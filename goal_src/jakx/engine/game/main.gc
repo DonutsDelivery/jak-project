@@ -55,6 +55,12 @@
 
     (while *run*
       (display-frame-finish disp)
+      ;; og:preserve-this — load common.TXT into *common-text*. Ported from jak3
+      ;; main.gc:1519 (display-loop-main). Guarded by *level-text-file-load-flag*
+      ;; internally so it's a one-shot on first call; after load, flag clears.
+      ;; Without this, title-menu's (while (not *common-text*) (suspend)) loops
+      ;; forever and the title menu never draws.
+      (load-level-text-files -1)
       (display-sync disp)
       (suspend)
       ;; og:preserve-this — PC port per-frame hook deferred: (update *setting-control*)
