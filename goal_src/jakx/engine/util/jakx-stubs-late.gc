@@ -427,3 +427,112 @@
       )
   arg1
   )
+
+;; Ported from jak3 engine/entity/entity.gc:1970. Required by game-info.gc's initialize! 'boot lambda for Phase 3.
+(defun reset-actors ((arg0 symbol))
+  (let* ((v1-0 arg0)
+         (perm
+           (cond
+             ((or (= v1-0 'life) (= v1-0 'debug))
+              (the-as
+                entity-perm-status
+                (entity-perm-status bit-0 error dead no-kill bit-5 subtask-complete bit-9 bit-12 bit-15)
+                )
+              )
+             ((= v1-0 'try)
+              (the-as
+                entity-perm-status
+                (entity-perm-status bit-0 error dead no-kill bit-5 subtask-complete bit-9 bit-12 bit-15)
+                )
+              )
+             ((= v1-0 'game)
+              (the-as entity-perm-status (entity-perm-status
+                                           bit-0
+                                           error
+                                           dead
+                                           no-kill
+                                           bit-4
+                                           bit-5
+                                           subtask-complete
+                                           complete
+                                           bit-9
+                                           bit-10
+                                           save
+                                           bit-12
+                                           bit-13
+                                           bit-15
+                                           )
+                      )
+              )
+             (else
+               (the-as
+                 entity-perm-status
+                 (entity-perm-status bit-0 error dead no-kill bit-4 bit-5 subtask-complete bit-9 bit-10 bit-12 bit-15)
+                 )
+               )
+             )
+           )
+         (s4-0 *game-info*)
+         )
+    (dotimes (s3-0 (-> *level* length))
+      (let ((v1-4 (-> *level* level s3-0)))
+        (when (or (= (-> v1-4 status) 'active) (= (-> v1-4 status) 'alive) (= (-> v1-4 status) 'loaded))
+          (when (-> v1-4 part-engine)
+            (set! (-> v1-4 part-engine length) 0)
+            0
+            )
+          (when (-> v1-4 entity)
+            (let ((s2-0 (-> v1-4 bsp level entity)))
+              (dotimes (s1-0 (-> s2-0 length))
+                (let ((s0-0 (-> s2-0 data s1-0 entity)))
+                  (if (not (and (-> s0-0 extra process) (logtest? (-> s0-0 extra process mask) (process-mask no-kill))))
+                      (kill! s0-0)
+                      )
+                  (update (-> s0-0 extra perm) arg0 (the-as entity-perm-status perm))
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    (let ((s3-1 (-> s4-0 task-perm-list)))
+      (dotimes (s2-1 (-> s3-1 length))
+        (update (-> s3-1 data s2-1) arg0 (the-as entity-perm-status perm))
+        )
+      (logior! (-> s3-1 data 1 status) (entity-perm-status complete))
+      )
+    (let ((s4-1 (-> s4-0 perm-list)))
+      (dotimes (s3-2 (-> s4-1 length))
+        (update (-> s4-1 data s3-2) arg0 (the-as entity-perm-status perm))
+        )
+      )
+    )
+  (let ((s5-1 (lambda ((arg0 process)) (if (not (logtest? (-> arg0 mask) (process-mask no-kill)))
+                                           (deactivate arg0)
+                                           )
+                      )
+              )
+        )
+    (iterate-process-tree *pusher-pool* s5-1 *null-kernel-context*)
+    (iterate-process-tree *entity-pool* s5-1 *null-kernel-context*)
+    )
+  (if #t
+      (task-node-reset arg0)
+      )
+  (dotimes (s5-2 (-> *level* length))
+    (let ((s4-2 (-> *level* level s5-2)))
+      (when (= (-> s4-2 status) 'active)
+        (let ((s3-3 (the-as (function level none) (get-callback-symbol-value-by-slot! (-> s4-2 info) 35))))
+          (if (and s3-3 (type? s3-3 function))
+              (s3-3 s4-2)
+              )
+          )
+        )
+      )
+    )
+  (set! (-> *ACTOR-bank* birth-max) 1000)
+  (update-task-masks arg0)
+  0
+  (none)
+  )

@@ -97,7 +97,14 @@
         (set! (-> a1-0 0) 'title)
         (want-levels *load-state* a1-0)
         )
-      (title-screen-change "demo-screen" 27 (the-as string #f) -1 #t #f)
+      ;; Jak X has a dolby/thx splash before the title logo (not the jak3 "demo-screen"
+      ;; path — that would map to DESCREEN.STR which doesn't exist in Jak X's iso).
+      ;; Real screens in iso_data/jakx/STR: DOSCREEN (dolby-screen), THSCREEN (thx-dolby).
+      ;; Chunk index: 0 = 4:3, 1 = 16:9 (per decompiler_out/jakx/title-obs_ir2.asm
+      ;; aspect-ratio gate before title-screen-change call site L85).
+      (title-screen-change "dolby-screen"
+                           (if (= (-> *setting-control* user-default aspect-ratio) 'aspect16x9) 1 0)
+                           (the-as string #f) -1 #t #f)
       (wait-for-press (seconds 1) (seconds 5) #t)
       (title-screen-change (the-as string #f) -1 (the-as string #f) -1 #f #f)
       (set-blackout-frames (seconds 0.2))
