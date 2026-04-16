@@ -241,3 +241,21 @@
   0
   (none)
   )
+
+;; title-fade-out / title-progress / activate-progress — all touch *screen-filter*
+;; which has no instance in jakx yet. Stubbed no-op for Phase 2 startup body.
+;; Port real impls when *screen-filter* is wired up.
+;; activate-progress already has an extern decl at engine/ui/progress/progress-h.gc:11
+;; as (function process symbol none), so this def must match that exactly.
+(defun title-fade-out ((arg0 float))
+  0
+  )
+
+(defun title-progress ((arg0 symbol))
+  0
+  )
+
+(defun activate-progress ((arg0 process) (arg1 symbol))
+  0
+  (none)
+  )
