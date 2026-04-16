@@ -248,38 +248,15 @@
   (set-setting! 'music-volume 'abs 0.0 0)
   (set-setting! 'entity-name "camera-311" 0.0 0)
   (apply-settings *setting-control*)
+  ;; og:preserve-this — use the default external-art-buffer-init (fixed EE
+  ;; addresses) instead of the jak3-style lambda that allocates from the title
+  ;; level's heap. jakx's TITLE.DGO is a stub (title-obs.o moved to GAME.CGO
+  ;; for type registration), so the title level has no heap to kmalloc from —
+  ;; level-get *level* 'title returns #f, and the jak3 lambda then null-derefs
+  ;; / produces a bogus heap pointer that corrupts the STR→EE DMA.
   (dotimes (gp-0 2)
     (set! (-> self buffer gp-0)
-          (new
-            'process
-            'external-art-buffer
-            gp-0
-            (lambda ((arg0 external-art-buffer))
-              (let ((gp-0 (level-get *level* 'title)))
-                (cond
-                  ((not (-> gp-0 user-object (-> arg0 index)))
-                   (let ((s4-0 (-> arg0 heap)))
-                     (set! (-> s4-0 base) (kmalloc (-> gp-0 heap) #xd0000 (kmalloc-flags) "heap"))
-                     (set! (-> s4-0 current) (-> s4-0 base))
-                     (set! (-> s4-0 top-base) (&+ (-> s4-0 base) #xd0000))
-                     (set! (-> s4-0 top) (-> s4-0 top-base))
-                     )
-                   (set! (-> gp-0 user-object (-> arg0 index)) (the-as basic (-> arg0 heap base)))
-                   )
-                  (else
-                    (let ((v1-10 (-> arg0 heap)))
-                      (set! (-> v1-10 base) (the-as pointer (-> gp-0 user-object (-> arg0 index))))
-                      (set! (-> v1-10 current) (-> v1-10 base))
-                      (set! (-> v1-10 top-base) (&+ (-> v1-10 base) #xd0000))
-                      (set! (-> v1-10 top) (-> v1-10 top-base))
-                      )
-                    )
-                  )
-                )
-              0
-              )
-            #f
-            )
+          (new 'process 'external-art-buffer gp-0 external-art-buffer-init #f)
           )
     )
   (set! (-> self selected) 0)
