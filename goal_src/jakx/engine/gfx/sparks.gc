@@ -1,0 +1,156 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for symbol *sparks-work*, type sparks-work
+(define *sparks-work*
+  (new 'static 'sparks-work
+    :constants (new 'static 'spark-constants
+      :adgif-tag (new 'static 'qword :data (new 'static 'array uint32 4 #x8003 #x10000000 #xe #x0))
+      :prim-tags (new 'static 'inline-array vector 3
+        (new 'static 'vector
+          :data (new 'static 'array float 4 (the-as float #x8001) 15384707000.0 (the-as float #x4141e) 0.0)
+          )
+        (new 'static 'vector :data (new 'static 'array float 4
+                                     (the-as float #x8001)
+                                     283797750000000000000000000000.0
+                                     0.0000000000000000000000000000000000017406554
+                                     0.0
+                                     )
+                             )
+        (new 'static 'vector :data (new 'static 'array float 4
+                                     (the-as float #x8001)
+                                     -0.00000000000000000000000000004521159
+                                     0.000000000000000000000000007476058
+                                     (the-as float #x4)
+                                     )
+                             )
+        )
+      :color-groups (new 'static 'inline-array spark-color-group 13
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 255.0 180.0 100.0 128.0))
+            (new 'static 'vector :data (new 'static 'array float 4 255.0 200.0 180.0 128.0))
+            (new 'static 'vector :data (new 'static 'array float 4 255.0 200.0 180.0 128.0))
+            (new 'static 'vector :data (new 'static 'array float 4 255.0 180.0 100.0 128.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x48)
+          )
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 40.0 30.0 15.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 40.0 30.0 15.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 40.0 30.0 15.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 40.0 30.0 15.0 64.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
+          )
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 53.0 40.0 20.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 53.0 40.0 20.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 53.0 40.0 20.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 53.0 40.0 20.0 64.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
+          )
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 66.0 50.0 25.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 66.0 50.0 25.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 66.0 50.0 25.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 66.0 50.0 25.0 64.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
+          )
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 80.0 60.0 30.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 80.0 60.0 30.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 80.0 60.0 30.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 80.0 60.0 30.0 64.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
+          )
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 128.0 128.0 128.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 128.0 128.0 128.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 128.0 128.0 128.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 128.0 128.0 128.0 64.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
+          )
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 140.0 140.0 140.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 140.0 140.0 140.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 140.0 140.0 140.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 140.0 140.0 140.0 64.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
+          )
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 170.0 170.0 170.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 170.0 170.0 170.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 170.0 170.0 170.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 170.0 170.0 170.0 64.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
+          )
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 200.0 200.0 200.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 200.0 200.0 200.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 200.0 200.0 200.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 200.0 200.0 200.0 64.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
+          )
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 20.0 60.0 20.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 20.0 60.0 20.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 20.0 60.0 20.0 8.0))
+            (new 'static 'vector :data (new 'static 'array float 4 20.0 60.0 20.0 64.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
+          )
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 27.0 80.0 15.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 27.0 80.0 15.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 27.0 80.0 15.0 8.0))
+            (new 'static 'vector :data (new 'static 'array float 4 27.0 80.0 15.0 64.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
+          )
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 150.0 120.0 40.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 150.0 120.0 40.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 150.0 120.0 40.0 8.0))
+            (new 'static 'vector :data (new 'static 'array float 4 150.0 120.0 40.0 64.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
+          )
+        (new 'static 'spark-color-group
+          :colors (new 'static 'inline-array vector 4
+            (new 'static 'vector :data (new 'static 'array float 4 140.0 160.0 60.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 140.0 160.0 60.0 64.0))
+            (new 'static 'vector :data (new 'static 'array float 4 140.0 160.0 60.0 8.0))
+            (new 'static 'vector :data (new 'static 'array float 4 140.0 160.0 60.0 64.0))
+            )
+          :alpha (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
+          )
+        )
+      :friction 0.999
+      :scale 0.016666668
+      )
+    :test #f
+    )
+  )
+
+;; definition for symbol sparks-vu1-block, type object
+(define sparks-vu1-block #f)
+

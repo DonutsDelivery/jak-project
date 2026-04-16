@@ -1,0 +1,94 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition of type list-link
+(deftype list-link (structure)
+  ((prev  list-link)
+   (next  list-link)
+   )
+  :pack-me
+  )
+
+;; definition for method 3 of type list-link
+(defmethod inspect ((this list-link))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'list-link)
+  (format #t "~1Tprev: #<list-link @ #x~X>~%" (-> this prev))
+  (format #t "~1Tnext: #<list-link @ #x~X>~%" (-> this next))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type linked-list
+(deftype linked-list (structure)
+  ((head  list-link)
+   (tail  list-link)
+   )
+  (:methods
+    (linked-list-method-9 (_type_) none)
+    (linked-list-method-10 (_type_ list-link) none)
+    (linked-list-method-11 (_type_ list-link) none)
+    )
+  )
+
+;; definition for method 3 of type linked-list
+(defmethod inspect ((this linked-list))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'linked-list)
+  (format #t "~1Thead: #<list-link @ #x~X>~%" (-> this head))
+  (format #t "~1Ttail: #<list-link @ #x~X>~%" (-> this tail))
+  (label cfg-4)
+  this
+  )
+
+;; linked-list-method-9: initialize linked list
+(defmethod linked-list-method-9 ((this linked-list))
+  (set! (-> this head) #f)
+  (set! (-> this tail) #f)
+  0
+  (none)
+  )
+
+;; linked-list-method-10: append link to end of list
+(defmethod linked-list-method-10 ((this linked-list) (arg0 list-link))
+  (set! (-> arg0 next) #f)
+  (let ((v1-0 (-> this tail)))
+    (set! (-> arg0 prev) v1-0)
+    (if v1-0
+        (set! (-> v1-0 next) arg0)
+        (set! (-> this head) arg0)
+        )
+    )
+  (set! (-> this tail) arg0)
+  0
+  (none)
+  )
+
+;; linked-list-method-11: remove link from list
+(defmethod linked-list-method-11 ((this linked-list) (arg0 list-link))
+  (let ((prev (-> arg0 prev))
+        (next (-> arg0 next))
+        )
+    (if prev
+        (set! (-> prev next) next)
+        (set! (-> this head) next)
+        )
+    (if next
+        (set! (-> next prev) prev)
+        (set! (-> this tail) prev)
+        )
+    )
+  0
+  (none)
+  )
+
+;; fixup-relocated-link: could not be decompiled, stubbed
+(defun fixup-relocated-link ((arg0 linked-list) (arg1 int))
+  (none)
+  )

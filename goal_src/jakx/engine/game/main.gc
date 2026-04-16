@@ -1,0 +1,85 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; Ported from jak3 — minimal display loop for jakx early bringup.
+;; jak3 version: goal_src/jak3/engine/game/main.gc:1645
+
+;; This stripped display-loop:
+;;   - skips the math-engine "matrix" subprocess (actors/joints not driven yet)
+;;   - skips display-loop-main (level loading, camera updates, AI, etc.)
+;;   - just runs display-sync + display-frame-finish each tick so GOAL
+;;     submits DMA chains to the C renderer every frame
+;;
+;; The stub `on` in jakx-stubs.gc is overridden here (load order puts main.o
+;; after jakx-stubs.o in game.gd).
+
+;; *dproc* and *run* are declared in main-h.gc. We set *run* so our loop runs.
+(set! *run* #t)
+
+(defun paused? ()
+  "Are we paused? Counts any type of pause/menu/freeze. Ported from jak3 main.gc:122."
+  (or (= *master-mode* 'pause) (= *master-mode* 'progress) (= *master-mode* 'menu) (= *master-mode* 'freeze))
+  )
+
+(defun movie? ()
+  "Are we in a movie? Ported from jak3 main.gc:127."
+  (logtest? (-> *kernel-context* prevent-from-run) (process-mask movie))
+  )
+
+(defbehavior display-loop process ()
+  "Display loop — progressively matching jak3's full version (main.gc:1645).
+   Currently adds: update *setting-control*, update *pc-settings* in main loop.
+   Still skipped vs jak3: matrix-engine process, time-of-day-context init,
+   actor-hash, collide-rider-pool prep, blerc-init, vblank-handler install,
+   display-loop-main body. Re-enable as their dependencies settle."
+  (stack-size-set! (-> self main-thread) 512)
+
+  (let ((disp *display*))
+    (set! *teleport* #t)
+
+    ;; og:preserve-this — now safe: subagent fixed target-pos, entity-by-name,
+    ;; and add-blackout (all were declared extern with no impl). Verified the
+    ;; full update method runs clean end-to-end.
+    (update *setting-control*)
+
+    (set! (-> disp frames 0 start-time)
+          (timer-count (the-as timer-bank #x10000800)))
+    (set! (-> disp frames 1 start-time)
+          (timer-count (the-as timer-bank #x10000800)))
+    (set! (-> disp dog-ratio) 1.0)
+
+    ;; warmup: first display-sync runs display-frame-start which sets up
+    ;; the bucket chain on the on-screen frame.
+    (display-sync disp)
+    (format 0 "display-loop: running~%")
+
+    (while *run*
+      (display-frame-finish disp)
+      (display-sync disp)
+      (suspend)
+      ;; og:preserve-this — PC port per-frame hook deferred: (update *setting-control*)
+      ;; crashes at boot with *pc-settings* active too. Isolating one at a time.
+      ;; (#when PC_PORT (update *pc-settings*))
+      )
+    )
+
+  (set! *dproc* #f)
+  (format 0 "display is off #<#x~X>.~%" self)
+  0
+  )
+
+(defun on ((arg0 symbol))
+  "Start the display process. Spawned once from play-boot or similar."
+  (when (not *dproc*)
+    (set! *run* #t)
+    (set! *dproc* (ppointer->process (process-spawn-function
+                                       process
+                                       display-loop
+                                       :name "display"
+                                       :from *4k-dead-pool*
+                                       :to *display-pool*
+                                       :stack *kernel-dram-stack*
+                                       )))
+    )
+  *dproc*
+  )

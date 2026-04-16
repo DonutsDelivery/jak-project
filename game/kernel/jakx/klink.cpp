@@ -1,6 +1,7 @@
 #include "klink.h"
 
 #include "common/common_types.h"
+#include "common/log/log.h"
 #include "common/goal_constants.h"
 #include "common/symbols.h"
 
@@ -741,7 +742,6 @@ void link_control::jakx_finish(bool jump_from_c_to_goal) {
 
   *EnableMethodSet = *EnableMethodSet + m_keep_debug;
 
-  // printf("finish %s\n", m_object_name);
   if (m_opengoal) {
     // setup mips2c functions
     const auto& it = Mips2C::gMips2CLinkCallbacks[GameVersion::JakX].find(m_object_name);

@@ -1,6 +1,8 @@
 #include "kdgo.h"
 
+#include <chrono>
 #include <cstring>
+#include <thread>
 
 #include "common/log/log.h"
 
@@ -85,11 +87,10 @@ void RpcSync(s32 channel) {
       Msg(6, "STALL: [kernel] waiting for IOP on RPC port #%d\n", channel);
     }
     while (RpcBusy(channel)) {
-      // an attempt to avoid spamming SIF?
-      u32 i = 0;
-      while (i < 1000) {
-        i++;
-      }
+      // Yield CPU to OS so the IOP thread (running on another OS thread) can make progress.
+      // Busy-spinning here starves the IOP and creates a deadlock on machines where the two
+      // OS threads share a core.
+      std::this_thread::sleep_for(std::chrono::microseconds(50));
     }
   }
 }

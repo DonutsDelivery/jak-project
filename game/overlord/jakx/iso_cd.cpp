@@ -488,17 +488,53 @@ void CISOCDFileSystem::DvdDriverCallback(int) {
  * just search for files in the appropriate out folder.
  */
 void CISOCDFileSystem::ReadDirectory() {
-  for (const auto& f :
-       fs::directory_iterator(file_util::get_jak_project_dir() / "out" / "jakx" / "iso")) {
-    if (f.is_regular_file()) {
-      auto& e = g_FileDefs.emplace_back();
-      std::string file_name = f.path().filename().string();
-      ASSERT(file_name.length() < 16);  // should be 8.3.
-      MakeISOName(&e.name, file_name.c_str());
-      e.full_path =
-          fmt::format("{}/out/jakx/iso/{}", file_util::get_jak_project_dir().string(), file_name);
+  auto project_dir = file_util::get_jak_project_dir();
+
+  // First, scan compiled output (GAME.CGO, KERNEL.CGO, etc.)
+  auto out_iso = project_dir / "out" / "jakx" / "iso";
+  if (fs::exists(out_iso)) {
+    for (const auto& f : fs::directory_iterator(out_iso)) {
+      if (f.is_regular_file()) {
+        auto& e = g_FileDefs.emplace_back();
+        std::string file_name = f.path().filename().string();
+        ASSERT(file_name.length() < 16);
+        MakeISOName(&e.name, file_name.c_str());
+        e.full_path = f.path().string();
+      }
     }
   }
+
+  // Then, scan extracted game data from iso_data (SBK, DGO, STR, VAG, etc.)
+  auto iso_data = project_dir / "iso_data" / "jakx";
+  if (fs::exists(iso_data)) {
+    for (const auto& subdir : fs::directory_iterator(iso_data)) {
+      if (subdir.is_directory()) {
+        for (const auto& f : fs::directory_iterator(subdir.path())) {
+          if (f.is_regular_file()) {
+            std::string file_name = f.path().filename().string();
+            if (file_name.length() >= 16) continue;
+            // Check if this file is already registered (out/iso takes priority)
+            ISOName iname;
+            MakeISOName(&iname, file_name.c_str());
+            if (FindIN(&iname)) continue;
+            auto& e = g_FileDefs.emplace_back();
+            e.name = iname;
+            e.full_path = f.path().string();
+          }
+        }
+      } else if (subdir.is_regular_file()) {
+        std::string file_name = subdir.path().filename().string();
+        if (file_name.length() >= 16) continue;
+        ISOName iname;
+        MakeISOName(&iname, file_name.c_str());
+        if (FindIN(&iname)) continue;
+        auto& e = g_FileDefs.emplace_back();
+        e.name = iname;
+        e.full_path = subdir.path().string();
+      }
+    }
+  }
+  lg::info("ReadDirectory: found {} files", g_FileDefs.size());
 }
 
 /*!

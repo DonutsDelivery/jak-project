@@ -259,8 +259,10 @@ int output_slot_by_idx(GameVersion version, const std::string& name) {
       v = &jak2_animated_texture_slots();
       break;
     case GameVersion::Jak3:
-    case GameVersion::JakX:
       v = &jak3_animated_texture_slots();
+      break;
+    case GameVersion::JakX:
+      v = &jakx_animated_texture_slots();
       break;
     default:
     case GameVersion::Jak1:
@@ -476,8 +478,9 @@ const std::vector<std::string>& animated_texture_slots(GameVersion version) {
     case GameVersion::Jak2:
       return jak2_animated_texture_slots();
     case GameVersion::Jak3:
-    case GameVersion::JakX:
       return jak3_animated_texture_slots();
+    case GameVersion::JakX:
+      return jakx_animated_texture_slots();
     default:
       ASSERT_NOT_REACHED();
   }
@@ -604,14 +607,17 @@ TextureAnimator::TextureAnimator(ShaderLibrary& shaders,
   m_output_debug_flags.resize(animated_texture_slots(m_version).size());
 
   // animation-specific stuff
-  setup_texture_anims_common();
   switch (m_version) {
     case GameVersion::Jak2:
+      setup_texture_anims_common();
       setup_texture_anims_jak2();
       break;
     case GameVersion::Jak3:
-    case GameVersion::JakX:
+      setup_texture_anims_common();
       setup_texture_anims_jak3();
+      break;
+    case GameVersion::JakX:
+      // TODO: Jak X texture animations - skip for now
       break;
     default:
       ASSERT_NOT_REACHED();

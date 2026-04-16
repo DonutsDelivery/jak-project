@@ -1,0 +1,8 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; Placeholder object for TITLE.DGO. Real title code (title-obs.o) lives in
+;; GAME.CGO so its type/symbol registrations run at kernel-load time. But
+;; TITLE.DGO itself still needs at least one real object or the level loader's
+;; DMA layer aborts on an empty DGO.
+(define *title-stub-loaded* #t)

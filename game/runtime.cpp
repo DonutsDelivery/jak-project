@@ -78,6 +78,7 @@
 #include "game/overlord/jak2/streamlist.h"
 #include "game/overlord/jak2/vag.h"
 #include "game/overlord/jak3/overlord.h"
+#include "game/overlord/jakx/overlord.h"
 #include "game/system/Deci2Server.h"
 #include "game/system/iop_thread.h"
 #include "sce/deci2.h"
@@ -239,6 +240,7 @@ void ee_runner(SystemThreadInterface& iface) {
       break;
     case GameVersion::JakX:
       jakx::goal_main(g_argc, g_argv);
+      break;
     default:
       ASSERT_MSG(false, "Unsupported game version");
   }
@@ -338,8 +340,10 @@ void iop_runner(SystemThreadInterface& iface, GameVersion version) {
         jak2::start_overlord_wrapper(iop.overlord_argc, iop.overlord_argv, &complete);
         break;
       case GameVersion::Jak3:
-      case GameVersion::JakX:
         jak3::start_overlord_wrapper(&complete);
+        break;
+      case GameVersion::JakX:
+        jakx::start_overlord_wrapper(&complete);
         break;
       default:
         ASSERT_NOT_REACHED();

@@ -9,7 +9,48 @@
   // it will make the decompiler much faster.
   "allowed_objects": [],
 
-  "banned_objects": [],
+  "banned_objects": [
+    // CfgVtx/atomic_op crashes - decompiler limitations with Jak X patterns
+    "banned_objects",
+    "race-line",
+    "wvehicle-wheel",
+    "wvehicle-part",
+    "wvehicle-weapons-part",
+    "wvehicle-effects",
+    "wvehicle-sounds",
+    "vehicle-reticle",
+    "wvehicle",
+    "wvehicle-events",
+    "wvehicle-util",
+    "wvehicle-ai",
+    "wvehicle-states",
+    "wvehicle-physics",
+    "hud-player-indicators",
+    "wvehicle-race",
+    "wvehicle-net",
+    "wcar-projectiles",
+    "wvehicle-weapons-proj",
+    "wvehicle-weapons-oil",
+    "wvehicle-weapons",
+    "wvehicle-weapons-aux",
+    "wvehicle-weapons2",
+    "wvehicle-weapons3",
+    "wvehicle-weapons-util",
+    "wcar-skel",
+    "wcar",
+    "vehicle-antenna",
+    "wcar-base",
+    "wcar-mongoose",
+    "wcar-falcon",
+    "wcar-wombat",
+    "collide-mesh",
+    "collide-shape",
+    "entity",
+    "task-control",
+    "net-mgr-medius-cache",
+    "water-anim",
+    "editable"
+  ],
 
   ////////////////////////////
   // CODE ANALYSIS OPTIONS
@@ -32,6 +73,10 @@
   // this will display most data as hex, but will add labels/references/type pointers/strings
   // this generates a huge amount of output if you run it on the entire game.
   "disassemble_data": false,
+
+  // process part group table
+  "process_part_group_table": false,
+  "dump_part_group_table": false,
 
   // unpack textures to assets folder
   "process_tpages": false,
@@ -102,11 +147,11 @@
   "inputs_file": "decompiler/config/jakx/ntsc_v1/inputs.jsonc",
   "art_info_file": "decompiler/config/jakx/ntsc_v1/art_info.jsonc",
   "import_deps_file": "decompiler/config/jakx/ntsc_v1/import_deps.jsonc",
-  "all_types_file": "decompiler/config/ntsc_v1/all-types.gc",
-  "art_group_dump_file": "decompiler/config/ntsc_v1/art-group-info.min.json",
-  "joint_node_dump_file": "decompiler/config/ntsc_v1/joint-node-info.min.json",
-  "tex_dump_file": "decompiler/config/ntsc_v1/tex-info.min.json",
-  "process_stack_size_file": "decompiler/config/ntsc_v1/process_stack_size_overrides.jsonc",
+  "all_types_file": "decompiler/config/jakx/all-types.gc",
+  "art_group_dump_file": "decompiler/config/jakx/ntsc_v1/art-group-info.min.json",
+  "joint_node_dump_file": "decompiler/config/jakx/ntsc_v1/joint-node-info.min.json",
+  "tex_dump_file": "decompiler/config/jakx/ntsc_v1/tex-info.min.json",
+  "process_stack_size_file": "decompiler/config/jakx/ntsc_v1/process_stack_size_overrides.jsonc",
 
   // optional: a predetermined object file name map from a file.
   // this will make decompilation naming consistent even if you only run on some objects.
@@ -117,7 +162,7 @@
   ////////////////////////////
 
   // turn this on to extract level background graphics data as .fr3 files in out/<game>/fr3
-  "levels_extract": false,
+  "levels_extract": true,
   // turn this on if you want extracted levels to be saved out as .glb files in glb_out/<game>
   "rip_levels": false,
   // should we also extract collision meshes to the .fr3 files?

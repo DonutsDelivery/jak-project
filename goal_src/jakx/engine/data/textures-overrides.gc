@@ -1,0 +1,30 @@
+;;-*-Lisp-*-
+;; name: textures-overrides.gc
+;; name in dgo: <asm only; not loaded as object>
+;;
+;; og:preserve-this — jakx-specific texture-id overrides.
+;;
+;; Jak X's gamefont tpage (tpage-12) has the font textures at different indices
+;; than jak 3's. We import jak3's textures.gc so that the many incidental
+;; references throughout the engine still resolve, but then redefine the
+;; gamefont font texture constants here with the correct indices so that
+;; setup-font-texture and draw-string-xy find the real glyph bitmaps.
+;;
+;; jak 3 gamefont:    jak X gamefont:
+;;   0  font.12hi       5  font.12hi
+;;   1  font.12lo       6  font.12lo
+;;   2  font.24hi       7  font.24hi
+;;   3  font.24hi2      8  font.24hi2
+;;   4  font.24lo       9  font.24lo
+;;   5  font.24lo2     10  font.24lo2
+;;
+;; def-tex prints "error redefining texture. data mismatch" because the tpage
+;; hash already has the jak3 entry, but its final (defconstant ...) emission
+;; does override the earlier defconstant — which is exactly what we want.
+
+(def-tex font.12hi  gamefont 5)
+(def-tex font.12lo  gamefont 6)
+(def-tex font.24hi  gamefont 7)
+(def-tex font.24hi2 gamefont 8)
+(def-tex font.24lo  gamefont 9)
+(def-tex font.24lo2 gamefont 10)

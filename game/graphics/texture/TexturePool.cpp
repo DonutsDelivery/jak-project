@@ -263,7 +263,15 @@ void TexturePool::handle_upload_now(const u8* tpage,
 void TexturePool::relocate(u32 destination, u32 source, u32 format) {
   std::unique_lock<std::mutex> lk(m_mutex);
   GpuTexture* src = lookup_gpu_texture(source);
-  ASSERT(src);
+  if (!src) {
+    // og:preserve-this — jakx: early boot may request relocate for a texture that hasn't
+    // been uploaded yet (e.g. setup-font-texture running before the font tpage is loaded).
+    // Warn instead of asserting so the game can keep booting; the font will fall back to
+    // the random-texture placeholder until a later frame when the upload arrives.
+    lg::warn("TexturePool::relocate: no source at slot {} (dest={}, fmt={})", source, destination,
+             format);
+    return;
+  }
   if (format == 44) {
     m_mt4hh_textures.emplace_back();
     m_mt4hh_textures.back().slot = destination;

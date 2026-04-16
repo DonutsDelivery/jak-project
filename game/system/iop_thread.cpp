@@ -1,6 +1,7 @@
 #include "iop_thread.h"
 
 #include "common/global_profiler/GlobalProfiler.h"
+#include "common/log/log.h"
 
 #ifdef __linux__
 #include <unistd.h>

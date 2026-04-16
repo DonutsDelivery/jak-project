@@ -1,0 +1,12 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; name: wcar-snake.gc
+;; name in dgo: wcar-snake
+;; dgos: LPATK, LFACCAR, WASALL
+
+;; og:preserve-this
+;; v-snake depends on wcar-snake-base and wcar-base which are not defined
+;; (parent type files were emptied). Emptied to avoid compilation errors.
+
+;; DECOMP BEGINS

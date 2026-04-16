@@ -9,6 +9,40 @@
 
 #include "runtime.h"
 
+#ifdef __linux__
+#include <cstdio>
+#include <cstdlib>
+#include <csignal>
+#include <execinfo.h>
+#include <pthread.h>
+#include <unistd.h>
+
+static void segv_handler(int sig, siginfo_t* info, void* ucontext) {
+  (void)ucontext;
+  char tname[32] = {0};
+  pthread_getname_np(pthread_self(), tname, sizeof(tname));
+  fprintf(stderr, "\n=== SEGFAULT (sig=%d) at addr=%p in thread='%s' tid=%ld ===\n", sig,
+          info->si_addr, tname, (long)pthread_self());
+  void* buf[64];
+  int n = backtrace(buf, 64);
+  backtrace_symbols_fd(buf, n, STDERR_FILENO);
+  fflush(stderr);
+  std::signal(sig, SIG_DFL);
+  std::raise(sig);
+}
+
+static void install_segv_handler() {
+  struct sigaction sa {};
+  sa.sa_sigaction = segv_handler;
+  sa.sa_flags = SA_SIGINFO;
+  sigemptyset(&sa.sa_mask);
+  sigaction(SIGSEGV, &sa, nullptr);
+  sigaction(SIGBUS, &sa, nullptr);
+}
+#else
+static void install_segv_handler() {}
+#endif
+
 #include "common/global_profiler/GlobalProfiler.h"
 #include "common/log/log.h"
 #include "common/util/FileUtil.h"
@@ -87,6 +121,7 @@ std::string game_arg_documentation() {
  * Entry point for the game.
  */
 int main(int argc, char** argv) {
+  install_segv_handler();
   ArgumentGuard u8_guard(argc, argv);
 
   // CLI flags

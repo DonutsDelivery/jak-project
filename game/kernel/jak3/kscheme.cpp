@@ -6,6 +6,8 @@
 #include "common/goal_constants.h"
 #include "common/log/log.h"
 #include "common/symbols.h"
+#include "common/versions/versions.h"
+#include "game/kernel/jakx/kscheme.h"
 
 #include "game/kernel/common/Symbol4.h"
 #include "game/kernel/common/fileio.h"
@@ -735,6 +737,10 @@ Ptr<Symbol4<u32>> find_symbol_from_c(uint16_t sym_id, const char* name) {
  *
  */
 Ptr<Symbol4<u32>> intern_from_c(int sym_id, int flags, const char* name) {
+  // mips2c functions use ::jak3::intern_from_c — dispatch to jakx when running that game
+  if (g_game_version == GameVersion::JakX) {
+    return ::jakx::intern_from_c(sym_id, flags, name);
+  }
 #ifdef JAK3_HASH_TABLE
   if (!strcmp(name, "_empty_")) {
     return (s7 + S7_OFF_FIX_SYM_EMPTY_PAIR).cast<Symbol4<u32>>();

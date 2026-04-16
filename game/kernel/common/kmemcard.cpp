@@ -101,6 +101,7 @@ const char* mc_get_filename_no_dir(GameVersion version, int ndx) {
       filenames = filename_jak2;
       break;
     case GameVersion::Jak3:
+    case GameVersion::JakX:
       filenames = filename_jak3;
       break;
   }

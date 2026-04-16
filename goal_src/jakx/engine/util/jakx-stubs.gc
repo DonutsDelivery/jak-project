@@ -1,0 +1,243 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; Simplified stubs for Jak 3 types not in Jak X
+;; Loaded after focus.o
+
+;; Forward declarations
+(declare-type gun process-drawable)
+(declare-type board process-drawable)
+(declare-type target-turret process-focusable)
+(declare-type process-taskable process-focusable)
+(declare-type wings process-drawable)
+(declare-type flut process-focusable)
+
+;; Enemy system
+(deftype enemy-info (basic)
+  ()
+  (:methods
+    (copy-enemy-info! (_type_ _type_) none)
+    )
+  )
+
+(deftype enemy (process-focusable)
+  ()
+  (:methods
+    (enemy-method-50 (_type_) none)
+    )
+  )
+
+(deftype nav-enemy-info (basic)
+  ()
+  )
+
+(deftype nav-enemy (enemy)
+  ()
+  )
+
+;; Collectables
+(deftype collectable (process-drawable)
+  ()
+  )
+
+;; Sync methods are needed by generic-obs
+(defmethod get-norm! ((this sync-info) (arg0 int))
+  0.0
+  )
+
+(defmethod get-phase-offset ((this sync-info))
+  0.0
+  )
+
+(defmethod get-scaled-val! ((this sync-info) (arg0 float) (arg1 int))
+  0.0
+  )
+
+(defmethod get-timeframe-offset! ((this sync-info) (arg0 time-frame) (arg1 int))
+  (the time-frame 0)
+  )
+
+;; Process types
+(deftype fma-sphere (process-drawable) ())
+
+(defenum process-taskable-flags
+  :type uint32
+  :bitfield #t
+  (ptf0 0)
+  (ptf1 1)
+  (ptf2 2)
+  (ptf3 3)
+  (ptf4 4)
+  (ptf5 5)
+  (ptf6 6)
+  (ptf7 7)
+  )
+
+(deftype process-taskable (process-focusable)
+  ((task     game-task-control)
+   (flags    process-taskable-flags)
+   )
+  (:methods
+    (init-collision! (_type_) none)
+    (init-skeleton! (_type_) none)
+    (init-defaults! (_type_) none)
+    (get-art-element (_type_) art-element)
+    )
+  )
+(deftype voicebox (process-drawable) ())
+(deftype bug-report (process) ())
+(deftype blocking-plane (process-drawable) ())
+
+;; Surface modifier globals
+(define *walk-mods* (the-as surface #f))
+(define *turn-around-mods* (the-as surface #f))
+(define *jump-mods* (the-as surface #f))
+(define *double-jump-mods* (the-as surface #f))
+(define *flip-jump-mods* (the-as surface #f))
+(define *flop-mods* (the-as surface #f))
+(define *flop-land-mods* (the-as surface #f))
+(define *roll-mods* (the-as surface #f))
+(define *roll-flip-mods* (the-as surface #f))
+(define *launch-jump-mods* (the-as surface #f))
+(define *forward-jump-mods* (the-as surface #f))
+(define *forward-high-jump-mods* (the-as surface #f))
+(define *high-jump-mods* (the-as surface #f))
+(define *dive-mods* (the-as surface #f))
+(define *neutral-mods* (the-as surface #f))
+(define *empty-mods* (the-as surface #f))
+(define *empty-mods-allow-gun* (the-as surface #f))
+(define *grab-mods* (the-as surface #f))
+(define *attack-mods* (the-as surface #f))
+(define *run-attack-mods* (the-as surface #f))
+(define *smack-mods* (the-as surface #f))
+(define *smack-up-mods* (the-as surface #f))
+(define *duck-mods* (the-as surface #f))
+(define *hit-ground-hard-mods* (the-as surface #f))
+(define *uppercut-mods* (the-as surface #f))
+(define *uppercut-jump-mods* (the-as surface #f))
+(define *slide-jump-mods* (the-as surface #f))
+(define *slide-down-mods* (the-as surface #f))
+(define *float-mods* (the-as surface #f))
+(define *look-around-mods* (the-as surface #f))
+(define *blast-recover-mods* (the-as surface #f))
+(define *darkjak-trans-mods* (the-as surface #f))
+(define *jump-attack-mods* (the-as surface #f))
+(define *trip-mods* (the-as surface #f))
+(define *ladder-mods* (the-as surface #f))
+(define *tube-mods* (the-as surface #f))
+(define *tube-jump-mods* (the-as surface #f))
+(define *tube-hit-mods* (the-as surface #f))
+(define *flut-walk-mods* (the-as surface #f))
+(define *flut-run-wild-mods* (the-as surface #f))
+(define *flut-run-racer-mods* (the-as surface #f))
+(define *flut-run-attack-mods* (the-as surface #f))
+(define *flut-jump-mods* (the-as surface #f))
+(define *flut-jump-racer-mods* (the-as surface #f))
+(define *flut-double-jump-mods* (the-as surface #f))
+(define *flut-double-jump-racer-mods* (the-as surface #f))
+(define *flut-jump-wild-mods* (the-as surface #f))
+(define *flut-air-attack-mods* (the-as surface #f))
+(define *flut-get-off-mods* (the-as surface #f))
+(define *pilot-mods* (the-as surface #f))
+(define *pilot-get-on-mods* (the-as surface #f))
+(define *pilot-get-off-mods* (the-as surface #f))
+(define *turret-get-on-mods* (the-as surface #f))
+(define *indax-walk-mods* (the-as surface #f))
+(define *indax-jump-mods* (the-as surface #f))
+(define *indax-double-jump-mods* (the-as surface #f))
+(define *indax-bounce-mods* (the-as surface #f))
+(define *indax-hang-walk-mods* (the-as surface #f))
+(define *indax-hang-dodge-mods* (the-as surface #f))
+(define *indax-hang-attack-mods* (the-as surface #f))
+(define *wvehicle-surfaces* (the-as object #f))
+
+;; Process globals
+(define *target* (the-as process #f))
+(define *camera* (the-as process #f))
+(define *camera-combiner* (the-as process #f))
+(define *sidekick* (the-as process #f))
+
+;; Edge grab / prim beam
+(define *edge-grab-info* (the-as basic #f))
+(define *collide-edge-spec* (the-as basic #f))
+(define *gun-shadow-control* (the-as basic #f))
+(define *default-prim-beam-appearance* (the-as basic #f))
+(define *task-manager* (the-as (pointer process) #f))
+(define *art-info* (the-as object #f))
+(define *jg-info* (the-as object #f))
+
+;; Debug globals
+(define *display-region-inside* #f)
+(define *merge-region-prims* #f)
+(define *display-cam-collide-history* #f)
+(define *display-nav-marks* #f)
+(define *debug-hover* #f)
+(define *display-nav-mesh* #f)
+(define *display-path-marks* #f)
+(define *display-vol-marks* #f)
+(define *display-actor-graph* #f)
+(define *display-actor-vis* #f)
+(define *display-actor-marks* #f)
+(define *popup-menu-open* #f)
+
+;; Stub functions
+(defun spawn-prim-beam-tracker ((arg0 prim-beam-tracker-params) (arg1 symbol) (arg2 process))
+  (the-as process #f)
+  )
+
+;; Jak X is a racing game and has no "target" (playable jak character).
+;; jak3's (stop ...) kills the target process; here we just update game-info mode.
+(defun stop ((arg0 symbol))
+  (when *target*
+    (kill-by-name "target" *active-pool*)
+    (set! *target* (the-as process #f))
+    )
+  (set! (-> *game-info* mode) arg0)
+  0
+  )
+
+;; Blackout (transition fade) system is display-dependent and unused during early boot.
+(defun set-blackout-frames ((arg0 time-frame))
+  0
+  (none)
+  )
+
+;; Jak3 defines `on` in main.gc to spawn the display process; jakx main.gc is empty.
+;; Stub for now — display won't actually render, but boot can continue past (on #t) call in play.
+(defun on ((arg0 symbol))
+  (the-as process #f)
+  )
+
+;; jak3 defines demo?/kiosk? in main.gc — jakx main.gc is empty.
+(defun demo? ()
+  (or (= *kernel-boot-message* 'demo) (= *kernel-boot-message* 'demo-shared))
+  )
+
+(defun kiosk? ()
+  (= *kernel-boot-message* 'kiosk)
+  )
+(define *region-debug-inspect* #f)
+
+;; PC port subtitle system (jak3-specific)
+(define *subtitle3* (the-as (pointer process) #f))
+(define *subtitle3-text* (the-as basic #f))
+
+;; set-master-mode lives in jak3 main.gc, which is emptied in jakx.
+;; Port a simplified version — the full jak3 impl depends on *progress-process*,
+;; sound groups, and other globals that are not fully wired up during early
+;; bringup. The minimum needed for initialize! *game-info* 'boot to finish is
+;; to update *master-mode* + *last-master-mode* without crashing.
+(define *last-master-mode* 'game)
+
+(defun set-master-mode ((arg0 symbol))
+  "Change the master mode. Minimal jakx bringup stub — skips sound-group
+   ops and progress-process logic until those subsystems are live."
+  (when (!= arg0 *master-mode*)
+    (set! *last-master-mode* *master-mode*)
+    (set! *master-mode* arg0)
+    ;; og:preserve-this — skip (apply-settings *setting-control*) during bringup;
+    ;; it crashes today (settings agent is fixing it).
+    )
+  0
+  (none)
+  )

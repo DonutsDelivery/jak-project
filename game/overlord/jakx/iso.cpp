@@ -2,6 +2,7 @@
 
 #include <cstring>
 
+#include "common/log/log.h"
 #include "common/util/Assert.h"
 
 #include "game/overlord/jakx/dma.h"
@@ -1149,17 +1150,12 @@ u32 ISOThread() {
       }
     }
 
-    // this logic was changed so that the iso thread doesn't sleep when loading a DGO: otherwise
-    // we'd spent most of our time letting the thread sleep.
-    // instead, if there's an in progress DGO command, we yield.
-    // this yield allows DGO RPCs to run. Additionally, the priority of the ISO thread was lowered
-    // to allow the RPCs to run during this time.
+    // Original jak3 logic: yield during DGO loading, sleep when idle.
     bool sleep = !DgoCmdWaiting();
     if (sleep) {
       if (buffer_ok) {
         DelayThread(4000);
       } else {
-        // DelayThread(200);
         DelayThread(2000);
       }
     } else {
@@ -1278,11 +1274,6 @@ EIsoStatus RunDGOStateMachine(ISO_Hdr* m) {
           // sync with EE - if we're loading double-buffered, wait on the EE
           // note that we don't wait on the first object, since both buffers start empty,
           // and we can safely fill both with no syncs.
-          // the order of synchronization is a little bit strange. The EE must tell us that it's
-          // finished processing buffer A before we tell the EE the location of buffer B.
-          // This is needed to get the sync right for the last object - we want the EE to run
-          // through all the buffers, then we load the final object, then we notify it. If the EE
-          // wouldn't tell us it was done until it got the next object, we'd be unable to do this.
           if (cmd->finished_first_object != 0 && cmd->buffer1 != cmd->buffer2) {
             if (LookSyncMbx() == 0)
               goto exit_no_sync;
@@ -1523,12 +1514,10 @@ void* foo = 0;
  * Send a sync message to unblock the DGO thread when doing an async cancel.
  */
 bool NotifyDGO() {
-  // CpuSuspendIntr(local_10);
   bool pending_cancel = sLoadDGO.nosync_cancel_ack == 0;
   if (pending_cancel) {
     sLoadDGO.sync_sent_count = sLoadDGO.sync_sent_count + 1;
   }
-  // CpuResumeIntr(local_10[0]);
   if (pending_cancel) {
     SendMbx(g_nSyncMbx, &foo);
   }

@@ -1,0 +1,14 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; type ip-to-name-map is defined here, but it is unknown to the decompiler
+
+;; definition for method 3 of type ip-to-name-map
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; definition for symbol *ip-to-name-map*, type array
+(define *ip-to-name-map* (the-as array #f))
+
+
+
+

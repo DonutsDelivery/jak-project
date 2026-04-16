@@ -255,7 +255,13 @@ void Loader::loader_thread() {
  * This should be called during initialization, before any threaded loading goes on.
  */
 const tfrag3::Level& Loader::load_common(TexturePool& tex_pool, const std::string& name) {
-  auto data = file_util::read_binary_file(m_base_path / fmt::format("{}.fr3", name));
+  auto fr3_path = m_base_path / fmt::format("{}.fr3", name);
+  if (!file_util::file_exists(fr3_path.string())) {
+    fmt::print("[warn] Common FR3 file {} not found, using empty level\n", fr3_path.string());
+    m_common_level.level = std::make_unique<tfrag3::Level>();
+    return *m_common_level.level;
+  }
+  auto data = file_util::read_binary_file(fr3_path);
 
   auto decomp_data = compression::decompress_zstd(data.data(), data.size());
   Serializer ser(decomp_data.data(), decomp_data.size());

@@ -1,0 +1,429 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; Late stubs for types/functions referenced by jak3 source and jakx decompiled files
+;; Loaded at position 165 in game.gd (after focus, before scene)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Type declarations for jakx-specific types
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(declare-type squad-control basic)
+(declare-type race-path-group structure)
+(declare-type race-path structure)
+(declare-type pecker-npc process-taskable)
+
+;; title-control lives in TITLE.DGO (title-obs.o), which loads after GAME.CGO.
+;; spawn-title-control is our wrapper in title-obs.gc; level.gc calls it as a
+;; plain function by name, so only the extern is needed here (no type refs).
+(define-extern spawn-title-control (function none))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; control-info — jak3's player control type
+;; Full definition needed because many jak3 source files access its fields
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(deftype control-info (collide-shape-moving)
+  "Minimal control-info with only fields referenced by jakx source files."
+  ((ctrl-xz-vel                    float          :offset 564)
+   (draw-offset                    vector :inline :offset 3728)
+   (cspace-offset                  vector :inline :offset 3744)
+   (anim-collide-offset-world      vector :inline :offset 3776)
+   (standard-dynamics              dynamics       :offset 3824)
+   (mod-surface                    surface        :offset 3828)
+   (current-surface                surface        :offset 3832)
+   (cpad                           cpad-info      :offset 3848)
+   (to-target-pt-xz                vector :inline :offset 3872)
+   (w-R-c                          matrix :inline :offset 4112)
+   (c-R-w                          matrix :inline :offset 4176)
+   (camera-pos                     vector :inline :offset 4336)
+   (ground-local-norm-dot-grav     float          :offset 4632)
+   (local-slope-z                  float          :offset 4636)
+   (last-time-on-surface           time-frame     :offset 4656)
+   (collision-spheres              uint32 10      :offset 5016)
+   (last-roll-end-time             time-frame     :offset 5072)
+   (last-running-attack-end-time   time-frame     :offset 5080)
+   (last-hands-attempt-time        time-frame     :offset 5088)
+   (last-attack-end-time           time-frame     :offset 5096)
+   (last-feet-attempt-time         time-frame     :offset 5104)
+   (last-time-of-stuck             time-frame     :offset 5120)
+   (bend-target                    float          :offset 5136)
+   (collide-mode                   symbol         :offset 5248)
+   (collide-mode-transition        float          :offset 5252)
+   (duck-gun-tube-transision       float          :offset 5256)
+   (unknown-word04                 uint32         :offset 5616)
+   (unknown-vector37               vector :inline :offset 5648)
+   (unknown-vector38               vector :inline :offset 5664)
+   (unknown-quat39                 quaternion :inline :offset 5680)
+   (unknown-quat40                 quaternion :inline :offset 5696)
+   (unknown-sound-id00             sound-id       :offset 5776)
+   (danger-mode                    symbol         :offset 5984)
+   (target-attack-id               uint32         :offset 5988)
+   (bomb-scale                     float          :offset 5996)
+   (attack-count                   uint64         :offset 6000)
+   (remaining-ctrl-iterations      int32          :offset 6192)
+   (unknown-time-frame26           time-frame     :offset 6248)
+   (unknown-time-frame27           time-frame     :offset 6256)
+   (unknown-sound-id04             sound-id       :offset 6292)
+   (unknown-float45                float          :offset 6296)
+   (default-collide-as-fgnd        collide-spec   :offset 6304)
+   (default-collide-with-fgnd      collide-spec   :offset 6312)
+   (time-of-last-zero-input        time-frame     :offset 6320)
+   )
+  )
+
+;; vehicle-wheel-info - forward declared, fully defined in vehicle-h.gc
+(declare-type vehicle-wheel-info structure)
+
+;; vehicle-controls-flag - enum for vehicle control flags
+(defenum vehicle-controls-flag
+  :type uint32
+  :bitfield #t
+  )
+
+;; vehicle-controls - needed by pilot-info and vehicle.gc
+(deftype vehicle-controls (structure)
+  ((steering    float)
+   (throttle    float)
+   (brake       float)
+   (lean-z      float)
+   (handbrake   float)
+   (flags       vehicle-controls-flag)
+   (prev-flags  vehicle-controls-flag)
+   )
+  )
+
+;; pilot-info - needed by scene.gc (-> *target* pilot vehicle)
+(deftype pilot-info (basic)
+  ((entity                   basic)
+   (vehicle                  handle)
+   (left-right-bias          float)
+   (left-right-interp        float)
+   (front-back-interp        float)
+   (up-down-interp           float)
+   (stance                   uint8)
+   (seat-index               int8)
+   (backup-nav-radius        float)
+   (gun?                     symbol)
+   (controls                 vehicle-controls  :inline)
+   )
+  )
+
+;; gun-info - needed by hud-classes.gc
+(deftype gun-info (basic)
+  ((process            basic)
+   (gun                basic)
+   (gun-pos            transformq     :inline)
+   (gun-type           pickup-type)
+   (using-gun-type     pickup-type)
+   (active?            symbol)
+   (latch?             symbol)
+   (put-away?          symbol)
+   (surpress-time      time-frame)
+   (fire-time          time-frame)
+   (gun-delay-fire     float)
+   (gun-time           time-frame)
+   (gun-get-on-time    time-frame)
+   (active-time        time-frame)
+   (fire-delay         uint32)
+   (gun-control        uint32)
+   (gun-target         basic)
+   (gun-daxter         float)
+   (gun-select-time    time-frame     4)
+   (gun-roty-rel       degrees)
+   (gun-roty           degrees)
+   (gun-roty-targ      degrees)
+   (hips               basic)
+   (upper-body         basic)
+   (chest              basic)
+   (strip              basic)
+   (uv-slide           float)
+   (charge-ammo        float)
+   (ammo-required      float)
+   )
+  )
+
+;; board-info / carry-info / darkjak-info / lightjak-info etc - minimal stubs
+(deftype board-info (basic)
+  ((last-jump-time time-frame)
+   )
+  )
+(deftype carry-info (basic) ())
+(deftype darkjak-info (basic) ())
+(deftype lightjak-info (basic) ())
+(deftype flut-info (basic) ())
+(deftype mech-info (basic) ())
+(deftype indax-info (basic) ())
+(deftype ladder-info (basic) ())
+(deftype tube-info (basic) ())
+(deftype turret-info (basic) ())
+(deftype racer-info (basic) ())
+
+;; sound-info - jakx-specific type for sound data
+(deftype sound-info (basic)
+  ((flags        uint32)
+   (index        int32)
+   (name         uint128)
+   (fo-power     float)
+   (fo-min       float)
+   (fo-max       float)
+   (volume       float)
+   (priority     int32)
+   (duck-amount  float)
+   (group        uint8)
+   )
+  )
+
+;; speedrun-info - PC port feature
+(deftype speedrun-info (basic)
+  ()
+  )
+(define *speedrun-info* (the-as speedrun-info #f))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Scene additions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; scene.vehicles field is jakx-specific - added in intro-scenes3/task-scenes
+;; Since scene is already defined from scene-h.gc, we can't add a field.
+;; Instead we'll fix the files that reference it.
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Missing functions/macros
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; gun->eco: converts gun-type to eco pickup type
+(defun gun->eco ((arg0 pickup-type))
+  (the-as pickup-type 0)
+  )
+
+;; gun->ammo: converts gun-type to ammo pickup type
+(defun gun->ammo ((arg0 pickup-type))
+  (the-as pickup-type 0)
+  )
+
+;; start-run!: PC port speedrun feature
+(defun start-run! ((arg0 speedrun-info))
+  (none)
+  )
+
+;; sphere-cull-for-ocean: jak3 ocean rendering helper
+(defun sphere-cull-for-ocean ((arg0 vector))
+  #f
+  )
+
+;; update-light-sphere-from-editable-light: debug tool helper
+(defun update-light-sphere-from-editable-light ((arg0 basic))
+  (none)
+  )
+
+;; show-maya-skeleton: debug visualization
+(defun show-maya-skeleton ((arg0 process-drawable) (arg1 int) (arg2 float))
+  (none)
+  )
+
+;; get-penetrate-using-from-attack-event: jak3 combat system
+(defun get-penetrate-using-from-attack-event ((arg0 process-drawable) (arg1 basic))
+  (the-as uint 0)
+  )
+
+;; target-danger-set!: jak3 danger system
+(defun target-danger-set! ((arg0 symbol) (arg1 symbol))
+  (none)
+  )
+
+;; vehicle-entity-hack: jakx vehicle entity lookup
+(defun vehicle-entity-hack ((arg0 int))
+  #f
+  )
+
+;; vehicle-manager-start: jakx vehicle system init
+(defun vehicle-manager-start ()
+  (none)
+  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Missing globals
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define *compact-actors* #f)
+(define *edit-instance* (the-as string #f))
+
+;; target-lightjak-process: jak3 eco power function
+(defun target-lightjak-process ()
+  (none)
+  )
+
+;; view-get-active: jakx view system (returns basic, view type defined later)
+(defun view-get-active ()
+  (the-as basic #f)
+  )
+
+;; find-instance-by-name-level: jak3 debug function
+(defun find-instance-by-name-level ((arg0 string) (arg1 basic))
+  (the-as basic #f)
+  )
+
+;; missions-options: jakx-specific progress menu
+(deftype missions-options (basic)
+  ((options basic 16)
+   )
+  )
+(define *missions-options* (the-as missions-options #f))
+
+;; Additional type stubs
+;; race-path-sample: full deftype needed because race-control uses it :inline
+(deftype race-path-sample (structure)
+  ((bytes     uint8       32)
+   (pos       vector      :inline :overlay-at (-> bytes 0))
+   (quat      quaternion  :inline :overlay-at (-> bytes 16))
+   (stick-x   int8                :overlay-at (-> bytes 12))
+   (stick-y   int8                :overlay-at (-> bytes 13))
+   (throttle  uint8               :overlay-at (-> bytes 14))
+   (flags     uint8               :overlay-at (-> bytes 15))
+   )
+  )
+(declare-type race-control structure)
+(declare-type wcar-snake-base basic)
+(declare-type debug-vehicle-work basic)
+(declare-type rigid-body-vehicle-constants structure)
+(declare-type vehicle-info structure)
+(declare-type race-mesh-slice-query structure)
+
+;; pilot-edge-grab-info - needed by vehicle-util.gc
+(deftype pilot-edge-grab-info (structure)
+  ((found?  symbol)
+   (pos     vector :inline)
+   (normal  vector :inline)
+   )
+  )
+
+;; unlocked-secrets - PC port feature
+(deftype unlocked-secrets (basic)
+  ((options basic 32)
+   )
+  )
+(define *unlocked-secrets* (the-as unlocked-secrets #f))
+
+;; Additional missing functions
+;; target eco-power behaviors - already forward-declared as (function none :behavior target)
+;; We don't need stubs since they're already declared and just won't be called
+
+(defun using-gun? ((arg0 process))
+  #f
+  )
+
+;; view type is defined in view-h.gc
+
+;; entity-by-name: ported from jak3/engine/entity/entity.gc:102.
+;; Walks active levels' BSP actors/nav-meshes/race-meshes/cameras looking for a
+;; name match. Called from cam-master-set-entity every frame via
+;; (update *setting-control*). Without an impl, the extern null-derefs to
+;; 0x2123000000 once (update *setting-control*) is enabled in the display-loop.
+(defun entity-by-name ((arg0 string))
+  (if (not arg0)
+      (return (the-as entity #f))
+      )
+  (dotimes (s5-0 (-> *level* length))
+    (let ((s4-0 (-> *level* level s5-0)))
+      (when (= (-> s4-0 status) 'active)
+        (let ((s3-0 (-> s4-0 bsp actors)))
+          (when (nonzero? s3-0)
+            (dotimes (s2-0 (-> s3-0 length))
+              (let ((s1-0 (-> s3-0 data s2-0 actor)))
+                (if (string= (res-lump-struct s1-0 'name string) arg0)
+                    (return s1-0)
+                    )
+                )
+              )
+            )
+          )
+        (let ((s3-1 (-> s4-0 bsp nav-meshes)))
+          (when (nonzero? s3-1)
+            (dotimes (s2-1 (-> s3-1 length))
+              (let ((s1-1 (-> s3-1 s2-1)))
+                (if (string= (res-lump-struct s1-1 'name string) arg0)
+                    (return s1-1)
+                    )
+                )
+              )
+            )
+          )
+        (let ((s3-2 (-> s4-0 bsp race-meshes)))
+          (when (nonzero? s3-2)
+            (dotimes (s2-2 (-> s3-2 length))
+              (let ((s1-2 (-> s3-2 s2-2)))
+                (if (string= (res-lump-struct s1-2 'name string) arg0)
+                    (return s1-2)
+                    )
+                )
+              )
+            )
+          )
+        (let ((s4-1 (-> s4-0 bsp cameras)))
+          (when (nonzero? s4-1)
+            (dotimes (s3-3 (-> s4-1 length))
+              (let ((s2-3 (-> s4-1 s3-3)))
+                (if (string= (res-lump-struct s2-3 'name string) arg0)
+                    (return s2-3)
+                    )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  (the-as entity #f)
+  )
+
+;; add-blackout: ported from jak3/engine/game/main.gc:104.
+;; apply-settings (settings.gc) calls this every frame from (update *setting-control*).
+;; It updates display bgcolor / pmode alpha for the fade-to-black transition.
+;; Without a real impl, the extern null-derefs to 0x2123000000 at first call.
+(defun add-blackout ((arg0 time-frame) (r int) (g int) (b int) (arg4 int))
+  "Update display settings to do blackout with GS pmode alp."
+  (let ((v1-0 *display*))
+    (let ((a0-1 (new 'static 'array time-frame 2 (seconds 0) (seconds 0))))
+      (set! (-> v1-0 bgcolor r) r)
+      (set! (-> v1-0 bgcolor g) g)
+      (set! (-> v1-0 bgcolor b) b)
+      (set! (-> v1-0 pmode alp) (- 255 arg4))
+      (set! (-> a0-1 0) 0)
+      (set! (-> a0-1 1) 0)
+      )
+    (if (nonzero? arg4)
+        (set! (-> v1-0 force-sync) (the-as uint (max 4 (the-as int (-> v1-0 force-sync)))))
+        )
+    )
+  0
+  )
+
+;; set-mh-primary-target / set-ff-primary-target / set-kg-primary-target:
+;; jakx metal-head / Freedom Fighters / Krimzon Guard AI primary-target setters.
+;; Referenced by apply-settings when *city-mode* is 'ctywide. Not reached at boot
+;; (*city-mode* is #f), but stubbed so the externs resolve. Real ports can land
+;; later when the faction AI is hooked up.
+;; og:preserve-this — stubs; real impls depend on faction AI that isn't ported yet.
+(defun set-mh-primary-target ((arg0 handle) (arg1 float))
+  (none)
+  )
+(defun set-ff-primary-target ((arg0 handle) (arg1 float))
+  (none)
+  )
+(defun set-kg-primary-target ((arg0 handle) (arg1 float))
+  (none)
+  )
+
+;; process-entity-set!: binds a process to its entity + level. Declared extern
+;; at engine/common-obs/generic-obs.gc:20 with no body; called from
+;; title-control-init, manipy-init, and ~5 other sites. Ported verbatim from
+;; jak3 engine/entity/entity.gc:477.
+(defun process-entity-set! ((arg0 process) (arg1 entity))
+  (set! (-> arg0 entity) (the-as entity-actor arg1))
+  (if arg1
+      (set! (-> arg0 level) (-> arg1 extra level))
+      (set! (-> arg0 level) (-> *level* level-default))
+      )
+  arg1
+  )

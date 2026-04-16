@@ -199,3 +199,11 @@ const std::vector<std::string>& jak2_animated_texture_slots() {
 const std::vector<std::string>& jak3_animated_texture_slots() {
   return jak3_slots;
 }
+
+std::vector<std::string> jakx_slots = {
+    // TODO: populate with Jak X animated texture slots once identified
+};
+
+const std::vector<std::string>& jakx_animated_texture_slots() {
+  return jakx_slots;
+}

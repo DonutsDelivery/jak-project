@@ -1,0 +1,28 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; Ported from jak2 target-util.gc:1773 / jak3 target-util.gc:1953.
+;; Minimal implementation of `target-pos` so speech-control / settings / other
+;; systems that reference it can run at boot while full target-util.gc is still
+;; being ported. Returns the world position of the local target. If *target* is
+;; #f (common during early boot before play starts), falls back to camera-pos.
+
+(defun target-pos ((arg0 int))
+  "Return world-space position associated with the local player target.
+   arg0=0 returns the control trans; non-zero looks up a bone in the
+   cspace node-list. When *target* isn't alive yet we return the current
+   camera position so callers get a valid vector instead of crashing."
+  (let ((a1-0 *target*))
+    (cond
+      (a1-0
+        (if (zero? arg0)
+            (-> a1-0 control trans)
+            (vector<-cspace! (new 'static 'vector) (-> a1-0 node-list data arg0))
+            )
+        )
+      (else
+        (camera-pos)
+        )
+      )
+    )
+  )

@@ -1,0 +1,226 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; name: title-obs.gc
+;; name in dgo: title-obs
+;; dgos: TITLE
+
+;; Phase 0 + Phase 1 port for jakx bringup: enough of title-control so that
+;; `(process-spawn title-control :init title-control-init :name "title-control"
+;;   :to *entity-pool*)` succeeds from the REPL. The full startup/wait/idle
+;; state bodies, memory-card UI, logo skelgroup rendering, museum/credits, and
+;; scrap-book data all remain unported (Phase 2+).
+;;
+;; Type layout is jak3's `.gc` layout, NOT the decompiler-guessed one in
+;; jakx all-types.gc (which omits fields title-control-init touches).
+
+(declare-type title-control process)
+(define-extern *title-control* (pointer title-control))
+
+(deftype title-control (process)
+  ((selected     int32)
+   (sprites      hud-sprite           2 :inline)
+   (sprite-pos   vector               :inline)
+   (sprite-draw  uint32)
+   (buffer       external-art-buffer  2)
+   (want         int32                2)
+   (want-name    string               2)
+   (have         int32                2)
+   (draw         int32)
+   (draw-name    string)
+   (active       symbol)
+   (spark-time   time-frame)
+   (gui-id       sound-id)
+   (logo         (pointer manipy))
+   )
+  (:state-methods
+    startup
+    wait
+    idle
+    (scrap-book int)
+    (control-spec int)
+    )
+  )
+
+(define *title-control* (the-as (pointer title-control) #f))
+
+;; Forward reference: title-control-init is defined below, used by spawn-title-control.
+(define-extern title-control-init (function object :behavior title-control))
+
+;; Wrapper for spawning title-control from files that don't have the full
+;; deftype in scope (e.g. level.gc in GAME.CGO, which is loaded before TITLE.DGO).
+;; Level.gc's call site just declares this extern and invokes by name; the
+;; process-spawn macro's method-lookup on title-control happens inside this
+;; translation unit where the full type is visible.
+(defun spawn-title-control ()
+  (process-spawn title-control :init title-control-init :name "title-control" :to *entity-pool*)
+  0
+  (none)
+  )
+
+(defmethod relocate ((this title-control) (offset int))
+  (dotimes (v1-0 2)
+    (if (nonzero? (-> this buffer v1-0))
+        (&+! (-> this buffer v1-0) offset)
+        )
+    )
+  (the-as title-control ((method-of-type process relocate) this offset))
+  )
+
+;; Minimal stub for `startup`: sleep forever. Phase 2 will replace with the
+;; real jak3 startup `:code` (want-levels, title-screen-change, wait-for-press,
+;; mc-get-slot-info, initialize! 'game, logo manipy spawn, go-virtual wait).
+(defstate startup (title-control)
+  :virtual #t
+  :code (behavior ()
+    (until #f
+      (suspend)
+      )
+    )
+  )
+
+;; Other states declared so go-virtual compiles; bodies stub to sleep.
+(defstate wait (title-control)
+  :virtual #t
+  :code (behavior ()
+    (until #f
+      (suspend)
+      )
+    )
+  )
+
+(defstate idle (title-control)
+  :virtual #t
+  :code (behavior ()
+    (until #f
+      (suspend)
+      )
+    )
+  )
+
+(defstate scrap-book (title-control)
+  :virtual #t
+  :code (the-as (function int object) sleep-code)
+  )
+
+(defstate control-spec (title-control)
+  :virtual #t
+  :code (the-as (function int object) sleep-code)
+  )
+
+;; Ported verbatim from jak3 levels/title/title-obs.gc:994.
+(defbehavior title-control-init title-control ()
+  (stack-size-set! (-> self main-thread) 2048)
+  (logclear! (-> self mask) (process-mask freeze pause menu progress actor-pause))
+  (set! (-> self level) (level-get *level* 'title))
+  ;; og:preserve-this — guard against level-get returning #f during early bringup
+  ;; (title level slot may not be active in *level* yet when we spawn).
+  (let ((a1-2 (if (and (-> self level)
+                       (nonzero? (-> self level entity))
+                       (> (-> self level entity length) 0))
+                  (-> self level entity data 0 entity)
+                  )
+              )
+        )
+    (process-entity-set! self a1-2)
+    )
+  (set-setting! 'allow-pause #f 0.0 0)
+  (set-setting! 'allow-progress #f 0.0 0)
+  (set-setting! 'airlock #f 0.0 0)
+  (set-setting! 'music #f 0.0 0)
+  (set-setting! 'allow-timeout #f 0.0 0)
+  (set-setting! 'allow-error #f 0.0 0)
+  (set-setting! 'music-volume 'abs 0.0 0)
+  (set-setting! 'entity-name "camera-311" 0.0 0)
+  (apply-settings *setting-control*)
+  (dotimes (gp-0 2)
+    (set! (-> self buffer gp-0)
+          (new
+            'process
+            'external-art-buffer
+            gp-0
+            (lambda ((arg0 external-art-buffer))
+              (let ((gp-0 (level-get *level* 'title)))
+                (cond
+                  ((not (-> gp-0 user-object (-> arg0 index)))
+                   (let ((s4-0 (-> arg0 heap)))
+                     (set! (-> s4-0 base) (kmalloc (-> gp-0 heap) #xd0000 (kmalloc-flags) "heap"))
+                     (set! (-> s4-0 current) (-> s4-0 base))
+                     (set! (-> s4-0 top-base) (&+ (-> s4-0 base) #xd0000))
+                     (set! (-> s4-0 top) (-> s4-0 top-base))
+                     )
+                   (set! (-> gp-0 user-object (-> arg0 index)) (the-as basic (-> arg0 heap base)))
+                   )
+                  (else
+                    (let ((v1-10 (-> arg0 heap)))
+                      (set! (-> v1-10 base) (the-as pointer (-> gp-0 user-object (-> arg0 index))))
+                      (set! (-> v1-10 current) (-> v1-10 base))
+                      (set! (-> v1-10 top-base) (&+ (-> v1-10 base) #xd0000))
+                      (set! (-> v1-10 top) (-> v1-10 top-base))
+                      )
+                    )
+                  )
+                )
+              0
+              )
+            #f
+            )
+          )
+    )
+  (set! (-> self selected) 0)
+  (dotimes (v1-38 2)
+    (set! (-> self want v1-38) -1)
+    (set! (-> self have v1-38) -1)
+    )
+  (set! (-> self draw) -1)
+  (set! (-> self active) #f)
+  (dotimes (v1-42 2)
+    (let ((a0-17 (&+ (-> self sprites 0 color-ptr) (* v1-42 64))))
+      (set! (-> a0-17 0) 128)
+      (set! (-> a0-17 1) 128)
+      (set! (-> a0-17 2) 128)
+      (set! (-> a0-17 3) 128)
+      )
+    (set! (-> self sprites v1-42 pos z) #xffffff)
+    (set! (-> self sprites v1-42 pos w) 0)
+    (set! (-> self sprites v1-42 scale-x) 1.0)
+    (set! (-> self sprites v1-42 scale-y) 1.0)
+    (set! (-> self sprites v1-42 angle) 0.0)
+    (set! (-> self sprites v1-42 flags) (hud-sprite-flags))
+    (set! (-> self sprites v1-42 tid) (the-as texture-id #f))
+    )
+  (set! (-> self sprite-draw) (the-as uint 0))
+  (set! (-> self logo) (the-as (pointer manipy) #f))
+  (send-event (handle->process (-> *game-info* dust-storm)) 'set-intro #t)
+  (let ((v1-55 (-> *game-info* demo-state)))
+    (cond
+      ((zero? v1-55)
+       (set! (-> *setting-control* user-current fog-special-interp-targ) 0.0)
+       (send-event (handle->process (-> *game-info* dust-storm)) 'set-intensity 0)
+       )
+      ((or (= v1-55 1) (= v1-55 2))
+       )
+      ((= v1-55 3)
+       (set! (-> *setting-control* user-current fog-special-interp-targ) 2.0)
+       (send-event (handle->process (-> *game-info* dust-storm)) 'set-intensity #x40000000)
+       (set-setting! 'fog-special-interp-targ #f 2.0 0)
+       (set-setting! 'fog-special-interp-rate #f 0.2 0)
+       )
+      ((= v1-55 100)
+       (set! (-> *game-info* demo-state) (the-as uint 1))
+       )
+      ((= v1-55 201)
+       (go-virtual scrap-book 1)
+       )
+      ((= v1-55 202)
+       (go-virtual scrap-book 2)
+       )
+      ((= v1-55 203)
+       (go-virtual scrap-book 3)
+       )
+      )
+    )
+  (set! *title-control* (the-as (pointer title-control) (process->ppointer self)))
+  (set! (-> *game-info* controller 0) (process->handle self))
+  (go-virtual startup)
+  )
