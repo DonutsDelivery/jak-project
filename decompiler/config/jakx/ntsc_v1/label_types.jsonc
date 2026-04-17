@@ -5,9 +5,15 @@
     ["L35", "car-level-array", true],
     ["L19", "array", true],
     ["L3", "array", true]
-  ]
-  //, "math": [
-  //   ["L108", "(pointer float)", 32],
-  //   ["L109", "(pointer float)", 32]
-  // ],
+  ],
+  "math": [
+    ["L108", "(pointer float)", 32],
+    ["L109", "(pointer float)", 32]
+  ],
+  "profile": [
+    ["L3", "(inline-array profile-spec)", 14]
+  ],
+  "texture-anim-h": [["L1", "(pointer uint8)", 256]],
+  "pat-h": [["L1", "(inline-array pat-mode-info)", 4]],
+  "ambient-h": [["L1", "(inline-array talker-speech-class)", 365]]
 }
