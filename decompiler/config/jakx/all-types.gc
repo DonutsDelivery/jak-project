@@ -35570,21 +35570,21 @@
 (define-extern *merc-global-stats* merc-global-stats) ;; merc-global-stats
 (define-extern clear-tr-stat function) ;; (function tr-stat none)
 (define-extern *stat-string-tfrag* string) ;; string
-(define-extern *stat-string-tfrag-scissor* object) ;; string
-(define-extern *stat-string-total* object) ;; string
+(define-extern *stat-string-tfrag-scissor* string) ;; string
+(define-extern *stat-string-total* string) ;; string
 (define-extern print-tr-stat function) ;; (function tr-stat string string none)
 (define-extern print-terrain-stats function) ;; (function none)
 (define-extern update-subdivide-settings! function) ;; (function subdivide-settings math-camera int none)
-(define-extern *subdivide-settings* object) ;; subdivide-settings
+(define-extern *subdivide-settings* subdivide-settings) ;; subdivide-settings
 (define-extern set-tfrag-dists! function) ;; (function tfrag-dists none)
 (define-extern *terrain-context* object) ;; terrain-context
-(define-extern GSH_ENABLE object) ;; symbol
+(define-extern GSH_ENABLE symbol) ;; symbol
 (define-extern GSH_BUCKET object) ;; bucket-id
-(define-extern GSH_WHICH_STAT object) ;; int
-(define-extern GSH_MAX_DISPLAY object) ;; basic
-(define-extern GSH_TIME object) ;; int
+(define-extern GSH_WHICH_STAT int) ;; int
+(define-extern GSH_MAX_DISPLAY basic) ;; basic
+(define-extern GSH_TIME int) ;; int
 (define-extern *perf-stats* object) ;; perf-stat-array
-(define-extern *gomi-stats-hack* object) ;; (inline-array perf-stat)
+(define-extern *gomi-stats-hack* (inline-array perf-stat)) ;; (inline-array perf-stat)
 (define-extern start-perf-stat-collection function) ;; (function none)
 (define-extern end-perf-stat-collection function) ;; (function none)
 (define-extern print-perf-stats function) ;; (function none)
@@ -35721,10 +35721,10 @@
 (define-extern sprite-release-user-hvdf function) ;; (function int none)
 (define-extern sprite-get-user-hvdf function) ;; (function int vector)
 (define-extern *sprite-hvdf-data* object) ;; sprite-hvdf-data
-(define-extern *sprite-hvdf-control* object) ;; sprite-hvdf-control
+(define-extern *sprite-hvdf-control* sprite-hvdf-control) ;; sprite-hvdf-control
 (define-extern *sprite-aux-list* object) ;; sprite-aux-list
-(define-extern *sprite-array-2d* object) ;; sprite-array-2d
-(define-extern *sprite-array-3d* object) ;; sprite-array-3d
+(define-extern *sprite-array-2d* sprite-array-2d) ;; sprite-array-2d
+(define-extern *sprite-array-3d* sprite-array-3d) ;; sprite-array-3d
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sprite-distort                 ;;
@@ -35885,19 +35885,19 @@
 (define-extern sprite-glow-vu1-block object) ;; vu-function
 (define-extern sprite-glow-init-consts function) ;; (function sprite-glow-consts none)
 (define-extern sprite-glow-init-engine function) ;; (function dma-buffer none)
-(define-extern *sprite-glow-dma-packet-data* object) ;; sprite-glow-dma-packet-data
+(define-extern *sprite-glow-dma-packet-data* sprite-glow-dma-packet-data) ;; sprite-glow-dma-packet-data
 (define-extern sprite-glow-add-sprite function) ;; (function dma-buffer sprite-vec-data-2d float float float adgif-shader none)
 (define-extern sprite-glow-add-simple-sprite function) ;; (function dma-buffer sprite-glow-dma-packet-data sprite-glow-data pointer none)
 (define-extern sprite-glow-draw function) ;; (function dma-buffer none)
 (define-extern add-shader-to-dma function) ;; (function dma-buffer adgif-shader)
-(define-extern *simple-sprite-system* object) ;; simple-sprite-system
+(define-extern *simple-sprite-system* simple-sprite-system) ;; simple-sprite-system
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; debug-sphere                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern make-debug-sphere-table function) ;; (function vector-array float float vector-array)
-(define-extern *debug-sphere-table* object) ;; (array vector-array)
+(define-extern *debug-sphere-table* (array vector-array)) ;; (array vector-array)
 (define-extern add-debug-sphere-from-table function) ;; (function bucket-id vector meters rgba int none)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -35956,10 +35956,10 @@
 (define-extern add-debug-outline-triangle function) ;; (function symbol bucket-id vector vector vector rgba symbol)
 (define-extern add-debug-triangle-normal function) ;; (function symbol bucket-id vector vector vector rgba symbol)
 (define-extern add-debug-flat-triangle-noclip function)
-(define-extern *debug-lines* object) ;; (inline-array debug-line)
-(define-extern *debug-lines-trk* object) ;; debug-tracking-thang
-(define-extern *debug-text-3ds* object) ;; (inline-array debug-text-3d)
-(define-extern *debug-text-3d-trk* object) ;; debug-tracking-thang
+(define-extern *debug-lines* (inline-array debug-line)) ;; (inline-array debug-line)
+(define-extern *debug-lines-trk* debug-tracking-thang) ;; debug-tracking-thang
+(define-extern *debug-text-3ds* (inline-array debug-text-3d)) ;; (inline-array debug-text-3d)
+(define-extern *debug-text-3d-trk* debug-tracking-thang) ;; debug-tracking-thang
 (define-extern *debug-prims* object)
 (define-extern debug-reset-prim-buffer function)
 (define-extern add-debug-flat-triangle function) ;; (function symbol bucket-id vector vector vector rgba symbol)
@@ -36000,7 +36000,7 @@
 (define-extern dma-timeout-cam function) ;; (function vector)
 (define-extern display-file-info function) ;; (function int)
 (define-extern add-debug-cursor function) ;; (function symbol bucket-id int int mouse-buttons int)
-(define-extern *boundary-polygon* object) ;; (inline-array sky-vertex)
+(define-extern *boundary-polygon* (inline-array sky-vertex)) ;; (inline-array sky-vertex)
 (define-extern init-boundary-regs function) ;; (function none)
 (define-extern add-boundary-shader function) ;; (function texture-id dma-buffer none)
 (define-extern draw-boundary-polygon function)
@@ -36168,8 +36168,8 @@
   )
 
 
-(define-extern *stats-blerc* object) ;; symbol
-(define-extern *blerc-globals* object) ;; blerc-globals
+(define-extern *stats-blerc* symbol) ;; symbol
+(define-extern *blerc-globals* blerc-globals) ;; blerc-globals
 (define-extern blerc-stats-init function) ;; (function none)
 (define-extern blerc-init function) ;; (function none)
 (define-extern blerc-a-fragment function) ;; function
@@ -36188,7 +36188,7 @@
 
 ;; merc-ctrl is already defined!
 
-(define-extern *texture-login-data* object) ;; texture-login-data
+(define-extern *texture-login-data* texture-login-data) ;; texture-login-data
 (define-extern texture-usage-init function) ;; (function merc-ctrl symbol)
 (define-extern texture-usage-update function) ;; (function texture symbol)
 (define-extern merc-stats-display function) ;; (function merc-ctrl none)
@@ -36251,7 +36251,7 @@
 ;; bones                          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *bone-calculation-list* object) ;; bone-calculation-list
+(define-extern *bone-calculation-list* bone-calculation-list) ;; bone-calculation-list
 (define-extern bone-list-init function) ;; (function none)
 (define-extern bones-vu0-block object) ;; vu-function
 (define-extern bones-set-sqwc function) ;; (function none)
@@ -36287,7 +36287,7 @@
 (define-extern vu-lights<-light-group! function) ;; (function vu-lights light-group none)
 (define-extern foreground-add-mtx-calc function) ;; (function bone-calculation (inline-array pris-mtx) bone-calc-flags bone-calculation)
 (define-extern foreground-wrapup function) ;; (function none)
-(define-extern *default-shadow-settings* object) ;; shadow-settings
+(define-extern *default-shadow-settings* shadow-settings) ;; shadow-settings
 (define-extern foreground-shadow function) ;; (function draw-control (inline-array pris-mtx) pointer pointer)
 (define-extern foreground-generic-merc-death function) ;; (function draw-control generic-merc-ctrl none)
 (define-extern foreground-generic-merc-add-fragments function) ;; (function merc-effect pointer mercneric-chain pointer)
@@ -36298,8 +36298,8 @@
 (define-extern foreground-ripple function) ;; (function draw-control merc-ctrl pointer int pointer)
 (define-extern foreground-draw function) ;; (function draw-control dma-buffer float none)
 (define-extern foreground-draw-hud function) ;; (function draw-control dma-buffer float none)
-(define-extern *foreground* object) ;; foreground-globals
-(define-extern *foreground-draw-engine* object) ;; engine
+(define-extern *foreground* foreground-globals) ;; foreground-globals
+(define-extern *foreground-draw-engine* engine) ;; engine
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; generic-vu0                    ;;
@@ -36326,7 +36326,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *target-lock* object) ;; object
-(define-extern *generic-consts* object) ;; generic-consts
+(define-extern *generic-consts* generic-consts) ;; generic-consts
 (define-extern generic-work-init function) ;; (function generic-bucket-state none)
 (define-extern generic-upload-vu0 function) ;; (function none)
 (define-extern upload-vu0-program function) ;; (function vu-function pointer none)
@@ -36376,7 +36376,7 @@
 
 
 (define-extern mercneric-vu0-block object) ;; vu-function
-(define-extern *inv-init-table* object) ;; (inline-array invinitdata)
+(define-extern *inv-init-table* (inline-array invinitdata)) ;; (inline-array invinitdata)
 (define-extern generic-merc-init-asm function) ;; (function none)
 (define-extern mercneric-matrix-asm function)
 (define-extern mercneric-shader-asm function)
@@ -36552,7 +36552,7 @@
 ;; texture-anim                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *texture-anim-work* object) ;; texture-anim-work
+(define-extern *texture-anim-work* texture-anim-work) ;; texture-anim-work
 (define-extern texture-anim-layer-interp function) ;; (function texture-anim-layer float none)
 (define-extern texture-anim-layer-add-shader function) ;; (function dma-buffer texture-anim-layer int none)
 (define-extern texture-anim-layer-add-clut-shader function) ;; (function dma-buffer texture-anim-layer int none)
@@ -36587,8 +36587,8 @@
 (define-extern texture-anim-alpha-ramp-clut-init function) ;; (function texture-anim none)
 (define-extern texture-anim-override-size-init function)
 (define-extern texture-anim-change-mt8h-init function) ;; (function texture-anim none)
-(define-extern *texture-anim-pages-table* object) ;; (pointer uint8)
-(define-extern *texture-anim-mip-array* object) ;; (pointer uint16)
+(define-extern *texture-anim-pages-table* (pointer uint8)) ;; (pointer uint8)
+(define-extern *texture-anim-mip-array* (pointer uint16)) ;; (pointer uint16)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; texture-anim-funcs             ;;
@@ -36597,7 +36597,7 @@
 (define-extern *fog-texture-tbp* object)
 (define-extern fog-texture-anim-init function) ;; (function texture-anim int)
 (define-extern fog-texture-anim-init2 function)
-(define-extern *fog-texture-work* object) ;; fog-texture-work
+(define-extern *fog-texture-work* fog-texture-work) ;; fog-texture-work
 (define-extern real-fog-texture-anim-func function) ;; (function dma-buffer texture-anim int)
 (define-extern fog-texture-anim-func function) ;; (function dma-buffer texture-anim int)
 
@@ -36660,8 +36660,8 @@
 ;; font-data                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *font12-table* object) ;; (inline-array vector)
-(define-extern *font24-table* object) ;; (inline-array vector)
+(define-extern *font12-table* (inline-array vector)) ;; (inline-array vector)
+(define-extern *font24-table* (inline-array vector)) ;; (inline-array vector)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; font                           ;;
@@ -36814,7 +36814,7 @@
 (define-extern draw-prototype-inline-array-shrub function) ;; (function int (inline-array prototype-bucket-shrub) pointer)
 (define-extern draw-drawable-tree-instance-shrub function) ;; (function drawable-tree-instance-shrub level none)
 (define-extern *dma-test* object) ;; dma-test
-(define-extern *dma-test-work* object) ;; dma-test-work
+(define-extern *dma-test-work* dma-test-work) ;; dma-test-work
 (define-extern init-dma-test function) ;; (function none)
 (define-extern dma-test-func function) ;; (function none)
 (define-extern move-test-func function) ;; (function none)
@@ -36851,13 +36851,13 @@
 |#
 
 
-(define-extern *tfrag-display-stats* object) ;; symbol
+(define-extern *tfrag-display-stats* symbol) ;; symbol
 (define-extern tfrag-vu1-block object) ;; vu-function
 (define-extern tfrag-data-setup function) ;; (function tfrag-data int int none)
 (define-extern add-tfrag-mtx-0 function) ;; (function dma-buffer symbol none)
 (define-extern add-tfrag-mtx-1 function) ;; (function dma-buffer symbol none)
 (define-extern add-tfrag-data function) ;; (function dma-buffer int int none)
-(define-extern t-stat object) ;; tfrag-stats
+(define-extern t-stat tfrag-stats) ;; tfrag-stats
 (define-extern tfrag-print-stats function) ;; (function symbol none)
 (define-extern tfrag-init-buffer function) ;; (function dma-buffer gs-test int symbol none)
 (define-extern tfrag-end-buffer function) ;; (function dma-buffer int none)
@@ -36892,14 +36892,14 @@
 (define-extern draw-drawable-tree-tfrag-water function) ;; (function drawable-tree-tfrag none)
 (define-extern tfrag-vu1-init-buf function) ;; (function bucket-id gs-test int uint symbol none)
 (define-extern tfrag-scissor-vu1-init-buf function) ;; (function bucket-id gs-test int uint symbol none)
-(define-extern *tfrag-init-table* object) ;; (inline-array tfrag-init-data)
+(define-extern *tfrag-init-table* (inline-array tfrag-init-data)) ;; (inline-array tfrag-init-data)
 (define-extern tfrag-vu1-init-buffers function) ;; (function none)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tfrag-work                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *tfrag-work* object) ;; tfrag-work
+(define-extern *tfrag-work* tfrag-work) ;; tfrag-work
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tie                            ;;
@@ -37156,13 +37156,13 @@
   )
 
 
-(define-extern *tie* object) ;; tie-debug
+(define-extern *tie* tie-debug) ;; tie-debug
 (define-extern tie-debug-between function) ;; (function uint uint uint)
 (define-extern tie-debug-one function) ;; (function uint uint uint)
 (define-extern tie-debug-frag-between function) ;; (function uint uint uint)
 (define-extern tie-debug-frag-one function) ;; (function uint uint uint)
 (define-extern walk-tie-generic-prototypes function) ;; (function none)
-(define-extern *pke-hack* object) ;; vector
+(define-extern *pke-hack* vector) ;; vector
 (define-extern draw-inline-array-instance-tie function) ;; (function pointer (inline-array instance-tie) int dma-buffer none)
 (define-extern draw-inline-array-prototype-tie-asm function) ;; (function dma-buffer int prototype-array-tie none)
 (define-extern draw-inline-array-prototype-tie-shared-asm function)
@@ -37173,7 +37173,7 @@
 ;; prim                           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *prim-work* object) ;; prim-work
+(define-extern *prim-work* prim-work) ;; prim-work
 (define-extern *level-texture-page-translate* array)
 (define-extern *foreground-to-level-translate* array)
 (define-extern prim-engine-execute function) ;; (function none)
@@ -37263,19 +37263,19 @@
 
 ;; sparticle-launcher is already defined!
 
-(define-extern *part-id-table* object) ;; (array sparticle-launcher)
+(define-extern *part-id-table* (array sparticle-launcher)) ;; (array sparticle-launcher)
 (define-extern *part-group-id-table* object) ;; (array sparticle-launch-group)
 (define-extern *launch-control-table* object)
-(define-extern *sp-temp* object) ;; float
+(define-extern *sp-temp* float) ;; float
 (define-extern count-launch-controls-in-table function)
 (define-extern lookup-part-group-by-name function) ;; (function string sparticle-launch-group)
 (define-extern lookup-part-group-pointer-by-name function) ;; (function string (pointer object))
 (define-extern part-group-pointer? function) ;; (function pointer symbol)
 (define-extern unlink-part-group-by-heap function) ;; (function kheap int)
 (define-extern sp-init-fields! function) ;; (function (pointer float) (inline-array sp-field-init-spec) sp-field-id sp-field-id symbol (inline-array sp-field-init-spec))
-(define-extern *sp-launcher-lock* object) ;; symbol
+(define-extern *sp-launcher-lock* symbol) ;; symbol
 (define-extern *sp-launch-queue* object) ;; sp-launch-queue
-(define-extern *sp-launcher-enable* object) ;; symbol
+(define-extern *sp-launcher-enable* symbol) ;; symbol
 (define-extern particle-setup-adgif function) ;; (function adgif-shader int none)
 (define-extern *particle-adgif-cache* object) ;; particle-adgif-cache
 (define-extern particle-adgif-cache-flush function) ;; (function none)
@@ -37286,7 +37286,7 @@
 (define-extern sp-euler-convert function) ;; (function sparticle-launchinfo sparticle-cpuinfo none)
 (define-extern sp-rotate-system function) ;; (function sparticle-launchinfo sparticle-cpuinfo transformq none)
 (define-extern sp-launch-particles-var function) ;; (function sparticle-system sparticle-launcher matrix sparticle-launch-state sparticle-launch-control float none)
-(define-extern *death-adgif* object) ;; adgif-shader
+(define-extern *death-adgif* adgif-shader) ;; adgif-shader
 (define-extern sp-launch-particles-death function) ;; (function sparticle-system sparticle-launcher vector none)
 (define-extern sp-clear-queue function) ;; (function none)
 (define-extern sp-relaunch-setup-fields function) ;; (function object sparticle-launcher sparticle-cpuinfo sprite-vec-data-3d none)
@@ -38811,7 +38811,7 @@
 (define-extern *save-camera-inv-rot* matrix) ;; matrix
 (define-extern move-camera-from-pad function) ;; (function math-camera math-camera)
 (define-extern external-cam-reset! function) ;; (function none)
-(define-extern *start-timer* object) ;; int
+(define-extern *start-timer* int) ;; int
 (define-extern *timer-value* object) ;; int
 (define-extern *start-pos* object) ;; vector
 (define-extern update-camera function) ;; (function symbol)
