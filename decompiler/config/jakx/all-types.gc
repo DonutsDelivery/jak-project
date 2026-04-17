@@ -23228,19 +23228,19 @@
 
 
 
-#|
+
 (deftype medius-player-online-state (structure)
   ((connect-status        int32      :offset-assert 0)
    (medius-lobby-world-id int32      :offset-assert 4)
    (medius-game-world-id  int32      :offset-assert 8)
-   (lobby-name            UNKNOWN 64 :offset-assert 12)
-   (game-name             UNKNOWN 64 :offset-assert 76)
+   (lobby-name            uint8   64 :offset-assert 12)
+   (game-name             uint8   64 :offset-assert 76)
    )
   :method-count-assert 9
   :size-assert         #x8c
   :flag-assert         #x90000008c
   )
-|#
+
 
 
 
@@ -43057,11 +43057,11 @@
 
 
 
-#|
+
 (deftype medius-cache-index-array (structure)
   ((ct     int32            :offset-assert 0)
    (max-ct int32            :offset-assert 4)
-   (data   UNKNOWN :dynamic :offset-assert 8)
+   (data   uint32 :dynamic  :offset-assert 8)
    )
   :method-count-assert 13
   :size-assert         #x8
@@ -43073,7 +43073,7 @@
     (medius-cache-index-array-method-12 () none) ;; 12
     )
   )
-|#
+
 
 
 
@@ -43094,19 +43094,20 @@
 
 
 
-#|
+
 (deftype medius-cached-info-player (medius-cached-info)
-  ((name         UNKNOWN                    32      :offset-assert 24)
-   (format-name  UNKNOWN                    160     :offset-assert 56)
-   (online-state medius-player-online-state :inline :offset-assert 216)
-   (stats        net-player-stats           :inline :offset-assert 356)
-   (ladder-stats net-player-ladder-stats    :inline :offset-assert 368)
+  ((name         uint8                              32  :offset 24)
+   (format-name  uint8                              160 :offset 56)
+   (online-state-ptr medius-player-online-state         :offset 216) ;; was :inline but alignment issue
+   (stats-ptr        net-player-stats                   :offset 356)
+   (ladder-stats-ptr net-player-ladder-stats            :offset 368)
+   (pad          uint8                              312 :offset 372) ;; pad to 684 bytes
    )
   :method-count-assert 12
   :size-assert         #x2ac
   :flag-assert         #xc000002ac
   )
-|#
+
 
 
 
@@ -43125,12 +43126,12 @@
 
 
   
-#|(deftype medius-player-index-array (medius-cache-index-array)
+(deftype medius-player-index-array (medius-cache-index-array)
   ()
   :method-count-assert 13
   :size-assert         #x8
   :flag-assert         #xd00000008
-  )|#
+  )
   
 
 
@@ -43186,12 +43187,12 @@
 
 
   
-#|(deftype medius-clan-index-array (medius-cache-index-array)
+(deftype medius-clan-index-array (medius-cache-index-array)
   ()
   :method-count-assert 13
   :size-assert         #x8
   :flag-assert         #xd00000008
-  )|#
+  )
   
 
 
