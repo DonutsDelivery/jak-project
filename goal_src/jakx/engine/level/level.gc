@@ -2914,13 +2914,15 @@
   (when arg1
     (spawn-title-control)
     )
-  ;; og:preserve-this — initialize! 'boot still DISABLED. Enabled it briefly
-  ;; with our minimal start() ported; crashed at 0x2123000000 (EE null) right
-  ;; after display-loop started. The spawned lambda's chain or something
-  ;; inside initialize! 'boot derefs a null global we haven't wired up yet.
-  ;; Needs isolating (add format prints across the initialize! body branches).
-  ;; Deferred to Phase 3.
-  ;; (if arg1 (initialize! *game-info* 'boot (the-as game-save #f) (the-as string #f) (the-as resetter-spec #f)))
+  ;; Canonical jak3 boot chain, now enabled. Blockers fixed this session:
+  ;;   - open! method body (task-control-h declared slot, no body → null dispatch)
+  ;;   - task-node-reset, update-task-masks, task-node-open! stubs
+  ;;   - entity-perm update method body (ported from jak3 entity.gc:1925)
+  ;;   - minimal start() returning (the-as target #f) (target subsystem deferred)
+  ;; Lambda runs: stop → reset-actors → open! → set-continue! → suspend → start.
+  (when arg1
+    (initialize! *game-info* 'boot (the-as game-save #f) (the-as string #f) (the-as resetter-spec #f))
+    )
   (kmemclose)
   (kmemclose)
   0

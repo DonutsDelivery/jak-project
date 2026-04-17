@@ -428,6 +428,88 @@
   arg1
   )
 
+;; task-node-reset + update-task-masks — also called from reset-actors (ported
+;; from jak3) and from initialize! movie/debug branches. jak3 bodies in
+;; engine/game/task/task-control.gc:1524 (reset) and :87 (update). For Phase
+;; 2/3 stub as no-ops — nothing in the title/menu path depends on task nodes
+;; being in any particular state.
+(defun task-node-reset ((arg0 symbol))
+  0
+  )
+(defun update-task-masks ((arg0 symbol))
+  0
+  )
+
+;; update — method on entity-perm. Method slot declared in entity-h.gc
+;; but no body in jakx. Called from reset-actors's task-perm-list / perm-list
+;; iteration. Null method dispatch = 0x2123000000 null crash.
+;; Ported verbatim from jak3 engine/entity/entity.gc:1925.
+(defmethod update ((this entity-perm) (arg0 symbol) (arg1 entity-perm-status))
+  (cond
+    ((= arg0 'game)
+     (logclear! (-> this status) arg1)
+     )
+    ((task-complete? *game-info* (-> this task))
+     (if (or (= arg0 'try) (= arg0 'life))
+         (logclear! (-> this status) (logior (if (logtest? (-> this status) (entity-perm-status bit-4))
+                                                 524
+                                                 0
+                                                 )
+                                             #x8203
+                                             )
+                    )
+         (logclear! (-> this status) (logior (if (logtest? (-> this status) (entity-perm-status bit-4))
+                                                 524
+                                                 0
+                                                 )
+                                             515
+                                             )
+                    )
+         )
+     )
+    (else
+      (logclear! (-> this status) (logclear
+                                    (logior arg1 (if (logtest? (-> this status) (entity-perm-status bit-4))
+                                                     524
+                                                     0
+                                                     )
+                                            )
+                                    (if (logtest? (-> this status) (entity-perm-status bit-14))
+                                        32
+                                        0
+                                        )
+                                    )
+                 )
+      )
+    )
+  (when (not (logtest? (-> this status) (entity-perm-status bit-5)))
+    (set! (-> this user-uint64) (the-as uint 0))
+    0
+    )
+  this
+  )
+
+;; open! — method 12 on game-task-node-info. Declared in task-control-h.gc
+;; but has no defmethod body in jakx. Called from initialize!'s spawned lambda
+;; ((open! (-> *game-info* sub-task-list (game-task-node city-start-start)) 'event)).
+;; Without a body, the method dispatch hits a null function pointer and
+;; segfaults at 0x2123000000 (null in EE) on the next kernel dispatch.
+;; Real jak3 body at engine/game/task/task-control.gc:956 (~50 lines) unlocks
+;; next-task-node logic. For Phase 2/3 bringup, stub to no-op — nothing in
+;; the title/menu path depends on task nodes actually opening.
+(defmethod open! ((this game-task-node-info) (arg0 symbol))
+  0
+  )
+
+;; task-node-open! — plain function, extern at task-control-h.gc:64.
+;; Same story: lambda in initialize! calls it on (-> reset-spec node) when
+;; reset-spec is non-#f. For our boot path reset-spec = #f so this call is
+;; guarded away — but a dispatching call would crash. Stub matches the extern
+;; signature (function game-task-node symbol int).
+(defun task-node-open! ((arg0 game-task-node) (arg1 symbol))
+  0
+  )
+
 ;; start (player lifecycle): jak3 logic-target.gc:3155 spawns the target
 ;; process via `:init target-init`. In jakx bringup the target subsystem is
 ;; not yet ported (target-init, target-init! method, target-continue state,
