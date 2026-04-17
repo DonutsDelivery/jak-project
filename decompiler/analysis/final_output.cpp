@@ -359,10 +359,18 @@ std::string write_from_top_level_form(Form* top_form,
   }
 
   // Strip a trailing bare integer 0 — the v0 return value from a `li v0, 0; jr ra`
-  // epilogue that wasn't folded into the function body.
+  // epilogue that wasn't folded into the function body. Check both the atomic
+  // and generic-expression forms, and fall back to a string match on the printed
+  // form so we catch whichever wrapper the expression analyzer left behind.
   if (!forms.empty()) {
+    bool dropped = false;
     auto back_as_atom = dynamic_cast<SimpleAtomElement*>(forms.back());
     if (back_as_atom && back_as_atom->atom().is_int(0)) {
+      forms.pop_back();
+      dropped = true;
+    }
+    if (!dropped &&
+        pretty_print::to_string(forms.back()->to_form(env)) == "0") {
       forms.pop_back();
     }
   }
