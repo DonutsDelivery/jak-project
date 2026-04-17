@@ -17374,7 +17374,7 @@
   :size-assert         #x43c
   :flag-assert         #x540000043c
   (:methods
-    (ocean-method-11 (_type_ vector symbol) float) ;; 11
+    (ocean-method-11 (_type_ vector symbol) none) ;; 11
     (ocean-method-12 (_type_) none) ;; 12 ;; (draw! (_type_) none)
     (ocean-method-13 (_type_) none) ;; 13 ;; (update-map (_type_) none)
     (ocean-method-14 (_type_ ocean-wave-info uint float) none) ;; 14
@@ -17384,7 +17384,7 @@
     (ocean-method-18 (_type_ (pointer ocean-colors) (pointer ocean-colors)) int) ;; 18
     (ocean-method-19 (_type_ dma-buffer) none) ;; 19
     (ocean-method-20 (_type_ dma-buffer) pointer) ;; 20
-    (ocean-method-21 (_type_ float float) float) ;; 21
+    (ocean-method-21 (_type_ float float) none) ;; 21
     (ocean-method-22 (_type_ dma-buffer int) none) ;; 22
     (ocean-method-23 (_type_ dma-buffer int) int) ;; 23
     (ocean-method-24 (_type_) none) ;; 24 ;; (ocean-near-setup-constants (_type_ ocean-near-constants) none)
@@ -17393,15 +17393,15 @@
     (ocean-method-27 (_type_ dma-buffer vector) none) ;; 27
     (ocean-method-28 (_type_ dma-buffer uint uint) none) ;; 28
     (ocean-method-29 (_type_ dma-buffer) none) ;; 29
-    (ocean-method-30 (_type_ uint uint) symbol) ;; 30
-    (ocean-method-31 (_type_ int int) symbol) ;; 31
-    (ocean-method-32 (_type_ uint uint) symbol) ;; 32
+    (ocean-method-30 (_type_ uint uint) none) ;; 30
+    (ocean-method-31 (_type_ int int) none) ;; 31
+    (ocean-method-32 (_type_ uint uint) int) ;; 32
     (ocean-method-33 (_type_ dma-buffer uint uint int int symbol) int) ;; 33
     (ocean-method-34 (_type_ dma-buffer uint uint int int int) int) ;; 34
     (ocean-method-35 (_type_ ocean-trans-mask int int vector) none) ;; 35
     (ocean-method-36 (_type_ uint uint uint uint) none) ;; 36
-    (ocean-method-37 (_type_ dma-buffer uint uint) none) ;; 37
-    (ocean-method-38 (_type_ dma-buffer) none) ;; 38
+    (ocean-method-37 (_type_ dma-buffer uint uint) dma-buffer) ;; 37
+    (ocean-method-38 (_type_ dma-buffer) dma-buffer) ;; 38
     (ocean-method-39 (_type_ dma-buffer) none) ;; 39
     (ocean-method-40 (_type_ dma-buffer) none) ;; 40
     (ocean-method-41 (_type_ dma-buffer int) none) ;; 41
@@ -17409,12 +17409,12 @@
     (ocean-method-43 (_type_ matrix matrix matrix) matrix) ;; 43
     (ocean-method-44 (_type_ vector vector matrix) vector) ;; 44
     (ocean-method-45 (_type_ dma-buffer vector) symbol) ;; 45
-    (ocean-method-46 (_type_ pointer int int vector) symbol) ;; 46
+    (ocean-method-46 (_type_ pointer int int vector) none) ;; 46
     (ocean-method-47 (_type_) none) ;; 47 ;; (ocean-mid-setup-constants (_type_ ocean-mid-constants) none)
     (ocean-method-48 (_type_ dma-buffer) int) ;; 48
-    (ocean-method-49 (_type_ uint uint) symbol) ;; 49
-    (ocean-method-50 (_type_ uint uint) symbol) ;; 50
-    (ocean-method-51 (_type_ uint uint) symbol) ;; 51
+    (ocean-method-49 (_type_ uint uint) int) ;; 49
+    (ocean-method-50 (_type_ uint uint) int) ;; 50
+    (ocean-method-51 (_type_ uint uint) none) ;; 51
     (ocean-method-52 (_type_ dma-buffer int int int int float) int) ;; 52
     (ocean-method-53 (_type_ dma-buffer uint uint (pointer float) int symbol) none) ;; 53
     (ocean-method-54 (_type_ dma-buffer uint uint) int) ;; 54
@@ -31924,22 +31924,25 @@
 
 
   
-#|(deftype generic-shrub-fragment (drawable)
-  ((textures (inline-array adgif-shader)  :offset-assert 4) ;; guessed by decompiler
-   (vtx-cnt  uint32                       :offset-assert 8)
-   (cnt-qwc  uint8                        :offset-assert 12)
-   (vtx-qwc  uint8                        :offset-assert 13)
-   (col-qwc  uint8                        :offset-assert 14)
-   (stq-qwc  uint8                        :offset-assert 15)
-   (cnt      uint32                       :offset-assert 16)
-   (vtx      uint32                       :offset-assert 20)
-   (col      uint32                       :offset-assert 24)
-   (stq      uint32                       :offset-assert 28)
+(deftype generic-shrub-fragment (drawable)
+  "Shrub data, converted into the format for generic.
+   The shrub renderer doesn't support clipping, so it falls back to generic.
+   This requires storing the data for all shrubs prototype twice!"
+  ((textures (inline-array adgif-shader)  :offset 4) ;; guessed by decompiler
+   (vtx-cnt  uint32                       :offset 8)
+   (cnt-qwc  uint8                        :offset 12)
+   (vtx-qwc  uint8                        :offset 13)
+   (col-qwc  uint8                        :offset 14)
+   (stq-qwc  uint8                        :offset 15)
+   (cnt      uint32                       :offset 16)
+   (vtx      uint32                       :offset 20)
+   (col      uint32                       :offset 24)
+   (stq      uint32                       :offset 28)
    )
   :method-count-assert 17
   :size-assert         #x20
   :flag-assert         #x1100000020
-  )|#
+  )
   
 
 
@@ -32103,14 +32106,15 @@
 
 
   
-#|(deftype tie-fragment (drawable)
-  ((gif-ref       (inline-array adgif-shader)  :offset-assert 4) ;; guessed by decompiler
-   (point-ref     uint32                       :offset-assert 8)
-   (color-index   uint16                       :offset-assert 12)
-   (base-colors   uint8                        :offset-assert 14)
-   (tex-count     uint16                       :offset-assert 32)
-   (gif-count     uint16                       :offset-assert 34)
-   (vertex-count  uint16                       :offset-assert 36)
+(deftype tie-fragment (drawable)
+  "A mesh fragment of a TIE. This is a chunk of mesh that is rendered by VU1, stored as DMA chains."
+  ((gif-ref       (inline-array adgif-shader)  :offset 4) ;; guessed by decompiler
+   (point-ref     uint32                       :offset 8)
+   (color-index   uint16                       :offset 12)
+   (base-colors   uint8                        :offset 14)
+   (tex-count     uint16                       :offset 32)
+   (gif-count     uint16                       :offset 34)
+   (vertex-count  uint16                       :offset 36)
    (color-count   uint16                       :offset-assert 38)
    (dp-ref        uint32                       :offset-assert 40)
    (dp-qwc        uint32                       :offset-assert 44)
@@ -32123,7 +32127,7 @@
   :method-count-assert 17
   :size-assert         #x40
   :flag-assert         #x1100000040
-  )|#
+  )
   
 
 
@@ -44242,7 +44246,7 @@
     (vehicle-method-99 (_type_) int) ;; 99 ;; (vehicle-method-99 (_type_) none)
     (vehicle-method-100 (_type_) none) ;; 100 ;; (vehicle-method-100 (_type_) none)
     (vehicle-method-101 (_type_) none) ;; 101 ;; (vehicle-method-101 (_type_) none)
-    (vehicle-method-102 (_type_) symbol) ;; 102
+    (vehicle-method-102 (_type_) none) ;; 102
     (vehicle-method-103 (_type_) none) ;; 103 ;; (vehicle-method-103 (_type_) none)
     (vehicle-method-104 (_type_) none) ;; 104 ;; (vehicle-method-104 (_type_) none)
     (vehicle-method-105 (_type_) none) ;; 105 ;; (vehicle-method-105 (_type_) none)
@@ -44267,8 +44271,8 @@
     (vehicle-method-124 (_type_) int) ;; 124 ;; (vehicle-method-124 (_type_) none)
     (vehicle-method-125 (_type_) int) ;; 125 ;; (vehicle-method-125 (_type_) none)
     (vehicle-method-126 (_type_) int) ;; 126 ;; (vehicle-method-126 (_type_) none)
-    (vehicle-method-127 (_type_ process-focusable) symbol) ;; 127
-    (vehicle-method-128 (_type_) symbol) ;; 128
+    (vehicle-method-127 (_type_ process-focusable) none) ;; 127
+    (vehicle-method-128 (_type_) int) ;; 128
     (vehicle-method-129 (_type_) int) ;; 129 ;; (vehicle-method-129 (_type_) none)
     (vehicle-method-130 (_type_) int) ;; 130 ;; (vehicle-method-130 (_type_) none)
     (vehicle-method-131 (_type_) none) ;; 131 ;; (vehicle-method-131 (_type_ traffic-object-spawn-params) none)
@@ -44281,9 +44285,9 @@
     (vehicle-method-138 (_type_) none) ;; 138 ;; (vehicle-method-138 (_type_) none)
     (vehicle-method-139 (_type_) int) ;; 139 ;; (vehicle-method-139 (_type_) none)
     (vehicle-method-140 (_type_) none) ;; 140 ;; (vehicle-method-140 (_type_) none)
-    (vehicle-method-141 (_type_) symbol) ;; 141
+    (vehicle-method-141 (_type_) int) ;; 141
     (vehicle-method-142 (_type_) symbol) ;; 142 ;; (vehicle-method-142 (_type_) none)
-    (vehicle-method-143 (_type_ process) object) ;; 143
+    (vehicle-method-143 (_type_ process) int) ;; 143
     (vehicle-method-144 (_type_) none) ;; 144 ;; (vehicle-method-144 (_type_) none)
     (vehicle-method-145 (_type_) none) ;; 145 ;; (vehicle-method-145 (_type_) none)
     (vehicle-method-146 (_type_ vector) none) ;; 146
