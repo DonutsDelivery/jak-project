@@ -13038,13 +13038,13 @@
       "@returns [[#t]] if [[this::override-weather-flag]] is set, we aren't in a cutscene and [[this::current-special-interp]] is equal to `0.0`"
       (_type_) symbol) ;; 14 ;; (apply-mood-color (_type_ mood-control-work) none)
     (set-lightning-time! (_type_ mood-control-work) none) ;; 15
-    (apply-mood-clouds-and-fog (_type_ mood-control-work) none) ;; 16 ;; (adjust-num-clouds! (_type_ mood-control-work) none)
-    (apply-mood-fog (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) none) ;; 17
-    (apply-fog-height (_type_ mood-control-work float float float float) none) ;; 18
-    (apply-mood-colors (_type_ mood-control-work) none) ;; 19
-    (mood-control-method-20 (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) none) ;; 20
-    (apply-mood-channels (_type_ mood-control-work) none) ;; 21
-    (adjust-num-clouds (_type_ mood-control-work) none) ;; 22
+    (apply-mood-clouds-and-fog (_type_ mood-control-work) int) ;; 16 ;; (adjust-num-clouds! (_type_ mood-control-work) none)
+    (apply-mood-fog (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) int) ;; 17
+    (apply-fog-height (_type_ mood-control-work float float float float) int) ;; 18
+    (apply-mood-colors (_type_ mood-control-work) int) ;; 19
+    (mood-control-method-20 (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) int) ;; 20
+    (apply-mood-channels (_type_ mood-control-work) int) ;; 21
+    (adjust-num-clouds (_type_ mood-control-work) int) ;; 22
     (gen-lightning-and-thunder! (_type_ int) none) ;; 23
     (play-or-stop-lightning-sfx! (_type_ sound-spec vector) none) ;; 24
     )
@@ -37817,7 +37817,7 @@
 (define-extern set-movie-color! function)
 (define-extern palette-select-special (function mood-context-core3 symbol))
 (define-extern clear-mood-times (function mood-context symbol))
-(define-extern update-mood-itimes (function mood-context none))
+(define-extern update-mood-itimes (function mood-context int))
 (define-extern update-mood-direction (function mood-context-core3 mood-table float float))
 (define-extern update-mood-exterior (function mood-context-core3 mood-table float int object))
 (define-extern copy-mood-exterior (function mood-context symbol))
@@ -37836,10 +37836,10 @@
 (define-extern *flash7* array) ;; (array float)
 (define-extern update-mood-light (function mood-context int int float float float float float float))
 (define-extern update-mood-lava (function mood-context int int float float float float float float))
-(define-extern update-mood-flicker (function mood-context int int none))
+(define-extern update-mood-flicker (function mood-context int int int))
 (define-extern update-mood-florescent (function mood-context int int float))
-(define-extern update-mood-electricity (function mood-context int int float float none))
-(define-extern update-mood-pulse (function mood-context int int float float float float none))
+(define-extern update-mood-electricity (function mood-context int int float float float))
+(define-extern update-mood-pulse (function mood-context int int float float float float float))
 (define-extern update-mood-strobe (function mood-context int int int float float))
 (define-extern update-mood-caustics (function mood-context int float float float float float))
 (define-extern override-mood-fog function)
