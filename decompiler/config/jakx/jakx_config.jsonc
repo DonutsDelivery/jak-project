@@ -10,6 +10,7 @@
   "allowed_objects": [],
 
   "banned_objects": [
+    "keyboard",
     // Decompiler crashes. See .planning/jakx-decomp-patterns.md for per-file
     // crash sites. The 24 files previously banned but now decompile cleanly
     // have been removed (commit on this pass).
