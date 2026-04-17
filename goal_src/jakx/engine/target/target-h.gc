@@ -45,194 +45,6 @@
 ;; ---target-flags
 
 
-;; +++darkjak-stage
-(defenum darkjak-stage
-  :bitfield #t
-  :type uint32
-  (force-on)
-  (endless-dark)
-  (active)
-  (smack)
-  (bomb0)
-  (bomb1)
-  (tracking)
-  (invinc)
-  (invis)
-  (no-anim)
-  )
-;; ---darkjak-stage
-
-
-(declare-type rigid-body-impact structure)
-(declare-type sidekick process-drawable)
-(declare-type racer-info basic)
-(declare-type tube-info basic)
-(declare-type flut-info basic)
-(declare-type board-info basic)
-(declare-type pilot-info basic)
-(declare-type gun-info basic)
-(declare-type mech-info basic)
-(declare-type turret-info basic)
-(declare-type indax-info basic)
-(declare-type ladder-info basic)
-(declare-type darkjak-info basic)
-(declare-type lightjak-info basic)
-
-;; target-util
-(define-extern target-pos (function int vector))
-(define-extern can-exit-duck? (function target symbol))
-(define-extern target-collide-set! (function symbol float int :behavior target))
-(define-extern target-move-dist (function time-frame float :behavior target))
-(define-extern get-intersect-point (function vector touching-prims-entry collide-shape touching-shapes-entry vector))
-(define-extern target-update-segs (function process-drawable float))
-
-;; logic-target
-(define-extern target-darkjak-setup (function symbol none :behavior target))
-(define-extern target-lightjak-setup (function symbol none :behavior target))
-(define-extern target-sidekick-setup (function symbol none :behavior target))
-(define-extern target-board-setup (function symbol none :behavior target))
-(define-extern target-board-joint-points (function none :behavior target))
-(define-extern target-gun-setup (function symbol none :behavior target))
-(define-extern target-gun-joint-pre (function none :behavior target))
-(define-extern target-gun-joint-points (function none :behavior target))
-(define-extern target-powerup-process (function none :behavior target))
-(define-extern target-generic-event-handler (function process int symbol event-message-block object :behavior target))
-(define-extern target-exit (function none :behavior target))
-(define-extern activate-hud (function target none))
-(define-extern *target-geo-control* external-art-buffer)
-(define-extern *target-anim-control* external-art-buffer)
-
-;; target-handler
-(define-extern target-gun-end-mode (function symbol symbol :behavior target))
-(define-extern target-powerup-effect (function symbol none :behavior target))
-(define-extern target-gun-type-set! (function pickup-type none :behavior target))
-(define-extern vehicle-spawn (function vehicle-type traffic-object-spawn-params process-drawable))
-(define-extern target-gun-init (function pickup-type none :behavior target))
-(define-extern target-invisible-stop (function none :behavior target))
-(define-extern target-gun-fire (function pickup-type none :behavior target))
-
-;; target-anim
-(define-extern *attack-end-mods* surface)
-
-;; target
-(define-extern want-to-powerjak? (function symbol :behavior target))
-(define-extern target-invisible-start (function time-frame none :behavior target))
-(define-extern target-top-anim-base-mode (function int none :behavior target))
-(define-extern target-land-effect (function none :behavior target))
-(define-extern *attack-find-mods* surface)
-(define-extern *uppercut-mods* surface)
-(define-extern *uppercut-jump-mods* surface)
-
-;; target2
-(define-extern *trip-mods* surface)
-(define-extern *look-around-mods* surface)
-(define-extern target-gun-check (function none :behavior target))
-(define-extern target-darkjak-end-mode (function symbol none :behavior target))
-(define-extern target-lightjak-end-mode (function symbol none :behavior target))
-(define-extern want-to-gun? (function target symbol symbol :behavior process))
-(define-extern *hit-ground-hard-mods* surface)
-(define-extern *float-mods* surface)
-(define-extern *blast-recover-mods* surface)
-
-;; target-death
-(define-extern pre-intro-play (function none))
-(define-extern intro-play (function none))
-(define-extern find-nearest-entity (function vector type entity))
-(define-extern have-vehicle-v-type? (function vehicle-type symbol))
-(define-extern entity-birth-no-kill (function entity process))
-(define-extern process-drawable-burn-effect (function time-frame rgbaf :behavior target))
-(define-extern warp-gate type)
-(define-extern htorpedo type)
-(define-extern target-turret type)
-(define-extern scorpion-gun-manager type)
-(define-extern bt-gun-manager type)
-
-;; target-gun
-(declare-type gun process-drawable)
-(define-extern target-gun-marking-menu (function target none))
-(define-extern gun-init (function none :behavior gun))
-(define-extern truncate-player-ammo (function pickup-type none))
-(define-extern target-gun-can-fire-yellow? (function pickup-type symbol :behavior target))
-(define-extern target-gun-fire-yellow (function pickup-type (pointer process) :behavior target))
-(define-extern target-gun-can-fire-red? (function pickup-type symbol :behavior target))
-(define-extern target-gun-fire-red (function pickup-type (pointer process) :behavior target))
-(define-extern target-gun-can-fire-blue? (function pickup-type symbol :behavior target))
-(define-extern target-gun-fire-blue (function pickup-type (pointer process) :behavior target))
-(define-extern target-gun-can-fire-dark? (function pickup-type symbol :behavior target))
-(define-extern target-gun-fire-dark (function pickup-type (pointer process) :behavior target))
-
-;; powerups
-(define-extern target-darkjak-process (function none :behavior target))
-
-;; target-darkjak
-(define-extern *darkjak-trans-mods* surface)
-
-;; target-ladder
-(define-extern *ladder-mods* surface)
-
-;; target-tube
-(define-extern *tube-mods* surface)
-(define-extern *tube-jump-mods* surface)
-(define-extern *tube-hit-mods* surface)
-(define-extern *tube-surface* surface)
-
-;; target-flut
-(define-extern *flut-walk-mods* surface)
-(define-extern *flut-run-racer-mods* surface)
-(define-extern *flut-run-wild-mods* surface)
-(define-extern *flut-jump-wild-mods* surface)
-(define-extern *flut-jump-mods* surface)
-(define-extern *flut-jump-racer-mods* surface)
-(define-extern *flut-double-jump-mods* surface)
-(define-extern *flut-double-jump-racer-mods* surface)
-(define-extern *flut-run-attack-mods* surface)
-(define-extern *flut-air-attack-mods* surface)
-(define-extern *flut-get-off-mods* surface)
-
-;; target-pilot
-(define-extern *pilot-mods* surface)
-(define-extern *pilot-get-on-mods* surface)
-(define-extern *pilot-get-off-mods* surface)
-
-;; target-turret
-(define-extern *turret-get-on-mods* surface)
-
-;; target-indax
-(define-extern *indax-walk-mods* surface)
-(define-extern *indax-jump-mods* surface)
-(define-extern *indax-double-jump-mods* surface)
-(define-extern *indax-bounce-mods* surface)
-(define-extern target-indax-exit (function none :behavior target))
-
-;; target-indax-hang
-(define-extern *indax-hang-walk-mods* surface)
-(define-extern *indax-hang-dodge-mods* surface)
-(define-extern *indax-hang-attack-mods* surface)
-
-;; +++lightjak-stage
-(defenum lightjak-stage
-  :bitfield #t
-  :type uint32
-  (ls0 0)
-  (ls1 1)
-  (ls2 2)
-  (regen 3)
-  (swoop 4)
-  (freeze 5)
-  (ls6 6)
-  (ls7 7)
-  (ls8 8)
-  (ls9 9)
-  (ls10 10)
-  (ls11 11)
-  (ls12 12)
-  (ls13 13)
-  (ls14 14)
-  (ls15 15)
-  )
-;; ---lightjak-stage
-
-
 ;; +++target-geo
 (defenum target-geo
   :type int32
@@ -273,340 +85,152 @@
 ;; ---target-effect
 
 
+;; Forward declarations used by the target deftype and by downstream files that
+;; include target-h.gc before their real definitions.
+(declare-type target process-focusable)
+(declare-type sidekick process-drawable)
+(declare-type gun-info basic)
+(declare-type pilot-info basic)
+(declare-type board-info basic)
+(declare-type rigid-body-impact structure)
+
+;; Externs confirmed present in jakx (see .research-target-h-trim.md).
+;; Keep the minimum set needed to link against target-h.gc's forward
+;; references plus downstream files that still expect them.
+
+;; target-util
+(define-extern target-pos (function int vector))
+
+;; logic-target
+(define-extern target-move-dist (function time-frame float :behavior target))
+
+;; collide / rigid-body-object (used by target-handler and others)
+(define-extern get-intersect-point (function vector touching-prims-entry collide-shape touching-shapes-entry vector))
+
+;; target-handler
+(define-extern target-generic-event-handler (function process int symbol event-message-block object :behavior target))
+
+;; vehicle-manager (kept under old "target-handler" header historically; actual
+;; definition lives in vehicle-manager_ir2.asm).
+(define-extern vehicle-spawn (function vehicle-type traffic-object-spawn-params process-drawable))
+
+;; script / find-nearest-h
+(define-extern find-nearest-entity (function vector type entity))
+(define-extern entity-birth-no-kill (function entity process))
+
+;; external-art buffers (referenced by loader.gc even though the research
+;; tagged them for removal -- they are still used by the dynamic-art-loader
+;; diagnostic prints).
+(define-extern *target-geo-control* external-art-buffer)
+(define-extern *target-anim-control* external-art-buffer)
+
+;; target-handler/powerups externs that survived deeper dead-code passes and
+;; are still referenced. Added back during the iterative trim pass.
+(define-extern target-gun-end-mode (function symbol symbol :behavior target))
+
+
 ;; DECOMP BEGINS
 
+;; Authoritative layout for jakx's `target` type.
+;;
+;; The reference is the inspect method in decompiler_out/jakx/target-h_disasm.gc
+;; (jakx overrides methods 3/10/51/56/57 from process-focusable and adds a
+;; single own method, slot 59 = `target-init!`).
+;;
+;; Flag-assert is taken straight from target-h_ir2.asm L50 (#x3c02c00350):
+;;   method-count = #x3c = 60, heap-base = #x2c0, size = #x350 = 848 bytes.
+;;
+;; Field offsets are the ones the runtime inspect actually prints. Fields not
+;; printed by inspect (e.g. `gun`, `pilot`, `sidekick`) are tucked into gaps
+;; between the printed fields so downstream code that still references them by
+;; name continues to compile. If any of those fields ever get a correct offset
+;; from further decompilation, they should replace the "guessed by decompiler"
+;; entries here.
+
 (deftype target (process-focusable)
-  ((self                         target           :override)
-   (ppointer                     (pointer target) :override)
-   (fact                         fact-info-target :override)
-   (control                      control-info      :overlay-at root)
-   (skel2                        joint-control)
-   (shadow-backup                shadow-geo)
-   (target-flags                 target-flags      :overlay-at state-flags)
-   (game                         game-info)
-   (neck                         joint-mod)
-   (head                         joint-mod)
-   (upper-body                   joint-mod)
-   (horns                        joint-mod)
-   (hair                         joint-mod         2)
-   (arm-ik                       joint-mod-ik      2)
-   (leg-ik                       joint-mod-ik      2)
-   (foot                         joint-mod         2)
-   (cloth                        symbol)
-   (mech-ik                      joint-mod-ik      2)
-   (init-time                    time-frame        :overlay-at (-> mech-ik 0))
-   (teleport-time                time-frame)
-   (state-hook-time              time-frame)
-   (state-hook                   (function none :behavior target))
-   (cam-user-mode                symbol)
-   (sidekick                     (pointer sidekick))
-   (manipy                       (pointer manipy))
-   (mirror                       (pointer process-drawable))
-   (attack-info                  attack-info       :inline)
-   (attack-info-rec              attack-info       :inline)
-   (attack-info-old              attack-info       8 :inline)
-   (anim-seed                    uint64)
-   (alt-cam-pos                  vector            :inline)
-   (current-level                level)
-   (saved-pos                    transformq        :inline)
-   (saved-owner                  handle)
-   (alt-neck-pos                 vector            :inline)
-   (focus-search                 (array collide-shape))
-   (handle-search                (array handle))
-   (excitement                   float)
-   (shock-effect-time            time-frame)
-   (beard?                       symbol)
-   (spool-anim                   spool-anim)
-   (ambient-time                 time-frame)
-   (fp-hud                       handle)
-   (no-load-wait                 time-frame)
-   (no-look-around-wait          time-frame)
-   (burn-proc                    handle)
-   (pre-joint-hook               (function none :behavior target))
-   (notify                       handle)
-   (death-resetter               resetter-spec     :inline)
-   (mode-cache                   symbol)
-   (mode-param1                  handle)
-   (mode-param2                  uint64)
-   (mode-param3                  uint64)
-   (major-mode-exit-hook         (function none :behavior target))
-   (major-mode-event-hook        (function process int symbol event-message-block object :behavior target))
-   (sub-mode-exit-hook           (function none :behavior target))
-   (ext-geo-control              external-art-buffer)
-   (pending-ext-geo              target-geo)
-   (ext-geo                      target-geo)
-   (ext-anim-control             external-art-buffer)
-   (pending-ext-anim             target-anim)
-   (ext-anim                     target-anim)
-   (tobot-state                  state)
-   (tobot?                       symbol)
-   (tobot-recorder               basic)
-   (target-effect                target-effect)
-   (color-effect                 symbol)
-   (color-effect-start-time      time-frame)
-   (color-effect-duration        time-frame)
-   (racer                        racer-info)
-   (tube                         tube-info)
-   (flut                         flut-info)
-   (board                        board-info)
-   (pilot                        pilot-info)
-   (gun                          gun-info)
-   (mech                         mech-info)
-   (turret                       turret-info)
-   (indax                        indax-info)
-   (ladder                       ladder-info)
-   (darkjak-interp               float)
-   (darkjak-interp-old           float)
-   (darkjak-giant-interp         float)
-   (darkjak                      darkjak-info)
-   (lightjak-interp              float)
-   (lightjak-interp-old          float)
-   (lightjak                     lightjak-info)
-   (scarf-interp-targ            float)
-   (scarf-interp                 float)
-   (scarf-interp-old             float)
-   (goggles-interp-targ          float)
-   (goggles-interp               float)
-   (goggles-interp-old           float)
-   (invisible-interp             float)
-   (invisible-start-time         time-frame)
-   (invisible-duration           time-frame)
-   (invisible-shadow-dir-backup  vector            :inline)
+  ((self                   target            :override)
+   (ppointer               (pointer target)  :override)
+   (fact                   fact-info-target  :override)
+   (control                control-info      :overlay-at root)
+   (target-flags           target-flags      :overlay-at state-flags)
+   ;; The PS2 inspect prints field offsets (232, 252, 268, ...) that assume
+   ;; the lenient MIPS alignment rules used by the original binary. OpenGOAL
+   ;; enforces strict per-type alignment, so we list fields in the SAME ORDER
+   ;; as inspect and let the compiler pack them. Final size (0x350 / 848 bytes)
+   ;; is still guaranteed by the size-assert below -- any drift will fail the
+   ;; assert instead of silently misaligning.
+   (vehicle                uint64)
+   (sidekick               (pointer sidekick))   ;; guessed by decompiler (not in inspect)
+   (game                   game-info)
+   (init-time              time-frame)
+   (teleport-time          time-frame)
+   (state-hook-time        time-frame)
+   (state-hook             (function none :behavior target))
+   (cam-user-mode          symbol)
+   (anim-seed              uint64)
+   (gun                    gun-info)             ;; guessed by decompiler (not in inspect)
+   (pilot                  pilot-info)           ;; guessed by decompiler (not in inspect)
+   (board                  board-info)           ;; guessed by decompiler (target-draw-process)
+   (cloth                  symbol)               ;; guessed by decompiler (powerups.gc)
+   (ext-anim               target-anim)          ;; guessed by decompiler (powerups.gc)
+   (ext-anim-control       external-art-buffer)  ;; guessed by decompiler (powerups.gc)
+   (pending-ext-anim       target-anim)          ;; guessed by decompiler (powerups.gc)
+   (alt-cam-pos            vector  :inline)
+   (current-level          level)
+   (scarf-interp-targ      float)                ;; guessed by decompiler (not in inspect)
+   (scarf-interp           float)                ;; guessed by decompiler (powerups.gc)
+   (scarf-interp-old       float)                ;; guessed by decompiler (powerups.gc)
+   (goggles-interp-targ    float)                ;; guessed by decompiler (not in inspect)
+   (goggles-interp         float)                ;; guessed by decompiler
+   (goggles-interp-old     float)                ;; guessed by decompiler
+   (darkjak-interp         float)                ;; guessed by decompiler (powerups.gc)
+   (darkjak-interp-old     float)                ;; guessed by decompiler (powerups.gc)
+   (lightjak-interp        float)                ;; guessed by decompiler (powerups.gc)
+   (lightjak-interp-old    float)                ;; guessed by decompiler (powerups.gc)
+   (saved-pos              transformq :inline)
+   (saved-owner            handle)
+   (excitement             float)
+   (shock-effect-time      time-frame)
+   (fp-hud                 handle)
+   (no-load-wait           time-frame)
+   (no-look-around-wait    time-frame)
+   (burn-proc              handle)
+   (pre-joint-hook         (function none :behavior target))
+   (notify                 handle)
+   (mode-cache             symbol)
+   (mode-param1            handle)
+   (mode-param2            uint64)
+   (mode-param3            uint64)
+   (major-mode-exit-hook   (function none :behavior target))
+   (major-mode-event-hook  (function process int symbol event-message-block object :behavior target))
+   (sub-mode-exit-hook     (function none :behavior target))
+   (target-effect          target-effect)
+   (color-effect           symbol)
+   (color-effect-start-time time-frame)
+   (color-effect-duration  time-frame)
+   (yes-state              symbol)
+   (no-state               symbol)
+   (state-object           uint32 4)
+   (state-uint32           uint32 4          :overlay-at (-> state-object 0))
+   (state-float            float 4           :overlay-at (-> state-object 0))
+   (state-button           uint32 4)
+   (state-vector           vector 4 :inline)
+   (state-smush            uint8 32)             ;; smush-control inline payload
+   (state-sound            uint32 4)
+   (state-handle           handle 4)
+   (state-impact           uint8 68)             ;; rigid-body-impact (forward-declared) inline payload
    )
   (:methods
-    (target-method-28 (_type_ collide-cache collide-edge-spec) none)
     (target-init! (_type_ continue-point symbol) none)
     )
   (:states
-    target-attack
-    (target-attack-air symbol)
-    (target-attack-uppercut float float)
-    (target-attack-uppercut-jump float float)
-    (target-blast-recover rigid-body-impact)
-    (target-board-clone-anim handle)
-    target-board-duck-stance
-    target-board-falling
-    (target-board-flip float float symbol)
-    (target-board-get-off handle symbol)
-    target-board-get-on
-    (target-board-grab symbol)
-    (target-board-grenade handle)
-    target-board-halfpipe
-    (target-board-hit symbol attack-info)
-    target-board-hit-ground
-    (target-board-hold float float symbol)
-    (target-board-jump meters meters symbol)
-    target-board-jump-kick
-    (target-board-ride-edge symbol)
-    target-board-stance
-    (target-board-start handle)
-    (target-board-trickx float float symbol)
-    (target-board-tricky float float symbol)
-    target-board-turn-around
-    (target-board-turn-to vector time-frame)
-    (target-board-wall-kick vector float)
-    target-carry-pickup
-    (target-clone-anim handle)
     (target-continue continue-point)
-    (target-credits int)
-    target-darkjak-bomb0
-    (target-darkjak-bomb1 float float)
-    target-darkjak-get-off
-    (target-darkjak-get-on darkjak-stage)
-    target-darkjak-running-attack
-    target-darkjak-smack
-    target-darkjak-smack-charge
-    (target-death symbol)
-    target-demo
-    (target-double-jump float float)
-    (target-duck-high-jump float float symbol)
-    (target-duck-high-jump-jump float float symbol)
-    (target-duck-stance symbol)
-    (target-duck-walk symbol)
-    (target-eco-powerup int float)
-    target-edge-grab
-    (target-edge-grab-jump float float symbol)
-    target-edge-grab-off
-    (target-falling object)
     target-float
-    (target-flop float float float object)
-    (target-flop-hit-ground symbol)
-    (target-flut-air-attack float)
-    target-flut-air-attack-hit-ground
-    (target-flut-clone-anim handle)
-    (target-flut-death symbol)
-    (target-flut-double-jump float float)
-    (target-flut-eject symbol)
-    (target-flut-falling object)
-    (target-flut-get-off handle)
-    target-flut-get-off-jump
-    (target-flut-get-on handle)
-    target-flut-grab
-    (target-flut-hit symbol attack-info)
-    target-flut-hit-ground
-    (target-flut-jump float float)
-    (target-flut-kanga-catch handle symbol)
-    target-flut-run-wild
-    target-flut-running-attack
-    target-flut-stance
-    (target-flut-start handle symbol int)
-    target-flut-walk
-    (target-grab symbol)
-    (target-grab-ride handle)
-    target-gun-stance
-    target-gun-walk
-    target-hide
-    (target-high-jump float float object)
-    (target-hit symbol attack-info)
-    (target-hit-ground symbol)
-    (target-hit-ground-hard float)
-    target-ice-stance
-    target-ice-walk
-    target-indax-attack
-    (target-indax-attack-air symbol)
-    (target-indax-death symbol)
-    (target-indax-double-jump float float)
-    (target-indax-falling symbol)
-    target-indax-get-off
-    (target-indax-grab symbol)
-    target-indax-hang
-    target-indax-hang-attack
-    target-indax-hang-dodge
-    target-indax-hang-stance
-    target-indax-hang-turn-around
-    target-indax-hang-walk
-    (target-indax-hit symbol attack-info)
-    (target-indax-hit-ground symbol)
-    (target-indax-jump float float surface)
-    target-indax-running-attack
-    target-indax-stance
-    (target-indax-start handle object)
-    target-indax-trip
-    target-indax-walk
-    (target-invisible-get-on handle time-frame)
-    (target-jump float float surface)
-    (target-jump-forward float float symbol)
-    target-ladder
-    target-ladder-jump-off
-    target-ladder-slide-down
-    target-ladder-stance
-    (target-ladder-start handle)
-    target-ladder-switch
-    target-ladder-walk-down
-    target-ladder-walk-up
-    (target-launch float symbol vector int)
-    target-launch-dir
-    target-lightjak-freeze
-    target-lightjak-get-off
-    (target-lightjak-get-on lightjak-stage)
-    (target-lightjak-regen int)
-    target-lightjak-shield
-    (target-lightjak-swoop float)
-    (target-lightjak-swoop-again float)
-    (target-lightjak-swoop-falling symbol)
-    target-load-wait
-    target-look-around
-    target-mech-carry-drag
-    target-mech-carry-drop
-    target-mech-carry-falling
-    (target-mech-carry-hit-ground symbol)
-    (target-mech-carry-jump float float)
-    target-mech-carry-pickup
-    target-mech-carry-stance
-    target-mech-carry-throw
-    target-mech-carry-walk
-    (target-mech-clone-anim handle)
-    (target-mech-death symbol)
-    (target-mech-falling symbol)
-    target-mech-get-off
-    (target-mech-get-on handle)
-    (target-mech-get-up handle)
-    target-mech-grab
-    (target-mech-hit symbol attack-info)
-    (target-mech-hit-ground symbol)
-    (target-mech-jump float float surface)
-    target-mech-punch
-    target-mech-shield
-    target-mech-stance
-    (target-mech-start handle float symbol)
-    target-mech-walk
-    (target-pilot-clone-anim handle)
-    target-pilot-daxter-perch
-    (target-pilot-death symbol)
-    (target-pilot-edge-grab pilot-edge-grab-info)
-    (target-pilot-get-off handle)
-    target-pilot-get-on
-    target-pilot-grab
-    (target-pilot-hit symbol attack-info)
-    target-pilot-impact
-    target-pilot-stance
-    (target-pilot-start handle symbol symbol)
-    (target-play-anim string handle)
-    (target-pole-cycle handle)
-    (target-pole-flip-forward float float float)
-    (target-pole-flip-forward-jump float float)
-    (target-pole-flip-up float float float)
-    (target-pole-flip-up-jump float float symbol)
-    target-powerjak-get-on
-    (target-racing-start handle)
-    target-roll
-    (target-roll-flip float float)
-    target-running-attack
-    target-slide-down
-    target-slide-down-to-ground
-    target-stance
-    target-stance-ambient
-    target-stance-look-around
-    target-startup
-    target-swim
-    target-swim-down
-    (target-swim-jump float float)
-    (target-swim-jump-jump float float surface)
-    target-swim-stance
-    target-swim-up
-    target-swim-walk
+    target-intro
+    target-introb
     (target-title symbol)
-    target-tube
-    (target-tube-death symbol)
-    (target-tube-hit symbol attack-info)
-    (target-tube-jump float float)
-    (target-tube-start handle)
-    target-tube-walk
-    target-turn-around
-    target-turret-get-off
-    (target-turret-get-on handle)
-    (target-turret-stance handle)
-    target-turret-stance-fire
-    target-wade-stance
-    target-wade-walk
-    target-walk
-    (target-warp-in vector vector object)
-    (target-warp-out vector vector handle)
-    target-yellow-jump-blast
-    tobot-stance
     )
   )
 
 
 (define-perm *target* target #f)
-
-(deftype sidekick (process-drawable)
-  ((parent               (pointer target) :override)
-   (control              control-info      :overlay-at root)
-   (anim-seed            uint64            :offset 208)
-   (shadow-in-movie?     symbol)
-   (special-anim-time    time-frame)
-   (special-anim-interp  float)
-   (special-anim-frame   float)
-   (offset               transformq        :inline)
-   (mirror               (pointer process-drawable))
-   (ear                  joint-mod         2)
-   (flap                 joint-mod         2)
-   )
-  (:states
-    sidekick-clone
-    )
-  )
-
-
-(define-perm *sidekick* sidekick #f)
