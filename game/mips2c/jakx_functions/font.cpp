@@ -5,10 +5,8 @@
 //
 // Currently implements:
 //   - get-string-length-asm
-//   - draw-string-asm-packed  (partial — first render loop + effect passes
-//                              complete; second-loop scanner + tilde-code
-//                              handlers + bracket push/pop complete;
-//                              second-loop render tail B158..B170 TODO)
+//   - draw-string-asm-packed  (COMPLETE — all 171 blocks / both render
+//                              loops ported)
 //
 // These are hand-adapted from the jakx MIPS assembly in
 // decompiler_out/jakx/font_ir2.asm. They are NOT copies of the jak3 port —
@@ -418,19 +416,25 @@ void link() {
 //             glyph emission. Taken when the string contains brackets.
 //   B171    : epilogue; write final dma pointer back, return vf23 in v0.
 //
-// This port implements the ENTRY + MEASURE + FIRST RENDER LOOP —
-// blocks B0-B91 (MIPS labels L127 / L128 / L129 / L130..L159). This
-// covers tilde-code processing, font-size switching, kerning toggle,
-// manual x/y offsets, save/restore of cursor, CR/LF → justify advance,
-// full glyph lookup + projection through calc-mat, char-packet emission
-// to the dma buffer, clip-test, and the 5-pass outline/shadow effect
-// passes gated by flag 4096.
+// This port is COMPLETE — all 171 blocks of the jakx asm are now
+// translated. The function consists of two render loops:
 //
-// Still TODO: the bracket-aware second render loop (B92..B170, MIPS
-// labels L160..L187) which handles '[...]' color/justify codes. When
-// the first loop exits via L159 it currently falls straight through to
-// the epilogue (skipping the second pass); strings that don't contain
-// '[' brackets render the same as they would in the full asm.
+//   First loop  (B0-B91, L127..L159)   — primary pass with 5-layer
+//                                         outline/shadow effect rendering
+//                                         gated by flag bit 4096.
+//   Second loop (B92-B171, L160..L187) — secondary pass with bracket-
+//                                         aware '[...]' color state
+//                                         push/pop and '~l'/'~L'/'~u'/'~U'
+//                                         color code handling. Always
+//                                         emits exactly one packet per
+//                                         glyph (no effect gate) and
+//                                         uses hvdf-offset (vf27) as
+//                                         the primary offset vector
+//                                         instead of hvdf-shadow (vf26).
+//
+// Both loops share a single epilogue (block_171) that writes the
+// advanced dma pointer back to font-work[buf] and returns vf23
+// packed into v0.
 
 namespace draw_string_asm_packed {
 struct Cache {
@@ -1657,10 +1661,124 @@ block_157:
   goto block_92;                                      // L160
 
 block_158:
-  // B158 / L183: second-loop render tail. TODO — ports in next batch.
-  // Falls through to epilogue so glyphs that land here aren't drawn
-  // but the function still returns cleanly.
-  goto block_171;
+  // B158 / L183: second-loop glyph lookup + max-x bailout. Mirrors
+  // B66/L150 but the render tail that follows differs (see B160).
+  c->addu(t1, t2, a1);                                // glyph ptr base
+  c->lqc2(vf5, -96, t1);                              // glyph st+advance
+  c->mov128_gpr_vf(t1, vf1);                          // qmfc2.i t1, vf1
+  bc = ((s64)c->sgpr64(t1)) < 0;                      // bltz t1, L187 (overflow)
+  if (bc) { goto block_171; }
+
+  // B159: second sign check (on float pattern).
+  c->sra(t1, t1, 31);
+  bc = ((s64)c->sgpr64(t1)) < 0;                      // bltz t1, L160 (skip glyph but continue)
+  c->vadd(DEST::xyz, vf8, vf5, vf18);                 // vf8 = vf5 + vf18 (outline st)
+  if (bc) { goto block_92; }
+
+  // B160: full transform + char-packet emit. Differences from first
+  // loop's B69:
+  //   - No rendering gate (flag 4097) — the second pass always draws.
+  //   - vf9 = current-color (@544) not color-shadow (@608).
+  //   - Offset vector is hvdf-offset (vf27) not hvdf-shadow (vf26) — so
+  //     the "primary" pass goes through vf27 here while the first loop
+  //     used vf26.
+  //   - Position regs are vf1/vf4 (reused) instead of vf2/vf3.
+  c->vadd(DEST::xyz, vf1, vf23, vf0);                 // vadd.xyz vf1, vf23, vf0
+  c->vadd(DEST::xyz, vf4, vf23, vf15);                // vadd.xyz vf4, vf23, vf15
+  c->vmul(DEST::xyzw, vf19, vf5, vf13);               // vmul.xyzw vf19, vf5, vf13
+
+  c->vmula_bc(DEST::xyzw, BC::w, vf31, vf0);
+  c->vmadda_bc(DEST::xyzw, BC::x, vf28, vf1);
+  c->vmadda_bc(DEST::xyzw, BC::y, vf29, vf1);
+  c->vmadd_bc(DEST::xyzw, BC::z, vf1, vf30, vf1);
+
+  c->vmula_bc(DEST::xyzw, BC::w, vf31, vf0);
+  c->vmadda_bc(DEST::xyzw, BC::x, vf28, vf4);
+  c->vmadda_bc(DEST::xyzw, BC::y, vf29, vf4);
+  c->vmadd_bc(DEST::xyzw, BC::z, vf4, vf30, vf4);
+
+  c->vdiv(vf25, BC::z, vf1, BC::w);                   // vdiv Q, vf25.z, vf1.w
+  c->lq(t1, 0, v1);                                   // tag low
+  c->lq(t2, 16, v1);                                  // tag high
+  c->lqc2(vf9, 544, v1);                              // vf9 = current-color (second loop!)
+  c->sq(t1, 0, a0);
+  c->sq(t2, 16, a0);
+  c->sqc2(vf20, 32, a0);                              // font-tmpl
+  c->sqc2(vf9, 48, a0);                               // current-color
+  c->vmulq(DEST::xyz, vf1, vf1);                      // project divide
+  c->vmulq(DEST::xyz, vf5, vf5);
+  c->vdiv(vf25, BC::z, vf4, BC::w);                   // vdiv Q, vf25.z, vf4.w
+  c->andi(t1, a2, 2);                                 // kerning?
+  c->vadd(DEST::xyzw, vf1, vf1, vf27);                // vf1 += hvdf-offset (NOT shadow)
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L184 (no kern)
+  c->andi(t1, a2, 64);                                // flag 64 newline pending
+  if (bc) { goto block_163; }
+
+  // B161:
+  bc = c->sgpr64(t1) != 0;                            // bne t1, r0, L184
+  if (bc) { goto block_163; }
+
+  // B162: kerned advance
+  c->vadd_bc(DEST::x, BC::w, vf23, vf23, vf19);
+  goto block_164;
+
+block_163:
+  // B163 / L184: fixed advance.
+  c->vadd_bc(DEST::x, BC::w, vf23, vf23, vf14);
+  // fall through
+
+block_164:
+  // B164 / L185: convert position regs to ints, emit remaining fields.
+  c->vftoi4(DEST::xyzw, vf1, vf1);                    // vftoi4.xyzw vf1, vf1
+  c->sqc2(vf5, 64, a0);                               // st0
+  c->vmulq(DEST::xyz, vf4, vf4);
+  c->vmulq(DEST::xyz, vf8, vf8);
+  c->vadd(DEST::xyzw, vf4, vf4, vf27);                // vf4 += hvdf-offset
+  c->sqc2(vf8, 96, a0);                               // st1 (outline)
+  c->vftoi4(DEST::xyzw, vf4, vf4);
+  c->andi(t1, a2, 256);                               // depth-override flag
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L186
+  if (bc) { goto block_166; }
+
+  // B165: depth-override — use vf23.z.
+  c->vftoi0(DEST::z, vf1, vf23);
+  c->vftoi0(DEST::z, vf4, vf23);
+  // fall through
+
+block_166:
+  // B166 / L186: emit pos0/pos1 and do on-screen clip test.
+  c->sqc2(vf1, 80, a0);                               // pos0
+  c->sqc2(vf4, 112, a0);                              // pos1
+  c->lw(t2, 80, a0);                                  // pos0.x
+  c->lw(t1, 84, a0);                                  // pos0.y
+  c->ori(t3, r0, 36864);
+  c->dsubu(t2, t2, t3);
+  c->lw(t3, 112, a0);                                 // pos1.x
+  c->ori(t4, r0, 36096);
+  c->dsubu(t1, t1, t4);
+  c->lw(t4, 116, a0);                                 // pos1.y
+  bc = ((s64)c->sgpr64(t2)) > 0;                      // bgtz t2, L160 (clip → skip)
+  c->daddiu(t2, t3, -28672);
+  if (bc) { goto block_92; }
+
+  // B167:
+  bc = ((s64)c->sgpr64(t1)) > 0;                      // bgtz t1, L160
+  c->daddiu(t1, t4, -29440);
+  if (bc) { goto block_92; }
+
+  // B168:
+  bc = ((s64)c->sgpr64(t2)) < 0;                      // bltz t2, L160
+  if (bc) { goto block_92; }
+
+  // B169:
+  bc = ((s64)c->sgpr64(t1)) < 0;                      // bltz t1, L160
+  if (bc) { goto block_92; }
+
+  // B170: glyph passed clip — unconditionally advance dma by 128 (no
+  // flag-1 gate in the second loop — every glyph that makes it here
+  // draws), then loop back.
+  c->daddiu(a0, a0, 128);
+  goto block_92;                                      // L160
 
 block_171:
   // ---------------------------------------------------------------------------
