@@ -97,6 +97,24 @@
 (declare-type sparticle-launcher basic)
 (declare-type state basic)
 (declare-type res-lump basic)
+(declare-type sparticle-cpuinfo structure)
+(declare-type sparticle-system basic)
+(declare-type sparticle-launchinfo structure)
+(declare-type sparticle-launch-state structure)
+(declare-type sprite-vec-data-3d structure)
+(declare-type sprite-vec-data-2d structure)
+(declare-type time-of-day-proc basic)
+(declare-type projectile basic)
+(declare-type projectile-bounce basic)
+(declare-type control-info basic)
+(declare-type part-tracker basic)
+(declare-type auto-save basic)
+(declare-type ragdoll-proc basic)
+(declare-type task-arrow-params structure)
+(declare-type vehicle-wheel-init-params structure)
+(declare-type vehicle-wheel basic)
+(declare-type light-trail-tracker-spawn-params structure)
+(declare-type explosion-init-params structure)
 
 ;; kernel types
 (defenum link-flag
@@ -116,8 +134,6 @@
   (french 1)
   (german 2)
   (spanish 3)
-(declare-type process-nettable basic)
-(declare-type process-drawable basic)
   (italian 4)
   (commentary 5)
   (japanese 6)
@@ -584,6 +600,9 @@
 
 (declare-type process-tree basic)
 (declare-type process process-tree)
+(declare-type process-nettable process)
+(declare-type process-drawable process-nettable)
+(declare-type process-focusable process-drawable)
 (declare-type thread basic)
 (declare-type cpu-thread thread)
 (declare-type clock basic)
@@ -2039,7 +2058,7 @@
 
 
 (define-extern task-arrow-init-by-other function) ;; (function task-arrow-params object :behavior task-arrow)
-(define-extern task-arrow-spawn function) ;; (function task-arrow-params process-tree process)
+(define-extern task-arrow-spawn (function task-arrow-params process-tree process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; race-manager                   ;;
@@ -2456,8 +2475,8 @@
 
 (define-extern *explosion-effect-suppress* object)
 (define-extern explosion-init-by-other function) ;; (function explosion-init-params object :behavior explosion)
-(define-extern explosion-spawn-legacy-version function) ;; (function process-drawable type explosion-init-params (pointer process))
-(define-extern explosion-spawn function) ;; (function explosion-init-params process-drawable none)
+(define-extern explosion-spawn-legacy-version (function process-drawable type explosion-init-params (pointer process)))
+(define-extern explosion-spawn (function explosion-init-params process-drawable none))
 (define-extern find-closest-solid-sphere-prim function) ;; (function collide-shape vector collide-spec collide-shape-prim)
 (define-extern *explosion-debug-sphere* sphere) ;; sphere
 (define-extern explosion-handle-touch-with-ccheck function)
@@ -5445,8 +5464,8 @@
 
 
 (define-extern *vehicle-wheel-constants* rigid-body-object-constants)
-(define-extern vehicle-wheel-init-by-other function) ;; (function vehicle-wheel-init-params object :behavior vehicle-wheel)
-(define-extern vehicle-wheel-spawn function) ;; (function process vehicle-wheel-init-params vehicle-wheel)
+(define-extern vehicle-wheel-init-by-other (function vehicle-wheel-init-params object :behavior vehicle-wheel))
+(define-extern vehicle-wheel-spawn (function process vehicle-wheel-init-params vehicle-wheel))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-part                  ;;
@@ -5471,10 +5490,10 @@
 (define-extern *curve-carexplo-scale-x* curve2d-fast)
 (define-extern *curve-carexplo-scale-y* curve2d-fast)
 (define-extern *part-car-explosion-texture-curve-settings* object)
-(define-extern sparticle-motion-blur-dirt function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern spt-birth-func-brightness-buggy-rocks function) ;; (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none)
-(define-extern spt-birth-func-part-buggy-rocks function) ;; (function sparticle-system sparticle-cpuinfo sparticle-launchinfo object object none)
-(define-extern spt-birth-func-part-dbuggy-debris function) ;; (function sparticle-system sparticle-cpuinfo sparticle-launchinfo object object none)
+(define-extern sparticle-motion-blur-dirt (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern spt-birth-func-brightness-buggy-rocks (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
+(define-extern spt-birth-func-part-buggy-rocks (function sparticle-system sparticle-cpuinfo sparticle-launchinfo object object none))
+(define-extern spt-birth-func-part-dbuggy-debris (function sparticle-system sparticle-cpuinfo sparticle-launchinfo object object none))
 (define-extern spt-birth-func-brightness-buggy-snow function)
 (define-extern spt-birth-func-part-wv-snow function)
 (define-extern spt-birth-func-part-wv-grass function)
@@ -5497,8 +5516,8 @@
 (define-extern spt-birth-func-brightness-oil function)
 (define-extern spt-func-part-oil-emit function)
 (define-extern spt-func-part-oil-emit-sparkle function)
-(define-extern check-scorp-shell-level1 function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern check-scorp-shell-level2 function) ;; (function sparticle-system sparticle-cpuinfo vector none)
+(define-extern check-scorp-shell-level1 (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern check-scorp-shell-level2 (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern *curve-toad-linear-up-red* curve2d-piecewise)
 (define-extern *trail-color-curve-grenade-yellow* curve-color-fast)
 (define-extern *curve-grenade-linear-toad-trail* curve2d-fast) ;; curve2d-fast
@@ -35643,7 +35662,7 @@
 (define-extern joint-anim-login (function joint-anim-drawable joint-anim-drawable))
 (define-extern joint-anim-inspect-elt (function joint-anim float joint-anim))
 (define-extern jacc-mem-usage (function joint-anim-compressed-control memory-usage-block int joint-anim-compressed-control))
-(define-extern joint-control-cleanup function) ;; (function joint-control kheap art-joint-anim symbol)
+(define-extern joint-control-cleanup (function joint-control kheap art-joint-anim symbol))
 (define-extern joint-control-channel-eval (function joint-control-channel float :behavior process))
 (define-extern joint-control-channel-eval! (function joint-control-channel (function joint-control-channel float float float float) float :behavior process))
 (define-extern joint-control-channel-group-eval! (function joint-control-channel art-joint-anim (function joint-control-channel float float float float) int))
@@ -35867,11 +35886,11 @@
 
 (define-extern sprite-setup-header function) ;; (function sprite-header int none)
 (define-extern clear-sprite-aux-list (function none))
-(define-extern add-to-sprite-aux-list function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d uint none)
+(define-extern add-to-sprite-aux-list (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d uint none))
 (define-extern sprite-setup-frame-data function) ;; (function sprite-frame-data uint none)
 (define-extern sprite-vu1-block vu-function)
-(define-extern sprite-set-3d-quaternion! function) ;; (function sprite-vec-data-3d quaternion quaternion)
-(define-extern sprite-get-3d-quaternion! function) ;; (function quaternion sprite-vec-data-3d quaternion)
+(define-extern sprite-set-3d-quaternion! (function sprite-vec-data-3d quaternion quaternion))
+(define-extern sprite-get-3d-quaternion! (function quaternion sprite-vec-data-3d quaternion))
 (define-extern sprite-add-matrix-data (function dma-buffer uint none))
 (define-extern sprite-add-frame-data (function dma-buffer uint none))
 (define-extern sprite-add-2d-chunk (function sprite-array-2d int int dma-buffer int none))
@@ -36048,7 +36067,7 @@
 (define-extern sprite-glow-init-consts function) ;; (function sprite-glow-consts none)
 (define-extern sprite-glow-init-engine (function dma-buffer none))
 (define-extern *sprite-glow-dma-packet-data* sprite-glow-dma-packet-data) ;; sprite-glow-dma-packet-data
-(define-extern sprite-glow-add-sprite function) ;; (function dma-buffer sprite-vec-data-2d float float float adgif-shader none)
+(define-extern sprite-glow-add-sprite (function dma-buffer sprite-vec-data-2d float float float adgif-shader none))
 (define-extern sprite-glow-add-simple-sprite (function dma-buffer sprite-glow-dma-packet-data sprite-glow-data pointer none))
 (define-extern sprite-glow-draw (function dma-buffer none))
 (define-extern add-shader-to-dma (function dma-buffer adgif-shader))
@@ -37424,7 +37443,7 @@
 (define-extern lookup-part-group-by-name (function string sparticle-launch-group))
 (define-extern lookup-part-group-pointer-by-name (function string (pointer object)))
 (define-extern part-group-pointer? (function pointer symbol))
-(define-extern unlink-part-group-by-heap function) ;; (function kheap int)
+(define-extern unlink-part-group-by-heap (function kheap int))
 (define-extern sp-init-fields! (function (pointer float) (inline-array sp-field-init-spec) sp-field-id sp-field-id symbol (inline-array sp-field-init-spec)))
 (define-extern *sp-launcher-lock* symbol) ;; symbol
 (define-extern *sp-launch-queue* object) ;; sp-launch-queue
@@ -37434,17 +37453,17 @@
 (define-extern particle-adgif-cache-flush (function none))
 (define-extern particle-adgif (function adgif-shader texture-id none))
 (define-extern particle-adgif-callback (function adgif-shader texture-id none))
-(define-extern sp-queue-launch function) ;; (function sparticle-system sparticle-launcher matrix int)
-(define-extern sp-adjust-launch function) ;; (function sparticle-launchinfo sparticle-cpuinfo (inline-array sp-field-init-spec) matrix symbol none)
-(define-extern sp-euler-convert function) ;; (function sparticle-launchinfo sparticle-cpuinfo none)
-(define-extern sp-rotate-system function) ;; (function sparticle-launchinfo sparticle-cpuinfo transformq none)
-(define-extern sp-launch-particles-var function) ;; (function sparticle-system sparticle-launcher matrix sparticle-launch-state sparticle-launch-control float none)
+(define-extern sp-queue-launch (function sparticle-system sparticle-launcher matrix int))
+(define-extern sp-adjust-launch (function sparticle-launchinfo sparticle-cpuinfo (inline-array sp-field-init-spec) matrix symbol none))
+(define-extern sp-euler-convert (function sparticle-launchinfo sparticle-cpuinfo none))
+(define-extern sp-rotate-system (function sparticle-launchinfo sparticle-cpuinfo transformq none))
+(define-extern sp-launch-particles-var (function sparticle-system sparticle-launcher matrix sparticle-launch-state sparticle-launch-control float none))
 (define-extern *death-adgif* adgif-shader) ;; adgif-shader
-(define-extern sp-launch-particles-death function) ;; (function sparticle-system sparticle-launcher vector none)
+(define-extern sp-launch-particles-death (function sparticle-system sparticle-launcher vector none))
 (define-extern sp-clear-queue (function none))
-(define-extern sp-relaunch-setup-fields function) ;; (function object sparticle-launcher sparticle-cpuinfo sprite-vec-data-3d none)
-(define-extern sp-relaunch-particle-2d function) ;; (function object sparticle-launcher sparticle-cpuinfo sprite-vec-data-2d none)
-(define-extern sp-relaunch-particle-3d function) ;; (function object sparticle-launcher sparticle-cpuinfo sprite-vec-data-3d none)
+(define-extern sp-relaunch-setup-fields (function object sparticle-launcher sparticle-cpuinfo sprite-vec-data-3d none))
+(define-extern sp-relaunch-particle-2d (function object sparticle-launcher sparticle-cpuinfo sprite-vec-data-2d none))
+(define-extern sp-relaunch-particle-3d (function object sparticle-launcher sparticle-cpuinfo sprite-vec-data-3d none))
 (define-extern get-matching-control-table-index function)
 (define-extern kill-all-particles-with-control function)
 (define-extern execute-particle-local-space-engine (function int none))
@@ -37454,54 +37473,54 @@
 (define-extern spawn-level-particles-for-camera function)
 (define-extern execute-part-engine (function none))
 (define-extern check-particles function)
-(define-extern sparticle-track-root function) ;; (function object sparticle-cpuinfo vector none)
-(define-extern sparticle-track-root-prim function) ;; (function object sparticle-cpuinfo vector none)
-(define-extern sparticle-track-joint function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern sparticle-turn-to-vel function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d none)
-(define-extern sparticle-rotate-to-vel-3d function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d vector none)
-(define-extern birth-func-clean function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none)
-(define-extern birth-func-process-clock function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none)
-(define-extern birth-func-copy-rot-color function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none)
+(define-extern sparticle-track-root (function object sparticle-cpuinfo vector none))
+(define-extern sparticle-track-root-prim (function object sparticle-cpuinfo vector none))
+(define-extern sparticle-track-joint (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern sparticle-turn-to-vel (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d none))
+(define-extern sparticle-rotate-to-vel-3d (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d vector none))
+(define-extern birth-func-clean (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
+(define-extern birth-func-process-clock (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
+(define-extern birth-func-copy-rot-color (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
 (define-extern *global-toggle* int) ;; int
-(define-extern birth-func-copy2-rot-color function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none)
-(define-extern birth-func-copy-omega-to-z function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none)
-(define-extern birth-func-random-next-time function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none)
-(define-extern sparticle-respawn-heights function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern sparticle-respawn-timer function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern sparticle-texture-animate function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern sparticle-texture-day-night function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-2d none)
-(define-extern sparticle-motion-blur function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern sparticle-motion-blur-old function) ;; (function object sparticle-cpuinfo sprite-vec-data-3d object)
+(define-extern birth-func-copy2-rot-color (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
+(define-extern birth-func-copy-omega-to-z (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
+(define-extern birth-func-random-next-time (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
+(define-extern sparticle-respawn-heights (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern sparticle-respawn-timer (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern sparticle-texture-animate (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern sparticle-texture-day-night (function sparticle-system sparticle-cpuinfo sprite-vec-data-2d none))
+(define-extern sparticle-motion-blur (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern sparticle-motion-blur-old (function object sparticle-cpuinfo sprite-vec-data-3d object))
 (define-extern sparticle-set-conerot (function sparticle-launcher vector none))
-(define-extern check-ground-bounce function) ;; (function sparticle-system sparticle-cpuinfo sparticle-launchinfo float)
-(define-extern check-drop-group-center function) ;; (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none)
+(define-extern check-ground-bounce (function sparticle-system sparticle-cpuinfo sparticle-launchinfo float))
+(define-extern check-drop-group-center (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern check-drop-group-center-with-offset function)
-(define-extern check-bubble-height function) ;; (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none)
-(define-extern check-raise-group-center function) ;; (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none)
-(define-extern birth-func-y->userdata function) ;; (function sparticle-system sparticle-cpuinfo matrix none)
-(define-extern birth-func-ocean-height function) ;; (function sparticle-system sparticle-cpuinfo matrix none)
-(define-extern birth-func-camera-orient function) ;; (function int sparticle-cpuinfo sparticle-launchinfo none)
-(define-extern birth-func-set-parent-pntr function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none)
-(define-extern birth-func-get-parent-quat function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none)
-(define-extern spt-func-camera-facing-orbiter function) ;; (function sparticle-system sparticle-cpuinfo sparticle-launchinfo quaternion)
+(define-extern check-bubble-height (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
+(define-extern check-raise-group-center (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
+(define-extern birth-func-y->userdata (function sparticle-system sparticle-cpuinfo matrix none))
+(define-extern birth-func-ocean-height (function sparticle-system sparticle-cpuinfo matrix none))
+(define-extern birth-func-camera-orient (function int sparticle-cpuinfo sparticle-launchinfo none))
+(define-extern birth-func-set-parent-pntr (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
+(define-extern birth-func-get-parent-quat (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
+(define-extern spt-func-camera-facing-orbiter (function sparticle-system sparticle-cpuinfo sparticle-launchinfo quaternion))
 (define-extern *particle-birth-work* object)
-(define-extern birth-func-set-quat function) ;; (function int sparticle-cpuinfo sparticle-launchinfo none)
+(define-extern birth-func-set-quat (function int sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern birth-func-add-vel function)
-(define-extern birth-func-set-vel function) ;; (function object sparticle-cpuinfo sparticle-launchinfo none)
-(define-extern birth-func-set-vel-2d function) ;; (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none)
+(define-extern birth-func-set-vel (function object sparticle-cpuinfo sparticle-launchinfo none))
+(define-extern birth-func-set-vel-2d (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern birth-func-set-vel-range function)
-(define-extern birth-func-texture-group function) ;; (function int sparticle-cpuinfo sparticle-launchinfo none)
-(define-extern rot-to-particle function) ;; (function degrees sprite-vec-data-2d matrix none)
+(define-extern birth-func-texture-group (function int sparticle-cpuinfo sparticle-launchinfo none))
+(define-extern rot-to-particle (function degrees sprite-vec-data-2d matrix none))
 (define-extern rot-to-particle-no-flip function)
-(define-extern birth-func-flip-based-on-scale function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none)
-(define-extern sparticle-2d-spline-align function) ;; (function object sparticle-cpuinfo sprite-vec-data-2d object none)
+(define-extern birth-func-flip-based-on-scale (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
+(define-extern sparticle-2d-spline-align (function object sparticle-cpuinfo sprite-vec-data-2d object none))
 (define-extern sparticle-2d-spline-align-no-flip function)
-(define-extern sparticle-2d-spline-align-instant function) ;; (function object sparticle-cpuinfo sprite-vec-data-2d none)
-(define-extern birth-func-inherit-size function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none)
-(define-extern birth-func-texture-group-2d function) ;; (function object sparticle-cpuinfo sparticle-launchinfo object object none)
-(define-extern sparticle-3d-rotate-xz-to-camera function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d none)
-(define-extern spt-func-relative-pos function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d none)
-(define-extern spt-func-turn-to-vel-radial function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d none)
+(define-extern sparticle-2d-spline-align-instant (function object sparticle-cpuinfo sprite-vec-data-2d none))
+(define-extern birth-func-inherit-size (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
+(define-extern birth-func-texture-group-2d (function object sparticle-cpuinfo sparticle-launchinfo object object none))
+(define-extern sparticle-3d-rotate-xz-to-camera (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d none))
+(define-extern spt-func-relative-pos (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d none))
+(define-extern spt-func-turn-to-vel-radial (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sparticle-subsampler           ;;
@@ -37512,33 +37531,33 @@
 ;; sparticle                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern sp-particle-copy! function) ;; (function sparticle-cpuinfo sparticle-cpuinfo none)
+(define-extern sp-particle-copy! (function sparticle-cpuinfo sparticle-cpuinfo none))
 (define-extern *sp-particle-system-2d* object) ;; sparticle-system
 (define-extern *sp-particle-system-3d* object) ;; sparticle-system
-(define-extern sp-get-block-size function) ;; (function sparticle-system int int)
-(define-extern sp-get-approx-alloc-size function) ;; (function sparticle-system int int)
-(define-extern sp-free-particle function) ;; (function sparticle-system int sparticle-cpuinfo sprite-vec-data-2d none)
-(define-extern sp-get-particle function) ;; (function sparticle-system int sparticle-launch-state sparticle-cpuinfo)
-(define-extern sp-kill-particle function) ;; (function sparticle-system sparticle-cpuinfo symbol)
-(define-extern sp-orbiter function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern sp-process-block-2d function) ;; (function sparticle-system int int int int symbol none)
-(define-extern sp-process-block-3d function) ;; (function sparticle-system int int int int symbol none)
+(define-extern sp-get-block-size (function sparticle-system int int))
+(define-extern sp-get-approx-alloc-size (function sparticle-system int int))
+(define-extern sp-free-particle (function sparticle-system int sparticle-cpuinfo sprite-vec-data-2d none))
+(define-extern sp-get-particle (function sparticle-system int sparticle-launch-state sparticle-cpuinfo))
+(define-extern sp-kill-particle (function sparticle-system sparticle-cpuinfo symbol))
+(define-extern sp-orbiter (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern sp-process-block-2d (function sparticle-system int int int int symbol none))
+(define-extern sp-process-block-3d (function sparticle-system int int int int symbol none))
 (define-extern sp-copy-to-spr (function int pointer int none))
 (define-extern sp-copy-from-spr (function int pointer int none))
 (define-extern memcpy (function pointer pointer none))
-(define-extern sp-process-block function) ;; (function sparticle-system int sprite-array-2d int none)
-(define-extern sp-process-particle-system function) ;; (function sparticle-system int sprite-array-2d none)
+(define-extern sp-process-block (function sparticle-system int sprite-array-2d int none))
+(define-extern sp-process-particle-system (function sparticle-system int sprite-array-2d none))
 (define-extern *particles-flag* symbol) ;; symbol
 (define-extern forall-particles-with-control-runner function)
 (define-extern forall-particles-with-control function)
-(define-extern sparticle-kill-it function) ;; (function sparticle-system sparticle-cpuinfo none)
-(define-extern sparticle-60-to-50 function) ;; (function sparticle-system sparticle-cpuinfo pointer none)
-(define-extern sparticle-50-to-60 function) ;; (function sparticle-system sparticle-cpuinfo pointer none)
-(define-extern forall-particles-runner function) ;; (function (function sparticle-system sparticle-cpuinfo pointer none) sparticle-system none)
+(define-extern sparticle-kill-it (function sparticle-system sparticle-cpuinfo none))
+(define-extern sparticle-60-to-50 (function sparticle-system sparticle-cpuinfo pointer none))
+(define-extern sparticle-50-to-60 (function sparticle-system sparticle-cpuinfo pointer none))
+(define-extern forall-particles-runner (function (function sparticle-system sparticle-cpuinfo pointer none) sparticle-system none))
 (define-extern forall-particles (function function symbol symbol none))
 (define-extern all-particles-50-to-60 (function none))
 (define-extern all-particles-60-to-50 (function none))
-(define-extern remap-particle function) ;; (function sparticle-system sparticle-cpuinfo pointer none)
+(define-extern remap-particle (function sparticle-system sparticle-cpuinfo pointer none))
 (define-extern remap-all-particles (function none))
 (define-extern process-particles (function none))
 (define-extern spt-func-on-omega-height-die function)
@@ -37637,9 +37656,9 @@
 
 (define-extern *image-scene-name* object)
 (define-extern *image-scene-num* object)
-(define-extern drawable-load function) ;; (function drawable kheap drawable)
-(define-extern art-load function) ;; (function string kheap art)
-(define-extern art-group-load-check function) ;; (function string kheap int art-group)
+(define-extern drawable-load (function drawable kheap drawable))
+(define-extern art-load (function string kheap art))
+(define-extern art-group-load-check (function string kheap int art-group))
 (define-extern external-art-buffer-init (function external-art-buffer int))
 (define-extern *preload-spool-anims* symbol) ;; symbol
 (define-extern ja-play-spooled-anim function) ;; (function spool-anim art-joint-anim art-joint-anim (function process-drawable symbol) spooler-flags int :behavior process-drawable)
@@ -37806,7 +37825,7 @@
 (define-extern clear-mood-context (function mood-context symbol))
 (define-extern update-mood-interior (function mood-context symbol float))
 (define-extern update-mood-interior-ambient (function mood-context symbol float vector))
-(define-extern update-mood-flames function) ;; (function mood-context int int int float float float float :behavior time-of-day-proc)
+(define-extern update-mood-flames (function mood-context int int int float float float float :behavior time-of-day-proc))
 (define-extern *flash0* array) ;; (array float)
 (define-extern *flash1* array) ;; (array float)
 (define-extern *flash2* array) ;; (array float)
@@ -37872,12 +37891,12 @@
   
 
 
-(define-extern update-mood-default function) ;; (function mood-context float int none :behavior time-of-day-proc)
+(define-extern update-mood-default (function mood-context float int none :behavior time-of-day-proc))
 (define-extern update-mood-copy-parent (function mood-context object int none))
 (define-extern get-sphere-interp (function sphere vector float float float))
 (define-extern update-mood-default-exterior function)
 (define-extern init-mood-mountain (function mood-context uint))
-(define-extern update-mood-mountain function) ;; (function mood-context float int none :behavior time-of-day-proc)
+(define-extern update-mood-mountain (function mood-context float int none :behavior time-of-day-proc))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; mood-funcs2                    ;;
@@ -37928,13 +37947,13 @@
 (define-extern init-mood-fog-default function)
 (define-extern init-mood-fog-temple function)
 (define-extern init-mood-fog-drome function)
-(define-extern update-mood-default-interior function) ;; (function mood-context none :behavior time-of-day-proc)
-(define-extern update-mood-default-interior-ambient function) ;; (function mood-context none :behavior time-of-day-proc)
+(define-extern update-mood-default-interior (function mood-context none :behavior time-of-day-proc))
+(define-extern update-mood-default-interior-ambient (function mood-context none :behavior time-of-day-proc))
 (define-extern update-rustyh-lights function)
 (define-extern update-mood-rustyh function)
 (define-extern set-rustyh-effect-light! function)
 (define-extern update-hiphog-lights (function mood-context none))
-(define-extern update-mood-hiphog function) ;; (function mood-context float none :behavior time-of-day-proc)
+(define-extern update-mood-hiphog (function mood-context float none :behavior time-of-day-proc))
 (define-extern update-garage-brdroom-lights function)
 (define-extern update-mood-garage-brdroom function)
 (define-extern set-garage-switched! function)
@@ -37950,24 +37969,24 @@
 
 (define-extern group-rain-screend-drop sparticle-launch-group) ;; sparticle-launch-group
 (define-extern update-snow (function float vector vector none))
-(define-extern birth-func-omega-normal-orient function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none)
-(define-extern birth-func-rain function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none)
-(define-extern check-drop-level-rain function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern check-drop-level-rain2 function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern check-drop-level-splash function) ;; (function sparticle-system sparticle-cpuinfo vector none)
+(define-extern birth-func-omega-normal-orient (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
+(define-extern birth-func-rain (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
+(define-extern check-drop-level-rain (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern check-drop-level-rain2 (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern check-drop-level-splash (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern cam-master-effect (function none :behavior camera-master))
-(define-extern sparticle-track-sun function) ;; (function int sparticle-cpuinfo matrix none)
+(define-extern sparticle-track-sun (function int sparticle-cpuinfo matrix none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; time-of-day                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern time-of-day-effect object) ;; (function none)
-(define-extern time-of-day-update function) ;; (function none :behavior time-of-day-proc)
-(define-extern update-counters function) ;; (function float :behavior time-of-day-proc)
+(define-extern time-of-day-update (function none :behavior time-of-day-proc))
+(define-extern update-counters (function float :behavior time-of-day-proc))
 (define-extern time-of-day-tick state) ;; (state time-of-day-proc)
-(define-extern init-time-of-day function) ;; (function object :behavior time-of-day-proc)
-(define-extern start-time-of-day function) ;; (function (pointer time-of-day-proc))
+(define-extern init-time-of-day (function object :behavior time-of-day-proc))
+(define-extern start-time-of-day (function (pointer time-of-day-proc)))
 (define-extern time-of-day-setup (function symbol symbol))
 (define-extern time-of-day-interp-colors (function (pointer rgba) uint mood-context none))
 (define-extern time-of-day-interp-colors-scratch (function (pointer rgba) time-of-day-palette mood-context none))
@@ -38667,9 +38686,9 @@
 ;; collide-shape                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern find-ground-point function) ;; (function control-info vector float float vector)
+(define-extern find-ground-point (function control-info vector float float vector))
 (define-extern collide-shape-moving-angle-set! (function collide-shape-moving vector vector none))
-(define-extern cshape-reaction-update-state function) ;; (function control-info collide-query vector none)
+(define-extern cshape-reaction-update-state (function control-info collide-query vector none))
 (define-extern cshape-reaction-default function) ;; (function control-info collide-query vector vector collide-status)
 (define-extern cshape-reaction-just-move function) ;; (function control-info collide-query vector collide-status)
 (define-extern collide-shape-draw-debug-marks (function none))
@@ -38788,7 +38807,7 @@
 (define-extern death-default death-info) ;; death-info
 (define-extern death-warp-in death-info) ;; death-info
 (define-extern death-warp-out death-info) ;; death-info
-(define-extern sparticle-texture-glow-soft function) ;; (function sparticle-system sparticle-cpuinfo vector none)
+(define-extern sparticle-texture-glow-soft (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern merc-death-spawn (function int vector vector none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -40100,10 +40119,10 @@
 (define-extern clone-anim (function handle symbol string none :behavior process-drawable))
 (define-extern manipy-post (function none :behavior manipy))
 (define-extern manipy-init function) ;; (function vector entity-actor skeleton-group vector manipy-options none :behavior manipy)
-(define-extern part-tracker-init-base function) ;; (function sparticle-launch-group time-frame (function part-tracker vector) uint process-drawable object none :behavior part-tracker)
+(define-extern part-tracker-init-base (function sparticle-launch-group time-frame (function part-tracker vector) uint process-drawable object none :behavior part-tracker))
 (define-extern part-tracker-subsampler-init function) ;; (function part-tracker-subsampler-init-params object :behavior part-tracker-subsampler)
 (define-extern part-tracker-init function) ;; (function part-tracker-init-params object :behavior part-tracker)
-(define-extern part-tracker-track-root function) ;; (function sparticle-system sparticle-cpuinfo vector none)
+(define-extern part-tracker-track-root (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern lightning-tracker-init function) ;; (function lightning-spec time-frame symbol process-drawable vector vector none :behavior lightning-tracker)
 (define-extern process-grab? (function process symbol symbol :behavior process))
 (define-extern process-release? (function process symbol :behavior process))
@@ -40114,7 +40133,7 @@
 (define-extern process-drawable-random-point! (function process-drawable vector vector))
 (define-extern process-drawable-pair-random-point! (function process-drawable process-drawable vector float vector))
 (define-extern simple-prim-init-by-other function) ;; (function vector vector texture-id object :behavior simple-prim)
-(define-extern birth-func-simple-prim function) ;; (function int sparticle-cpuinfo sparticle-launchinfo none)
+(define-extern birth-func-simple-prim (function int sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern external-camera-controller-init-by-other function) ;; (function entity time-frame symbol object :behavior external-camera-controller)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -40146,7 +40165,7 @@
 (define-extern *lightning-globals* lightning-globals) ;; lightning-globals
 (define-extern *lightning* symbol) ;; symbol
 (define-extern lightning-draw-all (function none))
-(define-extern unlink-lightning-spec-by-heap function) ;; (function kheap none)
+(define-extern unlink-lightning-spec-by-heap (function kheap none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; light-trails-h                 ;;
@@ -40646,8 +40665,8 @@
   )
 
 
-(define-extern birth-func-curve function) ;; (function int sparticle-cpuinfo sparticle-launchinfo none)
-(define-extern live-func-curve function) ;; (function sparticle-system sparticle-cpuinfo vector none)
+(define-extern birth-func-curve (function int sparticle-cpuinfo sparticle-launchinfo none))
+(define-extern live-func-curve (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern *alpha-fast* curve2d-fast) ;; curve2d-fast
 (define-extern *unity-fast* curve2d-fast) ;; curve2d-fast
 (define-extern *ccro* curve-color-fast) ;; curve-color-fast
@@ -40715,7 +40734,7 @@
 ;; logic-target                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern draw-history function) ;; (function control-info none)
+(define-extern draw-history (function control-info none))
 (define-extern target-history-print (function history-iterator symbol))
 (define-extern target-print-stats (function target symbol symbol))
 (define-extern target-move-dist (function time-frame float :behavior target))
@@ -40734,7 +40753,7 @@
 ;; debug-part                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern sparticle-track-root-money function) ;; (function sparticle-system sparticle-cpuinfo vector none)
+(define-extern sparticle-track-root-money (function sparticle-system sparticle-cpuinfo vector none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; attackable-hash                ;;
@@ -40758,16 +40777,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern cshape-reaction-projectile function) ;; (function control-info collide-query vector vector collide-status)
-(define-extern projectile-event-handler function) ;; (function process int symbol event-message-block projectile :behavior projectile)
-(define-extern projectile-move-fill-all-dirs function) ;; (function projectile none)
-(define-extern projectile-move-fill-line-sphere function) ;; (function projectile none)
-(define-extern projectile-update-velocity-add-gravity function) ;; (function projectile none)
-(define-extern projectile-update-velocity-space-wars function) ;; (function projectile none)
+(define-extern projectile-event-handler (function process int symbol event-message-block projectile :behavior projectile))
+(define-extern projectile-move-fill-all-dirs (function projectile none))
+(define-extern projectile-move-fill-line-sphere (function projectile none))
+(define-extern projectile-update-velocity-add-gravity (function projectile none))
+(define-extern projectile-update-velocity-space-wars (function projectile none))
 (define-extern projectile-base-code function)
-(define-extern projectile-init-by-other function) ;; (function projectile-init-by-other-params object :behavior projectile)
-(define-extern projectile-bounce-update-velocity function) ;; (function projectile-bounce none :behavior projectile)
-(define-extern projectile-bounce-falling-post function) ;; (function none :behavior projectile-bounce)
-(define-extern projectile-bounce-move function) ;; (function projectile-bounce none)
+(define-extern projectile-init-by-other (function projectile-init-by-other-params object :behavior projectile))
+(define-extern projectile-bounce-update-velocity (function projectile-bounce none :behavior projectile))
+(define-extern projectile-bounce-falling-post (function none :behavior projectile-bounce))
+(define-extern projectile-bounce-move (function projectile-bounce none))
 (define-extern projectile-bounce-reaction function) ;; (function control-info collide-query vector vector collide-status)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -41176,7 +41195,7 @@
 
 
 (define-extern *beam-info* beam-info) ;; beam-info
-(define-extern birth-func-setup-beam function) ;; (function int sparticle-cpuinfo sparticle-launchinfo none)
+(define-extern birth-func-setup-beam (function int sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern draw-beam (function sparticle-launcher vector vector symbol none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -41970,17 +41989,17 @@
 ;; water                          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern check-water-level-drop function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern check-water-level-drop-and-die function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern check-water-level-drop-and-die-motion function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern check-water-level-above-and-die function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern check-water-level-drop-motion function) ;; (function sparticle-system sparticle-cpuinfo vector none)
+(define-extern check-water-level-drop (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern check-water-level-drop-and-die (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern check-water-level-drop-and-die-motion (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern check-water-level-above-and-die (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern check-water-level-drop-motion (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern *water-simple-alpha-curve-in* curve2d-piecewise) ;; curve2d-piecewise
 (define-extern *growing-curve* curve2d-piecewise) ;; curve2d-piecewise
 (define-extern *water-simple-alpha-curve-fade-out* curve2d-piecewise) ;; curve2d-piecewise
 (define-extern *color-curve-tan-brown* curve-color-piecewise) ;; curve-color-piecewise
 (define-extern *water-wake-trail* light-trail-composition) ;; light-trail-composition
-(define-extern part-water-splash-callback function) ;; (function part-tracker none)
+(define-extern part-water-splash-callback (function part-tracker none))
 (define-extern splash-spawn (function float vector int none))
 (define-extern rings-water-spawn (function float vector vector float float none))
 (define-extern water-info<-region (function water-info drawable-region-prim (inline-array water-sphere) collide-action process-drawable water-info))
@@ -46839,7 +46858,7 @@
   
 (deftype menu-option-info (structure)
   ((display-name-id uint32  :offset-assert 0)
-   (sym             basic   :offset-assert 4)
+   (sym             symbol  :offset-assert 4)
    (extra           basic   :offset-assert 8)
    (extra-object    basic   :offset 8)
    (extra-int       int32   :offset 8)
@@ -49472,14 +49491,14 @@
 (define-extern *mc-ghost-ptr* object)
 (define-extern game-save-elt->string (function game-save-elt string))
 (define-extern *auto-save-info* mc-slot-info) ;; mc-slot-info
-(define-extern auto-save-post function) ;; (function pointer :behavior auto-save)
-(define-extern auto-save-init-by-other function) ;; (function symbol process int int symbol object :behavior auto-save)
+(define-extern auto-save-post (function pointer :behavior auto-save))
+(define-extern auto-save-init-by-other (function symbol process int int symbol object :behavior auto-save))
 (define-extern auto-idle state)
 (define-extern auto-save-error-proc-init-by-other function)
 (define-extern progress-allowed? (function symbol))
-(define-extern auto-save-command function) ;; (function symbol int int process-tree symbol (pointer auto-save))
+(define-extern auto-save-command (function symbol int int process-tree symbol (pointer auto-save)))
 (define-extern auto-save-check (function int))
-(define-extern auto-save-user function) ;; (function (pointer auto-save))
+(define-extern auto-save-user (function (pointer auto-save)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; title-obs                      ;;
@@ -54450,9 +54469,9 @@
 (define-extern part-cliffs-bird8-path function)
 (define-extern part-cliffs-bird9-path function)
 (define-extern part-cliffs-bird10-path function)
-(define-extern part-wascitya-fly1-path function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern part-wascitya-fly2-path function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern part-wascitya-fly3-path function) ;; (function sparticle-system sparticle-cpuinfo vector none)
+(define-extern part-wascitya-fly1-path (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern part-wascitya-fly2-path (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern part-wascitya-fly3-path (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern spt-func-part-cliffs-drops-splash function)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -54578,10 +54597,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern ragdoll-matrix-interp (function matrix matrix matrix float matrix))
-(define-extern ragdoll-joint-callback function) ;; (function cspace transformq process-drawable ragdoll-proc none)
-(define-extern ragdoll-other-joint-callback function) ;; (function cspace transformq none :behavior ragdoll-proc)
+(define-extern ragdoll-joint-callback (function cspace transformq process-drawable ragdoll-proc none))
+(define-extern ragdoll-other-joint-callback (function cspace transformq none :behavior ragdoll-proc))
 (define-extern ragdoll-reflect-matrix (function matrix vector vector vector))
-(define-extern ragdoll-proc-init-by-other function) ;; (function ragdoll-setup object :behavior ragdoll-proc)
+(define-extern ragdoll-proc-init-by-other (function ragdoll-setup object :behavior ragdoll-proc))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; raptor                         ;;
@@ -56099,10 +56118,10 @@
   )
 
 
-(define-extern update-mood-desert function) ;; (function mood-context float int none :behavior time-of-day-proc)
+(define-extern update-mood-desert (function mood-context float int none :behavior time-of-day-proc))
 (define-extern init-mood-desertg (function mood-context float))
-(define-extern update-mood-desertg function) ;; (function mood-context float int none :behavior time-of-day-proc)
-(define-extern update-mood-deswalk function) ;; (function mood-context float int none :behavior time-of-day-proc)
+(define-extern update-mood-desertg (function mood-context float int none :behavior time-of-day-proc))
+(define-extern update-mood-deswalk (function mood-context float int none :behavior time-of-day-proc))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; desert-ocean                   ;;
@@ -56154,7 +56173,7 @@
 (define-extern *part-desert-small-bowl-fire-flame-curve-settings* particle-curve-settings) ;; particle-curve-settings
 (define-extern *scenecamera-fog-update?* symbol) ;; symbol
 (define-extern scenecamera-fog-update (function none))
-(define-extern birth-func-desert-beacon-set-accel function) ;; (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none)
+(define-extern birth-func-desert-beacon-set-accel (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern *range-wrsplash-color* curve-color-fast) ;; curve-color-fast
 (define-extern *range-wrsplash-alpha* curve2d-fast) ;; curve2d-fast
 (define-extern *range-wrsplash-scale-x* curve2d-fast) ;; curve2d-fast
@@ -56406,7 +56425,7 @@
 (define-extern *curve-scale-lava-geyser-flame-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-scale-lava-geyser-flame-y* curve2d-fast) ;; curve2d-fast
 (define-extern *part-jungle-lavafire-small-curve-settings* object)
-(define-extern spt-func-birth-on-pop function) ;; (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none)
+(define-extern spt-func-birth-on-pop (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; jungle-obs                     ;;
