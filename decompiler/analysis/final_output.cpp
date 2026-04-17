@@ -343,36 +343,41 @@ std::string write_from_top_level_form(Form* top_form,
   std::vector<FormElement*> forms = top_form->elts();
   ASSERT(!forms.empty());
 
-  // remove a (none) from the end, if it exists.
-  auto back_as_generic_op = dynamic_cast<GenericElement*>(forms.back());
-  if (back_as_generic_op && back_as_generic_op->op().is_fixed(FixedOperatorKind::NONE)) {
-    forms.pop_back();
-  }
-
-  // Strip a trailing (ret-none) — the raw function-epilogue atomic op that
-  // sometimes survives when expression building doesn't convert it to (none).
-  if (!forms.empty()) {
-    auto back_as_atomic = dynamic_cast<AtomicOpElement*>(forms.back());
+  // Strip trailing epilogue/no-op forms that slip through expression building:
+  //   - (none) — the FixedOperatorKind::NONE generic, typical case
+  //   - (ret-none) — raw AtomicOp(FunctionEndOp) when expr-builder didn't fold it
+  //   - bare 0 — v0 from `li v0, 0; jr ra`, sometimes wrapped in various elements
+  //   - EmptyElement / inactive — placeholders that render to nothing anyway
+  // Loop because multiple can stack (e.g. (none) followed by ret-none followed by 0).
+  while (!forms.empty()) {
+    auto* back = forms.back();
+    auto back_as_generic_op = dynamic_cast<GenericElement*>(back);
+    if (back_as_generic_op && back_as_generic_op->op().is_fixed(FixedOperatorKind::NONE)) {
+      forms.pop_back();
+      continue;
+    }
+    auto back_as_atomic = dynamic_cast<AtomicOpElement*>(back);
     if (back_as_atomic && dynamic_cast<const FunctionEndOp*>(back_as_atomic->op())) {
       forms.pop_back();
+      continue;
     }
-  }
-
-  // Strip a trailing bare integer 0 — the v0 return value from a `li v0, 0; jr ra`
-  // epilogue that wasn't folded into the function body. Check both the atomic
-  // and generic-expression forms, and fall back to a string match on the printed
-  // form so we catch whichever wrapper the expression analyzer left behind.
-  if (!forms.empty()) {
-    bool dropped = false;
-    auto back_as_atom = dynamic_cast<SimpleAtomElement*>(forms.back());
+    auto back_as_atom = dynamic_cast<SimpleAtomElement*>(back);
     if (back_as_atom && back_as_atom->atom().is_int(0)) {
       forms.pop_back();
-      dropped = true;
+      continue;
     }
-    if (!dropped &&
-        pretty_print::to_string(forms.back()->to_form(env)) == "0") {
+    if (dynamic_cast<EmptyElement*>(back) || !back->active()) {
       forms.pop_back();
+      continue;
     }
+    if (pretty_print::to_string(back->to_form(env)) == "0") {
+      forms.pop_back();
+      continue;
+    }
+    break;
+  }
+  if (forms.empty()) {
+    return "";
   }
 
   std::string result;
@@ -612,6 +617,18 @@ std::string write_from_top_level_form(Form* top_form,
       if (empty) {
         something_matched = true;
       } else if (!x->active()) {
+        something_matched = true;
+      }
+    }
+
+    // Silently drop stray epilogue artifacts (bare 0, (ret-none)) that slip
+    // through expression building and end up as their own top-level entries.
+    // Stripping them at the end of the form vector only helps if they are
+    // literally last; they are often mid-list with other inactive elements
+    // after them, so a per-element skip is needed too.
+    if (!something_matched) {
+      auto as_str = pretty_print::to_string(x->to_form(env));
+      if (as_str == "0" || as_str == "(ret-none)") {
         something_matched = true;
       }
     }
