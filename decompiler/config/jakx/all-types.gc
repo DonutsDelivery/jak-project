@@ -116,6 +116,8 @@
   (french 1)
   (german 2)
   (spanish 3)
+(declare-type process-nettable basic)
+(declare-type process-drawable basic)
   (italian 4)
   (commentary 5)
   (japanese 6)
@@ -33402,18 +33404,18 @@
   :size-assert         #x664
   :flag-assert         #x1800000664
   (:methods
-    (tracking-spline-method-9 (_type_) none) ;; 9
-    (tracking-spline-method-10 (_type_ vector) none) ;; 10
+    (tracking-spline-method-9 (_type_) int) ;; 9 — body returns int
+    (tracking-spline-method-10 (_type_ vector) int) ;; 10 — body returns int
     (debug-point-info (_type_ int) none) ;; 11
     (debug-all-points (_type_) none) ;; 12
-    (tracking-spline-method-13 (_type_ int) none) ;; 13
-    (tracking-spline-method-14 (_type_ tracking-spline-sampler) none) ;; 14
-    (tracking-spline-method-15 (_type_) none) ;; 15
-    (tracking-spline-method-16 (_type_ float) none) ;; 16
+    (tracking-spline-method-13 (_type_ int) int) ;; 13 — body returns int
+    (tracking-spline-method-14 (_type_ tracking-spline-sampler) int) ;; 14 — body returns int
+    (tracking-spline-method-15 (_type_) int) ;; 15 — body returns int
+    (tracking-spline-method-16 (_type_ float) int) ;; 16 — body returns int
     (tracking-spline-method-17 (_type_ vector float float symbol) int) ;; 17
     (tracking-spline-method-18 (_type_ float vector vector tracking-spline-sampler) vector) ;; 18
     (tracking-spline-method-19 (_type_ float vector vector tracking-spline-sampler) vector) ;; 19
-    (tracking-spline-method-20 (_type_ vector int) none) ;; 20
+    (tracking-spline-method-20 (_type_ vector int) int) ;; 20 — body returns int
     (tracking-spline-method-21 (_type_ vector float float float float vector) vector) ;; 21
     (tracking-spline-method-22 (_type_ float) symbol) ;; 22
     (debug-draw-spline (_type_) none) ;; 23
