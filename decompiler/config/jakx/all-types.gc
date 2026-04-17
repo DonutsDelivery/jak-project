@@ -16932,13 +16932,13 @@
 
 
   
-#|(deftype ocean-spheres (structure)
-  ((spheres sphere 36 :offset-assert 0) ;; guessed by decompiler
+(deftype ocean-spheres (structure)
+  ((spheres sphere 36 :inline :offset-assert 0) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x240
   :flag-assert         #x900000240
-  )|#
+  )
   
 
 
@@ -16954,26 +16954,26 @@
 
 
   
-#|(deftype ocean-colors-float (structure)
-  ((colors vector 2548 :offset-assert 0) ;; guessed by decompiler
+(deftype ocean-colors-float (structure)
+  ((colors vector 2548 :inline :offset-assert 0) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x9f40
   :flag-assert         #x900009f40
-  )|#
+  )
   
 
 
 
   
-#|(deftype ocean-mid-mask (structure)
-  ((mask  uint8  8 :offset-assert 0) ;; guessed by decompiler
-   (dword uint64   :offset-assert 0)
+(deftype ocean-mid-mask (structure)
+  ((mask  uint8  8 :offset 0)
+   (dword uint64   :offset 0)
    )
   :method-count-assert 9
   :size-assert         #x8
   :flag-assert         #x900000008
-  )|#
+  )
   
 
 
@@ -16989,26 +16989,26 @@
 
 
   
-#|(deftype ocean-mid-masks (basic)
+(deftype ocean-mid-masks (basic)
   ((data (inline-array ocean-mid-mask)  :offset-assert 4) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x8
   :flag-assert         #x900000008
-  )|#
+  )
   
 
 
 
   
-#|(deftype ocean-trans-mask (structure)
-  ((mask uint8 4 :offset-assert 0) ;; guessed by decompiler
-   (word int32   :offset-assert 0)
+(deftype ocean-trans-mask (structure)
+  ((mask uint8 4 :offset 0)
+   (word int32   :offset 0)
    )
   :method-count-assert 9
   :size-assert         #x4
   :flag-assert         #x900000004
-  )|#
+  )
   
 
 
@@ -17308,56 +17308,56 @@
 
 
   
-#|(deftype ocean-map (structure)
+(deftype ocean-map (structure)
   ((start-corner        vector              :inline :offset-assert 0)
    (far-color           vector              :inline :offset-assert 16)
    (ocean-colors        ocean-colors                :offset-assert 32)
-   (ocean-mid-indices   ocean-mid-indices           :offset-assert 36) ;; guessed by decompiler
-   (ocean-trans-indices ocean-trans-indices         :offset-assert 40) ;; guessed by decompiler
-   (ocean-near-indices  ocean-near-indices          :offset-assert 44) ;; guessed by decompiler
-   (ocean-mid-masks     ocean-mid-masks             :offset-assert 48) ;; guessed by decompiler
+   (ocean-mid-indices   ocean-mid-indices           :offset-assert 36)
+   (ocean-trans-indices ocean-trans-indices         :offset-assert 40)
+   (ocean-near-indices  ocean-near-indices          :offset-assert 44)
+   (ocean-mid-masks     ocean-mid-masks             :offset-assert 48)
    )
   :method-count-assert 11
   :size-assert         #x34
   :flag-assert         #xb00000034
   (:methods
-    (ocean-map-method-9 () none) ;; 9 ;; (set-height! (_type_ float) none)
-    (ocean-map-method-10 () none) ;; 10 ;; (get-base-height (_type_) float)
+    (ocean-map-method-9 () none) ;; 9
+    (ocean-map-method-10 () none) ;; 10
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype ocean (ocean-map)
-  ((off                symbol                   :offset-assert 52) ;; guessed by decompiler
-   (near-off           symbol                   :offset-assert 56) ;; guessed by decompiler
-   (far-on             symbol                   :offset-assert 60) ;; guessed by decompiler
-   (all-on             symbol                   :offset-assert 64) ;; guessed by decompiler
-   (ocean-facing       uint32                   :offset-assert 68)
-   (mid-mask-ptrs      pointer          36      :offset-assert 72) ;; guessed by decompiler
-   (mid-camera-masks   uint64           36      :offset-assert 216) ;; guessed by decompiler
-   (trans-mask-ptrs    pointer          64      :offset-assert 504) ;; guessed by decompiler
-   (trans-camera-masks ocean-trans-mask 16      :offset-assert 760) ;; guessed by decompiler
-   (trans-temp-masks   uint32           16      :offset-assert 824) ;; guessed by decompiler
-   (haze-lights        haze-lights      :inline :offset-assert 896)
-   (near-mask-indices  uint16           16      :offset-assert 1020) ;; guessed by decompiler
-   (mid-minx           uint8                    :offset-assert 1052)
-   (mid-maxx           uint8                    :offset-assert 1053)
-   (mid-minz           uint8                    :offset-assert 1054)
-   (mid-maxz           uint8                    :offset-assert 1055)
-   (near-minx          uint8                    :offset-assert 1056)
-   (near-maxx          uint8                    :offset-assert 1057)
-   (near-minz          uint8                    :offset-assert 1058)
-   (near-maxz          uint8                    :offset-assert 1059)
-   (temp-minx          uint8                    :offset-assert 1060)
-   (temp-maxx          uint8                    :offset-assert 1061)
-   (temp-minz          uint8                    :offset-assert 1062)
-   (temp-maxz          uint8                    :offset-assert 1063)
-   (tex1               uint64                   :offset-assert 1064) ;; gs-tex1
-   (tex1-near          uint64                   :offset-assert 1072) ;; gs-tex1
-   (wait-to-vu0        uint32                   :offset-assert 1080)
+(deftype ocean (ocean-map)
+  ((off                symbol                   :offset 52)
+   (near-off           symbol                   :offset 56)
+   (far-on             symbol                   :offset 60)
+   (all-on             symbol                   :offset 64)
+   (ocean-facing       uint32                   :offset 68)
+   (mid-mask-ptrs      pointer          36      :offset 72)
+   (mid-camera-masks   uint64           36      :offset 224)
+   (trans-mask-ptrs    pointer          64      :offset 512)
+   (trans-camera-masks ocean-trans-mask 16 :inline :offset 768)
+   (trans-temp-masks   uint32           16      :offset 832)
+   (haze-lights        haze-lights      :inline :offset 896)
+   (near-mask-indices  uint16           16      :offset 1020)
+   (mid-minx           uint8                    :offset 1052)
+   (mid-maxx           uint8                    :offset 1053)
+   (mid-minz           uint8                    :offset 1054)
+   (mid-maxz           uint8                    :offset 1055)
+   (near-minx          uint8                    :offset 1056)
+   (near-maxx          uint8                    :offset 1057)
+   (near-minz          uint8                    :offset 1058)
+   (near-maxz          uint8                    :offset 1059)
+   (temp-minx          uint8                    :offset 1060)
+   (temp-maxx          uint8                    :offset 1061)
+   (temp-minz          uint8                    :offset 1062)
+   (temp-maxz          uint8                    :offset 1063)
+   (tex1               uint64                   :offset 1064)
+   (tex1-near          uint64                   :offset 1072)
+   (wait-to-vu0        uint32                   :offset 1080)
    )
   :method-count-assert 84
   :size-assert         #x43c
@@ -17434,10 +17434,10 @@
     (ocean-method-79 () none) ;; 79 ;; (ocean-method-79 (_type_ (pointer rgba)) none)
     (ocean-method-80 () none) ;; 80 ;; (ocean-method-80 (_type_ dma-buffer) none)
     (ocean-method-81 () none) ;; 81 ;; (draw-envmap-debug (_type_ dma-buffer) none)
-    (ocean-method-82 () none) ;; 82 ;; (ocean-method-82 (_type_ dma-buffer float) int)
-    (ocean-method-83 () none) ;; 83 ;; (ocean-method-83 (_type_ dma-buffer sky-upload-data vector4w float) none)
+    (ocean-method-82 () none) ;; 82
+    (ocean-method-83 () none) ;; 83
     )
-  )|#
+  )
   
 
 
@@ -53096,7 +53096,7 @@
 (define-extern *ocean-near-indices-atoll* ocean-near-indices)
 (define-extern *ocean-trans-indices-atoll* ocean-trans-indices)
 (define-extern *ocean-mid-indices-atoll* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-atoll* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-atoll* ocean-mid-masks)
 (define-extern *ocean-map-atoll* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -54024,7 +54024,7 @@
 (define-extern *ocean-near-indices-canspar* ocean-near-indices)
 (define-extern *ocean-trans-indices-canspar* ocean-trans-indices)
 (define-extern *ocean-mid-indices-canspar* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-canspar* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-canspar* ocean-mid-masks)
 (define-extern *ocean-map-canspar* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -54254,7 +54254,7 @@
 (define-extern *ocean-near-indices-cliffs* ocean-near-indices)
 (define-extern *ocean-trans-indices-cliffs* ocean-trans-indices)
 (define-extern *ocean-mid-indices-cliffs* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-cliffs* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-cliffs* ocean-mid-masks)
 (define-extern *ocean-map-cliffs* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55470,7 +55470,7 @@
 (define-extern *ocean-near-indices-docks* ocean-near-indices)
 (define-extern *ocean-trans-indices-docks* ocean-trans-indices)
 (define-extern *ocean-mid-indices-docks* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-docks* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-docks* ocean-mid-masks)
 (define-extern *ocean-map-docks* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55662,7 +55662,7 @@
 (define-extern *ocean-near-indices-kras* ocean-near-indices)
 (define-extern *ocean-trans-indices-kras* ocean-trans-indices)
 (define-extern *ocean-mid-indices-kras* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-kras* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-kras* ocean-mid-masks)
 (define-extern *ocean-map-kras* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55746,7 +55746,7 @@
 (define-extern *ocean-near-indices-drome* ocean-near-indices)
 (define-extern *ocean-trans-indices-drome* ocean-trans-indices)
 (define-extern *ocean-mid-indices-drome* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-drome* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-drome* ocean-mid-masks)
 (define-extern *ocean-map-drome* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55757,7 +55757,7 @@
 (define-extern *ocean-near-indices-desisle* ocean-near-indices)
 (define-extern *ocean-trans-indices-desisle* ocean-trans-indices)
 (define-extern *ocean-mid-indices-desisle* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-desisle* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-desisle* ocean-mid-masks)
 (define-extern *ocean-map-desisle* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55892,7 +55892,7 @@
 (define-extern *ocean-near-indices-desert* ocean-near-indices) ;; ocean-near-indices
 (define-extern *ocean-trans-indices-desert* ocean-trans-indices) ;; ocean-trans-indices
 (define-extern *ocean-mid-indices-desert* ocean-mid-indices) ;; ocean-mid-indices
-#|(define-extern *ocean-mid-masks-desert* ocean-mid-masks)|# ;; ocean-mid-masks
+(define-extern *ocean-mid-masks-desert* ocean-mid-masks)
 (define-extern *ocean-map-desert* object) ;; ocean-map
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -56090,7 +56090,7 @@
 (define-extern *ocean-near-indices-haven* ocean-near-indices)
 (define-extern *ocean-trans-indices-haven* ocean-trans-indices)
 (define-extern *ocean-mid-indices-haven* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-haven* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-haven* ocean-mid-masks)
 (define-extern *ocean-map-haven* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -56162,7 +56162,7 @@
 (define-extern *ocean-near-indices-havjung* ocean-near-indices)
 (define-extern *ocean-trans-indices-havjung* ocean-trans-indices)
 (define-extern *ocean-mid-indices-havjung* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-havjung* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-havjung* ocean-mid-masks)
 (define-extern *ocean-map-havjung* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -56448,7 +56448,7 @@
 (define-extern *ocean-near-indices-jungle* ocean-near-indices)
 (define-extern *ocean-trans-indices-jungle* ocean-trans-indices)
 (define-extern *ocean-mid-indices-jungle* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-jungle* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-jungle* ocean-mid-masks)
 (define-extern *ocean-map-jungle* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -56622,7 +56622,7 @@
 (define-extern *ocean-near-indices-kcross* ocean-near-indices)
 (define-extern *ocean-trans-indices-kcross* ocean-trans-indices)
 (define-extern *ocean-mid-indices-kcross* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-kcross* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-kcross* ocean-mid-masks)
 (define-extern *ocean-map-kcross* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -58899,7 +58899,7 @@
 (define-extern *ocean-near-indices-spargus* ocean-near-indices)
 (define-extern *ocean-trans-indices-spargus* ocean-trans-indices)
 (define-extern *ocean-mid-indices-spargus* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-spargus* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-spargus* ocean-mid-masks)
 (define-extern *ocean-map-spargus* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -58942,7 +58942,7 @@
 (define-extern *ocean-near-indices-temple* ocean-near-indices)
 (define-extern *ocean-trans-indices-temple* ocean-trans-indices)
 (define-extern *ocean-mid-indices-temple* ocean-mid-indices)
-#|(define-extern *ocean-mid-masks-temple* ocean-mid-masks)|#
+(define-extern *ocean-mid-masks-temple* ocean-mid-masks)
 (define-extern *ocean-map-temple* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
