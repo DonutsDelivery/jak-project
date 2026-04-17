@@ -60477,6 +60477,9 @@
 (define-extern medius-universe-variable-information-response object)
 (define-extern medius-server-authentication-response object)
 (define-extern string-menu object)
+(define-extern sky-color-day object)
+(define-extern shadow-vu1-constants object)
+(define-extern sp-field-init-spec object)
 
 ;; bubbles-path stub — entity-table references it
 (deftype bubbles-path (process)
