@@ -88,6 +88,13 @@ Per decomp run it tells you:
   (LIVE vs commented) in jakx all-types.gc, decomp output, and checks
   jak3/jak2 for a copy-port source. Auto-invoked from run.sh when decomp
   fatal-crashes so agents 1/2 land on triage info, not just a log tail.
+- `field_drift_scan.py` — ranks the 933 deftypes active in both current
+  `all-types.gc` and the decompiler regen but with differing bodies. Classifies
+  each as `clean-methods` (return/arg types only — lowest effort), `size-change`
+  (layout changed), `multi`, or `methods-restructure`. Scores by
+  `4·failing_refs + all_refs − complexity_penalty`. Writes
+  `.jakx_watch/field_drift_queue.md`; the `clean-methods` sub-list is the
+  batch return-type-sweep queue for Agent 1.
 - `migration_candidates.py` — audits `goal_src/jakx/engine/**/*.gc` hand-ports
   against current decomp state. A hand-port is a deletion candidate when its
   decomp is real-clean / real-partial. Flags update-from-decomp append-bug
@@ -117,6 +124,7 @@ python3 scripts/jakx_watch/measure.py \
 - `.jakx_watch/history/latest.json` — most recent snapshot
 - `.jakx_watch/status.md`           — human-readable latest summary
 - `.jakx_watch/activation_queue.md` — ranked queue of activation candidates
+- `.jakx_watch/field_drift_queue.md`     — ranked field-drift deftype update queue
 - `.jakx_watch/migration_candidates.md` — ranked hand-ports ready for deletion
 - `.jakx_watch/discovery_queue.md`       — ranked pure-discovery deftype queue
 - `.jakx_watch/mips2c_queue.md`          — ranked jak3→jakx port queue

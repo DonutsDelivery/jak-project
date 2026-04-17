@@ -525,6 +525,37 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
                 lines.append(f"    {n}")
             lines.append(f"    ... (see types_drift output for full list of {td['discovery_count']})")
 
+    # ===== optional: field-drift queue =====
+    fdq = snap.get("field_drift_queue")
+    if fdq:
+        lines.append("")
+        lines.append("## field-drift queue (deftypes active in both cur+regen but body differs)")
+        tiers = fdq.get("tiers", {})
+        lines.append(
+            f"  total: {fdq.get('total', 0)}  ·  "
+            f"clean-methods={tiers.get('clean-methods', 0)}  "
+            f"size-change={tiers.get('size-change', 0)}  "
+            f"multi={tiers.get('multi', 0)}  "
+            f"other={tiers.get('methods-restructure', 0) + tiers.get('other', 0)}  ·  "
+            f"full list: .jakx_watch/field_drift_queue.md"
+        )
+        clean = fdq.get("top_clean_methods") or []
+        if clean:
+            lines.append("  top clean-methods (return-type-sweep targets — lowest effort):")
+            for i, e in enumerate(clean[:5], 1):
+                lines.append(
+                    f"    {i:>2}. score={e['score']:>6}  {e['name']:<30}  "
+                    f"fref={e['failing_refs']}  aref={e['all_refs']}"
+                )
+        heavy = fdq.get("top_heavy") or []
+        if heavy:
+            lines.append("  top multi/size-change (high-impact structural updates):")
+            for i, e in enumerate(heavy[:3], 1):
+                lines.append(
+                    f"    {i:>2}. score={e['score']:>6}  {e['name']:<30}  "
+                    f"fref={e['failing_refs']}  [{e['tier']}]"
+                )
+
     # ===== optional: static-data decomp bug (when scanner ran) =====
     sdb = snap.get("static_data_bug")
     if sdb:

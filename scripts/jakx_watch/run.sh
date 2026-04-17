@@ -144,6 +144,11 @@ if [ -f "$NEW_TYPES" ]; then
     echo "" | tee -a "$RUN_LOG"
     echo "-- rank activation candidates --" | tee -a "$RUN_LOG"
     python3 scripts/jakx_watch/rank_discovery.py 2>&1 | tee -a "$RUN_LOG"
+
+    echo "" | tee -a "$RUN_LOG"
+    echo "-- field-drift queue --" | tee -a "$RUN_LOG"
+    python3 scripts/jakx_watch/field_drift_scan.py \
+        --regen "$NEW_TYPES" 2>&1 | tee -a "$RUN_LOG" || true
 fi
 
 # --- static-data decomp bug scanner ---
