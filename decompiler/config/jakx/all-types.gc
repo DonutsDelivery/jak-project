@@ -28599,7 +28599,7 @@
   (:methods
     (new "Allocate a process-tree with the kernel clock." (symbol type string) _type_) ;; 0
     (activate "Move a process from dead to active, moving it to the given tree." (_type_ process-tree string pointer) process-tree) ;; 9
-    (deactivate "Make a process dead, clean it up, remove it from the active pool, and return to dead pool." (_type_) none) ;; 10
+    (deactivate "Make a process dead, clean it up, remove it from the active pool, and return to dead pool." (_type_) int) ;; 10
     (init-from-entity! (_type_ entity-actor) object) ;; 11
     (run-logic? "Should this process be run? Checked by execute-process-tree." (_type_) symbol) ;; 12
     (process-tree-method-13 () none) ;; 13
