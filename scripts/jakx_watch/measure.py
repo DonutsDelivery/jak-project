@@ -506,11 +506,35 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
                 lines.append(f"    {n}")
             if len(td["activation_candidates"]) > 20:
                 lines.append(f"    ... +{len(td['activation_candidates']) - 20} more")
+        # RANKED activation queue (from rank_discovery.py).
+        ranked = td.get("ranked_discovery", [])
+        if ranked:
+            lines.append("  RANKED ACTIVATION QUEUE (top 15 — full list: .jakx_watch/activation_queue.md):")
+            lines.append(f"    {'#':>2}  {'T':>1}  {'name':<40}  {'parent':<22} refs  j3  par  score")
+            for i, r in enumerate(ranked[:15], 1):
+                j3 = "✓" if r.get("in_jak3") else " "
+                par = "✓" if r.get("parent_ok") else " "
+                lines.append(
+                    f"    {i:>2}  {r.get('tier','?'):>1}  {r['name']:<40}  "
+                    f"{r.get('parent',''):<22} {r.get('refs',0):>3}  {j3:>2}  {par:>3}  {r.get('score',0):>5}"
+                )
+            lines.append(f"    (generate stubs: python3 scripts/jakx_watch/emit_stub.py --top 30 > stubs.gc)")
         if td.get("discovery_sample"):
             lines.append("  DISCOVERY SAMPLE (regen found, not in current — add deftype):")
             for n in td["discovery_sample"][:10]:
                 lines.append(f"    {n}")
             lines.append(f"    ... (see types_drift output for full list of {td['discovery_count']})")
+
+    # ===== optional: static-data decomp bug (when scanner ran) =====
+    sdb = snap.get("static_data_bug")
+    if sdb:
+        lines.append("")
+        lines.append("## static-data decomp bug — (define *X* <static-data LN>) fails goalc")
+        lines.append(f"  occurrences: {sdb['total']} across {sdb['files']} files")
+        lines.append(f"  top offenders:")
+        for name, c in sdb.get("top_files", [])[:10]:
+            lines.append(f"    {c:>4}  {name}")
+        lines.append("  → decompiler C++ patch target: emit `(define *X* ...)` with 2 args, not 3")
 
     # ===== optional: offline-test split (when jakx corpus exists) =====
     ot = snap.get("offline_test")

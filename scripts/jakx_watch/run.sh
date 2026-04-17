@@ -123,6 +123,22 @@ if [ -f "$NEW_TYPES" ]; then
     python3 scripts/jakx_watch/types_drift.py \
         --current "$ROOT/decompiler/config/jakx/all-types.gc" \
         --regen   "$NEW_TYPES" 2>&1 | tee -a "$RUN_LOG"
+
+    echo "" | tee -a "$RUN_LOG"
+    echo "-- rank activation candidates --" | tee -a "$RUN_LOG"
+    python3 scripts/jakx_watch/rank_discovery.py 2>&1 | tee -a "$RUN_LOG"
+fi
+
+# --- static-data decomp bug scanner ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- static-data decomp bug scan --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/static_data_scan.py 2>&1 | tee -a "$RUN_LOG" || true
+
+# --- auto-seed _REF.gc for newly-real-clean files (no-op if coverage complete) ---
+if [ -f "$ROOT/test/offline/config/jakx/config.jsonc" ]; then
+    echo "" | tee -a "$RUN_LOG"
+    echo "-- auto-seed _REF.gc for new real-clean files --" | tee -a "$RUN_LOG"
+    python3 scripts/jakx_watch/seed_refs.py 2>&1 | tee -a "$RUN_LOG" || true
 fi
 
 # --- offline-test pass (only if jakx corpus exists) ---
