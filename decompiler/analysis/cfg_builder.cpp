@@ -29,7 +29,9 @@ std::pair<BranchElement*, Form*> get_condition_branch_as_vector(Form* in) {
   //  If this changes, this can be fixed here, rather than refactoring the whole thing.
   if (in->size() > 1) {
     auto irb = dynamic_cast<BranchElement*>(in->back());
-    ASSERT(irb);
+    if (!irb) {
+      return std::make_pair(nullptr, nullptr);
+    }
     return std::make_pair(irb, in);
   }
   return std::make_pair(nullptr, nullptr);
