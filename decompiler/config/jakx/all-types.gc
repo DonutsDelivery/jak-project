@@ -1575,6 +1575,7 @@
 (declare-type curve-color-fast curve-color)
 (declare-type curve2d basic)
 (declare-type curve2d-fast curve2d)
+(declare-type curve2d-piecewise curve2d)
 
 (define-extern *range-jakxexplo-color* curve-color-fast)
 (define-extern *range-jakxexplo-alpha* curve2d-fast)
@@ -5419,7 +5420,7 @@
 (define-extern spt-func-part-oil-emit-sparkle function)
 (define-extern check-scorp-shell-level1 function) ;; (function sparticle-system sparticle-cpuinfo vector none)
 (define-extern check-scorp-shell-level2 function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern *curve-toad-linear-up-red* object) ;; curve2d-piecewise
+(define-extern *curve-toad-linear-up-red* curve2d-piecewise)
 (define-extern *trail-color-curve-grenade-yellow* curve-color-fast)
 (define-extern *curve-grenade-linear-toad-trail* curve2d-fast) ;; curve2d-fast
 (define-extern *grenade-1-trail* object)
