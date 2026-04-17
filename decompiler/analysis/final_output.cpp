@@ -479,6 +479,16 @@ std::string write_from_top_level_form(Form* top_form,
                      {DerefTokenMatcher::string("heap-base")}),
       Matcher::any());
 
+  // (set! (-> SYM FIELD) VALUE) — generic single-hop deref-set with a named
+  // field on a plain symbol (global or type name). Narrow enough to stay safe
+  // (we don't match arbitrary deref targets or multi-hop chains), broad enough
+  // to cover patterns like (set! (-> *texture-relocate-later* memcpy) #f),
+  // (set! (-> *profile-array* data 0) ...), (set! (-> *matrix-engine* length) 0).
+  Matcher sym_field_set_matcher = Matcher::set(
+      Matcher::deref(Matcher::any_symbol(), false,
+                     {DerefTokenMatcher::any_string()}),
+      Matcher::any());
+
   for (auto& x : forms) {
     bool something_matched = false;
     Form f;
@@ -663,6 +673,15 @@ std::string write_from_top_level_form(Form* top_form,
     if (!something_matched) {
       auto heap_base_match_result = match(heap_base_setter_matcher, &f);
       if (heap_base_match_result.matched) {
+        something_matched = true;
+        result += pretty_print::to_string(x->to_form(env));
+        result += "\n\n";
+      }
+    }
+
+    if (!something_matched) {
+      auto sym_field_match_result = match(sym_field_set_matcher, &f);
+      if (sym_field_match_result.matched) {
         something_matched = true;
         result += pretty_print::to_string(x->to_form(env));
         result += "\n\n";
