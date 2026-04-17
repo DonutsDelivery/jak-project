@@ -47,6 +47,8 @@
   )
 
 
+;; og:preserve-this jakx dictionary layout does not have an inline `data` array
+;; of (id, text); strings live in dic-data, so we cannot walk them per-entry here.
 (defmethod mem-usage ((this game-text-info) (usage memory-usage-block) (flags int))
   (set! (-> usage length) (max 85 (-> usage length)))
   (set! (-> usage data 84 name) "string")
@@ -54,15 +56,6 @@
   (let ((v1-6 (asize-of this)))
     (+! (-> usage data 84 used) v1-6)
     (+! (-> usage data 84 total) (logand -16 (+ v1-6 15)))
-    )
-  (dotimes (s4-0 (-> this length))
-    (set! (-> usage length) (max 85 (-> usage length)))
-    (set! (-> usage data 84 name) "string")
-    (+! (-> usage data 84 count) 1)
-    (let ((v1-18 (asize-of (-> this data s4-0 text))))
-      (+! (-> usage data 84 used) v1-18)
-      (+! (-> usage data 84 total) (logand -16 (+ v1-18 15)))
-      )
     )
   this
   )
@@ -156,6 +149,13 @@
 
 ;; og:preserve-this extracted implementation out so that callers of `lookup-text!` were uneffected
 ;; this implementation is different from the original (has fallback text lookup)
+;;
+;; Decoder for jakx's dictionary text layout. Each entry in `text` is an (id, index)
+;; pair sorted by id. `index` points into `text-data`, which stores a length-prefixed
+;; sequence of character indices. Each character index looks up an offset in
+;; `dic-index`, which in turn points into `dic-data` — a byte pool of length-prefixed
+;; per-character strings. Decoded output is written into *expanded-text-line0/1*.
+;; Ported from the decompiled asm in decompiler_out/jakx/text_ir2.asm method 9.
 (define-extern lookup-text-impl! (function game-text-info text-id symbol symbol string))
 (defun lookup-text-impl! ((this game-text-info) (arg0 text-id) (arg1 symbol) (fallback-call? symbol))
   (cond
@@ -171,25 +171,32 @@
        )
      )
     (else
-      (let* ((a1-2 0)
-             (a3-0 (+ (-> this length) 1))
-             (v1-2 (/ (+ a1-2 a3-0) 2))
+      ;; og:preserve-this use raw pointer arithmetic to walk the text array.
+      ;; Indexed field access `(-> this text N id)` produces bad code for
+      ;; :pack-me structs in at least some configurations and segfaults; the
+      ;; MIPS decomp does the same (sll 3 + add + lwu), so we replicate that
+      ;; manually with (&+) and l.wu.
+      (let* ((text-base (the-as (pointer uint8) (-> this text)))
+             (lo 0)
+             (hi (+ (-> this length) 1))
+             (mid (/ (+ lo hi) 2))
+             (prev-mid -1)
+             (arg0-u (the-as uint arg0))
              )
-        (let ((t0-0 -1))
-          (while (and (!= (-> this data v1-2 id) arg0) (!= v1-2 t0-0))
-            (if (< (the-as uint arg0) (the-as uint (-> this data v1-2 id)))
-                (set! a3-0 v1-2)
-                (set! a1-2 v1-2)
-                )
-            (set! t0-0 v1-2)
-            (set! v1-2 (/ (+ a1-2 a3-0) 2))
-            )
+        ;; read id at text + mid*8 + 0
+        (while (and (!= (l.wu (&+ text-base (* mid 8))) arg0-u) (!= mid prev-mid))
+          (if (< arg0-u (the-as uint (l.wu (&+ text-base (* mid 8)))))
+              (set! hi mid)
+              (set! lo mid)
+              )
+          (set! prev-mid mid)
+          (set! mid (/ (+ lo hi) 2))
           )
         (cond
-          ((!= (-> this data v1-2 id) arg0)
+          ((!= (l.wu (&+ text-base (* mid 8))) arg0-u)
            (cond
              (arg1
-               ;; og:preserve-this Added fallback to english is string is not found.
+               ;; og:preserve-this Added fallback to english if string is not found.
                (#if PC_PORT
                  (if (and *fallback-text-lookup?* (not fallback-call?))
                    (aif (lookup-text-impl! *fallback-text* arg0 #t #t)
@@ -199,7 +206,7 @@
                  (the-as string #f))
                )
              (else
-              ;; og:preserve-this Added fallback to english is string is not found.
+              ;; og:preserve-this Added fallback to english if string is not found.
               (#if PC_PORT
                 (if (and *fallback-text-lookup?* (not fallback-call?))
                   (aif (lookup-text-impl! *fallback-text* arg0 #t #t)
@@ -210,11 +217,88 @@
                )
              )
            )
-          ((= (-> this language-id) 7)
-           (convert-korean-text (-> this data v1-2 text))
-           )
           (else
-            (-> this data v1-2 text)
+            ;; match at `mid`. read index at text + mid*8 + 4, then decode from text-data.
+            (let* ((entry-index (the int (l.wu (&+ text-base (+ (* mid 8) 4)))))
+                   (cursor entry-index)
+                   (text-data (-> this text-data))
+                   (dic-index (-> this dic-index))
+                   (dic-data  (-> this dic-data))
+                   (len-byte (the int (-> text-data cursor)))
+                   (korean? #f)
+                   )
+              ;; high bit of the length byte flags korean/wide mode
+              (when (nonzero? (logand len-byte 128))
+                (set! korean? #t)
+                (set! len-byte (logand len-byte #x7f))
+                )
+              (+! cursor 1)
+              ;; length == 127 means multi-byte length: add 0xff chunks, final is the last byte
+              (when (= len-byte 127)
+                (let ((ext (the int (-> text-data cursor))))
+                  (while (= ext 255)
+                    (+! len-byte 255)
+                    (+! cursor 1)
+                    (set! ext (the int (-> text-data cursor)))
+                    )
+                  (+! len-byte ext)
+                  (+! cursor 1)
+                  )
+                )
+              ;; flip the output buffer and pick which one to write into
+              (set! *expand-buf-number* (logxor *expand-buf-number* 1))
+              (let ((out-buf (if (zero? *expand-buf-number*)
+                                 *expanded-text-line0*
+                                 *expanded-text-line1*
+                                 )
+                             )
+                    (out-pos 0)
+                    )
+                (cond
+                  (korean?
+                    ;; korean: each character is a u16 little-endian index
+                    (dotimes (i len-byte)
+                      (let* ((lo-byte (the int (-> text-data (+ cursor (* i 2)))))
+                             (hi-byte (the int (-> text-data (+ cursor (* i 2) 1))))
+                             (ch-idx  (+ lo-byte (shl hi-byte 8)))
+                             (char-off (the int (-> dic-index ch-idx)))
+                             (char-len (the int (-> dic-data char-off)))
+                             )
+                        (dotimes (b char-len)
+                          (set! (-> out-buf data out-pos)
+                                (-> dic-data (+ char-off 1 b)))
+                          (+! out-pos 1)
+                          )
+                        )
+                      )
+                    )
+                  (else
+                    ;; non-korean: each character is a single byte index
+                    (dotimes (i len-byte)
+                      (let* ((ch-idx (the int (-> text-data (+ cursor i))))
+                             (char-off (the int (-> dic-index ch-idx)))
+                             (char-len (the int (-> dic-data char-off)))
+                             )
+                        (dotimes (b char-len)
+                          (set! (-> out-buf data out-pos)
+                                (-> dic-data (+ char-off 1 b)))
+                          (+! out-pos 1)
+                          )
+                        )
+                      )
+                    )
+                  )
+                (set! (-> out-buf data out-pos) (the-as uint 0))
+                (cond
+                  ((= (-> this language-id) 7)
+                   (convert-korean-text out-buf)
+                   )
+                  (else
+                    out-buf
+                    )
+                  )
+                )
+              )
             )
           )
         )

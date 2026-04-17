@@ -1623,22 +1623,36 @@
 
 ;; DECOMP BEGINS
 
+;; og:preserve-this jakx uses a dictionary layout for game-text-info
+;; (dic-index / dic-data / text / text-data), NOT jak3's inline (id, text) array.
 (deftype game-text (structure)
-  ((id    text-id)
-   (text  string)
+  ((id     text-id  :offset-assert 0)
+   (index  uint32   :offset-assert 4)
    )
   :pack-me
+  :size-assert #x8
   )
 
 
 (deftype game-text-info (basic)
-  ((length       int32)
-   (language-id  int32)
-   (group-name   string)
-   (data         game-text  :inline :dynamic)
+  ((length       int32                 :offset-assert 4)
+   (language-id  int32                 :offset-assert 8)
+   (group-name   string                :offset-assert 12)
+   (dic-index    (pointer uint32)      :offset-assert 16)
+   (dic-data     (pointer uint8)       :offset-assert 20)
+   (text         (pointer game-text)   :offset-assert 24)
+   (text-data    (pointer uint8)       :offset-assert 28)
    )
+  :size-assert #x20
   (:methods
+    ;; og:preserve-this kept the (text-id) signature used by jakx sources; the
+    ;; authoritative all-types.gc shows (game-text) but since game-text.id is at
+    ;; offset 0 and text-id is uint32, the two are interchangeable at the ABI
+    ;; level (binary search compares the u32 at offset 0 either way).
     (lookup-text! (_type_ text-id symbol) string)
+    (game-text-info-method-10 (_type_ text-id symbol) none)
+    (game-text-info-method-11 (_type_ string) string)
+    (game-text-info-method-12 (_type_) none)
     )
   )
 
