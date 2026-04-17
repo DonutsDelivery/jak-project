@@ -77,8 +77,14 @@ void clean_up_cond_with_else(FormPool& pool, FormElement* ir, const Env& env) {
       continue;
     }
     auto jump_to_next = get_condition_branch(e.condition);
-    ASSERT(jump_to_next.first);
-    ASSERT(jump_to_next.first->op()->branch_delay().kind() == IR2_BranchDelay::Kind::NOP);
+    if (!jump_to_next.first) {
+      lg::error("clean_up_cond_with_else: no branch in entry.condition, skipping");
+      continue;
+    }
+    if (jump_to_next.first->op()->branch_delay().kind() != IR2_BranchDelay::Kind::NOP) {
+      lg::error("clean_up_cond_with_else: non-NOP branch delay, skipping");
+      continue;
+    }
     // patch the branch to next with a condition.
     auto replacement = jump_to_next.first->op()->get_condition_as_form(pool, env);
     replacement->invert();
@@ -86,9 +92,15 @@ void clean_up_cond_with_else(FormPool& pool, FormElement* ir, const Env& env) {
 
     // check the jump at the end of a block.
     auto jump_to_end = get_condition_branch(e.body);
-    ASSERT(jump_to_end.first);
-    ASSERT(jump_to_end.first->op()->branch_delay().kind() == IR2_BranchDelay::Kind::NOP);
-    ASSERT(jump_to_end.first->op()->condition().kind() == IR2_Condition::Kind::ALWAYS);
+    if (!jump_to_end.first) {
+      lg::error("clean_up_cond_with_else: no branch at end of entry.body, skipping");
+      continue;
+    }
+    if (jump_to_end.first->op()->branch_delay().kind() != IR2_BranchDelay::Kind::NOP ||
+        jump_to_end.first->op()->condition().kind() != IR2_Condition::Kind::ALWAYS) {
+      lg::error("clean_up_cond_with_else: unexpected end-of-body branch shape, skipping");
+      continue;
+    }
 
     // if possible, we just want to remove this from the sequence its in.
     // but sometimes there's a case with nothing in it so there is no sequence.
