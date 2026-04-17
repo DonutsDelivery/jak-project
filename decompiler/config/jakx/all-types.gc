@@ -29208,15 +29208,15 @@
 ;; ---pov-camera-h:pov-camera-flag
 
   
-#|(deftype pov-camera (process-drawable)
-  ((flags               pov-camera-flag  :offset-assert 248) ;; pov-camera-flag
-   (debounce-start-time time-frame       :offset-assert 256) ;; time-frame
-   (notify-handle       handle           :offset-assert 264) ;; handle
-   (anim-name           string           :offset-assert 272) ;; guessed by decompiler
-   (command-list        pair             :offset-assert 276) ;; guessed by decompiler
-   (mask-to-clear       process-mask     :offset-assert 280) ;; guessed by decompiler
-   (music-volume-movie  float            :offset-assert 284)
-   (sfx-volume-movie    float            :offset-assert 288)
+(deftype pov-camera (process-drawable)
+  ((flags               pov-camera-flag  :offset 248)
+   (debounce-start-time time-frame       :offset 256)
+   (notify-handle       handle           :offset 264)
+   (anim-name           string           :offset 272)
+   (command-list        pair             :offset 276)
+   (mask-to-clear       process-mask     :offset 280)
+   (music-volume-movie  float            :offset 284)
+   (sfx-volume-movie    float            :offset 288)
    )
   :method-count-assert 60
   :size-assert         #x124
@@ -29233,7 +29233,7 @@
     (pov-camera-method-58 () none) ;; 58
     (pov-camera-method-59 () none) ;; 59
     )
-  )|#
+  )
   
 
 
@@ -51325,16 +51325,16 @@
 
 
   
-#|(deftype viewer (process-drawable)
-  ((janim art-joint-anim  :offset-assert 248) ;; guessed by decompiler
+(deftype viewer (process-drawable)
+  ((janim art-joint-anim  :offset 248)
    )
   :method-count-assert 50
   :size-assert         #xfc
   :flag-assert         #x32007000fc
   (:states
-    viewer-process ;; associated process guessed by decompiler, old: (state viewer)
+    viewer-process
     )
-  )|#
+  )
   
 
 
@@ -51355,27 +51355,20 @@
 
 
   
-#|(deftype save-memcard (process)
-  ((name basic  :offset-assert 4)
+(deftype save-memcard (process)
+  ((save-name-str basic  :offset 144)
    )
   :method-count-assert 19
   :size-assert         #x94
   :flag-assert         #x1300100094
   (:methods
-    (save-memcard-method-9 () none) ;; 9
-    (save-memcard-method-10 () none) ;; 10
-    (save-memcard-method-11 () none) ;; 11
-    (save-memcard-method-12 () none) ;; 12
-    (save-memcard-method-13 () none) ;; 13
     (save-memcard-method-14 () none) ;; 14
+    (save-memcard-method-15 () none) ;; 15
+    (save-memcard-method-16 () none) ;; 16
+    (save-memcard-method-17 () none) ;; 17
+    (save-memcard-method-18 () none) ;; 18
     )
-  (:state-methods
-    create-file ;; 15
-    save-account ;; 18
-    error-error ;; 16
-    done-done ;; 17
-    )
-  )|#
+  )
   
 
 
