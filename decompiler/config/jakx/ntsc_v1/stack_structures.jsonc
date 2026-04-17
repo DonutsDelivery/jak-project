@@ -1,3 +1,19 @@
 {
-  // "quaternion-smooth-seek!": [[16, ["inline-array", "quaternion", 2]]],
+  "doppler-pitch-shift": [[16, ["inline-array", "vector", 2]]],
+  "evaluate-color-curve-fast": [[16, "vector"]],
+  "evaluate-curve-fast": [[16, "vector"], [32, "vector"]],
+  "init-for-transform": [[192, "vector"]],
+  "matrix<-parented-transformq!": [[16, "vector"]],
+  "nearest-dist2-between-moving-points": [[16, ["inline-array", "vector", 2]]],
+  "quaternion-smooth-seek!": [[16, ["inline-array", "quaternion", 2]]],
+  "rotate-vector-to-vector": [[16, "quaternion"]],
+  "slave-set-rotation!": [[96, "vector"], [112, "matrix"], [176, "vector"]],
+  "sound-name->string": [[16, ["array", "uint8", 16]]],
+  "string->sound-name": [[16, ["array", "sound-name", 1]]],
+  "teleport-camera-by-pos": [[16, "vector"]],
+  "v-slrp2!": [[32, "vector"], [64, "matrix"]],
+  "v-slrp3!": [[32, "vector"]],
+  "vector-circle-tangent-new": [[32, "vector"], [48, "vector"]],
+  "vector-line-xz-distance-point!": [[16, "matrix"]],
+  "vector-segment-xz-distance-point!": [[16, "matrix"]]
 }
