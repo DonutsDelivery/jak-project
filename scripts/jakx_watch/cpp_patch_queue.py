@@ -87,6 +87,9 @@ PATTERNS: list[tuple[str, int, str, re.Pattern]] = [
     ("defmethod-empty-args", 1,
      "(defmethod NAME () ...) — arg types not inferred (signature missing)",
      re.compile(r"^\(defmethod\s+\S+\s+\(\)\s", re.M)),
+    ("lambda-at-label", 3,
+     "(apply <lambda at LN>) — lambda placeholder in static data; goalc reader rejects angle brackets",
+     re.compile(r"<lambda\s+at\s+L\d+>")),
 ]
 
 
@@ -120,7 +123,10 @@ def scan(decomp_dir: Path) -> dict:
         for pid, sev, desc, _ in PATTERNS
     }
     for fp in sorted(decomp_dir.glob("*_disasm.gc")):
-        text = _strip_diagnostic_comments(fp.read_text(errors="replace"))
+        try:
+            text = _strip_diagnostic_comments(fp.read_text(errors="replace"))
+        except OSError:
+            continue
         stem = fp.name[: -len("_disasm.gc")]
         for pid, sev, desc, pat in PATTERNS:
             hits = pat.findall(text)
