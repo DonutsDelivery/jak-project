@@ -205,9 +205,16 @@
     (remove-setting! 'allow-timeout)
     (remove-setting! 'dialog-volume)
     (suspend-for (seconds 2))
-    (if (zero? (the-as int (title-menu)))
-        (go-virtual idle)
-        )
+    (let ((selected (the-as int (title-menu))))
+      ;; jakx: skip the progress menu intermediate and launch the game
+      ;; directly on Start Game (selected=0). This is the jakx-equivalent
+      ;; of jak3's progress-pc.gc:288 initialize! call that normally
+      ;; happens after a save-file confirmation screen.
+      (when (zero? selected)
+        (initialize! *game-info* 'game
+                     (the-as game-save #f)
+                     (the-as string #f)
+                     (the-as resetter-spec #f))))
     (sleep-code)
     )
   :post (-> (method-of-type title-control startup) post)
