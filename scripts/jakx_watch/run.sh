@@ -179,6 +179,11 @@ echo "" | tee -a "$RUN_LOG"
 echo "-- mips2c queue --" | tee -a "$RUN_LOG"
 python3 scripts/jakx_watch/mips2c_candidates.py 2>&1 | tail -40 | tee -a "$RUN_LOG" || true
 
+# --- C++ decompiler patch queue (malformed emission clusters) ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- C++ patch queue --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/cpp_patch_queue.py 2>&1 | tee -a "$RUN_LOG" || true
+
 # --- auto-seed _REF.gc for newly-real-clean files (no-op if coverage complete) ---
 if [ -f "$ROOT/test/offline/config/jakx/config.jsonc" ]; then
     echo "" | tee -a "$RUN_LOG"

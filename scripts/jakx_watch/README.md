@@ -77,6 +77,12 @@ Per decomp run it tells you:
   ranked per-function port list (jak3 fn → missing in jakx_functions/). Shows
   block count (porting complexity proxy), whether any split-failed caller
   depends on the function, and caller-file detail for the top-3.
+- `cpp_patch_queue.py` — cross-file pattern clustering for C++ decompiler-emitter
+  bugs. Probes ~12 known malformed emissions (static-data variants, escaped
+  `<uninitialized>` tokens, leaked raw asm ops, empty defmethod arg lists,
+  etc.) and ranks by `count × severity`. Writes `.jakx_watch/cpp_patch_queue.md`
+  — each row is a **single emitter patch** that, once fixed, clears the whole
+  cluster.
 - `type_ref_finder.py` — triage helper. `--auto` scrapes the FAILED
   status.md banner for the unknown type, then finds every reference
   (LIVE vs commented) in jakx all-types.gc, decomp output, and checks
@@ -114,6 +120,7 @@ python3 scripts/jakx_watch/measure.py \
 - `.jakx_watch/migration_candidates.md` — ranked hand-ports ready for deletion
 - `.jakx_watch/discovery_queue.md`       — ranked pure-discovery deftype queue
 - `.jakx_watch/mips2c_queue.md`          — ranked jak3→jakx port queue
+- `.jakx_watch/cpp_patch_queue.md`       — ranked C++ decompiler-emitter patches
 - `.jakx_watch/run-TS.log`          — combined stdout+stderr of a run.sh invocation
 - `log/decompiler.*.log`            — native decompiler logs (shared dir)
 - `test/decompiler/reference/jakx/` — `_REF.gc` baseline corpus (checked in)

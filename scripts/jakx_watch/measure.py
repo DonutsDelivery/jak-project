@@ -649,6 +649,26 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
             lines.append("  queue empty — all regen types already present in "
                          "jakx all-types.gc (see activation_queue.md)")
 
+    # ===== optional: cpp patch queue (malformed emission clusters) =====
+    cq = snap.get("cpp_patch_queue")
+    if cq:
+        lines.append("")
+        lines.append("## C++ patch queue (decompiler emission fixes)")
+        lines.append(
+            f"  non-zero: {cq.get('non_zero', 0)} / {cq.get('probed', 0)} "
+            f"patterns  ·  full list: .jakx_watch/cpp_patch_queue.md"
+        )
+        top = cq.get("top") or []
+        if top:
+            lines.append("  top 5 patterns (one C++ patch clears ALL hits):")
+            for i, e in enumerate(top[:5], 1):
+                lines.append(
+                    f"    {i:>2}. score={e.get('score', 0):>7}  "
+                    f"sev={e.get('severity')}  "
+                    f"{e['id']:<24}  count={e.get('count', 0):>5}  "
+                    f"files={e.get('files', 0):>3}"
+                )
+
     # ===== optional: mips2c queue (ranked jak3→jakx ports) =====
     mq = snap.get("mips2c_queue")
     if mq:

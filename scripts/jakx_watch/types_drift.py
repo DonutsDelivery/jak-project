@@ -33,14 +33,40 @@ ROOT = Path(__file__).resolve().parents[2]
 LATEST = ROOT / ".jakx_watch" / "history" / "latest.json"
 
 # (deftype NAME ... )   — capture name + whole body up to balanced paren.
-# Simple: lex by line, track paren depth.
-RE_DEFTYPE_START = re.compile(r"^\s*(?:;;\s*)?\(deftype\s+([\w<>!?:\-\+\*/=]+)\s*")
+# Block-aware parser mirrors scripts/jakx_watch/rank_discovery.py so a type
+# `#| (deftype X ...) |#`-commented in jakx is recognized as PRESENT (just
+# inactive) rather than reported as DISCOVERY. Not fixing this was leading
+# status.md to claim "459 discovery" when the real count is 0.
+RE_DEFTYPE_START = re.compile(
+    r"^\s*(?:#\|\s*)?(?:;;\s*)?\(deftype\s+([\w<>!?:\-\+\*/=]+)\s*"
+)
 
 
 def parse_deftypes(text: str) -> dict[str, dict]:
-    """Returns { name: {"commented": bool, "body": str, "digest": short-hash} }."""
+    """Returns {name: {commented, block_commented, body, digest, first_line}}.
+
+    Handles both line-comments (`;; (deftype ...)`) and block-comments
+    (`#| (deftype ...) |#`). A type appearing in either form is considered
+    PRESENT (distinct from DISCOVERY, which is "nowhere in the file").
+    """
     out: dict[str, dict] = {}
     lines = text.splitlines()
+
+    # First pass: mark every line that falls inside a `#| ... |#` block.
+    in_block = [False] * len(lines)
+    block = False
+    for idx, line in enumerate(lines):
+        if "#|" in line and not block:
+            block = True
+            in_block[idx] = True
+        elif block:
+            in_block[idx] = True
+            if "|#" in line:
+                block = False
+        if "#|" in line and "|#" in line.split("#|", 1)[1]:
+            block = False
+
+    # Second pass: extract each deftype body.
     i = 0
     while i < len(lines):
         line = lines[i]
@@ -50,15 +76,13 @@ def parse_deftypes(text: str) -> dict[str, dict]:
             continue
         name = m.group(1)
         commented = ";;" in line[: line.find("(deftype")]
-        # Track paren balance from here. If commented, we have to strip `;;` prefix
-        # for each subsequent line to compute balance.
+        block_commented = in_block[i]
         depth = 0
         start_i = i
         body_lines = []
         while i < len(lines):
             raw = lines[i]
             if commented:
-                # strip leading ";;" (one set)
                 s = re.sub(r"^\s*;;\s?", "", raw)
             else:
                 s = raw
@@ -74,8 +98,17 @@ def parse_deftypes(text: str) -> dict[str, dict]:
             i += 1
         body = "\n".join(body_lines)
         digest = hashlib.sha1(re.sub(r"\s+", " ", body).encode()).hexdigest()[:10]
-        out[name] = {"commented": commented, "body": body, "digest": digest,
-                     "first_line": start_i + 1}
+        prev = out.get(name)
+        this_active = not commented and not block_commented
+        prev_active = prev and not prev["commented"] and not prev["block_commented"]
+        if prev is None or (this_active and not prev_active):
+            out[name] = {
+                "commented": commented,
+                "block_commented": block_commented,
+                "body": body,
+                "digest": digest,
+                "first_line": start_i + 1,
+            }
     return out
 
 
@@ -90,17 +123,24 @@ def main():
     cur = parse_deftypes(Path(args.current).read_text(errors="replace"))
     reg = parse_deftypes(Path(args.regen).read_text(errors="replace"))
 
-    cur_active = {n for n, v in cur.items() if not v["commented"]}
-    cur_commented = {n for n, v in cur.items() if v["commented"]}
+    # Active = neither line-commented nor block-commented. Block-commented
+    # types (`#| ... |#`) are COMMENTED, not DISCOVERY.
+    cur_active = {n for n, v in cur.items()
+                  if not v["commented"] and not v.get("block_commented", False)}
+    cur_commented = {n for n, v in cur.items()
+                     if v["commented"] or v.get("block_commented", False)}
+    reg_active = {n for n, v in reg.items() if not v.get("block_commented", False)}
     reg_names = set(reg.keys())
 
-    # Activation candidates: commented in current, emitted as active in regen.
-    activation_candidates = sorted(cur_commented & reg_names)
+    # Activation candidates: commented (line OR block) in current, emitted
+    # as ACTIVE in regen. These are the immediate uncomment wins.
+    activation_candidates = sorted(cur_commented & reg_active)
 
-    # Discovery: not in current at all, present in regen.
+    # Discovery: not in current at all (neither active nor commented),
+    # present in regen. These require NEW deftypes (not just uncommenting).
     discovery = sorted(reg_names - set(cur.keys()))
 
-    # Over-specified: active in current, not in regen.
+    # Over-specified: active in current, not in regen at all.
     over_spec = sorted(cur_active - reg_names)
 
     # Field drift: active in both, but bodies differ (by digest).
