@@ -1,0 +1,76 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; name: wcar-base.gc
+;; name in dgo: wcar-base
+;; dgos: GAME
+
+;; -----------------------------------------------------------------------------
+;; Shared base type for every wheeled racer (wcar-{bobcat,cougar,wolf,bear,...}).
+;; Extends `wvehicle` with only two extra fields: the per-wheel joint-mod arrays
+;; for shock-absorber articulation (`jmod-shock-tops`, `jmod-shock-mids`).
+;;
+;; Ported from decompiler_out/jakx/wcar-base_disasm.gc and all-types.gc:7116.
+;; The decomp file contains three methods (3=inspect, 65=build-collide-shape,
+;; 115=update-shocks) but the latter two are riddled with type-prop failures,
+;; unresolvable external symbols (L8/L9/L10/L11, collide-shape-moving,
+;; cshape-reaction-default, etc.) and unset-register warnings. Only the
+;; inspect method is portable today. The two bodies are deliberately omitted
+;; here and will be re-ported once the collide-shape / cshape-reaction stack
+;; and the L* static data are available in jakx.
+;; -----------------------------------------------------------------------------
+
+(declare-type wcar-base wvehicle)
+
+;; -----------------------------------------------------------------------------
+;; wcar-base
+;;
+;; all-types says wvehicle's size is #x1234=4660 but jmod-shock-tops starts at
+;; offset 4672 (16-byte alignment for inline joint-mod-rotate-local arrays).
+;; That 12-byte gap is reserved with `pad-4660`. jmod-shock-tops is 4 x
+;; joint-mod-rotate-local :inline (128 bytes); jmod-shock-mids is 8 x
+;; joint-mod-rotate-local :inline (256 bytes). Keeping the uint8-array
+;; placeholder style used for jmod-frame / jmod-axles in wvehicle-h.gc so the
+;; layout matches without pulling in joint-mod bodies we haven't ported yet.
+;; Final size: 4672 + 128 + 256 = 5056 = #x13c0, matches all-types.
+;; -----------------------------------------------------------------------------
+(deftype wcar-base (wvehicle)
+  ((pad-4660         uint8 12)                      ;; align to 16 for the inline jmod arrays
+   (jmod-shock-tops  uint8 128)                     ;; 4 x joint-mod-rotate-local :inline (placeholder)
+   (jmod-shock-mids  uint8 256)                     ;; 8 x joint-mod-rotate-local :inline (placeholder)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; Method 3 - inspect. Ported verbatim from decomp.
+;; -----------------------------------------------------------------------------
+(defmethod inspect ((this wcar-base))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (let ((t9-0 (method-of-type wvehicle inspect)))
+    (t9-0 this)
+    )
+  (format #t "~2Tjmod-shock-tops[4] @ #x~X~%" (-> this jmod-shock-tops))
+  (format #t "~2Tjmod-shock-mids[4] @ #x~X~%" (-> this jmod-shock-mids))
+  (label cfg-4)
+  this
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; Methods 65 (rigid-body-object-method-65 / collide-shape builder) and 115
+;; (vehicle-method-115 / shock-joint updater) are NOT ported yet. The decomp
+;; bodies failed type-prop in too many places and rely on:
+;;   * collide-shape-moving / collide-shape-prim-group / collide-shape-prim-sphere
+;;     constructors (not yet wired up in jakx)
+;;   * cshape-reaction-default reference
+;;   * *standard-dynamics* (rigid-body-dynamics) lookup
+;;   * static-vector labels L8..L11 (anonymous statics inside wcar-base)
+;; Until those dependencies land in jakx, the parent wvehicle / vehicle
+;; definitions are used by the concrete wcar-* types. No game code currently
+;; dispatches to these methods during boot, so omitting them is safe for the
+;; cold-boot smoke.
+;; -----------------------------------------------------------------------------

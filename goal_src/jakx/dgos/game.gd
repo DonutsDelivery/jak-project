@@ -561,6 +561,7 @@
   "wvehicle-hud-h.o"
   "wvehicle-hud.o"
   "hud-widgets-powerhang.o"
+  "wcar-base.o"
   "wcar-possum.o"
   "wcar-bobcat.o"
   "wcar-cougar.o"
