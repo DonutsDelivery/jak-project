@@ -402,6 +402,24 @@ namespace jakx {
 namespace get_string_length_asm { extern void link(); }
 namespace draw_string_asm_packed { extern void link(); }
 namespace draw_string_init_justify { extern void link(); }
+// sky.cpp ports (see game/mips2c/jakx_functions/sky.cpp)
+namespace set_tex_offset { extern void link(); }
+namespace render_sky_tri { extern void link(); }
+namespace render_sky_quad { extern void link(); }
+namespace draw_large_polygon { extern void link(); }
+namespace clip_polygon_against_positive_hyperplane { extern void link(); }
+namespace clip_polygon_against_negative_hyperplane { extern void link(); }
+namespace method_17_sky_work { extern void link(); }
+namespace method_18_sky_work { extern void link(); }
+namespace method_29_sky_work { extern void link(); }
+namespace method_30_sky_work { extern void link(); }
+namespace method_31_sky_work { extern void link(); }
+namespace method_32_sky_work { extern void link(); }
+namespace method_34_sky_work { extern void link(); }
+namespace method_35_sky_work { extern void link(); }
+namespace set_sky_vf23_value { extern void link(); }
+// joint.cpp port (see game/mips2c/jakx_functions/joint.cpp)
+namespace cspace_parented_transformq_joint { extern void link(); }
 }
 // clang-format on
 
@@ -693,7 +711,10 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      {"texture", {jak3::adgif_shader_texture_with_update::link}},
      {"collide-func",
       {jak3::moving_sphere_triangle_intersect::link, jak3::collide_do_primitives::link}},
-     {"joint", {jak3::cspace_parented_transformq_joint::link}},
+     // joint — jakx-native port; structurally identical to jak3 but lives
+     // in the jakx namespace so future divergence (if any) can be expressed
+     // without touching jak3's copy. See game/mips2c/jakx_functions/joint.cpp.
+     {"joint", {jakx::cspace_parented_transformq_joint::link}},
      {"foreground",
       {jak3::foreground_check_longest_edge_asm::link, jak3::foreground_generic_merc::link,
        jak3::foreground_merc::link, jak3::foreground_draw_hud::link}},
@@ -752,12 +773,20 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
        jak3::generic_translucent::link, jak3::high_speed_reject::link,
        jak3::mercneric_convert::link, jak3::generic_merc_init_asm::link}},
      {"sky-tng",
-      {jak3::set_tex_offset::link, jak3::render_sky_quad::link, jak3::render_sky_tri::link,
-       jak3::method_17_sky_work::link, jak3::method_18_sky_work::link,
-       jak3::method_29_sky_work::link, jak3::method_30_sky_work::link,
-       jak3::method_31_sky_work::link, jak3::method_34_sky_work::link,
-       jak3::method_35_sky_work::link, jak3::method_32_sky_work::link,
-       jak3::set_sky_vf23_value::link, jak3::draw_large_polygon::link}},
+      // JakX-native ports — see game/mips2c/jakx_functions/sky.cpp.
+      // Simple funcs (set-tex-offset, render-sky-quad/tri, draw-large-polygon,
+      // clip-polygon-against-*) are structurally identical to jak3. The
+      // sky-work methods (17/18/29-35) DIVERGE between jak3 and jakx —
+      // the current bindings use jak3 bodies and should be rewritten per
+      // method from jakx sky-tng_ir2.asm.
+      {jakx::set_tex_offset::link, jakx::render_sky_quad::link, jakx::render_sky_tri::link,
+       jakx::method_17_sky_work::link, jakx::method_18_sky_work::link,
+       jakx::method_29_sky_work::link, jakx::method_30_sky_work::link,
+       jakx::method_31_sky_work::link, jakx::method_34_sky_work::link,
+       jakx::method_35_sky_work::link, jakx::method_32_sky_work::link,
+       jakx::set_sky_vf23_value::link, jakx::draw_large_polygon::link,
+       jakx::clip_polygon_against_positive_hyperplane::link,
+       jakx::clip_polygon_against_negative_hyperplane::link}},
      {"shadow-cpu",
       {jak3::shadow_xform_verts::link, jak3::shadow_execute::link,
        jak3::shadow_calc_dual_verts::link, jak3::shadow_scissor_edges::link,
