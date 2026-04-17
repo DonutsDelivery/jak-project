@@ -41819,7 +41819,7 @@
 (define-extern *growing-curve* curve2d-piecewise) ;; curve2d-piecewise
 (define-extern *water-simple-alpha-curve-fade-out* curve2d-piecewise) ;; curve2d-piecewise
 (define-extern *color-curve-tan-brown* curve-color-piecewise) ;; curve-color-piecewise
-(define-extern *water-wake-trail* object) ;; light-trail-composition
+(define-extern *water-wake-trail* light-trail-composition) ;; light-trail-composition
 (define-extern part-water-splash-callback function) ;; (function part-tracker none)
 (define-extern splash-spawn function) ;; (function float vector int none)
 (define-extern rings-water-spawn function) ;; (function float vector vector float float none)
@@ -41974,7 +41974,7 @@
 
 (define-extern scene-decode-continue function) ;; (function basic continue-point)
 (define-extern scene-lookup function) ;; (function basic scene)
-(define-extern *subtitle-work* object) ;; subtitle-work
+(define-extern *subtitle-work* subtitle-work) ;; subtitle-work
 (define-extern draw-subtitle-image function) ;; (function subtitle-image font-context none)
 (define-extern process-drawable-draw-subtitles function) ;; (function none :behavior process-drawable)
 (define-extern scene-player-init function) ;; (function object symbol string none :behavior scene-player)
@@ -42123,25 +42123,25 @@
 ;; ocean-trans-tables             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *ocean-left-table* object) ;; (pointer float)
-(define-extern *ocean-right-table* object) ;; (pointer float)
-(define-extern *ocean-up-table* object) ;; (pointer float)
-(define-extern *ocean-down-table* object) ;; (pointer float)
-(define-extern *ocean-down-left-table* object) ;; (pointer float)
-(define-extern *ocean-down-right-table* object) ;; (pointer float)
-(define-extern *ocean-up-right-table* object) ;; (pointer float)
-(define-extern *ocean-up-left-table* object) ;; (pointer float)
-(define-extern *ocean-trans-left-table* object) ;; (pointer float)
-(define-extern *ocean-trans-right-table* object) ;; (pointer float)
-(define-extern *ocean-trans-up-table* object) ;; (pointer float)
-(define-extern *ocean-trans-down-table* object) ;; (pointer float)
-(define-extern *ocean-trans-down-left-table* object) ;; (pointer float)
-(define-extern *ocean-trans-down-right-table* object) ;; (pointer float)
-(define-extern *ocean-trans-up-right-table* object) ;; (pointer float)
-(define-extern *ocean-trans-up-left-table* object) ;; (pointer float)
-(define-extern *ocean-trans-corner-table* object) ;; (inline-array vector4w-2)
-(define-extern *ocean-trans-strip-array* object) ;; (pointer float)
-(define-extern *ocean-trans-st-table* object) ;; (inline-array vector)
+(define-extern *ocean-left-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-right-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-up-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-down-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-down-left-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-down-right-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-up-right-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-up-left-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-trans-left-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-trans-right-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-trans-up-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-trans-down-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-trans-down-left-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-trans-down-right-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-trans-up-right-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-trans-up-left-table* (pointer float)) ;; (pointer float)
+(define-extern *ocean-trans-corner-table* (inline-array vector4w-2)) ;; (inline-array vector4w-2)
+(define-extern *ocean-trans-strip-array* (pointer float)) ;; (pointer float)
+(define-extern *ocean-trans-st-table* (inline-array vector)) ;; (inline-array vector)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ocean                          ;;
@@ -42186,7 +42186,7 @@
 ;; eye                            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *eye-work* object) ;; eye-work
+(define-extern *eye-work* eye-work) ;; eye-work
 (define-extern find-free-eye-index function) ;; (function int string int int)
 (define-extern free-eye-index function) ;; (function int int)
 (define-extern render-eyes-32 function) ;; (function dma-buffer eye-control int pointer)
@@ -43146,7 +43146,7 @@
 (define-extern *medius-outstanding-clan-invites* object)
 (define-extern *medius-mute-list* object)
 (define-extern *medius-clan-members-online* object)
-(define-extern *medius-my-player* object) ;; medius-cached-info-player
+(define-extern *medius-my-player* medius-cached-info-player) ;; medius-cached-info-player
 (define-extern *medius-recent-opponents* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -43265,9 +43265,9 @@
 (define-extern *medius-incoming-clan-invites* array)
 (define-extern *medius-clan-challenges* array)
 (define-extern *medius-visible-clan-challenges* array)
-(define-extern *medius-my-clan* object) ;; medius-cached-info-clan
+(define-extern *medius-my-clan* medius-cached-info-clan) ;; medius-cached-info-clan
 (define-extern *medius-my-clan-members* object)
-(define-extern *medius-enemy-clan* object) ;; medius-cached-info-clan
+(define-extern *medius-enemy-clan* medius-cached-info-clan) ;; medius-cached-info-clan
 (define-extern *medius-enemy-clan-members* object)
 (define-extern *medius-enemy-clan-id* object)
 (define-extern *challenge-clans* array)
@@ -48370,7 +48370,7 @@
 
 (define-extern add-recent-opponent function)
 (define-extern get-recent-players function)
-(define-extern *tmp-player* object) ;; medius-cached-info-player
+(define-extern *tmp-player* medius-cached-info-player) ;; medius-cached-info-player
 (define-extern medius-player-info-retrieve-behavior function)
 (define-extern update-client-state function)
 (define-extern init-player-lists function)
@@ -48404,7 +48404,7 @@
 (define-extern get-clan-msg function)
 (define-extern *clan-is-my-clan* object)
 (define-extern clan-member-list-callback function)
-(define-extern *tmp-clan* object) ;; medius-cached-info-clan
+(define-extern *tmp-clan* medius-cached-info-clan) ;; medius-cached-info-clan
 (define-extern *tmp-clan-members* object)
 (define-extern medius-clan-info-retrieve-behavior function)
 (define-extern clan-create function)
@@ -49302,7 +49302,7 @@
 (define-extern *mc-ghost-idx* object)
 (define-extern *mc-ghost-ptr* object)
 (define-extern game-save-elt->string (function game-save-elt string))
-(define-extern *auto-save-info* object) ;; mc-slot-info
+(define-extern *auto-save-info* mc-slot-info) ;; mc-slot-info
 (define-extern auto-save-post function) ;; (function pointer :behavior auto-save)
 (define-extern auto-save-init-by-other function) ;; (function symbol process int int symbol object :behavior auto-save)
 (define-extern auto-idle state)
@@ -49360,7 +49360,7 @@
 (define-extern *scrap-book-3* array)
 (define-extern *scrap-book-1* array) ;; (array int16)
 (define-extern *scrap-book-2* array) ;; (array int16)
-(define-extern *progress-save-info* object) ;; mc-slot-info
+(define-extern *progress-save-info* mc-slot-info) ;; mc-slot-info
 (define-extern post-memcard function)
 (define-extern *game-name-entered* object)
 (define-extern draw-language-select function)
@@ -50025,7 +50025,7 @@
 ;; rigid-body-object              ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *rigid-body-object-constants* object) ;; rigid-body-object-constants
+(define-extern *rigid-body-object-constants* rigid-body-object-constants) ;; rigid-body-object-constants
 (define-extern rigid-body-object-event-handler function) ;; (function process int symbol event-message-block object :behavior rigid-body-object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -50056,7 +50056,7 @@
   
 
 
-(define-extern *ragdoll-test-ragdoll-setup* object) ;; ragdoll-setup
+(define-extern *ragdoll-test-ragdoll-setup* ragdoll-setup) ;; ragdoll-setup
 (define-extern ragdoll-test-init-by-other function) ;; (function ragdoll-setup entity-actor object :behavior ragdoll-test)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -50905,10 +50905,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern calc-fade-vals function) ;; (function float none)
-(define-extern *vehicle-headlight-glow-template* object) ;; sprite-glow-data
-(define-extern *vehicle-taillight-glow-template* object) ;; sprite-glow-data
-(define-extern *vehicle-thruster-glow-template* object) ;; sprite-glow-data
-(define-extern *vehicle-particle-common-info* object) ;; vehicle-particle-common-info
+(define-extern *vehicle-headlight-glow-template* sprite-glow-data) ;; sprite-glow-data
+(define-extern *vehicle-taillight-glow-template* sprite-glow-data) ;; sprite-glow-data
+(define-extern *vehicle-thruster-glow-template* sprite-glow-data) ;; sprite-glow-data
+(define-extern *vehicle-particle-common-info* vehicle-particle-common-info) ;; vehicle-particle-common-info
 (define-extern vehicle-draw-thruster function) ;; (function vehicle-particle-common-info vehicle-draw-thruster-params none)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51343,7 +51343,7 @@
 (define-extern display-list-control function)
 (define-extern *ANIM_TESTER-bank* anim-tester-bank)
 (define-extern anim-tester-num-print function)
-(define-extern *anim-tester* object) ;; (pointer anim-tester)
+(define-extern *anim-tester* (pointer anim-tester)) ;; (pointer anim-tester)
 (define-extern anim-test-obj-init function)
 (define-extern anim-test-sequence-init function)
 (define-extern anim-test-seq-item-copy! function)
@@ -51398,9 +51398,9 @@
 
 
 (define-extern *viewer-sg* skeleton-group) ;; skeleton-group
-(define-extern viewer-string object) ;; string
-(define-extern viewer-ja-name object) ;; string
-(define-extern viewer-geo-name object) ;; string
+(define-extern viewer-string string) ;; string
+(define-extern viewer-ja-name string) ;; string
+(define-extern viewer-geo-name string) ;; string
 (define-extern actor-get-arg! function) ;; (function string string string symbol)
 (define-extern art-part-name function) ;; (function string string)
 (define-extern init-viewer function) ;; (function string string object :behavior viewer)
@@ -51468,9 +51468,9 @@
 (define-extern save-memcard-init-by-other function)
 (define-extern *debug-save-memcard-dead-pool* object)
 (define-extern start-save-memcard function)
-(define-extern *part-tester-name* object) ;; string
+(define-extern *part-tester-name* string) ;; string
 (define-extern part-tester-init-by-other function) ;; (function vector none :behavior process-drawable)
-(define-extern *debug-part-dead-pool* object) ;; dead-pool
+(define-extern *debug-part-dead-pool* dead-pool) ;; dead-pool
 (define-extern start-part function) ;; (function none)
 (define-extern test-idle state)
 (define-extern test-process-init-by-other function)
@@ -51836,8 +51836,8 @@
   
 
 
-(define-extern *editable-temp-id* object) ;; int
-(define-extern *editable-default-name* object) ;; string
+(define-extern *editable-temp-id* int) ;; int
+(define-extern *editable-default-name* string) ;; string
 (define-extern editable-command->string function) ;; (function editable-command string)
 (define-extern editable-filter->string function) ;; (function editable-filter basic string)
 (define-extern *editable-work* object) ;; editable-work
@@ -51872,7 +51872,7 @@
 (define-extern editable-player-init function) ;; (function symbol none :behavior editable-player)
 (define-extern set-editable-name function)
 (define-extern select-editable-by-name function)
-(define-extern *editable-menu-context* object) ;; debug-menu-context
+(define-extern *editable-menu-context* debug-menu-context) ;; debug-menu-context
 (define-extern editable-menu-command function)
 (define-extern editable-menu-command-no-close function)
 (define-extern dm-region-tree-pick-func function)
@@ -52502,8 +52502,8 @@
 ;; default-menu                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *debug-menu-context* object) ;; debug-menu-context
-(define-extern *dm-cam-mode-interpolation* object) ;; int
+(define-extern *debug-menu-context* debug-menu-context) ;; debug-menu-context
+(define-extern *dm-cam-mode-interpolation* int) ;; int
 (define-extern dm-cam-mode-func function) ;; (function (state camera-slave) debug-menu-msg object)
 (define-extern dm-cam-mode-default function) ;; (function object debug-menu-msg symbol)
 (define-extern dm-cam-settings-default function) ;; (function object debug-menu-msg symbol)
@@ -52584,11 +52584,11 @@
 (define-extern dm-bug-report-report-pick-func function) ;; (function symbol debug-menu-msg none)
 (define-extern debug-menu-node<? function) ;; (function debug-menu-node debug-menu-node symbol)
 (define-extern dm-shader-pick-func function) ;; (function texture-id debug-menu-msg symbol)
-(define-extern *shader-pick-menu* object) ;; debug-menu
+(define-extern *shader-pick-menu* debug-menu) ;; debug-menu
 (define-extern build-shader-list function) ;; (function none)
 (define-extern dm-instance-pick-func function) ;; (function string debug-menu-msg basic)
 (define-extern dm-enable-instance-func function) ;; (function string debug-menu-msg symbol)
-(define-extern *instance-shrub-menu* object) ;; debug-menu
+(define-extern *instance-shrub-menu* debug-menu) ;; debug-menu
 (define-extern *instance-tie-menu* object) ;; debug-menu
 (define-extern *enable-instance-shrub-menu* object) ;; debug-menu
 (define-extern *enable-instance-tie-menu* object) ;; debug-menu
