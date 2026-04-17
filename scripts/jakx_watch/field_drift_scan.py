@@ -12,9 +12,12 @@ For each drifted type it computes:
     size-change   — :size-assert or :method-count-assert differ (struct layout change)
     field-change  — field definitions differ (surgical)
     multi         — two or more of the above
+  - DOWNSTREAM: how many subtypes inherit this type (direct children + transitive
+    descendants). A :methods fix on a parent cascades to all inheritors, so a
+    parent with 10 descendants is worth prioritising even if its own refs are low.
 
 Scoring (higher = higher priority for Agent 1 to update):
-  score = 4·failing_refs + 1·all_refs − complexity_penalty
+  score = 4·failing_refs + 1·all_refs + 1·descendants − complexity_penalty
 
 Output:
   .jakx_watch/field_drift_queue.md   — human-readable top-30
@@ -174,6 +177,48 @@ COMPLEXITY_PENALTY = {
 }
 
 
+def build_inheritance_maps(all_types: dict) -> tuple[dict[str, list[str]], dict[str, int]]:
+    """Build parent→children and type→descendant_count maps from parsed all-types.
+
+    Uses RE_PARENT_SIZE already applied during parse: each type entry's body
+    carries the parent name. Walk active types only.
+
+    Returns:
+        children_map: {type_name: [direct_child_names]}
+        descendant_count: {type_name: total_transitive_descendants}
+    """
+    children_map: dict[str, list[str]] = collections.defaultdict(list)
+    parent_of: dict[str, str] = {}
+
+    for name, info in all_types.items():
+        if info.get("commented") or info.get("block_commented"):
+            continue
+        p_m = RE_PARENT_SIZE.search(info["body"])
+        if p_m:
+            parent = p_m.group(1)
+            children_map[parent].append(name)
+            parent_of[name] = parent
+
+    # Compute transitive descendant count with memoisation.
+    memo: dict[str, int] = {}
+
+    def count_descendants(t: str, visiting: set[str]) -> int:
+        if t in memo:
+            return memo[t]
+        if t in visiting:
+            return 0  # cycle guard
+        visiting = visiting | {t}
+        children = children_map.get(t, [])
+        total = len(children) + sum(count_descendants(c, visiting) for c in children)
+        memo[t] = total
+        return total
+
+    for name in list(all_types.keys()):
+        count_descendants(name, set())
+
+    return dict(children_map), memo
+
+
 def build_type_ref_index(decomp_dir: Path) -> dict[str, list[str]]:
     """Scan decomp output and return {type_name: [file_stems_that_reference_it]}.
 
@@ -235,6 +280,9 @@ def main() -> int:
     print(f"parsing {regen_path.name}...")
     reg = parse_deftypes(regen_path.read_text(errors="replace"))
 
+    print("building inheritance maps...")
+    children_map, descendant_counts = build_inheritance_maps(cur)
+
     cur_active = {n: v for n, v in cur.items()
                   if not v["commented"] and not v.get("block_commented", False)}
     # Use all regen types (matching types_drift.py's drift computation).
@@ -278,10 +326,13 @@ def main() -> int:
 
         all_refs = ref_index.get(name, [])
         failing_refs = [f for f in all_refs if f in failing_files]
+        direct_children = children_map.get(name, [])
+        descendants = descendant_counts.get(name, 0)
 
         score = (
             4 * len(failing_refs)
             + 1 * len(all_refs)
+            + 1 * descendants
             - COMPLEXITY_PENALTY[tier]
         )
 
@@ -291,6 +342,8 @@ def main() -> int:
             "changes": changes,
             "failing_refs": len(failing_refs),
             "all_refs": len(all_refs),
+            "direct_children": len(direct_children),
+            "descendants": descendants,
             "score": round(score, 1),
             "cur_size": cur_info["size"],
             "reg_size": reg_info["size"],
@@ -312,7 +365,7 @@ def main() -> int:
         changes_str = "; ".join(r['changes'][:2])
         print(
             f"  {r['score']:>6.1f}  {r['tier']:<20}  {r['name']:<35}  "
-            f"fref={r['failing_refs']}  aref={r['all_refs']}  {changes_str}"
+            f"fref={r['failing_refs']}  aref={r['all_refs']}  sub={r['descendants']}  {changes_str}"
         )
 
     if args.no_write:
@@ -327,8 +380,8 @@ def main() -> int:
         f"drifted: {len(drift_names)}  ·  "
         f"tiers: {dict(tier_counts)}_",
         "",
-        "933 deftypes are **active in both** current `all-types.gc` and the decompiler regen, "
-        "but their **bodies differ**. Updating these lets the decompiler emit better output "
+        "Deftypes **active in both** current `all-types.gc` and the decompiler regen "
+        "but with **differing bodies**. Updating these lets the decompiler emit better output "
         "for the real-partial files that reference them.",
         "",
         "Complexity tiers:",
@@ -337,16 +390,19 @@ def main() -> int:
         "- **size-change** — `:size-assert` or `:method-count-assert` changed (C++ struct layout change)",
         "- **multi** — two or more of the above",
         "",
-        "Score = 4·failing_refs + 1·all_refs − complexity_penalty",
+        "**sub** = transitive descendant count in all-types.gc. "
+        "A :methods fix cascades to all inheritors — a parent with sub=10 amplifies one edit.",
         "",
-        "| # | score | tier | type | fref | aref | parent | changes |",
-        "|---|------:|------|------|-----:|-----:|--------|---------|",
+        "Score = 4·failing_refs + 1·all_refs + 1·descendants − complexity_penalty",
+        "",
+        "| # | score | tier | type | fref | aref | sub | parent | changes |",
+        "|---|------:|------|------|-----:|-----:|----:|--------|---------|",
     ]
     for i, r in enumerate(results[:args.top], 1):
         changes_str = "; ".join(r["changes"][:2])
         lines.append(
             f"| {i} | {r['score']} | {r['tier']} | `{r['name']}` | "
-            f"{r['failing_refs']} | {r['all_refs']} | "
+            f"{r['failing_refs']} | {r['all_refs']} | {r['descendants']} | "
             f"`{r['parent'] or '?'}` | {changes_str} |"
         )
     lines.append("")
@@ -363,11 +419,15 @@ def main() -> int:
         lines.append(f"- method-count: `{r['cur_mc']}` → `{r['reg_mc']}`")
         lines.append(f"- fields: `{r['cur_fields']}` → `{r['reg_fields']}`")
         lines.append(f"- changes: {'; '.join(r['changes'])}")
-        lines.append(f"- failing refs: {r['failing_refs']}  all refs: {r['all_refs']}")
+        lines.append(
+            f"- failing refs: {r['failing_refs']}  all refs: {r['all_refs']}  "
+            f"direct children: {r['direct_children']}  descendants: {r['descendants']}"
+        )
     lines.append("")
     lines.append("## How to use")
     lines.append("")
     lines.append("1. Pick the highest-score **clean-methods** row.")
+    lines.append("   - Prefer rows with **sub > 0** — a parent fix cascades to all descendants.")
     lines.append("2. Open `all-types.gc` at the line shown.")
     lines.append("3. Compare the `:methods` block against the regen (`new-all-types.gc`) and align return types.")
     lines.append("4. For **size-change** or **field-change** rows: use `emit_stub.py NAME` to get the regen body.")
@@ -387,6 +447,7 @@ def main() -> int:
                     "score": r["score"],
                     "failing_refs": r["failing_refs"],
                     "all_refs": r["all_refs"],
+                    "descendants": r["descendants"],
                     "changes": r["changes"][:2],
                 }
             top_clean = [r for r in results if r["tier"] == "clean-methods"][:8]
