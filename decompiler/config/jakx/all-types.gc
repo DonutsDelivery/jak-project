@@ -2174,7 +2174,7 @@
 ;; net-powerup                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-#|(define-extern *tmp-powerup-motion-info* net-powerup-motion-info)|#
+(define-extern *tmp-powerup-motion-info* object) ;; net-powerup-motion-info
 (define-extern *dynamic-powerups* object)
 (define-extern powerup-build-static-hash function)
 (define-extern powerup-build-dynamic-hash function)
@@ -2341,7 +2341,7 @@
   
 
 
-#|(define-extern *eco-blue-debris-params* debris-static-params)|#
+(define-extern *eco-blue-debris-params* object) ;; debris-static-params
 (define-extern *eco-blue-base-quat* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -3747,8 +3747,8 @@
   
 
 
-#|(define-extern *hud-manager-death-indicator-1* hud-manager-death-indicator)|#
-#|(define-extern *hud-manager-death-indicator-2* hud-manager-death-indicator)|#
+(define-extern *hud-manager-death-indicator-1* object) ;; hud-manager-death-indicator
+(define-extern *hud-manager-death-indicator-2* object) ;; hud-manager-death-indicator
 (define-extern *death-indicator-single0* array)
 (define-extern *death-indicator-single0-proc* object)
 (define-extern spawn-death-indicator-single0 function)
@@ -7019,7 +7019,7 @@
 ;; wcar                           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-#|(define-extern *wcar-explosion-info* vehicle-explosion-info)|# ;; vehicle-explosion-info
+(define-extern *wcar-explosion-info* object) ;; vehicle-explosion-info
 (define-extern *v-mongoose-constants* object)
 (define-extern *v-falcon-constants* object)
 (define-extern *v-wombat-constants* object)
@@ -18705,7 +18705,6 @@
 (declare-type cloth-system verlet-particle-system)
 (declare-type joint-control basic)
 
-#|
 (deftype draw-control (basic)
   "The draw-control is a collection of all the stuff that the foreground rendering system needs to draw something.
    Each process-drawable has a draw-control."
@@ -18772,7 +18771,6 @@
     (do-joint-math (_type_ cspace-array joint-control) none) ;; 15
     )
   )
-|#
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -21263,7 +21261,6 @@
     )
   )
 
-#|
 (deftype joint-control (basic)
   "Every [[process-drawable]] has a [[joint-control]] that handles all the animation channels."
   ((status                  joint-control-status                                             :offset-assert 4)
@@ -21278,25 +21275,21 @@
    (postbind-function       (function draw-control cspace-array joint-control none)          :offset-assert 32) ;; guessed by decompiler
    (effect                  effect-control                                                   :offset-assert 36) ;; guessed by decompiler
    (interp-select           int64                                                   2        :offset-assert 40) ;; guessed by decompiler
-   ;;(UNKNOWN                 UNKNOWN                                                          :offset-assert -1) ;; field could not be read.
    (top-anim                top-anim-joint-control                                           :offset-assert 56) ;; guessed by decompiler
    (override                (array float)                                                    :offset-assert 60) ;; guessed by decompiler
    (channel                 joint-control-channel                                   :dynamic :inline :offset-assert 64) ;; guessed by decompiler
-   ;;(UNKNOWN                 UNKNOWN                                                          :offset-assert -1) ;; field could not be read.
    )
   :method-count-assert 13
   :size-assert         #x40
   :flag-assert         #xd00000040
-  ;; field joint-control-status is likely a value type.
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type int) _type_)
-    (joint-control-method-9 () none) ;; 9 ;; (current-cycle-distance (_type_) float)
-    (joint-control-method-10 () none) ;; 10 ;; (update-anim-data (_type_) none)
-    (joint-control-method-11 () none) ;; 11 ;; (debug-print-channels (_type_ symbol) int)
-    (joint-control-method-12 () none) ;; 12 ;; (joint-control-method-12 (_type_ int) joint-control-channel)
+    (new (symbol type) _type_) ;; 0
+    (joint-control-method-9 () none) ;; 9
+    (joint-control-method-10 () none) ;; 10
+    (joint-control-method-11 () none) ;; 11
+    (joint-control-method-12 () none) ;; 12
     )
   )
-|#
 
 
   
@@ -21932,24 +21925,23 @@
 
 
   
-#|(deftype fact-info (basic)
+(deftype fact-info (basic)
   ((process             process       :offset-assert 4) ;; guessed by decompiler
-   (pickup-amount       float         :offset-assert 12)
-   (pickup-spawn-amount float         :offset-assert 16)
-   (options             actor-option  :offset-assert 24)
-   (fade-time           uint64        :offset-assert 32) ;; time-frame
+   (pickup-amount       float         :offset 12)
+   (pickup-spawn-amount float         :offset 16)
+   (options             uint32        :offset 24) ;; actor-option
+   (fade-time           uint64        :offset 32) ;; time-frame
    )
   :method-count-assert 12
   :size-assert         #x28
   :flag-assert         #xc00000028
-  ;; field actor-option is likely a value type.
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type process pickup-type float) _type_)
-    (fact-info-method-9 () none) ;; 9 ;; (drop-pickup (_type_ symbol process-tree fact-info int symbol) (pointer process))
-    (fact-info-method-10 () none) ;; 10 ;; (reset! (_type_ symbol) none)
-    (fact-info-method-11 () none) ;; 11 ;; (pickup-collectable! (_type_ pickup-type float handle) float)
+    (new (symbol type) _type_) ;; 0
+    (fact-info-method-9 () none) ;; 9
+    (fact-info-method-10 () none) ;; 10
+    (fact-info-method-11 () none) ;; 11
     )
-  )|#
+  )
   
 
 
@@ -32776,33 +32768,33 @@
 
 
   
-#|(deftype region-prim-area (structure)
-  ((region-prim-list        region-prim-list       :inline :offset-assert 0)
-   (pos                     vector                 :inline :offset-assert 1296)
-   (ray                     vector                 :inline :offset-assert 1328)
-   (region-enter-count      int32                          :offset-assert 1360)
-   (region-enter-list       region                 320     :offset-assert 1364) ;; guessed by decompiler
-   (region-enter-prim-list  drawable-region-sphere 320     :offset-assert 2644) ;; guessed by decompiler
-   (region-exit-count       int32                          :offset-assert 3924)
-   (region-exit-list        region                 320     :offset-assert 3928) ;; guessed by decompiler
-   (region-exit-prim-list   drawable-region-sphere 320     :offset-assert 5208) ;; guessed by decompiler
-   (region-inside-count     int32                          :offset-assert 6488)
-   (region-inside-list      region                 320     :offset-assert 6492) ;; guessed by decompiler
-   (region-inside-prim-list drawable-region-sphere 320     :offset-assert 7772) ;; guessed by decompiler
-   (region-start-count      int32                          :offset-assert 9052)
-   (region-start-list       region                 320     :offset-assert 9056) ;; guessed by decompiler
-   (region-start-prim-list  drawable-region-sphere 320     :offset-assert 10336) ;; guessed by decompiler
+(deftype region-prim-area (structure)
+  ((region-prim-list        region-prim-list       :inline :offset 0)
+   (pos                     vector                 :inline :offset 1296)
+   (ray                     vector                 :inline :offset 1312)
+   (region-enter-count      int32                          :offset 1344)
+   (region-enter-list       region                 320     :offset 1348) ;; guessed by decompiler
+   (region-enter-prim-list  drawable-region-sphere 320     :offset 2628) ;; guessed by decompiler
+   (region-exit-count       int32                          :offset 3908)
+   (region-exit-list        region                 320     :offset 3912) ;; guessed by decompiler
+   (region-exit-prim-list   drawable-region-sphere 320     :offset 5192) ;; guessed by decompiler
+   (region-inside-count     int32                          :offset 6472)
+   (region-inside-list      region                 320     :offset 6476) ;; guessed by decompiler
+   (region-inside-prim-list drawable-region-sphere 320     :offset 7756) ;; guessed by decompiler
+   (region-start-count      int32                          :offset 9036)
+   (region-start-list       region                 320     :offset 9040) ;; guessed by decompiler
+   (region-start-prim-list  drawable-region-sphere 320     :offset 10320) ;; guessed by decompiler
    )
   :method-count-assert 13
-  :size-assert         #x2d60
-  :flag-assert         #xd00002d60
+  :size-assert         #x2d50
+  :flag-assert         #xd00002d50
   (:methods
     (region-prim-area-method-9 () none) ;; 9 ;; (track-entered-region! (_type_ drawable-region-sphere) int)
     (region-prim-area-method-10 () none) ;; 10 ;; (track-exited-region! (_type_ drawable-region-sphere) int)
     (region-prim-area-method-11 () none) ;; 11 ;; (track-inside-region! (_type_ drawable-region-sphere) int)
     (region-prim-area-method-12 () none) ;; 12 ;; (track-start-region! (_type_ drawable-region-sphere) int)
     )
-  )|#
+  )
   
 
 
@@ -33667,19 +33659,19 @@
 
 
   
-#|(deftype sparticle-launcher (basic)
+(deftype sparticle-launcher (basic)
   ((birthaccum float                              :offset-assert 4)
-   (init-specs (inline-array sp-field-init-spec)  :offset-assert 8) ;; guessed by decompiler
+   (init-specs uint32                             :offset-assert 8) ;; (inline-array sp-field-init-spec)
    (level-flag int32                              :offset-assert 12)
    )
   :method-count-assert 11
   :size-assert         #x10
   :flag-assert         #xb00000010
   (:methods
-    (sparticle-launcher-method-9 () none) ;; 9 ;; (get-field-spec-by-id (_type_ sp-field-id) sp-field-init-spec)
-    (sparticle-launcher-method-10 () none) ;; 10 ;; (setup-special-textures (_type_ string) none)
+    (sparticle-launcher-method-9 () none) ;; 9
+    (sparticle-launcher-method-10 () none) ;; 10
     )
-  )|#
+  )
   
 
 
@@ -33727,16 +33719,16 @@
 
 
   
-#|(deftype sparticle-launch-group (basic)
+(deftype sparticle-launch-group (basic)
   ((length          int16                                       :offset-assert 4)
    (duration        uint16                                      :offset-assert 6)
    (linger-duration uint16                                      :offset-assert 8)
    (flags           uint16                                      :offset-assert 10) ;; sp-group-flag
    (name            string                                      :offset-assert 12) ;; guessed by decompiler
    (launcher        (inline-array sparticle-group-item)         :offset-assert 16) ;; guessed by decompiler
-   (rotate-x        deg                                         :offset-assert 20) ;; degrees
-   (rotate-y        deg                                         :offset-assert 24) ;; degrees
-   (rotate-z        deg                                         :offset-assert 28) ;; degrees
+   (rotate-x        float                                       :offset-assert 20) ;; degrees
+   (rotate-y        float                                       :offset-assert 24) ;; degrees
+   (rotate-z        float                                       :offset-assert 28) ;; degrees
    (scale-x         float                                       :offset-assert 32)
    (scale-y         float                                       :offset-assert 36)
    (scale-z         float                                       :offset-assert 40)
@@ -33746,43 +33738,41 @@
   :size-assert         #x40
   :flag-assert         #xa00000040
   (:methods
-    (sparticle-launch-group-method-9 () none) ;; 9 ;; (create-launch-control (_type_ process) sparticle-launch-control)
+    (sparticle-launch-group-method-9 () none) ;; 9
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype sparticle-launch-control (inline-array-class)
-  ((length              int32                              :offset-assert 4)
-   (allocated-length    int32                              :offset-assert 8)
-   (group               sparticle-launch-group             :offset-assert 16) ;; guessed by decompiler
-   (proc                process-drawable                   :offset-assert 20) ;; guessed by decompiler
-   (local-clock         int32                              :offset-assert 24)
-   (local-space-binding particle-local-space-info          :offset-assert 28)
-   (matrix              int8                               :offset-assert 32)
-   (pointer-control     uint32                             :offset-assert 36)
-   (last-spawn-frame    int32                              :offset-assert 40)
-   (last-spawn-time     int32                              :offset-assert 44)
-   (origin              matrix                    :inline  :offset-assert 48)
-   (center              vector                    :inline  :offset-assert 96)
-   (data                sparticle-launch-state    :dynamic :offset-assert 112) ;; guessed by decompiler
+(deftype sparticle-launch-control (inline-array-class)
+  ((group               sparticle-launch-group             :offset 16) ;; guessed by decompiler
+   (proc                process-drawable                   :offset 20) ;; guessed by decompiler
+   (local-clock         int32                              :offset 24)
+   (local-space-binding particle-local-space-info          :offset 28)
+   (matrix              int8                               :offset 32)
+   (pointer-control     uint32                             :offset 36)
+   (last-spawn-frame    int32                              :offset 40)
+   (last-spawn-time     int32                              :offset 44)
+   (origin              matrix                    :inline  :offset 48)
+   (center              vector                    :inline  :offset 96)
+   (sl-data             uint8                     :dynamic :offset 112) ;; sparticle-launch-state
    )
   :method-count-assert 22
   :size-assert         #x70
   :flag-assert         #x1600000070
   (:methods
-    (sparticle-launch-control-method-14 () none) ;; 14 ;; (initialize (_type_ sparticle-launch-group process-drawable) none)
-    (sparticle-launch-control-method-15 () none) ;; 15 ;; (is-visible? (_type_ vector) symbol)
-    (sparticle-launch-control-method-16 () none) ;; 16 ;; (spawn (_type_ vector) object)
-    (sparticle-launch-control-method-17 () none) ;; 17 ;; (spawn-from-mat (_type_ matrix) none)
-    (sparticle-launch-control-method-18 () none) ;; 18 ;; (spawn-from-cspace (_type_ cspace) none)
-    (sparticle-launch-control-method-19 () none) ;; 19 ;; (kill-particles (_type_) none)
-    (sparticle-launch-control-method-20 () none) ;; 20 ;; (set-local-space-info (_type_ particle-local-space-info) none)
+    (sparticle-launch-control-method-14 () none) ;; 14
+    (sparticle-launch-control-method-15 () none) ;; 15
+    (sparticle-launch-control-method-16 () none) ;; 16
+    (sparticle-launch-control-method-17 () none) ;; 17
+    (sparticle-launch-control-method-18 () none) ;; 18
+    (sparticle-launch-control-method-19 () none) ;; 19
+    (sparticle-launch-control-method-20 () none) ;; 20
     (sparticle-launch-control-method-21 () none) ;; 21
     )
-  )|#
+  )
   
 
 
@@ -38512,26 +38502,21 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#|
 (deftype grid-hash-work (basic)
-  ((result-qwords     UNKNOWN 4        :offset-assert 16)
-   (result-words      uint8   :dynamic :offset-assert 16) ;; guessed by decompiler
-   (result-bits       uint8   :dynamic :offset-assert 16) ;; guessed by decompiler
-   (object-id         int32            :offset-assert 80)
-   (temp-box-min      vector  :inline  :offset-assert 96)
-   (temp-box-max      vector  :inline  :offset-assert 112)
-   (visit-count       int32            :offset-assert 128)
-   (temp-time         uint32           :offset-assert 132)
-   (queue-object-time uint32           :offset-assert 136)
-   (make-hash-time    uint32           :offset-assert 140)
-   (search-time       uint32           :offset-assert 144)
-   (add-object-time   uint32           :offset-assert 148)
+  ((object-id         int32            :offset 80)
+   (temp-box-min      vector  :inline  :offset 96)
+   (temp-box-max      vector  :inline  :offset 112)
+   (visit-count       int32            :offset 128)
+   (temp-time         uint32           :offset 132)
+   (queue-object-time uint32           :offset 136)
+   (make-hash-time    uint32           :offset 140)
+   (search-time       uint32           :offset 144)
+   (add-object-time   uint32           :offset 148)
    )
   :method-count-assert 9
   :size-assert         #x98
   :flag-assert         #x900000098
   )
-|#
 
 
 (define-extern *grid-hash-work* grid-hash-work) ;; grid-hash-work
@@ -43122,7 +43107,7 @@
 (define-extern *medius-outstanding-clan-invites* object)
 (define-extern *medius-mute-list* object)
 (define-extern *medius-clan-members-online* object)
-#|(define-extern *medius-my-player* medius-cached-info-player)|#
+(define-extern *medius-my-player* object) ;; medius-cached-info-player
 (define-extern *medius-recent-opponents* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -43240,9 +43225,9 @@
 (define-extern *medius-incoming-clan-invites* array)
 (define-extern *medius-clan-challenges* array)
 (define-extern *medius-visible-clan-challenges* array)
-#|(define-extern *medius-my-clan* medius-cached-info-clan)|#
+(define-extern *medius-my-clan* object) ;; medius-cached-info-clan
 (define-extern *medius-my-clan-members* object)
-#|(define-extern *medius-enemy-clan* medius-cached-info-clan)|#
+(define-extern *medius-enemy-clan* object) ;; medius-cached-info-clan
 (define-extern *medius-enemy-clan-members* object)
 (define-extern *medius-enemy-clan-id* object)
 (define-extern *challenge-clans* array)
@@ -48339,7 +48324,7 @@
 
 (define-extern add-recent-opponent function)
 (define-extern get-recent-players function)
-#|(define-extern *tmp-player* medius-cached-info-player)|#
+(define-extern *tmp-player* object) ;; medius-cached-info-player
 (define-extern medius-player-info-retrieve-behavior function)
 (define-extern update-client-state function)
 (define-extern init-player-lists function)
@@ -48373,7 +48358,7 @@
 (define-extern get-clan-msg function)
 (define-extern *clan-is-my-clan* object)
 (define-extern clan-member-list-callback function)
-#|(define-extern *tmp-clan* medius-cached-info-clan)|#
+(define-extern *tmp-clan* object) ;; medius-cached-info-clan
 (define-extern *tmp-clan-members* object)
 (define-extern medius-clan-info-retrieve-behavior function)
 (define-extern clan-create function)
