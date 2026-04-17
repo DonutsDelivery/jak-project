@@ -51,6 +51,8 @@ def update_all_blocks(game_name, block_dict):
     for file_name, blocks in block_dict.items():
         # Get the file's lines
         path = get_gsrc_path_from_filename(game_name, file_name)
+        if path is None:
+            continue
         lines = []
         final_lines = []
         with open(path) as f:

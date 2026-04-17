@@ -52,6 +52,8 @@ parser.add_argument(
 args = parser.parse_args()
 
 gsrc_path = get_gsrc_path_from_filename(args.game, args.file)
+if gsrc_path is None:
+    exit(1)
 
 # Step 1 - Find and update all named blocks from all-types (useful for enums)
 update_alltypes_named_blocks(args.game)

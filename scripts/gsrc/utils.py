@@ -48,7 +48,7 @@ def get_gsrc_path_from_filename(game_name, file_name):
   path = "./goal_src/{}/{}/{}.gc".format(game_name, src_path, file_name)
   if not os.path.exists(path):
     print("couldn't find {} in /goal_src/{}!".format(file_name, game_name))
-    exit(1)
+    return None
   return path
 
 def get_alltypes_path_from_game(game_name):
