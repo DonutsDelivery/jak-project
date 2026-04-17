@@ -14,9 +14,7 @@
     // Decompiler crashes. See .planning/jakx-decomp-patterns.md for per-file
     // crash sites. The 24 files previously banned but now decompile cleanly
     // have been removed (commit on this pass).
-    "collide-shape",
-    "net-mgr-dme",
-    "net-mgr-medius-cache"
+    "collide-shape"
   ],
 
   ////////////////////////////
