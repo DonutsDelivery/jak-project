@@ -30235,11 +30235,11 @@
    (userdata      uint64                                    :offset-assert 240)
    (user-time     time-frame                        2       :offset-assert 248) ;; guessed by decompiler
    (user-vector   vector                            :inline :offset-assert 272)
-   (user-handle   handle                            2       :offset-assert 304) ;; guessed by decompiler
+   (user-handle   handle                            2       :offset 288) ;; guessed by decompiler
    )
-  :method-count-assert 18
-  :size-assert         #x140
-  :flag-assert         #x1200b00140
+  :method-count-assert 23
+  :size-assert         #x130
+  :flag-assert         #x1700a00130
   ;; field userdata uses ~A with a 64-bit load.
   (:methods
     (lightning-tracker-method-9 () none) ;; 9
