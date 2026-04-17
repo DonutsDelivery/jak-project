@@ -41642,11 +41642,11 @@
     )
   )
 
-(deftype entity-race-mesh (entity)
+(deftype entity-race-mesh (entity-nav-mesh)
   ()
   :method-count-assert 29
-  :size-assert         #x38
-  :flag-assert         #x1d00000038
+  :size-assert         #x3c
+  :flag-assert         #x1d0000003c
   )
 
 (deftype entity-actor (entity)
@@ -44227,7 +44227,7 @@
     (vehicle-method-96 (_type_ float) none) ;; 96
     (vehicle-method-97 (_type_) none) ;; 97 ;; (vehicle-method-97 (_type_ float vehicle-physics-work) none)
     (vehicle-method-98 (_type_) none) ;; 98 ;; (vehicle-method-98 (_type_) none)
-    (vehicle-method-99 (_type_) none) ;; 99 ;; (vehicle-method-99 (_type_) none)
+    (vehicle-method-99 (_type_) int) ;; 99 ;; (vehicle-method-99 (_type_) none)
     (vehicle-method-100 (_type_) none) ;; 100 ;; (vehicle-method-100 (_type_) none)
     (vehicle-method-101 (_type_) none) ;; 101 ;; (vehicle-method-101 (_type_) none)
     (vehicle-method-102 (_type_) symbol) ;; 102
@@ -44239,35 +44239,35 @@
     (vehicle-method-108 (_type_ int) none) ;; 108
     (vehicle-method-109 (_type_) none) ;; 109 ;; (vehicle-method-109 (_type_) none)
     (vehicle-method-110 (_type_) none) ;; 110 ;; (vehicle-method-110 (_type_) none)
-    (vehicle-method-111 (_type_ vector) none) ;; 111
+    (vehicle-method-111 (_type_ vector) int) ;; 111
     (vehicle-method-112 (_type_ vehicle-controls) none) ;; 112
     (vehicle-method-113 (_type_ vector int int) none) ;; 113
-    (vehicle-method-114 (_type_ int) none) ;; 114
-    (vehicle-method-115 (_type_) none) ;; 115 ;; (vehicle-method-115 (_type_) none)
+    (vehicle-method-114 (_type_ int) int) ;; 114
+    (vehicle-method-115 (_type_) int) ;; 115 ;; (vehicle-method-115 (_type_) none)
     (vehicle-method-116 (_type_ symbol) none) ;; 116
-    (vehicle-method-117 (_type_) none) ;; 117 ;; (vehicle-method-117 (_type_) none)
-    (vehicle-method-118 (_type_) none) ;; 118 ;; (vehicle-method-118 (_type_) none)
-    (vehicle-method-119 (_type_) none) ;; 119 ;; (vehicle-method-119 (_type_) none)
-    (vehicle-method-120 (_type_ float) none) ;; 120
-    (vehicle-method-121 (_type_ float) none) ;; 121
-    (vehicle-method-122 (_type_) none) ;; 122 ;; (vehicle-method-122 (_type_) none)
-    (vehicle-method-123 (_type_) none) ;; 123 ;; (vehicle-method-123 (_type_) none)
-    (vehicle-method-124 (_type_) none) ;; 124 ;; (vehicle-method-124 (_type_) none)
-    (vehicle-method-125 (_type_) none) ;; 125 ;; (vehicle-method-125 (_type_) none)
-    (vehicle-method-126 (_type_) none) ;; 126 ;; (vehicle-method-126 (_type_) none)
+    (vehicle-method-117 (_type_) int) ;; 117 ;; (vehicle-method-117 (_type_) none)
+    (vehicle-method-118 (_type_) int) ;; 118 ;; (vehicle-method-118 (_type_) none)
+    (vehicle-method-119 (_type_) int) ;; 119 ;; (vehicle-method-119 (_type_) none)
+    (vehicle-method-120 (_type_ float) int) ;; 120
+    (vehicle-method-121 (_type_ float) int) ;; 121
+    (vehicle-method-122 (_type_) int) ;; 122 ;; (vehicle-method-122 (_type_) none)
+    (vehicle-method-123 (_type_) int) ;; 123 ;; (vehicle-method-123 (_type_) none)
+    (vehicle-method-124 (_type_) int) ;; 124 ;; (vehicle-method-124 (_type_) none)
+    (vehicle-method-125 (_type_) int) ;; 125 ;; (vehicle-method-125 (_type_) none)
+    (vehicle-method-126 (_type_) int) ;; 126 ;; (vehicle-method-126 (_type_) none)
     (vehicle-method-127 (_type_ process-focusable) symbol) ;; 127
     (vehicle-method-128 (_type_) symbol) ;; 128
-    (vehicle-method-129 (_type_) none) ;; 129 ;; (vehicle-method-129 (_type_) none)
-    (vehicle-method-130 (_type_) none) ;; 130 ;; (vehicle-method-130 (_type_) none)
+    (vehicle-method-129 (_type_) int) ;; 129 ;; (vehicle-method-129 (_type_) none)
+    (vehicle-method-130 (_type_) int) ;; 130 ;; (vehicle-method-130 (_type_) none)
     (vehicle-method-131 (_type_) none) ;; 131 ;; (vehicle-method-131 (_type_ traffic-object-spawn-params) none)
-    (vehicle-method-132 (_type_) none) ;; 132 ;; (vehicle-method-132 (_type_ traffic-object-spawn-params) none)
+    (vehicle-method-132 (_type_) int) ;; 132 ;; (vehicle-method-132 (_type_ traffic-object-spawn-params) none)
     (vehicle-method-133 (_type_) none) ;; 133 ;; (vehicle-method-133 (_type_ traffic-object-spawn-params) none)
     (vehicle-method-134 (_type_) none) ;; 134 ;; (vehicle-method-134 (_type_) none)
     (vehicle-method-135 (_type_) none) ;; 135 ;; (vehicle-method-135 (_type_) none)
     (vehicle-method-136 (_type_) none) ;; 136 ;; (vehicle-method-136 (_type_) none)
     (vehicle-method-137 (_type_) none) ;; 137 ;; (vehicle-method-137 (_type_) none)
     (vehicle-method-138 (_type_) none) ;; 138 ;; (vehicle-method-138 (_type_) none)
-    (vehicle-method-139 (_type_) none) ;; 139 ;; (vehicle-method-139 (_type_) none)
+    (vehicle-method-139 (_type_) int) ;; 139 ;; (vehicle-method-139 (_type_) none)
     (vehicle-method-140 (_type_) none) ;; 140 ;; (vehicle-method-140 (_type_) none)
     (vehicle-method-141 (_type_) symbol) ;; 141
     (vehicle-method-142 (_type_) none) ;; 142 ;; (vehicle-method-142 (_type_) none)
@@ -44275,54 +44275,54 @@
     (vehicle-method-144 (_type_) none) ;; 144 ;; (vehicle-method-144 (_type_) none)
     (vehicle-method-145 (_type_) none) ;; 145 ;; (vehicle-method-145 (_type_) none)
     (vehicle-method-146 (_type_ vector) none) ;; 146
-    (vehicle-method-147 (_type_) none) ;; 147 ;; (vehicle-method-147 (_type_) none)
-    (vehicle-method-148 (_type_) none) ;; 148 ;; (vehicle-method-148 (_type_) none)
+    (vehicle-method-147 (_type_) int) ;; 147 ;; (vehicle-method-147 (_type_) none)
+    (vehicle-method-148 (_type_) int) ;; 148 ;; (vehicle-method-148 (_type_) none)
     (vehicle-method-149 (_type_) none) ;; 149 ;; (vehicle-method-149 (_type_) none)
     (vehicle-method-150 (_type_) none) ;; 150 ;; (vehicle-method-150 (_type_) none)
     (vehicle-method-151 (_type_ float) none) ;; 151
     (vehicle-method-152 (_type_) none) ;; 152
     (vehicle-method-153 (_type_) none) ;; 153
-    (vehicle-method-154 (_type_) none) ;; 154
-    (vehicle-method-155 (_type_) none) ;; 155
+    (vehicle-method-154 (_type_) int) ;; 154
+    (vehicle-method-155 (_type_) int) ;; 155
     (vehicle-method-156 (_type_) none) ;; 156
     (vehicle-method-157 (_type_) none) ;; 157
     (vehicle-method-158 (_type_) none) ;; 158
     (vehicle-method-159 (_type_) none) ;; 159
     (vehicle-method-160 (_type_) none) ;; 160
     (vehicle-method-161 (_type_) none) ;; 161
-    (vehicle-method-162 (_type_) none) ;; 162
-    (vehicle-method-163 (_type_) none) ;; 163
-    (vehicle-method-164 (_type_) none) ;; 164
-    (vehicle-method-165 (_type_) none) ;; 165
+    (vehicle-method-162 (_type_) int) ;; 162
+    (vehicle-method-163 (_type_) int) ;; 163
+    (vehicle-method-164 (_type_) int) ;; 164
+    (vehicle-method-165 (_type_) int) ;; 165
     (vehicle-method-166 (_type_) none) ;; 166
     (vehicle-method-167 (_type_) none) ;; 167
     (vehicle-method-168 (_type_) none) ;; 168
-    (vehicle-method-169 (_type_) none) ;; 169
-    (vehicle-method-170 (_type_) none) ;; 170
+    (vehicle-method-169 (_type_) int) ;; 169
+    (vehicle-method-170 (_type_) int) ;; 170
     (vehicle-method-171 (_type_) none) ;; 171
-    (vehicle-method-172 (_type_) none) ;; 172
+    (vehicle-method-172 (_type_) int) ;; 172
     (vehicle-method-173 (_type_) none) ;; 173
-    (vehicle-method-174 (_type_) none) ;; 174
-    (vehicle-method-175 (_type_) none) ;; 175
-    (vehicle-method-176 (_type_) none) ;; 176
-    (vehicle-method-177 (_type_) none) ;; 177
+    (vehicle-method-174 (_type_) int) ;; 174
+    (vehicle-method-175 (_type_) int) ;; 175
+    (vehicle-method-176 (_type_) int) ;; 176
+    (vehicle-method-177 (_type_) int) ;; 177
     (vehicle-method-178 (_type_) none) ;; 178
-    (vehicle-method-179 (_type_) none) ;; 179
-    (vehicle-method-180 (_type_) none) ;; 180
+    (vehicle-method-179 (_type_) int) ;; 179
+    (vehicle-method-180 (_type_) int) ;; 180
     (vehicle-method-181 (_type_) none) ;; 181
-    (vehicle-method-182 (_type_) none) ;; 182
-    (vehicle-method-183 (_type_) none) ;; 183
+    (vehicle-method-182 (_type_) int) ;; 182
+    (vehicle-method-183 (_type_) int) ;; 183
     (vehicle-method-184 (_type_) none) ;; 184
     (vehicle-method-185 (_type_) none) ;; 185
     (vehicle-method-186 (_type_) none) ;; 186
     (vehicle-method-187 (_type_) none) ;; 187
     (vehicle-method-188 (_type_) none) ;; 188
-    (vehicle-method-189 (_type_) none) ;; 189
+    (vehicle-method-189 (_type_) int) ;; 189
     (vehicle-method-190 (_type_) none) ;; 190
     (vehicle-method-191 (_type_) none) ;; 191
     (vehicle-method-192 (_type_) none) ;; 192
     (vehicle-method-193 (_type_) none) ;; 193
-    (vehicle-method-194 (_type_) none) ;; 194
+    (vehicle-method-194 (_type_) int) ;; 194
     (vehicle-method-195 (_type_) none) ;; 195
     (vehicle-method-196 (_type_) none) ;; 196
     (vehicle-method-197 (_type_) none) ;; 197
@@ -44330,7 +44330,7 @@
     (vehicle-method-199 (_type_) none) ;; 199
     (vehicle-method-200 (_type_) none) ;; 200
     (vehicle-method-201 (_type_) none) ;; 201
-    (vehicle-method-202 (_type_) none) ;; 202
+    (vehicle-method-202 (_type_) int) ;; 202
     (vehicle-method-203 (_type_) none) ;; 203
     )
   )
