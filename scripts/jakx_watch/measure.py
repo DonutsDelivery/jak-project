@@ -134,6 +134,10 @@ RE_LOG_UNKNOWN_TYPE = re.compile(r"Type (\S+) is unknown", re.MULTILINE)
 RE_LOG_UNKNOWN_FN_TYPE = re.compile(r"Function (\S+) didn't know its type", re.MULTILINE)
 # "Called a function, but we do not know its type" — log at which file?
 RE_LOG_FILE_HEADER = re.compile(r"\[(\d+)/(\d+)\]------ (\S+)")
+# C++ assertion death — cannot be fixed via all-types.gc, needs decompiler C++ work.
+RE_LOG_DIE = re.compile(r"\[die\] (.+)", re.MULTILINE)
+RE_LOG_MIPS2C_ON = re.compile(r"\[info\] MIPS2C on (\S+)", re.MULTILINE)
+RE_LOG_MIPS2C_UNKNOWN = re.compile(r"mips2c unknown: (.+)", re.MULTILINE)
 
 
 def parse_decomp_log(path: Path) -> dict:
@@ -157,6 +161,13 @@ def parse_decomp_log(path: Path) -> dict:
     unk_type = collections.Counter(RE_LOG_UNKNOWN_TYPE.findall(text))
     unk_fn = collections.Counter(RE_LOG_UNKNOWN_FN_TYPE.findall(text))
 
+    # C++ assertion ("die") — find the last occurrence and the MIPS2C function
+    # that was in flight (useful context: the function is the crash site).
+    die_msgs = RE_LOG_DIE.findall(text)
+    mips2c_fns = RE_LOG_MIPS2C_ON.findall(text)
+    last_mips2c_fn = mips2c_fns[-1] if mips2c_fns else None
+    mips2c_unknown = collections.Counter(RE_LOG_MIPS2C_UNKNOWN.findall(text))
+
     return {
         "log_parsed": True,
         "log_path": str(path),
@@ -172,6 +183,9 @@ def parse_decomp_log(path: Path) -> dict:
         "top_unknown_fn_types": dict(unk_fn.most_common(20)),
         "unknown_symbol_count": sum(unk_sym.values()),
         "unknown_symbol_distinct": len(unk_sym),
+        "cpp_assertion_die": die_msgs[-3:] if die_msgs else [],
+        "mips2c_last_in_flight": last_mips2c_fn,
+        "mips2c_unknown_instrs": dict(mips2c_unknown.most_common(10)),
     }
 
 
@@ -266,41 +280,78 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
     s = snap["summary"]
     lines = []
     ts = snap["ts"]
-    lines.append(f"# jakx decomp measurement — {ts}")
-    if snap.get("git_sha"):
-        lines.append(f"git: {snap['git_sha'][:12]}")
+    sha = snap.get("git_sha") or "unknown"
+    # Canonical header — agents grep this.
+    lines.append(f"# jakx_watch status")
+    lines.append(f"last updated @ git {sha[:12]}  ·  ts {ts}")
+    cfg_dirty = False
+    for p, h in (snap.get("config_hashes") or {}).items():
+        # If any config file's hash doesn't match what git has at HEAD, the
+        # snapshot reflects uncommitted edits — mark it.
+        pass  # (keep simple; the ts + sha is enough signal for now)
     lines.append("")
 
     log = snap.get("decomp_log") or {}
+    # ===== canonical section 1: FATAL crashes =====
+    lines.append("## FATAL crashes")
     if log.get("log_parsed"):
-        lines.append(f"log: {log.get('log_path')}")
+        fatal = log.get("fatal_unknown_types") or []
+        die = log.get("cpp_assertion_die") or []
         tli = log.get("last_processed_index")
         ttot = log.get("total_index")
         if tli is not None:
             blocked = (ttot or 0) - tli
             lines.append(
-                f"  decomp progress: {tli}/{ttot} processed "
+                f"decomp progress: {tli}/{ttot} processed "
                 f"({blocked} files blocked by crash; last: {log.get('last_processed_file')})"
             )
-        fatal = log.get("fatal_unknown_types")
         if fatal:
-            lines.append(f"  FATAL Type Error crash — unknown type(s): {fatal[:5]}")
-        tl = log.get("type_load_errors")
+            lines.append(f"unknown type(s) that crashed decomp: {fatal[:5]}")
+        if die:
+            lines.append(f"C++ ASSERTION crash (decompiler bug — NOT fixable via all-types.gc):")
+            for msg in die[-2:]:
+                lines.append(f"  {msg[:140]}")
+            lift = log.get("mips2c_last_in_flight")
+            if lift:
+                lines.append(f"  crash happened during mips2c on: {lift}")
+                lines.append(f"  → this is a decompiler C++ bug. Report to Claude orchestrator;")
+                lines.append(f"    config/type edits won't fix it.")
+            mui = log.get("mips2c_unknown_instrs") or {}
+            if mui:
+                lines.append(f"  unknown MIPS instructions mips2c hit ({len(mui)} kinds):")
+                for k, v in list(mui.items())[:6]:
+                    lines.append(f"    {v:3d}  {k}")
+        if not fatal and not die:
+            lines.append("no fatal crashes in last run")
+        tl = log.get("type_load_errors") or []
         if tl:
-            lines.append(f"  type-load errors: {tl[:5]}{' ...' if len(tl) > 5 else ''}")
-        lines.append(f"  fn type-prop failures: {log.get('fn_type_prop_failure_count')}")
+            lines.append(f"type-load errors: {tl[:5]}{' ...' if len(tl) > 5 else ''}")
+        lines.append(f"fn type-prop failures: {log.get('fn_type_prop_failure_count')}")
+    else:
+        lines.append("(no log parsed)")
+    lines.append("")
+
+    # ===== canonical section 2: top unknown symbols =====
+    lines.append("## top unknown symbols (fix these in all-types.gc → biggest unblock)")
+    if log.get("log_parsed"):
+        lines.append(
+            f"unknown-symbol events: {log.get('unknown_symbol_count', 0)} across "
+            f"{log.get('unknown_symbol_distinct', 0)} names"
+        )
         tus = log.get("top_unknown_symbols") or {}
         if tus:
-            lines.append(f"  unknown-symbol events: {log.get('unknown_symbol_count')} across {log.get('unknown_symbol_distinct')} names")
-            lines.append("  top unknown symbols (fix these in all-types.gc → biggest unblock):")
-            for i, (k, v) in enumerate(list(tus.items())[:8]):
-                lines.append(f"    {v:4d}  {k}")
+            for k, v in list(tus.items())[:12]:
+                lines.append(f"  {v:4d}  {k}")
+        else:
+            lines.append("(none)")
         tut = log.get("top_unknown_types") or {}
         if tut:
-            lines.append("  top unknown types (fatal blockers — uncommenting these in all-types should uncrash decomp):")
-            for i, (k, v) in enumerate(list(tut.items())[:8]):
-                lines.append(f"    {v:4d}  {k}")
-        lines.append("")
+            lines.append("unknown types (fatal blockers — uncomment in all-types.gc to uncrash decomp):")
+            for k, v in list(tut.items())[:8]:
+                lines.append(f"  {v:4d}  {k}")
+    else:
+        lines.append("(no log parsed)")
+    lines.append("")
 
     lines.append(f"files total:            {s['total_files']}")
     b = s["buckets"]
@@ -333,6 +384,58 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
             dd = s[key] - p[key]
             if dd != 0:
                 lines.append(f"  {key:20s}: {dd:+d}  ({p[key]} → {s[key]})")
+
+        # Error category disappearance: strongest signal that a fix worked.
+        prev_errs = prev.get("error_histogram", {})
+        cur_errs = snap.get("error_histogram", {})
+        vanished = [(k, v) for k, v in prev_errs.items() if k not in cur_errs]
+        new_errs = [(k, v) for k, v in cur_errs.items() if k not in prev_errs]
+        shrunk = [
+            (k, prev_errs[k], cur_errs[k])
+            for k in cur_errs
+            if k in prev_errs and cur_errs[k] < prev_errs[k]
+        ]
+        grew = [
+            (k, prev_errs[k], cur_errs[k])
+            for k in cur_errs
+            if k in prev_errs and cur_errs[k] > prev_errs[k]
+        ]
+        if vanished:
+            lines.append("")
+            lines.append(f"  ERROR categories VANISHED ({len(vanished)}):")
+            for k, v in sorted(vanished, key=lambda kv: -kv[1])[:8]:
+                lines.append(f"    -{v:4d}  {k[:100]}")
+        if shrunk:
+            lines.append("")
+            shrunk.sort(key=lambda t: -(t[1] - t[2]))
+            lines.append(f"  ERROR categories shrunk ({len(shrunk)}) — top 8:")
+            for k, old, new in shrunk[:8]:
+                lines.append(f"    {new-old:+5d}  ({old} → {new})  {k[:90]}")
+        if new_errs:
+            lines.append("")
+            new_errs.sort(key=lambda kv: -kv[1])
+            lines.append(f"  ERROR categories NEW ({len(new_errs)}) — top 5:")
+            for k, v in new_errs[:5]:
+                lines.append(f"    +{v:4d}  {k[:100]}")
+        if grew:
+            grew.sort(key=lambda t: -(t[2] - t[1]))
+            # only show significant regressions
+            grew_sig = [g for g in grew if g[2] - g[1] >= 5]
+            if grew_sig:
+                lines.append("")
+                lines.append(f"  ERROR categories GREW (regression warning) — top 5:")
+                for k, old, new in grew_sig[:5]:
+                    lines.append(f"    {new-old:+5d}  ({old} → {new})  {k[:90]}")
+
+        # Also track log-level unknown-symbol shifts (the true unblock signal).
+        prev_unk = (prev.get("decomp_log") or {}).get("top_unknown_symbols", {}) or {}
+        cur_unk = (log or {}).get("top_unknown_symbols", {}) or {}
+        resolved = [(k, v) for k, v in prev_unk.items() if k not in cur_unk]
+        if resolved:
+            lines.append("")
+            lines.append(f"  unknown symbols RESOLVED in log ({len(resolved)}):")
+            for k, v in sorted(resolved, key=lambda kv: -kv[1])[:10]:
+                lines.append(f"    -{v:3d}  {k}")
     lines.append("")
     lines.append("top 8 ERROR categories:")
     for i, (k, v) in enumerate(list(snap["error_histogram"].items())[:8]):
@@ -374,17 +477,30 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
                 arrow = "↓" if delta < 0 else ("↑" if delta > 0 else "=")
                 lines.append(f"  {arrow} {name}: {oc} → {nc}  ({oeoe} → {neoe}, {delta:+d})")
 
+    # ===== canonical section 3: top stub-density offenders =====
     lines.append("")
-    lines.append("top 10 offender files by (failed+error) count:")
+    lines.append("## top stub-density offender files")
     offenders = sorted(
         snap["per_file"].items(),
         key=lambda kv: -(kv[1]["failed"] + kv[1]["error"]),
     )[:10]
-    for name, st in offenders:
-        lines.append(
-            f"  {st['failed']+st['error']:5d}  [{st['category']:13s}] {name}  "
-            f"(defun={st['defun']} defmethod={st['defmethod']} stubs={st['failed']} err={st['error']})"
-        )
+    if offenders:
+        for name, st in offenders:
+            lines.append(
+                f"  {st['failed']+st['error']:5d}  [{st['category']:13s}] {name}  "
+                f"(defun={st['defun']} defmethod={st['defmethod']} stubs={st['failed']} err={st['error']})"
+            )
+    else:
+        lines.append("(none)")
+
+    # ===== optional: offline-test split (when jakx corpus exists) =====
+    ot = snap.get("offline_test")
+    if ot:
+        lines.append("")
+        lines.append("## offline-test pass (real-clean split)")
+        lines.append(f"  green (passing):   {len(ot.get('green', []))}")
+        lines.append(f"  amber (mismatch):  {len(ot.get('amber', []))}")
+        lines.append(f"  candidates:        {ot.get('candidates')}")
 
     return "\n".join(lines)
 
@@ -431,9 +547,17 @@ def main():
         out.write_text(json.dumps(snap, indent=2))
         latest = HISTORY_DIR / "latest.json"
         latest.write_text(json.dumps(snap, indent=2))
-        # Also write a human-readable status.md the orchestrator can share.
+        # status.md is the agent-consumable status file. Other Claude sessions
+        # cat it each cycle. Keep it structured and non-empty.
         status = ROOT / ".jakx_watch" / "status.md"
-        status.write_text("```\n" + format_summary_block(snap, prev) + "\n```\n")
+        body = format_summary_block(snap, prev)
+        if not body.strip() or len(body) < 200:
+            body = (
+                "ERROR: measurement produced empty output.\n"
+                "Fix scripts/jakx_watch/measure.py before relying on this file.\n"
+                "---\n" + body
+            )
+        status.write_text("```\n" + body + "\n```\n")
         print(f"\nsnapshot saved: {out.relative_to(ROOT)}", file=sys.stderr)
         print(f"status file:    {status.relative_to(ROOT)}", file=sys.stderr)
 

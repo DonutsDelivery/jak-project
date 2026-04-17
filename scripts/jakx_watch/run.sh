@@ -70,7 +70,7 @@ echo "-- running decompiler --" | tee -a "$RUN_LOG"
 set +e
 "$BIN" "$CFG" "$ISO" "$OUT_DIR" \
     --version ntsc_v1 \
-    --config-override '{"decompile_code": true, "levels_extract": false, "allowed_objects": []}' \
+    --config-override '{"decompile_code": true, "levels_extract": false, "allowed_objects": [], "generate_all_types": true}' \
     >>"$RUN_LOG" 2>&1
 RC=$?
 set -e
@@ -88,7 +88,22 @@ echo "emitted $N_OUT _disasm.gc files" | tee -a "$RUN_LOG"
 
 if [ "$N_OUT" = "0" ]; then
     echo "NO output files emitted — types likely failed to load." | tee -a "$RUN_LOG"
-    tail -20 "$RUN_LOG" | tee -a "$RUN_LOG"
+    # Write an error banner into status.md so other sessions don't fly blind.
+    STATUS="$ROOT/.jakx_watch/status.md"
+    mkdir -p "$(dirname "$STATUS")"
+    {
+        echo '```'
+        echo "# jakx_watch status — FAILED"
+        echo "last updated @ git $(git rev-parse HEAD 2>/dev/null | head -c 12)  ·  ts $(date -Iseconds)"
+        echo ""
+        echo "## ERROR: decomp emitted zero files"
+        echo ""
+        echo "Decompiler couldn't load types — likely a broken deftype in all-types.gc."
+        echo "Tail of run log ($RUN_LOG):"
+        echo ""
+        tail -20 "$RUN_LOG" 2>/dev/null
+        echo '```'
+    } > "$STATUS"
     exit 1
 fi
 
@@ -99,3 +114,25 @@ echo "-- measuring --" | tee -a "$RUN_LOG"
 python3 scripts/jakx_watch/measure.py \
     --decomp-out "$OUT_DIR/jakx" \
     --log "$DECOMP_LOG" 2>&1 | tee -a "$RUN_LOG"
+
+# --- types drift (generate_all_types regression detection) ---
+NEW_TYPES="$OUT_DIR/jakx/new-all-types.gc"
+if [ -f "$NEW_TYPES" ]; then
+    echo "" | tee -a "$RUN_LOG"
+    echo "-- types drift --" | tee -a "$RUN_LOG"
+    python3 scripts/jakx_watch/types_drift.py \
+        --current "$ROOT/decompiler/config/jakx/all-types.gc" \
+        --regen   "$NEW_TYPES" 2>&1 | tee -a "$RUN_LOG"
+fi
+
+# --- offline-test pass (only if jakx corpus exists) ---
+if [ -f "$ROOT/test/offline/config/jakx/config.jsonc" ]; then
+    echo "" | tee -a "$RUN_LOG"
+    echo "-- offline-test pass --" | tee -a "$RUN_LOG"
+    python3 scripts/jakx_watch/offline_test_pass.py 2>&1 | tee -a "$RUN_LOG"
+else
+    echo "" | tee -a "$RUN_LOG"
+    echo "-- offline-test: SKIPPED (no jakx config or reference corpus yet) --" | tee -a "$RUN_LOG"
+    echo "   to enable: create test/offline/config/jakx/config.jsonc and" | tee -a "$RUN_LOG"
+    echo "   test/decompiler/reference/jakx/" | tee -a "$RUN_LOG"
+fi
