@@ -1576,6 +1576,14 @@
 (declare-type curve2d basic)
 (declare-type curve2d-fast curve2d)
 (declare-type curve2d-piecewise curve2d)
+(declare-type net-powerup-motion-info basic)
+(declare-type debris-static-params basic)
+(declare-type rigid-body-object-constants structure)
+(declare-type particle-curve-settings structure)
+(declare-type light-trail-composition structure)
+(declare-type joint-exploder-static-params structure)
+(declare-type vehicle-explosion-info joint-exploder-static-params)
+(declare-type rigid-body-vehicle-constants rigid-body-object-constants)
 
 (define-extern *range-jakxexplo-color* curve-color-fast)
 (define-extern *range-jakxexplo-alpha* curve2d-fast)
@@ -2175,7 +2183,7 @@
 ;; net-powerup                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *tmp-powerup-motion-info* object) ;; net-powerup-motion-info
+(define-extern *tmp-powerup-motion-info* net-powerup-motion-info)
 (define-extern *dynamic-powerups* object)
 (define-extern powerup-build-static-hash function)
 (define-extern powerup-build-dynamic-hash function)
@@ -2342,7 +2350,7 @@
   
 
 
-(define-extern *eco-blue-debris-params* object) ;; debris-static-params
+(define-extern *eco-blue-debris-params* debris-static-params)
 (define-extern *eco-blue-base-quat* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -5365,7 +5373,7 @@
   
 
 
-(define-extern *vehicle-wheel-constants* object) ;; rigid-body-object-constants
+(define-extern *vehicle-wheel-constants* rigid-body-object-constants)
 (define-extern vehicle-wheel-init-by-other function) ;; (function vehicle-wheel-init-params object :behavior vehicle-wheel)
 (define-extern vehicle-wheel-spawn function) ;; (function process vehicle-wheel-init-params vehicle-wheel)
 
@@ -5406,7 +5414,7 @@
 (define-extern *curve-wv-wsplash-alpha* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-wv-wsplash-scale-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-wv-wsplash-scale-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-wv-water-splash-curve-settings* object) ;; particle-curve-settings
+(define-extern *part-wv-water-splash-curve-settings* particle-curve-settings)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-weapons-part          ;;
@@ -5610,7 +5618,7 @@
   
 
 
-(define-extern *wheel-trail-info* object) ;; light-trail-composition
+(define-extern *wheel-trail-info* light-trail-composition)
 (define-extern tire-trail-tracker-init-by-other function) ;; (function light-trail-tracker-spawn-params object :behavior tire-trail-tracker)
 (define-extern spawn-tire-trail-tracker function) ;; (function process light-trail-tracker-spawn-params tire-trail-tracker)
 
@@ -6970,7 +6978,7 @@
 ;; wcar                           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *wcar-explosion-info* object) ;; vehicle-explosion-info
+(define-extern *wcar-explosion-info* vehicle-explosion-info)
 (define-extern *v-mongoose-constants* object)
 (define-extern *v-falcon-constants* object)
 (define-extern *v-wombat-constants* object)
@@ -6984,7 +6992,7 @@
 (define-extern *v-tiger-constants* object)
 (define-extern *v-cheetah-constants* object)
 (define-extern *v-gila-constants* object)
-(define-extern *v-snake-constants* object) ;; rigid-body-vehicle-constants
+(define-extern *v-snake-constants* rigid-body-vehicle-constants)
 (define-extern *v-daxtermobile-constants* object)
 (define-extern *v-drone-constants* object)
 
