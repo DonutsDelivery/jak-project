@@ -397,6 +397,10 @@ namespace shadow_execute { extern void link(); }
 namespace method_21_cloth_system { extern void link(); }
 
 }
+
+namespace jakx {
+namespace get_string_length_asm { extern void link(); }
+}
 // clang-format on
 
 LinkedFunctionTable gLinkedFunctionTable;
@@ -661,6 +665,8 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
     /////////// JAK X
     // JakX reuses jak3's mips2c implementations — same engine, same assembly routines.
     // Complete copy of jak3's table to avoid missing any functions.
+    // Exceptions: routines where jakx's font-context / font-work layouts
+    // diverged from jak3 have jakx-native ports in mips2c/jakx_functions/.
     {{"lights",
       {jak3::light_hash_get_bucket_index::link, jak3::add_light_sphere_to_light_group::link,
        jak3::light_hash_count_items::link, jak3::light_hash_add_items::link}},
@@ -675,7 +681,11 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
        jak3::generic_warp_dest::link, jak3::generic_warp_envmap_dest::link,
        jak3::generic_no_light_proc::link}},
      {"font",
-      {jak3::method_9_font_work::link, jak3::draw_string_asm::link, jak3::get_string_length::link}},
+      {jak3::method_9_font_work::link, jak3::draw_string_asm::link,
+       // JakX-native: font-context flags at offset 12 (jak3: 64), font-work
+       // size vectors at 320/336/368/384 (jak3: 208/224/256/272), save slot
+       // at 496 (jak3: 464). See game/mips2c/jakx_functions/font.cpp.
+       jakx::get_string_length_asm::link}},
      {"texture", {jak3::adgif_shader_texture_with_update::link}},
      {"collide-func",
       {jak3::moving_sphere_triangle_intersect::link, jak3::collide_do_primitives::link}},
