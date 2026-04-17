@@ -60455,6 +60455,16 @@
 (define-extern medius-universe-news-response object)
 (define-extern medius-server-authentication-request object)
 (define-extern string-menu-info object)
+(define-extern hud-deathmatch-split-view-0 object)
+(define-extern net-send-message-out-params object)
+(define-extern medius-account-update-stats-request object)
+(define-extern medius-chat-message object)
+(define-extern medius-game-world-player-list-response object)
+(define-extern medius-get-my-clan-messages-response object)
+(define-extern medius-player-info-request object)
+(define-extern medius-universe-variable-information-response object)
+(define-extern medius-server-authentication-response object)
+(define-extern string-menu object)
 
 
 ;; time-of-day-proc stub
