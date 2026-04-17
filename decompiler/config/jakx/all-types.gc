@@ -34,6 +34,29 @@
 (define-extern index-sprite-list-menu object)
 (define-extern net-connect-in-params object)
 
+;; Auto-extern batch 23 — unblocking top unknown-symbol warnings
+(define-extern hud-deathmatch-split-view-1 type)
+(define-extern net-latency-metrics-data-args type)
+(define-extern medius-add-player-to-clan-request type)
+(define-extern medius-binary-fwd-message type)
+(define-extern medius-get-all-announcements-request type)
+(define-extern medius-get-my-clans-request type)
+(define-extern medius-player-info-response type)
+(define-extern medius-universe-svo-urlresponse type)
+(define-extern medius-server-set-attributes-request type)
+(define-extern options-bar-indicator type)
+
+;; Auto-extern batch 24 — second wave unknown-symbol unblocks
+(define-extern hud-deathmatch-score-drop-view-10 type)
+(define-extern medius-add-player-to-clan-response type)
+(define-extern medius-binary-message type)
+(define-extern medius-get-all-clan-messages-request type)
+(define-extern medius-get-my-clans-response type)
+(define-extern medius-player-report type)
+(define-extern medius-universe-status-list-response type)
+(define-extern medius-server-set-attributes-response type)
+(define-extern game-text-menu-info type)
+
 ;; type system setup
 (define-extern object type)
 (define-extern type type)
@@ -60464,6 +60487,13 @@
 (define-extern medius-server-authentication-response object)
 (define-extern string-menu object)
 
+;; bubbles-path stub — entity-table references it
+(deftype bubbles-path (process)
+  ()
+  :method-count-assert 14
+  :size-assert         #x90
+  :flag-assert         #xe00000090
+  )
 
 ;; time-of-day-proc stub
 (deftype time-of-day-proc (process)
