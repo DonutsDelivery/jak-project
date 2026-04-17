@@ -32142,10 +32142,10 @@
   
 
 
-;; (deftype drawable-inline-array-instance-tie (drawable-inline-array)
-;;   ()
-;;   :flag-assert #x1100000064
-;;   )
+(deftype drawable-inline-array-instance-tie (drawable-inline-array)
+  ()
+  :flag-assert #x1100000020
+  )
 
 
 #|
@@ -32164,10 +32164,10 @@
 |#
 
 
-;; (deftype prototype-tie (drawable-inline-array)
-;;   ()
-;;   :flag-assert #x1100000064
-;;   )
+(deftype prototype-tie (drawable-inline-array)
+  ()
+  :flag-assert #x1100000020
+  )
 
 
   
