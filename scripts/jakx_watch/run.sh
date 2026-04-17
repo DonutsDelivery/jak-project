@@ -136,3 +136,9 @@ else
     echo "   to enable: create test/offline/config/jakx/config.jsonc and" | tee -a "$RUN_LOG"
     echo "   test/decompiler/reference/jakx/" | tee -a "$RUN_LOG"
 fi
+
+# Re-render status.md now that types_drift.py + offline_test_pass.py have
+# augmented latest.json. measure.py wrote status.md earlier, before those ran.
+echo "" | tee -a "$RUN_LOG"
+echo "-- re-rendering status.md with augmented data --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/measure.py --restatus-only 2>&1 | tee -a "$RUN_LOG"

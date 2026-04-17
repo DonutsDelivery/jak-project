@@ -25,8 +25,12 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import re
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+LATEST = ROOT / ".jakx_watch" / "history" / "latest.json"
 
 # (deftype NAME ... )   — capture name + whole body up to balanced paren.
 # Simple: lex by line, track paren depth.
@@ -129,6 +133,25 @@ def main():
     show_list("DISCOVERY — not yet in all-types.gc at all", discovery)
     show_list("OVER-SPECIFIED — active in current but regen found no evidence", over_spec, limit=20)
     show_list("FIELD DRIFT — active in both but body differs", drift, limit=20)
+
+    # Persist a summary into latest.json so measure.py --restatus-only can surface
+    # the headline numbers + top activation candidates in status.md.
+    if LATEST.exists():
+        try:
+            snap = json.loads(LATEST.read_text())
+            snap["types_drift"] = {
+                "current_active": len(cur_active),
+                "current_commented": len(cur_commented),
+                "regen_total": len(reg_names),
+                "activation_candidates": activation_candidates,
+                "discovery_count": len(discovery),
+                "discovery_sample": discovery[:30],
+                "over_specified_count": len(over_spec),
+                "field_drift_count": len(drift),
+            }
+            LATEST.write_text(json.dumps(snap, indent=2))
+        except Exception as e:
+            print(f"(couldn't persist types_drift into latest.json: {e})")
 
 
 if __name__ == "__main__":

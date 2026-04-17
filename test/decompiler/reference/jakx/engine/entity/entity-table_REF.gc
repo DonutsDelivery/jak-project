@@ -1,0 +1,37 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for symbol *entity-info*, type (array entity-info)
+(define *entity-info* <static-data L10>)
+
+;; definition for function entity-info-lookup
+;; WARN: Return type mismatch basic vs entity-info.
+(defun entity-info-lookup ((arg0 type))
+  (the-as entity-info (cond
+                        ((nonzero? (-> arg0 method-table 13))
+                         (-> arg0 method-table 13)
+                         )
+                        (else
+                          (let ((v1-1 *entity-info*))
+                            (dotimes (a1-0 (-> v1-1 length))
+                              (let ((a2-3 (-> v1-1 a1-0 ptype)))
+                                (when (if (logtest? (the-as int a2-3) 1)
+                                          (= (-> arg0 symbol) a2-3)
+                                          (= arg0 a2-3)
+                                          )
+                                  (set! (-> arg0 method-table 13) (the-as function (-> v1-1 a1-0)))
+                                  (return (the-as entity-info (-> v1-1 a1-0)))
+                                  )
+                                )
+                              )
+                            )
+                          (set! (-> arg0 method-table 13) #f)
+                          (the-as basic #f)
+                          )
+                        )
+          )
+  )
+
+
+
+

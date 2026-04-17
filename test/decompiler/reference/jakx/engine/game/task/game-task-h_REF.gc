@@ -1,0 +1,112 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for symbol *net-play-mode-names*, type (array symbol)
+(define *net-play-mode-names* (new 'static 'boxed-array :type symbol
+                                'race
+                                'deathrace
+                                'timebox
+                                'timetrial
+                                'deathmatch
+                                'hunt
+                                'collect
+                                'ctf
+                                'reversi
+                                'team-deathmatch
+                                'football
+                                'artifact
+                                'king-of-hill
+                                'rushhour
+                                'assassin
+                                'training
+                                'training2
+                                'boss-battle
+                                'artist
+                                'invalid
+                                'intro-b
+                                )
+        )
+
+;; definition for symbol *net-play-mode-text-ids*, type object
+(define *net-play-mode-text-ids* <static-data L178>)
+
+;; definition for symbol *net-play-mode-icon-string*, type (array string)
+(define *net-play-mode-icon-string* <static-data L167>)
+
+;; definition of type task-level-info
+(deftype task-level-info (structure)
+  ((flags                uint32)
+   (text-id              uint32)
+   (venue-text-id        uint32)
+   (caps-text-id         uint32)
+   (tex-name             string)
+   (race-mesh-name       string)
+   (race-banner-name     string)
+   (race-ai-tuning-name  string)
+   )
+  )
+
+;; definition for method 3 of type task-level-info
+(defmethod inspect ((this task-level-info))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'task-level-info)
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (format #t "~1Ttext-id: ~D~%" (-> this text-id))
+  (format #t "~1Tvenue-text-id: ~D~%" (-> this venue-text-id))
+  (format #t "~1Tcaps-text-id: ~D~%" (-> this caps-text-id))
+  (format #t "~1Ttex-name: ~A~%" (-> this tex-name))
+  (format #t "~1Trace-mesh-name: ~A~%" (-> this race-mesh-name))
+  (format #t "~1Trace-banner-name: ~A~%" (-> this race-banner-name))
+  (format #t "~1Trace-ai-tuning-name: ~A~%" (-> this race-ai-tuning-name))
+  (label cfg-4)
+  this
+  )
+
+;; definition for symbol *task-level*, type (array symbol)
+(define *task-level* <static-data L166>)
+
+;; definition for symbol *task-level-info*, type (array task-level-info)
+(define *task-level-info* <static-data L14>)
+
+;; definition for symbol *driver-list-cup1*, type array
+(define *driver-list-cup1* (the-as array <static-data L13>))
+
+;; definition for symbol *driver-list-cup1-gp*, type array
+(define *driver-list-cup1-gp* (the-as array <static-data L12>))
+
+;; definition for symbol *driver-list-cup1-temp*, type array
+(define *driver-list-cup1-temp* (the-as array <static-data L11>))
+
+;; definition for symbol *driver-list-cup2*, type array
+(define *driver-list-cup2* (the-as array <static-data L10>))
+
+;; definition for symbol *driver-list-cup2-gp*, type array
+(define *driver-list-cup2-gp* (the-as array <static-data L9>))
+
+;; definition for symbol *driver-list-cup3*, type array
+(define *driver-list-cup3* (the-as array <static-data L8>))
+
+;; definition for symbol *driver-list-cup3-capture*, type array
+(define *driver-list-cup3-capture* (the-as array <static-data L7>))
+
+;; definition for symbol *driver-list-cup3-gp*, type array
+(define *driver-list-cup3-gp* (the-as array <static-data L6>))
+
+;; definition for symbol *driver-list-cup4-capture*, type array
+(define *driver-list-cup4-capture* (the-as array <static-data L5>))
+
+;; definition for symbol *driver-list-cup4-gp*, type array
+(define *driver-list-cup4-gp* (the-as array <static-data L4>))
+
+;; definition for symbol *driver-list-boss*, type array
+(define *driver-list-boss* (the-as array <static-data L3>))
+
+;; definition for symbol *driver-list-training*, type array
+(define *driver-list-training* (the-as array <static-data L2>))
+
+
+
+

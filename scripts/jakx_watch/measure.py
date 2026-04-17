@@ -493,14 +493,37 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
     else:
         lines.append("(none)")
 
+    # ===== optional: types drift (when decomp produced new-all-types.gc) =====
+    td = snap.get("types_drift")
+    if td:
+        lines.append("")
+        lines.append("## types drift (generate_all_types regen vs current all-types.gc)")
+        lines.append(f"  current: {td['current_active']} active + {td['current_commented']} commented")
+        lines.append(f"  regen:   {td['regen_total']} types  ·  discovery: {td['discovery_count']}  ·  over-spec: {td['over_specified_count']}  ·  field-drift: {td['field_drift_count']}")
+        if td.get("activation_candidates"):
+            lines.append("  ACTIVATION CANDIDATES (uncomment in all-types.gc → immediate unblock):")
+            for n in td["activation_candidates"][:20]:
+                lines.append(f"    {n}")
+            if len(td["activation_candidates"]) > 20:
+                lines.append(f"    ... +{len(td['activation_candidates']) - 20} more")
+        if td.get("discovery_sample"):
+            lines.append("  DISCOVERY SAMPLE (regen found, not in current — add deftype):")
+            for n in td["discovery_sample"][:10]:
+                lines.append(f"    {n}")
+            lines.append(f"    ... (see types_drift output for full list of {td['discovery_count']})")
+
     # ===== optional: offline-test split (when jakx corpus exists) =====
     ot = snap.get("offline_test")
     if ot:
         lines.append("")
         lines.append("## offline-test pass (real-clean split)")
-        lines.append(f"  green (passing):   {len(ot.get('green', []))}")
-        lines.append(f"  amber (mismatch):  {len(ot.get('amber', []))}")
-        lines.append(f"  candidates:        {ot.get('candidates')}")
+        if ot.get("blocked"):
+            lines.append(f"  BLOCKED: {ot.get('blocker', 'unknown reason')}")
+            lines.append(f"  candidates: {ot.get('candidates')}")
+        else:
+            lines.append(f"  green (passing):   {len(ot.get('green', []))}")
+            lines.append(f"  amber (mismatch):  {len(ot.get('amber', []))}")
+            lines.append(f"  candidates:        {ot.get('candidates')}")
 
     return "\n".join(lines)
 
@@ -512,7 +535,37 @@ def main():
     ap.add_argument("--compare", help="Path to a previous snapshot JSON to diff against")
     ap.add_argument("--decomp-out", help=f"Path to decompiler output dir (default: {DEFAULT_DECOMP_OUT})",
                     default=str(DEFAULT_DECOMP_OUT))
+    ap.add_argument("--restatus-only", action="store_true",
+                    help="Skip measurement; just re-render status.md from latest.json "
+                    "(use after offline_test_pass.py / types_drift.py augment the snapshot).")
     args = ap.parse_args()
+
+    if args.restatus_only:
+        latest = HISTORY_DIR / "latest.json"
+        if not latest.exists():
+            print("no latest.json — run measure.py first", file=sys.stderr)
+            sys.exit(1)
+        snap = json.loads(latest.read_text())
+        # Find prev snap for the delta block
+        prev = None
+        if HISTORY_DIR.exists():
+            candidates = sorted(HISTORY_DIR.glob("snap-*.json"), key=lambda p: p.stat().st_mtime)
+            want_out = snap.get("decomp_out")
+            for c in reversed(candidates):
+                try:
+                    cand = json.loads(c.read_text())
+                except Exception:
+                    continue
+                if cand.get("digest") == snap.get("digest"):
+                    continue
+                if cand.get("decomp_out") == want_out:
+                    prev = cand
+                    break
+        status = ROOT / ".jakx_watch" / "status.md"
+        body = format_summary_block(snap, prev)
+        status.write_text("```\n" + body + "\n```\n")
+        print(f"status file re-rendered: {status.relative_to(ROOT)}", file=sys.stderr)
+        return
 
     log_path = Path(args.log).resolve() if args.log else find_latest_log()
     decomp_out = Path(args.decomp_out).resolve()

@@ -1,0 +1,210 @@
+{
+  // Bootstrap config for jakx offline-test.
+  // Start with CGOs (engine code) — level DGOs can be added later as they decompile.
+  // Keep the dgos list minimal during Phase-0 so offline-test is fast and the
+  // _REF.gc corpus stays small + curated. Expand as more files reach real-clean.
+  "dgos": [
+    "CGO/KERNEL.CGO",
+    "CGO/GAME.CGO",
+    "CGO/ENGINE.CGO",
+    "CGO/COMMON.CGO",
+    "CGO/ART.CGO"
+  ],
+
+  // Skip goalc-compiling these (they decompile but we know the output won't compile
+  // yet — e.g., top-level lambdas, asm tricks, weird type layouts).
+  "skip_compile_files": [
+    "types-h",
+    "hfrag-h",
+    "joint",
+    "subdivide",
+    "shadow-cpu-h",
+    "foreground",
+    "tie-methods",
+    "scene-actor"
+  ],
+
+  // Skip goalc-compiling these specific functions/methods inside otherwise-good files.
+  // Most of these are inherited from jak3 (same decompiler, same edge cases).
+  // Trim as jakx's real-clean set shrinks.
+  "skip_compile_functions": [
+    // gcommon
+    "qmem-clear!",
+    "(method 9 inline-array-class-uint32)",
+    "(method 9 inline-array-class-uint64)",
+    "breakpoint-range-set!",
+    "valid?",
+    // gkernel
+    "(method 10 process)",
+    "(method 14 dead-pool)",
+    // gstate
+    "enter-state",
+    // math
+    "logf",
+    "log2f",
+    "cube-root",
+    "lerp-scale",
+    "rand-vu-init",
+    "rand-vu",
+    "rand-vu-nostep",
+    // matrix
+    "matrix-axis-sin-cos-vu!",
+    "matrix-axis-sin-cos!",
+    "matrix-3x3-normalize!",
+    // geometry
+    "closest-pt-in-triangle",
+    "circle-circle-xz-intersect",
+    "calculate-basis-functions-vector!",
+    "curve-evaluate!",
+    // timer
+    "(method 9 clock)",
+    // pad
+    "service-cpads",
+    // connect
+    "(method 0 engine)",
+    "(method 0 engine-pers)",
+    // math-camera
+    "update-math-camera",
+    "transform-point-vector!",
+    "transform-point-qword!",
+    "transform-point-vector-scale!",
+    // dma
+    "dma-buffer-add-vu-function",
+    // sky
+    "(method 3 sky-vertex)",
+    // texture
+    "(method 9 texture-page-dir)",
+    "set-dirty-mask!",
+    "(method 3 generic-tie-interp-point)",
+    "invalidate-cache-line",
+    // multiple def
+    "(method 3 hfrag-poly4)",
+    "(method 3 hfrag-poly9)",
+    "(method 3 hfrag-poly25)",
+    "(method 3 hfrag-mip-packet)",
+    // transformq
+    "(method 17 trsqv)",
+    // bsp
+    "bsp-camera-asm",
+    "build-masks",
+    // process-drawable
+    "(method 19 process-drawable)",
+    "(method 10 joint-control)",
+    // target-handler
+    "target-send-attack",
+    // find-nearest
+    "find-nearest-focusable",
+    // sprite
+    "(method 3 sprite-aux-list)",
+    "sprite-draw-distorters",
+    // debug
+    "bugfix?",
+    // camera
+    "cam-los-collide",
+    "v-slrp3!",
+    "v-slrp2!",
+    "slave-set-rotation!",
+    // bones
+    "bones-mtx-calc-execute",
+    // generic
+    "upload-vu0-program",
+    "generic-upload-vu0",
+    "generic-warp-source",
+    // font
+    "draw-string",
+    // decomp
+    "(method 16 level)",
+    "unpack-comp-lzo",
+    // shrubbery
+    "init-dma-test",
+    "draw-prototype-inline-array-shrub",
+    "draw-inline-array-instance-shrub",
+    // tfrag
+    "tfrag-scissor-end-buffer",
+    "tfrag-scissor-init-buffer",
+    "tfrag-scissor-vu1-init-buf",
+    "(method 9 drawable-tree-instance-tie)",
+    // hud
+    "(method 10 hud-sprite)",
+    // level
+    "(method 29 level)",
+    "level-update-after-load",
+    "(method 9 level)",
+    "(method 11 level)",
+    // drawable
+    "calc-shadow-masks",
+    "calc-realtime-lights",
+    "real-main-draw-hook",
+    "display-sync",
+    "dma-add-process-drawable",
+    "vis-cull",
+    "vis-cull-debug",
+    "foreground-engine-execute",
+    // idle-control
+    "(method 10 idle-control)",
+    // aligner
+    "(method 9 align-control)",
+    // collide-mesh
+    "(method 9 collide-mesh-cache)",
+    "(method 10 collide-mesh)",
+    "(method 11 collide-mesh)",
+    "(method 13 collide-mesh)",
+    // collide-shape
+    "(method 18 collide-shape-prim-group)",
+    "(method 19 collide-shape-prim)",
+    "(method 36 collide-shape)",
+    "(method 12 collide-shape-prim-group)",
+    "(method 13 collide-shape-prim)",
+    "collide-shape-draw-debug-marks",
+    // spatial-hash
+    "(method 11 grid-hash)",
+    "(method 15 sphere-hash)",
+    // collide-cache
+    "test-closest-pt-in-triangle",
+    // sparticle-launcher
+    "sp-relaunch-particle-3d",
+    "execute-part-engine",
+    "sparticle-respawn-heights",
+    "sparticle-respawn-timer",
+    "sparticle-mode-animate",
+    "sparticle-texture-animate",
+    "sparticle-texture-day-night",
+    "sparticle-motion-blur",
+    "birth-func-texture-group",
+    // script
+    "command-get-process",
+    // mood
+    "update-mood-direction",
+    // eyes
+    "debug-eyes",
+    // nav-mesh
+    "(method 36 nav-mesh)",
+    "(method 45 nav-mesh)",
+    "(method 46 nav-mesh)",
+    // minimap
+    "(method 20 minimap)",
+    "(method 18 minimap)",
+    "(method 16 minimap)",
+    // merc-blend-shape
+    "setup-blerc-chains",
+    // ocean
+    "test-seq-read",
+    "test-worst-read",
+    "test-seq-write",
+    "test-worst-write",
+    "test-to-spr",
+    "test-from-spr",
+    "test-to-from-spr",
+    // ocean-texture
+    "check-normals",
+    // asm
+    "close-sky-buffer",
+    "(method 19 cloth-system)",
+    "(method 37 cloth-system)",
+    "(method 19 rope-prim-system)",
+    "sprite-add-matrix-data",
+    "camera-fov-frame"
+  ],
+
+  "skip_compile_states": {}
+}

@@ -55,6 +55,51 @@ def main() -> int:
     )
     print(f"real-clean candidates: {len(candidates)}")
 
+    # Pre-flight: run once against the first candidate to detect compile-setup
+    # blockers (e.g., language-enum mismatch between all-types.gc and kernel-defs.gc).
+    # If found, surface it and stop — no point running N files that all hit the
+    # same setup failure.
+    preflight = subprocess.run(
+        [
+            str(OFFLINE_TEST),
+            "--iso_data_path", str(ISO_DIR / "jakx"),
+            "--game", "jakx",
+            "--file", candidates[0] if candidates else "NONE",
+        ],
+        capture_output=True, text=True, check=False, timeout=180,
+    )
+    pre_out = preflight.stdout + preflight.stderr
+    setup_blocker = None
+    if "Inconsistent type definition" in pre_out:
+        # Extract the offending type name
+        import re as _re
+        m = _re.search(r"Type ([\w<>!?:\-\+\*/=]+) was originally", pre_out)
+        tname = m.group(1) if m else "<unknown>"
+        setup_blocker = (
+            f"all-types.gc vs kernel-defs.gc type mismatch on '{tname}'. "
+            f"Fix: reconcile the defenum/deftype in decompiler/config/jakx/all-types.gc "
+            f"with goal_src/jakx/kernel-defs.gc (use the 25-entry version jak3 has)."
+        )
+    elif preflight.returncode != 0 and "Compiler Exception" in pre_out:
+        # Any other compiler exception during setup
+        setup_blocker = (
+            "offline-test compiler setup threw. Last 20 lines of output:\n  "
+            + "\n  ".join(pre_out.strip().splitlines()[-20:])
+        )
+
+    if setup_blocker:
+        print(f"BLOCKER: offline-test setup fails on ALL files.")
+        print(f"  {setup_blocker}")
+        snap["offline_test"] = {
+            "green": [],
+            "amber": [],
+            "blocked": True,
+            "blocker": setup_blocker,
+            "candidates": len(candidates),
+        }
+        LATEST.write_text(json.dumps(snap, indent=2))
+        return 0
+
     results = {"green": [], "amber": [], "error": []}
     for name in candidates:
         r = subprocess.run(
