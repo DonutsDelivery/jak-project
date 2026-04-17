@@ -52589,9 +52589,9 @@
 (define-extern dm-instance-pick-func function) ;; (function string debug-menu-msg basic)
 (define-extern dm-enable-instance-func function) ;; (function string debug-menu-msg symbol)
 (define-extern *instance-shrub-menu* debug-menu) ;; debug-menu
-(define-extern *instance-tie-menu* object) ;; debug-menu
-(define-extern *enable-instance-shrub-menu* object) ;; debug-menu
-(define-extern *enable-instance-tie-menu* object) ;; debug-menu
+(define-extern *instance-tie-menu* debug-menu) ;; debug-menu
+(define-extern *enable-instance-shrub-menu* debug-menu) ;; debug-menu
+(define-extern *enable-instance-tie-menu* debug-menu) ;; debug-menu
 (define-extern build-instance-list function) ;; (function object none)
 (define-extern *path-recorder-menu* object)
 (define-extern dm-set-recorder-path function)
@@ -52617,7 +52617,7 @@
 (define-extern dm-anim-tester-func function) ;; (function int debug-menu-msg symbol)
 (define-extern stop-watch-display function) ;; (function object object symbol)
 (define-extern debug-menu-context-make-default-menus function) ;; (function debug-menu-context debug-menu-context)
-(define-extern *popup-menu-context* object) ;; debug-menu-context
+(define-extern *popup-menu-context* debug-menu-context) ;; debug-menu-context
 (define-extern popup-menu-context-make-default-menus function) ;; (function debug-menu-context debug-menu-context)
 (define-extern menu-respond-to-pause function) ;; (function symbol)
 (define-extern *menu-hook* function) ;; (function debug-menu-context)
@@ -52753,7 +52753,7 @@
 (define-extern print-actual-collision function) ;; (function process-drawable none)
 (define-extern collision-edit-get-max-prim function) ;; (function process-drawable int)
 (define-extern collision-edit-get-prim function) ;; (function process-drawable int collide-shape-prim)
-(define-extern *collision-edit-info* object) ;; collision-edit-info
+(define-extern *collision-edit-info* collision-edit-info) ;; collision-edit-info
 (define-extern collision-editor-init-by-other function) ;; (function handle object :behavior collision-editor)
 (define-extern stop-collision-edit function) ;; (function none)
 (define-extern collision-edit function) ;; (function process (pointer process))
@@ -55284,12 +55284,12 @@
 ;; credits-cloth                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *enable-method-set* object) ;; int
+(define-extern *enable-method-set* int) ;; int
 (define-extern get-neighboring-faces function) ;; (function vector4w int int int int int)
-(define-extern *normal-array* object) ;; (inline-array vector)
+(define-extern *normal-array* (inline-array vector)) ;; (inline-array vector)
 (define-extern light-vertex function) ;; (function current-position-info vector rgba)
-(define-extern *once* object) ;; symbol
-(define-extern *cloth-fade-alpha* object) ;; gs-alpha
+(define-extern *once* symbol) ;; symbol
+(define-extern *cloth-fade-alpha* gs-alpha) ;; gs-alpha
 (define-extern symbol->cloth-flags function) ;; (function symbol cloth-flag)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55935,12 +55935,12 @@
 ;; desert-ocean                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *ocean-colors-desert* object) ;; ocean-colors
+(define-extern *ocean-colors-desert* ocean-colors) ;; ocean-colors
 (define-extern *ocean-near-indices-desert* ocean-near-indices) ;; ocean-near-indices
 (define-extern *ocean-trans-indices-desert* ocean-trans-indices) ;; ocean-trans-indices
 (define-extern *ocean-mid-indices-desert* ocean-mid-indices) ;; ocean-mid-indices
 (define-extern *ocean-mid-masks-desert* ocean-mid-masks)
-(define-extern *ocean-map-desert* object) ;; ocean-map
+(define-extern *ocean-map-desert* ocean-map) ;; ocean-map
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; desert-part                    ;;
@@ -55956,7 +55956,7 @@
 (define-extern *curve-alpha-desert-hanging-fire-flame* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-desert-hanging-fire-flame-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-desert-hanging-fire-flame-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-desert-hanging-fire-flame-curve-settings* object) ;; particle-curve-settings
+(define-extern *part-desert-hanging-fire-flame-curve-settings* particle-curve-settings) ;; particle-curve-settings
 (define-extern *range-color-desert-bowl-fire-flame* curve-color-fast) ;; curve-color-fast
 (define-extern *range-alpha-desert-bowl-fire-flame* curve2d-fast) ;; curve2d-fast
 (define-extern *range-scale-desert-bowl-fire-flame-x* curve2d-fast) ;; curve2d-fast
@@ -55967,7 +55967,7 @@
 (define-extern *curve-alpha-desert-bowl-fire-flame* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-desert-bowl-fire-flame-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-desert-bowl-fire-flame-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-desert-bowl-fire-flame-curve-settings* object) ;; particle-curve-settings
+(define-extern *part-desert-bowl-fire-flame-curve-settings* particle-curve-settings) ;; particle-curve-settings
 (define-extern *range-color-desert-small-bowl-fire-flame* curve-color-fast) ;; curve-color-fast
 (define-extern *range-alpha-desert-small-bowl-fire-flame* curve2d-fast) ;; curve2d-fast
 (define-extern *range-scale-desert-small-bowl-fire-flame-x* curve2d-fast) ;; curve2d-fast
@@ -55978,8 +55978,8 @@
 (define-extern *curve-alpha-desert-small-bowl-fire-flame* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-desert-small-bowl-fire-flame-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-desert-small-bowl-fire-flame-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-desert-small-bowl-fire-flame-curve-settings* object) ;; particle-curve-settings
-(define-extern *scenecamera-fog-update?* object) ;; symbol
+(define-extern *part-desert-small-bowl-fire-flame-curve-settings* particle-curve-settings) ;; particle-curve-settings
+(define-extern *scenecamera-fog-update?* symbol) ;; symbol
 (define-extern scenecamera-fog-update function) ;; (function none)
 (define-extern birth-func-desert-beacon-set-accel function) ;; (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none)
 (define-extern *range-wrsplash-color* curve-color-fast) ;; curve-color-fast
@@ -55989,7 +55989,7 @@
 (define-extern *curve-wrsplash-alpha* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-wrsplash-scale-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-wrsplash-scale-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-water-rocks-splash-curve-settings* object) ;; particle-curve-settings
+(define-extern *part-water-rocks-splash-curve-settings* particle-curve-settings) ;; particle-curve-settings
 (define-extern *range-color-firepit-fire-flame* curve-color-fast) ;; curve-color-fast
 (define-extern *range-alpha-firepit-fire-flame* curve2d-fast) ;; curve2d-fast
 (define-extern *range-scale-firepit-fire-flame-x* curve2d-fast) ;; curve2d-fast
@@ -56000,7 +56000,7 @@
 (define-extern *curve-alpha-firepit-fire-flame* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-firepit-fire-flame-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-firepit-fire-flame-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-firepit-fire-flame-curve-settings* object) ;; particle-curve-settings
+(define-extern *part-firepit-fire-flame-curve-settings* particle-curve-settings) ;; particle-curve-settings
 (define-extern *stronghold-range-color-flame* curve-color-fast) ;; curve-color-fast
 (define-extern *stronghold-range-alpha-flame* curve2d-fast) ;; curve2d-fast
 (define-extern *stronghold-range-scale-flame-x* curve2d-fast) ;; curve2d-fast
@@ -56011,7 +56011,7 @@
 (define-extern *stronghold-curve-alpha-flame* curve2d-fast) ;; curve2d-fast
 (define-extern *stronghold-curve-flame-x* curve2d-fast) ;; curve2d-fast
 (define-extern *stronghold-curve-flame-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-stronghold-torchfire-flame-curve-settings* object) ;; particle-curve-settings
+(define-extern *part-stronghold-torchfire-flame-curve-settings* particle-curve-settings) ;; particle-curve-settings
 (define-extern *range-color-desert-bollard-fire-flame* curve-color-fast) ;; curve-color-fast
 (define-extern *range-alpha-desert-bollard-fire-flame* curve2d-fast) ;; curve2d-fast
 (define-extern *range-scale-desert-bollard-fire-flame-x* curve2d-fast) ;; curve2d-fast
@@ -56022,7 +56022,7 @@
 (define-extern *curve-alpha-desert-bollard-fire-flame* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-desert-bollard-fire-flame-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-desert-bollard-fire-flame-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-desert-bollard-fire-flame-curve-settings* object) ;; particle-curve-settings
+(define-extern *part-desert-bollard-fire-flame-curve-settings* particle-curve-settings) ;; particle-curve-settings
 (define-extern *range-dessplash-color* curve-color-fast) ;; curve-color-fast
 (define-extern *range-dessplash-alpha* curve2d-fast) ;; curve2d-fast
 (define-extern *range-dessplash-scale-x* curve2d-fast) ;; curve2d-fast
@@ -56030,7 +56030,7 @@
 (define-extern *curve-dessplash-alpha* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-dessplash-scale-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-dessplash-scale-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-desert-water-rocks-splash-curve-settings* object) ;; particle-curve-settings
+(define-extern *part-desert-water-rocks-splash-curve-settings* particle-curve-settings) ;; particle-curve-settings
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; desarena-part                  ;;
