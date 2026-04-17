@@ -44512,7 +44512,7 @@
 
 
   
-#|(deftype vehicle-weapon-slot (process-drawable)
+(deftype vehicle-weapon-slot (process-drawable)
   ((owning-vehicle uint64  :offset-assert 248)
    (ammunition     int8    :offset-assert 256)
    (flags          uint8   :offset-assert 257)
@@ -44537,7 +44537,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
@@ -45086,6 +45086,7 @@
     )
   )
 |#
+
 
 
 
