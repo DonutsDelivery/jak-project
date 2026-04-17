@@ -53192,6 +53192,7 @@
 (define-extern kernel-read (function none))
 (define-extern kernel-check-hardwired-addresses (function none))
 (define-extern install-default-debug-handler (function object none))
+(define-extern install-debug-handler (function object none))
 (define-extern return-from-exception (function object none))
 (define-extern kernel-set-exception-vector (function object int)) 
 (define-extern kernel-set-interrupt-vector (function none))
