@@ -15,5 +15,17 @@
   "v-slrp3!": [[32, "vector"]],
   "vector-circle-tangent-new": [[32, "vector"], [48, "vector"]],
   "vector-line-xz-distance-point!": [[16, "matrix"]],
-  "vector-segment-xz-distance-point!": [[16, "matrix"]]
+  "vector-segment-xz-distance-point!": [[16, "matrix"]],
+  "(method 10 collide-mesh)": [[16, "oot-work"]],
+  "(method 11 collide-mesh)": [[16, "spat-work"]],
+  "(method 11 grid-hash)": [[16, "vector"], [32, "vector"]],
+  "(method 135 vehicle)": [[16, ["inline-array", "matrix", 2]]],
+  "(method 14 collide-cache)": [[16, "bounding-box"]],
+  "(method 16 collide-cache)": [[16, "collide-puls-work"]],
+  "(method 18 drawable-region-face)": [[16, "vector"], [32, "vector"]],
+  "(method 18 tracking-spline)": [[16, "tracking-spline-sampler"]],
+  "(method 28 ocean)": [[16, "vector"]],
+  "(method 46 ocean)": [[16, "vector"]],
+  "(method 9 curve-color-fast)": [[16, "rgbaf"]],
+  "(method 9 curve2d-fast)": [[16, "vector"], [32, "vector"]]
 }
