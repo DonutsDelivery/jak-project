@@ -21,7 +21,11 @@
     "shadow-cpu-h",
     "foreground",
     "tie-methods",
-    "scene-actor"
+    "scene-actor",
+    // jakx: unresolved <static-data-LN> placeholder for *net-play-mode-text-ids*
+    // (L178). Decomp output matches REF but goalc can't compile the placeholder
+    // until static-array inlining for the jakx symbol layout lands.
+    "game-task-h"
   ],
 
   // Skip goalc-compiling these specific functions/methods inside otherwise-good files.
