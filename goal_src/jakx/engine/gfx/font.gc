@@ -98,41 +98,16 @@
   )
 
 (defun draw-string ((arg0 string) (arg1 dma-buffer) (arg2 font-context))
-  "Render `arg0` at `arg2 origin` using the embedded 3x5 bitmap font.
-   Returns the original origin quad as the draw-string-result so callers
-   that compute string width from it fall through harmlessly."
-  (let* ((ox (the int (-> arg2 origin x)))
-         (oy (the int (-> arg2 origin y)))
-         (scale (-> arg2 scale))
-         ;; pixel-size = 2..5 depending on font-context scale
-         (pix (max 2 (the int (* 3.0 scale))))
-         (char-gap pix)
-         (char-w (+ (* JAKX-BITMAP-FONT-COLS pix) char-gap))
-         (n (length arg0))
-         (color (new 'static 'rgba :r #xff :g #xff :b #xff :a #x80))
-         (depth #xffffff))
-    (dotimes (ci n)
-      (let* ((raw (the int (-> arg0 data ci)))
-             ;; fold lowercase → uppercase: 'a'..'z' (0x61..0x7a) -> 'A'..'Z'
-             (c (if (and (>= raw #x61) (<= raw #x7a))
-                    (- raw #x20)
-                    raw))
-             ;; only chars 0x20..0x60 have glyphs; others become '?'
-             (idx (if (and (>= c #x20) (<= c #x60))
-                      (- c #x20)
-                      (- #x3f #x20)))
-             (base (* idx JAKX-BITMAP-FONT-COLS))
-             (cx (+ ox (* ci char-w))))
-        (dotimes (col JAKX-BITMAP-FONT-COLS)
-          (let ((bits (the int (-> *jakx-bitmap-font-3x5* (+ base col)))))
-            (dotimes (row JAKX-BITMAP-FONT-ROWS)
-              (when (nonzero? (logand bits (ash 1 row)))
-                (draw-sprite2d-xy arg1
-                                  (+ cx (* col pix))
-                                  (+ oy (* row pix))
-                                  pix pix color depth)))))))
-    )
-  (the-as draw-string-result (-> arg2 origin quad))
+  "Render `arg0` via the real jakx mips2c draw-string-asm-packed routine.
+
+   draw-string-asm-packed is a direct C++ port of the PS2 asm (see
+   game/mips2c/jakx_functions/font.cpp). It emits per-glyph char-packets
+   to `arg1` with proper calc-mat projection and 5-pass outline/shadow
+   effects. The returned uint128 is reinterpreted as draw-string-result
+   so callers that read its `length` field (the accumulated x-extent
+   as a float in the low 32 bits) fall through correctly."
+  (set-context! *font-work* arg2)
+  (the-as draw-string-result (draw-string-asm-packed arg0 arg1 arg2))
   )
 
 ; (def-mips2c get-string-length (function string font-context draw-string-result))
