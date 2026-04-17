@@ -43978,8 +43978,8 @@
   )
 ;; ---vehicle-h:vehicle-flag
 
-  
-#|(deftype vehicle (rigid-body-object)
+
+(deftype vehicle (rigid-body-object)
   ((car-info                        car-info-full                               :offset-assert 288)
    (vehicle-flags                   vehicle-flag                                :offset 264 :score 1) ;; renamed ;; rigid-body-object-flag
    (damage-matrix                   matrix                            2 :inline :offset-assert 304)
@@ -44141,7 +44141,7 @@
     (vehicle-method-202 () none) ;; 202
     (vehicle-method-203 () none) ;; 203
     )
-  )|#
+  )
   
 
 (deftype vehicle-draw-thruster-params (structure)
@@ -44160,10 +44160,12 @@
   :flag-assert         #x900000054
   )
 
-;; (deftype debug-vehicle-work (basic)
-;;   ()
-;;   :flag-assert #x900000080
-;;   )
+(deftype debug-vehicle-work (basic)
+  ((pad uint8 124  :offset-assert 4))
+  :size-assert #x80
+  :method-count-assert 9
+  :flag-assert #x900000080
+  )
 
 (define-extern vehicle-init-remote function)
 (define-extern *msg-map-vehicle* array)
@@ -50900,7 +50902,7 @@
 ;; vehicle                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *debug-vehicle-work* object) ;; debug-vehicle-work
+(define-extern *debug-vehicle-work* debug-vehicle-work)
 (define-extern *tmp-vehicle-info* object)
 (define-extern *tmp-rigid-body-control* object)
 (define-extern *vehicle-shadow-control* shadow-control) ;; shadow-control
