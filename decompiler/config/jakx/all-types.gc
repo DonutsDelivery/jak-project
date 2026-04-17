@@ -15896,7 +15896,7 @@
 (define-extern *font-default-matrix* matrix)
 (define-extern *font-default-matrix-3d* matrix)
 (define-extern *font-context* font-context)
-(define-extern *font-context* font-context)
+(define-extern *font-context-3d* font-context)
 (define-extern *font-char-effect* font-char-effect)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -42438,16 +42438,16 @@
   )
 
   
-#|(deftype joint-exploder (process-drawable)
-  ((die-if-below-y             float                                :offset-assert 248)
-   (die-if-beyond-xz-dist-sqrd float                                :offset-assert 252)
-   (joints                     joint-exploder-joints                :offset-assert 256) ;; guessed by decompiler
-   (static-params              joint-exploder-static-params         :offset-assert 260) ;; guessed by decompiler
-   (anim                       art-joint-anim                       :offset-assert 264) ;; guessed by decompiler
-   (scale-vector               vector                       :inline :offset-assert 272)
-   (tuning                     joint-exploder-tuning        :inline :offset-assert 288)
-   (lists                      joint-exploder-list-array            :offset-assert 392) ;; guessed by decompiler
-   (last-colsound-time         time-frame                           :offset-assert 400) ;; time-frame
+(deftype joint-exploder (process-drawable)
+  ((die-if-below-y             float                                :offset 248)
+   (die-if-beyond-xz-dist-sqrd float                                :offset 252)
+   (joints                     joint-exploder-joints                :offset 256)
+   (static-params              joint-exploder-static-params         :offset 260)
+   (anim                       art-joint-anim                       :offset 264)
+   (scale-vector               vector                       :inline :offset 272)
+   (tuning                     joint-exploder-tuning        :inline :offset 288)
+   (lists                      joint-exploder-list-array            :offset 392)
+   (last-colsound-time         time-frame                           :offset 400)
    )
   :method-count-assert 60
   :size-assert         #x198
@@ -42465,13 +42465,13 @@
     (joint-exploder-method-59 () none) ;; 59
     )
   (:states
-    joint-exploder-shatter ;; associated process guessed by decompiler, old: (state joint-exploder)
+    joint-exploder-shatter
     )
-  )|#
+  )
   
 
-#|(define-extern joint-exploder-joint-callback (function draw-control cspace-array joint-control none))|#
-#|(define-extern joint-exploder-init-by-other (function skeleton-group int joint-exploder-tuning joint-exploder-static-params object :behavior joint-exploder))|#
+(define-extern joint-exploder-joint-callback (function draw-control cspace-array joint-control none))
+(define-extern joint-exploder-init-by-other (function skeleton-group int joint-exploder-tuning joint-exploder-static-params object :behavior joint-exploder))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; debris                         ;;
