@@ -9044,9 +9044,9 @@
     (change-sound! "Change the sound being played." (_type_ sound-name) int) ;; 10
     (update-trans! "Change the trans of the sound." (_type_ vector) int) ;; 11
     (update-vol! "Change the volume of the sound." (_type_ float) int) ;; 12
-    (update-pitch-mod! (_type_ float) none) ;; 13
-    (set-falloff-far! (_type_ float) none) ;; 14
-    (set-falloff-mode! (_type_ int) none) ;; 15
+    (update-pitch-mod! (_type_ float) int) ;; 13
+    (set-falloff-far! (_type_ float) int) ;; 14
+    (set-falloff-mode! (_type_ int) int) ;; 15
     (stop! (_type_) int) ;; 16
     )
   )
@@ -12692,21 +12692,21 @@
        If no connection exists, add it.
        Schedule an update to happen in arg1 seconds."
       (_type_ object time-frame) connection-pers) ;; 9
-    (kill-callback "Called when a connection is removed." (_type_ connection-pers) none) ;; 10
-    (kill-by-key "Remove connections with this key, calling `kill-callback`." (_type_ object) none) ;; 11
+    (kill-callback "Called when a connection is removed." (_type_ connection-pers) int) ;; 10
+    (kill-by-key "Remove connections with this key, calling `kill-callback`." (_type_ object) int) ;; 11
     (kill-matching
       "Call the given function on each connection. If it returns truthy, kill that connection."
-      (_type_ (function engine-pers connection-pers object object symbol) object object) none) ;; 12
+      (_type_ (function engine-pers connection-pers object object symbol) object object) int) ;; 12
     (update-callback
       "Called when a connection is run.
        Users can override this as needed."
-      (_type_) none) ;; 13
+      (_type_) int) ;; 13
     (run-pending-updates!
       "Run updates if they scheduled. If something is found that has no pending update, kill it.
        Note that we won't kill things on this call if they fail to update their `update-time`.
        They will survive until the next call to `run-pending-updates`!
        (or you can modify their `update-time` before that to prevent them from being killed.)"
-      (_type_ time-frame) none) ;; 14
+      (_type_ time-frame) int) ;; 14
     )
   )
 
@@ -17736,10 +17736,10 @@
     (drawable-method-12 (_type_) int) ;; 12 ;; (fill-collide-list-from-line-sphere (_type_ int collide-list collide-query) int)
     (collect-stats "Collect triangle/perf statistics for rendering.
                     This is only called when viewing stats.
-                    The vis-bits and culling registers are loaded during this time." (_type_) none) ;; 13
-    (debug-draw "Debug-draw a drawable and its children. Typically uses the debug-draw functions." (_type_) none) ;; 14
+                    The vis-bits and culling registers are loaded during this time." (_type_) int) ;; 13
+    (debug-draw "Debug-draw a drawable and its children. Typically uses the debug-draw functions." (_type_) int) ;; 14
     (unpack-vis (_type_ (pointer int8) (pointer int8)) (pointer int8)) ;; 15
-    (collect-regions "Fill the region-prim-list with regions that intersect the sphere." (_type_ sphere int region-prim-list) none) ;; 16
+    (collect-regions "Fill the region-prim-list with regions that intersect the sphere." (_type_ sphere int region-prim-list) int) ;; 16
     )
   )
 
@@ -21158,10 +21158,10 @@
 
   
 (deftype instance (drawable)
-  ((bucket-index uint16           :offset-assert 6)
-   (origin       matrix4h :inline :offset-assert 32)
-   (flags        uint16           :offset-assert 46) ;; instance-flags
-   (wind-index   uint16           :offset-assert 62)
+  ((bucket-index uint16           :offset 6)
+   (origin       matrix4h :inline :offset 32)
+   (flags        uint16           :offset 46) ;; instance-flags
+   (wind-index   uint16           :offset 62)
    )
   :method-count-assert 17
   :size-assert         #x40
@@ -30458,11 +30458,11 @@
     (compute-trans-at-time (_type_ float vector) vector) ;; 9
     (compute-transv-at-time (_type_ float vector) vector) ;; 10
     (compute-time-until-apex (_type_) float) ;; 11
-    (setup-from-to-duration! (_type_ vector vector float float) none) ;; 12
-    (setup-from-to-xz-vel! (_type_ vector vector float float) none) ;; 13
-    (setup-from-to-y-vel! (_type_ vector vector float float) none) ;; 14
-    (setup-from-to-height! (_type_ vector vector float float) none) ;; 15
-    (setup-from-to-duration-and-height! (_type_ vector vector float float) none) ;; 16
+    (setup-from-to-duration! (_type_ vector vector float float) int) ;; 12
+    (setup-from-to-xz-vel! (_type_ vector vector float float) int) ;; 13
+    (setup-from-to-y-vel! (_type_ vector vector float float) int) ;; 14
+    (setup-from-to-height! (_type_ vector vector float float) int) ;; 15
+    (setup-from-to-duration-and-height! (_type_ vector vector float float) int) ;; 16
     (debug-draw (_type_) none) ;; 17
     )
   )
