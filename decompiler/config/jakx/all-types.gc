@@ -2026,10 +2026,10 @@
 ;; net-anim                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (deftype net-anim-path (uint8)
-;;   ()
-;;   :flag-assert #x900000001
-;;   )
+(deftype net-anim-path (uint8)
+  ()
+  :flag-assert #x900000001
+  )
 
 
 (deftype net-anim-state (structure)
@@ -4186,11 +4186,10 @@
 
 
 
-#|
 (deftype in-game-menu-hud (hud-item-group)
   ((start-time      uint64     :offset-assert 48)
    (selection-index int8       :offset-assert 56)
-   (old-clock-ratio UNKNOWN 22 :offset-assert 60)
+   (old-clock-ratio uint32 22  :offset-assert 60)
    (sound-id        uint32     :offset-assert 148)
    )
   :method-count-assert 26
@@ -4201,17 +4200,16 @@
     (in-game-menu-hud-method-25 () none) ;; 25
     )
   )
-|#
 
 
 
   
-#|(deftype in-game-menu-hud-options (in-game-menu-hud)
+(deftype in-game-menu-hud-options (in-game-menu-hud)
   ()
   :method-count-assert 26
   :size-assert         #x98
   :flag-assert         #x1a00000098
-  )|#
+  )
   
 
 
@@ -7541,10 +7539,10 @@
   )
 
 
-;; (deftype part-id (uint32)
-;;   ()
-;;   :flag-assert #x900000004
-;;   )
+(deftype part-id (uint32)
+  ()
+  :flag-assert #x900000004
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -9117,15 +9115,15 @@
 |#
 
 
-;; (deftype vif-fbrst (uint32)
-;;   ()
-;;   :flag-assert #x900000004
-;;   )
+(deftype vif-fbrst (uint32)
+  ()
+  :flag-assert #x900000004
+  )
 
-;; (deftype vif-err (uint32)
-;;   ()
-;;   :flag-assert #x900000004
-;;   )
+(deftype vif-err (uint32)
+  ()
+  :flag-assert #x900000004
+  )
 
 
   
@@ -31857,15 +31855,15 @@
   
 
 
-;; (deftype drawable-inline-array-instance-shrub (drawable-inline-array)
-;;   ()
-;;   :flag-assert #x1100000074
-;;   )
+(deftype drawable-inline-array-instance-shrub (drawable-inline-array)
+  ()
+  :flag-assert #x1100000020
+  )
 
-;; (deftype drawable-tree-instance-shrub (drawable-tree)
-;;   ()
-;;   :flag-assert #x1100000020
-;;   )
+(deftype drawable-tree-instance-shrub (drawable-tree)
+  ()
+  :flag-assert #x1100000020
+  )
 
 
   
@@ -34315,8 +34313,26 @@
   :flag-assert         #x21186018ec
   )
 
+(deftype death-indicator-view-10 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype death-indicator-view-11 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype death-indicator-view-12 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype death-indicator-view-13 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype death-indicator-view-14 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype death-indicator-view-20 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype death-indicator-view-21 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype death-indicator-view-22 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype death-indicator-view-23 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype death-indicator-view-24 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
 
-
+(deftype hud-in-game-menu-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-in-game-menu-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-in-game-menu-view-2 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-in-game-menu-view-shared-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-in-game-menu-view-shared-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-in-game-menu-view-shared-2 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-in-game-menu-networked-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-in-game-menu-networked-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-in-game-menu-networked-view-2 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
 
 #|(deftype hud-map (hud)
   ((x float  :offset-assert 6364)
@@ -45770,19 +45786,20 @@
 
 
 
-#|
 (deftype net-game-mgr (process-nettable)
   ((scheduled-finish-time int32      :offset-assert 188)
    (scheduled-finish-mode basic      :offset-assert 192)
    (sorted-ct             int8       :offset-assert 196)
    (human-ct              int8       :offset-assert 197)
-   (sorted-ids            UNKNOWN 24 :offset-assert 198)
+   (sorted-ids            uint8 24   :offset-assert 198)
+   (pad0                  uint8 2)
    (intro-end-time        int32      :offset-assert 224)
-   (hud-player-indicators UNKNOWN 2  :offset-assert 232)
+   (hud-player-indicators uint64  2  :offset-assert 232)
    (net-players           basic      :offset-assert 248)
-   (stats-hud             UNKNOWN 2  :offset-assert 256)
-   (intro-handle          UNKNOWN 2  :offset-assert 272)
-   (cheats                UNKNOWN 4  :offset-assert 288)
+   (pad1                  uint8 4)
+   (stats-hud             uint64  2  :offset-assert 256)
+   (intro-handle          uint64  2  :offset-assert 272)
+   (cheats                uint16  4  :offset-assert 288)
    (state-time            uint64     :offset-assert 296)
    )
   :method-count-assert 80
@@ -45829,7 +45846,6 @@
     (net-game-mgr-method-79 () none) ;; 79
     )
   )
-|#
 
 
 (define-extern net-game-mgr-init-remote function)
@@ -45887,12 +45903,12 @@
 
 
 
-#|
 (deftype net-game-mgr-race (net-game-mgr)
   ((lap-count       int8       :offset-assert 304)
    (racer-ct        int8       :offset-assert 305)
-   (racer-ids       UNKNOWN 24 :offset-assert 306)
+   (racer-ids       uint8 24   :offset-assert 306)
    (race-count-down int8       :offset-assert 330)
+   (race-pad0       uint8 13)
    (banner          uint64     :offset-assert 344)
    (hud-clock       uint64     :offset-assert 352)
    (auto-end-time   int32      :offset-assert 360)
@@ -45911,7 +45927,6 @@
     (net-game-mgr-race-method-87 () none) ;; 87
     )
   )
-|#
 
 
 (define-extern net-player-race-init-remote function)
@@ -45972,7 +45987,7 @@
 
 
   
-#|(deftype net-game-mgr-deathmatch (net-game-mgr)
+(deftype net-game-mgr-deathmatch (net-game-mgr)
   ((spawner-array basic  :offset-assert 304)
    (spawner-count int8   :offset-assert 308)
    )
@@ -45985,7 +46000,7 @@
     (net-game-mgr-deathmatch-method-82 () none) ;; 82
     (net-game-mgr-deathmatch-method-83 () none) ;; 83
     )
-  )|#
+  )
   
 
 
@@ -46037,13 +46052,13 @@
 
 
   
-#|(deftype net-game-mgr-deathrace (net-game-mgr-race)
+(deftype net-game-mgr-deathrace (net-game-mgr-race)
   ((next-drone-spawn-time uint64  :offset-assert 368)
    )
   :method-count-assert 88
   :size-assert         #x178
   :flag-assert         #x5800f00178
-  )|#
+  )
   
 
 
@@ -46190,12 +46205,12 @@
 
 
   
-#|(deftype net-game-mgr-beasthunt (net-game-mgr-deathmatch)
+(deftype net-game-mgr-beasthunt (net-game-mgr-deathmatch)
   ()
   :method-count-assert 84
   :size-assert         #x135
   :flag-assert         #x5400b00135
-  )|#
+  )
   
 
 
@@ -46210,13 +46225,13 @@
 
 
   
-#|(deftype net-game-mgr-collectable (net-game-mgr-deathmatch)
+(deftype net-game-mgr-collectable (net-game-mgr-deathmatch)
   ((steal-mode basic  :offset-assert 312)
    )
   :method-count-assert 84
   :size-assert         #x13c
   :flag-assert         #x5400b0013c
-  )|#
+  )
   
 
 
@@ -46295,13 +46310,13 @@
 
 
   
-#|(deftype net-game-mgr-ctf (net-game-mgr-deathmatch)
+(deftype net-game-mgr-ctf (net-game-mgr-deathmatch)
   ((red-spawners-count int8  :offset-assert 309)
    )
   :method-count-assert 84
   :size-assert         #x136
   :flag-assert         #x5400b00136
-  )|#
+  )
   
 
 
@@ -46431,14 +46446,14 @@
 
 
   
-#|(deftype net-game-mgr-time-box (net-game-mgr-race)
+(deftype net-game-mgr-time-box (net-game-mgr-race)
   ((total-race-time uint32  :offset-assert 364)
    (sound-id        uint32  :offset-assert 368)
    )
   :method-count-assert 88
   :size-assert         #x174
   :flag-assert         #x5800f00174
-  )|#
+  )
   
 
 
@@ -46453,18 +46468,18 @@
 
 
   
-#|(deftype net-game-mgr-time-trial (net-game-mgr-race)
+(deftype net-game-mgr-time-trial (net-game-mgr-race)
   ()
   :method-count-assert 88
   :size-assert         #x16c
   :flag-assert         #x5800e0016c
-  )|#
+  )
   
 
 
 
   
-#|(deftype net-game-mgr-training (net-game-mgr-deathrace)
+(deftype net-game-mgr-training (net-game-mgr-deathrace)
   ((spawn-ai-num int32  :offset-assert 376)
    (ai-num       int32  :offset-assert 380)
    (ais-move?    basic  :offset-assert 384)
@@ -46474,7 +46489,7 @@
   :method-count-assert 88
   :size-assert         #x18c
   :flag-assert         #x580100018c
-  )|#
+  )
   
 
 
@@ -48983,10 +48998,10 @@
 ;; net-process-mgr                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (deftype owner-and-flags (int8)
-;;   ()
-;;   :flag-assert #x900000001
-;;   )
+(deftype owner-and-flags (int8)
+  ()
+  :flag-assert #x900000001
+  )
 
 
 #|
@@ -59500,7 +59515,6 @@
 (define-extern combo-tracker object)
 (define-extern construction-object object)
 (define-extern daxter object)
-(define-extern death-indicator-view-10 object)
 (define-extern debris-group object)
 (define-extern debug-rigid-body-move object)
 (define-extern disc-error-proc object)
@@ -59548,7 +59562,6 @@
 (define-extern hoff-text-floater object)
 (define-extern hud-game-end-grand-prix object)
 (define-extern hud-in-game-menu-options-view-0 object)
-(define-extern hud-in-game-menu-view-0 object)
 (define-extern hud-item-player-name object)
 (define-extern hud-map object)
 (define-extern hud-player-indicators-view0 object)
@@ -59591,8 +59604,6 @@
 (define-extern nav-mesh-poly-array object)
 (define-extern net-enemy-info object)
 (define-extern net-game-mgr object)
-(define-extern net-game-mgr-deathmatch object)
-(define-extern net-game-mgr-deathrace object)
 (define-extern net-game-mgr-rushhour object)
 (define-extern net-latency-metrics-params object)
 (define-extern net-update-conn-errors object)
@@ -59673,7 +59684,6 @@
 (define-extern bone-layout object)
 (define-extern collide-frag-mesh object)
 (define-extern connection-minimap object)
-(define-extern death-indicator-view-11 object)
 (define-extern fact-info-crate object)
 (define-extern foreground-area object)
 (define-extern hang-time-hud-single object)
@@ -59684,7 +59694,6 @@
 (define-extern hud-game-end-view-0 object)
 (define-extern hud-headset-talker-race object)
 (define-extern hud-in-game-menu-options-view-1 object)
-(define-extern hud-in-game-menu-view-1 object)
 (define-extern hud-item-player-score object)
 (define-extern hud-player-indicators-view1 object)
 (define-extern hud-points-combo-display1 object)
@@ -59731,13 +59740,11 @@
 (define-extern wrong-way-linebot object)
 
 ;; Auto-extern batch 3
-(define-extern death-indicator-view-12 object)
 (define-extern hud-background-top-view-0 object)
 (define-extern hud-deathrace-stats-multi object)
 (define-extern hud-game-end-side-view-0 object)
 (define-extern hud-headset-talker-other object)
 (define-extern hud-in-game-menu-options-view-2 object)
-(define-extern hud-in-game-menu-view-2 object)
 (define-extern hud-item-number object)
 (define-extern hud-points-combo-display2 object)
 (define-extern hud-race-stats-side-view-0 object)
@@ -59760,7 +59767,6 @@
 (define-extern collide-fragment object)
 (define-extern collision-cylinder-array object)
 (define-extern collision-editor-edited-proc object)
-(define-extern death-indicator-view-13 object)
 (define-extern drawable-tree-tfrag-trans-shared object)
 (define-extern editable-sample object)
 (define-extern eznet-combination object)
@@ -59773,7 +59779,6 @@
 (define-extern hud-deathrace-stats-split-view-0 object)
 (define-extern hud-game-end-top-view-0 object)
 (define-extern hud-icon object)
-(define-extern hud-in-game-menu-view-shared-0 object)
 (define-extern hud-points-combo-display3 object)
 (define-extern hud-race-stats-view-1 object)
 (define-extern hud-results-team-view-0 object)
@@ -59830,7 +59835,6 @@
 (define-extern collision-editor object)
 (define-extern cty-attack-reset object)
 (define-extern cty-faction-evaluate-commands object)
-(define-extern death-indicator-view-14 object)
 (define-extern drawable-inline-array-collide-fragment object)
 (define-extern drawable-tree-tfrag-water-shared object)
 (define-extern editable-light object)
@@ -59840,7 +59844,6 @@
 (define-extern hud-background-side-view-0 object)
 (define-extern hud-cash-stats-single object)
 (define-extern hud-deathrace-stats-split-view-1 object)
-(define-extern hud-in-game-menu-view-shared-1 object)
 (define-extern hud-points-combo-display4 object)
 (define-extern hud-results-team-view-1 object)
 (define-extern hud-top-split-bar object)
@@ -59877,7 +59880,6 @@
 ;; Auto-extern batch 6
 (define-extern check-line-spheres-hack-work object)
 (define-extern cloud-vert-array object)
-(define-extern death-indicator-view-20 object)
 (define-extern drawable-inline-array-tfrag-trans object)
 (define-extern editable-entity object)
 (define-extern external-camera-controller object)
@@ -59885,7 +59887,6 @@
 (define-extern hud-assassin-indicators-view0 object)
 (define-extern hud-background-side-view-1 object)
 (define-extern hud-cash-stats-top-view-0 object)
-(define-extern hud-in-game-menu-view-shared-2 object)
 (define-extern hud-side-split-bar object)
 (define-extern jakx-logo-menu object)
 (define-extern light-trail-tracker-projectile object)
@@ -59910,12 +59911,10 @@
 (define-extern weapon-trail object)
 
 ;; Auto-extern batch 7
-(define-extern death-indicator-view-21 object)
 (define-extern editable-face object)
 (define-extern haze-vert-array object)
 (define-extern hud-assassin-indicators-view1 object)
 (define-extern hud-cash-stats-top-view-1 object)
-(define-extern hud-in-game-menu-networked-view-0 object)
 (define-extern medius-add-to-buddy-list-response object)
 (define-extern medius-disband-clan-response object)
 (define-extern medius-file-list-request object)
@@ -59936,10 +59935,8 @@
 (define-extern tread-trail-crumb object)
 
 ;; Auto-extern batch 8
-(define-extern death-indicator-view-22 object)
 (define-extern editable-plane object)
 (define-extern hud-cash-stats-side-view-0 object)
-(define-extern hud-in-game-menu-networked-view-1 object)
 (define-extern medius-add-to-ignore-list-request object)
 (define-extern medius-dnas-signature-post object)
 (define-extern medius-file-list-response object)
@@ -59956,10 +59953,8 @@
 (define-extern tread-trail object)
 
 ;; Auto-extern batch 9
-(define-extern death-indicator-view-23 object)
 (define-extern editable-work object)
 (define-extern hud-cash-stats-side-view-1 object)
-(define-extern hud-in-game-menu-networked-view-2 object)
 (define-extern medius-add-to-ignore-list-response object)
 (define-extern medius-end-game-report object)
 (define-extern medius-file-update-attributes-request object)
@@ -59976,7 +59971,6 @@
 (define-extern weapon-trail-tracker object)
 
 ;; Auto-extern batch 10
-(define-extern death-indicator-view-24 object)
 (define-extern medius-account-delete-request object)
 (define-extern medius-anonymous-login-request object)
 (define-extern medius-error-message object)
@@ -60432,6 +60426,35 @@
 (define-extern medius-last-response object)
 (define-extern medius-meta-data-response object)
 (define-extern medius-simple-request object)
+(define-extern net-bit-mask object)
+(define-extern medius-account-registration-response object)
+(define-extern medius-channel-list-request object)
+(define-extern medius-game-list-request object)
+(define-extern medius-get-locations-request object)
+(define-extern medius-modify-clan-message-response object)
+(define-extern medius-world-report object)
+(define-extern medius-file-cancel-operation-request object)
+(define-extern string-info object)
+(define-extern net-client-list object)
+(define-extern medius-account-update-password-request object)
+(define-extern medius-channel-list-response object)
+(define-extern medius-game-list-response object)
+(define-extern medius-get-locations-response object)
+(define-extern medius-pick-location-request object)
+(define-extern medius-get-universe-information-request object)
+(define-extern medius-file-cancel-operation-response object)
+(define-extern menu-string-array object)
+(define-extern race-mesh-debug object)
+(define-extern hud-deathmatch-single object)
+(define-extern net-send-message-in-params object)
+(define-extern medius-account-update-profile-request object)
+(define-extern medius-chat-fwd-message object)
+(define-extern medius-game-world-player-list-request object)
+(define-extern medius-get-my-clan-messages-request object)
+(define-extern medius-pick-location-response object)
+(define-extern medius-universe-news-response object)
+(define-extern medius-server-authentication-request object)
+(define-extern string-menu-info object)
 
 
 ;; time-of-day-proc stub
