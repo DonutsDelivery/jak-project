@@ -51,7 +51,14 @@ if [ "$FORCE" != "1" ] && [ -f "$CFG_HASH_FILE" ]; then
     if [ "$OLD_HASH" = "$NEW_HASH" ]; then
         echo "config unchanged since last run (hash=$NEW_HASH); skipping decomp." \
           | tee -a "$RUN_LOG"
-        python3 scripts/jakx_watch/measure.py
+        # Re-render status.md from existing latest.json (don't overwrite it with
+        # a bare snapshot from the default decompiler_out/jakx path).
+        LATEST="$ROOT/.jakx_watch/history/latest.json"
+        if [ -f "$LATEST" ]; then
+            python3 scripts/jakx_watch/measure.py --restatus-only 2>&1 | tee -a "$RUN_LOG"
+        elif [ -d "$OUT_DIR/jakx" ]; then
+            python3 scripts/jakx_watch/measure.py --decomp-out "$OUT_DIR/jakx" 2>&1 | tee -a "$RUN_LOG"
+        fi
         exit 0
     fi
 fi
