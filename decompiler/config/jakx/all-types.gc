@@ -30830,10 +30830,11 @@
   
 
 
-;; (deftype drawable-tree-collide-fragment (drawable-tree)
-;;   ()
-;;   :flag-assert #x1100000020
-;;   )
+(deftype drawable-tree-collide-fragment (drawable-tree)
+  "Unused jak 1 background collision data."
+  ()
+  :flag-assert #x1100000020
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -31896,10 +31897,10 @@
 ;;   :flag-assert #x1100000044
 ;;   )
 
-;; (deftype prototype-generic-shrub (drawable-group)
-;;   ()
-;;   :flag-assert #x1100000020
-;;   )
+(deftype prototype-generic-shrub (drawable-group)
+  ()
+  :flag-assert #x1100000020
+  )
 
 
 (deftype shrubbery-matrix (structure)
@@ -32446,50 +32447,60 @@
   
 
 
-;; (deftype drawable-inline-array-tfrag (drawable-inline-array)
-;;   ()
-;;   :flag-assert #x1100000064
-;;   )
+(deftype drawable-inline-array-tfrag (drawable-inline-array)
+  "Array of tfragments"
+  ((data tfragment 1 :inline :offset-assert 32)
+   (pad uint32)
+   )
+  :flag-assert #x1100000064
+  )
 
-;; (deftype drawable-inline-array-tfrag-trans (drawable-inline-array-tfrag)
-;;   ()
-;;   :flag-assert #x11000000b4
-;;   )
+(deftype drawable-inline-array-tfrag-trans (drawable-inline-array-tfrag)
+  ;; note: this is probably a bug in the type layout, copied from jak 1.
+  ;; this data2 is not used.
+  ((data2 tfragment 1 :inline :offset-assert 112)
+   (pad2 uint32))
+  :flag-assert #x11000000b4
+  )
 
-;; (deftype drawable-inline-array-tfrag-water (drawable-inline-array-tfrag)
-;;   ()
-;;   :flag-assert #x11000000b4
-;;   )
+(deftype drawable-inline-array-tfrag-water (drawable-inline-array-tfrag)
+  ((data2 tfragment 1 :inline :offset-assert 112)
+   (pad2 uint32))
+  :flag-assert #x11000000b4
+  )
 
-;; (deftype drawable-tree-tfrag (drawable-tree)
-;;   ()
-;;   :flag-assert #x1100000020
-;;   )
+(deftype drawable-tree-tfrag (drawable-tree)
+  "top level tfrag tree."
+  ((time-of-day-pal time-of-day-palette :offset 12)
+   (arrays    drawable-inline-array :dynamic :offset 32 :score 100) ;; either drawable-inline-array-node or drawable-inline-array-tfrag
+   )
+  :flag-assert #x1100000020
+  )
 
-;; (deftype drawable-tree-tfrag-trans (drawable-tree-tfrag)
-;;   ()
-;;   :flag-assert #x1100000020
-;;   )
+(deftype drawable-tree-tfrag-trans (drawable-tree-tfrag)
+  ()
+  :flag-assert #x1100000020
+  )
 
-;; (deftype drawable-tree-tfrag-water (drawable-tree-tfrag)
-;;   ()
-;;   :flag-assert #x1100000020
-;;   )
+(deftype drawable-tree-tfrag-water (drawable-tree-tfrag)
+  ()
+  :flag-assert #x1100000020
+  )
 
-;; (deftype drawable-tree-tfrag-shared (drawable-tree-tfrag)
-;;   ()
-;;   :flag-assert #x1100000020
-;;   )
+(deftype drawable-tree-tfrag-shared (drawable-tree-tfrag)
+  ()
+  :flag-assert #x1100000020
+  )
 
-;; (deftype drawable-tree-tfrag-trans-shared (drawable-tree-tfrag-shared)
-;;   ()
-;;   :flag-assert #x1100000020
-;;   )
+(deftype drawable-tree-tfrag-trans-shared (drawable-tree-tfrag-shared)
+  ()
+  :flag-assert #x1100000020
+  )
 
-;; (deftype drawable-tree-tfrag-water-shared (drawable-tree-tfrag-shared)
-;;   ()
-;;   :flag-assert #x1100000020
-;;   )
+(deftype drawable-tree-tfrag-water-shared (drawable-tree-tfrag-shared)
+  ()
+  :flag-assert #x1100000020
+  )
 
 
   
@@ -36958,13 +36969,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(deftype drawable-inline-array-tfrag (drawable-inline-array)
-  "Array of tfragments"
-  ((data tfragment 1 :inline :offset-assert 32)
-   (pad uint32)
-   )
-  :flag-assert #x1100000064
-  )
+;; drawable-inline-array-tfrag moved to tfrag-near block earlier in file
+;; so that subtypes drawable-inline-array-tfrag-trans/-water can reference it.
 
 
 (define-extern *tfrag-display-stats* symbol) ;; symbol
@@ -59423,13 +59429,8 @@
   :flag-assert         #x900000004
   )
 
-;; drawable-tree-tfrag-shared stub
-(deftype drawable-tree-tfrag-shared (drawable-tree)
-  ()
-  :method-count-assert 17
-  :size-assert         #x20
-  :flag-assert         #x1100000020
-  )
+;; drawable-tree-tfrag-shared now defined earlier with proper parent
+;; drawable-tree-tfrag (see tfrag-near block).
 
 ;; Explicit type-symbol externs for types that have UNKNOWN fields or other
 ;; registration issues. These force add_symbol even when the deftype didn't
