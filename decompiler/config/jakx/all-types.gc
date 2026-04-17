@@ -6637,19 +6637,12 @@
 
   
 #|(deftype muzzle-flash (process-drawable)
-  ((glued-to       uint64             :offset-assert 248)
-   (glued-joint    int32              :offset-assert 256)
-   (local-rotation quaternion :inline :offset-assert 272)
-   )
-  :method-count-assert 52
-  :size-assert         #x120
-  :flag-assert         #x3400900120
-  (:state-methods
-    idle ;; 51
-    lit ;; 50
-    )
+  ()
+  :method-count-assert 50
+  :size-assert         #xf8
+  :flag-assert         #x32007000f8
   )|#
-  
+
 
 
 
@@ -9904,11 +9897,11 @@
   :size-assert         #x98
   :flag-assert         #xa00000098
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type int) _type_)
-    (cpad-info-method-9 () none) ;; 9 ;; (adjust-to-screen-flip (_type_) int)
+    (new (symbol type) _type_) ;; 0
+    (cpad-info-method-9 (_type_) int) ;; 9
     )
   )|#
-  
+
 
 
 
@@ -15281,50 +15274,11 @@
 
   
 #|(deftype blit-displays-work (structure)
-  ((adgif-tmpl               dma-gif-packet :inline :offset-assert 0)
-   (sprite-tmpl              dma-gif-packet :inline :offset-assert 32)
-   (contrast-tmpl            dma-gif-packet :inline :offset-assert 64)
-   (sprite-slow-tmpl         dma-gif-packet :inline :offset-assert 96)
-   (screen-tmpl              dma-gif-packet :inline :offset-assert 128)
-   (blur-tmpl                dma-gif-packet :inline :offset-assert 160)
-   (blur-tmpl2               dma-gif-packet :inline :offset-assert 192)
-   (line-tmpl                dma-gif-packet :inline :offset-assert 224)
-   (scan-tmpl                dma-gif-packet :inline :offset-assert 256)
-   (color                    vector4w       :inline :offset-assert 288)
-   (line-color               uint64                 :offset-assert 304)
-   (scan-colors              vector4w       15      :offset-assert 320) ;; guessed by decompiler
-   (vu1-enable-user-menu     uint64                 :offset-assert 560) ;; vu1-renderer-mask
-   (texture-enable-user-menu uint32                 :offset-assert 568)
-   (horizontal-flip-flag     symbol                 :offset-assert 572) ;; guessed by decompiler
-   (scan-alpha               float                  :offset-assert 576)
-   (scanline                 uint32                 :offset-assert 580)
-   (progress-interp          float                  :offset-assert 584)
-   (progress-interp-dest     float                  :offset-assert 588)
-   (progress-interp-speed    float                  :offset-assert 592)
+  ((pad uint8 596 :offset-assert 0)
    )
   :method-count-assert 27
   :size-assert         #x254
   :flag-assert         #x1b00000254
-  (:methods
-    (blit-displays-work-method-9 () none) ;; 9 ;; (blit-displays-work-method-9 () none)
-    (blit-displays-work-method-10 () none) ;; 10 ;; (blit-displays-work-method-10 () none)
-    (blit-displays-work-method-11 () none) ;; 11 ;; (blit-displays-work-method-11 () none)
-    (blit-displays-work-method-12 () none) ;; 12 ;; (blit-displays-work-method-12 () none)
-    (blit-displays-work-method-13 () none) ;; 13 ;; (blit-displays-work-method-13 () none)
-    (blit-displays-work-method-14 () none) ;; 14 ;; (blit-displays-work-method-14 () none)
-    (blit-displays-work-method-15 () none) ;; 15 ;; (blit-displays-work-method-15 () none)
-    (blit-displays-work-method-16 () none) ;; 16 ;; (blit-displays-work-method-16 () none)
-    (blit-displays-work-method-17 () none) ;; 17 ;; (blit-displays-work-method-17 (_type_ vector int float symbol) none)
-    (blit-displays-work-method-18 () none) ;; 18 ;; (blit-displays-work-method-18 () none)
-    (blit-displays-work-method-19 () none) ;; 19 ;; (blit-displays-work-method-19 (_type_) none)
-    (blit-displays-work-method-20 () none) ;; 20 ;; (blit-displays-work-method-20 (_type_) none)
-    (blit-displays-work-method-21 () none) ;; 21 ;; (get-menu-mode (_type_) symbol)
-    (blit-displays-work-method-22 () none) ;; 22 ;; (get-screen-copied (_type_) symbol)
-    (blit-displays-work-method-23 () none) ;; 23 ;; (get-horizontal-flip-flag (_type_) symbol)
-    (blit-displays-work-method-24 () none) ;; 24 ;; (set-menu-mode (_type_ symbol) symbol)
-    (blit-displays-work-method-25 () none) ;; 25 ;; (set-screen-copied (_type_ symbol) symbol)
-    (blit-displays-work-method-26 () none) ;; 26 ;; (set-horizontal-flip-flag (_type_ symbol) symbol)
-    )
   )|#
   
 
@@ -21091,16 +21045,15 @@
 
 
 
-#|
 (deftype prototype-node-group (basic)
   ((next-prototype       int16       :offset-assert 4)
    (next-free            int16       :offset-assert 6)
-   (next-child-prototype UNKNOWN 19  :offset-assert 8)
-   (data                 UNKNOWN 512 :offset-assert 48)
+   (next-child-prototype uint8 40    :offset-assert 8)
+   (data                 uint8 8144  :offset-assert 48)
    )
   :method-count-assert 15
-  :size-assert         #x2030
-  :flag-assert         #xf00002030
+  :size-assert         #x2000
+  :flag-assert         #xf00002000
   (:methods
     (prototype-node-group-method-9 () none) ;; 9
     (prototype-node-group-method-10 () none) ;; 10
@@ -21110,7 +21063,6 @@
     (prototype-node-group-method-14 () none) ;; 14
     )
   )
-|#
 
 
 
@@ -28660,6 +28612,23 @@
     process-drawable-idle ;; associated process guessed by decompiler, old: (state process-drawable)
     )
   )
+
+;; manipy: minimal process-drawable subclass (same size as parent)
+(deftype manipy (process-drawable)
+  ()
+  :method-count-assert 50
+  :size-assert         #xf8
+  :flag-assert         #x32007000f8
+  )
+
+
+;; manipy: minimal subclass of process-drawable (referenced by :behavior tags)
+(deftype manipy (process-drawable)
+  ()
+  :method-count-assert 50
+  :size-assert         #xf8
+  :flag-assert         #x32007000f8
+  )
   
 
   
@@ -29975,7 +29944,14 @@
 
 
   
-#|(deftype collide-shape-moving (collide-shape)
+(deftype collide-shape-moving (collide-shape)
+  ((csm-pad uint8 272 :offset 200))
+  :method-count-assert 55
+  :size-assert         #x1d8
+  :flag-assert         #x37000001d8
+  )
+#|
+(deftype collide-shape-moving-FULL-PENDING (collide-shape)
   ((rider-time         uint64                                                                     :offset-assert 200) ;; time-frame
    (rider-last-move    vector                                                             :inline :offset-assert 208)
    (trans-old          vector                                                             :inline :offset-assert 224)
@@ -33195,46 +33171,44 @@
 
 
   
-#|(deftype eye (structure)
-  ((data         vector       2 :offset-assert 0) ;; guessed by decompiler
-   (x            float          :offset-assert 0)
+(deftype eye (structure)
+  ((x            float          :offset-assert 0)
    (y            float          :offset-assert 4)
    (lid          float          :offset-assert 8)
+   (pad0         uint32         :offset-assert 12)
    (iris-scale   float          :offset-assert 16)
    (pupil-scale  float          :offset-assert 20)
    (lid-scale    float          :offset-assert 24)
+   (pad1         uint32         :offset-assert 28)
    (tbp          int32          :offset-assert 32)
    (shader-count uint32         :offset-assert 36)
-   (shader       adgif-shader 8 :offset-assert 40) ;; guessed by decompiler
+   (pad2         uint8       40 :offset-assert 40)
    )
   :method-count-assert 9
-  :size-assert         #x48
-  :flag-assert         #x900000048
-  )|#
+  :size-assert         #x50
+  :flag-assert         #x900000050
+  )
   
 
 
 
-#|
 (deftype eye-control (structure)
   ((process            uint64                              :offset-assert 0) ;; handle
    (random-time        uint16                              :offset-assert 8)
    (bucket             uint16                              :offset-assert 10)
    (blink              float                               :offset-assert 12)
    (shaders            (inline-array adgif-shader)         :offset-assert 16) ;; guessed by decompiler
-   (eyes               eye                         2       :offset-assert 32) ;; guessed by decompiler
    (left               eye                         :inline :offset-assert 32)
    (right              eye                         :inline :offset-assert 112)
    (level-index        int16                               :offset-assert 192)
    (high-res?          symbol                              :offset-assert 196) ;; guessed by decompiler
    (level-texture-page uint32                              :offset-assert 200)
-   (UNKNOWN            UNKNOWN                             :offset-assert -1) ;; field could not be read.
+   (pad                uint8                       64      :offset-assert 204)
    )
   :method-count-assert 9
   :size-assert         #x10c
   :flag-assert         #x90000010c
   )
-|#
 
 
 
@@ -44324,7 +44298,7 @@
 
 
   
-#|(deftype race-state (structure)
+(deftype race-state (structure)
   ((start-sphere           sphere      :inline :offset-assert 0)
    (start-dir              vector      :inline :offset-assert 16)
    (finish-sphere          sphere      :inline :offset-assert 32)
@@ -44342,7 +44316,7 @@
    (race-ai-tuning         basic               :offset-assert 96)
    (race-ai-tuning-indices basic               :offset-assert 100)
    (longest-race-line-dist float               :offset-assert 104)
-   (racer-array            racer-state 10      :offset-assert 112) ;; guessed by decompiler
+   (racer-array            uint8    964       :offset-assert 108) ;; actually (racer-state 10)
    )
   :method-count-assert 12
   :size-assert         #x430
@@ -44352,7 +44326,7 @@
     (race-state-method-10 () none) ;; 10 ;; (begin-race (_type_) none)
     (race-state-method-11 () none) ;; 11 ;; (update (_type_) none)
     )
-  )|#
+  )
   
 
 
@@ -44381,13 +44355,12 @@
 
 
 
-#|
 (deftype race-mesh-slice-query (structure)
   ((search-sphere sphere    :inline :offset-assert 0)
-   (slice-range   UNKNOWN   2       :offset-assert 16)
+   (slice-range   int16     2       :offset-assert 16)
    (race-line     race-line         :offset-assert 20)
    (pt-on-slice   vector    :inline :offset-assert 32)
-   (slice-corners vector    4       :offset-assert 48) ;; guessed by decompiler
+   (slice-corners vector    4 :inline :offset-assert 48)
    (lap-dist      float             :offset-assert 112)
    (slice-id      int16             :offset-assert 116)
    )
@@ -44395,7 +44368,6 @@
   :size-assert         #x76
   :flag-assert         #x900000076
   )
-|#
 
 
 
@@ -44498,19 +44470,19 @@
 
 
   
-#|(deftype race-control (structure)
+(deftype race-control (structure)
   ((state       race-state   :offset-assert 0)
    (racer-state racer-state  :offset-assert 4)
-   (mesh        race-mesh    :offset-assert 8) ;; guessed by decompiler
+   (mesh        basic        :offset-assert 8) ;; actually race-mesh (stubbed)
    (line        race-line    :offset-assert 12)
    )
   :method-count-assert 10
   :size-assert         #x10
   :flag-assert         #xa00000010
   (:methods
-    (race-control-method-9 () none) ;; 9 ;; (race-control-method-9 (_type_ int vector) none)
+    (race-control-method-9 () none) ;; 9
     )
-  )|#
+  )
   
 
 
@@ -44909,8 +44881,14 @@
 
 
 
-#|
 (deftype wvehicle (vehicle)
+  ((wvehicle-pad uint8 2523 :offset 2137))
+  :method-count-assert 204
+  :size-assert         #x1234
+  :flag-assert         #xcc11b01234
+  )
+#|
+(deftype wvehicle-FULL-PENDING (vehicle)
   ((net-extra                      wvehicle-net-extra        :inline :offset-assert 2140)
    (antenna                        uint64                            :offset-assert 2152)
    (fire-tracker                   uint64                            :offset-assert 2160)
@@ -45100,6 +45078,13 @@
 |#
 
 
+;; wcar-base stub (extends wvehicle)
+(deftype wcar-base (wvehicle)
+  ((wcar-base-pad uint8 396 :offset 4660))
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
 
 
 (deftype vehicle-antenna-init-params (structure)
@@ -46668,18 +46653,17 @@
 
 
   
-#|(deftype menu-option-info (structure)
+(deftype menu-option-info (structure)
   ((display-name-id uint32  :offset-assert 0)
    (sym             basic   :offset-assert 4)
    (extra           basic   :offset-assert 8)
-   (extra-object    basic   :offset-assert 8)
-   (extra-int       int32   :offset-assert 8)
+   (extra-object    basic   :offset 8)
+   (extra-int       int32   :offset 8)
    )
   :method-count-assert 9
   :size-assert         #xc
   :flag-assert         #x90000000c
-  ;; field extra uses ~A with a signed load. field extra-object uses ~A with a signed load.
-  )|#
+  )
   
 
 
@@ -50167,8 +50151,14 @@
 
 
 
-#|
 (deftype driver (process-focusable)
+  ((driver-pad uint8 132 :offset 256))
+  :method-count-assert 59
+  :size-assert         #x184
+  :flag-assert         #x3b01000184
+  )
+#|
+(deftype driver-FULL-PENDING (process-focusable)
   ((info               driver-info :inline :offset-assert 256)
    (vehicle            uint64              :offset-assert 280)
    (speech-time        uint64              :offset-assert 288)
@@ -52242,9 +52232,7 @@
 
   
 #|(deftype int16-array (inline-array-class)
-  ((length           int32          :offset-assert 4)
-   (allocated-length int32          :offset-assert 8)
-   (data             int16 :dynamic :offset-assert 16) ;; guessed by decompiler
+  ((data int16 :dynamic :offset 16)
    )
   :method-count-assert 14
   :size-assert         #x10
@@ -59029,4 +59017,1176 @@
 
 
 
+
+
+
+;; wvehicle-wheel-launcher-spec stub
+(deftype wvehicle-wheel-launcher-spec (structure)
+  ()
+  :method-count-assert 9
+  :size-assert         #x0
+  :flag-assert         #x900000000
+  )
+
+;; vehicle-reticle-base stub
+(deftype vehicle-reticle-base (process)
+  ()
+  :method-count-assert 14
+  :size-assert         #x90
+  :flag-assert         #xe00000090
+  )
+
+;; muzzle-flash stub
+(deftype muzzle-flash (process-drawable)
+  ()
+  :method-count-assert 50
+  :size-assert         #xf8
+  :flag-assert         #x32007000f8
+  )
+
+;; joint-mod-set-rot-local stub
+(deftype joint-mod-set-rot-local (joint-mod-base)
+  ()
+  :method-count-assert 12
+  :size-assert         #xc
+  :flag-assert         #xc0000000c
+  )
+
+;; cpad-info stub
+(deftype cpad-info (hw-cpad)
+  ()
+  :method-count-assert 9
+  :size-assert         #x24
+  :flag-assert         #x900000024
+  )
+
+;; blit-displays-work stub
+(deftype blit-displays-work (structure)
+  ()
+  :method-count-assert 9
+  :size-assert         #x0
+  :flag-assert         #x900000000
+  )
+
+;; prim-strip stub
+(deftype prim-strip (prim-base)
+  ()
+  :method-count-assert 10
+  :size-assert         #x4
+  :flag-assert         #xa00000004
+  )
+
+;; talker stub
+(deftype talker (process)
+  ()
+  :method-count-assert 14
+  :size-assert         #x90
+  :flag-assert         #xe00000090
+  )
+
+;; net-available-game stub
+(deftype net-available-game (structure)
+  ()
+  :method-count-assert 9
+  :size-assert         #x0
+  :flag-assert         #x900000000
+  )
+
+;; scene-player stub
+(deftype scene-player (process-drawable)
+  ()
+  :method-count-assert 50
+  :size-assert         #xf8
+  :flag-assert         #x32007000f8
+  )
+
+;; joint-mod stub
+(deftype joint-mod (basic)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; part-tracker stub
+(deftype part-tracker (process)
+  ()
+  :method-count-assert 14
+  :size-assert         #x90
+  :flag-assert         #xe00000090
+  )
+
+;; touching-prims-entry-pool stub
+(deftype touching-prims-entry-pool (structure)
+  ()
+  :method-count-assert 9
+  :size-assert         #x0
+  :flag-assert         #x900000000
+  )
+
+;; touching-list stub
+(deftype touching-list (structure)
+  ()
+  :method-count-assert 9
+  :size-assert         #x0
+  :flag-assert         #x900000000
+  )
+
+;; projectile stub
+(deftype projectile (process-drawable)
+  ()
+  :method-count-assert 50
+  :size-assert         #xf8
+  :flag-assert         #x32007000f8
+  )
+
+;; sparticle-cpuinfo stub
+(deftype sparticle-cpuinfo (structure)
+  ()
+  :method-count-assert 9
+  :size-assert         #x0
+  :flag-assert         #x900000000
+  )
+
+;; path-control stub
+(deftype path-control (basic)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; vol-control stub
+(deftype vol-control (basic)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; powerup-draw stub
+(deftype powerup-draw (process-drawable)
+  ()
+  :method-count-assert 50
+  :size-assert         #xf8
+  :flag-assert         #x32007000f8
+  )
+
+;; net-simple-destruct stub
+(deftype net-simple-destruct (process-focusable)
+  ()
+  :method-count-assert 59
+  :size-assert         #x100
+  :flag-assert         #x3b00700100
+  )
+
+;; eco stub
+(deftype eco (process-drawable)
+  ()
+  :method-count-assert 50
+  :size-assert         #xf8
+  :flag-assert         #x32007000f8
+  )
+
+;; editable-region stub
+(deftype editable-region (basic)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; int16-array stub
+(deftype int16-array (inline-array-class)
+  ()
+  :method-count-assert 14
+  :size-assert         #x10
+  :flag-assert         #xe00000010
+  )
+
+;; krasmale stub
+(deftype krasmale (process-drawable)
+  ()
+  :method-count-assert 50
+  :size-assert         #xf8
+  :flag-assert         #x32007000f8
+  )
+
+;; knet-scert-function-1-args stub
+(deftype knet-scert-function-1-args (structure)
+  ()
+  :method-count-assert 9
+  :size-assert         #x0
+  :flag-assert         #x900000000
+  )
+
+;; net-projectile stub
+(deftype net-projectile (projectile)
+  ()
+  :method-count-assert 50
+  :size-assert         #xf8
+  :flag-assert         #x32007000f8
+  )
+
+;; curve-control stub
+(deftype curve-control (path-control)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; entity-more-perm-hash stub
+(deftype entity-more-perm-hash (structure)
+  ()
+  :method-count-assert 15
+  :size-assert         #x0
+  :flag-assert         #xf00000000
+  (:methods
+    (entity-more-perm-hash-method-9 (_type_) none) ;; 9
+    (entity-more-perm-hash-method-10 (_type_) none) ;; 10
+    (entity-more-perm-hash-method-11 (_type_) none) ;; 11
+    (entity-more-perm-hash-method-12 (_type_) none) ;; 12
+    (entity-more-perm-hash-method-13 (_type_) none) ;; 13
+    (entity-more-perm-hash-method-14 (_type_) none) ;; 14
+    )
+  )
+
+;; palette-fade-controls stub
+(deftype palette-fade-controls (basic)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; install-handler stub
+(deftype install-handler (basic)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; editable-array stub
+(deftype editable-array (basic)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; drawable-tree-tfrag-shared stub
+(deftype drawable-tree-tfrag-shared (drawable-tree)
+  ()
+  :method-count-assert 17
+  :size-assert         #x20
+  :flag-assert         #x1100000020
+  )
+
+;; Explicit type-symbol externs for types that have UNKNOWN fields or other
+;; registration issues. These force add_symbol even when the deftype didn't
+;; auto-register, unblocking type-prop for callers that reference the symbol.
+(define-extern net-process-mgr type)
+(define-extern vehicle-reticle-on-me type)
+(define-extern medius-game-array type)
+(define-extern impact-control type)
+(define-extern background-work type)
+(define-extern editable-point type)
+
+;; Auto-generated type externs for types with registration issues
+(define-extern auto-save type)
+(define-extern blur-coords type)
+(define-extern deathmatch-spawner-array type)
+(define-extern default-interior-states type)
+(define-extern drift-editor type)
+(define-extern driver-info type)
+(define-extern engine-minimap type)
+(define-extern entity-more-perm type)
+(define-extern fake-msg type)
+(define-extern fmv-work type)
+(define-extern ghost-file type)
+(define-extern headset type)
+(define-extern headset-decoder type)
+(define-extern http-downloader type)
+(define-extern hud-corners type)
+(define-extern hud-vehicle type)
+(define-extern lobby-menu-manager type)
+(define-extern medius-add-to-buddy-list-confirmation-response type)
+(define-extern medius-create-game-request0 type)
+(define-extern medius-file-download-request type)
+(define-extern medius-get-clan-member-list-request type)
+(define-extern medius-join-game-request0 type)
+(define-extern medius-room type)
+(define-extern medius-set-localization-params-request type)
+(define-extern medius-simple-response type)
+(define-extern mouse-info type)
+(define-extern nav-find-corner-portal-params type)
+(define-extern net-dme-version type)
+(define-extern net-enemy type)
+(define-extern net-enemy-transition type)
+(define-extern net-game-mgr-assassin type)
+(define-extern net-game-mgr-race type)
+(define-extern net-game-mgr-vehicle-info type)
+(define-extern nospawn type)
+(define-extern point-tracker type)
+(define-extern race-line-get-points type)
+(define-extern received-chat-msg type)
+(define-extern red-sentry-bot type)
+(define-extern rigid-body-object-extra-info type)
+(define-extern rigid-body-queue-manager type)
+(define-extern rigid-body-surface type)
+(define-extern sce-stat type)
+(define-extern tie-near-consts type)
+(define-extern timetrial-snapshot type)
+(define-extern udp-layer type)
+(define-extern universe-choice type)
+(define-extern vehicle-antenna-state type)
+(define-extern vehicle-reticle-on-them type)
+(define-extern vif-stat type)
+
+;; Auto-extern: symbols blocking top-level-login, registered as object to satisfy type-prop
+(define-extern actor-hash-buckets object)
+(define-extern anim-test-obj object)
+(define-extern auto-save-error-proc object)
+(define-extern auto-test-levels object)
+(define-extern aux-voice-mgr object)
+(define-extern base-menu object)
+(define-extern blerc-dcache object)
+(define-extern bone-buffer object)
+(define-extern boss-hud object)
+(define-extern cam-dbg-scratch object)
+(define-extern camera-facing-quad object)
+(define-extern cloth-on-skeleton object)
+(define-extern collide-frag-vertex object)
+(define-extern collide-probe-stack object)
+(define-extern collision-editor-default-proc object)
+(define-extern color-array object)
+(define-extern combo-tracker object)
+(define-extern construction-object object)
+(define-extern daxter object)
+(define-extern death-indicator-view-10 object)
+(define-extern debris-group object)
+(define-extern debug-rigid-body-move object)
+(define-extern disc-error-proc object)
+(define-extern dma-test object)
+(define-extern drawable-tree-collide-fragment object)
+(define-extern drawable-tree-tfrag-trans object)
+(define-extern driver-ashelin object)
+(define-extern driver-daxter object)
+(define-extern driver-gtblitz object)
+(define-extern driver-jak object)
+(define-extern driver-jaka object)
+(define-extern driver-jakb object)
+(define-extern driver-jakc object)
+(define-extern driver-kaeden object)
+(define-extern driver-kiera object)
+(define-extern driver-klever object)
+(define-extern driver-osmo object)
+(define-extern driver-pecker object)
+(define-extern driver-ratchet object)
+(define-extern driver-rayn object)
+(define-extern driver-razer object)
+(define-extern driver-sig object)
+(define-extern driver-taryn object)
+(define-extern driver-thug-a object)
+(define-extern driver-thug-b object)
+(define-extern driver-thug-c object)
+(define-extern driver-torn object)
+(define-extern driver-ur-86 object)
+(define-extern driver-ximon object)
+(define-extern eco-powerup-draw object)
+(define-extern editable-player object)
+(define-extern editable-sphere object)
+(define-extern etie-matrix object)
+(define-extern etn-matrix object)
+(define-extern explosion object)
+(define-extern fact-info-enemy object)
+(define-extern float-array object)
+(define-extern flow-section-array object)
+(define-extern fmv-player object)
+(define-extern ghost-info object)
+(define-extern helmet-hud object)
+(define-extern high-scores-list object)
+(define-extern hiphog-states object)
+(define-extern history-elt object)
+(define-extern hoff-text-floater object)
+(define-extern hud-game-end-grand-prix object)
+(define-extern hud-in-game-menu-options-view-0 object)
+(define-extern hud-in-game-menu-view-0 object)
+(define-extern hud-item-player-name object)
+(define-extern hud-map object)
+(define-extern hud-player-indicators-view0 object)
+(define-extern hud-points-combo-display0 object)
+(define-extern hud-race-stats-single object)
+(define-extern hud-results-grand-prix object)
+(define-extern hud-results-medal object)
+(define-extern hud-spartacus object)
+(define-extern hud-sprite object)
+(define-extern hud-sprite-work object)
+(define-extern instance object)
+(define-extern intro-hud-view object)
+(define-extern joint-mod-head object)
+(define-extern krasfemale object)
+(define-extern lightning-bolt object)
+(define-extern lightning-spans-array object)
+(define-extern lightning-tracker object)
+(define-extern light-trail object)
+(define-extern lobby-chat-string object)
+(define-extern manipulator object)
+(define-extern matrix-stack object)
+(define-extern medius-add-to-buddy-list-fwd-confirmation-request0 object)
+(define-extern medius-create-game-request object)
+(define-extern medius-file-download-response object)
+(define-extern medius-get-clan-member-list-response object)
+(define-extern medius-join-game-request object)
+(define-extern medius-room-array object)
+(define-extern medius-set-message-as-read-request object)
+(define-extern menu-string object)
+(define-extern mgclinitialize-in-params object)
+(define-extern mgcl-simple-response object)
+(define-extern mine-a object)
+(define-extern minimap-class-node object)
+(define-extern mountain-states object)
+(define-extern mysql-nav-node object)
+(define-extern nav-engine-spr-buffer object)
+(define-extern nav-find-clear-spot-work object)
+(define-extern nav-graph-command-array object)
+(define-extern nav-mesh-editable object)
+(define-extern nav-mesh-poly-array object)
+(define-extern net-enemy-info object)
+(define-extern net-game-mgr object)
+(define-extern net-game-mgr-deathmatch object)
+(define-extern net-game-mgr-deathrace object)
+(define-extern net-game-mgr-rushhour object)
+(define-extern net-latency-metrics-params object)
+(define-extern net-update-conn-errors object)
+(define-extern ocean-trans-strip-array object)
+(define-extern part-tracker-init-params object)
+(define-extern part-tracker-subsampler object)
+(define-extern perf-stat-array object)
+(define-extern power-slide-hud-single object)
+(define-extern prototype-bucket object)
+(define-extern race-mesh-hash-search object)
+(define-extern ragdoll-edit-info object)
+(define-extern ragdoll-test object)
+(define-extern rb-debug-state-record object)
+(define-extern ripple-globals object)
+(define-extern sabotage-sequence object)
+(define-extern sce-dirent object)
+(define-extern scf-get-volume object)
+(define-extern search-info object)
+(define-extern shadow-vu1-constants object)
+(define-extern shrub-view-data object)
+(define-extern sky-color-day object)
+(define-extern sky-work object)
+(define-extern smoke-particle object)
+(define-extern sparticle-birthinfo object)
+(define-extern sparticle-launchinfo object)
+(define-extern sparticle-subsampler object)
+(define-extern sparticle-system object)
+(define-extern spooler-block object)
+(define-extern sprite-distorter-sine-tables object)
+(define-extern sprite-glow-consts object)
+(define-extern sprite-header object)
+(define-extern sprite-vec-data-2d object)
+(define-extern subdivide-dists object)
+(define-extern task-arrow object)
+(define-extern terrain-context object)
+(define-extern test-process object)
+(define-extern text-display-nice-shot object)
+(define-extern tfrag-dists object)
+(define-extern this-way object)
+(define-extern tie-consts object)
+(define-extern timer-hold-bank object)
+(define-extern timetrial-recording object)
+(define-extern trail-blocker object)
+(define-extern update-engine-loop-state-work object)
+(define-extern v-bear object)
+(define-extern v-bobcat object)
+(define-extern v-cheetah object)
+(define-extern v-cougar object)
+(define-extern v-daxtermobile object)
+(define-extern vehicle-antenna object)
+(define-extern vehicle-debris object)
+(define-extern vehicle-hud-view-0 object)
+(define-extern vehicle-manager object)
+(define-extern vehicle-respawn-invul object)
+(define-extern vehicle-wheel-init-params object)
+(define-extern v-falcon object)
+(define-extern v-gila object)
+(define-extern vif-bank object)
+(define-extern visvol-editor object)
+(define-extern v-leopard object)
+(define-extern v-mongoose object)
+(define-extern v-panther object)
+(define-extern v-possum object)
+(define-extern v-snake object)
+(define-extern v-tiger object)
+(define-extern v-toad-shot object)
+(define-extern v-wolf object)
+(define-extern v-wombat object)
+(define-extern v-wpn-net-info object)
+(define-extern v-wpn-purple-shield object)
+(define-extern v-wpn-red-turbo-preventor object)
+(define-extern v-wpn-yellow-chain-gun object)
+(define-extern water-anim object)
+(define-extern wind-vector object)
+(define-extern wvehicle-part-work object)
+
+;; Auto-extern batch 2
+(define-extern bone-layout object)
+(define-extern collide-frag-mesh object)
+(define-extern connection-minimap object)
+(define-extern death-indicator-view-11 object)
+(define-extern fact-info-crate object)
+(define-extern foreground-area object)
+(define-extern hang-time-hud-single object)
+(define-extern history object)
+(define-extern hud-background object)
+(define-extern hud-box object)
+(define-extern hud-deathrace-stats-single object)
+(define-extern hud-game-end-view-0 object)
+(define-extern hud-headset-talker-race object)
+(define-extern hud-in-game-menu-options-view-1 object)
+(define-extern hud-in-game-menu-view-1 object)
+(define-extern hud-item-player-score object)
+(define-extern hud-player-indicators-view1 object)
+(define-extern hud-points-combo-display1 object)
+(define-extern hud-race-stats-top-view-0 object)
+(define-extern hud-results-grand-prix-totals object)
+(define-extern hud-results-view-0 object)
+(define-extern instance-shrub-work object)
+(define-extern joint-work object)
+(define-extern light-trail-breadcrumb object)
+(define-extern map-menu object)
+(define-extern medius-add-to-buddy-list-fwd-confirmation-request object)
+(define-extern medius-create-game-response object)
+(define-extern medius-file-download-stream-request object)
+(define-extern medius-get-clan-team-challenge-history-request object)
+(define-extern medius-join-game-response object)
+(define-extern medius-set-stored-account-info-request object)
+(define-extern net-game-mgr-boss-battle object)
+(define-extern net-initialize-out-params object)
+(define-extern net-lanpeer-desc object)
+(define-extern net-object-filter-data object)
+(define-extern net-player-rushhour object)
+(define-extern ocean-wave-frames object)
+(define-extern particle-buffer object)
+(define-extern ragdoll-joint object)
+(define-extern shadow-vu1-data object)
+(define-extern sky-sun-data object)
+(define-extern special-intro-hud-view object)
+(define-extern sp-field-init-spec object)
+(define-extern sprite-hvdf-data object)
+(define-extern sprite-vec-data-3d object)
+(define-extern tfrag-data object)
+(define-extern tie-matrix object)
+(define-extern touch-tracker object)
+(define-extern trail-conn-search object)
+(define-extern update-engine-mix-state-work object)
+(define-extern *user* object)
+(define-extern vehicle-hud-view-1 object)
+(define-extern vehicle-suppress-look object)
+(define-extern vehicle-wheel object)
+(define-extern v-wpn-red-mine-launcher object)
+(define-extern v-wpn-red-tractor-beam object)
+(define-extern v-wpn-yellow-default-gun object)
+(define-extern wind-dma object)
+(define-extern wrong-way-linebot object)
+
+;; Auto-extern batch 3
+(define-extern death-indicator-view-12 object)
+(define-extern hud-background-top-view-0 object)
+(define-extern hud-deathrace-stats-multi object)
+(define-extern hud-game-end-side-view-0 object)
+(define-extern hud-headset-talker-other object)
+(define-extern hud-in-game-menu-options-view-2 object)
+(define-extern hud-in-game-menu-view-2 object)
+(define-extern hud-item-number object)
+(define-extern hud-points-combo-display2 object)
+(define-extern hud-race-stats-side-view-0 object)
+(define-extern hud-results-medal-1 object)
+(define-extern hud-results-view-1 object)
+(define-extern hud-rushhour-stats-view-0 object)
+(define-extern wrong-way object)
+
+;; Auto-extern batch 4
+(define-extern *cty-attack-controller* object)
+(define-extern *cty-faction-manager* object)
+(define-extern *debug-vertex-stats* object)
+(define-extern *time-of-day* object)
+(define-extern anim-test-sequence object)
+(define-extern animation-info object)
+(define-extern birth-pickup-at-point object)
+(define-extern bone-work object)
+(define-extern breadcrumb-array object)
+(define-extern cam-debug-tri object)
+(define-extern collide-fragment object)
+(define-extern collision-cylinder-array object)
+(define-extern collision-editor-edited-proc object)
+(define-extern death-indicator-view-13 object)
+(define-extern drawable-tree-tfrag-trans-shared object)
+(define-extern editable-sample object)
+(define-extern eznet-combination object)
+(define-extern flow-control object)
+(define-extern fuel-cell object)
+(define-extern gui-control object)
+(define-extern helmet-garage object)
+(define-extern hud-artifact-indicators-view0 object)
+(define-extern hud-background-top-view-1 object)
+(define-extern hud-deathrace-stats-split-view-0 object)
+(define-extern hud-game-end-top-view-0 object)
+(define-extern hud-icon object)
+(define-extern hud-in-game-menu-view-shared-0 object)
+(define-extern hud-points-combo-display3 object)
+(define-extern hud-race-stats-view-1 object)
+(define-extern hud-results-team-view-0 object)
+(define-extern hud-rushhour-stats-view-1 object)
+(define-extern hud-slowmo object)
+(define-extern instance-tie-work object)
+(define-extern knet-scert-function-0-args object)
+(define-extern knet-scert-function-2-args object)
+(define-extern light-trail-tracker object)
+(define-extern lightning-new-tracker object)
+(define-extern lightning-spans-internal-array object)
+(define-extern lobby-chat-window object)
+(define-extern medius-add-to-buddy-list-fwd-confirmation-response0 object)
+(define-extern medius-delete-clan-message-request object)
+(define-extern medius-file-download-stream-response object)
+(define-extern medius-get-clan-team-challenge-history-response object)
+(define-extern medius-ladder-list-extra-info-request object)
+(define-extern medius-status-response object)
+(define-extern minimap-draw-work object)
+(define-extern mysql-nav-node-array object)
+(define-extern nav-engine object)
+(define-extern nav-find-corner-work object)
+(define-extern nav-graph-editor object)
+(define-extern nav-mesh-editor object)
+(define-extern nav-mesh-tri-quad-array object)
+(define-extern net-bandwidth-info object)
+(define-extern net-initialize-in-params object)
+(define-extern net-join-in-params object)
+(define-extern ocean-mid-constants object)
+(define-extern race-mesh-edge object)
+(define-extern ragdoll object)
+(define-extern rb-debugger object)
+(define-extern rigid-body-work object)
+(define-extern simple-prim object)
+(define-extern sky-moon-data object)
+(define-extern smoke-system object)
+(define-extern spartacus-editor object)
+(define-extern sparticle-launch-state object)
+(define-extern sprite-area object)
+(define-extern sprite-aux-elem object)
+(define-extern starting-linebot object)
+(define-extern tfrag-dma object)
+(define-extern tire-trail-crumb object)
+(define-extern trail-graph object)
+(define-extern v-wpn-red-sentry-gun object)
+(define-extern v-wpn-yellow-grenade object)
+
+;; Auto-extern batch 5
+(define-extern anim-test-seq-item object)
+(define-extern anonymous-0 object)
+(define-extern base-menu-info object)
+(define-extern bone-memory object)
+(define-extern cam-collision-record-array object)
+(define-extern collision-editor object)
+(define-extern cty-attack-reset object)
+(define-extern cty-faction-evaluate-commands object)
+(define-extern death-indicator-view-14 object)
+(define-extern drawable-inline-array-collide-fragment object)
+(define-extern drawable-tree-tfrag-water-shared object)
+(define-extern editable-light object)
+(define-extern eznet-combination-list object)
+(define-extern hack-line-sphere object)
+(define-extern hud-artifact-indicators-view1 object)
+(define-extern hud-background-side-view-0 object)
+(define-extern hud-cash-stats-single object)
+(define-extern hud-deathrace-stats-split-view-1 object)
+(define-extern hud-in-game-menu-view-shared-1 object)
+(define-extern hud-points-combo-display4 object)
+(define-extern hud-results-team-view-1 object)
+(define-extern hud-top-split-bar object)
+(define-extern instance-tie-dma object)
+(define-extern light-trail-tracker-water object)
+(define-extern lightning-sphere object)
+(define-extern medius-add-to-buddy-list-fwd-confirmation-response object)
+(define-extern medius-delete-clan-message-response object)
+(define-extern medius-file-delete-request object)
+(define-extern medius-get-clan-team-challenges-request object)
+(define-extern medius-ladder-list-extra-info-response0 object)
+(define-extern medius-text-filter-request object)
+(define-extern minimap object)
+(define-extern mysql-nav-edge object)
+(define-extern nav-mesh-editable-array object)
+(define-extern net-host-peer-to-peer-in-params object)
+(define-extern ocean-near-constants object)
+(define-extern particle-birth-work object)
+(define-extern race-banner object)
+(define-extern race-mesh-slice object)
+(define-extern ragdoll-proc object)
+(define-extern setup-city-task-faction object)
+(define-extern sky-upload-data object)
+(define-extern sprite-aux-list object)
+(define-extern sz-ipaddress object)
+(define-extern task-arrow-params object)
+(define-extern tire-trail object)
+(define-extern v-wpn-red-drone-gun object)
+(define-extern v-wpn-yellow-guided-missile object)
+(define-extern water-flow object)
+(define-extern weapon-trail-crumb object)
+(define-extern work-area object)
+
+;; Auto-extern batch 6
+(define-extern check-line-spheres-hack-work object)
+(define-extern cloud-vert-array object)
+(define-extern death-indicator-view-20 object)
+(define-extern drawable-inline-array-tfrag-trans object)
+(define-extern editable-entity object)
+(define-extern external-camera-controller object)
+(define-extern finish-banner object)
+(define-extern hud-assassin-indicators-view0 object)
+(define-extern hud-background-side-view-1 object)
+(define-extern hud-cash-stats-top-view-0 object)
+(define-extern hud-in-game-menu-view-shared-2 object)
+(define-extern hud-side-split-bar object)
+(define-extern jakx-logo-menu object)
+(define-extern light-trail-tracker-projectile object)
+(define-extern medius-add-to-buddy-list-request object)
+(define-extern medius-disband-clan-request object)
+(define-extern medius-file-delete-response object)
+(define-extern medius-get-clan-team-challenges-response object)
+(define-extern medius-ladder-list-extra-info-response object)
+(define-extern medius-text-filter-response object)
+(define-extern mysql-nav-edge-array object)
+(define-extern nav-mesh-editor-undo object)
+(define-extern net-resolve-addr-data object)
+(define-extern net-type-client object)
+(define-extern net-type-lookup-response object)
+(define-extern patch-group object)
+(define-extern prototype-tie-work object)
+(define-extern race-mesh-hash object)
+(define-extern sprite-frame-data object)
+(define-extern text-display-deflected-view-1 object)
+(define-extern tire-trail-tracker object)
+(define-extern v-wpn-red-smoke object)
+(define-extern weapon-trail object)
+
+;; Auto-extern batch 7
+(define-extern death-indicator-view-21 object)
+(define-extern editable-face object)
+(define-extern haze-vert-array object)
+(define-extern hud-assassin-indicators-view1 object)
+(define-extern hud-cash-stats-top-view-1 object)
+(define-extern hud-in-game-menu-networked-view-0 object)
+(define-extern medius-add-to-buddy-list-response object)
+(define-extern medius-disband-clan-response object)
+(define-extern medius-file-list-request object)
+(define-extern medius-get-game-list-filter-request object)
+(define-extern medius-ladder-list-request object)
+(define-extern medius-transfer-clan-leadership-request object)
+(define-extern mysql-nav-visnode object)
+(define-extern nav-mesh-editor-undo-array object)
+(define-extern net-resolve-addr-in-params object)
+(define-extern net-type-lookup-params object)
+(define-extern net-type-object object)
+(define-extern network-bootstrap object)
+(define-extern prototype-tie-dma object)
+(define-extern rigid-body-move-work object)
+(define-extern selection-menu-manager object)
+(define-extern strip-segment object)
+(define-extern text-display-deflected-view-2 object)
+(define-extern tread-trail-crumb object)
+
+;; Auto-extern batch 8
+(define-extern death-indicator-view-22 object)
+(define-extern editable-plane object)
+(define-extern hud-cash-stats-side-view-0 object)
+(define-extern hud-in-game-menu-networked-view-1 object)
+(define-extern medius-add-to-ignore-list-request object)
+(define-extern medius-dnas-signature-post object)
+(define-extern medius-file-list-response object)
+(define-extern medius-get-game-list-filter-response object)
+(define-extern medius-ladder-list-response object)
+(define-extern medius-transfer-clan-leadership-response object)
+(define-extern mysql-nav-visnode-array object)
+(define-extern net-incoming-client-in-params object)
+(define-extern net-lanfind-exchange-callback-out-args object)
+(define-extern oil-trail object)
+(define-extern rsa-key object)
+(define-extern sprite-info object)
+(define-extern text-display-sblastered-view-1 object)
+(define-extern tread-trail object)
+
+;; Auto-extern batch 9
+(define-extern death-indicator-view-23 object)
+(define-extern editable-work object)
+(define-extern hud-cash-stats-side-view-1 object)
+(define-extern hud-in-game-menu-networked-view-2 object)
+(define-extern medius-add-to-ignore-list-response object)
+(define-extern medius-end-game-report object)
+(define-extern medius-file-update-attributes-request object)
+(define-extern medius-get-ladder-stats-request object)
+(define-extern medius-ladder-position-extra-info-request object)
+(define-extern medius-update-clan-stats-request object)
+(define-extern mysql-nav-graph object)
+(define-extern net-lanfind-in-params object)
+(define-extern net-type-broadcast-schedule object)
+(define-extern rsa-keypair object)
+(define-extern slip-object object)
+(define-extern text-display-sblastered-view-2 object)
+(define-extern transition-info object)
+(define-extern weapon-trail-tracker object)
+
+;; Auto-extern batch 10
+(define-extern death-indicator-view-24 object)
+(define-extern medius-account-delete-request object)
+(define-extern medius-anonymous-login-request object)
+(define-extern medius-error-message object)
+(define-extern medius-file-update-attributes-response object)
+(define-extern medius-get-ladder-stats-response object)
+(define-extern medius-ladder-position-extra-info-response object)
+(define-extern medius-update-clan-stats-response object)
+(define-extern net-color-array object)
+(define-extern net-type-field object)
+(define-extern oil-slick object)
+(define-extern sprite-menu-info object)
+(define-extern text-display-supernova-backfire-view-1 object)
+(define-extern tread-trail-tracker object)
+
+;; time-of-day-proc stub
+(deftype time-of-day-proc (process)
+  ()
+  :method-count-assert 14
+  :size-assert         #x90
+  :flag-assert         #xe00000090
+  )
+
+;; projectile-bounce stub
+(deftype projectile-bounce (projectile)
+  ()
+  :method-count-assert 50
+  :size-assert         #xf8
+  :flag-assert         #x32007000f8
+  )
+
+;; joint-mod-polar-look-at stub
+(deftype joint-mod-polar-look-at (basic)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; editable stub
+(deftype editable (basic)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; vehicle-reticle-on-me stub — already defined above? check for dups
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ported from jak3 for wvehicle stack structure analysis
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; wvehicle-stack-type0
+(deftype wvehicle-stack-type0 (structure)
+  ((float-arr float 4 :offset 0)
+   (vec00 vector :inline :offset 96)
+   (float03326 float :offset 16)
+   (float0335 float :offset 20)
+   (float032 float :offset 24)
+   (float03623423 float :offset 28)
+   (word00 uint32 :offset 28 :score 1)
+   (float00 float :offset 80)
+   (float01 float :offset 96)
+   (float000 float :offset 116)
+   (float8 float :offset 120)
+   (float02 float :offset 124)
+   (float03 float :offset 128)
+   (float04 float :offset 132)
+   (float05 float :offset 136)
+   (float06 float :offset 140)
+   (float07 float :offset 144)
+   )
+  )
+
+;; wvehicle-stack-type1
+(deftype wvehicle-stack-type1 (structure)
+  ((vec00 vector :inline :offset 0)
+   (float00 float :offset 16)
+   (float01 float :offset 20)
+   (byte00 int8 :offset 24)
+   )
+  )
+
+;; wvehicle-stack-type2
+(deftype wvehicle-stack-type2 (structure)
+  ((cquery collide-query :inline :offset 0)
+   (mat0 matrix :inline :offset 544)
+   (vec0 vector :inline :offset 592)
+   (vec1 vector :inline :offset 624)
+   (vec2 vector :inline :offset 640)
+   (vec3 vector :inline :offset 656)
+   (float0 float :offset 672)
+   )
+  )
+
+;; wvehicle-stack-type3
+(deftype wvehicle-stack-type3 (structure)
+  ((vec0 vector :inline :offset 0)
+   (mat0 matrix :inline :offset 16)
+   (float0 float :offset 80)
+   )
+  )
+
+;; wvehicle-stack-type4
+(deftype wvehicle-stack-type4 (structure)
+  ((byte0 int8 :offset 0)
+   (float0 float :offset 4)
+   (float1 float :offset 8)
+   (float2 float :offset 12)
+   )
+  )
+
+;; wvehicle-stack-type5
+(deftype wvehicle-stack-type5 (structure)
+  ((vec0 vector :inline :offset 0)
+   (vec1 vector :inline :offset 16)
+   (vec2 vector :inline :offset 32)
+   (vec3 vector :inline :offset 48)
+   (vec4 vector :inline :offset 64)
+   (vec5 vector :inline :offset 80)
+   (vec6 vector :inline :offset 96)
+   (vec7 vector :inline :offset 112)
+   (vec8 vector :inline :offset 128)
+   (vec9 vector :inline :offset 144)
+   )
+  )
+
+;; wvehicle-stack-type6
+(deftype wvehicle-stack-type6 (structure)
+  ((mat0    matrix     :inline :offset 0)
+   (quat0   quaternion :inline :offset 64)
+   (quat1   quaternion :inline :offset 80)
+   (quat2   quaternion :inline :offset 96)
+   (quat3   quaternion :inline :offset 112)
+   (quat4   quaternion :inline :offset 128)
+   (vec0    vector     :inline :offset 144)
+   (vec1    vector     :inline :offset 160)
+   (vec2    vector     :inline :offset 176)
+   (vec3    vector     :inline :offset 192)
+   (float0  float              :offset 240)
+   )
+  )
+
+;; wvehicle-sound-loop-params (ported from jak3)
+(deftype wvehicle-sound-loop-params (structure)
+  ((speed  float  :offset-assert 0)
+   (weight float  :offset-assert 4)
+   )
+  :method-count-assert 9
+  :size-assert         #x8
+  :flag-assert         #x900000008
+  )
+
+;; wvehicle-sound-work (ported from jak3)
+(deftype wvehicle-sound-work (structure)
+  ((roll-basis-params  wvehicle-sound-loop-params 4 :inline :offset-assert 0)
+   (slide-basis-params wvehicle-sound-loop-params 2 :inline :offset-assert 64)
+   )
+  :method-count-assert 9
+  :size-assert         #x60
+  :flag-assert         #x900000060
+  )
+
+;; wvehicle-stack-type7
+(deftype wvehicle-stack-type7 (structure)
+  ((work wvehicle-sound-work :inline :offset 0)
+   (vec0 vector :inline :offset 96)
+   (float3 float        :offset 116)
+   (float2 float        :offset 120)
+   (float0 float        :offset 124)
+   (vec1 vector :inline :offset 128)
+   (float1 float        :offset 144)
+   )
+  )
+
+;; wvehicle-probe-work
+(deftype wvehicle-probe-work (structure)
+  ((local-pos    vector :inline :offset-assert 0)
+   (local-normal vector :inline :offset-assert 16)
+   (world-pos    vector :inline :offset-assert 32)
+   (world-normal vector :inline :offset-assert 48)
+   (wheel-axis   vector :inline :offset-assert 64)
+   (side-dir     vector :inline :offset-assert 80)
+   (forward-dir  vector :inline :offset-assert 96)
+   (velocity     vector :inline :offset-assert 112)
+   (probe-uu     float          :offset-assert 128)
+   )
+  :method-count-assert 9
+  :size-assert         #x84
+  :flag-assert         #x900000084
+  )
+
+;; wvehicle-physics-work
+(deftype wvehicle-physics-work (structure)
+  ((mat                   matrix        :inline :offset-assert 0)
+   (force                 vector        :inline :offset-assert 64)
+   (velocity              vector        :inline :offset-assert 80)
+   (world-pos             vector        :inline :offset-assert 96)
+   (world-normal          vector        :inline :offset-assert 112)
+   (local-pos             vector        :inline :offset-assert 128)
+   (steering-axis         vector        :inline :offset-assert 144)
+   (probe-dir             vector        :inline :offset-assert 160)
+   (tmp                   vector        :inline :offset-assert 176)
+   (p-body                vector        :inline :offset-assert 192)
+   (axis                  vector        :inline :offset-assert 208)
+   (dir                   vector        :inline :offset-assert 224)
+   (ground-normal-sum     vector        :inline :offset-assert 240)
+   (ground-pos            vector        :inline :offset-assert 256)
+   (forward-dir           vector        :inline :offset-assert 272)
+   (side-dir              vector        :inline :offset-assert 288)
+   (wheel-axis            vector        :inline :offset-assert 304)
+   (wsphere               sphere        :inline :offset-assert 320)
+   (friction-coef         float                 :offset-assert 336)
+   (wheel-radius          float                 :offset-assert 340)
+   (side-force            float                 :offset-assert 344)
+   (forward-force         float                 :offset-assert 348)
+   (max-forward-tire-grip float                 :offset-assert 352)
+   (max-side-tire-grip    float                 :offset-assert 356)
+   (inertia-eff           float                 :offset-assert 360)
+   (ground-torque         float                 :offset-assert 364)
+   (braking-torque        float                 :offset-assert 368)
+   (total-torque          float                 :offset-assert 372)
+   (limit-braking-torque  float                 :offset-assert 376)
+   (max-braking-torque    float                 :offset-assert 380)
+   (surface-drag          float                 :offset-assert 384)
+   (water-y               float                 :offset-assert 388)
+   (cur-time              uint32                :offset-assert 392)
+   (surface-type          uint8                 :offset-assert 396)
+   (surface-depth         float                 :offset-assert 400)
+   (material              uint64                :offset-assert 408)
+   (probe-work-array      wvehicle-probe-work 4 :inline :offset-assert 416)
+   (cquery                collide-query :inline :offset-assert 992)
+   )
+  :method-count-assert 9
+  :size-assert         #x5fc
+  :flag-assert         #x9000005fc
+  )
+
+
+;; net-projectile dup removed (conflicted with 59225)
+
+
+;; Wave-2: enums ported from jak3
+
+;; pad-buttons
+(defenum pad-buttons
+  :bitfield #t
+  :type uint32
+  (select   0)
+  (l3       1)
+  (r3       2)
+  (start    3)
+  (up       4)
+  (right    5)
+  (down     6)
+  (left     7)
+  (l2       8)
+  (r2       9)
+  (l1       10)
+  (r1       11)
+  (triangle 12)
+  (circle   13)
+  (x        14)
+  (square   15)
+  ;; only 16 buttons are mapped to hardware, the rest are 'actions' or something else
+  (l-analog-up 16)
+  (l-analog-right 17)
+  (l-analog-down 18)
+  (l-analog-left 19)
+  (r-analog-up 20)
+  (r-analog-right 21)
+  (r-analog-down 22)
+  (r-analog-left 23)
+  (confirm 24)
+  )
+
+;; path-control-flag
+(defenum path-control-flag
+  :bitfield #t
+  :type uint32
+  (display 0)
+  (draw-line 1) ;; TODO - only seen it used to control debug drawing so far
+  (draw-point 2) ;; TODO - only seen it used to control debug drawing so far
+  (draw-text 3) ;; TODO - only seen it used to control debug drawing so far
+  (not-found 4)
+  )
+
+;; collide-status
+(defenum collide-status
+  :bitfield #t
+  :type uint64
+  (on-surface 0)
+  (on-ground 1)
+  (touch-surface 2)
+  (touch-wall 3)
+  (touch-ceiling 4)
+  (touch-actor 5)
+  (on-special-surface 6)
+  (touch-edge 7)
+  (no-touch 8)
+  (blocked 9)
+  (on-water 10)
+  (impact-surface 11)
+  (touch-background 12)
+  (stuck 13)
+  (touch-ceiling-sticky 14)
+  (glance 15)
+  (probe-hit 16)
+  )
+
+;; cshape-reaction-flags
+(defenum cshape-reaction-flags
+  :bitfield #t
+  :type uint32
+  (csrf00)
+  (csrf01)
+  (csrf02)
+  (csrf03)
+  (csrf04)
+  (csrf05)
+  (csrf06)
+  (csrf07)
+  (csrf08)
+  (csrf09)
+  (csrf10)
+  (csrf11)
+  (csrf12)
+  (csrf13)
+  (csrf14)
+  (csrf15)
+  (csrf16)
+  (csrf17)
+  (csrf18)
+  (csrf19)
+  (csrf20)
+  (csrf21)
+  (csrf22)
+  (csrf23)
+  (csrf24)
+  (csrf25)
+  (csrf26)
+  (csrf27)
+  (csrf28)
+  (csrf29)
+  (csrf30)
+  (csrf31)
+  )
 
