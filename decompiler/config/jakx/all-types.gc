@@ -35133,21 +35133,21 @@
   :flag-assert         #x1b00000058
   (:methods
     (new (symbol type int) _type_) ;; 0
-    (grid-hash-method-9 (_type_ int vector vector) none) ;; 9 ;; update-grid-for-objects-in-box
-    (grid-hash-method-10 (_type_) none) ;; 10 ;; clear-bucket-array
-    (grid-hash-method-11 (_type_ int vector vector vector) none) ;; 11 ;; setup-search-box
+    (grid-hash-method-9 (_type_ int vector vector) int) ;; 9 ;; update-grid-for-objects-in-box
+    (grid-hash-method-10 (_type_) int) ;; 10 ;; clear-bucket-array
+    (grid-hash-method-11 (_type_ int vector vector vector) int) ;; 11 ;; setup-search-box
     (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12 ;; search-for-point
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13 ;; search-for-sphere
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
     (grid-hash-method-15 (_type_) none) ;; 15 ;; dump-grid-info
-    (grid-hash-method-16 (_type_ grid-hash-box grid-hash-box) none) ;; 16 ;; verify-bits-in-bucket
-    (grid-hash-method-17 (_type_ object grid-hash-box) none) ;; 17 ;; box-of-everything
+    (grid-hash-method-16 (_type_ grid-hash-box grid-hash-box) int) ;; 16 ;; verify-bits-in-bucket
+    (grid-hash-method-17 (_type_ object grid-hash-box) int) ;; 17 ;; box-of-everything
     (grid-hash-method-18 (_type_ grid-hash-box int) none) ;; 18
     (grid-hash-method-19 (_type_ grid-hash-box int) none) ;; 19
     (grid-hash-method-20 (_type_ grid-hash-box (pointer uint8)) none) ;; 20 ;; do-search!
-    (grid-hash-method-21 (_type_ grid-hash-box vector vector) none) ;; 21 ;; set-up-box
+    (grid-hash-method-21 (_type_ grid-hash-box vector vector) int) ;; 21 ;; set-up-box
     (grid-hash-method-22 (_type_ grid-hash-box sphere) none) ;; 22 ;; sphere-to-grid-box
-    (grid-hash-method-23 (_type_ grid-hash-box vector vector float) none) ;; 23 ;; line-sphere-to-grid-box
+    (grid-hash-method-23 (_type_ grid-hash-box vector vector float) int) ;; 23 ;; line-sphere-to-grid-box
     (grid-hash-method-24 (_type_) none) ;; 24 ;; update-grid
     (grid-hash-method-25 (_type_) none) ;; 25
     (grid-hash-method-26 (_type_) none) ;; 26
