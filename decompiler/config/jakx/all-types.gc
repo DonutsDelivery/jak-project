@@ -34123,50 +34123,60 @@
 
 
   
-#|(deftype hud (process)
-  ((trigger-time   uint64        :offset-assert 144) ;; time-frame
-   (last-hide-time uint64        :offset-assert 152) ;; time-frame
-   (offset         float         :offset-assert 160)
-   (flags          hud-flags     :offset-assert 164) ;; guessed by decompiler
-   (strings        hud-string 45 :offset-assert 176) ;; guessed by decompiler
-   (sprites        hud-sprite 50 :offset-assert 3056) ;; guessed by decompiler
-   (icons          hud-icon   2  :offset-assert 6256) ;; guessed by decompiler
-   (num-strings    int32         :offset-assert 6352)
-   (num-sprites    int32         :offset-assert 6356)
-   (gui-id         sound-id      :offset-assert 6360) ;; guessed by decompiler
+(deftype hud (process)
+  ((trigger-time   uint64        :offset 144) ;; time-frame
+   (last-hide-time uint64        :offset 152) ;; time-frame
+   (offset         float         :offset 160)
+   (flags          uint32        :offset 164) ;; hud-flags
+   (strings-raw    uint8     2880 :offset 176) ;; hud-string 45
+   (sprites-raw    uint8     3200 :offset 3056) ;; hud-sprite 50
+   (icons-raw      uint8     96  :offset 6256) ;; hud-icon 2
+   (num-strings    int32         :offset 6352)
+   (num-sprites    int32         :offset 6356)
+   (gui-id         sound-id      :offset 6360)
    )
   :method-count-assert 30
   :size-assert         #x18dc
   :flag-assert         #x1e185018dc
   (:methods
-    (hud-method-9 () none) ;; 9
-    (hud-method-10 () none) ;; 10
-    (hud-method-11 () none) ;; 11
-    (hud-method-12 () none) ;; 12
-    (hud-method-13 () none) ;; 13
-    (hud-method-14 () none) ;; 14 ;; (hidden? (_type_) object)
-    (hud-method-15 () none) ;; 15 ;; (draw (_type_) none)
-    (hud-method-16 () none) ;; 16 ;; (update-values! (_type_) none)
-    (hud-method-17 () none) ;; 17 ;; (init-callback (_type_) none)
-    (hud-method-18 () none) ;; 18 ;; (event-callback (_type_ process int symbol event-message-block) object)
-    (hud-method-19 () none) ;; 19 ;; (hud-method-19 (_type_) none)
-    (hud-method-20 () none) ;; 20 ;; (hud-method-20 (_type_) none)
-    (hud-method-21 () none) ;; 21 ;; (hud-method-21 (_type_) none)
-    (hud-method-22 () none) ;; 22 ;; (hud-method-22 (_type_) none)
-    (hud-method-23 () none) ;; 23 ;; (hud-method-23 (_type_) none)
-    (hud-method-24 () none) ;; 24 ;; (check-ready-and-maybe-show (_type_ symbol) symbol)
-    (hud-method-25 () none) ;; 25 ;; (update-value-callback (_type_ int int) none)
-    (hud-method-26 () none) ;; 26 ;; (alloc-string-if-needed (_type_ int) none)
+    (hud-method-14 () none) ;; 14
+    (hud-method-15 () none) ;; 15
+    (hud-method-16 () none) ;; 16
+    (hud-method-17 () none) ;; 17
+    (hud-method-18 () none) ;; 18
+    (hud-method-19 () none) ;; 19
+    (hud-method-20 () none) ;; 20
+    (hud-method-21 () none) ;; 21
+    (hud-method-22 () none) ;; 22
+    (hud-method-23 () none) ;; 23
+    (hud-method-24 () none) ;; 24
+    (hud-method-25 () none) ;; 25
+    (hud-method-26 () none) ;; 26
     (hud-method-27 () none) ;; 27
     (hud-method-28 () none) ;; 28
     (hud-method-29 () none) ;; 29
     )
-  )|#
-  
+  )
+
+(deftype in-game-hud (hud)
+  ((real-items           basic  :offset-assert 6364)
+   (items                basic  :offset-assert 6368)
+   (manager              basic  :offset-assert 6372)
+   (inited-strings-count int32  :offset-assert 6376)
+   )
+  :method-count-assert 33
+  :size-assert         #x18ec
+  :flag-assert         #x21186018ec
+  (:methods
+    (in-game-hud-method-30 () none) ;; 30
+    (in-game-hud-method-31 () none) ;; 31
+    (in-game-hud-method-32 () none) ;; 32
+    )
+  )
 
 
 
-  
+
 #|(deftype hud-map (hud)
   ((x float  :offset-assert 6364)
    (y float  :offset-assert 6368)
@@ -39283,15 +39293,13 @@
 
 
   
-#|(deftype particle-array (inline-array-class)
-  ((length           int32                    :offset-assert 4)
-   (allocated-length int32                    :offset-assert 8)
-   (data             verlet-particle :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype particle-array (inline-array-class)
+  ((data             verlet-particle :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -39311,43 +39319,37 @@
 
 
   
-#|(deftype stick-constraint-array (inline-array-class)
-  ((length           int32                     :offset-assert 4)
-   (allocated-length int32                     :offset-assert 8)
-   (data             stick-constraint :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype stick-constraint-array (inline-array-class)
+  ((data             stick-constraint :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
 
   
-#|(deftype collision-sphere-array (inline-array-class)
-  ((length           int32           :offset-assert 4)
-   (allocated-length int32           :offset-assert 8)
-   (data             sphere :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype collision-sphere-array (inline-array-class)
+  ((data             sphere :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
 
   
-#|(deftype collision-disc-array (inline-array-class)
-  ((length           int32                    :offset-assert 4)
-   (allocated-length int32                    :offset-assert 8)
-   (data             disc-constraint :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype collision-disc-array (inline-array-class)
+  ((data             disc-constraint :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -39367,22 +39369,20 @@
 
 
   
-#|(deftype anchor-point-array (inline-array-class)
-  ((length           int32                          :offset-assert 4)
-   (allocated-length int32                          :offset-assert 8)
-   (data             particle-anchor-point :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype anchor-point-array (inline-array-class)
+  ((data             particle-anchor-point :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
 
   
-#|(deftype verlet-particle-system (cloth-base)
-  ((particles               particle-array         :offset-assert 4) ;; guessed by decompiler
+(deftype verlet-particle-system (cloth-base)
+  ((particles               particle-array         :offset-assert 4)
    (drag                    float                  :offset-assert 8)
    (accum-force             vector         :inline :offset-assert 16)
    (timestep-frequency      int8                   :offset-assert 32)
@@ -39393,13 +39393,13 @@
   :size-assert         #x40
   :flag-assert         #x1000000040
   (:methods
-    (verlet-particle-system-method-11 () none) ;; 11 ;; (accumulate-external-forces! (_type_) none)
-    (verlet-particle-system-method-12 () none) ;; 12 ;; (compute-verlet-step (_type_ float) none)
-    (verlet-particle-system-method-13 () none) ;; 13 ;; (run-one-iteration (_type_) none)
-    (verlet-particle-system-method-14 () none) ;; 14 ;; (reset! (_type_) none)
-    (verlet-particle-system-method-15 () none) ;; 15 ;; (debug-draw (_type_) none)
+    (verlet-particle-system-method-11 () none) ;; 11
+    (verlet-particle-system-method-12 () none) ;; 12
+    (verlet-particle-system-method-13 () none) ;; 13
+    (verlet-particle-system-method-14 () none) ;; 14
+    (verlet-particle-system-method-15 () none) ;; 15
     )
-  )|#
+  )
   
 
 
@@ -39427,41 +39427,35 @@
 
 
   
-#|(deftype cloth-system (verlet-particle-system)
-  ((particles                  particle-array                 :offset-assert 0) ;; guessed by decompiler
-   (drag                       float                          :offset-assert 4)
-   (accum-force                vector                 :inline :offset-assert 12)
-   (timestep-frequency         int8                           :offset-assert 28)
-   (last-simulate-remaining    int8                           :offset-assert 29)
-   (momentum                   vector                 :inline :offset-assert 44)
-   (ground-constraint          float                          :offset-assert 60)
-   (disc-collision-constraints collision-disc-array           :offset-assert 64) ;; guessed by decompiler
-   (collision-constraints      collision-sphere-array         :offset-assert 68) ;; guessed by decompiler
-   (stick-constraints          stick-constraint-array         :offset-assert 72) ;; guessed by decompiler
-   (anchor-points              anchor-point-array             :offset-assert 76) ;; guessed by decompiler
-   (constraint-strengths       int32                  3       :offset-assert 80) ;; guessed by decompiler
-   (num-xy-constraints         int16                          :offset-assert 92)
-   (num-diagonal-constraints   int16                          :offset-assert 94)
-   (cloth-width                int32                          :offset-assert 96)
-   (cloth-height               int32                          :offset-assert 100)
-   (strip                      prim-strip                     :offset-assert 104) ;; guessed by decompiler
-   (strip2                     prim-strip                     :offset-assert 108) ;; guessed by decompiler
-   (strip3                     prim-strip                     :offset-assert 112) ;; guessed by decompiler
-   (mesh                       art-cloth-geo                  :offset-assert 116) ;; guessed by decompiler
-   (gravity-constant           float                          :offset-assert 120)
-   (wind-constant              float                          :offset-assert 124)
-   (flags                      cloth-flag                     :offset-assert 132)
-   (thickness-scalar           float                          :offset-assert 140)
-   (ball-collision-radius      float                          :offset-assert 144)
-   (face-normal-scalar         float                          :offset-assert 148)
-   (reset-count                int8                           :offset-assert 152)
-   (num-iterations             int8                           :offset-assert 153)
-   (secret-disable             uint64                         :offset-assert 156) ;; game-secrets
-   (params                     cloth-params                   :offset-assert 164)
+(deftype cloth-system (verlet-particle-system)
+  ((ground-constraint          float                          :offset 60)
+   (disc-collision-constraints collision-disc-array           :offset 64)
+   (collision-constraints      collision-sphere-array         :offset 68)
+   (stick-constraints          stick-constraint-array         :offset 72)
+   (anchor-points              anchor-point-array             :offset 76)
+   (constraint-strengths       int32                  3       :offset 80)
+   (num-xy-constraints         int16                          :offset 92)
+   (num-diagonal-constraints   int16                          :offset 94)
+   (cloth-width                int32                          :offset 96)
+   (cloth-height               int32                          :offset 100)
+   (strip                      uint32                         :offset 104) ;; prim-strip
+   (strip2                     uint32                         :offset 108) ;; prim-strip
+   (strip3                     uint32                         :offset 112) ;; prim-strip
+   (mesh                       art-cloth-geo                  :offset 116)
+   (gravity-constant           float                          :offset 120)
+   (wind-constant              float                          :offset 124)
+   (flags                      uint32                         :offset 132) ;; cloth-flag
+   (thickness-scalar           float                          :offset 140)
+   (ball-collision-radius      float                          :offset 144)
+   (face-normal-scalar         float                          :offset 148)
+   (reset-count                int8                           :offset 152)
+   (num-iterations             int8                           :offset 153)
+   (secret-disable             uint64                         :offset 160)
+   (cp                         cloth-params                   :offset 164)
    )
   :method-count-assert 38
-  :size-assert         #xac
-  :flag-assert         #x26000000ac
+  :size-assert         #xa8
+  :flag-assert         #x26000000a8
   ;; field cloth-flag is likely a value type.
   (:methods
     (cloth-system-method-16 () none) ;; 16 ;; (initialize-cloth-system! (_type_ cloth-params) none)
@@ -39485,9 +39479,9 @@
     (cloth-system-method-34 () none) ;; 34 ;; (hide! (_type_) none)
     (cloth-system-method-35 () none) ;; 35 ;; (reset-locations (_type_) none)
     (cloth-system-method-36 () none) ;; 36 ;; (pre-physics-update (_type_) none)
-    (cloth-system-method-37 () none) ;; 37 ;; (cloth-system-cmd-handler (_type_ pair) none)
+    (cloth-system-method-37 () none) ;; 37
     )
-  )|#
+  )
   
 
 
