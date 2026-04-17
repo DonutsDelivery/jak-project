@@ -181,9 +181,15 @@ void clean_up_return_final(const Function& f, ReturnElement* ir) {
   }
   ASSERT(dead);
   auto src = dynamic_cast<SimpleExpressionElement*>(dead->src()->try_as_single_element());
-  ASSERT(src);
-  ASSERT(src->expr().is_identity() && src->expr().get_arg(0).is_int() &&
-         src->expr().get_arg(0).get_int() == 0);
+  if (!src) {
+    lg::error("clean_up_return_final: dead-code src was not a simple expression, leaving in place");
+    return;
+  }
+  if (!(src->expr().is_identity() && src->expr().get_arg(0).is_int() &&
+        src->expr().get_arg(0).get_int() == 0)) {
+    lg::error("clean_up_return_final: dead-code src was not identity-zero, leaving in place");
+    return;
+  }
   ir->dead_code = nullptr;
 }
 
@@ -733,8 +739,9 @@ void clean_up_cond_no_else_final(Function& func, CondNoElseElement* cne) {
       ASSERT(fr.has_value());
       cne->final_destination = *fr;
     } else {
-      lg::print("failed to clean up cond_no_else_final: {}\n", func.name());
-      ASSERT(false);
+      lg::error("clean_up_cond_no_else_final: entry {} has no false_destination in {}, skipping",
+                idx, func.name());
+      return;
     }
   }
 
