@@ -1,10 +1,8 @@
-;; Jak X ATOLL.DGO — main atoll race track.
-;;
-;; For initial bringup we omit the jakx level-code objects
-;; (atoll-ocean.o, atoll-effects.o, atoll-part.o, atoll-obs.o) because they
-;; haven't been ported to OpenGOAL yet. The level still packages the geometry
-;; (atoll-vis.go), art groups, and textures — enough to validate the DGO
-;; build pipeline and, once wired to level-load-info, the loader path.
+;; Jak X ATOLL.DGO — level geometry + art + textures only.
+;; Code objects (atoll-ocean.o, atoll-effects.o, atoll-part.o, atoll-obs.o)
+;; deferred until ported to OpenGOAL.
+;; atoll-vis.go is the level visibility binary — the loader looks for
+;; visname 'atoll-vis, so keep it in the DGO.
 ("ATOLL.DGO"
  ("tpage-3038.go"
   "tpage-3039.go"
