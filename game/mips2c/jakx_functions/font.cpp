@@ -6,8 +6,9 @@
 // Currently implements:
 //   - get-string-length-asm
 //   - draw-string-asm-packed  (partial — first render loop + effect passes
-//                              complete; second-loop switch scanner ported;
-//                              second-loop handlers B122..B170 still TODO)
+//                              complete; second-loop scanner + tilde-code
+//                              handlers + bracket push/pop complete;
+//                              second-loop render tail B158..B170 TODO)
 //
 // These are hand-adapted from the jakx MIPS assembly in
 // decompiler_out/jakx/font_ir2.asm. They are NOT copies of the jak3 port —
@@ -1386,84 +1387,279 @@ block_106:
   c->daddiu(t4, t1, -85);                             // 'U'
   if (bc) { goto block_131; }
 
-  // -------------------------------------------------------------------------
-  // *** B122-B170 still TODO — the switch falls through to a safe exit here.
-  // The remaining asm covers:
-  //   B122-B125   : 'U' case + digit-accumulator continuation
-  //   B126-B128   : L162/L163 small/large font switch
-  //   B129-B130   : L164 color-by-name (looks up char-color by char in
-  //                 digit accumulator, expands via pextlb/pextlh into
-  //                 current-color)
-  //   B131-B132   : L165 color-by-index (t3 is already the color index)
-  //   B133-B134   : L166 kerning toggle
-  //   B135-B139   : L167/L168/L169 h-offset with sign
-  //   B140-B144   : L170/L171/L172 v-offset with sign
-  //   B145-B148   : L173/L174/L175/L176 bracket push/pop + y/z save/restore.
-  //                 These touch new font-work slots: save-color @ 512 and
-  //                 save-color2 @ 528, plus save-last-color @ 6169.
-  //   B149-B158   : L177..L183 second-loop render tail (ctrl-char + regular
-  //                 printable variants of what first-loop B57..B66 did).
-  //   B159-B170   : L184..L187 transform + char-packet emit + clip test.
-  //                 No effect passes in the second loop (no gate on flag
-  //                 4096) — it always emits exactly one packet per glyph.
-  //
-  // For now, any tilde-code that falls off the switch (non-matching letters,
-  // or 'U') falls through to the safe epilogue at block_171.
-  // -------------------------------------------------------------------------
-  goto block_171;
+  // B122: 'U' → L165 (color-by-index)
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L165
+  c->daddiu(t4, t1, -48);                             // '0'
+  if (bc) { goto block_131; }
 
-  // -------------------------------------------------------------------------
-  // Forward-reference stubs for second-loop handlers not yet ported.
-  // Each drops to the epilogue so the function still returns cleanly if
-  // the switch above branches here. Real implementations land in later
-  // commits.
-  // -------------------------------------------------------------------------
+  // B123:
+  bc = ((s64)c->sgpr64(t4)) < 0;                      // bltz t4, L181 (< '0' → printable)
+  c->daddiu(t5, t1, -57);                             // '9'
+  if (bc) { goto block_155; }
+
+  // B124:
+  bc = ((s64)c->sgpr64(t5)) > 0;                      // bgtz t5, L181
+  c->sll(t5, t3, 2);                                  // sll t5, t3, 2
+  if (bc) { goto block_155; }
+
+  // B125: digit accumulator: t3 = (t3 * 10) + (char - '0')
+  c->daddu(t1, t3, t5);                               // t3 + t3*4 = 5*t3
+  c->sll(t1, t1, 1);                                  // *2 → *10
+  c->daddu(t3, t1, t4);                               // + digit
+  goto block_106;                                     // loop back to L161
+
 block_126:
-  // B126 / L162: small-font switch for second loop. TODO.
-  goto block_171;
+  // B126 / L162: "~n"/"~N" — small-font switch in second loop.
+  // If t3 (digit count) != 0 → large-font branch (L163).
+  bc = c->sgpr64(t3) != 0;                            // bne t3, r0, L163
+  c->addiu(t1, r0, -33);                              // -33 = ~32 (clear 'large')
+  if (bc) { goto block_128; }
+
+  // B127: install small-font templates/table/sizes, clear 'large' flag.
+  c->lq(a1, 192, v1);                                 // small-font-0-tmpl
+  c->lq(t2, 208, v1);
+  c->lq(t3, 224, v1);
+  c->lq(t4, 240, v1);
+  c->sq(a1, 6080, v1);
+  c->sq(t2, 6096, v1);
+  c->sq(t3, 6112, v1);
+  c->sq(t4, 6128, v1);
+  c->load_symbol2(a1, cache.font12_table);
+  c->mov64(a1, a1);
+  c->lqc2(vf13, 320, v1);
+  c->lqc2(vf14, 336, v1);
+  c->lqc2(vf15, 352, v1);
+  c->and_(a2, a2, t1);                                // clear bit 5 (large)
+  goto block_92;                                      // L160
+
+block_128:
+  // B128 / L163: large-font switch.
+  c->lq(a1, 256, v1);
+  c->lq(t1, 272, v1);
+  c->lq(t2, 288, v1);
+  c->lq(t3, 304, v1);
+  c->sq(a1, 6080, v1);
+  c->sq(t1, 6096, v1);
+  c->sq(t2, 6112, v1);
+  c->sq(t3, 6128, v1);
+  c->load_symbol2(a1, cache.font24_table);
+  c->mov64(a1, a1);
+  c->lqc2(vf13, 368, v1);
+  c->lqc2(vf14, 384, v1);
+  c->lqc2(vf15, 400, v1);
+  c->ori(a2, a2, 32);                                 // set bit 5 (large)
+  goto block_92;
 
 block_129:
-  // B129 / L164: color-by-name (l/L). TODO.
-  goto block_171;
+  // B129 / L164: color-by-name ("~l<digits>" / "~L<digits>"). Writes
+  // last-color = t3 (digit), then if flag bit 128 is set, bails back
+  // to loop top without applying the color. Otherwise falls into B130
+  // to compute color-table[t3] and store into current-color.
+  c->andi(t1, a2, 128);                               // flag 128 (color-lock?)
+  c->sll(t2, t3, 4);                                  // t2 = t3 * 16 (color-table stride)
+  bc = c->sgpr64(t1) != 0;                            // bne t1, r0, L160 (locked — skip)
+  c->sb(t3, 6168, v1);                                // last-color = t3 (unconditional delay slot)
+  if (bc) { goto block_92; }
+
+  // B130: compute color-table[t3] at offset 4896 + t3*16, expand via
+  // pextlb/pextlh from byte to vector4w, store to current-color (@544),
+  // and write the alpha float bits from font-context @8 into the w slot.
+  c->daddu(t1, t2, v1);                               // t1 = &font-work + t3*16
+  c->lwu(t1, 4896, t1);                               // load first 4 bytes of color
+  c->pextlb(t2, r0, t1);                              // bytes → halfs
+  c->lwu(t1, 8, gp);                                  // alpha bits from font-context @8
+  c->pextlh(t2, r0, t2);                              // halfs → words
+  c->sq(t2, 544, v1);                                 // current-color
+  c->sw(t1, 556, v1);                                 // current-color.w (alpha)
+  goto block_92;
 
 block_131:
-  // B131 / L165: color-by-index (u/U). TODO.
-  goto block_171;
+  // B131 / L165: color-by-index ("~u<digits>" / "~U<digits>"). t3 is
+  // already the color value (raw bytes from the digit accumulator) —
+  // no table indirection. Bails on flag 128.
+  c->andi(t1, a2, 128);
+  bc = c->sgpr64(t1) != 0;                            // bne t1, r0, L160
+  if (bc) { goto block_92; }
+
+  // B132: pextlb/pextlh on t3 directly.
+  c->pextlb(t2, r0, t3);                              // bytes → halfs
+  c->lw(t1, 8, gp);                                   // alpha bits
+  c->pextlh(t2, r0, t2);                              // halfs → words
+  c->sq(t2, 544, v1);                                 // current-color
+  c->sw(t1, 556, v1);                                 // alpha
+  goto block_92;
 
 block_133:
-  // B133 / L166: kerning toggle. TODO.
-  goto block_171;
+  // B133 / L166: "~k"/"~K" — kerning toggle (identical to B43/L135).
+  c->addiu(t1, r0, -3);                               // -3 = ~2
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L160
+  c->and_(a2, a2, t1);                                // clear bit 1
+  if (bc) { goto block_92; }
+
+  // B134:
+  c->ori(a2, a2, 2);                                  // set bit 1
+  goto block_92;
 
 block_135:
-  // B135 / L167: horizontal offset. TODO.
-  goto block_171;
+  // B135 / L167: "~h"/"~H" — horizontal offset (identical to B45/L136).
+  c->mov128_vf_gpr(vf1, t3);                          // qmtc2.i vf1, t3
+  c->daddiu(t1, t2, -45);                             // '-'
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L169
+  c->vitof0(DEST::xyzw, vf1, vf1);
+  if (bc) { goto block_139; }
+
+  // B136:
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L168
+  if (bc) { goto block_138; }
+
+  // B137: '+' → vf23.x += vf1.x
+  c->vadd_bc(DEST::x, BC::x, vf23, vf23, vf1);
+  goto block_92;
+
+block_138:
+  // B138 / L168: '-' → vf23.x -= vf1.x
+  c->vsub_bc(DEST::x, BC::x, vf23, vf23, vf1);
+  goto block_92;
+
+block_139:
+  // B139 / L169: absolute → vf23.x = vf1.x
+  c->vadd_bc(DEST::x, BC::x, vf23, vf0, vf1);
+  goto block_92;
 
 block_140:
-  // B140 / L170: vertical offset. TODO.
-  goto block_171;
+  // B140 / L170: "~v"/"~V" — vertical offset (identical to B50/L139).
+  c->mov128_vf_gpr(vf1, t3);
+  c->daddiu(t1, t2, -45);
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L172
+  c->vitof0(DEST::xyzw, vf1, vf1);
+  if (bc) { goto block_144; }
+
+  // B141:
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L171
+  if (bc) { goto block_143; }
+
+  // B142: '+' → vf23.y += vf1.x
+  c->vadd_bc(DEST::y, BC::x, vf23, vf23, vf1);
+  goto block_92;
+
+block_143:
+  // B143 / L171: '-' → vf23.y -= vf1.x
+  c->vsub_bc(DEST::y, BC::x, vf23, vf23, vf1);
+  goto block_92;
+
+block_144:
+  // B144 / L172: absolute → vf23.y = vf1.x
+  c->vadd_bc(DEST::y, BC::x, vf23, vf0, vf1);
+  goto block_92;
 
 block_145:
-  // B145 / L173: '[' — push color state. TODO.
-  goto block_171;
+  // B145 / L173: '[' — push color state.
+  //   save-last-color (@6169) = last-color (@6168)
+  //   save-color (@512) = current-color (@544)
+  c->lb(t1, 6168, v1);
+  c->lqc2(vf9, 544, v1);
+  c->sb(t1, 6169, v1);
+  c->sqc2(vf9, 512, v1);
+  goto block_92;
 
 block_146:
-  // B146 / L174: ']' — pop color state. TODO.
-  goto block_171;
+  // B146 / L174: ']' — pop color state.
+  //   last-color (@6168) = save-last-color (@6169)
+  //   current-color (@544) = save-color (@512)
+  c->lb(t1, 6169, v1);
+  c->lqc2(vf9, 512, v1);
+  c->sb(t1, 6168, v1);
+  c->sqc2(vf9, 544, v1);
+  goto block_92;
 
 block_147:
-  // B147 / L175: 'y'/'Y' — save cursor. TODO.
-  goto block_171;
+  // B147 / L175: 'y'/'Y' — save cursor + color state.
+  //   save-last-color ← last-color
+  //   save-color ← current-color
+  //   save (@496) ← vf23
+  c->lb(t1, 6168, v1);
+  c->lqc2(vf9, 544, v1);
+  c->sb(t1, 6169, v1);
+  c->sqc2(vf9, 512, v1);
+  c->sqc2(vf23, 496, v1);                             // save cursor
+  goto block_92;
 
 block_148:
-  // B148 / L176: 'z'/'Z' — restore cursor. TODO.
-  goto block_171;
+  // B148 / L176: 'z'/'Z' — restore cursor + color state.
+  //   last-color ← save-last-color
+  //   current-color ← save-color
+  //   vf23 ← save (@496)
+  c->lb(t1, 6169, v1);
+  c->lqc2(vf9, 512, v1);
+  c->sb(t1, 6168, v1);
+  c->sqc2(vf9, 544, v1);
+  c->lqc2(vf23, 496, v1);                             // restore cursor
+  goto block_92;
 
 block_149:
-  // B149 / L177: control char (≤3). TODO.
-  goto block_171;
+  // B149 / L177: control char (≤3). Mirrors B57/L144 but second loop
+  // branches into the L183 common render tail instead of L147.
+  c->daddiu(t2, t1, -3);                              // t1==3?
+  c->ori(a2, a2, 64);                                 // set bit 6 (newline pending)
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L179 (t1==3)
+  c->daddiu(t1, t1, -2);                              // t1==2?
+  if (bc) { goto block_153; }
+
+  // B150:
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L178 (t1==2)
+  if (bc) { goto block_152; }
+
+  // B151: t1==1 — current-font-1-tmpl
+  c->lqc2(vf20, 6096, v1);
+  goto block_154;                                     // L180
+
+block_152:
+  // B152 / L178: t1==2 — current-font-2-tmpl
+  c->lqc2(vf20, 6112, v1);
+  goto block_154;
+
+block_153:
+  // B153 / L179: t1==3 — current-font-3-tmpl
+  c->lqc2(vf20, 6128, v1);
+  // fall through
+
+block_154:
+  // B154 / L180: common tail — fetch next char, compute cell index,
+  // vf4 = vf23 + vf15, vf1 = vf25 - vf23, jump to L183 (render path).
+  c->lbu(t1, 4, t0);
+  c->daddiu(t0, t0, 1);
+  c->vadd(DEST::xyz, vf4, vf23, vf15);
+  c->sll(t2, t1, 4);
+  c->vsub(DEST::xyzw, vf1, vf25, vf23);
+  goto block_158;                                     // L183 (second-loop render tail — TODO)
 
 block_155:
-  // B155 / L181: regular printable fast path. TODO.
+  // B155 / L181: regular printable fast path. Mirrors B63/L148 but
+  // branches to L182 (CR/LF) / L183 (render) — both in the second loop.
+  c->addiu(t2, r0, -65);                              // -65 = ~64
+  c->and_(a2, a2, t2);                                // clear bit 6
+  c->vadd(DEST::xyz, vf4, vf23, vf15);
+  c->sll(t2, t1, 4);                                  // cell index
+  c->vsub(DEST::xyzw, vf1, vf25, vf23);
+  c->daddiu(t3, t1, -10);                             // LF?
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L182
+  c->daddiu(t1, t1, -13);                             // CR?
+  if (bc) { goto block_157; }
+
+  // B156:
+  bc = c->sgpr64(t1) != 0;                            // bne t1, r0, L183 (neither)
+  if (bc) { goto block_158; }
+
+block_157:
+  // B157 / L182: CR/LF — advance justify cursor, reload vf23.
+  c->daddiu(a3, a3, 16);
+  c->lqc2(vf23, 640, a3);
+  goto block_92;                                      // L160
+
+block_158:
+  // B158 / L183: second-loop render tail. TODO — ports in next batch.
+  // Falls through to epilogue so glyphs that land here aren't drawn
+  // but the function still returns cleanly.
   goto block_171;
 
 block_171:
