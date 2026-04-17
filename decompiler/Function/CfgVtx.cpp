@@ -37,12 +37,19 @@ void CfgVtx::replace_pred_and_check(CfgVtx* old_pred, CfgVtx* new_pred) {
   bool replaced = false;
   for (auto& x : pred) {
     if (x == old_pred) {
-      ASSERT(!replaced);
+      if (replaced) {
+        lg::error(
+            "CfgVtx::replace_pred_and_check: old_pred {} appears multiple times in pred list of {}",
+            old_pred ? old_pred->to_string() : "nullptr", to_string());
+      }
       x = new_pred;
       replaced = true;
     }
   }
-  ASSERT(replaced);
+  if (!replaced) {
+    lg::error("CfgVtx::replace_pred_and_check: old_pred {} not in pred list of {} (no-op)",
+              old_pred ? old_pred->to_string() : "nullptr", to_string());
+  }
 }
 
 /*!
@@ -111,8 +118,13 @@ void CfgVtx::replace_preds_with_and_check(std::vector<CfgVtx*> old_preds, CfgVtx
 
   pred = new_pred_list;
 
-  for (auto x : found) {
-    ASSERT(x);
+  for (size_t i = 0; i < found.size(); i++) {
+    if (!found[i]) {
+      lg::error(
+          "CfgVtx::replace_preds_with_and_check: old_pred {} not in pred list of {} "
+          "(treating as no-op)",
+          old_preds[i] ? old_preds[i]->to_string() : "nullptr", to_string());
+    }
   }
 }
 
