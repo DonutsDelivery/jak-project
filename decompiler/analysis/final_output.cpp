@@ -201,6 +201,16 @@ std::string final_defun_out(const Function& func,
     if (method_info.name == "new") {
       top.push_back(pretty_print::to_symbol(func.guessed_name.type_name));
     }
+    // Synthesize a `this` arg when the deftype declared the method with an
+    // empty arg list ((): decomp placeholders for methods of jakx types that
+    // never got a full signature fill-in). Methods always receive `this`, so
+    // emit `((this TYPE))` to keep goalc from rejecting `(defmethod NAME ())`.
+    if (arguments.is_list() && arguments.is_empty_list() &&
+        method_info.name != "new") {
+      arguments = pretty_print::build_list(pretty_print::build_list(
+          pretty_print::to_symbol("this"),
+          pretty_print::to_symbol(func.guessed_name.type_name)));
+    }
     top.push_back(arguments);
     auto top_form = pretty_print::build_list(top);
 
