@@ -10071,6 +10071,7 @@
 (define-extern *keybd-hold-ct* object)
 (define-extern *keybd-ungetc* object)
 (define-extern keybd-read-ascii function)
+(define-extern keybd-get-data (function keybd-info none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; gs                             ;;
