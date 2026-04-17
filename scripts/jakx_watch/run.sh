@@ -149,6 +149,11 @@ echo "" | tee -a "$RUN_LOG"
 echo "-- load-offset clustering --" | tee -a "$RUN_LOG"
 python3 scripts/jakx_watch/load_offset_scan.py 2>&1 | tee -a "$RUN_LOG" || true
 
+# --- add-failed clustering (uninit-arg + typed-ptr-arith failures) ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- add-failed clustering --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/add_failed_scan.py 2>&1 | tee -a "$RUN_LOG" || true
+
 # --- auto-seed _REF.gc for newly-real-clean files (no-op if coverage complete) ---
 if [ -f "$ROOT/test/offline/config/jakx/config.jsonc" ]; then
     echo "" | tee -a "$RUN_LOG"

@@ -536,6 +536,26 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
             lines.append(f"    {c:>4}  {name}")
         lines.append("  → decompiler C++ patch target: emit `(define *X* ...)` with 2 args, not 3")
 
+    # ===== optional: add-failed clusters =====
+    af = snap.get("add_failed_clusters")
+    if af:
+        lines.append("")
+        lines.append("## add-failed clusters (\"add failed: LHS <integer N>\")")
+        lines.append(
+            f"  total: {af.get('total', 0)}  ·  "
+            f"uninit={af.get('uninit_total', 0)}  ·  typed={af.get('typed_total', 0)}"
+        )
+        tuc = af.get("top_uninit_callers") or []
+        if tuc:
+            lines.append("  top 10 uninit callers (declare :methods arg types in all-types.gc):")
+            for caller, c in tuc[:10]:
+                lines.append(f"    {c:>4}  {caller}")
+        ttp = af.get("top_typed_pairs") or []
+        if ttp:
+            lines.append("  top 10 typed (TYPE + OFFS) pairs (declare field or type_casts entry):")
+            for entry in ttp[:10]:
+                lines.append(f"    {entry['count']:>4}  {entry['type']} + {entry['offs']}")
+
     # ===== optional: load-offset clusters =====
     lo = snap.get("load_offset_clusters")
     if lo:

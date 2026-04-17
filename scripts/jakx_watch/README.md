@@ -57,6 +57,10 @@ Per decomp run it tells you:
   (set! DST (OP (+ REG OFFS)))` by offset + caller. Surfaces struct-field
   offsets that aren't resolving (type_casts.jsonc candidates) and global
   (gp+OFFS) references that are missing from the symbol table.
+- `add_failed_scan.py` — clusters `;; ERROR: ... add failed: LHS <integer N>`
+  into two buckets: `<uninitialized>` (method arg signatures missing in
+  all-types.gc) and typed LHS (deftype field missing or type_casts entry
+  needed).
 - `migration_candidates.py` — audits `goal_src/jakx/engine/**/*.gc` hand-ports
   against current decomp state. A hand-port is a deletion candidate when its
   decomp is real-clean / real-partial. Flags update-from-decomp append-bug
