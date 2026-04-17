@@ -440,6 +440,13 @@ std::string write_from_top_level_form(Form* top_form,
                                    {Matcher::any_symbol(1)})})}),
       Matcher::set(Matcher::any_symbol(2), Matcher::any(3)));
 
+  // (set! (-> TYPE heap-base) VALUE) — inline-array-class heap-base initialization.
+  // Emits cleanly as a top-level set! (goalc accepts it; no special wrapping needed).
+  Matcher heap_base_setter_matcher = Matcher::set(
+      Matcher::deref(Matcher::any_symbol(), false,
+                     {DerefTokenMatcher::string("heap-base")}),
+      Matcher::any());
+
   for (auto& x : forms) {
     bool something_matched = false;
     Form f;
@@ -579,6 +586,15 @@ std::string write_from_top_level_form(Form* top_form,
         something_matched = true;
       } else if (!x->active()) {
         something_matched = true;
+      }
+    }
+
+    if (!something_matched) {
+      auto heap_base_match_result = match(heap_base_setter_matcher, &f);
+      if (heap_base_match_result.matched) {
+        something_matched = true;
+        result += pretty_print::to_string(x->to_form(env));
+        result += "\n\n";
       }
     }
 
