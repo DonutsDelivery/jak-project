@@ -1,3 +1,28 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+;; name: wcar-tiger.gc
+;; name in dgo: wcar-tiger
+;; dgos: GAME
+
+;; -----------------------------------------------------------------------------
+;; v-tiger - concrete wcar variant.
+;;
+;; Ported from decompiler_out/jakx/wcar-tiger_disasm.gc and
+;; decompiler/config/jakx/all-types.gc:7294. The decomp file is malformed
+;; (type-prop failed everywhere, only top-level (new type ...) +
+;; (method-set! ...) calls are visible, no actual lisp bodies). The deftype
+;; itself has no extra fields: flag/size assertions say #x13c0 = parent
+;; wcar-base's size.
+;;
+;; Tiger has one extra override vs the other wcars: method 69 (->L37).
+;; Method overrides 3 (inspect), 69, 100, 115 are NOT ported - the bodies
+;; weren't captured in the decomp.
+;; -----------------------------------------------------------------------------
+
+(deftype v-tiger (wcar-base)
+  ()
+  )
+
+;; Method overrides (3 inspect, 69, 100 task-complete-hook, 115 update-shocks)
+;; deferred until wcar-base 115 lands and the L* static vectors are rebuilt.

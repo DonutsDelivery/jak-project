@@ -1,3 +1,28 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+;; name: wcar-daxtermobile.gc
+;; name in dgo: wcar-daxtermobile
+;; dgos: GAME
+
+;; -----------------------------------------------------------------------------
+;; v-daxtermobile - concrete wcar variant.
+;;
+;; Ported from decompiler_out/jakx/wcar-daxtermobile_disasm.gc and
+;; decompiler/config/jakx/all-types.gc:7358. The decomp file is malformed
+;; (type-prop failed everywhere, only top-level (new type ...) +
+;; (method-set! ...) calls are visible, no actual lisp bodies). The deftype
+;; itself has no extra fields: flag/size assertions say #x13c0 = parent
+;; wcar-base's size.
+;;
+;; Method overrides 3 (inspect), 66, 100, 115 deferred along with the
+;; matching wcar-base methods.
+;; -----------------------------------------------------------------------------
+
+(deftype v-daxtermobile (wcar-base)
+  ()
+  )
+
+;; Method overrides (3 inspect, 66 init-from-entity, 100 task-complete-hook,
+;; 115 update-shocks) deferred until wcar-base 115 lands and the L* static
+;; vectors are rebuilt.
