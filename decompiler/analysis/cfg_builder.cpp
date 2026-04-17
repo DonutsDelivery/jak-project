@@ -348,7 +348,9 @@ bool try_clean_up_sc_as_and(FormPool& pool, Function& func, ShortCircuitElement*
   for (int i = 0; i < int(ir->entries.size()) - 1; i++) {
     auto branch = get_condition_branch(ir->entries.at(i).condition);
     ASSERT(branch.first);
-    ASSERT(ir->entries.at(i).branch_delay.has_value());
+    if (!ir->entries.at(i).branch_delay.has_value()) {
+      return false;
+    }
     if (!delay_slot_sets_false(branch.first, *ir->entries.at(i).branch_delay)) {
       return false;
     }
@@ -456,7 +458,9 @@ bool try_clean_up_sc_as_or(FormPool& pool, Function& func, ShortCircuitElement* 
     // short circuit branch
     auto branch = get_condition_branch(ir->entries.at(i).condition);
     ASSERT(branch.first);
-    ASSERT(ir->entries.at(i).branch_delay.has_value());
+    if (!ir->entries.at(i).branch_delay.has_value()) {
+      return false;
+    }
     // the branch should write true (there's two ways this can happen)
     if (!delay_slot_sets_truthy(branch.first, *ir->entries.at(i).branch_delay)) {
       return false;
@@ -575,7 +579,9 @@ void clean_up_sc(FormPool& pool, Function& func, ShortCircuitElement* ir);
 bool try_splitting_nested_sc(FormPool& pool, Function& func, ShortCircuitElement* ir) {
   auto first_branch = get_condition_branch(ir->entries.front().condition);
   ASSERT(first_branch.first);
-  ASSERT(ir->entries.front().branch_delay.has_value());
+  if (!ir->entries.front().branch_delay.has_value()) {
+    return false;
+  }
   bool first_is_and = delay_slot_sets_false(first_branch.first, *ir->entries.front().branch_delay);
   bool first_is_or = delay_slot_sets_truthy(first_branch.first, *ir->entries.front().branch_delay);
 
@@ -592,7 +598,9 @@ bool try_splitting_nested_sc(FormPool& pool, Function& func, ShortCircuitElement
   for (int i = 1; i < int(ir->entries.size()) - 1; i++) {
     auto branch = get_condition_branch(ir->entries.at(i).condition);
     ASSERT(branch.first);
-    ASSERT(ir->entries.at(i).branch_delay.has_value());
+    if (!ir->entries.at(i).branch_delay.has_value()) {
+      return false;
+    }
     bool is_and = delay_slot_sets_false(branch.first, *ir->entries.at(i).branch_delay);
     bool is_or = delay_slot_sets_truthy(branch.first, *ir->entries.at(i).branch_delay);
     ASSERT_MSG(is_and != is_or,
@@ -651,7 +659,9 @@ void clean_up_sc(FormPool& pool, Function& func, ShortCircuitElement* ir) {
   if (!try_clean_up_sc_as_and(pool, func, ir)) {
     if (!try_clean_up_sc_as_or(pool, func, ir)) {
       if (!try_splitting_nested_sc(pool, func, ir)) {
-        ASSERT(false);
+        lg::error(
+            "clean_up_sc: failed all three strategies (and/or/split) in {} (leaving SC as-is)",
+            func.name());
       }
     }
   }
@@ -1895,11 +1905,13 @@ Form* cfg_to_ir_helper(FormPool& pool, Function& f, const CfgVtx* vtx) {
         auto& op = f.ir2.atomic_ops->ops.at(delay_start);
         auto op_as_expr = dynamic_cast<SetVarOp*>(op.get());
         if (!op_as_expr) {
-          lg::print("bad in {}\n", f.name());
-          lg::print("{}\n", op->to_string(f.ir2.env));
+          lg::error(
+              "short-circuit likely-delay was not a SetVarOp in {}: {} (leaving "
+              "branch_delay empty)",
+              f.name(), op->to_string(f.ir2.env));
+        } else {
+          e.branch_delay = *op_as_expr;
         }
-        ASSERT(op_as_expr);
-        e.branch_delay = *op_as_expr;
       }
 
       entries.push_back(e);
