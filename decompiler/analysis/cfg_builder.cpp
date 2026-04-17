@@ -190,12 +190,23 @@ void clean_up_return_final(const Function& f, ReturnElement* ir) {
  */
 void clean_up_break(FormPool& pool, BreakElement* ir, const Env&) {
   auto jump_to_end = get_condition_branch(ir->return_code);
-  ASSERT(jump_to_end.first);
-  ASSERT(jump_to_end.first->op()->branch_delay().kind() == IR2_BranchDelay::Kind::NOP);
-  ASSERT(jump_to_end.first->op()->condition().kind() == IR2_Condition::Kind::ALWAYS);
+  if (!jump_to_end.first) {
+    lg::error("clean_up_break: no jump found, leaving break unmodified");
+    return;
+  }
+  if (jump_to_end.first->op()->branch_delay().kind() != IR2_BranchDelay::Kind::NOP ||
+      jump_to_end.first->op()->condition().kind() != IR2_Condition::Kind::ALWAYS) {
+    lg::error("clean_up_break: unexpected branch shape (delay={}, cond={}), leaving unmodified",
+              (int)jump_to_end.first->op()->branch_delay().kind(),
+              (int)jump_to_end.first->op()->condition().kind());
+    return;
+  }
   auto as_end_of_sequence = get_condition_branch_as_vector(ir->return_code);
   if (as_end_of_sequence.first) {
-    ASSERT(as_end_of_sequence.second->size() > 1);
+    if (as_end_of_sequence.second->size() <= 1) {
+      lg::error("clean_up_break: sequence too small to pop, leaving unmodified");
+      return;
+    }
     as_end_of_sequence.second->pop_back();
   } else {
     *(jump_to_end.second) = pool.alloc_element<EmptyElement>();
