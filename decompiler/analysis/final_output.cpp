@@ -629,6 +629,25 @@ std::string write_from_top_level_form(Form* top_form,
       }
     }
 
+    // Top-level function/method calls (e.g. `(init-mood-control *mood-control*)`
+    // or `(scene-method-17 (new 'static 'scene ...))`) are valid GOAL forms —
+    // the compiler runs them at toplevel to register data. Emit them as-is.
+    if (!something_matched) {
+      auto as_gen = dynamic_cast<GenericElement*>(x);
+      if (as_gen && as_gen->op().kind() == GenericOperator::Kind::FUNCTION_EXPR) {
+        something_matched = true;
+        result += pretty_print::to_string(x->to_form(env));
+        result += "\n\n";
+      }
+    }
+    if (!something_matched) {
+      if (dynamic_cast<FunctionCallElement*>(x)) {
+        something_matched = true;
+        result += pretty_print::to_string(x->to_form(env));
+        result += "\n\n";
+      }
+    }
+
     // Silently drop stray epilogue artifacts (bare 0, (ret-none)) that slip
     // through expression building and end up as their own top-level entries.
     // Stripping them at the end of the form vector only helps if they are
