@@ -1,8 +1,118 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; ERROR: top level function was not converted to expressions. Cannot decompile.
+;; name: wvehicle-weapons-h.gc
+;; name in dgo: wvehicle-weapons-h
+;; dgos: GAME
+
+;; -----------------------------------------------------------------------------
+;; Jak X wheel-vehicle weapons header. Ported from
+;; decompiler/config/jakx/all-types.gc (wvehicle-weapons-h block, lines
+;; 44471-44694). The upstream decompiler_out/jakx/wvehicle-weapons-h_disasm.gc
+;; couldn't decompile the top-level, so all-types.gc is the authoritative
+;; source.
+;;
+;; Only the active (uncommented) types are ported here. The commented-out
+;; types (vehicle-weapon-slot, gunmount-drawable, gunmount-generic-drawable,
+;; warning-hud-icon, vehicle-weapon-drone) are process-drawable / hud
+;; subclasses whose bodies will be added when wvehicle-weapons.gc body and
+;; gunmount logic land; wvehicle-h refers to those via uint64 handles so no
+;; forward decl is needed here.
+;;
+;; Other types in the wvehicle-weapons-h decomp block that conceptually belong
+;; here but were pulled into wvehicle-h.gc so the vehicle header was
+;; self-contained: v-wpn-turbo-lightning-info, wvehicle-weapon-sync-blob,
+;; wvehicle-sound-loop-state, wvehicle-engine-loop-state,
+;; wvehicle-engine-mix-state. Those are already defined there and NOT
+;; redefined here.
+;; -----------------------------------------------------------------------------
 
 
+;; -----------------------------------------------------------------------------
+;; rapid-fire-params - tuning block for a rapid-fire weapon (rof, range,
+;; callbacks, sounds).
+;; -----------------------------------------------------------------------------
+(deftype rapid-fire-params (structure)
+  ((rof                    uint16  :offset-assert 0)
+   (shot-radius            float   :offset-assert 4)
+   (shot-range             float   :offset-assert 8)
+   (beam-effect            uint16  :offset-assert 12)
+   (impact-callback        basic   :offset-assert 16)
+   (impact-callback-params basic   :offset-assert 20)
+   (shot-sound             uint16  :offset-assert 24)
+   (hit-sound              uint16  :offset-assert 26)
+   (wpn-type               uint8   :offset-assert 28)
+   (wpn-powerup-level      int8    :offset-assert 29)
+   )
+  )
 
 
+;; -----------------------------------------------------------------------------
+;; rapid-fire-control - per-instance runtime state for a rapid-fire weapon.
+;; -----------------------------------------------------------------------------
+(deftype rapid-fire-control (basic)
+  ((owner          uint64                    :offset-assert 8)
+   (params         rapid-fire-params         :offset-assert 16)
+   (shot-clock     uint16                    :offset-assert 20)
+   (next-shot-from int8                      :offset-assert 22)
+   (hit-spang-part basic                     :offset-assert 24)
+   (old-origin     vector            :inline :offset-assert 32)
+   (old-rot        quaternion        :inline :offset-assert 48)
+   (emitters       basic                     :offset-assert 64)
+   )
+  (:methods
+    (rapid-fire-control-method-9 () none)
+    (rapid-fire-control-method-10 () none)
+    (rapid-fire-control-method-11 () none)
+    (rapid-fire-control-method-12 () none)
+    )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; rapid-fire-callback-gun-hitspang-params - particle group ids for the
+;; impact "hit-spang" visual.
+;; -----------------------------------------------------------------------------
+(deftype rapid-fire-callback-gun-hitspang-params (structure)
+  ((bits-part-id  uint32  :offset-assert 0)
+   (dust-part-id  uint32  :offset-assert 4)
+   (group-part-id uint32  :offset-assert 8)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; v-wpn-ptable-entry - one entry in a weapon probability table
+;; (chance-weighted choice of weapon type).
+;; -----------------------------------------------------------------------------
+(deftype v-wpn-ptable-entry (structure)
+  ((chance      uint16  :offset-assert 0)
+   (weapon-type uint8   :offset-assert 2)
+   (pad1        uint8   :offset-assert 3)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; v-wpn-ptable - a weapon probability table (pointer to array of entries).
+;; -----------------------------------------------------------------------------
+(deftype v-wpn-ptable (structure)
+  ((entries-count int8    :offset-assert 0)
+   (total-chance  uint16  :offset-assert 2)
+   (entries-array uint32  :offset-assert 4)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; v-wpn-ptable-quad - four probability tables (base/last-lap x
+;; in-front/behind) plus the "behind" distance threshold.
+;; -----------------------------------------------------------------------------
+(deftype v-wpn-ptable-quad (structure)
+  ((base             v-wpn-ptable  :offset-assert 0)
+   (last-lap         v-wpn-ptable  :offset-assert 4)
+   (base-behind      v-wpn-ptable  :offset-assert 8)
+   (last-lap-behind  v-wpn-ptable  :offset-assert 12)
+   (behind-threshold float         :offset-assert 16)
+   )
+  )
