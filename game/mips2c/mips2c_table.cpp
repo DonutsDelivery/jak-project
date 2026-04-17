@@ -426,6 +426,8 @@ namespace particle_adgif { extern void link(); }
 // particle_curves.cpp port (see game/mips2c/jakx_functions/particle_curves.cpp)
 namespace live_func_curve { extern void link(); }
 namespace birth_func_curve { extern void link(); }
+// wvehicle_part.cpp port (see game/mips2c/jakx_functions/wvehicle_part.cpp)
+namespace sparticle_motion_blur_dirt { extern void link(); }
 }
 // clang-format on
 
@@ -771,7 +773,9 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      {"nav-control", {jak3::method_39_nav_state::link}},
      {"merc-blend-shape",
       {jak3::blerc_execute::link, jak3::setup_blerc_chains_for_one_fragment::link}},
-     {"wvehicle-part", {jak3::sparticle_motion_blur_dirt::link}},
+     // wvehicle-part: jakx-native sparticle-motion-blur-dirt (target access
+     // via view-get-active-target + offset-184 control handle).
+     {"wvehicle-part", {jakx::sparticle_motion_blur_dirt::link}},
      {"ripple",
       {jak3::ripple_matrix_scale::link, jak3::ripple_apply_wave_table::link,
        jak3::ripple_create_wave_table::link, jak3::ripple_execute_init::link}},
