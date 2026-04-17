@@ -33,6 +33,22 @@ Per decomp run it tells you:
 - `run.sh` — wipes a private output dir, runs the decompiler against current
   config, then invokes `measure.py`. Short-circuits if config hash hasn't
   changed since last run (override with `JAKX_WATCH_FORCE=1`).
+- `types_drift.py` — diffs `new-all-types.gc` (generate_all_types regen) vs
+  current `all-types.gc`. Surfaces activation / discovery / field-drift sets.
+- `rank_discovery.py` — scores activation candidates by (parent_ok, jak3
+  similarity, reference count, dependency depth, tier) and writes
+  `.jakx_watch/activation_queue.md` (top 30 priority list).
+- `emit_stub.py` — extracts a `(deftype NAME ...)` body from jak3 / jak2 /
+  regen for a requested type, paste-ready for all-types.gc. `--top N`
+  batch-emits the ranked queue; `--min` emits a skeleton-only stub.
+- `seed_refs.py` — auto-dumps `_REF.gc` files for real-clean jakx outputs
+  that don't yet have coverage (uses `offline-test --dump_current_output`).
+- `offline_test_pass.py` — runs the offline-test over the real-clean bucket,
+  splits into green (passes) / amber (compile or REF-mismatch fails). Has a
+  pre-flight to surface setup blockers (type errors in all-types.gc etc.).
+- `static_data_scan.py` — counts `(define *X* <static-data LN>)` occurrences
+  across decomp output. This pattern fails goalc compilation (arg mismatch)
+  and is a high-priority C++ decompiler patch target.
 
 ## Usage
 
@@ -56,8 +72,10 @@ python3 scripts/jakx_watch/measure.py \
 - `.jakx_watch/history/snap-*.json` — per-run snapshots (gitignored)
 - `.jakx_watch/history/latest.json` — most recent snapshot
 - `.jakx_watch/status.md`           — human-readable latest summary
+- `.jakx_watch/activation_queue.md` — ranked queue of activation candidates
 - `.jakx_watch/run-TS.log`          — combined stdout+stderr of a run.sh invocation
 - `log/decompiler.*.log`            — native decompiler logs (shared dir)
+- `test/decompiler/reference/jakx/` — `_REF.gc` baseline corpus (checked in)
 
 ## What NOT to edit from this tool
 
