@@ -61,6 +61,12 @@ Per decomp run it tells you:
   into two buckets: `<uninitialized>` (method arg signatures missing in
   all-types.gc) and typed LHS (deftype field missing or type_casts entry
   needed).
+- `return_mismatch_scan.py` — clusters `;; WARN: Return type mismatch
+  DECLARED vs ACTUAL` by pattern and by parent type. Each mismatch is a
+  stance disagreement between an `:methods` entry in all-types.gc and the
+  decompiled body — fixable by editing the declaration (most common) or the
+  body. Top clusters surface types whose `:methods` block can be
+  batch-corrected in one edit.
 - `type_ref_finder.py` — triage helper. `--auto` scrapes the FAILED
   status.md banner for the unknown type, then finds every reference
   (LIVE vs commented) in jakx all-types.gc, decomp output, and checks

@@ -536,6 +536,34 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
             lines.append(f"    {c:>4}  {name}")
         lines.append("  → decompiler C++ patch target: emit `(define *X* ...)` with 2 args, not 3")
 
+    # ===== optional: return-mismatch clusters =====
+    rm = snap.get("return_mismatch_clusters")
+    if rm:
+        lines.append("")
+        lines.append("## return-mismatch clusters (:methods declared vs body actual)")
+        lines.append(f"  total WARNs: {rm.get('total', 0)}")
+        tp = rm.get("top_patterns") or []
+        if tp:
+            lines.append("  top 5 mismatch patterns:")
+            for entry in tp[:5]:
+                lines.append(
+                    f"    {entry['count']:>4}  declared={entry['declared']:<10} "
+                    f"actual={entry['actual']}"
+                )
+        tpt = rm.get("top_parent_types") or []
+        if tpt:
+            lines.append("  top 10 parent types (batch-fix :methods block):")
+            for name, c in tpt[:10]:
+                lines.append(f"    {c:>4}  {name}")
+        tsp = rm.get("top_specific") or []
+        if tsp:
+            lines.append("  top 10 specific entries (type, declared→actual):")
+            for entry in tsp[:10]:
+                lines.append(
+                    f"    {entry['count']:>4}  {entry['type']}  "
+                    f"({entry['declared']} → {entry['actual']})"
+                )
+
     # ===== optional: add-failed clusters =====
     af = snap.get("add_failed_clusters")
     if af:
