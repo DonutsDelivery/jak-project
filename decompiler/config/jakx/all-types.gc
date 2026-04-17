@@ -13210,27 +13210,27 @@
   :size-assert         #x594
   :flag-assert         #x1e00000594
   (:methods
-    (level-method-9 () none) ;; 9 ;; (deactivate (_type_) _type_)
-    (level-method-10 () none) ;; 10 ;; (unload! (_type_) _type_)
-    (level-method-11 () none) ;; 11 ;; (is-object-visible? (_type_ int) symbol)
-    (level-method-12 () none) ;; 12 ;; (level-method-12 () none)
-    (level-method-13 () none) ;; 13 ;; (bsp-name (_type_) symbol)
-    (level-method-14 () none) ;; 14 ;; (compute-memory-usage! (_type_ symbol) memory-usage-block)
-    (level-method-15 () none) ;; 15 ;; (inside-bsp? (_type_) symbol)
-    (level-method-16 () none) ;; 16 ;; (update-vis! (_type_ level-vis-info uint (pointer uint8)) symbol)
-    (level-method-17 () none) ;; 17 ;; (load-continue (_type_) _type_)
-    (level-method-18 () none) ;; 18 ;; (load-begin (_type_) _type_)
-    (level-method-19 () none) ;; 19 ;; (login-begin (_type_) _type_)
-    (level-method-20 () none) ;; 20 ;; (debug-print-region-splitbox (_type_ vector object) none)
-    (level-method-21 () none) ;; 21 ;; (get-art-group-by-name (_type_ string) art-group)
-    (level-method-22 () none) ;; 22 ;; (set-proto-vis! (_type_ symbol) int)
+    (level-method-9 (_type_) none) ;; 9 ;; (deactivate (_type_) _type_)
+    (level-method-10 (_type_) none) ;; 10 ;; (unload! (_type_) _type_)
+    (level-method-11 (_type_) none) ;; 11 ;; (is-object-visible? (_type_ int) symbol)
+    (level-method-12 (_type_) none) ;; 12 ;; (level-method-12 (_type_) none)
+    (level-method-13 (_type_) none) ;; 13 ;; (bsp-name (_type_) symbol)
+    (level-method-14 (_type_) none) ;; 14 ;; (compute-memory-usage! (_type_ symbol) memory-usage-block)
+    (level-method-15 (_type_) none) ;; 15 ;; (inside-bsp? (_type_) symbol)
+    (level-method-16 (_type_) none) ;; 16 ;; (update-vis! (_type_ level-vis-info uint (pointer uint8)) symbol)
+    (level-method-17 (_type_) none) ;; 17 ;; (load-continue (_type_) _type_)
+    (level-method-18 (_type_) none) ;; 18 ;; (load-begin (_type_) _type_)
+    (level-method-19 (_type_) none) ;; 19 ;; (login-begin (_type_) _type_)
+    (level-method-20 (_type_) none) ;; 20 ;; (debug-print-region-splitbox (_type_ vector object) none)
+    (level-method-21 (_type_) none) ;; 21 ;; (get-art-group-by-name (_type_ string) art-group)
+    (level-method-22 (_type_) none) ;; 22 ;; (set-proto-vis! (_type_ symbol) int)
     (lookup-text (_type_ text-id symbol) symbol) ;; 23
-    (level-method-24 () none) ;; 24 ;; (level-method-24 () none)
-    (level-method-25 () none) ;; 25 ;; (birth (_type_) _type_)
-    (level-method-26 () none) ;; 26 ;; (level-status-update! (_type_ symbol) _type_)
-    (level-method-27 () none) ;; 27 ;; (load-common-package (_type_) none)
-    (level-method-28 () none) ;; 28 ;; (init-vis-from-bsp (_type_) none)
-    (level-method-29 () none) ;; 29 ;; (vis-clear (_type_) none)
+    (level-method-24 (_type_) none) ;; 24 ;; (level-method-24 (_type_) none)
+    (level-method-25 (_type_) none) ;; 25 ;; (birth (_type_) _type_)
+    (level-method-26 (_type_) none) ;; 26 ;; (level-status-update! (_type_ symbol) _type_)
+    (level-method-27 (_type_) none) ;; 27 ;; (load-common-package (_type_) none)
+    (level-method-28 (_type_) none) ;; 28 ;; (init-vis-from-bsp (_type_) none)
+    (level-method-29 (_type_) none) ;; 29 ;; (vis-clear (_type_) none)
     )
   )
 
@@ -13419,13 +13419,13 @@
   :size-assert         #x118
   :flag-assert         #x1000000118
   (:methods
-    (minimap-method-9 () none) ;; 9 ;; (debug-draw (_type_) none)
-    (minimap-method-10 () none) ;; 10 ;; (get-trail-for-connection (_type_ connection-minimap symbol) minimap-trail)
-    (minimap-method-11 () none) ;; 11 ;; (get-icon-draw-pos (_type_ connection-minimap minimap-trail vector float vector) symbol)
-    (minimap-method-12 () none) ;; 12 ;; (add-icon! (_type_ process uint int vector int) connection-minimap)
-    (minimap-method-13 () none) ;; 13 ;; (free-trail-by-connection (_type_ connection-minimap) none)
-    (minimap-method-14 () none) ;; 14 ;; (update-trails (_type_) none)
-    (minimap-method-15 () none) ;; 15 ;; (draw-1 (_type_ dma-buffer vector4w symbol) none)
+    (minimap-method-9 (_type_) none) ;; 9 ;; (debug-draw (_type_) none)
+    (minimap-method-10 (_type_) none) ;; 10 ;; (get-trail-for-connection (_type_ connection-minimap symbol) minimap-trail)
+    (minimap-method-11 (_type_) none) ;; 11 ;; (get-icon-draw-pos (_type_ connection-minimap minimap-trail vector float vector) symbol)
+    (minimap-method-12 (_type_) none) ;; 12 ;; (add-icon! (_type_ process uint int vector int) connection-minimap)
+    (minimap-method-13 (_type_) none) ;; 13 ;; (free-trail-by-connection (_type_ connection-minimap) none)
+    (minimap-method-14 (_type_) none) ;; 14 ;; (update-trails (_type_) none)
+    (minimap-method-15 (_type_) none) ;; 15 ;; (draw-1 (_type_ dma-buffer vector4w symbol) none)
     )
   )|#
   
@@ -15247,13 +15247,13 @@
   :size-assert         #x2b0
   :flag-assert         #x10000002b0
   (:methods
-    (viewport-method-9 () none) ;; 9
-    (viewport-method-10 () none) ;; 10
-    (viewport-method-11 () none) ;; 11
-    (viewport-method-12 () none) ;; 12
-    (viewport-method-13 () none) ;; 13
-    (viewport-method-14 () none) ;; 14
-    (viewport-method-15 () none) ;; 15
+    (viewport-method-9 (_type_) none) ;; 9
+    (viewport-method-10 (_type_) none) ;; 10
+    (viewport-method-11 (_type_) none) ;; 11
+    (viewport-method-12 (_type_) none) ;; 12
+    (viewport-method-13 (_type_) none) ;; 13
+    (viewport-method-14 (_type_) none) ;; 14
+    (viewport-method-15 (_type_) none) ;; 15
     )
   )
 
@@ -17322,79 +17322,79 @@
   :size-assert         #x43c
   :flag-assert         #x540000043c
   (:methods
-    (ocean-method-11 () none) ;; 11 ;; (get-height (_type_ vector symbol) float)
-    (ocean-method-12 () none) ;; 12 ;; (draw! (_type_) none)
-    (ocean-method-13 () none) ;; 13 ;; (update-map (_type_) none)
-    (ocean-method-14 () none) ;; 14 ;; (interp-wave (_type_ ocean-wave-info uint float) none)
-    (ocean-method-15 () none) ;; 15 ;; (ocean-method-15 (_type_ matrix matrix) none)
-    (ocean-method-16 () none) ;; 16 ;; (generate-verts (_type_ ocean-vert-array ocean-height-array) none)
-    (ocean-method-17 () none) ;; 17 ;; (add-colors! (_type_ vector ocean-vertex) none)
-    (ocean-method-18 () none) ;; 18 ;; (ocean-method-18 (_type_ (pointer ocean-colors) (pointer ocean-colors)) none)
-    (ocean-method-19 () none) ;; 19 ;; (init-buffer! (_type_ dma-buffer) none)
-    (ocean-method-20 () none) ;; 20 ;; (end-buffer! (_type_ dma-buffer) none)
-    (ocean-method-21 () none) ;; 21 ;; (set-corners! (_type_ float float) float)
-    (ocean-method-22 () none) ;; 22 ;; (ocean-near-add-call (_type_ dma-buffer int) none)
-    (ocean-method-23 () none) ;; 23 ;; (ocean-near-add-call-flush (_type_ dma-buffer int) none)
-    (ocean-method-24 () none) ;; 24 ;; (ocean-near-setup-constants (_type_ ocean-near-constants) none)
-    (ocean-method-25 () none) ;; 25 ;; (ocean-near-add-constants (_type_ dma-buffer) none)
-    (ocean-method-26 () none) ;; 26 ;; (ocean-near-add-heights (_type_ dma-buffer) none)
-    (ocean-method-27 () none) ;; 27 ;; (ocean-near-add-matrices (_type_ dma-buffer vector) none)
-    (ocean-method-28 () none) ;; 28 ;; (ocean-near-add-upload (_type_ dma-buffer uint uint) none)
-    (ocean-method-29 () none) ;; 29 ;; (draw-ocean-near (_type_ dma-buffer) none)
-    (ocean-method-30 () none) ;; 30 ;; (ocean-trans-camera-masks-bit? (_type_ uint uint) symbol)
-    (ocean-method-31 () none) ;; 31 ;; (ocean-trans-mask-ptrs-bit? (_type_ int int) symbol)
-    (ocean-method-32 () none) ;; 32 ;; (ocean-trans-mask-ptrs-set! (_type_ uint uint) symbol)
-    (ocean-method-33 () none) ;; 33 ;; (ocean-trans-add-upload-table (_type_ dma-buffer uint uint int int symbol) none)
-    (ocean-method-34 () none) ;; 34 ;; (ocean-trans-add-upload-strip (_type_ dma-buffer uint uint int int int) none)
-    (ocean-method-35 () none) ;; 35 ;; (ocean-transition-check (_type_ ocean-trans-mask int int vector) none)
-    (ocean-method-36 () none) ;; 36 ;; (ocean-make-trans-camera-masks (_type_ uint uint uint uint) none)
-    (ocean-method-37 () none) ;; 37 ;; (ocean-trans-add-upload (_type_ dma-buffer uint uint) none)
-    (ocean-method-38 () none) ;; 38 ;; (draw-ocean-transition-seams (_type_ dma-buffer) none)
-    (ocean-method-39 () none) ;; 39 ;; (ocean-trans-add-constants (_type_ dma-buffer) none)
-    (ocean-method-40 () none) ;; 40 ;; (draw-ocean-transition (_type_ dma-buffer) none)
-    (ocean-method-41 () none) ;; 41 ;; (ocean-mid-add-call (_type_ dma-buffer int) none)
-    (ocean-method-42 () none) ;; 42 ;; (ocean-mid-add-call-flush (_type_ dma-buffer uint) none)
-    (ocean-method-43 () none) ;; 43 ;; (ocean-matrix*! (_type_ matrix matrix matrix) matrix)
-    (ocean-method-44 () none) ;; 44 ;; (ocean-vector-matrix*! (_type_ vector vector matrix) vector)
-    (ocean-method-45 () none) ;; 45 ;; (ocean-mid-add-matrices (_type_ dma-buffer vector) none)
-    (ocean-method-46 () none) ;; 46 ;; (ocean-mid-check (_type_ pointer int int vector) symbol)
-    (ocean-method-47 () none) ;; 47 ;; (ocean-mid-setup-constants (_type_ ocean-mid-constants) none)
-    (ocean-method-48 () none) ;; 48 ;; (ocean-mid-add-constants (_type_ dma-buffer) none)
-    (ocean-method-49 () none) ;; 49 ;; (ocean-mid-camera-masks-bit? (_type_ uint uint) symbol)
-    (ocean-method-50 () none) ;; 50 ;; (ocean-mid-mask-ptrs-bit? (_type_ uint uint) symbol)
-    (ocean-method-51 () none) ;; 51 ;; (ocean-mid-camera-masks-set! (_type_ uint uint) symbol)
-    (ocean-method-52 () none) ;; 52 ;; (ocean-mid-add-upload (_type_ dma-buffer int int int int float) none)
-    (ocean-method-53 () none) ;; 53 ;; (ocean-mid-add-upload-table (_type_ dma-buffer uint uint (pointer float) int symbol) none)
-    (ocean-method-54 () none) ;; 54 ;; (ocean-mid-add-upload-top (_type_ dma-buffer uint uint) none)
-    (ocean-method-55 () none) ;; 55 ;; (ocean-mid-add-upload-middle (_type_ dma-buffer uint uint) none)
-    (ocean-method-56 () none) ;; 56 ;; (ocean-mid-add-upload-bottom (_type_ dma-buffer uint uint) none)
-    (ocean-method-57 () none) ;; 57 ;; (ocean-seams-add-constants (_type_ dma-buffer) none)
-    (ocean-method-58 () none) ;; 58 ;; (draw-ocean-mid-seams (_type_ dma-buffer) none)
-    (ocean-method-59 () none) ;; 59 ;; (draw-ocean-mid (_type_ dma-buffer) none)
-    (ocean-method-60 () none) ;; 60 ;; (ocean-method-60 (_type_ dma-buffer) none)
-    (ocean-method-61 () none) ;; 61 ;; (ocean-method-61 (_type_ dma-buffer) none)
-    (ocean-method-62 () none) ;; 62 ;; (ocean-method-62 (_type_ dma-buffer) none)
-    (ocean-method-63 () none) ;; 63 ;; (ocean-method-63 (_type_ dma-buffer) none)
-    (ocean-method-64 () none) ;; 64 ;; (ocean-method-64 (_type_ dma-buffer) none)
-    (ocean-method-65 () none) ;; 65 ;; (ocean-method-65 (_type_ dma-buffer) none)
-    (ocean-method-66 () none) ;; 66 ;; (ocean-method-66 (_type_ dma-buffer) none)
-    (ocean-method-67 () none) ;; 67 ;; (ocean-method-67 (_type_ dma-buffer) none)
-    (ocean-method-68 () none) ;; 68 ;; (render-ocean-far (_type_ dma-buffer int) none)
-    (ocean-method-69 () none) ;; 69 ;; (draw-ocean-far (_type_ dma-buffer) none)
-    (ocean-method-70 () none) ;; 70 ;; (ocean-texture-setup-constants (_type_ ocean-texture-constants) none)
-    (ocean-method-71 () none) ;; 71 ;; (ocean-texture-add-constants (_type_ dma-buffer) none)
-    (ocean-method-72 () none) ;; 72 ;; (ocean-texture-add-envmap (_type_ dma-buffer) none)
-    (ocean-method-73 () none) ;; 73 ;; (ocean-texture-add-verts (_type_ dma-buffer int) none)
-    (ocean-method-74 () none) ;; 74 ;; (ocean-texture-add-verts-last (_type_ dma-buffer int int) none)
-    (ocean-method-75 () none) ;; 75 ;; (ocean-texture-add-call-start (_type_ dma-buffer) none)
-    (ocean-method-76 () none) ;; 76 ;; (ocean-texture-add-call-rest (_type_ dma-buffer) none)
-    (ocean-method-77 () none) ;; 77 ;; (ocean-texture-add-call-done (_type_ dma-buffer) none)
-    (ocean-method-78 () none) ;; 78 ;; (draw-ocean-texture (_type_ dma-buffer int) none)
-    (ocean-method-79 () none) ;; 79 ;; (ocean-method-79 (_type_ (pointer rgba)) none)
-    (ocean-method-80 () none) ;; 80 ;; (ocean-method-80 (_type_ dma-buffer) none)
-    (ocean-method-81 () none) ;; 81 ;; (draw-envmap-debug (_type_ dma-buffer) none)
-    (ocean-method-82 () none) ;; 82
-    (ocean-method-83 () none) ;; 83
+    (ocean-method-11 (_type_) none) ;; 11 ;; (get-height (_type_ vector symbol) float)
+    (ocean-method-12 (_type_) none) ;; 12 ;; (draw! (_type_) none)
+    (ocean-method-13 (_type_) none) ;; 13 ;; (update-map (_type_) none)
+    (ocean-method-14 (_type_) none) ;; 14 ;; (interp-wave (_type_ ocean-wave-info uint float) none)
+    (ocean-method-15 (_type_) none) ;; 15 ;; (ocean-method-15 (_type_ matrix matrix) none)
+    (ocean-method-16 (_type_) none) ;; 16 ;; (generate-verts (_type_ ocean-vert-array ocean-height-array) none)
+    (ocean-method-17 (_type_) none) ;; 17 ;; (add-colors! (_type_ vector ocean-vertex) none)
+    (ocean-method-18 (_type_) none) ;; 18 ;; (ocean-method-18 (_type_ (pointer ocean-colors) (pointer ocean-colors)) none)
+    (ocean-method-19 (_type_) none) ;; 19 ;; (init-buffer! (_type_ dma-buffer) none)
+    (ocean-method-20 (_type_) none) ;; 20 ;; (end-buffer! (_type_ dma-buffer) none)
+    (ocean-method-21 (_type_) none) ;; 21 ;; (set-corners! (_type_ float float) float)
+    (ocean-method-22 (_type_) none) ;; 22 ;; (ocean-near-add-call (_type_ dma-buffer int) none)
+    (ocean-method-23 (_type_) none) ;; 23 ;; (ocean-near-add-call-flush (_type_ dma-buffer int) none)
+    (ocean-method-24 (_type_) none) ;; 24 ;; (ocean-near-setup-constants (_type_ ocean-near-constants) none)
+    (ocean-method-25 (_type_) none) ;; 25 ;; (ocean-near-add-constants (_type_ dma-buffer) none)
+    (ocean-method-26 (_type_) none) ;; 26 ;; (ocean-near-add-heights (_type_ dma-buffer) none)
+    (ocean-method-27 (_type_) none) ;; 27 ;; (ocean-near-add-matrices (_type_ dma-buffer vector) none)
+    (ocean-method-28 (_type_) none) ;; 28 ;; (ocean-near-add-upload (_type_ dma-buffer uint uint) none)
+    (ocean-method-29 (_type_) none) ;; 29 ;; (draw-ocean-near (_type_ dma-buffer) none)
+    (ocean-method-30 (_type_) none) ;; 30 ;; (ocean-trans-camera-masks-bit? (_type_ uint uint) symbol)
+    (ocean-method-31 (_type_) none) ;; 31 ;; (ocean-trans-mask-ptrs-bit? (_type_ int int) symbol)
+    (ocean-method-32 (_type_) none) ;; 32 ;; (ocean-trans-mask-ptrs-set! (_type_ uint uint) symbol)
+    (ocean-method-33 (_type_) none) ;; 33 ;; (ocean-trans-add-upload-table (_type_ dma-buffer uint uint int int symbol) none)
+    (ocean-method-34 (_type_) none) ;; 34 ;; (ocean-trans-add-upload-strip (_type_ dma-buffer uint uint int int int) none)
+    (ocean-method-35 (_type_) none) ;; 35 ;; (ocean-transition-check (_type_ ocean-trans-mask int int vector) none)
+    (ocean-method-36 (_type_) none) ;; 36 ;; (ocean-make-trans-camera-masks (_type_ uint uint uint uint) none)
+    (ocean-method-37 (_type_) none) ;; 37 ;; (ocean-trans-add-upload (_type_ dma-buffer uint uint) none)
+    (ocean-method-38 (_type_) none) ;; 38 ;; (draw-ocean-transition-seams (_type_ dma-buffer) none)
+    (ocean-method-39 (_type_) none) ;; 39 ;; (ocean-trans-add-constants (_type_ dma-buffer) none)
+    (ocean-method-40 (_type_) none) ;; 40 ;; (draw-ocean-transition (_type_ dma-buffer) none)
+    (ocean-method-41 (_type_) none) ;; 41 ;; (ocean-mid-add-call (_type_ dma-buffer int) none)
+    (ocean-method-42 (_type_) none) ;; 42 ;; (ocean-mid-add-call-flush (_type_ dma-buffer uint) none)
+    (ocean-method-43 (_type_) none) ;; 43 ;; (ocean-matrix*! (_type_ matrix matrix matrix) matrix)
+    (ocean-method-44 (_type_) none) ;; 44 ;; (ocean-vector-matrix*! (_type_ vector vector matrix) vector)
+    (ocean-method-45 (_type_) none) ;; 45 ;; (ocean-mid-add-matrices (_type_ dma-buffer vector) none)
+    (ocean-method-46 (_type_) none) ;; 46 ;; (ocean-mid-check (_type_ pointer int int vector) symbol)
+    (ocean-method-47 (_type_) none) ;; 47 ;; (ocean-mid-setup-constants (_type_ ocean-mid-constants) none)
+    (ocean-method-48 (_type_) none) ;; 48 ;; (ocean-mid-add-constants (_type_ dma-buffer) none)
+    (ocean-method-49 (_type_) none) ;; 49 ;; (ocean-mid-camera-masks-bit? (_type_ uint uint) symbol)
+    (ocean-method-50 (_type_) none) ;; 50 ;; (ocean-mid-mask-ptrs-bit? (_type_ uint uint) symbol)
+    (ocean-method-51 (_type_) none) ;; 51 ;; (ocean-mid-camera-masks-set! (_type_ uint uint) symbol)
+    (ocean-method-52 (_type_) none) ;; 52 ;; (ocean-mid-add-upload (_type_ dma-buffer int int int int float) none)
+    (ocean-method-53 (_type_) none) ;; 53 ;; (ocean-mid-add-upload-table (_type_ dma-buffer uint uint (pointer float) int symbol) none)
+    (ocean-method-54 (_type_) none) ;; 54 ;; (ocean-mid-add-upload-top (_type_ dma-buffer uint uint) none)
+    (ocean-method-55 (_type_) none) ;; 55 ;; (ocean-mid-add-upload-middle (_type_ dma-buffer uint uint) none)
+    (ocean-method-56 (_type_) none) ;; 56 ;; (ocean-mid-add-upload-bottom (_type_ dma-buffer uint uint) none)
+    (ocean-method-57 (_type_) none) ;; 57 ;; (ocean-seams-add-constants (_type_ dma-buffer) none)
+    (ocean-method-58 (_type_) none) ;; 58 ;; (draw-ocean-mid-seams (_type_ dma-buffer) none)
+    (ocean-method-59 (_type_) none) ;; 59 ;; (draw-ocean-mid (_type_ dma-buffer) none)
+    (ocean-method-60 (_type_) none) ;; 60 ;; (ocean-method-60 (_type_ dma-buffer) none)
+    (ocean-method-61 (_type_) none) ;; 61 ;; (ocean-method-61 (_type_ dma-buffer) none)
+    (ocean-method-62 (_type_) none) ;; 62 ;; (ocean-method-62 (_type_ dma-buffer) none)
+    (ocean-method-63 (_type_) none) ;; 63 ;; (ocean-method-63 (_type_ dma-buffer) none)
+    (ocean-method-64 (_type_) none) ;; 64 ;; (ocean-method-64 (_type_ dma-buffer) none)
+    (ocean-method-65 (_type_) none) ;; 65 ;; (ocean-method-65 (_type_ dma-buffer) none)
+    (ocean-method-66 (_type_) none) ;; 66 ;; (ocean-method-66 (_type_ dma-buffer) none)
+    (ocean-method-67 (_type_) none) ;; 67 ;; (ocean-method-67 (_type_ dma-buffer) none)
+    (ocean-method-68 (_type_) none) ;; 68 ;; (render-ocean-far (_type_ dma-buffer int) none)
+    (ocean-method-69 (_type_) none) ;; 69 ;; (draw-ocean-far (_type_ dma-buffer) none)
+    (ocean-method-70 (_type_) none) ;; 70 ;; (ocean-texture-setup-constants (_type_ ocean-texture-constants) none)
+    (ocean-method-71 (_type_) none) ;; 71 ;; (ocean-texture-add-constants (_type_ dma-buffer) none)
+    (ocean-method-72 (_type_) none) ;; 72 ;; (ocean-texture-add-envmap (_type_ dma-buffer) none)
+    (ocean-method-73 (_type_) none) ;; 73 ;; (ocean-texture-add-verts (_type_ dma-buffer int) none)
+    (ocean-method-74 (_type_) none) ;; 74 ;; (ocean-texture-add-verts-last (_type_ dma-buffer int int) none)
+    (ocean-method-75 (_type_) none) ;; 75 ;; (ocean-texture-add-call-start (_type_ dma-buffer) none)
+    (ocean-method-76 (_type_) none) ;; 76 ;; (ocean-texture-add-call-rest (_type_ dma-buffer) none)
+    (ocean-method-77 (_type_) none) ;; 77 ;; (ocean-texture-add-call-done (_type_ dma-buffer) none)
+    (ocean-method-78 (_type_) none) ;; 78 ;; (draw-ocean-texture (_type_ dma-buffer int) none)
+    (ocean-method-79 (_type_) none) ;; 79 ;; (ocean-method-79 (_type_ (pointer rgba)) none)
+    (ocean-method-80 (_type_) none) ;; 80 ;; (ocean-method-80 (_type_ dma-buffer) none)
+    (ocean-method-81 (_type_) none) ;; 81 ;; (draw-envmap-debug (_type_ dma-buffer) none)
+    (ocean-method-82 (_type_) none) ;; 82
+    (ocean-method-83 (_type_) none) ;; 83
     )
   )
   
@@ -20645,16 +20645,16 @@
   :size-assert         #xe8
   :flag-assert         #x13006000e8
   (:methods
-    (talker-method-9 () none) ;; 9
-    (talker-method-10 () none) ;; 10
-    (talker-method-11 () none) ;; 11
-    (talker-method-12 () none) ;; 12
-    (talker-method-13 () none) ;; 13
-    (talker-method-14 () none) ;; 14 ;; (idle () _type_ :state)
-    (talker-method-15 () none) ;; 15 ;; (active () _type_ :state)
-    (talker-method-16 () none) ;; 16 ;; (exit () _type_ :state)
-    (talker-method-17 () none) ;; 17 ;; (talker-method-17 (_type_) none)
-    (talker-method-18 () none) ;; 18
+    (talker-method-9 (_type_) none) ;; 9
+    (talker-method-10 (_type_) none) ;; 10
+    (talker-method-11 (_type_) none) ;; 11
+    (talker-method-12 (_type_) none) ;; 12
+    (talker-method-13 (_type_) none) ;; 13
+    (talker-method-14 (_type_) none) ;; 14 ;; (idle () _type_ :state)
+    (talker-method-15 (_type_) none) ;; 15 ;; (active () _type_ :state)
+    (talker-method-16 (_type_) none) ;; 16 ;; (exit () _type_ :state)
+    (talker-method-17 (_type_) none) ;; 17 ;; (talker-method-17 (_type_) none)
+    (talker-method-18 (_type_) none) ;; 18
     )
   )|#
   
@@ -29095,8 +29095,8 @@
   :flag-assert         #x120000008c
   ;; field on-running uses ~A with a signed load. field on-complete uses ~A with a signed load.
   (:methods
-    (scene-method-16 () none) ;; 16 ;; (init-spool-by-scene! (_type_ spool-anim) spool-anim)
-    (scene-method-17 () none) ;; 17 ;; (load-scene (_type_) scene)
+    (scene-method-16 (_type_) none) ;; 16 ;; (init-spool-by-scene! (_type_ spool-anim) spool-anim)
+    (scene-method-17 (_type_) none) ;; 17 ;; (load-scene (_type_) scene)
     )
   )
   
@@ -30238,12 +30238,12 @@
   :size-assert         #xe8
   :flag-assert         #x14006000e8
   (:methods
-    (othercam-method-14 () none) ;; 14
-    (othercam-method-15 () none) ;; 15
-    (othercam-method-16 () none) ;; 16
-    (othercam-method-17 () none) ;; 17
-    (othercam-method-18 () none) ;; 18
-    (othercam-method-19 () none) ;; 19
+    (othercam-method-14 (_type_) none) ;; 14
+    (othercam-method-15 (_type_) none) ;; 15
+    (othercam-method-16 (_type_) none) ;; 16
+    (othercam-method-17 (_type_) none) ;; 17
+    (othercam-method-18 (_type_) none) ;; 18
+    (othercam-method-19 (_type_) none) ;; 19
     )
   (:states
     othercam-running ;; associated process guessed by decompiler, old: (state othercam)
@@ -30294,9 +30294,9 @@
   :size-assert         #x1d4
   :flag-assert         #x35015001d4
   (:methods
-    (explosion-method-50 () none) ;; 50
-    (explosion-method-51 () none) ;; 51
-    (explosion-method-52 () none) ;; 52
+    (explosion-method-50 (_type_) none) ;; 50
+    (explosion-method-51 (_type_) none) ;; 51
+    (explosion-method-52 (_type_) none) ;; 52
     )
   )|#
   
@@ -31154,23 +31154,23 @@
   :size-assert         #x2ecc
   :flag-assert         #x1a00002ecc
   (:methods
-    (ragdoll-method-9 () none) ;; 9 ;; (ragdoll-method-9 (_type_ matrix process-drawable) none)
-    (ragdoll-method-10 () none) ;; 10 ;; (ragdoll-method-10 (_type_ process-drawable symbol vector symbol) none)
-    (ragdoll-method-11 () none) ;; 11 ;; (turn-off-for-duration! (_type_ time-frame) none)
-    (ragdoll-method-12 () none) ;; 12 ;; (get-parent-joint (_type_ (inline-array ragdoll-joint)) ragdoll-joint)
-    (ragdoll-method-13 () none) ;; 13 ;; (ragdoll-method-13 (_type_ ragdoll-edit-info ragdoll-joint matrix matrix) none)
-    (ragdoll-method-14 () none) ;; 14 ;; (ragdoll-method-14 (_type_ process-drawable ragdoll-joint object matrix) none)
-    (ragdoll-method-15 () none) ;; 15 ;; (ragdoll-method-15 (_type_ process-drawable ragdoll-edit-info) none)
-    (ragdoll-method-16 () none) ;; 16 ;; (ragdoll-setup! (_type_ process-drawable ragdoll-setup) none)
-    (ragdoll-method-17 () none) ;; 17 ;; (ragdoll-method-17 (_type_ process-drawable) none)
-    (ragdoll-method-18 () none) ;; 18 ;; (ragdoll-method-18 (_type_) none)
-    (ragdoll-method-19 () none) ;; 19 ;; (ragdoll-method-19 (_type_ vector int object matrix) none)
-    (ragdoll-method-20 () none) ;; 20 ;; (reset-vec! (_type_ vector) none)
-    (ragdoll-method-21 () none) ;; 21 ;; (ragdoll-method-21 (_type_ vector vector float) vector)
-    (ragdoll-method-22 () none) ;; 22 ;; (get-max-angle-for-joint-idx (_type_ int) degrees)
-    (ragdoll-method-23 () none) ;; 23 ;; (ragdoll-method-23 (_type_ vector vector float symbol) none)
-    (ragdoll-method-24 () none) ;; 24 ;; (ragdoll-method-24 (_type_ vector int) none)
-    (ragdoll-method-25 () none) ;; 25 ;; (enable-ragdoll! (_type_ process-drawable) none)
+    (ragdoll-method-9 (_type_) none) ;; 9 ;; (ragdoll-method-9 (_type_ matrix process-drawable) none)
+    (ragdoll-method-10 (_type_) none) ;; 10 ;; (ragdoll-method-10 (_type_ process-drawable symbol vector symbol) none)
+    (ragdoll-method-11 (_type_) none) ;; 11 ;; (turn-off-for-duration! (_type_ time-frame) none)
+    (ragdoll-method-12 (_type_) none) ;; 12 ;; (get-parent-joint (_type_ (inline-array ragdoll-joint)) ragdoll-joint)
+    (ragdoll-method-13 (_type_) none) ;; 13 ;; (ragdoll-method-13 (_type_ ragdoll-edit-info ragdoll-joint matrix matrix) none)
+    (ragdoll-method-14 (_type_) none) ;; 14 ;; (ragdoll-method-14 (_type_ process-drawable ragdoll-joint object matrix) none)
+    (ragdoll-method-15 (_type_) none) ;; 15 ;; (ragdoll-method-15 (_type_ process-drawable ragdoll-edit-info) none)
+    (ragdoll-method-16 (_type_) none) ;; 16 ;; (ragdoll-setup! (_type_ process-drawable ragdoll-setup) none)
+    (ragdoll-method-17 (_type_) none) ;; 17 ;; (ragdoll-method-17 (_type_ process-drawable) none)
+    (ragdoll-method-18 (_type_) none) ;; 18 ;; (ragdoll-method-18 (_type_) none)
+    (ragdoll-method-19 (_type_) none) ;; 19 ;; (ragdoll-method-19 (_type_ vector int object matrix) none)
+    (ragdoll-method-20 (_type_) none) ;; 20 ;; (reset-vec! (_type_ vector) none)
+    (ragdoll-method-21 (_type_) none) ;; 21 ;; (ragdoll-method-21 (_type_ vector vector float) vector)
+    (ragdoll-method-22 (_type_) none) ;; 22 ;; (get-max-angle-for-joint-idx (_type_ int) degrees)
+    (ragdoll-method-23 (_type_) none) ;; 23 ;; (ragdoll-method-23 (_type_ vector vector float symbol) none)
+    (ragdoll-method-24 (_type_) none) ;; 24 ;; (ragdoll-method-24 (_type_ vector int) none)
+    (ragdoll-method-25 (_type_) none) ;; 25 ;; (enable-ragdoll! (_type_ process-drawable) none)
     )
   )|#
   
@@ -31250,28 +31250,28 @@
   :size-assert         #x231
   :flag-assert         #x4801b00231
   (:methods
-    (projectile-method-50 () none) ;; 50
-    (projectile-method-51 () none) ;; 51
-    (projectile-method-52 () none) ;; 52
-    (projectile-method-53 () none) ;; 53
-    (projectile-method-54 () none) ;; 54
-    (projectile-method-55 () none) ;; 55
-    (projectile-method-56 () none) ;; 56
-    (projectile-method-57 () none) ;; 57
-    (projectile-method-58 () none) ;; 58
-    (projectile-method-59 () none) ;; 59
-    (projectile-method-60 () none) ;; 60
-    (projectile-method-61 () none) ;; 61
-    (projectile-method-62 () none) ;; 62
-    (projectile-method-63 () none) ;; 63
-    (projectile-method-64 () none) ;; 64
-    (projectile-method-65 () none) ;; 65
-    (projectile-method-66 () none) ;; 66
-    (projectile-method-67 () none) ;; 67
-    (projectile-method-68 () none) ;; 68
-    (projectile-method-69 () none) ;; 69
-    (projectile-method-70 () none) ;; 70
-    (projectile-method-71 () none) ;; 71
+    (projectile-method-50 (_type_) none) ;; 50
+    (projectile-method-51 (_type_) none) ;; 51
+    (projectile-method-52 (_type_) none) ;; 52
+    (projectile-method-53 (_type_) none) ;; 53
+    (projectile-method-54 (_type_) none) ;; 54
+    (projectile-method-55 (_type_) none) ;; 55
+    (projectile-method-56 (_type_) none) ;; 56
+    (projectile-method-57 (_type_) none) ;; 57
+    (projectile-method-58 (_type_) none) ;; 58
+    (projectile-method-59 (_type_) none) ;; 59
+    (projectile-method-60 (_type_) none) ;; 60
+    (projectile-method-61 (_type_) none) ;; 61
+    (projectile-method-62 (_type_) none) ;; 62
+    (projectile-method-63 (_type_) none) ;; 63
+    (projectile-method-64 (_type_) none) ;; 64
+    (projectile-method-65 (_type_) none) ;; 65
+    (projectile-method-66 (_type_) none) ;; 66
+    (projectile-method-67 (_type_) none) ;; 67
+    (projectile-method-68 (_type_) none) ;; 68
+    (projectile-method-69 (_type_) none) ;; 69
+    (projectile-method-70 (_type_) none) ;; 70
+    (projectile-method-71 (_type_) none) ;; 71
     )
   )|#
   
@@ -31368,7 +31368,7 @@
   :size-assert         #x350
   :flag-assert         #x3c02c00350
   (:methods
-    (target-method-59 () none) ;; 59
+    (target-method-59 (_type_) none) ;; 59
     )
   (:states
     target-float
@@ -34136,22 +34136,22 @@
   :size-assert         #x18dc
   :flag-assert         #x1e185018dc
   (:methods
-    (hud-method-14 () none) ;; 14
-    (hud-method-15 () none) ;; 15
-    (hud-method-16 () none) ;; 16
-    (hud-method-17 () none) ;; 17
-    (hud-method-18 () none) ;; 18
-    (hud-method-19 () none) ;; 19
-    (hud-method-20 () none) ;; 20
-    (hud-method-21 () none) ;; 21
-    (hud-method-22 () none) ;; 22
-    (hud-method-23 () none) ;; 23
-    (hud-method-24 () none) ;; 24
-    (hud-method-25 () none) ;; 25
-    (hud-method-26 () none) ;; 26
-    (hud-method-27 () none) ;; 27
-    (hud-method-28 () none) ;; 28
-    (hud-method-29 () none) ;; 29
+    (hud-method-14 (_type_) none) ;; 14
+    (hud-method-15 (_type_) none) ;; 15
+    (hud-method-16 (_type_) none) ;; 16
+    (hud-method-17 (_type_) none) ;; 17
+    (hud-method-18 (_type_) none) ;; 18
+    (hud-method-19 (_type_) none) ;; 19
+    (hud-method-20 (_type_) none) ;; 20
+    (hud-method-21 (_type_) none) ;; 21
+    (hud-method-22 (_type_) none) ;; 22
+    (hud-method-23 (_type_) none) ;; 23
+    (hud-method-24 (_type_) none) ;; 24
+    (hud-method-25 (_type_) none) ;; 25
+    (hud-method-26 (_type_) none) ;; 26
+    (hud-method-27 (_type_) none) ;; 27
+    (hud-method-28 (_type_) none) ;; 28
+    (hud-method-29 (_type_) none) ;; 29
     )
   )
 
@@ -36069,8 +36069,8 @@
   :flag-assert         #xb00000010
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type int) _type_)
-    (history-method-9 () none) ;; 9 ;; (clear-record-tags! (_type_ history-channel uint uint) history-elt)
-    (history-method-10 () none) ;; 10 ;; (clear-history-entries! (_type_) none)
+    (history-method-9 (_type_) none) ;; 9 ;; (clear-record-tags! (_type_ history-channel uint uint) history-elt)
+    (history-method-10 (_type_) none) ;; 10 ;; (clear-history-entries! (_type_) none)
     )
   )|#
   
@@ -42332,30 +42332,30 @@
   :size-assert         #x220
   :flag-assert         #x2101900220
   (:methods
-    (headset-method-9 () none) ;; 9
-    (headset-method-10 () none) ;; 10
-    (headset-method-11 () none) ;; 11
-    (headset-method-12 () none) ;; 12
-    (headset-method-13 () none) ;; 13
-    (headset-method-14 () none) ;; 14
-    (headset-method-15 () none) ;; 15
-    (headset-method-16 () none) ;; 16
-    (headset-method-17 () none) ;; 17
-    (headset-method-18 () none) ;; 18
-    (headset-method-19 () none) ;; 19
-    (headset-method-20 () none) ;; 20
-    (headset-method-21 () none) ;; 21
-    (headset-method-22 () none) ;; 22
-    (headset-method-23 () none) ;; 23
-    (headset-method-24 () none) ;; 24
-    (headset-method-25 () none) ;; 25
-    (headset-method-26 () none) ;; 26
-    (headset-method-27 () none) ;; 27
-    (headset-method-28 () none) ;; 28
-    (headset-method-29 () none) ;; 29
-    (headset-method-30 () none) ;; 30
-    (headset-method-31 () none) ;; 31
-    (headset-method-32 () none) ;; 32
+    (headset-method-9 (_type_) none) ;; 9
+    (headset-method-10 (_type_) none) ;; 10
+    (headset-method-11 (_type_) none) ;; 11
+    (headset-method-12 (_type_) none) ;; 12
+    (headset-method-13 (_type_) none) ;; 13
+    (headset-method-14 (_type_) none) ;; 14
+    (headset-method-15 (_type_) none) ;; 15
+    (headset-method-16 (_type_) none) ;; 16
+    (headset-method-17 (_type_) none) ;; 17
+    (headset-method-18 (_type_) none) ;; 18
+    (headset-method-19 (_type_) none) ;; 19
+    (headset-method-20 (_type_) none) ;; 20
+    (headset-method-21 (_type_) none) ;; 21
+    (headset-method-22 (_type_) none) ;; 22
+    (headset-method-23 (_type_) none) ;; 23
+    (headset-method-24 (_type_) none) ;; 24
+    (headset-method-25 (_type_) none) ;; 25
+    (headset-method-26 (_type_) none) ;; 26
+    (headset-method-27 (_type_) none) ;; 27
+    (headset-method-28 (_type_) none) ;; 28
+    (headset-method-29 (_type_) none) ;; 29
+    (headset-method-30 (_type_) none) ;; 30
+    (headset-method-31 (_type_) none) ;; 31
+    (headset-method-32 (_type_) none) ;; 32
     )
   )
 |#
@@ -44036,121 +44036,121 @@
   :flag-assert         #xcc07d00859
   ;; field vehicle-flag is likely a value type.
   (:methods
-    (vehicle-method-89 () none) ;; 89 ;; (init-reverse (_type_ vehicle-controls) none)
-    (vehicle-method-90 () none) ;; 90 ;; (control-hook-ai (_type_ vehicle-controls) none)
-    (vehicle-method-91 () none) ;; 91 ;; (control-hook-player (_type_) none)
-    (vehicle-method-92 () none) ;; 92 ;; (vehicle-method-92 (_type_ vehicle-controls) none)
-    (vehicle-method-93 () none) ;; 93 ;; (vehicle-method-93 (_type_) none)
-    (vehicle-method-94 () none) ;; 94 ;; (vehicle-method-94 (_type_) none)
-    (vehicle-method-95 () none) ;; 95 ;; (vehicle-method-95 (_type_ vector float) none)
-    (vehicle-method-96 () none) ;; 96 ;; (vehicle-method-96 (_type_ float) none)
-    (vehicle-method-97 () none) ;; 97 ;; (vehicle-method-97 (_type_ float vehicle-physics-work) none)
-    (vehicle-method-98 () none) ;; 98 ;; (vehicle-method-98 (_type_) none)
-    (vehicle-method-99 () none) ;; 99 ;; (vehicle-method-99 (_type_) none)
-    (vehicle-method-100 () none) ;; 100 ;; (vehicle-method-100 (_type_) none)
-    (vehicle-method-101 () none) ;; 101 ;; (vehicle-method-101 (_type_) none)
-    (vehicle-method-102 () none) ;; 102 ;; (vehicle-method-102 (_type_) symbol)
-    (vehicle-method-103 () none) ;; 103 ;; (vehicle-method-103 (_type_) none)
-    (vehicle-method-104 () none) ;; 104 ;; (vehicle-method-104 (_type_) none)
-    (vehicle-method-105 () none) ;; 105 ;; (vehicle-method-105 (_type_) none)
-    (vehicle-method-106 () none) ;; 106 ;; (vehicle-method-106 (_type_) none)
-    (vehicle-method-107 () none) ;; 107 ;; (vehicle-method-107 (_type_ int process) none)
-    (vehicle-method-108 () none) ;; 108 ;; (vehicle-method-108 (_type_ int) none)
-    (vehicle-method-109 () none) ;; 109 ;; (vehicle-method-109 (_type_) none)
-    (vehicle-method-110 () none) ;; 110 ;; (vehicle-method-110 (_type_) none)
-    (vehicle-method-111 () none) ;; 111 ;; (get-linear-accel! (_type_ vector) none)
-    (vehicle-method-112 () none) ;; 112 ;; (copy-vehicle-controls! (_type_ vehicle-controls) none)
-    (vehicle-method-113 () none) ;; 113 ;; (vehicle-method-113 (_type_ vector int int) none)
-    (vehicle-method-114 () none) ;; 114 ;; (vehicle-method-114 (_type_ int) none)
-    (vehicle-method-115 () none) ;; 115 ;; (vehicle-method-115 (_type_) none)
-    (vehicle-method-116 () none) ;; 116 ;; (vehicle-method-116 (_type_ symbol) none)
-    (vehicle-method-117 () none) ;; 117 ;; (vehicle-method-117 (_type_) none)
-    (vehicle-method-118 () none) ;; 118 ;; (vehicle-method-118 (_type_) none)
-    (vehicle-method-119 () none) ;; 119 ;; (vehicle-method-119 (_type_) none)
-    (vehicle-method-120 () none) ;; 120 ;; (apply-gravity (_type_ float) none)
-    (vehicle-method-121 () none) ;; 121 ;; (apply-gravity1 (_type_ float) none)
-    (vehicle-method-122 () none) ;; 122 ;; (vehicle-method-122 (_type_) none)
-    (vehicle-method-123 () none) ;; 123 ;; (vehicle-method-123 (_type_) none)
-    (vehicle-method-124 () none) ;; 124 ;; (vehicle-method-124 (_type_) none)
-    (vehicle-method-125 () none) ;; 125 ;; (vehicle-method-125 (_type_) none)
-    (vehicle-method-126 () none) ;; 126 ;; (vehicle-method-126 (_type_) none)
-    (vehicle-method-127 () none) ;; 127 ;; (check-player-get-on (_type_ process-focusable) symbol)
-    (vehicle-method-128 () none) ;; 128 ;; (vehicle-method-128 (_type_) symbol)
-    (vehicle-method-129 () none) ;; 129 ;; (vehicle-method-129 (_type_) none)
-    (vehicle-method-130 () none) ;; 130 ;; (vehicle-method-130 (_type_) none)
-    (vehicle-method-131 () none) ;; 131 ;; (vehicle-method-131 (_type_ traffic-object-spawn-params) none)
-    (vehicle-method-132 () none) ;; 132 ;; (vehicle-method-132 (_type_ traffic-object-spawn-params) none)
-    (vehicle-method-133 () none) ;; 133 ;; (vehicle-method-133 (_type_ traffic-object-spawn-params) none)
-    (vehicle-method-134 () none) ;; 134 ;; (vehicle-method-134 (_type_) none)
-    (vehicle-method-135 () none) ;; 135 ;; (vehicle-method-135 (_type_) none)
-    (vehicle-method-136 () none) ;; 136 ;; (vehicle-method-136 (_type_) none)
-    (vehicle-method-137 () none) ;; 137 ;; (vehicle-method-137 (_type_) none)
-    (vehicle-method-138 () none) ;; 138 ;; (vehicle-method-138 (_type_) none)
-    (vehicle-method-139 () none) ;; 139 ;; (vehicle-method-139 (_type_) none)
-    (vehicle-method-140 () none) ;; 140 ;; (vehicle-method-140 (_type_) none)
-    (vehicle-method-141 () none) ;; 141 ;; (vehicle-method-141 (_type_) symbol)
-    (vehicle-method-142 () none) ;; 142 ;; (vehicle-method-142 (_type_) none)
-    (vehicle-method-143 () none) ;; 143 ;; (vehicle-method-143 (_type_ process) object)
-    (vehicle-method-144 () none) ;; 144 ;; (vehicle-method-144 (_type_) none)
-    (vehicle-method-145 () none) ;; 145 ;; (vehicle-method-145 (_type_) none)
-    (vehicle-method-146 () none) ;; 146 ;; (vehicle-method-146 (_type_ vector) none)
-    (vehicle-method-147 () none) ;; 147 ;; (vehicle-method-147 (_type_) none)
-    (vehicle-method-148 () none) ;; 148 ;; (vehicle-method-148 (_type_) none)
-    (vehicle-method-149 () none) ;; 149 ;; (vehicle-method-149 (_type_) none)
-    (vehicle-method-150 () none) ;; 150 ;; (vehicle-method-150 (_type_) none)
-    (vehicle-method-151 () none) ;; 151 ;; (set-hit-points (_type_ float) none)
-    (vehicle-method-152 () none) ;; 152
-    (vehicle-method-153 () none) ;; 153
-    (vehicle-method-154 () none) ;; 154
-    (vehicle-method-155 () none) ;; 155
-    (vehicle-method-156 () none) ;; 156
-    (vehicle-method-157 () none) ;; 157
-    (vehicle-method-158 () none) ;; 158
-    (vehicle-method-159 () none) ;; 159
-    (vehicle-method-160 () none) ;; 160
-    (vehicle-method-161 () none) ;; 161
-    (vehicle-method-162 () none) ;; 162
-    (vehicle-method-163 () none) ;; 163
-    (vehicle-method-164 () none) ;; 164
-    (vehicle-method-165 () none) ;; 165
-    (vehicle-method-166 () none) ;; 166
-    (vehicle-method-167 () none) ;; 167
-    (vehicle-method-168 () none) ;; 168
-    (vehicle-method-169 () none) ;; 169
-    (vehicle-method-170 () none) ;; 170
-    (vehicle-method-171 () none) ;; 171
-    (vehicle-method-172 () none) ;; 172
-    (vehicle-method-173 () none) ;; 173
-    (vehicle-method-174 () none) ;; 174
-    (vehicle-method-175 () none) ;; 175
-    (vehicle-method-176 () none) ;; 176
-    (vehicle-method-177 () none) ;; 177
-    (vehicle-method-178 () none) ;; 178
-    (vehicle-method-179 () none) ;; 179
-    (vehicle-method-180 () none) ;; 180
-    (vehicle-method-181 () none) ;; 181
-    (vehicle-method-182 () none) ;; 182
-    (vehicle-method-183 () none) ;; 183
-    (vehicle-method-184 () none) ;; 184
-    (vehicle-method-185 () none) ;; 185
-    (vehicle-method-186 () none) ;; 186
-    (vehicle-method-187 () none) ;; 187
-    (vehicle-method-188 () none) ;; 188
-    (vehicle-method-189 () none) ;; 189
-    (vehicle-method-190 () none) ;; 190
-    (vehicle-method-191 () none) ;; 191
-    (vehicle-method-192 () none) ;; 192
-    (vehicle-method-193 () none) ;; 193
-    (vehicle-method-194 () none) ;; 194
-    (vehicle-method-195 () none) ;; 195
-    (vehicle-method-196 () none) ;; 196
-    (vehicle-method-197 () none) ;; 197
-    (vehicle-method-198 () none) ;; 198
-    (vehicle-method-199 () none) ;; 199
-    (vehicle-method-200 () none) ;; 200
-    (vehicle-method-201 () none) ;; 201
-    (vehicle-method-202 () none) ;; 202
-    (vehicle-method-203 () none) ;; 203
+    (vehicle-method-89 (_type_) none) ;; 89 ;; (init-reverse (_type_ vehicle-controls) none)
+    (vehicle-method-90 (_type_) none) ;; 90 ;; (control-hook-ai (_type_ vehicle-controls) none)
+    (vehicle-method-91 (_type_) none) ;; 91 ;; (control-hook-player (_type_) none)
+    (vehicle-method-92 (_type_) none) ;; 92 ;; (vehicle-method-92 (_type_ vehicle-controls) none)
+    (vehicle-method-93 (_type_) none) ;; 93 ;; (vehicle-method-93 (_type_) none)
+    (vehicle-method-94 (_type_) none) ;; 94 ;; (vehicle-method-94 (_type_) none)
+    (vehicle-method-95 (_type_) none) ;; 95 ;; (vehicle-method-95 (_type_ vector float) none)
+    (vehicle-method-96 (_type_) none) ;; 96 ;; (vehicle-method-96 (_type_ float) none)
+    (vehicle-method-97 (_type_) none) ;; 97 ;; (vehicle-method-97 (_type_ float vehicle-physics-work) none)
+    (vehicle-method-98 (_type_) none) ;; 98 ;; (vehicle-method-98 (_type_) none)
+    (vehicle-method-99 (_type_) none) ;; 99 ;; (vehicle-method-99 (_type_) none)
+    (vehicle-method-100 (_type_) none) ;; 100 ;; (vehicle-method-100 (_type_) none)
+    (vehicle-method-101 (_type_) none) ;; 101 ;; (vehicle-method-101 (_type_) none)
+    (vehicle-method-102 (_type_) none) ;; 102 ;; (vehicle-method-102 (_type_) symbol)
+    (vehicle-method-103 (_type_) none) ;; 103 ;; (vehicle-method-103 (_type_) none)
+    (vehicle-method-104 (_type_) none) ;; 104 ;; (vehicle-method-104 (_type_) none)
+    (vehicle-method-105 (_type_) none) ;; 105 ;; (vehicle-method-105 (_type_) none)
+    (vehicle-method-106 (_type_) none) ;; 106 ;; (vehicle-method-106 (_type_) none)
+    (vehicle-method-107 (_type_) none) ;; 107 ;; (vehicle-method-107 (_type_ int process) none)
+    (vehicle-method-108 (_type_) none) ;; 108 ;; (vehicle-method-108 (_type_ int) none)
+    (vehicle-method-109 (_type_) none) ;; 109 ;; (vehicle-method-109 (_type_) none)
+    (vehicle-method-110 (_type_) none) ;; 110 ;; (vehicle-method-110 (_type_) none)
+    (vehicle-method-111 (_type_) none) ;; 111 ;; (get-linear-accel! (_type_ vector) none)
+    (vehicle-method-112 (_type_) none) ;; 112 ;; (copy-vehicle-controls! (_type_ vehicle-controls) none)
+    (vehicle-method-113 (_type_) none) ;; 113 ;; (vehicle-method-113 (_type_ vector int int) none)
+    (vehicle-method-114 (_type_) none) ;; 114 ;; (vehicle-method-114 (_type_ int) none)
+    (vehicle-method-115 (_type_) none) ;; 115 ;; (vehicle-method-115 (_type_) none)
+    (vehicle-method-116 (_type_) none) ;; 116 ;; (vehicle-method-116 (_type_ symbol) none)
+    (vehicle-method-117 (_type_) none) ;; 117 ;; (vehicle-method-117 (_type_) none)
+    (vehicle-method-118 (_type_) none) ;; 118 ;; (vehicle-method-118 (_type_) none)
+    (vehicle-method-119 (_type_) none) ;; 119 ;; (vehicle-method-119 (_type_) none)
+    (vehicle-method-120 (_type_) none) ;; 120 ;; (apply-gravity (_type_ float) none)
+    (vehicle-method-121 (_type_) none) ;; 121 ;; (apply-gravity1 (_type_ float) none)
+    (vehicle-method-122 (_type_) none) ;; 122 ;; (vehicle-method-122 (_type_) none)
+    (vehicle-method-123 (_type_) none) ;; 123 ;; (vehicle-method-123 (_type_) none)
+    (vehicle-method-124 (_type_) none) ;; 124 ;; (vehicle-method-124 (_type_) none)
+    (vehicle-method-125 (_type_) none) ;; 125 ;; (vehicle-method-125 (_type_) none)
+    (vehicle-method-126 (_type_) none) ;; 126 ;; (vehicle-method-126 (_type_) none)
+    (vehicle-method-127 (_type_) none) ;; 127 ;; (check-player-get-on (_type_ process-focusable) symbol)
+    (vehicle-method-128 (_type_) none) ;; 128 ;; (vehicle-method-128 (_type_) symbol)
+    (vehicle-method-129 (_type_) none) ;; 129 ;; (vehicle-method-129 (_type_) none)
+    (vehicle-method-130 (_type_) none) ;; 130 ;; (vehicle-method-130 (_type_) none)
+    (vehicle-method-131 (_type_) none) ;; 131 ;; (vehicle-method-131 (_type_ traffic-object-spawn-params) none)
+    (vehicle-method-132 (_type_) none) ;; 132 ;; (vehicle-method-132 (_type_ traffic-object-spawn-params) none)
+    (vehicle-method-133 (_type_) none) ;; 133 ;; (vehicle-method-133 (_type_ traffic-object-spawn-params) none)
+    (vehicle-method-134 (_type_) none) ;; 134 ;; (vehicle-method-134 (_type_) none)
+    (vehicle-method-135 (_type_) none) ;; 135 ;; (vehicle-method-135 (_type_) none)
+    (vehicle-method-136 (_type_) none) ;; 136 ;; (vehicle-method-136 (_type_) none)
+    (vehicle-method-137 (_type_) none) ;; 137 ;; (vehicle-method-137 (_type_) none)
+    (vehicle-method-138 (_type_) none) ;; 138 ;; (vehicle-method-138 (_type_) none)
+    (vehicle-method-139 (_type_) none) ;; 139 ;; (vehicle-method-139 (_type_) none)
+    (vehicle-method-140 (_type_) none) ;; 140 ;; (vehicle-method-140 (_type_) none)
+    (vehicle-method-141 (_type_) none) ;; 141 ;; (vehicle-method-141 (_type_) symbol)
+    (vehicle-method-142 (_type_) none) ;; 142 ;; (vehicle-method-142 (_type_) none)
+    (vehicle-method-143 (_type_) none) ;; 143 ;; (vehicle-method-143 (_type_ process) object)
+    (vehicle-method-144 (_type_) none) ;; 144 ;; (vehicle-method-144 (_type_) none)
+    (vehicle-method-145 (_type_) none) ;; 145 ;; (vehicle-method-145 (_type_) none)
+    (vehicle-method-146 (_type_) none) ;; 146 ;; (vehicle-method-146 (_type_ vector) none)
+    (vehicle-method-147 (_type_) none) ;; 147 ;; (vehicle-method-147 (_type_) none)
+    (vehicle-method-148 (_type_) none) ;; 148 ;; (vehicle-method-148 (_type_) none)
+    (vehicle-method-149 (_type_) none) ;; 149 ;; (vehicle-method-149 (_type_) none)
+    (vehicle-method-150 (_type_) none) ;; 150 ;; (vehicle-method-150 (_type_) none)
+    (vehicle-method-151 (_type_) none) ;; 151 ;; (set-hit-points (_type_ float) none)
+    (vehicle-method-152 (_type_) none) ;; 152
+    (vehicle-method-153 (_type_) none) ;; 153
+    (vehicle-method-154 (_type_) none) ;; 154
+    (vehicle-method-155 (_type_) none) ;; 155
+    (vehicle-method-156 (_type_) none) ;; 156
+    (vehicle-method-157 (_type_) none) ;; 157
+    (vehicle-method-158 (_type_) none) ;; 158
+    (vehicle-method-159 (_type_) none) ;; 159
+    (vehicle-method-160 (_type_) none) ;; 160
+    (vehicle-method-161 (_type_) none) ;; 161
+    (vehicle-method-162 (_type_) none) ;; 162
+    (vehicle-method-163 (_type_) none) ;; 163
+    (vehicle-method-164 (_type_) none) ;; 164
+    (vehicle-method-165 (_type_) none) ;; 165
+    (vehicle-method-166 (_type_) none) ;; 166
+    (vehicle-method-167 (_type_) none) ;; 167
+    (vehicle-method-168 (_type_) none) ;; 168
+    (vehicle-method-169 (_type_) none) ;; 169
+    (vehicle-method-170 (_type_) none) ;; 170
+    (vehicle-method-171 (_type_) none) ;; 171
+    (vehicle-method-172 (_type_) none) ;; 172
+    (vehicle-method-173 (_type_) none) ;; 173
+    (vehicle-method-174 (_type_) none) ;; 174
+    (vehicle-method-175 (_type_) none) ;; 175
+    (vehicle-method-176 (_type_) none) ;; 176
+    (vehicle-method-177 (_type_) none) ;; 177
+    (vehicle-method-178 (_type_) none) ;; 178
+    (vehicle-method-179 (_type_) none) ;; 179
+    (vehicle-method-180 (_type_) none) ;; 180
+    (vehicle-method-181 (_type_) none) ;; 181
+    (vehicle-method-182 (_type_) none) ;; 182
+    (vehicle-method-183 (_type_) none) ;; 183
+    (vehicle-method-184 (_type_) none) ;; 184
+    (vehicle-method-185 (_type_) none) ;; 185
+    (vehicle-method-186 (_type_) none) ;; 186
+    (vehicle-method-187 (_type_) none) ;; 187
+    (vehicle-method-188 (_type_) none) ;; 188
+    (vehicle-method-189 (_type_) none) ;; 189
+    (vehicle-method-190 (_type_) none) ;; 190
+    (vehicle-method-191 (_type_) none) ;; 191
+    (vehicle-method-192 (_type_) none) ;; 192
+    (vehicle-method-193 (_type_) none) ;; 193
+    (vehicle-method-194 (_type_) none) ;; 194
+    (vehicle-method-195 (_type_) none) ;; 195
+    (vehicle-method-196 (_type_) none) ;; 196
+    (vehicle-method-197 (_type_) none) ;; 197
+    (vehicle-method-198 (_type_) none) ;; 198
+    (vehicle-method-199 (_type_) none) ;; 199
+    (vehicle-method-200 (_type_) none) ;; 200
+    (vehicle-method-201 (_type_) none) ;; 201
+    (vehicle-method-202 (_type_) none) ;; 202
+    (vehicle-method-203 (_type_) none) ;; 203
     )
   )
   
@@ -45027,74 +45027,74 @@
   :size-assert         #x1234
   :flag-assert         #x11011b01234
   (:methods
-    (wvehicle-method-204 () none) ;; 204
-    (wvehicle-method-205 () none) ;; 205
-    (wvehicle-method-206 () none) ;; 206
-    (wvehicle-method-207 () none) ;; 207
-    (wvehicle-method-208 () none) ;; 208
-    (wvehicle-method-209 () none) ;; 209
-    (wvehicle-method-210 () none) ;; 210
-    (wvehicle-method-211 () none) ;; 211
-    (wvehicle-method-212 () none) ;; 212
-    (wvehicle-method-213 () none) ;; 213
-    (wvehicle-method-214 () none) ;; 214
-    (wvehicle-method-215 () none) ;; 215
-    (wvehicle-method-216 () none) ;; 216
-    (wvehicle-method-217 () none) ;; 217
-    (wvehicle-method-218 () none) ;; 218
-    (wvehicle-method-219 () none) ;; 219
-    (wvehicle-method-220 () none) ;; 220
-    (wvehicle-method-221 () none) ;; 221
-    (wvehicle-method-222 () none) ;; 222
-    (wvehicle-method-223 () none) ;; 223
-    (wvehicle-method-224 () none) ;; 224
-    (wvehicle-method-225 () none) ;; 225
-    (wvehicle-method-226 () none) ;; 226
-    (wvehicle-method-227 () none) ;; 227
-    (wvehicle-method-228 () none) ;; 228
-    (wvehicle-method-229 () none) ;; 229
-    (wvehicle-method-230 () none) ;; 230
-    (wvehicle-method-231 () none) ;; 231
-    (wvehicle-method-232 () none) ;; 232
-    (wvehicle-method-233 () none) ;; 233
-    (wvehicle-method-234 () none) ;; 234
-    (wvehicle-method-235 () none) ;; 235
-    (wvehicle-method-236 () none) ;; 236
-    (wvehicle-method-237 () none) ;; 237
-    (wvehicle-method-238 () none) ;; 238
-    (wvehicle-method-239 () none) ;; 239
-    (wvehicle-method-240 () none) ;; 240
-    (wvehicle-method-241 () none) ;; 241
-    (wvehicle-method-242 () none) ;; 242
-    (wvehicle-method-243 () none) ;; 243
-    (wvehicle-method-244 () none) ;; 244
-    (wvehicle-method-245 () none) ;; 245
-    (wvehicle-method-246 () none) ;; 246
-    (wvehicle-method-247 () none) ;; 247
-    (wvehicle-method-248 () none) ;; 248
-    (wvehicle-method-249 () none) ;; 249
-    (wvehicle-method-250 () none) ;; 250
-    (wvehicle-method-251 () none) ;; 251
-    (wvehicle-method-252 () none) ;; 252
-    (wvehicle-method-253 () none) ;; 253
-    (wvehicle-method-254 () none) ;; 254
-    (wvehicle-method-255 () none) ;; 255
-    (wvehicle-method-256 () none) ;; 256
-    (wvehicle-method-257 () none) ;; 257
-    (wvehicle-method-258 () none) ;; 258
-    (wvehicle-method-259 () none) ;; 259
-    (wvehicle-method-260 () none) ;; 260
-    (wvehicle-method-261 () none) ;; 261
-    (wvehicle-method-262 () none) ;; 262
-    (wvehicle-method-263 () none) ;; 263
-    (wvehicle-method-264 () none) ;; 264
-    (wvehicle-method-265 () none) ;; 265
-    (wvehicle-method-266 () none) ;; 266
-    (wvehicle-method-267 () none) ;; 267
-    (wvehicle-method-268 () none) ;; 268
-    (wvehicle-method-269 () none) ;; 269
-    (wvehicle-method-270 () none) ;; 270
-    (wvehicle-method-271 () none) ;; 271
+    (wvehicle-method-204 (_type_) none) ;; 204
+    (wvehicle-method-205 (_type_) none) ;; 205
+    (wvehicle-method-206 (_type_) none) ;; 206
+    (wvehicle-method-207 (_type_) none) ;; 207
+    (wvehicle-method-208 (_type_) none) ;; 208
+    (wvehicle-method-209 (_type_) none) ;; 209
+    (wvehicle-method-210 (_type_) none) ;; 210
+    (wvehicle-method-211 (_type_) none) ;; 211
+    (wvehicle-method-212 (_type_) none) ;; 212
+    (wvehicle-method-213 (_type_) none) ;; 213
+    (wvehicle-method-214 (_type_) none) ;; 214
+    (wvehicle-method-215 (_type_) none) ;; 215
+    (wvehicle-method-216 (_type_) none) ;; 216
+    (wvehicle-method-217 (_type_) none) ;; 217
+    (wvehicle-method-218 (_type_) none) ;; 218
+    (wvehicle-method-219 (_type_) none) ;; 219
+    (wvehicle-method-220 (_type_) none) ;; 220
+    (wvehicle-method-221 (_type_) none) ;; 221
+    (wvehicle-method-222 (_type_) none) ;; 222
+    (wvehicle-method-223 (_type_) none) ;; 223
+    (wvehicle-method-224 (_type_) none) ;; 224
+    (wvehicle-method-225 (_type_) none) ;; 225
+    (wvehicle-method-226 (_type_) none) ;; 226
+    (wvehicle-method-227 (_type_) none) ;; 227
+    (wvehicle-method-228 (_type_) none) ;; 228
+    (wvehicle-method-229 (_type_) none) ;; 229
+    (wvehicle-method-230 (_type_) none) ;; 230
+    (wvehicle-method-231 (_type_) none) ;; 231
+    (wvehicle-method-232 (_type_) none) ;; 232
+    (wvehicle-method-233 (_type_) none) ;; 233
+    (wvehicle-method-234 (_type_) none) ;; 234
+    (wvehicle-method-235 (_type_) none) ;; 235
+    (wvehicle-method-236 (_type_) none) ;; 236
+    (wvehicle-method-237 (_type_) none) ;; 237
+    (wvehicle-method-238 (_type_) none) ;; 238
+    (wvehicle-method-239 (_type_) none) ;; 239
+    (wvehicle-method-240 (_type_) none) ;; 240
+    (wvehicle-method-241 (_type_) none) ;; 241
+    (wvehicle-method-242 (_type_) none) ;; 242
+    (wvehicle-method-243 (_type_) none) ;; 243
+    (wvehicle-method-244 (_type_) none) ;; 244
+    (wvehicle-method-245 (_type_) none) ;; 245
+    (wvehicle-method-246 (_type_) none) ;; 246
+    (wvehicle-method-247 (_type_) none) ;; 247
+    (wvehicle-method-248 (_type_) none) ;; 248
+    (wvehicle-method-249 (_type_) none) ;; 249
+    (wvehicle-method-250 (_type_) none) ;; 250
+    (wvehicle-method-251 (_type_) none) ;; 251
+    (wvehicle-method-252 (_type_) none) ;; 252
+    (wvehicle-method-253 (_type_) none) ;; 253
+    (wvehicle-method-254 (_type_) none) ;; 254
+    (wvehicle-method-255 (_type_) none) ;; 255
+    (wvehicle-method-256 (_type_) none) ;; 256
+    (wvehicle-method-257 (_type_) none) ;; 257
+    (wvehicle-method-258 (_type_) none) ;; 258
+    (wvehicle-method-259 (_type_) none) ;; 259
+    (wvehicle-method-260 (_type_) none) ;; 260
+    (wvehicle-method-261 (_type_) none) ;; 261
+    (wvehicle-method-262 (_type_) none) ;; 262
+    (wvehicle-method-263 (_type_) none) ;; 263
+    (wvehicle-method-264 (_type_) none) ;; 264
+    (wvehicle-method-265 (_type_) none) ;; 265
+    (wvehicle-method-266 (_type_) none) ;; 266
+    (wvehicle-method-267 (_type_) none) ;; 267
+    (wvehicle-method-268 (_type_) none) ;; 268
+    (wvehicle-method-269 (_type_) none) ;; 269
+    (wvehicle-method-270 (_type_) none) ;; 270
+    (wvehicle-method-271 (_type_) none) ;; 271
     )
   )
 |#
@@ -46616,12 +46616,12 @@
   :size-assert         #xf8
   :flag-assert         #x38007000f8
   (:methods
-    (eco-method-50 () none) ;; 50
-    (eco-method-51 () none) ;; 51
-    (eco-method-52 () none) ;; 52
-    (eco-method-53 () none) ;; 53
-    (eco-method-54 () none) ;; 54
-    (eco-method-55 () none) ;; 55
+    (eco-method-50 (_type_) none) ;; 50
+    (eco-method-51 (_type_) none) ;; 51
+    (eco-method-52 (_type_) none) ;; 52
+    (eco-method-53 (_type_) none) ;; 53
+    (eco-method-54 (_type_) none) ;; 54
+    (eco-method-55 (_type_) none) ;; 55
     )
   )|#
   
@@ -48909,12 +48909,12 @@
   :size-assert         #x90
   :flag-assert         #xf00000090
   (:methods
-    (nospawn-method-9 () none) ;; 9
-    (nospawn-method-10 () none) ;; 10
-    (nospawn-method-11 () none) ;; 11
-    (nospawn-method-12 () none) ;; 12
-    (nospawn-method-13 () none) ;; 13
-    (nospawn-method-14 () none) ;; 14
+    (nospawn-method-9 (_type_) none) ;; 9
+    (nospawn-method-10 (_type_) none) ;; 10
+    (nospawn-method-11 (_type_) none) ;; 11
+    (nospawn-method-12 (_type_) none) ;; 12
+    (nospawn-method-13 (_type_) none) ;; 13
+    (nospawn-method-14 (_type_) none) ;; 14
     )
   )
 |#
@@ -50082,9 +50082,9 @@
   :size-assert         #x10
   :flag-assert         #xc00000010
   (:methods
-    (helmet-method-9 () none) ;; 9
-    (helmet-method-10 () none) ;; 10
-    (helmet-method-11 () none) ;; 11
+    (helmet-method-9 (_type_) none) ;; 9
+    (helmet-method-10 (_type_) none) ;; 10
+    (helmet-method-11 (_type_) none) ;; 11
     )
   )
 
@@ -50188,11 +50188,11 @@
   :size-assert         #x184
   :flag-assert         #x4301000184
   (:methods
-    (driver-method-62 () none) ;; 62
-    (driver-method-63 () none) ;; 63
-    (driver-method-64 () none) ;; 64
-    (driver-method-65 () none) ;; 65
-    (driver-method-66 () none) ;; 66
+    (driver-method-62 (_type_) none) ;; 62
+    (driver-method-63 (_type_) none) ;; 63
+    (driver-method-64 (_type_) none) ;; 64
+    (driver-method-65 (_type_) none) ;; 65
+    (driver-method-66 (_type_) none) ;; 66
     )
   (:state-methods
     idle ;; 59
@@ -51499,12 +51499,12 @@
   :size-assert         #xb0
   :flag-assert         #xf000000b0
   (:methods
-    (manipulator-method-9 () none) ;; 9 ;; (set-mode (_type_ manipulator-mode) none)
-    (manipulator-method-10 () none) ;; 10 ;; (manipulator-method-10 (_type_) none)
-    (manipulator-method-11 () none) ;; 11 ;; (manipulator-method-11 (_type_) none)
-    (manipulator-method-12 () none) ;; 12 ;; (manipulator-method-12 (_type_ vector) none)
-    (manipulator-method-13 () none) ;; 13 ;; (manipulator-method-13 (_type_ vector vector) none)
-    (manipulator-method-14 () none) ;; 14 ;; (manipulator-method-14 (_type_) none)
+    (manipulator-method-9 (_type_) none) ;; 9 ;; (set-mode (_type_ manipulator-mode) none)
+    (manipulator-method-10 (_type_) none) ;; 10 ;; (manipulator-method-10 (_type_) none)
+    (manipulator-method-11 (_type_) none) ;; 11 ;; (manipulator-method-11 (_type_) none)
+    (manipulator-method-12 (_type_) none) ;; 12 ;; (manipulator-method-12 (_type_ vector) none)
+    (manipulator-method-13 (_type_) none) ;; 13 ;; (manipulator-method-13 (_type_ vector vector) none)
+    (manipulator-method-14 (_type_) none) ;; 14 ;; (manipulator-method-14 (_type_) none)
     )
   )|#
   
@@ -51558,33 +51558,33 @@
   :size-assert         #x1c
   :flag-assert         #x240000001c
   (:methods
-    (editable-method-9 () none) ;; 9 ;; (editable-method-9 () none)
-    (editable-method-10 () none) ;; 10 ;; (editable-method-10 () none)
-    (editable-method-11 () none) ;; 11 ;; (editable-method-11 () none)
-    (editable-method-12 () none) ;; 12 ;; (editable-method-12 () none)
-    (editable-method-13 () none) ;; 13 ;; (editable-method-13 () none)
-    (editable-method-14 () none) ;; 14 ;; (editable-method-14 () none)
-    (editable-method-15 () none) ;; 15 ;; (editable-method-15 () none)
-    (editable-method-16 () none) ;; 16 ;; (editable-method-16 () none)
-    (editable-method-17 () none) ;; 17 ;; (editable-method-17 () none)
-    (editable-method-18 () none) ;; 18 ;; (editable-method-18 () none)
-    (editable-method-19 () none) ;; 19 ;; (editable-method-19 () none)
-    (editable-method-20 () none) ;; 20 ;; (editable-method-20 () none)
-    (editable-method-21 () none) ;; 21 ;; (editable-method-21 () none)
-    (editable-method-22 () none) ;; 22 ;; (editable-method-22 () none)
-    (editable-method-23 () none) ;; 23 ;; (editable-method-23 () none)
-    (editable-method-24 () none) ;; 24 ;; (editable-method-24 () none)
-    (editable-method-25 () none) ;; 25 ;; (editable-method-25 () none)
-    (editable-method-26 () none) ;; 26 ;; (editable-method-26 () none)
-    (editable-method-27 () none) ;; 27 ;; (editable-method-27 () none)
-    (editable-method-28 () none) ;; 28 ;; (editable-method-28 () none)
-    (editable-method-29 () none) ;; 29 ;; (editable-method-29 () none)
-    (editable-method-30 () none) ;; 30 ;; (editable-method-30 () none)
-    (editable-method-31 () none) ;; 31 ;; (editable-method-31 () none)
-    (editable-method-32 () none) ;; 32 ;; (editable-method-32 () none)
-    (editable-method-33 () none) ;; 33 ;; (editable-method-33 () none)
-    (editable-method-34 () none) ;; 34 ;; (editable-method-34 () none)
-    (editable-method-35 () none) ;; 35 ;; (editable-method-35 () none)
+    (editable-method-9 (_type_) none) ;; 9 ;; (editable-method-9 (_type_) none)
+    (editable-method-10 (_type_) none) ;; 10 ;; (editable-method-10 (_type_) none)
+    (editable-method-11 (_type_) none) ;; 11 ;; (editable-method-11 (_type_) none)
+    (editable-method-12 (_type_) none) ;; 12 ;; (editable-method-12 (_type_) none)
+    (editable-method-13 (_type_) none) ;; 13 ;; (editable-method-13 (_type_) none)
+    (editable-method-14 (_type_) none) ;; 14 ;; (editable-method-14 (_type_) none)
+    (editable-method-15 (_type_) none) ;; 15 ;; (editable-method-15 (_type_) none)
+    (editable-method-16 (_type_) none) ;; 16 ;; (editable-method-16 (_type_) none)
+    (editable-method-17 (_type_) none) ;; 17 ;; (editable-method-17 (_type_) none)
+    (editable-method-18 (_type_) none) ;; 18 ;; (editable-method-18 (_type_) none)
+    (editable-method-19 (_type_) none) ;; 19 ;; (editable-method-19 (_type_) none)
+    (editable-method-20 (_type_) none) ;; 20 ;; (editable-method-20 (_type_) none)
+    (editable-method-21 (_type_) none) ;; 21 ;; (editable-method-21 (_type_) none)
+    (editable-method-22 (_type_) none) ;; 22 ;; (editable-method-22 (_type_) none)
+    (editable-method-23 (_type_) none) ;; 23 ;; (editable-method-23 (_type_) none)
+    (editable-method-24 (_type_) none) ;; 24 ;; (editable-method-24 (_type_) none)
+    (editable-method-25 (_type_) none) ;; 25 ;; (editable-method-25 (_type_) none)
+    (editable-method-26 (_type_) none) ;; 26 ;; (editable-method-26 (_type_) none)
+    (editable-method-27 (_type_) none) ;; 27 ;; (editable-method-27 (_type_) none)
+    (editable-method-28 (_type_) none) ;; 28 ;; (editable-method-28 (_type_) none)
+    (editable-method-29 (_type_) none) ;; 29 ;; (editable-method-29 (_type_) none)
+    (editable-method-30 (_type_) none) ;; 30 ;; (editable-method-30 (_type_) none)
+    (editable-method-31 (_type_) none) ;; 31 ;; (editable-method-31 (_type_) none)
+    (editable-method-32 (_type_) none) ;; 32 ;; (editable-method-32 (_type_) none)
+    (editable-method-33 (_type_) none) ;; 33 ;; (editable-method-33 (_type_) none)
+    (editable-method-34 (_type_) none) ;; 34 ;; (editable-method-34 (_type_) none)
+    (editable-method-35 (_type_) none) ;; 35 ;; (editable-method-35 (_type_) none)
     )
   )|#
   
@@ -52810,15 +52810,15 @@
   :size-assert         #x144
   :flag-assert         #x4200c00144
   (:methods
-    (daxter-method-57 () none) ;; 57
-    (daxter-method-58 () none) ;; 58
-    (daxter-method-59 () none) ;; 59
-    (daxter-method-60 () none) ;; 60
-    (daxter-method-61 () none) ;; 61
-    (daxter-method-62 () none) ;; 62
-    (daxter-method-63 () none) ;; 63
-    (daxter-method-64 () none) ;; 64
-    (daxter-method-65 () none) ;; 65
+    (daxter-method-57 (_type_) none) ;; 57
+    (daxter-method-58 (_type_) none) ;; 58
+    (daxter-method-59 (_type_) none) ;; 59
+    (daxter-method-60 (_type_) none) ;; 60
+    (daxter-method-61 (_type_) none) ;; 61
+    (daxter-method-62 (_type_) none) ;; 62
+    (daxter-method-63 (_type_) none) ;; 63
+    (daxter-method-64 (_type_) none) ;; 64
+    (daxter-method-65 (_type_) none) ;; 65
     )
   (:state-methods
     hide ;; 52
@@ -55259,7 +55259,7 @@
   :size-assert         #xfc
   :flag-assert         #x39007000fc
   (:methods
-    (collectoid-method-56 () none) ;; 56
+    (collectoid-method-56 (_type_) none) ;; 56
     )
   )
 
