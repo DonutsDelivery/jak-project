@@ -208,3 +208,122 @@ void link() {
 
 }  // namespace sparticle_motion_blur
 }  // namespace Mips2C::jakx
+
+namespace Mips2C::jakx {
+// particle-adgif — jakx-native port.
+//
+// Structurally identical to jak3's particle-adgif (same 102 ops, same
+// labels L357-L361, same Cache layout). Present in jakx namespace for
+// consistency with other jakx mips2c ports and to isolate from jak3's
+// copy should binary divergence surface later.
+//
+// Source: .jakx_watch/decomp_out/jakx/sparticle-launcher_ir2.asm:19804-19918
+// Compare: game/mips2c/jak3_functions/sparticle_launcher.cpp:439-570
+namespace particle_adgif {
+struct Cache {
+  void* particle_adgif_cache;  // *particle-adgif-cache*
+  void* particle_setup_adgif;  // particle-setup-adgif
+} cache;
+
+u64 execute(void* ctxt) {
+  auto* c = (ExecutionContext*)ctxt;
+  bool bc = false;
+  u32 call_addr = 0;
+  c->dsra(a3, a1, 20);                              // dsra a3, a1, 20
+  c->load_symbol2(t1, cache.particle_adgif_cache);  // lw t1, *particle-adgif-cache*(s7)
+  c->dsra(t0, a1, 8);                               // dsra t0, a1, 8
+  c->lw(t2, 0, t1);                                 // lw t2, 0(t1)
+  c->xor_(a3, a3, t0);                              // xor a3, a3, t0
+  c->lhu(v1, 4, t1);                                // lhu v1, 4(t1)
+  c->andi(a3, a3, 65535);                           // andi a3, a3, 65535
+  c->lw(t4, 8, t1);                                 // lw t4, 8(t1)
+  bc = c->sgpr64(v1) == c->sgpr64(a3);              // beq v1, a3, L360
+  c->daddiu(t3, t1, 12);                            // daddiu t3, t1, 12
+  if (bc) {goto block_7;}
+
+  bc = c->sgpr64(t2) == 0;                          // beq t2, r0, L359
+  c->daddiu(t4, t1, 172);                           // daddiu t4, t1, 172
+  if (bc) {goto block_4;}
+
+
+block_2:
+  c->lhu(v1, 0, t3);                                // lhu v1, 0(t3)
+  c->daddiu(t3, t3, 2);                             // daddiu t3, t3, 2
+  bc = c->sgpr64(v1) == c->sgpr64(a3);              // beq v1, a3, L360
+  c->daddiu(t2, t2, -1);                            // daddiu t2, t2, -1
+  if (bc) {goto block_7;}
+
+  bc = c->sgpr64(t2) != 0;                          // bne t2, r0, L358
+  c->daddiu(t4, t4, 80);                            // daddiu t4, t4, 80
+  if (bc) {goto block_2;}
+
+
+block_4:
+  c->daddiu(sp, sp, -16);                           // daddiu sp, sp, -16
+  c->lw(v1, 0, t1);                                 // lw v1, 0(t1)
+  c->daddiu(v1, v1, -80);                           // daddiu v1, v1, -80
+  c->sw(a0, 0, sp);                                 // sw a0, 0(sp)
+  bc = c->sgpr64(v1) == 0;                          // beq v1, r0, L361
+  c->daddiu(v1, v1, 81);                            // daddiu v1, v1, 81
+  if (bc) {goto block_8;}
+
+  c->sh(a3, 0, t3);                                 // sh a3, 0(t3)
+  c->sw(t4, 4, sp);                                 // sw t4, 4(sp)
+  c->mov64(a0, t4);                                 // or a0, t4, r0
+  c->load_symbol2(t9, cache.particle_setup_adgif);  // lw t9, particle-setup-adgif(s7)
+  c->sw(ra, 8, sp);                                 // sw ra, 8(sp)
+  call_addr = c->gprs[t9].du32[0];
+  c->sw(v1, 0, t1);                                 // sw v1, 0(t1)
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->lw(v1, 8, t4);                                 // lw v1, 8(t4)
+  c->lw(a0, 0, sp);                                 // lw a0, 0(sp)
+  c->lw(t4, 4, sp);                                 // lw t4, 4(sp)
+  c->andi(v1, v1, 1024);                            // andi v1, v1, 1024
+  c->lw(ra, 8, sp);                                 // lw ra, 8(sp)
+  c->daddiu(sp, sp, 16);                            // daddiu sp, sp, 16
+  bc = c->sgpr64(v1) == 0;                          // beq v1, r0, L360
+  c->lw(v1, 0, t1);                                 // lw v1, 0(t1)
+  if (bc) {goto block_7;}
+
+  c->daddiu(v1, v1, -1);                            // daddiu v1, v1, -1
+  c->sw(v1, 0, t1);                                 // sw v1, 0(t1)
+
+block_7:
+  c->lqc2(vf16, 0, t4);                             // lqc2 vf16, 0(t4)
+  c->lqc2(vf17, 16, t4);                            // lqc2 vf17, 16(t4)
+  c->lqc2(vf18, 32, t4);                            // lqc2 vf18, 32(t4)
+  c->lqc2(vf19, 48, t4);                            // lqc2 vf19, 48(t4)
+  c->lqc2(vf20, 64, t4);                            // lqc2 vf20, 64(t4)
+  c->sqc2(vf16, 0, a0);                             // sqc2 vf16, 0(a0)
+  c->sqc2(vf17, 16, a0);                            // sqc2 vf17, 16(a0)
+  c->sqc2(vf18, 32, a0);                            // sqc2 vf18, 32(a0)
+  c->sqc2(vf19, 48, a0);                            // sqc2 vf19, 48(a0)
+  c->sqc2(vf20, 64, a0);                            // sqc2 vf20, 64(a0)
+  c->sw(t4, 8, t1);                                 // sw t4, 8(t1)
+  c->sh(a3, 4, t1);                                 // sh a3, 4(t1)
+  goto end_of_function;
+
+
+block_8:
+  c->sw(t4, 4, sp);                                 // sw t4, 4(sp)
+  c->load_symbol2(t9, cache.particle_setup_adgif);  // lw t9, particle-setup-adgif(s7)
+  c->sw(ra, 8, sp);                                 // sw ra, 8(sp)
+  call_addr = c->gprs[t9].du32[0];
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->lw(t4, 4, sp);                                 // lw t4, 4(sp)
+  c->lw(ra, 8, sp);                                 // lw ra, 8(sp)
+  c->daddiu(sp, sp, 16);                            // daddiu sp, sp, 16
+  goto end_of_function;
+
+end_of_function:
+  return c->gprs[v0].du64[0];
+}
+
+void link() {
+  cache.particle_adgif_cache = intern_from_c(-1, 0, "*particle-adgif-cache*").c();
+  cache.particle_setup_adgif = intern_from_c(-1, 0, "particle-setup-adgif").c();
+  gLinkedFunctionTable.reg("particle-adgif", execute, 128);
+}
+
+}  // namespace particle_adgif
+}  // namespace Mips2C::jakx

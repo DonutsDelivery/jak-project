@@ -100,7 +100,7 @@
     // clip-polygon-against-negative-hyperplane — moved to mips2c_functions_by_name
     // clip-polygon-against-positive-hyperplane — moved to mips2c_functions_by_name
     "sp-init-fields!",
-    "particle-adgif",
+    // particle-adgif — moved to mips2c_functions_by_name (jakx-native port)
     "sp-launch-particles-var",
     // sparticle-motion-blur — moved to mips2c_functions_by_name (jakx-native port)
     "sp-process-block-2d",
@@ -1735,11 +1735,13 @@
     "draw-large-polygon",
     "clip-polygon-against-positive-hyperplane",
     "clip-polygon-against-negative-hyperplane",
-    // sparticle-launcher — jakx-native port in
-    // game/mips2c/jakx_functions/sparticle_launcher.cpp. Prologue
-    // calls view-get-active-math-camera (split-screen camera select)
-    // instead of loading *math-camera* directly like jak3.
-    "sparticle-motion-blur"
+    // sparticle-launcher — jakx-native ports in
+    // game/mips2c/jakx_functions/sparticle_launcher.cpp.
+    //   sparticle-motion-blur: prologue calls view-get-active-math-camera
+    //     (split-screen camera select) instead of loading *math-camera*.
+    //   particle-adgif: structurally identical to jak3; jakx namespace only.
+    "sparticle-motion-blur",
+    "particle-adgif"
     // sky-work methods (17/18/29-35) intentionally LEFT in asm_functions_by_name:
     // they diverge from jak3 and their jakx-native port isn't yet written.
     // Letting mips2c run on them would bind them but with jak3's wrong bodies.
