@@ -2908,23 +2908,19 @@
       )
     )
   (on #t)
-  ;; og:preserve-this — SKIP initialize! *game-info* during early jakx bringup.
-  ;; Per jak3 this is: (if arg1 (initialize! *game-info* 'boot #f #f #f))
-  ;; The initialize! method itself now runs clean through all branches (see
-  ;; game-info.gc null-deref fixes and jakx-stubs.gc set-master-mode stub),
-  ;; but the process it spawns (title-control-like) crashes downstream in
-  ;; the display loop. The orchestrator will re-enable this call once that
-  ;; downstream crash is addressed.
-  ;;
-  ;; Direct title-control spawn — bypasses initialize! 'boot and the target
-  ;; state machinery. title-obs is loaded with the title level above, so its
-  ;; symbols are resolved by now. title-control-init runs synchronously to
-  ;; first (suspend), then the process sleeps in the stubbed `startup` state.
-  ;; The wrapper `spawn-title-control` lives in title-obs.gc (TITLE.DGO) where
-  ;; the full deftype is visible; called by name here via extern.
+  ;; Direct title-control spawn for Phase 2 visual. Bypasses target-title
+  ;; state (target subsystem not ported). Called before initialize! 'boot so
+  ;; the title screen shows even without a live target process.
   (when arg1
     (spawn-title-control)
     )
+  ;; og:preserve-this — initialize! 'boot still DISABLED. Enabled it briefly
+  ;; with our minimal start() ported; crashed at 0x2123000000 (EE null) right
+  ;; after display-loop started. The spawned lambda's chain or something
+  ;; inside initialize! 'boot derefs a null global we haven't wired up yet.
+  ;; Needs isolating (add format prints across the initialize! body branches).
+  ;; Deferred to Phase 3.
+  ;; (if arg1 (initialize! *game-info* 'boot (the-as game-save #f) (the-as string #f) (the-as resetter-spec #f)))
   (kmemclose)
   (kmemclose)
   0
