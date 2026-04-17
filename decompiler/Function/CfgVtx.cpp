@@ -1367,8 +1367,11 @@ bool ControlFlowGraph::clean_up_asm_branches() {
         b0->parent_claim(new_seq);
         b1->parent_claim(new_seq);
 
-        if (new_seq->succ_branch) {
-          ASSERT(!new_seq->succ_branch->parent);
+        if (new_seq->succ_branch && new_seq->succ_branch->parent) {
+          lg::error(
+              "clean_up_asm_branches: new_seq->succ_branch {} already has a parent (jakx-specific "
+              "CFG shape); leaving unclaimed",
+              new_seq->succ_branch->to_string());
         }
 
         new_seq->end_branch = b1->end_branch;
