@@ -51261,7 +51261,15 @@
   )
 
 
-;; anim-tester is already defined!
+(deftype anim-tester (process-focusable)
+  ((pad uint8 184 :offset-assert 256))
+  :method-count-assert 59
+  :size-assert         #x1b8
+  :flag-assert         #x3b013001b8
+  (:states
+    anim-tester-process
+    )
+  )
 
 
   
