@@ -17396,7 +17396,7 @@
     (ocean-method-59 (_type_ dma-buffer) none) ;; 59
     (ocean-method-60 (_type_ dma-buffer) none) ;; 60
     (ocean-method-61 (_type_ dma-buffer) none) ;; 61
-    (ocean-method-62 (_type_ dma-buffer) none) ;; 62
+    (ocean-method-62 (_type_ dma-buffer) int) ;; 62 — body returns int
     (ocean-method-63 (_type_ dma-buffer) none) ;; 63
     (ocean-method-64 (_type_ dma-buffer) none) ;; 64
     (ocean-method-65 (_type_ dma-buffer) none) ;; 65
