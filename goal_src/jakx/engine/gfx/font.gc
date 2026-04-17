@@ -14,15 +14,16 @@
 
 (defmethod-mips2c "(method 9 font-work)" 9 font-work)
 
+;; draw-string-init-justify: jakx-native mips2c. Justify pre-pass —
+;; walks the string once, writes per-line starting-x into
+;; font-work.justify[] based on left/center/right flags. Called by
+;; draw-string-asm-packed at entry. Returns a uint128 (packed — low
+;; 32 bits = last-line width float, discarded by caller).
+(def-mips2c draw-string-init-justify (function string dma-buffer font-context uint128))
+
 ;; draw-string-asm-packed: jakx-native mips2c. Takes (string, dma-buffer,
 ;; font-context) and returns a uint128 (packed — low 32 bits = accumulated
 ;; x-extent as IEEE float). See game/mips2c/jakx_functions/font.cpp.
-;; Partial port: entry + font-table setup + color expansion; main render
-;; loop is still TODO (falls through to epilogue), so no glyphs are drawn
-;; by the asm yet — the bitmap-font fallback in draw-string below still
-;; runs. The win over the old jak3-stub draw-string-asm is that this
-;; function doesn't corrupt memory from reading jakx's font-context at
-;; jak3 offsets.
 (def-mips2c draw-string-asm-packed (function string dma-buffer font-context uint128))
 
 ;; JAKX bitmap-font draw-string.

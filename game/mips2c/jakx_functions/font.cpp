@@ -5,8 +5,11 @@
 //
 // Currently implements:
 //   - get-string-length-asm
-//   - draw-string-asm-packed  (COMPLETE — all 171 blocks / both render
-//                              loops ported)
+//   - draw-string-asm-packed     (COMPLETE — all 171 blocks / both
+//                                 render loops ported)
+//   - draw-string-init-justify   (COMPLETE — all 79 blocks; justify
+//                                 pre-pass called by draw-string-asm-
+//                                 packed at entry)
 //
 // These are hand-adapted from the jakx MIPS assembly in
 // decompiler_out/jakx/font_ir2.asm. They are NOT copies of the jak3 port —
@@ -1812,4 +1815,611 @@ void link() {
 }
 
 } // namespace draw_string_asm_packed
+
+// =============================================================================
+// draw-string-init-justify
+// =============================================================================
+//
+// Direct port of jakx font_ir2.asm L285 (`draw-string-init-justify`),
+// lines 12466-12978 (blocks B0-B78).
+//
+// This is the justify pre-pass. It walks the input string once and for
+// each line-break writes the starting-x position of the next line into
+// font-work.justify[N] (@640 + N*16). The later render pass reads these
+// entries so multi-line strings are positioned correctly relative to
+// the font-context's origin and its left/center/right justify flags.
+//
+// Args:
+//   a0 = string
+//   a1 = dma-buffer (only used for writing *font-work*.buf @6172)
+//   a2 = font-context
+// Returns:
+//   v0 = qmfc2 of vf23 after final vsub — packed u128 whose low 32 bits
+//        are the last-line width as a float. The caller (draw-string-
+//        asm-packed) discards v0, so this is mostly a formality.
+//
+// Unlike draw-string-asm-packed, this function has total stack = 0 —
+// no saved regs, no sp adjustment beyond the delay-slot daddu sp,sp,r0.
+// It also has no '[...]' bracket logic; those are only in the render
+// pass.
+//
+// Register roster in the main loop (B4 onward):
+//   a0 = str-ptr (advances per char)
+//   a1 = flags (from font-context @12)
+//   a2 = fontN-table base (small or large)
+//   a3 = justify cursor (= font-work; advances by 16 per line written)
+//   v1 = *font-work*
+//   vf13/14/15 = size1/2/3 for selected font
+//   vf23 = running cursor x (in font-context origin coords)
+//   vf24 = origin (font-context @44)
+//   vf25 = strip-gif vector (font-context @156, jakx layout)
+//   vf16 = size-st1 (for center-justify math)
+//
+// Flag bits referenced:
+//   1  — (nothing in this function; draw-enable in the render pass)
+//   2  — kerning
+//   4  — right-justify ("~j" / "~J")
+//   16 — center-justify
+//   32 — large font
+//   64 — "newline pending" (set on ctrl chars)
+
+namespace draw_string_init_justify {
+struct Cache {
+  void* font_work;    // *font-work*
+  void* font12_table; // *font12-table*
+  void* font24_table; // *font24-table*
+} cache;
+
+u64 execute(void* ctxt) {
+  auto* c = (ExecutionContext*)ctxt;
+  bool bc = false;
+
+  // ---------------------------------------------------------------------------
+  // B0 / L285: prologue. Same vf/register setup as draw-string-asm-packed's
+  // B0, minus the jalr to init-justify (this IS init-justify).
+  // ---------------------------------------------------------------------------
+  c->load_symbol2(v1, cache.font_work);               // lw v1, *font-work*(s7)
+  c->mov64(v1, v1);                                   // or v1, v1, r0
+  c->sw(a1, 6172, v1);                                // sw a1, 6172(v1)  ; buf
+  c->lw(a1, 4, a1);                                   // lw a1, 4(a1)     ; dma write ptr (unused here)
+  c->sw(a0, 6176, v1);                                // sw a0, 6176(v1)  ; str-ptr
+
+  c->lqc2(vf28, 76, a2);                              // calc-mat row 0
+  c->lqc2(vf29, 92, a2);                              // calc-mat row 1
+  c->lqc2(vf30, 108, a2);                             // calc-mat row 2
+  c->lqc2(vf31, 124, a2);                             // calc-mat row 3
+  c->lqc2(vf16, 416, v1);                             // size-st1
+  c->lqc2(vf17, 432, v1);                             // size-st2
+  c->lqc2(vf18, 448, v1);                             // size-st3
+  c->lqc2(vf27, 4736, v1);                            // hvdf-offset
+  c->lqc2(vf26, 4752, v1);                            // hvdf-shadow
+  c->lqc2(vf25, 156, a2);                             // strip-gif (jakx @156)
+  c->lqc2(vf23, 44, a2);                              // origin
+  c->lqc2(vf24, 44, a2);                              // origin
+  c->lqc2(vf1,  44, a2);                              // origin
+  c->lqc2(vf2,  44, a2);                              // origin
+  c->vadd_bc(DEST::x, BC::x, vf1, vf0, vf0);          // zero vf1.x
+  c->vadd_bc(DEST::x, BC::x, vf2, vf0, vf0);          // zero vf2.x
+  c->vadd(DEST::x, vf1, vf0, vf25);                   // vf1.x = vf25.x
+  c->vmul_bc(DEST::x, BC::w, vf2, vf25, vf16);        // vf2.x = vf25.x * vf16.w
+  c->sqc2(vf1, 464, v1);                              // origin-right
+  c->sqc2(vf2, 480, v1);                              // origin-center
+
+  c->lw(a1, 12, a2);                                  // a1 = flags (jakx @12)
+  c->vmove(DEST::xyzw, vf1, vf0);
+  c->vmove(DEST::xyzw, vf2, vf0);
+  c->vmove(DEST::xyzw, vf3, vf0);
+  c->vmove(DEST::xyzw, vf4, vf0);
+
+  c->andi(a2, a1, 32);                                // flag 32 = large font?
+  bc = c->sgpr64(a2) != 0;                            // bne a2, r0, L286
+  c->load_symbol2(a2, cache.font12_table);
+  if (bc) { goto block_2; }
+
+  // B1: small-font setup.
+  c->mov64(a2, a2);
+  c->lq(a3, 192, v1);                                 // small-font-0-tmpl
+  c->lq(t0, 208, v1);
+  c->lq(t1, 224, v1);
+  c->lq(t2, 240, v1);
+  c->sq(a3, 6080, v1);                                // current-font-0-tmpl
+  c->sq(t0, 6096, v1);
+  c->sq(t1, 6112, v1);
+  c->sq(t2, 6128, v1);
+  c->lqc2(vf13, 320, v1);                             // size1-small
+  c->lqc2(vf14, 336, v1);                             // size2-small
+  c->lqc2(vf15, 352, v1);                             // size3-small
+  goto block_3;
+
+block_2:
+  // B2 / L286: large-font setup.
+  c->load_symbol2(a2, cache.font24_table);
+  c->mov64(a2, a2);
+  c->lq(a3, 256, v1);                                 // large-font-0-tmpl
+  c->lq(t0, 272, v1);
+  c->lq(t1, 288, v1);
+  c->lq(t2, 304, v1);
+  c->sq(a3, 6080, v1);
+  c->sq(t0, 6096, v1);
+  c->sq(t1, 6112, v1);
+  c->sq(t2, 6128, v1);
+  c->lqc2(vf13, 368, v1);
+  c->lqc2(vf14, 384, v1);
+  c->lqc2(vf15, 400, v1);
+
+block_3:
+  // B3 / L287: initialize justify cursor a3 = font-work.
+  c->mov64(a3, v1);
+
+block_4:
+  // B4 / L288: top of scanner loop.
+  c->lbu(t0, 4, a0);                                  // lbu t0, 4(a0)
+  c->daddiu(a0, a0, 1);                               // daddiu a0, a0, 1
+  c->lqc2(vf20, 6080, v1);                            // lqc2 vf20, 6080(v1) (seeded; unused in this fn)
+  bc = c->sgpr64(t0) == 0;                            // beq t0, r0, L311 (end of string)
+  c->daddiu(t1, t0, -3);                              // daddiu t1, t0, -3
+  if (bc) { goto block_73; }
+
+  // B5:
+  bc = ((s64)c->sgpr64(t1)) <= 0;                     // blez t1, L303 (ctrl char)
+  c->daddiu(t1, t0, -126);                            // daddiu t1, t0, -126 ('~')
+  if (bc) { goto block_59; }
+
+  // B6:
+  bc = c->sgpr64(t1) != 0;                            // bne t1, r0, L304 (printable)
+  if (bc) { goto block_60; }
+
+  // B7: tilde-code begin — read next char.
+  c->lbu(t0, 4, a0);                                  // lbu t0, 4(a0)
+  c->daddiu(a0, a0, 1);                               // daddiu a0, a0, 1
+  c->addiu(t1, r0, 0);                                // t1 = sign accumulator
+  c->addiu(t2, r0, 0);                                // t2 = digit accumulator
+  bc = c->sgpr64(t0) == 0;                            // beq t0, r0, L311
+  c->daddiu(t3, t0, -43);                             // '+'
+  if (bc) { goto block_73; }
+
+  // B8:
+  c->movz(t1, t0, t3);                                // movz t1, t0, t3
+  c->daddiu(t3, t0, -45);                             // '-'
+  c->movz(t1, t0, t3);                                // movz t1, t0, t3
+  bc = c->sgpr64(t1) != 0;                            // bne t1, r0, L289
+  c->daddiu(t3, t0, -91);                             // '['
+  if (bc) { goto block_18; }
+
+  // B9: '[' — ignored in init-justify (→ L288 loop top)
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L288
+  c->daddiu(t2, t0, -93);                             // ']'
+  if (bc) { goto block_4; }
+
+  // B10: ']' — ignored
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L288
+  c->daddiu(t2, t0, -121);                            // 'y'
+  if (bc) { goto block_4; }
+
+  // B11: 'y' → L301 (save cursor)
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L301
+  c->daddiu(t2, t0, -89);                             // 'Y'
+  if (bc) { goto block_57; }
+
+  // B12:
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L301
+  c->daddiu(t2, t0, -122);                            // 'z'
+  if (bc) { goto block_57; }
+
+  // B13: 'z' → L302 (restore cursor)
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L302
+  c->daddiu(t2, t0, -90);                             // 'Z'
+  if (bc) { goto block_58; }
+
+  // B14:
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L302
+  c->daddiu(t2, t0, -48);                             // '0'
+  if (bc) { goto block_58; }
+
+  // B15:
+  bc = ((s64)c->sgpr64(t2)) < 0;                      // bltz t2, L304 (non-digit → printable)
+  c->daddiu(t2, t0, -57);                             // '9'
+  if (bc) { goto block_60; }
+
+  // B16:
+  bc = ((s64)c->sgpr64(t2)) > 0;                      // bgtz t2, L304
+  c->daddiu(t2, t0, -126);                            // '~'
+  if (bc) { goto block_60; }
+
+  // B17:
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L304 ('~' again)
+  c->daddiu(t2, t0, -48);                             // digit value
+  if (bc) { goto block_60; }
+
+block_18:
+  // B18 / L289: tilde letter scanner.
+  c->lbu(t0, 4, a0);                                  // lbu t0, 4(a0)
+  c->daddiu(a0, a0, 1);                               // daddiu a0, a0, 1
+  bc = c->sgpr64(t0) == 0;                            // beq t0, r0, L311
+  c->daddiu(t3, t0, -110);                            // 'n'
+  if (bc) { goto block_73; }
+
+  // B19:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L290 (small)
+  c->daddiu(t3, t0, -78);                             // 'N'
+  if (bc) { goto block_38; }
+
+  // B20:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L290
+  c->daddiu(t3, t0, -108);                            // 'l'
+  if (bc) { goto block_38; }
+
+  // B21: 'l' ignored (→ L288)
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L288
+  c->daddiu(t3, t0, -76);                             // 'L'
+  if (bc) { goto block_4; }
+
+  // B22: 'L' ignored
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L288
+  c->daddiu(t3, t0, -119);                            // 'w'
+  if (bc) { goto block_4; }
+
+  // B23: 'w' ignored (unlike draw-string-asm-packed which had L134 handler)
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L288
+  c->daddiu(t3, t0, -87);                             // 'W'
+  if (bc) { goto block_4; }
+
+  // B24: 'W' ignored
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L288
+  c->daddiu(t3, t0, -107);                            // 'k'
+  if (bc) { goto block_4; }
+
+  // B25: 'k' → L292 (kerning toggle)
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L292
+  c->daddiu(t3, t0, -75);                             // 'K'
+  if (bc) { goto block_41; }
+
+  // B26:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L292
+  c->daddiu(t3, t0, -106);                            // 'j'
+  if (bc) { goto block_41; }
+
+  // B27: 'j' → L293 (right-justify flag toggle)
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L293
+  c->daddiu(t3, t0, -74);                             // 'J'
+  if (bc) { goto block_43; }
+
+  // B28:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L293
+  c->daddiu(t3, t0, -104);                            // 'h'
+  if (bc) { goto block_43; }
+
+  // B29: 'h' → L295 (h-offset)
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L295
+  c->daddiu(t3, t0, -72);                             // 'H'
+  if (bc) { goto block_47; }
+
+  // B30:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L295
+  c->daddiu(t3, t0, -118);                            // 'v'
+  if (bc) { goto block_47; }
+
+  // B31: 'v' → L298 (v-offset)
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L298
+  c->daddiu(t3, t0, -86);                             // 'V'
+  if (bc) { goto block_52; }
+
+  // B32:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L298
+  c->daddiu(t3, t0, -117);                            // 'u'
+  if (bc) { goto block_52; }
+
+  // B33: 'u' ignored in init-justify
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L288
+  c->daddiu(t3, t0, -85);                             // 'U'
+  if (bc) { goto block_4; }
+
+  // B34:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L288
+  c->daddiu(t3, t0, -48);                             // '0'
+  if (bc) { goto block_4; }
+
+  // B35:
+  bc = ((s64)c->sgpr64(t3)) < 0;                      // bltz t3, L304 (< '0' → printable)
+  c->daddiu(t4, t0, -57);                             // '9'
+  if (bc) { goto block_60; }
+
+  // B36:
+  bc = ((s64)c->sgpr64(t4)) > 0;                      // bgtz t4, L304
+  c->sll(t4, t2, 2);
+  if (bc) { goto block_60; }
+
+  // B37: digit accumulator: t2 = t2 * 10 + digit (where digit = char - '0')
+  c->daddu(t0, t2, t4);                               // t0 = t2 + t2*4 = 5*t2
+  c->sll(t0, t0, 1);                                  // *2 → *10
+  c->daddu(t2, t0, t3);                               // + (char - '0')
+  goto block_18;
+
+block_38:
+  // B38 / L290: "~n"/"~N" — small-font switch. If digits nonzero → large.
+  bc = c->sgpr64(t2) != 0;                            // bne t2, r0, L291
+  c->addiu(t0, r0, -33);                              // -33 = ~32 (clear 'large')
+  if (bc) { goto block_40; }
+
+  // B39: install small-font state, clear 'large' flag.
+  c->load_symbol2(a2, cache.font12_table);
+  c->mov64(a2, a2);
+  c->lqc2(vf13, 320, v1);
+  c->lqc2(vf14, 336, v1);
+  c->lqc2(vf15, 352, v1);
+  c->and_(a1, a1, t0);                                // clear bit 5
+  goto block_4;
+
+block_40:
+  // B40 / L291: large-font switch.
+  c->load_symbol2(a2, cache.font24_table);
+  c->mov64(a2, a2);
+  c->lqc2(vf13, 368, v1);
+  c->lqc2(vf14, 384, v1);
+  c->lqc2(vf15, 400, v1);
+  c->ori(a1, a1, 32);                                 // set bit 5
+  goto block_4;
+
+block_41:
+  // B41 / L292: "~k"/"~K" — kerning toggle (flag bit 1).
+  c->addiu(t0, r0, -3);                               // -3 = ~2
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L288
+  c->and_(a1, a1, t0);                                // clear bit 1
+  if (bc) { goto block_4; }
+
+  // B42:
+  c->ori(a1, a1, 2);                                  // set bit 1
+  goto block_4;
+
+block_43:
+  // B43 / L293: "~j"/"~J" — justify mode toggle.
+  // If digits == 0: clear flag bits 16 AND 4 (clear both center and right).
+  // If digits == 2: set bit 4 (right-justify).
+  // Else:          set bit 16 (center-justify).
+  c->addiu(t0, r0, -21);                              // -21 = ~(16|4) = ~20
+  c->daddiu(t1, t2, -2);                              // digits == 2?
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L288
+  c->and_(a1, a1, t0);                                // clear bits 16+4 (delay slot)
+  if (bc) { goto block_4; }
+
+  // B44:
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L294
+  if (bc) { goto block_46; }
+
+  // B45: digits != 0 and != 2 → center-justify (bit 16)
+  c->ori(a1, a1, 16);
+  goto block_4;
+
+block_46:
+  // B46 / L294: digits == 2 → right-justify (bit 4)
+  c->ori(a1, a1, 4);
+  goto block_4;
+
+block_47:
+  // B47 / L295: "~h"/"~H" — horizontal offset (qmtc2 digits → vitof0 → +/-/=).
+  c->mov128_vf_gpr(vf1, t2);                          // qmtc2.i vf1, t2
+  c->daddiu(t0, t1, -45);                             // '-' check
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L297 (absolute)
+  c->vitof0(DEST::xyzw, vf1, vf1);
+  if (bc) { goto block_51; }
+
+  // B48:
+  bc = c->sgpr64(t0) == 0;                            // beq t0, r0, L296 ('-')
+  if (bc) { goto block_50; }
+
+  // B49: '+' → vf23.x += vf1.x
+  c->vadd_bc(DEST::x, BC::x, vf23, vf23, vf1);
+  goto block_4;
+
+block_50:
+  // B50 / L296: '-' → vf23.x -= vf1.x
+  c->vsub_bc(DEST::x, BC::x, vf23, vf23, vf1);
+  goto block_4;
+
+block_51:
+  // B51 / L297: absolute → vf23.x = vf1.x
+  c->vadd_bc(DEST::x, BC::x, vf23, vf0, vf1);
+  goto block_4;
+
+block_52:
+  // B52 / L298: "~v"/"~V" — vertical offset.
+  c->mov128_vf_gpr(vf1, t2);
+  c->daddiu(t0, t1, -45);
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L300 (absolute)
+  c->vitof0(DEST::xyzw, vf1, vf1);
+  if (bc) { goto block_56; }
+
+  // B53:
+  bc = c->sgpr64(t0) == 0;                            // beq t0, r0, L299 ('-')
+  if (bc) { goto block_55; }
+
+  // B54: '+' → vf23.y += vf1.x
+  c->vadd_bc(DEST::y, BC::x, vf23, vf23, vf1);
+  goto block_4;
+
+block_55:
+  // B55 / L299: '-' → vf23.y -= vf1.x
+  c->vsub_bc(DEST::y, BC::x, vf23, vf23, vf1);
+  goto block_4;
+
+block_56:
+  // B56 / L300: absolute → vf23.y = vf1.x
+  c->vadd_bc(DEST::y, BC::x, vf23, vf0, vf1);
+  goto block_4;
+
+block_57:
+  // B57 / L301: '~y'/'~Y' — save cursor.
+  c->sqc2(vf23, 496, v1);
+  goto block_4;
+
+block_58:
+  // B58 / L302: '~z'/'~Z' — restore cursor.
+  c->lqc2(vf23, 496, v1);
+  goto block_4;
+
+block_59:
+  // B59 / L303: control char (≤ 3). Set newline-pending (bit 6), fetch
+  // next char, compute cell index, fall into L308 via the common
+  // advance path. Also computes vf1 = vf25 - vf23 in the delay slot
+  // so L308 can test for overflow.
+  c->ori(a1, a1, 64);                                 // set bit 6
+  c->lbu(t0, 4, a0);
+  c->daddiu(a0, a0, 1);
+  c->sll(t1, t0, 4);                                  // cell index
+  c->vsub(DEST::xyzw, vf1, vf25, vf23);
+  goto block_67;                                      // L308
+
+block_60:
+  // B60 / L304: regular printable. Clear newline-pending (bit 6), check CR/LF.
+  c->addiu(t1, r0, -65);                              // -65 = ~64
+  c->and_(a1, a1, t1);                                // clear bit 6
+  c->sll(t1, t0, 4);                                  // cell index
+  c->vsub(DEST::xyzw, vf1, vf25, vf23);
+  c->daddiu(t2, t0, -10);                             // LF?
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L305
+  c->daddiu(t0, t0, -13);                             // CR?
+  if (bc) { goto block_62; }
+
+  // B61:
+  bc = c->sgpr64(t0) != 0;                            // bne t0, r0, L308 (regular glyph)
+  if (bc) { goto block_67; }
+
+block_62:
+  // B62 / L305: CR or LF — end of line. Compute vf1 = vf23 - vf24
+  // (line width from origin). Pick left/center/right by flags 16 / 4
+  // and write the next line's starting-x to justify[a3].
+  c->vsub(DEST::xyzw, vf1, vf23, vf24);
+  c->andi(t0, a1, 16);                                // center flag
+  bc = c->sgpr64(t0) != 0;                            // bne t0, r0, L306
+  c->andi(t0, a1, 4);                                 // right flag (delay slot)
+  if (bc) { goto block_65; }
+
+  // B63:
+  bc = c->sgpr64(t0) != 0;                            // bne t0, r0, L307
+  if (bc) { goto block_66; }
+
+  // B64: left-justify — next line starts at origin; advance justify cursor.
+  //    vf23 = vf0 + vf24  (reset to origin x)
+  //    justify[a3] = vf23 (before the vaddw below — BEWARE delay slot:
+  //                       the sqc2 is the NON-delay instruction that
+  //                       stores the reset vf23; the vaddw adjusts
+  //                       vf23.y AFTER the store)
+  c->vadd_bc(DEST::x, BC::x, vf23, vf0, vf24);        // vaddx.x vf23, vf0, vf24
+  c->sqc2(vf23, 640, a3);                             // store justify[next]
+  c->vadd_bc(DEST::y, BC::w, vf23, vf23, vf15);       // advance y by size3.w
+  c->daddiu(a3, a3, 16);                              // bump cursor
+  goto block_4;
+
+block_65:
+  // B65 / L306: center-justify — start this line at origin-right - line-width.
+  //    vf2 = origin-right (@464)
+  //    vf23.x = vf2.x - vf1.x
+  //    justify[a3] = vf23
+  //    then reset for the NEXT line.
+  c->lqc2(vf2, 464, v1);                              // origin-right
+  c->vsub(DEST::x, vf23, vf2, vf1);
+  c->sqc2(vf23, 640, a3);                             // store current line's start
+  c->vadd_bc(DEST::x, BC::x, vf23, vf0, vf24);        // reset cursor
+  c->vadd_bc(DEST::y, BC::w, vf23, vf23, vf15);       // advance y
+  c->daddiu(a3, a3, 16);
+  goto block_4;
+
+block_66:
+  // B66 / L307: right-justify — same structure but uses origin-center (@480)
+  // and scales vf1.x by vf16.w first.
+  c->lqc2(vf2, 480, v1);                              // origin-center
+  c->vmul_bc(DEST::x, BC::w, vf1, vf1, vf16);         // vf1.x *= vf16.w
+  c->vsub(DEST::x, vf23, vf2, vf1);
+  c->sqc2(vf23, 640, a3);
+  c->vadd_bc(DEST::x, BC::x, vf23, vf0, vf24);
+  c->vadd_bc(DEST::y, BC::w, vf23, vf23, vf15);
+  c->daddiu(a3, a3, 16);
+  goto block_4;
+
+block_67:
+  // B67 / L308: glyph advance. Load glyph vector (st+advance) and check
+  // for max-x overflow.
+  c->addu(t0, t1, a2);                                // t0 = &fontN-table + char*16
+  c->lqc2(vf5, -96, t0);                              // glyph st+advance
+  c->mov128_gpr_vf(t0, vf1);                          // qmfc2.i t0, vf1
+  bc = ((s64)c->sgpr64(t0)) < 0;                      // bltz t0, L311 (end-of-line clamp)
+  c->sra(t0, t0, 31);                                 // (delay slot; not read here)
+  if (bc) { goto block_73; }
+
+  // B68: compute kerned advance (vf19 = vf5 * vf13).
+  c->vmul(DEST::xyzw, vf19, vf5, vf13);
+  c->andi(t0, a1, 2);                                 // kerning?
+  bc = c->sgpr64(t0) == 0;                            // beq t0, r0, L309
+  c->andi(t0, a1, 64);                                // newline-pending?
+  if (bc) { goto block_71; }
+
+  // B69:
+  bc = c->sgpr64(t0) != 0;                            // bne t0, r0, L309
+  if (bc) { goto block_71; }
+
+  // B70: kerned advance: vf23.x += vf19.w
+  c->vadd_bc(DEST::x, BC::w, vf23, vf23, vf19);
+  goto block_72;
+
+block_71:
+  // B71 / L309: fixed advance: vf23.x += vf14.w
+  c->vadd_bc(DEST::x, BC::w, vf23, vf23, vf14);
+
+block_72:
+  // B72 / L310: fall-through back to loop.
+  goto block_4;
+
+block_73:
+  // B73 / L311: end of string. Handle the last line's justify (same
+  // 3-way split: left writes vf23 as-is (after reset to origin x);
+  // center uses origin-right - line-width; right uses origin-center -
+  // line-width*vf16.w).
+  c->vsub(DEST::xyzw, vf1, vf23, vf24);               // vf1 = line width
+  c->andi(a0, a1, 16);                                // center?
+  bc = c->sgpr64(a0) != 0;                            // bne a0, r0, L312
+  c->andi(a0, a1, 4);                                 // right?
+  if (bc) { goto block_76; }
+
+  // B74:
+  bc = c->sgpr64(a0) != 0;                            // bne a0, r0, L313
+  if (bc) { goto block_77; }
+
+  // B75: left-justify last line — store origin x.
+  c->vadd_bc(DEST::x, BC::x, vf23, vf0, vf24);        // reset vf23.x to origin x
+  c->sqc2(vf23, 640, a3);                             // store
+  goto block_78;
+
+block_76:
+  // B76 / L312: center-justify last line.
+  c->lqc2(vf2, 464, v1);                              // origin-right
+  c->vsub(DEST::x, vf23, vf2, vf1);
+  c->sqc2(vf23, 640, a3);
+  goto block_78;
+
+block_77:
+  // B77 / L313: right-justify last line.
+  c->lqc2(vf2, 480, v1);                              // origin-center
+  c->vmul_bc(DEST::x, BC::w, vf1, vf1, vf16);
+  c->vsub(DEST::x, vf23, vf2, vf1);
+  c->sqc2(vf23, 640, a3);
+
+block_78:
+  // B78 / L314: compute return value (vf23 - vf24) and return.
+  c->vsub(DEST::xyzw, vf23, vf23, vf24);
+  c->mov128_gpr_vf(v0, vf23);
+  // jr ra / daddu sp, sp, r0 — no stack to restore (frame size 0).
+  goto end_of_function;
+
+end_of_function:
+  return c->gprs[v0].du64[0];
+}
+
+void link() {
+  cache.font_work = intern_from_c(-1, 0, "*font-work*").c();
+  cache.font12_table = intern_from_c(-1, 0, "*font12-table*").c();
+  cache.font24_table = intern_from_c(-1, 0, "*font24-table*").c();
+  gLinkedFunctionTable.reg("draw-string-init-justify", execute, 1024);
+}
+
+} // namespace draw_string_init_justify
 } // namespace Mips2C::jakx

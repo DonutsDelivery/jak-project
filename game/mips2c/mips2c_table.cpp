@@ -401,6 +401,7 @@ namespace method_21_cloth_system { extern void link(); }
 namespace jakx {
 namespace get_string_length_asm { extern void link(); }
 namespace draw_string_asm_packed { extern void link(); }
+namespace draw_string_init_justify { extern void link(); }
 }
 // clang-format on
 
@@ -687,7 +688,8 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
        // size vectors at 320/336/368/384 (jak3: 208/224/256/272), save slot
        // at 496 (jak3: 464). See game/mips2c/jakx_functions/font.cpp.
        jakx::get_string_length_asm::link,
-       jakx::draw_string_asm_packed::link}},
+       jakx::draw_string_asm_packed::link,
+       jakx::draw_string_init_justify::link}},
      {"texture", {jak3::adgif_shader_texture_with_update::link}},
      {"collide-func",
       {jak3::moving_sphere_triangle_intersect::link, jak3::collide_do_primitives::link}},
