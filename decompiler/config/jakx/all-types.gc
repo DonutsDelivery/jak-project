@@ -2377,7 +2377,7 @@
 (define-extern explosion-spawn-legacy-version function) ;; (function process-drawable type explosion-init-params (pointer process))
 (define-extern explosion-spawn function) ;; (function explosion-init-params process-drawable none)
 (define-extern find-closest-solid-sphere-prim function) ;; (function collide-shape vector collide-spec collide-shape-prim)
-(define-extern *explosion-debug-sphere* object) ;; sphere
+(define-extern *explosion-debug-sphere* sphere) ;; sphere
 (define-extern explosion-handle-touch-with-ccheck function)
 (define-extern explosion-handle-touch-without-ccheck function)
 
@@ -9839,7 +9839,7 @@
 (define-extern disasm-vif-details function) ;; (function symbol (pointer uint8) vif-cmd int symbol)
 (define-extern disasm-vif-tag function) ;; (function (pointer vif-tag) int symbol symbol int)
 (define-extern disasm-dma-tag function) ;; (function dma-tag symbol none)
-(define-extern *dma-disasm* object) ;; symbol
+(define-extern *dma-disasm* symbol) ;; symbol
 (define-extern disasm-dma-list function) ;; (function dma-packet symbol symbol symbol int symbol)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -10012,13 +10012,13 @@
 (define-extern cpad-invalid! function) ;; (function cpad-info cpad-info)
 (define-extern analog-input function) ;; (function int float float float float float)
 (define-extern cpad-set-buzz! function) ;; (function cpad-info int int time-frame none)
-(define-extern *cpad-list* object) ;; cpad-list
-(define-extern *cpad-debug* object) ;; symbol
+(define-extern *cpad-list* cpad-list) ;; cpad-list
+(define-extern *cpad-debug* symbol) ;; symbol
 (define-extern service-cpads function) ;; (function cpad-list)
 (define-extern buzz-stop! function) ;; (function int none)
 (define-extern *mouse* object) ;; mouse-info
 (define-extern service-mouse function) ;; (function none)
-(define-extern *keybd* object) ;; keybd-info
+(define-extern *keybd* keybd-info) ;; keybd-info
 (define-extern service-keybd function) ;; (function none)
 (define-extern *usb-to-ascii-map* object)
 (define-extern *keybd-last-key* object)
@@ -15100,8 +15100,8 @@
   )
 
 
-(define-extern *screen-shot-work* object) ;; screen-shot-work
-(define-extern *image-name* object) ;; string
+(define-extern *screen-shot-work* screen-shot-work) ;; screen-shot-work
+(define-extern *image-name* string) ;; string
 (define-extern *capture-tga-buffer* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -16075,14 +16075,14 @@
   )
 
 
-(define-extern *profile-spec-array* object) ;; (inline-array profile-spec)
+(define-extern *profile-spec-array* (inline-array profile-spec)) ;; (inline-array profile-spec)
 (define-extern *profile-translate-array* array) ;; (pointer uint64)
-(define-extern *profile-work* object) ;; profile-work
-(define-extern *profile-x* object) ;; int
-(define-extern *profile-y* object) ;; int
-(define-extern *profile-w* object) ;; int
-(define-extern *profile-h* object) ;; int
-(define-extern *profile-ticks* object) ;; symbol
+(define-extern *profile-work* profile-work) ;; profile-work
+(define-extern *profile-x* int) ;; int
+(define-extern *profile-y* int) ;; int
+(define-extern *profile-w* int) ;; int
+(define-extern *profile-h* int) ;; int
+(define-extern *profile-ticks* symbol) ;; symbol
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; display                        ;;
@@ -17441,8 +17441,8 @@
   
 
 
-(define-extern *ocean-map* object) ;; ocean-map
-(define-extern *ocean* object) ;; ocean
+(define-extern *ocean-map* ocean-map) ;; ocean-map
+(define-extern *ocean* ocean) ;; ocean
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; car-textures                   ;;
@@ -20701,7 +20701,7 @@
   
 
 
-(define-extern *talker-speech* object) ;; (inline-array talker-speech-class)
+(define-extern *talker-speech* (inline-array talker-speech-class)) ;; (inline-array talker-speech-class)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; speech-h                       ;;
@@ -21803,11 +21803,11 @@
 ;; lights                         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *light-hash-work* object) ;; light-hash-work
+(define-extern *light-hash-work* light-hash-work) ;; light-hash-work
 (define-extern light-slerp function) ;; (function light light light float light)
 (define-extern light-group-slerp function) ;; (function light-group light-group light-group float light-group)
 (define-extern light-group-process! function) ;; (function vu-lights light-group vector vector none)
-(define-extern *default-lights* object) ;; vu-lights
+(define-extern *default-lights* vu-lights) ;; vu-lights
 (define-extern vu-lights-default! function) ;; (function vu-lights vu-lights)
 (define-extern init-light-hash function) ;; (function none)
 (define-extern light-hash-count-items function) ;; (function light-hash light-sphere none)
@@ -30063,13 +30063,13 @@
   
 
 
-(define-extern *collide-hit-by-player-list* object) ;; engine
-(define-extern *collide-hit-by-others-list* object) ;; engine
-(define-extern *collide-player-list* object) ;; engine
+(define-extern *collide-hit-by-player-list* engine) ;; engine
+(define-extern *collide-hit-by-others-list* engine) ;; engine
+(define-extern *collide-player-list* engine) ;; engine
 (define-extern *collide-shape-prim-backgnd* collide-shape-prim-mesh) ;; collide-shape-prim-mesh
 (define-extern *collide-shape-prim-water* collide-shape-prim-mesh) ;; collide-shape-prim-mesh
 (define-extern *collide-shape-prim-nav-mesh* collide-shape-prim-mesh)
-(define-extern *collide-rider-pool* object) ;; collide-rider-pool
+(define-extern *collide-rider-pool* collide-rider-pool) ;; collide-rider-pool
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; generic-obs-h                  ;;
@@ -30412,9 +30412,9 @@
   
 
 
-(define-extern *simple-prim-additive* object) ;; gs-alpha
-(define-extern *simple-prim-alpha-blend* object) ;; gs-alpha
-(define-extern *simple-prim-subtractive* object) ;; gs-alpha
+(define-extern *simple-prim-additive* gs-alpha) ;; gs-alpha
+(define-extern *simple-prim-alpha-blend* gs-alpha) ;; gs-alpha
+(define-extern *simple-prim-subtractive* gs-alpha) ;; gs-alpha
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; trajectory-h                   ;;
@@ -32040,7 +32040,7 @@
 
 
 (define-extern shrubbery-login-post-texture function) ;; (function shrubbery none)
-(define-extern *shrub-state* object) ;; int
+(define-extern *shrub-state* int) ;; int
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tie-h                          ;;
@@ -32876,8 +32876,8 @@
   
 
 
-(define-extern *terrain-stats* object) ;; terrain-stats
-(define-extern *collide-stats* object) ;; collide-stats
+(define-extern *terrain-stats* terrain-stats) ;; terrain-stats
+(define-extern *collide-stats* collide-stats) ;; collide-stats
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; entity-h                       ;;
@@ -33858,7 +33858,7 @@
 |#
 
 
-(define-extern *launch-matrix* object) ;; matrix
+(define-extern *launch-matrix* matrix) ;; matrix
 (define-extern compute-rot-in-screenspace function) ;; (function vector float)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -33955,7 +33955,7 @@
   
 
 
-(define-extern *sp-60-hz* object) ;; symbol
+(define-extern *sp-60-hz* symbol) ;; symbol
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; actor-link-h                   ;;
@@ -34004,27 +34004,27 @@
 ;; cam-debug-h                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *redline-table* object) ;; (pointer float)
-(define-extern *redline-index* object) ;; int
+(define-extern *redline-table* (pointer float)) ;; (pointer float)
+(define-extern *redline-index* int) ;; int
 (define-extern float-save-redline function) ;; (function float none)
 (define-extern float-lookup-redline function) ;; (function float float)
-(define-extern *blueline-table* object) ;; (pointer float)
-(define-extern *blueline-index* object) ;; int
+(define-extern *blueline-table* (pointer float)) ;; (pointer float)
+(define-extern *blueline-index* int) ;; int
 (define-extern float-save-blueline function) ;; (function float none)
 (define-extern float-lookup-blueline function) ;; (function float float)
-(define-extern *greenline-table* object) ;; (pointer float)
-(define-extern *greenline-index* object) ;; int
+(define-extern *greenline-table* (pointer float)) ;; (pointer float)
+(define-extern *greenline-index* int) ;; int
 (define-extern float-save-greenline function) ;; (function float none)
 (define-extern float-lookup-greenline function) ;; (function float float)
-(define-extern *yellowline-table* object) ;; (pointer float)
-(define-extern *yellowline-index* object) ;; int
+(define-extern *yellowline-table* (pointer float)) ;; (pointer float)
+(define-extern *yellowline-index* int) ;; int
 (define-extern float-save-yellowline function) ;; (function float none)
 (define-extern float-lookup-yellowline function) ;; (function float float)
-(define-extern *timeplot-table* object) ;; (pointer float)
-(define-extern *timeplot-index* object) ;; int
+(define-extern *timeplot-table* (pointer float)) ;; (pointer float)
+(define-extern *timeplot-index* int) ;; int
 (define-extern float-save-timeplot function) ;; (function float none)
 (define-extern float-lookup-timeplot function) ;; (function float float)
-(define-extern *cam-layout* object) ;; symbol
+(define-extern *cam-layout* symbol) ;; symbol
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; cam-update-h                   ;;
@@ -35072,8 +35072,8 @@
 ;; actor-hash-h                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *actor-list* object) ;; (pointer collide-shape)
-(define-extern *actor-list-length* object) ;; int
+(define-extern *actor-list* (pointer collide-shape)) ;; (pointer collide-shape)
+(define-extern *actor-list-length* int) ;; int
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; fmv-player-h                   ;;
@@ -35321,8 +35321,8 @@
   )
 
 
-(define-extern *ramdisk-rpc* object) ;; rpc-buffer-pair
-(define-extern *current-ramdisk-id* object) ;; int
+(define-extern *ramdisk-rpc* rpc-buffer-pair) ;; rpc-buffer-pair
+(define-extern *current-ramdisk-id* int) ;; int
 (define-extern ramdisk-load function) ;; (function int uint uint pointer int)
 (define-extern ramdisk-sync function) ;; (function none)
 
@@ -35527,7 +35527,7 @@
 (define-extern real-joint-mod-gun-look-at-handler function) ;; (function cspace transformq none :behavior process)
 (define-extern joint-mod-gun-look-at-handler function) ;; (function cspace transformq none :behavior process)
 (define-extern joint-mod-foot-rot-handler function) ;; (function cspace transformq none :behavior process)
-(define-extern last-try-to-look-at-data object) ;; try-to-look-at-info
+(define-extern last-try-to-look-at-data try-to-look-at-info) ;; try-to-look-at-info
 (define-extern joint-mod-look-at-handler function) ;; (function cspace transformq none :behavior process)
 (define-extern joint-mod-world-look-at-handler function) ;; (function cspace transformq none :behavior process)
 (define-extern joint-mod-rotate-handler function) ;; (function cspace transformq none :behavior process)
@@ -35557,7 +35557,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern mem-usage-bsp-tree function) ;; (function bsp-header bsp-node memory-usage-block int none)
-(define-extern *test-shrub* object) ;; int
+(define-extern *test-shrub* int) ;; int
 (define-extern bsp-camera-asm function) ;; (function bsp-header vector none)
 (define-extern print-collide-stats function) ;; (function none)
 (define-extern level-remap-texture function) ;; (function texture-id texture-id)
@@ -35567,9 +35567,9 @@
 ;; subdivide                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *merc-global-stats* object) ;; merc-global-stats
+(define-extern *merc-global-stats* merc-global-stats) ;; merc-global-stats
 (define-extern clear-tr-stat function) ;; (function tr-stat none)
-(define-extern *stat-string-tfrag* object) ;; string
+(define-extern *stat-string-tfrag* string) ;; string
 (define-extern *stat-string-tfrag-scissor* object) ;; string
 (define-extern *stat-string-total* object) ;; string
 (define-extern print-tr-stat function) ;; (function tr-stat string string none)
