@@ -38812,8 +38812,8 @@
 (define-extern move-camera-from-pad function) ;; (function math-camera math-camera)
 (define-extern external-cam-reset! function) ;; (function none)
 (define-extern *start-timer* int) ;; int
-(define-extern *timer-value* object) ;; int
-(define-extern *start-pos* object) ;; vector
+(define-extern *timer-value* int) ;; int
+(define-extern *start-pos* vector) ;; vector
 (define-extern update-camera function) ;; (function symbol)
 (define-extern move-level-by-name function) ;; (function symbol float float float vector)
 (define-extern execute-cam-post-hook-engine function) ;; (function int)
@@ -39034,14 +39034,14 @@
   )
 
 
-(define-extern *camera-layout-blink* object) ;; symbol
+(define-extern *camera-layout-blink* symbol) ;; symbol
 (define-extern *CAM_LAYOUT-bank* cam-layout-bank) ;; cam-layout-bank
-(define-extern *camera-layout-message-ypos* object) ;; int
-(define-extern *volume-point-current* object) ;; int
-(define-extern *volume-point* object) ;; vector-array
-(define-extern *volume-normal-current* object) ;; int
-(define-extern *volume-normal* object) ;; vector-array
-(define-extern *volume-descriptor-current* object) ;; int
+(define-extern *camera-layout-message-ypos* int) ;; int
+(define-extern *volume-point-current* int) ;; int
+(define-extern *volume-point* vector-array) ;; vector-array
+(define-extern *volume-normal-current* int) ;; int
+(define-extern *volume-normal* vector-array) ;; vector-array
+(define-extern *volume-descriptor-current* int) ;; int
 (define-extern *volume-descriptor* object) ;; vol-control
 (define-extern cam-layout-print function) ;; (function int int string pointer)
 (define-extern cam-layout-intersect-dist function) ;; (function vector vector vector float)
@@ -39059,7 +39059,7 @@
 (define-extern clmf-next-volume function) ;; (function int symbol :behavior cam-layout)
 (define-extern clmf-next-vol-dpad function) ;; (function symbol)
 (define-extern clmf-to-edit-cam function) ;; (function symbol)
-(define-extern *last-cur-entity* object) ;; int
+(define-extern *last-cur-entity* int) ;; int
 (define-extern clmf-next-entity function) ;; (function int symbol :behavior cam-layout)
 (define-extern clmf-to-spline-attr function) ;; (function symbol)
 (define-extern clmf-to-intro-attr function) ;; (function symbol)
@@ -39115,7 +39115,7 @@
 (define-extern *clm-save-all* clm) ;; clm
 (define-extern *clm-save-one* clm) ;; clm
 (define-extern *clm-select* clm) ;; clm
-(define-extern *clm* object) ;; clm
+(define-extern *clm* clm) ;; clm
 (define-extern cam-layout-do-action function) ;; (function clm-item-action object :behavior cam-layout)
 (define-extern cam-layout-function-call function) ;; (function symbol string int basic symbol :behavior cam-layout)
 (define-extern cam-layout-do-menu function) ;; (function clm symbol :behavior cam-layout)
@@ -39545,10 +39545,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern get-neighboring-faces function) ;; (function vector4w int int int int int)
-(define-extern *normal-array* object) ;; (inline-array vector)
+(define-extern *normal-array* (inline-array vector)) ;; (inline-array vector)
 (define-extern light-vertex function) ;; (function current-position-info vector rgba)
-(define-extern *once* object) ;; symbol
-(define-extern *cloth-fade-alpha* object) ;; gs-alpha
+(define-extern *once* symbol) ;; symbol
+(define-extern *cloth-fade-alpha* gs-alpha) ;; gs-alpha
 (define-extern symbol->cloth-flags function) ;; (function symbol cloth-flag)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -39806,10 +39806,10 @@
 (define-extern command-get-entity function) ;; (function object entity entity)
 (define-extern command-get-trans function) ;; (function object vector vector)
 (define-extern key-assoc function) ;; (function object pair vector4w pair)
-(define-extern *script-form* object) ;; (inline-array script-form)
+(define-extern *script-form* (inline-array script-form)) ;; (inline-array script-form)
 (define-extern level-from-heap function) ;; (function int level)
-(define-extern *syntax-context* object) ;; script-context
-(define-extern *script-context* object) ;; script-context
+(define-extern *syntax-context* script-context) ;; script-context
+(define-extern *script-context* script-context) ;; script-context
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; generic-obs                    ;;
@@ -39980,8 +39980,8 @@
   )
 
 
-(define-extern *lightning-spec-id-table* object) ;; (array lightning-spec)
-(define-extern *lightning-gcf* object) ;; gcf-control
+(define-extern *lightning-spec-id-table* (array lightning-spec)) ;; (array lightning-spec)
+(define-extern *lightning-gcf* gcf-control) ;; gcf-control
 (define-extern lightning-fractal-gen function) ;; (function (inline-array vector) int int float lightning-spec none)
 (define-extern lightning-uniform-gen function) ;; (function (inline-array vector) int int float lightning-spec none)
 (define-extern lightning-trail-uniform-gen function) ;; (function (inline-array vector) (inline-array vector) float int symbol)
@@ -39991,8 +39991,8 @@
 (define-extern lightning-update function) ;; (function lightning-control symbol)
 (define-extern lightning-draw function) ;; (function dma-buffer lightning-control lightning-globals symbol)
 (define-extern lightning-start function) ;; (function float float (pointer process))
-(define-extern *lightning-globals* object) ;; lightning-globals
-(define-extern *lightning* object) ;; symbol
+(define-extern *lightning-globals* lightning-globals) ;; lightning-globals
+(define-extern *lightning* symbol) ;; symbol
 (define-extern lightning-draw-all function) ;; (function none)
 (define-extern unlink-lightning-spec-by-heap function) ;; (function kheap none)
 
@@ -40501,7 +40501,7 @@
 (define-extern *ccro* curve-color-fast) ;; curve-color-fast
 (define-extern *scale-curve* curve2d-fast) ;; curve2d-fast
 (define-extern *scale-range* curve2d-fast) ;; curve2d-fast
-(define-extern *part-function-curve-test-curve-settings* object) ;; particle-curve-settings
+(define-extern *part-function-curve-test-curve-settings* particle-curve-settings) ;; particle-curve-settings
 (define-extern ptest function) ;; (function none)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -40509,8 +40509,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern compute-trail-scaled-t function) ;; (function uint float float float float float vector float)
-(define-extern *dist-cache-array* object) ;; (pointer float)
-(define-extern *total-length* object) ;; float
+(define-extern *dist-cache-array* (pointer float)) ;; (pointer float)
+(define-extern *total-length* float) ;; float
 (define-extern light-trail-tracker-common-post function) ;; (function object :behavior light-trail-tracker)
 (define-extern estimate-light-trail-mem-usage function) ;; (function uint uint int)
 
@@ -40518,9 +40518,9 @@
 ;; lightning-new                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *lightning-alpha-additive* object) ;; gs-alpha
-(define-extern *lightning-alpha-blend* object) ;; gs-alpha
-(define-extern *lightning-alpha-subtractive* object) ;; gs-alpha
+(define-extern *lightning-alpha-additive* gs-alpha) ;; gs-alpha
+(define-extern *lightning-alpha-blend* gs-alpha) ;; gs-alpha
+(define-extern *lightning-alpha-subtractive* gs-alpha) ;; gs-alpha
 (define-extern matrix<-vector-yz2! function) ;; (function matrix vector vector matrix)
 (define-extern choose-nice-perp function) ;; (function vector vector)
 (define-extern lightning-new-tracker-init-by-other function) ;; (function lightning-tracker-init-params object :behavior lightning-new-tracker)
@@ -41004,7 +41004,7 @@
 ;; target-death                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *auto-continue* object) ;; symbol
+(define-extern *auto-continue* symbol) ;; symbol
 (define-extern next-continue function) ;; (function continue-point continue-point)
 (define-extern arrive-at-continue function) ;; (function continue-point none :behavior target)
 (define-extern target-continue-init-art function) ;; (function none :behavior target)
@@ -41023,7 +41023,7 @@
   )
 
 
-(define-extern *beam-info* object) ;; beam-info
+(define-extern *beam-info* beam-info) ;; beam-info
 (define-extern birth-func-setup-beam function) ;; (function int sparticle-cpuinfo sparticle-launchinfo none)
 (define-extern draw-beam function) ;; (function sparticle-launcher vector vector symbol none)
 
@@ -41671,13 +41671,13 @@
 |#
 
 
-(define-extern *debug-nav-control-output* object) ;; symbol
-(define-extern *debug-nav-control* object) ;; symbol
-(define-extern *debug-nav-mesh-output* object) ;; symbol
-(define-extern *debug-nav-ray* object) ;; nav-ray
-(define-extern *debug-ray-offset* object) ;; vector
-(define-extern *debug-offset* object) ;; vector
-(define-extern *nav-mesh-work* object) ;; nav-mesh-work
+(define-extern *debug-nav-control-output* symbol) ;; symbol
+(define-extern *debug-nav-control* symbol) ;; symbol
+(define-extern *debug-nav-mesh-output* symbol) ;; symbol
+(define-extern *debug-nav-ray* nav-ray) ;; nav-ray
+(define-extern *debug-ray-offset* vector) ;; vector
+(define-extern *debug-offset* vector) ;; vector
+(define-extern *nav-mesh-work* nav-mesh-work) ;; nav-mesh-work
 (define-extern *default-nav-mesh* nav-mesh) ;; nav-mesh
 (define-extern *nav-mesh-id-hash* array)
 (define-extern id-hash-find-free-index function)
@@ -41755,8 +41755,8 @@
   :flag-assert         #x9000000c0
   )
 
-(define-extern *nav-triangle-test-count* object) ;; int
-(define-extern *nav-last-triangle-test-count* object) ;; int
+(define-extern *nav-triangle-test-count* int) ;; int
+(define-extern *nav-last-triangle-test-count* int) ;; int
 (define-extern debug-nav-validate-current-poly function) ;; (function nav-mesh nav-poly vector symbol)
 (define-extern debug-report-nav-stats function) ;; (function none)
 (define-extern get-nav-control function) ;; (function process-drawable nav-mesh none)
@@ -41769,9 +41769,9 @@
 (define-extern compute-dir-parm function) ;; (function vector vector vector float)
 (define-extern vector-rotate-y-sincos! function) ;; (function vector vector float float float)
 (define-extern test-xz-point-on-line-segment? function) ;; (function vector vector vector float symbol)
-(define-extern *null-nav-callback-info* object) ;; nav-callback-info
-(define-extern *default-nav-callback-info* object) ;; nav-callback-info
-(define-extern *physics-nav-callback-info* object) ;; nav-callback-info
+(define-extern *null-nav-callback-info* nav-callback-info) ;; nav-callback-info
+(define-extern *default-nav-callback-info* nav-callback-info) ;; nav-callback-info
+(define-extern *physics-nav-callback-info* nav-callback-info) ;; nav-callback-info
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; effect-control                 ;;
@@ -41793,7 +41793,7 @@
 (define-extern *curve-wsplash-alpha* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-wsplash-scale-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-wsplash-scale-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-water-splash-curve-settings* object) ;; particle-curve-settings
+(define-extern *part-water-splash-curve-settings* particle-curve-settings) ;; particle-curve-settings
 (define-extern *range-splash-color* curve-color-fast) ;; curve-color-fast
 (define-extern *range-splash-alpha* curve2d-fast) ;; curve2d-fast
 (define-extern *range-splash-scale-x* curve2d-fast) ;; curve2d-fast
@@ -41801,10 +41801,10 @@
 (define-extern *curve-splash-alpha* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-splash-scale-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-splash-scale-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-water-splash-center-curve-settings* object) ;; particle-curve-settings
+(define-extern *part-water-splash-center-curve-settings* particle-curve-settings) ;; particle-curve-settings
 (define-extern *curve-wsplash-small-scale-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-wsplash-small-scale-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-water-splash-small-curve-settings* object) ;; particle-curve-settings
+(define-extern *part-water-splash-small-curve-settings* particle-curve-settings) ;; particle-curve-settings
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; water                          ;;
@@ -41815,10 +41815,10 @@
 (define-extern check-water-level-drop-and-die-motion function) ;; (function sparticle-system sparticle-cpuinfo vector none)
 (define-extern check-water-level-above-and-die function) ;; (function sparticle-system sparticle-cpuinfo vector none)
 (define-extern check-water-level-drop-motion function) ;; (function sparticle-system sparticle-cpuinfo vector none)
-(define-extern *water-simple-alpha-curve-in* object) ;; curve2d-piecewise
-(define-extern *growing-curve* object) ;; curve2d-piecewise
-(define-extern *water-simple-alpha-curve-fade-out* object) ;; curve2d-piecewise
-(define-extern *color-curve-tan-brown* object) ;; curve-color-piecewise
+(define-extern *water-simple-alpha-curve-in* curve2d-piecewise) ;; curve2d-piecewise
+(define-extern *growing-curve* curve2d-piecewise) ;; curve2d-piecewise
+(define-extern *water-simple-alpha-curve-fade-out* curve2d-piecewise) ;; curve2d-piecewise
+(define-extern *color-curve-tan-brown* curve-color-piecewise) ;; curve-color-piecewise
 (define-extern *water-wake-trail* object) ;; light-trail-composition
 (define-extern part-water-splash-callback function) ;; (function part-tracker none)
 (define-extern splash-spawn function) ;; (function float vector int none)
