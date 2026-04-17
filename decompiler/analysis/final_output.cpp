@@ -608,6 +608,14 @@ std::string write_from_top_level_form(Form* top_form,
           result += write_from_top_level_form(entry.body, dts, file, skip_functions, imports, env);
 
           result += ")\n";
+        } else if (entry.condition->to_string(env) == "#t") {
+          // (if #t BODY) — constant-true wrapper, common around static-data
+          // defines that the compiler emitted as an if-expression. Unwrap the
+          // body and recursively emit it through the same top-level splitter,
+          // so BODY's (set! *sym* ...) matches define_symbol_matcher.
+          something_matched = true;
+          result +=
+              write_from_top_level_form(entry.body, dts, file, skip_functions, imports, env);
         }
       }
     }
