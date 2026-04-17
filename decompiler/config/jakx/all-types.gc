@@ -32417,31 +32417,32 @@
 
 
   
-#|(deftype tfragment (drawable)
-  ((color-index         uint16                        :offset-assert 6)
-   (debug-data          tfragment-debug-data          :offset-assert 8)
-   (color-indices       uint32                        :offset-assert 12)
-   (colors              uint32                        :offset-assert 12)
-   (dma-chain           uint32                      3 :offset-assert 32) ;; guessed by decompiler
-   (dma-common          uint32                        :offset-assert 32)
-   (dma-level-0         uint32                        :offset-assert 32)
-   (dma-base            uint32                        :offset-assert 36)
-   (dma-level-1         uint32                        :offset-assert 40)
-   (dma-qwc             uint8                       4 :offset-assert 44) ;; guessed by decompiler
-   (shader              (inline-array adgif-shader)   :offset-assert 48) ;; guessed by decompiler
-   (num-shaders         uint8                         :offset-assert 52)
-   (num-base-colors     uint8                         :offset-assert 53)
-   (num-level0-colors   uint8                         :offset-assert 54)
-   (num-level1-colors   uint8                         :offset-assert 55)
-   (color-offset        uint8                         :offset-assert 56)
-   (color-count         uint8                         :offset-assert 57)
-   (texture-masks-index uint16                        :offset-assert 58)
-   (generic             generic-tfragment             :offset-assert 60)
+(deftype tfragment (drawable)
+  "A tfrag mesh fragment. This is just references to DMA data, plus some metadata."
+  ((color-index         uint16                        :offset 6)
+   (debug-data          tfragment-debug-data          :offset 8)
+   (color-indices       uint32                        :offset 12)
+   (colors              uint32                        :offset 12)
+   (dma-chain           uint32                      3 :offset 32) ;; guessed by decompiler
+   (dma-common          uint32                        :offset 32)
+   (dma-level-0         uint32                        :offset 32)
+   (dma-base            uint32                        :offset 36)
+   (dma-level-1         uint32                        :offset 40)
+   (dma-qwc             uint8                       4 :offset 44) ;; guessed by decompiler
+   (dma-qwc-word        uint32                        :overlay-at dma-qwc)
+   (shader              (inline-array adgif-shader)   :offset 48) ;; guessed by decompiler
+   (num-shaders         uint8                         :offset 52)
+   (num-base-colors     uint8                         :offset 53)
+   (num-level0-colors   uint8                         :offset 54)
+   (num-level1-colors   uint8                         :offset 55)
+   (color-offset        uint8                         :offset 56)
+   (color-count         uint8                         :offset 57)
+   (texture-masks-index uint16                        :offset 58)
+   (generic             generic-tfragment             :offset 60)
+   (generic-u32         uint32                        :offset 60) ;; added
    )
-  :method-count-assert 17
-  :size-assert         #x40
   :flag-assert         #x1100000040
-  )|#
+  )
   
 
 
@@ -36957,17 +36958,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#|
 (deftype drawable-inline-array-tfrag (drawable-inline-array)
-  ((length  int16              :offset-assert 2)
-   (data    tfragment :dynamic :offset-assert 32) ;; guessed by decompiler
-   (UNKNOWN UNKNOWN            :offset-assert -1) ;; field could not be read.
+  "Array of tfragments"
+  ((data tfragment 1 :inline :offset-assert 32)
+   (pad uint32)
    )
-  :method-count-assert 17
-  :size-assert         #x64
-  :flag-assert         #x1100000064
+  :flag-assert #x1100000064
   )
-|#
 
 
 (define-extern *tfrag-display-stats* symbol) ;; symbol

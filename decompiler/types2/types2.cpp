@@ -684,7 +684,20 @@ end_type_pass:
   std::string error;
   if (!convert_to_old_format(out, function_cache, error, input.func->ir2.env.casts(),
                              input.func->ir2.env.stack_casts(), *input.dts, hit_error)) {
-    lg::print("Failed convert_to_old_format: {}\n", error);
+    // Retry in recovery mode — fill null types with uninitialized.
+    // Lets the top-level function pattern-matcher still split methods/defuns
+    // even when a register's type couldn't be propagated.
+    std::string retry_error;
+    out.op_end_types.clear();
+    out.block_init_types.clear();
+    if (convert_to_old_format(out, function_cache, retry_error, input.func->ir2.env.casts(),
+                              input.func->ir2.env.stack_casts(), *input.dts, true)) {
+      input.func->ir2.env.types_succeeded = true;
+      input.func->warnings.warning(
+          "Type analysis recovered (null→uninitialized): original error was: {}", error);
+    } else {
+      lg::print("Failed convert_to_old_format: {}\n", error);
+    }
   } else {
     input.func->ir2.env.types_succeeded = true;
     auto last_type = out.op_end_types.back().get(Register(Reg::GPR, Reg::V0)).typespec();
