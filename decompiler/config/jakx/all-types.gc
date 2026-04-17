@@ -17375,7 +17375,7 @@
     (ocean-method-17 (_type_ vector ocean-vertex) none) ;; 17
     (ocean-method-18 (_type_ (pointer ocean-colors) (pointer ocean-colors)) int) ;; 18
     (ocean-method-19 (_type_ dma-buffer) none) ;; 19
-    (ocean-method-20 (_type_ dma-buffer) none) ;; 20
+    (ocean-method-20 (_type_ dma-buffer) pointer) ;; 20
     (ocean-method-21 (_type_ float float) float) ;; 21
     (ocean-method-22 (_type_ dma-buffer int) none) ;; 22
     (ocean-method-23 (_type_ dma-buffer int) int) ;; 23
@@ -28605,7 +28605,7 @@
     (process-tree-method-13 () none) ;; 13
     (process-nettable-method-14 () none) ;; 14
     (process-nettable-method-15 () int) ;; 15
-    (process-nettable-method-16 () none) ;; 16
+    (process-nettable-method-16 () int) ;; 16
     (process-nettable-method-17 () int) ;; 17
     (process-nettable-method-18 () none) ;; 18
     (process-nettable-method-19 () none) ;; 19
@@ -28694,7 +28694,7 @@
     (process-drawable-method-45 () none) ;; 45
     (process-drawable-method-46 () none) ;; 46
     (process-drawable-method-47 () symbol) ;; 47
-    (process-drawable-method-48 () none) ;; 48
+    (process-drawable-method-48 () int) ;; 48
     (process-drawable-method-49 () symbol) ;; 49
     )
   (:states
@@ -29009,7 +29009,7 @@
   :flag-assert         #xa000000a8
   ;; field handle is likely a value type.
   (:methods
-    (attack-info-method-9 (_type_ attack-info process-drawable process-drawable) none) ;; 9
+    (attack-info-method-9 (_type_ attack-info process-drawable process-drawable) int) ;; 9
     )
   )
 
@@ -34679,7 +34679,7 @@
     (nav-ray-method-9 (_type_ nav-poly nav-poly vector vector) int) ;; 9 ;; init-ray (guessed)
     (nav-ray-method-10 (_type_ nav-poly nav-poly vector vector) int) ;; 10
     (nav-ray-method-11 (_type_) int) ;; 11
-    (nav-ray-method-12 (_type_) none) ;; 12
+    (nav-ray-method-12 (_type_) int) ;; 12
     )
   )
 
@@ -39677,7 +39677,7 @@
     (cloth-system-method-27 (_type_ vector int int current-position-info) vector) ;; 27
     (cloth-system-method-28 (_type_ int int current-position-info) none) ;; 28
     (cloth-system-method-29 (_type_ int int current-position-info int) uint) ;; 29
-    (cloth-system-method-30 (_type_ int int current-position-info int) none) ;; 30
+    (cloth-system-method-30 (_type_ int int current-position-info int) uint) ;; 30
     (cloth-system-method-31 (_type_ current-position-info) none) ;; 31
     (cloth-system-method-32 (_type_ vector int int current-position-info) none) ;; 32
     (cloth-system-method-33 (_type_ vu-lights) none) ;; 33
@@ -41033,7 +41033,7 @@
     (rigid-body-object-method-80 () int) ;; 80
     (rigid-body-object-method-81 () none) ;; 81
     (rigid-body-object-method-82 () symbol) ;; 82
-    (rigid-body-object-method-83 () none) ;; 83
+    (rigid-body-object-method-83 () symbol) ;; 83
     (rigid-body-object-method-84 () none) ;; 84
     (rigid-body-object-method-85 () int) ;; 85
     (rigid-body-object-method-86 () int) ;; 86
@@ -44323,7 +44323,7 @@
     (vehicle-method-192 (_type_) none) ;; 192
     (vehicle-method-193 (_type_) none) ;; 193
     (vehicle-method-194 (_type_) int) ;; 194
-    (vehicle-method-195 (_type_) none) ;; 195
+    (vehicle-method-195 (_type_) object) ;; 195
     (vehicle-method-196 (_type_) none) ;; 196
     (vehicle-method-197 (_type_) int) ;; 197
     (vehicle-method-198 (_type_) none) ;; 198
@@ -45387,7 +45387,7 @@
     (net-player-method-49 () none) ;; 49
     (net-player-method-50 () none) ;; 50
     (net-player-method-51 () none) ;; 51
-    (net-player-method-52 () none) ;; 52
+    (net-player-method-52 () symbol) ;; 52
     (net-player-method-53 (_type_) none) ;; 53
     (net-player-method-54 () none) ;; 54
     (net-player-method-55 () none) ;; 55
@@ -45878,7 +45878,7 @@
     (net-game-mgr-method-55 () float) ;; 55
     (net-game-mgr-method-56 () none) ;; 56
     (net-game-mgr-method-57 () none) ;; 57
-    (net-game-mgr-method-58 () none) ;; 58
+    (net-game-mgr-method-58 () symbol) ;; 58
     (net-game-mgr-method-59 () int) ;; 59
     (net-game-mgr-method-60 () none) ;; 60
     (net-game-mgr-method-61 () none) ;; 61
