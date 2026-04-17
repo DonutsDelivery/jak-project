@@ -11851,7 +11851,7 @@
   (:methods
     (texture-page-method-9 () none) ;; 9 ;; (remove-data-from-heap (_type_ kheap) _type_)
     (texture-page-method-10 (_type_ int int) int) ;; 10
-    (texture-page-method-11 (_type_ int int) none) ;; 11
+    (texture-page-method-11 (_type_ int int) texture-page) ;; 11
     (texture-page-method-12 (_type_ dma-buffer tex-upload-mode) int) ;; 12
     (texture-page-method-13 (_type_ tex-upload-mode) int) ;; 13
     (texture-page-method-14 () none) ;; 14
@@ -13314,7 +13314,7 @@
     (level-method-24 (_type_) none) ;; 24 ;; (level-method-24 (_type_) none)
     (level-method-25 (_type_) _type_) ;; 25
     (level-method-26 (_type_ symbol) _type_) ;; 26
-    (level-method-27 (_type_) none) ;; 27 ;; (load-common-package (_type_) none)
+    (level-method-27 (_type_) level) ;; 27 ;; (load-common-package (_type_) none)
     (level-method-28 (_type_) none) ;; 28 ;; (init-vis-from-bsp (_type_) none)
     (level-method-29 (_type_) int) ;; 29 ;; (vis-clear (_type_) none)
     )
@@ -17325,7 +17325,7 @@
   :flag-assert         #xb00000034
   (:methods
     (ocean-map-method-9 (_type_) int) ;; 9
-    (ocean-map-method-10 (_type_) none) ;; 10
+    (ocean-map-method-10 (_type_) number) ;; 10
     )
   )
   
@@ -21256,7 +21256,7 @@
   :flag-assert         #xd00000068
   (:methods
     (new (symbol type process-drawable) _type_) ;; 0
-    (reset (_type_) none) ;; 9
+    (reset (_type_) top-anim-joint-control) ;; 9
     (update (_type_) int) ;; 10
     (get-channel (_type_ int) joint-control-channel) ;; 11
     (push-anim-to-targ (_type_ art-joint-anim float int int float float symbol) none) ;; 12
@@ -21766,7 +21766,7 @@
     (lightning-control-method-10 () none) ;; 10 ;; (get-mode (_type_) lightning-mode)
     (lightning-control-method-11 (_type_ int vector) int) ;; 11
     (lightning-control-method-12 (_type_ vector) none) ;; 12
-    (lightning-control-method-13 (_type_ vector) none) ;; 13
+    (lightning-control-method-13 (_type_ vector) vector) ;; 13
     )
   )
 
@@ -30028,7 +30028,7 @@
     (collide-shape-method-51 (_type_ collide-query vector collide-spec float float float) symbol) ;; 51
     (collide-shape-method-52 (_type_ water-info collide-action) water-info) ;; 52
     (collide-shape-method-53 (_type_ (function collide-shape-prim none)) int) ;; 53
-    (collide-shape-method-54 (_type_) none) ;; 54
+    (collide-shape-method-54 (_type_) collide-shape) ;; 54
     )
   )
 
@@ -39675,7 +39675,7 @@
     (cloth-system-method-25 (_type_) int) ;; 25
     (cloth-system-method-26 (_type_) none) ;; 26
     (cloth-system-method-27 (_type_ vector int int current-position-info) vector) ;; 27
-    (cloth-system-method-28 (_type_ int int current-position-info) none) ;; 28
+    (cloth-system-method-28 (_type_ int int current-position-info) uint) ;; 28
     (cloth-system-method-29 (_type_ int int current-position-info int) uint) ;; 29
     (cloth-system-method-30 (_type_ int int current-position-info int) uint) ;; 30
     (cloth-system-method-31 (_type_ current-position-info) none) ;; 31
@@ -40926,7 +40926,7 @@
     (rigid-body-control-method-21 (_type_ vector vector float) int) ;; 21
     (rigid-body-control-method-22 (_type_ vector vector) int) ;; 22
     (rigid-body-control-method-23 (_type_ vector vector) int) ;; 23
-    (rigid-body-control-method-24 (_type_ vector vector) none) ;; 24
+    (rigid-body-control-method-24 (_type_ vector vector) vector) ;; 24
     (rigid-body-control-method-25 (_type_ vector) vector) ;; 25
     (rigid-body-control-method-26 (_type_) none) ;; 26
     (rigid-body-control-method-27 (_type_ rigid-body-info vector quaternion (function rigid-body-object float)) none) ;; 27
@@ -41662,8 +41662,8 @@
   (:methods
     (next-actor (_type_) entity-actor) ;; 27
     (prev-actor (_type_) entity-actor) ;; 28
-    (debug-print (_type_ symbol type) none) ;; 29
-    (toggle-status (_type_ entity-perm-status symbol) none) ;; 30
+    (debug-print (_type_ symbol type) entity-actor) ;; 29
+    (toggle-status (_type_ entity-perm-status symbol) entity-perm-status) ;; 30
     (get-simple-travel-vector (_type_ vector vector vector object float) nav-mesh) ;; 31
     (project-point-to-nav-mesh (_type_ vector vector nav-poly float) nav-poly) ;; 32
     )
@@ -45885,13 +45885,13 @@
     (net-game-mgr-method-62 () symbol) ;; 62
     (net-game-mgr-method-63 () int) ;; 63
     (net-game-mgr-method-64 () int) ;; 64
-    (net-game-mgr-method-65 () none) ;; 65
+    (net-game-mgr-method-65 () string) ;; 65
     (net-game-mgr-method-66 () none) ;; 66
     (net-game-mgr-method-67 () none) ;; 67
     (net-game-mgr-method-68 () none) ;; 68
     (net-game-mgr-method-69 () int) ;; 69
     (net-game-mgr-method-70 () symbol) ;; 70
-    (net-game-mgr-method-71 () none) ;; 71
+    (net-game-mgr-method-71 () texture) ;; 71
     (net-game-mgr-method-72 () symbol) ;; 72
     (net-game-mgr-method-73 () int) ;; 73
     (net-game-mgr-method-74 () int) ;; 74
