@@ -1416,8 +1416,8 @@ class DecompiledDataElement : public FormElement {
   std::optional<LabelInfo> label_info() const { return m_label_info; }
 
  private:
-  bool m_decompiled = false;
-  goos::Object m_description;
+  mutable bool m_decompiled = false;
+  mutable goos::Object m_description;
   DecompilerLabel m_label;
   std::optional<LabelInfo> m_label_info;
 };

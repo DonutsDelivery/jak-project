@@ -4,6 +4,7 @@
 #include <utility>
 
 #include "common/goos/PrettyPrinter.h"
+#include "common/log/log.h"
 #include "common/type_system/TypeSystem.h"
 #include "common/util/print_float.h"
 
@@ -2492,7 +2493,28 @@ DecompiledDataElement::DecompiledDataElement(const DecompilerLabel& label,
                                              const std::optional<LabelInfo>& label_info)
     : m_label(label), m_label_info(label_info) {}
 
-goos::Object DecompiledDataElement::to_form_internal(const Env&) const {
+goos::Object DecompiledDataElement::to_form_internal(const Env& env) const {
+  if (!m_decompiled && env.file && env.dts) {
+    // Lazy-decompile on first access. insert_static_refs normally calls do_decomp
+    // during analysis, but when that pass threw (e.g. type error deep in a static
+    // structure), it leaves this element with the `<static-data LN>` placeholder
+    // that goalc can't parse. Retry here so the emitted form at least tries to
+    // resolve to valid GOAL syntax.
+    try {
+      if (m_label_info) {
+        m_description =
+            decompile_at_label_with_hint(*m_label_info, m_label, env.file->labels,
+                                         env.file->words_by_seg, env.dts->ts, env.file, env.version);
+      } else {
+        m_description = decompile_at_label_guess_type(m_label, env.file->labels,
+                                                      env.file->words_by_seg, env.dts->ts,
+                                                      env.file, env.version);
+      }
+      m_decompiled = true;
+    } catch (const std::exception&) {
+      // Fall through to placeholder — lazy decomp is best-effort.
+    }
+  }
   if (m_decompiled) {
     return m_description;
   } else {

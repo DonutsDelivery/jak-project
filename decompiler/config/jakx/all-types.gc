@@ -59624,7 +59624,6 @@
 (define-extern nav-mesh-editable object)
 (define-extern nav-mesh-poly-array object)
 (define-extern net-enemy-info object)
-(define-extern net-game-mgr object)
 (define-extern net-game-mgr-rushhour object)
 (define-extern net-latency-metrics-params object)
 (define-extern net-update-conn-errors object)
@@ -59641,11 +59640,8 @@
 (define-extern ripple-globals object)
 (define-extern sabotage-sequence object)
 (define-extern sce-dirent object)
-(define-extern scf-get-volume object)
 (define-extern search-info object)
-(define-extern shadow-vu1-constants object)
 (define-extern shrub-view-data object)
-(define-extern sky-color-day object)
 (define-extern sky-work object)
 (define-extern smoke-particle object)
 (define-extern sparticle-birthinfo object)
@@ -59742,7 +59738,6 @@
 (define-extern shadow-vu1-data object)
 (define-extern sky-sun-data object)
 (define-extern special-intro-hud-view object)
-(define-extern sp-field-init-spec object)
 (define-extern sprite-hvdf-data object)
 (define-extern sprite-vec-data-3d object)
 (define-extern tfrag-data object)
@@ -59750,7 +59745,6 @@
 (define-extern touch-tracker object)
 (define-extern trail-conn-search object)
 (define-extern update-engine-mix-state-work object)
-(define-extern *user* object)
 (define-extern vehicle-hud-view-1 object)
 (define-extern vehicle-suppress-look object)
 (define-extern vehicle-wheel object)
@@ -59788,7 +59782,6 @@
 (define-extern collide-fragment object)
 (define-extern collision-cylinder-array object)
 (define-extern collision-editor-edited-proc object)
-(define-extern drawable-tree-tfrag-trans-shared object)
 (define-extern editable-sample object)
 (define-extern eznet-combination object)
 (define-extern flow-control object)
@@ -59857,7 +59850,6 @@
 (define-extern cty-attack-reset object)
 (define-extern cty-faction-evaluate-commands object)
 (define-extern drawable-inline-array-collide-fragment object)
-(define-extern drawable-tree-tfrag-water-shared object)
 (define-extern editable-light object)
 (define-extern eznet-combination-list object)
 (define-extern hack-line-sphere object)
@@ -59901,7 +59893,6 @@
 ;; Auto-extern batch 6
 (define-extern check-line-spheres-hack-work object)
 (define-extern cloud-vert-array object)
-(define-extern drawable-inline-array-tfrag-trans object)
 (define-extern editable-entity object)
 (define-extern external-camera-controller object)
 (define-extern finish-banner object)
@@ -60493,6 +60484,14 @@
   :method-count-assert 14
   :size-assert         #x90
   :flag-assert         #xe00000090
+  )
+
+;; nav-graph stub — entity-table references it (different from mysql-nav-graph)
+(deftype nav-graph (basic)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
   )
 
 ;; time-of-day-proc stub
