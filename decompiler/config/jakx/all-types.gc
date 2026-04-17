@@ -30026,11 +30026,11 @@
     (collide-shape-method-37 (_type_ vector) int) ;; 37
     (collide-shape-method-38 (_type_) int) ;; 38
     (collide-shape-method-39 (_type_ collide-shape collide-query) symbol) ;; 39
-    (collide-shape-method-40 (_type_ overlaps-others-params) symbol) ;; 40
+    (collide-shape-method-40 (_type_ overlaps-others-params) object) ;; 40
     (collide-shape-method-41 (_type_ attack-info float) vector) ;; 41
     (collide-shape-method-42 (_type_ collide-shape collide-query) symbol) ;; 42
     (collide-shape-method-43 (_type_ pull-rider-info) none) ;; 43
-    (collide-shape-method-44 (_type_) symbol) ;; 44
+    (collide-shape-method-44 (_type_) none) ;; 44
     (collide-shape-method-45 (_type_) collide-spec) ;; 45
     (collide-shape-method-46 (_type_) int) ;; 46
     (collide-shape-method-47 (_type_ collide-spec) int) ;; 47
@@ -30826,18 +30826,12 @@
 
 
   
-#|(deftype collide-frag-vertex (vector)
-  ((data float   4 :offset-assert 0) ;; guessed by decompiler
-   (x    float     :offset-assert 0)
-   (y    float     :offset-assert 4)
-   (z    float     :offset-assert 8)
-   (w    float     :offset-assert 12)
-   (quad uint128   :offset-assert 0)
-   )
+(deftype collide-frag-vertex (vector)
+  ()
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
-  )|#
+  )
   
 
 
@@ -33688,7 +33682,7 @@
   (:methods
     (camera-master-method-14 (_type_ vector) vector) ;; 14
     (camera-master-method-15 (_type_ vector) vector) ;; 15
-    (camera-master-method-16 (_type_ symbol) int) ;; 16
+    (camera-master-method-16 (_type_ symbol) symbol) ;; 16
     (camera-master-method-17 () none) ;; 17
     )
   )
@@ -34408,14 +34402,14 @@
 (deftype hud-in-game-menu-networked-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
 (deftype hud-in-game-menu-networked-view-2 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
 
-#|(deftype hud-map (hud)
+(deftype hud-map (hud)
   ((x float  :offset-assert 6364)
    (y float  :offset-assert 6368)
    )
   :method-count-assert 30
   :size-assert         #x18e4
   :flag-assert         #x1e186018e4
-  )|#
+  )
   
 
 
@@ -45403,7 +45397,7 @@
     (net-player-method-49 () none) ;; 49
     (net-player-method-50 () none) ;; 50
     (net-player-method-51 () none) ;; 51
-    (net-player-method-52 () symbol) ;; 52
+    (net-player-method-52 () none) ;; 52
     (net-player-method-53 (_type_) none) ;; 53
     (net-player-method-54 () none) ;; 54
     (net-player-method-55 () none) ;; 55
@@ -45894,7 +45888,7 @@
     (net-game-mgr-method-55 () float) ;; 55
     (net-game-mgr-method-56 () none) ;; 56
     (net-game-mgr-method-57 () none) ;; 57
-    (net-game-mgr-method-58 () symbol) ;; 58
+    (net-game-mgr-method-58 () none) ;; 58
     (net-game-mgr-method-59 () int) ;; 59
     (net-game-mgr-method-60 () none) ;; 60
     (net-game-mgr-method-61 () none) ;; 61
