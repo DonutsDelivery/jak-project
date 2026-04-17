@@ -30219,7 +30219,7 @@
 
 
   
-#|(deftype lightning-tracker (process)
+(deftype lightning-tracker (process)
   ((root          trsqv                                     :offset-assert 144) ;; guessed by decompiler
    (lightning     lightning-control                         :offset-assert 148) ;; guessed by decompiler
    (callback      (function lightning-tracker none)         :offset-assert 152) ;; guessed by decompiler
@@ -30252,7 +30252,7 @@
     (lightning-tracker-method-16 (_type_) none) ;; 16
     (lightning-tracker-method-17 () none) ;; 17
     )
-  )|#
+  )
   
 
 
