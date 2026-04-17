@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Scan for the static-data decomp bug.
 
-Pattern: `(define *FOO* <static-data LN>)`. goalc parses this as 3 tokens
-(`*FOO*`, `<static-data`, `LN>`) but `define` expects 2 args (name + value),
-so compilation fails with "Got 3 arguments, but expected 2".
+Pattern: `(define *FOO* <static-data-LN>)`. goalc rejects the angle-bracket
+token in expression position. The decompiler currently emits the hyphen form
+`<static-data-LN>` (not the older `<static-data LN>` space form).
 
 Emits counts per file + per symbol, writes summary to latest.json, and
 returns nonzero if the count has GROWN vs the previous snapshot (regression).
@@ -20,7 +20,9 @@ ROOT = Path(__file__).resolve().parents[2]
 DISASM_DIR = ROOT / ".jakx_watch" / "decomp_out" / "jakx"
 LATEST = ROOT / ".jakx_watch" / "history" / "latest.json"
 
-PAT = re.compile(r"^\(define\s+(\*[^*\s]+\*)\s+<static-data\s+(L\d+)>\)", re.M)
+# Matches both hyphen form <static-data-LN> (current emitter) and
+# legacy space form <static-data LN> (now zero hits, kept for historical catch).
+PAT = re.compile(r"^\(define\s+(\*[^*\s]+\*)\s+<static-data[-\s](L\d+)>\)", re.M)
 
 
 def main() -> int:

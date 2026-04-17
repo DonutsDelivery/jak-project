@@ -51,15 +51,20 @@ QUEUE_MD = ROOT / ".jakx_watch" / "cpp_patch_queue.md"
 #   2 — runtime undefined
 #   1 — warning / noise (compiles but degrades downstream tooling)
 PATTERNS: list[tuple[str, int, str, re.Pattern]] = [
+    # Decompiler currently emits <static-data-LN> (hyphen form).
+    # Legacy space form <static-data LN> has 0 hits but kept for historical catch.
     ("static-data-define", 4,
-     "(define *X* <static-data LN>) — goalc reader sees 3 tokens, expects 2",
-     re.compile(r"^\(define\s+\*[^*\s]+\*\s+<static-data\s+L\d+>\)", re.M)),
+     "(define *X* <static-data[-]LN>) — goalc reader rejects angle-bracket token; emitter should emit a quoted label",
+     re.compile(r"^\(define\s+\*[^*\s]+\*\s+<static-data[-\s]L\d+>\)", re.M)),
     ("static-data-set", 4,
-     "(set! X <static-data LN>) — same 3-token bug outside (define)",
-     re.compile(r"\(set!\s+\S+\s+<static-data\s+L\d+>\)")),
+     "(set! X <static-data[-]LN>) — same angle-bracket bug outside (define)",
+     re.compile(r"\(set!\s+\S+\s+<static-data[-\s]L\d+>\)")),
     ("static-data-let", 4,
-     "let-binding (X <static-data LN>) — same root bug in a different context",
-     re.compile(r"\(let\s+\(\(\S+\s+<static-data\s+L\d+>\)")),
+     "let-binding (X <static-data[-]LN>) — same root bug in a let context",
+     re.compile(r"\(let\s+\(\(\S+\s+<static-data[-\s]L\d+>\)")),
+    ("static-data-expr", 4,
+     "<static-data-LN> in any expression position (catch-all for set!/other contexts)",
+     re.compile(r"<static-data-L\d+>")),
     ("link-unknown", 3,
      "<link-unknown NAME> — decomp couldn't resolve a global label",
      re.compile(r"<link-unknown\s+\S+?>")),
