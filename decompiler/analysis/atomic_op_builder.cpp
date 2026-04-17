@@ -1855,8 +1855,13 @@ std::unique_ptr<AtomicOp> convert_5(const Instruction& i0,
       break;
     case GameVersion::Jak2:
     case GameVersion::Jak3:
-    case GameVersion::JakX:
       process_offset = 48;
+      break;
+    case GameVersion::JakX:
+      // jakx's process struct grew — the SUSPEND idiom reads the next-
+      // thread pointer from offset 56 (confirmed in jakx *_ir2.asm:
+      // 'lwu s6, 56(s6) ; mtlo1 s6'), not 48 as jak2/jak3 do.
+      process_offset = 56;
       break;
     default:
       ASSERT(false);
