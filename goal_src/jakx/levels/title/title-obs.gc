@@ -236,6 +236,11 @@
 (defbehavior title-control-init title-control ()
   (stack-size-set! (-> self main-thread) 2048)
   (logclear! (-> self mask) (process-mask freeze pause menu progress actor-pause))
+  ;; og:preserve-this — set no-kill so initialize! 'boot's spawned lambda's
+  ;; (reset-actors 'game) → iterate-process-tree *entity-pool* doesn't
+  ;; deactivate us. Without this, title-control dies on the first kernel
+  ;; dispatch after play and nothing renders the splash.
+  (logior! (-> self mask) (process-mask no-kill))
   (set! (-> self level) (level-get *level* 'title))
   ;; og:preserve-this — guard against level-get returning #f during early bringup
   ;; (title level slot may not be active in *level* yet when we spawn).

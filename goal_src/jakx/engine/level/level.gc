@@ -2914,12 +2914,6 @@
   (when arg1
     (spawn-title-control)
     )
-  ;; Canonical jak3 boot chain, now enabled. Blockers fixed this session:
-  ;;   - open! method body (task-control-h declared slot, no body → null dispatch)
-  ;;   - task-node-reset, update-task-masks, task-node-open! stubs
-  ;;   - entity-perm update method body (ported from jak3 entity.gc:1925)
-  ;;   - minimal start() returning (the-as target #f) (target subsystem deferred)
-  ;; Lambda runs: stop → reset-actors → open! → set-continue! → suspend → start.
   (when arg1
     (initialize! *game-info* 'boot (the-as game-save #f) (the-as string #f) (the-as resetter-spec #f))
     )
