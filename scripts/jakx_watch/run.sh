@@ -169,6 +169,16 @@ echo "" | tee -a "$RUN_LOG"
 echo "-- return-mismatch clustering --" | tee -a "$RUN_LOG"
 python3 scripts/jakx_watch/return_mismatch_scan.py 2>&1 | tee -a "$RUN_LOG" || true
 
+# --- discovery queue (ranked pure-discovery deftypes for new-type work) ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- discovery queue --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/discovery_queue.py 2>&1 | tee -a "$RUN_LOG" || true
+
+# --- mips2c port queue (ranked jak3 mips2c functions by jakx unblock) ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- mips2c queue --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/mips2c_candidates.py 2>&1 | tail -40 | tee -a "$RUN_LOG" || true
+
 # --- auto-seed _REF.gc for newly-real-clean files (no-op if coverage complete) ---
 if [ -f "$ROOT/test/offline/config/jakx/config.jsonc" ]; then
     echo "" | tee -a "$RUN_LOG"

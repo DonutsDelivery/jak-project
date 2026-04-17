@@ -626,6 +626,49 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
             for k, v in top_files[:10]:
                 lines.append(f"    {v:>4}  {k}")
 
+    # ===== optional: discovery queue (pure-discovery deftype work) =====
+    dq = snap.get("discovery_queue")
+    if dq:
+        lines.append("")
+        lines.append("## discovery queue (new deftypes needed)")
+        lines.append(
+            f"  pool: {dq.get('count', 0)} pure-discovery types  ·  "
+            f"full list: .jakx_watch/discovery_queue.md"
+        )
+        top = dq.get("top") or []
+        if top:
+            lines.append("  top 5 by readiness:")
+            for i, e in enumerate(top[:5], 1):
+                pflag = "P✓" if e.get("parent_ok") else "  "
+                lines.append(
+                    f"    {i:>2}. [{pflag}] {e.get('score', 0):>6.2f}  "
+                    f"{e['name']:<30}  {e.get('complexity', '?'):<14}  "
+                    f"prereq={e.get('prereq_count', 0)}  fref={e.get('failing_refs', 0)}"
+                )
+        else:
+            lines.append("  queue empty — all regen types already present in "
+                         "jakx all-types.gc (see activation_queue.md)")
+
+    # ===== optional: mips2c queue (ranked jak3→jakx ports) =====
+    mq = snap.get("mips2c_queue")
+    if mq:
+        lines.append("")
+        lines.append("## mips2c port queue (jak3→jakx function ports)")
+        lines.append(
+            f"  candidates: {mq.get('count', 0)} functions  ·  "
+            f"full list: .jakx_watch/mips2c_queue.md"
+        )
+        top = mq.get("top") or []
+        if top:
+            lines.append("  top 5 by readiness:")
+            for i, e in enumerate(top[:5], 1):
+                sf = "SF" if e.get("has_split_failed") else "  "
+                lines.append(
+                    f"    {i:>2}. [{sf}] {e.get('score', 0):>6.2f}  "
+                    f"{e['fn']:<38}  blocks={e.get('blocks', 0):<3}  "
+                    f"refs={e.get('caller_count', 0):<3}  src={e.get('cpp', '?')}"
+                )
+
     # ===== optional: migration candidates (delete-ready hand-ports) =====
     mc = snap.get("migration_candidates")
     if mc:

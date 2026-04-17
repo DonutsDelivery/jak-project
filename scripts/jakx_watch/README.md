@@ -67,6 +67,16 @@ Per decomp run it tells you:
   decompiled body — fixable by editing the declaration (most common) or the
   body. Top clusters surface types whose `:methods` block can be
   batch-corrected in one edit.
+- `discovery_queue.py` — ranked top-20 PURE-DISCOVERY deftypes (types emitted
+  by regen's new-all-types.gc but absent from jakx in any form — neither
+  active, line-commented, nor block-commented). Per-entry: parent status,
+  dependent-count weighted toward failing files, copy-port complexity (clean
+  copy vs minor/major surgery), parent-first prerequisites. Writes
+  `.jakx_watch/discovery_queue.md`.
+- `mips2c_candidates.py` — writes `.jakx_watch/mips2c_queue.md` with a
+  ranked per-function port list (jak3 fn → missing in jakx_functions/). Shows
+  block count (porting complexity proxy), whether any split-failed caller
+  depends on the function, and caller-file detail for the top-3.
 - `type_ref_finder.py` — triage helper. `--auto` scrapes the FAILED
   status.md banner for the unknown type, then finds every reference
   (LIVE vs commented) in jakx all-types.gc, decomp output, and checks
@@ -102,6 +112,8 @@ python3 scripts/jakx_watch/measure.py \
 - `.jakx_watch/status.md`           — human-readable latest summary
 - `.jakx_watch/activation_queue.md` — ranked queue of activation candidates
 - `.jakx_watch/migration_candidates.md` — ranked hand-ports ready for deletion
+- `.jakx_watch/discovery_queue.md`       — ranked pure-discovery deftype queue
+- `.jakx_watch/mips2c_queue.md`          — ranked jak3→jakx port queue
 - `.jakx_watch/run-TS.log`          — combined stdout+stderr of a run.sh invocation
 - `log/decompiler.*.log`            — native decompiler logs (shared dir)
 - `test/decompiler/reference/jakx/` — `_REF.gc` baseline corpus (checked in)
