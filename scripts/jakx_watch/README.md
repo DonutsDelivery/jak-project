@@ -49,6 +49,11 @@ Per decomp run it tells you:
 - `static_data_scan.py` — counts `(define *X* <static-data LN>)` occurrences
   across decomp output. This pattern fails goalc compilation (arg mismatch)
   and is a high-priority C++ decompiler patch target.
+- `migration_candidates.py` — audits `goal_src/jakx/engine/**/*.gc` hand-ports
+  against current decomp state. A hand-port is a deletion candidate when its
+  decomp is real-clean / real-partial. Flags update-from-decomp append-bug
+  risk (hand-port defines named methods whose jakx all-types.gc deftype
+  doesn't declare them). Writes `.jakx_watch/migration_candidates.md`.
 
 ## Usage
 
@@ -73,6 +78,7 @@ python3 scripts/jakx_watch/measure.py \
 - `.jakx_watch/history/latest.json` — most recent snapshot
 - `.jakx_watch/status.md`           — human-readable latest summary
 - `.jakx_watch/activation_queue.md` — ranked queue of activation candidates
+- `.jakx_watch/migration_candidates.md` — ranked hand-ports ready for deletion
 - `.jakx_watch/run-TS.log`          — combined stdout+stderr of a run.sh invocation
 - `log/decompiler.*.log`            — native decompiler logs (shared dir)
 - `test/decompiler/reference/jakx/` — `_REF.gc` baseline corpus (checked in)

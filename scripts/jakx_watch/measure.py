@@ -536,6 +536,37 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
             lines.append(f"    {c:>4}  {name}")
         lines.append("  → decompiler C++ patch target: emit `(define *X* ...)` with 2 args, not 3")
 
+    # ===== optional: migration candidates (delete-ready hand-ports) =====
+    mc = snap.get("migration_candidates")
+    if mc:
+        lines.append("")
+        lines.append("## migration candidates (delete-ready hand-ports)")
+        lines.append(
+            f"  count: {mc.get('count', 0)}  ·  "
+            f"by-cat: {mc.get('by_category', {})}  ·  "
+            f"by-offline-test: {mc.get('by_offline_test', {})}"
+        )
+        risky = mc.get("append_bug_risk_count", 0)
+        if risky:
+            lines.append(
+                f"  append-bug risk: {risky} candidates need method-name hoist "
+                f"into all-types.gc before migration"
+            )
+        top = mc.get("top", [])
+        if top:
+            lines.append("  top 10 by readiness score (higher = more ready):")
+            for i, c in enumerate(top[:10], 1):
+                risk = f" ⚠{c['append_bug_risk_count']}" if c.get("append_bug_risk_count") else ""
+                lines.append(
+                    f"    {i:>2}. {c.get('score', 0):>6.2f}  "
+                    f"[{c.get('category', '?'):>12}]  "
+                    f"[{c.get('offline_test', '?'):>7}]  {c['name']}{risk}"
+                )
+            lines.append(
+                f"    (full list: .jakx_watch/migration_candidates.md — "
+                f"Agents 1/2 consume when between activation batches)"
+            )
+
     # ===== optional: offline-test split (when jakx corpus exists) =====
     ot = snap.get("offline_test")
     if ot:
