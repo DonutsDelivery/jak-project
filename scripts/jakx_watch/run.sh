@@ -102,6 +102,16 @@ if [ "$N_OUT" = "0" ]; then
         echo "Tail of run log ($RUN_LOG):"
         echo ""
         tail -20 "$RUN_LOG" 2>/dev/null
+        echo ""
+        # Auto-triage: if the run log has a "Type X is unknown" banner, surface
+        # the ref finder's output so agents 1/2 see blast radius immediately.
+        FATAL_TYPE=$(grep -oE 'Type [^ ]+ is unknown' "$RUN_LOG" 2>/dev/null | head -1 | awk '{print $2}')
+        if [ -n "$FATAL_TYPE" ]; then
+            echo "## auto-triage: type_ref_finder.py for '$FATAL_TYPE'"
+            echo ""
+            python3 "$ROOT/scripts/jakx_watch/type_ref_finder.py" "$FATAL_TYPE" 2>/dev/null \
+              | head -40
+        fi
         echo '```'
     } > "$STATUS"
     exit 1

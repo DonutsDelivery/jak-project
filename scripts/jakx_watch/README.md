@@ -61,6 +61,11 @@ Per decomp run it tells you:
   into two buckets: `<uninitialized>` (method arg signatures missing in
   all-types.gc) and typed LHS (deftype field missing or type_casts entry
   needed).
+- `type_ref_finder.py` — triage helper. `--auto` scrapes the FAILED
+  status.md banner for the unknown type, then finds every reference
+  (LIVE vs commented) in jakx all-types.gc, decomp output, and checks
+  jak3/jak2 for a copy-port source. Auto-invoked from run.sh when decomp
+  fatal-crashes so agents 1/2 land on triage info, not just a log tail.
 - `migration_candidates.py` — audits `goal_src/jakx/engine/**/*.gc` hand-ports
   against current decomp state. A hand-port is a deletion candidate when its
   decomp is real-clean / real-partial. Flags update-from-decomp append-bug
