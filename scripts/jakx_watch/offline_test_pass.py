@@ -70,9 +70,8 @@ def main() -> int:
     )
     pre_out = preflight.stdout + preflight.stderr
     setup_blocker = None
+    import re as _re
     if "Inconsistent type definition" in pre_out:
-        # Extract the offending type name
-        import re as _re
         m = _re.search(r"Type ([\w<>!?:\-\+\*/=]+) was originally", pre_out)
         tname = m.group(1) if m else "<unknown>"
         setup_blocker = (
@@ -80,8 +79,27 @@ def main() -> int:
             f"Fix: reconcile the defenum/deftype in decompiler/config/jakx/all-types.gc "
             f"with goal_src/jakx/kernel-defs.gc (use the 25-entry version jak3 has)."
         )
+    elif "-- Type Error! --" in pre_out or "Type Error: Type" in pre_out:
+        # Usually "Type X is unknown when parsing decompiler type file:Y:Z"
+        # — a dependency type missing from all-types.gc
+        clean = _re.sub(r"\x1b\[[0-9;]*m", "", pre_out)
+        m = _re.search(
+            r"Type Error: Type ([\w<>!?:\-\+\*/=]+) is unknown[^\n]*\n[^\n]*"
+            r"decompiler type file:([^\s:]+?):(\d+)[^\n]*\n\s*\(([^\n]*)",
+            clean,
+        )
+        if m:
+            unk, fpath, line, form = m.group(1), m.group(2), m.group(3), m.group(4).strip()[:80]
+            setup_blocker = (
+                f"unknown type '{unk}' at {fpath}:{line} (in form: ({form}). "
+                f"Add a deftype / declare-type / define-extern for '{unk}' in all-types.gc."
+            )
+        else:
+            # Fall back: extract just the "Type X is unknown" line.
+            m2 = _re.search(r"(Type Error: Type [\w<>!?:\-\+\*/=]+ is unknown[^\n]*)", clean)
+            setup_blocker = (m2.group(1) if m2
+                             else "Type Error parsing all-types.gc (couldn't parse detail).")
     elif preflight.returncode != 0 and "Compiler Exception" in pre_out:
-        # Any other compiler exception during setup
         setup_blocker = (
             "offline-test compiler setup threw. Last 20 lines of output:\n  "
             + "\n  ".join(pre_out.strip().splitlines()[-20:])
@@ -100,7 +118,14 @@ def main() -> int:
         LATEST.write_text(json.dumps(snap, indent=2))
         return 0
 
-    results = {"green": [], "amber": [], "error": []}
+    results = {"green": [], "amber": [], "amber_reasons": {}}
+    import re as _re
+    # Capture the one-line reason after "-- Compilation Error! --"
+    reason_re = _re.compile(
+        r"-- Compilation Error! --\s*\n\x1b?\[[0-9;]*m?\x1b?\[[0-9;]*m?(.+?)\n", _re.DOTALL
+    )
+    form_re = _re.compile(r"Form:\s*\n\x1b?\[[0-9;]*m?\x1b?\[[0-9;]*m?(.+?)\n", _re.DOTALL)
+
     for name in candidates:
         r = subprocess.run(
             [
@@ -112,13 +137,28 @@ def main() -> int:
             ],
             capture_output=True, text=True, check=False, timeout=120,
         )
+        out = r.stdout + r.stderr
         if r.returncode == 0:
             results["green"].append(name)
-        elif "no reference" in (r.stdout + r.stderr).lower():
-            # skip quietly
+        elif "no reference" in out.lower():
             pass
         else:
             results["amber"].append(name)
+            # Strip ANSI escape sequences, then extract the error reason and offending form.
+            clean = _re.sub(r"\x1b\[[0-9;]*m", "", out)
+            reason = "unknown"
+            form = ""
+            m = _re.search(r"-- Compilation Error! --\s*\n(.+?)\n", clean)
+            if m:
+                reason = m.group(1).strip()
+            m = _re.search(r"Form:\s*\n(.+?)\n", clean)
+            if m:
+                form = m.group(1).strip()
+            elif "diff" in clean.lower() and "---" in clean:
+                # REF mismatch (not compile error): extract the first diff chunk.
+                reason = "REF mismatch (decomp output differs from checked-in _REF.gc)"
+                form = ""
+            results["amber_reasons"][name] = {"reason": reason[:180], "form": form[:120]}
 
     print(f"green  (offline-test passing):  {len(results['green'])}")
     print(f"amber  (decomps, bytecode mismatch): {len(results['amber'])}")
@@ -137,6 +177,7 @@ def main() -> int:
     snap["offline_test"] = {
         "green": results["green"],
         "amber": results["amber"],
+        "amber_reasons": results.get("amber_reasons", {}),
         "candidates": len(candidates),
     }
     LATEST.write_text(json.dumps(snap, indent=2))

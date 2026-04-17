@@ -521,9 +521,29 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
             lines.append(f"  BLOCKED: {ot.get('blocker', 'unknown reason')}")
             lines.append(f"  candidates: {ot.get('candidates')}")
         else:
-            lines.append(f"  green (passing):   {len(ot.get('green', []))}")
-            lines.append(f"  amber (mismatch):  {len(ot.get('amber', []))}")
+            greens = ot.get('green', [])
+            ambers = ot.get('amber', [])
+            lines.append(f"  green (passing):   {len(greens)}")
+            lines.append(f"  amber (mismatch):  {len(ambers)}")
             lines.append(f"  candidates:        {ot.get('candidates')}")
+            if greens:
+                lines.append("  GREEN (shippable — offline-test passes):")
+                for n in greens[:20]:
+                    lines.append(f"    ✓ {n}")
+                if len(greens) > 20:
+                    lines.append(f"    ... +{len(greens) - 20} more")
+            if ambers:
+                lines.append("  AMBER (decomp ok, goalc-compile fails):")
+                reasons = ot.get("amber_reasons", {})
+                for n in ambers[:10]:
+                    r = reasons.get(n, {})
+                    reason = r.get("reason", "unknown")
+                    form = r.get("form", "")
+                    lines.append(f"    ~ {n}: {reason}")
+                    if form:
+                        lines.append(f"        form: {form}")
+                if len(ambers) > 10:
+                    lines.append(f"    ... +{len(ambers) - 10} more")
 
     return "\n".join(lines)
 
