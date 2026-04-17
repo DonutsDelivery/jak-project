@@ -75,11 +75,16 @@ def classify_caller(text: str, err_pos: int) -> tuple[str, str]:
 
 
 def scan_file(path: Path) -> list[tuple[str, str, str, str]]:
-    """Return list of (caller, parent_type, declared, actual)."""
+    """Return list of (caller, parent_type, declared, actual).
+
+    Decompiler WARN format (decompiler/types2/types2.cpp:705) is:
+        "Return type mismatch {last_type} vs {declared}"
+    i.e. group 1 = actual (what body returns), group 2 = declared (:methods).
+    """
     text = path.read_text(errors="replace")
     out = []
     for m in RE_MISMATCH.finditer(text):
-        declared, actual = m.group(1), m.group(2)
+        actual, declared = m.group(1), m.group(2)
         caller, parent = classify_caller(text, m.start())
         out.append((caller, parent, declared, actual))
     return out

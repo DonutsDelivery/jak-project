@@ -97,6 +97,22 @@ def pick_decomp_dir() -> Path:
     return DECOMP_PRIMARY
 
 
+def _strip_diagnostic_comments(text: str) -> str:
+    """Drop `;;`-prefixed lines so we only scan emitted GOAL source.
+
+    Type-propagation diagnostics (`;; ERROR: failed type prop ... <uninitialized>
+    ...`) are comment-lines, not leaked placeholder tokens. Matching them
+    produces false positives that dominate the queue and bury real patches.
+    """
+    out: list[str] = []
+    for line in text.splitlines(keepends=True):
+        stripped = line.lstrip()
+        if stripped.startswith(";;") or stripped.startswith(";"):
+            continue
+        out.append(line)
+    return "".join(out)
+
+
 def scan(decomp_dir: Path) -> dict:
     """Return per-pattern {id: {count, files: Counter, samples}}."""
     results: dict[str, dict] = {
@@ -104,7 +120,7 @@ def scan(decomp_dir: Path) -> dict:
         for pid, sev, desc, _ in PATTERNS
     }
     for fp in sorted(decomp_dir.glob("*_disasm.gc")):
-        text = fp.read_text(errors="replace")
+        text = _strip_diagnostic_comments(fp.read_text(errors="replace"))
         stem = fp.name[: -len("_disasm.gc")]
         for pid, sev, desc, pat in PATTERNS:
             hits = pat.findall(text)
