@@ -1354,12 +1354,28 @@ std::unique_ptr<AtomicOp> convert_dsubu_3(const Instruction& i0,
     auto a = i0.get_src(0).get_reg();
     auto b = i0.get_src(1).get_reg();
     auto dest = i1.get_dst(0).get_reg();
-    ASSERT(i1.get_src(0).is_reg(rs7()));
-    ASSERT(i1.get_src(1).is_imm(true_symbol_offset(version)));
-    ASSERT(i2.get_dst(0).get_reg() == dest);
-    ASSERT(i2.get_src(0).is_reg(rs7()));
-    ASSERT(i2.get_src(1).get_reg() == temp);
-    ASSERT(temp != dest);
+    // Guard against patterns that don't fit the expected triplet shape (e.g. jakx
+    // sometimes emits dsubu/daddiu/movn sequences where movn's test register is
+    // routed through r0 or where temp and dest share the same register). In those
+    // cases, fall back to single-instruction conversion instead of hard-asserting.
+    if (!i1.get_src(0).is_reg(rs7())) {
+      return nullptr;
+    }
+    if (!i1.get_src(1).is_imm(true_symbol_offset(version))) {
+      return nullptr;
+    }
+    if (i2.get_dst(0).get_reg() != dest) {
+      return nullptr;
+    }
+    if (!i2.get_src(0).is_reg(rs7())) {
+      return nullptr;
+    }
+    if (i2.get_src(1).get_reg() != temp) {
+      return nullptr;
+    }
+    if (temp == dest) {
+      return nullptr;
+    }
     auto kind = i2.kind == InstructionKind::MOVN ? IR2_Condition::Kind::EQUAL
                                                  : IR2_Condition::Kind::NOT_EQUAL;
     std::unique_ptr<AtomicOp> result;
