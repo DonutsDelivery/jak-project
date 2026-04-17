@@ -13385,7 +13385,7 @@
     (level-group-method-12 (_type_ symbol symbol) level) ;; 12
     (level-group-method-13 (_type_) int) ;; 13
     (level-group-method-14 (_type_ symbol type string) none) ;; 14
-    (level-group-method-15 (_type_ symbol) none) ;; 15
+    (level-group-method-15 (_type_ symbol) int) ;; 15
     (level-group-method-16 (_type_) int) ;; 16
     (level-group-method-17 (_type_) none) ;; 17
     (level-group-method-18 (_type_) none) ;; 18
@@ -13631,7 +13631,7 @@
   :flag-assert         #xc0000006c
   (:methods
     (draw "Add DMA data to our bucket to draw the filter." (_type_) none) ;; 9
-    (screen-filter-method-10 (_type_ vector vector float bucket-id int int symbol) none) ;; 10
+    (screen-filter-method-10 (_type_ vector vector float bucket-id int int symbol) int) ;; 10
     (disable (_type_) none) ;; 11
     )
   )
@@ -28604,9 +28604,9 @@
     (run-logic? "Should this process be run? Checked by execute-process-tree." (_type_) symbol) ;; 12
     (process-tree-method-13 () none) ;; 13
     (process-nettable-method-14 () none) ;; 14
-    (process-nettable-method-15 () none) ;; 15
+    (process-nettable-method-15 () int) ;; 15
     (process-nettable-method-16 () none) ;; 16
-    (process-nettable-method-17 () none) ;; 17
+    (process-nettable-method-17 () int) ;; 17
     (process-nettable-method-18 () none) ;; 18
     (process-nettable-method-19 () none) ;; 19
     (process-nettable-method-20 () none) ;; 20
@@ -28624,8 +28624,8 @@
     (process-nettable-method-32 () none) ;; 32
     (process-nettable-method-33 () none) ;; 33
     (process-nettable-method-34 () none) ;; 34
-    (process-nettable-method-35 () none) ;; 35
-    (process-nettable-method-36 () none) ;; 36
+    (process-nettable-method-35 () int) ;; 35
+    (process-nettable-method-36 () int) ;; 36
     (process-nettable-method-37 () none) ;; 37
     (process-nettable-method-38 () none) ;; 38
     (process-nettable-method-39 () none) ;; 39
@@ -29460,9 +29460,9 @@
   :size-assert         #xc
   :flag-assert         #xc0000000c
   (:methods
-    (joint-mod-base-method-9 (_type_ process-drawable uint uint16) none) ;; 9 ;; (init (_type_ process-drawable uint joint-mod-base-flags) none)
-    (joint-mod-base-method-10 (_type_) none) ;; 10 ;; (attach-callback (_type_) none)
-    (joint-mod-base-method-11 (_type_) none) ;; 11 ;; (remove-callback (_type_) none)
+    (joint-mod-base-method-9 (_type_ process-drawable uint uint16) int) ;; 9 ;; (init (_type_ process-drawable uint joint-mod-base-flags) none)
+    (joint-mod-base-method-10 (_type_) int) ;; 10 ;; (attach-callback (_type_) none)
+    (joint-mod-base-method-11 (_type_) int) ;; 11 ;; (remove-callback (_type_) none)
     )
   )
 
@@ -33119,10 +33119,10 @@
   :size-assert         #x2804
   :flag-assert         #xf00002804
   (:methods
-    (entity-more-perm-hash-method-9 () none) ;; 9
-    (entity-more-perm-hash-method-10 () none) ;; 10
-    (entity-more-perm-hash-method-11 () none) ;; 11
-    (entity-more-perm-hash-method-12 () none) ;; 12
+    (entity-more-perm-hash-method-9 () int) ;; 9
+    (entity-more-perm-hash-method-10 () int) ;; 10
+    (entity-more-perm-hash-method-11 () int) ;; 11
+    (entity-more-perm-hash-method-12 () int) ;; 12
     (entity-more-perm-hash-method-13 () none) ;; 13
     (entity-more-perm-hash-method-14 () none) ;; 14
     )
@@ -34304,12 +34304,12 @@
     (hud-method-14 (_type_) none) ;; 14
     (hud-method-15 (_type_) none) ;; 15
     (hud-method-16 (_type_) none) ;; 16
-    (hud-method-17 (_type_) none) ;; 17
-    (hud-method-18 (_type_) none) ;; 18
-    (hud-method-19 (_type_) none) ;; 19
-    (hud-method-20 (_type_) none) ;; 20
+    (hud-method-17 (_type_) symbol) ;; 17
+    (hud-method-18 (_type_) symbol) ;; 18
+    (hud-method-19 (_type_) symbol) ;; 19
+    (hud-method-20 (_type_) symbol) ;; 20
     (hud-method-21 (_type_) none) ;; 21
-    (hud-method-22 (_type_) none) ;; 22
+    (hud-method-22 (_type_) symbol) ;; 22
     (hud-method-23 (_type_) none) ;; 23
     (hud-method-24 (_type_) none) ;; 24
     (hud-method-25 (_type_) none) ;; 25
@@ -34676,9 +34676,9 @@
   :size-assert         #x5c
   :flag-assert         #xd0000005c
   (:methods
-    (nav-ray-method-9 (_type_ nav-poly nav-poly vector vector) none) ;; 9 ;; init-ray (guessed)
-    (nav-ray-method-10 (_type_ nav-poly nav-poly vector vector) none) ;; 10
-    (nav-ray-method-11 (_type_) none) ;; 11
+    (nav-ray-method-9 (_type_ nav-poly nav-poly vector vector) int) ;; 9 ;; init-ray (guessed)
+    (nav-ray-method-10 (_type_ nav-poly nav-poly vector vector) int) ;; 10
+    (nav-ray-method-11 (_type_) int) ;; 11
     (nav-ray-method-12 (_type_) none) ;; 12
     )
   )
@@ -34956,8 +34956,8 @@
   :size-assert         #xb0
   :flag-assert         #x39000000b0
   (:methods
-    (nav-state-method-9 (_type_) none) ;; 9 ;; debug-draw
-    (nav-state-method-10 (_type_) none) ;; 10
+    (nav-state-method-9 (_type_) int) ;; 9 ;; debug-draw
+    (nav-state-method-10 (_type_) int) ;; 10
     (nav-state-method-11 (_type_ object) symbol) ;; 11 ;; plan-over-pat1-polys-using-route (nav-gap-info)
     (nav-state-method-12 (_type_ vector) vector) ;; 12 ;; get-velocity
     (nav-state-method-13 (_type_ vector) vector) ;; 13 ;; get-travel
@@ -46827,13 +46827,13 @@
   (:methods
     (eco-mgr-method-42 () none) ;; 42
     (eco-mgr-method-43 () none) ;; 43
-    (eco-mgr-method-44 () none) ;; 44
+    (eco-mgr-method-44 () int) ;; 44
     (eco-mgr-method-45 () none) ;; 45
     (eco-mgr-method-46 () none) ;; 46
     (eco-mgr-method-47 () none) ;; 47
     (eco-mgr-method-48 () none) ;; 48
-    (eco-mgr-method-49 () none) ;; 49
-    (eco-mgr-method-50 () none) ;; 50
+    (eco-mgr-method-49 () int) ;; 49
+    (eco-mgr-method-50 () int) ;; 50
     )
   )
 
