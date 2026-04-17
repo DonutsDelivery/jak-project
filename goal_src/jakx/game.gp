@@ -84,6 +84,10 @@
 ;; minimal TITLE.DGO so play can satisfy its load of the 'title level during early boot
 (cgo-file "title.gd" '())
 
+;; first race-level DGO — atoll. Code objects not yet ported; only geometry/art/textures.
+;; Named ATOLL.DGO (not ATL.DGO) so the level loader finds it by :name 'atoll.
+(cgo-file "atoll.gd" '())
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Groups
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

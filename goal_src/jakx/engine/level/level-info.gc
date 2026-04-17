@@ -20716,3 +20716,58 @@
 (#when PC_PORT
   (cons! *level-load-list* 'test-zone)
   )
+
+;; og:preserve-this first race-track level registered for jakx bringup.
+;; packages '("atl")' tells the loader to pull ATL.DGO (geometry + art + tpages).
+(define atoll
+  (new 'static 'level-load-info
+    :name 'atoll
+    :visname 'atoll-vis
+    :nickname 'atl
+    :dbname 'atoll
+    :taskname 'default
+    :index #x129
+    :master-level #f
+    :packages '()
+    :run-packages '("common")
+    :memory-mode (level-memory-mode large)
+    :music-bank #f
+    :extra-sound-bank #f
+    :mood-func 'init-mood-atoll
+    :special-mood #f
+    :ocean #f
+    :ocean-alpha 1.0
+    :priority 100
+    :draw-priority 10.0
+    :base-task-mask (task-mask task0)
+    :bigmap-id (bigmap-id none)
+    :continues '((new 'static 'continue-point
+        :name "atoll-start"
+        :level 'atoll
+        :trans (static-vectorm 0 10 0)
+        :camera-trans (static-vectorm 0 5 -20)
+        :quat (new 'static 'vector4h :data (new 'static 'array int16 4 0 0 0 #x7fff))
+        :camera-rot (new 'static 'array int16 9 #x7fff 0 0 0 #x7fff 0 0 0 #x7fff)
+        :on-goto #f
+        :vis-nick 'atl
+        :vehicle-type #x1b
+        :want-count 1
+        :want (new 'static 'inline-array level-buffer-state-small 1
+          (new 'static 'level-buffer-state-small :name 'atoll :display? 'display)
+          )
+        :want-sound (new 'static 'array symbol 3 #f #f #f)
+        )
+      )
+    :callback-list '()
+    :borrow #f
+    :bottom-height (meters -150)
+    :fog-height (meters 80)
+    :max-rain 1.0
+    :fog-mult 1.0
+    :mood-range (new 'static 'mood-range :max-cloud 1.0 :min-fog 0.5 :max-fog 1.0)
+    )
+  )
+
+(#when PC_PORT
+  (cons! *level-load-list* 'atoll)
+  )
