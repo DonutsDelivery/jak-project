@@ -43381,6 +43381,7 @@
 ;; rigid-body-surface-h           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(declare-type rigid-body-surface structure)
 
 #|
 (deftype rigid-body-surface (structure)
@@ -44749,16 +44750,17 @@
   ((id    sound-id  :offset-assert 0) ;; guessed by decompiler
    (vol   float     :offset-assert 4)
    (pitch float     :offset-assert 8)
+   (pad   uint32    :offset-assert 12)
    )
   :method-count-assert 9
-  :size-assert         #xc
-  :flag-assert         #x90000000c
+  :size-assert         #x10
+  :flag-assert         #x900000010
   )
 
 
 
   
-#|(deftype vehicle-wheel-state (structure)
+(deftype vehicle-wheel-state (structure)
   ((info             vehicle-wheel-info               :offset-assert 0)
    (flags            uint8                            :offset-assert 4)
    (prev-flags       uint8                            :offset-assert 5)
@@ -44771,7 +44773,7 @@
    (ground-normal    vector                   :inline :offset-assert 96)
    (trans            vector                   :inline :offset-assert 112)
    (quat             quaternion               :inline :offset-assert 128)
-   (trail-pos        vector                   2       :offset-assert 144) ;; guessed by decompiler
+   (trail-pos        vector                   2 :inline :offset-assert 144) ;; guessed by decompiler
    (surface          rigid-body-surface               :offset-assert 176) ;; vehicle-wheel-surface
    (pos              float                            :offset-assert 180)
    (pos2             float                            :offset-assert 184)
@@ -44799,7 +44801,7 @@
   :method-count-assert 9
   :size-assert         #x120
   :flag-assert         #x900000120
-  )|#
+  )
   
 
 
@@ -44843,10 +44845,12 @@
    (weapon-timer            uint64                          :offset-assert 120)
    (weapon-aggression       float                           :offset-assert 128)
    (mode                    uint8                           :offset-assert 132)
+   (pad0                    uint8                           :offset-assert 133)
+   (pad1                    uint16                          :offset-assert 134)
    )
   :method-count-assert 9
-  :size-assert         #x85
-  :flag-assert         #x900000085
+  :size-assert         #x88
+  :flag-assert         #x900000088
   )
 
 
@@ -44854,23 +44858,24 @@
 (deftype wvehicle-engine-loop-state (structure)
   ((id    uint32  :offset-assert 0)
    (index int8    :offset-assert 4)
+   (pad0  uint8   :offset-assert 5)
+   (pad1  uint16  :offset-assert 6)
+   (pad2  uint64  :offset-assert 8)
    )
   :method-count-assert 9
-  :size-assert         #x5
-  :flag-assert         #x900000005
+  :size-assert         #x10
+  :flag-assert         #x900000010
   )
 
 
 
-#|
 (deftype wvehicle-engine-mix-state (structure)
-  ((loops UNKNOWN 2 :offset-assert 0)
+  ((loops wvehicle-engine-loop-state 2 :inline :offset-assert 0)
    )
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
   )
-|#
 
 
 
@@ -44888,20 +44893,18 @@
 
 
 
-#|
 (deftype wvehicle-weapon-sync-blob (structure)
-  ((data              UNKNOWN 4 :offset-assert 0)
-   (wpn-left-type     int8      :offset-assert 0)
-   (wpn-right-type    int8      :offset-assert 1)
-   (wpn-left-powerup  int8      :offset-assert 2)
-   (wpn-right-powerup int8      :offset-assert 3)
-   (blob              int32     :offset-assert 0)
+  ((data              uint8 4   :offset 0)
+   (wpn-left-type     int8      :offset 0)
+   (wpn-right-type    int8      :offset 1)
+   (wpn-left-powerup  int8      :offset 2)
+   (wpn-right-powerup int8      :offset 3)
+   (blob              int32     :offset 0)
    )
   :method-count-assert 9
   :size-assert         #x4
   :flag-assert         #x900000004
   )
-|#
 
 
 
