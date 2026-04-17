@@ -298,6 +298,24 @@
    )
   )
 
+;; og:preserve-this: squad-control method + alert-level helpers — needed by
+;; vehicle-util.gc (vehicle-method-107 / vehicle-method-108). squad-control is
+;; declared above as a basic. The full type lives in jak3's squad-control.gc,
+;; which isn't ported yet. These no-op stubs let the vehicle helpers link; the
+;; code paths only fire for AI-driven vehicles that don't exist in the jakx
+;; boot image.
+(define-extern squad-control-method-18 (function squad-control int process none))
+(defun squad-control-method-18 ((arg0 squad-control) (arg1 int) (arg2 process))
+  0
+  (none)
+  )
+
+(define-extern set-alert-level0 (function squad-control int none))
+(defun set-alert-level0 ((arg0 squad-control) (arg1 int))
+  0
+  (none)
+  )
+
 ;; unlocked-secrets - PC port feature
 (deftype unlocked-secrets (basic)
   ((options basic 32)
