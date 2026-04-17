@@ -423,6 +423,9 @@ namespace cspace_parented_transformq_joint { extern void link(); }
 // sparticle_launcher.cpp port (see game/mips2c/jakx_functions/sparticle_launcher.cpp)
 namespace sparticle_motion_blur { extern void link(); }
 namespace particle_adgif { extern void link(); }
+// particle_curves.cpp port (see game/mips2c/jakx_functions/particle_curves.cpp)
+namespace live_func_curve { extern void link(); }
+namespace birth_func_curve { extern void link(); }
 }
 // clang-format on
 
@@ -721,7 +724,10 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      {"foreground",
       {jak3::foreground_check_longest_edge_asm::link, jak3::foreground_generic_merc::link,
        jak3::foreground_merc::link, jak3::foreground_draw_hud::link}},
-     {"particle-curves", {jak3::live_func_curve::link, jak3::birth_func_curve::link}},
+     // particle-curves — jakx-native ports; structurally identical to jak3
+     // but in jakx namespace so future divergence is localized.
+     // See game/mips2c/jakx_functions/particle_curves.cpp.
+     {"particle-curves", {jakx::live_func_curve::link, jakx::birth_func_curve::link}},
      {"collide-hash",
       {jak3::method_11_collide_hash::link, jak3::method_12_collide_hash::link,
        jak3::fill_bg_using_box_new::link, jak3::fill_bg_using_line_sphere_new::link}},

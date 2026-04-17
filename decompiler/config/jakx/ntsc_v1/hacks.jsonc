@@ -186,8 +186,8 @@
     "generic-warp-envmap-dest",
     "generic-no-light-proc",
     "debug-line-clip?",
-    "live-func-curve",
-    "birth-func-curve",
+    // live-func-curve      — moved to mips2c_functions_by_name (jakx-native port)
+    // birth-func-curve     — moved to mips2c_functions_by_name (jakx-native port)
     "sparticle-motion-blur-dirt",
     "foreground-draw-hud",
     "shadow-execute",
@@ -1741,7 +1741,12 @@
     //     (split-screen camera select) instead of loading *math-camera*.
     //   particle-adgif: structurally identical to jak3; jakx namespace only.
     "sparticle-motion-blur",
-    "particle-adgif"
+    "particle-adgif",
+    // particle-curves — jakx-native ports in
+    // game/mips2c/jakx_functions/particle_curves.cpp. Structurally
+    // identical to jak3; jakx namespace only.
+    "live-func-curve",
+    "birth-func-curve"
     // sky-work methods (17/18/29-35) intentionally LEFT in asm_functions_by_name:
     // they diverge from jak3 and their jakx-native port isn't yet written.
     // Letting mips2c run on them would bind them but with jak3's wrong bodies.
