@@ -97,6 +97,27 @@
     )
   )
 
+(defun font-work-setup-hvdf! ()
+  "GOAL-level stub for the hvdf-setup portion of (method 10 font-context).
+   Real jakx asm (decompiler_out/jakx/font_ir2.asm:2982) populates
+   *font-work* hvdf-offset/shadow/outline from *viewport-array* each time
+   a font-context is applied. Without it, offset 4736 stays zero and
+   mips2c draw-string-asm-packed projects every glyph to y=-2048,
+   off-screen. Until method 10 gets a proper mips2c port, copy
+   *math-camera* hvdf-off into all 6 hvdf slots. Shadow/outline land on
+   the same pixel as the base (no visible shadow/outline effect) but the
+   main glyph lands on-screen."
+  (let ((src (-> *math-camera* hvdf-off)))
+    (vector-copy! (-> *font-work* hvdf-offset) src)
+    (vector-copy! (-> *font-work* hvdf-shadow) src)
+    (vector-copy! (-> *font-work* hvdf-outline0) src)
+    (vector-copy! (-> *font-work* hvdf-outline1) src)
+    (vector-copy! (-> *font-work* hvdf-outline2) src)
+    (vector-copy! (-> *font-work* hvdf-outline3) src)
+    )
+  (none)
+  )
+
 (defun draw-string ((arg0 string) (arg1 dma-buffer) (arg2 font-context))
   "Render `arg0` via the real jakx mips2c draw-string-asm-packed routine.
 
@@ -106,6 +127,7 @@
    effects. The returned uint128 is reinterpreted as draw-string-result
    so callers that read its `length` field (the accumulated x-extent
    as a float in the low 32 bits) fall through correctly."
+  (font-work-setup-hvdf!)
   (set-context! *font-work* arg2)
   (the-as draw-string-result (draw-string-asm-packed arg0 arg1 arg2))
   )
