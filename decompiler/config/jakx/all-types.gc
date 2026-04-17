@@ -21772,24 +21772,24 @@
 
 
   
-#|(deftype lightning-probe-vars (basic)
-  ((src-joint-index uint32                        :offset-assert 4)
-   (next-spawn-time uint64                        :offset-assert 8) ;; time-frame
-   (last-valid-time uint64                        :offset-assert 16) ;; time-frame
-   (point           vector                2       :offset-assert 32) ;; guessed by decompiler
-   (start-pos       vector                :inline :offset-assert 32)
-   (end-pos         vector                :inline :offset-assert 48)
-   (probe-dirs      (inline-array vector)         :offset-assert 64) ;; guessed by decompiler
+(deftype lightning-probe-vars (basic)
+  ((src-joint-index uint32                        :offset 4)
+   (next-spawn-time uint64                        :offset 8)
+   (last-valid-time uint64                        :offset 16)
+   (point           vector                2 :inline :offset 32)
+   (start-pos       vector                :inline :offset 32)
+   (end-pos         vector                :inline :offset 48)
+   (probe-dirs      (inline-array vector)         :offset 64)
    )
   :method-count-assert 9
   :size-assert         #x44
   :flag-assert         #x900000044
-  )|#
+  )
   
 
 
 (define-extern lookup-lightning-spec-by-name function) ;; (function string lightning-spec)
-(define-extern *lightning-probe-vars* object) ;; lightning-probe-vars
+(define-extern *lightning-probe-vars* lightning-probe-vars)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; res                            ;;
