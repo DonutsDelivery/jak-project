@@ -33030,11 +33030,7 @@
 ;;   :flag-assert #x1d0000003c
 ;;   )
 
-;; entity-race-mesh needs entity fully-defined (entity is at line 41593, after this)
-;; (deftype entity-race-mesh (entity)
-;;   ()
-;;   :flag-assert #x1d0000003c
-;;   )
+;; entity-race-mesh now active; moved past entity deftype (~line 41650).
 
 ;; (deftype entity-actor (entity)
 ;;   ()
@@ -41644,6 +41640,13 @@
     (initialize-nav-mesh! "Initialize the nav-mesh in this entity." (_type_) none) ;; 27
     (debug-draw (_type_) none) ;; 28
     )
+  )
+
+(deftype entity-race-mesh (entity)
+  ()
+  :method-count-assert 29
+  :size-assert         #x38
+  :flag-assert         #x1d00000038
   )
 
 (deftype entity-actor (entity)
