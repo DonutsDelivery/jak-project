@@ -28658,6 +28658,7 @@
 (declare-type water-control basic)
 (declare-type carry-info basic)
 (declare-type rigid-body-control basic)
+(declare-type draw-control basic)
 
 (declare-type sparticle-launch-control inline-array-class)
 
@@ -28667,12 +28668,14 @@
   )
 
   
-#|(deftype process-drawable (process-nettable)
+(deftype process-drawable (process-nettable)
   "This is the main base class for in-game objects.
    This handles drawing, collision, animation, navigation, particles, sounds, physics, etc.
    The actual child classes will add most of the functionality, and this just serves as a common
    container for references to the `-control` objects for this object."
-  ((root        trsqv                     :offset-assert 188) ;; guessed by decompiler
+  ((self        process-drawable          :override)
+   (ppointer    (pointer process-drawable) :override)
+   (root        trsqv                     :offset-assert 188) ;; guessed by decompiler
    (node-list   cspace-array              :offset-assert 192) ;; guessed by decompiler
    (draw        draw-control              :offset-assert 196) ;; guessed by decompiler
    (skel        joint-control             :offset-assert 200) ;; guessed by decompiler
@@ -28704,11 +28707,11 @@
     (process-drawable-art-error string) ;; associated process guessed by decompiler, old: (state string process-drawable)
     process-drawable-idle ;; associated process guessed by decompiler, old: (state process-drawable)
     )
-  )|#
+  )
   
 
   
-#|(deftype process-drawable-reserved (process-drawable)
+(deftype process-drawable-reserved (process-drawable)
   "A process drawable with a lot of unused method slots.
    GOAL cannot increase the number of methods at runtime, so, for interactive development, it is useful
    to have a type with a large number of slots which can be turned into real methods without needed to reboot the PS2."
@@ -28916,8 +28919,8 @@
     (process-drawable-reserved-method-246 () none) ;; 246
     (process-drawable-reserved-method-247 () none) ;; 247
     )
-  )|#
-  
+  )
+
 
 (deftype attack-dir-info (structure)
   "Information about the position/direction of an attack."
@@ -30687,8 +30690,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   
-#|(deftype process-focusable (process-drawable)
-  ((focus-status uint64  :offset-assert 248) ;; focus-status
+(deftype process-focusable (process-drawable)
+  ((self         process-focusable :override)
+   (ppointer     (pointer process-focusable) :override)
+   (focus-status uint64  :offset-assert 248) ;; focus-status
    )
   :method-count-assert 59
   :size-assert         #x100
@@ -30704,7 +30709,7 @@
     (process-focusable-method-57 () none) ;; 57
     (process-focusable-method-58 () none) ;; 58
     )
-  )|#
+  )
   
 
 
@@ -31366,10 +31371,25 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   
-#|(deftype target (process-focusable)
-  ()
-  :flag-assert #x3b00700100
-  )|#
+(deftype target (process-focusable)
+  ((self     target            :override)
+   (ppointer (pointer target)  :override)
+   (target-data uint8 592 :offset-assert 256) ;; placeholder to reach size 0x350
+   )
+  :method-count-assert 60
+  :size-assert         #x350
+  :flag-assert         #x3c02c00350
+  (:methods
+    (target-method-59 () none) ;; 59
+    )
+  (:states
+    target-float
+    target-intro
+    target-introb
+    (target-continue continue-point)
+    (target-title symbol)
+    )
+  )
   
 
 
@@ -49267,18 +49287,18 @@
 
 
   
-#|(deftype title-control (process)
-  ((buffer    external-art-buffer 2 :offset-assert 140) ;; guessed by decompiler
-   (want      int32               2 :offset-assert 148) ;; guessed by decompiler
-   (want-name string              2 :offset-assert 156) ;; guessed by decompiler
-   (have      int32               2 :offset-assert 164) ;; guessed by decompiler
-   (draw      int32                 :offset-assert 172)
-   (draw-name string                :offset-assert 176) ;; guessed by decompiler
-   (active    symbol                :offset-assert 180) ;; guessed by decompiler
+(deftype title-control (process)
+  ((buffer    external-art-buffer 2 :offset-assert 144) ;; guessed by decompiler
+   (want      int32               2 :offset-assert 152) ;; guessed by decompiler
+   (want-name string              2 :offset-assert 160) ;; guessed by decompiler
+   (have      int32               2 :offset-assert 168) ;; guessed by decompiler
+   (draw      int32                 :offset-assert 176)
+   (draw-name string                :offset-assert 180) ;; guessed by decompiler
+   (active    symbol                :offset-assert 184) ;; guessed by decompiler
    )
-  :method-count-assert 22
+  :method-count-assert 27
   :size-assert         #xbc
-  :flag-assert         #x16003000bc
+  :flag-assert         #x1b003000bc
   (:methods
     (title-control-method-9 () none) ;; 9
     (title-control-method-10 () none) ;; 10
@@ -49296,7 +49316,7 @@
     splash-screen ;; 20
     thx-dolby ;; 21
     )
-  )|#
+  )
   
 
 
