@@ -211,10 +211,18 @@
       ;; of jak3's progress-pc.gc:288 initialize! call that normally
       ;; happens after a save-file confirmation screen.
       (when (zero? selected)
+        ;; jakx: match jak3 progress-intro-start pattern.
+        ;; Setting (-> *game-info* mode) 'play BEFORE initialize! is what
+        ;; makes initialize!'s big `(case (-> this mode))` fire the 'play
+        ;; branch — which spawns the target/game process, calls set-continue!,
+        ;; and transitions out of title. Without this, initialize! returns
+        ;; harmlessly and wait just falls into sleep-code.
+        (set! (-> *game-info* mode) 'play)
         (initialize! *game-info* 'game
                      (the-as game-save #f)
                      (the-as string #f)
-                     (the-as resetter-spec #f))))
+                     (the-as resetter-spec #f))
+        (set-master-mode 'game)))
     (sleep-code)
     )
   :post (-> (method-of-type title-control startup) post)

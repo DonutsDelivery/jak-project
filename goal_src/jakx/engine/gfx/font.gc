@@ -16,34 +16,111 @@
 
 (def-mips2c draw-string-asm (function string dma-buffer font-context draw-string-result))
 
-;; JAKX: minimal GOAL draw-string that emits one untextured sprite2d per
-;; character. jak3's mips2c draw-string-asm reads jak3 offsets against jakx's
-;; 187-byte font-context and corrupts memory. This implementation stays in
-;; pure GOAL and uses jakx's real font-context fields directly.
+;; JAKX bitmap-font draw-string.
 ;;
-;; It does NOT yet render glyphs — each char becomes a colored rectangle.
-;; Good enough for title-menu visibility pending a real glyph renderer.
+;; jak3's mips2c `draw-string-asm` reads jak3 offsets against jakx's 187-byte
+;; font-context and corrupts memory (session-8 root cause). The real jakx
+;; mips2c is 18k lines of MIPS — too expensive to port for a title menu.
 ;;
-;; See reference_jakx_font_context_layout_differs.md in memory.
+;; Instead, draw glyphs from an embedded 3x5 bitmap font. Each printable
+;; ASCII char is 3 columns × 5 rows × 1 bit; on-pixels emit a small rect
+;; through draw-sprite2d-xy. Font data lives in *jakx-bitmap-font-3x5*.
+;;
+;; Only uppercase ASCII + digits + a few punctuation are encoded. Unknown
+;; chars render as an open rectangle (4 corner pixels).
+;;
+;; Pixel size scales off font-context.scale. This is NOT pixel-accurate to
+;; the PS2 font — it's a legibility substitute until the real glyph renderer
+;; lands.
+(defconstant JAKX-BITMAP-FONT-COLS 3)
+(defconstant JAKX-BITMAP-FONT-ROWS 5)
+
+;; Each entry is 3 bytes (one per column). Each byte has 5 bits active:
+;; bit N = pixel at row N in that column. Index = (char - 32) for chars in
+;; 0x20..0x7F. Lowercase letters fold to uppercase before lookup.
+(define *jakx-bitmap-font-3x5*
+  (new 'static 'array uint8 192
+    ;; 0x20 ' '                  0x21 '!'                   0x22 '"'
+    #x00 #x00 #x00               #x00 #x17 #x00             #x03 #x00 #x03
+    ;; 0x23 '#' (= 3 horiz)      0x24 '$' (= S)             0x25 '%'
+    #x0a #x1f #x0a               #x12 #x15 #x09             #x11 #x04 #x11
+    ;; 0x26 '&'                  0x27 "'"                   0x28 '('
+    #x0a #x15 #x1a               #x00 #x03 #x00             #x0e #x11 #x00
+    ;; 0x29 ')'                  0x2a '*'                   0x2b '+'
+    #x00 #x11 #x0e               #x05 #x02 #x05             #x04 #x0e #x04
+    ;; 0x2c ','                  0x2d '-'                   0x2e '.'
+    #x00 #x18 #x00               #x04 #x04 #x04             #x00 #x10 #x00
+    ;; 0x2f '/'                  0x30 '0'                   0x31 '1'
+    #x18 #x04 #x03               #x1f #x11 #x1f             #x12 #x1f #x10
+    ;; 0x32 '2'                  0x33 '3'                   0x34 '4'
+    #x19 #x15 #x16               #x11 #x15 #x0e             #x07 #x04 #x1f
+    ;; 0x35 '5'                  0x36 '6'                   0x37 '7'
+    #x07 #x15 #x0d               #x0e #x15 #x09             #x19 #x05 #x03
+    ;; 0x38 '8'                  0x39 '9'                   0x3a ':'
+    #x0a #x15 #x0a               #x12 #x15 #x0e             #x00 #x0a #x00
+    ;; 0x3b ';'                  0x3c '<'                   0x3d '='
+    #x00 #x1a #x00               #x04 #x0a #x11             #x0a #x0a #x0a
+    ;; 0x3e '>'                  0x3f '?'                   0x40 '@'
+    #x11 #x0a #x04               #x01 #x15 #x02             #x0e #x15 #x0e
+    ;; 0x41 'A'                  0x42 'B'                   0x43 'C'
+    #x1e #x05 #x1e               #x1f #x15 #x0a             #x0e #x11 #x11
+    ;; 0x44 'D'                  0x45 'E'                   0x46 'F'
+    #x1f #x11 #x0e               #x1f #x15 #x11             #x1f #x05 #x01
+    ;; 0x47 'G'                  0x48 'H'                   0x49 'I'
+    #x0e #x11 #x1d               #x1f #x04 #x1f             #x11 #x1f #x11
+    ;; 0x4a 'J'                  0x4b 'K'                   0x4c 'L'
+    #x08 #x10 #x0f               #x1f #x04 #x11             #x1f #x10 #x10
+    ;; 0x4d 'M'                  0x4e 'N'                   0x4f 'O'
+    #x1f #x06 #x1f               #x1f #x0e #x1f             #x0e #x11 #x0e
+    ;; 0x50 'P'                  0x51 'Q'                   0x52 'R'
+    #x1f #x05 #x02               #x0e #x19 #x16             #x1f #x05 #x1a
+    ;; 0x53 'S'                  0x54 'T'                   0x55 'U'
+    #x12 #x15 #x09               #x01 #x1f #x01             #x1f #x10 #x1f
+    ;; 0x56 'V'                  0x57 'W'                   0x58 'X'
+    #x0f #x10 #x0f               #x1f #x0c #x1f             #x1b #x04 #x1b
+    ;; 0x59 'Y'                  0x5a 'Z'                   0x5b '['
+    #x03 #x1c #x03               #x19 #x15 #x13             #x1f #x11 #x00
+    ;; 0x5c '\'                  0x5d ']'                   0x5e '^'
+    #x03 #x04 #x18               #x00 #x11 #x1f             #x02 #x01 #x02
+    ;; 0x5f '_'                  0x60 '`'                   0x61..unused..
+    #x10 #x10 #x10               #x01 #x02 #x00             #x00 #x00 #x00
+    )
+  )
+
 (defun draw-string ((arg0 string) (arg1 dma-buffer) (arg2 font-context))
+  "Render `arg0` at `arg2 origin` using the embedded 3x5 bitmap font.
+   Returns the original origin quad as the draw-string-result so callers
+   that compute string width from it fall through harmlessly."
   (let* ((ox (the int (-> arg2 origin x)))
          (oy (the int (-> arg2 origin y)))
          (scale (-> arg2 scale))
-         (char-w (max 4 (the int (* 7.0 scale))))
-         (char-h (max 6 (the int (* 10.0 scale))))
-         (spacing (max 1 (the int (* 1.0 scale))))
+         ;; pixel-size = 2..5 depending on font-context scale
+         (pix (max 2 (the int (* 3.0 scale))))
+         (char-gap pix)
+         (char-w (+ (* JAKX-BITMAP-FONT-COLS pix) char-gap))
          (n (length arg0))
          (color (new 'static 'rgba :r #xff :g #xff :b #xff :a #x80))
-         (depth #xffffff)
-         )
-    (dotimes (i n)
-      (draw-sprite2d-xy arg1
-                        (+ ox (* i (+ char-w spacing)))
-                        oy
-                        char-w
-                        char-h
-                        color
-                        depth))
+         (depth #xffffff))
+    (dotimes (ci n)
+      (let* ((raw (the int (-> arg0 data ci)))
+             ;; fold lowercase → uppercase: 'a'..'z' (0x61..0x7a) -> 'A'..'Z'
+             (c (if (and (>= raw #x61) (<= raw #x7a))
+                    (- raw #x20)
+                    raw))
+             ;; only chars 0x20..0x60 have glyphs; others become '?'
+             (idx (if (and (>= c #x20) (<= c #x60))
+                      (- c #x20)
+                      (- #x3f #x20)))
+             (base (* idx JAKX-BITMAP-FONT-COLS))
+             (cx (+ ox (* ci char-w))))
+        (dotimes (col JAKX-BITMAP-FONT-COLS)
+          (let ((bits (the int (-> *jakx-bitmap-font-3x5* (+ base col)))))
+            (dotimes (row JAKX-BITMAP-FONT-ROWS)
+              (when (nonzero? (logand bits (ash 1 row)))
+                (draw-sprite2d-xy arg1
+                                  (+ cx (* col pix))
+                                  (+ oy (* row pix))
+                                  pix pix color depth)))))))
     )
   (the-as draw-string-result (-> arg2 origin quad))
   )

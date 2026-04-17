@@ -161,6 +161,37 @@ u64 CPadGetData(u64 cpad_info) {
     cpad->state = 0;
   }
   cpad->valid = pad_state | 0x80;
+  // og:preserve-this — JAKX_AUTO_START=<frame_n> env-var simulates a
+  // single-frame START button press on pad 0 at the specified frame. Used
+  // by the jakx bringup smoke test to exercise the title→game transition
+  // path without a real controller / keyboard. Only fires once per process.
+  {
+    static bool s_auto_start_cached = false;
+    static int s_auto_start_frame = -1;
+    static int s_cpad_call_counter = 0;
+    static bool s_auto_start_fired = false;
+    if (!s_auto_start_cached) {
+      const char* env = std::getenv("JAKX_AUTO_START");
+      if (env) {
+        s_auto_start_frame = atoi(env);
+      }
+      s_auto_start_cached = true;
+    }
+    if (s_auto_start_frame >= 0 && cpad->number == 0) {
+      s_cpad_call_counter++;
+      if (!s_auto_start_fired && s_cpad_call_counter >= s_auto_start_frame) {
+        // button0 is the raw u16 field that service-cpads feeds into
+        // button0-shadow-abs / button0-abs. Setting bit 3 (pad-buttons:start)
+        // here — BEFORE service-cpads runs on this same frame — gets the
+        // bit into button0-abs[0], and the rel diff (abs[0] & ~abs[1])
+        // produces a one-frame cpad-pressed? hit.
+        cpad->button0 |= (1 << 3);
+        s_auto_start_fired = true;
+        lg::print("JAKX_AUTO_START: injecting START press at cpad call {}\n",
+                  s_cpad_call_counter);
+      }
+    }
+  }
   switch (cpad->state) {
     // case 99: // functional
     default:  // controller is functioning as normal
