@@ -194,12 +194,21 @@
   )
 
 ;; wait reuses startup's :post so the rendering keeps running after go-virtual wait.
+;; Minimal port of jak3 title-obs.gc:550 :code — skips the manipy logo event
+;; hook (we don't spawn manipy in Phase 2) and the dust-storm setting removal.
+;; The real work: suspend-for a bit, then call title-menu. title-menu waits
+;; on *common-text* (now loaded per-frame from display-loop) and handles
+;; START-button → (initialize! *game-info* 'game ...) → go-virtual idle.
 (defstate wait (title-control)
   :virtual #t
   :code (behavior ()
-    (until #f
-      (suspend)
-      )
+    (remove-setting! 'allow-timeout)
+    (remove-setting! 'dialog-volume)
+    (suspend-for (seconds 2))
+    (if (zero? (the-as int (title-menu)))
+        (go-virtual idle)
+        )
+    (sleep-code)
     )
   :post (-> (method-of-type title-control startup) post)
   )
