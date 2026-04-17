@@ -7594,15 +7594,15 @@
   (:methods
     (add-spheres! "Add count spheres." (_type_ (inline-array sphere) int) int) ;; 9
     (add-box! "Expand the box as needed to contain the given box." (_type_ bounding-box) int) ;; 10
-    (add-point! "Expand the box as needed to contain the given point." (_type_ vector) none) ;; 11
+    (add-point! "Expand the box as needed to contain the given point." (_type_ vector) int) ;; 11 — body returns int
     (intersects-line-segment?
       "Check intersection in xz plane, using liang-barsky. Not sure if this actually
        a useful check or not..."
       (_type_ vector vector) symbol) ;; 12
-    (set-from-point-offset! "Set to the smallest box containing arg0, (arg0 + arg1)" (_type_ vector vector) none) ;; 13
+    (set-from-point-offset! "Set to the smallest box containing arg0, (arg0 + arg1)" (_type_ vector vector) int) ;; 13 — body returns int
     (set-from-point-offset-pad! "Set the box to contain arg0, arg0 + offset, with some padding." (_type_ vector vector float) int) ;; 14
-    (set-to-point! "Set the box to be a single point." (_type_ vector) none) ;; 15
-    (set-from-sphere! "Set the box to contain a single sphere." (_type_ sphere) none) ;; 16
+    (set-to-point! "Set the box to be a single point." (_type_ vector) int) ;; 15 — body returns int
+    (set-from-sphere! "Set the box to contain a single sphere." (_type_ sphere) int) ;; 16 — body returns int
     (set-from-spheres!
       "Reset box to hold the given spheres.
        Note: this implementation could be optimized."
