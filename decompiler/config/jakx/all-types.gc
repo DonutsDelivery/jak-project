@@ -13363,6 +13363,7 @@
   )
 
 (define-extern *level* level-group)
+(define-extern *level-type-list* (array type))
 (define-extern *draw-index* int)
 (define-extern *level-index* int)
 (define-extern *city-mode* symbol)
@@ -16003,42 +16004,42 @@
 
 
   
-#|(deftype time-of-day-context (basic)
-  ((interp                 float                  18      :offset-assert 4) ;; guessed by decompiler
-   (current-fog            mood-fog               :inline :offset-assert 80)
-   (current-sky-color      vector                 :inline :offset-assert 128)
-   (current-env-color      vector                 :inline :offset-assert 144)
-   (current-prt-color      vector                 :inline :offset-assert 160)
-   (current-shadow-color   vector                 :inline :offset-assert 176)
-   (light-group            light-group            8       :offset-assert 192) ;; guessed by decompiler
-   (current-clouds         mood-clouds            :inline :offset-assert 1728)
-   (times                  vector                 8       :offset-assert 1744) ;; guessed by decompiler
-   (title-light-group      light-group            :inline :offset-assert 1872)
-   (rim-light-group        light-group            :inline :offset-assert 2064)
-   (front-rear-light-group light-group            :inline :offset-assert 2256)
-   (fog-override           mood-fog               :inline :offset-assert 2448)
-   (filter                 vector                 :inline :offset-assert 2496)
-   (filter-color           vector                 :inline :offset-assert 2512)
-   (time                   float                          :offset-assert 2528)
-   (target-interp          float                          :offset-assert 2532)
-   (erase-color            rgba                           :offset-assert 2536) ;; guessed by decompiler
-   (sky                    symbol                         :offset-assert 2540) ;; guessed by decompiler
-   (special-mood           basic                          :offset-assert 2544)
-   (use-camera-other       basic                          :offset-assert 2548)
-   (title-updated          symbol                         :offset-assert 2552) ;; guessed by decompiler
-   (mode                   time-of-day-palette-id         :offset-assert 2556) ;; guessed by decompiler
-   (override-enable        basic                          :offset-assert 2560)
-   (override-palette       uint32                         :offset-assert 2564)
-   (max-rain               float                          :offset-assert 2568)
-   (exterior-level         basic                          :offset-assert 2572)
-   (ocean-alpha            float                          :offset-assert 2576)
-   (shadow-override        float                          :offset-assert 2580)
-   (fog-override-interp    float                          :offset-assert 2584)
+(deftype time-of-day-context (basic)
+  ((interp                 float                  18      :offset 4)
+   (current-fog            mood-fog               :inline :offset 80)
+   (current-sky-color      vector                 :inline :offset 128)
+   (current-env-color      vector                 :inline :offset 144)
+   (current-prt-color      vector                 :inline :offset 160)
+   (current-shadow-color   vector                 :inline :offset 176)
+   (light-group-arr        light-group            8       :offset 192)
+   (current-clouds         mood-clouds            :inline :offset 1728)
+   (times                  vector                 8       :offset 1744)
+   (title-light-group      light-group            :inline :offset 1872)
+   (rim-light-group        light-group            :inline :offset 2064)
+   (front-rear-light-group light-group            :inline :offset 2256)
+   (fog-override           mood-fog               :inline :offset 2448)
+   (filter                 vector                 :inline :offset 2496)
+   (filter-color           vector                 :inline :offset 2512)
+   (time                   float                          :offset 2528)
+   (target-interp          float                          :offset 2532)
+   (erase-color            rgba                           :offset 2536)
+   (sky                    symbol                         :offset 2540)
+   (special-mood           basic                          :offset 2544)
+   (use-camera-other       basic                          :offset 2548)
+   (title-updated          symbol                         :offset 2552)
+   (mode                   uint32                         :offset 2556) ;; time-of-day-palette-id
+   (override-enable        basic                          :offset 2560)
+   (override-palette       uint32                         :offset 2564)
+   (max-rain               float                          :offset 2568)
+   (exterior-level         basic                          :offset 2572)
+   (ocean-alpha            float                          :offset 2576)
+   (shadow-override        float                          :offset 2580)
+   (fog-override-interp    float                          :offset 2584)
    )
   :method-count-assert 9
   :size-assert         #xa1c
   :flag-assert         #x900000a1c
-  )|#
+  )
   
 
 
@@ -16056,7 +16057,7 @@
 
 
 (define-extern *palette-fade-controls* object) ;; palette-fade-controls
-#|(define-extern *time-of-day-context* time-of-day-context)|# ;; time-of-day-context
+(define-extern *time-of-day-context* time-of-day-context)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; profile                        ;;
@@ -16160,7 +16161,7 @@
 
 
   
-#|(deftype camera-bank (basic)
+(deftype camera-bank (basic)
   ((collide-move-rad        float   :offset-assert 4)
    (joypad                  uint32  :offset-assert 8)
    (min-detectable-velocity float   :offset-assert 12)
@@ -16170,12 +16171,12 @@
    (default-string-max-z    meters  :offset-assert 32)
    (default-string-min-z    meters  :offset-assert 36)
    (default-string-push-z   meters  :offset-assert 40)
-   (default-tilt-adjust     deg     :offset-assert 44) ;; degrees
+   (default-tilt-adjust     float   :offset-assert 44) ;; deg
    )
   :method-count-assert 9
   :size-assert         #x30
   :flag-assert         #x900000030
-  )|#
+  )
   
 
 
@@ -16196,7 +16197,7 @@
   )
 
 
-#|(define-extern *CAMERA-bank* camera-bank)|# ;; camera-bank
+(define-extern *CAMERA-bank* camera-bank)
 (define-extern *CAMERA_MASTER-bank* camera-master-bank) ;; camera-master-bank
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -20870,32 +20871,32 @@
 
 
   
-#|(deftype wind-work (basic)
-  ((wind-array    vector 64      :offset-assert 16) ;; guessed by decompiler
-   (wind-normal   vector :inline :offset-assert 1040)
-   (wind-temp     vector :inline :offset-assert 1056)
-   (wind-force    float  64      :offset-assert 1072) ;; guessed by decompiler
-   (wind-const    vector :inline :offset-assert 1328)
-   (wind-time     uint32         :offset-assert 1344)
-   (wait-to-vu0   uint32         :offset-assert 1348)
-   (wait-to-spr   uint32         :offset-assert 1352)
-   (wait-from-spr uint32         :offset-assert 1356)
-   (spr-index     uint32         :offset-assert 1360)
-   (count         uint32         :offset-assert 1364)
-   (next-count    uint32         :offset-assert 1368)
-   (last-count    uint32         :offset-assert 1372)
-   (to-spr        uint32         :offset-assert 1376)
-   (from-spr      uint32         :offset-assert 1380)
-   (next-mem      uint32         :offset-assert 1384)
-   (last-mem      uint32         :offset-assert 1388)
-   (next-spr      uint32         :offset-assert 1392)
-   (last-spr      uint32         :offset-assert 1396)
-   (to-ptrs       uint32 3       :offset-assert 1400) ;; guessed by decompiler
+(deftype wind-work (basic)
+  ((wind-array    vector 64      :offset 16)
+   (wind-normal   vector :inline :offset 1040)
+   (wind-temp     vector :inline :offset 1056)
+   (wind-force    float  64      :offset 1072)
+   (wind-const    vector :inline :offset 1328)
+   (wind-time     uint32         :offset 1344)
+   (wait-to-vu0   uint32         :offset 1348)
+   (wait-to-spr   uint32         :offset 1352)
+   (wait-from-spr uint32         :offset 1356)
+   (spr-index     uint32         :offset 1360)
+   (count         uint32         :offset 1364)
+   (next-count    uint32         :offset 1368)
+   (last-count    uint32         :offset 1372)
+   (to-spr        uint32         :offset 1376)
+   (from-spr      uint32         :offset 1380)
+   (next-mem      uint32         :offset 1384)
+   (last-mem      uint32         :offset 1388)
+   (next-spr      uint32         :offset 1392)
+   (last-spr      uint32         :offset 1396)
+   (to-ptrs       uint32 3       :offset 1400)
    )
   :method-count-assert 9
   :size-assert         #x584
   :flag-assert         #x900000584
-  )|#
+  )
   
 
 
@@ -21788,7 +21789,7 @@
 
 
 (define-extern lookup-lightning-spec-by-name function) ;; (function string lightning-spec)
-#|(define-extern *lightning-probe-vars* lightning-probe-vars)|# ;; lightning-probe-vars
+(define-extern *lightning-probe-vars* object) ;; lightning-probe-vars
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; res                            ;;
@@ -33265,7 +33266,7 @@
   )
 
 
-#|(define-extern *eye-control-array* eye-control-array)|# ;; eye-control-array
+(define-extern *eye-control-array* object) ;; eye-control-array
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; camera-h                       ;;
@@ -35504,7 +35505,7 @@
 ;; wind-work                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-#|(define-extern *wind-work* wind-work)|# ;; wind-work
+(define-extern *wind-work* wind-work)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wind                           ;;
@@ -40552,7 +40553,7 @@
 
 ;; attackable-hash is already defined!
 
-#|(define-extern *attackable-hash* attackable-hash)|#
+(define-extern *attackable-hash* object) ;; attackable-hash
 (define-extern attackable-hash-copy! function)
 (define-extern attackable-hash-exchange! function)
 (define-extern attackable-hash-update function)
@@ -50726,27 +50727,27 @@
 
 
   
-#|(deftype cam-point-watch-bank (basic)
+(deftype cam-point-watch-bank (basic)
   ((speed     float  :offset-assert 4)
-   (rot-speed deg    :offset-assert 8) ;; degrees
+   (rot-speed float  :offset-assert 8) ;; deg
    )
   :method-count-assert 9
   :size-assert         #xc
   :flag-assert         #x90000000c
-  )|#
+  )
   
 
 
 
   
-#|(deftype cam-free-bank (basic)
+(deftype cam-free-bank (basic)
   ((speed     float  :offset-assert 4)
-   (rot-speed deg    :offset-assert 8) ;; degrees
+   (rot-speed float  :offset-assert 8) ;; deg
    )
   :method-count-assert 9
   :size-assert         #xc
   :flag-assert         #x90000000c
-  )|#
+  )
   
 
 
@@ -50763,9 +50764,9 @@
   )
 
 
-#|(define-extern *CAM_POINT_WATCH-bank* cam-point-watch-bank)|# ;; cam-point-watch-bank
+(define-extern *CAM_POINT_WATCH-bank* cam-point-watch-bank)
 (define-extern cam-point-watch state) ;; (state camera-slave)
-#|(define-extern *CAM_FREE-bank* cam-free-bank)|# ;; cam-free-bank
+(define-extern *CAM_FREE-bank* cam-free-bank)
 (define-extern cam-mouse-input function) ;; (function matrix vector vector object)
 (define-extern cam-free-floating-input function) ;; (function matrix vector vector int int vector)
 (define-extern cam-free-floating-move function) ;; (function matrix vector vector int vector)
@@ -50863,7 +50864,7 @@
 ;; vehicle                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-#|(define-extern *debug-vehicle-work* debug-vehicle-work)|# ;; debug-vehicle-work
+(define-extern *debug-vehicle-work* object) ;; debug-vehicle-work
 (define-extern *tmp-vehicle-info* object)
 (define-extern *tmp-rigid-body-control* object)
 (define-extern *vehicle-shadow-control* shadow-control) ;; shadow-control
