@@ -465,6 +465,9 @@
       (suspend)
       )
     (until #f
+      ;; jakx: manually service the cpad here since display-loop doesn't
+      ;; yet call service-cpads. Without this, cpad button state never updates.
+      (service-cpads)
       (when (not (paused?))
         (cond
           ((and (kiosk?) (or (cpad-pressed? 0 square) (time-elapsed? s5-1 (seconds 60))))

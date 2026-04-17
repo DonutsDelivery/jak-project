@@ -98,6 +98,11 @@
 
 (define-extern gun-trigger-buttons-swap! (function cpad-info none))
 
+;; jakx is a racing game with no guns — stub this to no-op so service-cpads
+;; doesn't null-deref calling an undefined function symbol.
+(defun gun-trigger-buttons-swap! ((obj cpad-info))
+  (none))
+
 ;; DECOMP BEGINS
 
 (deftype scf-time (structure)
