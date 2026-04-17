@@ -49,6 +49,10 @@ Per decomp run it tells you:
 - `static_data_scan.py` — counts `(define *X* <static-data LN>)` occurrences
   across decomp output. This pattern fails goalc compilation (arg mismatch)
   and is a high-priority C++ decompiler patch target.
+- `unknown_call_scan.py` — clusters `;; ERROR: ... Called a function, but we do
+  not know its type` by parent type / method. A type with many clustered errors
+  indicates its `:methods` block in all-types.gc needs better signatures so
+  type-prop can resolve jr-t9 callees.
 - `migration_candidates.py` — audits `goal_src/jakx/engine/**/*.gc` hand-ports
   against current decomp state. A hand-port is a deletion candidate when its
   decomp is real-clean / real-partial. Flags update-from-decomp append-bug

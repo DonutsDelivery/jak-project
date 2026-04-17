@@ -139,6 +139,11 @@ echo "" | tee -a "$RUN_LOG"
 echo "-- migration candidates audit --" | tee -a "$RUN_LOG"
 python3 scripts/jakx_watch/migration_candidates.py 2>&1 | tee -a "$RUN_LOG" || true
 
+# --- unknown-call clustering (which types have methods w/ unknown callees) ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- unknown-call clustering --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/unknown_call_scan.py 2>&1 | tee -a "$RUN_LOG" || true
+
 # --- auto-seed _REF.gc for newly-real-clean files (no-op if coverage complete) ---
 if [ -f "$ROOT/test/offline/config/jakx/config.jsonc" ]; then
     echo "" | tee -a "$RUN_LOG"

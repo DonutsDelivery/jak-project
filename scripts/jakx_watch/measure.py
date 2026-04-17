@@ -536,6 +536,26 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
             lines.append(f"    {c:>4}  {name}")
         lines.append("  → decompiler C++ patch target: emit `(define *X* ...)` with 2 args, not 3")
 
+    # ===== optional: unknown-call clusters =====
+    uc = snap.get("unknown_call_clusters")
+    if uc:
+        lines.append("")
+        lines.append("## unknown-call clusters (methods w/ unknown callees)")
+        lines.append(
+            f"  total: {uc.get('total', 0)} across {uc.get('files', 0)} files  ·  "
+            f"fix signatures in all-types.gc :methods to unblock clusters"
+        )
+        top_parents = uc.get("top_parent_types") or []
+        if top_parents:
+            lines.append("  top 10 parent types (fix deftype :methods → clears N errors):")
+            for k, v in top_parents[:10]:
+                lines.append(f"    {v:>4}  {k}")
+        top_files = uc.get("top_files") or []
+        if top_files:
+            lines.append("  top 10 offender files:")
+            for k, v in top_files[:10]:
+                lines.append(f"    {v:>4}  {k}")
+
     # ===== optional: migration candidates (delete-ready hand-ports) =====
     mc = snap.get("migration_candidates")
     if mc:

@@ -29439,9 +29439,9 @@
   :size-assert         #xc
   :flag-assert         #xc0000000c
   (:methods
-    (joint-mod-base-method-9 () none) ;; 9 ;; (init (_type_ process-drawable uint joint-mod-base-flags) none)
-    (joint-mod-base-method-10 () none) ;; 10 ;; (attach-callback (_type_) none)
-    (joint-mod-base-method-11 () none) ;; 11 ;; (remove-callback (_type_) none)
+    (joint-mod-base-method-9 (_type_ process-drawable uint uint16) none) ;; 9 ;; (init (_type_ process-drawable uint joint-mod-base-flags) none)
+    (joint-mod-base-method-10 (_type_) none) ;; 10 ;; (attach-callback (_type_) none)
+    (joint-mod-base-method-11 (_type_) none) ;; 11 ;; (remove-callback (_type_) none)
     )
   )
 
@@ -29690,12 +29690,12 @@
   :size-assert         #x28
   :flag-assert         #xf00000028
   (:methods
-    (collide-mesh-method-9 () none) ;; 9 ;; (debug-draw-tris (_type_ process-drawable int) none)
-    (collide-mesh-method-10 () none) ;; 10 ;; (overlap-test (_type_ collide-mesh-cache-tri vector) symbol)
-    (collide-mesh-method-11 () none) ;; 11 ;; (should-push-away-test (_type_ collide-mesh-cache-tri collide-tri-result vector float) float)
-    (collide-mesh-method-12 () none) ;; 12 ;; (sphere-on-platform-test (_type_ collide-mesh-cache-tri collide-tri-result vector float) float)
-    (collide-mesh-method-13 () none) ;; 13 ;; (unpack-mesh-to-cache! (_type_ (inline-array collide-mesh-cache-tri) matrix) none)
-    (collide-mesh-method-14 () none) ;; 14 ;; (collide-mesh-math-1 (_type_ object object) none)
+    (collide-mesh-method-9 (_type_ process-drawable int) none) ;; 9 ;; debug-draw-tris
+    (collide-mesh-method-10 (_type_ collide-mesh-cache-tri vector) symbol) ;; 10 ;; overlap-test
+    (collide-mesh-method-11 (_type_ collide-mesh-cache-tri collide-tri-result vector float) float) ;; 11 ;; should-push-away-test
+    (collide-mesh-method-12 (_type_ collide-mesh-cache-tri collide-tri-result vector float) float) ;; 12 ;; sphere-on-platform-test
+    (collide-mesh-method-13 (_type_ (inline-array collide-mesh-cache-tri) matrix) none) ;; 13 ;; unpack-mesh-to-cache!
+    (collide-mesh-method-14 (_type_ object object) none) ;; 14 ;; collide-mesh-math-1
     )
   )
 
@@ -30547,11 +30547,11 @@
   :size-assert         #x40
   :flag-assert         #xe00000040
   (:methods
-    (cubic-curve-method-9 () none) ;; 9 ;; (cubic-curve-method-9 (_type_ vector vector vector vector) none)
-    (cubic-curve-method-10 () none) ;; 10 ;; (cubic-curve-method-10 (_type_ vector float) vector)
-    (cubic-curve-method-11 () none) ;; 11 ;; (cubic-curve-method-11 (_type_ vector float) vector)
-    (cubic-curve-method-12 () none) ;; 12 ;; (cubic-curve-method-12 (_type_ vector float) vector)
-    (cubic-curve-method-13 () none) ;; 13 ;; (debug-draw-curve (_type_) none)
+    (cubic-curve-method-9 (_type_ vector vector vector vector) none) ;; 9
+    (cubic-curve-method-10 (_type_ vector float) vector) ;; 10
+    (cubic-curve-method-11 (_type_ vector float) vector) ;; 11
+    (cubic-curve-method-12 (_type_ vector float) vector) ;; 12
+    (cubic-curve-method-13 (_type_) none) ;; 13 ;; (debug-draw-curve (_type_) none)
     )
   )
 
@@ -34653,10 +34653,10 @@
   :size-assert         #x5c
   :flag-assert         #xd0000005c
   (:methods
-    (nav-ray-method-9 () none) ;; 9
-    (nav-ray-method-10 () none) ;; 10
-    (nav-ray-method-11 () none) ;; 11
-    (nav-ray-method-12 () none) ;; 12
+    (nav-ray-method-9 (_type_ nav-poly nav-poly vector vector) none) ;; 9 ;; init-ray (guessed)
+    (nav-ray-method-10 (_type_ nav-poly nav-poly vector vector) none) ;; 10
+    (nav-ray-method-11 (_type_) none) ;; 11
+    (nav-ray-method-12 (_type_) none) ;; 12
     )
   )
 
@@ -34703,8 +34703,8 @@
   :size-assert         #xa0
   :flag-assert         #xb000000a0
   (:methods
-    (clamp-travel-vector-to-mesh-return-info-method-9 () none) ;; 9
-    (clamp-travel-vector-to-mesh-return-info-method-10 () none) ;; 10
+    (clamp-travel-vector-to-mesh-return-info-method-9 (_type_) none) ;; 9
+    (clamp-travel-vector-to-mesh-return-info-method-10 (_type_) none) ;; 10
     )
   )
 
@@ -34767,44 +34767,44 @@
   :flag-assert         #x2f00000070
   ;; field nav-mesh-flag is likely a value type.
   (:methods
-    (nav-mesh-method-9 () none) ;; 9 ;; (debug-draw (_type_) none)
-    (nav-mesh-method-10 () none) ;; 10 ;; (nav-mesh-method-10 (_type_ vector vector nav-poly) nav-poly)
-    (nav-mesh-method-11 () none) ;; 11 ;; (nav-mesh-method-11 (_type_ vector) nav-poly)
-    (nav-mesh-method-12 () none) ;; 12 ;; (nav-mesh-method-12 (_type_ vector float nav-poly) symbol)
-    (nav-mesh-method-13 () none) ;; 13 ;; (poly-centroid (_type_ nav-poly vector) vector)
-    (nav-mesh-method-14 () none) ;; 14 ;; (poly-centroid-local (_type_ nav-poly vector) vector)
-    (nav-mesh-method-15 () none) ;; 15 ;; (lookup-poly-on-route-to-target (_type_ nav-poly nav-poly) nav-poly)
-    (nav-mesh-method-16 () none) ;; 16 ;; (get-route-portal (_type_ nav-poly nav-poly nav-route-portal) (inline-array nav-vertex))
-    (nav-mesh-method-17 () none) ;; 17 ;; (initialize-mesh! (_type_) none)
-    (nav-mesh-method-18 () none) ;; 18 ;; (advance-ray-to-nearest-poly-edge-or-dest! (_type_ nav-ray) none)
-    (nav-mesh-method-19 () none) ;; 19 ;; (try-move-along-ray (_type_ nav-poly vector vector float) meters)
-    (nav-mesh-method-20 () none) ;; 20 ;; (clamp-vector-to-mesh-cross-gaps (_type_ vector nav-poly vector float symbol clamp-travel-vector-to-mesh-return-info) none)
-    (nav-mesh-method-21 () none) ;; 21 ;; (clamp-vector-to-mesh-no-gaps (_type_ vector nav-poly vector clamp-travel-vector-to-mesh-return-info) none)
-    (nav-mesh-method-22 () none) ;; 22 ;; (set-normals-from-adjacent-bounds (_type_ clamp-travel-vector-to-mesh-return-info) none)
-    (nav-mesh-method-23 () none) ;; 23 ;; (find-adjacent-bounds-one (_type_ vector nav-poly int int) none)
-    (nav-mesh-method-24 () none) ;; 24 ;; (compute-bounding-box-from-vertices (_type_ vector vector) none)
-    (nav-mesh-method-25 () none) ;; 25 ;; (init-from-entity (_type_ entity-nav-mesh) none)
-    (nav-mesh-method-26 () none) ;; 26 ;; (handle-birth (_type_) none)
-    (nav-mesh-method-27 () none) ;; 27 ;; (handle-kill (_type_) none)
-    (nav-mesh-method-28 () none) ;; 28 ;; (update-navigation (_type_) none)
-    (nav-mesh-method-29 () none) ;; 29 ;; (new-nav-control (_type_) nav-control)
-    (nav-mesh-method-30 () none) ;; 30 ;; (remove-nav-control (_type_ nav-control) none)
-    (nav-mesh-method-31 () none) ;; 31 ;; (add-process-drawable-to-nav-mesh (_type_ process-drawable symbol) none)
-    (nav-mesh-method-32 () none) ;; 32 ;; (remove-process-drawable (_type_ process-drawable) none)
-    (nav-mesh-method-33 () none) ;; 33 ;; (change-to (_type_ process-drawable) none)
-    (nav-mesh-method-34 () none) ;; 34 ;; (link-by-id (_type_ uint) symbol)
-    (nav-mesh-method-35 () none) ;; 35 ;; (unlink-by-id (_type_ uint) symbol)
-    (nav-mesh-method-36 () none) ;; 36 ;; (nav-mesh-method-36 (_type_ vector vector float) float)
-    (nav-mesh-method-37 () none) ;; 37 ;; (nav-mesh-method-37 (_type_ vector vector float) float)
-    (nav-mesh-method-38 () none) ;; 38 ;; (nav-mesh-method-38 (_type_ nav-poly) none)
-    (nav-mesh-method-39 () none) ;; 39 ;; (debug-draw-poly (_type_ nav-poly rgba) none)
-    (nav-mesh-method-40 () none) ;; 40 ;; (point-in-poly? (_type_ nav-poly vector) symbol)
-    (nav-mesh-method-41 () none) ;; 41 ;; (nav-mesh-method-41 (_type_ nav-poly vector vector vector (pointer nav-poly)) vector)
-    (nav-mesh-method-42 () none) ;; 42 ;; (closest-point-on-boundary (_type_ nav-poly vector vector) vector)
-    (nav-mesh-method-43 () none) ;; 43 ;; (project-point-onto-plane-of-poly-local (_type_ nav-poly vector vector vector) none)
-    (nav-mesh-method-44 () none) ;; 44 ;; (project-point-into-poly-2d (_type_ nav-poly vector vector) vector)
-    (nav-mesh-method-45 () none) ;; 45 ;; (nav-mesh-method-45 (_type_ nav-poly) nav-poly)
-    (nav-mesh-method-46 () none) ;; 46 ;; (nav-mesh-method-46 (_type_ nav-poly) nav-poly)
+    (nav-mesh-method-9 (_type_) none) ;; 9 ;; debug-draw
+    (nav-mesh-method-10 (_type_ vector vector nav-poly) nav-poly) ;; 10
+    (nav-mesh-method-11 (_type_ vector) nav-poly) ;; 11
+    (nav-mesh-method-12 (_type_ vector float nav-poly) symbol) ;; 12
+    (nav-mesh-method-13 (_type_ nav-poly vector) vector) ;; 13 ;; poly-centroid
+    (nav-mesh-method-14 (_type_ nav-poly vector) vector) ;; 14 ;; poly-centroid-local
+    (nav-mesh-method-15 (_type_ nav-poly nav-poly) nav-poly) ;; 15 ;; lookup-poly-on-route-to-target
+    (nav-mesh-method-16 (_type_ nav-poly nav-poly nav-route-portal) (inline-array nav-vertex)) ;; 16 ;; get-route-portal
+    (nav-mesh-method-17 (_type_) none) ;; 17 ;; initialize-mesh!
+    (nav-mesh-method-18 (_type_ nav-ray) none) ;; 18 ;; advance-ray-to-nearest-poly-edge-or-dest!
+    (nav-mesh-method-19 (_type_ nav-poly vector vector float) meters) ;; 19 ;; try-move-along-ray
+    (nav-mesh-method-20 (_type_ vector nav-poly vector float symbol clamp-travel-vector-to-mesh-return-info) none) ;; 20
+    (nav-mesh-method-21 (_type_ vector nav-poly vector clamp-travel-vector-to-mesh-return-info) none) ;; 21
+    (nav-mesh-method-22 (_type_ clamp-travel-vector-to-mesh-return-info) none) ;; 22
+    (nav-mesh-method-23 (_type_ vector nav-poly int int) none) ;; 23
+    (nav-mesh-method-24 (_type_ vector vector) none) ;; 24
+    (nav-mesh-method-25 (_type_ entity) none) ;; 25 ;; init-from-entity (entity-nav-mesh commented, use entity)
+    (nav-mesh-method-26 (_type_) none) ;; 26 ;; handle-birth
+    (nav-mesh-method-27 (_type_) none) ;; 27 ;; handle-kill
+    (nav-mesh-method-28 (_type_) none) ;; 28 ;; update-navigation
+    (nav-mesh-method-29 (_type_) nav-control) ;; 29 ;; new-nav-control
+    (nav-mesh-method-30 (_type_ nav-control) none) ;; 30 ;; remove-nav-control
+    (nav-mesh-method-31 (_type_ process-drawable symbol) none) ;; 31 ;; add-process-drawable-to-nav-mesh
+    (nav-mesh-method-32 (_type_ process-drawable) none) ;; 32 ;; remove-process-drawable
+    (nav-mesh-method-33 (_type_ process-drawable) none) ;; 33 ;; change-to
+    (nav-mesh-method-34 (_type_ uint) symbol) ;; 34 ;; link-by-id
+    (nav-mesh-method-35 (_type_ uint) symbol) ;; 35 ;; unlink-by-id
+    (nav-mesh-method-36 (_type_ vector vector float) float) ;; 36
+    (nav-mesh-method-37 (_type_ vector vector float) float) ;; 37
+    (nav-mesh-method-38 (_type_ nav-poly) none) ;; 38
+    (nav-mesh-method-39 (_type_ nav-poly rgba) none) ;; 39 ;; debug-draw-poly
+    (nav-mesh-method-40 (_type_ nav-poly vector) symbol) ;; 40 ;; point-in-poly?
+    (nav-mesh-method-41 (_type_ nav-poly vector vector vector (pointer nav-poly)) vector) ;; 41
+    (nav-mesh-method-42 (_type_ nav-poly vector vector) vector) ;; 42 ;; closest-point-on-boundary
+    (nav-mesh-method-43 (_type_ nav-poly vector vector vector) none) ;; 43
+    (nav-mesh-method-44 (_type_ nav-poly vector vector) vector) ;; 44
+    (nav-mesh-method-45 (_type_ nav-poly) nav-poly) ;; 45
+    (nav-mesh-method-46 (_type_ nav-poly) nav-poly) ;; 46
     )
   )
 
@@ -34933,54 +34933,54 @@
   :size-assert         #xb0
   :flag-assert         #x39000000b0
   (:methods
-    (nav-state-method-9 () none) ;; 9 ;; (debug-draw (_type_) none)
-    (nav-state-method-10 () none) ;; 10 ;; (nav-state-method-10 (_type_) none)
-    (nav-state-method-11 () none) ;; 11 ;; (plan-over-pat1-polys-using-route (_type_ nav-gap-info) symbol)
-    (nav-state-method-12 () none) ;; 12 ;; (get-velocity (_type_ vector) vector)
-    (nav-state-method-13 () none) ;; 13 ;; (get-travel (_type_ vector) vector)
-    (nav-state-method-14 () none) ;; 14 ;; (get-heading (_type_ vector) vector)
-    (nav-state-method-15 () none) ;; 15 ;; (get-target-pos (_type_ vector) vector)
-    (nav-state-method-16 () none) ;; 16 ;; (get-speed (_type_) meters)
-    (nav-state-method-17 () none) ;; 17 ;; (get-rotation-rate (_type_) float)
-    (nav-state-method-18 () none) ;; 18 ;; (try-projecting-to-current-poly (_type_ vector vector vector) symbol)
-    (nav-state-method-19 () none) ;; 19 ;; (get-current-poly (_type_) nav-poly)
-    (nav-state-method-20 () none) ;; 20 ;; (copy-nav-state! (_type_ (pointer nav-state)) none)
-    (nav-state-method-21 () none) ;; 21 ;; (nav-state-method-21 () none)
-    (nav-state-method-22 () none) ;; 22 ;; (nav-state-method-22 () none)
-    (nav-state-method-23 () none) ;; 23 ;; (nav-state-method-23 () none)
-    (nav-state-method-24 () none) ;; 24 ;; (turn-and-navigate-to-destination (_type_) none)
-    (nav-state-method-25 () none) ;; 25 ;; (navigate-using-route-portals-wrapper (_type_) none)
-    (nav-state-method-26 () none) ;; 26 ;; (navigate-using-best-dir-recompute-avoid-spheres-1-wrapper (_type_) none)
-    (nav-state-method-27 () none) ;; 27 ;; (navigate-within-poly-wrapper (_type_) none)
-    (nav-state-method-28 () none) ;; 28 ;; (compute-travel-speed (_type_) none)
-    (nav-state-method-29 () none) ;; 29 ;; (nav-state-method-29 (_type_) none)
-    (nav-state-method-30 () none) ;; 30 ;; (nav-state-method-30 (_type_) none)
-    (nav-state-method-31 () none) ;; 31 ;; (navigate-using-best-dir-recompute-avoid-spheres-2 (_type_) none)
-    (nav-state-method-32 () none) ;; 32 ;; (update-travel-dir-from-spheres (_type_) none)
-    (nav-state-method-33 () none) ;; 33 ;; (compute-speed-simple (_type_) none)
-    (nav-state-method-34 () none) ;; 34 ;; (navigate-v1! (_type_) none)
-    (nav-state-method-35 () none) ;; 35 ;; (reset-target! (_type_) none)
-    (nav-state-method-36 () none) ;; 36 ;; (add-offset-to-target! (_type_ vector) none)
-    (nav-state-method-37 () none) ;; 37 ;; (navigate-v2! (_type_) none)
-    (nav-state-method-38 () none) ;; 38 ;; (set-current-poly! (_type_ nav-poly) none)
-    (nav-state-method-39 () none) ;; 39 ;; (nav-state-method-39 (_type_) symbol)
-    (nav-state-method-40 () none) ;; 40 ;; (do-navigation-to-destination (_type_ vector) none)
-    (nav-state-method-41 () none) ;; 41 ;; (clamp-vector-to-mesh-cross-gaps (_type_ vector) symbol)
-    (nav-state-method-42 () none) ;; 42 ;; (set-target-pos! (_type_ vector) none)
-    (nav-state-method-43 () none) ;; 43 ;; (set-virtual-cur-pos! (_type_ vector) none)
-    (nav-state-method-44 () none) ;; 44 ;; (set-travel! (_type_ vector) none)
-    (nav-state-method-45 () none) ;; 45 ;; (set-velocity! (_type_ vector) none)
-    (nav-state-method-46 () none) ;; 46 ;; (set-heading! (_type_ vector) none)
-    (nav-state-method-47 () none) ;; 47 ;; (set-speed! (_type_ meters) none)
-    (nav-state-method-48 () none) ;; 48 ;; (reset! (_type_ nav-control) none)
-    (nav-state-method-49 () none) ;; 49 ;; (nav-state-method-49 () none)
-    (nav-state-method-50 () none) ;; 50 ;; (navigate-using-best-dir-use-existing-avoid-spheres (_type_ nav-avoid-spheres-params) none)
-    (nav-state-method-51 () none) ;; 51 ;; (nav-state-method-51 (_type_) none)
-    (nav-state-method-52 () none) ;; 52 ;; (navigate-using-route-portals (_type_) none)
-    (nav-state-method-53 () none) ;; 53 ;; (navigate-using-best-dir-recompute-avoid-spheres-1 (_type_) none)
-    (nav-state-method-54 () none) ;; 54 ;; (navigate-within-poly (_type_) none)
-    (nav-state-method-55 () none) ;; 55 ;; (clamp-travel-vector (_type_) none)
-    (nav-state-method-56 () none) ;; 56
+    (nav-state-method-9 (_type_) none) ;; 9 ;; debug-draw
+    (nav-state-method-10 (_type_) none) ;; 10
+    (nav-state-method-11 (_type_ object) symbol) ;; 11 ;; plan-over-pat1-polys-using-route (nav-gap-info)
+    (nav-state-method-12 (_type_ vector) vector) ;; 12 ;; get-velocity
+    (nav-state-method-13 (_type_ vector) vector) ;; 13 ;; get-travel
+    (nav-state-method-14 (_type_ vector) vector) ;; 14 ;; get-heading
+    (nav-state-method-15 (_type_ vector) vector) ;; 15 ;; get-target-pos
+    (nav-state-method-16 (_type_) meters) ;; 16 ;; get-speed
+    (nav-state-method-17 (_type_) float) ;; 17 ;; get-rotation-rate
+    (nav-state-method-18 (_type_ vector vector vector) symbol) ;; 18 ;; try-projecting-to-current-poly
+    (nav-state-method-19 (_type_) nav-poly) ;; 19 ;; get-current-poly
+    (nav-state-method-20 (_type_ (pointer nav-state)) none) ;; 20 ;; copy-nav-state!
+    (nav-state-method-21 (_type_) none) ;; 21
+    (nav-state-method-22 (_type_) none) ;; 22
+    (nav-state-method-23 (_type_) none) ;; 23
+    (nav-state-method-24 (_type_) none) ;; 24 ;; turn-and-navigate-to-destination
+    (nav-state-method-25 (_type_) none) ;; 25
+    (nav-state-method-26 (_type_) none) ;; 26
+    (nav-state-method-27 (_type_) none) ;; 27
+    (nav-state-method-28 (_type_) none) ;; 28 ;; compute-travel-speed
+    (nav-state-method-29 (_type_) none) ;; 29
+    (nav-state-method-30 (_type_) none) ;; 30
+    (nav-state-method-31 (_type_) none) ;; 31
+    (nav-state-method-32 (_type_) none) ;; 32
+    (nav-state-method-33 (_type_) none) ;; 33 ;; compute-speed-simple
+    (nav-state-method-34 (_type_) none) ;; 34 ;; navigate-v1!
+    (nav-state-method-35 (_type_) none) ;; 35 ;; reset-target!
+    (nav-state-method-36 (_type_ vector) none) ;; 36 ;; add-offset-to-target!
+    (nav-state-method-37 (_type_) none) ;; 37 ;; navigate-v2!
+    (nav-state-method-38 (_type_ nav-poly) none) ;; 38 ;; set-current-poly!
+    (nav-state-method-39 (_type_) symbol) ;; 39
+    (nav-state-method-40 (_type_ vector) none) ;; 40 ;; do-navigation-to-destination
+    (nav-state-method-41 (_type_ vector) symbol) ;; 41 ;; clamp-vector-to-mesh-cross-gaps
+    (nav-state-method-42 (_type_ vector) none) ;; 42 ;; set-target-pos!
+    (nav-state-method-43 (_type_ vector) none) ;; 43 ;; set-virtual-cur-pos!
+    (nav-state-method-44 (_type_ vector) none) ;; 44 ;; set-travel!
+    (nav-state-method-45 (_type_ vector) none) ;; 45 ;; set-velocity!
+    (nav-state-method-46 (_type_ vector) none) ;; 46 ;; set-heading!
+    (nav-state-method-47 (_type_ meters) none) ;; 47 ;; set-speed!
+    (nav-state-method-48 (_type_ nav-control) none) ;; 48 ;; reset!
+    (nav-state-method-49 (_type_) none) ;; 49
+    (nav-state-method-50 (_type_ object) none) ;; 50 ;; navigate-using-best-dir-use-existing-avoid-spheres (nav-avoid-spheres-params)
+    (nav-state-method-51 (_type_) none) ;; 51
+    (nav-state-method-52 (_type_) none) ;; 52 ;; navigate-using-route-portals
+    (nav-state-method-53 (_type_) none) ;; 53
+    (nav-state-method-54 (_type_) none) ;; 54 ;; navigate-within-poly
+    (nav-state-method-55 (_type_) none) ;; 55 ;; clamp-travel-vector
+    (nav-state-method-56 (_type_) none) ;; 56
     )
   )
 
@@ -35014,45 +35014,45 @@
   :size-assert         #x120
   :flag-assert         #x3000000120
   (:methods
-    (nav-control-method-9 () none) ;; 9 ;; (debug-draw (_type_) none)
-    (nav-control-method-10 () none) ;; 10 ;; (point-in-bsphere? (_type_ vector) symbol)
-    (nav-control-method-11 () none) ;; 11 ;; (find-poly-containing-point-1 (_type_ vector) nav-poly)
-    (nav-control-method-12 () none) ;; 12 ;; (closest-point-on-mesh (_type_ vector vector nav-poly) nav-poly)
-    (nav-control-method-13 () none) ;; 13 ;; (find-nearest-poly-to-point (_type_ vector) nav-poly)
-    (nav-control-method-14 () none) ;; 14 ;; (project-point-onto-plane-of-poly (_type_ nav-poly vector vector vector) none)
-    (nav-control-method-15 () none) ;; 15 ;; (find-poly-containing-point-2 (_type_ vector) nav-poly)
-    (nav-control-method-16 () none) ;; 16 ;; (is-above-poly-max-height? (_type_ vector float) symbol)
-    (nav-control-method-17 () none) ;; 17 ;; (is-in-mesh? (_type_ vector float) symbol)
-    (nav-control-method-18 () none) ;; 18 ;; (avoid-spheres-1! (_type_ nav-avoid-spheres-params) symbol)
-    (nav-control-method-19 () none) ;; 19 ;; (avoid-spheres-2! (_type_ nav-avoid-spheres-params) symbol)
-    (nav-control-method-20 () none) ;; 20 ;; (clamp-vector-to-mesh-cross-gaps (_type_ vector nav-poly vector float symbol clamp-travel-vector-to-mesh-return-info) none)
-    (nav-control-method-21 () none) ;; 21 ;; (clamp-vector-to-mesh-no-gaps (_type_ vector nav-poly vector clamp-travel-vector-to-mesh-return-info) none)
-    (nav-control-method-22 () none) ;; 22 ;; (find-first-sphere-and-update-avoid-params (_type_ vector nav-avoid-spheres-params) float)
-    (nav-control-method-23 () none) ;; 23 ;; (set-spheres-from-nav-ids (_type_) none)
-    (nav-control-method-24 () none) ;; 24 ;; (add-root-sphere-to-hash! (_type_ vector int) symbol)
-    (nav-control-method-25 () none) ;; 25 ;; (get-max-rotation-rate (_type_) float)
-    (nav-control-method-26 () none) ;; 26 ;; (get-sphere-mask (_type_) uint)
-    (nav-control-method-27 () none) ;; 27 ;; (get-target-speed (_type_) meters)
-    (nav-control-method-28 () none) ;; 28 ;; (enable-extra-sphere! (_type_) none)
-    (nav-control-method-29 () none) ;; 29 ;; (disable-extra-sphere! (_type_) none)
-    (nav-control-method-30 () none) ;; 30 ;; (copy-extra-nav-sphere! (_type_ sphere) none)
-    (nav-control-method-31 () none) ;; 31 ;; (set-extra-nav-sphere-xyz! (_type_ sphere) none)
-    (nav-control-method-32 () none) ;; 32 ;; (set-extra-nav-sphere-radius! (_type_ float) none)
-    (nav-control-method-33 () none) ;; 33 ;; (set-nearest-y-thres! (_type_ float) none)
-    (nav-control-method-34 () none) ;; 34 ;; (set-nav-cull-radius! (_type_ meters) none)
-    (nav-control-method-35 () none) ;; 35 ;; (set-speed-scale! (_type_ float) none)
-    (nav-control-method-36 () none) ;; 36 ;; (set-target-speed! (_type_ meters) none)
-    (nav-control-method-37 () none) ;; 37 ;; (set-acceleration! (_type_ meters) none)
-    (nav-control-method-38 () none) ;; 38 ;; (set-turning-acceleration! (_type_ meters) none)
-    (nav-control-method-39 () none) ;; 39 ;; (set-max-rotation-rate! (_type_ float) none)
-    (nav-control-method-40 () none) ;; 40 ;; (set-sphere-mask! (_type_ uint) none)
-    (nav-control-method-41 () none) ;; 41 ;; (remove! (_type_) none)
-    (nav-control-method-42 () none) ;; 42 ;; (init! (_type_ collide-shape) none)
-    (nav-control-method-43 () none) ;; 43 ;; (display-marks? (_type_) symbol)
-    (nav-control-method-44 () none) ;; 44 ;; (nav-control-method-44 () none)
-    (nav-control-method-45 () none) ;; 45 ;; (find-first-sphere-intersecting-ray (_type_ vector vector vector) sphere)
-    (nav-control-method-46 () none) ;; 46 ;; (find-sphere-ids-from-sphere-hash (_type_ symbol) none)
-    (nav-control-method-47 () none) ;; 47
+    (nav-control-method-9 (_type_) none) ;; 9 ;; debug-draw
+    (nav-control-method-10 (_type_ vector) symbol) ;; 10 ;; point-in-bsphere?
+    (nav-control-method-11 (_type_ vector) nav-poly) ;; 11 ;; find-poly-containing-point-1
+    (nav-control-method-12 (_type_ vector vector nav-poly) nav-poly) ;; 12 ;; closest-point-on-mesh
+    (nav-control-method-13 (_type_ vector) nav-poly) ;; 13 ;; find-nearest-poly-to-point
+    (nav-control-method-14 (_type_ nav-poly vector vector vector) none) ;; 14 ;; project-point-onto-plane-of-poly
+    (nav-control-method-15 (_type_ vector) nav-poly) ;; 15 ;; find-poly-containing-point-2
+    (nav-control-method-16 (_type_ vector float) symbol) ;; 16 ;; is-above-poly-max-height?
+    (nav-control-method-17 (_type_ vector float) symbol) ;; 17 ;; is-in-mesh?
+    (nav-control-method-18 (_type_ object) symbol) ;; 18 ;; avoid-spheres-1!
+    (nav-control-method-19 (_type_ object) symbol) ;; 19 ;; avoid-spheres-2!
+    (nav-control-method-20 (_type_ vector nav-poly vector float symbol clamp-travel-vector-to-mesh-return-info) none) ;; 20
+    (nav-control-method-21 (_type_ vector nav-poly vector clamp-travel-vector-to-mesh-return-info) none) ;; 21
+    (nav-control-method-22 (_type_ vector object) float) ;; 22 ;; find-first-sphere-and-update-avoid-params
+    (nav-control-method-23 (_type_) none) ;; 23 ;; set-spheres-from-nav-ids
+    (nav-control-method-24 (_type_ vector int) symbol) ;; 24 ;; add-root-sphere-to-hash!
+    (nav-control-method-25 (_type_) float) ;; 25 ;; get-max-rotation-rate
+    (nav-control-method-26 (_type_) uint) ;; 26 ;; get-sphere-mask
+    (nav-control-method-27 (_type_) meters) ;; 27 ;; get-target-speed
+    (nav-control-method-28 (_type_) none) ;; 28 ;; enable-extra-sphere!
+    (nav-control-method-29 (_type_) none) ;; 29 ;; disable-extra-sphere!
+    (nav-control-method-30 (_type_ sphere) none) ;; 30 ;; copy-extra-nav-sphere!
+    (nav-control-method-31 (_type_ sphere) none) ;; 31
+    (nav-control-method-32 (_type_ float) none) ;; 32
+    (nav-control-method-33 (_type_ float) none) ;; 33
+    (nav-control-method-34 (_type_ meters) none) ;; 34
+    (nav-control-method-35 (_type_ float) none) ;; 35
+    (nav-control-method-36 (_type_ meters) none) ;; 36
+    (nav-control-method-37 (_type_ meters) none) ;; 37
+    (nav-control-method-38 (_type_ meters) none) ;; 38
+    (nav-control-method-39 (_type_ float) none) ;; 39
+    (nav-control-method-40 (_type_ uint) none) ;; 40
+    (nav-control-method-41 (_type_) none) ;; 41 ;; remove!
+    (nav-control-method-42 (_type_ collide-shape) none) ;; 42 ;; init!
+    (nav-control-method-43 (_type_) symbol) ;; 43 ;; display-marks?
+    (nav-control-method-44 (_type_) none) ;; 44
+    (nav-control-method-45 (_type_ vector vector vector) sphere) ;; 45
+    (nav-control-method-46 (_type_ symbol) none) ;; 46
+    (nav-control-method-47 (_type_) none) ;; 47
     )
   )
 
@@ -35105,25 +35105,25 @@
   :size-assert         #x58
   :flag-assert         #x1b00000058
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type int) _type_)
-    (grid-hash-method-9 () none) ;; 9 ;; (update-grid-for-objects-in-box (_type_ int vector vector) none)
-    (grid-hash-method-10 () none) ;; 10 ;; (clear-bucket-array (_type_) none)
-    (grid-hash-method-11 () none) ;; 11 ;; (setup-search-box (_type_ int vector vector vector) none)
-    (grid-hash-method-12 () none) ;; 12 ;; (search-for-point (_type_ vector) (pointer uint8))
-    (grid-hash-method-13 () none) ;; 13 ;; (search-for-sphere (_type_ vector float) (pointer uint8))
-    (grid-hash-method-14 () none) ;; 14 ;; (draw (_type_ rgba) none)
-    (grid-hash-method-15 () none) ;; 15 ;; (dump-grid-info (_type_) none)
-    (grid-hash-method-16 () none) ;; 16 ;; (verify-bits-in-bucket (_type_ grid-hash-box grid-hash-box) none)
-    (grid-hash-method-17 () none) ;; 17 ;; (box-of-everything (_type_ object grid-hash-box) none)
-    (grid-hash-method-18 () none) ;; 18 ;; (grid-hash-method-18 (_type_ grid-hash-box int) none)
-    (grid-hash-method-19 () none) ;; 19 ;; (grid-hash-method-19 (_type_ grid-hash-box int) none)
-    (grid-hash-method-20 () none) ;; 20 ;; (do-search! (_type_ grid-hash-box (pointer uint8)) none)
-    (grid-hash-method-21 () none) ;; 21 ;; (set-up-box (_type_ grid-hash-box vector vector) none)
-    (grid-hash-method-22 () none) ;; 22 ;; (sphere-to-grid-box (_type_ grid-hash-box sphere) none)
-    (grid-hash-method-23 () none) ;; 23 ;; (line-sphere-to-grid-box (_type_ grid-hash-box vector vector float) none)
-    (grid-hash-method-24 () none) ;; 24 ;; (update-grid (_type_) none)
-    (grid-hash-method-25 () none) ;; 25
-    (grid-hash-method-26 () none) ;; 26
+    (new (symbol type int) _type_) ;; 0
+    (grid-hash-method-9 (_type_ int vector vector) none) ;; 9 ;; update-grid-for-objects-in-box
+    (grid-hash-method-10 (_type_) none) ;; 10 ;; clear-bucket-array
+    (grid-hash-method-11 (_type_ int vector vector vector) none) ;; 11 ;; setup-search-box
+    (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12 ;; search-for-point
+    (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13 ;; search-for-sphere
+    (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
+    (grid-hash-method-15 (_type_) none) ;; 15 ;; dump-grid-info
+    (grid-hash-method-16 (_type_ grid-hash-box grid-hash-box) none) ;; 16 ;; verify-bits-in-bucket
+    (grid-hash-method-17 (_type_ object grid-hash-box) none) ;; 17 ;; box-of-everything
+    (grid-hash-method-18 (_type_ grid-hash-box int) none) ;; 18
+    (grid-hash-method-19 (_type_ grid-hash-box int) none) ;; 19
+    (grid-hash-method-20 (_type_ grid-hash-box (pointer uint8)) none) ;; 20 ;; do-search!
+    (grid-hash-method-21 (_type_ grid-hash-box vector vector) none) ;; 21 ;; set-up-box
+    (grid-hash-method-22 (_type_ grid-hash-box sphere) none) ;; 22 ;; sphere-to-grid-box
+    (grid-hash-method-23 (_type_ grid-hash-box vector vector float) none) ;; 23 ;; line-sphere-to-grid-box
+    (grid-hash-method-24 (_type_) none) ;; 24 ;; update-grid
+    (grid-hash-method-25 (_type_) none) ;; 25
+    (grid-hash-method-26 (_type_) none) ;; 26
     )
   )
 
@@ -41869,14 +41869,14 @@
   :size-assert         #x30
   :flag-assert         #x1100000030
   (:methods
-    (nav-link-search-info-method-9 () none) ;; 9
-    (nav-link-search-info-method-10 () none) ;; 10
-    (nav-link-search-info-method-11 () none) ;; 11
-    (nav-link-search-info-method-12 () none) ;; 12
-    (nav-link-search-info-method-13 () none) ;; 13
-    (nav-link-search-info-method-14 () none) ;; 14
-    (nav-link-search-info-method-15 () none) ;; 15
-    (nav-link-search-info-method-16 () none) ;; 16
+    (nav-link-search-info-method-9 (_type_) none) ;; 9
+    (nav-link-search-info-method-10 (_type_) none) ;; 10
+    (nav-link-search-info-method-11 (_type_) none) ;; 11
+    (nav-link-search-info-method-12 (_type_) none) ;; 12
+    (nav-link-search-info-method-13 (_type_) none) ;; 13
+    (nav-link-search-info-method-14 (_type_) none) ;; 14
+    (nav-link-search-info-method-15 (_type_) none) ;; 15
+    (nav-link-search-info-method-16 (_type_) none) ;; 16
     )
   )
 
