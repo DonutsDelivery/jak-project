@@ -95,6 +95,11 @@ Per decomp run it tells you:
   `4·failing_refs + all_refs − complexity_penalty`. Writes
   `.jakx_watch/field_drift_queue.md`; the `clean-methods` sub-list is the
   batch return-type-sweep queue for Agent 1.
+- `cluster_impact.py` — groups the 1126 commented deftypes into activation clusters
+  (one cluster per active root type). Ranks by `f_refs / depth` — files potentially
+  unblocked per unit of parent-first ordering work. Top clusters for Agent 2:
+  `driver` (r/cost=23), `process` (r/cost=22), `wcar-base` (r/cost=18).
+  Writes `.jakx_watch/cluster_impact.md`.
 - `migration_candidates.py` — audits `goal_src/jakx/engine/**/*.gc` hand-ports
   against current decomp state. A hand-port is a deletion candidate when its
   decomp is real-clean / real-partial. Flags update-from-decomp append-bug
@@ -129,6 +134,7 @@ python3 scripts/jakx_watch/measure.py \
 - `.jakx_watch/discovery_queue.md`       — ranked pure-discovery deftype queue
 - `.jakx_watch/mips2c_queue.md`          — ranked jak3→jakx port queue
 - `.jakx_watch/cpp_patch_queue.md`       — ranked C++ decompiler-emitter patches
+- `.jakx_watch/cluster_impact.md`        — commented-deftype clusters ranked by unblock/cost
 - `.jakx_watch/run-TS.log`          — combined stdout+stderr of a run.sh invocation
 - `log/decompiler.*.log`            — native decompiler logs (shared dir)
 - `test/decompiler/reference/jakx/` — `_REF.gc` baseline corpus (checked in)

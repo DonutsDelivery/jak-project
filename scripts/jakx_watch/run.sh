@@ -196,6 +196,11 @@ echo "" | tee -a "$RUN_LOG"
 echo "-- C++ patch queue --" | tee -a "$RUN_LOG"
 python3 scripts/jakx_watch/cpp_patch_queue.py 2>&1 | tee -a "$RUN_LOG" || true
 
+# --- cluster impact (commented-deftype activation clusters ranked by unblock/cost) ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- cluster impact --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/cluster_impact.py 2>&1 | tail -20 | tee -a "$RUN_LOG" || true
+
 # --- auto-seed _REF.gc for newly-real-clean files (no-op if coverage complete) ---
 if [ -f "$ROOT/test/offline/config/jakx/config.jsonc" ]; then
     echo "" | tee -a "$RUN_LOG"
