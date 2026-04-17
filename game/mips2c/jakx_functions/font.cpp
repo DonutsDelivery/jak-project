@@ -5,7 +5,8 @@
 //
 // Currently implements:
 //   - get-string-length-asm
-//   - draw-string-asm-packed  (partial — main render loop only)
+//   - draw-string-asm-packed  (partial — first render loop + effect passes;
+//                              bracket-aware second loop still TODO)
 //
 // These are hand-adapted from the jakx MIPS assembly in
 // decompiler_out/jakx/font_ir2.asm. They are NOT copies of the jak3 port —
@@ -415,20 +416,19 @@ void link() {
 //             glyph emission. Taken when the string contains brackets.
 //   B171    : epilogue; write final dma pointer back, return vf23 in v0.
 //
-// This port implements the ENTRY + MEASURE fast path — the portion that
-// scans the string for width and emits the *accumulated* x-extent in vf23.
-// Full dma-buffer glyph emission (the "effect passes" in B68..B90 and the
-// entire second bracket-loop B91..B170) is deferred as TODO and falls
-// through to the epilogue. For jakx title-screen text rendering this
-// produces a valid return value (u128 packed {width, .., .., ..}) so
-// callers don't corrupt memory like the jak3 stub did, but no glyphs
-// are actually drawn yet (same visual result as the current bitmap-font
-// hand-port, but with correct measurement).
+// This port implements the ENTRY + MEASURE + FIRST RENDER LOOP —
+// blocks B0-B91 (MIPS labels L127 / L128 / L129 / L130..L159). This
+// covers tilde-code processing, font-size switching, kerning toggle,
+// manual x/y offsets, save/restore of cursor, CR/LF → justify advance,
+// full glyph lookup + projection through calc-mat, char-packet emission
+// to the dma buffer, clip-test, and the 5-pass outline/shadow effect
+// passes gated by flag 4096.
 //
-// That's intentional: the goal of this landing is to (a) get a correct
-// mips2c entry into the table, (b) stop the jak3-stub memory corruption
-// from reading jakx-layout font-context, and (c) provide a foundation
-// for incrementally porting the remaining rendering blocks.
+// Still TODO: the bracket-aware second render loop (B92..B170, MIPS
+// labels L160..L187) which handles '[...]' color/justify codes. When
+// the first loop exits via L159 it currently falls straight through to
+// the epilogue (skipping the second pass); strings that don't contain
+// '[' brackets render the same as they would in the full asm.
 
 namespace draw_string_asm_packed {
 struct Cache {
@@ -572,36 +572,646 @@ block_3:
   c->lqc2(vf23, 640, a3);                             // vf23 = justify[0]  ; starting x from justify table
 
   // ---------------------------------------------------------------------------
-  // *** PARTIAL PORT BOUNDARY ***
-  //
-  // TODO: The main rendering loop (B4-B90, MIPS labels L130..L159) and the
-  // bracket-aware second loop (B91-B170, L160..L187) are not yet ported.
-  // Those blocks iterate the string, emit char-packets into the dma buffer
-  // via sqc2/sq, and perform shadow/effect passes.
-  //
-  // For now we fall through to the epilogue, returning the initial vf23
-  // (justify[0]) so callers get a sane u128 packed value. Nothing is drawn
-  // to the dma buffer by this function — the outer GOAL code will still
-  // use the bitmap-font fallback in goal_src/jakx/engine/gfx/font.gc for
-  // visible text. The important wins here are:
-  //   1) draw-string-init-justify is called with correct args, so the
-  //      dma write pointer advances properly (prevents the jak3-stub
-  //      corruption of font-context).
-  //   2) current-color and flags are computed against jakx's real
-  //      font-context layout (offset 12 flags, offset 180 color, etc.).
-  //   3) Return value is a valid packed u128 from vf23 instead of garbage.
-  //
-  // To finish the port, translate blocks B4..B170 from the asm. Each
-  // block is a direct mips2c translation; see get_string_length_asm
-  // above for the same switch-scan skeleton at smaller scale.
+  // Register roster on entry to B4 / L130 (per asm lines 6603..6605):
+  //   a0 = dma write ptr (from lw a0, 4(s4))
+  //   a1 = fontN-table base
+  //   a2 = flags (reloaded from font-context @ 12)
+  //   a3 = font-work ptr (= v1) — used as the justify[] cursor
+  //   t0 = str-ptr
+  //   v1 = *font-work*
+  //   vf13/14/15 = size1/2/3 for selected font
+  //   vf16/17/18 = size-st1/2/3
+  //   vf23 = current cursor (= justify[0] at start)
+  //   vf24 = origin (from font-context @ 44)
+  //   vf25 = strip-gif (font-context @ 156, jakx layout)
+  //   vf26 = hvdf-shadow (@ 4752), vf27 = hvdf-offset (@ 4736)
+  //   vf28..vf31 = calc-mat rows
   // ---------------------------------------------------------------------------
 
-  // Silence "unused" warnings for vars used only by the TODO'd blocks.
-  (void)a0;
-  (void)t0;
-  (void)a2;
+block_4:
+  // B4 / L130: top of render loop. Fetch next char from str-ptr, load
+  // current-font-0-tmpl (for the emitted packet's gif tag).
+  c->lbu(t1, 4, t0);                                  // lbu t1, 4(t0) ; char
+  c->daddiu(t0, t0, 1);                               // daddiu t0, t0, 1
+  c->lqc2(vf20, 6080, v1);                            // lqc2 vf20, 6080(v1) ; current-font-0-tmpl
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L159 ; end-of-string
+  c->daddiu(t2, t1, -3);                              // daddiu t2, t1, -3
+  if (bc) { goto block_91; }
 
+  // B5:
+  bc = ((s64)c->sgpr64(t2)) <= 0;                     // blez t2, L144 (ctrl char)
+  c->daddiu(t2, t1, -126);                            // daddiu t2, t1, -126 ('~')
+  if (bc) { goto block_57; }
+
+  // B6:
+  bc = c->sgpr64(t2) != 0;                            // bne t2, r0, L148 (printable)
+  if (bc) { goto block_63; }
+
+  // B7: tilde-code: read next char
+  c->lbu(t1, 4, t0);                                  // lbu t1, 4(t0)
+  c->daddiu(t0, t0, 1);                               // daddiu t0, t0, 1
+  c->addiu(t2, r0, 0);                                // addiu t2, r0, 0 ; sign accumulator
+  c->addiu(t3, r0, 0);                                // addiu t3, r0, 0 ; digit accumulator
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L159
+  c->daddiu(t4, t1, -43);                             // '+'
+  if (bc) { goto block_91; }
+
+  // B8:
+  c->movz(t2, t1, t4);                                // movz t2, t1, t4
+  c->daddiu(t4, t1, -45);                             // '-'
+  c->movz(t2, t1, t4);                                // movz t2, t1, t4
+  bc = c->sgpr64(t2) != 0;                            // bne t2, r0, L131 (saw +/-)
+  c->daddiu(t4, t1, -91);                             // '['
+  if (bc) { goto block_18; }
+
+  // B9:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L130 (ignore '[')
+  c->daddiu(t3, t1, -93);                             // ']'
+  if (bc) { goto block_4; }
+
+  // B10:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L130 (ignore ']')
+  c->daddiu(t3, t1, -121);                            // 'y'
+  if (bc) { goto block_4; }
+
+  // B11:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L142 ('y' save)
+  c->daddiu(t3, t1, -89);                             // 'Y'
+  if (bc) { goto block_55; }
+
+  // B12:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L142 ('Y' save)
+  c->daddiu(t3, t1, -122);                            // 'z'
+  if (bc) { goto block_55; }
+
+  // B13:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L143 ('z' restore)
+  c->daddiu(t3, t1, -90);                             // 'Z'
+  if (bc) { goto block_56; }
+
+  // B14:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L143 ('Z' restore)
+  c->daddiu(t3, t1, -48);                             // '0'
+  if (bc) { goto block_56; }
+
+  // B15:
+  bc = ((s64)c->sgpr64(t3)) < 0;                      // bltz t3, L148 (< '0' non-tilde printable)
+  c->daddiu(t3, t1, -57);                             // '9'
+  if (bc) { goto block_63; }
+
+  // B16:
+  bc = ((s64)c->sgpr64(t3)) > 0;                      // bgtz t3, L148 (> '9')
+  c->daddiu(t3, t1, -126);                            // '~'
+  if (bc) { goto block_63; }
+
+  // B17:
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L148 ('~' again — printable)
+  c->daddiu(t3, t1, -48);                             // digit value
+  if (bc) { goto block_63; }
+
+block_18:
+  // B18 / L131: read another char (code selector or digit continuation)
+  c->lbu(t1, 4, t0);                                  // lbu t1, 4(t0)
+  c->daddiu(t0, t0, 1);                               // daddiu t0, t0, 1
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L159
+  c->daddiu(t4, t1, -110);                            // 'n'
+  if (bc) { goto block_91; }
+
+  // B19:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L132 ('n' small)
+  c->daddiu(t4, t1, -78);                             // 'N'
+  if (bc) { goto block_38; }
+
+  // B20:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L132 ('N' small)
+  c->daddiu(t4, t1, -108);                            // 'l'
+  if (bc) { goto block_38; }
+
+  // B21:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L130 (ignore 'l')
+  c->daddiu(t4, t1, -76);                             // 'L'
+  if (bc) { goto block_4; }
+
+  // B22:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L130 (ignore 'L')
+  c->daddiu(t4, t1, -119);                            // 'w'
+  if (bc) { goto block_4; }
+
+  // B23:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L134 ('w')
+  c->daddiu(t4, t1, -87);                             // 'W'
+  if (bc) { goto block_41; }
+
+  // B24:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L134 ('W')
+  c->daddiu(t4, t1, -107);                            // 'k'
+  if (bc) { goto block_41; }
+
+  // B25:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L135 ('k' kerning)
+  c->daddiu(t4, t1, -75);                             // 'K'
+  if (bc) { goto block_43; }
+
+  // B26:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L135 ('K')
+  c->daddiu(t4, t1, -106);                            // 'j'
+  if (bc) { goto block_43; }
+
+  // B27:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L130 (ignore 'j')
+  c->daddiu(t4, t1, -74);                             // 'J'
+  if (bc) { goto block_4; }
+
+  // B28:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L130
+  c->daddiu(t4, t1, -104);                            // 'h'
+  if (bc) { goto block_4; }
+
+  // B29:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L136 ('h' h-offset)
+  c->daddiu(t4, t1, -72);                             // 'H'
+  if (bc) { goto block_45; }
+
+  // B30:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L136 ('H')
+  c->daddiu(t4, t1, -118);                            // 'v'
+  if (bc) { goto block_45; }
+
+  // B31:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L139 ('v' v-offset)
+  c->daddiu(t4, t1, -86);                             // 'V'
+  if (bc) { goto block_50; }
+
+  // B32:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L139 ('V')
+  c->daddiu(t4, t1, -117);                            // 'u'
+  if (bc) { goto block_50; }
+
+  // B33:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L130 (ignore 'u')
+  c->daddiu(t4, t1, -85);                             // 'U'
+  if (bc) { goto block_4; }
+
+  // B34:
+  bc = c->sgpr64(t4) == 0;                            // beq t4, r0, L130
+  c->daddiu(t4, t1, -48);                             // '0'
+  if (bc) { goto block_4; }
+
+  // B35:
+  bc = ((s64)c->sgpr64(t4)) < 0;                      // bltz t4, L148 (< '0' — treat as printable)
+  c->daddiu(t5, t1, -57);                             // '9'
+  if (bc) { goto block_63; }
+
+  // B36:
+  bc = ((s64)c->sgpr64(t5)) > 0;                      // bgtz t5, L148 (> '9')
+  c->sll(t5, t3, 2);                                  // sll t5, t3, 2
+  if (bc) { goto block_63; }
+
+  // B37: digit accumulator: t3 = (t3 * 10) + (char - '0')
+  c->daddu(t1, t3, t5);                               // t3 + t3*4 = 5*t3
+  c->sll(t1, t1, 1);                                  // *2 → *10
+  c->daddu(t3, t1, t4);                               // + digit
+  goto block_18;
+
+block_38:
+  // B38 / L132: "~n"/"~N" — small font switch. If t3 (digit count) != 0,
+  // jump to large-font path (L133).
+  bc = c->sgpr64(t3) != 0;                            // bne t3, r0, L133
+  c->addiu(t1, r0, -33);                              // -33 = ~32 (clear 'large' bit)
+  if (bc) { goto block_40; }
+
+  // B39: install small font templates/table/sizes, clear 'large' flag.
+  c->lq(a1, 192, v1);                                 // small-font-0-tmpl
+  c->lq(t2, 208, v1);
+  c->lq(t3, 224, v1);
+  c->lq(t4, 240, v1);
+  c->sq(a1, 6080, v1);                                // current-font-0-tmpl
+  c->sq(t2, 6096, v1);
+  c->sq(t3, 6112, v1);
+  c->sq(t4, 6128, v1);
+  c->load_symbol2(a1, cache.font12_table);
+  c->mov64(a1, a1);
+  c->lqc2(vf13, 320, v1);                             // size1-small
+  c->lqc2(vf14, 336, v1);                             // size2-small
+  c->lqc2(vf15, 352, v1);                             // size3-small
+  c->and_(a2, a2, t1);                                // clear bit 5 (large)
+  goto block_4;
+
+block_40:
+  // B40 / L133: install large font templates/table/sizes, set 'large' flag.
+  c->lq(a1, 256, v1);                                 // large-font-0-tmpl
+  c->lq(t1, 272, v1);
+  c->lq(t2, 288, v1);
+  c->lq(t3, 304, v1);
+  c->sq(a1, 6080, v1);
+  c->sq(t1, 6096, v1);
+  c->sq(t2, 6112, v1);
+  c->sq(t3, 6128, v1);
+  c->load_symbol2(a1, cache.font24_table);
+  c->mov64(a1, a1);
+  c->lqc2(vf13, 368, v1);
+  c->lqc2(vf14, 384, v1);
+  c->lqc2(vf15, 400, v1);
+  c->ori(a2, a2, 32);                                 // set bit 5 (large)
+  goto block_4;
+
+block_41:
+  // B41 / L134: "~w"/"~W" — toggle flag bit 0 (word-wrap? — flag 1).
+  // If digit (t3)==0 → clear; else → set.
+  c->addiu(t1, r0, -2);                               // -2 = ~1
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L130
+  c->and_(a2, a2, t1);                                // clear bit 0
+  if (bc) { goto block_4; }
+
+  // B42:
+  c->ori(a2, a2, 1);                                  // set bit 0
+  goto block_4;
+
+block_43:
+  // B43 / L135: "~k"/"~K" — toggle kerning (bit 1).
+  c->addiu(t1, r0, -3);                               // -3 = ~2
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L130
+  c->and_(a2, a2, t1);                                // clear bit 1
+  if (bc) { goto block_4; }
+
+  // B44:
+  c->ori(a2, a2, 2);                                  // set bit 1
+  goto block_4;
+
+block_45:
+  // B45 / L136: "~h"/"~H" — horizontal offset with sign (t2) and digits (t3).
+  c->mov128_vf_gpr(vf1, t3);                          // qmtc2.i vf1, t3
+  c->daddiu(t1, t2, -45);                             // '-' check
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L138 (no sign → absolute)
+  c->vitof0(DEST::xyzw, vf1, vf1);                    // vitof0.xyzw vf1, vf1
+  if (bc) { goto block_49; }
+
+  // B46:
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L137 ('-')
+  if (bc) { goto block_48; }
+
+  // B47: '+' → vf23.x += vf1.x
+  c->vadd_bc(DEST::x, BC::x, vf23, vf23, vf1);        // vaddx.x vf23, vf23, vf1
+  goto block_4;
+
+block_48:
+  // B48 / L137: '-' → vf23.x -= vf1.x
+  c->vsub_bc(DEST::x, BC::x, vf23, vf23, vf1);        // vsubx.x vf23, vf23, vf1
+  goto block_4;
+
+block_49:
+  // B49 / L138: absolute → vf23.x = vf1.x (via vf0 + vf1.x)
+  c->vadd_bc(DEST::x, BC::x, vf23, vf0, vf1);         // vaddx.x vf23, vf0, vf1
+  goto block_4;
+
+block_50:
+  // B50 / L139: "~v"/"~V" — vertical offset with sign (t2) and digits (t3).
+  c->mov128_vf_gpr(vf1, t3);                          // qmtc2.i vf1, t3
+  c->daddiu(t1, t2, -45);                             // '-' check
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L141 (no sign → absolute)
+  c->vitof0(DEST::xyzw, vf1, vf1);                    // vitof0.xyzw vf1, vf1
+  if (bc) { goto block_54; }
+
+  // B51:
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L140
+  if (bc) { goto block_53; }
+
+  // B52: '+' → vf23.y += vf1.x
+  c->vadd_bc(DEST::y, BC::x, vf23, vf23, vf1);        // vaddx.y vf23, vf23, vf1
+  goto block_4;
+
+block_53:
+  // B53 / L140: '-' → vf23.y -= vf1.x
+  c->vsub_bc(DEST::y, BC::x, vf23, vf23, vf1);        // vsubx.y vf23, vf23, vf1
+  goto block_4;
+
+block_54:
+  // B54 / L141: absolute → vf23.y = vf1.x
+  c->vadd_bc(DEST::y, BC::x, vf23, vf0, vf1);         // vaddx.y vf23, vf0, vf1
+  goto block_4;
+
+block_55:
+  // B55 / L142: "~y"/"~Y" — save current cursor to font-work[496]
+  c->sqc2(vf23, 496, v1);                             // sqc2 vf23, 496(v1) ; save
+  goto block_4;
+
+block_56:
+  // B56 / L143: "~z"/"~Z" — restore saved cursor.
+  c->lqc2(vf23, 496, v1);                             // lqc2 vf23, 496(v1) ; save
+  goto block_4;
+
+block_57:
+  // B57 / L144: control char (≤ 3) — flag bit 6 + pick current-font-N-tmpl
+  // based on char (1, 2, or 3).
+  c->daddiu(t2, t1, -3);                              // t1==3?
+  c->ori(a2, a2, 64);                                 // set bit 6 (newline pending)
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L146 (t1==3)
+  c->daddiu(t1, t1, -2);                              // t1==2?
+  if (bc) { goto block_61; }
+
+  // B58:
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L145 (t1==2)
+  if (bc) { goto block_60; }
+
+  // B59: t1==1 — use current-font-1-tmpl
+  c->lqc2(vf20, 6096, v1);                            // lqc2 vf20, 6096(v1)
+  goto block_62;
+
+block_60:
+  // B60 / L145: t1==2 — use current-font-2-tmpl
+  c->lqc2(vf20, 6112, v1);                            // lqc2 vf20, 6112(v1)
+  goto block_62;
+
+block_61:
+  // B61 / L146: t1==3 — use current-font-3-tmpl
+  c->lqc2(vf20, 6128, v1);                            // lqc2 vf20, 6128(v1)
+  // fall through
+
+block_62:
+  // B62 / L147: common tail after ctrl char — fetch next char, compute
+  // glyph cell index = char*16, set vf4 = vf23 + vf15 (cell offset),
+  // vf1 = vf25 - vf23 (remaining x), jump to L150.
+  c->lbu(t1, 4, t0);                                  // lbu t1, 4(t0)
+  c->daddiu(t0, t0, 1);                               // daddiu t0, t0, 1
+  c->vadd(DEST::xyz, vf4, vf23, vf15);                // vadd.xyz vf4, vf23, vf15
+  c->sll(t2, t1, 4);                                  // t2 = char*16
+  c->vsub(DEST::xyzw, vf1, vf25, vf23);               // vsub.xyzw vf1, vf25, vf23
+  goto block_66;                                      // branch to L150
+
+block_63:
+  // B63 / L148: regular printable fast path. Clear bit 6 (newline pending),
+  // compute cell index, check for CR/LF.
+  c->sll(t2, t1, 4);                                  // t2 = char*16
+  c->addiu(t3, r0, -65);                              // -65 = ~64
+  c->vadd(DEST::xyz, vf4, vf23, vf15);                // vadd.xyz vf4, vf23, vf15
+  c->and_(a2, a2, t3);                                // clear bit 6 (and ?? — mask -65 clears 64)
+  c->vsub(DEST::xyzw, vf1, vf25, vf23);               // vsub.xyzw vf1, vf25, vf23
+  c->daddiu(t3, t1, -10);                             // LF?
+  bc = c->sgpr64(t3) == 0;                            // beq t3, r0, L149
+  c->daddiu(t1, t1, -13);                             // CR?
+  if (bc) { goto block_65; }
+
+  // B64:
+  bc = c->sgpr64(t1) != 0;                            // bne t1, r0, L150 (neither CR nor LF)
+  if (bc) { goto block_66; }
+
+block_65:
+  // B65 / L149: CR/LF — advance to next justify row: a3 += 16; vf23 = justify[next]
+  c->daddiu(a3, a3, 16);                              // daddiu a3, a3, 16
+  c->lqc2(vf23, 640, a3);                             // vf23 = justify[next]
+  goto block_4;
+
+block_66:
+  // B66 / L150: look up glyph advance vector, check if cursor still within
+  // the max-x (vf1.x = vf25.x - vf23.x — sign bit of float says "overflow").
+  c->addu(t1, t2, a1);                                // addu t1, t2, a1 (glyph ptr base)
+  c->lqc2(vf5, -96, t1);                              // lqc2 vf5, -96(t1) ; glyph st+advance
+  c->mov128_gpr_vf(t1, vf1);                          // qmfc2.i t1, vf1
+  bc = ((s64)c->sgpr64(t1)) < 0;                      // bltz t1, L159 (hit max-x → bail)
+  c->vadd(DEST::xyz, vf8, vf5, vf18);                 // vadd.xyz vf8, vf5, vf18 (outline offset)
+  if (bc) { goto block_91; }
+
+  // B67: sra t1, t1, 31 — if vf1.x float had sign bit set, t1 becomes -1.
+  // This is a second-pass sign check on the FLOAT bit pattern.
+  c->sra(t1, t1, 31);
+  bc = ((s64)c->sgpr64(t1)) < 0;                      // bltz t1, L130 (skip this glyph but continue)
+  if (bc) { goto block_4; }
+
+  // B68: rendering gate — check if flag bits 0 | 4096 set. If neither,
+  // skip the glyph (it still advanced via vf19 computation).
+  c->vadd(DEST::xyz, vf1, vf23, vf0);                 // vadd.xyz vf1, vf23, vf0
+  c->andi(t1, a2, 4097);                              // flag bits 0 | 4096
+  c->vmul(DEST::xyzw, vf19, vf5, vf13);               // vmul.xyzw vf19, vf5, vf13 (glyph advance)
+  bc = c->sgpr64(t1) == 0;                            // beq t1, r0, L130
+  if (bc) { goto block_4; }
+
+  // B69: full transform — project vf1 (glyph bottom-left) and vf4 (top-right)
+  // through calc-mat (vf28..vf31), divide by w, write the char-packet
+  // (tmpl @0..16 + color vf20 + shadow vf9 + pos vf2/vf3 + st vf5/vf8).
+  c->vmula_bc(DEST::xyzw, BC::w, vf31, vf0);          // vmulaw.xyzw acc, vf31, vf0
+  c->vmadda_bc(DEST::xyzw, BC::x, vf28, vf1);         // vmaddax.xyzw acc, vf28, vf1
+  c->vmadda_bc(DEST::xyzw, BC::y, vf29, vf1);         // vmadday.xyzw acc, vf29, vf1
+  c->vmadd_bc(DEST::xyzw, BC::z, vf1, vf30, vf1);     // vmaddz.xyzw vf1, vf30, vf1
+
+  c->vmula_bc(DEST::xyzw, BC::w, vf31, vf0);
+  c->vmadda_bc(DEST::xyzw, BC::x, vf28, vf4);
+  c->vmadda_bc(DEST::xyzw, BC::y, vf29, vf4);
+  c->vmadd_bc(DEST::xyzw, BC::z, vf4, vf30, vf4);
+
+  c->vdiv(vf25, BC::z, vf1, BC::w);                   // vdiv Q, vf25.z, vf1.w
+  c->lq(t2, 0, v1);                                   // tag low qword
+  c->lq(t1, 16, v1);                                  // tag high qword
+  c->lqc2(vf9, 608, v1);                              // color-shadow
+  c->sq(t2, 0, a0);                                   // emit tag @ +0
+  c->sq(t1, 16, a0);                                  // emit tag @ +16
+  c->sqc2(vf20, 32, a0);                              // emit font-tmpl @ +32
+  c->sqc2(vf9, 48, a0);                               // emit shadow color @ +48
+  c->vmulq(DEST::xyz, vf1, vf1);                      // vmulq.xyz vf1, vf1 (proj divide)
+  c->vmulq(DEST::xyz, vf5, vf5);                      // vmulq.xyz vf5, vf5
+  c->vdiv(vf25, BC::z, vf4, BC::w);                   // vdiv Q, vf25.z, vf4.w
+  c->andi(t2, a2, 2);                                 // kerning?
+  c->vadd(DEST::xyzw, vf2, vf1, vf26);                // vf2 = vf1 + hvdf-shadow
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L151 (no kern → fixed)
+  c->andi(t2, a2, 64);                                // flag 64 = newline pending
+  if (bc) { goto block_72; }
+
+  // B70:
+  bc = c->sgpr64(t2) != 0;                            // bne t2, r0, L151
+  if (bc) { goto block_72; }
+
+  // B71: kerned advance: vf23.x += vf19.w
+  c->vadd_bc(DEST::x, BC::w, vf23, vf23, vf19);       // vaddw.x vf23, vf23, vf19
+  goto block_73;
+
+block_72:
+  // B72 / L151: fixed advance: vf23.x += vf14.w
+  c->vadd_bc(DEST::x, BC::w, vf23, vf23, vf14);       // vaddw.x vf23, vf23, vf14
+  // fall through
+
+block_73:
+  // B73 / L152: convert positions to gs-format ints, emit remaining fields,
+  // do y/x on-screen clip test.
+  c->vftoi4(DEST::xyzw, vf2, vf2);                    // vftoi4.xyzw vf2, vf2
+  c->sqc2(vf5, 64, a0);                               // st0
+  c->vmulq(DEST::xyz, vf4, vf4);                      // vmulq.xyz vf4, vf4
+  c->vmulq(DEST::xyz, vf8, vf8);                      // vmulq.xyz vf8, vf8
+  c->vadd(DEST::xyzw, vf3, vf4, vf26);                // vf3 = vf4 + hvdf-shadow
+  c->sqc2(vf8, 96, a0);                               // st1 (outline)
+  c->vftoi4(DEST::xyzw, vf3, vf3);                    // vftoi4.xyzw vf3, vf3
+  c->andi(t2, a2, 256);                               // flag 256 = depth-from-vf23 hack
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L153
+  if (bc) { goto block_75; }
+
+  // B74: depth override — use vf23.z for z slot.
+  c->vftoi0(DEST::z, vf2, vf23);                      // vftoi0.z vf2, vf23
+  c->vftoi0(DEST::z, vf3, vf23);                      // vftoi0.z vf3, vf23
+  // fall through
+
+block_75:
+  // B75 / L153: emit pos0 @ +80, pos1 @ +112, then clip check.
+  c->sqc2(vf2, 80, a0);                               // pos0
+  c->sqc2(vf3, 112, a0);                              // pos1
+  c->lw(t3, 80, a0);                                  // pos0.x (int)
+  c->lw(t2, 84, a0);                                  // pos0.y (int)
+  c->ori(t4, r0, 36864);                              // x min-clip const
+  c->dsubu(t3, t3, t4);
+  c->lw(t4, 112, a0);                                 // pos1.x
+  c->ori(t5, r0, 36096);                              // y min-clip const
+  c->dsubu(t2, t2, t5);
+  c->lw(t5, 116, a0);                                 // pos1.y
+  bc = ((s64)c->sgpr64(t3)) > 0;                      // bgtz t3, L130 (clipped — skip)
+  c->daddiu(t3, t4, -28672);
+  if (bc) { goto block_4; }
+
+  // B76:
+  bc = ((s64)c->sgpr64(t2)) > 0;                      // bgtz t2, L130
+  c->daddiu(t2, t5, -29440);
+  if (bc) { goto block_4; }
+
+  // B77:
+  bc = ((s64)c->sgpr64(t3)) < 0;                      // bltz t3, L130
+  if (bc) { goto block_4; }
+
+  // B78:
+  bc = ((s64)c->sgpr64(t2)) < 0;                      // bltz t2, L130
+  if (bc) { goto block_4; }
+
+  // B79: glyph passed clip. Check flag 1 (draw enabled) → advance dma by 128.
+  c->andi(t2, a2, 1);                                 // flag 1
+  bc = c->sgpr64(t2) == 0;                            // beq t2, r0, L154
+  if (bc) { goto block_81; }
+
+  // B80: advance dma pointer by 128 (one char-packet).
+  c->daddiu(a0, a0, 128);                             // daddiu a0, a0, 128
+
+block_81:
+  // B81 / L154: effect-draw gate — flag 4096 enables the 5-pass outline/shadow
+  // effects (B82..B90). If clear, just loop back.
+  c->andi(t2, a2, 4096);
+  bc = c->sgpr64(t2) == 0;
+  if (bc) { goto block_4; }
+
+  // B82: effect pass 1 — outline layer 1 (vf26 = hvdf-outline1 @ 4784).
+  c->lqc2(vf26, 4784, v1);                            // lqc2 vf26, 4784(v1)
+  c->lq(t2, 0, v1);                                   // tag low
+  c->sq(t1, 16, a0);                                  // tag high (t1 still loaded from B69)
+  c->sqc2(vf20, 32, a0);
+  c->sqc2(vf9, 48, a0);
+  c->sq(t2, 0, a0);
+  c->vadd(DEST::xyzw, vf2, vf1, vf26);
+  c->vftoi4(DEST::xyzw, vf2, vf2);
+  c->sqc2(vf5, 64, a0);
+  c->vadd(DEST::xyzw, vf3, vf4, vf26);
+  c->sqc2(vf8, 96, a0);
+  c->vftoi4(DEST::xyzw, vf3, vf3);
+  c->andi(t2, a2, 256);
+  bc = c->sgpr64(t2) == 0;
+  if (bc) { goto block_84; }
+
+  // B83: depth-override for effect pass 1.
+  c->vftoi0(DEST::z, vf2, vf23);
+  c->vftoi0(DEST::z, vf3, vf23);
+
+block_84:
+  // B84 / L155: emit pass 1 pos, advance dma; start effect pass 2
+  // (vf26 = hvdf-outline2 @ 4800).
+  c->sqc2(vf2, 80, a0);
+  c->sqc2(vf3, 112, a0);
+  c->daddiu(a0, a0, 128);
+  c->lqc2(vf26, 4800, v1);                            // hvdf-outline2
+  c->lq(t2, 0, v1);
+  c->sq(t1, 16, a0);
+  c->sqc2(vf20, 32, a0);
+  c->sqc2(vf9, 48, a0);
+  c->sq(t2, 0, a0);
+  c->vadd(DEST::xyzw, vf2, vf1, vf26);
+  c->vftoi4(DEST::xyzw, vf2, vf2);
+  c->sqc2(vf5, 64, a0);
+  c->vadd(DEST::xyzw, vf3, vf4, vf26);
+  c->sqc2(vf8, 96, a0);
+  c->vftoi4(DEST::xyzw, vf3, vf3);
+  c->andi(t2, a2, 256);
+  bc = c->sgpr64(t2) == 0;
+  if (bc) { goto block_86; }
+
+  // B85: depth-override for effect pass 2.
+  c->vftoi0(DEST::z, vf2, vf23);
+  c->vftoi0(DEST::z, vf3, vf23);
+
+block_86:
+  // B86 / L156: emit pass 2 pos, advance dma; start pass 3
+  // (vf26 = hvdf-outline3 @ 4816).
+  c->sqc2(vf2, 80, a0);
+  c->sqc2(vf3, 112, a0);
+  c->daddiu(a0, a0, 128);
+  c->lqc2(vf26, 4816, v1);                            // hvdf-outline3
+  c->lq(t2, 0, v1);
+  c->sq(t1, 16, a0);
+  c->sqc2(vf20, 32, a0);
+  c->sqc2(vf9, 48, a0);
+  c->sq(t2, 0, a0);
+  c->vadd(DEST::xyzw, vf2, vf1, vf26);
+  c->vftoi4(DEST::xyzw, vf2, vf2);
+  c->sqc2(vf5, 64, a0);
+  c->vadd(DEST::xyzw, vf3, vf4, vf26);
+  c->sqc2(vf8, 96, a0);
+  c->vftoi4(DEST::xyzw, vf3, vf3);
+  c->andi(t2, a2, 256);
+  bc = c->sgpr64(t2) == 0;
+  if (bc) { goto block_88; }
+
+  // B87: depth-override for effect pass 3.
+  c->vftoi0(DEST::z, vf2, vf23);
+  c->vftoi0(DEST::z, vf3, vf23);
+
+block_88:
+  // B88 / L157: emit pass 3 pos, advance dma; start pass 4
+  // (vf26 = hvdf-outline0 @ 4768).
+  c->sqc2(vf2, 80, a0);
+  c->sqc2(vf3, 112, a0);
+  c->daddiu(a0, a0, 128);
+  c->lqc2(vf26, 4768, v1);                            // hvdf-outline0
+  c->lq(t2, 0, v1);
+  c->sq(t1, 16, a0);
+  c->sqc2(vf20, 32, a0);
+  c->sqc2(vf9, 48, a0);
+  c->sq(t2, 0, a0);
+  c->vadd(DEST::xyzw, vf2, vf1, vf26);
+  c->vftoi4(DEST::xyzw, vf2, vf2);
+  c->sqc2(vf5, 64, a0);
+  c->vadd(DEST::xyzw, vf3, vf4, vf26);
+  c->sqc2(vf8, 96, a0);
+  c->vftoi4(DEST::xyzw, vf3, vf3);
+  c->andi(t1, a2, 256);
+  bc = c->sgpr64(t1) == 0;
+  if (bc) { goto block_90; }
+
+  // B89: depth-override for effect pass 4.
+  c->vftoi0(DEST::z, vf2, vf23);
+  c->vftoi0(DEST::z, vf3, vf23);
+
+block_90:
+  // B90 / L158: emit pass 4 pos, restore vf26 to hvdf-shadow (@ 4752),
+  // advance dma, loop back.
+  c->sqc2(vf2, 80, a0);
+  c->sqc2(vf3, 112, a0);
+  c->lqc2(vf26, 4752, v1);                            // restore hvdf-shadow
+  c->daddiu(a0, a0, 128);
+  goto block_4;
+
+block_91:
+  // B91 / L159: end of first render loop. The second loop (B92..B170)
+  // would start here by reloading a2, a3, t0, and vf23 from justify[0],
+  // then iterating the string again for bracket-aware second pass.
+  // That loop is TODO — fall through to the epilogue so the function
+  // still returns a sane u128.
+  //
+  // TODO: port B92..B170 (MIPS labels L160..L187). Structure mirrors the
+  // first loop but handles '[...]' color/justify codes.
+
+  // ---------------------------------------------------------------------------
   // B171 / L187 epilogue: write dma ptr back, compute return u128.
+  // ---------------------------------------------------------------------------
   c->lw(v1, 6172, v1);                                // lw v1, 6172(v1)  ; buf
   c->sw(a0, 4, v1);                                   // sw a0, 4(v1)     ; advance buf write ptr
   c->vsub(DEST::xyzw, vf23, vf23, vf24);              // vsub.xyzw vf23, vf23, vf24
