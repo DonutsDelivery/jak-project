@@ -144,6 +144,11 @@ echo "" | tee -a "$RUN_LOG"
 echo "-- unknown-call clustering --" | tee -a "$RUN_LOG"
 python3 scripts/jakx_watch/unknown_call_scan.py 2>&1 | tee -a "$RUN_LOG" || true
 
+# --- load-offset clustering (which struct offsets are type-prop-unresolved) ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- load-offset clustering --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/load_offset_scan.py 2>&1 | tee -a "$RUN_LOG" || true
+
 # --- auto-seed _REF.gc for newly-real-clean files (no-op if coverage complete) ---
 if [ -f "$ROOT/test/offline/config/jakx/config.jsonc" ]; then
     echo "" | tee -a "$RUN_LOG"

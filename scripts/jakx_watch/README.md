@@ -53,6 +53,10 @@ Per decomp run it tells you:
   not know its type` by parent type / method. A type with many clustered errors
   indicates its `:methods` block in all-types.gc needs better signatures so
   type-prop can resolve jr-t9 callees.
+- `load_offset_scan.py` — clusters `;; ERROR: ... Could not figure out load:
+  (set! DST (OP (+ REG OFFS)))` by offset + caller. Surfaces struct-field
+  offsets that aren't resolving (type_casts.jsonc candidates) and global
+  (gp+OFFS) references that are missing from the symbol table.
 - `migration_candidates.py` — audits `goal_src/jakx/engine/**/*.gc` hand-ports
   against current decomp state. A hand-port is a deletion candidate when its
   decomp is real-clean / real-partial. Flags update-from-decomp append-bug

@@ -536,6 +536,28 @@ def format_summary_block(snap: dict, prev: dict | None = None) -> str:
             lines.append(f"    {c:>4}  {name}")
         lines.append("  → decompiler C++ patch target: emit `(define *X* ...)` with 2 args, not 3")
 
+    # ===== optional: load-offset clusters =====
+    lo = snap.get("load_offset_clusters")
+    if lo:
+        lines.append("")
+        lines.append("## load-offset clusters (\"Could not figure out load\")")
+        lines.append(f"  total: {lo.get('total', 0)}  ·  shapes: {lo.get('shapes', {})}")
+        tso = lo.get("top_struct_offsets") or []
+        if tso:
+            lines.append("  top 10 struct offsets (field @OFFS — type_casts.jsonc candidate):")
+            for offs, c in tso[:10]:
+                lines.append(f"    {c:>4}  offs={offs}")
+        tgo = lo.get("top_global_offsets") or []
+        if tgo:
+            lines.append("  top 8 global offsets (gp+OFFS — unresolved *symbol*/global-var ref):")
+            for offs, c in tgo[:8]:
+                lines.append(f"    {c:>4}  offs={offs}")
+        tf = lo.get("top_files") or []
+        if tf:
+            lines.append("  top 8 offender files:")
+            for name, c in tf[:8]:
+                lines.append(f"    {c:>4}  {name}")
+
     # ===== optional: unknown-call clusters =====
     uc = snap.get("unknown_call_clusters")
     if uc:
