@@ -1,3 +1,400 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+;; name: wvehicle-h.gc
+;; name in dgo: wvehicle-h
+;; dgos: GAME
+
+;; -----------------------------------------------------------------------------
+;; Jak X wheel-vehicle (wvehicle) types. Extends the Jak 3 `vehicle` type with
+;; race/AI/engine/wheel/weapon state. Ported from decompiler_out/jakx/
+;; wvehicle-h_disasm.gc. Types only; method bodies live in wvehicle.gc /
+;; wvehicle-weapons.gc and are not ported here.
+;;
+;; Missing cross-module deps (stubbed locally so this header stays self-contained
+;; without touching jakx-stubs-late.gc):
+;;   - `nav-location`  - 8-byte structure, not yet ported. Minimal deftype below
+;;                       so wvehicle-ai-destination / wvehicle-ai-state can use
+;;                       it :inline.
+;;   - `race-control`  - declare-typed in jakx-stubs-late.gc but no body exists
+;;                       yet; wvehicle embeds it :inline at offset 2168 taking
+;;                       24 bytes. We reserve that space with a raw `uint8 24`
+;;                       placeholder field. When race-control is ported the
+;;                       field can be overlaid on top of the placeholder.
+;;   - `rigid-body-surface` - only pointer-referenced, declare-type is enough.
+;; -----------------------------------------------------------------------------
+
+(declare-type rigid-body-surface structure)
+
+;; Forward declarations for the wvehicle cluster.
+(declare-type wvehicle vehicle)
+(declare-type vehicle-wheel-state structure)
+(declare-type wvehicle-sound-loop-state structure)
+(declare-type wvehicle-engine-mix-state structure)
+(declare-type wvehicle-weapon-sync-blob structure)
+
+
+;; -----------------------------------------------------------------------------
+;; nav-location - local stub (full type lives in jak3 nav-mesh-h which isn't
+;; ported yet for jakx). Fields match all-types.gc:34599.
+;; -----------------------------------------------------------------------------
+(deftype nav-location (structure)
+  ((nav-mesh basic)
+   (nav-poly nav-poly)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; wvehicle-sound-loop-state
+;; -----------------------------------------------------------------------------
+(deftype wvehicle-sound-loop-state (structure)
+  ((id    sound-id)
+   (vol   float)
+   (pitch float)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; vehicle-wheel-state - per-wheel physics + rendering state
+;; -----------------------------------------------------------------------------
+(deftype vehicle-wheel-state (structure)
+  ((info             vehicle-wheel-info                        :offset-assert 0)
+   (flags            uint8                                     :offset-assert 4)
+   (prev-flags       uint8                                     :offset-assert 5)
+   (handle           uint64                                    :offset-assert 8)
+   (probe-local-pos  vector                   :inline          :offset-assert 16)
+   (probe-local-dir  vector                   :inline          :offset-assert 32)
+   (local-axis       vector                   :inline          :offset-assert 48)
+   (surface-pos      vector                   :inline          :offset-assert 64)
+   (ground-pos       vector                   :inline          :offset-assert 80)
+   (ground-normal    vector                   :inline          :offset-assert 96)
+   (trans            vector                   :inline          :offset-assert 112)
+   (quat             quaternion               :inline          :offset-assert 128)
+   (trail-pos        vector                   2       :inline :offset-assert 144)
+   (surface          rigid-body-surface                        :offset-assert 176)
+   (pos              float                                     :offset-assert 180)
+   (pos2             float                                     :offset-assert 184)
+   (inertia          float                                     :offset-assert 188)
+   (steer-angle      float                                     :offset-assert 192)
+   (angle            float                                     :offset-assert 196)
+   (rev              float                                     :offset-assert 200)
+   (x-scale          float                                     :offset-assert 204)
+   (torque           float                                     :offset-assert 208)
+   (braking-torque   float                                     :offset-assert 212)
+   (up-force         float                                     :offset-assert 216)
+   (drive-diff       float                                     :offset-assert 220)
+   (side-vel         float                                     :offset-assert 224)
+   (up-vel           float                                     :offset-assert 228)
+   (forward-vel      float                                     :offset-assert 232)
+   (forward-slip-vel float                                     :offset-assert 236)
+   (friction-coef    float                                     :offset-assert 240)
+   (sink-depth       float                                     :offset-assert 244)
+   (sin-susp-ang     float                                     :offset-assert 248)
+   (cos-susp-ang     float                                     :offset-assert 252)
+   (part-birth-accum sparticle-launch-control 4                :offset-assert 256)
+   (tread-time       uint32                                    :offset-assert 272)
+   (tread-tracker    uint64                                    :offset-assert 280)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; wvehicle-net-extra - delta fields for network sync
+;; -----------------------------------------------------------------------------
+(deftype wvehicle-net-extra (structure)
+  ((desired-steering  float)
+   (desired-throttle  float)
+   (desired-wheel-rev float)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; wvehicle-ai-destination - nav goal for AI racer
+;; -----------------------------------------------------------------------------
+(deftype wvehicle-ai-destination (structure)
+  ((final-position vector       :inline :offset-assert 0)
+   (position       vector       :inline :offset-assert 16)
+   (velocity       vector       :inline :offset-assert 32)
+   (nav-location   nav-location :inline :offset-assert 48)
+   (handle         uint64               :offset-assert 56)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; wvehicle-ai-state - full AI racer brain state
+;; -----------------------------------------------------------------------------
+(deftype wvehicle-ai-state (structure)
+  ((destination             wvehicle-ai-destination :inline :offset-assert 0)
+   (nav-location            nav-location            :inline :offset-assert 64)
+   (current-travel          vector                  :inline :offset-assert 80)
+   (previous-steering-error float                           :offset-assert 96)
+   (no-physics-speed        float                           :offset-assert 100)
+   (blocked-timer           float                           :offset-assert 104)
+   (reverse-timer           float                           :offset-assert 108)
+   (flags                   uint32                          :offset-assert 112)
+   (desired-speed           float                           :offset-assert 116)
+   (weapon-timer            uint64                          :offset-assert 120)
+   (weapon-aggression       float                           :offset-assert 128)
+   (mode                    uint8                           :offset-assert 132)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; wvehicle-engine-loop-state - one voice of the engine sound blend
+;; -----------------------------------------------------------------------------
+(deftype wvehicle-engine-loop-state (structure)
+  ((id    uint32)
+   (index int8)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; wvehicle-engine-mix-state - two engine loops blended together
+;; -----------------------------------------------------------------------------
+(deftype wvehicle-engine-mix-state (structure)
+  ((loops wvehicle-engine-loop-state 2 :inline :offset-assert 0)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; v-wpn-turbo-lightning-info - turbo lightning arc endpoints
+;; -----------------------------------------------------------------------------
+(deftype v-wpn-turbo-lightning-info (structure)
+  ((pt-start         vector :inline :offset-assert 0)
+   (pt-end           vector :inline :offset-assert 16)
+   (next-start       vector :inline :offset-assert 32)
+   (next-end         vector :inline :offset-assert 48)
+   (next-recomp-time uint64         :offset-assert 64)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; wvehicle-weapon-sync-blob - 4-byte packed weapon state for net sync
+;; -----------------------------------------------------------------------------
+(deftype wvehicle-weapon-sync-blob (structure)
+  ((data              uint8 4   :offset 0)
+   (wpn-left-type     int8      :offset 0)
+   (wpn-right-type    int8      :offset 1)
+   (wpn-left-powerup  int8      :offset 2)
+   (wpn-right-powerup int8      :offset 3)
+   (blob              int32     :offset 0)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; vehicle-antenna-init-params - spawn params for a whip antenna
+;; -----------------------------------------------------------------------------
+(deftype vehicle-antenna-init-params (structure)
+  ((pos     vector :inline :offset-assert 0)
+   (tilt    float          :offset-assert 16)
+   (vehicle basic          :offset-assert 20)
+   (skel    basic          :offset-assert 24)
+   (level   basic          :offset-assert 28)
+   )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; wvehicle - the big one. Concrete racer types (wcar-bobcat, wcar-cheetah, ...)
+;; extend this. The `race` field is opaque 24 bytes until race-control is ported.
+;; -----------------------------------------------------------------------------
+(deftype wvehicle (vehicle)
+  ((net-extra                      wvehicle-net-extra        :inline)
+   (antenna                        uint64)
+   (fire-tracker                   uint64)
+   (race-placeholder               uint8                     24) ;; race-control :inline (not yet ported)
+   (ai                             wvehicle-ai-state         :inline)
+   (engine-rev                     float)
+   (engine-inertia                 float)
+   (engine-torque                  float)
+   (engine-max-torque              float)
+   (engine-rpm                     float)
+   (engine-load                    float)
+   (sound-engine-rpm               float)
+   (sound-engine-load              float)
+   (sound-engine-envelope          float)
+   (wheel-rev                      float)
+   (wheel-inertia                  float)
+   (wheel-torque                   float)
+   (wheel-braking-torque           float)
+   (wheel-ground-torque            float)
+   (clutch-grab                    float)
+   (gear-ratio                     float)
+   (final-drive-ratio              float)
+   (total-gear-ratio               float)
+   (inv-total-gear-ratio           float)
+   (avg-drive-wheel-radius         float)
+   (drive-wheel-inertia            float)
+   (clutch-inertia                 float)
+   (idle-throttle                  float)
+   (wheelbase                      float)
+   (f-track-width                  float)
+   (r-track-width                  float)
+   (susp-spring-control            float)
+   (jump-control                   float)
+   (shortcut-speed-factor          float)
+   (path-deviation                 float)
+   (turbo-ready                    float)
+   (slide-factor                   float)
+   (slide-time                     uint32)
+   (max-speed                      float)
+   (shift-state                    uint8)
+   (gear-select                    int8)
+   (next-gear-select               int8)
+   (shift-time                     uint32)
+   (wheel                          vehicle-wheel-state       4)
+   (gravity-dir                    vector                    :inline)
+   (surface-velocity               vector                    :inline)
+   (tire-roll-loop-state           wvehicle-sound-loop-state 6)
+   (tire-slide-loop-state          wvehicle-sound-loop-state 2)
+   (min-load-engine-mix-state      wvehicle-engine-mix-state :inline)
+   (max-load-engine-mix-state      wvehicle-engine-mix-state :inline)
+   (damage-sound-id                sound-id)
+   (water-sound-id                 sound-id)
+   (wheel-fire-sound-id            uint32)
+   (oil-sound-id                   uint32)
+   (turbo-sound-id                 sound-id)
+   (turbo-sound2-id                uint32)
+   (car-fire-loop                  uint32)
+   (hang-time-sound-id             uint32)
+   (overturned-time                uint32)
+   (engine-steady-time             uint32)
+   (splash-time                    uint32)
+   (knobby-time                    uint32)
+   (susp-creak-time                uint32)
+   (ground-time                    uint32)
+   (jump-time                      uint32)
+   (no-slide-time                  uint32)
+   (slide-distance                 float)
+   (power-slide-hud                uint64)
+   (hang-time-hud                  uint64)
+   (hang-time                      float)
+   (next-slide-sound-play-distance float)
+   (attached-array                 handle                    16)
+   (eng-pitch-offset               float)
+   (eng-pitch-variance             float)
+   (eng-pitch-variance-seek        float)
+   (eng-vol-variance               float)
+   (eng-vol-variance-seek          float)
+   (turbo-pitch                    float)
+   (health-pickup-multiplier       float)
+   (jmod-steering-wheel            joint-mod-rotate-local    :inline)
+   (jmod-frame                     uint8                     128) ;; 2 x joint-mod-rotate-local :inline
+   (jmod-axles                     uint8                     192) ;; 4 x joint-mod-rotate-local :inline (placeholder)
+   (water-sound-envelope           float)
+   (pad-4468                       uint8                     20)
+   (wpn-current-target             uint64)
+   (wpn-current-target-acquired    uint64)
+   (wpn-left                       uint64)
+   (wpn-right                      uint64)
+   (wpn-shield                     uint64)
+   (wpn-drone                      uint64)
+   (wpn-oil                        uint64)
+   (wpn-turbo                      uint64)
+   (wpn-bulldog-gun                uint64)
+   (wpn-drawable-left              uint64)
+   (wpn-drawable-right             uint64)
+   (wpn-spin-done-left             int32)
+   (wpn-spin-done-right            int32)
+   (prev-wpn-sync                  wvehicle-weapon-sync-blob :inline)
+   (turbo-suppressor-particle      basic)
+   (dark-seeking-me                basic)
+   (dark-suck-sound-pending        int8)
+   (pad-4597                       uint8                     3)
+   (vehicle-exhaust-subsampler     uint64                    2) ;; placeholder 16 bytes
+   (wheel-launcher                 uint32                    4) ;; sparticle-launch-control ptr array
+   (wheel-fire-launcher            uint32                    4)
+   (hack-armed-right               basic)
+   (hack-armed-left                basic)
+   (shake-amount                   float)
+   (whoosh-sound-id                uint32)
+   (sink-sound-id                  uint32)
+   )
+  (:methods
+    (wvehicle-method-204 (_type_) none)
+    (wvehicle-method-205 (_type_) none)
+    (wvehicle-method-206 (_type_) none)
+    (wvehicle-method-207 (_type_) none)
+    (wvehicle-method-208 (_type_) none)
+    (wvehicle-method-209 (_type_) none)
+    (wvehicle-method-210 (_type_) none)
+    (wvehicle-method-211 (_type_) none)
+    (wvehicle-method-212 (_type_) none)
+    (wvehicle-method-213 (_type_) none)
+    (wvehicle-method-214 (_type_) none)
+    (wvehicle-method-215 (_type_) none)
+    (wvehicle-method-216 (_type_) none)
+    (wvehicle-method-217 (_type_) none)
+    (wvehicle-method-218 (_type_) none)
+    (wvehicle-method-219 (_type_) none)
+    (wvehicle-method-220 (_type_) none)
+    (wvehicle-method-221 (_type_) none)
+    (wvehicle-method-222 (_type_) none)
+    (wvehicle-method-223 (_type_) none)
+    (wvehicle-method-224 (_type_) none)
+    (wvehicle-method-225 (_type_) none)
+    (wvehicle-method-226 (_type_) none)
+    (wvehicle-method-227 (_type_) none)
+    (wvehicle-method-228 (_type_) none)
+    (wvehicle-method-229 (_type_) none)
+    (wvehicle-method-230 (_type_) none)
+    (wvehicle-method-231 (_type_) none)
+    (wvehicle-method-232 (_type_) none)
+    (wvehicle-method-233 (_type_) none)
+    (wvehicle-method-234 (_type_) none)
+    (wvehicle-method-235 (_type_) none)
+    (wvehicle-method-236 (_type_) none)
+    (wvehicle-method-237 (_type_) none)
+    (wvehicle-method-238 (_type_) none)
+    (wvehicle-method-239 (_type_) none)
+    (wvehicle-method-240 (_type_) none)
+    (wvehicle-method-241 (_type_) none)
+    (wvehicle-method-242 (_type_) none)
+    (wvehicle-method-243 (_type_) none)
+    (wvehicle-method-244 (_type_) none)
+    (wvehicle-method-245 (_type_) none)
+    (wvehicle-method-246 (_type_) none)
+    (wvehicle-method-247 (_type_) none)
+    (wvehicle-method-248 (_type_) none)
+    (wvehicle-method-249 (_type_) none)
+    (wvehicle-method-250 (_type_) none)
+    (wvehicle-method-251 (_type_) none)
+    (wvehicle-method-252 (_type_) none)
+    (wvehicle-method-253 (_type_) none)
+    (wvehicle-method-254 (_type_) none)
+    (wvehicle-method-255 (_type_) none)
+    (wvehicle-method-256 (_type_) none)
+    (wvehicle-method-257 (_type_) none)
+    (wvehicle-method-258 (_type_) none)
+    (wvehicle-method-259 (_type_) none)
+    (wvehicle-method-260 (_type_) none)
+    (wvehicle-method-261 (_type_) none)
+    (wvehicle-method-262 (_type_) none)
+    (wvehicle-method-263 (_type_) none)
+    (wvehicle-method-264 (_type_) none)
+    (wvehicle-method-265 (_type_) none)
+    (wvehicle-method-266 (_type_) none)
+    (wvehicle-method-267 (_type_) none)
+    (wvehicle-method-268 (_type_) none)
+    (wvehicle-method-269 (_type_) none)
+    (wvehicle-method-270 (_type_) none)
+    (wvehicle-method-271 (_type_) none)
+    )
+  )
+
+
+;; -----------------------------------------------------------------------------
+;; Externs for helpers defined in wvehicle.gc / wvehicle-weapons.gc
+;; -----------------------------------------------------------------------------
+(define-extern rpm->radians-per-sec (function float float))
+(define-extern radians-per-sec->rpm (function float float))
+(define-extern vehicle-shielded? (function wvehicle symbol))
