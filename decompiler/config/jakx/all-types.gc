@@ -40588,9 +40588,15 @@
 ;; attackable-hash                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; attackable-hash is already defined!
+(deftype attackable-hash (basic)
+  ((data (pointer uint64) :offset-assert 4)
+   (pad  uint8 10 :offset-assert 8))
+  :method-count-assert 9
+  :size-assert         #x12
+  :flag-assert         #x900000012
+  )
 
-(define-extern *attackable-hash* object) ;; attackable-hash
+(define-extern *attackable-hash* attackable-hash)
 (define-extern attackable-hash-copy! function)
 (define-extern attackable-hash-exchange! function)
 (define-extern attackable-hash-update function)
