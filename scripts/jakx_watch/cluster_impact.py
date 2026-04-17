@@ -10,6 +10,9 @@ For each cluster it computes:
   - file_refs: decomp files that reference ANY type in the cluster
   - depth: longest parent-first chain within the cluster (ordering cost)
   - ref_per_cost: file_refs / max(1, depth) — the prioritisation score
+  - c_unlock: commented types OUTSIDE this cluster whose parent is one of this
+    cluster's types. These become newly activatable when this cluster is
+    activated. High c_unlock = cascade unblock (one cluster unlocks the next).
 
 Ranking: higher ref_per_cost = more files unblocked per unit of activation work.
 
@@ -243,6 +246,20 @@ def main() -> int:
     print(f"building ref index for {len(commented_names)} commented types...")
     ref_index = build_ref_index(decomp_dir, commented_names)
 
+    # Build a ref index for commented types: which OTHER commented types mention
+    # each type name in their body? Used for c_unlock computation.
+    # Single pass over all commented type bodies — build inverted index.
+    commented_body_refs: dict[str, set[str]] = collections.defaultdict(set)
+    # Build word-boundary pattern for all type names
+    all_type_names = set(all_types.keys())
+    for cname in commented_names:
+        body = all_types[cname]["body"]
+        # Find all word-boundary identifiers in body that are type names
+        for m in re.finditer(r"[a-z][a-z0-9\-!?<>*/]*(?:-[a-z0-9!?<>*/]+)+|[a-z][a-z0-9!?<>*/]{2,}", body):
+            tok = m.group(0)
+            if tok in all_type_names and tok != cname:
+                commented_body_refs[tok].add(cname)
+
     # Score each cluster
     ranked = []
     for root, info in clusters.items():
@@ -256,6 +273,17 @@ def main() -> int:
         size = len(cluster_types)
         ref_per_cost = round(len(files_union) / max(1, max_depth), 2)
 
+        # c_unlock: unique commented types OUTSIDE this cluster that reference
+        # any type in this cluster in their body (field types, method args, etc.).
+        # When this cluster is activated, these commented types have one fewer
+        # unresolved dependency — a high count means cascading activation potential.
+        c_unlock_set: set[str] = set()
+        for t in cluster_types:
+            for ref_by in commented_body_refs.get(t, set()):
+                if ref_by not in cluster_types:
+                    c_unlock_set.add(ref_by)
+        c_unlock = len(c_unlock_set)
+
         ranked.append({
             "root": root,
             "size": size,
@@ -263,6 +291,7 @@ def main() -> int:
             "file_refs": len(files_union),
             "total_refs": total_refs,
             "ref_per_cost": ref_per_cost,
+            "c_unlock": c_unlock,
             "types": info["types"],
             "depths": info["depths"],
         })
@@ -271,11 +300,11 @@ def main() -> int:
 
     # Console summary
     print(f"\nTop {min(args.top, len(ranked))} clusters by ref_per_cost:")
-    print(f"  {'root':<30} {'size':>5} {'depth':>5} {'f_refs':>6} {'t_refs':>6} {'r/cost':>7}")
+    print(f"  {'root':<30} {'size':>5} {'depth':>5} {'f_refs':>6} {'t_refs':>6} {'r/cost':>7} {'c_unlock':>8}")
     for r in ranked[: args.top]:
         print(
             f"  {r['root']:<30} {r['size']:>5} {r['max_depth']:>5} "
-            f"{r['file_refs']:>6} {r['total_refs']:>6} {r['ref_per_cost']:>7.2f}"
+            f"{r['file_refs']:>6} {r['total_refs']:>6} {r['ref_per_cost']:>7.2f} {r['c_unlock']:>8}"
         )
 
     if args.detail:
@@ -310,14 +339,17 @@ def main() -> int:
         "- **f_refs** — decomp files that reference ≥1 type in the cluster (files potentially unblocked)",
         "- **t_refs** — total reference events across all types in the cluster",
         "- **r/cost** = f_refs / max(1, depth) — main rank signal: files-per-unit-of-ordering-work",
+        "- **c_unlock** — unique commented types OUTSIDE this cluster that reference any type "
+        "inside it (field types, method args, parent types). Activating this cluster resolves "
+        "one dependency for each of these types — high c_unlock = cascade activation potential.",
         "",
-        "| # | r/cost | root (active anchor) | size | depth | f_refs | t_refs |",
-        "|---|-------:|---------------------|-----:|------:|-------:|-------:|",
+        "| # | r/cost | root (active anchor) | size | depth | f_refs | t_refs | c_unlock |",
+        "|---|-------:|---------------------|-----:|------:|-------:|-------:|---------:|",
     ]
     for i, r in enumerate(ranked[: args.top], 1):
         lines.append(
             f"| {i} | {r['ref_per_cost']:.2f} | `{r['root']}` | "
-            f"{r['size']} | {r['max_depth']} | {r['file_refs']} | {r['total_refs']} |"
+            f"{r['size']} | {r['max_depth']} | {r['file_refs']} | {r['total_refs']} | {r['c_unlock']} |"
         )
 
     lines += [
@@ -329,7 +361,7 @@ def main() -> int:
         "",
     ]
     for r in ranked[:15]:
-        lines.append(f"### `{r['root']}` (size={r['size']}, depth={r['max_depth']}, f_refs={r['file_refs']})")
+        lines.append(f"### `{r['root']}` (size={r['size']}, depth={r['max_depth']}, f_refs={r['file_refs']}, c_unlock={r['c_unlock']})")
         lines.append("")
         lines.append("| depth | type | file_refs |")
         lines.append("|------:|------|----------:|")
