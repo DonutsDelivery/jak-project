@@ -824,6 +824,20 @@ std::unique_ptr<AtomicOp> convert_subu_1(const Instruction& i0, int idx) {
   }
 }
 
+std::unique_ptr<AtomicOp> convert_sllv_1(const Instruction& i0, int idx) {
+  // sllv rD, rS, r0 — shift by zero is identity. jakx's compiler emits this
+  // as a truncate-to-int32 mov in places where older games used `or rD,rS,r0`.
+  // Without this, jakx code hits "Unsupported inline assembly: sllv" and
+  // fails expression building. If the shift amount isn't r0, fall through
+  // to the asm fallback.
+  if (i0.get_src(1).is_reg(rr0())) {
+    auto dst = make_dst_var(i0.get_dst(0).get_reg(), idx);
+    auto src = make_src_atom(i0.get_src(0).get_reg(), idx).as_expr();
+    return std::make_unique<SetVarOp>(dst, src, idx);
+  }
+  return nullptr;
+}
+
 std::unique_ptr<AtomicOp> convert_1(const Instruction& i0,
                                     int idx,
                                     bool hint_inline_asm,
@@ -836,6 +850,8 @@ std::unique_ptr<AtomicOp> convert_1(const Instruction& i0,
       return convert_por_1(i0, idx);
     case InstructionKind::ORI:
       return convert_ori_1(i0, idx);
+    case InstructionKind::SLLV:
+      return convert_sllv_1(i0, idx);
     case InstructionKind::AND:
       return make_3reg_op(i0, SimpleExpression::Kind::AND, idx);
     case InstructionKind::PCPYLD:
