@@ -225,3 +225,20 @@ fi
 echo "" | tee -a "$RUN_LOG"
 echo "-- re-rendering status.md with augmented data --" | tee -a "$RUN_LOG"
 python3 scripts/jakx_watch/measure.py --restatus-only 2>&1 | tee -a "$RUN_LOG"
+
+# Guard: if offline_test is missing from latest.json (can happen when a
+# concurrent run.sh call races and overwrites latest.json between
+# offline_test_pass.py's read and write), re-run it now so status.md is
+# fully populated.
+if [ -f "$ROOT/test/offline/config/jakx/config.jsonc" ]; then
+    LATEST="$ROOT/.jakx_watch/history/latest.json"
+    if [ -f "$LATEST" ]; then
+        HAS_OT=$(python3 -c "import json,sys; d=json.load(open('$LATEST')); sys.exit(0 if 'offline_test' in d else 1)" 2>/dev/null; echo $?)
+        if [ "$HAS_OT" != "0" ]; then
+            echo "" | tee -a "$RUN_LOG"
+            echo "-- offline-test: re-running (offline_test key missing from latest.json — race recovery) --" | tee -a "$RUN_LOG"
+            python3 scripts/jakx_watch/offline_test_pass.py 2>&1 | tee -a "$RUN_LOG" || true
+            python3 scripts/jakx_watch/measure.py --restatus-only 2>&1 | tee -a "$RUN_LOG"
+        fi
+    fi
+fi
