@@ -12,6 +12,28 @@
 (define-extern hud-points-icon-display4 object)
 (define-extern sprite-ptr-menu object)
 
+;; Auto-extern batch 21
+(define-extern medius-account-logout-request type)
+(define-extern medius-channel-list-extra-info-response1 type)
+(define-extern medius-file-search-by-meta-data-request type)
+(define-extern medius-game-list-extra-info-request type)
+(define-extern medius-get-lobby-player-names-request type)
+(define-extern medius-machine-signature-post type)
+(define-extern medius-version-server-request type)
+(define-extern net-connection-info type)
+(define-extern index-sprite-list-menu-info object)
+
+;; Auto-extern batch 22
+(define-extern medius-account-registration-request type)
+(define-extern medius-channel-list-extra-info-response type)
+(define-extern medius-file-search-by-meta-data-response type)
+(define-extern medius-game-list-extra-info-response type)
+(define-extern medius-get-lobby-player-names-response type)
+(define-extern medius-modify-clan-message-request type)
+(define-extern medius-version-server-response type)
+(define-extern index-sprite-list-menu object)
+(define-extern net-connect-in-params object)
+
 ;; type system setup
 (define-extern object type)
 (define-extern type type)
