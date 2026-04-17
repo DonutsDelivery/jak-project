@@ -30261,7 +30261,7 @@
 
 
   
-#|(deftype othercam (process)
+(deftype othercam (process)
   ((hand              uint64               :offset-assert 144) ;; handle
    (old-global-mask   process-mask         :offset-assert 152) ;; guessed by decompiler
    (mask-to-clear     process-mask         :offset-assert 156) ;; guessed by decompiler
@@ -30275,21 +30275,21 @@
    (spooling?         symbol               :offset-assert 224) ;; guessed by decompiler
    (fov               float                :offset-assert 228)
    )
-  :method-count-assert 15
+  :method-count-assert 20
   :size-assert         #xe8
-  :flag-assert         #xf006000e8
+  :flag-assert         #x14006000e8
   (:methods
-    (othercam-method-9 () none) ;; 9
-    (othercam-method-10 () none) ;; 10
-    (othercam-method-11 () none) ;; 11
-    (othercam-method-12 () none) ;; 12
-    (othercam-method-13 () none) ;; 13
     (othercam-method-14 () none) ;; 14
+    (othercam-method-15 () none) ;; 15
+    (othercam-method-16 () none) ;; 16
+    (othercam-method-17 () none) ;; 17
+    (othercam-method-18 () none) ;; 18
+    (othercam-method-19 () none) ;; 19
     )
   (:states
     othercam-running ;; associated process guessed by decompiler, old: (state othercam)
     )
-  )|#
+  )
   
 
 
