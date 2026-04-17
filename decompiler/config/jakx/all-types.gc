@@ -5662,7 +5662,7 @@
   :size-assert         #x80
   :flag-assert         #x1900000080
   (:methods
-    (tire-trail-method-23 () none) ;; 23 ;; (tire-trail-method-23 (_type_ vector vector float) none)
+    (tire-trail-method-23 (_type_ vector vector float) none) ;; 23
     (tire-trail-method-24 () none) ;; 24
     )
   )|#
@@ -11703,23 +11703,23 @@
   :flag-assert         #x1c000002d0
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type) _type_)
-    (texture-pool-method-9 () none) ;; 9 ;; (initialize! (_type_) _type_)
-    (texture-pool-method-10 () none) ;; 10 ;; (print-usage (_type_) _type_)
-    (texture-pool-method-11 () none) ;; 11 ;; (setup-font-texture (_type_) none)
-    (texture-pool-method-12 () none) ;; 12 ;; (allocate-defaults (_type_) none)
-    (texture-pool-method-13 () none) ;; 13 ;; (login-level-textures (_type_ level int (pointer texture-id)) none)
-    (texture-pool-method-14 () none) ;; 14 ;; (add-level-tpage-dma (_type_ level tpage-category bucket-id) none)
-    (texture-pool-method-15 () none) ;; 15 ;; (allocate-vram-words! (_type_ int) int)
-    (texture-pool-method-16 () none) ;; 16 ;; (allocate-segment (_type_ texture-pool-segment int) texture-pool-segment)
-    (texture-pool-method-17 () none) ;; 17 ;; (unload-page (_type_ texture-page) none)
-    (texture-pool-method-18 () none) ;; 18 ;; (get-common-page-slot-by-id (_type_ int) int)
-    (texture-pool-method-19 () none) ;; 19 ;; (update-warp-and-hud (_type_) none)
-    (texture-pool-method-20 () none) ;; 20 ;; (update-sprites (_type_) none)
-    (texture-pool-method-21 () none) ;; 21 ;; (mark-hud-warp-sprite-dirty (_type_) none)
-    (texture-pool-method-22 () none) ;; 22 ;; (lay-out-sprite-tex (_type_) none)
-    (texture-pool-method-23 () none) ;; 23 ;; (lay-out-hud-tex (_type_) none)
-    (texture-pool-method-24 () none) ;; 24 ;; (lay-out-warp-tex (_type_) none)
-    (texture-pool-method-25 () none) ;; 25 ;; (clear-ids (_type_) none)
+    (texture-pool-method-9 (_type_) _type_) ;; 9
+    (texture-pool-method-10 (_type_) _type_) ;; 10
+    (texture-pool-method-11 (_type_) none) ;; 11
+    (texture-pool-method-12 (_type_) none) ;; 12
+    (texture-pool-method-13 (_type_ level int (pointer texture-id)) none) ;; 13
+    (texture-pool-method-14 (_type_ level tpage-category bucket-id) none) ;; 14
+    (texture-pool-method-15 (_type_ int) int) ;; 15
+    (texture-pool-method-16 (_type_ texture-pool-segment int) texture-pool-segment) ;; 16
+    (texture-pool-method-17 (_type_ texture-page) none) ;; 17
+    (texture-pool-method-18 (_type_ int) int) ;; 18
+    (texture-pool-method-19 (_type_) none) ;; 19
+    (texture-pool-method-20 (_type_) none) ;; 20
+    (texture-pool-method-21 (_type_) none) ;; 21
+    (texture-pool-method-22 (_type_) none) ;; 22
+    (texture-pool-method-23 (_type_) none) ;; 23
+    (texture-pool-method-24 (_type_) none) ;; 24
+    (texture-pool-method-25 (_type_) none) ;; 25
     (texture-pool-method-26 () none) ;; 26
     (texture-pool-method-27 () none) ;; 27
     )
@@ -11829,10 +11829,10 @@
   :flag-assert         #xf00000080
   (:methods
     (texture-page-method-9 () none) ;; 9 ;; (remove-data-from-heap (_type_ kheap) _type_)
-    (texture-page-method-10 () none) ;; 10 ;; (get-leftover-block-count (_type_ int int) int)
-    (texture-page-method-11 () none) ;; 11 ;; (relocate-dests! (_type_ int int) none)
-    (texture-page-method-12 () none) ;; 12 ;; (add-to-dma-buffer (_type_ dma-buffer tex-upload-mode) int)
-    (texture-page-method-13 () none) ;; 13 ;; (upload-now! (_type_ tex-upload-mode) none)
+    (texture-page-method-10 (_type_ int int) int) ;; 10
+    (texture-page-method-11 (_type_ int int) none) ;; 11
+    (texture-page-method-12 (_type_ dma-buffer tex-upload-mode) int) ;; 12
+    (texture-page-method-13 (_type_ tex-upload-mode) none) ;; 13
     (texture-page-method-14 () none) ;; 14
     )
   )
@@ -12325,9 +12325,9 @@
   :size-assert         #x14
   :flag-assert         #xc00000014
   (:methods
-    (trail-node-method-9 () none) ;; 9 ;; (get-dist-score (_type_ vector) uint)
-    (trail-node-method-10 () none) ;; 10 ;; (debug-draw (_type_ int) symbol)
-    (trail-node-method-11 () none) ;; 11 ;; (get-position (_type_ vector) vector)
+    (trail-node-method-9 (_type_ vector) uint) ;; 9
+    (trail-node-method-10 (_type_ int) symbol) ;; 10
+    (trail-node-method-11 (_type_ vector) vector) ;; 11
     )
   )
 
@@ -12487,31 +12487,31 @@
   :size-assert         #x190
   :flag-assert         #x2200000190
   (:methods
-    (trail-graph-method-9 () none) ;; 9 ;; (trail-graph-method-9 (_type_ int) int)
-    (trail-graph-method-10 () none) ;; 10 ;; (trail-graph-method-10 (_type_ int) symbol)
-    (trail-graph-method-11 () none) ;; 11 ;; (trail-graph-method-11 (_type_ int int) trail-node)
-    (trail-graph-method-12 () none) ;; 12 ;; (trail-graph-method-12 (_type_ trail-node vector) symbol)
-    (trail-graph-method-13 () none) ;; 13 ;; (trail-graph-method-13 (_type_ vector vector) symbol)
-    (trail-graph-method-14 () none) ;; 14 ;; (debug-draw (_type_) symbol)
-    (trail-graph-method-15 () none) ;; 15 ;; (trail-graph-method-15 (_type_ int) symbol)
-    (trail-graph-method-16 () none) ;; 16 ;; (trail-graph-method-16 (_type_ int (pointer uint16) vector vector rgba float) symbol)
-    (trail-graph-method-17 () none) ;; 17 ;; (trail-graph-method-17 (_type_ vector vector) int)
-    (trail-graph-method-18 () none) ;; 18 ;; (trail-graph-method-18 (_type_ vector) int)
-    (trail-graph-method-19 () none) ;; 19 ;; (trail-graph-method-19 (_type_) none)
-    (trail-graph-method-20 () none) ;; 20 ;; (trail-graph-method-20 (_type_ uint vector) vector)
-    (trail-graph-method-21 () none) ;; 21 ;; (trail-graph-method-21 (_type_ (pointer uint16) int (pointer int32) (pointer float)) int)
-    (trail-graph-method-22 () none) ;; 22 ;; (trail-graph-method-22 (_type_ int int) symbol)
-    (trail-graph-method-23 () none) ;; 23 ;; (trail-graph-method-23 (_type_) symbol)
-    (trail-graph-method-24 () none) ;; 24 ;; (trail-graph-method-24 (_type_ uint vector int int) symbol)
-    (trail-graph-method-25 () none) ;; 25 ;; (trail-graph-method-25 (_type_ int) int)
-    (trail-graph-method-26 () none) ;; 26 ;; (trail-graph-method-26 (_type_) int)
-    (trail-graph-method-27 () none) ;; 27 ;; (trail-graph-method-27 (_type_) int)
+    (trail-graph-method-9 (_type_ int) int) ;; 9
+    (trail-graph-method-10 (_type_ int) symbol) ;; 10
+    (trail-graph-method-11 (_type_ int int) trail-node) ;; 11
+    (trail-graph-method-12 (_type_ trail-node vector) symbol) ;; 12
+    (trail-graph-method-13 (_type_ vector vector) symbol) ;; 13
+    (trail-graph-method-14 (_type_) symbol) ;; 14
+    (trail-graph-method-15 (_type_ int) symbol) ;; 15
+    (trail-graph-method-16 (_type_ int (pointer uint16) vector vector rgba float) symbol) ;; 16
+    (trail-graph-method-17 (_type_ vector vector) int) ;; 17
+    (trail-graph-method-18 (_type_ vector) int) ;; 18
+    (trail-graph-method-19 (_type_) none) ;; 19
+    (trail-graph-method-20 (_type_ uint vector) vector) ;; 20
+    (trail-graph-method-21 (_type_ (pointer uint16) int (pointer int32) (pointer float)) int) ;; 21
+    (trail-graph-method-22 (_type_ int int) symbol) ;; 22
+    (trail-graph-method-23 (_type_) symbol) ;; 23
+    (trail-graph-method-24 (_type_ uint vector int int) symbol) ;; 24
+    (trail-graph-method-25 (_type_ int) int) ;; 25
+    (trail-graph-method-26 (_type_) int) ;; 26
+    (trail-graph-method-27 (_type_) int) ;; 27
     (trail-graph-method-28 () none) ;; 28 ;; (trail-graph-method-28 (_type_ trail-conn-search int int) symbol)
-    (trail-graph-method-29 () none) ;; 29 ;; (trail-graph-method-29 (_type_ vector vector trail-cached-search-info) int)
-    (trail-graph-method-30 () none) ;; 30 ;; (trail-graph-method-30 (_type_) int)
-    (trail-graph-method-31 () none) ;; 31 ;; (trail-graph-method-31 (_type_ int) none)
-    (trail-graph-method-32 () none) ;; 32 ;; (trail-graph-method-32 (_type_) uint)
-    (trail-graph-method-33 () none) ;; 33 ;; (trail-graph-method-33 (_type_ int) symbol)
+    (trail-graph-method-29 (_type_ vector vector trail-cached-search-info) int) ;; 29
+    (trail-graph-method-30 (_type_) int) ;; 30
+    (trail-graph-method-31 (_type_ int) none) ;; 31
+    (trail-graph-method-32 (_type_) uint) ;; 32
+    (trail-graph-method-33 (_type_ int) symbol) ;; 33
     )
   )|#
   
@@ -13016,7 +13016,7 @@
     (weather-event-concluded? ;; TODO - guess at name
       "@returns [[#t]] if [[this::override-weather-flag]] is set, we aren't in a cutscene and [[this::current-special-interp]] is equal to `0.0`"
       (_type_) symbol) ;; 14 ;; (apply-mood-color (_type_ mood-control-work) none)
-    (set-lightning-time! (_type_ int int float) none) ;; 15 ;; (apply-mood-channels (_type_ mood-control-work) none)
+    (set-lightning-time! (_type_ mood-control-work) none) ;; 15
     (apply-mood-clouds-and-fog (_type_ mood-control-work) none) ;; 16 ;; (adjust-num-clouds! (_type_ mood-control-work) none)
     (apply-mood-fog (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) none) ;; 17
     (apply-fog-height (_type_ mood-control-work float float float float) none) ;; 18
@@ -13275,24 +13275,24 @@
   :size-assert         #x594
   :flag-assert         #x1e00000594
   (:methods
-    (level-method-9 (_type_) none) ;; 9 ;; (deactivate (_type_) _type_)
-    (level-method-10 (_type_) none) ;; 10 ;; (unload! (_type_) _type_)
-    (level-method-11 (_type_) none) ;; 11 ;; (is-object-visible? (_type_ int) symbol)
+    (level-method-9 (_type_) _type_) ;; 9
+    (level-method-10 (_type_) _type_) ;; 10
+    (level-method-11 (_type_ int) symbol) ;; 11
     (level-method-12 (_type_) none) ;; 12 ;; (level-method-12 (_type_) none)
-    (level-method-13 (_type_) none) ;; 13 ;; (bsp-name (_type_) symbol)
+    (level-method-13 (_type_) symbol) ;; 13
     (level-method-14 (_type_) none) ;; 14 ;; (compute-memory-usage! (_type_ symbol) memory-usage-block)
-    (level-method-15 (_type_) none) ;; 15 ;; (inside-bsp? (_type_) symbol)
-    (level-method-16 (_type_) none) ;; 16 ;; (update-vis! (_type_ level-vis-info uint (pointer uint8)) symbol)
-    (level-method-17 (_type_) none) ;; 17 ;; (load-continue (_type_) _type_)
-    (level-method-18 (_type_) none) ;; 18 ;; (load-begin (_type_) _type_)
-    (level-method-19 (_type_) none) ;; 19 ;; (login-begin (_type_) _type_)
-    (level-method-20 (_type_) none) ;; 20 ;; (debug-print-region-splitbox (_type_ vector object) none)
-    (level-method-21 (_type_) none) ;; 21 ;; (get-art-group-by-name (_type_ string) art-group)
-    (level-method-22 (_type_) none) ;; 22 ;; (set-proto-vis! (_type_ symbol) int)
+    (level-method-15 (_type_) symbol) ;; 15
+    (level-method-16 (_type_ level-vis-info uint (pointer uint8)) symbol) ;; 16
+    (level-method-17 (_type_) _type_) ;; 17
+    (level-method-18 (_type_) _type_) ;; 18
+    (level-method-19 (_type_) _type_) ;; 19
+    (level-method-20 (_type_ vector object) none) ;; 20
+    (level-method-21 (_type_ string) art-group) ;; 21
+    (level-method-22 (_type_ symbol) int) ;; 22
     (lookup-text (_type_ text-id symbol) symbol) ;; 23
     (level-method-24 (_type_) none) ;; 24 ;; (level-method-24 (_type_) none)
-    (level-method-25 (_type_) none) ;; 25 ;; (birth (_type_) _type_)
-    (level-method-26 (_type_) none) ;; 26 ;; (level-status-update! (_type_ symbol) _type_)
+    (level-method-25 (_type_) _type_) ;; 25
+    (level-method-26 (_type_ symbol) _type_) ;; 26
     (level-method-27 (_type_) none) ;; 27 ;; (load-common-package (_type_) none)
     (level-method-28 (_type_) none) ;; 28 ;; (init-vis-from-bsp (_type_) none)
     (level-method-29 (_type_) none) ;; 29 ;; (vis-clear (_type_) none)
@@ -13358,28 +13358,28 @@
   :size-assert         #x6d04
   :flag-assert         #x2200006d04
   (:methods
-    (level-group-method-9 () none) ;; 9 ;; (level-get (_type_ symbol) level)
-    (level-group-method-10 () none) ;; 10 ;; (level-get-with-status (_type_ symbol) level)
-    (level-group-method-11 () none) ;; 11 ;; (get-level-by-heap-ptr-and-status (_type_ pointer symbol) level)
-    (level-group-method-12 () none) ;; 12 ;; (level-get-for-use (_type_ symbol symbol) level)
-    (level-group-method-13 () none) ;; 13 ;; (activate-levels! (_type_) int)
-    (level-group-method-14 () none) ;; 14 ;; (debug-print-entities (_type_ symbol type string) none)
-    (level-group-method-15 () none) ;; 15 ;; (debug-draw-actors (_type_ symbol) none)
-    (level-group-method-16 () none) ;; 16 ;; (assign-draw-indices (_type_) none)
-    (level-group-method-17 () none) ;; 17 ;; (actors-update (_type_) none)
-    (level-group-method-18 () none) ;; 18 ;; (update-nav-meshes-method (_type_) none)
-    (level-group-method-19 () none) ;; 19 ;; (level-update (_type_) none)
-    (level-group-method-20 () none) ;; 20 ;; (level-get-target-inside (_type_) level)
-    (level-group-method-21 () none) ;; 21 ;; (init-level-system (_type_ symbol) none)
-    (level-group-method-22 () none) ;; 22 ;; (art-group-get-by-name (_type_ string (pointer level)) art-group)
-    (level-group-method-23 () none) ;; 23 ;; (update-vis-volumes (_type_) none)
-    (level-group-method-24 () none) ;; 24 ;; (level-group-method-24 (_type_) none)
-    (level-group-method-25 () none) ;; 25 ;; (print-volume-sizes (_type_) none)
-    (level-group-method-26 () none) ;; 26 ;; (status-of-level-and-borrows (_type_ symbol symbol) symbol)
-    (level-group-method-27 () none) ;; 27 ;; (do-nothing (_type_) none)
-    (level-group-method-28 () none) ;; 28 ;; (load-in-progress? (_type_) symbol)
-    (level-group-method-29 () none) ;; 29 ;; (is-load-allowed? (_type_ (pointer symbol)) symbol)
-    (level-group-method-30 () none) ;; 30 ;; (level-get-most-disposable (_type_) level)
+    (level-group-method-9 (_type_ symbol) level) ;; 9
+    (level-group-method-10 (_type_ symbol) level) ;; 10
+    (level-group-method-11 (_type_ pointer symbol) level) ;; 11
+    (level-group-method-12 (_type_ symbol symbol) level) ;; 12
+    (level-group-method-13 (_type_) int) ;; 13
+    (level-group-method-14 (_type_ symbol type string) none) ;; 14
+    (level-group-method-15 (_type_ symbol) none) ;; 15
+    (level-group-method-16 (_type_) none) ;; 16
+    (level-group-method-17 (_type_) none) ;; 17
+    (level-group-method-18 (_type_) none) ;; 18
+    (level-group-method-19 (_type_) none) ;; 19
+    (level-group-method-20 (_type_) level) ;; 20
+    (level-group-method-21 (_type_ symbol) none) ;; 21
+    (level-group-method-22 (_type_ string (pointer level)) art-group) ;; 22
+    (level-group-method-23 (_type_) none) ;; 23
+    (level-group-method-24 (_type_) none) ;; 24
+    (level-group-method-25 (_type_) none) ;; 25
+    (level-group-method-26 (_type_ symbol symbol) symbol) ;; 26
+    (level-group-method-27 (_type_) none) ;; 27
+    (level-group-method-28 (_type_) symbol) ;; 28
+    (level-group-method-29 (_type_ (pointer symbol)) symbol) ;; 29
+    (level-group-method-30 (_type_) level) ;; 30
     (level-group-method-31 () none) ;; 31
     (level-group-method-32 () none) ;; 32
     (level-group-method-33 () none) ;; 33
@@ -13490,7 +13490,7 @@
     (minimap-method-12 (_type_) none) ;; 12 ;; (add-icon! (_type_ process uint int vector int) connection-minimap)
     (minimap-method-13 (_type_) none) ;; 13 ;; (free-trail-by-connection (_type_ connection-minimap) none)
     (minimap-method-14 (_type_) none) ;; 14 ;; (update-trails (_type_) none)
-    (minimap-method-15 (_type_) none) ;; 15 ;; (draw-1 (_type_ dma-buffer vector4w symbol) none)
+    (minimap-method-15 (_type_ dma-buffer vector4w symbol) none) ;; 15
     )
   )|#
   
@@ -13610,7 +13610,7 @@
   :flag-assert         #xc0000006c
   (:methods
     (draw "Add DMA data to our bucket to draw the filter." (_type_) none) ;; 9
-    (screen-filter-method-10 () none) ;; 10 ;; (setup (_type_ vector vector float bucket-id int int symbol) none)
+    (screen-filter-method-10 (_type_ vector vector float bucket-id int int symbol) none) ;; 10
     (disable (_type_) none) ;; 11
     )
   )
@@ -14759,11 +14759,11 @@
   :size-assert         #xac
   :flag-assert         #xe000000ac
   (:methods
-    (game-task-node-info-method-9 () none) ;; 9 ;; (get-idx-in-task-list (_type_) int)
-    (game-task-node-info-method-10 () none) ;; 10 ;; (open! (_type_ symbol) int)
-    (game-task-node-info-method-11 () none) ;; 11 ;; (game-task-node-info-method-11 (_type_ symbol) none)
-    (game-task-node-info-method-12 () none) ;; 12 ;; (game-task-node-info-method-12 (_type_) symbol)
-    (game-task-node-info-method-13 () none) ;; 13 ;; (eval-game-task-cmd! (_type_) none)
+    (game-task-node-info-method-9 (_type_) int) ;; 9
+    (game-task-node-info-method-10 (_type_ symbol) int) ;; 10
+    (game-task-node-info-method-11 (_type_ symbol) none) ;; 11
+    (game-task-node-info-method-12 (_type_) symbol) ;; 12
+    (game-task-node-info-method-13 (_type_) none) ;; 13
     )
   )
 
@@ -15693,18 +15693,18 @@
   :flag-assert         #x1e000000bb
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type matrix int int float font-color font-flags) _type_)
-    (font-context-method-9 () none) ;; 9 ;; (set-mat! (font-context matrix) font-context)
-    (font-context-method-10 () none) ;; 10 ;; (set-origin! (font-context int int) font-context)
-    (font-context-method-11 () none) ;; 11 ;; (set-depth! (font-context int) font-context)
-    (font-context-method-12 () none) ;; 12 ;; (set-w! (font-context float) font-context)
-    (font-context-method-13 () none) ;; 13 ;; (set-width! (font-context int) font-context)
-    (font-context-method-14 () none) ;; 14 ;; (set-height! (font-context int) font-context)
-    (font-context-method-15 () none) ;; 15 ;; (set-projection! (font-context float) font-context)
-    (font-context-method-16 () none) ;; 16 ;; (set-color! (font-context font-color) font-context)
-    (font-context-method-17 () none) ;; 17 ;; (set-flags! (font-context font-flags) font-context)
-    (font-context-method-18 () none) ;; 18 ;; (set-start-line! (font-context uint) font-context)
-    (font-context-method-19 () none) ;; 19 ;; (set-scale! (font-context float) font-context)
-    (font-context-method-20 () none) ;; 20 ;; (set-alpha! (font-context float) font-context)
+    (font-context-method-9 (font-context matrix) font-context) ;; 9
+    (font-context-method-10 (font-context int int) font-context) ;; 10
+    (font-context-method-11 (font-context int) font-context) ;; 11
+    (font-context-method-12 (font-context float) font-context) ;; 12
+    (font-context-method-13 (font-context int) font-context) ;; 13
+    (font-context-method-14 (font-context int) font-context) ;; 14
+    (font-context-method-15 (font-context float) font-context) ;; 15
+    (font-context-method-16 (font-context font-color) font-context) ;; 16
+    (font-context-method-17 (font-context font-flags) font-context) ;; 17
+    (font-context-method-18 (font-context uint) font-context) ;; 18
+    (font-context-method-19 (font-context float) font-context) ;; 19
+    (font-context-method-20 (font-context float) font-context) ;; 20
     (font-context-method-21 () none) ;; 21
     (font-context-method-22 () none) ;; 22
     (font-context-method-23 () none) ;; 23
@@ -15927,8 +15927,8 @@
   :size-assert         #x110
   :flag-assert         #xb00000110
   (:methods
-    (palette-fade-controls-method-9 () none) ;; 9 ;; (reset! (_type_) none)
-    (palette-fade-controls-method-10 () none) ;; 10 ;; (set-fade! (_type_ int float float vector) object)
+    (palette-fade-controls-method-9 (_type_) none) ;; 9
+    (palette-fade-controls-method-10 (_type_ int float float vector) object) ;; 10
     )
   )|#
   
@@ -16126,7 +16126,7 @@
   :size-assert         #x20
   :flag-assert         #xd00000020
   (:methods
-    (lookup-text! (_type_ game-text symbol) symbol) ;; 9 ;; (lookup-text! (_type_ text-id symbol) string)
+    (lookup-text! (_type_ text-id symbol) string) ;; 9
     (game-text-info-method-10 (_type_ text-id symbol) none) ;; 10
     (game-text-info-method-11 (_type_ string) string) ;; 11
     (game-text-info-method-12 () none) ;; 12
@@ -16478,8 +16478,8 @@
   :flag-assert         #xb00000190
   ;; field cam-slave-options is likely a value type. field cam-master-options is likely a value type.
   (:methods
-    (cam-setting-data-method-9 () none) ;; 9 ;; (cam-setting-data-method-9 (_type_ engine engine-pers engine) _type_)
-    (cam-setting-data-method-10 () none) ;; 10 ;; (cam-setting-data-method-10 (_type_ object (pointer process) float int) _type_)
+    (cam-setting-data-method-9 (_type_ engine engine-pers engine) _type_) ;; 9
+    (cam-setting-data-method-10 (_type_ object (pointer process) float int) _type_) ;; 10
     )
   )
 
@@ -16518,17 +16518,17 @@
   :flag-assert         #x1900001c1c
   (:methods
     (new (symbol type int) _type_) ;; 0
-    (setting-control-method-9 () none) ;; 9 ;; (add-setting (_type_ process symbol object object object) connection)
-    (setting-control-method-10 () none) ;; 10 ;; (persist-with-delay (_type_ symbol time-frame symbol symbol float int) none)
-    (setting-control-method-11 () none) ;; 11 ;; (set-setting (_type_ process symbol object object object) connection)
-    (setting-control-method-12 () none) ;; 12 ;; (remove-setting (_type_ process symbol) none)
-    (add-setting (_type_ process symbol object object object) connection) ;; 13 ;; (kill-persister (_type_ engine-pers object) none)
-    (persist-with-delay (_type_ symbol time-frame symbol symbol float int) int) ;; 14 ;; (setting-control-method-14 (_type_ object) connectable)
-    (set-setting (_type_ process symbol object object object) connection) ;; 15 ;; (get-setting (_type_ object) connectable)
-    (remove-setting (_type_ process symbol) none) ;; 16 ;; (remove-setting-by-arg0 (_type_ object) none)
-    (setting-control-method-17 (_type_ process symbol) int) ;; 17 ;; (set-setting-by-param (_type_ symbol object object object) connection)
-    (setting-control-method-18 () none) ;; 18 ;; (apply-settings (_type_) user-setting-data)
-    (move-connection-to-dead (_type_ connection) int) ;; 19 ;; (update (_type_) user-setting-data)
+    (setting-control-method-9 (_type_ process symbol object object object) connection) ;; 9
+    (setting-control-method-10 (_type_ symbol time-frame symbol symbol float int) none) ;; 10
+    (setting-control-method-11 (_type_ process symbol object object object) connection) ;; 11
+    (setting-control-method-12 (_type_ process symbol) none) ;; 12
+    (add-setting (_type_ engine-pers object) none) ;; 13
+    (persist-with-delay (_type_ object) connectable) ;; 14
+    (set-setting (_type_ object) connectable) ;; 15
+    (remove-setting (_type_ object) none) ;; 16
+    (setting-control-method-17 (_type_ symbol object object object) connection) ;; 17
+    (setting-control-method-18 (_type_) user-setting-data) ;; 18
+    (move-connection-to-dead (_type_) user-setting-data) ;; 19
     (setting-control-method-20 () none) ;; 20
     (remove-setting-by-arg0 (_type_ object) int) ;; 21
     (set-setting-by-param (_type_ symbol object object object) connection) ;; 22
@@ -16831,34 +16831,34 @@
   :size-assert         #x2784
   :flag-assert         #x2500002784
   (:methods
-    (sky-work-method-9 () none) ;; 9 ;; (init-sun-data! (_type_ int float float float) none)
-    (sky-work-method-10 () none) ;; 10 ;; (init-orbit-settings! (_type_ int float float float float float float) none)
-    (sky-work-method-11 () none) ;; 11 ;; (update-colors-for-time (_type_ float) none)
-    (sky-work-method-12 () none) ;; 12 ;; (update-time-and-speed (_type_ float float) none)
-    (sky-work-method-13 () none) ;; 13 ;; (draw-erase (_type_ dma-buffer vector) none)
-    (sky-work-method-14 () none) ;; 14 ;; (draw (_type_) none)
-    (sky-work-method-15 () none) ;; 15 ;; (update-camera-matrix (_type_ matrix) none)
-    (sky-work-method-16 () none) ;; 16 ;; (update-template-colors (_type_) none)
-    (sky-work-method-17 () none) ;; 17 ;; (init-regs-for-large-polygon-draw (_type_) none)
-    (sky-work-method-18 () none) ;; 18 ;; (init-regs-for-sky-asm (_type_) none)
-    (sky-work-method-19 () none) ;; 19 ;; (cloud-vtx-light-update (_type_ vector vector cloud-lights vector vector) none)
-    (sky-work-method-20 () none) ;; 20 ;; (cloud-vtx-tex-update (_type_ vector vector vector cloud-lights) none)
-    (sky-work-method-21 () none) ;; 21 ;; (adjust-cloud-lighting (_type_) none)
-    (sky-work-method-22 () none) ;; 22 ;; (cloud-vtx1-to-sky (_type_ sky-vertex cloud-vertex) none)
-    (sky-work-method-23 () none) ;; 23 ;; (cloud-vtx2-to-sky (_type_ sky-vertex cloud-vertex) none)
-    (sky-work-method-24 () none) ;; 24 ;; (draw-clouds (_type_ dma-buffer) none)
-    (sky-work-method-25 () none) ;; 25 ;; (apply-haze-light (_type_ vector vector haze-lights float) none)
-    (sky-work-method-26 () none) ;; 26 ;; (adjust-haze-lighting (_type_) none)
-    (sky-work-method-27 () none) ;; 27 ;; (haze-vtx-to-sky (_type_ sky-vertex sky-vertex haze-vertex) none)
-    (sky-work-method-28 () none) ;; 28 ;; (draw-haze (_type_ dma-buffer) none)
-    (sky-work-method-29 () none) ;; 29 ;; (sun-dma (_type_ dma-buffer) none)
-    (sky-work-method-30 () none) ;; 30 ;; (green-sun-dma (_type_ dma-buffer) none)
-    (sky-work-method-31 () none) ;; 31 ;; (moon-dma (_type_ dma-buffer) none)
-    (sky-work-method-32 () none) ;; 32 ;; (day-star-dma (_type_ dma-buffer) none)
+    (sky-work-method-9 (_type_ int float float float) none) ;; 9
+    (sky-work-method-10 (_type_ int float float float float float float) none) ;; 10
+    (sky-work-method-11 (_type_ float) none) ;; 11
+    (sky-work-method-12 (_type_ float float) none) ;; 12
+    (sky-work-method-13 (_type_ dma-buffer vector) none) ;; 13
+    (sky-work-method-14 (_type_) none) ;; 14
+    (sky-work-method-15 (_type_ matrix) none) ;; 15
+    (sky-work-method-16 (_type_) none) ;; 16
+    (sky-work-method-17 (_type_) none) ;; 17
+    (sky-work-method-18 (_type_) none) ;; 18
+    (sky-work-method-19 (_type_ vector vector cloud-lights vector vector) none) ;; 19
+    (sky-work-method-20 (_type_ vector vector vector cloud-lights) none) ;; 20
+    (sky-work-method-21 (_type_) none) ;; 21
+    (sky-work-method-22 (_type_ sky-vertex cloud-vertex) none) ;; 22
+    (sky-work-method-23 (_type_ sky-vertex cloud-vertex) none) ;; 23
+    (sky-work-method-24 (_type_ dma-buffer) none) ;; 24
+    (sky-work-method-25 (_type_ vector vector haze-lights float) none) ;; 25
+    (sky-work-method-26 (_type_) none) ;; 26
+    (sky-work-method-27 (_type_ sky-vertex sky-vertex haze-vertex) none) ;; 27
+    (sky-work-method-28 (_type_ dma-buffer) none) ;; 28
+    (sky-work-method-29 (_type_ dma-buffer) none) ;; 29
+    (sky-work-method-30 (_type_ dma-buffer) none) ;; 30
+    (sky-work-method-31 (_type_ dma-buffer) none) ;; 31
+    (sky-work-method-32 (_type_ dma-buffer) none) ;; 32
     (sky-work-method-33 () none) ;; 33 ;; (setup-stars (_type_ matrix sky-upload-data) none)
-    (sky-work-method-34 () none) ;; 34 ;; (stars-transform-asm (_type_) none)
-    (sky-work-method-35 () none) ;; 35 ;; (stars-dma (_type_ dma-buffer) none)
-    (sky-work-method-36 () none) ;; 36 ;; (draw-roof (_type_ dma-buffer) none)
+    (sky-work-method-34 (_type_) none) ;; 34
+    (sky-work-method-35 (_type_ dma-buffer) none) ;; 35
+    (sky-work-method-36 (_type_ dma-buffer) none) ;; 36
     )
   )|#
   
@@ -17345,77 +17345,77 @@
   :size-assert         #x43c
   :flag-assert         #x540000043c
   (:methods
-    (ocean-method-11 (_type_) none) ;; 11 ;; (get-height (_type_ vector symbol) float)
+    (ocean-method-11 (_type_ vector symbol) float) ;; 11
     (ocean-method-12 (_type_) none) ;; 12 ;; (draw! (_type_) none)
     (ocean-method-13 (_type_) none) ;; 13 ;; (update-map (_type_) none)
-    (ocean-method-14 (_type_) none) ;; 14 ;; (interp-wave (_type_ ocean-wave-info uint float) none)
-    (ocean-method-15 (_type_) none) ;; 15 ;; (ocean-method-15 (_type_ matrix matrix) none)
+    (ocean-method-14 (_type_ ocean-wave-info uint float) none) ;; 14
+    (ocean-method-15 (_type_ matrix matrix) none) ;; 15
     (ocean-method-16 (_type_) none) ;; 16 ;; (generate-verts (_type_ ocean-vert-array ocean-height-array) none)
-    (ocean-method-17 (_type_) none) ;; 17 ;; (add-colors! (_type_ vector ocean-vertex) none)
-    (ocean-method-18 (_type_) none) ;; 18 ;; (ocean-method-18 (_type_ (pointer ocean-colors) (pointer ocean-colors)) none)
-    (ocean-method-19 (_type_) none) ;; 19 ;; (init-buffer! (_type_ dma-buffer) none)
-    (ocean-method-20 (_type_) none) ;; 20 ;; (end-buffer! (_type_ dma-buffer) none)
-    (ocean-method-21 (_type_) none) ;; 21 ;; (set-corners! (_type_ float float) float)
-    (ocean-method-22 (_type_) none) ;; 22 ;; (ocean-near-add-call (_type_ dma-buffer int) none)
-    (ocean-method-23 (_type_) none) ;; 23 ;; (ocean-near-add-call-flush (_type_ dma-buffer int) none)
+    (ocean-method-17 (_type_ vector ocean-vertex) none) ;; 17
+    (ocean-method-18 (_type_ (pointer ocean-colors) (pointer ocean-colors)) none) ;; 18
+    (ocean-method-19 (_type_ dma-buffer) none) ;; 19
+    (ocean-method-20 (_type_ dma-buffer) none) ;; 20
+    (ocean-method-21 (_type_ float float) float) ;; 21
+    (ocean-method-22 (_type_ dma-buffer int) none) ;; 22
+    (ocean-method-23 (_type_ dma-buffer int) none) ;; 23
     (ocean-method-24 (_type_) none) ;; 24 ;; (ocean-near-setup-constants (_type_ ocean-near-constants) none)
-    (ocean-method-25 (_type_) none) ;; 25 ;; (ocean-near-add-constants (_type_ dma-buffer) none)
-    (ocean-method-26 (_type_) none) ;; 26 ;; (ocean-near-add-heights (_type_ dma-buffer) none)
-    (ocean-method-27 (_type_) none) ;; 27 ;; (ocean-near-add-matrices (_type_ dma-buffer vector) none)
-    (ocean-method-28 (_type_) none) ;; 28 ;; (ocean-near-add-upload (_type_ dma-buffer uint uint) none)
-    (ocean-method-29 (_type_) none) ;; 29 ;; (draw-ocean-near (_type_ dma-buffer) none)
-    (ocean-method-30 (_type_) none) ;; 30 ;; (ocean-trans-camera-masks-bit? (_type_ uint uint) symbol)
-    (ocean-method-31 (_type_) none) ;; 31 ;; (ocean-trans-mask-ptrs-bit? (_type_ int int) symbol)
-    (ocean-method-32 (_type_) none) ;; 32 ;; (ocean-trans-mask-ptrs-set! (_type_ uint uint) symbol)
-    (ocean-method-33 (_type_) none) ;; 33 ;; (ocean-trans-add-upload-table (_type_ dma-buffer uint uint int int symbol) none)
-    (ocean-method-34 (_type_) none) ;; 34 ;; (ocean-trans-add-upload-strip (_type_ dma-buffer uint uint int int int) none)
-    (ocean-method-35 (_type_) none) ;; 35 ;; (ocean-transition-check (_type_ ocean-trans-mask int int vector) none)
-    (ocean-method-36 (_type_) none) ;; 36 ;; (ocean-make-trans-camera-masks (_type_ uint uint uint uint) none)
-    (ocean-method-37 (_type_) none) ;; 37 ;; (ocean-trans-add-upload (_type_ dma-buffer uint uint) none)
-    (ocean-method-38 (_type_) none) ;; 38 ;; (draw-ocean-transition-seams (_type_ dma-buffer) none)
-    (ocean-method-39 (_type_) none) ;; 39 ;; (ocean-trans-add-constants (_type_ dma-buffer) none)
-    (ocean-method-40 (_type_) none) ;; 40 ;; (draw-ocean-transition (_type_ dma-buffer) none)
-    (ocean-method-41 (_type_) none) ;; 41 ;; (ocean-mid-add-call (_type_ dma-buffer int) none)
-    (ocean-method-42 (_type_) none) ;; 42 ;; (ocean-mid-add-call-flush (_type_ dma-buffer uint) none)
-    (ocean-method-43 (_type_) none) ;; 43 ;; (ocean-matrix*! (_type_ matrix matrix matrix) matrix)
-    (ocean-method-44 (_type_) none) ;; 44 ;; (ocean-vector-matrix*! (_type_ vector vector matrix) vector)
-    (ocean-method-45 (_type_) none) ;; 45 ;; (ocean-mid-add-matrices (_type_ dma-buffer vector) none)
-    (ocean-method-46 (_type_) none) ;; 46 ;; (ocean-mid-check (_type_ pointer int int vector) symbol)
+    (ocean-method-25 (_type_ dma-buffer) none) ;; 25
+    (ocean-method-26 (_type_ dma-buffer) none) ;; 26
+    (ocean-method-27 (_type_ dma-buffer vector) none) ;; 27
+    (ocean-method-28 (_type_ dma-buffer uint uint) none) ;; 28
+    (ocean-method-29 (_type_ dma-buffer) none) ;; 29
+    (ocean-method-30 (_type_ uint uint) symbol) ;; 30
+    (ocean-method-31 (_type_ int int) symbol) ;; 31
+    (ocean-method-32 (_type_ uint uint) symbol) ;; 32
+    (ocean-method-33 (_type_ dma-buffer uint uint int int symbol) none) ;; 33
+    (ocean-method-34 (_type_ dma-buffer uint uint int int int) none) ;; 34
+    (ocean-method-35 (_type_ ocean-trans-mask int int vector) none) ;; 35
+    (ocean-method-36 (_type_ uint uint uint uint) none) ;; 36
+    (ocean-method-37 (_type_ dma-buffer uint uint) none) ;; 37
+    (ocean-method-38 (_type_ dma-buffer) none) ;; 38
+    (ocean-method-39 (_type_ dma-buffer) none) ;; 39
+    (ocean-method-40 (_type_ dma-buffer) none) ;; 40
+    (ocean-method-41 (_type_ dma-buffer int) none) ;; 41
+    (ocean-method-42 (_type_ dma-buffer uint) none) ;; 42
+    (ocean-method-43 (_type_ matrix matrix matrix) matrix) ;; 43
+    (ocean-method-44 (_type_ vector vector matrix) vector) ;; 44
+    (ocean-method-45 (_type_ dma-buffer vector) none) ;; 45
+    (ocean-method-46 (_type_ pointer int int vector) symbol) ;; 46
     (ocean-method-47 (_type_) none) ;; 47 ;; (ocean-mid-setup-constants (_type_ ocean-mid-constants) none)
-    (ocean-method-48 (_type_) none) ;; 48 ;; (ocean-mid-add-constants (_type_ dma-buffer) none)
-    (ocean-method-49 (_type_) none) ;; 49 ;; (ocean-mid-camera-masks-bit? (_type_ uint uint) symbol)
-    (ocean-method-50 (_type_) none) ;; 50 ;; (ocean-mid-mask-ptrs-bit? (_type_ uint uint) symbol)
-    (ocean-method-51 (_type_) none) ;; 51 ;; (ocean-mid-camera-masks-set! (_type_ uint uint) symbol)
-    (ocean-method-52 (_type_) none) ;; 52 ;; (ocean-mid-add-upload (_type_ dma-buffer int int int int float) none)
-    (ocean-method-53 (_type_) none) ;; 53 ;; (ocean-mid-add-upload-table (_type_ dma-buffer uint uint (pointer float) int symbol) none)
-    (ocean-method-54 (_type_) none) ;; 54 ;; (ocean-mid-add-upload-top (_type_ dma-buffer uint uint) none)
-    (ocean-method-55 (_type_) none) ;; 55 ;; (ocean-mid-add-upload-middle (_type_ dma-buffer uint uint) none)
-    (ocean-method-56 (_type_) none) ;; 56 ;; (ocean-mid-add-upload-bottom (_type_ dma-buffer uint uint) none)
-    (ocean-method-57 (_type_) none) ;; 57 ;; (ocean-seams-add-constants (_type_ dma-buffer) none)
-    (ocean-method-58 (_type_) none) ;; 58 ;; (draw-ocean-mid-seams (_type_ dma-buffer) none)
-    (ocean-method-59 (_type_) none) ;; 59 ;; (draw-ocean-mid (_type_ dma-buffer) none)
-    (ocean-method-60 (_type_) none) ;; 60 ;; (ocean-method-60 (_type_ dma-buffer) none)
-    (ocean-method-61 (_type_) none) ;; 61 ;; (ocean-method-61 (_type_ dma-buffer) none)
-    (ocean-method-62 (_type_) none) ;; 62 ;; (ocean-method-62 (_type_ dma-buffer) none)
-    (ocean-method-63 (_type_) none) ;; 63 ;; (ocean-method-63 (_type_ dma-buffer) none)
-    (ocean-method-64 (_type_) none) ;; 64 ;; (ocean-method-64 (_type_ dma-buffer) none)
-    (ocean-method-65 (_type_) none) ;; 65 ;; (ocean-method-65 (_type_ dma-buffer) none)
-    (ocean-method-66 (_type_) none) ;; 66 ;; (ocean-method-66 (_type_ dma-buffer) none)
-    (ocean-method-67 (_type_) none) ;; 67 ;; (ocean-method-67 (_type_ dma-buffer) none)
-    (ocean-method-68 (_type_) none) ;; 68 ;; (render-ocean-far (_type_ dma-buffer int) none)
-    (ocean-method-69 (_type_) none) ;; 69 ;; (draw-ocean-far (_type_ dma-buffer) none)
-    (ocean-method-70 (_type_) none) ;; 70 ;; (ocean-texture-setup-constants (_type_ ocean-texture-constants) none)
-    (ocean-method-71 (_type_) none) ;; 71 ;; (ocean-texture-add-constants (_type_ dma-buffer) none)
-    (ocean-method-72 (_type_) none) ;; 72 ;; (ocean-texture-add-envmap (_type_ dma-buffer) none)
-    (ocean-method-73 (_type_) none) ;; 73 ;; (ocean-texture-add-verts (_type_ dma-buffer int) none)
-    (ocean-method-74 (_type_) none) ;; 74 ;; (ocean-texture-add-verts-last (_type_ dma-buffer int int) none)
-    (ocean-method-75 (_type_) none) ;; 75 ;; (ocean-texture-add-call-start (_type_ dma-buffer) none)
-    (ocean-method-76 (_type_) none) ;; 76 ;; (ocean-texture-add-call-rest (_type_ dma-buffer) none)
-    (ocean-method-77 (_type_) none) ;; 77 ;; (ocean-texture-add-call-done (_type_ dma-buffer) none)
-    (ocean-method-78 (_type_) none) ;; 78 ;; (draw-ocean-texture (_type_ dma-buffer int) none)
-    (ocean-method-79 (_type_) none) ;; 79 ;; (ocean-method-79 (_type_ (pointer rgba)) none)
-    (ocean-method-80 (_type_) none) ;; 80 ;; (ocean-method-80 (_type_ dma-buffer) none)
-    (ocean-method-81 (_type_) none) ;; 81 ;; (draw-envmap-debug (_type_ dma-buffer) none)
+    (ocean-method-48 (_type_ dma-buffer) none) ;; 48
+    (ocean-method-49 (_type_ uint uint) symbol) ;; 49
+    (ocean-method-50 (_type_ uint uint) symbol) ;; 50
+    (ocean-method-51 (_type_ uint uint) symbol) ;; 51
+    (ocean-method-52 (_type_ dma-buffer int int int int float) none) ;; 52
+    (ocean-method-53 (_type_ dma-buffer uint uint (pointer float) int symbol) none) ;; 53
+    (ocean-method-54 (_type_ dma-buffer uint uint) none) ;; 54
+    (ocean-method-55 (_type_ dma-buffer uint uint) none) ;; 55
+    (ocean-method-56 (_type_ dma-buffer uint uint) none) ;; 56
+    (ocean-method-57 (_type_ dma-buffer) none) ;; 57
+    (ocean-method-58 (_type_ dma-buffer) none) ;; 58
+    (ocean-method-59 (_type_ dma-buffer) none) ;; 59
+    (ocean-method-60 (_type_ dma-buffer) none) ;; 60
+    (ocean-method-61 (_type_ dma-buffer) none) ;; 61
+    (ocean-method-62 (_type_ dma-buffer) none) ;; 62
+    (ocean-method-63 (_type_ dma-buffer) none) ;; 63
+    (ocean-method-64 (_type_ dma-buffer) none) ;; 64
+    (ocean-method-65 (_type_ dma-buffer) none) ;; 65
+    (ocean-method-66 (_type_ dma-buffer) none) ;; 66
+    (ocean-method-67 (_type_ dma-buffer) none) ;; 67
+    (ocean-method-68 (_type_ dma-buffer int) none) ;; 68
+    (ocean-method-69 (_type_ dma-buffer) none) ;; 69
+    (ocean-method-70 (_type_ ocean-texture-constants) none) ;; 70
+    (ocean-method-71 (_type_ dma-buffer) none) ;; 71
+    (ocean-method-72 (_type_ dma-buffer) none) ;; 72
+    (ocean-method-73 (_type_ dma-buffer int) none) ;; 73
+    (ocean-method-74 (_type_ dma-buffer int int) none) ;; 74
+    (ocean-method-75 (_type_ dma-buffer) none) ;; 75
+    (ocean-method-76 (_type_ dma-buffer) none) ;; 76
+    (ocean-method-77 (_type_ dma-buffer) none) ;; 77
+    (ocean-method-78 (_type_ dma-buffer int) none) ;; 78
+    (ocean-method-79 (_type_ (pointer rgba)) none) ;; 79
+    (ocean-method-80 (_type_ dma-buffer) none) ;; 80
+    (ocean-method-81 (_type_ dma-buffer) none) ;; 81
     (ocean-method-82 (_type_) none) ;; 82
     (ocean-method-83 (_type_) none) ;; 83
     )
@@ -19047,7 +19047,7 @@
   :size-assert         #x20
   :flag-assert         #xa00000020
   (:methods
-    (merc-effect-method-9 () none) ;; 9 ;; (login-adgifs (_type_) none)
+    (merc-effect-method-9 (_type_) none) ;; 9
     )
   )
 
@@ -20277,19 +20277,19 @@
   :flag-assert         #x1b00001088
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type) _type_)
-    (load-state-method-9 () none) ;; 9 ;; (reset! (_type_) _type_)
-    (load-state-method-10 () none) ;; 10 ;; (update! (_type_) int)
-    (load-state-method-11 () none) ;; 11 ;; (want-levels (_type_ (pointer symbol)) int)
-    (load-state-method-12 () none) ;; 12 ;; (want-sound-banks (_type_ (pointer symbol)) none)
-    (load-state-method-13 () none) ;; 13 ;; (want-display-level (_type_ symbol symbol) int)
-    (load-state-method-14 () none) ;; 14 ;; (want-vis-level (_type_ symbol) none)
-    (load-state-method-15 () none) ;; 15 ;; (want-force-vis (_type_ symbol symbol) int)
-    (load-state-method-16 () none) ;; 16 ;; (want-force-inside (_type_ symbol symbol) none)
-    (load-state-method-17 () none) ;; 17 ;; (execute-commands-up-to (_type_ float) none)
-    (load-state-method-18 () none) ;; 18 ;; (backup-load-state-and-set-cmds (_type_ pair) int)
-    (load-state-method-19 () none) ;; 19 ;; (restore-load-state-and-cleanup (_type_) int)
-    (load-state-method-20 () none) ;; 20 ;; (restore-load-state (_type_) int)
-    (load-state-method-21 () none) ;; 21 ;; (add-borrow-levels (_type_) none)
+    (load-state-method-9 (_type_) _type_) ;; 9
+    (load-state-method-10 (_type_) int) ;; 10
+    (load-state-method-11 (_type_ (pointer symbol)) int) ;; 11
+    (load-state-method-12 (_type_ (pointer symbol)) none) ;; 12
+    (load-state-method-13 (_type_ symbol symbol) int) ;; 13
+    (load-state-method-14 (_type_ symbol) none) ;; 14
+    (load-state-method-15 (_type_ symbol symbol) int) ;; 15
+    (load-state-method-16 (_type_ symbol symbol) none) ;; 16
+    (load-state-method-17 (_type_ float) none) ;; 17
+    (load-state-method-18 (_type_ pair) int) ;; 18
+    (load-state-method-19 (_type_) int) ;; 19
+    (load-state-method-20 (_type_) int) ;; 20
+    (load-state-method-21 (_type_) none) ;; 21
     (load-state-method-22 () none) ;; 22
     (load-state-method-23 () none) ;; 23
     (load-state-method-24 () none) ;; 24
@@ -20438,27 +20438,27 @@
   :flag-assert         #x1f000006a8
   (:methods
     (game-info-method-9 () none) ;; 9 ;; (initialize! (_type_ symbol game-save string resetter-spec) _type_)
-    (game-info-method-10 () none) ;; 10 ;; (give (_type_ symbol float handle) float)
-    (game-info-method-11 () none) ;; 11 ;; (task-complete? (_type_ game-task) symbol)
-    (game-info-method-12 () none) ;; 12 ;; (subtask-index-by-name (_type_ string) int)
+    (game-info-method-10 (_type_ symbol float handle) float) ;; 10
+    (game-info-method-11 (_type_ game-task) symbol) ;; 11
+    (game-info-method-12 (_type_ string) int) ;; 12
     (game-info-method-13 () none) ;; 13 ;; (actor-perm (_type_ actor-id) entity-perm)
     (game-info-method-14 () none) ;; 14 ;; (task-perm-by-index (_type_ int) entity-perm)
-    (game-info-method-15 () none) ;; 15 ;; (copy-perms-from-level! (_type_ level) int)
-    (game-info-method-16 () none) ;; 16 ;; (copy-perms-to-level! (_type_ level) int)
-    (game-info-method-17 () none) ;; 17 ;; (debug-inspect (_type_ symbol) _type_)
-    (game-info-method-18 () none) ;; 18 ;; (get-current-continue-forced (_type_) continue-point)
-    (game-info-method-19 () none) ;; 19 ;; (get-continue-by-name (_type_ string) continue-point)
-    (game-info-method-20 () none) ;; 20 ;; (set-continue! (_type_ basic symbol) continue-point)
-    (game-info-method-21 () none) ;; 21 ;; (game-info-method-21 (_type_) none)
+    (game-info-method-15 (_type_ level) int) ;; 15
+    (game-info-method-16 (_type_ level) int) ;; 16
+    (game-info-method-17 (_type_ symbol) _type_) ;; 17
+    (game-info-method-18 (_type_) continue-point) ;; 18
+    (game-info-method-19 (_type_ string) continue-point) ;; 19
+    (game-info-method-20 (_type_ basic symbol) continue-point) ;; 20
+    (game-info-method-21 (_type_) none) ;; 21
     (game-info-method-22 () none) ;; 22 ;; (save-game (_type_ game-save string) game-save)
     (game-info-method-23 () none) ;; 23 ;; (load-game (_type_ game-save) game-save)
-    (game-info-method-24 () none) ;; 24 ;; (you-suck-stage (_type_ symbol int) int)
-    (game-info-method-25 () none) ;; 25 ;; (you-suck-scale (_type_ symbol int) float)
+    (game-info-method-24 (_type_ symbol int) int) ;; 24
+    (game-info-method-25 (_type_ symbol int) float) ;; 25
     (get-next-attack-id! (_type_) uint) ;; 26
     (game-info-method-27 () none) ;; 27 ;; (game-info-method-27 (_type_ game-score float) int)
-    (game-info-method-28 () none) ;; 28 ;; (get-game-score-ref (_type_ int) (pointer float))
-    (game-info-method-29 () none) ;; 29 ;; (game-info-method-29 (_type_ int) int)
-    (game-info-method-30 () none) ;; 30 ;; (get-highscore-rank (_type_ int float) int)
+    (game-info-method-28 (_type_ int) (pointer float)) ;; 28
+    (game-info-method-29 (_type_ int) int) ;; 29
+    (game-info-method-30 (_type_ int float) int) ;; 30
     )
   )
 
@@ -20638,11 +20638,11 @@
   :flag-assert         #xe00000020
   ;; field on-close uses ~A with a signed load.
   (:methods
-    (talker-speech-class-method-9 () none) ;; 9 ;; (talker-speech-class-method-9 (_type_) symbol)
-    (talker-speech-class-method-10 () none) ;; 10 ;; (play-communicator-speech! (_type_) none)
-    (talker-speech-class-method-11 () none) ;; 11 ;; (talker-speech-class-method-11 (_type_) none)
-    (talker-speech-class-method-12 () none) ;; 12 ;; (talker-speech-class-method-12 (_type_ int) none)
-    (talker-speech-class-method-13 () none) ;; 13 ;; (talker-speech-class-method-13 (_type_ int) none)
+    (talker-speech-class-method-9 (_type_) symbol) ;; 9
+    (talker-speech-class-method-10 (_type_) none) ;; 10
+    (talker-speech-class-method-11 (_type_) none) ;; 11
+    (talker-speech-class-method-12 (_type_ int) none) ;; 12
+    (talker-speech-class-method-13 (_type_ int) none) ;; 13
     )
   )
 
@@ -20673,9 +20673,9 @@
     (talker-method-11 (_type_) none) ;; 11
     (talker-method-12 (_type_) none) ;; 12
     (talker-method-13 (_type_) none) ;; 13
-    (talker-method-14 (_type_) none) ;; 14 ;; (idle () _type_ :state)
-    (talker-method-15 (_type_) none) ;; 15 ;; (active () _type_ :state)
-    (talker-method-16 (_type_) none) ;; 16 ;; (exit () _type_ :state)
+    (talker-method-14 () _type_ :state) ;; 14
+    (talker-method-15 () _type_ :state) ;; 15
+    (talker-method-16 () _type_ :state) ;; 16
     (talker-method-17 (_type_) none) ;; 17 ;; (talker-method-17 (_type_) none)
     (talker-method-18 (_type_) none) ;; 18
     )
@@ -20800,12 +20800,12 @@
   :flag-assert         #x1100000094
   ;; field speech-channel-flag is likely a value type.
   (:methods
-    (speech-channel-method-9 (_type_) none) ;; 9 ;; (speech-channel-method-9 (_type_ process-drawable speech-type) int)
-    (speech-channel-method-10 () none) ;; 10 ;; (speech-channel-method-10 (_type_ handle) none)
-    (speech-channel-method-11 () none) ;; 11 ;; (speech-channel-method-11 (_type_) none)
-    (speech-channel-method-12 () none) ;; 12 ;; (reset-channel! (_type_) none)
-    (speech-channel-method-13 () none) ;; 13 ;; (init! (_type_) none)
-    (speech-channel-method-14 () none) ;; 14 ;; (speech-channel-method-14 (_type_ speech-type float) none)
+    (speech-channel-method-9 (_type_ process-drawable speech-type) int) ;; 9
+    (speech-channel-method-10 (_type_ handle) none) ;; 10
+    (speech-channel-method-11 (_type_) none) ;; 11
+    (speech-channel-method-12 (_type_) none) ;; 12
+    (speech-channel-method-13 (_type_) none) ;; 13
+    (speech-channel-method-14 (_type_ speech-type float) none) ;; 14
     (speech-channel-method-15 () none) ;; 15
     (speech-channel-method-16 () none) ;; 16
     )
@@ -20820,12 +20820,12 @@
   (:methods
     (speech-control-method-9 (_type_) none) ;; 9 ;; (speech-table-reset! (_type_) none)
     (speech-control-method-10 () none) ;; 10 ;; (speech-table-set! (_type_ speech-type speech-type-info) none)
-    (speech-control-method-11 () none) ;; 11 ;; (speech-control-method-11 (_type_) none)
-    (speech-control-method-12 () none) ;; 12 ;; (speech-control-method-12 (_type_ process-drawable speech-type) none)
-    (speech-control-method-13 () none) ;; 13 ;; (speech-control-method-13 (_type_ process-drawable speech-type int) none)
-    (speech-control-method-14 () none) ;; 14 ;; (speech-control-method-14 (_type_ handle) none)
-    (speech-control-method-15 () none) ;; 15 ;; (speech-control-method-15 (_type_) none)
-    (speech-control-method-16 () none) ;; 16 ;; (speech-control-method-16 (_type_) none)
+    (speech-control-method-11 (_type_) none) ;; 11
+    (speech-control-method-12 (_type_ process-drawable speech-type) none) ;; 12
+    (speech-control-method-13 (_type_ process-drawable speech-type int) none) ;; 13
+    (speech-control-method-14 (_type_ handle) none) ;; 14
+    (speech-control-method-15 (_type_) none) ;; 15
+    (speech-control-method-16 (_type_) none) ;; 16
     )
   )
 
@@ -21743,9 +21743,9 @@
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type lightning-spec process float) _type_)
     (lightning-control-method-9 () none) ;; 9 ;; (change-mode (_type_ lightning-mode) lightning-mode)
     (lightning-control-method-10 () none) ;; 10 ;; (get-mode (_type_) lightning-mode)
-    (lightning-control-method-11 () none) ;; 11 ;; (set-point! (_type_ int vector) none)
-    (lightning-control-method-12 () none) ;; 12 ;; (set-first-meet-point (_type_ vector) none)
-    (lightning-control-method-13 () none) ;; 13 ;; (set-last-meet-point (_type_ vector) none)
+    (lightning-control-method-11 (_type_ int vector) none) ;; 11
+    (lightning-control-method-12 (_type_ vector) none) ;; 12
+    (lightning-control-method-13 (_type_ vector) none) ;; 13
     )
   )
 
@@ -21953,7 +21953,7 @@
   ;; field actor-option is likely a value type.
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process (pointer float)) _type_)
-    (fact-info-enemy-method-12 () none) ;; 12 ;; (clear-mask-bits (_type_ int) none)
+    (fact-info-enemy-method-12 (_type_ int) none) ;; 12
     )
   )|#
   
@@ -28988,7 +28988,7 @@
   :flag-assert         #xa000000a8
   ;; field handle is likely a value type.
   (:methods
-    (attack-info-method-9 () none) ;; 9 ;; (attack-info-method-9 (_type_ attack-info process-drawable process-drawable) none)
+    (attack-info-method-9 (_type_ attack-info process-drawable process-drawable) none) ;; 9
     )
   )
 
@@ -29133,8 +29133,8 @@
   :flag-assert         #x120000008c
   ;; field on-running uses ~A with a signed load. field on-complete uses ~A with a signed load.
   (:methods
-    (scene-method-16 (_type_) none) ;; 16 ;; (init-spool-by-scene! (_type_ spool-anim) spool-anim)
-    (scene-method-17 (_type_) none) ;; 17 ;; (load-scene (_type_) scene)
+    (scene-method-16 (_type_ spool-anim) spool-anim) ;; 16
+    (scene-method-17 (_type_) scene) ;; 17
     )
   )
   
@@ -29392,12 +29392,12 @@
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type joint-mod-mode process-drawable int) _type_)
     (joint-mod-method-9 () none) ;; 9 ;; (mode-set! (_type_ joint-mod-mode) none)
-    (joint-mod-method-10 () none) ;; 10 ;; (target-set! (_type_ vector) none)
-    (joint-mod-method-11 () none) ;; 11 ;; (look-at! (_type_ vector symbol process) none)
-    (joint-mod-method-12 () none) ;; 12 ;; (reset-blend! (_type_) _type_)
-    (joint-mod-method-13 () none) ;; 13 ;; (twist-set! (_type_ float float float) vector)
-    (joint-mod-method-14 () none) ;; 14 ;; (trs-set! (_type_ vector quaternion vector) none)
-    (joint-mod-method-15 () none) ;; 15 ;; (shut-down (_type_) none)
+    (joint-mod-method-10 (_type_ vector) none) ;; 10
+    (joint-mod-method-11 (_type_ vector symbol process) none) ;; 11
+    (joint-mod-method-12 (_type_) _type_) ;; 12
+    (joint-mod-method-13 (_type_ float float float) vector) ;; 13
+    (joint-mod-method-14 (_type_ vector quaternion vector) none) ;; 14
+    (joint-mod-method-15 (_type_) none) ;; 15
     )
   )|#
   
@@ -29576,8 +29576,8 @@
   :flag-assert         #xb00000028
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process-drawable int float) _type_)
-    (joint-mod-ik-method-9 () none) ;; 9 ;; (set-ik-target! (_type_ vector) none)
-    (joint-mod-ik-method-10 () none) ;; 10 ;; (enable-set! (_type_ symbol) none)
+    (joint-mod-ik-method-9 (_type_ vector) none) ;; 9
+    (joint-mod-ik-method-10 (_type_ symbol) none) ;; 10
     )
   )
 
@@ -29618,12 +29618,12 @@
   :size-assert         #x58
   :flag-assert         #xf00000058
   (:methods
-    (joint-mod-polar-look-at-method-9 () none) ;; 9 ;; (initialize (_type_ process-drawable int) none)
-    (joint-mod-polar-look-at-method-10 () none) ;; 10 ;; (set-target! (_type_ vector) none)
+    (joint-mod-polar-look-at-method-9 (_type_ process-drawable int) none) ;; 9
+    (joint-mod-polar-look-at-method-10 (_type_ vector) none) ;; 10
     (joint-mod-polar-look-at-method-11 () none) ;; 11 ;; (set-both-targets! (_type_ joint-mod-polar-look-at vector) none)
-    (joint-mod-polar-look-at-method-12 () none) ;; 12 ;; (blend-on! (_type_ time-frame float symbol) none)
-    (joint-mod-polar-look-at-method-13 () none) ;; 13 ;; (blend-to-off! (_type_ time-frame symbol) none)
-    (joint-mod-polar-look-at-method-14 () none) ;; 14 ;; (get-start-blend! (_type_) float)
+    (joint-mod-polar-look-at-method-12 (_type_ time-frame float symbol) none) ;; 12
+    (joint-mod-polar-look-at-method-13 (_type_ time-frame symbol) none) ;; 13
+    (joint-mod-polar-look-at-method-14 (_type_) float) ;; 14
     )
   )|#
   
@@ -29981,33 +29981,33 @@
   ;; field penetrate is likely a value type. field penetrate is likely a value type.
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process-drawable collide-list-enum) _type_)
-    (collide-shape-method-28 () none) ;; 28 ;; (move-by-vector! (_type_ vector) none)
-    (collide-shape-method-29 () none) ;; 29 ;; (move-to-point! (_type_ vector) none)
-    (collide-shape-method-30 () none) ;; 30 ;; (debug-draw (_type_) none)
-    (collide-shape-method-31 () none) ;; 31 ;; (fill-cache-for-shape (_type_ float collide-query) none)
-    (collide-shape-method-32 () none) ;; 32 ;; (fill-cache-integrate-and-collide (_type_ vector collide-query meters) none)
-    (collide-shape-method-33 () none) ;; 33 ;; (find-prim-by-id (_type_ uint) collide-shape-prim)
-    (collide-shape-method-34 () none) ;; 34 ;; (find-prim-by-id-logtest (_type_ uint) collide-shape-prim)
-    (collide-shape-method-35 () none) ;; 35 ;; (detect-riders! (_type_) symbol)
-    (collide-shape-method-36 () none) ;; 36 ;; (build-bounding-box-for-shape (_type_ bounding-box float collide-spec) symbol)
-    (collide-shape-method-37 () none) ;; 37 ;; (integrate-and-collide! (_type_ vector) none)
-    (collide-shape-method-38 () none) ;; 38 ;; (find-collision-meshes (_type_) none)
-    (collide-shape-method-39 () none) ;; 39 ;; (on-platform (_type_ collide-shape collide-query) symbol)
-    (collide-shape-method-40 () none) ;; 40 ;; (find-overlapping-shapes (_type_ overlaps-others-params) symbol)
-    (collide-shape-method-41 () none) ;; 41 ;; (shove-to-closest-point-on-path (_type_ attack-info float) vector)
-    (collide-shape-method-42 () none) ;; 42 ;; (should-push-away (_type_ collide-shape collide-query) symbol)
-    (collide-shape-method-43 () none) ;; 43 ;; (pull-rider! (_type_ pull-rider-info) none)
-    (collide-shape-method-44 () none) ;; 44 ;; (pull-riders! (_type_) symbol)
-    (collide-shape-method-45 () none) ;; 45 ;; (do-push-aways (_type_) collide-spec)
-    (collide-shape-method-46 () none) ;; 46 ;; (update-transforms (_type_) none)
-    (collide-shape-method-47 () none) ;; 47 ;; (set-collide-with! (_type_ collide-spec) none)
-    (collide-shape-method-48 () none) ;; 48 ;; (set-collide-as! (_type_ collide-spec) none)
-    (collide-shape-method-49 () none) ;; 49 ;; (modify-collide-as! (_type_ int collide-spec collide-spec) none)
+    (collide-shape-method-28 (_type_ vector) none) ;; 28
+    (collide-shape-method-29 (_type_ vector) none) ;; 29
+    (collide-shape-method-30 (_type_) none) ;; 30
+    (collide-shape-method-31 (_type_ float collide-query) none) ;; 31
+    (collide-shape-method-32 (_type_ vector collide-query meters) none) ;; 32
+    (collide-shape-method-33 (_type_ uint) collide-shape-prim) ;; 33
+    (collide-shape-method-34 (_type_ uint) collide-shape-prim) ;; 34
+    (collide-shape-method-35 (_type_) symbol) ;; 35
+    (collide-shape-method-36 (_type_ bounding-box float collide-spec) symbol) ;; 36
+    (collide-shape-method-37 (_type_ vector) none) ;; 37
+    (collide-shape-method-38 (_type_) none) ;; 38
+    (collide-shape-method-39 (_type_ collide-shape collide-query) symbol) ;; 39
+    (collide-shape-method-40 (_type_ overlaps-others-params) symbol) ;; 40
+    (collide-shape-method-41 (_type_ attack-info float) vector) ;; 41
+    (collide-shape-method-42 (_type_ collide-shape collide-query) symbol) ;; 42
+    (collide-shape-method-43 (_type_ pull-rider-info) none) ;; 43
+    (collide-shape-method-44 (_type_) symbol) ;; 44
+    (collide-shape-method-45 (_type_) collide-spec) ;; 45
+    (collide-shape-method-46 (_type_) none) ;; 46
+    (collide-shape-method-47 (_type_ collide-spec) none) ;; 47
+    (collide-shape-method-48 (_type_ collide-spec) none) ;; 48
+    (collide-shape-method-49 (_type_ int collide-spec collide-spec) none) ;; 49
     (collide-shape-method-50 () none) ;; 50 ;; (send-shoves (_type_ process touching-shapes-entry float float float) symbol)
-    (collide-shape-method-51 () none) ;; 51 ;; (above-ground? (_type_ collide-query vector collide-spec float float float) symbol)
-    (collide-shape-method-52 () none) ;; 52 ;; (water-info-init! (_type_ water-info collide-action) water-info)
-    (collide-shape-method-53 () none) ;; 53 ;; (iterate-prims (_type_ (function collide-shape-prim none)) none)
-    (collide-shape-method-54 () none) ;; 54 ;; (pusher-init (_type_) none)
+    (collide-shape-method-51 (_type_ collide-query vector collide-spec float float float) symbol) ;; 51
+    (collide-shape-method-52 (_type_ water-info collide-action) water-info) ;; 52
+    (collide-shape-method-53 (_type_ (function collide-shape-prim none)) none) ;; 53
+    (collide-shape-method-54 (_type_) none) ;; 54
     )
   )
 
@@ -30050,18 +30050,18 @@
   ;; field penetrate is likely a value type. field penetrate is likely a value type.
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process-drawable collide-list-enum) _type_)
-    (collide-shape-moving-method-55 () none) ;; 55 ;; (find-ground (_type_ collide-query collide-spec float float float process) symbol)
+    (collide-shape-moving-method-55 (_type_ collide-query collide-spec float float float process) symbol) ;; 55
     (collide-shape-moving-method-56 () none) ;; 56 ;; (react-to-pat! (_type_ pat-surface) cshape-reaction-flags)
-    (collide-shape-moving-method-57 () none) ;; 57 ;; (integrate-no-collide! (_type_ vector) none)
-    (collide-shape-moving-method-58 () none) ;; 58 ;; (integrate-for-enemy-no-mtg (_type_ vector overlaps-others-params) symbol)
-    (collide-shape-moving-method-59 () none) ;; 59 ;; (move-above-ground (_type_ vector move-above-ground-params) none)
-    (collide-shape-moving-method-60 () none) ;; 60 ;; (move-to-ground (_type_ float float symbol collide-spec) none)
-    (collide-shape-moving-method-61 () none) ;; 61 ;; (move-to-ground-point (_type_ vector vector vector) none)
-    (collide-shape-moving-method-62 () none) ;; 62 ;; (compute-acc-due-to-gravity (_type_ vector float) vector)
-    (collide-shape-moving-method-63 () none) ;; 63 ;; (rbody-collision (_type_ rigid-body-control float) none)
-    (collide-shape-moving-method-64 () none) ;; 64 ;; (try-snap-to-surface (_type_ vector float float float) symbol)
-    (collide-shape-moving-method-65 () none) ;; 65 ;; (fill-and-try-snap-to-surface (_type_ vector float float float collide-query) symbol)
-    (collide-shape-moving-method-66 () none) ;; 66 ;; (step-collision! (_type_ vector vector float int) float)
+    (collide-shape-moving-method-57 (_type_ vector) none) ;; 57
+    (collide-shape-moving-method-58 (_type_ vector overlaps-others-params) symbol) ;; 58
+    (collide-shape-moving-method-59 (_type_ vector move-above-ground-params) none) ;; 59
+    (collide-shape-moving-method-60 (_type_ float float symbol collide-spec) none) ;; 60
+    (collide-shape-moving-method-61 (_type_ vector vector vector) none) ;; 61
+    (collide-shape-moving-method-62 (_type_ vector float) vector) ;; 62
+    (collide-shape-moving-method-63 (_type_ rigid-body-control float) none) ;; 63
+    (collide-shape-moving-method-64 (_type_ vector float float float) symbol) ;; 64
+    (collide-shape-moving-method-65 (_type_ vector float float float collide-query) symbol) ;; 65
+    (collide-shape-moving-method-66 (_type_ vector vector float int) float) ;; 66
     )
   )|#
   
@@ -30104,8 +30104,8 @@
   :size-assert         #xf0
   :flag-assert         #x11006000f0
   (:methods
-    (part-spawner-method-14 () none) ;; 14 ;; (active () _type_ :state)
-    (part-spawner-method-15 () none) ;; 15 ;; (is-in-view? (_type_) symbol)
+    (part-spawner-method-14 () _type_ :state) ;; 14
+    (part-spawner-method-15 (_type_) symbol) ;; 15
     (part-spawner-method-16 () none) ;; 16
     )
   )
@@ -30140,10 +30140,10 @@
     (part-tracker-method-11 () none) ;; 11
     (part-tracker-method-12 () none) ;; 12
     (part-tracker-method-13 () none) ;; 13
-    (part-tracker-method-14 () none) ;; 14 ;; (active () _type_ :state)
-    (part-tracker-method-15 () none) ;; 15 ;; (linger () _type_ :state)
-    (part-tracker-method-16 () none) ;; 16 ;; (die () _type_ :state)
-    (part-tracker-method-17 () none) ;; 17 ;; (notify-parent-of-death (_type_) none)
+    (part-tracker-method-14 () _type_ :state) ;; 14
+    (part-tracker-method-15 () _type_ :state) ;; 15
+    (part-tracker-method-16 () _type_ :state) ;; 16
+    (part-tracker-method-17 (_type_) none) ;; 17
     (part-tracker-method-18 () none) ;; 18
     )
   )|#
@@ -30214,9 +30214,9 @@
     (lightning-tracker-method-11 () none) ;; 11
     (lightning-tracker-method-12 () none) ;; 12
     (lightning-tracker-method-13 () none) ;; 13
-    (lightning-tracker-method-14 () none) ;; 14 ;; (active () _type_ :state)
-    (lightning-tracker-method-15 () none) ;; 15 ;; (notify-parent-of-death (_type_) none)
-    (lightning-tracker-method-16 () none) ;; 16 ;; (update (_type_) none)
+    (lightning-tracker-method-14 () _type_ :state) ;; 14
+    (lightning-tracker-method-15 (_type_) none) ;; 15
+    (lightning-tracker-method-16 (_type_) none) ;; 16
     (lightning-tracker-method-17 () none) ;; 17
     )
   )|#
@@ -30353,7 +30353,7 @@
   :size-assert         #x90
   :flag-assert         #x1000000090
   (:methods
-    (process-hidden-method-14 () none) ;; 14 ;; (die () _type_ :state)
+    (process-hidden-method-14 () _type_ :state) ;; 14
     (process-hidden-method-15 () none) ;; 15
     )
   )
@@ -30409,7 +30409,7 @@
     (external-camera-controller-method-11 () none) ;; 11
     (external-camera-controller-method-12 () none) ;; 12
     (external-camera-controller-method-13 () none) ;; 13
-    (external-camera-controller-method-14 () none) ;; 14 ;; (active () _type_ :state)
+    (external-camera-controller-method-14 () _type_ :state) ;; 14
     (external-camera-controller-method-15 () none) ;; 15
     )
   )|#
@@ -30463,9 +30463,9 @@
   :flag-assert         #xc00000050
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process-drawable int float collide-spec) _type_)
-    (impact-control-method-9 () none) ;; 9 ;; (initialize (_type_ process-drawable int float collide-spec) impact-control)
-    (impact-control-method-10 () none) ;; 10 ;; (update-from-cspace (_type_) none)
-    (impact-control-method-11 () none) ;; 11 ;; (impact-control-method-11 (_type_ collide-query process pat-surface) float)
+    (impact-control-method-9 (_type_ process-drawable int float collide-spec) impact-control) ;; 9
+    (impact-control-method-10 (_type_) none) ;; 10
+    (impact-control-method-11 (_type_ collide-query process pat-surface) float) ;; 11
     )
   )
 |#
@@ -30482,9 +30482,9 @@
   :flag-assert         #xc00000020
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type vector vector) _type_)
-    (point-tracker-method-9 () none) ;; 9 ;; (initialize (_type_ vector vector) point-tracker)
-    (point-tracker-method-10 () none) ;; 10 ;; (point-tracker-method-10 (_type_ vector vector vector float) vector)
-    (point-tracker-method-11 () none) ;; 11 ;; (point-tracker-method-11 (_type_ vector vector vector float) vector)
+    (point-tracker-method-9 (_type_ vector vector) point-tracker) ;; 9
+    (point-tracker-method-10 (_type_ vector vector vector float) vector) ;; 10
+    (point-tracker-method-11 (_type_ vector vector vector float) vector) ;; 11
     )
   )
 |#
@@ -30501,7 +30501,7 @@
   :flag-assert         #xe00000030
   (:methods
     (combo-tracker-method-12 () none) ;; 12 ;; (combo-tracker-method-12 (_type_ vector vector process time-frame) combo-tracker)
-    (combo-tracker-method-13 () none) ;; 13 ;; (combo-tracker-method-13 (_type_ handle vector float vector float) process-focusable)
+    (combo-tracker-method-13 (_type_ handle vector float vector float) process-focusable) ;; 13
     )
   )|#
   
@@ -30586,8 +30586,8 @@
   :size-assert         #xe8
   :flag-assert         #xd000000e8
   (:methods
-    (touching-prims-entry-method-9 () none) ;; 9 ;; (touching-prims-entry-method-9 (_type_ vector) vector)
-    (touching-prims-entry-method-10 () none) ;; 10 ;; (get-middle-of-bsphere-overlap (_type_ vector) vector)
+    (touching-prims-entry-method-9 (_type_ vector) vector) ;; 9
+    (touching-prims-entry-method-10 (_type_ vector) vector) ;; 10
     (touching-prims-entry-method-11 () none) ;; 11 ;; (get-touched-prim (_type_ collide-shape touching-shapes-entry) collide-shape-prim)
     (touching-prims-entry-method-12 () none) ;; 12 ;; (get-touched-tri (_type_ collide-shape touching-shapes-entry) collide-tri-result)
     )
@@ -30605,10 +30605,10 @@
   :flag-assert         #xd00003c10
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type) _type_)
-    (touching-prims-entry-pool-method-9 () none) ;; 9 ;; (alloc-node (_type_) touching-prims-entry)
-    (touching-prims-entry-pool-method-10 () none) ;; 10 ;; (get-free-node-count (_type_) int)
-    (touching-prims-entry-pool-method-11 () none) ;; 11 ;; (init-list! (_type_) none)
-    (touching-prims-entry-pool-method-12 () none) ;; 12 ;; (free-node (_type_ touching-prims-entry) touching-prims-entry)
+    (touching-prims-entry-pool-method-9 (_type_) touching-prims-entry) ;; 9
+    (touching-prims-entry-pool-method-10 (_type_) int) ;; 10
+    (touching-prims-entry-pool-method-11 (_type_) none) ;; 11
+    (touching-prims-entry-pool-method-12 (_type_ touching-prims-entry) touching-prims-entry) ;; 12
     )
   )|#
   
@@ -30627,12 +30627,12 @@
   :size-assert         #x20
   :flag-assert         #xf00000020
   (:methods
-    (touching-shapes-entry-method-9 () none) ;; 9 ;; (get-head (_type_) touching-prims-entry)
-    (touching-shapes-entry-method-10 () none) ;; 10 ;; (get-next (_type_ touching-shapes-entry) touching-prims-entry)
-    (touching-shapes-entry-method-11 () none) ;; 11 ;; (get-touched-shape (_type_ collide-shape) collide-shape)
-    (touching-shapes-entry-method-12 () none) ;; 12 ;; (prims-touching? (_type_ collide-shape uint) touching-prims-entry)
-    (touching-shapes-entry-method-13 () none) ;; 13 ;; (prims-touching-action? (_type_ collide-shape collide-action collide-action) basic)
-    (touching-shapes-entry-method-14 () none) ;; 14 ;; (free-touching-prims-list (_type_) none)
+    (touching-shapes-entry-method-9 (_type_) touching-prims-entry) ;; 9
+    (touching-shapes-entry-method-10 (_type_ touching-shapes-entry) touching-prims-entry) ;; 10
+    (touching-shapes-entry-method-11 (_type_ collide-shape) collide-shape) ;; 11
+    (touching-shapes-entry-method-12 (_type_ collide-shape uint) touching-prims-entry) ;; 12
+    (touching-shapes-entry-method-13 (_type_ collide-shape collide-action collide-action) basic) ;; 13
+    (touching-shapes-entry-method-14 (_type_) none) ;; 14
     )
   )
 
@@ -30649,11 +30649,11 @@
   :flag-assert         #xe00000408
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type) _type_)
-    (touching-list-method-9 () none) ;; 9 ;; (add-touching-prims (_type_ collide-shape-prim collide-shape-prim float collide-tri-result collide-tri-result) none)
-    (touching-list-method-10 () none) ;; 10 ;; (free-nodes (_type_) none)
-    (touching-list-method-11 () none) ;; 11 ;; (update-from-step-size (_type_ float) none)
-    (touching-list-method-12 () none) ;; 12 ;; (send-events-for-touching-shapes (_type_) none)
-    (touching-list-method-13 () none) ;; 13 ;; (get-shapes-entry (_type_ collide-shape collide-shape) touching-shapes-entry)
+    (touching-list-method-9 (_type_ collide-shape-prim collide-shape-prim float collide-tri-result collide-tri-result) none) ;; 9
+    (touching-list-method-10 (_type_) none) ;; 10
+    (touching-list-method-11 (_type_ float) none) ;; 11
+    (touching-list-method-12 (_type_) none) ;; 12
+    (touching-list-method-13 (_type_ collide-shape collide-shape) touching-shapes-entry) ;; 13
     )
   )|#
   
@@ -31090,10 +31090,10 @@
     (ragdoll-edit-info-method-9 () none) ;; 9 ;; (has-joint? (_type_ ragdoll-joint) symbol)
     (ragdoll-edit-info-method-10 () none) ;; 10 ;; (ragdoll-edit-info-method-10 (_type_ object ragdoll-joint) symbol)
     (ragdoll-edit-info-method-11 () none) ;; 11 ;; (fill-child-stack! (_type_ ragdoll) none)
-    (ragdoll-edit-info-method-12 () none) ;; 12 ;; (ragdoll-edit-info-method-12 (_type_) none)
+    (ragdoll-edit-info-method-12 (_type_) none) ;; 12
     (ragdoll-edit-info-method-13 () none) ;; 13 ;; (cycle-joints! (_type_ ragdoll) none)
     (ragdoll-edit-info-method-14 () none) ;; 14 ;; (ragdoll-edit-info-method-14 (_type_ matrix vector (inline-array ragdoll-joint) ragdoll process-drawable) vector)
-    (ragdoll-edit-info-method-15 () none) ;; 15 ;; (ragdoll-edit-info-method-15 (_type_) none)
+    (ragdoll-edit-info-method-15 (_type_) none) ;; 15
     (ragdoll-edit-info-method-16 () none) ;; 16 ;; (ragdoll-edit-info-method-16 (_type_ ragdoll process-drawable) none)
     (ragdoll-edit-info-method-17 () none) ;; 17 ;; (ragdoll-edit-info-method-17 (_type_ ragdoll process-drawable) none)
     )
@@ -31200,23 +31200,23 @@
   :size-assert         #x2ecc
   :flag-assert         #x1a00002ecc
   (:methods
-    (ragdoll-method-9 (_type_) none) ;; 9 ;; (ragdoll-method-9 (_type_ matrix process-drawable) none)
-    (ragdoll-method-10 (_type_) none) ;; 10 ;; (ragdoll-method-10 (_type_ process-drawable symbol vector symbol) none)
-    (ragdoll-method-11 (_type_) none) ;; 11 ;; (turn-off-for-duration! (_type_ time-frame) none)
+    (ragdoll-method-9 (_type_ matrix process-drawable) none) ;; 9
+    (ragdoll-method-10 (_type_ process-drawable symbol vector symbol) none) ;; 10
+    (ragdoll-method-11 (_type_ time-frame) none) ;; 11
     (ragdoll-method-12 (_type_) none) ;; 12 ;; (get-parent-joint (_type_ (inline-array ragdoll-joint)) ragdoll-joint)
     (ragdoll-method-13 (_type_) none) ;; 13 ;; (ragdoll-method-13 (_type_ ragdoll-edit-info ragdoll-joint matrix matrix) none)
     (ragdoll-method-14 (_type_) none) ;; 14 ;; (ragdoll-method-14 (_type_ process-drawable ragdoll-joint object matrix) none)
     (ragdoll-method-15 (_type_) none) ;; 15 ;; (ragdoll-method-15 (_type_ process-drawable ragdoll-edit-info) none)
-    (ragdoll-method-16 (_type_) none) ;; 16 ;; (ragdoll-setup! (_type_ process-drawable ragdoll-setup) none)
-    (ragdoll-method-17 (_type_) none) ;; 17 ;; (ragdoll-method-17 (_type_ process-drawable) none)
+    (ragdoll-method-16 (_type_ process-drawable ragdoll-setup) none) ;; 16
+    (ragdoll-method-17 (_type_ process-drawable) none) ;; 17
     (ragdoll-method-18 (_type_) none) ;; 18 ;; (ragdoll-method-18 (_type_) none)
-    (ragdoll-method-19 (_type_) none) ;; 19 ;; (ragdoll-method-19 (_type_ vector int object matrix) none)
-    (ragdoll-method-20 (_type_) none) ;; 20 ;; (reset-vec! (_type_ vector) none)
-    (ragdoll-method-21 (_type_) none) ;; 21 ;; (ragdoll-method-21 (_type_ vector vector float) vector)
-    (ragdoll-method-22 (_type_) none) ;; 22 ;; (get-max-angle-for-joint-idx (_type_ int) degrees)
-    (ragdoll-method-23 (_type_) none) ;; 23 ;; (ragdoll-method-23 (_type_ vector vector float symbol) none)
-    (ragdoll-method-24 (_type_) none) ;; 24 ;; (ragdoll-method-24 (_type_ vector int) none)
-    (ragdoll-method-25 (_type_) none) ;; 25 ;; (enable-ragdoll! (_type_ process-drawable) none)
+    (ragdoll-method-19 (_type_ vector int object matrix) none) ;; 19
+    (ragdoll-method-20 (_type_ vector) none) ;; 20
+    (ragdoll-method-21 (_type_ vector vector float) vector) ;; 21
+    (ragdoll-method-22 (_type_ int) degrees) ;; 22
+    (ragdoll-method-23 (_type_ vector vector float symbol) none) ;; 23
+    (ragdoll-method-24 (_type_ vector int) none) ;; 24
+    (ragdoll-method-25 (_type_ process-drawable) none) ;; 25
     )
   )|#
   
@@ -31237,12 +31237,12 @@
     (ragdoll-proc-method-11 () none) ;; 11
     (ragdoll-proc-method-12 () none) ;; 12
     (ragdoll-proc-method-13 () none) ;; 13
-    (ragdoll-proc-method-14 () none) ;; 14 ;; (idle () _type_ :state)
-    (ragdoll-proc-method-15 () none) ;; 15 ;; (ragdoll-proc-method-15 (_type_ symbol vector symbol) none)
-    (ragdoll-proc-method-16 () none) ;; 16 ;; (disable-for-duration (_type_ time-frame) none)
+    (ragdoll-proc-method-14 () _type_ :state) ;; 14
+    (ragdoll-proc-method-15 (_type_ symbol vector symbol) none) ;; 15
+    (ragdoll-proc-method-16 (_type_ time-frame) none) ;; 16
     (ragdoll-proc-method-17 () none) ;; 17 ;; (ragdoll-proc-method-17 (_type_ ragdoll-edit-info) none)
     (ragdoll-proc-method-18 () none) ;; 18 ;; (ragdoll-proc-method-18 (_type_ ragdoll-edit-info) none)
-    (ragdoll-proc-method-19 () none) ;; 19 ;; (ragdoll-proc-method-19 (_type_) none)
+    (ragdoll-proc-method-19 (_type_) none) ;; 19
     (ragdoll-proc-method-20 () none) ;; 20
     )
   )|#
@@ -31480,10 +31480,10 @@
   :flag-assert         #xe00000034
   (:methods
     (perf-stat-method-9 () none) ;; 9 ;; (perf-stat-method-9 () none)
-    (perf-stat-method-10 () none) ;; 10 ;; (print-to-stream (_type_ string basic) none)
-    (perf-stat-method-11 () none) ;; 11 ;; (start-profiling! (_type_) none)
-    (perf-stat-method-12 () none) ;; 12 ;; (stop-profiling! (_type_) none)
-    (perf-stat-method-13 () none) ;; 13 ;; (update-wait-stats (_type_ uint uint uint) none)
+    (perf-stat-method-10 (_type_ string basic) none) ;; 10
+    (perf-stat-method-11 (_type_) none) ;; 11
+    (perf-stat-method-12 (_type_) none) ;; 12
+    (perf-stat-method-13 (_type_ uint uint uint) none) ;; 13
     )
   )
 
@@ -31540,8 +31540,8 @@
   :size-assert         #x190
   :flag-assert         #x1300000190
   (:methods
-    (bsp-header-method-17 () none) ;; 17 ;; (birth (_type_) none)
-    (bsp-header-method-18 () none) ;; 18 ;; (deactivate-entities (_type_) none)
+    (bsp-header-method-17 (_type_) none) ;; 17
+    (bsp-header-method-18 (_type_) none) ;; 18
     )
   )
 
@@ -31699,19 +31699,19 @@
   :size-assert         #x84
   :flag-assert         #x1c00000084
   (:methods
-    (collide-cache-method-9 () none) ;; 9 ;; (debug-draw (_type_) none)
-    (collide-cache-method-10 () none) ;; 10 ;; (fill-and-probe-using-line-sphere (_type_ collide-query) float)
-    (collide-cache-method-11 () none) ;; 11 ;; (fill-and-probe-using-spheres (_type_ collide-query) symbol)
-    (collide-cache-method-12 () none) ;; 12 ;; (fill-using-bounding-box (_type_ collide-query) none)
-    (collide-cache-method-13 () none) ;; 13 ;; (fill-using-line-sphere (_type_ collide-query) none)
-    (collide-cache-method-14 () none) ;; 14 ;; (fill-using-spheres (_type_ collide-query) none)
-    (collide-cache-method-15 () none) ;; 15 ;; (reset (_type_) none)
-    (collide-cache-method-16 () none) ;; 16 ;; (probe-using-line-sphere (_type_ collide-query) float)
-    (collide-cache-method-17 () none) ;; 17 ;; (probe-using-spheres (_type_ collide-query) symbol)
+    (collide-cache-method-9 (_type_) none) ;; 9
+    (collide-cache-method-10 (_type_ collide-query) float) ;; 10
+    (collide-cache-method-11 (_type_ collide-query) symbol) ;; 11
+    (collide-cache-method-12 (_type_ collide-query) none) ;; 12
+    (collide-cache-method-13 (_type_ collide-query) none) ;; 13
+    (collide-cache-method-14 (_type_ collide-query) none) ;; 14
+    (collide-cache-method-15 (_type_) none) ;; 15
+    (collide-cache-method-16 (_type_ collide-query) float) ;; 16
+    (collide-cache-method-17 (_type_ collide-query) symbol) ;; 17
     (fill-from-bg (_type_ (function collide-hash int collide-list collide-query int) (function collide-cache collide-list collide-query none) collide-query) none) ;; 18
-    (collide-cache-method-19 () none) ;; 19 ;; (fill-from-fg-boxes (_type_) none)
-    (collide-cache-method-20 () none) ;; 20 ;; (fill-from-fg-line-sphere (_type_ collide-query) none)
-    (collide-cache-method-21 () none) ;; 21 ;; (fill-from-water (_type_ water-control) none)
+    (collide-cache-method-19 (_type_) none) ;; 19
+    (collide-cache-method-20 (_type_ collide-query) none) ;; 20
+    (collide-cache-method-21 (_type_ water-control) none) ;; 21
     (collide-cache-method-22 () none) ;; 22 ;; (collide-cache-method-22 () none)
     (collide-cache-method-23 () none) ;; 23 ;; (collide-cache-method-23 () none)
     (collide-cache-method-24 () none) ;; 24 ;; (collide-cache-method-24 () none)
@@ -31846,22 +31846,22 @@
 
 
   
-#|(deftype shrubbery (drawable)
-  ((textures (inline-array adgif-shader)  :offset-assert 4) ;; guessed by decompiler
-   (header   qword                        :offset-assert 8)
-   (obj-qwc  uint8                        :offset-assert 12)
-   (vtx-qwc  uint8                        :offset-assert 13)
-   (col-qwc  uint8                        :offset-assert 14)
-   (stq-qwc  uint8                        :offset-assert 15)
-   (obj      uint32                       :offset-assert 16)
-   (vtx      uint32                       :offset-assert 20)
-   (col      uint32                       :offset-assert 24)
-   (stq      uint32                       :offset-assert 28)
+(deftype shrubbery (drawable)
+  ((textures (inline-array adgif-shader)  :offset 4) ;; guessed by decompiler
+   (header   qword                        :offset 8)
+   (obj-qwc  uint8                        :offset 12)
+   (vtx-qwc  uint8                        :offset 13)
+   (col-qwc  uint8                        :offset 14)
+   (stq-qwc  uint8                        :offset 15)
+   (obj      uint32                       :offset 16)
+   (vtx      uint32                       :offset 20)
+   (col      uint32                       :offset 24)
+   (stq      uint32                       :offset 28)
    )
   :method-count-assert 17
   :size-assert         #x20
   :flag-assert         #x1100000020
-  )|#
+  )
   
 
 
@@ -31910,10 +31910,15 @@
   
 
 
-;; (deftype prototype-shrubbery (drawable-inline-array)
-;;   ()
-;;   :flag-assert #x1100000044
-;;   )
+(deftype prototype-shrubbery (drawable-inline-array)
+  "Array of shrub prototypes."
+  ((data shrubbery 1 :inline :offset-assert 32)
+   (pad uint32)
+   )
+  :method-count-assert 17
+  :size-assert         #x44
+  :flag-assert         #x1100000044
+  )
 
 (deftype prototype-trans-shrubbery (prototype-shrubbery)
   ()
@@ -32843,10 +32848,10 @@
   :size-assert         #x2d50
   :flag-assert         #xd00002d50
   (:methods
-    (region-prim-area-method-9 () none) ;; 9 ;; (track-entered-region! (_type_ drawable-region-sphere) int)
-    (region-prim-area-method-10 () none) ;; 10 ;; (track-exited-region! (_type_ drawable-region-sphere) int)
-    (region-prim-area-method-11 () none) ;; 11 ;; (track-inside-region! (_type_ drawable-region-sphere) int)
-    (region-prim-area-method-12 () none) ;; 12 ;; (track-start-region! (_type_ drawable-region-sphere) int)
+    (region-prim-area-method-9 (_type_ drawable-region-sphere) int) ;; 9
+    (region-prim-area-method-10 (_type_ drawable-region-sphere) int) ;; 10
+    (region-prim-area-method-11 (_type_ drawable-region-sphere) int) ;; 11
+    (region-prim-area-method-12 (_type_ drawable-region-sphere) int) ;; 12
     )
   )
   
@@ -32967,7 +32972,7 @@
   :size-assert         #x40
   :flag-assert         #xa00000040
   (:methods
-    (entity-links-method-9 () none) ;; 9 ;; (birth? (_type_ vector) symbol)
+    (entity-links-method-9 (_type_ vector) symbol) ;; 9
     )
   )
 
@@ -33004,10 +33009,11 @@
 ;;   :flag-assert #x1d0000003c
 ;;   )
 
-(deftype entity-race-mesh (entity)
-  ()
-  :flag-assert #x1d0000003c
-  )
+;; entity-race-mesh needs entity fully-defined (entity is at line 41593, after this)
+;; (deftype entity-race-mesh (entity)
+;;   ()
+;;   :flag-assert #x1d0000003c
+;;   )
 
 ;; (deftype entity-actor (entity)
 ;;   ()
@@ -33647,9 +33653,9 @@
   :size-assert         #x938
   :flag-assert         #x1208b00938
   (:methods
-    (camera-master-method-14 () none) ;; 14 ;; (camera-master-method-14 (_type_ vector) vector)
-    (camera-master-method-15 () none) ;; 15 ;; (camera-master-method-15 (_type_ vector) vector)
-    (camera-master-method-16 () none) ;; 16 ;; (camera-master-method-16 (_type_ symbol) int)
+    (camera-master-method-14 (_type_ vector) vector) ;; 14
+    (camera-master-method-15 (_type_ vector) vector) ;; 15
+    (camera-master-method-16 (_type_ symbol) int) ;; 16
     (camera-master-method-17 () none) ;; 17
     )
   )
@@ -33932,8 +33938,8 @@
   :flag-assert         #xb00000068
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type sparticle-system sparticle-launcher float) _type_)
-    (sparticle-subsampler-method-9 () none) ;; 9 ;; (init-with-vec! (_type_ vector) vector)
-    (sparticle-subsampler-method-10 () none) ;; 10 ;; (init-with-mat! (_type_ matrix) matrix)
+    (sparticle-subsampler-method-9 (_type_ vector) vector) ;; 9
+    (sparticle-subsampler-method-10 (_type_ matrix) matrix) ;; 10
     )
   )|#
   
@@ -34073,23 +34079,23 @@
   :flag-assert         #x1a00000010
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process symbol) _type_)
-    (actor-link-info-method-9 () none) ;; 9 ;; (get-matching-actor-type-mask (_type_ type) int)
-    (actor-link-info-method-10 () none) ;; 10 ;; (actor-count-before (_type_) int)
-    (actor-link-info-method-11 () none) ;; 11 ;; (link-to-next-and-prev-actor (_type_) actor-link-info)
-    (actor-link-info-method-12 () none) ;; 12 ;; (get-next (_type_) entity-actor)
-    (actor-link-info-method-13 () none) ;; 13 ;; (get-prev (_type_) entity-actor)
-    (actor-link-info-method-14 () none) ;; 14 ;; (get-next-process (_type_) process)
-    (actor-link-info-method-15 () none) ;; 15 ;; (get-prev-process (_type_) process)
-    (actor-link-info-method-16 () none) ;; 16 ;; (apply-function-forward (_type_ (function entity-actor object object) object) int)
-    (actor-link-info-method-17 () none) ;; 17 ;; (apply-function-reverse (_type_ (function entity-actor object object) object) int)
-    (actor-link-info-method-18 () none) ;; 18 ;; (apply-all (_type_ (function entity-actor object object) object) int)
-    (actor-link-info-method-19 () none) ;; 19 ;; (send-to-all (_type_ symbol) none)
-    (actor-link-info-method-20 () none) ;; 20 ;; (send-to-all-after (_type_ symbol) object)
-    (actor-link-info-method-21 () none) ;; 21 ;; (send-to-all-before (_type_ symbol) object)
-    (actor-link-info-method-22 () none) ;; 22 ;; (send-to-next-and-prev (_type_ symbol) none)
-    (actor-link-info-method-23 () none) ;; 23 ;; (send-to-next (_type_ symbol) none)
-    (actor-link-info-method-24 () none) ;; 24 ;; (send-to-prev (_type_ symbol) none)
-    (actor-link-info-method-25 () none) ;; 25 ;; (actor-count (_type_) int)
+    (actor-link-info-method-9 (_type_ type) int) ;; 9
+    (actor-link-info-method-10 (_type_) int) ;; 10
+    (actor-link-info-method-11 (_type_) actor-link-info) ;; 11
+    (actor-link-info-method-12 (_type_) entity-actor) ;; 12
+    (actor-link-info-method-13 (_type_) entity-actor) ;; 13
+    (actor-link-info-method-14 (_type_) process) ;; 14
+    (actor-link-info-method-15 (_type_) process) ;; 15
+    (actor-link-info-method-16 (_type_ (function entity-actor object object) object) int) ;; 16
+    (actor-link-info-method-17 (_type_ (function entity-actor object object) object) int) ;; 17
+    (actor-link-info-method-18 (_type_ (function entity-actor object object) object) int) ;; 18
+    (actor-link-info-method-19 (_type_ symbol) none) ;; 19
+    (actor-link-info-method-20 (_type_ symbol) object) ;; 20
+    (actor-link-info-method-21 (_type_ symbol) object) ;; 21
+    (actor-link-info-method-22 (_type_ symbol) none) ;; 22
+    (actor-link-info-method-23 (_type_ symbol) none) ;; 23
+    (actor-link-info-method-24 (_type_ symbol) none) ;; 24
+    (actor-link-info-method-25 (_type_) int) ;; 25
     )
   )
 
@@ -34217,8 +34223,8 @@
   :size-assert         #x34
   :flag-assert         #xb00000034
   (:methods
-    (hud-sprite-method-9 () none) ;; 9 ;; (draw (_type_ dma-buffer level symbol) none)
-    (hud-sprite-method-10 () none) ;; 10 ;; (hud-sprite-method-10 (_type_ dma-buffer level int int int int) object)
+    (hud-sprite-method-9 (_type_ dma-buffer level symbol) none) ;; 9
+    (hud-sprite-method-10 (_type_ dma-buffer level int int int int) object) ;; 10
     )
   )|#
   
@@ -34236,10 +34242,10 @@
   :size-assert         #x20
   :flag-assert         #xd00000020
   (:methods
-    (hud-box-method-9 () none) ;; 9 ;; (draw-box-prim-only (_type_ dma-buffer) none)
-    (hud-box-method-10 () none) ;; 10 ;; (draw-box-alpha-1 (_type_ dma-buffer) none)
-    (hud-box-method-11 () none) ;; 11 ;; (draw-box-alpha-2 (_type_ dma-buffer) none)
-    (hud-box-method-12 () none) ;; 12 ;; (draw-box-alpha-3 (_type_ dma-buffer) none)
+    (hud-box-method-9 (_type_ dma-buffer) none) ;; 9
+    (hud-box-method-10 (_type_ dma-buffer) none) ;; 10
+    (hud-box-method-11 (_type_ dma-buffer) none) ;; 11
+    (hud-box-method-12 (_type_ dma-buffer) none) ;; 12
     )
   )|#
   
@@ -34453,29 +34459,29 @@
   :flag-assert         #x2100000028
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process symbol float entity symbol) _type_)
-    (path-control-method-9 () none) ;; 9 ;; (debug-draw (_type_) none)
-    (path-control-method-10 () none) ;; 10 ;; (get-point-in-path! (_type_ vector float symbol) vector)
-    (path-control-method-11 () none) ;; 11 ;; (get-random-point (_type_ vector) vector)
-    (path-control-method-12 () none) ;; 12 ;; (path-control-method-12 (_type_ vector float float) vector)
-    (path-control-method-13 () none) ;; 13 ;; (displacement-between-two-points-normalized! (_type_ vector float) vector)
-    (path-control-method-14 () none) ;; 14 ;; (get-point-at-percent-along-path! (_type_ vector float symbol) vector)
-    (path-control-method-15 () none) ;; 15 ;; (path-control-method-15 (_type_ vector float float) vector)
-    (path-control-method-16 () none) ;; 16 ;; (displacement-between-points-at-percent-normalized! (_type_ vector float) vector)
-    (path-control-method-17 () none) ;; 17 ;; (get-num-segments (_type_) float)
-    (path-control-method-18 () none) ;; 18 ;; (total-distance (_type_) float)
-    (path-control-method-19 () none) ;; 19 ;; (get-num-verts (_type_) int)
-    (path-control-method-20 () none) ;; 20 ;; (segement-duration->path-duration (_type_ float) float)
-    (path-control-method-21 () none) ;; 21 ;; (path-duration->segment-duration (_type_ float) float)
-    (path-control-method-22 () none) ;; 22 ;; (path-control-method-22 (_type_ vector) float)
-    (path-control-method-23 () none) ;; 23 ;; (path-control-method-23 (_type_ vector) float)
-    (path-control-method-24 () none) ;; 24 ;; (path-control-method-24 (_type_ vector) float)
-    (path-control-method-25 () none) ;; 25 ;; (path-control-method-25 (_type_ vector) float)
-    (path-control-method-26 () none) ;; 26 ;; (path-control-method-26 (_type_ float float) float)
-    (path-control-method-27 () none) ;; 27 ;; (path-control-method-27 (_type_ vector) vector)
-    (path-control-method-28 () none) ;; 28 ;; (path-control-method-28 (_type_ vector vector symbol) float)
-    (path-control-method-29 () none) ;; 29 ;; (path-control-method-29 (_type_ vector int float) float)
-    (path-control-method-30 () none) ;; 30 ;; (should-display-marks? (_type_) symbol)
-    (path-control-method-31 () none) ;; 31 ;; (displacement-between-two-points! (_type_ vector float float) vector)
+    (path-control-method-9 (_type_) none) ;; 9
+    (path-control-method-10 (_type_ vector float symbol) vector) ;; 10
+    (path-control-method-11 (_type_ vector) vector) ;; 11
+    (path-control-method-12 (_type_ vector float float) vector) ;; 12
+    (path-control-method-13 (_type_ vector float) vector) ;; 13
+    (path-control-method-14 (_type_ vector float symbol) vector) ;; 14
+    (path-control-method-15 (_type_ vector float float) vector) ;; 15
+    (path-control-method-16 (_type_ vector float) vector) ;; 16
+    (path-control-method-17 (_type_) float) ;; 17
+    (path-control-method-18 (_type_) float) ;; 18
+    (path-control-method-19 (_type_) int) ;; 19
+    (path-control-method-20 (_type_ float) float) ;; 20
+    (path-control-method-21 (_type_ float) float) ;; 21
+    (path-control-method-22 (_type_ vector) float) ;; 22
+    (path-control-method-23 (_type_ vector) float) ;; 23
+    (path-control-method-24 (_type_ vector) float) ;; 24
+    (path-control-method-25 (_type_ vector) float) ;; 25
+    (path-control-method-26 (_type_ float float) float) ;; 26
+    (path-control-method-27 (_type_ vector) vector) ;; 27
+    (path-control-method-28 (_type_ vector vector symbol) float) ;; 28
+    (path-control-method-29 (_type_ vector int float) float) ;; 29
+    (path-control-method-30 (_type_) symbol) ;; 30
+    (path-control-method-31 (_type_ vector float float) vector) ;; 31
     (path-control-method-32 () none) ;; 32
     )
   )|#
@@ -35014,45 +35020,45 @@
   :size-assert         #x120
   :flag-assert         #x3000000120
   (:methods
-    (nav-control-method-9 (_type_) none) ;; 9 ;; debug-draw
-    (nav-control-method-10 (_type_ vector) symbol) ;; 10 ;; point-in-bsphere?
-    (nav-control-method-11 (_type_ vector) nav-poly) ;; 11 ;; find-poly-containing-point-1
-    (nav-control-method-12 (_type_ vector vector nav-poly) nav-poly) ;; 12 ;; closest-point-on-mesh
-    (nav-control-method-13 (_type_ vector) nav-poly) ;; 13 ;; find-nearest-poly-to-point
-    (nav-control-method-14 (_type_ nav-poly vector vector vector) none) ;; 14 ;; project-point-onto-plane-of-poly
-    (nav-control-method-15 (_type_ vector) nav-poly) ;; 15 ;; find-poly-containing-point-2
-    (nav-control-method-16 (_type_ vector float) symbol) ;; 16 ;; is-above-poly-max-height?
-    (nav-control-method-17 (_type_ vector float) symbol) ;; 17 ;; is-in-mesh?
-    (nav-control-method-18 (_type_ object) symbol) ;; 18 ;; avoid-spheres-1!
-    (nav-control-method-19 (_type_ object) symbol) ;; 19 ;; avoid-spheres-2!
-    (nav-control-method-20 (_type_ vector nav-poly vector float symbol clamp-travel-vector-to-mesh-return-info) none) ;; 20
-    (nav-control-method-21 (_type_ vector nav-poly vector clamp-travel-vector-to-mesh-return-info) none) ;; 21
-    (nav-control-method-22 (_type_ vector object) float) ;; 22 ;; find-first-sphere-and-update-avoid-params
-    (nav-control-method-23 (_type_) none) ;; 23 ;; set-spheres-from-nav-ids
-    (nav-control-method-24 (_type_ vector int) symbol) ;; 24 ;; add-root-sphere-to-hash!
-    (nav-control-method-25 (_type_) float) ;; 25 ;; get-max-rotation-rate
-    (nav-control-method-26 (_type_) uint) ;; 26 ;; get-sphere-mask
-    (nav-control-method-27 (_type_) meters) ;; 27 ;; get-target-speed
-    (nav-control-method-28 (_type_) none) ;; 28 ;; enable-extra-sphere!
-    (nav-control-method-29 (_type_) none) ;; 29 ;; disable-extra-sphere!
-    (nav-control-method-30 (_type_ sphere) none) ;; 30 ;; copy-extra-nav-sphere!
-    (nav-control-method-31 (_type_ sphere) none) ;; 31
-    (nav-control-method-32 (_type_ float) none) ;; 32
-    (nav-control-method-33 (_type_ float) none) ;; 33
-    (nav-control-method-34 (_type_ meters) none) ;; 34
-    (nav-control-method-35 (_type_ float) none) ;; 35
-    (nav-control-method-36 (_type_ meters) none) ;; 36
-    (nav-control-method-37 (_type_ meters) none) ;; 37
-    (nav-control-method-38 (_type_ meters) none) ;; 38
-    (nav-control-method-39 (_type_ float) none) ;; 39
-    (nav-control-method-40 (_type_ uint) none) ;; 40
-    (nav-control-method-41 (_type_) none) ;; 41 ;; remove!
-    (nav-control-method-42 (_type_ collide-shape) none) ;; 42 ;; init!
-    (nav-control-method-43 (_type_) symbol) ;; 43 ;; display-marks?
-    (nav-control-method-44 (_type_) none) ;; 44
-    (nav-control-method-45 (_type_ vector vector vector) sphere) ;; 45
-    (nav-control-method-46 (_type_ symbol) none) ;; 46
-    (nav-control-method-47 (_type_) none) ;; 47
+    (nav-control-method-9 () none) ;; 9
+    (nav-control-method-10 () none) ;; 10
+    (nav-control-method-11 () none) ;; 11
+    (nav-control-method-12 () none) ;; 12
+    (nav-control-method-13 () none) ;; 13
+    (nav-control-method-14 () none) ;; 14
+    (nav-control-method-15 () none) ;; 15
+    (nav-control-method-16 () none) ;; 16
+    (nav-control-method-17 () none) ;; 17
+    (nav-control-method-18 () none) ;; 18
+    (nav-control-method-19 () none) ;; 19
+    (nav-control-method-20 () none) ;; 20
+    (nav-control-method-21 () none) ;; 21
+    (nav-control-method-22 () none) ;; 22
+    (nav-control-method-23 () none) ;; 23
+    (nav-control-method-24 () none) ;; 24
+    (nav-control-method-25 () none) ;; 25
+    (nav-control-method-26 () none) ;; 26
+    (nav-control-method-27 () none) ;; 27
+    (nav-control-method-28 () none) ;; 28
+    (nav-control-method-29 () none) ;; 29
+    (nav-control-method-30 () none) ;; 30
+    (nav-control-method-31 () none) ;; 31
+    (nav-control-method-32 () none) ;; 32
+    (nav-control-method-33 () none) ;; 33
+    (nav-control-method-34 () none) ;; 34
+    (nav-control-method-35 () none) ;; 35
+    (nav-control-method-36 () none) ;; 36
+    (nav-control-method-37 () none) ;; 37
+    (nav-control-method-38 () none) ;; 38
+    (nav-control-method-39 () none) ;; 39
+    (nav-control-method-40 () none) ;; 40
+    (nav-control-method-41 () none) ;; 41
+    (nav-control-method-42 () none) ;; 42
+    (nav-control-method-43 () none) ;; 43
+    (nav-control-method-44 () none) ;; 44
+    (nav-control-method-45 () none) ;; 45
+    (nav-control-method-46 () none) ;; 46
+    (nav-control-method-47 () none) ;; 47
     )
   )
 
@@ -35181,12 +35187,12 @@
   :flag-assert         #x2400000068
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type int int) _type_)
-    (sphere-hash-method-27 () none) ;; 27 ;; (add-a-sphere-with-flag (_type_ vector int) int)
-    (sphere-hash-method-28 () none) ;; 28 ;; (update-from-spheres (_type_) none)
-    (sphere-hash-method-29 () none) ;; 29 ;; (sphere-hash-method-29 (_type_ find-nav-sphere-ids-params) none)
-    (sphere-hash-method-30 () none) ;; 30 ;; (find-nav-sphere-ids (_type_ find-nav-sphere-ids-params int int) symbol)
-    (sphere-hash-method-31 () none) ;; 31 ;; (add-sphere-with-mask-and-id (_type_ vector vector float int) symbol)
-    (sphere-hash-method-32 () none) ;; 32 ;; (sphere-hash-method-32 (_type_ sphere int) symbol)
+    (sphere-hash-method-27 (_type_ vector int) int) ;; 27
+    (sphere-hash-method-28 (_type_) none) ;; 28
+    (sphere-hash-method-29 (_type_ find-nav-sphere-ids-params) none) ;; 29
+    (sphere-hash-method-30 (_type_ find-nav-sphere-ids-params int int) symbol) ;; 30
+    (sphere-hash-method-31 (_type_ vector vector float int) symbol) ;; 31
+    (sphere-hash-method-32 (_type_ sphere int) symbol) ;; 32
     (sphere-hash-method-33 () none) ;; 33
     (sphere-hash-method-34 () none) ;; 34
     (sphere-hash-method-35 () none) ;; 35
@@ -35212,10 +35218,10 @@
   :flag-assert         #x2a00000074
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type int int) _type_)
-    (spatial-hash-method-36 () none) ;; 36 ;; (fill-actor-list-for-sphere (_type_ vector vector float (pointer collide-shape) int int) int)
-    (spatial-hash-method-37 () none) ;; 37 ;; (fill-actor-list-for-line-sphere (_type_ vector vector float (pointer collide-shape) int int) int)
-    (spatial-hash-method-38 () none) ;; 38 ;; (fill-actor-list-for-vec+r (_type_ vector (pointer collide-shape)) int)
-    (spatial-hash-method-39 () none) ;; 39 ;; (spatial-hash-method-39 (_type_ object hash-object-info) int)
+    (spatial-hash-method-36 (_type_ vector vector float (pointer collide-shape) int int) int) ;; 36
+    (spatial-hash-method-37 (_type_ vector vector float (pointer collide-shape) int int) int) ;; 37
+    (spatial-hash-method-38 (_type_ vector (pointer collide-shape)) int) ;; 38
+    (spatial-hash-method-39 (_type_ object hash-object-info) int) ;; 39
     (spatial-hash-method-40 () none) ;; 40
     (spatial-hash-method-41 () none) ;; 41
     )
@@ -35625,8 +35631,8 @@
   :size-assert         #x20
   :flag-assert         #x1000000020
   (:methods
-    (art-group-method-14 () none) ;; 14 ;; (link-art-to-master (_type_) art-group)
-    (art-group-method-15 () none) ;; 15 ;; (unlink-art-to-master (_type_) int)
+    (art-group-method-14 (_type_) art-group) ;; 14
+    (art-group-method-15 (_type_) int) ;; 15
     )
   )
 |#
@@ -37588,7 +37594,7 @@
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type int level) _type_)
     (load-dir-method-9 () none) ;; 9 ;; (load-to-heap-by-name (_type_ string symbol kheap int) art-group)
-    (load-dir-method-10 () none) ;; 10 ;; (set-loaded-art (_type_ art-group) art-group)
+    (load-dir-method-10 (_type_ art-group) art-group) ;; 10
     )
   )|#
   
@@ -37605,23 +37611,23 @@
   :flag-assert         #x1a00001080
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type int) _type_)
-    (gui-control-method-9 () none) ;; 9 ;; (add-process (_type_ process gui-channel gui-action string float time-frame) sound-id)
-    (gui-control-method-10 () none) ;; 10 ;; (remove-process (_type_ process gui-channel) int)
-    (gui-control-method-11 () none) ;; 11 ;; (stop-str (_type_ gui-connection) int)
-    (gui-control-method-12 () none) ;; 12 ;; (gui-control-method-12 (_type_ process gui-channel gui-action string int float sound-id) sound-id)
-    (gui-control-method-13 () none) ;; 13 ;; (update (_type_ symbol) int)
-    (gui-control-method-14 () none) ;; 14 ;; (lookup-gui-connection-id (_type_ string gui-channel gui-action) sound-id)
-    (gui-control-method-15 () none) ;; 15 ;; (lookup-gui-connection (_type_ process gui-channel string sound-id) gui-connection)
-    (gui-control-method-16 () none) ;; 16 ;; (set-action! (_type_ gui-action sound-id gui-channel gui-action string (function gui-connection symbol) process) int)
-    (gui-control-method-17 () none) ;; 17 ;; (get-status (_type_ sound-id) gui-status)
-    (gui-control-method-18 () none) ;; 18 ;; (gui-control-method-18 (_type_ gui-channel) symbol)
-    (gui-control-method-19 () none) ;; 19 ;; (handle-command-list (_type_ gui-channel gui-connection) symbol)
-    (gui-control-method-20 () none) ;; 20 ;; (sound-params-set! (_type_ sound-id symbol int int int float) gui-connection)
-    (gui-control-method-21 () none) ;; 21 ;; (gui-control-method-21 (_type_ gui-connection) int)
-    (gui-control-method-22 () none) ;; 22 ;; (gui-control-method-22 (_type_ gui-connection vector) int)
-    (gui-control-method-23 () none) ;; 23 ;; (update-connection (_type_ gui-connection process symbol) none)
-    (gui-control-method-24 () none) ;; 24 ;; (handle-command (_type_ gui-channel gui-channel symbol gui-connection) symbol)
-    (gui-control-method-25 () none) ;; 25 ;; (channel-id-set! (_type_ gui-connection sound-id) int)
+    (gui-control-method-9 (_type_ process gui-channel gui-action string float time-frame) sound-id) ;; 9
+    (gui-control-method-10 (_type_ process gui-channel) int) ;; 10
+    (gui-control-method-11 (_type_ gui-connection) int) ;; 11
+    (gui-control-method-12 (_type_ process gui-channel gui-action string int float sound-id) sound-id) ;; 12
+    (gui-control-method-13 (_type_ symbol) int) ;; 13
+    (gui-control-method-14 (_type_ string gui-channel gui-action) sound-id) ;; 14
+    (gui-control-method-15 (_type_ process gui-channel string sound-id) gui-connection) ;; 15
+    (gui-control-method-16 (_type_ gui-action sound-id gui-channel gui-action string (function gui-connection symbol) process) int) ;; 16
+    (gui-control-method-17 (_type_ sound-id) gui-status) ;; 17
+    (gui-control-method-18 (_type_ gui-channel) symbol) ;; 18
+    (gui-control-method-19 (_type_ gui-channel gui-connection) symbol) ;; 19
+    (gui-control-method-20 (_type_ sound-id symbol int int int float) gui-connection) ;; 20
+    (gui-control-method-21 (_type_ gui-connection) int) ;; 21
+    (gui-control-method-22 (_type_ gui-connection vector) int) ;; 22
+    (gui-control-method-23 (_type_ gui-connection process symbol) none) ;; 23
+    (gui-control-method-24 (_type_ gui-channel gui-channel symbol gui-connection) symbol) ;; 24
+    (gui-control-method-25 (_type_ gui-connection sound-id) int) ;; 25
     )
   )
 |#
@@ -38742,7 +38748,7 @@
   :size-assert         #x8
   :flag-assert         #xa00000008
   (:methods
-    (actor-hash-bucket-method-9 () none) ;; 9 ;; (add-actor-cshape (_type_ collide-shape) none)
+    (actor-hash-bucket-method-9 (_type_ collide-shape) none) ;; 9
     )
   )
 
@@ -38759,7 +38765,7 @@
   :size-assert         #x60
   :flag-assert         #xa00000060
   (:methods
-    (actor-hash-buckets-method-9 () none) ;; 9 ;; (hash-actors (_type_) none)
+    (actor-hash-buckets-method-9 (_type_) none) ;; 9
     )
   )|#
   
@@ -38837,15 +38843,15 @@
   :flag-assert         #x1200000150
   (:methods
     (new (symbol type process int float float float) _type_) ;; 0
-    (water-control-method-9 () none) ;; 9 ;; (water-control-method-9 (_type_) none)
-    (water-control-method-10 () none) ;; 10 ;; (water-control-method-10 (_type_) none)
-    (water-control-method-11 () none) ;; 11 ;; (start-bobbing! (_type_ float int int) none)
-    (water-control-method-12 () none) ;; 12 ;; (distance-from-surface (_type_) float)
-    (water-control-method-13 () none) ;; 13 ;; (spawn-ripples (_type_ float vector int vector symbol) none)
-    (water-control-method-14 () none) ;; 14 ;; (display-water-marks? (_type_) symbol)
-    (water-control-method-15 () none) ;; 15 ;; (enter-water (_type_) none)
-    (water-control-method-16 () none) ;; 16 ;; (water-control-method-16 (_type_) none)
-    (water-control-method-17 () none) ;; 17 ;; (water-control-method-17 (_type_) none)
+    (water-control-method-9 (_type_) none) ;; 9
+    (water-control-method-10 (_type_) none) ;; 10
+    (water-control-method-11 (_type_ float int int) none) ;; 11
+    (water-control-method-12 (_type_) float) ;; 12
+    (water-control-method-13 (_type_ float vector int vector symbol) none) ;; 13
+    (water-control-method-14 (_type_) symbol) ;; 14
+    (water-control-method-15 (_type_) none) ;; 15
+    (water-control-method-16 (_type_) none) ;; 16
+    (water-control-method-17 (_type_) none) ;; 17
     )
   )
   
@@ -38981,9 +38987,9 @@
   :size-assert         #x18
   :flag-assert         #xc00000018
   (:methods
-    (plane-volume-method-9 () none) ;; 9 ;; (plane-volume-method-9 (_type_ symbol vector-array vector-array) plane-volume)
-    (plane-volume-method-10 () none) ;; 10 ;; (debug-draw (_type_) none)
-    (plane-volume-method-11 () none) ;; 11 ;; (point-in-vol? (_type_ vector float) symbol)
+    (plane-volume-method-9 (_type_ symbol vector-array vector-array) plane-volume) ;; 9
+    (plane-volume-method-10 (_type_) none) ;; 10
+    (plane-volume-method-11 (_type_ vector float) symbol) ;; 11
     )
   )
 
@@ -39005,9 +39011,9 @@
   :flag-assert         #xc0000061c
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process-drawable) _type_)
-    (vol-control-method-9 () none) ;; 9 ;; (debug-draw (_type_) none)
-    (vol-control-method-10 () none) ;; 10 ;; (vol-control-method-10 (_type_ plane) symbol)
-    (vol-control-method-11 () none) ;; 11 ;; (should-display? (_type_) symbol)
+    (vol-control-method-9 (_type_) none) ;; 9
+    (vol-control-method-10 (_type_ plane) symbol) ;; 10
+    (vol-control-method-11 (_type_) symbol) ;; 11
     )
   )|#
   
@@ -39640,27 +39646,27 @@
   :flag-assert         #x26000000a8
   ;; field cloth-flag is likely a value type.
   (:methods
-    (cloth-system-method-16 () none) ;; 16 ;; (initialize-cloth-system! (_type_ cloth-params) none)
-    (cloth-system-method-17 () none) ;; 17 ;; (debug-draw-spheres (_type_) none)
-    (cloth-system-method-18 () none) ;; 18 ;; (post-physics-update (_type_) int)
-    (cloth-system-method-19 () none) ;; 19 ;; (enforce-constraints-1 (_type_) none)
-    (cloth-system-method-20 () none) ;; 20 ;; (enforce-constraints-2 (_type_) none)
-    (cloth-system-method-21 () none) ;; 21 ;; (cloth-system-method-21 (_type_) none)
-    (cloth-system-method-22 () none) ;; 22 ;; (cloth-system-method-22 (_type_) none)
-    (cloth-system-method-23 () none) ;; 23 ;; (cloth-system-method-23 (_type_) none)
-    (cloth-system-method-24 () none) ;; 24 ;; (cloth-system-method-24 (_type_) int)
-    (cloth-system-method-25 () none) ;; 25 ;; (cloth-system-method-25 (_type_) int)
-    (cloth-system-method-26 () none) ;; 26 ;; (cloth-system-method-26 (_type_) none)
-    (cloth-system-method-27 () none) ;; 27 ;; (cloth-system-method-27 (_type_ vector int int current-position-info) vector)
-    (cloth-system-method-28 () none) ;; 28 ;; (cloth-system-method-28 (_type_ int int current-position-info) none)
-    (cloth-system-method-29 () none) ;; 29 ;; (cloth-system-method-29 (_type_ int int current-position-info int) uint)
-    (cloth-system-method-30 () none) ;; 30 ;; (cloth-system-method-30 (_type_ int int current-position-info int) none)
-    (cloth-system-method-31 () none) ;; 31 ;; (cloth-system-method-31 (_type_ current-position-info) none)
-    (cloth-system-method-32 () none) ;; 32 ;; (cloth-system-method-32 (_type_ vector int int current-position-info) none)
-    (cloth-system-method-33 () none) ;; 33 ;; (cloth-system-method-33 (_type_ vu-lights) none)
-    (cloth-system-method-34 () none) ;; 34 ;; (hide! (_type_) none)
-    (cloth-system-method-35 () none) ;; 35 ;; (reset-locations (_type_) none)
-    (cloth-system-method-36 () none) ;; 36 ;; (pre-physics-update (_type_) none)
+    (cloth-system-method-16 (_type_ cloth-params) none) ;; 16
+    (cloth-system-method-17 (_type_) none) ;; 17
+    (cloth-system-method-18 (_type_) int) ;; 18
+    (cloth-system-method-19 (_type_) none) ;; 19
+    (cloth-system-method-20 (_type_) none) ;; 20
+    (cloth-system-method-21 (_type_) none) ;; 21
+    (cloth-system-method-22 (_type_) none) ;; 22
+    (cloth-system-method-23 (_type_) none) ;; 23
+    (cloth-system-method-24 (_type_) int) ;; 24
+    (cloth-system-method-25 (_type_) int) ;; 25
+    (cloth-system-method-26 (_type_) none) ;; 26
+    (cloth-system-method-27 (_type_ vector int int current-position-info) vector) ;; 27
+    (cloth-system-method-28 (_type_ int int current-position-info) none) ;; 28
+    (cloth-system-method-29 (_type_ int int current-position-info int) uint) ;; 29
+    (cloth-system-method-30 (_type_ int int current-position-info int) none) ;; 30
+    (cloth-system-method-31 (_type_ current-position-info) none) ;; 31
+    (cloth-system-method-32 (_type_ vector int int current-position-info) none) ;; 32
+    (cloth-system-method-33 (_type_ vu-lights) none) ;; 33
+    (cloth-system-method-34 (_type_) none) ;; 34
+    (cloth-system-method-35 (_type_) none) ;; 35
+    (cloth-system-method-36 (_type_) none) ;; 36
     (cloth-system-method-37 () none) ;; 37
     )
   )
@@ -40043,7 +40049,7 @@
     (part-controller-method-11 () none) ;; 11
     (part-controller-method-12 () none) ;; 12
     (part-controller-method-13 () none) ;; 13
-    (part-controller-method-14 () none) ;; 14 ;; (active () _type_ :state)
+    (part-controller-method-14 () _type_ :state) ;; 14
     )
   (:state-methods
     active ;; 15
@@ -40238,18 +40244,18 @@
   :size-assert         #x80
   :flag-assert         #x1700000080
   (:methods
-    (light-trail-method-10 () none) ;; 10 ;; (reset! (_type_) none)
-    (light-trail-method-11 () none) ;; 11 ;; (add-crumb! (_type_ vector time-frame) int)
-    (light-trail-method-12 () none) ;; 12 ;; (build-prim-strip! (_type_) none)
-    (light-trail-method-13 () none) ;; 13 ;; (common-trans! (_type_) int)
-    (light-trail-method-14 () none) ;; 14 ;; (expire-old-points! (_type_) none)
-    (light-trail-method-15 () none) ;; 15 ;; (light-trail-method-15 (_type_) none)
+    (light-trail-method-10 (_type_) none) ;; 10
+    (light-trail-method-11 (_type_ vector time-frame) int) ;; 11
+    (light-trail-method-12 (_type_) none) ;; 12
+    (light-trail-method-13 (_type_) int) ;; 13
+    (light-trail-method-14 (_type_) none) ;; 14
+    (light-trail-method-15 (_type_) none) ;; 15
     (light-trail-method-16 () none) ;; 16 ;; (add-vert-to-prim-strip! (_type_ prim-strip vector rgba float float) none)
-    (light-trail-method-17 () none) ;; 17 ;; (add-tri-pair-to-prim! (_type_ vector rgba float vector float) symbol)
+    (light-trail-method-17 (_type_ vector rgba float vector float) symbol) ;; 17
     (light-trail-method-18 () none) ;; 18 ;; (calc-vertex-pos! (_type_ light-trail-breadcrumb int vector vector) none)
-    (light-trail-method-19 () none) ;; 19 ;; (crumb-age-out-callback (_type_ float int) none)
-    (light-trail-method-20 () none) ;; 20 ;; (reset-crumbs! (_type_) none)
-    (light-trail-method-21 () none) ;; 21 ;; (replace-last-crumb! (_type_ vector) none)
+    (light-trail-method-19 (_type_ float int) none) ;; 19
+    (light-trail-method-20 (_type_) none) ;; 20
+    (light-trail-method-21 (_type_ vector) none) ;; 21
     (light-trail-method-22 () none) ;; 22
     )
   )|#
@@ -40276,7 +40282,7 @@
   :size-assert         #x80
   :flag-assert         #x1900000080
   (:methods
-    (weapon-trail-method-23 () none) ;; 23 ;; (weapon-trail-method-23 (_type_ vector vector) none)
+    (weapon-trail-method-23 (_type_ vector vector) none) ;; 23
     (weapon-trail-method-24 () none) ;; 24
     )
   )|#
@@ -40303,7 +40309,7 @@
   :size-assert         #x80
   :flag-assert         #x1900000080
   (:methods
-    (tread-trail-method-23 () none) ;; 23 ;; (tread-trail-method-23 (_type_ vector vector) none)
+    (tread-trail-method-23 (_type_ vector vector) none) ;; 23
     (tread-trail-method-24 () none) ;; 24
     )
   )|#
@@ -40353,13 +40359,13 @@
     (light-trail-tracker-method-11 () none) ;; 11
     (light-trail-tracker-method-12 () none) ;; 12
     (light-trail-tracker-method-13 () none) ;; 13
-    (light-trail-tracker-method-14 () none) ;; 14 ;; (tracking () _type_ :state)
-    (light-trail-tracker-method-15 () none) ;; 15 ;; (die () _type_ :state)
-    (light-trail-tracker-method-16 () none) ;; 16 ;; (get-tracked-object-pos (_type_ process-focusable vector) vector)
-    (light-trail-tracker-method-17 () none) ;; 17 ;; (should-track? (_type_ process-focusable) symbol)
-    (light-trail-tracker-method-18 () none) ;; 18 ;; (should-end? (_type_ process-focusable) symbol)
-    (light-trail-tracker-method-19 () none) ;; 19 ;; (should-draw? (_type_) symbol)
-    (light-trail-tracker-method-20 () none) ;; 20 ;; (add-crumb! (_type_ vector) none)
+    (light-trail-tracker-method-14 () _type_ :state) ;; 14
+    (light-trail-tracker-method-15 () _type_ :state) ;; 15
+    (light-trail-tracker-method-16 (_type_ process-focusable vector) vector) ;; 16
+    (light-trail-tracker-method-17 (_type_ process-focusable) symbol) ;; 17
+    (light-trail-tracker-method-18 (_type_ process-focusable) symbol) ;; 18
+    (light-trail-tracker-method-19 (_type_) symbol) ;; 19
+    (light-trail-tracker-method-20 (_type_ vector) none) ;; 20
     (light-trail-tracker-method-21 () none) ;; 21
     )
   )|#
@@ -40552,20 +40558,20 @@
   :size-assert         #x74
   :flag-assert         #x1700000074
   (:methods
-    (lightning-bolt-method-9 () none) ;; 9 ;; (init! (_type_ int int lightning-appearance) none)
-    (lightning-bolt-method-10 () none) ;; 10 ;; (reset-spans! (_type_) none)
-    (lightning-bolt-method-11 () none) ;; 11 ;; (lightning-bolt-method-11 (_type_) none)
-    (lightning-bolt-method-12 () none) ;; 12 ;; (lightning-bolt-method-12 (_type_) none)
-    (lightning-bolt-method-13 () none) ;; 13 ;; (lightning-bolt-method-13 (_type_ int) none)
-    (lightning-bolt-method-14 () none) ;; 14 ;; (lightning-bolt-method-14 (_type_) int)
-    (lightning-bolt-method-15 () none) ;; 15 ;; (lightning-bolt-method-15 (_type_ object int lightning-span-internal) none)
-    (lightning-bolt-method-16 () none) ;; 16 ;; (lightning-bolt-method-16 (_type_ vector float float vector matrix) none)
-    (lightning-bolt-method-17 () none) ;; 17 ;; (lightning-bolt-method-17 (_type_ uint float float curve2d-fast float) float)
+    (lightning-bolt-method-9 (_type_ int int lightning-appearance) none) ;; 9
+    (lightning-bolt-method-10 (_type_) none) ;; 10
+    (lightning-bolt-method-11 (_type_) none) ;; 11
+    (lightning-bolt-method-12 (_type_) none) ;; 12
+    (lightning-bolt-method-13 (_type_ int) none) ;; 13
+    (lightning-bolt-method-14 (_type_) int) ;; 14
+    (lightning-bolt-method-15 (_type_ object int lightning-span-internal) none) ;; 15
+    (lightning-bolt-method-16 (_type_ vector float float vector matrix) none) ;; 16
+    (lightning-bolt-method-17 (_type_ uint float float curve2d-fast float) float) ;; 17
     (lightning-bolt-method-18 () none) ;; 18 ;; (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none)
-    (lightning-bolt-method-19 () none) ;; 19 ;; (lightning-bolt-method-19 (_type_ vector int int matrix float float) none)
-    (lightning-bolt-method-20 () none) ;; 20 ;; (lightning-bolt-method-20 (_type_ int lightning-span-internal) vector)
-    (lightning-bolt-method-21 () none) ;; 21 ;; (lightning-bolt-method-21 (_type_ int int float) none)
-    (lightning-bolt-method-22 () none) ;; 22 ;; (lightning-bolt-method-22 (_type_) none)
+    (lightning-bolt-method-19 (_type_ vector int int matrix float float) none) ;; 19
+    (lightning-bolt-method-20 (_type_ int lightning-span-internal) vector) ;; 20
+    (lightning-bolt-method-21 (_type_ int int float) none) ;; 21
+    (lightning-bolt-method-22 (_type_) none) ;; 22
     )
   )|#
   
@@ -40587,8 +40593,8 @@
     (lightning-new-tracker-method-11 () none) ;; 11
     (lightning-new-tracker-method-12 () none) ;; 12
     (lightning-new-tracker-method-13 () none) ;; 13
-    (lightning-new-tracker-method-14 () none) ;; 14 ;; (active () _type_ :state)
-    (lightning-new-tracker-method-15 () none) ;; 15 ;; (die () _type_ :state)
+    (lightning-new-tracker-method-14 () _type_ :state) ;; 14
+    (lightning-new-tracker-method-15 () _type_ :state) ;; 15
     (lightning-new-tracker-method-16 () none) ;; 16
     )
   )|#
@@ -40810,7 +40816,7 @@
   :size-assert         #xc4
   :flag-assert         #xa000000c4
   (:methods
-    (rigid-body-info-method-9 () none) ;; 9 ;; (rigid-body-info-method-9 (_type_) none)
+    (rigid-body-info-method-9 (_type_) none) ;; 9
     )
   )
 
@@ -40888,31 +40894,31 @@
   ;; field rigid-body-flag is likely a value type.
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process) _type_)
-    (rigid-body-control-method-9 () none) ;; 9 ;; (rigid-body-control-method-9 (_type_ collide-shape-moving float) none)
-    (rigid-body-control-method-10 () none) ;; 10 ;; (rigid-body-control-method-10 (_type_ rigid-body-object float float) object)
-    (rigid-body-control-method-11 () none) ;; 11 ;; (update-rbody-transform! (_type_ collide-shape-moving) none)
-    (rigid-body-control-method-12 () none) ;; 12 ;; (rigid-body-control-method-12 (_type_ float) none)
-    (rigid-body-control-method-13 () none) ;; 13 ;; (init-velocities! (_type_) none)
-    (rigid-body-control-method-14 () none) ;; 14 ;; (rigid-body-control-method-14 (_type_ float) none)
-    (rigid-body-control-method-15 () none) ;; 15 ;; (rigid-body-control-method-15 (_type_) none)
-    (rigid-body-control-method-16 () none) ;; 16 ;; (reset-force-and-torque! (_type_) none)
-    (rigid-body-control-method-17 () none) ;; 17 ;; (reset-momentum! (_type_) none)
-    (rigid-body-control-method-18 () none) ;; 18 ;; (apply-impact! (_type_ vector vector) none)
-    (rigid-body-control-method-19 () none) ;; 19 ;; (rigid-body-control-method-19 (_type_ vector vector) none)
-    (rigid-body-control-method-20 () none) ;; 20 ;; (add-force! (_type_ vector) none)
-    (rigid-body-control-method-21 () none) ;; 21 ;; (rigid-body-control-method-21 (_type_ vector vector float) none)
-    (rigid-body-control-method-22 () none) ;; 22 ;; (rigid-body-control-method-22 (_type_ vector vector) none)
-    (rigid-body-control-method-23 () none) ;; 23 ;; (rigid-body-control-method-23 (_type_ vector vector) none)
-    (rigid-body-control-method-24 () none) ;; 24 ;; (rigid-body-control-method-24 (_type_ vector vector) none)
-    (rigid-body-control-method-25 () none) ;; 25 ;; (rigid-body-control-method-25 (_type_ vector) vector)
-    (rigid-body-control-method-26 () none) ;; 26 ;; (rigid-body-control-method-26 (_type_) none)
-    (rigid-body-control-method-27 () none) ;; 27 ;; (init! (_type_ rigid-body-info vector quaternion (function rigid-body-object float)) none)
-    (rigid-body-control-method-28 () none) ;; 28 ;; (rigid-body-control-method-28 (_type_ vector quaternion) none)
-    (rigid-body-control-method-29 () none) ;; 29 ;; (debug-print-info (_type_ object) none)
-    (rigid-body-control-method-30 () none) ;; 30 ;; (debug-print-force-torque (_type_ object) none)
-    (rigid-body-control-method-31 () none) ;; 31 ;; (debug-print-pos-rot (_type_ object) none)
-    (rigid-body-control-method-32 () none) ;; 32 ;; (debug-print-momentum (_type_ object) none)
-    (rigid-body-control-method-33 () none) ;; 33 ;; (debug-print-velocity (_type_ object) none)
+    (rigid-body-control-method-9 (_type_ collide-shape-moving float) none) ;; 9
+    (rigid-body-control-method-10 (_type_ rigid-body-object float float) object) ;; 10
+    (rigid-body-control-method-11 (_type_ collide-shape-moving) none) ;; 11
+    (rigid-body-control-method-12 (_type_ float) none) ;; 12
+    (rigid-body-control-method-13 (_type_) none) ;; 13
+    (rigid-body-control-method-14 (_type_ float) none) ;; 14
+    (rigid-body-control-method-15 (_type_) none) ;; 15
+    (rigid-body-control-method-16 (_type_) none) ;; 16
+    (rigid-body-control-method-17 (_type_) none) ;; 17
+    (rigid-body-control-method-18 (_type_ vector vector) none) ;; 18
+    (rigid-body-control-method-19 (_type_ vector vector) none) ;; 19
+    (rigid-body-control-method-20 (_type_ vector) none) ;; 20
+    (rigid-body-control-method-21 (_type_ vector vector float) none) ;; 21
+    (rigid-body-control-method-22 (_type_ vector vector) none) ;; 22
+    (rigid-body-control-method-23 (_type_ vector vector) none) ;; 23
+    (rigid-body-control-method-24 (_type_ vector vector) none) ;; 24
+    (rigid-body-control-method-25 (_type_ vector) vector) ;; 25
+    (rigid-body-control-method-26 (_type_) none) ;; 26
+    (rigid-body-control-method-27 (_type_ rigid-body-info vector quaternion (function rigid-body-object float)) none) ;; 27
+    (rigid-body-control-method-28 (_type_ vector quaternion) none) ;; 28
+    (rigid-body-control-method-29 (_type_ object) none) ;; 29
+    (rigid-body-control-method-30 (_type_ object) none) ;; 30
+    (rigid-body-control-method-31 (_type_ object) none) ;; 31
+    (rigid-body-control-method-32 (_type_ object) none) ;; 32
+    (rigid-body-control-method-33 (_type_ object) none) ;; 33
     (rigid-body-control-method-34 () none) ;; 34
     (rigid-body-control-method-35 () none) ;; 35
     (rigid-body-control-method-36 () none) ;; 36
@@ -41030,14 +41036,14 @@
   :size-assert         #x410
   :flag-assert         #x1100000410
   (:methods
-    (rigid-body-queue-method-9 () none) ;; 9 ;; (init-queue! (_type_ process) none)
-    (rigid-body-queue-method-10 () none) ;; 10 ;; (rigid-body-queue-method-10 (_type_) none)
-    (rigid-body-queue-method-11 () none) ;; 11 ;; (rigid-body-queue-method-11 (_type_ process) none)
-    (rigid-body-queue-method-12 () none) ;; 12 ;; (rigid-body-queue-method-12 (_type_ int int) none)
-    (rigid-body-queue-method-13 () none) ;; 13 ;; (rigid-body-queue-method-13 (_type_ int process) none)
-    (rigid-body-queue-method-14 () none) ;; 14 ;; (rigid-body-queue-method-14 (_type_ int) none)
-    (rigid-body-queue-method-15 () none) ;; 15 ;; (rigid-body-queue-method-15 (_type_ process) none)
-    (rigid-body-queue-method-16 () none) ;; 16 ;; (rigid-body-queue-method-16 (_type_) none)
+    (rigid-body-queue-method-9 (_type_ process) none) ;; 9
+    (rigid-body-queue-method-10 (_type_) none) ;; 10
+    (rigid-body-queue-method-11 (_type_ process) none) ;; 11
+    (rigid-body-queue-method-12 (_type_ int int) none) ;; 12
+    (rigid-body-queue-method-13 (_type_ int process) none) ;; 13
+    (rigid-body-queue-method-14 (_type_ int) none) ;; 14
+    (rigid-body-queue-method-15 (_type_ process) none) ;; 15
+    (rigid-body-queue-method-16 (_type_) none) ;; 16
     )
   )
 
@@ -41761,14 +41767,14 @@
   :size-assert         #x60
   :flag-assert         #x1600000060
   (:methods
-    (nav-engine-method-9 () none) ;; 9 ;; (inc-spr-addr! (_type_ uint) uint)
-    (nav-engine-method-10 () none) ;; 10 ;; (lay-out-spad-memory (_type_ nav-mesh) none)
-    (nav-engine-method-11 () none) ;; 11 ;; (set-up-mem-work (_type_) none)
-    (nav-engine-method-12 () none) ;; 12 ;; (add-spheres-from-mesh-user-list (_type_ sphere-hash nav-mesh) none)
-    (nav-engine-method-13 () none) ;; 13 ;; (add-all-spheres (_type_) none)
-    (nav-engine-method-14 () none) ;; 14 ;; (do-sphere-lookups (_type_) none)
-    (nav-engine-method-15 () none) ;; 15 ;; (update-nav-controls-pipelined-in-spr (_type_) none)
-    (nav-engine-method-16 () none) ;; 16 ;; (update-nav-controls-in-spr (_type_) none)
+    (nav-engine-method-9 (_type_ uint) uint) ;; 9
+    (nav-engine-method-10 (_type_ nav-mesh) none) ;; 10
+    (nav-engine-method-11 (_type_) none) ;; 11
+    (nav-engine-method-12 (_type_ sphere-hash nav-mesh) none) ;; 12
+    (nav-engine-method-13 (_type_) none) ;; 13
+    (nav-engine-method-14 (_type_) none) ;; 14
+    (nav-engine-method-15 (_type_) none) ;; 15
+    (nav-engine-method-16 (_type_) none) ;; 16
     (nav-engine-method-17 () none) ;; 17 ;; (upload-nav-to-spr (_type_ nav-engine-spr-buffer) none)
     (nav-engine-method-18 () none) ;; 18 ;; (download-nav-from-spr (_type_ nav-engine-spr-buffer) none)
     (nav-engine-method-19 () none) ;; 19 ;; (do-callbacks (_type_ nav-engine-spr-buffer) none)
@@ -42028,11 +42034,11 @@
   :flag-assert         #xe00000040
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process-drawable res-lump) _type_)
-    (flow-control-method-9 () none) ;; 9 ;; (draw-path (_type_) none)
-    (flow-control-method-10 () none) ;; 10 ;; (setup (_type_ (pointer float) int) none)
-    (flow-control-method-11 () none) ;; 11 ;; (push-process (_type_ process-focusable) none)
-    (flow-control-method-12 () none) ;; 12 ;; (find-and-push-things (_type_) none)
-    (flow-control-method-13 () none) ;; 13 ;; (flow-control-method-13 (_type_ water-info vector) symbol)
+    (flow-control-method-9 (_type_) none) ;; 9
+    (flow-control-method-10 (_type_ (pointer float) int) none) ;; 10
+    (flow-control-method-11 (_type_ process-focusable) none) ;; 11
+    (flow-control-method-12 (_type_) none) ;; 12
+    (flow-control-method-13 (_type_ water-info vector) symbol) ;; 13
     )
   )|#
   
@@ -42749,13 +42755,13 @@
   :size-assert         #x3c0
   :flag-assert         #x12033003c0
   (:methods
-    (debris-group-method-14 () none) ;; 14 ;; (idle () _type_ :state)
+    (debris-group-method-14 () _type_ :state) ;; 14
     )
   (:state-methods
     idle ;; 15, old: (do-collision (_type_ int) none)
     )
   (:methods
-    (debris-group-method-16 () none) ;; 16 ;; (update-box! (_type_ int) none)
+    (debris-group-method-16 (_type_ int) none) ;; 16
     (debris-group-method-17 () none) ;; 17
     )
   )|#
@@ -43960,7 +43966,7 @@
   :size-assert         #x9c
   :flag-assert         #xa0000009c
   (:methods
-    (vehicle-particle-common-info-method-9 () none) ;; 9 ;; (init! (_type_) none)
+    (vehicle-particle-common-info-method-9 (_type_) none) ;; 9
     )
   )
 
@@ -44187,46 +44193,46 @@
   :flag-assert         #xcc07d00859
   ;; field vehicle-flag is likely a value type.
   (:methods
-    (vehicle-method-89 (_type_) none) ;; 89 ;; (init-reverse (_type_ vehicle-controls) none)
-    (vehicle-method-90 (_type_) none) ;; 90 ;; (control-hook-ai (_type_ vehicle-controls) none)
+    (vehicle-method-89 (_type_ vehicle-controls) none) ;; 89
+    (vehicle-method-90 (_type_ vehicle-controls) none) ;; 90
     (vehicle-method-91 (_type_) none) ;; 91 ;; (control-hook-player (_type_) none)
-    (vehicle-method-92 (_type_) none) ;; 92 ;; (vehicle-method-92 (_type_ vehicle-controls) none)
+    (vehicle-method-92 (_type_ vehicle-controls) none) ;; 92
     (vehicle-method-93 (_type_) none) ;; 93 ;; (vehicle-method-93 (_type_) none)
     (vehicle-method-94 (_type_) none) ;; 94 ;; (vehicle-method-94 (_type_) none)
-    (vehicle-method-95 (_type_) none) ;; 95 ;; (vehicle-method-95 (_type_ vector float) none)
-    (vehicle-method-96 (_type_) none) ;; 96 ;; (vehicle-method-96 (_type_ float) none)
+    (vehicle-method-95 (_type_ vector float) none) ;; 95
+    (vehicle-method-96 (_type_ float) none) ;; 96
     (vehicle-method-97 (_type_) none) ;; 97 ;; (vehicle-method-97 (_type_ float vehicle-physics-work) none)
     (vehicle-method-98 (_type_) none) ;; 98 ;; (vehicle-method-98 (_type_) none)
     (vehicle-method-99 (_type_) none) ;; 99 ;; (vehicle-method-99 (_type_) none)
     (vehicle-method-100 (_type_) none) ;; 100 ;; (vehicle-method-100 (_type_) none)
     (vehicle-method-101 (_type_) none) ;; 101 ;; (vehicle-method-101 (_type_) none)
-    (vehicle-method-102 (_type_) none) ;; 102 ;; (vehicle-method-102 (_type_) symbol)
+    (vehicle-method-102 (_type_) symbol) ;; 102
     (vehicle-method-103 (_type_) none) ;; 103 ;; (vehicle-method-103 (_type_) none)
     (vehicle-method-104 (_type_) none) ;; 104 ;; (vehicle-method-104 (_type_) none)
     (vehicle-method-105 (_type_) none) ;; 105 ;; (vehicle-method-105 (_type_) none)
     (vehicle-method-106 (_type_) none) ;; 106 ;; (vehicle-method-106 (_type_) none)
-    (vehicle-method-107 (_type_) none) ;; 107 ;; (vehicle-method-107 (_type_ int process) none)
-    (vehicle-method-108 (_type_) none) ;; 108 ;; (vehicle-method-108 (_type_ int) none)
+    (vehicle-method-107 (_type_ int process) none) ;; 107
+    (vehicle-method-108 (_type_ int) none) ;; 108
     (vehicle-method-109 (_type_) none) ;; 109 ;; (vehicle-method-109 (_type_) none)
     (vehicle-method-110 (_type_) none) ;; 110 ;; (vehicle-method-110 (_type_) none)
-    (vehicle-method-111 (_type_) none) ;; 111 ;; (get-linear-accel! (_type_ vector) none)
-    (vehicle-method-112 (_type_) none) ;; 112 ;; (copy-vehicle-controls! (_type_ vehicle-controls) none)
-    (vehicle-method-113 (_type_) none) ;; 113 ;; (vehicle-method-113 (_type_ vector int int) none)
-    (vehicle-method-114 (_type_) none) ;; 114 ;; (vehicle-method-114 (_type_ int) none)
+    (vehicle-method-111 (_type_ vector) none) ;; 111
+    (vehicle-method-112 (_type_ vehicle-controls) none) ;; 112
+    (vehicle-method-113 (_type_ vector int int) none) ;; 113
+    (vehicle-method-114 (_type_ int) none) ;; 114
     (vehicle-method-115 (_type_) none) ;; 115 ;; (vehicle-method-115 (_type_) none)
-    (vehicle-method-116 (_type_) none) ;; 116 ;; (vehicle-method-116 (_type_ symbol) none)
+    (vehicle-method-116 (_type_ symbol) none) ;; 116
     (vehicle-method-117 (_type_) none) ;; 117 ;; (vehicle-method-117 (_type_) none)
     (vehicle-method-118 (_type_) none) ;; 118 ;; (vehicle-method-118 (_type_) none)
     (vehicle-method-119 (_type_) none) ;; 119 ;; (vehicle-method-119 (_type_) none)
-    (vehicle-method-120 (_type_) none) ;; 120 ;; (apply-gravity (_type_ float) none)
-    (vehicle-method-121 (_type_) none) ;; 121 ;; (apply-gravity1 (_type_ float) none)
+    (vehicle-method-120 (_type_ float) none) ;; 120
+    (vehicle-method-121 (_type_ float) none) ;; 121
     (vehicle-method-122 (_type_) none) ;; 122 ;; (vehicle-method-122 (_type_) none)
     (vehicle-method-123 (_type_) none) ;; 123 ;; (vehicle-method-123 (_type_) none)
     (vehicle-method-124 (_type_) none) ;; 124 ;; (vehicle-method-124 (_type_) none)
     (vehicle-method-125 (_type_) none) ;; 125 ;; (vehicle-method-125 (_type_) none)
     (vehicle-method-126 (_type_) none) ;; 126 ;; (vehicle-method-126 (_type_) none)
-    (vehicle-method-127 (_type_) none) ;; 127 ;; (check-player-get-on (_type_ process-focusable) symbol)
-    (vehicle-method-128 (_type_) none) ;; 128 ;; (vehicle-method-128 (_type_) symbol)
+    (vehicle-method-127 (_type_ process-focusable) symbol) ;; 127
+    (vehicle-method-128 (_type_) symbol) ;; 128
     (vehicle-method-129 (_type_) none) ;; 129 ;; (vehicle-method-129 (_type_) none)
     (vehicle-method-130 (_type_) none) ;; 130 ;; (vehicle-method-130 (_type_) none)
     (vehicle-method-131 (_type_) none) ;; 131 ;; (vehicle-method-131 (_type_ traffic-object-spawn-params) none)
@@ -44239,17 +44245,17 @@
     (vehicle-method-138 (_type_) none) ;; 138 ;; (vehicle-method-138 (_type_) none)
     (vehicle-method-139 (_type_) none) ;; 139 ;; (vehicle-method-139 (_type_) none)
     (vehicle-method-140 (_type_) none) ;; 140 ;; (vehicle-method-140 (_type_) none)
-    (vehicle-method-141 (_type_) none) ;; 141 ;; (vehicle-method-141 (_type_) symbol)
+    (vehicle-method-141 (_type_) symbol) ;; 141
     (vehicle-method-142 (_type_) none) ;; 142 ;; (vehicle-method-142 (_type_) none)
-    (vehicle-method-143 (_type_) none) ;; 143 ;; (vehicle-method-143 (_type_ process) object)
+    (vehicle-method-143 (_type_ process) object) ;; 143
     (vehicle-method-144 (_type_) none) ;; 144 ;; (vehicle-method-144 (_type_) none)
     (vehicle-method-145 (_type_) none) ;; 145 ;; (vehicle-method-145 (_type_) none)
-    (vehicle-method-146 (_type_) none) ;; 146 ;; (vehicle-method-146 (_type_ vector) none)
+    (vehicle-method-146 (_type_ vector) none) ;; 146
     (vehicle-method-147 (_type_) none) ;; 147 ;; (vehicle-method-147 (_type_) none)
     (vehicle-method-148 (_type_) none) ;; 148 ;; (vehicle-method-148 (_type_) none)
     (vehicle-method-149 (_type_) none) ;; 149 ;; (vehicle-method-149 (_type_) none)
     (vehicle-method-150 (_type_) none) ;; 150 ;; (vehicle-method-150 (_type_) none)
-    (vehicle-method-151 (_type_) none) ;; 151 ;; (set-hit-points (_type_ float) none)
+    (vehicle-method-151 (_type_ float) none) ;; 151
     (vehicle-method-152 (_type_) none) ;; 152
     (vehicle-method-153 (_type_) none) ;; 153
     (vehicle-method-154 (_type_) none) ;; 154
@@ -44499,9 +44505,9 @@
   :size-assert         #x430
   :flag-assert         #xc00000430
   (:methods
-    (race-state-method-9 () none) ;; 9 ;; (init-racers! (_type_ process-drawable int) none)
-    (race-state-method-10 () none) ;; 10 ;; (begin-race (_type_) none)
-    (race-state-method-11 () none) ;; 11 ;; (update (_type_) none)
+    (race-state-method-9 (_type_ process-drawable int) none) ;; 9
+    (race-state-method-10 (_type_) none) ;; 10
+    (race-state-method-11 (_type_) none) ;; 11
     )
   )
   
@@ -44623,17 +44629,17 @@
   :size-assert         #x20
   :flag-assert         #x1500000020
   (:methods
-    (race-mesh-method-9 () none) ;; 9 ;; (debug-draw-path (_type_ int int rgba rgba) none)
-    (race-mesh-method-10 () none) ;; 10 ;; (debug-draw-path-from-history (_type_ int int) symbol)
-    (race-mesh-method-11 () none) ;; 11 ;; (debug-draw-slice (_type_ int) none)
-    (race-mesh-method-12 () none) ;; 12 ;; (debug-draw-edges (_type_) none)
-    (race-mesh-method-13 () none) ;; 13 ;; (race-mesh-method-13 (_type_ race-mesh-slice-query) none)
-    (race-mesh-method-14 () none) ;; 14 ;; (race-mesh-method-14 (_type_ race-mesh-slice-query) none)
-    (race-mesh-method-15 () none) ;; 15 ;; (race-mesh-method-15 (_type_ int race-mesh-slice-query) none)
-    (race-mesh-method-16 () none) ;; 16 ;; (race-mesh-method-16 (_type_ race-mesh-slice-query) none)
-    (race-mesh-method-17 () none) ;; 17 ;; (race-mesh-method-17 (_type_ race-mesh-slice-query) symbol)
+    (race-mesh-method-9 (_type_ int int rgba rgba) none) ;; 9
+    (race-mesh-method-10 (_type_ int int) symbol) ;; 10
+    (race-mesh-method-11 (_type_ int) none) ;; 11
+    (race-mesh-method-12 (_type_) none) ;; 12
+    (race-mesh-method-13 (_type_ race-mesh-slice-query) none) ;; 13
+    (race-mesh-method-14 (_type_ race-mesh-slice-query) none) ;; 14
+    (race-mesh-method-15 (_type_ int race-mesh-slice-query) none) ;; 15
+    (race-mesh-method-16 (_type_ race-mesh-slice-query) none) ;; 16
+    (race-mesh-method-17 (_type_ race-mesh-slice-query) symbol) ;; 17
     (race-mesh-method-18 () none) ;; 18 ;; (race-mesh-method-18 (_type_ race-mesh-hash-search int int race-mesh-slice-query) none)
-    (race-mesh-method-19 () none) ;; 19 ;; (race-mesh-method-19 (_type_ int race-mesh-slice-query) symbol)
+    (race-mesh-method-19 (_type_ int race-mesh-slice-query) symbol) ;; 19
     (race-mesh-method-20 () none) ;; 20
     )
   )|#
@@ -49390,8 +49396,8 @@
   ;; :flag-assert         #xc00000070
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type int) _type_)
-    (game-save-method-9 () none) ;; 9 ;; (save-to-file (_type_ string) _type_)
-    (game-save-method-10 () none) ;; 10 ;; (load-from-file (_type_ string) _type_)
+    (game-save-method-9 (_type_ string) _type_) ;; 9
+    (game-save-method-10 (_type_ string) _type_) ;; 10
     (debug-inspect (_type_ symbol) _type_) ;; 11 ;; (debug-inspect (_type_ symbol) _type_)
     )
   )
@@ -49425,7 +49431,7 @@
     (auto-save-method-11 () none) ;; 11
     (auto-save-method-12 () none) ;; 12
     (auto-save-method-13 () none) ;; 13
-    (auto-save-method-14 () none) ;; 14 ;; (get-heap () _type_ :state)
+    (auto-save-method-14 () _type_ :state) ;; 14
     )
   (:state-methods
     get-heap ;; 15, old: (get-card () _type_ :state)
@@ -49497,9 +49503,9 @@
     (title-control-method-11 () none) ;; 11
     (title-control-method-12 () none) ;; 12
     (title-control-method-13 () none) ;; 13
-    (title-control-method-14 () none) ;; 14 ;; (startup () _type_ :state)
-    (title-control-method-16 () none) ;; 16 ;; (idle () _type_ :state)
-    (title-control-method-17 () none) ;; 17 ;; (scrap-book (int) _type_ :state)
+    (title-control-method-14 () _type_ :state) ;; 14
+    (title-control-method-16 () _type_ :state) ;; 16
+    (title-control-method-17 (int) _type_ :state) ;; 17
     )
   (:state-methods
     startup ;; 15, old: (wait () _type_ :state)
@@ -49873,8 +49879,8 @@
   :size-assert         #x14
   :flag-assert         #xb00000014
   (:methods
-    (idle-control-method-9 () none) ;; 9 ;; (init! (_type_ (inline-array idle-control-frame)) none)
-    (idle-control-method-10 () none) ;; 10 ;; (play-idle-frames! (_type_ process-drawable) none)
+    (idle-control-method-9 (_type_ (inline-array idle-control-frame)) none) ;; 9
+    (idle-control-method-10 (_type_ process-drawable) none) ;; 10
     )
   )
 
@@ -50160,7 +50166,7 @@
     (rigid-body-queue-manager-method-11 () none) ;; 11
     (rigid-body-queue-manager-method-12 () none) ;; 12
     (rigid-body-queue-manager-method-13 () none) ;; 13
-    (rigid-body-queue-manager-method-14 () none) ;; 14 ;; (idle () _type_ :state)
+    (rigid-body-queue-manager-method-14 () _type_ :state) ;; 14
     )
   (:state-methods
     idle ;; 15
@@ -51170,8 +51176,8 @@
     (vehicle-manager-method-11 () none) ;; 11
     (vehicle-manager-method-12 () none) ;; 12
     (vehicle-manager-method-13 () none) ;; 13
-    (vehicle-manager-method-14 () none) ;; 14 ;; (idle () _type_ :state)
-    (vehicle-manager-method-17 () none) ;; 17 ;; (vehicle-manager-method-17 (_type_) none)
+    (vehicle-manager-method-14 () _type_ :state) ;; 14
+    (vehicle-manager-method-17 (_type_) none) ;; 17
     (vehicle-manager-method-18 () none) ;; 18
     )
   (:state-methods
@@ -51668,8 +51674,8 @@
     (manipulator-method-9 (_type_) none) ;; 9 ;; (set-mode (_type_ manipulator-mode) none)
     (manipulator-method-10 (_type_) none) ;; 10 ;; (manipulator-method-10 (_type_) none)
     (manipulator-method-11 (_type_) none) ;; 11 ;; (manipulator-method-11 (_type_) none)
-    (manipulator-method-12 (_type_) none) ;; 12 ;; (manipulator-method-12 (_type_ vector) none)
-    (manipulator-method-13 (_type_) none) ;; 13 ;; (manipulator-method-13 (_type_ vector vector) none)
+    (manipulator-method-12 (_type_ vector) none) ;; 12
+    (manipulator-method-13 (_type_ vector vector) none) ;; 13
     (manipulator-method-14 (_type_) none) ;; 14 ;; (manipulator-method-14 (_type_) none)
     )
   )|#
@@ -52081,8 +52087,8 @@
   :size-assert         #x4c
   :flag-assert         #xb0000004c
   (:methods
-    (mysql-nav-node-method-9 () none) ;; 9 ;; (exec-sql! (_type_) symbol)
-    (mysql-nav-node-method-10 () none) ;; 10 ;; (temp-edge-size (_type_) int)
+    (mysql-nav-node-method-9 (_type_) symbol) ;; 9
+    (mysql-nav-node-method-10 (_type_) int) ;; 10
     )
   )|#
   
@@ -52228,21 +52234,21 @@
   :flag-assert         #x1800000428
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type string) _type_)
-    (mysql-nav-graph-method-9 () none) ;; 9 ;; (init-from-sql! (_type_ string string) symbol)
-    (mysql-nav-graph-method-10 () none) ;; 10 ;; (exec-sql! (_type_) symbol)
-    (mysql-nav-graph-method-11 () none) ;; 11 ;; (indexof-nav-node (_type_ int) int)
-    (mysql-nav-graph-method-12 () none) ;; 12 ;; (indexof-nav-edge (_type_ int) int)
-    (mysql-nav-graph-method-13 () none) ;; 13 ;; (mysql-nav-graph-method-13 (_type_) none)
-    (mysql-nav-graph-method-14 () none) ;; 14 ;; (mysql-nav-graph-method-14 (_type_) none)
-    (mysql-nav-graph-method-15 () none) ;; 15 ;; (mysql-nav-graph-method-15 (_type_) none)
-    (mysql-nav-graph-method-16 () none) ;; 16 ;; (mysql-nav-graph-method-16 (_type_) none)
-    (mysql-nav-graph-method-17 () none) ;; 17 ;; (mysql-nav-graph-method-17 (_type_) none)
+    (mysql-nav-graph-method-9 (_type_ string string) symbol) ;; 9
+    (mysql-nav-graph-method-10 (_type_) symbol) ;; 10
+    (mysql-nav-graph-method-11 (_type_ int) int) ;; 11
+    (mysql-nav-graph-method-12 (_type_ int) int) ;; 12
+    (mysql-nav-graph-method-13 (_type_) none) ;; 13
+    (mysql-nav-graph-method-14 (_type_) none) ;; 14
+    (mysql-nav-graph-method-15 (_type_) none) ;; 15
+    (mysql-nav-graph-method-16 (_type_) none) ;; 16
+    (mysql-nav-graph-method-17 (_type_) none) ;; 17
     (mysql-nav-graph-method-18 () none) ;; 18 ;; (lookup-level-info2 (_type_ mysql-nav-node symbol) mysql-nav-graph-level-info)
-    (mysql-nav-graph-method-19 () none) ;; 19 ;; (mysql-nav-graph-method-19 (_type_) none)
-    (mysql-nav-graph-method-20 () none) ;; 20 ;; (mysql-nav-graph-method-20 (_type_) none)
-    (mysql-nav-graph-method-21 () none) ;; 21 ;; (mysql-nav-graph-method-21 (_type_) none)
-    (mysql-nav-graph-method-22 () none) ;; 22 ;; (mysql-nav-graph-method-22 (_type_) none)
-    (mysql-nav-graph-method-23 () none) ;; 23 ;; (mysql-nav-graph-method-23 (_type_) none)
+    (mysql-nav-graph-method-19 (_type_) none) ;; 19
+    (mysql-nav-graph-method-20 (_type_) none) ;; 20
+    (mysql-nav-graph-method-21 (_type_) none) ;; 21
+    (mysql-nav-graph-method-22 (_type_) none) ;; 22
+    (mysql-nav-graph-method-23 (_type_) none) ;; 23
     )
   )|#
   
@@ -52321,7 +52327,7 @@
     (nav-graph-editor-method-11 () none) ;; 11
     (nav-graph-editor-method-12 () none) ;; 12
     (nav-graph-editor-method-13 () none) ;; 13
-    (nav-graph-editor-method-14 () none) ;; 14 ;; (move-node () _type_ :state)
+    (nav-graph-editor-method-14 () _type_ :state) ;; 14
     (nav-graph-editor-method-30 () none) ;; 30 ;; (nav-graph-editor-method-30 () none)
     (nav-graph-editor-method-31 () none) ;; 31 ;; (nav-graph-editor-method-31 () none)
     (nav-graph-editor-method-32 () none) ;; 32 ;; (nav-graph-editor-method-32 () none)
@@ -52882,7 +52888,7 @@
     (collision-editor-method-11 () none) ;; 11
     (collision-editor-method-12 () none) ;; 12
     (collision-editor-method-13 () none) ;; 13
-    (collision-editor-method-14 () none) ;; 14 ;; (idle () _type_ :state)
+    (collision-editor-method-14 () _type_ :state) ;; 14
     )
   (:state-methods
     idle ;; 15
@@ -52902,9 +52908,9 @@
   :size-assert         #x1c
   :flag-assert         #xc0000001c
   (:methods
-    (collision-edit-info-method-9 () none) ;; 9 ;; (collision-edit-info-method-9 (_type_) none)
-    (collision-edit-info-method-10 () none) ;; 10 ;; (draw-menu (_type_ process-drawable) none)
-    (collision-edit-info-method-11 () none) ;; 11 ;; (collision-edit-info-method-11 (_type_ process-drawable) none)
+    (collision-edit-info-method-9 (_type_) none) ;; 9
+    (collision-edit-info-method-10 (_type_ process-drawable) none) ;; 10
+    (collision-edit-info-method-11 (_type_ process-drawable) none) ;; 11
     )
   )
 
