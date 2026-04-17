@@ -510,33 +510,10 @@
   0
   )
 
-;; start (player lifecycle): jak3 logic-target.gc:3155 spawns the target
-;; process via `:init target-init`. In jakx bringup the target subsystem is
-;; not yet ported (target-init, target-init! method, target-continue state,
-;; and the whole control-info / collide-shape-moving / camera / joint pipe).
-;; This minimal port does the level/setting prelude verbatim and skips the
-;; process-spawn, returning #f. Result: `initialize! *game-info* 'boot`/'game
-;; can call the post-`start` code path (the lambda in game-info.gc's
-;; initialize!) without crashing. *target* stays #f (stubbed in
-;; jakx-stubs.gc:155) — any downstream `when *target*` check skips.
-;; Port real start when target subsystem is ported. Jak3 signature:
-;;   (function symbol continue-point target)
-(defun start ((arg0 symbol) (arg1 continue-point))
-  (let ((v1-0 arg0))
-    (set! (-> *level* play?) (if (= v1-0 'play)
-                                 #t
-                                 (-> *setting-control* user-default border-mode)
-                                 )
-          )
-    )
-  (set! (-> *setting-control* user-default border-mode) #f)
-  (set! (-> *setting-control* user-default region-mode) #f)
-  (apply-settings *setting-control*)
-  (stop arg0)
-  ;; og:preserve-this — skipped: real jak3 process-spawn target :init target-init.
-  ;; Target subsystem not ported yet. *target* stays #f.
-  (the-as target #f)
-  )
+;; start (player lifecycle) now lives in goal_src/jakx/engine/target/logic-target.gc
+;; after the real target-init/target-init! port landed. The stub that used to
+;; live here (which returned #f and skipped process-spawn) has been removed;
+;; start now spawns a real target process so *target* can become non-#f.
 
 ;; Ported from jak3 engine/entity/entity.gc:1970. Required by game-info.gc's initialize! 'boot lambda for Phase 3.
 (defun reset-actors ((arg0 symbol))

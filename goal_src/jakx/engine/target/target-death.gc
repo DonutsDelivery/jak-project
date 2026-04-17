@@ -1,3 +1,27 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+;; name: target-death.gc
+;; name in dgo: target-death
+;; dgos: GAME
+
+;; target-continue -- STUB.
+;;
+;; Real jakx body is the big transition-state at decompiler_out/jakx/target-death_ir2.asm
+;; (top-level-login wires :code L63, :event L1, :enter L64, :trans L77, :exit L65
+;;  plus target-continue-init-art L78, and target-no-move-post as :post).
+;; The real :code lambda is 1400+ MIPS lines handling continue-point teleport,
+;; settings fade-in, art-group continue, and exits-to either a spawn or target-title.
+;;
+;; For Phase 3 bringup we just need the target process to spawn into SOME state
+;; that sleeps, so `*target*` becomes non-#f. A sleep-code body in target-continue
+;; satisfies that without dragging in the whole continue-point/art-group/spool/
+;; post-memcard chain. Real port lands later.
+(defstate target-continue (target)
+  :code (behavior ((arg0 continue-point))
+    ;; Ignore the continue-point arg; just sleep. Real body would fade in,
+    ;; teleport to arg0's trans, and transition out.
+    (sleep-code)
+    )
+  :post target-no-move-post
+  )

@@ -1,3 +1,47 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+;; name: target-handler.gc
+;; name in dgo: target-handler
+;; dgos: GAME
+
+;; target-exit -- ported verbatim from jakx decomp.
+;; decompiler_out/jakx/target-handler_ir2.asm:136 (function target-exit).
+;;
+;; MIPS:
+;;   v1 = 0xff88c09d ;;  = -7921699 sign-extended
+;;   a0 = (l.wu (+ self 232))    ;; target-flags
+;;   (s.w! (+ self 232) (logand v1 a0))
+;;   v1 = 0xbfff feff            ;;  = -1073742273
+;;   a0 = (l.d  (+ self 244))    ;; focus-status (64-bit)
+;;   (s.d! (+ self 244) (logand v1 a0))
+;;   ret 0
+;;
+;; We don't try to translate the bitmask into enum symbols -- the jakx
+;; target-flags / focus-status enums differ from jak3's, and the MIPS mask
+;; was hand-composed by the original devs against the EE layout. Using the
+;; raw masks preserves semantics byte-for-byte.
+(defbehavior target-exit target ()
+  (set! (-> self target-flags)
+        (the-as target-flags (logand #xff88c09d (-> self target-flags))))
+  (set! (-> self focus-status)
+        (the-as focus-status (logand (the-as uint #xbffffeff) (-> self focus-status))))
+  0
+  (none)
+  )
+
+;; target-generic-event-handler -- STUB.
+;;
+;; The real jakx body is ~1060 lines at decompiler_out/jakx/target-handler_ir2.asm:
+;;   .function target-generic-event-handler  (L26, see top-level-login)
+;; and handles every combat / movement / pickup / mode-change event the
+;; target can receive. None of that is reachable during the Phase 3 boot
+;; path: target spawns, runs target-init!, and parks in target-continue
+;; which sleeps. No events are delivered until gameplay is live.
+;;
+;; Returning 0 makes the event-hook a no-op; any dispatch that reaches it
+;; drops the event. Real port lands when combat/input lands.
+(defbehavior target-generic-event-handler target
+    ((arg0 process) (arg1 int) (arg2 symbol) (arg3 event-message-block))
+  (the-as object 0)
+  )

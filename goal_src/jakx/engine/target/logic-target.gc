@@ -1,3 +1,324 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+;; name: logic-target.gc
+;; name in dgo: logic-target
+;; dgos: GAME
+
+;; ---------------------------------------------------------------------------
+;; Externs for forward references (functions/methods defined in files that
+;; load AFTER logic-target.gc in game.gd):
+;;   target-handler.o  (target-exit, target-generic-event-handler)
+;;   target-death.o    (target-continue state)
+;; We declare externs here so the logic-target.o compilation links; the real
+;; definitions get patched in at load time.
+;; ---------------------------------------------------------------------------
+
+;; view-get-active-index -- decompiler_out/jakx/logic-target_ir2.asm:1064 uses
+;; this everywhere. No source body in jakx yet; stub returns 0 ("main view").
+;; Used to index *setting-control* cam-default[N] mode-name.
+(define-extern view-get-active-index (function int))
+
+;; target-exit lives in target-handler.gc which loads AFTER logic-target.gc.
+;; Re-declare as extern so our reset-target-state call links.
+(define-extern target-exit (function none :behavior target))
+
+;; ---------------------------------------------------------------------------
+;; Support functions
+;; ---------------------------------------------------------------------------
+
+(defun view-get-active-index ()
+  "STUB: jakx view system index lookup. Real impl would pick the active split
+   screen view and return its 0-3 index. Defaulting to 0 = main view."
+  0
+  )
+
+;; ---------------------------------------------------------------------------
+;; target-no-move-post -- ported from decompiler_out/jakx/logic-target_ir2.asm:1590
+;; Jakx post-hook is trivial: copy control.dir-targ (offset 108 from control
+;; base at control+0 == target+184; so absolute target+292 but we use the
+;; field accessors for clarity).
+;;
+;; Actually the MIPS is:
+;;   v1 = (l.wu (+ s6 184))   ;; s6 = self, +184 = root/control
+;;   a0 = (+ v1 28)           ;; control.quat (quaternion starts at 28 in collide-shape)
+;;   a1 = (+ v1 108)          ;; control.dir-targ (at 108)
+;;   (quaternion-copy! a0 a1)
+;;
+;; collide-shape's `quat` is at offset 28 and `dir-targ` at 108. We use
+;; control because control-info inherits from collide-shape-moving; both
+;; field names resolve.
+;; ---------------------------------------------------------------------------
+
+(defbehavior target-no-move-post target ()
+  (quaternion-copy! (-> self control quat) (-> self control dir-targ))
+  0
+  (none)
+  )
+
+;; target-real-post -- jakx does the same trivial quaternion-copy!
+;; (decompiler_out/jakx/logic-target_ir2.asm:1658). All the jak3 locomotion /
+;; turn-to-vector / thrust / rotation / collision pipeline does NOT exist in
+;; the jakx target -- the vehicle process owns movement.
+(defbehavior target-real-post target ()
+  (quaternion-copy! (-> self control quat) (-> self control dir-targ))
+  0
+  (none)
+  )
+
+;; target-post -- jakx wrapper, just tail-calls target-real-post
+;; (decompiler_out/jakx/logic-target_ir2.asm:1628).
+(defbehavior target-post target ()
+  (target-real-post)
+  0
+  (none)
+  )
+
+;; ---------------------------------------------------------------------------
+;; level-setup -- ported from decompiler_out/jakx/logic-target_ir2.asm:1696.
+;; The jakx body is much simpler than jak3: no task-in-times accumulation,
+;; no old-frame-counter delta. Just update current-level from
+;; level-get-target-inside and send level-enter if it changed.
+;; ---------------------------------------------------------------------------
+
+(defbehavior level-setup target ()
+  (let ((gp-0 (-> self current-level)))
+    (set! (-> self current-level) (level-get-target-inside *level*))
+    (when (and (-> self current-level)
+               (or (not gp-0) (!= (-> gp-0 name) (-> self current-level name)))
+               )
+      (send-event self 'level-enter (-> self current-level name))
+      )
+    )
+  0
+  (none)
+  )
+
+;; ---------------------------------------------------------------------------
+;; reset-target-state -- ported from decompiler_out/jakx/logic-target_ir2.asm:1513.
+;; Jakx body is tiny: optional zero of transform, then target-exit and
+;; buzz-stop!. No surf/dynamics/override setup (all jak3 debris).
+;;
+;; MIPS:
+;;   if (arg0)  { vector-identity! (+ control 44)  ;; scale
+;;                quaternion-identity! (+ control 28)  ;; quat
+;;                sq 0 -> (+ control 60) }  ;; transv.quad = 0
+;;   target-exit
+;;   cam-user-mode = 'normal
+;;   buzz-stop! 0
+;; ---------------------------------------------------------------------------
+
+(defbehavior reset-target-state target ((arg0 symbol))
+  (when arg0
+    (vector-identity! (-> self control scale))
+    (quaternion-identity! (-> self control quat))
+    (set! (-> self control transv quad) (the-as uint128 0))
+    )
+  (target-exit)
+  (set! (-> self cam-user-mode) 'normal)
+  (buzz-stop! 0)
+  self
+  )
+
+;; ---------------------------------------------------------------------------
+;; target-init! -- method 59 of target. The core port.
+;;
+;; Reference: decompiler_out/jakx/logic-target_ir2.asm:1012 (MIPS body) and
+;; .research-target-minimal-port.md section 2 for the field/offset crib sheet.
+;;
+;; Jakx is MUCH simpler than jak3: no joint-mods, no skeleton-group lookup,
+;; no art-group, no gun/board/sidekick/darkjak/lightjak setup, no hud,
+;; no water-control, no align-control, no fact-info-target. The collide
+;; shape is a plain collide-shape-moving with ONE root prim-group + ONE
+;; prim-sphere, not jak3's 10-sphere body.
+;;
+;; We follow the MIPS sequence verbatim. Field offsets cross-checked against
+;; decompiler_out/jakx/target-h_ir2.asm (inspect method).
+;; ---------------------------------------------------------------------------
+
+(defmethod target-init! ((this target) (arg0 continue-point) (arg1 symbol))
+  "Initialize a freshly spawned target process from a continue-point.
+   arg1 is the old `tobot?` symbol in jak3 -- unused in jakx but kept for
+   signature compat with the jak3 callers that live on."
+
+  ;; Zero mode-cache/color-effect and the three major/sub mode hooks.
+  ;; MIPS offsets 468, 524, 500, 504, 508.
+  (set! (-> this mode-cache) #f)
+  (set! (-> this color-effect) #f)
+  (set! (-> this major-mode-exit-hook) #f)
+  (set! (-> this major-mode-event-hook) #f)
+  (set! (-> this sub-mode-exit-hook) #f)
+
+  ;; game pointer
+  (set! (-> this game) *game-info*)
+
+  ;; settings: disallow pause+progress
+  (set-setting! 'allow-pause #f 0.0 0)
+  (set-setting! 'allow-progress #f 0.0 0)
+
+  ;; camera mode for the active view. The MIPS computes `1200 *
+  ;; view-get-active-index` and indexes *setting-control*. Since jakx's
+  ;; setting-control has cam-current/cam-target/cam-default as three inline
+  ;; cam-setting-data (not a four-element array as in jak3), and our
+  ;; view-get-active-index stub returns 0, we simply hit cam-default.mode-name.
+  (view-get-active-index)  ;; call for side effects / signature parity
+  (set! (-> *setting-control* cam-default mode-name) 'cam-string)
+  (apply-settings *setting-control*)
+
+  ;; continue-point: take caller's, else forced default
+  (if (not arg0)
+      (set! arg0 (get-current-continue-forced *game-info*))
+      )
+  (set-continue! *game-info* arg0 #f)
+
+  ;; main thread stack size
+  (stack-size-set! (-> this main-thread) 1024)
+
+  ;; mask: logior 0x8000 (process-mask target), logand ~5 (clear 1+4)
+  (logior! (-> this mask) (process-mask target))
+  (set! (-> this mask) (the-as process-mask (logand -5 (-> this mask))))
+
+  ;; clear state-hook
+  (set! (-> this state-hook) (the-as (function none :behavior target) nothing))
+
+  ;; Build a collide-shape-moving as root (stored at target+184 = root field).
+  ;; Collision spec is jakx's simple 2-prim scheme: collide-as = 2, collide-with
+  ;; = 0x64383f7d (jakx default target mask seen in MIPS).
+  (let ((cshape (new 'process 'collide-shape-moving this (collide-list-enum hit-by-others))))
+    (set! (-> cshape dynam) (copy *standard-dynamics* 'process))
+    (set! (-> cshape reaction) cshape-reaction-default)
+    (set! (-> cshape no-reaction)
+          (the-as (function collide-shape-moving collide-query vector vector none) nothing)
+          )
+    ;; root prim-group: 1 sub-prim, collide-as = 2, collide-with = 0x64383f7d
+    (let ((prim-group (new 'process 'collide-shape-prim-group cshape (the-as uint 1) 1)))
+      (set! (-> cshape total-prims) (the-as uint 2))
+      (set! (-> prim-group prim-core action) (collide-action solid))
+      (set-vector! (-> prim-group local-sphere) 0.0 0.0 0.0 4096.0)
+      (set! (-> cshape root-prim) prim-group)
+      (set! (-> prim-group prim-core collide-as) (collide-spec jak))
+      (set! (-> prim-group prim-core collide-with) (the-as collide-spec #x64383f7d))
+      )
+    ;; one sphere sub-prim
+    (let ((sphere (new 'process 'collide-shape-prim-sphere cshape (the-as uint 6))))
+      (set! (-> sphere prim-core action) (collide-action solid))
+      (set-vector! (-> sphere local-sphere) 0.0 0.0 0.0 4096.0)
+      (set! (-> sphere prim-core collide-as) (collide-spec jak))
+      (set! (-> sphere prim-core collide-with) (the-as collide-spec #x64383f7d))
+      )
+    ;; nav-radius = 0.75 * root-prim.local-sphere.w
+    (set! (-> cshape nav-radius) (* 0.75 (-> cshape root-prim local-sphere w)))
+    ;; backup collide-as/with from root-prim
+    (let ((rp (-> cshape root-prim)))
+      (set! (-> cshape backup-collide-as) (-> rp prim-core collide-as))
+      (set! (-> cshape backup-collide-with) (-> rp prim-core collide-with))
+      )
+    ;; event-priority = 9
+    (set! (-> cshape event-priority) (the-as uint 9))
+    ;; install as root (control is overlaid at root)
+    (set! (-> this root) cshape)
+    )
+
+  ;; max-iteration-count = 8, event-self = 'touched
+  (let ((cs (-> this root)))
+    (set! (-> (the-as collide-shape-moving cs) max-iteration-count) (the-as uint 8))
+    (set! (-> (the-as collide-shape-moving cs) event-self) 'touched)
+    )
+
+  ;; Move collide shape to continue-point.trans.
+  ;; MIPS calls method 132 of the collide-shape-moving with (+ s5 12).
+  ;; +12 on continue-point is its `trans` field. Method 132 is move-to-point!
+  ;; (collide-shape) in jakx -- defined in jakx-stubs-late.gc.
+  (move-to-point! (-> this root) (-> arg0 trans))
+
+  ;; Zero notify
+  (set! (-> this notify) (the-as handle #f))
+
+  ;; copy root-prim collide-as/with back into shape backup (MIPS does this twice).
+  (let* ((rp (-> (the-as collide-shape-moving (-> this root)) root-prim)))
+    (set! (-> (the-as collide-shape-moving (-> this root)) backup-collide-as) (-> rp prim-core collide-as))
+    (set! (-> (the-as collide-shape-moving (-> this root)) backup-collide-with) (-> rp prim-core collide-with))
+    )
+
+  ;; Debug: add-connection to *debug-engine* for target-print-stats. Not
+  ;; needed for Phase 3 bringup and target-print-stats isn't ported. Skip
+  ;; the whole block under `*debug-segment*` guard. (E-stub -- matches the
+  ;; MIPS "if not *debug-segment* skip" branch.)
+
+  ;; Zero fp-hud and burn-proc.
+  (set! (-> this fp-hud) (the-as handle #f))
+  (set! (-> this burn-proc) (the-as handle #f))
+
+  ;; reset-target-state with #t (full reset) and install event-hook.
+  (reset-target-state #t)
+  (set! (-> this event-hook) target-generic-event-handler)
+
+  ;; current-level = #f, then run level-setup to pick actual level.
+  (set! (-> this current-level) #f)
+  (level-setup)
+
+  ;; pre-joint-hook = nothing
+  (set! (-> this pre-joint-hook) (the-as (function none :behavior target) nothing))
+
+  ;; init-time = current clock time (MIPS reads (l.d (+ clock 20)))
+  (set! (-> this init-time) (-> this clock frame-counter))
+
+  0
+  (none)
+  )
+
+;; ---------------------------------------------------------------------------
+;; target-init -- the process-spawn :init hook. Jakx MIPS at
+;; decompiler_out/jakx/logic-target_ir2.asm:951 shows it invokes method 59
+;; (target-init!) with (arg0=continue-point, arg1=#f), then enters
+;; target-continue state.
+;; ---------------------------------------------------------------------------
+
+(defbehavior target-init target ((arg0 continue-point))
+  (target-init! self arg0 #f)
+  (set! (-> self event-hook) (-> target-continue event))
+  (logior! (-> self focus-status) (focus-status teleporting))
+  (go target-continue arg0)
+  (none)
+  )
+
+;; ---------------------------------------------------------------------------
+;; start -- player lifecycle. Jakx MIPS at logic-target_ir2.asm:317.
+;;
+;; Jakx has more wrapping than jak3: view-push-context/view-pop-context plus
+;; view-set-active-target. We skip all of that -- jakx has no view system
+;; ported yet, view-get-active-index is a stub and view-set-active-target
+;; is unreferenced. The minimum-viable body just does the jak3-style
+;; process-spawn and sets *target*.
+;; ---------------------------------------------------------------------------
+
+(defun start ((arg0 symbol) (arg1 continue-point))
+  (let ((v1-0 arg0))
+    (set! (-> *level* play?) (if (= v1-0 'play)
+                                 #t
+                                 (-> *setting-control* user-default border-mode)
+                                 )
+          )
+    )
+  (set! (-> *setting-control* user-default border-mode) #f)
+  (set! (-> *setting-control* user-default region-mode) #f)
+  (apply-settings *setting-control*)
+  (stop arg0)
+  (let ((v1-8 (process-spawn
+                target
+                :init target-init
+                arg1
+                :name "target"
+                :from *target-dead-pool*
+                :to *target-pool*
+                :stack *kernel-dram-stack*
+                )
+              )
+        )
+    (if v1-8
+        (set! *target* (the-as target (-> v1-8 0 self)))
+        (set! *target* (the-as target #f))
+        )
+    )
+  *target*
+  )
