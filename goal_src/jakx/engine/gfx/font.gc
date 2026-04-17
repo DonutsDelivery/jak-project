@@ -16,12 +16,35 @@
 
 (def-mips2c draw-string-asm (function string dma-buffer font-context draw-string-result))
 
-;; JAKX: jak3's draw-string-asm mips2c is incompatible with jakx's font-context
-;; layout (187 bytes vs 72, fields in different order). Until a jakx-native
-;; mips2c or GOAL renderer is written, draw-string is a no-op returning the
-;; origin. This keeps the game from segfaulting post-dolby.
+;; JAKX: minimal GOAL draw-string that emits one untextured sprite2d per
+;; character. jak3's mips2c draw-string-asm reads jak3 offsets against jakx's
+;; 187-byte font-context and corrupts memory. This implementation stays in
+;; pure GOAL and uses jakx's real font-context fields directly.
+;;
+;; It does NOT yet render glyphs — each char becomes a colored rectangle.
+;; Good enough for title-menu visibility pending a real glyph renderer.
+;;
 ;; See reference_jakx_font_context_layout_differs.md in memory.
 (defun draw-string ((arg0 string) (arg1 dma-buffer) (arg2 font-context))
+  (let* ((ox (the int (-> arg2 origin x)))
+         (oy (the int (-> arg2 origin y)))
+         (scale (-> arg2 scale))
+         (char-w (max 4 (the int (* 7.0 scale))))
+         (char-h (max 6 (the int (* 10.0 scale))))
+         (spacing (max 1 (the int (* 1.0 scale))))
+         (n (length arg0))
+         (color (new 'static 'rgba :r #xff :g #xff :b #xff :a #x80))
+         (depth #xffffff)
+         )
+    (dotimes (i n)
+      (draw-sprite2d-xy arg1
+                        (+ ox (* i (+ char-w spacing)))
+                        oy
+                        char-w
+                        char-h
+                        color
+                        depth))
+    )
   (the-as draw-string-result (-> arg2 origin quad))
   )
 
