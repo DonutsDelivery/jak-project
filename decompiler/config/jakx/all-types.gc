@@ -1010,7 +1010,9 @@
 (define-extern *dram-stack* (pointer uint8))
 (define-extern *null-kernel-context* kernel-context)
 (define-extern *stack-top* pointer)
+(define-extern *kernel-sp* pointer)
 (define-extern *user* symbol)
+(define-extern scf-get-volume "Defined in the kernel" (function int))
 (define-extern remove-exit
                "Remove the top stack frame. If you have no other stack frames, you can use this before a `go`
                 to skip the `exit` of the state you are currently in."
@@ -17746,6 +17748,8 @@
     (collect-regions "Fill the region-prim-list with regions that intersect the sphere." (_type_ sphere int region-prim-list) int) ;; 16
     )
   )
+
+(define-extern drawable-tri-count (function drawable int)) ;; NOTE - defined in kernel?
 
 (deftype drawable-error (drawable)
   "A drawable which just represents an error. When drawn, it simply displays a sphere with an error message."
