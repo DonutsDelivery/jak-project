@@ -237,6 +237,7 @@ set(RUNTIME_SOURCE
         mips2c/jakx_functions/font.cpp
         mips2c/jakx_functions/joint.cpp
         mips2c/jakx_functions/sky.cpp
+        mips2c/jakx_functions/sparticle_launcher.cpp
         mips2c/mips2c_table.cpp
         overlord/common/dma.cpp
         overlord/common/fake_iso.cpp

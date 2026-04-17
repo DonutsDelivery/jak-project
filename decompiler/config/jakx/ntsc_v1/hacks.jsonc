@@ -97,18 +97,18 @@
     "draw-boundary-polygon",
     "render-boundary-quad",
     "render-boundary-tri",
-    "clip-polygon-against-negative-hyperplane",
-    "clip-polygon-against-positive-hyperplane",
+    // clip-polygon-against-negative-hyperplane — moved to mips2c_functions_by_name
+    // clip-polygon-against-positive-hyperplane — moved to mips2c_functions_by_name
     "sp-init-fields!",
     "particle-adgif",
     "sp-launch-particles-var",
-    "sparticle-motion-blur",
+    // sparticle-motion-blur — moved to mips2c_functions_by_name (jakx-native port)
     "sp-process-block-2d",
     "sp-process-block-3d",
-    "set-tex-offset",
-    "draw-large-polygon",
-    "render-sky-quad",
-    "render-sky-tri",
+    // set-tex-offset      — moved to mips2c_functions_by_name
+    // draw-large-polygon  — moved to mips2c_functions_by_name
+    // render-sky-quad     — moved to mips2c_functions_by_name
+    // render-sky-tri      — moved to mips2c_functions_by_name
     "(method 17 sky-work)",
     "(method 18 sky-work)",
     "(method 32 sky-work)",
@@ -1725,7 +1725,25 @@
       ]
     ]
   },
-  "mips2c_functions_by_name": [],
+  "mips2c_functions_by_name": [
+    // sky-tng — hand-ported in game/mips2c/jakx_functions/sky.cpp.
+    // Simple transforms (identical to jak3 binary). Safe to let the
+    // decompiler run mips2c on them.
+    "set-tex-offset",
+    "render-sky-quad",
+    "render-sky-tri",
+    "draw-large-polygon",
+    "clip-polygon-against-positive-hyperplane",
+    "clip-polygon-against-negative-hyperplane",
+    // sparticle-launcher — jakx-native port in
+    // game/mips2c/jakx_functions/sparticle_launcher.cpp. Prologue
+    // calls view-get-active-math-camera (split-screen camera select)
+    // instead of loading *math-camera* directly like jak3.
+    "sparticle-motion-blur"
+    // sky-work methods (17/18/29-35) intentionally LEFT in asm_functions_by_name:
+    // they diverge from jak3 and their jakx-native port isn't yet written.
+    // Letting mips2c run on them would bind them but with jak3's wrong bodies.
+  ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
     [

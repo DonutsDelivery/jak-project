@@ -420,6 +420,8 @@ namespace method_35_sky_work { extern void link(); }
 namespace set_sky_vf23_value { extern void link(); }
 // joint.cpp port (see game/mips2c/jakx_functions/joint.cpp)
 namespace cspace_parented_transformq_joint { extern void link(); }
+// sparticle_launcher.cpp port (see game/mips2c/jakx_functions/sparticle_launcher.cpp)
+namespace sparticle_motion_blur { extern void link(); }
 }
 // clang-format on
 
@@ -746,8 +748,11 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
        jak3::method_31_sphere_hash::link, jak3::method_32_spatial_hash::link,
        jak3::method_38_spatial_hash::link, jak3::method_35_spatial_hash::link,
        jak3::method_36_spatial_hash::link, jak3::method_34_spatial_hash::link}},
+     // sparticle-motion-blur is jakx-native (view-get-active-math-camera
+     // prologue differs from jak3). Others still hit jak3 bodies until
+     // jakx-native ports land — see .jakx_watch/mips2c_queue.md.
      {"sparticle-launcher",
-      {jak3::sparticle_motion_blur::link, jak3::sp_launch_particles_var::link,
+      {jakx::sparticle_motion_blur::link, jak3::sp_launch_particles_var::link,
        jak3::particle_adgif::link, jak3::sp_init_fields::link}},
      {"sparticle", {jak3::sp_process_block_2d::link, jak3::sp_process_block_3d::link}},
      {"nav-engine",
