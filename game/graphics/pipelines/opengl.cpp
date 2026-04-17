@@ -587,6 +587,25 @@ void GLDisplay::process_sdl_events() {
  * Main function called to render graphics frames. This is called in a loop.
  */
 void GLDisplay::render() {
+  // og:preserve-this — JAKX_AUTO_SCREENSHOT=<frame_n> env-var triggers a
+  // screenshot at the given frame number. Exists so the Claude Code session
+  // can programmatically verify title-menu render without requiring
+  // interactive F2 press (Wayland + no screenshot tools in the shell).
+  // Safe to delete once user visual verification is done.
+  {
+    static int s_render_frame_counter = 0;
+    static int s_auto_screenshot_frame = -2;
+    if (s_auto_screenshot_frame == -2) {
+      const char* env = std::getenv("JAKX_AUTO_SCREENSHOT");
+      s_auto_screenshot_frame = env ? std::atoi(env) : -1;
+    }
+    if (s_auto_screenshot_frame > 0 && s_render_frame_counter == s_auto_screenshot_frame) {
+      extern bool g_want_screenshot;
+      g_want_screenshot = true;
+      lg::print("JAKX_AUTO_SCREENSHOT: triggered at frame {}\n", s_render_frame_counter);
+    }
+    s_render_frame_counter++;
+  }
   // Before we process the current frames SDL events we for keyboard/mouse button inputs.
   //
   // This technically means that keyboard/mouse button inputs will be a frame behind but the
