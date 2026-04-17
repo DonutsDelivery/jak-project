@@ -31915,10 +31915,10 @@
 ;;   :flag-assert #x1100000044
 ;;   )
 
-;; (deftype prototype-trans-shrubbery (prototype-shrubbery)
-;;   ()
-;;   :flag-assert #x1100000044
-;;   )
+(deftype prototype-trans-shrubbery (prototype-shrubbery)
+  ()
+  :flag-assert #x1100000044
+  )
 
 (deftype prototype-generic-shrub (drawable-group)
   ()
@@ -33004,10 +33004,10 @@
 ;;   :flag-assert #x1d0000003c
 ;;   )
 
-;; (deftype entity-race-mesh (entity)
-;;   ()
-;;   :flag-assert #x1d0000003c
-;;   )
+(deftype entity-race-mesh (entity)
+  ()
+  :flag-assert #x1d0000003c
+  )
 
 ;; (deftype entity-actor (entity)
 ;;   ()
