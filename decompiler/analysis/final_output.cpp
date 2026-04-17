@@ -2,6 +2,7 @@
 
 #include "common/goos/PrettyPrinter.h"
 
+#include "decompiler/IR2/AtomicOp.h"
 #include "decompiler/IR2/Form.h"
 #include "decompiler/IR2/GenericElementMatcher.h"
 #include "decompiler/ObjectFile/LinkedObjectFile.h"
@@ -346,6 +347,24 @@ std::string write_from_top_level_form(Form* top_form,
   auto back_as_generic_op = dynamic_cast<GenericElement*>(forms.back());
   if (back_as_generic_op && back_as_generic_op->op().is_fixed(FixedOperatorKind::NONE)) {
     forms.pop_back();
+  }
+
+  // Strip a trailing (ret-none) — the raw function-epilogue atomic op that
+  // sometimes survives when expression building doesn't convert it to (none).
+  if (!forms.empty()) {
+    auto back_as_atomic = dynamic_cast<AtomicOpElement*>(forms.back());
+    if (back_as_atomic && dynamic_cast<const FunctionEndOp*>(back_as_atomic->op())) {
+      forms.pop_back();
+    }
+  }
+
+  // Strip a trailing bare integer 0 — the v0 return value from a `li v0, 0; jr ra`
+  // epilogue that wasn't folded into the function body.
+  if (!forms.empty()) {
+    auto back_as_atom = dynamic_cast<SimpleAtomElement*>(forms.back());
+    if (back_as_atom && back_as_atom->atom().is_int(0)) {
+      forms.pop_back();
+    }
   }
 
   std::string result;
