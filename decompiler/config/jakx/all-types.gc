@@ -44543,7 +44543,7 @@
 
 
   
-#|(deftype gunmount-drawable (process-drawable)
+(deftype gunmount-drawable (process-drawable)
   ((mounted-on uint64  :offset-assert 248)
    (hardpoint  int8    :offset-assert 256)
    )
@@ -44556,13 +44556,13 @@
     (gunmount-drawable-method-52 () none) ;; 52
     (gunmount-drawable-method-53 () none) ;; 53
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype gunmount-generic-drawable (gunmount-drawable)
+(deftype gunmount-generic-drawable (gunmount-drawable)
   ((config          uint8   :offset-assert 257)
    (flash           uint64  :offset-assert 264)
    (changeover-anim int32   :offset-assert 272)
@@ -44575,19 +44575,19 @@
     (gunmount-generic-drawable-method-54 () none) ;; 54
     (gunmount-generic-drawable-method-55 () none) ;; 55
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype warning-hud-icon (basic)
-  ((hsprite hud-sprite :inline :offset-assert 16)
+(deftype warning-hud-icon (basic)
+  ((hsprite uint8 52 :offset 16) ;; hud-sprite :inline placeholder
    )
   :method-count-assert 9
   :size-assert         #x44
   :flag-assert         #x900000044
-  )|#
+  )
   
 
 
@@ -44647,7 +44647,7 @@
 
 
 
-#|
+
 (deftype vehicle-weapon-drone (process-focusable)
   ((owning-vehicle    uint64             :offset-assert 256)
    (owning-slot       uint64             :offset-assert 264)
@@ -44663,7 +44663,7 @@
    (last-gaze-time    uint64             :offset-assert 328)
    (pitch-bend        float              :offset-assert 336)
    (sweep-loop        uint32             :offset-assert 340)
-   (muzzle-flashes    UNKNOWN    4       :offset-assert 344)
+   (muzzle-flashes    uint64     4       :offset-assert 344) ;; placeholder
    (next-target-poll  uint64             :offset-assert 376)
    (firecontrol       basic              :offset-assert 384)
    (blam              uint32             :offset-assert 388)
@@ -44682,7 +44682,7 @@
     (vehicle-weapon-drone-method-66 () none) ;; 66
     )
   )
-|#
+
 
 
 
