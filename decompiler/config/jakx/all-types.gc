@@ -40821,8 +40821,8 @@
     )
   )
 
-  
-#|(deftype rigid-body-object (process-focusable)
+
+(deftype rigid-body-object (process-focusable)
   ((info               rigid-body-object-constants  :offset-assert 256)
    (flags              rigid-body-object-flag       :offset-assert 264)
    (max-time-step      float                        :offset-assert 272)
@@ -40866,7 +40866,7 @@
     (rigid-body-object-method-87 () none) ;; 87
     (rigid-body-object-method-88 () none) ;; 88
     )
-  )|#
+  )
   
 
 
