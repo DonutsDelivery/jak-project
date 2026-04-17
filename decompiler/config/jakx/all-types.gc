@@ -3698,8 +3698,8 @@
   
 
 
-(define-extern *hud-manager-death-indicator-1* object) ;; hud-manager-death-indicator
-(define-extern *hud-manager-death-indicator-2* object) ;; hud-manager-death-indicator
+(define-extern *hud-manager-death-indicator-1* hud-manager-death-indicator)
+(define-extern *hud-manager-death-indicator-2* hud-manager-death-indicator)
 (define-extern *death-indicator-single0* array)
 (define-extern *death-indicator-single0-proc* object)
 (define-extern spawn-death-indicator-single0 function)
@@ -35565,7 +35565,7 @@
 (define-extern set-tfrag-dists! function) ;; (function tfrag-dists none)
 (define-extern *terrain-context* object) ;; terrain-context
 (define-extern GSH_ENABLE symbol) ;; symbol
-(define-extern GSH_BUCKET object) ;; bucket-id
+(define-extern GSH_BUCKET bucket-id)
 (define-extern GSH_WHICH_STAT int) ;; int
 (define-extern GSH_MAX_DISPLAY basic) ;; basic
 (define-extern GSH_TIME int) ;; int
@@ -35693,7 +35693,7 @@
 (define-extern clear-sprite-aux-list function) ;; (function none)
 (define-extern add-to-sprite-aux-list function) ;; (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d uint none)
 (define-extern sprite-setup-frame-data function) ;; (function sprite-frame-data uint none)
-(define-extern sprite-vu1-block object) ;; vu-function
+(define-extern sprite-vu1-block vu-function)
 (define-extern sprite-set-3d-quaternion! function) ;; (function sprite-vec-data-3d quaternion quaternion)
 (define-extern sprite-get-3d-quaternion! function) ;; (function quaternion sprite-vec-data-3d quaternion)
 (define-extern sprite-add-matrix-data function) ;; (function dma-buffer uint none)
@@ -35735,7 +35735,7 @@
 
 (define-extern *sprite-distorter-sine-tables* object) ;; sprite-distorter-sine-tables
 (define-extern sprite-distorter-generate-tables function) ;; (function none)
-(define-extern sprite-distort-vu1-block object) ;; vu-function
+(define-extern sprite-distort-vu1-block vu-function)
 (define-extern sprite-init-distorter function) ;; (function dma-buffer none)
 (define-extern sprite-draw-distorters function) ;; (function dma-buffer none)
 
@@ -35868,7 +35868,7 @@
 
 
 (define-extern *sprite-glow-templates* array)
-(define-extern sprite-glow-vu1-block object) ;; vu-function
+(define-extern sprite-glow-vu1-block vu-function)
 (define-extern sprite-glow-init-consts function) ;; (function sprite-glow-consts none)
 (define-extern sprite-glow-init-engine function) ;; (function dma-buffer none)
 (define-extern *sprite-glow-dma-packet-data* sprite-glow-dma-packet-data) ;; sprite-glow-dma-packet-data
@@ -36077,13 +36077,13 @@
 ;; merc-vu1                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern merc-vu1-block object) ;; vu-function
+(define-extern merc-vu1-block vu-function)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emerc-vu1                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern emerc-vu1-block object) ;; vu-function
+(define-extern emerc-vu1-block vu-function)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; merc-blend-shape               ;;
@@ -36239,7 +36239,7 @@
 
 (define-extern *bone-calculation-list* bone-calculation-list) ;; bone-calculation-list
 (define-extern bone-list-init function) ;; (function none)
-(define-extern bones-vu0-block object) ;; vu-function
+(define-extern bones-vu0-block vu-function)
 (define-extern bones-set-sqwc function) ;; (function none)
 (define-extern bones-reset-sqwc function) ;; (function none)
 (define-extern bones-init function) ;; (function dma-buffer none)
@@ -36264,7 +36264,7 @@
 ;; foreground                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern foreground-vu0-block object) ;; vu-function
+(define-extern foreground-vu0-block vu-function)
 (define-extern generic-bucket-state-init function) ;; (function generic-bucket-state none)
 (define-extern mercneric-chain-init function) ;; (function mercneric-chain bucket-id none)
 (define-extern foreground-init function) ;; (function none)
@@ -36291,13 +36291,13 @@
 ;; generic-vu0                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern generic-vu0-block object) ;; vu-function
+(define-extern generic-vu0-block vu-function)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; generic-vu1                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern generic-vu1-block object) ;; vu-function
+(define-extern generic-vu1-block vu-function)
 (define-extern generic-setup-constants function) ;; (function generic-constants none)
 (define-extern generic-add-constants function) ;; (function dma-buffer none)
 (define-extern generic-setup-shrub-constants function) ;; (function generic-shrub-constants int int int none)
@@ -36361,7 +36361,7 @@
   )
 
 
-(define-extern mercneric-vu0-block object) ;; vu-function
+(define-extern mercneric-vu0-block vu-function)
 (define-extern *inv-init-table* (inline-array invinitdata)) ;; (inline-array invinitdata)
 (define-extern generic-merc-init-asm function) ;; (function none)
 (define-extern mercneric-matrix-asm function)
@@ -36511,7 +36511,7 @@
 
 
 (define-extern *shadow-vu1-data* object) ;; shadow-vu1-data
-(define-extern shadow-vu1-block object) ;; vu-function
+(define-extern shadow-vu1-block vu-function)
 (define-extern shadow-vu1-add-constants function) ;; (function dma-buffer int none)
 (define-extern shadow-vu1-patch-consts function) ;; (function symbol int none)
 (define-extern shadow-vu1-add-matrix function) ;; (function dma-buffer math-camera none)
@@ -36706,7 +36706,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *background-work* object) ;; background-work
-(define-extern background-vu0-block object) ;; vu-function
+(define-extern background-vu0-block vu-function)
 (define-extern background-upload-vu0 function) ;; (function none)
 (define-extern init-background function) ;; (function none)
 (define-extern upload-vis-bits function) ;; (function level level bsp-header none)
@@ -36787,7 +36787,7 @@
 (define-extern mem-usage-shrub-walk function) ;; (function draw-node int memory-usage-block int draw-node)
 (define-extern highres-shrub-login function) ;; (function draw-node none)
 (define-extern highres-prototype-shrub-login function)
-(define-extern shrub-vu1-block object) ;; vu-function
+(define-extern shrub-vu1-block vu-function)
 (define-extern shrub-num-tris function) ;; (function shrubbery uint)
 (define-extern shrub-make-perspective-matrix function) ;; (function matrix matrix matrix)
 (define-extern shrub-init-view-data function) ;; (function shrub-view-data symbol)
@@ -36815,7 +36815,7 @@
 ;; tfrag-near                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern tnear-vu1-block object) ;; vu-function
+(define-extern tnear-vu1-block vu-function)
 (define-extern tfrag-details function) ;; (function tfragment none)
 (define-extern clip-restore function) ;; (function none)
 
@@ -36838,7 +36838,7 @@
 
 
 (define-extern *tfrag-display-stats* symbol) ;; symbol
-(define-extern tfrag-vu1-block object) ;; vu-function
+(define-extern tfrag-vu1-block vu-function)
 (define-extern tfrag-data-setup function) ;; (function tfrag-data int int none)
 (define-extern add-tfrag-mtx-0 function) ;; (function dma-buffer symbol none)
 (define-extern add-tfrag-mtx-1 function) ;; (function dma-buffer symbol none)
@@ -36944,7 +36944,7 @@
 |#
 
 
-(define-extern tie-vu1-block object) ;; vu-function
+(define-extern tie-vu1-block vu-function)
 (define-extern tie-init-consts function) ;; (function tie-consts gs-alpha gs-test gs-test none)
 (define-extern tie-init-engine function) ;; (function dma-buffer gs-alpha gs-test gs-test none)
 (define-extern tie-end-buffer function) ;; (function dma-buffer none)
@@ -36991,7 +36991,7 @@
   
 
 
-(define-extern etie-vu1-block object) ;; vu-function
+(define-extern etie-vu1-block vu-function)
 (define-extern etie-magic function) ;; (function int int)
 (define-extern etie-init-consts function) ;; (function etie-consts gs-alpha none)
 (define-extern etie-init-engine function) ;; (function dma-buffer gs-alpha gs-test none)
@@ -38292,7 +38292,7 @@
 (define-extern testlow level-load-info)
 (define-extern henry level-load-info)
 (define-extern chartest level-load-info) ;; level-load-info
-(define-extern *level-load-list* object) ;; pair
+(define-extern *level-load-list* pair)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; level                          ;;
@@ -38426,7 +38426,7 @@
 (define-extern probe-traverse-inline-array-node function) ;; (function drawable-inline-array-node int none)
 (define-extern probe-traverse-collide-fragment function) ;; (function drawable-tree-collide-fragment int none)
 (define-extern *collide-probe-stack* object) ;; collide-probe-stack
-(define-extern collide-vu0-block object) ;; vu-function
+(define-extern collide-vu0-block vu-function)
 (define-extern collide-probe-node function) ;; (function (inline-array draw-node) int collide-list int)
 (define-extern print-out function) ;; (function int object)
 (define-extern collide-probe-instance-tie-collide-frags function) ;; (function none)
@@ -42155,7 +42155,7 @@
 ;; ocean-mid                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern ocean-mid-block object) ;; vu-function
+(define-extern ocean-mid-block vu-function)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ocean-transition               ;;
@@ -42166,7 +42166,7 @@
 ;; ocean-near                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern ocean-near-block object) ;; vu-function
+(define-extern ocean-near-block vu-function)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sparks                         ;;
@@ -51877,7 +51877,7 @@
 (define-extern dm-editable-boolean-toggle-pick-func function)
 (define-extern editable-menu-context-make-menus function)
 (define-extern insert-sample-camera function)
-(define-extern *debug-hook* object) ;; pair
+(define-extern *debug-hook* pair)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; mysql-nav-graph                ;;
