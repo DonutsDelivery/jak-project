@@ -66,7 +66,9 @@ Per decomp run it tells you:
   stance disagreement between an `:methods` entry in all-types.gc and the
   decompiled body — fixable by editing the declaration (most common) or the
   body. Top clusters surface types whose `:methods` block can be
-  batch-corrected in one edit.
+  batch-corrected in one edit. Also writes `.jakx_watch/return_mismatch_queue.md`
+  with per-method detail: exact method-N vtable index + all-types.gc line number
+  for each mismatch, so Agent 1 can do surgical fixes without manual lookup.
 - `discovery_queue.py` — ranked top-20 PURE-DISCOVERY deftypes (types emitted
   by regen's new-all-types.gc but absent from jakx in any form — neither
   active, line-commented, nor block-commented). Per-entry: parent status,
@@ -135,6 +137,7 @@ python3 scripts/jakx_watch/measure.py \
 - `.jakx_watch/mips2c_queue.md`          — ranked jak3→jakx port queue
 - `.jakx_watch/cpp_patch_queue.md`       — ranked C++ decompiler-emitter patches
 - `.jakx_watch/cluster_impact.md`        — commented-deftype clusters ranked by unblock/cost
+- `.jakx_watch/return_mismatch_queue.md` — per-method mismatch fix list with all-types.gc line refs
 - `.jakx_watch/run-TS.log`          — combined stdout+stderr of a run.sh invocation
 - `log/decompiler.*.log`            — native decompiler logs (shared dir)
 - `test/decompiler/reference/jakx/` — `_REF.gc` baseline corpus (checked in)
