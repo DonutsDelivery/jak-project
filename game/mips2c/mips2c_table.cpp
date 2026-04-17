@@ -428,6 +428,11 @@ namespace live_func_curve { extern void link(); }
 namespace birth_func_curve { extern void link(); }
 // wvehicle_part.cpp port (see game/mips2c/jakx_functions/wvehicle_part.cpp)
 namespace sparticle_motion_blur_dirt { extern void link(); }
+// ripple.cpp port (see game/mips2c/jakx_functions/ripple.cpp)
+namespace ripple_matrix_scale { extern void link(); }
+namespace ripple_apply_wave_table { extern void link(); }
+namespace ripple_create_wave_table { extern void link(); }
+namespace ripple_execute_init { extern void link(); }
 }
 // clang-format on
 
@@ -776,9 +781,11 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      // wvehicle-part: jakx-native sparticle-motion-blur-dirt (target access
      // via view-get-active-target + offset-184 control handle).
      {"wvehicle-part", {jakx::sparticle_motion_blur_dirt::link}},
+     // ripple: jakx-native ports (see game/mips2c/jakx_functions/ripple.cpp).
+     // All four functions are structurally identical to jak3; jakx namespace only.
      {"ripple",
-      {jak3::ripple_matrix_scale::link, jak3::ripple_apply_wave_table::link,
-       jak3::ripple_create_wave_table::link, jak3::ripple_execute_init::link}},
+      {jakx::ripple_matrix_scale::link, jakx::ripple_apply_wave_table::link,
+       jakx::ripple_create_wave_table::link, jakx::ripple_execute_init::link}},
      {"ocean-vu0",
       {jak3::method_14_ocean::link, jak3::method_15_ocean::link, jak3::method_16_ocean::link}},
      {"ocean",

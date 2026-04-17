@@ -237,6 +237,7 @@ set(RUNTIME_SOURCE
         mips2c/jakx_functions/font.cpp
         mips2c/jakx_functions/joint.cpp
         mips2c/jakx_functions/particle_curves.cpp
+        mips2c/jakx_functions/ripple.cpp
         mips2c/jakx_functions/sky.cpp
         mips2c/jakx_functions/sparticle_launcher.cpp
         mips2c/jakx_functions/wvehicle_part.cpp

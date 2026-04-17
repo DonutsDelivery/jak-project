@@ -164,10 +164,10 @@
     "(method 18 nav-engine)",
     "(method 21 nav-engine)",
     "(method 39 nav-state)",
-    "ripple-create-wave-table",
-    "ripple-execute-init",
-    "ripple-apply-wave-table",
-    "ripple-matrix-scale",
+    // ripple-create-wave-table  — moved to mips2c_functions_by_name (jakx-native port)
+    // ripple-execute-init       — moved to mips2c_functions_by_name (jakx-native port)
+    // ripple-apply-wave-table   — moved to mips2c_functions_by_name (jakx-native port)
+    // ripple-matrix-scale       — moved to mips2c_functions_by_name (jakx-native port)
     "foreground-generic-merc",
     "generic-merc-init-asm",
     "mercneric-convert",
@@ -1751,7 +1751,13 @@
     // game/mips2c/jakx_functions/wvehicle_part.cpp. Diverges from jak3:
     //   sparticle-motion-blur-dirt: calls view-get-active-target (split-
     //     screen) + reads control handle at offset 184 (jak3: 124).
-    "sparticle-motion-blur-dirt"
+    "sparticle-motion-blur-dirt",
+    // ripple — jakx-native ports in game/mips2c/jakx_functions/ripple.cpp.
+    // All four functions are structurally identical to jak3; jakx namespace only.
+    "ripple-create-wave-table",
+    "ripple-execute-init",
+    "ripple-apply-wave-table",
+    "ripple-matrix-scale"
     // sky-work methods (17/18/29-35) intentionally LEFT in asm_functions_by_name:
     // they diverge from jak3 and their jakx-native port isn't yet written.
     // Letting mips2c run on them would bind them but with jak3's wrong bodies.
