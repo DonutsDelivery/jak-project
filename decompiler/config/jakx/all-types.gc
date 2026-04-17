@@ -40917,24 +40917,24 @@
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process) _type_)
     (rigid-body-control-method-9 (_type_ collide-shape-moving float) none) ;; 9
     (rigid-body-control-method-10 (_type_ rigid-body-object float float) object) ;; 10
-    (rigid-body-control-method-11 (_type_ collide-shape-moving) none) ;; 11
-    (rigid-body-control-method-12 (_type_ float) none) ;; 12
-    (rigid-body-control-method-13 (_type_) none) ;; 13
+    (rigid-body-control-method-11 (_type_ collide-shape-moving) int) ;; 11
+    (rigid-body-control-method-12 (_type_ float) int) ;; 12
+    (rigid-body-control-method-13 (_type_) int) ;; 13
     (rigid-body-control-method-14 (_type_ float) none) ;; 14
     (rigid-body-control-method-15 (_type_) none) ;; 15
-    (rigid-body-control-method-16 (_type_) none) ;; 16
-    (rigid-body-control-method-17 (_type_) none) ;; 17
-    (rigid-body-control-method-18 (_type_ vector vector) none) ;; 18
+    (rigid-body-control-method-16 (_type_) int) ;; 16
+    (rigid-body-control-method-17 (_type_) int) ;; 17
+    (rigid-body-control-method-18 (_type_ vector vector) int) ;; 18
     (rigid-body-control-method-19 (_type_ vector vector) none) ;; 19
-    (rigid-body-control-method-20 (_type_ vector) none) ;; 20
-    (rigid-body-control-method-21 (_type_ vector vector float) none) ;; 21
-    (rigid-body-control-method-22 (_type_ vector vector) none) ;; 22
-    (rigid-body-control-method-23 (_type_ vector vector) none) ;; 23
+    (rigid-body-control-method-20 (_type_ vector) int) ;; 20
+    (rigid-body-control-method-21 (_type_ vector vector float) int) ;; 21
+    (rigid-body-control-method-22 (_type_ vector vector) int) ;; 22
+    (rigid-body-control-method-23 (_type_ vector vector) int) ;; 23
     (rigid-body-control-method-24 (_type_ vector vector) none) ;; 24
     (rigid-body-control-method-25 (_type_ vector) vector) ;; 25
     (rigid-body-control-method-26 (_type_) none) ;; 26
     (rigid-body-control-method-27 (_type_ rigid-body-info vector quaternion (function rigid-body-object float)) none) ;; 27
-    (rigid-body-control-method-28 (_type_ vector quaternion) none) ;; 28
+    (rigid-body-control-method-28 (_type_ vector quaternion) int) ;; 28
     (rigid-body-control-method-29 (_type_ object) none) ;; 29
     (rigid-body-control-method-30 (_type_ object) none) ;; 30
     (rigid-body-control-method-31 (_type_ object) none) ;; 31
