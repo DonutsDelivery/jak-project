@@ -5936,12 +5936,12 @@
 
 
   
-#|(deftype vehicle-respawn-invul (process)
+(deftype vehicle-respawn-invul (process)
   ((vehicle uint64  :offset-assert 144)
    )
-  :method-count-assert 16
+  :method-count-assert 21
   :size-assert         #x98
-  :flag-assert         #x1000100098
+  :flag-assert         #x1500100098
   (:methods
     (vehicle-respawn-invul-method-9 () none) ;; 9
     (vehicle-respawn-invul-method-10 () none) ;; 10
@@ -5953,18 +5953,18 @@
   (:state-methods
     idle ;; 15
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype vehicle-suppress-look (process)
+(deftype vehicle-suppress-look (process)
   ((vehicle uint64  :offset-assert 144)
    )
-  :method-count-assert 16
+  :method-count-assert 21
   :size-assert         #x98
-  :flag-assert         #x1000100098
+  :flag-assert         #x1500100098
   (:methods
     (vehicle-suppress-look-method-9 () none) ;; 9
     (vehicle-suppress-look-method-10 () none) ;; 10
@@ -5976,7 +5976,7 @@
   (:state-methods
     idle ;; 15
     )
-  )|#
+  )
   
 
 
@@ -59700,7 +59700,6 @@
 (define-extern vehicle-debris object)
 (define-extern vehicle-hud-view-0 object)
 (define-extern vehicle-manager object)
-(define-extern vehicle-respawn-invul object)
 (define-extern vehicle-wheel-init-params object)
 (define-extern v-falcon object)
 (define-extern v-gila object)
@@ -59770,7 +59769,6 @@
 (define-extern trail-conn-search object)
 (define-extern update-engine-mix-state-work object)
 (define-extern vehicle-hud-view-1 object)
-(define-extern vehicle-suppress-look object)
 (define-extern vehicle-wheel object)
 (define-extern v-wpn-red-mine-launcher object)
 (define-extern v-wpn-red-tractor-beam object)
