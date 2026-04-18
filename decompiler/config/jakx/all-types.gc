@@ -59452,26 +59452,26 @@
 ;; (define-extern drawable-tree-collide-fragment object) ;; clobbers active deftype
 ;; (define-extern drawable-tree-tfrag-trans object) ;; clobbers active deftype
 ;; (define-extern driver-ashelin object) ;; clobbers active deftype
-(define-extern driver-daxter object)
-(define-extern driver-gtblitz object)
-(define-extern driver-jak object)
-(define-extern driver-jaka object)
-(define-extern driver-jakb object)
-(define-extern driver-jakc object)
-(define-extern driver-kaeden object)
-(define-extern driver-kiera object)
-(define-extern driver-klever object)
-(define-extern driver-osmo object)
-(define-extern driver-pecker object)
-(define-extern driver-ratchet object)
-(define-extern driver-rayn object)
-(define-extern driver-razer object)
-(define-extern driver-sig object)
-(define-extern driver-taryn object)
-(define-extern driver-thug-a object)
-(define-extern driver-thug-b object)
-(define-extern driver-thug-c object)
-(define-extern driver-torn object)
+;; (define-extern driver-daxter object) ;; clobbers active deftype
+;; (define-extern driver-gtblitz object) ;; clobbers active deftype
+;; (define-extern driver-jak object) ;; clobbers active deftype
+;; (define-extern driver-jaka object) ;; clobbers active deftype
+;; (define-extern driver-jakb object) ;; clobbers active deftype
+;; (define-extern driver-jakc object) ;; clobbers active deftype
+;; (define-extern driver-kaeden object) ;; clobbers active deftype
+;; (define-extern driver-kiera object) ;; clobbers active deftype
+;; (define-extern driver-klever object) ;; clobbers active deftype
+;; (define-extern driver-osmo object) ;; clobbers active deftype
+;; (define-extern driver-pecker object) ;; clobbers active deftype
+;; (define-extern driver-ratchet object) ;; clobbers active deftype
+;; (define-extern driver-rayn object) ;; clobbers active deftype
+;; (define-extern driver-razer object) ;; clobbers active deftype
+;; (define-extern driver-sig object) ;; clobbers active deftype
+;; (define-extern driver-taryn object) ;; clobbers active deftype
+;; (define-extern driver-thug-a object) ;; clobbers active deftype
+;; (define-extern driver-thug-b object) ;; clobbers active deftype
+;; (define-extern driver-thug-c object) ;; clobbers active deftype
+;; (define-extern driver-torn object) ;; clobbers active deftype
 (define-extern driver-ur-86 object)
 (define-extern driver-ximon object)
 (define-extern eco-powerup-draw object)
