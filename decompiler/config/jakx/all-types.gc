@@ -42435,7 +42435,7 @@
   )
 
   
-#|(deftype debris-group (process)
+(deftype debris-group (process)
   ((had-first-hit   symbol                :offset-assert 144)
    (dead-debris-num int32                 :offset-assert 148)
    (debris-num      int32                 :offset-assert 152)
@@ -42451,15 +42451,13 @@
   :flag-assert         #x12033003c0
   (:methods
     (debris-group-method-14 () _type_ :state) ;; 14
+    (debris-group-method-16 (_type_ int) none) ;; 16
+    (debris-group-method-17 () _type_ :state) ;; 17 (symbol-registry treats as state)
     )
   (:state-methods
-    idle ;; 15, old: (do-collision (_type_ int) none)
+    idle ;; 15
     )
-  (:methods
-    (debris-group-method-16 (_type_ int) none) ;; 16
-    (debris-group-method-17 () none) ;; 17
-    )
-  )|#
+  )
   
 
 (deftype debris-tuning (structure)
