@@ -34,13 +34,7 @@
   ],
   "hint_inline_assembly_functions": [],
   "asm_functions_by_name": [
-    // fmv-player: decompiler's mips2c emitter crashes on these (BAD PROLOGUE / lq/sq
-    // instructions). Hand-written stubs in game/mips2c/jakx_functions/fmv_player.cpp
-    // are registered via mips2c_table.cpp at runtime — no decompiler codegen needed.
-    "fmv-file-init",
-    "fmv-get-time",
-    "fmv-file-read",
-    "fmv-memcpy",
+
     "output-race-mesh",
     "get-string-length",
     "name=",
@@ -1765,7 +1759,14 @@
     "ripple-create-wave-table",
     "ripple-execute-init",
     "ripple-apply-wave-table",
-    "ripple-matrix-scale"
+    "ripple-matrix-scale",
+    // fmv-player — PIC prologue (sd s7 / bgezal r0) + lq/sq can't be fully decompiled;
+    // AtomicOpForm.cpp + mips2c.cpp patched to handle non-PLAIN_DATA constant-pool ptrs.
+    // PC bridge stubs in game/mips2c/jakx_functions/fmv_player.cpp.
+    "fmv-file-init",
+    "fmv-get-time",
+    "fmv-file-read",
+    "fmv-memcpy"
     // sky-work methods (17/18/29-35) intentionally LEFT in asm_functions_by_name:
     // they diverge from jak3 and their jakx-native port isn't yet written.
     // Letting mips2c run on them would bind them but with jak3's wrong bodies.

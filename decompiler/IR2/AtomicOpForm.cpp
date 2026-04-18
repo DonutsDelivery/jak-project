@@ -502,23 +502,26 @@ FormElement* make_label_load(int label_idx,
       load_size == 4 && hint.result_type == TypeSpec("float")) {
     ASSERT((label.offset % 4) == 0);
     auto word = env.file->words_by_seg.at(label.target_segment).at(label.offset / 4);
-    ASSERT(word.kind() == LinkedWord::PLAIN_DATA);
-    float value;
-    memcpy(&value, &word.data, 4);
-    return pool.alloc_element<ConstantFloatElement>(value);
+    if (word.kind() == LinkedWord::PLAIN_DATA) {
+      float value;
+      memcpy(&value, &word.data, 4);
+      return pool.alloc_element<ConstantFloatElement>(value);
+    }
+    // non-PLAIN_DATA (e.g. PIC prologue pointer in constant pool) — fall through
   } else if (hint.result_type == TypeSpec("uint64") && load_kind != LoadVarOp::Kind::FLOAT &&
              load_size == 8) {
     ASSERT((label.offset % 8) == 0);
     auto word0 = env.file->words_by_seg.at(label.target_segment).at(label.offset / 4);
     auto word1 = env.file->words_by_seg.at(label.target_segment).at(1 + (label.offset / 4));
-    ASSERT(word0.kind() == LinkedWord::PLAIN_DATA);
-    ASSERT(word1.kind() == LinkedWord::PLAIN_DATA);
-    u64 value;
-    memcpy(&value, &word0.data, 4);
-    memcpy(((u8*)&value) + 4, &word1.data, 4);
-    return pool.alloc_element<CastElement>(TypeSpec("uint"),
-                                           pool.alloc_single_element_form<SimpleAtomElement>(
-                                               nullptr, SimpleAtom::make_int_constant(value)));
+    if (word0.kind() == LinkedWord::PLAIN_DATA && word1.kind() == LinkedWord::PLAIN_DATA) {
+      u64 value;
+      memcpy(&value, &word0.data, 4);
+      memcpy(((u8*)&value) + 4, &word1.data, 4);
+      return pool.alloc_element<CastElement>(TypeSpec("uint"),
+                                             pool.alloc_single_element_form<SimpleAtomElement>(
+                                                 nullptr, SimpleAtom::make_int_constant(value)));
+    }
+    // non-PLAIN_DATA — fall through
   }
 
   // is it a constant bitfield?
@@ -529,21 +532,22 @@ FormElement* make_label_load(int label_idx,
     ASSERT((label.offset % 8) == 0);
     auto& word0 = env.file->words_by_seg.at(label.target_segment).at(label.offset / 4);
     auto& word1 = env.file->words_by_seg.at(label.target_segment).at(1 + (label.offset / 4));
-    ASSERT(word0.kind() == LinkedWord::PLAIN_DATA);
-    ASSERT(word1.kind() == LinkedWord::PLAIN_DATA);
-    u64 value;
-    memcpy(&value, &word0.data, 4);
-    memcpy(((u8*)&value) + 4, &word1.data, 4);
-    // for some reason, GOAL would use a 64-bit constant for all bitfields, even if they are
-    // smaller. We should check that the higher bits are all zero.
-    int bits = as_bitfield->get_size_in_memory() * 8;
-    ASSERT(bits <= 64);
-    if (bits < 64) {
-      ASSERT((value >> bits) == 0);
-      // technically ub if bits == 64.
+    if (word0.kind() == LinkedWord::PLAIN_DATA && word1.kind() == LinkedWord::PLAIN_DATA) {
+      u64 value;
+      memcpy(&value, &word0.data, 4);
+      memcpy(((u8*)&value) + 4, &word1.data, 4);
+      // for some reason, GOAL would use a 64-bit constant for all bitfields, even if they are
+      // smaller. We should check that the higher bits are all zero.
+      int bits = as_bitfield->get_size_in_memory() * 8;
+      ASSERT(bits <= 64);
+      if (bits < 64) {
+        ASSERT((value >> bits) == 0);
+        // technically ub if bits == 64.
+      }
+      auto defs = decompile_bitfield_from_int(hint.result_type, ts, value);
+      return pool.alloc_element<BitfieldStaticDefElement>(hint.result_type, defs, pool);
     }
-    auto defs = decompile_bitfield_from_int(hint.result_type, ts, value);
-    return pool.alloc_element<BitfieldStaticDefElement>(hint.result_type, defs, pool);
+    // non-PLAIN_DATA (PIC prologue pointer) — fall through
   }
 
   /*

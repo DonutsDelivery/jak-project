@@ -5270,6 +5270,7 @@
 (define-extern matrix<-vector-z! (function matrix vector matrix))
 
 
+#|
 (deftype wvehicle-physics-work (structure)
   ((wheel-work-array      uint8   192     :offset-assert 0)
    (mat                   matrix  :inline :offset-assert 192)
@@ -5311,6 +5312,7 @@
   :size-assert         #x220
   :flag-assert         #x900000220
   )
+|#
 
 
 
@@ -21932,6 +21934,7 @@
 
 
   
+#|
 (deftype net-lanfind-exchange-callback-out-args (structure)
   ((b-respond-to-sender int32            :offset-assert 0)
    (details             net-data :inline :offset-assert 4)
@@ -21940,11 +21943,13 @@
   :size-assert         #xc
   :flag-assert         #x90000000c
   )
+|#
   
 
 
 
   
+#|
 (deftype net-lanfind-in-params (structure)
   ((b-default-set        int32            :offset-assert 0)
    (session-type         int32            :offset-assert 4)
@@ -21958,6 +21963,7 @@
   :size-assert         #x20
   :flag-assert         #x900000020
   )
+|#
   
 
 
@@ -45456,6 +45462,7 @@
 
 
 
+#|
 (deftype net-game-mgr-football (net-game-mgr-race)
   ((borrow-level      basic    :offset-assert 364)
    (intro-hud-manager uint8 16 :offset-assert 368)
@@ -45465,6 +45472,7 @@
   :size-assert         #x188
   :flag-assert         #x5700f00188
   )
+|#
 
 
 
@@ -45552,6 +45560,7 @@
 
 
 
+#|
 (deftype net-game-mgr-artifact (net-game-mgr-deathmatch)
   ((artifact-location-array basic    :offset-assert 312)
    (artifact-location-count int8     :offset-assert 316)
@@ -45569,6 +45578,7 @@
     (net-game-mgr-artifact-method-85 () none) ;; 85
     )
   )
+|#
 
 
 
@@ -47127,6 +47137,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+#|
 (deftype lobby-menu-manager (process)
   ((game-type                  uint32    :offset-assert 144)
    (in-focus-index             int8      :offset-assert 216)
@@ -47361,6 +47372,7 @@
     (lobby-menu-manager-method-195 () none) ;; 195
     )
   )
+|#
 
 
 (define-extern lobby-vehicle-flag->string function)
@@ -49625,6 +49637,7 @@
   :size-assert         #x184
   :flag-assert         #x3b01000184
   )
+#|
 (deftype driver-FULL-PENDING (process-focusable)
   ((info               driver-info :inline :offset-assert 256)
    (vehicle            uint64              :offset-assert 280)
@@ -49657,6 +49670,7 @@
     (driver-method-66 (_type_) none) ;; 66
     )
   )
+|#
 
 
 (define-extern joint-mod-head-handler function)
@@ -52898,6 +52912,7 @@
 
 
   
+#|
 (deftype plow (net-enemy)
   ((tracking-player      uint64  :offset-assert 872)
    (do-flip-anim         basic   :offset-assert 880)
@@ -52926,6 +52941,7 @@
     reverse        ;; 89
     )
   )
+|#
   
 
 
@@ -53880,6 +53896,7 @@
 
 
   
+#|
 (deftype raptor (net-enemy)
   ()
   :method-count-assert 91
@@ -53893,6 +53910,7 @@
     chase          ;; 90
     )
   )
+|#
   
 
 

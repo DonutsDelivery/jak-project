@@ -555,14 +555,15 @@ Mips2C_Line handle_lwc1(const Instruction& i0,
   if (i0.get_src(0).is_label() && i0.get_src(1).is_reg(Register(Reg::GPR, Reg::FP))) {
     auto& label = file->labels.at(i0.get_src(0).get_label());
     auto& word = file->words_by_seg.at(label.target_segment).at(label.offset / 4);
-    ASSERT(word.kind() == LinkedWord::PLAIN_DATA);
-    float f;
-    memcpy(&f, &word.data, 4);
-    return {fmt::format("c->fprs[{}] = {};", reg_to_name(i0.get_dst(0)), float_to_string(f)),
-            instr_str};
-  } else {
-    return handle_generic_load(i0, instr_str);
+    if (word.kind() == LinkedWord::PLAIN_DATA) {
+      float f;
+      memcpy(&f, &word.data, 4);
+      return {fmt::format("c->fprs[{}] = {};", reg_to_name(i0.get_dst(0)), float_to_string(f)),
+              instr_str};
+    }
+    // non-PLAIN_DATA (PIC prologue pointer) — fall through to generic load
   }
+  return handle_generic_load(i0, instr_str);
 }
 
 Mips2C_Line handle_lw(Mips2C_Output& out,
@@ -581,17 +582,18 @@ Mips2C_Line handle_lw(Mips2C_Output& out,
     const auto& label = file->labels.at(i0.get_src(0).get_label());
     ASSERT((label.offset % 4) == 0);
     const auto& word = file->words_by_seg.at(label.target_segment).at(label.offset / 4);
-    ASSERT(word.kind() == LinkedWord::PLAIN_DATA);
-    u32 val_u32 = word.data;
-    float val_float;
-    memcpy(&val_float, &val_u32, 4);
-    std::string comment = fmt::format("{} {}", instr_str, float_to_string(val_float));
-    return {fmt::format("c->lw_float_constant({}, 0x{:08x});", reg_to_name(i0.get_dst(0)), val_u32),
-            comment};
-  } else {
-    // fall back to standard loads
-    return handle_generic_load(i0, instr_str);
+    if (word.kind() == LinkedWord::PLAIN_DATA) {
+      u32 val_u32 = word.data;
+      float val_float;
+      memcpy(&val_float, &val_u32, 4);
+      std::string comment = fmt::format("{} {}", instr_str, float_to_string(val_float));
+      return {fmt::format("c->lw_float_constant({}, 0x{:08x});", reg_to_name(i0.get_dst(0)), val_u32),
+              comment};
+    }
+    // non-PLAIN_DATA (PIC prologue pointer) — fall through to generic load
   }
+  // fall back to standard loads
+  return handle_generic_load(i0, instr_str);
 }
 
 Mips2C_Line handle_generic_store(Mips2C_Output& /*out*/,
