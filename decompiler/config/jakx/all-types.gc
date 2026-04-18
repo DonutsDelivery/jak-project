@@ -4774,6 +4774,7 @@
 
 
   
+;; vehicle-wheel moved to after rigid-body-object definition (L40041+)
 #|(deftype vehicle-wheel (rigid-body-object)
   ((camera-dist float  :offset-assert 288)
    )
@@ -40083,7 +40084,25 @@
     (rigid-body-object-method-88 () int) ;; 88
     )
   )
-  
+
+
+
+;; vehicle-wheel moved here from L4777 to resolve rigid-body-object forward-ref
+(deftype vehicle-wheel (rigid-body-object)
+  ((camera-dist float  :offset-assert 288)
+   )
+  :method-count-assert 93
+  :size-assert         #x124
+  :flag-assert         #x5d00a00124
+  (:state-methods
+    explode ;; 89
+    fade-out ;; 90
+    die ;; 91
+    )
+  (:methods
+    (vehicle-wheel-method-92 () none) ;; 92
+    )
+  )
 
 
 (deftype rigid-body-queue (structure)
@@ -50982,8 +51001,58 @@
 ;; editable-h                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; editable-flag enum — used in editable-* field types
+(defenum editable-flag
+  :type uint32
+  :bitfield #t
+  (selected)
+  (no-save)
+  (orient)
+  (x)
+  (y)
+  (z)
+  (no-plane-snap)
+  (no-update)
+  (mark)
+  (top-set)
+  (bot-set)
+  (changed)
+  )
 
-  
+;; editable-command enum — used in editable-array.target-mode / .target-command / .command
+(defenum editable-command
+  :type uint32
+  (none 0)
+  )
+
+;; editable-filter enum — used in editable-region.filter and editable-array.filter
+(defenum editable-filter
+  :type uint32
+  :bitfield #t
+  (none 0)
+  )
+
+;; editable stub — parent type
+(deftype editable (basic)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; editable-array stub — used as field type in editable-player etc.
+(deftype editable-array (basic)
+  ()
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; editable-plane/point forward-declared (children defined later in this section)
+(declare-type editable-plane editable)
+(declare-type editable-point editable)
+
+
 (deftype editable-region (basic)
   ((changed   symbol  :offset-assert 4) ;; guessed by decompiler
    (locked    symbol  :offset-assert 8) ;; guessed by decompiler
@@ -51209,20 +51278,20 @@
 
   
 #|(deftype editable-player (process-drawable)
-  ((current           editable-array           :offset-assert 248) ;; guessed by decompiler
+  ((current           editable-array           :offset-assert 248)
    (current-command   uint32                   :offset-assert 252)
-   (select-command    function                 :offset-assert 256) ;; guessed by decompiler
+   (select-command    function                 :offset-assert 256)
    (drag-command      uint32                   :offset-assert 260)
-   (extra-command     function                 :offset-assert 264) ;; guessed by decompiler
+   (extra-command     function                 :offset-assert 264)
    (left-handed       basic                    :offset-assert 268)
    (light-names       basic                    :offset-assert 272)
-   (external-cam-mode symbol                   :offset-assert 276) ;; guessed by decompiler
-   (command           editable-command 6       :offset-assert 280) ;; guessed by decompiler
-   (close-menu-time   uint64                   :offset-assert 304) ;; time-frame
+   (external-cam-mode symbol                   :offset-assert 276)
+   (command           editable-command 6       :offset-assert 280)
+   (close-menu-time   time-frame               :offset-assert 304)
    (mouse-pos         vector           :inline :offset-assert 320)
    (mouse-end         vector           :inline :offset-assert 336)
    (manipulator       manipulator      :inline :offset-assert 352)
-   (mouse-box         vector           2       :offset-assert 528) ;; guessed by decompiler
+   (mouse-box         vector           2       :offset-assert 528)
    (mouse-hit         vector           :inline :offset-assert 560)
    (mouse-normal      vector           :inline :offset-assert 576)
    (float-variable    float                    :offset-assert 592)
@@ -58607,13 +58676,8 @@
   :flag-assert         #x900000004
   )
 
-;; editable-array stub
-(deftype editable-array (basic)
-  ()
-  :method-count-assert 9
-  :size-assert         #x4
-  :flag-assert         #x900000004
-  )
+;; editable-array stub — moved up to L51044 (was here)
+;; (deftype editable-array (basic) () :method-count-assert 9 :size-assert #x4 :flag-assert #x900000004)
 
 ;; drawable-tree-tfrag-shared now defined earlier with proper parent
 ;; drawable-tree-tfrag (see tfrag-near block).
@@ -58902,7 +58966,7 @@
 ;; (define-extern trail-conn-search object) ;; clobbers active deftype
 (define-extern update-engine-mix-state-work object)
 ;;(define-extern vehicle-hud-view-1 object)
-(define-extern vehicle-wheel object)
+;; (define-extern vehicle-wheel object) ;; activated as deftype
 (define-extern v-wpn-red-mine-launcher object)
 (define-extern v-wpn-red-tractor-beam object)
 (define-extern v-wpn-yellow-default-gun object)
@@ -59662,13 +59726,8 @@
   :flag-assert         #x900000004
   )
 
-;; editable stub
-(deftype editable (basic)
-  ()
-  :method-count-assert 9
-  :size-assert         #x4
-  :flag-assert         #x900000004
-  )
+;; editable stub — moved up to L51036 (was here)
+;; (deftype editable (basic) () :method-count-assert 9 :size-assert #x4 :flag-assert #x900000004)
 
 ;; vehicle-reticle-on-me stub — already defined above? check for dups
 
