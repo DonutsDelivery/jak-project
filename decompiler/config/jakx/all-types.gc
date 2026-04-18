@@ -54174,9 +54174,9 @@
 
 (deftype raptor (net-enemy)
   ()
-  :method-count-assert 91
+  :method-count-assert 92
   :size-assert         #x368
-  :flag-assert         #x5b02e00368
+  :flag-assert         #x5c02e00368
   (:state-methods
     startup        ;; 59 (override)
     following-path ;; 87
@@ -58915,7 +58915,7 @@
    (name       symbol                    :offset-assert 8)
    (process    process-drawable          :offset-assert 12)
    (path-ptr   (pointer float)           :offset-assert 16) ;; jakx extra vs jak3
-   (curve      curve             :inline :offset-assert 20)
+   (curve      uint8 20                  :offset 20)        ;; curve :inline proxy (20 not 16-aligned)
    )
   :method-count-assert 33
   :size-assert         #x28

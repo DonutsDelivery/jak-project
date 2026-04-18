@@ -39067,5 +39067,47 @@
     [6, "a1", "process"],
     [11, "v1", "int"],
     [14, "a2", "(pointer uint32)"]
+  ],
+  // font-context new: 6 extra args in GPRs; t1 carries float z in int reg — force float so mtc1/swc1 emits direct assign
+  "(method 0 font-context)": [
+    [0, "a2", "pointer"],
+    [1, "a3", "int"],
+    [2, "t0", "int"],
+    [3, "t1", "float"],
+    [4, "t2", "font-color"],
+    [5, "t3", "font-flags"]
+  ],
+  // font-context-method-14: second int arg (y-coord) in a2
+  "(method 14 font-context)": [
+    [3, "a2", "int"]
+  ],
+  // font-context-method-15: arg is int (pixel count), asm does mtc1+cvt.s.w (i2f)
+  "(method 15 font-context)": [
+    [0, "a1", "int"]
+  ],
+  // font-context-method-16: font-color stored as raw float bits — force a1 float so mtc1 emits direct assign
+  "(method 16 font-context)": [
+    [0, "a1", "float"]
+  ],
+  // font-context setter methods 21/22/26/27/28: type-prop loses a0/a1 at entry
+  "(method 21 font-context)": [
+    [0, "a0", "font-context"],
+    [0, "a1", "int"]
+  ],
+  "(method 22 font-context)": [
+    [0, "a0", "font-context"],
+    [0, "a1", "int"]
+  ],
+  "(method 26 font-context)": [
+    [0, "a0", "font-context"],
+    [0, "a1", "float"]
+  ],
+  "(method 27 font-context)": [
+    [0, "a0", "font-context"],
+    [0, "a1", "uint"]
+  ],
+  "(method 28 font-context)": [
+    [0, "a0", "font-context"],
+    [0, "a1", "uint"]
   ]
 }

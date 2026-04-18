@@ -1,11 +1,6 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; name: font-h.gc
-;; name in dgo: font-h
-;; dgos: GAME
-
-;; +++font-flags
 (defenum font-flags
   :type uint32
   :bitfield #t
@@ -20,10 +15,7 @@
   (font-flag-9 9)
   (font-flag-11 11)
   )
-;; ---font-flags
 
-
-;; +++font-color
 (defenum font-color
   :type uint32
   (default 0)
@@ -72,88 +64,84 @@
   (font-color-43 43)
   (font-color-44 44)
   )
-;; ---font-color
 
-
-;; added type
-(deftype draw-string-result (uint64)
-  ((length float :offset 0)
-   (b float :offset 32))
-  )
-
-(declare-type font-context basic)
-(define-extern draw-string-xy (function string dma-buffer int int font-color font-flags draw-string-result))
-(define-extern draw-string (function string dma-buffer font-context draw-string-result))
-
-;; DECOMP BEGINS
-
-;; font-char-effect: used by *font-char-effect* machinery in jakx.
+;; definition of type font-char-effect
 (deftype font-char-effect (structure)
   ((scale-x  float)
    (scale-y  float)
    (angle    float)
    (trans-x  float)
    (trans-y  float)
-   (color    vector4w :inline :offset 32)
+   (color    vector4w  :inline)
    )
   )
 
-
-(deftype char-verts (structure)
-  ((pos     vector  4 :inline)
-   (color   vector  4 :inline)
-   (tex-st  vector  4 :inline)
-   )
+;; definition for method 3 of type font-char-effect
+(defmethod inspect ((this font-char-effect))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'font-char-effect)
+  (format #t "~1Tscale-x: ~f~%" (-> this scale-x))
+  (format #t "~1Tscale-y: ~f~%" (-> this scale-y))
+  (format #t "~1Tangle: ~f~%" (-> this angle))
+  (format #t "~1Ttrans-x: ~f~%" (-> this trans-x))
+  (format #t "~1Ttrans-y: ~f~%" (-> this trans-y))
+  (format #t "~1Tcolor: #<vector4w @ #x~X>~%" (-> this color))
+  (label cfg-4)
+  this
   )
 
-
+;; definition of type char-color
 (deftype char-color (structure)
   ((color  rgba  4)
    )
   )
 
+;; definition for method 3 of type char-color
+(defmethod inspect ((this char-color))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'char-color)
+  (format #t "~1Tcolor[4] @ #x~X~%" (-> this color))
+  (label cfg-4)
+  this
+  )
 
-;; The real jakx font-context layout. This is substantially different from jak3's:
-;; - jakx puts flags at offset 16 (before origin), origin at 32.
-;; - jakx has no max-x field at any offset; we overlay max-x on the unused
-;;   meters-per-texel slot so callers ported from jak3 keep working.
-;; Layout must stay byte-exact because the (currently jak3) mips2c draw-string-asm
-;; reads these offsets directly.
+;; definition of type font-context
 (deftype font-context (basic)
-  ((y-spacing        float            :offset 4)
-   (alpha            float            :offset 8)
-   (ialpha           int32            :offset 12)
-   (flags            font-flags       :offset 16)
-   (origin           vector  :inline  :offset 32)
-   (calc-origin      vector  :inline  :offset 48)
-   (strip-gif        vector  :inline  :offset 64)
-   (calc-mat         matrix  :inline  :offset 80)
-   (width            float            :offset 144)
-   (height           float            :offset 148)
-   (meters-per-texel float            :offset 152)
-   (max-x            float            :offset 152) ;; overlay on meters-per-texel (jak3-era code path)
-   (start-line       uint32           :offset 156)
-   (scaled-width     float            :offset 160)
-   (scaled-height    float            :offset 164)
-   (projection       float            :offset 168)
-   (scale            float            :offset 172)
-   (mat              matrix           :offset 176)
-   (effect-time      float            :offset 180)
-   ;; Real jakx stores color/effect/effect-color as three bytes at 184/185/186.
-   ;; Ported jak3-era code accesses (-> ctx color) as the 32-bit font-color
-   ;; enum. We widen color to 32 bits here (spanning 184-187); the mips2c
-   ;; path only reads the low byte so this is compatible. The effect fields
-   ;; stay accessible via :overlay-at for any future port that needs them.
-   (color            font-color       :offset 184)
-   (color-byte       uint8            :offset 184)
-   (effect           uint8            :offset 185)
-   (effect-color     uint8            :offset 186)
+  ((y-spacing         float)
+   (alpha             float)
+   (ialpha            int32)
+   (flags             font-flags)
+   (origin            vector  :inline)
+   (calc-origin       vector  :inline)
+   (strip-gif         vector  :inline)
+   (calc-mat          matrix  :inline)
+   (width             float)
+   (height            float)
+   (meters-per-texel  float)
+   (start-line        uint32)
+   (scaled-width      float)
+   (scaled-height     float)
+   (projection        float)
+   (scale             float)
+   (mat               matrix)
+   (effect-time       float)
+   (color             font-color)
+   (effect            uint8)
+   (effect-color      uint8)
+   (max-x             float)
    )
   (:methods
-    ;; Real jakx constructor is 2-arg; we keep a 7-arg compatibility constructor
-    ;; so the many jak3-style callsites still work until they're converted to
-    ;; the 2-arg-plus-setter-chain idiom.
     (new (symbol type matrix int int float font-color font-flags) _type_)
+    (font-context-method-9 (font-context matrix) font-context)
+    (font-context-method-10 (font-context int int) font-context)
+    (font-context-method-11 (font-context int) font-context)
+    (font-context-method-12 (font-context float) font-context)
     (set-mat! (font-context matrix) font-context)
     (set-origin! (font-context int int) font-context)
     (set-depth! (font-context int) font-context)
@@ -166,289 +154,540 @@
     (set-start-line! (font-context uint) font-context)
     (set-scale! (font-context float) font-context)
     (set-alpha! (font-context float) font-context)
+    (font-context-method-25 () none)
+    (font-context-method-26 (font-context float) font-context)
+    (font-context-method-27 (font-context uint) font-context)
+    (font-context-method-28 (font-context uint) font-context)
+    (font-context-method-29 () none)
     )
   )
 
+;; definition for method 3 of type font-context
+(defmethod inspect ((this font-context))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Ty-spacing: ~f~%" (-> this y-spacing))
+  (format #t "~1Talpha: ~f~%" (-> this alpha))
+  (format #t "~1Tialpha: ~D~%" (-> this ialpha))
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (format #t "~1Torigin: #<vector @ #x~X>~%" (-> this origin))
+  (format #t "~1Tcalc-origin: #<vector @ #x~X>~%" (-> this calc-origin))
+  (format #t "~1Tstrip-gif: #<vector @ #x~X>~%" (-> this strip-gif))
+  (format #t "~1Tcalc-mat: #<matrix @ #x~X>~%" (-> this calc-mat))
+  (format #t "~1Twidth: ~f~%" (-> this width))
+  (format #t "~1Theight: ~f~%" (-> this height))
+  (format #t "~1Tmeters-per-texel: ~f~%" (-> this meters-per-texel))
+  (format #t "~1Tstart-line: ~D~%" (-> this start-line))
+  (format #t "~1Tscaled-width: ~f~%" (-> this scaled-width))
+  (format #t "~1Tscaled-height: ~f~%" (-> this scaled-height))
+  (format #t "~1Tprojection: ~f~%" (-> this projection))
+  (format #t "~1Tscale: ~f~%" (-> this scale))
+  (format #t "~1Tmat: #<matrix @ #x~X>~%" (-> this mat))
+  (format #t "~1Teffect-time: ~f~%" (-> this effect-time))
+  (format #t "~1Tcolor: ~D~%" (-> this color))
+  (format #t "~1Teffect: ~D~%" (-> this effect))
+  (format #t "~1Teffect-color: ~D~%" (-> this effect-color))
+  (label cfg-4)
+  this
+  )
 
+;; definition for method 13 of type font-context
 (defmethod set-mat! ((this font-context) (arg0 matrix))
   (set! (-> this mat) arg0)
   this
   )
 
+;; definition for method 14 of type font-context
 (defmethod set-origin! ((this font-context) (arg0 int) (arg1 int))
   (set! (-> this origin x) (the float arg0))
   (set! (-> this origin y) (the float arg1))
   this
   )
 
+;; definition for method 15 of type font-context
 (defmethod set-depth! ((this font-context) (arg0 int))
   (set! (-> this origin z) (the float arg0))
   this
   )
 
+;; definition for method 16 of type font-context
 (defmethod set-w! ((this font-context) (arg0 float))
   (set! (-> this origin w) arg0)
   this
   )
 
+;; definition for method 17 of type font-context
 (defmethod set-width! ((this font-context) (arg0 int))
   (set! (-> this width) (the float arg0))
   this
   )
 
+;; definition for method 18 of type font-context
 (defmethod set-height! ((this font-context) (arg0 int))
   (set! (-> this height) (the float arg0))
   this
   )
 
+;; definition for method 19 of type font-context
 (defmethod set-projection! ((this font-context) (arg0 float))
   (set! (-> this projection) arg0)
   this
   )
 
+;; definition for method 20 of type font-context
 (defmethod set-color! ((this font-context) (arg0 font-color))
   (set! (-> this color) arg0)
   this
   )
 
+;; definition for method 21 of type font-context
 (defmethod set-flags! ((this font-context) (arg0 font-flags))
   (set! (-> this flags) arg0)
   this
   )
 
+;; definition for method 22 of type font-context
 (defmethod set-start-line! ((this font-context) (arg0 uint))
   (set! (-> this start-line) arg0)
   this
   )
 
+;; definition for method 23 of type font-context
+;; ERROR: function has no local vars. Cannot decompile.
 (defmethod set-scale! ((this font-context) (arg0 float))
   (set! (-> this scale) arg0)
   this
   )
 
+;; definition for method 24 of type font-context
+;; ERROR: function has no local vars. Cannot decompile.
 (defmethod set-alpha! ((this font-context) (arg0 float))
   (set! (-> this alpha) arg0)
   this
   )
 
+;; definition for method 25 of type font-context
+;; ERROR: function has no local vars. Cannot decompile.
+
+;; definition for method 26 of type font-context
+(defmethod font-context-method-26 ((this font-context) (arg0 float))
+  (set! (-> this meters-per-texel) arg0)
+  this
+  )
+
+;; definition for method 27 of type font-context
+(defmethod font-context-method-27 ((this font-context) (arg0 uint))
+  (set! (-> this effect) arg0)
+  this
+  )
+
+;; definition for method 28 of type font-context
+(defmethod font-context-method-28 ((this font-context) (arg0 uint))
+  (set! (-> this effect-color) arg0)
+  this
+  )
+
+;; definition for method 29 of type font-context
+;; ERROR: function has no local vars. Cannot decompile.
+
+;; definition for method 0 of type font-context
 (defmethod new font-context ((allocation symbol)
-                             (type-to-make type)
-                             (arg0 matrix)
-                             (arg1 int)
-                             (arg2 int)
-                             (arg3 float)
-                             (arg4 font-color)
-                             (arg5 font-flags)
-                             )
-  "Compatibility constructor — takes jak3-style 7 args and initialises the
-   new jakx layout. Real jakx uses a 2-arg new + setter chain; this wrapper
-   exists so un-converted callsites still work."
+                           (type-to-make type)
+                           (arg0 matrix)
+                           (arg1 int)
+                           (arg2 int)
+                           (arg3 float)
+                           (arg4 font-color)
+                           (arg5 font-flags)
+                           )
   (let ((v0-0 (object-new allocation type-to-make (the-as int (-> type-to-make size)))))
+    (set! (-> v0-0 flags) arg5)
     (set! (-> v0-0 mat) arg0)
-    (set! (-> v0-0 origin x) (the float arg1))
-    (set! (-> v0-0 origin y) (the float arg2))
-    (cond
-      ((= arg3 0.0)
-       (set! (-> v0-0 origin z) (-> *math-camera* isometric trans z))
-       )
-      (else
-        (set! (-> v0-0 origin z) arg3)
-        )
+    (let ((v1-4 v0-0))
+      (set! (-> v1-4 origin x) (the float arg1))
+      (set! (-> v1-4 origin y) (the float arg2))
       )
-    (set! (-> v0-0 origin w) 1.0)
+    (let ((v1-5 v0-0))
+      (set! (-> v1-5 origin z) arg3)
+      )
+    (let ((v1-6 v0-0))
+      (set! (-> v1-6 origin w) 1.0)
+      )
     (set-width! v0-0 512)
     (set-height! v0-0 416)
-    (set! (-> v0-0 projection) 1.0)
+    (let ((v1-9 v0-0))
+      (set! (-> v1-9 projection) 1.0)
+      )
     (set! (-> v0-0 color) arg4)
-    (set! (-> v0-0 flags) arg5)
-    (set! (-> v0-0 start-line) (the-as uint 0))
+    (let ((a0-5 v0-0))
+      (set! (-> a0-5 start-line) (the-as uint 0))
+      )
     (set-scale! v0-0 1.0)
-    (set! (-> v0-0 alpha) 1.0)
-    (set! (-> v0-0 y-spacing) 0.0)
-    (set! (-> v0-0 max-x) 0.0)
+    (let ((v1-13 v0-0))
+      (set! (-> v1-13 alpha) 1.0)
+      )
+    (let ((v1-14 v0-0))
+      (set! (-> v1-14 y-spacing) 32.0)
+      )
+    (let ((v1-15 v0-0))
+      (set! (-> v1-15 meters-per-texel) 200.0)
+      )
+    (let ((a0-10 v0-0))
+      (set! (-> a0-10 effect) (the-as uint 0))
+      )
+    (let ((a0-11 v0-0))
+      (set! (-> a0-11 effect-color) (the-as uint 0))
+      )
+    (let ((v1-18 v0-0))
+      (set! (-> v1-18 effect-time) (the float 0.0))
+      )
     v0-0
     )
   )
 
-
-(define *font-default-matrix* (new 'static 'matrix
-                                :rvec (new 'static 'vector :x 1.0)
-                                :uvec (new 'static 'vector :y 1.0)
-                                :fvec (new 'static 'vector :z 1.0)
-                                :trans (new 'static 'vector :x -256.0 :y -208.0 :w 1.0)
-                                )
-        )
-
-(define *font-default-matrix-3d* (new 'static 'matrix
-                                   :rvec (new 'static 'vector :x 1.0)
-                                   :uvec (new 'static 'vector :y 1.0)
-                                   :fvec (new 'static 'vector :z 1.0)
-                                   :trans (new 'static 'vector :w 1.0)
-                                   )
-        )
-
-
-;; Packet shapes used by font rendering. Layouts from all-types.gc.
+;; definition of type char-packet
 (deftype char-packet (structure)
-  ((tag    dma-gif-packet :inline)
-   (font   dma-packet     :inline)
-   (color0 vector         :inline)
-   (st0    vector         :inline)
-   (pos0   vector         :inline)
-   (st1    vector         :inline)
-   (pos1   vector         :inline)
-   (color2 vector         :inline)
-   (st2    vector         :inline)
-   (pos2   vector         :inline)
-   (st3    vector         :inline)
-   (pos3   vector         :inline)
+  ((tag     dma-gif-packet  :inline)
+   (font    dma-packet      :inline)
+   (color0  vector          :inline)
+   (st0     vector          :inline)
+   (pos0    vector          :inline)
+   (st1     vector          :inline)
+   (pos1    vector          :inline)
+   (color2  vector          :inline)
+   (st2     vector          :inline)
+   (pos2    vector          :inline)
+   (st3     vector          :inline)
+   (pos3    vector          :inline)
    )
   )
 
+;; definition for method 3 of type char-packet
+(defmethod inspect ((this char-packet))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'char-packet)
+  (format #t "~1Ttag: #<dma-gif-packet @ #x~X>~%" (-> this tag))
+  (format #t "~1Tfont: #<dma-packet @ #x~X>~%" (-> this font))
+  (format #t "~1Tcolor0: #<vector @ #x~X>~%" (-> this color0))
+  (format #t "~1Tst0: #<vector @ #x~X>~%" (-> this st0))
+  (format #t "~1Tpos0: #<vector @ #x~X>~%" (-> this pos0))
+  (format #t "~1Tst1: #<vector @ #x~X>~%" (-> this st1))
+  (format #t "~1Tpos1: #<vector @ #x~X>~%" (-> this pos1))
+  (format #t "~1Tcolor2: #<vector @ #x~X>~%" (-> this color2))
+  (format #t "~1Tst2: #<vector @ #x~X>~%" (-> this st2))
+  (format #t "~1Tpos2: #<vector @ #x~X>~%" (-> this pos2))
+  (format #t "~1Tst3: #<vector @ #x~X>~%" (-> this st3))
+  (format #t "~1Tpos3: #<vector @ #x~X>~%" (-> this pos3))
+  (label cfg-4)
+  this
+  )
 
+;; definition of type char-ad-packet
 (deftype char-ad-packet (structure)
-  ((tag  dma-gif-packet :inline)
-   (font dma-packet     :inline)
+  ((tag   dma-gif-packet  :inline)
+   (font  dma-packet      :inline)
    )
   )
 
+;; definition for method 3 of type char-ad-packet
+(defmethod inspect ((this char-ad-packet))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'char-ad-packet)
+  (format #t "~1Ttag: #<dma-gif-packet @ #x~X>~%" (-> this tag))
+  (format #t "~1Tfont: #<dma-packet @ #x~X>~%" (-> this font))
+  (label cfg-4)
+  this
+  )
 
+;; definition of type char-2d-packet
 (deftype char-2d-packet (structure)
-  ((tag   dma-gif-packet :inline)
-   (font  dma-packet     :inline)
-   (color vector         :inline)
-   (st0   vector         :inline)
-   (pos0  vector         :inline)
-   (st1   vector         :inline)
-   (pos1  vector         :inline)
+  ((tag    dma-gif-packet  :inline)
+   (font   dma-packet      :inline)
+   (color  vector          :inline)
+   (st0    vector          :inline)
+   (pos0   vector          :inline)
+   (st1    vector          :inline)
+   (pos1   vector          :inline)
    )
   )
 
+;; definition for method 3 of type char-2d-packet
+(defmethod inspect ((this char-2d-packet))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'char-2d-packet)
+  (format #t "~1Ttag: #<dma-gif-packet @ #x~X>~%" (-> this tag))
+  (format #t "~1Tfont: #<dma-packet @ #x~X>~%" (-> this font))
+  (format #t "~1Tcolor: #<vector @ #x~X>~%" (-> this color))
+  (format #t "~1Tst0: #<vector @ #x~X>~%" (-> this st0))
+  (format #t "~1Tpos0: #<vector @ #x~X>~%" (-> this pos0))
+  (format #t "~1Tst1: #<vector @ #x~X>~%" (-> this st1))
+  (format #t "~1Tpos1: #<vector @ #x~X>~%" (-> this pos1))
+  (label cfg-4)
+  this
+  )
 
+;; definition of type char-2d-packet-no-packed
 (deftype char-2d-packet-no-packed (structure)
-  ((tag    dma-gif-packet :inline)
-   (color0 uint64)
-   (st0    uint64)
-   (pos0   uint64)
-   (st1    uint64)
-   (pos1   uint64)
-   (color1 uint64)
+  ((tag     dma-gif-packet  :inline)
+   (color0  uint64)
+   (st0     uint64)
+   (pos0    uint64)
+   (st1     uint64)
+   (pos1    uint64)
+   (color1  uint64)
    )
   )
 
+;; definition for method 3 of type char-2d-packet-no-packed
+(defmethod inspect ((this char-2d-packet-no-packed))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'char-2d-packet-no-packed)
+  (format #t "~1Ttag: #<dma-gif-packet @ #x~X>~%" (-> this tag))
+  (format #t "~1Tcolor0: ~D~%" (-> this color0))
+  (format #t "~1Tst0: ~D~%" (-> this st0))
+  (format #t "~1Tpos0: ~D~%" (-> this pos0))
+  (format #t "~1Tst1: ~D~%" (-> this st1))
+  (format #t "~1Tpos1: ~D~%" (-> this pos1))
+  (format #t "~1Tcolor1: ~D~%" (-> this color1))
+  (label cfg-4)
+  this
+  )
 
+;; definition of type char-packet-no-packed
 (deftype char-packet-no-packed (structure)
-  ((tag    dma-gif-packet :inline)
-   (prim   uint64)
-   (color0 uint64)
-   (st0    uint64)
-   (pos0   uint64)
-   (st1    uint64)
-   (pos1   uint64)
-   (st2    uint64)
-   (pos2   uint64)
-   (st3    uint64)
-   (pos3   uint64)
+  ((tag     dma-gif-packet  :inline)
+   (prim    uint64)
+   (color0  uint64)
+   (st0     uint64)
+   (pos0    uint64)
+   (st1     uint64)
+   (pos1    uint64)
+   (st2     uint64)
+   (pos2    uint64)
+   (st3     uint64)
+   (pos3    uint64)
    )
   )
 
+;; definition for method 3 of type char-packet-no-packed
+(defmethod inspect ((this char-packet-no-packed))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'char-packet-no-packed)
+  (format #t "~1Ttag: #<dma-gif-packet @ #x~X>~%" (-> this tag))
+  (format #t "~1Tprim: ~D~%" (-> this prim))
+  (format #t "~1Tcolor0: ~D~%" (-> this color0))
+  (format #t "~1Tst0: ~D~%" (-> this st0))
+  (format #t "~1Tpos0: ~D~%" (-> this pos0))
+  (format #t "~1Tst1: ~D~%" (-> this st1))
+  (format #t "~1Tpos1: ~D~%" (-> this pos1))
+  (format #t "~1Tst2: ~D~%" (-> this st2))
+  (format #t "~1Tpos2: ~D~%" (-> this pos2))
+  (format #t "~1Tst3: ~D~%" (-> this st3))
+  (format #t "~1Tpos3: ~D~%" (-> this pos3))
+  (label cfg-4)
+  this
+  )
 
+;; definition of type char-3d-packet
 (deftype char-3d-packet (structure)
-  ((tag    dma-gif-packet :inline)
-   (font   dma-packet     :inline)
-   (color  vector         :inline)
-   (st0    vector         :inline)
-   (pos0   vector         :inline)
-   (st1    vector         :inline)
-   (pos1   vector         :inline)
-   (color2 vector         :inline)
-   (st2    vector         :inline)
-   (pos2   vector         :inline)
-   (st3    vector         :inline)
-   (pos3   vector         :inline)
+  ((tag     dma-gif-packet  :inline)
+   (font    dma-packet      :inline)
+   (color   vector          :inline)
+   (st0     vector          :inline)
+   (pos0    vector          :inline)
+   (st1     vector          :inline)
+   (pos1    vector          :inline)
+   (color2  vector          :inline)
+   (st2     vector          :inline)
+   (pos2    vector          :inline)
+   (st3     vector          :inline)
+   (pos3    vector          :inline)
    )
   )
 
+;; definition for method 3 of type char-3d-packet
+(defmethod inspect ((this char-3d-packet))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'char-3d-packet)
+  (format #t "~1Ttag: #<dma-gif-packet @ #x~X>~%" (-> this tag))
+  (format #t "~1Tfont: #<dma-packet @ #x~X>~%" (-> this font))
+  (format #t "~1Tcolor: #<vector @ #x~X>~%" (-> this color))
+  (format #t "~1Tst0: #<vector @ #x~X>~%" (-> this st0))
+  (format #t "~1Tpos0: #<vector @ #x~X>~%" (-> this pos0))
+  (format #t "~1Tst1: #<vector @ #x~X>~%" (-> this st1))
+  (format #t "~1Tpos1: #<vector @ #x~X>~%" (-> this pos1))
+  (format #t "~1Tcolor2: #<vector @ #x~X>~%" (-> this color2))
+  (format #t "~1Tst2: #<vector @ #x~X>~%" (-> this st2))
+  (format #t "~1Tpos2: #<vector @ #x~X>~%" (-> this pos2))
+  (format #t "~1Tst3: #<vector @ #x~X>~%" (-> this st3))
+  (format #t "~1Tpos3: #<vector @ #x~X>~%" (-> this pos3))
+  (label cfg-4)
+  this
+  )
 
-;; The real jakx font-work layout. Significantly larger than jak3's.
-;; Fields referenced by currently-imported ported code: color-table (74 entries),
-;; color-shadow. Everything else is initialised by the (still jak3) mips2c draw-string-asm.
+;; definition of type font-work
 (deftype font-work (structure)
-  ((char-2d-tmpl           dma-gif-packet :inline)
-   (char-2d-no-packed-tmpl dma-gif-packet :inline)
-   (char-3d-tmpl           dma-gif-packet :inline)
-   (char-ad-tmpl           dma-gif-packet :inline)
-   (char-no-packed-tmpl    dma-gif-packet :inline)
-   (char-tmpl              dma-gif-packet :inline)
-   (small-font-0-tmpl      uint64         2)
-   (small-font-1-tmpl      uint64         2)
-   (small-font-2-tmpl      uint64         2)
-   (small-font-3-tmpl      uint64         2)
-   (large-font-0-tmpl      uint64         2)
-   (large-font-1-tmpl      uint64         2)
-   (large-font-2-tmpl      uint64         2)
-   (large-font-3-tmpl      uint64         2)
-   (size1-small            vector         :inline)
-   (size2-small            vector         :inline)
-   (size3-small            vector         :inline)
-   (size1-large            vector         :inline)
-   (size2-large            vector         :inline)
-   (size3-large            vector         :inline)
-   (size-st1               vector         :inline)
-   (size-st2               vector         :inline)
-   (size-st3               vector         :inline)
-   (origin-right           vector         :inline)
-   (origin-center          vector         :inline)
-   (save                   vector         :inline)
-   (save-color             vector         :inline)
-   (save-color2            vector         :inline)
-   (current-color          vector4w       :inline)
-   (current-colorq         uint64                 :overlay-at current-color)
-   (current-color2         vector4w       :inline)
-   (current-color2q        uint64                 :overlay-at current-color2)
-   (effect-colors          vector4w     2 :inline)
-   (color-shadow           vector4w       :inline)
-   (color-outline          vector4w       :inline)
-   (justify                vector     256 :inline)
-   (hvdf-offset            vector         :inline)
-   (hvdf-shadow            vector         :inline)
-   (hvdf-outline           vector       4 :inline)
-   (hvdf-outline0          vector         :inline :overlay-at (-> hvdf-outline 0))
-   (hvdf-outline1          vector         :inline :overlay-at (-> hvdf-outline 1))
-   (hvdf-outline2          vector         :inline :overlay-at (-> hvdf-outline 2))
-   (hvdf-outline3          vector         :inline :overlay-at (-> hvdf-outline 3))
-   (save-pos0              vector         :inline)
-   (save-pos1              vector         :inline)
-   (save-pos2              vector         :inline)
-   (save-pos3              vector         :inline)
-   (color-table            char-color  74 :inline)
-   (current-font-0-tmpl    uint64         2)
-   (current-font-1-tmpl    uint64         2)
-   (current-font-2-tmpl    uint64         2)
-   (current-font-3-tmpl    uint64         2)
-   (screen-min             vector2w       :inline)
-   (screen-max             vector2w       :inline)
-   (last-color             uint8)
-   (save-last-color        uint8)
-   (buf                    basic :offset 6172)
-   (str-ptr                uint32)
+  ((char-2d-tmpl            dma-gif-packet  :inline)
+   (char-2d-no-packed-tmpl  dma-gif-packet  :inline)
+   (char-3d-tmpl            dma-gif-packet  :inline)
+   (char-ad-tmpl            dma-gif-packet  :inline)
+   (char-no-packed-tmpl     dma-gif-packet  :inline)
+   (char-tmpl               dma-gif-packet  :inline)
+   (small-font-0-tmpl       uint64          2)
+   (small-font-1-tmpl       uint64          2)
+   (small-font-2-tmpl       uint64          2)
+   (small-font-3-tmpl       uint64          2)
+   (large-font-0-tmpl       uint64          2)
+   (large-font-1-tmpl       uint64          2)
+   (large-font-2-tmpl       uint64          2)
+   (large-font-3-tmpl       uint64          2)
+   (size1-small             vector          :inline)
+   (size2-small             vector          :inline)
+   (size3-small             vector          :inline)
+   (size1-large             vector          :inline)
+   (size2-large             vector          :inline)
+   (size3-large             vector          :inline)
+   (size-st1                vector          :inline)
+   (size-st2                vector          :inline)
+   (size-st3                vector          :inline)
+   (origin-right            vector          :inline)
+   (origin-center           vector          :inline)
+   (save                    vector          :inline)
+   (save-color              vector          :inline)
+   (save-color2             vector          :inline)
+   (current-color           vector4w        :inline)
+   (current-colorq          uint64                  :overlay-at (-> current-color data 0))
+   (current-color2          vector4w        :inline)
+   (current-color2q         uint64                  :overlay-at (-> current-color2 data 0))
+   (effect-colors           vector4w        2 :inline)
+   (color-shadow            vector4w        :inline)
+   (color-outline           vector4w        :inline)
+   (justify                 vector          256 :inline)
+   (hvdf-offset             vector          :inline)
+   (hvdf-shadow             vector          :inline)
+   (hvdf-outline            vector          4 :inline)
+   (hvdf-outline0           vector          :inline :overlay-at (-> hvdf-outline 0))
+   (hvdf-outline1           vector          :inline :overlay-at (-> hvdf-outline 1))
+   (hvdf-outline2           vector          :inline :overlay-at (-> hvdf-outline 2))
+   (hvdf-outline3           vector          :inline :overlay-at (-> hvdf-outline 3))
+   (save-pos0               vector          :inline)
+   (save-pos1               vector          :inline)
+   (save-pos2               vector          :inline)
+   (save-pos3               vector          :inline)
+   (color-table             char-color      74 :inline)
+   (current-font-0-tmpl     uint64          2)
+   (current-font-1-tmpl     uint64          2)
+   (current-font-2-tmpl     uint64          2)
+   (current-font-3-tmpl     uint64          2)
+   (screen-min              vector2w        :inline)
+   (screen-max              vector2w        :inline)
+   (last-color              uint8)
+   (save-last-color         uint8)
+   (buf                     basic)
+   (str-ptr                 uint32)
    )
   (:methods
     (set-context! (_type_ font-context) none)
     )
   )
 
+;; definition for method 3 of type font-work
+(defmethod inspect ((this font-work))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'font-work)
+  (format #t "~1Tchar-2d-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this char-2d-tmpl))
+  (format #t "~1Tchar-2d-no-packed-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this char-2d-no-packed-tmpl))
+  (format #t "~1Tchar-3d-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this char-3d-tmpl))
+  (format #t "~1Tchar-ad-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this char-ad-tmpl))
+  (format #t "~1Tchar-no-packed-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this char-no-packed-tmpl))
+  (format #t "~1Tchar-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this char-tmpl))
+  (format #t "~1Tsmall-font-0-tmpl[2] @ #x~X~%" (-> this small-font-0-tmpl))
+  (format #t "~1Tsmall-font-1-tmpl[2] @ #x~X~%" (-> this small-font-1-tmpl))
+  (format #t "~1Tsmall-font-2-tmpl[2] @ #x~X~%" (-> this small-font-2-tmpl))
+  (format #t "~1Tsmall-font-3-tmpl[2] @ #x~X~%" (-> this small-font-3-tmpl))
+  (format #t "~1Tlarge-font-0-tmpl[2] @ #x~X~%" (-> this large-font-0-tmpl))
+  (format #t "~1Tlarge-font-1-tmpl[2] @ #x~X~%" (-> this large-font-1-tmpl))
+  (format #t "~1Tlarge-font-2-tmpl[2] @ #x~X~%" (-> this large-font-2-tmpl))
+  (format #t "~1Tlarge-font-3-tmpl[2] @ #x~X~%" (-> this large-font-3-tmpl))
+  (format #t "~1Tsize1-small: #<vector @ #x~X>~%" (-> this size1-small))
+  (format #t "~1Tsize2-small: #<vector @ #x~X>~%" (-> this size2-small))
+  (format #t "~1Tsize3-small: #<vector @ #x~X>~%" (-> this size3-small))
+  (format #t "~1Tsize1-large: #<vector @ #x~X>~%" (-> this size1-large))
+  (format #t "~1Tsize2-large: #<vector @ #x~X>~%" (-> this size2-large))
+  (format #t "~1Tsize3-large: #<vector @ #x~X>~%" (-> this size3-large))
+  (format #t "~1Tsize-st1: #<vector @ #x~X>~%" (-> this size-st1))
+  (format #t "~1Tsize-st2: #<vector @ #x~X>~%" (-> this size-st2))
+  (format #t "~1Tsize-st3: #<vector @ #x~X>~%" (-> this size-st3))
+  (format #t "~1Torigin-right: #<vector @ #x~X>~%" (-> this origin-right))
+  (format #t "~1Torigin-center: #<vector @ #x~X>~%" (-> this origin-center))
+  (format #t "~1Tsave: #<vector @ #x~X>~%" (-> this save))
+  (format #t "~1Tsave-color: #<vector @ #x~X>~%" (-> this save-color))
+  (format #t "~1Tsave-color2: #<vector @ #x~X>~%" (-> this save-color2))
+  (format #t "~1Tcurrent-color: #<vector4w @ #x~X>~%" (-> this current-color))
+  (format #t "~1Tcurrent-colorq: ~D~%" (-> this current-colorq))
+  (format #t "~1Tcurrent-color2: #<vector4w @ #x~X>~%" (-> this current-color2))
+  (format #t "~1Tcurrent-color2q: ~D~%" (-> this current-color2q))
+  (format #t "~1Teffect-colors[2] @ #x~X~%" (-> this effect-colors))
+  (format #t "~1Tcolor-shadow: #<vector4w @ #x~X>~%" (-> this color-shadow))
+  (format #t "~1Tcolor-outline: #<vector4w @ #x~X>~%" (-> this color-outline))
+  (format #t "~1Tjustify[256] @ #x~X~%" (-> this justify))
+  (format #t "~1Thvdf-offset: #<vector @ #x~X>~%" (-> this hvdf-offset))
+  (format #t "~1Thvdf-shadow: #<vector @ #x~X>~%" (-> this hvdf-shadow))
+  (format #t "~1Thvdf-outline[4] @ #x~X~%" (-> this hvdf-outline))
+  (format #t "~1Thvdf-outline0: #<vector @ #x~X>~%" (-> this hvdf-outline))
+  (format #t "~1Thvdf-outline1: #<vector @ #x~X>~%" (-> this hvdf-outline1))
+  (format #t "~1Thvdf-outline2: #<vector @ #x~X>~%" (-> this hvdf-outline2))
+  (format #t "~1Thvdf-outline3: #<vector @ #x~X>~%" (-> this hvdf-outline3))
+  (format #t "~1Tsave-pos0: #<vector @ #x~X>~%" (-> this save-pos0))
+  (format #t "~1Tsave-pos1: #<vector @ #x~X>~%" (-> this save-pos1))
+  (format #t "~1Tsave-pos2: #<vector @ #x~X>~%" (-> this save-pos2))
+  (format #t "~1Tsave-pos3: #<vector @ #x~X>~%" (-> this save-pos3))
+  (format #t "~1Tcolor-table[74] @ #x~X~%" (-> this color-table))
+  (format #t "~1Tcurrent-font-0-tmpl[2] @ #x~X~%" (-> this current-font-0-tmpl))
+  (format #t "~1Tcurrent-font-1-tmpl[2] @ #x~X~%" (-> this current-font-1-tmpl))
+  (format #t "~1Tcurrent-font-2-tmpl[2] @ #x~X~%" (-> this current-font-2-tmpl))
+  (format #t "~1Tcurrent-font-3-tmpl[2] @ #x~X~%" (-> this current-font-3-tmpl))
+  (format #t "~1Tscreen-min: #<vector2w @ #x~X>~%" (-> this screen-min))
+  (format #t "~1Tscreen-max: #<vector2w @ #x~X>~%" (-> this screen-max))
+  (format #t "~1Tlast-color: ~D~%" (-> this last-color))
+  (format #t "~1Tsave-last-color: ~D~%" (-> this save-last-color))
+  (format #t "~1Tbuf: ~A~%" (-> this buf))
+  (format #t "~1Tstr-ptr: ~A~%" (-> this str-ptr))
+  (label cfg-4)
+  this
+  )
 
+;; definition for method 9 of type font-work
+(defmethod set-context! ((this font-work) (arg0 font-context))
+  (font-context-method-9 arg0 (-> arg0 mat))
+  (none)
+  )
 
-;; Static *font-work* init — imported verbatim from
-;; decompiler_out/jakx/font-h_disasm.gc (real jakx ROM contents). The previous
-;; hand-port only seeded :char-2d-tmpl / :char-3d-tmpl / :char-tmpl plus the
-;; size-* vectors, leaving the 74-entry color-table all zero. Consequence:
-;; draw-string-asm-packed reads color-table[idx].rgba at offset 4896+idx*16
-;; and gets all-zero RGBA → transparent/invisible pixels. Also the hand-port's
-;; char-tmpl DMA/GIF tag (qwc=#xe, nreg=13) didn't match real jakx (qwc=#xc,
-;; nreg=12), and char-2d-no-packed / char-ad / char-no-packed were missing.
-;; Restoring the real static body fixes all three.
+;; definition for symbol *font-work*, type font-work
 (define *font-work*
   (new 'static 'font-work
     :char-2d-tmpl (new 'static 'dma-gif-packet
@@ -1034,28 +1273,92 @@
     )
   )
 
-
+;; definition for function font-set-tex0
 (defun font-set-tex0 ((arg0 (pointer gs-tex0)) (arg1 texture) (arg2 int) (arg3 int) (arg4 int))
-  (set! (-> arg0 0) (new 'static 'gs-tex0
-                      :tcc #x1
-                      :cld #x1
-                      :cbp arg4
-                      :th (+ (log2 (+ (-> arg1 h) -1)) 1)
-                      :tw (log2 (-> arg1 w))
-                      :tbw (-> arg1 width 0)
-                      :tbp0 (/ arg2 64)
-                      :psm arg3
-                      )
+  (let ((v0-2
+          (logior (logior (logior (logior (logior (logior (shl #x20000004 32) (shr (shl arg3 58) 38)) (shr (shl (/ arg2 64) 50) 50))
+                                          (shr (shl (-> arg1 width 0) 58) 44)
+                                          )
+                                  (shr (shl (log2 (-> arg1 w)) 60) 34)
+                                  )
+                          (shr (shl (+ (log2 (+ (-> arg1 h) -1)) 1) 60) 30)
+                          )
+                  (shr (shl arg4 50) 13)
+                  )
+          )
         )
-  (none)
+    (set! (-> arg0 0) (the-as gs-tex0 v0-2))
+    v0-2
+    )
   )
 
-;; The real jakx color-table has 74 entries, all now statically populated
-;; above. set-font-color is the runtime API for overriding color entries.
-(defun set-font-color ((idx font-color) (clr0 rgba) (clr1 rgba) (clr2 rgba) (clr3 rgba))
-  (set! (-> *font-work* color-table idx color 0) clr0)
-  (set! (-> *font-work* color-table idx color 1) clr1)
-  (set! (-> *font-work* color-table idx color 2) clr2)
-  (set! (-> *font-work* color-table idx color 3) clr3)
+;; definition for function set-font-color
+(defun set-font-color ((arg0 font-color) (arg1 int) (arg2 rgba) (arg3 rgba) (arg4 rgba))
+  (set! (-> *font-work* color-table arg0 color 0) (the-as rgba arg1))
+  (set! (-> *font-work* color-table arg0 color 1) arg2)
+  (set! (-> *font-work* color-table arg0 color 2) arg3)
   0
   )
+
+;; definition for symbol *font-default-matrix*, type matrix
+(define *font-default-matrix*
+  (new 'static 'matrix
+    :rvec (new 'static 'vector :data (new 'static 'array float 4 1.0 0.0 0.0 0.0))
+    :uvec (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.0 0.0))
+    :fvec (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 1.0 0.0))
+    :trans (new 'static 'vector :data (new 'static 'array float 4 -256.0 -208.0 0.0 1.0))
+    )
+  )
+
+;; definition for symbol *font-default-matrix-3d*, type matrix
+(define *font-default-matrix-3d* (new 'static 'matrix
+                                   :rvec (new 'static 'vector :data (new 'static 'array float 4 1.0 0.0 0.0 0.0))
+                                   :uvec (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.0 0.0))
+                                   :fvec (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 1.0 0.0))
+                                   :trans (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 1.0))
+                                   )
+        )
+
+;; definition for symbol *font-context*, type font-context
+(define *font-context* (new
+                         'global
+                         'font-context
+                         *font-default-matrix*
+                         0
+                         0
+                         8396850.0
+                         (font-color default)
+                         (font-flags shadow kerning)
+                         )
+        )
+
+;; definition for symbol *font-context-3d*, type font-context
+(define *font-context-3d* (new
+                            'global
+                            'font-context
+                            *font-default-matrix-3d*
+                            0
+                            0
+                            0.0
+                            (font-color default)
+                            (font-flags shadow kerning font-flag-9)
+                            )
+        )
+
+;; definition for symbol *font-char-effect*, type font-char-effect
+(define *font-char-effect* (the-as font-char-effect (malloc 'global 6144)))
+
+(deftype draw-string-result (uint64)
+  ((length  float  :offset 0)
+   (b       float  :offset 32)
+   )
+  )
+
+(define-extern draw-string-xy (function string dma-buffer int int font-color font-flags draw-string-result))
+(define-extern draw-string (function string dma-buffer font-context draw-string-result))
+(define-extern draw-string-adv (function string dma-buffer font-context none))
+(define-extern get-string-length (function string font-context draw-string-result))
+
+
+
+
