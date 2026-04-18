@@ -47158,7 +47158,7 @@
 
 
   
-#|(deftype index-sprite-list-menu-info (sprite-menu-info)
+(deftype index-sprite-list-menu-info (sprite-menu-info)
   ((index-list  basic  :offset-assert 68)
    (horiz-list? basic  :offset-assert 72)
    (item-offset int32  :offset-assert 76)
@@ -47167,19 +47167,19 @@
   :method-count-assert 9
   :size-assert         #x54
   :flag-assert         #x900000054
-  )|#
+  )
   
 
 
 
   
-#|(deftype index-sprite-list-menu (prim-strip-menu)
+(deftype index-sprite-list-menu (prim-strip-menu)
   ((index-list basic  :offset-assert 552)
    )
   :method-count-assert 67
   :size-assert         #x22c
   :flag-assert         #x4301a0022c
-  )|#
+  )
   
 
 
