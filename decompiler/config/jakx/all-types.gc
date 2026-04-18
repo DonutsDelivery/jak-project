@@ -49472,14 +49472,14 @@
 
 
   
-#|(deftype auto-save-error-proc (process-drawable)
+(deftype auto-save-error-proc (process-drawable)
   ((error basic   :offset-assert 248)
    (bmask uint32  :offset-assert 252)
    )
   :method-count-assert 50
   :size-assert         #x100
   :flag-assert         #x3200700100
-  )|#
+  )
   
 
 
@@ -59530,7 +59530,7 @@
 ;; Auto-extern: symbols blocking top-level-login, registered as object to satisfy type-prop
 (define-extern actor-hash-buckets object)
 (define-extern anim-test-obj object)
-(define-extern auto-save-error-proc object)
+;; (define-extern auto-save-error-proc object) ;; activated as deftype
 (define-extern auto-test-levels object)
 (define-extern aux-voice-mgr object)
 (define-extern base-menu object)
