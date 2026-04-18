@@ -36168,7 +36168,7 @@
 (define-extern add-debug-line (function symbol bucket-id vector vector rgba symbol rgba symbol))
 (define-extern add-debug-line2d (function symbol bucket-id vector4w vector4w vector4w symbol))
 (define-extern add-debug-box (function symbol bucket-id vector vector rgba symbol))
-(define-extern add-debug-box-with-transform (function symbol bucket-id bounding-box matrix rgba symbol))
+(define-extern add-debug-box-with-transform (function symbol bucket-id bounding-box matrix rgba int))
 (define-extern add-debug-x (function symbol bucket-id vector rgba symbol))
 (define-extern add-debug-cross (function symbol bucket-id vector float symbol))
 (define-extern add-debug-text-3d (function symbol bucket-id string vector font-color vector2h symbol))
@@ -38757,7 +38757,7 @@
 
 
 (define-extern *grid-hash-work* grid-hash-work) ;; grid-hash-work
-(define-extern validate-bucket-bits (function grid-hash (pointer grid-hash-word) symbol))
+(define-extern validate-bucket-bits (function grid-hash (pointer grid-hash-word) int))
 (define-extern draw-grid (function vector vector (pointer int8) rgba none))
 (define-extern draw-sphere-box (function sphere rgba none))
 (define-extern draw-line-sphere (function vector vector float rgba none))
@@ -39446,8 +39446,8 @@
 ;; cam-start                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern cam-stop (function symbol))
-(define-extern cam-start (function symbol int)) 
+(define-extern cam-stop (function int))
+(define-extern cam-start (function symbol int))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; cloth-h                        ;;
