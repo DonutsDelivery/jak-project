@@ -59548,7 +59548,7 @@
 (define-extern daxter object)
 (define-extern debris-group object)
 (define-extern debug-rigid-body-move object)
-(define-extern disc-error-proc object)
+;; (define-extern disc-error-proc object) ;; activated as deftype
 (define-extern dma-test object)
 (define-extern drawable-tree-collide-fragment object)
 (define-extern drawable-tree-tfrag-trans object)
