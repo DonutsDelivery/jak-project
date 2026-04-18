@@ -1,0 +1,86 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; type race-mesh-hash-search is defined here, but it is unknown to the decompiler
+
+;; failed to figure out what this is:
+(method-set! (the-as type race-mesh-hash-search) 3 L19)
+
+;; definition of type race-mesh-slice-query
+(deftype race-mesh-slice-query (structure)
+  ((search-sphere  sphere  :inline)
+   (slice-range    int16   2)
+   (race-line      race-line)
+   (pt-on-slice    vector  :inline)
+   (slice-corners  vector  4 :inline)
+   (lap-dist       float)
+   (slice-id       int16)
+   )
+  )
+
+;; definition for method 3 of type race-mesh-slice-query
+(defmethod inspect ((this race-mesh-slice-query))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'race-mesh-slice-query)
+  (format #t "~1Tsearch-sphere: #<sphere @ #x~X>~%" (-> this search-sphere))
+  (format #t "~1Tslice-range[2] @ #x~X~%" (-> this slice-range))
+  (format #t "~1Trace-line: #<race-line @ #x~X>~%" (-> this race-line))
+  (format #t "~1Tpt-on-slice: #<vector @ #x~X>~%" (-> this pt-on-slice))
+  (format #t "~1Tslice-corners[4] @ #x~X~%" (-> this slice-corners))
+  (format #t "~1Tlap-dist: ~f~%" (-> this lap-dist))
+  (format #t "~1Tslice-id: ~D~%" (-> this slice-id))
+  (label cfg-4)
+  this
+  )
+
+;; type race-mesh-edge is defined here, but it is unknown to the decompiler
+
+;; failed to figure out what this is:
+(method-set! (the-as type race-mesh-edge) 3 L13)
+
+;; type race-mesh-slice is defined here, but it is unknown to the decompiler
+
+;; failed to figure out what this is:
+(method-set! (the-as type race-mesh-slice) 3 L10)
+
+;; definition of type race-mesh-hash-cell
+(deftype race-mesh-hash-cell (structure)
+  ((first-slice  int16)
+   (slice-count  uint8)
+   (pad          uint8)
+   )
+  )
+
+;; definition for method 3 of type race-mesh-hash-cell
+(defmethod inspect ((this race-mesh-hash-cell))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'race-mesh-hash-cell)
+  (format #t "~1Tfirst-slice: ~D~%" (-> this first-slice))
+  (format #t "~1Tslice-count: ~D~%" (-> this slice-count))
+  (format #t "~1Tpad: ~D~%" (-> this pad))
+  (label cfg-4)
+  this
+  )
+
+;; type race-mesh-hash is defined here, but it is unknown to the decompiler
+
+;; failed to figure out what this is:
+(method-set! (the-as type race-mesh-hash) 3 L4)
+
+;; type race-mesh is defined here, but it is unknown to the decompiler
+
+;; definition for method 3 of type race-mesh
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; failed to figure out what this is:
+0
+
+
+
+

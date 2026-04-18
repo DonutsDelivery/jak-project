@@ -39777,10 +39777,10 @@
 
 
   
-#|(deftype simple-prim-particle-binding (simple-prim)
-  ((color      rgba    :offset-assert 252) ;; guessed by decompiler
-   (lifetime   uint64  :offset-assert 256) ;; time-frame
-   (state-time uint64  :offset-assert 240) ;; time-frame
+(deftype simple-prim-particle-binding (simple-prim)
+  ((color      rgba    :offset 252)
+   (lifetime   uint64  :offset 256)
+   (pad-end    uint64  :offset-assert 264)
    )
   :method-count-assert 58
   :size-assert         #x110
@@ -39790,9 +39790,11 @@
     )
   (:state-methods
     die ;; 56
-    active ;; 50
     )
-  )|#
+  (:states
+    active ;; 50 override
+    )
+  )
   
 
 
