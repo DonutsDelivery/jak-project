@@ -5712,7 +5712,7 @@
 
 
   
-(deftype v-wpn-red-smoke (vehicle-weapon-slot)
+#|(deftype v-wpn-red-smoke (vehicle-weapon-slot)
   ((smoke-system uint64  :offset-assert 264)
    (wait-time    int32   :offset-assert 272)
    )
@@ -5726,7 +5726,7 @@
     idle ;; 50
     wait-delay ;; 60
     )
-  )
+  )|#
   
 
 
@@ -5832,7 +5832,7 @@
 
 
   
-(deftype v-wpn-red-oil (vehicle-weapon-slot)
+#|(deftype v-wpn-red-oil (vehicle-weapon-slot)
   ((oil-emitter uint64  :offset-assert 264)
    (wait-time   int32   :offset-assert 272)
    )
@@ -5846,7 +5846,7 @@
     idle ;; 50
     wait-delay ;; 60
     )
-  )
+  )|#
   
 
 
@@ -5884,7 +5884,7 @@
 
 
   
-(deftype v-wpn-yellow-chain-gun (vehicle-weapon-slot)
+#|(deftype v-wpn-yellow-chain-gun (vehicle-weapon-slot)
   ((last-fire-event uint64  :offset-assert 264)
    (firecontrol     basic   :offset-assert 272)
    (blam            uint32  :offset-assert 276)
@@ -5896,13 +5896,13 @@
     idle ;; 50
     firing ;; 60
     )
-  )
+  )|#
   
 
 
 
   
-(deftype v-wpn-yellow-default-gun (vehicle-weapon-slot)
+#|(deftype v-wpn-yellow-default-gun (vehicle-weapon-slot)
   ((last-fire-event uint64  :offset-assert 264)
    (firecontrol     basic   :offset-assert 272)
    (blam            uint32  :offset-assert 276)
@@ -5914,13 +5914,13 @@
     idle ;; 50
     firing ;; 60
     )
-  )
+  )|#
   
 
 
 
   
-(deftype v-wpn-yellow-grenade (vehicle-weapon-slot)
+#|(deftype v-wpn-yellow-grenade (vehicle-weapon-slot)
   ((next-shot-allowed uint64  :offset-assert 264)
    (next-to-fire      uint8   :offset-assert 272)
    )
@@ -5930,12 +5930,12 @@
   (:state-methods
     idle ;; 50
     )
-  )
+  )|#
   
 
 
 
-(deftype v-wpn-yellow-guided-missile (vehicle-weapon-slot)
+#|(deftype v-wpn-yellow-guided-missile (vehicle-weapon-slot)
   ((next-shot-allowed        uint64    :offset-assert 264)
    (next-to-fire             uint8     :offset-assert 272)
    (targ-list                uint64 4  :offset-assert 280)
@@ -5948,12 +5948,12 @@
     idle ;; 50
     firing ;; 60
     )
-  )
+  )|#
 
 
 
   
-(deftype v-wpn-yellow-seismic-blaster (vehicle-weapon-slot)
+#|(deftype v-wpn-yellow-seismic-blaster (vehicle-weapon-slot)
   ((fire-at      uint32  :offset-assert 264)
    (on-hud-indic int8    :offset-assert 268)
    )
@@ -5965,7 +5965,7 @@
     firing ;; 60
     backfiring ;; 61
     )
-  )
+  )|#
   
 
 
@@ -6060,7 +6060,7 @@
 
 
   
-(deftype v-wpn-red-turbo-preventor (vehicle-weapon-slot)
+#|(deftype v-wpn-red-turbo-preventor (vehicle-weapon-slot)
   ((sound-id  uint32  :offset-assert 264)
    (player-id int8    :offset-assert 268)
    (snd-loop  uint32  :offset-assert 272)
@@ -6072,7 +6072,7 @@
     idle ;; 50
     firing ;; 60
     )
-  )
+  )|#
   
 
 
