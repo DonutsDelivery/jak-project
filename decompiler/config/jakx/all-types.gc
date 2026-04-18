@@ -50431,11 +50431,9 @@
   :method-count-assert 52
   :size-assert         #x11c
   :flag-assert         #x340090011c
-  (:methods
-    (helmet-garage-method-51 () none) ;; 51
-    )
   (:state-methods
     idle ;; 50
+    helmet-garage-method-51 ;; 51
     )
   )
   
@@ -51642,7 +51640,7 @@
 
 
   
-(deftype test-process (process-focusable)
+#|(deftype test-process (process-focusable)
   ((state-time uint64  :offset-assert 240)
    (effect     uint8   :offset-assert 264)
    (sound-id   uint32  :offset-assert 268)
@@ -51650,7 +51648,7 @@
   :method-count-assert 59
   :size-assert         #x110
   :flag-assert         #x3b00800110
-  )
+  )|#
   
 
 
@@ -59278,13 +59276,7 @@
   :flag-assert         #x900000000
   )
 
-;; scene-player stub
-(deftype scene-player (process-drawable)
-  ()
-  :method-count-assert 50
-  :size-assert         #xf8
-  :flag-assert         #x32007000f8
-  )
+;; scene-player stub superseded by full definition at L28907
 
 ;; joint-mod stub
 (deftype joint-mod (basic)
