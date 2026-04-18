@@ -13317,7 +13317,7 @@
     (level-method-20 (_type_ vector object) none) ;; 20
     (level-method-21 (_type_ string) art-group) ;; 21
     (level-method-22 (_type_ symbol) int) ;; 22
-    (lookup-text (_type_ text-id symbol) symbol) ;; 23
+    (lookup-text (_type_ text-id symbol) string) ;; 23
     (level-method-24 (_type_) none) ;; 24 ;; (level-method-24 (_type_) none)
     (level-method-25 (_type_) _type_) ;; 25
     (level-method-26 (_type_ symbol) _type_) ;; 26
@@ -30020,7 +30020,7 @@
     (collide-shape-method-32 (_type_ vector collide-query meters) int) ;; 32
     (collide-shape-method-33 (_type_ uint) collide-shape-prim) ;; 33
     (collide-shape-method-34 (_type_ uint) collide-shape-prim) ;; 34
-    (collide-shape-method-35 (_type_) symbol) ;; 35
+    (collide-shape-method-35 (_type_) joint-control-status) ;; 35
     (collide-shape-method-36 (_type_ bounding-box float collide-spec) symbol) ;; 36
     (collide-shape-method-37 (_type_ vector) int) ;; 37
     (collide-shape-method-38 (_type_) int) ;; 38
@@ -50469,12 +50469,12 @@
 
 
   
-#|(deftype driver-jak (driver)
+(deftype driver-jak (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50485,12 +50485,12 @@
 
 
   
-#|(deftype driver-ashelin (driver)
+(deftype driver-ashelin (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50501,12 +50501,12 @@
 
 
   
-#|(deftype driver-razer (driver)
+(deftype driver-razer (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50517,12 +50517,12 @@
 
 
   
-#|(deftype driver-klever (driver)
+(deftype driver-klever (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50533,12 +50533,12 @@
 
 
   
-#|(deftype driver-kiera (driver)
+(deftype driver-kiera (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50549,12 +50549,12 @@
 
 
   
-#|(deftype driver-thug-a (driver)
+(deftype driver-thug-a (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50565,12 +50565,12 @@
 
 
   
-#|(deftype driver-thug-b (driver)
+(deftype driver-thug-b (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50581,12 +50581,12 @@
 
 
   
-#|(deftype driver-thug-c (driver)
+(deftype driver-thug-c (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50597,12 +50597,12 @@
 
 
   
-#|(deftype driver-taryn (driver)
+(deftype driver-taryn (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50613,12 +50613,12 @@
 
 
   
-#|(deftype driver-torn (driver)
+(deftype driver-torn (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50629,12 +50629,12 @@
 
 
   
-#|(deftype driver-sig (driver)
+(deftype driver-sig (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50645,12 +50645,12 @@
 
 
   
-#|(deftype driver-ur-86 (driver)
+(deftype driver-ur-86 (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50661,12 +50661,12 @@
 
 
   
-#|(deftype driver-kaeden (driver)
+(deftype driver-kaeden (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50677,12 +50677,12 @@
 
 
   
-#|(deftype driver-rayn (driver)
+(deftype driver-rayn (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50693,12 +50693,12 @@
 
 
   
-#|(deftype driver-ratchet (driver)
+(deftype driver-ratchet (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50709,12 +50709,12 @@
 
 
   
-#|(deftype driver-jaka (driver)
+(deftype driver-jaka (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50725,12 +50725,12 @@
 
 
   
-#|(deftype driver-jakb (driver)
+(deftype driver-jakb (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50741,12 +50741,12 @@
 
 
   
-#|(deftype driver-jakc (driver)
+(deftype driver-jakc (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50757,12 +50757,12 @@
 
 
   
-#|(deftype driver-daxter (driver)
+(deftype driver-daxter (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50773,12 +50773,12 @@
 
 
   
-#|(deftype driver-gtblitz (driver)
+(deftype driver-gtblitz (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50789,12 +50789,12 @@
 
 
   
-#|(deftype driver-pecker (driver)
+(deftype driver-pecker (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50805,12 +50805,12 @@
 
 
   
-#|(deftype driver-ximon (driver)
+(deftype driver-ximon (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
@@ -50821,12 +50821,12 @@
 
 
   
-#|(deftype driver-osmo (driver)
+(deftype driver-osmo (driver)
   ()
-  :method-count-assert 67
+  :method-count-assert 59
   :size-assert         #x184
-  :flag-assert         #x4301000184
-  )|#
+  :flag-assert         #x3b01000184
+  )
   
 
 
