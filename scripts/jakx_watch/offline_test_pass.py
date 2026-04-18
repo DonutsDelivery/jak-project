@@ -289,8 +289,21 @@ def main() -> int:
             )
         else:
             m2 = re.search(r"(Type Error: Type [\w<>!?:\-\+\*/=]+ is unknown[^\n]*)", clean_pre)
-            setup_blocker = (m2.group(1) if m2
-                             else "Type Error parsing all-types.gc (couldn't parse detail).")
+            if m2:
+                setup_blocker = m2.group(1)
+            else:
+                # Catch remaining -- Type Error! -- variants with file context
+                m3 = re.search(
+                    r"-- Type Error! --\s*\n(.*?)\n.*?decompiler type file:([^\s:]+?):(\d+)",
+                    clean_pre, re.DOTALL,
+                )
+                if m3:
+                    detail = m3.group(1).strip()[:120]
+                    fpath, line = m3.group(2), m3.group(3)
+                    setup_blocker = f"Type Error at {fpath}:{line}: {detail}"
+                else:
+                    last_lines = "\n  ".join(clean_pre.strip().splitlines()[-10:])
+                    setup_blocker = f"Type Error parsing all-types.gc — last output:\n  {last_lines}"
     elif "has" in pre_out and "methods, but method-count-assert" in pre_out:
         # (c) Method-count mismatch: active deftype declares the wrong count
         # vs what the compiled binary actually has.
@@ -320,6 +333,55 @@ def main() -> int:
                 m2.group(1) if m2
                 else "method-count-assert mismatch (couldn't parse detail)"
             )
+    elif "Tried to place field" in pre_out and "not aligned correctly" in pre_out:
+        # Alignment error: "Tried to place field X at N, but it is not aligned correctly,
+        # requires M-byte alignment"
+        m = re.search(
+            r"Tried to place field ([\w\-]+) at (\d+), but it is not aligned correctly"
+            r"[^\n]*requires (\d+)-byte alignment"
+            r"[^\n]*\n[^\n]*decompiler type file:([^\s:]+?):(\d+)",
+            clean_pre,
+        )
+        if m:
+            field, offset, align, fpath, line = (
+                m.group(1), m.group(2), m.group(3), m.group(4), m.group(5)
+            )
+            setup_blocker = (
+                f"field '{field}' at offset {offset} is not {align}-byte aligned "
+                f"at {fpath}:{line}. "
+                f"Fix: use :offset {align * ((int(offset) + int(align) - 1) // int(align))} "
+                f"or restructure preceding fields."
+            )
+        else:
+            m2 = re.search(
+                r"(Tried to place field [\w\-]+ at \d+, but it is not aligned[^\n]*)", clean_pre
+            )
+            setup_blocker = m2.group(1) if m2 else "field alignment error (couldn't parse detail)"
+    elif "but offset-assert was set to" in pre_out or "but it was placed at" in pre_out:
+        # Offset assertion failure: "Field X was placed at N but offset-assert was set to M"
+        m = re.search(
+            r"Field ([\w\-]+) was placed at (\d+) but offset-assert was set to (\d+)"
+            r"[^\n]*\n[^\n]*decompiler type file:([^\s:]+?):(\d+)",
+            clean_pre,
+        )
+        if not m:
+            m = re.search(
+                r"field ([\w\-]+).*?placed at (\d+).*?offset-assert.*?(\d+)"
+                r".*?decompiler type file:([^\s:]+?):(\d+)",
+                clean_pre, re.DOTALL,
+            )
+        if m:
+            field, actual, expected, fpath, line = (
+                m.group(1), m.group(2), m.group(3), m.group(4), m.group(5)
+            )
+            setup_blocker = (
+                f"field '{field}' placed at {actual} but offset-assert={expected} "
+                f"at {fpath}:{line}. "
+                f"Check preceding field sizes / alignment; adjust :offset-assert or fix field layout."
+            )
+        else:
+            m2 = re.search(r"(Field [\w\-]+ was placed at \d+[^\n]*)", clean_pre)
+            setup_blocker = m2.group(1) if m2 else "offset-assert mismatch (couldn't parse detail)"
     elif preflight.returncode not in (0, None) and "Compiler Exception" in pre_out:
         setup_blocker = (
             "offline-test compiler setup threw. Last 20 lines of output:\n  "
@@ -327,7 +389,8 @@ def main() -> int:
         )
     elif preflight.returncode is not None and preflight.returncode < 0:
         # SIGABRT or other signal crash not caught by the patterns above.
-        last_lines = "\n  ".join(clean_pre.strip().splitlines()[-6:])
+        # Show more context — last 15 lines, stripping ANSI.
+        last_lines = "\n  ".join(clean_pre.strip().splitlines()[-15:])
         setup_blocker = (
             f"offline-test crashed (signal {-preflight.returncode}). "
             f"Last output:\n  {last_lines}"
