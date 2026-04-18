@@ -39581,15 +39581,13 @@
 
 
   
-#|(deftype collision-cylinder-array (inline-array-class)
-  ((length           int32                        :offset-assert 4)
-   (allocated-length int32                        :offset-assert 8)
-   (data             cylinder-constraint :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype collision-cylinder-array (inline-array-class)
+  ((data cylinder-constraint :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -52921,12 +52919,11 @@
 
 
   
-#|(deftype collision-editor (process)
-  ((proc uint64  :offset-assert 144) ;; handle
-   )
-  :method-count-assert 16
+(deftype collision-editor (process)
+  ((proc handle  :offset-assert 144))
+  :method-count-assert 21
   :size-assert         #x98
-  :flag-assert         #x1000100098
+  :flag-assert         #x1500100098
   (:methods
     (collision-editor-method-9 () none) ;; 9
     (collision-editor-method-10 () none) ;; 10
@@ -52938,7 +52935,7 @@
   (:state-methods
     idle ;; 15
     )
-  )|#
+  )
   
 
 
