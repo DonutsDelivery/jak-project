@@ -19566,36 +19566,29 @@
 (deftype talker (process)
   ((trans          vector              :inline :offset-assert 144)
    (message        talker-speech-class         :offset-assert 160)
-   (total-time     uint64                      :offset-assert 168) ;; time-frame
-   (total-off-time uint64                      :offset-assert 176) ;; time-frame
-   (start-time     uint64                      :offset-assert 184) ;; time-frame
-   (state-time     uint64                      :offset-assert 192) ;; time-frame
-   (voicebox       uint64                      :offset-assert 200) ;; handle
-   (voice-id       sound-id                    :offset-assert 208) ;; guessed by decompiler
-   (message-id     sound-id                    :offset-assert 212) ;; guessed by decompiler
+   (total-time     time-frame                  :offset-assert 168)
+   (total-off-time time-frame                  :offset-assert 176)
+   (start-time     time-frame                  :offset-assert 184)
+   (state-time     time-frame                  :offset-assert 192)
+   (voicebox       handle                      :offset-assert 200)
+   (voice-id       sound-id                    :offset-assert 208)
+   (message-id     sound-id                    :offset-assert 212)
    (region         region                      :offset-assert 216)
    (interp         float                       :offset-assert 220)
-   (save?          symbol                      :offset-assert 224) ;; guessed by decompiler
-   (grab?          symbol                      :offset-assert 228) ;; guessed by decompiler
+   (save?          symbol                      :offset-assert 224)
+   (grab?          symbol                      :offset-assert 228)
    )
-  :method-count-assert 24
+  :method-count-assert 19
   :size-assert         #xe8
-  :flag-assert         #x18006000e8
-  (:methods
-    (talker-method-14 (_type_) none) ;; 14
-    (talker-method-15 (_type_) none) ;; 15
-    (talker-method-16 (_type_) none) ;; 16
-    (talker-method-17 (_type_) none) ;; 17
-    (talker-method-18 (_type_) none) ;; 18
-    )
+  :flag-assert         #x13006000e8
   (:state-methods
-    talker-state-19 ;; 19
-    talker-state-20 ;; 20
-    talker-state-21 ;; 21
+    talker-state-14 ;; 14
+    idle ;; 15
+    active ;; 16
+    exit ;; 17
     )
   (:methods
-    (talker-method-22 (_type_) none) ;; 22
-    (talker-method-23 (_type_) none) ;; 23
+    (draw-text (_type_) none) ;; 18
     )
   )
   
