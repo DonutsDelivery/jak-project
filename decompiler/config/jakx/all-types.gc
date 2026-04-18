@@ -7337,12 +7337,12 @@
 
 
   
-#|(deftype v-tiger (wcar-base)
+(deftype v-tiger (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7353,12 +7353,12 @@
 
 
   
-#|(deftype v-cheetah (wcar-base)
+(deftype v-cheetah (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7369,12 +7369,12 @@
 
 
   
-#|(deftype v-gila (wcar-base)
+(deftype v-gila (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7385,12 +7385,12 @@
 
 
   
-#|(deftype v-snake (wcar-base)
+(deftype v-snake (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7401,12 +7401,12 @@
 
 
   
-#|(deftype v-daxtermobile (wcar-base)
+(deftype v-daxtermobile (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
