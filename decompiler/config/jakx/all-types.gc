@@ -43279,12 +43279,24 @@
   ;; field vehicle-flag is likely a value type.
   (:methods
     (vehicle-method-89 (_type_ vehicle-controls) none) ;; 89
-    (vehicle-method-90 (_type_ vehicle-controls) none) ;; 90
+    )
+  (:state-methods
+    waiting ;; 90
+    )
+  (:methods
     (vehicle-method-91 (_type_) none) ;; 91 ;; (control-hook-player (_type_) none)
-    (vehicle-method-92 (_type_ vehicle-controls) none) ;; 92
+    )
+  (:state-methods
+    player-control ;; 92
+    )
+  (:methods
     (vehicle-method-93 (_type_) none) ;; 93 ;; (vehicle-method-93 (_type_) none)
-    (vehicle-method-94 (_type_) none) ;; 94 ;; (vehicle-method-94 (_type_) none)
-    (vehicle-method-95 (_type_ vector float) none) ;; 95
+    )
+  (:state-methods
+    explode ;; 94
+    die ;; 95
+    )
+  (:methods
     (vehicle-method-96 (_type_ float) none) ;; 96
     (vehicle-method-97 (_type_) none) ;; 97 ;; (vehicle-method-97 (_type_ float vehicle-physics-work) none)
     (vehicle-method-98 (_type_) none) ;; 98 ;; (vehicle-method-98 (_type_) none)
@@ -43776,8 +43788,10 @@
   :method-count-assert 60
   :size-assert         #x105
   :flag-assert         #x3c00800105
+  (:state-methods
+    idle-base ;; 51
+    )
   (:methods
-    (vehicle-weapon-slot-method-51 () none) ;; 51
     (vehicle-weapon-slot-method-52 () none) ;; 52
     (vehicle-weapon-slot-method-53 () none) ;; 53
     (vehicle-weapon-slot-method-54 () none) ;; 54
@@ -45305,9 +45319,11 @@
   :method-count-assert 80
   :size-assert         #x130
   :flag-assert         #x5000a00130
+  (:state-methods
+    startup ;; 42
+    running ;; 43
+    )
   (:methods
-    (net-game-mgr-method-42 () none) ;; 42
-    (net-game-mgr-method-43 () none) ;; 43
     (net-game-mgr-method-44 () none) ;; 44
     (net-game-mgr-method-45 () none) ;; 45
     (net-game-mgr-method-46 () symbol) ;; 46
@@ -45413,18 +45429,19 @@
    (hud-clock       uint64     :offset-assert 352)
    (auto-end-time   int32      :offset-assert 360)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x16c
-  :flag-assert         #x5800e0016c
+  :flag-assert         #x5700e0016c
+  (:state-methods
+    race-waiting ;; 80
+    racing ;; 81
+    )
   (:methods
-    (net-game-mgr-race-method-80 () none) ;; 80
-    (net-game-mgr-race-method-81 () none) ;; 81
     (net-game-mgr-race-method-82 () none) ;; 82
     (net-game-mgr-race-method-83 () none) ;; 83
     (net-game-mgr-race-method-84 () none) ;; 84
     (net-game-mgr-race-method-85 () none) ;; 85
     (net-game-mgr-race-method-86 () none) ;; 86
-    (net-game-mgr-race-method-87 () none) ;; 87
     )
   )
 
@@ -45550,9 +45567,9 @@
 (deftype net-game-mgr-deathrace (net-game-mgr-race)
   ((next-drone-spawn-time uint64  :offset-assert 368)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x178
-  :flag-assert         #x5800f00178
+  :flag-assert         #x5700f00178
   )
   
 
@@ -45878,9 +45895,9 @@
   ((next-drone-spawn-time uint64  :offset-assert 368)
    (drone-type-counter    int32   :offset-assert 376)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x17c
-  :flag-assert         #x5800f0017c
+  :flag-assert         #x5700f0017c
   )
   
 
@@ -45940,9 +45957,9 @@
   ((total-race-time uint32  :offset-assert 364)
    (sound-id        uint32  :offset-assert 368)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x174
-  :flag-assert         #x5800f00174
+  :flag-assert         #x5700f00174
   )
   
 
@@ -45960,9 +45977,9 @@
   
 (deftype net-game-mgr-time-trial (net-game-mgr-race)
   ()
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x16c
-  :flag-assert         #x5800e0016c
+  :flag-assert         #x5700e0016c
   )
   
 
@@ -45976,9 +45993,9 @@
    (ai-attack?   basic  :offset-assert 388)
    (can-shoot?   basic  :offset-assert 392)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x18c
-  :flag-assert         #x580100018c
+  :flag-assert         #x570100018c
   )
   
 
@@ -46008,9 +46025,9 @@
    (player-lost? basic   :offset-assert 368)
    (lose-time    uint64  :offset-assert 376)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x180
-  :flag-assert         #x5800f00180
+  :flag-assert         #x5700f00180
   )
   
 
@@ -48600,35 +48617,33 @@
 
 
 
-#|
 (deftype fmv-work (structure)
-  ((current-buffer uint32                 :offset-assert 0)
-   (buffers        UNKNOWN        2       :offset-assert 4)
-   (buffer-size    uint32                 :offset-assert 36)
-   (cursor         uint32                 :offset-assert 40)
-   (name           basic                  :offset-assert 44)
-   (dma-addr       uint32                 :offset-assert 48)
-   (data-size      uint32                 :offset-assert 52)
-   (num-frames     uint32                 :offset-assert 56)
-   (copied-size    uint32                 :offset-assert 60)
-   (count-frame    uint32                 :offset-assert 64)
-   (own-rpc        basic                  :offset-assert 68)
-   (len-read       int32                  :offset-assert 72)
-   (finished       basic                  :offset-assert 76)
-   (current-frame  int32                  :offset-assert 80)
-   (page           basic                  :offset-assert 84)
-   (tex            basic                  :offset-assert 88)
-   (corner         UNKNOWN        4       :offset-assert 96)
-   (pos            UNKNOWN        4       :offset-assert 160)
-   (uv             UNKNOWN        4       :offset-assert 224)
-   (col            vector4w       :inline :offset-assert 288)
-   (draw-tmpl      dma-gif-packet :inline :offset-assert 304)
+  ((current-buffer uint32                       :offset-assert 0)
+   (buffers        uint32 8             :offset-assert 4)
+   (buffer-size    uint32                       :offset-assert 36)
+   (cursor         uint32                       :offset-assert 40)
+   (name           basic                        :offset-assert 44)
+   (dma-addr       uint32                       :offset-assert 48)
+   (data-size      uint32                       :offset-assert 52)
+   (num-frames     uint32                       :offset-assert 56)
+   (copied-size    uint32                       :offset-assert 60)
+   (count-frame    uint32                       :offset-assert 64)
+   (own-rpc        basic                        :offset-assert 68)
+   (len-read       int32                        :offset-assert 72)
+   (finished       basic                        :offset-assert 76)
+   (current-frame  int32                        :offset-assert 80)
+   (page           basic                        :offset-assert 84)
+   (tex            basic                        :offset-assert 88)
+   (corner         vector         4 :inline     :offset-assert 96)
+   (pos            vector         4 :inline     :offset-assert 160)
+   (uv             vector         4 :inline     :offset-assert 224)
+   (col            vector4w       :inline       :offset-assert 288)
+   (draw-tmpl      dma-gif-packet :inline       :offset-assert 304)
    )
   :method-count-assert 9
   :size-assert         #x150
   :flag-assert         #x900000150
   )
-|#
 
 
 (define-extern *subtitles-text* object)
@@ -48648,6 +48663,7 @@
 (define-extern fmv-player-init-by-other function)
 (define-extern fmv-player-run function)
 (define-extern fmv-player-run-texture function)
+(define-extern fmv-player-terminate (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; game-save                      ;;
@@ -51714,7 +51730,7 @@
 
 
   
-#|(deftype nav-graph-editor (process)
+(deftype nav-graph-editor (process)
   ((nav-graph           mysql-nav-graph                 :offset-assert 144) ;; guessed by decompiler
    (mode                symbol                          :offset-assert 148) ;; guessed by decompiler
    (command-id          int32                           :offset-assert 152)
@@ -51741,77 +51757,75 @@
    (minimap-make-mode   uint8                           :offset-assert 300)
    (clipping-dist       float                           :offset-assert 304)
    (default-node        mysql-nav-node          :inline :offset-assert 320)
-   (default-edge        mysql-nav-edge          :inline :offset-assert 396)
-   (command-array       nav-graph-command-array         :offset-assert 472) ;; guessed by decompiler
+   (default-edge        mysql-nav-edge          :inline :offset-assert 400)
+   (command-array       nav-graph-command-array         :offset-assert 476) ;; guessed by decompiler
    )
-  :method-count-assert 74
-  :size-assert         #x1dc
-  :flag-assert         #x4a015001dc
+  :method-count-assert 69
+  :size-assert         #x1e0
+  :flag-assert         #x45015001e0
   (:methods
-    (nav-graph-editor-method-9 () none) ;; 9
-    (nav-graph-editor-method-10 () none) ;; 10
-    (nav-graph-editor-method-11 () none) ;; 11
-    (nav-graph-editor-method-12 () none) ;; 12
-    (nav-graph-editor-method-13 () none) ;; 13
-    (nav-graph-editor-method-14 () _type_ :state) ;; 14
-    (nav-graph-editor-method-30 () none) ;; 30 ;; (nav-graph-editor-method-30 () none)
-    (nav-graph-editor-method-31 () none) ;; 31 ;; (nav-graph-editor-method-31 () none)
-    (nav-graph-editor-method-32 () none) ;; 32 ;; (nav-graph-editor-method-32 () none)
-    (nav-graph-editor-method-33 () none) ;; 33 ;; (nav-graph-editor-method-33 () none)
-    (nav-graph-editor-method-34 () none) ;; 34 ;; (nav-graph-editor-method-34 () none)
-    (nav-graph-editor-method-35 () none) ;; 35 ;; (nav-graph-editor-method-35 () none)
-    (nav-graph-editor-method-36 () none) ;; 36 ;; (nav-graph-editor-method-36 () none)
-    (nav-graph-editor-method-37 () none) ;; 37 ;; (nav-graph-editor-method-37 () none)
-    (nav-graph-editor-method-38 () none) ;; 38 ;; (nav-graph-editor-method-38 () none)
-    (nav-graph-editor-method-39 () none) ;; 39 ;; (nav-graph-editor-method-39 () none)
-    (nav-graph-editor-method-40 () none) ;; 40 ;; (nav-graph-editor-method-40 () none)
-    (nav-graph-editor-method-41 () none) ;; 41 ;; (nav-graph-editor-method-41 () none)
-    (nav-graph-editor-method-42 () none) ;; 42 ;; (nav-graph-editor-method-42 () none)
-    (nav-graph-editor-method-43 () none) ;; 43 ;; (nav-graph-editor-method-43 () none)
-    (nav-graph-editor-method-44 () none) ;; 44 ;; (nav-graph-editor-method-44 () none)
-    (nav-graph-editor-method-45 () none) ;; 45 ;; (nav-graph-editor-method-45 () none)
-    (nav-graph-editor-method-46 () none) ;; 46 ;; (nav-graph-editor-method-46 () none)
-    (nav-graph-editor-method-47 () none) ;; 47 ;; (nav-graph-editor-method-47 () none)
-    (nav-graph-editor-method-48 () none) ;; 48 ;; (nav-graph-editor-method-48 () none)
-    (nav-graph-editor-method-49 () none) ;; 49 ;; (nav-graph-editor-method-49 () none)
-    (nav-graph-editor-method-50 () none) ;; 50 ;; (nav-graph-editor-method-50 () none)
-    (nav-graph-editor-method-51 () none) ;; 51 ;; (nav-graph-editor-method-51 () none)
-    (nav-graph-editor-method-52 () none) ;; 52 ;; (nav-graph-editor-method-52 () none)
-    (nav-graph-editor-method-53 () none) ;; 53 ;; (nav-graph-editor-method-53 () none)
-    (nav-graph-editor-method-54 () none) ;; 54 ;; (nav-graph-editor-method-54 () none)
-    (nav-graph-editor-method-55 () none) ;; 55 ;; (nav-graph-editor-method-55 () none)
-    (nav-graph-editor-method-56 () none) ;; 56 ;; (nav-graph-editor-method-56 () none)
-    (nav-graph-editor-method-57 () none) ;; 57 ;; (nav-graph-editor-method-57 () none)
-    (nav-graph-editor-method-58 () none) ;; 58 ;; (nav-graph-editor-method-58 () none)
-    (nav-graph-editor-method-59 () none) ;; 59 ;; (nav-graph-editor-method-59 () none)
-    (nav-graph-editor-method-60 () none) ;; 60 ;; (nav-graph-editor-method-60 () none)
-    (nav-graph-editor-method-61 () none) ;; 61 ;; (nav-graph-editor-method-61 () none)
-    (nav-graph-editor-method-62 () none) ;; 62 ;; (nav-graph-editor-method-62 () none)
-    (nav-graph-editor-method-63 () none) ;; 63 ;; (nav-graph-editor-method-63 () none)
-    (nav-graph-editor-method-64 () none) ;; 64 ;; (nav-graph-editor-method-64 () none)
-    (nav-graph-editor-method-65 () none) ;; 65 ;; (nav-graph-editor-method-65 () none)
-    (nav-graph-editor-method-66 () none) ;; 66 ;; (nav-graph-editor-method-66 () none)
-    (nav-graph-editor-method-67 () none) ;; 67 ;; (nav-graph-editor-method-67 () none)
-    (nav-graph-editor-method-68 () none) ;; 68
+    (nav-graph-editor-method-14 () _type_ :state) ;; 14 - slot placeholder, no defstate
     )
   (:state-methods
-    adjust-node-angle ;; 23, old: (adjust-node-radius () _type_ :state)
-    move-node ;; 15, old: (move-plane () _type_ :state)
-    adjust-plane ;; 20, old: (adjust-it () _type_ :state)
-    adjust-node-radius ;; 24, old: (adjust-edge-visibility () _type_ :state)
-    move-plane ;; 16, old: (create () _type_ :state)
-    create-edge ;; 19, old: (adjust-plane () _type_ :state)
-    edit-edge ;; 18, old: (create-edge () _type_ :state)
-    adjust-edge-visibility ;; 25, old: (adjust-edge-width () _type_ :state)
-    adjust-edge-width ;; 26, old: (adjust-edge-density () _type_ :state)
-    adjust-edge-density ;; 27, old: (draw-closest-minimap () _type_ :state)
-    adjust-it ;; 21, old: (adjust-minimap () _type_ :state)
-    adjust-minimap ;; 22, old: (adjust-node-angle () _type_ :state)
-    draw-closest-minimap ;; 28, old: (create-pov () _type_ :state)
-    create ;; 17, old: (edit-edge () _type_ :state)
-    create-pov ;; 29, old: (nav-graph-editor-method-29 () none)
+    move-node             ;; 15
+    move-plane            ;; 16
+    create                ;; 17
+    edit-edge             ;; 18
+    create-edge           ;; 19
+    adjust-plane          ;; 20
+    adjust-it             ;; 21
+    adjust-minimap        ;; 22
+    adjust-node-angle     ;; 23
+    adjust-node-radius    ;; 24
+    adjust-edge-visibility ;; 25
+    adjust-edge-width     ;; 26
+    adjust-edge-density   ;; 27
+    draw-closest-minimap  ;; 28
+    create-pov            ;; 29
     )
-  )|#
+  (:methods
+    (nav-graph-editor-method-30 () none) ;; 30
+    (nav-graph-editor-method-31 () none) ;; 31
+    (nav-graph-editor-method-32 () none) ;; 32
+    (nav-graph-editor-method-33 () none) ;; 33
+    (nav-graph-editor-method-34 () none) ;; 34
+    (nav-graph-editor-method-35 () none) ;; 35
+    (nav-graph-editor-method-36 () none) ;; 36
+    (nav-graph-editor-method-37 () none) ;; 37
+    (nav-graph-editor-method-38 () none) ;; 38
+    (nav-graph-editor-method-39 () none) ;; 39
+    (nav-graph-editor-method-40 () none) ;; 40
+    (nav-graph-editor-method-41 () none) ;; 41
+    (nav-graph-editor-method-42 () none) ;; 42
+    (nav-graph-editor-method-43 () none) ;; 43
+    (nav-graph-editor-method-44 () none) ;; 44
+    (nav-graph-editor-method-45 () none) ;; 45
+    (nav-graph-editor-method-46 () none) ;; 46
+    (nav-graph-editor-method-47 () none) ;; 47
+    (nav-graph-editor-method-48 () none) ;; 48
+    (nav-graph-editor-method-49 () none) ;; 49
+    (nav-graph-editor-method-50 () none) ;; 50
+    (nav-graph-editor-method-51 () none) ;; 51
+    (nav-graph-editor-method-52 () none) ;; 52
+    (nav-graph-editor-method-53 () none) ;; 53
+    (nav-graph-editor-method-54 () none) ;; 54
+    (nav-graph-editor-method-55 () none) ;; 55
+    (nav-graph-editor-method-56 () none) ;; 56
+    (nav-graph-editor-method-57 () none) ;; 57
+    (nav-graph-editor-method-58 () none) ;; 58
+    (nav-graph-editor-method-59 () none) ;; 59
+    (nav-graph-editor-method-60 () none) ;; 60
+    (nav-graph-editor-method-61 () none) ;; 61
+    (nav-graph-editor-method-62 () none) ;; 62
+    (nav-graph-editor-method-63 () none) ;; 63
+    (nav-graph-editor-method-64 () none) ;; 64
+    (nav-graph-editor-method-65 () none) ;; 65
+    (nav-graph-editor-method-66 () none) ;; 66
+    (nav-graph-editor-method-67 () none) ;; 67
+    (nav-graph-editor-method-68 () none) ;; 68
+    )
+  )
+;; partial old block (removed):
   
 
 
@@ -52369,8 +52383,8 @@
     (construction-object-method-92 () none) ;; 92
     )
   (:state-methods
-    idle ;; 59
-    active ;; 60
+    idle ;; 93
+    active ;; 94
     )
   )
   
@@ -58819,7 +58833,6 @@
 (define-extern engine-minimap type)
 (define-extern entity-more-perm type)
 (define-extern fake-msg type)
-(define-extern fmv-work type)
 (define-extern ghost-file type)
 (define-extern headset type)
 (define-extern headset-decoder type)
