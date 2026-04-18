@@ -1889,7 +1889,7 @@
 
 
   
-(deftype wrong-way (process-drawable)
+#|(deftype wrong-way (process-drawable)
   ((base-y            float          :offset-assert 248)
    (height-offset     float          :offset-assert 252)
    (start-position    vector :inline :offset-assert 256)
@@ -1910,7 +1910,7 @@
     enter ;; 52
     exit ;; 51
     )
-  )
+  )|#
   
 
 
@@ -59787,6 +59787,7 @@
 (define-extern hud-results-medal-1 object)
 (define-extern hud-results-view-1 object)
 (define-extern hud-rushhour-stats-view-0 object)
+(define-extern wrong-way object)
 
 ;; Auto-extern batch 4
 (define-extern *cty-attack-controller* object)
