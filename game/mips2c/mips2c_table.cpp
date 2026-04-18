@@ -423,6 +423,8 @@ namespace cspace_parented_transformq_joint { extern void link(); }
 // sparticle_launcher.cpp port (see game/mips2c/jakx_functions/sparticle_launcher.cpp)
 namespace sparticle_motion_blur { extern void link(); }
 namespace particle_adgif { extern void link(); }
+namespace sp_init_fields { extern void link(); }
+namespace sp_launch_particles_var { extern void link(); }
 // particle_curves.cpp port (see game/mips2c/jakx_functions/particle_curves.cpp)
 namespace live_func_curve { extern void link(); }
 namespace birth_func_curve { extern void link(); }
@@ -762,13 +764,11 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
        jak3::method_31_sphere_hash::link, jak3::method_32_spatial_hash::link,
        jak3::method_38_spatial_hash::link, jak3::method_35_spatial_hash::link,
        jak3::method_36_spatial_hash::link, jak3::method_34_spatial_hash::link}},
-     // sparticle-motion-blur + particle-adgif are jakx-native ports (see
-     // game/mips2c/jakx_functions/sparticle_launcher.cpp). The remaining
-     // two (sp-launch-particles-var, sp-init-fields!) still use jak3 bodies
-     // until their jakx-native ports land — see .jakx_watch/mips2c_queue.md.
+     // All four sparticle_launcher.cpp functions are now jakx-native ports
+     // (see game/mips2c/jakx_functions/sparticle_launcher.cpp).
      {"sparticle-launcher",
-      {jakx::sparticle_motion_blur::link, jak3::sp_launch_particles_var::link,
-       jakx::particle_adgif::link, jak3::sp_init_fields::link}},
+      {jakx::sparticle_motion_blur::link, jakx::sp_launch_particles_var::link,
+       jakx::particle_adgif::link, jakx::sp_init_fields::link}},
      {"sparticle", {jak3::sp_process_block_2d::link, jak3::sp_process_block_3d::link}},
      {"nav-engine",
       {jak3::method_21_nav_engine::link, jak3::method_20_nav_engine::link,
