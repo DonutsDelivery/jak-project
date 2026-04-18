@@ -55983,14 +55983,14 @@
 
   
 (deftype des-plant (net-simple-destruct)
-  ((exploder-params joint-exploder-static-params         :offset-assert 288) ;; guessed by decompiler
-   (exploder-skel   skeleton-group                       :offset-assert 292) ;; guessed by decompiler
-   (exploder-anim   uint32                               :offset-assert 296)
-   (exploder        uint64                               :offset-assert 304) ;; handle
-   (attack-vel      vector                       :inline :offset-assert 320)
-   (spring-pos      vector                       :inline :offset-assert 336)
-   (spring-vel      vector                       :inline :offset-assert 352)
-   (jmods           joint-mod-rotate-local       4       :offset-assert 368) ;; guessed by decompiler
+  ((exploder-params joint-exploder-static-params         :offset 288)
+   (exploder-skel   skeleton-group                       :offset 292)
+   (exploder-anim   uint32                               :offset 296)
+   (exploder        uint64                               :offset 304) ;; handle
+   (attack-vel      vector                       :inline :offset 320)
+   (spring-pos      vector                       :inline :offset 336)
+   (spring-vel      vector                       :inline :offset 352)
+   (jmods           joint-mod-rotate-local       4       :offset 368)
    )
   :method-count-assert 76
   :size-assert         #x1f0
@@ -57264,24 +57264,25 @@
 
 
   
-#|(deftype interface-world-map (process-drawable)
+(deftype interface-world-map (process-drawable)
   ((u               float          :offset-assert 248)
-   (curve           basic          :offset-assert 256)
+   (pad248          uint32         :offset-assert 252)
+   (curve           basic          :offset 256)
    (path-u          float          :offset-assert 260)
    (draw?           basic          :offset-assert 264)
-   (particle-matrix matrix :inline :offset-assert 272)
+   (particle-matrix matrix :inline :offset 272)
    )
   :method-count-assert 53
   :size-assert         #x150
   :flag-assert         #x3500c00150
-  (:methods
-    (interface-world-map-method-52 () none) ;; 52
-    )
   (:state-methods
     idle ;; 50
     leave ;; 51
     )
-  )|#
+  (:methods
+    (interface-world-map-method-52 () none) ;; 52
+    )
+  )
   
 
 
