@@ -36,7 +36,10 @@
     // decompiler → *talker-speech* #f fallback → TypeCheck fail.
     "ambient-h",
     // jakx: (the-as TYPE Lnn) static label references not resolvable by goalc.
-    "mood-tables"
+    "mood-tables",
+    // jakx: (set! a1-0 L440) raw label ref in (method inspect mysql-nav-graph).
+    // Content matches REF; goalc can't resolve label symbol.
+    "mysql-nav-graph"
   ],
 
   // Skip goalc-compiling these specific functions/methods inside otherwise-good files.
@@ -218,7 +221,11 @@
     "(method 37 cloth-system)",
     "(method 19 rope-prim-system)",
     "sprite-add-matrix-data",
-    "camera-fov-frame"
+    "camera-fov-frame",
+    // sparticle-launcher-h: (method 0 sparticle-subsampler) enter-state on none type;
+    // (method 3 projectile-bounce): type-prop fails (empty stub, missing fields).
+    "(method 0 sparticle-subsampler)",
+    "(method 3 projectile-bounce)"
   ],
 
   "skip_compile_states": {}

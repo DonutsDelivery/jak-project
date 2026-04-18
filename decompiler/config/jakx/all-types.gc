@@ -52623,7 +52623,18 @@
 
 
   
-#|(deftype artifact-draw (eco-powerup-draw)
+(deftype eco-powerup-draw (powerup-draw)
+  ((vehicle-handle uint64  :offset-assert 264)
+   )
+  :method-count-assert 57
+  :size-assert         #x110
+  :flag-assert         #x3900800110
+  (:state-methods
+    idle ;; 50
+    )
+  )
+
+(deftype artifact-draw (eco-powerup-draw)
   ()
   :method-count-assert 57
   :size-assert         #x110
@@ -52631,7 +52642,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
