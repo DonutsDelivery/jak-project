@@ -1,0 +1,93 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for symbol *merc-death-globals*, type vector
+(define *merc-death-globals* (new 'global 'vector))
+
+;; definition for function birth-func-death-sparks
+;; WARN: Return type mismatch int vs none.
+(defun birth-func-death-sparks ()
+  0
+  (none)
+  )
+
+;; definition for symbol death-seed, type death-info
+(define death-seed
+  (new 'static 'death-info :vertex-skip #x8 :timer #xe0 :overlap #xff :effect #x27 :sound "temp-enemy-die")
+  )
+
+;; definition for function start-seed-effect
+(defun start-seed-effect ((arg0 process-drawable) (arg1 vector) (arg2 cspace))
+  (let ((v1-0 (-> arg0 draw))
+        (a1-1 death-seed)
+        )
+    (set! (-> v1-0 death-vertex-skip) (-> a1-1 vertex-skip))
+    (set! (-> v1-0 death-effect) (-> a1-1 effect))
+    (set! (-> v1-0 death-timer) (+ (-> a1-1 timer) 1))
+    (set! (-> v1-0 death-timer-org) (-> v1-0 death-timer))
+    (set! (-> v1-0 death-draw-overlap) (-> a1-1 overlap))
+    )
+  (send-event
+    arg0
+    'trans-hook
+    (lambda :behavior process-drawable () (let ((v0-0 200))
+                                            (set! (-> self draw death-timer) (the-as uint v0-0))
+                                            (the-as time-frame v0-0)
+                                            )
+                                       )
+    )
+  0
+  )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 39) #f)
+
+;; definition for symbol death-default, type death-info
+(define death-default
+  (new 'static 'death-info :vertex-skip #xa :timer #x4b :overlap #x4 :effect #x28 :sound "enemy-fizz")
+  )
+
+;; definition for symbol death-warp-in, type death-info
+(define death-warp-in
+  (new 'static 'death-info :vertex-skip #x96 :timer #x4b :effect #x29 :sound "warpgate-tele")
+  )
+
+;; definition for symbol death-warp-out, type death-info
+(define death-warp-out
+  (new 'static 'death-info :vertex-skip #x96 :timer #x96 :effect #x29 :sound "warpgate-tele")
+  )
+
+;; definition for function sparticle-texture-glow-soft
+;; WARN: Return type mismatch int vs none.
+(defun sparticle-texture-glow-soft ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 vector))
+  (particle-adgif-callback (-> arg1 adgif) (new 'static 'texture-id :index #x17 :page #x4))
+  (set! (-> arg1 sp-func) (the-as (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d uint none) 0))
+  0
+  (none)
+  )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 41) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 42) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 40) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 43) #f)
+
+;; definition for function merc-death-spawn
+(defun merc-death-spawn ((arg0 int) (arg1 vector) (arg2 vector))
+  (let ((v1-2 (-> *part-id-table* arg0)))
+    (if (and (nonzero? v1-2) (= (-> v1-2 type) sparticle-launcher))
+        (sp-launch-particles-death (the-as sparticle-system *sp-particle-system-2d*) v1-2 arg1)
+        )
+    )
+  0
+  )
+
+
+
+

@@ -1,0 +1,247 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition of type net-player-stats
+(deftype net-player-stats (structure)
+  ((stats-version    int8)
+   (current-clan     int32)
+   (last-channel-id  int32)
+   )
+  )
+
+;; definition for method 3 of type net-player-stats
+(defmethod inspect ((this net-player-stats))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'net-player-stats)
+  (format #t "~1Tstats-version: ~D~%" (-> this stats-version))
+  (format #t "~1Tcurrent-clan: ~D~%" (-> this current-clan))
+  (format #t "~1Tlast-channel-id: ~D~%" (-> this last-channel-id))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type medius-cached-info-player
+(deftype medius-cached-info-player (medius-cached-info)
+  ((name              uint8                       32  :offset  24)
+   (format-name       uint8                       160 :offset  56)
+   (online-state-ptr  medius-player-online-state      :offset 216)
+   (stats-ptr         net-player-stats                :offset 356)
+   (ladder-stats-ptr  net-player-ladder-stats         :offset 368)
+   (pad               uint8                       312 :offset 372)
+   )
+  )
+
+;; definition for method 3 of type medius-cached-info-player
+(defmethod inspect ((this medius-cached-info-player))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tmedius-id: ~D~%" (-> this medius-id))
+  (format #t "~1Taccessed-time: ~D~%" (-> this accessed-time))
+  (format #t "~1Tfetched-time: ~D~%" (-> this fetched-time))
+  (format #t "~1Tstatus: ~D~%" (-> this status))
+  (format #t "~1Tname[32] @ #x~X~%" (-> this name))
+  (format #t "~1Tformat-name[160] @ #x~X~%" (-> this format-name))
+  (format #t "~1Tonline-state: #<medius-player-online-state @ #x~X>~%" (&-> this online-state-ptr))
+  (format #t "~1Tstats: #<net-player-stats @ #x~X>~%" (&-> this stats-ptr))
+  (format #t "~1Tladder-stats: #<net-player-ladder-stats @ #x~X>~%" (&-> this ladder-stats-ptr))
+  (label cfg-4)
+  this
+  )
+
+;; definition for symbol *medius-player-cache*, type medius-cache
+(define *medius-player-cache*
+  (new 'static 'medius-cache :objects (new 'static 'boxed-array :type medius-cached-info-player
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        (new 'static 'medius-cached-info-player)
+                                        )
+                             )
+  )
+
+((method-of-object *medius-player-cache* medius-cache-method-12))
+
+;; definition of type medius-player
+(deftype medius-player (medius-cache-index)
+  ()
+  (:methods
+    (medius-player-method-11 () none)
+    (medius-player-method-12 () none)
+    (medius-player-method-13 () none)
+    )
+  )
+
+;; definition for method 3 of type medius-player
+(defmethod inspect ((this medius-player))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'medius-player)
+  (format #t "~1Tid: ~D~%" (-> this id))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type medius-player-index-array
+(deftype medius-player-index-array (medius-cache-index-array)
+  ()
+  )
+
+;; definition for method 3 of type medius-player-index-array
+(defmethod inspect ((this medius-player-index-array))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'medius-player-index-array)
+  (format #t "~1Tct: ~D~%" (-> this ct))
+  (format #t "~1Tmax-ct: ~D~%" (-> this max-ct))
+  (format #t "~1Tdata[0] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
+  )
+
+;; definition for symbol *medius-buddies*, type object
+(define *medius-buddies* #f)
+
+;; failed to figure out what this is:
+(let ((v1-8 100)
+      (a0-9 *medius-buddies*)
+      )
+  (s.w! (+ a0-9 4) v1-8)
+  )
+
+;; definition for symbol *medius-buddies-online*, type object
+(define *medius-buddies-online* #f)
+
+;; failed to figure out what this is:
+(let ((v1-10 100)
+      (a0-10 *medius-buddies-online*)
+      )
+  (s.w! (+ a0-10 4) v1-10)
+  )
+
+;; definition for symbol *medius-ignores*, type object
+(define *medius-ignores* #f)
+
+;; failed to figure out what this is:
+(let ((v1-12 32)
+      (a0-11 *medius-ignores*)
+      )
+  (s.w! (+ a0-11 4) v1-12)
+  )
+
+;; definition for symbol *medius-room-players*, type object
+(define *medius-room-players* #f)
+
+;; failed to figure out what this is:
+(let ((v1-14 256)
+      (a0-12 *medius-room-players*)
+      )
+  (s.w! (+ a0-12 4) v1-14)
+  )
+
+;; definition for symbol *medius-recent-players*, type object
+(define *medius-recent-players* #f)
+
+;; failed to figure out what this is:
+(let ((v1-16 32)
+      (a0-13 *medius-recent-players*)
+      )
+  (s.w! (+ a0-13 4) v1-16)
+  )
+
+;; definition for symbol *medius-in-game-players*, type object
+(define *medius-in-game-players* #f)
+
+;; failed to figure out what this is:
+(let ((v1-18 8)
+      (a0-14 *medius-in-game-players*)
+      )
+  (s.w! (+ a0-14 4) v1-18)
+  )
+
+;; definition for symbol *medius-local-game-players*, type object
+(define *medius-local-game-players* #f)
+
+;; failed to figure out what this is:
+(let ((v1-20 8)
+      (a0-15 *medius-local-game-players*)
+      )
+  (s.w! (+ a0-15 4) v1-20)
+  )
+
+;; definition for symbol *medius-outstanding-clan-invites*, type object
+(define *medius-outstanding-clan-invites* #f)
+
+;; failed to figure out what this is:
+(let ((v1-22 64)
+      (a0-16 *medius-outstanding-clan-invites*)
+      )
+  (s.w! (+ a0-16 4) v1-22)
+  )
+
+;; definition for symbol *medius-mute-list*, type object
+(define *medius-mute-list* #f)
+
+;; failed to figure out what this is:
+(let ((v1-24 24)
+      (a0-17 *medius-mute-list*)
+      )
+  (s.w! (+ a0-17 4) v1-24)
+  )
+
+;; definition for symbol *medius-clan-members-online*, type object
+(define *medius-clan-members-online* #f)
+
+;; failed to figure out what this is:
+(let ((v1-26 64)
+      (a0-18 *medius-clan-members-online*)
+      )
+  (s.w! (+ a0-18 4) v1-26)
+  )
+
+;; definition for symbol *medius-my-player*, type medius-cached-info-player
+(define *medius-my-player* (new 'static 'medius-cached-info-player))
+
+;; definition for symbol *medius-recent-opponents*, type object
+(define *medius-recent-opponents* #f)
+
+
+
+
