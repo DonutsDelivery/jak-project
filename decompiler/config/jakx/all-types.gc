@@ -4518,9 +4518,9 @@
 (deftype race-mesh-debug (process)
   ((mesh basic  :offset-assert 144)
    )
-  :method-count-assert 16
+  :method-count-assert 21
   :size-assert         #x94
-  :flag-assert         #x1000100094
+  :flag-assert         #x1500100094
   (:methods
     (race-mesh-debug-method-9 () none) ;; 9
     (race-mesh-debug-method-10 () none) ;; 10
@@ -5818,13 +5818,13 @@
 
 
   
-#|(deftype vehicle-reticle-base (process)
+(deftype vehicle-reticle-base (process)
   ((owner      uint64  :offset-assert 144)
    (state-time uint64  :offset-assert 152)
    )
-  :method-count-assert 15
+  :method-count-assert 20
   :size-assert         #xa0
-  :flag-assert         #xf001000a0
+  :flag-assert         #x14001000a0
   (:methods
     (vehicle-reticle-base-method-9 () none) ;; 9
     (vehicle-reticle-base-method-10 () none) ;; 10
@@ -5833,7 +5833,7 @@
     (vehicle-reticle-base-method-13 () none) ;; 13
     (vehicle-reticle-base-method-14 () none) ;; 14
     )
-  )|#
+  )
   
 
 
@@ -52843,9 +52843,9 @@
 (deftype visvol-editor (process)
   ((proc uint64  :offset-assert 144)
    )
-  :method-count-assert 16
+  :method-count-assert 21
   :size-assert         #x98
-  :flag-assert         #x1000100098
+  :flag-assert         #x1500100098
   (:methods
     (visvol-editor-method-9 () none) ;; 9
     (visvol-editor-method-10 () none) ;; 10
