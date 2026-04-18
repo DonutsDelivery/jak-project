@@ -1879,28 +1879,7 @@
 
 
   
-#|(deftype wrong-way (process-drawable)
-  ((base-y            float          :offset-assert 248)
-   (height-offset     float          :offset-assert 252)
-   (start-position    vector :inline :offset-assert 256)
-   (bot               uint64         :offset-assert 272)
-   (alarm-sound       uint32         :offset-assert 280)
-   (friendly          basic          :offset-assert 284)
-   (kill-player-quick basic          :offset-assert 288)
-   )
-  :method-count-assert 55
-  :size-assert         #x124
-  :flag-assert         #x3700a00124
-  (:methods
-    (wrong-way-method-53 () none) ;; 53
-    (wrong-way-method-54 () none) ;; 54
-    )
-  (:state-methods
-    idle ;; 50
-    enter ;; 52
-    exit ;; 51
-    )
-  )|#
+;; wrong-way: activated below parent process-drawable at L28289
   
 
 
@@ -1911,29 +1890,7 @@
 
 
 
-#|
-(deftype race-banner (process-drawable)
-  ((mat             matrix  :inline :offset-assert 256)
-   (end-pos         vector  :inline :offset-assert 320)
-   (explode-sound   uint32          :offset-assert 336)
-   (base-y          float           :offset-assert 340)
-   (banner          UNKNOWN 5       :offset-assert 344)
-   (blend-up-height float           :offset-assert 364)
-   (last-index      int8            :offset-assert 368)
-   (index           int8            :offset-assert 369)
-   )
-  :method-count-assert 53
-  :size-assert         #x172
-  :flag-assert         #x3500f00172
-  (:methods
-    (race-banner-method-52 () none) ;; 52
-    )
-  (:state-methods
-    banner-countdown ;; 50
-    banner-go ;; 51
-    )
-  )
-|#
+;; race-banner: activated below parent process-drawable at L28289
 
 
 
