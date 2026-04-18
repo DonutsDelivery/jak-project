@@ -28904,7 +28904,7 @@
   
 
   
-#|(deftype scene-player (process-drawable)
+(deftype scene-player (process-drawable)
   ((scene-list           (array scene)           :offset-assert 248) ;; guessed by decompiler
    (scene                scene                   :offset-assert 252) ;; guessed by decompiler
    (scene-index          int32                   :offset-assert 256)
@@ -28947,7 +28947,7 @@
     (scene-player-method-54 () none) ;; 54
     (scene-player-method-55 () none) ;; 55
     )
-  )|#
+  )
   
 
 (define-extern *scene-player* (pointer scene-player))
