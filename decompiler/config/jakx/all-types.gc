@@ -31516,15 +31516,14 @@
 
 
   
-#|(deftype perf-stat-array (inline-array-class)
-  ((length           int32              :offset-assert 4)
-   (allocated-length int32              :offset-assert 8)
-   (data             perf-stat :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype perf-stat-array (inline-array-class)
+  "Array of all stats for all buckets."
+  ((data perf-stat :dynamic :inline :offset-assert 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
