@@ -43536,6 +43536,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+(declare-type race-state structure)
 (deftype racer-state (structure)
   ((position                vector    :inline :offset-assert 0)
    (start-position          vector    :inline :offset-assert 16)
@@ -43559,9 +43560,9 @@
   :size-assert         #x5c
   :flag-assert         #xc0000005c
   (:methods
-    (racer-state-method-9 () none) ;; 9 ;; (update-lap-distance (_type_ race-state) none)
-    (racer-state-method-10 () none) ;; 10 ;; (begin-lap (_type_ race-state) none)
-    (racer-state-method-11 () none) ;; 11 ;; (end-lap (_type_ race-state) none)
+    (update-lap-distance (_type_ race-state) none) ;; 9
+    (begin-lap (_type_ race-state) none) ;; 10
+    (end-lap (_type_ race-state) none) ;; 11
     )
   )
 

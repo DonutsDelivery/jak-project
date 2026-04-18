@@ -22,9 +22,9 @@
    (lap-quadrant             int8)
    )
   (:methods
-    (racer-state-method-9 () none)
-    (racer-state-method-10 () none)
-    (racer-state-method-11 () none)
+    (update-lap-distance (_type_ race-state) none)
+    (begin-lap (_type_ race-state) none)
+    (end-lap (_type_ race-state) none)
     )
   )
 
