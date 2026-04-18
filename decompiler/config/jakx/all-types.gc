@@ -9,7 +9,6 @@
 (define-extern medius-lobby-world-player-list-response type)
 (define-extern medius-update-user-state type)
 (define-extern net-address-list type)
-(define-extern hud-points-icon-display4 object)
 (define-extern sprite-ptr-menu object)
 
 ;; Auto-extern batch 21
@@ -34402,6 +34401,18 @@
 (deftype hud-in-game-menu-networked-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
 (deftype hud-in-game-menu-networked-view-2 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
 
+(deftype hud-points-combo-display0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-points-combo-display1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-points-combo-display2 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-points-combo-display3 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-points-combo-display4 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+
+(deftype hud-points-icon-display0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-points-icon-display1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-points-icon-display2 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-points-icon-display3 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-points-icon-display4 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+
 (deftype hud-map (hud)
   ((x float  :offset-assert 6364)
    (y float  :offset-assert 6368)
@@ -59627,7 +59638,6 @@
 (define-extern hud-item-player-name object)
 (define-extern hud-map object)
 (define-extern hud-player-indicators-view0 object)
-(define-extern hud-points-combo-display0 object)
 (define-extern hud-race-stats-single object)
 (define-extern hud-results-grand-prix object)
 (define-extern hud-results-medal object)
@@ -59754,7 +59764,6 @@
 (define-extern hud-in-game-menu-options-view-1 object)
 (define-extern hud-item-player-score object)
 (define-extern hud-player-indicators-view1 object)
-(define-extern hud-points-combo-display1 object)
 (define-extern hud-race-stats-top-view-0 object)
 (define-extern hud-results-grand-prix-totals object)
 (define-extern hud-results-view-0 object)
@@ -59802,7 +59811,6 @@
 (define-extern hud-headset-talker-other object)
 (define-extern hud-in-game-menu-options-view-2 object)
 (define-extern hud-item-number object)
-(define-extern hud-points-combo-display2 object)
 (define-extern hud-race-stats-side-view-0 object)
 (define-extern hud-results-medal-1 object)
 (define-extern hud-results-view-1 object)
@@ -59834,7 +59842,6 @@
 (define-extern hud-deathrace-stats-split-view-0 object)
 (define-extern hud-game-end-top-view-0 object)
 (define-extern hud-icon object)
-(define-extern hud-points-combo-display3 object)
 (define-extern hud-race-stats-view-1 object)
 (define-extern hud-results-team-view-0 object)
 (define-extern hud-rushhour-stats-view-1 object)
@@ -59898,7 +59905,6 @@
 (define-extern hud-background-side-view-0 object)
 (define-extern hud-cash-stats-single object)
 (define-extern hud-deathrace-stats-split-view-1 object)
-(define-extern hud-points-combo-display4 object)
 (define-extern hud-results-team-view-1 object)
 (define-extern hud-top-split-bar object)
 (define-extern instance-tie-dma object)
@@ -60053,7 +60059,6 @@
 (define-extern text-display-supernova-backfire-view-2 object)
 
 ;; Auto-extern batch 12
-(define-extern hud-points-icon-display0 object)
 (define-extern medius-account-get-idresponse object)
 (define-extern medius-ban-player-response object)
 (define-extern medius-file-get-attributes-response object)
@@ -60067,7 +60072,6 @@
 (define-extern sprite-menu object)
 
 ;; Auto-extern batch 13
-(define-extern hud-points-icon-display1 object)
 (define-extern medius-account-get-profile-request object)
 (define-extern medius-channel-info-request object)
 (define-extern medius-file-update-meta-data-request object)
@@ -60081,7 +60085,6 @@
 (define-extern v-wpn-red-oil object)
 
 ;; Auto-extern batch 14
-(define-extern hud-points-icon-display2 object)
 (define-extern medius-account-get-profile-response object)
 (define-extern medius-channel-info-response object)
 (define-extern medius-file-update-meta-data-responset object)
@@ -60093,7 +60096,6 @@
 (define-extern sprite-ptr-info object)
 
 ;; Auto-extern batch 15
-(define-extern hud-points-icon-display3 object)
 (define-extern medius-account-login-request object)
 (define-extern medius-channel-list-extra-info-request object)
 (define-extern medius-file-get-meta-data-request object)
