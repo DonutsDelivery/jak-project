@@ -1826,29 +1826,6 @@
 
 
 
-#|
-(deftype wrong-way-linebot (process-drawable)
-  ((initial-quat quaternion :inline :offset-assert 256)
-   (initial-pos  vector     :inline :offset-assert 272)
-   (hover-sound  uint32             :offset-assert 288)
-   (l-control    uint8      12      :offset-assert 292)
-   (my-vehicle   uint64             :offset-assert 304)
-   (spawn-part   uint64             :offset-assert 312)
-   (vehicle-part uint64             :offset-assert 320)
-   (sound-id     uint32             :offset-assert 328)
-   )
-  :method-count-assert 53
-  :size-assert         #x14c
-  :flag-assert         #x3500c0014c
-  (:state-methods
-    idle  ;; 50
-    shoot ;; 51
-    )
-  (:methods
-    (wrong-way-linebot-method-52 () none) ;; 52
-    )
-  )
-|#
 
 
 
@@ -2139,19 +2116,6 @@
 
 
 
-#|
-(deftype eco-blue (eco)
-  ((launcher    uint8 20 :offset-assert 248)
-   (birth-accum uint8 20 :offset-assert 268)
-   )
-  :method-count-assert 56
-  :size-assert         #x120
-  :flag-assert         #x3800900120
-  (:state-methods
-    running ;; 50 (override)
-    )
-  )
-|#
 
 
 
@@ -4310,100 +4274,6 @@
 
 
 
-#|
-(deftype hud-vehicle (hud)
-  ((weapon-texture uint8 49 :offset-assert 6364)
-   (gun-texture                      basic              :offset-assert 6364)
-   (missile-texture                  basic              :offset-assert 6368)
-   (grenade-texture                  basic              :offset-assert 6372)
-   (taserram-texture                 basic              :offset-assert 6376)
-   (mine-texture                     basic              :offset-assert 6380)
-   (shield-texture                   basic              :offset-assert 6384)
-   (target-texture uint8 2 :offset-assert 6560)
-   (slot-roulette-active? uint8 2 :offset-assert 6568)
-   (button-out? uint8 2 :offset-assert 6576)
-   (weapon-picked? uint8 2 :offset-assert 6584)
-   (slot-roulette-start-time uint8 2 :offset-assert 6592)
-   (roulette-counter uint8 2 :offset-assert 6600)
-   (weapon-color uint8 2 :offset-assert 6608)
-   (selected-weapon uint8 2 :offset-assert 6610)
-   (powerup-level                    int32              :offset-assert 6612)
-   (last-light-level                 int8               :offset-assert 6616)
-   (light-bar-part-right-init        basic              :offset-assert 6620)
-   (light-bar-part-right-filled      basic              :offset-assert 6624)
-   (light-bar-part-left-init         basic              :offset-assert 6628)
-   (light-bar-part-left-filled       basic              :offset-assert 6632)
-   (current-light-eco                float              :offset-assert 6636)
-   (current-green-eco                float              :offset-assert 6640)
-   (current-blue-eco                 float              :offset-assert 6644)
-   (slot-weapon-color uint8 2 :offset-assert 6648)
-   (incoming?                        basic              :offset-assert 6652)
-   (light-eco-level                  float              :offset-assert 6656)
-   (light-eco-level-fx-start-time    uint32             :offset-assert 6660)
-   (split-screen-offset-left-x       float              :offset-assert 6664)
-   (split-screen-offset-right-x      float              :offset-assert 6668)
-   (split-screen-offset-y            float              :offset-assert 6672)
-   (hud-right-ammo-counter-1         hud-sprite :inline :offset-assert 3056)
-   (hud-right-ammo-counter-2         hud-sprite :inline :offset-assert 3120)
-   (hud-right-light-underlay         hud-sprite :inline :offset-assert 3184)
-   (hud-right-light-ctrl-1           hud-sprite :inline :offset-assert 3248)
-   (hud-right-light-ctrl-2           hud-sprite :inline :offset-assert 3312)
-   (hud-right-light-ctrl-3           hud-sprite :inline :offset-assert 3376)
-   (hud-right-light-bar              hud-sprite :inline :offset-assert 3440)
-   (hud-right-turbo-underlay         hud-sprite :inline :offset-assert 3504)
-   (hud-right-turbo-ctrl-1           hud-sprite :inline :offset-assert 3568)
-   (hud-right-turbo-ctrl-2           hud-sprite :inline :offset-assert 3632)
-   (hud-right-turbo-bar              hud-sprite :inline :offset-assert 3696)
-   (hud-right-display-weapon-field   hud-sprite :inline :offset-assert 3760)
-   (hud-right-upper-left             hud-sprite :inline :offset-assert 3824)
-   (hud-right-upper-right            hud-sprite :inline :offset-assert 3888)
-   (hud-right-lower-right            hud-sprite :inline :offset-assert 3952)
-   (hud-right-lower-left             hud-sprite :inline :offset-assert 4016)
-   (hud-right-ammo-counter-overlay   hud-sprite :inline :offset-assert 4080)
-   (hud-right-ammo-counter-overlay-2 hud-sprite :inline :offset-assert 4144)
-   (hud-right-weapon-icon-shadow     hud-sprite :inline :offset-assert 4208)
-   (hud-right-weapon-icon            hud-sprite :inline :offset-assert 4272)
-   (hud-right-display-shine          hud-sprite :inline :offset-assert 4336)
-   (hud-left-ammo-counter-1          hud-sprite :inline :offset-assert 4400)
-   (hud-left-ammo-counter-2          hud-sprite :inline :offset-assert 4464)
-   (hud-left-light-underlay          hud-sprite :inline :offset-assert 4528)
-   (hud-left-light-ctrl-1            hud-sprite :inline :offset-assert 4592)
-   (hud-left-light-ctrl-2            hud-sprite :inline :offset-assert 4656)
-   (hud-left-light-ctrl-3            hud-sprite :inline :offset-assert 4720)
-   (hud-left-light-bar               hud-sprite :inline :offset-assert 4784)
-   (hud-left-health-underlay         hud-sprite :inline :offset-assert 4848)
-   (hud-left-health-ctrl-1           hud-sprite :inline :offset-assert 4912)
-   (hud-left-health-ctrl-2           hud-sprite :inline :offset-assert 4976)
-   (hud-left-health-bar              hud-sprite :inline :offset-assert 5040)
-   (hud-left-display-weapon-field    hud-sprite :inline :offset-assert 5104)
-   (hud-left-upper-left              hud-sprite :inline :offset-assert 5168)
-   (hud-left-upper-right             hud-sprite :inline :offset-assert 5232)
-   (hud-left-lower-left              hud-sprite :inline :offset-assert 5296)
-   (hud-left-lower-right             hud-sprite :inline :offset-assert 5360)
-   (hud-left-ammo-counter-overlay    hud-sprite :inline :offset-assert 5424)
-   (hud-left-ammo-counter-overlay-2  hud-sprite :inline :offset-assert 5488)
-   (hud-left-weapon-icon-shadow      hud-sprite :inline :offset-assert 5552)
-   (hud-left-weapon-icon             hud-sprite :inline :offset-assert 5616)
-   (hud-left-display-shine           hud-sprite :inline :offset-assert 5680)
-   (hud-turbo-disabled               hud-sprite :inline :offset-assert 5744)
-   )
-  :method-count-assert 40
-  :size-assert         #x1a14
-  :flag-assert         #x2819901a14
-  (:methods
-    (hud-vehicle-method-30 () none) ;; 30
-    (hud-vehicle-method-31 () none) ;; 31
-    (hud-vehicle-method-32 () none) ;; 32
-    (hud-vehicle-method-33 () none) ;; 33
-    (hud-vehicle-method-34 () none) ;; 34
-    (hud-vehicle-method-35 () none) ;; 35
-    (hud-vehicle-method-36 () none) ;; 36
-    (hud-vehicle-method-37 () none) ;; 37
-    (hud-vehicle-method-38 () none) ;; 38
-    (hud-vehicle-method-39 () none) ;; 39
-    )
-  )
-|#
 
 
 
@@ -5438,26 +5308,6 @@
   
 
 
-#|
-(deftype v-toad-shot (net-projectile)
-  ((trail-tracker    uint64         :offset-assert 568)
-   (blast-radius     float          :offset-assert 576)
-   (powerup-level    uint8          :offset-assert 580)
-   (initial-velocity vector :inline :offset-assert 592)
-   (vehicle-perigee  float          :offset-assert 608)
-   )
-  :method-count-assert 76
-  :size-assert         #x264
-  :flag-assert         #x4c01e00264
-  (:methods
-    (v-toad-shot-method-75 () none) ;; 75
-    )
-  (:state-methods
-    die    ;; 50
-    impact ;; 52
-    )
-  )
-|#
 
 
   
@@ -5475,30 +5325,6 @@
   
 
 
-#|
-(deftype mine-a (process-focusable)
-  ((shooter           uint64             :offset-assert 256)
-   (destination-point vector     :inline :offset-assert 272)
-   (destination-rot   quaternion :inline :offset-assert 288)
-   (traj              trajectory :inline :offset-assert 304)
-   (beepy             uint32             :offset-assert 344)
-   (trail-tracker     uint64             :offset-assert 352)
-   (warning           basic              :offset-assert 360)
-   )
-  :method-count-assert 64
-  :size-assert         #x16c
-  :flag-assert         #x4000e0016c
-  (:state-methods
-    idle    ;; 59
-    falling ;; 60
-    die     ;; 61
-    )
-  (:methods
-    (mine-a-method-62 () none) ;; 62
-    (mine-a-method-63 () none) ;; 63
-    )
-  )
-|#
 
 
   
@@ -5508,38 +5334,6 @@
   
 
 
-#|
-(deftype mine-b (process-focusable)
-  ((shooter           uint64             :offset-assert 256)
-   (glued-to          uint64             :offset-assert 264)
-   (destination-point vector     :inline :offset-assert 272)
-   (destination-rot   quaternion :inline :offset-assert 288)
-   (traj              trajectory :inline :offset-assert 304)
-   (cached-rp-trans   vector     :inline :offset-assert 352)
-   (trail-tracker     uint64             :offset-assert 368)
-   (beepy             uint32             :offset-assert 376)
-   (attach-point      int32              :offset-assert 380)
-   (looseness         int32              :offset-assert 384)
-   (expires-on        uint64             :offset-assert 392)
-   (warning           basic              :offset-assert 400)
-   )
-  :method-count-assert 67
-  :size-assert         #x194
-  :flag-assert         #x4301100194
-  (:state-methods
-    idle         ;; 59
-    falling      ;; 60
-    leaping-onto ;; 61
-    attached     ;; 62
-    shake-off    ;; 63
-    die          ;; 64
-    )
-  (:methods
-    (mine-b-method-65 () none) ;; 65
-    (mine-b-method-66 () none) ;; 66
-    )
-  )
-|#
 
 
   
@@ -5549,38 +5343,6 @@
   
 
 
-#|
-(deftype v-yellow-guided-missile (net-projectile)
-  ((trail-tracker        uint64                       :offset-assert 568)
-   (blast-radius         float                        :offset-assert 576)
-   (initial-velocity     float                        :offset-assert 580)
-   (time-of-next-pitch   uint64                       :offset-assert 584)
-   (time-strike-standoff int32                        :offset-assert 592)
-   (next-rot             quaternion           :inline :offset-assert 608)
-   (previous-target      uint64                       :offset-assert 624)
-   (pred                 net-predictor-simple :inline :offset-assert 640)
-   (defer-kaboom         uint64                       :offset-assert 952)
-   (last-hit             uint64                       :offset-assert 960)
-   )
-  :method-count-assert 81
-  :size-assert         #x3c8
-  :flag-assert         #x51034003c8
-  (:state-methods
-    die       ;; 50
-    dissipate ;; 51
-    impact    ;; 52
-    moving    ;; 53
-    launching ;; 75
-    wild      ;; 76
-    tracking  ;; 77
-    )
-  (:methods
-    (v-yellow-guided-missile-method-78 () none) ;; 78
-    (v-yellow-guided-missile-method-79 () none) ;; 79
-    (v-yellow-guided-missile-method-80 () none) ;; 80
-    )
-  )
-|#
 
 
   
@@ -5633,25 +5395,6 @@
 
 
 
-#|
-(deftype particle-buffer (prim-client)
-  ((tex-id           uint32      :offset-assert 4)
-   (smoke-part-count int32       :offset-assert 8)
-   (smoke-parts      uint8  2400 :offset-assert 16)
-   (strip            basic       :offset-assert 2416)
-   (single-strip     uint8  12   :offset-assert 2420)
-   )
-  :method-count-assert 14
-  :size-assert         #x980
-  :flag-assert         #xe00000980
-  (:methods
-    (particle-buffer-method-10 () none) ;; 10
-    (particle-buffer-method-11 () none) ;; 11
-    (particle-buffer-method-12 () none) ;; 12
-    (particle-buffer-method-13 () none) ;; 13
-    )
-  )
-|#
 
 
 
@@ -5683,23 +5426,6 @@
   
 
 
-#|
-(deftype v-wpn-red-smoke (vehicle-weapon-slot)
-  ((smoke-system uint64  :offset-assert 264)
-   (wait-time    int32   :offset-assert 272)
-   )
-  :method-count-assert 62
-  :size-assert         #x114
-  :flag-assert         #x3e00900114
-  (:state-methods
-    idle       ;; 50 (override)
-    wait-delay ;; 60
-    )
-  (:methods
-    (v-wpn-red-smoke-method-61 () none) ;; 61
-    )
-  )
-|#
 
 
   
@@ -5721,29 +5447,6 @@
 
 
 
-#|
-(deftype oil-trail (prim-client)
-  ((tex-id                   uint32          :offset-assert 4)
-   (segment-count            int32           :offset-assert 8)
-   (last-segment-last-point  vector  :inline :offset-assert 16)
-   (last-segment-first-point vector  :inline :offset-assert 32)
-   (segments                 uint8   3200    :offset-assert 48)
-   (strip                    basic           :offset-assert 3248)
-   )
-  :method-count-assert 17
-  :size-assert         #xcb4
-  :flag-assert         #x1100000cb4
-  (:methods
-    (oil-trail-method-10 () none) ;; 10
-    (oil-trail-method-11 () none) ;; 11
-    (oil-trail-method-12 () none) ;; 12
-    (oil-trail-method-13 () none) ;; 13
-    (oil-trail-method-14 () none) ;; 14
-    (oil-trail-method-15 () none) ;; 15
-    (oil-trail-method-16 () none) ;; 16
-    )
-  )
-|#
 
 
 
@@ -5813,23 +5516,6 @@
   
 
 
-#|
-(deftype v-wpn-red-oil (vehicle-weapon-slot)
-  ((oil-emitter uint64  :offset-assert 264)
-   (wait-time   int32   :offset-assert 272)
-   )
-  :method-count-assert 62
-  :size-assert         #x114
-  :flag-assert         #x3e00900114
-  (:state-methods
-    idle       ;; 50 (override)
-    wait-delay ;; 60
-    )
-  (:methods
-    (v-wpn-red-oil-method-61 () none) ;; 61
-    )
-  )
-|#
 
 
   
@@ -5981,45 +5667,6 @@
 
 
 
-#|
-(deftype red-sentry-bot (process-focusable)
-  ((destination-point       vector     :inline :offset-assert 256)
-   (destination-rot         quaternion :inline :offset-assert 272)
-   (traj                    trajectory :inline :offset-assert 288)
-   (next-target-poll        uint64             :offset-assert 328)
-   (targ-handle             uint64             :offset-assert 336)
-   (yaw                     float              :offset-assert 344)
-   (pitch                   float              :offset-assert 348)
-   (expire-at               int32              :offset-assert 352)
-   (hitpoints               float              :offset-assert 356)
-   (hitpoints-last          float              :offset-assert 360)
-   (hitpoints-prev-msg-time uint64             :offset-assert 368)
-   (flash                   uint8      16      :offset-assert 376)
-   (last-fired              uint64             :offset-assert 392)
-   (gun-loop                uint32             :offset-assert 400)
-   (warning                 basic              :offset-assert 404)
-   (firecontrol             basic              :offset-assert 408)
-   (ammo                    int16              :offset-assert 412)
-   (powerup-level           uint8              :offset-assert 414)
-   (shooter-id              int8               :offset-assert 415)
-   )
-  :method-count-assert 67
-  :size-assert         #x1a0
-  :flag-assert         #x43011001a0
-  (:state-methods
-    falling         ;; 59
-    idle            ;; 60
-    firing          ;; 61
-    firing-missiles ;; 62
-    die             ;; 63
-    )
-  (:methods
-    (red-sentry-bot-method-64 () none) ;; 64
-    (red-sentry-bot-method-65 () none) ;; 65
-    (red-sentry-bot-method-66 () none) ;; 66
-    )
-  )
-|#
 
 
 
@@ -6124,23 +5771,6 @@
   
 
 
-#|
-(deftype v-wpn-red-tractor-beam (vehicle-weapon-slot)
-  ((firing-at      uint64  :offset-assert 264)
-   (duration-left  int32   :offset-assert 272)
-   (using-side     uint8   :offset-assert 276)
-   (part-on-me     basic   :offset        224)
-   (part-on-target basic   :offset-assert 280)
-   )
-  :method-count-assert 61
-  :size-assert         #x11c
-  :flag-assert         #x3d0090011c
-  (:state-methods
-    idle   ;; 50 (override)
-    firing ;; 60 (new)
-    )
-  )
-|#
 
 
   
@@ -6230,37 +5860,6 @@
 
 
 
-#|
-(deftype vehicle-antenna (process-drawable)
-  ((vehicle          uint64                          :offset-assert 248)
-   (attach-local-pos vector                  :inline :offset-assert 256)
-   (attach-rot       quaternion              :inline :offset-assert 272)
-   (jmod-antenna     uint8                   128     :offset-assert 288)
-   (jmod-tail        joint-mod-set-rot-local :inline :offset-assert 416)
-   (sim-state        vehicle-antenna-state   :inline :offset-assert 448)
-   (ant-tip-pos      vector                  :inline :offset-assert 448)
-   (ant-tip-vel      vector                  :inline :offset-assert 464)
-   (spring-pos       vector                  :inline :offset-assert 480)
-   (spring-vel       vector                  :inline :offset-assert 496)
-   (tail-pos         vector                  :inline :offset-assert 512)
-   (tail-vel         vector                  :inline :offset-assert 528)
-   (i-tip-node       int8                            :offset-assert 544)
-   (use-tail?        basic                           :offset-assert 548)
-   )
-  :method-count-assert 55
-  :size-assert         #x228
-  :flag-assert         #x3701a00228
-  (:state-methods
-    idle ;; 50
-    die ;; 51
-    )
-  (:methods
-    (vehicle-antenna-method-52 () none) ;; 52
-    (vehicle-antenna-method-53 () none) ;; 53
-    (vehicle-antenna-method-54 () none) ;; 54
-    )
-  )
-|#
 
 
 
@@ -18827,6 +18426,46 @@
     )
   )
 
+(deftype particle-buffer (prim-client)
+  ((tex-id           uint32      :offset-assert 4)
+   (smoke-part-count int32       :offset-assert 8)
+   (smoke-parts      uint8  2400 :offset-assert 16)
+   (strip            basic       :offset-assert 2416)
+   (single-strip     uint8  12   :offset-assert 2420)
+   )
+  :method-count-assert 14
+  :size-assert         #x980
+  :flag-assert         #xe00000980
+  (:methods
+    (particle-buffer-method-10 () none) ;; 10
+    (particle-buffer-method-11 () none) ;; 11
+    (particle-buffer-method-12 () none) ;; 12
+    (particle-buffer-method-13 () none) ;; 13
+    )
+  )
+
+(deftype oil-trail (prim-client)
+  ((tex-id                   uint32          :offset-assert 4)
+   (segment-count            int32           :offset-assert 8)
+   (last-segment-last-point  vector  :inline :offset-assert 16)
+   (last-segment-first-point vector  :inline :offset-assert 32)
+   (segments                 uint8   3200    :offset-assert 48)
+   (strip                    basic           :offset-assert 3248)
+   )
+  :method-count-assert 17
+  :size-assert         #xcb4
+  :flag-assert         #x1100000cb4
+  (:methods
+    (oil-trail-method-10 () none) ;; 10
+    (oil-trail-method-11 () none) ;; 11
+    (oil-trail-method-12 () none) ;; 12
+    (oil-trail-method-13 () none) ;; 13
+    (oil-trail-method-14 () none) ;; 14
+    (oil-trail-method-15 () none) ;; 15
+    (oil-trail-method-16 () none) ;; 16
+    )
+  )
+
 (defenum prim-flags
   :type uint32
   :bitfield #t
@@ -27657,6 +27296,58 @@
     )
   )
 
+(deftype wrong-way-linebot (process-drawable)
+  ((initial-quat quaternion :inline :offset-assert 256)
+   (initial-pos  vector     :inline :offset-assert 272)
+   (hover-sound  uint32             :offset-assert 288)
+   (l-control    uint8      12      :offset-assert 292)
+   (my-vehicle   uint64             :offset-assert 304)
+   (spawn-part   uint64             :offset-assert 312)
+   (vehicle-part uint64             :offset-assert 320)
+   (sound-id     uint32             :offset-assert 328)
+   )
+  :method-count-assert 53
+  :size-assert         #x14c
+  :flag-assert         #x3500c0014c
+  (:state-methods
+    idle  ;; 50
+    shoot ;; 51
+    )
+  (:methods
+    (wrong-way-linebot-method-52 () none) ;; 52
+    )
+  )
+
+(deftype vehicle-antenna (process-drawable)
+  ((vehicle          uint64                          :offset-assert 248)
+   (attach-local-pos vector                  :inline :offset-assert 256)
+   (attach-rot       quaternion              :inline :offset-assert 272)
+   (jmod-antenna     uint8                   128     :offset-assert 288)
+   (jmod-tail        joint-mod-set-rot-local :inline :offset-assert 416)
+   (sim-state        vehicle-antenna-state   :inline :offset-assert 448)
+   (ant-tip-pos      vector                  :inline :offset-assert 448)
+   (ant-tip-vel      vector                  :inline :offset-assert 464)
+   (spring-pos       vector                  :inline :offset-assert 480)
+   (spring-vel       vector                  :inline :offset-assert 496)
+   (tail-pos         vector                  :inline :offset-assert 512)
+   (tail-vel         vector                  :inline :offset-assert 528)
+   (i-tip-node       int8                            :offset-assert 544)
+   (use-tail?        basic                           :offset-assert 548)
+   )
+  :method-count-assert 55
+  :size-assert         #x228
+  :flag-assert         #x3701a00228
+  (:state-methods
+    idle ;; 50
+    die ;; 51
+    )
+  (:methods
+    (vehicle-antenna-method-52 () none) ;; 52
+    (vehicle-antenna-method-53 () none) ;; 53
+    (vehicle-antenna-method-54 () none) ;; 54
+    )
+  )
+
 ;; manipy: minimal process-drawable subclass (same size as parent)
 (deftype manipy (process-drawable)
   ()
@@ -29785,6 +29476,98 @@
     (process-focusable-method-56 () int) ;; 56
     (process-focusable-method-57 () int) ;; 57
     (process-focusable-method-58 () int) ;; 58
+    )
+  )
+
+(deftype mine-a (process-focusable)
+  ((shooter           uint64             :offset-assert 256)
+   (destination-point vector     :inline :offset-assert 272)
+   (destination-rot   quaternion :inline :offset-assert 288)
+   (traj              trajectory :inline :offset-assert 304)
+   (beepy             uint32             :offset-assert 344)
+   (trail-tracker     uint64             :offset-assert 352)
+   (warning           basic              :offset-assert 360)
+   )
+  :method-count-assert 64
+  :size-assert         #x16c
+  :flag-assert         #x4000e0016c
+  (:state-methods
+    idle    ;; 59
+    falling ;; 60
+    die     ;; 61
+    )
+  (:methods
+    (mine-a-method-62 () none) ;; 62
+    (mine-a-method-63 () none) ;; 63
+    )
+  )
+
+(deftype mine-b (process-focusable)
+  ((shooter           uint64             :offset-assert 256)
+   (glued-to          uint64             :offset-assert 264)
+   (destination-point vector     :inline :offset-assert 272)
+   (destination-rot   quaternion :inline :offset-assert 288)
+   (traj              trajectory :inline :offset-assert 304)
+   (cached-rp-trans   vector     :inline :offset-assert 352)
+   (trail-tracker     uint64             :offset-assert 368)
+   (beepy             uint32             :offset-assert 376)
+   (attach-point      int32              :offset-assert 380)
+   (looseness         int32              :offset-assert 384)
+   (expires-on        uint64             :offset-assert 392)
+   (warning           basic              :offset-assert 400)
+   )
+  :method-count-assert 67
+  :size-assert         #x194
+  :flag-assert         #x4301100194
+  (:state-methods
+    idle         ;; 59
+    falling      ;; 60
+    leaping-onto ;; 61
+    attached     ;; 62
+    shake-off    ;; 63
+    die          ;; 64
+    )
+  (:methods
+    (mine-b-method-65 () none) ;; 65
+    (mine-b-method-66 () none) ;; 66
+    )
+  )
+
+(deftype red-sentry-bot (process-focusable)
+  ((destination-point       vector     :inline :offset-assert 256)
+   (destination-rot         quaternion :inline :offset-assert 272)
+   (traj                    trajectory :inline :offset-assert 288)
+   (next-target-poll        uint64             :offset-assert 328)
+   (targ-handle             uint64             :offset-assert 336)
+   (yaw                     float              :offset-assert 344)
+   (pitch                   float              :offset-assert 348)
+   (expire-at               int32              :offset-assert 352)
+   (hitpoints               float              :offset-assert 356)
+   (hitpoints-last          float              :offset-assert 360)
+   (hitpoints-prev-msg-time uint64             :offset-assert 368)
+   (flash                   uint8      16      :offset-assert 376)
+   (last-fired              uint64             :offset-assert 392)
+   (gun-loop                uint32             :offset-assert 400)
+   (warning                 basic              :offset-assert 404)
+   (firecontrol             basic              :offset-assert 408)
+   (ammo                    int16              :offset-assert 412)
+   (powerup-level           uint8              :offset-assert 414)
+   (shooter-id              int8               :offset-assert 415)
+   )
+  :method-count-assert 67
+  :size-assert         #x1a0
+  :flag-assert         #x43011001a0
+  (:state-methods
+    falling         ;; 59
+    idle            ;; 60
+    firing          ;; 61
+    firing-missiles ;; 62
+    die             ;; 63
+    )
+  (:methods
+    (red-sentry-bot-method-64 () none) ;; 64
+    (red-sentry-bot-method-65 () none) ;; 65
+    (red-sentry-bot-method-66 () none) ;; 66
     )
   )
   
@@ -33479,6 +33262,99 @@
     (hud-method-27 (_type_) symbol) ;; 27
     (hud-method-28 (_type_) none) ;; 28
     (hud-method-29 (_type_) none) ;; 29
+    )
+  )
+
+(deftype hud-vehicle (hud)
+  ((weapon-texture uint8 49 :offset-assert 6364)
+   (gun-texture                      basic              :offset-assert 6364)
+   (missile-texture                  basic              :offset-assert 6368)
+   (grenade-texture                  basic              :offset-assert 6372)
+   (taserram-texture                 basic              :offset-assert 6376)
+   (mine-texture                     basic              :offset-assert 6380)
+   (shield-texture                   basic              :offset-assert 6384)
+   (target-texture uint8 2 :offset-assert 6560)
+   (slot-roulette-active? uint8 2 :offset-assert 6568)
+   (button-out? uint8 2 :offset-assert 6576)
+   (weapon-picked? uint8 2 :offset-assert 6584)
+   (slot-roulette-start-time uint8 2 :offset-assert 6592)
+   (roulette-counter uint8 2 :offset-assert 6600)
+   (weapon-color uint8 2 :offset-assert 6608)
+   (selected-weapon uint8 2 :offset-assert 6610)
+   (powerup-level                    int32              :offset-assert 6612)
+   (last-light-level                 int8               :offset-assert 6616)
+   (light-bar-part-right-init        basic              :offset-assert 6620)
+   (light-bar-part-right-filled      basic              :offset-assert 6624)
+   (light-bar-part-left-init         basic              :offset-assert 6628)
+   (light-bar-part-left-filled       basic              :offset-assert 6632)
+   (current-light-eco                float              :offset-assert 6636)
+   (current-green-eco                float              :offset-assert 6640)
+   (current-blue-eco                 float              :offset-assert 6644)
+   (slot-weapon-color uint8 2 :offset-assert 6648)
+   (incoming?                        basic              :offset-assert 6652)
+   (light-eco-level                  float              :offset-assert 6656)
+   (light-eco-level-fx-start-time    uint32             :offset-assert 6660)
+   (split-screen-offset-left-x       float              :offset-assert 6664)
+   (split-screen-offset-right-x      float              :offset-assert 6668)
+   (split-screen-offset-y            float              :offset-assert 6672)
+   (hud-right-ammo-counter-1         hud-sprite :inline :offset-assert 3056)
+   (hud-right-ammo-counter-2         hud-sprite :inline :offset-assert 3120)
+   (hud-right-light-underlay         hud-sprite :inline :offset-assert 3184)
+   (hud-right-light-ctrl-1           hud-sprite :inline :offset-assert 3248)
+   (hud-right-light-ctrl-2           hud-sprite :inline :offset-assert 3312)
+   (hud-right-light-ctrl-3           hud-sprite :inline :offset-assert 3376)
+   (hud-right-light-bar              hud-sprite :inline :offset-assert 3440)
+   (hud-right-turbo-underlay         hud-sprite :inline :offset-assert 3504)
+   (hud-right-turbo-ctrl-1           hud-sprite :inline :offset-assert 3568)
+   (hud-right-turbo-ctrl-2           hud-sprite :inline :offset-assert 3632)
+   (hud-right-turbo-bar              hud-sprite :inline :offset-assert 3696)
+   (hud-right-display-weapon-field   hud-sprite :inline :offset-assert 3760)
+   (hud-right-upper-left             hud-sprite :inline :offset-assert 3824)
+   (hud-right-upper-right            hud-sprite :inline :offset-assert 3888)
+   (hud-right-lower-right            hud-sprite :inline :offset-assert 3952)
+   (hud-right-lower-left             hud-sprite :inline :offset-assert 4016)
+   (hud-right-ammo-counter-overlay   hud-sprite :inline :offset-assert 4080)
+   (hud-right-ammo-counter-overlay-2 hud-sprite :inline :offset-assert 4144)
+   (hud-right-weapon-icon-shadow     hud-sprite :inline :offset-assert 4208)
+   (hud-right-weapon-icon            hud-sprite :inline :offset-assert 4272)
+   (hud-right-display-shine          hud-sprite :inline :offset-assert 4336)
+   (hud-left-ammo-counter-1          hud-sprite :inline :offset-assert 4400)
+   (hud-left-ammo-counter-2          hud-sprite :inline :offset-assert 4464)
+   (hud-left-light-underlay          hud-sprite :inline :offset-assert 4528)
+   (hud-left-light-ctrl-1            hud-sprite :inline :offset-assert 4592)
+   (hud-left-light-ctrl-2            hud-sprite :inline :offset-assert 4656)
+   (hud-left-light-ctrl-3            hud-sprite :inline :offset-assert 4720)
+   (hud-left-light-bar               hud-sprite :inline :offset-assert 4784)
+   (hud-left-health-underlay         hud-sprite :inline :offset-assert 4848)
+   (hud-left-health-ctrl-1           hud-sprite :inline :offset-assert 4912)
+   (hud-left-health-ctrl-2           hud-sprite :inline :offset-assert 4976)
+   (hud-left-health-bar              hud-sprite :inline :offset-assert 5040)
+   (hud-left-display-weapon-field    hud-sprite :inline :offset-assert 5104)
+   (hud-left-upper-left              hud-sprite :inline :offset-assert 5168)
+   (hud-left-upper-right             hud-sprite :inline :offset-assert 5232)
+   (hud-left-lower-left              hud-sprite :inline :offset-assert 5296)
+   (hud-left-lower-right             hud-sprite :inline :offset-assert 5360)
+   (hud-left-ammo-counter-overlay    hud-sprite :inline :offset-assert 5424)
+   (hud-left-ammo-counter-overlay-2  hud-sprite :inline :offset-assert 5488)
+   (hud-left-weapon-icon-shadow      hud-sprite :inline :offset-assert 5552)
+   (hud-left-weapon-icon             hud-sprite :inline :offset-assert 5616)
+   (hud-left-display-shine           hud-sprite :inline :offset-assert 5680)
+   (hud-turbo-disabled               hud-sprite :inline :offset-assert 5744)
+   )
+  :method-count-assert 40
+  :size-assert         #x1a14
+  :flag-assert         #x2819901a14
+  (:methods
+    (hud-vehicle-method-30 () none) ;; 30
+    (hud-vehicle-method-31 () none) ;; 31
+    (hud-vehicle-method-32 () none) ;; 32
+    (hud-vehicle-method-33 () none) ;; 33
+    (hud-vehicle-method-34 () none) ;; 34
+    (hud-vehicle-method-35 () none) ;; 35
+    (hud-vehicle-method-36 () none) ;; 36
+    (hud-vehicle-method-37 () none) ;; 37
+    (hud-vehicle-method-38 () none) ;; 38
+    (hud-vehicle-method-39 () none) ;; 39
     )
   )
 
@@ -43962,6 +43838,54 @@
     )
   )
 
+(deftype v-wpn-red-smoke (vehicle-weapon-slot)
+  ((smoke-system uint64  :offset-assert 264)
+   (wait-time    int32   :offset-assert 272)
+   )
+  :method-count-assert 62
+  :size-assert         #x114
+  :flag-assert         #x3e00900114
+  (:state-methods
+    idle       ;; 50 (override)
+    wait-delay ;; 60
+    )
+  (:methods
+    (v-wpn-red-smoke-method-61 () none) ;; 61
+    )
+  )
+
+(deftype v-wpn-red-oil (vehicle-weapon-slot)
+  ((oil-emitter uint64  :offset-assert 264)
+   (wait-time   int32   :offset-assert 272)
+   )
+  :method-count-assert 62
+  :size-assert         #x114
+  :flag-assert         #x3e00900114
+  (:state-methods
+    idle       ;; 50 (override)
+    wait-delay ;; 60
+    )
+  (:methods
+    (v-wpn-red-oil-method-61 () none) ;; 61
+    )
+  )
+
+(deftype v-wpn-red-tractor-beam (vehicle-weapon-slot)
+  ((firing-at      uint64  :offset-assert 264)
+   (duration-left  int32   :offset-assert 272)
+   (using-side     uint8   :offset-assert 276)
+   (part-on-me     basic   :offset        224)
+   (part-on-target basic   :offset-assert 280)
+   )
+  :method-count-assert 61
+  :size-assert         #x11c
+  :flag-assert         #x3d0090011c
+  (:state-methods
+    idle   ;; 50 (override)
+    firing ;; 60 (new)
+    )
+  )
+
 ;; vehicle-weapon-slot cluster — 10 of 11 children activated
 ;; (tractor-beam deferred: offset-assert 224 conflicts with parent fields)
 
@@ -46316,6 +46240,56 @@
     (net-projectile-method-72 () none)
     (net-projectile-method-73 () none)
     (net-projectile-method-74 () none)
+    )
+  )
+
+(deftype v-toad-shot (net-projectile)
+  ((trail-tracker    uint64         :offset-assert 568)
+   (blast-radius     float          :offset-assert 576)
+   (powerup-level    uint8          :offset-assert 580)
+   (initial-velocity vector :inline :offset-assert 592)
+   (vehicle-perigee  float          :offset-assert 608)
+   )
+  :method-count-assert 76
+  :size-assert         #x264
+  :flag-assert         #x4c01e00264
+  (:methods
+    (v-toad-shot-method-75 () none) ;; 75
+    )
+  (:state-methods
+    die    ;; 50
+    impact ;; 52
+    )
+  )
+
+(deftype v-yellow-guided-missile (net-projectile)
+  ((trail-tracker        uint64                       :offset-assert 568)
+   (blast-radius         float                        :offset-assert 576)
+   (initial-velocity     float                        :offset-assert 580)
+   (time-of-next-pitch   uint64                       :offset-assert 584)
+   (time-strike-standoff int32                        :offset-assert 592)
+   (next-rot             quaternion           :inline :offset-assert 608)
+   (previous-target      uint64                       :offset-assert 624)
+   (pred                 net-predictor-simple :inline :offset-assert 640)
+   (defer-kaboom         uint64                       :offset-assert 952)
+   (last-hit             uint64                       :offset-assert 960)
+   )
+  :method-count-assert 81
+  :size-assert         #x3c8
+  :flag-assert         #x51034003c8
+  (:state-methods
+    die       ;; 50
+    dissipate ;; 51
+    impact    ;; 52
+    moving    ;; 53
+    launching ;; 75
+    wild      ;; 76
+    tracking  ;; 77
+    )
+  (:methods
+    (v-yellow-guided-missile-method-78 () none) ;; 78
+    (v-yellow-guided-missile-method-79 () none) ;; 79
+    (v-yellow-guided-missile-method-80 () none) ;; 80
     )
   )
   
@@ -49893,47 +49867,6 @@
   
 
 
-#|
-(deftype joint-mod-head (joint-mod)
-  ((mode            uint32             :offset-assert 0)
-   (process         basic              :offset-assert 4)
-   (joint           cspace             :offset-assert 8)
-   (target          vector     :inline :offset-assert 12)
-   (twist           vector     :inline :offset-assert 28)
-   (twist-max       vector     :inline :offset-assert 44)
-   (extra-twist     deg                :offset-assert 36)
-   (track-mode      track-mode         :offset-assert 40)
-   (look-at-count   uint16             :offset-assert 42)
-   (twist-range-x   meters             :offset-assert 52)
-   (twist-range-y   meters             :offset-assert 56)
-   (twist-speed-x   float              :offset-assert 60)
-   (twist-speed-y   float              :offset-assert 64)
-   (trans           vector     :inline :offset-assert 76)
-   (smushy-old      float              :offset-assert 76)
-   (smushy-off      float              :offset-assert 80)
-   (smushyv         float              :offset-assert 84)
-   (quat            quaternion :inline :offset-assert 92)
-   (scale           vector     :inline :offset-assert 108)
-   (notice-time     uint64             :offset-assert 124)
-   (flex-blend      float              :offset-assert 132)
-   (blend           float              :offset-assert 136)
-   (old-blend       float              :offset-assert 140)
-   (max-dist        meters             :offset-assert 144)
-   (ignore-angle    deg                :offset-assert 148)
-   (up              uint8              :offset-assert 152)
-   (nose            uint8              :offset-assert 153)
-   (ear             uint8              :offset-assert 154)
-   (base-joint      uint8              :offset-assert 155)
-   (base-nose       uint8              :offset-assert 156)
-   (shutting-down?  basic              :offset-assert 160)
-   (parented-scale? basic              :offset-assert 164)
-   )
-  :method-count-assert 16
-  :size-assert         #xac
-  :flag-assert         #x10000000ac
-  ;; field track-mode is likely a value type.
-  )
-|#
 
 
   
@@ -58912,18 +58845,59 @@
   :flag-assert         #x900000004
   )
 
+(deftype joint-mod-head (joint-mod)
+  ((mode            uint32             :offset-assert 0)
+   (process         basic              :offset-assert 4)
+   (joint           cspace             :offset-assert 8)
+   (target          vector     :inline :offset-assert 12)
+   (twist           vector     :inline :offset-assert 28)
+   (twist-max       vector     :inline :offset-assert 44)
+   (extra-twist     deg                :offset-assert 36)
+   (track-mode      track-mode         :offset-assert 40)
+   (look-at-count   uint16             :offset-assert 42)
+   (twist-range-x   meters             :offset-assert 52)
+   (twist-range-y   meters             :offset-assert 56)
+   (twist-speed-x   float              :offset-assert 60)
+   (twist-speed-y   float              :offset-assert 64)
+   (trans           vector     :inline :offset-assert 76)
+   (smushy-old      float              :offset-assert 76)
+   (smushy-off      float              :offset-assert 80)
+   (smushyv         float              :offset-assert 84)
+   (quat            quaternion :inline :offset-assert 92)
+   (scale           vector     :inline :offset-assert 108)
+   (notice-time     uint64             :offset-assert 124)
+   (flex-blend      float              :offset-assert 132)
+   (blend           float              :offset-assert 136)
+   (old-blend       float              :offset-assert 140)
+   (max-dist        meters             :offset-assert 144)
+   (ignore-angle    deg                :offset-assert 148)
+   (up              uint8              :offset-assert 152)
+   (nose            uint8              :offset-assert 153)
+   (ear             uint8              :offset-assert 154)
+   (base-joint      uint8              :offset-assert 155)
+   (base-nose       uint8              :offset-assert 156)
+   (shutting-down?  basic              :offset-assert 160)
+   (parented-scale? basic              :offset-assert 164)
+   )
+  :method-count-assert 16
+  :size-assert         #xac
+  :flag-assert         #x10000000ac
+  ;; field track-mode is likely a value type.
+  )
+
 ;; part-tracker — full definition above at L29817
 
 ;; touching-prims-entry-pool — full definition above at L30303
 
-;; touching-list — 5 new methods (9-13), new overrides slot 0, total=14
+;; touching-list from jak3 — 5 new methods, new overrides slot 0, total=14
 (deftype touching-list (structure)
-  ((num-touching-shapes  int32  :offset-assert 0)
-   (resolve-u            int8   :offset-assert 4)
+  ((num-touching-shapes  int32                    :offset-assert 0)
+   (resolve-u            int8                     :offset-assert 4)
+   (touching-shapes      touching-shapes-entry 32 :inline :offset-assert 16)
    )
   :method-count-assert 14
-  :size-assert         #x5
-  :flag-assert         #xe00000005
+  :size-assert         #x410
+  :flag-assert         #xe00000410
   (:methods
     (new (symbol type) _type_) ;; 0
     (add-touching-prims (_type_ object object float object object) none) ;; 9
@@ -58992,6 +58966,18 @@
     (eco-method-53 (_type_) none) ;; 53
     (eco-method-54 (_type_) none) ;; 54
     (eco-method-55 (_type_) none) ;; 55
+    )
+  )
+
+(deftype eco-blue (eco)
+  ((launcher    uint8 20 :offset-assert 248)
+   (birth-accum uint8 20 :offset-assert 268)
+   )
+  :method-count-assert 56
+  :size-assert         #x120
+  :flag-assert         #x3800900120
+  (:state-methods
+    running ;; 50 (override)
     )
   )
 
