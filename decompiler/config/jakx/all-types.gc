@@ -56732,7 +56732,7 @@
 
 
   
-#|(deftype ice-flag (process-drawable)
+(deftype ice-flag (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -56740,7 +56740,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
@@ -56778,7 +56778,7 @@
 
 
   
-#|(deftype kcro-flag-down (process-drawable)
+(deftype kcro-flag-down (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -56786,7 +56786,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
@@ -56894,7 +56894,7 @@
 
 
   
-#|(deftype garage-cinema (process-drawable)
+(deftype garage-cinema (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -56902,7 +56902,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
