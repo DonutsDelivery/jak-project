@@ -51642,15 +51642,15 @@
 
 
   
-#|(deftype test-process (process-focusable)
-  ((state-time uint64  :offset-assert 240)
-   (effect     uint8   :offset-assert 264)
-   (sound-id   uint32  :offset-assert 268)
+(deftype test-process (process-focusable)
+  ((pad      uint8  8 :offset-assert 256)
+   (effect   uint8    :offset-assert 264)
+   (sound-id uint32   :offset-assert 268)
    )
   :method-count-assert 59
   :size-assert         #x110
   :flag-assert         #x3b00800110
-  )|#
+  )
   
 
 
