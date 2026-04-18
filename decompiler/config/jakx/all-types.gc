@@ -17162,18 +17162,8 @@
 
 
   
-(deftype texture-page-dir (basic)
-  ((length  int32                       :offset-assert 4)
-   (entries texture-page-dir-entry 1 :inline :offset-assert 8)
-   )
-  :method-count-assert 11
-  :size-assert         #x14
-  :flag-assert         #xb00000014
-  (:methods
-    (unlink-shaders-in-heap (_type_ kheap) int) ;; 9
-    (texture-page-dir-method-10 () none) ;; 10
-    )
-  )
+;; texture-page-dir — full definition above at L11564
+
   
 
 
@@ -38525,11 +38515,11 @@
 
 
   
-#|(deftype actor-hash-buckets (structure)
-  ((hash spatial-hash              :offset-assert 0) ;; guessed by decompiler
-   (list engine                    :offset-assert 4) ;; guessed by decompiler
-   (data actor-hash-bucket 4       :offset-assert 8) ;; guessed by decompiler
-   (tpos vector            :inline :offset-assert 80)
+(deftype actor-hash-buckets (structure)
+  ((hash spatial-hash                :offset-assert 0) ;; guessed by decompiler
+   (list engine                      :offset-assert 4) ;; guessed by decompiler
+   (data actor-hash-bucket 4 :inline :offset-assert 16) ;; guessed by decompiler
+   (tpos vector            :inline   :offset-assert 80)
    )
   :method-count-assert 10
   :size-assert         #x60
@@ -38537,7 +38527,7 @@
   (:methods
     (actor-hash-buckets-method-9 (_type_) int) ;; 9
     )
-  )|#
+  )
   
 
 
