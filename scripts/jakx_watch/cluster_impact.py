@@ -306,6 +306,12 @@ def main() -> int:
             if tok in all_type_names and tok != cname:
                 commented_body_refs[tok].add(cname)
 
+    # Build type → cluster_root reverse map for cascade analysis
+    type_to_cluster: dict[str, str] = {}
+    for root, info in clusters.items():
+        for t in info["types"]:
+            type_to_cluster[t] = root
+
     # Score each cluster
     ranked = []
     for root, info in clusters.items():
@@ -330,6 +336,17 @@ def main() -> int:
                     c_unlock_set.add(ref_by)
         c_unlock = len(c_unlock_set)
 
+        # Cascade analysis: group c_unlock_set members by their cluster root.
+        # cascades_to = {other_cluster_root: count_of_types_unlocked_in_that_cluster}
+        # This answers: "activating THIS cluster unblocks N types in cluster Z."
+        cascades_to: dict[str, int] = collections.Counter()
+        for t in c_unlock_set:
+            other_root = type_to_cluster.get(t)
+            if other_root and other_root != root:
+                cascades_to[other_root] += 1
+        # Sort by count descending for display
+        cascades_to_sorted = sorted(cascades_to.items(), key=lambda x: -x[1])
+
         # Count how many types in this cluster (including root) have pending clobbers
         clobber_count = sum(
             1 for t in cluster_types if t in pending_clobbers
@@ -343,6 +360,7 @@ def main() -> int:
             "total_refs": total_refs,
             "ref_per_cost": ref_per_cost,
             "c_unlock": c_unlock,
+            "cascades_to": cascades_to_sorted,
             "pending_clobber": clobber_count,
             "root_clobbered": root in pending_clobbers,
             "types": info["types"],
@@ -353,13 +371,14 @@ def main() -> int:
 
     # Console summary
     print(f"\nTop {min(args.top, len(ranked))} clusters by ref_per_cost:")
-    print(f"  {'root':<30} {'size':>5} {'depth':>5} {'f_refs':>6} {'t_refs':>6} {'r/cost':>7} {'c_unlock':>8} {'clobber':>7}")
+    print(f"  {'root':<30} {'size':>5} {'depth':>5} {'f_refs':>6} {'t_refs':>6} {'r/cost':>7} {'c_unlock':>8} {'clobber':>7}  cascades_to (top 2)")
     for r in ranked[: args.top]:
         clob_flag = f"*{r['pending_clobber']}" if r["pending_clobber"] else "-"
+        top_cascades = ", ".join(f"{root}(+{n})" for root, n in r["cascades_to"][:2])
         print(
             f"  {r['root']:<30} {r['size']:>5} {r['max_depth']:>5} "
             f"{r['file_refs']:>6} {r['total_refs']:>6} {r['ref_per_cost']:>7.2f} "
-            f"{r['c_unlock']:>8} {clob_flag:>7}"
+            f"{r['c_unlock']:>8} {clob_flag:>7}  {top_cascades or '-'}"
         )
 
     if args.detail:
@@ -401,16 +420,21 @@ def main() -> int:
         "`(define-extern FOO object)` at line >59000. These will be re-clobbered at runtime "
         "even after deftype activation — the clobber line must be commented out first. "
         "`*N` = N types in cluster need clobber fix; `-` = clean.",
+        "- **cascades_to** — top cluster(s) that become partially unblocked when this cluster "
+        "is activated (format: `cluster-root(+N)` where N = types in that cluster that "
+        "reference types from this cluster). Activating high-cascade clusters chains into the "
+        "next cluster for free.",
         "",
-        "| # | r/cost | root (active anchor) | size | depth | f_refs | t_refs | c_unlock | clobber |",
-        "|---|-------:|---------------------|-----:|------:|-------:|-------:|---------:|--------:|",
+        "| # | r/cost | root (active anchor) | size | depth | f_refs | t_refs | c_unlock | clobber | cascades_to |",
+        "|---|-------:|---------------------|-----:|------:|-------:|-------:|---------:|--------:|-------------|",
     ]
     for i, r in enumerate(ranked[: args.top], 1):
         clob_cell = f"\\*{r['pending_clobber']}" if r["pending_clobber"] else "-"
+        cascade_cell = ", ".join(f"`{root}`(+{n})" for root, n in r["cascades_to"][:2]) or "-"
         lines.append(
             f"| {i} | {r['ref_per_cost']:.2f} | `{r['root']}` | "
             f"{r['size']} | {r['max_depth']} | {r['file_refs']} | {r['total_refs']} | "
-            f"{r['c_unlock']} | {clob_cell} |"
+            f"{r['c_unlock']} | {clob_cell} | {cascade_cell} |"
         )
 
     lines += [
@@ -434,6 +458,26 @@ def main() -> int:
             lines.append(f"| {d} | `{t}` | {fr} | {clob} |")
         lines.append("")
 
+    # Cascade chain section: show top 20 clusters with their best cascade target
+    # Only include clusters that cascade into at least one other
+    cascade_entries = [(r["root"], r["cascades_to"]) for r in ranked if r["cascades_to"]]
+    cascade_entries.sort(key=lambda x: -(x[1][0][1] if x[1] else 0))
+    lines += [
+        "## Cross-cluster cascade graph",
+        "",
+        "Activating cluster **A** puts these types in cluster **B** one dependency closer "
+        "to activation. Use this to plan cluster chains: pick A first if it has a high-scoring "
+        "B that follows naturally.",
+        "",
+        "Format: `cluster-A → cluster-B (+N types in B reference types in A)`",
+        "",
+    ]
+    for root, cascades in cascade_entries[:20]:
+        top = cascades[:3]
+        targets = " → ".join(f"`{cr}`(+{n})" for cr, n in top)
+        lines.append(f"- `{root}` → {targets}")
+    lines.append("")
+
     lines += [
         "## How to use",
         "",
@@ -443,6 +487,8 @@ def main() -> int:
         "3. Use `scripts/jakx_watch/emit_stub.py --name TYPE` to generate the activation body.",
         "4. Re-run `bash scripts/jakx_watch/run.sh` after each depth layer to measure unblock delta.",
         "5. Cross-reference with `activation_queue.md` for per-type readiness scores.",
+        "6. Use the **cascade graph** above to plan multi-cluster chains: if cluster A cascades",
+        "   into B(+10), activate A then immediately proceed to B.",
     ]
 
     OUTPUT_MD.write_text("\n".join(lines) + "\n")
