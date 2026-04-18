@@ -57299,7 +57299,7 @@
 
 
   
-(deftype interface-world-map (process-drawable)
+#|(deftype interface-world-map (process-drawable)
   ((u               float          :offset-assert 248)
    (curve           basic          :offset-assert 256)
    (path-u          float          :offset-assert 260)
@@ -57309,36 +57309,36 @@
   :method-count-assert 53
   :size-assert         #x150
   :flag-assert         #x3500c00150
+  (:methods
+    (interface-world-map-method-52 () none) ;; 52
+    )
   (:state-methods
     idle ;; 50
     leave ;; 51
     )
-  (:methods
-    (interface-world-map-method-52 () none) ;; 52
-    )
-  )
+  )|#
   
 
 
 
   
-(deftype world-map-kras-mesh (interface-world-map)
+#|(deftype world-map-kras-mesh (interface-world-map)
   ()
   :method-count-assert 53
   :size-assert         #x150
   :flag-assert         #x3500c00150
-  )
+  )|#
   
 
 
 
   
-(deftype world-map-docks-mesh (interface-world-map)
+#|(deftype world-map-docks-mesh (interface-world-map)
   ()
   :method-count-assert 53
   :size-assert         #x150
   :flag-assert         #x3500c00150
-  )
+  )|#
   
 
 
