@@ -59573,26 +59573,26 @@
 (define-extern update-engine-loop-state-work object)
 ;; (define-extern v-bear object) ;; clobbers active deftype
 ;; (define-extern v-bobcat object) ;; clobbers active deftype
-(define-extern v-cheetah object)
-(define-extern v-cougar object)
-(define-extern v-daxtermobile object)
+;; (define-extern v-cheetah object) ;; clobbers active deftype
+;; (define-extern v-cougar object) ;; clobbers active deftype
+;; (define-extern v-daxtermobile object) ;; clobbers active deftype
 (define-extern vehicle-antenna object)
-(define-extern vehicle-debris object)
-(define-extern vehicle-hud-view-0 object)
-(define-extern vehicle-manager object)
+;; (define-extern vehicle-debris object) ;; clobbers active deftype
+;; (define-extern vehicle-hud-view-0 object) ;; clobbers active deftype
+;; (define-extern vehicle-manager object) ;; clobbers active deftype
 (define-extern vehicle-wheel-init-params object)
-(define-extern v-falcon object)
-(define-extern v-gila object)
-(define-extern vif-bank object)
-(define-extern v-leopard object)
-(define-extern v-mongoose object)
-(define-extern v-panther object)
-(define-extern v-possum object)
-(define-extern v-snake object)
-(define-extern v-tiger object)
+;; (define-extern v-falcon object) ;; clobbers active deftype
+;; (define-extern v-gila object) ;; clobbers active deftype
+;; (define-extern vif-bank object) ;; clobbers active deftype
+;; (define-extern v-leopard object) ;; clobbers active deftype
+;; (define-extern v-mongoose object) ;; clobbers active deftype
+;; (define-extern v-panther object) ;; clobbers active deftype
+;; (define-extern v-possum object) ;; clobbers active deftype
+;; (define-extern v-snake object) ;; clobbers active deftype
+;; (define-extern v-tiger object) ;; clobbers active deftype
 (define-extern v-toad-shot object)
-(define-extern v-wolf object)
-(define-extern v-wombat object)
+;; (define-extern v-wolf object) ;; clobbers active deftype
+;; (define-extern v-wombat object) ;; clobbers active deftype
 (define-extern v-wpn-net-info object)
 (define-extern v-wpn-purple-shield object)
 (define-extern v-wpn-red-turbo-preventor object)
@@ -59605,9 +59605,9 @@
 ;; (define-extern bone-layout object) ;; clobbers active deftype
 ;; (define-extern collide-frag-mesh object) ;; clobbers active deftype
 ;; (define-extern connection-minimap object) ;; clobbers active deftype
-(define-extern fact-info-crate object)
-(define-extern foreground-area object)
-(define-extern hang-time-hud-single object)
+;; (define-extern fact-info-crate object) ;; clobbers active deftype
+;; (define-extern foreground-area object) ;; clobbers active deftype
+;; (define-extern hang-time-hud-single object) ;; clobbers active deftype
 ;; (define-extern history object) ;; clobbers active deftype
 (define-extern hud-background object)
 (define-extern hud-box object)
