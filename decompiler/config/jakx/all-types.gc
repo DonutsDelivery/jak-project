@@ -28316,17 +28316,19 @@
   :method-count-assert 60
   :size-assert         #x124
   :flag-assert         #x3c00a00124
+  (:state-methods
+    pov-camera-abort ;; 50
+    pov-camera-done-playing ;; 51
+    pov-camera-playing ;; 52
+    pov-camera-start-playing ;; 53
+    pov-camera-startup ;; 54
+    )
   (:methods
-    (pov-camera-method-50 () none) ;; 50
-    (pov-camera-method-51 () none) ;; 51
-    (pov-camera-method-52 () none) ;; 52
-    (pov-camera-method-53 () none) ;; 53
-    (pov-camera-method-54 () none) ;; 54
-    (pov-camera-method-55 () none) ;; 55
-    (pov-camera-method-56 () symbol) ;; 56
-    (pov-camera-method-57 () none) ;; 57
-    (pov-camera-method-58 () int) ;; 58
-    (pov-camera-method-59 () int) ;; 59
+    (abort? (_type_) symbol) ;; 55
+    (target-grabbed? (_type_) symbol) ;; 56
+    (set-stack-size! (_type_) none) ;; 57
+    (pov-camera-method-58 (_type_) none) ;; 58
+    (target-released? (_type_) symbol) ;; 59
     )
   )
   
