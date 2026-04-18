@@ -6508,18 +6508,16 @@
 
 
 
-#|
 (deftype strip-segment (structure)
-  ((strip-length int8      :offset-assert 0)
-   (strip-index  int8      :offset-assert 1)
-   (birth-time   int32     :offset-assert 4)
-   (points       UNKNOWN 3 :offset-assert 16)
+  ((strip-length int8              :offset-assert 0)
+   (strip-index  int8              :offset-assert 1)
+   (birth-time   int32             :offset-assert 4)
+   (points       vector 3 :inline  :offset-assert 16)
    )
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
   )
-|#
 
 
 
