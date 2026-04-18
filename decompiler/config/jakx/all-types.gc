@@ -58915,7 +58915,7 @@
    (name       symbol                    :offset-assert 8)
    (process    process-drawable          :offset-assert 12)
    (path-ptr   (pointer float)           :offset-assert 16) ;; jakx extra vs jak3
-   (curve      uint8 20                  :offset 20)        ;; curve :inline proxy (20 not 16-aligned)
+   (curve      curve             :inline  :offset-assert 20)
    )
   :method-count-assert 33
   :size-assert         #x28
