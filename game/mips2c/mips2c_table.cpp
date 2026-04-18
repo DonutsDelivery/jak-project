@@ -428,6 +428,23 @@ namespace init_boundary_regs { extern void link(); }
 namespace draw_boundary_polygon { extern void link(); }
 namespace render_boundary_quad { extern void link(); }
 namespace render_boundary_tri { extern void link(); }
+// shadow.cpp port (see game/mips2c/jakx_functions/shadow.cpp)
+namespace shadow_xform_verts { extern void link(); }
+namespace shadow_calc_dual_verts { extern void link(); }
+namespace shadow_scissor_edges { extern void link(); }
+namespace shadow_scissor_top { extern void link(); }
+namespace shadow_init_vars { extern void link(); }
+namespace shadow_find_facing_single_tris { extern void link(); }
+namespace shadow_find_single_edges { extern void link(); }
+namespace shadow_find_facing_double_tris { extern void link(); }
+namespace shadow_find_double_edges { extern void link(); }
+namespace shadow_add_verts { extern void link(); }
+namespace shadow_add_facing_single_tris { extern void link(); }
+namespace shadow_add_single_edges { extern void link(); }
+namespace shadow_add_single_tris { extern void link(); }
+namespace shadow_add_double_tris { extern void link(); }
+namespace shadow_add_double_edges { extern void link(); }
+namespace shadow_execute { extern void link(); }
 // sparticle_launcher.cpp port (see game/mips2c/jakx_functions/sparticle_launcher.cpp)
 namespace sparticle_motion_blur { extern void link(); }
 namespace particle_adgif { extern void link(); }
@@ -820,14 +837,14 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
        jakx::clip_polygon_against_positive_hyperplane::link,
        jakx::clip_polygon_against_negative_hyperplane::link}},
      {"shadow-cpu",
-      {jak3::shadow_xform_verts::link, jak3::shadow_execute::link,
-       jak3::shadow_calc_dual_verts::link, jak3::shadow_scissor_edges::link,
-       jak3::shadow_scissor_top::link, jak3::shadow_init_vars::link,
-       jak3::shadow_find_facing_single_tris::link, jak3::shadow_find_facing_double_tris::link,
-       jak3::shadow_find_single_edges::link, jak3::shadow_find_double_edges::link,
-       jak3::shadow_add_verts::link, jak3::shadow_add_facing_single_tris::link,
-       jak3::shadow_add_single_edges::link, jak3::shadow_add_double_edges::link,
-       jak3::shadow_add_single_tris::link, jak3::shadow_add_double_tris::link}},
+      {jakx::shadow_xform_verts::link, jakx::shadow_execute::link,
+       jakx::shadow_calc_dual_verts::link, jakx::shadow_scissor_edges::link,
+       jakx::shadow_scissor_top::link, jakx::shadow_init_vars::link,
+       jakx::shadow_find_facing_single_tris::link, jakx::shadow_find_facing_double_tris::link,
+       jakx::shadow_find_single_edges::link, jakx::shadow_find_double_edges::link,
+       jakx::shadow_add_verts::link, jakx::shadow_add_facing_single_tris::link,
+       jakx::shadow_add_single_edges::link, jakx::shadow_add_double_edges::link,
+       jakx::shadow_add_single_tris::link, jakx::shadow_add_double_tris::link}},
      {"cloth", {jak3::method_21_cloth_system::link}}}};
 
 void LinkedFunctionTable::reg(const std::string& name, u64 (*exec)(void*), u32 stack_size) {
