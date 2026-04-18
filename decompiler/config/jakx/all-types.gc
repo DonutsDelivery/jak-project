@@ -1694,15 +1694,7 @@
 
 
   
-#|(deftype chat-window-menu (base-menu)
-  ()
-  :method-count-assert 65
-  :size-assert         #x218
-  :flag-assert         #x4101900218
-  (:state-methods
-    running ;; 52
-    )
-  )|#
+
   
 
 
@@ -2341,21 +2333,7 @@
 
 
 
-#|(deftype in-game-hud (hud)
-  ((real-items           basic  :offset-assert 6364)
-   (items                basic  :offset-assert 6368)
-   (manager              basic  :offset-assert 6372)
-   (inited-strings-count int32  :offset-assert 6376)
-   )
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  (:methods
-    (in-game-hud-method-30 () none) ;; 30
-    (in-game-hud-method-31 () none) ;; 31
-    (in-game-hud-method-32 () none) ;; 32
-    )
-  )|#
+
   
 
 
@@ -2857,34 +2835,19 @@
 
 
   
-#|(deftype hud-slowmo (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-top-split-bar (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-side-split-bar (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -3017,56 +2980,31 @@
 
 
   
-#|(deftype hud-results-medal (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-results-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-results-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-results-team-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-results-team-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -3102,34 +3040,19 @@
 
 
   
-#|(deftype hud-results-grand-prix (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-results-grand-prix-totals (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-results-medal-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -3170,67 +3093,37 @@
 
 
   
-#|(deftype high-scores-list (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-background (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-background-top-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-background-top-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-background-side-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-background-side-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -3290,45 +3183,25 @@
 
 
   
-#|(deftype hud-game-end-grand-prix (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-game-end-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-game-end-side-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-game-end-top-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -3345,56 +3218,31 @@
 
 
   
-#|(deftype hud-cash-stats-single (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-cash-stats-top-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-cash-stats-top-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-cash-stats-side-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-cash-stats-side-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -3492,111 +3340,61 @@
 
 
   
-#|(deftype death-indicator-view-10 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype death-indicator-view-11 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype death-indicator-view-12 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype death-indicator-view-13 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype death-indicator-view-14 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype death-indicator-view-20 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype death-indicator-view-21 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype death-indicator-view-22 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype death-indicator-view-23 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype death-indicator-view-24 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -3671,56 +3469,31 @@
 
 
   
-#|(deftype hud-points-combo-display0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-points-combo-display1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-points-combo-display2 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-points-combo-display3 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-points-combo-display4 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -3746,67 +3519,37 @@
 
 
   
-#|(deftype text-display-deflected-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype text-display-deflected-view-2 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype text-display-sblastered-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype text-display-sblastered-view-2 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype text-display-supernova-backfire-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype text-display-supernova-backfire-view-2 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -3829,56 +3572,31 @@
 
 
   
-#|(deftype hud-points-icon-display0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-points-icon-display1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-points-icon-display2 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-points-icon-display3 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-points-icon-display4 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -3945,12 +3663,7 @@
 
 
   
-#|(deftype text-display-nice-shot (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -3968,23 +3681,13 @@
 
 
   
-#|(deftype hud-headset-talker-race (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-headset-talker-other (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -4061,100 +3764,55 @@
 
 
   
-#|(deftype hud-in-game-menu-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-in-game-menu-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-in-game-menu-view-2 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-in-game-menu-view-shared-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-in-game-menu-view-shared-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-in-game-menu-view-shared-2 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-in-game-menu-networked-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-in-game-menu-networked-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-in-game-menu-networked-view-2 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -4198,34 +3856,19 @@
 
 
   
-#|(deftype hud-in-game-menu-options-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-in-game-menu-options-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-in-game-menu-options-view-2 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -4248,23 +3891,13 @@
 
 
   
-#|(deftype intro-hud-view (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype special-intro-hud-view (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -4429,45 +4062,25 @@
 
 
   
-#|(deftype hud-race-stats-single (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-race-stats-top-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-race-stats-side-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-race-stats-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -4491,45 +4104,25 @@
 
 
   
-#|(deftype hud-deathrace-stats-single (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-deathrace-stats-multi (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-deathrace-stats-split-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-deathrace-stats-split-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -4553,23 +4146,13 @@
 
 
   
-#|(deftype hud-rushhour-stats-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-rushhour-stats-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -4599,12 +4182,7 @@
 
 
   
-#|(deftype boss-hud (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -4763,78 +4341,43 @@
 
 
   
-#|(deftype hud-deathmatch-single (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-deathmatch-split-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-deathmatch-split-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-deathmatch-score-drop-view-10 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-deathmatch-score-drop-view-11 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-deathmatch-score-drop-view-20 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-deathmatch-score-drop-view-21 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -5112,23 +4655,13 @@
 
 
   
-#|(deftype vehicle-hud-view-0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype vehicle-hud-view-1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -5171,12 +4704,7 @@
 
 
   
-#|(deftype power-slide-hud-single (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -5206,12 +4734,7 @@
 
 
   
-#|(deftype hang-time-hud-single (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -5367,27 +4890,7 @@
 
 
   
-#|(deftype wvehicle-wheel-launcher-spec (structure)
-  ((mat                    matrix              :offset-assert 0)
-   (particle-system        sparticle-system    :offset-assert 4) ;; guessed by decompiler
-   (streak-system          basic               :offset-assert 8)
-   (launcher               sparticle-launcher  :offset-assert 12) ;; guessed by decompiler
-   (num-spec               sp-field-init-spec  :offset-assert 16)
-   (r-spec                 sp-field-init-spec  :offset-assert 20)
-   (g-spec                 sp-field-init-spec  :offset-assert 24)
-   (b-spec                 sp-field-init-spec  :offset-assert 28)
-   (a-spec                 sp-field-init-spec  :offset-assert 32)
-   (scale-x-spec           sp-field-init-spec  :offset-assert 36)
-   (scale-y-spec           sp-field-init-spec  :offset-assert 40)
-   (fade-a-spec            sp-field-init-spec  :offset-assert 44)
-   (timer-spec             sp-field-init-spec  :offset-assert 48)
-   (ptr-part-birth-accum   uint32              :offset-assert 52)
-   (ptr-streak-birth-accum uint32              :offset-assert 56)
-   )
-  :method-count-assert 9
-  :size-assert         #x3c
-  :flag-assert         #x90000003c
-  )|#
+
   
 
 
@@ -5490,14 +4993,7 @@
 
 
   
-#|(deftype wvehicle-sound-work (structure)
-  ((roll-basis-params  wvehicle-sound-loop-params 6 :offset-assert 0) ;; guessed by decompiler
-   (slide-basis-params wvehicle-sound-loop-params 2 :offset-assert 96) ;; guessed by decompiler
-   )
-  :method-count-assert 9
-  :size-assert         #x80
-  :flag-assert         #x900000080
-  )|#
+
   
 
 
@@ -5836,24 +5332,7 @@
 
 
   
-#|(deftype wvehicle-probe-work (structure)
-  ((mat               matrix        :inline :offset-assert 0)
-   (world-pos         vector        :inline :offset-assert 64)
-   (probe-dir         vector        :inline :offset-assert 80)
-   (tmp               vector        :inline :offset-assert 96)
-   (ground-normal-sum vector        :inline :offset-assert 112)
-   (probe-uu          float                 :offset-assert 128)
-   (wheel-radius      float                 :offset-assert 132)
-   (water-y           float                 :offset-assert 136)
-   (surface-type      uint8                 :offset-assert 140)
-   (surface-depth     float                 :offset-assert 144)
-   (material          uint64                :offset-assert 152)
-   (cquery            collide-query :inline :offset-assert 160)
-   )
-  :method-count-assert 9
-  :size-assert         #x2bc
-  :flag-assert         #x9000002bc
-  )|#
+
   
 
 
@@ -5932,67 +5411,37 @@
 
 
   
-#|(deftype hud-player-indicators-view0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-player-indicators-view1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-artifact-indicators-view0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-artifact-indicators-view1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-assassin-indicators-view0 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
 
   
-#|(deftype hud-assassin-indicators-view1 (in-game-hud)
-  ()
-  :method-count-assert 33
-  :size-assert         #x18ec
-  :flag-assert         #x21186018ec
-  )|#
+
   
 
 
@@ -6639,30 +6088,13 @@
 
 
   
-#|(deftype v-wpn-red-sentry-gun (vehicle-weapon-slot)
-  ()
-  :method-count-assert 60
-  :size-assert         #x105
-  :flag-assert         #x3c00800105
-  (:state-methods
-    idle ;; 50
-    )
-  )|#
+
   
 
 
 
   
-#|(deftype v-wpn-red-drone-gun (vehicle-weapon-slot)
-  ()
-  :method-count-assert 61
-  :size-assert         #x105
-  :flag-assert         #x3d00800105
-  (:state-methods
-    idle ;; 50
-    firing ;; 60
-    )
-  )|#
+
   
 
 
@@ -6774,17 +6206,7 @@
 
 
   
-#|(deftype joint-mod-set-rot-local (joint-mod-base)
-  ((flags      uint16             :offset-assert 0)
-   (node-index int16              :offset-assert 2)
-   (proc       uint32             :offset-assert 4)
-   (callback   basic              :offset-assert 8)
-   (rotation   quaternion :inline :offset-assert 16)
-   )
-  :method-count-assert 12
-  :size-assert         #x20
-  :flag-assert         #xc00000020
-  )|#
+
   
 
 
@@ -20141,7 +19563,7 @@
 
 
   
-#|(deftype talker (process)
+(deftype talker (process)
   ((trans          vector              :inline :offset-assert 144)
    (message        talker-speech-class         :offset-assert 160)
    (total-time     uint64                      :offset-assert 168) ;; time-frame
@@ -20156,22 +19578,26 @@
    (save?          symbol                      :offset-assert 224) ;; guessed by decompiler
    (grab?          symbol                      :offset-assert 228) ;; guessed by decompiler
    )
-  :method-count-assert 19
+  :method-count-assert 24
   :size-assert         #xe8
-  :flag-assert         #x13006000e8
+  :flag-assert         #x18006000e8
   (:methods
-    (talker-method-9 (_type_) none) ;; 9
-    (talker-method-10 (_type_) none) ;; 10
-    (talker-method-11 (_type_) none) ;; 11
-    (talker-method-12 (_type_) none) ;; 12
-    (talker-method-13 (_type_) none) ;; 13
-    (talker-method-14 () _type_ :state) ;; 14
-    (talker-method-15 () _type_ :state) ;; 15
-    (talker-method-16 () _type_ :state) ;; 16
-    (talker-method-17 (_type_) none) ;; 17 ;; (talker-method-17 (_type_) none)
+    (talker-method-14 (_type_) none) ;; 14
+    (talker-method-15 (_type_) none) ;; 15
+    (talker-method-16 (_type_) none) ;; 16
+    (talker-method-17 (_type_) none) ;; 17
     (talker-method-18 (_type_) none) ;; 18
     )
-  )|#
+  (:state-methods
+    talker-state-19 ;; 19
+    talker-state-20 ;; 20
+    talker-state-21 ;; 21
+    )
+  (:methods
+    (talker-method-22 (_type_) none) ;; 22
+    (talker-method-23 (_type_) none) ;; 23
+    )
+  )
   
 
 
@@ -27928,24 +27354,7 @@
 
 
   
-#|(deftype net-available-game (structure)
-  ((info             net-available-game-info :inline :offset-assert 0)
-   (connect-info     net-connection-info     :inline :offset-assert 104)
-   (medius-world-id  int32                           :offset-assert 260)
-   (format-game-name uint8                   64      :offset-assert 264)
-   )
-  :method-count-assert 15
-  :size-assert         #x148
-  :flag-assert         #xf00000148
-  (:methods
-    (net-available-game-method-9 () none) ;; 9
-    (net-available-game-method-10 () none) ;; 10
-    (net-available-game-method-11 () none) ;; 11
-    (net-available-game-method-12 () none) ;; 12
-    (net-available-game-method-13 () none) ;; 13
-    (net-available-game-method-14 () none) ;; 14
-    )
-  )|#
+
   
 
 
@@ -29042,55 +28451,7 @@
 
 
   
-#|(deftype joint-mod (basic)
-  ((mode            joint-mod-mode           :offset-assert 4) ;; guessed by decompiler
-   (process         process-drawable         :offset-assert 8) ;; guessed by decompiler
-   (joint           cspace                   :offset-assert 12)
-   (target          vector           :inline :offset-assert 16)
-   (twist           vector           :inline :offset-assert 32)
-   (twist-max       vector           :inline :offset-assert 48)
-   (extra-twist     deg                      :offset-assert 40) ;; degrees
-   (track-mode      track-mode               :offset-assert 44)
-   (look-at-count   uint16                   :offset-assert 46)
-   (twist-range-x   meters                   :offset-assert 56)
-   (twist-range-y   meters                   :offset-assert 60)
-   (twist-speed-x   float                    :offset-assert 64)
-   (twist-speed-y   float                    :offset-assert 68)
-   (trans           vector           :inline :offset-assert 80)
-   (smushy-old      float                    :offset-assert 80)
-   (smushy-off      float                    :offset-assert 84)
-   (smushyv         float                    :offset-assert 88)
-   (quat            quaternion       :inline :offset-assert 96)
-   (scale           vector           :inline :offset-assert 112)
-   (notice-time     uint64                   :offset-assert 128) ;; time-frame
-   (flex-blend      float                    :offset-assert 136)
-   (blend           float                    :offset-assert 140)
-   (old-blend       float                    :offset-assert 144)
-   (max-dist        meters                   :offset-assert 148)
-   (ignore-angle    deg                      :offset-assert 152) ;; degrees
-   (up              uint8                    :offset-assert 156)
-   (nose            uint8                    :offset-assert 157)
-   (ear             uint8                    :offset-assert 158)
-   (base-joint      uint8                    :offset-assert 159)
-   (base-nose       uint8                    :offset-assert 160)
-   (shutting-down?  symbol                   :offset-assert 164) ;; guessed by decompiler
-   (parented-scale? symbol                   :offset-assert 168) ;; guessed by decompiler
-   )
-  :method-count-assert 16
-  :size-assert         #xac
-  :flag-assert         #x10000000ac
-  ;; field track-mode is likely a value type.
-  (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type joint-mod-mode process-drawable int) _type_)
-    (joint-mod-method-9 () none) ;; 9 ;; (mode-set! (_type_ joint-mod-mode) none)
-    (joint-mod-method-10 (_type_ vector) none) ;; 10
-    (joint-mod-method-11 (_type_ vector symbol process) none) ;; 11
-    (joint-mod-method-12 (_type_) _type_) ;; 12
-    (joint-mod-method-13 (_type_ float float float) vector) ;; 13
-    (joint-mod-method-14 (_type_ vector quaternion vector) none) ;; 14
-    (joint-mod-method-15 (_type_) none) ;; 15
-    )
-  )|#
+
   
 
 
@@ -29286,37 +28647,7 @@
 
 
   
-#|(deftype joint-mod-polar-look-at (basic)
-  ((flags                   joint-mod-polar-flags         :offset-assert 4) ;; guessed by decompiler
-   (ear                     int8                          :offset-assert 8)
-   (up                      int8                          :offset-assert 9)
-   (nose                    int8                          :offset-assert 10)
-   (polar-internal-tilt-max float                         :offset-assert 12)
-   (polar-internal-radius   float                         :offset-assert 16)
-   (polar-external-tilt-max float                         :offset-assert 20)
-   (polar-external-radius   float                         :offset-assert 24)
-   (upward-tilt             float                         :offset-assert 28)
-   (downward-tilt           float                         :offset-assert 32)
-   (forward-twist           float                         :offset-assert 36)
-   (backward-twist          float                         :offset-assert 40)
-   (target                  vector                :inline :offset-assert 48)
-   (blend-duration          uint64                        :offset-assert 64) ;; time-frame
-   (blend-start-time        uint64                        :offset-assert 72) ;; time-frame
-   (blend-start-value       float                         :offset-assert 80)
-   (blend-max               float                         :offset-assert 84)
-   )
-  :method-count-assert 15
-  :size-assert         #x58
-  :flag-assert         #xf00000058
-  (:methods
-    (joint-mod-polar-look-at-method-9 (_type_ process-drawable int) none) ;; 9
-    (joint-mod-polar-look-at-method-10 (_type_ vector) none) ;; 10
-    (joint-mod-polar-look-at-method-11 () none) ;; 11 ;; (set-both-targets! (_type_ joint-mod-polar-look-at vector) none)
-    (joint-mod-polar-look-at-method-12 (_type_ time-frame float symbol) none) ;; 12
-    (joint-mod-polar-look-at-method-13 (_type_ time-frame symbol) none) ;; 13
-    (joint-mod-polar-look-at-method-14 (_type_) float) ;; 14
-    )
-  )|#
+
   
 
 
@@ -30324,23 +29655,7 @@
 
 
   
-#|(deftype touching-list (structure)
-  ((num-touching-shapes int32                    :offset-assert 0)
-   (resolve-u           int8                     :offset-assert 4)
-   (touching-shapes     touching-shapes-entry 32 :offset-assert 8) ;; guessed by decompiler
-   )
-  :method-count-assert 14
-  :size-assert         #x408
-  :flag-assert         #xe00000408
-  (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type) _type_)
-    (touching-list-method-9 (_type_ collide-shape-prim collide-shape-prim float collide-tri-result collide-tri-result) none) ;; 9
-    (touching-list-method-10 (_type_) none) ;; 10
-    (touching-list-method-11 (_type_ float) none) ;; 11
-    (touching-list-method-12 (_type_) none) ;; 12
-    (touching-list-method-13 (_type_ collide-shape collide-shape) touching-shapes-entry) ;; 13
-    )
-  )|#
+
   
 
 
@@ -31041,20 +30356,7 @@
 
 
   
-#|(deftype projectile-bounce (projectile)
-  ((played-bounce-time uint64             :offset-assert 568) ;; time-frame
-   (tumble-quat        quaternion :inline :offset-assert 576)
-   (gravity            float              :offset-assert 592)
-   )
-  :method-count-assert 75
-  :size-assert         #x254
-  :flag-assert         #x4b01d00254
-  (:methods
-    (projectile-bounce-method-72 () none) ;; 72
-    (projectile-bounce-method-73 () none) ;; 73
-    (projectile-bounce-method-74 () none) ;; 74
-    )
-  )|#
+
   
 
 
@@ -34230,62 +33532,13 @@
 
 
   
-#|(deftype path-control (basic)
-  ((flags      path-control-flag         :offset-assert 4) ;; guessed by decompiler
-   (name       symbol                    :offset-assert 8) ;; guessed by decompiler
-   (process    process-drawable          :offset-assert 12) ;; guessed by decompiler
-   (distmap    uint32                    :offset-assert 16)
-   (curve      curve             :inline :offset-assert 20)
-   (num-cverts int32                     :offset-assert 24)
-   (cverts     uint32                    :offset-assert 20)
-   )
-  :method-count-assert 33
-  :size-assert         #x28
-  :flag-assert         #x2100000028
-  (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type process symbol float entity symbol) _type_)
-    (path-control-method-9 (_type_) none) ;; 9
-    (path-control-method-10 (_type_ vector float symbol) vector) ;; 10
-    (path-control-method-11 (_type_ vector) vector) ;; 11
-    (path-control-method-12 (_type_ vector float float) vector) ;; 12
-    (path-control-method-13 (_type_ vector float) vector) ;; 13
-    (path-control-method-14 (_type_ vector float symbol) vector) ;; 14
-    (path-control-method-15 (_type_ vector float float) vector) ;; 15
-    (path-control-method-16 (_type_ vector float) vector) ;; 16
-    (path-control-method-17 (_type_) float) ;; 17
-    (path-control-method-18 (_type_) float) ;; 18
-    (path-control-method-19 (_type_) int) ;; 19
-    (path-control-method-20 (_type_ float) float) ;; 20
-    (path-control-method-21 (_type_ float) float) ;; 21
-    (path-control-method-22 (_type_ vector) float) ;; 22
-    (path-control-method-23 (_type_ vector) float) ;; 23
-    (path-control-method-24 (_type_ vector) float) ;; 24
-    (path-control-method-25 (_type_ vector) float) ;; 25
-    (path-control-method-26 (_type_ float float) float) ;; 26
-    (path-control-method-27 (_type_ vector) vector) ;; 27
-    (path-control-method-28 (_type_ vector vector symbol) float) ;; 28
-    (path-control-method-29 (_type_ vector int float) float) ;; 29
-    (path-control-method-30 (_type_) symbol) ;; 30
-    (path-control-method-31 (_type_ vector float float) vector) ;; 31
-    (path-control-method-32 () none) ;; 32
-    )
-  )|#
+
   
 
 
 
   
-#|(deftype curve-control (path-control)
-  ()
-  :method-count-assert 35
-  :size-assert         #x28
-  :flag-assert         #x2300000028
-  (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type process symbol float) _type_)
-    (curve-control-method-33 () none) ;; 33
-    (curve-control-method-34 () none) ;; 34
-    )
-  )|#
+
   
 
 
@@ -38767,26 +38020,7 @@
 
 
   
-#|(deftype vol-control (basic)
-  ((flags         vol-flags           :offset-assert 4) ;; guessed by decompiler
-   (process       process-drawable    :offset-assert 8) ;; guessed by decompiler
-   (pos-vol-count int32               :offset-assert 12)
-   (pos-vol       plane-volume     32 :offset-assert 16) ;; guessed by decompiler
-   (neg-vol-count int32               :offset-assert 784)
-   (neg-vol       plane-volume     32 :offset-assert 788) ;; guessed by decompiler
-   (debug-point   vector-array        :offset-assert 1556) ;; guessed by decompiler
-   (debug-normal  vector-array        :offset-assert 1560) ;; guessed by decompiler
-   )
-  :method-count-assert 12
-  :size-assert         #x61c
-  :flag-assert         #xc0000061c
-  (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type process-drawable) _type_)
-    (vol-control-method-9 (_type_) none) ;; 9
-    (vol-control-method-10 (_type_ plane) symbol) ;; 10
-    (vol-control-method-11 (_type_) symbol) ;; 11
-    )
-  )|#
+
   
 
 
@@ -51727,47 +50961,7 @@
 
 
   
-#|(deftype editable (basic)
-  ((flags  editable-flag    :offset-assert 4)
-   (name   string           :offset-assert 8) ;; guessed by decompiler
-   (id     uint32           :offset-assert 12)
-   (region editable-region  :offset-assert 16) ;; guessed by decompiler
-   (owner  pair             :offset-assert 20) ;; guessed by decompiler
-   (prefix basic            :offset-assert 24)
-   )
-  :method-count-assert 36
-  :size-assert         #x1c
-  :flag-assert         #x240000001c
-  (:methods
-    (editable-method-9 (_type_) none) ;; 9 ;; (editable-method-9 (_type_) none)
-    (editable-method-10 (_type_) none) ;; 10 ;; (editable-method-10 (_type_) none)
-    (editable-method-11 (_type_) none) ;; 11 ;; (editable-method-11 (_type_) none)
-    (editable-method-12 (_type_) none) ;; 12 ;; (editable-method-12 (_type_) none)
-    (editable-method-13 (_type_) none) ;; 13 ;; (editable-method-13 (_type_) none)
-    (editable-method-14 (_type_) none) ;; 14 ;; (editable-method-14 (_type_) none)
-    (editable-method-15 (_type_) none) ;; 15 ;; (editable-method-15 (_type_) none)
-    (editable-method-16 (_type_) none) ;; 16 ;; (editable-method-16 (_type_) none)
-    (editable-method-17 (_type_) none) ;; 17 ;; (editable-method-17 (_type_) none)
-    (editable-method-18 (_type_) none) ;; 18 ;; (editable-method-18 (_type_) none)
-    (editable-method-19 (_type_) none) ;; 19 ;; (editable-method-19 (_type_) none)
-    (editable-method-20 (_type_) none) ;; 20 ;; (editable-method-20 (_type_) none)
-    (editable-method-21 (_type_) none) ;; 21 ;; (editable-method-21 (_type_) none)
-    (editable-method-22 (_type_) none) ;; 22 ;; (editable-method-22 (_type_) none)
-    (editable-method-23 (_type_) none) ;; 23 ;; (editable-method-23 (_type_) none)
-    (editable-method-24 (_type_) none) ;; 24 ;; (editable-method-24 (_type_) none)
-    (editable-method-25 (_type_) none) ;; 25 ;; (editable-method-25 (_type_) none)
-    (editable-method-26 (_type_) none) ;; 26 ;; (editable-method-26 (_type_) none)
-    (editable-method-27 (_type_) none) ;; 27 ;; (editable-method-27 (_type_) none)
-    (editable-method-28 (_type_) none) ;; 28 ;; (editable-method-28 (_type_) none)
-    (editable-method-29 (_type_) none) ;; 29 ;; (editable-method-29 (_type_) none)
-    (editable-method-30 (_type_) none) ;; 30 ;; (editable-method-30 (_type_) none)
-    (editable-method-31 (_type_) none) ;; 31 ;; (editable-method-31 (_type_) none)
-    (editable-method-32 (_type_) none) ;; 32 ;; (editable-method-32 (_type_) none)
-    (editable-method-33 (_type_) none) ;; 33 ;; (editable-method-33 (_type_) none)
-    (editable-method-34 (_type_) none) ;; 34 ;; (editable-method-34 (_type_) none)
-    (editable-method-35 (_type_) none) ;; 35 ;; (editable-method-35 (_type_) none)
-    )
-  )|#
+
   
 
 
@@ -59173,13 +58367,7 @@
 
 ;; prim-strip stub — moved up to L19720 to precede simple-prim at L30065
 
-;; talker stub
-(deftype talker (process)
-  ()
-  :method-count-assert 14
-  :size-assert         #x90
-  :flag-assert         #xe00000090
-  )
+;; talker stub superseded by full definition at L20144
 
 ;; net-available-game stub
 (deftype net-available-game (structure)
