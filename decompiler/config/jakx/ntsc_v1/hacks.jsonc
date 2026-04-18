@@ -111,10 +111,12 @@
     // sparticle-motion-blur — moved to mips2c_functions_by_name (jakx-native port)
     "sp-process-block-2d",
     "sp-process-block-3d",
-    // set-tex-offset      — moved to mips2c_functions_by_name
-    // draw-large-polygon  — moved to mips2c_functions_by_name
-    // render-sky-quad     — moved to mips2c_functions_by_name
-    // render-sky-tri      — moved to mips2c_functions_by_name
+    "set-tex-offset",           // VU instructions crash mips2c analysis; keep in asm
+    "draw-large-polygon",       // VU instructions crash mips2c analysis; keep in asm
+    "render-sky-quad",          // VU instructions crash mips2c analysis; keep in asm
+    "render-sky-tri",           // VU instructions crash mips2c analysis; keep in asm
+    "clip-polygon-against-positive-hyperplane", // VU instructions crash mips2c; keep in asm
+    "clip-polygon-against-negative-hyperplane", // VU instructions crash mips2c; keep in asm
     "(method 17 sky-work)",
     "(method 18 sky-work)",
     "(method 32 sky-work)",
@@ -170,10 +172,10 @@
     "(method 18 nav-engine)",
     "(method 21 nav-engine)",
     "(method 39 nav-state)",
-    // ripple-create-wave-table  — moved to mips2c_functions_by_name (jakx-native port)
-    // ripple-execute-init       — moved to mips2c_functions_by_name (jakx-native port)
-    // ripple-apply-wave-table   — moved to mips2c_functions_by_name (jakx-native port)
-    // ripple-matrix-scale       — moved to mips2c_functions_by_name (jakx-native port)
+    "ripple-create-wave-table",  // VU integer ops (vsqi/viaddi/vlqi/viand) crash mips2c
+    "ripple-execute-init",       // VU integer ops; keep in asm
+    "ripple-apply-wave-table",   // VU integer ops; keep in asm
+    "ripple-matrix-scale",       // VU integer ops; keep in asm
     "foreground-generic-merc",
     "generic-merc-init-asm",
     "mercneric-convert",
@@ -1734,12 +1736,12 @@
     // sky-tng — hand-ported in game/mips2c/jakx_functions/sky.cpp.
     // Simple transforms (identical to jak3 binary). Safe to let the
     // decompiler run mips2c on them.
-    "set-tex-offset",
-    "render-sky-quad",
-    "render-sky-tri",
-    "draw-large-polygon",
-    "clip-polygon-against-positive-hyperplane",
-    "clip-polygon-against-negative-hyperplane",
+    // set-tex-offset      — moved to asm_functions_by_name (VU crash)
+    // render-sky-quad     — moved to asm_functions_by_name (VU crash)
+    // render-sky-tri      — moved to asm_functions_by_name (VU crash)
+    // draw-large-polygon  — moved to asm_functions_by_name (VU crash)
+    // clip-polygon-against-positive-hyperplane — moved to asm (VU crash)
+    // clip-polygon-against-negative-hyperplane — moved to asm (VU crash)
     // sparticle-launcher — jakx-native ports in
     // game/mips2c/jakx_functions/sparticle_launcher.cpp.
     //   sparticle-motion-blur: prologue calls view-get-active-math-camera
@@ -1758,11 +1760,11 @@
     //     screen) + reads control handle at offset 184 (jak3: 124).
     "sparticle-motion-blur-dirt",
     // ripple — jakx-native ports in game/mips2c/jakx_functions/ripple.cpp.
-    // All four functions are structurally identical to jak3; jakx namespace only.
-    "ripple-create-wave-table",
-    "ripple-execute-init",
-    "ripple-apply-wave-table",
-    "ripple-matrix-scale",
+    // moved to asm_functions_by_name (VU instructions: vsqi/viaddi/vlqi/viand crash mips2c)
+    // "ripple-create-wave-table",
+    // "ripple-execute-init",
+    // "ripple-apply-wave-table",
+    // "ripple-matrix-scale",
     // fmv-player — PIC prologue (sd s7 / bgezal r0) + lq/sq can't be fully decompiled;
     // AtomicOpForm.cpp + mips2c.cpp patched to handle non-PLAIN_DATA constant-pool ptrs.
     // PC bridge stubs in game/mips2c/jakx_functions/fmv_player.cpp.

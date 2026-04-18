@@ -156,6 +156,7 @@
    (audio-language                   uint8)
    (city-sound                       pair    3 :offset 660)
    (board-max-speed                  float)
+   (lock-sound-camera-to-target      symbol)
    (hide-crates?                     symbol    :offset 680)
    (pickups                          symbol)
    (sound-ear                        handle)
