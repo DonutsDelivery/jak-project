@@ -34145,6 +34145,9 @@
 (deftype hud-artifact-indicators-view1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
 (deftype hud-assassin-indicators-view0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
 (deftype hud-assassin-indicators-view1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-slowmo (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-top-split-bar (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-side-split-bar (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
 
 
 (deftype hud-map (hud)
