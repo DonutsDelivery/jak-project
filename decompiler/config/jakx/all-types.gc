@@ -2029,7 +2029,8 @@
 
 
   
-#|(deftype net-enemy-info (structure)
+(declare-type ragdoll-setup structure)
+(deftype net-enemy-info (structure)
   ((flags                      uint64         :offset-assert 0)
    (inverse-mass               float          :offset-assert 8)
    (ragdoll-info               ragdoll-setup  :offset-assert 12)
@@ -2053,7 +2054,7 @@
   :method-count-assert 9
   :size-assert         #x50
   :flag-assert         #x900000050
-  )|#
+  )
   
 
 
