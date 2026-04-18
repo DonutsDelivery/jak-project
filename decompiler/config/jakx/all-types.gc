@@ -1875,15 +1875,7 @@
 
 
   
-#|(deftype finish-banner (race-banner)
-  ()
-  :method-count-assert 54
-  :size-assert         #x172
-  :flag-assert         #x3600f00172
-  (:state-methods
-    banner-finish ;; 53
-    )
-  )|#
+;; finish-banner: activated below parent race-banner
   
 
 
@@ -28309,6 +28301,17 @@
     (banner-countdown () _type_ :state) ;; 50
     (banner-go () _type_ :state) ;; 51
     (race-banner-method-52 () none) ;; 52
+    )
+  )
+
+;; finish-banner (race-banner child + banner-finish state at slot 53)
+(deftype finish-banner (race-banner)
+  ()
+  :method-count-assert 54
+  :size-assert         #x172
+  :flag-assert         #x3600f00172
+  (:methods
+    (banner-finish () _type_ :state) ;; 53
     )
   )
 
