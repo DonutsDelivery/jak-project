@@ -47358,7 +47358,7 @@
 
 
   
-#|(deftype dropdown-item (string-menu)
+(deftype dropdown-item (string-menu)
   ((selected           basic          :offset-assert 560)
    (p-client-selection basic          :offset-assert 564)
    (prev-selection     int32          :offset-assert 568)
@@ -47371,7 +47371,7 @@
   (:methods
     (dropdown-item-method-69 () none) ;; 69
     )
-  )|#
+  )
   
 
 
