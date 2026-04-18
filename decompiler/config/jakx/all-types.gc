@@ -14774,8 +14774,9 @@
    (ambient-wind-scalar     float               :offset-assert 644)
    (halfpipe-jump-mult      float               :offset-assert 648)
    (audio-language          uint8               :offset-assert 652) ;; language-enum
-   (city-sound              pair              3 :offset 660)
+   (city-sound              pair              3 :score -1 :offset 660)
    (board-max-speed         float               :offset-assert 672)
+   (lock-sound-camera-to-target symbol          :offset-assert 676)
    (hide-crates?            symbol              :offset 680)
    (pickups                 symbol              :offset-assert 684)
    (sound-ear               handle              :offset-assert 688)
@@ -14951,11 +14952,11 @@
   )
 
 (deftype setting-control (basic)
-  ((user-current user-setting-data   :inline :offset-assert 16)
-   (user-target  user-setting-data   :inline :offset-assert 800)
-   (user-default user-setting-data   :inline :offset-assert 1584)
-   (cam-settings cam-setting-state 4 :inline :offset-assert 2368)
-   (engine       engine                      :offset-assert 7168) ;; guessed by decompiler
+  ((user-current                 user-setting-data   :inline :offset-assert 16)
+   (user-target                  user-setting-data   :inline :offset-assert 800)
+   (user-default                 user-setting-data   :inline :offset-assert 1584)
+   (cam-settings                 cam-setting-state 4 :inline :offset-assert 2368)
+   (engine                       engine              :offset-assert 7168) ;; guessed by decompiler
    (engine-pers  engine-pers                 :offset-assert 7172) ;; guessed by decompiler
    (engine-hi    engine                      :offset-assert 7176) ;; guessed by decompiler
    (cam-engines  engine-group      4 :offset-assert 7180)
@@ -22669,7 +22670,7 @@
    (generic-field3        int32                    :offset-assert 176)
    (port                  int32                    :offset-assert 180)
    (game-host-type        int32                    :offset-assert 184)
-   (address-list          net-address-list :inline :offset-assert 188)
+   (address-list          net-address-list :inline :offset 188)
    )
   :method-count-assert 9
   :size-assert         #xec
@@ -45761,11 +45762,10 @@
 
 
 
-#|
 (deftype net-game-mgr-artifact (net-game-mgr-deathmatch)
   ((artifact-location-array basic    :offset-assert 312)
    (artifact-location-count int8     :offset-assert 316)
-   (artifact                uint8 48 :offset-assert 320)
+   (artifact                uint8 48 :offset 320)
    (num-artifacts           int32    :offset-assert 368)
    (last-artifact-index     int32    :offset-assert 372)
    (last-position-index     uint8 24 :offset-assert 376)
@@ -45779,7 +45779,6 @@
     (net-game-mgr-artifact-method-85 () none) ;; 85
     )
   )
-|#
 
 
 
