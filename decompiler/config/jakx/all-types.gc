@@ -54934,43 +54934,34 @@
 
 
   
-#|(deftype coli-atlas-base-a (coli-object-base)
+(deftype coli-atlas-base-a (coli-object-base)
   ()
-  :method-count-assert 71
+  :method-count-assert 72
   :size-assert         #x128
-  :flag-assert         #x4700a00128
-  (:state-methods
-    idle ;; 59
-    )
-  )|#
+  :flag-assert         #x4800a00128
+  )
   
 
 
 
   
-#|(deftype coli-atlas-base-b (coli-object-base)
+(deftype coli-atlas-base-b (coli-object-base)
   ()
-  :method-count-assert 71
+  :method-count-assert 72
   :size-assert         #x128
-  :flag-assert         #x4700a00128
-  (:state-methods
-    idle ;; 59
-    )
-  )|#
+  :flag-assert         #x4800a00128
+  )
   
 
 
 
   
-#|(deftype coli-atlas-base-c (coli-object-base)
+(deftype coli-atlas-base-c (coli-object-base)
   ()
-  :method-count-assert 71
+  :method-count-assert 72
   :size-assert         #x128
-  :flag-assert         #x4700a00128
-  (:state-methods
-    idle ;; 59
-    )
-  )|#
+  :flag-assert         #x4800a00128
+  )
   
 
 
