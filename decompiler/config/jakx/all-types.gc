@@ -6190,11 +6190,11 @@
 
 
   
-#|(deftype smoke-particle (structure)
+(deftype smoke-particle (structure)
   ((pos        vector :inline :offset-assert 0)
+   (size       float          :offset 12)
    (vel        vector :inline :offset-assert 16)
-   (size-delta float          :offset-assert 28)
-   (size       float          :offset-assert 12)
+   (size-delta float          :offset 28)
    (decay      float          :offset-assert 32)
    (rot        float          :offset-assert 36)
    (rot-delta  float          :offset-assert 40)
@@ -6203,7 +6203,7 @@
   :method-count-assert 9
   :size-assert         #x30
   :flag-assert         #x900000030
-  )|#
+  )
   
 
 
@@ -15392,8 +15392,8 @@
 
 
   
-#|(deftype palette-fade-controls (basic)
-  ((control palette-fade-control 8 :offset-assert 16) ;; guessed by decompiler
+(deftype palette-fade-controls (basic)
+  ((control palette-fade-control 8 :inline :offset-assert 16)
    )
   :method-count-assert 11
   :size-assert         #x110
@@ -15402,7 +15402,7 @@
     (palette-fade-controls-method-9 (_type_) none) ;; 9
     (palette-fade-controls-method-10 (_type_ int float float vector) object) ;; 10
     )
-  )|#
+  )
   
 
 
@@ -16596,24 +16596,24 @@
 
 
   
-#|(deftype ocean-mid-constants (structure)
+(deftype ocean-mid-constants (structure)
   ((hmge-scale     vector       :inline :offset-assert 0)
    (inv-hmge-scale vector       :inline :offset-assert 16)
    (hvdf-offset    vector       :inline :offset-assert 32)
    (fog            vector       :inline :offset-assert 48)
    (constants      vector       :inline :offset-assert 64)
    (constants2     vector       :inline :offset-assert 80)
-   (drw-fan        qword        :inline :offset-assert 96) ;; gs-gif-tag :inline
-   (env-fan        qword        :inline :offset-assert 112) ;; gs-gif-tag :inline
-   (drw-adgif      qword        :inline :offset-assert 128) ;; gs-gif-tag :inline
+   (drw-fan        qword        :inline :offset-assert 96)
+   (env-fan        qword        :inline :offset-assert 112)
+   (drw-adgif      qword        :inline :offset-assert 128)
    (drw-texture    adgif-shader :inline :offset-assert 144)
-   (drw-strip-0    qword        :inline :offset-assert 224) ;; gs-gif-tag :inline
-   (drw-strip-1    qword        :inline :offset-assert 240) ;; gs-gif-tag :inline
-   (env-adgif      qword        :inline :offset-assert 256) ;; gs-gif-tag :inline
+   (drw-strip-0    qword        :inline :offset-assert 224)
+   (drw-strip-1    qword        :inline :offset-assert 240)
+   (env-adgif      qword        :inline :offset-assert 256)
    (env-texture    adgif-shader :inline :offset-assert 272)
-   (env-strip      qword        :inline :offset-assert 352) ;; gs-gif-tag :inline
+   (env-strip      qword        :inline :offset-assert 352)
    (env-color      vector       :inline :offset-assert 368)
-   (index-table    vector4w     8       :offset-assert 384) ;; guessed by decompiler
+   (index-table    vector4w     8 :inline :offset-assert 384)
    (pos0           vector       :inline :offset-assert 512)
    (pos1           vector       :inline :offset-assert 528)
    (pos2           vector       :inline :offset-assert 544)
@@ -16622,7 +16622,7 @@
   :method-count-assert 9
   :size-assert         #x240
   :flag-assert         #x900000240
-  )|#
+  )
   
 
 
@@ -16678,7 +16678,7 @@
 
 
   
-#|(deftype ocean-near-constants (structure)
+(deftype ocean-near-constants (structure)
   ((hmge-scale     vector       :inline :offset-assert 0)
    (inv-hmge-scale vector       :inline :offset-assert 16)
    (hvdf-offset    vector       :inline :offset-assert 32)
@@ -16688,28 +16688,28 @@
    (constants3     vector       :inline :offset-assert 96)
    (constants4     vector       :inline :offset-assert 112)
    (constants5     vector       :inline :offset-assert 128)
-   (drw-fan        qword        :inline :offset-assert 144) ;; gs-gif-tag :inline
-   (drw2-fan       qword        :inline :offset-assert 160) ;; gs-gif-tag :inline
-   (env-fan        qword        :inline :offset-assert 176) ;; gs-gif-tag :inline
-   (drw-adgif      qword        :inline :offset-assert 192) ;; gs-gif-tag :inline
+   (drw-fan        qword        :inline :offset-assert 144)
+   (drw2-fan       qword        :inline :offset-assert 160)
+   (env-fan        qword        :inline :offset-assert 176)
+   (drw-adgif      qword        :inline :offset-assert 192)
    (drw-texture    adgif-shader :inline :offset-assert 208)
-   (drw-strip      qword        :inline :offset-assert 288) ;; gs-gif-tag :inline
-   (env-adgif      qword        :inline :offset-assert 304) ;; gs-gif-tag :inline
+   (drw-strip      qword        :inline :offset-assert 288)
+   (env-adgif      qword        :inline :offset-assert 304)
    (env-texture    adgif-shader :inline :offset-assert 320)
-   (env-strip      qword        :inline :offset-assert 400) ;; gs-gif-tag :inline
+   (env-strip      qword        :inline :offset-assert 400)
    (env-color      vector       :inline :offset-assert 416)
-   (drw2-adgif     qword        :inline :offset-assert 432) ;; gs-gif-tag :inline
+   (drw2-adgif     qword        :inline :offset-assert 432)
    (drw2-tex0      qword        :inline :offset-assert 448)
    (drw2-frame     qword        :inline :offset-assert 464)
-   (drw2-strip     qword        :inline :offset-assert 480) ;; gs-gif-tag :inline
-   (drw3-adgif     qword        :inline :offset-assert 496) ;; gs-gif-tag :inline
-   (drw3-frame     qword        :inline :offset-assert 512) ;; gs-adcmd :inline
-   (index-table    vector4w     4       :offset-assert 528) ;; guessed by decompiler
+   (drw2-strip     qword        :inline :offset-assert 480)
+   (drw3-adgif     qword        :inline :offset-assert 496)
+   (drw3-frame     qword        :inline :offset-assert 512)
+   (index-table    vector4w     4 :inline :offset-assert 528)
    )
   :method-count-assert 9
   :size-assert         #x250
   :flag-assert         #x900000250
-  )|#
+  )
   
 
 
@@ -21725,7 +21725,7 @@
 
 
   
-#|(deftype net-bandwidth-info (structure)
+(deftype net-bandwidth-info (structure)
   ((sends      net-client-metric :inline :offset-assert 0)
    (send-bytes net-client-metric :inline :offset-assert 8)
    (recvs      net-client-metric :inline :offset-assert 16)
@@ -21734,7 +21734,7 @@
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
-  )|#
+  )
   
 
 
@@ -59428,13 +59428,7 @@
     )
   )
 
-;; palette-fade-controls stub
-(deftype palette-fade-controls (basic)
-  ()
-  :method-count-assert 9
-  :size-assert         #x4
-  :flag-assert         #x900000004
-  )
+;; palette-fade-controls — full definition at L15395
 
 ;; install-handler stub
 (deftype install-handler (basic)
