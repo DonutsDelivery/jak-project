@@ -58829,7 +58829,7 @@
 
 
   
-#|(deftype garage-turntable (process-drawable)
+(deftype garage-turntable (process-drawable)
   ((dest-trans      vector        :inline :offset-assert 256)
    (dest-quat       quaternion    :inline :offset-assert 272)
    (rotv            float                 :offset-assert 288)
@@ -58847,33 +58847,33 @@
   :method-count-assert 54
   :size-assert         #x188
   :flag-assert         #x3601000188
+  (:state-methods
+    down ;; 50
+    up ;; 51
+    )
   (:methods
     (garage-turntable-method-52 () none) ;; 52
     (garage-turntable-method-53 () none) ;; 53
     )
-  (:state-methods
-    up ;; 51
-    down ;; 50
-    )
-  )|#
+  )
   
 
 
 
   
-#|(deftype garage-car-arm (process-drawable)
+(deftype garage-car-arm (process-drawable)
   ((arm-rot joint-mod-rotate-local :inline :offset-assert 256)
    )
   :method-count-assert 52
   :size-assert         #x120
   :flag-assert         #x3400900120
-  (:methods
-    (garage-car-arm-method-51 () none) ;; 51
-    )
   (:state-methods
     idle ;; 50
     )
-  )|#
+  (:methods
+    (garage-car-arm-method-51 () none) ;; 51
+    )
+  )
   
 
 
