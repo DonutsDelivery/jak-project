@@ -2617,9 +2617,10 @@
 
 
   
-#|(deftype hud-item-sprite (hud-item)
-  ((scale-x      int16              :offset-assert 26)
-   (real-scale-x int16              :offset-assert 24)
+(declare-type hud-sprite structure)
+(deftype hud-item-sprite (hud-item)
+  ((scale-x      int16              :offset 26)
+   (real-scale-x int16              :offset 24)
    (sprite       hud-sprite         :offset-assert 40)
    (real-scale-y int16              :offset-assert 44)
    (scale-y      int16              :offset-assert 46)
@@ -2634,7 +2635,7 @@
   (:methods
     (hud-item-sprite-method-24 () none) ;; 24
     )
-  )|#
+  )
   
 
 
@@ -6241,7 +6242,7 @@
 
 
   
-(deftype mine-a (process-focusable)
+#|(deftype mine-a (process-focusable)
   ((shooter           uint64             :offset-assert 256)
    (destination-point vector     :inline :offset-assert 272)
    (destination-rot   quaternion :inline :offset-assert 288)
@@ -6253,16 +6254,16 @@
   :method-count-assert 64
   :size-assert         #x16c
   :flag-assert         #x4000e0016c
+  (:methods
+    (mine-a-method-62 () none) ;; 62
+    (mine-a-method-63 () none) ;; 63
+    )
   (:state-methods
     idle ;; 59
     falling ;; 60
     die ;; 61
     )
-  (:methods
-    (mine-a-method-62 () none) ;; 62
-    (mine-a-method-63 () none) ;; 63
-    )
-  )
+  )|#
   
 
 
@@ -7197,17 +7198,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; minimap                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-#|
-(deftype engine-minimap (engine-pers)
-  ((UNKNOWN UNKNOWN  :offset-assert -1) ;; field could not be read.
-   )
-  :method-count-assert 15
-  :size-assert         #x20
-  :flag-assert         #xf00000020
-  )
-|#
 
 
 (define-extern *minimap* object) ;; minimap
@@ -13135,7 +13125,14 @@
   
 
 
-;; engine-minimap is already defined!
+(deftype engine-minimap (engine-pers)
+  ((alive-list connection-minimap  :offset 24 :override)
+   (dead-list  connection-minimap  :offset 28 :override)
+   )
+  :method-count-assert 15
+  :size-assert         #x20
+  :flag-assert         #xf00000020
+  )
 
 
   
