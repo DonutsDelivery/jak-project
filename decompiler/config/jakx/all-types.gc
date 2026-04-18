@@ -55194,18 +55194,18 @@
 
 
   
-#|(deftype coli-break-object (process-drawable)
+(deftype coli-break-object (process-drawable)
   ()
   :method-count-assert 52
   :size-assert         #xf8
   :flag-assert         #x34007000f8
-  (:methods
-    (coli-break-object-method-51 () none) ;; 51
-    )
   (:state-methods
     die ;; 50
     )
-  )|#
+  (:methods
+    (coli-break-object-method-51 () none) ;; 51
+    )
+  )
   
 
 
