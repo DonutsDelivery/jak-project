@@ -7169,6 +7169,12 @@
   )
 |#
 
+(deftype wcar-base (wvehicle)
+  ((wcar-base-pad uint8 396 :offset 4660))
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -7176,7 +7182,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-  
+
 (deftype v-mongoose (wcar-base)
   ()
   :method-count-assert 272
@@ -9091,13 +9097,13 @@
 
 
   
-#|(deftype timer-hold-bank (timer-bank)
+(deftype timer-hold-bank (timer-bank)
   ((hold uint32  :offset-assert 48)
    )
   :method-count-assert 9
   :size-assert         #x34
   :flag-assert         #x900000034
-  )|#
+  )
   
 
 
@@ -30392,7 +30398,7 @@
 
 
   
-#|(deftype simple-prim (process-drawable)
+(deftype simple-prim (process-drawable)
   ((strip prim-strip  :offset-assert 248) ;; guessed by decompiler
    )
   :method-count-assert 56
@@ -30406,7 +30412,7 @@
     (simple-prim-method-54 () none) ;; 54
     (simple-prim-method-55 () none) ;; 55
     )
-  )|#
+  )
   
 
 
@@ -45292,15 +45298,6 @@
     )
   )
 |#
-
-
-;; wcar-base stub (extends wvehicle)
-(deftype wcar-base (wvehicle)
-  ((wcar-base-pad uint8 396 :offset 4660))
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
 
 
 (deftype vehicle-antenna-init-params (structure)
