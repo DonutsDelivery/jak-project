@@ -9,7 +9,12 @@
     "target",
     "vehicle-load-parts"
   ],
-  "no_type_analysis_functions_by_name": [],
+  "no_type_analysis_functions_by_name": [
+    // wvehicle-weapons-h top-level crashes decompiler with assertion
+    // is_var() at IR2/AtomicOp.h:156 after "add failed: int object" at op 14.
+    // Skipping type analysis prevents crash while preserving 193 downstream files.
+    "(top-level-login wvehicle-weapons-h)"
+  ],
   "cond_with_else_max_lengths": [
     [
       "(method 20 res-lump)",
@@ -188,7 +193,7 @@
     "generic-no-light-proc",
     "debug-line-clip?",
     "live-func-curve",          // mips2c validation generates 2094 errors (VU0 macros); keep in asm
-    // birth-func-curve        — moved to mips2c_functions_by_name (jakx-native port)
+    "birth-func-curve",         // mips2c hits VU instructions (viand/vmtirx/vsqi); keep in asm
     // sparticle-motion-blur-dirt — moved to mips2c_functions_by_name (jakx-native port)
     "foreground-draw-hud",
     "shadow-execute",
@@ -1746,7 +1751,7 @@
     // game/mips2c/jakx_functions/particle_curves.cpp. Structurally
     // identical to jak3; jakx namespace only.
     // live-func-curve — in asm_functions_by_name (mips2c validation fails with 2094 errors)
-    "birth-func-curve",
+    // birth-func-curve — in asm_functions_by_name (mips2c hits VU instructions; viand/vmtirx/vsqi)
     // wvehicle-part — jakx-native port in
     // game/mips2c/jakx_functions/wvehicle_part.cpp. Diverges from jak3:
     //   sparticle-motion-blur-dirt: calls view-get-active-target (split-
