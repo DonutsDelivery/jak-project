@@ -8332,7 +8332,7 @@
    (display-sy                  int32   :offset-assert 28)
    (relative-x-scale-reciprical float   :offset-assert 32)
    (smode2                      uint64  :offset-assert 40)
-   (aspect-ratio                basic   :offset-assert 48)
+   (aspect-ratio                symbol  :offset-assert 48)
    )
   :method-count-assert 9
   :size-assert         #x34
@@ -27278,11 +27278,23 @@
   :flag-assert         #x3c00a00128
   (:methods
     (net-mgr-method-14 () none) ;; 14
-    (net-mgr-method-15 () none) ;; 15
+    )
+  (:state-methods
+    idle ;; 15
+    )
+  (:methods
     (net-mgr-method-16 () none) ;; 16
-    (net-mgr-method-17 () none) ;; 17
+    )
+  (:state-methods
+    getting-universe-information ;; 17
+    )
+  (:methods
     (net-mgr-method-18 () none) ;; 18
-    (net-mgr-method-19 () none) ;; 19
+    )
+  (:state-methods
+    connecting-to-mas ;; 19
+    )
+  (:methods
     (net-mgr-method-20 () none) ;; 20
     (net-mgr-method-21 () none) ;; 21
     (net-mgr-method-22 () none) ;; 22
@@ -27294,19 +27306,35 @@
     (net-mgr-method-28 () none) ;; 28
     (net-mgr-method-29 () none) ;; 29
     (net-mgr-method-30 () none) ;; 30
-    (net-mgr-method-31 () none) ;; 31
+    )
+  (:state-methods
+    refreshing-lan-games ;; 31
+    )
+  (:methods
     (net-mgr-method-32 () none) ;; 32
     (net-mgr-method-33 () none) ;; 33
     (net-mgr-method-34 () none) ;; 34
     (net-mgr-method-35 () none) ;; 35
-    (net-mgr-method-36 () none) ;; 36
+    )
+  (:state-methods
+    starting-playback-game ;; 36
+    )
+  (:methods
     (net-mgr-method-37 () none) ;; 37
     (net-mgr-method-38 () none) ;; 38
-    (net-mgr-method-39 () none) ;; 39
+    )
+  (:state-methods
+    connecting-to-game ;; 39
+    )
+  (:methods
     (net-mgr-method-40 () none) ;; 40
     (net-mgr-method-41 () none) ;; 41
     (net-mgr-method-42 () none) ;; 42
-    (net-mgr-method-43 () none) ;; 43
+    )
+  (:state-methods
+    disconnecting ;; 43
+    )
+  (:methods
     (net-mgr-method-44 () none) ;; 44
     (net-mgr-method-45 () none) ;; 45
     (net-mgr-method-46 () none) ;; 46
@@ -34333,17 +34361,21 @@
   :size-assert         #xb1
   :flag-assert         #x19003000b1
   (:methods
-    (fmv-player-method-9 () none) ;; 9
-    (fmv-player-method-10 () none) ;; 10
-    (fmv-player-method-11 () none) ;; 11
-    (fmv-player-method-12 () none) ;; 12
-    (fmv-player-method-13 () none) ;; 13
-    (fmv-player-method-14 () none) ;; 14
-    (fmv-player-method-15 () none) ;; 15
-    (fmv-player-method-16 () none) ;; 16
-    (fmv-player-method-17 () none) ;; 17
-    (fmv-player-method-18 () none) ;; 18
-    (fmv-player-method-19 () none) ;; 19
+    (fmv-player-method-9 () none) ;; 14
+    )
+  (:state-methods
+    idle ;; 15
+    )
+  (:methods
+    (fmv-player-method-11 () none) ;; 16
+    (fmv-player-method-12 () none) ;; 17
+    (fmv-player-method-13 () none) ;; 18
+    (fmv-player-method-14 () none) ;; 19
+    (fmv-player-method-15 () none) ;; 20
+    (fmv-player-method-16 () none) ;; 21
+    (fmv-player-method-17 () none) ;; 22
+    (fmv-player-method-18 () none) ;; 23
+    (fmv-player-method-19 () none) ;; 24
     )
   )
   
@@ -58452,8 +58484,10 @@
   :method-count-assert 56
   :size-assert         #xf8
   :flag-assert         #x38007000f8
+  (:state-methods
+    running ;; 50
+    )
   (:methods
-    (eco-method-50 (_type_) none) ;; 50
     (eco-method-51 (_type_) none) ;; 51
     (eco-method-52 (_type_) none) ;; 52
     (eco-method-53 (_type_) none) ;; 53
@@ -58461,10 +58495,6 @@
     (eco-method-55 (_type_) none) ;; 55
     )
   )
-
-;; eco-yellow/red/green: method-count=56 regen shows state override at slot 50 —
-;; cannot activate until eco-method-50 conflict is resolved (symbol-registry
-;; treats slot 50 as state; complex to reconcile without source).
 
 ;; editable-region — full definition above at L51654
 
