@@ -496,6 +496,22 @@ namespace method_11_collide_hash { extern void link(); }
 namespace method_12_collide_hash { extern void link(); }
 namespace fill_bg_using_box_new { extern void link(); }
 namespace fill_bg_using_line_sphere_new { extern void link(); }
+// collide_mesh.cpp port (see game/mips2c/jakx_functions/collide_mesh.cpp)
+namespace method_12_collide_mesh { extern void link(); }
+namespace method_14_collide_mesh { extern void link(); }
+namespace method_15_collide_mesh { extern void link(); }
+// collide_cache.cpp port (see game/mips2c/jakx_functions/collide_cache.cpp)
+namespace method_10_collide_shape_prim_mesh { extern void link(); }
+namespace method_10_collide_shape_prim_sphere { extern void link(); }
+namespace method_10_collide_shape_prim_group { extern void link(); }
+namespace method_11_collide_shape_prim_mesh { extern void link(); }
+namespace method_11_collide_shape_prim_sphere { extern void link(); }
+namespace method_11_collide_shape_prim_group { extern void link(); }
+namespace method_9_collide_cache_prim { extern void link(); }
+namespace method_10_collide_cache_prim { extern void link(); }
+namespace method_17_collide_cache { extern void link(); }
+namespace method_9_collide_puss_work { extern void link(); }
+namespace method_10_collide_puss_work { extern void link(); }
 }
 // clang-format on
 
@@ -807,18 +823,21 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      {"collide-hash",
       {jakx::method_11_collide_hash::link, jakx::method_12_collide_hash::link,
        jakx::fill_bg_using_box_new::link, jakx::fill_bg_using_line_sphere_new::link}},
+     // collide-mesh / collide-cache: jakx-native ports — structurally
+     // identical to jak3; jakx namespace only.
+     // See game/mips2c/jakx_functions/collide_mesh.cpp and collide_cache.cpp.
      {"collide-mesh",
-      {jak3::method_12_collide_mesh::link, jak3::method_14_collide_mesh::link,
-       jak3::method_15_collide_mesh::link, jak3::method_10_collide_shape_prim_mesh::link}},
+      {jakx::method_12_collide_mesh::link, jakx::method_14_collide_mesh::link,
+       jakx::method_15_collide_mesh::link, jakx::method_10_collide_shape_prim_mesh::link}},
      {"collide-cache",
-      {jak3::method_10_collide_shape_prim_mesh::link,
-       jak3::method_10_collide_shape_prim_sphere::link,
-       jak3::method_10_collide_shape_prim_group::link,
-       jak3::method_11_collide_shape_prim_mesh::link,
-       jak3::method_11_collide_shape_prim_sphere::link,
-       jak3::method_11_collide_shape_prim_group::link, jak3::method_9_collide_cache_prim::link,
-       jak3::method_10_collide_cache_prim::link, jak3::method_17_collide_cache::link,
-       jak3::method_9_collide_puss_work::link, jak3::method_10_collide_puss_work::link}},
+      {jakx::method_10_collide_shape_prim_mesh::link,
+       jakx::method_10_collide_shape_prim_sphere::link,
+       jakx::method_10_collide_shape_prim_group::link,
+       jakx::method_11_collide_shape_prim_mesh::link,
+       jakx::method_11_collide_shape_prim_sphere::link,
+       jakx::method_11_collide_shape_prim_group::link, jakx::method_9_collide_cache_prim::link,
+       jakx::method_10_collide_cache_prim::link, jakx::method_17_collide_cache::link,
+       jakx::method_9_collide_puss_work::link, jakx::method_10_collide_puss_work::link}},
      {"collide-edge-grab",
       {jak3::method_10_collide_edge_hold_list::link, jak3::method_19_collide_edge_work::link,
        jak3::method_9_edge_grab_info::link, jak3::method_17_collide_edge_work::link,
