@@ -34,6 +34,13 @@
   ],
   "hint_inline_assembly_functions": [],
   "asm_functions_by_name": [
+    // fmv-player: decompiler's mips2c emitter crashes on these (BAD PROLOGUE / lq/sq
+    // instructions). Hand-written stubs in game/mips2c/jakx_functions/fmv_player.cpp
+    // are registered via mips2c_table.cpp at runtime — no decompiler codegen needed.
+    "fmv-file-init",
+    "fmv-get-time",
+    "fmv-file-read",
+    "fmv-memcpy",
     "get-string-length",
     "name=",
     "quad-copy!",
