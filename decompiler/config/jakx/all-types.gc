@@ -54881,8 +54881,8 @@
 
   
 (deftype coli-object-base (net-simple-destruct)
-  ((actor-group       uint32  :offset-assert 284)
-   (actor-group-count int32   :offset-assert 288)
+  ((actor-group       uint32  :offset-assert 288)
+   (actor-group-count int32   :offset-assert 292)
    )
   :method-count-assert 72
   :size-assert         #x128
@@ -55982,7 +55982,7 @@
 
 
   
-#|(deftype des-plant (net-simple-destruct)
+(deftype des-plant (net-simple-destruct)
   ((exploder-params joint-exploder-static-params         :offset-assert 288) ;; guessed by decompiler
    (exploder-skel   skeleton-group                       :offset-assert 292) ;; guessed by decompiler
    (exploder-anim   uint32                               :offset-assert 296)
@@ -55992,9 +55992,9 @@
    (spring-vel      vector                       :inline :offset-assert 352)
    (jmods           joint-mod-rotate-local       4       :offset-assert 368) ;; guessed by decompiler
    )
-  :method-count-assert 74
+  :method-count-assert 76
   :size-assert         #x1f0
-  :flag-assert         #x4a016001f0
+  :flag-assert         #x4c016001f0
   (:methods
     (des-plant-method-70 () none) ;; 70
     (des-plant-method-71 () none) ;; 71
@@ -56002,10 +56002,10 @@
     (des-plant-method-73 () none) ;; 73
     )
   (:state-methods
-    idle ;; 59
-    explode ;; 60
+    idle ;; 74 (state-methods add slots; regen '59' is jak3-era)
+    explode ;; 75
     )
-  )|#
+  )
   
 
 
@@ -56672,9 +56672,9 @@
    (impact-direction vector :inline :offset-assert 304)
    (particle-matrix  matrix :inline :offset-assert 320)
    (path-length      float          :offset-assert 384)
-   (last-u           float          :offset-assert 396)
-   (roll-sound       uint32         :offset-assert 400)
-   (offset           float          :offset-assert 404)
+   (last-u           float          :offset 396)  ;; 8-byte gap 388-395 after path-length
+   (roll-sound       uint32         :offset 400)
+   (offset           float          :offset 404)
    )
   :method-count-assert 90
   :size-assert         #x198
