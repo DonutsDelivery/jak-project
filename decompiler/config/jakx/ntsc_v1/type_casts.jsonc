@@ -39064,7 +39064,7 @@
   //   cast to (pointer uint32) so l.wu(a2+92) resolves until the deftype is fixed.
   "(method 9 race-control)": [
     [5, "v1", "pointer"],
-    [6, "a1", "pointer"],
+    [6, "a1", "process"],
     [11, "v1", "int"],
     [14, "a2", "(pointer uint32)"]
   ]
