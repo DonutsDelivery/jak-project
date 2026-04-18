@@ -1825,7 +1825,7 @@
 
 
 
-#|
+
 (deftype wrong-way-linebot (process-drawable)
   ((initial-quat quaternion :inline :offset-assert 256)
    (initial-pos  vector     :inline :offset-assert 272)
@@ -1847,7 +1847,7 @@
     (wrong-way-linebot-method-52 () none) ;; 52
     )
   )
-|#
+
 
 
 
@@ -2197,7 +2197,7 @@
 
 
 
-#|
+
 (deftype eco-blue (eco)
   ((launcher    uint8 20 :offset-assert 248)
    (birth-accum uint8 20 :offset-assert 268)
@@ -2209,7 +2209,7 @@
     running ;; 50 (override)
     )
   )
-|#
+
 
 
 
@@ -4366,7 +4366,7 @@
 
 
 
-#|
+
 (deftype hud-vehicle (hud)
   ((weapon-texture uint8 49 :offset-assert 6364)
    (gun-texture                      basic              :offset-assert 6364)
@@ -4459,7 +4459,7 @@
     (hud-vehicle-method-39 () none) ;; 39
     )
   )
-|#
+
 
 
 
@@ -5486,7 +5486,7 @@
 
   
 
-#|
+
 (deftype v-toad-shot (net-projectile)
   ((trail-tracker    uint64         :offset-assert 568)
    (blast-radius     float          :offset-assert 576)
@@ -5505,7 +5505,7 @@
     impact ;; 52
     )
   )
-|#
+
 
   
 
@@ -5521,7 +5521,7 @@
 
   
 
-#|
+
 (deftype mine-a (process-focusable)
   ((shooter           uint64             :offset-assert 256)
    (destination-point vector     :inline :offset-assert 272)
@@ -5544,15 +5544,15 @@
     (mine-a-method-63 () none) ;; 63
     )
   )
-|#
-
-  
-
 
 
   
 
-#|
+
+
+  
+
+
 (deftype mine-b (process-focusable)
   ((shooter           uint64             :offset-assert 256)
    (glued-to          uint64             :offset-assert 264)
@@ -5583,15 +5583,15 @@
     (mine-b-method-66 () none) ;; 66
     )
   )
-|#
-
-  
-
 
 
   
 
-#|
+
+
+  
+
+
 (deftype v-yellow-guided-missile (net-projectile)
   ((trail-tracker        uint64                       :offset-assert 568)
    (blast-radius         float                        :offset-assert 576)
@@ -5622,7 +5622,7 @@
     (v-yellow-guided-missile-method-80 () none) ;; 80
     )
   )
-|#
+
 
   
 
@@ -5673,7 +5673,7 @@
 
 
 
-#|
+
 (deftype particle-buffer (prim-client)
   ((tex-id           uint32      :offset-assert 4)
    (smoke-part-count int32       :offset-assert 8)
@@ -5691,7 +5691,7 @@
     (particle-buffer-method-13 () none) ;; 13
     )
   )
-|#
+
 
 
 
@@ -5721,7 +5721,7 @@
 
   
 
-#|
+
 (deftype v-wpn-red-smoke (vehicle-weapon-slot)
   ((smoke-system uint64  :offset-assert 264)
    (wait-time    int32   :offset-assert 272)
@@ -5737,7 +5737,7 @@
     (v-wpn-red-smoke-method-61 () none) ;; 61
     )
   )
-|#
+
 
   
 
@@ -5757,7 +5757,7 @@
 
 
 
-#|
+
 (deftype oil-trail (prim-client)
   ((tex-id                   uint32          :offset-assert 4)
    (segment-count            int32           :offset-assert 8)
@@ -5779,7 +5779,7 @@
     (oil-trail-method-16 () none) ;; 16
     )
   )
-|#
+
 
 
 
@@ -5847,7 +5847,7 @@
 
   
 
-#|
+
 (deftype v-wpn-red-oil (vehicle-weapon-slot)
   ((oil-emitter uint64  :offset-assert 264)
    (wait-time   int32   :offset-assert 272)
@@ -5863,7 +5863,7 @@
     (v-wpn-red-oil-method-61 () none) ;; 61
     )
   )
-|#
+
 
   
 
@@ -6013,7 +6013,7 @@
 
 
 
-#|
+
 (deftype red-sentry-bot (process-focusable)
   ((destination-point       vector     :inline :offset-assert 256)
    (destination-rot         quaternion :inline :offset-assert 272)
@@ -6051,7 +6051,7 @@
     (red-sentry-bot-method-66 () none) ;; 66
     )
   )
-|#
+
 
 
 
@@ -6154,7 +6154,7 @@
 
   
 
-#|
+
 (deftype v-wpn-red-tractor-beam (vehicle-weapon-slot)
   ((firing-at      uint64  :offset-assert 264)
    (duration-left  int32   :offset-assert 272)
@@ -6170,7 +6170,7 @@
     firing ;; 60 (new)
     )
   )
-|#
+
 
   
 
@@ -6255,7 +6255,7 @@
 
 
 
-#|
+
 (deftype vehicle-antenna (process-drawable)
   ((vehicle          uint64                          :offset-assert 248)
    (attach-local-pos vector                  :inline :offset-assert 256)
@@ -6285,7 +6285,7 @@
     (vehicle-antenna-method-54 () none) ;; 54
     )
   )
-|#
+
 
 
 
@@ -45648,7 +45648,7 @@
 
 
 
-#|
+
 (deftype net-game-mgr-artifact (net-game-mgr-deathmatch)
   ((artifact-location-array basic    :offset-assert 312)
    (artifact-location-count int8     :offset-assert 316)
@@ -45666,7 +45666,7 @@
     (net-game-mgr-artifact-method-85 () none) ;; 85
     )
   )
-|#
+
 
 
 
@@ -47227,7 +47227,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#|
+
 (deftype lobby-menu-manager (process)
   ((game-type                  uint32    :offset-assert 144)
    (in-focus-index             int8      :offset-assert 216)
@@ -47462,7 +47462,7 @@
     (lobby-menu-manager-method-195 () none) ;; 195
     )
   )
-|#
+
 
 
 (define-extern lobby-vehicle-flag->string function)
@@ -49678,7 +49678,7 @@
 
   
 
-#|
+
 (deftype joint-mod-head (joint-mod)
   ((mode            uint32             :offset-assert 0)
    (process         basic              :offset-assert 4)
@@ -49718,7 +49718,7 @@
   :flag-assert         #x10000000ac
   ;; field track-mode is likely a value type.
   )
-|#
+
 
   
 
@@ -49730,7 +49730,7 @@
   :size-assert         #x184
   :flag-assert         #x3b01000184
   )
-#|
+
 (deftype driver-FULL-PENDING (process-focusable)
   ((info               driver-info :inline :offset-assert 256)
    (vehicle            uint64              :offset-assert 280)
@@ -49763,7 +49763,7 @@
     (driver-method-66 (_type_) none) ;; 66
     )
   )
-|#
+
 
 
 (define-extern joint-mod-head-handler function)
@@ -58795,13 +58795,7 @@
 
 ;; palette-fade-controls — full definition at L15395
 
-;; install-handler stub
-(deftype install-handler (basic)
-  ()
-  :method-count-assert 9
-  :size-assert         #x4
-  :flag-assert         #x900000004
-  )
+(define-extern install-handler (function int function int))
 
 ;; editable-array stub — moved up to L51044 (was here)
 ;; (deftype editable-array (basic) () :method-count-assert 9 :size-assert #x4 :flag-assert #x900000004)
