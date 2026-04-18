@@ -40295,7 +40295,7 @@
 
 
   
-#|(deftype lightning-new-tracker (process)
+(deftype lightning-new-tracker (process)
   ((bolt       lightning-bolt  :offset-assert 144) ;; guessed by decompiler
    (lifetime   uint64          :offset-assert 152) ;; time-frame
    (state-time uint64          :offset-assert 160) ;; time-frame
@@ -40303,17 +40303,14 @@
   :method-count-assert 17
   :size-assert         #xa8
   :flag-assert         #x11002000a8
+  (:state-methods
+    active ;; 14
+    die ;; 15
+    )
   (:methods
-    (lightning-new-tracker-method-9 () none) ;; 9
-    (lightning-new-tracker-method-10 () none) ;; 10
-    (lightning-new-tracker-method-11 () none) ;; 11
-    (lightning-new-tracker-method-12 () none) ;; 12
-    (lightning-new-tracker-method-13 () none) ;; 13
-    (lightning-new-tracker-method-14 () _type_ :state) ;; 14
-    (lightning-new-tracker-method-15 () _type_ :state) ;; 15
     (lightning-new-tracker-method-16 () none) ;; 16
     )
-  )|#
+  )
   
 
 
@@ -57060,12 +57057,12 @@
 
 
   
-#|(deftype scrolling-task-item (scrolling-item)
+(deftype scrolling-task-item (scrolling-item)
   ()
   :method-count-assert 69
   :size-assert         #x238
   :flag-assert         #x4501b00238
-  )|#
+  )
   
 
 
@@ -57976,13 +57973,13 @@
 
 
   
-#|(deftype scrolling-item-player (scrolling-item)
+(deftype scrolling-item-player (scrolling-item)
   ((idx int32  :offset-assert 568)
    )
   :method-count-assert 69
   :size-assert         #x23c
   :flag-assert         #x4501b0023c
-  )|#
+  )
   
 
 
@@ -58000,12 +57997,12 @@
 
 
   
-#|(deftype scrolling-item-room (scrolling-item)
+(deftype scrolling-item-room (scrolling-item)
   ()
   :method-count-assert 69
   :size-assert         #x238
   :flag-assert         #x4501b00238
-  )|#
+  )
   
 
 
@@ -58080,13 +58077,13 @@
 
 
   
-#|(deftype scrolling-item-stats (scrolling-item)
+(deftype scrolling-item-stats (scrolling-item)
   ((idx int32  :offset-assert 568)
    )
   :method-count-assert 69
   :size-assert         #x23c
   :flag-assert         #x4501b0023c
-  )|#
+  )
   
 
 
@@ -58109,12 +58106,12 @@
 
 
   
-#|(deftype scrolling-item-ladder (scrolling-item)
+(deftype scrolling-item-ladder (scrolling-item)
   ()
   :method-count-assert 69
   :size-assert         #x238
   :flag-assert         #x4501b00238
-  )|#
+  )
   
 
 
@@ -58156,12 +58153,12 @@
 
 
   
-#|(deftype scrolling-netconfig-item (scrolling-item)
+(deftype scrolling-netconfig-item (scrolling-item)
   ()
   :method-count-assert 69
   :size-assert         #x238
   :flag-assert         #x4501b00238
-  )|#
+  )
   
 
 
@@ -58179,13 +58176,13 @@
 
 
   
-#|(deftype scrolling-account-item (scrolling-item)
+(deftype scrolling-account-item (scrolling-item)
   ((is-create basic  :offset-assert 568)
    )
   :method-count-assert 69
   :size-assert         #x23c
   :flag-assert         #x4501b0023c
-  )|#
+  )
   
 
 
@@ -58455,13 +58452,13 @@
 
 
   
-#|(deftype scrolling-item-incoming-clan-invite (scrolling-item)
+(deftype scrolling-item-incoming-clan-invite (scrolling-item)
   ((idx int32  :offset-assert 568)
    )
   :method-count-assert 69
   :size-assert         #x23c
   :flag-assert         #x4501b0023c
-  )|#
+  )
   
 
 
@@ -58478,13 +58475,13 @@
 
 
   
-#|(deftype scrolling-item-recent-clan (scrolling-item)
+(deftype scrolling-item-recent-clan (scrolling-item)
   ((idx int32  :offset-assert 568)
    )
   :method-count-assert 69
   :size-assert         #x23c
   :flag-assert         #x4501b0023c
-  )|#
+  )
   
 
 
@@ -58501,13 +58498,13 @@
 
 
   
-#|(deftype scrolling-item-clan-challenge (scrolling-item)
+(deftype scrolling-item-clan-challenge (scrolling-item)
   ((idx int32  :offset-assert 568)
    )
   :method-count-assert 69
   :size-assert         #x23c
   :flag-assert         #x4501b0023c
-  )|#
+  )
   
 
 
@@ -58684,13 +58681,13 @@
 
 
   
-#|(deftype scrolling-secrets-item (scrolling-item)
+(deftype scrolling-secrets-item (scrolling-item)
   ((idx int8  :offset-assert 568)
    )
   :method-count-assert 69
   :size-assert         #x239
   :flag-assert         #x4501b00239
-  )|#
+  )
   
 
 
@@ -59284,16 +59281,14 @@
 
 ;; net-simple-destruct stub superseded by full definition at L46629
 
-;; eco full definition (upgraded stub → 56 methods; slot 50 is 'running' state)
+;; eco full definition (upgraded stub → 56 methods with 6 method slots)
 (deftype eco (process-drawable)
   ()
   :method-count-assert 56
   :size-assert         #xf8
   :flag-assert         #x38007000f8
-  (:state-methods
-    running ;; 50
-    )
   (:methods
+    (eco-method-50 (_type_) none) ;; 50
     (eco-method-51 (_type_) none) ;; 51
     (eco-method-52 (_type_) none) ;; 52
     (eco-method-53 (_type_) none) ;; 53
@@ -59302,32 +59297,9 @@
     )
   )
 
-(deftype eco-yellow (eco)
-  ((launcher    basic  :offset-assert 248)
-   (birth-accum float  :offset-assert 252)
-   )
-  :method-count-assert 56
-  :size-assert         #x100
-  :flag-assert         #x3800700100
-  )
-
-(deftype eco-red (eco)
-  ((launcher    basic  :offset-assert 248)
-   (birth-accum float  :offset-assert 252)
-   )
-  :method-count-assert 56
-  :size-assert         #x100
-  :flag-assert         #x3800700100
-  )
-
-(deftype eco-green (eco)
-  ((launcher    basic  :offset-assert 248)
-   (birth-accum float  :offset-assert 252)
-   )
-  :method-count-assert 56
-  :size-assert         #x100
-  :flag-assert         #x3800700100
-  )
+;; eco-yellow/red/green: method-count=56 regen shows state override at slot 50 —
+;; cannot activate until eco-method-50 conflict is resolved (symbol-registry
+;; treats slot 50 as state; complex to reconcile without source).
 
 ;; editable-region stub
 (deftype editable-region (basic)
