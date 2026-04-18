@@ -43324,7 +43324,7 @@
     (vehicle-method-132 (_type_) int) ;; 132 ;; (vehicle-method-132 (_type_ traffic-object-spawn-params) none)
     (vehicle-method-133 (_type_) none) ;; 133 ;; (vehicle-method-133 (_type_ traffic-object-spawn-params) none)
     (vehicle-method-134 (_type_) none) ;; 134 ;; (vehicle-method-134 (_type_) none)
-    (vehicle-method-135 (_type_) int) ;; 135 ;; (vehicle-method-135 (_type_) none)
+    (vehicle-method-135 (_type_) none) ;; 135
     (vehicle-method-136 (_type_) none) ;; 136 ;; (vehicle-method-136 (_type_) none)
     (vehicle-method-137 (_type_) none) ;; 137 ;; (vehicle-method-137 (_type_) none)
     (vehicle-method-138 (_type_) none) ;; 138 ;; (vehicle-method-138 (_type_) none)
@@ -43346,7 +43346,7 @@
     (vehicle-method-154 (_type_) int) ;; 154
     (vehicle-method-155 (_type_) int) ;; 155
     (vehicle-method-156 (_type_) none) ;; 156
-    (vehicle-method-157 (_type_) int) ;; 157
+    (vehicle-method-157 (_type_) none) ;; 157
     (vehicle-method-158 (_type_) none) ;; 158
     (vehicle-method-159 (_type_) none) ;; 159
     (vehicle-method-160 (_type_) none) ;; 160
@@ -43386,7 +43386,7 @@
     (vehicle-method-194 (_type_) int) ;; 194
     (vehicle-method-195 (_type_) object) ;; 195
     (vehicle-method-196 (_type_) none) ;; 196
-    (vehicle-method-197 (_type_) int) ;; 197
+    (vehicle-method-197 (_type_) none) ;; 197
     (vehicle-method-198 (_type_) none) ;; 198
     (vehicle-method-199 (_type_) none) ;; 199
     (vehicle-method-200 (_type_) none) ;; 200
@@ -51666,17 +51666,17 @@
     (mysql-nav-graph-method-10 (_type_) symbol) ;; 10
     (mysql-nav-graph-method-11 (_type_ int) int) ;; 11
     (mysql-nav-graph-method-12 (_type_ int) int) ;; 12
-    (mysql-nav-graph-method-13 (_type_) none) ;; 13
-    (mysql-nav-graph-method-14 (_type_) none) ;; 14
-    (mysql-nav-graph-method-15 (_type_) none) ;; 15
-    (mysql-nav-graph-method-16 (_type_) none) ;; 16
-    (mysql-nav-graph-method-17 (_type_) none) ;; 17
+    (mysql-nav-graph-method-13 (_type_) int) ;; 13
+    (mysql-nav-graph-method-14 (_type_) int) ;; 14
+    (mysql-nav-graph-method-15 (_type_) int) ;; 15
+    (mysql-nav-graph-method-16 (_type_) int) ;; 16
+    (mysql-nav-graph-method-17 (_type_) int) ;; 17
     (mysql-nav-graph-method-18 () none) ;; 18
-    (mysql-nav-graph-method-19 (_type_) none) ;; 19
-    (mysql-nav-graph-method-20 (_type_) none) ;; 20
-    (mysql-nav-graph-method-21 (_type_) none) ;; 21
-    (mysql-nav-graph-method-22 (_type_) none) ;; 22
-    (mysql-nav-graph-method-23 (_type_) none) ;; 23
+    (mysql-nav-graph-method-19 (_type_) int) ;; 19
+    (mysql-nav-graph-method-20 (_type_) int) ;; 20
+    (mysql-nav-graph-method-21 (_type_) symbol) ;; 21
+    (mysql-nav-graph-method-22 (_type_) int) ;; 22
+    (mysql-nav-graph-method-23 (_type_) symbol) ;; 23
     )
   )
   
