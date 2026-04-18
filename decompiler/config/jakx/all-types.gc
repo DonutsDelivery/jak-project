@@ -35684,18 +35684,18 @@
 
 
   
-#|(deftype sprite-distorter-sine-tables (basic)
+(deftype sprite-distorter-sine-tables (basic)
   ((aspx   float          :offset-assert 4)
    (aspy   float          :offset-assert 8)
-   (entry  vector 128     :offset-assert 16) ;; guessed by decompiler
-   (ientry qword  9       :offset-assert 2064) ;; guessed by decompiler
-   (giftag qword  :inline :offset-assert 2208) ;; gs-gif-tag :inline
+   (entry  vector 128 :inline :offset-assert 16)
+   (ientry qword  9 :inline :offset-assert 2064)
+   (giftag qword  :inline :offset-assert 2208)
    (color  qword  :inline :offset-assert 2224)
    )
   :method-count-assert 9
   :size-assert         #x8c0
   :flag-assert         #x9000008c0
-  )|#
+  )
   
 
 
