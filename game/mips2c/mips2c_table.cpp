@@ -483,6 +483,9 @@ namespace generic_merc_query { extern void link(); }
 namespace generic_merc_death { extern void link(); }
 namespace generic_merc_execute_asm { extern void link(); }
 namespace generic_merc_do_chain { extern void link(); }
+// sparticle.cpp port (see game/mips2c/jakx_functions/sparticle.cpp)
+namespace sp_process_block_2d { extern void link(); }
+namespace sp_process_block_3d { extern void link(); }
 }
 // clang-format on
 
@@ -819,7 +822,9 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      {"sparticle-launcher",
       {jakx::sparticle_motion_blur::link, jakx::sp_launch_particles_var::link,
        jakx::particle_adgif::link, jakx::sp_init_fields::link}},
-     {"sparticle", {jak3::sp_process_block_2d::link, jak3::sp_process_block_3d::link}},
+     // sparticle: jakx-native ports — structurally identical to jak3;
+     // jakx namespace only. See game/mips2c/jakx_functions/sparticle.cpp.
+     {"sparticle", {jakx::sp_process_block_2d::link, jakx::sp_process_block_3d::link}},
      {"nav-engine",
       {jak3::method_21_nav_engine::link, jak3::method_20_nav_engine::link,
        jak3::method_18_nav_engine::link, jak3::method_17_nav_engine::link,

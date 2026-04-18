@@ -244,6 +244,7 @@ set(RUNTIME_SOURCE
         mips2c/jakx_functions/sky.cpp
         mips2c/jakx_functions/debug.cpp
         mips2c/jakx_functions/shadow.cpp
+        mips2c/jakx_functions/sparticle.cpp
         mips2c/jakx_functions/sparticle_launcher.cpp
         mips2c/jakx_functions/texture.cpp
         mips2c/jakx_functions/wvehicle_part.cpp
