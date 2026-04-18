@@ -5599,20 +5599,8 @@
 
 
   
-#|(deftype tire-trail (light-trail)
-  ((crumb-array             (array uint8)             :offset-assert 4) ;; guessed by decompiler
-   (crumb-size              uint8                     :offset-assert 8)
-   (crumb-count             int16                     :offset-assert 10)
-   (max-crumb-count         int16                     :offset-assert 12)
-   (appearance              light-trail-composition   :offset-assert 16)
-   (start-marker            uint64                    :offset-assert 24)
-   (end-marker              uint64                    :offset-assert 32)
-   (decision                uint64                    :offset-assert 40) ;; light-trail-decision
-   (total-distance-traveled float                     :offset-assert 48)
-   (strip                   prim-strip                :offset-assert 52) ;; guessed by decompiler
-   (strip2                  prim-strip                :offset-assert 56) ;; guessed by decompiler
-   (cache-vector            vector                  4 :offset-assert 64) ;; guessed by decompiler
-   )
+(deftype tire-trail (light-trail)
+  ()
   :method-count-assert 25
   :size-assert         #x80
   :flag-assert         #x1900000080
@@ -5620,13 +5608,13 @@
     (tire-trail-method-23 (_type_ vector vector float) none) ;; 23
     (tire-trail-method-24 () none) ;; 24
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype tire-trail-tracker (light-trail-tracker)
+(deftype tire-trail-tracker (light-trail-tracker)
   ()
   :method-count-assert 24
   :size-assert         #xbc
@@ -5635,10 +5623,7 @@
     (tire-trail-tracker-method-22 () none) ;; 22
     (tire-trail-tracker-method-23 () none) ;; 23
     )
-  (:state-methods
-    tracking ;; 15
-    )
-  )|#
+  )
   
 
 
@@ -41475,11 +41460,11 @@
 
 
   
-#|(deftype nav-engine-spr-buffer (structure)
+(deftype nav-engine-spr-buffer (structure)
   ((mem-addr  (pointer nav-mesh)          :offset-assert 0) ;; guessed by decompiler
-   (mem-nav   uint32                      :offset-assert 0)
+   (mem-nav   uint32                      :offset 0)
    (spr-addr  (inline-array nav-control)  :offset-assert 4) ;; guessed by decompiler
-   (spr-nav   uint32                      :offset-assert 4)
+   (spr-nav   uint32                      :offset 4)
    (q-size    uint32                      :offset-assert 8)
    (i-nav     uint8                       :offset-assert 12)
    (done      int8                        :offset-assert 13)
@@ -41489,7 +41474,7 @@
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
-  )|#
+  )
   
 
 
@@ -41550,14 +41535,14 @@
 
 
   
-#|(deftype nav-find-clear-spot-work (structure)
-  ((id-array     int8   16 :offset-assert 0) ;; guessed by decompiler
-   (sphere-array sphere 16 :offset-assert 16) ;; guessed by decompiler
+(deftype nav-find-clear-spot-work (structure)
+  ((id-array     int8   16         :offset-assert 0) ;; guessed by decompiler
+   (sphere-array sphere 16 :inline :offset-assert 16) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x110
   :flag-assert         #x900000110
-  )|#
+  )
   
 
 
