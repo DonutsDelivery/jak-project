@@ -52217,23 +52217,23 @@
 
 
   
-#|(deftype mysql-nav-graph (basic)
-  ((nav_graph_id            uint32                        :offset-assert 4)
-   (graph-type              basic                         :offset-assert 8)
-   (node-array              mysql-nav-node-array          :offset-assert 12) ;; guessed by decompiler
-   (edge-array              mysql-nav-edge-array          :offset-assert 16) ;; guessed by decompiler
-   (visnode-array           mysql-nav-visnode-array       :offset-assert 20) ;; guessed by decompiler
-   (pov-conn-array          uint32                        :offset-assert 24)
-   (pov-conn-array-length   int32                         :offset-assert 28)
-   (level-info-array-length int32                         :offset-assert 32)
-   (level-info-last-lookup  int32                         :offset-assert 36)
-   (level-info-array        mysql-nav-graph-level-info 32 :offset-assert 40) ;; guessed by decompiler
+(deftype mysql-nav-graph (basic)
+  ((nav_graph_id            uint32                                :offset-assert 4)
+   (graph-type              basic                                 :offset-assert 8)
+   (node-array              mysql-nav-node-array                  :offset-assert 12) ;; guessed by decompiler
+   (edge-array              mysql-nav-edge-array                  :offset-assert 16) ;; guessed by decompiler
+   (visnode-array           mysql-nav-visnode-array               :offset-assert 20) ;; guessed by decompiler
+   (pov-conn-array          uint32                                :offset-assert 24)
+   (pov-conn-array-length   int32                                 :offset-assert 28)
+   (level-info-array-length int32                                 :offset-assert 32)
+   (level-info-last-lookup  int32                                 :offset-assert 36)
+   (level-info-array        mysql-nav-graph-level-info 32 :inline :offset-assert 48) ;; placed at 48 due to 16-byte alignment
    )
   :method-count-assert 24
-  :size-assert         #x428
-  :flag-assert         #x1800000428
+  :size-assert         #x430
+  :flag-assert         #x1800000430
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type string) _type_)
+    (new (symbol type) _type_) ;; 0
     (mysql-nav-graph-method-9 (_type_ string string) symbol) ;; 9
     (mysql-nav-graph-method-10 (_type_) symbol) ;; 10
     (mysql-nav-graph-method-11 (_type_ int) int) ;; 11
@@ -52243,14 +52243,14 @@
     (mysql-nav-graph-method-15 (_type_) none) ;; 15
     (mysql-nav-graph-method-16 (_type_) none) ;; 16
     (mysql-nav-graph-method-17 (_type_) none) ;; 17
-    (mysql-nav-graph-method-18 () none) ;; 18 ;; (lookup-level-info2 (_type_ mysql-nav-node symbol) mysql-nav-graph-level-info)
+    (mysql-nav-graph-method-18 () none) ;; 18
     (mysql-nav-graph-method-19 (_type_) none) ;; 19
     (mysql-nav-graph-method-20 (_type_) none) ;; 20
     (mysql-nav-graph-method-21 (_type_) none) ;; 21
     (mysql-nav-graph-method-22 (_type_) none) ;; 22
     (mysql-nav-graph-method-23 (_type_) none) ;; 23
     )
-  )|#
+  )
   
 
 
@@ -55289,12 +55289,12 @@
 
 
   
-#|(deftype coli-statue-female (coli-statue)
+(deftype coli-statue-female (coli-statue)
   ()
   :method-count-assert 55
   :size-assert         #x108
   :flag-assert         #x3700800108
-  )|#
+  )
   
 
 
