@@ -20146,26 +20146,31 @@
 #|(deftype talker (process)
   ((trans          vector              :inline :offset-assert 144)
    (message        talker-speech-class         :offset-assert 160)
-   (total-time     uint64                      :offset-assert 168)
-   (total-off-time uint64                      :offset-assert 176)
-   (start-time     uint64                      :offset-assert 184)
-   (state-time     uint64                      :offset-assert 192)
-   (voicebox       uint64                      :offset-assert 200)
-   (voice-id       sound-id                    :offset-assert 208)
-   (message-id     sound-id                    :offset-assert 212)
+   (total-time     uint64                      :offset-assert 168) ;; time-frame
+   (total-off-time uint64                      :offset-assert 176) ;; time-frame
+   (start-time     uint64                      :offset-assert 184) ;; time-frame
+   (state-time     uint64                      :offset-assert 192) ;; time-frame
+   (voicebox       uint64                      :offset-assert 200) ;; handle
+   (voice-id       sound-id                    :offset-assert 208) ;; guessed by decompiler
+   (message-id     sound-id                    :offset-assert 212) ;; guessed by decompiler
    (region         region                      :offset-assert 216)
    (interp         float                       :offset-assert 220)
-   (save?          symbol                      :offset-assert 224)
-   (grab?          symbol                      :offset-assert 228)
+   (save?          symbol                      :offset-assert 224) ;; guessed by decompiler
+   (grab?          symbol                      :offset-assert 228) ;; guessed by decompiler
    )
   :method-count-assert 19
   :size-assert         #xe8
   :flag-assert         #x13006000e8
   (:methods
+    (talker-method-9 (_type_) none) ;; 9
+    (talker-method-10 (_type_) none) ;; 10
+    (talker-method-11 (_type_) none) ;; 11
+    (talker-method-12 (_type_) none) ;; 12
+    (talker-method-13 (_type_) none) ;; 13
     (talker-method-14 () _type_ :state) ;; 14
     (talker-method-15 () _type_ :state) ;; 15
     (talker-method-16 () _type_ :state) ;; 16
-    (talker-method-17 (_type_) none) ;; 17
+    (talker-method-17 (_type_) none) ;; 17 ;; (talker-method-17 (_type_) none)
     (talker-method-18 (_type_) none) ;; 18
     )
   )|#
@@ -59193,7 +59198,13 @@
 
 ;; prim-strip stub — moved up to L19720 to precede simple-prim at L30065
 
-;; talker — full definition at L20146
+;; talker stub
+(deftype talker (process)
+  ()
+  :method-count-assert 14
+  :size-assert         #x90
+  :flag-assert         #xe00000090
+  )
 
 ;; net-available-game stub
 (deftype net-available-game (structure)
