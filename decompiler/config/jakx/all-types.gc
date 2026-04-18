@@ -53353,7 +53353,7 @@
 
 
   
-#|(deftype atoll-rotor (process-drawable)
+(deftype atoll-rotor (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -53361,13 +53361,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype atoll-dish (process-drawable)
+(deftype atoll-dish (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -53375,7 +53375,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
