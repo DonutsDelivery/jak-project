@@ -28862,16 +28862,18 @@
   :size-assert         #x1c8
   :flag-assert         #x38014001c8
   ;; field user-data uses ~A with a 64-bit load.
+  (:state-methods
+    (wait symbol) ;; 50
+    release ;; 51
+    play-anim ;; 52
+    )
   (:methods
-    (scene-player-method-50 () none) ;; 50
-    (scene-player-method-51 () none) ;; 51
-    (scene-player-method-52 () none) ;; 52
-    (scene-player-method-53 () none) ;; 53
-    (scene-player-method-54 () none) ;; 54
-    (scene-player-method-55 () none) ;; 55
+    (scene-player-method-53 (_type_ string symbol) none) ;; 53
+    (scene-player-method-54 (_type_ scene symbol) scene) ;; 54
+    (scene-player-method-55 (_type_ float float) none) ;; 55
     )
   )
-  
+
 
 (define-extern *scene-player* (pointer scene-player))
 (define-extern *debug-menu-scene-play* object)
