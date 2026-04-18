@@ -486,6 +486,11 @@ namespace generic_merc_do_chain { extern void link(); }
 // sparticle.cpp port (see game/mips2c/jakx_functions/sparticle.cpp)
 namespace sp_process_block_2d { extern void link(); }
 namespace sp_process_block_3d { extern void link(); }
+// foreground.cpp port (see game/mips2c/jakx_functions/foreground.cpp)
+namespace foreground_check_longest_edge_asm { extern void link(); }
+namespace foreground_merc { extern void link(); }
+namespace foreground_generic_merc { extern void link(); }
+namespace foreground_draw_hud { extern void link(); }
 }
 // clang-format on
 
@@ -783,9 +788,11 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      // in the jakx namespace so future divergence (if any) can be expressed
      // without touching jak3's copy. See game/mips2c/jakx_functions/joint.cpp.
      {"joint", {jakx::cspace_parented_transformq_joint::link}},
+     // foreground: jakx-native ports — structurally identical to jak3;
+     // jakx namespace only. See game/mips2c/jakx_functions/foreground.cpp.
      {"foreground",
-      {jak3::foreground_check_longest_edge_asm::link, jak3::foreground_generic_merc::link,
-       jak3::foreground_merc::link, jak3::foreground_draw_hud::link}},
+      {jakx::foreground_check_longest_edge_asm::link, jakx::foreground_generic_merc::link,
+       jakx::foreground_merc::link, jakx::foreground_draw_hud::link}},
      // particle-curves — jakx-native ports; structurally identical to jak3
      // but in jakx namespace so future divergence is localized.
      // See game/mips2c/jakx_functions/particle_curves.cpp.
