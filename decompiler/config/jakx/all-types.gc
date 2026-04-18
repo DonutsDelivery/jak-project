@@ -34566,7 +34566,7 @@
   )
 
 
-(define-extern *fmv-player* object)
+(define-extern *fmv-player* fmv-player)
 (define-extern *m2v-info* array)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -34966,7 +34966,7 @@
 (define-extern GSH_WHICH_STAT int) ;; int
 (define-extern GSH_MAX_DISPLAY basic) ;; basic
 (define-extern GSH_TIME int) ;; int
-(define-extern *perf-stats* object) ;; perf-stat-array
+(define-extern *perf-stats* perf-stat-array)
 (define-extern *gomi-stats-hack* (inline-array perf-stat)) ;; (inline-array perf-stat)
 (define-extern start-perf-stat-collection (function none))
 (define-extern end-perf-stat-collection (function none))
@@ -58918,10 +58918,21 @@
 
 ;; touching-list stub (real deftype has :inline 16-byte alignment issue at offset 8)
 (deftype touching-list (structure)
-  ()
-  :method-count-assert 9
-  :size-assert         #x0
-  :flag-assert         #x900000000
+  ((num-touching-shapes  int32)
+   (resolve-u            int8)
+   (touching-shapes      uint8 :offset-assert 8)
+   )
+  :method-count-assert 15
+  :size-assert         #x8
+  :flag-assert         #xf00000008
+  (:methods
+    (new (symbol type) _type_) ;; 9
+    (add-touching-prims (_type_ object object float object object) none) ;; 10
+    (free-nodes (_type_) none) ;; 11
+    (update-from-step-size (_type_ float) none) ;; 12
+    (send-events-for-touching-shapes (_type_) none) ;; 13
+    (get-shapes-entry (_type_ object object) object) ;; 14
+    )
   )
 
 ;; projectile — full definition above at L30951
