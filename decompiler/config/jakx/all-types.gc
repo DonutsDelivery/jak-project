@@ -29813,7 +29813,8 @@
 
 
   
-#|(deftype part-tracker (process)
+(declare-type part-tracker process)
+(deftype part-tracker (process)
   ((root            trsqv                                  :offset-assert 144) ;; guessed by decompiler
    (mat             matrix                         :inline :offset-assert 160)
    (offset          vector                         :inline :offset-assert 224)
@@ -29821,6 +29822,7 @@
    (userdata        uint64                                 :offset-assert 256)
    (user-time       time-frame                     2       :offset-assert 264) ;; guessed by decompiler
    (user-vector     vector                         :inline :offset-assert 288)
+   (pad304          uint8                          16      :offset-assert 304)
    (user-handle     uint32                         2       :offset-assert 320) ;; guessed by decompiler
    (part            sparticle-launch-control               :offset-assert 328) ;; guessed by decompiler
    (callback        (function part-tracker vector)         :offset-assert 332) ;; guessed by decompiler
@@ -29831,9 +29833,9 @@
    (target          uint64                                 :offset-assert 368) ;; handle
    (target-joint    int32                                  :offset-assert 376)
    )
-  :method-count-assert 19
+  :method-count-assert 24
   :size-assert         #x17c
-  :flag-assert         #x1300f0017c
+  :flag-assert         #x1800f0017c
   ;; field userdata uses ~A with a 64-bit load.
   (:methods
     (part-tracker-method-9 () none) ;; 9
@@ -29847,7 +29849,7 @@
     (part-tracker-method-17 (_type_) none) ;; 17
     (part-tracker-method-18 () none) ;; 18
     )
-  )|#
+  )
   
 
 
@@ -40062,12 +40064,12 @@
 
 
   
-#|(deftype light-trail-tracker (process)
-  ((trail                light-trail  :offset-assert 144) ;; guessed by decompiler
-   (tracked-object       uint64       :offset-assert 152) ;; handle
-   (offscreen?           symbol       :offset-assert 160) ;; guessed by decompiler
-   (offscreen-start-time uint64       :offset-assert 168) ;; time-frame
-   (next-line-check-time uint64       :offset-assert 176) ;; time-frame
+(deftype light-trail-tracker (process)
+  ((trail                light-trail  :offset-assert 144)
+   (tracked-object       uint64       :offset-assert 152)
+   (offscreen?           symbol       :offset-assert 160)
+   (offscreen-start-time uint64       :offset-assert 168)
+   (next-line-check-time uint64       :offset-assert 176)
    (last-add-frame-val   uint32       :offset-assert 184)
    )
   :method-count-assert 22
@@ -40088,7 +40090,7 @@
     (light-trail-tracker-method-20 (_type_ vector) none) ;; 20
     (light-trail-tracker-method-21 () none) ;; 21
     )
-  )|#
+  )
   
 
 
@@ -59244,13 +59246,7 @@
   :flag-assert         #x900000004
   )
 
-;; part-tracker stub
-(deftype part-tracker (process)
-  ()
-  :method-count-assert 14
-  :size-assert         #x90
-  :flag-assert         #xe00000090
-  )
+;; part-tracker — full definition above at L29817
 
 ;; touching-prims-entry-pool stub
 (deftype touching-prims-entry-pool (structure)
