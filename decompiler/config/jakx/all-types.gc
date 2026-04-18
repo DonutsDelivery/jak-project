@@ -46379,13 +46379,13 @@
 
 
   
-#|(deftype net-player-rushhour (net-player-race)
+(deftype net-player-rushhour (net-player-race)
   ((combo-score     int32   :offset-assert 496)
    (combo-count     int32   :offset-assert 500)
    (last-score-time int32   :offset-assert 504)
    (combo-hud       uint64  :offset-assert 512)
    (drone-type      uint16  :offset-assert 520)
-   (powerup-timer   uint64  :offset-assert 536)
+   (powerup-timer   uint64  :offset 536) ;; 8-byte gap after drone-type
    )
   :method-count-assert 111
   :size-assert         #x220
@@ -46395,7 +46395,7 @@
     (net-player-rushhour-method-109 () none) ;; 109
     (net-player-rushhour-method-110 () none) ;; 110
     )
-  )|#
+  )
   
 
 
@@ -47053,9 +47053,8 @@
 
   
 (deftype sprite-menu-info (base-menu-info)
-  ((trans-info   transition-info  :offset 16)
-   (sprites-info basic            :offset-assert 52)
-   (color        uint32           :offset-assert 56)
+  ((sprites-info basic  :offset-assert 52)
+   (color        uint32 :offset-assert 56)
    )
   :method-count-assert 9
   :size-assert         #x3c
@@ -47080,7 +47079,7 @@
 
 
   
-#|(deftype sprite-menu (base-menu)
+(deftype sprite-menu (base-menu)
   ((sprites basic  :offset-assert 536)
    (alpha   float  :offset-assert 540)
    )
@@ -47090,7 +47089,7 @@
   (:methods
     (sprite-menu-method-65 () none) ;; 65
     )
-  )|#
+  )
   
 
 
@@ -47109,7 +47108,7 @@
 
 
   
-#|(deftype prim-strip-menu (sprite-menu)
+(deftype prim-strip-menu (sprite-menu)
   ((p-client-array basic  :offset-assert 544)
    (colors         basic  :offset-assert 548)
    )
@@ -47119,7 +47118,7 @@
   (:methods
     (prim-strip-menu-method-66 () none) ;; 66
     )
-  )|#
+  )
   
 
 
