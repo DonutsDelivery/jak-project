@@ -20842,11 +20842,7 @@
 
   
 (deftype prototype-array-tie (array)
-  ((type             type :offset 0) ;; guessed by decompiler
-   (length           int32 :offset 4)
-   (allocated-length int32 :offset 8)
-   (content-type     type :offset 12) ;; guessed by decompiler
-   )
+  ()
   :method-count-assert 10
   :size-assert         #x10
   :flag-assert         #xa00000010
