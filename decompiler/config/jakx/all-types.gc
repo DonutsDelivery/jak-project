@@ -52483,34 +52483,34 @@
 
 
   
-#|(deftype nav-mesh-editable (structure)
+(deftype nav-mesh-editable (structure)
   ((flags         uint32                   :offset-assert 0)
    (verts         basic                    :offset-assert 4)
    (tris          basic                    :offset-assert 8)
-   (quads         nav-mesh-tri-quad-array  :offset-assert 12) ;; guessed by decompiler
+   (quads         nav-mesh-tri-quad-array  :offset-assert 12)
    (navmesh-id    uint32                   :offset-assert 16)
    (idx           uint32                   :offset-assert 20)
-   (level-name    symbol                   :offset-assert 24) ;; guessed by decompiler
+   (level-name    symbol                   :offset-assert 24)
    (level-id      uint32                   :offset-assert 28)
-   (polys         nav-mesh-poly-array      :offset-assert 32) ;; guessed by decompiler
+   (polys         nav-mesh-poly-array      :offset-assert 32)
    (selected-poly uint32                   :offset-assert 36)
    )
   :method-count-assert 19
   :size-assert         #x28
   :flag-assert         #x1300000028
   (:methods
-    (nav-mesh-editable-method-9 () none) ;; 9 ;; (nav-mesh-editable-method-9 () none)
-    (nav-mesh-editable-method-10 () none) ;; 10 ;; (nav-mesh-editable-method-10 () none)
-    (nav-mesh-editable-method-11 () none) ;; 11 ;; (nav-mesh-editable-method-11 () none)
-    (nav-mesh-editable-method-12 () none) ;; 12 ;; (nav-mesh-editable-method-12 () none)
-    (nav-mesh-editable-method-13 () none) ;; 13 ;; (nav-mesh-editable-method-13 () none)
-    (nav-mesh-editable-method-14 () none) ;; 14 ;; (nav-mesh-editable-method-14 () none)
-    (nav-mesh-editable-method-15 () none) ;; 15 ;; (nav-mesh-editable-method-15 () none)
-    (nav-mesh-editable-method-16 () none) ;; 16 ;; (nav-mesh-editable-method-16 () none)
-    (nav-mesh-editable-method-17 () none) ;; 17 ;; (nav-mesh-editable-method-17 () none)
-    (nav-mesh-editable-method-18 () none) ;; 18 ;; (nav-mesh-editable-method-18 () none)
+    (nav-mesh-editable-method-9 () none) ;; 9
+    (nav-mesh-editable-method-10 () none) ;; 10
+    (nav-mesh-editable-method-11 () none) ;; 11
+    (nav-mesh-editable-method-12 () none) ;; 12
+    (nav-mesh-editable-method-13 () none) ;; 13
+    (nav-mesh-editable-method-14 () none) ;; 14
+    (nav-mesh-editable-method-15 () none) ;; 15
+    (nav-mesh-editable-method-16 () none) ;; 16
+    (nav-mesh-editable-method-17 () none) ;; 17
+    (nav-mesh-editable-method-18 () none) ;; 18
     )
-  )|#
+  )
   
 
 
@@ -52558,7 +52558,7 @@
 
 
   
-#|(deftype nav-mesh-editor (process-drawable)
+(deftype nav-mesh-editor (process-drawable)
   ((close-menu-time      uint64                    :offset-assert 248)
    (external-cam-mode    basic                     :offset-assert 256)
    (mouse-pressed        uint64                    :offset-assert 264)
@@ -52602,7 +52602,7 @@
     (nav-mesh-editor-method-56 () none) ;; 56
     (nav-mesh-editor-method-57 () none) ;; 57
     )
-  )|#
+  )
   
 
 
