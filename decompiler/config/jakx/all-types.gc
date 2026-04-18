@@ -30772,7 +30772,28 @@
 
 
   
-#|(deftype ragdoll-edit-info (structure)
+(defenum ragdoll-joint-flag
+  :type uint32
+  :bitfield #t
+  (rjf0 0)
+  (rjf1 1)
+  (rjf2 2)
+  (rjf3 3)
+  (rjf4 4)
+  (rjf5 5)
+  (rjf6 6)
+  (rjf7 7)
+  (rjf8 8)
+  (rjf9 9)
+  (rjf10 10)
+  (rjf11 11)
+  (rjf12 12)
+  (rjf13 13)
+  (rjf14 14)
+  (rjf15 15)
+  )
+
+(deftype ragdoll-edit-info (structure)
   ((editing         symbol           :offset-assert 0) ;; guessed by decompiler
    (current-func    uint64           :offset-assert 8)
    (analog-func     uint64           :offset-assert 16)
@@ -30802,7 +30823,7 @@
     (ragdoll-edit-info-method-16 () none) ;; 16 ;; (ragdoll-edit-info-method-16 (_type_ ragdoll process-drawable) none)
     (ragdoll-edit-info-method-17 () none) ;; 17 ;; (ragdoll-edit-info-method-17 (_type_ ragdoll process-drawable) none)
     )
-  )|#
+  )
   
 
 
@@ -30839,7 +30860,7 @@
 
 
   
-#|(deftype ragdoll-joint (structure)
+(deftype ragdoll-joint (structure)
   ((quat                quaternion         :inline :offset-assert 0)
    (position            vector             :inline :offset-assert 16)
    (velocity            vector             :inline :offset-assert 32)
@@ -30866,7 +30887,7 @@
   :method-count-assert 9
   :size-assert         #xbc
   :flag-assert         #x9000000bc
-  )|#
+  )
   
 
 
@@ -31527,24 +31548,24 @@
 
 
   
-#|(deftype shrub-view-data (structure)
+(deftype shrub-view-data (structure)
   ((data           uint128 3       :offset-assert 0) ;; guessed by decompiler
    (texture-giftag qword   :inline :offset-assert 0) ;; gs-gif-tag :inline
    (consts         vector  :inline :offset-assert 16)
    (fog-clamp      vector  :inline :offset-assert 32)
-   (tex-start-ptr  int32           :offset-assert 16)
-   (gifbufsum      float           :offset-assert 16)
-   (mtx-buf-ptr    int32           :offset-assert 20)
-   (exp23          float           :offset-assert 20)
-   (fog-0          float           :offset-assert 24)
-   (fog-1          float           :offset-assert 28)
-   (fog-min        float           :offset-assert 32)
-   (fog-max        float           :offset-assert 36)
+   (tex-start-ptr  int32           :offset 16)
+   (gifbufsum      float           :offset 16)
+   (mtx-buf-ptr    int32           :offset 20)
+   (exp23          float           :offset 20)
+   (fog-0          float           :offset 24)
+   (fog-1          float           :offset 28)
+   (fog-min        float           :offset 32)
+   (fog-max        float           :offset 36)
    )
   :method-count-assert 9
   :size-assert         #x30
   :flag-assert         #x900000030
-  )|#
+  )
   
 
 
@@ -32234,16 +32255,16 @@
 
 
   
-#|(deftype tfrag-dists (structure)
+(deftype tfrag-dists (structure)
   ((data   uint32 16 :offset-assert 0) ;; guessed by decompiler
-   (vector vector 4  :offset-assert 0) ;; guessed by decompiler
-   (k0s    vector 2  :offset-assert 0) ;; guessed by decompiler
-   (k1s    vector 2  :offset-assert 32) ;; guessed by decompiler
+   (vector vector 4  :offset 0) ;; guessed by decompiler
+   (k0s    vector 2  :offset 0) ;; guessed by decompiler
+   (k1s    vector 2  :offset 32) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
-  )|#
+  )
   
 
 
@@ -32819,36 +32840,6 @@
 
 
   
-#|(deftype sprite-vec-data-2d (structure)
-  ((x-y-z-sx    vector   :inline :offset-assert 0)
-   (flag-rot-sy vector   :inline :offset-assert 16)
-   (r-g-b-a     vector   :inline :offset-assert 32)
-   (x           float            :offset-assert 0)
-   (y           float            :offset-assert 4)
-   (z           float            :offset-assert 8)
-   (sx          float            :offset-assert 12)
-   (sy          float            :offset-assert 28)
-   (rot         float            :offset-assert 24)
-   (flag        int32            :offset-assert 16)
-   (matrix      int32            :offset-assert 20)
-   (warp-turns  int32            :offset-assert 16)
-   (r           float            :offset-assert 32)
-   (g           float            :offset-assert 36)
-   (b           float            :offset-assert 40)
-   (a           float            :offset-assert 44)
-   (trans       vector3s :inline :offset-assert 0)
-   (color       rgbaf    :inline :offset-assert 32)
-   (data        uint128  1       :offset-assert 0) ;; guessed by decompiler
-   (data64      uint64   6       :offset-assert 0) ;; guessed by decompiler
-   )
-  :method-count-assert 9
-  :size-assert         #x30
-  :flag-assert         #x900000030
-  )|#
-  
-
-
-
 (deftype sprite-array-2d (basic)
   ((num-sprites int32                       2 :offset-assert 4) ;; guessed by decompiler
    (num-valid   int32                       2 :offset-assert 12) ;; guessed by decompiler
@@ -33459,20 +33450,20 @@
   (float-store 7)
   )
 
-#|(deftype sparticle-birthinfo (structure)
+(deftype sparticle-birthinfo (structure)
   ((sprite       uint32   :offset-assert 0)
    (anim         int32    :offset-assert 4)
    (anim-speed   float    :offset-assert 8)
    (birth-func   basic    :offset-assert 12)
    (joint-ppoint int32    :offset-assert 16)
    (num-to-birth float    :offset-assert 20)
-   (dataf        float  1 :offset-assert 0) ;; guessed by decompiler
-   (data         uint32 1 :offset-assert 0) ;; guessed by decompiler
+   (dataf        float  1 :offset 0) ;; guessed by decompiler
+   (data         uint32 1 :offset 0) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x18
   :flag-assert         #x900000018
-  )|#
+  )
   
 
 
@@ -40223,7 +40214,7 @@
 
 
   
-#|(deftype lightning-bolt (basic)
+(deftype lightning-bolt (basic)
   ((current-points                vector-array                     :offset-assert 4) ;; guessed by decompiler
    (desired-points                vector-array                     :offset-assert 8) ;; guessed by decompiler
    (span-pts-start                vector-array                     :offset-assert 12) ;; guessed by decompiler
@@ -40267,7 +40258,7 @@
     (lightning-bolt-method-21 (_type_ int int float) none) ;; 21
     (lightning-bolt-method-22 (_type_) none) ;; 22
     )
-  )|#
+  )
   
 
 
