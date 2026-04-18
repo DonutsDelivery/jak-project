@@ -1910,39 +1910,7 @@
 
 
   
-#|(deftype task-arrow (process-drawable)
-  ((color            uint32                     :offset-assert 248)
-   (pos              vector             :inline :offset-assert 256)
-   (theta            float                      :offset-assert 272)
-   (phi              float                      :offset-assert 276)
-   (dist             float                      :offset-assert 280)
-   (smoothed-dist    float                      :offset-assert 284)
-   (max-dist         float                      :offset-assert 288)
-   (flags            task-arrow-flags           :offset-assert 292) ;; guessed by decompiler
-   (map-icon         uint16                     :offset-assert 296)
-   (minimap          connection-minimap         :offset-assert 300)
-   (base-quat        quaternion         :inline :offset-assert 304)
-   (base-scale       float                      :offset-assert 320)
-   (rod-of-god-scale float                      :offset-assert 324)
-   (moving           symbol                     :offset-assert 328) ;; guessed by decompiler
-   (death-pending?   symbol                     :offset-assert 332) ;; guessed by decompiler
-   (alpha            float                      :offset-assert 336)
-   (choir-sound      ambient-sound              :offset-assert 340) ;; guessed by decompiler
-   (rod-quad         basic                      :offset-assert 344)
-   )
-  :method-count-assert 55
-  :size-assert         #x15c
-  :flag-assert         #x3700d0015c
-  (:methods
-    (task-arrow-method-53 () none) ;; 53
-    (task-arrow-method-54 () none) ;; 54
-    )
-  (:state-methods
-    idle ;; 50
-    leave ;; 52
-    die ;; 51
-    )
-  )|#
+;; task-arrow: activated below parent process-drawable at L28289
   
 
 
@@ -28347,6 +28315,39 @@
   :flag-assert         #x3300700100
   (:methods
     (idle () _type_ :state) ;; 50
+    )
+  )
+
+;; task-arrow (process-drawable, 3 states + 2 methods, task-arrow-flags→uint32)
+(deftype task-arrow (process-drawable)
+  ((color            uint32                     :offset-assert 248)
+   (pos              vector             :inline :offset-assert 256)
+   (theta            float                      :offset-assert 272)
+   (phi              float                      :offset-assert 276)
+   (dist             float                      :offset-assert 280)
+   (smoothed-dist    float                      :offset-assert 284)
+   (max-dist         float                      :offset-assert 288)
+   (flags            uint32                     :offset-assert 292) ;; task-arrow-flags
+   (map-icon         uint16                     :offset-assert 296)
+   (minimap          connection-minimap         :offset-assert 300)
+   (base-quat        quaternion         :inline :offset-assert 304)
+   (base-scale       float                      :offset-assert 320)
+   (rod-of-god-scale float                      :offset-assert 324)
+   (moving           symbol                     :offset-assert 328)
+   (death-pending?   symbol                     :offset-assert 332)
+   (alpha            float                      :offset-assert 336)
+   (choir-sound      ambient-sound              :offset-assert 340)
+   (rod-quad         basic                      :offset-assert 344)
+   )
+  :method-count-assert 55
+  :size-assert         #x15c
+  :flag-assert         #x3700d0015c
+  (:methods
+    (idle () _type_ :state) ;; 50
+    (die () _type_ :state) ;; 51
+    (leave () _type_ :state) ;; 52
+    (task-arrow-method-53 () none) ;; 53
+    (task-arrow-method-54 () none) ;; 54
     )
   )
 
