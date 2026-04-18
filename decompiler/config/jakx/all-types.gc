@@ -46960,18 +46960,18 @@
 
 
   
-#|(deftype jakx-logo-menu (base-menu)
+(deftype jakx-logo-menu (base-menu)
   ()
   :method-count-assert 65
   :size-assert         #x218
   :flag-assert         #x4101900218
-  )|#
+  )
   
 
 
 
   
-#|(deftype map-menu (base-menu)
+(deftype map-menu (base-menu)
   ()
   :method-count-assert 66
   :size-assert         #x218
@@ -46979,13 +46979,13 @@
   (:methods
     (map-menu-method-65 () none) ;; 65
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype selection-menu-manager (base-menu)
+(deftype selection-menu-manager (base-menu)
   ((selection-index      int32  :offset-assert 536)
    (prev-selection-index int32  :offset-assert 540)
    (enabled              basic  :offset-assert 544)
@@ -46997,7 +46997,7 @@
     (selection-menu-manager-method-65 () none) ;; 65
     (selection-menu-manager-method-66 () none) ;; 66
     )
-  )|#
+  )
   
 
 
