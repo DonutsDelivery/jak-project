@@ -6306,26 +6306,7 @@
 
 
   
-#|(deftype lightning-sphere (process-drawable)
-  ((last-touched-by uint64         :offset-assert 248)
-   (start-time      int32          :offset-assert 256)
-   (damage          float          :offset-assert 260)
-   (l-control       basic          :offset-assert 264)
-   (lightning-time  int32          :offset-assert 268)
-   (start           vector :inline :offset-assert 272)
-   (end             vector :inline :offset-assert 288)
-   (zap-target      uint64         :offset-assert 304)
-   (lightning-on    basic          :offset-assert 312)
-   (sound-id        uint32         :offset-assert 316)
-   (owner-handle    uint64         :offset-assert 320)
-   )
-  :method-count-assert 51
-  :size-assert         #x148
-  :flag-assert         #x3300c00148
-  (:state-methods
-    idle ;; 50
-    )
-  )|#
+;; lightning-sphere: activated below parent process-drawable at L28289
   
 
 
@@ -28356,9 +28337,31 @@
     )
   )
 
+;; lightning-sphere (process-drawable with 11 fields + idle state)
+(deftype lightning-sphere (process-drawable)
+  ((last-touched-by uint64         :offset-assert 248)
+   (start-time      int32          :offset-assert 256)
+   (damage          float          :offset-assert 260)
+   (l-control       basic          :offset-assert 264)
+   (lightning-time  int32          :offset-assert 268)
+   (start           vector :inline :offset-assert 272)
+   (end             vector :inline :offset-assert 288)
+   (zap-target      uint64         :offset-assert 304)
+   (lightning-on    basic          :offset-assert 312)
+   (sound-id        uint32         :offset-assert 316)
+   (owner-handle    uint64         :offset-assert 320)
+   )
+  :method-count-assert 51
+  :size-assert         #x148
+  :flag-assert         #x3300c00148
+  (:methods
+    (idle () _type_ :state) ;; 50
+    )
+  )
 
 
-  
+
+
 (deftype process-drawable-reserved (process-drawable)
   "A process drawable with a lot of unused method slots.
    GOAL cannot increase the number of methods at runtime, so, for interactive development, it is useful
@@ -52064,8 +52067,9 @@
 
 
   
-#|(deftype mysql-nav-node (structure)
-  ((mysql-save-flag  mysql-save-flag                       :offset-assert 0) ;; guessed by decompiler
+(declare-type mysql-nav-edge structure)
+(deftype mysql-nav-node (structure)
+  ((mysql-save-flag  uint32                                :offset-assert 0) ;; mysql-save-flag
    (runtime-id       uint32                                :offset-assert 4)
    (temp-edge-list   (inline-array mysql-nav-edge)         :offset-assert 8) ;; guessed by decompiler
    (level-node-index int32                                 :offset-assert 12)
@@ -52077,7 +52081,7 @@
    (level_name       symbol                                :offset-assert 48) ;; guessed by decompiler
    (angle            float                                 :offset-assert 52)
    (radius           float                                 :offset-assert 56)
-   (nav_node_flag    nav-node-flag                         :offset-assert 60) ;; guessed by decompiler
+   (nav_node_flag    uint32                                :offset-assert 60) ;; nav-node-flag
    (nav_mesh_id      uint32                                :offset-assert 64)
    (data_int_0       uint32                                :offset-assert 68)
    (data_int_1       uint32                                :offset-assert 72)
@@ -52089,7 +52093,7 @@
     (mysql-nav-node-method-9 (_type_) symbol) ;; 9
     (mysql-nav-node-method-10 (_type_) int) ;; 10
     )
-  )|#
+  )
   
 
 
@@ -52106,8 +52110,8 @@
 
 
   
-#|(deftype mysql-nav-edge (structure)
-  ((mysql-save-flag    mysql-save-flag     :offset-assert 0) ;; guessed by decompiler
+(deftype mysql-nav-edge (structure)
+  ((mysql-save-flag    uint32              :offset-assert 0) ;; mysql-save-flag
    (runtime-id         uint32              :offset-assert 4)
    (runtime-node-id-1  int32               :offset-assert 8)
    (runtime-node-id-2  int32               :offset-assert 12)
@@ -52116,12 +52120,12 @@
    (nav_graph_id       uint32              :offset-assert 24)
    (nav_node_id_1      uint32              :offset-assert 28)
    (nav_node_id_2      uint32              :offset-assert 32)
-   (directionality     nav-directionality  :offset-assert 36) ;; guessed by decompiler
+   (directionality     uint32              :offset-assert 36) ;; nav-directionality
    (speed_limit        float               :offset-assert 40)
    (density            float               :offset-assert 44)
    (traffic_edge_flag  int32               :offset-assert 48)
-   (nav_clock_mask     nav-clock-mask      :offset-assert 52) ;; guessed by decompiler
-   (nav_clock_type     nav-clock-type      :offset-assert 56) ;; guessed by decompiler
+   (nav_clock_mask     uint32              :offset-assert 52) ;; nav-clock-mask
+   (nav_clock_type     uint32              :offset-assert 56) ;; nav-clock-type
    (nav_territory_type uint32              :offset-assert 60)
    (exclusive_data     uint32              :offset-assert 64)
    (width              float               :offset-assert 68)
@@ -52131,9 +52135,9 @@
   :size-assert         #x4c
   :flag-assert         #xa0000004c
   (:methods
-    (mysql-nav-edge-method-9 () none) ;; 9 ;; (mysql-nav-edge-method-9 () none)
+    (mysql-nav-edge-method-9 () none) ;; 9
     )
-  )|#
+  )
   
 
 
@@ -52150,22 +52154,22 @@
 
 
   
-#|(deftype mysql-nav-visnode (structure)
-  ((mysql-save-flag mysql-save-flag  :offset-assert 0) ;; guessed by decompiler
-   (runtime-node-id int32            :offset-assert 4)
-   (runtime-edge-id int32            :offset-assert 8)
-   (nav_visnode_id  uint32           :offset-assert 12)
-   (nav_graph_id    uint32           :offset-assert 16)
-   (nav_node_id     uint32           :offset-assert 20)
-   (nav_edge_id     uint32           :offset-assert 24)
+(deftype mysql-nav-visnode (structure)
+  ((mysql-save-flag uint32  :offset-assert 0) ;; mysql-save-flag
+   (runtime-node-id int32   :offset-assert 4)
+   (runtime-edge-id int32   :offset-assert 8)
+   (nav_visnode_id  uint32  :offset-assert 12)
+   (nav_graph_id    uint32  :offset-assert 16)
+   (nav_node_id     uint32  :offset-assert 20)
+   (nav_edge_id     uint32  :offset-assert 24)
    )
   :method-count-assert 10
   :size-assert         #x1c
   :flag-assert         #xa0000001c
   (:methods
-    (mysql-nav-visnode-method-9 () none) ;; 9 ;; (mysql-nav-visnode-method-9 () none)
+    (mysql-nav-visnode-method-9 () none) ;; 9
     )
-  )|#
+  )
   
 
 
