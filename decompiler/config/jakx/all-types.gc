@@ -56667,7 +56667,7 @@
 
 
   
-#|(deftype peak-snowball (rigid-body-object)
+(deftype peak-snowball (rigid-body-object)
   ((target-position  vector :inline :offset-assert 288)
    (impact-direction vector :inline :offset-assert 304)
    (particle-matrix  matrix :inline :offset-assert 320)
@@ -56680,10 +56680,9 @@
   :size-assert         #x198
   :flag-assert         #x5a01100198
   (:state-methods
-    explode ;; 89
-    idle ;; 59
+    explode ;; 89 (idle is inherited parent state, not redeclared)
     )
-  )|#
+  )
   
 
 
