@@ -8357,6 +8357,8 @@
   (pris2 6)
   (sprite 7)
   (hud 8)
+  (sky 9)
+  (hfrag 10)
   )
 ;; ---vu1-user-h:tpage-category
 
@@ -8384,6 +8386,16 @@
 (defenum texture-enable-mask
   :type uint64
   :bitfield #t
+  (tfrag 0)
+  (all-pris 1)
+  (shrub 2)
+  (alpha 3)
+  (water 4)
+  (warp 5)
+  (sprite 6)
+  (hud 7)
+  (sky 8)
+  (hfrag 9)
   )
 ;; ---vu1-user-h:texture-enable-mask
 
@@ -34365,9 +34377,9 @@
     )
   (:state-methods
     idle ;; 15
+    idle-texture ;; 16
     )
   (:methods
-    (fmv-player-method-11 () none) ;; 16
     (fmv-player-method-12 () none) ;; 17
     (fmv-player-method-13 () none) ;; 18
     (fmv-player-method-14 () none) ;; 19
@@ -44671,8 +44683,10 @@
   :method-count-assert 98
   :size-assert         #x190
   :flag-assert         #x6201000190
+  (:state-methods
+    waiting ;; 42
+    )
   (:methods
-    (net-player-method-42 () none) ;; 42
     (net-player-method-43 () none) ;; 43
     (net-player-method-44 () none) ;; 44
     (net-player-method-45 () symbol) ;; 45
@@ -44842,8 +44856,10 @@
   :method-count-assert 87
   :size-assert         #x47a
   :flag-assert         #x5703f0047a
+  (:state-methods
+    running ;; 42
+    )
   (:methods
-    (net-world-method-42 () none) ;; 42
     (net-world-method-43 () none) ;; 43
     (net-world-method-44 () none) ;; 44
     (net-world-method-45 () symbol) ;; 45
@@ -45095,8 +45111,10 @@
   :method-count-assert 57
   :size-assert         #x108
   :flag-assert         #x3900800108
+  (:state-methods
+    idle ;; 50
+    )
   (:methods
-    (powerup-draw-method-50 () none) ;; 50
     (powerup-draw-method-51 () none) ;; 51
     (powerup-draw-method-52 () none) ;; 52
     (powerup-draw-method-53 () symbol) ;; 53
@@ -47692,15 +47710,17 @@
   :size-assert         #xa0
   :flag-assert         #x1b001000a0
   ;; field connect-handle uses ~A with a signed load.
+  (:methods
+    (aux-voice-mgr-method-14 () none) ;; 14
+    )
   (:state-methods
-    die ;; 14
     startup ;; 15
     creating ;; 16
     joining ;; 17
     active ;; 18
+    die ;; 19
     )
   (:methods
-    (aux-voice-mgr-method-19 () none) ;; 19
     (aux-voice-mgr-method-20 () none) ;; 20
     (aux-voice-mgr-method-21 () none) ;; 21
     (aux-voice-mgr-method-22 () none) ;; 22
