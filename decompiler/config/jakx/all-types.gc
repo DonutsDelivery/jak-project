@@ -56428,7 +56428,7 @@
 
 
   
-#|(deftype jungle-stone-snake-head-proxy (process-focusable)
+(deftype jungle-stone-snake-head-proxy (process-focusable)
   ((actor-group       uint32         :offset-assert 256)
    (actor-group-count int32          :offset-assert 260)
    (impact-velocity   vector :inline :offset-assert 272)
@@ -56439,33 +56439,29 @@
   :method-count-assert 65
   :size-assert         #x130
   :flag-assert         #x4100a00130
+  (:state-methods
+    idle ;; 59
+    explode ;; 60
+    )
   (:methods
     (jungle-stone-snake-head-proxy-method-61 () none) ;; 61
     (jungle-stone-snake-head-proxy-method-62 () none) ;; 62
     (jungle-stone-snake-head-proxy-method-63 () none) ;; 63
     (jungle-stone-snake-head-proxy-method-64 () none) ;; 64
     )
-  (:state-methods
-    idle ;; 59
-    explode ;; 60
-    )
-  )|#
+  )
   
 
 
 
   
-#|(deftype jungle-stone-snake-head-draw (jungle-stone-snake-head-proxy)
+(deftype jungle-stone-snake-head-draw (jungle-stone-snake-head-proxy)
   ((waterfall-part uint64  :offset-assert 304)
    )
   :method-count-assert 65
   :size-assert         #x138
   :flag-assert         #x4100b00138
-  (:state-methods
-    idle ;; 59
-    explode ;; 60
-    )
-  )|#
+  )
   
 
 
