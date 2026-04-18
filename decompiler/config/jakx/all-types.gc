@@ -55277,7 +55277,7 @@
 
 
   
-#|(deftype coli-statue-chain-straight (process-drawable)
+(deftype coli-statue-chain-straight (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -55285,13 +55285,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype coli-statue-chain-curved (process-drawable)
+(deftype coli-statue-chain-curved (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -55299,7 +55299,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
