@@ -21008,14 +21008,14 @@
 
 
   
-#|(deftype matrix-stack (structure)
+(deftype matrix-stack (structure)
   ((top  matrix    :offset-assert 0)
-   (data matrix 24 :offset-assert 16) ;; guessed by decompiler
+   (data matrix 24 :inline :offset-assert 16) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x610
   :flag-assert         #x900000610
-  )|#
+  )
   
 
 
@@ -21066,31 +21066,31 @@
 
 
   
-#|(deftype bone-buffer (structure)
-  ((joint  matrix   16 :offset-assert 0) ;; guessed by decompiler
-   (bone   bone     16 :offset-assert 1024) ;; guessed by decompiler
-   (output pris-mtx 16 :offset-assert 2304) ;; guessed by decompiler
+(deftype bone-buffer (structure)
+  ((joint  matrix   16 :inline :offset-assert 0) ;; guessed by decompiler
+   (bone   bone     16 :inline :offset-assert 1024) ;; guessed by decompiler
+   (output pris-mtx 16 :inline :offset-assert 2304) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x1100
   :flag-assert         #x900001100
-  )|#
+  )
   
 
 
 
   
-#|(deftype bone-layout (structure)
+(deftype bone-layout (structure)
   ((data   uint16                  8 :offset-assert 0) ;; guessed by decompiler
-   (joint  (inline-array matrix)   2 :offset-assert 0) ;; guessed by decompiler
-   (bone   (inline-array bone)     2 :offset-assert 8) ;; guessed by decompiler
-   (output (inline-array pris-mtx) 2 :offset-assert 16) ;; guessed by decompiler
-   (unused uint32                  2 :offset-assert 24) ;; guessed by decompiler
+   (joint  (inline-array matrix)   2 :offset 0) ;; guessed by decompiler
+   (bone   (inline-array bone)     2 :offset 8) ;; guessed by decompiler
+   (output (inline-array pris-mtx) 2 :offset 16) ;; guessed by decompiler
+   (unused uint32                  2 :offset 24) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
-  )|#
+  )
   
 
 
@@ -21114,14 +21114,14 @@
 
 
   
-#|(deftype bone-work (structure)
+(deftype bone-work (structure)
   ((layout bone-layout :inline :offset-assert 0)
    (regs   bone-regs   :inline :offset-assert 32)
    )
   :method-count-assert 9
   :size-assert         #x44
   :flag-assert         #x900000044
-  )|#
+  )
   
 
 
@@ -21138,14 +21138,14 @@
 
 
   
-#|(deftype bone-memory (structure)
+(deftype bone-memory (structure)
   ((work   bone-work   :inline :offset-assert 0)
-   (buffer bone-buffer 2       :offset-assert 80) ;; guessed by decompiler
+   (buffer bone-buffer 2 :inline :offset-assert 80) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x2250
   :flag-assert         #x900002250
-  )|#
+  )
   
 
 
@@ -56158,12 +56158,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#|
 (deftype palm-tree (process-drawable)
   ((attack-vel        vector  :inline :offset-assert 256)
    (spring-pos        vector  :inline :offset-assert 272)
    (spring-vel        vector  :inline :offset-assert 288)
-   (jmods             UNKNOWN 5       :offset-assert 304)
+   (jmods             uint32 40       :offset-assert 304) ;; TODO: real type (5 joint-mods, 32 bytes each)
    (last-impulse-time int32           :offset-assert 464)
    )
   :method-count-assert 56
@@ -56180,7 +56179,6 @@
     vibrate ;; 51
     )
   )
-|#
 
 
 
