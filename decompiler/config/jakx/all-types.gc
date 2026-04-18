@@ -44215,20 +44215,21 @@
 
 
   
-#|(deftype race-mesh-hash-search (structure)
-  ((best-dist             float                  :offset-assert 0)
-   (debug-cells-searched  int32                  :offset-assert 4)
-   (debug-slices-searched int32                  :offset-assert 8)
-   (bounds                bounding-box4w :inline :offset-assert 16)
-   (cell-quads            vector         2       :offset-assert 48) ;; guessed by decompiler
-   (slice-quads           vector         4       :offset-assert 80) ;; guessed by decompiler
-   (cell-bits             vector16ub     2       :offset-assert 48) ;; guessed by decompiler
-   (slice-bits            vector16ub     2       :offset-assert 80) ;; guessed by decompiler
+(deftype race-mesh-hash-search (structure)
+  ((best-dist             float                          :offset-assert 0)
+   (debug-cells-searched  int32                          :offset-assert 4)
+   (debug-slices-searched int32                          :offset-assert 8)
+   (pad12                 uint32                         :offset-assert 12)
+   (bounds                bounding-box4w :inline         :offset-assert 16)
+   (cell-quads            vector         2 :inline       :offset-assert 48)
+   (slice-quads           vector         4 :inline       :offset-assert 80)
+   (cell-bits             vector16ub     2 :inline       :offset 48)
+   (slice-bits            vector16ub     2 :inline       :offset 80)
    )
   :method-count-assert 9
   :size-assert         #x90
   :flag-assert         #x900000090
-  )|#
+  )
   
 
 
