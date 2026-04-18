@@ -29854,10 +29854,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   
-#|(deftype manipy (process-drawable)
+(deftype manipy (process-drawable)
   ()
   :flag-assert #x32007000f8
-  )|#
+  )
   
 
 (deftype part-spawner (process)
