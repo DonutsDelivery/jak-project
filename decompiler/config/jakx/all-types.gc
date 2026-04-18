@@ -55771,7 +55771,7 @@
 
 
   
-#|(deftype kras-fireworks-ship-a (process-drawable)
+(deftype kras-fireworks-ship-a (process-drawable)
   ((curve     basic   :offset-assert 248)
    (location  float   :offset-assert 252)
    (fireworks uint64  :offset-assert 256)
@@ -55782,7 +55782,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
