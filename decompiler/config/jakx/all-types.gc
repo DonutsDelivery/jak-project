@@ -2157,54 +2157,15 @@
 
 
 
-#|
 (deftype eco-light (process)
-  ((name             basic                 :offset-assert 0)
-   (mask             process-mask          :offset-assert 4)
-   (clock            basic                 :offset-assert 8)
-   (view             basic                 :offset-assert 12)
-   (parent           uint32                :offset-assert 16)
-   (brother          uint32                :offset-assert 20)
-   (child            uint32                :offset-assert 24)
-   (ppointer         uint32                :offset-assert 28)
-   (self             basic                 :offset-assert 32)
-   (profile-ticks    uint32                :offset-assert 36)
-   (pool             basic                 :offset-assert 40)
-   (status           basic                 :offset-assert 44)
-   (pid              int32                 :offset-assert 48)
-   (main-thread      basic                 :offset-assert 52)
-   (top-thread       basic                 :offset-assert 56)
-   (entity           basic                 :offset-assert 60)
-   (level            basic                 :offset-assert 64)
-   (state            basic                 :offset-assert 68)
-   (prev-state       basic                 :offset-assert 72)
-   (next-state       basic                 :offset-assert 76)
-   (state-stack      basic                 :offset-assert 80)
-   (trans-hook       basic                 :offset-assert 84)
-   (post-hook        basic                 :offset-assert 88)
-   (event-hook       basic                 :offset-assert 92)
-   (allocated-length int32                 :offset-assert 96)
-   (heap-base        uint32                :offset-assert 108)
-   (heap-top         uint32                :offset-assert 112)
-   (heap-cur         uint32                :offset-assert 116)
-   (stack-frame-top  basic                 :offset-assert 120)
-   (heap             kheap        :inline  :offset-assert 108)
-   (connection-list  connectable  :inline  :offset-assert 124)
-   (stack            UNKNOWN      :dynamic :offset-assert 140)
-   )
+  ()
   :method-count-assert 15
   :size-assert         #x90
   :flag-assert         #xf00000090
   (:methods
-    (eco-light-method-9 () none) ;; 9
-    (eco-light-method-10 () none) ;; 10
-    (eco-light-method-11 () none) ;; 11
-    (eco-light-method-12 () none) ;; 12
-    (eco-light-method-13 () none) ;; 13
     (eco-light-method-14 () none) ;; 14
     )
   )
-|#
 
 
 
@@ -4293,54 +4254,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#|
 (deftype spawn-point (process)
-  ((name             basic                 :offset-assert 0)
-   (mask             process-mask          :offset-assert 4)
-   (clock            basic                 :offset-assert 8)
-   (view             basic                 :offset-assert 12)
-   (parent           uint32                :offset-assert 16)
-   (brother          uint32                :offset-assert 20)
-   (child            uint32                :offset-assert 24)
-   (ppointer         uint32                :offset-assert 28)
-   (self             basic                 :offset-assert 32)
-   (profile-ticks    uint32                :offset-assert 36)
-   (pool             basic                 :offset-assert 40)
-   (status           basic                 :offset-assert 44)
-   (pid              int32                 :offset-assert 48)
-   (main-thread      basic                 :offset-assert 52)
-   (top-thread       basic                 :offset-assert 56)
-   (entity           basic                 :offset-assert 60)
-   (level            basic                 :offset-assert 64)
-   (state            basic                 :offset-assert 68)
-   (prev-state       basic                 :offset-assert 72)
-   (next-state       basic                 :offset-assert 76)
-   (state-stack      basic                 :offset-assert 80)
-   (trans-hook       basic                 :offset-assert 84)
-   (post-hook        basic                 :offset-assert 88)
-   (event-hook       basic                 :offset-assert 92)
-   (allocated-length int32                 :offset-assert 96)
-   (heap-base        uint32                :offset-assert 108)
-   (heap-top         uint32                :offset-assert 112)
-   (heap-cur         uint32                :offset-assert 116)
-   (stack-frame-top  basic                 :offset-assert 120)
-   (heap             kheap        :inline  :offset-assert 108)
-   (connection-list  connectable  :inline  :offset-assert 124)
-   (stack            UNKNOWN      :dynamic :offset-assert 140)
-   )
+  ()
   :method-count-assert 15
   :size-assert         #x90
   :flag-assert         #xf00000090
   (:methods
-    (spawn-point-method-9 () none) ;; 9
-    (spawn-point-method-10 () none) ;; 10
-    (spawn-point-method-11 () none) ;; 11
-    (spawn-point-method-12 () none) ;; 12
-    (spawn-point-method-13 () none) ;; 13
     (spawn-point-method-14 () none) ;; 14
     )
   )
-|#
 
 
 
@@ -6268,6 +6190,27 @@
 (define-extern vehicle-antenna-spawn function)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; euler-h                        ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(deftype euler-angles (vector)
+  "Just uses the same xyzw and data array as vector.
+   The `w` stores an integer that seems to have
+   bitfields for... something? Like maybe the order?
+   Euler angles are mostly unused, and the code is a bit of disaster."
+  ()
+  :method-count-assert 9
+  :size-assert         #x10
+  :flag-assert         #x900000010
+  )
+
+(define-extern EulSafe
+  "Maybe euler angle storage orders?
+   What is this naming convention?"
+  (array int32))
+(define-extern EulNext (array int32))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; drift                          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -6283,12 +6226,10 @@
 
 
 
-#|
 (deftype drift-editor (process)
   ((angles                       euler-angles :inline :offset-assert 144)
    (counter                      int32                :offset-assert 160)
    (editor-start-time            uint32               :offset-assert 164)
-   (all-data-array               UNKNOWN      5       :offset-assert 168)
    (drive-data-array             uint32               :offset-assert 168)
    (wheel-front-left-data-array  uint32               :offset-assert 172)
    (wheel-front-right-data-array uint32               :offset-assert 176)
@@ -6301,21 +6242,17 @@
   :size-assert         #xc1
   :flag-assert         #x13004000c1
   (:methods
-    (drift-editor-method-9 () none) ;; 9
-    (drift-editor-method-10 () none) ;; 10
-    (drift-editor-method-11 () none) ;; 11
-    (drift-editor-method-12 () none) ;; 12
-    (drift-editor-method-13 () none) ;; 13
     (drift-editor-method-14 () none) ;; 14
-    (drift-editor-method-18 () none) ;; 18
     )
   (:state-methods
     init-state ;; 15
     run-state ;; 16
     write-file ;; 17
     )
+  (:methods
+    (drift-editor-method-18 () none) ;; 18
+    )
   )
-|#
 
 
 (define-extern *drift-file-stream* file-stream)
@@ -41556,28 +41493,22 @@
 
 
 
-#|
 (deftype headset (process)
   ((flags                   uint32                     :offset-assert 144)
-   (decoders                UNKNOWN            4       :offset-assert 148)
-   (client-to-decoder       UNKNOWN            16      :offset-assert 468)
+   (decoders                uint8              320     :offset-assert 148)
+   (client-to-decoder       uint8              16      :offset-assert 468)
    (encoder-io              nci-codec-io-block :inline :offset-assert 484)
    (last-speech-time        int32                      :offset-assert 508)
    (prev-operation          basic                      :offset-assert 512)
    (bytes-in-playback-queue int32                      :offset-assert 516)
    (first-send              basic                      :offset-assert 520)
    (frame-ct                int32                      :offset-assert 524)
-   (client-talking          UNKNOWN            16      :offset-assert 528)
+   (client-talking          uint8              16      :offset-assert 528)
    )
   :method-count-assert 33
   :size-assert         #x220
   :flag-assert         #x2101900220
   (:methods
-    (headset-method-9 (_type_) none) ;; 9
-    (headset-method-10 (_type_) none) ;; 10
-    (headset-method-11 (_type_) none) ;; 11
-    (headset-method-12 (_type_) none) ;; 12
-    (headset-method-13 (_type_) none) ;; 13
     (headset-method-14 (_type_) none) ;; 14
     (headset-method-15 (_type_) none) ;; 15
     (headset-method-16 (_type_) none) ;; 16
@@ -41599,7 +41530,6 @@
     (headset-method-32 (_type_) none) ;; 32
     )
   )
-|#
 
 
 (define-extern *headset-input-buffer* object)
@@ -41903,16 +41833,15 @@
 
 
 
-#|
 (deftype net-process-mgr (process)
   ((local-machine-idx                int32                :offset-assert 144)
    (session-master-idx               int32                :offset-assert 148)
-   (machines                         UNKNOWN      8       :offset-assert 152)
+   (machines                         uint8        256     :offset-assert 152)
    (last-allocated-local-id          int32                :offset-assert 408)
    (last-allocated-global-id         int32                :offset-assert 412)
    (have-send-pending-objects        basic                :offset-assert 416)
    (snap-time-of-day                 basic                :offset-assert 420)
-   (owner-lists                      UNKNOWN      10      :offset-assert 424)
+   (owner-lists                      uint8        160     :offset-assert 424)
    (active-list                      linked-list  :inline :offset-assert 584)
    (cur-proc-valid                   basic                :offset-assert 592)
    (cur-proc-id                      uint16               :offset-assert 596)
@@ -41925,11 +41854,6 @@
   :size-assert         #x264
   :flag-assert         #x3b01e00264
   (:methods
-    (net-process-mgr-method-9 () none) ;; 9
-    (net-process-mgr-method-10 () none) ;; 10
-    (net-process-mgr-method-11 () none) ;; 11
-    (net-process-mgr-method-12 () none) ;; 12
-    (net-process-mgr-method-13 () none) ;; 13
     (net-process-mgr-method-14 () none) ;; 14
     (net-process-mgr-method-15 () none) ;; 15
     (net-process-mgr-method-16 () none) ;; 16
@@ -41977,7 +41901,6 @@
     (net-process-mgr-method-58 () none) ;; 58
     )
   )
-|#
 
 
 (define-extern *net-process-mgr* object)
@@ -47254,10 +47177,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#|
 (deftype lobby-menu-manager (process)
   ((game-type                  uint32    :offset-assert 144)
-   (menu-handles               UNKNOWN 8 :offset-assert 152)
    (in-focus-index             int8      :offset-assert 216)
    (menu-handle-1              uint64    :offset-assert 152)
    (menu-handle-2              uint64    :offset-assert 160)
@@ -47279,7 +47200,7 @@
    (current-local-player       int8      :offset-assert 328)
    (spawn-another?             basic     :offset-assert 332)
    (state-time                 uint64    :offset-assert 336)
-   (has-driver?                UNKNOWN 2 :offset-assert 344)
+   (has-driver?                uint8   8 :offset-assert 344)
    (car-part-type-selected     uint8     :offset-assert 352)
    (cam-string                 basic     :offset-assert 356)
    (driver-was-taken?          basic     :offset-assert 360)
@@ -47306,11 +47227,6 @@
   :size-assert         #x1b0
   :flag-assert         #xc4012001b0
   (:methods
-    (lobby-menu-manager-method-9 () none) ;; 9
-    (lobby-menu-manager-method-10 () none) ;; 10
-    (lobby-menu-manager-method-11 () none) ;; 11
-    (lobby-menu-manager-method-12 () none) ;; 12
-    (lobby-menu-manager-method-13 () none) ;; 13
     (lobby-menu-manager-method-14 () none) ;; 14
     (lobby-menu-manager-method-15 () none) ;; 15
     (lobby-menu-manager-method-16 () none) ;; 16
@@ -47495,7 +47411,6 @@
     (lobby-menu-manager-method-195 () none) ;; 195
     )
   )
-|#
 
 
 (define-extern lobby-vehicle-flag->string function)
@@ -48549,12 +48464,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#|
 (deftype http-downloader (process)
   ((socket      int32        :offset-assert 144)
-   (buffer      UNKNOWN 1024 :offset-assert 148)
-   (hostname    UNKNOWN 128  :offset-assert 1172)
-   (url         UNKNOWN 128  :offset-assert 1300)
+   (buffer      uint8  1024  :offset-assert 148)
+   (hostname    uint8  128   :offset-assert 1172)
+   (url         uint8  128   :offset-assert 1300)
    (ip          int32        :offset-assert 1428)
    (port        int32        :offset-assert 1432)
    (http-rc     int32        :offset-assert 1436)
@@ -48565,15 +48479,7 @@
   :size-assert         #x5a8
   :flag-assert         #x17052005a8
   (:methods
-    (http-downloader-method-9 () none) ;; 9
-    (http-downloader-method-10 () none) ;; 10
-    (http-downloader-method-11 () none) ;; 11
-    (http-downloader-method-12 () none) ;; 12
-    (http-downloader-method-13 () none) ;; 13
     (http-downloader-method-14 () none) ;; 14
-    (http-downloader-method-20 () none) ;; 20
-    (http-downloader-method-21 () none) ;; 21
-    (http-downloader-method-22 () none) ;; 22
     )
   (:state-methods
     resolving ;; 15
@@ -48582,8 +48488,12 @@
     fetching-data ;; 18
     die ;; 19
     )
+  (:methods
+    (http-downloader-method-20 () none) ;; 20
+    (http-downloader-method-21 () none) ;; 21
+    (http-downloader-method-22 () none) ;; 22
+    )
   )
-|#
 
 
 (define-extern *http-downloader* object)
@@ -48845,7 +48755,6 @@
   )
 
 
-#|
 (deftype auto-save (process)
   ((card                      int32                  :offset-assert 144)
    (slot                      int32                  :offset-assert 148)
@@ -48862,37 +48771,31 @@
    (icon                      hud-sprite     :inline :offset-assert 640)
    (icon-gui-id               uint32                 :offset-assert 692)
    (message-gui-id            uint32                 :offset-assert 696)
-   (game-name                 UNKNOWN        16      :offset-assert 700)
+   (game-name                 uint8          16      :offset-assert 700)
    )
   :method-count-assert 29
   :size-assert         #x2cc
   :flag-assert         #x1d024002cc
   (:methods
-    (auto-save-method-9 () none) ;; 9
-    (auto-save-method-10 () none) ;; 10
-    (auto-save-method-11 () none) ;; 11
-    (auto-save-method-12 () none) ;; 12
-    (auto-save-method-13 () none) ;; 13
     (auto-save-method-14 () _type_ :state) ;; 14
     )
   (:state-methods
-    get-heap ;; 15, old: (get-card () _type_ :state)
-    save-ghost ;; 24
-    get-card ;; 16, old: (format-card () _type_ :state)
-    format-card ;; 17, old: (unformat-card () _type_ :state)
-    unformat-card ;; 18, old: (create-file () _type_ :state)
-    create-file ;; 19, old: (save () _type_ :state)
-    save ;; 20, old: (restore () _type_ :state)
-    save-common ;; 22, old: (done () _type_ :state)
-    save-patch ;; 26
-    restore ;; 21, old: (error (mc-status-code) _type_ :state)
+    get-heap       ;; 15
+    get-card       ;; 16
+    format-card    ;; 17
+    unformat-card  ;; 18
+    create-file    ;; 19
+    save           ;; 20
+    restore        ;; 21
+    save-common    ;; 22
     restore-common ;; 23
-    restore-ghost ;; 25
-    error ;; 27
-    done ;; 28
+    save-ghost     ;; 24
+    restore-ghost  ;; 25
+    save-patch     ;; 26
+    error          ;; 27
+    done           ;; 28
     )
   )
-|#
 
 
 
