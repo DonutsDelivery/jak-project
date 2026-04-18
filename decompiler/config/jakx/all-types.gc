@@ -14222,7 +14222,7 @@
 (deftype game-task-info (basic)
   ((name                       string           :offset-assert 4) ;; guessed by decompiler
    (task-level                 uint8            :offset-assert 8)
-   (text-name                  text-id          :offset-assert 12) ;; guessed by decompiler
+   (text-name                  uint32           :offset-assert 12) ;; text-id (enum unpopulated)
    (text-id-long               uint32           :offset-assert 16)
    (single-player              basic            :offset-assert 20)
    (kiosk-play-node            game-task-node   :offset-assert 24) ;; game-task-node
@@ -20123,7 +20123,7 @@
    (delay         uint16   :offset-assert 12)
    (pos           uint16   :offset-assert 14)
    (neg           uint16   :offset-assert 16)
-   (text-message  text-id  :offset-assert 20) ;; guessed by decompiler
+   (text-message  uint32   :offset-assert 20) ;; text-id (enum unpopulated)
    (on-close      pair     :offset-assert 24) ;; guessed by decompiler
    (camera        string   :offset-assert 28) ;; guessed by decompiler
    )
