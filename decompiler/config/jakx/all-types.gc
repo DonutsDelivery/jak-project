@@ -51277,7 +51277,7 @@
 
 
   
-#|(deftype editable-player (process-drawable)
+(deftype editable-player (process-drawable)
   ((current           editable-array           :offset-assert 248)
    (current-command   uint32                   :offset-assert 252)
    (select-command    function                 :offset-assert 256)
@@ -51309,7 +51309,7 @@
     (editable-player-method-52 () none) ;; 52
     (editable-player-method-53 () none) ;; 53
     )
-  )|#
+  )
   
 
 
