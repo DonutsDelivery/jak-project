@@ -41231,14 +41231,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   
-#|(deftype disc-error-proc (process-drawable)
+(deftype disc-error-proc (process-drawable)
   ((error basic   :offset-assert 248)
    (bmask uint32  :offset-assert 252)
    )
   :method-count-assert 50
   :size-assert         #x100
   :flag-assert         #x3200700100
-  )|#
+  )
   
 
 (define-extern set-letterbox-frames "Enable letterbox for the given amount of time." (function time-frame none))
