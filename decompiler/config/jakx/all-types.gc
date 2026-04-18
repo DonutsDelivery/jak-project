@@ -27661,7 +27661,7 @@
 
 
   
-(deftype net-lanfind-exchange-callback-in-args (structure)
+#|(deftype net-lanfind-exchange-callback-in-args (structure)
   ((connection-handle basic                    :offset-assert 0)
    (session-type      int32                    :offset-assert 4)
    (peer-desc         net-lanpeer-desc :inline :offset-assert 8)
@@ -27671,13 +27671,13 @@
   :method-count-assert 9
   :size-assert         #xb8
   :flag-assert         #x9000000b8
-  )
+  )|#
   
 
 
 
   
-(deftype net-lanfind-callback-data-args (structure)
+#|(deftype net-lanfind-callback-data-args (structure)
   ((n-num-clients     int16                    :offset-assert 0)
    (n-max-num-clients int16                    :offset-assert 2)
    (session-type      int32                    :offset-assert 4)
@@ -27688,7 +27688,7 @@
   :method-count-assert 9
   :size-assert         #xb8
   :flag-assert         #x9000000b8
-  )
+  )|#
   
 
 
