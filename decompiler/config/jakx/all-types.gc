@@ -38341,13 +38341,13 @@
 
 
   
-#|(deftype collide-probe-stack (structure)
-  ((data collide-probe-stack-elem 1024 :offset-assert 0) ;; guessed by decompiler
+(deftype collide-probe-stack (structure)
+  ((data uint128 1024 :offset-assert 0) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x4000
   :flag-assert         #x900004000
-  )|#
+  )
   
 
 
