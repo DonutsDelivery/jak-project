@@ -21725,7 +21725,7 @@
 
 
   
-(deftype net-bandwidth-info (structure)
+#|(deftype net-bandwidth-info (structure)
   ((sends      net-client-metric :inline :offset-assert 0)
    (send-bytes net-client-metric :inline :offset-assert 8)
    (recvs      net-client-metric :inline :offset-assert 16)
@@ -21734,7 +21734,7 @@
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
-  )
+  )|#
   
 
 
