@@ -29986,7 +29986,7 @@
 
 
   
-#|(deftype touch-tracker (process-drawable)
+(deftype touch-tracker (process-drawable)
   ((duration     uint64                         :offset-assert 248) ;; time-frame
    (target       uint64                         :offset-assert 256) ;; handle
    (event        symbol                         :offset-assert 264) ;; guessed by decompiler
@@ -30000,7 +30000,7 @@
   (:methods
     (touch-tracker-method-50 () none) ;; 50
     )
-  )|#
+  )
   
 
 
@@ -59746,7 +59746,7 @@
 (define-extern sprite-vec-data-3d object)
 (define-extern tfrag-data object)
 (define-extern tie-matrix object)
-(define-extern touch-tracker object)
+;; (define-extern touch-tracker object) ;; activated as deftype
 (define-extern trail-conn-search object)
 (define-extern update-engine-mix-state-work object)
 (define-extern vehicle-hud-view-1 object)
