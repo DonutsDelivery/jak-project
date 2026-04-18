@@ -50036,7 +50036,7 @@
 
 
   
-#|(deftype rigid-body-move-work (structure)
+(deftype rigid-body-move-work (structure)
   ((cquery          collide-query      :inline :offset-assert 0)
    (mat             matrix             :inline :offset-assert 544)
    (impact-info     rigid-body-impact  :inline :offset-assert 608)
@@ -50060,15 +50060,17 @@
    (penetrate-depth float                      :offset-assert 916)
    (material        uint64                     :offset-assert 920)
    (surface-type    uint8                      :offset-assert 928)
+   (pad929          uint8 3                    :offset-assert 929)
    (surface         rigid-body-surface         :offset-assert 932)
    (step-count      int8                       :offset-assert 936)
+   (pad937          uint8 3                    :offset-assert 937)
    (start-time      uint32                     :offset-assert 940)
    (end-time        uint32                     :offset-assert 944)
    )
   :method-count-assert 9
   :size-assert         #x3b4
   :flag-assert         #x9000003b4
-  )|#
+  )
   
 
 
