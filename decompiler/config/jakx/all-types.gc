@@ -40059,7 +40059,7 @@
 
 
   
-#|(deftype light-trail-tracker (process)
+(deftype light-trail-tracker (process)
   ((trail                light-trail  :offset-assert 144)
    (tracked-object       uint64       :offset-assert 152)
    (offscreen?           symbol       :offset-assert 160)
@@ -40085,13 +40085,13 @@
     (light-trail-tracker-method-20 (_type_ vector) none) ;; 20
     (light-trail-tracker-method-21 () none) ;; 21
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype weapon-trail-tracker (light-trail-tracker)
+(deftype weapon-trail-tracker (light-trail-tracker)
   ((joint0     int16   :offset-assert 188)
    (joint1     int16   :offset-assert 190)
    (state-time uint64  :offset-assert 192)
@@ -40102,35 +40102,35 @@
   (:methods
     (weapon-trail-tracker-method-22 () none) ;; 22
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype tread-trail-tracker (light-trail-tracker)
+(deftype tread-trail-tracker (light-trail-tracker)
   ()
   :method-count-assert 27
   :size-assert         #xbc
   :flag-assert         #x1b003000bc
-  )|#
+  )
   
 
 
 
   
-#|(deftype light-trail-tracker-water (light-trail-tracker)
+(deftype light-trail-tracker-water (light-trail-tracker)
   ()
   :method-count-assert 27
   :size-assert         #xbc
   :flag-assert         #x1b003000bc
-  )|#
+  )
   
 
 
 
   
-#|(deftype light-trail-tracker-projectile (light-trail-tracker)
+(deftype light-trail-tracker-projectile (light-trail-tracker)
   ((state-time uint64  :offset-assert 192)
    )
   :method-count-assert 28
@@ -40139,7 +40139,7 @@
   (:methods
     (light-trail-tracker-projectile-method-22 () none) ;; 22
     )
-  )|#
+  )
 
 
 
