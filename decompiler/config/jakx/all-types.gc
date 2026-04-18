@@ -20704,38 +20704,38 @@
 
 
   
-#|(deftype prototype-bucket-shrub (prototype-bucket)
+(deftype prototype-bucket-shrub (prototype-bucket)
   ((next        uint32     4 :offset-assert 64) ;; guessed by decompiler
    (count       uint16     4 :offset-assert 80) ;; guessed by decompiler
    (mod-count   uint16     4 :offset-assert 88) ;; guessed by decompiler
    (last        dma-packet 4 :offset-assert 96) ;; guessed by decompiler
-   (next-clear  uint128      :offset-assert 64)
-   (count-clear uint64       :offset-assert 80)
-   (last-clear  uint128      :offset-assert 96)
+   (next-clear  uint128 :offset 64)
+   (count-clear uint64 :offset 80)
+   (last-clear  uint128 :offset 96)
    )
   :method-count-assert 9
   :size-assert         #x70
   :flag-assert         #x900000070
-  )|#
+  )
   
 
 
 
   
-#|(deftype prototype-inline-array-shrub (drawable)
-  ((length int16                    :offset-assert 6)
+(deftype prototype-inline-array-shrub (drawable)
+  ((length int16 :offset 6)
    (data   prototype-bucket-shrub 1 :offset-assert 36) ;; guessed by decompiler
    )
   :method-count-assert 17
   :size-assert         #x94
   :flag-assert         #x1100000094
-  )|#
+  )
   
 
 
 
   
-#|(deftype prototype-array-shrub-info (basic)
+(deftype prototype-array-shrub-info (basic)
   ((prototype-inline-array-shrub prototype-inline-array-shrub  :offset-assert 4) ;; guessed by decompiler
    (wind-vectors                 uint32                        :offset-assert 8)
    (wind-count                   int32                         :offset-assert 12)
@@ -20743,7 +20743,7 @@
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
-  )|#
+  )
   
 
 
@@ -59371,13 +59371,14 @@
   :flag-assert         #x900000004
   )
 
-;; int16-array stub
+#| int16-array stub — real deftype now active in nav-mesh-editor-h section
 (deftype int16-array (inline-array-class)
   ()
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
   )
+|#
 
 ;; krasmale stub
 (deftype krasmale (process-drawable)
