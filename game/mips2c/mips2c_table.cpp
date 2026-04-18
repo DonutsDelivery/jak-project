@@ -491,6 +491,11 @@ namespace foreground_check_longest_edge_asm { extern void link(); }
 namespace foreground_merc { extern void link(); }
 namespace foreground_generic_merc { extern void link(); }
 namespace foreground_draw_hud { extern void link(); }
+// collide_hash.cpp port (see game/mips2c/jakx_functions/collide_hash.cpp)
+namespace method_11_collide_hash { extern void link(); }
+namespace method_12_collide_hash { extern void link(); }
+namespace fill_bg_using_box_new { extern void link(); }
+namespace fill_bg_using_line_sphere_new { extern void link(); }
 }
 // clang-format on
 
@@ -797,9 +802,11 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      // but in jakx namespace so future divergence is localized.
      // See game/mips2c/jakx_functions/particle_curves.cpp.
      {"particle-curves", {jakx::live_func_curve::link, jakx::birth_func_curve::link}},
+     // collide-hash: jakx-native ports — structurally identical to jak3;
+     // jakx namespace only. See game/mips2c/jakx_functions/collide_hash.cpp.
      {"collide-hash",
-      {jak3::method_11_collide_hash::link, jak3::method_12_collide_hash::link,
-       jak3::fill_bg_using_box_new::link, jak3::fill_bg_using_line_sphere_new::link}},
+      {jakx::method_11_collide_hash::link, jakx::method_12_collide_hash::link,
+       jakx::fill_bg_using_box_new::link, jakx::fill_bg_using_line_sphere_new::link}},
      {"collide-mesh",
       {jak3::method_12_collide_mesh::link, jak3::method_14_collide_mesh::link,
        jak3::method_15_collide_mesh::link, jak3::method_10_collide_shape_prim_mesh::link}},
