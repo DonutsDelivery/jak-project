@@ -5447,6 +5447,7 @@
 
 
   
+#|
 (deftype mine-a (process-focusable)
   ((shooter           uint64             :offset-assert 256)
    (destination-point vector     :inline :offset-assert 272)
@@ -5469,11 +5470,13 @@
     (mine-a-method-63 () none) ;; 63
     )
   )
+|#
   
 
 
 
   
+#|
 (deftype mine-b (process-focusable)
   ((shooter           uint64             :offset-assert 256)
    (glued-to          uint64             :offset-assert 264)
@@ -5504,6 +5507,7 @@
     (mine-b-method-66 () none) ;; 66
     )
   )
+|#
   
 
 
@@ -5665,13 +5669,12 @@
 
 
 
-#|
 (deftype oil-trail (prim-client)
   ((tex-id                   uint32          :offset-assert 4)
    (segment-count            int32           :offset-assert 8)
    (last-segment-last-point  vector  :inline :offset-assert 16)
    (last-segment-first-point vector  :inline :offset-assert 32)
-   (segments                 UNKNOWN 50      :offset-assert 48)
+   (segments                 uint8   3200    :offset-assert 48)
    (strip                    basic           :offset-assert 3248)
    )
   :method-count-assert 17
@@ -5687,7 +5690,6 @@
     (oil-trail-method-16 () none) ;; 16
     )
   )
-|#
 
 
 
@@ -5915,6 +5917,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+#|
 (deftype red-sentry-bot (process-focusable)
   ((destination-point       vector     :inline :offset-assert 256)
    (destination-rot         quaternion :inline :offset-assert 272)
@@ -5952,6 +5955,7 @@
     (red-sentry-bot-method-66 () none) ;; 66
     )
   )
+|#
 
 
 (define-extern red-sentry-bot-init-remote function)
@@ -38965,22 +38969,22 @@
 
 
   
-#|(deftype simple-prim-particle-binding (simple-prim)
-  ((color      rgba    :offset-assert 252) ;; guessed by decompiler
-   (lifetime   uint64  :offset-assert 256) ;; time-frame
-   (state-time uint64  :offset-assert 240) ;; time-frame
+(deftype simple-prim-particle-binding (simple-prim)
+  ((color      rgba    :offset-assert 252)
+   (lifetime   uint64  :offset-assert 256)
+   (state-time uint64  :offset-assert 240)
    )
   :method-count-assert 58
   :size-assert         #x110
   :flag-assert         #x3a00800110
+  (:state-methods
+    active ;; 50 (override)
+    die    ;; 56
+    )
   (:methods
     (simple-prim-particle-binding-method-57 () none) ;; 57
     )
-  (:state-methods
-    die ;; 56
-    active ;; 50
-    )
-  )|#
+  )
   
 
 
@@ -45473,17 +45477,15 @@
 
 
 
-#|
 (deftype net-game-mgr-football (net-game-mgr-race)
-  ((borrow-level      basic     :offset-assert 364)
-   (intro-hud-manager UNKNOWN 2 :offset-assert 368)
-   (intro-sfx         UNKNOWN 2 :offset-assert 384)
+  ((borrow-level      basic    :offset-assert 364)
+   (intro-hud-manager uint8 16 :offset-assert 368)
+   (intro-sfx         uint8 8  :offset-assert 384)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x188
-  :flag-assert         #x5801000188
+  :flag-assert         #x5700f00188
   )
-|#
 
 
 
