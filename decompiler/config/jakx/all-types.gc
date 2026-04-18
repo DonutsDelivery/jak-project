@@ -54925,10 +54925,10 @@
 
   
 (deftype coli-statue (process-drawable)
-  ((actor-group       uint32  :offset-assert 244)
-   (actor-group-count int32   :offset-assert 248)
-   (destruction-time  int32   :offset-assert 252)
-   (check-time        int32   :offset-assert 256)
+  ((actor-group       uint32  :offset-assert 248)
+   (actor-group-count int32   :offset-assert 252)
+   (destruction-time  int32   :offset-assert 256)
+   (check-time        int32   :offset-assert 260)
    )
   :method-count-assert 55
   :size-assert         #x108
