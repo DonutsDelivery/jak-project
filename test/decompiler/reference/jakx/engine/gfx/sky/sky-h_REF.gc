@@ -256,9 +256,23 @@
   this
   )
 
-;; type haze-vert-array is defined here, but it is unknown to the decompiler
+;; definition of type haze-vert-array
+(deftype haze-vert-array (structure)
+  ((data  haze-vertex  36 :inline)
+   )
+  )
 
-(method-set! (the-as type haze-vert-array) 3 L10)
+;; definition for method 3 of type haze-vert-array
+(defmethod inspect ((this haze-vert-array))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'haze-vert-array)
+  (format #t "~1Tdata[36] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type cloud-lights
 (deftype cloud-lights (structure)
