@@ -16,9 +16,7 @@
   (warp 5)
   (pris2 6)
   (sprite 7)
-  (hud 8) ;; or map?
-  (sky 9)
-  (hfrag 10)
+  (hud 8)
   )
 ;; ---tpage-category
 
@@ -693,7 +691,7 @@
   )
 
 ;; +++vu1-renderer-mask
-;; TODO stolen from Jak 2 (and it was all wrong...)
+;; TODO stolen from Jak 2 (and it was all wrong...) (and now stolen from Jak 3, fun!)
 (defenum vu1-renderer-mask
   :type uint64
   :bitfield #t
@@ -733,7 +731,7 @@
   (rn33)
   (rn34)
   (rn35)
-  (depth-cue)
+  (rn36)
   (rn37)
   )
 ;; ---vu1-renderer-mask
@@ -750,16 +748,6 @@
 (defenum texture-enable-mask
   :type uint64
   :bitfield #t
-  (tfrag 0)
-  (all-pris 1)
-  (shrub 2)
-  (alpha 3)
-  (water 4)
-  (warp 5)
-  (sprite 6)
-  (hud 7)
-  (sky 8)
-  (hfrag 9)
   )
 ;; ---texture-enable-mask
 
