@@ -464,6 +464,16 @@ namespace ripple_execute_init { extern void link(); }
 namespace init_ocean_far_regs { extern void link(); }
 namespace draw_large_polygon_ocean { extern void link(); }
 namespace render_ocean_quad { extern void link(); }
+// generic_effect.cpp port (see game/mips2c/jakx_functions/generic_effect.cpp)
+namespace generic_light_proc { extern void link(); }
+namespace generic_envmap_proc { extern void link(); }
+namespace generic_prepare_dma_double { extern void link(); }
+namespace generic_prepare_dma_single { extern void link(); }
+namespace generic_warp_source_proc { extern void link(); }
+namespace generic_warp_dest_proc { extern void link(); }
+namespace generic_warp_dest { extern void link(); }
+namespace generic_warp_envmap_dest { extern void link(); }
+namespace generic_no_light_proc { extern void link(); }
 }
 // clang-format on
 
@@ -738,12 +748,14 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
       {jakx::debug_line_clip::link, jakx::init_boundary_regs::link,
        jakx::draw_boundary_polygon::link, jakx::render_boundary_quad::link,
        jakx::render_boundary_tri::link, jak3::set_sky_vf27::link}},
+     // generic-effect: jakx-native ports — structurally identical to jak3;
+     // jakx namespace only. See game/mips2c/jakx_functions/generic_effect.cpp.
      {"generic-effect",
-      {jak3::generic_light_proc::link, jak3::generic_envmap_proc::link,
-       jak3::generic_prepare_dma_double::link, jak3::generic_prepare_dma_single::link,
-       jak3::generic_warp_source_proc::link, jak3::generic_warp_dest_proc::link,
-       jak3::generic_warp_dest::link, jak3::generic_warp_envmap_dest::link,
-       jak3::generic_no_light_proc::link}},
+      {jakx::generic_light_proc::link, jakx::generic_envmap_proc::link,
+       jakx::generic_prepare_dma_double::link, jakx::generic_prepare_dma_single::link,
+       jakx::generic_warp_source_proc::link, jakx::generic_warp_dest_proc::link,
+       jakx::generic_warp_dest::link, jakx::generic_warp_envmap_dest::link,
+       jakx::generic_no_light_proc::link}},
      {"font",
       {jak3::method_9_font_work::link, jak3::draw_string_asm::link,
        // JakX-native: font-context flags at offset 12 (jak3: 64), font-work
