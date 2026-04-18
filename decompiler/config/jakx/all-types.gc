@@ -55951,7 +55951,7 @@
 
 
   
-#|(deftype drome-tunnel-drum (process-drawable)
+(deftype drome-tunnel-drum (process-drawable)
   ((sound-id uint32  :offset-assert 248)
    )
   :method-count-assert 51
@@ -55960,7 +55960,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
