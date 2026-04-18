@@ -46352,6 +46352,7 @@
 
 
 
+(define-extern timetrial-recording object)
 (define-extern *ghosts-enabled* object)
 (define-extern *ghost-rec* object)
 (define-extern *ghost-upload-proc* object)
@@ -59279,7 +59280,7 @@
 ;; (define-extern this-way object) ;; clobbers active deftype
 ;; (define-extern tie-consts object) ;; clobbers active deftype
 ;; (define-extern timer-hold-bank object) ;; clobbers active deftype
-(define-extern timetrial-recording type) ;; was: object (clobbered); now: type (correct for deftype)
+;; (define-extern timetrial-recording type) ;; removed: defined at ~46355 before deftype block
 ;; (define-extern trail-blocker object) ;; clobbers active deftype
 (define-extern update-engine-loop-state-work object)
 ;; (define-extern v-bear object) ;; clobbers active deftype
@@ -59431,8 +59432,10 @@
 (define-extern knet-get-static-patches (function none))
 (define-extern knet-udp-socket-open (function none))
 (define-extern knet-udp-socket-sendto (function none))
+(define-extern knet-udp-socket-close (function none))
 (define-extern knet-dclose (function none))
 (define-extern knet-crc (function none))
+(define-extern knet-file-erase (function none))
 (define-extern knet-eenet-poll-is-shutdown (function none))
 (define-extern knet-lg-got-headset (function none))
 (define-extern knet-lg-set-playback (function none))
