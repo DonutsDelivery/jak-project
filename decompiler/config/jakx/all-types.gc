@@ -4823,7 +4823,7 @@
 
 
   
-#|(deftype sabotage-sequence (process)
+(deftype sabotage-sequence (process)
   ((net-player    uint64  :offset-assert 144)
    (vehicle       uint64  :offset-assert 152)
    (fire-tracker  uint64  :offset-assert 160)
@@ -4848,7 +4848,7 @@
   (:state-methods
     idle ;; 15
     )
-  )|#
+  )
   
 
 
@@ -59666,7 +59666,6 @@
 (define-extern ragdoll-test object)
 (define-extern rb-debug-state-record object)
 (define-extern ripple-globals object)
-(define-extern sabotage-sequence object)
 (define-extern sce-dirent object)
 (define-extern search-info object)
 (define-extern shrub-view-data object)
