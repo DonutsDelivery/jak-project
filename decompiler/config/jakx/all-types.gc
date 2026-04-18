@@ -1847,15 +1847,15 @@
 
 
   
-#|(deftype this-way (process-drawable)
+(deftype this-way (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
   :flag-assert         #x33007000f8
-  (:state-methods
-    idle ;; 50
+  (:methods
+    (idle () _type_ :state) ;; 50
     )
-  )|#
+  )
   
 
 
@@ -6530,7 +6530,7 @@
 
 
   
-#|(deftype slip-object (process-drawable)
+(deftype slip-object (process-drawable)
   ((start-time   int32   :offset-assert 248)
    (damage       float   :offset-assert 252)
    (fire-sound   basic   :offset-assert 256)
@@ -6539,25 +6539,25 @@
   :method-count-assert 51
   :size-assert         #x110
   :flag-assert         #x3300800110
-  (:state-methods
-    idle ;; 50
+  (:methods
+    (idle () _type_ :state) ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype oil-slick (process-drawable)
+(deftype oil-slick (process-drawable)
   ((vehicle uint64  :offset-assert 248)
    )
   :method-count-assert 51
   :size-assert         #x100
   :flag-assert         #x3300700100
-  (:state-methods
-    idle ;; 50
+  (:methods
+    (idle () _type_ :state) ;; 50
     )
-  )|#
+  )
   
 
 
@@ -32452,16 +32452,16 @@
 
 
   
-#|(deftype subdivide-dists (structure)
-  ((data   uint32  32 :offset-assert 0) ;; guessed by decompiler
-   (vector vector  8  :offset-assert 0) ;; guessed by decompiler
-   (k0s    uint128 4  :offset-assert 0) ;; guessed by decompiler
-   (k1s    uint128 4  :offset-assert 64) ;; guessed by decompiler
+(deftype subdivide-dists (structure)
+  ((data   uint32  32 :offset 0) ;; guessed by decompiler
+   (vector vector  8  :offset 0) ;; guessed by decompiler
+   (k0s    uint128 4  :offset 0) ;; guessed by decompiler
+   (k1s    uint128 4  :offset 64) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x80
   :flag-assert         #x900000080
-  )|#
+  )
   
 
 
