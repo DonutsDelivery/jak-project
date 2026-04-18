@@ -20676,29 +20676,29 @@
 
 
   
-#|(deftype prototype-bucket (basic)
+(deftype prototype-bucket (basic)
   ((name                string           :offset-assert 4) ;; guessed by decompiler
    (flags               uint16           :offset-assert 8) ;; prototype-flags
    (texture-masks-index uint16           :offset-assert 10)
    (in-level            uint16           :offset-assert 12)
    (utextures           uint16           :offset-assert 14)
-   (wide-level-index    uint16           :offset-assert 14)
+   (wide-level-index    uint16 :offset 14)
    (geometry            drawable 4       :offset-assert 16) ;; guessed by decompiler
    (dists               vector   :inline :offset-assert 32)
    (rdists              vector   :inline :offset-assert 48)
-   (near-plane          meters           :offset-assert 32)
-   (near-stiff          meters           :offset-assert 36)
-   (mid-plane           meters           :offset-assert 40)
-   (far-plane           meters           :offset-assert 44)
-   (rlength-near        float            :offset-assert 48)
-   (rlength-stiff       float            :offset-assert 52)
-   (rlength-mid         float            :offset-assert 56)
-   (stiffness           float            :offset-assert 60)
+   (near-plane          meters :offset 32)
+   (near-stiff          meters :offset 36)
+   (mid-plane           meters :offset 40)
+   (far-plane           meters :offset 44)
+   (rlength-near        float :offset 48)
+   (rlength-stiff       float :offset 52)
+   (rlength-mid         float :offset 56)
+   (stiffness           float :offset 60)
    )
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
-  )|#
+  )
   
 
 
@@ -52426,13 +52426,13 @@
 
 
   
-#|(deftype int16-array (inline-array-class)
+(deftype int16-array (inline-array-class)
   ((data int16 :dynamic :offset 16)
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -59628,7 +59628,7 @@
 (define-extern part-tracker-subsampler object)
 (define-extern perf-stat-array object)
 (define-extern power-slide-hud-single object)
-(define-extern prototype-bucket object)
+;; prototype-bucket activated above at L20679
 (define-extern race-mesh-hash-search object)
 (define-extern ragdoll-edit-info object)
 (define-extern ragdoll-test object)
