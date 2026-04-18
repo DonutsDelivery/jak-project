@@ -41900,7 +41900,7 @@
 
 
   
-#|(deftype hud-sprite-work (structure)
+(deftype hud-sprite-work (structure)
   ((adgif-tmpl         dma-gif-packet :inline :offset-assert 0)
    (draw-tmpl          dma-gif-packet :inline :offset-assert 32)
    (draw-no-tex-tmpl   dma-gif-packet :inline :offset-assert 64)
@@ -41912,13 +41912,14 @@
    (line-tmpl          dma-gif-packet :inline :offset-assert 256)
    (scan-tmpl          dma-gif-packet :inline :offset-assert 288)
    (line-color         uint64                 :offset-assert 320) ;; gs-rgbaq
-   (scan-colors        vector4w       32      :offset-assert 336) ;; guessed by decompiler
+   (pad328             uint64                 :offset-assert 328)
+   (scan-colors        vector4w       32 :inline :offset-assert 336) ;; guessed by decompiler
    (scanline           uint32                 :offset-assert 848)
    )
   :method-count-assert 9
   :size-assert         #x354
   :flag-assert         #x900000354
-  )|#
+  )
   
 
 
