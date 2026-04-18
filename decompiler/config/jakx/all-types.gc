@@ -12075,7 +12075,7 @@
 (deftype trail-blocker (structure)
   ((plane          plane  :inline :offset-assert 0)
    (center         vector :inline :offset-assert 16)
-   (radius-squared float          :offset-assert 28)
+   (radius-squared float          :offset-assert 28 :overlay-at (-> center w))
    )
   :method-count-assert 9
   :size-assert         #x20
@@ -20578,7 +20578,7 @@
 (deftype wind-vector (structure)
   ((wind-pos  vector4w :inline :offset-assert 0)
    (wind-vel  vector4w :inline :offset-assert 16)
-   (stiffness float            :offset-assert 28)
+   (stiffness float            :offset 28) ;; aliases wind-vel.w
    )
   :method-count-assert 9
   :size-assert         #x20
