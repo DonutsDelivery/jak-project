@@ -55598,9 +55598,9 @@
   
 (deftype train-car (train-object)
   ()
-  :method-count-assert 89
+  :method-count-assert 90
   :size-assert         #x130
-  :flag-assert         #x5900a00130
+  :flag-assert         #x5a00a00130
   (:state-methods
     idle ;; 59
     )
