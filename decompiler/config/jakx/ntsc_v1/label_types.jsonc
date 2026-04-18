@@ -1,24 +1,100 @@
 {
   "ocean-trans-tables": [
-    ["L1", "(inline-array vector)", 4],
-    ["L2", "(pointer float)", 160],
-    ["L3", "(pointer float)", 100],
-    ["L4", "(pointer float)", 72],
-    ["L5", "(pointer float)", 72],
-    ["L6", "(pointer float)", 72],
-    ["L7", "(pointer float)", 72],
-    ["L8", "(pointer float)", 44],
-    ["L9", "(pointer float)", 44],
-    ["L10", "(pointer float)", 44],
-    ["L11", "(pointer float)", 44],
-    ["L12", "(pointer float)", 40],
-    ["L13", "(pointer float)", 40],
-    ["L14", "(pointer float)", 40],
-    ["L15", "(pointer float)", 40],
-    ["L16", "(pointer float)", 28],
-    ["L17", "(pointer float)", 28],
-    ["L18", "(pointer float)", 28],
-    ["L19", "(pointer float)", 28]
+    [
+      "L1",
+      "(inline-array vector)",
+      4
+    ],
+    [
+      "L2",
+      "(pointer float)",
+      160
+    ],
+    [
+      "L3",
+      "(pointer float)",
+      100
+    ],
+    [
+      "L4",
+      "(pointer float)",
+      72
+    ],
+    [
+      "L5",
+      "(pointer float)",
+      72
+    ],
+    [
+      "L6",
+      "(pointer float)",
+      72
+    ],
+    [
+      "L7",
+      "(pointer float)",
+      72
+    ],
+    [
+      "L8",
+      "(pointer float)",
+      44
+    ],
+    [
+      "L9",
+      "(pointer float)",
+      44
+    ],
+    [
+      "L10",
+      "(pointer float)",
+      44
+    ],
+    [
+      "L11",
+      "(pointer float)",
+      44
+    ],
+    [
+      "L12",
+      "(pointer float)",
+      40
+    ],
+    [
+      "L13",
+      "(pointer float)",
+      40
+    ],
+    [
+      "L14",
+      "(pointer float)",
+      40
+    ],
+    [
+      "L15",
+      "(pointer float)",
+      40
+    ],
+    [
+      "L16",
+      "(pointer float)",
+      28
+    ],
+    [
+      "L17",
+      "(pointer float)",
+      28
+    ],
+    [
+      "L18",
+      "(pointer float)",
+      28
+    ],
+    [
+      "L19",
+      "(pointer float)",
+      28
+    ]
   ],
   "car-tables": [
     [
@@ -99,6 +175,11 @@
     [
       "L475",
       "nav-callback-info"
+    ],
+    [
+      "L527",
+      "uint64",
+      true
     ]
   ],
   "anim-tester": [
@@ -110,6 +191,11 @@
     [
       "L656",
       "DISP_LIST-bank",
+      true
+    ],
+    [
+      "L703",
+      "uint64",
       true
     ]
   ],
@@ -175,6 +261,79 @@
       "L881",
       "cam-layout-bank",
       true
+    ],
+    [
+      "L785",
+      "vector"
+    ],
+    [
+      "L792",
+      "vector4w"
+    ],
+    [
+      "L794",
+      "vector4w"
+    ],
+    [
+      "L796",
+      "vector4w"
+    ],
+    [
+      "L798",
+      "vector4w"
+    ],
+    [
+      "L800",
+      "vector4w"
+    ],
+    [
+      "L802",
+      "vector4w"
+    ],
+    [
+      "L889",
+      "uint64",
+      true
+    ],
+    [
+      "L892",
+      "uint64",
+      true
+    ],
+    [
+      "L893",
+      "uint64",
+      true
+    ],
+    [
+      "L894",
+      "uint64",
+      true
+    ],
+    [
+      "L895",
+      "uint64",
+      true
+    ],
+    [
+      "L896",
+      "uint64",
+      true
+    ],
+    [
+      "L897",
+      "uint64",
+      true
+    ],
+    [
+      "L898",
+      "uint64",
+      true
+    ],
+    [
+      "L899",
+      "uint64",
+      true
     ]
   ],
   "cam-states": [
@@ -192,12 +351,22 @@
       "L567",
       "state",
       true
+    ],
+    [
+      "L689",
+      "uint64",
+      true
     ]
   ],
   "drift": [
     [
       "L63",
       "file-stream",
+      true
+    ],
+    [
+      "L72",
+      "uint64",
       true
     ]
   ],
@@ -211,25 +380,78 @@
       "L834",
       "hud-manager-death-indicator",
       true
+    ],
+    [
+      "L915",
+      "uint64",
+      true
     ]
   ],
   "hud-widgets-3": [
-    ["L548", "(array hud-item)"],
-    ["L527", "(array hud-item)"],
-    ["L506", "(array hud-item)"],
-    ["L485", "(array hud-item)"],
-    ["L464", "(array hud-item)"],
-    ["L456", "(array hud-item)"],
-    ["L448", "(array hud-item)"],
-    ["L440", "(array hud-item)"],
-    ["L432", "(array hud-item)"],
-    ["L424", "(array hud-item)"],
-    ["L416", "(array hud-item)"],
-    ["L405", "(array hud-item)"],
-    ["L395", "(array hud-item)"],
-    ["L385", "(array hud-item)"],
-    ["L375", "(array hud-item)"],
-    ["L365", "(array hud-item)"]
+    [
+      "L548",
+      "(array hud-item)"
+    ],
+    [
+      "L527",
+      "(array hud-item)"
+    ],
+    [
+      "L506",
+      "(array hud-item)"
+    ],
+    [
+      "L485",
+      "(array hud-item)"
+    ],
+    [
+      "L464",
+      "(array hud-item)"
+    ],
+    [
+      "L456",
+      "(array hud-item)"
+    ],
+    [
+      "L448",
+      "(array hud-item)"
+    ],
+    [
+      "L440",
+      "(array hud-item)"
+    ],
+    [
+      "L432",
+      "(array hud-item)"
+    ],
+    [
+      "L424",
+      "(array hud-item)"
+    ],
+    [
+      "L416",
+      "(array hud-item)"
+    ],
+    [
+      "L405",
+      "(array hud-item)"
+    ],
+    [
+      "L395",
+      "(array hud-item)"
+    ],
+    [
+      "L385",
+      "(array hud-item)"
+    ],
+    [
+      "L375",
+      "(array hud-item)"
+    ],
+    [
+      "L365",
+      "(array hud-item)"
+    ]
   ],
   "lights": [
     [
@@ -239,9 +461,21 @@
     ]
   ],
   "level-info": [
-    ["L2527", "mood-range", true],
-    ["L2528", "mood-range", true],
-    ["L2529", "mood-range", true]
+    [
+      "L2527",
+      "mood-range",
+      true
+    ],
+    [
+      "L2528",
+      "mood-range",
+      true
+    ],
+    [
+      "L2529",
+      "mood-range",
+      true
+    ]
   ],
   "mood-tables": [
     [
@@ -429,6 +663,11 @@
       "L57",
       "state",
       true
+    ],
+    [
+      "L166",
+      "uint64",
+      true
     ]
   ],
   "shrubbery": [
@@ -497,10 +736,19 @@
       "L126",
       "texture-anim-array",
       true
+    ],
+    [
+      "L163",
+      "uint64",
+      true
     ]
   ],
   "game-task-h": [
-    ["L178", "object", false]
+    [
+      "L178",
+      "object",
+      false
+    ]
   ],
   "wvehicle-weapons-part": [
     [
@@ -557,6 +805,236 @@
       "L411",
       "curve-color-fast",
       true
+    ]
+  ],
+  "hud-cash": [
+    [
+      "L1056",
+      "uint64",
+      true
+    ]
+  ],
+  "hud-high-scores": [
+    [
+      "L339",
+      "uint64",
+      true
+    ]
+  ],
+  "hud-results-grand-prix": [
+    [
+      "L871",
+      "uint64",
+      true
+    ]
+  ],
+  "hud-results": [
+    [
+      "L1482",
+      "uint64",
+      true
+    ]
+  ],
+  "hud-widgets": [
+    [
+      "L455",
+      "uint64",
+      true
+    ]
+  ],
+  "in-game-menu-hud": [
+    [
+      "L388",
+      "uint64",
+      true
+    ]
+  ],
+  "intro-scenes2": [
+    [
+      "L1142",
+      "uint64",
+      true
+    ]
+  ],
+  "loader": [
+    [
+      "L1450",
+      "uint64",
+      true
+    ]
+  ],
+  "menu2-COMMON-GAME": [
+    [
+      "L972",
+      "uint64",
+      true
+    ]
+  ],
+  "mood-funcs2": [
+    [
+      "L47",
+      "uint64",
+      true
+    ]
+  ],
+  "mood-funcs": [
+    [
+      "L52",
+      "uint64",
+      true
+    ]
+  ],
+  "nav-mesh-editor": [
+    [
+      "L567",
+      "uint64",
+      true
+    ]
+  ],
+  "net-deathmatch": [
+    [
+      "L1010",
+      "uint64",
+      true
+    ]
+  ],
+  "net-deathrace": [
+    [
+      "L468",
+      "uint64",
+      true
+    ]
+  ],
+  "net-race": [
+    [
+      "L960",
+      "uint64",
+      true
+    ]
+  ],
+  "net-util": [
+    [
+      "L217",
+      "uint64",
+      true
+    ]
+  ],
+  "scert-3-h": [
+    [
+      "L1278",
+      "uint64",
+      true
+    ]
+  ],
+  "scert-4-h": [
+    [
+      "L989",
+      "uint64",
+      true
+    ]
+  ],
+  "scert-5-h": [
+    [
+      "L1786",
+      "uint64",
+      true
+    ]
+  ],
+  "scert-6-h": [
+    [
+      "L1732",
+      "uint64",
+      true
+    ]
+  ],
+  "scert-7-h": [
+    [
+      "L1906",
+      "uint64",
+      true
+    ]
+  ],
+  "scert-8-h": [
+    [
+      "L2045",
+      "uint64",
+      true
+    ]
+  ],
+  "scert-9-h": [
+    [
+      "L1527",
+      "uint64",
+      true
+    ]
+  ],
+  "scert-10-h": [
+    [
+      "L1075",
+      "uint64",
+      true
+    ]
+  ],
+  "scert-11-h": [
+    [
+      "L333",
+      "uint64",
+      true
+    ]
+  ],
+  "task-control-h": [
+    [
+      "L971",
+      "uint64",
+      true
+    ]
+  ],
+  "task-control": [
+    [
+      "L613",
+      "uint64",
+      true
+    ]
+  ],
+  "vehicle-h": [
+    [
+      "L546",
+      "uint64",
+      true
+    ]
+  ],
+  "wvehicle-hud": [
+    [
+      "L660",
+      "uint64",
+      true
+    ]
+  ],
+  "wvehicle-weapons-proj": [
+    [
+      "L770",
+      "uint64",
+      true
+    ]
+  ],
+  "wvehicle-weapons": [
+    [
+      "L920",
+      "uint64",
+      true
+    ]
+  ],
+  "nav-mesh": [
+    [
+      "L322",
+      "(inline-array vector)",
+      2
+    ]
+  ],
+  "scene-actor": [
+    [
+      "L127",
+      "cloth-params"
     ]
   ]
 }
