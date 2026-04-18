@@ -14797,13 +14797,13 @@
 
 
   
-(deftype blit-displays-work (structure)
+#|(deftype blit-displays-work (structure)
   ((pad uint8 596 :offset-assert 0)
    )
   :method-count-assert 27
   :size-assert         #x254
   :flag-assert         #x1b00000254
-  )
+  )|#
   
 
 
