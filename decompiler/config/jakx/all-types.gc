@@ -6617,14 +6617,14 @@
 
 
   
-#|(deftype oil-flame-emitter (oil-emitter)
+(deftype oil-flame-emitter (oil-emitter)
   ((last-flame-spawn-pos vector :inline :offset-assert 304)
    (flame-distance-emit  float          :offset-assert 320)
    )
-  :method-count-assert 19
+  :method-count-assert 24
   :size-assert         #x144
-  :flag-assert         #x1300c00144
-  )|#
+  :flag-assert         #x1800c00144
+  )
   
 
 
@@ -12107,17 +12107,17 @@
 
   
 (deftype trail-conn-search (structure)
-  ((best-conn-id         int32                  :offset-assert 0)
-   (best-dist            float                  :offset-assert 4)
-   (src-pos              vector                 :offset-assert 8)
-   (conn-pos             vector                 :offset-assert 12)
-   (debug-cells-searched int32                  :offset-assert 16)
-   (debug-conns-searched int32                  :offset-assert 20)
-   (bounds               bounding-box4w :inline :offset-assert 32)
-   (cell-quads           qword          2       :offset-assert 64) ;; guessed by decompiler
-   (conn-quads           qword          7       :offset-assert 96) ;; guessed by decompiler
-   (cell-bits            vector16ub     2       :offset 64) ;; guessed by decompiler
-   (conn-bits            vector16ub     2       :offset 96) ;; guessed by decompiler
+  ((best-conn-id         int32                         :offset-assert 0)
+   (best-dist            float                         :offset-assert 4)
+   (src-pos              vector                        :offset-assert 8)
+   (conn-pos             vector                        :offset-assert 12)
+   (debug-cells-searched int32                         :offset-assert 16)
+   (debug-conns-searched int32                         :offset-assert 20)
+   (bounds               bounding-box4w :inline        :offset-assert 32)
+   (cell-quads           qword          2 :inline      :offset-assert 64) ;; guessed by decompiler
+   (conn-quads           qword          7 :inline      :offset-assert 96) ;; guessed by decompiler
+   (cell-bits            vector16ub     2              :offset 64) ;; guessed by decompiler
+   (conn-bits            vector16ub     2              :offset 96) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #xd0
@@ -16329,37 +16329,37 @@
 
 
   
-#|(deftype sky-sun-data (structure)
+(deftype sky-sun-data (structure)
   ((data           uint128 4       :offset-assert 0) ;; guessed by decompiler
-   (pos            vector  :inline :offset-assert 0)
-   (r-sun          float           :offset-assert 16)
-   (r-halo         float           :offset-assert 20)
-   (r-aurora       float           :offset-assert 24)
-   (c-sun-start    rgba            :offset-assert 32) ;; guessed by decompiler
-   (c-sun-end      rgba            :offset-assert 48) ;; guessed by decompiler
-   (c-halo-start   rgba            :offset-assert 36) ;; guessed by decompiler
-   (c-halo-end     rgba            :offset-assert 52) ;; guessed by decompiler
-   (c-aurora-start rgba            :offset-assert 40) ;; guessed by decompiler
-   (c-aurora-end   rgba            :offset-assert 56) ;; guessed by decompiler
+   (pos            vector  :inline :offset 0)
+   (r-sun          float           :offset 16)
+   (r-halo         float           :offset 20)
+   (r-aurora       float           :offset 24)
+   (c-sun-start    rgba            :offset 32) ;; guessed by decompiler
+   (c-sun-end      rgba            :offset 48) ;; guessed by decompiler
+   (c-halo-start   rgba            :offset 36) ;; guessed by decompiler
+   (c-halo-end     rgba            :offset 52) ;; guessed by decompiler
+   (c-aurora-start rgba            :offset 40) ;; guessed by decompiler
+   (c-aurora-end   rgba            :offset 56) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
-  )|#
+  )
   
 
 
 
   
-#|(deftype sky-moon-data (structure)
+(deftype sky-moon-data (structure)
   ((data  uint128 2       :offset-assert 0) ;; guessed by decompiler
-   (pos   vector  :inline :offset-assert 0)
-   (scale vector  :inline :offset-assert 16)
+   (pos   vector  :inline :offset 0)
+   (scale vector  :inline :offset 16)
    )
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
-  )|#
+  )
   
 
 
@@ -16380,15 +16380,15 @@
 
 
   
-#|(deftype sky-upload-data (structure)
+(deftype sky-upload-data (structure)
   ((data uint128       12      :offset-assert 0) ;; guessed by decompiler
-   (sun  sky-sun-data  2       :offset-assert 0) ;; guessed by decompiler
-   (moon sky-moon-data :inline :offset-assert 128)
+   (sun  sky-sun-data  2 :inline :offset 0) ;; guessed by decompiler
+   (moon sky-moon-data :inline :offset 128)
    )
   :method-count-assert 9
   :size-assert         #xc0
   :flag-assert         #x9000000c0
-  )|#
+  )
   
 
 
@@ -21027,26 +21027,26 @@
 
 
   
-#|(deftype joint-work (structure)
+(deftype joint-work (structure)
   ((temp-mtx       matrix                      :inline :offset-assert 0)
    (joint-stack    matrix-stack                :inline :offset-assert 64)
    (fix-jmp-table  (function none)             16      :offset-assert 1616) ;; guessed by decompiler
    (frm-jmp-table  (function none)             16      :offset-assert 1680) ;; guessed by decompiler
    (pair-jmp-table (function none)             16      :offset-assert 1744) ;; guessed by decompiler
-   (uploads        channel-upload-info         24      :offset-assert 1808) ;; guessed by decompiler
+   (uploads        channel-upload-info         24 :inline :offset-assert 1808) ;; guessed by decompiler
    (num-uploads    int32                               :offset-assert 2384)
-   (mtx-acc        matrix                      2       :offset-assert 2400) ;; guessed by decompiler
-   (tq-acc         transformq                  100     :offset-assert 2528) ;; guessed by decompiler
+   (mtx-acc        matrix                      2 :inline :offset-assert 2400) ;; guessed by decompiler
+   (tq-acc         transformq                  100 :inline :offset-assert 2528) ;; guessed by decompiler
    (jacp-hdr       joint-anim-compressed-hdr   :inline :offset-assert 7328)
    (fixed-data     joint-anim-compressed-fixed :inline :offset-assert 7392)
-   (frame-data     joint-anim-compressed-frame 2       :offset-assert 9600) ;; guessed by decompiler
-   (flatten-array  float                       576     :offset-assert 2400) ;; guessed by decompiler
-   (flattened      vector                      24      :offset-assert 2400) ;; guessed by decompiler
+   (frame-data     joint-anim-compressed-frame 2 :inline :offset-assert 9600) ;; guessed by decompiler
+   (flatten-array  float                       576     :offset 2400) ;; guessed by decompiler
+   (flattened      vector                      24      :offset 2400) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x3640
   :flag-assert         #x900003640
-  )|#
+  )
   
 
 
@@ -30788,7 +30788,35 @@
   (rjf15 15)
   )
 
-(declare-type ragdoll-joint structure)
+(deftype ragdoll-joint (structure)
+  ((quat                quaternion         :inline :offset-assert 0)
+   (position            vector             :inline :offset-assert 16)
+   (velocity            vector             :inline :offset-assert 32)
+   (bounce              vector             :inline :offset-assert 48)
+   (old-x               vector             :inline :offset-assert 64)
+   (pre-tform           vector             :inline :offset-assert 80)
+   (geo-tform           vector             :inline :offset-assert 96)
+   (axial-slop          float                      :offset-assert 112)
+   (max-angle           float                      :offset-assert 116) ;; degrees
+   (joint-length        float                      :offset-assert 120)
+   (coll-rad            float                      :offset-assert 124)
+   (ragdoll-joint-flags ragdoll-joint-flag         :offset-assert 128) ;; guessed by decompiler
+   (joint-type          uint64                     :offset-assert 136)
+   (joint-index         int8                       :offset-assert 144)
+   (parent-joint        int8                       :offset-assert 145)
+   (parent-index        int8                       :offset-assert 146)
+   (num-children        int8                       :offset-assert 147)
+   (old-param0          basic                      :offset-assert 148)
+   (hit-sound           uint128                    :offset-assert 160) ;; sound-name
+   (ground-pat          pat-surface                :offset-assert 176) ;; guessed by decompiler
+   (user0               int32                      :offset-assert 180)
+   (original-speed      float                      :offset-assert 184)
+   )
+  :method-count-assert 9
+  :size-assert         #xbc
+  :flag-assert         #x9000000bc
+  )
+
 (deftype ragdoll-edit-info (structure)
   ((editing         symbol           :offset-assert 0) ;; guessed by decompiler
    (current-func    uint64           :offset-assert 8)
@@ -30854,43 +30882,8 @@
   )
 
 
-
-  
-(deftype ragdoll-joint (structure)
-  ((quat                quaternion         :inline :offset-assert 0)
-   (position            vector             :inline :offset-assert 16)
-   (velocity            vector             :inline :offset-assert 32)
-   (bounce              vector             :inline :offset-assert 48)
-   (old-x               vector             :inline :offset-assert 64)
-   (pre-tform           vector             :inline :offset-assert 80)
-   (geo-tform           vector             :inline :offset-assert 96)
-   (axial-slop          float                      :offset-assert 112)
-   (max-angle           float                      :offset-assert 116) ;; degrees
-   (joint-length        float                      :offset-assert 120)
-   (coll-rad            float                      :offset-assert 124)
-   (ragdoll-joint-flags ragdoll-joint-flag         :offset-assert 128) ;; guessed by decompiler
-   (joint-type          uint64                     :offset-assert 136)
-   (joint-index         int8                       :offset-assert 144)
-   (parent-joint        int8                       :offset-assert 145)
-   (parent-index        int8                       :offset-assert 146)
-   (num-children        int8                       :offset-assert 147)
-   (old-param0          basic                      :offset-assert 148)
-   (hit-sound           uint128                    :offset-assert 160) ;; sound-name
-   (ground-pat          pat-surface                :offset-assert 176) ;; guessed by decompiler
-   (user0               int32                      :offset-assert 180)
-   (original-speed      float                      :offset-assert 184)
-   )
-  :method-count-assert 9
-  :size-assert         #xbc
-  :flag-assert         #x9000000bc
-  )
-  
-
-
-
-  
-#|(deftype ragdoll (basic)
-  ((ragdoll-joints        ragdoll-joint 60      :offset-assert 16) ;; guessed by decompiler
+(deftype ragdoll (basic)
+  ((ragdoll-joints        ragdoll-joint 60 :inline :offset-assert 16) ;; guessed by decompiler
    (num-joints            uint8                 :offset-assert 11536)
    (mirror                matrix        :inline :offset-assert 11552)
    (gravity               vector        :inline :offset-assert 11616)
@@ -30910,7 +30903,7 @@
    (rotate-vel            quaternion    :inline :offset-assert 11744)
    (rotate-adj            quaternion    :inline :offset-assert 11760)
    (rotate-adj-count      int8                  :offset-assert 11776)
-   (ragdoll-flags         ragdoll-flag          :offset-assert 11780) ;; guessed by decompiler
+   (ragdoll-flags         uint32                :offset-assert 11780) ;; guessed by decompiler
    (flex-blend            float                 :offset-assert 11784)
    (stable-joints         int8                  :offset-assert 11788)
    (ragdoll-joint-remap   uint8         100     :offset-assert 11789) ;; guessed by decompiler
@@ -30940,7 +30933,7 @@
     (ragdoll-method-24 (_type_ vector int) none) ;; 24
     (ragdoll-method-25 (_type_ process-drawable) none) ;; 25
     )
-  )|#
+  )
   
 
 
@@ -32267,19 +32260,19 @@
 
   
 (deftype tfrag-data (structure)
-  ((data        uint32      56      :offset 0) ;; guessed by decompiler
+  ((fog         vector      :inline :offset-assert 0)
+   (data        uint32      56      :offset 0) ;; guessed by decompiler
    (vector      vector      14      :offset 0) ;; guessed by decompiler
-   (fog         vector      :inline :offset-assert 0)
-   (val         vector      :inline :offset-assert 16)
-   (strgif      qword       :inline :offset-assert 32) ;; gs-gif-tag :inline
-   (fangif      qword       :inline :offset-assert 48) ;; gs-gif-tag :inline
-   (adgif       qword       :inline :offset-assert 64) ;; gs-gif-tag :inline
-   (hvdf-offset vector      :inline :offset-assert 80)
-   (hmge-scale  vector      :inline :offset-assert 96)
-   (invh-scale  vector      :inline :offset-assert 112)
-   (ambient     vector      :inline :offset-assert 128)
-   (guard       vector      :inline :offset-assert 144)
-   (dists       tfrag-dists :inline :offset-assert 160)
+   (val         vector      :inline :offset 16)
+   (strgif      qword       :inline :offset 32) ;; gs-gif-tag :inline
+   (fangif      qword       :inline :offset 48) ;; gs-gif-tag :inline
+   (adgif       qword       :inline :offset 64) ;; gs-gif-tag :inline
+   (hvdf-offset vector      :inline :offset 80)
+   (hmge-scale  vector      :inline :offset 96)
+   (invh-scale  vector      :inline :offset 112)
+   (ambient     vector      :inline :offset 128)
+   (guard       vector      :inline :offset 144)
+   (dists       tfrag-dists :inline :offset 160)
    (k0s         uint128     2       :offset 160) ;; guessed by decompiler
    (k1s         uint128     2       :offset 192) ;; guessed by decompiler
    )
@@ -33554,7 +33547,7 @@
 
 
   
-#|(deftype sparticle-launch-state (structure)
+(deftype sparticle-launch-state (structure)
   ((group-item sparticle-group-item      :offset-assert 0)
    (flags      uint16                    :offset-assert 4) ;; sp-launch-state-flags
    (randomize  uint16                    :offset-assert 6)
@@ -33565,14 +33558,14 @@
    (accum      float                     :offset-assert 24)
    (spawn-time uint32                    :offset-assert 28)
    (control    sparticle-launch-control  :offset-assert 32) ;; guessed by decompiler
-   (swarm      basic                     :offset-assert 20)
-   (seed       uint32                    :offset-assert 24)
-   (time       uint32                    :offset-assert 28)
+   (swarm      basic                     :offset 20)
+   (seed       uint32                    :offset 24)
+   (time       uint32                    :offset 28)
    )
   :method-count-assert 9
   :size-assert         #x24
   :flag-assert         #x900000024
-  )|#
+  )
   
 
 
@@ -40298,10 +40291,7 @@
 
 
   
-#|(deftype lightning-new-tracker (process)
-  ;; cannot activate — regen slot names (active at 14, die at 15) don't match
-  ;; binary slot assignments (die at 14, active at 15 found by probe). Either
-  ;; order fails a defstate match. Slot 16 is also state-typed in binary.
+(deftype lightning-new-tracker (process)
   ((bolt       lightning-bolt  :offset-assert 144) ;; guessed by decompiler
    (lifetime   uint64          :offset-assert 152) ;; time-frame
    (state-time uint64          :offset-assert 160) ;; time-frame
@@ -40316,7 +40306,7 @@
   (:methods
     (lightning-new-tracker-method-16 () none) ;; 16
     )
-  )|#
+  )
   
 
 
