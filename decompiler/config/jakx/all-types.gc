@@ -55277,89 +55277,89 @@
 
 
   
-#|(deftype coli-statue-base-se (coli-object-base)
+(deftype coli-statue-base-se (coli-object-base)
   ()
-  :method-count-assert 71
+  :method-count-assert 72
   :size-assert         #x128
-  :flag-assert         #x4700a00128
-  )|#
+  :flag-assert         #x4800a00128
+  )
   
 
 
 
   
-#|(deftype coli-statue-base-c-sw (coli-object-base)
+(deftype coli-statue-base-c-sw (coli-object-base)
   ()
-  :method-count-assert 71
+  :method-count-assert 72
   :size-assert         #x128
-  :flag-assert         #x4700a00128
-  )|#
+  :flag-assert         #x4800a00128
+  )
   
 
 
 
   
-#|(deftype coli-statue-base-nw (coli-object-base)
+(deftype coli-statue-base-nw (coli-object-base)
   ()
-  :method-count-assert 71
+  :method-count-assert 72
   :size-assert         #x128
-  :flag-assert         #x4700a00128
-  )|#
+  :flag-assert         #x4800a00128
+  )
   
 
 
 
   
-#|(deftype coli-statue-base-ne (coli-object-base)
+(deftype coli-statue-base-ne (coli-object-base)
   ()
-  :method-count-assert 71
+  :method-count-assert 72
   :size-assert         #x128
-  :flag-assert         #x4700a00128
-  )|#
+  :flag-assert         #x4800a00128
+  )
   
 
 
 
   
-#|(deftype coli-statue-base-s-se (coli-object-base)
+(deftype coli-statue-base-s-se (coli-object-base)
   ()
-  :method-count-assert 71
+  :method-count-assert 72
   :size-assert         #x128
-  :flag-assert         #x4700a00128
-  )|#
+  :flag-assert         #x4800a00128
+  )
   
 
 
 
   
-#|(deftype coli-statue-base-s-sw (coli-object-base)
+(deftype coli-statue-base-s-sw (coli-object-base)
   ()
-  :method-count-assert 71
+  :method-count-assert 72
   :size-assert         #x128
-  :flag-assert         #x4700a00128
-  )|#
+  :flag-assert         #x4800a00128
+  )
   
 
 
 
   
-#|(deftype coli-statue-base-s-nw (coli-object-base)
+(deftype coli-statue-base-s-nw (coli-object-base)
   ()
-  :method-count-assert 71
+  :method-count-assert 72
   :size-assert         #x128
-  :flag-assert         #x4700a00128
-  )|#
+  :flag-assert         #x4800a00128
+  )
   
 
 
 
   
-#|(deftype coli-statue-base-s-ne (coli-object-base)
+(deftype coli-statue-base-s-ne (coli-object-base)
   ()
-  :method-count-assert 71
+  :method-count-assert 72
   :size-assert         #x128
-  :flag-assert         #x4700a00128
-  )|#
+  :flag-assert         #x4800a00128
+  )
   
 
 
