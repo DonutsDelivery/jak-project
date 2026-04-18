@@ -2609,7 +2609,8 @@
 
 
   
-#|(deftype hud-item-string (hud-item)
+(declare-type hud-string structure)
+(deftype hud-item-string (hud-item)
   ((string            hud-string  :offset-assert 40)
    (text-id           uint32      :offset-assert 44)
    (font-effect       uint8       :offset-assert 48)
@@ -2628,7 +2629,7 @@
     (hud-item-string-method-27 () none) ;; 27
     (hud-item-string-method-28 () none) ;; 28
     )
-  )|#
+  )
   
 
 
@@ -3004,12 +3005,12 @@
 
 
   
-#|(deftype hud-item-string-big (hud-item-string)
+(deftype hud-item-string-big (hud-item-string)
   ()
   :method-count-assert 29
   :size-assert         #x3c
   :flag-assert         #x1d0000003c
-  )|#
+  )
   
 
 
@@ -3026,23 +3027,23 @@
 
 
   
-#|(deftype hud-top-split-bar (in-game-hud)
+(deftype hud-top-split-bar (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-side-split-bar (in-game-hud)
+(deftype hud-side-split-bar (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
@@ -5765,7 +5766,7 @@
 
 
   
-#|(deftype vehicle-reticle-base (process)
+(deftype vehicle-reticle-base (process)
   ((owner      uint64  :offset-assert 144)
    (state-time uint64  :offset-assert 152)
    )
@@ -5780,7 +5781,7 @@
     (vehicle-reticle-base-method-13 () none) ;; 13
     (vehicle-reticle-base-method-14 () none) ;; 14
     )
-  )|#
+  )
   
 
 
