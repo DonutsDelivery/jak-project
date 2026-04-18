@@ -6583,7 +6583,7 @@
 
 
   
-#|(deftype oil-emitter (process)
+(deftype oil-emitter (process)
   ((emitting            basic                 :offset-assert 144)
    (owning-vehicle      uint64                :offset-assert 152)
    (oil-trail           basic                 :offset-assert 160)
@@ -6596,9 +6596,9 @@
    (damage              float                 :offset-assert 284)
    (oil-slick           uint64                :offset-assert 288)
    )
-  :method-count-assert 19
+  :method-count-assert 24
   :size-assert         #x128
-  :flag-assert         #x1300a00128
+  :flag-assert         #x1800a00128
   (:methods
     (oil-emitter-method-9 () none) ;; 9
     (oil-emitter-method-10 () none) ;; 10
@@ -6613,7 +6613,7 @@
   (:state-methods
     emit-oil ;; 15
     )
-  )|#
+  )
   
 
 
