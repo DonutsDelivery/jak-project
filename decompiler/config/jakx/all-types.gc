@@ -28313,6 +28313,49 @@
     )
   )
 
+;; wrong-way (process-drawable with 3 states + 2 methods)
+(deftype wrong-way (process-drawable)
+  ((base-y            float          :offset-assert 248)
+   (height-offset     float          :offset-assert 252)
+   (start-position    vector :inline :offset-assert 256)
+   (bot               uint64         :offset-assert 272)
+   (alarm-sound       uint32         :offset-assert 280)
+   (friendly          basic          :offset-assert 284)
+   (kill-player-quick basic          :offset-assert 288)
+   )
+  :method-count-assert 55
+  :size-assert         #x124
+  :flag-assert         #x3700a00124
+  (:methods
+    (idle () _type_ :state) ;; 50
+    (exit () _type_ :state) ;; 51
+    (enter () _type_ :state) ;; 52
+    (wrong-way-method-53 () none) ;; 53
+    (wrong-way-method-54 () none) ;; 54
+    )
+  )
+
+;; race-banner (process-drawable with 2 states + method + UNKNOWN→uint32 banner array)
+(deftype race-banner (process-drawable)
+  ((mat             matrix  :inline :offset-assert 256)
+   (end-pos         vector  :inline :offset-assert 320)
+   (explode-sound   uint32          :offset-assert 336)
+   (base-y          float           :offset-assert 340)
+   (banner          uint32  5       :offset-assert 344)
+   (blend-up-height float           :offset-assert 364)
+   (last-index      int8            :offset-assert 368)
+   (index           int8            :offset-assert 369)
+   )
+  :method-count-assert 53
+  :size-assert         #x172
+  :flag-assert         #x3500f00172
+  (:methods
+    (banner-countdown () _type_ :state) ;; 50
+    (banner-go () _type_ :state) ;; 51
+    (race-banner-method-52 () none) ;; 52
+    )
+  )
+
 
 
   
