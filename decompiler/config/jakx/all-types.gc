@@ -1847,15 +1847,7 @@
 
 
   
-#|(deftype this-way (process-drawable)
-  ()
-  :method-count-assert 51
-  :size-assert         #xf8
-  :flag-assert         #x33007000f8
-  (:methods
-    (idle () _type_ :state) ;; 50
-    )
-  )|#
+;; this-way: activated below parent process-drawable at L28289
   
 
 
@@ -1914,23 +1906,7 @@
 
 
   
-#|(deftype starting-linebot (process-drawable)
-  ((initial-quat   quaternion :inline :offset-assert 256)
-   (initial-pos    vector     :inline :offset-assert 272)
-   (offset         vector     :inline :offset-assert 288)
-   (red-projection basic              :offset-assert 304)
-   (race-started   basic              :offset-assert 308)
-   )
-  :method-count-assert 52
-  :size-assert         #x138
-  :flag-assert         #x3400b00138
-  (:methods
-    (starting-linebot-method-51 () none) ;; 51
-    )
-  (:state-methods
-    idle ;; 50
-    )
-  )|#
+;; starting-linebot: activated below parent process-drawable at L28289
   
 
 
@@ -6457,34 +6433,13 @@
 
 
   
-#|(deftype slip-object (process-drawable)
-  ((start-time   int32   :offset-assert 248)
-   (damage       float   :offset-assert 252)
-   (fire-sound   basic   :offset-assert 256)
-   (owner-handle uint64  :offset-assert 264)
-   )
-  :method-count-assert 51
-  :size-assert         #x110
-  :flag-assert         #x3300800110
-  (:methods
-    (idle () _type_ :state) ;; 50
-    )
-  )|#
+;; slip-object: activated below parent process-drawable at L28289
   
 
 
 
   
-#|(deftype oil-slick (process-drawable)
-  ((vehicle uint64  :offset-assert 248)
-   )
-  :method-count-assert 51
-  :size-assert         #x100
-  :flag-assert         #x3300700100
-  (:methods
-    (idle () _type_ :state) ;; 50
-    )
-  )|#
+;; oil-slick: activated below parent process-drawable at L28289
   
 
 
@@ -28344,6 +28299,61 @@
   :method-count-assert 50
   :size-assert         #xf8
   :flag-assert         #x32007000f8
+  )
+
+;; this-way (process-drawable subtype with idle state — was pre-parent)
+(deftype this-way (process-drawable)
+  ()
+  :method-count-assert 51
+  :size-assert         #xf8
+  :flag-assert         #x33007000f8
+  (:methods
+    (idle () _type_ :state) ;; 50
+    )
+  )
+
+;; slip-object (process-drawable subtype with fields + idle state)
+(deftype slip-object (process-drawable)
+  ((start-time   int32   :offset-assert 248)
+   (damage       float   :offset-assert 252)
+   (fire-sound   basic   :offset-assert 256)
+   (owner-handle uint64  :offset-assert 264)
+   )
+  :method-count-assert 51
+  :size-assert         #x110
+  :flag-assert         #x3300800110
+  (:methods
+    (idle () _type_ :state) ;; 50
+    )
+  )
+
+;; oil-slick (process-drawable subtype with one vehicle field + idle state)
+(deftype oil-slick (process-drawable)
+  ((vehicle uint64  :offset-assert 248)
+   )
+  :method-count-assert 51
+  :size-assert         #x100
+  :flag-assert         #x3300700100
+  (:methods
+    (idle () _type_ :state) ;; 50
+    )
+  )
+
+;; starting-linebot (process-drawable subtype with 5 fields + idle state + method-51)
+(deftype starting-linebot (process-drawable)
+  ((initial-quat   quaternion :inline :offset-assert 256)
+   (initial-pos    vector     :inline :offset-assert 272)
+   (offset         vector     :inline :offset-assert 288)
+   (red-projection basic              :offset-assert 304)
+   (race-started   basic              :offset-assert 308)
+   )
+  :method-count-assert 52
+  :size-assert         #x138
+  :flag-assert         #x3400b00138
+  (:methods
+    (idle () _type_ :state) ;; 50
+    (starting-linebot-method-51 () none) ;; 51
+    )
   )
 
 
