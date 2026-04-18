@@ -14143,18 +14143,18 @@
     (font-context-method-10 (font-context int int) font-context) ;; 10
     (font-context-method-11 (font-context int) font-context) ;; 11
     (font-context-method-12 (font-context float) font-context) ;; 12
-    (font-context-method-13 (font-context int) font-context) ;; 13
-    (font-context-method-14 (font-context int int) font-context) ;; 14
-    (font-context-method-15 (font-context int) font-context) ;; 15
-    (font-context-method-16 (font-context float) font-context) ;; 16
-    (font-context-method-17 (font-context font-flags) font-context) ;; 17
-    (font-context-method-18 (font-context uint) font-context) ;; 18
-    (font-context-method-19 (font-context float) font-context) ;; 19
-    (font-context-method-20 (font-context float) font-context) ;; 20
-    (font-context-method-21 (font-context int) font-context) ;; 21
-    (font-context-method-22 (font-context int) font-context) ;; 22
-    (font-context-method-23 () none) ;; 23
-    (font-context-method-24 () none) ;; 24
+    (set-mat! (font-context matrix) font-context) ;; 13
+    (set-origin! (font-context int int) font-context) ;; 14
+    (set-depth! (font-context int) font-context) ;; 15
+    (set-w! (font-context float) font-context) ;; 16
+    (set-width! (font-context int) font-context) ;; 17
+    (set-height! (font-context int) font-context) ;; 18
+    (set-projection! (font-context float) font-context) ;; 19
+    (set-color! (font-context font-color) font-context) ;; 20
+    (set-flags! (font-context font-flags) font-context) ;; 21
+    (set-start-line! (font-context uint) font-context) ;; 22
+    (set-scale! (font-context float) font-context) ;; 23
+    (set-alpha! (font-context float) font-context) ;; 24
     (font-context-method-25 () none) ;; 25
     (font-context-method-26 (font-context float) font-context) ;; 26
     (font-context-method-27 (font-context uint) font-context) ;; 27
@@ -14316,9 +14316,12 @@
    (buf                    basic                  :offset-assert 6172)
    (str-ptr                uint32                 :offset-assert 6176) ;; guessed by decompiler
    )
-  :method-count-assert 9
+  :method-count-assert 10
   :size-assert         #x1824
-  :flag-assert         #x900001824
+  :flag-assert         #xa00001824
+  (:methods
+    (set-context! (_type_ font-context) none) ;; 9
+    )
   )
 
 (define-extern *font-work* font-work)
@@ -29564,7 +29567,7 @@
   
 
 
-#|
+(declare-type nav-poly structure) ;; fwd-ref for net-enemy
 (deftype net-enemy (process-focusable)
   ((flags                  uint64                     :offset-assert 256)
    (info                   net-enemy-info             :offset-assert 264)
@@ -29581,7 +29584,7 @@
    (vehicle-penetrate-time int32                      :offset-assert 696)
    (paths                  basic                      :offset-assert 700)
    (pending-impulse-valid  basic                      :offset-assert 704)
-   (pending-impulse        rigid-body-impact  :inline :offset-assert 720)
+   (pending-impulse        uint8 68           :offset 720)           ;; rigid-body-impact :inline proxy (fwd-ref)
    (last-transition-time   int32                      :offset-assert 788)
    (last-attack-id         int32                      :offset-assert 792)
    (vel-for-ragdoll        vector             :inline :offset-assert 800)
@@ -29625,7 +29628,6 @@
     (net-enemy-method-86 () none) ;; 86
     )
   )
-|#
 
 
 
@@ -33256,82 +33258,81 @@
     )
   )
 
-#|
 (deftype hud-vehicle (hud)
-  ((weapon-texture uint8 49 :offset-assert 6364)
-   (gun-texture                      basic              :offset-assert 6364)
-   (missile-texture                  basic              :offset-assert 6368)
-   (grenade-texture                  basic              :offset-assert 6372)
-   (taserram-texture                 basic              :offset-assert 6376)
-   (mine-texture                     basic              :offset-assert 6380)
-   (shield-texture                   basic              :offset-assert 6384)
-   (target-texture uint8 2 :offset-assert 6560)
-   (slot-roulette-active? uint8 2 :offset-assert 6568)
-   (button-out? uint8 2 :offset-assert 6576)
-   (weapon-picked? uint8 2 :offset-assert 6584)
-   (slot-roulette-start-time uint8 2 :offset-assert 6592)
-   (roulette-counter uint8 2 :offset-assert 6600)
-   (weapon-color uint8 2 :offset-assert 6608)
-   (selected-weapon uint8 2 :offset-assert 6610)
-   (powerup-level                    int32              :offset-assert 6612)
-   (last-light-level                 int8               :offset-assert 6616)
-   (light-bar-part-right-init        basic              :offset-assert 6620)
-   (light-bar-part-right-filled      basic              :offset-assert 6624)
-   (light-bar-part-left-init         basic              :offset-assert 6628)
-   (light-bar-part-left-filled       basic              :offset-assert 6632)
-   (current-light-eco                float              :offset-assert 6636)
-   (current-green-eco                float              :offset-assert 6640)
-   (current-blue-eco                 float              :offset-assert 6644)
-   (slot-weapon-color uint8 2 :offset-assert 6648)
-   (incoming?                        basic              :offset-assert 6652)
-   (light-eco-level                  float              :offset-assert 6656)
-   (light-eco-level-fx-start-time    uint32             :offset-assert 6660)
-   (split-screen-offset-left-x       float              :offset-assert 6664)
-   (split-screen-offset-right-x      float              :offset-assert 6668)
-   (split-screen-offset-y            float              :offset-assert 6672)
-   (hud-right-ammo-counter-1         hud-sprite :inline :offset-assert 3056)
-   (hud-right-ammo-counter-2         hud-sprite :inline :offset-assert 3120)
-   (hud-right-light-underlay         hud-sprite :inline :offset-assert 3184)
-   (hud-right-light-ctrl-1           hud-sprite :inline :offset-assert 3248)
-   (hud-right-light-ctrl-2           hud-sprite :inline :offset-assert 3312)
-   (hud-right-light-ctrl-3           hud-sprite :inline :offset-assert 3376)
-   (hud-right-light-bar              hud-sprite :inline :offset-assert 3440)
-   (hud-right-turbo-underlay         hud-sprite :inline :offset-assert 3504)
-   (hud-right-turbo-ctrl-1           hud-sprite :inline :offset-assert 3568)
-   (hud-right-turbo-ctrl-2           hud-sprite :inline :offset-assert 3632)
-   (hud-right-turbo-bar              hud-sprite :inline :offset-assert 3696)
-   (hud-right-display-weapon-field   hud-sprite :inline :offset-assert 3760)
-   (hud-right-upper-left             hud-sprite :inline :offset-assert 3824)
-   (hud-right-upper-right            hud-sprite :inline :offset-assert 3888)
-   (hud-right-lower-right            hud-sprite :inline :offset-assert 3952)
-   (hud-right-lower-left             hud-sprite :inline :offset-assert 4016)
-   (hud-right-ammo-counter-overlay   hud-sprite :inline :offset-assert 4080)
-   (hud-right-ammo-counter-overlay-2 hud-sprite :inline :offset-assert 4144)
-   (hud-right-weapon-icon-shadow     hud-sprite :inline :offset-assert 4208)
-   (hud-right-weapon-icon            hud-sprite :inline :offset-assert 4272)
-   (hud-right-display-shine          hud-sprite :inline :offset-assert 4336)
-   (hud-left-ammo-counter-1          hud-sprite :inline :offset-assert 4400)
-   (hud-left-ammo-counter-2          hud-sprite :inline :offset-assert 4464)
-   (hud-left-light-underlay          hud-sprite :inline :offset-assert 4528)
-   (hud-left-light-ctrl-1            hud-sprite :inline :offset-assert 4592)
-   (hud-left-light-ctrl-2            hud-sprite :inline :offset-assert 4656)
-   (hud-left-light-ctrl-3            hud-sprite :inline :offset-assert 4720)
-   (hud-left-light-bar               hud-sprite :inline :offset-assert 4784)
-   (hud-left-health-underlay         hud-sprite :inline :offset-assert 4848)
-   (hud-left-health-ctrl-1           hud-sprite :inline :offset-assert 4912)
-   (hud-left-health-ctrl-2           hud-sprite :inline :offset-assert 4976)
-   (hud-left-health-bar              hud-sprite :inline :offset-assert 5040)
-   (hud-left-display-weapon-field    hud-sprite :inline :offset-assert 5104)
-   (hud-left-upper-left              hud-sprite :inline :offset-assert 5168)
-   (hud-left-upper-right             hud-sprite :inline :offset-assert 5232)
-   (hud-left-lower-left              hud-sprite :inline :offset-assert 5296)
-   (hud-left-lower-right             hud-sprite :inline :offset-assert 5360)
-   (hud-left-ammo-counter-overlay    hud-sprite :inline :offset-assert 5424)
-   (hud-left-ammo-counter-overlay-2  hud-sprite :inline :offset-assert 5488)
-   (hud-left-weapon-icon-shadow      hud-sprite :inline :offset-assert 5552)
-   (hud-left-weapon-icon             hud-sprite :inline :offset-assert 5616)
-   (hud-left-display-shine           hud-sprite :inline :offset-assert 5680)
-   (hud-turbo-disabled               hud-sprite :inline :offset-assert 5744)
+  ((weapon-texture uint8 49 :offset 6364)
+   (gun-texture                      basic              :offset 6364)
+   (missile-texture                  basic              :offset 6368)
+   (grenade-texture                  basic              :offset 6372)
+   (taserram-texture                 basic              :offset 6376)
+   (mine-texture                     basic              :offset 6380)
+   (shield-texture                   basic              :offset 6384)
+   (target-texture uint8 2 :offset 6560)
+   (slot-roulette-active? uint8 2 :offset 6568)
+   (button-out? uint8 2 :offset 6576)
+   (weapon-picked? uint8 2 :offset 6584)
+   (slot-roulette-start-time uint8 2 :offset 6592)
+   (roulette-counter uint8 2 :offset 6600)
+   (weapon-color uint8 2 :offset 6608)
+   (selected-weapon uint8 2 :offset 6610)
+   (powerup-level                    int32              :offset 6612)
+   (last-light-level                 int8               :offset 6616)
+   (light-bar-part-right-init        basic              :offset 6620)
+   (light-bar-part-right-filled      basic              :offset 6624)
+   (light-bar-part-left-init         basic              :offset 6628)
+   (light-bar-part-left-filled       basic              :offset 6632)
+   (current-light-eco                float              :offset 6636)
+   (current-green-eco                float              :offset 6640)
+   (current-blue-eco                 float              :offset 6644)
+   (slot-weapon-color uint8 2 :offset 6648)
+   (incoming?                        basic              :offset 6652)
+   (light-eco-level                  float              :offset 6656)
+   (light-eco-level-fx-start-time    uint32             :offset 6660)
+   (split-screen-offset-left-x       float              :offset 6664)
+   (split-screen-offset-right-x      float              :offset 6668)
+   (split-screen-offset-y            float              :offset 6672)
+   (hud-right-ammo-counter-1         hud-sprite :inline :offset 3056)
+   (hud-right-ammo-counter-2         hud-sprite :inline :offset 3120)
+   (hud-right-light-underlay         hud-sprite :inline :offset 3184)
+   (hud-right-light-ctrl-1           hud-sprite :inline :offset 3248)
+   (hud-right-light-ctrl-2           hud-sprite :inline :offset 3312)
+   (hud-right-light-ctrl-3           hud-sprite :inline :offset 3376)
+   (hud-right-light-bar              hud-sprite :inline :offset 3440)
+   (hud-right-turbo-underlay         hud-sprite :inline :offset 3504)
+   (hud-right-turbo-ctrl-1           hud-sprite :inline :offset 3568)
+   (hud-right-turbo-ctrl-2           hud-sprite :inline :offset 3632)
+   (hud-right-turbo-bar              hud-sprite :inline :offset 3696)
+   (hud-right-display-weapon-field   hud-sprite :inline :offset 3760)
+   (hud-right-upper-left             hud-sprite :inline :offset 3824)
+   (hud-right-upper-right            hud-sprite :inline :offset 3888)
+   (hud-right-lower-right            hud-sprite :inline :offset 3952)
+   (hud-right-lower-left             hud-sprite :inline :offset 4016)
+   (hud-right-ammo-counter-overlay   hud-sprite :inline :offset 4080)
+   (hud-right-ammo-counter-overlay-2 hud-sprite :inline :offset 4144)
+   (hud-right-weapon-icon-shadow     hud-sprite :inline :offset 4208)
+   (hud-right-weapon-icon            hud-sprite :inline :offset 4272)
+   (hud-right-display-shine          hud-sprite :inline :offset 4336)
+   (hud-left-ammo-counter-1          hud-sprite :inline :offset 4400)
+   (hud-left-ammo-counter-2          hud-sprite :inline :offset 4464)
+   (hud-left-light-underlay          hud-sprite :inline :offset 4528)
+   (hud-left-light-ctrl-1            hud-sprite :inline :offset 4592)
+   (hud-left-light-ctrl-2            hud-sprite :inline :offset 4656)
+   (hud-left-light-ctrl-3            hud-sprite :inline :offset 4720)
+   (hud-left-light-bar               hud-sprite :inline :offset 4784)
+   (hud-left-health-underlay         hud-sprite :inline :offset 4848)
+   (hud-left-health-ctrl-1           hud-sprite :inline :offset 4912)
+   (hud-left-health-ctrl-2           hud-sprite :inline :offset 4976)
+   (hud-left-health-bar              hud-sprite :inline :offset 5040)
+   (hud-left-display-weapon-field    hud-sprite :inline :offset 5104)
+   (hud-left-upper-left              hud-sprite :inline :offset 5168)
+   (hud-left-upper-right             hud-sprite :inline :offset 5232)
+   (hud-left-lower-left              hud-sprite :inline :offset 5296)
+   (hud-left-lower-right             hud-sprite :inline :offset 5360)
+   (hud-left-ammo-counter-overlay    hud-sprite :inline :offset 5424)
+   (hud-left-ammo-counter-overlay-2  hud-sprite :inline :offset 5488)
+   (hud-left-weapon-icon-shadow      hud-sprite :inline :offset 5552)
+   (hud-left-weapon-icon             hud-sprite :inline :offset 5616)
+   (hud-left-display-shine           hud-sprite :inline :offset 5680)
+   (hud-turbo-disabled               hud-sprite :inline :offset 5744)
    )
   :method-count-assert 40
   :size-assert         #x1a14
@@ -33349,7 +33350,6 @@
     (hud-vehicle-method-39 () none) ;; 39
     )
   )
-|#
 
 (deftype in-game-hud (hud)
   ((real-items           basic  :offset-assert 6364)
@@ -47385,52 +47385,51 @@
 
 
 
-#|
 (deftype lobby-menu-manager (process)
-  ((game-type                  uint32    :offset-assert 144)
-   (in-focus-index             int8      :offset-assert 216)
-   (menu-handle-1              uint64    :offset-assert 152)
-   (menu-handle-2              uint64    :offset-assert 160)
-   (menu-handle-popup          uint64    :offset-assert 168)
-   (menu-handle-background     uint64    :offset-assert 224)
-   (menu-handle-logo-main      uint64    :offset-assert 232)
-   (menu-handle-logo-subtitle  uint64    :offset-assert 240)
-   (local-players              int32     :offset-assert 248)
-   (refresh-time               uint32    :offset-assert 252)
-   (game-connection-type       uint8     :offset-assert 256)
-   (vehicle-handle             uint64    :offset-assert 264)
-   (vehicle-selected           uint8     :offset-assert 272)
-   (vehicle-flags              uint64    :offset-assert 280)
-   (vehicle-paint-mode         uint64    :offset-assert 288)
-   (tuning-type-selected       uint64    :offset-assert 296)
-   (all-ready?                 basic     :offset-assert 304)
-   (map-proc                   uint64    :offset-assert 312)
-   (venue-map                  uint64    :offset-assert 320)
-   (current-local-player       int8      :offset-assert 328)
-   (spawn-another?             basic     :offset-assert 332)
-   (state-time                 uint64    :offset-assert 336)
-   (has-driver?                uint8   8 :offset-assert 344)
-   (car-part-type-selected     uint8     :offset-assert 352)
-   (cam-string                 basic     :offset-assert 356)
-   (driver-was-taken?          basic     :offset-assert 360)
-   (interpolate-camera?        basic     :offset-assert 364)
-   (last-selected-human-count  int8      :offset-assert 368)
-   (last-selected-cpu-count    int8      :offset-assert 369)
-   (game-visible?              basic     :offset-assert 372)
-   (psp-mode-run?              basic     :offset-assert 376)
-   (garage-lights              float     :offset-assert 380)
-   (garage-lights-target       float     :offset-assert 384)
-   (memcard-status             uint32    :offset-assert 388)
-   (time-limit?                basic     :offset-assert 392)
-   (profile-save-mode          basic     :offset-assert 396)
-   (machine-id-to-kick         int8      :offset-assert 400)
-   (cookie-id-to-kick          int8      :offset-assert 401)
-   (override-fov               basic     :offset-assert 404)
-   (profile-new-save           basic     :offset-assert 408)
-   (voice-id                   uint32    :offset-assert 412)
-   (split-selection-prev-state basic     :offset-assert 416)
-   (vehicle-part-fade          uint8     :offset-assert 420)
-   (vehicle-loaded-time        uint64    :offset-assert 424)
+  ((game-type                  uint32    :offset 144)
+   (in-focus-index             int8      :offset 216)
+   (menu-handle-1              uint64    :offset 152)
+   (menu-handle-2              uint64    :offset 160)
+   (menu-handle-popup          uint64    :offset 168)
+   (menu-handle-background     uint64    :offset 224)
+   (menu-handle-logo-main      uint64    :offset 232)
+   (menu-handle-logo-subtitle  uint64    :offset 240)
+   (local-players              int32     :offset 248)
+   (refresh-time               uint32    :offset 252)
+   (game-connection-type       uint8     :offset 256)
+   (vehicle-handle             uint64    :offset 264)
+   (vehicle-selected           uint8     :offset 272)
+   (vehicle-flags              uint64    :offset 280)
+   (vehicle-paint-mode         uint64    :offset 288)
+   (tuning-type-selected       uint64    :offset 296)
+   (all-ready?                 basic     :offset 304)
+   (map-proc                   uint64    :offset 312)
+   (venue-map                  uint64    :offset 320)
+   (current-local-player       int8      :offset 328)
+   (spawn-another?             basic     :offset 332)
+   (state-time                 uint64    :offset 336)
+   (has-driver?                uint8   8 :offset 344)
+   (car-part-type-selected     uint8     :offset 352)
+   (cam-string                 basic     :offset 356)
+   (driver-was-taken?          basic     :offset 360)
+   (interpolate-camera?        basic     :offset 364)
+   (last-selected-human-count  int8      :offset 368)
+   (last-selected-cpu-count    int8      :offset 369)
+   (game-visible?              basic     :offset 372)
+   (psp-mode-run?              basic     :offset 376)
+   (garage-lights              float     :offset 380)
+   (garage-lights-target       float     :offset 384)
+   (memcard-status             uint32    :offset 388)
+   (time-limit?                basic     :offset 392)
+   (profile-save-mode          basic     :offset 396)
+   (machine-id-to-kick         int8      :offset 400)
+   (cookie-id-to-kick          int8      :offset 401)
+   (override-fov               basic     :offset 404)
+   (profile-new-save           basic     :offset 408)
+   (voice-id                   uint32    :offset 412)
+   (split-selection-prev-state basic     :offset 416)
+   (vehicle-part-fade          uint8     :offset 420)
+   (vehicle-loaded-time        uint64    :offset 424)
    )
   :method-count-assert 196
   :size-assert         #x1b0
@@ -47620,7 +47619,6 @@
     (lobby-menu-manager-method-195 () none) ;; 195
     )
   )
-|#
 
 
 
@@ -53172,7 +53170,6 @@
 
   
 
-#|
 (deftype plow (net-enemy)
   ((tracking-player      uint64  :offset-assert 872)
    (do-flip-anim         basic   :offset-assert 880)
@@ -53190,9 +53187,9 @@
    (smoke2               basic   :offset-assert 928)
    (engine-sound-id      uint32  :offset-assert 932)
    )
-  :method-count-assert 90
+  :method-count-assert 92
   :size-assert         #x3a8
-  :flag-assert         #x5a032003a8
+  :flag-assert         #x5c032003a8
   (:state-methods
     startup        ;; 59 (override)
     waiting-respawn ;; 61 (override)
@@ -53201,7 +53198,6 @@
     reverse        ;; 89
     )
   )
-|#
 
   
 
@@ -54176,7 +54172,6 @@
 
   
 
-#|
 (deftype raptor (net-enemy)
   ()
   :method-count-assert 91
@@ -54190,7 +54185,6 @@
     chase          ;; 90
     )
   )
-|#
 
   
 
@@ -58917,14 +58911,15 @@
 ;; sparticle-cpuinfo — full definition above at L33676
 
 (deftype path-control (basic)
-  ((flags      uint32         :offset-assert 4)
+  ((flags      uint32                    :offset-assert 4) ;; path-control-flag
    (name       symbol                    :offset-assert 8)
    (process    process-drawable          :offset-assert 12)
-   (curve      curve             :inline :offset-assert 16)
+   (path-ptr   (pointer float)           :offset-assert 16) ;; jakx extra vs jak3
+   (curve      curve             :inline :offset-assert 20)
    )
   :method-count-assert 33
-  :size-assert         #x24
-  :flag-assert         #x2100000024
+  :size-assert         #x28
+  :flag-assert         #x2100000028
   (:methods
     (new (symbol type process symbol float entity symbol) _type_) ;; 0
     (debug-draw (_type_) none) ;; 9
@@ -59045,8 +59040,8 @@
 (deftype curve-control (path-control)
   ()
   :method-count-assert 35
-  :size-assert         #x24
-  :flag-assert         #x2300000024
+  :size-assert         #x28
+  :flag-assert         #x2300000028
   (:methods
     (new (symbol type process symbol float) _type_) ;; 0
     (curve-control-method-33 (_type_) none) ;; 33
