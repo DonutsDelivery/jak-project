@@ -7177,12 +7177,12 @@
 
 
   
-#|(deftype v-mongoose (wcar-base)
+(deftype v-mongoose (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7193,12 +7193,12 @@
 
 
   
-#|(deftype v-falcon (wcar-base)
+(deftype v-falcon (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7209,12 +7209,12 @@
 
 
   
-#|(deftype v-wombat (wcar-base)
+(deftype v-wombat (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7225,12 +7225,12 @@
 
 
   
-#|(deftype v-possum (wcar-base)
+(deftype v-possum (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7241,12 +7241,12 @@
 
 
   
-#|(deftype v-bobcat (wcar-base)
+(deftype v-bobcat (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7257,12 +7257,12 @@
 
 
   
-#|(deftype v-cougar (wcar-base)
+(deftype v-cougar (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7273,12 +7273,12 @@
 
 
   
-#|(deftype v-wolf (wcar-base)
+(deftype v-wolf (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7289,12 +7289,12 @@
 
 
   
-#|(deftype v-bear (wcar-base)
+(deftype v-bear (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7305,12 +7305,12 @@
 
 
   
-#|(deftype v-leopard (wcar-base)
+(deftype v-leopard (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
@@ -7321,12 +7321,12 @@
 
 
   
-#|(deftype v-panther (wcar-base)
+(deftype v-panther (wcar-base)
   ()
   :method-count-assert 272
   :size-assert         #x13c0
   :flag-assert         #x110133013c0
-  )|#
+  )
   
 
 
