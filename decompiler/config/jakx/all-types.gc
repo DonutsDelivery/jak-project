@@ -50152,7 +50152,7 @@
 
 
   
-#|(deftype ragdoll-test (process-focusable)
+(deftype ragdoll-test (process-focusable)
   ((ragdoll-proc uint64  :offset-assert 256) ;; handle
    )
   :method-count-assert 64
@@ -50165,7 +50165,7 @@
     freefall ;; 62
     idle ;; 63
     )
-  )|#
+  )
   
 
 
@@ -59555,7 +59555,7 @@
 ;; prototype-bucket activated above at L20679
 (define-extern race-mesh-hash-search object)
 (define-extern ragdoll-edit-info object)
-(define-extern ragdoll-test object)
+;; ragdoll-test activated at L50155
 (define-extern rb-debug-state-record object)
 (define-extern ripple-globals object)
 (define-extern sce-dirent object)
