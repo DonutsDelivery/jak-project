@@ -28463,14 +28463,6 @@
   )
 
 
-;; manipy: minimal subclass of process-drawable (referenced by :behavior tags)
-(deftype manipy (process-drawable)
-  ()
-  :method-count-assert 50
-  :size-assert         #xf8
-  :flag-assert         #x32007000f8
-  )
-  
 
   
 (deftype process-drawable-reserved (process-drawable)
@@ -29853,11 +29845,6 @@
 ;; generic-obs-h                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  
-(deftype manipy (process-drawable)
-  ()
-  :flag-assert #x32007000f8
-  )
   
 
 (deftype part-spawner (process)
@@ -51083,7 +51070,7 @@
 
 
   
-#|(deftype vehicle-debris (rigid-body-object)
+(deftype vehicle-debris (rigid-body-object)
   ((impact-sound uint16  :offset-assert 288)
    (camera-dist  float   :offset-assert 292)
    )
@@ -51095,7 +51082,7 @@
     fade-out ;; 90
     die ;; 91
     )
-  )|#
+  )
   
 
 
@@ -52958,14 +52945,14 @@
 
 
   
-#|(deftype construction-object (rigid-body-object)
+(deftype construction-object (rigid-body-object)
   ((splash           basic  :offset-assert 288)
-   (blink-start-time int32  :offset-assert 296)
+   (blink-start-time int32  :offset 296)
    (hit-time         int32  :offset-assert 300)
    )
-  :method-count-assert 93
+  :method-count-assert 95
   :size-assert         #x130
-  :flag-assert         #x5d00a00130
+  :flag-assert         #x5f00a00130
   (:methods
     (construction-object-method-89 () none) ;; 89
     (construction-object-method-90 () none) ;; 90
@@ -52976,7 +52963,7 @@
     idle ;; 59
     active ;; 60
     )
-  )|#
+  )
   
 
 
