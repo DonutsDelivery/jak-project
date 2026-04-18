@@ -21698,55 +21698,42 @@
 
 
   
-#|(deftype fact-info-enemy (fact-info)
-  ((process             process                 :offset-assert 0) ;; guessed by decompiler
-   (pickup-amount       float                   :offset-assert 8)
-   (pickup-spawn-amount float                   :offset-assert 12)
-   (options             actor-option            :offset-assert 20)
-   (fade-time           uint64                  :offset-assert 28) ;; time-frame
-   (speed               float                   :offset-assert 36)
-   (idle-distance       meters                  :offset-assert 40)
-   (notice-top          meters                  :offset-assert 44)
-   (notice-bottom       meters                  :offset-assert 48)
-   (cam-horz            meters                  :offset-assert 52)
-   (cam-vert            meters                  :offset-assert 56)
-   (cam-notice-dist     meters                  :offset-assert 60)
-   (enemy-options       enemy-option            :offset-assert 64)
-   (trig-dist           meters                  :offset-assert 68)
-   (trig-actor-group    (pointer actor-group)   :offset-assert 72) ;; guessed by decompiler
-   (trig-mask-count     int8                    :offset-assert 76)
-   (trig-mask           uint8                 2 :offset-assert 77) ;; guessed by decompiler
+(deftype fact-info-enemy (fact-info)
+  ((speed               float                   :offset-assert 40)
+   (idle-distance       meters                  :offset-assert 44)
+   (notice-top          meters                  :offset-assert 48)
+   (notice-bottom       meters                  :offset-assert 52)
+   (cam-horz            meters                  :offset-assert 56)
+   (cam-vert            meters                  :offset-assert 60)
+   (cam-notice-dist     meters                  :offset-assert 64)
+   (enemy-options       uint32                  :offset-assert 68) ;; TODO enemy-option enum
+   (trig-dist           meters                  :offset-assert 72)
+   (trig-actor-group    uint32                  :offset-assert 76) ;; TODO (pointer actor-group) — fwd ref at L32778
+   (trig-mask-count     int8                    :offset-assert 80)
+   (trig-mask           uint8                 2 :offset-assert 81) ;; guessed by decompiler
    )
   :method-count-assert 13
   :size-assert         #x53
   :flag-assert         #xd00000053
-  ;; field actor-option is likely a value type.
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type process (pointer float)) _type_)
+    (new (symbol type) _type_) ;; 0
     (fact-info-enemy-method-12 (_type_ int) none) ;; 12
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype fact-info-crate (fact-info)
-  ((process             process       :offset-assert 0) ;; guessed by decompiler
-   (pickup-amount       float         :offset-assert 8)
-   (pickup-spawn-amount float         :offset-assert 12)
-   (options             actor-option  :offset-assert 20)
-   (fade-time           uint64        :offset-assert 28) ;; time-frame
-   (suck-count          int32         :offset-assert 36)
-   )
+(deftype fact-info-crate (fact-info)
+  ((suck-count int32 :offset-assert 40))
   :method-count-assert 12
   :size-assert         #x2c
   :flag-assert         #xc0000002c
-  ;; field actor-option is likely a value type.
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type process pickup-type float) _type_)
+    (new (symbol type) _type_) ;; 0
     )
-  )|#
+  )
   
 
 
@@ -39810,7 +39797,7 @@
 
 
   
-#|(deftype sound-on-path (process-drawable)
+(deftype sound-on-path (process-drawable)
   ((flags           uint8          :offset-assert 248)
    (spawn-sound     uint128        :offset-assert 256) ;; sound-name
    (loop-sound      uint32         :offset-assert 276)
@@ -39828,7 +39815,7 @@
     no-play ;; 52
     active ;; 50
     )
-  )|#
+  )
   
 
 
@@ -51453,17 +51440,18 @@
 
   
 #|(deftype anim-test-obj (glst-named-node)
+  ;; list-con list-control :inline needs 16-byte alignment; regen says 44 but list-control requires 16-aligned inline placement (jakx-specific constraint)
   ((obj-art-group basic                :offset-assert 12)
    (seq-list      glst-list    :inline :offset-assert 16)
    (flags         int32                :offset-assert 32)
    (mesh-geo      basic                :offset-assert 36)
    (joint-geo     basic                :offset-assert 40)
-   (list-con      list-control :inline :offset-assert 44)
-   (parent        uint32               :offset-assert 124)
-   (anim-index    int32                :offset-assert 128)
-   (anim-hindex   int32                :offset-assert 132)
-   (seq-index     int32                :offset-assert 136)
-   (seq-hindex    int32                :offset-assert 140)
+   (list-con      list-control :inline :offset 44)
+   (parent        uint32               :offset 124)
+   (anim-index    int32                :offset 128)
+   (anim-hindex   int32                :offset 132)
+   (seq-index     int32                :offset 136)
+   (seq-hindex    int32                :offset 140)
    )
   :method-count-assert 9
   :size-assert         #x90
@@ -51475,11 +51463,12 @@
 
   
 #|(deftype anim-test-sequence (glst-named-node)
+  ;; same list-con 16-alignment blocker as anim-test-obj
   ((item-list    glst-list     :inline :offset-assert 12)
    (playing-item int32                 :offset-assert 28)
    (flags        int32                 :offset-assert 32)
-   (list-con     list-control  :inline :offset-assert 36)
-   (parent       anim-test-obj         :offset-assert 116)
+   (list-con     list-control  :inline :offset 36)
+   (parent       anim-test-obj         :offset 116)
    )
   :method-count-assert 9
   :size-assert         #x78
@@ -51491,6 +51480,7 @@
 
   
 #|(deftype anim-test-seq-item (glst-named-node)
+  ;; parent anim-test-sequence is commented (blocked by list-con alignment)
   ((speed       int32               :offset-assert 12)
    (blend       int32               :offset-assert 16)
    (first-frame float               :offset-assert 20)
