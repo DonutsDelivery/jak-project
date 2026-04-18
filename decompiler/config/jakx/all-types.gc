@@ -8591,10 +8591,10 @@
 
 
   
-#|(deftype vif-bank (structure)
+(deftype vif-bank (structure)
   ((stat   uint32   :offset-assert 0)
    (fbrst  uint32   :offset-assert 16)
-   (err    vif-err  :offset-assert 32) ;; guessed by decompiler
+   (err    vif-err  :offset-assert 32)
    (mark   uint32   :offset-assert 48)
    (cycle  uint32   :offset-assert 64)
    (mode   uint32   :offset-assert 80)
@@ -8607,7 +8607,7 @@
    (tops   uint32   :offset-assert 192)
    (itop   uint32   :offset-assert 208)
    (top    uint32   :offset-assert 224)
-   (r0     uint32   :offset-assert 256)
+   (r0     uint32   :offset 256)
    (r1     uint32   :offset-assert 272)
    (r2     uint32   :offset-assert 288)
    (r3     uint32   :offset-assert 304)
@@ -8619,7 +8619,7 @@
   :method-count-assert 9
   :size-assert         #x174
   :flag-assert         #x900000174
-  )|#
+  )
   
 
 
@@ -53069,8 +53069,9 @@
 
 
   
-#|(deftype spartacus-editor (process)
-  ((selected-index        uint32  :offset-assert 152)
+(deftype spartacus-editor (process)
+  ((pad                   uint8  8 :offset-assert 144)
+   (selected-index        uint32   :offset-assert 152)
    (selected-type         uint32  :offset-assert 156)
    (selected-spawner-type uint32  :offset-assert 160)
    (backup-capture-mode   basic   :offset-assert 164)
@@ -53079,9 +53080,9 @@
    (hud                   uint64  :offset-assert 184)
    (scale-unit            float   :offset-assert 192)
    )
-  :method-count-assert 26
+  :method-count-assert 31
   :size-assert         #xc4
-  :flag-assert         #x1a004000c4
+  :flag-assert         #x1f004000c4
   (:methods
     (spartacus-editor-method-9 () none) ;; 9
     (spartacus-editor-method-10 () none) ;; 10
@@ -53101,9 +53102,9 @@
     (spartacus-editor-method-25 () none) ;; 25
     )
   (:state-methods
-    idle ;; 15
+    idle
     )
-  )|#
+  )
   
 
 
@@ -59509,23 +59510,23 @@
 (define-extern aux-voice-mgr object)
 (define-extern base-menu object)
 (define-extern blerc-dcache object)
-(define-extern bone-buffer object)
+;; (define-extern bone-buffer object) ;; clobbers active deftype
 (define-extern boss-hud object)
 (define-extern cam-dbg-scratch object)
 (define-extern camera-facing-quad object)
 (define-extern cloth-on-skeleton object)
-(define-extern collide-frag-vertex object)
+;; (define-extern collide-frag-vertex object) ;; clobbers active deftype
 (define-extern collide-probe-stack object)
 (define-extern color-array object)
 (define-extern combo-tracker object)
 (define-extern construction-object object)
-(define-extern daxter object)
+;; (define-extern daxter object) ;; clobbers active deftype
 (define-extern debris-group object)
 (define-extern debug-rigid-body-move object)
 ;; (define-extern disc-error-proc object) ;; activated as deftype
 (define-extern dma-test object)
-(define-extern drawable-tree-collide-fragment object)
-(define-extern drawable-tree-tfrag-trans object)
+;; (define-extern drawable-tree-collide-fragment object) ;; clobbers active deftype
+;; (define-extern drawable-tree-tfrag-trans object) ;; clobbers active deftype
 (define-extern driver-ashelin object)
 (define-extern driver-daxter object)
 (define-extern driver-gtblitz object)
@@ -59575,17 +59576,17 @@
 (define-extern hud-spartacus object)
 (define-extern hud-sprite object)
 (define-extern hud-sprite-work object)
-(define-extern instance object)
+;; (define-extern instance object) ;; clobbers active deftype
 (define-extern intro-hud-view object)
 (define-extern joint-mod-head object)
 (define-extern krasfemale object)
-(define-extern lightning-bolt object)
-(define-extern lightning-spans-array object)
-(define-extern lightning-tracker object)
+;; (define-extern lightning-bolt object) ;; clobbers active deftype
+;; (define-extern lightning-spans-array object) ;; clobbers active deftype
+;; (define-extern lightning-tracker object) ;; clobbers active deftype
 (define-extern light-trail object)
 (define-extern lobby-chat-string object)
 (define-extern manipulator object)
-(define-extern matrix-stack object)
+;; (define-extern matrix-stack object) ;; clobbers active deftype
 (define-extern medius-add-to-buddy-list-fwd-confirmation-request0 object)
 (define-extern medius-create-game-request object)
 (define-extern medius-file-download-response object)
@@ -59599,7 +59600,7 @@
 (define-extern mine-a object)
 (define-extern minimap-class-node object)
 (define-extern mountain-states object)
-(define-extern mysql-nav-node object)
+;; (define-extern mysql-nav-node object) ;; clobbers active deftype
 (define-extern nav-engine-spr-buffer object)
 (define-extern nav-find-clear-spot-work object)
 (define-extern nav-graph-command-array object)
@@ -59616,35 +59617,35 @@
 (define-extern power-slide-hud-single object)
 ;; prototype-bucket activated above at L20679
 (define-extern race-mesh-hash-search object)
-(define-extern ragdoll-edit-info object)
+;; (define-extern ragdoll-edit-info object) ;; clobbers active deftype
 ;; ragdoll-test activated at L50155
 (define-extern rb-debug-state-record object)
 (define-extern ripple-globals object)
 (define-extern sce-dirent object)
-(define-extern search-info object)
-(define-extern shrub-view-data object)
+;; (define-extern search-info object) ;; clobbers active deftype
+;; (define-extern shrub-view-data object) ;; clobbers active deftype
 (define-extern sky-work object)
 (define-extern smoke-particle object)
-(define-extern sparticle-birthinfo object)
-(define-extern sparticle-launchinfo object)
-(define-extern sparticle-subsampler object)
-(define-extern sparticle-system object)
+;; (define-extern sparticle-birthinfo object) ;; clobbers active deftype
+;; (define-extern sparticle-launchinfo object) ;; clobbers active deftype
+;; (define-extern sparticle-subsampler object) ;; clobbers active deftype
+;; (define-extern sparticle-system object) ;; clobbers active deftype
 (define-extern spooler-block object)
 (define-extern sprite-distorter-sine-tables object)
 (define-extern sprite-glow-consts object)
 (define-extern sprite-header object)
-(define-extern sprite-vec-data-2d object)
+;; (define-extern sprite-vec-data-2d object) ;; clobbers active deftype
 (define-extern subdivide-dists object)
 (define-extern task-arrow object)
 (define-extern terrain-context object)
 (define-extern test-process object)
 (define-extern text-display-nice-shot object)
-(define-extern tfrag-dists object)
+;; (define-extern tfrag-dists object) ;; clobbers active deftype
 (define-extern this-way object)
 (define-extern tie-consts object)
 (define-extern timer-hold-bank object)
 (define-extern timetrial-recording object)
-(define-extern trail-blocker object)
+;; (define-extern trail-blocker object) ;; clobbers active deftype
 (define-extern update-engine-loop-state-work object)
 (define-extern v-bear object)
 (define-extern v-bobcat object)
@@ -59672,18 +59673,18 @@
 (define-extern v-wpn-purple-shield object)
 (define-extern v-wpn-red-turbo-preventor object)
 (define-extern v-wpn-yellow-chain-gun object)
-(define-extern water-anim object)
-(define-extern wind-vector object)
+;; (define-extern water-anim object) ;; clobbers active deftype
+;; (define-extern wind-vector object) ;; clobbers active deftype
 (define-extern wvehicle-part-work object)
 
 ;; Auto-extern batch 2
-(define-extern bone-layout object)
-(define-extern collide-frag-mesh object)
-(define-extern connection-minimap object)
+;; (define-extern bone-layout object) ;; clobbers active deftype
+;; (define-extern collide-frag-mesh object) ;; clobbers active deftype
+;; (define-extern connection-minimap object) ;; clobbers active deftype
 (define-extern fact-info-crate object)
 (define-extern foreground-area object)
 (define-extern hang-time-hud-single object)
-(define-extern history object)
+;; (define-extern history object) ;; clobbers active deftype
 (define-extern hud-background object)
 (define-extern hud-box object)
 (define-extern hud-deathrace-stats-single object)
@@ -59696,7 +59697,7 @@
 (define-extern hud-results-grand-prix-totals object)
 (define-extern hud-results-view-0 object)
 (define-extern instance-shrub-work object)
-(define-extern joint-work object)
+;; (define-extern joint-work object) ;; clobbers active deftype
 (define-extern light-trail-breadcrumb object)
 (define-extern map-menu object)
 (define-extern medius-add-to-buddy-list-fwd-confirmation-request object)
@@ -59712,23 +59713,23 @@
 (define-extern net-player-rushhour object)
 (define-extern ocean-wave-frames object)
 (define-extern particle-buffer object)
-(define-extern ragdoll-joint object)
+;; (define-extern ragdoll-joint object) ;; clobbers active deftype
 (define-extern shadow-vu1-data object)
-(define-extern sky-sun-data object)
+;; (define-extern sky-sun-data object) ;; clobbers active deftype
 (define-extern special-intro-hud-view object)
 (define-extern sprite-hvdf-data object)
-(define-extern sprite-vec-data-3d object)
-(define-extern tfrag-data object)
-(define-extern tie-matrix object)
+;; (define-extern sprite-vec-data-3d object) ;; clobbers active deftype
+;; (define-extern tfrag-data object) ;; clobbers active deftype
+;; (define-extern tie-matrix object) ;; clobbers active deftype
 ;; (define-extern touch-tracker object) ;; activated as deftype
-(define-extern trail-conn-search object)
+;; (define-extern trail-conn-search object) ;; clobbers active deftype
 (define-extern update-engine-mix-state-work object)
 (define-extern vehicle-hud-view-1 object)
 (define-extern vehicle-wheel object)
 (define-extern v-wpn-red-mine-launcher object)
 (define-extern v-wpn-red-tractor-beam object)
 (define-extern v-wpn-yellow-default-gun object)
-(define-extern wind-dma object)
+;; (define-extern wind-dma object) ;; clobbers active deftype
 (define-extern wrong-way-linebot object)
 
 ;; Auto-extern batch 3
@@ -59752,16 +59753,16 @@
 (define-extern anim-test-sequence object)
 (define-extern animation-info object)
 (define-extern birth-pickup-at-point object)
-(define-extern bone-work object)
+;; (define-extern bone-work object) ;; clobbers active deftype
 (define-extern breadcrumb-array object)
 (define-extern cam-debug-tri object)
-(define-extern collide-fragment object)
+;; (define-extern collide-fragment object) ;; clobbers active deftype
 (define-extern collision-cylinder-array object)
 (define-extern editable-sample object)
 (define-extern eznet-combination object)
 (define-extern flow-control object)
 (define-extern fuel-cell object)
-(define-extern gui-control object)
+;; (define-extern gui-control object) ;; clobbers active deftype
 (define-extern helmet-garage object)
 (define-extern hud-artifact-indicators-view0 object)
 (define-extern hud-background-top-view-1 object)
@@ -59776,8 +59777,8 @@
 (define-extern knet-scert-function-0-args object)
 (define-extern knet-scert-function-2-args object)
 (define-extern light-trail-tracker object)
-(define-extern lightning-new-tracker object)
-(define-extern lightning-spans-internal-array object)
+;; (define-extern lightning-new-tracker object) ;; clobbers active deftype
+;; (define-extern lightning-spans-internal-array object) ;; clobbers active deftype
 (define-extern lobby-chat-window object)
 (define-extern medius-add-to-buddy-list-fwd-confirmation-response0 object)
 (define-extern medius-delete-clan-message-request object)
@@ -59786,7 +59787,7 @@
 (define-extern medius-ladder-list-extra-info-request object)
 (define-extern medius-status-response object)
 (define-extern minimap-draw-work object)
-(define-extern mysql-nav-node-array object)
+;; (define-extern mysql-nav-node-array object) ;; clobbers active deftype
 (define-extern nav-engine object)
 (define-extern nav-find-corner-work object)
 (define-extern nav-graph-editor object)
@@ -59797,20 +59798,20 @@
 (define-extern net-join-in-params object)
 (define-extern ocean-mid-constants object)
 (define-extern race-mesh-edge object)
-(define-extern ragdoll object)
+;; (define-extern ragdoll object) ;; clobbers active deftype
 (define-extern rb-debugger object)
 (define-extern rigid-body-work object)
 ;; simple-prim activated at L30073
-(define-extern sky-moon-data object)
+;; (define-extern sky-moon-data object) ;; clobbers active deftype
 (define-extern smoke-system object)
 (define-extern spartacus-editor object)
-(define-extern sparticle-launch-state object)
+;; (define-extern sparticle-launch-state object) ;; clobbers active deftype
 (define-extern sprite-area object)
 (define-extern sprite-aux-elem object)
 (define-extern starting-linebot object)
-(define-extern tfrag-dma object)
+;; (define-extern tfrag-dma object) ;; clobbers active deftype
 ;; tire-trail-crumb activated at L5613
-(define-extern trail-graph object)
+;; (define-extern trail-graph object) ;; clobbers active deftype
 (define-extern v-wpn-red-sentry-gun object)
 (define-extern v-wpn-yellow-grenade object)
 
@@ -59818,12 +59819,12 @@
 (define-extern anim-test-seq-item object)
 (define-extern anonymous-0 object)
 (define-extern base-menu-info object)
-(define-extern bone-memory object)
+;; (define-extern bone-memory object) ;; clobbers active deftype
 (define-extern cam-collision-record-array object)
 (define-extern collision-editor object)
 (define-extern cty-attack-reset object)
 (define-extern cty-faction-evaluate-commands object)
-(define-extern drawable-inline-array-collide-fragment object)
+;; (define-extern drawable-inline-array-collide-fragment object) ;; clobbers active deftype
 (define-extern editable-light object)
 (define-extern eznet-combination-list object)
 (define-extern hack-line-sphere object)
@@ -59843,16 +59844,16 @@
 (define-extern medius-ladder-list-extra-info-response0 object)
 (define-extern medius-text-filter-request object)
 (define-extern minimap object)
-(define-extern mysql-nav-edge object)
+;; (define-extern mysql-nav-edge object) ;; clobbers active deftype
 (define-extern nav-mesh-editable-array object)
 (define-extern net-host-peer-to-peer-in-params object)
 (define-extern ocean-near-constants object)
-(define-extern particle-birth-work object)
-(define-extern race-banner object)
+;; (define-extern particle-birth-work object) ;; clobbers active deftype
+;; (define-extern race-banner object) ;; clobbers active deftype
 (define-extern race-mesh-slice object)
-(define-extern ragdoll-proc object)
+;; (define-extern ragdoll-proc object) ;; clobbers active deftype
 (define-extern setup-city-task-faction object)
-(define-extern sky-upload-data object)
+;; (define-extern sky-upload-data object) ;; clobbers active deftype
 (define-extern sprite-aux-list object)
 (define-extern sz-ipaddress object)
 (define-extern task-arrow-params object)
@@ -59865,7 +59866,7 @@
 
 ;; Auto-extern batch 6
 (define-extern check-line-spheres-hack-work object)
-(define-extern cloud-vert-array object)
+;; (define-extern cloud-vert-array object) ;; clobbers active deftype
 (define-extern editable-entity object)
 (define-extern external-camera-controller object)
 (define-extern finish-banner object)
@@ -59881,7 +59882,7 @@
 (define-extern medius-get-clan-team-challenges-response object)
 (define-extern medius-ladder-list-extra-info-response object)
 (define-extern medius-text-filter-response object)
-(define-extern mysql-nav-edge-array object)
+;; (define-extern mysql-nav-edge-array object) ;; clobbers active deftype
 (define-extern nav-mesh-editor-undo object)
 (define-extern net-resolve-addr-data object)
 (define-extern net-type-client object)
@@ -59906,7 +59907,7 @@
 (define-extern medius-get-game-list-filter-request object)
 (define-extern medius-ladder-list-request object)
 (define-extern medius-transfer-clan-leadership-request object)
-(define-extern mysql-nav-visnode object)
+;; (define-extern mysql-nav-visnode object) ;; clobbers active deftype
 (define-extern nav-mesh-editor-undo-array object)
 (define-extern net-resolve-addr-in-params object)
 (define-extern net-type-lookup-params object)
@@ -59928,12 +59929,12 @@
 (define-extern medius-get-game-list-filter-response object)
 (define-extern medius-ladder-list-response object)
 (define-extern medius-transfer-clan-leadership-response object)
-(define-extern mysql-nav-visnode-array object)
+;; (define-extern mysql-nav-visnode-array object) ;; clobbers active deftype
 (define-extern net-incoming-client-in-params object)
 (define-extern net-lanfind-exchange-callback-out-args object)
 (define-extern oil-trail object)
 (define-extern rsa-key object)
-(define-extern sprite-info object)
+;; (define-extern sprite-info object) ;; clobbers active deftype
 (define-extern text-display-sblastered-view-1 object)
 (define-extern tread-trail object)
 
@@ -59946,7 +59947,7 @@
 (define-extern medius-get-ladder-stats-request object)
 (define-extern medius-ladder-position-extra-info-request object)
 (define-extern medius-update-clan-stats-request object)
-(define-extern mysql-nav-graph object)
+;; (define-extern mysql-nav-graph object) ;; clobbers active deftype
 (define-extern net-lanfind-in-params object)
 (define-extern net-type-broadcast-schedule object)
 (define-extern rsa-keypair object)
@@ -60446,9 +60447,9 @@
 (define-extern medius-universe-variable-information-response object)
 (define-extern medius-server-authentication-response object)
 (define-extern string-menu object)
-(define-extern sky-color-day object)
+;; (define-extern sky-color-day object) ;; clobbers active deftype
 (define-extern shadow-vu1-constants object)
-(define-extern sp-field-init-spec object)
+;; (define-extern sp-field-init-spec object) ;; clobbers active deftype
 
 ;; bubbles-path stub — entity-table references it
 (deftype bubbles-path (process)
