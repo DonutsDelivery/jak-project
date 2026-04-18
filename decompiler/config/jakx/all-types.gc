@@ -36593,7 +36593,7 @@
 
 (define-extern *blit-displays-work* object) ;; blit-displays-work
 (define-extern clear-zbuf function)
-(define-extern draw-color-bars function) ;; (function blit-displays-work none)
+(define-extern draw-color-bars (function blit-displays-work none))
 (define-extern draw-raw-image (function bucket-id art-group int vector vector level int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
