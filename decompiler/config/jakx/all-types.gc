@@ -47003,12 +47003,12 @@
 
 
   
-#|(deftype sprite-info (structure)
+(deftype sprite-info (structure)
   ((offset            vector :inline :offset-assert 0)
-   (offset-x          float          :offset-assert 0)
-   (offset-y          float          :offset-assert 4)
-   (offset-z          float          :offset-assert 8)
-   (offset-w          float          :offset-assert 12)
+   (offset-x          float          :offset 0)
+   (offset-y          float          :offset 4)
+   (offset-z          float          :offset 8)
+   (offset-w          float          :offset 12)
    (pos-z             int32          :offset-assert 16)
    (tex-name          basic          :offset-assert 20)
    (tex-id            uint32         :offset-assert 24)
@@ -47022,13 +47022,13 @@
   :method-count-assert 9
   :size-assert         #x29
   :flag-assert         #x900000029
-  )|#
+  )
   
 
 
 
   
-#|(deftype transition-info (animation-info)
+(deftype transition-info (animation-info)
   ((enter-pos-x     float  :offset-assert 48)
    (enter-pos-y     float  :offset-assert 52)
    (enter-alpha     float  :offset-assert 56)
@@ -47046,21 +47046,21 @@
   :method-count-assert 9
   :size-assert         #x64
   :flag-assert         #x900000064
-  )|#
+  )
   
 
 
 
   
-#|(deftype sprite-menu-info (base-menu-info)
-  ((trans-info   transition-info  :offset-assert 16)
+(deftype sprite-menu-info (base-menu-info)
+  ((trans-info   transition-info  :offset 16)
    (sprites-info basic            :offset-assert 52)
    (color        uint32           :offset-assert 56)
    )
   :method-count-assert 9
   :size-assert         #x3c
   :flag-assert         #x90000003c
-  )|#
+  )
   
 
 
