@@ -57064,7 +57064,7 @@
 
 
   
-#|(deftype scrolling-menu-medius (scrolling-menu)
+(deftype scrolling-menu-medius (scrolling-menu)
   ((prev-id         int32  :offset-assert 616)
    (prev-top-offset int32  :offset-assert 620)
    )
@@ -57072,10 +57072,9 @@
   :size-assert         #x270
   :flag-assert         #x4f01e00270
   (:methods
-    (scrolling-menu-medius-method-77 () none) ;; 77
     (scrolling-menu-medius-method-78 () none) ;; 78
     )
-  )|#
+  )
   
 
 
@@ -58245,12 +58244,7 @@
 
 
   
-#|(deftype scrolling-account-menu (scrolling-menu)
-  ()
-  :method-count-assert 77
-  :size-assert         #x268
-  :flag-assert         #x4d01e00268
-  )|#
+(deftype scrolling-account-menu (scrolling-menu) () :method-count-assert 78 :size-assert #x268 :flag-assert #x4e01e00268)
   
 
 
@@ -58318,12 +58312,7 @@
 
 
   
-#|(deftype scrolling-universe-menu (scrolling-menu)
-  ()
-  :method-count-assert 77
-  :size-assert         #x268
-  :flag-assert         #x4d01e00268
-  )|#
+(deftype scrolling-universe-menu (scrolling-menu) () :method-count-assert 78 :size-assert #x268 :flag-assert #x4e01e00268)
   
 
 
