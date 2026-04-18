@@ -2617,10 +2617,9 @@
 
 
   
-(declare-type hud-sprite structure)
-(deftype hud-item-sprite (hud-item)
-  ((scale-x      int16              :offset 26)
-   (real-scale-x int16              :offset 24)
+#|(deftype hud-item-sprite (hud-item)
+  ((scale-x      int16              :offset-assert 26)
+   (real-scale-x int16              :offset-assert 24)
    (sprite       hud-sprite         :offset-assert 40)
    (real-scale-y int16              :offset-assert 44)
    (scale-y      int16              :offset-assert 46)
@@ -2635,7 +2634,7 @@
   (:methods
     (hud-item-sprite-method-24 () none) ;; 24
     )
-  )
+  )|#
   
 
 
@@ -30300,21 +30299,21 @@
 
 
   
-#|(deftype touching-prims-entry-pool (structure)
-  ((head  touching-prims-entry    :offset-assert 0)
-   (nodes touching-prims-entry 64 :offset-assert 16) ;; guessed by decompiler
+(deftype touching-prims-entry-pool (structure)
+  ((head  touching-prims-entry            :offset-assert 0)
+   (nodes touching-prims-entry 64 :inline :offset-assert 16) ;; guessed by decompiler
    )
   :method-count-assert 13
   :size-assert         #x3c10
   :flag-assert         #xd00003c10
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type) _type_)
+    (new (symbol type) _type_) ;; 0
     (touching-prims-entry-pool-method-9 (_type_) touching-prims-entry) ;; 9
     (touching-prims-entry-pool-method-10 (_type_) int) ;; 10
     (touching-prims-entry-pool-method-11 (_type_) none) ;; 11
     (touching-prims-entry-pool-method-12 (_type_ touching-prims-entry) touching-prims-entry) ;; 12
     )
-  )|#
+  )
   
 
 
@@ -49832,25 +49831,26 @@
 
 
   
-#|(deftype water-anim (process-drawable)
+(deftype water-anim (process-drawable)
   ((water-height        meters        :offset-assert 248)
    (wade-height         meters        :offset-assert 252)
    (swim-height         meters        :offset-assert 256)
    (bottom-height       meters        :offset-assert 260)
-   (attack-event        symbol        :offset-assert 264) ;; guessed by decompiler
+   (attack-event        symbol        :offset-assert 264)
    (attack-id           uint32        :offset-assert 268)
-   (flow                flow-control  :offset-assert 272) ;; guessed by decompiler
-   (target              uint64        :offset-assert 280) ;; handle
-   (flags               water-flag    :offset-assert 288) ;; guessed by decompiler
-   (look                int32         :offset-assert 292) ;; wanim-look
-   (play-ambient-sound? symbol        :offset-assert 296) ;; guessed by decompiler
-   (visible             symbol        :offset-assert 300) ;; guessed by decompiler
+   (flow                flow-control  :offset-assert 272)
+   (target              uint64        :offset-assert 280)
+   (flags               water-flag    :offset-assert 288)
+   (look                int32         :offset-assert 292)
+   (play-ambient-sound? symbol        :offset-assert 296)
+   (visible             symbol        :offset-assert 300)
    )
   :method-count-assert 59
   :size-assert         #x130
   :flag-assert         #x3b00a00130
   (:methods
     (water-anim-method-50 () none) ;; 50
+    (idle () _type_ :state) ;; 51
     (water-anim-method-52 () none) ;; 52
     (water-anim-method-53 () none) ;; 53
     (water-anim-method-54 () none) ;; 54
@@ -49859,10 +49859,7 @@
     (water-anim-method-57 () none) ;; 57
     (water-anim-method-58 () none) ;; 58
     )
-  (:state-methods
-    idle ;; 51
-    )
-  )|#
+  )
   
 
 
@@ -59206,15 +59203,9 @@
 
 ;; part-tracker — full definition above at L29817
 
-;; touching-prims-entry-pool stub
-(deftype touching-prims-entry-pool (structure)
-  ()
-  :method-count-assert 9
-  :size-assert         #x0
-  :flag-assert         #x900000000
-  )
+;; touching-prims-entry-pool — full definition above at L30303
 
-;; touching-list stub
+;; touching-list stub (real deftype has :inline 16-byte alignment issue at offset 8)
 (deftype touching-list (structure)
   ()
   :method-count-assert 9
