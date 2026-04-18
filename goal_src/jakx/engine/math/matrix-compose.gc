@@ -1,13 +1,6 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; name: matrix-compose.gc
-;; name in dgo: matrix-compose
-;; dgos: GAME
-
-;; DECOMP BEGINS
-
-
 ;; definition for function matrix-fur-compose
 ;; INFO: Used lq/sq
 (defun matrix-fur-compose ((arg0 matrix) (arg1 vector) (arg2 vector) (arg3 vector))
