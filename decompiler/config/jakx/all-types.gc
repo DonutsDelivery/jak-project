@@ -1994,25 +1994,7 @@
 ;; camera-facing-quad             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
-  
-#|(deftype camera-facing-quad (prim-client)
-  ((pos    vector :inline :offset-assert 16)
-   (height float          :offset-assert 32)
-   (width  float          :offset-assert 36)
-   (strip  basic          :offset-assert 40)
-   (color  uint32         :offset-assert 44)
-   )
-  :method-count-assert 14
-  :size-assert         #x30
-  :flag-assert         #xe00000030
-  (:methods
-    (camera-facing-quad-method-10 () none) ;; 10
-    (camera-facing-quad-method-11 () none) ;; 11
-    (camera-facing-quad-method-12 () none) ;; 12
-    (camera-facing-quad-method-13 () none) ;; 13
-    )
-  )|#
+;; camera-facing-quad moved to after prim-client definition (L19718)
   
 
 
@@ -19746,7 +19728,26 @@
     (setup-dma-and-tex "Set up the bucket, prim sink, and texture." (_type_ draw-control) none) ;; 10
     )
   )
-  
+
+;; camera-facing-quad moved here from L1999 (precedes prim-client, needs parent resolved first)
+(deftype camera-facing-quad (prim-client)
+  ((pos    vector :inline :offset-assert 16)
+   (height float          :offset-assert 32)
+   (width  float          :offset-assert 36)
+   (strip  basic          :offset-assert 40)
+   (color  uint32         :offset-assert 44)
+   )
+  :method-count-assert 14
+  :size-assert         #x30
+  :flag-assert         #xe00000030
+  (:methods
+    (camera-facing-quad-method-10 () none) ;; 10
+    (camera-facing-quad-method-11 () none) ;; 11
+    (camera-facing-quad-method-12 () none) ;; 12
+    (camera-facing-quad-method-13 () none) ;; 13
+    )
+  )
+
 
 (deftype prim-sink (structure)
   ((vertex-count  uint8  :offset-assert 0)
