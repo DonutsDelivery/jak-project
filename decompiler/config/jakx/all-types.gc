@@ -55676,7 +55676,7 @@
 
 
   
-#|(deftype wind-rotor (process-drawable)
+(deftype wind-rotor (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -55684,7 +55684,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
@@ -55729,7 +55729,7 @@
 
 
   
-#|(deftype kras-tower (process-drawable)
+(deftype kras-tower (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -55737,13 +55737,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype kras-fishtank-lo (process-drawable)
+(deftype kras-fishtank-lo (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -55751,13 +55751,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype kras-rusty-sign (process-drawable)
+(deftype kras-rusty-sign (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -55765,7 +55765,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
@@ -55788,7 +55788,7 @@
 
 
   
-#|(deftype kras-flag (process-drawable)
+(deftype kras-flag (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -55796,13 +55796,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype kras-windsock (process-drawable)
+(deftype kras-windsock (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -55810,7 +55810,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
