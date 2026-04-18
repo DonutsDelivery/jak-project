@@ -474,6 +474,15 @@ namespace generic_warp_dest_proc { extern void link(); }
 namespace generic_warp_dest { extern void link(); }
 namespace generic_warp_envmap_dest { extern void link(); }
 namespace generic_no_light_proc { extern void link(); }
+// generic_merc.cpp port (see game/mips2c/jakx_functions/generic_merc.cpp)
+namespace generic_merc_init_asm { extern void link(); }
+namespace mercneric_convert { extern void link(); }
+namespace high_speed_reject { extern void link(); }
+namespace generic_translucent { extern void link(); }
+namespace generic_merc_query { extern void link(); }
+namespace generic_merc_death { extern void link(); }
+namespace generic_merc_execute_asm { extern void link(); }
+namespace generic_merc_do_chain { extern void link(); }
 }
 // clang-format on
 
@@ -832,11 +841,13 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      {"ocean",
       {jakx::init_ocean_far_regs::link, jakx::draw_large_polygon_ocean::link,
        jakx::render_ocean_quad::link}},
+     // generic-merc: jakx-native ports — structurally identical to jak3;
+     // jakx namespace only. See game/mips2c/jakx_functions/generic_merc.cpp.
      {"generic-merc",
-      {jak3::generic_merc_do_chain::link, jak3::generic_merc_execute_asm::link,
-       jak3::generic_merc_death::link, jak3::generic_merc_query::link,
-       jak3::generic_translucent::link, jak3::high_speed_reject::link,
-       jak3::mercneric_convert::link, jak3::generic_merc_init_asm::link}},
+      {jakx::generic_merc_do_chain::link, jakx::generic_merc_execute_asm::link,
+       jakx::generic_merc_death::link, jakx::generic_merc_query::link,
+       jakx::generic_translucent::link, jakx::high_speed_reject::link,
+       jakx::mercneric_convert::link, jakx::generic_merc_init_asm::link}},
      {"sky-tng",
       // JakX-native ports — see game/mips2c/jakx_functions/sky.cpp.
       // Simple funcs (set-tex-offset, render-sky-quad/tri, draw-large-polygon,
