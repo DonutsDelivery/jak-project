@@ -54929,7 +54929,7 @@
 
 
   
-(deftype coli-statue (process-drawable)
+#|(deftype coli-statue (process-drawable)
   ((actor-group       uint32  :offset-assert 244)
    (actor-group-count int32   :offset-assert 248)
    (destruction-time  int32   :offset-assert 252)
@@ -54938,16 +54938,16 @@
   :method-count-assert 55
   :size-assert         #x108
   :flag-assert         #x3700800108
-  (:state-methods
-    idle ;; 50
-    explode ;; 51
-    )
   (:methods
     (coli-statue-method-52 () none) ;; 52
     (coli-statue-method-53 () none) ;; 53
     (coli-statue-method-54 () none) ;; 54
     )
-  )
+  (:state-methods
+    idle ;; 50
+    explode ;; 51
+    )
+  )|#
   
 
 
