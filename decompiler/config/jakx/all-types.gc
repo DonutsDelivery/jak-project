@@ -43791,6 +43791,123 @@
     idle ;; 50
     )
   )
+
+;; vehicle-weapon-slot cluster — 10 of 11 children activated
+;; (tractor-beam deferred: offset-assert 224 conflicts with parent fields)
+
+;; v-wpn-red-smoke / v-wpn-red-oil deferred: slot 61 is (state _type_) at runtime
+;; but regen shows it as method. Revisit after understanding actual state layout.
+
+(deftype v-wpn-yellow-chain-gun (vehicle-weapon-slot)
+  ((last-fire-event uint64  :offset-assert 264)
+   (firecontrol     basic   :offset-assert 272)
+   (blam            uint32  :offset-assert 276)
+   )
+  :method-count-assert 61
+  :size-assert         #x118
+  :flag-assert         #x3d00900118
+  (:state-methods
+    idle ;; 50
+    firing ;; 60
+    )
+  )
+
+(deftype v-wpn-yellow-default-gun (vehicle-weapon-slot)
+  ((last-fire-event uint64  :offset-assert 264)
+   (firecontrol     basic   :offset-assert 272)
+   (blam            uint32  :offset-assert 276)
+   )
+  :method-count-assert 61
+  :size-assert         #x118
+  :flag-assert         #x3d00900118
+  (:state-methods
+    idle ;; 50
+    firing ;; 60
+    )
+  )
+
+(deftype v-wpn-yellow-grenade (vehicle-weapon-slot)
+  ((next-shot-allowed uint64  :offset-assert 264)
+   (next-to-fire      uint8   :offset-assert 272)
+   )
+  :method-count-assert 60
+  :size-assert         #x111
+  :flag-assert         #x3c00900111
+  (:state-methods
+    idle ;; 50
+    )
+  )
+
+(deftype v-wpn-yellow-guided-missile (vehicle-weapon-slot)
+  ((next-shot-allowed        uint64    :offset-assert 264)
+   (next-to-fire             uint8     :offset-assert 272)
+   (targ-list                uint64 4  :offset-assert 280)
+   (run-targeting-this-frame int8      :offset-assert 312)
+   )
+  :method-count-assert 61
+  :size-assert         #x139
+  :flag-assert         #x3d00b00139
+  (:state-methods
+    idle ;; 50
+    firing ;; 60
+    )
+  )
+
+(deftype v-wpn-yellow-seismic-blaster (vehicle-weapon-slot)
+  ((fire-at      uint32  :offset-assert 264)
+   (on-hud-indic int8    :offset-assert 268)
+   )
+  :method-count-assert 62
+  :size-assert         #x10d
+  :flag-assert         #x3e0080010d
+  (:state-methods
+    idle ;; 50
+    firing ;; 60
+    backfiring ;; 61
+    )
+  )
+
+(deftype v-wpn-red-turbo-preventor (vehicle-weapon-slot)
+  ((sound-id  uint32  :offset-assert 264)
+   (player-id int8    :offset-assert 268)
+   (snd-loop  uint32  :offset-assert 272)
+   )
+  :method-count-assert 61
+  :size-assert         #x114
+  :flag-assert         #x3d00900114
+  (:state-methods
+    idle ;; 50
+    firing ;; 60
+    )
+  )
+
+(deftype v-wpn-red-mine-launcher (vehicle-weapon-slot)
+  ((salvo-count uint8   :offset-assert 261)
+   (last-fired  uint64  :offset-assert 264)
+   )
+  :method-count-assert 61
+  :size-assert         #x110
+  :flag-assert         #x3d00800110
+  (:state-methods
+    idle ;; 50
+    firing ;; 60
+    )
+  )
+
+(deftype v-wpn-purple-shield (vehicle-weapon-slot)
+  ((mysound          uint32  :offset-assert 264)
+   (zap-interval     uint64  :offset-assert 272)
+   (jiggle-start     uint64  :offset-assert 280)
+   (jiggle-amplitude float   :offset-assert 288)
+   )
+  :method-count-assert 61
+  :size-assert         #x124
+  :flag-assert         #x3d00a00124
+  (:state-methods
+    idle ;; 50
+    firing ;; 60
+    )
+  )
   
 
 
@@ -58911,9 +59028,9 @@
 ;; (define-extern v-wolf object) ;; clobbers active deftype
 ;; (define-extern v-wombat object) ;; clobbers active deftype
 (define-extern v-wpn-net-info object)
-(define-extern v-wpn-purple-shield object)
-(define-extern v-wpn-red-turbo-preventor object)
-(define-extern v-wpn-yellow-chain-gun object)
+;; (define-extern v-wpn-purple-shield object) ;; activated as deftype
+;; (define-extern v-wpn-red-turbo-preventor object) ;; activated as deftype
+;; (define-extern v-wpn-yellow-chain-gun object) ;; activated as deftype
 ;; (define-extern water-anim object) ;; clobbers active deftype
 ;; (define-extern wind-vector object) ;; clobbers active deftype
 (define-extern wvehicle-part-work object)
@@ -58967,9 +59084,9 @@
 (define-extern update-engine-mix-state-work object)
 ;;(define-extern vehicle-hud-view-1 object)
 ;; (define-extern vehicle-wheel object) ;; activated as deftype
-(define-extern v-wpn-red-mine-launcher object)
+;; (define-extern v-wpn-red-mine-launcher object) ;; activated as deftype
 (define-extern v-wpn-red-tractor-beam object)
-(define-extern v-wpn-yellow-default-gun object)
+;; (define-extern v-wpn-yellow-default-gun object) ;; activated as deftype
 ;; (define-extern wind-dma object) ;; clobbers active deftype
 (define-extern wrong-way-linebot object)
 
@@ -59054,7 +59171,7 @@
 ;; tire-trail-crumb activated at L5613
 ;; (define-extern trail-graph object) ;; clobbers active deftype
 ;;(define-extern v-wpn-red-sentry-gun object)
-(define-extern v-wpn-yellow-grenade object)
+;; (define-extern v-wpn-yellow-grenade object) ;; activated as deftype
 
 ;; Auto-extern batch 5
 ;;(define-extern anim-test-seq-item object)
@@ -59100,7 +59217,7 @@
 ;;(define-extern task-arrow-params object)
 ;;(define-extern tire-trail object)
 ;;(define-extern v-wpn-red-drone-gun object)
-(define-extern v-wpn-yellow-guided-missile object)
+;; (define-extern v-wpn-yellow-guided-missile object) ;; activated as deftype
 ;;(define-extern water-flow object)
 ;; weapon-trail-crumb activated earlier in file
 ;;(define-extern work-area object)
@@ -59134,7 +59251,7 @@
 (define-extern sprite-frame-data object)
 ;;(define-extern text-display-deflected-view-1 object)
 ;;(define-extern tire-trail-tracker object)
-(define-extern v-wpn-red-smoke object)
+;; (define-extern v-wpn-red-smoke object) ;; activated as deftype
 ;;(define-extern weapon-trail object)
 
 ;; Auto-extern batch 7
@@ -59251,7 +59368,7 @@
 (define-extern net-lanfind-callback-data-args object)
 (define-extern net-stream-media-video-play-data object)
 ;;(define-extern prim-strip-menu object)
-(define-extern v-wpn-red-oil object)
+;; (define-extern v-wpn-red-oil object) ;; activated as deftype
 
 ;; Auto-extern batch 14
 (define-extern medius-account-get-profile-response object)
