@@ -51487,7 +51487,7 @@
 
 
   
-#|(deftype anim-test-obj (glst-named-node)
+(deftype anim-test-obj (glst-named-node)
   ((obj-art-group basic                :offset-assert 12)
    (seq-list      glst-list    :inline :offset-assert 16)
    (flags         int32                :offset-assert 32)
@@ -51503,7 +51503,7 @@
   :method-count-assert 9
   :size-assert         #x90
   :flag-assert         #x900000090
-  )|#
+  )
   
 
 
