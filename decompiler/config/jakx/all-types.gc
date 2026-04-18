@@ -20749,7 +20749,7 @@
 
 
   
-#|(deftype prototype-bucket-tie (prototype-bucket)
+(deftype prototype-bucket-tie (prototype-bucket)
   ((next                        uint32                      12       :offset-assert 64) ;; guessed by decompiler
    (count                       uint16                      12       :offset-assert 112) ;; guessed by decompiler
    (frag-count                  uint8                       4        :offset-assert 136) ;; guessed by decompiler
@@ -20764,100 +20764,100 @@
    (collide-hash-fragment-array collide-hash-fragment-array          :offset-assert 176) ;; guessed by decompiler
    (tie-colors                  time-of-day-palette                  :offset-assert 180) ;; guessed by decompiler
    (data                        uint32                      :dynamic :offset-assert 184) ;; guessed by decompiler
-   (color-index-qwc             uint32                      :dynamic :offset-assert 184) ;; guessed by decompiler
-   (scissor-frag-count          uint8                                :offset-assert 136)
-   (near-frag-count             uint8                                :offset-assert 137)
-   (mid-frag-count              uint8                                :offset-assert 138)
-   (far-frag-count              uint8                                :offset-assert 139)
-   (scissor-index-start         uint8                                :offset-assert 140)
-   (near-index-start            uint8                                :offset-assert 141)
-   (mid-index-start             uint8                                :offset-assert 142)
-   (far-index-start             uint8                                :offset-assert 143)
-   (scissor-base-qw             uint16                               :offset-assert 144)
-   (near-base-qw                uint16                               :offset-assert 146)
-   (mid-base-qw                 uint16                               :offset-assert 148)
-   (far-base-qw                 uint16                               :offset-assert 150)
-   (tie-next                    uint32                      4        :offset-assert 64) ;; guessed by decompiler
-   (tie-scissor-next            uint32                               :offset-assert 64)
-   (tie-near-next               uint32                               :offset-assert 68)
-   (tie-mid-next                uint32                               :offset-assert 72)
-   (tie-far-next                uint32                               :offset-assert 76)
-   (trans-next                  uint32                      4        :offset-assert 64) ;; guessed by decompiler
-   (trans-scissor-next          uint32                      4        :offset-assert 64) ;; guessed by decompiler
-   (trans-near-next             uint32                               :offset-assert 68)
-   (trans-mid-next              uint32                               :offset-assert 72)
-   (trans-far-next              uint32                               :offset-assert 76)
-   (water-next                  uint32                      4        :offset-assert 64) ;; guessed by decompiler
-   (water-scissor-next          uint32                      4        :offset-assert 64) ;; guessed by decompiler
-   (water-near-next             uint32                               :offset-assert 68)
-   (water-mid-next              uint32                               :offset-assert 72)
-   (water-far-next              uint32                               :offset-assert 76)
-   (envmap-next                 uint32                      4        :offset-assert 80) ;; guessed by decompiler
-   (envmap-scissor-next         uint32                      4        :offset-assert 80) ;; guessed by decompiler
-   (envmap-near-next            uint32                               :offset-assert 84)
-   (envmap-mid-next             uint32                               :offset-assert 88)
-   (envmap-far-next             uint32                               :offset-assert 92)
-   (generic-next                uint32                      3        :offset-assert 96) ;; guessed by decompiler
-   (generic-near-next           uint32                               :offset-assert 96)
-   (generic-mid-next            uint32                               :offset-assert 100)
-   (generic-far-next            uint32                               :offset-assert 104)
-   (vanish-next                 uint32                               :offset-assert 108)
-   (tie-count                   uint16                      4        :offset-assert 112) ;; guessed by decompiler
-   (tie-scissor-count           uint16                               :offset-assert 112)
-   (tie-near-count              uint16                               :offset-assert 114)
-   (tie-mid-count               uint16                               :offset-assert 116)
-   (tie-far-count               uint16                               :offset-assert 118)
-   (trans-count                 uint16                      4        :offset-assert 112) ;; guessed by decompiler
-   (trans-scissor-count         uint16                               :offset-assert 112)
-   (trans-near-count            uint16                               :offset-assert 114)
-   (trans-mid-count             uint16                               :offset-assert 116)
-   (trans-far-count             uint16                               :offset-assert 118)
-   (water-count                 uint16                      4        :offset-assert 112) ;; guessed by decompiler
-   (water-scissor-count         uint16                               :offset-assert 112)
-   (water-near-count            uint16                               :offset-assert 114)
-   (water-mid-count             uint16                               :offset-assert 116)
-   (water-far-count             uint16                               :offset-assert 118)
-   (envmap-count                uint16                      4        :offset-assert 120) ;; guessed by decompiler
-   (envmap-scissor-count        uint16                               :offset-assert 120)
-   (envmap-near-count           uint16                               :offset-assert 122)
-   (envmap-mid-count            uint16                               :offset-assert 124)
-   (envmap-far-count            uint16                               :offset-assert 126)
-   (generic-count               uint16                      3        :offset-assert 128) ;; guessed by decompiler
-   (generic-near-count          uint16                               :offset-assert 128)
-   (generic-mid-count           uint16                               :offset-assert 130)
-   (generic-far-count           uint16                               :offset-assert 132)
-   (vanish-count                uint16                               :offset-assert 134)
-   (next-clear                  uint128                     3        :offset-assert 64) ;; guessed by decompiler
-   (count-clear                 uint64                      3        :offset-assert 112) ;; guessed by decompiler
+   (color-index-qwc             uint32                      :dynamic :offset 184) ;; guessed by decompiler
+   (scissor-frag-count          uint8                                :offset 136)
+   (near-frag-count             uint8                                :offset 137)
+   (mid-frag-count              uint8                                :offset 138)
+   (far-frag-count              uint8                                :offset 139)
+   (scissor-index-start         uint8                                :offset 140)
+   (near-index-start            uint8                                :offset 141)
+   (mid-index-start             uint8                                :offset 142)
+   (far-index-start             uint8                                :offset 143)
+   (scissor-base-qw             uint16                               :offset 144)
+   (near-base-qw                uint16                               :offset 146)
+   (mid-base-qw                 uint16                               :offset 148)
+   (far-base-qw                 uint16                               :offset 150)
+   (tie-next                    uint32                      4        :offset 64) ;; guessed by decompiler
+   (tie-scissor-next            uint32                               :offset 64)
+   (tie-near-next               uint32                               :offset 68)
+   (tie-mid-next                uint32                               :offset 72)
+   (tie-far-next                uint32                               :offset 76)
+   (trans-next                  uint32                      4        :offset 64) ;; guessed by decompiler
+   (trans-scissor-next          uint32                      4        :offset 64) ;; guessed by decompiler
+   (trans-near-next             uint32                               :offset 68)
+   (trans-mid-next              uint32                               :offset 72)
+   (trans-far-next              uint32                               :offset 76)
+   (water-next                  uint32                      4        :offset 64) ;; guessed by decompiler
+   (water-scissor-next          uint32                      4        :offset 64) ;; guessed by decompiler
+   (water-near-next             uint32                               :offset 68)
+   (water-mid-next              uint32                               :offset 72)
+   (water-far-next              uint32                               :offset 76)
+   (envmap-next                 uint32                      4        :offset 80) ;; guessed by decompiler
+   (envmap-scissor-next         uint32                      4        :offset 80) ;; guessed by decompiler
+   (envmap-near-next            uint32                               :offset 84)
+   (envmap-mid-next             uint32                               :offset 88)
+   (envmap-far-next             uint32                               :offset 92)
+   (generic-next                uint32                      3        :offset 96) ;; guessed by decompiler
+   (generic-near-next           uint32                               :offset 96)
+   (generic-mid-next            uint32                               :offset 100)
+   (generic-far-next            uint32                               :offset 104)
+   (vanish-next                 uint32                               :offset 108)
+   (tie-count                   uint16                      4        :offset 112) ;; guessed by decompiler
+   (tie-scissor-count           uint16                               :offset 112)
+   (tie-near-count              uint16                               :offset 114)
+   (tie-mid-count               uint16                               :offset 116)
+   (tie-far-count               uint16                               :offset 118)
+   (trans-count                 uint16                      4        :offset 112) ;; guessed by decompiler
+   (trans-scissor-count         uint16                               :offset 112)
+   (trans-near-count            uint16                               :offset 114)
+   (trans-mid-count             uint16                               :offset 116)
+   (trans-far-count             uint16                               :offset 118)
+   (water-count                 uint16                      4        :offset 112) ;; guessed by decompiler
+   (water-scissor-count         uint16                               :offset 112)
+   (water-near-count            uint16                               :offset 114)
+   (water-mid-count             uint16                               :offset 116)
+   (water-far-count             uint16                               :offset 118)
+   (envmap-count                uint16                      4        :offset 120) ;; guessed by decompiler
+   (envmap-scissor-count        uint16                               :offset 120)
+   (envmap-near-count           uint16                               :offset 122)
+   (envmap-mid-count            uint16                               :offset 124)
+   (envmap-far-count            uint16                               :offset 126)
+   (generic-count               uint16                      3        :offset 128) ;; guessed by decompiler
+   (generic-near-count          uint16                               :offset 128)
+   (generic-mid-count           uint16                               :offset 130)
+   (generic-far-count           uint16                               :offset 132)
+   (vanish-count                uint16                               :offset 134)
+   (next-clear                  uint128                     3        :offset 64) ;; guessed by decompiler
+   (count-clear                 uint64                      3        :offset 112) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #xb8
   :flag-assert         #x9000000b8
-  )|#
+  )
   
 
 
 
   
-#|(deftype prototype-array-tie (array)
-  ((type             type   :offset-assert 0) ;; guessed by decompiler
-   (length           int32  :offset-assert 4)
-   (allocated-length int32  :offset-assert 8)
-   (content-type     type   :offset-assert 12) ;; guessed by decompiler
+(deftype prototype-array-tie (array)
+  ((type             type :offset 0) ;; guessed by decompiler
+   (length           int32 :offset 4)
+   (allocated-length int32 :offset 8)
+   (content-type     type :offset 12) ;; guessed by decompiler
    )
   :method-count-assert 10
   :size-assert         #x10
   :flag-assert         #xa00000010
   (:methods
-    (prototype-array-tie-method-9 () none) ;; 9 ;; (prototype-array-tie-method-9 () none)
+    (prototype-array-tie-method-9 () none) ;; 9
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype proxy-prototype-array-tie (basic)
+(deftype proxy-prototype-array-tie (basic)
   ((prototype-array-tie prototype-array-tie  :offset-assert 4) ;; guessed by decompiler
    (wind-vectors        uint32               :offset-assert 8)
    (wind-count          uint16               :offset-assert 12)
@@ -20866,7 +20866,7 @@
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
-  )|#
+  )
   
 
 
@@ -31855,16 +31855,16 @@
 
 
   
-#|(deftype instance-tie (instance)
-  ((color-indices uint32                :offset-assert 8)
-   (bucket-ptr    prototype-bucket-tie  :offset-assert 12) ;; guessed by decompiler
-   (max-scale     uint16                :offset-assert 38)
-   (rmin-scale    uint16                :offset-assert 54)
+(deftype instance-tie (instance)
+  ((color-indices uint32 :offset 8)
+   (bucket-ptr    prototype-bucket-tie :offset 12) ;; guessed by decompiler
+   (max-scale     uint16 :offset 38)
+   (rmin-scale    uint16 :offset 54)
    )
   :method-count-assert 17
   :size-assert         #x40
   :flag-assert         #x1100000040
-  )|#
+  )
   
 
 
