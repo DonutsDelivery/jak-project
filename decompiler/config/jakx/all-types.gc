@@ -5610,15 +5610,7 @@
 
 
   
-;; tire-trail-crumb moved to after light-trail-breadcrumb definition (L39921+)
-#|(deftype tire-trail-crumb (light-trail-breadcrumb)
-  ((offset     vector :inline :offset-assert 16)
-   (uu         float          :offset 28 :overlay-at (-> offset w))
-   )
-  :method-count-assert 9
-  :size-assert         #x20
-  :flag-assert         #x900000020
-  )|#
+;; tire-trail-crumb activated at L40028 (below tread-trail-crumb)
   
 
 
@@ -39719,12 +39711,12 @@
 
 
   
-#|(deftype simple-prim-zbuf-mask (simple-prim)
+(deftype simple-prim-zbuf-mask (simple-prim)
   ()
   :method-count-assert 56
   :size-assert         #xfc
   :flag-assert         #x38007000fc
-  )|#
+  )
   
 
 
@@ -40012,6 +40004,15 @@
   
 (deftype tread-trail-crumb (light-trail-breadcrumb)
   ((normal vector :inline :offset-assert 16)
+   )
+  :method-count-assert 9
+  :size-assert         #x20
+  :flag-assert         #x900000020
+  )
+
+(deftype tire-trail-crumb (light-trail-breadcrumb)
+  ((offset vector :inline :offset-assert 16)
+   (uu     float         :offset 28 :overlay-at (-> offset w))
    )
   :method-count-assert 9
   :size-assert         #x20
@@ -46803,12 +46804,12 @@
 
 
   
-#|(deftype menu-string (hud-string)
+(deftype menu-string (hud-string)
   ()
   :method-count-assert 10
   :size-assert         #x44
   :flag-assert         #xa00000044
-  )|#
+  )
   
 
 
@@ -56952,14 +56953,14 @@
 
 
   
-#|(deftype scrolling-item (string-menu)
+(deftype scrolling-item (string-menu)
   ((selected     basic  :offset-assert 560)
    (scroll-alpha float  :offset-assert 564)
    )
   :method-count-assert 69
   :size-assert         #x238
   :flag-assert         #x4501b00238
-  )|#
+  )
   
 
 
@@ -57658,56 +57659,56 @@
 
 
   
-#|(deftype dropdown-cup (dropdown-item)
+(deftype dropdown-cup (dropdown-item)
   ()
   :method-count-assert 70
   :size-assert         #x250
   :flag-assert         #x4601c00250
-  )|#
+  )
   
 
 
 
   
-#|(deftype dropdown-cup-strings (dynamic-string-menu)
+(deftype dropdown-cup-strings (dynamic-string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
 
   
-#|(deftype dropdown-cup-borders (prim-strip-menu)
+(deftype dropdown-cup-borders (prim-strip-menu)
   ()
   :method-count-assert 67
   :size-assert         #x228
   :flag-assert         #x4301a00228
-  )|#
+  )
   
 
 
 
   
-#|(deftype adventure-top-bar (string-menu)
+(deftype adventure-top-bar (string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
 
   
-#|(deftype adventure-cup-score (string-menu)
+(deftype adventure-cup-score (string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
