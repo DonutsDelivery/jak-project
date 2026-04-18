@@ -50131,31 +50131,22 @@
 
 
 
-#|
 (deftype rigid-body-queue-manager (process)
   ((queue      rigid-body-queue   :offset-assert 144)
    (time-val   uint32             :offset-assert 148)
    (pad        uint32             :offset-assert 152)
    (state-time uint64             :offset-assert 160)
    (delay      uint32             :offset-assert 168)
-   (times      UNKNOWN          4 :offset-assert 172)
+   (times      uint32           4 :offset-assert 172)
    )
   :method-count-assert 16
   :size-assert         #xbc
   :flag-assert         #x10003000bc
   (:methods
-    (rigid-body-queue-manager-method-9 () none) ;; 9
-    (rigid-body-queue-manager-method-10 () none) ;; 10
-    (rigid-body-queue-manager-method-11 () none) ;; 11
-    (rigid-body-queue-manager-method-12 () none) ;; 12
-    (rigid-body-queue-manager-method-13 () none) ;; 13
-    (rigid-body-queue-manager-method-14 () _type_ :state) ;; 14
-    )
-  (:state-methods
-    idle ;; 15
+    (rigid-body-queue-manager-method-14 () none) ;; 14 (filler — jakx +5 slot shift)
+    (idle () _type_ :state) ;; 15
     )
   )
-|#
 
 
 (define-extern *rigid-body-queue* object)
@@ -51251,16 +51242,16 @@
 
 
   
-#|(deftype search-info (structure)
+(deftype search-info (structure)
   ((point        vector            :inline :offset-assert 0)
    (best-point   vector            :inline :offset-assert 16)
    (match-handle uint64                    :offset-assert 32) ;; handle
    (match        process-focusable         :offset-assert 40) ;; guessed by decompiler
    (best         float                     :offset-assert 44)
    (radius       float                     :offset-assert 48)
-   (rating       search-info-flag          :offset-assert 52)
-   (require      search-info-flag          :offset-assert 56)
-   (mask         search-info-flag          :offset-assert 60)
+   (rating       uint32                    :offset-assert 52) ;; search-info-flag
+   (require      uint32                    :offset-assert 56) ;; search-info-flag
+   (mask         uint32                    :offset-assert 60) ;; search-info-flag
    (rot-base     vector            :inline :offset-assert 64)
    (back-point   vector            :inline :offset-assert 80)
    (rot-range    float                     :offset-assert 96)
@@ -51268,7 +51259,7 @@
   :method-count-assert 9
   :size-assert         #x64
   :flag-assert         #x900000064
-  )|#
+  )
   
 
 
