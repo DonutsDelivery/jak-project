@@ -2481,7 +2481,7 @@
 (define-extern explosion-init-by-other function) ;; (function explosion-init-params object :behavior explosion)
 (define-extern explosion-spawn-legacy-version (function process-drawable type explosion-init-params (pointer process)))
 (define-extern explosion-spawn (function explosion-init-params process-drawable none))
-(define-extern find-closest-solid-sphere-prim (function collide-shape vector collide-spec collide-shape-prim))
+(define-extern find-closest-solid-sphere-prim function) ;; (function collide-shape vector collide-spec collide-shape-prim)
 (define-extern *explosion-debug-sphere* sphere) ;; sphere
 (define-extern explosion-handle-touch-with-ccheck function)
 (define-extern explosion-handle-touch-without-ccheck function)
