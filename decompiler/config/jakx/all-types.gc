@@ -21034,7 +21034,8 @@
    (fix-jmp-table  (function none)             16      :offset-assert 1616) ;; guessed by decompiler
    (frm-jmp-table  (function none)             16      :offset-assert 1680) ;; guessed by decompiler
    (pair-jmp-table (function none)             16      :offset-assert 1744) ;; guessed by decompiler
-   (num-uploads    int32                               :offset 2384)
+   (uploads        channel-upload-info         24 :inline :offset-assert 1808) ;; guessed by decompiler
+   (num-uploads    int32                               :offset-assert 2384)
    (mtx-acc        matrix                      2 :inline :offset-assert 2400) ;; guessed by decompiler
    (tq-acc         transformq                  100 :inline :offset-assert 2528) ;; guessed by decompiler
    (jacp-hdr       joint-anim-compressed-hdr   :inline :offset-assert 7328)
@@ -56973,8 +56974,9 @@
 
 
   
-#|(deftype scrolling-menu-info (dropdown-item-info)
-  ((item-spacing                vector         :inline :offset-assert 128)
+(deftype scrolling-menu-info (dropdown-item-info)
+  ((pad122                      uint8 6                :offset-assert 122)
+   (item-spacing                vector         :inline :offset-assert 128)
    (offset-to-top-item          vector         :inline :offset-assert 144)
    (scroll-stages               int32                  :offset-assert 160)
    (visible-item-ct             int32                  :offset-assert 164)
@@ -56988,7 +56990,7 @@
   :method-count-assert 9
   :size-assert         #xc0
   :flag-assert         #x9000000c0
-  )|#
+  )
   
 
 
