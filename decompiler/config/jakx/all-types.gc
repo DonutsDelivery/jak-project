@@ -39531,15 +39531,13 @@
 
 
   
-#|(deftype float-array (inline-array-class)
-  ((length           int32          :offset-assert 4)
-   (allocated-length int32          :offset-assert 8)
-   (data             float :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype float-array (inline-array-class)
+  ((data float :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -40188,15 +40186,13 @@
 
 
   
-#|(deftype color-array (inline-array-class)
-  ((length           int32          :offset-assert 4)
-   (allocated-length int32          :offset-assert 8)
-   (data             rgbaf :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype color-array (inline-array-class)
+  ((data rgbaf :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
