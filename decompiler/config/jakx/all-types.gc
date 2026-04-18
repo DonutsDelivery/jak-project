@@ -1829,7 +1829,7 @@
   ((initial-quat quaternion :inline :offset-assert 256)
    (initial-pos  vector     :inline :offset-assert 272)
    (hover-sound  uint32             :offset-assert 288)
-   (l-control    UNKNOWN    3       :offset-assert 292)
+   (l-control    uint8      12      :offset-assert 292)
    (my-vehicle   uint64             :offset-assert 304)
    (spawn-part   uint64             :offset-assert 312)
    (vehicle-part uint64             :offset-assert 320)
@@ -1838,12 +1838,12 @@
   :method-count-assert 53
   :size-assert         #x14c
   :flag-assert         #x3500c0014c
+  (:state-methods
+    idle  ;; 50
+    shoot ;; 51
+    )
   (:methods
     (wrong-way-linebot-method-52 () none) ;; 52
-    )
-  (:state-methods
-    idle ;; 50
-    shoot ;; 51
     )
   )
 |#
@@ -1992,19 +1992,17 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#|
 (deftype net-enemy-transition (structure)
-  ((timestamp int32      :offset-assert 0)
-   (name      basic      :offset-assert 4)
-   (preempt   basic      :offset-assert 8)
-   (data-len  int32      :offset-assert 12)
-   (buf-data  UNKNOWN 64 :offset-assert 16)
+  ((timestamp int32    :offset-assert 0)
+   (name      basic    :offset-assert 4)
+   (preempt   basic    :offset-assert 8)
+   (data-len  int32    :offset-assert 12)
+   (buf-data  uint8 64 :offset-assert 16)
    )
   :method-count-assert 9
   :size-assert         #x50
   :flag-assert         #x900000050
   )
-|#
 
 
 
@@ -4999,6 +4997,7 @@
 
 
   
+#|
 (deftype vehicle-reticle-base (process)
   ((owner      uint64  :offset-assert 144)
    (state-time uint64  :offset-assert 152)
@@ -5014,11 +5013,20 @@
     (vehicle-reticle-base-method-13 () none) ;; 13
     (vehicle-reticle-base-method-14 () none) ;; 14
     )
+  (:state-methods
+    idle                    ;; 15
+    missile-incoming        ;; 16
+    missile-incoming-abort  ;; 17
+    peacemaker-incoming     ;; 18
+    peacemaker-incoming-abort ;; 19
+    )
   )
-  
+|#
 
 
 
+
+#|
 (deftype vehicle-reticle-on-me (vehicle-reticle-base)
   ((targeted-by                  uint64     :offset-assert 160)
    (hsprites-base                uint8  192 :offset 176)
@@ -5043,9 +5051,11 @@
     peacemaker-incoming-abort ;; 19
     )
   )
+|#
 
 
 
+#|
 (deftype vehicle-reticle-on-them (vehicle-reticle-base)
   ((hsprites     uint8  704 :offset-assert 160)
    (spinner-rate uint64     :offset-assert 864)
@@ -5059,6 +5069,7 @@
     vehicle-target ;; 16
     )
   )
+|#
 
 
 (define-extern reticle-wad-on-me-base array)
@@ -5213,9 +5224,8 @@
 
 
 
-#|
 (deftype wvehicle-physics-work (structure)
-  ((wheel-work-array      UNKNOWN 4       :offset-assert 0)
+  ((wheel-work-array      uint8   192     :offset-assert 0)
    (mat                   matrix  :inline :offset-assert 192)
    (force                 vector  :inline :offset-assert 256)
    (velocity              vector  :inline :offset-assert 272)
@@ -5255,7 +5265,6 @@
   :size-assert         #x220
   :flag-assert         #x900000220
   )
-|#
 
 
 
@@ -5595,11 +5604,11 @@
 
 #|
 (deftype particle-buffer (prim-client)
-  ((tex-id           uint32     :offset-assert 4)
-   (smoke-part-count int32      :offset-assert 8)
-   (smoke-parts      UNKNOWN 50 :offset-assert 16)
-   (strip            basic      :offset-assert 2416)
-   (single-strip     UNKNOWN 3  :offset-assert 2420)
+  ((tex-id           uint32      :offset-assert 4)
+   (smoke-part-count int32       :offset-assert 8)
+   (smoke-parts      uint8  2400 :offset-assert 16)
+   (strip            basic       :offset-assert 2416)
+   (single-strip     uint8  12   :offset-assert 2420)
    )
   :method-count-assert 14
   :size-assert         #x980
@@ -5639,6 +5648,7 @@
 
 
   
+#|
 (deftype v-wpn-red-smoke (vehicle-weapon-slot)
   ((smoke-system uint64  :offset-assert 264)
    (wait-time    int32   :offset-assert 272)
@@ -5654,6 +5664,7 @@
     (v-wpn-red-smoke-method-61 () none) ;; 61
     )
   )
+|#
   
 
 
@@ -5671,6 +5682,7 @@
 
 
 
+#|
 (deftype oil-trail (prim-client)
   ((tex-id                   uint32          :offset-assert 4)
    (segment-count            int32           :offset-assert 8)
@@ -5692,6 +5704,7 @@
     (oil-trail-method-16 () none) ;; 16
     )
   )
+|#
 
 
 
@@ -5757,6 +5770,7 @@
 
 
   
+#|
 (deftype v-wpn-red-oil (vehicle-weapon-slot)
   ((oil-emitter uint64  :offset-assert 264)
    (wait-time   int32   :offset-assert 272)
@@ -5772,6 +5786,7 @@
     (v-wpn-red-oil-method-61 () none) ;; 61
     )
   )
+|#
   
 
 
@@ -6143,24 +6158,21 @@
 
 
 
-#|
 (deftype vehicle-antenna-state (structure)
-  ((data UNKNOWN 6 :offset-assert 0)
+  ((data uint8 96 :offset-assert 0)
    )
   :method-count-assert 9
   :size-assert         #x60
   :flag-assert         #x900000060
   )
-|#
 
 
 
-#|
 (deftype vehicle-antenna (process-drawable)
   ((vehicle          uint64                          :offset-assert 248)
    (attach-local-pos vector                  :inline :offset-assert 256)
    (attach-rot       quaternion              :inline :offset-assert 272)
-   (jmod-antenna     UNKNOWN                 4       :offset-assert 288)
+   (jmod-antenna     uint8                   128     :offset-assert 288)
    (jmod-tail        joint-mod-set-rot-local :inline :offset-assert 416)
    (sim-state        vehicle-antenna-state   :inline :offset-assert 448)
    (ant-tip-pos      vector                  :inline :offset-assert 448)
@@ -6175,17 +6187,16 @@
   :method-count-assert 55
   :size-assert         #x228
   :flag-assert         #x3701a00228
+  (:state-methods
+    idle ;; 50
+    die ;; 51
+    )
   (:methods
     (vehicle-antenna-method-52 () none) ;; 52
     (vehicle-antenna-method-53 () none) ;; 53
     (vehicle-antenna-method-54 () none) ;; 54
     )
-  (:state-methods
-    idle ;; 50
-    die ;; 51
-    )
   )
-|#
 
 
 (define-extern *vehicle-antenna-state* object)
@@ -6273,16 +6284,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#|
 (deftype race-line-get-points (structure)
-  ((points UNKNOWN 4 :offset-assert 0)
-   (index  int32     :offset-assert 64)
+  ((points uint8 64 :offset-assert 0)
+   (index  int32    :offset-assert 64)
    )
   :method-count-assert 9
   :size-assert         #x44
   :flag-assert         #x900000044
   )
-|#
 
 
 (define-extern test-find-line-info function)
