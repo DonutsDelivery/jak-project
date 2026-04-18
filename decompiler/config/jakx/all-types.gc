@@ -40304,8 +40304,8 @@
   :size-assert         #xa8
   :flag-assert         #x11002000a8
   (:state-methods
-    active ;; 14
-    die ;; 15
+    die ;; 14
+    active ;; 15
     )
   (:methods
     (lightning-new-tracker-method-16 () none) ;; 16
@@ -46517,7 +46517,7 @@
 
 
   
-#|(deftype net-game-mgr-boss-battle (net-game-mgr-race)
+(deftype net-game-mgr-boss-battle (net-game-mgr-race)
   ((player-won?  basic   :offset-assert 364)
    (player-lost? basic   :offset-assert 368)
    (lose-time    uint64  :offset-assert 376)
@@ -46525,7 +46525,7 @@
   :method-count-assert 88
   :size-assert         #x180
   :flag-assert         #x5800f00180
-  )|#
+  )
   
 
 
@@ -57038,7 +57038,7 @@
 
 
   
-#|(deftype indicator (string-menu)
+(deftype indicator (string-menu)
   ((got int32   :offset-assert 560)
    (max int32   :offset-assert 564)
    (msg uint32  :offset-assert 568)
@@ -57046,7 +57046,7 @@
   :method-count-assert 69
   :size-assert         #x23c
   :flag-assert         #x4501b0023c
-  )|#
+  )
   
 
 
@@ -58019,14 +58019,14 @@
 
 
   
-#|(deftype scrolling-item-game (scrolling-item)
+(deftype scrolling-item-game (scrolling-item)
   ((burn-version uint32  :offset-assert 568)
    (avg-ping     int32   :offset-assert 572)
    )
   :method-count-assert 69
   :size-assert         #x240
   :flag-assert         #x4501b00240
-  )|#
+  )
   
 
 
@@ -58358,7 +58358,7 @@
 
 
   
-#|(deftype player-info-menu (string-menu)
+(deftype player-info-menu (string-menu)
   ((player medius-player  :offset-assert 560)
    )
   :method-count-assert 70
@@ -58367,7 +58367,7 @@
   (:methods
     (player-info-menu-method-69 () none) ;; 69
     )
-  )|#
+  )
   
 
 
@@ -58559,14 +58559,14 @@
 
 
   
-#|(deftype dropdown-weapon-item-info (dropdown-item-info)
+(deftype dropdown-weapon-item-info (dropdown-item-info)
   ((weapon-type    int8    :offset-assert 122)
    (weapon-text-id uint32  :offset-assert 124)
    )
   :method-count-assert 9
   :size-assert         #x80
   :flag-assert         #x900000080
-  )|#
+  )
   
 
 
@@ -58583,7 +58583,7 @@
 
 
   
-#|(deftype dropdown-advanced-flag-item-info (dropdown-item-info)
+(deftype dropdown-advanced-flag-item-info (dropdown-item-info)
   ((advanced-flags uint8   :offset-assert 122)
    (text-id-1      uint32  :offset-assert 124)
    (text-id-2      uint32  :offset-assert 128)
@@ -58591,7 +58591,7 @@
   :method-count-assert 9
   :size-assert         #x84
   :flag-assert         #x900000084
-  )|#
+  )
   
 
 
@@ -58608,15 +58608,15 @@
 
 
   
-#|(deftype dropdown-weapon-item (dropdown-item)
+(deftype dropdown-weapon-item (dropdown-item)
   ()
-  :method-count-assert 70
+  :method-count-assert 71
   :size-assert         #x250
-  :flag-assert         #x4601c00250
+  :flag-assert         #x4701c00250
   (:state-methods
     running ;; 52
     )
-  )|#
+  )
   
 
 
@@ -58706,12 +58706,12 @@
 
 
   
-#|(deftype scrolling-scenes-item (scrolling-secrets-item)
+(deftype scrolling-scenes-item (scrolling-secrets-item)
   ()
   :method-count-assert 69
-  :size-assert         #x23a
-  :flag-assert         #x4501b0023a
-  )|#
+  :size-assert         #x239
+  :flag-assert         #x4501b00239
+  )
   
 
 
