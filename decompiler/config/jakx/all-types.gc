@@ -35052,7 +35052,7 @@
 
 
   
-#|(deftype fmv-player (process)
+(deftype fmv-player (process)
   ((texture-base-page    uint32  :offset-assert 144)
    (texture-width        uint32  :offset-assert 148)
    (gui-id               uint32  :offset-assert 152)
@@ -35060,9 +35060,9 @@
    (start-time           uint64  :offset-assert 168)
    (fmv-mode             uint8   :offset-assert 176)
    )
-  :method-count-assert 20
+  :method-count-assert 25
   :size-assert         #xb1
-  :flag-assert         #x14003000b1
+  :flag-assert         #x19003000b1
   (:methods
     (fmv-player-method-9 () none) ;; 9
     (fmv-player-method-10 () none) ;; 10
@@ -35076,7 +35076,7 @@
     (fmv-player-method-18 () none) ;; 18
     (fmv-player-method-19 () none) ;; 19
     )
-  )|#
+  )
   
 
 
@@ -59597,7 +59597,7 @@
 (define-extern fact-info-enemy object)
 (define-extern float-array object)
 (define-extern flow-section-array object)
-(define-extern fmv-player object)
+;; (define-extern fmv-player object) ;; activated as deftype
 (define-extern ghost-info object)
 (define-extern helmet-hud object)
 (define-extern high-scores-list object)
