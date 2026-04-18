@@ -2141,16 +2141,16 @@
 
 
   
-#|(deftype eco-powerup-draw (powerup-draw)
+(deftype eco-powerup-draw (powerup-draw)
   ((vehicle-handle uint64  :offset-assert 264)
    )
   :method-count-assert 57
   :size-assert         #x110
   :flag-assert         #x3900800110
   (:state-methods
-    idle ;; 50
+    idle ;; 50 (override)
     )
-  )|#
+  )
   
 
 
@@ -4546,7 +4546,7 @@
    (hud-w-shield-deflexor-01         basic   :offset-assert 196)
    (hud-w-shield-deathtouch-01       basic   :offset-assert 200)
    (hud-w-earthshaker-01             basic   :offset-assert 204)
-   (hud-w-clone-car-01               basic   :offset-assert 212)
+   (hud-w-clone-car-01               basic   :offset 212)
    )
   :method-count-assert 25
   :size-assert         #xd8
@@ -4935,7 +4935,7 @@
 
 
   
-#|(deftype update-engine-loop-state-work (structure)
+(deftype update-engine-loop-state-work (structure)
   ((i-loop int8                            :offset-assert 0)
    (info   vehicle-sound-engine-loop-info  :offset-assert 4)
    (volume float                           :offset-assert 8)
@@ -4944,7 +4944,7 @@
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
-  )|#
+  )
   
 
 
@@ -6121,21 +6121,21 @@
 
 
   
-#|(deftype v-wpn-red-tractor-beam (vehicle-weapon-slot)
+(deftype v-wpn-red-tractor-beam (vehicle-weapon-slot)
   ((firing-at      uint64  :offset-assert 264)
    (duration-left  int32   :offset-assert 272)
    (using-side     uint8   :offset-assert 276)
-   (part-on-me     basic   :offset-assert 224)
+   (part-on-me     basic   :offset        224)
    (part-on-target basic   :offset-assert 280)
    )
   :method-count-assert 61
   :size-assert         #x11c
   :flag-assert         #x3d0090011c
   (:state-methods
-    idle ;; 50
-    firing ;; 60
+    idle   ;; 50 (override)
+    firing ;; 60 (new)
     )
-  )|#
+  )
   
 
 
@@ -6216,6 +6216,7 @@
 
 
 
+#|
 (deftype vehicle-antenna (process-drawable)
   ((vehicle          uint64                          :offset-assert 248)
    (attach-local-pos vector                  :inline :offset-assert 256)
@@ -6245,6 +6246,7 @@
     (vehicle-antenna-method-54 () none) ;; 54
     )
   )
+|#
 
 
 (define-extern *vehicle-antenna-state* object)
@@ -21317,7 +21319,7 @@
 
 
   
-#|(deftype net-stream-media-video-record-data (structure)
+(deftype net-stream-media-video-record-data (structure)
   ((p-y           net-color-array  :offset-assert 0)
    (p-cr          net-color-array  :offset-assert 4)
    (p-cb          net-color-array  :offset-assert 8)
@@ -21327,7 +21329,7 @@
   :method-count-assert 9
   :size-assert         #x14
   :flag-assert         #x900000014
-  )|#
+  )
   
 
 
@@ -38968,9 +38970,8 @@
 
   
 (deftype simple-prim-particle-binding (simple-prim)
-  ((color      rgba    :offset-assert 252)
-   (lifetime   uint64  :offset-assert 256)
-   (state-time uint64  :offset-assert 240)
+  ((color    rgba   :offset-assert 252)
+   (lifetime uint64 :offset-assert 256)
    )
   :method-count-assert 58
   :size-assert         #x110
