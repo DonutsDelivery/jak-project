@@ -1,8 +1,21 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; ERROR: top level function was not converted to expressions. Cannot decompile.
+;; name: fmv-player.gc
+;; name in dgo: fmv-player
+;; dgos: GAME
 
-
-
-
+;; Thin GOAL wrapper around the C++ FMVPlayer infrastructure.
+;; pc-fmv-play/stop/is-done are in game/kernel/jakx/kmachine_extras.cpp,
+;; backed by FMVPlayer.cpp (ffmpeg, runs in render thread).
+;;
+;; Starts playback of path (relative to iso_data/jakx/), suspends until done.
+;; Start button calls pc-fmv-stop; loop exits on next is-done poll.
+(defun fmv-player-run ((path string))
+  (pc-fmv-play path)
+  (until (nonzero? (pc-fmv-is-done))
+    (when (cpad-pressed? 0 start)
+      (pc-fmv-stop))
+    (suspend))
+  (none)
+  )

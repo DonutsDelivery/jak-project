@@ -1,8 +1,10 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; ERROR: top level function was not converted to expressions. Cannot decompile.
+;; name: fmv-player-h.gc
+;; name in dgo: fmv-player-h
+;; dgos: GAME
 
-
-
-
+;; Forward declaration for fmv-player.gc which implements this function.
+;; Called by title-obs.gc startup state to play intro FMVs before the title menu.
+(define-extern fmv-player-run (function string none))

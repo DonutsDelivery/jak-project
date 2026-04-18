@@ -45,9 +45,11 @@ class FMVPlayer {
   GLuint m_vbo = 0;
   GLuint m_texture = 0;
 
-  // PTS timing: wall-clock at which playback started
+  // PTS timing
   double m_play_start_wall = 0.0;
   double m_stream_time_base = 0.0;
+  double m_current_pts_secs = 0.0;    // PTS of the frame currently in m_texture
+  double m_frame_duration_secs = 0.0; // nominal duration of one frame (from pkt_duration)
 
   // State machine — all transitions guarded by m_mutex
   enum class Phase { IDLE, PLAY_REQ, PLAYING, STOP_REQ, DONE };

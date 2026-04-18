@@ -137,6 +137,8 @@ void FMVPlayer::open_file(const std::string& path) {
   m_video_stream_idx = video_idx;
   m_stream_time_base = av_q2d(stream->time_base);
   m_play_start_wall = wall_time_now();
+  m_current_pts_secs = 0.0;
+  m_frame_duration_secs = 0.0;
 
   lg::info("[FMV] Opened {}: {}x{} @ {:.2f} fps", path, codec_ctx->width, codec_ctx->height,
            av_q2d(stream->avg_frame_rate));
@@ -172,98 +174,103 @@ bool FMVPlayer::decode_and_draw(SharedRenderState* render_state, ScopedProfilerN
   auto* frame = reinterpret_cast<AVFrame*>(m_frame);
   auto* rgb_frame = reinterpret_cast<AVFrame*>(m_rgb_frame);
 
-  // Read packets until we get a decoded video frame
-  bool got_frame = false;
-  while (!got_frame) {
-    int ret = av_read_frame(fmt_ctx, packet);
-    if (ret < 0) {
-      // EOF or error — flush
-      avcodec_send_packet(codec_ctx, nullptr);
-      if (avcodec_receive_frame(codec_ctx, frame) >= 0) {
-        got_frame = true;
+  // Pace frames against wall clock: only decode a new video frame once wall
+  // time has advanced past (current_frame_pts + frame_duration). Until then
+  // re-draw the existing texture. This makes a 25fps video play at 25fps
+  // regardless of whether the render loop runs at 30, 60, or 15 fps.
+  double wall_elapsed = wall_time_now() - m_play_start_wall;
+  bool need_next_frame = (m_frame_width == 0) ||
+                         (wall_elapsed >= m_current_pts_secs + m_frame_duration_secs);
+
+  bool still_going = true;
+
+  if (need_next_frame) {
+    bool got_frame = false;
+    while (!got_frame) {
+      int ret = av_read_frame(fmt_ctx, packet);
+      if (ret < 0) {
+        avcodec_send_packet(codec_ctx, nullptr);
+        if (avcodec_receive_frame(codec_ctx, frame) >= 0) {
+          got_frame = true;
+        } else {
+          still_going = false;
+        }
+        break;
+      }
+      if (packet->stream_index == m_video_stream_idx) {
+        avcodec_send_packet(codec_ctx, packet);
+        av_packet_unref(packet);
+        if (avcodec_receive_frame(codec_ctx, frame) >= 0)
+          got_frame = true;
       } else {
-        return false;  // truly done
+        av_packet_unref(packet);
       }
-      break;
     }
 
-    if (packet->stream_index == m_video_stream_idx) {
-      avcodec_send_packet(codec_ctx, packet);
-      av_packet_unref(packet);
-      if (avcodec_receive_frame(codec_ctx, frame) >= 0) {
-        got_frame = true;
+    if (got_frame) {
+      // Update timing. Use PTS if available; otherwise advance by one frame duration.
+      if (frame->pts != AV_NOPTS_VALUE)
+        m_current_pts_secs = frame->pts * m_stream_time_base;
+      else
+        m_current_pts_secs += m_frame_duration_secs;
+
+      // Derive frame duration from stream avg_frame_rate (works for all ffmpeg versions).
+      if (m_frame_duration_secs == 0.0) {
+        double fps = av_q2d(fmt_ctx->streams[m_video_stream_idx]->avg_frame_rate);
+        m_frame_duration_secs = (fps > 0.0) ? 1.0 / fps : 1.0 / 25.0;
       }
-    } else {
-      av_packet_unref(packet);
-    }
-  }
 
-  if (!got_frame)
-    return false;
+      int w = codec_ctx->width;
+      int h = codec_ctx->height;
+      if (w != m_frame_width || h != m_frame_height) {
+        if (m_sws_ctx)
+          sws_freeContext(reinterpret_cast<SwsContext*>(m_sws_ctx));
+        if (m_rgb_buf)
+          av_free(m_rgb_buf);
+        m_sws_ctx = sws_getContext(w, h, codec_ctx->pix_fmt, w, h, AV_PIX_FMT_RGB24,
+                                   SWS_BILINEAR, nullptr, nullptr, nullptr);
+        m_rgb_buf_size = av_image_get_buffer_size(AV_PIX_FMT_RGB24, w, h, 1);
+        m_rgb_buf = reinterpret_cast<uint8_t*>(av_malloc(m_rgb_buf_size));
+        av_image_fill_arrays(rgb_frame->data, rgb_frame->linesize, m_rgb_buf, AV_PIX_FMT_RGB24,
+                             w, h, 1);
+        m_frame_width = w;
+        m_frame_height = h;
+        glBindTexture(GL_TEXTURE_2D, m_texture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+        glBindTexture(GL_TEXTURE_2D, 0);
+      }
 
-  // PTS-based timing: skip frames that haven't arrived yet
-  if (frame->pts != AV_NOPTS_VALUE) {
-    double frame_ts = frame->pts * m_stream_time_base;
-    double wall_elapsed = wall_time_now() - m_play_start_wall;
-    if (frame_ts > wall_elapsed + 0.005) {
-      // Too early — don't upload, re-display last frame this render tick
+      sws_scale(reinterpret_cast<SwsContext*>(m_sws_ctx),
+                reinterpret_cast<const uint8_t* const*>(frame->data), frame->linesize, 0, h,
+                rgb_frame->data, rgb_frame->linesize);
       av_frame_unref(frame);
-      return true;
+
+      glBindTexture(GL_TEXTURE_2D, m_texture);
+      glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, m_rgb_buf);
+      glBindTexture(GL_TEXTURE_2D, 0);
     }
   }
 
-  int w = codec_ctx->width;
-  int h = codec_ctx->height;
-
-  // (Re)allocate sws context and RGB buffer if dimensions changed
-  if (w != m_frame_width || h != m_frame_height) {
-    if (m_sws_ctx)
-      sws_freeContext(reinterpret_cast<SwsContext*>(m_sws_ctx));
-    if (m_rgb_buf)
-      av_free(m_rgb_buf);
-    m_sws_ctx = sws_getContext(w, h, codec_ctx->pix_fmt, w, h, AV_PIX_FMT_RGB24, SWS_BILINEAR,
-                               nullptr, nullptr, nullptr);
-    m_rgb_buf_size = av_image_get_buffer_size(AV_PIX_FMT_RGB24, w, h, 1);
-    m_rgb_buf = reinterpret_cast<uint8_t*>(av_malloc(m_rgb_buf_size));
-    av_image_fill_arrays(rgb_frame->data, rgb_frame->linesize, m_rgb_buf, AV_PIX_FMT_RGB24, w, h,
-                         1);
-    m_frame_width = w;
-    m_frame_height = h;
-
-    // (Re)allocate texture
+  // Always draw the current texture whether we just decoded a new frame or
+  // are holding the previous one while wall time catches up.
+  if (m_frame_width > 0) {
+    auto& shader = render_state->shaders[ShaderId::FMV];
+    shader.activate();
+    glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_texture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, w, h, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+    glUniform1i(glGetUniformLocation(shader.id(), "tex_T0"), 0);
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_BLEND);
+    glBindVertexArray(m_vao);
+    prof.add_tri(2);
+    prof.add_draw_call();
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
+    glEnable(GL_DEPTH_TEST);
   }
 
-  sws_scale(reinterpret_cast<SwsContext*>(m_sws_ctx),
-            reinterpret_cast<const uint8_t* const*>(frame->data), frame->linesize, 0, h,
-            rgb_frame->data, rgb_frame->linesize);
-  av_frame_unref(frame);
-
-  // Upload RGB frame to GL texture
-  glBindTexture(GL_TEXTURE_2D, m_texture);
-  glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, m_rgb_buf);
-  glBindTexture(GL_TEXTURE_2D, 0);
-
-  // Draw fullscreen quad with FMV shader
-  auto& shader = render_state->shaders[ShaderId::FMV];
-  shader.activate();
-  glActiveTexture(GL_TEXTURE0);
-  glBindTexture(GL_TEXTURE_2D, m_texture);
-  glUniform1i(glGetUniformLocation(shader.id(), "tex_T0"), 0);
-
-  glDisable(GL_DEPTH_TEST);
-  glDisable(GL_BLEND);
-  glBindVertexArray(m_vao);
-  prof.add_tri(2);
-  prof.add_draw_call();
-  glDrawArrays(GL_TRIANGLES, 0, 6);
-  glBindVertexArray(0);
-  glBindTexture(GL_TEXTURE_2D, 0);
-  glEnable(GL_DEPTH_TEST);
-
-  return true;
+  return still_going;
 }
 
 void FMVPlayer::render_frame(SharedRenderState* render_state, ScopedProfilerNode& prof) {

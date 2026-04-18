@@ -48791,7 +48791,7 @@
 (define-extern fmv-file-read (function none))
 (define-extern fmv-fade-out (function none))
 (define-extern fmv-player-init-by-other (function none))
-(define-extern fmv-player-run (function none))
+(define-extern fmv-player-run (function string none))
 (define-extern fmv-player-run-texture (function none))
 (define-extern fmv-player-terminate (function none))
 

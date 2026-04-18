@@ -5,15 +5,6 @@
 ;; name in dgo: title-obs
 ;; dgos: TITLE
 
-;; Phase 0 + Phase 1 port for jakx bringup: enough of title-control so that
-;; `(process-spawn title-control :init title-control-init :name "title-control"
-;;   :to *entity-pool*)` succeeds from the REPL. The full startup/wait/idle
-;; state bodies, memory-card UI, logo skelgroup rendering, museum/credits, and
-;; scrap-book data all remain unported (Phase 2+).
-;;
-;; Type layout is jak3's `.gc` layout, NOT the decompiler-guessed one in
-;; jakx all-types.gc (which omits fields title-control-init touches).
-
 (declare-type title-control process)
 (define-extern *title-control* (pointer title-control))
 
@@ -44,19 +35,10 @@
 
 (define *title-control* (the-as (pointer title-control) #f))
 
-;; Forward references: all defined below, but states and spawn-title-control need
-;; the compile-time signatures.
 (define-extern title-control-init (function object :behavior title-control))
 (define-extern title-screen-change (function string int string int symbol symbol int :behavior title-control))
-(define-extern wait-for-press (function time-frame time-frame symbol symbol))
-(define-extern direction-press (function time-frame time-frame symbol symbol))
-(define-extern title-menu (function object :behavior title-control))
 
-;; Wrapper for spawning title-control from files that don't have the full
-;; deftype in scope (e.g. level.gc in GAME.CGO, which is loaded before TITLE.DGO).
-;; Level.gc's call site just declares this extern and invokes by name; the
-;; process-spawn macro's method-lookup on title-control happens inside this
-;; translation unit where the full type is visible.
+;; Wrapper for spawning title-control from files without the full deftype in scope.
 (defun spawn-title-control ()
   (process-spawn title-control :init title-control-init :name "title-control" :to *entity-pool*)
   0
@@ -72,48 +54,32 @@
   (the-as title-control ((method-of-type process relocate) this offset))
   )
 
-;; `startup` state — minimal :code (show demo-screen then sleep in wait),
-;; full :post ported from jak3 title-obs.gc:469. The :post is what drives
-;; per-frame rendering of the currently-drawn screen via external-art-buffer
-;; + with-dma-buffer-add-bucket + draw-raw-image.
-;;
-;; Phase-2 skipped vs jak3: the memory-card / language check, the
-;; `initialize! *game-info* 'game "pre-intro-start"` call, the manipy logo
-;; spawn for demo-state 1/2/3. Those are all safe-to-skip for first pixels.
+;; Real Jak X startup: THX → INTRO → INTROB FMV sequence, then go idle.
+;; Derived from decompiler_out/jakx/title-obs_ir2.asm anon-functions 6 and 2.
 (defstate startup (title-control)
   :virtual #t
   :code (behavior ()
-    (when (zero? (-> *game-info* demo-state))
-      (let ((a1-0 (new 'stack-no-clear 'array 'symbol 10)))
-        (set! (-> a1-0 9) #f)
-        (set! (-> a1-0 8) #f)
-        (set! (-> a1-0 7) #f)
-        (set! (-> a1-0 6) #f)
-        (set! (-> a1-0 5) #f)
-        (set! (-> a1-0 4) #f)
-        (set! (-> a1-0 3) #f)
-        (set! (-> a1-0 2) #f)
-        (set! (-> a1-0 1) #f)
-        (set! (-> a1-0 0) 'title)
-        (want-levels *load-state* a1-0)
-        )
-      ;; Jak X has a dolby/thx splash before the title logo (not the jak3 "demo-screen"
-      ;; path — that would map to DESCREEN.STR which doesn't exist in Jak X's iso).
-      ;; Real screens in iso_data/jakx/STR: DOSCREEN (dolby-screen), THSCREEN (thx-dolby).
-      ;; Chunk index: 0 = 4:3, 1 = 16:9 (per decompiler_out/jakx/title-obs_ir2.asm
-      ;; aspect-ratio gate before title-screen-change call site L85).
-      (title-screen-change "dolby-screen"
-                           (if (= (-> *setting-control* user-default aspect-ratio) 'aspect16x9) 1 0)
-                           (the-as string #f) -1 #t #f)
-      (wait-for-press (seconds 1) (seconds 5) #t)
-      (title-screen-change (the-as string #f) -1 (the-as string #f) -1 #f #f)
-      (set-blackout-frames (seconds 0.2))
-      (set! (-> *game-info* demo-state) (the-as uint 1))
+    ;; Load the title level so external-art-buffer / STR streaming works.
+    (let ((a1-0 (new 'stack-no-clear 'array 'symbol 10)))
+      (set! (-> a1-0 9) #f)
+      (set! (-> a1-0 8) #f)
+      (set! (-> a1-0 7) #f)
+      (set! (-> a1-0 6) #f)
+      (set! (-> a1-0 5) #f)
+      (set! (-> a1-0 4) #f)
+      (set! (-> a1-0 3) #f)
+      (set! (-> a1-0 2) #f)
+      (set! (-> a1-0 1) #f)
+      (set! (-> a1-0 0) 'title)
+      (want-levels *load-state* a1-0)
       )
-    (go-virtual wait)
+    ;; Real Jak X intro sequence (see title-obs_ir2.asm anon-function 6 L8 / anon-function 2).
+    (fmv-player-run "STR/THX.M2V")
+    (fmv-player-run "STR/INTRO.M2V")
+    (fmv-player-run "STR/INTROB.M2V")
+    (go-virtual idle)
     )
   :post (behavior ()
-    (local-vars (gp-4 external-art-buffer))
     (set! (-> *setting-control* cam-current fov) (-> *setting-control* cam-target fov))
     (dotimes (v1-2 2)
       (set! (-> self buffer v1-2 frame-lock) #f)
@@ -157,83 +123,43 @@
     (when (>= (-> self draw) 0)
       (dotimes (gp-3 2)
         (when (file-status (-> self buffer gp-3) (-> self draw-name) (-> self draw))
-          (set! gp-4 (-> self buffer gp-3))
-          (goto cfg-46)
-          )
-        )
-      (set! gp-4 (the-as external-art-buffer #f))
-      (label cfg-46)
-      (when (and gp-4 (-> gp-4 art-group))
-        (with-dma-buffer-add-bucket ((s4-1 (-> *display* frames (-> *display* on-screen) global-buf))
-                                     (bucket-id debug-no-zbuf1)
+          (let ((gp-4 (-> self buffer gp-3)))
+            (with-dma-buffer-add-bucket ((s4-1 (-> *display* frames (-> *display* on-screen) global-buf))
+                                         (bucket-id debug-no-zbuf1)
+                                         )
+              (dma-buffer-add-gs-set s4-1
+                                     (test-1 (new 'static 'gs-test :ate #x1 :afail #x3 :zte #x1 :ztst (gs-ztest always)))
                                      )
-          (dma-buffer-add-gs-set s4-1
-                                 (test-1 (new 'static 'gs-test :ate #x1 :afail #x3 :zte #x1 :ztst (gs-ztest always)))
-                                 )
-          (let ((t1-0 (shl #x8000 16)))
-            (draw-sprite2d-xy s4-1 -256 -208 512 416 (the-as rgba t1-0) #x3fffff)
+              (let ((t1-0 (shl #x8000 16)))
+                (draw-sprite2d-xy s4-1 -256 -208 512 416 (the-as rgba t1-0) #x3fffff)
+                )
+              )
+            (let ((t9-6 draw-raw-image)
+                  (a0-31 *blit-displays-work*)
+                  (a1-15 577)
+                  (a2-5 (-> gp-4 art-group))
+                  (a3-7 (new 'static 'vector :x 512.0 :y 416.0 :w 1.0))
+                  (t0-2 (new 'stack-no-clear 'vector))
+                  )
+              (set! (-> t0-2 x) (-> *video-params* relative-x-scale))
+              (set! (-> t0-2 y) 1.0)
+              (set! (-> t0-2 z) 0.0)
+              (set! (-> t0-2 w) 1.0)
+              (t9-6 a0-31 (the-as bucket-id a1-15) a2-5 a3-7 t0-2 (-> self level) 8)
+              )
+            (set! (-> self active) #t)
+            (goto cfg-46)
             )
           )
-        (let ((t9-6 draw-raw-image)
-              (a0-31 *blit-displays-work*)
-              (a1-15 577)
-              (a2-5 (-> gp-4 art-group))
-              (a3-7 (new 'static 'vector :x 512.0 :y 416.0 :w 1.0))
-              (t0-2 (new 'stack-no-clear 'vector))
-              )
-          (set! (-> t0-2 x) (-> *video-params* relative-x-scale))
-          (set! (-> t0-2 y) 1.0)
-          (set! (-> t0-2 z) 0.0)
-          (set! (-> t0-2 w) 1.0)
-          (t9-6 a0-31 (the-as bucket-id a1-15) a2-5 a3-7 t0-2 (-> self level) 8)
-          )
-        (set! (-> self active) #t)
         )
+      (label cfg-46)
       )
     )
   )
 
-;; wait reuses startup's :post so the rendering keeps running after go-virtual wait.
-;; Minimal port of jak3 title-obs.gc:550 :code — skips the manipy logo event
-;; hook (we don't spawn manipy in Phase 2) and the dust-storm setting removal.
-;; The real work: suspend-for a bit, then call title-menu. title-menu waits
-;; on *common-text* (now loaded per-frame from display-loop) and handles
-;; START-button → (initialize! *game-info* 'game ...) → go-virtual idle.
 (defstate wait (title-control)
   :virtual #t
-  :code (behavior ()
-    (remove-setting! 'allow-timeout)
-    (remove-setting! 'dialog-volume)
-    (format 0 "~%[BRINGUP] title wait state :code entering~%")
-    (suspend-for (seconds 2))
-    (format 0 "[BRINGUP] title wait: calling title-menu~%")
-    (let ((selected (the-as int (title-menu))))
-      (format 0 "[BRINGUP] title-menu returned selected=~d~%" selected)
-      ;; jakx: skip the progress menu intermediate and launch the game
-      ;; directly on Start Game (selected=0). This is the jakx-equivalent
-      ;; of jak3's progress-pc.gc:288 initialize! call that normally
-      ;; happens after a save-file confirmation screen.
-      (when (zero? selected)
-        ;; Play intro FMV before the tutorial race.
-        ;; pc-fmv-play hands off to the render thread (FMVPlayer.cpp + ffmpeg).
-        ;; Loop suspending until done; START skips via pc-fmv-stop.
-        (format 0 "[BRINGUP] title: playing INTRO.M2V~%")
-        (pc-fmv-play "STR/INTRO.M2V")
-        (until (nonzero? (pc-fmv-is-done))
-          ;; Check Start button to skip
-          (when (cpad-pressed? 0 start)
-            (pc-fmv-stop)
-            ;; spin one frame so render thread sees STOP_REQ and clears
-            (suspend))
-          (suspend))
-        (format 0 "[BRINGUP] title: INTRO.M2V done, invoking (bg 'atoll)~%")
-        ;; jakx bringup: test level-load pipeline by calling bg 'atoll
-        ;; directly, instead of going through initialize! 'game (which needs
-        ;; target / pilot / race-control — none ported yet).
-        (bg 'atoll)
-        (format 0 "[BRINGUP] (bg 'atoll) returned~%")))
-    (sleep-code)
-    )
+  :code (the-as (function object) sleep-code)
   :post (-> (method-of-type title-control startup) post)
   )
 
@@ -260,14 +186,9 @@
 (defbehavior title-control-init title-control ()
   (stack-size-set! (-> self main-thread) 2048)
   (logclear! (-> self mask) (process-mask freeze pause menu progress actor-pause))
-  ;; og:preserve-this — set no-kill so initialize! 'boot's spawned lambda's
-  ;; (reset-actors 'game) → iterate-process-tree *entity-pool* doesn't
-  ;; deactivate us. Without this, title-control dies on the first kernel
-  ;; dispatch after play and nothing renders the splash.
+  ;; og:preserve-this — set no-kill so reset-actors doesn't deactivate us.
   (logior! (-> self mask) (process-mask no-kill))
   (set! (-> self level) (level-get *level* 'title))
-  ;; og:preserve-this — guard against level-get returning #f during early bringup
-  ;; (title level slot may not be active in *level* yet when we spawn).
   (let ((a1-2 (if (and (-> self level)
                        (nonzero? (-> self level entity))
                        (> (-> self level entity length) 0))
@@ -286,12 +207,7 @@
   (set-setting! 'music-volume 'abs 0.0 0)
   (set-setting! 'entity-name "camera-311" 0.0 0)
   (apply-settings *setting-control*)
-  ;; og:preserve-this — use the default external-art-buffer-init (fixed EE
-  ;; addresses) instead of the jak3-style lambda that allocates from the title
-  ;; level's heap. jakx's TITLE.DGO is a stub (title-obs.o moved to GAME.CGO
-  ;; for type registration), so the title level has no heap to kmalloc from —
-  ;; level-get *level* 'title returns #f, and the jak3 lambda then null-derefs
-  ;; / produces a bogus heap pointer that corrupts the STR→EE DMA.
+  ;; og:preserve-this — use fixed external-art-buffer-init; title level has no heap.
   (dotimes (gp-0 2)
     (set! (-> self buffer gp-0)
           (new 'process 'external-art-buffer gp-0 external-art-buffer-init #f)
@@ -424,113 +340,4 @@
   (set! (-> self want-name 1) arg2)
   (set! (-> self want 1) arg3)
   0
-  )
-
-;; Ported from jak3 levels/title/title-obs.gc:138
-(defun wait-for-press ((arg0 time-frame) (arg1 time-frame) (arg2 symbol))
-  (let ((s2-0 (current-time))
-        (s3-0 #f)
-        )
-    (while (not (or (time-elapsed? s2-0 arg1) (and (time-elapsed? s2-0 arg0) s3-0)))
-      (if (cpad-pressed? 0 confirm)
-          (set! s3-0 #t)
-          )
-      (when (and arg2 (cpad-pressed? 0 triangle))
-        (set! s3-0 'abort)
-        (goto cfg-17)
-        )
-      (suspend)
-      )
-    (label cfg-17)
-    s3-0
-    )
-  )
-
-;; Ported from jak3 levels/title/title-obs.gc:157
-(defun direction-press ((arg0 time-frame) (arg1 time-frame) (arg2 symbol))
-  (let ((s2-0 (current-time))
-        (s3-0 #f)
-        )
-    (while (not (or (time-elapsed? s2-0 arg1) (and (time-elapsed? s2-0 arg0) s3-0)))
-      (if (cpad-pressed? 0 r1 confirm)
-          (set! s3-0 'forward)
-          )
-      (if (cpad-pressed? 0 l1)
-          (set! s3-0 'back)
-          )
-      (when (and arg2 (cpad-pressed? 0 triangle))
-        (set! s3-0 'abort)
-        (goto cfg-19)
-        )
-      (suspend)
-      )
-    (label cfg-19)
-    s3-0
-    )
-  )
-
-;; Ported from jak3 levels/title/title-obs.gc:181
-;; WARN: Return type mismatch int vs object.
-;; WARN: new jak 2 until loop case, check carefully
-(defbehavior title-menu title-control ()
-  (local-vars (sv-112 font-context))
-  (sound-play "dmenu-hit")
-  (let ((gp-1 (new 'static 'boxed-array :type text-id (text-id progress-start-button)))
-        (s5-1 (current-time))
-        )
-    (while (not *common-text*)
-      (suspend)
-      )
-    (until #f
-      ;; jakx: manually service the cpad here since display-loop doesn't
-      ;; yet call service-cpads. Without this, cpad button state never updates.
-      (service-cpads)
-      (when (not (paused?))
-        (cond
-          ((and (kiosk?) (or (cpad-pressed? 0 square) (time-elapsed? s5-1 (seconds 60))))
-           (initialize! *game-info* 'game (the-as game-save #f) (the-as string #f) (the-as resetter-spec #f))
-           (suspend-for (seconds 5)
-             )
-           (set! s5-1 (current-time))
-           )
-          ((and (cpad-pressed? 0 up l-analog-up) (> (-> self selected) 0))
-           (seekl! (-> self selected) 0 1)
-           (sound-play "dmenu-move")
-           )
-          ((and (cpad-pressed? 0 down l-analog-down) (< (-> self selected) (+ (-> gp-1 length) -1)))
-           (seekl! (-> self selected) (+ (-> gp-1 length) -1) 1)
-           (sound-play "dmenu-move")
-           )
-          ((or (cpad-pressed? 0 confirm)
-               (and (cpad-pressed? 0 start)
-                    (or (not *debug-segment*) (not (logtest? (-> *cpad-list* cpads 0 button0-abs 0) (pad-buttons l3))))
-                    )
-               )
-           (sound-play "dmenu-pick")
-           (return (the-as object (-> self selected)))
-           )
-          )
-        (when (< (mod (current-time) 300) 210)
-          (set! sv-112
-                (new 'stack 'font-context *font-default-matrix* 64 312 0.0 (font-color default) (font-flags shadow kerning))
-                )
-          (set-width! sv-112 384)
-          (set-height! sv-112 50)
-          (set! (-> sv-112 flags) (font-flags shadow kerning middle middle-vert large))
-          (set! (-> sv-112 scale) 0.7)
-          (dotimes (s4-2 (-> gp-1 length))
-            (if (= (-> self selected) s4-2)
-                (set! (-> sv-112 color) (font-color progress-old-selected))
-                (set! (-> sv-112 color) (font-color white))
-                )
-            (print-game-text (lookup-text! *common-text* (-> gp-1 s4-2) #f) sv-112 #f 44 (bucket-id hud-draw-hud-alpha))
-            (+! (-> sv-112 origin y) 22.0)
-            )
-          )
-        )
-      (suspend)
-      )
-    )
-  #f
-  -1
   )
