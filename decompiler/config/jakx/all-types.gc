@@ -59493,23 +59493,23 @@
 ;; (define-extern hud-in-game-menu-options-view-0 object) ;; clobbers active deftype
 ;; (define-extern hud-item-player-name object) ;; clobbers active deftype
 ;; (define-extern hud-map object) ;; clobbers active deftype
-(define-extern hud-player-indicators-view0 object)
-(define-extern hud-race-stats-single object)
-(define-extern hud-results-grand-prix object)
-(define-extern hud-results-medal object)
-(define-extern hud-spartacus object)
-(define-extern hud-sprite object)
-(define-extern hud-sprite-work object)
+;; (define-extern hud-player-indicators-view0 object) ;; clobbers active deftype
+;; (define-extern hud-race-stats-single object) ;; clobbers active deftype
+;; (define-extern hud-results-grand-prix object) ;; clobbers active deftype
+;; (define-extern hud-results-medal object) ;; clobbers active deftype
+;; (define-extern hud-spartacus object) ;; clobbers active deftype
+;; (define-extern hud-sprite object) ;; clobbers active deftype
+;; (define-extern hud-sprite-work object) ;; clobbers active deftype
 ;; (define-extern instance object) ;; clobbers active deftype
-(define-extern intro-hud-view object)
+;; (define-extern intro-hud-view object) ;; clobbers active deftype
 (define-extern joint-mod-head object)
 (define-extern krasfemale object)
 ;; (define-extern lightning-bolt object) ;; clobbers active deftype
 ;; (define-extern lightning-spans-array object) ;; clobbers active deftype
 ;; (define-extern lightning-tracker object) ;; clobbers active deftype
-(define-extern light-trail object)
+;; (define-extern light-trail object) ;; clobbers active deftype
 (define-extern lobby-chat-string object)
-(define-extern manipulator object)
+;; (define-extern manipulator object) ;; clobbers active deftype
 ;; (define-extern matrix-stack object) ;; clobbers active deftype
 (define-extern medius-add-to-buddy-list-fwd-confirmation-request0 object)
 (define-extern medius-create-game-request object)
@@ -59518,20 +59518,20 @@
 (define-extern medius-join-game-request object)
 (define-extern medius-room-array object)
 (define-extern medius-set-message-as-read-request object)
-(define-extern menu-string object)
+;; (define-extern menu-string object) ;; clobbers active deftype
 (define-extern mgclinitialize-in-params object)
 (define-extern mgcl-simple-response object)
 (define-extern mine-a object)
 (define-extern minimap-class-node object)
-(define-extern mountain-states object)
+;; (define-extern mountain-states object) ;; clobbers active deftype
 ;; (define-extern mysql-nav-node object) ;; clobbers active deftype
-(define-extern nav-engine-spr-buffer object)
-(define-extern nav-find-clear-spot-work object)
-(define-extern nav-graph-command-array object)
-(define-extern nav-mesh-editable object)
-(define-extern nav-mesh-poly-array object)
-(define-extern net-enemy-info object)
-(define-extern net-game-mgr-rushhour object)
+;; (define-extern nav-engine-spr-buffer object) ;; clobbers active deftype
+;; (define-extern nav-find-clear-spot-work object) ;; clobbers active deftype
+;; (define-extern nav-graph-command-array object) ;; clobbers active deftype
+;; (define-extern nav-mesh-editable object) ;; clobbers active deftype
+;; (define-extern nav-mesh-poly-array object) ;; clobbers active deftype
+;; (define-extern net-enemy-info object) ;; clobbers active deftype
+;; (define-extern net-game-mgr-rushhour object) ;; clobbers active deftype
 (define-extern net-latency-metrics-params object)
 (define-extern net-update-conn-errors object)
 (define-extern ocean-trans-strip-array object)
