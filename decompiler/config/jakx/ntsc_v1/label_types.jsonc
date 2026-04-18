@@ -180,6 +180,11 @@
       "L527",
       "uint64",
       true
+    ],
+    [
+      "L526",
+      "uint64",
+      true
     ]
   ],
   "anim-tester": [
@@ -195,6 +200,11 @@
     ],
     [
       "L703",
+      "uint64",
+      true
+    ],
+    [
+      "L699",
       "uint64",
       true
     ]
@@ -338,6 +348,11 @@
   ],
   "cam-states": [
     [
+      "L689",
+      "uint64",
+      true
+    ],
+    [
       "L512",
       "state",
       true
@@ -353,7 +368,7 @@
       true
     ],
     [
-      "L689",
+      "L690",
       "uint64",
       true
     ]
@@ -366,6 +381,11 @@
     ],
     [
       "L72",
+      "uint64",
+      true
+    ],
+    [
+      "L71",
       "uint64",
       true
     ]
@@ -383,6 +403,11 @@
     ],
     [
       "L915",
+      "uint64",
+      true
+    ],
+    [
+      "L916",
       "uint64",
       true
     ]
@@ -668,6 +693,11 @@
       "L166",
       "uint64",
       true
+    ],
+    [
+      "L164",
+      "uint64",
+      true
     ]
   ],
   "shrubbery": [
@@ -684,7 +714,7 @@
   ],
   "sprite": [
     [
-      "L53",
+      "L52",
       "vu-function",
       true
     ]
@@ -812,11 +842,21 @@
       "L1056",
       "uint64",
       true
+    ],
+    [
+      "L1053",
+      "uint64",
+      true
     ]
   ],
   "hud-high-scores": [
     [
       "L339",
+      "uint64",
+      true
+    ],
+    [
+      "L337",
       "uint64",
       true
     ]
@@ -833,6 +873,11 @@
       "L1482",
       "uint64",
       true
+    ],
+    [
+      "L1485",
+      "uint64",
+      true
     ]
   ],
   "hud-widgets": [
@@ -840,11 +885,21 @@
       "L455",
       "uint64",
       true
+    ],
+    [
+      "L447",
+      "uint64",
+      true
     ]
   ],
   "in-game-menu-hud": [
     [
       "L388",
+      "uint64",
+      true
+    ],
+    [
+      "L386",
       "uint64",
       true
     ]
@@ -882,6 +937,11 @@
       "L52",
       "uint64",
       true
+    ],
+    [
+      "L53",
+      "uint64",
+      true
     ]
   ],
   "nav-mesh-editor": [
@@ -894,6 +954,11 @@
   "net-deathmatch": [
     [
       "L1010",
+      "uint64",
+      true
+    ],
+    [
+      "L1011",
       "uint64",
       true
     ]
@@ -924,11 +989,21 @@
       "L1278",
       "uint64",
       true
+    ],
+    [
+      "L1273",
+      "uint64",
+      true
     ]
   ],
   "scert-4-h": [
     [
       "L989",
+      "uint64",
+      true
+    ],
+    [
+      "L974",
       "uint64",
       true
     ]
@@ -938,11 +1013,21 @@
       "L1786",
       "uint64",
       true
+    ],
+    [
+      "L1798",
+      "uint64",
+      true
     ]
   ],
   "scert-6-h": [
     [
       "L1732",
+      "uint64",
+      true
+    ],
+    [
+      "L1736",
       "uint64",
       true
     ]
@@ -952,11 +1037,21 @@
       "L1906",
       "uint64",
       true
+    ],
+    [
+      "L1887",
+      "uint64",
+      true
     ]
   ],
   "scert-8-h": [
     [
       "L2045",
+      "uint64",
+      true
+    ],
+    [
+      "L2063",
       "uint64",
       true
     ]
@@ -966,11 +1061,21 @@
       "L1527",
       "uint64",
       true
+    ],
+    [
+      "L1540",
+      "uint64",
+      true
     ]
   ],
   "scert-10-h": [
     [
       "L1075",
+      "uint64",
+      true
+    ],
+    [
+      "L1098",
       "uint64",
       true
     ]
@@ -980,11 +1085,21 @@
       "L333",
       "uint64",
       true
+    ],
+    [
+      "L334",
+      "uint64",
+      true
     ]
   ],
   "task-control-h": [
     [
       "L971",
+      "uint64",
+      true
+    ],
+    [
+      "L973",
       "uint64",
       true
     ]
@@ -1001,11 +1116,21 @@
       "L546",
       "uint64",
       true
+    ],
+    [
+      "L548",
+      "uint64",
+      true
     ]
   ],
   "wvehicle-hud": [
     [
       "L660",
+      "uint64",
+      true
+    ],
+    [
+      "L656",
       "uint64",
       true
     ]
@@ -1015,6 +1140,19 @@
       "L770",
       "uint64",
       true
+    ],
+    [
+      "L769",
+      "uint64",
+      true
+    ],
+    [
+      "L700",
+      "quaternion"
+    ],
+    [
+      "L718",
+      "quaternion"
     ]
   ],
   "wvehicle-weapons": [
@@ -1022,6 +1160,15 @@
       "L920",
       "uint64",
       true
+    ],
+    [
+      "L919",
+      "uint64",
+      true
+    ],
+    [
+      "L835",
+      "vector"
     ]
   ],
   "nav-mesh": [
@@ -1033,8 +1180,27 @@
   ],
   "scene-actor": [
     [
-      "L127",
+      "L126",
       "cloth-params"
+    ]
+  ],
+  "game-info": [
+    [
+      "L311",
+      "uint64",
+      true
+    ],
+    [
+      "L309",
+      "uint64",
+      true
+    ]
+  ],
+  "script": [
+    [
+      "L2190",
+      "uint64",
+      true
     ]
   ]
 }
