@@ -2899,35 +2899,35 @@
 
 
   
-#|(deftype hud-item-player-name (hud-item-string)
+(deftype hud-item-player-name (hud-item-string)
   ()
   :method-count-assert 29
   :size-assert         #x3c
   :flag-assert         #x1d0000003c
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-item-player-score (hud-item-string)
+(deftype hud-item-player-score (hud-item-string)
   ()
   :method-count-assert 29
   :size-assert         #x3c
   :flag-assert         #x1d0000003c
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-item-number (hud-item-string)
+(deftype hud-item-number (hud-item-string)
   ((value int32  :offset-assert 60)
    )
   :method-count-assert 29
   :size-assert         #x40
   :flag-assert         #x1d00000040
-  )|#
+  )
   
 
 
@@ -2983,12 +2983,12 @@
 
 
   
-#|(deftype hud-localized-string (hud-item-string)
+(deftype hud-localized-string (hud-item-string)
   ()
   :method-count-assert 29
   :size-assert         #x3c
   :flag-assert         #x1d0000003c
-  )|#
+  )
   
 
 
@@ -3894,12 +3894,12 @@
 
 
   
-#|(deftype hud-item-info-string (hud-item-string)
+(deftype hud-item-info-string (hud-item-string)
   ()
   :method-count-assert 29
   :size-assert         #x3c
   :flag-assert         #x1d0000003c
-  )|#
+  )
   
 
 
@@ -5306,25 +5306,25 @@
 
 
   
-#|(deftype hud-item-power-slide-distance-tenths (hud-item-string)
+(deftype hud-item-power-slide-distance-tenths (hud-item-string)
   ((distance float  :offset-assert 60)
    )
   :method-count-assert 29
   :size-assert         #x40
   :flag-assert         #x1d00000040
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-item-power-slide-distance (hud-item-string)
+(deftype hud-item-power-slide-distance (hud-item-string)
   ((distance float  :offset-assert 60)
    )
   :method-count-assert 29
   :size-assert         #x40
   :flag-assert         #x1d00000040
-  )|#
+  )
   
 
 
@@ -5341,25 +5341,25 @@
 
 
   
-#|(deftype hud-item-hang-time-tenths-seconds (hud-item-string)
+(deftype hud-item-hang-time-tenths-seconds (hud-item-string)
   ((seconds float  :offset-assert 60)
    )
   :method-count-assert 29
   :size-assert         #x40
   :flag-assert         #x1d00000040
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-item-hang-time-seconds (hud-item-string)
+(deftype hud-item-hang-time-seconds (hud-item-string)
   ((seconds float  :offset-assert 60)
    )
   :method-count-assert 29
   :size-assert         #x40
   :flag-assert         #x1d00000040
-  )|#
+  )
   
 
 
@@ -20611,15 +20611,15 @@
 
 
   
-#|(deftype wind-dma (structure)
-  ((buffer0 wind-vector 128 :offset-assert 0) ;; guessed by decompiler
-   (buffer1 wind-vector 128 :offset-assert 4096) ;; guessed by decompiler
-   (buffer2 wind-vector 128 :offset-assert 8192) ;; guessed by decompiler
+(deftype wind-dma (structure)
+  ((buffer0 wind-vector 128 :inline :offset-assert 0) ;; guessed by decompiler
+   (buffer1 wind-vector 128 :inline :offset-assert 4096) ;; guessed by decompiler
+   (buffer2 wind-vector 128 :inline :offset-assert 8192) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x3000
   :flag-assert         #x900003000
-  )|#
+  )
   
 
 
@@ -32881,31 +32881,31 @@
 
 
   
-#|(deftype sprite-vec-data-3d (structure)
+(deftype sprite-vec-data-3d (structure)
   ((x-y-z-sx    vector   :inline :offset-assert 0)
    (qx-qy-qz-sy vector   :inline :offset-assert 16)
    (r-g-b-a     vector   :inline :offset-assert 32)
-   (x           float            :offset-assert 0)
-   (y           float            :offset-assert 4)
-   (z           float            :offset-assert 8)
-   (sx          float            :offset-assert 12)
-   (sy          float            :offset-assert 28)
-   (qx          float            :offset-assert 16)
-   (qy          float            :offset-assert 20)
-   (qz          float            :offset-assert 24)
-   (r           float            :offset-assert 32)
-   (g           float            :offset-assert 36)
-   (b           float            :offset-assert 40)
-   (a           float            :offset-assert 44)
-   (trans       vector3s :inline :offset-assert 0)
-   (rot         vector3s :inline :offset-assert 16)
-   (color       rgbaf    :inline :offset-assert 32)
-   (data        uint128  1       :offset-assert 0) ;; guessed by decompiler
+   (x           float            :offset 0)
+   (y           float            :offset 4)
+   (z           float            :offset 8)
+   (sx          float            :offset 12)
+   (sy          float            :offset 28)
+   (qx          float            :offset 16)
+   (qy          float            :offset 20)
+   (qz          float            :offset 24)
+   (r           float            :offset 32)
+   (g           float            :offset 36)
+   (b           float            :offset 40)
+   (a           float            :offset 44)
+   (trans       vector3s :inline :offset 0)
+   (rot         vector3s :inline :offset 16)
+   (color       rgbaf    :inline :offset 32)
+   (data        uint128  1       :offset 0) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x30
   :flag-assert         #x900000030
-  )|#
+  )
   
 
 
@@ -40065,7 +40065,7 @@
 
 
   
-(deftype light-trail-tracker (process)
+#|(deftype light-trail-tracker (process)
   ((trail                light-trail  :offset-assert 144)
    (tracked-object       uint64       :offset-assert 152)
    (offscreen?           symbol       :offset-assert 160)
@@ -40091,13 +40091,13 @@
     (light-trail-tracker-method-20 (_type_ vector) none) ;; 20
     (light-trail-tracker-method-21 () none) ;; 21
     )
-  )
+  )|#
   
 
 
 
   
-(deftype weapon-trail-tracker (light-trail-tracker)
+#|(deftype weapon-trail-tracker (light-trail-tracker)
   ((joint0     int16   :offset-assert 188)
    (joint1     int16   :offset-assert 190)
    (state-time uint64  :offset-assert 192)
@@ -40108,29 +40108,29 @@
   (:methods
     (weapon-trail-tracker-method-22 () none) ;; 22
     )
-  )
+  )|#
   
 
 
 
   
-(deftype tread-trail-tracker (light-trail-tracker)
+#|(deftype tread-trail-tracker (light-trail-tracker)
   ()
   :method-count-assert 27
   :size-assert         #xbc
   :flag-assert         #x1b003000bc
-  )
+  )|#
   
 
 
 
   
-(deftype light-trail-tracker-water (light-trail-tracker)
+#|(deftype light-trail-tracker-water (light-trail-tracker)
   ()
   :method-count-assert 27
   :size-assert         #xbc
   :flag-assert         #x1b003000bc
-  )
+  )|#
   
 
 
