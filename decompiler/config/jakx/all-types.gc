@@ -55827,16 +55827,13 @@
 
 
   
-#|(deftype kras-pump-break-draw (kras-pump-break-proxy)
+(deftype kras-pump-break-draw (kras-pump-break-proxy)
   ((flame-sound uint32  :offset-assert 304)
    )
   :method-count-assert 65
   :size-assert         #x134
   :flag-assert         #x4100b00134
-  (:state-methods
-    explode ;; 60
-    )
-  )|#
+  )
   
 
 
@@ -57017,7 +57014,7 @@
 
 
   
-#|(deftype scrolling-menu (dropdown-item)
+(deftype scrolling-menu (dropdown-item)
   ((cur-idx          int32  :offset-assert 592)
    (top-idx          int32  :offset-assert 596)
    (cur-scroll       int32  :offset-assert 600)
@@ -57025,9 +57022,9 @@
    (total-item-ct    int32  :offset-assert 608)
    (physical-item-ct int32  :offset-assert 612)
    )
-  :method-count-assert 77
+  :method-count-assert 78
   :size-assert         #x268
-  :flag-assert         #x4d01e00268
+  :flag-assert         #x4e01e00268
   (:methods
     (scrolling-menu-method-70 () none) ;; 70
     (scrolling-menu-method-71 () none) ;; 71
@@ -57038,9 +57035,9 @@
     (scrolling-menu-method-76 () none) ;; 76
     )
   (:state-methods
-    running ;; 52
+    running ;; 77
     )
-  )|#
+  )
   
 
 
