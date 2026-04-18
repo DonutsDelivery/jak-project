@@ -16252,7 +16252,7 @@
 
 
   
-#|(deftype sky-work (structure)
+(deftype sky-work (structure)
   ((adgif-tmpl       dma-gif-packet  :inline :offset-assert 0)
    (draw-tmpl        dma-gif-packet  :inline :offset-assert 32)
    (draw-tmpl2       dma-gif-packet  :inline :offset-assert 64)
@@ -16333,7 +16333,7 @@
     (sky-work-method-35 (_type_ dma-buffer) none) ;; 35
     (sky-work-method-36 (_type_ dma-buffer) none) ;; 36
     )
-  )|#
+  )
   
 
 
@@ -39796,33 +39796,28 @@
 
 
   
-#|(deftype part-controller (process)
-  ((actor-group        (pointer actor-group)                     :offset-assert 140) ;; guessed by decompiler
-   (actor-group-count  int32                                     :offset-assert 144)
-   (spawn-delay        uint64                                    :offset-assert 148) ;; time-frame
-   (current-part-index uint16                                    :offset-assert 156)
-   (state-time         uint64                                    :offset-assert 164) ;; time-frame
-   (next-reset-time    uint64                                    :offset-assert 172) ;; time-frame
-   (reset-interval-min uint64                                    :offset-assert 180) ;; time-frame
-   (reset-interval-max uint64                                    :offset-assert 188) ;; time-frame
-   (particle-launchers (array (pointer sparticle-launch-group))  :offset-assert 196) ;; guessed by decompiler
-   (spawn-sound        sound-info                                :offset-assert 200) ;; sound-name
+(deftype part-controller (process)
+  ((actor-group        (pointer actor-group)                     :offset-assert 144)
+   (actor-group-count  int32                                     :offset-assert 148)
+   (spawn-delay        uint64                                    :offset-assert 152)
+   (current-part-index uint16                                    :offset-assert 160)
+   (state-time         uint64                                    :offset-assert 168)
+   (next-reset-time    uint64                                    :offset-assert 176)
+   (reset-interval-min uint64                                    :offset-assert 184)
+   (reset-interval-max uint64                                    :offset-assert 192)
+   (particle-launchers (array (pointer sparticle-launch-group))  :offset-assert 200)
+   (spawn-sound        sound-info                                :offset-assert 204)
    )
   :method-count-assert 16
   :size-assert         #xd0
   :flag-assert         #x10004000d0
   (:methods
-    (part-controller-method-9 () none) ;; 9
-    (part-controller-method-10 () none) ;; 10
-    (part-controller-method-11 () none) ;; 11
-    (part-controller-method-12 () none) ;; 12
-    (part-controller-method-13 () none) ;; 13
     (part-controller-method-14 () _type_ :state) ;; 14
     )
   (:state-methods
     active ;; 15
     )
-  )|#
+  )
   
 
 
