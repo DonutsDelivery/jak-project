@@ -173,9 +173,29 @@
   ()
   )
 
-;; type tfrag-dists is defined here, but it is unknown to the decompiler
+;; definition of type tfrag-dists
+(deftype tfrag-dists (structure)
+  ((data    uint32  16)
+   (vector  vector  4 :overlay-at (-> data 0))
+   (k0s     vector  2 :overlay-at (-> data 0))
+   (k1s     vector  2 :overlay-at (-> data 8))
+   )
+  )
 
-(method-set! (the-as type tfrag-dists) 3 L19)
+;; definition for method 3 of type tfrag-dists
+(defmethod inspect ((this tfrag-dists))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'tfrag-dists)
+  (format #t "~1Tdata[16] @ #x~X~%" (-> this data))
+  (format #t "~1Tvector[4] @ #x~X~%" (-> this data))
+  (format #t "~1Tk0s[2] @ #x~X~%" (-> this data))
+  (format #t "~1Tk1s[2] @ #x~X~%" (-> this k1s))
+  (label cfg-4)
+  this
+  )
 
 ;; type tfrag-data is defined here, but it is unknown to the decompiler
 

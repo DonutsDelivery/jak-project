@@ -2483,9 +2483,6 @@
 ;; net-hud                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Forward declaration so children declared below can reference in-game-hud
-;; before its full deftype is reached at L34018.
-(declare-type in-game-hud hud)
 
 
 #|(deftype in-game-hud (hud)
@@ -3019,34 +3016,34 @@
 
 
   
-(deftype hud-slowmo (in-game-hud)
+#|(deftype hud-slowmo (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )
+  )|#
   
 
 
 
   
-(deftype hud-top-split-bar (in-game-hud)
+#|(deftype hud-top-split-bar (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )
+  )|#
   
 
 
 
   
-(deftype hud-side-split-bar (in-game-hud)
+#|(deftype hud-side-split-bar (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )
+  )|#
   
 
 
@@ -48365,15 +48362,15 @@
 
 
   
-#|(deftype aux-voice-mgr (process)
+(deftype aux-voice-mgr (process)
   ((game-id        int32  :offset-assert 144)
    (my-id          int32  :offset-assert 148)
    (bitfield       int32  :offset-assert 152)
    (connect-handle basic  :offset-assert 156)
    )
-  :method-count-assert 22
+  :method-count-assert 27
   :size-assert         #xa0
-  :flag-assert         #x16001000a0
+  :flag-assert         #x1b001000a0
   ;; field connect-handle uses ~A with a signed load.
   (:methods
     (aux-voice-mgr-method-9 () none) ;; 9
@@ -48392,7 +48389,7 @@
     joining ;; 17
     active ;; 18
     )
-  )|#
+  )
   
 
 
@@ -54734,7 +54731,27 @@
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
   )
-  
+
+(deftype hud-slowmo (in-game-hud)
+  ()
+  :method-count-assert 33
+  :size-assert         #x18ec
+  :flag-assert         #x21186018ec
+  )
+
+(deftype hud-top-split-bar (in-game-hud)
+  ()
+  :method-count-assert 33
+  :size-assert         #x18ec
+  :flag-assert         #x21186018ec
+  )
+
+(deftype hud-side-split-bar (in-game-hud)
+  ()
+  :method-count-assert 33
+  :size-assert         #x18ec
+  :flag-assert         #x21186018ec
+  )
 
 
 (define-extern *hud-training-clock* array)
@@ -60427,13 +60444,7 @@
   :flag-assert         #x900000004
   )
 
-;; time-of-day-proc stub
-(deftype time-of-day-proc (process)
-  ()
-  :method-count-assert 14
-  :size-assert         #x90
-  :flag-assert         #xe00000090
-  )
+;; time-of-day-proc — full definition above at L15658
 
 ;; projectile-bounce stub
 (deftype projectile-bounce (projectile)

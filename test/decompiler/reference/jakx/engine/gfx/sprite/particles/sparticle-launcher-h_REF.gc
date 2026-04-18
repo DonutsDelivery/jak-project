@@ -1,9 +1,37 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; type sparticle-birthinfo is defined here, but it is unknown to the decompiler
+;; definition of type sparticle-birthinfo
+(deftype sparticle-birthinfo (structure)
+  ((sprite        uint32)
+   (anim          int32)
+   (anim-speed    float)
+   (birth-func    basic)
+   (joint-ppoint  int32)
+   (num-to-birth  float)
+   (dataf         float   1 :overlay-at sprite)
+   (data          uint32  1 :overlay-at sprite)
+   )
+  )
 
-(method-set! (the-as type sparticle-birthinfo) 3 L30)
+;; definition for method 3 of type sparticle-birthinfo
+(defmethod inspect ((this sparticle-birthinfo))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'sparticle-birthinfo)
+  (format #t "~1Tsprite: ~D~%" (-> this sprite))
+  (format #t "~1Tanim: ~D~%" (-> this anim))
+  (format #t "~1Tanim-speed: ~f~%" (-> this anim-speed))
+  (format #t "~1Tbirth-func: ~A~%" (-> this birth-func))
+  (format #t "~1Tjoint-ppoint: ~D~%" (-> this joint-ppoint))
+  (format #t "~1Tnum-to-birth: ~f~%" (-> this num-to-birth))
+  (format #t "~1Tdataf[1] @ #x~X~%" (&-> this sprite))
+  (format #t "~1Tdata[1] @ #x~X~%" (&-> this sprite))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type sp-field-init-spec
 (deftype sp-field-init-spec (structure)

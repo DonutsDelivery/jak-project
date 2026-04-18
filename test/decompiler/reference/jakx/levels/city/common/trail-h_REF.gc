@@ -66,9 +66,27 @@
   this
   )
 
-;; type trail-blocker is defined here, but it is unknown to the decompiler
+;; definition of type trail-blocker
+(deftype trail-blocker (structure)
+  ((plane           plane   :inline)
+   (center          vector  :inline)
+   (radius-squared  float   :overlay-at (-> center data 3))
+   )
+  )
 
-(method-set! (the-as type trail-blocker) 3 L22)
+;; definition for method 3 of type trail-blocker
+(defmethod inspect ((this trail-blocker))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'trail-blocker)
+  (format #t "~1Tplane: #<plane @ #x~X>~%" (-> this plane))
+  (format #t "~1Tcenter: #<vector @ #x~X>~%" (-> this center))
+  (format #t "~1Tradius-squared: ~f~%" (-> this center w))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type trail-conn
 (deftype trail-conn (structure)

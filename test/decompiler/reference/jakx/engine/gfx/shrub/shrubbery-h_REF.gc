@@ -21,9 +21,45 @@
   this
   )
 
-;; type shrub-view-data is defined here, but it is unknown to the decompiler
+;; definition of type shrub-view-data
+(deftype shrub-view-data (structure)
+  ((data            uint128  3       :offset   0)
+   (texture-giftag  qword    :inline :overlay-at (-> data 0))
+   (consts          vector   :inline :overlay-at (-> data 1))
+   (fog-clamp       vector   :inline :overlay-at (-> data 2))
+   (tex-start-ptr   int32            :overlay-at (-> data 1))
+   (gifbufsum       float            :overlay-at tex-start-ptr)
+   (mtx-buf-ptr     int32            :overlay-at (-> consts y))
+   (exp23           float            :overlay-at mtx-buf-ptr)
+   (fog-0           float            :overlay-at (-> consts z))
+   (fog-1           float            :overlay-at (-> consts w))
+   (fog-min         float            :overlay-at (-> data 2))
+   (fog-max         float            :overlay-at (-> fog-clamp y))
+   )
+  )
 
-(method-set! (the-as type shrub-view-data) 3 L28)
+;; definition for method 3 of type shrub-view-data
+(defmethod inspect ((this shrub-view-data))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'shrub-view-data)
+  (format #t "~1Tdata[3] @ #x~X~%" (-> this data))
+  (format #t "~1Ttexture-giftag: #<qword @ #x~X>~%" (-> this data))
+  (format #t "~1Tconsts: #<vector @ #x~X>~%" (-> this consts))
+  (format #t "~1Tfog-clamp: #<vector @ #x~X>~%" (-> this fog-clamp))
+  (format #t "~1Ttex-start-ptr: ~D~%" (-> this consts x))
+  (format #t "~1Tgifbufsum: ~f~%" (-> this consts x))
+  (format #t "~1Tmtx-buf-ptr: ~D~%" (-> this consts y))
+  (format #t "~1Texp23: ~f~%" (-> this consts y))
+  (format #t "~1Tfog-0: ~f~%" (-> this consts z))
+  (format #t "~1Tfog-1: ~f~%" (-> this consts w))
+  (format #t "~1Tfog-min: ~f~%" (-> this fog-clamp x))
+  (format #t "~1Tfog-max: ~f~%" (-> this fog-clamp y))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type shrubbery
 (deftype shrubbery (drawable)

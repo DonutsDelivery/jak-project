@@ -25,9 +25,23 @@
   this
   )
 
-;; type sky-color-day is defined here, but it is unknown to the decompiler
+;; definition of type sky-color-day
+(deftype sky-color-day (structure)
+  ((hour  sky-color-hour  24 :inline)
+   )
+  )
 
-(method-set! (the-as type sky-color-day) 3 L38)
+;; definition for method 3 of type sky-color-day
+(defmethod inspect ((this sky-color-day))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'sky-color-day)
+  (format #t "~1Thour[24] @ #x~X~%" (-> this hour))
+  (label cfg-4)
+  this
+  )
 
 ;; type sky-sun-data is defined here, but it is unknown to the decompiler
 

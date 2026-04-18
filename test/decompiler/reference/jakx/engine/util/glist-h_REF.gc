@@ -51,6 +51,7 @@
    (tailpred  glst-node)
    (numelem   int32)
    )
+  :allow-misaligned
   )
 
 ;; definition for method 3 of type glst-list

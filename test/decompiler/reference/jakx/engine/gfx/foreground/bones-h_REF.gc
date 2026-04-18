@@ -1,13 +1,53 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; type bone-buffer is defined here, but it is unknown to the decompiler
+;; definition of type bone-buffer
+(deftype bone-buffer (structure)
+  ((joint   matrix    16 :inline)
+   (bone    bone      16 :inline)
+   (output  pris-mtx  16 :inline)
+   )
+  )
 
-(method-set! (the-as type bone-buffer) 3 L22)
+;; definition for method 3 of type bone-buffer
+(defmethod inspect ((this bone-buffer))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'bone-buffer)
+  (format #t "~1Tjoint[16] @ #x~X~%" (-> this joint))
+  (format #t "~1Tbone[16] @ #x~X~%" (-> this bone))
+  (format #t "~1Toutput[16] @ #x~X~%" (-> this output))
+  (label cfg-4)
+  this
+  )
 
-;; type bone-layout is defined here, but it is unknown to the decompiler
+;; definition of type bone-layout
+(deftype bone-layout (structure)
+  ((data    uint16                   8)
+   (joint   (inline-array matrix)    2 :overlay-at (-> data 0))
+   (bone    (inline-array bone)      2 :overlay-at (-> data 4))
+   (output  (inline-array pris-mtx)  2 :offset  16)
+   (unused  uint32                   2 :offset  24)
+   )
+  )
 
-(method-set! (the-as type bone-layout) 3 L19)
+;; definition for method 3 of type bone-layout
+(defmethod inspect ((this bone-layout))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'bone-layout)
+  (format #t "~1Tdata[8] @ #x~X~%" (-> this data))
+  (format #t "~1Tjoint[2] @ #x~X~%" (-> this data))
+  (format #t "~1Tbone[2] @ #x~X~%" (-> this bone))
+  (format #t "~1Toutput[2] @ #x~X~%" (-> this output))
+  (format #t "~1Tunused[2] @ #x~X~%" (-> this unused))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type bone-regs
 (deftype bone-regs (structure)
@@ -43,9 +83,25 @@
   this
   )
 
-;; type bone-work is defined here, but it is unknown to the decompiler
+;; definition of type bone-work
+(deftype bone-work (structure)
+  ((layout  bone-layout  :inline)
+   (regs    bone-regs    :inline)
+   )
+  )
 
-(method-set! (the-as type bone-work) 3 L13)
+;; definition for method 3 of type bone-work
+(defmethod inspect ((this bone-work))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'bone-work)
+  (format #t "~1Tlayout: #<bone-layout @ #x~X>~%" (-> this layout))
+  (format #t "~1Tregs: #<bone-regs @ #x~X>~%" (-> this regs))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type bone-debug
 (deftype bone-debug (structure)
@@ -67,9 +123,25 @@
   this
   )
 
-;; type bone-memory is defined here, but it is unknown to the decompiler
+;; definition of type bone-memory
+(deftype bone-memory (structure)
+  ((work    bone-work    :inline)
+   (buffer  bone-buffer  2 :inline)
+   )
+  )
 
-(method-set! (the-as type bone-memory) 3 L7)
+;; definition for method 3 of type bone-memory
+(defmethod inspect ((this bone-memory))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'bone-memory)
+  (format #t "~1Twork: #<bone-work @ #x~X>~%" (-> this work))
+  (format #t "~1Tbuffer[2] @ #x~X~%" (-> this buffer))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type bone-calculation
 (deftype bone-calculation (structure)
