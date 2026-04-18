@@ -33921,11 +33921,11 @@
 
 
   
-#|(deftype hud-box (structure)
-  ((box   bounding-box2 :inline :offset-assert 0)
-   (min   vector2       :inline :offset-assert 0)
-   (max   vector2       :inline :offset-assert 8)
-   (color vector4w      :inline :offset-assert 16)
+(deftype hud-box (structure)
+  ((box   bounding-box2 :inline :offset   0)
+   (min   vector2       :inline :offset   0)
+   (max   vector2       :inline :offset   8)
+   (color vector4w      :inline :offset  16)
    )
   :method-count-assert 13
   :size-assert         #x20
@@ -33936,14 +33936,14 @@
     (hud-box-method-11 (_type_ dma-buffer) none) ;; 11
     (hud-box-method-12 (_type_ dma-buffer) none) ;; 12
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-icon (structure)
-  ((icon    (pointer manipy)         :offset-assert 0) ;; guessed by decompiler
+(deftype hud-icon (structure)
+  ((icon    (pointer manipy)         :offset-assert 0)
    (pos     vector4w         :inline :offset-assert 16)
    (scale-x float                    :offset-assert 32)
    (scale-y float                    :offset-assert 36)
@@ -33951,7 +33951,7 @@
   :method-count-assert 9
   :size-assert         #x28
   :flag-assert         #x900000028
-  )|#
+  )
   
 
 
@@ -35742,16 +35742,16 @@
 
 
   
-#|(deftype sprite-glow-consts (structure)
-  ((camera      matrix :inline :offset-assert 0)
-   (perspective matrix :inline :offset-assert 64)
+(deftype sprite-glow-consts (structure)
+  ((camera      matrix :inline :offset-assert   0)
+   (perspective matrix :inline :offset-assert  64)
    (hvdf-offset vector :inline :offset-assert 128)
    (hmge-scale  vector :inline :offset-assert 144)
    (consts      vector :inline :offset-assert 160)
-   (pfog0       float          :offset-assert 160)
-   (deg-to-rad  float          :offset-assert 164)
-   (min-scale   float          :offset-assert 168)
-   (inv-area    float          :offset-assert 172)
+   (pfog0       float          :offset        160)
+   (deg-to-rad  float          :offset        164)
+   (min-scale   float          :offset        168)
+   (inv-area    float          :offset        172)
    (sincos-01   vector :inline :offset-assert 176)
    (sincos-23   vector :inline :offset-assert 192)
    (sincos-45   vector :inline :offset-assert 208)
@@ -35759,14 +35759,14 @@
    (sincos-89   vector :inline :offset-assert 240)
    (basis-x     vector :inline :offset-assert 256)
    (basis-y     vector :inline :offset-assert 272)
-   (xy-array    vector 4       :offset-assert 288) ;; guessed by decompiler
+   (xy-array    vector 4 :inline :offset-assert 288)
    (clamp-min   vector :inline :offset-assert 352)
    (clamp-max   vector :inline :offset-assert 368)
    )
   :method-count-assert 9
   :size-assert         #x180
   :flag-assert         #x900000180
-  )|#
+  )
   
 
 
@@ -36160,14 +36160,14 @@
 
 
   
-#|(deftype ripple-globals (structure)
+(deftype ripple-globals (structure)
   ((count    int32             :offset-assert 0)
-   (requests ripple-request 16 :offset-assert 4) ;; guessed by decompiler
+   (requests ripple-request 16 :inline :offset-assert 4)
    )
   :method-count-assert 9
   :size-assert         #x84
   :flag-assert         #x900000084
-  )|#
+  )
   
 
 
@@ -36699,13 +36699,13 @@
 
 
   
-#|(deftype dma-test (structure)
-  ((data qword 101 :offset-assert 0) ;; guessed by decompiler
+(deftype dma-test (structure)
+  ((data qword 101 :inline :offset-assert 0)
    )
   :method-count-assert 9
   :size-assert         #x650
   :flag-assert         #x900000650
-  )|#
+  )
   
 
 
