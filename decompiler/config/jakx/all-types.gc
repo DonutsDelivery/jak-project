@@ -35468,26 +35468,26 @@
 
 
   
-#|(deftype sprite-header (structure)
-  ((header      qword 1 :offset-assert 0) ;; guessed by decompiler
-   (num-sprites int32   :offset-assert 0)
+(deftype sprite-header (structure)
+  ((header      qword 1 :inline :offset-assert 0) ;; guessed by decompiler
+   (num-sprites int32          :offset 0)
    )
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
-  )|#
+  )
   
 
 
 
   
-#|(deftype sprite-hvdf-data (structure)
-  ((data qword 76 :offset-assert 0) ;; guessed by decompiler
+(deftype sprite-hvdf-data (structure)
+  ((data qword 76 :inline :offset-assert 0) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x4c0
   :flag-assert         #x9000004c0
-  )|#
+  )
   
 
 
@@ -46736,7 +46736,7 @@
 
 
   
-#|(deftype eco (process-drawable)
+(deftype eco (process-drawable)
   ()
   :method-count-assert 56
   :size-assert         #xf8
@@ -46749,7 +46749,7 @@
     (eco-method-54 (_type_) none) ;; 54
     (eco-method-55 (_type_) none) ;; 55
     )
-  )|#
+  )
   
 
 
@@ -54348,15 +54348,15 @@
 
 
   
-#|(deftype can-leaves-floor (process-drawable)
+(deftype can-leaves-floor (process-drawable)
   ()
   :method-count-assert 51
-  :size-assert         #x100
-  :flag-assert         #x3300700100
-  (:state-methods
-    idle ;; 50
+  :size-assert         #xf8
+  :flag-assert         #x33007000f8
+  (:methods
+    (idle () _type_ :state) ;; 50
     )
-  )|#
+  )
   
 
 
