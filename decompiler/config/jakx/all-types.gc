@@ -4518,9 +4518,9 @@
 (deftype race-mesh-debug (process)
   ((mesh basic  :offset-assert 144)
    )
-  :method-count-assert 21
+  :method-count-assert 16
   :size-assert         #x94
-  :flag-assert         #x1500100094
+  :flag-assert         #x1000100094
   (:methods
     (race-mesh-debug-method-9 () none) ;; 9
     (race-mesh-debug-method-10 () none) ;; 10
@@ -60028,6 +60028,7 @@
 (define-extern medius-update-game-request object)
 (define-extern net-stream-media-video-record-data object)
 (define-extern net-type-structure object)
+(define-extern oil-emitter object)
 (define-extern text-display-supernova-backfire-view-2 object)
 
 ;; Auto-extern batch 12
