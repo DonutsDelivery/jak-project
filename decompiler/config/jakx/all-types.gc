@@ -30306,9 +30306,9 @@
   :flag-assert         #x4801b00231
   (:methods
     (projectile-method-50 (_type_) none)
-    (projectile-method-51 (_type_) none)
     )
   (:state-methods
+    dissipate ;; 51
     impact ;; 52
     moving ;; 53
     )
@@ -33295,9 +33295,9 @@
     )
   (:state-methods
     hud-hidden ;; 15
+    hud-in ;; 16
     )
   (:methods
-    (hud-method-16 (_type_) none) ;; 16
     (hud-method-17 (_type_) symbol) ;; 17
     (hud-method-18 (_type_) symbol) ;; 18
     (hud-method-19 (_type_) symbol) ;; 19
@@ -45034,9 +45034,9 @@
   :flag-assert         #x38007000f4
   (:state-methods
     idle ;; 42
+    wait-respawn ;; 43
     )
   (:methods
-    (net-powerup-method-43 () none) ;; 43
     (net-powerup-method-44 () none) ;; 44
     (net-powerup-method-45 () none) ;; 45
     (net-powerup-method-46 () none) ;; 46
@@ -46081,9 +46081,9 @@
   :flag-assert         #x33003000bc
   (:state-methods
     running ;; 42
+    die ;; 43
     )
   (:methods
-    (eco-mgr-method-43 () none) ;; 43
     (eco-mgr-method-44 () int) ;; 44
     (eco-mgr-method-45 () none) ;; 45
     (eco-mgr-method-46 () none) ;; 46
