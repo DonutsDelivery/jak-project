@@ -52973,12 +52973,12 @@
 
 
   
-#|(deftype hud-spartacus (hud)
+(deftype hud-spartacus (hud)
   ()
   :method-count-assert 30
   :size-assert         #x18dc
   :flag-assert         #x1e185018dc
-  )|#
+  )
   
 
 
