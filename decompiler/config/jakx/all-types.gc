@@ -42451,7 +42451,7 @@
   :flag-assert         #x12033003c0
   (:methods
     (debris-group-method-14 () _type_ :state) ;; 14
-    (debris-group-method-16 (_type_ int) none) ;; 16
+    (debris-group-method-16 () _type_ :state) ;; 16 (symbol-registry treats as state)
     (debris-group-method-17 () _type_ :state) ;; 17 (symbol-registry treats as state)
     )
   (:state-methods
