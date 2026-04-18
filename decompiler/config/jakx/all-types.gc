@@ -29403,7 +29403,7 @@
   
 
 
-(define-extern joint-mod-debug-draw function) ;; (function joint-mod none)
+(define-extern joint-mod-debug-draw (function joint-mod none))
 (define-extern joint-mod-spinner-callback (function cspace transformq none))
 (define-extern joint-mod-rotate-local-callback (function cspace transformq none))
 (define-extern joint-mod-trans-rot-local-callback function)
