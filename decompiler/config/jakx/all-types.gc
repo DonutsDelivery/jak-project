@@ -38756,26 +38756,26 @@
 
 
   
-(deftype vol-control (basic)
-  ((flags         uint32                      :offset-assert 4) ;; vol-flags
-   (process       process-drawable            :offset-assert 8) ;; guessed by decompiler
-   (pos-vol-count int32                       :offset-assert 12)
-   (pos-vol       plane-volume     32 :inline :offset-assert 16) ;; guessed by decompiler
-   (neg-vol-count int32                       :offset-assert 784)
-   (neg-vol       plane-volume     32 :inline :offset-assert 788) ;; guessed by decompiler
-   (debug-point   vector-array                :offset-assert 1556) ;; guessed by decompiler
-   (debug-normal  vector-array                :offset-assert 1560) ;; guessed by decompiler
+#|(deftype vol-control (basic)
+  ((flags         vol-flags           :offset-assert 4) ;; guessed by decompiler
+   (process       process-drawable    :offset-assert 8) ;; guessed by decompiler
+   (pos-vol-count int32               :offset-assert 12)
+   (pos-vol       plane-volume     32 :offset-assert 16) ;; guessed by decompiler
+   (neg-vol-count int32               :offset-assert 784)
+   (neg-vol       plane-volume     32 :offset-assert 788) ;; guessed by decompiler
+   (debug-point   vector-array        :offset-assert 1556) ;; guessed by decompiler
+   (debug-normal  vector-array        :offset-assert 1560) ;; guessed by decompiler
    )
   :method-count-assert 12
   :size-assert         #x61c
   :flag-assert         #xc0000061c
   (:methods
-    (new (symbol type) _type_) ;; 0
+    (new (symbol type) _type_) ;; 0 ;; (new (symbol type process-drawable) _type_)
     (vol-control-method-9 (_type_) none) ;; 9
     (vol-control-method-10 (_type_ plane) symbol) ;; 10
     (vol-control-method-11 (_type_) symbol) ;; 11
     )
-  )
+  )|#
   
 
 
