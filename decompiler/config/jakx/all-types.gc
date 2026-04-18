@@ -14138,27 +14138,27 @@
   :size-assert         #xbb
   :flag-assert         #x1e000000bb
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type matrix int int float font-color font-flags) _type_)
+    (new (symbol type matrix int int float font-color font-flags) _type_) ;; 0
     (font-context-method-9 (font-context matrix) font-context) ;; 9
     (font-context-method-10 (font-context int int) font-context) ;; 10
     (font-context-method-11 (font-context int) font-context) ;; 11
     (font-context-method-12 (font-context float) font-context) ;; 12
     (font-context-method-13 (font-context int) font-context) ;; 13
-    (font-context-method-14 (font-context int) font-context) ;; 14
-    (font-context-method-15 (font-context float) font-context) ;; 15
-    (font-context-method-16 (font-context font-color) font-context) ;; 16
+    (font-context-method-14 (font-context int int) font-context) ;; 14
+    (font-context-method-15 (font-context int) font-context) ;; 15
+    (font-context-method-16 (font-context float) font-context) ;; 16
     (font-context-method-17 (font-context font-flags) font-context) ;; 17
     (font-context-method-18 (font-context uint) font-context) ;; 18
     (font-context-method-19 (font-context float) font-context) ;; 19
     (font-context-method-20 (font-context float) font-context) ;; 20
-    (font-context-method-21 () none) ;; 21
-    (font-context-method-22 () none) ;; 22
+    (font-context-method-21 (font-context int) font-context) ;; 21
+    (font-context-method-22 (font-context int) font-context) ;; 22
     (font-context-method-23 () none) ;; 23
     (font-context-method-24 () none) ;; 24
     (font-context-method-25 () none) ;; 25
-    (font-context-method-26 () none) ;; 26
-    (font-context-method-27 () none) ;; 27
-    (font-context-method-28 () none) ;; 28
+    (font-context-method-26 (font-context float) font-context) ;; 26
+    (font-context-method-27 (font-context uint) font-context) ;; 27
+    (font-context-method-28 (font-context uint) font-context) ;; 28
     (font-context-method-29 () none) ;; 29
     )
   )
@@ -22651,7 +22651,6 @@
 
 
 
-#|
 (deftype medius-create-game-on-self-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (session-key uint8 17 :offset-assert 21)
@@ -22670,13 +22669,12 @@
    (generic-field3        int32                    :offset-assert 176)
    (port                  int32                    :offset-assert 180)
    (game-host-type        int32                    :offset-assert 184)
-   (address-list          net-address-list :inline :offset 188)
+   (address-list          uint8 48         :offset-assert 188)
    )
   :method-count-assert 9
   :size-assert         #xec
   :flag-assert         #x9000000ec
   )
-|#
 
 
 
@@ -24197,17 +24195,15 @@
 
 
 
-#|
 (deftype medius-join-channel-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (status-code  int32                       :offset-assert 24)
-   (connect-info net-connection-info :inline :offset-assert 28)
+   (connect-info uint8 154           :offset 28)
    )
   :method-count-assert 9
   :size-assert         #xb6
   :flag-assert         #x9000000b6
   )
-|#
 
 
 
@@ -25443,10 +25439,9 @@
 
   
 
-#|
 (deftype medius-connect-in-params (structure)
   ((connect-info                         net-connection-info     :inline :offset-assert 0)
-   (stream-media-params                  net-stream-media-params :inline :offset-assert 156)
+   (stream-media-params                  uint8 112               :offset 156)
    (max-clients-per-connection           uint32                          :offset-assert 268)
    (my-connect-callback                  basic                           :offset-assert 272)
    (pf-remote-client-connect-callback    basic                           :offset-assert 276)
@@ -25456,7 +25451,6 @@
   :size-assert         #x11c
   :flag-assert         #x90000011c
   )
-|#
 
   
 
@@ -26253,16 +26247,14 @@
 
 
 
-#|
 (deftype medius-server-join-game-request (structure)
   ((message-id uint8 21 :offset-assert 0)
-   (connect-info net-connection-info :inline :offset-assert 24)
+   (connect-info uint8 154           :offset 24)
    )
   :method-count-assert 9
   :size-assert         #xb2
   :flag-assert         #x9000000b2
   )
-|#
 
 
 
@@ -53275,7 +53267,6 @@
 
   
 
-#|
 (deftype raceline-weapon (process-drawable)
   ((owner-id       int8                       :offset-assert 248)
    (delta-height   float                      :offset-assert 252)
@@ -53283,7 +53274,7 @@
    (minimap        connection-minimap         :offset-assert 260)
    (visible        basic                      :offset-assert 264)
    (last-sent-time int32                      :offset-assert 268)
-   (prox           basic                      :offset-assert 168)
+   (prox-obj       basic                      :offset-assert 272)
    (mesh           basic                      :offset-assert 276)
    (slice-id       int16                      :offset-assert 280)
    (race-line      race-line                  :offset-assert 284)
@@ -53331,9 +53322,6 @@
     die ;; 51
     )
   )
-|#
-
-  
 
 
 (define-extern raceline-weapon-init-remote function)
@@ -53390,7 +53378,6 @@
 
   
 
-#|
 (deftype seeker (raceline-weapon)
   ((sound-id    uint32  :offset-assert 356)
    (start-speed float   :offset-assert 360)
@@ -53403,7 +53390,6 @@
     tracking ;; 50
     )
   )
-|#
 
   
 
@@ -53425,10 +53411,9 @@
 
 
 
-#|
 (deftype success-seeker (seeker)
   ((last-had-target-time int32           :offset-assert 364)
-   (lightning-point uint8 3 :offset-assert 368)
+   (lightning-points uint8 144 :offset-assert 368)
    (particle-matrix      matrix  :inline :offset-assert 512)
    (lost-target          basic           :offset-assert 576)
    (center-quad          basic           :offset-assert 580)
@@ -53447,7 +53432,6 @@
     tracking ;; 50
     )
   )
-|#
 
 
 
@@ -59402,6 +59386,13 @@
 (define-extern instance-tie-work object)
 (define-extern knet-scert-function-0-args object)
 (define-extern knet-scert-function-2-args object)
+(define-extern knet-scert-function-3-args object)
+(define-extern knet-scert-function-5-args object)
+(define-extern knet-dopen function)
+(define-extern knet-tcp-socket-open function)
+(define-extern knet-tcp-socket-close function)
+(define-extern knet-tcp-socket-send function)
+(define-extern fmv-get-mem-requirements function)
 ;;(define-extern light-trail-tracker object)
 ;; (define-extern lightning-new-tracker object) ;; clobbers active deftype
 ;; (define-extern lightning-spans-internal-array object) ;; clobbers active deftype
