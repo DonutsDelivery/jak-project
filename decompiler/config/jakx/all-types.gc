@@ -37167,7 +37167,7 @@
 
 
   
-#|(deftype sp-launch-stack (structure)
+(deftype sp-launch-stack (structure)
   ((ra         basic                       :offset-assert 0)
    (dummy0     basic                       :offset-assert 4)
    (dummy1     basic                       :offset-assert 8)
@@ -37189,8 +37189,7 @@
   :method-count-assert 9
   :size-assert         #x140
   :flag-assert         #x900000140
-  ;; field ra uses ~A with a signed load. field dummy0 uses ~A with a signed load. field dummy1 uses ~A with a signed load. field b-spfic uses ~A with a signed load. field l-spfic uses ~A with a signed load.
-  )|#
+  )
   
 
 
@@ -55426,9 +55425,6 @@
   :method-count-assert 57
   :size-assert         #x10c
   :flag-assert         #x390080010c
-  (:methods
-    (idle () _type_ :state) ;; 50
-    )
   )
   
 
