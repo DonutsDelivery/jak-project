@@ -1,14 +1,9 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; name: debug-sphere.gc
-;; name in dgo: debug-sphere
-;; dgos: GAME
-
-;; DECOMP BEGINS
-
+;; definition for function make-debug-sphere-table
+;; INFO: Used lq/sq
 (defun make-debug-sphere-table ((arg0 vector-array) (arg1 float) (arg2 float))
-  "Create a table of lines on a sphere."
   (local-vars (sv-80 vector) (sv-96 vector) (sv-112 int))
   (let ((s2-0 (new-stack-vector0))
         (f30-0 1.0)
@@ -35,9 +30,9 @@
           (set! (-> sv-80 z) (+ (-> s2-0 z) (* (sin (* (the float (+ sv-112 1)) (/ 65536.0 arg1))) f28-0)))
           (set! (-> sv-96 x) (+ (-> s2-0 x) (* (cos (* (the float sv-112) (/ 65536.0 arg1))) f26-0)))
           (set! (-> sv-96 z) (+ (-> s2-0 z) (* (sin (* (the float sv-112) (/ 65536.0 arg1))) f26-0)))
-          (vector-copy! (-> arg0 data s5-0) s0-0)
-          (vector-copy! (-> arg0 data (+ s5-0 1)) sv-80)
-          (vector-copy! (-> arg0 data (+ s5-0 2)) sv-96)
+          (set! (-> arg0 data s5-0 quad) (-> s0-0 quad))
+          (set! (-> arg0 data (+ s5-0 1) quad) (-> sv-80 quad))
+          (set! (-> arg0 data (+ s5-0 2) quad) (-> sv-96 quad))
           (+! s5-0 3)
           (set! sv-112 (+ sv-112 1))
           )
@@ -48,12 +43,15 @@
   arg0
   )
 
+;; this part is debug only
 (when *debug-segment*
+;; definition for symbol *debug-sphere-table*, type (array vector-array)
 (define *debug-sphere-table* (new 'debug 'boxed-array vector-array 10))
 
 )
+;; definition for function add-debug-sphere-from-table
+;; INFO: Used lq/sq
 (defun add-debug-sphere-from-table ((arg0 bucket-id) (arg1 vector) (arg2 meters) (arg3 rgba) (arg4 int))
-  "Draw a sphere out of debug lines, using the precomputed table of lines."
   (local-vars (sv-32 vector-array) (sv-36 vector))
   (rlet ((vf1 :class vf)
          (vf2 :class vf)
@@ -93,6 +91,9 @@
         )
       )
     0
-    (none)
     )
   )
+
+
+
+

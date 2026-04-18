@@ -1,19 +1,15 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; name: glist.gc
-;; name in dgo: glist
-;; dgos: GAME
-
-;; DECOMP BEGINS
-
 ;; this file is debug only
 (declare-file (debug))
 
+;; definition for function glst-num-elements
 (defun glst-num-elements ((arg0 glst-list))
   (-> arg0 numelem)
   )
 
+;; definition for function glst-remove
 (defun glst-remove ((arg0 glst-list) (arg1 glst-node))
   (let ((v1-0 arg1))
     "return the previous node in the list"
@@ -31,6 +27,7 @@
   arg1
   )
 
+;; definition for function glst-remove-tail
 (defun glst-remove-tail ((arg0 glst-list))
   (let ((v1-0 arg0))
     "return the tail of the list"
@@ -46,6 +43,7 @@
     )
   )
 
+;; definition for function glst-remove-head
 (defun glst-remove-head ((arg0 glst-list))
   (let ((v1-0 arg0))
     "return the start of the list"
@@ -61,6 +59,7 @@
     )
   )
 
+;; definition for function glst-insert-before
 (defun glst-insert-before ((arg0 glst-list) (arg1 glst-node) (arg2 glst-node))
   (let ((v1-0 arg1))
     "return the previous node in the list"
@@ -75,6 +74,7 @@
   arg2
   )
 
+;; definition for function glst-insert-after
 (defun glst-insert-after ((arg0 glst-list) (arg1 glst-node) (arg2 glst-node))
   (let ((v1-0 arg1))
     "return the next node in the list"
@@ -89,16 +89,19 @@
   arg2
   )
 
+;; definition for function glst-add-tail
 (defun glst-add-tail ((arg0 glst-list) (arg1 glst-node))
   (glst-insert-before arg0 (the-as glst-node (&-> arg0 tail)) arg1)
   arg1
   )
 
+;; definition for function glst-add-head
 (defun glst-add-head ((arg0 glst-list) (arg1 glst-node))
   (glst-insert-after arg0 (the-as glst-node arg0) arg1)
   arg1
   )
 
+;; definition for function glst-init-list!
 (defun glst-init-list! ((arg0 glst-list))
   (set! (-> arg0 head) (the-as glst-node (&-> arg0 tail)))
   (set! (-> arg0 tail) #f)
@@ -107,6 +110,7 @@
   arg0
   )
 
+;; definition for function glst-find-node-by-name
 (defun glst-find-node-by-name ((arg0 glst-list) (arg1 string))
   (let ((v1-0 arg0))
     "return the start of the list"
@@ -126,6 +130,7 @@
   (the-as glst-node #f)
   )
 
+;; definition for function glst-get-node-by-index
 (defun glst-get-node-by-index ((arg0 glst-list) (arg1 int))
   (when (and (< arg1 (glst-num-elements arg0)) (>= arg1 0))
     "return the start of the list"
@@ -144,6 +149,7 @@
   (the-as glst-node #f)
   )
 
+;; definition for function glst-length-of-longest-name
 (defun glst-length-of-longest-name ((arg0 glst-list))
   (let ((gp-0 0))
     (let ((v1-0 arg0))
@@ -167,6 +173,7 @@
     )
   )
 
+;; definition for function glst-get-node-index
 (defun glst-get-node-index ((arg0 glst-list) (arg1 glst-node))
   (let ((v1-0 0))
     "return the start of the list"
@@ -186,3 +193,7 @@
     )
   -1
   )
+
+
+
+
