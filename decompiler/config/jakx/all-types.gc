@@ -35646,7 +35646,7 @@
 (define-extern sprite-setup-header function) ;; (function sprite-header int none)
 (define-extern clear-sprite-aux-list (function none))
 (define-extern add-to-sprite-aux-list (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d uint none))
-(define-extern sprite-setup-frame-data function) ;; (function sprite-frame-data uint none)
+(define-extern sprite-setup-frame-data (function sprite-frame-data uint none))
 (define-extern sprite-vu1-block vu-function)
 (define-extern sprite-set-3d-quaternion! (function sprite-vec-data-3d quaternion quaternion))
 (define-extern sprite-get-3d-quaternion! (function quaternion sprite-vec-data-3d quaternion))
