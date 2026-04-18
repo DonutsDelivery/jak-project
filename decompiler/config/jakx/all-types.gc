@@ -27293,21 +27293,13 @@
     )
   (:state-methods
     idle ;; 15
-    )
-  (:methods
-    (net-mgr-method-16 () none) ;; 16
-    )
-  (:state-methods
+    die ;; 16
     getting-universe-information ;; 17
-    )
-  (:methods
-    (net-mgr-method-18 () none) ;; 18
-    )
-  (:state-methods
+    dns-lookup ;; 18
     connecting-to-mas ;; 19
+    beginning-session ;; 20
     )
   (:methods
-    (net-mgr-method-20 () none) ;; 20
     (net-mgr-method-21 () none) ;; 21
     (net-mgr-method-22 () none) ;; 22
     (net-mgr-method-23 () none) ;; 23
@@ -27321,21 +27313,17 @@
     )
   (:state-methods
     refreshing-lan-games ;; 31
+    verifying-lan-game ;; 32
     )
   (:methods
-    (net-mgr-method-32 () none) ;; 32
     (net-mgr-method-33 () none) ;; 33
     (net-mgr-method-34 () none) ;; 34
     (net-mgr-method-35 () none) ;; 35
     )
   (:state-methods
     starting-playback-game ;; 36
-    )
-  (:methods
-    (net-mgr-method-37 () none) ;; 37
-    (net-mgr-method-38 () none) ;; 38
-    )
-  (:state-methods
+    playing-playback-game ;; 37
+    hosting-game ;; 38
     connecting-to-game ;; 39
     )
   (:methods
@@ -34378,9 +34366,9 @@
   (:state-methods
     idle ;; 15
     idle-texture ;; 16
+    idle-texture-fma ;; 17
     )
   (:methods
-    (fmv-player-method-12 () none) ;; 17
     (fmv-player-method-13 () none) ;; 18
     (fmv-player-method-14 () none) ;; 19
     (fmv-player-method-15 () none) ;; 20
@@ -44685,9 +44673,9 @@
   :flag-assert         #x6201000190
   (:state-methods
     waiting ;; 42
+    running ;; 43
     )
   (:methods
-    (net-player-method-43 () none) ;; 43
     (net-player-method-44 () none) ;; 44
     (net-player-method-45 () symbol) ;; 45
     (net-player-method-46 () none) ;; 46
@@ -44858,9 +44846,9 @@
   :flag-assert         #x5703f0047a
   (:state-methods
     running ;; 42
+    demo-screen ;; 43
     )
   (:methods
-    (net-world-method-43 () none) ;; 43
     (net-world-method-44 () none) ;; 44
     (net-world-method-45 () symbol) ;; 45
     (net-world-method-46 () none) ;; 46
@@ -45113,9 +45101,9 @@
   :flag-assert         #x3900800108
   (:state-methods
     idle ;; 50
+    die ;; 51
     )
   (:methods
-    (powerup-draw-method-51 () none) ;; 51
     (powerup-draw-method-52 () none) ;; 52
     (powerup-draw-method-53 () symbol) ;; 53
     (powerup-draw-method-54 () none) ;; 54
