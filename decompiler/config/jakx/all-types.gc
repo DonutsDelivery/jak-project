@@ -56306,15 +56306,15 @@
 
 
   
-#|(deftype haven-trashcan (construction-object)
+(deftype haven-trashcan (construction-object)
   ((has-hit-ground basic   :offset-assert 304)
    (barrel-roll    uint32  :offset-assert 308)
    (rolling        basic   :offset-assert 312)
    )
-  :method-count-assert 93
+  :method-count-assert 95
   :size-assert         #x13c
-  :flag-assert         #x5d00b0013c
-  )|#
+  :flag-assert         #x5f00b0013c
+  )
   
 
 
@@ -56742,13 +56742,13 @@
 
 
   
-#|(deftype kcro-bouncy-tire-a (construction-object)
+(deftype kcro-bouncy-tire-a (construction-object)
   ((has-hit-ground basic  :offset-assert 304)
    )
-  :method-count-assert 93
+  :method-count-assert 95
   :size-assert         #x134
-  :flag-assert         #x5d00b00134
-  )|#
+  :flag-assert         #x5f00b00134
+  )
   
 
 
@@ -56776,13 +56776,13 @@
 
 
   
-#|(deftype kcro-oil-barrel (construction-object)
+(deftype kcro-oil-barrel (construction-object)
   ((has-hit-ground basic  :offset-assert 304)
    )
-  :method-count-assert 93
+  :method-count-assert 95
   :size-assert         #x134
-  :flag-assert         #x5d00b00134
-  )|#
+  :flag-assert         #x5f00b00134
+  )
   
 
 
