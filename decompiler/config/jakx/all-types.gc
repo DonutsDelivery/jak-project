@@ -12072,7 +12072,7 @@
 
 
   
-#|(deftype trail-blocker (structure)
+(deftype trail-blocker (structure)
   ((plane          plane  :inline :offset-assert 0)
    (center         vector :inline :offset-assert 16)
    (radius-squared float          :offset-assert 28)
@@ -12080,7 +12080,7 @@
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
-  )|#
+  )
   
 
 
@@ -16326,13 +16326,13 @@
 
 
   
-#|(deftype sky-color-day (structure)
-  ((hour sky-color-hour 24 :offset-assert 0) ;; guessed by decompiler
+(deftype sky-color-day (structure)
+  ((hour sky-color-hour 24 :inline :offset-assert 0) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x180
   :flag-assert         #x900000180
-  )|#
+  )
   
 
 
@@ -20575,7 +20575,7 @@
 
 
   
-#|(deftype wind-vector (structure)
+(deftype wind-vector (structure)
   ((wind-pos  vector4w :inline :offset-assert 0)
    (wind-vel  vector4w :inline :offset-assert 16)
    (stiffness float            :offset-assert 28)
@@ -20583,7 +20583,7 @@
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
-  )|#
+  )
   
 
 
@@ -56185,34 +56185,34 @@
 
 
   
-#|(deftype palm-tree-a (palm-tree)
+(deftype palm-tree-a (palm-tree)
   ()
   :method-count-assert 56
   :size-assert         #x1d4
   :flag-assert         #x38015001d4
-  )|#
+  )
   
 
 
 
   
-#|(deftype palm-tree-b (palm-tree)
+(deftype palm-tree-b (palm-tree)
   ()
   :method-count-assert 56
   :size-assert         #x1d4
   :flag-assert         #x38015001d4
-  )|#
+  )
   
 
 
 
   
-#|(deftype palm-tree-c (palm-tree)
+(deftype palm-tree-c (palm-tree)
   ()
   :method-count-assert 56
   :size-assert         #x1d4
   :flag-assert         #x38015001d4
-  )|#
+  )
   
 
 
