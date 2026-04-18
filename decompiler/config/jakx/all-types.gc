@@ -43752,7 +43752,7 @@
   :size-assert         #x10
   :flag-assert         #xa00000010
   (:methods
-    (race-control-method-9 () none) ;; 9
+    (race-control-method-9 (_type_ race-state racer-state race-line) none) ;; 9
     )
   )
   
