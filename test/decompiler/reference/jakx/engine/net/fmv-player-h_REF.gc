@@ -59,9 +59,48 @@
   this
   )
 
-;; type fmv-player is defined here, but it is unknown to the decompiler
+;; definition of type fmv-player
+(deftype fmv-player (process)
+  ((texture-base-page     uint32)
+   (texture-width         uint32)
+   (gui-id                uint32)
+   (subtitle-change-time  uint64)
+   (start-time            uint64)
+   (fmv-mode              uint8)
+   )
+  (:methods
+    (fmv-player-method-9 () none)
+    (fmv-player-method-10 () none)
+    (fmv-player-method-11 () none)
+    (fmv-player-method-12 () none)
+    (fmv-player-method-13 () none)
+    (fmv-player-method-14 () none)
+    (fmv-player-method-15 () none)
+    (fmv-player-method-16 () none)
+    (fmv-player-method-17 () none)
+    (fmv-player-method-18 () none)
+    (fmv-player-method-19 () none)
+    )
+  )
 
-(method-set! (the-as type fmv-player) 3 L1641)
+;; definition for method 3 of type fmv-player
+(defmethod inspect ((this fmv-player))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (let ((t9-0 (method-of-type process inspect)))
+    (t9-0 this)
+    )
+  (format #t "~2Ttexture-base-page: ~D~%" (-> this texture-base-page))
+  (format #t "~2Ttexture-width: ~D~%" (-> this texture-width))
+  (format #t "~2Tgui-id: ~D~%" (-> this gui-id))
+  (format #t "~2Tsubtitle-change-time: ~D~%" (-> this subtitle-change-time))
+  (format #t "~2Tstart-time: ~D~%" (-> this start-time))
+  (format #t "~2Tfmv-mode: ~D~%" (-> this fmv-mode))
+  (label cfg-4)
+  this
+  )
 
 ;; definition for symbol *fmv-player*, type object
 (define *fmv-player* (the-as object #f))
