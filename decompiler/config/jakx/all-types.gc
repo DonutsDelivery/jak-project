@@ -4213,16 +4213,18 @@
   :size-assert         #xc4
   :flag-assert         #x16004000c4
   (:methods
-    (sabotage-sequence-method-9 () none) ;; 9
-    (sabotage-sequence-method-10 () none) ;; 10
-    (sabotage-sequence-method-11 () none) ;; 11
-    (sabotage-sequence-method-12 () none) ;; 12
-    (sabotage-sequence-method-13 () none) ;; 13
-    (sabotage-sequence-method-14 () none) ;; 14
-    (sabotage-sequence-method-16 () none) ;; 16
+    (sabotage-sequence-method-9 () none) ;; 14
     )
   (:state-methods
     idle ;; 15
+    )
+  (:methods
+    (sabotage-sequence-method-11 () none) ;; 16
+    (sabotage-sequence-method-12 () none) ;; 17
+    (sabotage-sequence-method-13 () none) ;; 18
+    (sabotage-sequence-method-14 () none) ;; 19
+    (sabotage-sequence-method-15 () none) ;; 20
+    (sabotage-sequence-method-16 () none) ;; 21
     )
   )
   
@@ -4250,15 +4252,17 @@
   :size-assert         #xc0
   :flag-assert         #x15003000c0
   (:methods
-    (hoff-text-floater-method-9 () none) ;; 9
-    (hoff-text-floater-method-10 () none) ;; 10
-    (hoff-text-floater-method-11 () none) ;; 11
-    (hoff-text-floater-method-12 () none) ;; 12
-    (hoff-text-floater-method-13 () none) ;; 13
-    (hoff-text-floater-method-14 () none) ;; 14
+    (hoff-text-floater-method-9 () none) ;; 14
     )
   (:state-methods
     run ;; 15
+    )
+  (:methods
+    (hoff-text-floater-method-11 () none) ;; 16
+    (hoff-text-floater-method-12 () none) ;; 17
+    (hoff-text-floater-method-13 () none) ;; 18
+    (hoff-text-floater-method-14 () none) ;; 19
+    (hoff-text-floater-method-15 () none) ;; 20
     )
   )
   
@@ -5196,15 +5200,17 @@
   :size-assert         #x98
   :flag-assert         #x1500100098
   (:methods
-    (vehicle-respawn-invul-method-9 () none) ;; 9
-    (vehicle-respawn-invul-method-10 () none) ;; 10
-    (vehicle-respawn-invul-method-11 () none) ;; 11
-    (vehicle-respawn-invul-method-12 () none) ;; 12
-    (vehicle-respawn-invul-method-13 () none) ;; 13
-    (vehicle-respawn-invul-method-14 () none) ;; 14
+    (vehicle-respawn-invul-method-9 () none) ;; 14
     )
   (:state-methods
     idle ;; 15
+    )
+  (:methods
+    (vehicle-respawn-invul-method-11 () none) ;; 16
+    (vehicle-respawn-invul-method-12 () none) ;; 17
+    (vehicle-respawn-invul-method-13 () none) ;; 18
+    (vehicle-respawn-invul-method-14 () none) ;; 19
+    (vehicle-respawn-invul-method-15 () none) ;; 20
     )
   )
   
@@ -29352,8 +29358,10 @@
   :method-count-assert 53
   :size-assert         #x1d4
   :flag-assert         #x35015001d4
+  (:state-methods
+    explode ;; 50
+    )
   (:methods
-    (explosion-method-50 (_type_) none) ;; 50
     (explosion-method-51 (_type_) none) ;; 51
     (explosion-method-52 (_type_) none) ;; 52
     )
@@ -30299,8 +30307,12 @@
   (:methods
     (projectile-method-50 (_type_) none)
     (projectile-method-51 (_type_) none)
-    (projectile-method-52 (_type_) none)
-    (projectile-method-53 (_type_) none)
+    )
+  (:state-methods
+    impact ;; 52
+    moving ;; 53
+    )
+  (:methods
     (projectile-method-54 (_type_) none)
     (projectile-method-55 (_type_) none)
     (projectile-method-56 (_type_) none)
@@ -33280,7 +33292,11 @@
   :flag-assert         #x1e185018dc
   (:methods
     (hud-method-14 (_type_) none) ;; 14
-    (hud-method-15 (_type_) none) ;; 15
+    )
+  (:state-methods
+    hud-hidden ;; 15
+    )
+  (:methods
     (hud-method-16 (_type_) none) ;; 16
     (hud-method-17 (_type_) symbol) ;; 17
     (hud-method-18 (_type_) symbol) ;; 18
@@ -39595,12 +39611,12 @@
   :method-count-assert 17
   :size-assert         #xa8
   :flag-assert         #x11002000a8
-  (:state-methods
-    die ;; 14
-    active ;; 15
-    )
   (:methods
-    (lightning-new-tracker-method-16 () none) ;; 16
+    (lightning-new-tracker-method-14 () none) ;; 14
+    )
+  (:state-methods
+    active ;; 15
+    die ;; 16
     )
   )
   
@@ -45016,8 +45032,10 @@
   :method-count-assert 56
   :size-assert         #xf4
   :flag-assert         #x38007000f4
+  (:state-methods
+    idle ;; 42
+    )
   (:methods
-    (net-powerup-method-42 () none) ;; 42
     (net-powerup-method-43 () none) ;; 43
     (net-powerup-method-44 () none) ;; 44
     (net-powerup-method-45 () none) ;; 45
@@ -46061,8 +46079,10 @@
   :method-count-assert 51
   :size-assert         #xbc
   :flag-assert         #x33003000bc
+  (:state-methods
+    running ;; 42
+    )
   (:methods
-    (eco-mgr-method-42 () none) ;; 42
     (eco-mgr-method-43 () none) ;; 43
     (eco-mgr-method-44 () int) ;; 44
     (eco-mgr-method-45 () none) ;; 45
