@@ -1,6 +1,10 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+;; Forward declarations needed by font-context-method-9 in font.gc
+(declare-type viewport-array structure)
+(define-extern *viewport-array* viewport-array)
+
 (defenum font-flags
   :type uint32
   :bitfield #t
@@ -191,6 +195,20 @@
   (format #t "~1Teffect: ~D~%" (-> this effect))
   (format #t "~1Teffect-color: ~D~%" (-> this effect-color))
   (label cfg-4)
+  this
+  )
+
+;; definition for method 9 of type font-context
+;; stub — implementation in font.gc
+
+;; definition for method 10 of type font-context
+;; stub — not reached in title flow
+
+;; definition for method 11 of type font-context
+;; stub — not reached in title flow
+
+;; definition for method 12 of type font-context — middle-vert vertical centering stub
+(defmethod font-context-method-12 ((this font-context) (arg0 float))
   this
   )
 
