@@ -56421,23 +56421,23 @@
 
 
   
-#|(deftype jungle-clay-jar-a (net-simple-destruct)
+(deftype jungle-clay-jar-a (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
 
   
-#|(deftype jungle-clay-jar-b (net-simple-destruct)
+(deftype jungle-clay-jar-b (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
@@ -56520,45 +56520,45 @@
 
 
   
-#|(deftype jungle-tree-root-large-a (net-simple-destruct)
+(deftype jungle-tree-root-large-a (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
 
   
-#|(deftype jungle-tree-root-large-b (net-simple-destruct)
+(deftype jungle-tree-root-large-b (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
 
   
-#|(deftype jungle-statue-small-outdoors (net-simple-destruct)
+(deftype jungle-statue-small-outdoors (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
 
   
-#|(deftype jungle-statue-small-indoors (net-simple-destruct)
+(deftype jungle-statue-small-indoors (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
@@ -56804,23 +56804,23 @@
 
 
   
-#|(deftype kcro-fence-piece-a (net-simple-destruct)
+(deftype kcro-fence-piece-a (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
 
   
-#|(deftype kcro-fence-piece-b (net-simple-destruct)
+(deftype kcro-fence-piece-b (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
@@ -59074,12 +59074,12 @@
 
 
   
-#|(deftype snow-dinobreak (net-simple-destruct)
+(deftype snow-dinobreak (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
