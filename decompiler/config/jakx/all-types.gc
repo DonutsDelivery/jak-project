@@ -5818,7 +5818,7 @@
 
 
   
-(deftype vehicle-reticle-base (process)
+#|(deftype vehicle-reticle-base (process)
   ((owner      uint64  :offset-assert 144)
    (state-time uint64  :offset-assert 152)
    )
@@ -5833,7 +5833,7 @@
     (vehicle-reticle-base-method-13 () none) ;; 13
     (vehicle-reticle-base-method-14 () none) ;; 14
     )
-  )
+  )|#
   
 
 
@@ -59234,13 +59234,7 @@
   :flag-assert         #x900000000
   )
 
-;; vehicle-reticle-base stub
-(deftype vehicle-reticle-base (process)
-  ()
-  :method-count-assert 14
-  :size-assert         #x90
-  :flag-assert         #xe00000090
-  )
+;; vehicle-reticle-base stub superseded by full definition at L5821
 
 ;; muzzle-flash stub
 (deftype muzzle-flash (process-drawable)
