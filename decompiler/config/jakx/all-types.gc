@@ -16535,13 +16535,14 @@
 
 
   
-(deftype ocean-wave-frames (structure)
-  ((frame ocean-wave-data 64 :inline :offset-assert 0)
+#|(deftype ocean-wave-frames (structure)
+  ((frame ocean-wave-data 64 :offset-assert 0) ;; guessed by decompiler
    )
   :method-count-assert 9
-  :size-assert         #x10000
+  :size-assert         #x0
+  :heap-base           #x1
   :flag-assert         #x900010000
-  )
+  )|#
   
 
 
