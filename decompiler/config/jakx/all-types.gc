@@ -55117,67 +55117,67 @@
 
 
   
-#|(deftype coli-pillar-break (net-simple-destruct)
+(deftype coli-pillar-break (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
 
   
-#|(deftype coli-gate-a-straight (net-simple-destruct)
+(deftype coli-gate-a-straight (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
 
   
-#|(deftype coli-gate-b-curved (net-simple-destruct)
+(deftype coli-gate-b-curved (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
 
   
-#|(deftype coli-stands-rail-a (net-simple-destruct)
+(deftype coli-stands-rail-a (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
 
   
-#|(deftype coli-stands-rail-b (net-simple-destruct)
+(deftype coli-stands-rail-b (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
 
   
-#|(deftype coli-stands-rail-c (net-simple-destruct)
+(deftype coli-stands-rail-c (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
