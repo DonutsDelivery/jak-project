@@ -2051,7 +2051,6 @@
 
 
 
-#|
 (deftype net-enemy (process-focusable)
   ((flags                  uint64                     :offset-assert 256)
    (info                   net-enemy-info             :offset-assert 264)
@@ -2062,7 +2061,7 @@
    (last-health-send-time  int32                      :offset-assert 292)
    (net-anim               net-anim-control   :inline :offset-assert 304)
    (minimap                connection-minimap         :offset-assert 444)
-   (transitions            UNKNOWN            3       :offset-assert 448)
+   (transitions            uint8              240     :offset-assert 448)
    (transition-ct          int32                      :offset-assert 688)
    (last-attack-time       int32                      :offset-assert 692)
    (vehicle-penetrate-time int32                      :offset-assert 696)
@@ -2112,7 +2111,6 @@
     (net-enemy-method-86 () none) ;; 86
     )
   )
-|#
 
 
 (define-extern *tmp-construct-transition* object)
@@ -5417,8 +5415,8 @@
 
 
   
-#|(deftype v-toad-shot (net-projectile)
-  ((trail-tracker    uint64         :offset-assert 568) ;; handle
+(deftype v-toad-shot (net-projectile)
+  ((trail-tracker    uint64         :offset-assert 568)
    (blast-radius     float          :offset-assert 576)
    (powerup-level    uint8          :offset-assert 580)
    (initial-velocity vector :inline :offset-assert 592)
@@ -5431,10 +5429,10 @@
     (v-toad-shot-method-75 () none) ;; 75
     )
   (:state-methods
+    die    ;; 50
     impact ;; 52
-    die ;; 50
     )
-  )|#
+  )
   
 
 
@@ -5448,7 +5446,7 @@
 
 
   
-#|(deftype mine-a (process-focusable)
+(deftype mine-a (process-focusable)
   ((shooter           uint64             :offset-assert 256)
    (destination-point vector     :inline :offset-assert 272)
    (destination-rot   quaternion :inline :offset-assert 288)
@@ -5460,22 +5458,22 @@
   :method-count-assert 64
   :size-assert         #x16c
   :flag-assert         #x4000e0016c
+  (:state-methods
+    idle    ;; 59
+    falling ;; 60
+    die     ;; 61
+    )
   (:methods
     (mine-a-method-62 () none) ;; 62
     (mine-a-method-63 () none) ;; 63
     )
-  (:state-methods
-    idle ;; 59
-    falling ;; 60
-    die ;; 61
-    )
-  )|#
+  )
   
 
 
 
   
-#|(deftype mine-b (process-focusable)
+(deftype mine-b (process-focusable)
   ((shooter           uint64             :offset-assert 256)
    (glued-to          uint64             :offset-assert 264)
    (destination-point vector     :inline :offset-assert 272)
@@ -5492,25 +5490,25 @@
   :method-count-assert 67
   :size-assert         #x194
   :flag-assert         #x4301100194
+  (:state-methods
+    idle         ;; 59
+    falling      ;; 60
+    leaping-onto ;; 61
+    attached     ;; 62
+    shake-off    ;; 63
+    die          ;; 64
+    )
   (:methods
     (mine-b-method-65 () none) ;; 65
     (mine-b-method-66 () none) ;; 66
     )
-  (:state-methods
-    idle ;; 59
-    leaping-onto ;; 61
-    attached ;; 62
-    falling ;; 60
-    shake-off ;; 63
-    die ;; 64
-    )
-  )|#
+  )
   
 
 
 
   
-#|(deftype v-yellow-guided-missile (net-projectile)
+(deftype v-yellow-guided-missile (net-projectile)
   ((trail-tracker        uint64                       :offset-assert 568)
    (blast-radius         float                        :offset-assert 576)
    (initial-velocity     float                        :offset-assert 580)
@@ -5525,21 +5523,21 @@
   :method-count-assert 81
   :size-assert         #x3c8
   :flag-assert         #x51034003c8
+  (:state-methods
+    die       ;; 50
+    dissipate ;; 51
+    impact    ;; 52
+    moving    ;; 53
+    launching ;; 75
+    wild      ;; 76
+    tracking  ;; 77
+    )
   (:methods
     (v-yellow-guided-missile-method-78 () none) ;; 78
     (v-yellow-guided-missile-method-79 () none) ;; 79
     (v-yellow-guided-missile-method-80 () none) ;; 80
     )
-  (:state-methods
-    moving ;; 53
-    tracking ;; 77
-    wild ;; 76
-    impact ;; 52
-    dissipate ;; 51
-    launching ;; 75
-    die ;; 50
-    )
-  )|#
+  )
   
 
 
@@ -5916,7 +5914,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#|
 (deftype red-sentry-bot (process-focusable)
   ((destination-point       vector     :inline :offset-assert 256)
    (destination-rot         quaternion :inline :offset-assert 272)
@@ -5929,7 +5926,7 @@
    (hitpoints               float              :offset-assert 356)
    (hitpoints-last          float              :offset-assert 360)
    (hitpoints-prev-msg-time uint64             :offset-assert 368)
-   (flash                   UNKNOWN    2       :offset-assert 376)
+   (flash                   uint8      16      :offset-assert 376)
    (last-fired              uint64             :offset-assert 392)
    (gun-loop                uint32             :offset-assert 400)
    (warning                 basic              :offset-assert 404)
@@ -5941,20 +5938,19 @@
   :method-count-assert 67
   :size-assert         #x1a0
   :flag-assert         #x43011001a0
+  (:state-methods
+    falling         ;; 59
+    idle            ;; 60
+    firing          ;; 61
+    firing-missiles ;; 62
+    die             ;; 63
+    )
   (:methods
     (red-sentry-bot-method-64 () none) ;; 64
     (red-sentry-bot-method-65 () none) ;; 65
     (red-sentry-bot-method-66 () none) ;; 66
     )
-  (:state-methods
-    falling ;; 59
-    idle ;; 60
-    firing ;; 61
-    firing-missiles ;; 62
-    die ;; 63
-    )
   )
-|#
 
 
 (define-extern red-sentry-bot-init-remote function)
@@ -41472,11 +41468,12 @@
 
 
 
+#|
 (deftype headset (process)
   ((flags                   uint32                     :offset-assert 144)
    (decoders                uint8              320     :offset-assert 148)
    (client-to-decoder       uint8              16      :offset-assert 468)
-   (encoder-io              nci-codec-io-block :inline :offset-assert 484)
+   (encoder-io              uint8              21      :offset-assert 484)
    (last-speech-time        int32                      :offset-assert 508)
    (prev-operation          basic                      :offset-assert 512)
    (bytes-in-playback-queue int32                      :offset-assert 516)
@@ -41510,6 +41507,7 @@
     )
   )
 
+|#
 
 (define-extern *headset-input-buffer* object)
 (define-extern *headset-input-bytes* object)
@@ -41821,7 +41819,7 @@
    (have-send-pending-objects        basic                :offset-assert 416)
    (snap-time-of-day                 basic                :offset-assert 420)
    (owner-lists                      uint8        160     :offset-assert 424)
-   (active-list                      linked-list  :inline :offset-assert 584)
+   (active-list                      uint32       2       :offset-assert 584)
    (cur-proc-valid                   basic                :offset-assert 592)
    (cur-proc-id                      uint16               :offset-assert 596)
    (cur-proc-owner-idx               int8                 :offset-assert 598)
@@ -49647,7 +49645,6 @@
   :size-assert         #x184
   :flag-assert         #x3b01000184
   )
-#|
 (deftype driver-FULL-PENDING (process-focusable)
   ((info               driver-info :inline :offset-assert 256)
    (vehicle            uint64              :offset-assert 280)
@@ -49657,9 +49654,9 @@
    (turn-back-anim     int8                :offset-assert 336)
    (turn-front-anim    int8                :offset-assert 337)
    (up-down-anim       int8                :offset-assert 338)
-   (intro-anim         UNKNOWN     4       :offset-assert 339)
+   (intro-anim         uint8       5       :offset-assert 339)
    (jmod-head          basic               :offset-assert 344)
-   (arm-ik             UNKNOWN     2       :offset-assert 348)
+   (arm-ik             uint8       12      :offset-assert 348)
    (looking-at         uint64              :offset-assert 360)
    (looking-at-timeout int32               :offset-assert 368)
    (helmet             helmet      :inline :offset-assert 372)
@@ -49667,6 +49664,11 @@
   :method-count-assert 67
   :size-assert         #x184
   :flag-assert         #x4301000184
+  (:state-methods
+    idle  ;; 59
+    intro ;; 60
+    die   ;; 61
+    )
   (:methods
     (driver-method-62 (_type_) none) ;; 62
     (driver-method-63 (_type_) none) ;; 63
@@ -49674,13 +49676,7 @@
     (driver-method-65 (_type_) none) ;; 65
     (driver-method-66 (_type_) none) ;; 66
     )
-  (:state-methods
-    idle ;; 59
-    intro ;; 60
-    die ;; 61
-    )
   )
-|#
 
 
 (define-extern joint-mod-head-handler function)
@@ -52922,7 +52918,7 @@
 
 
   
-#|(deftype plow (net-enemy)
+(deftype plow (net-enemy)
   ((tracking-player      uint64  :offset-assert 872)
    (do-flip-anim         basic   :offset-assert 880)
    (been-hit             basic   :offset-assert 884)
@@ -52943,13 +52939,13 @@
   :size-assert         #x3a8
   :flag-assert         #x5a032003a8
   (:state-methods
-    startup ;; 59
-    intro-path ;; 87
+    startup        ;; 59 (override)
+    waiting-respawn ;; 61 (override)
+    intro-path     ;; 87
     following-path ;; 88
-    reverse ;; 89
-    waiting-respawn ;; 61
+    reverse        ;; 89
     )
-  )|#
+  )
   
 
 
@@ -53904,19 +53900,19 @@
 
 
   
-#|(deftype raptor (net-enemy)
+(deftype raptor (net-enemy)
   ()
   :method-count-assert 91
   :size-assert         #x368
   :flag-assert         #x5b02e00368
   (:state-methods
-    startup ;; 59
+    startup        ;; 59 (override)
     following-path ;; 87
-    reverse ;; 89
-    idle-wait ;; 88
-    chase ;; 90
+    idle-wait      ;; 88
+    reverse        ;; 89
+    chase          ;; 90
     )
-  )|#
+  )
   
 
 
