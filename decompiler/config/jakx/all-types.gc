@@ -39990,7 +39990,7 @@
 
 
   
-#|(deftype weapon-trail (light-trail)
+(deftype weapon-trail (light-trail)
   ()
   :method-count-assert 25
   :size-assert         #x80
@@ -39999,7 +39999,7 @@
     (weapon-trail-method-23 (_type_ vector vector) none) ;; 23
     (weapon-trail-method-24 () none) ;; 24
     )
-  )|#
+  )
   
 
 
@@ -40088,7 +40088,7 @@
     (light-trail-tracker-method-17 (_type_ process-focusable) symbol) ;; 17
     (light-trail-tracker-method-18 (_type_ process-focusable) symbol) ;; 18
     (light-trail-tracker-method-19 (_type_) symbol) ;; 19
-    (light-trail-tracker-method-20 (_type_ vector) none) ;; 20
+    (light-trail-tracker-method-20 () _type_ :state) ;; 20
     (light-trail-tracker-method-21 () none) ;; 21
     )
   )
@@ -40097,55 +40097,55 @@
 
 
   
-#|(deftype weapon-trail-tracker (light-trail-tracker)
+(deftype weapon-trail-tracker (light-trail-tracker)
   ((joint0     int16   :offset-assert 188)
    (joint1     int16   :offset-assert 190)
-   (state-time uint64  :offset-assert 192) ;; time-frame
+   (state-time uint64  :offset-assert 192)
    )
-  :method-count-assert 23
+  :method-count-assert 28
   :size-assert         #xc8
-  :flag-assert         #x17004000c8
+  :flag-assert         #x1c004000c8
   (:methods
     (weapon-trail-tracker-method-22 () none) ;; 22
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype tread-trail-tracker (light-trail-tracker)
+(deftype tread-trail-tracker (light-trail-tracker)
   ()
-  :method-count-assert 22
+  :method-count-assert 27
   :size-assert         #xbc
-  :flag-assert         #x16003000bc
-  )|#
+  :flag-assert         #x1b003000bc
+  )
   
 
 
 
   
-#|(deftype light-trail-tracker-water (light-trail-tracker)
+(deftype light-trail-tracker-water (light-trail-tracker)
   ()
-  :method-count-assert 22
+  :method-count-assert 27
   :size-assert         #xbc
-  :flag-assert         #x16003000bc
-  )|#
+  :flag-assert         #x1b003000bc
+  )
   
 
 
 
   
-#|(deftype light-trail-tracker-projectile (light-trail-tracker)
-  ((state-time uint64  :offset-assert 192) ;; time-frame
+(deftype light-trail-tracker-projectile (light-trail-tracker)
+  ((state-time uint64  :offset-assert 192)
    )
-  :method-count-assert 23
+  :method-count-assert 28
   :size-assert         #xc8
-  :flag-assert         #x17004000c8
+  :flag-assert         #x1c004000c8
   (:methods
     (light-trail-tracker-projectile-method-22 () none) ;; 22
     )
-  )|#
+  )
   
 
 
