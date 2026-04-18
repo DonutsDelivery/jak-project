@@ -59284,14 +59284,16 @@
 
 ;; net-simple-destruct stub superseded by full definition at L46629
 
-;; eco full definition (upgraded stub → 56 methods with 6 method slots)
+;; eco full definition (upgraded stub → 56 methods; slot 50 is 'running' state)
 (deftype eco (process-drawable)
   ()
   :method-count-assert 56
   :size-assert         #xf8
   :flag-assert         #x38007000f8
+  (:state-methods
+    running ;; 50
+    )
   (:methods
-    (eco-method-50 (_type_) none) ;; 50
     (eco-method-51 (_type_) none) ;; 51
     (eco-method-52 (_type_) none) ;; 52
     (eco-method-53 (_type_) none) ;; 53
@@ -59300,9 +59302,32 @@
     )
   )
 
-;; eco-yellow/red/green: method-count=56 regen shows state override at slot 50 —
-;; cannot activate until eco-method-50 conflict is resolved (symbol-registry
-;; treats slot 55 as state; complex to reconcile without source).
+(deftype eco-yellow (eco)
+  ((launcher    basic  :offset-assert 248)
+   (birth-accum float  :offset-assert 252)
+   )
+  :method-count-assert 56
+  :size-assert         #x100
+  :flag-assert         #x3800700100
+  )
+
+(deftype eco-red (eco)
+  ((launcher    basic  :offset-assert 248)
+   (birth-accum float  :offset-assert 252)
+   )
+  :method-count-assert 56
+  :size-assert         #x100
+  :flag-assert         #x3800700100
+  )
+
+(deftype eco-green (eco)
+  ((launcher    basic  :offset-assert 248)
+   (birth-accum float  :offset-assert 252)
+   )
+  :method-count-assert 56
+  :size-assert         #x100
+  :flag-assert         #x3800700100
+  )
 
 ;; editable-region stub
 (deftype editable-region (basic)
