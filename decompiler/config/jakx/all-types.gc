@@ -25619,17 +25619,15 @@
 
 
 
-#|
 (deftype medius-file-create-request (structure)
   ((medius-file-to-create         medius-file            :inline :offset-assert 0)
-   (medius-file-create-attributes medius-file-attributes :inline :offset-assert 172)
+   (medius-file-create-attributes uint8 276              :offset 172)
    (message-id uint8 21 :offset-assert 448)
    )
   :method-count-assert 9
   :size-assert         #x1d5
   :flag-assert         #x9000001d5
   )
-|#
 
 
 
@@ -26260,18 +26258,16 @@
 
 
 
-#|
 (deftype medius-server-join-game-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (confirmation int8            :offset-assert 21)
    (access-key uint8 17 :offset-assert 22)
-   (pub-key      rsa-key :inline :offset-assert 40)
+   (pub-key      uint8 64        :offset 40)
    )
   :method-count-assert 9
   :size-assert         #x68
   :flag-assert         #x900000068
   )
-|#
 
 
 
@@ -26340,17 +26336,15 @@
 
 
 
-#|
 (deftype medius-server-session-begin-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (confirmation int8                        :offset-assert 21)
-   (connect-info net-connection-info :inline :offset-assert 24)
+   (connect-info uint8 154           :offset 24)
    )
   :method-count-assert 9
   :size-assert         #xb2
   :flag-assert         #x9000000b2
   )
-|#
 
 
 
@@ -58922,12 +58916,42 @@
 
 ;; sparticle-cpuinfo — full definition above at L33676
 
-;; path-control stub
 (deftype path-control (basic)
-  ()
-  :method-count-assert 9
-  :size-assert         #x4
-  :flag-assert         #x900000004
+  ((flags      uint32         :offset-assert 4)
+   (name       symbol                    :offset-assert 8)
+   (process    process-drawable          :offset-assert 12)
+   (curve      curve             :inline :offset-assert 16)
+   )
+  :method-count-assert 33
+  :size-assert         #x24
+  :flag-assert         #x2100000024
+  (:methods
+    (new (symbol type process symbol float entity symbol) _type_) ;; 0
+    (debug-draw (_type_) none) ;; 9
+    (get-point-in-path! (_type_ vector float symbol) vector) ;; 10
+    (get-random-point (_type_ vector) vector) ;; 11
+    (path-control-method-12 (_type_ vector float float) vector) ;; 12
+    (displacement-between-two-points-normalized! (_type_ vector float) vector) ;; 13
+    (get-point-at-percent-along-path! (_type_ vector float symbol) vector) ;; 14
+    (path-control-method-15 (_type_ vector float float) vector) ;; 15
+    (displacement-between-points-at-percent-normalized! (_type_ vector float) vector) ;; 16
+    (get-num-segments (_type_) float) ;; 17
+    (total-distance (_type_) float) ;; 18
+    (get-num-verts (_type_) int) ;; 19
+    (segement-duration->path-duration (_type_ float) float) ;; 20
+    (path-duration->segment-duration (_type_ float) float) ;; 21
+    (path-control-method-22 (_type_ vector) float) ;; 22
+    (path-control-method-23 (_type_ vector) float) ;; 23
+    (path-control-method-24 (_type_ vector) float) ;; 24
+    (path-control-method-25 (_type_ vector) float) ;; 25
+    (path-control-method-26 (_type_ float float) float) ;; 26
+    (path-control-method-27 (_type_ vector) vector) ;; 27
+    (path-control-method-28 (_type_ vector vector symbol) float) ;; 28
+    (path-control-method-29 (_type_ vector int float) float) ;; 29
+    (should-display-marks? (_type_) symbol) ;; 30
+    (displacement-between-two-points! (_type_ vector float float) vector) ;; 31
+    (path-control-method-32 (_type_) none) ;; 32
+    )
   )
 
 ;; vol-control stub
@@ -59018,12 +59042,16 @@
 
 ;; net-projectile — full definition above at L46714
 
-;; curve-control stub
 (deftype curve-control (path-control)
   ()
-  :method-count-assert 9
-  :size-assert         #x4
-  :flag-assert         #x900000004
+  :method-count-assert 35
+  :size-assert         #x24
+  :flag-assert         #x2300000024
+  (:methods
+    (new (symbol type process symbol float) _type_) ;; 0
+    (curve-control-method-33 (_type_) none) ;; 33
+    (curve-control-method-34 (_type_) none) ;; 34
+    )
   )
 
 ;; entity-more-perm-hash stub
@@ -59393,6 +59421,12 @@
 (define-extern knet-tcp-socket-close function)
 (define-extern knet-tcp-socket-send function)
 (define-extern fmv-get-mem-requirements function)
+(define-extern knet-lg-tick function)
+(define-extern knet-lg-set-recording function)
+(define-extern knet-lg-awrite function)
+(define-extern fmv-player-get-texture function)
+(define-extern mc-unformat function)
+(define-extern show-maya-skeleton function)
 ;;(define-extern light-trail-tracker object)
 ;; (define-extern lightning-new-tracker object) ;; clobbers active deftype
 ;; (define-extern lightning-spans-internal-array object) ;; clobbers active deftype
