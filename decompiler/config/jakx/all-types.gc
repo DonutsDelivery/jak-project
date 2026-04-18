@@ -6371,32 +6371,7 @@
 
 
   
-#|(deftype smoke-system (process-nettable)
-  ((owning-vehicle            uint64         :offset-assert 192)
-   (part-count                float          :offset-assert 200)
-   (emit-rate                 float          :offset-assert 204)
-   (start-time                int32          :offset-assert 208)
-   (last-pos                  vector :inline :offset-assert 224)
-   (buffer                    basic          :offset-assert 240)
-   (smoke-screen-sound        uint32         :offset-assert 244)
-   (lightning-sound-id        uint32         :offset-assert 248)
-   (last-size                 float          :offset-assert 252)
-   (damage                    float          :offset-assert 256)
-   (last-lightning-sphere-pos vector :inline :offset-assert 272)
-   (part-subsampler           basic          :offset-assert 288)
-   (smoke-electric            basic          :offset-assert 292)
-   (smoke-matrix              matrix :inline :offset-assert 304)
-   )
-  :method-count-assert 44
-  :size-assert         #x170
-  :flag-assert         #x2c00e00170
-  (:methods
-    (smoke-system-method-43 () none) ;; 43
-    )
-  (:state-methods
-    idle ;; 42
-    )
-  )|#
+;; smoke-system: activated below parent process-nettable at L28235
   
 
 
@@ -28288,6 +28263,32 @@
 (define-extern *net-process-class-names* object)
 #|(define-extern net-process-class-register (function draw-control none))|#
 (define-extern write-msg-map-rec (function process-drawable net-process-class-info none))
+
+;; smoke-system (parent process-nettable — activated here for parent-ordering)
+(deftype smoke-system (process-nettable)
+  ((owning-vehicle            uint64         :offset-assert 192)
+   (part-count                float          :offset-assert 200)
+   (emit-rate                 float          :offset-assert 204)
+   (start-time                int32          :offset-assert 208)
+   (last-pos                  vector :inline :offset-assert 224)
+   (buffer                    basic          :offset-assert 240)
+   (smoke-screen-sound        uint32         :offset-assert 244)
+   (lightning-sound-id        uint32         :offset-assert 248)
+   (last-size                 float          :offset-assert 252)
+   (damage                    float          :offset-assert 256)
+   (last-lightning-sphere-pos vector :inline :offset-assert 272)
+   (part-subsampler           basic          :offset-assert 288)
+   (smoke-electric            basic          :offset-assert 292)
+   (smoke-matrix              matrix :inline :offset-assert 304)
+   )
+  :method-count-assert 44
+  :size-assert         #x170
+  :flag-assert         #x2c00e00170
+  (:methods
+    (idle () _type_ :state) ;; 42
+    (smoke-system-method-43 () none) ;; 43
+    )
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; game-h                         ;;
@@ -51641,9 +51642,9 @@
 
 
   
-#|(deftype manipulator (structure)
-  ((action             manipulator-action         :offset-assert 0) ;; guessed by decompiler
-   (mode               manipulator-mode           :offset-assert 4) ;; guessed by decompiler
+(deftype manipulator (structure)
+  ((action             uint32                     :offset-assert 0) ;; manipulator-action
+   (mode               uint32                     :offset-assert 4) ;; manipulator-mode
    (dragging?          symbol                     :offset-assert 8) ;; guessed by decompiler
    (position           vector             :inline :offset-assert 16)
    (speed              vector             :inline :offset-assert 32)
@@ -51657,14 +51658,14 @@
   :size-assert         #xb0
   :flag-assert         #xf000000b0
   (:methods
-    (manipulator-method-9 (_type_) none) ;; 9 ;; (set-mode (_type_ manipulator-mode) none)
-    (manipulator-method-10 (_type_) none) ;; 10 ;; (manipulator-method-10 (_type_) none)
-    (manipulator-method-11 (_type_) none) ;; 11 ;; (manipulator-method-11 (_type_) none)
+    (manipulator-method-9 (_type_) none) ;; 9
+    (manipulator-method-10 (_type_) none) ;; 10
+    (manipulator-method-11 (_type_) none) ;; 11
     (manipulator-method-12 (_type_ vector) none) ;; 12
     (manipulator-method-13 (_type_ vector vector) none) ;; 13
-    (manipulator-method-14 (_type_) none) ;; 14 ;; (manipulator-method-14 (_type_) none)
+    (manipulator-method-14 (_type_) none) ;; 14
     )
-  )|#
+  )
   
 
 
@@ -51676,29 +51677,28 @@
 
 
   
-#|(deftype editable-region (basic)
-  ((changed   symbol           :offset-assert 4) ;; guessed by decompiler
-   (locked    symbol           :offset-assert 8) ;; guessed by decompiler
-   (id        uint64           :offset-assert 16)
-   (filter    editable-filter  :offset-assert 24) ;; guessed by decompiler
-   (tree      symbol           :offset-assert 28) ;; guessed by decompiler
-   (level     string           :offset-assert 32) ;; guessed by decompiler
-   (on-enter  string           :offset-assert 36) ;; guessed by decompiler
-   (on-inside string           :offset-assert 40) ;; guessed by decompiler
-   (on-exit   string           :offset-assert 44) ;; guessed by decompiler
+(deftype editable-region (basic)
+  ((changed   symbol  :offset-assert 4) ;; guessed by decompiler
+   (locked    symbol  :offset-assert 8) ;; guessed by decompiler
+   (id        uint64  :offset-assert 16)
+   (filter    uint32  :offset-assert 24) ;; editable-filter
+   (tree      symbol  :offset-assert 28) ;; guessed by decompiler
+   (level     string  :offset-assert 32) ;; guessed by decompiler
+   (on-enter  string  :offset-assert 36) ;; guessed by decompiler
+   (on-inside string  :offset-assert 40) ;; guessed by decompiler
+   (on-exit   string  :offset-assert 44) ;; guessed by decompiler
    )
   :method-count-assert 13
   :size-assert         #x30
   :flag-assert         #xd00000030
-  ;; field on-enter uses ~A with a signed load. field on-inside uses ~A with a signed load. field on-exit uses ~A with a signed load.
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type) _type_)
-    (editable-region-method-9 () none) ;; 9 ;; (editable-region-method-9 () none)
-    (editable-region-method-10 () none) ;; 10 ;; (editable-region-method-10 () none)
-    (editable-region-method-11 () none) ;; 11 ;; (editable-region-method-11 () none)
-    (editable-region-method-12 () none) ;; 12 ;; (editable-region-method-12 () none)
+    (new (symbol type) _type_) ;; 0
+    (editable-region-method-9 () none) ;; 9
+    (editable-region-method-10 () none) ;; 10
+    (editable-region-method-11 () none) ;; 11
+    (editable-region-method-12 () none) ;; 12
     )
-  )|#
+  )
   
 
 
@@ -59312,13 +59312,7 @@
 ;; cannot activate until eco-method-50 conflict is resolved (symbol-registry
 ;; treats slot 50 as state; complex to reconcile without source).
 
-;; editable-region stub
-(deftype editable-region (basic)
-  ()
-  :method-count-assert 9
-  :size-assert         #x4
-  :flag-assert         #x900000004
-  )
+;; editable-region — full definition above at L51654
 
 #| int16-array stub — real deftype now active in nav-mesh-editor-h section
 (deftype int16-array (inline-array-class)
