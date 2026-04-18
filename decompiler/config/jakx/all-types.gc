@@ -58951,7 +58951,7 @@
 
 
   
-#|(deftype wm-kras-circular-tower (process-drawable)
+(deftype wm-kras-circular-tower (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -58959,13 +58959,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype menu-haven-trophy (process-drawable)
+(deftype menu-haven-trophy (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -58973,13 +58973,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype menu-kras-trophy (process-drawable)
+(deftype menu-kras-trophy (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -58987,13 +58987,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype menu-marauder-trophy (process-drawable)
+(deftype menu-marauder-trophy (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -59001,13 +59001,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype menu-spargus-trophy (process-drawable)
+(deftype menu-spargus-trophy (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -59015,7 +59015,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
