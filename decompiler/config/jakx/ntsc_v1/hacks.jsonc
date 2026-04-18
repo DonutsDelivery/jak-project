@@ -189,7 +189,7 @@
     "generic-warp-envmap-dest",
     "generic-no-light-proc",
     "debug-line-clip?",
-    // live-func-curve — moved to mips2c_functions_by_name (cfg_builder.cpp assert fixed)
+    "live-func-curve",          // mips2c validation generates 2094 errors (VU0 macros); keep in asm
     // birth-func-curve        — moved to mips2c_functions_by_name (jakx-native port)
     // sparticle-motion-blur-dirt — moved to mips2c_functions_by_name (jakx-native port)
     "foreground-draw-hud",
@@ -1747,7 +1747,7 @@
     // particle-curves — jakx-native ports in
     // game/mips2c/jakx_functions/particle_curves.cpp. Structurally
     // identical to jak3; jakx namespace only.
-    "live-func-curve",
+    // live-func-curve — in asm_functions_by_name (mips2c validation fails with 2094 errors)
     "birth-func-curve",
     // wvehicle-part — jakx-native port in
     // game/mips2c/jakx_functions/wvehicle_part.cpp. Diverges from jak3:
