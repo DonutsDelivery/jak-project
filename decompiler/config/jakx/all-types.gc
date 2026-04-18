@@ -53432,7 +53432,7 @@
 
 
   
-#|(deftype ctf-base (process-drawable)
+(deftype ctf-base (process-drawable)
   ((base-b uint64  :offset-assert 248)
    (base-c uint64  :offset-assert 256)
    (team   uint8   :offset-assert 264)
@@ -53443,13 +53443,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype ctf-base-b (process-drawable)
+(deftype ctf-base-b (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -53457,13 +53457,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype ctf-base-c (process-drawable)
+(deftype ctf-base-c (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -53471,13 +53471,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype ctf-captured-flag (process-drawable)
+(deftype ctf-captured-flag (process-drawable)
   ((pos            vector :inline :offset-assert 256)
    (end            vector :inline :offset-assert 272)
    (l-control      basic          :offset-assert 288)
@@ -53492,7 +53492,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
