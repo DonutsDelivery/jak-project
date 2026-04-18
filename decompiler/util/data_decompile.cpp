@@ -187,7 +187,11 @@ goos::Object decompile_function_at_label(const DecompilerLabel& label,
       }
     }
   }
-  return pretty_print::to_symbol(fmt::format("<lambda at {}>", label.name));
+  // Lambda/function decomp failed. Emit #f so goalc can still parse the
+  // surrounding form; callers wrapping in `(the-as function X)` will type-
+  // coerce. A `<lambda at LN>` placeholder was rejected by goalc's reader
+  // because of the angle brackets.
+  return pretty_print::to_symbol("#f");
 }
 
 /*!

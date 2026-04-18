@@ -2518,11 +2518,14 @@ goos::Object DecompiledDataElement::to_form_internal(const Env& env) const {
   if (m_decompiled) {
     return m_description;
   } else {
-    // Emit as a single-token symbol (dash, not space) so the surrounding
-    // form still parses as goalc expects even when static decomp failed.
-    // A space-separated placeholder made `(define *X* <static-data LN>)`
-    // parse as 3 args to `define` instead of 2.
-    return pretty_print::to_symbol(fmt::format("<static-data-{}>", m_label.name));
+    // Static decomp failed. We can't produce faithful data, but we must
+    // still emit something goalc will parse *and* type-check. `#f` is the
+    // GOAL null basic; it coerces to any reference-typed destination via
+    // `(the-as T #f)`. Wrapping in a reader-visible comment would help
+    // humans, but goos has no inline block-comment syntax, so we emit the
+    // placeholder as bare `#f` and rely on the FAILED-STATIC marker in the
+    // surrounding `;; ERROR: Failed static ref` log line to flag it.
+    return pretty_print::to_symbol("#f");
   }
 }
 
