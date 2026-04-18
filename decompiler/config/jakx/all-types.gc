@@ -59472,27 +59472,27 @@
 ;; (define-extern driver-thug-b object) ;; clobbers active deftype
 ;; (define-extern driver-thug-c object) ;; clobbers active deftype
 ;; (define-extern driver-torn object) ;; clobbers active deftype
-(define-extern driver-ur-86 object)
-(define-extern driver-ximon object)
+;; (define-extern driver-ur-86 object) ;; clobbers active deftype
+;; (define-extern driver-ximon object) ;; clobbers active deftype
 (define-extern eco-powerup-draw object)
 (define-extern editable-player object)
 (define-extern editable-sphere object)
-(define-extern etie-matrix object)
-(define-extern etn-matrix object)
-(define-extern explosion object)
-(define-extern fact-info-enemy object)
-(define-extern float-array object)
-(define-extern flow-section-array object)
+;; (define-extern etie-matrix object) ;; clobbers active deftype
+;; (define-extern etn-matrix object) ;; clobbers active deftype
+;; (define-extern explosion object) ;; clobbers active deftype
+;; (define-extern fact-info-enemy object) ;; clobbers active deftype
+;; (define-extern float-array object) ;; clobbers active deftype
+;; (define-extern flow-section-array object) ;; clobbers active deftype
 ;; (define-extern fmv-player object) ;; activated as deftype
 (define-extern ghost-info object)
-(define-extern helmet-hud object)
-(define-extern high-scores-list object)
+;; (define-extern helmet-hud object) ;; clobbers active deftype
+;; (define-extern high-scores-list object) ;; clobbers active deftype
 (define-extern hiphog-states object)
-(define-extern history-elt object)
-(define-extern hud-game-end-grand-prix object)
-(define-extern hud-in-game-menu-options-view-0 object)
-(define-extern hud-item-player-name object)
-(define-extern hud-map object)
+;; (define-extern history-elt object) ;; clobbers active deftype
+;; (define-extern hud-game-end-grand-prix object) ;; clobbers active deftype
+;; (define-extern hud-in-game-menu-options-view-0 object) ;; clobbers active deftype
+;; (define-extern hud-item-player-name object) ;; clobbers active deftype
+;; (define-extern hud-map object) ;; clobbers active deftype
 (define-extern hud-player-indicators-view0 object)
 (define-extern hud-race-stats-single object)
 (define-extern hud-results-grand-prix object)
