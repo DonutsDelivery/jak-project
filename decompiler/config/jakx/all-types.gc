@@ -46887,7 +46887,7 @@
 
 
   
-#|(deftype base-menu-info (structure)
+(deftype base-menu-info (structure)
   ((menu-type     basic           :offset-assert 0)
    (children      basic           :offset-assert 4)
    (name-symbol   basic           :offset-assert 8)
@@ -46908,7 +46908,7 @@
   :method-count-assert 9
   :size-assert         #x34
   :flag-assert         #x900000034
-  )|#
+  )
   
 
 
