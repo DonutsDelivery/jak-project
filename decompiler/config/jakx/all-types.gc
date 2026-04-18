@@ -31892,15 +31892,16 @@
 
 
   
-#|(deftype instance-shrubbery (instance)
+(deftype instance-shrubbery (instance)
+  "Instance of a shrub."
   ((flat-normal vector :inline :offset-assert 64)
-   (flat-hwidth float          :offset-assert 76)
-   (color       uint32         :offset-assert 8)
+   (flat-hwidth float          :offset 76)
+   (color       uint32         :offset 8)
    )
   :method-count-assert 17
   :size-assert         #x50
   :flag-assert         #x1100000050
-  )|#
+  )
   
 
 
@@ -39712,17 +39713,17 @@
 
 
   
-#|(deftype cloth-on-skeleton (cloth-system)
+(deftype cloth-on-skeleton (cloth-system)
   ((base-transform-index int16          :offset-assert 168)
-   (owner                uint64         :offset-assert 172) ;; handle
-   (last-owner-pos       vector :inline :offset-assert 188)
-   (last-owner-mat       matrix :inline :offset-assert 204)
+   (owner                handle         :offset-assert 176)
+   (last-owner-pos       vector :inline :offset-assert 192)
+   (last-owner-mat       matrix :inline :offset-assert 208)
    )
   :method-count-assert 38
   :size-assert         #x110
   :flag-assert         #x2600000110
   ;; field cloth-flag is likely a value type.
-  )|#
+  )
   
 
 
