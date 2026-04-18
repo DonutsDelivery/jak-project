@@ -47452,7 +47452,7 @@
 
   
 (deftype item-num-max-selection (item-num-selection)
-  ()
+  ((pad612 uint32 :offset-assert 612))
   :method-count-assert 70
   :size-assert         #x268
   :flag-assert         #x4601e00268
@@ -59303,19 +59303,21 @@
 
 ;; net-simple-destruct stub superseded by full definition at L46629
 
-;; eco full definition (upgraded stub → 56 methods with 6 method slots)
+;; eco full definition; slot 50 = running state (children override it)
 (deftype eco (process-drawable)
   ()
   :method-count-assert 56
   :size-assert         #xf8
   :flag-assert         #x38007000f8
   (:methods
-    (eco-method-50 (_type_) none) ;; 50
     (eco-method-51 (_type_) none) ;; 51
     (eco-method-52 (_type_) none) ;; 52
     (eco-method-53 (_type_) none) ;; 53
     (eco-method-54 (_type_) none) ;; 54
     (eco-method-55 (_type_) none) ;; 55
+    )
+  (:state-methods
+    running ;; 50
     )
   )
 
