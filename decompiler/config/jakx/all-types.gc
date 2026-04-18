@@ -3027,23 +3027,23 @@
 
 
   
-(deftype hud-top-split-bar (in-game-hud)
+#|(deftype hud-top-split-bar (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )
+  )|#
   
 
 
 
   
-(deftype hud-side-split-bar (in-game-hud)
+#|(deftype hud-side-split-bar (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )
+  )|#
   
 
 
@@ -15654,7 +15654,8 @@
 
 
   
-#|(deftype time-of-day-proc (process)
+(declare-type sparticle-launch-control basic)
+(deftype time-of-day-proc (process)
   ((hours              int32                     :offset-assert 144)
    (minutes            int32                     :offset-assert 148)
    (seconds            int32                     :offset-assert 152)
@@ -15677,9 +15678,9 @@
    (moon               sparticle-launch-control  :offset-assert 252) ;; guessed by decompiler
    (start-timer        int32                     :offset-assert 256)
    )
-  :method-count-assert 15
+  :method-count-assert 20
   :size-assert         #x104
-  :flag-assert         #xf00800104
+  :flag-assert         #x1400800104
   (:methods
     (time-of-day-proc-method-9 () none) ;; 9
     (time-of-day-proc-method-10 () none) ;; 10
@@ -15688,7 +15689,7 @@
     (time-of-day-proc-method-13 () none) ;; 13
     (time-of-day-proc-method-14 () none) ;; 14
     )
-  )|#
+  )
   
 
 
