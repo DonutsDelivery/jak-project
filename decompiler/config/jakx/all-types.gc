@@ -12106,7 +12106,7 @@
 
 
   
-#|(deftype trail-conn-search (structure)
+(deftype trail-conn-search (structure)
   ((best-conn-id         int32                  :offset-assert 0)
    (best-dist            float                  :offset-assert 4)
    (src-pos              vector                 :offset-assert 8)
@@ -12116,13 +12116,13 @@
    (bounds               bounding-box4w :inline :offset-assert 32)
    (cell-quads           qword          2       :offset-assert 64) ;; guessed by decompiler
    (conn-quads           qword          7       :offset-assert 96) ;; guessed by decompiler
-   (cell-bits            vector16ub     2       :offset-assert 64) ;; guessed by decompiler
-   (conn-bits            vector16ub     2       :offset-assert 96) ;; guessed by decompiler
+   (cell-bits            vector16ub     2       :offset 64) ;; guessed by decompiler
+   (conn-bits            vector16ub     2       :offset 96) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #xd0
   :flag-assert         #x9000000d0
-  )|#
+  )
   
 
 
@@ -32266,9 +32266,9 @@
 
 
   
-#|(deftype tfrag-data (structure)
-  ((data        uint32      56      :offset-assert 0) ;; guessed by decompiler
-   (vector      vector      14      :offset-assert 0) ;; guessed by decompiler
+(deftype tfrag-data (structure)
+  ((data        uint32      56      :offset 0) ;; guessed by decompiler
+   (vector      vector      14      :offset 0) ;; guessed by decompiler
    (fog         vector      :inline :offset-assert 0)
    (val         vector      :inline :offset-assert 16)
    (strgif      qword       :inline :offset-assert 32) ;; gs-gif-tag :inline
@@ -32280,13 +32280,13 @@
    (ambient     vector      :inline :offset-assert 128)
    (guard       vector      :inline :offset-assert 144)
    (dists       tfrag-dists :inline :offset-assert 160)
-   (k0s         uint128     2       :offset-assert 160) ;; guessed by decompiler
-   (k1s         uint128     2       :offset-assert 192) ;; guessed by decompiler
+   (k0s         uint128     2       :offset 160) ;; guessed by decompiler
+   (k1s         uint128     2       :offset 192) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #xe0
   :flag-assert         #x9000000e0
-  )|#
+  )
   
 
 
@@ -40136,7 +40136,7 @@
 
 
   
-(deftype light-trail-tracker-projectile (light-trail-tracker)
+#|(deftype light-trail-tracker-projectile (light-trail-tracker)
   ((state-time uint64  :offset-assert 192)
    )
   :method-count-assert 28
@@ -40145,8 +40145,8 @@
   (:methods
     (light-trail-tracker-projectile-method-22 () none) ;; 22
     )
-  )
-  
+  )|#
+
 
 
 (define-extern light-trail-tracker-init-by-other function) ;; (function light-trail-tracker-spawn-params object :behavior light-trail-tracker)
