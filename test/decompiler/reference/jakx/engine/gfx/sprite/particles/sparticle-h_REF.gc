@@ -130,9 +130,39 @@
   this
   )
 
-;; type sparticle-system is defined here, but it is unknown to the decompiler
+;; definition of type sparticle-system
+(deftype sparticle-system (basic)
+  ((blocks           int32  2)
+   (length           int32  2)
+   (num-alloc        int32  2)
+   (is-3d            basic)
+   (flags            uint32)
+   (alloc-table      (pointer uint64))
+   (cpuinfo-table    (inline-array sparticle-cpuinfo))
+   (vecdata-table    pointer)
+   (adgifdata-table  (inline-array adgif-shader))
+   )
+  )
 
-(method-set! (the-as type sparticle-system) 3 L1)
+;; definition for method 3 of type sparticle-system
+(defmethod inspect ((this sparticle-system))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tblocks[2] @ #x~X~%" (-> this blocks))
+  (format #t "~1Tlength[2] @ #x~X~%" (-> this length))
+  (format #t "~1Tnum-alloc[2] @ #x~X~%" (-> this num-alloc))
+  (format #t "~1Tis-3d: ~A~%" (-> this is-3d))
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (format #t "~1Talloc-table: #x~X~%" (-> this alloc-table))
+  (format #t "~1Tcpuinfo-table: #x~X~%" (-> this cpuinfo-table))
+  (format #t "~1Tvecdata-table: #x~X~%" (-> this vecdata-table))
+  (format #t "~1Tadgifdata-table: #x~X~%" (-> this adgifdata-table))
+  (label cfg-4)
+  this
+  )
 
 
 

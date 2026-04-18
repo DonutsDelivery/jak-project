@@ -22181,14 +22181,14 @@
 
 
   
-#|(deftype net-client-list (structure)
+(deftype net-client-list (structure)
   ((target-client int32                :offset-assert 0)
    (client-mask   net-bit-mask :inline :offset-assert 4)
    )
   :method-count-assert 9
   :size-assert         #x2c
   :flag-assert         #x90000002c
-  )|#
+  )
   
 
 
@@ -22251,7 +22251,7 @@
 
 
   
-#|(deftype net-latency-metrics-data-args (structure)
+(deftype net-latency-metrics-data-args (structure)
   ((connection-handle    basic                            :offset-assert 0)
    (target-client-index  int32                            :offset-assert 4)
    (latency-metrics-info net-latency-metrics-info :inline :offset-assert 8)
@@ -22261,8 +22261,7 @@
   :method-count-assert 9
   :size-assert         #x1c
   :flag-assert         #x90000001c
-  ;; field connection-handle uses ~A with a signed load. field p-user-data uses ~A with a signed load.
-  )|#
+  )
   
 
 
@@ -22273,7 +22272,7 @@
 
 
   
-#|(deftype net-latency-metrics-params (structure)
+(deftype net-latency-metrics-params (structure)
   ((connection-handle           basic                   :offset-assert 0)
    (target-client-list          net-client-list :inline :offset-assert 4)
    (pf-latency-metrics-callback basic                   :offset-assert 48)
@@ -22282,8 +22281,7 @@
   :method-count-assert 9
   :size-assert         #x38
   :flag-assert         #x900000038
-  ;; field connection-handle uses ~A with a signed load. field p-user-data uses ~A with a signed load.
-  )|#
+  )
   
 
 
