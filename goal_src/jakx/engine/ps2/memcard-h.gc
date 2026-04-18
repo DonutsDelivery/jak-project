@@ -1,46 +1,17 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; name: memcard-h.gc
-;; name in dgo: memcard-h
-;; dgos: GAME
-
-;; +++mc-status-code
-(defenum mc-status-code
-  :type uint32
-  (busy 0)
-  (ok 1)
-  (bad-handle 2)
-  (format-failed 3)
-  (internal-error 4)
-  (write-error 5)
-  (read-error 6)
-  (new-game 7)
-  (no-memory 8)
-  (no-card 9)
-  (no-last 10)
-  (no-format 11)
-  (no-file 12)
-  (no-save 13)
-  (no-space 14)
-  (bad-version 15)
-  (no-process 16)
-  (no-auto-save 17)
-  )
-;; ---mc-status-code
-
-
-;; DECOMP BEGINS
-
+;; definition of type mc-handle
 (deftype mc-handle (int32)
   ()
   )
 
+;; definition of type mc-file-info
 (deftype mc-file-info (structure)
   "Data stored in a save file."
   ((present                int32)
-   (blind-data             float   16)
-   (blind-data-int8        int8    64 :overlay-at (-> blind-data 0))
+   (blind-data             float   24)
+   (blind-data-int8        int8    96 :overlay-at (-> blind-data 0))
    (level-index            int32      :overlay-at (-> blind-data 0))
    (gem-count              float      :overlay-at (-> blind-data 1))
    (skill-count            float      :overlay-at (-> blind-data 2))
@@ -57,11 +28,43 @@
    (purchase-secrets       uint32     :overlay-at (-> blind-data 10))
    (secrets                uint32     :overlay-at (-> blind-data 12))
    (features               uint32     :overlay-at (-> blind-data 14))
+   (name                   uint8   16 :overlay-at (-> blind-data 16))
    )
   :pack-me
   )
 
+;; definition for method 3 of type mc-file-info
+(defmethod inspect ((this mc-file-info))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'mc-file-info)
+  (format #t "~1Tpresent: ~D~%" (-> this present))
+  (format #t "~1Tblind-data[24] @ #x~X~%" (-> this blind-data))
+  (format #t "~1Tblind-data-int8[96] @ #x~X~%" (-> this blind-data))
+  (format #t "~1Tlevel-index: ~D~%" (-> this level-index))
+  (format #t "~1Tgem-count: ~f~%" (-> this gem-count))
+  (format #t "~1Tskill-count: ~f~%" (-> this skill-count))
+  (format #t "~1Tcompletion-percentage: ~f~%" (-> this completion-percentage))
+  (format #t "~1Tminute: #x~X~%" (-> this minute))
+  (format #t "~1Thour: #x~X~%" (-> this hour))
+  (format #t "~1Tweek: #x~X~%" (-> this week))
+  (format #t "~1Tday: #x~X~%" (-> this day))
+  (format #t "~1Tmonth: #x~X~%" (-> this month))
+  (format #t "~1Tyear: #x~X~%" (-> this year))
+  (format #t "~1Tlanguage: ~D~%" (-> this language))
+  (format #t "~1Tgame-time0: ~D~%" (-> this game-time0))
+  (format #t "~1Tgame-time1: ~D~%" (-> this game-time1))
+  (format #t "~1Tpurchase-secrets: #x~X~%" (&-> this purchase-secrets))
+  (format #t "~1Tsecrets: #x~X~%" (&-> this secrets))
+  (format #t "~1Tfeatures: #x~X~%" (&-> this features))
+  (format #t "~1Tname[16] @ #x~X~%" (-> this name))
+  (label cfg-4)
+  this
+  )
 
+;; definition of type mc-slot-info
 (deftype mc-slot-info (structure)
   "Data about a memory card slot."
   ((handle        mc-handle)
@@ -76,7 +79,26 @@
   :pack-me
   )
 
+;; definition for method 3 of type mc-slot-info
+(defmethod inspect ((this mc-slot-info))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'mc-slot-info)
+  (format #t "~1Thandle: ~D~%" (-> this handle))
+  (format #t "~1Tknown: ~D~%" (-> this known))
+  (format #t "~1Tformatted: ~D~%" (-> this formatted))
+  (format #t "~1Tinited: ~D~%" (-> this inited))
+  (format #t "~1Tlast-file: ~D~%" (-> this last-file))
+  (format #t "~1Tmem-required: ~D~%" (-> this mem-required))
+  (format #t "~1Tmem-actual: ~D~%" (-> this mem-actual))
+  (format #t "~1Tfile[4] @ #x~X~%" (-> this file))
+  (label cfg-4)
+  this
+  )
 
+;; definition for function mc-sync
 (defun mc-sync ()
   "Synchronize the memory card state."
   (let ((v0-0 0))
@@ -88,6 +110,8 @@
     )
   )
 
+;; definition for function show-mc-info
+;; WARN: Return type mismatch int vs none.
 (defun show-mc-info ((buf dma-buffer))
   "Display the memory card debug text."
   (let ((slot (new 'stack-no-clear 'mc-slot-info)))
@@ -137,3 +161,119 @@
   0
   (none)
   )
+
+;; definition of type stored-network-account
+(deftype stored-network-account (structure)
+  ((name      uint8  64)
+   (password  uint8  64)
+   )
+  :pack-me
+  (:methods
+    (stored-network-account-method-9 () none)
+    (stored-network-account-method-10 () none)
+    )
+  )
+
+;; definition for method 3 of type stored-network-account
+(defmethod inspect ((this stored-network-account))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'stored-network-account)
+  (format #t "~1Tname[64] @ #x~X~%" (-> this name))
+  (format #t "~1Tpassword[64] @ #x~X~%" (-> this password))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type stored-network-accounts
+(deftype stored-network-accounts (structure)
+  ((accounts     stored-network-account  4 :inline)
+   (default-idx  int8)
+   (ct           int8)
+   )
+  :pack-me
+  (:methods
+    (stored-network-accounts-method-9 () none)
+    )
+  )
+
+;; definition for method 3 of type stored-network-accounts
+(defmethod inspect ((this stored-network-accounts))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'stored-network-accounts)
+  (format #t "~1Taccounts[4] @ #x~X~%" (-> this accounts))
+  (format #t "~1Tdefault-idx: ~D~%" (-> this default-idx))
+  (format #t "~1Tct: ~D~%" (-> this ct))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type mc-common-data
+(deftype mc-common-data (structure)
+  ((magic         uint32)
+   (crc           uint32)
+   (version       uint32)
+   (data          uint8                    1012)
+   (net-accounts  stored-network-accounts  :inline :overlay-at (-> data 0))
+   )
+  )
+
+;; definition for method 3 of type mc-common-data
+(defmethod inspect ((this mc-common-data))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'mc-common-data)
+  (format #t "~1Tmagic: ~D~%" (-> this magic))
+  (format #t "~1Tcrc: ~D~%" (-> this crc))
+  (format #t "~1Tversion: ~D~%" (-> this version))
+  (format #t "~1Tdata[1012] @ #x~X~%" (-> this data))
+  (format #t "~1Tnet-accounts: #<stored-network-accounts @ #x~X>~%" (-> this data))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type mc-patch-data
+(deftype mc-patch-data (structure)
+  ((magic    uint32)
+   (crc      uint32)
+   (version  uint32)
+   (size     uint32)
+   (data     uint8  524272)
+   )
+  )
+
+;; definition for method 3 of type mc-patch-data
+(defmethod inspect ((this mc-patch-data))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'mc-patch-data)
+  (format #t "~1Tmagic: ~D~%" (-> this magic))
+  (format #t "~1Tcrc: ~D~%" (-> this crc))
+  (format #t "~1Tversion: ~D~%" (-> this version))
+  (format #t "~1Tsize: ~D~%" (-> this size))
+  (format #t "~1Tdata[524272] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
+  )
+
+;; definition for symbol *mc-common-data*, type mc-common-data
+(define *mc-common-data* (new 'static 'mc-common-data))
+
+;; definition for symbol *mc-patch-data*, type mc-patch-data
+(define *mc-patch-data* (the-as mc-patch-data #f))
+
+;; definition for symbol *mc-last-result*, type object
+(define *mc-last-result* (the-as object 1))
+
+
+
+
