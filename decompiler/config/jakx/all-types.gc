@@ -29877,13 +29877,14 @@
 
 
   
-#|(deftype part-tracker-subsampler (part-tracker)
+(declare-type sparticle-subsampler basic)
+(deftype part-tracker-subsampler (part-tracker)
   ((subsampler sparticle-subsampler  :offset-assert 380) ;; guessed by decompiler
    )
-  :method-count-assert 19
+  :method-count-assert 24
   :size-assert         #x180
-  :flag-assert         #x1300f00180
-  )|#
+  :flag-assert         #x1800f00180
+  )
   
 
 
@@ -40072,9 +40073,9 @@
    (next-line-check-time uint64       :offset-assert 176)
    (last-add-frame-val   uint32       :offset-assert 184)
    )
-  :method-count-assert 22
+  :method-count-assert 27
   :size-assert         #xbc
-  :flag-assert         #x16003000bc
+  :flag-assert         #x1b003000bc
   (:methods
     (light-trail-tracker-method-9 () none) ;; 9
     (light-trail-tracker-method-10 () none) ;; 10
