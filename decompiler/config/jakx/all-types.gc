@@ -54315,9 +54315,10 @@
 
 
 
-  
+
 (deftype time-freeze-med-draw (time-freeze-short-draw)
-  ((pad280 uint8 16 :offset-assert 280))
+  ((pad280 uint64 :offset-assert 280)
+   (pad288 uint64 :offset-assert 288))
   :method-count-assert 58
   :size-assert         #x128
   :flag-assert         #x3a00a00128
@@ -55976,23 +55977,23 @@
 
 
   
-#|(deftype des-cactus-a (des-plant)
+(deftype des-cactus-a (des-plant)
   ()
-  :method-count-assert 74
+  :method-count-assert 76
   :size-assert         #x1f0
-  :flag-assert         #x4a016001f0
-  )|#
+  :flag-assert         #x4c016001f0
+  )
   
 
 
 
   
-#|(deftype des-cactus-b (des-plant)
+(deftype des-cactus-b (des-plant)
   ()
-  :method-count-assert 74
+  :method-count-assert 76
   :size-assert         #x1f0
-  :flag-assert         #x4a016001f0
-  )|#
+  :flag-assert         #x4c016001f0
+  )
   
 
 
