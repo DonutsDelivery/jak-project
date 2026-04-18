@@ -40088,7 +40088,7 @@
     (light-trail-tracker-method-17 (_type_ process-focusable) symbol) ;; 17
     (light-trail-tracker-method-18 (_type_ process-focusable) symbol) ;; 18
     (light-trail-tracker-method-19 (_type_) symbol) ;; 19
-    (light-trail-tracker-method-20 () _type_ :state) ;; 20
+    (light-trail-tracker-method-20 (_type_ vector) none) ;; 20
     (light-trail-tracker-method-21 () none) ;; 21
     )
   )
