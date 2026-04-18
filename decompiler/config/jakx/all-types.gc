@@ -58916,14 +58916,14 @@
 
 ;; touching-prims-entry-pool — full definition above at L30303
 
-;; touching-list — 5 new methods (9-13), new overrides slot 0, total=13
+;; touching-list — 5 new methods (9-13), new overrides slot 0, total=14
 (deftype touching-list (structure)
   ((num-touching-shapes  int32  :offset-assert 0)
    (resolve-u            int8   :offset-assert 4)
    )
-  :method-count-assert 13
+  :method-count-assert 14
   :size-assert         #x5
-  :flag-assert         #xd00000005
+  :flag-assert         #xe00000005
   (:methods
     (new (symbol type) _type_) ;; 0
     (add-touching-prims (_type_ object object float object object) none) ;; 9
