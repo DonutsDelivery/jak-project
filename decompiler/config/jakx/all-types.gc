@@ -7154,270 +7154,6 @@
 (define-extern vehicle-antenna-spawn function)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-base                      ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-#|
-(deftype wcar-base (wvehicle)
-  ((jmod-shock-tops UNKNOWN 4 :offset-assert 4672)
-   (jmod-shock-mids UNKNOWN 4 :offset-assert 4800)
-   )
-  :method-count-assert 272
-  :size-assert         #x13c0
-  :flag-assert         #x110133013c0
-  )
-|#
-
-(deftype wcar-base (wvehicle)
-  ((wcar-base-pad uint8 396 :offset 4660))
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-mongoose                  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-
-(deftype v-mongoose (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-falcon                    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-falcon (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-wombat                    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-wombat (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-possum                    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-possum (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-bobcat                    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-bobcat (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-cougar                    ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-cougar (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-wolf                      ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-wolf (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-bear                      ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-bear (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-leopard                   ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-leopard (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-panther                   ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-panther (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-tiger                     ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-tiger (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-cheetah                   ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-cheetah (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-gila                      ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-gila (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-snake                     ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-snake (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; wcar-daxtermobile              ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-  
-(deftype v-daxtermobile (wcar-base)
-  ()
-  :method-count-assert 204
-  :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
-  )
-  
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; drift                          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -9098,7 +8834,7 @@
 
   
 (deftype timer-hold-bank (timer-bank)
-  ((hold uint32  :offset-assert 48)
+  ((hold uint32  :offset 48)
    )
   :method-count-assert 9
   :size-assert         #x34
@@ -30398,7 +30134,7 @@
 
 
   
-(deftype simple-prim (process-drawable)
+#|(deftype simple-prim (process-drawable)
   ((strip prim-strip  :offset-assert 248) ;; guessed by decompiler
    )
   :method-count-assert 56
@@ -30412,7 +30148,7 @@
     (simple-prim-method-54 () none) ;; 54
     (simple-prim-method-55 () none) ;; 55
     )
-  )
+  )|#
   
 
 
@@ -45109,6 +44845,270 @@
   :size-assert         #x1234
   :flag-assert         #xcc11b01234
   )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-base                      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+#|
+(deftype wcar-base (wvehicle)
+  ((jmod-shock-tops UNKNOWN 4 :offset-assert 4672)
+   (jmod-shock-mids UNKNOWN 4 :offset-assert 4800)
+   )
+  :method-count-assert 272
+  :size-assert         #x13c0
+  :flag-assert         #x110133013c0
+  )
+|#
+
+(deftype wcar-base (wvehicle)
+  ((wcar-base-pad uint8 396 :offset 4660))
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-mongoose                  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+(deftype v-mongoose (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-falcon                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-falcon (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-wombat                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-wombat (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-possum                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-possum (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-bobcat                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-bobcat (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-cougar                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-cougar (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-wolf                      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-wolf (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-bear                      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-bear (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-leopard                   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-leopard (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-panther                   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-panther (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-tiger                     ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-tiger (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-cheetah                   ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-cheetah (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-gila                      ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-gila (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-snake                     ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-snake (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; wcar-daxtermobile              ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype v-daxtermobile (wcar-base)
+  ()
+  :method-count-assert 204
+  :size-assert         #x13c0
+  :flag-assert         #xcc133013c0
+  )
+  
+
+
+
 #|
 (deftype wvehicle-FULL-PENDING (vehicle)
   ((net-extra                      wvehicle-net-extra        :inline :offset-assert 2140)
