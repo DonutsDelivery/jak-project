@@ -460,6 +460,10 @@ namespace ripple_matrix_scale { extern void link(); }
 namespace ripple_apply_wave_table { extern void link(); }
 namespace ripple_create_wave_table { extern void link(); }
 namespace ripple_execute_init { extern void link(); }
+// ocean.cpp port (see game/mips2c/jakx_functions/ocean.cpp)
+namespace init_ocean_far_regs { extern void link(); }
+namespace draw_large_polygon_ocean { extern void link(); }
+namespace render_ocean_quad { extern void link(); }
 }
 // clang-format on
 
@@ -814,8 +818,8 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      {"ocean-vu0",
       {jak3::method_14_ocean::link, jak3::method_15_ocean::link, jak3::method_16_ocean::link}},
      {"ocean",
-      {jak3::init_ocean_far_regs::link, jak3::draw_large_polygon_ocean::link,
-       jak3::render_ocean_quad::link}},
+      {jakx::init_ocean_far_regs::link, jakx::draw_large_polygon_ocean::link,
+       jakx::render_ocean_quad::link}},
      {"generic-merc",
       {jak3::generic_merc_do_chain::link, jak3::generic_merc_execute_asm::link,
        jak3::generic_merc_death::link, jak3::generic_merc_query::link,
