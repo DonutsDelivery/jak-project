@@ -2139,6 +2139,7 @@
 
 
 
+#|
 (deftype eco-blue (eco)
   ((launcher    uint8 20 :offset-assert 248)
    (birth-accum uint8 20 :offset-assert 268)
@@ -2150,6 +2151,7 @@
     running ;; 50 (override)
     )
   )
+|#
 
 
 
@@ -4308,6 +4310,7 @@
 
 
 
+#|
 (deftype hud-vehicle (hud)
   ((weapon-texture uint8 49 :offset-assert 6364)
    (gun-texture                      basic              :offset-assert 6364)
@@ -4400,6 +4403,7 @@
     (hud-vehicle-method-39 () none) ;; 39
     )
   )
+|#
 
 
 
@@ -4623,6 +4627,7 @@
   
 (declare-type skeleton-group basic)
 
+#|
 (deftype vehicle-wheel-init-params (structure)
   ((vehicle  basic                  :offset-assert 0)
    (skel     skeleton-group         :offset-assert 4)
@@ -4636,6 +4641,7 @@
   :size-assert         #x40
   :flag-assert         #x900000040
   )
+|#
  ;; forward-ref to quaternion (L7157)
   
 
@@ -4770,6 +4776,7 @@
 
   
 
+#|
 (deftype wvehicle-part-work (structure)
   ((streak             spark-launch-params          :inline :offset-assert 0)
    (local-mat          matrix                       :inline :offset-assert 80)
@@ -4825,6 +4832,7 @@
   :size-assert         #x3b0
   :flag-assert         #x9000003b0
   )
+|#
 
   
 
@@ -4889,6 +4897,7 @@
 
   
 
+#|
 (deftype update-engine-loop-state-work (structure)
   ((i-loop int8                            :offset-assert 0)
    (info   vehicle-sound-engine-loop-info  :offset-assert 4)
@@ -4899,6 +4908,7 @@
   :size-assert         #x10
   :flag-assert         #x900000010
   )
+|#
 
   
 
@@ -5428,6 +5438,7 @@
   
 
 
+#|
 (deftype v-toad-shot (net-projectile)
   ((trail-tracker    uint64         :offset-assert 568)
    (blast-radius     float          :offset-assert 576)
@@ -5446,6 +5457,7 @@
     impact ;; 52
     )
   )
+|#
 
 
   
@@ -5537,6 +5549,7 @@
   
 
 
+#|
 (deftype v-yellow-guided-missile (net-projectile)
   ((trail-tracker        uint64                       :offset-assert 568)
    (blast-radius         float                        :offset-assert 576)
@@ -5567,6 +5580,7 @@
     (v-yellow-guided-missile-method-80 () none) ;; 80
     )
   )
+|#
 
 
   
@@ -5619,6 +5633,7 @@
 
 
 
+#|
 (deftype particle-buffer (prim-client)
   ((tex-id           uint32      :offset-assert 4)
    (smoke-part-count int32       :offset-assert 8)
@@ -5636,6 +5651,7 @@
     (particle-buffer-method-13 () none) ;; 13
     )
   )
+|#
 
 
 
@@ -5667,6 +5683,7 @@
   
 
 
+#|
 (deftype v-wpn-red-smoke (vehicle-weapon-slot)
   ((smoke-system uint64  :offset-assert 264)
    (wait-time    int32   :offset-assert 272)
@@ -5682,6 +5699,7 @@
     (v-wpn-red-smoke-method-61 () none) ;; 61
     )
   )
+|#
 
 
   
@@ -5703,6 +5721,7 @@
 
 
 
+#|
 (deftype oil-trail (prim-client)
   ((tex-id                   uint32          :offset-assert 4)
    (segment-count            int32           :offset-assert 8)
@@ -5724,6 +5743,7 @@
     (oil-trail-method-16 () none) ;; 16
     )
   )
+|#
 
 
 
@@ -5793,6 +5813,7 @@
   
 
 
+#|
 (deftype v-wpn-red-oil (vehicle-weapon-slot)
   ((oil-emitter uint64  :offset-assert 264)
    (wait-time   int32   :offset-assert 272)
@@ -5808,6 +5829,7 @@
     (v-wpn-red-oil-method-61 () none) ;; 61
     )
   )
+|#
 
 
   
@@ -6102,6 +6124,7 @@
   
 
 
+#|
 (deftype v-wpn-red-tractor-beam (vehicle-weapon-slot)
   ((firing-at      uint64  :offset-assert 264)
    (duration-left  int32   :offset-assert 272)
@@ -6117,6 +6140,7 @@
     firing ;; 60 (new)
     )
   )
+|#
 
 
   
@@ -6206,6 +6230,7 @@
 
 
 
+#|
 (deftype vehicle-antenna (process-drawable)
   ((vehicle          uint64                          :offset-assert 248)
    (attach-local-pos vector                  :inline :offset-assert 256)
@@ -6235,6 +6260,7 @@
     (vehicle-antenna-method-54 () none) ;; 54
     )
   )
+|#
 
 
 
@@ -15602,6 +15628,7 @@
 
   
 
+#|
 (deftype sky-work (structure)
   ((adgif-tmpl       dma-gif-packet  :inline :offset-assert 0)
    (draw-tmpl        dma-gif-packet  :inline :offset-assert 32)
@@ -15684,6 +15711,7 @@
     (sky-work-method-36 (_type_ dma-buffer) none) ;; 36
     )
   )
+|#
 
   
 
@@ -15907,6 +15935,7 @@
 
   
 
+#|
 (deftype ocean-wave-frames (structure)
   ((frame ocean-wave-data 64 :offset-assert 0) ;; guessed by decompiler
    )
@@ -15915,6 +15944,7 @@
   :heap-base           #x1
   :flag-assert         #x900010000
   )
+|#
 
   
 
@@ -21110,6 +21140,7 @@
 
 
 
+#|
 (deftype net-type-lookup-response (structure)
   ((asz-ipaddresses uint8 16 :offset-assert 0)
    (n-ipaddresses   uint32     :offset-assert 256)
@@ -21119,6 +21150,7 @@
   :size-assert         #x108
   :flag-assert         #x900000108
   )
+|#
 
 
 
@@ -21323,6 +21355,7 @@
 
 
 
+#|
 (deftype net-rgbarray (structure)
   ((cb-size   int32      :offset-assert 0)
    (line-size int32      :offset-assert 4)
@@ -21334,12 +21367,14 @@
   :size-assert         #x50
   :flag-assert         #x900000050
   )
+|#
 
 
 
 
   
 
+#|
 (deftype net-stream-media-video-play-data (structure)
   ((client-index     int32         :offset-assert 0)
    (p-rgbarray       net-rgbarray  :offset-assert 4)
@@ -21351,6 +21386,7 @@
   :flag-assert         #x900000010
   ;; field p-user-data uses ~A with a signed load.
   )
+|#
 
   
 
@@ -21932,6 +21968,7 @@
 
   
 
+#|
 (deftype net-lanfind-exchange-callback-out-args (structure)
   ((b-respond-to-sender int32            :offset-assert 0)
    (details             net-data :inline :offset-assert 4)
@@ -21940,6 +21977,7 @@
   :size-assert         #xc
   :flag-assert         #x90000000c
   )
+|#
 
   
 
@@ -21947,6 +21985,7 @@
 
   
 
+#|
 (deftype net-lanfind-in-params (structure)
   ((b-default-set        int32            :offset-assert 0)
    (session-type         int32            :offset-assert 4)
@@ -21960,6 +21999,7 @@
   :size-assert         #x20
   :flag-assert         #x900000020
   )
+|#
 
   
 
@@ -22133,6 +22173,7 @@
 
 
 
+#|
 (deftype medius-account-login-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (status-code     int32                       :offset-assert 24)
@@ -22145,6 +22186,7 @@
   :size-assert         #xc2
   :flag-assert         #x9000000c2
   )
+|#
 
 
 
@@ -22967,6 +23009,7 @@
 
 
 
+#|
 (deftype medius-create-game-on-self-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (session-key uint8 17 :offset-assert 21)
@@ -22991,6 +23034,7 @@
   :size-assert         #xec
   :flag-assert         #x9000000ec
   )
+|#
 
 
 
@@ -23912,6 +23956,7 @@
 
 
 
+#|
 (deftype medius-get-ladder-stats-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (status-code int32      :offset-assert 24)
@@ -23921,6 +23966,7 @@
   :size-assert         #x58
   :flag-assert         #x900000058
   )
+|#
 
 
 
@@ -23940,6 +23986,7 @@
 
 
 
+#|
 (deftype medius-get-ladder-stats-wide-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (status-code           int32       :offset-assert 24)
@@ -23950,11 +23997,13 @@
   :size-assert         #x1b0
   :flag-assert         #x9000001b0
   )
+|#
 
 
 
 
 
+#|
 (deftype medius-get-ladder-stats-wide-w-idarray-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (ids uint8 50 :offset-assert 24)
@@ -23964,11 +24013,13 @@
   :size-assert         #xe4
   :flag-assert         #x9000000e4
   )
+|#
 
 
 
 
 
+#|
 (deftype medius-get-ladder-stats-wide-w-idarray-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (status-code           int32       :offset-assert 24)
@@ -23980,6 +24031,7 @@
   :size-assert         #x1b1
   :flag-assert         #x9000001b1
   )
+|#
 
 
 
@@ -24503,6 +24555,7 @@
 
 
 
+#|
 (deftype medius-join-channel-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (status-code  int32                       :offset-assert 24)
@@ -24512,6 +24565,7 @@
   :size-assert         #xb6
   :flag-assert         #x9000000b6
   )
+|#
 
 
 
@@ -24539,6 +24593,7 @@
 
 
 
+#|
 (deftype medius-join-game-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (session-key uint8 17 :offset-assert 21)
@@ -24553,6 +24608,7 @@
   :size-assert         #xc4
   :flag-assert         #x9000000c4
   )
+|#
 
 
 
@@ -24589,6 +24645,7 @@
 
 
 
+#|
 (deftype medius-ladder-list-extra-info-response0 (structure)
   ((message-id uint8 21 :offset-assert 0)
    (status-code     int32                              :offset-assert 24)
@@ -24603,11 +24660,13 @@
   :size-assert         #x1d1
   :flag-assert         #x9000001d1
   )
+|#
 
 
 
 
 
+#|
 (deftype medius-ladder-list-extra-info-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (status-code     int32                              :offset-assert 24)
@@ -24623,6 +24682,7 @@
   :size-assert         #x1d5
   :flag-assert         #x9000001d5
   )
+|#
 
 
 
@@ -25472,6 +25532,7 @@
 
 
 
+#|
 (deftype medius-update-ladder-stats-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (ladder-type int32      :offset-assert 24)
@@ -25481,11 +25542,13 @@
   :size-assert         #x58
   :flag-assert         #x900000058
   )
+|#
 
 
 
 
 
+#|
 (deftype medius-update-ladder-stats-wide-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (ladder-type int32       :offset-assert 24)
@@ -25495,11 +25558,13 @@
   :size-assert         #x1ac
   :flag-assert         #x9000001ac
   )
+|#
 
 
 
 
 
+#|
 (deftype medius-update-clan-ladder-stats-wide-delta-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (clan-id    int32       :offset-assert 24)
@@ -25509,6 +25574,7 @@
   :size-assert         #x1ac
   :flag-assert         #x9000001ac
   )
+|#
 
 
 
@@ -25735,6 +25801,7 @@
 
   
 
+#|
 (deftype medius-connect-in-params (structure)
   ((connect-info                         net-connection-info     :inline :offset-assert 0)
    (stream-media-params                  net-stream-media-params :inline :offset-assert 156)
@@ -25747,6 +25814,7 @@
   :size-assert         #x11c
   :flag-assert         #x90000011c
   )
+|#
 
   
 
@@ -25915,6 +25983,7 @@
 
 
 
+#|
 (deftype medius-file-create-request (structure)
   ((medius-file-to-create         medius-file            :inline :offset-assert 0)
    (medius-file-create-attributes medius-file-attributes :inline :offset-assert 172)
@@ -25924,6 +25993,7 @@
   :size-assert         #x1d5
   :flag-assert         #x9000001d5
   )
+|#
 
 
 
@@ -26146,6 +26216,7 @@
 
 
 
+#|
 (deftype medius-file-update-attributes-request (structure)
   ((medius-file-info               medius-file            :inline :offset-assert 0)
    (medius-file-updated-attributes medius-file-attributes :inline :offset-assert 172)
@@ -26155,6 +26226,7 @@
   :size-assert         #x1d5
   :flag-assert         #x9000001d5
   )
+|#
 
 
 
@@ -26187,6 +26259,7 @@
 
 
 
+#|
 (deftype medius-file-get-attributes-response (structure)
   ((medius-file-info                medius-file            :inline :offset-assert 0)
    (medius-file-attributes-response medius-file-attributes :inline :offset-assert 172)
@@ -26197,11 +26270,13 @@
   :size-assert         #x1d9
   :flag-assert         #x9000001d9
   )
+|#
 
 
 
 
 
+#|
 (deftype medius-file-update-meta-data-request (structure)
   ((medius-file-info        medius-file           :inline :offset-assert 0)
    (medius-update-meta-data medius-file-meta-data :inline :offset-assert 172)
@@ -26211,6 +26286,7 @@
   :size-assert         #x1f9
   :flag-assert         #x9000001f9
   )
+|#
 
 
 
@@ -26230,6 +26306,7 @@
 
 
 
+#|
 (deftype medius-file-get-meta-data-request (structure)
   ((medius-file-info               medius-file           :inline :offset-assert 0)
    (medius-meta-data-requested-key medius-file-meta-data :inline :offset-assert 172)
@@ -26239,11 +26316,13 @@
   :size-assert         #x1f9
   :flag-assert         #x9000001f9
   )
+|#
 
 
 
 
 
+#|
 (deftype medius-file-get-meta-data-response (structure)
   ((medius-file-info          medius-file           :inline :offset-assert 0)
    (medius-meta-data-response medius-file-meta-data :inline :offset-assert 172)
@@ -26255,6 +26334,7 @@
   :size-assert         #x1fe
   :flag-assert         #x9000001fe
   )
+|#
 
 
 
@@ -26273,6 +26353,7 @@
 
 
 
+#|
 (deftype medius-file-search-by-meta-data-response (structure)
   ((medius-file-info          medius-file           :inline :offset-assert 0)
    (medius-meta-data-response medius-file-meta-data :inline :offset-assert 172)
@@ -26284,6 +26365,7 @@
   :size-assert         #x1fe
   :flag-assert         #x9000001fe
   )
+|#
 
 
 
@@ -26315,6 +26397,7 @@
 
 
 
+#|
 (deftype medius-server-authentication-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (trust-level  int32                    :offset-assert 24)
@@ -26324,11 +26407,13 @@
   :size-assert         #x4c
   :flag-assert         #x90000004c
   )
+|#
 
 
 
 
 
+#|
 (deftype medius-server-authentication-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (confirmation int8                        :offset-assert 21)
@@ -26338,11 +26423,13 @@
   :size-assert         #xb2
   :flag-assert         #x9000000b2
   )
+|#
 
 
 
 
 
+#|
 (deftype medius-server-set-attributes-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (attributes            int32               :offset-assert 24)
@@ -26352,6 +26439,7 @@
   :size-assert         #x34
   :flag-assert         #x900000034
   )
+|#
 
 
 
@@ -26523,6 +26611,7 @@
 
 
 
+#|
 (deftype medius-server-join-game-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (connect-info net-connection-info :inline :offset-assert 24)
@@ -26531,11 +26620,13 @@
   :size-assert         #xb2
   :flag-assert         #x9000000b2
   )
+|#
 
 
 
 
 
+#|
 (deftype medius-server-join-game-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (confirmation int8            :offset-assert 21)
@@ -26546,6 +26637,7 @@
   :size-assert         #x68
   :flag-assert         #x900000068
   )
+|#
 
 
 
@@ -26614,6 +26706,7 @@
 
 
 
+#|
 (deftype medius-server-session-begin-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (confirmation int8                        :offset-assert 21)
@@ -26623,6 +26716,7 @@
   :size-assert         #xb2
   :flag-assert         #x9000000b2
   )
+|#
 
 
 
@@ -26838,6 +26932,7 @@
 
 
 
+#|
 (deftype net-lanpeer-desc (structure)
   ((dme-version      net-dme-version         :inline :offset-assert 0)
    (net-platform-id  int32                           :offset-assert 20)
@@ -26851,11 +26946,13 @@
   :size-assert         #xa4
   :flag-assert         #x9000000a4
   )
+|#
 
 
 
 
 
+#|
 (deftype net-initialize-in-params (structure)
   ((b-default-set                  int32                           :offset-assert 0)
    (localization                   net-localization-params :inline :offset-assert 4)
@@ -26875,12 +26972,14 @@
   :flag-assert         #x900000078
   ;; field p-system-message-callback-data uses ~A with a signed load.
   )
+|#
 
 
 
 
   
 
+#|
 (deftype net-host-peer-to-peer-in-params (structure)
   ((b-default-set                            int32                           :offset-assert 0)
    (pf-local-connect-callback                basic                           :offset-assert 4)
@@ -26907,6 +27006,7 @@
   :flag-assert         #x9000000c0
   ;; field p-local-connect-callback-data uses ~A with a signed load. field p-local-disconnect-callback-data uses ~A with a signed load. field p-remote-client-connect-callback-data uses ~A with a signed load. field p-remote-client-disconnect-callback-data uses ~A with a signed load. field p-system-status-callback-data uses ~A with a signed load.
   )
+|#
 
   
 
@@ -26914,6 +27014,7 @@
 
   
 
+#|
 (deftype net-resolve-addr-data (structure)
   ((b-is-set     int32                    :offset-assert 0)
    (error-code   int32                    :offset-assert 4)
@@ -26923,6 +27024,7 @@
   :size-assert         #x38
   :flag-assert         #x900000038
   )
+|#
 
   
 
@@ -26930,6 +27032,7 @@
 
   
 
+#|
 (deftype net-resolve-addr-in-params (structure)
   ((b-default-set            int32               :offset-assert 0)
    (pf-resolve-addr-callback basic               :offset-assert 4)
@@ -26939,6 +27042,7 @@
   :size-assert         #x20
   :flag-assert         #x900000020
   )
+|#
 
   
 
@@ -26946,6 +27050,7 @@
 
   
 
+#|
 (deftype net-incoming-client-in-params (structure)
   ((b-default-set         int32                    :offset-assert 0)
    (incoming-address-list net-address-list :inline :offset-assert 4)
@@ -26955,6 +27060,7 @@
   :size-assert         #x74
   :flag-assert         #x900000074
   )
+|#
 
   
 
@@ -26962,6 +27068,7 @@
 
   
 
+#|
 (deftype net-type-broadcast-schedule (structure)
   ((min-update-interval  uint32              :offset-assert 0)
    (error-threshold-type int32               :offset-assert 4)
@@ -26972,6 +27079,7 @@
   :size-assert         #xd
   :flag-assert         #x90000000d
   )
+|#
 
   
 
@@ -26979,6 +27087,7 @@
 
   
 
+#|
 (deftype net-type-field (structure)
   ((offset          int32                               :offset-assert 0)
    (element-size    int32                               :offset-assert 4)
@@ -26990,12 +27099,14 @@
   :size-assert         #x1d
   :flag-assert         #x90000001d
   )
+|#
 
   
 
 
 
 
+#|
 (deftype net-type-structure (structure)
   ((total-size         int32      :offset-assert 0)
    (field-count        int32      :offset-assert 4)
@@ -27007,12 +27118,14 @@
   :size-assert         #x228
   :flag-assert         #x900000228
   )
+|#
 
 
 
 
   
 
+#|
 (deftype net-lanfind-exchange-callback-in-args (structure)
   ((connection-handle basic                    :offset-assert 0)
    (session-type      int32                    :offset-assert 4)
@@ -27024,6 +27137,7 @@
   :size-assert         #xb8
   :flag-assert         #x9000000b8
   )
+|#
 
   
 
@@ -27031,6 +27145,7 @@
 
   
 
+#|
 (deftype net-lanfind-callback-data-args (structure)
   ((n-num-clients     int16                    :offset-assert 0)
    (n-max-num-clients int16                    :offset-assert 2)
@@ -27043,6 +27158,7 @@
   :size-assert         #xb8
   :flag-assert         #x9000000b8
   )
+|#
 
   
 
@@ -28997,6 +29113,7 @@
   :flag-assert         #x37000001d8
   )
 
+#|
 (deftype collide-shape-moving-FULL-PENDING (collide-shape)
   ((rider-time         uint64                                                                     :offset-assert 200) ;; time-frame
    (rider-last-move    vector                                                             :inline :offset-assert 208)
@@ -29041,6 +29158,7 @@
     (collide-shape-moving-method-66 (_type_ vector vector float int) float) ;; 66
     )
   )
+|#
 
   
 
@@ -29128,6 +29246,7 @@
 
   
 
+#|
 (deftype part-tracker-init-params (structure)
   ((local-offset         vector                         :inline :offset-assert 0)
    (userdata             uint64                                 :offset-assert 16)
@@ -29144,6 +29263,7 @@
   :size-assert         #x38
   :flag-assert         #x900000038
   )
+|#
 
   
 
@@ -29670,6 +29790,7 @@
   
 
 
+#|
 (deftype net-enemy (process-focusable)
   ((flags                  uint64                     :offset-assert 256)
    (info                   net-enemy-info             :offset-assert 264)
@@ -29730,6 +29851,7 @@
     (net-enemy-method-86 () none) ;; 86
     )
   )
+|#
 
 
 
@@ -30984,6 +31106,7 @@
 
   
 
+#|
 (deftype instance-shrub-work (structure)
   ((dummy                           qword             3       :offset-assert 0) ;; guessed by decompiler
    (chaina                          qword             8       :offset-assert 48) ;; guessed by decompiler
@@ -31057,6 +31180,7 @@
   :size-assert         #x19bc
   :flag-assert         #x9000019bc
   )
+|#
 
   
 
@@ -31177,6 +31301,7 @@
 
   
 
+#|
 (deftype instance-tie-work (structure)
   ((wind-const                     vector     :inline :offset-assert 0)
    (hmge-d                         vector     :inline :offset-assert 16)
@@ -31229,6 +31354,7 @@
   :size-assert         #x22c
   :flag-assert         #x90000022c
   )
+|#
 
   
 
@@ -31236,6 +31362,7 @@
 
   
 
+#|
 (deftype instance-tie-dma (structure)
   ((banka instance-tie      32  :offset-assert 4) ;; guessed by decompiler
    (bankb instance-tie      32  :offset-assert 2052) ;; guessed by decompiler
@@ -31247,6 +31374,7 @@
   :size-assert         #x3000
   :flag-assert         #x900003000
   )
+|#
 
   
 
@@ -31254,6 +31382,7 @@
 
   
 
+#|
 (deftype prototype-tie-work (structure)
   ((upload-flushe              dma-packet   :inline :offset-assert 0)
    (upload-palette             dma-packet   :inline :offset-assert 16)
@@ -31341,6 +31470,7 @@
   :size-assert         #x240
   :flag-assert         #x900000240
   )
+|#
 
   
 
@@ -31348,6 +31478,7 @@
 
   
 
+#|
 (deftype prototype-tie-dma (structure)
   ((colora               rgba    256 :offset-assert 0) ;; guessed by decompiler
    (colorb               rgba    256 :offset-assert 1024) ;; guessed by decompiler
@@ -31429,6 +31560,7 @@
   :size-assert         #x2890
   :flag-assert         #x900002890
   )
+|#
 
   
 
@@ -31719,6 +31851,7 @@
 
 
 
+#|
 (deftype background-work (basic)
   ((tfrag-tree-count              int32                           :offset-assert 4)
    (tfrag-trees                   drawable-tree-tfrag          19 :offset-assert 8) ;; guessed by decompiler
@@ -31750,6 +31883,7 @@
   :size-assert         #x4e8
   :flag-assert         #x9000004e8
   )
+|#
 
 
 
@@ -32091,6 +32225,7 @@
 
 
 
+#|
 (deftype entity-more-perm (structure)
   ((aid         uint32    :offset-assert 0)
    (ent         basic     :offset-assert 4)
@@ -32111,6 +32246,7 @@
     (entity-more-perm-method-9 () none) ;; 9
     )
   )
+|#
 
 
 
@@ -33209,6 +33345,7 @@
 
 
 
+#|
 (deftype hud-corners (structure)
   ((data uint8 4 :offset-assert 0)
    )
@@ -33219,6 +33356,7 @@
     (hud-corners-method-9 () none) ;; 9
     )
   )
+|#
 
 
 
@@ -33795,6 +33933,7 @@
 
 
 
+#|
 (deftype nav-find-corner-portal-params (structure)
   ((start-poly   nav-poly         :offset-assert 0)
    (target-poly  nav-poly         :offset-assert 4)
@@ -33808,6 +33947,7 @@
   :size-assert         #x51
   :flag-assert         #x900000051
   )
+|#
 
 
 
@@ -34903,6 +35043,7 @@
 
 
 
+#|
 (deftype sprite-frame-data (structure)
   ((data uint8 42 :offset-assert 0)
    (cdata              vector       16      :offset-assert 0) ;; guessed by decompiler
@@ -34943,6 +35084,7 @@
   :size-assert         #x2a0
   :flag-assert         #x9000002a0
   )
+|#
 
 
 
@@ -35468,6 +35610,7 @@
 
   
 
+#|
 (deftype ripple-globals (structure)
   ((count    int32             :offset-assert 0)
    (requests ripple-request 16 :offset-assert 4) ;; guessed by decompiler
@@ -35476,6 +35619,7 @@
   :size-assert         #x84
   :flag-assert         #x900000084
   )
+|#
 
   
 
@@ -35885,6 +36029,7 @@
 
 
 
+#|
 (deftype blur-coords (structure)
   ((pos uint8 8 :offset-assert 0)
    (tex uint8 8 :offset-assert 64)
@@ -35893,6 +36038,7 @@
   :size-assert         #x80
   :flag-assert         #x900000080
   )
+|#
 
 
 
@@ -36339,6 +36485,7 @@
 
 
 
+#|
 (deftype tie-near-consts (structure)
   ((extra     qword    :inline :offset-assert 0)
    (gifbufs   qword    :inline :offset-assert 16)
@@ -36357,6 +36504,7 @@
   :size-assert         #xb0
   :flag-assert         #x9000000b0
   )
+|#
 
 
 
@@ -36760,6 +36908,7 @@
 
 
 
+#|
 (deftype dma-block-list (structure)
   ((total-length int32     :offset-assert 0)
    (min-offset   int32     :offset-assert 4)
@@ -36772,6 +36921,7 @@
     (dma-block-list-method-9 () none) ;; 9
     )
   )
+|#
 
 
 
@@ -38357,6 +38507,7 @@
 
 
 
+#|
 (deftype cam-debug-tri (structure)
   ((vertex uint8 3 :offset-assert 0)
    (intersect vector   :inline :offset-assert 48)
@@ -38366,6 +38517,7 @@
   :size-assert         #x44
   :flag-assert         #x900000044
   )
+|#
 
 
 
@@ -40126,6 +40278,7 @@
 
   
 
+#|
 (deftype rb-debug-state-record (structure)
   ((flags           uint16             :offset-assert 0)
    (time-remaining  float              :offset-assert 4)
@@ -40151,12 +40304,14 @@
     (rb-debug-state-record-method-10 () none) ;; 10
     )
   )
+|#
 
   
 
 
 
 
+#|
 (deftype rb-debugger (structure)
   ((user-mode      uint8            :offset-assert 0)
    (hook-control   uint8            :offset-assert 1)
@@ -40192,6 +40347,7 @@
     (rb-debugger-method-20 () none) ;; 20
     )
   )
+|#
 
 
 
@@ -40826,6 +40982,7 @@
 
   
 
+#|
 (deftype nav-engine (structure)
   ((spr-addr              uint32                    :offset-assert 0)
    (nav-work-addr         uint32                    :offset-assert 4)
@@ -40867,6 +41024,7 @@
     (nav-engine-method-21 () none) ;; 21 ;; (reloc-ptrs-to-mem (_type_ nav-engine-spr-buffer) none)
     )
   )
+|#
 
   
 
@@ -40895,6 +41053,7 @@
 
 
 
+#|
 (deftype nav-find-corner-work (structure)
   ((cur-poly     nav-poly                 :offset-assert 0)
    (target-poly  nav-poly                 :offset-assert 4)
@@ -40912,6 +41071,7 @@
   :size-assert         #xb8
   :flag-assert         #x9000000b8
   )
+|#
 
 
 
@@ -41543,6 +41703,7 @@
 
 
 
+#|
 (deftype headset-decoder (structure)
   ((client-idx int8                       :offset-assert 0)
    (last-time  int32                      :offset-assert 4)
@@ -41555,6 +41716,7 @@
   :size-assert         #x42
   :flag-assert         #x900000042
   )
+|#
 
 
 
@@ -42521,6 +42683,7 @@
 
 
 
+#|
 (deftype medius-game-array (structure)
   ((ct   int32      :offset-assert 0)
    (data uint8 64 :offset-assert 4)
@@ -42533,6 +42696,7 @@
     (medius-game-array-method-10 () none) ;; 10
     )
   )
+|#
 
 
 
@@ -42617,6 +42781,7 @@
 (declare-type rigid-body-surface structure)
 
 
+#|
 (deftype rigid-body-surface (structure)
   ((flags            rigid-body-surface-flag   :offset-assert 0)
    (surface-type     uint8                     :offset-assert 1)
@@ -42644,6 +42809,7 @@
   :flag-assert         #x900000040
   ;; field rigid-body-surface-flag is likely a value type.
   )
+|#
 
 
 
@@ -44544,6 +44710,7 @@
 
 
 
+#|
 (deftype wvehicle-FULL-PENDING (vehicle)
   ((net-extra                      wvehicle-net-extra        :inline :offset-assert 2140)
    (antenna                        uint64                            :offset-assert 2152)
@@ -44731,6 +44898,7 @@
     (wvehicle-method-271 (_type_) none) ;; 271
     )
   )
+|#
 
 
 
@@ -45272,6 +45440,7 @@
 
 
 
+#|
 (deftype net-game-mgr-vehicle-info (structure)
   ((all-vehicles uint8 6 :offset-assert 0)
    (local-vehicles uint8 6 :offset-assert 24)
@@ -45286,6 +45455,7 @@
   :size-assert         #x64
   :flag-assert         #x900000064
   )
+|#
 
 
 
@@ -45661,6 +45831,7 @@
 
 
 
+#|
 (deftype net-game-mgr-artifact (net-game-mgr-deathmatch)
   ((artifact-location-array basic    :offset-assert 312)
    (artifact-location-count int8     :offset-assert 316)
@@ -45678,6 +45849,7 @@
     (net-game-mgr-artifact-method-85 () none) ;; 85
     )
   )
+|#
 
 
 
@@ -46184,6 +46356,7 @@
 
 
 
+#|
 (deftype timetrial-recording (structure)
   ((crc           uint32                            :offset-assert 0)
    (total-snaps   uint32                            :offset-assert 4)
@@ -46208,6 +46381,7 @@
     (timetrial-recording-method-13 () none) ;; 13
     )
   )
+|#
 
 
 
@@ -46298,6 +46472,7 @@
 
 
 
+#|
 (deftype strings-extra-struct (structure)
   ((text uint8 128 :offset-assert 0)
    (extra        basic       :offset-assert 128)
@@ -46310,6 +46485,7 @@
   :flag-assert         #x900000084
   ;; field extra uses ~A with a signed load. field extra-object uses ~A with a signed load.
   )
+|#
 
 
 
@@ -47157,6 +47333,7 @@
 
 
 
+#|
 (deftype keyboard-key (structure)
   ((data uint8 4 :offset-assert 0)
    (char  uint8     :offset-assert 0)
@@ -47175,12 +47352,14 @@
   :size-assert         #x14
   :flag-assert         #x900000014
   )
+|#
 
 
 
 
   
 
+#|
 (deftype keyboard-control (process-drawable)
   ((selected      int32                       :offset-assert 248)
    (pos-x         int32                       :offset-assert 252)
@@ -47215,6 +47394,7 @@
     idle ;; 50
     )
   )
+|#
 
   
 
@@ -47240,6 +47420,7 @@
 
 
 
+#|
 (deftype lobby-menu-manager (process)
   ((game-type                  uint32    :offset-assert 144)
    (in-focus-index             int8      :offset-assert 216)
@@ -47474,6 +47655,7 @@
     (lobby-menu-manager-method-195 () none) ;; 195
     )
   )
+|#
 
 
 
@@ -47626,6 +47808,7 @@
 
 
 
+#|
 (deftype lobby-chat-window (structure)
   ((strings uint8 16 :offset-assert 0)
    (x       int32      :offset-assert 1792)
@@ -47643,6 +47826,7 @@
     (lobby-chat-window-method-12 () none) ;; 12
     )
   )
+|#
 
 
 
@@ -48086,6 +48270,7 @@
 
 
 
+#|
 (deftype medius-room-array (structure)
   ((total-ct    int32     :offset-assert 0)
    (base-page   int32     :offset-assert 4)
@@ -48101,6 +48286,7 @@
     (medius-room-array-method-10 () none) ;; 10
     )
   )
+|#
 
 
 
@@ -48312,6 +48498,7 @@
 
 
 
+#|
 (deftype sce-stat (structure)
   ((mode    uint32    :offset-assert 0)
    (attr    int32     :offset-assert 4)
@@ -48326,11 +48513,13 @@
   :size-assert         #x40
   :flag-assert         #x900000040
   )
+|#
 
 
 
 
 
+#|
 (deftype sce-dirent (structure)
   ((stat    sce-stat :inline :offset-assert 0)
    (name uint8 256 :offset-assert 64)
@@ -48341,6 +48530,7 @@
   :flag-assert         #x900000144
   ;; field private uses ~A with a signed load.
   )
+|#
 
 
 
@@ -48362,6 +48552,7 @@
 
 
 
+#|
 (deftype eznet-combination-list (structure)
   ((length      int32      :offset-assert 0)
    (default     int32      :offset-assert 4)
@@ -48372,6 +48563,7 @@
   :size-assert         #x800
   :flag-assert         #x900000800
   )
+|#
 
 
 
@@ -49201,6 +49393,7 @@
 
 
 
+#|
 (deftype udp-layer (structure)
   ((machines uint8 8 :offset-assert 0)
    (socket              int32     :offset-assert 256)
@@ -49227,6 +49420,7 @@
     (udp-layer-method-19 () none) ;; 19
     )
   )
+|#
 
 
 
@@ -49365,6 +49559,7 @@
 
   
 
+#|
 (deftype debug-rigid-body-move (structure)
   ((vel-dot-norm    float                      :offset-assert 0)
    (time-step-scale float                      :offset-assert 4)
@@ -49381,12 +49576,14 @@
   :size-assert         #x1b4
   :flag-assert         #x9000001b4
   )
+|#
 
   
 
 
 
 
+#|
 (deftype rigid-body-work (structure)
   ((max-ang-momentum float      :offset-assert 0)
    (max-ang-velocity float      :offset-assert 4)
@@ -49398,6 +49595,7 @@
   :size-assert         #x1c10
   :flag-assert         #x900001c10
   )
+|#
 
 
 
@@ -49439,6 +49637,7 @@
 
 
 
+#|
 (deftype hack-line-sphere (structure)
   ((spheres uint8 2 :offset-assert 0)
    (prim    basic     :offset-assert 28)
@@ -49447,11 +49646,13 @@
   :size-assert         #x20
   :flag-assert         #x900000020
   )
+|#
 
 
 
 
 
+#|
 (deftype check-line-spheres-hack-work (structure)
   ((fill-sphere         sphere  :inline :offset-assert 0)
    (fill-delta          vector  :inline :offset-assert 16)
@@ -49470,6 +49671,7 @@
   :size-assert         #xec
   :flag-assert         #x9000000ec
   )
+|#
 
 
 
@@ -49691,6 +49893,7 @@
   
 
 
+#|
 (deftype joint-mod-head (joint-mod)
   ((mode            uint32             :offset-assert 0)
    (process         basic              :offset-assert 4)
@@ -49730,6 +49933,7 @@
   :flag-assert         #x10000000ac
   ;; field track-mode is likely a value type.
   )
+|#
 
 
   
@@ -49743,6 +49947,7 @@
   :flag-assert         #x3b01000184
   )
 
+#|
 (deftype driver-FULL-PENDING (process-focusable)
   ((info               driver-info :inline :offset-assert 256)
    (vehicle            uint64              :offset-assert 280)
@@ -49775,6 +49980,7 @@
     (driver-method-66 (_type_) none) ;; 66
     )
   )
+|#
 
 
 
@@ -51236,6 +51442,7 @@
 
   
 
+#|
 (deftype editable-point (editable)
   ((flags  editable-flag           :offset-assert 0)
    (name   string                  :offset-assert 4) ;; guessed by decompiler
@@ -51253,6 +51460,7 @@
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type vector editable-region) _type_)
     )
   )
+|#
 
   
 
@@ -51260,6 +51468,7 @@
 
   
 
+#|
 (deftype editable-sphere (editable-point)
   ()
   :method-count-assert 36
@@ -51269,6 +51478,7 @@
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type vector float editable-region) _type_)
     )
   )
+|#
 
   
 
@@ -51276,12 +51486,14 @@
 
   
 
+#|
 (deftype editable-sample (editable-point)
   ()
   :method-count-assert 36
   :size-assert         #x30
   :flag-assert         #x2400000030
   )
+|#
 
   
 
@@ -51289,6 +51501,7 @@
 
   
 
+#|
 (deftype editable-light (editable-sphere)
   ((direction           vector :inline :offset-assert 44)
    (color               vector :inline :offset-assert 60)
@@ -51311,6 +51524,7 @@
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type vector float editable-region) _type_)
     )
   )
+|#
 
   
 
@@ -51318,6 +51532,7 @@
 
   
 
+#|
 (deftype editable-entity (editable-point)
   ((angles euler-angles :inline :offset-assert 44)
    (idx    int32                :offset-assert 60)
@@ -51330,6 +51545,7 @@
     (editable-entity-method-36 () none) ;; 36 ;; (editable-entity-method-36 () none)
     )
   )
+|#
 
   
 
@@ -53032,6 +53248,7 @@
 
   
 
+#|
 (deftype plow (net-enemy)
   ((tracking-player      uint64  :offset-assert 872)
    (do-flip-anim         basic   :offset-assert 880)
@@ -53060,6 +53277,7 @@
     reverse        ;; 89
     )
   )
+|#
 
   
 
@@ -53119,6 +53337,7 @@
 
   
 
+#|
 (deftype raceline-weapon (process-drawable)
   ((owner-id       int8                       :offset-assert 248)
    (delta-height   float                      :offset-assert 252)
@@ -53174,6 +53393,7 @@
     die ;; 51
     )
   )
+|#
 
   
 
@@ -53190,6 +53410,7 @@
 
   
 
+#|
 (deftype chicken-drone (raceline-weapon)
   ((beam-fire-control basic          :offset-assert 356)
    (machinegun-sound  uint32         :offset-assert 360)
@@ -53208,6 +53429,7 @@
     die ;; 51
     )
   )
+|#
 
   
 
@@ -53215,12 +53437,14 @@
 
   
 
+#|
 (deftype chicken-drone-2 (chicken-drone)
   ()
   :method-count-assert 81
   :size-assert         #x1b4
   :flag-assert         #x51013001b4
   )
+|#
 
   
 
@@ -53228,6 +53452,7 @@
 
   
 
+#|
 (deftype seeker (raceline-weapon)
   ((sound-id    uint32  :offset-assert 356)
    (start-speed float   :offset-assert 360)
@@ -53240,6 +53465,7 @@
     tracking ;; 50
     )
   )
+|#
 
   
 
@@ -53261,6 +53487,7 @@
 
 
 
+#|
 (deftype success-seeker (seeker)
   ((last-had-target-time int32           :offset-assert 364)
    (lightning-point uint8 3 :offset-assert 368)
@@ -53282,18 +53509,21 @@
     tracking ;; 50
     )
   )
+|#
 
 
 
 
   
 
+#|
 (deftype success-seeker-2 (success-seeker)
   ()
   :method-count-assert 84
   :size-assert         #x248
   :flag-assert         #x5401c00248
   )
+|#
 
   
 
@@ -53301,6 +53531,7 @@
 
   
 
+#|
 (deftype turbodash-seeker (seeker)
   ((trail-tracker uint64  :offset-assert 368)
    (target-id     int8    :offset-assert 376)
@@ -53318,6 +53549,7 @@
     die ;; 51
     )
   )
+|#
 
   
 
@@ -54028,6 +54260,7 @@
 
   
 
+#|
 (deftype raptor (net-enemy)
   ()
   :method-count-assert 91
@@ -54041,6 +54274,7 @@
     chase          ;; 90
     )
   )
+|#
 
   
 
@@ -54119,6 +54353,7 @@
 
   
 
+#|
 (deftype net-player-training (net-player-deathrace)
   ((explained-dark-eco      basic                    :offset-assert 528)
    (explained-mult-weapons  basic                    :offset-assert 532)
@@ -54183,6 +54418,7 @@
     running ;; 43
     )
   )
+|#
 
   
 
@@ -55051,6 +55287,7 @@
 
 
 
+#|
 (deftype train (train-object)
   ((curve          basic           :offset-assert 304)
    (head-car       int32           :offset-assert 308)
@@ -55074,6 +55311,7 @@
     training-mine
     )
   )
+|#
 
 
 
@@ -56560,6 +56798,7 @@
 
 
 
+#|
 (deftype scrolling-task-menu (scrolling-menu)
   ((task-ct  int32      :offset-assert 616)
    (task-ids uint8 32 :offset-assert 620)
@@ -56568,18 +56807,21 @@
   :size-assert         #x28c
   :flag-assert         #x4d0200028c
   )
+|#
 
 
 
 
   
 
+#|
 (deftype scrolling-net-task-menu (scrolling-task-menu)
   ()
   :method-count-assert 77
   :size-assert         #x28c
   :flag-assert         #x4d0200028c
   )
+|#
 
   
 
@@ -56671,6 +56913,7 @@
 
 
 
+#|
 (deftype menumap-states (structure)
   ((current-values uint8 5 :offset-assert 0)
    (target-values uint8 5 :offset-assert 20)
@@ -56679,6 +56922,7 @@
   :size-assert         #x28
   :flag-assert         #x900000028
   )
+|#
 
 
 
@@ -57643,6 +57887,7 @@
 
 
 
+#|
 (deftype scrolling-netconfig-menu (scrolling-menu)
   ((valid-indices uint8 16 :offset-assert 616)
    )
@@ -57650,6 +57895,7 @@
   :size-assert         #x278
   :flag-assert         #x4d01f00278
   )
+|#
 
 
 
@@ -57685,6 +57931,7 @@
 
   
 
+#|
 (deftype editable-selection (dropdown-item)
   ((disabled       basic   :offset-assert 596)
    (keyboard-flags uint64  :offset-assert 600)
@@ -57698,6 +57945,7 @@
     running ;; 52
     )
   )
+|#
 
   
 
@@ -58203,6 +58451,7 @@
 
 
 
+#|
 (deftype garage-tool-arm (process-drawable)
   ((track        joint-mod-rotate-world :inline :offset-assert 256)
    (elbow uint8 4 :offset-assert 288)
@@ -58223,6 +58472,7 @@
     idle ;; 50
     )
   )
+|#
 
 
 
@@ -60008,6 +60258,7 @@
   )
 
 ;; wvehicle-physics-work
+#|
 (deftype wvehicle-physics-work (structure)
   ((mat                   matrix        :inline :offset-assert 0)
    (force                 vector        :inline :offset-assert 64)
@@ -60052,6 +60303,7 @@
   :size-assert         #x5fc
   :flag-assert         #x9000005fc
   )
+|#
 
 
 ;; net-projectile dup removed (conflicted with 59225)
