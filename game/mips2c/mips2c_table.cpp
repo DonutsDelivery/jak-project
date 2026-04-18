@@ -420,6 +420,8 @@ namespace method_35_sky_work { extern void link(); }
 namespace set_sky_vf23_value { extern void link(); }
 // joint.cpp port (see game/mips2c/jakx_functions/joint.cpp)
 namespace cspace_parented_transformq_joint { extern void link(); }
+// texture.cpp port (see game/mips2c/jakx_functions/texture.cpp)
+namespace adgif_shader_texture_with_update { extern void link(); }
 // sparticle_launcher.cpp port (see game/mips2c/jakx_functions/sparticle_launcher.cpp)
 namespace sparticle_motion_blur { extern void link(); }
 namespace particle_adgif { extern void link(); }
@@ -723,7 +725,7 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
        jakx::get_string_length_asm::link,
        jakx::draw_string_asm_packed::link,
        jakx::draw_string_init_justify::link}},
-     {"texture", {jak3::adgif_shader_texture_with_update::link}},
+     {"texture", {jakx::adgif_shader_texture_with_update::link}},
      {"collide-func",
       {jak3::moving_sphere_triangle_intersect::link, jak3::collide_do_primitives::link}},
      // joint — jakx-native port; structurally identical to jak3 but lives
