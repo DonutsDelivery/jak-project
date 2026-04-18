@@ -188,8 +188,13 @@ python3 scripts/jakx_watch/discovery_queue.py 2>&1 | tee -a "$RUN_LOG" || true
 
 # --- mips2c port queue (ranked jak3 mips2c functions by jakx unblock) ---
 echo "" | tee -a "$RUN_LOG"
-echo "-- mips2c queue --" | tee -a "$RUN_LOG"
+echo "-- mips2c queue (legacy) --" | tee -a "$RUN_LOG"
 python3 scripts/jakx_watch/mips2c_candidates.py 2>&1 | tail -40 | tee -a "$RUN_LOG" || true
+
+# --- mips2c candidate scan (dual-signal: jak3-has-it + asm-error markers) ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- mips2c candidate scan (dual-signal) --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/mips2c_candidate_scan.py 2>&1 | tail -30 | tee -a "$RUN_LOG" || true
 
 # --- C++ decompiler patch queue (malformed emission clusters) ---
 echo "" | tee -a "$RUN_LOG"
@@ -200,6 +205,16 @@ python3 scripts/jakx_watch/cpp_patch_queue.py 2>&1 | tee -a "$RUN_LOG" || true
 echo "" | tee -a "$RUN_LOG"
 echo "-- cluster impact --" | tee -a "$RUN_LOG"
 python3 scripts/jakx_watch/cluster_impact.py 2>&1 | tail -20 | tee -a "$RUN_LOG" || true
+
+# --- clobber scan (define-extern stubs that clobber active deftypes at L>59000) ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- clobber scan --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/clobber_scan.py 2>&1 | tee -a "$RUN_LOG" || true
+
+# --- label_types copy-port candidates (jak3→jakx confirmed copy-portables) ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- label_types copy-port scan --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/label_types_copy_scan.py 2>&1 | tee -a "$RUN_LOG" || true
 
 # --- auto-seed _REF.gc for newly-real-clean files (no-op if coverage complete) ---
 if [ -f "$ROOT/test/offline/config/jakx/config.jsonc" ]; then
