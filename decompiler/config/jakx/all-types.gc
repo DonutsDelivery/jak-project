@@ -21019,6 +21019,7 @@
    (amount    float                        :offset-assert 16)
    (interp    float                        :offset-assert 20)
    )
+  :pack-me
   :method-count-assert 9
   :size-assert         #x18
   :flag-assert         #x900000018
@@ -21033,8 +21034,7 @@
    (fix-jmp-table  (function none)             16      :offset-assert 1616) ;; guessed by decompiler
    (frm-jmp-table  (function none)             16      :offset-assert 1680) ;; guessed by decompiler
    (pair-jmp-table (function none)             16      :offset-assert 1744) ;; guessed by decompiler
-   (uploads        channel-upload-info         24 :inline :offset-assert 1808) ;; guessed by decompiler
-   (num-uploads    int32                               :offset-assert 2384)
+   (num-uploads    int32                               :offset 2384)
    (mtx-acc        matrix                      2 :inline :offset-assert 2400) ;; guessed by decompiler
    (tq-acc         transformq                  100 :inline :offset-assert 2528) ;; guessed by decompiler
    (jacp-hdr       joint-anim-compressed-hdr   :inline :offset-assert 7328)
@@ -40019,7 +40019,7 @@
 
 
   
-#|(deftype tread-trail (light-trail)
+(deftype tread-trail (light-trail)
   ()
   :method-count-assert 25
   :size-assert         #x80
@@ -40028,7 +40028,7 @@
     (tread-trail-method-23 (_type_ vector vector) none) ;; 23
     (tread-trail-method-24 () none) ;; 24
     )
-  )|#
+  )
   
 
 
