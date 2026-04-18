@@ -1,541 +1,198 @@
 {
-  "car-tables": [
-    [
-      "L133",
-      "array",
-      true
-    ],
-    [
-      "L36",
-      "array",
-      true
-    ],
-    [
-      "L35",
-      "car-level-array",
-      true
-    ],
-    [
-      "L19",
-      "array",
-      true
-    ],
-    [
-      "L3",
-      "array",
-      true
-    ]
-  ],
-  "math": [
-    [
-      "L108",
-      "(pointer float)",
-      32
-    ],
-    [
-      "L109",
-      "(pointer float)",
-      32
-    ]
-  ],
-  "profile": [
-    [
-      "L3",
-      "(inline-array profile-spec)",
-      14
-    ]
-  ],
-  "texture-anim-h": [
-    [
-      "L1",
-      "(pointer uint8)",
-      256
-    ]
-  ],
-  "pat-h": [
-    [
-      "L1",
-      "(inline-array pat-mode-info)",
-      4
-    ]
-  ],
   "ambient-h": [
-    [
-      "L1",
-      "(inline-array talker-speech-class)",
-      365
-    ]
-  ],
-  "nav-control": [
-    [
-      "L473",
-      "nav-callback-info"
-    ],
-    [
-      "L474",
-      "nav-callback-info"
-    ],
-    [
-      "L475",
-      "nav-callback-info"
-    ]
+    ["L1", "(inline-array talker-speech-class)", 365]
   ],
   "anim-tester": [
-    [
-      "L633",
-      "anim-tester-bank",
-      true
-    ],
-    [
-      "L656",
-      "DISP_LIST-bank",
-      true
-    ]
+    ["L633", "anim-tester-bank", true],
+    ["L656", "DISP_LIST-bank", true],
+    ["L698", "uint64", true],
+    ["L699", "uint64", true],
+    ["L700", "uint64", true],
+    ["L701", "uint64", true],
+    ["L702", "uint64", true],
+    ["L703", "uint64", true]
   ],
   "bones": [
-    [
-      "L40",
-      "vu-function",
-      true
-    ]
+    ["L40", "vu-function", true]
   ],
   "cam-layout": [
-    [
-      "L408",
-      "clm",
-      true
-    ],
-    [
-      "L425",
-      "clm",
-      true
-    ],
-    [
-      "L434",
-      "clm",
-      true
-    ],
-    [
-      "L443",
-      "clm",
-      true
-    ],
-    [
-      "L514",
-      "clm",
-      true
-    ],
-    [
-      "L532",
-      "clm",
-      true
-    ],
-    [
-      "L628",
-      "clm",
-      true
-    ],
-    [
-      "L640",
-      "clm",
-      true
-    ],
-    [
-      "L657",
-      "clm",
-      true
-    ],
-    [
-      "L670",
-      "clm",
-      true
-    ],
-    [
-      "L881",
-      "cam-layout-bank",
-      true
-    ]
+    ["L408", "clm", true],
+    ["L425", "clm", true],
+    ["L434", "clm", true],
+    ["L443", "clm", true],
+    ["L514", "clm", true],
+    ["L532", "clm", true],
+    ["L628", "clm", true],
+    ["L640", "clm", true],
+    ["L657", "clm", true],
+    ["L670", "clm", true],
+    ["L785", "vector"],
+    ["L792", "vector4w"],
+    ["L794", "vector4w"],
+    ["L796", "vector4w"],
+    ["L798", "vector4w"],
+    ["L800", "vector4w"],
+    ["L802", "vector4w"],
+    ["L881", "cam-layout-bank", true],
+    ["L889", "uint64", true],
+    ["L892", "uint64", true],
+    ["L893", "uint64", true],
+    ["L894", "uint64", true],
+    ["L895", "uint64", true],
+    ["L896", "uint64", true],
+    ["L897", "uint64", true],
+    ["L898", "uint64", true],
+    ["L899", "uint64", true]
   ],
   "cam-states": [
-    [
-      "L512",
-      "state",
-      true
-    ],
-    [
-      "L566",
-      "state",
-      true
-    ],
-    [
-      "L567",
-      "state",
-      true
-    ]
+    ["L512", "state", true],
+    ["L566", "state", true],
+    ["L567", "state", true]
+  ],
+  "car-tables": [
+    ["L3", "array", true],
+    ["L19", "array", true],
+    ["L35", "car-level-array", true],
+    ["L36", "array", true],
+    ["L133", "array", true]
   ],
   "drift": [
-    [
-      "L63",
-      "file-stream",
-      true
-    ]
+    ["L63", "file-stream", true]
+  ],
+  "game-task-h": [
+    ["L178", "object", false]
   ],
   "hud-widgets-2": [
-    [
-      "L833",
-      "hud-manager-death-indicator",
-      true
-    ],
-    [
-      "L834",
-      "hud-manager-death-indicator",
-      true
-    ]
+    ["L833", "hud-manager-death-indicator", true],
+    ["L834", "hud-manager-death-indicator", true]
   ],
   "hud-widgets-3": [
-    ["L548", "(array hud-item)"],
-    ["L527", "(array hud-item)"],
-    ["L506", "(array hud-item)"],
-    ["L485", "(array hud-item)"],
-    ["L464", "(array hud-item)"],
-    ["L456", "(array hud-item)"],
-    ["L448", "(array hud-item)"],
-    ["L440", "(array hud-item)"],
-    ["L432", "(array hud-item)"],
-    ["L424", "(array hud-item)"],
-    ["L416", "(array hud-item)"],
-    ["L405", "(array hud-item)"],
-    ["L395", "(array hud-item)"],
-    ["L385", "(array hud-item)"],
+    ["L365", "(array hud-item)"],
     ["L375", "(array hud-item)"],
-    ["L365", "(array hud-item)"]
-  ],
-  "lights": [
-    [
-      "L51",
-      "light-hash-work",
-      true
-    ]
+    ["L385", "(array hud-item)"],
+    ["L395", "(array hud-item)"],
+    ["L405", "(array hud-item)"],
+    ["L416", "(array hud-item)"],
+    ["L424", "(array hud-item)"],
+    ["L432", "(array hud-item)"],
+    ["L440", "(array hud-item)"],
+    ["L448", "(array hud-item)"],
+    ["L456", "(array hud-item)"],
+    ["L464", "(array hud-item)"],
+    ["L485", "(array hud-item)"],
+    ["L506", "(array hud-item)"],
+    ["L527", "(array hud-item)"],
+    ["L548", "(array hud-item)"]
   ],
   "level-info": [
     ["L2527", "mood-range", true],
     ["L2528", "mood-range", true],
     ["L2529", "mood-range", true]
   ],
+  "lights": [
+    ["L51", "light-hash-work", true]
+  ],
+  "math": [
+    ["L108", "(pointer float)", 32],
+    ["L109", "(pointer float)", 32]
+  ],
   "mood-tables": [
-    [
-      "L5",
-      "mood-sky-table",
-      true
-    ],
-    [
-      "L6",
-      "mood-direction-table",
-      true
-    ],
-    [
-      "L7",
-      "mood-clouds",
-      true
-    ],
-    [
-      "L8",
-      "mood-clouds",
-      true
-    ],
-    [
-      "L9",
-      "mood-clouds",
-      true
-    ],
-    [
-      "L10",
-      "mood-clouds",
-      true
-    ],
-    [
-      "L11",
-      "mood-clouds",
-      true
-    ],
-    [
-      "L12",
-      "mood-clouds",
-      true
-    ],
-    [
-      "L13",
-      "mood-clouds",
-      true
-    ],
-    [
-      "L14",
-      "mood-clouds",
-      true
-    ],
-    [
-      "L15",
-      "mood-clouds",
-      true
-    ],
-    [
-      "L16",
-      "mood-channel-group",
-      true
-    ],
-    [
-      "L17",
-      "mood-channel-group",
-      true
-    ],
-    [
-      "L18",
-      "mood-channel-group",
-      true
-    ],
-    [
-      "L19",
-      "mood-color-table",
-      true
-    ],
-    [
-      "L20",
-      "mood-color-table",
-      true
-    ],
-    [
-      "L21",
-      "mood-color-table",
-      true
-    ],
-    [
-      "L22",
-      "mood-color-table",
-      true
-    ],
-    [
-      "L23",
-      "mood-color-table",
-      true
-    ],
-    [
-      "L24",
-      "mood-color-table",
-      true
-    ],
-    [
-      "L25",
-      "mood-fog-table",
-      true
-    ],
-    [
-      "L26",
-      "mood-fog-table",
-      true
-    ],
-    [
-      "L27",
-      "mood-fog-table",
-      true
-    ],
-    [
-      "L28",
-      "mood-fog-table",
-      true
-    ],
-    [
-      "L29",
-      "mood-fog-table",
-      true
-    ],
-    [
-      "L30",
-      "mood-fog-table",
-      true
-    ],
-    [
-      "L31",
-      "mood-fog-table",
-      true
-    ],
-    [
-      "L32",
-      "mood-fog-table",
-      true
-    ],
-    [
-      "L33",
-      "mood-fog-table",
-      true
-    ],
-    [
-      "L34",
-      "mood-fog-table",
-      true
-    ],
-    [
-      "L35",
-      "mood-fog-table",
-      true
-    ],
-    [
-      "L36",
-      "mood-fog-table",
-      true
-    ]
+    ["L5", "mood-sky-table", true],
+    ["L6", "mood-direction-table", true],
+    ["L7", "mood-clouds", true],
+    ["L8", "mood-clouds", true],
+    ["L9", "mood-clouds", true],
+    ["L10", "mood-clouds", true],
+    ["L11", "mood-clouds", true],
+    ["L12", "mood-clouds", true],
+    ["L13", "mood-clouds", true],
+    ["L14", "mood-clouds", true],
+    ["L15", "mood-clouds", true],
+    ["L16", "mood-channel-group", true],
+    ["L17", "mood-channel-group", true],
+    ["L18", "mood-channel-group", true],
+    ["L19", "mood-color-table", true],
+    ["L20", "mood-color-table", true],
+    ["L21", "mood-color-table", true],
+    ["L22", "mood-color-table", true],
+    ["L23", "mood-color-table", true],
+    ["L24", "mood-color-table", true],
+    ["L25", "mood-fog-table", true],
+    ["L26", "mood-fog-table", true],
+    ["L27", "mood-fog-table", true],
+    ["L28", "mood-fog-table", true],
+    ["L29", "mood-fog-table", true],
+    ["L30", "mood-fog-table", true],
+    ["L31", "mood-fog-table", true],
+    ["L32", "mood-fog-table", true],
+    ["L33", "mood-fog-table", true],
+    ["L34", "mood-fog-table", true],
+    ["L35", "mood-fog-table", true],
+    ["L36", "mood-fog-table", true]
+  ],
+  "nav-control": [
+    ["L473", "nav-callback-info"],
+    ["L474", "nav-callback-info"],
+    ["L475", "nav-callback-info"]
   ],
   "net-game-mgr-h": [
-    [
-      "L21",
-      "continue-point",
-      true
-    ]
+    ["L21", "continue-point", true]
   ],
   "net-mgr-medius-clans-h": [
-    [
-      "L5",
-      "medius-cached-info-clan",
-      true
-    ],
-    [
-      "L7",
-      "medius-cached-info-clan",
-      true
-    ]
+    ["L5", "medius-cached-info-clan", true],
+    ["L7", "medius-cached-info-clan", true]
   ],
   "part-tester": [
-    [
-      "L57",
-      "state",
-      true
-    ]
+    ["L44", "uint64", true],
+    ["L49", "uint64", true],
+    ["L57", "state", true]
+  ],
+  "pat-h": [
+    ["L1", "(inline-array pat-mode-info)", 4]
+  ],
+  "profile": [
+    ["L2", "(pointer uint64)", 584],
+    ["L3", "(inline-array profile-spec)", 14]
   ],
   "shrubbery": [
-    [
-      "L138",
-      "dma-test-work",
-      true
-    ],
-    [
-      "L146",
-      "vu-function",
-      true
-    ]
+    ["L138", "dma-test-work", true],
+    ["L146", "vu-function", true],
+    ["L150", "(pointer bucket-id)", 12],
+    ["L151", "(pointer bucket-id)", 12],
+    ["L152", "(pointer bucket-id)", 12],
+    ["L153", "(pointer bucket-id)", 12],
+    ["L155", "(pointer bucket-id)", 12]
   ],
   "sprite": [
-    [
-      "L53",
-      "vu-function",
-      true
-    ]
+    ["L53", "vu-function", true]
   ],
   "sprite-distort": [
-    [
-      "L27",
-      "vu-function",
-      true
-    ]
+    ["L27", "vu-function", true]
+  ],
+  "texture-anim-h": [
+    ["L1", "(pointer uint8)", 256]
   ],
   "texture-anim-tables": [
-    [
-      "L18",
-      "texture-anim-array",
-      true
-    ],
-    [
-      "L25",
-      "texture-anim-array",
-      true
-    ],
-    [
-      "L50",
-      "texture-anim-array",
-      true
-    ],
-    [
-      "L57",
-      "texture-anim-array",
-      true
-    ],
-    [
-      "L73",
-      "texture-anim-array",
-      true
-    ],
-    [
-      "L89",
-      "texture-anim-array",
-      true
-    ],
-    [
-      "L116",
-      "texture-anim-array",
-      true
-    ],
-    [
-      "L126",
-      "texture-anim-array",
-      true
-    ]
-  ],
-  "game-task-h": [
-    ["L178", "object", false]
+    ["L18", "texture-anim-array", true],
+    ["L25", "texture-anim-array", true],
+    ["L50", "texture-anim-array", true],
+    ["L57", "texture-anim-array", true],
+    ["L73", "texture-anim-array", true],
+    ["L89", "texture-anim-array", true],
+    ["L116", "texture-anim-array", true],
+    ["L126", "texture-anim-array", true]
   ],
   "wvehicle-weapons-part": [
-    [
-      "L373",
-      "curve-color-fast",
-      true
-    ],
-    [
-      "L374",
-      "curve-color-fast",
-      true
-    ],
-    [
-      "L398",
-      "curve-color-fast",
-      true
-    ],
-    [
-      "L401",
-      "curve2d-fast",
-      true
-    ],
-    [
-      "L402",
-      "curve-color-fast",
-      true
-    ],
-    [
-      "L403",
-      "curve-color-fast",
-      true
-    ],
-    [
-      "L404",
-      "curve2d-fast",
-      true
-    ],
-    [
-      "L408",
-      "curve2d-fast",
-      true
-    ],
-    [
-      "L409",
-      "curve-color-fast",
-      true
-    ],
-    [
-      "L410",
-      "curve-color-fast",
-      true
-    ],
-    [
-      "L411",
-      "curve-color-fast",
-      true
-    ]
+    ["L373", "curve-color-fast", true],
+    ["L374", "curve-color-fast", true],
+    ["L398", "curve-color-fast", true],
+    ["L401", "curve2d-fast", true],
+    ["L402", "curve-color-fast", true],
+    ["L403", "curve-color-fast", true],
+    ["L404", "curve2d-fast", true],
+    ["L408", "curve2d-fast", true],
+    ["L409", "curve-color-fast", true],
+    ["L410", "curve-color-fast", true],
+    ["L411", "curve-color-fast", true]
   ]
 }
