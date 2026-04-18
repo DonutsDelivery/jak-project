@@ -47438,91 +47438,91 @@
 
 
   
-#|(deftype item-num-selection (item-list-selection)
+(deftype item-num-selection (item-list-selection)
   ((num-selection int32   :offset-assert 604)
    (sound-id      uint32  :offset-assert 608)
    )
   :method-count-assert 70
   :size-assert         #x264
   :flag-assert         #x4601e00264
-  )|#
+  )
   
 
 
 
   
-#|(deftype item-num-max-selection (item-num-selection)
+(deftype item-num-max-selection (item-num-selection)
   ()
   :method-count-assert 70
   :size-assert         #x268
   :flag-assert         #x4601e00268
-  )|#
+  )
   
 
 
 
   
-#|(deftype games-list-selection (string-menu)
+(deftype games-list-selection (string-menu)
   ((selection-index int8  :offset-assert 560)
    )
   :method-count-assert 69
   :size-assert         #x231
   :flag-assert         #x4501b00231
-  )|#
+  )
   
 
 
 
   
-#|(deftype player-ct-string-menu (string-menu)
+(deftype player-ct-string-menu (string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
 
   
-#|(deftype string-list-selection (dropdown-item)
+(deftype string-list-selection (dropdown-item)
   ((selection-index int8  :offset-assert 592)
    )
   :method-count-assert 70
   :size-assert         #x251
   :flag-assert         #x4601d00251
-  )|#
+  )
   
 
 
 
   
-#|(deftype basic-list-selection-info (string-menu-info)
+(deftype basic-list-selection-info (string-menu-info)
   ((menu-options-info-sym basic  :offset-assert 68)
    )
   :method-count-assert 9
   :size-assert         #x48
   :flag-assert         #x900000048
-  )|#
+  )
   
 
 
 
   
-#|(deftype basic-list-selection (string-menu)
+(deftype basic-list-selection (string-menu)
   ((menu-options-info-ptr basic  :offset-assert 560)
    (selection-index       int8   :offset-assert 564)
    )
   :method-count-assert 69
   :size-assert         #x235
   :flag-assert         #x4501b00235
-  )|#
+  )
   
 
 
 
   
-#|(deftype big-text-menu-info (sprite-menu-info)
+(deftype big-text-menu-info (sprite-menu-info)
   ((string-info string-info  :offset-assert 60)
    (text        basic        :offset-assert 64)
    (off-2d-x    float        :offset-assert 68)
@@ -47531,13 +47531,13 @@
   :method-count-assert 9
   :size-assert         #x4c
   :flag-assert         #x90000004c
-  )|#
+  )
   
 
 
 
   
-#|(deftype big-text-menu (sprite-menu)
+(deftype big-text-menu (sprite-menu)
   ((big-text    basic  :offset-assert 544)
    (vert-offset float  :offset-assert 548)
    (vert-extent float  :offset-assert 552)
@@ -47549,7 +47549,7 @@
   (:methods
     (big-text-menu-method-66 () none) ;; 66
     )
-  )|#
+  )
   
 
 
