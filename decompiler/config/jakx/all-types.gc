@@ -4518,9 +4518,9 @@
 (deftype race-mesh-debug (process)
   ((mesh basic  :offset-assert 144)
    )
-  :method-count-assert 16
+  :method-count-assert 21
   :size-assert         #x94
-  :flag-assert         #x1000100094
+  :flag-assert         #x1500100094
   (:methods
     (race-mesh-debug-method-9 () none) ;; 9
     (race-mesh-debug-method-10 () none) ;; 10
@@ -6635,7 +6635,7 @@
 
 
   
-#|(deftype oil-emitter (process)
+(deftype oil-emitter (process)
   ((emitting            basic                 :offset-assert 144)
    (owning-vehicle      uint64                :offset-assert 152)
    (oil-trail           basic                 :offset-assert 160)
@@ -6665,7 +6665,7 @@
   (:state-methods
     emit-oil ;; 15
     )
-  )|#
+  )
   
 
 
@@ -60028,7 +60028,6 @@
 (define-extern medius-update-game-request object)
 (define-extern net-stream-media-video-record-data object)
 (define-extern net-type-structure object)
-(define-extern oil-emitter object)
 (define-extern text-display-supernova-backfire-view-2 object)
 
 ;; Auto-extern batch 12
