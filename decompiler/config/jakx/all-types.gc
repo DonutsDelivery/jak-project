@@ -1798,7 +1798,7 @@
 
 
   
-#|(deftype krasfemale (process-drawable)
+(deftype krasfemale (process-drawable)
   ((extra-id uint32  :offset-assert 248)
    (anim     basic   :offset-assert 252)
    )
@@ -1808,7 +1808,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
@@ -59235,13 +59235,7 @@
   )
 
 ;; vehicle-reticle-base stub
-(deftype vehicle-reticle-base (process)
-  ()
-  :method-count-assert 14
-  :size-assert         #x90
-  :flag-assert         #xe00000090
-  )
-
+;; vehicle-reticle-base stub (superseded by full definition at L5821)
 ;; muzzle-flash stub
 (deftype muzzle-flash (process-drawable)
   ()
