@@ -29827,22 +29827,23 @@
 
 
   
-(deftype part-tracker-init-params (structure)
+#|(deftype part-tracker-init-params (structure)
   ((local-offset         vector                         :inline :offset-assert 0)
    (userdata             uint64                                 :offset-assert 16)
-   (duration             time-frame                             :offset-assert 24)
+   (duration             time-frame                             :offset-assert 24) ;; guessed by decompiler
    (local-space-param    int32                                  :offset-assert 28)
-   (group                sparticle-launch-group                 :offset-assert 32)
-   (callback             (function part-tracker vector)         :offset-assert 36)
+   (group                sparticle-launch-group                 :offset-assert 32) ;; guessed by decompiler
+   (callback             (function part-tracker vector)         :offset-assert 36) ;; guessed by decompiler
    (local-space-callback basic                                  :offset-assert 40)
-   (target               process-drawable                       :offset-assert 44)
-   (mat-joint            object                                 :offset-assert 48)
+   (target               process-drawable                       :offset-assert 44) ;; guessed by decompiler
+   (mat-joint            object                                 :offset-assert 48) ;; guessed by decompiler
    (subsampler-num       float                                  :offset-assert 52)
    )
   :method-count-assert 9
   :size-assert         #x38
   :flag-assert         #x900000038
-  )
+  ;; field userdata uses ~A with a 64-bit load. field mat-joint uses ~A with a signed load.
+  )|#
   
 
 
