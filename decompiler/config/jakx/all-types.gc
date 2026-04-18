@@ -53351,17 +53351,14 @@
 
 
   
-#|(deftype artifact (net-powerup)
+(deftype artifact (net-powerup)
   ((high-value     basic  :offset-assert 244)
    (original-owner int32  :offset-assert 248)
    )
   :method-count-assert 56
   :size-assert         #xfc
   :flag-assert         #x38007000fc
-  (:state-methods
-    idle ;; 42
-    )
-  )|#
+  )
   
 
 
@@ -57035,15 +57032,15 @@
 
 
   
-#|(deftype dropdown-menu (dropdown-item)
+(deftype dropdown-menu (dropdown-item)
   ()
-  :method-count-assert 70
+  :method-count-assert 71
   :size-assert         #x250
-  :flag-assert         #x4601c00250
+  :flag-assert         #x4701c00250
   (:state-methods
-    running ;; 52
+    running ;; 70 (state-methods add slot)
     )
-  )|#
+  )
   
 
 
@@ -57110,56 +57107,56 @@
 
 
   
-#|(deftype profile-error-string (string-menu)
+(deftype profile-error-string (string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
 
   
-#|(deftype profile-yes-no-string (string-menu)
+(deftype profile-yes-no-string (string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
 
   
-#|(deftype profile-loading-string (string-menu)
+(deftype profile-loading-string (string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
 
   
-#|(deftype dropdown-profile (dropdown-item)
+(deftype dropdown-profile (dropdown-item)
   ()
   :method-count-assert 70
   :size-assert         #x250
   :flag-assert         #x4601c00250
-  )|#
+  )
   
 
 
 
   
-#|(deftype title-load-save-profile (string-menu)
+(deftype title-load-save-profile (string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
