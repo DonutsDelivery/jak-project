@@ -16252,7 +16252,7 @@
 
 
   
-(deftype sky-work (structure)
+#|(deftype sky-work (structure)
   ((adgif-tmpl       dma-gif-packet  :inline :offset-assert 0)
    (draw-tmpl        dma-gif-packet  :inline :offset-assert 32)
    (draw-tmpl2       dma-gif-packet  :inline :offset-assert 64)
@@ -16333,7 +16333,7 @@
     (sky-work-method-35 (_type_ dma-buffer) none) ;; 35
     (sky-work-method-36 (_type_ dma-buffer) none) ;; 36
     )
-  )
+  )|#
   
 
 
