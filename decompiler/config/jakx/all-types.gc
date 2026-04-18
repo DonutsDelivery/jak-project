@@ -38056,9 +38056,9 @@
 ;; level-info                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *default-mood-range* object)
-(define-extern *mood-range-1* object)
-(define-extern *mood-range-snow* object)
+(define-extern *default-mood-range* mood-range)
+(define-extern *mood-range-1* mood-range)
+(define-extern *mood-range-snow* mood-range)
 (define-extern default-level level-load-info) ;; level-load-info
 (define-extern intro level-load-info) ;; level-load-info
 (define-extern title level-load-info) ;; level-load-info
