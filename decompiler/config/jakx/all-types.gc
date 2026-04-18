@@ -51300,6 +51300,7 @@
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
+  :allow-misaligned
   )
 
 
@@ -58433,12 +58434,12 @@
 
 
   
-#|(deftype green-room-game-info-menu (string-menu)
+(deftype green-room-game-info-menu (string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
@@ -58523,12 +58524,12 @@
 
 
   
-#|(deftype clan-info-menu (string-menu)
+(deftype clan-info-menu (string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
@@ -58574,12 +58575,12 @@
 
 
   
-#|(deftype item-minute-selection (item-num-selection)
+(deftype item-minute-selection (item-num-selection)
   ()
   :method-count-assert 70
   :size-assert         #x264
   :flag-assert         #x4601e00264
-  )|#
+  )
   
 
 
@@ -58599,12 +58600,12 @@
 
 
   
-#|(deftype dropdown-advanced-flag-item (dropdown-item)
+(deftype dropdown-advanced-flag-item (dropdown-item)
   ()
   :method-count-assert 70
   :size-assert         #x250
   :flag-assert         #x4601c00250
-  )|#
+  )
   
 
 
@@ -58624,12 +58625,12 @@
 
 
   
-#|(deftype non-host-advanced-options-menu (string-menu)
+(deftype non-host-advanced-options-menu (string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
