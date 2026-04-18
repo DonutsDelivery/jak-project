@@ -245,9 +245,36 @@
   this
   )
 
-;; type lightning-new-tracker is defined here, but it is unknown to the decompiler
+;; definition of type lightning-new-tracker
+(deftype lightning-new-tracker (process)
+  ((bolt        lightning-bolt)
+   (lifetime    uint64)
+   (state-time  uint64)
+   )
+  (:state-methods
+    die
+    active
+    )
+  (:methods
+    (lightning-new-tracker-method-16 () none)
+    )
+  )
 
-(method-set! (the-as type lightning-new-tracker) 3 L4)
+;; definition for method 3 of type lightning-new-tracker
+(defmethod inspect ((this lightning-new-tracker))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (let ((t9-0 (method-of-type process inspect)))
+    (t9-0 this)
+    )
+  (format #t "~2Tbolt: ~A~%" (-> this bolt))
+  (format #t "~2Tlifetime: ~D~%" (-> this lifetime))
+  (format #t "~2Tstate-time: ~D~%" (-> this state-time))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type lightning-tracker-init-params
 (deftype lightning-tracker-init-params (structure)

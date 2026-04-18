@@ -117,9 +117,27 @@
   this
   )
 
-;; type wind-dma is defined here, but it is unknown to the decompiler
+;; definition of type wind-dma
+(deftype wind-dma (structure)
+  ((buffer0  wind-vector  128 :inline)
+   (buffer1  wind-vector  128 :inline)
+   (buffer2  wind-vector  128 :inline)
+   )
+  )
 
-(method-set! (the-as type wind-dma) 3 L3)
+;; definition for method 3 of type wind-dma
+(defmethod inspect ((this wind-dma))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'wind-dma)
+  (format #t "~1Tbuffer0[128] @ #x~X~%" (-> this buffer0))
+  (format #t "~1Tbuffer1[128] @ #x~X~%" (-> this buffer1))
+  (format #t "~1Tbuffer2[128] @ #x~X~%" (-> this buffer2))
+  (label cfg-4)
+  this
+  )
 
 
 

@@ -52068,15 +52068,12 @@
 
 
   
-#|(deftype mysql-nav-node-array (inline-array-class)
-  ((length           int32                   :offset-assert 4)
-   (allocated-length int32                   :offset-assert 8)
-   (data             mysql-nav-node :dynamic :offset-assert 16) ;; guessed by decompiler
-   )
+(deftype mysql-nav-node-array (inline-array-class)
+  ()
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -52115,15 +52112,12 @@
 
 
   
-#|(deftype mysql-nav-edge-array (inline-array-class)
-  ((length           int32                   :offset-assert 4)
-   (allocated-length int32                   :offset-assert 8)
-   (data             mysql-nav-edge :dynamic :offset-assert 16) ;; guessed by decompiler
-   )
+(deftype mysql-nav-edge-array (inline-array-class)
+  ()
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -52150,15 +52144,12 @@
 
 
   
-#|(deftype mysql-nav-visnode-array (inline-array-class)
-  ((length           int32                      :offset-assert 4)
-   (allocated-length int32                      :offset-assert 8)
-   (data             mysql-nav-visnode :dynamic :offset-assert 16) ;; guessed by decompiler
-   )
+(deftype mysql-nav-visnode-array (inline-array-class)
+  ()
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 

@@ -136,9 +136,47 @@
   this
   )
 
-;; type sparticle-launch-state is defined here, but it is unknown to the decompiler
+;; definition of type sparticle-launch-state
+(deftype sparticle-launch-state (structure)
+  ((group-item  sparticle-group-item)
+   (flags       uint16)
+   (randomize   uint16)
+   (center      vector)
+   (sprite3d    sprite-vec-data-3d)
+   (sprite      sparticle-cpuinfo)
+   (offset      uint32)
+   (accum       float)
+   (spawn-time  uint32)
+   (control     sparticle-launch-control)
+   (swarm       basic   :overlay-at offset)
+   (seed        uint32  :overlay-at accum)
+   (time        uint32  :overlay-at spawn-time)
+   )
+  )
 
-(method-set! (the-as type sparticle-launch-state) 3 L18)
+;; definition for method 3 of type sparticle-launch-state
+(defmethod inspect ((this sparticle-launch-state))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'sparticle-launch-state)
+  (format #t "~1Tgroup-item: #<sparticle-group-item @ #x~X>~%" (-> this group-item))
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (format #t "~1Trandomize: ~D~%" (-> this randomize))
+  (format #t "~1Tcenter: #<vector @ #x~X>~%" (-> this center))
+  (format #t "~1Tsprite3d: #<sprite-vec-data-3d @ #x~X>~%" (-> this sprite3d))
+  (format #t "~1Tsprite: ~A~%" (-> this sprite))
+  (format #t "~1Toffset: ~D~%" (-> this offset))
+  (format #t "~1Taccum: ~f~%" (-> this accum))
+  (format #t "~1Tspawn-time: ~D~%" (-> this spawn-time))
+  (format #t "~1Tcontrol: ~A~%" (-> this control))
+  (format #t "~1Tswarm: ~A~%" (-> this offset))
+  (format #t "~1Tseed: ~D~%" (-> this accum))
+  (format #t "~1Ttime: ~D~%" (-> this spawn-time))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type sparticle-launch-group
 (deftype sparticle-launch-group (basic)
