@@ -5228,10 +5228,11 @@
 
 
   
-#|(deftype vehicle-wheel-init-params (structure)
+(declare-type skeleton-group basic)
+(deftype vehicle-wheel-init-params (structure)
   ((vehicle  basic                  :offset-assert 0)
-   (skel     skeleton-group         :offset-assert 4) ;; guessed by decompiler
-   (level    symbol                 :offset-assert 8) ;; guessed by decompiler
+   (skel     skeleton-group         :offset-assert 4)
+   (level    symbol                 :offset-assert 8)
    (radius   float                  :offset-assert 12)
    (position vector         :inline :offset-assert 16)
    (rotation quaternion     :inline :offset-assert 32)
@@ -5240,7 +5241,7 @@
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
-  )|#
+  )
   
 
 
