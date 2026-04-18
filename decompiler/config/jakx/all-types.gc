@@ -56443,7 +56443,7 @@
 
 
   
-#|(deftype flaming-arrow (process-drawable)
+(deftype flaming-arrow (process-drawable)
   ((flame-sound basic  :offset-assert 248)
    )
   :method-count-assert 51
@@ -56452,7 +56452,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
@@ -59353,12 +59353,20 @@
   :flag-assert         #x3b00700100
   )
 
-;; eco stub
+;; eco full definition (upgraded stub → 56 methods with 6 method slots)
 (deftype eco (process-drawable)
   ()
-  :method-count-assert 50
+  :method-count-assert 56
   :size-assert         #xf8
-  :flag-assert         #x32007000f8
+  :flag-assert         #x38007000f8
+  (:methods
+    (eco-method-50 (_type_) none) ;; 50
+    (eco-method-51 (_type_) none) ;; 51
+    (eco-method-52 (_type_) none) ;; 52
+    (eco-method-53 (_type_) none) ;; 53
+    (eco-method-54 (_type_) none) ;; 54
+    (eco-method-55 (_type_) none) ;; 55
+    )
   )
 
 ;; editable-region stub
