@@ -167,13 +167,15 @@
    (cur-trans-hook        (function none))
    (user-data             uint64)
    )
+  (:state-methods
+    (wait symbol)
+    release
+    play-anim
+    )
   (:methods
-    (scene-player-method-50 () none)
-    (scene-player-method-51 () none)
-    (scene-player-method-52 () none)
-    (scene-player-method-53 () none)
-    (scene-player-method-54 () none)
-    (scene-player-method-55 () none)
+    (scene-player-method-53 (_type_ string symbol) none)
+    (scene-player-method-54 (_type_ scene symbol) scene)
+    (scene-player-method-55 (_type_ float float) none)
     )
   )
 
