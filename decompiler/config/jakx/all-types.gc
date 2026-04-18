@@ -20146,31 +20146,26 @@
 #|(deftype talker (process)
   ((trans          vector              :inline :offset-assert 144)
    (message        talker-speech-class         :offset-assert 160)
-   (total-time     uint64                      :offset-assert 168) ;; time-frame
-   (total-off-time uint64                      :offset-assert 176) ;; time-frame
-   (start-time     uint64                      :offset-assert 184) ;; time-frame
-   (state-time     uint64                      :offset-assert 192) ;; time-frame
-   (voicebox       uint64                      :offset-assert 200) ;; handle
-   (voice-id       sound-id                    :offset-assert 208) ;; guessed by decompiler
-   (message-id     sound-id                    :offset-assert 212) ;; guessed by decompiler
+   (total-time     uint64                      :offset-assert 168)
+   (total-off-time uint64                      :offset-assert 176)
+   (start-time     uint64                      :offset-assert 184)
+   (state-time     uint64                      :offset-assert 192)
+   (voicebox       uint64                      :offset-assert 200)
+   (voice-id       sound-id                    :offset-assert 208)
+   (message-id     sound-id                    :offset-assert 212)
    (region         region                      :offset-assert 216)
    (interp         float                       :offset-assert 220)
-   (save?          symbol                      :offset-assert 224) ;; guessed by decompiler
-   (grab?          symbol                      :offset-assert 228) ;; guessed by decompiler
+   (save?          symbol                      :offset-assert 224)
+   (grab?          symbol                      :offset-assert 228)
    )
   :method-count-assert 19
   :size-assert         #xe8
   :flag-assert         #x13006000e8
   (:methods
-    (talker-method-9 (_type_) none) ;; 9
-    (talker-method-10 (_type_) none) ;; 10
-    (talker-method-11 (_type_) none) ;; 11
-    (talker-method-12 (_type_) none) ;; 12
-    (talker-method-13 (_type_) none) ;; 13
     (talker-method-14 () _type_ :state) ;; 14
     (talker-method-15 () _type_ :state) ;; 15
     (talker-method-16 () _type_ :state) ;; 16
-    (talker-method-17 (_type_) none) ;; 17 ;; (talker-method-17 (_type_) none)
+    (talker-method-17 (_type_) none) ;; 17
     (talker-method-18 (_type_) none) ;; 18
     )
   )|#
@@ -30953,38 +30948,38 @@
 
 
   
-#|(deftype projectile (process-drawable)
+(deftype projectile (process-drawable)
   ((starting-pos           vector                     :inline :offset-assert 256)
    (starting-dir           vector                     :inline :offset-assert 272)
    (target-pos             vector                     :inline :offset-assert 288)
    (base-target-pos        vector                     :inline :offset-assert 304)
    (pre-move-transv        vector                     :inline :offset-assert 320)
-   (timeout                uint64                             :offset-assert 336) ;; time-frame
-   (spawn-time             uint64                             :offset-assert 344) ;; time-frame
-   (options                uint64                             :offset-assert 352) ;; projectile-options
-   (last-target            uint64                             :offset-assert 360) ;; handle
-   (notify-handle          uint64                             :offset-assert 368) ;; handle
-   (owner-handle           uint64                             :offset-assert 376) ;; handle
-   (ignore-handle          uint64                             :offset-assert 384) ;; handle
-   (update-velocity        (function projectile none)         :offset-assert 392) ;; guessed by decompiler
-   (move                   (function projectile none)         :offset-assert 396) ;; guessed by decompiler
-   (pick-target            (function projectile none)         :offset-assert 400) ;; guessed by decompiler
+   (timeout                uint64                             :offset-assert 336)
+   (spawn-time             uint64                             :offset-assert 344)
+   (options                uint64                             :offset-assert 352)
+   (last-target            uint64                             :offset-assert 360)
+   (notify-handle          uint64                             :offset-assert 368)
+   (owner-handle           uint64                             :offset-assert 376)
+   (ignore-handle          uint64                             :offset-assert 384)
+   (update-velocity        (function projectile none)         :offset-assert 392)
+   (move                   (function projectile none)         :offset-assert 396)
+   (pick-target            (function projectile none)         :offset-assert 400)
    (max-speed              float                              :offset-assert 404)
-   (old-dist               float                      16      :offset-assert 408) ;; guessed by decompiler
+   (old-dist               float                      16      :offset-assert 408)
    (old-dist-count         int32                              :offset-assert 472)
    (hits                   int32                              :offset-assert 476)
    (max-hits               int32                              :offset-assert 480)
    (tween                  float                              :offset-assert 484)
-   (attack-mode            symbol                             :offset-assert 488) ;; guessed by decompiler
+   (attack-mode            symbol                             :offset-assert 488)
    (attack-id              uint32                             :offset-assert 492)
    (damage                 float                              :offset-assert 496)
    (vehicle-damage-factor  float                              :offset-assert 500)
    (vehicle-impulse-factor float                              :offset-assert 504)
    (charge-level           float                              :offset-assert 508)
-   (sound-id               sound-id                           :offset-assert 512) ;; guessed by decompiler
+   (sound-id               sound-id                           :offset-assert 512)
    (stop-speed             meters                             :offset-assert 516)
-   (invinc-time            uint64                             :offset-assert 520) ;; time-frame
-   (desired-target         uint64                             :offset-assert 528) ;; handle
+   (invinc-time            uint64                             :offset-assert 520)
+   (desired-target         uint64                             :offset-assert 528)
    (desired-target-pos     vector                     :inline :offset-assert 544)
    (wpn-type               uint8                              :offset-assert 560)
    )
@@ -30992,30 +30987,30 @@
   :size-assert         #x231
   :flag-assert         #x4801b00231
   (:methods
-    (projectile-method-50 (_type_) none) ;; 50
-    (projectile-method-51 (_type_) none) ;; 51
-    (projectile-method-52 (_type_) none) ;; 52
-    (projectile-method-53 (_type_) none) ;; 53
-    (projectile-method-54 (_type_) none) ;; 54
-    (projectile-method-55 (_type_) none) ;; 55
-    (projectile-method-56 (_type_) none) ;; 56
-    (projectile-method-57 (_type_) none) ;; 57
-    (projectile-method-58 (_type_) none) ;; 58
-    (projectile-method-59 (_type_) none) ;; 59
-    (projectile-method-60 (_type_) none) ;; 60
-    (projectile-method-61 (_type_) none) ;; 61
-    (projectile-method-62 (_type_) none) ;; 62
-    (projectile-method-63 (_type_) none) ;; 63
-    (projectile-method-64 (_type_) none) ;; 64
-    (projectile-method-65 (_type_) none) ;; 65
-    (projectile-method-66 (_type_) none) ;; 66
-    (projectile-method-67 (_type_) none) ;; 67
-    (projectile-method-68 (_type_) none) ;; 68
-    (projectile-method-69 (_type_) none) ;; 69
-    (projectile-method-70 (_type_) none) ;; 70
-    (projectile-method-71 (_type_) none) ;; 71
+    (projectile-method-50 (_type_) none)
+    (projectile-method-51 (_type_) none)
+    (projectile-method-52 (_type_) none)
+    (projectile-method-53 (_type_) none)
+    (projectile-method-54 (_type_) none)
+    (projectile-method-55 (_type_) none)
+    (projectile-method-56 (_type_) none)
+    (projectile-method-57 (_type_) none)
+    (projectile-method-58 (_type_) none)
+    (projectile-method-59 (_type_) none)
+    (projectile-method-60 (_type_) none)
+    (projectile-method-61 (_type_) none)
+    (projectile-method-62 (_type_) none)
+    (projectile-method-63 (_type_) none)
+    (projectile-method-64 (_type_) none)
+    (projectile-method-65 (_type_) none)
+    (projectile-method-66 (_type_) none)
+    (projectile-method-67 (_type_) none)
+    (projectile-method-68 (_type_) none)
+    (projectile-method-69 (_type_) none)
+    (projectile-method-70 (_type_) none)
+    (projectile-method-71 (_type_) none)
     )
-  )|#
+  )
   
 
 
@@ -59198,13 +59193,7 @@
 
 ;; prim-strip stub — moved up to L19720 to precede simple-prim at L30065
 
-;; talker stub
-(deftype talker (process)
-  ()
-  :method-count-assert 14
-  :size-assert         #x90
-  :flag-assert         #xe00000090
-  )
+;; talker — full definition at L20146
 
 ;; net-available-game stub
 (deftype net-available-game (structure)
@@ -59236,13 +59225,7 @@
   :flag-assert         #x900000000
   )
 
-;; projectile stub
-(deftype projectile (process-drawable)
-  ()
-  :method-count-assert 50
-  :size-assert         #xf8
-  :flag-assert         #x32007000f8
-  )
+;; projectile — full definition above at L30951
 
 ;; v-wpn-red-sentry-gun stub (vehicle-weapon-slot, size=parent, +0 methods-new-declared)
 (deftype v-wpn-red-sentry-gun (vehicle-weapon-slot)
@@ -59349,12 +59332,12 @@
   :flag-assert         #x900000000
   )
 
-;; net-projectile stub
+;; net-projectile stub — inherits full projectile (size 0x231, 72 methods)
 (deftype net-projectile (projectile)
   ()
-  :method-count-assert 50
-  :size-assert         #xf8
-  :flag-assert         #x32007000f8
+  :method-count-assert 72
+  :size-assert         #x231
+  :flag-assert         #x4801b00231
   )
 
 ;; curve-control stub
@@ -60430,12 +60413,12 @@
 
 ;; time-of-day-proc — full definition above at L15658
 
-;; projectile-bounce stub
+;; projectile-bounce stub — inherits full projectile
 (deftype projectile-bounce (projectile)
   ()
-  :method-count-assert 50
-  :size-assert         #xf8
-  :flag-assert         #x32007000f8
+  :method-count-assert 72
+  :size-assert         #x231
+  :flag-assert         #x4801b00231
   )
 
 ;; joint-mod-polar-look-at stub
