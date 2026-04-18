@@ -47124,35 +47124,35 @@
 
 
   
-#|(deftype sprite-ptr-info (sprite-info)
+(deftype sprite-ptr-info (sprite-info)
   ((sprite-ptr basic  :offset-assert 44)
    )
   :method-count-assert 9
   :size-assert         #x30
   :flag-assert         #x900000030
-  )|#
+  )
   
 
 
 
   
-#|(deftype sprite-ptr-menu-info (sprite-menu-info)
+(deftype sprite-ptr-menu-info (sprite-menu-info)
   ()
   :method-count-assert 9
   :size-assert         #x3c
   :flag-assert         #x90000003c
-  )|#
+  )
   
 
 
 
   
-#|(deftype sprite-ptr-menu (prim-strip-menu)
+(deftype sprite-ptr-menu (prim-strip-menu)
   ()
   :method-count-assert 67
   :size-assert         #x228
   :flag-assert         #x4301a00228
-  )|#
+  )
   
 
 
