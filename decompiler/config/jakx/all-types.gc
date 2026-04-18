@@ -41918,7 +41918,7 @@
 
 
   
-#|(deftype movie-path (process)
+(deftype movie-path (process)
   ((root        basic          :offset-assert 144)
    (path        basic          :offset-assert 148)
    (path-pos    float          :offset-assert 152)
@@ -41927,9 +41927,9 @@
    (enabled?    basic          :offset-assert 176)
    (movie-frame uint32         :offset-assert 180)
    )
-  :method-count-assert 17
+  :method-count-assert 22
   :size-assert         #xb8
-  :flag-assert         #x11003000b8
+  :flag-assert         #x16003000b8
   (:methods
     (movie-path-method-9 () none) ;; 9
     (movie-path-method-10 () none) ;; 10
@@ -41942,7 +41942,7 @@
   (:state-methods
     active ;; 15
     )
-  )|#
+  )
   
 
 
