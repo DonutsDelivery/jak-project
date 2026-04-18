@@ -2617,24 +2617,9 @@
 
 
   
-#|(deftype hud-item-sprite (hud-item)
-  ((scale-x      int16              :offset-assert 26)
-   (real-scale-x int16              :offset-assert 24)
-   (sprite       hud-sprite         :offset-assert 40)
-   (real-scale-y int16              :offset-assert 44)
-   (scale-y      int16              :offset-assert 46)
-   (color        vector4w   :inline :offset-assert 48)
-   (tex-id       uint32             :offset-assert 64)
-   (sprite-flags uint16             :offset-assert 68)
-   (angle        float              :offset-assert 72)
-   )
-  :method-count-assert 25
-  :size-assert         #x4c
-  :flag-assert         #x190000004c
-  (:methods
-    (hud-item-sprite-method-24 () none) ;; 24
-    )
-  )|#
+;; hud-item-sprite: activated below parent hud-sprite at L33866 (parent ordering)
+;; deferred: parent hud-item at L2489 has overlapping field names (scale-x/real-scale-x)
+;; ...see activation below after hud-sprite
   
 
 
@@ -33863,19 +33848,19 @@
 
 
   
-#|(deftype hud-sprite (structure)
+(deftype hud-sprite (structure)
   ((pos      vector4w   :inline :offset-assert 0)
-   (offset-x float              :offset-assert 0)
-   (offset-y float              :offset-assert 4)
+   (offset-x float              :offset 0)
+   (offset-y float              :offset 4)
    (color    vector4w   :inline :offset-assert 16)
-   (flags    uint16             :offset-assert 32) ;; hud-sprite-flags
+   (flags    uint16             :offset-assert 32)
    (scale-x  float              :offset-assert 36)
-   (width    float              :offset-assert 36)
+   (width    float              :offset 36)
    (scale-y  float              :offset-assert 40)
-   (height   float              :offset-assert 40)
+   (height   float              :offset 40)
    (angle    float              :offset-assert 44)
-   (tex      texture            :offset-assert 48) ;; guessed by decompiler
-   (tid      texture-id         :offset-assert 48) ;; guessed by decompiler
+   (tex      texture            :offset-assert 48)
+   (tid      texture-id         :offset 48)
    )
   :method-count-assert 11
   :size-assert         #x34
@@ -33884,8 +33869,26 @@
     (hud-sprite-method-9 (_type_ dma-buffer level symbol) none) ;; 9
     (hud-sprite-method-10 (_type_ dma-buffer level int int int int) object) ;; 10
     )
-  )|#
-  
+  )
+
+;; hud-item-sprite (parent hud-item @ L2489, field type hud-sprite @ L33851)
+(deftype hud-item-sprite (hud-item)
+  ((sprite       hud-sprite         :offset-assert 40)
+   (real-scale-y int16              :offset-assert 44)
+   (scale-y      int16              :offset-assert 46)
+   (color        vector4w   :inline :offset-assert 48)
+   (tex-id       uint32             :offset-assert 64)
+   (sprite-flags uint16             :offset-assert 68)
+   (angle        float              :offset-assert 72)
+   )
+  :method-count-assert 25
+  :size-assert         #x4c
+  :flag-assert         #x190000004c
+  (:methods
+    (hud-item-sprite-method-24 () none) ;; 24
+    )
+  )
+
 
 
 
