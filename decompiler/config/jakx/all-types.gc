@@ -41742,7 +41742,7 @@
 
 
   
-#|(deftype flow-control (basic)
+(deftype flow-control (basic)
   ((path           path-control               :offset-assert 4) ;; guessed by decompiler
    (speed          float                      :offset-assert 8)
    (belt-radius    float                      :offset-assert 12)
@@ -41754,20 +41754,20 @@
   :size-assert         #x40
   :flag-assert         #xe00000040
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type process-drawable res-lump) _type_)
+    (new (symbol type) _type_) ;; 0
     (flow-control-method-9 (_type_) none) ;; 9
     (flow-control-method-10 (_type_ (pointer float) int) none) ;; 10
     (flow-control-method-11 (_type_ process-focusable) none) ;; 11
     (flow-control-method-12 (_type_) none) ;; 12
     (flow-control-method-13 (_type_ water-info vector) symbol) ;; 13
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype water-flow (process-drawable)
+(deftype water-flow (process-drawable)
   ((flow flow-control  :offset-assert 248) ;; guessed by decompiler
    )
   :method-count-assert 51
@@ -41776,7 +41776,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
