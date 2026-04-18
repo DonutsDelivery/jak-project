@@ -1780,33 +1780,13 @@
 
 
   
-#|(deftype krasmale (process-drawable)
-  ((extra-id uint32  :offset-assert 248)
-   (anim     basic   :offset-assert 252)
-   )
-  :method-count-assert 51
-  :size-assert         #x100
-  :flag-assert         #x3300700100
-  (:state-methods
-    idle ;; 50
-    )
-  )|#
+;; krasmale: activated below parent process-drawable at L28289
   
 
 
 
   
-#|(deftype krasfemale (process-drawable)
-  ((extra-id uint32  :offset-assert 248)
-   (anim     basic   :offset-assert 252)
-   )
-  :method-count-assert 51
-  :size-assert         #x100
-  :flag-assert         #x3300700100
-  (:state-methods
-    idle ;; 50
-    )
-  )|#
+;; krasfemale: activated below parent process-drawable at L28289
   
 
 
@@ -6478,12 +6458,7 @@
 
 
   
-#|(deftype muzzle-flash (process-drawable)
-  ()
-  :method-count-assert 50
-  :size-assert         #xf8
-  :flag-assert         #x32007000f8
-  )|#
+;; muzzle-flash: activated below parent process-drawable at L28289
 
 
 
@@ -28357,6 +28332,40 @@
   (:methods
     (idle () _type_ :state) ;; 50
     )
+  )
+
+;; krasmale (process-drawable with 2 fields + idle state)
+(deftype krasmale (process-drawable)
+  ((extra-id uint32  :offset-assert 248)
+   (anim     basic   :offset-assert 252)
+   )
+  :method-count-assert 51
+  :size-assert         #x100
+  :flag-assert         #x3300700100
+  (:methods
+    (idle () _type_ :state) ;; 50
+    )
+  )
+
+;; krasfemale (process-drawable with 2 fields + idle state — same layout as krasmale)
+(deftype krasfemale (process-drawable)
+  ((extra-id uint32  :offset-assert 248)
+   (anim     basic   :offset-assert 252)
+   )
+  :method-count-assert 51
+  :size-assert         #x100
+  :flag-assert         #x3300700100
+  (:methods
+    (idle () _type_ :state) ;; 50
+    )
+  )
+
+;; muzzle-flash (empty process-drawable subtype, same size/method-count as parent)
+(deftype muzzle-flash (process-drawable)
+  ()
+  :method-count-assert 50
+  :size-assert         #xf8
+  :flag-assert         #x32007000f8
   )
 
 
