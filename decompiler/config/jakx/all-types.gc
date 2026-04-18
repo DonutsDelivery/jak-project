@@ -59343,12 +59343,29 @@
   )
 |#
 
-;; krasmale stub
+;; krasmale full
 (deftype krasmale (process-drawable)
-  ()
-  :method-count-assert 50
-  :size-assert         #xf8
-  :flag-assert         #x32007000f8
+  ((extra-id uint32  :offset-assert 248)
+   (anim     basic   :offset-assert 252)
+   )
+  :method-count-assert 51
+  :size-assert         #x100
+  :flag-assert         #x3300700100
+  (:state-methods
+    idle ;; 50
+    )
+  )
+
+(deftype krasfemale (process-drawable)
+  ((extra-id uint32  :offset-assert 248)
+   (anim     basic   :offset-assert 252)
+   )
+  :method-count-assert 51
+  :size-assert         #x100
+  :flag-assert         #x3300700100
+  (:state-methods
+    idle ;; 50
+    )
   )
 
 ;; knet-scert-function-1-args stub
