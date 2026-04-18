@@ -40068,12 +40068,12 @@
    (next-line-check-time uint64       :offset-assert 176)
    (last-add-frame-val   uint32       :offset-assert 184)
    )
-  :method-count-assert 21
+  :method-count-assert 22
   :size-assert         #xbc
-  :flag-assert         #x15003000bc
+  :flag-assert         #x16003000bc
   (:state-methods
-    die ;; 14
-    tracking ;; 15
+    tracking ;; 14
+    die ;; 15
     )
   (:methods
     (get-tracked-object-pos (_type_ process-focusable vector) vector) ;; 16
@@ -40081,6 +40081,7 @@
     (should-end? (_type_ process-focusable) symbol) ;; 18
     (should-draw? (_type_) symbol) ;; 19
     (add-crumb! (_type_ vector) none) ;; 20
+    (light-trail-tracker-method-21 () none) ;; 21
     )
   )
   
@@ -40094,11 +40095,11 @@
    (joint1     int16   :offset-assert 190)
    (state-time uint64  :offset-assert 192)
    )
-  :method-count-assert 22
+  :method-count-assert 23
   :size-assert         #xc8
-  :flag-assert         #x16004000c8
+  :flag-assert         #x17004000c8
   (:state-methods
-    hang-on ;; 21
+    hang-on ;; 22
     )
   )
   
@@ -40109,9 +40110,9 @@
 (deftype tread-trail-tracker (light-trail-tracker)
   ((trail tread-trail :override)
    )
-  :method-count-assert 21
+  :method-count-assert 22
   :size-assert         #xbc
-  :flag-assert         #x15003000bc
+  :flag-assert         #x16003000bc
   )
   
 
@@ -40120,9 +40121,9 @@
   
 (deftype light-trail-tracker-water (light-trail-tracker)
   ()
-  :method-count-assert 21
+  :method-count-assert 22
   :size-assert         #xbc
-  :flag-assert         #x15003000bc
+  :flag-assert         #x16003000bc
   )
   
 
@@ -40132,11 +40133,11 @@
 (deftype light-trail-tracker-projectile (light-trail-tracker)
   ((state-time uint64  :offset-assert 192)
    )
-  :method-count-assert 22
+  :method-count-assert 23
   :size-assert         #xc8
-  :flag-assert         #x16004000c8
+  :flag-assert         #x17004000c8
   (:state-methods
-    hang-on ;; 21
+    hang-on ;; 22
     )
   )
 
@@ -57878,20 +57879,20 @@
 
 
   
-#|(deftype paintjob-menu (string-menu)
+(deftype paintjob-menu (string-menu)
   ((j-mod-color joint-mod-rotate-local :inline :offset-assert 560)
    (sat-lum-tri basic                          :offset-assert 592)
    (saturation  float                          :offset-assert 596)
    (value       float                          :offset-assert 600)
    (sat-lum-pos vector                 :inline :offset-assert 608)
    )
-  :method-count-assert 69
+  :method-count-assert 70
   :size-assert         #x270
-  :flag-assert         #x4501e00270
+  :flag-assert         #x4601e00270
   (:state-methods
     running ;; 52
     )
-  )|#
+  )
   
 
 
@@ -58400,7 +58401,8 @@
 
 
   
-#|(deftype game-info-menu (string-menu)
+(declare-type net-available-game structure)
+(deftype game-info-menu (string-menu)
   ((game net-available-game  :offset-assert 560)
    )
   :method-count-assert 70
@@ -58409,7 +58411,7 @@
   (:methods
     (game-info-menu-method-69 () none) ;; 69
     )
-  )|#
+  )
   
 
 
@@ -59185,13 +59187,7 @@
   :flag-assert         #xc0000000c
   )
 
-;; cpad-info stub
-(deftype cpad-info (hw-cpad)
-  ()
-  :method-count-assert 9
-  :size-assert         #x24
-  :flag-assert         #x900000024
-  )
+;; cpad-info — full definition above at L9635
 
 ;; blit-displays-work stub
 (deftype blit-displays-work (structure)
