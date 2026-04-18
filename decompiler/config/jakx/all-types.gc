@@ -54880,20 +54880,20 @@
 
 
   
-#|(deftype coli-object-base (net-simple-destruct)
+(deftype coli-object-base (net-simple-destruct)
   ((actor-group       uint32  :offset-assert 284)
    (actor-group-count int32   :offset-assert 288)
    )
-  :method-count-assert 71
+  :method-count-assert 72
   :size-assert         #x128
-  :flag-assert         #x4700a00128
+  :flag-assert         #x4800a00128
   (:methods
     (coli-object-base-method-70 () none) ;; 70
     )
   (:state-methods
-    idle ;; 59
+    idle ;; 71 (state-methods always add slots; regen label '59' is jak3-era)
     )
-  )|#
+  )
   
 
 
