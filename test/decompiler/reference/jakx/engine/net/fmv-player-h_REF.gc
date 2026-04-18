@@ -102,8 +102,8 @@
   this
   )
 
-;; definition for symbol *fmv-player*, type object
-(define *fmv-player* (the-as object #f))
+;; definition for symbol *fmv-player*, type fmv-player
+(define *fmv-player* (the-as fmv-player #f))
 
 ;; definition of type fmv-display-params
 (deftype fmv-display-params (structure)

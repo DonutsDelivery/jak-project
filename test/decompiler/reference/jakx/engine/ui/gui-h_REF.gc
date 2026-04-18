@@ -292,7 +292,32 @@
   this
   )
 
-;; type gui-control is defined here, but it is unknown to the decompiler
+;; definition of type gui-control
+(deftype gui-control (basic)
+  ((engine  engine)
+   (data    uint8  4216)
+   )
+  (:methods
+    (new (symbol type) _type_)
+    (gui-control-method-9 (_type_ process gui-channel gui-action string float time-frame) sound-id)
+    (gui-control-method-10 (_type_ process gui-channel) int)
+    (gui-control-method-11 (_type_ gui-connection) int)
+    (gui-control-method-12 (_type_ process gui-channel gui-action string int float sound-id) sound-id)
+    (gui-control-method-13 (_type_ symbol) int)
+    (gui-control-method-14 (_type_ string gui-channel gui-action) sound-id)
+    (gui-control-method-15 (_type_ process gui-channel string sound-id) gui-connection)
+    (gui-control-method-16 (_type_ gui-action sound-id gui-channel gui-action string (function gui-connection symbol) process) int)
+    (gui-control-method-17 (_type_ sound-id) gui-status)
+    (gui-control-method-18 (_type_ gui-channel) symbol)
+    (gui-control-method-19 (_type_ gui-channel gui-connection) symbol)
+    (gui-control-method-20 (_type_ sound-id symbol int int int float) gui-connection)
+    (gui-control-method-21 (_type_ gui-connection) int)
+    (gui-control-method-22 (_type_ gui-connection vector) int)
+    (gui-control-method-23 (_type_ gui-connection process symbol) none)
+    (gui-control-method-24 (_type_ gui-channel gui-channel symbol gui-connection) symbol)
+    (gui-control-method-25 (_type_ gui-connection sound-id) int)
+    )
+  )
 
 
 

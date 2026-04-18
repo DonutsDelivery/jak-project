@@ -48,8 +48,7 @@
 (def-mips2c birth-func-curve (function int sparticle-cpuinfo sparticle-launchinfo none))
 
 ;; definition for function live-func-curve
-;; INFO: function output is handled by mips2c
-(def-mips2c live-func-curve (function sparticle-system sparticle-cpuinfo vector none))
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
 ;; failed to figure out what this is:
 (set! (-> *part-id-table* 45) #f)

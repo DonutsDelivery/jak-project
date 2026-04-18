@@ -58920,11 +58920,12 @@
 (deftype touching-list (structure)
   ((num-touching-shapes  int32)
    (resolve-u            int8)
+   (pad0                 uint8 3 :offset-assert 5)
    (touching-shapes      uint8 :offset-assert 8)
    )
   :method-count-assert 15
-  :size-assert         #x8
-  :flag-assert         #xf00000008
+  :size-assert         #x9
+  :flag-assert         #xf00000009
   (:methods
     (new (symbol type) _type_) ;; 9
     (add-touching-prims (_type_ object object float object object) none) ;; 10

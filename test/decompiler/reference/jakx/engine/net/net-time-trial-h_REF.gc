@@ -1,0 +1,70 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for symbol *ghosts-enabled*, type object
+(define *ghosts-enabled* (the-as object #t))
+
+;; definition of type timetrial-snapshot
+(deftype timetrial-snapshot (structure)
+  ((pos-x-lo   uint16)
+   (pos-y      uint16)
+   (pos-z-lo   uint16)
+   (pos-xz-hi  uint8)
+   (rot        uint8  3)
+   (flags      uint8)
+   (skip       uint8)
+   )
+  (:methods
+    (timetrial-snapshot-method-9 () none)
+    (timetrial-snapshot-method-10 () none)
+    (timetrial-snapshot-method-11 () none)
+    (timetrial-snapshot-method-12 () none)
+    )
+  )
+
+;; definition for method 3 of type timetrial-snapshot
+(defmethod inspect ((this timetrial-snapshot))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'timetrial-snapshot)
+  (format #t "~1Tpos-x-lo: ~D~%" (-> this pos-x-lo))
+  (format #t "~1Tpos-y: ~D~%" (-> this pos-y))
+  (format #t "~1Tpos-z-lo: ~D~%" (-> this pos-z-lo))
+  (format #t "~1Tpos-xz-hi: ~D~%" (-> this pos-xz-hi))
+  (format #t "~1Trot[3] @ #x~X~%" (-> this rot))
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (format #t "~1Tskip: ~D~%" (-> this skip))
+  (label cfg-4)
+  this
+  )
+
+;; type timetrial-recording is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type timetrial-recording) 3 L6)
+
+;; definition for symbol *ghost-rec*, type object
+(define *ghost-rec* #f)
+
+;; definition for symbol *ghost-upload-proc*, type object
+(define *ghost-upload-proc* #f)
+
+;; failed to figure out what this is:
+(let ((v1-5 *ghost-upload-proc*))
+  (s.d! v1-5 #f)
+  )
+
+;; definition for symbol *ghost-download-proc*, type object
+(define *ghost-download-proc* #f)
+
+;; failed to figure out what this is:
+(let ((v1-7 *ghost-download-proc*))
+  (s.d! v1-7 #f)
+  )
+
+(method-set! (the-as type timetrial-recording) 12 L1)
+
+
+
+
