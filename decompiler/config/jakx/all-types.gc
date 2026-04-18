@@ -2051,6 +2051,7 @@
 
 
 
+#|
 (deftype net-enemy (process-focusable)
   ((flags                  uint64                     :offset-assert 256)
    (info                   net-enemy-info             :offset-assert 264)
@@ -2111,6 +2112,7 @@
     (net-enemy-method-86 () none) ;; 86
     )
   )
+|#
 
 
 (define-extern *tmp-construct-transition* object)
@@ -4506,7 +4508,7 @@
 
 
   
-#|(deftype hud-weapon-field (hud-item-group)
+(deftype hud-weapon-field (hud-item-group)
   ((side                             uint64  :offset-assert 48)
    (spinning                         basic   :offset-assert 56)
    (next-change-time                 int32   :offset-assert 60)
@@ -4546,7 +4548,6 @@
    (hud-w-shield-deflexor-01         basic   :offset-assert 196)
    (hud-w-shield-deathtouch-01       basic   :offset-assert 200)
    (hud-w-earthshaker-01             basic   :offset-assert 204)
-   (hud-w-stelnova-01                basic   :offset-assert 164)
    (hud-w-clone-car-01               basic   :offset-assert 212)
    )
   :method-count-assert 25
@@ -4555,7 +4556,7 @@
   (:methods
     (hud-weapon-field-method-24 () none) ;; 24
     )
-  )|#
+  )
   
 
 
@@ -5632,21 +5633,21 @@
 
 
   
-#|(deftype v-wpn-red-smoke (vehicle-weapon-slot)
+(deftype v-wpn-red-smoke (vehicle-weapon-slot)
   ((smoke-system uint64  :offset-assert 264)
    (wait-time    int32   :offset-assert 272)
    )
   :method-count-assert 62
   :size-assert         #x114
   :flag-assert         #x3e00900114
+  (:state-methods
+    idle       ;; 50 (override)
+    wait-delay ;; 60
+    )
   (:methods
     (v-wpn-red-smoke-method-61 () none) ;; 61
     )
-  (:state-methods
-    idle ;; 50
-    wait-delay ;; 60
-    )
-  )|#
+  )
   
 
 
@@ -5752,21 +5753,21 @@
 
 
   
-#|(deftype v-wpn-red-oil (vehicle-weapon-slot)
+(deftype v-wpn-red-oil (vehicle-weapon-slot)
   ((oil-emitter uint64  :offset-assert 264)
    (wait-time   int32   :offset-assert 272)
    )
   :method-count-assert 62
   :size-assert         #x114
   :flag-assert         #x3e00900114
+  (:state-methods
+    idle       ;; 50 (override)
+    wait-delay ;; 60
+    )
   (:methods
     (v-wpn-red-oil-method-61 () none) ;; 61
     )
-  (:state-methods
-    idle ;; 50
-    wait-delay ;; 60
-    )
-  )|#
+  )
   
 
 
