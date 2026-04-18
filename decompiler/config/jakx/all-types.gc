@@ -29,7 +29,7 @@
 (define-extern medius-get-lobby-player-names-response type)
 (define-extern medius-modify-clan-message-request type)
 (define-extern medius-version-server-response type)
-(define-extern net-connect-in-params object)
+(declare-type net-connect-in-params structure)
 
 ;; Auto-extern batch 23 — unblocking top unknown-symbol warnings
 (define-extern hud-deathmatch-split-view-1 type)
@@ -12203,19 +12203,19 @@
 
 
   
-#|(deftype minimap-class-node (structure)
-  ((default-position vector       :inline :offset-assert 0)
-   (flags            minimap-flag         :offset-assert 16)
-   (name             string               :offset-assert 20) ;; guessed by decompiler
-   (icon-xy          vector2ub    :inline :offset-assert 24)
-   (class            uint16               :offset-assert 26) ;; minimap-class
-   (scale            float                :offset-assert 28)
-   (color            rgba                 :offset-assert 32) ;; guessed by decompiler
+(deftype minimap-class-node (structure)
+  ((default-position vector    :inline :offset-assert 0)
+   (flags            uint32            :offset-assert 16)
+   (name             string            :offset-assert 20)
+   (icon-xy          vector2ub :inline :offset-assert 24)
+   (class            uint16            :offset-assert 26)
+   (scale            float             :offset-assert 28)
+   (color            rgba              :offset-assert 32)
    )
   :method-count-assert 9
   :size-assert         #x24
   :flag-assert         #x900000024
-  )|#
+  )
   
 
 
@@ -21074,16 +21074,16 @@
 
 
   
-#|(deftype net-bandwidth-info (structure)
-  ((sends      net-client-metric :inline :offset-assert 0)
-   (send-bytes net-client-metric :inline :offset-assert 8)
-   (recvs      net-client-metric :inline :offset-assert 16)
-   (recv-bytes net-client-metric :inline :offset-assert 24)
+(deftype net-bandwidth-info (structure)
+  ((sends      uint8 8 :offset-assert 0)
+   (send-bytes uint8 8 :offset-assert 8)
+   (recvs      uint8 8 :offset-assert 16)
+   (recv-bytes uint8 8 :offset-assert 24)
    )
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
-  )|#
+  )
   
 
 
@@ -21454,12 +21454,12 @@
 
 
 (deftype net-connection-info (structure)
-  ((e-type        int32                    :offset-assert 0)
-   (address-list  net-address-list :inline :offset-assert 4)
-   (world-id      int32                    :offset-assert 52)
-   (server-key    rsa-key          :inline :offset-assert 56)
-   (a-session-key uint8 17                 :offset-assert 120)
-   (a-access-key  uint8 17                 :offset-assert 137)
+  ((e-type        int32    :offset-assert 0)
+   (address-list  uint8 48 :offset-assert 4)
+   (world-id      int32    :offset-assert 52)
+   (server-key    uint8 64 :offset-assert 56)
+   (a-session-key uint8 17 :offset-assert 120)
+   (a-access-key  uint8 17 :offset-assert 137)
    )
   :method-count-assert 9
   :size-assert         #x9a
@@ -21472,8 +21472,8 @@
 (deftype net-connect-in-params (structure)
   ((b-default-set                            int32                           :offset-assert 0)
    (max-clients                              int32                           :offset-assert 4)
-   (connection-info                          net-connection-info     :inline :offset-assert 8)
-   (pf-local-connect-callback                basic                           :offset-assert 164)
+   (connection-info                          uint8 156 :offset-assert 8)
+   (pf-local-connect-callback                basic     :offset-assert 164)
    (p-local-connect-callback-data            basic                           :offset-assert 168)
    (pf-local-disconnect-callback             basic                           :offset-assert 172)
    (p-local-disconnect-callback-data         basic                           :offset-assert 176)
@@ -21485,10 +21485,10 @@
    (p-host-change-callback-data              basic                           :offset-assert 200)
    (pf-system-status-callback                basic                           :offset-assert 204)
    (p-system-status-callback-data            basic                           :offset-assert 208)
-   (stream-media-params                      net-stream-media-params :inline :offset-assert 212)
-   (user-specified                           int32                           :offset-assert 324)
+   (stream-media-params                      uint8 112 :offset-assert 212)
+   (user-specified                           int32     :offset-assert 324)
    (aux-udpbind-port                         int32                           :offset-assert 328)
-   (token-params                             net-token-params        :inline :offset-assert 332)
+   (token-params                             uint8 12  :offset-assert 332)
    (b-use-time-base                          int32                           :offset-assert 344)
    (send-buffer-size                         uint32                          :offset-assert 348)
    (recv-buffer-size                         uint32                          :offset-assert 352)
@@ -21516,7 +21516,7 @@
   
 (deftype net-client-list (structure)
   ((target-client int32                :offset-assert 0)
-   (client-mask   net-bit-mask :inline :offset-assert 4)
+   (client-mask   uint8 40 :offset-assert 4)
    )
   :method-count-assert 9
   :size-assert         #x2c
@@ -21531,7 +21531,7 @@
   ((connection-handle basic                   :offset-assert 0)
    (transport-flags   int8                    :offset-assert 4)
    (message-type      int32                   :offset-assert 8)
-   (dest-client       net-client-list :inline :offset-assert 12)
+   (dest-client       uint8 44 :offset-assert 12)
    (message-length    int32                   :offset-assert 56)
    (message-data      uint32                  :offset-assert 60)
    )
@@ -21546,7 +21546,7 @@
   
 (deftype net-send-message-out-params (structure)
   ((error-code    int32                   :offset-assert 0)
-   (queued-client net-client-list :inline :offset-assert 4)
+   (queued-client uint8 44 :offset-assert 4)
    )
   :method-count-assert 9
   :size-assert         #x30
@@ -21586,7 +21586,7 @@
 (deftype net-latency-metrics-data-args (structure)
   ((connection-handle    basic                            :offset-assert 0)
    (target-client-index  int32                            :offset-assert 4)
-   (latency-metrics-info net-latency-metrics-info :inline :offset-assert 8)
+   (latency-metrics-info uint8 12 :offset-assert 8)
    (error-code           int32                            :offset-assert 20)
    (p-user-data          basic                            :offset-assert 24)
    )
@@ -21606,7 +21606,7 @@
   
 (deftype net-latency-metrics-params (structure)
   ((connection-handle           basic                   :offset-assert 0)
-   (target-client-list          net-client-list :inline :offset-assert 4)
+   (target-client-list          uint8 44 :offset-assert 4)
    (pf-latency-metrics-callback basic                   :offset-assert 48)
    (p-user-data                 basic                   :offset-assert 52)
    )
@@ -21649,18 +21649,17 @@
 
 
   
-#|(deftype net-object-filter-data (structure)
-  ((client-list    net-client-list :inline :offset-assert 0)
+(deftype net-object-filter-data (structure)
+  ((client-list    uint8 44 :offset-assert 0)
    (object-index   int32                   :offset-assert 44)
-   (fields-updated net-bit-mask    :inline :offset-assert 48)
+   (fields-updated uint8 40 :offset-assert 48)
    (update-type    int32                   :offset-assert 88)
    (p-user-data    basic                   :offset-assert 92)
    )
   :method-count-assert 9
   :size-assert         #x60
   :flag-assert         #x900000060
-  ;; field p-user-data uses ~A with a signed load.
-  )|#
+  )
   
 
 
@@ -21719,31 +21718,28 @@
 
 
 
-#|
 (deftype net-join-in-params (structure)
-  ((b-default-set                       int32      :offset-assert 0)
-   (connection-handle                   basic      :offset-assert 4)
-   (sz-client-name                      UNKNOWN 12 :offset-assert 8)
-   (net-object-count                    int32      :offset-assert 20)
-   (data-stream-count                   int32      :offset-assert 24)
-   (session-master-status               int32      :offset-assert 28)
-   (pf-local-join-callback              basic      :offset-assert 32)
-   (p-join-callback-data                basic      :offset-assert 36)
-   (pf-remote-client-event-callback     basic      :offset-assert 40)
-   (p-remote-client-event-callback-data basic      :offset-assert 44)
-   (pf-smchange-callback                basic      :offset-assert 48)
-   (p-smchange-callback-data            basic      :offset-assert 52)
-   (pf-ownership-update-callback        basic      :offset-assert 56)
-   (p-ownership-update-callback-data    basic      :offset-assert 60)
-   (pf-ownership-request-callback       basic      :offset-assert 64)
-   (p-ownership-request-callback-data   basic      :offset-assert 68)
+  ((b-default-set                       int32     :offset-assert 0)
+   (connection-handle                   basic     :offset-assert 4)
+   (sz-client-name                      uint8 12  :offset-assert 8)
+   (net-object-count                    int32     :offset-assert 20)
+   (data-stream-count                   int32     :offset-assert 24)
+   (session-master-status               int32     :offset-assert 28)
+   (pf-local-join-callback              basic     :offset-assert 32)
+   (p-join-callback-data                basic     :offset-assert 36)
+   (pf-remote-client-event-callback     basic     :offset-assert 40)
+   (p-remote-client-event-callback-data basic     :offset-assert 44)
+   (pf-smchange-callback                basic     :offset-assert 48)
+   (p-smchange-callback-data            basic     :offset-assert 52)
+   (pf-ownership-update-callback        basic     :offset-assert 56)
+   (p-ownership-update-callback-data    basic     :offset-assert 60)
+   (pf-ownership-request-callback       basic     :offset-assert 64)
+   (p-ownership-request-callback-data   basic     :offset-assert 68)
    )
   :method-count-assert 9
   :size-assert         #x48
   :flag-assert         #x900000048
-  ;; field connection-handle uses ~A with a signed load. field p-join-callback-data uses ~A with a signed load. field p-remote-client-event-callback-data uses ~A with a signed load. field p-smchange-callback-data uses ~A with a signed load. field p-ownership-update-callback-data uses ~A with a signed load. field p-ownership-request-callback-data uses ~A with a signed load.
   )
-|#
 
 
 
@@ -21936,20 +21932,20 @@
 
 
   
-#|(deftype net-lanfind-exchange-callback-out-args (structure)
+(deftype net-lanfind-exchange-callback-out-args (structure)
   ((b-respond-to-sender int32            :offset-assert 0)
    (details             net-data :inline :offset-assert 4)
    )
   :method-count-assert 9
   :size-assert         #xc
   :flag-assert         #x90000000c
-  )|#
+  )
   
 
 
 
   
-#|(deftype net-lanfind-in-params (structure)
+(deftype net-lanfind-in-params (structure)
   ((b-default-set        int32            :offset-assert 0)
    (session-type         int32            :offset-assert 4)
    (filter               uint32           :offset-assert 8)
@@ -21961,8 +21957,7 @@
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
-  ;; field p-user-data uses ~A with a signed load.
-  )|#
+  )
   
 
 
