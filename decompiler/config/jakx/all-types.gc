@@ -54990,7 +54990,7 @@
 
 
   
-#|(deftype coli-atlas-globe (rigid-body-object)
+(deftype coli-atlas-globe (rigid-body-object)
   ((set-angular-velocity  basic              :offset-assert 288)
    (send-update           basic              :offset-assert 292)
    (last-sent-position    vector     :inline :offset-assert 304)
@@ -55006,9 +55006,9 @@
    (roll-sound-stop-time  int32              :offset-assert 404)
    (roll-sound-start-time int32              :offset-assert 408)
    )
-  :method-count-assert 95
+  :method-count-assert 97
   :size-assert         #x19c
-  :flag-assert         #x5f0110019c
+  :flag-assert         #x610110019c
   (:methods
     (coli-atlas-globe-method-89 () none) ;; 89
     (coli-atlas-globe-method-90 () none) ;; 90
@@ -55018,10 +55018,10 @@
     (coli-atlas-globe-method-94 () none) ;; 94
     )
   (:state-methods
-    idle ;; 59
-    active ;; 60
+    idle ;; 95 (regen said 59 but state-methods always add new slots)
+    active ;; 96
     )
-  )|#
+  )
   
 
 
