@@ -52957,7 +52957,7 @@
 
 
   
-#|(deftype daxter (process-drawable)
+(deftype daxter (process-drawable)
   ((veh                uint64         :offset-assert 248)
    (lean               float          :offset-assert 256)
    (transition-allowed basic          :offset-assert 260)
@@ -52971,6 +52971,13 @@
   :size-assert         #x144
   :flag-assert         #x4200c00144
   (:methods
+    (idle () _type_ :state) ;; 50
+    (appear () _type_ :state) ;; 51
+    (hide () _type_ :state) ;; 52
+    (jump () _type_ :state) ;; 53
+    (big-lean-right () _type_ :state) ;; 54
+    (big-lean-left () _type_ :state) ;; 55
+    (fall () _type_ :state) ;; 56
     (daxter-method-57 (_type_) none) ;; 57
     (daxter-method-58 (_type_) none) ;; 58
     (daxter-method-59 (_type_) none) ;; 59
@@ -52981,16 +52988,7 @@
     (daxter-method-64 (_type_) none) ;; 64
     (daxter-method-65 (_type_) none) ;; 65
     )
-  (:state-methods
-    hide ;; 52
-    appear ;; 51
-    fall ;; 56
-    idle ;; 50
-    big-lean-left ;; 55
-    big-lean-right ;; 54
-    jump ;; 53
-    )
-  )|#
+  )
   
 
 
