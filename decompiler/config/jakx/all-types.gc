@@ -54893,12 +54893,12 @@
 
 
   
-#|(deftype coli-center-arch (net-simple-destruct)
+(deftype coli-center-arch (net-simple-destruct)
   ()
   :method-count-assert 70
   :size-assert         #x120
   :flag-assert         #x4600900120
-  )|#
+  )
   
 
 
