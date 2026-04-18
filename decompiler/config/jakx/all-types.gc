@@ -2398,50 +2398,8 @@
 
 
   
-#|(deftype eco-yellow (eco)
-  ((launcher    basic  :offset-assert 248)
-   (birth-accum float  :offset-assert 252)
-   )
-  :method-count-assert 56
-  :size-assert         #x100
-  :flag-assert         #x3800700100
-  (:state-methods
-    running ;; 50
-    )
-  )|#
-  
+;; eco-yellow, eco-red, eco-green moved to after eco parent at L59307+
 
-
-
-  
-#|(deftype eco-red (eco)
-  ((launcher    basic  :offset-assert 248)
-   (birth-accum float  :offset-assert 252)
-   )
-  :method-count-assert 56
-  :size-assert         #x100
-  :flag-assert         #x3800700100
-  (:state-methods
-    running ;; 50
-    )
-  )|#
-  
-
-
-
-  
-#|(deftype eco-green (eco)
-  ((launcher    basic  :offset-assert 248)
-   (birth-accum float  :offset-assert 252)
-   )
-  :method-count-assert 56
-  :size-assert         #x100
-  :flag-assert         #x3800700100
-  (:state-methods
-    running ;; 50
-    )
-  )|#
-  
 
 
 (define-extern *eco-blue-debris-params* debris-static-params)
@@ -59303,22 +59261,48 @@
 
 ;; net-simple-destruct stub superseded by full definition at L46629
 
-;; eco full definition; slot 50 = running state (children override it)
+;; eco full definition; slot 50 = running state, slot 55 is also a state per runtime
 (deftype eco (process-drawable)
   ()
   :method-count-assert 56
   :size-assert         #xf8
   :flag-assert         #x38007000f8
   (:methods
+    (running () _type_ :state) ;; 50
     (eco-method-51 (_type_) none) ;; 51
     (eco-method-52 (_type_) none) ;; 52
     (eco-method-53 (_type_) none) ;; 53
     (eco-method-54 (_type_) none) ;; 54
-    (eco-method-55 (_type_) none) ;; 55
+    (eco-method-55 () _type_ :state) ;; 55
     )
-  (:state-methods
-    running ;; 50
-    )
+  )
+
+;; eco subtypes (moved here from L2401 to satisfy parent-first ordering)
+(deftype eco-yellow (eco)
+  ((launcher    basic  :offset-assert 248)
+   (birth-accum float  :offset-assert 252)
+   )
+  :method-count-assert 56
+  :size-assert         #x100
+  :flag-assert         #x3800700100
+  )
+
+(deftype eco-red (eco)
+  ((launcher    basic  :offset-assert 248)
+   (birth-accum float  :offset-assert 252)
+   )
+  :method-count-assert 56
+  :size-assert         #x100
+  :flag-assert         #x3800700100
+  )
+
+(deftype eco-green (eco)
+  ((launcher    basic  :offset-assert 248)
+   (birth-accum float  :offset-assert 252)
+   )
+  :method-count-assert 56
+  :size-assert         #x100
+  :flag-assert         #x3800700100
   )
 
 ;; editable-region stub
