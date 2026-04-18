@@ -22082,8 +22082,7 @@
   :method-count-assert 9
   :size-assert         #x70
   :flag-assert         #x900000070
-  ;; field p-audio-record-callback-data uses ~A with a signed load. field p-audio-play-callback-data uses ~A with a signed load. field p-video-record-callback-data uses ~A with a signed load. field p-video-play-callback-data uses ~A with a signed load. field p-custom-video-record-callback-data uses ~A with a signed load. field p-custom-video-play-callback-data uses ~A with a signed load.
-  )|#
+  )|# ;; :inline net-video-data-characteristics at offset 72 forces 16-byte alignment → placed at 80
   
 
 
@@ -59379,7 +59378,7 @@
 ;; Auto-generated type externs for types with registration issues
 (define-extern auto-save type)
 (define-extern blur-coords type)
-(define-extern deathmatch-spawner-array type)
+;; (define-extern deathmatch-spawner-array type) ;; clobbers active deftype
 (define-extern default-interior-states type)
 (define-extern drift-editor type)
 (define-extern driver-info type)
@@ -59408,15 +59407,15 @@
 (define-extern net-enemy type)
 (define-extern net-enemy-transition type)
 (define-extern net-game-mgr-assassin type)
-(define-extern net-game-mgr-race type)
+;; (define-extern net-game-mgr-race type) ;; clobbers active deftype
 (define-extern net-game-mgr-vehicle-info type)
-(define-extern nospawn type)
+;; (define-extern nospawn type) ;; clobbers active deftype
 (define-extern point-tracker type)
 (define-extern race-line-get-points type)
 (define-extern received-chat-msg type)
 (define-extern red-sentry-bot type)
 (define-extern rigid-body-object-extra-info type)
-(define-extern rigid-body-queue-manager type)
+;; (define-extern rigid-body-queue-manager type) ;; clobbers active deftype
 (define-extern rigid-body-surface type)
 (define-extern sce-stat type)
 (define-extern tie-near-consts type)
@@ -59428,31 +59427,31 @@
 (define-extern vif-stat type)
 
 ;; Auto-extern: symbols blocking top-level-login, registered as object to satisfy type-prop
-(define-extern actor-hash-buckets object)
-(define-extern anim-test-obj object)
+;; (define-extern actor-hash-buckets object) ;; clobbers active deftype
+;; (define-extern anim-test-obj object) ;; clobbers active deftype
 ;; (define-extern auto-save-error-proc object) ;; activated as deftype
-(define-extern auto-test-levels object)
-(define-extern aux-voice-mgr object)
-(define-extern base-menu object)
-(define-extern blerc-dcache object)
+;; (define-extern auto-test-levels object) ;; clobbers active deftype
+;; (define-extern aux-voice-mgr object) ;; clobbers active deftype
+;; (define-extern base-menu object) ;; clobbers active deftype
+;; (define-extern blerc-dcache object) ;; clobbers active deftype
 ;; (define-extern bone-buffer object) ;; clobbers active deftype
-(define-extern boss-hud object)
-(define-extern cam-dbg-scratch object)
-(define-extern camera-facing-quad object)
-(define-extern cloth-on-skeleton object)
+;; (define-extern boss-hud object) ;; clobbers active deftype
+;; (define-extern cam-dbg-scratch object) ;; clobbers active deftype
+;; (define-extern camera-facing-quad object) ;; clobbers active deftype
+;; (define-extern cloth-on-skeleton object) ;; clobbers active deftype
 ;; (define-extern collide-frag-vertex object) ;; clobbers active deftype
-(define-extern collide-probe-stack object)
-(define-extern color-array object)
+;; (define-extern collide-probe-stack object) ;; clobbers active deftype
+;; (define-extern color-array object) ;; clobbers active deftype
 (define-extern combo-tracker object)
-(define-extern construction-object object)
+;; (define-extern construction-object object) ;; clobbers active deftype
 ;; (define-extern daxter object) ;; clobbers active deftype
-(define-extern debris-group object)
+;; (define-extern debris-group object) ;; clobbers active deftype
 (define-extern debug-rigid-body-move object)
 ;; (define-extern disc-error-proc object) ;; activated as deftype
-(define-extern dma-test object)
+;; (define-extern dma-test object) ;; clobbers active deftype
 ;; (define-extern drawable-tree-collide-fragment object) ;; clobbers active deftype
 ;; (define-extern drawable-tree-tfrag-trans object) ;; clobbers active deftype
-(define-extern driver-ashelin object)
+;; (define-extern driver-ashelin object) ;; clobbers active deftype
 (define-extern driver-daxter object)
 (define-extern driver-gtblitz object)
 (define-extern driver-jak object)
