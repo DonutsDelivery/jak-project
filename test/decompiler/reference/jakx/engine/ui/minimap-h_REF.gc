@@ -110,9 +110,37 @@
   this
   )
 
-;; type minimap-draw-work is defined here, but it is unknown to the decompiler
+;; definition of type minimap-draw-work
+(deftype minimap-draw-work (structure)
+  ((buf           dma-buffer)
+   (global-flags  uint32)
+   (draw-pos      vector4w  :inline)
+   (mat           matrix    :inline)
+   (corner        vector    4 :inline)
+   (vec           vector    :inline)
+   (pos           vector    :inline)
+   (mid-val       float)
+   )
+  )
 
-(method-set! (the-as type minimap-draw-work) 3 L4)
+;; definition for method 3 of type minimap-draw-work
+(defmethod inspect ((this minimap-draw-work))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'minimap-draw-work)
+  (format #t "~1Tbuf: ~A~%" (-> this buf))
+  (format #t "~1Tglobal-flags: ~D~%" (-> this global-flags))
+  (format #t "~1Tdraw-pos: #<vector4w @ #x~X>~%" (-> this draw-pos))
+  (format #t "~1Tmat: #<matrix @ #x~X>~%" (-> this mat))
+  (format #t "~1Tcorner[4] @ #x~X~%" (-> this corner))
+  (format #t "~1Tvec: #<vector @ #x~X>~%" (-> this vec))
+  (format #t "~1Tpos: #<vector @ #x~X>~%" (-> this pos))
+  (format #t "~1Tmid-val: ~f~%" (-> this mid-val))
+  (label cfg-4)
+  this
+  )
 
 ;; type minimap is defined here, but it is unknown to the decompiler
 

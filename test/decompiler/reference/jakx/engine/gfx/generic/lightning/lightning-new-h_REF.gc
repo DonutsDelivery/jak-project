@@ -251,12 +251,10 @@
    (lifetime    uint64)
    (state-time  uint64)
    )
-  (:state-methods
-    die
-    active
-    )
   (:methods
-    (lightning-new-tracker-method-16 () none)
+    (lightning-new-tracker-method-14 () none)
+    (active () _type_ :state)
+    (die () _type_ :state)
     )
   )
 
