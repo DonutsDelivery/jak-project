@@ -50223,9 +50223,8 @@
 
 
   
-#|(deftype ragdoll-test (process-focusable)
-  ((ragdoll-proc uint64  :offset-assert 256) ;; handle
-   )
+(deftype ragdoll-test (process-focusable)
+  ((ragdoll-proc handle  :offset-assert 256))
   :method-count-assert 64
   :size-assert         #x108
   :flag-assert         #x4000800108
@@ -50236,7 +50235,7 @@
     freefall ;; 62
     idle ;; 63
     )
-  )|#
+  )
   
 
 
@@ -51643,7 +51642,7 @@
 
 
   
-#|(deftype test-process (process-focusable)
+(deftype test-process (process-focusable)
   ((state-time uint64  :offset-assert 240)
    (effect     uint8   :offset-assert 264)
    (sound-id   uint32  :offset-assert 268)
@@ -51651,7 +51650,7 @@
   :method-count-assert 59
   :size-assert         #x110
   :flag-assert         #x3b00800110
-  )|#
+  )
   
 
 
@@ -52976,7 +52975,7 @@
 
 
   
-#|(deftype daxter (process-drawable)
+(deftype daxter (process-drawable)
   ((veh                uint64         :offset-assert 248)
    (lean               float          :offset-assert 256)
    (transition-allowed basic          :offset-assert 260)
@@ -53009,7 +53008,7 @@
     big-lean-right ;; 54
     jump ;; 53
     )
-  )|#
+  )
   
 
 
@@ -55008,7 +55007,7 @@
 
 
   
-#|(deftype coli-ball-collision (process-focusable)
+(deftype coli-ball-collision (process-focusable)
   ()
   :method-count-assert 60
   :size-assert         #x100
@@ -55016,7 +55015,7 @@
   (:state-methods
     idle ;; 59
     )
-  )|#
+  )
   
 
 
@@ -59545,7 +59544,7 @@
 (define-extern color-array object)
 (define-extern combo-tracker object)
 (define-extern construction-object object)
-(define-extern daxter object)
+;; (define-extern daxter object) ;; activated as deftype
 (define-extern debris-group object)
 (define-extern debug-rigid-body-move object)
 ;; (define-extern disc-error-proc object) ;; activated as deftype
