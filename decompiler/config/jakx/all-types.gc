@@ -13117,22 +13117,21 @@
 
 
   
-#|(deftype connection-minimap (connection-pers)
-  ((next           connection-minimap         :offset-assert 0)
-   (handle         uint64                     :offset-assert 8) ;; handle
-   (position       vector                     :offset-assert 16)
-   (alpha          float                      :offset-assert 20)
-   (flags          minimap-flag               :offset-assert 24)
-   (class          minimap-class-node         :offset-assert 28)
-   (node           uint16                     :offset-assert 32)
-   (edge-ry        int16                      :offset-assert 34)
+(deftype connection-minimap (connection-pers)
+  ((next           connection-minimap         :override)
+   (handle         uint64                     :offset 8) ;; handle (aliases parent key+update-time)
+   (position       vector                     :offset 16)
+   (alpha          float                      :offset 20)
+   (flags          uint32                     :offset 24) ;; minimap-flag
+   (class          basic                      :offset 28) ;; minimap-class-node
+   (node           uint16                     :offset 32)
+   (edge-ry        int16                      :offset 34)
    (last-world-pos vector             :inline :offset-assert 48)
    )
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
-  ;; field key uses ~A with a signed load.
-  )|#
+  )
   
 
 
@@ -40071,17 +40070,15 @@
   :method-count-assert 22
   :size-assert         #xbc
   :flag-assert         #x16003000bc
-  (:state-methods
-    die ;; 14
-    tracking ;; 15
-    )
   (:methods
-    (get-tracked-object-pos (_type_ process-focusable vector) vector) ;; 16
+    (light-trail-tracker-method-14 () none) ;; 14
+    (tracking () _type_ :state) ;; 15
+    (die () _type_ :state) ;; 16
     (should-track? (_type_ process-focusable) symbol) ;; 17
     (should-end? (_type_ process-focusable) symbol) ;; 18
     (should-draw? (_type_) symbol) ;; 19
     (add-crumb! (_type_ vector) none) ;; 20
-    (light-trail-tracker-method-21 () none) ;; 21
+    (get-tracked-object-pos (_type_ process-focusable vector) vector) ;; 21
     )
   )
   
