@@ -512,6 +512,55 @@ namespace method_10_collide_cache_prim { extern void link(); }
 namespace method_17_collide_cache { extern void link(); }
 namespace method_9_collide_puss_work { extern void link(); }
 namespace method_10_collide_puss_work { extern void link(); }
+// collide_edge_grab.cpp port (see game/mips2c/jakx_functions/collide_edge_grab.cpp)
+namespace method_10_collide_edge_hold_list { extern void link(); }
+namespace method_19_collide_edge_work { extern void link(); }
+namespace method_9_edge_grab_info { extern void link(); }
+namespace method_17_collide_edge_work { extern void link(); }
+namespace method_16_collide_edge_work { extern void link(); }
+namespace method_18_collide_edge_work { extern void link(); }
+// collide_func.cpp port (see game/mips2c/jakx_functions/collide_func.cpp)
+namespace moving_sphere_triangle_intersect { extern void link(); }
+namespace collide_do_primitives { extern void link(); }
+// lights.cpp port (see game/mips2c/jakx_functions/lights.cpp)
+namespace light_hash_add_items { extern void link(); }
+namespace light_hash_count_items { extern void link(); }
+namespace add_light_sphere_to_light_group { extern void link(); }
+namespace light_hash_get_bucket_index { extern void link(); }
+// merc_blend_shape.cpp port (see game/mips2c/jakx_functions/merc_blend_shape.cpp)
+namespace blerc_execute { extern void link(); }
+namespace setup_blerc_chains_for_one_fragment { extern void link(); }
+// nav_control.cpp port (see game/mips2c/jakx_functions/nav_control.cpp)
+namespace method_39_nav_state { extern void link(); }
+// nav_engine.cpp port (see game/mips2c/jakx_functions/nav_engine.cpp)
+namespace method_21_nav_engine { extern void link(); }
+namespace method_20_nav_engine { extern void link(); }
+namespace method_18_nav_engine { extern void link(); }
+namespace method_17_nav_engine { extern void link(); }
+namespace nav_state_patch_pointers { extern void link(); }
+namespace nav_dma_send_from_spr_no_flush { extern void link(); }
+namespace nav_dma_send_to_spr_no_flush { extern void link(); }
+// ocean_vu0.cpp port (see game/mips2c/jakx_functions/ocean_vu0.cpp)
+namespace method_14_ocean { extern void link(); }
+namespace method_15_ocean { extern void link(); }
+namespace method_16_ocean { extern void link(); }
+// spatial_hash.cpp port (see game/mips2c/jakx_functions/spatial_hash.cpp)
+namespace method_18_grid_hash { extern void link(); }
+namespace method_19_grid_hash { extern void link(); }
+namespace method_20_grid_hash { extern void link(); }
+namespace method_22_grid_hash { extern void link(); }
+namespace method_28_sphere_hash { extern void link(); }
+namespace method_32_sphere_hash { extern void link(); }
+namespace method_29_sphere_hash { extern void link(); }
+namespace method_30_sphere_hash { extern void link(); }
+namespace method_31_sphere_hash { extern void link(); }
+namespace method_32_spatial_hash { extern void link(); }
+namespace method_38_spatial_hash { extern void link(); }
+namespace method_35_spatial_hash { extern void link(); }
+namespace method_36_spatial_hash { extern void link(); }
+namespace method_34_spatial_hash { extern void link(); }
+// cloth.cpp port (see game/mips2c/jakx_functions/cloth.cpp)
+namespace method_21_cloth_system { extern void link(); }
 }
 // clang-format on
 
@@ -779,9 +828,11 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
     // Complete copy of jak3's table to avoid missing any functions.
     // Exceptions: routines where jakx's font-context / font-work layouts
     // diverged from jak3 have jakx-native ports in mips2c/jakx_functions/.
+    // lights: jakx-native ports — structurally identical to jak3;
+    // jakx namespace only. See game/mips2c/jakx_functions/lights.cpp.
     {{"lights",
-      {jak3::light_hash_get_bucket_index::link, jak3::add_light_sphere_to_light_group::link,
-       jak3::light_hash_count_items::link, jak3::light_hash_add_items::link}},
+      {jakx::light_hash_get_bucket_index::link, jakx::add_light_sphere_to_light_group::link,
+       jakx::light_hash_count_items::link, jakx::light_hash_add_items::link}},
      {"debug",
       {jakx::debug_line_clip::link, jakx::init_boundary_regs::link,
        jakx::draw_boundary_polygon::link, jakx::render_boundary_quad::link,
@@ -803,8 +854,10 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
        jakx::draw_string_asm_packed::link,
        jakx::draw_string_init_justify::link}},
      {"texture", {jakx::adgif_shader_texture_with_update::link}},
+     // collide-func: jakx-native ports — structurally identical to jak3;
+     // jakx namespace only. See game/mips2c/jakx_functions/collide_func.cpp.
      {"collide-func",
-      {jak3::moving_sphere_triangle_intersect::link, jak3::collide_do_primitives::link}},
+      {jakx::moving_sphere_triangle_intersect::link, jakx::collide_do_primitives::link}},
      // joint — jakx-native port; structurally identical to jak3 but lives
      // in the jakx namespace so future divergence (if any) can be expressed
      // without touching jak3's copy. See game/mips2c/jakx_functions/joint.cpp.
@@ -838,18 +891,20 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
        jakx::method_11_collide_shape_prim_group::link, jakx::method_9_collide_cache_prim::link,
        jakx::method_10_collide_cache_prim::link, jakx::method_17_collide_cache::link,
        jakx::method_9_collide_puss_work::link, jakx::method_10_collide_puss_work::link}},
+     // collide-edge-grab / spatial-hash: jakx-native ports — structurally
+     // identical to jak3; jakx namespace only.
      {"collide-edge-grab",
-      {jak3::method_10_collide_edge_hold_list::link, jak3::method_19_collide_edge_work::link,
-       jak3::method_9_edge_grab_info::link, jak3::method_17_collide_edge_work::link,
-       jak3::method_16_collide_edge_work::link, jak3::method_18_collide_edge_work::link}},
+      {jakx::method_10_collide_edge_hold_list::link, jakx::method_19_collide_edge_work::link,
+       jakx::method_9_edge_grab_info::link, jakx::method_17_collide_edge_work::link,
+       jakx::method_16_collide_edge_work::link, jakx::method_18_collide_edge_work::link}},
      {"spatial-hash",
-      {jak3::method_18_grid_hash::link, jak3::method_19_grid_hash::link,
-       jak3::method_20_grid_hash::link, jak3::method_22_grid_hash::link,
-       jak3::method_28_sphere_hash::link, jak3::method_32_sphere_hash::link,
-       jak3::method_29_sphere_hash::link, jak3::method_30_sphere_hash::link,
-       jak3::method_31_sphere_hash::link, jak3::method_32_spatial_hash::link,
-       jak3::method_38_spatial_hash::link, jak3::method_35_spatial_hash::link,
-       jak3::method_36_spatial_hash::link, jak3::method_34_spatial_hash::link}},
+      {jakx::method_18_grid_hash::link, jakx::method_19_grid_hash::link,
+       jakx::method_20_grid_hash::link, jakx::method_22_grid_hash::link,
+       jakx::method_28_sphere_hash::link, jakx::method_32_sphere_hash::link,
+       jakx::method_29_sphere_hash::link, jakx::method_30_sphere_hash::link,
+       jakx::method_31_sphere_hash::link, jakx::method_32_spatial_hash::link,
+       jakx::method_38_spatial_hash::link, jakx::method_35_spatial_hash::link,
+       jakx::method_36_spatial_hash::link, jakx::method_34_spatial_hash::link}},
      // All four sparticle_launcher.cpp functions are now jakx-native ports
      // (see game/mips2c/jakx_functions/sparticle_launcher.cpp).
      {"sparticle-launcher",
@@ -858,14 +913,16 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      // sparticle: jakx-native ports — structurally identical to jak3;
      // jakx namespace only. See game/mips2c/jakx_functions/sparticle.cpp.
      {"sparticle", {jakx::sp_process_block_2d::link, jakx::sp_process_block_3d::link}},
+     // nav-engine / nav-control / merc-blend-shape: jakx-native ports —
+     // structurally identical to jak3; jakx namespace only.
      {"nav-engine",
-      {jak3::method_21_nav_engine::link, jak3::method_20_nav_engine::link,
-       jak3::method_18_nav_engine::link, jak3::method_17_nav_engine::link,
-       jak3::nav_state_patch_pointers::link, jak3::nav_dma_send_from_spr_no_flush::link,
-       jak3::nav_dma_send_to_spr_no_flush::link}},
-     {"nav-control", {jak3::method_39_nav_state::link}},
+      {jakx::method_21_nav_engine::link, jakx::method_20_nav_engine::link,
+       jakx::method_18_nav_engine::link, jakx::method_17_nav_engine::link,
+       jakx::nav_state_patch_pointers::link, jakx::nav_dma_send_from_spr_no_flush::link,
+       jakx::nav_dma_send_to_spr_no_flush::link}},
+     {"nav-control", {jakx::method_39_nav_state::link}},
      {"merc-blend-shape",
-      {jak3::blerc_execute::link, jak3::setup_blerc_chains_for_one_fragment::link}},
+      {jakx::blerc_execute::link, jakx::setup_blerc_chains_for_one_fragment::link}},
      // wvehicle-part: jakx-native sparticle-motion-blur-dirt (target access
      // via view-get-active-target + offset-184 control handle).
      {"wvehicle-part", {jakx::sparticle_motion_blur_dirt::link}},
@@ -874,8 +931,10 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      {"ripple",
       {jakx::ripple_matrix_scale::link, jakx::ripple_apply_wave_table::link,
        jakx::ripple_create_wave_table::link, jakx::ripple_execute_init::link}},
+     // ocean-vu0: jakx-native ports — structurally identical to jak3;
+     // jakx namespace only. See game/mips2c/jakx_functions/ocean_vu0.cpp.
      {"ocean-vu0",
-      {jak3::method_14_ocean::link, jak3::method_15_ocean::link, jak3::method_16_ocean::link}},
+      {jakx::method_14_ocean::link, jakx::method_15_ocean::link, jakx::method_16_ocean::link}},
      {"ocean",
       {jakx::init_ocean_far_regs::link, jakx::draw_large_polygon_ocean::link,
        jakx::render_ocean_quad::link}},
@@ -910,7 +969,9 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
        jakx::shadow_add_verts::link, jakx::shadow_add_facing_single_tris::link,
        jakx::shadow_add_single_edges::link, jakx::shadow_add_double_edges::link,
        jakx::shadow_add_single_tris::link, jakx::shadow_add_double_tris::link}},
-     {"cloth", {jak3::method_21_cloth_system::link}}}};
+     // cloth: jakx-native port — structurally identical to jak3; jakx
+     // namespace only. See game/mips2c/jakx_functions/cloth.cpp.
+     {"cloth", {jakx::method_21_cloth_system::link}}}};
 
 void LinkedFunctionTable::reg(const std::string& name, u64 (*exec)(void*), u32 stack_size) {
   const auto& it = m_executes.insert({name, {exec, Ptr<u8>()}});
