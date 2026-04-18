@@ -4506,7 +4506,6 @@
 
 
   
-#|
 (deftype hud-weapon-field (hud-item-group)
   ((side                             uint64  :offset-assert 48)
    (spinning                         basic   :offset-assert 56)
@@ -4556,9 +4555,6 @@
     (hud-weapon-field-method-24 () none) ;; 24
     )
   )
-|#
-  
-
 
 
 (deftype hud-vehicle-left (hud-item-group)
@@ -4997,7 +4993,6 @@
 
 
   
-#|
 (deftype vehicle-reticle-base (process)
   ((owner      uint64  :offset-assert 144)
    (state-time uint64  :offset-assert 152)
@@ -5006,11 +5001,6 @@
   :size-assert         #xa0
   :flag-assert         #x14001000a0
   (:methods
-    (vehicle-reticle-base-method-9 () none) ;; 9
-    (vehicle-reticle-base-method-10 () none) ;; 10
-    (vehicle-reticle-base-method-11 () none) ;; 11
-    (vehicle-reticle-base-method-12 () none) ;; 12
-    (vehicle-reticle-base-method-13 () none) ;; 13
     (vehicle-reticle-base-method-14 () none) ;; 14
     )
   (:state-methods
@@ -5021,12 +5011,10 @@
     peacemaker-incoming-abort ;; 19
     )
   )
-|#
 
 
 
 
-#|
 (deftype vehicle-reticle-on-me (vehicle-reticle-base)
   ((targeted-by                  uint64     :offset-assert 160)
    (hsprites-base                uint8  192 :offset 176)
@@ -5051,25 +5039,22 @@
     peacemaker-incoming-abort ;; 19
     )
   )
-|#
 
 
 
-#|
 (deftype vehicle-reticle-on-them (vehicle-reticle-base)
   ((hsprites     uint8  704 :offset-assert 160)
    (spinner-rate uint64     :offset-assert 864)
    (lockon-sound uint32     :offset-assert 872)
    )
-  :method-count-assert 17
+  :method-count-assert 21
   :size-assert         #x36c
-  :flag-assert         #x1102e0036c
+  :flag-assert         #x1502e0036c
   (:state-methods
-    idle           ;; 15
-    vehicle-target ;; 16
+    idle           ;; 15 (override)
+    vehicle-target ;; 20 (new)
     )
   )
-|#
 
 
 (define-extern reticle-wad-on-me-base array)
@@ -5222,6 +5207,69 @@
   :flag-assert         #x900000030
   )
 
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; matrix-h                       ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(deftype matrix (structure)
+  "A 4x4 matrix, stored in row-major order.
+   some, but not all, functions assume that a matrix is an affine transform.
+   others assume that the rotation has no scale or shear (and that its inverse is its transpose)."
+  ((data   float   16      :offset-assert 0 :score -3) ;; guessed by decompiler
+   (vector vector  4       :offset 0 :score -2) ;; guessed by decompiler
+   (quad   uint128 4       :offset 0 :score -1) ;; guessed by decompiler
+   (rvec   vector  :inline :offset 0)
+   (uvec   vector  :inline :offset 16)
+   (fvec   vector  :inline :offset 32)
+   (trans  vector  :inline :offset 48)
+   )
+  :method-count-assert 10
+  :size-assert         #x40
+  :flag-assert         #xa00000040
+  (:methods
+    (transform-vectors!
+      "Transform many vectors. This acts like w = 1, even if it isn't. The value of w is copied."
+      (_type_ (inline-array vector) (inline-array vector) int) none) ;; 9
+    )
+  )
+
+(deftype matrix3 (structure)
+  "A 3x3 matrix, stored in row-major order.
+   NOTE: the rows each have an extra 4-bytes of padding,
+   so this is really a 3x4 matrix.
+   This type is rarely used."
+  ((data   float   12 :offset-assert 0 :score -1) ;; guessed by decompiler
+   (vector vector  3  :inline :offset 0) ;; guessed by decompiler
+   (quad   uint128 3  :offset 0) ;; guessed by decompiler
+   )
+  :method-count-assert 9
+  :size-assert         #x30
+  :flag-assert         #x900000030
+  )
+
+(deftype matrix4h (structure)
+  "A matrix stored using 16-bit integers.
+   Note that these usually have different scaling for the 4th row which
+   contains the translation in an affine transform.
+   So you generally should not unpack these to floats without knowing where they came from
+   and how they were originally packed (for example, in tie/shrub)."
+  ((data     int16    16 :offset-assert 0 :score -1) ;; guessed by decompiler
+   (vector4h vector4h 4  :offset 0) ;; guessed by decompiler
+   (long     int64    4  :offset 0) ;; guessed by decompiler
+   )
+  :method-count-assert 9
+  :size-assert         #x20
+  :flag-assert         #x900000020
+  )
+
+(define-extern matrix-copy! "Copy arg1 to arg0" (function matrix matrix matrix))
+(define-extern matrix<-vector-yz-exact! (function matrix vector vector matrix))
+(define-extern matrix<-vector-yz! (function matrix vector vector matrix))
+(define-extern matrix<-vector-z! (function matrix vector matrix))
 
 
 (deftype wvehicle-physics-work (structure)
@@ -6466,67 +6514,6 @@
   :flag-assert         #xe00000010
   )
 
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; matrix-h                       ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-(deftype matrix (structure)
-  "A 4x4 matrix, stored in row-major order.
-   some, but not all, functions assume that a matrix is an affine transform.
-   others assume that the rotation has no scale or shear (and that its inverse is its transpose)."
-  ((data   float   16      :offset-assert 0 :score -3) ;; guessed by decompiler
-   (vector vector  4       :offset 0 :score -2) ;; guessed by decompiler
-   (quad   uint128 4       :offset 0 :score -1) ;; guessed by decompiler
-   (rvec   vector  :inline :offset 0)
-   (uvec   vector  :inline :offset 16)
-   (fvec   vector  :inline :offset 32)
-   (trans  vector  :inline :offset 48)
-   )
-  :method-count-assert 10
-  :size-assert         #x40
-  :flag-assert         #xa00000040
-  (:methods
-    (transform-vectors!
-      "Transform many vectors. This acts like w = 1, even if it isn't. The value of w is copied."
-      (_type_ (inline-array vector) (inline-array vector) int) none) ;; 9
-    )
-  )
-
-(deftype matrix3 (structure)
-  "A 3x3 matrix, stored in row-major order.
-   NOTE: the rows each have an extra 4-bytes of padding,
-   so this is really a 3x4 matrix.
-   This type is rarely used."
-  ((data   float   12 :offset-assert 0 :score -1) ;; guessed by decompiler
-   (vector vector  3  :inline :offset 0) ;; guessed by decompiler
-   (quad   uint128 3  :offset 0) ;; guessed by decompiler
-   )
-  :method-count-assert 9
-  :size-assert         #x30
-  :flag-assert         #x900000030
-  )
-
-(deftype matrix4h (structure)
-  "A matrix stored using 16-bit integers.
-   Note that these usually have different scaling for the 4th row which
-   contains the translation in an affine transform.
-   So you generally should not unpack these to floats without knowing where they came from
-   and how they were originally packed (for example, in tie/shrub)."
-  ((data     int16    16 :offset-assert 0 :score -1) ;; guessed by decompiler
-   (vector4h vector4h 4  :offset 0) ;; guessed by decompiler
-   (long     int64    4  :offset 0) ;; guessed by decompiler
-   )
-  :method-count-assert 9
-  :size-assert         #x20
-  :flag-assert         #x900000020
-  )
-
-(define-extern matrix-copy! "Copy arg1 to arg0" (function matrix matrix matrix))
-(define-extern matrix<-vector-yz-exact! (function matrix vector vector matrix))
-(define-extern matrix<-vector-yz! (function matrix vector vector matrix))
-(define-extern matrix<-vector-z! (function matrix vector matrix))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; quaternion-h                   ;;
