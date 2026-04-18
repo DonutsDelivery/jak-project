@@ -39102,17 +39102,13 @@
 
 
 
-#|
 (deftype cam-collision-record-array (inline-array-class)
-  ((length           int32            :offset-assert 4)
-   (allocated-length int32            :offset-assert 8)
-   (data             UNKNOWN :dynamic :offset-assert 16)
+  ((data cam-collision-record :dynamic :offset-assert 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
   )
-|#
 
 
 (define-extern *camera-old-cpu* object)
@@ -39951,28 +39947,26 @@
 
 
   
-#|(deftype light-trail-breadcrumb (structure)
+(deftype light-trail-breadcrumb (structure)
   ((pos        vector :inline :offset-assert 0)
-   (birth-time uint32         :offset-assert 12)
+   (birth-time uint32         :offset 12)
    )
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
-  )|#
+  )
   
 
 
 
   
-#|(deftype breadcrumb-array (inline-array-class)
-  ((length           int32                           :offset-assert 4)
-   (allocated-length int32                           :offset-assert 8)
-   (data             light-trail-breadcrumb :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype breadcrumb-array (inline-array-class)
+  ((data light-trail-breadcrumb :dynamic :offset-assert 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -45992,17 +45986,12 @@
 
 
 
-#|
 (deftype deathmatch-spawner-array (inline-array-class)
-  ((length           int32            :offset-assert 4)
-   (allocated-length int32            :offset-assert 8)
-   (data             UNKNOWN :dynamic :offset-assert 16)
-   )
+  ((data deathmatch-spawner :dynamic :offset-assert 16))
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
   )
-|#
 
 
 
