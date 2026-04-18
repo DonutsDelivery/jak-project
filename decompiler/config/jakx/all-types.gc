@@ -14797,13 +14797,13 @@
 
 
   
-#|(deftype blit-displays-work (structure)
+(deftype blit-displays-work (structure)
   ((pad uint8 596 :offset-assert 0)
    )
   :method-count-assert 27
   :size-assert         #x254
   :flag-assert         #x1b00000254
-  )|#
+  )
   
 
 
@@ -32490,17 +32490,17 @@
 
 
   
-#|(deftype foreground-area (structure)
-  ((generic-work    generic-work    :inline :offset-assert 0)
-   (foreground-work foreground-work :inline :offset-assert 0)
-   (joint-work      joint-work      :inline :offset-assert 0)
-   (bone-mem        bone-memory     :inline :offset-assert 0)
-   (shadow-work     shadow-work     :inline :offset-assert 0)
+(deftype foreground-area (structure)
+  ((generic-work    generic-work    :inline :offset 0)
+   (foreground-work foreground-work :inline :offset 0)
+   (joint-work      joint-work      :inline :offset 0)
+   (bone-mem        bone-memory     :inline :offset 0)
+   (shadow-work     shadow-work     :inline :offset 0)
    )
   :method-count-assert 9
   :size-assert         #x3fe0
   :flag-assert         #x900003fe0
-  )|#
+  )
   
 
 
@@ -32538,41 +32538,41 @@
 
 
   
-#|(deftype sprite-area (structure)
-  ((clock-data vector 22       :offset-assert 0) ;; guessed by decompiler
-   (buffer     uint8  :dynamic :offset-assert 352) ;; guessed by decompiler
+(deftype sprite-area (structure)
+  ((clock-data vector 22 :inline :offset-assert 0)
+   (buffer     uint8  :dynamic :offset-assert 352)
    )
   :method-count-assert 9
   :size-assert         #x160
   :flag-assert         #x900000160
-  )|#
+  )
   
 
 
 
   
-#|(deftype work-area (structure)
-  ((background  background-area  :inline :offset-assert 0)
-   (foreground  foreground-area  :inline :offset-assert 0)
-   (region-prim region-prim-area :inline :offset-assert 0)
-   (sprite      sprite-area      :inline :offset-assert 0)
+(deftype work-area (structure)
+  ((background  background-area  :inline :offset 0)
+   (foreground  foreground-area  :inline :offset 0)
+   (region-prim region-prim-area :inline :offset 0)
+   (sprite      sprite-area      :inline :offset 0)
    )
   :method-count-assert 9
   :size-assert         #x4000
   :flag-assert         #x900004000
-  )|#
+  )
   
 
 
 
   
-#|(deftype terrain-context (structure)
+(deftype terrain-context (structure)
   ((work work-area :inline :offset-assert 0)
    )
   :method-count-assert 9
   :size-assert         #x4000
   :flag-assert         #x900004000
-  )|#
+  )
   
 
 
