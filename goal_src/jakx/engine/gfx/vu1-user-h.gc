@@ -17,6 +17,8 @@
   (pris2 6)
   (sprite 7)
   (hud 8)
+  (sky 9)
+  (hfrag 10)
   )
 ;; ---tpage-category
 
@@ -748,6 +750,16 @@
 (defenum texture-enable-mask
   :type uint64
   :bitfield #t
+  (tfrag 0)
+  (all-pris 1)
+  (shrub 2)
+  (alpha 3)
+  (water 4)
+  (warp 5)
+  (sprite 6)
+  (hud 7)
+  (sky 8)
+  (hfrag 9)
   )
 ;; ---texture-enable-mask
 
