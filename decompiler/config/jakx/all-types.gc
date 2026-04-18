@@ -55550,7 +55550,7 @@
 
 
   
-#|(deftype end-credits-character-viewer (process)
+(deftype end-credits-character-viewer (process)
   ((hirez-viewer     uint64        :offset-assert 144)
    (vehicle          uint64        :offset-assert 152)
    (turntable-handle uint64        :offset-assert 160)
@@ -55559,9 +55559,9 @@
    (anim-ending      basic         :offset-assert 176)
    (current-char     credits-char  :offset-assert 180)
    )
-  :method-count-assert 17
+  :method-count-assert 22
   :size-assert         #xb8
-  :flag-assert         #x11003000b8
+  :flag-assert         #x16003000b8
   (:methods
     (end-credits-character-viewer-method-9 () none) ;; 9
     (end-credits-character-viewer-method-10 () none) ;; 10
@@ -55574,7 +55574,7 @@
     running ;; 15
     die ;; 16
     )
-  )|#
+  )
   
 
 
