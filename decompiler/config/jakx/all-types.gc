@@ -39040,28 +39040,28 @@
 
 
   
-#|(deftype cam-dbg-scratch (structure)
-  ((linevec4w      vector :inline :offset-assert 0)
-   (color          vector :inline :offset-assert 32)
-   (plotvec        vector :inline :offset-assert 48)
-   (linevec        vector :inline :offset-assert 80)
-   (rel-vec        vector :inline :offset-assert 112)
-   (sphere-v-start vector :inline :offset-assert 128)
-   (sphere-v-end   vector :inline :offset-assert 144)
-   (sphere-v-down  vector :inline :offset-assert 160)
-   (sphere-vec     vector :inline :offset-assert 176)
-   (crossvec       vector :inline :offset-assert 192)
-   (bboxvec        vector :inline :offset-assert 240)
-   (fov-vv         vector :inline :offset-assert 336)
-   (fov-src        vector :inline :offset-assert 400)
-   (fov-dest       vector :inline :offset-assert 416)
-   (fov-vert       vector :inline :offset-assert 432)
-   (fov-horz       vector :inline :offset-assert 448)
+(deftype cam-dbg-scratch (structure)
+  ((linevec4w      vector :inline :offset 0)
+   (color          vector :inline :offset 32)
+   (plotvec        vector :inline :offset 48)
+   (linevec        vector :inline :offset 80)
+   (rel-vec        vector :inline :offset 112)
+   (sphere-v-start vector :inline :offset 128)
+   (sphere-v-end   vector :inline :offset 144)
+   (sphere-v-down  vector :inline :offset 160)
+   (sphere-vec     vector :inline :offset 176)
+   (crossvec       vector :inline :offset 192)
+   (bboxvec        vector :inline :offset 240)
+   (fov-vv         vector :inline :offset 336)
+   (fov-src        vector :inline :offset 400)
+   (fov-dest       vector :inline :offset 416)
+   (fov-vert       vector :inline :offset 432)
+   (fov-horz       vector :inline :offset 448)
    )
   :method-count-assert 9
   :size-assert         #x1d0
   :flag-assert         #x9000001d0
-  )|#
+  )
   
 
 
