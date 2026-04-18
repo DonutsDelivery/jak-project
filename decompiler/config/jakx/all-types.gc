@@ -5241,7 +5241,7 @@
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
-  )|#
+  )|# ;; forward-ref to quaternion (L7157)
   
 
 
@@ -21976,7 +21976,6 @@
   :method-count-assert 9
   :size-assert         #x14
   :flag-assert         #x900000014
-  ;; field p-user-data uses ~A with a signed load.
   )|#
   
 
@@ -46226,17 +46225,12 @@
 
 
 
-#|
 (deftype artifact-location-array (inline-array-class)
-  ((length           int32            :offset-assert 4)
-   (allocated-length int32            :offset-assert 8)
-   (data             UNKNOWN :dynamic :offset-assert 16)
-   )
+  ((data uint8 :dynamic :overlay-at _data))
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
   )
-|#
 
 
 
@@ -46717,17 +46711,17 @@
 
 
   
-#|(deftype net-projectile (projectile)
+(deftype net-projectile (projectile)
   ()
   :method-count-assert 75
   :size-assert         #x231
   :flag-assert         #x4b01b00231
   (:methods
-    (net-projectile-method-72 () none) ;; 72
-    (net-projectile-method-73 () none) ;; 73
-    (net-projectile-method-74 () none) ;; 74
+    (net-projectile-method-72 () none)
+    (net-projectile-method-73 () none)
+    (net-projectile-method-74 () none)
     )
-  )|#
+  )
   
 
 
@@ -47126,17 +47120,12 @@
 
 
 
-#|
 (deftype hud-sprite-array (inline-array-class)
-  ((length           int32            :offset-assert 4)
-   (allocated-length int32            :offset-assert 8)
-   (data             UNKNOWN :dynamic :offset-assert 16)
-   )
+  ((data uint8 :dynamic :overlay-at _data))
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
   )
-|#
 
 
 
@@ -47279,17 +47268,12 @@
 
 
 
-#|
 (deftype menu-string-array (inline-array-class)
-  ((length           int32            :offset-assert 4)
-   (allocated-length int32            :offset-assert 8)
-   (data             UNKNOWN :dynamic :offset-assert 16)
-   )
+  ((data uint8 :dynamic :overlay-at _data))
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
   )
-|#
 
 
 
@@ -59338,13 +59322,7 @@
   :flag-assert         #x900000000
   )
 
-;; net-projectile stub — inherits full projectile (size 0x231, 72 methods)
-(deftype net-projectile (projectile)
-  ()
-  :method-count-assert 72
-  :size-assert         #x231
-  :flag-assert         #x4801b00231
-  )
+;; net-projectile — full definition above at L46714
 
 ;; curve-control stub
 (deftype curve-control (path-control)
