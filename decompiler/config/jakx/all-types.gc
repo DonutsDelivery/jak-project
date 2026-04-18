@@ -46914,7 +46914,7 @@
 
 
   
-#|(deftype base-menu (process-drawable)
+(deftype base-menu (process-drawable)
   ((child-handles     basic                       :offset-assert 248)
    (info-ptr          base-menu-info              :offset-assert 252)
    (focused?          basic                       :offset-assert 256)
@@ -46954,7 +46954,7 @@
     (base-menu-method-63 () none) ;; 63
     (base-menu-method-64 () none) ;; 64
     )
-  )|#
+  )
   
 
 
