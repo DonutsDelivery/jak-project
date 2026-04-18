@@ -53674,7 +53674,7 @@
 
 
   
-#|(deftype brd-pool-water (process-drawable)
+(deftype brd-pool-water (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -53682,7 +53682,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
