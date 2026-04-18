@@ -54142,7 +54142,7 @@
 
 
   
-#|(deftype powercell-dispenser-subdraw (process-drawable)
+(deftype powercell-dispenser-subdraw (process-drawable)
   ((fuel-cell  uint64            :offset-assert 248)
    (luxo       vu-lights :inline :offset-assert 256)
    (draw-part? basic             :offset-assert 368)
@@ -54154,7 +54154,7 @@
     (powercell-dispenser-subdraw-method-50 () none) ;; 50
     (powercell-dispenser-subdraw-method-51 () none) ;; 51
     )
-  )|#
+  )
   
 
 
@@ -54229,7 +54229,7 @@
 
 
   
-#|(deftype spar-lighthouse-light (process-drawable)
+(deftype spar-lighthouse-light (process-drawable)
   ((part-tracker uint64  :offset-assert 248)
    )
   :method-count-assert 51
@@ -54238,7 +54238,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
