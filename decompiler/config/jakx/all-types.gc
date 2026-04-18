@@ -18426,6 +18426,7 @@
     )
   )
 
+#|
 (deftype particle-buffer (prim-client)
   ((tex-id           uint32      :offset-assert 4)
    (smoke-part-count int32       :offset-assert 8)
@@ -18443,6 +18444,7 @@
     (particle-buffer-method-13 () none) ;; 13
     )
   )
+|#
 
 (deftype oil-trail (prim-client)
   ((tex-id                   uint32          :offset-assert 4)
@@ -27318,6 +27320,7 @@
     )
   )
 
+#|
 (deftype vehicle-antenna (process-drawable)
   ((vehicle          uint64                          :offset-assert 248)
    (attach-local-pos vector                  :inline :offset-assert 256)
@@ -27347,6 +27350,7 @@
     (vehicle-antenna-method-54 () none) ;; 54
     )
   )
+|#
 
 ;; manipy: minimal process-drawable subclass (same size as parent)
 (deftype manipy (process-drawable)
@@ -33265,6 +33269,7 @@
     )
   )
 
+#|
 (deftype hud-vehicle (hud)
   ((weapon-texture uint8 49 :offset-assert 6364)
    (gun-texture                      basic              :offset-assert 6364)
@@ -33357,6 +33362,7 @@
     (hud-vehicle-method-39 () none) ;; 39
     )
   )
+|#
 
 (deftype in-game-hud (hud)
   ((real-items           basic  :offset-assert 6364)
@@ -58845,6 +58851,7 @@
   :flag-assert         #x900000004
   )
 
+#|
 (deftype joint-mod-head (joint-mod)
   ((mode            uint32             :offset-assert 0)
    (process         basic              :offset-assert 4)
@@ -58884,6 +58891,7 @@
   :flag-assert         #x10000000ac
   ;; field track-mode is likely a value type.
   )
+|#
 
 ;; part-tracker — full definition above at L29817
 
