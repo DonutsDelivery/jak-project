@@ -16402,13 +16402,13 @@
 
 
   
-#|(deftype cloud-vert-array (structure)
-  ((data cloud-vertex 100 :offset-assert 0) ;; guessed by decompiler
+(deftype cloud-vert-array (structure)
+  ((data cloud-vertex 100 :inline :offset-assert 0) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x2bc0
   :flag-assert         #x900002bc0
-  )|#
+  )
   
 
 
@@ -40072,8 +40072,8 @@
   :size-assert         #xbc
   :flag-assert         #x16003000bc
   (:state-methods
-    tracking ;; 14
-    die ;; 15
+    die ;; 14
+    tracking ;; 15
     )
   (:methods
     (get-tracked-object-pos (_type_ process-focusable vector) vector) ;; 16
@@ -54824,12 +54824,12 @@
 
 
   
-#|(deftype v-drone (wcar-base)
+(deftype v-drone (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
-  )|#
+  :flag-assert         #xcc133013c0
+  )
   
 
 
