@@ -25,7 +25,18 @@
     // jakx: unresolved <static-data-LN> placeholder for *net-play-mode-text-ids*
     // (L178). Decomp output matches REF but goalc can't compile the placeholder
     // until static-array inlining for the jakx symbol layout lands.
-    "game-task-h"
+    "game-task-h",
+    // jakx: (method-set! ... Lnn) pattern — inspect method installed via code label
+    // reference. Content matches REF but goalc can't resolve raw label symbols.
+    "tie-h",
+    "sky-h",
+    "shrubbery-h",
+    "minimap-h",
+    // jakx: talker-speech-class.name (string at struct offset 0) confuses static-ref
+    // decompiler → *talker-speech* #f fallback → TypeCheck fail.
+    "ambient-h",
+    // jakx: (the-as TYPE Lnn) static label references not resolvable by goalc.
+    "mood-tables"
   ],
 
   // Skip goalc-compiling these specific functions/methods inside otherwise-good files.

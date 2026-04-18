@@ -1,0 +1,107 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition of type talker-speech-class
+(deftype talker-speech-class (structure)
+  ((name           string)
+   (channel        uint8)
+   (flags          uint16)
+   (speech         uint16)
+   (text-duration  uint16)
+   (delay          uint16)
+   (pos            uint16)
+   (neg            uint16)
+   (text-message   uint32)
+   (on-close       pair)
+   (camera         string)
+   )
+  (:methods
+    (talker-speech-class-method-9 (_type_) symbol)
+    (talker-speech-class-method-10 (_type_) none)
+    (talker-speech-class-method-11 (_type_) none)
+    (talker-speech-class-method-12 (_type_ int) none)
+    (talker-speech-class-method-13 (_type_ int) none)
+    )
+  )
+
+;; definition for method 3 of type talker-speech-class
+(defmethod inspect ((this talker-speech-class))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'talker-speech-class)
+  (format #t "~1Tname: ~A~%" (-> this name))
+  (format #t "~1Tchannel: ~D~%" (-> this channel))
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (format #t "~1Tspeech: ~D~%" (-> this speech))
+  (format #t "~1Ttext-duration: ~D~%" (-> this text-duration))
+  (format #t "~1Tdelay: ~D~%" (-> this delay))
+  (format #t "~1Tpos: ~D~%" (-> this pos))
+  (format #t "~1Tneg: ~D~%" (-> this neg))
+  (format #t "~1Ttext-message: ~D~%" (-> this text-message))
+  (format #t "~1Ton-close: ~A~%" (-> this on-close))
+  (format #t "~1Tcamera: ~A~%" (-> this camera))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type talker
+(deftype talker (process)
+  ((trans           vector  :inline)
+   (message         talker-speech-class)
+   (total-time      time-frame)
+   (total-off-time  time-frame)
+   (start-time      time-frame)
+   (state-time      time-frame)
+   (voicebox        handle)
+   (voice-id        sound-id)
+   (message-id      sound-id)
+   (region          region)
+   (interp          float)
+   (save?           symbol)
+   (grab?           symbol)
+   )
+  (:state-methods
+    talker-state-14
+    idle
+    active
+    exit
+    )
+  (:methods
+    (draw-text (_type_) none)
+    )
+  )
+
+;; definition for method 3 of type talker
+(defmethod inspect ((this talker))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (let ((t9-0 (method-of-type process inspect)))
+    (t9-0 this)
+    )
+  (format #t "~2Ttrans: ~`vector`P~%" (-> this stack))
+  (format #t "~2Tmessage: #<talker-speech-class @ #x~X>~%" (-> this message))
+  (format #t "~2Ttotal-time: ~D~%" (-> this total-time))
+  (format #t "~2Ttotal-off-time: ~D~%" (-> this total-off-time))
+  (format #t "~2Tstart-time: ~D~%" (-> this start-time))
+  (format #t "~2Tstate-time: ~D~%" (-> this state-time))
+  (format #t "~2Tvoicebox: ~D~%" (-> this voicebox))
+  (format #t "~2Tvoice-id: ~D~%" (-> this voice-id))
+  (format #t "~2Tmessage-id: ~D~%" (-> this message-id))
+  (format #t "~2Tregion: #<region @ #x~X>~%" (-> this region))
+  (format #t "~2Tinterp: ~f~%" (-> this interp))
+  (format #t "~2Tsave?: ~A~%" (-> this save?))
+  (format #t "~2Tgrab?: ~A~%" (-> this grab?))
+  (label cfg-4)
+  this
+  )
+
+;; definition for symbol *talker-speech*, type (inline-array talker-speech-class)
+(define *talker-speech* #f)
+
+
+
+

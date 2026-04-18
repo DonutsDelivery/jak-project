@@ -5225,15 +5225,17 @@
   :size-assert         #x98
   :flag-assert         #x1500100098
   (:methods
-    (vehicle-suppress-look-method-9 () none) ;; 9
-    (vehicle-suppress-look-method-10 () none) ;; 10
-    (vehicle-suppress-look-method-11 () none) ;; 11
-    (vehicle-suppress-look-method-12 () none) ;; 12
-    (vehicle-suppress-look-method-13 () none) ;; 13
-    (vehicle-suppress-look-method-14 () none) ;; 14
+    (vehicle-suppress-look-method-9 () none) ;; 14
     )
   (:state-methods
     idle ;; 15
+    )
+  (:methods
+    (vehicle-suppress-look-method-11 () none) ;; 16
+    (vehicle-suppress-look-method-12 () none) ;; 17
+    (vehicle-suppress-look-method-13 () none) ;; 18
+    (vehicle-suppress-look-method-14 () none) ;; 19
+    (vehicle-suppress-look-method-15 () none) ;; 20
     )
   )
   
@@ -27302,7 +27304,11 @@
   (:methods
     (net-mgr-method-21 () none) ;; 21
     (net-mgr-method-22 () none) ;; 22
-    (net-mgr-method-23 () none) ;; 23
+    )
+  (:state-methods
+    logging-in ;; 23
+    )
+  (:methods
     (net-mgr-method-24 () none) ;; 24
     (net-mgr-method-25 () none) ;; 25
     (net-mgr-method-26 () none) ;; 26
@@ -27317,7 +27323,11 @@
     )
   (:methods
     (net-mgr-method-33 () none) ;; 33
-    (net-mgr-method-34 () none) ;; 34
+    )
+  (:state-methods
+    starting-sp-game ;; 34
+    )
+  (:methods
     (net-mgr-method-35 () none) ;; 35
     )
   (:state-methods
@@ -27325,9 +27335,9 @@
     playing-playback-game ;; 37
     hosting-game ;; 38
     connecting-to-game ;; 39
+    joining-game ;; 40
     )
   (:methods
-    (net-mgr-method-40 () none) ;; 40
     (net-mgr-method-41 () none) ;; 41
     (net-mgr-method-42 () none) ;; 42
     )
@@ -44674,9 +44684,9 @@
   (:state-methods
     waiting ;; 42
     running ;; 43
+    die ;; 44
     )
   (:methods
-    (net-player-method-44 () none) ;; 44
     (net-player-method-45 () symbol) ;; 45
     (net-player-method-46 () none) ;; 46
     (net-player-method-47 () int) ;; 47
@@ -44847,9 +44857,9 @@
   (:state-methods
     running ;; 42
     demo-screen ;; 43
+    play-movie ;; 44
     )
   (:methods
-    (net-world-method-44 () none) ;; 44
     (net-world-method-45 () symbol) ;; 45
     (net-world-method-46 () none) ;; 46
     (net-world-method-47 () none) ;; 47
@@ -52047,15 +52057,17 @@
   :size-assert         #x98
   :flag-assert         #x1500100098
   (:methods
-    (visvol-editor-method-9 () none) ;; 9
-    (visvol-editor-method-10 () none) ;; 10
-    (visvol-editor-method-11 () none) ;; 11
-    (visvol-editor-method-12 () none) ;; 12
-    (visvol-editor-method-13 () none) ;; 13
-    (visvol-editor-method-14 () none) ;; 14
+    (visvol-editor-method-9 () none) ;; 14
     )
   (:state-methods
     idle ;; 15
+    )
+  (:methods
+    (visvol-editor-method-11 () none) ;; 16
+    (visvol-editor-method-12 () none) ;; 17
+    (visvol-editor-method-13 () none) ;; 18
+    (visvol-editor-method-14 () none) ;; 19
+    (visvol-editor-method-15 () none) ;; 20
     )
   )
   
@@ -52106,15 +52118,17 @@
   :size-assert         #x98
   :flag-assert         #x1500100098
   (:methods
-    (collision-editor-method-9 () none) ;; 9
-    (collision-editor-method-10 () none) ;; 10
-    (collision-editor-method-11 () none) ;; 11
-    (collision-editor-method-12 () none) ;; 12
-    (collision-editor-method-13 () none) ;; 13
-    (collision-editor-method-14 () _type_ :state) ;; 14
+    (collision-editor-method-9 () none) ;; 14
     )
   (:state-methods
     idle ;; 15
+    )
+  (:methods
+    (collision-editor-method-11 () none) ;; 16
+    (collision-editor-method-12 () none) ;; 17
+    (collision-editor-method-13 () none) ;; 18
+    (collision-editor-method-14 () none) ;; 19
+    (collision-editor-method-15 () none) ;; 20
     )
   )
   
@@ -52311,25 +52325,27 @@
   :size-assert         #xc4
   :flag-assert         #x1f004000c4
   (:methods
-    (spartacus-editor-method-9 () none) ;; 9
-    (spartacus-editor-method-10 () none) ;; 10
-    (spartacus-editor-method-11 () none) ;; 11
-    (spartacus-editor-method-12 () none) ;; 12
-    (spartacus-editor-method-13 () none) ;; 13
-    (spartacus-editor-method-14 () none) ;; 14
-    (spartacus-editor-method-16 () none) ;; 16
-    (spartacus-editor-method-17 () none) ;; 17
-    (spartacus-editor-method-18 () none) ;; 18
-    (spartacus-editor-method-19 () none) ;; 19
-    (spartacus-editor-method-20 () none) ;; 20
-    (spartacus-editor-method-21 () none) ;; 21
-    (spartacus-editor-method-22 () none) ;; 22
-    (spartacus-editor-method-23 () none) ;; 23
-    (spartacus-editor-method-24 () none) ;; 24
-    (spartacus-editor-method-25 () none) ;; 25
+    (spartacus-editor-method-9 () none) ;; 14
     )
   (:state-methods
-    idle
+    idle ;; 15
+    )
+  (:methods
+    (spartacus-editor-method-11 () none) ;; 16
+    (spartacus-editor-method-12 () none) ;; 17
+    (spartacus-editor-method-13 () none) ;; 18
+    (spartacus-editor-method-14 () none) ;; 19
+    (spartacus-editor-method-16 () none) ;; 20
+    (spartacus-editor-method-17 () none) ;; 21
+    (spartacus-editor-method-18 () none) ;; 22
+    (spartacus-editor-method-19 () none) ;; 23
+    (spartacus-editor-method-20 () none) ;; 24
+    (spartacus-editor-method-21 () none) ;; 25
+    (spartacus-editor-method-22 () none) ;; 26
+    (spartacus-editor-method-23 () none) ;; 27
+    (spartacus-editor-method-24 () none) ;; 28
+    (spartacus-editor-method-25 () none) ;; 29
+    (spartacus-editor-method-26 () none) ;; 30
     )
   )
   

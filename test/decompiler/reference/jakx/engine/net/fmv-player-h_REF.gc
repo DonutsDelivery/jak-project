@@ -70,9 +70,9 @@
    )
   (:methods
     (fmv-player-method-9 () none)
-    (fmv-player-method-10 () none)
-    (fmv-player-method-11 () none)
-    (fmv-player-method-12 () none)
+    (idle () _type_ :state)
+    (idle-texture () _type_ :state)
+    (idle-texture-fma () _type_ :state)
     (fmv-player-method-13 () none)
     (fmv-player-method-14 () none)
     (fmv-player-method-15 () none)
