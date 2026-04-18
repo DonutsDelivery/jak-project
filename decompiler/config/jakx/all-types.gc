@@ -19716,7 +19716,7 @@
   :flag-assert         #xa00000004
   )
 
-#|(deftype prim-strip-FULL (prim-base)
+(deftype prim-strip-FULL (prim-base)
   "A collection of vertices, all with the same texture and draw settings.
    These are owned by the thing submitting to prim, not the prim renderer itself."
   ((flags               prim-flags            :offset-assert 4) ;; guessed by decompiler
@@ -19745,7 +19745,7 @@
          (symbol type int texture-id string) _type_)
     (setup-dma-and-tex "Set up the bucket, prim sink, and texture." (_type_ draw-control) none) ;; 10
     )
-  )|#
+  )
   
 
 (deftype prim-sink (structure)
@@ -39937,19 +39937,19 @@
 
 
   
-#|(deftype light-trail (prim-client)
-  ((crumb-array             (array uint8)             :offset-assert 4) ;; guessed by decompiler
+(deftype light-trail (prim-client)
+  ((crumb-array             (array uint8)             :offset-assert 4)
    (crumb-size              uint8                     :offset-assert 8)
    (crumb-count             int16                     :offset-assert 10)
    (max-crumb-count         int16                     :offset-assert 12)
    (appearance              light-trail-composition   :offset-assert 16)
    (start-marker            uint64                    :offset-assert 24)
    (end-marker              uint64                    :offset-assert 32)
-   (decision                uint64                    :offset-assert 40) ;; light-trail-decision
+   (decision                uint64                    :offset-assert 40)
    (total-distance-traveled float                     :offset-assert 48)
-   (strip                   prim-strip                :offset-assert 52) ;; guessed by decompiler
-   (strip2                  prim-strip                :offset-assert 56) ;; guessed by decompiler
-   (cache-vector            vector                  4 :offset-assert 64) ;; guessed by decompiler
+   (strip                   prim-strip                :offset-assert 52)
+   (strip2                  prim-strip                :offset-assert 56)
+   (cache-vector            vector          4 :inline :offset-assert 64)
    )
   :method-count-assert 23
   :size-assert         #x80
@@ -39961,15 +39961,15 @@
     (light-trail-method-13 (_type_) int) ;; 13
     (light-trail-method-14 (_type_) none) ;; 14
     (light-trail-method-15 (_type_) none) ;; 15
-    (light-trail-method-16 () none) ;; 16 ;; (add-vert-to-prim-strip! (_type_ prim-strip vector rgba float float) none)
+    (light-trail-method-16 () none) ;; 16
     (light-trail-method-17 (_type_ vector rgba float vector float) symbol) ;; 17
-    (light-trail-method-18 () none) ;; 18 ;; (calc-vertex-pos! (_type_ light-trail-breadcrumb int vector vector) none)
+    (light-trail-method-18 () none) ;; 18
     (light-trail-method-19 (_type_ float int) none) ;; 19
     (light-trail-method-20 (_type_) none) ;; 20
     (light-trail-method-21 (_type_ vector) none) ;; 21
     (light-trail-method-22 () none) ;; 22
     )
-  )|#
+  )
   
 
 
