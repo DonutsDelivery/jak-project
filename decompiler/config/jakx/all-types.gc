@@ -47185,12 +47185,12 @@
 
 
   
-#|(deftype string-info (structure)
+(deftype string-info (structure)
   ((offset                  vector :inline :offset-assert 0)
-   (offset-x                float          :offset-assert 0)
-   (offset-y                float          :offset-assert 4)
-   (offset-z                float          :offset-assert 8)
-   (offset-w                float          :offset-assert 12)
+   (offset-x                float          :offset 0)
+   (offset-y                float          :offset 4)
+   (offset-z                float          :offset 8)
+   (offset-w                float          :offset 12)
    (pos-z                   int32          :offset-assert 16)
    (id                      uint32         :offset-assert 20)
    (font-scale              float          :offset-assert 24)
@@ -47212,7 +47212,7 @@
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
-  )|#
+  )
   
 
 
@@ -47232,20 +47232,20 @@
 
 
   
-#|(deftype string-menu-info (sprite-menu-info)
+(deftype string-menu-info (sprite-menu-info)
   ((strings-info basic  :offset-assert 60)
    (text-ids     basic  :offset-assert 64)
    )
   :method-count-assert 9
   :size-assert         #x44
   :flag-assert         #x900000044
-  )|#
+  )
   
 
 
 
   
-#|(deftype string-menu (prim-strip-menu)
+(deftype string-menu (prim-strip-menu)
   ((strings  basic  :offset-assert 552)
    (text-ids basic  :offset-assert 556)
    )
@@ -47256,53 +47256,53 @@
     (string-menu-method-67 () none) ;; 67
     (string-menu-method-68 () none) ;; 68
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype options-bar-indicator (string-menu)
+(deftype options-bar-indicator (string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
 
   
-#|(deftype game-text-menu-info (string-menu-info)
+(deftype game-text-menu-info (string-menu-info)
   ((text-id uint32  :offset-assert 68)
    )
   :method-count-assert 9
   :size-assert         #x48
   :flag-assert         #x900000048
-  )|#
+  )
   
 
 
 
   
-#|(deftype game-text-menu (string-menu)
+(deftype game-text-menu (string-menu)
   ((text-id uint32  :offset-assert 560)
    )
   :method-count-assert 69
   :size-assert         #x234
   :flag-assert         #x4501b00234
-  )|#
+  )
   
 
 
 
   
-#|(deftype dynamic-string-menu (string-menu)
+(deftype dynamic-string-menu (string-menu)
   ()
   :method-count-assert 69
   :size-assert         #x230
   :flag-assert         #x4501a00230
-  )|#
+  )
   
 
 
