@@ -55006,7 +55006,7 @@
 
 
   
-#|(deftype coli-ball-collision (process-focusable)
+(deftype coli-ball-collision (process-focusable)
   ()
   :method-count-assert 60
   :size-assert         #x100
@@ -55014,7 +55014,7 @@
   (:state-methods
     idle ;; 59
     )
-  )|#
+  )
   
 
 
