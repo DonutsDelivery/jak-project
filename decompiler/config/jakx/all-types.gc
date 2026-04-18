@@ -36841,26 +36841,26 @@
 
 
   
-#|(deftype tie-consts (structure)
-  ((data      uint32   40      :offset-assert 0) ;; guessed by decompiler
-   (vector    vector   10      :offset-assert 0) ;; guessed by decompiler
-   (quads     uint128  10      :offset-assert 0) ;; guessed by decompiler
-   (adgif     qword    :inline :offset-assert 0) ;; gs-gif-tag :inline
-   (strgif    qword    :inline :offset-assert 16) ;; gs-gif-tag :inline
-   (extra     qword    :inline :offset-assert 32) ;; vector :inline
-   (gifbufs   qword    :inline :offset-assert 48) ;; vector :inline
-   (clrbufs   qword    :inline :offset-assert 64)
-   (misc      qword    :inline :offset-assert 80)
-   (atestgif  qword    :inline :offset-assert 96) ;; gs-gif-tag :inline
-   (alpha     qword    :inline :offset-assert 112) ;; gs-adcmd :inline
-   (atest     gs-adcmd 2       :offset-assert 128) ;; guessed by decompiler
-   (atest-tra gs-adcmd :inline :offset-assert 128)
-   (atest-def gs-adcmd :inline :offset-assert 144)
+(deftype tie-consts (structure)
+  ((adgif     qword    :inline         :offset-assert 0)
+   (strgif    qword    :inline         :offset-assert 16)
+   (extra     qword    :inline         :offset-assert 32)
+   (gifbufs   qword    :inline         :offset-assert 48)
+   (clrbufs   qword    :inline         :offset-assert 64)
+   (misc      qword    :inline         :offset-assert 80)
+   (atestgif  qword    :inline         :offset-assert 96)
+   (alpha     qword    :inline         :offset-assert 112)
+   (atest     gs-adcmd 2      :inline  :offset-assert 128) ;; guessed by decompiler
+   (data      uint32   40              :offset 0) ;; guessed by decompiler
+   (vector    vector   10 :inline      :offset 0) ;; guessed by decompiler
+   (quads     uint128  10              :offset 0) ;; guessed by decompiler
+   (atest-tra gs-adcmd :inline         :offset 128)
+   (atest-def gs-adcmd :inline         :offset 144)
    )
   :method-count-assert 9
   :size-assert         #xa0
   :flag-assert         #x9000000a0
-  )|#
+  )
   
 
 
