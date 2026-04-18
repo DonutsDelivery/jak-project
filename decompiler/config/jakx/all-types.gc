@@ -52840,7 +52840,7 @@
 
 
   
-#|(deftype visvol-editor (process)
+(deftype visvol-editor (process)
   ((proc uint64  :offset-assert 144)
    )
   :method-count-assert 16
@@ -52857,7 +52857,7 @@
   (:state-methods
     idle ;; 15
     )
-  )|#
+  )
   
 
 
@@ -59707,7 +59707,6 @@
 (define-extern v-falcon object)
 (define-extern v-gila object)
 (define-extern vif-bank object)
-(define-extern visvol-editor object)
 (define-extern v-leopard object)
 (define-extern v-mongoose object)
 (define-extern v-panther object)
