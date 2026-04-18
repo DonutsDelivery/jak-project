@@ -42465,10 +42465,7 @@
   )
 
   
-#|(deftype debris-group (process)
-  ;; symbol-registry marks slots 14, 15, 16, 17 all as states but they need
-  ;; proper state names (16 was "do-collision") to match jak3-style
-  ;; slot-name resolution — skipping until names identified.
+(deftype debris-group (process)
   ((had-first-hit   symbol                :offset-assert 144)
    (dead-debris-num int32                 :offset-assert 148)
    (debris-num      int32                 :offset-assert 152)
@@ -42482,17 +42479,15 @@
   :method-count-assert 18
   :size-assert         #x3c0
   :flag-assert         #x12033003c0
-  (:methods
-    (debris-group-method-14 () _type_ :state) ;; 14
-    )
   (:state-methods
-    idle ;; 15, old: (do-collision (_type_ int) none)
+    idle ;; 14
     )
   (:methods
-    (debris-group-method-16 (_type_ int) none) ;; 16
+    (do-collision (_type_ int) none) ;; 15
+    (update-box! (_type_ int) none) ;; 16
     (debris-group-method-17 () none) ;; 17
     )
-  )|#
+  )
   
 
 (deftype debris-tuning (structure)
@@ -46807,8 +46802,8 @@
 (deftype menu-string (hud-string)
   ()
   :method-count-assert 10
-  :size-assert         #x44
-  :flag-assert         #xa00000044
+  :size-assert         #x40
+  :flag-assert         #xa00000040
   )
   
 
@@ -51437,48 +51432,45 @@
 
 
   
-#|(deftype anim-test-obj (glst-named-node)
-  ;; list-con list-control :inline needs 16-byte alignment; regen says 44 but list-control requires 16-aligned inline placement (jakx-specific constraint)
+(deftype anim-test-obj (glst-named-node)
   ((obj-art-group basic                :offset-assert 12)
    (seq-list      glst-list    :inline :offset-assert 16)
    (flags         int32                :offset-assert 32)
    (mesh-geo      basic                :offset-assert 36)
    (joint-geo     basic                :offset-assert 40)
-   (list-con      list-control :inline :offset 44)
-   (parent        uint32               :offset 124)
-   (anim-index    int32                :offset 128)
-   (anim-hindex   int32                :offset 132)
-   (seq-index     int32                :offset 136)
-   (seq-hindex    int32                :offset 140)
+   (list-con      list-control :inline :offset-assert 44)
+   (parent        uint32               :offset-assert 124)
+   (anim-index    int32                :offset-assert 128)
+   (anim-hindex   int32                :offset-assert 132)
+   (seq-index     int32                :offset-assert 136)
+   (seq-hindex    int32                :offset-assert 140)
    )
   :method-count-assert 9
   :size-assert         #x90
   :flag-assert         #x900000090
-  )|#
+  )
   
 
 
 
   
-#|(deftype anim-test-sequence (glst-named-node)
-  ;; same list-con 16-alignment blocker as anim-test-obj
+(deftype anim-test-sequence (glst-named-node)
   ((item-list    glst-list     :inline :offset-assert 12)
    (playing-item int32                 :offset-assert 28)
    (flags        int32                 :offset-assert 32)
-   (list-con     list-control  :inline :offset 36)
-   (parent       anim-test-obj         :offset 116)
+   (list-con     list-control  :inline :offset-assert 36)
+   (parent       anim-test-obj         :offset-assert 116)
    )
   :method-count-assert 9
   :size-assert         #x78
   :flag-assert         #x900000078
-  )|#
+  )
   
 
 
 
   
-#|(deftype anim-test-seq-item (glst-named-node)
-  ;; parent anim-test-sequence is commented (blocked by list-con alignment)
+(deftype anim-test-seq-item (glst-named-node)
   ((speed       int32               :offset-assert 12)
    (blend       int32               :offset-assert 16)
    (first-frame float               :offset-assert 20)
@@ -51491,7 +51483,7 @@
   :method-count-assert 9
   :size-assert         #x2c
   :flag-assert         #x90000002c
-  )|#
+  )
   
 
 
@@ -57819,12 +57811,12 @@
 
 
   
-#|(deftype customize-main-selection-menu-manager (selection-menu-manager)
+(deftype customize-main-selection-menu-manager (selection-menu-manager)
   ()
   :method-count-assert 67
   :size-assert         #x224
   :flag-assert         #x4301a00224
-  )|#
+  )
   
 
 
@@ -57843,12 +57835,12 @@
 
 
   
-#|(deftype customize-vs-selection-menu-manager (selection-menu-manager)
+(deftype customize-vs-selection-menu-manager (selection-menu-manager)
   ()
   :method-count-assert 67
   :size-assert         #x224
   :flag-assert         #x4301a00224
-  )|#
+  )
   
 
 
@@ -57868,12 +57860,12 @@
 
 
   
-#|(deftype customize-bp-selection-menu-manager (selection-menu-manager)
+(deftype customize-bp-selection-menu-manager (selection-menu-manager)
   ()
   :method-count-assert 67
   :size-assert         #x224
   :flag-assert         #x4301a00224
-  )|#
+  )
   
 
 
