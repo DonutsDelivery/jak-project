@@ -1387,6 +1387,16 @@ void types2_for_add(types2::Type& type_out,
     }
   }
 
+  // Adding 0 to any value is a no-op (daddu reg, r0, reg pattern); just propagate the type.
+  if (arg1_type.is_integer_constant(0)) {
+    type_out.type = arg0_type;
+    return;
+  }
+  if (arg0_type.is_integer_constant(0)) {
+    type_out.type = arg1_type;
+    return;
+  }
+
   lg::print("checks: {} {} {}\n", tc(dts, TypeSpec("structure"), arg1_type),
             !expr.get_arg(0).is_int(), is_int_or_uint(dts, arg0_type));
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <optional>
+#include <stdexcept>
 #include <string>
 #include <utility>
 
@@ -153,7 +154,9 @@ class SimpleAtom {
   bool is_var() const { return m_kind == Kind::VARIABLE; }
   bool is_label() const { return m_kind == Kind::STATIC_ADDRESS; }
   const RegisterAccess& var() const {
-    ASSERT(is_var());
+    if (!is_var()) {
+      throw std::runtime_error("SimpleAtom::var() called on non-variable atom");
+    }
     return m_variable;
   }
 
