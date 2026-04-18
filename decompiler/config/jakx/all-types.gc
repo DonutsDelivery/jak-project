@@ -36854,18 +36854,18 @@
 
 
   
-#|(deftype etie-matrix (structure)
+(deftype etie-matrix (structure)
   ((rmtx  matrix  :inline :offset-assert 0)
    (nmtx  matrix3 :inline :offset-assert 64)
-   (morph float           :offset-assert 76)
-   (fog   float           :offset-assert 92)
-   (fade  uint32          :offset-assert 108)
+   (morph float           :offset 76)
+   (fog   float           :offset 92)
+   (fade  uint32          :offset 108)
    (tint  qword   :inline :offset-assert 112)
    )
   :method-count-assert 9
   :size-assert         #x80
   :flag-assert         #x900000080
-  )|#
+  )
   
 
 
@@ -36906,18 +36906,18 @@
 
 
   
-#|(deftype etn-matrix (structure)
+(deftype etn-matrix (structure)
   ((rmtx  matrix  :inline :offset-assert 0)
    (nmtx  matrix3 :inline :offset-assert 64)
-   (morph float           :offset-assert 76)
-   (fog   float           :offset-assert 92)
-   (fade  uint32          :offset-assert 108)
+   (morph float           :offset 76)
+   (fog   float           :offset 92)
+   (fade  uint32          :offset 108)
    (tint  qword   :inline :offset-assert 112)
    )
   :method-count-assert 9
   :size-assert         #x80
   :flag-assert         #x900000080
-  )|#
+  )
   
 
 
