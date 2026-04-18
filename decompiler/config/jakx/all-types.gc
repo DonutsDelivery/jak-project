@@ -5610,11 +5610,10 @@
 
 
   
+;; tire-trail-crumb moved to after light-trail-breadcrumb definition (L39921+)
 #|(deftype tire-trail-crumb (light-trail-breadcrumb)
-  ((pos        vector :inline :offset-assert 0)
-   (birth-time uint32         :offset-assert 12)
-   (offset     vector :inline :offset-assert 16)
-   (uu         float          :offset-assert 28)
+  ((offset     vector :inline :offset-assert 16)
+   (uu         float          :offset 28 :overlay-at (-> offset w))
    )
   :method-count-assert 9
   :size-assert         #x20
@@ -30772,6 +30771,7 @@
 
 
   
+(declare-type ragdoll-joint structure)
 (defenum ragdoll-joint-flag
   :type uint32
   :bitfield #t
@@ -30793,6 +30793,7 @@
   (rjf15 15)
   )
 
+(declare-type ragdoll-joint structure)
 (deftype ragdoll-edit-info (structure)
   ((editing         symbol           :offset-assert 0) ;; guessed by decompiler
    (current-func    uint64           :offset-assert 8)
@@ -31549,10 +31550,10 @@
 
   
 (deftype shrub-view-data (structure)
-  ((data           uint128 3       :offset-assert 0) ;; guessed by decompiler
-   (texture-giftag qword   :inline :offset-assert 0) ;; gs-gif-tag :inline
-   (consts         vector  :inline :offset-assert 16)
-   (fog-clamp      vector  :inline :offset-assert 32)
+  ((data           uint128 3       :offset 0) ;; guessed by decompiler
+   (texture-giftag qword   :inline :offset 0) ;; gs-gif-tag :inline
+   (consts         vector  :inline :offset 16)
+   (fog-clamp      vector  :inline :offset 32)
    (tex-start-ptr  int32           :offset 16)
    (gifbufsum      float           :offset 16)
    (mtx-buf-ptr    int32           :offset 20)
@@ -32837,6 +32838,35 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sprite-h                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  
+(deftype sprite-vec-data-2d (structure)
+  ((x-y-z-sx    vector   :inline :offset-assert 0)
+   (flag-rot-sy vector   :inline :offset-assert 16)
+   (r-g-b-a     vector   :inline :offset-assert 32)
+   (x           float            :offset 0)
+   (y           float            :offset 4)
+   (z           float            :offset 8)
+   (sx          float            :offset 12)
+   (sy          float            :offset 28)
+   (rot         float            :offset 24)
+   (flag        int32            :offset 16)
+   (matrix      int32            :offset 20)
+   (warp-turns  int32            :offset 16)
+   (r           float            :offset 32)
+   (g           float            :offset 36)
+   (b           float            :offset 40)
+   (a           float            :offset 44)
+   (trans       vector3s :inline :offset 0)
+   (color       rgbaf    :inline :offset 32)
+   (data        uint128  1       :offset 0) ;; guessed by decompiler
+   (data64      uint64   6       :offset 0) ;; guessed by decompiler
+   )
+  :method-count-assert 9
+  :size-assert         #x30
+  :flag-assert         #x900000030
+  )
 
 
   
@@ -40235,8 +40265,8 @@
    (generate-mode                 uint64                           :offset-assert 96)
    (snap-inner-points?            symbol                           :offset-assert 104) ;; guessed by decompiler
    (span-data                     int8                           2 :offset-assert 108) ;; guessed by decompiler
-   (num-active-spans              int8                             :offset-assert 108)
-   (num-spans                     int8                             :offset-assert 109)
+   (num-active-spans              int8                             :offset 108)
+   (num-spans                     int8                             :offset 109)
    (base-color                    rgba                             :offset-assert 112) ;; guessed by decompiler
    )
   :method-count-assert 23
@@ -55825,25 +55855,25 @@
 
 
   
-#|(deftype construction-cone (construction-object)
+(deftype construction-cone (construction-object)
   ((has-hit-ground basic  :offset-assert 304)
    )
-  :method-count-assert 93
+  :method-count-assert 95
   :size-assert         #x134
-  :flag-assert         #x5d00b00134
-  )|#
+  :flag-assert         #x5f00b00134
+  )
   
 
 
 
   
-#|(deftype construction-barricade (construction-object)
+(deftype construction-barricade (construction-object)
   ((has-hit-ground basic  :offset-assert 304)
    )
-  :method-count-assert 93
+  :method-count-assert 95
   :size-assert         #x134
-  :flag-assert         #x5d00b00134
-  )|#
+  :flag-assert         #x5f00b00134
+  )
   
 
 
@@ -59743,7 +59773,7 @@
 (define-extern sprite-aux-elem object)
 (define-extern starting-linebot object)
 (define-extern tfrag-dma object)
-(define-extern tire-trail-crumb object)
+;; tire-trail-crumb activated at L5613
 (define-extern trail-graph object)
 (define-extern v-wpn-red-sentry-gun object)
 (define-extern v-wpn-yellow-grenade object)
