@@ -1,9 +1,116 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; type minimap-class-node is defined here, but it is unknown to the decompiler
+;; definition of type minimap-class-node
+(deftype minimap-class-node (structure)
+  ((default-position  vector     :inline)
+   (flags             uint32)
+   (name              string)
+   (icon-xy           vector2ub  :inline)
+   (class             uint16)
+   (scale             float)
+   (color             rgba)
+   )
+  )
 
-(method-set! (the-as type minimap-class-node) 3 L28)
+;; definition for method 3 of type minimap-class-node
+(defmethod inspect ((this minimap-class-node))
+  (when (not this)
+    (set! this this)
+    (goto cfg-49)
+    )
+  (format #t "[~8x] ~A~%" this 'minimap-class-node)
+  (format #t "~1Tdefault-position: ~`vector`P~%" (-> this default-position))
+  (format #t "~1Tflags: #x~X : (minimap-flag " (-> this flags))
+  (let ((s5-0 (-> this flags)))
+    (if (= (logand s5-0 1) 1)
+        (format #t "active ")
+        )
+    (if (= (logand s5-0 4) 4)
+        (format #t "fade-in ")
+        )
+    (if (= (logand s5-0 64) 64)
+        (format #t "racer ")
+        )
+    (if (= (logand s5-0 2) 2)
+        (format #t "minimap ")
+        )
+    (if (= (logand s5-0 32) 32)
+        (format #t "flash ")
+        )
+    (if (= (logand s5-0 16) 16)
+        (format #t "task-graph ")
+        )
+    (if (= (logand s5-0 8) 8)
+        (format #t "fade-out ")
+        )
+    )
+  (format #t ")~%")
+  (format #t "~1Tname: ~A~%" (-> this name))
+  (format #t "~1Ticon-xy: #<vector2ub @ #x~X>~%" (-> this icon-xy))
+  (let ((t9-13 format)
+        (a0-21 #t)
+        (a1-13 "~1Tclass: #x~X : ~S~%")
+        (a2-5 (-> this class))
+        (v1-23 (-> this class))
+        )
+    (t9-13 a0-21 a1-13 a2-5 (cond
+                              ((= v1-23 8)
+                               "raptor"
+                               )
+                              ((= v1-23 11)
+                               "blue-flag"
+                               )
+                              ((= v1-23 5)
+                               "racer-4"
+                               )
+                              ((= v1-23 14)
+                               "chicken-drone"
+                               )
+                              ((= v1-23 1)
+                               "racer-0"
+                               )
+                              ((= v1-23 6)
+                               "racer-5"
+                               )
+                              ((= v1-23 13)
+                               "success-seeker"
+                               )
+                              ((= v1-23 2)
+                               "racer-1"
+                               )
+                              ((= v1-23 10)
+                               "red-flag"
+                               )
+                              ((= v1-23 7)
+                               "racer-6"
+                               )
+                              ((zero? v1-23)
+                               "none"
+                               )
+                              ((= v1-23 3)
+                               "racer-2"
+                               )
+                              ((= v1-23 12)
+                               "neutral-flag"
+                               )
+                              ((= v1-23 9)
+                               "goal"
+                               )
+                              ((= v1-23 4)
+                               "racer-3"
+                               )
+                              (else
+                                "*unknown*"
+                                )
+                              )
+           )
+    )
+  (format #t "~1Tscale: ~f~%" (-> this scale))
+  (format #t "~1Tcolor: #x~X~%" (-> this color))
+  (label cfg-49)
+  this
+  )
 
 ;; definition of type connection-minimap
 (deftype connection-minimap (connection-pers)
@@ -142,9 +249,64 @@
   this
   )
 
-;; type minimap is defined here, but it is unknown to the decompiler
+;; definition of type minimap
+(deftype minimap (structure)
+  ((draw-tmpl         dma-gif-packet  :inline)
+   (sprite-tmpl       dma-gif-packet  :inline)
+   (sprite2-tmpl      dma-gif-packet  :inline)
+   (adgif-tmpl        dma-gif-packet  :inline)
+   (color             vector4w        :inline)
+   (tex-coords        bounding-box2   :inline)
+   (race-corner       vector          :inline)
+   (mat               matrix          :inline)
+   (tex-offset        vector2         :inline)
+   (race-tex          texture)
+   (race-scale        float)
+   (meters-per-texel  float)
+   (icon-inv-scale    float)
+   (fade              float)
+   (goal-time         float)
+   (engine            engine-minimap)
+   (engine-key        uint32)
+   )
+  (:methods
+    (minimap-method-9 (_type_) none)
+    (minimap-method-10 (_type_) none)
+    (minimap-method-11 (_type_) none)
+    (minimap-method-12 (_type_) none)
+    (minimap-method-13 (_type_) none)
+    (minimap-method-14 (_type_) none)
+    (minimap-method-15 (_type_ dma-buffer vector4w symbol) none)
+    )
+  )
 
-(method-set! (the-as type minimap) 3 L1)
+;; definition for method 3 of type minimap
+(defmethod inspect ((this minimap))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'minimap)
+  (format #t "~1Tdraw-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this draw-tmpl))
+  (format #t "~1Tsprite-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this sprite-tmpl))
+  (format #t "~1Tsprite2-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this sprite2-tmpl))
+  (format #t "~1Tadgif-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this adgif-tmpl))
+  (format #t "~1Tcolor: #<vector4w @ #x~X>~%" (-> this color))
+  (format #t "~1Ttex-coords: #<bounding-box2 @ #x~X>~%" (-> this tex-coords))
+  (format #t "~1Trace-corner: #<vector @ #x~X>~%" (-> this race-corner))
+  (format #t "~1Tmat: #<matrix @ #x~X>~%" (-> this mat))
+  (format #t "~1Ttex-offset: #<vector2 @ #x~X>~%" (-> this tex-offset))
+  (format #t "~1Trace-tex: ~A~%" (-> this race-tex))
+  (format #t "~1Trace-scale: ~f~%" (-> this race-scale))
+  (format #t "~1Tmeters-per-texel: ~f~%" (-> this meters-per-texel))
+  (format #t "~1Ticon-inv-scale: ~f~%" (-> this icon-inv-scale))
+  (format #t "~1Tfade: ~f~%" (-> this fade))
+  (format #t "~1Tgoal-time: ~f~%" (-> this goal-time))
+  (format #t "~1Tengine: ~A~%" (-> this engine))
+  (format #t "~1Tengine-key: ~D~%" (-> this engine-key))
+  (label cfg-4)
+  this
+  )
 
 
 

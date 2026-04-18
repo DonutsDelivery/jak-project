@@ -11487,7 +11487,42 @@
   ],
   "display-loop-main": [
     [
+      107,
+      "t9",
+      "(function none)"
+    ],
+    [
+      177,
+      "a1",
+      "(function object none)"
+    ],
+    [
       231,
+      "t9",
+      "(function none)"
+    ],
+    [
+      287,
+      "t9",
+      "(function none)"
+    ],
+    [
+      434,
+      "t9",
+      "(function none)"
+    ],
+    [
+      722,
+      "t9",
+      "(function none)"
+    ],
+    [
+      576,
+      "t9",
+      "(function none)"
+    ],
+    [
+      826,
       "t9",
       "(function none)"
     ]
@@ -39021,8 +39056,13 @@
   // race-control-method-9: start-dir.w holds a packed handle/pointer.
   // v1 is typed float after ->start-dir.w; op 5 reinterprets bits as pointer for l.wu.
   // a1 at op 6 is the lwu result (process ptr); l.w(a1+48) loads the PID for handle build.
+  // v1 at op 11 is mfc1 (float bits copied to int reg); cast to int so logior resolves.
+  // a2 at op 14: racer-state is missing a race-mesh pointer field at offset 92;
+  //   cast to (pointer uint32) so l.wu(a2+92) resolves until the deftype is fixed.
   "(method 9 race-control)": [
     [5, "v1", "pointer"],
-    [6, "a1", "pointer"]
+    [6, "a1", "process"],
+    [11, "v1", "int"],
+    [14, "a2", "(pointer uint32)"]
   ]
 }

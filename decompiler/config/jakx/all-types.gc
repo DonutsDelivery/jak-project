@@ -2054,6 +2054,7 @@
 
 
 
+#|
 (deftype net-enemy (process-focusable)
   ((flags                  uint64                     :offset-assert 256)
    (info                   net-enemy-info             :offset-assert 264)
@@ -2114,6 +2115,7 @@
     (net-enemy-method-86 () none) ;; 86
     )
   )
+|#
 
 
 
@@ -6253,6 +6255,7 @@
 
 
 
+#|
 (deftype vehicle-antenna (process-drawable)
   ((vehicle          uint64                          :offset-assert 248)
    (attach-local-pos vector                  :inline :offset-assert 256)
@@ -6282,6 +6285,7 @@
     (vehicle-antenna-method-54 () none) ;; 54
     )
   )
+|#
 
 
 
