@@ -12,11 +12,30 @@ Requires a minimal jakx offline-test config at
   test/decompiler/reference/jakx/**/*_REF.gc
 
 For jakx's Phase-0 state (no corpus), this script no-ops cleanly.
+
+Pre-flight static analysis
+--------------------------
+Before invoking the offline-test binary this script runs three static checks
+against all-types.gc that catch patterns which crash the decompiler at load
+time (saving the cost of a full binary invocation):
+
+  (a) :inline references to block-commented deftypes
+      An active deftype field with :inline TYPE where TYPE is inside #|...|#
+      causes "Type X is unknown" SIGABRT during decompiler startup.
+
+  (b) Parent-type activation gaps
+      An active deftype whose parent type is block-commented causes the same
+      "Type X is unknown" crash — the parent must precede the child.
+
+  (c) Method-count mismatches (declared vs compiled-binary actual)
+      Detected by the runtime preflight: offline-test logs
+      "Type X has N methods, but method-count-assert was set to M" when the
+      :flag-assert declared in all-types.gc disagrees with the compiled object.
 """
 from __future__ import annotations
 
 import json
-import shutil
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -27,6 +46,152 @@ JAKX_CONFIG = ROOT / "test" / "offline" / "config" / "jakx" / "config.jsonc"
 JAKX_REFS = ROOT / "test" / "decompiler" / "reference" / "jakx"
 ISO_DIR = ROOT / "iso_data"
 LATEST = ROOT / ".jakx_watch" / "history" / "latest.json"
+ALL_TYPES = ROOT / "decompiler" / "config" / "jakx" / "all-types.gc"
+
+
+# ---------------------------------------------------------------------------
+# Static all-types.gc scanner
+# ---------------------------------------------------------------------------
+
+def _mask_block_comments(text: str) -> tuple[str, set[str]]:
+    """Replace #|...|# regions with spaces (preserving newlines).
+
+    Returns (masked_text, commented_deftype_names).
+    Preserving newlines keeps line numbers stable so error messages are accurate.
+    """
+    commented: set[str] = set()
+    parts: list[str] = []
+    i, n = 0, len(text)
+    while i < n:
+        if i + 1 < n and text[i] == '#' and text[i + 1] == '|':
+            end = text.find('|#', i + 2)
+            if end == -1:
+                parts.append(text[i:])
+                break
+            block = text[i:end + 2]
+            for m in re.finditer(r'\(deftype\s+(\S+)', block):
+                commented.add(m.group(1))
+            # Replace non-newline chars with space to preserve line numbering.
+            parts.append(''.join('\n' if c == '\n' else ' ' for c in block))
+            i = end + 2
+        else:
+            parts.append(text[i])
+            i += 1
+    return ''.join(parts), commented
+
+
+# GOAL built-in types that are always registered by the decompiler at startup.
+# A deftype that inherits from one of these won't crash even if that name is
+# absent from / commented in all-types.gc.
+_GOAL_BUILTIN_TYPES: frozenset[str] = frozenset({
+    "object", "structure", "basic", "string", "symbol",
+    "array", "inline-array", "inline-array-class",
+    "integer", "int", "uint",
+    "int8", "int16", "int32", "int64",
+    "uint8", "uint16", "uint32", "uint64", "uint128", "int128",
+    "float", "number",
+    "pointer", "function",
+    "process", "process-tree", "dead-pool",
+    "type", "link-block", "kheap",
+    "none", "binteger",
+})
+
+
+def _scan_all_types_static(all_types_path: Path) -> list[str]:
+    """Statically scan all-types.gc for patterns that crash the decompiler at load time.
+
+    Returns a list of human-readable blocker strings (empty = no blockers found).
+
+    Checks:
+      (a) Active deftype fields that use ':inline TYPE' where TYPE is block-commented.
+          Crash: "Type X is unknown" SIGABRT at decompiler startup.
+      (b) Active deftypes whose parent type is block-commented.
+          Crash: same "Type X is unknown" SIGABRT.
+
+    Method-count mismatches (c) require the compiled binary and are detected
+    by the runtime preflight.
+    """
+    if not all_types_path.exists():
+        return []
+
+    text = all_types_path.read_text(errors='replace')
+    active, commented = _mask_block_comments(text)
+    if not commented:
+        return []
+
+    # A type that appears in BOTH a comment block AND active code is active
+    # (e.g., after a reorder fix the old commented copy is still present).
+    # Remove such names from the "commented" set so we don't false-positive on them.
+    active_deftype_names: set[str] = {
+        m.group(1) for m in re.finditer(r'\(deftype\s+(\S+)', active)
+    }
+    commented -= active_deftype_names
+    # GOAL built-ins are always registered by the decompiler at startup; they
+    # won't cause "Type X is unknown" even when absent from all-types.gc.
+    commented -= _GOAL_BUILTIN_TYPES
+
+    if not commented:
+        return []
+
+    blockers: list[str] = []
+    lines = active.splitlines()
+
+    # (b) Active deftypes with commented parent
+    # Pattern: (deftype child-name (parent-name)
+    parent_re = re.compile(r'\(deftype\s+(\S+)\s+\((\S+)\)')
+    for lineno, line in enumerate(lines, 1):
+        m = parent_re.search(line)
+        if m:
+            child, parent = m.group(1), m.group(2)
+            if parent in commented:
+                blockers.append(
+                    f"[parent-gap] '{child}' active but parent '{parent}' is"
+                    f" block-commented — all-types.gc:{lineno}"
+                )
+
+    # (a) Active fields with ':inline TYPE' where TYPE is block-commented.
+    # Field syntax variants:
+    #   (field-name TYPE :inline ...)
+    #   (field-name TYPE N :inline ...)         <- inline-array shorthand
+    #
+    # Strategy: capture (field-name TYPE rest-until-close-paren), then check
+    # whether ':inline' appears in rest.  This avoids a greedy [^)]* consuming
+    # ':inline' before the end-anchor can match.
+    deftype_name_re = re.compile(r'\(deftype\s+(\S+)')
+    inline_field_re = re.compile(
+        r'\(\s*\S+\s+'   # ( field-name
+        r'(\S+)'         # TYPE (group 1)
+        r'([^)]*)\)'     # rest of field until ')' (group 2)
+    )
+    # Also handle (inline-array TYPE N) form used in some field definitions.
+    inline_array_re = re.compile(r'\(inline-array\s+(\S+)')
+
+    current_deftype = 'unknown'
+    for lineno, line in enumerate(lines, 1):
+        dt_m = deftype_name_re.search(line)
+        if dt_m:
+            current_deftype = dt_m.group(1)
+
+        for m in inline_field_re.finditer(line):
+            field_type = m.group(1)
+            rest = m.group(2)
+            if ':inline' in rest and field_type in commented:
+                blockers.append(
+                    f"[inline-commented] '{current_deftype}' has field with"
+                    f" ':inline {field_type}' but '{field_type}' is block-commented"
+                    f" — all-types.gc:{lineno}"
+                )
+
+        for m in inline_array_re.finditer(line):
+            arr_type = m.group(1)
+            if arr_type in commented:
+                blockers.append(
+                    f"[inline-array-commented] '{current_deftype}' has"
+                    f" '(inline-array {arr_type} ...)' but '{arr_type}' is"
+                    f" block-commented — all-types.gc:{lineno}"
+                )
+
+    return blockers
 
 
 def main() -> int:
@@ -55,10 +220,38 @@ def main() -> int:
     )
     print(f"real-clean candidates: {len(candidates)}")
 
-    # Pre-flight: run once against the first candidate to detect compile-setup
-    # blockers (e.g., language-enum mismatch between all-types.gc and kernel-defs.gc).
+    # -----------------------------------------------------------------------
+    # Static pre-flight: scan all-types.gc before invoking the binary.
+    # Catches (a) :inline refs to commented types and (b) parent-gap activations
+    # — both cause SIGABRT at decompiler startup, making the binary preflight
+    # useless.  Surface them here so Agent 1/2 get a precise fix target.
+    # -----------------------------------------------------------------------
+    if ALL_TYPES.exists():
+        static_blockers = _scan_all_types_static(ALL_TYPES)
+        if static_blockers:
+            blocker_text = "; ".join(static_blockers)
+            print(f"STATIC BLOCKER: all-types.gc has {len(static_blockers)} issue(s)"
+                  f" that crash the decompiler at load time:")
+            for b in static_blockers:
+                print(f"  {b}")
+            snap["offline_test"] = {
+                "green": [],
+                "amber": [],
+                "blocked": True,
+                "blocker": f"static: {blocker_text}",
+                "static_blockers": static_blockers,
+                "candidates": len(candidates),
+            }
+            LATEST.write_text(json.dumps(snap, indent=2))
+            return 0
+
+    # -----------------------------------------------------------------------
+    # Runtime pre-flight: run offline-test once against the first candidate
+    # to detect compile-setup blockers that require the binary
+    # (e.g., language-enum mismatch, method-count-assert mismatch).
     # If found, surface it and stop — no point running N files that all hit the
     # same setup failure.
+    # -----------------------------------------------------------------------
     preflight = subprocess.run(
         [
             str(OFFLINE_TEST),
@@ -70,9 +263,10 @@ def main() -> int:
     )
     pre_out = preflight.stdout + preflight.stderr
     setup_blocker = None
-    import re as _re
+    clean_pre = re.sub(r"\x1b\[[0-9;]*m", "", pre_out)
+
     if "Inconsistent type definition" in pre_out:
-        m = _re.search(r"Type ([\w<>!?:\-\+\*/=]+) was originally", pre_out)
+        m = re.search(r"Type ([\w<>!?:\-\+\*/=]+) was originally", pre_out)
         tname = m.group(1) if m else "<unknown>"
         setup_blocker = (
             f"all-types.gc vs kernel-defs.gc type mismatch on '{tname}'. "
@@ -82,11 +276,10 @@ def main() -> int:
     elif "-- Type Error! --" in pre_out or "Type Error: Type" in pre_out:
         # Usually "Type X is unknown when parsing decompiler type file:Y:Z"
         # — a dependency type missing from all-types.gc
-        clean = _re.sub(r"\x1b\[[0-9;]*m", "", pre_out)
-        m = _re.search(
+        m = re.search(
             r"Type Error: Type ([\w<>!?:\-\+\*/=]+) is unknown[^\n]*\n[^\n]*"
             r"decompiler type file:([^\s:]+?):(\d+)[^\n]*\n\s*\(([^\n]*)",
-            clean,
+            clean_pre,
         )
         if m:
             unk, fpath, line, form = m.group(1), m.group(2), m.group(3), m.group(4).strip()[:80]
@@ -95,14 +288,49 @@ def main() -> int:
                 f"Add a deftype / declare-type / define-extern for '{unk}' in all-types.gc."
             )
         else:
-            # Fall back: extract just the "Type X is unknown" line.
-            m2 = _re.search(r"(Type Error: Type [\w<>!?:\-\+\*/=]+ is unknown[^\n]*)", clean)
+            m2 = re.search(r"(Type Error: Type [\w<>!?:\-\+\*/=]+ is unknown[^\n]*)", clean_pre)
             setup_blocker = (m2.group(1) if m2
                              else "Type Error parsing all-types.gc (couldn't parse detail).")
-    elif preflight.returncode != 0 and "Compiler Exception" in pre_out:
+    elif "has" in pre_out and "methods, but method-count-assert" in pre_out:
+        # (c) Method-count mismatch: active deftype declares the wrong count
+        # vs what the compiled binary actually has.
+        # Error: "Type X has N methods, but method-count-assert was set to M
+        #         when parsing decompiler type file:...:LINE"
+        m = re.search(
+            r"Type ([\w\-]+) has (\d+) methods, but method-count-assert was set to (\d+)"
+            r"[^\n]*\n[^\n]*decompiler type file:([^\s:]+?):(\d+)",
+            clean_pre,
+        )
+        if m:
+            tname, actual, declared, fpath, lineno = (
+                m.group(1), m.group(2), m.group(3), m.group(4), m.group(5)
+            )
+            # Compute correct flag-assert prefix: actual_hex << 20 combined with
+            # existing size-assert.  Surface the raw numbers; agent fixes manually.
+            setup_blocker = (
+                f"method-count mismatch: '{tname}' :method-count-assert {declared}"
+                f" but binary has {actual} methods — {fpath}:{lineno}."
+                f" Update :flag-assert to #x{int(actual):04x}... in all-types.gc."
+            )
+        else:
+            m2 = re.search(
+                r"([\w\-]+ has \d+ methods, but method-count-assert[^\n]*)", clean_pre
+            )
+            setup_blocker = (
+                m2.group(1) if m2
+                else "method-count-assert mismatch (couldn't parse detail)"
+            )
+    elif preflight.returncode not in (0, None) and "Compiler Exception" in pre_out:
         setup_blocker = (
             "offline-test compiler setup threw. Last 20 lines of output:\n  "
             + "\n  ".join(pre_out.strip().splitlines()[-20:])
+        )
+    elif preflight.returncode is not None and preflight.returncode < 0:
+        # SIGABRT or other signal crash not caught by the patterns above.
+        last_lines = "\n  ".join(clean_pre.strip().splitlines()[-6:])
+        setup_blocker = (
+            f"offline-test crashed (signal {-preflight.returncode}). "
+            f"Last output:\n  {last_lines}"
         )
 
     if setup_blocker:
@@ -119,12 +347,6 @@ def main() -> int:
         return 0
 
     results = {"green": [], "amber": [], "amber_reasons": {}}
-    import re as _re
-    # Capture the one-line reason after "-- Compilation Error! --"
-    reason_re = _re.compile(
-        r"-- Compilation Error! --\s*\n\x1b?\[[0-9;]*m?\x1b?\[[0-9;]*m?(.+?)\n", _re.DOTALL
-    )
-    form_re = _re.compile(r"Form:\s*\n\x1b?\[[0-9;]*m?\x1b?\[[0-9;]*m?(.+?)\n", _re.DOTALL)
 
     for name in candidates:
         r = subprocess.run(
@@ -144,18 +366,16 @@ def main() -> int:
             pass
         else:
             results["amber"].append(name)
-            # Strip ANSI escape sequences, then extract the error reason and offending form.
-            clean = _re.sub(r"\x1b\[[0-9;]*m", "", out)
+            clean = re.sub(r"\x1b\[[0-9;]*m", "", out)
             reason = "unknown"
             form = ""
-            m = _re.search(r"-- Compilation Error! --\s*\n(.+?)\n", clean)
+            m = re.search(r"-- Compilation Error! --\s*\n(.+?)\n", clean)
             if m:
                 reason = m.group(1).strip()
-            m = _re.search(r"Form:\s*\n(.+?)\n", clean)
+            m = re.search(r"Form:\s*\n(.+?)\n", clean)
             if m:
                 form = m.group(1).strip()
             elif "diff" in clean.lower() and "---" in clean:
-                # REF mismatch (not compile error): extract the first diff chunk.
                 reason = "REF mismatch (decomp output differs from checked-in _REF.gc)"
                 form = ""
             results["amber_reasons"][name] = {"reason": reason[:180], "form": form[:120]}
