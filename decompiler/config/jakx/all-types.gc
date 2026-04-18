@@ -6538,27 +6538,6 @@
 (define-extern *unity-quaternion* quaternion)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; euler-h                        ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(deftype euler-angles (vector)
-  "Just uses the same xyzw and data array as vector.
-   The `w` stores an integer that seems to have
-   bitfields for... something? Like maybe the order?
-   Euler angles are mostly unused, and the code is a bit of disaster."
-  ()
-  :method-count-assert 9
-  :size-assert         #x10
-  :flag-assert         #x900000010
-  )
-
-(define-extern EulSafe
-  "Maybe euler angle storage orders?
-   What is this naming convention?"
-  (array int32))
-(define-extern EulNext (array int32))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; transform-h                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -45449,10 +45428,8 @@
 
 
 
-#|
 (deftype net-game-mgr-assassin (net-game-mgr-deathmatch)
-  ((mark    UNKNOWN 24 :offset-assert 305)
-   (UNKNOWN UNKNOWN    :offset-assert -1) ;; field could not be read.
+  ((mark uint8 24 :offset-assert 309)
    )
   :method-count-assert 86
   :size-assert         #x14d
@@ -45462,7 +45439,6 @@
     (net-game-mgr-assassin-method-85 () none) ;; 85
     )
   )
-|#
 
 
 
@@ -45598,15 +45574,14 @@
 
 
 
-#|
 (deftype net-game-mgr-artifact (net-game-mgr-deathmatch)
-  ((artifact-location-array basic     :offset-assert 312)
-   (artifact-location-count int8      :offset-assert 316)
-   (artifact                UNKNOWN 6 :offset-assert 320)
-   (num-artifacts           int32     :offset-assert 368)
-   (last-artifact-index     int32     :offset-assert 372)
-   (last-position-index     UNKNOWN 6 :offset-assert 376)
-   (special-rule            basic     :offset-assert 400)
+  ((artifact-location-array basic    :offset-assert 312)
+   (artifact-location-count int8     :offset-assert 316)
+   (artifact                uint8 48 :offset-assert 320)
+   (num-artifacts           int32    :offset-assert 368)
+   (last-artifact-index     int32    :offset-assert 372)
+   (last-position-index     uint8 24 :offset-assert 376)
+   (special-rule            basic    :offset-assert 400)
    )
   :method-count-assert 86
   :size-assert         #x194
@@ -45616,7 +45591,6 @@
     (net-game-mgr-artifact-method-85 () none) ;; 85
     )
   )
-|#
 
 
 
@@ -45826,10 +45800,9 @@
 
 
 
-#|
 (deftype net-game-mgr-king-of-hill (net-game-mgr-deathmatch)
-  ((king-id     int16     :offset-assert 310)
-   (kingfx-part UNKNOWN 4 :offset-assert 312)
+  ((king-id     int16    :offset-assert 310)
+   (kingfx-part uint8 16 :offset-assert 312)
    )
   :method-count-assert 85
   :size-assert         #x148
@@ -45838,7 +45811,6 @@
     (net-game-mgr-king-of-hill-method-84 () none) ;; 84
     )
   )
-|#
 
 
 
