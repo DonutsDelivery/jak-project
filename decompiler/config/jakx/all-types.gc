@@ -22166,29 +22166,27 @@
 
 
 
-#|
 (deftype net-bit-mask (structure)
-  ((bitmask UNKNOWN 8 :offset-assert 0)
-   (base-id int32     :offset-assert 32)
-   (max-id  int32     :offset-assert 36)
+  ((bitmask uint32 8 :offset-assert 0)
+   (base-id int32    :offset-assert 32)
+   (max-id  int32    :offset-assert 36)
    )
   :method-count-assert 9
   :size-assert         #x28
   :flag-assert         #x900000028
   )
-|#
 
 
 
   
-(deftype net-client-list (structure)
+#|(deftype net-client-list (structure)
   ((target-client int32                :offset-assert 0)
    (client-mask   net-bit-mask :inline :offset-assert 4)
    )
   :method-count-assert 9
   :size-assert         #x2c
   :flag-assert         #x90000002c
-  )
+  )|#
   
 
 
@@ -22251,7 +22249,7 @@
 
 
   
-(deftype net-latency-metrics-data-args (structure)
+#|(deftype net-latency-metrics-data-args (structure)
   ((connection-handle    basic                            :offset-assert 0)
    (target-client-index  int32                            :offset-assert 4)
    (latency-metrics-info net-latency-metrics-info :inline :offset-assert 8)
@@ -22261,7 +22259,8 @@
   :method-count-assert 9
   :size-assert         #x1c
   :flag-assert         #x90000001c
-  )
+  ;; field connection-handle uses ~A with a signed load. field p-user-data uses ~A with a signed load.
+  )|#
   
 
 
@@ -22272,7 +22271,7 @@
 
 
   
-(deftype net-latency-metrics-params (structure)
+#|(deftype net-latency-metrics-params (structure)
   ((connection-handle           basic                   :offset-assert 0)
    (target-client-list          net-client-list :inline :offset-assert 4)
    (pf-latency-metrics-callback basic                   :offset-assert 48)
@@ -22281,7 +22280,7 @@
   :method-count-assert 9
   :size-assert         #x38
   :flag-assert         #x900000038
-  )
+  )|#
   
 
 
@@ -29848,19 +29847,18 @@
 #|(deftype part-tracker-init-params (structure)
   ((local-offset         vector                         :inline :offset-assert 0)
    (userdata             uint64                                 :offset-assert 16)
-   (duration             time-frame                             :offset-assert 24) ;; guessed by decompiler
+   (duration             time-frame                             :offset-assert 24)
    (local-space-param    int32                                  :offset-assert 28)
-   (group                sparticle-launch-group                 :offset-assert 32) ;; guessed by decompiler
-   (callback             (function part-tracker vector)         :offset-assert 36) ;; guessed by decompiler
+   (group                sparticle-launch-group                 :offset-assert 32)
+   (callback             (function part-tracker vector)         :offset-assert 36)
    (local-space-callback basic                                  :offset-assert 40)
-   (target               process-drawable                       :offset-assert 44) ;; guessed by decompiler
-   (mat-joint            object                                 :offset-assert 48) ;; guessed by decompiler
+   (target               process-drawable                       :offset-assert 44)
+   (mat-joint            object                                 :offset-assert 48)
    (subsampler-num       float                                  :offset-assert 52)
    )
   :method-count-assert 9
   :size-assert         #x38
   :flag-assert         #x900000038
-  ;; field userdata uses ~A with a 64-bit load. field mat-joint uses ~A with a signed load.
   )|#
   
 
