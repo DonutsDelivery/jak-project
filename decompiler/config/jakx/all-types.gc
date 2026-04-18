@@ -46401,14 +46401,14 @@
 
 
   
-#|(deftype net-game-mgr-rushhour (net-game-mgr-race)
+(deftype net-game-mgr-rushhour (net-game-mgr-race)
   ((next-drone-spawn-time uint64  :offset-assert 368)
    (drone-type-counter    int32   :offset-assert 376)
    )
   :method-count-assert 88
   :size-assert         #x17c
   :flag-assert         #x5800f0017c
-  )|#
+  )
   
 
 
@@ -46865,22 +46865,23 @@
 
 
   
-#|(deftype animation-info (structure)
+(deftype animation-info (structure)
   ((enter-anim   int32          :offset-assert 0)
    (exit-anim    int32          :offset-assert 4)
    (running-anim int32          :offset-assert 8)
    (anim-speed   float          :offset-assert 12)
    (enter-delay  uint32         :offset-assert 16)
-   (3d-offset    vector :inline :offset-assert 32)
-   (3d-offset-x  float          :offset-assert 32)
-   (3d-offset-y  float          :offset-assert 36)
-   (3d-offset-z  float          :offset-assert 40)
-   (3d-offset-w  float          :offset-assert 44)
+   (pad20        uint32 3       :offset-assert 20)
+   (3d-offset    vector :inline :offset 32)
+   (3d-offset-x  float          :offset 32)
+   (3d-offset-y  float          :offset 36)
+   (3d-offset-z  float          :offset 40)
+   (3d-offset-w  float          :offset 44)
    )
   :method-count-assert 9
   :size-assert         #x30
   :flag-assert         #x900000030
-  )|#
+  )
   
 
 
