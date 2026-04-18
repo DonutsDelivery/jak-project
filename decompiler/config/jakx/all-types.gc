@@ -59534,13 +59534,13 @@
 ;; (define-extern net-game-mgr-rushhour object) ;; clobbers active deftype
 (define-extern net-latency-metrics-params object)
 (define-extern net-update-conn-errors object)
-(define-extern ocean-trans-strip-array object)
+;; (define-extern ocean-trans-strip-array object) ;; clobbers active deftype
 (define-extern part-tracker-init-params object)
-(define-extern part-tracker-subsampler object)
-(define-extern perf-stat-array object)
-(define-extern power-slide-hud-single object)
+;; (define-extern part-tracker-subsampler object) ;; clobbers active deftype
+;; (define-extern perf-stat-array object) ;; clobbers active deftype
+;; (define-extern power-slide-hud-single object) ;; clobbers active deftype
 ;; prototype-bucket activated above at L20679
-(define-extern race-mesh-hash-search object)
+;; (define-extern race-mesh-hash-search object) ;; clobbers active deftype
 ;; (define-extern ragdoll-edit-info object) ;; clobbers active deftype
 ;; ragdoll-test activated at L50155
 (define-extern rb-debug-state-record object)
@@ -59549,30 +59549,30 @@
 ;; (define-extern search-info object) ;; clobbers active deftype
 ;; (define-extern shrub-view-data object) ;; clobbers active deftype
 (define-extern sky-work object)
-(define-extern smoke-particle object)
+;; (define-extern smoke-particle object) ;; clobbers active deftype
 ;; (define-extern sparticle-birthinfo object) ;; clobbers active deftype
 ;; (define-extern sparticle-launchinfo object) ;; clobbers active deftype
 ;; (define-extern sparticle-subsampler object) ;; clobbers active deftype
 ;; (define-extern sparticle-system object) ;; clobbers active deftype
-(define-extern spooler-block object)
-(define-extern sprite-distorter-sine-tables object)
-(define-extern sprite-glow-consts object)
-(define-extern sprite-header object)
+;; (define-extern spooler-block object) ;; clobbers active deftype
+;; (define-extern sprite-distorter-sine-tables object) ;; clobbers active deftype
+;; (define-extern sprite-glow-consts object) ;; clobbers active deftype
+;; (define-extern sprite-header object) ;; clobbers active deftype
 ;; (define-extern sprite-vec-data-2d object) ;; clobbers active deftype
-(define-extern subdivide-dists object)
-(define-extern task-arrow object)
-(define-extern terrain-context object)
-(define-extern test-process object)
-(define-extern text-display-nice-shot object)
+;; (define-extern subdivide-dists object) ;; clobbers active deftype
+;; (define-extern task-arrow object) ;; clobbers active deftype
+;; (define-extern terrain-context object) ;; clobbers active deftype
+;; (define-extern test-process object) ;; clobbers active deftype
+;; (define-extern text-display-nice-shot object) ;; clobbers active deftype
 ;; (define-extern tfrag-dists object) ;; clobbers active deftype
-(define-extern this-way object)
-(define-extern tie-consts object)
-(define-extern timer-hold-bank object)
+;; (define-extern this-way object) ;; clobbers active deftype
+;; (define-extern tie-consts object) ;; clobbers active deftype
+;; (define-extern timer-hold-bank object) ;; clobbers active deftype
 (define-extern timetrial-recording object)
 ;; (define-extern trail-blocker object) ;; clobbers active deftype
 (define-extern update-engine-loop-state-work object)
-(define-extern v-bear object)
-(define-extern v-bobcat object)
+;; (define-extern v-bear object) ;; clobbers active deftype
+;; (define-extern v-bobcat object) ;; clobbers active deftype
 (define-extern v-cheetah object)
 (define-extern v-cougar object)
 (define-extern v-daxtermobile object)
