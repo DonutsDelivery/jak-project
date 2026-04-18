@@ -13125,14 +13125,16 @@
   
 
 
-(deftype engine-minimap (engine-pers)
+;; engine-minimap activation reverted — triggered type-prop regression in minimap.gc
+;; when :override'd fields change connection-minimap type. Needs deeper investigation.
+#|(deftype engine-minimap (engine-pers)
   ((alive-list connection-minimap  :offset 24 :override)
    (dead-list  connection-minimap  :offset 28 :override)
    )
   :method-count-assert 15
   :size-assert         #x20
   :flag-assert         #xf00000020
-  )
+  )|#
 
 
   
