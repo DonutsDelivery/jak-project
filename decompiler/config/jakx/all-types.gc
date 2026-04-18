@@ -46085,7 +46085,7 @@
 
 
   
-#|(deftype powercell-dispenser-draw (powerup-draw)
+(deftype powercell-dispenser-draw (powerup-draw)
   ((subdraw uint64  :offset-assert 264)
    )
   :method-count-assert 58
@@ -46094,7 +46094,7 @@
   (:methods
     (powercell-dispenser-draw-method-57 () none) ;; 57
     )
-  )|#
+  )
   
 
 
