@@ -51361,6 +51361,7 @@
   :method-count-assert 9
   :size-assert         #x50
   :flag-assert         #x900000050
+  :allow-misaligned
   )
 
 
@@ -57798,14 +57799,14 @@
 
 
   
-#|(deftype customize-main-dropdown-item (dropdown-item)
+(deftype customize-main-dropdown-item (dropdown-item)
   ((orig-3d-offset vector :inline :offset-assert 592)
    (offset-targ    vector :inline :offset-assert 608)
    )
   :method-count-assert 70
   :size-assert         #x270
   :flag-assert         #x4601e00270
-  )|#
+  )
   
 
 
@@ -57822,14 +57823,14 @@
 
 
   
-#|(deftype customize-vs-dropdown-item (dropdown-item)
+(deftype customize-vs-dropdown-item (dropdown-item)
   ((orig-3d-offset vector :inline :offset-assert 592)
    (offset-targ    vector :inline :offset-assert 608)
    )
   :method-count-assert 70
   :size-assert         #x270
   :flag-assert         #x4601e00270
-  )|#
+  )
   
 
 
@@ -57846,7 +57847,7 @@
 
 
   
-#|(deftype customize-bp-dropdown-item (dropdown-item)
+(deftype customize-bp-dropdown-item (dropdown-item)
   ((orig-3d-offset vector :inline :offset-assert 592)
    (offset-targ    vector :inline :offset-assert 608)
    (load-part?     basic          :offset-assert 624)
@@ -57854,7 +57855,7 @@
   :method-count-assert 70
   :size-assert         #x274
   :flag-assert         #x4601f00274
-  )|#
+  )
   
 
 
@@ -57890,12 +57891,12 @@
 
 
   
-#|(deftype upgrade-dropdown-item (dropdown-item)
+(deftype upgrade-dropdown-item (dropdown-item)
   ()
   :method-count-assert 70
   :size-assert         #x250
   :flag-assert         #x4601c00250
-  )|#
+  )
   
 
 
@@ -58200,12 +58201,12 @@
 
 
   
-#|(deftype edit-account-selection-manager (selection-menu-manager)
+(deftype edit-account-selection-manager (selection-menu-manager)
   ()
   :method-count-assert 67
   :size-assert         #x224
   :flag-assert         #x4301a00224
-  )|#
+  )
   
 
 
@@ -58229,34 +58230,34 @@
 
 
   
-#|(deftype dropdown-button (dropdown-item)
+(deftype dropdown-button (dropdown-item)
   ()
   :method-count-assert 70
   :size-assert         #x250
   :flag-assert         #x4601c00250
-  )|#
+  )
   
 
 
 
   
-#|(deftype non-accepting-item-list-selection (item-list-selection)
+(deftype non-accepting-item-list-selection (item-list-selection)
   ()
   :method-count-assert 70
   :size-assert         #x25c
   :flag-assert         #x4601d0025c
-  )|#
+  )
   
 
 
 
   
-#|(deftype scrolling-universe-item (scrolling-item)
+(deftype scrolling-universe-item (scrolling-item)
   ()
   :method-count-assert 69
   :size-assert         #x238
   :flag-assert         #x4501b00238
-  )|#
+  )
   
 
 
