@@ -46626,7 +46626,7 @@
 
 
   
-#|(deftype net-simple-destruct (process-focusable)
+(deftype net-simple-destruct (process-focusable)
   ((hit-points         float          :offset-assert 256)
    (incoming-attack-id int32          :offset-assert 260)
    (impact-velocity    vector :inline :offset-assert 272)
@@ -46647,7 +46647,7 @@
     (net-simple-destruct-method-68 () none) ;; 68
     (net-simple-destruct-method-69 () none) ;; 69
     )
-  )|#
+  )
   
 
 
