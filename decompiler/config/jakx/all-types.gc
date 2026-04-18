@@ -17162,16 +17162,18 @@
 
 
   
-#|(deftype texture-page-dir (basic)
-  ()
+(deftype texture-page-dir (basic)
+  ((length  int32                       :offset-assert 4)
+   (entries texture-page-dir-entry 1 :inline :offset-assert 8)
+   )
   :method-count-assert 11
   :size-assert         #x14
   :flag-assert         #xb00000014
   (:methods
-    (texture-page-dir-method-9 () none) ;; 9 ;; (unlink-shaders-in-heap (_type_ kheap) int)
+    (unlink-shaders-in-heap (_type_ kheap) int) ;; 9
     (texture-page-dir-method-10 () none) ;; 10
     )
-  )|#
+  )
   
 
 
