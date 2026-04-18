@@ -37,6 +37,8 @@ RE_DEFTYPE_START = re.compile(
     r"^\s*(?:#\|\s*)?(?:;;\s*)?\(deftype\s+([\w<>!?:\-\+\*/=]+)\s*"
 )
 RE_PARENT = re.compile(r"\(deftype\s+\S+\s+\((\S+)\)")
+RE_DEFINE_EXTERN = re.compile(r"^\s*\(define-extern\s+([\w<>!?:\-\+\*/=]+)\s+\S+\s*\)")
+CLOBBER_THRESHOLD = 59000
 
 
 # ---------------------------------------------------------------------------
@@ -213,6 +215,45 @@ def pick_decomp_dir() -> Path:
     return DECOMP_PRIMARY
 
 
+def find_pending_clobbers(text: str, active_types: set[str]) -> set[str]:
+    """Return the set of type names that have an active (define-extern FOO ...)
+    at line > CLOBBER_THRESHOLD AND an active deftype earlier in the file.
+
+    An 'active' define-extern is one that is not line-commented (;;) and not
+    inside a block comment (#| ... |#).
+    """
+    lines = text.splitlines()
+
+    # Build block-comment map
+    in_block = [False] * len(lines)
+    block = False
+    for idx, raw in enumerate(lines):
+        if "#|" in raw:
+            after_open = raw.split("#|", 1)[1]
+            if "|#" in after_open:
+                in_block[idx] = True
+                continue
+            block = True
+        if block:
+            in_block[idx] = True
+            if "|#" in raw:
+                block = False
+
+    clobbered: set[str] = set()
+    for idx, raw in enumerate(lines):
+        lineno = idx + 1
+        if lineno <= CLOBBER_THRESHOLD:
+            continue
+        if in_block[idx]:
+            continue
+        if re.match(r"^\s*;;", raw):
+            continue
+        m = RE_DEFINE_EXTERN.match(raw)
+        if m and m.group(1) in active_types:
+            clobbered.add(m.group(1))
+    return clobbered
+
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -231,11 +272,16 @@ def main() -> int:
     decomp_dir = Path(args.decomp_out).resolve() if args.decomp_out else pick_decomp_dir()
 
     print(f"parsing {types_path.name}...")
-    all_types = parse_deftypes(types_path.read_text(errors="replace"))
+    types_text = types_path.read_text(errors="replace")
+    all_types = parse_deftypes(types_text)
     active = {n for n, v in all_types.items()
               if not v["commented"] and not v.get("block_commented")}
     commented_names = {n for n in all_types if n not in active}
     print(f"active={len(active)}  commented={len(commented_names)}")
+
+    # Find active types that are clobbered by a late define-extern
+    pending_clobbers = find_pending_clobbers(types_text, active)
+    print(f"pending-clobbers (active define-extern >L{CLOBBER_THRESHOLD}): {len(pending_clobbers)}")
 
     print("building clusters...")
     clusters = build_clusters(all_types)
@@ -284,6 +330,11 @@ def main() -> int:
                     c_unlock_set.add(ref_by)
         c_unlock = len(c_unlock_set)
 
+        # Count how many types in this cluster (including root) have pending clobbers
+        clobber_count = sum(
+            1 for t in cluster_types if t in pending_clobbers
+        ) + (1 if root in pending_clobbers else 0)
+
         ranked.append({
             "root": root,
             "size": size,
@@ -292,6 +343,8 @@ def main() -> int:
             "total_refs": total_refs,
             "ref_per_cost": ref_per_cost,
             "c_unlock": c_unlock,
+            "pending_clobber": clobber_count,
+            "root_clobbered": root in pending_clobbers,
             "types": info["types"],
             "depths": info["depths"],
         })
@@ -300,11 +353,13 @@ def main() -> int:
 
     # Console summary
     print(f"\nTop {min(args.top, len(ranked))} clusters by ref_per_cost:")
-    print(f"  {'root':<30} {'size':>5} {'depth':>5} {'f_refs':>6} {'t_refs':>6} {'r/cost':>7} {'c_unlock':>8}")
+    print(f"  {'root':<30} {'size':>5} {'depth':>5} {'f_refs':>6} {'t_refs':>6} {'r/cost':>7} {'c_unlock':>8} {'clobber':>7}")
     for r in ranked[: args.top]:
+        clob_flag = f"*{r['pending_clobber']}" if r["pending_clobber"] else "-"
         print(
             f"  {r['root']:<30} {r['size']:>5} {r['max_depth']:>5} "
-            f"{r['file_refs']:>6} {r['total_refs']:>6} {r['ref_per_cost']:>7.2f} {r['c_unlock']:>8}"
+            f"{r['file_refs']:>6} {r['total_refs']:>6} {r['ref_per_cost']:>7.2f} "
+            f"{r['c_unlock']:>8} {clob_flag:>7}"
         )
 
     if args.detail:
@@ -342,14 +397,20 @@ def main() -> int:
         "- **c_unlock** — unique commented types OUTSIDE this cluster that reference any type "
         "inside it (field types, method args, parent types). Activating this cluster resolves "
         "one dependency for each of these types — high c_unlock = cascade activation potential.",
+        "- **clobber** — number of types in this cluster (including root) that have an active "
+        "`(define-extern FOO object)` at line >59000. These will be re-clobbered at runtime "
+        "even after deftype activation — the clobber line must be commented out first. "
+        "`*N` = N types in cluster need clobber fix; `-` = clean.",
         "",
-        "| # | r/cost | root (active anchor) | size | depth | f_refs | t_refs | c_unlock |",
-        "|---|-------:|---------------------|-----:|------:|-------:|-------:|---------:|",
+        "| # | r/cost | root (active anchor) | size | depth | f_refs | t_refs | c_unlock | clobber |",
+        "|---|-------:|---------------------|-----:|------:|-------:|-------:|---------:|--------:|",
     ]
     for i, r in enumerate(ranked[: args.top], 1):
+        clob_cell = f"\\*{r['pending_clobber']}" if r["pending_clobber"] else "-"
         lines.append(
             f"| {i} | {r['ref_per_cost']:.2f} | `{r['root']}` | "
-            f"{r['size']} | {r['max_depth']} | {r['file_refs']} | {r['total_refs']} | {r['c_unlock']} |"
+            f"{r['size']} | {r['max_depth']} | {r['file_refs']} | {r['total_refs']} | "
+            f"{r['c_unlock']} | {clob_cell} |"
         )
 
     lines += [
@@ -361,14 +422,16 @@ def main() -> int:
         "",
     ]
     for r in ranked[:15]:
-        lines.append(f"### `{r['root']}` (size={r['size']}, depth={r['max_depth']}, f_refs={r['file_refs']}, c_unlock={r['c_unlock']})")
+        root_clob = " ⚠ root-clobbered" if r["root_clobbered"] else ""
+        lines.append(f"### `{r['root']}` (size={r['size']}, depth={r['max_depth']}, f_refs={r['file_refs']}, c_unlock={r['c_unlock']}, clobber={r['pending_clobber']}){root_clob}")
         lines.append("")
-        lines.append("| depth | type | file_refs |")
-        lines.append("|------:|------|----------:|")
+        lines.append("| depth | type | file_refs | clobber |")
+        lines.append("|------:|------|----------:|---------|")
         for t in sorted(r["types"], key=lambda t: (r["depths"][t], t)):
             d = r["depths"][t]
             fr = len(ref_index.get(t, set()))
-            lines.append(f"| {d} | `{t}` | {fr} |")
+            clob = "⚠" if t in pending_clobbers else ""
+            lines.append(f"| {d} | `{t}` | {fr} | {clob} |")
         lines.append("")
 
     lines += [
