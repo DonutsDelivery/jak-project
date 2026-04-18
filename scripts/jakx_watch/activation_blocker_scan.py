@@ -106,10 +106,24 @@ def parse_all_block_deftypes(text: str) -> list[dict]:
     return results
 
 
+# GOAL built-in types that are always active (no deftype in all-types.gc)
+BUILTIN_TYPES = frozenset({
+    "object", "structure", "basic", "string", "symbol", "type", "function",
+    "integer", "int", "uint", "int8", "int16", "int32", "int64", "int128",
+    "uint8", "uint16", "uint32", "uint64", "uint128", "float", "binteger",
+    "process", "process-tree", "dead-pool", "event-message-block",
+    "connectable", "drawable", "inline-array-class", "pair", "pointer",
+    "vu-function", "link-block", "kheap", "array", "stack-frame",
+    "file-stream", "protect-frame", "handle", "timer-frame", "cpu-thread",
+    "thread", "catch-frame", "throw-context", "dead-pool-allocator",
+    "none", "meters",
+})
+
+
 def build_active_set(text: str) -> set[str]:
     """Return set of type names that are active (not block-commented, not line-commented)."""
     lines = text.splitlines()
-    active = set()
+    active = set(BUILTIN_TYPES)
     in_block = [False] * len(lines)
     block = False
     for idx, line in enumerate(lines):
