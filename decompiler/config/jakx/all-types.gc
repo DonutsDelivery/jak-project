@@ -4870,9 +4870,9 @@
    (context     basic          :offset-assert 184)
    (text        basic          :offset-assert 188)
    )
-  :method-count-assert 16
+  :method-count-assert 21
   :size-assert         #xc0
-  :flag-assert         #x10003000c0
+  :flag-assert         #x15003000c0
   (:methods
     (hoff-text-floater-method-9 () none) ;; 9
     (hoff-text-floater-method-10 () none) ;; 10
@@ -6635,7 +6635,7 @@
 
 
   
-(deftype oil-emitter (process)
+#|(deftype oil-emitter (process)
   ((emitting            basic                 :offset-assert 144)
    (owning-vehicle      uint64                :offset-assert 152)
    (oil-trail           basic                 :offset-assert 160)
@@ -6665,20 +6665,20 @@
   (:state-methods
     emit-oil ;; 15
     )
-  )
+  )|#
   
 
 
 
   
-(deftype oil-flame-emitter (oil-emitter)
+#|(deftype oil-flame-emitter (oil-emitter)
   ((last-flame-spawn-pos vector :inline :offset-assert 304)
    (flame-distance-emit  float          :offset-assert 320)
    )
   :method-count-assert 19
   :size-assert         #x144
   :flag-assert         #x1300c00144
-  )
+  )|#
   
 
 
