@@ -72,6 +72,14 @@ def classify_drift(ref_text: str, dis_text: str) -> tuple[str, str]:
     """Classify the relationship between REF and disasm.
 
     Returns (category, reason_string).
+
+    Priority:
+    1. If unknowns INCREASED → regression (type went from defined → unknown).
+    2. If unknowns DECREASED (types improved) → stale_ref, even if errors also changed.
+       Unknown types are architecturally more important than per-function errors.
+    3. If unknowns unchanged but errors increased → regression.
+    4. If unknowns unchanged but errors decreased → stale_ref.
+    5. Fall back to quality score comparison.
     """
     if ref_text == dis_text:
         return "green", ""
@@ -85,19 +93,33 @@ def classify_drift(ref_text: str, dis_text: str) -> tuple[str, str]:
     ref_errors = len(RE_FUNCTION_NO_TYPE.findall(ref_text))
     dis_errors = len(RE_FUNCTION_NO_TYPE.findall(dis_text))
 
-    # Clear regression: disasm has more unknowns/errors than REF
-    if dis_unknowns > ref_unknowns or dis_errors > ref_errors:
+    # Unknown types going UP = regression (types were known, now aren't)
+    if dis_unknowns > ref_unknowns:
         reason = (
-            f"disasm has more unknowns ({dis_unknowns} vs {ref_unknowns}) "
-            f"or errors ({dis_errors} vs {ref_errors})"
+            f"unknown types increased {ref_unknowns} → {dis_unknowns}; "
+            f"errors {ref_errors} → {dis_errors}"
         )
         return "regression", reason
 
-    # Clear improvement: disasm has fewer unknowns/errors → stale REF
-    if dis_unknowns < ref_unknowns or dis_errors < ref_errors:
+    # Unknown types going DOWN = improvement in types (stale REF) even if errors also changed
+    if dis_unknowns < ref_unknowns:
         reason = (
-            f"disasm has fewer unknowns ({dis_unknowns} vs {ref_unknowns}) "
-            f"or errors ({dis_errors} vs {ref_errors}) — REF needs update"
+            f"unknown types improved {ref_unknowns} → {dis_unknowns}; "
+            f"errors {ref_errors} → {dis_errors} — REF needs update"
+        )
+        return "stale_ref", reason
+
+    # Unknowns unchanged: use errors as signal
+    if dis_errors > ref_errors:
+        reason = (
+            f"function errors increased {ref_errors} → {dis_errors} "
+            f"(unknowns unchanged at {dis_unknowns})"
+        )
+        return "regression", reason
+
+    if dis_errors < ref_errors:
+        reason = (
+            f"function errors improved {ref_errors} → {dis_errors} — REF needs update"
         )
         return "stale_ref", reason
 
