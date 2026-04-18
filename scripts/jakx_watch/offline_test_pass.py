@@ -107,8 +107,11 @@ def _scan_all_types_static(all_types_path: Path) -> list[str]:
           Crash: "Type X is unknown" SIGABRT at decompiler startup.
       (b) Active deftypes whose parent type is block-commented.
           Crash: same "Type X is unknown" SIGABRT.
+      (c) Active deftypes whose parent is active but defined LATER in the file
+          (forward-reference ordering).  The GOAL reader processes the file
+          top-to-bottom; a child before its parent crashes identically to (b).
 
-    Method-count mismatches (c) require the compiled binary and are detected
+    Method-count mismatches (d) require the compiled binary and are detected
     by the runtime preflight.
     """
     if not all_types_path.exists():
@@ -148,6 +151,22 @@ def _scan_all_types_static(all_types_path: Path) -> list[str]:
                     f"[parent-gap] '{child}' active but parent '{parent}' is"
                     f" block-commented — all-types.gc:{lineno}"
                 )
+
+    # (c) Active deftypes whose parent is active but defined later (forward-ref ordering).
+    # Walk active text line-by-line tracking which types have been defined so far.
+    # A child that references a not-yet-defined parent crashes the same as (b).
+    defined_so_far: set[str] = set(_GOAL_BUILTIN_TYPES)
+    for lineno, line in enumerate(lines, 1):
+        m = parent_re.search(line)
+        if m:
+            child, parent = m.group(1), m.group(2)
+            if parent not in defined_so_far and parent not in commented:
+                # parent is active (not commented) but not yet seen — forward ref
+                blockers.append(
+                    f"[forward-ref] '{child}' active at line {lineno} but parent"
+                    f" '{parent}' defined later — add declare-type or reorder"
+                )
+            defined_so_far.add(child)
 
     # (a) Active fields with ':inline TYPE' where TYPE is block-commented.
     # Field syntax variants:
