@@ -45783,7 +45783,7 @@
 
 
   
-#|(deftype powerup-draw (process-drawable)
+(deftype powerup-draw (process-drawable)
   ((parent-proc uint64  :offset-assert 248)
    (glow-sound  basic   :offset-assert 256)
    (part-time   int32   :offset-assert 260)
@@ -45800,7 +45800,7 @@
     (powerup-draw-method-55 () none) ;; 55
     (powerup-draw-method-56 () none) ;; 56
     )
-  )|#
+  )
   
 
 
@@ -59343,13 +59343,7 @@
   :flag-assert         #x900000004
   )
 
-;; powerup-draw stub
-(deftype powerup-draw (process-drawable)
-  ()
-  :method-count-assert 50
-  :size-assert         #xf8
-  :flag-assert         #x32007000f8
-  )
+;; powerup-draw stub superseded by full definition at L45786
 
 ;; net-simple-destruct stub
 (deftype net-simple-destruct (process-focusable)
