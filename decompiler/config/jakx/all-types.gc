@@ -59345,13 +59345,7 @@
 
 ;; powerup-draw stub superseded by full definition at L45786
 
-;; net-simple-destruct stub
-(deftype net-simple-destruct (process-focusable)
-  ()
-  :method-count-assert 59
-  :size-assert         #x100
-  :flag-assert         #x3b00700100
-  )
+;; net-simple-destruct stub superseded by full definition at L46629
 
 ;; eco full definition (upgraded stub → 56 methods with 6 method slots)
 (deftype eco (process-drawable)
