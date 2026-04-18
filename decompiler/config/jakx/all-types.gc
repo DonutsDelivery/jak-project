@@ -60013,6 +60013,8 @@
 (define-extern net-color-array object)
 (define-extern net-type-field object)
 (define-extern oil-slick object)
+(define-extern oil-emitter object)
+(define-extern oil-flame-emitter object)
 (define-extern sprite-menu-info object)
 (define-extern text-display-supernova-backfire-view-1 object)
 (define-extern tread-trail-tracker object)
