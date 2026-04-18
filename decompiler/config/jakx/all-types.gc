@@ -58916,23 +58916,21 @@
 
 ;; touching-prims-entry-pool — full definition above at L30303
 
-;; touching-list stub (real deftype has :inline 16-byte alignment issue at offset 8)
+;; touching-list — 5 new methods (9-13), new overrides slot 0, total=14
 (deftype touching-list (structure)
-  ((num-touching-shapes  int32)
-   (resolve-u            int8)
-   (pad0                 uint8 3 :offset-assert 5)
-   (touching-shapes      uint8 :offset-assert 8)
+  ((num-touching-shapes  int32  :offset-assert 0)
+   (resolve-u            int8   :offset-assert 4)
    )
-  :method-count-assert 15
-  :size-assert         #x9
-  :flag-assert         #xf00000009
+  :method-count-assert 14
+  :size-assert         #x5
+  :flag-assert         #xe00000005
   (:methods
-    (new (symbol type) _type_) ;; 9
-    (add-touching-prims (_type_ object object float object object) none) ;; 10
-    (free-nodes (_type_) none) ;; 11
-    (update-from-step-size (_type_ float) none) ;; 12
-    (send-events-for-touching-shapes (_type_) none) ;; 13
-    (get-shapes-entry (_type_ object object) object) ;; 14
+    (new (symbol type) _type_) ;; 0
+    (add-touching-prims (_type_ object object float object object) none) ;; 9
+    (free-nodes (_type_) none) ;; 10
+    (update-from-step-size (_type_ float) none) ;; 11
+    (send-events-for-touching-shapes (_type_) none) ;; 12
+    (get-shapes-entry (_type_ object object) object) ;; 13
     )
   )
 
