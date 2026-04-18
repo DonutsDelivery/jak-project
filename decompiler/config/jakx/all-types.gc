@@ -39799,13 +39799,13 @@
   
 (deftype sound-on-path (process-drawable)
   ((flags           uint8          :offset-assert 248)
-   (spawn-sound     uint128        :offset-assert 256) ;; sound-name
-   (loop-sound      uint32         :offset-assert 276)
-   (amb-sound       ambient-sound  :offset-assert 280) ;; guessed by decompiler
-   (reverb-value    float          :offset-assert 284)
-   (reverb-radius   float          :offset-assert 288)
-   (reverb-radius-y float          :offset-assert 292)
-   (reverb-mode     int32          :offset-assert 296)
+   (spawn-sound     uint128        :offset 256) ;; sound-name
+   (loop-sound      uint32         :offset 276)
+   (amb-sound       ambient-sound  :offset 280)
+   (reverb-value    float          :offset 284)
+   (reverb-radius   float          :offset 288)
+   (reverb-radius-y float          :offset 292)
+   (reverb-mode     int32          :offset 296)
    )
   :method-count-assert 53
   :size-assert         #x12c
@@ -55786,7 +55786,7 @@
 
 
   
-#|(deftype kras-pump-break-proxy (process-focusable)
+(deftype kras-pump-break-proxy (process-focusable)
   ((actor-group       uint32         :offset-assert 256)
    (actor-group-count int32          :offset-assert 260)
    (impact-velocity   vector :inline :offset-assert 272)
@@ -55797,17 +55797,17 @@
   :method-count-assert 65
   :size-assert         #x130
   :flag-assert         #x4100a00130
+  (:state-methods
+    idle ;; 59
+    explode ;; 60
+    )
   (:methods
     (kras-pump-break-proxy-method-61 () none) ;; 61
     (kras-pump-break-proxy-method-62 () none) ;; 62
     (kras-pump-break-proxy-method-63 () none) ;; 63
     (kras-pump-break-proxy-method-64 () none) ;; 64
     )
-  (:state-methods
-    idle ;; 59
-    explode ;; 60
-    )
-  )|#
+  )
   
 
 
