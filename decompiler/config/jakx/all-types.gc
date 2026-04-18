@@ -20,7 +20,6 @@
 (define-extern medius-machine-signature-post type)
 (define-extern medius-version-server-request type)
 (define-extern net-connection-info type)
-(define-extern index-sprite-list-menu-info object)
 
 ;; Auto-extern batch 22
 (define-extern medius-account-registration-request type)
@@ -30,7 +29,6 @@
 (define-extern medius-get-lobby-player-names-response type)
 (define-extern medius-modify-clan-message-request type)
 (define-extern medius-version-server-response type)
-(define-extern index-sprite-list-menu object)
 (define-extern net-connect-in-params object)
 
 ;; Auto-extern batch 23 — unblocking top unknown-symbol warnings
@@ -47331,17 +47329,18 @@
 
 
   
-#|(deftype dropdown-item-info (string-menu-info)
-  ((trans-info                  dropdown-trans-info         :offset-assert 16)
+(deftype dropdown-item-info (string-menu-info)
+  ((trans-info                  dropdown-trans-info         :offset 16)
    (selection-box-width         int32                       :offset-assert 68)
    (selection-box-height        int32                       :offset-assert 72)
    (selection-type              basic                       :offset-assert 76)
    (selection-extra             int32                       :offset-assert 80)
-   (selection-box-offset        vector              :inline :offset-assert 96)
-   (selection-box-offset-x      float                       :offset-assert 96)
-   (selection-box-offset-y      float                       :offset-assert 100)
-   (selection-box-offset-z      float                       :offset-assert 104)
-   (selection-box-offset-w      float                       :offset-assert 108)
+   (pad84                       uint32 3                    :offset-assert 84)
+   (selection-box-offset        vector              :inline :offset 96)
+   (selection-box-offset-x      float                       :offset 96)
+   (selection-box-offset-y      float                       :offset 100)
+   (selection-box-offset-z      float                       :offset 104)
+   (selection-box-offset-w      float                       :offset 108)
    (selection-box-color         uint32                      :offset-assert 112)
    (down-index-modifier         int8                        :offset-assert 116)
    (up-index-modifier           int8                        :offset-assert 117)
@@ -47353,7 +47352,7 @@
   :method-count-assert 9
   :size-assert         #x7a
   :flag-assert         #x90000007a
-  )|#
+  )
   
 
 
@@ -59833,7 +59832,7 @@
 (define-extern v-wpn-red-drone-gun object)
 (define-extern v-wpn-yellow-guided-missile object)
 (define-extern water-flow object)
-(define-extern weapon-trail-crumb object)
+;; weapon-trail-crumb activated earlier in file
 (define-extern work-area object)
 
 ;; Auto-extern batch 6
@@ -59890,7 +59889,7 @@
 (define-extern selection-menu-manager object)
 (define-extern strip-segment object)
 (define-extern text-display-deflected-view-2 object)
-(define-extern tread-trail-crumb object)
+;; tread-trail-crumb activated earlier in file
 
 ;; Auto-extern batch 8
 (define-extern editable-plane object)
