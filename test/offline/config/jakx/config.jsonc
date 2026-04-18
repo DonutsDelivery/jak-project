@@ -39,7 +39,11 @@
     "mood-tables",
     // jakx: (set! a1-0 L440) raw label ref in (method inspect mysql-nav-graph).
     // Content matches REF; goalc can't resolve label symbol.
-    "mysql-nav-graph"
+    "mysql-nav-graph",
+    // jakx: L13/L14 raw label refs (same static-ref pattern as mood-tables).
+    "file-io",
+    "game-info-h",
+    "net-mgr-medius-players-h"
   ],
 
   // Skip goalc-compiling these specific functions/methods inside otherwise-good files.

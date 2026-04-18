@@ -51744,9 +51744,9 @@
    (default-edge        mysql-nav-edge          :inline :offset-assert 396)
    (command-array       nav-graph-command-array         :offset-assert 472) ;; guessed by decompiler
    )
-  :method-count-assert 69
+  :method-count-assert 74
   :size-assert         #x1dc
-  :flag-assert         #x45015001dc
+  :flag-assert         #x4a015001dc
   (:methods
     (nav-graph-editor-method-9 () none) ;; 9
     (nav-graph-editor-method-10 () none) ;; 10
