@@ -27661,7 +27661,7 @@
 
 
   
-#|(deftype net-lanfind-exchange-callback-in-args (structure)
+(deftype net-lanfind-exchange-callback-in-args (structure)
   ((connection-handle basic                    :offset-assert 0)
    (session-type      int32                    :offset-assert 4)
    (peer-desc         net-lanpeer-desc :inline :offset-assert 8)
@@ -27671,14 +27671,13 @@
   :method-count-assert 9
   :size-assert         #xb8
   :flag-assert         #x9000000b8
-  ;; field connection-handle uses ~A with a signed load. field p-user-data uses ~A with a signed load.
-  )|#
+  )
   
 
 
 
   
-#|(deftype net-lanfind-callback-data-args (structure)
+(deftype net-lanfind-callback-data-args (structure)
   ((n-num-clients     int16                    :offset-assert 0)
    (n-max-num-clients int16                    :offset-assert 2)
    (session-type      int32                    :offset-assert 4)
@@ -27689,8 +27688,7 @@
   :method-count-assert 9
   :size-assert         #xb8
   :flag-assert         #x9000000b8
-  ;; field p-user-data uses ~A with a signed load.
-  )|#
+  )
   
 
 
@@ -58041,13 +58039,13 @@
 
 
   
-#|(deftype scrolling-menu-player (scrolling-menu-medius)
+(deftype scrolling-menu-player (scrolling-menu-medius)
   ((players medius-cache-index-array  :offset-assert 624)
    )
   :method-count-assert 79
   :size-assert         #x274
   :flag-assert         #x4f01f00274
-  )|#
+  )
   
 
 
@@ -58064,12 +58062,7 @@
 
 
   
-#|(deftype scrolling-menu-room (scrolling-menu-medius)
-  ()
-  :method-count-assert 79
-  :size-assert         #x270
-  :flag-assert         #x4f01e00270
-  )|#
+(deftype scrolling-menu-room (scrolling-menu-medius) () :method-count-assert 79 :size-assert #x270 :flag-assert #x4f01e00270)
   
 
 
@@ -58088,12 +58081,7 @@
 
 
   
-#|(deftype scrolling-menu-game (scrolling-menu-medius)
-  ()
-  :method-count-assert 79
-  :size-assert         #x270
-  :flag-assert         #x4f01e00270
-  )|#
+(deftype scrolling-menu-game (scrolling-menu-medius) () :method-count-assert 79 :size-assert #x270 :flag-assert #x4f01e00270)
   
 
 
@@ -58145,7 +58133,7 @@
 
 
   
-#|(deftype scrolling-menu-stats (scrolling-menu-medius)
+(deftype scrolling-menu-stats (scrolling-menu-medius)
   ((stats         basic  :offset-assert 624)
    (info-array    basic  :offset-assert 628)
    (show-vehicles basic  :offset-assert 632)
@@ -58156,7 +58144,7 @@
   (:methods
     (scrolling-menu-stats-method-79 () none) ;; 79
     )
-  )|#
+  )
   
 
 
@@ -58173,12 +58161,7 @@
 
 
   
-#|(deftype scrolling-menu-ladder (scrolling-menu-medius)
-  ()
-  :method-count-assert 79
-  :size-assert         #x270
-  :flag-assert         #x4f01e00270
-  )|#
+(deftype scrolling-menu-ladder (scrolling-menu-medius) () :method-count-assert 79 :size-assert #x270 :flag-assert #x4f01e00270)
   
 
 
@@ -58511,12 +58494,7 @@
 
 
   
-#|(deftype scrolling-menu-incoming-clan-invite (scrolling-menu-medius)
-  ()
-  :method-count-assert 79
-  :size-assert         #x270
-  :flag-assert         #x4f01e00270
-  )|#
+(deftype scrolling-menu-incoming-clan-invite (scrolling-menu-medius) () :method-count-assert 79 :size-assert #x270 :flag-assert #x4f01e00270)
   
 
 
@@ -58534,12 +58512,7 @@
 
 
   
-#|(deftype scrolling-menu-recent-clan (scrolling-menu-medius)
-  ()
-  :method-count-assert 79
-  :size-assert         #x270
-  :flag-assert         #x4f01e00270
-  )|#
+(deftype scrolling-menu-recent-clan (scrolling-menu-medius) () :method-count-assert 79 :size-assert #x270 :flag-assert #x4f01e00270)
   
 
 
@@ -58557,12 +58530,7 @@
 
 
   
-#|(deftype scrolling-menu-clan-challenge (scrolling-menu-medius)
-  ()
-  :method-count-assert 79
-  :size-assert         #x270
-  :flag-assert         #x4f01e00270
-  )|#
+(deftype scrolling-menu-clan-challenge (scrolling-menu-medius) () :method-count-assert 79 :size-assert #x270 :flag-assert #x4f01e00270)
   
 
 
