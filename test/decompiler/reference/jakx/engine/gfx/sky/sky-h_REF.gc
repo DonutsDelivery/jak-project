@@ -25,83 +25,20 @@
   this
   )
 
-;; definition of type sky-color-day
-(deftype sky-color-day (structure)
-  ((hour  sky-color-hour  24 :inline)
-   )
-  )
+;; type sky-color-day is defined here, but it is unknown to the decompiler
 
-;; definition for method 3 of type sky-color-day
-(defmethod inspect ((this sky-color-day))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this 'sky-color-day)
-  (format #t "~1Thour[24] @ #x~X~%" (-> this hour))
-  (label cfg-4)
-  this
-  )
+;; failed to figure out what this is:
+(method-set! (the-as type sky-color-day) 3 L38)
 
-;; definition of type sky-sun-data
-(deftype sky-sun-data (structure)
-  ((data            uint128  4)
-   (pos             vector   :inline :overlay-at (-> data 0))
-   (r-sun           float            :overlay-at (-> data 1))
-   (r-halo          float            :offset  20)
-   (r-aurora        float            :offset  24)
-   (c-sun-start     rgba             :overlay-at (-> data 2))
-   (c-sun-end       rgba             :overlay-at (-> data 3))
-   (c-halo-start    rgba             :offset  36)
-   (c-halo-end      rgba             :offset  52)
-   (c-aurora-start  rgba             :offset  40)
-   (c-aurora-end    rgba             :offset  56)
-   )
-  )
+;; type sky-sun-data is defined here, but it is unknown to the decompiler
 
-;; definition for method 3 of type sky-sun-data
-(defmethod inspect ((this sky-sun-data))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this 'sky-sun-data)
-  (format #t "~1Tdata[4] @ #x~X~%" (-> this data))
-  (format #t "~1Tpos: #<vector @ #x~X>~%" (-> this data))
-  (format #t "~1Tr-sun: ~f~%" (-> this r-sun))
-  (format #t "~1Tr-halo: ~f~%" (-> this r-halo))
-  (format #t "~1Tr-aurora: ~f~%" (-> this r-aurora))
-  (format #t "~1Tc-sun-start: ~D~%" (-> this c-sun-start))
-  (format #t "~1Tc-sun-end: ~D~%" (-> this c-sun-end))
-  (format #t "~1Tc-halo-start: ~D~%" (-> this c-halo-start))
-  (format #t "~1Tc-halo-end: ~D~%" (-> this c-halo-end))
-  (format #t "~1Tc-aurora-start: ~D~%" (-> this c-aurora-start))
-  (format #t "~1Tc-aurora-end: ~D~%" (-> this c-aurora-end))
-  (label cfg-4)
-  this
-  )
+;; failed to figure out what this is:
+(method-set! (the-as type sky-sun-data) 3 L35)
 
-;; definition of type sky-moon-data
-(deftype sky-moon-data (structure)
-  ((data   uint128  2)
-   (pos    vector   :inline :overlay-at (-> data 0))
-   (scale  vector   :inline :overlay-at (-> data 1))
-   )
-  )
+;; type sky-moon-data is defined here, but it is unknown to the decompiler
 
-;; definition for method 3 of type sky-moon-data
-(defmethod inspect ((this sky-moon-data))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this 'sky-moon-data)
-  (format #t "~1Tdata[2] @ #x~X~%" (-> this data))
-  (format #t "~1Tpos: #<vector @ #x~X>~%" (-> this data))
-  (format #t "~1Tscale: #<vector @ #x~X>~%" (-> this scale))
-  (label cfg-4)
-  this
-  )
+;; failed to figure out what this is:
+(method-set! (the-as type sky-moon-data) 3 L32)
 
 ;; definition of type sky-orbit
 (deftype sky-orbit (structure)
@@ -131,27 +68,10 @@
   this
   )
 
-;; definition of type sky-upload-data
-(deftype sky-upload-data (structure)
-  ((data  uint128        12)
-   (sun   sky-sun-data   2 :inline :overlay-at (-> data 0))
-   (moon  sky-moon-data  :inline   :overlay-at (-> data 8))
-   )
-  )
+;; type sky-upload-data is defined here, but it is unknown to the decompiler
 
-;; definition for method 3 of type sky-upload-data
-(defmethod inspect ((this sky-upload-data))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this 'sky-upload-data)
-  (format #t "~1Tdata[12] @ #x~X~%" (-> this data))
-  (format #t "~1Tsun[2] @ #x~X~%" (-> this data))
-  (format #t "~1Tmoon: #<sky-moon-data @ #x~X>~%" (-> this moon))
-  (label cfg-4)
-  this
-  )
+;; failed to figure out what this is:
+(method-set! (the-as type sky-upload-data) 3 L26)
 
 ;; definition of type sky-vertex
 (deftype sky-vertex (structure)
@@ -218,6 +138,7 @@
 
 ;; type cloud-vert-array is defined here, but it is unknown to the decompiler
 
+;; failed to figure out what this is:
 (method-set! (the-as type cloud-vert-array) 3 L16)
 
 ;; definition of type haze-vertex
@@ -244,6 +165,7 @@
 
 ;; type haze-vert-array is defined here, but it is unknown to the decompiler
 
+;; failed to figure out what this is:
 (method-set! (the-as type haze-vert-array) 3 L10)
 
 ;; definition of type cloud-lights
@@ -324,7 +246,11 @@
 
 ;; type sky-work is defined here, but it is unknown to the decompiler
 
+;; failed to figure out what this is:
 (method-set! (the-as type sky-work) 3 L1)
+
+;; failed to figure out what this is:
+0
 
 
 

@@ -217,6 +217,7 @@
   )
 
 ;; definition for function camera-teleport-to-entity-named
+;; WARN: Return type mismatch int vs none.
 (defun camera-teleport-to-entity-named ((arg0 string))
   (let ((a0-3 (as-type (entity-by-name arg0) entity-actor)))
     (if a0-3
@@ -225,9 +226,11 @@
         )
     )
   0
+  (none)
   )
 
 ;; definition for function camera-teleport-to-location
+;; WARN: Return type mismatch int vs none.
 (defun camera-teleport-to-location ((arg0 float) (arg1 float) (arg2 float))
   (let ((gp-0 (new 'stack-no-clear 'transformq)))
     (set-vector! (-> gp-0 trans) (* 4096.0 arg0) (* 4096.0 arg1) (* 4096.0 arg2) 1.0)
@@ -236,6 +239,7 @@
     (send-event (view-get-active-camera) 'teleport-to-transformq gp-0)
     )
   0
+  (none)
   )
 
 

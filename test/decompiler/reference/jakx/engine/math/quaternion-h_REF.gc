@@ -37,6 +37,9 @@
 ;; definition for symbol *unity-quaternion*, type quaternion
 (define *unity-quaternion* (new 'static 'quaternion :w 1.0))
 
+;; failed to figure out what this is:
+0
+
 
 
 

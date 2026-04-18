@@ -30,6 +30,7 @@
   this
   )
 
+;; failed to figure out what this is:
 (set! (-> ripple-merc-query heap-base) (the-as uint 16))
 
 ;; definition of type merc-byte-header
@@ -398,7 +399,7 @@
    (extra-info           merc-extra-info)
    )
   (:methods
-    (merc-effect-method-9 (_type_) none)
+    (merc-effect-method-9 () none)
     )
   )
 
@@ -894,6 +895,9 @@ Consists of a header and a list of [[merc-effect]]s."
   (label cfg-4)
   this
   )
+
+;; failed to figure out what this is:
+0
 
 
 

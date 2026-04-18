@@ -21,181 +21,35 @@
   this
   )
 
-;; definition of type shrub-view-data
-(deftype shrub-view-data (structure)
-  ((data            uint128  3       :offset   0)
-   (texture-giftag  qword    :inline :overlay-at (-> data 0))
-   (consts          vector   :inline :overlay-at (-> data 1))
-   (fog-clamp       vector   :inline :overlay-at (-> data 2))
-   (tex-start-ptr   int32            :overlay-at (-> data 1))
-   (gifbufsum       float            :overlay-at tex-start-ptr)
-   (mtx-buf-ptr     int32            :overlay-at (-> consts y))
-   (exp23           float            :overlay-at mtx-buf-ptr)
-   (fog-0           float            :overlay-at (-> consts z))
-   (fog-1           float            :overlay-at (-> consts w))
-   (fog-min         float            :overlay-at (-> data 2))
-   (fog-max         float            :overlay-at (-> fog-clamp y))
-   )
-  )
+;; type shrub-view-data is defined here, but it is unknown to the decompiler
 
-;; definition for method 3 of type shrub-view-data
-(defmethod inspect ((this shrub-view-data))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this 'shrub-view-data)
-  (format #t "~1Tdata[3] @ #x~X~%" (-> this data))
-  (format #t "~1Ttexture-giftag: #<qword @ #x~X>~%" (-> this data))
-  (format #t "~1Tconsts: #<vector @ #x~X>~%" (-> this consts))
-  (format #t "~1Tfog-clamp: #<vector @ #x~X>~%" (-> this fog-clamp))
-  (format #t "~1Ttex-start-ptr: ~D~%" (-> this consts x))
-  (format #t "~1Tgifbufsum: ~f~%" (-> this consts x))
-  (format #t "~1Tmtx-buf-ptr: ~D~%" (-> this consts y))
-  (format #t "~1Texp23: ~f~%" (-> this consts y))
-  (format #t "~1Tfog-0: ~f~%" (-> this consts z))
-  (format #t "~1Tfog-1: ~f~%" (-> this consts w))
-  (format #t "~1Tfog-min: ~f~%" (-> this fog-clamp x))
-  (format #t "~1Tfog-max: ~f~%" (-> this fog-clamp y))
-  (label cfg-4)
-  this
-  )
+;; failed to figure out what this is:
+(method-set! (the-as type shrub-view-data) 3 L28)
 
-;; definition of type shrubbery
-(deftype shrubbery (drawable)
-  ((textures  (inline-array adgif-shader)  :overlay-at id)
-   (header    qword                        :offset   8)
-   (obj-qwc   uint8                        :offset  12)
-   (vtx-qwc   uint8                        :offset  13)
-   (col-qwc   uint8                        :offset  14)
-   (stq-qwc   uint8                        :offset  15)
-   (obj       uint32                       :overlay-at (-> bsphere data 0))
-   (vtx       uint32                       :overlay-at (-> bsphere data 1))
-   (col       uint32                       :overlay-at (-> bsphere data 2))
-   (stq       uint32                       :overlay-at (-> bsphere data 3))
-   )
-  )
+;; type shrubbery is defined here, but it is unknown to the decompiler
 
 ;; definition for method 3 of type shrubbery
-(defmethod inspect ((this shrubbery))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this (-> this type))
-  (format #t "~1Tid: ~D~%" (-> this id))
-  (format #t "~1Tbsphere: ~`vector`P~%" (-> this bsphere))
-  (format #t "~1Ttextures: #x~X~%" (-> this textures))
-  (format #t "~1Theader: #<qword @ #x~X>~%" (-> this header))
-  (format #t "~1Tobj-qwc: ~D~%" (-> this obj-qwc))
-  (format #t "~1Tvtx-qwc: ~D~%" (-> this vtx-qwc))
-  (format #t "~1Tcol-qwc: ~D~%" (-> this col-qwc))
-  (format #t "~1Tstq-qwc: ~D~%" (-> this stq-qwc))
-  (format #t "~1Tobj: #x~X~%" (-> this bsphere x))
-  (format #t "~1Tvtx: #x~X~%" (-> this bsphere y))
-  (format #t "~1Tcol: #x~X~%" (-> this bsphere z))
-  (format #t "~1Tstq: #x~X~%" (-> this bsphere w))
-  (label cfg-4)
-  this
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
-;; definition of type instance-shrubbery
-(deftype instance-shrubbery (instance)
-  "Instance of a shrub."
-  ((flat-normal  vector  :inline)
-   (flat-hwidth  float   :overlay-at (-> flat-normal data 3))
-   (color        uint32  :offset   8)
-   )
-  )
+;; type instance-shrubbery is defined here, but it is unknown to the decompiler
 
 ;; definition for method 3 of type instance-shrubbery
-(defmethod inspect ((this instance-shrubbery))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this (-> this type))
-  (format #t "~1Tid: ~D~%" (-> this id))
-  (format #t "~1Tbsphere: ~`vector`P~%" (-> this bsphere))
-  (format #t "~1Tbucket-index: ~D~%" (-> this bucket-index))
-  (format #t "~1Torigin: #<matrix4h @ #x~X>~%" (-> this origin))
-  (format #t "~1Tflags: ~D~%" (-> this flags))
-  (format #t "~1Twind-index: ~D~%" (-> this wind-index))
-  (format #t "~1Tflat-normal: #<vector @ #x~X>~%" (-> this flat-normal))
-  (format #t "~1Tflat-hwidth: ~f~%" (-> this flat-normal w))
-  (format #t "~1Tcolor: ~D~%" (-> this color))
-  (label cfg-4)
-  this
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
-;; definition of type drawable-inline-array-instance-shrub
-(deftype drawable-inline-array-instance-shrub (drawable-inline-array)
-  ()
-  )
+;; type drawable-inline-array-instance-shrub is defined here, but it is unknown to the decompiler
 
-;; definition of type drawable-tree-instance-shrub
-(deftype drawable-tree-instance-shrub (drawable-tree)
-  ()
-  )
+;; type drawable-tree-instance-shrub is defined here, but it is unknown to the decompiler
 
-;; definition of type generic-shrub-fragment
-(deftype generic-shrub-fragment (drawable)
-  "Shrub data, converted into the format for generic.
-The shrub renderer doesn't support clipping, so it falls back to generic.
-This requires storing the data for all shrubs prototype twice!"
-  ((textures  (inline-array adgif-shader)  :overlay-at id)
-   (vtx-cnt   uint32                       :offset   8)
-   (cnt-qwc   uint8                        :offset  12)
-   (vtx-qwc   uint8                        :offset  13)
-   (col-qwc   uint8                        :offset  14)
-   (stq-qwc   uint8                        :offset  15)
-   (cnt       uint32                       :overlay-at (-> bsphere data 0))
-   (vtx       uint32                       :overlay-at (-> bsphere data 1))
-   (col       uint32                       :overlay-at (-> bsphere data 2))
-   (stq       uint32                       :overlay-at (-> bsphere data 3))
-   )
-  )
+;; type generic-shrub-fragment is defined here, but it is unknown to the decompiler
 
 ;; definition for method 3 of type generic-shrub-fragment
-(defmethod inspect ((this generic-shrub-fragment))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this (-> this type))
-  (format #t "~1Tid: ~D~%" (-> this id))
-  (format #t "~1Tbsphere: ~`vector`P~%" (-> this bsphere))
-  (format #t "~1Ttextures: #x~X~%" (-> this textures))
-  (format #t "~1Tvtx-cnt: ~D~%" (-> this vtx-cnt))
-  (format #t "~1Tcnt-qwc: ~D~%" (-> this cnt-qwc))
-  (format #t "~1Tvtx-qwc: ~D~%" (-> this vtx-qwc))
-  (format #t "~1Tcol-qwc: ~D~%" (-> this col-qwc))
-  (format #t "~1Tstq-qwc: ~D~%" (-> this stq-qwc))
-  (format #t "~1Tcnt: #x~X~%" (-> this bsphere x))
-  (format #t "~1Tvtx: #x~X~%" (-> this bsphere y))
-  (format #t "~1Tcol: #x~X~%" (-> this bsphere z))
-  (format #t "~1Tstq: #x~X~%" (-> this bsphere w))
-  (label cfg-4)
-  this
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
-;; definition of type prototype-shrubbery
-(deftype prototype-shrubbery (drawable-inline-array)
-  "Array of shrub prototypes."
-  ((data  shrubbery  1 :inline)
-   (pad   uint32)
-   )
-  )
+;; type prototype-shrubbery is defined here, but it is unknown to the decompiler
 
-;; definition of type prototype-trans-shrubbery
-(deftype prototype-trans-shrubbery (prototype-shrubbery)
-  ()
-  )
+;; type prototype-trans-shrubbery is defined here, but it is unknown to the decompiler
 
-;; definition of type prototype-generic-shrub
-(deftype prototype-generic-shrub (drawable-group)
-  ()
-  )
+;; type prototype-generic-shrub is defined here, but it is unknown to the decompiler
 
 ;; definition of type shrubbery-matrix
 (deftype shrubbery-matrix (structure)
@@ -218,37 +72,7 @@ This requires storing the data for all shrubs prototype twice!"
   )
 
 ;; definition for function shrubbery-login-post-texture
-;; INFO: Used lq/sq
-(defun shrubbery-login-post-texture ((arg0 shrubbery))
-  (let* ((v1-1 (-> arg0 header data 0))
-         (a1-1 (the-as object (+ (the-as uint (-> arg0 header)) (* (+ (-> arg0 header data 1) 1) 16))))
-         (a2-5 (the-as object (+ (the-as int a1-1) (* v1-1 64))))
-         (a3-0 (the-as object (-> arg0 textures)))
-         )
-    (dotimes (a0-1 (the-as int v1-1))
-      (set! (-> (the-as qword a2-5) quad) (-> (the-as qword a3-0) quad))
-      (let ((a2-6 (the-as object (+ (the-as int a2-5) 16)))
-            (a3-1 (the-as object (&+ (the-as pointer a3-0) 16)))
-            )
-        (set! (-> (the-as qword a1-1) vector4w x) (the-as int (-> (the-as qword a3-1) data 0)))
-        (set! (-> (the-as qword a1-1) vector4w y) (the-as int (-> (the-as qword a3-1) data 1)))
-        (set! (-> (the-as qword a1-1) vector4w z) (the-as int (-> (the-as qword a3-1) data 2)))
-        (set! a1-1 (+ (the-as int a1-1) 16))
-        (let ((a3-2 (the-as object (&+ (the-as pointer a3-1) 16))))
-          (dotimes (t0-4 3)
-            (set! (-> (the-as qword a1-1) quad) (-> (the-as qword a3-2) quad))
-            (set! a1-1 (+ (the-as int a1-1) 16))
-            (set! a3-2 (&+ (the-as pointer a3-2) 16))
-            )
-          (set! (-> (the-as qword a2-6) quad) (-> (the-as qword a3-2) quad))
-          (set! a2-5 (+ (the-as int a2-6) 16))
-          (set! a3-0 (&+ (the-as pointer a3-2) 80))
-          )
-        )
-      )
-    )
-  #f
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
 ;; definition for symbol *shrub-state*, type int
 (define *shrub-state* 0)
@@ -287,6 +111,7 @@ This requires storing the data for all shrubs prototype twice!"
 
 ;; type instance-shrub-work is defined here, but it is unknown to the decompiler
 
+;; failed to figure out what this is:
 (method-set! (the-as type instance-shrub-work) 3 L10)
 
 ;; definition of type instance-shrub-dma
@@ -312,6 +137,9 @@ This requires storing the data for all shrubs prototype twice!"
   (label cfg-4)
   this
   )
+
+;; failed to figure out what this is:
+0
 
 
 

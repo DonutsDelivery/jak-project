@@ -100,12 +100,12 @@
    (speeches         speech-info  31)
    )
   (:methods
-    (speech-channel-method-9 (_type_ process-drawable speech-type) int)
-    (speech-channel-method-10 (_type_ handle) none)
-    (speech-channel-method-11 (_type_) none)
-    (speech-channel-method-12 (_type_) none)
-    (speech-channel-method-13 (_type_) int)
-    (speech-channel-method-14 (_type_ speech-type float) int)
+    (speech-channel-method-9 (_type_) none)
+    (speech-channel-method-10 () none)
+    (speech-channel-method-11 () none)
+    (speech-channel-method-12 () none)
+    (speech-channel-method-13 () none)
+    (speech-channel-method-14 () none)
     (speech-channel-method-15 () none)
     (speech-channel-method-16 () none)
     )
@@ -141,14 +141,14 @@
   ((channels  speech-channel  22 :inline)
    )
   (:methods
-    (speech-control-method-9 (_type_) int)
-    (speech-control-method-10 () int)
-    (speech-control-method-11 (_type_) none)
-    (speech-control-method-12 (_type_ process-drawable speech-type) int)
-    (speech-control-method-13 (_type_ process-drawable speech-type int) int)
-    (speech-control-method-14 (_type_ handle) int)
-    (speech-control-method-15 (_type_) int)
-    (speech-control-method-16 (_type_) none)
+    (speech-control-method-9 (_type_) none)
+    (speech-control-method-10 () none)
+    (speech-control-method-11 () none)
+    (speech-control-method-12 () none)
+    (speech-control-method-13 () none)
+    (speech-control-method-14 () none)
+    (speech-control-method-15 () none)
+    (speech-control-method-16 () none)
     )
   )
 
@@ -163,6 +163,9 @@
   (label cfg-4)
   this
   )
+
+;; failed to figure out what this is:
+0
 
 
 

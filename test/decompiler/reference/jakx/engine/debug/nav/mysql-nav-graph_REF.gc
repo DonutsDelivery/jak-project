@@ -1,0 +1,171 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; this file is debug only
+(declare-file (debug))
+
+;; type mysql-nav-node is defined here, but it is unknown to the decompiler
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-node) 3 L286)
+
+;; type mysql-nav-node-array is defined here, but it is unknown to the decompiler
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-node-array) 3 L283)
+
+;; failed to figure out what this is:
+(let ((v1-3 80)
+      (a0-4 mysql-nav-node-array)
+      )
+  (s.h! (+ a0-4 12) v1-3)
+  )
+
+;; type mysql-nav-edge is defined here, but it is unknown to the decompiler
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-edge) 3 L280)
+
+;; type mysql-nav-edge-array is defined here, but it is unknown to the decompiler
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-edge-array) 3 L277)
+
+;; failed to figure out what this is:
+(let ((v1-6 80)
+      (a0-9 mysql-nav-edge-array)
+      )
+  (s.h! (+ a0-9 12) v1-6)
+  )
+
+;; type mysql-nav-visnode is defined here, but it is unknown to the decompiler
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-visnode) 3 L274)
+
+;; type mysql-nav-visnode-array is defined here, but it is unknown to the decompiler
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-visnode-array) 3 L271)
+
+;; failed to figure out what this is:
+(let ((v1-9 32)
+      (a0-14 mysql-nav-visnode-array)
+      )
+  (s.h! (+ a0-14 12) v1-9)
+  )
+
+;; definition of type mysql-nav-pov-conn
+(deftype mysql-nav-pov-conn (structure)
+  ((runtime-node-id-1  int32)
+   (runtime-node-id-2  int32)
+   )
+  )
+
+;; definition for method 3 of type mysql-nav-pov-conn
+(defmethod inspect ((this mysql-nav-pov-conn))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'mysql-nav-pov-conn)
+  (format #t "~1Truntime-node-id-1: ~D~%" (-> this runtime-node-id-1))
+  (format #t "~1Truntime-node-id-2: ~D~%" (-> this runtime-node-id-2))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type mysql-nav-graph-level-info
+(deftype mysql-nav-graph-level-info (structure)
+  ((level          symbol)
+   (level-id       uint32)
+   (node-count     int32)
+   (branch-count   int32)
+   (to-link-count  int32)
+   )
+  )
+
+;; definition for method 3 of type mysql-nav-graph-level-info
+(defmethod inspect ((this mysql-nav-graph-level-info))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'mysql-nav-graph-level-info)
+  (format #t "~1Tlevel: ~A~%" (-> this level))
+  (format #t "~1Tlevel-id: ~D~%" (-> this level-id))
+  (format #t "~1Tnode-count: ~D~%" (-> this node-count))
+  (format #t "~1Tbranch-count: ~D~%" (-> this branch-count))
+  (format #t "~1Tto-link-count: ~D~%" (-> this to-link-count))
+  (label cfg-4)
+  this
+  )
+
+;; type mysql-nav-graph is defined here, but it is unknown to the decompiler
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 3 L262)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 0 L257)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 21 L253)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 13 L250)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 14 L247)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 15 L241)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 16 L237)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-node) 9 L208)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-edge) 9 L154)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-visnode) 9 L141)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 11 L136)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 12 L131)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 9 L62)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-node) 10 L59)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 17 L50)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 18 L39)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 19 L29)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 20 L28)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 10 L18)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 23 L12)
+
+;; failed to figure out what this is:
+(method-set! (the-as type mysql-nav-graph) 22 L1)
+
+
+
+

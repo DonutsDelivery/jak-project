@@ -59,189 +59,41 @@
   this
   )
 
-;; definition of type tfragment
-(deftype tfragment (drawable)
-  "A tfrag mesh fragment. This is just references to DMA data, plus some metadata."
-  ((color-index          uint16                         :offset   6)
-   (debug-data           tfragment-debug-data           :offset   8)
-   (color-indices        uint32                         :offset  12)
-   (colors               uint32                         :overlay-at color-indices)
-   (dma-chain            uint32                       3 :offset  32)
-   (dma-common           uint32                         :overlay-at (-> dma-chain 0))
-   (dma-level-0          uint32                         :overlay-at dma-common)
-   (dma-base             uint32                         :overlay-at (-> dma-chain 1))
-   (dma-level-1          uint32                         :overlay-at (-> dma-chain 2))
-   (dma-qwc              uint8                        4 :offset  44)
-   (dma-qwc-word         uint32                         :overlay-at (-> dma-qwc 0))
-   (shader               (inline-array adgif-shader)    :offset  48)
-   (num-shaders          uint8                          :offset  52)
-   (num-base-colors      uint8                          :offset  53)
-   (num-level0-colors    uint8                          :offset  54)
-   (num-level1-colors    uint8                          :offset  55)
-   (color-offset         uint8                          :offset  56)
-   (color-count          uint8                          :offset  57)
-   (texture-masks-index  uint16                         :offset  58)
-   (generic              generic-tfragment              :offset  60)
-   (generic-u32          uint32                         :overlay-at generic)
-   )
-  )
+;; type tfragment is defined here, but it is unknown to the decompiler
 
 ;; definition for method 3 of type tfragment
-(defmethod inspect ((this tfragment))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this (-> this type))
-  (format #t "~1Tid: ~D~%" (-> this id))
-  (format #t "~1Tbsphere: ~`vector`P~%" (-> this bsphere))
-  (format #t "~1Tcolor-index: ~D~%" (-> this color-index))
-  (format #t "~1Tdebug-data: #<tfragment-debug-data @ #x~X>~%" (-> this debug-data))
-  (format #t "~1Tcolor-indices: #x~X~%" (-> this color-indices))
-  (format #t "~1Tcolors: #x~X~%" (-> this color-indices))
-  (format #t "~1Tdma-chain[3] @ #x~X~%" (-> this dma-chain))
-  (format #t "~1Tdma-common: #x~X~%" (-> this dma-common))
-  (format #t "~1Tdma-level-0: #x~X~%" (-> this dma-common))
-  (format #t "~1Tdma-base: #x~X~%" (-> this dma-base))
-  (format #t "~1Tdma-level-1: #x~X~%" (-> this dma-level-1))
-  (format #t "~1Tdma-qwc[4] @ #x~X~%" (-> this dma-qwc))
-  (format #t "~1Tshader: #x~X~%" (-> this shader))
-  (format #t "~1Tnum-shaders: ~D~%" (-> this num-shaders))
-  (format #t "~1Tnum-base-colors: ~D~%" (-> this num-base-colors))
-  (format #t "~1Tnum-level0-colors: ~D~%" (-> this num-level0-colors))
-  (format #t "~1Tnum-level1-colors: ~D~%" (-> this num-level1-colors))
-  (format #t "~1Tcolor-offset: ~D~%" (-> this color-offset))
-  (format #t "~1Tcolor-count: ~D~%" (-> this color-count))
-  (format #t "~1Ttexture-masks-index: ~D~%" (-> this texture-masks-index))
-  (format #t "~1Tgeneric: #<generic-tfragment @ #x~X>~%" (-> this generic))
-  (label cfg-4)
-  this
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
-;; definition of type drawable-inline-array-tfrag
-(deftype drawable-inline-array-tfrag (drawable-inline-array)
-  "Array of tfragments"
-  ((data  tfragment  1 :inline)
-   (pad   uint32)
-   )
-  )
+;; type drawable-inline-array-tfrag is defined here, but it is unknown to the decompiler
 
-;; definition of type drawable-inline-array-tfrag-trans
-(deftype drawable-inline-array-tfrag-trans (drawable-inline-array-tfrag)
-  ((data2  tfragment  1 :inline)
-   (pad2   uint32)
-   )
-  )
+;; type drawable-inline-array-tfrag-trans is defined here, but it is unknown to the decompiler
 
-;; definition of type drawable-inline-array-tfrag-water
-(deftype drawable-inline-array-tfrag-water (drawable-inline-array-tfrag)
-  ((data2  tfragment  1 :inline)
-   (pad2   uint32)
-   )
-  )
+;; type drawable-inline-array-tfrag-water is defined here, but it is unknown to the decompiler
 
-;; definition of type drawable-tree-tfrag
-(deftype drawable-tree-tfrag (drawable-tree)
-  "top level tfrag tree."
-  ((time-of-day-pal  time-of-day-palette             :offset  12)
-   (arrays           drawable-inline-array  :dynamic :offset  32)
-   )
-  )
+;; type drawable-tree-tfrag is defined here, but it is unknown to the decompiler
 
-;; definition of type drawable-tree-tfrag-trans
-(deftype drawable-tree-tfrag-trans (drawable-tree-tfrag)
-  ()
-  )
+;; type drawable-tree-tfrag-trans is defined here, but it is unknown to the decompiler
 
-;; definition of type drawable-tree-tfrag-water
-(deftype drawable-tree-tfrag-water (drawable-tree-tfrag)
-  ()
-  )
+;; type drawable-tree-tfrag-water is defined here, but it is unknown to the decompiler
 
 ;; definition of type drawable-tree-tfrag-shared
-(deftype drawable-tree-tfrag-shared (drawable-tree-tfrag)
+(deftype drawable-tree-tfrag-shared (drawable-tree)
   ()
   )
 
-;; definition of type drawable-tree-tfrag-trans-shared
-(deftype drawable-tree-tfrag-trans-shared (drawable-tree-tfrag-shared)
-  ()
-  )
+;; type drawable-tree-tfrag-trans-shared is defined here, but it is unknown to the decompiler
 
-;; definition of type drawable-tree-tfrag-water-shared
-(deftype drawable-tree-tfrag-water-shared (drawable-tree-tfrag-shared)
-  ()
-  )
+;; type drawable-tree-tfrag-water-shared is defined here, but it is unknown to the decompiler
 
-;; definition of type tfrag-dists
-(deftype tfrag-dists (structure)
-  ((data    uint32  16)
-   (vector  vector  4 :overlay-at (-> data 0))
-   (k0s     vector  2 :overlay-at (-> data 0))
-   (k1s     vector  2 :overlay-at (-> data 8))
-   )
-  )
+;; type tfrag-dists is defined here, but it is unknown to the decompiler
 
-;; definition for method 3 of type tfrag-dists
-(defmethod inspect ((this tfrag-dists))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this 'tfrag-dists)
-  (format #t "~1Tdata[16] @ #x~X~%" (-> this data))
-  (format #t "~1Tvector[4] @ #x~X~%" (-> this data))
-  (format #t "~1Tk0s[2] @ #x~X~%" (-> this data))
-  (format #t "~1Tk1s[2] @ #x~X~%" (-> this k1s))
-  (label cfg-4)
-  this
-  )
+;; failed to figure out what this is:
+(method-set! (the-as type tfrag-dists) 3 L19)
 
-;; definition of type tfrag-data
-(deftype tfrag-data (structure)
-  ((fog          vector       :inline)
-   (data         uint32       56      :overlay-at (-> fog data 0))
-   (vector       vector       14      :overlay-at fog)
-   (val          vector       :inline :overlay-at (-> vector 4))
-   (strgif       qword        :inline :overlay-at (-> vector 8))
-   (fangif       qword        :inline :overlay-at (-> vector 12))
-   (adgif        qword        :inline :overlay-at (-> data 16))
-   (hvdf-offset  vector       :inline :overlay-at (-> data 20))
-   (hmge-scale   vector       :inline :overlay-at (-> data 24))
-   (invh-scale   vector       :inline :overlay-at (-> data 28))
-   (ambient      vector       :inline :overlay-at (-> data 32))
-   (guard        vector       :inline :overlay-at (-> data 36))
-   (dists        tfrag-dists  :inline :overlay-at (-> data 40))
-   (k0s          uint128      2       :overlay-at (-> data 40))
-   (k1s          uint128      2       :overlay-at (-> data 48))
-   )
-  )
+;; type tfrag-data is defined here, but it is unknown to the decompiler
 
-;; definition for method 3 of type tfrag-data
-(defmethod inspect ((this tfrag-data))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this 'tfrag-data)
-  (format #t "~1Tdata[56] @ #x~X~%" (-> this fog))
-  (format #t "~1Tvector[14] @ #x~X~%" (-> this fog))
-  (format #t "~1Tfog: #<vector @ #x~X>~%" (-> this fog))
-  (format #t "~1Tval: #<vector @ #x~X>~%" (-> this val))
-  (format #t "~1Tstrgif: #<qword @ #x~X>~%" (-> this strgif))
-  (format #t "~1Tfangif: #<qword @ #x~X>~%" (-> this fangif))
-  (format #t "~1Tadgif: #<qword @ #x~X>~%" (-> this adgif))
-  (format #t "~1Thvdf-offset: #<vector @ #x~X>~%" (-> this hvdf-offset))
-  (format #t "~1Thmge-scale: #<vector @ #x~X>~%" (-> this hmge-scale))
-  (format #t "~1Tinvh-scale: #<vector @ #x~X>~%" (-> this invh-scale))
-  (format #t "~1Tambient: #<vector @ #x~X>~%" (-> this ambient))
-  (format #t "~1Tguard: #<vector @ #x~X>~%" (-> this guard))
-  (format #t "~1Tdists: #<tfrag-dists @ #x~X>~%" (-> this dists))
-  (format #t "~1Tk0s[2] @ #x~X~%" (-> this dists))
-  (format #t "~1Tk1s[2] @ #x~X~%" (-> this dists k1s))
-  (label cfg-4)
-  this
-  )
+;; failed to figure out what this is:
+(method-set! (the-as type tfrag-data) 3 L16)
 
 ;; definition of type tfrag-control
 (deftype tfrag-control (structure)
@@ -433,7 +285,11 @@
 
 ;; type tfrag-dma is defined here, but it is unknown to the decompiler
 
+;; failed to figure out what this is:
 (method-set! (the-as type tfrag-dma) 3 L1)
+
+;; failed to figure out what this is:
+0
 
 
 

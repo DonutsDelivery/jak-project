@@ -51,7 +51,6 @@
    (tailpred  glst-node)
    (numelem   int32)
    )
-  :allow-misaligned
   )
 
 ;; definition for method 3 of type glst-list
@@ -70,57 +69,34 @@
   )
 
 ;; definition for function glst-next
-(defun glst-next ((arg0 glst-node))
-  "return the next node in the list"
-  (-> arg0 next)
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
 ;; definition for function glst-prev
-(defun glst-prev ((arg0 glst-node))
-  "return the previous node in the list"
-  (-> arg0 prev)
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
 ;; definition for function glst-head
-(defun glst-head ((arg0 glst-list))
-  "return the start of the list"
-  (-> arg0 head)
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
 ;; definition for function glst-tail
-(defun glst-tail ((arg0 glst-list))
-  "return the tail of the list"
-  (-> arg0 tailpred)
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
 ;; definition for function glst-end-of-list?
-(defun glst-end-of-list? ((arg0 glst-node))
-  "is this node the end of the list. #t = end"
-  (not (-> arg0 next))
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
 ;; definition for function glst-start-of-list?
-(defun glst-start-of-list? ((arg0 glst-node))
-  "is this node the start of the list. #t = start"
-  (not (-> arg0 prev))
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
 ;; definition for function glst-empty?
-(defun glst-empty? ((arg0 glst-list))
-  "is the list empty, #t = empty"
-  (= (-> arg0 tailpred) arg0)
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
 ;; definition for function glst-node-name
-(defun glst-node-name ((arg0 glst-named-node))
-  (-> arg0 privname)
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
 
 ;; definition for function glst-set-name!
-(defun glst-set-name! ((arg0 glst-named-node) (arg1 string))
-  (set! (-> arg0 privname) arg1)
-  arg1
-  )
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; failed to figure out what this is:
+0
 
 
 

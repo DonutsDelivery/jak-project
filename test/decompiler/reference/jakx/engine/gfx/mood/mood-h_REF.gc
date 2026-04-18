@@ -629,20 +629,20 @@
    (clouds                  mood-clouds         9)
    )
   (:methods
-    (init-weather! (_type_) int)
-    (set-cloud-and-fog-interp! (_type_ float float float float) int)
-    (update-mood-range! (_type_ float float float float) int)
-    (set-time-for-random-weather! (_type_ float float) int)
-    (set-special-interps! (_type_ float float symbol) int)
+    (init-weather! (_type_) none)
+    (set-cloud-and-fog-interp! (_type_ float float float float) none)
+    (update-mood-range! (_type_ float float float float) none)
+    (set-time-for-random-weather! (_type_ float float) none)
+    (set-special-interps! (_type_ float float symbol) none)
     (weather-event-concluded? (_type_) symbol)
-    (set-lightning-time! (_type_ mood-control-work) int)
-    (apply-mood-clouds-and-fog (_type_ mood-control-work) int)
-    (apply-mood-fog (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) int)
-    (apply-fog-height (_type_ mood-control-work float float float float) int)
-    (apply-mood-colors (_type_ mood-control-work) int)
-    (mood-control-method-20 (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) int)
-    (apply-mood-channels (_type_ mood-control-work) int)
-    (adjust-num-clouds (_type_ mood-control-work) int)
+    (set-lightning-time! (_type_ int int float) none)
+    (apply-mood-clouds-and-fog (_type_ mood-control-work) none)
+    (apply-mood-fog (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) none)
+    (apply-fog-height (_type_ mood-control-work float float float float) none)
+    (apply-mood-colors (_type_ mood-control-work) none)
+    (mood-control-method-20 (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) none)
+    (apply-mood-channels (_type_ mood-control-work) none)
+    (adjust-num-clouds (_type_ mood-control-work) none)
     (gen-lightning-and-thunder! (_type_ int) none)
     (play-or-stop-lightning-sfx! (_type_ sound-spec vector) none)
     )
@@ -696,6 +696,7 @@
   )
 
 ;; definition for method 13 of type mood-control
+;; WARN: Return type mismatch int vs none.
 (defmethod set-special-interps! ((this mood-control) (target-interp float) (rate-interp float) (set-current-interp? symbol))
   "Sets the `*-special-interp` values with the given values
    @param! this The [[mood-control]]
@@ -711,6 +712,7 @@
         )
     )
   0
+  (none)
   )
 
 ;; definition for method 14 of type mood-control
@@ -719,6 +721,9 @@
   "@returns [[#t]] if [[this::override-weather-flag]] is set, we aren't in a cutscene and [[this::current-special-interp]] is equal to `0.0`"
   (the-as symbol (and (-> this override-weather-flag) (not (movie?)) (= (-> this current-special-interp) 0.0)))
   )
+
+;; failed to figure out what this is:
+0
 
 
 

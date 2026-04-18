@@ -103,8 +103,8 @@ Multiple channels are used to blend animations together."
    )
   (:methods
     (new (symbol type process-drawable) _type_)
-    (reset (_type_) top-anim-joint-control)
-    (update (_type_) int)
+    (reset (_type_) none)
+    (update (_type_) none)
     (get-channel (_type_ int) joint-control-channel)
     (push-anim-to-targ (_type_ art-joint-anim float int int float float symbol) none)
     )
@@ -238,25 +238,10 @@ Multiple channels are used to blend animations together."
   this
   )
 
-;; definition of type matrix-stack
-(deftype matrix-stack (structure)
-  ((top   matrix)
-   (data  matrix  24 :inline)
-   )
-  )
+;; type matrix-stack is defined here, but it is unknown to the decompiler
 
-;; definition for method 3 of type matrix-stack
-(defmethod inspect ((this matrix-stack))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this 'matrix-stack)
-  (format #t "~1Ttop: #<matrix @ #x~X>~%" (-> this top))
-  (format #t "~1Tdata[24] @ #x~X~%" (-> this data))
-  (label cfg-4)
-  this
-  )
+;; failed to figure out what this is:
+(method-set! (the-as type matrix-stack) 3 L7)
 
 ;; definition of type channel-upload-info
 (deftype channel-upload-info (structure)
@@ -288,7 +273,11 @@ Multiple channels are used to blend animations together."
 
 ;; type joint-work is defined here, but it is unknown to the decompiler
 
+;; failed to figure out what this is:
 (method-set! (the-as type joint-work) 3 L1)
+
+;; failed to figure out what this is:
+0
 
 
 

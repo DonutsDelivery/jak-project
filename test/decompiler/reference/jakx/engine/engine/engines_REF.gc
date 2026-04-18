@@ -1,6 +1,7 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+;; failed to figure out what this is:
 (kmemopen global "engines")
 
 ;; definition for symbol *background-draw-engine*, type engine
@@ -9,11 +10,13 @@
 ;; definition for symbol *matrix-engine*, type (array handle)
 (define *matrix-engine* (new 'global 'boxed-array handle 384))
 
+;; failed to figure out what this is:
 (set! (-> *matrix-engine* length) 0)
 
 ;; definition for symbol *cloth-engine*, type (array handle)
 (define *cloth-engine* (new 'global 'boxed-array handle 32))
 
+;; failed to figure out what this is:
 (set! (-> *cloth-engine* length) 0)
 
 ;; definition for symbol *part-engine*, type engine
@@ -91,6 +94,7 @@
 ;; definition for symbol *task-manager-engine*, type engine
 (define *task-manager-engine* (new 'global 'engine 'task-manager 16 connection))
 
+;; failed to figure out what this is:
 (kmemclose)
 
 

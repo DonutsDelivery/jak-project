@@ -121,6 +121,7 @@
   this
   )
 
+;; failed to figure out what this is:
 (set! (-> anchor-transform-array heap-base) (the-as uint 32))
 
 ;; definition of type sphere-transform-array
@@ -143,6 +144,7 @@
   this
   )
 
+;; failed to figure out what this is:
 (set! (-> sphere-transform-array heap-base) (the-as uint 32))
 
 ;; definition of type disc-transform-array
@@ -165,6 +167,7 @@
   this
   )
 
+;; failed to figure out what this is:
 (set! (-> disc-transform-array heap-base) (the-as uint 48))
 
 ;; definition of type cloth-thickness-array
@@ -187,6 +190,7 @@
   this
   )
 
+;; failed to figure out what this is:
 (set! (-> cloth-thickness-array heap-base) (the-as uint 1))
 
 ;; definition of type cloth-params
@@ -266,6 +270,9 @@
   (label cfg-4)
   this
   )
+
+;; failed to figure out what this is:
+0
 
 
 

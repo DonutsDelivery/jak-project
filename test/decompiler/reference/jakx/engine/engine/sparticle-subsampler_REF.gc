@@ -1,0 +1,12 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; failed to figure out what this is:
+(method-set! (the-as type sparticle-subsampler) 9 L6)
+
+;; failed to figure out what this is:
+(method-set! (the-as type sparticle-subsampler) 10 L1)
+
+
+
+

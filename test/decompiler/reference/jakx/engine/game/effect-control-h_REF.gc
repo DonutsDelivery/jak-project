@@ -15,12 +15,12 @@
    )
   (:methods
     (new (symbol type process-drawable) _type_)
-    (effect-control-method-9 (_type_) int)
-    (do-effect (_type_ string float int) int)
-    (do-effect-for-surface (_type_ symbol float int basic pat-surface) int)
+    (effect-control-method-9 (_type_) none)
+    (do-effect (_type_ string float int) none)
+    (do-effect-for-surface (_type_ symbol float int basic pat-surface) none)
     (play-effect-sound (_type_ symbol float int basic sound-name) int)
-    (set-channel-offset! (_type_ int) int)
-    (play-effects-from-res-lump (_type_ float float float) int)
+    (set-channel-offset! (_type_ int) none)
+    (play-effects-from-res-lump (_type_ float float float) none)
     )
   )
 
@@ -60,10 +60,15 @@
   )
 
 ;; definition for method 13 of type effect-control
+;; WARN: Return type mismatch int vs none.
 (defmethod set-channel-offset! ((this effect-control) (offset int))
   (set! (-> this channel-offset) offset)
   0
+  (none)
   )
+
+;; failed to figure out what this is:
+0
 
 
 

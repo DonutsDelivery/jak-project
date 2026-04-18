@@ -9,12 +9,12 @@
   (:methods
     (add-spheres! (_type_ (inline-array sphere) int) int)
     (add-box! (_type_ bounding-box) int)
-    (add-point! (_type_ vector) int)
+    (add-point! (_type_ vector) none)
     (intersects-line-segment? (_type_ vector vector) symbol)
-    (set-from-point-offset! (_type_ vector vector) int)
+    (set-from-point-offset! (_type_ vector vector) none)
     (set-from-point-offset-pad! (_type_ vector vector float) int)
-    (set-to-point! (_type_ vector) int)
-    (set-from-sphere! (_type_ sphere) int)
+    (set-to-point! (_type_ vector) none)
+    (set-from-sphere! (_type_ sphere) none)
     (set-from-spheres! (_type_ (inline-array sphere) int) int)
     (get-bounding-sphere (_type_ vector) vector)
     (inside-xyz? (bounding-box vector) symbol)
@@ -116,6 +116,7 @@
   this
   )
 
+;; failed to figure out what this is:
 (set! (-> bounding-box-array heap-base) (the-as uint 32))
 
 

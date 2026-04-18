@@ -28,10 +28,13 @@
   )
 
 ;; definition for symbol *net-log-tmp-header*, type object
-(define *net-log-tmp-header* #f)
+(define *net-log-tmp-header* <static-data L3>)
 
 ;; definition for symbol *comment-string*, type object
 (define *comment-string* (the-as object (new 'global 'string 200 "")))
+
+;; failed to figure out what this is:
+0
 
 
 

@@ -99,6 +99,7 @@ easily dma'd to the scratchpad later."
   this
   )
 
+;; failed to figure out what this is:
 (set! (-> skeleton heap-base) (the-as uint 80))
 
 ;; definition of type cspace
@@ -159,6 +160,7 @@ The callback function is used to take the joint transforms out of the joint anim
   this
   )
 
+;; failed to figure out what this is:
 (set! (-> cspace-array heap-base) (the-as uint 32))
 
 ;; definition for method 2 of type cspace
@@ -174,6 +176,9 @@ The callback function is used to take the joint transforms out of the joint anim
     )
   this
   )
+
+;; failed to figure out what this is:
+0
 
 
 

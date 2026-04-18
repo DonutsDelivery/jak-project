@@ -16,9 +16,9 @@
    (conn-count       uint8)
    )
   (:methods
-    (trail-node-method-9 (_type_ vector) uint)
-    (trail-node-method-10 (_type_ int) symbol)
-    (trail-node-method-11 (_type_ vector) vector)
+    (trail-node-method-9 () none)
+    (trail-node-method-10 () none)
+    (trail-node-method-11 () none)
     )
   )
 
@@ -66,27 +66,10 @@
   this
   )
 
-;; definition of type trail-blocker
-(deftype trail-blocker (structure)
-  ((plane           plane   :inline)
-   (center          vector  :inline)
-   (radius-squared  float   :overlay-at (-> center data 3))
-   )
-  )
+;; type trail-blocker is defined here, but it is unknown to the decompiler
 
-;; definition for method 3 of type trail-blocker
-(defmethod inspect ((this trail-blocker))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this 'trail-blocker)
-  (format #t "~1Tplane: #<plane @ #x~X>~%" (-> this plane))
-  (format #t "~1Tcenter: #<vector @ #x~X>~%" (-> this center))
-  (format #t "~1Tradius-squared: ~f~%" (-> this center w))
-  (label cfg-4)
-  this
-  )
+;; failed to figure out what this is:
+(method-set! (the-as type trail-blocker) 3 L22)
 
 ;; definition of type trail-conn
 (deftype trail-conn (structure)
@@ -141,43 +124,10 @@
   this
   )
 
-;; definition of type trail-conn-search
-(deftype trail-conn-search (structure)
-  ((best-conn-id          int32)
-   (best-dist             float)
-   (src-pos               vector)
-   (conn-pos              vector)
-   (debug-cells-searched  int32)
-   (debug-conns-searched  int32)
-   (bounds                bounding-box4w  :inline)
-   (cell-quads            qword           2 :inline)
-   (conn-quads            qword           7 :inline)
-   (cell-bits             vector16ub      2 :overlay-at cell-quads)
-   (conn-bits             vector16ub      2 :overlay-at conn-quads)
-   )
-  )
+;; type trail-conn-search is defined here, but it is unknown to the decompiler
 
-;; definition for method 3 of type trail-conn-search
-(defmethod inspect ((this trail-conn-search))
-  (when (not this)
-    (set! this this)
-    (goto cfg-4)
-    )
-  (format #t "[~8x] ~A~%" this 'trail-conn-search)
-  (format #t "~1Tbest-conn-id: ~D~%" (-> this best-conn-id))
-  (format #t "~1Tbest-dist: ~f~%" (-> this best-dist))
-  (format #t "~1Tsrc-pos: #<vector @ #x~X>~%" (-> this src-pos))
-  (format #t "~1Tconn-pos: #<vector @ #x~X>~%" (-> this conn-pos))
-  (format #t "~1Tdebug-cells-searched: ~D~%" (-> this debug-cells-searched))
-  (format #t "~1Tdebug-conns-searched: ~D~%" (-> this debug-conns-searched))
-  (format #t "~1Tbounds: #<bounding-box4w @ #x~X>~%" (-> this bounds))
-  (format #t "~1Tcell-quads[2] @ #x~X~%" (-> this cell-quads))
-  (format #t "~1Tconn-quads[7] @ #x~X~%" (-> this conn-quads))
-  (format #t "~1Tcell-bits[2] @ #x~X~%" (-> this cell-quads))
-  (format #t "~1Tconn-bits[2] @ #x~X~%" (-> this conn-quads))
-  (label cfg-4)
-  this
-  )
+;; failed to figure out what this is:
+(method-set! (the-as type trail-conn-search) 3 L13)
 
 ;; definition of type trail-conn-hash
 (deftype trail-conn-hash (basic)
@@ -251,6 +201,7 @@
 
 ;; type trail-graph is defined here, but it is unknown to the decompiler
 
+;; failed to figure out what this is:
 (method-set! (the-as type trail-graph) 3 L1)
 
 ;; definition for symbol *trail-graph*, type object

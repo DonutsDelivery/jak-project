@@ -6241,7 +6241,7 @@
 
 
   
-#|(deftype mine-a (process-focusable)
+(deftype mine-a (process-focusable)
   ((shooter           uint64             :offset-assert 256)
    (destination-point vector     :inline :offset-assert 272)
    (destination-rot   quaternion :inline :offset-assert 288)
@@ -6253,16 +6253,16 @@
   :method-count-assert 64
   :size-assert         #x16c
   :flag-assert         #x4000e0016c
-  (:methods
-    (mine-a-method-62 () none) ;; 62
-    (mine-a-method-63 () none) ;; 63
-    )
   (:state-methods
     idle ;; 59
     falling ;; 60
     die ;; 61
     )
-  )|#
+  (:methods
+    (mine-a-method-62 () none) ;; 62
+    (mine-a-method-63 () none) ;; 63
+    )
+  )
   
 
 
@@ -12148,7 +12148,7 @@
 
 
   
-#|(deftype trail-graph (basic)
+(deftype trail-graph (basic)
   ((mode                      uint8                                       :offset-assert 4)
    (search-id                 uint32                                      :offset-assert 8)
    (open-head-id              int16                                       :offset-assert 12)
@@ -12176,10 +12176,10 @@
    (orig-goal-pos             vector                              :inline :offset-assert 160)
    (conn-start-pos            vector                              :inline :offset-assert 176)
    (conn-goal-pos             vector                              :inline :offset-assert 192)
-   (open-quads                qword                               6       :offset-assert 208) ;; guessed by decompiler
-   (closed-quads              qword                               6       :offset-assert 304) ;; guessed by decompiler
-   (open-bits                 vector16ub                          2       :offset-assert 208) ;; guessed by decompiler
-   (closed-bits               vector16ub                          2       :offset-assert 304) ;; guessed by decompiler
+   (open-quads                qword                            6  :inline :offset-assert 208) ;; guessed by decompiler
+   (closed-quads              qword                            6  :inline :offset-assert 304) ;; guessed by decompiler
+   (open-bits                 vector16ub                       2  :inline :offset 208) ;; guessed by decompiler
+   (closed-bits               vector16ub                       2  :inline :offset 304) ;; guessed by decompiler
    )
   :method-count-assert 34
   :size-assert         #x190
@@ -12211,7 +12211,7 @@
     (trail-graph-method-32 (_type_) uint) ;; 32
     (trail-graph-method-33 (_type_ int) symbol) ;; 33
     )
-  )|#
+  )
   
 
 
@@ -30940,7 +30940,7 @@
 
 
   
-#|(deftype ragdoll-proc (process)
+(deftype ragdoll-proc (process)
   ((ragdoll        ragdoll  :offset-assert 144) ;; guessed by decompiler
    (last-attack-id uint32   :offset-assert 148)
    )
@@ -30948,11 +30948,6 @@
   :size-assert         #x98
   :flag-assert         #x1500100098
   (:methods
-    (ragdoll-proc-method-9 () none) ;; 9
-    (ragdoll-proc-method-10 () none) ;; 10
-    (ragdoll-proc-method-11 () none) ;; 11
-    (ragdoll-proc-method-12 () none) ;; 12
-    (ragdoll-proc-method-13 () none) ;; 13
     (ragdoll-proc-method-14 () _type_ :state) ;; 14
     (ragdoll-proc-method-15 (_type_ symbol vector symbol) none) ;; 15
     (ragdoll-proc-method-16 (_type_ time-frame) none) ;; 16
@@ -30961,7 +30956,7 @@
     (ragdoll-proc-method-19 (_type_) none) ;; 19
     (ragdoll-proc-method-20 () none) ;; 20
     )
-  )|#
+  )
   
 
 
@@ -32384,17 +32379,17 @@
 
 
   
-#|(deftype tfrag-dma (structure)
-  ((banka  tfragment 16   :offset-assert 4) ;; guessed by decompiler
-   (bankb  tfragment 16   :offset-assert 1028) ;; guessed by decompiler
-   (outa   uint128   128  :offset-assert 2048) ;; guessed by decompiler
-   (outb   uint128   128  :offset-assert 4096) ;; guessed by decompiler
-   (colors rgba      2048 :offset-assert 6144) ;; guessed by decompiler
+(deftype tfrag-dma (structure)
+  ((banka  tfragment 16   :inline :offset-assert 0) ;; guessed by decompiler
+   (bankb  tfragment 16   :inline :offset-assert 1024) ;; guessed by decompiler
+   (outa   uint128   128          :offset-assert 2048) ;; guessed by decompiler
+   (outb   uint128   128          :offset-assert 4096) ;; guessed by decompiler
+   (colors rgba      2047         :offset-assert 6144) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x37fc
   :flag-assert         #x9000037fc
-  )|#
+  )
   
 
 
@@ -33631,7 +33626,7 @@
 
 
   
-#|(deftype sparticle-subsampler (basic)
+(deftype sparticle-subsampler (basic)
   ((min-emit          float                    :offset-assert 4)
    (accum             float                    :offset-assert 8)
    (spt-num           float                    :offset-assert 12)
@@ -33649,7 +33644,7 @@
     (sparticle-subsampler-method-9 (_type_ vector) vector) ;; 9
     (sparticle-subsampler-method-10 (_type_ matrix) matrix) ;; 10
     )
-  )|#
+  )
   
 
 
@@ -49002,39 +48997,19 @@
   )
 
 
-#|
 (deftype nospawn (process)
+  ()
+  :method-count-assert 15
+  :size-assert         #x90
+  :flag-assert         #xf00000090
+  (:methods
+    (nospawn-method-14 () none) ;; 14
+    )
+  )
+
+#|
+(deftype nospawn-OLD-REGEN (process)
   ((name             basic                 :offset-assert 0)
-   (mask             process-mask          :offset-assert 4)
-   (clock            basic                 :offset-assert 8)
-   (view             basic                 :offset-assert 12)
-   (parent           uint32                :offset-assert 16)
-   (brother          uint32                :offset-assert 20)
-   (child            uint32                :offset-assert 24)
-   (ppointer         uint32                :offset-assert 28)
-   (self             basic                 :offset-assert 32)
-   (profile-ticks    uint32                :offset-assert 36)
-   (pool             basic                 :offset-assert 40)
-   (status           basic                 :offset-assert 44)
-   (pid              int32                 :offset-assert 48)
-   (main-thread      basic                 :offset-assert 52)
-   (top-thread       basic                 :offset-assert 56)
-   (entity           basic                 :offset-assert 60)
-   (level            basic                 :offset-assert 64)
-   (state            basic                 :offset-assert 68)
-   (prev-state       basic                 :offset-assert 72)
-   (next-state       basic                 :offset-assert 76)
-   (state-stack      basic                 :offset-assert 80)
-   (trans-hook       basic                 :offset-assert 84)
-   (post-hook        basic                 :offset-assert 88)
-   (event-hook       basic                 :offset-assert 92)
-   (allocated-length int32                 :offset-assert 96)
-   (heap-base        uint32                :offset-assert 108)
-   (heap-top         uint32                :offset-assert 112)
-   (heap-cur         uint32                :offset-assert 116)
-   (stack-frame-top  basic                 :offset-assert 120)
-   (heap             kheap        :inline  :offset-assert 108)
-   (connection-list  connectable  :inline  :offset-assert 124)
    (stack            UNKNOWN      :dynamic :offset-assert 140)
    )
   :method-count-assert 15
@@ -51098,8 +51073,22 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-  
-#|(deftype vehicle-manager (process)
+(deftype vehicle-manager (process)
+  ()
+  :method-count-assert 19
+  :size-assert         #x90
+  :flag-assert         #x1300000090
+  (:methods
+    (vehicle-manager-method-14 () none) ;; 14
+    (idle () _type_ :state) ;; 15
+    (active () _type_ :state) ;; 16
+    (vehicle-manager-method-17 (_type_) none) ;; 17
+    (vehicle-manager-method-18 () none) ;; 18
+    )
+  )
+
+
+#|(deftype vehicle-manager-OLD-REGEN (process)
   ((name             string                                                            :offset-assert 0) ;; guessed by decompiler
    (mask             process-mask                                                      :offset-assert 4)
    (clock            clock                                                             :offset-assert 8) ;; guessed by decompiler
