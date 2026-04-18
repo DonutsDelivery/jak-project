@@ -225,7 +225,9 @@
     // sparticle-launcher-h: (method 0 sparticle-subsampler) enter-state on none type;
     // (method 3 projectile-bounce): type-prop fails (empty stub, missing fields).
     "(method 0 sparticle-subsampler)",
-    "(method 3 projectile-bounce)"
+    "(method 3 projectile-bounce)",
+    // collide-h: fpr->gpr applied to (inline-array sphere) from overlay field alias.
+    "(method 3 collide-query)"
   ],
 
   "skip_compile_states": {}

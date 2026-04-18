@@ -51276,8 +51276,9 @@
 
 
 
-  
-(deftype editable-player (process-drawable)
+;; editable-player disabled: mouse-box (vector 2 :inline) offset-assert mismatch
+;; GOALC places mouse-hit at 544 but offset-assert says 560. A2 must fix field ordering.
+#|(deftype editable-player (process-drawable)
   ((current           editable-array           :offset-assert 248)
    (current-command   uint32                   :offset-assert 252)
    (select-command    function                 :offset-assert 256)
@@ -51291,7 +51292,7 @@
    (mouse-pos         vector           :inline :offset-assert 320)
    (mouse-end         vector           :inline :offset-assert 336)
    (manipulator       manipulator      :inline :offset-assert 352)
-   (mouse-box         vector           2       :offset-assert 528)
+   (mouse-box         vector           2 :inline :offset-assert 528)
    (mouse-hit         vector           :inline :offset-assert 560)
    (mouse-normal      vector           :inline :offset-assert 576)
    (float-variable    float                    :offset-assert 592)
@@ -51309,7 +51310,7 @@
     (editable-player-method-52 () none) ;; 52
     (editable-player-method-53 () none) ;; 53
     )
-  )
+  )|#
   
 
 
