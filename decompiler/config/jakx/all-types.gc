@@ -46185,7 +46185,7 @@
 
 
   
-#|(deftype powercell-footie (rigid-body-object)
+(deftype powercell-footie (rigid-body-object)
   ((owner      uint64         :offset-assert 288)
    (plyid      int8           :offset-assert 296)
    (tip-vel    vector :inline :offset-assert 304)
@@ -46201,7 +46201,7 @@
     (powercell-footie-method-89 () none) ;; 89
     (powercell-footie-method-90 () none) ;; 90
     )
-  )|#
+  )
   
 
 
@@ -55526,12 +55526,12 @@
 
 
   
-#|(deftype end-credits-proc (process)
+(deftype end-credits-proc (process)
   ((char-viewer uint64  :offset-assert 144)
    )
-  :method-count-assert 17
+  :method-count-assert 22
   :size-assert         #x98
-  :flag-assert         #x1100100098
+  :flag-assert         #x1600100098
   (:methods
     (end-credits-proc-method-9 () none) ;; 9
     (end-credits-proc-method-10 () none) ;; 10
@@ -55544,7 +55544,7 @@
     running ;; 15
     die ;; 16
     )
-  )|#
+  )
   
 
 
