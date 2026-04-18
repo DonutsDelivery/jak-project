@@ -16180,13 +16180,13 @@
 
 
   
-#|(deftype haze-vert-array (structure)
-  ((data haze-vertex 36 :offset-assert 0) ;; guessed by decompiler
+(deftype haze-vert-array (structure)
+  ((data haze-vertex 36 :inline :offset-assert 0)
    )
   :method-count-assert 9
   :size-assert         #x6c0
   :flag-assert         #x9000006c0
-  )|#
+  )
   
 
 
