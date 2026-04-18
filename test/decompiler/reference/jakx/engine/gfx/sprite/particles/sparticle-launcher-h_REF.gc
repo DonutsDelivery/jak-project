@@ -278,11 +278,109 @@
 
 (set! (-> sparticle-launch-control heap-base) (the-as uint 48))
 
-;; type sparticle-subsampler is defined here, but it is unknown to the decompiler
+;; definition of type sparticle-subsampler
+(deftype sparticle-subsampler (basic)
+  ((min-emit           float)
+   (accum              float)
+   (spt-num            float)
+   (sp-system          sparticle-system)
+   (part-id            uint32)
+   (spawn-mat          matrix  :inline)
+   (inited?            symbol)
+   (per-meter-method?  basic)
+   )
+  (:methods
+    (new (symbol type) _type_)
+    (sparticle-subsampler-method-9 (_type_ vector) vector)
+    (sparticle-subsampler-method-10 (_type_ matrix) matrix)
+    )
+  )
 
-(method-set! (the-as type sparticle-subsampler) 3 L9)
+;; definition for method 3 of type sparticle-subsampler
+(defmethod inspect ((this sparticle-subsampler))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tmin-emit: ~f~%" (-> this min-emit))
+  (format #t "~1Taccum: ~f~%" (-> this accum))
+  (format #t "~1Tspt-num: ~f~%" (-> this spt-num))
+  (format #t "~1Tsp-system: ~A~%" (-> this sp-system))
+  (format #t "~1Tpart-id: ~D~%" (-> this part-id))
+  (format #t "~1Tspawn-mat: #<matrix @ #x~X>~%" (-> this spawn-mat))
+  (format #t "~1Tinited?: ~A~%" (-> this inited?))
+  (format #t "~1Tper-meter-method?: ~A~%" (-> this per-meter-method?))
+  (label cfg-4)
+  this
+  )
 
-(method-set! (the-as type sparticle-subsampler) 0 L2)
+;; definition for method 0 of type sparticle-subsampler
+;; ERROR: failed type prop at 17: At op 17, called enter-state, but the current next-state has type none, which is not a valid state.
+;; WARN: Return type mismatch none vs sparticle-subsampler.
+;; ERROR: Function may read a register that is not set: a2
+;; ERROR: Function may read a register that is not set: a3
+;; ERROR: Function may read a register that is not set: t0
+;; ERROR: Function may read a register that is not set: t1
+;; ERROR: Function may read a register that is not set: t2
+(defmethod new sparticle-subsampler ((a0-0 symbol) (a1-0 type))
+  (local-vars
+    (v0-0 sparticle-subsampler)
+    (v0-1 none)
+    (v0-2 none)
+    (v0-3 none)
+    (v1-0 type)
+    (v1-1 type)
+    (v1-3 (state string process-drawable))
+    (a0-1 string)
+    (a0-2 none)
+    (a1-1 type)
+    (a2-0 none)
+    (a2-1 uint)
+    (a3-0 none)
+    (t0-0 none)
+    (t1-0 none)
+    (t2-0 none)
+    (s1-0 sparticle-subsampler)
+    (t9-0 function)
+    (t9-1 function)
+    (t9-2 none)
+    (f0-0 none)
+    (f0-1 none)
+    )
+  (with-pp
+    (when (begin
+            (set! v1-0 object)
+            (set! t9-0 (method-of-type v1-0 new))
+            (set! v1-1 a1-0)
+            (set! a2-1 (-> a1-0 size))
+            (set! a1-1 v1-1)
+            (set! v0-0 (call! a0-0 a1-1 a2-1))
+            (set! s1-0 v0-0)
+            (zero? s1-0)
+            )
+      (set! t9-1 enter-state)
+      (set! a0-1 L5)
+      (set! v1-3 process-drawable-art-error)
+      (set! (-> s6-0 next-state) v1-3)
+      (call!)
+      (set! v1-4 (the-as none v0-1))
+      )
+    (set! (-> s1-0 per-meter-method?) (the-as basic t1-0))
+    (set! (-> s1-0 part-id) (the-as uint a3-0))
+    (set! (-> s1-0 inited?) #f)
+    (set! (-> s1-0 sp-system) (the-as sparticle-system a2-0))
+    (set! f0-0 (the-as none (gpr->fpr t0-0)))
+    (set! (-> s1-0 spt-num) (the-as float f0-0))
+    (set! f0-1 (the-as none (gpr->fpr t2-0)))
+    (set! (-> s1-0 min-emit) (the-as float f0-1))
+    (set! t9-2 (the-as none matrix-identity!))
+    (set! a0-2 (the-as none (-> s1-0 spawn-mat)))
+    (call!)
+    (set! v0-3 (the-as none s1-0))
+    (ret-value v0-3)
+    )
+  )
 
 ;; definition for function compute-rot-in-screenspace
 (defun compute-rot-in-screenspace ((arg0 vector))
@@ -302,9 +400,39 @@
   (the float (sar (shl (the int (atan (-> arg0 y) (* -1.0 (-> arg0 x)))) 48) 48))
   )
 
-;; type particle-birth-work is defined here, but it is unknown to the decompiler
+;; definition of type particle-birth-work
+(deftype particle-birth-work (structure)
+  ((quat       quaternion  :inline)
+   (vel-range  vector      2 :inline)
+   (vel        vector      :inline :overlay-at (-> vel-range 0))
+   (pos-range  vector      2 :inline)
+   (pos        vector      :inline :overlay-at (-> pos-range 0))
+   (d-pos      vector      :inline :overlay-at (-> pos-range 1))
+   (mat        matrix      :inline)
+   (tt         float)
+   (t-step     float)
+   )
+  )
 
-(method-set! (the-as type particle-birth-work) 3 L6)
+;; definition for method 3 of type particle-birth-work
+(defmethod inspect ((this particle-birth-work))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'particle-birth-work)
+  (format #t "~1Tquat: #<quaternion @ #x~X>~%" (-> this quat))
+  (format #t "~1Tvel-range[2] @ #x~X~%" (-> this vel-range))
+  (format #t "~1Tvel: #<vector @ #x~X>~%" (-> this vel-range))
+  (format #t "~1Tpos-range[2] @ #x~X~%" (-> this pos-range))
+  (format #t "~1Tpos: #<vector @ #x~X>~%" (-> this pos-range))
+  (format #t "~1Td-pos: #<vector @ #x~X>~%" (-> this d-pos))
+  (format #t "~1Tmat: #<matrix @ #x~X>~%" (-> this mat))
+  (format #t "~1Ttt: ~f~%" (-> this tt))
+  (format #t "~1Tt-step: ~f~%" (-> this t-step))
+  (label cfg-4)
+  this
+  )
 
 
 
