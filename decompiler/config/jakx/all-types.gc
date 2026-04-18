@@ -33719,25 +33719,25 @@
 
 
   
-#|(deftype sparticle-launchinfo (structure)
+(deftype sparticle-launchinfo (structure)
   ((launchrot  vector :inline :offset-assert 0)
    (conerot    vector :inline :offset-assert 16)
-   (rotate-x   float          :offset-assert 32)
-   (rotate-y   float          :offset-assert 36)
-   (rotate-z   float          :offset-assert 40)
-   (coneradius float          :offset-assert 44)
    (rotate     vector :inline :offset-assert 32)
-   (scale-x    float          :offset-assert 48)
-   (scale-y    float          :offset-assert 52)
-   (scale-z    float          :offset-assert 56)
-   (dummy      float          :offset-assert 60)
    (scale      vector :inline :offset-assert 48)
-   (data       uint8  1       :offset-assert 0) ;; guessed by decompiler
+   (rotate-x   float          :offset 32)
+   (rotate-y   float          :offset 36)
+   (rotate-z   float          :offset 40)
+   (coneradius float          :offset 44)
+   (scale-x    float          :offset 48)
+   (scale-y    float          :offset 52)
+   (scale-z    float          :offset 56)
+   (dummy      float          :offset 60)
+   (data       uint8  1       :offset 0) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
-  )|#
+  )
   
 
 
@@ -47005,6 +47005,13 @@
 
   
 (deftype jakx-logo-menu (base-menu)
+  ()
+  :method-count-assert 65
+  :size-assert         #x218
+  :flag-assert         #x4101900218
+  )
+
+(deftype chat-window-menu (base-menu)
   ()
   :method-count-assert 65
   :size-assert         #x218
