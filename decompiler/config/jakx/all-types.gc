@@ -58879,7 +58879,7 @@
 
 
   
-#|(deftype garage-sliding-door (process-drawable)
+(deftype garage-sliding-door (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -58887,7 +58887,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
@@ -58923,7 +58923,7 @@
 
 
   
-#|(deftype wm-docks-crane (process-drawable)
+(deftype wm-docks-crane (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -58931,13 +58931,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype wm-drome-wind-machine (process-drawable)
+(deftype wm-drome-wind-machine (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -58945,7 +58945,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
