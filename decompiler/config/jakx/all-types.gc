@@ -1826,6 +1826,7 @@
 
 
 
+#|
 (deftype wrong-way-linebot (process-drawable)
   ((initial-quat quaternion :inline :offset-assert 256)
    (initial-pos  vector     :inline :offset-assert 272)
@@ -1847,6 +1848,7 @@
     (wrong-way-linebot-method-52 () none) ;; 52
     )
   )
+|#
 
 
 
@@ -1994,7 +1996,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#|
+
 (deftype net-enemy-transition (structure)
   ((timestamp int32    :offset-assert 0)
    (name      basic    :offset-assert 4)
@@ -2006,7 +2008,7 @@
   :size-assert         #x50
   :flag-assert         #x900000050
   )
-|#
+
 
 
 
@@ -2054,68 +2056,7 @@
 
 
 
-#|
-(deftype net-enemy (process-focusable)
-  ((flags                  uint64                     :offset-assert 256)
-   (info                   net-enemy-info             :offset-assert 264)
-   (ragdoll-proc           uint64                     :offset-assert 272)
-   (health                 float                      :offset-assert 280)
-   (local-damage           float                      :offset-assert 284)
-   (killed-by              int8                       :offset-assert 288)
-   (last-health-send-time  int32                      :offset-assert 292)
-   (net-anim               net-anim-control   :inline :offset-assert 304)
-   (minimap                connection-minimap         :offset-assert 444)
-   (transitions            uint8              240     :offset-assert 448)
-   (transition-ct          int32                      :offset-assert 688)
-   (last-attack-time       int32                      :offset-assert 692)
-   (vehicle-penetrate-time int32                      :offset-assert 696)
-   (paths                  basic                      :offset-assert 700)
-   (pending-impulse-valid  basic                      :offset-assert 704)
-   (pending-impulse        rigid-body-impact  :inline :offset-assert 720)
-   (last-transition-time   int32                      :offset-assert 788)
-   (last-attack-id         int32                      :offset-assert 792)
-   (vel-for-ragdoll        vector             :inline :offset-assert 800)
-   (nav-poly               nav-poly                   :offset-assert 816)
-   (snap-flags             uint64                     :offset-assert 824)
-   (prev-pos               vector             :inline :offset-assert 832)
-   (forward-path-vector    vector             :inline :offset-assert 848)
-   (enemy-link             list-link          :inline :offset-assert 864)
-   )
-  :method-count-assert 87
-  :size-assert         #x368
-  :flag-assert         #x5702e00368
-  (:methods
-    (net-enemy-method-59 () none) ;; 59
-    (net-enemy-method-60 () none) ;; 60
-    (net-enemy-method-61 () none) ;; 61
-    (net-enemy-method-62 () none) ;; 62
-    (net-enemy-method-63 () none) ;; 63
-    (net-enemy-method-64 () none) ;; 64
-    (net-enemy-method-65 () none) ;; 65
-    (net-enemy-method-66 () none) ;; 66
-    (net-enemy-method-67 () none) ;; 67
-    (net-enemy-method-68 () none) ;; 68
-    (net-enemy-method-69 () none) ;; 69
-    (net-enemy-method-70 () none) ;; 70
-    (net-enemy-method-71 () none) ;; 71
-    (net-enemy-method-72 () none) ;; 72
-    (net-enemy-method-73 () none) ;; 73
-    (net-enemy-method-74 () none) ;; 74
-    (net-enemy-method-75 () none) ;; 75
-    (net-enemy-method-76 () none) ;; 76
-    (net-enemy-method-77 () none) ;; 77
-    (net-enemy-method-78 () none) ;; 78
-    (net-enemy-method-79 () none) ;; 79
-    (net-enemy-method-80 () none) ;; 80
-    (net-enemy-method-81 () none) ;; 81
-    (net-enemy-method-82 () none) ;; 82
-    (net-enemy-method-83 () none) ;; 83
-    (net-enemy-method-84 () none) ;; 84
-    (net-enemy-method-85 () none) ;; 85
-    (net-enemy-method-86 () none) ;; 86
-    )
-  )
-|#
+
 
 
 
@@ -5284,7 +5225,7 @@
 (define-extern matrix<-vector-z! (function matrix vector matrix))
 
 
-#|
+
 (deftype wvehicle-physics-work (structure)
   ((wheel-work-array      uint8   192     :offset-assert 0)
    (mat                   matrix  :inline :offset-assert 192)
@@ -5326,7 +5267,7 @@
   :size-assert         #x220
   :flag-assert         #x900000220
   )
-|#
+
 
 
 
@@ -5522,6 +5463,7 @@
   
 
 
+#|
 (deftype mine-a (process-focusable)
   ((shooter           uint64             :offset-assert 256)
    (destination-point vector     :inline :offset-assert 272)
@@ -5544,6 +5486,7 @@
     (mine-a-method-63 () none) ;; 63
     )
   )
+|#
 
 
   
@@ -5553,6 +5496,7 @@
   
 
 
+#|
 (deftype mine-b (process-focusable)
   ((shooter           uint64             :offset-assert 256)
    (glued-to          uint64             :offset-assert 264)
@@ -5583,6 +5527,7 @@
     (mine-b-method-66 () none) ;; 66
     )
   )
+|#
 
 
   
@@ -6014,6 +5959,7 @@
 
 
 
+#|
 (deftype red-sentry-bot (process-focusable)
   ((destination-point       vector     :inline :offset-assert 256)
    (destination-rot         quaternion :inline :offset-assert 272)
@@ -6051,6 +5997,7 @@
     (red-sentry-bot-method-66 () none) ;; 66
     )
   )
+|#
 
 
 
@@ -6242,6 +6189,7 @@
 
 
 
+
 #|
 (deftype vehicle-antenna-state (structure)
   ((data uint8 96 :offset-assert 0)
@@ -6251,6 +6199,8 @@
   :flag-assert         #x900000060
   )
 |#
+
+
 
 
 
@@ -6285,6 +6235,7 @@
     (vehicle-antenna-method-54 () none) ;; 54
     )
   )
+
 
 
 
@@ -21980,7 +21931,7 @@
 
 
   
-#|
+
 (deftype net-lanfind-exchange-callback-out-args (structure)
   ((b-respond-to-sender int32            :offset-assert 0)
    (details             net-data :inline :offset-assert 4)
@@ -21989,13 +21940,13 @@
   :size-assert         #xc
   :flag-assert         #x90000000c
   )
-|#
-  
-
-
 
   
-#|
+
+
+
+  
+
 (deftype net-lanfind-in-params (structure)
   ((b-default-set        int32            :offset-assert 0)
    (session-type         int32            :offset-assert 4)
@@ -22009,7 +21960,7 @@
   :size-assert         #x20
   :flag-assert         #x900000020
   )
-|#
+
   
 
 
@@ -29719,6 +29670,69 @@
   
 
 
+(deftype net-enemy (process-focusable)
+  ((flags                  uint64                     :offset-assert 256)
+   (info                   net-enemy-info             :offset-assert 264)
+   (ragdoll-proc           uint64                     :offset-assert 272)
+   (health                 float                      :offset-assert 280)
+   (local-damage           float                      :offset-assert 284)
+   (killed-by              int8                       :offset-assert 288)
+   (last-health-send-time  int32                      :offset-assert 292)
+   (net-anim               net-anim-control   :inline :offset-assert 304)
+   (minimap                connection-minimap         :offset-assert 444)
+   (transitions            uint8              240     :offset-assert 448)
+   (transition-ct          int32                      :offset-assert 688)
+   (last-attack-time       int32                      :offset-assert 692)
+   (vehicle-penetrate-time int32                      :offset-assert 696)
+   (paths                  basic                      :offset-assert 700)
+   (pending-impulse-valid  basic                      :offset-assert 704)
+   (pending-impulse        rigid-body-impact  :inline :offset-assert 720)
+   (last-transition-time   int32                      :offset-assert 788)
+   (last-attack-id         int32                      :offset-assert 792)
+   (vel-for-ragdoll        vector             :inline :offset-assert 800)
+   (nav-poly               nav-poly                   :offset-assert 816)
+   (snap-flags             uint64                     :offset-assert 824)
+   (prev-pos               vector             :inline :offset-assert 832)
+   (forward-path-vector    vector             :inline :offset-assert 848)
+   (enemy-link             list-link          :inline :offset-assert 864)
+   )
+  :method-count-assert 87
+  :size-assert         #x368
+  :flag-assert         #x5702e00368
+  (:methods
+    (net-enemy-method-59 () none) ;; 59
+    (net-enemy-method-60 () none) ;; 60
+    (net-enemy-method-61 () none) ;; 61
+    (net-enemy-method-62 () none) ;; 62
+    (net-enemy-method-63 () none) ;; 63
+    (net-enemy-method-64 () none) ;; 64
+    (net-enemy-method-65 () none) ;; 65
+    (net-enemy-method-66 () none) ;; 66
+    (net-enemy-method-67 () none) ;; 67
+    (net-enemy-method-68 () none) ;; 68
+    (net-enemy-method-69 () none) ;; 69
+    (net-enemy-method-70 () none) ;; 70
+    (net-enemy-method-71 () none) ;; 71
+    (net-enemy-method-72 () none) ;; 72
+    (net-enemy-method-73 () none) ;; 73
+    (net-enemy-method-74 () none) ;; 74
+    (net-enemy-method-75 () none) ;; 75
+    (net-enemy-method-76 () none) ;; 76
+    (net-enemy-method-77 () none) ;; 77
+    (net-enemy-method-78 () none) ;; 78
+    (net-enemy-method-79 () none) ;; 79
+    (net-enemy-method-80 () none) ;; 80
+    (net-enemy-method-81 () none) ;; 81
+    (net-enemy-method-82 () none) ;; 82
+    (net-enemy-method-83 () none) ;; 83
+    (net-enemy-method-84 () none) ;; 84
+    (net-enemy-method-85 () none) ;; 85
+    (net-enemy-method-86 () none) ;; 86
+    )
+  )
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; focus                          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -36658,16 +36672,15 @@
 
 
 
-#|
 (deftype gui-control (basic)
-  ((engine  engine   :offset-assert 4) ;; guessed by decompiler
-   (UNKNOWN UNKNOWN  :offset-assert -1) ;; field could not be read.
+  ((engine  engine    :offset-assert 4)
+   (data    uint8 4216 :offset-assert 8)
    )
   :method-count-assert 26
   :size-assert         #x1080
   :flag-assert         #x1a00001080
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type int) _type_)
+    (new (symbol type) _type_) ;; 0
     (gui-control-method-9 (_type_ process gui-channel gui-action string float time-frame) sound-id) ;; 9
     (gui-control-method-10 (_type_ process gui-channel) int) ;; 10
     (gui-control-method-11 (_type_ gui-connection) int) ;; 11
@@ -36687,7 +36700,6 @@
     (gui-control-method-25 (_type_ gui-connection sound-id) int) ;; 25
     )
   )
-|#
 
 
 (define-extern *image-scene-name* object)
@@ -45550,7 +45562,7 @@
 
 
 
-#|
+
 (deftype net-game-mgr-football (net-game-mgr-race)
   ((borrow-level      basic    :offset-assert 364)
    (intro-hud-manager uint8 16 :offset-assert 368)
@@ -45558,9 +45570,9 @@
    )
   :method-count-assert 87
   :size-assert         #x188
-  :flag-assert         #x5700f00188
+  :flag-assert         #x5701000188
   )
-|#
+
 
 
 
@@ -53019,7 +53031,7 @@
 
 
   
-#|
+
 (deftype plow (net-enemy)
   ((tracking-player      uint64  :offset-assert 872)
    (do-flip-anim         basic   :offset-assert 880)
@@ -53048,7 +53060,7 @@
     reverse        ;; 89
     )
   )
-|#
+
   
 
 
@@ -54015,7 +54027,7 @@
 
 
   
-#|
+
 (deftype raptor (net-enemy)
   ()
   :method-count-assert 91
@@ -54029,7 +54041,7 @@
     chase          ;; 90
     )
   )
-|#
+
   
 
 
