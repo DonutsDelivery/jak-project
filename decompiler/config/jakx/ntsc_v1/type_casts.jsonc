@@ -39017,5 +39017,10 @@
       "v1",
       "process-focusable"
     ]
+  ],
+  // race-control-method-9: start-dir.w holds a packed handle/pointer.
+  // v1 is typed float after ->start-dir.w; op 5 reinterprets bits as pointer for l.wu.
+  "(method 9 race-control)": [
+    [5, "v1", "pointer"]
   ]
 }
