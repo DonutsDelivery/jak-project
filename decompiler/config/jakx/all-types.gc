@@ -47330,8 +47330,7 @@
 
   
 (deftype dropdown-item-info (string-menu-info)
-  ((trans-info                  dropdown-trans-info         :offset 16)
-   (selection-box-width         int32                       :offset-assert 68)
+  ((selection-box-width         int32                       :offset-assert 68)
    (selection-box-height        int32                       :offset-assert 72)
    (selection-type              basic                       :offset-assert 76)
    (selection-extra             int32                       :offset-assert 80)
@@ -47377,20 +47376,20 @@
 
 
   
-#|(deftype item-list-selection-info (dropdown-item-info)
+(deftype item-list-selection-info (dropdown-item-info)
   ((menu-options-info-sym basic   :offset-assert 124)
    (add-string            uint32  :offset-assert 128)
    )
   :method-count-assert 9
   :size-assert         #x84
   :flag-assert         #x900000084
-  )|#
+  )
   
 
 
 
   
-#|(deftype item-list-selection (dropdown-item)
+(deftype item-list-selection (dropdown-item)
   ((menu-options-info-ptr menu-selection-struct  :offset-assert 592)
    (selection-type        basic                  :offset-assert 596)
    (selection-index       int32                  :offset-assert 600)
@@ -47398,29 +47397,29 @@
   :method-count-assert 70
   :size-assert         #x25c
   :flag-assert         #x4601d0025c
-  )|#
+  )
   
 
 
 
   
-#|(deftype item-list-driver-selection (item-list-selection)
+(deftype item-list-driver-selection (item-list-selection)
   ()
   :method-count-assert 70
   :size-assert         #x25c
   :flag-assert         #x4601d0025c
-  )|#
+  )
   
 
 
 
   
-#|(deftype item-num-selection-info (item-list-selection-info)
+(deftype item-num-selection-info (item-list-selection-info)
   ()
   :method-count-assert 9
   :size-assert         #x88
   :flag-assert         #x900000088
-  )|#
+  )
   
 
 
