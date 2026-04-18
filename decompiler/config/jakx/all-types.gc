@@ -12894,12 +12894,12 @@
 
 
   
-#|(deftype minimap-draw-work (structure)
-  ((buf          dma-buffer         :offset-assert 0) ;; guessed by decompiler
+(deftype minimap-draw-work (structure)
+  ((buf          dma-buffer         :offset-assert 0)
    (global-flags uint32             :offset-assert 4)
    (draw-pos     vector4w   :inline :offset-assert 16)
    (mat          matrix     :inline :offset-assert 32)
-   (corner       vector     4       :offset-assert 96) ;; guessed by decompiler
+   (corner       vector     4 :inline :offset-assert 96)
    (vec          vector     :inline :offset-assert 160)
    (pos          vector     :inline :offset-assert 176)
    (mid-val      float              :offset-assert 192)
@@ -12907,7 +12907,7 @@
   :method-count-assert 9
   :size-assert         #xc4
   :flag-assert         #x9000000c4
-  )|#
+  )
   
 
 
@@ -30072,8 +30072,8 @@
 
 
   
-#|(deftype task-arrow-params (structure)
-  ((flags    task-arrow-flags         :offset-assert 0) ;; guessed by decompiler
+(deftype task-arrow-params (structure)
+  ((flags    uint32                   :offset-assert 0) ;; task-arrow-flags
    (map-icon uint16                   :offset-assert 4)
    (pos      vector           :inline :offset-assert 16)
    (quat     quaternion       :inline :offset-assert 32)
@@ -30082,7 +30082,7 @@
   :method-count-assert 9
   :size-assert         #x34
   :flag-assert         #x900000034
-  )|#
+  )
   
 
 
@@ -35582,17 +35582,17 @@
 
 
   
-#|(deftype sprite-aux-elem (structure)
-  ((aux-type sprite-aux-type      :offset-assert 0) ;; guessed by decompiler
-   (data     vector             3 :offset-assert 4) ;; guessed by decompiler
-   (vec-data sprite-vec-data-2d   :offset-assert 4)
-   (gif-data adgif-shader         :offset-assert 8)
-   (aux-data sparticle-cpuinfo    :offset-assert 12)
+(deftype sprite-aux-elem (structure)
+  ((aux-type uint32                :offset-assert 0) ;; sprite-aux-type
+   (data     vector             3 :offset-assert 4)
+   (vec-data sprite-vec-data-2d    :offset 4)
+   (gif-data adgif-shader          :offset 8)
+   (aux-data sparticle-cpuinfo     :offset 12)
    )
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
-  )|#
+  )
   
 
 
@@ -44409,16 +44409,16 @@
 
 
   
-#|(deftype race-mesh (basic)
+(deftype race-mesh (basic)
   ((version         uint8                            :offset-assert 4)
    (flags           uint8                            :offset-assert 5) ;; race-mesh-flag
    (slice-count     int16                            :offset-assert 6)
    (edge-count      int16                            :offset-assert 8)
    (race-line-count int16                            :offset-assert 10)
    (ai-valid-mask   int16                            :offset-assert 12)
-   (pad             uint8                          2 :offset-assert 14) ;; guessed by decompiler
-   (slices          (inline-array race-mesh-slice)   :offset-assert 16) ;; guessed by decompiler
-   (edges           (inline-array race-mesh-edge)    :offset-assert 20) ;; guessed by decompiler
+   (pad             uint8                          2 :offset-assert 14)
+   (slices          (inline-array race-mesh-slice)   :offset-assert 16)
+   (edges           (inline-array race-mesh-edge)    :offset-assert 20)
    (hash            race-mesh-hash                   :offset-assert 24)
    (race-lines      uint32                           :offset-assert 28)
    )
@@ -44426,20 +44426,20 @@
   :size-assert         #x20
   :flag-assert         #x1500000020
   (:methods
-    (race-mesh-method-9 (_type_ int int rgba rgba) none) ;; 9
-    (race-mesh-method-10 (_type_ int int) symbol) ;; 10
-    (race-mesh-method-11 (_type_ int) none) ;; 11
-    (race-mesh-method-12 (_type_) none) ;; 12
-    (race-mesh-method-13 (_type_ race-mesh-slice-query) none) ;; 13
-    (race-mesh-method-14 (_type_ race-mesh-slice-query) none) ;; 14
-    (race-mesh-method-15 (_type_ int race-mesh-slice-query) none) ;; 15
-    (race-mesh-method-16 (_type_ race-mesh-slice-query) none) ;; 16
-    (race-mesh-method-17 (_type_ race-mesh-slice-query) symbol) ;; 17
-    (race-mesh-method-18 () none) ;; 18 ;; (race-mesh-method-18 (_type_ race-mesh-hash-search int int race-mesh-slice-query) none)
-    (race-mesh-method-19 (_type_ int race-mesh-slice-query) symbol) ;; 19
-    (race-mesh-method-20 () none) ;; 20
+    (race-mesh-method-9 (_type_ int int rgba rgba) none)
+    (race-mesh-method-10 (_type_ int int) symbol)
+    (race-mesh-method-11 (_type_ int) none)
+    (race-mesh-method-12 (_type_) none)
+    (race-mesh-method-13 (_type_ race-mesh-slice-query) none)
+    (race-mesh-method-14 (_type_ race-mesh-slice-query) none)
+    (race-mesh-method-15 (_type_ int race-mesh-slice-query) none)
+    (race-mesh-method-16 (_type_ race-mesh-slice-query) none)
+    (race-mesh-method-17 (_type_ race-mesh-slice-query) symbol)
+    (race-mesh-method-18 () none)
+    (race-mesh-method-19 (_type_ int race-mesh-slice-query) symbol)
+    (race-mesh-method-20 () none)
     )
-  )|#
+  )
   
 
 
