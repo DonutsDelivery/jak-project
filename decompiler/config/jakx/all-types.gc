@@ -42400,17 +42400,20 @@
   )
 
   
-#|(deftype debris (basic)
+(deftype debris (basic)
   ((root            transformq           :inline :offset-assert 16)
    (node-list       cspace-array                 :offset-assert 64) ;; guessed by decompiler
    (draw            draw-control                 :offset-assert 68) ;; guessed by decompiler
    (duration        float                        :offset-assert 72)
    (hit-xz-reaction float                        :offset-assert 76)
    (hit-y-reaction  float                        :offset-assert 80)
+   (pad84           uint32 3                     :offset-assert 84)
    (prev-pos        vector               :inline :offset-assert 96)
    (gravity         float                        :offset-assert 112)
+   (pad116          uint32 3                     :offset-assert 116)
    (rot-axis        vector               :inline :offset-assert 128)
    (rot-angle       float                        :offset-assert 144)
+   (pad148          uint32 3                     :offset-assert 148)
    (transv          vector               :inline :offset-assert 160)
    (time-fade-out   time-frame                   :offset-assert 176) ;; time-frame
    (params          debris-static-params         :offset-assert 184) ;; guessed by decompiler
@@ -42418,7 +42421,7 @@
   :method-count-assert 9
   :size-assert         #xbc
   :flag-assert         #x9000000bc
-  )|#
+  )
   
 
 (deftype debris-box (structure)
