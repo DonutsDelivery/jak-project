@@ -50329,24 +50329,22 @@
 
 
   
-#|(deftype helmet-hud (process-drawable)
+(deftype helmet-hud (process-drawable)
   ()
   :method-count-assert 52
   :size-assert         #xf8
   :flag-assert         #x34007000f8
   (:methods
+    (idle () _type_ :state) ;; 50
     (helmet-hud-method-51 () none) ;; 51
     )
-  (:state-methods
-    idle ;; 50
-    )
-  )|#
+  )
   
 
 
 
   
-#|(deftype helmet-garage (process-drawable)
+(deftype helmet-garage (process-drawable)
   ((offset        vector :inline :offset-assert 256)
    (hud-handle    uint64         :offset-assert 272)
    (vehicle-level basic          :offset-assert 280)
@@ -50354,11 +50352,11 @@
   :method-count-assert 52
   :size-assert         #x11c
   :flag-assert         #x340090011c
-  (:state-methods
-    idle ;; 50
-    helmet-garage-method-51 ;; 51
+  (:methods
+    (idle () _type_ :state) ;; 50
+    (helmet-garage-method-51 () none) ;; 51
     )
-  )|#
+  )
   
 
 
