@@ -56844,21 +56844,21 @@
 
 
   
-#|(deftype interface-cam (process-drawable)
+(deftype interface-cam (process-drawable)
   ()
   :method-count-assert 55
   :size-assert         #xf8
   :flag-assert         #x37007000f8
+  (:state-methods
+    idle ;; 50
+    enter ;; 51
+    exit ;; 52
+    )
   (:methods
     (interface-cam-method-53 () none) ;; 53
     (interface-cam-method-54 () none) ;; 54
     )
-  (:state-methods
-    enter ;; 51
-    idle ;; 50
-    exit ;; 52
-    )
-  )|#
+  )
   
 
 
