@@ -2141,6 +2141,7 @@
 
 
   
+#|
 (deftype eco-powerup-draw (powerup-draw)
   ((vehicle-handle uint64  :offset-assert 264)
    )
@@ -2151,6 +2152,7 @@
     idle ;; 50 (override)
     )
   )
+|#
   
 
 
@@ -2190,14 +2192,14 @@
 
 #|
 (deftype eco-blue (eco)
-  ((launcher    UNKNOWN 5 :offset-assert 248)
-   (birth-accum UNKNOWN 5 :offset-assert 268)
+  ((launcher    uint8 20 :offset-assert 248)
+   (birth-accum uint8 20 :offset-assert 268)
    )
   :method-count-assert 56
   :size-assert         #x120
   :flag-assert         #x3800900120
   (:state-methods
-    running ;; 50
+    running ;; 50 (override)
     )
   )
 |#
@@ -3627,15 +3629,13 @@
 
 
 
-#|
 (deftype hud-headset-talker (hud-item-group)
-  ((decoder-talk-times UNKNOWN 8 :offset-assert 44)
+  ((decoder-talk-times uint8 32 :offset-assert 44)
    )
   :method-count-assert 24
   :size-assert         #x4c
   :flag-assert         #x180000004c
   )
-|#
 
 
 
@@ -3975,13 +3975,12 @@
 
 
 
-#|
 (deftype hud-player-positions (hud-item-group)
-  ((player-position-list UNKNOWN 6 :offset-assert 44)
+  ((player-position-list uint8 24  :offset-assert 44)
    (player-count         int32     :offset-assert 68)
-   (rotations            UNKNOWN 3 :offset-assert 72)
+   (rotations            uint8 48  :offset-assert 72)
    (used-rotations       int32     :offset-assert 120)
-   (damage-records       UNKNOWN 6 :offset-assert 124)
+   (damage-records       uint8 96  :offset-assert 124)
    (used-damage-records  int32     :offset-assert 220)
    (horizontal           basic     :offset-assert 224)
    )
@@ -4003,7 +4002,6 @@
     (hud-player-positions-method-35 () none) ;; 35
     )
   )
-|#
 
 
 
@@ -4949,9 +4947,8 @@
 
 
 
-#|
 (deftype update-engine-mix-state-work (structure)
-  ((loops             UNKNOWN 2 :offset-assert 0)
+  ((loops             uint8 32  :offset-assert 0)
    (xover1            float     :offset-assert 32)
    (xover2            float     :offset-assert 36)
    (crossover         float     :offset-assert 40)
@@ -4964,7 +4961,6 @@
   :size-assert         #x33
   :flag-assert         #x900000033
   )
-|#
 
 
 (define-extern update-engine-mix-state function)
@@ -6121,6 +6117,7 @@
 
 
   
+#|
 (deftype v-wpn-red-tractor-beam (vehicle-weapon-slot)
   ((firing-at      uint64  :offset-assert 264)
    (duration-left  int32   :offset-assert 272)
@@ -6136,6 +6133,7 @@
     firing ;; 60 (new)
     )
   )
+|#
   
 
 
