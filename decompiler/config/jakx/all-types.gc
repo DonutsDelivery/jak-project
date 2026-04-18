@@ -53851,33 +53851,33 @@
 
 
   
-#|(deftype v-wpn-success-seeker (vehicle-weapon-slot)
-  ((next-shot-time int32  :offset-assert 268)
-   (next-to-fire   uint8  :offset-assert 272)
+(deftype v-wpn-success-seeker (vehicle-weapon-slot)
+  ((next-shot-time int32  :offset-assert 264)
+   (next-to-fire   uint8  :offset-assert 268)
    )
   :method-count-assert 60
-  :size-assert         #x111
-  :flag-assert         #x3c00900111
+  :size-assert         #x10d
+  :flag-assert         #x3c0080010d
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype v-wpn-chicken-drone (vehicle-weapon-slot)
-  ((next-shot-time int32  :offset-assert 268)
-   (next-to-fire   uint8  :offset-assert 272)
+(deftype v-wpn-chicken-drone (vehicle-weapon-slot)
+  ((next-shot-time int32  :offset-assert 264)
+   (next-to-fire   uint8  :offset-assert 268)
    )
   :method-count-assert 60
-  :size-assert         #x111
-  :flag-assert         #x3c00900111
+  :size-assert         #x10d
+  :flag-assert         #x3c0080010d
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
