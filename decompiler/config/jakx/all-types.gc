@@ -4833,9 +4833,9 @@
    (text-time     uint64  :offset-assert 184)
    (suppress-text basic   :offset-assert 192)
    )
-  :method-count-assert 17
+  :method-count-assert 22
   :size-assert         #xc4
-  :flag-assert         #x11004000c4
+  :flag-assert         #x16004000c4
   (:methods
     (sabotage-sequence-method-9 () none) ;; 9
     (sabotage-sequence-method-10 () none) ;; 10
@@ -6671,14 +6671,14 @@
 
 
   
-#|(deftype oil-flame-emitter (oil-emitter)
+(deftype oil-flame-emitter (oil-emitter)
   ((last-flame-spawn-pos vector :inline :offset-assert 304)
    (flame-distance-emit  float          :offset-assert 320)
    )
   :method-count-assert 19
   :size-assert         #x144
   :flag-assert         #x1300c00144
-  )|#
+  )
   
 
 
@@ -60040,7 +60040,6 @@
 (define-extern medius-update-game-response object)
 (define-extern net-lanfind-exchange-callback-in-args object)
 (define-extern net-rgbarray object)
-(define-extern oil-flame-emitter object)
 (define-extern sprite-menu object)
 
 ;; Auto-extern batch 13
