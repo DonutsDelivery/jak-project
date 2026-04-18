@@ -289,8 +289,26 @@ def main() -> int:
     clusters = {r: c for r, c in clusters.items() if c["types"]}
     print(f"clusters (active roots with commented subtypes): {len(clusters)}")
 
+    # Load split-failed set from latest.json (authoritative per-file categories)
+    split_failed_stems: set[str] = set()
+    latest_json = ROOT / ".jakx_watch" / "history" / "latest.json"
+    try:
+        import json as _json
+        _data = _json.loads(latest_json.read_text())
+        per_file = _data.get("per_file", {})
+        split_failed_stems = {s for s, v in per_file.items()
+                              if v.get("category") == "split-failed"}
+    except Exception:
+        pass
+    print(f"split-failed files (from latest.json): {len(split_failed_stems)}")
+
     print(f"building ref index for {len(commented_names)} commented types...")
     ref_index = build_ref_index(decomp_dir, commented_names)
+
+    # Build a split-failed-only ref index: {type_name: {split_failed_file_stems}}
+    sf_ref_index: dict[str, set[str]] = {
+        t: refs & split_failed_stems for t, refs in ref_index.items()
+    }
 
     # Build a ref index for commented types: which OTHER commented types mention
     # each type name in their body? Used for c_unlock computation.
@@ -347,6 +365,22 @@ def main() -> int:
         # Sort by count descending for display
         cascades_to_sorted = sorted(cascades_to.items(), key=lambda x: -x[1])
 
+        # Net split-failed files unblocked: union of SF files that reference
+        # any type in THIS cluster + any type in cascade target clusters.
+        # This is the upper-bound count of split-failed files that could
+        # unblock if this cluster (and its immediate cascades) are activated.
+        sf_direct: set[str] = set()
+        for t in cluster_types:
+            sf_direct |= sf_ref_index.get(t, set())
+
+        sf_cascade: set[str] = set()
+        for other_root, _ in cascades_to_sorted:
+            other_cluster = clusters.get(other_root, {})
+            for t in other_cluster.get("types", []):
+                sf_cascade |= sf_ref_index.get(t, set())
+
+        net_sf_files = sf_direct | sf_cascade
+
         # Count how many types in this cluster (including root) have pending clobbers
         clobber_count = sum(
             1 for t in cluster_types if t in pending_clobbers
@@ -361,23 +395,29 @@ def main() -> int:
             "ref_per_cost": ref_per_cost,
             "c_unlock": c_unlock,
             "cascades_to": cascades_to_sorted,
+            "sf_direct": len(sf_direct),
+            "sf_cascade": len(sf_cascade),
+            "net_sf": len(net_sf_files),
             "pending_clobber": clobber_count,
             "root_clobbered": root in pending_clobbers,
             "types": info["types"],
             "depths": info["depths"],
         })
 
-    ranked.sort(key=lambda r: (-r["ref_per_cost"], -r["file_refs"]))
+    # Primary: net_sf (split-failed files directly unblocked — A2's actionable metric)
+    # Secondary: ref_per_cost (efficiency of activation work)
+    # Tertiary: file_refs (total file coverage including non-SF files)
+    ranked.sort(key=lambda r: (-r["net_sf"], -r["ref_per_cost"], -r["file_refs"]))
 
     # Console summary
     print(f"\nTop {min(args.top, len(ranked))} clusters by ref_per_cost:")
-    print(f"  {'root':<30} {'size':>5} {'depth':>5} {'f_refs':>6} {'t_refs':>6} {'r/cost':>7} {'c_unlock':>8} {'clobber':>7}  cascades_to (top 2)")
+    print(f"  {'root':<30} {'size':>5} {'depth':>5} {'f_refs':>6} {'net_sf':>6} {'r/cost':>7} {'c_unlock':>8} {'clobber':>7}  cascades_to (top 2)")
     for r in ranked[: args.top]:
         clob_flag = f"*{r['pending_clobber']}" if r["pending_clobber"] else "-"
         top_cascades = ", ".join(f"{root}(+{n})" for root, n in r["cascades_to"][:2])
         print(
             f"  {r['root']:<30} {r['size']:>5} {r['max_depth']:>5} "
-            f"{r['file_refs']:>6} {r['total_refs']:>6} {r['ref_per_cost']:>7.2f} "
+            f"{r['file_refs']:>6} {r['net_sf']:>6} {r['ref_per_cost']:>7.2f} "
             f"{r['c_unlock']:>8} {clob_flag:>7}  {top_cascades or '-'}"
         )
 
@@ -424,16 +464,21 @@ def main() -> int:
         "is activated (format: `cluster-root(+N)` where N = types in that cluster that "
         "reference types from this cluster). Activating high-cascade clusters chains into the "
         "next cluster for free.",
+        "- **net_sf** — **the key ranking signal for A2**: union of split-failed files that "
+        "reference any type in this cluster OR in any cascade target cluster. This is the "
+        "upper-bound count of split-failed files that could unblock if this cluster "
+        "(and immediate cascades) are activated. `sf_d+c` = direct + cascade breakdown.",
         "",
-        "| # | r/cost | root (active anchor) | size | depth | f_refs | t_refs | c_unlock | clobber | cascades_to |",
-        "|---|-------:|---------------------|-----:|------:|-------:|-------:|---------:|--------:|-------------|",
+        "| # | r/cost | root (active anchor) | size | depth | f_refs | net_sf | sf_d+c | c_unlock | clobber | cascades_to |",
+        "|---|-------:|---------------------|-----:|------:|-------:|-------:|-------:|---------:|--------:|-------------|",
     ]
     for i, r in enumerate(ranked[: args.top], 1):
         clob_cell = f"\\*{r['pending_clobber']}" if r["pending_clobber"] else "-"
         cascade_cell = ", ".join(f"`{root}`(+{n})" for root, n in r["cascades_to"][:2]) or "-"
+        sf_breakdown = f"{r['sf_direct']}+{r['sf_cascade']}"
         lines.append(
             f"| {i} | {r['ref_per_cost']:.2f} | `{r['root']}` | "
-            f"{r['size']} | {r['max_depth']} | {r['file_refs']} | {r['total_refs']} | "
+            f"{r['size']} | {r['max_depth']} | {r['file_refs']} | {r['net_sf']} | {sf_breakdown} | "
             f"{r['c_unlock']} | {clob_cell} | {cascade_cell} |"
         )
 
@@ -481,7 +526,8 @@ def main() -> int:
     lines += [
         "## How to use",
         "",
-        "1. Pick the highest **r/cost** cluster whose **root** is an active base type.",
+        "1. Pick the cluster with the highest **net_sf** (split-failed files that could unblock). "
+        "   Use **r/cost** as tiebreaker.",
         "2. Work top-down by **depth** within the cluster: activate depth=1 types first,",
         "   then depth=2, etc. Each layer depends on the previous being active.",
         "3. Use `scripts/jakx_watch/emit_stub.py --name TYPE` to generate the activation body.",

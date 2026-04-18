@@ -114,15 +114,20 @@ def classify_drift(ref_text: str, dis_text: str) -> tuple[str, str]:
     return "changed", reason
 
 
-def short_diff(ref_text: str, dis_text: str, max_lines: int = 12) -> list[str]:
-    """Return a compact unified diff excerpt."""
-    diff = list(difflib.unified_diff(
+def full_diff(ref_text: str, dis_text: str) -> list[str]:
+    """Return the full unified diff between REF and disasm."""
+    return list(difflib.unified_diff(
         ref_text.splitlines(keepends=True),
         dis_text.splitlines(keepends=True),
         fromfile="REF",
         tofile="disasm",
-        n=2,
+        n=3,
     ))
+
+
+def short_diff(ref_text: str, dis_text: str, max_lines: int = 20) -> list[str]:
+    """Return a compact unified diff excerpt."""
+    diff = full_diff(ref_text, dis_text)
     if not diff:
         return []
     out = []
@@ -133,6 +138,27 @@ def short_diff(ref_text: str, dis_text: str, max_lines: int = 12) -> list[str]:
             out.append("... (truncated)")
             break
     return out
+
+
+def diff_severity(ref_text: str, dis_text: str) -> tuple[int, int]:
+    """Return (removed_lines, added_lines) — lines lost from REF and gained in disasm."""
+    diff = full_diff(ref_text, dis_text)
+    removed = sum(1 for l in diff if l.startswith("-") and not l.startswith("---"))
+    added = sum(1 for l in diff if l.startswith("+") and not l.startswith("+++"))
+    return removed, added
+
+
+def extract_unknown_types(text: str) -> list[str]:
+    """Return type names flagged as unknown in a disasm file."""
+    return re.findall(
+        r"type (\S+) is defined here, but it is unknown to the decompiler",
+        text,
+    )
+
+
+def extract_ref_types(text: str) -> list[str]:
+    """Return type names defined (as deftype) in a REF file."""
+    return re.findall(r"\(deftype (\S+)\s*\(", text)
 
 
 def load_real_clean_set(decomp_dir: Path) -> set[str]:
@@ -230,13 +256,20 @@ def main() -> int:
         ref_text = ref_path.read_text(errors="replace")
         dis_text = disasm_path.read_text(errors="replace")
         cat, reason = classify_drift(ref_text, dis_text)
+        removed, added = diff_severity(ref_text, dis_text) if cat != "green" else (0, 0)
         diff_lines = short_diff(ref_text, dis_text) if cat != "green" else []
+        unknown_in_dis = extract_unknown_types(dis_text) if cat == "regression" else []
+        defined_in_ref = extract_ref_types(ref_text) if cat == "regression" else []
 
         results[cat].append({
             "stem": stem,
             "ref_path": ref_path,
             "reason": reason,
             "diff": diff_lines,
+            "removed": removed,
+            "added": added,
+            "unknown_in_dis": unknown_in_dis,
+            "defined_in_ref": defined_in_ref,
         })
 
     # Unseeded: real-clean in latest.json but no REF exists
@@ -252,10 +285,16 @@ def main() -> int:
     print(f"  missing    : {len(results['missing'])}  ← REF exists but no current disasm")
     print(f"  unseeded   : {len(unseeded)}  ← real-clean but no REF yet")
 
+    # Sort regressions by severity (most lines removed first)
+    results["regression"].sort(key=lambda r: -r["removed"])
+    results["stale_ref"].sort(key=lambda r: -r["added"])
+    results["changed"].sort(key=lambda r: -(r["removed"] + r["added"]))
+
     if results["regression"]:
-        print("\nREGRESSIONS (disasm worse than REF):")
+        print("\nREGRESSIONS (disasm worse than REF, sorted by severity):")
         for r in results["regression"]:
-            print(f"  {r['stem']}: {r['reason']}")
+            unk = f"  unknown: {r['unknown_in_dis']}" if r["unknown_in_dis"] else ""
+            print(f"  {r['stem']} (-{r['removed']} lines): {r['reason']}{unk}")
 
     if results["stale_ref"]:
         print("\nSTALE REFs (disasm improved; update REF):")
@@ -297,10 +336,80 @@ def main() -> int:
         "",
     ]
 
-    def section(title: str, entries: list[dict], show: bool = True) -> list[str]:
+    def regression_section(entries: list[dict]) -> list[str]:
+        out = [
+            f"## Regressions ({len(entries)}) — disasm worse than REF",
+            "",
+            "Sorted by severity (most lines lost first). "
+            "**Regressed types** are those that the REF defines but the current disasm marks as unknown.",
+            "",
+        ]
+        if not entries:
+            out += ["_None._", ""]
+            return out
+        out += [
+            "| # | file | severity | regressed types | reason |",
+            "|---|------|----------|-----------------|--------|",
+        ]
+        for i, e in enumerate(entries, 1):
+            unk = ", ".join(f"`{t}`" for t in e["unknown_in_dis"]) or "—"
+            out.append(
+                f"| {i} | `{e['stem']}` | -{e['removed']} lines | {unk} | {e['reason']} |"
+            )
+        out.append("")
+        for e in entries:
+            out.append(f"### `{e['stem']}` (severity: -{e['removed']} lines)")
+            out.append("")
+            if e["defined_in_ref"]:
+                out.append(f"**Types in REF:** {', '.join(f'`{t}`' for t in e['defined_in_ref'])}")
+                out.append("")
+            if e["unknown_in_dis"]:
+                out.append(
+                    f"**Regressed (unknown in disasm):** "
+                    f"{', '.join(f'`{t}`' for t in e['unknown_in_dis'])}"
+                )
+                out.append("")
+                out.append(
+                    "_Fix: check `clobber_scan.py` for these type names; "
+                    "check `all-types.gc` for recently-commented deftypes._"
+                )
+                out.append("")
+            out.append(f"**Reason:** {e['reason']}")
+            out.append("")
+            if e["diff"]:
+                out.append("```diff")
+                out.extend(e["diff"])
+                out.append("```")
+            out.append("")
+        return out
+
+    def stale_section(entries: list[dict]) -> list[str]:
+        out = [
+            f"## Stale REFs ({len(entries)}) — disasm improved, REF needs update",
+            "",
+            "Sorted by improvement size (most lines gained first). "
+            "Run `python3 scripts/jakx_watch/seed_refs.py --force` to update.",
+            "",
+        ]
+        if not entries:
+            out += ["_None._", ""]
+            return out
+        for e in entries:
+            out.append(f"### `{e['stem']}` (+{e['added']} lines in disasm)")
+            out.append("")
+            out.append(f"**Reason:** {e['reason']}")
+            out.append("")
+            if e["diff"]:
+                out.append("```diff")
+                out.extend(e["diff"])
+                out.append("```")
+            out.append("")
+        return out
+
+    def generic_section(title: str, entries: list[dict], show: bool = True) -> list[str]:
         out = [f"## {title}", ""]
         if not entries:
-            out += [f"_None._", ""]
+            out += ["_None._", ""]
             return out
         if not show:
             out += [f"_{len(entries)} files (use --show-green to list)_", ""]
@@ -318,24 +427,18 @@ def main() -> int:
                 out.append("")
         return out
 
-    lines += section(
-        f"Regressions ({len(results['regression'])}) — disasm worse than REF",
-        results["regression"],
-    )
-    lines += section(
-        f"Stale REFs ({len(results['stale_ref'])}) — disasm improved, REF needs update",
-        results["stale_ref"],
-    )
-    lines += section(
+    lines += regression_section(results["regression"])
+    lines += stale_section(results["stale_ref"])
+    lines += generic_section(
         f"Changed ({len(results['changed'])}) — content differs, direction unclear",
         results["changed"],
     )
-    lines += section(
+    lines += generic_section(
         f"Missing ({len(results['missing'])}) — REF exists but no current disasm",
         results["missing"],
     )
     if args.show_green:
-        lines += section(
+        lines += generic_section(
             f"Green ({len(results['green'])}) — identical",
             results["green"],
         )
