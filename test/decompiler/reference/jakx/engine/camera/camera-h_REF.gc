@@ -89,18 +89,18 @@
    (debug-last-point    int32)
    )
   (:methods
-    (tracking-spline-method-9 (_type_) none)
-    (tracking-spline-method-10 (_type_ vector) none)
+    (tracking-spline-method-9 (_type_) int)
+    (tracking-spline-method-10 (_type_ vector) int)
     (debug-point-info (_type_ int) none)
     (debug-all-points (_type_) none)
-    (tracking-spline-method-13 (_type_ int) none)
-    (tracking-spline-method-14 (_type_ tracking-spline-sampler) none)
-    (tracking-spline-method-15 (_type_) none)
-    (tracking-spline-method-16 (_type_ float) none)
+    (tracking-spline-method-13 (_type_ int) int)
+    (tracking-spline-method-14 (_type_ tracking-spline-sampler) int)
+    (tracking-spline-method-15 (_type_) int)
+    (tracking-spline-method-16 (_type_ float) int)
     (tracking-spline-method-17 (_type_ vector float float symbol) int)
     (tracking-spline-method-18 (_type_ float vector vector tracking-spline-sampler) vector)
     (tracking-spline-method-19 (_type_ float vector vector tracking-spline-sampler) vector)
-    (tracking-spline-method-20 (_type_ vector int) none)
+    (tracking-spline-method-20 (_type_ vector int) int)
     (tracking-spline-method-21 (_type_ vector float float float float vector) vector)
     (tracking-spline-method-22 (_type_ float) symbol)
     (debug-draw-spline (_type_) none)
@@ -143,9 +143,9 @@
    )
   :pack-me
   (:methods
-    (init (_type_ float float float float) none)
-    (copy-to (_type_ _type_) none)
-    (update! (_type_ float) none)
+    (init (_type_ float float float float) int)
+    (copy-to (_type_ _type_) int)
+    (update! (_type_ float) int)
     (jump-to-target! (_type_ float) float)
     )
   )
@@ -168,7 +168,6 @@
   )
 
 ;; definition for method 9 of type cam-float-seeker
-;; WARN: Return type mismatch int vs none.
 (defmethod init ((this cam-float-seeker) (arg0 float) (arg1 float) (arg2 float) (arg3 float))
   (set! (-> this target) arg0)
   (set! (-> this value) arg0)
@@ -177,11 +176,9 @@
   (set! (-> this max-vel) arg2)
   (set! (-> this max-partial) arg3)
   0
-  (none)
   )
 
 ;; definition for method 10 of type cam-float-seeker
-;; WARN: Return type mismatch int vs none.
 (defmethod copy-to ((this cam-float-seeker) (arg0 cam-float-seeker))
   (set! (-> this target) (-> arg0 target))
   (set! (-> this value) (-> arg0 value))
@@ -190,11 +187,9 @@
   (set! (-> this max-vel) (-> arg0 max-vel))
   (set! (-> this max-partial) (-> arg0 max-partial))
   0
-  (none)
   )
 
 ;; definition for method 11 of type cam-float-seeker
-;; WARN: Return type mismatch int vs none.
 (defmethod update! ((this cam-float-seeker) (arg0 float))
   0.0
   0.0
@@ -229,7 +224,6 @@
       )
     )
   0
-  (none)
   )
 
 ;; definition for method 12 of type cam-float-seeker
@@ -249,8 +243,8 @@
    (max-partial  float)
    )
   (:methods
-    (init (_type_ vector float float float) none)
-    (update! (_type_ vector) none)
+    (init (_type_ vector float float float) int)
+    (update! (_type_ vector) int)
     )
   )
 
@@ -273,7 +267,6 @@
 
 ;; definition for method 9 of type cam-vector-seeker
 ;; INFO: Used lq/sq
-;; WARN: Return type mismatch int vs none.
 (defmethod init ((this cam-vector-seeker) (arg0 vector) (arg1 float) (arg2 float) (arg3 float))
   (cond
     (arg0
@@ -290,11 +283,9 @@
   (set! (-> this max-vel) arg2)
   (set! (-> this max-partial) arg3)
   0
-  (none)
   )
 
 ;; definition for method 10 of type cam-vector-seeker
-;; WARN: Return type mismatch int vs none.
 (defmethod update! ((this cam-vector-seeker) (arg0 vector))
   (rlet ((vf0 :class vf)
          (vf4 :class vf)
@@ -371,7 +362,6 @@
         )
       )
     0
-    (none)
     )
   )
 
@@ -652,9 +642,9 @@
    (interest-dist        float)
    )
   (:methods
-    (camera-master-method-14 () none)
-    (camera-master-method-15 () none)
-    (camera-master-method-16 () none)
+    (camera-master-method-14 (_type_ vector) vector)
+    (camera-master-method-15 (_type_ vector) vector)
+    (camera-master-method-16 (_type_ symbol) symbol)
     (camera-master-method-17 () none)
     )
   )
@@ -711,9 +701,6 @@
   (label cfg-4)
   this
   )
-
-;; failed to figure out what this is:
-0
 
 
 

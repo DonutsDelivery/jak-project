@@ -33742,7 +33742,7 @@
 
 
   
-#|(deftype sparticle-system (basic)
+(deftype sparticle-system (basic)
   ((blocks          int32                            2 :offset-assert 4) ;; guessed by decompiler
    (length          int32                            2 :offset-assert 12) ;; guessed by decompiler
    (num-alloc       int32                            2 :offset-assert 20) ;; guessed by decompiler
@@ -33756,7 +33756,7 @@
   :method-count-assert 9
   :size-assert         #x34
   :flag-assert         #x900000034
-  )|#
+  )
   
 
 
@@ -59293,6 +59293,25 @@
   :method-count-assert 50
   :size-assert         #xf8
   :flag-assert         #x32007000f8
+  )
+
+;; v-wpn-red-sentry-gun stub (vehicle-weapon-slot, size=parent, +0 methods-new-declared)
+(deftype v-wpn-red-sentry-gun (vehicle-weapon-slot)
+  ()
+  :method-count-assert 60
+  :size-assert         #x105
+  :flag-assert         #x3c00800105
+  )
+
+;; v-wpn-red-drone-gun stub (vehicle-weapon-slot, +1 method@60)
+(deftype v-wpn-red-drone-gun (vehicle-weapon-slot)
+  ()
+  :method-count-assert 61
+  :size-assert         #x105
+  :flag-assert         #x3d00800105
+  (:methods
+    (v-wpn-red-drone-gun-method-60 () none) ;; 60
+    )
   )
 
 ;; sparticle-cpuinfo — full definition above at L33676

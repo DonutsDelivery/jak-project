@@ -78,9 +78,9 @@
    (racer-array             uint8   964)
    )
   (:methods
-    (race-state-method-9 () none)
-    (race-state-method-10 () none)
-    (race-state-method-11 () none)
+    (race-state-method-9 (_type_ process-drawable int) int)
+    (race-state-method-10 (_type_) symbol)
+    (race-state-method-11 (_type_) none)
     )
   )
 
@@ -112,9 +112,6 @@
   (label cfg-4)
   this
   )
-
-;; failed to figure out what this is:
-0
 
 
 

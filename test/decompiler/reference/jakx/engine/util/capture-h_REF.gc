@@ -84,31 +84,22 @@
 ;; definition for symbol *screen-shot-work*, type screen-shot-work
 (define *screen-shot-work* (new 'global 'screen-shot-work))
 
-;; failed to figure out what this is:
 (set! (-> *screen-shot-work* count) -1)
 
-;; failed to figure out what this is:
 (set! (-> *screen-shot-work* size) -1)
 
-;; failed to figure out what this is:
 (set! (-> *screen-shot-work* highres-enable) #f)
 
-;; failed to figure out what this is:
 (set! (-> *screen-shot-work* highres-objects-enable) #f)
 
-;; failed to figure out what this is:
 (set! (-> *screen-shot-work* hud-enable) #f)
 
-;; failed to figure out what this is:
 (set! (-> *screen-shot-work* letterbox-enable) #f)
 
-;; failed to figure out what this is:
 (set! (-> *screen-shot-work* debug-enable) #f)
 
-;; failed to figure out what this is:
 (set! (-> *screen-shot-work* dir) #f)
 
-;; failed to figure out what this is:
 (set! (-> *screen-shot-work* dir-checked?) #f)
 
 ;; definition for symbol *image-name*, type string
@@ -116,9 +107,6 @@
 
 ;; definition for symbol *capture-tga-buffer*, type object
 (define *capture-tga-buffer* (the-as object #f))
-
-;; failed to figure out what this is:
-0
 
 
 

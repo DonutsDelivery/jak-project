@@ -2,7 +2,24 @@
 (in-package goal)
 
 ;; definition for symbol *entity-info*, type (array entity-info)
-(define *entity-info* <static-data L10>)
+(define *entity-info*
+  (new 'static 'boxed-array :type entity-info
+    (new 'static 'entity-info
+      :ptype (type-ref bubbles-path :method-count 14)
+      :pool '*16k-dead-pool*
+      :heap-size #x8000
+      )
+    (new 'static 'entity-info :ptype 'veger-npc :pool '*16k-dead-pool* :heap-size #x10000)
+    (new 'static 'entity-info :ptype 'seem-npc :pool '*16k-dead-pool* :heap-size #x20000)
+    (new 'static 'entity-info :ptype 'kleever-npc :pool '*16k-dead-pool* :heap-size #x18000)
+    (new 'static 'entity-info :ptype 'damus-npc :pool '*16k-dead-pool* :heap-size #x10000)
+    (new 'static 'entity-info
+      :ptype (type-ref nav-graph :method-count 9)
+      :pool '*16k-dead-pool*
+      :heap-size #x4000
+      )
+    )
+  )
 
 ;; definition for function entity-info-lookup
 ;; WARN: Return type mismatch basic vs entity-info.

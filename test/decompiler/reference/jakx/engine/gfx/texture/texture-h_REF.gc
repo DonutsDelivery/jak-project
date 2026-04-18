@@ -65,25 +65,25 @@ as the tpage number and index of the texture within the tpage."
    )
   (:methods
     (new (symbol type) _type_)
-    (texture-pool-method-9 () none)
-    (texture-pool-method-10 () none)
-    (texture-pool-method-11 () none)
-    (texture-pool-method-12 () none)
-    (texture-pool-method-13 () none)
-    (texture-pool-method-14 () none)
-    (texture-pool-method-15 () none)
-    (texture-pool-method-16 () none)
-    (texture-pool-method-17 () none)
-    (texture-pool-method-18 () none)
-    (texture-pool-method-19 () none)
-    (texture-pool-method-20 () none)
-    (texture-pool-method-21 () none)
-    (texture-pool-method-22 () none)
-    (texture-pool-method-23 () none)
-    (texture-pool-method-24 () none)
-    (texture-pool-method-25 () none)
+    (texture-pool-method-9 (_type_) _type_)
+    (texture-pool-method-10 (_type_) _type_)
+    (texture-pool-method-11 (_type_) int)
+    (texture-pool-method-12 (_type_) int)
+    (texture-pool-method-13 (_type_ level int (pointer texture-id)) int)
+    (texture-pool-method-14 (_type_ level tpage-category bucket-id) none)
+    (texture-pool-method-15 (_type_ int) int)
+    (texture-pool-method-16 (_type_ texture-pool-segment int) texture-pool-segment)
+    (texture-pool-method-17 (_type_ texture-page) int)
+    (texture-pool-method-18 (_type_ int) int)
+    (texture-pool-method-19 (_type_) symbol)
+    (texture-pool-method-20 (_type_) symbol)
+    (texture-pool-method-21 (_type_) symbol)
+    (texture-pool-method-22 (_type_) none)
+    (texture-pool-method-23 (_type_) none)
+    (texture-pool-method-24 (_type_) none)
+    (texture-pool-method-25 (_type_) none)
     (texture-pool-method-26 () none)
-    (texture-pool-method-27 () none)
+    (texture-pool-method-27 () int)
     )
   )
 
@@ -183,7 +183,6 @@ So mask 0 is needed if segment 0 of the texture is needed, etc..."
   this
   )
 
-;; failed to figure out what this is:
 (set! (-> texture-masks-array heap-base) (the-as uint 48))
 
 ;; definition for symbol *texture-masks*, type texture-masks
@@ -297,10 +296,10 @@ Lower number segments are larger and have hi-res versions of textures."
    )
   (:methods
     (texture-page-method-9 () none)
-    (texture-page-method-10 () none)
-    (texture-page-method-11 () none)
-    (texture-page-method-12 () none)
-    (texture-page-method-13 () none)
+    (texture-page-method-10 (_type_ int int) int)
+    (texture-page-method-11 (_type_ int int) texture-page)
+    (texture-page-method-12 (_type_ dma-buffer tex-upload-mode) int)
+    (texture-page-method-13 (_type_ tex-upload-mode) int)
     (texture-page-method-14 () none)
     )
   )
@@ -432,7 +431,6 @@ to have a smaller impact on frame times when loading."
 ;; definition for symbol *texture-relocate-later*, type texture-relocate-later
 (define *texture-relocate-later* (new 'global 'texture-relocate-later))
 
-;; failed to figure out what this is:
 (set! (-> *texture-relocate-later* memcpy) #f)
 
 ;; definition for symbol *texture-page-dir*, type texture-page-dir
@@ -510,7 +508,6 @@ of the texture."
   this
   )
 
-;; failed to figure out what this is:
 (set! (-> adgif-shader-array heap-base) (the-as uint 80))
 
 ;; definition of type texture-base
@@ -858,10 +855,7 @@ of the texture."
   )
 
 ;; definition for symbol *texture-page-translate*, type (array texture-page-translate-item)
-(define *texture-page-translate* <static-data L5>)
-
-;; failed to figure out what this is:
-0
+(define *texture-page-translate* #f)
 
 
 

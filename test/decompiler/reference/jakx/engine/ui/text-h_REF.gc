@@ -33,10 +33,10 @@
    (text-data    (pointer uint8))
    )
   (:methods
-    (lookup-text! (_type_ game-text symbol) symbol)
-    (game-text-info-method-10 (_type_ text-id symbol) none)
+    (lookup-text! (_type_ text-id symbol) string)
+    (game-text-info-method-10 (_type_ text-id symbol) int)
     (game-text-info-method-11 (_type_ string) string)
-    (game-text-info-method-12 () none)
+    (game-text-info-method-12 () int)
     )
   )
 
@@ -67,9 +67,6 @@
 
 ;; definition for symbol *common-text*, type game-text-info
 (define *common-text* (the-as game-text-info #f))
-
-;; failed to figure out what this is:
-0
 
 
 

@@ -51,6 +51,7 @@
    (tailpred  glst-node)
    (numelem   int32)
    )
+  :allow-misaligned
   )
 
 ;; definition for method 3 of type glst-list
@@ -69,34 +70,57 @@
   )
 
 ;; definition for function glst-next
-;; ERROR: function has no type analysis. Cannot decompile.
+(defun glst-next ((arg0 glst-node))
+  "return the next node in the list"
+  (-> arg0 next)
+  )
 
 ;; definition for function glst-prev
-;; ERROR: function has no type analysis. Cannot decompile.
+(defun glst-prev ((arg0 glst-node))
+  "return the previous node in the list"
+  (-> arg0 prev)
+  )
 
 ;; definition for function glst-head
-;; ERROR: function has no type analysis. Cannot decompile.
+(defun glst-head ((arg0 glst-list))
+  "return the start of the list"
+  (-> arg0 head)
+  )
 
 ;; definition for function glst-tail
-;; ERROR: function has no type analysis. Cannot decompile.
+(defun glst-tail ((arg0 glst-list))
+  "return the tail of the list"
+  (-> arg0 tailpred)
+  )
 
 ;; definition for function glst-end-of-list?
-;; ERROR: function has no type analysis. Cannot decompile.
+(defun glst-end-of-list? ((arg0 glst-node))
+  "is this node the end of the list. #t = end"
+  (not (-> arg0 next))
+  )
 
 ;; definition for function glst-start-of-list?
-;; ERROR: function has no type analysis. Cannot decompile.
+(defun glst-start-of-list? ((arg0 glst-node))
+  "is this node the start of the list. #t = start"
+  (not (-> arg0 prev))
+  )
 
 ;; definition for function glst-empty?
-;; ERROR: function has no type analysis. Cannot decompile.
+(defun glst-empty? ((arg0 glst-list))
+  "is the list empty, #t = empty"
+  (= (-> arg0 tailpred) arg0)
+  )
 
 ;; definition for function glst-node-name
-;; ERROR: function has no type analysis. Cannot decompile.
+(defun glst-node-name ((arg0 glst-named-node))
+  (-> arg0 privname)
+  )
 
 ;; definition for function glst-set-name!
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; failed to figure out what this is:
-0
+(defun glst-set-name! ((arg0 glst-named-node) (arg1 string))
+  (set! (-> arg0 privname) arg1)
+  arg1
+  )
 
 
 

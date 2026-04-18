@@ -23,55 +23,170 @@
   this
   )
 
-;; type tie-fragment is defined here, but it is unknown to the decompiler
+;; definition of type tie-fragment
+(deftype tie-fragment (drawable)
+  "A mesh fragment of a TIE. This is a chunk of mesh that is rendered by VU1, stored as DMA chains."
+  ((gif-ref        (inline-array adgif-shader)  :overlay-at id)
+   (point-ref      uint32                       :offset   8)
+   (color-index    uint16                       :offset  12)
+   (base-colors    uint8                        :offset  14)
+   (tex-count      uint16                       :offset  32)
+   (gif-count      uint16                       :offset  34)
+   (vertex-count   uint16                       :offset  36)
+   (color-count    uint16)
+   (dp-ref         uint32)
+   (dp-qwc         uint32)
+   (generic-ref    uint32)
+   (generic-count  uint16)
+   (normal-count   uint16)
+   (normal-ref     uint32)
+   (debug          tie-fragment-debug)
+   )
+  )
 
 ;; definition for method 3 of type tie-fragment
-;; ERROR: function has no type analysis. Cannot decompile.
+(defmethod inspect ((this tie-fragment))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tid: ~D~%" (-> this id))
+  (format #t "~1Tbsphere: ~`vector`P~%" (-> this bsphere))
+  (format #t "~1Tgif-ref: #x~X~%" (-> this gif-ref))
+  (format #t "~1Tpoint-ref: #x~X~%" (-> this point-ref))
+  (format #t "~1Tcolor-index: ~D~%" (-> this color-index))
+  (format #t "~1Tbase-colors: ~D~%" (-> this base-colors))
+  (format #t "~1Ttex-count: ~D~%" (-> this tex-count))
+  (format #t "~1Tgif-count: ~D~%" (-> this gif-count))
+  (format #t "~1Tvertex-count: ~D~%" (-> this vertex-count))
+  (format #t "~1Tcolor-count: ~D~%" (-> this color-count))
+  (format #t "~1Tdp-ref: #x~X~%" (-> this dp-ref))
+  (format #t "~1Tdp-qwc: ~D~%" (-> this dp-qwc))
+  (format #t "~1Tgeneric-ref: #x~X~%" (-> this generic-ref))
+  (format #t "~1Tgeneric-count: ~D~%" (-> this generic-count))
+  (format #t "~1Tnormal-count: ~D~%" (-> this normal-count))
+  (format #t "~1Tnormal-ref: #x~X~%" (-> this normal-ref))
+  (format #t "~1Tdebug: #<tie-fragment-debug @ #x~X>~%" (-> this debug))
+  (label cfg-4)
+  this
+  )
 
-;; type instance-tie is defined here, but it is unknown to the decompiler
+;; definition of type instance-tie
+(deftype instance-tie (instance)
+  ((color-indices  uint32                :offset   8)
+   (bucket-ptr     prototype-bucket-tie  :offset  12)
+   (max-scale      uint16                :offset  38)
+   (rmin-scale     uint16                :offset  54)
+   )
+  )
 
 ;; definition for method 3 of type instance-tie
-;; ERROR: function has no type analysis. Cannot decompile.
+(defmethod inspect ((this instance-tie))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tid: ~D~%" (-> this id))
+  (format #t "~1Tbsphere: ~`vector`P~%" (-> this bsphere))
+  (format #t "~1Tbucket-index: ~D~%" (-> this bucket-index))
+  (format #t "~1Torigin: #<matrix4h @ #x~X>~%" (-> this origin))
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (format #t "~1Twind-index: ~D~%" (-> this wind-index))
+  (format #t "~1Tcolor-indices: #x~X~%" (-> this color-indices))
+  (format #t "~1Tbucket-ptr: ~A~%" (-> this bucket-ptr))
+  (format #t "~1Tmax-scale: ~D~%" (-> this max-scale))
+  (format #t "~1Trmin-scale: ~D~%" (-> this rmin-scale))
+  (label cfg-4)
+  this
+  )
 
-;; type drawable-inline-array-instance-tie is defined here, but it is unknown to the decompiler
+;; definition of type drawable-inline-array-instance-tie
+(deftype drawable-inline-array-instance-tie (drawable-inline-array)
+  ()
+  )
 
-;; type drawable-tree-instance-tie is defined here, but it is unknown to the decompiler
+;; definition of type drawable-tree-instance-tie
+(deftype drawable-tree-instance-tie (drawable-tree)
+  ((prototypes  proxy-prototype-array-tie  :offset   8)
+   )
+  )
 
 ;; definition for method 3 of type drawable-tree-instance-tie
-;; ERROR: function has no type analysis. Cannot decompile.
+(defmethod inspect ((this drawable-tree-instance-tie))
+  (when (not this)
+    (set! this this)
+    (goto cfg-7)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tid: ~D~%" (-> this id))
+  (format #t "~1Tbsphere: ~`vector`P~%" (-> this bsphere))
+  (format #t "~1Tlength: ~D~%" (-> this length))
+  (format #t "~1Tdata[0] @ #x~X~%" (-> this data))
+  (dotimes (s5-0 (-> this length))
+    (format #t "~T  [~D]~1Tdata: ~A~%" s5-0 (-> this data s5-0))
+    )
+  (format #t "~1Tprototypes: ~A~%" (-> this prototypes))
+  (label cfg-7)
+  this
+  )
 
-;; type prototype-tie is defined here, but it is unknown to the decompiler
+;; definition of type prototype-tie
+(deftype prototype-tie (drawable-inline-array)
+  ()
+  )
 
-;; type tie-matrix is defined here, but it is unknown to the decompiler
+;; definition of type tie-matrix
+(deftype tie-matrix (structure)
+  ((mat           matrix  :inline)
+   (morph         qword   :inline)
+   (fog           qword   :inline)
+   (envmap-flag   uint32  :overlay-at (-> fog data 0))
+   (guard-flag    uint32  :overlay-at (-> fog data 1))
+   (vertex-alpha  float   :overlay-at (-> fog data 2))
+   (fog-value     float   :overlay-at (-> fog data 3))
+   (fixed-alpha   float   :overlay-at (-> morph data 1))
+   )
+  )
 
-;; failed to figure out what this is:
-(method-set! (the-as type tie-matrix) 3 L13)
+;; definition for method 3 of type tie-matrix
+(defmethod inspect ((this tie-matrix))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'tie-matrix)
+  (format #t "~1Tmat: #<matrix @ #x~X>~%" (-> this mat))
+  (format #t "~1Tmorph: #<qword @ #x~X>~%" (-> this morph))
+  (format #t "~1Tfog: #<qword @ #x~X>~%" (-> this fog))
+  (format #t "~1Tenvmap-flag: ~D~%" (-> this envmap-flag))
+  (format #t "~1Tguard-flag: ~D~%" (-> this guard-flag))
+  (format #t "~1Tvertex-alpha: ~f~%" (-> this vertex-alpha))
+  (format #t "~1Tfog-value: ~f~%" (-> this fog-value))
+  (format #t "~1Tfixed-alpha: ~f~%" (-> this fixed-alpha))
+  (label cfg-4)
+  this
+  )
 
 ;; type instance-tie-work is defined here, but it is unknown to the decompiler
 
-;; failed to figure out what this is:
 (method-set! (the-as type instance-tie-work) 3 L10)
 
 ;; type instance-tie-dma is defined here, but it is unknown to the decompiler
 
-;; failed to figure out what this is:
 (method-set! (the-as type instance-tie-dma) 3 L7)
 
 ;; type prototype-tie-work is defined here, but it is unknown to the decompiler
 
-;; failed to figure out what this is:
 (method-set! (the-as type prototype-tie-work) 3 L4)
 
 ;; type prototype-tie-dma is defined here, but it is unknown to the decompiler
 
-;; failed to figure out what this is:
 (method-set! (the-as type prototype-tie-dma) 3 L1)
 
 ;; definition for symbol *instance-tie-work-copy*, type object
 (define *instance-tie-work-copy* (the-as object #f))
-
-;; failed to figure out what this is:
-0
 
 
 

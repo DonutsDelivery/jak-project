@@ -49,7 +49,7 @@
     (net-predictor-simple-method-10 () none)
     (net-predictor-simple-method-11 () none)
     (net-predictor-simple-method-12 () none)
-    (net-predictor-simple-method-13 () none)
+    (net-predictor-simple-method-13 () int)
     (net-predictor-simple-method-14 () none)
     (net-predictor-simple-method-15 () none)
     (net-predictor-simple-method-16 () none)
@@ -111,9 +111,6 @@
   (label cfg-4)
   this
   )
-
-;; failed to figure out what this is:
-0
 
 
 

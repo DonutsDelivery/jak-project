@@ -77,7 +77,7 @@
    (task       game-task           :overlay-at (-> perm task))
    )
   (:methods
-    (entity-links-method-9 () none)
+    (entity-links-method-9 (_type_ vector) symbol)
     )
   )
 
@@ -185,7 +185,6 @@
   this
   )
 
-;; failed to figure out what this is:
 (set! (-> entity-perm-array heap-base) (the-as uint 16))
 
 ;; definition of type entity-links-array
@@ -210,7 +209,6 @@ Levels store a reference to this which holds all the entities in the level."
   this
   )
 
-;; failed to figure out what this is:
 (set! (-> entity-links-array heap-base) (the-as uint 64))
 
 ;; definition of type entity
@@ -249,7 +247,10 @@ that gets accessed by the accompanying process."
     )
   )
 
-;; type entity-race-mesh is defined here, but it is unknown to the decompiler
+;; definition of type entity-race-mesh
+(deftype entity-race-mesh (entity-nav-mesh)
+  ()
+  )
 
 ;; definition of type entity-actor
 (deftype entity-actor (entity)
@@ -262,8 +263,8 @@ that gets accessed by the accompanying process."
   (:methods
     (next-actor (_type_) entity-actor)
     (prev-actor (_type_) entity-actor)
-    (debug-print (_type_ symbol type) none)
-    (toggle-status (_type_ entity-perm-status symbol) none)
+    (debug-print (_type_ symbol type) entity-actor)
+    (toggle-status (_type_ entity-perm-status symbol) entity-perm-status)
     (get-simple-travel-vector (_type_ vector vector vector object float) nav-mesh)
     (project-point-to-nav-mesh (_type_ vector vector nav-poly float) nav-poly)
     )
@@ -310,7 +311,6 @@ that gets accessed by the accompanying process."
   this
   )
 
-;; failed to figure out what this is:
 (set! (-> actor-group heap-base) (the-as uint 8))
 
 ;; definition of type entity-info
@@ -359,9 +359,6 @@ that gets accessed by the accompanying process."
 
 ;; definition for symbol *ACTOR-bank*, type actor-bank
 (define *ACTOR-bank* (new 'static 'actor-bank :pause-dist (meters 50) :birth-dist (meters 220) :birth-max 10))
-
-;; failed to figure out what this is:
-0
 
 
 

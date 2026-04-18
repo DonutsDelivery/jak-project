@@ -80,9 +80,6 @@ As a result, this type has a lot of weird methods and extra stuff hidden in it."
   (deg-diff (y-angle this) (vector-y-angle (vector-! (new 'stack-no-clear 'vector) arg0 (-> this trans))))
   )
 
-;; failed to figure out what this is:
-0
-
 
 
 

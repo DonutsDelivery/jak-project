@@ -103,8 +103,8 @@ Multiple channels are used to blend animations together."
    )
   (:methods
     (new (symbol type process-drawable) _type_)
-    (reset (_type_) none)
-    (update (_type_) none)
+    (reset (_type_) top-anim-joint-control)
+    (update (_type_) int)
     (get-channel (_type_ int) joint-control-channel)
     (push-anim-to-targ (_type_ art-joint-anim float int int float float symbol) none)
     )
@@ -238,10 +238,25 @@ Multiple channels are used to blend animations together."
   this
   )
 
-;; type matrix-stack is defined here, but it is unknown to the decompiler
+;; definition of type matrix-stack
+(deftype matrix-stack (structure)
+  ((top   matrix)
+   (data  matrix  24 :inline)
+   )
+  )
 
-;; failed to figure out what this is:
-(method-set! (the-as type matrix-stack) 3 L7)
+;; definition for method 3 of type matrix-stack
+(defmethod inspect ((this matrix-stack))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'matrix-stack)
+  (format #t "~1Ttop: #<matrix @ #x~X>~%" (-> this top))
+  (format #t "~1Tdata[24] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type channel-upload-info
 (deftype channel-upload-info (structure)
@@ -252,6 +267,7 @@ Multiple channels are used to blend animations together."
    (amount     float)
    (interp     float)
    )
+  :pack-me
   )
 
 ;; definition for method 3 of type channel-upload-info
@@ -271,13 +287,49 @@ Multiple channels are used to blend animations together."
   this
   )
 
-;; type joint-work is defined here, but it is unknown to the decompiler
+;; definition of type joint-work
+(deftype joint-work (structure)
+  ((temp-mtx        matrix                       :inline)
+   (joint-stack     matrix-stack                 :inline)
+   (fix-jmp-table   (function none)              16)
+   (frm-jmp-table   (function none)              16)
+   (pair-jmp-table  (function none)              16)
+   (uploads         channel-upload-info          24 :inline)
+   (num-uploads     int32)
+   (mtx-acc         matrix                       2 :inline)
+   (tq-acc          transformq                   100 :inline)
+   (jacp-hdr        joint-anim-compressed-hdr    :inline)
+   (fixed-data      joint-anim-compressed-fixed  :inline)
+   (frame-data      joint-anim-compressed-frame  2 :inline)
+   (flatten-array   float                        576 :overlay-at mtx-acc)
+   (flattened       vector                       24  :overlay-at mtx-acc)
+   )
+  )
 
-;; failed to figure out what this is:
-(method-set! (the-as type joint-work) 3 L1)
-
-;; failed to figure out what this is:
-0
+;; definition for method 3 of type joint-work
+(defmethod inspect ((this joint-work))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'joint-work)
+  (format #t "~1Ttemp-mtx: #<matrix @ #x~X>~%" (-> this temp-mtx))
+  (format #t "~1Tjoint-stack: #<matrix-stack @ #x~X>~%" (-> this joint-stack))
+  (format #t "~1Tfix-jmp-table[16] @ #x~X~%" (-> this fix-jmp-table))
+  (format #t "~1Tfrm-jmp-table[16] @ #x~X~%" (-> this frm-jmp-table))
+  (format #t "~1Tpair-jmp-table[16] @ #x~X~%" (-> this pair-jmp-table))
+  (format #t "~1Tuploads[24] @ #x~X~%" (-> this uploads))
+  (format #t "~1Tnum-uploads: ~D~%" (-> this num-uploads))
+  (format #t "~1Tmtx-acc[2] @ #x~X~%" (-> this mtx-acc))
+  (format #t "~1Ttq-acc[100] @ #x~X~%" (-> this tq-acc))
+  (format #t "~1Tjacp-hdr: #<joint-anim-compressed-hdr @ #x~X>~%" (-> this jacp-hdr))
+  (format #t "~1Tfixed-data: #<joint-anim-compressed-fixed @ #x~X>~%" (-> this fixed-data))
+  (format #t "~1Tframe-data[2] @ #x~X~%" (-> this frame-data))
+  (format #t "~1Tflatten-array[576] @ #x~X~%" (-> this mtx-acc))
+  (format #t "~1Tflattened[24] @ #x~X~%" (-> this mtx-acc))
+  (label cfg-4)
+  this
+  )
 
 
 

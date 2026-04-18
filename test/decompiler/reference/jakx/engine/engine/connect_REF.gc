@@ -633,11 +633,11 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
   (:methods
     (new (symbol type symbol int type) _type_)
     (schedule-callback (_type_ object time-frame) connection-pers)
-    (kill-callback (_type_ connection-pers) none)
-    (kill-by-key (_type_ object) none)
-    (kill-matching (_type_ (function engine-pers connection-pers object object symbol) object object) none)
-    (update-callback (_type_) none)
-    (run-pending-updates! (_type_ time-frame) none)
+    (kill-callback (_type_ connection-pers) int)
+    (kill-by-key (_type_ object) int)
+    (kill-matching (_type_ (function engine-pers connection-pers object object symbol) object object) int)
+    (update-callback (_type_) int)
+    (run-pending-updates! (_type_ time-frame) int)
     )
   )
 
@@ -731,24 +731,19 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
   )
 
 ;; definition for method 10 of type engine-pers
-;; WARN: Return type mismatch int vs none.
 (defmethod kill-callback ((this engine-pers) (arg0 connection-pers))
   "Called when a connection is removed."
   0
-  (none)
   )
 
 ;; definition for method 13 of type engine-pers
-;; WARN: Return type mismatch int vs none.
 (defmethod update-callback ((this engine-pers))
   "Called when a connection is run.
    Users can override this as needed."
   0
-  (none)
   )
 
 ;; definition for method 11 of type engine-pers
-;; WARN: Return type mismatch int vs none.
 (defmethod kill-by-key ((this engine-pers) (arg0 object))
   "Remove connections with this key, calling `kill-callback`."
   (let ((s4-0 (&-> this alive-list))
@@ -773,11 +768,9 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
       )
     )
   0
-  (none)
   )
 
 ;; definition for method 12 of type engine-pers
-;; WARN: Return type mismatch int vs none.
 (defmethod kill-matching ((this engine-pers)
                          (arg0 (function engine-pers connection-pers object object symbol))
                          (arg1 object)
@@ -806,11 +799,9 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
       )
     )
   0
-  (none)
   )
 
 ;; definition for method 14 of type engine-pers
-;; WARN: Return type mismatch int vs none.
 (defmethod run-pending-updates! ((this engine-pers) (arg0 time-frame))
   "Run updates if they scheduled. If something is found that has no pending update, kill it.
    Note that we won't kill things on this call if they fail to update their `update-time`.
@@ -841,11 +832,7 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
     )
   (set! (-> this execute-time) (the-as uint arg0))
   0
-  (none)
   )
-
-;; failed to figure out what this is:
-0
 
 
 

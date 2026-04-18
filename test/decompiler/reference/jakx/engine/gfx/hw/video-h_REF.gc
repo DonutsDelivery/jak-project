@@ -37,10 +37,7 @@
   )
 
 ;; definition for symbol *video-params*, type video-params
-(define *video-params* <static-data L1>)
-
-;; failed to figure out what this is:
-0
+(define *video-params* #f)
 
 
 

@@ -549,12 +549,12 @@ Each process-drawable has a draw-control."
   (:methods
     (new (symbol type process symbol) _type_)
     (get-skeleton-origin (_type_) vector)
-    (lod-set! (_type_ int) none)
-    (lods-assign! (_type_ lod-set) none)
-    (setup-masks (_type_ int int) none)
+    (lod-set! (_type_ int) int)
+    (lods-assign! (_type_ lod-set) int)
+    (setup-masks (_type_ int int) int)
     (setup-cspace-and-add (_type_ art-joint-geo symbol) cspace-array)
-    (draw-control-method-14 (_type_ cspace-array joint-control) none)
-    (do-joint-math (_type_ cspace-array joint-control) none)
+    (draw-control-method-14 (_type_ cspace-array joint-control) int)
+    (do-joint-math (_type_ cspace-array joint-control) int)
     )
   )
 
@@ -727,9 +727,6 @@ Each process-drawable has a draw-control."
 (defmethod get-skeleton-origin ((this draw-control))
   (-> this skeleton bones 0 transform trans)
   )
-
-;; failed to figure out what this is:
-0
 
 
 

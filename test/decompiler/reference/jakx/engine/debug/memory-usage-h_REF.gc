@@ -65,9 +65,6 @@
 ;; definition for symbol *temp-mem-usage*, type memory-usage-block
 (define *temp-mem-usage* (the-as memory-usage-block #f))
 
-;; failed to figure out what this is:
-0
-
 
 
 

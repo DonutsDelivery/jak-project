@@ -103,29 +103,49 @@
   this
   )
 
-;; type lightning-spans-array is defined here, but it is unknown to the decompiler
-
-;; failed to figure out what this is:
-(method-set! (the-as type lightning-spans-array) 3 L16)
-
-;; failed to figure out what this is:
-(let ((v1-4 8)
-      (a0-8 lightning-spans-array)
-      )
-  (s.h! (+ a0-8 12) v1-4)
+;; definition of type lightning-spans-array
+(deftype lightning-spans-array (inline-array-class)
+  ((data  lightning-span  :dynamic :offset  16)
+   )
   )
 
-;; type lightning-spans-internal-array is defined here, but it is unknown to the decompiler
-
-;; failed to figure out what this is:
-(method-set! (the-as type lightning-spans-internal-array) 3 L13)
-
-;; failed to figure out what this is:
-(let ((v1-6 4)
-      (a0-11 lightning-spans-internal-array)
-      )
-  (s.h! (+ a0-11 12) v1-6)
+;; definition for method 3 of type lightning-spans-array
+(defmethod inspect ((this lightning-spans-array))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tlength: ~D~%" (-> this length))
+  (format #t "~1Tallocated-length: ~D~%" (-> this allocated-length))
+  (format #t "~1Tdata[0] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
   )
+
+(set! (-> lightning-spans-array heap-base) (the-as uint 8))
+
+;; definition of type lightning-spans-internal-array
+(deftype lightning-spans-internal-array (inline-array-class)
+  ((data  lightning-span-internal  :dynamic :offset  16)
+   )
+  )
+
+;; definition for method 3 of type lightning-spans-internal-array
+(defmethod inspect ((this lightning-spans-internal-array))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tlength: ~D~%" (-> this length))
+  (format #t "~1Tallocated-length: ~D~%" (-> this allocated-length))
+  (format #t "~1Tdata[0] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
+  )
+
+(set! (-> lightning-spans-internal-array heap-base) (the-as uint 4))
 
 ;; definition of type tex-u-holder
 (deftype tex-u-holder (structure)
@@ -147,15 +167,114 @@
   this
   )
 
-;; type lightning-bolt is defined here, but it is unknown to the decompiler
+;; definition of type lightning-bolt
+(deftype lightning-bolt (basic)
+  ((current-points                 vector-array)
+   (desired-points                 vector-array)
+   (span-pts-start                 vector-array)
+   (spans                          lightning-spans-array)
+   (spans-internal                 lightning-spans-internal-array)
+   (strip1                         prim-strip)
+   (strip2                         prim-strip)
+   (inner-point-travel-time        uint64)
+   (start-fade-time                uint64)
+   (new-inner-point-generate-time  uint64)
+   (last-generate-time             uint64)
+   (base-width                     float)
+   (current-uv-shift               float)
+   (current-fade-scalar            float)
+   (fractal-reduction              float)
+   (appearance                     lightning-appearance)
+   (fade-mode                      uint64)
+   (generate-mode                  uint64)
+   (snap-inner-points?             symbol)
+   (span-data                      int8  2)
+   (num-active-spans               int8  :overlay-at (-> span-data 0))
+   (num-spans                      int8  :overlay-at (-> span-data 1))
+   (base-color                     rgba)
+   )
+  (:methods
+    (lightning-bolt-method-9 (_type_ int int lightning-appearance) none)
+    (lightning-bolt-method-10 (_type_) none)
+    (lightning-bolt-method-11 (_type_) none)
+    (lightning-bolt-method-12 (_type_) none)
+    (lightning-bolt-method-13 (_type_ int) none)
+    (lightning-bolt-method-14 (_type_) int)
+    (lightning-bolt-method-15 (_type_ object int lightning-span-internal) none)
+    (lightning-bolt-method-16 (_type_ vector float float vector matrix) none)
+    (lightning-bolt-method-17 (_type_ uint float float curve2d-fast float) float)
+    (lightning-bolt-method-18 () none)
+    (lightning-bolt-method-19 (_type_ vector int int matrix float float) none)
+    (lightning-bolt-method-20 (_type_ int lightning-span-internal) vector)
+    (lightning-bolt-method-21 (_type_ int int float) none)
+    (lightning-bolt-method-22 (_type_) none)
+    )
+  )
 
-;; failed to figure out what this is:
-(method-set! (the-as type lightning-bolt) 3 L7)
+;; definition for method 3 of type lightning-bolt
+(defmethod inspect ((this lightning-bolt))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tcurrent-points: ~A~%" (-> this current-points))
+  (format #t "~1Tdesired-points: ~A~%" (-> this desired-points))
+  (format #t "~1Tspan-pts-start: ~A~%" (-> this span-pts-start))
+  (format #t "~1Tspans: ~A~%" (-> this spans))
+  (format #t "~1Tspans-internal: ~A~%" (-> this spans-internal))
+  (format #t "~1Tstrip1: ~A~%" (-> this strip1))
+  (format #t "~1Tstrip2: ~A~%" (-> this strip2))
+  (format #t "~1Tinner-point-travel-time: ~D~%" (-> this inner-point-travel-time))
+  (format #t "~1Tstart-fade-time: ~D~%" (-> this start-fade-time))
+  (format #t "~1Tnew-inner-point-generate-time: ~D~%" (-> this new-inner-point-generate-time))
+  (format #t "~1Tlast-generate-time: ~D~%" (-> this last-generate-time))
+  (format #t "~1Tbase-width: ~f~%" (-> this base-width))
+  (format #t "~1Tcurrent-uv-shift: ~f~%" (-> this current-uv-shift))
+  (format #t "~1Tcurrent-fade-scalar: ~f~%" (-> this current-fade-scalar))
+  (format #t "~1Tfractal-reduction: ~f~%" (-> this fractal-reduction))
+  (format #t "~1Tappearance: #<lightning-appearance @ #x~X>~%" (-> this appearance))
+  (format #t "~1Tfade-mode: ~D~%" (-> this fade-mode))
+  (format #t "~1Tgenerate-mode: ~D~%" (-> this generate-mode))
+  (format #t "~1Tsnap-inner-points?: ~A~%" (-> this snap-inner-points?))
+  (format #t "~1Tspan-data[2] @ #x~X~%" (-> this span-data))
+  (format #t "~1Tnum-active-spans: ~D~%" (-> this num-active-spans))
+  (format #t "~1Tnum-spans: ~D~%" (-> this num-spans))
+  (format #t "~1Tbase-color: ~D~%" (-> this base-color))
+  (label cfg-4)
+  this
+  )
 
-;; type lightning-new-tracker is defined here, but it is unknown to the decompiler
+;; definition of type lightning-new-tracker
+(deftype lightning-new-tracker (process)
+  ((bolt        lightning-bolt)
+   (lifetime    uint64)
+   (state-time  uint64)
+   )
+  (:state-methods
+    die
+    active
+    )
+  (:methods
+    (lightning-new-tracker-method-16 () none)
+    )
+  )
 
-;; failed to figure out what this is:
-(method-set! (the-as type lightning-new-tracker) 3 L4)
+;; definition for method 3 of type lightning-new-tracker
+(defmethod inspect ((this lightning-new-tracker))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (let ((t9-0 (method-of-type process inspect)))
+    (t9-0 this)
+    )
+  (format #t "~2Tbolt: ~A~%" (-> this bolt))
+  (format #t "~2Tlifetime: ~D~%" (-> this lifetime))
+  (format #t "~2Tstate-time: ~D~%" (-> this state-time))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type lightning-tracker-init-params
 (deftype lightning-tracker-init-params (structure)
@@ -186,9 +305,6 @@
   (label cfg-4)
   this
   )
-
-;; failed to figure out what this is:
-0
 
 
 

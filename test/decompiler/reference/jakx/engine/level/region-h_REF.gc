@@ -53,7 +53,6 @@ and fit in scratchpad/cache better."
   this
   )
 
-;; failed to figure out what this is:
 (set! (-> region-array heap-base) (the-as uint 16))
 
 ;; definition of type drawable-region-prim
@@ -63,7 +62,7 @@ Note that all child classes of this must be 32-bytes."
   ((region  region  :offset   8)
    )
   (:methods
-    (debug-draw-region (_type_ int) none)
+    (debug-draw-region (_type_ int) int)
     (track-region (_type_ region-prim-area) symbol)
     (within-area? (_type_ region-prim-area) symbol)
     )
@@ -91,7 +90,7 @@ Note that all child classes of this must be 32-bytes."
    )
   (:methods
     (drawable-tree-region-prim-method-17 (_type_ vector) symbol)
-    (debug-print (_type_ vector object) none)
+    (debug-print (_type_ vector object) int)
     )
   )
 
@@ -212,7 +211,6 @@ exactly the same size as the parent, so it's okay."
   this
   )
 
-;; failed to figure out what this is:
 (set! (-> region-face-array heap-base) (the-as uint 32))
 
 ;; definition of type drawable-region-volume
@@ -257,9 +255,6 @@ exactly the same size as the parent, so it's okay."
   (label cfg-4)
   this
   )
-
-;; failed to figure out what this is:
-0
 
 
 

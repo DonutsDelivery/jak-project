@@ -84,13 +84,23 @@
 (define *current-ramdisk-id* 0)
 
 ;; definition for function ramdisk-load
-;; ERROR: function has no type analysis. Cannot decompile.
+(defun ramdisk-load ((arg0 int) (arg1 uint) (arg2 uint) (arg3 pointer))
+  (let ((v1-1 (the-as ramdisk-rpc-load (add-element *ramdisk-rpc*))))
+    (set! (-> v1-1 offset) arg1)
+    (set! (-> v1-1 ee-id) arg0)
+    (set! (-> v1-1 length) arg2)
+    )
+  (call *ramdisk-rpc* (the-as uint 0) arg3 arg2)
+  0
+  )
 
 ;; definition for function ramdisk-sync
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; failed to figure out what this is:
-0
+;; WARN: Return type mismatch int vs none.
+(defun ramdisk-sync ()
+  (sync *ramdisk-rpc* #t)
+  0
+  (none)
+  )
 
 
 

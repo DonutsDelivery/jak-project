@@ -1,10 +1,27 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; type wind-vector is defined here, but it is unknown to the decompiler
+;; definition of type wind-vector
+(deftype wind-vector (structure)
+  ((wind-pos   vector4w  :inline)
+   (wind-vel   vector4w  :inline)
+   (stiffness  float     :overlay-at (-> wind-vel data 3))
+   )
+  )
 
-;; failed to figure out what this is:
-(method-set! (the-as type wind-vector) 3 L9)
+;; definition for method 3 of type wind-vector
+(defmethod inspect ((this wind-vector))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'wind-vector)
+  (format #t "~1Twind-pos: #<vector4w @ #x~X>~%" (-> this wind-pos))
+  (format #t "~1Twind-vel: #<vector4w @ #x~X>~%" (-> this wind-vel))
+  (format #t "~1Tstiffness: ~f~%" (-> this stiffness))
+  (label cfg-4)
+  this
+  )
 
 ;; definition for symbol *wind-scales*, type array
 (define *wind-scales* (the-as array (new 'static 'boxed-array :type uint8
@@ -100,13 +117,27 @@
   this
   )
 
-;; type wind-dma is defined here, but it is unknown to the decompiler
+;; definition of type wind-dma
+(deftype wind-dma (structure)
+  ((buffer0  wind-vector  128 :inline)
+   (buffer1  wind-vector  128 :inline)
+   (buffer2  wind-vector  128 :inline)
+   )
+  )
 
-;; failed to figure out what this is:
-(method-set! (the-as type wind-dma) 3 L3)
-
-;; failed to figure out what this is:
-0
+;; definition for method 3 of type wind-dma
+(defmethod inspect ((this wind-dma))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'wind-dma)
+  (format #t "~1Tbuffer0[128] @ #x~X~%" (-> this buffer0))
+  (format #t "~1Tbuffer1[128] @ #x~X~%" (-> this buffer1))
+  (format #t "~1Tbuffer2[128] @ #x~X~%" (-> this buffer2))
+  (label cfg-4)
+  this
+  )
 
 
 
