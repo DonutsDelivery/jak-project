@@ -52475,15 +52475,12 @@
 
 
   
-#|(deftype nav-mesh-editable-array (inline-array-class)
-  ((length           int32                      :offset-assert 4)
-   (allocated-length int32                      :offset-assert 8)
-   (data             nav-mesh-editable :dynamic :offset-assert 16) ;; guessed by decompiler
-   )
+(deftype nav-mesh-editable-array (inline-array-class)
+  ()
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -52509,15 +52506,12 @@
 
 
   
-#|(deftype nav-mesh-editor-undo-array (inline-array-class)
-  ((length           int32                         :offset-assert 4)
-   (allocated-length int32                         :offset-assert 8)
-   (data             nav-mesh-editor-undo :dynamic :offset-assert 16) ;; guessed by decompiler
-   )
+(deftype nav-mesh-editor-undo-array (inline-array-class)
+  ()
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
