@@ -50406,7 +50406,7 @@
 
 
   
-(deftype helmet-hud (process-drawable)
+#|(deftype helmet-hud (process-drawable)
   ()
   :method-count-assert 52
   :size-assert         #xf8
@@ -50417,13 +50417,13 @@
   (:state-methods
     idle ;; 50
     )
-  )
+  )|#
   
 
 
 
   
-(deftype helmet-garage (process-drawable)
+#|(deftype helmet-garage (process-drawable)
   ((offset        vector :inline :offset-assert 256)
    (hud-handle    uint64         :offset-assert 272)
    (vehicle-level basic          :offset-assert 280)
@@ -50435,7 +50435,7 @@
     idle ;; 50
     helmet-garage-method-51 ;; 51
     )
-  )
+  )|#
   
 
 
@@ -59577,7 +59577,7 @@
 (define-extern flow-section-array object)
 ;; (define-extern fmv-player object) ;; activated as deftype
 (define-extern ghost-info object)
-;; (define-extern helmet-hud object) ;; activated as deftype
+(define-extern helmet-hud object)
 (define-extern high-scores-list object)
 (define-extern hiphog-states object)
 (define-extern history-elt object)
@@ -59779,7 +59779,7 @@
 (define-extern flow-control object)
 (define-extern fuel-cell object)
 (define-extern gui-control object)
-;; (define-extern helmet-garage object) ;; activated as deftype
+(define-extern helmet-garage object)
 (define-extern hud-artifact-indicators-view0 object)
 (define-extern hud-background-top-view-1 object)
 (define-extern hud-deathrace-stats-split-view-0 object)
