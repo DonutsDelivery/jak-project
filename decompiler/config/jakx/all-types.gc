@@ -31844,20 +31844,20 @@
 
 
   
-#|(deftype tie-matrix (structure)
+(deftype tie-matrix (structure)
   ((mat          matrix :inline :offset-assert 0)
    (morph        qword  :inline :offset-assert 64)
    (fog          qword  :inline :offset-assert 80)
-   (envmap-flag  uint32         :offset-assert 80)
-   (guard-flag   uint32         :offset-assert 84)
-   (vertex-alpha float          :offset-assert 88)
-   (fog-value    float          :offset-assert 92)
-   (fixed-alpha  float          :offset-assert 68)
+   (envmap-flag  uint32         :offset 80)
+   (guard-flag   uint32         :offset 84)
+   (vertex-alpha float          :offset 88)
+   (fog-value    float          :offset 92)
+   (fixed-alpha  float          :offset 68)
    )
   :method-count-assert 9
   :size-assert         #x60
   :flag-assert         #x900000060
-  )|#
+  )
   
 
 
