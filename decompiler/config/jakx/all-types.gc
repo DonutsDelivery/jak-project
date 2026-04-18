@@ -1782,7 +1782,7 @@
 
 
   
-#|(deftype krasmale (process-drawable)
+(deftype krasmale (process-drawable)
   ((extra-id uint32  :offset-assert 248)
    (anim     basic   :offset-assert 252)
    )
@@ -1792,7 +1792,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
@@ -53548,23 +53548,23 @@
 
 
   
-#|(deftype hud-ctf-indicators-view0 (in-game-hud)
+(deftype hud-ctf-indicators-view0 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-ctf-indicators-view1 (in-game-hud)
+(deftype hud-ctf-indicators-view1 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
@@ -53594,23 +53594,23 @@
 
 
   
-#|(deftype hud-hunt-indicators-view0 (in-game-hud)
+(deftype hud-hunt-indicators-view0 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-hunt-indicators-view1 (in-game-hud)
+(deftype hud-hunt-indicators-view1 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
@@ -54004,89 +54004,89 @@
 
 
   
-#|(deftype hud-football-stats-aux-view00 (in-game-hud)
+(deftype hud-football-stats-aux-view00 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-football-stats-aux-view01 (in-game-hud)
+(deftype hud-football-stats-aux-view01 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-football-stats-aux-view10 (in-game-hud)
+(deftype hud-football-stats-aux-view10 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-football-stats-aux-view11 (in-game-hud)
+(deftype hud-football-stats-aux-view11 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-football-stats-view-view-0 (in-game-hud)
+(deftype hud-football-stats-view-view-0 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-football-stats-view-view-1 (in-game-hud)
+(deftype hud-football-stats-view-view-1 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-football-stats-top-view-view-0 (in-game-hud)
+(deftype hud-football-stats-top-view-view-0 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-football-stats-top-view-view-1 (in-game-hud)
+(deftype hud-football-stats-top-view-view-1 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
@@ -54102,56 +54102,56 @@
 
 
   
-#|(deftype hud-football-managed-intro0 (in-game-hud)
+(deftype hud-football-managed-intro0 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-football-managed-intro1 (in-game-hud)
+(deftype hud-football-managed-intro1 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-football-managed-intro2 (in-game-hud)
+(deftype hud-football-managed-intro2 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-football-managed-intro3 (in-game-hud)
+(deftype hud-football-managed-intro3 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-football-managed-intro4 (in-game-hud)
+(deftype hud-football-managed-intro4 (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
@@ -54317,12 +54317,12 @@
 
 
   
-#|(deftype hud-time-box-stats (in-game-hud)
+(deftype hud-time-box-stats (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
@@ -54637,12 +54637,12 @@
 
 
   
-#|(deftype hud-training-clock (in-game-hud)
+(deftype hud-training-clock (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
@@ -54666,12 +54666,12 @@
 
 
   
-#|(deftype vehicle-hud-training (in-game-hud)
+(deftype vehicle-hud-training (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
@@ -54769,23 +54769,23 @@
 
 
   
-#|(deftype training2-race-hud (in-game-hud)
+(deftype training2-race-hud (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype training3-race-hud (in-game-hud)
+(deftype training3-race-hud (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
