@@ -19717,7 +19717,15 @@
   )
 
   
-#|(deftype prim-strip (prim-base)
+;; prim-strip stub moved here from L59182 (precedes simple-prim at L30065)
+(deftype prim-strip (prim-base)
+  ()
+  :method-count-assert 10
+  :size-assert         #x4
+  :flag-assert         #xa00000004
+  )
+
+#|(deftype prim-strip-FULL (prim-base)
   "A collection of vertices, all with the same texture and draw settings.
    These are owned by the thing submitting to prim, not the prim renderer itself."
   ((flags               prim-flags            :offset-assert 4) ;; guessed by decompiler
@@ -54261,8 +54269,9 @@
 
 
   
-#|(deftype time-freeze-short-draw (powerup-draw)
+(deftype time-freeze-short-draw (powerup-draw)
   ((base-y         float   :offset-assert 264)
+   (pad268         uint32  :offset-assert 268)
    (vehicle-handle uint64  :offset-assert 272)
    )
   :method-count-assert 58
@@ -54271,10 +54280,7 @@
   (:methods
     (time-freeze-short-draw-method-57 () none) ;; 57
     )
-  (:state-methods
-    idle ;; 50
-    )
-  )|#
+  )
   
 
 
@@ -59178,13 +59184,7 @@
   :flag-assert         #x900000000
   )
 
-;; prim-strip stub
-(deftype prim-strip (prim-base)
-  ()
-  :method-count-assert 10
-  :size-assert         #x4
-  :flag-assert         #xa00000004
-  )
+;; prim-strip stub — moved up to L19720 to precede simple-prim at L30065
 
 ;; talker stub
 (deftype talker (process)
