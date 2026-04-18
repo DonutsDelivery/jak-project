@@ -22425,14 +22425,14 @@
 
 
   
-#|(deftype anonymous-0 (structure)
+(deftype anonymous-0 (structure)
   ((error-threshold-magnitude float  :offset-assert 0)
-   (pf-threshold-callback     basic  :offset-assert 0)
+   (pf-threshold-callback     basic  :offset 0)
    )
   :method-count-assert 9
   :size-assert         #x4
   :flag-assert         #x900000004
-  )|#
+  )
   
 
 
@@ -30161,38 +30161,35 @@
 
 
 
-#|
 (deftype point-tracker (structure)
-  ((trans   vector  2 :offset-assert 0) ;; guessed by decompiler
-   (UNKNOWN UNKNOWN   :offset-assert -1) ;; field could not be read.
+  ((trans   vector  2 :inline :offset-assert 0)
    )
   :method-count-assert 12
   :size-assert         #x20
   :flag-assert         #xc00000020
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type vector vector) _type_)
+    (new (symbol type) _type_) ;; 0
     (point-tracker-method-9 (_type_ vector vector) point-tracker) ;; 9
     (point-tracker-method-10 (_type_ vector vector vector float) vector) ;; 10
     (point-tracker-method-11 (_type_ vector vector vector float) vector) ;; 11
     )
   )
-|#
 
 
 
   
-#|(deftype combo-tracker (point-tracker)
-  ((target          uint64  :offset-assert 32) ;; handle
-   (move-start-time uint64  :offset-assert 40) ;; time-frame
+(deftype combo-tracker (point-tracker)
+  ((target          uint64  :offset-assert 32)
+   (move-start-time uint64  :offset-assert 40)
    )
   :method-count-assert 14
   :size-assert         #x30
   :flag-assert         #xe00000030
   (:methods
-    (combo-tracker-method-12 () none) ;; 12 ;; (combo-tracker-method-12 (_type_ vector vector process time-frame) combo-tracker)
-    (combo-tracker-method-13 (_type_ handle vector float vector float) process-focusable) ;; 13
+    (combo-tracker-method-12 () none)
+    (combo-tracker-method-13 (_type_ handle vector float vector float) process-focusable)
     )
-  )|#
+  )
   
 
 
