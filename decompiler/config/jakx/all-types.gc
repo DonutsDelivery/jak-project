@@ -3092,17 +3092,17 @@
 
 
   
-#|(deftype hud-results (hud-results-base)
+(deftype hud-results (hud-results-base)
   ((i-got-medal uint8   :offset-assert 60)
    (stats-type  uint64  :offset-assert 64)
    )
   :method-count-assert 25
-  :size-assert         #x50
-  :flag-assert         #x1900000050
+  :size-assert         #x48
+  :flag-assert         #x1900000048
   (:methods
     (hud-results-method-24 () none) ;; 24
     )
-  )|#
+  )
   
 
 
@@ -40295,7 +40295,10 @@
 
 
   
-(deftype lightning-new-tracker (process)
+#|(deftype lightning-new-tracker (process)
+  ;; cannot activate — regen slot names (active at 14, die at 15) don't match
+  ;; binary slot assignments (die at 14, active at 15 found by probe). Either
+  ;; order fails a defstate match. Slot 16 is also state-typed in binary.
   ((bolt       lightning-bolt  :offset-assert 144) ;; guessed by decompiler
    (lifetime   uint64          :offset-assert 152) ;; time-frame
    (state-time uint64          :offset-assert 160) ;; time-frame
@@ -40310,7 +40313,7 @@
   (:methods
     (lightning-new-tracker-method-16 () none) ;; 16
     )
-  )
+  )|#
   
 
 
@@ -57705,50 +57708,50 @@
 
 
   
-#|(deftype dropdown-fade (dropdown-item)
+(deftype dropdown-fade (dropdown-item)
   ()
-  :method-count-assert 70
+  :method-count-assert 72
   :size-assert         #x250
-  :flag-assert         #x4601c00250
+  :flag-assert         #x4801c00250
   (:state-methods
     enter ;; 51
     exit ;; 55
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype dropdown-city (dropdown-fade)
+(deftype dropdown-city (dropdown-fade)
   ()
-  :method-count-assert 70
+  :method-count-assert 72
   :size-assert         #x250
-  :flag-assert         #x4601c00250
-  )|#
+  :flag-assert         #x4801c00250
+  )
   
 
 
 
   
-#|(deftype dropdown-venue (dropdown-fade)
+(deftype dropdown-venue (dropdown-fade)
   ()
-  :method-count-assert 70
+  :method-count-assert 72
   :size-assert         #x250
-  :flag-assert         #x4601c00250
-  )|#
+  :flag-assert         #x4801c00250
+  )
   
 
 
 
   
-#|(deftype dropdown-task (dropdown-fade)
+(deftype dropdown-task (dropdown-fade)
   ((medal-msg-start-time uint32  :offset-assert 592)
    )
-  :method-count-assert 70
+  :method-count-assert 72
   :size-assert         #x254
-  :flag-assert         #x4601d00254
-  )|#
+  :flag-assert         #x4801d00254
+  )
   
 
 
