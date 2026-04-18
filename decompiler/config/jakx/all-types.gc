@@ -55494,7 +55494,7 @@
 
 
   
-#|(deftype hirez-viewer (process-drawable)
+(deftype hirez-viewer (process-drawable)
   ((char    credits-char  :offset-assert 248) ;; museum-char
    (id      sound-id      :offset-assert 252) ;; guessed by decompiler
    (credits symbol        :offset-assert 256) ;; guessed by decompiler
@@ -55505,7 +55505,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
