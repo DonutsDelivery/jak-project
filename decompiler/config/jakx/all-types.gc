@@ -46371,7 +46371,7 @@
 
 
   
-#|(deftype ctf-flag (process-focusable)
+(deftype ctf-flag (process-focusable)
   ((carrier       uint64         :offset-assert 256)
    (grabbed-time  int32          :offset-assert 264)
    (carried-part  uint64         :offset-assert 272)
@@ -46405,7 +46405,7 @@
     (ctf-flag-method-76 () none) ;; 76
     (ctf-flag-method-77 () none) ;; 77
     )
-  )|#
+  )
   
 
 
