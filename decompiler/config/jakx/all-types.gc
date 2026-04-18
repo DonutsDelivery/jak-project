@@ -54429,7 +54429,7 @@
 
 
   
-(deftype can-leaves-floor (process-drawable)
+#|(deftype can-leaves-floor (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #x100
@@ -54437,7 +54437,7 @@
   (:state-methods
     idle ;; 50
     )
-  )
+  )|#
   
 
 
