@@ -47415,7 +47415,7 @@
 
   
 (deftype item-num-selection-info (item-list-selection-info)
-  ()
+  ((pad132 uint32 :offset-assert 132))
   :method-count-assert 9
   :size-assert         #x88
   :flag-assert         #x900000088
