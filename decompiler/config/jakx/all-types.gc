@@ -4862,7 +4862,7 @@
 
 
   
-#|(deftype hoff-text-floater (process)
+(deftype hoff-text-floater (process)
   ((screen-from vector :inline :offset-assert 144)
    (float-rate  float          :offset-assert 160)
    (duration    uint64         :offset-assert 168)
@@ -4884,7 +4884,7 @@
   (:state-methods
     run ;; 15
     )
-  )|#
+  )
   
 
 
@@ -59609,7 +59609,6 @@
 (define-extern high-scores-list object)
 (define-extern hiphog-states object)
 (define-extern history-elt object)
-(define-extern hoff-text-floater object)
 (define-extern hud-game-end-grand-prix object)
 (define-extern hud-in-game-menu-options-view-0 object)
 (define-extern hud-item-player-name object)
