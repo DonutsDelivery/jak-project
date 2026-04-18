@@ -49647,12 +49647,12 @@
 
 
   
-#|(deftype auto-test-levels (process)
+(deftype auto-test-levels (process)
   ((cur-task int32  :offset-assert 144)
    )
-  :method-count-assert 16
+  :method-count-assert 21
   :size-assert         #x94
-  :flag-assert         #x1000100094
+  :flag-assert         #x1500100094
   (:methods
     (auto-test-levels-method-9 () none) ;; 9
     (auto-test-levels-method-10 () none) ;; 10
@@ -49664,7 +49664,7 @@
   (:state-methods
     running ;; 15
     )
-  )|#
+  )
   
 
 
