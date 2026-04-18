@@ -694,3 +694,12 @@
   0
   (none)
   )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; FMV playback (INTRO.M2V etc.)
+;; C++ backend: game/graphics/opengl_renderer/FMVPlayer.cpp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define-extern pc-fmv-play (function string none))
+(define-extern pc-fmv-stop (function none))
+(define-extern pc-fmv-is-done (function int))

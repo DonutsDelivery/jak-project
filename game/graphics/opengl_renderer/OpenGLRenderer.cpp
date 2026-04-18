@@ -124,6 +124,10 @@ OpenGLRenderer::OpenGLRenderer(std::shared_ptr<TexturePool> texture_pool,
 
   // end set up screen draw
 
+  // FMV player (all game versions — only invoked by pc-fmv-play GOAL calls)
+  m_fmv_player = std::make_unique<FMVPlayer>();
+  Gfx::g_fmv_player = m_fmv_player.get();
+
   const tfrag3::Level* common_level = nullptr;
   {
     auto p = scoped_prof("load-common");
@@ -1039,6 +1043,13 @@ void OpenGLRenderer::render(DmaFollower dma, const RenderOptions& settings) {
   }
 
   m_last_pmode_alp = settings.pmode_alp_register;
+
+  // FMV overlay — draws on top of the final composited frame when active
+  if (m_fmv_player && m_fmv_player->is_active()) {
+    g_current_renderer = "fmv";
+    auto fmv_prof = m_profiler.root()->make_scoped_child("fmv");
+    m_fmv_player->render_frame(&m_render_state, fmv_prof);
+  }
 
   if (settings.save_screenshot) {
     g_current_renderer = "screenshot";

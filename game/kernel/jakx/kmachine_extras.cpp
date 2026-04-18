@@ -6,9 +6,11 @@
 #include "kscheme.h"
 
 #include "common/symbols.h"
+#include "common/util/FileUtil.h"
 #include "common/util/font/font_utils.h"
 
 #include "game/external/discord_jakx.h"
+#include "game/graphics/opengl_renderer/FMVPlayer.h"
 #include "game/kernel/common/Symbol4.h"
 #include "game/kernel/common/kmachine.h"
 #include "game/kernel/common/kscheme.h"
@@ -955,6 +957,31 @@ void pc_sr_mode_dump_new_custom_category(u32 speedrun_custom_category_ptr) {
     json data = g_speedrun_custom_categories;
     file_util::write_text_file(file_path, data.dump(2));
   }
+}
+
+// ---- FMV playback (pc-fmv-play / pc-fmv-stop / pc-fmv-is-done) ----
+
+void pc_fmv_play(u32 path_str_ptr) {
+  if (!Gfx::g_fmv_player) {
+    return;
+  }
+  const auto path = std::string(Ptr<String>(path_str_ptr).c()->data());
+  // Resolve relative to iso_data/jakx/
+  auto full_path = file_util::get_jak_project_dir() / "iso_data" / "jakx" / path;
+  Gfx::g_fmv_player->request_play(full_path.string());
+}
+
+void pc_fmv_stop() {
+  if (Gfx::g_fmv_player) {
+    Gfx::g_fmv_player->request_stop();
+  }
+}
+
+s32 pc_fmv_is_done() {
+  if (!Gfx::g_fmv_player) {
+    return 1;
+  }
+  return Gfx::g_fmv_player->is_done() ? 1 : 0;
 }
 
 }  // namespace kmachine_extras

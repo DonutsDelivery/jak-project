@@ -10,6 +10,7 @@
 #include "game/graphics/opengl_renderer/Fbo.h"
 #include "game/graphics/opengl_renderer/Profiler.h"
 #include "game/graphics/opengl_renderer/Shader.h"
+#include "game/graphics/opengl_renderer/FMVPlayer.h"
 #include "game/graphics/opengl_renderer/TextureAnimator.h"
 #include "game/graphics/opengl_renderer/foreground/Generic2.h"
 #include "game/graphics/opengl_renderer/foreground/Merc2.h"
@@ -146,6 +147,7 @@ class OpenGLRenderer {
   GLuint screen_vao = 0;  // vertex array object for a screen-space draw
   GLuint screen_vbo = 0;  // vertex buffer object for a screen-space draw
 
+  std::unique_ptr<FMVPlayer> m_fmv_player;
   std::unique_ptr<BucketRenderer> m_jak2_eye_renderer;
   std::unique_ptr<BucketRenderer> m_jak3_eye_renderer;
   GameVersion m_version;

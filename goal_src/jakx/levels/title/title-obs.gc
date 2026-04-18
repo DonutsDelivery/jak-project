@@ -214,13 +214,22 @@
       ;; of jak3's progress-pc.gc:288 initialize! call that normally
       ;; happens after a save-file confirmation screen.
       (when (zero? selected)
+        ;; Play intro FMV before the tutorial race.
+        ;; pc-fmv-play hands off to the render thread (FMVPlayer.cpp + ffmpeg).
+        ;; Loop suspending until done; START skips via pc-fmv-stop.
+        (format 0 "[BRINGUP] title: playing INTRO.M2V~%")
+        (pc-fmv-play "STR/INTRO.M2V")
+        (until (nonzero? (pc-fmv-is-done))
+          ;; Check Start button to skip
+          (when (cpad-pressed? 0 start)
+            (pc-fmv-stop)
+            ;; spin one frame so render thread sees STOP_REQ and clears
+            (suspend))
+          (suspend))
+        (format 0 "[BRINGUP] title: INTRO.M2V done, invoking (bg 'atoll)~%")
         ;; jakx bringup: test level-load pipeline by calling bg 'atoll
         ;; directly, instead of going through initialize! 'game (which needs
-        ;; target / pilot / race-control — none ported yet). If the engine
-        ;; tolerates ATL.DGO load (geometry + art + tpages, no code), we
-        ;; should see at minimum an attempt at the load sequence without
-        ;; segfault.
-        (format 0 "[BRINGUP] title: pressing Start — invoking (bg 'atoll)~%")
+        ;; target / pilot / race-control — none ported yet).
         (bg 'atoll)
         (format 0 "[BRINGUP] (bg 'atoll) returned~%")))
     (sleep-code)

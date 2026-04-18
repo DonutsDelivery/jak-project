@@ -464,6 +464,11 @@ void InitMachine_PCPort() {
   make_function_symbol_from_c("pc-sr-mode-dump-new-custom-category",
                               (void*)kmachine_extras::pc_sr_mode_dump_new_custom_category);
 
+  // FMV playback
+  make_function_symbol_from_c("pc-fmv-play", (void*)kmachine_extras::pc_fmv_play);
+  make_function_symbol_from_c("pc-fmv-stop", (void*)kmachine_extras::pc_fmv_stop);
+  make_function_symbol_from_c("pc-fmv-is-done", (void*)kmachine_extras::pc_fmv_is_done);
+
   // setup string constants
   auto user_dir_path = file_util::get_user_config_dir();
   intern_from_c(-1, 0, "*pc-user-dir-base-path*")->value() =

@@ -48,6 +48,7 @@ set(RUNTIME_SOURCE
         graphics/opengl_renderer/DirectRenderer2.cpp
         graphics/opengl_renderer/dma_helpers.cpp
         graphics/opengl_renderer/EyeRenderer.cpp
+        graphics/opengl_renderer/FMVPlayer.cpp
         graphics/opengl_renderer/foreground/Generic2_Build.cpp
         graphics/opengl_renderer/foreground/Generic2_DMA.cpp
         graphics/opengl_renderer/foreground/Generic2_OpenGL.cpp
@@ -380,7 +381,11 @@ add_subdirectory(sound)
 # we build the runtime as a static library.
 add_library(runtime STATIC ${RUNTIME_SOURCE} "../third-party/glad/src/glad.c")
 
-target_link_libraries(runtime common fmt SDL3::SDL3 imgui discord-rpc sound stb_image libco libcurl)
+# FFmpeg for MPEG2 FMV playback (INTRO.M2V etc.)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(FFMPEG REQUIRED libavcodec libavformat libavutil libswscale)
+target_include_directories(runtime PRIVATE ${FFMPEG_INCLUDE_DIRS})
+target_link_libraries(runtime common fmt SDL3::SDL3 imgui discord-rpc sound stb_image libco libcurl ${FFMPEG_LIBRARIES})
 if(WIN32)
     target_link_libraries(runtime mman)
 else()

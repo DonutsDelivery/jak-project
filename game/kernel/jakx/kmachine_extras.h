@@ -54,6 +54,11 @@ void pc_sr_mode_get_custom_category_continue_point(s32 entry_index, u32 name_str
 void pc_sr_mode_init_custom_category_info(s32 entry_index, u32 speedrun_custom_category_ptr);
 void pc_sr_mode_dump_new_custom_category(u32 speedrun_custom_category_ptr);
 
+// FMV playback
+void pc_fmv_play(u32 path_str_ptr);
+void pc_fmv_stop();
+s32 pc_fmv_is_done();
+
 struct DiscordInfo {
   float orb_count;          // float
   float gem_count;          // float
