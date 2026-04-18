@@ -4515,7 +4515,7 @@
 
 
   
-#|(deftype race-mesh-debug (process)
+(deftype race-mesh-debug (process)
   ((mesh basic  :offset-assert 144)
    )
   :method-count-assert 16
@@ -4532,7 +4532,7 @@
   (:state-methods
     idle ;; 15
     )
-  )|#
+  )
   
 
 
@@ -60474,7 +60474,6 @@
 (define-extern medius-get-universe-information-request object)
 (define-extern medius-file-cancel-operation-response object)
 (define-extern menu-string-array object)
-(define-extern race-mesh-debug object)
 (define-extern hud-deathmatch-single object)
 (define-extern net-send-message-in-params object)
 (define-extern medius-account-update-profile-request object)
