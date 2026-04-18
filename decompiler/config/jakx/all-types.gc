@@ -33647,14 +33647,13 @@
 
 
 
-#|
 (deftype particle-birth-work (structure)
   ((quat      quaternion :inline :offset-assert 0)
-   (vel-range UNKNOWN    2       :offset-assert 16)
-   (vel       vector     :inline :offset-assert 16)
-   (pos-range UNKNOWN    2       :offset-assert 48)
-   (pos       vector     :inline :offset-assert 48)
-   (d-pos     vector     :inline :offset-assert 64)
+   (vel-range vector  2  :inline :offset-assert 16)
+   (vel       vector     :inline :offset 16)
+   (pos-range vector  2  :inline :offset-assert 48)
+   (pos       vector     :inline :offset 48)
+   (d-pos     vector     :inline :offset 64)
    (mat       matrix     :inline :offset-assert 80)
    (tt        float              :offset-assert 144)
    (t-step    float              :offset-assert 148)
@@ -33663,7 +33662,6 @@
   :size-assert         #x98
   :flag-assert         #x900000098
   )
-|#
 
 
 (define-extern *launch-matrix* matrix) ;; matrix
@@ -34087,6 +34085,78 @@
 (deftype hud-points-icon-display2 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
 (deftype hud-points-icon-display3 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
 (deftype hud-points-icon-display4 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; bulk-activated empty-body in-game-hud subtypes (one-liner form)
+;; sourced by deduping #| ... |# commented originals scattered earlier in file
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(deftype hud-results-medal (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-results-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-results-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-results-team-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-results-team-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-results-grand-prix (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-results-grand-prix-totals (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-results-medal-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype high-scores-list (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-background (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-background-top-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-background-top-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-background-side-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-background-side-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-game-end-grand-prix (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-game-end-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-game-end-side-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-game-end-top-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-cash-stats-single (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-cash-stats-top-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-cash-stats-top-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-cash-stats-side-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-cash-stats-side-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype text-display-deflected-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype text-display-deflected-view-2 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype text-display-sblastered-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype text-display-sblastered-view-2 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype text-display-supernova-backfire-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype text-display-supernova-backfire-view-2 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype text-display-nice-shot (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-headset-talker-race (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-headset-talker-other (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-in-game-menu-options-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-in-game-menu-options-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-in-game-menu-options-view-2 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype intro-hud-view (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype special-intro-hud-view (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-race-stats-single (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-race-stats-top-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-race-stats-side-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-race-stats-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-deathrace-stats-single (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-deathrace-stats-multi (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-deathrace-stats-split-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-deathrace-stats-split-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-rushhour-stats-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-rushhour-stats-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype boss-hud (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-deathmatch-single (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-deathmatch-split-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-deathmatch-split-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-deathmatch-score-drop-view-10 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-deathmatch-score-drop-view-11 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-deathmatch-score-drop-view-20 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-deathmatch-score-drop-view-21 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype vehicle-hud-view-0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype vehicle-hud-view-1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype power-slide-hud-single (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hang-time-hud-single (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-player-indicators-view0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-player-indicators-view1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-artifact-indicators-view0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-artifact-indicators-view1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-assassin-indicators-view0 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+(deftype hud-assassin-indicators-view1 (in-game-hud) () :method-count-assert 33 :size-assert #x18ec :flag-assert #x21186018ec)
+
 
 (deftype hud-map (hud)
   ((x float  :offset-assert 6364)
@@ -36357,43 +36427,43 @@
 
 
   
-#|(deftype shadow-vu1-constants (structure)
-  ((hmgescale vector     :inline :offset-assert 0)
-   (invhscale vector     :inline :offset-assert 16)
-   (texoffset vector     :inline :offset-assert 32)
-   (texscale  vector     :inline :offset-assert 48)
-   (hvdfoff   vector     :inline :offset-assert 64)
-   (fog       vector     :inline :offset-assert 80)
-   (clrs      vector     2       :offset-assert 96) ;; guessed by decompiler
-   (adgif     gs-gif-tag :inline :offset-assert 128)
-   (texflush  gs-adcmd   :inline :offset-assert 144)
-   (flush     gs-adcmd   :inline :offset-assert 160)
-   (trigif    gs-gif-tag :inline :offset-assert 176)
-   (quadgif   gs-gif-tag :inline :offset-assert 192)
+(deftype shadow-vu1-constants (structure)
+  ((hmgescale vector     :inline         :offset-assert 0)
+   (invhscale vector     :inline         :offset-assert 16)
+   (texoffset vector     :inline         :offset-assert 32)
+   (texscale  vector     :inline         :offset-assert 48)
+   (hvdfoff   vector     :inline         :offset-assert 64)
+   (fog       vector     :inline         :offset-assert 80)
+   (clrs      vector     2      :inline  :offset-assert 96) ;; guessed by decompiler
+   (adgif     gs-gif-tag :inline         :offset-assert 128)
+   (texflush  gs-adcmd   :inline         :offset-assert 144)
+   (flush     gs-adcmd   :inline         :offset-assert 160)
+   (trigif    gs-gif-tag :inline         :offset-assert 176)
+   (quadgif   gs-gif-tag :inline         :offset-assert 192)
    )
   :method-count-assert 9
   :size-assert         #xd0
   :flag-assert         #x9000000d0
-  )|#
+  )
   
 
 
 
   
-#|(deftype shadow-vu1-data (structure)
-  ((adgif     gs-gif-tag :inline :offset-assert 0)
-   (ad        gs-adcmd   :inline :offset-assert 16)
-   (flush     gs-adcmd   :inline :offset-assert 32)
-   (trigif    gs-gif-tag :inline :offset-assert 48)
-   (quadgif   gs-gif-tag :inline :offset-assert 64)
-   (texoffset vector     :inline :offset-assert 80)
-   (texscale  vector     :inline :offset-assert 96)
-   (clrs      qword      2       :offset-assert 112) ;; guessed by decompiler
+(deftype shadow-vu1-data (structure)
+  ((adgif     gs-gif-tag :inline         :offset-assert 0)
+   (ad        gs-adcmd   :inline         :offset-assert 16)
+   (flush     gs-adcmd   :inline         :offset-assert 32)
+   (trigif    gs-gif-tag :inline         :offset-assert 48)
+   (quadgif   gs-gif-tag :inline         :offset-assert 64)
+   (texoffset vector     :inline         :offset-assert 80)
+   (texscale  vector     :inline         :offset-assert 96)
+   (clrs      qword      2      :inline  :offset-assert 112) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x90
   :flag-assert         #x900000090
-  )|#
+  )
   
 
 
