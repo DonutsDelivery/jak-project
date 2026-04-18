@@ -4508,6 +4508,7 @@
 
 
   
+#|
 (deftype hud-weapon-field (hud-item-group)
   ((side                             uint64  :offset-assert 48)
    (spinning                         basic   :offset-assert 56)
@@ -4557,6 +4558,7 @@
     (hud-weapon-field-method-24 () none) ;; 24
     )
   )
+|#
   
 
 
@@ -5017,38 +5019,35 @@
 
 
 
-#|
 (deftype vehicle-reticle-on-me (vehicle-reticle-base)
-  ((targeted-by                  uint64    :offset-assert 160)
-   (hsprites-base                UNKNOWN 3 :offset-assert 176)
-   (hsprites-missinc-static      UNKNOWN 2 :offset-assert 368)
-   (hsprites-missinc-spinner     UNKNOWN 1 :offset-assert 496)
-   (hsprites-missinc-converge    UNKNOWN 2 :offset-assert 560)
-   (hsprites-peacemaker-converge UNKNOWN 4 :offset-assert 688)
-   (side-parts-kickout           float     :offset-assert 944)
-   (missile-by                   uint64    :offset-assert 952)
-   (missile-by-last-seen         uint64    :offset-assert 960)
-   (missile-closest-dist         float     :offset-assert 968)
-   (lockon-sound                 uint32    :offset-assert 972)
+  ((targeted-by                  uint64     :offset-assert 160)
+   (hsprites-base                uint8  192 :offset-assert 176)
+   (hsprites-missinc-static      uint8  128 :offset-assert 368)
+   (hsprites-missinc-spinner     uint8  64  :offset-assert 496)
+   (hsprites-missinc-converge    uint8  128 :offset-assert 560)
+   (hsprites-peacemaker-converge uint8  256 :offset-assert 688)
+   (side-parts-kickout           float      :offset-assert 944)
+   (missile-by                   uint64     :offset-assert 952)
+   (missile-by-last-seen         uint64     :offset-assert 960)
+   (missile-closest-dist         float      :offset-assert 968)
+   (lockon-sound                 uint32     :offset-assert 972)
    )
   :method-count-assert 20
   :size-assert         #x3d0
   :flag-assert         #x14034003d0
   (:state-methods
-    idle ;; 15
-    missile-incoming ;; 16
-    missile-incoming-abort ;; 17
-    peacemaker-incoming ;; 18
+    idle                    ;; 15
+    missile-incoming        ;; 16
+    missile-incoming-abort  ;; 17
+    peacemaker-incoming     ;; 18
     peacemaker-incoming-abort ;; 19
     )
   )
-|#
 
 
 
-#|
 (deftype vehicle-reticle-on-them (vehicle-reticle-base)
-  ((hsprites     UNKNOWN 11 :offset-assert 160)
+  ((hsprites     uint8  704 :offset-assert 160)
    (spinner-rate uint64     :offset-assert 864)
    (lockon-sound uint32     :offset-assert 872)
    )
@@ -5056,11 +5055,10 @@
   :size-assert         #x36c
   :flag-assert         #x1102e0036c
   (:state-methods
-    idle ;; 15
+    idle           ;; 15
     vehicle-target ;; 16
     )
   )
-|#
 
 
 (define-extern reticle-wad-on-me-base array)
@@ -5416,6 +5414,7 @@
 
 
   
+#|
 (deftype v-toad-shot (net-projectile)
   ((trail-tracker    uint64         :offset-assert 568)
    (blast-radius     float          :offset-assert 576)
@@ -5434,6 +5433,7 @@
     impact ;; 52
     )
   )
+|#
   
 
 
@@ -5513,6 +5513,7 @@
 
 
   
+#|
 (deftype v-yellow-guided-missile (net-projectile)
   ((trail-tracker        uint64                       :offset-assert 568)
    (blast-radius         float                        :offset-assert 576)
@@ -5543,6 +5544,7 @@
     (v-yellow-guided-missile-method-80 () none) ;; 80
     )
   )
+|#
   
 
 
@@ -45489,23 +45491,21 @@
 
 
 
-#|
 (deftype net-player-football (net-player-race)
-  ((my-potato             uint64    :offset-assert 496)
-   (slow-warning          uint64    :offset-assert 504)
-   (pt-multiplier-timeout uint64    :offset-assert 512)
-   (aux-hud               uint64    :offset-assert 520)
-   (turbo-part-tracker    uint64    :offset-assert 528)
-   (turbo-meter           float     :offset-assert 536)
-   (cheat-award-time      uint64    :offset-assert 544)
-   (cheat-turbo-fill      float     :offset-assert 552)
-   (bing                  UNKNOWN 2 :offset-assert 556)
+  ((my-potato             uint64   :offset-assert 496)
+   (slow-warning          uint64   :offset-assert 504)
+   (pt-multiplier-timeout uint64   :offset-assert 512)
+   (aux-hud               uint64   :offset-assert 520)
+   (turbo-part-tracker    uint64   :offset-assert 528)
+   (turbo-meter           float    :offset-assert 536)
+   (cheat-award-time      uint64   :offset-assert 544)
+   (cheat-turbo-fill      float    :offset-assert 552)
+   (bing                  uint8  8 :offset-assert 556)
    )
   :method-count-assert 108
   :size-assert         #x234
   :flag-assert         #x6c01b00234
   )
-|#
 
 
 
