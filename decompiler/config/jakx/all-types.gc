@@ -37740,7 +37740,7 @@
 ;; time-of-day                    ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern time-of-day-effect object) ;; (function none)
+(define-extern time-of-day-effect (function none))
 (define-extern time-of-day-update (function none :behavior time-of-day-proc))
 (define-extern update-counters (function float :behavior time-of-day-proc))
 (define-extern time-of-day-tick state) ;; (state time-of-day-proc)
