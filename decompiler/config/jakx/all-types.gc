@@ -20976,17 +20976,15 @@
 
 
 
-#|
 (deftype net-update-conn-errors (structure)
   ((sizeof-net-update-errors uint32    :offset-assert 0)
-   (a-errors                 UNKNOWN 4 :offset-assert 4)
+   (a-errors                 uint8 32  :offset-assert 4)
    (udperror                 int32     :offset-assert 36)
    )
   :method-count-assert 9
   :size-assert         #x28
   :flag-assert         #x900000028
   )
-|#
 
 
 
@@ -21002,17 +21000,15 @@
 
 
 
-#|
 (deftype net-initialize-out-params (structure)
-  ((b-is-set   int32      :offset-assert 0)
-   (error-code int32      :offset-assert 4)
-   (sz-version UNKNOWN 16 :offset-assert 8)
+  ((b-is-set   int32     :offset-assert 0)
+   (error-code int32     :offset-assert 4)
+   (sz-version uint8 16  :offset-assert 8)
    )
   :method-count-assert 9
   :size-assert         #x18
   :flag-assert         #x900000018
   )
-|#
 
 
 
@@ -21142,27 +21138,24 @@
 
 
 
-#|
 (deftype rsa-key (structure)
-  ((key UNKNOWN 16 :offset-assert 0)
+  ((key uint8 64 :offset-assert 0)
    )
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
   )
-|#
 
 
 
-  
-#|(deftype rsa-keypair (structure)
+(deftype rsa-keypair (structure)
   ((public-key  rsa-key :inline :offset-assert 0)
    (private-key rsa-key :inline :offset-assert 64)
    )
   :method-count-assert 9
   :size-assert         #x80
   :flag-assert         #x900000080
-  )|#
+  )
   
 
 
