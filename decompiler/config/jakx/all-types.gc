@@ -55057,7 +55057,7 @@
 
 
   
-#|(deftype coli-atlas-statue-break-a (process-drawable)
+(deftype coli-atlas-statue-break-a (process-drawable)
   ()
   :method-count-assert 52
   :size-assert         #xf8
@@ -55066,13 +55066,13 @@
     idle ;; 50
     die ;; 51
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype coli-atlas-statue-break-b (process-drawable)
+(deftype coli-atlas-statue-break-b (process-drawable)
   ()
   :method-count-assert 52
   :size-assert         #xf8
@@ -55081,13 +55081,13 @@
     idle ;; 50
     die ;; 51
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype coli-atlas-base-break (process-drawable)
+(deftype coli-atlas-base-break (process-drawable)
   ()
   :method-count-assert 52
   :size-assert         #xf8
@@ -55096,7 +55096,7 @@
     idle ;; 50
     die ;; 51
     )
-  )|#
+  )
   
 
 
