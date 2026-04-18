@@ -7185,9 +7185,9 @@
 
 (deftype v-mongoose (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7201,9 +7201,9 @@
   
 (deftype v-falcon (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7217,9 +7217,9 @@
   
 (deftype v-wombat (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7233,9 +7233,9 @@
   
 (deftype v-possum (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7249,9 +7249,9 @@
   
 (deftype v-bobcat (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7265,9 +7265,9 @@
   
 (deftype v-cougar (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7281,9 +7281,9 @@
   
 (deftype v-wolf (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7297,9 +7297,9 @@
   
 (deftype v-bear (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7313,9 +7313,9 @@
   
 (deftype v-leopard (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7329,9 +7329,9 @@
   
 (deftype v-panther (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7345,9 +7345,9 @@
   
 (deftype v-tiger (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7361,9 +7361,9 @@
   
 (deftype v-cheetah (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7377,9 +7377,9 @@
   
 (deftype v-gila (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7393,9 +7393,9 @@
   
 (deftype v-snake (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -7409,9 +7409,9 @@
   
 (deftype v-daxtermobile (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -52872,7 +52872,7 @@
 
 
   
-#|(deftype collision-editor-default-proc (process-drawable)
+(deftype collision-editor-default-proc (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -52880,13 +52880,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype collision-editor-edited-proc (process-drawable)
+(deftype collision-editor-edited-proc (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -52894,7 +52894,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
@@ -59561,7 +59561,6 @@
 (define-extern cloth-on-skeleton object)
 (define-extern collide-frag-vertex object)
 (define-extern collide-probe-stack object)
-(define-extern collision-editor-default-proc object)
 (define-extern color-array object)
 (define-extern combo-tracker object)
 (define-extern construction-object object)
@@ -59808,7 +59807,6 @@
 (define-extern cam-debug-tri object)
 (define-extern collide-fragment object)
 (define-extern collision-cylinder-array object)
-(define-extern collision-editor-edited-proc object)
 (define-extern editable-sample object)
 (define-extern eznet-combination object)
 (define-extern flow-control object)
