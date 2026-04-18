@@ -4933,6 +4933,7 @@
 
 
   
+#|
 (deftype update-engine-loop-state-work (structure)
   ((i-loop int8                            :offset-assert 0)
    (info   vehicle-sound-engine-loop-info  :offset-assert 4)
@@ -4943,6 +4944,7 @@
   :size-assert         #x10
   :flag-assert         #x900000010
   )
+|#
   
 
 
@@ -21293,19 +21295,17 @@
 
 
 
-#|
 (deftype net-color-array (structure)
-  ((cb-size   int32      :offset-assert 0)
-   (line-size int32      :offset-assert 4)
-   (xsize     int32      :offset-assert 8)
-   (ysize     int32      :offset-assert 12)
-   (data      UNKNOWN 16 :offset-assert 16)
+  ((cb-size   int32   :offset-assert 0)
+   (line-size int32   :offset-assert 4)
+   (xsize     int32   :offset-assert 8)
+   (ysize     int32   :offset-assert 12)
+   (data      uint8 16 :offset-assert 16)
    )
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
   )
-|#
 
 
 
@@ -21399,7 +21399,7 @@
 
 
   
-#|(deftype net-stream-media-params (structure)
+(deftype net-stream-media-params (structure)
   ((b-default-set                       int32                                  :offset-assert 0)
    (b-use-stream-media                  int32                                  :offset-assert 4)
    (num-channels                        uint32                                 :offset-assert 8)
@@ -21408,12 +21408,12 @@
    (send-buffer-size                    uint32                                 :offset-assert 20)
    (recv-buffer-size                    uint32                                 :offset-assert 24)
    (grid-type                           int32                                  :offset-assert 28)
-   (audio-data-characteristics          net-audio-data-characteristics :inline :offset-assert 32)
-   (pf-audio-record-callback            basic                                  :offset-assert 56)
-   (p-audio-record-callback-data        basic                                  :offset-assert 60)
-   (pf-audio-play-callback              basic                                  :offset-assert 64)
-   (p-audio-play-callback-data          basic                                  :offset-assert 68)
-   (video-data-characteristics          net-video-data-characteristics :inline :offset-assert 72)
+   (audio-data-characteristics          uint8 24 :offset-assert 32)
+   (pf-audio-record-callback            basic    :offset-assert 56)
+   (p-audio-record-callback-data        basic    :offset-assert 60)
+   (pf-audio-play-callback              basic    :offset-assert 64)
+   (p-audio-play-callback-data          basic    :offset-assert 68)
+   (video-data-characteristics          uint8 8  :offset        72)
    (pf-video-record-callback            basic                                  :offset-assert 80)
    (p-video-record-callback-data        basic                                  :offset-assert 84)
    (pf-video-play-callback              basic                                  :offset-assert 88)
@@ -21426,56 +21426,50 @@
   :method-count-assert 9
   :size-assert         #x70
   :flag-assert         #x900000070
-  )|# ;; :inline net-video-data-characteristics at offset 72 forces 16-byte alignment → placed at 80
+  )
   
 
 
 
-#|
 (deftype net-address (structure)
-  ((address-type int32      :offset-assert 0)
-   (address      UNKNOWN 16 :offset-assert 4)
-   (port         uint32     :offset-assert 20)
+  ((address-type int32     :offset-assert 0)
+   (address      uint8 16  :offset-assert 4)
+   (port         uint32    :offset-assert 20)
    )
   :method-count-assert 9
   :size-assert         #x18
   :flag-assert         #x900000018
   )
-|#
 
 
 
-#|
 (deftype net-address-list (structure)
-  ((a-address-list UNKNOWN 2 :offset-assert 0)
+  ((a-address-list uint8 48 :offset-assert 0)
    )
   :method-count-assert 9
   :size-assert         #x30
   :flag-assert         #x900000030
   )
-|#
 
 
 
-#|
 (deftype net-connection-info (structure)
   ((e-type        int32                    :offset-assert 0)
    (address-list  net-address-list :inline :offset-assert 4)
    (world-id      int32                    :offset-assert 52)
    (server-key    rsa-key          :inline :offset-assert 56)
-   (a-session-key UNKNOWN          17      :offset-assert 120)
-   (a-access-key  UNKNOWN          17      :offset-assert 137)
+   (a-session-key uint8 17                 :offset-assert 120)
+   (a-access-key  uint8 17                 :offset-assert 137)
    )
   :method-count-assert 9
   :size-assert         #x9a
   :flag-assert         #x90000009a
   )
-|#
 
 
 
   
-#|(deftype net-connect-in-params (structure)
+(deftype net-connect-in-params (structure)
   ((b-default-set                            int32                           :offset-assert 0)
    (max-clients                              int32                           :offset-assert 4)
    (connection-info                          net-connection-info     :inline :offset-assert 8)
@@ -21502,8 +21496,7 @@
   :method-count-assert 9
   :size-assert         #x164
   :flag-assert         #x900000164
-  ;; field p-local-connect-callback-data uses ~A with a signed load. field p-local-disconnect-callback-data uses ~A with a signed load. field p-remote-client-connect-callback-data uses ~A with a signed load. field p-remote-client-disconnect-callback-data uses ~A with a signed load. field p-host-change-callback-data uses ~A with a signed load. field p-system-status-callback-data uses ~A with a signed load.
-  )|#
+  )
   
 
 
@@ -21521,20 +21514,20 @@
 
 
   
-#|(deftype net-client-list (structure)
+(deftype net-client-list (structure)
   ((target-client int32                :offset-assert 0)
    (client-mask   net-bit-mask :inline :offset-assert 4)
    )
   :method-count-assert 9
   :size-assert         #x2c
   :flag-assert         #x90000002c
-  )|#
+  )
   
 
 
 
   
-#|(deftype net-send-message-in-params (structure)
+(deftype net-send-message-in-params (structure)
   ((connection-handle basic                   :offset-assert 0)
    (transport-flags   int8                    :offset-assert 4)
    (message-type      int32                   :offset-assert 8)
@@ -21545,21 +21538,20 @@
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
-  ;; field connection-handle uses ~A with a signed load.
-  )|#
+  )
   
 
 
 
   
-#|(deftype net-send-message-out-params (structure)
+(deftype net-send-message-out-params (structure)
   ((error-code    int32                   :offset-assert 0)
    (queued-client net-client-list :inline :offset-assert 4)
    )
   :method-count-assert 9
   :size-assert         #x30
   :flag-assert         #x900000030
-  )|#
+  )
   
 
 
@@ -21591,7 +21583,7 @@
 
 
   
-#|(deftype net-latency-metrics-data-args (structure)
+(deftype net-latency-metrics-data-args (structure)
   ((connection-handle    basic                            :offset-assert 0)
    (target-client-index  int32                            :offset-assert 4)
    (latency-metrics-info net-latency-metrics-info :inline :offset-assert 8)
@@ -21601,8 +21593,7 @@
   :method-count-assert 9
   :size-assert         #x1c
   :flag-assert         #x90000001c
-  ;; field connection-handle uses ~A with a signed load. field p-user-data uses ~A with a signed load.
-  )|#
+  )
   
 
 
@@ -21613,7 +21604,7 @@
 
 
   
-#|(deftype net-latency-metrics-params (structure)
+(deftype net-latency-metrics-params (structure)
   ((connection-handle           basic                   :offset-assert 0)
    (target-client-list          net-client-list :inline :offset-assert 4)
    (pf-latency-metrics-callback basic                   :offset-assert 48)
@@ -21622,7 +21613,7 @@
   :method-count-assert 9
   :size-assert         #x38
   :flag-assert         #x900000038
-  )|#
+  )
   
 
 
@@ -38961,18 +38952,21 @@
 
   
 (deftype simple-prim-particle-binding (simple-prim)
-  ((color    rgba   :offset-assert 252)
-   (lifetime uint64 :offset-assert 256)
+  ((color    rgba   :offset 252)
+   (lifetime uint64 :offset 256)
+   (pad-end  uint64 :offset-assert 264)
    )
   :method-count-assert 58
   :size-assert         #x110
   :flag-assert         #x3a00800110
   (:state-methods
-    active ;; 50 (override)
-    die    ;; 56
+    die ;; 56
     )
   (:methods
     (simple-prim-particle-binding-method-57 () none) ;; 57
+    )
+  (:states
+    active ;; 50 override
     )
   )
   
