@@ -54820,7 +54820,7 @@
 
 
   
-#|(deftype training-bollard (process-drawable)
+(deftype training-bollard (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -54828,13 +54828,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype training-marker (process-drawable)
+(deftype training-marker (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -54842,13 +54842,13 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
 
   
-#|(deftype training-wall (process-drawable)
+(deftype training-wall (process-drawable)
   ()
   :method-count-assert 51
   :size-assert         #xf8
@@ -54856,7 +54856,7 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
+  )
   
 
 
