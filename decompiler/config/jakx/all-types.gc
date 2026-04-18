@@ -37124,7 +37124,7 @@
 
 
   
-#|(deftype sp-queued-launch-particles (structure)
+(deftype sp-queued-launch-particles (structure)
   ((sp-system   sparticle-system           :offset-assert 0) ;; guessed by decompiler
    (sp-launcher sparticle-launcher         :offset-assert 4) ;; guessed by decompiler
    (pos         vector             :inline :offset-assert 16)
@@ -37132,36 +37132,36 @@
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
-  )|#
+  )
   
 
 
 
   
-#|(deftype sp-launch-queue (basic)
-  ((in-use int32                          :offset-assert 4)
-   (queue  sp-queued-launch-particles 256 :offset-assert 16) ;; guessed by decompiler
+(deftype sp-launch-queue (basic)
+  ((in-use int32                                  :offset-assert 4)
+   (queue  sp-queued-launch-particles 256 :inline :offset-assert 16) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x2010
   :flag-assert         #x900002010
-  )|#
+  )
   
 
 
 
   
-#|(deftype particle-adgif-cache (basic)
-  ((used    int32           :offset-assert 4)
-   (last    uint16          :offset-assert 8)
-   (lastgif adgif-shader    :offset-assert 12)
-   (tidhash uint16       80 :offset-assert 16) ;; guessed by decompiler
-   (spadgif adgif-shader 80 :offset-assert 176) ;; guessed by decompiler
+(deftype particle-adgif-cache (basic)
+  ((used    int32                   :offset-assert 4)
+   (last    uint16                  :offset-assert 8)
+   (lastgif adgif-shader            :offset-assert 12)
+   (tidhash uint16       80         :offset-assert 16) ;; guessed by decompiler
+   (spadgif adgif-shader 80 :inline :offset-assert 176) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x19b0
   :flag-assert         #x9000019b0
-  )|#
+  )
   
 
 
@@ -55420,16 +55420,16 @@
 
 
   
-#|(deftype collectoid-draw (powerup-draw)
+(deftype collectoid-draw (powerup-draw)
   ((base-y float  :offset-assert 264)
    )
   :method-count-assert 57
   :size-assert         #x10c
   :flag-assert         #x390080010c
-  (:state-methods
-    idle ;; 50
+  (:methods
+    (idle () _type_ :state) ;; 50
     )
-  )|#
+  )
   
 
 
