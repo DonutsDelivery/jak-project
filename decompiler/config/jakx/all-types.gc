@@ -33673,7 +33673,7 @@
 
 
   
-#|(deftype sparticle-cpuinfo (structure)
+(deftype sparticle-cpuinfo (structure)
   ((sprite        sprite-vec-data-2d                                                                 :offset-assert 0)
    (adgif         adgif-shader                                                                       :offset-assert 4)
    (radius        float                                                                              :offset-assert 8)
@@ -33683,19 +33683,12 @@
    (fade          rgbaf                                                                      :inline :offset-assert 48)
    (acc           vector                                                                     :inline :offset-assert 64)
    (rotvel3d      quaternion                                                                 :inline :offset-assert 80)
-   (vel           vector3s                                                                   :inline :offset-assert 16)
-   (accel         vector3s                                                                   :inline :offset-assert 64)
-   (scalevelx     float                                                                              :offset-assert 28)
-   (scalevely     float                                                                              :offset-assert 44)
+   (scalevelx     float                                                                              :offset 28)
+   (scalevely     float                                                                              :offset 44)
    (friction      float                                                                              :offset-assert 96)
    (timer         int32                                                                              :offset-assert 100)
-   (flags         sp-cpuinfo-flag                                                                    :offset-assert 104) ;; guessed by decompiler
+   (flags         uint32                                                                             :offset-assert 104) ;; sp-cpuinfo-flag
    (user-int32    int32                                                                              :offset-assert 108)
-   (user-uint32   uint32                                                                             :offset-assert 108)
-   (user-float    float                                                                              :offset-assert 108)
-   (user-pntr     uint32                                                                             :offset-assert 108)
-   (user-object   basic                                                                              :offset-assert 108)
-   (user-sprite   sprite-vec-data-2d                                                                 :offset-assert 108)
    (sp-func       (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d uint none)         :offset-assert 112) ;; guessed by decompiler
    (next-time     uint32                                                                             :offset-assert 116)
    (next-launcher basic                                                                              :offset-assert 120)
@@ -33705,15 +33698,21 @@
    (user1-int16   uint16                                                                             :offset-assert 130)
    (control       basic                                                                              :offset-assert 132)
    (binding       int32                                                                              :offset-assert 136) ;; sparticle-launch-state
-   (data          uint32                                                                     1       :offset-assert 12) ;; guessed by decompiler
-   (datab         int8                                                                       4       :offset-assert 12) ;; guessed by decompiler
-   (dataf         float                                                                      1       :offset-assert 12) ;; guessed by decompiler
+   (vel           vector3s                                                                   :inline :offset 16)
+   (accel         vector3s                                                                   :inline :offset 64)
+   (user-uint32   uint32                                                                             :offset 108)
+   (user-float    float                                                                              :offset 108)
+   (user-pntr     uint32                                                                             :offset 108)
+   (user-object   basic                                                                              :offset 108)
+   (user-sprite   sprite-vec-data-2d                                                                 :offset 108)
+   (data          uint32                                                                     1       :offset 12) ;; guessed by decompiler
+   (datab         int8                                                                       4       :offset 12) ;; guessed by decompiler
+   (dataf         float                                                                      1       :offset 12) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x8c
   :flag-assert         #x90000008c
-  ;; field user-object uses ~A with a signed load. field control uses ~A with a signed load.
-  )|#
+  )
   
 
 
@@ -59296,13 +59295,7 @@
   :flag-assert         #x32007000f8
   )
 
-;; sparticle-cpuinfo stub
-(deftype sparticle-cpuinfo (structure)
-  ()
-  :method-count-assert 9
-  :size-assert         #x0
-  :flag-assert         #x900000000
-  )
+;; sparticle-cpuinfo — full definition above at L33676
 
 ;; path-control stub
 (deftype path-control (basic)
