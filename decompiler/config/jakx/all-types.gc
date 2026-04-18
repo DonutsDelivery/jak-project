@@ -9632,12 +9632,12 @@
 
 
   
-#|(deftype cpad-info (hw-cpad)
+(deftype cpad-info (hw-cpad)
   ((number             int32         :offset-assert 36)
    (cpad-file          int32         :offset-assert 40)
-   (button0-abs        pad-buttons 3 :offset-assert 44) ;; guessed by decompiler
-   (button0-shadow-abs pad-buttons 1 :offset-assert 56) ;; guessed by decompiler
-   (button0-rel        pad-buttons 3 :offset-assert 60) ;; guessed by decompiler
+   (button0-abs        uint32      3 :offset-assert 44) ;; pad-buttons
+   (button0-shadow-abs uint32      1 :offset-assert 56) ;; pad-buttons
+   (button0-rel        uint32      3 :offset-assert 60) ;; pad-buttons
    (stick0-dir         float         :offset-assert 72)
    (stick0-speed       float         :offset-assert 76)
    (new-pad            int32         :offset-assert 80)
@@ -9664,7 +9664,7 @@
     (new (symbol type) _type_) ;; 0
     (cpad-info-method-9 (_type_) int) ;; 9
     )
-  )|#
+  )
 
 
 
@@ -40068,23 +40068,19 @@
    (next-line-check-time uint64       :offset-assert 176)
    (last-add-frame-val   uint32       :offset-assert 184)
    )
-  :method-count-assert 27
+  :method-count-assert 21
   :size-assert         #xbc
-  :flag-assert         #x1b003000bc
+  :flag-assert         #x15003000bc
+  (:state-methods
+    die ;; 14
+    tracking ;; 15
+    )
   (:methods
-    (light-trail-tracker-method-9 () none) ;; 9
-    (light-trail-tracker-method-10 () none) ;; 10
-    (light-trail-tracker-method-11 () none) ;; 11
-    (light-trail-tracker-method-12 () none) ;; 12
-    (light-trail-tracker-method-13 () none) ;; 13
-    (light-trail-tracker-method-14 () _type_ :state) ;; 14
-    (light-trail-tracker-method-15 () _type_ :state) ;; 15
-    (light-trail-tracker-method-16 (_type_ process-focusable vector) vector) ;; 16
-    (light-trail-tracker-method-17 (_type_ process-focusable) symbol) ;; 17
-    (light-trail-tracker-method-18 (_type_ process-focusable) symbol) ;; 18
-    (light-trail-tracker-method-19 (_type_) symbol) ;; 19
-    (light-trail-tracker-method-20 (_type_ vector) none) ;; 20
-    (light-trail-tracker-method-21 () none) ;; 21
+    (get-tracked-object-pos (_type_ process-focusable vector) vector) ;; 16
+    (should-track? (_type_ process-focusable) symbol) ;; 17
+    (should-end? (_type_ process-focusable) symbol) ;; 18
+    (should-draw? (_type_) symbol) ;; 19
+    (add-crumb! (_type_ vector) none) ;; 20
     )
   )
   
@@ -40093,15 +40089,16 @@
 
   
 (deftype weapon-trail-tracker (light-trail-tracker)
-  ((joint0     int16   :offset-assert 188)
+  ((trail      weapon-trail :override)
+   (joint0     int16   :offset-assert 188)
    (joint1     int16   :offset-assert 190)
    (state-time uint64  :offset-assert 192)
    )
-  :method-count-assert 28
+  :method-count-assert 22
   :size-assert         #xc8
-  :flag-assert         #x1c004000c8
-  (:methods
-    (weapon-trail-tracker-method-22 () none) ;; 22
+  :flag-assert         #x16004000c8
+  (:state-methods
+    hang-on ;; 21
     )
   )
   
@@ -40110,10 +40107,11 @@
 
   
 (deftype tread-trail-tracker (light-trail-tracker)
-  ()
-  :method-count-assert 27
+  ((trail tread-trail :override)
+   )
+  :method-count-assert 21
   :size-assert         #xbc
-  :flag-assert         #x1b003000bc
+  :flag-assert         #x15003000bc
   )
   
 
@@ -40122,9 +40120,9 @@
   
 (deftype light-trail-tracker-water (light-trail-tracker)
   ()
-  :method-count-assert 27
+  :method-count-assert 21
   :size-assert         #xbc
-  :flag-assert         #x1b003000bc
+  :flag-assert         #x15003000bc
   )
   
 
@@ -40134,11 +40132,11 @@
 (deftype light-trail-tracker-projectile (light-trail-tracker)
   ((state-time uint64  :offset-assert 192)
    )
-  :method-count-assert 28
+  :method-count-assert 22
   :size-assert         #xc8
-  :flag-assert         #x1c004000c8
-  (:methods
-    (light-trail-tracker-projectile-method-22 () none) ;; 22
+  :flag-assert         #x16004000c8
+  (:state-methods
+    hang-on ;; 21
     )
   )
 
