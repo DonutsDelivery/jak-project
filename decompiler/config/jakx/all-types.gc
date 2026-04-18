@@ -55584,13 +55584,13 @@
 
 
   
-#|(deftype train-object (rigid-body-object)
+(deftype train-object (rigid-body-object)
   ((target-position vector :inline :offset-assert 288)
    )
   :method-count-assert 89
   :size-assert         #x130
   :flag-assert         #x5900a00130
-  )|#
+  )
   
 
 
