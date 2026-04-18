@@ -223,6 +223,11 @@ if [ -f "$ROOT/test/offline/config/jakx/config.jsonc" ]; then
     python3 scripts/jakx_watch/seed_refs.py 2>&1 | tee -a "$RUN_LOG" || true
 fi
 
+# --- REF drift scan (detects regressions + stale REFs after each decomp) ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- REF drift scan --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/ref_drift_scan.py 2>&1 | tee -a "$RUN_LOG" || true
+
 # --- offline-test pass (only if jakx corpus exists) ---
 if [ -f "$ROOT/test/offline/config/jakx/config.jsonc" ]; then
     echo "" | tee -a "$RUN_LOG"
