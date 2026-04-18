@@ -40522,29 +40522,25 @@
 
 
   
-#|(deftype lightning-spans-array (inline-array-class)
-  ((length           int32                   :offset-assert 4)
-   (allocated-length int32                   :offset-assert 8)
-   (data             lightning-span :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype lightning-spans-array (inline-array-class)
+  ((data lightning-span :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
 
   
-#|(deftype lightning-spans-internal-array (inline-array-class)
-  ((length           int32                            :offset-assert 4)
-   (allocated-length int32                            :offset-assert 8)
-   (data             lightning-span-internal :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype lightning-spans-internal-array (inline-array-class)
+  ((data lightning-span-internal :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -42046,15 +42042,13 @@
 
 
   
-#|(deftype flow-section-array (inline-array-class)
-  ((length           int32                 :offset-assert 4)
-   (allocated-length int32                 :offset-assert 8)
-   (data             flow-section :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype flow-section-array (inline-array-class)
+  ((data flow-section :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -52313,15 +52307,13 @@
 
 
   
-#|(deftype nav-graph-command-array (inline-array-class)
-  ((length           int32                      :offset-assert 4)
-   (allocated-length int32                      :offset-assert 8)
-   (data             nav-graph-command :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype nav-graph-command-array (inline-array-class)
+  ((data nav-graph-command :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -52486,15 +52478,13 @@
 
 
   
-#|(deftype nav-mesh-poly-array (inline-array-class)
-  ((length           int32                  :offset-assert 4)
-   (allocated-length int32                  :offset-assert 8)
-   (data             nav-mesh-poly :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype nav-mesh-poly-array (inline-array-class)
+  ((data nav-mesh-poly :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
@@ -52511,15 +52501,13 @@
 
 
   
-#|(deftype nav-mesh-tri-quad-array (inline-array-class)
-  ((length           int32                      :offset-assert 4)
-   (allocated-length int32                      :offset-assert 8)
-   (data             nav-mesh-tri-quad :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype nav-mesh-tri-quad-array (inline-array-class)
+  ((data nav-mesh-tri-quad :dynamic :offset 16) ;; guessed by decompiler
    )
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
-  )|#
+  )
   
 
 
