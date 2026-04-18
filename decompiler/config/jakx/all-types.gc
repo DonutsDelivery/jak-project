@@ -30070,7 +30070,7 @@
 
 
   
-#|(deftype simple-prim (process-drawable)
+(deftype simple-prim (process-drawable)
   ((strip prim-strip  :offset-assert 248) ;; guessed by decompiler
    )
   :method-count-assert 56
@@ -30084,7 +30084,7 @@
     (simple-prim-method-54 () none) ;; 54
     (simple-prim-method-55 () none) ;; 55
     )
-  )|#
+  )
   
 
 
@@ -54296,12 +54296,12 @@
 
 
   
-#|(deftype time-freeze-long-draw (time-freeze-short-draw)
-  ()
+(deftype time-freeze-long-draw (time-freeze-short-draw)
+  ((pad280 uint8 16 :offset-assert 280))
   :method-count-assert 58
   :size-assert         #x128
   :flag-assert         #x3a00a00128
-  )|#
+  )
   
 
 
@@ -54316,12 +54316,12 @@
 
 
   
-#|(deftype time-freeze-med-draw (time-freeze-short-draw)
-  ()
+(deftype time-freeze-med-draw (time-freeze-short-draw)
+  ((pad280 uint8 16 :offset-assert 280))
   :method-count-assert 58
   :size-assert         #x128
   :flag-assert         #x3a00a00128
-  )|#
+  )
   
 
 
@@ -59744,7 +59744,7 @@
 (define-extern ragdoll object)
 (define-extern rb-debugger object)
 (define-extern rigid-body-work object)
-(define-extern simple-prim object)
+;; simple-prim activated at L30073
 (define-extern sky-moon-data object)
 (define-extern smoke-system object)
 (define-extern spartacus-editor object)
