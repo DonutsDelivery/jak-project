@@ -2483,8 +2483,11 @@
 ;; net-hud                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Forward declaration so children declared below can reference in-game-hud
+;; before its full deftype is reached at L34018.
+(declare-type in-game-hud hud)
 
-  
+
 #|(deftype in-game-hud (hud)
   ((real-items           basic  :offset-assert 6364)
    (items                basic  :offset-assert 6368)
@@ -3016,34 +3019,34 @@
 
 
   
-#|(deftype hud-slowmo (in-game-hud)
+(deftype hud-slowmo (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-top-split-bar (in-game-hud)
+(deftype hud-top-split-bar (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
 
   
-#|(deftype hud-side-split-bar (in-game-hud)
+(deftype hud-side-split-bar (in-game-hud)
   ()
   :method-count-assert 33
   :size-assert         #x18ec
   :flag-assert         #x21186018ec
-  )|#
+  )
   
 
 
