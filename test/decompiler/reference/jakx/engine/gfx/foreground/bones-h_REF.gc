@@ -1,0 +1,138 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; type bone-buffer is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type bone-buffer) 3 L22)
+
+;; type bone-layout is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type bone-layout) 3 L19)
+
+;; definition of type bone-regs
+(deftype bone-regs (structure)
+  ((dma-buf     dma-buffer)
+   (wait-count  uint32)
+   (in-count    uint32)
+   (sp-size     uint32)
+   (sp-bufnum   uint32)
+   (joint-ptr   (inline-array joint))
+   (bone-ptr    (inline-array bone))
+   (num-bones   uint32)
+   (mtxs        (inline-array pris-mtx))
+   )
+  )
+
+;; definition for method 3 of type bone-regs
+(defmethod inspect ((this bone-regs))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'bone-regs)
+  (format #t "~1Tdma-buf: ~A~%" (-> this dma-buf))
+  (format #t "~1Twait-count: ~D~%" (-> this wait-count))
+  (format #t "~1Tin-count: ~D~%" (-> this in-count))
+  (format #t "~1Tsp-size: ~D~%" (-> this sp-size))
+  (format #t "~1Tsp-bufnum: ~D~%" (-> this sp-bufnum))
+  (format #t "~1Tjoint-ptr: #x~X~%" (-> this joint-ptr))
+  (format #t "~1Tbone-ptr: #x~X~%" (-> this bone-ptr))
+  (format #t "~1Tnum-bones: ~D~%" (-> this num-bones))
+  (format #t "~1Tmtxs: #x~X~%" (-> this mtxs))
+  (label cfg-4)
+  this
+  )
+
+;; type bone-work is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type bone-work) 3 L13)
+
+;; definition of type bone-debug
+(deftype bone-debug (structure)
+  ((time-ctr  uint32)
+   (timing    uint32  360)
+   )
+  )
+
+;; definition for method 3 of type bone-debug
+(defmethod inspect ((this bone-debug))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'bone-debug)
+  (format #t "~1Ttime-ctr: ~D~%" (-> this time-ctr))
+  (format #t "~1Ttiming[360] @ #x~X~%" (-> this timing))
+  (label cfg-4)
+  this
+  )
+
+;; type bone-memory is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type bone-memory) 3 L7)
+
+;; definition of type bone-calculation
+(deftype bone-calculation (structure)
+  ((flags                uint16)
+   (num-bones            uint16)
+   (matrix-area          (inline-array pris-mtx))
+   (joints               (inline-array joint))
+   (bones                (inline-array bone))
+   (ripple-scale         float)
+   (ripple-y-scale       float)
+   (ripple-normal-scale  float)
+   (ripple-area          (inline-array vector))
+   (next                 bone-calculation)
+   (dummy-1              uint32)
+   (dummy-2              uint32)
+   (dummy-3              uint32)
+   )
+  )
+
+;; definition for method 3 of type bone-calculation
+(defmethod inspect ((this bone-calculation))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'bone-calculation)
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (format #t "~1Tnum-bones: ~D~%" (-> this num-bones))
+  (format #t "~1Tmatrix-area: #x~X~%" (-> this matrix-area))
+  (format #t "~1Tjoints: #x~X~%" (-> this joints))
+  (format #t "~1Tbones: #x~X~%" (-> this bones))
+  (format #t "~1Tripple-scale: ~f~%" (-> this ripple-scale))
+  (format #t "~1Tripple-y-scale: ~f~%" (-> this ripple-y-scale))
+  (format #t "~1Tripple-normal-scale: ~f~%" (-> this ripple-normal-scale))
+  (format #t "~1Tripple-area: #x~X~%" (-> this ripple-area))
+  (format #t "~1Tnext: #<bone-calculation @ #x~X>~%" (-> this next))
+  (format #t "~1Tdummy-1: ~D~%" (-> this dummy-1))
+  (format #t "~1Tdummy-2: ~D~%" (-> this dummy-2))
+  (format #t "~1Tdummy-3: ~D~%" (-> this dummy-3))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type bone-calculation-list
+(deftype bone-calculation-list (structure)
+  ((first  bone-calculation)
+   (next   bone-calculation)
+   )
+  )
+
+;; definition for method 3 of type bone-calculation-list
+(defmethod inspect ((this bone-calculation-list))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'bone-calculation-list)
+  (format #t "~1Tfirst: #<bone-calculation @ #x~X>~%" (-> this first))
+  (format #t "~1Tnext: #<bone-calculation @ #x~X>~%" (-> this next))
+  (label cfg-4)
+  this
+  )
+
+
+
+

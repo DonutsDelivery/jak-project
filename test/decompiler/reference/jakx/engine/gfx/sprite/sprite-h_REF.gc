@@ -1,0 +1,68 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; type sprite-vec-data-2d is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type sprite-vec-data-2d) 3 L10)
+
+;; definition of type sprite-array-2d
+(deftype sprite-array-2d (basic)
+  ((num-sprites  int32    2)
+   (num-valid    int32    2)
+   (vec-data     pointer)
+   (adgif-data   (inline-array adgif-shader))
+   (pad          uint128  4)
+   (data         uint128  1)
+   )
+  )
+
+;; definition for method 3 of type sprite-array-2d
+(defmethod inspect ((this sprite-array-2d))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tnum-sprites[2] @ #x~X~%" (-> this num-sprites))
+  (format #t "~1Tnum-valid[2] @ #x~X~%" (-> this num-valid))
+  (format #t "~1Tvec-data: #x~X~%" (-> this vec-data))
+  (format #t "~1Tadgif-data: #x~X~%" (-> this adgif-data))
+  (format #t "~1Tpad[4] @ #x~X~%" (-> this pad))
+  (format #t "~1Tdata[1] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
+  )
+
+;; type sprite-vec-data-3d is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type sprite-vec-data-3d) 3 L4)
+
+;; definition of type sprite-array-3d
+(deftype sprite-array-3d (basic)
+  ((num-sprites  int32    2)
+   (num-valid    int32    2)
+   (vec-data     pointer)
+   (adgif-data   (inline-array adgif-shader))
+   (data         uint128  1)
+   )
+  )
+
+;; definition for method 3 of type sprite-array-3d
+(defmethod inspect ((this sprite-array-3d))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tnum-sprites[2] @ #x~X~%" (-> this num-sprites))
+  (format #t "~1Tnum-valid[2] @ #x~X~%" (-> this num-valid))
+  (format #t "~1Tvec-data: #x~X~%" (-> this vec-data))
+  (format #t "~1Tadgif-data: #x~X~%" (-> this adgif-data))
+  (format #t "~1Tdata[1] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
+  )
+
+
+
+

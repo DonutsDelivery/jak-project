@@ -1,0 +1,47 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition of type collide-frag-vertex
+(deftype collide-frag-vertex (vector)
+  ()
+  )
+
+;; definition for method 3 of type collide-frag-vertex
+;; INFO: Used lq/sq
+(defmethod inspect ((this collide-frag-vertex))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'collide-frag-vertex)
+  (format #t "~1Tdata[4] @ #x~X~%" (-> this data))
+  (format #t "~1Tx: ~f~%" (-> this x))
+  (format #t "~1Ty: ~f~%" (-> this y))
+  (format #t "~1Tz: ~f~%" (-> this z))
+  (format #t "~1Tw: ~f~%" (-> this w))
+  (format #t "~1Tquad: ~D~%" (-> this quad))
+  (label cfg-4)
+  this
+  )
+
+;; type collide-frag-mesh is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type collide-frag-mesh) 3 L7)
+
+;; type collide-fragment is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type collide-fragment) 3 L4)
+
+;; type drawable-inline-array-collide-fragment is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type drawable-inline-array-collide-fragment) 3 L1)
+
+;; definition of type drawable-tree-collide-fragment
+(deftype drawable-tree-collide-fragment (drawable-tree)
+  "Unused jak 1 background collision data."
+  ()
+  )
+
+
+
+

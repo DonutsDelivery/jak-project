@@ -1,0 +1,247 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition of type sky-color-hour
+(deftype sky-color-hour (structure)
+  ((snapshot1    int32)
+   (snapshot2    int32)
+   (morph-start  float)
+   (morph-end    float)
+   )
+  )
+
+;; definition for method 3 of type sky-color-hour
+(defmethod inspect ((this sky-color-hour))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'sky-color-hour)
+  (format #t "~1Tsnapshot1: ~D~%" (-> this snapshot1))
+  (format #t "~1Tsnapshot2: ~D~%" (-> this snapshot2))
+  (format #t "~1Tmorph-start: ~f~%" (-> this morph-start))
+  (format #t "~1Tmorph-end: ~f~%" (-> this morph-end))
+  (label cfg-4)
+  this
+  )
+
+;; type sky-color-day is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type sky-color-day) 3 L38)
+
+;; type sky-sun-data is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type sky-sun-data) 3 L35)
+
+;; type sky-moon-data is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type sky-moon-data) 3 L32)
+
+;; definition of type sky-orbit
+(deftype sky-orbit (structure)
+  ((high-noon  float)
+   (tilt       float)
+   (rise       float)
+   (dist       float)
+   (min-halo   float)
+   (max-halo   float)
+   )
+  )
+
+;; definition for method 3 of type sky-orbit
+(defmethod inspect ((this sky-orbit))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'sky-orbit)
+  (format #t "~1Thigh-noon: ~f~%" (-> this high-noon))
+  (format #t "~1Ttilt: ~f~%" (-> this tilt))
+  (format #t "~1Trise: ~f~%" (-> this rise))
+  (format #t "~1Tdist: ~f~%" (-> this dist))
+  (format #t "~1Tmin-halo: ~f~%" (-> this min-halo))
+  (format #t "~1Tmax-halo: ~f~%" (-> this max-halo))
+  (label cfg-4)
+  this
+  )
+
+;; type sky-upload-data is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type sky-upload-data) 3 L26)
+
+;; definition of type sky-vertex
+(deftype sky-vertex (structure)
+  ((pos  vector  :inline)
+   (stq  vector  :inline)
+   (col  vector  :inline)
+   )
+  )
+
+;; definition for method 3 of type sky-vertex
+;; INFO: this function exists in multiple non-identical object files
+(defmethod inspect ((this sky-vertex))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'sky-vertex)
+  (format #t "~1Tpos: #<vector @ #x~X>~%" (-> this pos))
+  (format #t "~1Tstq: #<vector @ #x~X>~%" (-> this stq))
+  (format #t "~1Tcol: #<vector @ #x~X>~%" (-> this col))
+  (label cfg-4)
+  this
+  )
+
+;; definition for method 3 of type sky-vertex
+;; INFO: this function exists in multiple non-identical object files
+(defmethod inspect ((this sky-vertex))
+  (format #t "sky-vertex [~X]:~%" this)
+  (format #t "~TPos: [~F ~F ~F ~F]~%" (-> this pos x) (-> this pos y) (-> this pos z) (-> this pos w))
+  (format #t "~TSTQ: [~F ~F ~F ~F]~%" (-> this stq x) (-> this stq y) (-> this stq z) (-> this stq w))
+  (format #t "~TCol: [~F ~F ~F ~F]~%" (-> this col x) (-> this col y) (-> this col z) (-> this col w))
+  this
+  )
+
+;; definition of type cloud-vertex
+(deftype cloud-vertex (structure)
+  ((pos   vector  :inline)
+   (stq   vector  :inline)
+   (col   vector  :inline)
+   (nrm   vector  :inline)
+   (stq2  vector  :inline)
+   (col2  vector  :inline)
+   (nrm2  vector  :inline)
+   )
+  )
+
+;; definition for method 3 of type cloud-vertex
+(defmethod inspect ((this cloud-vertex))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'cloud-vertex)
+  (format #t "~1Tpos: ~`vector`P~%" (-> this pos))
+  (format #t "~1Tstq: ~`vector`P~%" (-> this stq))
+  (format #t "~1Tcol: ~`vector`P~%" (-> this col))
+  (format #t "~1Tnrm: ~`vector`P~%" (-> this nrm))
+  (format #t "~1Tstq2: ~`vector`P~%" (-> this stq2))
+  (format #t "~1Tcol2: ~`vector`P~%" (-> this col2))
+  (format #t "~1Tnrm2: ~`vector`P~%" (-> this nrm2))
+  (label cfg-4)
+  this
+  )
+
+;; type cloud-vert-array is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type cloud-vert-array) 3 L16)
+
+;; definition of type haze-vertex
+(deftype haze-vertex (structure)
+  ((pos  vector  :inline)
+   (nrm  vector  :inline)
+   (col  vector  :inline)
+   )
+  )
+
+;; definition for method 3 of type haze-vertex
+(defmethod inspect ((this haze-vertex))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'haze-vertex)
+  (format #t "~1Tpos: ~`vector`P~%" (-> this pos))
+  (format #t "~1Tnrm: ~`vector`P~%" (-> this nrm))
+  (format #t "~1Tcol: ~`vector`P~%" (-> this col))
+  (label cfg-4)
+  this
+  )
+
+;; type haze-vert-array is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type haze-vert-array) 3 L10)
+
+;; definition of type cloud-lights
+(deftype cloud-lights (structure)
+  ((sun0-normal       vector  :inline)
+   (sun1-normal       vector  :inline)
+   (moon-normal       vector  :inline)
+   (ambi-color        vector  :inline)
+   (ambi-color-lower  vector  :inline)
+   (sun0-color        vector  :inline)
+   (sun1-color        vector  :inline)
+   (moon-color        vector  :inline)
+   (sun0-color-lower  vector  :inline)
+   (sun0-scale        float)
+   (sun1-scale        float)
+   (moon-scale        float)
+   )
+  )
+
+;; definition for method 3 of type cloud-lights
+(defmethod inspect ((this cloud-lights))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'cloud-lights)
+  (format #t "~1Tsun0-normal: #<vector @ #x~X>~%" (-> this sun0-normal))
+  (format #t "~1Tsun1-normal: #<vector @ #x~X>~%" (-> this sun1-normal))
+  (format #t "~1Tmoon-normal: #<vector @ #x~X>~%" (-> this moon-normal))
+  (format #t "~1Tambi-color: #<vector @ #x~X>~%" (-> this ambi-color))
+  (format #t "~1Tambi-color-lower: #<vector @ #x~X>~%" (-> this ambi-color-lower))
+  (format #t "~1Tsun0-color: #<vector @ #x~X>~%" (-> this sun0-color))
+  (format #t "~1Tsun1-color: #<vector @ #x~X>~%" (-> this sun1-color))
+  (format #t "~1Tmoon-color: #<vector @ #x~X>~%" (-> this moon-color))
+  (format #t "~1Tsun0-color-lower: #<vector @ #x~X>~%" (-> this sun0-color-lower))
+  (format #t "~1Tsun0-scale: ~f~%" (-> this sun0-scale))
+  (format #t "~1Tsun1-scale: ~f~%" (-> this sun1-scale))
+  (format #t "~1Tmoon-scale: ~f~%" (-> this moon-scale))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type haze-lights
+(deftype haze-lights (structure)
+  ((sun0-normal  vector  :inline)
+   (sun1-normal  vector  :inline)
+   (moon-normal  vector  :inline)
+   (ambi-color   vector  :inline)
+   (sun0-color   vector  :inline)
+   (sun1-color   vector  :inline)
+   (moon-color   vector  :inline)
+   (sun0-scale   float)
+   (sun1-scale   float)
+   (moon-scale   float)
+   )
+  )
+
+;; definition for method 3 of type haze-lights
+(defmethod inspect ((this haze-lights))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'haze-lights)
+  (format #t "~1Tsun0-normal: #<vector @ #x~X>~%" (-> this sun0-normal))
+  (format #t "~1Tsun1-normal: #<vector @ #x~X>~%" (-> this sun1-normal))
+  (format #t "~1Tmoon-normal: #<vector @ #x~X>~%" (-> this moon-normal))
+  (format #t "~1Tambi-color: #<vector @ #x~X>~%" (-> this ambi-color))
+  (format #t "~1Tsun0-color: #<vector @ #x~X>~%" (-> this sun0-color))
+  (format #t "~1Tsun1-color: #<vector @ #x~X>~%" (-> this sun1-color))
+  (format #t "~1Tmoon-color: #<vector @ #x~X>~%" (-> this moon-color))
+  (format #t "~1Tsun0-scale: ~f~%" (-> this sun0-scale))
+  (format #t "~1Tsun1-scale: ~f~%" (-> this sun1-scale))
+  (format #t "~1Tmoon-scale: ~f~%" (-> this moon-scale))
+  (label cfg-4)
+  this
+  )
+
+;; type sky-work is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type sky-work) 3 L1)
+
+
+
+

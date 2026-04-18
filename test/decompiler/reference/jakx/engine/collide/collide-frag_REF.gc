@@ -1,0 +1,39 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for method 9 of type drawable-tree-collide-fragment
+(defmethod login ((this drawable-tree-collide-fragment))
+  "Initialize the object after it is loaded."
+  this
+  )
+
+;; definition for method 10 of type drawable-tree-collide-fragment
+(defmethod draw ((this drawable-tree-collide-fragment))
+  "Draw the drawable, and typically its children.
+   This usually means adding stuff to a list to be drawn later, rather than expensive drawing here."
+  (when *display-render-collision*
+    (dotimes (s5-0 (-> this length))
+      (draw (-> this data s5-0))
+      )
+    )
+  0
+  )
+
+;; definition for method 15 of type drawable-tree-collide-fragment
+(defmethod unpack-vis ((this drawable-tree-collide-fragment) (arg0 (pointer int8)) (arg1 (pointer int8)))
+  arg1
+  )
+
+(method-set! (the-as type collide-fragment) 8 L17)
+
+(method-set! (the-as type drawable-inline-array-collide-fragment) 9 L6)
+
+(method-set! (the-as type collide-fragment) 10 L5)
+
+(method-set! (the-as type drawable-inline-array-collide-fragment) 10 L1)
+
+(method-set! (the-as type drawable-inline-array-collide-fragment) 8 L14)
+
+
+
+

@@ -28,7 +28,7 @@
         )
 
 ;; definition for symbol *net-play-mode-text-ids*, type object
-(define *net-play-mode-text-ids* <static-data-L178>)
+(define *net-play-mode-text-ids* #f)
 
 ;; definition for symbol *net-play-mode-icon-string*, type (array string)
 (define *net-play-mode-icon-string* (new 'static 'boxed-array :type string

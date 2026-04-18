@@ -1,0 +1,86 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; type ragdoll-edit-info is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type ragdoll-edit-info) 3 L17)
+
+;; definition for symbol *ragdoll-edit-info*, type object
+(define *ragdoll-edit-info* (the-as object 0))
+
+;; definition for symbol *ragdoll-edit-info*, type object
+(define *ragdoll-edit-info* #f)
+
+;; definition of type ragdoll-joint-setup
+(deftype ragdoll-joint-setup (structure)
+  ((joint-index   int32)
+   (parent-joint  int32)
+   (joint-type    uint64)
+   (pre-tform     vector  :inline)
+   (geo-tform     vector  :inline)
+   (axial-slop    float)
+   (max-angle     float)
+   (coll-rad      float)
+   (hit-sound     uint16)
+   )
+  )
+
+;; definition for method 3 of type ragdoll-joint-setup
+(defmethod inspect ((this ragdoll-joint-setup))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'ragdoll-joint-setup)
+  (format #t "~1Tjoint-index: ~D~%" (-> this joint-index))
+  (format #t "~1Tparent-joint: ~D~%" (-> this parent-joint))
+  (format #t "~1Tjoint-type: ~D~%" (-> this joint-type))
+  (format #t "~1Tpre-tform: #<vector @ #x~X>~%" (-> this pre-tform))
+  (format #t "~1Tgeo-tform: #<vector @ #x~X>~%" (-> this geo-tform))
+  (format #t "~1Taxial-slop: ~f~%" (-> this axial-slop))
+  (format #t "~1Tmax-angle: ~f~%" (-> this max-angle))
+  (format #t "~1Tcoll-rad: ~f~%" (-> this coll-rad))
+  (format #t "~1Thit-sound: ~D~%" (-> this hit-sound))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type ragdoll-setup
+(deftype ragdoll-setup (structure)
+  ((orient-tform     vector  :inline)
+   (scale            vector  :inline)
+   (bg-collide-with  collide-spec)
+   (joint-setup      (array ragdoll-joint-setup))
+   )
+  )
+
+;; definition for method 3 of type ragdoll-setup
+(defmethod inspect ((this ragdoll-setup))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'ragdoll-setup)
+  (format #t "~1Torient-tform: #<vector @ #x~X>~%" (-> this orient-tform))
+  (format #t "~1Tscale: #<vector @ #x~X>~%" (-> this scale))
+  (format #t "~1Tbg-collide-with: ~D~%" (-> this bg-collide-with))
+  (format #t "~1Tjoint-setup: ~A~%" (-> this joint-setup))
+  (label cfg-4)
+  this
+  )
+
+;; type ragdoll-joint is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type ragdoll-joint) 3 L8)
+
+;; type ragdoll is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type ragdoll) 3 L5)
+
+;; type ragdoll-proc is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type ragdoll-proc) 3 L2)
+
+
+
+
