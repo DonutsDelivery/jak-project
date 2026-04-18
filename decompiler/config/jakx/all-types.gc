@@ -44250,15 +44250,15 @@
 
 
   
-#|(deftype race-mesh-edge (structure)
+(deftype race-mesh-edge (structure)
   ((left     vector :inline :offset-assert 0)
    (right    vector :inline :offset-assert 16)
-   (lap-dist float          :offset-assert 12)
+   (lap-dist float          :offset 12) ;; overlays left.w
    )
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
-  )|#
+  )
   
 
 
@@ -44290,9 +44290,10 @@
 
 
   
-#|(deftype race-mesh-hash (structure)
+(deftype race-mesh-hash (structure)
   ((cells-wide  int8                                       :offset-assert 0)
    (cells-tall  int8                                       :offset-assert 1)
+   (pad2        uint16                                     :offset-assert 2)
    (cell-length float                                      :offset-assert 4)
    (cells       (inline-array race-mesh-hash-cell)         :offset-assert 8) ;; guessed by decompiler
    (slice-table (inline-array race-mesh-slice)             :offset-assert 12) ;; guessed by decompiler
@@ -44301,7 +44302,7 @@
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
-  )|#
+  )
   
 
 
