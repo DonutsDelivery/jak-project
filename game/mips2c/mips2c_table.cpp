@@ -422,6 +422,12 @@ namespace set_sky_vf23_value { extern void link(); }
 namespace cspace_parented_transformq_joint { extern void link(); }
 // texture.cpp port (see game/mips2c/jakx_functions/texture.cpp)
 namespace adgif_shader_texture_with_update { extern void link(); }
+// debug.cpp port (see game/mips2c/jakx_functions/debug.cpp)
+namespace debug_line_clip { extern void link(); }
+namespace init_boundary_regs { extern void link(); }
+namespace draw_boundary_polygon { extern void link(); }
+namespace render_boundary_quad { extern void link(); }
+namespace render_boundary_tri { extern void link(); }
 // sparticle_launcher.cpp port (see game/mips2c/jakx_functions/sparticle_launcher.cpp)
 namespace sparticle_motion_blur { extern void link(); }
 namespace particle_adgif { extern void link(); }
@@ -708,9 +714,9 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
       {jak3::light_hash_get_bucket_index::link, jak3::add_light_sphere_to_light_group::link,
        jak3::light_hash_count_items::link, jak3::light_hash_add_items::link}},
      {"debug",
-      {jak3::debug_line_clip::link, jak3::init_boundary_regs::link,
-       jak3::draw_boundary_polygon::link, jak3::render_boundary_quad::link,
-       jak3::render_boundary_tri::link, jak3::set_sky_vf27::link}},
+      {jakx::debug_line_clip::link, jakx::init_boundary_regs::link,
+       jakx::draw_boundary_polygon::link, jakx::render_boundary_quad::link,
+       jakx::render_boundary_tri::link, jak3::set_sky_vf27::link}},
      {"generic-effect",
       {jak3::generic_light_proc::link, jak3::generic_envmap_proc::link,
        jak3::generic_prepare_dma_double::link, jak3::generic_prepare_dma_single::link,
