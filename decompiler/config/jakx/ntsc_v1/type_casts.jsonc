@@ -39020,7 +39020,9 @@
   ],
   // race-control-method-9: start-dir.w holds a packed handle/pointer.
   // v1 is typed float after ->start-dir.w; op 5 reinterprets bits as pointer for l.wu.
+  // a1 at op 6 is the lwu result (process ptr); l.w(a1+48) loads the PID for handle build.
   "(method 9 race-control)": [
-    [5, "v1", "pointer"]
+    [5, "v1", "pointer"],
+    [6, "a1", "pointer"]
   ]
 }

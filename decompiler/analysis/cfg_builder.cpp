@@ -359,7 +359,9 @@ bool try_clean_up_sc_as_and(FormPool& pool, Function& func, ShortCircuitElement*
   RegisterAccess ir_dest;
   for (int i = 0; i < int(ir->entries.size()) - 1; i++) {
     auto branch = get_condition_branch(ir->entries.at(i).condition);
-    ASSERT(branch.first);
+    if (!branch.first) {
+      return false;
+    }
     if (!ir->entries.at(i).branch_delay.has_value()) {
       return false;
     }
@@ -387,7 +389,9 @@ bool try_clean_up_sc_as_and(FormPool& pool, Function& func, ShortCircuitElement*
   // now get rid of the branches
   for (int i = 0; i < int(ir->entries.size()) - 1; i++) {
     auto branch = get_condition_branch(ir->entries.at(i).condition);
-    ASSERT(branch.first);
+    if (!branch.first) {
+      return false;
+    }
 
     if (func.ir2.env.has_reg_use()) {
       auto delay_id = ir->entries.at(i).branch_delay->dst().idx();
@@ -469,7 +473,9 @@ bool try_clean_up_sc_as_or(FormPool& pool, Function& func, ShortCircuitElement* 
   for (int i = 0; i < int(ir->entries.size()) - 1; i++) {
     // short circuit branch
     auto branch = get_condition_branch(ir->entries.at(i).condition);
-    ASSERT(branch.first);
+    if (!branch.first) {
+      return false;
+    }
     if (!ir->entries.at(i).branch_delay.has_value()) {
       return false;
     }
@@ -506,7 +512,9 @@ bool try_clean_up_sc_as_or(FormPool& pool, Function& func, ShortCircuitElement* 
 
   for (int i = 0; i < int(ir->entries.size()) - 1; i++) {
     auto branch = get_condition_branch(ir->entries.at(i).condition);
-    ASSERT(branch.first);
+    if (!branch.first) {
+      return false;
+    }
 
     if (func.ir2.env.has_reg_use()) {
       auto delay_id = ir->entries.at(i).branch_delay->dst().idx();
@@ -609,7 +617,9 @@ bool try_splitting_nested_sc(FormPool& pool, Function& func, ShortCircuitElement
 
   for (int i = 1; i < int(ir->entries.size()) - 1; i++) {
     auto branch = get_condition_branch(ir->entries.at(i).condition);
-    ASSERT(branch.first);
+    if (!branch.first) {
+      return false;
+    }
     if (!ir->entries.at(i).branch_delay.has_value()) {
       return false;
     }

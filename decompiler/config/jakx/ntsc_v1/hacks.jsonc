@@ -35,6 +35,7 @@
   "hint_inline_assembly_functions": [],
   "asm_functions_by_name": [
 
+    "display-loop",
     "output-race-mesh",
     "get-string-length",
     "name=",
@@ -188,7 +189,7 @@
     "generic-warp-envmap-dest",
     "generic-no-light-proc",
     "debug-line-clip?",
-    // live-func-curve         — moved to mips2c_functions_by_name (jakx-native port)
+    "live-func-curve",          // mips2c branch.first assert crash workaround; move back after C++ fix
     // birth-func-curve        — moved to mips2c_functions_by_name (jakx-native port)
     // sparticle-motion-blur-dirt — moved to mips2c_functions_by_name (jakx-native port)
     "foreground-draw-hud",
@@ -224,7 +225,6 @@
     "(method 23 gui-control)",
     "(method 11 collide-mesh)",
     "target-standard-event-handler",
-    "display-loop-main",
     "(method 22 level)",
     "(method 11 medius-cache)",
     "water-anim-event-handler"
@@ -1747,7 +1747,7 @@
     // particle-curves — jakx-native ports in
     // game/mips2c/jakx_functions/particle_curves.cpp. Structurally
     // identical to jak3; jakx namespace only.
-    "live-func-curve",
+    // live-func-curve — moved back to asm_functions (mips2c crashes on branch.first assert)
     "birth-func-curve",
     // wvehicle-part — jakx-native port in
     // game/mips2c/jakx_functions/wvehicle_part.cpp. Diverges from jak3:
