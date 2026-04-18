@@ -55596,7 +55596,7 @@
 
 
   
-#|(deftype train-car (train-object)
+(deftype train-car (train-object)
   ()
   :method-count-assert 89
   :size-assert         #x130
@@ -55604,7 +55604,7 @@
   (:state-methods
     idle ;; 59
     )
-  )|#
+  )
   
 
 
