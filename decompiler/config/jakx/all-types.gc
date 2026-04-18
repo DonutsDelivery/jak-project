@@ -35891,25 +35891,25 @@
 
 
   
-#|(deftype history-elt (structure)
+(deftype history-elt (structure)
   ((record-tag-bytes      uint8       4       :offset-assert 0) ;; guessed by decompiler
-   (record-tag            uint32              :offset-assert 0)
-   (record-id             uint16              :offset-assert 0)
-   (owner                 uint8               :offset-assert 2)
+   (record-tag            uint32              :offset 0)
+   (record-id             uint16              :offset 0)
+   (owner                 uint8               :offset 2)
    (channel               uint8               :offset-assert 4) ;; history-channel
    (timestamp             uint64              :offset-assert 8) ;; time-frame
    (origin                vector      :inline :offset-assert 16)
    (bytes                 uint8       16      :offset-assert 32) ;; guessed by decompiler
-   (vector                vector      :inline :offset-assert 32)
-   (float                 float               :offset-assert 32)
-   (collide-status        uint64              :offset-assert 32) ;; collide-status
-   (collide-reaction-flag uint32              :offset-assert 40)
-   (pat                   pat-surface         :offset-assert 32) ;; guessed by decompiler
+   (vector                vector      :inline :offset 32)
+   (float                 float               :offset 32)
+   (collide-status        uint64              :offset 32) ;; collide-status
+   (collide-reaction-flag uint32              :offset 40)
+   (pat                   pat-surface         :offset 32) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x30
   :flag-assert         #x900000030
-  )|#
+  )
   
 
 
@@ -35938,20 +35938,20 @@
 
 
   
-#|(deftype history (basic)
-  ((alloc-index      int32                :offset-assert 4)
-   (allocated-length int32                :offset-assert 8)
-   (elts             history-elt :dynamic :offset-assert 16) ;; guessed by decompiler
+(deftype history (basic)
+  ((alloc-index      int32                        :offset-assert 4)
+   (allocated-length int32                        :offset-assert 8)
+   (elts             history-elt :inline :dynamic :offset-assert 16) ;; guessed by decompiler
    )
   :method-count-assert 11
   :size-assert         #x10
   :flag-assert         #xb00000010
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type int) _type_)
-    (history-method-9 (_type_) none) ;; 9 ;; (clear-record-tags! (_type_ history-channel uint uint) history-elt)
-    (history-method-10 (_type_) none) ;; 10 ;; (clear-history-entries! (_type_) none)
+    (new (symbol type) _type_) ;; 0
+    (history-method-9 (_type_) none) ;; 9
+    (history-method-10 (_type_) none) ;; 10
     )
-  )|#
+  )
   
 
 
@@ -36003,13 +36003,13 @@
 
 
   
-#|(deftype blerc-dcache (structure)
-  ((repl-mult vector 40 :offset-assert 0) ;; guessed by decompiler
+(deftype blerc-dcache (structure)
+  ((repl-mult vector 40 :inline :offset-assert 0) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x280
   :flag-assert         #x900000280
-  )|#
+  )
   
 
 
