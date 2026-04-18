@@ -77,7 +77,7 @@ echo "-- running decompiler --" | tee -a "$RUN_LOG"
 set +e
 "$BIN" "$CFG" "$ISO" "$OUT_DIR" \
     --version ntsc_v1 \
-    --config-override '{"decompile_code": true, "levels_extract": false, "allowed_objects": [], "generate_all_types": true}' \
+    --config-override '{"decompile_code": true, "levels_extract": false, "allowed_objects": [], "generate_all_types": false}' \
     >>"$RUN_LOG" 2>&1
 RC=$?
 set -e
@@ -90,7 +90,7 @@ echo "-- decompiler exited rc=$RC (elapsed ${ELAPSED}s) --" | tee -a "$RUN_LOG"
 DECOMP_LOG=$(ls -t "$LOG_DIR"/decompiler.*.log 2>/dev/null | head -1)
 
 # Success-ish: if we emitted any _disasm.gc files, measurement is meaningful.
-N_OUT=$(find "$OUT_DIR/jakx" -maxdepth 1 -name '*_disasm.gc' 2>/dev/null | wc -l)
+N_OUT=$(find "$OUT_DIR/jakx" -name '*_disasm.gc' 2>/dev/null | wc -l)
 echo "emitted $N_OUT _disasm.gc files" | tee -a "$RUN_LOG"
 
 if [ "$N_OUT" = "0" ]; then
