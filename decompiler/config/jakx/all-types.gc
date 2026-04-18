@@ -30356,7 +30356,7 @@
 
 
   
-#|(deftype explosion (process-drawable)
+(deftype explosion (process-drawable)
   ((start-time      uint64                        :offset-assert 248) ;; time-frame
    (duration        uint32                        :offset-assert 256)
    (linger-duration uint32                        :offset-assert 260)
@@ -30375,7 +30375,7 @@
     (explosion-method-51 (_type_) none) ;; 51
     (explosion-method-52 (_type_) none) ;; 52
     )
-  )|#
+  )
   
 
 
@@ -30428,13 +30428,13 @@
 
 
   
-#|(deftype external-camera-controller (process)
-  ((pause-time uint64  :offset-assert 144) ;; time-frame
-   (blur       symbol  :offset-assert 152) ;; guessed by decompiler
+(deftype external-camera-controller (process)
+  ((pause-time time-frame :offset-assert 144)
+   (blur       symbol     :offset-assert 152) ;; guessed by decompiler
    )
-  :method-count-assert 16
+  :method-count-assert 21
   :size-assert         #x9c
-  :flag-assert         #x100010009c
+  :flag-assert         #x150010009c
   (:methods
     (external-camera-controller-method-9 () none) ;; 9
     (external-camera-controller-method-10 () none) ;; 10
@@ -30444,7 +30444,7 @@
     (external-camera-controller-method-14 () _type_ :state) ;; 14
     (external-camera-controller-method-15 () none) ;; 15
     )
-  )|#
+  )
   
 
 
