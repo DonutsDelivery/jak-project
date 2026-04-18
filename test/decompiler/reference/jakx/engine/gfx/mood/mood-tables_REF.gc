@@ -97,8 +97,37 @@
 ;; definition for symbol *mood-sky-table*, type mood-sky-table
 (define *mood-sky-table* (the-as mood-sky-table L5))
 
-;; definition for symbol *mood-interp-table*, type object
-(define *mood-interp-table* #f)
+;; definition for symbol *mood-interp-table*, type sky-color-day
+(define *mood-interp-table*
+  (new 'static 'sky-color-day
+    :hour (new 'static 'inline-array sky-color-hour 24
+      (new 'static 'sky-color-hour :snapshot1 6 :snapshot2 7 :morph-start 0.2 :morph-end 0.4)
+      (new 'static 'sky-color-hour :snapshot1 6 :snapshot2 7 :morph-start 0.4 :morph-end 0.6)
+      (new 'static 'sky-color-hour :snapshot1 6 :snapshot2 7 :morph-start 0.6 :morph-end 0.8)
+      (new 'static 'sky-color-hour :snapshot1 6 :snapshot2 7 :morph-start 0.8 :morph-end 0.99)
+      (new 'static 'sky-color-hour :snapshot2 7 :morph-start 0.99 :morph-end 0.8)
+      (new 'static 'sky-color-hour :snapshot2 7 :morph-start 0.8 :morph-end 0.6)
+      (new 'static 'sky-color-hour :snapshot2 7 :morph-start 0.6)
+      (new 'static 'sky-color-hour :snapshot2 1 :morph-end 0.5)
+      (new 'static 'sky-color-hour :snapshot2 1 :morph-start 0.5 :morph-end 0.75)
+      (new 'static 'sky-color-hour :snapshot2 1 :morph-start 0.75 :morph-end 0.99)
+      (new 'static 'sky-color-hour :snapshot1 2 :snapshot2 1 :morph-start 0.99 :morph-end 0.5)
+      (new 'static 'sky-color-hour :snapshot1 2 :snapshot2 1 :morph-start 0.5)
+      (new 'static 'sky-color-hour :snapshot1 2 :snapshot2 3 :morph-end 0.5)
+      (new 'static 'sky-color-hour :snapshot1 2 :snapshot2 3 :morph-start 0.5 :morph-end 0.99)
+      (new 'static 'sky-color-hour :snapshot1 4 :snapshot2 3 :morph-start 0.99 :morph-end 0.84)
+      (new 'static 'sky-color-hour :snapshot1 4 :snapshot2 3 :morph-start 0.84 :morph-end 0.66)
+      (new 'static 'sky-color-hour :snapshot1 4 :snapshot2 3 :morph-start 0.66 :morph-end 0.5)
+      (new 'static 'sky-color-hour :snapshot1 4 :snapshot2 3 :morph-start 0.5)
+      (new 'static 'sky-color-hour :snapshot1 4 :snapshot2 5 :morph-end 0.99)
+      (new 'static 'sky-color-hour :snapshot1 6 :snapshot2 5 :morph-start 0.99 :morph-end 0.75)
+      (new 'static 'sky-color-hour :snapshot1 6 :snapshot2 5 :morph-start 0.75 :morph-end 0.5)
+      (new 'static 'sky-color-hour :snapshot1 6 :snapshot2 5 :morph-start 0.5 :morph-end 0.25)
+      (new 'static 'sky-color-hour :snapshot1 6 :snapshot2 5 :morph-start 0.25)
+      (new 'static 'sky-color-hour :snapshot1 6 :snapshot2 7 :morph-end 0.2)
+      )
+    )
+  )
 
 ;; definition for function init-mood-control
 (defun init-mood-control ((ctrl mood-control))
@@ -108,7 +137,7 @@
   (set! (-> ctrl mood-clouds) (new 'global 'mood-clouds))
   (set! (-> ctrl mood-direction-table) *mood-direction-table*)
   (set! (-> ctrl mood-sky-table) *mood-sky-table*)
-  (set! (-> ctrl mood-interp-table) (the-as sky-color-day *mood-interp-table*))
+  (set! (-> ctrl mood-interp-table) *mood-interp-table*)
   (mem-copy! (the-as pointer (-> ctrl mood-fog-table)) (the-as pointer *no-cloud-clear-mood-fog-table*) 384)
   (mem-copy! (the-as pointer (-> ctrl mood-color-table)) (the-as pointer *no-cloud-mood-color-table*) 256)
   (mem-copy! (the-as pointer (-> ctrl mood-channel-group)) (the-as pointer *no-cloud-mood-channel-group*) 384)

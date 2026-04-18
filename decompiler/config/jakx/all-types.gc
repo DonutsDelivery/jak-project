@@ -27307,9 +27307,9 @@
     )
   (:state-methods
     logging-in ;; 23
+    registering-account ;; 24
     )
   (:methods
-    (net-mgr-method-24 () none) ;; 24
     (net-mgr-method-25 () none) ;; 25
     (net-mgr-method-26 () none) ;; 26
     (net-mgr-method-27 () none) ;; 27
@@ -27326,19 +27326,15 @@
     )
   (:state-methods
     starting-sp-game ;; 34
-    )
-  (:methods
-    (net-mgr-method-35 () none) ;; 35
-    )
-  (:state-methods
+    playing-sp-game ;; 35
     starting-playback-game ;; 36
     playing-playback-game ;; 37
     hosting-game ;; 38
     connecting-to-game ;; 39
     joining-game ;; 40
+    playing-game ;; 41
     )
   (:methods
-    (net-mgr-method-41 () none) ;; 41
     (net-mgr-method-42 () none) ;; 42
     )
   (:state-methods
@@ -36836,7 +36832,7 @@
 (define-extern *clouds-1000* mood-clouds) ;; mood-clouds
 (define-extern *mood-direction-table* mood-direction-table) ;; mood-direction-table
 (define-extern *mood-sky-table* mood-sky-table) ;; mood-sky-table
-(define-extern *mood-interp-table* object) ;; sky-color-day
+(define-extern *mood-interp-table* sky-color-day)
 (define-extern init-mood-control (function mood-control symbol)) 
 (define-extern *mood-control* mood-control) ;; mood-control
 
@@ -58510,9 +58506,9 @@
   :flag-assert         #x38007000f8
   (:state-methods
     running ;; 50
+    die ;; 51
     )
   (:methods
-    (eco-method-51 (_type_) none) ;; 51
     (eco-method-52 (_type_) none) ;; 52
     (eco-method-53 (_type_) none) ;; 53
     (eco-method-54 (_type_) none) ;; 54
