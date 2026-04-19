@@ -59,6 +59,25 @@ At the moment we support **x86_64** on Windows, Linux and macOS (via Rosetta tra
 - Jak 1 has been considered in a polished, complete state for years at this point.
 - Jak 2 is considered in beta due to a few issues we are aware of that need fixing, however to the casual user, the game is essentially complete.
 - Jak 3 has a good amount of work left to do.
+- **Jak X: Combat Racing** — early bringup in progress. The decompiler pipeline is running, the GOAL engine boots, and the atoll level loads with geometry draw calls being submitted. Rendering to screen is the current focus. This is an unofficial experimental branch — see [DonutsDelivery/jak-project](https://github.com/DonutsDelivery/jak-project) for the latest work.
+
+#### Jak X Development Notes
+
+To build and run the Jak X bringup:
+
+```bash
+# Extract assets (requires your own legally-purchased PS2 disc image)
+./build/Release/extractor/extractor --extract --game jakx <path-to-iso>
+
+# Decompile
+./build/Release/decompiler/decompiler decompiler/config/jakx/jakx_config.jsonc iso_data/jakx decompiler_out/jakx
+
+# Build GOAL code
+echo '(make-group "all-code")' | ./build/Release/goalc/goalc --game jakx
+
+# Run
+DISPLAY=:0 JAKX_SKIP_INTRO=1 ./build/Release/game/gk --game jakx -- -boot -fakeiso -debug
+```
 
 ![](./docs/img/promosmall1.png)
 ![](./docs/img/promosmall2.png)
