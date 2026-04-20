@@ -1,3 +1,28 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+;; *viewport-array* global initialization.
+;; The decompiled new-method calls view-get-math-camera which isn't in GAME.CGO yet,
+;; so we allocate via structure-new (zeroed) and patch fields manually.
+(define *viewport-array* (new 'global 'viewport-array))
+
+;; Initialize all 3 viewport slots for single-player full-screen (screen-sx=512, screen-sy=416).
+;; viewport-method-12 sets these; we replicate the screen-dimension subset needed by font rendering.
+(dotimes (i 3)
+  (set! (-> *viewport-array* data i math-camera) *math-camera*)
+  (set! (-> *viewport-array* data i screen-sx) 512)
+  (set! (-> *viewport-array* data i screen-sy) 416)
+  ;; derived fields normally computed by viewport-method-11
+  (set! (-> *viewport-array* data i screen-hx) (/ 512 2))
+  (set! (-> *viewport-array* data i screen-hy) (/ 416 2))
+  (set! (-> *viewport-array* data i screen-qx) (/ 256 2))
+  (set! (-> *viewport-array* data i screen-qy) (/ 208 2))
+  (set! (-> *viewport-array* data i screen-maxx) (+ 512 1792))
+  (set! (-> *viewport-array* data i screen-maxy) (+ 416 1840))
+  (set! (-> *viewport-array* data i screen-cx) (+ 256 1792))
+  (set! (-> *viewport-array* data i screen-cy) (+ 208 1840))
+  (set! (-> *viewport-array* data i ratio-x) 1.0)
+  (set! (-> *viewport-array* data i ratio-y) 1.0)
+  )
+
+(set! (-> *viewport-array* num-viewports) (the-as uint 1))

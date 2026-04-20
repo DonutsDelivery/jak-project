@@ -30,6 +30,7 @@ class Deci2Server : public XSocketServer {
   void accept_thread_func();
 
  private:
+  void handle_client_disconnect();
   bool want_shutdown = false;
   bool protocols_ready = false;
   std::condition_variable cv;

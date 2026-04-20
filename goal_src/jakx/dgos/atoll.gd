@@ -3,7 +3,7 @@
 ;; deferred until ported to OpenGOAL.
 ;; atoll-vis.go is the level visibility binary — the loader looks for
 ;; visname 'atoll-vis, so keep it in the DGO.
-("ATOLL.DGO"
+("ATL.DGO"
  ("tpage-3038.go"
   "tpage-3039.go"
   "tpage-3040.go"

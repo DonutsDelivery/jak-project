@@ -16275,7 +16275,8 @@
   )
 
 (deftype drawable-tree-array (drawable-group)
-  ()
+  "Collection of drawable trees. This might have a tfrag tree, tie tree, etc."
+  ((trees drawable-tree :dynamic :offset 32 :score 100))
   :flag-assert #x1100000020
   )
 
@@ -30446,14 +30447,59 @@
 (deftype bsp-header (drawable)
   "The bsp-header is really an entire level.
    This probably started as a very simple structure, but now it is extremely complicated."
-  ((all-visible-list    (pointer uint8)      :offset-assert 32) ;; guessed by decompiler
-   (visible-list-length int16                :offset-assert 36)
-   (drawable-trees      drawable-tree-array  :offset-assert 40) ;; guessed by decompiler
-   (pat                 pointer              :offset-assert 44) ;; guessed by decompiler
-   (pat-length          int32                :offset-assert 48)
-
-   ;; TODO: Figure out bsp-header structure for Jak X.
-   (data uint8 348)
+  ((info                     file-info                              :offset 4)
+   (all-visible-list         (pointer uint8)      :offset-assert 32)
+   (visible-list-length      int16                :offset-assert 36)
+   (extra-vis-list-length    int16                :offset-assert 38)
+   (drawable-trees           drawable-tree-array  :offset-assert 40)
+   (pat                      pointer              :offset-assert 44)
+   (pat-length               int32                :offset-assert 48)
+   (texture-remap-table      (pointer uint64)     :offset-assert 52)
+   (texture-remap-table-len  int32                :offset-assert 56)
+   (texture-ids              (pointer texture-id) :offset-assert 60)
+   (texture-page-count       int32                :offset-assert 64)
+   (unknown-basic            basic                :offset-assert 68)
+   (name                     symbol               :offset-assert 72)
+   (nickname                 symbol               :offset-assert 76)
+   (vis-info                 level-vis-info 8     :offset-assert 80)
+   (actors                   drawable-inline-array-actor :offset-assert 112)
+   (cameras                  basic               :offset-assert 116) ;; (array entity-camera) — type defined later
+   (nodes                    basic               :offset-assert 120) ;; (inline-array bsp-node)
+   (level                    basic               :offset-assert 124)
+   (current-leaf-idx         uint16              :offset-assert 128)
+   (texture-flags            uint8 20            :offset-assert 130) ;; texture-page-flag 10 (10×uint16)
+   (cam-outside-bsp          uint8               :offset        152)
+   (cam-using-back           uint8               :offset-assert 153)
+   (cam-box-idx              uint16              :offset-assert 154)
+   (ambients                 basic               :offset-assert 156) ;; drawable-inline-array-ambient or #t
+   (subdivide-close          float               :offset 160)
+   (subdivide-far            float               :offset-assert 164)
+   (race-meshes              basic               :offset-assert 168) ;; (array entity-race-mesh)
+   (actor-birth-order        (pointer uint32)    :offset 172)
+   (light-hash               light-hash          :offset-assert 176)
+   (nav-meshes               basic               :offset-assert 180) ;; (array entity-nav-mesh)
+   (actor-groups             basic               :offset-assert 184) ;; (array actor-group)
+   (region-trees             basic               :offset 188) ;; (array drawable-tree-region-prim)
+   (region-array             region-array        :offset-assert 192)
+   (collide-hash             collide-hash        :offset 196)
+   (wind-array               uint32              :offset 200)
+   (wind-array-length        int32               :offset 204)
+   (city-level-info          basic               :offset 208) ;; city-level-info — type not yet defined
+   (vis-spheres              basic               :offset 216) ;; vector-array
+   (vis-spheres-length       uint32              :offset 248)
+   (region-tree              basic               :offset 252) ;; drawable-tree-region-prim
+   (tfrag-masks              texture-masks-array :offset 256)
+   (tfrag-closest            (pointer float)     :offset-assert 260)
+   (shrub-masks              texture-masks-array :offset-assert 264)
+   (shrub-closest            (pointer float)     :offset-assert 268)
+   (alpha-masks              texture-masks-array :offset-assert 272)
+   (alpha-closest            (pointer float)     :offset-assert 276)
+   (water-masks              texture-masks-array :offset-assert 280)
+   (water-closest            (pointer float)     :offset-assert 284)
+   (bsp-scale                vector :inline      :offset 288)
+   (bsp-offset               vector :inline      :offset-assert 304)
+   (hfrag-drawable           drawable            :offset 320)
+   (end                      uint8               :offset #x18f)
    )
   :method-count-assert 19
   :size-assert         #x190

@@ -485,6 +485,11 @@ void render_game_frame(int game_width,
                                             [=] { return g_gfx_data->has_data_to_render; });
   }
   // render that chain.
+  static int s_render_frame = 0;
+  s_render_frame++;
+  if (g_want_screenshot) {
+    fmt::print("[render_game_frame] g_want_screenshot=true got_chain={} frame={}\n", got_chain, s_render_frame);
+  }
   if (got_chain) {
     g_gfx_data->frame_idx_of_input_data = g_gfx_data->frame_idx;
     RenderOptions options;
@@ -514,6 +519,8 @@ void render_game_frame(int game_width,
     }
     // note : it's important we call get_screenshot_flag first because it modifies state
     if (g_gfx_data->debug_gui.get_screenshot_flag() || g_want_screenshot) {
+      fmt::print("[screenshot] g_want_screenshot triggered, settings ptr={}\n",
+                 (void*)g_screen_shot_settings);
       g_want_screenshot = false;
       options.save_screenshot = true;
       options.internal_res_screenshot = true;

@@ -40,7 +40,7 @@ NOTE: this is a special type in three ways:
 (defconstant SCE_SEEK_CUR 1)
 (defconstant SCE_SEEK_END 2)
 
-(defconstant LEVEL_BT_FILE_VERSION 36)
+(defconstant LEVEL_BT_FILE_VERSION 37)
 (defglobalconstant ART_GROUP_FILE_VERSION 8)
 (defconstant TPAGE_FILE_VERSION 8) ;; also used for dir
 (defconstant LEVEL_VS_FILE_VERSION 30)
@@ -193,7 +193,7 @@ NOTE: this is a special type in three ways:
                       8
                       )
                      (((file-kind level-bt))
-                      36
+                      LEVEL_BT_FILE_VERSION
                       )
                      (((file-kind art-group))
                       8

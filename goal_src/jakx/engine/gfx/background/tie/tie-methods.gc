@@ -245,7 +245,10 @@
   ;       )
   ;     )
   ;   )
+  (format 0 "[instance-tie-patch-buckets] vu1-enable-user=~X etie-mask=~X~%"
+          (-> *display* vu1-enable-user) (vu1-renderer-mask etie))
   (when (logtest? (-> *display* vu1-enable-user) (vu1-renderer-mask etie))
+    (format 0 "[instance-tie-patch-buckets] etie section entered~%")
     ; (when (nonzero? (-> *prototype-tie-work* envmap-count))
       (let ((s5-2 (-> *display* frames (-> *display* on-screen) global-buf base)))
         (with-dma-buffer-add-bucket ((v1-69 (-> *display* frames (-> *display* on-screen) global-buf))
@@ -1087,6 +1090,7 @@
         )
       (when (not (-> v1-0 dma-buffer-overflow))
         (let ((s5-0 (-> *display* frames (-> *display* on-screen) bucket-group arg0)))
+          (format 0 "[tie-init-buf] bucket=~D empty=~A~%" arg0 (= s5-0 (-> s5-0 last)))
           (when (!= s5-0 (-> s5-0 last))
             (let* ((s4-0 (-> *display* frames (-> *display* on-screen) global-buf))
                    (s3-1 (-> s4-0 base))

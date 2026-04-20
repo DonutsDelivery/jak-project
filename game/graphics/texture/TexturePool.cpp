@@ -91,7 +91,10 @@ GpuTexture* TexturePool::give_texture_and_load_to_vram(const TextureInput& in, u
 }
 
 void TexturePool::move_existing_to_vram(GpuTexture* tex, u32 slot_addr) {
-  ASSERT(!tex->is_placeholder);
+  if (tex->is_placeholder) {
+    // Texture not yet loaded from disk (placeholder). Skip — it will be uploaded on a later frame.
+    return;
+  }
   ASSERT(!tex->gpu_textures.empty());
   auto& slot = m_textures[slot_addr];
   if (std::find(tex->slots.begin(), tex->slots.end(), slot_addr) == tex->slots.end()) {
@@ -273,6 +276,10 @@ void TexturePool::relocate(u32 destination, u32 source, u32 format) {
     return;
   }
   if (format == 44) {
+    if (src->is_placeholder || src->gpu_textures.empty()) {
+      lg::warn("TexturePool::relocate mt4hh: source at slot {} is a placeholder, skipping", source);
+      return;
+    }
     m_mt4hh_textures.emplace_back();
     m_mt4hh_textures.back().slot = destination;
     m_mt4hh_textures.back().ref.source = src;
@@ -298,7 +305,7 @@ GpuTexture* TexturePool::get_gpu_texture_for_slot(PcTextureId id, u32 slot) {
     auto result = it.first;
     result->add_slot(slot);
     m_textures[slot].gpu_texture =
-        result->is_placeholder ? m_placeholder_texture_id : result->gpu_textures.at(0).gl;
+        (result->is_placeholder || result->gpu_textures.empty()) ? m_placeholder_texture_id : result->gpu_textures.at(0).gl;
     return result;
   }
 }

@@ -424,6 +424,13 @@ void Loader::update(TexturePool& texture_pool) {
       loader_input.mercs = &m_all_merc_models;
       loader_input.tex_pool = &texture_pool;
 
+      static int s_update_call = 0;
+      bool log_this_frame = (s_update_call++ % 60 == 0);
+      if (s_update_call == 1) {
+        fmt::print("[loader] starting '{}': {} textures, {} tfrag-geo0 trees\n", name,
+                   lev->level->textures.size(),
+                   lev->level->tfrag_trees.empty() ? 0 : (int)lev->level->tfrag_trees[0].size());
+      }
       for (auto& stage : m_loader_stages) {
         auto evt = scoped_prof(fmt::format("stage-{}", stage->name()).c_str());
         Timer stage_timer;
@@ -432,11 +439,15 @@ void Loader::update(TexturePool& texture_pool) {
           fmt::print("stage {} took {:.2f} ms\n", stage->name(), stage_timer.getMs());
         }
         if (!done) {
+          if (log_this_frame) {
+            fmt::print("[loader] blocked on stage '{}' (call {})\n", stage->name(), s_update_call);
+          }
           break;
         }
       }
 
       if (done) {
+        fmt::print("[loader] '{}' fully loaded after {} update calls\n", name, s_update_call);
         auto evt = scoped_prof("finish-stages");
         lk.lock();
         m_loaded_tfrag3_levels[name] = std::move(lev);

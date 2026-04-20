@@ -89,6 +89,12 @@ void TFragment::render(DmaFollower& dma,
 
   if (dma.current_tag().kind == DmaTag::Kind::CALL) {
     // renderer didn't run, let's just get out of here.
+    static bool s_logged_call = false;
+    if (!s_logged_call) {
+      s_logged_call = true;
+      fmt::print("[TFragment:{}] first CALL bail — vif0={} vif1={}\n", m_name,
+                 (int)dma.current_tag_vifcode0().kind, (int)dma.current_tag_vifcode1().kind);
+    }
     for (int i = 0; i < 4; i++) {
       dma.read_and_advance();
     }
@@ -119,6 +125,11 @@ void TFragment::render(DmaFollower& dma,
 
   if (dma.current_tag().kind == DmaTag::Kind::CALL) {
     // renderer didn't run, let's just get out of here.
+    static bool s_logged_call2 = false;
+    if (!s_logged_call2) {
+      s_logged_call2 = true;
+      fmt::print("[TFragment:{}] second CALL bail (post-vis-copy)\n", m_name);
+    }
     for (int i = 0; i < 4; i++) {
       dma.read_and_advance();
     }
@@ -158,6 +169,13 @@ void TFragment::render(DmaFollower& dma,
     }
 
     update_render_state_from_pc_settings(render_state, m_pc_port_data);
+
+    static int s_tfrag_render_calls = 0;
+    s_tfrag_render_calls++;
+    if (s_tfrag_render_calls <= 4 || s_tfrag_render_calls % 30 == 0) {
+      fmt::print("[TFragment/{}] render call#{} level='{}' trees[lod={}]={}\n",
+                 m_name, s_tfrag_render_calls, level_name, lod(), m_cached_trees[lod()].size());
+    }
 
     auto t3prof = prof.make_scoped_child("t3");
     render_matching_trees(lod(), m_tree_kinds, settings, render_state, t3prof);
@@ -277,6 +295,9 @@ void TFragment::update_load(const std::vector<tfrag3::TFragmentTreeKind>& tree_k
     for (size_t tree_idx = 0; tree_idx < lev_data->tfrag_trees[geom].size(); tree_idx++) {
       const auto& tree = lev_data->tfrag_trees[geom][tree_idx];
 
+      fmt::print("[update_load/{}] geo={} tree_idx={} kind={} match={}\n",
+                 m_name, geom, tree_idx, (int)tree.kind,
+                 std::find(tree_kinds.begin(), tree_kinds.end(), tree.kind) != tree_kinds.end());
       if (std::find(tree_kinds.begin(), tree_kinds.end(), tree.kind) != tree_kinds.end()) {
         auto& tree_cache = m_cached_trees[geom].emplace_back();
         tree_cache.kind = tree.kind;
@@ -365,8 +386,16 @@ bool TFragment::setup_for_level(const std::vector<tfrag3::TFragmentTreeKind>& tr
 
   if (!lev_data) {
     // not loaded
+    if (m_has_level || m_level_name != level) {
+      fmt::print("[TFragment] setup_for_level: '{}' not in loader (not yet loaded or wrong name)\n",
+                 level);
+    }
     m_has_level = false;
     m_textures = nullptr;
+    // Don't set m_level_name here — if we set it to `level` while data isn't ready,
+    // the next successful call sees m_level_name == level and skips update_load entirely,
+    // leaving m_cached_trees empty. Keep m_level_name at "" (or prior) so the next
+    // successful load triggers update_load and populates the tree cache.
     m_level_name = "";
     discard_tree_cache();
     return false;
@@ -387,6 +416,8 @@ bool TFragment::setup_for_level(const std::vector<tfrag3::TFragmentTreeKind>& tr
     m_has_level = true;
     m_textures = &lev_data->textures;
     m_level_name = level;
+    fmt::print("[setup_for_level/{}] update_load done: trees[0]={} trees[1]={} trees[2]={}\n",
+               m_name, m_cached_trees[0].size(), m_cached_trees[1].size(), m_cached_trees[2].size());
   } else {
     m_has_level = true;
   }
@@ -421,7 +452,49 @@ void TFragment::render_tree(int geom,
   if (m_color_result.size() < tree.colors->color_count) {
     m_color_result.resize(tree.colors->color_count);
   }
-  interp_time_of_day(settings.camera.itimes, *tree.colors, m_color_result.data());
+  // Fallback: if GOAL hasn't set up mood/itimes (no target process in stripped loop),
+  // use palette 0 at full weight so geometry renders with color instead of black.
+  const math::Vector<s32, 4>* itimes_to_use = settings.camera.itimes;
+  math::Vector<s32, 4> fallback_itimes[4] = {};
+  bool all_zero = true;
+  for (int i = 0; i < 4; i++) {
+    if (settings.camera.itimes[i].x() || settings.camera.itimes[i].y() ||
+        settings.camera.itimes[i].z() || settings.camera.itimes[i].w()) {
+      all_zero = false;
+      break;
+    }
+  }
+  if (all_zero) {
+    // interp_time_of_day extracts per-channel weights as 8-bit values packed in 32-bit words:
+    //   word[0] low byte  → component R (channel 0)
+    //   word[0] high word → component G (channel 1, bits 16-23)
+    //   word[1] low byte  → component B (channel 2)
+    //   word[1] high word → component A (channel 3, bits 16-23)
+    // 64 = full weight (maps to 1.0 after /64 in update-mood-itimes scale).
+    // All four channels must be non-zero or alpha=0 discards all fragments.
+    s32 packed = 64 | (64 << 16);  // low+high bytes both 64
+    fallback_itimes[0] = math::Vector<s32, 4>{packed, packed, 0, 0};
+    itimes_to_use = fallback_itimes;
+  }
+  interp_time_of_day(itimes_to_use, *tree.colors, m_color_result.data());
+
+  // log itimes and first color result on first few calls
+  {
+    static std::unordered_map<std::string, int> s_color_log_count;
+    auto& cnt = s_color_log_count[m_name];
+    cnt++;
+    if (cnt <= 3) {
+      auto& it = settings.camera.itimes[0];
+      u32 first_color = m_color_result.empty() ? 0u
+          : ((u32)m_color_result[0].x() | ((u32)m_color_result[0].y() << 8) |
+             ((u32)m_color_result[0].z() << 16) | ((u32)m_color_result[0].w() << 24));
+      fmt::print("[tfrag-color/{}] call#{} itimes[0]={{{},{},{},{}}} colors={} first_rgba={:#010x}\n",
+                 m_name, cnt,
+                 it.x(), it.y(), it.z(), it.w(),
+                 (int)tree.colors->color_count, first_color);
+    }
+  }
+
   glActiveTexture(GL_TEXTURE10);
   glBindTexture(GL_TEXTURE_1D, tree.time_of_day_texture);
   glTexSubImage1D(GL_TEXTURE_1D, 0, 0, tree.colors->color_count, GL_RGBA,
@@ -454,6 +527,17 @@ void TFragment::render_tree(int geom,
   }
 
   prof.add_tri(total_tris);
+
+  // draw-call count log — first 3 calls per instance
+  {
+    static std::unordered_map<std::string, int> s_render_call_count;
+    auto& cnt = s_render_call_count[m_name];
+    cnt++;
+    if (cnt <= 3) {
+      fmt::print("[render_tree/{}] call#{} geom={} total_tris={} draws={}\n",
+                 m_name, cnt, geom, total_tris, (int)tree.draws->size());
+    }
+  }
 
   for (size_t draw_idx = 0; draw_idx < tree.draws->size(); draw_idx++) {
     const auto& draw = tree.draws->operator[](draw_idx);

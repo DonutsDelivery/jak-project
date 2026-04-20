@@ -59,6 +59,22 @@ void Deci2Server::accept_thread_func() {
   }
 }
 
+void Deci2Server::handle_client_disconnect() {
+  printf("[DECI2] Connection closed by host — resetting, waiting for reconnect...\n");
+  client_connected = false;
+  close_socket(accepted_socket);
+  accepted_socket = -1;
+  // Join the (now-returned) accept thread before spawning a new one.
+  // The accept thread returns when it finds a connection, so it's always done here.
+  kill_accept_thread = true;
+  if (accept_thread.joinable()) {
+    accept_thread.join();
+  }
+  kill_accept_thread = false;
+  accept_thread_running = true;
+  accept_thread = std::thread(&Deci2Server::accept_thread_func, this);
+}
+
 bool Deci2Server::is_client_connected() {
   return client_connected;
 }
@@ -112,6 +128,11 @@ void Deci2Server::read_data() {
     if (want_exit_callback()) {
       return;
     }
+    if (x == 0 || (x < 0 && !socket_timed_out())) {
+      // EOF or hard error — host closed the connection
+      handle_client_disconnect();
+      return;
+    }
     got += x > 0 ? x : 0;
   }
 
@@ -160,6 +181,11 @@ void Deci2Server::read_data() {
     if (hdr->rsvd < hdr->len) {
       auto x = read_from_socket(accepted_socket, buffer.data() + hdr->rsvd, hdr->len - hdr->rsvd);
       if (want_exit_callback()) {
+        return;
+      }
+      if (x == 0 || (x < 0 && !socket_timed_out())) {
+        unlock();
+        handle_client_disconnect();
         return;
       }
       got += x > 0 ? x : 0;

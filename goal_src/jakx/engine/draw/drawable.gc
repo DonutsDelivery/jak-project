@@ -215,6 +215,7 @@
    profile bars, post-draw-hook. Real engines will fill these back in as
    we port tfrag/tie/merc/texture-pool machinery. For now: mark buckets,
    add end-marker, return the display."
+  (format 0 "[dff] entry on-screen=~D~%" (-> arg0 on-screen))
   (let* ((s4-0 (-> arg0 frames (-> arg0 on-screen)))
          (s5-0 (-> s4-0 calc-buf))
          )
@@ -241,6 +242,26 @@
           )
         )
       )
+    ;; VU1 init + texture upload — mirrors jak3 display-frame-finish:1946-1970.
+    (format 0 "[dff] calling tfrag-vu1-init-buffers draw-level[0]=~A~%" (-> *level* draw-level 0))
+    (tfrag-vu1-init-buffers)
+    (format 0 "[dff] calling tie-vu1-init-buffers~%")
+    (tie-vu1-init-buffers)
+    (format 0 "[dff] done tie-vu1-init-buffers~%")
+    (merc-vu1-init-buffers)
+    (format 0 "[dff] post-merc~%")
+    (emerc-vu1-init-buffers)
+    (format 0 "[dff] post-emerc~%")
+    (generic-vu1-init-buffers)
+    (format 0 "[dff] post-generic~%")
+    ;; update-sprites / update-warp-and-hud don't exist in jakx yet — skipped.
+    (particle-adgif-cache-flush)
+    (format 0 "[dff] post-adgif~%")
+    (remap-all-particles)
+    (format 0 "[dff] post-remap~%")
+    (upload-textures *texture-pool*)
+    (format 0 "[dff] post-upload~%")
+    ;; update-eyes skipped — eye rendering not yet ported for jakx
     ;; Skip bucket patching on the first frame when display-frame-start
     ;; hasn't run yet (bucket-group is still 0).
     (when (nonzero? (-> s4-0 bucket-group))
@@ -276,6 +297,7 @@
   "Wait for prev frame, vsync, submit this frame's DMA, start next frame.
    Trimmed from jak3: removed all the run-half-speed / force-sync /
    dog-ratio feedback logic — always vsync via pc-maybe-vsync."
+  (format 0 "[display-sync] entry~%")
   (sync-path 0 0)
   (let* ((s4-0 (-> arg0 last-screen))
          (s2-0 (shl (timer-count (the-as timer-bank #x10000800)) 48))
@@ -323,3 +345,16 @@
     )
   (none)
   )
+
+;; Minimal background draw hook — drives TFRAG/shrub/TIE rendering each frame.
+;; Mirrors jak3 real-main-draw-hook (drawable.gc:1513) without foreground/merc.
+;; Installed in *draw-hook* so display-loop drives background geometry.
+(defun main-draw-hook ()
+  (init-background)
+  (execute-connections *background-draw-engine* #f)
+  (finish-background)
+  (format 0 "[draw-hook] about to return~%")
+  (none)
+  )
+
+(define *draw-hook* main-draw-hook)

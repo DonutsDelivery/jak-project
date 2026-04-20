@@ -89,6 +89,7 @@ class Compiler {
   Debugger& get_debugger() { return m_debugger; }
   listener::Listener& listener() { return m_listener; }
   void poke_target() { m_listener.send_poke(); }
+  void set_no_target_reset() { m_reset_target_on_exit = false; }
   bool connect_to_target();
   replxx::Replxx::completions_t find_symbols_or_object_file_by_prefix(
       std::string const& context,
@@ -126,6 +127,7 @@ class Compiler {
   std::unique_ptr<None> m_none = nullptr;
   bool m_want_exit = false;
   bool m_want_reload = false;
+  bool m_reset_target_on_exit = true;  // set false via --no-target-reset to suppress LTT_MSG_RESET
   listener::Listener m_listener;
   goos::Interpreter m_goos;
   Debugger m_debugger;

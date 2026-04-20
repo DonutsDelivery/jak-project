@@ -160,6 +160,16 @@ void pc_set_levels(u32 lev_list) {
     }
   }
 
+  static std::vector<std::string> s_last_levels;
+  static int s_call_count = 0;
+  if (++s_call_count <= 3 || levels != s_last_levels) {
+    s_last_levels = levels;
+    std::string joined;
+    for (auto& l : levels) { if (!joined.empty()) joined += ", "; joined += l; }
+    fmt::print("[pc-set-levels] call#{} requesting: [{}]\n", s_call_count,
+               joined.empty() ? "(none)" : joined);
+  }
+
   Gfx::GetCurrentRenderer()->set_levels(levels);
 }
 
@@ -982,6 +992,11 @@ s32 pc_fmv_is_done() {
     return 1;
   }
   return Gfx::g_fmv_player->is_done() ? 1 : 0;
+}
+
+s32 pc_jakx_skip_intro() {
+  const char* v = getenv("JAKX_SKIP_INTRO");
+  return (v && v[0] != '0') ? 1 : 0;
 }
 
 }  // namespace kmachine_extras

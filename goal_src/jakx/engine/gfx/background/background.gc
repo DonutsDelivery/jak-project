@@ -105,15 +105,28 @@
   )
 
 (defun pc-draw-hfrags ()
-  "Generate DMA for all hfrag levels"
-  (with-profiler 'hfrag *profile-hfrag-color*
-    (with-dma-buffer-add-bucket ((dma-buf (-> *display* frames (-> *display* on-screen) global-buf))
-                                 (bucket-id hfrag)
-                                 )
-      (dotimes (i (-> *level* draw-level-count))
-        (let ((lev (-> *level* draw-level i)))
-          (when (pc-should-draw-hfrag lev)
-            (add-pc-tfrag3-data dma-buf lev i)
+  "Generate DMA for all hfrag levels.
+   Guard: only enter the bucket when at least one level has active hfrag data.
+   with-dma-bucket always writes a next-tag into the bucket, which causes the
+   C++ Hfrag renderer to fail its FLUSHA+DIRECT assertion on an otherwise-empty
+   chain. Skipping the bucket entirely avoids the crash on levels without hfrag."
+  (let ((found #f))
+    (dotimes (i (-> *level* draw-level-count))
+      (when (pc-should-draw-hfrag (-> *level* draw-level i))
+        (set! found #t)
+        )
+      )
+    (when found
+      (with-profiler 'hfrag *profile-hfrag-color*
+        (with-dma-buffer-add-bucket ((dma-buf (-> *display* frames (-> *display* on-screen) global-buf))
+                                     (bucket-id hfrag)
+                                     )
+          (dotimes (i (-> *level* draw-level-count))
+            (let ((lev (-> *level* draw-level i)))
+              (when (pc-should-draw-hfrag lev)
+                (add-pc-tfrag3-data dma-buf lev i)
+                )
+              )
             )
           )
         )
@@ -425,6 +438,10 @@
         )
       )
     )
+  (format 0 "[bg] tfrag=~D tie=~D shrub=~D~%"
+          (-> *background-work* tfrag-tree-count)
+          (-> *background-work* tie-tree-count)
+          (-> *background-work* shrub-tree-count))
   (when (nonzero? (-> *background-work* shrub-tree-count))
     (with-profiler 'shrubbery *profile-shrubbery-color*
       (dotimes (gp-2 (-> *background-work* shrub-tree-count))
@@ -441,7 +458,6 @@
           ;       )
           ;     )
           (set-background-regs! s4-1)
-          (set-shrub-quard-planes! s4-1)
           (draw-drawable-tree-instance-shrub s5-1 s4-1)
           )
         )

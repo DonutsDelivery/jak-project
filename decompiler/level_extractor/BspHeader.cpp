@@ -1141,7 +1141,9 @@ void ProxyPrototypeArrayTie::read_from_file(TypedRef ref,
   prototype_array_tie.read_from_file(
       get_and_check_ref_to_basic(ref, "prototype-array-tie", "prototype-array-tie", dts), dts,
       version);
-  wind_vectors = deref_label(get_field_ref(ref, "wind-vectors", dts));
+  if (get_word_kind_for_field(ref, "wind-vectors", dts) == decompiler::LinkedWord::PTR) {
+    wind_vectors = deref_label(get_field_ref(ref, "wind-vectors", dts));
+  }
 }
 
 std::string ProxyPrototypeArrayTie::print(const PrintSettings& settings, int indent) const {
@@ -1832,7 +1834,14 @@ void DrawableTreeArray::read_from_file(TypedRef ref,
     Ref object_ref = deref_label(array_slot_ref);
     object_ref.byte_offset -= 4;
 
-    trees.push_back(make_drawable_tree(typed_ref_from_basic(object_ref, dts), dts, version));
+    auto typed = typed_ref_from_basic(object_ref, dts);
+    try {
+      trees.push_back(make_drawable_tree(typed, dts, version));
+    } catch (const std::exception& e) {
+      lg::warn("tree[{}] ({}) extraction failed: {} — skipping", idx,
+               typed.type->get_name(), e.what());
+      trees.push_back(std::make_unique<DrawableTreeUnknown>());
+    }
   }
 }
 

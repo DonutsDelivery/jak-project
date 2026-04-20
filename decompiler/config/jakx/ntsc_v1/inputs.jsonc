@@ -382,7 +382,11 @@
     // "DGO/XIMLEV.DGO"
   ],
 
-  "levels_to_extract": [],
+  "levels_to_extract": [
+    "ATL.DGO",
+    "ATOLLART.DGO",
+    "ATOLLS.DGO"
+  ],
 
   // some objects are part of STR files (streaming data).
   "str_file_names": [],

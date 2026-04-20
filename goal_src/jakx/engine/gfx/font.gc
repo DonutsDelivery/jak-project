@@ -15,6 +15,9 @@
 ;; method 9 of font-context: compute calc-mat, scaled-width/height, hvdf-offset/shadow/outlines
 ;; in *font-work* from the font-context's origin, scale, and flags.
 (defmethod font-context-method-9 ((this font-context) (arg0 matrix))
+  (when (not *viewport-array*)
+    (return (the-as font-context 0))
+    )
   (let ((s5-0 (-> *viewport-array* default)))
     (-> this mat)
     (let ((v1-2 (-> this calc-mat))

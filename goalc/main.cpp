@@ -34,6 +34,7 @@ int main(int argc, char** argv) {
 
   bool auto_find_user = false;
   std::string cmd = "";
+  std::string eval_cmd = "";
   std::string username = "#f";
   std::string game = "jak1";
   int nrepl_port = -1;
@@ -43,6 +44,8 @@ int main(int argc, char** argv) {
   // TODO - a lot of these flags could be deprecated and moved into `repl-config.json`
   CLI::App app{"OpenGOAL Compiler / REPL"};
   app.add_option("-c,--cmd", cmd, "Specify a command to run, no REPL is launched in this mode");
+  app.add_option("-e,--eval", eval_cmd,
+                 "Compile and send a command to the running game (connects to game listener)");
   app.add_option("-u,--user", username,
                  "Specify the username to use for your user profile in 'goal_src/user/'");
   app.add_option("-p,--port", nrepl_port, "Specify the nREPL port.  Defaults to 8181");
@@ -105,6 +108,15 @@ int main(int argc, char** argv) {
     if (!cmd.empty()) {
       compiler = std::make_unique<Compiler>(game_version, emitter::InstructionSet::X86);
       compiler->run_front_end_on_string(cmd);
+      return 0;
+    }
+    if (!eval_cmd.empty()) {
+      compiler = std::make_unique<Compiler>(game_version, emitter::InstructionSet::X86);
+      if (!compiler->connect_to_target()) {
+        lg::error("Could not connect to game listener");
+        return 1;
+      }
+      compiler->compile_and_send_from_string(eval_cmd);
       return 0;
     }
   } catch (std::exception& e) {

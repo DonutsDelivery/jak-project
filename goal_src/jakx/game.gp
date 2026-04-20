@@ -85,7 +85,7 @@
 (cgo-file "title.gd" '())
 
 ;; first race-level DGO — atoll. Code objects not yet ported; only geometry/art/textures.
-;; Named ATOLL.DGO (not ATL.DGO) so the level loader finds it by :name 'atoll.
+;; Named ATL.DGO to match level info nickname 'atl (loader requests ATL.DGO).
 (cgo-file "atoll.gd" '())
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -93,3 +93,4 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (group-list "all-code" *all-gc*)
+(group-list "engine" *all-cgos*)

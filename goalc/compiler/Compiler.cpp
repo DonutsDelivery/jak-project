@@ -88,7 +88,9 @@ Compiler::Compiler(GameVersion version,
 
 Compiler::~Compiler() {
   if (m_listener.is_connected()) {
-    m_listener.send_reset(false);  // reset the target
+    if (m_reset_target_on_exit) {
+      m_listener.send_reset(false);
+    }
     m_listener.disconnect();
   }
 }

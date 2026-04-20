@@ -58,6 +58,7 @@ void pc_sr_mode_dump_new_custom_category(u32 speedrun_custom_category_ptr);
 void pc_fmv_play(u32 path_str_ptr);
 void pc_fmv_stop();
 s32 pc_fmv_is_done();
+s32 pc_jakx_skip_intro();
 
 struct DiscordInfo {
   float orb_count;          // float

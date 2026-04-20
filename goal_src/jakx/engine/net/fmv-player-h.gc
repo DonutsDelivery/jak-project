@@ -8,3 +8,4 @@
 ;; Forward declaration for fmv-player.gc which implements this function.
 ;; Called by title-obs.gc startup state to play intro FMVs before the title menu.
 (define-extern fmv-player-run (function string none))
+(define-extern pc-jakx-skip-intro (function int))

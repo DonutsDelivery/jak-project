@@ -1058,20 +1058,16 @@ void OpenGLRenderer::render(DmaFollower dma, const RenderOptions& settings) {
     int x, y, w, h, fbo_id;
 
     if (settings.internal_res_screenshot) {
-      Fbo* screenshot_src;
-      // can't screenshot from a multisampled buffer directly -
-      if (m_fbo_state.resources.resolve_buffer.valid) {
-        screenshot_src = &m_fbo_state.resources.resolve_buffer;
-        read_buffer = GL_COLOR_ATTACHMENT0;
-      } else {
-        screenshot_src = m_fbo_state.render_fbo;
-        read_buffer = GL_FRONT;
-      }
-      w = screenshot_src->width;
-      h = screenshot_src->height;
-      x = 0;
-      y = 0;
-      fbo_id = screenshot_src->fbo_id;
+      // Read from window framebuffer (GL_BACK) which is what do_pcrtc_effects draws to.
+      // This captures what's actually visible rather than the intermediate FBO.
+      read_buffer = GL_BACK;
+      w = settings.draw_region_width;
+      h = settings.draw_region_height;
+      x = m_render_state.draw_offset_x;
+      y = m_render_state.draw_offset_y;
+      fbo_id = 0;
+      fmt::print("[screenshot] reading from window FBO draw_region={}x{} offset={}x{}\n",
+                 w, h, x, y);
     } else {
       read_buffer = GL_BACK;
       w = settings.draw_region_width;
@@ -1630,6 +1626,10 @@ void OpenGLRenderer::do_pcrtc_effects(float alp,
                                       int brightness_contrast_alpha,
                                       SharedRenderState* render_state,
                                       ScopedProfilerNode& prof) {
+  static int s_pcrtc_calls = 0;
+  if (s_pcrtc_calls++ < 5) {
+    fmt::print("[pcrtc] alp={:.3f} frame={}\n", alp, s_pcrtc_calls);
+  }
   Fbo* window_blit_src = nullptr;
   if (m_fbo_state.resources.resolve_buffer.valid) {
     glBindFramebuffer(GL_READ_FRAMEBUFFER, m_fbo_state.render_fbo->fbo_id);

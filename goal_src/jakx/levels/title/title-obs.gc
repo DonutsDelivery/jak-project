@@ -74,10 +74,61 @@
       (want-levels *load-state* a1-0)
       )
     ;; Real Jak X intro sequence (see title-obs_ir2.asm anon-function 6 L8 / anon-function 2).
-    (fmv-player-run "STR/THX.M2V")
-    (fmv-player-run "STR/INTRO.M2V")
-    (fmv-player-run "STR/INTROB.M2V")
+    ;; Skip when JAKX_SKIP_INTRO=1 is set (developer bypass).
+    (when (zero? (pc-jakx-skip-intro))
+      (fmv-player-run "STR/THX.M2V")
+      (fmv-player-run "STR/INTRO.M2V")
+      (fmv-player-run "STR/INTROB.M2V")
+      )
+    ;; Level loading in jakx has no background task — only synchronous loads work
+    ;; (level-update is unported; update! is never called per-frame).
+    ;; Mirror what play does for title: level-get-for-use + load-continue loop.
+    (let ((atoll-slot (level-get-for-use *level* 'atoll 'loaded)))
+      (when atoll-slot
+        (format 0 "[title-obs] waiting for atoll load (status=~A)~%" (-> atoll-slot status))
+        (while (or (= (-> atoll-slot status) 'loading)
+                   (= (-> atoll-slot status) 'loading-bt)
+                   (= (-> atoll-slot status) 'login))
+          (load-continue atoll-slot)
+          (suspend)
+          )
+        (format 0 "[title-obs] atoll load done! status=~A~%" (-> atoll-slot status))
+        ;; The stripped display loop never calls update-loaded-levels, so the level
+        ;; stays in 'loaded and never reaches 'active. Manually wire the BSP into
+        ;; *background-draw-engine* so finish-background renders it.
+        ;; We skip birth (entity spawning) — only background geometry needed for now.
+        (when (and *dproc* (-> atoll-slot bsp))
+          (remove-by-param1 *background-draw-engine* (the-as int (-> atoll-slot bsp)))
+          (add-connection *background-draw-engine* *dproc* add-bsp-drawable (-> atoll-slot bsp) atoll-slot #f)
+          (set! (-> atoll-slot status) 'active)
+          (set! (-> atoll-slot display?) 'display)
+          ;; birth normally sets render?=#t. Set it directly since birth crashes (calls *camera*/*target*).
+          (set! (-> atoll-slot render?) #t)
+          ;; assign-draw-indices normally runs from update-loaded-levels each frame.
+          ;; Call it once manually so draw-level[] is populated for background rendering.
+          (assign-draw-indices *level*)
+          ;; og:preserve-this — vis-bits is zeroed at load; no per-frame PVS update runs.
+          ;; Write all-ones so every drawable is visible (bringup only).
+          (dotimes (vis-i 128)
+            (set! (-> (the-as (pointer int128) (&+ (-> atoll-slot vis-bits) (* vis-i 16)))) (the int128 -1))
+            )
+          (format 0 "[title-obs] atoll activated status=~A render?=~A~%" (-> atoll-slot status) (-> atoll-slot render?))
+          )
+        ;; Position camera at the atoll-start continue point camera position
+        ;; (0, 5m, -20m) looking toward +Z so the level geometry is in view.
+        ;; camera-trans from continue-point: (static-vectorm 0 5 -20)
+        (set-vector! (-> *math-camera* trans) 0.0 20480.0 -81920.0 1.0)
+        (matrix-identity! (-> *math-camera* inv-camera-rot))
+        (matrix-identity! (-> *math-camera* camera-rot))
+        )
+      )
+    ;; og:preserve-this — initialize! skipped: spawns target process → apply-settings
+    ;; sends sound RPC to IOP port #3 which has no handler in bringup → sync-path stalls
+    ;; display-frame-finish → *draw-hook* never fires. Skip until IOP sound is wired.
+    (format 0 "[title-obs] skipping initialize! (IOP RPC stall bypass) — going idle~%")
+    (format 0 "[title-obs] before go-virtual idle~%")
     (go-virtual idle)
+    (format 0 "[title-obs] after go-virtual idle (unreachable if state switch)~%")
     )
   :post (behavior ()
     (set! (-> *setting-control* cam-current fov) (-> *setting-control* cam-target fov))

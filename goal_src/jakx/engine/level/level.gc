@@ -2815,7 +2815,7 @@
   (none)
   )
 
-(defconstant *default-boot-level* 'wasall)
+(defconstant *default-boot-level* 'title) ;; jakx: boot to title, not wasall hub
 
 (defmacro play-desert ()
   `(start 'play (get-continue-by-name *game-info* "desert-start"))
@@ -2896,6 +2896,7 @@
         (while (and s4-1 (or (= (-> s4-1 status) 'loading) (= (-> s4-1 status) 'loading-bt) (= (-> s4-1 status) 'login)))
           (set-blackout-frames (seconds 0.02))
           (load-continue s4-1)
+          (suspend)
           )
         )
       )
@@ -2922,6 +2923,14 @@
   0
   )
 
+(defbehavior play-boot-lambda process ()
+  "Helper behavior for play-boot — gives us self access for stack-size-set!
+   The level-load while loop in play calls (suspend) and needs a larger stack."
+  (stack-size-set! (-> self main-thread) 1024)
+  (play #t #t)
+  (none)
+  )
+
 (defun play-boot ()
   "Function called by the C Kernel to start the game (wrapper around play)."
 
@@ -2933,7 +2942,7 @@
   ;; nested process-spawn segfaults.
   (process-spawn-function
     process
-    (lambda () (play #t #t) (none))
+    play-boot-lambda
     :from *4k-dead-pool*
     :stack *kernel-dram-stack*
     )

@@ -73,6 +73,8 @@ class TfragLoadStage : public LoaderStage {
     }
 
     if (data.lev_data->level->tfrag_trees.front().empty()) {
+      fmt::print("[TfragLoadStage] geo-0 empty, skipping (total geos: {})\n",
+                 data.lev_data->level->tfrag_trees.size());
       m_done = true;
       return true;
     }

@@ -42,6 +42,7 @@
     ;; full update method runs clean end-to-end.
     (update *setting-control*)
 
+
     (set! (-> disp frames 0 start-time)
           (timer-count (the-as timer-bank #x10000800)))
     (set! (-> disp frames 1 start-time)
@@ -54,6 +55,36 @@
     (format 0 "display-loop: running~%")
 
     (while *run*
+      ;; Update camera + run draw pipeline FIRST so buckets are filled
+      ;; before display-frame-finish runs VU1 inits. Matches jak3 ordering:
+      ;; update-camera → *draw-hook* → display-frame-finish → display-sync.
+      ;; og:preserve-this — tell C++ loader which levels to load each frame.
+      ;; level-update calls __pc-set-levels internally but is too heavy to call here.
+      ;; This inline minimal version is equivalent for the loader.
+      (#when PC_PORT
+        (let ((lev-names (new 'stack-no-clear 'array 'string 10)))
+          (dotimes (i 10) (set! (-> lev-names i) "none"))
+          (dotimes (i (-> *level* length))
+            (let ((lev (-> *level* level i)))
+              (when (or (= (-> lev status) 'active) (= (-> lev status) 'alive) (= (-> lev status) 'loaded) (= (-> lev status) 'loading))
+                (set! (-> lev-names i) (symbol->string (bsp-name lev))))))
+          (format 0 "[main] calling __pc-set-levels lev0=~A~%" (-> lev-names 0))
+          (__pc-set-levels lev-names)))
+      (update-camera)
+      ;; Seed non-zero mood times on active levels so background DMA packets
+      ;; get non-zero itimes (otherwise all geometry renders black).
+      ;; update-time-of-day→init-weather! gates on level-get-target-inside
+      ;; which returns #f without a target process, so we bypass it here.
+      (dotimes (i (-> *level* length))
+        (let ((lev (-> *level* level i)))
+          (when (= (-> lev status) 'active)
+            (set! (-> lev mood-context times 0 x) 1.0)
+            (set! (-> lev mood-context times 0 y) 1.0)
+            (set! (-> lev mood-context times 0 z) 1.0)
+            (set! (-> lev mood-context times 0 w) 1.0)
+            (update-mood-itimes (-> lev mood-context)))))
+      (*draw-hook*)
+      (format 0 "[main] before display-frame-finish~%")
       (display-frame-finish disp)
       ;; og:preserve-this — load common.TXT into *common-text*. Ported from jak3
       ;; main.gc:1519 (display-loop-main). Guarded by *level-text-file-load-flag*

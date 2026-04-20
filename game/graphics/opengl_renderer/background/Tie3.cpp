@@ -296,6 +296,7 @@ bool Tie3::set_up_common_data_from_dma(DmaFollower& dma, SharedRenderState* rend
   auto gs_test = dma.read_and_advance();
   if (gs_test.size_bytes == 160) {
   } else {
+    lg::warn("[Tie3] gs_test.size_bytes = {} (expected 160 or 32) at tag_offset=0x{:x}", gs_test.size_bytes, dma.current_tag_offset());
     ASSERT(gs_test.size_bytes == 32);
 
     auto tie_consts = dma.read_and_advance();

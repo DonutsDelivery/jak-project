@@ -42,17 +42,15 @@ using namespace ee;
  * Modified to use std::string, and removed call to fflush.
  */
 void InitParms(int argc, const char* const* argv) {
-  // Modified default settings to boot up the game like normal if no arguments are present.
-  if (argc == 1) {
-    DiskBoot = 1;
-    isodrv = fakeiso;
-    modsrc = 0;
-    reboot_iop = 0;
-    DebugSegment = 0;
-    MasterDebug = 0;
-    DebugSymbols = true;
-    // USE_OVERLORD2_W = false;
-  }
+  // Default to fakeiso mode regardless of argc (modern OpenGOAL passes --proj-path etc as args).
+  // kmachine_init_globals_common() sets modsrc=1/reboot_iop=1 (CD defaults); override here.
+  DiskBoot = 1;
+  isodrv = fakeiso;
+  modsrc = 0;
+  reboot_iop = 0;
+  DebugSegment = 0;
+  MasterDebug = 0;
+  DebugSymbols = true;
 
   for (int i = 1; i < argc; i++) {
     std::string arg = argv[i];
@@ -468,6 +466,7 @@ void InitMachine_PCPort() {
   make_function_symbol_from_c("pc-fmv-play", (void*)kmachine_extras::pc_fmv_play);
   make_function_symbol_from_c("pc-fmv-stop", (void*)kmachine_extras::pc_fmv_stop);
   make_function_symbol_from_c("pc-fmv-is-done", (void*)kmachine_extras::pc_fmv_is_done);
+  make_function_symbol_from_c("pc-jakx-skip-intro", (void*)kmachine_extras::pc_jakx_skip_intro);
 
   // setup string constants
   auto user_dir_path = file_util::get_user_config_dir();

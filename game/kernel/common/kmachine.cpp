@@ -192,6 +192,20 @@ u64 CPadGetData(u64 cpad_info) {
       }
     }
   }
+  // MCP pad injection: read button mask from /tmp/jakx-pad-inject (one line: hex u16)
+  // Written by the opengoal-mcp server. Pad 0 only, single frame, file deleted after read.
+  if (cpad->number == 0) {
+    static const char* s_inject_file = "/tmp/jakx-pad-inject";
+    FILE* f = fopen(s_inject_file, "r");
+    if (f) {
+      unsigned int mask = 0;
+      if (fscanf(f, "%x", &mask) == 1) {
+        cpad->button0 |= (u16)mask;
+      }
+      fclose(f);
+      remove(s_inject_file);
+    }
+  }
   switch (cpad->state) {
     // case 99: // functional
     default:  // controller is functioning as normal
@@ -1095,6 +1109,7 @@ u32 pc_is_imgui_visible() {
 }
 
 void pc_screen_shot() {
+  fmt::print("[pc_screen_shot] called — setting g_want_screenshot=true\n");
   g_want_screenshot = true;
 }
 
