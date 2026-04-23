@@ -15310,23 +15310,23 @@
   :size-assert         #x2784
   :flag-assert         #x2500002784
   (:methods
-    (sky-work-method-9 (_type_ int float float float) none) ;; 9
-    (sky-work-method-10 (_type_ int float float float float float float) none) ;; 10
-    (sky-work-method-11 (_type_ float) none) ;; 11
-    (sky-work-method-12 (_type_ float float) none) ;; 12
-    (sky-work-method-13 (_type_ dma-buffer vector) none) ;; 13
+    (sky-work-method-9 (_type_ int float float float) int) ;; 9
+    (sky-work-method-10 (_type_ int float float float float float float) int) ;; 10
+    (sky-work-method-11 (_type_ float) int) ;; 11
+    (sky-work-method-12 (_type_ float float) int) ;; 12
+    (sky-work-method-13 (_type_ dma-buffer vector) int) ;; 13
     (sky-work-method-14 (_type_) none) ;; 14
-    (sky-work-method-15 (_type_ matrix) none) ;; 15
+    (sky-work-method-15 (_type_ matrix) int) ;; 15
     (sky-work-method-16 (_type_) none) ;; 16
     (sky-work-method-17 (_type_) none) ;; 17
     (sky-work-method-18 (_type_) none) ;; 18
     (sky-work-method-19 (_type_ vector vector cloud-lights vector vector) none) ;; 19
-    (sky-work-method-20 (_type_ vector vector vector cloud-lights) none) ;; 20
+    (sky-work-method-20 (_type_ vector vector vector cloud-lights) int) ;; 20
     (sky-work-method-21 (_type_) none) ;; 21
-    (sky-work-method-22 (_type_ sky-vertex cloud-vertex) none) ;; 22
+    (sky-work-method-22 (_type_ sky-vertex cloud-vertex) int) ;; 22
     (sky-work-method-23 (_type_ sky-vertex cloud-vertex) none) ;; 23
     (sky-work-method-24 (_type_ dma-buffer) none) ;; 24
-    (sky-work-method-25 (_type_ vector vector haze-lights float) none) ;; 25
+    (sky-work-method-25 (_type_ vector vector haze-lights float) int) ;; 25
     (sky-work-method-26 (_type_) none) ;; 26
     (sky-work-method-27 (_type_ sky-vertex sky-vertex haze-vertex) none) ;; 27
     (sky-work-method-28 (_type_ dma-buffer) none) ;; 28
@@ -28754,7 +28754,7 @@
   :size-assert         #x50
   :flag-assert         #x1400000050
   (:methods
-    (new (symbol type collide-shape uint int) _type_) ;; 0
+    (new (symbol type collide-shape uint int) collide-shape-prim) ;; 0
     )
   )
 
@@ -29637,7 +29637,7 @@
     (net-enemy-method-70 () none) ;; 70
     (net-enemy-method-71 () none) ;; 71
     (net-enemy-method-72 () none) ;; 72
-    (net-enemy-method-73 () none) ;; 73
+    (net-enemy-method-73 () int) ;; 73
     (net-enemy-method-74 () none) ;; 74
     (net-enemy-method-75 () none) ;; 75
     (net-enemy-method-76 () none) ;; 76
@@ -33931,19 +33931,19 @@
   (:methods
     (nav-mesh-method-9 (_type_) int) ;; 9 ;; debug-draw
     (nav-mesh-method-10 (_type_ vector vector nav-poly) nav-poly) ;; 10
-    (nav-mesh-method-11 (_type_ vector) nav-poly) ;; 11
+    (nav-mesh-method-11 (_type_ vector) vector) ;; 11
     (nav-mesh-method-12 (_type_ vector float nav-poly) symbol) ;; 12
     (nav-mesh-method-13 (_type_ nav-poly vector) vector) ;; 13 ;; poly-centroid
     (nav-mesh-method-14 (_type_ nav-poly vector) vector) ;; 14 ;; poly-centroid-local
     (nav-mesh-method-15 (_type_ nav-poly nav-poly) nav-poly) ;; 15 ;; lookup-poly-on-route-to-target
     (nav-mesh-method-16 (_type_ nav-poly nav-poly nav-route-portal) (inline-array nav-vertex)) ;; 16 ;; get-route-portal
     (nav-mesh-method-17 (_type_) int) ;; 17 ;; initialize-mesh!
-    (nav-mesh-method-18 (_type_ nav-ray) none) ;; 18 ;; advance-ray-to-nearest-poly-edge-or-dest!
+    (nav-mesh-method-18 (_type_ nav-ray) meters) ;; 18 ;; advance-ray-to-nearest-poly-edge-or-dest!
     (nav-mesh-method-19 (_type_ nav-poly vector vector float) meters) ;; 19 ;; try-move-along-ray
     (nav-mesh-method-20 (_type_ vector nav-poly vector float symbol clamp-travel-vector-to-mesh-return-info) int) ;; 20
     (nav-mesh-method-21 (_type_ vector nav-poly vector clamp-travel-vector-to-mesh-return-info) none) ;; 21
-    (nav-mesh-method-22 (_type_ clamp-travel-vector-to-mesh-return-info) none) ;; 22
-    (nav-mesh-method-23 (_type_ vector nav-poly int int) none) ;; 23
+    (nav-mesh-method-22 (_type_ clamp-travel-vector-to-mesh-return-info) int) ;; 22
+    (nav-mesh-method-23 (_type_ vector nav-poly int int) int) ;; 23
     (nav-mesh-method-24 (_type_ vector vector) none) ;; 24
     (nav-mesh-method-25 (_type_ entity) none) ;; 25 ;; init-from-entity (entity-nav-mesh commented, use entity)
     (nav-mesh-method-26 (_type_) int) ;; 26 ;; handle-birth
@@ -33959,12 +33959,12 @@
     (nav-mesh-method-36 (_type_ vector vector float) float) ;; 36
     (nav-mesh-method-37 (_type_ vector vector float) float) ;; 37
     (nav-mesh-method-38 (_type_ nav-poly) none) ;; 38
-    (nav-mesh-method-39 (_type_ nav-poly rgba) none) ;; 39 ;; debug-draw-poly
-    (nav-mesh-method-40 (_type_ nav-poly vector) symbol) ;; 40 ;; point-in-poly?
+    (nav-mesh-method-39 (_type_ nav-poly rgba) rgba) ;; 39 ;; debug-draw-poly
+    (nav-mesh-method-40 (_type_ nav-poly vector) none) ;; 40 ;; point-in-poly?
     (nav-mesh-method-41 (_type_ nav-poly vector vector vector (pointer nav-poly)) vector) ;; 41
     (nav-mesh-method-42 (_type_ nav-poly vector vector) vector) ;; 42 ;; closest-point-on-boundary
     (nav-mesh-method-43 (_type_ nav-poly vector vector vector) none) ;; 43
-    (nav-mesh-method-44 (_type_ nav-poly vector vector) vector) ;; 44
+    (nav-mesh-method-44 (_type_ nav-poly vector vector) symbol) ;; 44
     (nav-mesh-method-45 (_type_ nav-poly) nav-poly) ;; 45
     (nav-mesh-method-46 (_type_ nav-poly) nav-poly) ;; 46
     )
@@ -34177,11 +34177,11 @@
   :flag-assert         #x3000000120
   (:methods
     (nav-control-method-9 () none) ;; 9
-    (nav-control-method-10 () none) ;; 10
+    (nav-control-method-10 () symbol) ;; 10
     (nav-control-method-11 () none) ;; 11
     (nav-control-method-12 () none) ;; 12
-    (nav-control-method-13 () none) ;; 13
-    (nav-control-method-14 () none) ;; 14
+    (nav-control-method-13 () nav-poly) ;; 13
+    (nav-control-method-14 () int) ;; 14
     (nav-control-method-15 () none) ;; 15
     (nav-control-method-16 () none) ;; 16
     (nav-control-method-17 () none) ;; 17
@@ -34191,13 +34191,13 @@
     (nav-control-method-21 () none) ;; 21
     (nav-control-method-22 () none) ;; 22
     (nav-control-method-23 () none) ;; 23
-    (nav-control-method-24 () none) ;; 24
-    (nav-control-method-25 () none) ;; 25
-    (nav-control-method-26 () none) ;; 26
-    (nav-control-method-27 () none) ;; 27
-    (nav-control-method-28 () none) ;; 28
+    (nav-control-method-24 () symbol) ;; 24
+    (nav-control-method-25 () float) ;; 25
+    (nav-control-method-26 () uint) ;; 26
+    (nav-control-method-27 () meters) ;; 27
+    (nav-control-method-28 () int) ;; 28
     (nav-control-method-29 () none) ;; 29
-    (nav-control-method-30 () none) ;; 30
+    (nav-control-method-30 () int) ;; 30
     (nav-control-method-31 () none) ;; 31
     (nav-control-method-32 () none) ;; 32
     (nav-control-method-33 () none) ;; 33
@@ -34207,9 +34207,9 @@
     (nav-control-method-37 () none) ;; 37
     (nav-control-method-38 () none) ;; 38
     (nav-control-method-39 () none) ;; 39
-    (nav-control-method-40 () none) ;; 40
+    (nav-control-method-40 () int) ;; 40
     (nav-control-method-41 () none) ;; 41
-    (nav-control-method-42 () none) ;; 42
+    (nav-control-method-42 () int) ;; 42
     (nav-control-method-43 () none) ;; 43
     (nav-control-method-44 () none) ;; 44
     (nav-control-method-45 () none) ;; 45
@@ -36765,20 +36765,20 @@
   :flag-assert         #x1a00001080
   (:methods
     (new (symbol type) _type_) ;; 0
-    (gui-control-method-9 (_type_ process gui-channel gui-action string float time-frame) sound-id) ;; 9
+    (gui-control-method-9 (_type_ process gui-channel gui-action string float time-frame) none) ;; 9
     (gui-control-method-10 (_type_ process gui-channel) int) ;; 10
     (gui-control-method-11 (_type_ gui-connection) int) ;; 11
-    (gui-control-method-12 (_type_ process gui-channel gui-action string int float sound-id) sound-id) ;; 12
-    (gui-control-method-13 (_type_ symbol) int) ;; 13
-    (gui-control-method-14 (_type_ string gui-channel gui-action) sound-id) ;; 14
-    (gui-control-method-15 (_type_ process gui-channel string sound-id) gui-connection) ;; 15
+    (gui-control-method-12 (_type_ process gui-channel gui-action string int float sound-id) none) ;; 12
+    (gui-control-method-13 (_type_ symbol) none) ;; 13
+    (gui-control-method-14 (_type_ string gui-channel gui-action) int) ;; 14
+    (gui-control-method-15 (_type_ process gui-channel string sound-id) symbol) ;; 15
     (gui-control-method-16 (_type_ gui-action sound-id gui-channel gui-action string (function gui-connection symbol) process) int) ;; 16
-    (gui-control-method-17 (_type_ sound-id) gui-status) ;; 17
+    (gui-control-method-17 (_type_ sound-id) int) ;; 17
     (gui-control-method-18 (_type_ gui-channel) symbol) ;; 18
     (gui-control-method-19 (_type_ gui-channel gui-connection) symbol) ;; 19
     (gui-control-method-20 (_type_ sound-id symbol int int int float) gui-connection) ;; 20
-    (gui-control-method-21 (_type_ gui-connection) int) ;; 21
-    (gui-control-method-22 (_type_ gui-connection vector) int) ;; 22
+    (gui-control-method-21 (_type_ gui-connection) none) ;; 21
+    (gui-control-method-22 (_type_ gui-connection vector) none) ;; 22
     (gui-control-method-23 (_type_ gui-connection process symbol) none) ;; 23
     (gui-control-method-24 (_type_ gui-channel gui-channel symbol gui-connection) symbol) ;; 24
     (gui-control-method-25 (_type_ gui-connection sound-id) int) ;; 25
@@ -38778,16 +38778,16 @@
   (:methods
     (cloth-system-method-16 (_type_ cloth-params) none) ;; 16
     (cloth-system-method-17 (_type_) int) ;; 17
-    (cloth-system-method-18 (_type_) int) ;; 18
+    (cloth-system-method-18 (_type_) none) ;; 18
     (cloth-system-method-19 (_type_) symbol) ;; 19
     (cloth-system-method-20 (_type_) symbol) ;; 20
     (cloth-system-method-21 (_type_) none) ;; 21
     (cloth-system-method-22 (_type_) symbol) ;; 22
     (cloth-system-method-23 (_type_) none) ;; 23
-    (cloth-system-method-24 (_type_) int) ;; 24
-    (cloth-system-method-25 (_type_) int) ;; 25
+    (cloth-system-method-24 (_type_) none) ;; 24
+    (cloth-system-method-25 (_type_) none) ;; 25
     (cloth-system-method-26 (_type_) none) ;; 26
-    (cloth-system-method-27 (_type_ vector int int current-position-info) vector) ;; 27
+    (cloth-system-method-27 (_type_ vector int int current-position-info) none) ;; 27
     (cloth-system-method-28 (_type_ int int current-position-info) uint) ;; 28
     (cloth-system-method-29 (_type_ int int current-position-info int) uint) ;; 29
     (cloth-system-method-30 (_type_ int int current-position-info int) uint) ;; 30
@@ -39368,17 +39368,17 @@
   :flag-assert         #x1700000080
   (:methods
     (light-trail-method-10 (_type_) none) ;; 10
-    (light-trail-method-11 (_type_ vector time-frame) int) ;; 11
-    (light-trail-method-12 (_type_) none) ;; 12
-    (light-trail-method-13 (_type_) int) ;; 13
-    (light-trail-method-14 (_type_) none) ;; 14
-    (light-trail-method-15 (_type_) none) ;; 15
+    (light-trail-method-11 (_type_ vector time-frame) float) ;; 11
+    (light-trail-method-12 (_type_) int) ;; 12
+    (light-trail-method-13 (_type_) connection) ;; 13
+    (light-trail-method-14 (_type_) int) ;; 14
+    (light-trail-method-15 (_type_) pointer) ;; 15
     (light-trail-method-16 () none) ;; 16
-    (light-trail-method-17 (_type_ vector rgba float vector float) symbol) ;; 17
+    (light-trail-method-17 (_type_ vector rgba float vector float) none) ;; 17
     (light-trail-method-18 () none) ;; 18
     (light-trail-method-19 (_type_ float int) none) ;; 19
-    (light-trail-method-20 (_type_) none) ;; 20
-    (light-trail-method-21 (_type_ vector) none) ;; 21
+    (light-trail-method-20 (_type_) int) ;; 20
+    (light-trail-method-21 (_type_ vector) int) ;; 21
     (light-trail-method-22 () none) ;; 22
     )
   )
@@ -39706,20 +39706,20 @@
   :size-assert         #x74
   :flag-assert         #x1700000074
   (:methods
-    (lightning-bolt-method-9 (_type_ int int lightning-appearance) none) ;; 9
-    (lightning-bolt-method-10 (_type_) none) ;; 10
-    (lightning-bolt-method-11 (_type_) none) ;; 11
-    (lightning-bolt-method-12 (_type_) none) ;; 12
-    (lightning-bolt-method-13 (_type_ int) none) ;; 13
-    (lightning-bolt-method-14 (_type_) int) ;; 14
+    (lightning-bolt-method-9 (_type_ int int lightning-appearance) int) ;; 9
+    (lightning-bolt-method-10 (_type_) int) ;; 10
+    (lightning-bolt-method-11 (_type_) int) ;; 11
+    (lightning-bolt-method-12 (_type_) int) ;; 12
+    (lightning-bolt-method-13 (_type_ int) int) ;; 13
+    (lightning-bolt-method-14 (_type_) uint) ;; 14
     (lightning-bolt-method-15 (_type_ object int lightning-span-internal) none) ;; 15
     (lightning-bolt-method-16 (_type_ vector float float vector matrix) none) ;; 16
     (lightning-bolt-method-17 (_type_ uint float float curve2d-fast float) float) ;; 17
     (lightning-bolt-method-18 () none) ;; 18 ;; (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none)
-    (lightning-bolt-method-19 (_type_ vector int int matrix float float) none) ;; 19
+    (lightning-bolt-method-19 (_type_ vector int int matrix float float) vector) ;; 19
     (lightning-bolt-method-20 (_type_ int lightning-span-internal) vector) ;; 20
-    (lightning-bolt-method-21 (_type_ int int float) none) ;; 21
-    (lightning-bolt-method-22 (_type_) none) ;; 22
+    (lightning-bolt-method-21 (_type_ int int float) int) ;; 21
+    (lightning-bolt-method-22 (_type_) number) ;; 22
     )
   )
   
@@ -49941,28 +49941,23 @@
 
 
 (deftype driver (process-focusable)
-  ((driver-pad uint8 132 :offset 256))
-  :method-count-assert 59
-  :size-assert         #x184
-  :flag-assert         #x3b01000184
-  )
-
-#|
-(deftype driver-FULL-PENDING (process-focusable)
-  ((info               driver-info :inline :offset-assert 256)
-   (vehicle            uint64              :offset-assert 280)
-   (speech-time        uint64              :offset-assert 288)
-   (anim-vel           vector      :inline :offset-assert 304)
-   (anim-pos           vector      :inline :offset-assert 320)
-   (turn-back-anim     int8                :offset-assert 336)
-   (turn-front-anim    int8                :offset-assert 337)
-   (up-down-anim       int8                :offset-assert 338)
-   (intro-anim         uint8       5       :offset-assert 339)
-   (jmod-head          basic               :offset-assert 344)
-   (arm-ik             uint8       12      :offset-assert 348)
-   (looking-at         uint64              :offset-assert 360)
-   (looking-at-timeout int32               :offset-assert 368)
-   (helmet             helmet      :inline :offset-assert 372)
+  (;; offsets derived from ntsc_v1 binary (process-nettable is 4 bytes smaller than jak3)
+   (info               driver-info :inline :offset 252)
+   (vehicle            uint64              :offset 276)
+   (speech-time        uint64              :offset 284)
+   (driver-unk292      uint8       8       :offset 292)
+   (anim-vel           vector      :inline :offset 300)
+   (anim-pos           vector      :inline :offset 316)
+   (turn-back-anim     int8                :offset 332)
+   (turn-front-anim    int8                :offset 333)
+   (up-down-anim       int8                :offset 334)
+   (intro-anim         uint8       4       :offset 335)
+   (jmod-head          basic               :offset 340)
+   (arm-ik             uint8       12      :offset 344)
+   (looking-at         uint64              :offset 356)
+   (looking-at-timeout int32               :offset 364)
+   (helmet             helmet      :inline :offset 368)
+   (driver-tail        uint8       4       :offset 384)
    )
   :method-count-assert 67
   :size-assert         #x184
@@ -49980,7 +49975,6 @@
     (driver-method-66 (_type_) none) ;; 66
     )
   )
-|#
 
 
 
