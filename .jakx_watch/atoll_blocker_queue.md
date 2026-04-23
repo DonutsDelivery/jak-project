@@ -9,9 +9,9 @@ _last updated: 2026-04-24T01:25Z by PAIR3-B after boot-path audit_
 | 2 | main.gc / display-loop | No entity-birth call in frame loop — even with entity data, actors never spawn | TODO | PAIR3-B | Need actors-update / entity-birth-update equivalent in while loop after initialize! |
 | 3 | race-manager.gc | 3-line stub — race init never runs | IN PROGRESS | PAIR3-A | claimed 01:27Z — fixing racer-state-method-11 type_prop (l.wu + a2 28) via type_cast |
 | 4 | race-control.gc | method-9 type_prop fail (l.wu + a1 28); output-race-mesh no type analysis | IN PROGRESS | PAIR1-B | claimed 01:32Z — fixing via all-types.gc method sigs for race-control/racer-state |
-| 5 | vehicle-manager.gc | 3-line stub — vehicle spawning unimplemented | TODO | - | decomp out exists but status unknown |
+| 5 | vehicle-manager.gc | 3-line stub — vehicle spawning unimplemented | IN PROGRESS | PAIR1-A | claimed 01:35Z — auditing decomp output to identify type_prop blockers |
 | 6 | driver.gc + driver-*.gc | 3-line stubs — no driver behavior | TODO | - | 10+ files. Can defer non-Jak drivers for tutorial |
-| 7 | draw pipeline / foreground-initialize-engines | Crashes when foreground-initialize-engines is called (bisect underway) | IN PROGRESS | PAIR3-B | Another agent bisecting; bisect1 game is stable with sky+background only |
+| 7 | draw pipeline / foreground-initialize-engines | Crashes when foreground-initialize-engines is called (bisect underway) | DONE @ 9716a6bfe | PAIR1-A | Bisect resolved: crash was update-time-of-day (calls clear-mood-times), not foreground-initialize-engines. Removed update-time-of-day from hook; full pipeline now stable |
 | 8 | sky texture missing | atoll level-flags has no 'sky flag → sky GOAL code is no-op; C++ renderer uses random texture | TODO | PAIR3-B | Add (level-flags sky) to atoll level-info; verify texture page available |
 | 9 | ripple-globals size-assert | rc=134 type error blocking decomp (FIXED) | DONE @ this session | PAIR3-B | Added :pack-me to ripple-request + :inline to ripple-globals.requests |
 
@@ -22,11 +22,12 @@ _last updated: 2026-04-24T01:25Z by PAIR3-B after boot-path audit_
 - [x] atoll geometry renders (tfrag, tie, shrub, water) via background pipeline
 - [x] sky draw call wired in main-draw-hook (draw *sky-work* + flush-cache)
 - [x] foreground-engine-execute wired in main-draw-hook
+- [x] foreground-initialize-engines crash resolved — crash was update-time-of-day, not fwd-init-engines; full pipeline (fwd-init + sky + fwd-engine + background) stable @ 9716a6bfe
 
 ## Investigating (not yet confirmed blockers)
 
 - atoll-obs.o — what entity types does it define? Need to check extracted raw object to understand race entity layout
-- foreground-initialize-engines crash — bisect agent identified minimal-stable is sky+background; foreground-initialize-engines is suspect. Root cause: *shadow-globals* bucket access. May be null or wrong size.
+- foreground-initialize-engines crash — RESOLVED. Real crash was update-time-of-day calling clear-mood-times (zeroes mood seeds) then weather vtable null-dispatch. foreground-initialize-engines is safe.
 - entity birth system — jak3 uses actors-update *level* in real-main-draw-hook. Need to add to jakx frame loop once entity data is present.
 
 ## Deferred (out-of-scope for tutorial)
