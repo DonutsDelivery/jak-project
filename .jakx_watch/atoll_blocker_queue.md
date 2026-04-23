@@ -8,7 +8,7 @@ _last updated: 2026-04-24T01:25Z by PAIR3-B after boot-path audit_
 | 1 | atoll.gd | atoll-obs.o excluded — no entity data in DGO → no race entities in BSP | TODO | PAIR3-B | Without entity records, reset-actors has nothing to spawn. atoll-obs.o must be decompiled and added to DGO |
 | 2 | main.gc / display-loop | No entity-birth call in frame loop — even with entity data, actors never spawn | TODO | PAIR3-B | Need actors-update / entity-birth-update equivalent in while loop after initialize! |
 | 3 | race-manager.gc | 3-line stub — race init never runs | IN PROGRESS | PAIR3-A | claimed 01:27Z — fixing racer-state-method-11 type_prop (l.wu + a2 28) via type_cast |
-| 4 | race-control.gc | method-9 type_prop fail (l.wu + a1 28); output-race-mesh no type analysis | TODO | - | type_cast needed: a1 is racer-state or race-control at op 3 |
+| 4 | race-control.gc | method-9 type_prop fail (l.wu + a1 28); output-race-mesh no type analysis | IN PROGRESS | PAIR1-B | claimed 01:32Z — fixing via all-types.gc method sigs for race-control/racer-state |
 | 5 | vehicle-manager.gc | 3-line stub — vehicle spawning unimplemented | TODO | - | decomp out exists but status unknown |
 | 6 | driver.gc + driver-*.gc | 3-line stubs — no driver behavior | TODO | - | 10+ files. Can defer non-Jak drivers for tutorial |
 | 7 | draw pipeline / foreground-initialize-engines | Crashes when foreground-initialize-engines is called (bisect underway) | IN PROGRESS | PAIR3-B | Another agent bisecting; bisect1 game is stable with sky+background only |
