@@ -7,7 +7,7 @@ _last updated: 2026-04-24T01:25Z by PAIR3-B after boot-path audit_
 |----------|------|--------------|--------|----------|-------|
 | 1 | atoll.gd | atoll-obs.o excluded — no entity data in DGO → no race entities in BSP | TODO | PAIR3-B | Without entity records, reset-actors has nothing to spawn. atoll-obs.o must be decompiled and added to DGO |
 | 2 | main.gc / display-loop | No entity-birth call in frame loop — even with entity data, actors never spawn | TODO | PAIR3-B | Need actors-update / entity-birth-update equivalent in while loop after initialize! |
-| 3 | race-manager.gc | 3-line stub — race init never runs | IN PROGRESS | PAIR3-A | claimed 01:27Z — fixing racer-state-method-11 type_prop (l.wu + a2 28) via type_cast |
+| 3 | race-manager.gc | 3-line stub — race init never runs | DONE @ next commit | PAIR3-A | Fixed racer-state-method-11 (logior handle build: op 9 v1→uint) + race-state-method-10 (op 20→21 for lwu). race-manager now decompiles 3 methods. Remaining l.d at op16 is WARN only (not blocking conversion). |
 | 4 | race-control.gc | method-9 type_prop fail (l.wu + a1 28); output-race-mesh no type analysis | DONE @ a77f317f5 | PAIR1-B | method-9 decompiles clean (WARN only); output-race-mesh a0 typed as race-line (op52 remains for PAIR2-B) |
 | 5 | vehicle-manager.gc | 3-line stub — vehicle spawning unimplemented | IN PROGRESS | PAIR1-A | claimed 01:35Z — auditing decomp output to identify type_prop blockers |
 | 6 | driver.gc + driver-*.gc | 3-line stubs — no driver behavior | IN PROGRESS | PAIR2-A | claimed — auditing decomp output for driver.gc + driver-jak.gc type_prop blockers |

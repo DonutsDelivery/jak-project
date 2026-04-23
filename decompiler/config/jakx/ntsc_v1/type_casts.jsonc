@@ -23226,12 +23226,30 @@
       "process-drawable"
     ]
   ],
+  "vehicle-manager-event-handler": [
+    [0, "a2", "symbol"],
+    [0, "a3", "event-message-block"]
+  ],
+  "vehicle-init-by-other": [
+    [0, "a1", "vehicle-spawn-params"]
+  ],
   "vehicle-spawn": [
+    [1, "a1", "vehicle-spawn-params"],
     [
       93,
       "gp",
       "vehicle"
     ]
+  ],
+  "find-vehicle": [
+    [1, "v1", "vehicle-manager"]
+  ],
+  "vehicle-in-level?": [
+    [0, "a0", "int"],
+    [1, "a1", "(pointer symbol)"]
+  ],
+  "vehicle-idx-from-level-name": [
+    [6, "v1", "net-vehicle"]
   ],
   "vehicle-spawn-hack": [
     [
