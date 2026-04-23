@@ -4519,8 +4519,10 @@
 
 
   
+#|
 ;; vehicle-wheel moved to after rigid-body-object definition (L40041+)
-#|(deftype vehicle-wheel (rigid-body-object)
+;; Duplicate — real def is at L40156 after rigid-body-object.
+(deftype vehicle-wheel (rigid-body-object)
   ((camera-dist float  :offset-assert 288)
    )
   :method-count-assert 93
@@ -4535,7 +4537,8 @@
     explode ;; 89
     fade-out ;; 90
     )
-  )|#
+  )
+|#
   
 
 
@@ -5556,7 +5559,9 @@
 
 
   
-#|(deftype v-wpn-yellow-chain-gun (vehicle-weapon-slot)
+#|
+;; Duplicates moved here from early in file — real defs at L43939+ after vehicle-weapon-slot.
+(deftype v-wpn-yellow-chain-gun (vehicle-weapon-slot)
   ((last-fire-event uint64  :offset-assert 264)
    (firecontrol     basic   :offset-assert 272)
    (blam            uint32  :offset-assert 276)
@@ -5568,13 +5573,13 @@
     idle ;; 50
     firing ;; 60
     )
-  )|#
-  
+  )
 
 
 
-  
-#|(deftype v-wpn-yellow-default-gun (vehicle-weapon-slot)
+
+
+(deftype v-wpn-yellow-default-gun (vehicle-weapon-slot)
   ((last-fire-event uint64  :offset-assert 264)
    (firecontrol     basic   :offset-assert 272)
    (blam            uint32  :offset-assert 276)
@@ -5586,13 +5591,13 @@
     idle ;; 50
     firing ;; 60
     )
-  )|#
-  
+  )
 
 
 
-  
-#|(deftype v-wpn-yellow-grenade (vehicle-weapon-slot)
+
+
+(deftype v-wpn-yellow-grenade (vehicle-weapon-slot)
   ((next-shot-allowed uint64  :offset-assert 264)
    (next-to-fire      uint8   :offset-assert 272)
    )
@@ -5602,12 +5607,12 @@
   (:state-methods
     idle ;; 50
     )
-  )|#
-  
+  )
 
 
 
-#|(deftype v-wpn-yellow-guided-missile (vehicle-weapon-slot)
+
+(deftype v-wpn-yellow-guided-missile (vehicle-weapon-slot)
   ((next-shot-allowed        uint64    :offset-assert 264)
    (next-to-fire             uint8     :offset-assert 272)
    (targ-list                uint64 4  :offset-assert 280)
@@ -5620,12 +5625,12 @@
     idle ;; 50
     firing ;; 60
     )
-  )|#
+  )
 
 
 
-  
-#|(deftype v-wpn-yellow-seismic-blaster (vehicle-weapon-slot)
+
+(deftype v-wpn-yellow-seismic-blaster (vehicle-weapon-slot)
   ((fire-at      uint32  :offset-assert 264)
    (on-hud-indic int8    :offset-assert 268)
    )
@@ -5637,7 +5642,8 @@
     firing ;; 60
     backfiring ;; 61
     )
-  )|#
+  )
+|#
   
 
 
@@ -5697,7 +5703,9 @@
 
 
   
-#|(deftype v-wpn-red-turbo-preventor (vehicle-weapon-slot)
+#|
+;; Duplicates moved here — real defs at L44008+ after vehicle-weapon-slot.
+(deftype v-wpn-red-turbo-preventor (vehicle-weapon-slot)
   ((sound-id  uint32  :offset-assert 264)
    (player-id int8    :offset-assert 268)
    (snd-loop  uint32  :offset-assert 272)
@@ -5709,13 +5717,12 @@
     idle ;; 50
     firing ;; 60
     )
-  )|#
-  
+  )
 
 
 
-  
-#|(deftype v-wpn-red-mine-launcher (vehicle-weapon-slot)
+
+(deftype v-wpn-red-mine-launcher (vehicle-weapon-slot)
   ((salvo-count uint8   :offset-assert 261)
    (last-fired  uint64  :offset-assert 264)
    )
@@ -5726,7 +5733,8 @@
     idle ;; 50
     firing ;; 60
     )
-  )|#
+  )
+|#
   
 
 
@@ -5751,7 +5759,9 @@
 
 
   
-#|(deftype v-wpn-purple-shield (vehicle-weapon-slot)
+#|
+;; Duplicate — real def at L44035+ after vehicle-weapon-slot.
+(deftype v-wpn-purple-shield (vehicle-weapon-slot)
   ((mysound          uint32  :offset-assert 264)
    (zap-interval     uint64  :offset-assert 272)
    (jiggle-start     uint64  :offset-assert 280)
@@ -5764,17 +5774,10 @@
     idle ;; 50
     firing ;; 60
     )
-  )|#
-  
+  )
+|#
 
 
-
-  
-
-
-
-
-  
 
 
 (define-extern shield-jiggle-scale! (function none))
@@ -15310,15 +15313,14 @@
     (sky-work-method-30 (_type_ dma-buffer) none) ;; 30
     (sky-work-method-31 (_type_ dma-buffer) none) ;; 31
     (sky-work-method-32 (_type_ dma-buffer) none) ;; 32
-    (sky-work-method-33 () none) ;; 33 ;; (setup-stars (_type_ matrix sky-upload-data) none)
+    (sky-work-method-33 () none) ;; 33
     (sky-work-method-34 (_type_) none) ;; 34
     (sky-work-method-35 (_type_ dma-buffer) none) ;; 35
     (sky-work-method-36 (_type_ dma-buffer) none) ;; 36
     )
   )
-|#
 
-  
+
 
 
 
@@ -15540,16 +15542,14 @@
 
   
 
-#|
 (deftype ocean-wave-frames (structure)
-  ((frame ocean-wave-data 64 :offset-assert 0) ;; guessed by decompiler
+  ((frame ocean-wave-data 64 :inline :offset-assert 0) ;; guessed by decompiler
    )
+  ;; overflow 16-bit int size bug
   :method-count-assert 9
-  :size-assert         #x0
-  :heap-base           #x1
-  :flag-assert         #x900010000
+  :size-assert         #x10000
+  ;:flag-assert         #x900010000
   )
-|#
 
   
 
@@ -18434,9 +18434,11 @@
   )
 
 #|
+;; particle-buffer layout needs investigation (smoke-parts at 16 vs 12 gap unclear)
 (deftype particle-buffer (prim-client)
   ((tex-id           uint32      :offset-assert 4)
    (smoke-part-count int32       :offset-assert 8)
+   (pad0             uint32      :offset-assert 12)
    (smoke-parts      uint8  2400 :offset-assert 16)
    (strip            basic       :offset-assert 2416)
    (single-strip     uint8  12   :offset-assert 2420)
@@ -31675,7 +31677,6 @@
 
 
 
-#|
 (deftype background-work (basic)
   ((tfrag-tree-count              int32                           :offset-assert 4)
    (tfrag-trees                   drawable-tree-tfrag          19 :offset-assert 8) ;; guessed by decompiler
@@ -31687,14 +31688,14 @@
    (tfrag-water-trees             drawable-tree-tfrag-water    19 :offset-assert 320) ;; guessed by decompiler
    (tfrag-water-levels            level                        19 :offset-assert 396) ;; guessed by decompiler
    (tfrag-shared-tree-count       int32                           :offset-assert 472)
-   (tfrag-shared-trees uint8 19 :offset-assert 476)
-   (tfrag-shared-levels uint8 19 :offset-assert 552)
+   (tfrag-shared-trees uint32 19 :offset-assert 476)
+   (tfrag-shared-levels uint32 19 :offset-assert 552)
    (tfrag-trans-shared-tree-count int32                           :offset-assert 628)
-   (tfrag-trans-shared-trees uint8 19 :offset-assert 632)
-   (tfrag-trans-shared-levels uint8 19 :offset-assert 708)
+   (tfrag-trans-shared-trees uint32 19 :offset-assert 632)
+   (tfrag-trans-shared-levels uint32 19 :offset-assert 708)
    (tfrag-water-shared-tree-count int32                           :offset-assert 784)
-   (tfrag-water-shared-trees uint8 19 :offset-assert 788)
-   (tfrag-water-shared-levels uint8 19 :offset-assert 864)
+   (tfrag-water-shared-trees uint32 19 :offset-assert 788)
+   (tfrag-water-shared-levels uint32 19 :offset-assert 864)
    (shrub-tree-count              int32                           :offset-assert 940)
    (shrub-trees                   drawable-tree-instance-shrub 19 :offset-assert 944) ;; guessed by decompiler
    (shrub-levels                  level                        19 :offset-assert 1020) ;; guessed by decompiler
@@ -31707,7 +31708,6 @@
   :size-assert         #x4e8
   :flag-assert         #x9000004e8
   )
-|#
 
 
 
@@ -35518,6 +35518,7 @@
   ((waveform ripple-wave  :offset-assert 0) ;; guessed by decompiler
    (effect   merc-effect  :offset-assert 4)
    )
+  :pack-me
   :method-count-assert 9
   :size-assert         #x8
   :flag-assert         #x900000008
@@ -35527,18 +35528,16 @@
 
   
 
-#|
 (deftype ripple-globals (structure)
-  ((count    int32             :offset-assert 0)
-   (requests ripple-request 16 :offset-assert 4) ;; guessed by decompiler
+  ((count    int32                     :offset-assert 0)
+   (requests ripple-request 16 :inline :offset-assert 4) ;; guessed by decompiler
    )
   :method-count-assert 9
   :size-assert         #x84
   :flag-assert         #x900000084
   )
-|#
 
-  
+
 
 
 (define-extern *ripple-globals* object) ;; ripple-globals
@@ -44228,7 +44227,16 @@
   )
 
 
-;; v-wpn-net-info is already defined!
+(deftype v-wpn-net-info (structure)
+  ((left-type   uint8 :offset-assert 0)
+   (right-type  uint8 :offset-assert 1)
+   (left-power  uint8 :offset-assert 2)
+   (right-power uint8 :offset-assert 3)
+   )
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
 
 (define-extern V_R_MINE1_ARMED? object)
 (define-extern weapon-mask->type (function none))
@@ -50724,58 +50732,6 @@
   )
 
 
-#|(deftype vehicle-manager-OLD-REGEN (process)
-  ((name             string                                                            :offset-assert 0) ;; guessed by decompiler
-   (mask             process-mask                                                      :offset-assert 4)
-   (clock            clock                                                             :offset-assert 8) ;; guessed by decompiler
-   (view             basic                                                             :offset-assert 12)
-   (parent           (pointer process-tree)                                            :offset-assert 16) ;; guessed by decompiler
-   (brother          (pointer process-tree)                                            :offset-assert 20) ;; guessed by decompiler
-   (child            (pointer process-tree)                                            :offset-assert 24) ;; guessed by decompiler
-   (ppointer         (pointer process)                                                 :offset-assert 28) ;; guessed by decompiler
-   (self             process                                                           :offset-assert 32) ;; guessed by decompiler
-   (profile-ticks    uint32                                                            :offset-assert 36)
-   (pool             dead-pool                                                         :offset-assert 40) ;; guessed by decompiler
-   (status           symbol                                                            :offset-assert 44) ;; guessed by decompiler
-   (pid              int32                                                             :offset-assert 48)
-   (main-thread      cpu-thread                                                        :offset-assert 52) ;; guessed by decompiler
-   (top-thread       cpu-thread                                                        :offset-assert 56) ;; guessed by decompiler
-   (entity           entity-actor                                                      :offset-assert 60) ;; guessed by decompiler
-   (level            level                                                             :offset-assert 64) ;; guessed by decompiler
-   (state            state                                                             :offset-assert 68) ;; guessed by decompiler
-   (prev-state       state                                                             :offset-assert 72) ;; guessed by decompiler
-   (next-state       state                                                             :offset-assert 76) ;; guessed by decompiler
-   (state-stack      (array state)                                                     :offset-assert 80) ;; guessed by decompiler
-   (trans-hook       function                                                          :offset-assert 84) ;; guessed by decompiler
-   (post-hook        function                                                          :offset-assert 88) ;; guessed by decompiler
-   (event-hook       (function process int symbol event-message-block object)          :offset-assert 92) ;; guessed by decompiler
-   (allocated-length int32                                                             :offset-assert 96)
-   (heap-base        pointer                                                           :offset-assert 108) ;; guessed by decompiler
-   (heap-top         pointer                                                           :offset-assert 112) ;; guessed by decompiler
-   (heap-cur         pointer                                                           :offset-assert 116) ;; guessed by decompiler
-   (stack-frame-top  stack-frame                                                       :offset-assert 120) ;; guessed by decompiler
-   (heap             kheap                                                    :inline  :offset-assert 108)
-   (connection-list  connectable                                              :inline  :offset-assert 124)
-   (stack            uint8                                                    :dynamic :offset-assert 140) ;; guessed by decompiler
-   )
-  :method-count-assert 19
-  :size-assert         #x90
-  :flag-assert         #x1300000090
-  (:methods
-    (vehicle-manager-method-9 () none) ;; 9
-    (vehicle-manager-method-10 () none) ;; 10
-    (vehicle-manager-method-11 () none) ;; 11
-    (vehicle-manager-method-12 () none) ;; 12
-    (vehicle-manager-method-13 () none) ;; 13
-    (vehicle-manager-method-14 () _type_ :state) ;; 14
-    (vehicle-manager-method-17 (_type_) none) ;; 17
-    (vehicle-manager-method-18 () none) ;; 18
-    )
-  (:state-methods
-    idle ;; 15, old: (active () _type_ :state)
-    active ;; 16, old: (vehicle-manager-method-16 (_type_) none)
-    )
-  )|#
   
 
 
@@ -53376,7 +53332,6 @@
 
   
 
-#|
 (deftype chicken-drone (raceline-weapon)
   ((beam-fire-control basic          :offset-assert 356)
    (machinegun-sound  uint32         :offset-assert 360)
@@ -53395,7 +53350,6 @@
     die ;; 51
     )
   )
-|#
 
   
 
@@ -53403,14 +53357,12 @@
 
   
 
-#|
 (deftype chicken-drone-2 (chicken-drone)
   ()
   :method-count-assert 81
   :size-assert         #x1b4
   :flag-assert         #x51013001b4
   )
-|#
 
   
 
