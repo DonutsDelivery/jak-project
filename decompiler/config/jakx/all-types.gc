@@ -43664,7 +43664,7 @@
   (:methods
     (update-lap-distance (_type_ race-state) none) ;; 9
     (begin-lap (_type_ race-state) none) ;; 10
-    (end-lap (_type_ race-state) none) ;; 11
+    (end-lap (_type_ process-drawable) none) ;; 11
     )
   )
 
@@ -59100,61 +59100,61 @@
 ;; Explicit type-symbol externs for types that have UNKNOWN fields or other
 ;; registration issues. These force add_symbol even when the deftype didn't
 ;; auto-register, unblocking type-prop for callers that reference the symbol.
-(define-extern net-process-mgr type)
-(define-extern vehicle-reticle-on-me type)
+;; (define-extern net-process-mgr type)  ;; clobbers active deftype at earlier line
+;; (define-extern vehicle-reticle-on-me type)  ;; clobbers active deftype at earlier line
 (define-extern medius-game-array type)
 (define-extern impact-control type)
-(define-extern background-work type)
+;; (define-extern background-work type)  ;; clobbers active deftype at earlier line
 (define-extern editable-point type)
 
 ;; Auto-generated type externs for types with registration issues
-(define-extern auto-save type)
+;; (define-extern auto-save type)  ;; clobbers active deftype at earlier line
 (define-extern blur-coords type)
 ;; (define-extern deathmatch-spawner-array type) ;; clobbers active deftype
 (define-extern default-interior-states type)
-(define-extern drift-editor type)
-(define-extern driver-info type)
-(define-extern engine-minimap type)
+;; (define-extern drift-editor type)  ;; clobbers active deftype at earlier line
+;; (define-extern driver-info type)  ;; clobbers active deftype at earlier line
+;; (define-extern engine-minimap type)  ;; clobbers active deftype at earlier line
 (define-extern entity-more-perm type)
-(define-extern fake-msg type)
-(define-extern ghost-file type)
-(define-extern headset type)
+;; (define-extern fake-msg type)  ;; clobbers active deftype at earlier line
+;; (define-extern ghost-file type)  ;; clobbers active deftype at earlier line
+;; (define-extern headset type)  ;; clobbers active deftype at earlier line
 (define-extern headset-decoder type)
-(define-extern http-downloader type)
+;; (define-extern http-downloader type)  ;; clobbers active deftype at earlier line
 (define-extern hud-corners type)
-(define-extern hud-vehicle type)
-(define-extern lobby-menu-manager type)
-(define-extern medius-add-to-buddy-list-confirmation-response type)
-(define-extern medius-create-game-request0 type)
-(define-extern medius-file-download-request type)
-(define-extern medius-get-clan-member-list-request type)
-(define-extern medius-join-game-request0 type)
-(define-extern medius-room type)
-(define-extern medius-set-localization-params-request type)
-(define-extern medius-simple-response type)
+;; (define-extern hud-vehicle type)  ;; clobbers active deftype at earlier line
+;; (define-extern lobby-menu-manager type)  ;; clobbers active deftype at earlier line
+;; (define-extern medius-add-to-buddy-list-confirmation-response type)  ;; clobbers active deftype at earlier line
+;; (define-extern medius-create-game-request0 type)  ;; clobbers active deftype at earlier line
+;; (define-extern medius-file-download-request type)  ;; clobbers active deftype at earlier line
+;; (define-extern medius-get-clan-member-list-request type)  ;; clobbers active deftype at earlier line
+;; (define-extern medius-join-game-request0 type)  ;; clobbers active deftype at earlier line
+;; (define-extern medius-room type)  ;; clobbers active deftype at earlier line
+;; (define-extern medius-set-localization-params-request type)  ;; clobbers active deftype at earlier line
+;; (define-extern medius-simple-response type)  ;; clobbers active deftype at earlier line
 (define-extern mouse-info type)
 (define-extern nav-find-corner-portal-params type)
-(define-extern net-dme-version type)
-(define-extern net-enemy type)
-(define-extern net-enemy-transition type)
-(define-extern net-game-mgr-assassin type)
+;; (define-extern net-dme-version type)  ;; clobbers active deftype at earlier line
+;; (define-extern net-enemy type)  ;; clobbers active deftype at earlier line
+;; (define-extern net-enemy-transition type)  ;; clobbers active deftype at earlier line
+;; (define-extern net-game-mgr-assassin type)  ;; clobbers active deftype at earlier line
 ;; (define-extern net-game-mgr-race type) ;; clobbers active deftype
 (define-extern net-game-mgr-vehicle-info type)
 ;; (define-extern nospawn type) ;; clobbers active deftype
 ;;(define-extern point-tracker type)
-(define-extern race-line-get-points type)
-(define-extern received-chat-msg type)
-(define-extern red-sentry-bot type)
+;; (define-extern race-line-get-points type)  ;; clobbers active deftype at earlier line
+;; (define-extern received-chat-msg type)  ;; clobbers active deftype at earlier line
+;; (define-extern red-sentry-bot type)  ;; clobbers active deftype at earlier line
 (define-extern rigid-body-object-extra-info type)
 ;; (define-extern rigid-body-queue-manager type) ;; clobbers active deftype
 (define-extern rigid-body-surface type)
 (define-extern sce-stat type)
 (define-extern tie-near-consts type)
-(define-extern timetrial-snapshot type)
+;; (define-extern timetrial-snapshot type)  ;; clobbers active deftype at earlier line
 (define-extern udp-layer type)
-(define-extern universe-choice type)
+;; (define-extern universe-choice type)  ;; clobbers active deftype at earlier line
 (define-extern vehicle-antenna-state type)
-(define-extern vehicle-reticle-on-them type)
+;; (define-extern vehicle-reticle-on-them type)  ;; clobbers active deftype at earlier line
 (define-extern vif-stat type)
 
 ;; Auto-extern: symbols blocking top-level-login, registered as object to satisfy type-prop
@@ -59324,7 +59324,7 @@
 ;; (define-extern v-toad-shot object)  ;; clobbers active deftype
 ;; (define-extern v-wolf object) ;; clobbers active deftype
 ;; (define-extern v-wombat object) ;; clobbers active deftype
-(define-extern v-wpn-net-info object)
+;; (define-extern v-wpn-net-info object)  ;; clobbers active deftype at earlier line
 ;; (define-extern v-wpn-purple-shield object) ;; activated as deftype
 ;; (define-extern v-wpn-red-turbo-preventor object) ;; activated as deftype
 ;; (define-extern v-wpn-yellow-chain-gun object) ;; activated as deftype
