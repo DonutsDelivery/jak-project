@@ -39109,5 +39109,1439 @@
   "(method 28 font-context)": [
     [0, "a0", "font-context"],
     [0, "a1", "uint"]
+  ],
+  "(method 10 bsp-header)": [
+    [1, "gp", "bsp-header"]
+  ],
+  "(method 10 hud-effect-group)": [
+    [12, "gp", "hud-effect-group"]
+  ],
+  "(method 10 hud-effect-move)": [
+    [1, "gp", "hud-effect-move"]
+  ],
+  "(method 10 hud-effect-offscreen)": [
+    [0, "a0", "hud-effect-offscreen"]
+  ],
+  "(method 10 hud-effect-scale)": [
+    [1, "gp", "hud-effect-scale"]
+  ],
+  "(method 10 hud-effect-slide)": [
+    [1, "gp", "hud-effect-slide"]
+  ],
+  "(method 10 hud-effect-throb)": [
+    [1, "gp", "hud-effect-throb"]
+  ],
+  "(method 10 hud-item-group)": [
+    [12, "gp", "hud-item-group"]
+  ],
+  "(method 10 linked-list)": [
+    [1, "a0", "linked-list"]
+  ],
+  "(method 10 net-clan-ladder-stats-info)": [
+    [2, "gp", "net-clan-ladder-stats-info"]
+  ],
+  "(method 10 net-player-ladder-stats-info)": [
+    [2, "gp", "net-player-ladder-stats-info"]
+  ],
+  "(method 10 race-line)": [
+    [0, "a0", "race-line"]
+  ],
+  "(method 10 rigid-body-vehicle-constants)": [
+    [2, "a0", "rigid-body-vehicle-constants"]
+  ],
+  "(method 10 wvehicle)": [
+    [1, "gp", "wvehicle"]
+  ],
+  "(method 100 net-player-boss-battle)": [
+    [12, "a0", "net-player-boss-battle"]
+  ],
+  "(method 108 net-player-rushhour)": [
+    [11, "gp", "net-player-rushhour"]
+  ],
+  "(method 11 hud-effect)": [
+    [21, "gp", "hud-effect"]
+  ],
+  "(method 11 hud-effect-fade)": [
+    [1, "gp", "hud-effect-fade"]
+  ],
+  "(method 11 hud-effect-group)": [
+    [12, "gp", "hud-effect-group"]
+  ],
+  "(method 11 hud-item-group)": [
+    [12, "gp", "hud-item-group"]
+  ],
+  "(method 11 hud-text-effect-sound)": [
+    [1, "gp", "hud-text-effect-sound"]
+  ],
+  "(method 11 joint-mod)": [
+    [7, "gp", "joint-mod"]
+  ],
+  "(method 11 talker-speech-class)": [
+    [5, "a0", "talker-speech-class"]
+  ],
+  "(method 11 viewport-array)": [
+    [1, "a0", "viewport-array"]
+  ],
+  "(method 113 vehicle)": [
+    [136, "gp", "vehicle"]
+  ],
+  "(method 12 hud-effect-group)": [
+    [14, "gp", "hud-effect-group"]
+  ],
+  "(method 12 hud-item-group)": [
+    [16, "gp", "hud-item-group"]
+  ],
+  "(method 12 rapid-fire-control)": [
+    [11, "gp", "rapid-fire-control"]
+  ],
+  "(method 12 talker-speech-class)": [
+    [7, "a0", "talker-speech-class"]
+  ],
+  "(method 12 top-anim-joint-control)": [
+    [50, "gp", "top-anim-joint-control"]
+  ],
+  "(method 13 drawable-tree-instance-shrub)": [
+    [5, "a0", "drawable-tree-instance-shrub"]
+  ],
+  "(method 13 hud-effect)": [
+    [0, "a0", "hud-effect"]
+  ],
+  "(method 13 hud-effect-group)": [
+    [20, "gp", "hud-effect-group"]
+  ],
+  "(method 13 hud-item-group)": [
+    [16, "gp", "hud-item-group"]
+  ],
+  "(method 13 ocean)": [
+    [4, "gp", "ocean"]
+  ],
+  "(method 13 talker-speech-class)": [
+    [8, "a0", "talker-speech-class"]
+  ],
+  "(method 135 vehicle)": [
+    [39, "gp", "vehicle"]
+  ],
+  "(method 14 bsp-header)": [
+    [1, "gp", "bsp-header"]
+  ],
+  "(method 14 hud-effect)": [
+    [1, "gp", "hud-effect"]
+  ],
+  "(method 14 hud-effect-emit-score-icon)": [
+    [3, "gp", "hud-effect-emit-score-icon"]
+  ],
+  "(method 14 hud-effect-font-effect)": [
+    [0, "a0", "hud-effect-font-effect"]
+  ],
+  "(method 14 hud-effect-scale)": [
+    [5, "a0", "hud-effect-scale"]
+  ],
+  "(method 14 hud-item-group)": [
+    [16, "gp", "hud-item-group"]
+  ],
+  "(method 14 hud-text-effect-sound)": [
+    [1, "gp", "hud-text-effect-sound"]
+  ],
+  "(method 14 texture-page)": [
+    [2, "gp", "texture-page"]
+  ],
+  "(method 144 vehicle)": [
+    [2, "gp", "vehicle"]
+  ],
+  "(method 15 car-info-full)": [
+    [1, "gp", "car-info-full"]
+  ],
+  "(method 15 hud-item-group)": [
+    [17, "gp", "hud-item-group"]
+  ],
+  "(method 15 vehicle)": [
+    [5, "gp", "vehicle"]
+  ],
+  "(method 16 bsp-header)": [
+    [3, "a0", "bsp-header"]
+  ],
+  "(method 16 collide-shape-prim-group)": [
+    [6, "gp", "collide-shape-prim-group"]
+  ],
+  "(method 16 movie-path)": [
+    [5, "gp", "movie-path"]
+  ],
+  "(method 16 vehicle-rev-manager)": [
+    [14, "gp", "vehicle-rev-manager"]
+  ],
+  "(method 16 vehicle-section)": [
+    [0, "a0", "vehicle-section"]
+  ],
+  "(method 166 wvehicle)": [
+    [16, "gp", "wvehicle"]
+  ],
+  "(method 17 bsp-header)": [
+    [4, "gp", "bsp-header"]
+  ],
+  "(method 17 texture-pool)": [
+    [11, "gp", "texture-pool"]
+  ],
+  "(method 18 bsp-header)": [
+    [1, "gp", "bsp-header"]
+  ],
+  "(method 18 level-group)": [
+    [12, "a0", "level-group"]
+  ],
+  "(method 18 race-mesh)": [
+    [4, "gp", "race-mesh"]
+  ],
+  "(method 18 spartacus-editor)": [
+    [3, "gp", "spartacus-editor"]
+  ],
+  "(method 18 tire-trail)": [
+    [3, "gp", "tire-trail"]
+  ],
+  "(method 19 blit-displays-work)": [
+    [0, "a0", "blit-displays-work"]
+  ],
+  "(method 19 hud-artifact-indicators)": [
+    [9, "gp", "hud-artifact-indicators"]
+  ],
+  "(method 19 hud-item-string)": [
+    [5, "gp", "hud-item-string"]
+  ],
+  "(method 19 hud-points-combo)": [
+    [1, "gp", "hud-points-combo"]
+  ],
+  "(method 19 in-game-menu-hud)": [
+    [1, "gp", "in-game-menu-hud"]
+  ],
+  "(method 19 in-game-menu-hud-options)": [
+    [1, "gp", "in-game-menu-hud-options"]
+  ],
+  "(method 19 spartacus-editor)": [
+    [5, "gp", "spartacus-editor"]
+  ],
+  "(method 19 vehicle-section)": [
+    [0, "a0", "vehicle-section"]
+  ],
+  "(method 20 car-info-full)": [
+    [26, "gp", "car-info-full"]
+  ],
+  "(method 20 hud-item-group)": [
+    [14, "gp", "hud-item-group"]
+  ],
+  "(method 20 spartacus-editor)": [
+    [7, "gp", "spartacus-editor"]
+  ],
+  "(method 21 car-info-full)": [
+    [25, "gp", "car-info-full"]
+  ],
+  "(method 21 collide-cache)": [
+    [50, "a0", "collide-cache"]
+  ],
+  "(method 21 hud-item-group)": [
+    [12, "gp", "hud-item-group"]
+  ],
+  "(method 21 hud-item-sprite)": [
+    [0, "a0", "hud-item-sprite"]
+  ],
+  "(method 21 hud-item-string)": [
+    [1, "a0", "hud-item-string"]
+  ],
+  "(method 21 spartacus-editor)": [
+    [7, "gp", "spartacus-editor"]
+  ],
+  "(method 22 hud-item-group)": [
+    [12, "gp", "hud-item-group"]
+  ],
+  "(method 22 load-state)": [
+    [292, "gp", "load-state"]
+  ],
+  "(method 22 spartacus-editor)": [
+    [157, "gp", "spartacus-editor"]
+  ],
+  "(method 23 blit-displays-work)": [
+    [3, "gp", "blit-displays-work"]
+  ],
+  "(method 23 hud-item)": [
+    [0, "a0", "hud-item"]
+  ],
+  "(method 23 hud-item-group)": [
+    [20, "gp", "hud-item-group"]
+  ],
+  "(method 24 hud-indicator)": [
+    [0, "a0", "hud-indicator"]
+  ],
+  "(method 24 hud-item-sprite)": [
+    [0, "a0", "hud-item-sprite"]
+  ],
+  "(method 24 hud-item-string)": [
+    [0, "a0", "hud-item-string"]
+  ],
+  "(method 25 hud-indicator)": [
+    [0, "a0", "hud-indicator"]
+  ],
+  "(method 25 hud-item-string)": [
+    [0, "a0", "hud-item-string"]
+  ],
+  "(method 25 spartacus-editor)": [
+    [0, "a0", "spartacus-editor"]
+  ],
+  "(method 26 hang-time-hud-single)": [
+    [30, "a0", "hang-time-hud-single"]
+  ],
+  "(method 26 hud-item-string)": [
+    [0, "a0", "hud-item-string"]
+  ],
+  "(method 3 attackable-hash)": [
+    [19, "gp", "attackable-hash"]
+  ],
+  "(method 3 bsp-header)": [
+    [34, "gp", "bsp-header"]
+  ],
+  "(method 3 cloth-on-skeleton)": [
+    [66, "gp", "cloth-on-skeleton"]
+  ],
+  "(method 3 cloth-system)": [
+    [66, "gp", "cloth-system"]
+  ],
+  "(method 3 index-sprite-list-menu-info)": [
+    [116, "gp", "index-sprite-list-menu-info"]
+  ],
+  "(method 3 manipy)": [
+    [12, "gp", "manipy"]
+  ],
+  "(method 3 net-process-class-info)": [
+    [35, "gp", "net-process-class-info"]
+  ],
+  "(method 3 talker)": [
+    [17, "gp", "talker"]
+  ],
+  "(method 3 vif-disasm-element)": [
+    [22, "a0", "vif-disasm-element"]
+  ],
+  "(method 31 in-game-hud)": [
+    [1, "gp", "in-game-hud"]
+  ],
+  "(method 31 process-nettable)": [
+    [3, "gp", "process-nettable"]
+  ],
+  "(method 32 net-simple-destruct)": [
+    [2, "gp", "net-simple-destruct"]
+  ],
+  "(method 32 process-nettable)": [
+    [4, "gp", "process-nettable"]
+  ],
+  "(method 35 net-world)": [
+    [3, "gp", "net-world"]
+  ],
+  "(method 43 collide-shape)": [
+    [28, "gp", "collide-shape"]
+  ],
+  "(method 44 process-drawable)": [
+    [2, "gp", "process-drawable"]
+  ],
+  "(method 45 process-drawable)": [
+    [0, "a0", "process-drawable"]
+  ],
+  "(method 46 process-drawable)": [
+    [4, "gp", "process-drawable"]
+  ],
+  "(method 47 process-drawable)": [
+    [1, "gp", "process-drawable"]
+  ],
+  "(method 48 wvehicle)": [
+    [1, "gp", "wvehicle"]
+  ],
+  "(method 49 eco-mgr)": [
+    [6, "a0", "eco-mgr"]
+  ],
+  "(method 49 net-game-mgr-boss-battle)": [
+    [1, "gp", "net-game-mgr-boss-battle"]
+  ],
+  "(method 50 eco-mgr)": [
+    [6, "a0", "eco-mgr"]
+  ],
+  "(method 50 joint-exploder)": [
+    [0, "a0", "joint-exploder"]
+  ],
+  "(method 50 process-focusable)": [
+    [1, "a0", "process-focusable"]
+  ],
+  "(method 51 collide-shape)": [
+    [21, "a0", "collide-shape"]
+  ],
+  "(method 51 helmet-garage)": [
+    [2, "gp", "helmet-garage"]
+  ],
+  "(method 51 helmet-hud)": [
+    [2, "gp", "helmet-hud"]
+  ],
+  "(method 51 net-powerup)": [
+    [0, "a0", "net-powerup"]
+  ],
+  "(method 51 process-focusable)": [
+    [1, "a0", "process-focusable"]
+  ],
+  "(method 51 target)": [
+    [0, "a0", "target"]
+  ],
+  "(method 52 joint-exploder)": [
+    [3, "gp", "joint-exploder"]
+  ],
+  "(method 52 process-focusable)": [
+    [0, "a0", "process-focusable"]
+  ],
+  "(method 52 water-anim)": [
+    [0, "a0", "water-anim"]
+  ],
+  "(method 53 powerup-draw)": [
+    [10, "gp", "powerup-draw"]
+  ],
+  "(method 53 process-focusable)": [
+    [0, "a0", "process-focusable"]
+  ],
+  "(method 54 net-game-mgr-boss-battle)": [
+    [3, "a0", "net-game-mgr-boss-battle"]
+  ],
+  "(method 54 net-powerup)": [
+    [1, "gp", "net-powerup"]
+  ],
+  "(method 54 task-arrow)": [
+    [1, "gp", "task-arrow"]
+  ],
+  "(method 54 wrong-way)": [
+    [0, "a0", "wrong-way"]
+  ],
+  "(method 55 joint-exploder)": [
+    [4, "gp", "joint-exploder"]
+  ],
+  "(method 55 scene-player)": [
+    [505, "gp", "scene-player"]
+  ],
+  "(method 56 joint-exploder)": [
+    [5, "gp", "joint-exploder"]
+  ],
+  "(method 56 powerup-draw)": [
+    [0, "a0", "powerup-draw"]
+  ],
+  "(method 56 water-anim)": [
+    [3, "gp", "water-anim"]
+  ],
+  "(method 57 joint-exploder)": [
+    [0, "a0", "joint-exploder"]
+  ],
+  "(method 57 pov-camera)": [
+    [0, "a0", "pov-camera"]
+  ],
+  "(method 57 rigid-body-object)": [
+    [0, "a0", "rigid-body-object"]
+  ],
+  "(method 58 net-mgr)": [
+    [11, "a0", "net-mgr"]
+  ],
+  "(method 58 water-anim)": [
+    [7, "gp", "water-anim"]
+  ],
+  "(method 60 net-player)": [
+    [4, "a0", "net-player"]
+  ],
+  "(method 61 wvehicle)": [
+    [2, "gp", "wvehicle"]
+  ],
+  "(method 62 rigid-body-object)": [
+    [5, "a0", "rigid-body-object"]
+  ],
+  "(method 63 rigid-body-object)": [
+    [0, "a0", "rigid-body-object"]
+  ],
+  "(method 64 rigid-body-object)": [
+    [10, "gp", "rigid-body-object"]
+  ],
+  "(method 66 vehicle-debris)": [
+    [1, "a0", "vehicle-debris"]
+  ],
+  "(method 68 net-simple-destruct)": [
+    [2, "gp", "net-simple-destruct"]
+  ],
+  "(method 68 vehicle)": [
+    [3, "gp", "vehicle"]
+  ],
+  "(method 69 projectile)": [
+    [2, "gp", "projectile"]
+  ],
+  "(method 69 rigid-body-object)": [
+    [1, "gp", "rigid-body-object"]
+  ],
+  "(method 69 v-mongoose)": [
+    [8, "gp", "v-mongoose"]
+  ],
+  "(method 7 cloth-system)": [
+    [17, "gp", "cloth-system"]
+  ],
+  "(method 7 collide-shape-moving)": [
+    [0, "a0", "collide-shape-moving"]
+  ],
+  "(method 7 driver)": [
+    [2, "gp", "driver"]
+  ],
+  "(method 7 editable-array)": [
+    [0, "a0", "editable-array"]
+  ],
+  "(method 7 joint-exploder)": [
+    [61, "a0", "joint-exploder"]
+  ],
+  "(method 7 joint-mod)": [
+    [0, "a0", "joint-mod"]
+  ],
+  "(method 7 manipy)": [
+    [0, "a0", "manipy"]
+  ],
+  "(method 7 path-control)": [
+    [0, "a0", "path-control"]
+  ],
+  "(method 7 spartacus-editor)": [
+    [36, "gp", "spartacus-editor"]
+  ],
+  "(method 7 vol-control)": [
+    [0, "a0", "vol-control"]
+  ],
+  "(method 7 wvehicle)": [
+    [28, "a0", "wvehicle"]
+  ],
+  "(method 70 net-player)": [
+    [1, "a0", "net-player"]
+  ],
+  "(method 71 construction-object)": [
+    [1, "gp", "construction-object"]
+  ],
+  "(method 71 vehicle)": [
+    [1, "gp", "vehicle"]
+  ],
+  "(method 72 rigid-body-object)": [
+    [1, "gp", "rigid-body-object"]
+  ],
+  "(method 72 vehicle)": [
+    [1, "gp", "vehicle"]
+  ],
+  "(method 73 rigid-body-object)": [
+    [1, "a0", "rigid-body-object"]
+  ],
+  "(method 73 vehicle)": [
+    [1, "a0", "vehicle"]
+  ],
+  "(method 78 net-world)": [
+    [0, "a0", "net-world"]
+  ],
+  "(method 80 vehicle)": [
+    [2, "gp", "vehicle"]
+  ],
+  "(method 80 wvehicle)": [
+    [33, "gp", "wvehicle"]
+  ],
+  "(method 86 vehicle)": [
+    [10, "gp", "vehicle"]
+  ],
+  "(method 87 rigid-body-object)": [
+    [0, "a0", "rigid-body-object"]
+  ],
+  "(method 87 vehicle)": [
+    [1, "gp", "vehicle"]
+  ],
+  "(method 87 vehicle-debris)": [
+    [3, "gp", "vehicle-debris"]
+  ],
+  "(method 88 vehicle)": [
+    [3, "gp", "vehicle"]
+  ],
+  "(method 88 vehicle-debris)": [
+    [2, "gp", "vehicle-debris"]
+  ],
+  "(method 89 construction-object)": [
+    [3, "gp", "construction-object"]
+  ],
+  "(method 89 net-player)": [
+    [0, "a0", "net-player"]
+  ],
+  "(method 9 camera-facing-quad)": [
+    [2, "gp", "camera-facing-quad"]
+  ],
+  "(method 9 drawable-tree-instance-shrub)": [
+    [1, "gp", "drawable-tree-instance-shrub"]
+  ],
+  "(method 9 hud-effect-group)": [
+    [12, "gp", "hud-effect-group"]
+  ],
+  "(method 9 hud-effect-scale)": [
+    [1, "gp", "hud-effect-scale"]
+  ],
+  "(method 9 hud-effect-throb)": [
+    [1, "gp", "hud-effect-throb"]
+  ],
+  "(method 9 hud-indicator)": [
+    [5, "gp", "hud-indicator"]
+  ],
+  "(method 9 hud-item-group)": [
+    [5, "gp", "hud-item-group"]
+  ],
+  "(method 9 in-game-menu-hud-options)": [
+    [62, "gp", "in-game-menu-hud-options"]
+  ],
+  "(method 9 nav-mesh-editable)": [
+    [8, "gp", "nav-mesh-editable"]
+  ],
+  "(method 9 nav-mesh-poly)": [
+    [8, "gp", "nav-mesh-poly"]
+  ],
+  "(method 9 rapid-fire-control)": [
+    [2, "a0", "rapid-fire-control"]
+  ],
+  "(method 9 rigid-body-object-constants)": [
+    [1, "a0", "rigid-body-object-constants"]
+  ],
+  "(method 9 texture-page)": [
+    [0, "a0", "texture-page"]
+  ],
+  "(method 90 construction-object)": [
+    [4, "gp", "construction-object"]
+  ],
+  "(method 0 collide-shape)": [
+    [25, "gp", "collide-shape"]
+  ],
+  "(method 10 nav-control)": [
+    [0, "a0", "nav-control"]
+  ],
+  "(method 10 nav-mesh-editable)": [
+    [1, "gp", "nav-mesh-editable"]
+  ],
+  "(method 10 oil-trail)": [
+    [11, "gp", "oil-trail"]
+  ],
+  "(method 10 sparks-work)": [
+    [2, "a0", "sparks-work"]
+  ],
+  "(method 103 net-player-race)": [
+    [0, "gp", "net-player-race"]
+  ],
+  "(method 104 net-player-race)": [
+    [0, "a0", "net-player-race"]
+  ],
+  "(method 105 net-player-race)": [
+    [1, "gp", "net-player-race"]
+  ],
+  "(method 106 net-player-race)": [
+    [2, "a0", "net-player-race"]
+  ],
+  "(method 107 net-player-race)": [
+    [0, "a0", "net-player-race"]
+  ],
+  "(method 11 nav-control)": [
+    [1, "a0", "nav-control"]
+  ],
+  "(method 11 nav-mesh-editable)": [
+    [0, "a0", "nav-mesh-editable"]
+  ],
+  "(method 11 nav-mesh-poly)": [
+    [0, "a0", "nav-mesh-poly"]
+  ],
+  "(method 11 sparks-work)": [
+    [1, "a0", "sparks-work"]
+  ],
+  "(method 110 net-player-deathrace)": [
+    [1, "a0", "net-player-deathrace"]
+  ],
+  "(method 110 net-player-rushhour)": [
+    [1, "a0", "net-player-rushhour"]
+  ],
+  "(method 12 nav-mesh-editable)": [
+    [85, "gp", "nav-mesh-editable"]
+  ],
+  "(method 12 nav-mesh-poly)": [
+    [0, "a0", "nav-mesh-poly"]
+  ],
+  "(method 12 vehicle-section)": [
+    [0, "a0", "vehicle-section"]
+  ],
+  "(method 13 nav-mesh-editable)": [
+    [0, "gp", "nav-mesh-editable"]
+  ],
+  "(method 13 nav-mesh-poly)": [
+    [10, "a0", "nav-mesh-poly"]
+  ],
+  "(method 13 oil-trail)": [
+    [3, "gp", "oil-trail"]
+  ],
+  "(method 14 cloth-system)": [
+    [1, "a0", "cloth-system"]
+  ],
+  "(method 14 nav-mesh-editable)": [
+    [47, "gp", "nav-mesh-editable"]
+  ],
+  "(method 14 nav-mesh-poly)": [
+    [3, "gp", "nav-mesh-poly"]
+  ],
+  "(method 15 artifact)": [
+    [8, "gp", "artifact"]
+  ],
+  "(method 15 nav-control)": [
+    [1, "a0", "nav-control"]
+  ],
+  "(method 15 nav-mesh-editable)": [
+    [1, "gp", "nav-mesh-editable"]
+  ],
+  "(method 15 net-powerup)": [
+    [3, "a0", "net-powerup"]
+  ],
+  "(method 15 red-sentry-bot)": [
+    [4, "gp", "red-sentry-bot"]
+  ],
+  "(method 16 nav-mesh-editable)": [
+    [3, "gp", "nav-mesh-editable"]
+  ],
+  "(method 16 process-nettable)": [
+    [0, "a0", "process-nettable"]
+  ],
+  "(method 16 wvehicle)": [
+    [4, "gp", "wvehicle"]
+  ],
+  "(method 17 lightning-tracker)": [
+    [0, "gp", "lightning-tracker"]
+  ],
+  "(method 17 nav-control)": [
+    [1, "a0", "nav-control"]
+  ],
+  "(method 17 net-player)": [
+    [4, "gp", "net-player"]
+  ],
+  "(method 17 net-powerup)": [
+    [19, "gp", "net-powerup"]
+  ],
+  "(method 17 vehicle)": [
+    [1, "a0", "vehicle"]
+  ],
+  "(method 18 hud-player-positions)": [
+    [4, "a0", "hud-player-positions"]
+  ],
+  "(method 18 hud-player-progress)": [
+    [4, "a0", "hud-player-progress"]
+  ],
+  "(method 18 nav-mesh-editable)": [
+    [3, "gp", "nav-mesh-editable"]
+  ],
+  "(method 18 part-tracker)": [
+    [11, "a0", "part-tracker"]
+  ],
+  "(method 18 process-nettable)": [
+    [0, "a0", "process-nettable"]
+  ],
+  "(method 18 red-sentry-bot)": [
+    [1, "a0", "red-sentry-bot"]
+  ],
+  "(method 18 v-toad-shot)": [
+    [2, "a0", "v-toad-shot"]
+  ],
+  "(method 19 hud-indicator)": [
+    [1, "a0", "hud-indicator"]
+  ],
+  "(method 19 process-nettable)": [
+    [1, "a0", "process-nettable"]
+  ],
+  "(method 20 http-downloader)": [
+    [16, "gp", "http-downloader"]
+  ],
+  "(method 20 nav-control)": [
+    [1, "a0", "nav-control"]
+  ],
+  "(method 20 net-powerup)": [
+    [0, "a0", "net-powerup"]
+  ],
+  "(method 20 red-sentry-bot)": [
+    [0, "a0", "red-sentry-bot"]
+  ],
+  "(method 23 nav-control)": [
+    [0, "a0", "nav-control"]
+  ],
+  "(method 24 hud-player-indicators)": [
+    [0, "a0", "hud-player-indicators"]
+  ],
+  "(method 24 net-process-mgr)": [
+    [18, "gp", "net-process-mgr"]
+  ],
+  "(method 25 load-state)": [
+    [2, "a0", "load-state"]
+  ],
+  "(method 25 net-process-mgr)": [
+    [0, "a0", "net-process-mgr"]
+  ],
+  "(method 26 net-process-mgr)": [
+    [0, "a0", "net-process-mgr"]
+  ],
+  "(method 27 net-process-mgr)": [
+    [4, "a0", "net-process-mgr"]
+  ],
+  "(method 27 process-nettable)": [
+    [5, "a0", "process-nettable"]
+  ],
+  "(method 28 nav-control)": [
+    [0, "a0", "nav-control"]
+  ],
+  "(method 28 nav-mesh)": [
+    [7, "gp", "nav-mesh"]
+  ],
+  "(method 28 net-process-mgr)": [
+    [4, "a0", "net-process-mgr"]
+  ],
+  "(method 29 nav-control)": [
+    [0, "a0", "nav-control"]
+  ],
+  "(method 3 nav-graph-editor)": [
+    [152, "gp", "nav-graph-editor"]
+  ],
+  "(method 3 try-to-look-at-info)": [
+    [2, "a0", "try-to-look-at-info"]
+  ],
+  "(method 30 nav-graph-editor)": [
+    [0, "gp", "nav-graph-editor"]
+  ],
+  "(method 30 net-process-mgr)": [
+    [5, "a0", "net-process-mgr"]
+  ],
+  "(method 31 net-process-mgr)": [
+    [2, "a0", "net-process-mgr"]
+  ],
+  "(method 32 net-process-mgr)": [
+    [1, "a0", "net-process-mgr"]
+  ],
+  "(method 34 nav-graph-editor)": [
+    [0, "a0", "nav-graph-editor"]
+  ],
+  "(method 35 eco-mgr)": [
+    [1, "a0", "eco-mgr"]
+  ],
+  "(method 35 net-enemy)": [
+    [0, "a0", "net-enemy"]
+  ],
+  "(method 35 net-game-mgr)": [
+    [6, "gp", "net-game-mgr"]
+  ],
+  "(method 35 net-player)": [
+    [2, "a0", "net-player"]
+  ],
+  "(method 35 net-powerup)": [
+    [48, "a0", "net-powerup"]
+  ],
+  "(method 35 net-projectile)": [
+    [116, "a0", "net-projectile"]
+  ],
+  "(method 35 net-simple-destruct-mgr)": [
+    [1, "a0", "net-simple-destruct-mgr"]
+  ],
+  "(method 35 net-test)": [
+    [7, "gp", "net-test"]
+  ],
+  "(method 35 red-sentry-bot)": [
+    [68, "a0", "red-sentry-bot"]
+  ],
+  "(method 35 sphere-hash)": [
+    [2, "a0", "sphere-hash"]
+  ],
+  "(method 36 net-enemy)": [
+    [0, "a0", "net-enemy"]
+  ],
+  "(method 36 net-game-mgr)": [
+    [0, "a0", "net-game-mgr"]
+  ],
+  "(method 36 rigid-body-control)": [
+    [2, "a0", "rigid-body-control"]
+  ],
+  "(method 37 nav-graph-editor)": [
+    [0, "a0", "nav-graph-editor"]
+  ],
+  "(method 38 net-process-mgr)": [
+    [28, "gp", "net-process-mgr"]
+  ],
+  "(method 38 process-nettable)": [
+    [2, "a0", "process-nettable"]
+  ],
+  "(method 39 nav-graph-editor)": [
+    [1, "a0", "nav-graph-editor"]
+  ],
+  "(method 39 net-process-mgr)": [
+    [4, "a0", "net-process-mgr"]
+  ],
+  "(method 39 process-nettable)": [
+    [2, "a0", "process-nettable"]
+  ],
+  "(method 40 nav-graph-editor)": [
+    [1, "a0", "nav-graph-editor"]
+  ],
+  "(method 40 net-process-mgr)": [
+    [1, "a0", "net-process-mgr"]
+  ],
+  "(method 41 nav-graph-editor)": [
+    [1, "a0", "nav-graph-editor"]
+  ],
+  "(method 42 nav-control)": [
+    [0, "a0", "nav-control"]
+  ],
+  "(method 42 nav-graph-editor)": [
+    [1, "a0", "nav-graph-editor"]
+  ],
+  "(method 43 nav-graph-editor)": [
+    [1, "a0", "nav-graph-editor"]
+  ],
+  "(method 43 process-drawable)": [
+    [31, "a0", "process-drawable"]
+  ],
+  "(method 44 nav-graph-editor)": [
+    [1, "a0", "nav-graph-editor"]
+  ],
+  "(method 44 net-simple-destruct-mgr)": [
+    [2, "a0", "net-simple-destruct-mgr"]
+  ],
+  "(method 45 net-player)": [
+    [24, "a0", "net-player"]
+  ],
+  "(method 47 eco-mgr)": [
+    [6, "a0", "eco-mgr"]
+  ],
+  "(method 47 nav-graph-editor)": [
+    [0, "gp", "nav-graph-editor"]
+  ],
+  "(method 47 net-process-mgr)": [
+    [2, "a0", "net-process-mgr"]
+  ],
+  "(method 48 nav-graph-editor)": [
+    [0, "gp", "nav-graph-editor"]
+  ],
+  "(method 48 net-player)": [
+    [5, "gp", "net-player"]
+  ],
+  "(method 48 net-player-artifact)": [
+    [5, "a0", "net-player-artifact"]
+  ],
+  "(method 48 net-player-boss-battle)": [
+    [7, "gp", "net-player-boss-battle"]
+  ],
+  "(method 48 net-player-deathrace)": [
+    [2, "a0", "net-player-deathrace"]
+  ],
+  "(method 48 net-player-rushhour)": [
+    [2, "a0", "net-player-rushhour"]
+  ],
+  "(method 48 net-process-mgr)": [
+    [0, "a0", "net-process-mgr"]
+  ],
+  "(method 49 nav-graph-editor)": [
+    [4, "gp", "nav-graph-editor"]
+  ],
+  "(method 49 net-process-mgr)": [
+    [3, "a0", "net-process-mgr"]
+  ],
+  "(method 50 nav-graph-editor)": [
+    [4, "gp", "nav-graph-editor"]
+  ],
+  "(method 50 net-enemy)": [
+    [0, "a0", "net-enemy"]
+  ],
+  "(method 51 editable-player)": [
+    [1, "gp", "editable-player"]
+  ],
+  "(method 51 nav-graph-editor)": [
+    [6, "gp", "nav-graph-editor"]
+  ],
+  "(method 52 artifact)": [
+    [2, "a0", "artifact"]
+  ],
+  "(method 52 editable-player)": [
+    [57, "gp", "editable-player"]
+  ],
+  "(method 52 net-mgr)": [
+    [56, "gp", "net-mgr"]
+  ],
+  "(method 52 simple-prim)": [
+    [0, "a0", "simple-prim"]
+  ],
+  "(method 52 simple-prim-zbuf-mask)": [
+    [0, "a0", "simple-prim-zbuf-mask"]
+  ],
+  "(method 53 artifact-draw)": [
+    [3, "a0", "artifact-draw"]
+  ],
+  "(method 53 editable-player)": [
+    [0, "gp", "editable-player"]
+  ],
+  "(method 53 nav-graph-editor)": [
+    [0, "a0", "nav-graph-editor"]
+  ],
+  "(method 53 net-game-mgr)": [
+    [6, "a0", "net-game-mgr"]
+  ],
+  "(method 53 net-process-mgr)": [
+    [3, "a0", "net-process-mgr"]
+  ],
+  "(method 54 joint-exploder)": [
+    [2, "a0", "joint-exploder"]
+  ],
+  "(method 54 nav-graph-editor)": [
+    [0, "a0", "nav-graph-editor"]
+  ],
+  "(method 54 nav-mesh-editor)": [
+    [37, "gp", "nav-mesh-editor"]
+  ],
+  "(method 54 net-player-deathmatch)": [
+    [3, "a0", "net-player-deathmatch"]
+  ],
+  "(method 54 net-player-race)": [
+    [1, "a0", "net-player-race"]
+  ],
+  "(method 54 net-process-mgr)": [
+    [3, "a0", "net-process-mgr"]
+  ],
+  "(method 54 net-world)": [
+    [77, "a0", "net-world"]
+  ],
+  "(method 54 simple-prim)": [
+    [7, "gp", "simple-prim"]
+  ],
+  "(method 55 nav-graph-editor)": [
+    [0, "a0", "nav-graph-editor"]
+  ],
+  "(method 55 nav-mesh-editor)": [
+    [0, "a0", "nav-mesh-editor"]
+  ],
+  "(method 55 net-player)": [
+    [1, "a0", "net-player"]
+  ],
+  "(method 55 net-process-mgr)": [
+    [4, "a0", "net-process-mgr"]
+  ],
+  "(method 55 simple-prim-particle-binding)": [
+    [0, "a0", "simple-prim-particle-binding"]
+  ],
+  "(method 55 v-wpn-purple-shield)": [
+    [1, "a0", "v-wpn-purple-shield"]
+  ],
+  "(method 55 v-wpn-red-drone-gun)": [
+    [1, "a0", "v-wpn-red-drone-gun"]
+  ],
+  "(method 55 v-wpn-red-mine-launcher)": [
+    [1, "a0", "v-wpn-red-mine-launcher"]
+  ],
+  "(method 55 v-wpn-red-oil)": [
+    [1, "a0", "v-wpn-red-oil"]
+  ],
+  "(method 55 v-wpn-red-sentry-gun)": [
+    [1, "a0", "v-wpn-red-sentry-gun"]
+  ],
+  "(method 55 v-wpn-red-smoke)": [
+    [1, "a0", "v-wpn-red-smoke"]
+  ],
+  "(method 55 v-wpn-red-tractor-beam)": [
+    [1, "a0", "v-wpn-red-tractor-beam"]
+  ],
+  "(method 55 v-wpn-red-turbo-preventor)": [
+    [1, "a0", "v-wpn-red-turbo-preventor"]
+  ],
+  "(method 56 nav-mesh-editor)": [
+    [0, "a0", "nav-mesh-editor"]
+  ],
+  "(method 56 net-game-mgr)": [
+    [12, "a0", "net-game-mgr"]
+  ],
+  "(method 56 net-player-deathmatch)": [
+    [2, "a0", "net-player-deathmatch"]
+  ],
+  "(method 56 net-process-mgr)": [
+    [4, "a0", "net-process-mgr"]
+  ],
+  "(method 57 nav-mesh-editor)": [
+    [0, "gp", "nav-mesh-editor"]
+  ],
+  "(method 57 net-enemy)": [
+    [0, "a0", "net-enemy"]
+  ],
+  "(method 57 net-game-mgr)": [
+    [3, "a0", "net-game-mgr"]
+  ],
+  "(method 57 net-game-mgr-artifact)": [
+    [14, "a0", "net-game-mgr-artifact"]
+  ],
+  "(method 57 net-game-mgr-deathmatch)": [
+    [5, "a0", "net-game-mgr-deathmatch"]
+  ],
+  "(method 57 net-game-mgr-race)": [
+    [10, "gp", "net-game-mgr-race"]
+  ],
+  "(method 58 nav-graph-editor)": [
+    [2, "gp", "nav-graph-editor"]
+  ],
+  "(method 58 net-game-mgr)": [
+    [4, "a0", "net-game-mgr"]
+  ],
+  "(method 58 net-game-mgr-boss-battle)": [
+    [13, "a0", "net-game-mgr-boss-battle"]
+  ],
+  "(method 58 net-game-mgr-deathmatch)": [
+    [13, "a0", "net-game-mgr-deathmatch"]
+  ],
+  "(method 58 net-game-mgr-race)": [
+    [13, "a0", "net-game-mgr-race"]
+  ],
+  "(method 58 net-game-mgr-rushhour)": [
+    [13, "a0", "net-game-mgr-rushhour"]
+  ],
+  "(method 59 basic-list-selection)": [
+    [1, "a0", "basic-list-selection"]
+  ],
+  "(method 59 dropdown-item)": [
+    [24, "gp", "dropdown-item"]
+  ],
+  "(method 59 index-sprite-list-menu)": [
+    [2, "gp", "index-sprite-list-menu"]
+  ],
+  "(method 59 item-list-selection)": [
+    [0, "gp", "item-list-selection"]
+  ],
+  "(method 59 item-num-selection)": [
+    [4, "gp", "item-num-selection"]
+  ],
+  "(method 59 map-menu)": [
+    [4, "gp", "map-menu"]
+  ],
+  "(method 59 nav-graph-editor)": [
+    [0, "a0", "nav-graph-editor"]
+  ],
+  "(method 59 options-bar-indicator)": [
+    [8, "gp", "options-bar-indicator"]
+  ],
+  "(method 59 prim-strip-menu)": [
+    [1, "gp", "prim-strip-menu"]
+  ],
+  "(method 59 sprite-menu)": [
+    [4, "gp", "sprite-menu"]
+  ],
+  "(method 59 string-menu)": [
+    [2, "gp", "string-menu"]
+  ],
+  "(method 60 big-text-menu)": [
+    [7, "gp", "big-text-menu"]
+  ],
+  "(method 60 chat-window-menu)": [
+    [0, "gp", "chat-window-menu"]
+  ],
+  "(method 60 index-sprite-list-menu)": [
+    [1, "a0", "index-sprite-list-menu"]
+  ],
+  "(method 60 nav-graph-editor)": [
+    [2, "a0", "nav-graph-editor"]
+  ],
+  "(method 60 net-game-mgr)": [
+    [85, "a0", "net-game-mgr"]
+  ],
+  "(method 60 prim-strip-menu)": [
+    [0, "gp", "prim-strip-menu"]
+  ],
+  "(method 60 sprite-ptr-menu)": [
+    [19, "gp", "sprite-ptr-menu"]
+  ],
+  "(method 60 string-menu)": [
+    [1, "gp", "string-menu"]
+  ],
+  "(method 61 dropdown-item)": [
+    [7, "gp", "dropdown-item"]
+  ],
+  "(method 61 nav-graph-editor)": [
+    [2, "a0", "nav-graph-editor"]
+  ],
+  "(method 61 net-game-mgr)": [
+    [6, "a0", "net-game-mgr"]
+  ],
+  "(method 61 net-player-race)": [
+    [0, "a0", "net-player-race"]
+  ],
+  "(method 61 options-bar-indicator)": [
+    [8, "gp", "options-bar-indicator"]
+  ],
+  "(method 61 vehicle)": [
+    [1, "a0", "vehicle"]
+  ],
+  "(method 61 vehicle-wheel)": [
+    [2, "gp", "vehicle-wheel"]
+  ],
+  "(method 62 basic-list-selection)": [
+    [6, "gp", "basic-list-selection"]
+  ],
+  "(method 62 nav-graph-editor)": [
+    [2, "gp", "nav-graph-editor"]
+  ],
+  "(method 62 net-enemy)": [
+    [2, "a0", "net-enemy"]
+  ],
+  "(method 62 net-player)": [
+    [1, "a0", "net-player"]
+  ],
+  "(method 62 wvehicle)": [
+    [2, "a0", "wvehicle"]
+  ],
+  "(method 63 base-menu)": [
+    [1, "gp", "base-menu"]
+  ],
+  "(method 63 nav-graph-editor)": [
+    [0, "gp", "nav-graph-editor"]
+  ],
+  "(method 63 net-player)": [
+    [1, "a0", "net-player"]
+  ],
+  "(method 63 net-simple-destruct)": [
+    [2, "a0", "net-simple-destruct"]
+  ],
+  "(method 64 base-menu)": [
+    [0, "gp", "base-menu"]
+  ],
+  "(method 64 nav-graph-editor)": [
+    [4, "a0", "nav-graph-editor"]
+  ],
+  "(method 64 net-player)": [
+    [1, "a0", "net-player"]
+  ],
+  "(method 64 red-sentry-bot)": [
+    [7, "a0", "red-sentry-bot"]
+  ],
+  "(method 64 vehicle)": [
+    [2, "a0", "vehicle"]
+  ],
+  "(method 64 wvehicle)": [
+    [7, "gp", "wvehicle"]
+  ],
+  "(method 65 index-sprite-list-menu)": [
+    [0, "gp", "index-sprite-list-menu"]
+  ],
+  "(method 65 map-menu)": [
+    [3, "a0", "map-menu"]
+  ],
+  "(method 65 nav-graph-editor)": [
+    [0, "a0", "nav-graph-editor"]
+  ],
+  "(method 65 net-player)": [
+    [2, "a0", "net-player"]
+  ],
+  "(method 65 selection-menu-manager)": [
+    [2, "gp", "selection-menu-manager"]
+  ],
+  "(method 65 sprite-menu)": [
+    [134, "gp", "sprite-menu"]
+  ],
+  "(method 66 big-text-menu)": [
+    [4, "gp", "big-text-menu"]
+  ],
+  "(method 66 index-sprite-list-menu)": [
+    [3, "gp", "index-sprite-list-menu"]
+  ],
+  "(method 66 nav-graph-editor)": [
+    [0, "a0", "nav-graph-editor"]
+  ],
+  "(method 66 net-player)": [
+    [2, "a0", "net-player"]
+  ],
+  "(method 66 prim-strip-menu)": [
+    [225, "gp", "prim-strip-menu"]
+  ],
+  "(method 66 rigid-body-object)": [
+    [0, "a0", "rigid-body-object"]
+  ],
+  "(method 66 vehicle-wheel)": [
+    [1, "a0", "vehicle-wheel"]
+  ],
+  "(method 67 basic-list-selection)": [
+    [4, "gp", "basic-list-selection"]
+  ],
+  "(method 67 dropdown-item)": [
+    [4, "gp", "dropdown-item"]
+  ],
+  "(method 67 dynamic-string-menu)": [
+    [7, "gp", "dynamic-string-menu"]
+  ],
+  "(method 67 games-list-selection)": [
+    [12, "gp", "games-list-selection"]
+  ],
+  "(method 67 item-list-selection)": [
+    [4, "gp", "item-list-selection"]
+  ],
+  "(method 67 item-num-max-selection)": [
+    [4, "gp", "item-num-max-selection"]
+  ],
+  "(method 67 item-num-selection)": [
+    [4, "gp", "item-num-selection"]
+  ],
+  "(method 67 net-player)": [
+    [1, "a0", "net-player"]
+  ],
+  "(method 67 player-ct-string-menu)": [
+    [10, "gp", "player-ct-string-menu"]
+  ],
+  "(method 67 rigid-body-object)": [
+    [0, "a0", "rigid-body-object"]
+  ],
+  "(method 67 string-list-selection)": [
+    [4, "gp", "string-list-selection"]
+  ],
+  "(method 67 string-menu)": [
+    [170, "gp", "string-menu"]
+  ],
+  "(method 68 nav-graph-editor)": [
+    [0, "a0", "nav-graph-editor"]
+  ],
+  "(method 68 net-game-mgr)": [
+    [64, "a0", "net-game-mgr"]
+  ],
+  "(method 68 net-player)": [
+    [1, "a0", "net-player"]
+  ],
+  "(method 68 rigid-body-object)": [
+    [1, "a0", "rigid-body-object"]
+  ],
+  "(method 68 string-menu)": [
+    [0, "gp", "string-menu"]
+  ],
+  "(method 69 net-simple-destruct)": [
+    [1, "a0", "net-simple-destruct"]
+  ],
+  "(method 69 v-tiger)": [
+    [7, "gp", "v-tiger"]
+  ],
+  "(method 69 vehicle)": [
+    [7, "gp", "vehicle"]
+  ],
+  "(method 69 wvehicle)": [
+    [7, "gp", "wvehicle"]
+  ],
+  "(method 70 net-player-race)": [
+    [0, "a0", "net-player-race"]
+  ],
+  "(method 71 net-world)": [
+    [349, "a0", "net-world"]
+  ],
+  "(method 71 rigid-body-object)": [
+    [1, "a0", "rigid-body-object"]
+  ],
+  "(method 72 net-game-mgr-assassin)": [
+    [22, "a0", "net-game-mgr-assassin"]
+  ],
+  "(method 72 net-world)": [
+    [19, "a0", "net-world"]
+  ],
+  "(method 73 net-world)": [
+    [2, "a0", "net-world"]
+  ],
+  "(method 74 net-enemy)": [
+    [3, "gp", "net-enemy"]
+  ],
+  "(method 74 net-projectile)": [
+    [1, "a0", "net-projectile"]
+  ],
+  "(method 75 v-toad-shot)": [
+    [0, "a0", "v-toad-shot"]
+  ],
+  "(method 76 net-player)": [
+    [34, "a0", "net-player"]
+  ],
+  "(method 77 net-world)": [
+    [98, "a0", "net-world"]
+  ],
+  "(method 77 rigid-body-object)": [
+    [0, "a0", "rigid-body-object"]
+  ],
+  "(method 77 vehicle)": [
+    [0, "a0", "vehicle"]
+  ],
+  "(method 81 net-game-mgr-deathmatch)": [
+    [30, "gp", "net-game-mgr-deathmatch"]
+  ],
+  "(method 81 net-player)": [
+    [0, "a0", "net-player"]
+  ],
+  "(method 82 net-enemy)": [
+    [0, "a0", "net-enemy"]
+  ],
+  "(method 82 net-game-mgr-deathmatch)": [
+    [5, "a0", "net-game-mgr-deathmatch"]
+  ],
+  "(method 82 net-player-race)": [
+    [1, "a0", "net-player-race"]
+  ],
+  "(method 82 rigid-body-object)": [
+    [6, "a0", "rigid-body-object"]
+  ],
+  "(method 83 net-enemy)": [
+    [1, "gp", "net-enemy"]
+  ],
+  "(method 83 net-game-mgr-deathmatch)": [
+    [3, "a0", "net-game-mgr-deathmatch"]
+  ],
+  "(method 83 net-player-race)": [
+    [1, "a0", "net-player-race"]
+  ],
+  "(method 83 rigid-body-object)": [
+    [4, "a0", "rigid-body-object"]
+  ],
+  "(method 85 net-enemy)": [
+    [0, "a0", "net-enemy"]
+  ],
+  "(method 85 net-game-mgr-artifact)": [
+    [30, "gp", "net-game-mgr-artifact"]
+  ],
+  "(method 85 net-game-mgr-race)": [
+    [6, "a0", "net-game-mgr-race"]
+  ],
+  "(method 85 net-player-race)": [
+    [1, "a0", "net-player-race"]
+  ],
+  "(method 87 vehicle-wheel)": [
+    [2, "gp", "vehicle-wheel"]
+  ],
+  "(method 88 vehicle-wheel)": [
+    [1, "gp", "vehicle-wheel"]
+  ],
+  "(method 9 hud-player-positions)": [
+    [2, "gp", "hud-player-positions"]
+  ],
+  "(method 9 nav-control)": [
+    [2, "gp", "nav-control"]
+  ],
+  "(method 9 oil-trail)": [
+    [1, "gp", "oil-trail"]
+  ],
+  "(method 90 net-player-deathmatch)": [
+    [0, "a0", "net-player-deathmatch"]
+  ],
+  "(method 90 net-player-race)": [
+    [1, "a0", "net-player-race"]
+  ],
+  "(method 91 net-player-deathmatch)": [
+    [2, "a0", "net-player-deathmatch"]
+  ],
+  "(method 91 net-player-race)": [
+    [2, "a0", "net-player-race"]
+  ],
+  "(method 92 vehicle-wheel)": [
+    [0, "a0", "vehicle-wheel"]
+  ],
+  "(method 93 net-player)": [
+    [1, "a0", "net-player"]
+  ],
+  "(method 95 net-player)": [
+    [2, "a0", "net-player"]
+  ],
+  "(method 96 net-player-assassin)": [
+    [2, "a0", "net-player-assassin"]
+  ],
+  "(method 96 net-player-deathmatch)": [
+    [2, "a0", "net-player-deathmatch"]
+  ],
+  "(method 96 net-player-deathrace)": [
+    [2, "a0", "net-player-deathrace"]
+  ],
+  "(method 96 net-player-rushhour)": [
+    [2, "a0", "net-player-rushhour"]
+  ],
+  "(method 98 net-player-race)": [
+    [0, "gp", "net-player-race"]
   ]
 }

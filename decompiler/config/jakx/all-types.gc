@@ -15236,7 +15236,6 @@
 
   
 
-#|
 (deftype sky-work (structure)
   ((adgif-tmpl       dma-gif-packet  :inline :offset-assert 0)
    (draw-tmpl        dma-gif-packet  :inline :offset-assert 32)
@@ -15245,18 +15244,18 @@
    (blend-tmpl       dma-gif-packet  :inline :offset-assert 128)
    (sprite-tmpl      dma-gif-packet  :inline :offset-assert 160)
    (sprite-tmpl2     dma-gif-packet  :inline :offset-assert 192)
-   (sun-coords       vector          2       :offset-assert 224) ;; guessed by decompiler
-   (green-coords     vector          2       :offset-assert 256) ;; guessed by decompiler
-   (moon0-coords     vector          2       :offset-assert 288) ;; guessed by decompiler
-   (moon1-coords     vector          2       :offset-assert 320) ;; guessed by decompiler
-   (moon2-coords     vector          2       :offset-assert 352) ;; guessed by decompiler
-   (star-coords      vector          2       :offset-assert 384) ;; guessed by decompiler
-   (sun-colors       vector4w        2       :offset-assert 416) ;; guessed by decompiler
-   (green-colors     vector4w        2       :offset-assert 448) ;; guessed by decompiler
-   (moon-colors      vector4w        3       :offset-assert 480) ;; guessed by decompiler
-   (star-colors      vector4w        16      :offset-assert 528) ;; guessed by decompiler
-   (st-coords        vector          2       :offset-assert 784) ;; guessed by decompiler
-   (random           vector4w        8       :offset-assert 816) ;; guessed by decompiler
+   (sun-coords       vector          2 :inline :offset-assert 224) ;; guessed by decompiler
+   (green-coords     vector          2 :inline :offset-assert 256) ;; guessed by decompiler
+   (moon0-coords     vector          2 :inline :offset-assert 288) ;; guessed by decompiler
+   (moon1-coords     vector          2 :inline :offset-assert 320) ;; guessed by decompiler
+   (moon2-coords     vector          2 :inline :offset-assert 352) ;; guessed by decompiler
+   (star-coords      vector          2 :inline :offset-assert 384) ;; guessed by decompiler
+   (sun-colors       vector4w        2 :inline :offset-assert 416) ;; guessed by decompiler
+   (green-colors     vector4w        2 :inline :offset-assert 448) ;; guessed by decompiler
+   (moon-colors      vector4w        3 :inline :offset-assert 480) ;; guessed by decompiler
+   (star-colors      vector4w        16 :inline :offset-assert 528) ;; guessed by decompiler
+   (st-coords        vector          2 :inline :offset-assert 784) ;; guessed by decompiler
+   (random           vector4w        8 :inline :offset-assert 816) ;; guessed by decompiler
    (giftag-base      dma-gif         :inline :offset-assert 944)
    (giftag-haze      dma-gif         :inline :offset-assert 960)
    (giftag-roof      dma-gif         :inline :offset-assert 976)
@@ -15267,7 +15266,7 @@
    (time             float                   :offset-assert 1072)
    (off-s            uint16                  :offset-assert 1076)
    (off-t            uint16                  :offset-assert 1078)
-   (orbit            sky-orbit       3       :offset-assert 1080) ;; guessed by decompiler
+   (orbit            sky-orbit       3 :inline :offset-assert 1080) ;; guessed by decompiler
    (upload-data      sky-upload-data :inline :offset-assert 1184)
    (ambi-color       vector          :inline :offset-assert 1376)
    (ambi-color-lower vector          :inline :offset-assert 1392)
@@ -15282,7 +15281,7 @@
    (cloud-lights     cloud-lights    :inline :offset-assert 1632)
    (haze-lights      haze-lights     :inline :offset-assert 1792)
    (buf              dma-buffer              :offset-assert 1916) ;; guessed by decompiler
-   (stars            vector          512     :offset-assert 1920) ;; guessed by decompiler
+   (stars            vector          512 :inline :offset-assert 1920) ;; guessed by decompiler
    (disable-day-star basic                   :offset-assert 10112)
    )
   :method-count-assert 37
