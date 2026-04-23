@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <regex>
+#include <unistd.h>
 
 #include "common/log/log.h"
 #include "common/repl/nrepl/ReplServer.h"
@@ -38,6 +39,7 @@ int main(int argc, char** argv) {
   std::string username = "#f";
   std::string game = "jak1";
   int nrepl_port = -1;
+  bool no_target_reset = false;
   fs::path project_path_override;
   fs::path iso_path_override;
 
@@ -55,6 +57,8 @@ int main(int argc, char** argv) {
   app.add_option("--proj-path", project_path_override,
                  "Specify the location of the 'data/' folder");
   app.add_option("--iso-path", iso_path_override, "Specify the location of the 'iso_data/' folder");
+  app.add_flag("--no-target-reset", no_target_reset,
+               "Do not send LTT_MSG_RESET to the game on exit (keeps game running)");
   define_common_cli_arguments(app);
   app.validate_positionals();
   CLI11_PARSE(app, argc, argv);
@@ -112,6 +116,9 @@ int main(int argc, char** argv) {
     }
     if (!eval_cmd.empty()) {
       compiler = std::make_unique<Compiler>(game_version, emitter::InstructionSet::X86);
+      if (no_target_reset) {
+        compiler->set_no_target_reset();
+      }
       if (!compiler->connect_to_target()) {
         lg::error("Could not connect to game listener");
         return 1;
@@ -144,6 +151,9 @@ int main(int argc, char** argv) {
     compiler = std::make_unique<Compiler>(
         game_version, emitter::InstructionSet::X86, std::make_optional(repl_config), username,
         std::make_unique<REPL::Wrapper>(username, repl_config, startup_file, nrepl_server_ok));
+    if (no_target_reset) {
+      compiler->set_no_target_reset();
+    }
     // Start nREPL Server if it spun up successfully
     if (nrepl_server_ok) {
       nrepl_thread = std::thread([&]() {
@@ -180,6 +190,9 @@ int main(int argc, char** argv) {
         // lock, while we compile
         std::lock_guard<std::mutex> lock(compiler_mutex);
         status = compiler->handle_repl_string(input_from_stdin);
+      } else if (!isatty(STDIN_FILENO)) {
+        // stdin is a pipe and returned EOF — exit cleanly instead of spinning
+        break;
       }
     }
   } catch (std::exception& e) {

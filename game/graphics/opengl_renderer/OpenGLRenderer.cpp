@@ -1057,25 +1057,24 @@ void OpenGLRenderer::render(DmaFollower dma, const RenderOptions& settings) {
     int read_buffer;
     int x, y, w, h, fbo_id;
 
-    if (settings.internal_res_screenshot) {
-      // Read from window framebuffer (GL_BACK) which is what do_pcrtc_effects draws to.
-      // This captures what's actually visible rather than the intermediate FBO.
-      read_buffer = GL_BACK;
-      w = settings.draw_region_width;
-      h = settings.draw_region_height;
-      x = m_render_state.draw_offset_x;
-      y = m_render_state.draw_offset_y;
-      fbo_id = 0;
-      fmt::print("[screenshot] reading from window FBO draw_region={}x{} offset={}x{}\n",
-                 w, h, x, y);
+    // do_pcrtc_effects already ran (line ~1038) and resolved MSAA → resolve_buffer.
+    // Read from resolve_buffer (non-MSAA) to get the full rendered scene.
+    // Fall back to render_fbo only if no resolve buffer exists.
+    read_buffer = GL_COLOR_ATTACHMENT0;
+    x = 0;
+    y = 0;
+    if (m_fbo_state.resources.resolve_buffer.valid) {
+      fbo_id = m_fbo_state.resources.resolve_buffer.fbo_id;
+      w = m_fbo_state.resources.resolve_buffer.width;
+      h = m_fbo_state.resources.resolve_buffer.height;
+      fmt::print("[screenshot] reading from resolve_buffer {}x{}\n", w, h);
     } else {
-      read_buffer = GL_BACK;
-      w = settings.draw_region_width;
-      h = settings.draw_region_height;
-      x = m_render_state.draw_offset_x;
-      y = m_render_state.draw_offset_y;
-      fbo_id = 0;  // window
+      fbo_id = m_fbo_state.render_fbo->fbo_id;
+      w = m_fbo_state.render_fbo->width;
+      h = m_fbo_state.render_fbo->height;
+      fmt::print("[screenshot] reading from render_fbo {}x{}\n", w, h);
     }
+    (void)settings.internal_res_screenshot;
     finish_screenshot(settings.screenshot_path, w, h, x, y, fbo_id, read_buffer,
                       settings.quick_screenshot);
   }

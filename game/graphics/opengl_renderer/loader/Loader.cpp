@@ -425,12 +425,19 @@ void Loader::update(TexturePool& texture_pool) {
       loader_input.tex_pool = &texture_pool;
 
       static int s_update_call = 0;
-      bool log_this_frame = (s_update_call++ % 60 == 0);
-      if (s_update_call == 1) {
-        fmt::print("[loader] starting '{}': {} textures, {} tfrag-geo0 trees\n", name,
+      if (it->second->load_id == UINT64_MAX) {
+        s_update_call = 0;
+        fmt::print("[loader] starting '{}': {} tex, tfrag trees={}/{}/{}, tie trees={}/{}/{}/{}, shrub={}, coll={}\n",
+                   name,
                    lev->level->textures.size(),
-                   lev->level->tfrag_trees.empty() ? 0 : (int)lev->level->tfrag_trees[0].size());
+                   lev->level->tfrag_trees[0].size(), lev->level->tfrag_trees[1].size(),
+                   lev->level->tfrag_trees[2].size(),
+                   lev->level->tie_trees[0].size(), lev->level->tie_trees[1].size(),
+                   lev->level->tie_trees[2].size(), lev->level->tie_trees[3].size(),
+                   lev->level->shrub_trees.size(),
+                   lev->level->collision.vertices.size());
       }
+      bool log_this_frame = (s_update_call++ % 60 == 0);
       for (auto& stage : m_loader_stages) {
         auto evt = scoped_prof(fmt::format("stage-{}", stage->name()).c_str());
         Timer stage_timer;

@@ -73,8 +73,10 @@ class TfragLoadStage : public LoaderStage {
     }
 
     if (data.lev_data->level->tfrag_trees.front().empty()) {
-      fmt::print("[TfragLoadStage] geo-0 empty, skipping (total geos: {})\n",
-                 data.lev_data->level->tfrag_trees.size());
+      fmt::print("[tfrag] geo-0 empty — all geos: {}/{}/{} trees\n",
+                 data.lev_data->level->tfrag_trees[0].size(),
+                 data.lev_data->level->tfrag_trees[1].size(),
+                 data.lev_data->level->tfrag_trees[2].size());
       m_done = true;
       return true;
     }
@@ -91,13 +93,19 @@ class TfragLoadStage : public LoaderStage {
                        GL_STATIC_DRAW);
         }
       }
+      fmt::print("[tfrag] opengl created: {}/{}/{} trees per geo\n",
+                 data.lev_data->level->tfrag_trees[0].size(),
+                 data.lev_data->level->tfrag_trees[1].size(),
+                 data.lev_data->level->tfrag_trees[2].size());
       m_opengl_created = true;
       return false;
     }
 
     constexpr u32 CHUNK_SIZE = 32768;
     u32 uploaded_bytes = 0;
-    [[maybe_unused]] u32 unique_buffers = 0;
+
+    m_call_count++;
+    bool log_this_call = (m_call_count % 60 == 0);
 
     while (true) {
       bool complete_tree;
@@ -107,19 +115,16 @@ class TfragLoadStage : public LoaderStage {
       } else {
         const auto& tree = data.lev_data->level->tfrag_trees[m_next_geo][m_next_tree];
         u32 end_vert_in_tree = tree.unpacked.vertices.size();
-        // the number of vertices we'd need to finish the tree right now
         size_t num_verts_left_in_tree = end_vert_in_tree - m_next_vert;
         size_t start_vert_for_chunk;
         size_t end_vert_for_chunk;
 
         if (num_verts_left_in_tree > CHUNK_SIZE) {
           complete_tree = false;
-          // should only do partial
           start_vert_for_chunk = m_next_vert;
           end_vert_for_chunk = start_vert_for_chunk + CHUNK_SIZE;
           m_next_vert += CHUNK_SIZE;
         } else {
-          // should do all!
           start_vert_for_chunk = m_next_vert;
           end_vert_for_chunk = end_vert_in_tree;
           complete_tree = true;
@@ -134,26 +139,29 @@ class TfragLoadStage : public LoaderStage {
       }
 
       if (complete_tree) {
-        unique_buffers++;
-        // and move on to next tree
         m_next_vert = 0;
         m_next_tree++;
         if (m_next_tree >= data.lev_data->level->tfrag_trees[m_next_geo].size()) {
           m_next_tree = 0;
           m_next_geo++;
           if (m_next_geo >= tfrag3::TFRAG_GEOS) {
-            m_next_tree = true;
-            m_next_tree = 0;
-            m_next_geo = 0;
-            m_next_vert = 0;
+            fmt::print("[tfrag] done after {} calls\n", m_call_count);
             m_done = true;
             return true;
           }
+        }
+        if (log_this_call) {
+          fmt::print("[tfrag] call={} geo={} tree={} vert={}\n", m_call_count, m_next_geo,
+                     m_next_tree, m_next_vert);
         }
         return false;
       }
 
       if (timer.getMs() > LOAD_BUDGET || (uploaded_bytes / 1024) > 2048) {
+        if (log_this_call) {
+          fmt::print("[tfrag] budget hit call={} geo={} tree={} vert={} uploaded={}KB\n",
+                     m_call_count, m_next_geo, m_next_tree, m_next_vert, uploaded_bytes / 1024);
+        }
         return false;
       }
     }
@@ -165,6 +173,7 @@ class TfragLoadStage : public LoaderStage {
     m_next_geo = 0;
     m_next_tree = 0;
     m_next_vert = 0;
+    m_call_count = 0;
   }
 
  private:
@@ -173,6 +182,7 @@ class TfragLoadStage : public LoaderStage {
   u32 m_next_geo = 0;
   u32 m_next_tree = 0;
   u32 m_next_vert = 0;
+  u32 m_call_count = 0;
 };
 
 class ShrubLoadStage : public LoaderStage {
