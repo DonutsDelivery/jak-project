@@ -24340,6 +24340,14 @@
       "process-focusable"
     ]
   ],
+  // racer-state-method-11 (end-lap): a1=process-drawable (fixed via method sig), propagate to a2 copy
+  "(method 11 racer-state)": [
+    [2, "a2", "process-drawable"]
+  ],
+  // race-state-method-10: a0 at op 20 is the lower-32 of a handle (ppointer); cast for lwu deref at op 21
+  "(method 10 race-state)": [
+    [20, "a0", "(pointer process)"]
+  ],
   "(method 11 race-state)": [
     [
       [
@@ -39780,7 +39788,7 @@
     [8, "gp", "artifact"]
   ],
   "(method 15 nav-control)": [
-    [1, "a0", "nav-control"]
+    [2, "a0", "nav-control"]
   ],
   "(method 15 nav-mesh-editable)": [
     [1, "gp", "nav-mesh-editable"]
@@ -39804,7 +39812,7 @@
     [0, "gp", "lightning-tracker"]
   ],
   "(method 17 nav-control)": [
-    [1, "a0", "nav-control"]
+    [2, "a0", "nav-control"]
   ],
   "(method 17 net-player)": [
     [4, "gp", "net-player"]
@@ -39846,7 +39854,7 @@
     [16, "gp", "http-downloader"]
   ],
   "(method 20 nav-control)": [
-    [1, "a0", "nav-control"]
+    [2, "a0", "nav-control"]
   ],
   "(method 20 net-powerup)": [
     [0, "a0", "net-powerup"]
@@ -39879,7 +39887,8 @@
     [5, "a0", "process-nettable"]
   ],
   "(method 28 nav-control)": [
-    [0, "a0", "nav-control"]
+    [0, "a0", "nav-control"],
+    [3, "a0", "nav-control"]
   ],
   "(method 28 nav-mesh)": [
     [7, "gp", "nav-mesh"]
@@ -39888,7 +39897,7 @@
     [4, "a0", "net-process-mgr"]
   ],
   "(method 29 nav-control)": [
-    [0, "a0", "nav-control"]
+    [1, "a0", "nav-control"]
   ],
   "(method 3 nav-graph-editor)": [
     [152, "gp", "nav-graph-editor"]
@@ -40503,7 +40512,7 @@
     [2, "gp", "hud-player-positions"]
   ],
   "(method 9 nav-control)": [
-    [2, "gp", "nav-control"]
+    [3, "gp", "nav-control"]
   ],
   "(method 9 oil-trail)": [
     [1, "gp", "oil-trail"]
@@ -40543,5 +40552,51 @@
   ],
   "(method 98 net-player-race)": [
     [0, "gp", "net-player-race"]
+  ]  ,
+  // nav-control methods -- op-exact casts (cast only applies at the op where REG is read)
+  "(method 11 nav-state)": [
+    [1, "a1", "nav-gap-info"]
+  ],
+  "(method 13 nav-control)": [
+    [0, "a0", "nav-control"]
+  ],
+  "(method 13 nav-link-search-info)": [
+    [2, "gp", "nav-mesh-link-search-node"]
+  ],
+  "(method 14 nav-control)": [
+    [0, "a0", "nav-control"]
+  ],
+  "(method 24 nav-control)": [
+    [0, "a0", "nav-control"]
+  ],
+  "(method 25 nav-control)": [
+    [0, "a0", "nav-control"]
+  ],
+  "(method 26 nav-control)": [
+    [0, "a0", "nav-control"]
+  ],
+  "(method 27 nav-control)": [
+    [0, "a0", "nav-control"]
+  ],
+  "(method 30 nav-control)": [
+    [1, "a0", "nav-control"]
+  ],
+  "(method 31 nav-control)": [
+    [0, "a0", "nav-control"]
+  ],
+  "(method 43 nav-control)": [
+    [1, "a0", "nav-control"]
+  ],
+  "(method 44 nav-control)": [
+    [4, "a0", "nav-control"]
+  ],
+  "(method 51 nav-state)": [
+    [2, "s5", "nav-avoid-spheres-params"]
+  ],
+  "(method 9 nav-link-search-info)": [
+    [3, "a1", "nav-avoid-spheres-params"]
+  ],
+  "(method 11 nav-link-search-info)": [
+    [0, "a1", "nav-mesh-link-search-node"]
   ]
 }
