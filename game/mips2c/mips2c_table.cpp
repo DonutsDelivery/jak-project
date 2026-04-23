@@ -402,6 +402,7 @@ namespace jakx {
 namespace get_string_length_asm { extern void link(); }
 namespace draw_string_asm_packed { extern void link(); }
 namespace draw_string_init_justify { extern void link(); }
+namespace method_10_font_context { extern void link(); }
 // sky.cpp ports (see game/mips2c/jakx_functions/sky.cpp)
 namespace set_tex_offset { extern void link(); }
 namespace render_sky_tri { extern void link(); }
@@ -852,7 +853,8 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
        // at 496 (jak3: 464). See game/mips2c/jakx_functions/font.cpp.
        jakx::get_string_length_asm::link,
        jakx::draw_string_asm_packed::link,
-       jakx::draw_string_init_justify::link}},
+       jakx::draw_string_init_justify::link,
+       jakx::method_10_font_context::link}},
      {"texture", {jakx::adgif_shader_texture_with_update::link}},
      // collide-func: jakx-native ports — structurally identical to jak3;
      // jakx namespace only. See game/mips2c/jakx_functions/collide_func.cpp.

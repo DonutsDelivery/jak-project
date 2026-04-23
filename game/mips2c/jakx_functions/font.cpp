@@ -2422,4 +2422,332 @@ void link() {
 }
 
 } // namespace draw_string_init_justify
+
+// =============================================================================
+// (method 10 font-context)
+// =============================================================================
+//
+// Direct port of jakx font_ir2.asm L2986 (`(method 10 font-context)`).
+//
+// Computes font-context derived fields from the current viewport and
+// populates *font-work* hvdf offset/outline slots. Called whenever a
+// font-context is applied to the render context (set-context!).
+//
+// Specifically:
+//   - scaled-width  = width * (1 / scale)
+//   - scaled-height = height * (1 / scale)
+//   - calc-mat row 0: (-(meters-per-texel * scale), 0, 0, 0)
+//   - calc-mat row 1: (shadow-x-shear or 0, -(mtpt*scale), 0, 0)
+//   - calc-mat rows 2-3: identity z and w
+//   - calc-mat = matrix*!(calc-mat, calc-mat) then matrix*!(calc-mat, vp-mat)
+//   - calc-origin.xyz = origin.xyz * scale, w = 1.0
+//   - projection = viewport.projection-float
+//   - ialpha = int(128.0f * alpha)
+//   - *font-work* hvdf-offset / shadow / outline[0..3] = viewport screen coords
+//   - *font-work*[364] = 0.5 * y-spacing
+//   - *font-work*[412] = y-spacing
+//
+// Args:
+//   a0 = font-context  (self)
+//   a1 = dma-buffer    (only used when flags bit 8 set — triggers method 16)
+// Returns:
+//   v0 = 0
+//
+namespace method_10_font_context {
+struct Cache {
+  void* viewport_array; // *viewport-array*
+  void* font_work;      // *font-work*
+  void* matrix_times;   // matrix*!
+} cache;
+
+u64 execute(void* ctxt) {
+  auto* c = (ExecutionContext*)ctxt;
+  bool bc = false;
+  u32 call_addr = 0;
+
+  // B0 / L52: prologue + compute scaled-width/height + set up calc-mat rows 0-0
+  c->daddiu(sp, sp, -112);                           // daddiu sp, sp, -112
+  c->sd(ra, 0, sp);                                  // sd ra, 0(sp)
+  c->sq(s2, 16, sp);                                 // sq s2, 16(sp)
+  c->sq(s3, 32, sp);                                 // sq s3, 32(sp)
+  c->sq(s4, 48, sp);                                 // sq s4, 48(sp)
+  c->sq(s5, 64, sp);                                 // sq s5, 64(sp)
+  c->sq(gp, 80, sp);                                 // sq gp, 80(sp)
+  c->swc1(f30, 96, sp);                              // swc1 f30, 96(sp)
+  c->mov64(gp, a0);                                  // or gp, a0, r0  (gp = font-context)
+  c->mov64(s3, a1);                                  // or s3, a1, r0  (s3 = dma-buffer)
+  c->load_symbol2(v1, cache.viewport_array);         // lw v1, *viewport-array*(s7)
+  c->daddiu(s5, v1, 1392);                           // daddiu s5, v1, 1392
+  c->lwu(a2, 172, gp);                               // lwu a2, 172(gp)   (mat ptr, unused)
+  c->daddiu(s2, gp, 76);                             // daddiu s2, gp, 76  (s2 = &calc-mat)
+  c->lwc1(f30, 168, gp);                             // lwc1 f30, 168(gp)  (f30 = scale)
+  c->lwc1(f0, 148, gp);                              // lwc1 f0, 148(gp)   (f0 = meters-per-texel)
+  c->muls(f0, f0, f30);                              // mul.s f0, f0, f30
+  c->negs(f0, f0);                                   // neg.s f0, f0  (f0 = -(mtpt*scale))
+  c->lui(v1, 16256);                                 // lui v1, 16256  (0x3F800000 = 1.0f)
+  c->mtc1(f1, v1);                                   // mtc1 f1, v1
+  c->divs(f1, f1, f30);                              // div.s f1, f1, f30  (f1 = 1/scale)
+  c->load_symbol2(v1, cache.viewport_array);         // lw v1, *viewport-array*(s7)
+  c->lwu(s4, 192, v1);                               // lwu s4, 192(v1)   (s4 = viewport ptr)
+  c->lwc1(f2, 140, gp);                              // lwc1 f2, 140(gp)  (f2 = width)
+  c->muls(f2, f2, f1);                               // mul.s f2, f2, f1
+  c->swc1(f2, 156, gp);                              // swc1 f2, 156(gp)  (scaled-width)
+  c->lwc1(f2, 144, gp);                              // lwc1 f2, 144(gp)  (f2 = height)
+  c->muls(f1, f2, f1);                               // mul.s f1, f2, f1
+  c->swc1(f1, 160, gp);                              // swc1 f1, 160(gp)  (scaled-height)
+  c->daddu(v1, r0, s2);                              // daddu v1, r0, s2  (v1 = &calc-mat)
+  c->swc1(f0, 0, v1);                                // swc1 f0, 0(v1)    (row0[0] = -(mtpt*scale))
+  c->mtc1(f1, r0);                                   // mtc1 f1, r0  (f1 = 0.0)
+  c->swc1(f1, 4, v1);                                // swc1 f1, 4(v1)
+  c->mtc1(f1, r0);
+  c->swc1(f1, 8, v1);                                // swc1 f1, 8(v1)
+  c->mtc1(f1, r0);
+  c->swc1(f1, 12, v1);                               // swc1 f1, 12(v1)   (row0 = {-(mtpt*s), 0, 0, 0})
+  c->lwu(v1, 12, gp);                                // lwu v1, 12(gp)    (flags)
+  c->andi(v1, v1, 2048);                             // andi v1, v1, 2048
+  bc = c->sgpr64(v1) == 0;                           // beq v1, r0, L53
+  // nop
+  if (bc) { goto block_2; }
+
+  // B1: flags bit 2048 set — italics/shadow x-shear on row1[0]
+  c->daddiu(v1, s2, 16);                             // daddiu v1, s2, 16  (row 1)
+  c->lui(a0, -16743);                                // lui a0, -16743  (0xBEB90000)
+  c->ori(a0, a0, 39322);                             // ori a0, a0, 39322  (0xBEB9999A ≈ -0.305f)
+  c->mtc1(f1, a0);                                   // mtc1 f1, a0
+  c->muls(f1, f1, f0);                               // mul.s f1, f1, f0  (shadow x-shear factor)
+  c->swc1(f1, 0, v1);                                // swc1 f1, 0(v1)    (row1[0] = shear)
+  c->swc1(f0, 4, v1);                                // swc1 f0, 4(v1)    (row1[1] = -(mtpt*scale))
+  c->mtc1(f0, r0);
+  c->swc1(f0, 8, v1);                                // swc1 f0, 8(v1)
+  c->mtc1(f0, r0);
+  c->swc1(f0, 12, v1);                               // swc1 f0, 12(v1)   (row1 = {shear, -(mtpt*s), 0, 0})
+  // beq r0, r0, L54 (unconditional goto block_3)
+  goto block_3;
+
+block_2:
+  // B2 / L53: no shadow x-shear
+  c->daddiu(v1, s2, 16);                             // daddiu v1, s2, 16  (row 1)
+  c->mtc1(f1, r0);                                   // mtc1 f1, r0  (f1 = 0.0)
+  c->swc1(f1, 0, v1);                                // swc1 f1, 0(v1)    (row1[0] = 0)
+  c->swc1(f0, 4, v1);                                // swc1 f0, 4(v1)    (row1[1] = -(mtpt*scale))
+  c->mtc1(f0, r0);
+  c->swc1(f0, 8, v1);                                // swc1 f0, 8(v1)
+  c->mtc1(f0, r0);
+  c->swc1(f0, 12, v1);                               // swc1 f0, 12(v1)
+  // fall through
+
+block_3:
+  // B3 / L54: fill identity rows 2 and 3 of calc-mat, call matrix*! twice,
+  //           compute calc-origin and update ialpha/projection.
+  c->daddiu(v1, s2, 32);                             // daddiu v1, s2, 32  (row 2)
+  c->mtc1(f0, r0);
+  c->swc1(f0, 0, v1);                                // row2[0] = 0
+  c->mtc1(f0, r0);
+  c->swc1(f0, 4, v1);                                // row2[4] = 0
+  c->lui(a0, 16256);                                 // lui a0, 16256  (1.0f)
+  c->mtc1(f0, a0);                                   // f0 = 1.0f
+  c->swc1(f0, 8, v1);                                // row2[8] = 1.0f
+  c->mtc1(f0, r0);
+  c->swc1(f0, 12, v1);                               // row2[12] = 0
+  c->daddiu(v1, s2, 48);                             // daddiu v1, s2, 48  (row 3)
+  c->mtc1(f0, r0);
+  c->swc1(f0, 0, v1);
+  c->mtc1(f0, r0);
+  c->swc1(f0, 4, v1);
+  c->mtc1(f0, r0);
+  c->swc1(f0, 8, v1);
+  c->lui(a0, 16256);
+  c->mtc1(f0, a0);                                   // f0 = 1.0f
+  c->swc1(f0, 12, v1);                               // row3[12] = 1.0f
+
+  // matrix*!(calc-mat, calc-mat)  — squares the matrix in place
+  c->load_symbol2(t9, cache.matrix_times);           // lw t9, matrix*!(s7)
+  c->mov64(a0, s2);                                  // or a0, s2, r0
+  c->mov64(a1, s2);                                  // or a1, s2, r0
+  call_addr = c->gprs[t9].du32[0];
+  c->sll(v0, ra, 0);                                 // sll v0, ra, 0
+  c->jalr(call_addr);                                // jalr ra, t9
+
+  // matrix*!(calc-mat, calc-mat, vp-transform)  — mul by viewport transform
+  c->load_symbol2(t9, cache.matrix_times);           // lw t9, matrix*!(s7)
+  c->mov64(a0, s2);                                  // or a0, s2, r0
+  c->daddiu(a2, s4, 572);                            // daddiu a2, s4, 572  (viewport transform matrix)
+  c->mov64(a1, s2);                                  // or a1, s2, r0
+  call_addr = c->gprs[t9].du32[0];
+  c->sll(v0, ra, 0);
+  c->jalr(call_addr);                                // jalr ra, t9
+
+  // calc-origin = origin.xyz * scale (with w=1.0)
+  c->daddiu(v1, gp, 44);                             // daddiu v1, gp, 44  (&calc-origin)
+  c->daddiu(a0, gp, 28);                             // daddiu a0, gp, 28  (&origin)
+  c->lqc2(vf1, 0, a0);                               // lqc2 vf1, 0(a0)   vf1 = origin
+  c->mfc1(a0, f30);                                  // mfc1 a0, f30      a0 = scale (float bits)
+  c->mov128_vf_gpr(vf2, a0);                         // qmtc2.i vf2, a0   vf2.x = scale
+  c->vadd_bc(DEST::w, BC::x, vf1, vf0, vf0);        // vaddx.w vf1, vf0, vf0  vf1.w = vf0.w+vf0.x = 1.0
+  c->vmul_bc(DEST::xyz, BC::x, vf1, vf1, vf2);      // vmulx.xyz vf1, vf1, vf2  vf1.xyz *= scale
+  c->sqc2(vf1, 0, v1);                               // sqc2 vf1, 0(v1)   store calc-origin
+
+  // projection = viewport float at s4+908
+  c->mov64(v1, gp);                                  // or v1, gp, r0
+  c->lwc1(f0, 908, s4);                              // lwc1 f0, 908(s4)
+  c->swc1(f0, 164, v1);                              // swc1 f0, 164(v1)  (projection = MIPS 164 = GOAL 168)
+
+  // ialpha = int(128.0f * alpha)
+  c->lui(v1, 17152);                                 // lui v1, 17152  (0x43000000 = 128.0f)
+  c->mtc1(f0, v1);                                   // mtc1 f0, v1  (f0 = 128.0f)
+  c->lwc1(f1, 4, gp);                                // lwc1 f1, 4(gp)  (f1 = alpha, MIPS 4 = GOAL 8)
+  c->muls(f0, f0, f1);                               // mul.s f0, f0, f1
+  c->cvtws(f0, f0);                                  // cvt.w.s f0, f0
+  c->swc1(f0, 8, gp);                                // swc1 f0, 8(gp)  (ialpha, MIPS 8 = GOAL 12)
+
+  // Check flag bit 8 — call virtual method 16 if set
+  c->lwu(v1, 12, gp);                                // lwu v1, 12(gp)  (flags)
+  c->andi(v1, v1, 8);                                // andi v1, v1, 8
+  bc = c->sgpr64(v1) == 0;                           // beq v1, r0, L55
+  c->mov64(v1, s7);                                  // or v1, s7, r0  (delay slot: #f)
+  if (bc) { goto block_5; }
+
+  // B4: flags bit 8 set — invoke method 16 on the font-context type
+  c->mov64(a0, gp);                                  // or a0, gp, r0
+  c->lwu(v1, -4, a0);                                // lwu v1, -4(a0)   (type pointer)
+  c->lwu(t9, 64, v1);                                // lwu t9, 64(v1)   (method 16 at vtable[64])
+  c->mov64(a1, s3);                                  // or a1, s3, r0    (dma-buffer)
+  call_addr = c->gprs[t9].du32[0];
+  c->sll(v0, ra, 0);
+  c->jalr(call_addr);                                // jalr ra, t9
+  c->mov64(v1, v0);                                  // or v1, v0, r0
+
+block_5:
+  // B5 / L55: populate *font-work* hvdf vectors (6 × vec4 at offsets 4736..4828)
+  // plus y-spacing scalars at 364 and 412.
+  c->load_symbol2(v1, cache.font_work);              // lw v1, *font-work*(s7)
+
+  // hvdf-offset (base): (float(x), float(y), z, w)
+  c->lw(a0, 588, s5);                                // lw a0, 588(s5)
+  c->mtc1(f0, a0);                                   // mtc1 f0, a0
+  c->cvtsw(f0, f0);                                  // cvt.s.w f0, f0
+  c->swc1(f0, 4736, v1);
+  c->lw(a0, 592, s5);                                // lw a0, 592(s5)
+  c->mtc1(f0, a0);
+  c->cvtsw(f0, f0);
+  c->swc1(f0, 4740, v1);
+  c->lwc1(f0, 820, s4);
+  c->swc1(f0, 4744, v1);
+  c->lwc1(f0, 824, s4);
+  c->swc1(f0, 4748, v1);
+
+  // hvdf-shadow: (float(x+1), float(y+1), z, w)
+  c->lw(a0, 588, s5);
+  c->daddiu(a0, a0, 1);                              // daddiu a0, a0, 1
+  c->mtc1(f0, a0);
+  c->cvtsw(f0, f0);
+  c->swc1(f0, 4752, v1);
+  c->lw(a0, 592, s5);
+  c->daddiu(a0, a0, 1);
+  c->mtc1(f0, a0);
+  c->cvtsw(f0, f0);
+  c->swc1(f0, 4756, v1);
+  c->lwc1(f0, 820, s4);
+  c->swc1(f0, 4760, v1);
+  c->lwc1(f0, 824, s4);
+  c->swc1(f0, 4764, v1);
+
+  // outline[0] NE: (x+1.0, y+1.0, z, w)
+  c->lui(a0, 16256);
+  c->mtc1(f0, a0);                                   // f0 = 1.0f
+  c->lw(a0, 588, s5);
+  c->mtc1(f1, a0);
+  c->cvtsw(f1, f1);
+  c->adds(f1, f1, f0);                               // f1 = x+1.0
+  c->swc1(f1, 4768, v1);
+  c->lw(a0, 592, s5);
+  c->mtc1(f1, a0);
+  c->cvtsw(f1, f1);
+  c->adds(f1, f1, f0);                               // f1 = y+1.0
+  c->swc1(f1, 4772, v1);
+  c->lwc1(f1, 820, s4);
+  c->swc1(f1, 4776, v1);
+  c->lwc1(f1, 824, s4);
+  c->swc1(f1, 4780, v1);
+
+  // outline[1] NW: (x-1.0, y+1.0, z, w)
+  c->lw(a0, 588, s5);
+  c->mtc1(f1, a0);
+  c->cvtsw(f1, f1);
+  c->subs(f1, f1, f0);                               // f1 = x-1.0
+  c->swc1(f1, 4784, v1);
+  c->lw(a0, 592, s5);
+  c->mtc1(f1, a0);
+  c->cvtsw(f1, f1);
+  c->adds(f1, f1, f0);                               // f1 = y+1.0
+  c->swc1(f1, 4788, v1);
+  c->lwc1(f1, 820, s4);
+  c->swc1(f1, 4792, v1);
+  c->lwc1(f1, 824, s4);
+  c->swc1(f1, 4796, v1);
+
+  // outline[2] SW: (x-1.0, y-1.0, z, w)
+  c->lw(a0, 588, s5);
+  c->mtc1(f1, a0);
+  c->cvtsw(f1, f1);
+  c->subs(f1, f1, f0);                               // f1 = x-1.0
+  c->swc1(f1, 4800, v1);
+  c->lw(a0, 592, s5);
+  c->mtc1(f1, a0);
+  c->cvtsw(f1, f1);
+  c->subs(f1, f1, f0);                               // f1 = y-1.0
+  c->swc1(f1, 4804, v1);
+  c->lwc1(f1, 820, s4);
+  c->swc1(f1, 4808, v1);
+  c->lwc1(f1, 824, s4);
+  c->swc1(f1, 4812, v1);
+
+  // outline[3] SE: (x+1.0, y-1.0, z, w)
+  c->lw(a0, 588, s5);
+  c->mtc1(f1, a0);
+  c->cvtsw(f1, f1);
+  c->adds(f1, f1, f0);                               // f1 = x+1.0
+  c->swc1(f1, 4816, v1);
+  c->lw(a0, 592, s5);
+  c->mtc1(f1, a0);
+  c->cvtsw(f1, f1);
+  c->subs(f0, f1, f0);                               // f0 = y-1.0  (overwrites f0=1.0)
+  c->swc1(f0, 4820, v1);
+  c->lwc1(f0, 820, s4);
+  c->swc1(f0, 4824, v1);
+  c->lwc1(f0, 824, s4);
+  c->swc1(f0, 4828, v1);
+
+  // y-spacing fields
+  c->lui(a0, 16128);                                 // lui a0, 16128  (0x3F000000 = 0.5f)
+  c->mtc1(f0, a0);                                   // f0 = 0.5f
+  c->lwc1(f1, 0, gp);                                // lwc1 f1, 0(gp)  (y-spacing, MIPS 0 = GOAL 4)
+  c->muls(f0, f0, f1);                               // f0 = 0.5 * y-spacing
+  c->swc1(f0, 364, v1);                              // *font-work*[364] = 0.5 * y-spacing
+  c->lwc1(f0, 0, gp);                                // reload y-spacing
+  c->swc1(f0, 412, v1);                              // *font-work*[412] = y-spacing
+
+  // Epilogue
+  c->mfc1(v1, f0);                                   // mfc1 v1, f0  (unused)
+  c->mov64(v0, r0);                                  // or v0, r0, r0  (return 0)
+  c->ld(ra, 0, sp);                                  // ld ra, 0(sp)
+  c->lwc1(f30, 96, sp);                              // lwc1 f30, 96(sp)
+  c->lq(gp, 80, sp);                                 // lq gp, 80(sp)
+  c->lq(s5, 64, sp);                                 // lq s5, 64(sp)
+  c->lq(s4, 48, sp);                                 // lq s4, 48(sp)
+  c->lq(s3, 32, sp);                                 // lq s3, 32(sp)
+  c->lq(s2, 16, sp);                                 // lq s2, 16(sp)
+  // jr ra / daddiu sp, sp, 112 handled by return
+  c->daddiu(sp, sp, 112);
+  return c->gprs[v0].du64[0];
+}
+
+void link() {
+  cache.viewport_array = intern_from_c(-1, 0, "*viewport-array*").c();
+  cache.font_work = intern_from_c(-1, 0, "*font-work*").c();
+  cache.matrix_times = intern_from_c(-1, 0, "matrix*!").c();
+  gLinkedFunctionTable.reg("(method 10 font-context)", execute, 128);
+}
+
+} // namespace method_10_font_context
 } // namespace Mips2C::jakx

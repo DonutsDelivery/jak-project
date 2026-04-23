@@ -204,7 +204,6 @@
    effects. The returned uint128 is reinterpreted as draw-string-result
    so callers that read its `length` field (the accumulated x-extent
    as a float in the low 32 bits) fall through correctly."
-  (font-work-setup-hvdf!)
   (set-context! *font-work* arg2)
   (the-as draw-string-result (draw-string-asm-packed arg0 arg1 arg2))
   )
