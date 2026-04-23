@@ -346,15 +346,65 @@
   (none)
   )
 
-;; Minimal background draw hook — drives TFRAG/shrub/TIE rendering each frame.
-;; Mirrors jak3 real-main-draw-hook (drawable.gc:1513) without foreground/merc.
-;; Installed in *draw-hook* so display-loop drives background geometry.
+;; Ported from jak3 drawable.gc:1474
+(defun foreground-initialize-engines ()
+  (let ((v1-0 *shadow-globals*))
+    (dotimes (a0-0 3)
+      (let ((a1-2 (-> v1-0 bucket a0-0)))
+        (set! (-> a1-2 first) (the-as pointer 0))
+        (set! (-> a1-2 next) (the-as pointer 0))
+        (set! (-> a1-2 shadow-color)
+              (cond
+                ((zero? a0-0)
+                 (new 'static 'rgba :r #xf0 :g #xf0 :b #xf0 :a #x80))
+                ((= a0-0 1)
+                 (the-as rgba (-> *setting-control* user-current spotlight-color)))
+                (else
+                 (the-as rgba (-> *setting-control* user-current highlight-color)))))
+        (set! (-> a1-2 constants) (the-as shadow-vu1-constants 0)))))
+  (none))
+
+;; Ported from jak3 drawable.gc:1417
+(defun foreground-engine-execute ((arg0 engine))
+  (when (> (length arg0) 0)
+    (with-profiler 'foreground *profile-foreground-color*
+      (let ((s4-1 (-> *display* frames (-> *display* on-screen) global-buf)))
+        (foreground-init)
+        (execute-connections arg0 s4-1))
+      (foreground-wrapup)))
+  0
+  (none))
+
+;; Ported from jak3 drawable.gc:1500
+(defun foreground-execute-cpu-vu0-engines ()
+  (let ((gp-0 (-> *display* frames (-> *display* on-screen) global-buf)))
+    (bones-init gp-0)
+    (bones-mtx-calc-execute)
+    (generic-merc-execute-all gp-0)
+    (shadow-execute-all gp-0))
+  (lightning-draw-all)
+  (prim-engine-execute)
+  (none))
+
+;; Full draw pipeline: sky + foreground + background.
+;; Matches jak3 real-main-draw-hook structure (drawable.gc:1513).
+;; Omitted/deferred:
+;;   - update-time-of-day: calls clear-mood-times each frame, zeroing manual
+;;     mood seeds; update-mood-default produces dark geometry (atoll mood-func
+;;     not wired). C++ itimes fallback in tfrag renderer provides correct
+;;     daylight colours until mood pipeline is wired.
+;;   - foreground-execute-cpu-vu0-engines: bones/generic-merc need actors.
+;;   - draw! *ocean*: do-tex-scroll! virtual slot unimplemented (ocean-texture.gc
+;;     not ported). Atoll water renders via tfrag-l0-water already.
 (defun main-draw-hook ()
+  (foreground-initialize-engines)
+  (reset! *prim-work*)
+  (draw *sky-work*)
+  (flush-cache 0)
+  (foreground-engine-execute *foreground-draw-engine*)
   (init-background)
   (execute-connections *background-draw-engine* #f)
   (finish-background)
-  (format 0 "[draw-hook] about to return~%")
-  (none)
-  )
+  (none))
 
 (define *draw-hook* main-draw-hook)

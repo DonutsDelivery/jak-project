@@ -114,21 +114,22 @@
             )
           (format 0 "[title-obs] atoll activated status=~A render?=~A~%" (-> atoll-slot status) (-> atoll-slot render?))
           )
-        ;; Position camera at the atoll-start continue point camera position
-        ;; (0, 5m, -20m) looking toward +Z so the level geometry is in view.
-        ;; camera-trans from continue-point: (static-vectorm 0 5 -20)
-        (set-vector! (-> *math-camera* trans) 0.0 20480.0 -81920.0 1.0)
-        (matrix-identity! (-> *math-camera* inv-camera-rot))
-        (matrix-identity! (-> *math-camera* camera-rot))
+        ;; Camera: 150m up, 300m ahead in +Z (over mid-track), 60° pitch down.
+        ;; 1m = 4096 units. 150m=614400, 300m=1228800.
+        (set-vector! (-> *math-camera* trans) 0.0 614400.0 1228800.0 1.0)
+        ;; Rx(+60°): fvec = (0, -0.866, 0.5) → steep downward look.
+        (matrix-rotate-x! (-> *math-camera* inv-camera-rot) 1.0471976)
         )
       )
-    ;; og:preserve-this — initialize! skipped: spawns target process → apply-settings
-    ;; sends sound RPC to IOP port #3 which has no handler in bringup → sync-path stalls
-    ;; display-frame-finish → *draw-hook* never fires. Skip until IOP sound is wired.
-    (format 0 "[title-obs] skipping initialize! (IOP RPC stall bypass) — going idle~%")
-    (format 0 "[title-obs] before go-virtual idle~%")
+    ;; Kick off the real game boot: set-continue to atoll-start, spawn target process.
+    ;; target-continue is a sleep-code stub so target parks without doing anything harmful.
+    ;; reset-actors (called inside initialize!'s spawned lambda) skips title-control
+    ;; (no-kill mask) and the atoll BSP (not an entity actor).
+    ;; apply-settings is safe — same function called every frame in setting-control:update.
+    (format 0 "[title-obs] calling initialize! 'game atoll-start~%")
+    (initialize! *game-info* 'game (the-as game-save #f) "atoll-start" (the-as resetter-spec #f))
+    (format 0 "[title-obs] initialize! returned — going idle~%")
     (go-virtual idle)
-    (format 0 "[title-obs] after go-virtual idle (unreachable if state switch)~%")
     )
   :post (behavior ()
     (set! (-> *setting-control* cam-current fov) (-> *setting-control* cam-target fov))

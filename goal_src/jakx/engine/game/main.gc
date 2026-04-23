@@ -52,15 +52,16 @@
     ;; warmup: first display-sync runs display-frame-start which sets up
     ;; the bucket chain on the on-screen frame.
     (display-sync disp)
-    (format 0 "display-loop: running~%")
 
     (while *run*
-      ;; Update camera + run draw pipeline FIRST so buckets are filled
-      ;; before display-frame-finish runs VU1 inits. Matches jak3 ordering:
-      ;; update-camera → *draw-hook* → display-frame-finish → display-sync.
+      (set! *artist-all-visible* #t)
+      (set! *external-cam-mode* 'locked)
+      (set-vector! (-> *math-camera* trans) -67563.0 900000.0 -299048.0 1.0)
+      (set-vector! (-> *save-camera-inv-rot* rvec) 1.0 0.0 0.0 0.0)
+      (set-vector! (-> *save-camera-inv-rot* uvec) 0.0 0.0 1.0 0.0)
+      (set-vector! (-> *save-camera-inv-rot* fvec) 0.0 -1.0 0.0 0.0)
       ;; og:preserve-this — tell C++ loader which levels to load each frame.
       ;; level-update calls __pc-set-levels internally but is too heavy to call here.
-      ;; This inline minimal version is equivalent for the loader.
       (#when PC_PORT
         (let ((lev-names (new 'stack-no-clear 'array 'string 10)))
           (dotimes (i 10) (set! (-> lev-names i) "none"))
@@ -68,7 +69,6 @@
             (let ((lev (-> *level* level i)))
               (when (or (= (-> lev status) 'active) (= (-> lev status) 'alive) (= (-> lev status) 'loaded) (= (-> lev status) 'loading))
                 (set! (-> lev-names i) (symbol->string (bsp-name lev))))))
-          (format 0 "[main] calling __pc-set-levels lev0=~A~%" (-> lev-names 0))
           (__pc-set-levels lev-names)))
       (update-camera)
       ;; Seed non-zero mood times on active levels so background DMA packets
@@ -84,7 +84,6 @@
             (set! (-> lev mood-context times 0 w) 1.0)
             (update-mood-itimes (-> lev mood-context)))))
       (*draw-hook*)
-      (format 0 "[main] before display-frame-finish~%")
       (display-frame-finish disp)
       ;; og:preserve-this — load common.TXT into *common-text*. Ported from jak3
       ;; main.gc:1519 (display-loop-main). Guarded by *level-text-file-load-flag*
