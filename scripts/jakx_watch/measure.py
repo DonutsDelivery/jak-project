@@ -12,11 +12,12 @@ Usage:
 Categories (per file):
   real-clean   : has defun/defmethod, no ERROR/"failed to figure out" markers
   real-partial : has defun/defmethod AND some error markers
-  split-failed : 0 defuns + 0 defmethods + has "failed to figure out" markers
-                 or starts with top-level (local-vars — top-level splitting
-                 never ran; symptom of types_succeeded=false.
-  static-only  : 0 defuns + 0 defmethods + 0 failure markers
-                 (headers, data-only files — legitimately empty of code)
+  split-failed : 0 defuns + 0 defmethods + at least one ERROR or FAILED marker.
+                 The functions exist but couldn't be decompiled.
+  static-only  : 0 defuns + 0 defmethods + 0 failure markers.
+                 Includes headers, data-only files, and top-level init-only
+                 files (e.g. mips2c installer sequences that emit (local-vars)
+                 but no GOAL function bodies).
   unknown      : doesn't fit any bucket (should not happen)
 """
 from __future__ import annotations
@@ -73,12 +74,12 @@ def classify(text: str) -> tuple[str, dict]:
     fn_total = defun_ct + defmethod_ct
 
     if fn_total == 0:
-        if failed_ct > 0 or local_vars_top:
-            cat = "split-failed"
-        elif error_ct > 0:
-            # no defuns, has errors (e.g. "ERROR: function has no type analysis")
+        if failed_ct > 0 or error_ct > 0:
+            # Failed or errored with no recoverable defuns — truly split-failed.
             cat = "split-failed"
         else:
+            # No errors: either a header/data file or a top-level init-only file
+            # (mips2c installers, symbol tables) — not a decompilation failure.
             cat = "static-only"
     else:
         if failed_ct + error_ct == 0:

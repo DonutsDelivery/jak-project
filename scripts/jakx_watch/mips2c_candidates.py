@@ -129,12 +129,15 @@ def main():
     print()
 
     # For each jak3 fn not yet in jakx, find which jakx decomp files reference it.
+    # Use -P with lookahead so "draw-string-asm" doesn't match "draw-string-asm-packed".
+    # GOAL name chars: [a-z0-9?!*<>+-]. Boundary = not followed by [a-z0-9!?*<>-].
     refs: dict[str, list[str]] = collections.defaultdict(list)
     candidate_fns = sorted(all_jak3_fns - jakx_fns)
     for fn in candidate_fns:
-        # Use fixed-string grep; ripgrep handles parens.
+        import re as _re
+        pattern = _re.escape(fn) + r"(?![a-z0-9!?*<>-])"
         r = subprocess.run(
-            ["grep", "-l", "-F", "-e", fn, "-r", str(decomp_dir)],
+            ["grep", "-l", "-P", "-e", pattern, "-r", str(decomp_dir)],
             capture_output=True,
             text=True,
             check=False,
