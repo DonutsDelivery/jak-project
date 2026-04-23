@@ -402,6 +402,11 @@
   (draw *sky-work*)
   (flush-cache 0)
   (foreground-engine-execute *foreground-draw-engine*)
+
+  ;; Entity birth: spawn/kill BSP entity-actors each frame.
+  ;; Matches jak3 real-main-draw-hook:1674. Gated internally on *spawn-actors*.
+  (actors-update *level*)
+
   (init-background)
   (execute-connections *background-draw-engine* #f)
   (finish-background)

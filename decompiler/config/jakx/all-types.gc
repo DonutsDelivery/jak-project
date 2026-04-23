@@ -43839,7 +43839,7 @@
   
 
 
-(define-extern output-race-mesh (function none))
+(define-extern output-race-mesh (function race-line none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-weapons-h             ;;
