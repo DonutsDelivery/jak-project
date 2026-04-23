@@ -15236,7 +15236,6 @@
 
   
 
-#|
 (deftype sky-work (structure)
   ((adgif-tmpl       dma-gif-packet  :inline :offset-assert 0)
    (draw-tmpl        dma-gif-packet  :inline :offset-assert 32)
@@ -15267,7 +15266,7 @@
    (time             float                   :offset-assert 1072)
    (off-s            uint16                  :offset-assert 1076)
    (off-t            uint16                  :offset-assert 1078)
-   (orbit            sky-orbit       3 :inline :offset-assert 1080) ;; guessed by decompiler
+   (orbit            sky-orbit       3 :inline) ;; binary: 1080; decompiler aligns to 1088 (stride 32)
    (upload-data      sky-upload-data :inline :offset-assert 1184)
    (ambi-color       vector          :inline :offset-assert 1376)
    (ambi-color-lower vector          :inline :offset-assert 1392)
@@ -15319,7 +15318,6 @@
     (sky-work-method-36 (_type_ dma-buffer) none) ;; 36
     )
   )
-|#
 
 
 
@@ -59255,11 +59253,11 @@
 ;; (define-extern ragdoll-edit-info object) ;; clobbers active deftype
 ;; ragdoll-test activated at L50155
 (define-extern rb-debug-state-record object)
-(define-extern ripple-globals object)
+;; (define-extern ripple-globals object) ;; clobbers active deftype
 (define-extern sce-dirent object)
 ;; (define-extern search-info object) ;; clobbers active deftype
 ;; (define-extern shrub-view-data object) ;; clobbers active deftype
-(define-extern sky-work object)
+;; (define-extern sky-work object) ;; clobbers active deftype
 ;; (define-extern smoke-particle object) ;; clobbers active deftype
 ;; (define-extern sparticle-birthinfo object) ;; clobbers active deftype
 ;; (define-extern sparticle-launchinfo object) ;; clobbers active deftype
@@ -59346,7 +59344,7 @@
 (define-extern net-lanpeer-desc object)
 ;; (define-extern net-object-filter-data object)  ;; clobbers active deftype
 ;;(define-extern net-player-rushhour object)
-(define-extern ocean-wave-frames object)
+;; (define-extern ocean-wave-frames object) ;; clobbers active deftype
 (define-extern particle-buffer object)
 ;; (define-extern ragdoll-joint object) ;; clobbers active deftype
 ;;(define-extern shadow-vu1-data object)
