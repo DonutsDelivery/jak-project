@@ -2078,7 +2078,15 @@
     "setup-blerc-chains-for-one-fragment",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: light-trails
-    "light-trail-tracker-common-post"
+    "light-trail-tracker-common-post",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-deathrace
+    "(method 110 net-player-deathrace)",
+    "(method 48 net-player-deathrace)",
+    // source: net-eco
+    "eco-mgr-init-by-other",
+    // source: net-eco-types
+    "(method 53 eco-blue)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
