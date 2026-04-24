@@ -2031,7 +2031,11 @@
     "calc-animation-from-spr",
     "decompress-frame-data-pair-to-accumulator",
     // source: math
-    "exp"
+    "exp",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: lights
+    "add-light-sphere-to-light-group",
+    "light-hash-get-bucket-index"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
