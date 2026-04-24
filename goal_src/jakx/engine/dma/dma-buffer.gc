@@ -354,8 +354,8 @@
 (deftype dma-gif (structure)
   "Believed unused GIF header type."
   ((gif   uint64   2)
-   (gif0 uint64 :overlay-at (-> gif 0))
-   (gif1 uint64 :overlay-at (-> gif 1))
+   (gif0  uint64   :overlay-at (-> gif 0))
+   (gif1  uint64   :overlay-at (-> gif 1))
    (quad  uint128  :overlay-at (-> gif 0))
    )
   )
@@ -365,8 +365,8 @@
   "The header for a DMA transfer that goes directly to GIF, containing DMA, VIF, GIF tags."
   ((dma-vif  dma-packet  :inline)
    (gif      uint64      2)
-   (gif0 uint64 :overlay-at (-> gif 0))
-   (gif1 uint64 :overlay-at (-> gif 1))
+   (gif0     uint64        :overlay-at (-> gif 0))
+   (gif1     uint64        :overlay-at (-> gif 1))
    (quad     uint128     2 :overlay-at (-> dma-vif dma))
    )
   )
@@ -428,28 +428,40 @@
   "Add DMA tags to load the given VU function. The destination in vu instruction memory
    is specific inside the vu-function. This does NOT copy the vu-function into the buffer,
    but creates a reference to the existing VU function."
-
-  ;; The first 4 bytes of a vu-function object's data are discarded because they aren't aligned.
-  (let ((func-ptr (the-as pointer (&-> vu-func data 4)))
-        (qlen (-> vu-func qlength)) ;; number of quadwords
-        (origin (-> vu-func origin)) ;; destination address in VU instruction memory.
+  (let ((v1-0 (the-as object (+ (the-as uint vu-func) 16)))
+        (a3-0 (-> vu-func qlength))
+        (a1-1 (-> vu-func origin))
         )
-    ;; loop until whole program is transferred.
-    (while (> qlen 0)
-      ;; transfer up to 127 quadwords at a single time.
-      (let ((qwc-now (min 127 qlen)))
-        ;; Set up DMA to transfer the data from the vu-function
-        ;; ref id = reference to data outside of the buffer.
-        (dma-buffer-add-ref-vif2 dma-buf qwc-now func-ptr
-                    ;; Set up first vifcode as a flush.
-                    (new 'static 'vif-tag :cmd (if (zero? flush-path-3) (vif-cmd flushe) (vif-cmd flusha)))
-                    ;; next vifcode, transfer microprogram. This is in 64-bit units (VU instructions)
-                    (new 'static 'vif-tag :cmd (vif-cmd mpg) :num (shl qwc-now 1) :imm origin)
-                    )
-        ;; increment by qwc-now quadwords.
-        (&+! func-ptr (shl qwc-now 4))
-        (set! qlen (- qlen qwc-now))
-        (+! origin (shl qwc-now 1))
+    (while (> a3-0 0)
+      (let ((t0-1 (min 127 a3-0)))
+        (let* ((t1-1 dma-buf)
+               (t2-0 (-> t1-1 base))
+               )
+          (set! (-> (the-as (pointer int64) t2-0))
+                (logior (logior #x30000000 (shr (shl t0-1 48) 48)) (shr (shl (the-as int v1-0) 33) 1))
+                )
+          (let ((t3-5 (shr
+                        (shl
+                          (if (zero? flush-path-3)
+                              16
+                              19
+                              )
+                          57
+                          )
+                        33
+                        )
+                      )
+                )
+            (s.w! (+ t2-0 8) t3-5)
+            )
+          (let ((t3-8 (logior (logior #x4a000000 (shr (shl a1-1 48) 48)) (shr (shl (* t0-1 2) 56) 40))))
+            (s.w! (+ t2-0 12) t3-8)
+            )
+          (set! (-> t1-1 base) (&+ t2-0 16))
+          )
+        (set! v1-0 (+ (the-as uint v1-0) (* t0-1 16)))
+        (set! a3-0 (- a3-0 t0-1))
+        (+! a1-1 (* t0-1 2))
         )
       )
     )

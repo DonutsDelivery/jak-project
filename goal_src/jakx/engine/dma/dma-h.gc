@@ -139,7 +139,7 @@
 
 (deftype dma-bank-control (structure)
   "Memory mapping for shared DMA registers."
-  ((ctrl     dma-ctrl  :offset   0)
+  ((ctrl     dma-ctrl)
    (stat     uint32    :offset  16)
    (pcr      uint32    :offset  32)
    (sqwc     dma-sqwc  :offset  48)
@@ -180,7 +180,7 @@
 
 (deftype dma-bucket (structure)
   "A linked list of DMA data, typically all in the same category. Used to organize the full DMA chain."
-  ((tag    dma-tag)
+  ((tag    uint64)
    (last   (pointer dma-tag))
    (dummy  uint32)
    (next   uint32  :offset   4)

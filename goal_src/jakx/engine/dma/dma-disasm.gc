@@ -22,172 +22,173 @@
 
 
 (define *vif-disasm-table*
-  (new 'static 'boxed-array :type vif-disasm-element
-    (new 'static 'vif-disasm-element :mask #x7f :string1 "nop")
-    (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 stcycl) :print #x2 :string1 "stcycl")
-    (new 'static 'vif-disasm-element
-      :mask #x7f
-      :tag (vif-cmd-32 offset)
-      :print #x1
-      :string1 "offset"
-      :string2 "offset"
+  (the-as array
+    (new 'static 'boxed-array :type vif-disasm-element
+      (new 'static 'vif-disasm-element :mask #x7f :string1 "nop")
+      (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 stcycl) :print #x2 :string1 "stcycl")
+      (new 'static 'vif-disasm-element
+        :mask #x7f
+        :tag (vif-cmd-32 offset)
+        :print #x1
+        :string1 "offset"
+        :string2 "offset"
+        )
+      (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 base) :print #x1 :string1 "base" :string2 "base")
+      (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 itop) :print #x1 :string1 "itop" :string2 "addr")
+      (new 'static 'vif-disasm-element
+        :mask #x7f
+        :tag (vif-cmd-32 stmod)
+        :print #x1
+        :string1 "stmod"
+        :string2 "mode"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x7f
+        :tag (vif-cmd-32 mskpath3)
+        :print #x1
+        :string1 "mskpath3"
+        :string2 "mask"
+        )
+      (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 mark) :print #x1 :string1 "mark" :string2 "mark")
+      (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 flushe) :string1 "flushe")
+      (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 flush) :string1 "flush")
+      (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 flusha) :string1 "flusha")
+      (new 'static 'vif-disasm-element
+        :mask #x7f
+        :tag (vif-cmd-32 mscal)
+        :print #x1
+        :string1 "mscal"
+        :string2 "addr"
+        )
+      (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 mscnt) :string1 "mscnt")
+      (new 'static 'vif-disasm-element
+        :mask #x7f
+        :tag (vif-cmd-32 mscalf)
+        :print #x1
+        :string1 "mscalf"
+        :string2 "addr"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x7f
+        :tag (vif-cmd-32 stmask)
+        :print #x3
+        :string1 "stmask"
+        :string2 "mask"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x7f
+        :tag (vif-cmd-32 strow)
+        :print #x4
+        :string1 "strow"
+        :string2 "row"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x7f
+        :tag (vif-cmd-32 stcol)
+        :print #x4
+        :string1 "stcol"
+        :string2 "col"
+        )
+      (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 mpg) :print #x5 :string1 "mpg")
+      (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 direct) :print #x6 :string1 "direct")
+      (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 directhl) :print #x6 :string1 "directhl")
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-s-32)
+        :val #x10
+        :print #x7
+        :string1 "unpack-s-32"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-s-16)
+        :val #x8
+        :print #x7
+        :string1 "unpack-s-16"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-s-8)
+        :val #x4
+        :print #x7
+        :string1 "unpack-s-8"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-v2-32)
+        :val #x8
+        :print #x7
+        :string1 "unpack-v2-32"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-v2-16)
+        :val #x4
+        :print #x7
+        :string1 "unpack-v2-16"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-v2-8)
+        :val #x2
+        :print #x7
+        :string1 "unpack-v2-8"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-v3-32)
+        :val #xc
+        :print #x7
+        :string1 "unpack-v3-32"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-v3-16)
+        :val #x6
+        :print #x7
+        :string1 "unpack-v3-16"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-v3-8)
+        :val #x3
+        :print #x7
+        :string1 "unpack-v3-8"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-v4-32)
+        :val #x10
+        :print #x7
+        :string1 "unpack-v4-32"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-v4-16)
+        :val #x8
+        :print #x7
+        :string1 "unpack-v4-16"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-v4-8)
+        :val #x4
+        :print #x7
+        :string1 "unpack-v4-8"
+        )
+      (new 'static 'vif-disasm-element
+        :mask #x6f
+        :tag (vif-cmd-32 unpack-v4-5)
+        :val #x2
+        :print #x7
+        :string1 "unpack-v4-5"
+        )
+      (new 'static 'vif-disasm-element :print #x8)
       )
-    (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 base) :print #x1 :string1 "base" :string2 "base")
-    (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 itop) :print #x1 :string1 "itop" :string2 "addr")
-    (new 'static 'vif-disasm-element
-      :mask #x7f
-      :tag (vif-cmd-32 stmod)
-      :print #x1
-      :string1 "stmod"
-      :string2 "mode"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x7f
-      :tag (vif-cmd-32 mskpath3)
-      :print #x1
-      :string1 "mskpath3"
-      :string2 "mask"
-      )
-    (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 mark) :print #x1 :string1 "mark" :string2 "mark")
-    (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 flushe) :string1 "flushe")
-    (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 flush) :string1 "flush")
-    (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 flusha) :string1 "flusha")
-    (new 'static 'vif-disasm-element
-      :mask #x7f
-      :tag (vif-cmd-32 mscal)
-      :print #x1
-      :string1 "mscal"
-      :string2 "addr"
-      )
-    (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 mscnt) :string1 "mscnt")
-    (new 'static 'vif-disasm-element
-      :mask #x7f
-      :tag (vif-cmd-32 mscalf)
-      :print #x1
-      :string1 "mscalf"
-      :string2 "addr"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x7f
-      :tag (vif-cmd-32 stmask)
-      :print #x3
-      :string1 "stmask"
-      :string2 "mask"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x7f
-      :tag (vif-cmd-32 strow)
-      :print #x4
-      :string1 "strow"
-      :string2 "row"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x7f
-      :tag (vif-cmd-32 stcol)
-      :print #x4
-      :string1 "stcol"
-      :string2 "col"
-      )
-    (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 mpg) :print #x5 :string1 "mpg")
-    (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 direct) :print #x6 :string1 "direct")
-    (new 'static 'vif-disasm-element :mask #x7f :tag (vif-cmd-32 directhl) :print #x6 :string1 "directhl")
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-s-32)
-      :val #x10
-      :print #x7
-      :string1 "unpack-s-32"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-s-16)
-      :val #x8
-      :print #x7
-      :string1 "unpack-s-16"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-s-8)
-      :val #x4
-      :print #x7
-      :string1 "unpack-s-8"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-v2-32)
-      :val #x8
-      :print #x7
-      :string1 "unpack-v2-32"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-v2-16)
-      :val #x4
-      :print #x7
-      :string1 "unpack-v2-16"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-v2-8)
-      :val #x2
-      :print #x7
-      :string1 "unpack-v2-8"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-v3-32)
-      :val #xc
-      :print #x7
-      :string1 "unpack-v3-32"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-v3-16)
-      :val #x6
-      :print #x7
-      :string1 "unpack-v3-16"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-v3-8)
-      :val #x3
-      :print #x7
-      :string1 "unpack-v3-8"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-v4-32)
-      :val #x10
-      :print #x7
-      :string1 "unpack-v4-32"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-v4-16)
-      :val #x8
-      :print #x7
-      :string1 "unpack-v4-16"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-v4-8)
-      :val #x4
-      :print #x7
-      :string1 "unpack-v4-8"
-      )
-    (new 'static 'vif-disasm-element
-      :mask #x6f
-      :tag (vif-cmd-32 unpack-v4-5)
-      :val #x2
-      :print #x7
-      :string1 "unpack-v4-5"
-      )
-    (new 'static 'vif-disasm-element :print #x8)
     )
   )
 
 (defun disasm-vif-details ((fmt-dest symbol) (vif-data (pointer uint8)) (unpack-cmd vif-cmd) (unpack-count int))
-  "Disassemble the data stored in a vif unpack."
   (let ((s4-0 unpack-count))
     (cond
       ((= unpack-cmd (vif-cmd unpack-v4-8))
@@ -298,152 +299,563 @@
   #f
   )
 
-(defun disasm-vif-tag ((tag (pointer vif-tag)) (count int) (format-dest symbol) (details? symbol))
-  "Disassemble vif tag, and possibly the associated data."
-  (local-vars (sv-16 vif-cmd) (sv-32 (pointer vif-tag)) (sv-48 int) (sv-64 uint))
-  (let ((gp-0 0))
-    (while (< gp-0 (* count 4))
-      (let ((s0-0 4))
-        (let ((s1-0 (-> tag 0)))
-          (format format-dest "  #x~X:" tag)
-          (dotimes (v1-0 (-> *vif-disasm-table* length))
-            (set! sv-16 (-> s1-0 cmd))
-            (when (= (logand sv-16 (-> *vif-disasm-table* v1-0 mask)) (-> *vif-disasm-table* v1-0 tag))
-              (let ((a0-12 (-> *vif-disasm-table* v1-0 print)))
-                (cond
-                  ((zero? a0-12)
-                   (format format-dest "  (~s :irq ~D)~%" (-> *vif-disasm-table* v1-0 string1) (-> s1-0 irq))
-                   )
-                  ((= a0-12 1)
-                   (format
-                     format-dest
-                     "  (~s :irq ~D :~s #x~X)~%"
-                     (-> *vif-disasm-table* v1-0 string1)
-                     (-> s1-0 irq)
-                     (-> *vif-disasm-table* v1-0 string2)
-                     (-> s1-0 imm)
-                     )
-                   )
-                  ((= a0-12 2)
-                   (let ((t1-1 (-> s1-0 imm)))
-                     (format
-                       format-dest
-                       "  (~s :irq ~D :wl ~D :cl ~D)~%"
-                       (-> *vif-disasm-table* v1-0 string1)
-                       (-> s1-0 irq)
-                       (shr (shl t1-1 48) 56)
-                       (shr (shl t1-1 56) 56)
-                       )
-                     )
-                   )
-                  ((= a0-12 3)
-                   (set! s0-0 8)
-                   (format
-                     format-dest
-                     "  (~s :irq ~D :~s #x~X)~%"
-                     (-> *vif-disasm-table* v1-0 string1)
-                     (-> s1-0 irq)
-                     (-> *vif-disasm-table* v1-0 string2)
-                     (-> tag 1)
-                     )
-                   )
-                  ((= a0-12 4)
-                   (set! s0-0 20)
-                   (format
-                     format-dest
-                     "  (~s :irq ~D :~s "
-                     (-> *vif-disasm-table* v1-0 string1)
-                     (-> s1-0 irq)
-                     (-> *vif-disasm-table* v1-0 string2)
-                     )
-                   (format format-dest "#x~X #x~X #x~X #x~X)~%" (-> tag 1) (-> tag 2) (-> tag 3) (-> tag 4))
-                   )
-                  ((= a0-12 5)
-                   (format
-                     format-dest
-                     "  (~s :irq ~D :instructions #x~D :addr #x~X)~%"
-                     (-> *vif-disasm-table* v1-0 string1)
-                     (-> s1-0 irq)
-                     (-> s1-0 num)
-                     (-> s1-0 imm)
-                     )
-                   )
-                  ((= a0-12 6)
-                   (if (-> s1-0 imm)
-                       (set! s0-0 #x100000)
-                       (set! s0-0 (the-as int (* (-> s1-0 imm) 16)))
-                       )
-                   (format
-                     format-dest
-                     "  (~s :irq ~D :qwc #x~D)~%"
-                     (-> *vif-disasm-table* v1-0 string1)
-                     (-> s1-0 irq)
-                     (-> s1-0 imm)
-                     )
-                   (set! sv-32 (&-> tag 1))
-                   (set! sv-48 0)
-                   (while (< sv-48 (the-as int (-> s1-0 imm)))
-                     (format
-                       format-dest
-                       "  #x~X:    #x~8x #x~8x #x~8x #x~8x~%"
-                       (+ (+ (* sv-48 16) 4) (the-as int tag))
-                       (-> sv-32 (* sv-48 4))
-                       (-> sv-32 (+ (* sv-48 4) 1))
-                       (-> sv-32 (+ (* sv-48 4) 2))
-                       (-> sv-32 (+ (* sv-48 4) 3))
-                       )
-                     (set! sv-48 (+ sv-48 1))
-                     )
-                   #f
-                   )
-                  ((= a0-12 7)
-                   (set! s0-0 (the-as int (+ (logand -4 (+ (* (-> *vif-disasm-table* v1-0 val) (-> s1-0 num)) 3)) 4)))
-                   (set! sv-64 (-> s1-0 imm))
-                   (format
-                     format-dest
-                     "  (~s :irq ~D :num ~D :addr #x~X "
-                     (-> *vif-disasm-table* v1-0 string1)
-                     (-> s1-0 irq)
-                     (-> s1-0 num)
-                     (shr (shl sv-64 54) 54)
-                     )
-                   (format
-                     format-dest
-                     ":msk ~D :flg ~D :usn ~D [skip ~d])~%"
-                     (-> s1-0 msk)
-                     (shr (shl sv-64 48) 63)
-                     (shr (shl sv-64 49) 63)
-                     (the-as uint s0-0)
-                     )
-                   (if details?
-                       (disasm-vif-details
-                         format-dest
-                         (the-as (pointer uint8) tag)
-                         (logand sv-16 (vif-cmd cmd-mask))
-                         (the-as int (-> s1-0 num))
-                         )
-                       )
-                   )
-                  ((= a0-12 8)
-                   (format format-dest "  (*unknown* vif-tag #x~X)~%" (-> s1-0 cmd))
-                   )
-                  )
-                )
-              (set! v1-0 (-> *vif-disasm-table* length))
-              )
-            )
-          )
-        (+! gp-0 s0-0)
-        (&+! tag s0-0)
-        )
-      )
-    (- gp-0 (* count 4))
+;; ERROR: failed type prop at 22: Could not figure out load: (set! a0 (l.wu (+ a0 4)))
+;; ERROR: Unsupported inline assembly instruction kind - [srl a3, s1, 31]
+;; ERROR: Unsupported inline assembly instruction kind - [srl a3, s1, 31]
+;; ERROR: Unsupported inline assembly instruction kind - [srl a3, s1, 31]
+;; ERROR: Unsupported inline assembly instruction kind - [srl a3, s1, 31]
+;; ERROR: Unsupported inline assembly instruction kind - [srl a3, s1, 31]
+;; ERROR: Unsupported inline assembly instruction kind - [srl a3, s1, 31]
+;; ERROR: Unsupported inline assembly instruction kind - [srl a3, s1, 31]
+;; ERROR: Unsupported inline assembly instruction kind - [srl a3, s1, 31]
+(defun disasm-vif-tag ((a0-0 (pointer vif-tag)) (a1-0 int) (a2-0 symbol) (a3-0 symbol))
+  (local-vars
+    (v0-0 object)
+    (v0-1 none)
+    (v0-2 none)
+    (v0-3 none)
+    (v0-4 none)
+    (v0-5 none)
+    (v0-6 none)
+    (v0-7 none)
+    (v0-8 int)
+    (v1-0 int)
+    (v1-1 none)
+    (v1-2 none)
+    (v1-3 none)
+    (v1-4 none)
+    (v1-5 none)
+    (v1-6 none)
+    (v1-7 none)
+    (v1-8 none)
+    (v1-9 none)
+    (v1-10 none)
+    (v1-11 none)
+    (v1-12 none)
+    (v1-13 none)
+    (v1-14 none)
+    (v1-15 none)
+    (v1-16 none)
+    (v1-17 none)
+    (v1-18 none)
+    (v1-19 none)
+    (v1-20 none)
+    (v1-21 none)
+    (v1-22 none)
+    (v1-23 none)
+    (v1-24 none)
+    (v1-25 none)
+    (v1-26 none)
+    (v1-27 none)
+    (v1-28 none)
+    (v1-29 none)
+    (v1-30 none)
+    (v1-31 none)
+    (v1-32 none)
+    (v1-33 none)
+    (v1-34 none)
+    (v1-35 none)
+    (v1-36 none)
+    (v1-37 none)
+    (v1-38 none)
+    (v1-39 none)
+    (v1-40 none)
+    (v1-41 none)
+    (v1-42 none)
+    (v1-43 none)
+    (v1-45 none)
+    (v1-46 none)
+    (v1-47 none)
+    (v1-48 none)
+    (v1-49 none)
+    (v1-50 none)
+    (v1-51 none)
+    (v1-52 none)
+    (v1-53 none)
+    (v1-54 none)
+    (v1-55 none)
+    (v1-56 none)
+    (v1-57 none)
+    (v1-58 none)
+    (v1-59 none)
+    (v1-60 none)
+    (v1-61 none)
+    (v1-63 none)
+    (v1-67 int)
+    (v1-69 int)
+    (a0-1 symbol)
+    (a0-2 int)
+    (a0-3 vif-cmd)
+    (a0-4 int)
+    (a0-5 int)
+    (a0-6 uint)
+    (a0-7 none)
+    (a0-9 none)
+    (a0-10 none)
+    (a0-11 none)
+    (a0-12 none)
+    (a0-15 none)
+    (a0-21 none)
+    (a0-22 none)
+    (a0-24 none)
+    (a0-25 none)
+    (a0-29 none)
+    (a0-30 none)
+    (a0-31 none)
+    (a0-32 none)
+    (a0-33 none)
+    (a0-34 none)
+    (a0-40 array)
+    (a0-41 int)
+    (a1-1 string)
+    (a1-2 array)
+    (a1-3 none)
+    (a1-4 none)
+    (a1-5 none)
+    (a1-7 none)
+    (a1-8 none)
+    (a1-10 none)
+    (a1-11 none)
+    (a1-13 none)
+    (a1-14 none)
+    (a1-16 none)
+    (a1-17 none)
+    (a1-19 none)
+    (a1-20 none)
+    (a1-21 none)
+    (a1-23 none)
+    (a1-24 none)
+    (a1-26 none)
+    (a1-27 none)
+    (a1-28 none)
+    (a1-30 none)
+    (a1-31 none)
+    (a1-32 none)
+    (a1-33 none)
+    (a1-34 none)
+    (a1-35 none)
+    (a1-36 none)
+    (a1-37 none)
+    (a1-39 none)
+    (a2-1 (pointer vif-tag))
+    (a2-2 none)
+    (a2-3 none)
+    (a2-4 none)
+    (a2-5 none)
+    (a2-6 none)
+    (a2-7 none)
+    (a2-8 none)
+    (a2-9 none)
+    (a2-10 none)
+    (a2-11 none)
+    (a2-12 none)
+    (a2-13 none)
+    (a2-14 none)
+    (a2-15 none)
+    (a2-16 none)
+    (a2-17 none)
+    (a2-18 none)
+    (a2-19 none)
+    (a2-20 none)
+    (a2-21 none)
+    (a2-22 none)
+    (a2-23 none)
+    (a2-24 none)
+    (a2-25 none)
+    (a2-26 none)
+    (a2-27 none)
+    (a2-28 none)
+    (a2-29 none)
+    (a2-30 none)
+    (a2-31 none)
+    (a2-32 none)
+    (a2-33 none)
+    (a2-34 none)
+    (a2-35 none)
+    (a3-1 none)
+    (a3-2 none)
+    (a3-3 none)
+    (a3-4 none)
+    (a3-5 none)
+    (a3-6 none)
+    (a3-7 none)
+    (a3-8 none)
+    (a3-9 none)
+    (a3-10 none)
+    (a3-11 none)
+    (a3-12 none)
+    (a3-13 none)
+    (a3-14 none)
+    (a3-15 none)
+    (a3-16 none)
+    (a3-17 none)
+    (a3-18 none)
+    (a3-19 none)
+    (t0-0 none)
+    (t0-1 none)
+    (t0-2 none)
+    (t0-3 none)
+    (t0-4 none)
+    (t0-5 none)
+    (t0-6 none)
+    (t0-7 none)
+    (t0-8 none)
+    (t0-9 none)
+    (t0-10 none)
+    (t0-11 none)
+    (t0-12 none)
+    (t0-13 none)
+    (t0-14 none)
+    (t0-15 none)
+    (t0-16 none)
+    (t1-0 none)
+    (t1-1 none)
+    (t1-2 none)
+    (t1-3 none)
+    (t1-4 none)
+    (t1-5 none)
+    (t1-6 none)
+    (t1-7 none)
+    (t1-8 none)
+    (t1-9 none)
+    (t1-10 none)
+    (t1-11 none)
+    (t2-0 none)
+    (t2-1 none)
+    (t2-2 none)
+    (t2-3 none)
+    (t2-4 none)
+    (s0-0 int)
+    (s1-0 vif-tag)
+    (t9-0 (function _varargs_ object))
+    (t9-1 none)
+    (t9-2 none)
+    (t9-3 none)
+    (t9-4 none)
+    (t9-5 none)
+    (t9-6 none)
+    (t9-7 none)
+    (t9-8 none)
+    (t9-9 none)
+    (t9-10 none)
+    (t9-11 none)
+    (t9-12 none)
+    (t9-13 none)
+    (gp-0 int)
+    (sv-16 vif-cmd)
+    (sv-32 none)
+    (sv-48 none)
+    (sv-64 none)
     )
+  (set! gp-0 0)
+  (while (begin (set! v1-67 (sll a1-0 2)) (<.si gp-0 v1-67))
+    (set! s0-0 4)
+    (set! s1-0 (-> a0-0 0))
+    (set! t9-0 format)
+    (set! a0-1 a2-0)
+    (set! a1-1 L141)
+    (set! a2-1 a0-0)
+    (call! a0-1 a1-1 a2-1)
+    (set! v1-0 0)
+    (while (begin (set! a0-40 *vif-disasm-table*) (set! a0-41 (-> a0-40 length)) (<.si v1-0 a0-41))
+      (when (begin
+              (set! a0-2 (sll s1-0 33))
+              (set! a0-3 (srl a0-2 57))
+              (set! sv-16 a0-3)
+              (set! a0-4 (sll v1-0 2))
+              (set! a1-2 *vif-disasm-table*)
+              (set! a0-5 (+ a0-4 a1-2))
+              (set! a0-6 (l.wu (+ a0-5 12)))
+              (set! a0-7 (the-as none (l.wu (+ a0-6 4))))
+              (set! a1-3 (the-as none sv-16))
+              (set! a2-2 (the-as none (sll v1-0 2)))
+              (set! a3-1 (the-as none *vif-disasm-table*))
+              (set! a2-3 (the-as none (+ a2-2 a3-1)))
+              (set! a2-4 (the-as none (l.wu (+ a2-3 12))))
+              (set! a2-5 (the-as none (l.wu a2-4)))
+              (set! a1-4 (the-as none (logand a1-3 a2-5)))
+              (= a1-4 a0-7)
+              )
+        (cond
+          ((begin
+             (set! a0-9 (the-as none (sll v1-0 2)))
+             (set! a1-5 (the-as none *vif-disasm-table*))
+             (set! a0-10 (the-as none (+ a0-9 a1-5)))
+             (set! a0-11 (the-as none (l.wu (+ a0-10 12))))
+             (set! a0-12 (the-as none (l.wu (+ a0-11 12))))
+             (zero? a0-12)
+             )
+           (set! t9-1 (the-as none format))
+           (set! a0-13 (the-as none a2-0))
+           (set! a1-7 (the-as none L140))
+           (set! v1-1 (the-as none (sll v1-0 2)))
+           (set! a2-6 (the-as none *vif-disasm-table*))
+           (set! v1-2 (the-as none (+ v1-1 a2-6)))
+           (set! v1-3 (the-as none (l.wu (+ v1-2 12))))
+           (set! a2-7 (the-as none (l.wu (+ v1-3 16))))
+           (.srl a3-2 s1-0 31)
+           (set! v0-1 (the-as none (call!)))
+           )
+          ((begin (set! a1-8 (the-as none 1)) (= a0-12 a1-8))
+           (set! t9-2 (the-as none format))
+           (set! a0-14 (the-as none a2-0))
+           (set! a1-10 (the-as none L139))
+           (set! a2-8 (the-as none (sll v1-0 2)))
+           (set! a3-3 (the-as none *vif-disasm-table*))
+           (set! a2-9 (the-as none (+ a2-8 a3-3)))
+           (set! a2-10 (the-as none (l.wu (+ a2-9 12))))
+           (set! a2-11 (the-as none (l.wu (+ a2-10 16))))
+           (.srl a3-4 s1-0 31)
+           (set! v1-4 (the-as none (sll v1-0 2)))
+           (set! t0-0 (the-as none *vif-disasm-table*))
+           (set! v1-5 (the-as none (+ v1-4 t0-0)))
+           (set! v1-6 (the-as none (l.wu (+ v1-5 12))))
+           (set! t0-1 (the-as none (l.wu (+ v1-6 20))))
+           (set! v1-7 (the-as none (sll s1-0 48)))
+           (set! t1-0 (the-as none (srl v1-7 48)))
+           (set! v0-1 (the-as none (call!)))
+           )
+          ((begin (set! a1-11 (the-as none 2)) (= a0-12 a1-11))
+           (set! a0-15 (the-as none (sll s1-0 48)))
+           (set! t1-1 (the-as none (srl a0-15 48)))
+           (set! t9-3 (the-as none format))
+           (set! a0-16 (the-as none a2-0))
+           (set! a1-13 (the-as none L138))
+           (set! v1-8 (the-as none (sll v1-0 2)))
+           (set! a2-12 (the-as none *vif-disasm-table*))
+           (set! v1-9 (the-as none (+ v1-8 a2-12)))
+           (set! v1-10 (the-as none (l.wu (+ v1-9 12))))
+           (set! a2-13 (the-as none (l.wu (+ v1-10 16))))
+           (.srl a3-5 s1-0 31)
+           (set! v1-11 (the-as none (sll t1-1 48)))
+           (set! t0-2 (the-as none (srl v1-11 56)))
+           (set! v1-12 (the-as none (sll t1-1 56)))
+           (set! t1-2 (the-as none (srl v1-12 56)))
+           (set! v0-1 (the-as none (call!)))
+           )
+          ((begin (set! a1-14 (the-as none 3)) (= a0-12 a1-14))
+           (set! s0-0 (the-as int 8))
+           (set! t9-4 (the-as none format))
+           (set! a0-17 (the-as none a2-0))
+           (set! a1-16 (the-as none L139))
+           (set! a2-14 (the-as none (sll v1-0 2)))
+           (set! a3-6 (the-as none *vif-disasm-table*))
+           (set! a2-15 (the-as none (+ a2-14 a3-6)))
+           (set! a2-16 (the-as none (l.wu (+ a2-15 12))))
+           (set! a2-17 (the-as none (l.wu (+ a2-16 16))))
+           (.srl a3-7 s1-0 31)
+           (set! v1-13 (the-as none (sll v1-0 2)))
+           (set! t0-3 (the-as none *vif-disasm-table*))
+           (set! v1-14 (the-as none (+ v1-13 t0-3)))
+           (set! v1-15 (the-as none (l.wu (+ v1-14 12))))
+           (set! t0-4 (the-as none (l.wu (+ v1-15 20))))
+           (set! t1-3 (the-as none (l.wu (+ a0-0 4))))
+           (set! v0-1 (the-as none (call!)))
+           )
+          ((begin (set! a1-17 (the-as none 4)) (= a0-12 a1-17))
+           (set! s0-0 (the-as int 20))
+           (set! t9-5 (the-as none format))
+           (set! a0-18 (the-as none a2-0))
+           (set! a1-19 (the-as none L137))
+           (set! a2-18 (the-as none (sll v1-0 2)))
+           (set! a3-8 (the-as none *vif-disasm-table*))
+           (set! a2-19 (the-as none (+ a2-18 a3-8)))
+           (set! a2-20 (the-as none (l.wu (+ a2-19 12))))
+           (set! a2-21 (the-as none (l.wu (+ a2-20 16))))
+           (.srl a3-9 s1-0 31)
+           (set! v1-16 (the-as none (sll v1-0 2)))
+           (set! t0-5 (the-as none *vif-disasm-table*))
+           (set! v1-17 (the-as none (+ v1-16 t0-5)))
+           (set! v1-18 (the-as none (l.wu (+ v1-17 12))))
+           (set! t0-6 (the-as none (l.wu (+ v1-18 20))))
+           (call!)
+           (set! t9-6 (the-as none format))
+           (set! a0-19 (the-as none a2-0))
+           (set! a1-20 (the-as none L136))
+           (set! a2-22 (the-as none (l.wu (+ a0-0 4))))
+           (set! a3-10 (the-as none (l.wu (+ a0-0 8))))
+           (set! t0-7 (the-as none (l.wu (+ a0-0 12))))
+           (set! t1-4 (the-as none (l.wu (+ a0-0 16))))
+           (set! v0-1 (the-as none (call!)))
+           )
+          ((begin (set! a1-21 (the-as none 5)) (= a0-12 a1-21))
+           (set! t9-7 (the-as none format))
+           (set! a0-20 (the-as none a2-0))
+           (set! a1-23 (the-as none L135))
+           (set! v1-19 (the-as none (sll v1-0 2)))
+           (set! a2-23 (the-as none *vif-disasm-table*))
+           (set! v1-20 (the-as none (+ v1-19 a2-23)))
+           (set! v1-21 (the-as none (l.wu (+ v1-20 12))))
+           (set! a2-24 (the-as none (l.wu (+ v1-21 16))))
+           (.srl a3-11 s1-0 31)
+           (set! v1-22 (the-as none (sll s1-0 40)))
+           (set! t0-8 (the-as none (srl v1-22 56)))
+           (set! v1-23 (the-as none (sll s1-0 48)))
+           (set! t1-5 (the-as none (srl v1-23 48)))
+           (set! v0-1 (the-as none (call!)))
+           )
+          ((begin (set! a1-24 (the-as none 6)) (= a0-12 a1-24))
+           (cond
+             ((begin (set! a0-21 (the-as none (sll s1-0 48))) (set! a0-22 (the-as none (srl a0-21 48))) a0-22)
+              (set! s0-0 (the-as int #x100000))
+              (set! a0-23 (the-as none s0-0))
+              )
+             (else
+               (set! a0-24 (the-as none (sll s1-0 48)))
+               (set! a0-25 (the-as none (srl a0-24 48)))
+               (set! s0-0 (the-as int (sll a0-25 4)))
+               (set! a0-26 (the-as none s0-0))
+               )
+             )
+           (set! t9-8 (the-as none format))
+           (set! a0-27 (the-as none a2-0))
+           (set! a1-26 (the-as none L134))
+           (set! v1-24 (the-as none (sll v1-0 2)))
+           (set! a2-25 (the-as none *vif-disasm-table*))
+           (set! v1-25 (the-as none (+ v1-24 a2-25)))
+           (set! v1-26 (the-as none (l.wu (+ v1-25 12))))
+           (set! a2-26 (the-as none (l.wu (+ v1-26 16))))
+           (.srl a3-12 s1-0 31)
+           (set! v1-27 (the-as none (sll s1-0 48)))
+           (set! t0-9 (the-as none (srl v1-27 48)))
+           (call!)
+           (set! v1-28 (the-as none (+ a0-0 4)))
+           (set! sv-32 v1-28)
+           (set! v1-29 (the-as none 0))
+           (set! sv-48 v1-29)
+           (while (begin
+                    (set! v1-43 sv-48)
+                    (set! a0-29 (the-as none (sll s1-0 48)))
+                    (set! a0-30 (the-as none (srl a0-29 48)))
+                    (<.si v1-43 a0-30)
+                    )
+             (set! t9-9 (the-as none format))
+             (set! a0-28 (the-as none a2-0))
+             (set! a1-27 (the-as none L147))
+             (set! v1-30 sv-48)
+             (set! v1-31 (the-as none (sll v1-30 4)))
+             (set! v1-32 (the-as none (+ v1-31 4)))
+             (set! a2-27 (the-as none (+ v1-32 a0-0)))
+             (set! v1-33 sv-32)
+             (set! a3-13 sv-48)
+             (set! a3-14 (the-as none (sll a3-13 2)))
+             (set! a3-15 (the-as none (sll a3-14 2)))
+             (set! v1-34 (the-as none (+ v1-33 a3-15)))
+             (set! a3-16 (the-as none (l.wu v1-34)))
+             (set! v1-35 sv-32)
+             (set! t0-10 sv-48)
+             (set! t0-11 (the-as none (sll t0-10 2)))
+             (set! t0-12 (the-as none (+ t0-11 1)))
+             (set! t0-13 (the-as none (sll t0-12 2)))
+             (set! v1-36 (the-as none (+ v1-35 t0-13)))
+             (set! t0-14 (the-as none (l.wu v1-36)))
+             (set! v1-37 sv-32)
+             (set! t1-6 sv-48)
+             (set! t1-7 (the-as none (sll t1-6 2)))
+             (set! t1-8 (the-as none (+ t1-7 2)))
+             (set! t1-9 (the-as none (sll t1-8 2)))
+             (set! v1-38 (the-as none (+ v1-37 t1-9)))
+             (set! t1-10 (the-as none (l.wu v1-38)))
+             (set! v1-39 sv-32)
+             (set! t2-0 sv-48)
+             (set! t2-1 (the-as none (sll t2-0 2)))
+             (set! t2-2 (the-as none (+ t2-1 3)))
+             (set! t2-3 (the-as none (sll t2-2 2)))
+             (set! v1-40 (the-as none (+ v1-39 t2-3)))
+             (set! t2-4 (the-as none (l.wu v1-40)))
+             (call!)
+             (set! v1-41 sv-48)
+             (set! v1-42 (the-as none (+ v1-41 1)))
+             (set! sv-48 v1-42)
+             )
+           (set! v1-45 (the-as none #f))
+           (set! v0-1 (the-as none v1-45))
+           )
+          ((begin (set! a1-28 (the-as none 7)) (= a0-12 a1-28))
+           (when (begin
+                   (set! a0-31 (the-as none -4))
+                   (set! a1-30 (the-as none (sll v1-0 2)))
+                   (set! a2-28 (the-as none *vif-disasm-table*))
+                   (set! a1-31 (the-as none (+ a1-30 a2-28)))
+                   (set! a1-32 (the-as none (l.wu (+ a1-31 12))))
+                   (set! a1-33 (the-as none (l.wu (+ a1-32 8))))
+                   (set! a2-29 (the-as none (sll s1-0 40)))
+                   (set! a2-30 (the-as none (srl a2-29 56)))
+                   (set! a1-34 (the-as none (*.ui a1-33 a2-30)))
+                   (set! a1-35 (the-as none (+ a1-34 3)))
+                   (set! a0-32 (the-as none (logand a0-31 a1-35)))
+                   (set! s0-0 (the-as int (+ a0-32 4)))
+                   (set! a0-33 (the-as none (sll s1-0 48)))
+                   (set! a0-34 (the-as none (srl a0-33 48)))
+                   (set! sv-64 a0-34)
+                   (set! t9-10 (the-as none format))
+                   (set! a0-35 (the-as none a2-0))
+                   (set! a1-36 (the-as none L133))
+                   (set! v1-46 (the-as none (sll v1-0 2)))
+                   (set! a2-31 (the-as none *vif-disasm-table*))
+                   (set! v1-47 (the-as none (+ v1-46 a2-31)))
+                   (set! v1-48 (the-as none (l.wu (+ v1-47 12))))
+                   (set! a2-32 (the-as none (l.wu (+ v1-48 16))))
+                   (.srl a3-17 s1-0 31)
+                   (set! v1-49 (the-as none (sll s1-0 40)))
+                   (set! t0-15 (the-as none (srl v1-49 56)))
+                   (set! v1-50 sv-64)
+                   (set! v1-51 (the-as none (sll v1-50 54)))
+                   (set! t1-11 (the-as none (srl v1-51 54)))
+                   (call!)
+                   (set! t9-11 (the-as none format))
+                   (set! a0-36 (the-as none a2-0))
+                   (set! a1-37 (the-as none L132))
+                   (set! v1-52 (the-as none (sll s1-0 35)))
+                   (set! a2-33 (the-as none (srl v1-52 63)))
+                   (set! v1-53 sv-64)
+                   (set! v1-54 (the-as none (sll v1-53 48)))
+                   (set! a3-18 (the-as none (srl v1-54 63)))
+                   (set! v1-55 sv-64)
+                   (set! v1-56 (the-as none (sll v1-55 49)))
+                   (set! t0-16 (the-as none (srl v1-56 63)))
+                   (set! t1-12 (the-as none s0-0))
+                   (call!)
+                   a3-0
+                   )
+             (set! t9-12 (the-as none disasm-vif-details))
+             (set! a0-37 (the-as none a2-0))
+             (set! a1-38 (the-as none a0-0))
+             (set! v1-57 (the-as none sv-16))
+             (set! a2-34 (the-as none (logand v1-57 239)))
+             (set! v1-58 (the-as none (sll s1-0 40)))
+             (set! a3-19 (the-as none (srl v1-58 56)))
+             (set! v0-7 (the-as none (call!)))
+             )
+           (set! v1-59 (the-as none v0-7))
+           (set! v0-1 (the-as none v1-59))
+           )
+          ((begin (set! v1-60 (the-as none 8)) (= a0-12 v1-60))
+           (set! t9-13 (the-as none format))
+           (set! a0-38 (the-as none a2-0))
+           (set! a1-39 (the-as none L131))
+           (set! v1-61 (the-as none (sll s1-0 33)))
+           (set! a2-35 (the-as none (srl v1-61 57)))
+           (set! v0-1 (the-as none (call!)))
+           )
+          )
+        (set! v1-62 (the-as none v0-1))
+        (set! v1-63 (the-as none *vif-disasm-table*))
+        (set! v1-0 (the-as int (l.w v1-63)))
+        (set! a0-39 (the-as none v1-0))
+        )
+      (set! v1-0 (the-as int (+ v1-0 1)))
+      )
+    (set! gp-0 (+ gp-0 s0-0))
+    (set! a0-0 (+ a0-0 s0-0))
+    (set! v1-66 a0-0)
+    )
+  (set! v1-69 (sll a1-0 2))
+  (set! v0-8 (- gp-0 v1-69))
+  (ret-value v0-8)
   )
 
-;; WARN: Return type mismatch object vs none.
 (defun disasm-dma-tag ((tag dma-tag) (format-dest symbol))
-  "Disassemble just the 64-byte dma tag"
   (format format-dest "(dma-tag ")
   (let ((t9-1 format)
         (a0-2 format-dest)
@@ -497,17 +909,12 @@
       (format format-dest " :pce ~d" (-> tag pce))
       )
   (format format-dest ")~%")
-  (none)
   )
 
 (define *dma-disasm* #t)
 
 ;; WARN: Check prologue - tricky store of a0
 (defun disasm-dma-list ((data dma-packet) (mode symbol) (verbose symbol) (stream symbol) (expected-size int))
-  "Print out an entire DMA list.
-   If mode is #t, print vif tags too. If mode is 'details, also print data unpacked by vif-tags.
-   If verbose is #t, print out the addresses of each tag, and total size statistics.
-   If expected size is negative, it is ignored. Otherwise, only disassemble this much dma data."
   (local-vars
     (sv-16 object)
     (sv-32 object)
