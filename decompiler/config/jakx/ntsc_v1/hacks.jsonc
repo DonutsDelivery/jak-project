@@ -2100,7 +2100,14 @@
     "(method 37 nav-mesh)",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: logic-target
-    "(method 59 target)"
+    "(method 59 target)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-enemy
+    "(method 17 net-enemy)",
+    "(method 36 net-enemy)",
+    "(method 62 net-enemy)",
+    // source: net-enemy-h
+    "net-enemy-init-remote"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
