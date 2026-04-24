@@ -1904,7 +1904,10 @@
     // source: editable-player
     "dm-editable-flag-pick-func",
     // source: font
-    "get-string-length-asm"
+    "get-string-length-asm",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: editable-player
+    "dm-region-tree-pick-func"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
