@@ -251,16 +251,37 @@ def get_type_size(type_name: str, all_types: dict, seen: set) -> Optional[int]:
     return size
 
 
-def audit_types(all_types: dict) -> tuple[list, list, int]:
-    """Audit all types and return (mismatches, unresolvables, passes).
+def has_dynamic_fields(type_def: dict) -> bool:
+    """Check if type has any :dynamic fields or :inline-array with :dynamic."""
+    for field in type_def["fields"]:
+        if field["dynamic"]:
+            return True
+        # Check for :inline-array with :dynamic (array_count > 1 and dynamic)
+        if field["array_count"] and field["array_count"] > 1 and field["dynamic"]:
+            return True
+    return False
+
+
+def is_bitfield_parent(parent_name: str, all_types: dict) -> bool:
+    """Check if parent type is a bitfield (uint32/64/128)."""
+    if parent_name in ("uint32", "uint64", "uint128"):
+        return True
+    # Could also check if parent has `:bitfield #t` but primitives above are the main case
+    return False
+
+
+def audit_types(all_types: dict) -> tuple[list, list, list, int]:
+    """Audit all types and return (mismatches, false_positives, unresolvables, passes).
 
     Returns:
-        (mismatches, unresolvables, pass_count)
+        (mismatches, false_positives, unresolvables, pass_count)
 
     Each mismatch: {type, declared, computed, diff, lineno}
+    Each false_positive: {type, reason, lineno}
     Each unresolvable: {type, reason, lineno}
     """
     mismatches = []
+    false_positives = []
     unresolvables = []
     passes = 0
 
@@ -268,12 +289,30 @@ def audit_types(all_types: dict) -> tuple[list, list, int]:
         if type_def["size_assert"] is None:
             continue  # No size assertion to check
 
+        # Skip types with :dynamic fields (can't compute size)
+        if has_dynamic_fields(type_def):
+            false_positives.append({
+                "type": type_name,
+                "reason": ":dynamic field",
+                "lineno": type_def["lineno"],
+            })
+            continue
+
+        # Skip types with bitfield parents
+        if is_bitfield_parent(type_def["parent"], all_types):
+            false_positives.append({
+                "type": type_name,
+                "reason": "bitfield parent",
+                "lineno": type_def["lineno"],
+            })
+            continue
+
         computed_size = get_type_size(type_name, all_types, set())
 
         if computed_size is None:
             unresolvables.append({
                 "type": type_name,
-                "reason": "forward-ref or :dynamic fields",
+                "reason": "forward-ref or unresolvable parent",
                 "lineno": type_def["lineno"],
             })
             continue
@@ -290,24 +329,24 @@ def audit_types(all_types: dict) -> tuple[list, list, int]:
         else:
             passes += 1
 
-    return mismatches, unresolvables, passes
+    return mismatches, false_positives, unresolvables, passes
 
 
-def write_audit_md(mismatches: list, unresolvables: list, passes: int, total: int) -> None:
+def write_audit_md(mismatches: list, false_positives: list, unresolvables: list, passes: int, total: int) -> None:
     """Write .jakx_watch/size_assert_audit.md report."""
     lines = [
         "# size-assert audit",
         "",
         f"_source: scripts/jakx_watch/size_assert_audit.py  ·  generated: {Path().cwd().name}_",
         "",
+        f"Found **{len(mismatches)} real mismatches** · {len(false_positives)} false positives · "
+        f"{len(unresolvables)} unresolvable · {passes} clean (out of {total} checked)",
+        "",
     ]
 
     if mismatches:
         lines.extend([
-            f"Found **{len(mismatches)} deftypes with size mismatches** · "
-            f"{len(unresolvables)} unresolvable · {passes} clean (out of {total} checked)",
-            "",
-            "## Mismatches (fix these — they may crash the scanner when activated)",
+            "## Real mismatches (fix these — they may crash the scanner when activated)",
             "",
             "| type | declared | computed | diff | line |",
             "|------|----------|----------|-----:|-----:|",
@@ -320,13 +359,24 @@ def write_audit_md(mismatches: list, unresolvables: list, passes: int, total: in
         lines.append("")
     else:
         lines.extend([
-            f"**All {passes} types with :size-assert pass** — no mismatches found.",
+            f"**All {passes} types with :size-assert pass** — no real mismatches found.",
             "",
         ])
 
+    if false_positives:
+        lines.extend([
+            "## False positives (skipped — can't compute size)",
+            "",
+            "| type | reason | line |",
+            "|------|--------|-----:|",
+        ])
+        for fp in sorted(false_positives, key=lambda x: x["lineno"]):
+            lines.append(f"| `{fp['type']}` | {fp['reason']} | {fp['lineno']} |")
+        lines.append("")
+
     if unresolvables:
         lines.extend([
-            "## Unresolvable (forward-refs / commented-out / :dynamic fields)",
+            "## Unresolvable (forward-refs / commented-out parents)",
             "",
             "| type | reason | line |",
             "|------|--------|-----:|",
@@ -338,7 +388,7 @@ def write_audit_md(mismatches: list, unresolvables: list, passes: int, total: in
     lines.extend([
         "## How to use",
         "",
-        "1. For each mismatch, check the actual field layout in `all-types.gc` at the line shown.",
+        "1. For each **real mismatch**, check the actual field layout in `all-types.gc` at the line shown.",
         "2. Recompute the size manually (sum of parent size + all field offsets + field sizes).",
         "3. Update `:size-assert` to match the computed value.",
         "4. Re-run `bash scripts/jakx_watch/run.sh` to validate the fix.",
@@ -366,20 +416,20 @@ def main() -> int:
 
     # Parse and audit
     all_types = parse_all_types(args.types)
-    mismatches, unresolvables, passes = audit_types(all_types)
+    mismatches, false_positives, unresolvables, passes = audit_types(all_types)
     total = len([t for t in all_types.values() if t["size_assert"] is not None])
 
-    print(f"size-assert audit: {len(mismatches)} mismatches, {len(unresolvables)} unresolvable, "
-          f"{passes} clean (out of {total})")
+    print(f"size-assert audit: {len(mismatches)} real mismatches, {len(false_positives)} false positives, "
+          f"{len(unresolvables)} unresolvable, {passes} clean (out of {total})")
 
     if mismatches:
-        print("\nTop 10 mismatches:")
+        print("\nTop 10 real mismatches:")
         for m in sorted(mismatches, key=lambda x: abs(x["diff"]), reverse=True)[:10]:
             print(f"  {m['type']:40s} declared #{hex(m['declared']):>6s}  computed #{hex(m['computed']):>6s}  "
                   f"diff {m['diff']:+d}  (L{m['lineno']})")
 
     if not args.no_write:
-        write_audit_md(mismatches, unresolvables, passes, total)
+        write_audit_md(mismatches, false_positives, unresolvables, passes, total)
 
     return 1 if mismatches else 0
 
