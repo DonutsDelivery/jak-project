@@ -146,11 +146,20 @@ def parse_all_types(types_path: Path) -> dict:
                 except ValueError:
                     pass
 
-            # Look for field definitions (lines starting with '(')
-            if body_line_stripped.startswith("(") and not body_line_stripped.startswith("(:"):
-                fm = RE_FIELD.match(body_line_stripped)
+            # Look for field definitions.
+            # Handle both (fieldname type ...) and ((fieldname type ...) on the same line.
+            # Strip leading double-paren: the outer ( opens the field block.
+            candidate_line = body_line_stripped
+            if candidate_line.startswith("(("):
+                candidate_line = candidate_line[1:]  # peel off field-block open paren
+            if candidate_line.startswith("(") and not candidate_line.startswith("(:"):
+                fm = RE_FIELD.match(candidate_line)
                 if fm:
                     field_name = fm.group(1)
+                    # Skip _type_ — it appears in :methods signatures, not as a real field
+                    if field_name == "_type_":
+                        j += 1
+                        continue
                     field_type = fm.group(2)
                     array_count = int(fm.group(3)) if fm.group(3) else None
                     tail = fm.group(4) or ""
@@ -233,11 +242,18 @@ def get_type_size(type_name: str, all_types: dict, seen: set) -> Optional[int]:
         if field_type_size is None:
             return None
 
-        # If :inline, embed the struct; otherwise pointer
+        # Storage rules:
+        #  :inline          → embed full type by value
+        #  named primitive (in PRIMITIVE_SIZES with size > 0) → store by value (natural size)
+        #  everything else  → stored as 4-byte pointer (basic, process, compound types)
         if field["inline"]:
             field_size = field_type_size * array_mult
+        elif field_type in PRIMITIVE_SIZES and PRIMITIVE_SIZES.get(field_type, 0) > 0:
+            # int8/uint8/int16/.../uint64/uint128/float/symbol/type stored by value
+            field_size = PRIMITIVE_SIZES[field_type] * array_mult
         else:
-            field_size = 4  # Pointer size
+            # Compound/reference type stored as 4-byte pointer
+            field_size = 4
 
         # Update size based on explicit offset or computed
         if field["offset"] is not None:
