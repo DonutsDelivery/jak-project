@@ -300,6 +300,11 @@ def main() -> int:
                         help="Override decomp_out directory path")
     parser.add_argument("--commit", action="store_true",
                         help="Auto-commit if guard passes (no errors added)")
+    parser.add_argument("--skip-file", default=None,
+                        help="Path to a file of candidate keys to exclude "
+                             "(one key per line, e.g. 'draw-node-cull' or "
+                             "'(method 9 collide-cache)'). Used for known-bad "
+                             "entries that crash the decompiler.")
     args = parser.parse_args()
 
     if args.apply:
@@ -334,10 +339,25 @@ def main() -> int:
     print(f"  Already in mips2c_functions_by_name: {len(existing_mips2c)}")
     print(f"  Currently in asm_functions_by_name:  {len(existing_asm)}")
 
-    # Step 4: filter
+    # Step 4a: load skip-file (known-bad candidates)
+    skip_keys: set[str] = set()
+    if args.skip_file:
+        skip_path = Path(args.skip_file)
+        if skip_path.exists():
+            for line in skip_path.read_text().splitlines():
+                line = line.strip()
+                if line and not line.startswith("#"):
+                    skip_keys.add(line)
+            print(f"  Loaded {len(skip_keys)} skip-file entries from {skip_path}")
+
+    # Step 4b: filter
     new_entries: list[tuple[str, str]] = []
+    skipped_by_file = 0
     for key, src in candidates:
         if key in existing_mips2c:
+            continue
+        if key in skip_keys:
+            skipped_by_file += 1
             continue
         is_asm = key in existing_asm
         if args.skip_asm and is_asm:
@@ -346,8 +366,10 @@ def main() -> int:
             continue
         new_entries.append((key, src))
 
-    already_mips2c = len(candidates) - len(new_entries)
+    already_mips2c = len(candidates) - len(new_entries) - skipped_by_file
     print(f"  Skipped (already mips2c): {already_mips2c}")
+    if skipped_by_file:
+        print(f"  Skipped (skip-file):      {skipped_by_file}")
     print(f"  New candidates to add:    {len(new_entries)}")
 
     # Step 5: apply batch size cap
