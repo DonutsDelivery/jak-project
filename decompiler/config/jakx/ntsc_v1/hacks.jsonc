@@ -2265,7 +2265,14 @@
     "net-game-mgr-rushhour-init-remote",
     "net-player-king-of-hill-init-remote",
     "net-player-rushhour-init-remote",
-    "net-player-time-box-init-remote"
+    "net-player-time-box-init-remote",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-game-modes2-h
+    "net-game-mgr-time-box-init-remote",
+    "net-game-mgr-time-trial-init-remote",
+    "net-game-mgr-training-init-remote",
+    "net-player-boss-battle-init-remote",
+    "net-player-time-trial-init-remote"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
