@@ -43,8 +43,6 @@
    )
   )
 
-(define-extern *debug-vertex-stats* debug-vertex-stats)
-(define-extern drawable-vertex-ratio (function drawable debug-vertex-stats int))
 
 (define *color-black* (new 'static 'rgba :a #x80))
 
@@ -63,6 +61,10 @@
 (define *color-magenta* (new 'static 'rgba :r #xff :b #xff :a #x80))
 
 (define *color-yellow* (new 'static 'rgba :r #xff :g #xff :a #x80))
+
+(define *color-purple* (new 'static 'rgba :r #x40 :b #x80 :a #x80))
+
+(define *color-light-gray* (new 'static 'rgba :r #xb0 :g #xb0 :b #xb0 :a #xb0))
 
 (define *color-light-red* (new 'static 'rgba :r #xff :g #x80 :b #x80 :a #x80))
 
@@ -89,3 +91,30 @@
 (define *color-dark-yellow* (new 'static 'rgba :r #x80 :g #x80 :a #x80))
 
 (define *color-orange* (new 'static 'rgba :r #xff :g #x80 :a #x80))
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(deftype stack-debug (structure)
+  ((r29         uint128)
+   (r31         uint128)
+   (test-count  int32)
+   (visit       int32)
+   (obj         basic)
+   )
+  )
