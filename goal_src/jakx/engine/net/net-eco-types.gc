@@ -6,3 +6,338 @@
 
 
 
+
+(let ((a0-0 (new 'static 'skeleton-group
+              :name "skel-eco-blue-debris-a"
+              :extra #f
+              :info #f
+              :art-group-name "eco-blue-debris"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 20480.0))
+              :texture-level 18
+              :version 8
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-0 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-0 clothing length) (-> a0-0 clothing allocated-length))
+    )
+  (set! (-> a0-0 jgeo) 0)
+  (set! (-> a0-0 janim) -1)
+  (set! (-> a0-0 mgeo 0) 1)
+  (set! (-> a0-0 lod-dist 0) 4095996000.0)
+  (add-to-loading-level a0-0)
+  )
+
+(let ((a0-1 (new 'static 'skeleton-group
+              :name "skel-eco-blue-debris-b"
+              :extra #f
+              :info #f
+              :art-group-name "eco-blue-debris"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 20480.0))
+              :texture-level 18
+              :version 8
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-1 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-1 clothing length) (-> a0-1 clothing allocated-length))
+    )
+  (set! (-> a0-1 jgeo) 2)
+  (set! (-> a0-1 janim) -1)
+  (set! (-> a0-1 mgeo 0) 3)
+  (set! (-> a0-1 lod-dist 0) 4095996000.0)
+  (add-to-loading-level a0-1)
+  )
+
+(let ((a0-2 (new 'static 'skeleton-group
+              :name "skel-eco-blue-debris-c"
+              :extra #f
+              :info #f
+              :art-group-name "eco-blue-debris"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 20480.0))
+              :texture-level 18
+              :version 8
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-2 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-2 clothing length) (-> a0-2 clothing allocated-length))
+    )
+  (set! (-> a0-2 jgeo) 4)
+  (set! (-> a0-2 janim) -1)
+  (set! (-> a0-2 mgeo 0) 5)
+  (set! (-> a0-2 lod-dist 0) 4095996000.0)
+  (add-to-loading-level a0-2)
+  )
+
+(let ((a0-3 (new 'static 'skeleton-group
+              :name "skel-eco-blue-debris-d"
+              :extra #f
+              :info #f
+              :art-group-name "eco-blue-debris"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 20480.0))
+              :texture-level 18
+              :version 8
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-3 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-3 clothing length) (-> a0-3 clothing allocated-length))
+    )
+  (set! (-> a0-3 jgeo) 6)
+  (set! (-> a0-3 janim) -1)
+  (set! (-> a0-3 mgeo 0) 7)
+  (set! (-> a0-3 lod-dist 0) 4095996000.0)
+  (add-to-loading-level a0-3)
+  )
+
+(define *eco-blue-debris-params*
+  (new 'static 'debris-static-params
+    :joints (new 'static 'boxed-array :type debris-static-joint-params
+      (new 'static 'debris-static-joint-params :group "skel-eco-blue-debris-a")
+      (new 'static 'debris-static-joint-params :group "skel-eco-blue-debris-b")
+      (new 'static 'debris-static-joint-params :group "skel-eco-blue-debris-c")
+      (new 'static 'debris-static-joint-params :group "skel-eco-blue-debris-d")
+      (new 'static 'debris-static-joint-params :group "skel-eco-blue-debris-a")
+      (new 'static 'debris-static-joint-params :group "skel-eco-blue-debris-c")
+      )
+    :collide-spec (collide-spec backgnd)
+    )
+  )
+
+;; type eco-blue is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *eco-blue-base-quat* #f)
+
+(quaternion-axis-angle! (the-as quaternion *eco-blue-base-quat*) 1.0 0.0 0.0 4000.0)
+
+(let ((a0-7 (new 'static 'skeleton-group
+              :name "skel-eco-blue"
+              :extra #f
+              :info #f
+              :art-group-name "eco-blue"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 20480.0))
+              :max-lod 2
+              :texture-level 18
+              :version 8
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-7 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-7 clothing length) (-> a0-7 clothing allocated-length))
+    )
+  (set! (-> a0-7 jgeo) 0)
+  (set! (-> a0-7 janim) 5)
+  (set! (-> a0-7 mgeo 0) 1)
+  (set! (-> a0-7 lod-dist 0) 81920.0)
+  (set! (-> a0-7 mgeo 1) 2)
+  (set! (-> a0-7 lod-dist 1) 163840.0)
+  (set! (-> a0-7 mgeo 2) 3)
+  (set! (-> a0-7 lod-dist 2) 4095996000.0)
+  (add-to-loading-level a0-7)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((gp-0 (new 'static 'state
+              :name 'running
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (inherit-state gp-0 (the-as state (method-of-type eco eco-method-50)))
+  (method-set! eco-blue 50 gp-0)
+  (set! (-> gp-0 enter) L198)
+  (set! (-> gp-0 trans) (the-as (function object) L216))
+  (set! (-> gp-0 code) L176)
+  (set! (-> gp-0 post) L175)
+  )
+
+;; type eco-yellow is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((a0-14 (new 'static 'skeleton-group
+               :name "skel-eco-yellow"
+               :extra #f
+               :info #f
+               :art-group-name "eco-yellow"
+               :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 20480.0))
+               :max-lod 2
+               :texture-level 18
+               :version 8
+               :clothing #f
+               )
+             )
+      )
+  (when #f
+    (set! (-> a0-14 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-14 clothing length) (-> a0-14 clothing allocated-length))
+    )
+  (set! (-> a0-14 jgeo) 0)
+  (set! (-> a0-14 janim) 5)
+  (set! (-> a0-14 mgeo 0) 1)
+  (set! (-> a0-14 lod-dist 0) 81920.0)
+  (set! (-> a0-14 mgeo 1) 2)
+  (set! (-> a0-14 lod-dist 1) 163840.0)
+  (set! (-> a0-14 mgeo 2) 3)
+  (set! (-> a0-14 lod-dist 2) 4095996000.0)
+  (add-to-loading-level a0-14)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((gp-1 (new 'static 'state
+              :name 'running
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (inherit-state gp-1 (the-as state (method-of-type eco eco-method-50)))
+  (method-set! eco-yellow 50 gp-1)
+  (set! (-> gp-1 enter) L138)
+  (set! (-> gp-1 code) L118)
+  (set! (-> gp-1 post) L117)
+  )
+
+;; type eco-red is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((a0-21 (new 'static 'skeleton-group
+               :name "skel-eco-red"
+               :extra #f
+               :info #f
+               :art-group-name "eco-red"
+               :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 18841.6))
+               :max-lod 2
+               :texture-level 18
+               :version 8
+               :clothing #f
+               )
+             )
+      )
+  (when #f
+    (set! (-> a0-21 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-21 clothing length) (-> a0-21 clothing allocated-length))
+    )
+  (set! (-> a0-21 jgeo) 0)
+  (set! (-> a0-21 janim) 5)
+  (set! (-> a0-21 mgeo 0) 1)
+  (set! (-> a0-21 lod-dist 0) 81920.0)
+  (set! (-> a0-21 mgeo 1) 2)
+  (set! (-> a0-21 lod-dist 1) 163840.0)
+  (set! (-> a0-21 mgeo 2) 3)
+  (set! (-> a0-21 lod-dist 2) 4095996000.0)
+  (add-to-loading-level a0-21)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((gp-2 (new 'static 'state
+              :name 'running
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (inherit-state gp-2 (the-as state (method-of-type eco eco-method-50)))
+  (method-set! eco-red 50 gp-2)
+  (set! (-> gp-2 enter) L80)
+  (set! (-> gp-2 code) L60)
+  (set! (-> gp-2 post) L59)
+  )
+
+;; type eco-green is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((a0-28 (new 'static 'skeleton-group
+               :name "skel-eco-green"
+               :extra #f
+               :info #f
+               :art-group-name "eco-green"
+               :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 17612.8))
+               :max-lod 2
+               :texture-level 18
+               :version 8
+               :clothing #f
+               )
+             )
+      )
+  (when #f
+    (set! (-> a0-28 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-28 clothing length) (-> a0-28 clothing allocated-length))
+    )
+  (set! (-> a0-28 jgeo) 0)
+  (set! (-> a0-28 janim) 5)
+  (set! (-> a0-28 mgeo 0) 1)
+  (set! (-> a0-28 lod-dist 0) 81920.0)
+  (set! (-> a0-28 mgeo 1) 2)
+  (set! (-> a0-28 lod-dist 1) 163840.0)
+  (set! (-> a0-28 mgeo 2) 3)
+  (set! (-> a0-28 lod-dist 2) 4095996000.0)
+  (add-to-loading-level a0-28)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((gp-3 (new 'static 'state
+              :name 'running
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (inherit-state gp-3 (the-as state (method-of-type eco eco-method-50)))
+  (method-set! eco-green 50 gp-3)
+  (set! (-> gp-3 enter) L22)
+  (set! (-> gp-3 code) L2)
+  (set! (-> gp-3 post) L1)
+  )

@@ -6,3 +6,123 @@
 
 
 
+
+(define *http-downloader* #f)
+
+(let ((v1-1 *http-downloader*))
+  (s.d! v1-1 #f)
+  )
+
+(define *http-request-string* (the-as object (new 'global 'string 160 (the-as string #f))))
+
+;; type http-downloader is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((gp-0
+        (new 'static 'state
+          :name 'resolving
+          :next #f
+          :exit #f
+          :parent #f
+          :code #f
+          :trans #f
+          :post #f
+          :enter #f
+          :event #f
+          )
+        )
+      )
+  (method-set! http-downloader 15 gp-0)
+  (set! (-> gp-0 event)
+        (the-as (function process int symbol event-message-block object) http-downloader-default-handler)
+        )
+  (set! (-> gp-0 code) L69)
+  )
+
+(define *socket-blocking* (the-as object 0))
+
+(let ((gp-1
+        (new 'static 'state
+          :name 'connecting
+          :next #f
+          :exit #f
+          :parent #f
+          :code #f
+          :trans #f
+          :post #f
+          :enter #f
+          :event #f
+          )
+        )
+      )
+  (method-set! http-downloader 16 gp-1)
+  (set! (-> gp-1 event)
+        (the-as (function process int symbol event-message-block object) http-downloader-default-handler)
+        )
+  (set! (-> gp-1 code) L49)
+  )
+
+(let ((gp-2
+        (new 'static 'state
+          :name 'fetching-headers
+          :next #f
+          :exit #f
+          :parent #f
+          :code #f
+          :trans #f
+          :post #f
+          :enter #f
+          :event #f
+          )
+        )
+      )
+  (method-set! http-downloader 17 gp-2)
+  (set! (-> gp-2 event)
+        (the-as (function process int symbol event-message-block object) http-downloader-default-handler)
+        )
+  (set! (-> gp-2 code) L22)
+  )
+
+(let ((gp-3
+        (new 'static 'state
+          :name 'fetching-data
+          :next #f
+          :exit #f
+          :parent #f
+          :code #f
+          :trans #f
+          :post #f
+          :enter #f
+          :event #f
+          )
+        )
+      )
+  (method-set! http-downloader 18 gp-3)
+  (set! (-> gp-3 event)
+        (the-as (function process int symbol event-message-block object) http-downloader-default-handler)
+        )
+  (set! (-> gp-3 code) L4)
+  )
+
+(let ((gp-4
+        (new 'static 'state :name 'die :next #f :exit #f :parent #f :code #f :trans #f :post #f :enter #f :event #f)
+        )
+      )
+  (method-set! http-downloader 19 gp-4)
+  (set! (-> gp-4 code) L3)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.

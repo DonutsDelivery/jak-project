@@ -6,3 +6,130 @@
 
 
 
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((gp-0 (new 'static 'state
+              :name 'startup
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (method-set! net-enemy 59 gp-0)
+  (set! (-> gp-0 enter) L236)
+  (set! (-> gp-0 code) sleep-code)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *tmp-transition* #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((gp-1 (new 'static 'state
+              :name 'in-ragdoll
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (method-set! net-enemy 60 gp-1)
+  (set! (-> gp-1 event) (the-as (function process int symbol event-message-block object) L92))
+  (set! (-> gp-1 enter) L126)
+  (set! (-> gp-1 exit) (the-as (function object) L89))
+  (set! (-> gp-1 trans) (the-as (function object) L114))
+  (set! (-> gp-1 code) L115)
+  (set! (-> gp-1 post) L91)
+  )
+
+(let ((gp-2 (new 'static 'state
+              :name 'waiting-respawn
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (method-set! net-enemy 61 gp-2)
+  (set! (-> gp-2 enter) L72)
+  (set! (-> gp-2 code) sleep-code)
+  (set! (-> gp-2 post) L71)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.

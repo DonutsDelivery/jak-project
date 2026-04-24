@@ -6,3 +6,87 @@
 
 
 
+
+;; type net-enemy-transition is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *tmp-construct-transition* #f)
+
+(deftype net-enemy-anim-info (structure)
+  ((name         basic)
+   (anim-idx     int32)
+   (forward-vel  vector)
+   )
+  )
+
+
+(deftype net-enemy-info (structure)
+  ((flags                       uint64)
+   (inverse-mass                float)
+   (ragdoll-info                ragdoll-setup)
+   (max-health                  float)
+   (damage-scale                float)
+   (respawn-delay               int32)
+   (smooth-root-trans           float)
+   (smooth-root-quat            float)
+   (fatal-impact-impulse        float)
+   (min-fatal-impact-enemy-vel  float)
+   (time-before-evaporate       int32)
+   (time-before-respawn         int32)
+   (anim-info                   basic)
+   (kill-score                  int32)
+   (wound-score-scale           float)
+   (allow-vehicle-penetrate     basic)
+   (min-ground-offset           float)
+   (ground-probe-lod-dist       float)
+   (show-kill-score             int32)
+   )
+  )
+
+
+;; type net-enemy is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *msg-map-net-enemy*
+  (the-as array (new 'static 'boxed-array :type symbol :length 0 :allocated-length 64))
+  )
+
+(define *net-process-class-info-net-enemy* #f)
+
+(let ((v1-8 *msg-map-net-enemy*)
+      (a0-10 *net-process-class-info-net-enemy*)
+      )
+  (s.w! a0-10 v1-8)
+  )
+
+(write-msg-map-rec
+  (the-as process-drawable net-enemy)
+  (the-as net-process-class-info *net-process-class-info-net-enemy*)
+  )
+
+(let ((v1-9 net-enemy)
+      (a0-12 *net-process-class-info-net-enemy*)
+      )
+  (s.w! (+ a0-12 24) v1-9)
+  )
+
+(let ((t9-11 net-process-class-register))
+  *net-process-class-info-net-enemy*
+  (t9-11)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *net-enemy-list* #f)
+
+*net-enemy-list*
+
+((method-of-type linked-list linked-list-method-9))

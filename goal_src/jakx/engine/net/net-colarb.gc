@@ -6,3 +6,24 @@
 
 
 
+
+(deftype net-colarb-req (structure)
+  ((req-by    int8)
+   (req-time  int32)
+   )
+  )
+
+
+(define *net-colarb-last-reqs* #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((v1-4 colarb-request-msg-callback)
+      (a0-2 *net-aux-msg-handlers*)
+      )
+  (s.w! (+ a0-2 144) v1-4)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
