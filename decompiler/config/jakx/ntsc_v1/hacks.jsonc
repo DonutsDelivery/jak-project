@@ -2090,7 +2090,11 @@
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: net-eco
     "(method 35 eco-mgr)",
-    "(method 44 eco-mgr)"
+    "(method 44 eco-mgr)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: loader
+    "(method 20 gui-control)",
+    "(method 23 gui-control)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
