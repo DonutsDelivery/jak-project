@@ -84,25 +84,68 @@ def get_commit_subject(sha: str) -> str:
     return "(unknown)"
 
 
-def classify_commit(delta: dict) -> str:
-    """Classify commit impact: WINNER, LOSER, or NEUTRAL.
+def classify_commit(delta: dict, prev: dict, curr: dict) -> str:
+    """Classify commit impact, accounting for file-coverage changes.
 
-    WINNER: Δerr ≤ -10 AND Δreal_clean ≥ 0 AND no bucket went negative
-    LOSER: Δerr ≥ +100 OR Δreal_clean ≤ -5
-    NEUTRAL: otherwise
+    Raw Δerr is MISLEADING when files move between buckets. When a crashed
+    (split-failed) file becomes processable, it contributes new errors of
+    its own — making a GOOD commit (unblocking files) look like a LOSER.
+
+    Strategy:
+    1. If coverage shifted meaningfully (files promoted out of crash OR
+       newly crashed), use per-processable-file error rate instead of
+       absolute Δerr.
+    2. If coverage is stable, use absolute Δerr (the simple case).
+
+    Split-failed going DOWN is unambiguously good (files no longer crash).
+    Split-failed going UP is unambiguously bad (new crashes introduced).
+
+    Verdicts:
+      ✅ WINNER   — clear improvement (fewer crashes OR fewer errors OR more clean files)
+      ❌ LOSER    — clear regression (new crashes OR fewer clean files OR rate spike)
+      ⚠️ COVERAGE — big coverage shift with ambiguous net impact; needs human review
+      ~ NEUTRAL   — stable metrics, nothing notable
     """
     d_err = delta["d_error_markers"]
     d_clean = delta["d_real_clean"]
-    d_partial = delta["d_real_partial"]
     d_split = delta["d_split_failed"]
     d_static = delta["d_static_only"]
 
-    # Check for negative buckets (rare but significant)
-    went_negative = d_clean < 0 or d_partial < 0 or d_split < 0 or d_static < 0
+    # Unambiguously bad: new crashes or lost clean files
+    if d_split >= 5 or d_clean <= -5:
+        return "❌"
 
-    if d_err <= -10 and d_clean >= 0 and not went_negative:
+    # Unambiguously good: fewer crashes (files unblocked)
+    # This overrides any Δerr signal because unblocking surfaces new errors.
+    if d_split <= -5:
         return "✅"
-    if d_err >= 100 or d_clean <= -5:
+
+    # Coverage shifted non-trivially — use per-processable-file error rate
+    coverage_shift = abs(d_split) >= 2 or abs(d_static) >= 10
+    if coverage_shift:
+        prev_processable = max(
+            1, prev["real_clean"] + prev["real_partial"] + prev["static_only"]
+        )
+        curr_processable = max(
+            1, curr["real_clean"] + curr["real_partial"] + curr["static_only"]
+        )
+        prev_rate = prev["sum_error_markers"] / prev_processable
+        curr_rate = curr["sum_error_markers"] / curr_processable
+        rate_delta = curr_rate - prev_rate
+
+        # Rate improved despite coverage shift = quiet winner
+        if rate_delta <= -0.5 and d_clean >= 0:
+            return "✅"
+        # Rate regressed on top of coverage shift = loser
+        if rate_delta >= 1.0:
+            return "❌"
+        # Ambiguous
+        return "⚠️"
+
+    # Stable coverage: absolute Δerr is meaningful
+    if d_err <= -10 and d_clean >= 0:
+        return "✅"
+    if d_err >= 100:
         return "❌"
     return "~"
 
@@ -158,7 +201,7 @@ def main():
         delta = compute_delta(metrics_prev, metrics_curr)
         delta["commit"] = sha_curr
         delta["subject"] = get_commit_subject(sha_curr)
-        delta["verdict"] = classify_commit(delta)
+        delta["verdict"] = classify_commit(delta, metrics_prev, metrics_curr)
         delta["timestamp"] = ts_curr
 
         impacts.append(delta)
@@ -168,13 +211,16 @@ def main():
 
     print(f"Computed {len(impacts)} commit impact records")
     print(
-        f"  Winners: {sum(1 for x in impacts if x['verdict'] == '✅')}"
+        f"  Winners:  {sum(1 for x in impacts if x['verdict'] == '✅')}"
     )
     print(
-        f"  Losers: {sum(1 for x in impacts if x['verdict'] == '❌')}"
+        f"  Losers:   {sum(1 for x in impacts if x['verdict'] == '❌')}"
     )
     print(
-        f"  Neutral: {sum(1 for x in impacts if x['verdict'] == '~')}"
+        f"  Coverage: {sum(1 for x in impacts if x['verdict'] == '⚠️')}"
+    )
+    print(
+        f"  Neutral:  {sum(1 for x in impacts if x['verdict'] == '~')}"
     )
 
     # Emit markdown
