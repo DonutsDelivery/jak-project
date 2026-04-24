@@ -2121,7 +2121,14 @@
     "(method 41 nav-state)",
     // source: nav-engine
     "nav-dma-send-from-spr-no-flush",
-    "nav-dma-send-to-spr-no-flush"
+    "nav-dma-send-to-spr-no-flush",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: nav-engine
+    "nav-state-patch-pointers",
+    // source: nav-graph-editor
+    "(method 60 nav-graph-editor)",
+    "(method 61 nav-graph-editor)",
+    "(method 64 nav-graph-editor)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
