@@ -2350,7 +2350,15 @@
     "mas-connect-callback",
     "medius-text-filter-request-callback",
     "refreshing-games-callback",
-    "total-games-callback"
+    "total-games-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-mgr-medius
+    "cb-get-announcements",
+    // source: net-mgr-mgcl
+    "mgcl-connect-games-callback",
+    "mgcl-end-game-callback",
+    "mgcl-join-game-callback",
+    "mgcl-world-status-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
