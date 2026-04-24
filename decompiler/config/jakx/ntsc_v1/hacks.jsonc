@@ -2172,7 +2172,15 @@
     "(method 53 artifact-draw)",
     "(method 57 net-game-mgr-artifact)",
     "artifact-draw-init-remote",
-    "artifact-init-remote"
+    "artifact-init-remote",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-artifact
+    "(method 17 net-game-mgr-artifact)",
+    "(method 48 net-player-artifact)",
+    // source: net-aux-voice
+    "aux-voice-mgr-failed",
+    "aux-voice-mgr-init-by-other",
+    "aux-voice-msg-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
