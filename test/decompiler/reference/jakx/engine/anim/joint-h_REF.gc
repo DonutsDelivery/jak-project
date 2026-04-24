@@ -106,7 +106,7 @@ Multiple channels are used to blend animations together."
     (reset (_type_) top-anim-joint-control)
     (update (_type_) int)
     (get-channel (_type_ int) joint-control-channel)
-    (push-anim-to-targ (_type_ art-joint-anim float int int float float symbol) none)
+    (push-anim-to-targ (_type_ art-joint-anim float int int float float symbol) int)
     )
   )
 

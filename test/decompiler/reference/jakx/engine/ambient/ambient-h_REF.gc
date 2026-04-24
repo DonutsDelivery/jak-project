@@ -69,7 +69,7 @@
     exit
     )
   (:methods
-    (draw-text (_type_) none)
+    (draw-text (_type_) int)
     )
   )
 

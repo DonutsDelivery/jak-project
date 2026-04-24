@@ -75,7 +75,7 @@ It's used to handle art groups that are loaded as part of a level load."
   (:methods
     (new (symbol type int function symbol) _type_)
     (set-pending-file (_type_ string int handle float) int)
-    (update (_type_) int)
+    (update (_type_) none)
     (inactive? (_type_) symbol)
     (file-status (_type_ string int) symbol)
     (link-file (_type_ art-group) art-group)
@@ -188,7 +188,7 @@ to a pair of external-art-buffers."
     (new (symbol type) _type_)
     (update (_type_ symbol) int)
     (clear-rec (_type_) int)
-    (spool-push (_type_ string int process float) int)
+    (spool-push (_type_ string int process float) none)
     (file-status (_type_ string int) symbol)
     (reserve-alloc (_type_) kheap)
     (reserve-free (_type_ kheap) int)

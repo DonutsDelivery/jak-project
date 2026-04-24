@@ -3,7 +3,6 @@
 
 ;; definition for method 11 of type racer-state
 ;; INFO: Used lq/sq
-;; WARN: Return type mismatch int vs none.
 (defmethod end-lap ((this racer-state) (arg0 process-drawable))
   (let ((v1-0 (process->ppointer arg0)))
     (set! (-> this racer) (the-as uint (logior (if (the-as (pointer process-drawable) v1-0)
@@ -29,7 +28,6 @@
   (set! (-> this last-slice) 0)
   (set! (-> this last-race-line) #f)
   0
-  (none)
   )
 
 ;; definition for method 9 of type race-state

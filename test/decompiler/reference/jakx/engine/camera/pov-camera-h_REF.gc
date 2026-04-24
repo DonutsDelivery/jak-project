@@ -22,8 +22,8 @@
   (:methods
     (abort? (_type_) symbol)
     (target-grabbed? (_type_) symbol)
-    (set-stack-size! (_type_) none)
-    (pov-camera-method-58 (_type_) none)
+    (set-stack-size! (_type_) int)
+    (pov-camera-method-58 (_type_) int)
     (target-released? (_type_) symbol)
     )
   )
