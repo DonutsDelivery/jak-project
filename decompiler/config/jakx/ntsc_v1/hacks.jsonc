@@ -1806,7 +1806,23 @@
     "collide-do-primitives",
     "raw-ray-sphere-intersect",
     "ray-cylinder-intersect",
-    "ray-triangle-intersect"
+    "ray-triangle-intersect",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: collide-func
+    "moving-sphere-triangle-intersect",
+    // source: collide-hash
+    "(method 11 collide-hash)",
+    "(method 12 collide-hash)",
+    "fill-bg-using-box-new",
+    "fill-bg-using-line-sphere-new",
+    // source: collide-mesh
+    "(method 11 collide-mesh)",
+    "(method 12 collide-mesh)",
+    "(method 14 collide-mesh)",
+    // source: collide-mesh-h
+    "(method 11 collide-mesh-cache)",
+    // source: collide-probe
+    "collide-probe-node"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
