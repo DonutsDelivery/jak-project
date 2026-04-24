@@ -1,3 +1,553 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+
+(let ((v1-0 #f)
+      (a0-0 *part-group-id-table*)
+      )
+  (s.w! (+ a0-0 728) v1-0)
+  )
+
+(set! (-> *part-id-table* 603) #f)
+
+(set! (-> *part-id-table* 600) #f)
+
+(set! (-> *part-id-table* 602) #f)
+
+(set! (-> *part-id-table* 605) #f)
+
+(set! (-> *part-id-table* 601) #f)
+
+(set! (-> *part-id-table* 604) #f)
+
+(set! (-> *part-id-table* 606) #f)
+
+(set! (-> *part-id-table* 607) #f)
+
+(let ((v1-9 #f)
+      (a0-9 *part-group-id-table*)
+      )
+  (s.w! (+ a0-9 732) v1-9)
+  )
+
+(set! (-> *part-id-table* 611) #f)
+
+(set! (-> *part-id-table* 608) #f)
+
+(set! (-> *part-id-table* 610) #f)
+
+(set! (-> *part-id-table* 613) #f)
+
+(set! (-> *part-id-table* 609) #f)
+
+(set! (-> *part-id-table* 612) #f)
+
+(set! (-> *part-id-table* 614) #f)
+
+(set! (-> *part-id-table* 615) #f)
+
+(let ((v1-18 #f)
+      (a0-18 *part-group-id-table*)
+      )
+  (s.w! (+ a0-18 736) v1-18)
+  )
+
+(set! (-> *part-id-table* 619) #f)
+
+(set! (-> *part-id-table* 616) #f)
+
+(set! (-> *part-id-table* 618) #f)
+
+(set! (-> *part-id-table* 621) #f)
+
+(set! (-> *part-id-table* 617) #f)
+
+(set! (-> *part-id-table* 620) #f)
+
+(set! (-> *part-id-table* 622) #f)
+
+(set! (-> *part-id-table* 623) #f)
+
+(let ((v1-27 #f)
+      (a0-27 *part-group-id-table*)
+      )
+  (s.w! (+ a0-27 740) v1-27)
+  )
+
+(set! (-> *part-id-table* 627) #f)
+
+(set! (-> *part-id-table* 624) #f)
+
+(set! (-> *part-id-table* 626) #f)
+
+(set! (-> *part-id-table* 629) #f)
+
+(set! (-> *part-id-table* 625) #f)
+
+(set! (-> *part-id-table* 628) #f)
+
+(set! (-> *part-id-table* 630) #f)
+
+(set! (-> *part-id-table* 631) #f)
+
+(let ((v1-36 #f)
+      (a0-36 *part-group-id-table*)
+      )
+  (s.w! (+ a0-36 744) v1-36)
+  )
+
+(set! (-> *part-id-table* 632) #f)
+
+(set! (-> *part-id-table* 633) #f)
+
+(set! (-> *part-id-table* 634) #f)
+
+(set! (-> *part-id-table* 635) #f)
+
+(set! (-> *part-id-table* 636) #f)
+
+(let ((v1-42 #f)
+      (a0-42 *part-group-id-table*)
+      )
+  (s.w! (+ a0-42 748) v1-42)
+  )
+
+(set! (-> *part-id-table* 637) #f)
+
+(set! (-> *part-id-table* 640) #f)
+
+(set! (-> *part-id-table* 638) #f)
+
+(set! (-> *part-id-table* 639) #f)
+
+(let ((v1-47 #f)
+      (a0-47 *part-group-id-table*)
+      )
+  (s.w! (+ a0-47 752) v1-47)
+  )
+
+(set! (-> *part-id-table* 641) #f)
+
+(let ((v1-49 #f)
+      (a0-49 *part-group-id-table*)
+      )
+  (s.w! (+ a0-49 756) v1-49)
+  )
+
+(set! (-> *part-id-table* 642) #f)
+
+(let ((v1-51 #f)
+      (a0-51 *part-group-id-table*)
+      )
+  (s.w! (+ a0-51 760) v1-51)
+  )
+
+(set! (-> *part-id-table* 643) #f)
+
+(set! (-> *part-id-table* 644) #f)
+
+(let ((v1-54 #f)
+      (a0-54 *part-group-id-table*)
+      )
+  (s.w! (+ a0-54 764) v1-54)
+  )
+
+(set! (-> *part-id-table* 645) #f)
+
+(set! (-> *part-id-table* 646) #f)
+
+(set! (-> *part-id-table* 647) #f)
+
+(let ((v1-58 #f)
+      (a0-58 *part-group-id-table*)
+      )
+  (s.w! (+ a0-58 768) v1-58)
+  )
+
+(set! (-> *part-id-table* 648) #f)
+
+(set! (-> *part-id-table* 649) #f)
+
+(set! (-> *part-id-table* 650) #f)
+
+(let ((v1-62 #f)
+      (a0-62 *part-group-id-table*)
+      )
+  (s.w! (+ a0-62 772) v1-62)
+  )
+
+(set! (-> *part-id-table* 651) #f)
+
+(let ((v1-64 #f)
+      (a0-64 *part-group-id-table*)
+      )
+  (s.w! (+ a0-64 776) v1-64)
+  )
+
+(set! (-> *part-id-table* 652) #f)
+
+(set! (-> *part-id-table* 653) #f)
+
+(set! (-> *part-id-table* 654) #f)
+
+(set! (-> *part-id-table* 655) #f)
+
+(set! (-> *part-id-table* 656) #f)
+
+(set! (-> *part-id-table* 657) #f)
+
+(set! (-> *part-id-table* 658) #f)
+
+(set! (-> *part-id-table* 659) #f)
+
+(let ((v1-73 #f)
+      (a0-73 *part-group-id-table*)
+      )
+  (s.w! (+ a0-73 780) v1-73)
+  )
+
+(let ((v1-74 #f)
+      (a0-74 *part-group-id-table*)
+      )
+  (s.w! (+ a0-74 784) v1-74)
+  )
+
+(let ((v1-75 #f)
+      (a0-75 *part-group-id-table*)
+      )
+  (s.w! (+ a0-75 788) v1-75)
+  )
+
+(let ((v1-76 #f)
+      (a0-76 *part-group-id-table*)
+      )
+  (s.w! (+ a0-76 792) v1-76)
+  )
+
+(let ((v1-77 #f)
+      (a0-77 *part-group-id-table*)
+      )
+  (s.w! (+ a0-77 796) v1-77)
+  )
+
+(set! (-> *part-id-table* 693) #f)
+
+(set! (-> *part-id-table* 694) #f)
+
+(set! (-> *part-id-table* 666) #f)
+
+(set! (-> *part-id-table* 669) #f)
+
+(set! (-> *part-id-table* 672) #f)
+
+(set! (-> *part-id-table* 675) #f)
+
+(set! (-> *part-id-table* 676) #f)
+
+(set! (-> *part-id-table* 677) #f)
+
+(set! (-> *part-id-table* 678) #f)
+
+(set! (-> *part-id-table* 679) #f)
+
+(set! (-> *part-id-table* 680) #f)
+
+(set! (-> *part-id-table* 660) #f)
+
+(set! (-> *part-id-table* 661) #f)
+
+(set! (-> *part-id-table* 662) #f)
+
+(set! (-> *part-id-table* 663) #f)
+
+(set! (-> *part-id-table* 664) #f)
+
+(set! (-> *part-id-table* 665) #f)
+
+(set! (-> *part-id-table* 667) #f)
+
+(set! (-> *part-id-table* 670) #f)
+
+(set! (-> *part-id-table* 673) #f)
+
+(set! (-> *part-id-table* 674) #f)
+
+(set! (-> *part-id-table* 671) #f)
+
+(set! (-> *part-id-table* 668) #f)
+
+(set! (-> *part-id-table* 681) #f)
+
+(set! (-> *part-id-table* 682) #f)
+
+(set! (-> *part-id-table* 683) #f)
+
+(set! (-> *part-id-table* 684) #f)
+
+(set! (-> *part-id-table* 685) #f)
+
+(set! (-> *part-id-table* 686) #f)
+
+(set! (-> *part-id-table* 687) #f)
+
+(set! (-> *part-id-table* 688) #f)
+
+(set! (-> *part-id-table* 689) #f)
+
+(set! (-> *part-id-table* 690) #f)
+
+(set! (-> *part-id-table* 691) #f)
+
+(set! (-> *part-id-table* 692) #f)
+
+(let ((v1-113 #f)
+      (a0-113 *part-group-id-table*)
+      )
+  (s.w! (+ a0-113 800) v1-113)
+  )
+
+(set! (-> *part-id-table* 695) #f)
+
+(let ((v1-115 #f)
+      (a0-115 *part-group-id-table*)
+      )
+  (s.w! (+ a0-115 804) v1-115)
+  )
+
+(set! (-> *part-id-table* 696) #f)
+
+(let ((v1-117 #f)
+      (a0-117 *part-group-id-table*)
+      )
+  (s.w! (+ a0-117 808) v1-117)
+  )
+
+(set! (-> *part-id-table* 697) #f)
+
+(let ((v1-119 #f)
+      (a0-119 *part-group-id-table*)
+      )
+  (s.w! (+ a0-119 812) v1-119)
+  )
+
+(set! (-> *part-id-table* 698) #f)
+
+(let ((v1-121 #f)
+      (a0-121 *part-group-id-table*)
+      )
+  (s.w! (+ a0-121 816) v1-121)
+  )
+
+(set! (-> *part-id-table* 702) #f)
+
+(set! (-> *part-id-table* 703) #f)
+
+(set! (-> *part-id-table* 706) #f)
+
+(set! (-> *part-id-table* 705) #f)
+
+(set! (-> *part-id-table* 701) #f)
+
+(set! (-> *part-id-table* 704) #f)
+
+(set! (-> *part-id-table* 699) #f)
+
+(set! (-> *part-id-table* 700) #f)
+
+(set! (-> *part-id-table* 707) #f)
+
+(let ((v1-131 #f)
+      (a0-131 *part-group-id-table*)
+      )
+  (s.w! (+ a0-131 820) v1-131)
+  )
+
+(set! (-> *part-id-table* 708) #f)
+
+(set! (-> *part-id-table* 709) #f)
+
+(let ((v1-134 #f)
+      (a0-134 *part-group-id-table*)
+      )
+  (s.w! (+ a0-134 824) v1-134)
+  )
+
+(set! (-> *part-id-table* 710) #f)
+
+(set! (-> *part-id-table* 715) #f)
+
+(set! (-> *part-id-table* 711) #f)
+
+(set! (-> *part-id-table* 712) #f)
+
+(set! (-> *part-id-table* 713) #f)
+
+(set! (-> *part-id-table* 714) #f)
+
+(let ((v1-141 #f)
+      (a0-141 *part-group-id-table*)
+      )
+  (s.w! (+ a0-141 828) v1-141)
+  )
+
+(set! (-> *part-id-table* 716) #f)
+
+(set! (-> *part-id-table* 721) #f)
+
+(set! (-> *part-id-table* 717) #f)
+
+(set! (-> *part-id-table* 718) #f)
+
+(set! (-> *part-id-table* 719) #f)
+
+(set! (-> *part-id-table* 720) #f)
+
+(let ((v1-148 #f)
+      (a0-148 *part-group-id-table*)
+      )
+  (s.w! (+ a0-148 832) v1-148)
+  )
+
+(set! (-> *part-id-table* 722) #f)
+
+(set! (-> *part-id-table* 723) #f)
+
+(let ((v1-151 #f)
+      (a0-151 *part-group-id-table*)
+      )
+  (s.w! (+ a0-151 836) v1-151)
+  )
+
+(set! (-> *part-id-table* 724) #f)
+
+(set! (-> *part-id-table* 725) #f)
+
+(let ((v1-154 #f)
+      (a0-154 *part-group-id-table*)
+      )
+  (s.w! (+ a0-154 840) v1-154)
+  )
+
+(set! (-> *part-id-table* 727) #f)
+
+(set! (-> *part-id-table* 728) #f)
+
+(set! (-> *part-id-table* 726) #f)
+
+(set! (-> *part-id-table* 729) #f)
+
+(let ((v1-159 #f)
+      (a0-159 *part-group-id-table*)
+      )
+  (s.w! (+ a0-159 844) v1-159)
+  )
+
+(set! (-> *part-id-table* 730) #f)
+
+(set! (-> *part-id-table* 732) #f)
+
+(set! (-> *part-id-table* 731) #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((v1-164 #f)
+      (a0-163 *part-group-id-table*)
+      )
+  (s.w! (+ a0-163 848) v1-164)
+  )
+
+(set! (-> *part-id-table* 734) #f)
+
+(set! (-> *part-id-table* 735) #f)
+
+(set! (-> *part-id-table* 733) #f)
+
+(let ((v1-168 #f)
+      (a0-167 *part-group-id-table*)
+      )
+  (s.w! (+ a0-167 852) v1-168)
+  )
+
+(set! (-> *part-id-table* 736) #f)
+
+(set! (-> *part-id-table* 737) #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((v1-172 #f)
+      (a0-170 *part-group-id-table*)
+      )
+  (s.w! (+ a0-170 856) v1-172)
+  )
+
+(set! (-> *part-id-table* 738) #f)
+
+(set! (-> *part-id-table* 739) #f)
+
+(let ((v1-175 #f)
+      (a0-173 *part-group-id-table*)
+      )
+  (s.w! (+ a0-173 860) v1-175)
+  )
+
+(set! (-> *part-id-table* 740) #f)
+
+(set! (-> *part-id-table* 741) #f)
+
+(set! (-> *part-id-table* 742) #f)
+
+(let ((v1-179 #f)
+      (a0-177 *part-group-id-table*)
+      )
+  (s.w! (+ a0-177 864) v1-179)
+  )
+
+(set! (-> *part-id-table* 743) #f)
+
+(set! (-> *part-id-table* 744) #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((v1-183 #f)
+      (a0-180 *part-group-id-table*)
+      )
+  (s.w! (+ a0-180 868) v1-183)
+  )
+
+(set! (-> *part-id-table* 745) #f)
+
+(set! (-> *part-id-table* 746) #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((v1-188 #f)
+      (a0-183 *part-group-id-table*)
+      )
+  (s.w! (+ a0-183 872) v1-188)
+  )
+
+(set! (-> *part-id-table* 747) #f)
+
+(set! (-> *part-id-table* 749) #f)
+
+(set! (-> *part-id-table* 750) #f)
+
+(set! (-> *part-id-table* 748) #f)
+
+(let ((v1-193 #f)
+      (a0-188 *part-group-id-table*)
+      )
+  (s.w! (+ a0-188 876) v1-193)
+  )
+
+(set! (-> *part-id-table* 751) #f)
+
+(set! (-> *part-id-table* 753) #f)
+
+(set! (-> *part-id-table* 754) #f)
+
+(set! (-> *part-id-table* 755) #f)
+
+(set! (-> *part-id-table* 752) #f)

@@ -83,91 +83,159 @@
 (deftype process-focusable (process-drawable)
   ((self          process-focusable           :override)
    (ppointer      (pointer process-focusable) :override)
-   (root          collide-shape               :override)
-   (focus-status  focus-status)
+   (focus-status  uint64)
    )
   (:methods
-    (get-search-info-flag (_type_) search-info-flag)
-    (get-trans (_type_ int) vector)
-    (get-quat (_type_ int) quaternion)
-    (get-transv (_type_) vector)
-    (time-to-apex-or-ground (_type_ int) int)
-    (get-water-height (_type_) meters)
-    (get-notice-time (_type_) time-frame)
-    (get-inv-mass (_type_) float)
+    (process-focusable-method-50 () none)
+    (process-focusable-method-51 () none)
+    (process-focusable-method-52 () none)
+    (process-focusable-method-53 () none)
+    (process-focusable-method-54 () int)
+    (process-focusable-method-55 () int)
+    (process-focusable-method-56 () int)
+    (process-focusable-method-57 () int)
+    (process-focusable-method-58 () int)
     )
   )
 
 
-;; WARN: Return type mismatch int vs search-info-flag.
-(defmethod get-search-info-flag ((this process-focusable))
-  "Get search-info-flag for this process."
-  (let ((search-flag (search-info-flag)))
-    (let ((mask (-> this mask)))
-      (if (logtest? (process-mask crate) mask)
-          (set! search-flag (the-as search-info-flag (logior (the-as int search-flag) (search-info-flag crate))))
-          )
-      (if (logtest? (process-mask guard) mask)
-          (set! search-flag (the-as search-info-flag (logior (the-as int search-flag) (search-info-flag guard))))
-          )
-      (if (logtest? (process-mask enemy) mask)
-          (set! search-flag (the-as search-info-flag (logior (the-as int search-flag) (search-info-flag enemy))))
-          )
-      )
-    (the-as search-info-flag search-flag)
-    )
-  )
-
-;; WARN: Return type mismatch structure vs vector.
-(defmethod get-trans ((this process-focusable) (mode int))
-  "Get the `trans` for this process."
-  (let ((cshape (-> this root)))
-    (the-as vector (cond
-                     ((zero? mode)
-                      (-> cshape trans)
-                      )
-                     ((and (= mode 1) (type? cshape collide-shape-moving))
-                      (-> (the-as collide-shape-moving cshape) gspot-pos)
-                      )
-                     ((and (or (= mode 2) (= mode 3) (= mode 10)) (type? cshape collide-shape))
-                      ;; og:preserve-this added check here so we don't use invalid bones
-                      (if (logtest? (-> this draw status) (draw-control-status uninited))
-                          (-> (the-as collide-shape-moving cshape) trans)
-                          (-> (the-as collide-shape-moving cshape) root-prim prim-core))
-                      )
-                     (else
-                       (-> cshape trans)
-                       )
-                     )
+;; ERROR: failed type prop at 1: Could not figure out load: (set! v1 (l.wu (+ a0 4)))
+;; ERROR: Function may read a register that is not set: a0
+(defmethod process-focusable-method-50 ((this process-focusable))
+  (local-vars (v0-0 int) (v0-1 none) (v1-0 none) (v1-1 none) (a0-0 none) (a0-1 none) (a0-2 none) (a0-5 none))
+  (when (begin
+          (when (begin
+                  (set! v0-0 0)
+                  (set! v1-0 (the-as none (l.wu (+ a0-0 4))))
+                  (set! a0-1 (the-as none #x20000))
+                  (set! a0-2 (the-as none (logand a0-1 v1-0)))
+                  (nonzero? a0-2)
+                  )
+            (set! v0-0 (the-as int (logior v0-0 2)))
+            (set! a0-4 (the-as none v0-0))
             )
+          (set! a0-5 (the-as none #x80000))
+          (set! v1-1 (the-as none (logand a0-5 v1-0)))
+          (nonzero? v1-1)
+          )
+    (set! v0-1 (the-as none (logior v0-0 16)))
+    (set! v1-3 (the-as none v0-1))
     )
+  (ret-none)
   )
 
-(defmethod get-transv ((this process-focusable))
-  "Get the `transv` for this process."
-  (-> this root transv)
+;; ERROR: failed type prop at 1: Could not figure out load: (set! gp (l.wu (+ a0 184)))
+;; ERROR: Function may read a register that is not set: a0
+;; ERROR: Function may read a register that is not set: a1
+(defmethod process-focusable-method-51 ((this process-focusable))
+  (local-vars
+    (v0-0 none)
+    (v0-1 none)
+    (v0-2 none)
+    (v0-3 none)
+    (v0-4 none)
+    (v0-5 none)
+    (v1-0 none)
+    (v1-1 none)
+    (v1-2 none)
+    (v1-3 none)
+    (v1-4 none)
+    (v1-5 none)
+    (v1-6 none)
+    (a0-0 none)
+    (a0-1 none)
+    (a0-3 none)
+    (a0-4 none)
+    (a0-5 none)
+    (a1-0 none)
+    (a1-1 none)
+    (a1-2 none)
+    (t9-0 none)
+    (t9-1 none)
+    (gp-0 none)
+    )
+  (cond
+    ((begin (set! gp-0 (the-as none (l.wu (+ a0-0 184)))) (zero? a1-0))
+     (set! v0-0 (the-as none (+ gp-0 12)))
+     )
+    ((begin
+       (and (begin (set! v1-0 (the-as none (+ a1-0 -1))) (set! a0-1 (the-as none (zero? v1-0))) a0-1)
+            (begin
+              (set! t9-0 (the-as none type?))
+              (set! a0-2 (the-as none gp-0))
+              (set! a1-1 (the-as none collide-shape-moving))
+              (set! v0-1 (the-as none (call!)))
+              (set! v1-1 (the-as none v0-1))
+              )
+            )
+       v1-1
+       )
+     (set! v0-2 (the-as none (+ gp-0 396)))
+     )
+    (else
+      (and (begin
+             (or (begin (set! v1-2 (the-as none (+ a1-0 -2))) (set! a0-3 (the-as none (zero? v1-2))) a0-3)
+                 (begin (set! v1-4 (the-as none (+ a1-0 -3))) (set! a0-4 (the-as none (zero? v1-4))) a0-4)
+                 (begin (set! a0-5 (the-as none (+ a1-0 -10))) (set! v1-3 (the-as none (zero? a0-5))))
+                 )
+             v1-3
+             )
+           (begin
+             (set! t9-1 (the-as none type?))
+             (set! a0-6 (the-as none gp-0))
+             (set! a1-2 (the-as none collide-shape))
+             (set! v0-3 (the-as none (call!)))
+             (set! v1-5 (the-as none v0-3))
+             )
+           )
+      (cond
+        (v1-5
+          (set! v1-6 (the-as none (l.wu (+ gp-0 156))))
+          (set! v0-4 (the-as none (+ v1-6 12)))
+          )
+        (else
+          (set! v0-5 (the-as none (+ gp-0 12)))
+          )
+        )
+      )
+    )
+  (ret-none)
   )
 
-(defmethod get-quat ((this process-focusable) (arg0 int))
-  "Get the quaternion for this process."
-  (-> this root quat)
+;; ERROR: failed type prop at 0: Could not figure out load: (set! v1 (l.wu (+ a0 184)))
+;; ERROR: Function may read a register that is not set: a0
+(defmethod process-focusable-method-53 ((this process-focusable))
+  (local-vars (v0-0 none) (v1-0 none) (a0-0 none))
+  (set! v1-0 (the-as none (l.wu (+ a0-0 184))))
+  (set! v0-0 (the-as none (+ v1-0 60)))
+  (ret-none)
   )
 
-(defmethod time-to-apex-or-ground ((this process-focusable) (arg0 int))
+;; ERROR: failed type prop at 0: Could not figure out load: (set! v1 (l.wu (+ a0 184)))
+;; ERROR: Function may read a register that is not set: a0
+(defmethod process-focusable-method-52 ((this process-focusable))
+  (local-vars (v0-0 none) (v1-0 none) (a0-0 none))
+  (set! v1-0 (the-as none (l.wu (+ a0-0 184))))
+  (set! v0-0 (the-as none (+ v1-0 28)))
+  (ret-none)
+  )
+
+(defmethod process-focusable-method-54 ((this process-focusable))
   0
   )
 
-;; WARN: Return type mismatch int vs meters.
-(defmethod get-water-height ((this process-focusable))
-  "Get the height of the water that we're in."
-  (the-as meters 0)
+(defmethod process-focusable-method-55 ((this process-focusable))
+  0
   )
 
-(defmethod get-inv-mass ((this process-focusable))
-  0.0
+(defmethod process-focusable-method-57 ((this process-focusable))
+  0
   )
 
-;; WARN: Return type mismatch int vs time-frame.
-(defmethod get-notice-time ((this process-focusable))
-  (the-as time-frame 0)
+(defmethod process-focusable-method-56 ((this process-focusable))
+  0
+  )
+
+(defmethod process-focusable-method-58 ((this process-focusable))
+  -1082130432
   )
