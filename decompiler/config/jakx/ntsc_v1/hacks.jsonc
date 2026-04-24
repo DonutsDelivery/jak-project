@@ -2047,7 +2047,14 @@
     "(method 59 map-menu)",
     "(method 60 index-sprite-list-menu)",
     "(method 65 map-menu)",
-    "base-menu-event-handler"
+    "base-menu-event-handler",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: math
+    "rand-uint31-gen",
+    // source: matrix
+    "(method 9 matrix)",
+    // source: merc-blend-shape
+    "blerc-a-fragment"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
