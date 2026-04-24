@@ -2054,7 +2054,10 @@
     // source: matrix
     "(method 9 matrix)",
     // source: merc-blend-shape
-    "blerc-a-fragment"
+    "blerc-a-fragment",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: merc-blend-shape
+    "blerc-execute"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
