@@ -2258,7 +2258,14 @@
     // source: net-game-modes2-h
     "ctf-flag-init-remote",
     "net-game-mgr-ctf-init-remote",
-    "net-player-ctf-init-remote"
+    "net-player-ctf-init-remote",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-game-modes2-h
+    "net-game-mgr-king-of-hill-init-remote",
+    "net-game-mgr-rushhour-init-remote",
+    "net-player-king-of-hill-init-remote",
+    "net-player-rushhour-init-remote",
+    "net-player-time-box-init-remote"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
