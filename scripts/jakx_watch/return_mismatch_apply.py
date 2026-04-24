@@ -15,20 +15,18 @@ The script:
   2. Finds the matching :methods lines in all-types.gc.
   3. Verifies parent/child type consistency before applying any change.
   4. Applies or prints (--dry-run) the edits.
-  5. (Without --dry-run) re-runs the decompiler and measures the delta.
+  5. (Without --dry-run) re-runs the decompiler via apply_guard and measures delta.
   6. Commits if WARN count drops with no new ERRORs, or reverts.
 """
 from __future__ import annotations
 
 import argparse
 import collections
-import os
 import re
-import subprocess
 import sys
 from pathlib import Path
 
-# Reuse scanner infrastructure
+# Reuse scanner infrastructure + shared regression gate
 sys.path.insert(0, str(Path(__file__).parent))
 from return_mismatch_scan import (  # noqa: E402
     build_method_line_index,
@@ -37,9 +35,9 @@ from return_mismatch_scan import (  # noqa: E402
     RE_METHOD_LINE,
     CURRENT_TYPES,
 )
+from apply_guard import run_with_guard  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
-STATUS_MD = ROOT / ".jakx_watch" / "status.md"
 
 # Structural vtable slots — never touch these
 SKIP_VTABLE = {0, 1, 9}  # new, delete, asize-of
@@ -292,48 +290,6 @@ def apply_fixes(types_path: Path, fixes: list[tuple[int, str, str, str]]) -> Non
     types_path.write_text("".join(lines))
 
 
-_RE_WARN_TOTAL = re.compile(r"^inline WARN\s+markers:\s+(\d+)", re.MULTILINE)
-_RE_ERROR_TOTAL = re.compile(r"^inline ERROR markers:\s+(\d+)", re.MULTILINE)
-
-
-def read_status_counts() -> tuple[int, int]:
-    """Return (error_markers, warn_markers) from current status.md."""
-    if not STATUS_MD.exists():
-        return (-1, -1)
-    text = STATUS_MD.read_text()
-    em = _RE_ERROR_TOTAL.search(text)
-    wm = _RE_WARN_TOTAL.search(text)
-    errors = int(em.group(1)) if em else -1
-    warns = int(wm.group(1)) if wm else -1
-    return errors, warns
-
-
-def run_decompiler() -> int:
-    """Run the jakx_watch decompiler pass. Returns exit code."""
-    env = {**os.environ, "JAKX_WATCH_FORCE": "1", "JAKX_WATCH_WAIT": "1"}
-    result = subprocess.run(
-        ["bash", "scripts/jakx_watch/run.sh"],
-        cwd=ROOT,
-        env=env,
-    )
-    return result.returncode
-
-
-def revert_all_types() -> None:
-    """Git-restore all-types.gc to HEAD."""
-    subprocess.run(
-        ["git", "checkout", "HEAD", "--", str(CURRENT_TYPES.relative_to(ROOT))],
-        cwd=ROOT,
-        check=True,
-    )
-
-
-def git_commit(message: str) -> None:
-    rel = str(CURRENT_TYPES.relative_to(ROOT))
-    subprocess.run(["git", "add", rel], cwd=ROOT, check=True)
-    subprocess.run(["git", "commit", "-m", message], cwd=ROOT, check=True)
-
-
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
@@ -440,74 +396,42 @@ def main() -> int:
         print(f"\n[dry-run] {len(fixes)} edits would be applied. Pass without --dry-run to apply.")
         return 0
 
-    # Record baseline
-    err_before, warn_before = read_status_counts()
-    print(f"\nBaseline:  errors={err_before}  warns={warn_before}")
+    pat_summary = ",".join(
+        f"{d}→{a}" for d, a in SAFE_PATTERNS_ORDERED if (d, a) in active_patterns
+    )
+    msg = (
+        f"fix(jakx/all-types): return-mismatch apply batch "
+        f"({pat_summary}) (Δwarn -N)\n\n"
+        f"Auto-applied {len(fixes)} :methods return-type corrections.\n"
+        f"Patterns: {pat_summary}\n\n"
+        f"Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+    )
 
-    # Apply
-    print(f"\nApplying {len(fixes)} edits to {CURRENT_TYPES.relative_to(ROOT)} ...")
-    try:
+    print(f"\nApplying {len(fixes)} edits via apply_guard ...")
+
+    def do_apply() -> list[Path]:
         apply_fixes(CURRENT_TYPES, fixes)
-    except ValueError as exc:
-        print(f"ERROR applying fixes: {exc}", file=sys.stderr)
-        return 1
-    print("  done.")
+        return [CURRENT_TYPES]
 
-    # Re-run decompiler
-    print("\nRunning decompiler (JAKX_WATCH_FORCE=1 JAKX_WATCH_WAIT=1) ...")
-    rc = run_decompiler()
-    if rc not in (0, 1):
-        print(f"WARN: decompiler exited {rc} — status.md may be stale", file=sys.stderr)
+    result = run_with_guard(
+        do_apply,
+        label=f"return-mismatch/{pat_summary}",
+        err_slack=0,
+        warn_must_decrease=True,
+        commit_on_pass=args.commit,
+        commit_message=msg,
+    )
 
-    # Measure delta
-    err_after, warn_after = read_status_counts()
-    print(f"\nAfter:     errors={err_after}  warns={warn_after}")
-
-    # Guard: if status.md couldn't be parsed, -1 is returned — treat as failure
-    if err_after == -1 or warn_after == -1:
-        print(
-            "ERROR: status.md did not contain expected markers after decompiler run.\n"
-            "       Decompiler may have crashed or status.md was not updated.\n"
-            "       Reverting to avoid committing on bad measurement.",
-            file=sys.stderr,
-        )
-        revert_all_types()
+    if not result.passed:
+        print(f"✗ Guard failed: {result.reason}", file=sys.stderr)
         return 1
 
-    delta_err = err_after - err_before
-    delta_warn = warn_after - warn_before
-    print(f"Delta:     Δerrors={delta_err:+d}  Δwarns={delta_warn:+d}")
-
-    # Decision
-    if delta_warn < 0 and delta_err <= 0:
-        print(f"\n✓ WARN count dropped by {-delta_warn}. Keeping changes.")
-        if args.commit:
-            pat_summary = ",".join(
-                f"{d}→{a}" for d, a in SAFE_PATTERNS_ORDERED if (d, a) in active_patterns
-            )
-            msg = (
-                f"fix(jakx/all-types): return-mismatch apply batch "
-                f"({pat_summary}) (Δwarn {warn_before}→{warn_after}, "
-                f"-{-delta_warn})\n\n"
-                f"Auto-applied {len(fixes)} :methods return-type corrections.\n"
-                f"Patterns: {pat_summary}\n\n"
-                f"Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
-            )
-            git_commit(msg)
-            print("  Committed.")
+    print(f"✓ WARN dropped by {-result.delta_warn} (Δerr={result.delta_err:+d})")
+    if args.commit:
+        if result.commit_sha:
+            print(f"  Committed as {result.commit_sha}.")
         else:
             print("  Pass --commit to auto-commit.")
-    elif delta_warn == 0 and delta_err <= 0:
-        print("\n~ WARN count unchanged. Changes were no-ops for active patterns.")
-        print("  Reverting to keep tree clean.")
-        revert_all_types()
-    else:
-        if delta_err > 0:
-            print(f"\n✗ ERROR count rose by {delta_err}. Reverting.", file=sys.stderr)
-        else:
-            print(f"\n✗ WARN count rose by {delta_warn}. Reverting.", file=sys.stderr)
-        revert_all_types()
-        return 1
 
     return 0
 
