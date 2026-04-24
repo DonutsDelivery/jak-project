@@ -1928,7 +1928,14 @@
     "foreground-generic-merc",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: default-menu
-    "dm-play-task-with-continue"
+    "dm-play-task-with-continue",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: generic-effect
+    "generic-none-dma-wait",
+    "generic-warp-dest",
+    "generic-warp-dest-proc",
+    "generic-warp-envmap-dest",
+    "generic-warp-source-proc"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
