@@ -28827,6 +28827,7 @@
   )
 
 #|
+;; Stale FULL-PENDING placeholder — `collide-shape-moving` real def is active at L28822.
 (deftype collide-shape-moving-FULL-PENDING (collide-shape)
   ((rider-time         uint64                                                                     :offset-assert 200) ;; time-frame
    (rider-last-move    vector                                                             :inline :offset-assert 208)
@@ -44717,6 +44718,7 @@
 
 
 #|
+;; Stale FULL-PENDING placeholder — `wvehicle` real def is active at L44447.
 (deftype wvehicle-FULL-PENDING (vehicle)
   ((net-extra                      wvehicle-net-extra        :inline :offset-assert 2140)
    (antenna                        uint64                            :offset-assert 2152)
@@ -48735,19 +48737,7 @@
   )
 
 
-#|
-(deftype nospawn-OLD-REGEN (process)
-  ((name             basic                 :offset-assert 0)
-   (stack            uint8      :dynamic :offset-assert 140)
-   )
-  :method-count-assert 15
-  :size-assert         #x90
-  :flag-assert         #xf00000090
-  (:methods
-    (nospawn-method-14 (_type_) none) ;; 14
-    )
-  )
-|#
+;; nospawn-OLD-REGEN was a stale regen artifact — superseded by `nospawn` above.
 
 
 
