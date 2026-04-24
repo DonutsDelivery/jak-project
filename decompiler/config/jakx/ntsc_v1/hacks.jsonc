@@ -1907,7 +1907,13 @@
     "get-string-length-asm",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: editable-player
-    "dm-region-tree-pick-func"
+    "dm-region-tree-pick-func",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: generic-effect
+    "generic-interp-dproc",
+    "generic-no-light-proc",
+    "generic-prepare-dma-double",
+    "generic-prepare-dma-single"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
