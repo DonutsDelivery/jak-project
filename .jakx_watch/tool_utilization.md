@@ -20,8 +20,10 @@ Lets sessions see at a glance which tools have active consumers and which queues
 | `asm_func_apply.py` | **RECENT** | Extended with PS2-opcode veto (mtlo1/mula.s family); next batch needs apply_guard integration |
 | `inspect_to_type_casts.py` | **RECENT** | Expanded offs=12 scanner (936c3736a, 200c4a316); offs=-4 batch complete |
 | `migrate_green_files.py` | **ACTIVE** | 3f676ba9 built + uses; 173 files migrated across batches 1-3 |
-| `size_assert_apply.py` | **PENDING** | Being authored by 2881c39d this cycle — unblocks 262 entries in size_assert_fixable.md |
-| `split_store_fix.py` | **PENDING** | Being authored by ff51092d this cycle — targets 156 Failed-store errors |
+| `size_assert_apply.py` | **SHIPPED (8914e8bfb)** | Tool works; audit script's Python type-system re-implementation produces noisy input → only 16 entries survive filter, all crash guard. Needs audit-script fix before real drain. |
+| `split_store_fix.py` | **SHIPPED (21d28af75)** | 3 jak3 entries ported this cycle; 56 Failed-store errors drained. |
+| `method_body_reader.py` | **SHIPPED (8a338c9c7)** | P4 from priority_queue — library used by return_mismatch_apply to validate return-type edits against actual body. |
+| `type_cast_extractor.py` | **PENDING** | P2 — assigned to ff51092d 2026-04-24; 867 errors target, 101 jak3-confirmed free ports available. |
 
 ## Detection / triage scanners
 
@@ -66,8 +68,8 @@ Lets sessions see at a glance which tools have active consumers and which queues
 **Sonnets** (applier authoring, deep analysis):
 1. `field_drift_queue.md` row #1 (`process`, sub=610) — highest cascade in the project; needs careful :methods merge with parent inheritance check
 2. `ref_drift_queue.md` regressions — most are stale REFs; `seed_refs.py --force` should reseed all 11 in one command (investigate first)
-3. `split_store_fix.py` applier (ff51092d owns this cycle)
-4. `size_assert_apply.py` applier (2881c39d owns this cycle)
+3. `type_cast_extractor.py` (P2, ff51092d owns 2026-04-24) — 867 errors drain
+4. Remaining priority_queue tools: P1 clobber_fixup, P3 asm_func_apply evolution, P5 safe_label_types_copy, P7 gotcha enforcer
 
 **Decision tree when all above drained:**
 - Biggest remaining bucket: `field_drift_queue.md` — 1689 drifted types across 5 complexity tiers
