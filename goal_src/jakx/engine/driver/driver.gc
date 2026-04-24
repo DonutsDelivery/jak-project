@@ -1,3 +1,524 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+;; name: driver.gc
+;; name in dgo: driver
+;; dgos: GAME
+
+;; SCAFFOLDING — behavioral driver code ported from ntsc_v1 binary analysis.
+;; Unported sections marked ;; SCAFFOLDING.
+
+;; +++driver:helmet-skel-groups
+
+(defskelgroup skel-helmet-a helmet-a helmet-a-lod0-jg helmet-a-idle-ja
+              ((helmet-a-lod0-mg (meters 999999)))
+              :bounds (static-spherem 0 1 0 3)
+              )
+
+(defskelgroup skel-helmet-b helmet-b helmet-b-lod0-jg helmet-b-idle-ja
+              ((helmet-b-lod0-mg (meters 999999)))
+              :bounds (static-spherem 0 1 0 3)
+              )
+
+(defskelgroup skel-helmet-c helmet-c helmet-c-lod0-jg helmet-c-idle-ja
+              ((helmet-c-lod0-mg (meters 999999)))
+              :bounds (static-spherem 0 1 0 3)
+              )
+
+(defskelgroup skel-helmet-d helmet-d helmet-d-lod0-jg helmet-d-idle-ja
+              ((helmet-d-lod0-mg (meters 999999)))
+              :bounds (static-spherem 0 1 0 3)
+              )
+
+(defskelgroup skel-helmet-e helmet-e helmet-e-lod0-jg helmet-e-idle-ja
+              ((helmet-e-lod0-mg (meters 999999)))
+              :bounds (static-spherem 0 1 0 3)
+              )
+
+(defskelgroup skel-helmet-f helmet-f helmet-f-lod0-jg helmet-f-idle-ja
+              ((helmet-f-lod0-mg (meters 999999)))
+              :bounds (static-spherem 0 1 0 3)
+              )
+
+;; ---driver:helmet-skel-groups
+
+;; definition of type helmet
+(deftype helmet (structure)
+  ((node-list  basic)
+   (draw       basic)
+   (node-index int8)
+   (scale      float)
+   )
+  (:methods
+    (helmet-method-9 (_type_) none)
+    (helmet-method-10 (_type_) none)
+    (helmet-method-11 (_type_) none)
+    )
+  )
+
+;; definition for method 3 of type helmet
+(defmethod inspect ((this helmet))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'helmet)
+  (format #t "~1Tnode-list: ~A~%" (-> this node-list))
+  (format #t "~1Tdraw: ~A~%" (-> this draw))
+  (format #t "~1Tnode-index: ~D~%" (-> this node-index))
+  (format #t "~1Tscale: ~f~%" (-> this scale))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type driver-initialize-params
+(deftype driver-initialize-params (structure)
+  ((vehicle     basic)
+   (level-slot  int8)
+   (driver-type uint8)
+   )
+  )
+
+;; definition for method 3 of type driver-initialize-params
+(defmethod inspect ((this driver-initialize-params))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'driver-initialize-params)
+  (format #t "~1Tvehicle: ~A~%" (-> this vehicle))
+  (format #t "~1Tlevel-slot: ~D~%" (-> this level-slot))
+  (format #t "~1Tdriver-type: ~D~%" (-> this driver-type))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type driver-info
+(deftype driver-info (structure)
+  ((skel            basic)
+   (turn-back-anim  int8)
+   (turn-front-anim int8)
+   (up-down-anim    int8)
+   (intro-anim      uint8 4)
+   (head-node       int8)
+   (arm0-node       int8)
+   (arm1-node       int8)
+   (arm0-dist       float)
+   (arm1-dist       float)
+   )
+  :size-assert #x18
+  :flag-assert #x900000018
+  )
+
+;; definition for method 3 of type driver-info
+(defmethod inspect ((this driver-info))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'driver-info)
+  (format #t "~1Tskel: ~A~%" (-> this skel))
+  (format #t "~1Tturn-back-anim: ~D~%" (-> this turn-back-anim))
+  (format #t "~1Tturn-front-anim: ~D~%" (-> this turn-front-anim))
+  (format #t "~1Tup-down-anim: ~D~%" (-> this up-down-anim))
+  (format #t "~1Tintro-anim[4] @ #x~X~%" (-> this intro-anim))
+  (format #t "~1Thead-node: ~D~%" (-> this head-node))
+  (format #t "~1Tarm0-node: ~D~%" (-> this arm0-node))
+  (format #t "~1Tarm1-node: ~D~%" (-> this arm1-node))
+  (format #t "~1Tarm0-dist: ~f~%" (-> this arm0-dist))
+  (format #t "~1Tarm1-dist: ~f~%" (-> this arm1-dist))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type driver
+(deftype driver (process-focusable)
+  (;; offsets derived from ntsc_v1 binary analysis
+   ;; process-nettable is 4 bytes smaller than jak3, shifting all fields -4 vs jak3
+   (info              driver-info :inline :offset 252) ;; 24 bytes, 4-byte aligned
+   (vehicle           uint8       8       :offset 276) ;; uint64 handle, misaligned — use uint8 8
+   (speech-time       uint8       8       :offset 284) ;; uint64 clock handle, misaligned
+   (driver-unk292     uint8       8       :offset 292)
+   (anim-vel          uint8       16      :offset 300) ;; vector, misaligned — use uint8 16
+   (anim-pos          uint8       16      :offset 316) ;; vector, misaligned
+   (turn-back-anim    int8                :offset 332)
+   (turn-front-anim   int8                :offset 333)
+   (up-down-anim      int8                :offset 334)
+   (intro-anim        uint8       4       :offset 335)
+   (jmod-head         basic               :offset 340)
+   (arm-ik            uint8       12      :offset 344)
+   (looking-at        uint8       8       :offset 356) ;; uint64 handle, misaligned
+   (looking-at-timeout int32              :offset 364)
+   (helmet            helmet      :inline :offset 368)
+   (driver-tail       uint8       4       :offset 384)
+   )
+  :method-count-assert 67
+  :size-assert         #x184
+  :flag-assert         #x4301000184
+  (:state-methods
+    idle  ;; 59
+    intro ;; 60
+    die   ;; 61
+    )
+  (:methods
+    (driver-method-62 (_type_) none) ;; 62
+    (driver-method-63 (_type_) none) ;; 63
+    (driver-method-64 (_type_) none) ;; 64
+    (driver-method-65 (_type_) none) ;; 65
+    (driver-method-66 (_type_) none) ;; 66
+    )
+  )
+
+;; definition for method 3 of type driver
+(defmethod inspect ((this driver))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (let ((t9-0 (method-of-type process-focusable inspect)))
+    (t9-0 this)
+    )
+  (format #t "~1Tturn-back-anim: ~D~%" (-> this turn-back-anim))
+  (format #t "~1Tturn-front-anim: ~D~%" (-> this turn-front-anim))
+  (format #t "~1Tup-down-anim: ~D~%" (-> this up-down-anim))
+  (format #t "~1Tjmod-head: ~A~%" (-> this jmod-head))
+  (format #t "~1Tlooking-at-timeout: ~D~%" (-> this looking-at-timeout))
+  (label cfg-4)
+  this
+  )
+
+;; definition for method 7 of type driver
+;; SCAFFOLDING — relocate arm-ik and jmod-head pointers, then call parent
+(defmethod relocate ((this driver) (off int))
+  (when (-> this jmod-head)
+    (let ((jmh (-> this jmod-head)))
+      ((method-of-type (-> (the-as basic jmh) type) relocate) (the-as basic jmh) off)
+      (set! (-> this jmod-head) (the-as basic (+ (the-as int (-> this jmod-head)) off)))
+      )
+    )
+  (when (nonzero? (-> (the-as (pointer uint32) (+ (the-as int this) 344)) 0))
+    (let ((arm0 (-> (the-as (pointer uint32) (+ (the-as int this) 344)) 0)))
+      (set! (-> (the-as (pointer uint32) (+ (the-as int this) 344)) 0) (+ arm0 (the-as uint off)))
+      )
+    )
+  (when (nonzero? (-> (the-as (pointer uint32) (+ (the-as int this) 348)) 0))
+    (let ((arm1 (-> (the-as (pointer uint32) (+ (the-as int this) 348)) 0)))
+      (set! (-> (the-as (pointer uint32) (+ (the-as int this) 348)) 0) (+ arm1 (the-as uint off)))
+      )
+    )
+  ((find-parent-method driver 7) this off)
+  )
+
+;; definition for method 65 of type driver
+;; SCAFFOLDING — sets draw visibility flags
+(defmethod driver-method-65 ((this driver))
+  ;; SCAFFOLDING
+  (none)
+  )
+
+;; definition for method 66 of type driver
+;; SCAFFOLDING — main driver update (trans/physics integration)
+(defmethod driver-method-66 ((this driver))
+  ;; SCAFFOLDING
+  (none)
+  )
+
+;; definition for function joint-mod-head-handler
+;; SCAFFOLDING — head-tracking callback
+(defun joint-mod-head-handler ()
+  ;; SCAFFOLDING
+  (none)
+  )
+
+;; definition for function driver-trans
+;; SCAFFOLDING — driver physics/position update per frame
+(defun driver-trans ()
+  ;; SCAFFOLDING
+  (none)
+  )
+
+;; definition for function driver-post
+(defun driver-post ()
+  (ja-post)
+  (none)
+  )
+
+;; definition for function driver-head
+;; SCAFFOLDING — head-look-at update
+(defun driver-head ()
+  ;; SCAFFOLDING
+  (none)
+  )
+
+;; definition for function driver-anim
+;; SCAFFOLDING — per-frame animation update
+(defun driver-anim ()
+  ;; SCAFFOLDING
+  (none)
+  )
+
+;; definition for function driver-event-handler
+;; SCAFFOLDING
+(defun driver-event-handler ()
+  ;; SCAFFOLDING
+  #f
+  )
+
+;; definition for state idle of type driver
+(defstate idle (driver)
+  :virtual #t
+  :event (the-as (function process int symbol event-message-block object) driver-event-handler)
+  :trans (behavior ()
+    (driver-trans)
+    (driver-head)
+    )
+  :code (behavior ()
+    (ja-channel-push! 3 150)
+    (loop
+      (driver-anim)
+      (suspend)
+      )
+    )
+  :post driver-post
+  )
+
+;; definition for state intro of type driver
+;; SCAFFOLDING — simplified, goes directly to idle after brief wait
+(defstate intro (driver)
+  :virtual #t
+  :event (the-as (function process int symbol event-message-block object) driver-event-handler)
+  :code (behavior ()
+    ;; SCAFFOLDING — real intro plays an animation before going to idle
+    (go (method-of-object self idle))
+    )
+  :post driver-post
+  )
+
+;; definition for state die of type driver
+(defstate die (driver)
+  :virtual #t
+  :code (behavior ()
+    '()
+    )
+  )
+
+;; definition for method 63 of type driver — create collide shape
+(defmethod driver-method-63 ((this driver))
+  (let ((s5-0 (new 'process 'collide-shape this (the-as uint 0))))
+    (set! (-> s5-0 penetrated-by) (the-as penetrate -1))
+    (let ((v1-3 (new 'process 'collide-shape-prim-sphere s5-0 (the-as uint 0))))
+      (set! (-> v1-3 prim-core collide-as) (collide-spec bot))
+      (set! (-> v1-3 transform-index) 3)
+      (set-vector! (-> v1-3 local-sphere) 0.0 0.0 0.0 0.0)
+      (set! (-> s5-0 total-prims) (the-as uint 1))
+      (set! (-> s5-0 root-prim) v1-3)
+      )
+    (set! (-> s5-0 nav-radius) (* 0.75 (-> s5-0 root-prim local-sphere w)))
+    (let ((v1-6 (-> s5-0 root-prim)))
+      (let ((a0-7 (-> v1-6 prim-core collide-as)))
+        ;; write aggregate collide-as/with flags to collide-shape fields at +180/+184
+        ;; these are fields after penetrated-by that aren't in the typed layout
+        (set! (-> (the-as (pointer uint32) (+ (the-as int s5-0) 180)) 0) (the-as uint a0-7))
+        )
+      (let ((v1-7 (-> v1-6 prim-core collide-with)))
+        (set! (-> (the-as (pointer uint32) (+ (the-as int s5-0) 184)) 0) (the-as uint v1-7))
+        )
+      )
+    (set! (-> this root) (the-as trsqv s5-0))
+    )
+  0
+  (none)
+  )
+
+;; definition for method 64 of type driver
+(defmethod driver-method-64 ((this driver))
+  0
+  (none)
+  )
+
+;; definition for function driver-init-by-other
+;; SCAFFOLDING — minimal init: resize thread, setup skel+collide, copy anim indices, init-skel, go idle
+(defbehavior driver-init-by-other driver ((params driver-initialize-params))
+  ;; resize cpu-thread stack to 64 bytes (to match binary)
+  ((method-of-object (-> self main-thread) 13) (-> self main-thread) 64)
+  ;; call virtual method-62 (per-driver skel/info setup) then method-63 (collide setup)
+  ((method-of-object self driver-method-62) self)
+  ((method-of-object self driver-method-63) self)
+  ;; copy animation channel indices from driver-info to self fields
+  (let ((info (-> self info)))
+    (set! (-> self turn-back-anim) (-> info turn-back-anim))
+    (set! (-> self turn-front-anim) (-> info turn-front-anim))
+    (set! (-> self up-down-anim) (-> info up-down-anim))
+    (dotimes (i 4)
+      (set! (-> self intro-anim i) (-> info intro-anim i))
+      )
+    )
+  ;; set entity slot from level-slot index
+  (let ((level-slot (-> params level-slot)))
+    (set! (-> self entity)
+          (the-as entity-actor
+                  (+ (the-as int *level*) (* 1440 (+ level-slot 12)) 544)))
+    )
+  ;; initialize skeleton (process-drawable-method-42 = init-skel equivalent)
+  ((method-of-object self process-drawable-method-42)
+   self
+   (the-as skeleton-group (-> self info skel))
+   0)
+  ;; SCAFFOLDING: skip vehicle handle, speech-time, jmod-head, helmet setup
+  ;; go to idle state
+  (go (method-of-object self idle))
+  (none)
+  )
+
+;; definition for function driver-spawn
+(defun driver-spawn ()
+  (local-vars
+    (v0-0 none)
+    (v0-1 none)
+    (v0-2 process)
+    (v0-3 none)
+    (v0-4 none)
+    (v0-5 none)
+    (v1-0 none)
+    (v1-4 type)
+    (v1-5 symbol)
+    (v1-6 type)
+    (a0-0 none)
+    (a0-3 int)
+    (a0-4 dead-pool)
+    (a0-5 none)
+    (a1-0 none)
+    (a1-1 none)
+    (a1-2 none)
+    (a1-3 none)
+    (a1-4 none)
+    (a1-5 none)
+    (a1-6 none)
+    (a1-7 none)
+    (a1-9 none)
+    (a1-10 none)
+    (a1-11 none)
+    (a1-13 none)
+    (a1-15 none)
+    (a2-0 none)
+    (a2-1 none)
+    (a2-2 none)
+    (a2-3 none)
+    (a2-4 none)
+    (a2-5 none)
+    (a2-6 none)
+    (a2-7 none)
+    (a2-8 none)
+    (a2-9 int)
+    (a3-0 none)
+    (a3-1 none)
+    (a3-2 int)
+    (a3-3 none)
+    (s0-0 object)
+    (s1-0 symbol)
+    (s1-1 driver-initialize-params)
+    (s3-1 (function process process-tree string pointer process-tree))
+    (s4-1 process)
+    (s5-0 none)
+    (t9-0 (function none))
+    (t9-1 (function none))
+    (t9-2 (function dead-pool type int object process))
+    (t9-3 (function symbol string))
+    (t9-4 none)
+    (t9-5 none)
+    (gp-0 symbol)
+    )
+  (when (begin
+          (set! gp-0 #f)
+          (set! t9-0 type-from-driver-type)
+          (set! a0-1 a0-0)
+          (set! v0-0 (call!))
+          (set! s5-0 v0-0)
+          (set! s1-0 #f)
+          (set! t9-1 level-from-driver-type)
+          (set! a0-2 a0-0)
+          (set! v0-1 (call!))
+          (set! v1-0 v0-1)
+          (set! a0-3 0)
+          (while (<.si a0-3 6)
+            (when (begin
+                    (and (begin
+                           (set! a1-1 (the-as none *level*))
+                           (set! a2-1 (the-as none 1440))
+                           (set! a3-0 (the-as none (+ a0-3 12)))
+                           (set! a2-2 (the-as none (*.si a2-1 a3-0)))
+                           (set! a1-2 (the-as none (+ a1-1 a2-2)))
+                           (set! a1-3 (the-as none (l.wu (+ a1-2 544))))
+                           (set! a2-3 (the-as none (= a1-3 v1-0)))
+                           a2-3
+                           )
+                         (begin
+                           (set! a1-5 (the-as none *level*))
+                           (set! a2-4 (the-as none 1440))
+                           (set! a3-1 (the-as none (+ a0-3 12)))
+                           (set! a2-5 (the-as none (*.si a2-4 a3-1)))
+                           (set! a1-6 (the-as none (+ a1-5 a2-5)))
+                           (set! a1-7 (the-as none (l.wu (+ a1-6 560))))
+                           (set! a2-6 (the-as none 'active))
+                           (set! a1-4 (the-as none (= a1-7 a2-6)))
+                           )
+                         )
+                    a1-4
+                    )
+              (set! a1-9 (the-as none 1440))
+              (set! a2-7 (the-as none (+ a0-3 12)))
+              (set! a1-10 (the-as none (*.si a1-9 a2-7)))
+              (set! a1-11 (the-as none (+ a1-10 544)))
+              (set! a2-8 (the-as none *level*))
+              (set! s1-0 (the-as symbol (+ a1-11 a2-8)))
+              (set! a2-0 (the-as none (+ a0-3 12)))
+              (set! a1-12 (the-as none a2-0))
+              )
+            (set! a0-3 (the-as int (+ a0-3 1)))
+            )
+          s1-0
+          )
+    (when (begin
+            (when (begin
+                    (set! s1-1 (new 'stack-no-clear 'driver-initialize-params))
+                    (set! (-> s1-1 vehicle) (the-as basic a1-0))
+                    (set! (-> s1-1 level-slot) (the-as int a2-0))
+                    (set! (-> s1-1 driver-type) (the-as uint a0-0))
+                    (set! a0-4 *default-dead-pool*)
+                    (set! v1-4 (-> a0-4 type))
+                    (set! t9-2 (method-of-type v1-4 get-process))
+                    (set! a1-13 s5-0)
+                    (set! a2-9 #x4000)
+                    (set! a3-2 1)
+                    (set! v0-2 (call! a0-4 a1-13 a2-9 a3-2))
+                    (set! s4-1 v0-2)
+                    s4-1
+                    )
+              (set! v1-6 process)
+              (set! s3-1 (method-of-type v1-6 activate))
+              (set! s2-1 s4-1)
+              (set! s0-0 *rigid-body-queue-manager*)
+              (set! t9-3 symbol->string)
+              (set! a0-5 (the-as none (l.wu s5-0)))
+              (call!)
+              (set! a2-10 (the-as none v0-3))
+              (set! a3-3 (the-as none #x70004000))
+              (set! t9-4 (the-as none s3-1))
+              (set! a0-6 (the-as none s2-1))
+              (set! a1-14 (the-as none s0-0))
+              (call!)
+              (set! t9-5 (the-as none run-function-in-process))
+              (set! a0-7 (the-as none s4-1))
+              (set! a1-15 (the-as none driver-init-by-other))
+              (set! a2-11 (the-as none s1-1))
+              (call!)
+              (set! v1-5 (the-as symbol (-> s4-1 ppointer)))
+              )
+            v1-5
+            )
+      (set! gp-0 (the-as symbol (-> (the-as process-drawable s4-1) ppointer)))
+      )
+    )
+  (set! v0-6 (the-as none gp-0))
+  (ret-none)
+  )

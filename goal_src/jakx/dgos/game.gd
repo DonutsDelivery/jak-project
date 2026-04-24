@@ -577,6 +577,7 @@
   "drift.o"
   "race-mesh.o"
   "race-ai-tuning.o"
+  "atoll-obs.o"
   "jakx-init.o"
   "dir-tpages.go"
   "tpage-1.go"
