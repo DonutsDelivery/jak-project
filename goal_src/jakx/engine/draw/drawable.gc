@@ -405,6 +405,11 @@
 
   ;; Entity birth: spawn/kill BSP entity-actors each frame.
   ;; Matches jak3 real-main-draw-hook:1674. Gated internally on *spawn-actors*.
+  ;; Force *spawn-actors* back on each frame: game-info.gc's initialize! 'play
+  ;; branch sets it to #f, and jak3's target-death turns it back on after the
+  ;; player spawns — but jakx's target-death port doesn't yet have that set! #t.
+  ;; Until target-death is fully ported, this guarantees entity birth stays on.
+  (set! *spawn-actors* #t)
   (actors-update *level*)
 
   (init-background)

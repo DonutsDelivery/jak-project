@@ -533,6 +533,13 @@
 ;; live here (which returned #f and skipped process-spawn) has been removed;
 ;; start now spawns a real target process so *target* can become non-#f.
 
+;; jakx entity.gc top-level initializer (decompiler_out/jakx/entity_disasm.gc:5).
+;; Without this, actors-update's (when *spawn-actors*) gate never opens and no
+;; BSP entities ever get birthed. entity-h.gc declares it as define-extern;
+;; the real entity.gc provides the value. (*compact-actors* is already defined
+;; above; *vis-actors* is not yet used by any ported code.)
+(define *spawn-actors* #t)
+
 ;; Ported from jak3 engine/entity/entity.gc:1970. Required by game-info.gc's initialize! 'boot lambda for Phase 3.
 (defun reset-actors ((arg0 symbol))
   (let* ((v1-0 arg0)
