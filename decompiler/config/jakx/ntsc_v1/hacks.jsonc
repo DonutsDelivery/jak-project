@@ -2272,7 +2272,16 @@
     "net-game-mgr-time-trial-init-remote",
     "net-game-mgr-training-init-remote",
     "net-player-boss-battle-init-remote",
-    "net-player-time-trial-init-remote"
+    "net-player-time-trial-init-remote",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-game-modes2-h
+    "net-game-mgr-boss-battle-init-remote",
+    // source: net-http
+    "http-downloader-default-handler",
+    "http-downloader-init-by-other",
+    // source: net-hud
+    "(method 14 hud-effect)",
+    "(method 9 basic-manager)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
