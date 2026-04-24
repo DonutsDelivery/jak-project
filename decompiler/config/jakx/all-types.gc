@@ -11806,10 +11806,10 @@
     (level-group-method-9 (_type_ symbol) level) ;; 9
     (level-group-method-10 (_type_ symbol) level) ;; 10
     (level-group-method-11 (_type_ pointer symbol) level) ;; 11
-    (level-group-method-12 (_type_ symbol symbol) level) ;; 12
+    (level-group-method-12 (_type_ symbol symbol) symbol) ;; 12
     (level-group-method-13 (_type_) int) ;; 13
     (level-group-method-14 (_type_ symbol type string) none) ;; 14
-    (level-group-method-15 (_type_ symbol) int) ;; 15
+    (level-group-method-15 (_type_ symbol) none) ;; 15
     (level-group-method-16 (_type_) int) ;; 16
     (level-group-method-17 (_type_) none) ;; 17
     (level-group-method-18 (_type_) none) ;; 18
@@ -11824,7 +11824,7 @@
     (level-group-method-27 (_type_) int) ;; 27
     (level-group-method-28 (_type_) symbol) ;; 28
     (level-group-method-29 (_type_ (pointer symbol)) symbol) ;; 29
-    (level-group-method-30 (_type_) level) ;; 30
+    (level-group-method-30 (_type_) none) ;; 30
     (level-group-method-31 () none) ;; 31
     (level-group-method-32 () none) ;; 32
     (level-group-method-33 () none) ;; 33
@@ -45414,10 +45414,10 @@
     die ;; 51
     )
   (:methods
-    (powerup-draw-method-52 () none) ;; 52
-    (powerup-draw-method-53 () symbol) ;; 53
-    (powerup-draw-method-54 () none) ;; 54
-    (powerup-draw-method-55 () none) ;; 55
+    (powerup-draw-method-52 () int) ;; 52
+    (powerup-draw-method-53 () none) ;; 53
+    (powerup-draw-method-54 () int) ;; 54
+    (powerup-draw-method-55 () int) ;; 55
     (powerup-draw-method-56 () none) ;; 56
     )
   )
@@ -59064,8 +59064,8 @@
   :flag-assert         #x2300000028
   (:methods
     (new (symbol type process symbol float) _type_) ;; 0
-    (curve-control-method-33 (_type_) none) ;; 33
-    (curve-control-method-34 (_type_) none) ;; 34
+    (curve-control-method-33 (_type_) vector) ;; 33
+    (curve-control-method-34 (_type_) vector) ;; 34
     )
   )
 
