@@ -1935,7 +1935,17 @@
     "generic-warp-dest",
     "generic-warp-dest-proc",
     "generic-warp-envmap-dest",
-    "generic-warp-source-proc"
+    "generic-warp-source-proc",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: game-save
+    "(method 22 game-info)",
+    "auto-save-post",
+    // source: gcommon
+    "quad-copy!",
+    // source: generic-effect
+    "generic-debug-light-proc",
+    // source: generic-merc
+    "generic-merc-init-asm"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
