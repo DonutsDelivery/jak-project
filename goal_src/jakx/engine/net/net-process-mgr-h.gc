@@ -6,3 +6,34 @@
 
 
 
+
+(deftype net-process-mgr-machine (structure)
+  ((state            uint8)
+   (delay            int32)
+   (acct-id          int32)
+   (overall-score    int32)
+   (clan-id          int32)
+   (local-player-ct  int32)
+   (cookie           int32)
+   (reported-ping    int32)
+   )
+  )
+
+
+;; type net-process-mgr is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *net-process-mgr* (the-as object #f))
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.

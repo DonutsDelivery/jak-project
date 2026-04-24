@@ -6,3 +6,228 @@
 
 
 
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *net-process-table*
+  (the-as array (new 'static 'boxed-array :type process-nettable :length 0 :allocated-length 1024))
+  )
+
+(deftype owner-and-flags (int8)
+  ()
+  )
+
+(deftype nospawn (process)
+  ()
+  (:methods
+    (nospawn-method-14 () none)
+    )
+  )
+
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((v1-8 net-process-mgr-handle-aux-msg-recv-end)
+      (a0-5 *net-aux-msg-handlers*)
+      )
+  (s.w! (+ a0-5 16) v1-8)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((v1-10 net-process-mgr-handle-aux-msg-recv-end-ack)
+      (a0-6 *net-aux-msg-handlers*)
+      )
+  (s.w! (+ a0-6 32) v1-10)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((v1-12 net-process-mgr-handle-aux-msg-spawn-entities)
+      (a0-7 *net-aux-msg-handlers*)
+      )
+  (s.w! (+ a0-7 48) v1-12)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((gp-0 (new 'static 'state
+              :name 'startup
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (method-set! net-process-mgr 15 gp-0)
+  (set! (-> gp-0 code) L375)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((gp-1 (new 'static 'state
+              :name 'staging
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (method-set! net-process-mgr 16 gp-1)
+  (set! (-> gp-1 event) (the-as (function process int symbol event-message-block object) L347))
+  (set! (-> gp-1 enter) L357)
+  (set! (-> gp-1 trans) (the-as (function object) L346))
+  (set! (-> gp-1 code) sleep-code)
+  )
+
+(let ((gp-2
+        (new 'static 'state
+          :name 'recv-objects
+          :next #f
+          :exit #f
+          :parent #f
+          :code #f
+          :trans #f
+          :post #f
+          :enter #f
+          :event #f
+          )
+        )
+      )
+  (method-set! net-process-mgr 17 gp-2)
+  (set! (-> gp-2 event)
+        (the-as (function process int symbol event-message-block object) net-process-mgr-default-handler)
+        )
+  (set! (-> gp-2 trans) (the-as (function object) L345))
+  (set! (-> gp-2 code) sleep-code)
+  )
+
+(let ((gp-3 (new 'static 'state
+              :name 'running
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (method-set! net-process-mgr 18 gp-3)
+  (set! (-> gp-3 event) (the-as (function process int symbol event-message-block object) L341))
+  (set! (-> gp-3 enter) L344)
+  (set! (-> gp-3 trans) (the-as (function object) L335))
+  (set! (-> gp-3 code) sleep-code)
+  )
+
+(let ((gp-4
+        (new 'static 'state :name 'die :next #f :exit #f :parent #f :code #f :trans #f :post #f :enter #f :event #f)
+        )
+      )
+  (method-set! net-process-mgr 19 gp-4)
+  (set! (-> gp-4 code) L334)
+  )
+
+(define *prev-time-of-day-time* (the-as object 0))
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.

@@ -6,3 +6,41 @@
 
 
 
+
+(define *net-start-view-ct* (the-as object 1))
+
+(define *listener-cpt* (the-as object #f))
+
+(define *net-hw-initted* (the-as object #f))
+
+(define *net-hw-config-id* (the-as object 0))
+
+(define *net-hw-last-error* (the-as object 0))
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *artist-continue-busy* (the-as object #f))
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
