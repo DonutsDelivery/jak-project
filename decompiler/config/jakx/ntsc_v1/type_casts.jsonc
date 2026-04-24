@@ -39429,6 +39429,12 @@
   "(method 3 cloth-system)": [
     [66, "gp", "cloth-system"]
   ],
+  // inspect generic-tie-interp-point: op 19 does (l.q gp) to print the
+  // overlapping `quad` field. The quad field is commented out in the deftype
+  // (misaligned at offset 0 as a uint128 overlay). Cast to uint128 to unblock.
+  "(method 3 generic-tie-interp-point)": [
+    [19, "a2", "uint128"]
+  ],
   "(method 3 index-sprite-list-menu-info)": [
     [116, "gp", "index-sprite-list-menu-info"]
   ],
