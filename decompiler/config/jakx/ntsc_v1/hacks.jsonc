@@ -1893,7 +1893,13 @@
     // source: font
     "char-effect-compute2",
     "draw-string-asm-packed",
-    "draw-string-init-justify"
+    "draw-string-init-justify",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: entity
+    "vis-cull-all?",
+    // source: font
+    "(method 10 font-context)",
+    "draw-string3d-asm"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
