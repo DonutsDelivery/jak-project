@@ -1975,7 +1975,14 @@
     // source: gkernel
     "reset-and-call",
     "return-from-thread",
-    "return-from-thread-dead"
+    "return-from-thread-dead",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: gkernel
+    "(method 0 catch-frame)",
+    "(method 10 cpu-thread)",
+    "(method 11 cpu-thread)",
+    "throw",
+    "throw-dispatch"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
