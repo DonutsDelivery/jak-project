@@ -2229,7 +2229,14 @@
     "(method 62 net-player)",
     // source: net-game-mgr-h
     "current-finish-mode",
-    "net-game-mgr-init-remote"
+    "net-game-mgr-init-remote",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-game-modes-h
+    "net-game-mgr-assassin-init-remote",
+    "net-game-mgr-deathmatch-init-remote",
+    "net-player-assassin-init-remote",
+    "net-player-deathmatch-init-remote",
+    "net-player-deathrace-init-remote"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
