@@ -53,8 +53,8 @@
     (disable-draw (shadow-control) int)
     (set-top-plane-offset (shadow-control float) int)
     (set-bottom-plane-offset (shadow-control float) int)
-    (probe-line-for-shadow (_type_ vector float float float) none)
-    (shadow-control-method-14 (_type_ vector vector float float float) none)
+    (probe-line-for-shadow (_type_ vector float float float) int)
+    (shadow-control-method-14 (_type_ vector vector float float float) int)
     )
   )
 
@@ -82,7 +82,7 @@
 (deftype shadow-data (structure)
   "DMA data for the shadow renderer."
   ((dma-unpack-template  dma-packet  :inline)
-   (dma-cnt              dma-tag)
+   (dma-cnt              uint64)
    (vif-nop              vif-tag)
    (vif-unpack-v4-8      vif-tag)
    (pdc                  basic)
@@ -103,9 +103,16 @@
 (deftype shadow-bucket (structure)
   ((first         pointer)
    (next          pointer)
-   (bucket-id     bucket-id)
+   (bucket-id     int32)
    (shadow-color  rgba)
    (constants     shadow-vu1-constants)
+   )
+  :allow-misaligned
+  )
+
+
+(deftype shadow-bucket-views (structure)
+  ((data  shadow-bucket  2 :inline)
    )
   :allow-misaligned
   )
@@ -114,18 +121,24 @@
 (deftype shadow-globals (structure)
   ((num-buckets  uint32)
    (cur-bucket   uint32)
-   (bucket       shadow-bucket  3 :inline)
+   (data         shadow-bucket-views  3 :inline)
    )
   )
 
 
 (define *shadow-globals* (new 'global 'shadow-globals))
 
-(set! (-> *shadow-globals* bucket 0 bucket-id) (bucket-id shadow))
+(set! (-> *shadow-globals* data 0 data 0 bucket-id) 403)
 
-(set! (-> *shadow-globals* bucket 1 bucket-id) (bucket-id shadow2))
+(set! (-> *shadow-globals* data 0 data 1 bucket-id) 404)
 
-(set! (-> *shadow-globals* bucket 2 bucket-id) (bucket-id shadow3))
+(set! (-> *shadow-globals* data 1 data 0 bucket-id) 774)
+
+(set! (-> *shadow-globals* data 1 data 1 bucket-id) 775)
+
+(set! (-> *shadow-globals* data 2 data 0 bucket-id) 776)
+
+(set! (-> *shadow-globals* data 2 data 1 bucket-id) 777)
 
 (deftype shadow-vertex (structure)
   ((x       float)
@@ -162,13 +175,13 @@
   )
 
 
-; (deftype shadow-edge (structure)
-;   ((ind-0  uint8)
-;    (ind-1  uint8)
-;    (tri-0  uint8)
-;    (tri-1  uint8)
-;    )
-;   )
+(deftype shadow-edge (structure)
+  ((ind-0  uint8)
+   (ind-1  uint8)
+   (tri-0  uint8)
+   (tri-1  uint8)
+   )
+  )
 
 
 (deftype shadow-frag-header (structure)
@@ -238,5 +251,3 @@
 (define *shadow-object* #f)
 
 (define *shadow-debug* #f)
-
-(define *shadow-dma-buf* (new 'global 'dma-buffer 512))

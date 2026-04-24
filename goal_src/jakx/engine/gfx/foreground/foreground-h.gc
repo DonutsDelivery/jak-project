@@ -51,14 +51,14 @@ This chain is assumed to run with a specific tpage from a specific level availab
   "Collection of buckets for a single level.
 Each bucket has a different texture. The order is:
 tfrag, pris, shrub, alpha, water, pris, pris2"
-  ((data  foreground-bucket  7 :inline)
+  ((data  foreground-bucket  10 :inline)
    )
   )
 
 
 (deftype foreground-bucket-grid (structure)
   "Array of buckets for each level, plus the single warp chain shared between everybody."
-  ((level-buckets  foreground-level-buckets  11 :inline)
+  ((level-buckets  foreground-level-buckets  19 :inline)
    (warp-chain     mercneric-chain           :inline)
    )
   )
@@ -90,7 +90,7 @@ during foreground processing."
 This is not used by the renderers, bone matrix, or joint code - just the code
 that assigns stuff to buckets and prepares DMA for merc (or requests for generic merc)."
   ((regs            foreground-regs         :inline)
-   (draw-index-map  uint8                   11 :offset  64)
+   (draw-index-map  uint8                   19 :offset  64)
    (grid            foreground-bucket-grid  :inline)
    (bounds          sphere                  :inline)
    (lights          vu-lights               :inline)
@@ -103,12 +103,11 @@ that assigns stuff to buckets and prepares DMA for merc (or requests for generic
 ;; ERROR: Unsupported inline assembly instruction kind - [cache dxwbin a0, 0]
 ;; ERROR: Unsupported inline assembly instruction kind - [cache dxwbin a0, 1]
 (defun invalidate-cache-line ((arg0 pointer))
-  ;; og:preserve-this
-  ; (.sync.l)
-  ; (.cache dxwbin arg0 0)
-  ; (.sync.l)
-  ; (.cache dxwbin arg0 1)
-  ; (.sync.l)
+  (.sync.l)
+  (.cache dxwbin arg0 0)
+  (.sync.l)
+  (.cache dxwbin arg0 1)
+  (.sync.l)
   0
   )
 
@@ -162,4 +161,45 @@ DMA generation. This is only for the currently-processing merc model's effects."
    (mtx-ref   dma-packet        :inline)
    (end-tag   dma-packet        :inline)
    )
+  )
+
+
+(define *bucket-map* #f)
+
+;; ERROR: failed type prop at 9: add failed: int <uninitialized>
+
+;; WARN: Return type mismatch none vs bucket-id.
+;; ERROR: Function may read a register that is not set: a3
+(defun vu1-bucket-map ((a0-0 int) (a1-0 int) (a2-0 merc-mode))
+  "Map from level, texture, mode to bucket-id."
+  (local-vars
+    (v0-0 none)
+    (v1-0 (pointer bucket-id-16))
+    (v1-1 none)
+    (a0-1 int)
+    (a0-2 int)
+    (a0-3 int)
+    (a0-4 none)
+    (a0-5 none)
+    (a1-1 int)
+    (a1-2 int)
+    (a1-3 int)
+    (a3-0 none)
+    (t0-0 int)
+    (t0-1 int)
+    )
+  (set! v1-0 *bucket-map*)
+  (set! t0-0 120)
+  (set! a0-1 (*.si t0-0 a0-0))
+  (set! t0-1 12)
+  (set! a1-1 (*.si t0-1 a1-0))
+  (set! a0-2 (+ a0-1 a1-1))
+  (set! a1-2 6)
+  (set! a1-3 (*.si a1-2 a2-0))
+  (set! a0-3 (+ a0-2 a1-3))
+  (set! a0-4 (the-as none (+ a0-3 a3-0)))
+  (set! a0-5 (the-as none (sll a0-4 1)))
+  (set! v1-1 (the-as none (+ v1-0 a0-5)))
+  (set! v0-0 (the-as none (l.h v1-1)))
+  (ret-value v0-0)
   )
