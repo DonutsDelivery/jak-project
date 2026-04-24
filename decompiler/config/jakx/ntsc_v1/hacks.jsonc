@@ -2151,7 +2151,14 @@
     "(method 36 nav-mesh)",
     "(method 45 nav-mesh)",
     // source: nav-mesh-editor
-    "nav-mesh-editor-init"
+    "nav-mesh-editor-init",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: nav-mesh
+    "(method 21 nav-mesh)",
+    "(method 30 nav-mesh)",
+    "(method 31 nav-mesh)",
+    "(method 42 nav-mesh)",
+    "(method 46 nav-mesh)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
