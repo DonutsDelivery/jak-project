@@ -8261,7 +8261,8 @@
       ],
       "v1",
       "sprite-glow-ref-template"
-    ]
+    ],
+    [6, "r0", "uint32"]
   ],
   "add-shader-to-dma": [
     [
@@ -41396,5 +41397,308 @@
   ],
   "prim-engine-execute": [
     [48, "v1", "connection"]
+  ],
+  "(method 62 driver-ashelin)": [
+    [8, "gp", "driver-ashelin"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-daxter)": [
+    [8, "gp", "driver-daxter"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-gtblitz)": [
+    [8, "gp", "driver-gtblitz"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-jak)": [
+    [8, "gp", "driver-jak"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-jaka)": [
+    [8, "gp", "driver-jaka"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-jakb)": [
+    [8, "gp", "driver-jakb"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-jakc)": [
+    [8, "gp", "driver-jakc"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-kaeden)": [
+    [8, "gp", "driver-kaeden"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-kiera)": [
+    [8, "gp", "driver-kiera"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-klever)": [
+    [8, "gp", "driver-klever"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-osmo)": [
+    [8, "gp", "driver-osmo"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-pecker)": [
+    [8, "gp", "driver-pecker"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-ratchet)": [
+    [8, "gp", "driver-ratchet"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 157 wvehicle)": [
+    [14, "gp", "wvehicle"]
+  ],
+  "(method 62 driver-rayn)": [
+    [8, "gp", "driver-rayn"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-razer)": [
+    [8, "gp", "driver-razer"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-sig)": [
+    [8, "gp", "driver-sig"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-taryn)": [
+    [8, "gp", "driver-taryn"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-thug-a)": [
+    [8, "gp", "driver-thug-a"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-thug-b)": [
+    [8, "gp", "driver-thug-b"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-thug-c)": [
+    [8, "gp", "driver-thug-c"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-torn)": [
+    [8, "gp", "driver-torn"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-ur-86)": [
+    [8, "gp", "driver-ur-86"],
+    [8, "v1", "uint8"]
+  ],
+  "(method 62 driver-ximon)": [
+    [8, "gp", "driver-ximon"],
+    [8, "v1", "uint8"]
+  ],
+  "vehicle-reticle-on-them-init-by-other": [
+    [51, "s6", "process"],
+    [51, "v1", "string"]
+  ],
+  "spawn-hud-cash-stats-side-view-0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-cash-stats-side-view-1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-cash-stats-single": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-cash-stats-top-view-0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-cash-stats-top-view-1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-high-scores-list": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-artifact-indicators-view0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-artifact-indicators-view1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-assassin-indicators-view0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-assassin-indicators-view1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-background": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-background-side-view-0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-background-side-view-1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-background-top-view-0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-background-top-view-1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-game-end-grand-prix": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-game-end-side-view-0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-game-end-top-view-0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-game-end-view-0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-player-indicators-view0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-player-indicators-view1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-results-grand-prix": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-results-grand-prix-totals": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-results-medal-1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-results-team-view-1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-single0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-single1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-single2": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-single3": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-single4": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-view-10": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-view-11": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-view-12": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-view-13": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-view-14": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-view-20": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-view-21": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-view-22": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-view-23": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-death-indicator-view-24": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hang-time-hud-single": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-headset-talker-other": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-headset-talker-race": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-points-combo-display0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-points-combo-display1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-points-combo-display2": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-points-combo-display3": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-points-combo-display4": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-points-icon-display0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-points-icon-display1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-points-icon-display2": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-points-icon-display3": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-points-icon-display4": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-results-medal": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-results-team-view-0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-results-view-0": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-results-view-1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-power-slide-hud-single": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-text-display-deflected-view-1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-text-display-deflected-view-2": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-text-display-nice-shot": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-text-display-sblastered-view-1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-text-display-sblastered-view-2": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-text-display-supernova-backfire-view-1": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-text-display-supernova-backfire-view-2": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-side-split-bar": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-slowmo": [
+    [31, "v0", "in-game-hud"]
+  ],
+  "spawn-hud-top-split-bar": [
+    [31, "v0", "in-game-hud"]
   ]
 }
