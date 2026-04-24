@@ -5849,7 +5849,6 @@
 
 
 
-#|
 (deftype vehicle-antenna-state (structure)
   ((data uint8 96 :offset-assert 0)
    )
@@ -5857,7 +5856,6 @@
   :size-assert         #x60
   :flag-assert         #x900000060
   )
-|#
 
 
 
@@ -7527,24 +7525,22 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-#|
 (deftype vif-stat (uint32)
-  ((UNKNOWN UNKNOWN  :offset-assert -1) ;; field could not be read.
-   (UNKNOWN UNKNOWN  :offset-assert -1) ;; field could not be read.
-   (UNKNOWN UNKNOWN  :offset-assert -1) ;; field could not be read.
-   (UNKNOWN UNKNOWN  :offset-assert -1) ;; field could not be read.
-   (UNKNOWN UNKNOWN  :offset-assert -1) ;; field could not be read.
-   (UNKNOWN UNKNOWN  :offset-assert -1) ;; field could not be read.
-   (UNKNOWN UNKNOWN  :offset-assert -1) ;; field could not be read.
-   (UNKNOWN UNKNOWN  :offset-assert -1) ;; field could not be read.
-   (UNKNOWN UNKNOWN  :offset-assert -1) ;; field could not be read.
-   (UNKNOWN UNKNOWN  :offset-assert -1) ;; field could not be read.
+  ((vps uint8 :offset 0 :size 2)
+   (vew uint8 :offset 2 :size 1)
+   (mrk uint8 :offset 6 :size 1)
+   (vss uint8 :offset 8 :size 1)
+   (vfs uint8 :offset 9 :size 1)
+   (vis uint8 :offset 10 :size 1)
+   (int uint8 :offset 11 :size 1)
+   (er0 uint8 :offset 12 :size 1)
+   (er1 uint8 :offset 13 :size 1)
+   (fqc uint8 :offset 24 :size 4)
    )
   :method-count-assert 9
   :size-assert         #x4
   :flag-assert         #x900000004
   )
-|#
 
 
 (deftype vif-fbrst (uint32)
@@ -59149,9 +59145,9 @@
 ;; (define-extern timetrial-snapshot type)  ;; clobbers active deftype at earlier line
 (define-extern udp-layer type)
 ;; (define-extern universe-choice type)  ;; clobbers active deftype at earlier line
-(define-extern vehicle-antenna-state type)
+;; (define-extern vehicle-antenna-state type) ;; clobbers active deftype
 ;; (define-extern vehicle-reticle-on-them type)  ;; clobbers active deftype at earlier line
-(define-extern vif-stat type)
+;; (define-extern vif-stat type) ;; clobbers active deftype
 
 ;; Auto-extern: symbols blocking top-level-login, registered as object to satisfy type-prop
 ;; (define-extern actor-hash-buckets object) ;; clobbers active deftype
