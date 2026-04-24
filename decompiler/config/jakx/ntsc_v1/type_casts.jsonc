@@ -39438,6 +39438,12 @@
   "(method 3 net-process-class-info)": [
     [35, "gp", "net-process-class-info"]
   ],
+  // inspect ocean: op 79 computes (+ gp 216) for mid-camera-masks display address.
+  // The deftype has mid-camera-masks at :offset 224, but binary accesses at +216.
+  // Cast a2 to uint to unblock the "add failed: ocean <integer 216>" type-prop error.
+  "(method 3 ocean)": [
+    [79, "a2", "uint"]
+  ],
   "(method 3 talker)": [
     [17, "gp", "talker"]
   ],
