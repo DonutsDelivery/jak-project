@@ -2390,7 +2390,14 @@
     "(method 63 net-player)",
     "(method 64 net-player)",
     "(method 67 net-player)",
-    "(method 68 net-player)"
+    "(method 68 net-player)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-player
+    "(method 35 net-player)",
+    "(method 48 net-player)",
+    "(method 95 net-player)",
+    "net-player-init-local",
+    "use-target-cam-base-helper"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
