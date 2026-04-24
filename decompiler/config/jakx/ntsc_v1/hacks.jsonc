@@ -2068,7 +2068,11 @@
     "(method 48 net-player-boss-battle)",
     // source: net-deathmatch
     "(method 82 net-game-mgr-deathmatch)",
-    "(method 83 net-game-mgr-deathmatch)"
+    "(method 83 net-game-mgr-deathmatch)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-deathrace
+    "(method 52 net-player-deathrace)",
+    "(method 96 net-player-deathrace)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
