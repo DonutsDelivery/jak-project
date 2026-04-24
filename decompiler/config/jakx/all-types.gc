@@ -34170,7 +34170,11 @@
    (extra-nav-sphere     vector                :inline :offset-assert 80)
    (root-nav-sphere      vector                :inline :offset-assert 96)
    (state                nav-state             :inline :offset-assert 112)
-   (mesh                 nav-mesh                      :offset 124)
+   ;; HACK: kept as basic instead of nav-mesh to avoid OOM in nav-control type prop.
+   ;; nav-mesh contains (inline-array nav-control) creating a type recursion that
+   ;; blows up memory when processing nav-control methods that access self.mesh.*.
+   ;; Use type_casts.jsonc entries to cast self.mesh -> nav-mesh in specific methods.
+   (mesh                 basic                         :offset 124)
    )
   :method-count-assert 48
   :size-assert         #x120
