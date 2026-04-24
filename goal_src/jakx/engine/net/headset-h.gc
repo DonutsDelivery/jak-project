@@ -6,3 +6,66 @@
 
 
 
+
+(deftype headset-queue (structure)
+  ((write-offset  int32)
+   (read-offset   int32)
+   (bytes         int32)
+   (size          int32)
+   (data          uint32)
+   )
+  (:methods
+    (headset-queue-method-9 () int)
+    (headset-queue-method-10 () none)
+    (headset-queue-method-11 () none)
+    (headset-queue-method-12 () int)
+    )
+  )
+
+
+(deftype nci-codec-io-block (structure)
+  ((pcm-buffer                      uint32)
+   (samples-in-pcm-buffer           int16)
+   (nelly-buffer                    uint32)
+   (nelly-buffer-size               uint16)
+   (nelly-buffer-read-byte-offset   uint16)
+   (nelly-buffer-read-bit-offset    uint8)
+   (nelly-buffer-write-byte-offset  uint16)
+   (nelly-buffer-write-bit-offset   uint8)
+   )
+  )
+
+
+(define *headset-input-buffer* #f)
+
+(define *headset-input-bytes* (the-as object 0))
+
+(define *headset-output-buffer* #f)
+
+(define *headset-output-bytes* (the-as object 0))
+
+(define *headset-output-offset* (the-as object 0))
+
+(define *headset-cmp-out-buffer* #f)
+
+(define *headset-cmp-out-frames* (the-as object 0))
+
+(define *headset-scratch-buffer* #f)
+
+(define *headset-mix-buffer* #f)
+
+(define *headset-decoder-ids* #f)
+
+(define *headset-decoder-ptrs*
+  (the-as array (new 'static 'boxed-array :type nci-codec-io-block :length 0 :allocated-length 4))
+  )
+
+;; type headset-decoder is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; type headset is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *headset* (the-as object #f))

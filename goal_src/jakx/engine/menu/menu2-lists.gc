@@ -6,3 +6,505 @@
 
 
 
+
+(define *menu-level-info-array*
+  (the-as array (new 'static 'boxed-array :type menu-option-info
+                  (new 'static 'menu-option-info :display-name-id #x550 :sym 'kras)
+                  (new 'static 'menu-option-info :display-name-id #x5e8 :sym 'docks)
+                  (new 'static 'menu-option-info :display-name-id #x9ed :sym 'drome)
+                  (new 'static 'menu-option-info :display-name-id #x8d0 :sym 'dockkra)
+                  (new 'static 'menu-option-info :display-name-id #x7a2 :sym 'dromdoc)
+                  (new 'static 'menu-option-info :display-name-id #x7a3 :sym 'kratour)
+                  (new 'static 'menu-option-info :display-name-id #x561 :sym 'coliseum)
+                  (new 'static 'menu-option-info :display-name-id #x6fe :sym 'kcross)
+                  (new 'static 'menu-option-info :display-name-id #x55f :sym 'jungle)
+                  (new 'static 'menu-option-info :display-name-id #x5ae :sym 'haven)
+                  (new 'static 'menu-option-info :display-name-id #x11c :sym 'sewer)
+                  (new 'static 'menu-option-info :display-name-id #x673 :sym 'havjung)
+                  (new 'static 'menu-option-info :display-name-id #x74b :sym 'havsew)
+                  (new 'static 'menu-option-info :display-name-id #x7ea :sym 'havtour)
+                  (new 'static 'menu-option-info :display-name-id #x11b :sym 'atoll)
+                  (new 'static 'menu-option-info :display-name-id #x560 :sym 'cliffs)
+                  (new 'static 'menu-option-info :display-name-id #x74c :sym 'spargus)
+                  (new 'static 'menu-option-info :display-name-id #x5e9 :sym 'canyon)
+                  (new 'static 'menu-option-info :display-name-id #x7a1 :sym 'temple)
+                  (new 'static 'menu-option-info :display-name-id #x76b :sym 'canspar)
+                  (new 'static 'menu-option-info :display-name-id #x92e :sym 'spartem)
+                  (new 'static 'menu-option-info :display-name-id #x79f :sym 'spatour)
+                  (new 'static 'menu-option-info :display-name-id #x562 :sym 'desarena)
+                  (new 'static 'menu-option-info :display-name-id #x9e7 :sym 'desisle)
+                  (new 'static 'menu-option-info :display-name-id #x54f :sym 'snow)
+                  (new 'static 'menu-option-info :display-name-id #x977 :sym 'peak)
+                  (new 'static 'menu-option-info :display-name-id #x9e8 :sym 'ice)
+                  (new 'static 'menu-option-info :display-name-id #x9e9 :sym 'iceberg)
+                  (new 'static 'menu-option-info :display-name-id #x9ea :sym 'icepass)
+                  (new 'static 'menu-option-info :display-name-id #x7a0 :sym 'icetour)
+                  (new 'static 'menu-option-info :display-name-id #x5af :sym 'snobowl)
+                  (new 'static 'menu-option-info :display-name-id #x9eb :sym 'fort)
+                  )
+                )
+  )
+
+(define *menu-level-info-beta-array*
+  (the-as array (new 'static 'boxed-array :type menu-option-info
+                  (new 'static 'menu-option-info :display-name-id #x550 :sym 'kras)
+                  (new 'static 'menu-option-info :display-name-id #x55f :sym 'jungle)
+                  (new 'static 'menu-option-info :display-name-id #x560 :sym 'cliffs)
+                  (new 'static 'menu-option-info :display-name-id #x6fe :sym 'kcross)
+                  )
+                )
+  )
+
+(if (beta?)
+    (set! *menu-level-info-array* *menu-level-info-beta-array*)
+    )
+
+(define *game-connection-info-array*
+  (the-as array (new 'static 'boxed-array :type menu-option-info
+                  (new 'static 'menu-option-info :display-name-id #x62a :sym 'adventure)
+                  (new 'static 'menu-option-info :display-name-id #x629 :sym 'multiplayer)
+                  (new 'static 'menu-option-info :display-name-id #x551 :sym 'local-connection)
+                  (new 'static 'menu-option-info :display-name-id #x552 :sym 'lan-connection)
+                  (new 'static 'menu-option-info :display-name-id #x5f7 :sym 'customize)
+                  (new 'static 'menu-option-info :display-name-id #x553 :sym 'internet-connection)
+                  (new 'static 'menu-option-info :display-name-id #x57a :sym 'test)
+                  )
+                )
+  )
+
+(define *menu-events-info-all* (the-as array #f))
+
+(define *menu-events-info-beta* (the-as array #f))
+
+(if (beta?)
+    (set! *menu-events-info-all* *menu-events-info-beta*)
+    )
+
+(define *lobby-entrance-info-array*
+  (the-as array (new 'static 'boxed-array :type menu-option-info :length 2 :allocated-length 4
+                  (new 'static 'menu-option-info :display-name-id #x56d :sym 'join-game-1p)
+                  (new 'static 'menu-option-info :display-name-id #x56e :sym 'host-game-1p)
+                  )
+                )
+  )
+
+(define *num-local-players-info-array*
+  (the-as array (new 'static 'boxed-array :type menu-option-info
+                  (new 'static 'menu-option-info :display-name-id #x663 :sym '1p)
+                  (new 'static 'menu-option-info :display-name-id #x664 :sym '2p)
+                  )
+                )
+  )
+
+(define *error-lobby-array*
+  (the-as array (new 'static 'boxed-array :type menu-option-info
+                  (new 'static 'menu-option-info :display-name-id #x572 :sym 'lobby-error)
+                  )
+                )
+  )
+
+(define *mirror-mode-array* (the-as array (new 'static 'boxed-array :type menu-option-info
+                                            (new 'static 'menu-option-info :display-name-id #x25 :sym 'yes)
+                                            (new 'static 'menu-option-info :display-name-id #x26 :sym 'no)
+                                            )
+                                          )
+        )
+
+(define *mirror-mode* #f)
+
+(let ((v1-14 *mirror-mode-array*)
+      (a0-0 *mirror-mode*)
+      )
+  (s.w! a0-0 v1-14)
+  )
+
+(let ((v1-15 *mirror-mode*))
+  (s.w! (+ v1-15 4) 0)
+  )
+
+(define *num-players-info* #f)
+
+(define *ai-num-players-info* #f)
+
+(define *buddy-num-players-info* #f)
+
+(define *clan-num-players-info* #f)
+
+(define *sfx-volume-info* #f)
+
+(define *music-volume-info* #f)
+
+(define *speech-volume-info* #f)
+
+(define *brightness-info* #f)
+
+(define *contrast-info* #f)
+
+(define *menu-events-info-array* #f)
+
+(define *menu-level-array* #f)
+
+(define *menu-vehicle-array* #f)
+
+(define *menu-driver-array* #f)
+
+(let ((v1-29 *menu-driver-array*))
+  (s.w! (+ v1-29 4) 0)
+  )
+
+(define *menu-vehicle-parts-array* #f)
+
+(define *player-index* (the-as array (new 'static 'boxed-array :type int8 :length 0 :allocated-length 6)))
+
+(define *menu-ready-room-stats-extra-array* (the-as array #f))
+
+(define *menu-ready-room-instruct-array* (the-as array (new 'static 'boxed-array :type uint32 #x575 #x60b)))
+
+(define *menu-ready-room-vehicle-array*
+  (the-as array (new 'static 'boxed-array :type uint32 #x576 #x576 #x576 #x576 #x576 #x576))
+  )
+
+(define *menu-ready-room-avatar-array*
+  (the-as array (new 'static 'boxed-array :type uint32 #x576 #x576 #x576 #x576 #x576 #x576))
+  )
+
+(define *ready-room-x-string* (the-as array (new 'static 'boxed-array :type uint32 #x576)))
+
+(define *menu-split-selection-string* (the-as array (new 'static 'boxed-array :type uint32 #x6b0)))
+
+(define *player-headphones?-list*
+  (the-as array (new 'static 'boxed-array :type int8 :length 0 :allocated-length 6))
+  )
+
+(define *player-ready?-list*
+  (the-as array (new 'static 'boxed-array :type int8 :length 0 :allocated-length 6))
+  )
+
+(define *split-screen-sprite-list*
+  (the-as array (new 'static 'boxed-array :type int8 :length 0 :allocated-length 2))
+  )
+
+(set! (-> *split-screen-sprite-list* length) 2)
+
+(define *graphic-options-sprite-list*
+  (the-as array (new 'static 'boxed-array :type int8 :length 0 :allocated-length 3))
+  )
+
+(set! (-> *graphic-options-sprite-list* length) 2)
+
+(define *sound-options-sprite-list*
+  (the-as array (new 'static 'boxed-array :type int8 :length 0 :allocated-length 1))
+  )
+
+(set! (-> *sound-options-sprite-list* length) 1)
+
+(define *adventure-bottom-bar-ids* (the-as array (new 'static 'boxed-array :type uint32 #x78e)))
+
+(define *adventure-bottom-bar-dpad-ids* (the-as array (new 'static 'boxed-array :type uint32 #x78b)))
+
+(define *adventure-bottom-bar-triangle-ids* (the-as array (new 'static 'boxed-array :type uint32 #x78f)))
+
+(define *adventure-top-bar-title-ids* (the-as array (new 'static 'boxed-array :type uint32 #x78f)))
+
+(define *adventure-garage-reminder-ids* (the-as array (new 'static 'boxed-array :type uint32 #xe3d)))
+
+(define *adventure-city-ids* (the-as array (new 'static 'boxed-array :type uint32 #x557)))
+
+(define *adventure-venue-ids* (the-as array (new 'static 'boxed-array :type uint32 #x557)))
+
+(define *secrets-accept-ids* (the-as array (new 'static 'boxed-array :type uint32 #xc55)))
+
+(define *player-names-extra* (the-as array #f))
+
+(define *driver-owner-dynamic-strings* (the-as array #f))
+
+(define *driver-taken-string* (the-as array (new 'static 'boxed-array :type uint32 #x6b0)))
+
+(define *driver-name* (the-as array #f))
+
+(define *driver-height* (the-as array #f))
+
+(define *driver-weight* (the-as array #f))
+
+(define *driver-sex* (the-as array #f))
+
+(define *driver-eyes* (the-as array #f))
+
+(define *driver-age* (the-as array #f))
+
+(define *personal-selection-bottom-bar-ids* (the-as array (new 'static 'boxed-array :type uint32 #xa38)))
+
+(define *garage-string* (the-as array (new 'static 'boxed-array :type uint32 #x6b0)))
+
+(define *game-title-extra* (the-as array #f))
+
+(define *player-to-be-kicked-extra* (the-as array #f))
+
+(define *high-score-string* (the-as array #f))
+
+(define *high-score-ranking-string* (the-as array #f))
+
+(define *high-score-title-ids* (the-as array (new 'static 'boxed-array :type uint32 #xcad)))
+
+(deftype vehicle-configuration (structure)
+  ((load-parts  uint64)
+   (id          uint32)
+   )
+  )
+
+
+(define *player-cash-extra* (the-as array #f))
+
+(define *mongoose-configurations*
+  (the-as array (new 'static 'boxed-array :type vehicle-configuration
+                  (new 'static 'vehicle-configuration :id #x637)
+                  (new 'static 'vehicle-configuration :load-parts #x48001 :id #x638)
+                  (new 'static 'vehicle-configuration :load-parts #x80001 :id #x63a)
+                  (new 'static 'vehicle-configuration :load-parts #xd0001 :id #x63b)
+                  )
+                )
+  )
+
+(define *falcon-configurations*
+  (the-as array
+    (new 'static 'boxed-array :type vehicle-configuration (new 'static 'vehicle-configuration :id #x637))
+    )
+  )
+
+(define *wombat-configurations*
+  (the-as array
+    (new 'static 'boxed-array :type vehicle-configuration (new 'static 'vehicle-configuration :id #x637))
+    )
+  )
+
+(define *aspect-ratio-data* (the-as array (new 'static 'boxed-array :type menu-option-info
+                                            (new 'static 'menu-option-info :display-name-id #x20 :sym '16x9)
+                                            (new 'static 'menu-option-info :display-name-id #x1f :sym '4x3)
+                                            )
+                                          )
+        )
+
+(define *aspect-ratio* #f)
+
+(let ((v1-77 *aspect-ratio-data*)
+      (a0-6 *aspect-ratio*)
+      )
+  (s.w! a0-6 v1-77)
+  )
+
+(let ((v1-78 *aspect-ratio*))
+  (s.w! (+ v1-78 4) 0)
+  )
+
+(define *vibration-menu-data*
+  (the-as array (new 'static 'boxed-array :type menu-option-info
+                  (new 'static 'menu-option-info :display-name-id #xf :sym 'on)
+                  (new 'static 'menu-option-info :display-name-id #x10 :sym 'off)
+                  )
+                )
+  )
+
+(define *vibration-menu-info* #f)
+
+(let ((v1-81 *vibration-menu-data*)
+      (a0-7 *vibration-menu-info*)
+      )
+  (s.w! a0-7 v1-81)
+  )
+
+(let ((v1-82 *vibration-menu-info*))
+  (s.w! (+ v1-82 4) 0)
+  )
+
+(define *crash-cam-menu-data*
+  (the-as array (new 'static 'boxed-array :type menu-option-info
+                  (new 'static 'menu-option-info :display-name-id #xf :sym 'on)
+                  (new 'static 'menu-option-info :display-name-id #x10 :sym 'off)
+                  )
+                )
+  )
+
+(define *crash-cam-menu-info* #f)
+
+(let ((v1-85 *crash-cam-menu-data*)
+      (a0-8 *crash-cam-menu-info*)
+      )
+  (s.w! a0-8 v1-85)
+  )
+
+(let ((v1-86 *crash-cam-menu-info*))
+  (s.w! (+ v1-86 4) 0)
+  )
+
+(define *kill-cam-menu-data* (the-as array (new 'static 'boxed-array :type menu-option-info
+                                             (new 'static 'menu-option-info :display-name-id #xf :sym 'on)
+                                             (new 'static 'menu-option-info :display-name-id #x10 :sym 'off)
+                                             )
+                                           )
+        )
+
+(define *kill-cam-menu-info* #f)
+
+(let ((v1-89 *kill-cam-menu-data*)
+      (a0-9 *kill-cam-menu-info*)
+      )
+  (s.w! a0-9 v1-89)
+  )
+
+(let ((v1-90 *kill-cam-menu-info*))
+  (s.w! (+ v1-90 4) 0)
+  )
+
+(define *progressive-menu-data*
+  (the-as array (new 'static 'boxed-array :type menu-option-info
+                  (new 'static 'menu-option-info :display-name-id #xf :sym 'on)
+                  (new 'static 'menu-option-info :display-name-id #x10 :sym 'off)
+                  )
+                )
+  )
+
+(define *progressive-menu-info* #f)
+
+(let ((v1-93 *progressive-menu-data*)
+      (a0-10 *progressive-menu-info*)
+      )
+  (s.w! a0-10 v1-93)
+  )
+
+(let ((v1-94 *progressive-menu-info*))
+  (s.w! (+ v1-94 4) 0)
+  )
+
+(define *video-mode-menu-data*
+  (the-as array (new 'static 'boxed-array :type menu-option-info
+                  (new 'static 'menu-option-info :display-name-id #xd92 :sym 'pal)
+                  (new 'static 'menu-option-info :display-name-id #xd93 :sym 'ntsc)
+                  )
+                )
+  )
+
+(define *video-mode-menu-info* #f)
+
+(let ((v1-97 *video-mode-menu-data*)
+      (a0-11 *video-mode-menu-info*)
+      )
+  (s.w! a0-11 v1-97)
+  )
+
+(let ((v1-98 *video-mode-menu-info*))
+  (s.w! (+ v1-98 4) 0)
+  )
+
+(define *stereo-mode-data*
+  (the-as array (new 'static 'boxed-array :type menu-option-info
+                  (new 'static 'menu-option-info :display-name-id #x5 :sym 'mono)
+                  (new 'static 'menu-option-info :display-name-id #x6 :sym 'stereo)
+                  (new 'static 'menu-option-info :display-name-id #x7 :sym 'surround)
+                  )
+                )
+  )
+
+(define *stereo-mode-info* #f)
+
+(let ((v1-101 *stereo-mode-data*)
+      (a0-12 *stereo-mode-info*)
+      )
+  (s.w! a0-12 v1-101)
+  )
+
+(let ((v1-102 *stereo-mode-info*))
+  (s.w! (+ v1-102 4) 0)
+  )
+
+(define *languge-text-ids*
+  (the-as array
+    (new 'static 'boxed-array :type uint32 #x12 #x13 #x14 #x15 #x16 #x12 #x18 #x17 #x10ad #x10ae #x0 #x209)
+    )
+  )
+
+(define *bottom-bar-ready-room-circle* (the-as array (new 'static 'boxed-array :type uint32 #x789)))
+
+(define *vehicle-class-ids* (the-as array (new 'static 'boxed-array :type uint32 #x758)))
+
+(define *screen-mode-ids* (the-as array (new 'static 'boxed-array :type uint32 #xd2c)))
+
+(define *video-mode-ids* (the-as array (new 'static 'boxed-array :type uint32 #x8c)))
+
+(define *video-mode-change-ids* (the-as array (new 'static 'boxed-array :type uint32 #x90)))
+
+(define *advanced-options-button-ids* (the-as array (new 'static 'boxed-array :type uint32 #x74d)))
+
+(define *menu-vehicle-colors-data* (the-as array #f))
+
+(define *menu-vehicle-colors-info* #f)
+
+(let ((v1-112 *menu-vehicle-colors-data*)
+      (a0-13 *menu-vehicle-colors-info*)
+      )
+  (s.w! a0-13 v1-112)
+  )
+
+(let ((v1-113 *menu-vehicle-colors-info*))
+  (s.w! (+ v1-113 4) 0)
+  )
+
+(define *level-texture-string* (the-as object (new 'global 'string 64 (the-as string #f))))
+
+(define *map-texture-string* (the-as object (new 'global 'string 64 (the-as string #f))))
+
+(define *icon-texture-string* (the-as object (new 'global 'string 64 (the-as string #f))))
+
+(define *player-1-name* #f)
+
+(define *player-2-name* #f)
+
+(define *player-3-name* #f)
+
+(define *player-4-name* #f)
+
+(define *player-5-name* #f)
+
+(define *player-6-name* #f)
+
+(define *player-1-extra* #f)
+
+(define *player-2-extra* #f)
+
+(define *player-3-extra* #f)
+
+(define *player-4-extra* #f)
+
+(define *player-5-extra* #f)
+
+(define *player-6-extra* #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(deftype selection-cache (structure)
+  ((state           basic)
+   (selection-type  basic)
+   )
+  )
+
+
+(define *selection-cache-array* #f)
+
+(define *selection-cache-index* (the-as object 1))
+
+(define *last-lobby-state* (the-as object #f))
+
+(let ((v1-134 'game-type)
+      (a0-19 *selection-cache-array*)
+      )
+  (s.w! a0-19 v1-134)
+  )
+
+(let ((v1-135 'adventure)
+      (a0-20 *selection-cache-array*)
+      )
+  (s.w! (+ a0-20 4) v1-135)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.

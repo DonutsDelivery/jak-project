@@ -6,3 +6,65 @@
 
 
 
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *ghost-tmp-string* "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+
+;; type ghost-file is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *ghost-file-ct* (the-as object 0))
+
+(define *ghost-files* #f)
+
+(define *ghost-file-info* #f)
+
+(define *ghost-download-ptr* (the-as object #f))
+
+(define *ghost-download-len* (the-as object 0))
+
+(define *ghost-tmp-buf* #f)
+
+;; type ghost-info is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type ghost-info) 3 L300)
+
+(define *ghost-info* #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *ghost-async-status* (the-as object #f))
+
+(define *ghost-req-id* (the-as object 0))
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *async-ghost-compress-busy* (the-as object #f))
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.

@@ -6,3 +6,160 @@
 
 
 
+
+(let ((v1-0 #f)
+      (a0-0 *part-group-id-table*)
+      )
+  (s.w! (+ a0-0 224) v1-0)
+  )
+
+(set! (-> *part-id-table* 333) #f)
+
+(let ((v1-2 #f)
+      (a0-2 *part-group-id-table*)
+      )
+  (s.w! (+ a0-2 228) v1-2)
+  )
+
+(set! (-> *part-id-table* 334) #f)
+
+(let ((v1-4 #f)
+      (a0-4 *part-group-id-table*)
+      )
+  (s.w! (+ a0-4 232) v1-4)
+  )
+
+(set! (-> *part-id-table* 336) #f)
+
+(set! (-> *part-id-table* 339) #f)
+
+(set! (-> *part-id-table* 335) #f)
+
+(set! (-> *part-id-table* 337) #f)
+
+(set! (-> *part-id-table* 338) #f)
+
+(set! (-> *part-id-table* 341) #f)
+
+(set! (-> *part-id-table* 340) #f)
+
+(define *range-jakxexplo-color*
+  (new 'static 'curve-color-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'inline-array vector 4
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      )
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 1.0))
+    )
+  )
+
+(define *range-jakxexplo-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 128.0 128.0 129.0 130.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 1.0 1.0))
+    )
+  )
+
+(define *range-jakxexplo-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 1.0 1.2 2.2 3.2))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 0.20000005 1.0 1.0 1.0))
+    )
+  )
+
+(define *range-jakxexplo-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 1.0 1.2 2.2 3.2))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 0.20000005 1.0 1.0 1.0))
+    )
+  )
+
+(define *curve-jakxexplo-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.05 -0.7 -1.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.6 0.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 20.0 -0.6153846 -2.0 1.0))
+    )
+  )
+
+(define *curve-jakxexplo-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.8 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.5 1.0 1.1 2.1))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 0.625 0.5000002 0.9999999 1.0))
+    )
+  )
+
+(define *curve-jakxexplo-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.8 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.5 1.0 1.1 2.1))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 0.625 0.5000002 0.9999999 1.0))
+    )
+  )
+
+(define *part-jakx-explosion-texture-curve-settings* #f)
+
+(set! (-> *part-id-table* 340 init-specs 16 initial-valuef)
+      (the-as float *part-jakx-explosion-texture-curve-settings*)
+      )
+
+(let ((v1-35 *range-jakxexplo-color*)
+      (a0-15 *part-jakx-explosion-texture-curve-settings*)
+      )
+  (s.w! a0-15 v1-35)
+  )
+
+(let ((v1-36 *range-jakxexplo-alpha*)
+      (a0-16 *part-jakx-explosion-texture-curve-settings*)
+      )
+  (s.w! (+ a0-16 4) v1-36)
+  )
+
+(let ((v1-37 *range-jakxexplo-scale-x*)
+      (a0-17 *part-jakx-explosion-texture-curve-settings*)
+      )
+  (s.w! (+ a0-17 8) v1-37)
+  )
+
+(let ((v1-38 *range-jakxexplo-scale-y*)
+      (a0-18 *part-jakx-explosion-texture-curve-settings*)
+      )
+  (s.w! (+ a0-18 12) v1-38)
+  )
+
+(let ((v1-39 *part-jakx-explosion-texture-curve-settings*))
+  (s.w! (+ v1-39 16) #f)
+  )
+
+(let ((v1-40 *part-jakx-explosion-texture-curve-settings*))
+  (s.w! (+ v1-40 20) #f)
+  )
+
+(let ((v1-41 *part-jakx-explosion-texture-curve-settings*))
+  (s.w! (+ v1-41 24) #f)
+  )
+
+(let ((v1-42 *curve-jakxexplo-alpha*)
+      (a0-19 *part-jakx-explosion-texture-curve-settings*)
+      )
+  (s.w! (+ a0-19 28) v1-42)
+  )
+
+(let ((v1-43 *curve-jakxexplo-scale-x*)
+      (a0-20 *part-jakx-explosion-texture-curve-settings*)
+      )
+  (s.w! (+ a0-20 32) v1-43)
+  )
+
+(let ((v0-0 *curve-jakxexplo-scale-y*)
+      (v1-44 *part-jakx-explosion-texture-curve-settings*)
+      )
+  (s.w! (+ v1-44 36) v0-0)
+  )
