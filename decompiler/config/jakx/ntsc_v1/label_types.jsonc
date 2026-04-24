@@ -1112,11 +1112,9 @@
     ]
   ],
   "tie-methods": [
-    [
-      "L268",
-      "(inline-array tie-init-data)",
-      10
-    ],
+    // "L268" entry removed — referenced `tie-init-data` which is not
+    // activated in all-types.gc. Blocked 324 files with rc=134 in 14b308c3e.
+    // Re-add this entry after activating `tie-init-data` deftype.
     [
       "L270",
       "(pointer bucket-id)",
