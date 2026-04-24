@@ -10,31 +10,28 @@
 ;; DECOMP BEGINS
 
 (deftype subdivide-settings (basic)
-  "Input settings for distances for switching mesh level of details.
-These are set by the level code and read by rendering code."
   ((dist    float  5)
    (meters  float  5)
-   (close   float  12)
-   (far     float  12)
+   (close   float  20)
+   (far     float  20)
    )
-  (:methods
-    (new (symbol type float float) _type_)
-    )
   )
 
 
-(defmethod new subdivide-settings ((allocation symbol) (type-to-make type) (arg0 float) (arg1 float))
+;; ERROR: Function may read a register that is not set: a2
+;; ERROR: Function may read a register that is not set: a3
+(defmethod new subdivide-settings ((allocation symbol) (type-to-make type))
+  (local-vars (a2-0 none) (a3-0 none))
   (let ((v0-0 (object-new allocation type-to-make (the-as int (-> type-to-make size)))))
-    (dotimes (v1-2 10)
-      (set! (-> v0-0 close v1-2) arg0)
-      (set! (-> v0-0 far v1-2) arg1)
+    (dotimes (v1-2 18)
+      (set! (-> v0-0 close v1-2) (the-as float (gpr->fpr a2-0)))
+      (set! (-> v0-0 far v1-2) (the-as float (gpr->fpr a3-0)))
       )
     v0-0
     )
   )
 
 (deftype subdivide-dists (structure)
-  "Unused subdivide distances. Internally, tfrag/tie figure these out instead."
   ((data    uint32   32 :offset   0)
    (vector  vector   8  :overlay-at (-> data 0))
    (k0s     uint128  4  :overlay-at (-> data 0))
@@ -44,7 +41,6 @@ These are set by the level code and read by rendering code."
 
 
 (deftype terrain-stats (structure)
-  "Desptie the name `terrain-stats`, these are more general triangle stats for all renderers."
   ((pris                      tr-stat  :inline)
    (tie-generic               tr-stat  :inline)
    (tie-vanish                tr-stat  :inline)
@@ -74,16 +70,12 @@ These are set by the level code and read by rendering code."
    (ocean-mid                 tr-stat  :inline)
    (ocean-near                tr-stat  :inline)
    (shadow                    tr-stat  :inline)
-   (hfrag                     tr-stat  :inline)
    (total                     tr-stat  :inline)
    )
   )
 
 
 (deftype background-area (structure)
-  "Scratchpad memory layout for most background rendering
-This uses the full scratchpad so it should only be used when the stack isn't on the scratchpad (rendering code).
-Interestingly, dma-area went from a union of all the -dma types to a plain array of bytes in jak 3."
   ((dma-area  uint8  14336)
    (vis-list  uint8  2048)
    )
@@ -91,7 +83,6 @@ Interestingly, dma-area went from a union of all the -dma types to a plain array
 
 
 (deftype foreground-area (structure)
-  "Scratchpad memory layout for most foreground rendering."
   ((generic-work     generic-work     :inline :offset   0)
    (foreground-work  foreground-work  :inline :offset   0)
    (joint-work       joint-work       :inline :offset   0)
@@ -102,36 +93,34 @@ Interestingly, dma-area went from a union of all the -dma types to a plain array
 
 
 (deftype region-prim-area (structure)
-  "Scratchpad memory layout for regions."
-  ((region-prim-list         region-prim-list        :inline)
-   (pos                      vector                  :inline)
-   (exit-pos                 vector                  :inline)
-   (ray                      vector                  :inline)
-   (exit-ray                 vector                  :inline)
-   (region-enter-count       int32)
-   (region-enter-list        region                  320)
-   (region-enter-prim-list   drawable-region-sphere  320)
-   (region-exit-count        int32)
-   (region-exit-list         region                  320)
-   (region-exit-prim-list    drawable-region-sphere  320)
-   (region-inside-count      int32)
-   (region-inside-list       region                  320)
-   (region-inside-prim-list  drawable-region-sphere  320)
-   (region-start-count       int32)
-   (region-start-list        region                  320)
-   (region-start-prim-list   drawable-region-sphere  320)
+  ((region-prim-list         region-prim-list        :inline :offset   0)
+   (pos                      vector                  :inline :offset 1296)
+   (ray                      vector                  :inline :offset 1312)
+   (region-enter-count       int32                           :offset 1344)
+   (region-enter-list        region                  320     :offset 1348)
+   (region-enter-prim-list   drawable-region-sphere  320     :offset 2628)
+   (region-exit-count        int32                           :offset 3908)
+   (region-exit-list         region                  320     :offset 3912)
+   (region-exit-prim-list    drawable-region-sphere  320     :offset 5192)
+   (region-inside-count      int32                           :offset 6472)
+   (region-inside-list       region                  320     :offset 6476)
+   (region-inside-prim-list  drawable-region-sphere  320     :offset 7756)
+   (region-start-count       int32                           :offset 9036)
+   (region-start-list        region                  320     :offset 9040)
+   (region-start-prim-list   drawable-region-sphere  320     :offset 10320)
    )
   (:methods
-    (track-entered-region! (_type_ drawable-region-sphere) int)
-    (track-exited-region! (_type_ drawable-region-sphere) int)
-    (track-inside-region! (_type_ drawable-region-sphere) int)
-    (track-start-region! (_type_ drawable-region-sphere) int)
+    (region-prim-area-method-9 (_type_ drawable-region-sphere) int)
+    (region-prim-area-method-10 (_type_ drawable-region-sphere) int)
+    (region-prim-area-method-11 (_type_ drawable-region-sphere) int)
+    (region-prim-area-method-12 (_type_ drawable-region-sphere) int)
     )
   )
 
+;; ERROR: failed type prop at 24: add failed: region-prim-area <integer 1328>
+
 
 (deftype sprite-area (structure)
-  "Scratchpad memory layout for sprites."
   ((clock-data  vector  22 :inline)
    (buffer      uint8   :dynamic)
    )
@@ -139,7 +128,6 @@ Interestingly, dma-area went from a union of all the -dma types to a plain array
 
 
 (deftype work-area (structure)
-  "All scratchpad memory layouts."
   ((background   background-area   :inline :offset   0)
    (foreground   foreground-area   :inline :offset   0)
    (region-prim  region-prim-area  :inline :offset   0)
@@ -149,7 +137,6 @@ Interestingly, dma-area went from a union of all the -dma types to a plain array
 
 
 (deftype terrain-context (structure)
-  "Useless wrapper around work-area. (this added some stuff in jak 1)"
   ((work  work-area  :inline)
    )
   )

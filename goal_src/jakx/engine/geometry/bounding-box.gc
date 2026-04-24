@@ -49,6 +49,16 @@
        )
   )
 
+(defmethod inside-box? ((this bounding-box) (arg0 bounding-box))
+  "Is the other box contained entirely inside the box?"
+  (dotimes (v1-0 3)
+    (if (or (< (-> arg0 max data v1-0) (-> this min data v1-0)) (< (-> this max data v1-0) (-> arg0 min data v1-0)))
+        (return #f)
+        )
+    )
+  #t
+  )
+
 (defmethod set-from-point-offset! ((this bounding-box) (arg0 vector) (arg1 vector))
   "Set to the smallest box containing arg0, (arg0 + arg1)"
   (rlet ((vf0 :class vf)
@@ -69,7 +79,6 @@
     (.svf (&-> this min quad) vf1)
     (.svf (&-> this max quad) vf2)
     0
-    (none)
     )
   )
 
@@ -87,7 +96,6 @@
     (.svf (&-> this min quad) vf1)
     (.svf (&-> this max quad) vf2)
     0
-    (none)
     )
   )
 
@@ -112,10 +120,9 @@
 
 (defmethod set-to-point! ((this bounding-box) (arg0 vector))
   "Set the box to be a single point."
-  (vector-copy! (-> this min) arg0)
-  (vector-copy! (-> this max) arg0)
+  (set! (-> this min quad) (-> arg0 quad))
+  (set! (-> this max quad) (-> arg0 quad))
   0
-  (none)
   )
 
 (defmethod set-from-point-offset-pad! ((this bounding-box) (arg0 vector) (arg1 vector) (arg2 float))
@@ -161,93 +168,39 @@
     (.svf (&-> this min quad) vf2)
     (.svf (&-> this max quad) vf3)
     0
-    (none)
     )
   )
 
-;;;;;;;;;;;;;;;;;;;;;;;;;
-;; multi-sphere methods
-;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; these are used in the collision system to build bounding boxes around collision geometries, so they are quite optimized.
-
-(defmethod add-spheres! ((this bounding-box) (spheres (inline-array sphere)) (count int))
-  "Add count spheres."
-  ;; the PS2 implementation is very optimized
-  ;; It is unrolled and 'software pipelined' to do 4 at a time.
-  ;; This is slightly less optimized.
-  (rlet ((current-min :class vf)
-         (current-max :class vf)
-         (sph-min :class vf)
-         (sph-max :class vf)
-         (sph :class vf))
-
-    (when (nonzero? count)
-      ;; load these outside the loop
-      (.lvf current-min (-> this min))
-      (.lvf current-max (-> this max))
-
-      (dotimes (i count)
-        (.lvf sph (-> spheres i))
-        (.sub.w.vf.xyz sph-min sph sph)
-        (.add.w.vf.xyz sph-max sph sph)
-        (.min.vf.xyz current-min current-min sph-min)
-        (.max.vf.xyz current-max current-max sph-max)
-        )
-
-      (.svf (-> this min) current-min)
-      (.svf (-> this max) current-max)
-      )
-    )
-  0
-  )
-
-(defmethod set-from-spheres! ((this bounding-box) (spheres (inline-array sphere)) (count int))
-  "Reset box to hold the given spheres. Note: this implementation could be optimized."
-  ;; This is also unrolled, but does 7 at a time.
-  (rlet ((vf0 :class vf)
-         (current-min :class vf)
-         (current-max :class vf)
-         (sph-min :class vf)
-         (sph-max :class vf)
-         (sph :class vf))
-    ;; init constant
-    (init-vf0-vector)
-    ;; init min/max. in the case we don't have any spheres, we should return (0,0,0,1) for min/max.
-    (set! current-min vf0)
-    (set! current-max vf0)
-
-    (dotimes (i count)
-      (.lvf sph (-> spheres i))
-      (.sub.w.vf.xyz sph-min sph sph)
-      (.add.w.vf.xyz sph-max sph sph)
-      (cond
-        ((zero? i)
-         (set! current-min sph-min)
-         (set! current-max sph-max)
-         )
-        (else
-         (.min.vf.xyz current-min current-min sph-min)
-         (.max.vf.xyz current-max current-max sph-max)
-         )
-        )
-      )
-
-    (.svf (-> this min) current-min)
-    (.svf (-> this max) current-max)
-    )
-  0
-  )
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
 (defmethod get-bounding-sphere ((this bounding-box) (arg0 vector))
   "Get a bounding sphere for a bounding box."
-  (let* ((a1-2 (vector-! (new 'stack-no-clear 'vector) (-> this max) (-> this min)))
-         (a0-3 (vector-float*! (new 'stack-no-clear 'vector) a1-2 0.5))
+  (rlet ((vf0 :class vf)
+         (vf4 :class vf)
+         (vf5 :class vf)
+         (vf6 :class vf)
          )
-    (vector+! arg0 (-> this min) a0-3)
-    (set! (-> arg0 w) (vector-length a0-3))
+    (init-vf0-vector)
+    (let* ((a1-2 (vector-! (new 'stack-no-clear 'vector) (-> this max) (-> this min)))
+           (a0-3 (vector-float*! (new 'stack-no-clear 'vector) a1-2 0.5))
+           )
+      (let ((v1-1 arg0))
+        (let ((a1-3 (-> this min))
+              (a2-1 a0-3)
+              )
+          (.lvf vf4 (&-> a1-3 quad))
+          (.lvf vf5 (&-> a2-1 quad))
+          )
+        (.mov.vf.w vf6 vf0)
+        (.add.vf.xyz vf6 vf4 vf5)
+        (.svf (&-> v1-1 quad) vf6)
+        )
+      (set! (-> arg0 w) (vector-length a0-3))
+      )
+    arg0
     )
-  arg0
   )
 
 (deftype liang-barsky-line-clip-params (structure)
@@ -292,7 +245,7 @@
 ;; WARN: disable def twice: 23. This may happen when a cond (no else) is nested inside of another conditional, but it should be rare.
 (defmethod intersects-line-segment? ((this bounding-box) (arg0 vector) (arg1 vector))
   "Check intersection in xz plane, using liang-barsky. Not sure if this actually
-a useful check or not..."
+   a useful check or not..."
   (let ((f28-0 (- (-> arg1 x) (-> arg0 x)))
         (f30-0 (- (-> arg1 z) (-> arg0 z)))
         )

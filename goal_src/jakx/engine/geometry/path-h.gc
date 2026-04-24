@@ -17,216 +17,281 @@
 
 ;; DECOMP BEGINS
 
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
 (deftype path-control (basic)
-  "The path-control is a reference a path data, which is just a list of points.
-Although it contains a `curve`, the knot part is not populated, so it's just treated as
-a bunch of line segments from the control points.
-The child class curve-control does fill out the knot data and is a proper b-spline.
-These path-controls are typically allocated on a process heap."
-  ((flags    path-control-flag)
-   (name     symbol)
-   (process  process-drawable)
-   (curve    curve  :inline)
-   )
-  (:methods
-    (new (symbol type process symbol float entity symbol) _type_)
-    (debug-draw (_type_) none)
-    (get-point-in-path! (_type_ vector float symbol) vector)
-    (get-random-point (_type_ vector) vector)
-    (path-control-method-12 (_type_ vector float float) vector)
-    (displacement-between-two-points-normalized! (_type_ vector float) vector)
-    (get-point-at-percent-along-path! (_type_ vector float symbol) vector)
-    (path-control-method-15 (_type_ vector float float) vector)
-    (displacement-between-points-at-percent-normalized! (_type_ vector float) vector)
-    (get-num-segments (_type_) float)
-    (total-distance (_type_) float)
-    (get-num-verts (_type_) int)
-    (segement-duration->path-duration (_type_ float) float)
-    (path-duration->segment-duration (_type_ float) float)
-    (path-control-method-22 (_type_ vector) float)
-    (path-control-method-23 (_type_ vector) float)
-    (path-control-method-24 (_type_ vector) float)
-    (path-control-method-25 (_type_ vector) float)
-    (path-control-method-26 (_type_ float float) float)
-    (path-control-method-27 (_type_ vector) vector)
-    (path-control-method-28 (_type_ vector vector symbol) float)
-    (path-control-method-29 (_type_ vector int float) float)
-    (should-display-marks? (_type_) symbol)
-    (displacement-between-two-points! (_type_ vector float float) vector)
-    )
+  ()
   )
 
+;; ERROR: failed type prop at 14: Could not figure out load: (set! a2 (l.wu gp))
 
 (set! (-> path-control method-table 9) nothing)
 
 (deftype curve-control (path-control)
-  "A curve-control is like a path control, but it has both control points and knot points."
   ()
-  (:methods
-    (new (symbol type process symbol float) _type_)
-    )
   )
 
+;; ERROR: failed type prop at 14: Could not figure out load: (set! a2 (l.wu gp))
 
-;; ERROR: Stack slot load at 32 mismatch: defined as size 4, got size 16
-;; ERROR: Stack slot load at 32 mismatch: defined as size 4, got size 16
-;; WARN: Return type mismatch object vs path-control.
-(defmethod new path-control ((allocation symbol)
-                           (type-to-make type)
-                           (proc process)
-                           (lump-name symbol)
-                           (lump-time float)
-                           (lump-actor entity)
-                           (must-exist symbol)
-                           )
-  "Allocate a new path-control, set up the curve to point to the specified lump data."
-  (local-vars (v0-3 object) (sv-16 res-tag) (sv-32 float))
-  (set! sv-32 lump-time)
-  (let ((s0-0 lump-actor)
-        (s1-0 must-exist)
-        )
-    (if (not s0-0)
-        (set! s0-0 (-> proc entity))
-        )
-    (when (= lump-name 'path)
-      (let ((v0-0 (entity-actor-lookup s0-0 'path-actor 0)))
-        (if v0-0
-            (set! s0-0 v0-0)
-            )
-        )
-      )
-    (let ((s2-0 (the-as object 0)))
-      (set! sv-16 (new 'static 'res-tag))
-      (let* ((t9-1 (method-of-type res-lump get-property-data))
-             (a1-2 lump-name)
-             (a2-2 'interp)
-             (t0-1 #f)
-             (t1-1 (the-as (pointer res-tag) (& sv-16)))
-             (t2-1 *res-static-buf*)
-             (s0-1 (t9-1 s0-0 a1-2 a2-2 sv-32 (the-as pointer t0-1) t1-1 t2-1))
-             )
-        (cond
-          (s0-1
-            (set! s2-0 (object-new allocation type-to-make (the-as int (-> type-to-make size))))
-            (set! v0-3 (cond
-                         ((nonzero? (the-as path-control s2-0))
-                          (set! (-> (the-as path-control s2-0) process) (the-as process-drawable proc))
-                          (set! (-> (the-as path-control s2-0) name) lump-name)
-                          (set! (-> (the-as path-control s2-0) curve cverts) (the-as (inline-array vector) s0-1))
-                          (set! v0-3 (-> sv-16 elt-count))
-                          (set! (-> (the-as path-control s2-0) curve num-cverts) (the-as int v0-3))
-                          v0-3
-                          )
-                         (else
-                           (go process-drawable-art-error "memory")
-                           )
-                         )
-                  )
-            )
-          (else
-            (when (not s1-0)
-              (set! s2-0 (object-new allocation type-to-make (the-as int (-> type-to-make size))))
-              (cond
-                ((nonzero? (the-as path-control s2-0))
-                 (logior! (-> (the-as path-control s2-0) flags) (path-control-flag not-found))
-                 (set! (-> (the-as path-control s2-0) process) (the-as process-drawable proc))
-                 (set! (-> (the-as path-control s2-0) name) lump-name)
-                 (set! (-> (the-as path-control s2-0) curve cverts) (the-as (inline-array vector) #f))
-                 (set! (-> (the-as path-control s2-0) curve num-cverts) 0)
-                 0
+;; ERROR: function has no local vars. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: failed type prop at 9: Could not figure out load: (set! gp (l.wu (+ s3 60)))
+;; WARN: Return type mismatch none vs curve-control.
+;; ERROR: Function may read a register that is not set: a2
+;; ERROR: Function may read a register that is not set: a3
+;; ERROR: Function may read a register that is not set: t0
+;; ERROR: Function may read a register that is not set: t1
+;; ERROR: Function may read a register that is not set: t2
+(defmethod new curve-control ((a0-0 symbol) (a1-0 type))
+  (local-vars
+    (r0-0 uint128)
+    (v0-0 none)
+    (v0-1 none)
+    (v0-2 none)
+    (v0-3 none)
+    (v0-4 none)
+    (v0-5 none)
+    (v0-6 none)
+    (v0-7 none)
+    (v0-8 none)
+    (v0-9 none)
+    (v0-10 none)
+    (v0-11 none)
+    (v1-2 none)
+    (v1-6 none)
+    (v1-7 none)
+    (v1-8 none)
+    (v1-9 none)
+    (v1-10 uint128)
+    (v1-11 uint128)
+    (v1-12 none)
+    (v1-13 none)
+    (v1-14 none)
+    (v1-16 uint128)
+    (v1-17 uint128)
+    (v1-18 none)
+    (v1-19 none)
+    (v1-20 none)
+    (v1-22 none)
+    (v1-24 none)
+    (v1-26 none)
+    (v1-28 none)
+    (v1-29 none)
+    (v1-30 none)
+    (v1-31 none)
+    (a0-8 none)
+    (a0-9 none)
+    (a0-11 none)
+    (a1-1 none)
+    (a1-4 none)
+    (a2-0 none)
+    (a2-1 none)
+    (a2-2 none)
+    (a2-3 none)
+    (a2-4 none)
+    (a2-5 none)
+    (a2-6 none)
+    (a3-0 none)
+    (a3-1 none)
+    (a3-2 none)
+    (a3-3 none)
+    (t0-0 none)
+    (t1-0 none)
+    (t1-1 none)
+    (t1-2 none)
+    (t1-3 none)
+    (t2-0 none)
+    (t2-1 none)
+    (t2-2 none)
+    (t2-3 none)
+    (s4-0 none)
+    (s5-0 none)
+    (t9-0 none)
+    (t9-1 none)
+    (t9-2 none)
+    (t9-3 none)
+    (t9-4 none)
+    (t9-5 none)
+    (t9-6 none)
+    (t9-7 none)
+    (t9-8 none)
+    (t9-9 none)
+    (t9-10 none)
+    (f0-0 none)
+    (sv-16 none)
+    (sv-32 none)
+    (sv-48 none)
+    (sv-64 none)
+    (sv-80 none)
+    (sv-96 none)
+    (sv-112 none)
+    )
+  (with-pp
+    (cond
+      ((begin
+         (when (begin
+                 (when (begin (set! sv-64 t1-0) (set! f0-0 (gpr->fpr t2-0)) (set! sv-80 f0-0) (not t0-0))
+                   (set! t0-0 (the-as none (l.wu (+ a2-0 60))))
+                   (set! v1-1 (the-as none t0-0))
+                   )
+                 (set! v1-2 (the-as none 'path))
+                 (= a3-0 v1-2)
                  )
-                (else
-                  (go process-drawable-art-error "memory")
+           (when (begin
+                   (set! t9-0 (the-as none entity-actor-lookup))
+                   (set! a0-1 (the-as none t0-0))
+                   (set! a1-1 (the-as none 'path-actor))
+                   (set! a2-1 (the-as none 0))
+                   (set! v0-0 (the-as none (call!)))
+                   v0-0
+                   )
+             (set! t0-0 (the-as none v0-0))
+             (set! v1-5 (the-as none t0-0))
+             )
+           )
+         (set! s5-0 (the-as none 0))
+         (set! t9-1 (the-as none get-distmap-name))
+         (set! a0-2 (the-as none a3-0))
+         (set! v0-1 (the-as none (call!)))
+         (set! s4-0 (the-as none v0-1))
+         (set! t9-2 (the-as none get-knot-name))
+         (set! a0-3 (the-as none a3-0))
+         (set! v0-2 (the-as none (call!)))
+         (set! sv-112 v0-2)
+         (set! sv-16 0)
+         (set! v1-6 (the-as none res-lump))
+         (set! t9-3 (the-as none (l.wu (+ v1-6 52))))
+         (set! a0-4 (the-as none t0-0))
+         (set! a1-2 (the-as none a3-0))
+         (set! a2-2 (the-as none 'interp))
+         (set! t1-1 (& sv-16))
+         (set! t2-1 (the-as none *res-static-buf*))
+         (set! a3-1 sv-80)
+         (set! v0-3 (the-as none (call!)))
+         (set! sv-96 v0-3)
+         (set! v1-7 sv-96)
+         v1-7
+         )
+       (cond
+         ((begin
+            (set! v1-8 (the-as none object))
+            (set! t9-4 (the-as none (l.wu (+ v1-8 16))))
+            (set! a1-3 (the-as none a1-0))
+            (set! a2-3 (the-as none (l.hu (+ a1-0 8))))
+            (set! a0-5 (the-as none a0-0))
+            (set! v0-4 (the-as none (call!)))
+            (set! s5-0 (the-as none v0-4))
+            (s.w! (+ s5-0 12) #f)
+            (nonzero? s5-0)
+            )
+          (when (begin
+                  (when (begin
+                          (s.w! (+ s5-0 8) a2-0)
+                          (s.w! (+ s5-0 4) a3-0)
+                          (set! v1-9 sv-96)
+                          (s.w! (+ s5-0 16) v1-9)
+                          (set! v1-10 (the-as uint128 sv-16))
+                          (.pcpyud v1-11 v1-10 r0-0)
+                          (set! v1-12 (the-as none (sll v1-11 1)))
+                          (set! v1-13 (the-as none (srl v1-12 49)))
+                          (s.w! (+ s5-0 20) v1-13)
+                          (set! sv-32 0)
+                          (set! v1-14 (the-as none res-lump))
+                          (set! t9-5 (the-as none (l.wu (+ v1-14 52))))
+                          (set! a0-6 (the-as none t0-0))
+                          (set! a2-4 (the-as none 'interp))
+                          (set! a3-2 (the-as none -831624408))
+                          (set! t1-2 (& sv-32))
+                          (set! t2-2 (the-as none *res-static-buf*))
+                          (set! a1-4 sv-112)
+                          (set! v0-5 (the-as none (call!)))
+                          v0-5
+                          )
+                    (s.w! (+ s5-0 24) v0-5)
+                    (set! v1-16 (the-as uint128 sv-32))
+                    (.pcpyud v1-17 v1-16 r0-0)
+                    (set! v1-18 (the-as none (sll v1-17 1)))
+                    (set! v1-19 (the-as none (srl v1-18 49)))
+                    (s.w! (+ s5-0 28) v1-19)
+                    )
+                  (set! sv-48 0)
+                  (set! v1-20 (the-as none res-lump))
+                  (set! t9-6 (the-as none (l.wu (+ v1-20 52))))
+                  (set! a2-5 (the-as none 'interp))
+                  (set! a3-3 (the-as none -831624408))
+                  (set! t1-3 (& sv-48))
+                  (set! t2-3 (the-as none *res-static-buf*))
+                  (set! a0-7 (the-as none t0-0))
+                  (set! a1-5 (the-as none s4-0))
+                  (set! v0-6 (the-as none (call!)))
+                  v0-6
                   )
-                )
+            (s.w! (+ s5-0 12) v0-6)
+            (set! a0-8 (the-as none s5-0))
+            (set! v1-22 (the-as none (l.wu (+ a0-8 -4))))
+            (set! t9-7 (the-as none (l.wu (+ v1-22 136))))
+            (call!)
+            (set! v1-23 (the-as none v0-7))
+            )
+          )
+         (else
+           (set! t9-8 (the-as none enter-state))
+           (set! a0-9 (the-as none L43))
+           (set! v1-24 (the-as none process-drawable-art-error))
+           (s.w! (+ s6-0 76) v1-24)
+           (call!)
+           (set! v1-25 (the-as none v0-8))
+           )
+         )
+       )
+      (else
+        (when (begin (set! v1-26 sv-64) (not v1-26))
+          (cond
+            ((begin
+               (set! v1-28 (the-as none object))
+               (set! t9-9 (the-as none (l.wu (+ v1-28 16))))
+               (set! a0-10 (the-as none a0-0))
+               (set! a1-6 (the-as none a1-0))
+               (set! a2-6 (the-as none (l.hu (+ a1-0 8))))
+               (set! v0-9 (the-as none (call!)))
+               (set! s5-0 (the-as none v0-9))
+               (s.w! (+ s5-0 12) #f)
+               (nonzero? s5-0)
+               )
+             (set! v1-29 (the-as none (l.wu s5-0)))
+             (set! v1-30 (the-as none (logior v1-29 16)))
+             (s.w! s5-0 v1-30)
+             (s.w! (+ s5-0 8) a2-0)
+             (s.w! (+ s5-0 4) a3-0)
+             (s.w! (+ s5-0 16) #f)
+             (s.w! (+ s5-0 20) 0)
+             (set! v0-10 (the-as none 0))
+             )
+            (else
+              (set! t9-10 (the-as none enter-state))
+              (set! a0-11 (the-as none L43))
+              (set! v1-31 (the-as none process-drawable-art-error))
+              (s.w! (+ s6-0 76) v1-31)
+              (set! v0-10 (the-as none (call!)))
               )
             )
-          )
-        )
-      (the-as path-control s2-0)
-      )
-    )
-  )
-
-(defmethod should-display-marks? ((this path-control))
-  (and *display-path-marks* (logtest? (-> this flags) (path-control-flag display)))
-  )
-
-(defmethod get-num-segments ((this path-control))
-  (the float (+ (-> this curve num-cverts) -1))
-  )
-
-(defmethod get-num-verts ((this path-control))
-  (-> this curve num-cverts)
-  )
-
-(defmethod segement-duration->path-duration ((this path-control) (arg0 float))
-  (* arg0 (get-num-segments this))
-  )
-
-(defmethod path-duration->segment-duration ((this path-control) (arg0 float))
-  (/ arg0 (get-num-segments this))
-  )
-
-(defmethod new curve-control ((allocation symbol) (type-to-make type) (proc process) (lump-name symbol) (lump-time float))
-  (let ((gp-0 (object-new allocation type-to-make (the-as int (-> type-to-make size)))))
-    (set! (-> gp-0 process) (the-as process-drawable proc))
-    (set! (-> gp-0 name) lump-name)
-    (let* ((s3-1 (-> proc entity))
-           (v1-2 lump-name)
-           (s2-0
-             (cond
-               ((= v1-2 'path)
-                'path-k
-                )
-               ((= v1-2 'flow)
-                'flow-k
-                )
-               ((= v1-2 'intro)
-                'intro-k
-                )
-               ((= v1-2 'pathshort)
-                'pathshort-k
-                )
-               ((= v1-2 'patha)
-                'patha-k
-                )
-               ((= v1-2 'pathb)
-                'pathb-k
-                )
-               (else
-                 (format
-                   0
-                   "WARNING: curve-control is being asked to look up an unknown name '~A', it will have to do so by string.~%"
-                   lump-name
-                   )
-                 (let ((s2-1 string->symbol))
-                   (format (clear *temp-string*) "~A-k" lump-name)
-                   (s2-1 *temp-string*)
-                   )
-                 )
-               )
-             )
-           )
-      (let ((v1-3 (entity-actor-lookup s3-1 'path-actor 0)))
-        (if v1-3
-            (set! s3-1 v1-3)
-            )
-        )
-      (when (not (get-curve-data! s3-1 (-> gp-0 curve) lump-name s2-0 lump-time))
-        (cond
-          ((> (-> gp-0 curve num-cverts) 0)
-           (set! (-> gp-0 type) path-control)
-           )
-          (else
-            (logior! (-> gp-0 flags) (path-control-flag not-found))
-            (set! (-> gp-0 curve cverts) (the-as (inline-array vector) #f))
-            (set! (-> gp-0 curve num-cverts) 0)
-            0
-            )
+          (set! v1-32 (the-as none v0-10))
           )
         )
       )
-    gp-0
+    (set! v0-11 (the-as none s5-0))
+    (ret-value v0-11)
     )
   )
