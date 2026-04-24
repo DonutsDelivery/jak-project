@@ -36429,26 +36429,24 @@
 
 
 
-#|
 (deftype tie-near-consts (structure)
-  ((extra     qword    :inline :offset-assert 0)
-   (gifbufs   qword    :inline :offset-assert 16)
-   (clrbufs   qword    :inline :offset-assert 32)
-   (adgif     qword    :inline :offset-assert 48)
-   (strgif    qword    :inline :offset-assert 64)
-   (fangif    qword    :inline :offset-assert 80)
-   (hvdfoffs  vector   :inline :offset-assert 96)
-   (invhscale vector   :inline :offset-assert 112)
-   (guard     vector   :inline :offset-assert 128)
-   (atest uint8 2 :offset-assert 144)
-   (atest-tra gs-adcmd :inline :offset-assert 144)
-   (atest-def gs-adcmd :inline :offset-assert 160)
+  ((extra     qword    :inline                       :offset-assert 0)
+   (gifbufs   qword    :inline                       :offset-assert 16)
+   (clrbufs   qword    :inline                       :offset-assert 32)
+   (adgif     qword    :inline                       :offset-assert 48)
+   (strgif    qword    :inline                       :offset-assert 64)
+   (fangif    qword    :inline                       :offset-assert 80)
+   (hvdfoffs  vector   :inline                       :offset-assert 96)
+   (invhscale vector   :inline                       :offset-assert 112)
+   (guard     vector   :inline                       :offset-assert 128)
+   (atest-tra gs-adcmd :inline                       :offset-assert 144)
+   (atest     uint64           :overlay-at atest-tra)
+   (atest-def gs-adcmd :inline                       :offset-assert 160)
    )
   :method-count-assert 9
   :size-assert         #xb0
   :flag-assert         #x9000000b0
   )
-|#
 
 
 
@@ -59132,7 +59130,7 @@
 ;; (define-extern rigid-body-queue-manager type) ;; clobbers active deftype
 (define-extern rigid-body-surface type)
 (define-extern sce-stat type)
-(define-extern tie-near-consts type)
+;; (define-extern tie-near-consts type) ;; clobbers active deftype
 ;; (define-extern timetrial-snapshot type)  ;; clobbers active deftype at earlier line
 (define-extern udp-layer type)
 ;; (define-extern universe-choice type)  ;; clobbers active deftype at earlier line
