@@ -1869,7 +1869,13 @@
     "mem-free-flash",
     "mem-free-lgaud",
     "mem-realloc-flash",
-    "mem-realloc-lgaud"
+    "mem-realloc-lgaud",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: dynamic-mem
+    "mem-alloc-lgaud",
+    "mem-alloc-nelly",
+    "mem-free-nelly",
+    "mem-realloc-nelly"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
