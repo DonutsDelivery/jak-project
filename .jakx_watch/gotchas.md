@@ -62,3 +62,7 @@ Recurring mistakes distilled from recent commit history. New session? Read this 
     7. Graphics/sound
     8. Boot → title → gameplay
     Hand-porting gameplay code before step 6 is complete is premature. If stuck, redirect to step 6 work.
+
+## all-types.gc (addendum)
+
+19. **Inline struct containers with nested `:inline` arrays/fields need `:pack-me` when interior offsets land on non-8-byte boundaries.** Pattern: parent struct embeds an `:inline` child type; the child's natural alignment bumps a sibling field past its declared `:offset`. Symptom: `:size-assert`/`:offset-assert` mismatch, or runtime crash on type init with "offset N != expected M". Fix: add `:pack-me` to the parent struct deftype. Seen in: `a9f07427a` driver alignment crash; `a77f317f5` sky-work orbit alignment; `4ccb676b7` curve :pack-me at offset 20; `7061aa760` curve :inline at offset 20. Mined from 11 commits in gotchas_candidates.md pattern `inline_alignment`.
