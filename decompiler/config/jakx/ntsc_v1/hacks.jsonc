@@ -2335,7 +2335,15 @@
     // source: net-mgr-medius-games
     "(method 9 medius-filter)",
     "get-game-list-callback",
-    "in-game-players-refreshing-callback"
+    "in-game-players-refreshing-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-mgr-medius
+    "medius-chat-callback",
+    "medius-error-msg-callback",
+    "medius-reassign-world-id-callback",
+    // source: net-mgr-medius-rooms
+    "refresh-rooms-callback",
+    "room-players-refreshing-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
