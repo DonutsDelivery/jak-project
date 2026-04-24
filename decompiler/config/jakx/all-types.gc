@@ -44495,81 +44495,10 @@
 
 (deftype wvehicle (vehicle)
   ((wvehicle-pad uint8 2523 :offset 2137))
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x1234
-  :flag-assert         #x11011b01234
-  
-  (:methods
-    (wvehicle-method-204 () none) ;; 204
-    (wvehicle-method-205 () none) ;; 205
-    (wvehicle-method-206 () none) ;; 206
-    (wvehicle-method-207 () none) ;; 207
-    (wvehicle-method-208 () none) ;; 208
-    (wvehicle-method-209 () none) ;; 209
-    (wvehicle-method-210 () none) ;; 210
-    (wvehicle-method-211 () none) ;; 211
-    (wvehicle-method-212 () none) ;; 212
-    (wvehicle-method-213 () none) ;; 213
-    (wvehicle-method-214 () none) ;; 214
-    (wvehicle-method-215 () none) ;; 215
-    (wvehicle-method-216 () none) ;; 216
-    (wvehicle-method-217 () none) ;; 217
-    (wvehicle-method-218 () none) ;; 218
-    (wvehicle-method-219 () none) ;; 219
-    (wvehicle-method-220 () none) ;; 220
-    (wvehicle-method-221 () none) ;; 221
-    (wvehicle-method-222 () none) ;; 222
-    (wvehicle-method-223 () none) ;; 223
-    (wvehicle-method-224 () none) ;; 224
-    (wvehicle-method-225 () none) ;; 225
-    (wvehicle-method-226 () none) ;; 226
-    (wvehicle-method-227 () none) ;; 227
-    (wvehicle-method-228 () none) ;; 228
-    (wvehicle-method-229 () none) ;; 229
-    (wvehicle-method-230 () none) ;; 230
-    (wvehicle-method-231 () none) ;; 231
-    (wvehicle-method-232 () none) ;; 232
-    (wvehicle-method-233 () none) ;; 233
-    (wvehicle-method-234 () none) ;; 234
-    (wvehicle-method-235 () none) ;; 235
-    (wvehicle-method-236 () none) ;; 236
-    (wvehicle-method-237 () none) ;; 237
-    (wvehicle-method-238 () none) ;; 238
-    (wvehicle-method-239 () none) ;; 239
-    (wvehicle-method-240 () none) ;; 240
-    (wvehicle-method-241 () none) ;; 241
-    (wvehicle-method-242 () none) ;; 242
-    (wvehicle-method-243 () none) ;; 243
-    (wvehicle-method-244 () none) ;; 244
-    (wvehicle-method-245 () none) ;; 245
-    (wvehicle-method-246 () none) ;; 246
-    (wvehicle-method-247 () none) ;; 247
-    (wvehicle-method-248 () none) ;; 248
-    (wvehicle-method-249 () none) ;; 249
-    (wvehicle-method-250 () none) ;; 250
-    (wvehicle-method-251 () none) ;; 251
-    (wvehicle-method-252 () none) ;; 252
-    (wvehicle-method-253 () none) ;; 253
-    (wvehicle-method-254 () none) ;; 254
-    (wvehicle-method-255 () none) ;; 255
-    (wvehicle-method-256 () none) ;; 256
-    (wvehicle-method-257 () none) ;; 257
-    (wvehicle-method-258 () none) ;; 258
-    (wvehicle-method-259 () none) ;; 259
-    (wvehicle-method-260 () none) ;; 260
-    (wvehicle-method-261 () none) ;; 261
-    (wvehicle-method-262 () none) ;; 262
-    (wvehicle-method-263 () none) ;; 263
-    (wvehicle-method-264 () none) ;; 264
-    (wvehicle-method-265 () none) ;; 265
-    (wvehicle-method-266 () none) ;; 266
-    (wvehicle-method-267 () none) ;; 267
-    (wvehicle-method-268 () none) ;; 268
-    (wvehicle-method-269 () none) ;; 269
-    (wvehicle-method-270 () none) ;; 270
-    (wvehicle-method-271 () none) ;; 271
-    )
-)
+  :flag-assert         #xcc11b01234
+  )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wcar-base                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -44590,9 +44519,9 @@
 
 (deftype wcar-base (wvehicle)
   ((wcar-base-pad uint8 396 :offset 4660))
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
 
 
@@ -44604,9 +44533,9 @@
 
 (deftype v-mongoose (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44620,9 +44549,9 @@
   
 (deftype v-falcon (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44636,9 +44565,9 @@
   
 (deftype v-wombat (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44652,9 +44581,9 @@
   
 (deftype v-possum (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44668,9 +44597,9 @@
   
 (deftype v-bobcat (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44684,9 +44613,9 @@
   
 (deftype v-cougar (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44700,9 +44629,9 @@
   
 (deftype v-wolf (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44716,9 +44645,9 @@
   
 (deftype v-bear (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44732,9 +44661,9 @@
   
 (deftype v-leopard (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44748,9 +44677,9 @@
   
 (deftype v-panther (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44764,9 +44693,9 @@
   
 (deftype v-tiger (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44780,9 +44709,9 @@
   
 (deftype v-cheetah (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44796,9 +44725,9 @@
   
 (deftype v-gila (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44812,9 +44741,9 @@
   
 (deftype v-snake (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -44828,9 +44757,9 @@
   
 (deftype v-daxtermobile (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
@@ -45718,9 +45647,9 @@
    (hud-clock       uint64     :offset-assert 352)
    (auto-end-time   int32      :offset-assert 360)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x16c
-  :flag-assert         #x5800e0016c
+  :flag-assert         #x5700e0016c
   (:state-methods
     race-waiting ;; 80
     racing ;; 81
@@ -45731,9 +45660,7 @@
     (net-game-mgr-race-method-84 () none) ;; 84
     (net-game-mgr-race-method-85 () none) ;; 85
     (net-game-mgr-race-method-86 () none) ;; 86
-    
-    (net-game-mgr-race-method-87 () none) ;; 87
-)
+    )
   )
 
 
@@ -45855,9 +45782,9 @@
 (deftype net-game-mgr-deathrace (net-game-mgr-race)
   ((next-drone-spawn-time uint64  :offset-assert 368)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x178
-  :flag-assert         #x5800f00178
+  :flag-assert         #x5700f00178
   )
   
 
@@ -45869,9 +45796,9 @@
    (intro-hud-manager uint8 16 :offset-assert 368)
    (intro-sfx         uint8 8  :offset-assert 384)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x188
-  :flag-assert         #x5801000188
+  :flag-assert         #x5701000188
   )
 
 
@@ -46181,9 +46108,9 @@
   ((next-drone-spawn-time uint64  :offset-assert 368)
    (drone-type-counter    int32   :offset-assert 376)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x17c
-  :flag-assert         #x5800f0017c
+  :flag-assert         #x5700f0017c
   )
   
 
@@ -46241,9 +46168,9 @@
   ((total-race-time uint32  :offset-assert 364)
    (sound-id        uint32  :offset-assert 368)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x174
-  :flag-assert         #x5800f00174
+  :flag-assert         #x5700f00174
   )
   
 
@@ -46261,9 +46188,9 @@
   
 (deftype net-game-mgr-time-trial (net-game-mgr-race)
   ()
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x16c
-  :flag-assert         #x5800e0016c
+  :flag-assert         #x5700e0016c
   )
   
 
@@ -46277,9 +46204,9 @@
    (ai-attack?   basic  :offset-assert 388)
    (can-shoot?   basic  :offset-assert 392)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x18c
-  :flag-assert         #x580100018c
+  :flag-assert         #x570100018c
   )
   
 
@@ -46309,9 +46236,9 @@
    (player-lost? basic   :offset-assert 368)
    (lose-time    uint64  :offset-assert 376)
    )
-  :method-count-assert 88
+  :method-count-assert 87
   :size-assert         #x180
-  :flag-assert         #x5800f00180
+  :flag-assert         #x5700f00180
   )
   
 
@@ -54617,9 +54544,9 @@
   
 (deftype v-drone (wcar-base)
   ()
-  :method-count-assert 272
+  :method-count-assert 204
   :size-assert         #x13c0
-  :flag-assert         #x110133013c0
+  :flag-assert         #xcc133013c0
   )
   
 
