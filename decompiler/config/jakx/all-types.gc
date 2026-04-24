@@ -48547,31 +48547,28 @@
 
 
 
-#|
 (deftype sce-stat (structure)
   ((mode    uint32    :offset-assert 0)
    (attr    int32     :offset-assert 4)
    (size    int32     :offset-assert 8)
-   (ctime uint8 8 :offset-assert 12)
-   (atime uint8 8 :offset-assert 20)
-   (mtime uint8 8 :offset-assert 28)
+   (ctime   uint8  8  :offset-assert 12)
+   (atime   uint8  8  :offset-assert 20)
+   (mtime   uint8  8  :offset-assert 28)
    (hisize  int32     :offset-assert 36)
-   (private uint8 6 :offset-assert 40)
+   (private uint32 6  :offset-assert 40)
    )
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
   )
-|#
 
 
 
 
 
-#|
 (deftype sce-dirent (structure)
   ((stat    sce-stat :inline :offset-assert 0)
-   (name uint8 256 :offset-assert 64)
+   (name    uint8 256        :offset-assert 64)
    (private basic            :offset-assert 320)
    )
   :method-count-assert 9
@@ -48579,7 +48576,6 @@
   :flag-assert         #x900000144
   ;; field private uses ~A with a signed load.
   )
-|#
 
 
 
@@ -59265,7 +59261,7 @@
 ;; ragdoll-test activated at L50155
 (define-extern rb-debug-state-record object)
 ;; (define-extern ripple-globals object) ;; clobbers active deftype
-(define-extern sce-dirent object)
+;; (define-extern sce-dirent object) ;; clobbers active deftype
 ;; (define-extern search-info object) ;; clobbers active deftype
 ;; (define-extern shrub-view-data object) ;; clobbers active deftype
 ;; (define-extern sky-work object) ;; clobbers active deftype
