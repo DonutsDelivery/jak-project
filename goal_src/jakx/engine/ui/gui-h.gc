@@ -9,12 +9,6 @@
 (defenum gui-connection-flags
   :type uint8
   :bitfield #t
-  (gcf0 0)
-  (gcf1 1)
-  (fo-curve 2)
-  (fo-min 3)
-  (fo-max 4)
-  (volume 5)
   )
 ;; ---gui-connection-flags
 
@@ -22,8 +16,8 @@
 ;; +++gui-channel
 (defenum gui-channel
   :type uint8
-  :bitfield #f
   (none 0)
+
   (art-load 16)
   (art-load-next 17)
   (background 18)
@@ -37,7 +31,7 @@
   (jak-effect-2 26)
   (gun 27)
   (hal 28)
-  (voicebox 29)
+  (speech 29)
   (guard 30)
   (jak-mode 31)
   (alert 32)
@@ -45,7 +39,9 @@
   (bbush 34)
   (rider 35)
   (task 36)
+
   (voice 47)
+
   (movie 64)
   (blackout 65)
   (query 66)
@@ -57,7 +53,7 @@
   (resetter 72)
   (progress 73)
   (freeze 74)
-  (subtitle-pc 78) ;; custom
+
   (screen 79)
   (hud-upper-right 80)
   (hud-upper-left 81)
@@ -75,7 +71,16 @@
   (hud-auto-save 93)
   (hud-auto-save-message 94)
   (hud 95)
-  (max 96)
+  (hud-mp-vehicle-main-0 96)
+  (hud-mp-vehicle-main-1 97)
+  (hud-mp-player-indicators-0 98)
+  (hud-mp-player-indicators-1 99)
+  (hud-mp-race-0 100)
+  (hud-mp-race-1 101)
+  (hud-mp-race-2 102)
+  (hud-mp-race-3 103)
+
+  (max 112)
   )
 ;; ---gui-channel
 
@@ -83,7 +88,6 @@
 ;; +++gui-status
 (defenum gui-status
   :type uint8 ;; not sure
-  :bitfield #f
   (unknown 0)
   (pending 1)
   (ready 2)
@@ -97,7 +101,6 @@
 ;; +++gui-action
 (defenum gui-action
   :type uint8
-  :bitfield #f
   (none 0)
   (queue 1)
   (play 2)
