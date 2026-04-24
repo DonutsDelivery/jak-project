@@ -1952,7 +1952,14 @@
     "high-speed-reject",
     "mercneric-convert",
     "mercneric-matrix-asm",
-    "mercneric-shader-asm"
+    "mercneric-shader-asm",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: generic-merc
+    "generic-merc-death",
+    "generic-merc-do-chain",
+    "generic-merc-execute-all",
+    "generic-merc-execute-asm",
+    "generic-merc-query"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
