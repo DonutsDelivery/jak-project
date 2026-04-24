@@ -3,8 +3,18 @@
 
 ;; definition for method 11 of type racer-state
 ;; INFO: Used lq/sq
+;; WARN: Return type mismatch int vs none.
 (defmethod end-lap ((this racer-state) (arg0 process-drawable))
-  (set! (-> this racer) (process->handle arg0))
+  (let ((v1-0 (process->ppointer arg0)))
+    (set! (-> this racer) (the-as uint (logior (if (the-as (pointer process-drawable) v1-0)
+                                                   (shl (-> (the-as (pointer process-drawable) v1-0) 0 pid) 32)
+                                                   0
+                                                   )
+                                               (the-as uint v1-0)
+                                               )
+                                  )
+          )
+    )
   (when arg0
     (set! (-> this position quad) (-> arg0 root trans quad))
     (set! (-> this last-race-mesh-position quad) (-> arg0 root trans quad))
@@ -18,6 +28,7 @@
   (set! (-> this next-racer-lap) 0.0)
   (set! (-> this last-slice) 0)
   (set! (-> this last-race-line) #f)
+  0
   (none)
   )
 
@@ -30,6 +41,7 @@
   )
 
 ;; definition for method 10 of type race-state
+;; WARN: .subu (32-bit) used on a uint at idx 17. This probably should be a handle.
 (defmethod race-state-method-10 ((this race-state))
   (with-pp
     (dotimes (s5-0 (-> this racer-count))
@@ -43,7 +55,12 @@
               (v1-4 (-> (the-as racer-state v1-3) racer))
               )
           (t9-0
-            (handle->process v1-4)
+            (and (nonzero? (l32-false-check v1-4)) (let ((a2-1 (-> v1-4 0)))
+                                                     (if (= (sar v1-4 32) (-> a2-1 pid))
+                                                         a2-1
+                                                         )
+                                                     )
+                 )
             a1-0
             )
           )
@@ -55,3 +72,7 @@
 
 ;; definition for symbol *race-state*, type object
 (define *race-state* #f)
+
+
+
+

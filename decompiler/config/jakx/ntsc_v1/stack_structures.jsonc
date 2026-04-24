@@ -4575,6 +4575,10 @@
       ]
     ]
   ],
+  // race-state-method-10: send-event call places event-message-block at sp+16
+  "(method 10 race-state)": [
+    [16, "event-message-block"]
+  ],
   "(method 12 race-state)": [
     [
       16,
@@ -8630,5 +8634,6 @@
   "(method 58 ocean)": [[16, "vector"]],
   "(method 59 ocean)": [[16, "vector"]],
   "(method 60 ocean)": [[16, "vector"]],
-  "(method 61 ocean)": [[16, "vector"]]
+  "(method 61 ocean)": [[16, "vector"]],
+  "driver-spawn": [[16, "driver-initialize-params"]]
 }

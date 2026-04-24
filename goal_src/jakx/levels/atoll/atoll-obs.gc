@@ -1,0 +1,64 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; Ported from decompiler_out/jakx/atoll-obs_disasm.gc.
+;; atoll-rotor and atoll-dish are level prop objects in the atoll race track.
+;; Types must be in GAME.CGO (not ATOLL.DGO) because level-DGO-loaded .o files
+;; do NOT register types (session-7 root cause).
+;;
+;; defskelgroup omitted: the art group elements (lod0-jg, idle-ja, lod0-mg) live
+;; in ATOLL.DGO and are not available at compile time for GAME.CGO. initialize-skeleton
+;; is skipped for now; these procs exist as invisible placeholders until a runtime
+;; art-group-get-by-name can be wired post-load.
+
+;; ---------------------------------------------------------------------------
+;; atoll-rotor — spinning rotor prop
+;; ---------------------------------------------------------------------------
+
+(deftype atoll-rotor (process-drawable)
+  ()
+  (:state-methods
+    idle
+    )
+  )
+
+(defstate idle (atoll-rotor)
+  :virtual #t
+  :code (behavior ()
+    (loop (suspend))
+    )
+  :post ja-post
+  )
+
+(defmethod init-from-entity! ((this atoll-rotor) (arg0 entity-actor))
+  (logior! (-> this mask) (process-mask actor-pause))
+  (set! (-> this root) (new 'process 'trsqv))
+  (process-drawable-from-entity! this arg0)
+  (go (method-of-object this idle))
+  )
+
+;; ---------------------------------------------------------------------------
+;; atoll-dish — spinning dish prop
+;; ---------------------------------------------------------------------------
+
+(deftype atoll-dish (process-drawable)
+  ()
+  (:state-methods
+    idle
+    )
+  )
+
+(defstate idle (atoll-dish)
+  :virtual #t
+  :code (behavior ()
+    (loop (suspend))
+    )
+  :post ja-post
+  )
+
+(defmethod init-from-entity! ((this atoll-dish) (arg0 entity-actor))
+  (logior! (-> this mask) (process-mask actor-pause))
+  (set! (-> this root) (new 'process 'trsqv))
+  (process-drawable-from-entity! this arg0)
+  (go (method-of-object this idle))
+  )
