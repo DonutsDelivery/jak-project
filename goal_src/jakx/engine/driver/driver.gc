@@ -522,3 +522,323 @@
   (set! v0-6 (the-as none gp-0))
   (ret-none)
   )
+
+(let ((a0-0 (new 'static 'skeleton-group
+              :name "skel-helmet-a"
+              :extra #f
+              :info #f
+              :art-group-name "helmet-a"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 4096.0 0.0 12288.0))
+              :version 8
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-0 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-0 clothing length) (-> a0-0 clothing allocated-length))
+    )
+  (set! (-> a0-0 jgeo) 0)
+  (set! (-> a0-0 janim) 2)
+  (set! (-> a0-0 mgeo 0) 1)
+  (set! (-> a0-0 lod-dist 0) 4095996000.0)
+  (add-to-loading-level a0-0)
+  )
+
+(let ((a0-1 (new 'static 'skeleton-group
+              :name "skel-helmet-b"
+              :extra #f
+              :info #f
+              :art-group-name "helmet-b"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 4096.0 0.0 12288.0))
+              :version 8
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-1 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-1 clothing length) (-> a0-1 clothing allocated-length))
+    )
+  (set! (-> a0-1 jgeo) 0)
+  (set! (-> a0-1 janim) 2)
+  (set! (-> a0-1 mgeo 0) 1)
+  (set! (-> a0-1 lod-dist 0) 4095996000.0)
+  (add-to-loading-level a0-1)
+  )
+
+(let ((a0-2 (new 'static 'skeleton-group
+              :name "skel-helmet-c"
+              :extra #f
+              :info #f
+              :art-group-name "helmet-c"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 4096.0 0.0 12288.0))
+              :version 8
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-2 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-2 clothing length) (-> a0-2 clothing allocated-length))
+    )
+  (set! (-> a0-2 jgeo) 0)
+  (set! (-> a0-2 janim) 2)
+  (set! (-> a0-2 mgeo 0) 1)
+  (set! (-> a0-2 lod-dist 0) 4095996000.0)
+  (add-to-loading-level a0-2)
+  )
+
+(let ((a0-3 (new 'static 'skeleton-group
+              :name "skel-helmet-d"
+              :extra #f
+              :info #f
+              :art-group-name "helmet-d"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 4096.0 0.0 12288.0))
+              :version 8
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-3 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-3 clothing length) (-> a0-3 clothing allocated-length))
+    )
+  (set! (-> a0-3 jgeo) 0)
+  (set! (-> a0-3 janim) 2)
+  (set! (-> a0-3 mgeo 0) 1)
+  (set! (-> a0-3 lod-dist 0) 4095996000.0)
+  (add-to-loading-level a0-3)
+  )
+
+(let ((a0-4 (new 'static 'skeleton-group
+              :name "skel-helmet-e"
+              :extra #f
+              :info #f
+              :art-group-name "helmet-e"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 4096.0 0.0 12288.0))
+              :version 8
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-4 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-4 clothing length) (-> a0-4 clothing allocated-length))
+    )
+  (set! (-> a0-4 jgeo) 0)
+  (set! (-> a0-4 janim) 2)
+  (set! (-> a0-4 mgeo 0) 1)
+  (set! (-> a0-4 lod-dist 0) 4095996000.0)
+  (add-to-loading-level a0-4)
+  )
+
+(let ((a0-5 (new 'static 'skeleton-group
+              :name "skel-helmet-f"
+              :extra #f
+              :info #f
+              :art-group-name "helmet-f"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 4096.0 0.0 12288.0))
+              :version 8
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-5 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-5 clothing length) (-> a0-5 clothing allocated-length))
+    )
+  (set! (-> a0-5 jgeo) 0)
+  (set! (-> a0-5 janim) 2)
+  (set! (-> a0-5 mgeo 0) 1)
+  (set! (-> a0-5 lod-dist 0) 4095996000.0)
+  (add-to-loading-level a0-5)
+  )
+
+(deftype helmet (structure)
+  ((node-list   basic)
+   (draw        basic)
+   (node-index  int8)
+   (scale       float)
+   )
+  (:methods
+    (helmet-method-9 (_type_) none)
+    (helmet-method-10 (_type_) none)
+    (helmet-method-11 (_type_) none)
+    )
+  )
+
+
+(deftype driver-initialize-params (structure)
+  ((vehicle      basic)
+   (level-slot   int8)
+   (driver-type  uint8)
+   )
+  )
+
+
+;; type driver-info is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; type joint-mod-head is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type joint-mod-head) 3 L170)
+
+(deftype driver (process-focusable)
+  ((driver-pad  uint8  132 :offset 256)
+   )
+  )
+
+;; ERROR: failed type prop at 17: Could not figure out load: (set! a2 (l.d (+ gp 276)))
+
+;; ERROR: failed type prop at 2: Could not figure out load: (set! v1 (l.wu (+ gp 344)))
+;; WARN: Return type mismatch none vs driver.
+(defmethod relocate ((a0-0 driver) (a1-0 int))
+  (local-vars
+    (v0-0 none)
+    (v0-1 none)
+    (v0-2 none)
+    (v0-3 none)
+    (v0-4 none)
+    (v1-0 none)
+    (v1-2 none)
+    (v1-4 none)
+    (v1-6 none)
+    (v1-7 none)
+    (v1-8 none)
+    (v1-10 none)
+    (v1-12 none)
+    (v1-14 none)
+    (v1-15 none)
+    (v1-16 none)
+    (v1-18 none)
+    (v1-20 none)
+    (v1-21 none)
+    (v1-22 none)
+    (a0-1 none)
+    (a0-2 none)
+    (a0-3 none)
+    (a0-4 none)
+    (a1-4 none)
+    (t9-0 none)
+    (t9-1 none)
+    (t9-2 none)
+    (t9-3 none)
+    (t9-4 none)
+    )
+  (when (begin
+          (when (begin (set! v1-0 (the-as none (l.wu (+ a0-0 344)))) (nonzero? v1-0))
+            (when (begin
+                    (set! a0-1 (the-as none (l.wu (+ a0-0 344))))
+                    (set! v1-2 (the-as none (l.wu (+ a0-1 -4))))
+                    (set! t9-0 (the-as none (l.wu (+ v1-2 44))))
+                    (set! a1-1 (the-as none a1-0))
+                    (call!)
+                    (set! v1-3 (the-as none v0-0))
+                    (set! v1-4 (the-as none (l.wu (+ a0-0 344))))
+                    (nonzero? v1-4)
+                    )
+              (set! v1-6 (the-as none (l.wu (+ a0-0 344))))
+              (set! v1-7 (the-as none (+ v1-6 a1-0)))
+              (s.w! (+ a0-0 344) v1-7)
+              )
+            )
+          (set! v1-8 (the-as none (l.wu (+ a0-0 348))))
+          (nonzero? v1-8)
+          )
+    (when (begin
+            (set! a0-2 (the-as none (l.wu (+ a0-0 348))))
+            (set! v1-10 (the-as none (l.wu (+ a0-2 -4))))
+            (set! t9-1 (the-as none (l.wu (+ v1-10 44))))
+            (set! a1-2 (the-as none a1-0))
+            (call!)
+            (set! v1-11 (the-as none v0-1))
+            (set! v1-12 (the-as none (l.wu (+ a0-0 348))))
+            (nonzero? v1-12)
+            )
+      (set! v1-14 (the-as none (l.wu (+ a0-0 348))))
+      (set! v1-15 (the-as none (+ v1-14 a1-0)))
+      (s.w! (+ a0-0 348) v1-15)
+      )
+    )
+  (when (begin (set! v1-16 (the-as none (l.wu (+ a0-0 340)))) (nonzero? v1-16))
+    (when (begin (set! v1-18 (the-as none (l.wu (+ a0-0 340)))) (nonzero? v1-18))
+      (set! v1-20 (the-as none (l.wu (+ a0-0 340))))
+      (set! v1-21 (the-as none (+ v1-20 a1-0)))
+      (s.w! (+ a0-0 340) v1-21)
+      )
+    )
+  (set! a0-3 (the-as none (+ a0-0 368)))
+  (set! v1-22 (the-as none helmet))
+  (set! t9-2 (the-as none (l.wu (+ v1-22 44))))
+  (set! a1-3 (the-as none a1-0))
+  (call!)
+  (set! v1-23 (the-as none v0-2))
+  (set! t9-3 (the-as none find-parent-method))
+  (set! a0-4 (the-as none driver))
+  (set! a1-4 (the-as none 7))
+  (set! v0-3 (the-as none (call!)))
+  (set! t9-4 (the-as none v0-3))
+  (set! a0-5 (the-as none a0-0))
+  (set! a1-5 (the-as none a1-0))
+  (set! v0-4 (the-as none (call!)))
+  (ret-value v0-4)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(method-set! (the-as type joint-mod-head) 9 L119)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((gp-0
+        (new 'static 'state :name 'idle :next #f :exit #f :parent #f :code #f :trans #f :post #f :enter #f :event #f)
+        )
+      )
+  (method-set! driver 59 gp-0)
+  (set! (-> gp-0 event) (the-as (function process int symbol event-message-block object) driver-event-handler))
+  (set! (-> gp-0 trans) (the-as (function object) L43))
+  (set! (-> gp-0 code) L41)
+  (set! (-> gp-0 post) driver-post)
+  )
+
+(let ((gp-1
+        (new 'static 'state :name 'intro :next #f :exit #f :parent #f :code #f :trans #f :post #f :enter #f :event #f)
+        )
+      )
+  (method-set! driver 60 gp-1)
+  (set! (-> gp-1 event) (the-as (function process int symbol event-message-block object) driver-event-handler))
+  (set! (-> gp-1 enter) L38)
+  (set! (-> gp-1 exit) (the-as (function object) L35))
+  (set! (-> gp-1 code) L27)
+  (set! (-> gp-1 post) driver-post)
+  )
+
+(let ((gp-2
+        (new 'static 'state :name 'die :next #f :exit #f :parent #f :code #f :trans #f :post #f :enter #f :event #f)
+        )
+      )
+  (method-set! driver 61 gp-2)
+  (set! (-> gp-2 code) L26)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.

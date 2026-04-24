@@ -1,3 +1,15 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+
+(deftype driver-ashelin (driver)
+  ()
+  )
+
+
+(defskelgroup skel-driver-ashelin ashelin 1 4
+              ((2 (meters 20)) (3 (meters 999999)))
+              :bounds (static-spherem 0 0 0 4)
+              )
+
+;; ERROR: function has no type analysis. Cannot decompile.

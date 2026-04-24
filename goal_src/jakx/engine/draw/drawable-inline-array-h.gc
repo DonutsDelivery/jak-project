@@ -34,3 +34,8 @@
   ((length  int16  :offset   6)
    )
   )
+
+(deftype drawable-inline-array (drawable)
+  ((length  int16  :offset   6)
+   )
+  )
