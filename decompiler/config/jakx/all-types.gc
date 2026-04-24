@@ -29582,7 +29582,7 @@
     )
   (:methods
     (red-sentry-bot-method-64 () none) ;; 64
-    (red-sentry-bot-method-65 () collide-shape) ;; 65
+    (red-sentry-bot-method-65 () none) ;; 65 ;; DIAG: reverted collide-shape (2c8f33261) for OOM investigation
     (red-sentry-bot-method-66 () none) ;; 66
     )
   )
@@ -33868,21 +33868,19 @@
 
 
 
-#|
 (deftype nav-find-corner-portal-params (structure)
-  ((start-poly   nav-poly         :offset-assert 0)
-   (target-poly  nav-poly         :offset-assert 4)
-   (corner-poly  nav-poly         :offset-assert 8)
-   (start-pos    vector   :inline :offset-assert 16)
-   (target-pos   vector   :inline :offset-assert 32)
-   (corner-verts uint8 2 :offset-assert 48)
-   (vert-select  int8             :offset-assert 80)
+  ((start-poly   nav-poly           :offset-assert 0)
+   (target-poly  nav-poly           :offset-assert 4)
+   (corner-poly  nav-poly           :offset-assert 8)
+   (start-pos    vector   :inline   :offset-assert 16)
+   (target-pos   vector   :inline   :offset-assert 32)
+   (corner-verts vector 2 :inline   :offset-assert 48)
+   (vert-select  int8               :offset-assert 80)
    )
   :method-count-assert 9
   :size-assert         #x51
   :flag-assert         #x900000051
   )
-|#
 
 
 
@@ -59114,7 +59112,7 @@
 ;; (define-extern medius-set-localization-params-request type)  ;; clobbers active deftype at earlier line
 ;; (define-extern medius-simple-response type)  ;; clobbers active deftype at earlier line
 (define-extern mouse-info type)
-(define-extern nav-find-corner-portal-params type)
+;; (define-extern nav-find-corner-portal-params type) ;; clobbers active deftype
 ;; (define-extern net-dme-version type)  ;; clobbers active deftype at earlier line
 ;; (define-extern net-enemy type)  ;; clobbers active deftype at earlier line
 ;; (define-extern net-enemy-transition type)  ;; clobbers active deftype at earlier line
