@@ -303,19 +303,22 @@ def port_define_externs(apply: bool, dry_run_diff: bool) -> List[Tuple[str, str,
         original = JAKX_ALLTYPES.read_text(encoding='utf-8', errors='replace')
         new_text = original
         for name, old_sig, new_sig in replacements:
-            # Replace the first occurrence of `(define-extern NAME old_sig)` line
-            # Build a regex that matches the define-extern line for this name
+            # Replace the first occurrence of `(define-extern NAME old_sig)` line.
+            # Format in file: (define-extern NAME TYPE)
+            # parse_define_externs strips the outer ) so old_sig/new_sig don't include it.
+            # Replacement: keep `(define-extern NAME `, insert new type, close with `)`.
+            # Group 1 = `(define-extern NAME `, group 2 = trailing comment or EOL.
             old_pat = re.compile(
                 r'^(\(define-extern\s+' + re.escape(name) + r'\s+)' +
-                re.escape(old_sig) + r'(\s*(?:;;.*)?)$',
+                re.escape(old_sig) + r'\)(\s*(?:;;.*)?)$',
                 re.MULTILINE
             )
-            new_line_repl = r'\g<1>' + new_sig + r'\g<2>'
+            new_line_repl = r'\g<1>' + new_sig + r')\g<2>'
             new_text, n = old_pat.subn(new_line_repl, new_text, count=1)
             if n == 0:
-                # Try matching with 'object' placeholder
+                # Try matching with 'object' placeholder (no parens, no extra closing))
                 old_pat2 = re.compile(
-                    r'^(\(define-extern\s+' + re.escape(name) + r'\s+)object(\s*(?:;;.*)?)$',
+                    r'^(\(define-extern\s+' + re.escape(name) + r'\s+)object\)(\s*(?:;;.*)?)$',
                     re.MULTILINE
                 )
                 new_text, n2 = old_pat2.subn(new_line_repl, new_text, count=1)
