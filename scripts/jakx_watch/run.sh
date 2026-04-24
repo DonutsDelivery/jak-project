@@ -263,6 +263,11 @@ else
     echo "   test/decompiler/reference/jakx/" | tee -a "$RUN_LOG"
 fi
 
+# --- commit impact log (empirical commit ranking by metric delta) ---
+echo "" | tee -a "$RUN_LOG"
+echo "-- commit impact log --" | tee -a "$RUN_LOG"
+python3 scripts/jakx_watch/commit_impact_log.py 2>&1 | tee -a "$RUN_LOG" || true
+
 # Re-render status.md now that types_drift.py + offline_test_pass.py have
 # augmented latest.json. measure.py wrote status.md earlier, before those ran.
 echo "" | tee -a "$RUN_LOG"
