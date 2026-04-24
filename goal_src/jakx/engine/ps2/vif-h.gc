@@ -16,20 +16,37 @@ Types related to VIF: the PS2's Vector Interface.
 
 ;; DECOMP BEGINS
 
-;; type vif-stat is defined here, but it is unknown to the decompiler
-
-;; ERROR: function has no type analysis. Cannot decompile.
+(deftype vif-stat (uint32)
+  ((vps uint8 :offset   0 :size   2)
+   (vew uint8 :offset   2 :size   1)
+   (mrk uint8 :offset   6 :size   1)
+   (vss uint8 :offset   8 :size   1)
+   (vfs uint8 :offset   9 :size   1)
+   (vis uint8 :offset  10 :size   1)
+   (int uint8 :offset  11 :size   1)
+   (er0 uint8 :offset  12 :size   1)
+   (er1 uint8 :offset  13 :size   1)
+   (fqc uint8 :offset  24 :size   4)
+   )
+  )
 
 (deftype vif-fbrst (uint32)
-  ()
+  ((rst uint8 :offset   0 :size   1)
+   (fbk uint8 :offset   1 :size   1)
+   (stp uint8 :offset   2 :size   1)
+   (stc uint8 :offset   3 :size   1)
+   )
   )
 
 (deftype vif-err (uint32)
-  ()
+  ((mii uint8 :offset   0 :size   1)
+   (me0 uint8 :offset   1 :size   1)
+   (me1 uint8 :offset   2 :size   1)
+   )
   )
 
 (deftype vif-bank (structure)
-  ((stat    uint32   :offset   0)
+  ((stat    uint32)
    (fbrst   uint32   :offset  16)
    (err     vif-err  :offset  32)
    (mark    uint32   :offset  48)
@@ -54,3 +71,7 @@ Types related to VIF: the PS2's Vector Interface.
    (c3      uint32   :offset 368)
    )
   )
+
+;; PS2 VIF map. There are no VIFs in OpenGOAL.
+(defconstant VIF0_BANK (the vif-bank #x10003800))
+(defconstant VIF1_BANK (the vif-bank #x10003c00))

@@ -89,12 +89,10 @@
    (scene-task        uint16)
    (on-running        pair)
    (on-complete       pair)
-   (vehicles          basic)
-   (ipu               basic)
    )
   (:methods
-    (scene-method-16 (_type_ spool-anim) spool-anim)
-    (scene-method-17 (_type_) scene)
+    (init-spool-by-scene! (_type_ spool-anim) spool-anim)
+    (load-scene (_type_) scene)
     )
   )
 
@@ -130,13 +128,15 @@
    (cur-trans-hook        (function none))
    (user-data             uint64)
    )
+  (:state-methods
+    (wait symbol)
+    release
+    play-anim
+    )
   (:methods
-    (scene-player-method-50 () none)
-    (scene-player-method-51 () none)
-    (scene-player-method-52 () none)
-    (scene-player-method-53 () none)
-    (scene-player-method-54 () none)
-    (scene-player-method-55 () none)
+    (scene-player-method-23 (_type_ string symbol) none)
+    (scene-player-method-24 (_type_ scene symbol) scene)
+    (scene-player-method-25 (_type_ float float) none)
     )
   )
 
@@ -144,12 +144,3 @@
 (define *scene-player* (the-as (pointer scene-player) #f))
 
 (define *debug-menu-scene-play* (the-as object #f))
-
-(defmethod scene-method-17 ((this scene))
-  (let ((v1-1 (-> *level* top-level)))
-    (if v1-1
-        (set-loaded-art (-> v1-1 art-group) this)
-        )
-    )
-  this
-  )
