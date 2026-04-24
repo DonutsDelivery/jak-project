@@ -1913,7 +1913,12 @@
     "generic-interp-dproc",
     "generic-no-light-proc",
     "generic-prepare-dma-double",
-    "generic-prepare-dma-single"
+    "generic-prepare-dma-single",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: generic-effect
+    "generic-envmap-proc",
+    "generic-no-light",
+    "generic-no-light+envmap"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
