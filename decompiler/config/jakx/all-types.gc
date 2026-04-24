@@ -4651,6 +4651,7 @@
 
 
 
+;; DEAD: intermediate work structure
   
 
 #|
@@ -4772,6 +4773,7 @@
 
 
 
+;; DEAD: intermediate work structure
   
 
 #|
@@ -8402,6 +8404,7 @@
    )
   :method-count-assert 9
   :size-assert         #x10
+;; DEAD: disabled mouse-info
   :flag-assert         #x900000010
   )
 
@@ -18452,6 +18455,7 @@
   :method-count-assert 10
   :size-assert         #x4
   :flag-assert         #xa00000004
+;; DEAD: disabled particle-buffer
   (:methods
     (prim-client-method-9 () int) ;; 9
     )
@@ -20809,6 +20813,7 @@
   :size-assert         #x10
   :flag-assert         #x900000010
   )
+;; DEAD: network infrastructure
 
 
 
@@ -21024,6 +21029,7 @@
   :size-assert         #x14
   :flag-assert         #x900000014
   )
+;; DEAD: network infrastructure
   
 
 
@@ -21043,6 +21049,7 @@
   )
 |#
 
+;; DEAD: network infrastructure
 
 
 
@@ -21637,6 +21644,7 @@
   :size-assert         #x8
   :flag-assert         #x900000008
   )
+;; DEAD: network infrastructure
 
 
 
@@ -21654,6 +21662,7 @@
 |#
 
   
+;; DEAD: network infrastructure
 
 
 
@@ -21842,6 +21851,7 @@
   :size-assert         #x66
   :flag-assert         #x900000066
   )
+;; DEAD: medius (online feature)
 
 
 
@@ -23623,6 +23633,7 @@
   :size-assert         #x1c
   :flag-assert         #x90000001c
   )
+;; DEAD: medius (online feature)
 
 
 
@@ -23653,6 +23664,7 @@
   :size-assert         #x20
   :flag-assert         #x900000020
   )
+;; DEAD: medius (online feature)
 
 
 
@@ -23670,6 +23682,7 @@
   :flag-assert         #x9000001b0
   )
 |#
+;; DEAD: medius (online feature)
 
 
 
@@ -23686,6 +23699,7 @@
   :flag-assert         #x9000000e4
   )
 |#
+;; DEAD: medius (online feature)
 
 
 
@@ -24258,6 +24272,7 @@
   :size-assert         #x80
   :flag-assert         #x900000080
   )
+;; DEAD: medius (online feature)
 
 
 
@@ -24310,6 +24325,7 @@
   :size-assert         #x28
   :flag-assert         #x900000028
   )
+;; DEAD: medius (online feature)
 
 
 
@@ -24331,6 +24347,7 @@
   :flag-assert         #x9000001d1
   )
 |#
+;; DEAD: medius (online feature)
 
 
 
@@ -25197,6 +25214,7 @@
   :size-assert         #x1c
   :flag-assert         #x90000001c
   )
+;; DEAD: medius (online feature)
 
 
 
@@ -25213,6 +25231,7 @@
   :flag-assert         #x900000058
   )
 |#
+;; DEAD: medius (online feature)
 
 
 
@@ -25229,6 +25248,7 @@
   :flag-assert         #x9000001ac
   )
 |#
+;; DEAD: medius (online feature)
 
 
 
@@ -25877,6 +25897,7 @@
   :size-assert         #xc6
   :flag-assert         #x9000000c6
   )
+;; DEAD: medius (online feature)
 
 
 
@@ -25920,6 +25941,7 @@
   :size-assert         #xc1
   :flag-assert         #x9000000c1
   )
+;; DEAD: medius (online feature)
 
 
 
@@ -25937,6 +25959,7 @@
   :flag-assert         #x9000001d9
   )
 |#
+;; DEAD: medius (online feature)
 
 
 
@@ -25967,6 +25990,7 @@
   :size-assert         #xc5
   :flag-assert         #x9000000c5
   )
+;; DEAD: medius (online feature)
 
 
 
@@ -25983,6 +26007,7 @@
   :flag-assert         #x9000001f9
   )
 |#
+;; DEAD: medius (online feature)
 
 
 
@@ -26014,6 +26039,7 @@
   :size-assert         #x14d
   :flag-assert         #x90000014d
   )
+;; DEAD: medius (online feature)
 
 
 
@@ -26058,6 +26084,7 @@
   :size-assert         #x19
   :flag-assert         #x900000019
   )
+;; DEAD: medius (online feature)
 
 
 
@@ -26074,6 +26101,7 @@
   :flag-assert         #x90000004c
   )
 |#
+;; DEAD: medius (online feature)
 
 
 
@@ -26090,6 +26118,7 @@
   :flag-assert         #x9000000b2
   )
 |#
+;; DEAD: medius (online feature)
 
 
 
@@ -26587,6 +26616,7 @@
   :method-count-assert 9
   :size-assert         #x4
   :flag-assert         #x900000004
+;; DEAD: network infrastructure
   )
 
 
@@ -26607,6 +26637,7 @@
   :flag-assert         #x9000000a4
   )
 |#
+;; DEAD: network infrastructure
 
 
 
@@ -26634,6 +26665,7 @@
   )
 |#
 
+;; DEAD: network infrastructure
 
 
 
@@ -26669,6 +26701,7 @@
 |#
 
   
+;; DEAD: network infrastructure
 
 
 
@@ -26687,6 +26720,7 @@
 |#
 
   
+;; DEAD: network infrastructure
 
 
 
@@ -26705,6 +26739,7 @@
 |#
 
   
+;; DEAD: network infrastructure
 
 
 
@@ -26723,6 +26758,7 @@
 |#
 
   
+;; DEAD: network infrastructure
 
 
 
@@ -26742,6 +26778,7 @@
 |#
 
   
+;; DEAD: network infrastructure
 
 
 
@@ -26761,6 +26798,7 @@
   )
 |#
 
+;; DEAD: network infrastructure
   
 
 
@@ -26780,6 +26818,7 @@
   )
 |#
 
+;; DEAD: network infrastructure
 
 
 
@@ -26800,6 +26839,7 @@
 |#
 
   
+;; DEAD: network infrastructure
 
 
 
@@ -27334,6 +27374,7 @@
     idle  ;; 50
     shoot ;; 51
     )
+;; DEAD: vehicle component (not in use)
   (:methods
     (wrong-way-linebot-method-52 () none) ;; 52
     )
@@ -30947,6 +30988,7 @@
   :size-assert         #x90
   :flag-assert         #x900000090
   )
+;; DEAD: asset type (decompiler regen)
 
 
 
@@ -31142,6 +31184,7 @@
   :flag-assert         #x900000060
   )
   
+;; DEAD: asset type (decompiler regen)
 
 
 
@@ -31203,6 +31246,7 @@
 |#
 
   
+;; DEAD: asset type (decompiler regen)
 
 
 
@@ -31223,6 +31267,7 @@
 |#
 
   
+;; DEAD: asset type (decompiler regen)
 
 
 
@@ -31319,6 +31364,7 @@
 |#
 
   
+;; DEAD: asset type (decompiler regen)
 
 
 
@@ -33185,6 +33231,7 @@
   :flag-assert         #xa00000040
   (:methods
     (hud-string-method-9 () none) ;; 9
+;; DEAD: UI/menu infrastructure
     )
   )
 
@@ -40210,6 +40257,7 @@
     (rigid-body-queue-method-11 (_type_ process) none) ;; 11
     (rigid-body-queue-method-12 (_type_ int int) int) ;; 12
     (rigid-body-queue-method-13 (_type_ int process) none) ;; 13
+;; DEAD: physics debug structure
     (rigid-body-queue-method-14 (_type_ int) int) ;; 14
     (rigid-body-queue-method-15 (_type_ process) none) ;; 15
     (rigid-body-queue-method-16 (_type_) symbol) ;; 16
@@ -40243,6 +40291,7 @@
   :flag-assert         #xb00000160
   (:methods
     (rb-debug-state-record-method-9 () none) ;; 9
+;; DEAD: physics debug structure
     (rb-debug-state-record-method-10 () none) ;; 10
     )
   )
@@ -40988,6 +41037,7 @@
 (deftype nav-find-clear-spot-work (structure)
   ((id-array     int8   16         :offset-assert 0) ;; guessed by decompiler
    (sphere-array sphere 16 :inline :offset-assert 16) ;; guessed by decompiler
+;; DEAD: intermediate work structure
    )
   :method-count-assert 9
   :size-assert         #x110
@@ -41638,6 +41688,7 @@
    (nelly-buffer-read-byte-offset  uint16  :offset-assert 14)
    (nelly-buffer-read-bit-offset   uint8   :offset-assert 16)
    (nelly-buffer-write-byte-offset uint16  :offset-assert 18)
+;; DEAD: disabled headset-decoder
    (nelly-buffer-write-bit-offset  uint8   :offset-assert 20)
    )
   :method-count-assert 9
@@ -42618,6 +42669,7 @@
 
 
 (deftype medius-cached-info-game-status (medius-cached-info)
+;; DEAD: medius (online feature)
   ((game-status int32  :offset-assert 24)
    )
   :method-count-assert 12
@@ -45434,6 +45486,7 @@
 
 (define-extern *powerup-static-hash* object)
 (define-extern *powerup-dynamic-hash* object)
+;; DEAD: network infrastructure
 (define-extern net-powerup-init-remote (function none))
 (define-extern *msg-map-net-powerup* array)
 (define-extern *net-process-class-info-net-powerup* object)
@@ -46398,6 +46451,7 @@
   :size-assert         #xc
   :flag-assert         #xd0000000c
   (:methods
+;; DEAD: disabled timetrial-recording
     (timetrial-snapshot-method-9 () none) ;; 9
     (timetrial-snapshot-method-10 () none) ;; 10
     (timetrial-snapshot-method-11 () none) ;; 11
@@ -47375,6 +47429,7 @@
 (define-extern *player-6-extra* object)
 (define-extern get-extra-player-string (function none))
 (define-extern set-index (function none))
+;; DEAD: UI/menu infrastructure
 (define-extern *selection-cache-array* object)
 (define-extern *selection-cache-index* object)
 (define-extern *last-lobby-state* object)
@@ -47401,6 +47456,7 @@
    (tid2  uint32    :offset-assert 12)
    (scale float     :offset-assert 16)
    )
+;; DEAD: UI/menu infrastructure
   :method-count-assert 9
   :size-assert         #x14
   :flag-assert         #x900000014
@@ -47848,6 +47904,7 @@
 
 
 (deftype lobby-chat-string (structure)
+;; DEAD: UI/menu infrastructure
   ((text uint8 100 :offset-assert 0)
    )
   :method-count-assert 9
@@ -48310,6 +48367,7 @@
    (name uint8 32 :offset-assert 4)
    (player-ct     int32      :offset-assert 36)
    (max-players   int32      :offset-assert 40)
+;; DEAD: medius (online feature)
    (game-world-ct int32      :offset-assert 44)
    )
   :method-count-assert 9
@@ -49605,6 +49663,7 @@
    (bsphere         sphere             :inline :offset-assert 32)
    (impact-info     rigid-body-impact  :inline :offset-assert 48)
    (rbody           rigid-body-control :inline :offset-assert 128)
+;; DEAD: intermediate work structure
    )
   :method-count-assert 9
   :size-assert         #x1b0
@@ -49674,6 +49733,7 @@
 (deftype hack-line-sphere (structure)
   ((spheres uint8 2 :offset-assert 0)
    (prim    basic     :offset-assert 28)
+;; DEAD: intermediate work structure
    )
   :method-count-assert 9
   :size-assert         #x20
@@ -51366,6 +51426,7 @@
     (editable-array-method-13 () none) ;; 13 ;; (editable-array-method-13 () none)
     (editable-array-method-14 () none) ;; 14 ;; (editable-array-method-14 () none)
     (editable-array-method-15 () none) ;; 15 ;; (editable-array-method-15 () none)
+;; DEAD: editor infrastructure
     (editable-array-method-16 () none) ;; 16 ;; (editable-array-method-16 () none)
     (editable-array-method-17 () none) ;; 17 ;; (editable-array-method-17 () none)
     (editable-array-method-18 () none) ;; 18 ;; (editable-array-method-18 () none)
@@ -51392,6 +51453,7 @@
   :method-count-assert 36
   :size-assert         #x30
   :flag-assert         #x2400000030
+;; DEAD: editor infrastructure
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type vector editable-region) _type_)
     )
@@ -51410,6 +51472,7 @@
   :method-count-assert 36
   :size-assert         #x30
   :flag-assert         #x2400000030
+;; DEAD: editor infrastructure
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type vector float editable-region) _type_)
     )
@@ -51425,6 +51488,7 @@
 #|
 (deftype editable-sample (editable-point)
   ()
+;; DEAD: editor infrastructure
   :method-count-assert 36
   :size-assert         #x30
   :flag-assert         #x2400000030
@@ -51456,6 +51520,7 @@
   :method-count-assert 36
   :size-assert         #x74
   :flag-assert         #x2400000074
+;; DEAD: editor infrastructure
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type vector float editable-region) _type_)
     )
@@ -51475,6 +51540,7 @@
    )
   :method-count-assert 37
   :size-assert         #x44
+;; DEAD: editor infrastructure
   :flag-assert         #x2500000044
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type vector float editable-region) _type_)
@@ -51502,6 +51568,7 @@
    (UNKNOWN UNKNOWN                 :offset-assert -1) ;; field could not be read.
    )
   :method-count-assert 38
+;; DEAD: editor infrastructure
   :size-assert         #x58
   :flag-assert         #x2600000058
   (:methods
@@ -54257,6 +54324,7 @@
 
 
 (deftype training-info (structure)
+;; DEAD: network infrastructure
   ((goal-count int8    :offset-assert 0)
    (goals      uint32  :offset-assert 4)
    )
@@ -56692,6 +56760,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; DEAD: UI/menu infrastructure
   
 (deftype scrolling-task-item (scrolling-item)
   ()
@@ -56708,6 +56777,7 @@
 (deftype scrolling-task-menu (scrolling-menu)
   ((task-ct  int32      :offset-assert 616)
    (task-ids uint8 32 :offset-assert 620)
+;; DEAD: UI/menu infrastructure
    )
   :method-count-assert 77
   :size-assert         #x28c
@@ -57779,6 +57849,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; DEAD: UI/menu infrastructure
   
 (deftype scrolling-netconfig-item (scrolling-item)
   ()
@@ -57823,6 +57894,7 @@
 
 
   
+;; DEAD: editor infrastructure
 (deftype edit-account-selection-manager (selection-menu-manager)
   ()
   :method-count-assert 67
@@ -58343,6 +58415,7 @@
 (define-extern *locked-msg-index* object)
 (define-extern *scene-type* object)
 (define-extern player-finished-adventure-mode? (function none))
+;; DEAD: UI/menu infrastructure
 (define-extern *last-secret-selected* object)
 (define-extern *last-scene-selected* object)
 (define-extern *secrets-menu-info* object)
@@ -58804,6 +58877,7 @@
   :method-count-assert 9
   :size-assert         #x0
   :flag-assert         #x900000000
+;; DEAD: disabled joint-mod-head
   )
 
 ;; scene-player stub superseded by full definition at L28907
