@@ -29256,28 +29256,25 @@
   )
 
 
-#|
 (deftype impact-control (structure)
   ((process      (pointer process-drawable)         :offset-assert 0) ;; guessed by decompiler
-   (radius       meters                             :offset-assert 4)
+   (radius       meters                             :offset-assert 4) ;; float
    (joint        int32                              :offset-assert 8)
    (collide-with collide-spec                       :offset-assert 12) ;; guessed by decompiler
-   (start-time   uint64                             :offset-assert 16)
-   (trans        vector                     2       :offset-assert 32) ;; guessed by decompiler
-   (UNKNOWN      UNKNOWN                            :offset-assert -1) ;; field could not be read.
+   (start-time   uint64                             :offset-assert 16) ;; time-frame
+   (trans        vector                     2 :inline :offset-assert 32) ;; guessed by decompiler
    (dir          vector                     :inline :offset-assert 64)
    )
   :method-count-assert 12
   :size-assert         #x50
   :flag-assert         #xc00000050
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type process-drawable int float collide-spec) _type_)
+    (new (symbol type process-drawable int float collide-spec) _type_) ;; 0
     (impact-control-method-9 (_type_ process-drawable int float collide-spec) impact-control) ;; 9
     (impact-control-method-10 (_type_) none) ;; 10
     (impact-control-method-11 (_type_ collide-query process pat-surface) float) ;; 11
     )
   )
-|#
 
 
 
@@ -59095,7 +59092,7 @@
 ;; (define-extern net-process-mgr type)  ;; clobbers active deftype at earlier line
 ;; (define-extern vehicle-reticle-on-me type)  ;; clobbers active deftype at earlier line
 (define-extern medius-game-array type)
-(define-extern impact-control type)
+;; (define-extern impact-control type) ;; clobbers active deftype
 ;; (define-extern background-work type)  ;; clobbers active deftype at earlier line
 (define-extern editable-point type)
 
