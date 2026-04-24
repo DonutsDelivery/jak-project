@@ -38554,37 +38554,37 @@
 (define-extern cam-slave-options->string (function cam-slave-options object string))
 (define-extern cam-index-options->string (function cam-index-options object string))
 (define-extern slave-los-state->string (function slave-los-state string))
-(define-extern cam-line-dma (function pointer))
-(define-extern camera-line2d (function vector4w vector4w pointer))
+(define-extern cam-line-dma (function none))
+(define-extern camera-line2d (function none))
 (define-extern camera-plot-float-func (function float float float float (function float float) vector4w none))
 (define-extern camera-line-setup (function vector4w none))
 (define-extern camera-line-draw (function vector vector none))
 (define-extern camera-line (function vector vector vector4w none))
 (define-extern camera-line-rel (function vector vector vector4w none))
 (define-extern camera-line-rel-len (function vector vector float vector4w none))
-(define-extern camera-sphere (function vector float vector4w none))
+(define-extern camera-sphere (function none))
 (define-extern camera-cross (function vector vector vector vector4w meters none))
-(define-extern camera-bounding-box-draw (function bounding-box basic rgba none))
+(define-extern camera-bounding-box-draw (function none))
 (define-extern *cam-debug-los-tri-current* object)
 (define-extern *cam-debug-los-tri* object)
 (define-extern *cam-debug-coll-tri-current* object)
 (define-extern *cam-debug-coll-tri* object)
 (define-extern cam-debug-reset-coll-tri (function none))
 (define-extern cam-debug-add-los-tri (function (inline-array collide-cache-tri) vector vector none))
-(define-extern cam-debug-add-coll-tri (function cam-debug-tri vector cam-debug-tri none))
-(define-extern cam-debug-draw-tris (function symbol))
-(define-extern camera-fov-draw (function int int vector float float vector4w none))
+(define-extern cam-debug-add-coll-tri (function none))
+(define-extern cam-debug-draw-tris (function none))
+(define-extern camera-fov-draw (function none))
 (define-extern camera-fov-frame (function matrix vector float float float vector4w symbol))
-(define-extern debug-euler (function cam-dbg-scratch object))
-(define-extern bike-cam-limit (function float float))
+(define-extern debug-euler (function none))
+(define-extern bike-cam-limit (function none))
 (define-extern camera-slave-debug (function camera-slave none))
-(define-extern master-draw-coordinates (function vector none))
+(define-extern master-draw-coordinates (function none))
 (define-extern *cam-collision-record-first* object)
 (define-extern *cam-collision-record-last* object)
 (define-extern *cam-collision-record-show* object)
 (define-extern *cam-collision-record* object)
 (define-extern cam-collision-record-save (function vector vector int symbol camera-slave none))
-(define-extern cam-collision-record-step (function int none))
+(define-extern cam-collision-record-step (function none))
 (define-extern cam-collision-record-draw (function none))
 (define-extern camera-master-debug (function camera-master none))
 (define-extern debug-set-camera-pos-rot! (function vector matrix vector))
@@ -40604,16 +40604,16 @@
 (define-extern line-in-view-frustum-any? (function none))
 (define-extern find-nearest-camera-distance (function none))
 (define-extern vis-cull (function int symbol))
-(define-extern vis-cull-debug (function work-area int symbol)) ;; (function work-area int symbol) -- work-area type not live
+(define-extern vis-cull-debug (function none))
 (define-extern error-sphere (function drawable-error string int)) 
 (define-extern *edit-instance* string)
 (define-extern *instance-mem-usage* memory-usage-block)
 (define-extern find-instance-by-name-level (function none)) ;; prototype-bucket not live
 (define-extern find-instance-by-name (function none)) ;; prototype-bucket not live
 (define-extern prototypes-game-visible-set! (function pair symbol level int))
-(define-extern find-instance-by-index (function type int bsp-header prototype-bucket)) ;; prototype-bucket not live
-(define-extern prototype-bucket-type (function prototype-bucket type)) ;; prototype-bucket not live
-(define-extern prototype-bucket-recalc-fields (function prototype-bucket prototype-bucket)) ;; prototype-bucket not live
+(define-extern find-instance-by-index (function none))
+(define-extern prototype-bucket-type (function none))
+(define-extern prototype-bucket-recalc-fields (function none))
 (define-extern print-prototype-intersection-list (function none))
 (define-extern print-prototype-list (function none))
 (define-extern draw-instance-info (function string none))
@@ -40622,9 +40622,9 @@
 (define-extern teleport-camera-by-name (function string none))
 (define-extern teleport-camera-by-pos (function float float float none))
 (define-extern calc-vu1-shadow (function none)) ;; draw-control not live
-(define-extern calc-shadow-masks (function light-group draw-control uint none)) ;; draw-control not live
-(define-extern calc-realtime-lights (function light-group draw-control uint none)) ;; draw-control not live
-(define-extern calc-vu1-lights (function vu-lights draw-control symbol none)) ;; draw-control not live
+(define-extern calc-shadow-masks (function none))
+(define-extern calc-realtime-lights (function none))
+(define-extern calc-vu1-lights (function none))
 (define-extern calc-particle-average-color (function none))
 (define-extern calc-particle-directional-color (function none))
 (define-extern real-dma-add-process-drawable (function none))
@@ -51678,9 +51678,9 @@
 ;; editable                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern common-owner (function editable editable object))
+(define-extern common-owner (function none))
 (define-extern update-light-sphere-from-editable-light (function none)) ;; editable-light deftype is block-commented; revert P9 backport
-(define-extern load-editable-lights (function editable-array symbol))
+(define-extern load-editable-lights (function none))
 (define-extern *editable-sample-region* object)
 (define-extern *editable-light-region* object)
 (define-extern *editable-entity-region* object)
@@ -51689,32 +51689,32 @@
 ;; editable-player                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern cleanup-selection (function editable-array object))
-(define-extern insert-box (function editable-array vector vector object))
-(define-extern insert-wall (function editable-array vector vector object))
-(define-extern update-manipulator-position (function editable-array manipulator matrix))
-(define-extern execute-select (function editable-array editable-command mouse-info manipulator symbol))
-(define-extern execute-mouse-move (function editable-array editable-command mouse-info manipulator symbol))
-(define-extern execute-move (function editable-array editable-command mouse-info manipulator symbol))
-(define-extern get-light-value (function uint float))
-(define-extern set-light-value (function int float object))
+(define-extern cleanup-selection (function none))
+(define-extern insert-box (function none))
+(define-extern insert-wall (function none))
+(define-extern update-manipulator-position (function none))
+(define-extern execute-select (function none))
+(define-extern execute-mouse-move (function none))
+(define-extern execute-move (function none))
+(define-extern get-light-value (function none))
+(define-extern set-light-value (function none))
 (define-extern keybd-set-time-of-day! (function none)) ;; time-of-day-palette-id undefined in jakx; revert P9 backport
 (define-extern lookup-bsp-by-name (function none))
 (define-extern editable-player-init (function none)) ;; (function symbol none :behavior editable-player)
-(define-extern set-editable-name (function string object))
-(define-extern select-editable-by-name (function string object))
+(define-extern set-editable-name (function none))
+(define-extern select-editable-by-name (function none))
 (define-extern *editable-menu-context* debug-menu-context) ;; debug-menu-context
-(define-extern editable-menu-command (function int object))
-(define-extern editable-menu-command-no-close (function int object))
-(define-extern dm-region-tree-pick-func (function symbol debug-menu-msg symbol))
-(define-extern dm-editable-flag-pick-func (function editable-flag debug-menu-msg symbol))
-(define-extern dm-editable-filter0-pick-func (function editable-filter debug-menu-msg symbol))
-(define-extern dm-editable-filter1-pick-func (function editable-filter debug-menu-msg symbol))
-(define-extern dm-editable-light-float-func (function int debug-menu-msg float float float))
-(define-extern dm-cam-externalize2 (function symbol debug-menu-msg symbol))
-(define-extern dm-editable-boolean-toggle-pick-func (function int debug-menu-msg symbol))
-(define-extern editable-menu-context-make-menus (function debug-menu-context debug-menu-context))
-(define-extern insert-sample-camera (function symbol object))
+(define-extern editable-menu-command (function none))
+(define-extern editable-menu-command-no-close (function none))
+(define-extern dm-region-tree-pick-func (function none))
+(define-extern dm-editable-flag-pick-func (function none))
+(define-extern dm-editable-filter0-pick-func (function none))
+(define-extern dm-editable-filter1-pick-func (function none))
+(define-extern dm-editable-light-float-func (function none))
+(define-extern dm-cam-externalize2 (function none))
+(define-extern dm-editable-boolean-toggle-pick-func (function none))
+(define-extern editable-menu-context-make-menus (function none))
+(define-extern insert-sample-camera (function none))
 (define-extern *debug-hook* pair)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -52033,20 +52033,20 @@
 
 
 (define-extern *nav-graph-editor* object) ;; (pointer nav-graph-editor)
-(define-extern get-node-draw-position (function vector mysql-nav-node vector))
-(define-extern nav-graph-editor-init-by-other (function string symbol object :behavior nav-graph-editor))
+(define-extern get-node-draw-position (function none))
+(define-extern nav-graph-editor-init-by-other (function none))
 (define-extern run-nav-graph-editor (function symbol (pointer process)))
 (define-extern get-nav-graph-editor (function none)) ;; (function nav-graph-editor)
 (define-extern exit-nav-graph-editor (function none))
-(define-extern nav-graph-set-level (function symbol object))
+(define-extern nav-graph-set-level (function none))
 (define-extern set-minimap-edge-flag (function none)) ;; nav-minimap-edge-flag undefined in jakx; revert P9 backport
-(define-extern set-vehicle-edit-mode (function symbol none))
-(define-extern translate-nav-graph (function float float float symbol))
-(define-extern update-nav-meshes (function symbol))
-(define-extern delete-node-nav-mesh (function int none))
-(define-extern smooth-nav-graph (function string symbol))
-(define-extern update-height (function string symbol))
-(define-extern update-width (function string symbol))
+(define-extern set-vehicle-edit-mode (function none))
+(define-extern translate-nav-graph (function none))
+(define-extern update-nav-meshes (function none))
+(define-extern delete-node-nav-mesh (function none))
+(define-extern smooth-nav-graph (function none))
+(define-extern update-height (function none))
+(define-extern update-width (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; nav-mesh-editor-h              ;;
@@ -52266,29 +52266,29 @@
   )
 
 
-(define-extern snap-level-navmesh (function vector vector symbol))
-(define-extern mouse-intersect-triangle (function vector vector vector vector float))
+(define-extern snap-level-navmesh (function none))
+(define-extern mouse-intersect-triangle (function none))
 (define-extern *clean-vertex-array* object)
 (define-extern *clean-index-array* object)
 (define-extern poly-flag-to-string (function none)) ;; nav-mesh-poly-flag undefined in jakx; revert P9 backport
-(define-extern point-in-cone (function vector vector vector vector symbol))
-(define-extern segment-in-cone (function vector vector vector vector symbol))
-(define-extern point-in-triangle (function vector vector vector vector symbol))
-(define-extern segments-intersect (function vector vector vector vector symbol))
-(define-extern is-diagonal (function int (inline-array triangulation-vert) vector-array int int int symbol))
+(define-extern point-in-cone (function none))
+(define-extern segment-in-cone (function none))
+(define-extern point-in-triangle (function none))
+(define-extern segments-intersect (function none))
+(define-extern is-diagonal (function none))
 (define-extern *verts-buf-1* object)
 (define-extern *verts-buf-2* object)
-(define-extern draw-square-point (function vector object))
-(define-extern get-level-id (function string int))
-(define-extern nav-mesh-editor-new (function object))
-(define-extern nav-delete (function int object))
-(define-extern nav-mesh-editor-translate (function int float float float object))
-(define-extern nav-mesh-editor-rotate-y (function float object))
-(define-extern nav-mesh-editor-load (function string object))
-(define-extern nav-mesh-editor-set-level (function symbol object))
-(define-extern nav-set-lev (function string object))
+(define-extern draw-square-point (function none))
+(define-extern get-level-id (function none))
+(define-extern nav-mesh-editor-new (function none))
+(define-extern nav-delete (function none))
+(define-extern nav-mesh-editor-translate (function none))
+(define-extern nav-mesh-editor-rotate-y (function none))
+(define-extern nav-mesh-editor-load (function none))
+(define-extern nav-mesh-editor-set-level (function none))
+(define-extern nav-set-lev (function none))
 (define-extern nav-set-flag (function none)) ;; nav-mesh-poly-flag undefined in jakx; revert P9 backport
-(define-extern nav-mesh-editor-init (function symbol object :behavior nav-mesh-editor))
+(define-extern nav-mesh-editor-init (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sampler                        ;;
@@ -52473,9 +52473,9 @@
 
 
 (define-extern *visvol-edit-info* object)
-(define-extern visvol-editor-init-by-other (function handle object :behavior visvol-editor))
-(define-extern stop-visvol-edit (function object))
-(define-extern visvol-edit (function string object))
+(define-extern visvol-editor-init-by-other (function none))
+(define-extern stop-visvol-edit (function none))
+(define-extern visvol-edit (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; collision-editor               ;;
@@ -59506,8 +59506,8 @@
 (define-extern knet-lg-got-headset (function none))
 (define-extern knet-lg-set-playback (function none))
 (define-extern fmv-player-get-texture (function none))
-(define-extern mc-unformat (function int mc-status-code))
-(define-extern show-maya-skeleton (function process-drawable int int none))
+(define-extern mc-unformat (function none))
+(define-extern show-maya-skeleton (function none))
 ;;(define-extern light-trail-tracker object)
 ;; (define-extern lightning-new-tracker object) ;; clobbers active deftype
 ;; (define-extern lightning-spans-internal-array object) ;; clobbers active deftype
@@ -59554,8 +59554,8 @@
 ;; (define-extern bone-memory object) ;; clobbers active deftype
 ;;(define-extern cam-collision-record-array object)
 ;;(define-extern collision-editor object)
-(define-extern cty-attack-reset (function symbol symbol symbol none))
-(define-extern cty-faction-evaluate-commands (function pair object))
+(define-extern cty-attack-reset (function none))
+(define-extern cty-faction-evaluate-commands (function none))
 ;; (define-extern drawable-inline-array-collide-fragment object) ;; clobbers active deftype
 (define-extern editable-light object)
 (define-extern eznet-combination-list object)
@@ -59584,7 +59584,7 @@
 ;; (define-extern race-banner object) ;; clobbers active deftype
 ;;(define-extern race-mesh-slice object)
 ;; (define-extern ragdoll-proc object) ;; clobbers active deftype
-(define-extern setup-city-task-faction (function object))
+(define-extern setup-city-task-faction (function none))
 ;; (define-extern sky-upload-data object) ;; clobbers active deftype
 (define-extern sprite-aux-list object)
 ;; (define-extern sz-ipaddress object)  ;; clobbers active deftype
