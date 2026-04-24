@@ -14,10 +14,27 @@ VU-crash risk: functions with vsqi/viaddi/vlqi/viand opcodes will crash
 run_mips2c.  Only ripple.gc contains those in this build; those functions
 are skipped automatically.
 
+# REGRESSION GATE (applies to all bulk-edit applier scripts)
+#
+# Pattern enforced: before writing config changes, snapshot the current
+# "not converted" error count from status.md.  After writing and re-running
+# the decompiler (--check flag), compare.  If Δerr > 0, revert the file
+# and exit non-zero.  A positive Δerr means we made things WORSE — abort.
+#
+# Why count "not converted" specifically? It's the direct target for this
+# applier. Other error categories (unset register, load fail, etc.) are
+# orthogonal and may fluctuate independently of our edits.
+#
+# Propagate this pattern to every other applier that edits config jsoncs:
+#   - return_mismatch_apply.py: gate on WARN "Return type mismatch" count
+#   - inspect_to_type_casts.py: gate on "failed type prop" count
+# Same structure: snapshot → edit → re-run → compare → revert if positive.
+
 Usage:
     python3 scripts/jakx_watch/asm_func_apply.py --dry-run
     python3 scripts/jakx_watch/asm_func_apply.py --apply
     python3 scripts/jakx_watch/asm_func_apply.py --apply --batch-size 50
+    python3 scripts/jakx_watch/asm_func_apply.py --apply --check
 
 Options:
     --dry-run      Print candidates without modifying hacks.jsonc (default)
@@ -26,11 +43,14 @@ Options:
     --skip-asm     Skip functions already in asm_functions_by_name (more cautious)
     --only-asm     Only process functions already in asm_functions_by_name
     --decomp-out   Override decomp_out directory
+    --check        After applying, re-run the decompiler and gate on Δerr.
+                   If "not converted" count increases, revert hacks.jsonc and exit 1.
 """
 from __future__ import annotations
 
 import argparse
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -45,6 +65,34 @@ VU_CRASH_OPCODES = re.compile(r"\b(vsqi|viaddi|vlqi|viand|vmtirx)\b")
 RE_DEF_FUNCTION = re.compile(r"^;; definition for function ([\w<>!?:\-\+\*/=]+)")
 RE_DEF_METHOD = re.compile(r"^;; definition for method (\d+) of type ([\w<>!?:\-\+\*/=]+)")
 RE_NOT_CONVERTED = re.compile(r"^;; ERROR: function was not converted to expressions\.")
+
+
+STATUS_MD = ROOT / ".jakx_watch" / "status.md"
+RE_NOT_CONVERTED_COUNT = re.compile(
+    r"^\s*(\d+)\s+function was not converted to expressions\."
+)
+
+
+def read_not_converted_count() -> int | None:
+    """Parse the 'not converted' error count from status.md top-8 ERROR table."""
+    if not STATUS_MD.exists():
+        return None
+    for line in STATUS_MD.read_text().splitlines():
+        m = RE_NOT_CONVERTED_COUNT.match(line)
+        if m:
+            return int(m.group(1))
+    return None
+
+
+def run_scanner() -> int:
+    """Run scripts/jakx_watch/run.sh with JAKX_WATCH_FORCE=1 and return exit code."""
+    env = {**__import__("os").environ, "JAKX_WATCH_FORCE": "1", "JAKX_WATCH_WAIT": "1"}
+    result = subprocess.run(
+        ["bash", str(ROOT / "scripts" / "jakx_watch" / "run.sh")],
+        env=env,
+        cwd=ROOT,
+    )
+    return result.returncode
 
 
 def pick_decomp_dir(override: str | None) -> Path:
@@ -240,6 +288,9 @@ def main() -> int:
                         help="Only process functions already in asm_functions_by_name")
     parser.add_argument("--decomp-out", default=None,
                         help="Override decomp_out directory path")
+    parser.add_argument("--check", action="store_true",
+                        help="After applying, re-run the decompiler and gate on Δerr. "
+                             "If 'not converted' count increases, revert and exit 1.")
     args = parser.parse_args()
 
     if args.apply:
@@ -322,11 +373,46 @@ def main() -> int:
         return 0
 
     # Apply
+    baseline_count = read_not_converted_count() if args.check else None
+    if args.check and baseline_count is not None:
+        print(f"Regression gate: baseline 'not converted' = {baseline_count}")
+
     new_text = apply_to_hacks(hacks_text, new_entries)
     HACKS_JSONC.write_text(new_text)
     print()
     print(f"Written {len(new_entries)} new entries to {HACKS_JSONC.relative_to(ROOT)}")
-    print("Next: JAKX_WATCH_WAIT=1 bash scripts/jakx_watch/run.sh")
+
+    if not args.check:
+        print("Next: JAKX_WATCH_WAIT=1 bash scripts/jakx_watch/run.sh")
+        return 0
+
+    # Regression gate: re-run scanner and compare counts
+    print()
+    print("Running decompiler scanner for regression gate (this takes a few minutes)…")
+    rc = run_scanner()
+    if rc != 0:
+        print(f"WARNING: run.sh exited {rc} — regression gate result may be unreliable")
+
+    new_count = read_not_converted_count()
+    if new_count is None:
+        print("WARNING: Could not read updated 'not converted' count from status.md")
+        return 0
+
+    delta = new_count - (baseline_count or 0)
+    print(f"Regression gate: after = {new_count}  Δ = {delta:+d}")
+
+    if delta > 0:
+        # Revert the hacks.jsonc change
+        print()
+        print(f"REGRESSION DETECTED (+{delta} 'not converted'). Reverting hacks.jsonc.")
+        HACKS_JSONC.write_text(hacks_text)
+        print("hacks.jsonc restored to pre-apply state.")
+        print("Investigate which entries caused the regression, then retry with --batch-size.")
+        return 1
+
+    print(f"Gate PASSED (Δ = {delta:+d}). Changes are safe to commit.")
+    print(f"  git add {HACKS_JSONC.relative_to(ROOT)} && git commit -m "
+          f'"fix(jakx/hacks): mips2c-suppress not-converted fns (Δerr {delta:+d})"')
     return 0
 
 
