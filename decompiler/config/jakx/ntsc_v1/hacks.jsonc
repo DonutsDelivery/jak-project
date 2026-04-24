@@ -2374,7 +2374,16 @@
     // source: net-mgr-muis
     "muis-connect-callback",
     "muis-info-callback",
-    "muis-news-callback"
+    "muis-news-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-mgr
+    "net-mgr-default-handler",
+    // source: net-player
+    "(method 65 net-player)",
+    "(method 66 net-player)",
+    "net-player-default-handler",
+    // source: net-player-h
+    "net-player-init-remote"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
