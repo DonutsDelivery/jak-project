@@ -31,6 +31,8 @@
 
 (declare-type race-mesh basic)
 (declare-type nav-poly structure)
+(declare-type process-nettable process)
+(declare-type entity-info basic)
 
 (define-extern process-by-ename (function string process))
 (define-extern entity-by-name (function string entity))
@@ -38,6 +40,7 @@
 (define-extern reset-actors (function symbol none))
 (define-extern process-entity-status! (function process entity-perm-status symbol entity-perm-status))
 (define-extern process-drawable-from-entity! (function process-drawable entity-actor none))
+(define-extern entity-info-lookup (function type entity-info))
 (define-extern init-entity (function process entity-actor type none))
 (define-extern entity-by-type (function type entity-actor))
 (define-extern entity-actor-from-level-name (function symbol entity-actor))
@@ -124,6 +127,7 @@ in [[res-tag]]s (such as name, curve data, volume data, etc.)
 that gets accessed by the accompanying process."
   ((trans  vector  :inline)
    (aid    uint32)
+   (pad    uint32)
    )
   (:methods
     (birth! (_type_) _type_)

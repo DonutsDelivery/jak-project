@@ -649,6 +649,153 @@
   (none)
   )
 
+;; --- Entity birth system ports (entity.gc not yet ported) ---
+;; activate a process from BSP entity data and run its init-from-entity!
+;; ported from entity.gc:3990
+(defun init-entity ((arg0 process) (arg1 entity-actor) (arg2 type))
+  (activate arg0 *entity-pool* (the-as string (-> arg1 pad)) (the-as pointer #x70004000))
+  (set! (-> arg0 entity) arg1)
+  (set! (-> arg0 level) (-> arg1 extra level))
+  (set! (-> arg1 extra process) arg0)
+  (run-now-in-process arg0 (method-of-object arg0 init-from-entity!) arg0 arg1)
+  (none)
+  )
+
+;; base entity.birth! — just a debug-print stub (ported from entity.gc:325)
+(defmethod birth! ((this entity))
+  (format #t "birth ~A~%" this)
+  this
+  )
+
+;; entity-actor.birth! — ported from entity.gc:4000
+;; Looks up etype in *entity-info*, allocates from dead pool, and runs init-from-entity!.
+;; Falls back to birth-viewer for unknown types. Sets bit-0 on failure to suppress retries.
+(defmethod birth! ((this entity-actor))
+  (let ((s5-1 (-> this etype)))
+    ;; Guard: if etype is null skip this entity entirely (avoids null-deref in type-type?).
+    (when (zero? (the-as int s5-1))
+      (format 0 "[birth!] entity aid=#x~X has null etype — skipping~%" (-> this aid))
+      (logior! (-> this extra perm status) (entity-perm-status bit-0))
+      (goto cfg-21))
+    ;; Prevent process-nettable types with method 40 from auto-spawning.
+    (when (not (logtest? (-> this extra kill-mask) (task-mask never)))
+      (when (and (type-type? s5-1 process-nettable) (nonzero? (-> s5-1 method-table 40)))
+        (format 0 "WARNING: preventing ~A from auto-spawning~%" this)
+        (logior! (-> this extra kill-mask) (task-mask never))
+        (set! this (the-as entity-actor #f))
+        (goto cfg-21)))
+    (let* ((v1-11 (entity-info-lookup s5-1))
+           (s4-0 (get-process
+                   *default-dead-pool*
+                   s5-1
+                   (if v1-11 (-> v1-11 heap-size) #x4000)
+                   0)))
+      (cond
+        ((not s4-0)
+         (format 0 "[birth!] no process slot for etype ~A~%" s5-1))
+        ((begin
+           (set! (-> s4-0 type) s5-1)
+           (and s5-1
+                (valid? s5-1 type (the-as string #f) #f 0)
+                (valid? (method-of-object s4-0 init-from-entity!) function (the-as string #f) #f 0)))
+         (init-entity s4-0 this s5-1))
+        (else
+          (when (not (birth-viewer s4-0 this))
+            (format 0 "[birth!] no init-from-entity! for type ~A on entity ~A~%" s5-1 this)
+            (logior! (-> this extra perm status) (entity-perm-status bit-0)))))))
+  (label cfg-21)
+  this
+  )
+
+;; entity.kill! — ported from entity.gc:331
+(defmethod kill! ((this entity))
+  (format #t "kill ~A~%" this)
+  this
+  )
+
+;; Called by entity-actor.kill! when the entity's process has already died.
+;; Clears error/no-kill flags and nulls the process pointer.
+;; ported from entity.gc:4048
+(defun entity-deactivate-handler ((arg0 process) (arg1 entity-actor))
+  (when (= arg0 (-> arg1 extra process))
+    (logclear! (-> arg1 extra perm status) (entity-perm-status error no-kill))
+    (set! (-> arg1 extra process) #f)
+    )
+  (none)
+  )
+
+;; entity-actor.kill! — ported from entity.gc:4058
+(defmethod kill! ((this entity-actor))
+  (let ((a0-1 (-> this extra process)))
+    (if a0-1
+        (deactivate a0-1)
+        (entity-deactivate-handler a0-1 this)
+        )
+    )
+  this
+  )
+
+;; Minimal port of jak3 entity.gc:1652 bsp-header.birth method.
+;; Just the essential work:
+;;   (1) allocate the level's entity-links-array if empty
+;;   (2) populate it by inlining jak3's add-to-level! logic from bsp.actors
+;; add-to-level! is declared in the entity deftype but never defmethod'd in jakx
+;; entity.gc (not yet ported), so calling it would invoke a null slot → SEGFAULT.
+;; Skips the camera birth loop and actor-groups init (which touch *camera*/*target*).
+(defun bsp-init-actors! ((bsp bsp-header))
+  (let* ((lev (-> bsp level))
+         (lgrp *level*)
+         (actor-count (if (nonzero? (-> bsp actors))
+                          (-> bsp actors length)
+                          0)))
+    (format 0 "[bsp-init-actors!] level=~A actor-count=~D~%" (-> lev name) actor-count)
+    (cond
+      ((not (-> lev entity))
+       (let ((saved-loading-level loading-level))
+         (set! loading-level (-> lev heap))
+         (set! (-> lev entity) (new 'loading-level 'entity-links-array actor-count))
+         (set! loading-level saved-loading-level)))
+      ((< (-> lev entity allocated-length) actor-count)
+       (format 0 "[bsp-init-actors!] ERROR: entity table too small (~D < ~D)~%"
+               (-> lev entity allocated-length) actor-count)))
+    (set! (-> lev entity length) 0)
+    (set! (-> lgrp entity-link) #f)
+    (when (nonzero? (-> bsp actors))
+      (dotimes (i (-> bsp actors length))
+        (let* ((idx (if (nonzero? (-> bsp actor-birth-order))
+                        (logand (-> bsp actor-birth-order i) 8191)
+                        i))
+               (actor (-> bsp actors data idx actor))
+               ;; Grab the next empty slot from the entity-links-array.
+               ;; This is inlined from jak3 add-to-level! (entity.gc:663) —
+               ;; that method is declared but not defmethod'd in jakx yet.
+               (slot (-> lev entity data (-> lev entity length))))
+          (+! (-> lev entity length) 1)
+          (set! (-> slot process) #f)
+          (set! (-> slot entity) actor)
+          (set! (-> actor extra) slot)
+          ;; Insert slot into level-group's entity-link circular list.
+          (cond
+            ((-> lgrp entity-link)
+             (let* ((head (-> lgrp entity-link))
+                    (nxt (-> head next-link)))
+               (set! (-> head next-link) slot)
+               (set! (-> slot prev-link) head)
+               (set! (-> slot next-link) nxt)
+               (set! (-> nxt prev-link) slot)))
+            (else
+              (set! (-> slot prev-link) slot)
+              (set! (-> slot next-link) slot)))
+          (set! (-> lgrp entity-link) slot)
+          (vector-copy! (-> slot trans) (-> actor trans))
+          (set! (-> slot perm aid) (the-as actor-id (-> actor aid)))
+          (set! (-> slot level) lev)
+          (when (zero? (mod i 50))
+            (format 0 "[bsp-init-actors!] actor ~D/~D idx=~D aid=#x~X etype=~A~%"
+                    i (-> bsp actors length) idx (-> actor aid) (-> actor etype))))))
+    (format 0 "[bsp-init-actors!] entity-links populated len=~D~%" (-> lev entity length)))
+  (none))
+
 ;; --- Ports from jak3 collide-shape.gc (for target-init! bringup) ---
 
 (defun cshape-reaction-default ((arg0 control-info) (arg1 collide-query) (arg2 vector) (arg3 vector))

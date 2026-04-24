@@ -66,7 +66,7 @@
                 (let ((lnk (-> ent-arr data j)))
                   (when (and (-> lnk entity)
                              (not (-> lnk process))
-                             (not (logtest? (-> lnk perm status) (entity-perm-status dead))))
+                             (not (logtest? (-> lnk perm status) (entity-perm-status dead bit-0))))
                     (birth! (-> lnk entity))
                     )
                   )

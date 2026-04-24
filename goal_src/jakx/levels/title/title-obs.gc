@@ -113,6 +113,11 @@
             (set! (-> (the-as (pointer int128) (&+ (-> atoll-slot vis-bits) (* vis-i 16)))) (the int128 -1))
             )
           (format 0 "[title-obs] atoll activated status=~A render?=~A~%" (-> atoll-slot status) (-> atoll-slot render?))
+          ;; Populate the level's entity-links-array from bsp.actors.
+          ;; Normally jak3 does this inside bsp-header.birth during the 'loaded → 'alive
+          ;; transition (level.gc:2135), but we skip that path here. Without this, the
+          ;; level.entity field stays #f and actors-update has nothing to birth.
+          (bsp-init-actors! (-> atoll-slot bsp))
           )
         ;; Camera: 150m up, 300m ahead in +Z (over mid-track), 60° pitch down.
         ;; 1m = 4096 units. 150m=614400, 300m=1228800.
