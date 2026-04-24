@@ -38447,9 +38447,8 @@
 
 
 
-#|
 (deftype cam-debug-tri (structure)
-  ((vertex uint8 3 :offset-assert 0)
+  ((vertex    vector 3 :inline :offset-assert 0) ;; guessed by decompiler
    (intersect vector   :inline :offset-assert 48)
    (color     vector4w         :offset-assert 64)
    )
@@ -38457,7 +38456,6 @@
   :size-assert         #x44
   :flag-assert         #x900000044
   )
-|#
 
 
 
@@ -49604,7 +49602,6 @@
 
   
 
-#|
 (deftype debug-rigid-body-move (structure)
   ((vel-dot-norm    float                      :offset-assert 0)
    (time-step-scale float                      :offset-assert 4)
@@ -49618,10 +49615,9 @@
    (rbody           rigid-body-control :inline :offset-assert 128)
    )
   :method-count-assert 9
-  :size-assert         #x1b4
-  :flag-assert         #x9000001b4
+  :size-assert         #x1b0
+  :flag-assert         #x9000001b0
   )
-|#
 
   
 
@@ -59175,7 +59171,7 @@
 ;; (define-extern construction-object object) ;; clobbers active deftype
 ;; (define-extern daxter object) ;; clobbers active deftype
 ;; (define-extern debris-group object) ;; clobbers active deftype
-(define-extern debug-rigid-body-move object)
+;; (define-extern debug-rigid-body-move object) ;; clobbers active deftype
 ;; (define-extern disc-error-proc object) ;; activated as deftype
 ;; (define-extern dma-test object) ;; clobbers active deftype
 ;; (define-extern drawable-tree-collide-fragment object) ;; clobbers active deftype
@@ -59408,7 +59404,7 @@
 (define-extern birth-pickup-at-point object)
 ;; (define-extern bone-work object) ;; clobbers active deftype
 ;;(define-extern breadcrumb-array object)
-(define-extern cam-debug-tri object)
+;; (define-extern cam-debug-tri object) ;; clobbers active deftype
 ;; (define-extern collide-fragment object) ;; clobbers active deftype
 ;;(define-extern collision-cylinder-array object)
 (define-extern editable-sample object)
