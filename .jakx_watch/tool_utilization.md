@@ -40,7 +40,7 @@ Lets sessions see at a glance which tools have active consumers and which queues
 
 | Tool | Status | Output | Notes |
 |---|---|---|---|
-| `label_types_copy_scan.py` | **IDLE** | `label_types_copy_queue.md` (**142 confirmed copy-ports from jak3**) | No active consumer. Haiku-shape work. Route next idle haiku. |
+| `label_types_copy_scan.py` | **IDLE + CAVEAT** | `label_types_copy_queue.md` (**142 confirmed copy-ports from jak3**) | ⚠️ "Confirmed" means the LABEL exists in jakx binary — NOT that the referenced TYPE is active in all-types.gc. Before copying each entry, grep the type against all-types.gc. Skip rows where the type sits inside a `#\| \|#` block. See gotchas #20 (14b308c3e → ea5b1d8a4 incident). |
 | `mips2c_candidate_scan.py` | **IDLE** | `mips2c_candidates.md` (1 real: draw-string-asm) | Detection works; gap-to-jak3 is 2 fns; low priority |
 | `mips2c_candidates.py` | **IDLE** | `mips2c_queue.md` (0 actionable) | Correct behavior — no split-failed blockers reference jakx |
 | `ref_drift_scan.py` | **IDLE** | `ref_drift_queue.md` (**11 real regressions + 1 stale_ref + 16 changed**) | `mood-tables2` -358 lines worst; most regressions are stale REFs — `seed_refs.py --force` clears them |
