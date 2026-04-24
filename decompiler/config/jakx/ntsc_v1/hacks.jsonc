@@ -2205,7 +2205,14 @@
     "(method 69 net-game-mgr)",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: net-game-mgr
-    "(method 46 net-game-mgr)"
+    "(method 46 net-game-mgr)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-game-mgr
+    "(method 57 net-game-mgr)",
+    "(method 60 net-game-mgr)",
+    "(method 61 net-game-mgr)",
+    "late-join-spawn-players",
+    "net-game-mgr-init-local"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
