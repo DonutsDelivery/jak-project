@@ -40284,14 +40284,17 @@
 
 
 
-#|
-(deftype rigid-body-object-extra-info (UNKNOWN)
-  ()
-  :method-count-assert 0
-  :size-assert         #x0
-  :flag-assert         #x0
+(deftype rigid-body-object-extra-info (structure)
+  ((max-time-step      float  :offset-assert 0)
+   (gravity            meters :offset-assert 4)
+   (idle-distance      meters :offset-assert 8)
+   (attack-force-scale float  :offset-assert 12)
+   )
+  :pack-me
+  :method-count-assert 9
+  :size-assert         #x10
+  :flag-assert         #x900000010
   )
-|#
 
 
 (define-extern get-penetrate-using-from-attack-event (function process-drawable event-message-block penetrate))
@@ -59102,7 +59105,7 @@
 ;; (define-extern race-line-get-points type)  ;; clobbers active deftype at earlier line
 ;; (define-extern received-chat-msg type)  ;; clobbers active deftype at earlier line
 ;; (define-extern red-sentry-bot type)  ;; clobbers active deftype at earlier line
-(define-extern rigid-body-object-extra-info type)
+;; (define-extern rigid-body-object-extra-info type) ;; clobbers active deftype
 ;; (define-extern rigid-body-queue-manager type) ;; clobbers active deftype
 (define-extern rigid-body-surface type)
 ;; (define-extern sce-stat type) ;; clobbers active deftype
