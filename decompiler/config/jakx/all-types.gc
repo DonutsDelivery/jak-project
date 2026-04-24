@@ -59255,7 +59255,7 @@
 ;; (define-extern net-latency-metrics-params object)  ;; clobbers active deftype
 ;; (define-extern net-update-conn-errors object)  ;; clobbers active deftype
 ;; (define-extern ocean-trans-strip-array object) ;; clobbers active deftype
-(define-extern part-tracker-init-params object)
+;; (define-extern part-tracker-init-params object) ;; clobbers active deftype
 ;; (define-extern part-tracker-subsampler object) ;; clobbers active deftype
 ;; (define-extern perf-stat-array object) ;; clobbers active deftype
 ;; (define-extern power-slide-hud-single object) ;; clobbers active deftype
