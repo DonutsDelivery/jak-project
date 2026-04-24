@@ -53423,14 +53423,12 @@
 
   
 
-#|
 (deftype success-seeker-2 (success-seeker)
   ()
   :method-count-assert 84
   :size-assert         #x248
   :flag-assert         #x5401c00248
   )
-|#
 
   
 
@@ -53438,7 +53436,6 @@
 
   
 
-#|
 (deftype turbodash-seeker (seeker)
   ((trail-tracker uint64  :offset-assert 368)
    (target-id     int8    :offset-assert 376)
@@ -53456,7 +53453,6 @@
     die ;; 51
     )
   )
-|#
 
   
 
@@ -56808,16 +56804,14 @@
 
 
 
-#|
 (deftype menumap-states (structure)
-  ((current-values uint8 5 :offset-assert 0)
-   (target-values uint8 5 :offset-assert 20)
+  ((current-values float 5 :offset-assert 0)
+   (target-values  float 5 :offset-assert 20)
    )
   :method-count-assert 9
   :size-assert         #x28
   :flag-assert         #x900000028
   )
-|#
 
 
 
