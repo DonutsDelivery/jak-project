@@ -12,7 +12,7 @@ _last updated: 2026-04-24T01:25Z by PAIR3-B after boot-path audit_
 | 5 | vehicle-manager.gc | 3-line stub — vehicle spawning unimplemented | IN PROGRESS | PAIR1-A | claimed 01:35Z — auditing decomp output to identify type_prop blockers |
 | 6 | driver.gc + driver-*.gc | 3-line stubs — no driver behavior | IN PROGRESS | PAIR2-A | claimed — auditing decomp output for driver.gc + driver-jak.gc type_prop blockers |
 | 7 | draw pipeline / foreground-initialize-engines | Crashes when foreground-initialize-engines is called (bisect underway) | DONE @ 9716a6bfe | PAIR1-A | Bisect resolved: crash was update-time-of-day (calls clear-mood-times), not foreground-initialize-engines. Removed update-time-of-day from hook; full pipeline now stable |
-| 8 | sky texture missing | atoll level-flags has no 'sky flag → sky GOAL code is no-op; C++ renderer uses random texture | TODO | PAIR3-B | Add (level-flags sky) to atoll level-info; verify texture page available |
+| 8 | sky texture missing | atoll level-flags has no 'sky flag → sky GOAL code is no-op; C++ renderer uses random texture | IN PROGRESS | PAIR3-B | claimed — adding (level-flags sky display-wait ocean-near-translucent) to atoll level-info |
 | 9 | ripple-globals size-assert | rc=134 type error blocking decomp (FIXED) | DONE @ this session | PAIR3-B | Added :pack-me to ripple-request + :inline to ripple-globals.requests |
 
 ## Completed
