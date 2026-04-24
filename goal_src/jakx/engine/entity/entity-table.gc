@@ -49,6 +49,33 @@
           )
   )
 
-
-
-
+;; Minimal actors-update for level-group. The method slot was never defmethod'd
+;; in jakx, leaving it null → crash when called from main-draw-hook.
+;; This port iterates active levels' entity-links-array and calls birth! for
+;; any unborn entity. Matches jak3 entity.gc:2120 structure, stripped of
+;; dead-pool compaction, actor-hash, and birth-distance management (all require
+;; *ACTOR-bank* / camera code not yet wired in jakx bringup).
+(defmethod actors-update ((this level-group))
+  (when *spawn-actors*
+    (dotimes (i (-> this length))
+      (let ((lev (-> this level i)))
+        (when (= (-> lev status) 'active)
+          (let ((ent-arr (-> lev entity)))
+            (when ent-arr
+              (dotimes (j (-> ent-arr length))
+                (let ((lnk (-> ent-arr data j)))
+                  (when (and (-> lnk entity)
+                             (not (-> lnk process))
+                             (not (logtest? (-> lnk perm status) (entity-perm-status dead))))
+                    (birth! (-> lnk entity))
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  (none)
+  )
