@@ -2236,7 +2236,14 @@
     "net-game-mgr-deathmatch-init-remote",
     "net-player-assassin-init-remote",
     "net-player-deathmatch-init-remote",
-    "net-player-deathrace-init-remote"
+    "net-player-deathrace-init-remote",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-game-modes-h
+    "net-game-mgr-deathrace-init-remote",
+    "net-game-mgr-football-init-remote",
+    "net-player-football-init-remote",
+    "powercell-dispenser-draw-init-remote",
+    "powercell-dispenser-init-remote"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
