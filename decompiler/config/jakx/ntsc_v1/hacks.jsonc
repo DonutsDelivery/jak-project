@@ -2219,7 +2219,17 @@
     "(method 56 net-player-deathmatch)",
     "(method 64 net-game-mgr-deathmatch)",
     "(method 96 net-player-deathmatch)",
-    "(method 99 net-player-deathmatch)"
+    "(method 99 net-player-deathmatch)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-deathmatch
+    "(method 91 net-player-deathmatch)",
+    // source: net-eco-h
+    "eco-mgr-init-remote",
+    // source: net-game-mgr
+    "(method 62 net-player)",
+    // source: net-game-mgr-h
+    "current-finish-mode",
+    "net-game-mgr-init-remote"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
