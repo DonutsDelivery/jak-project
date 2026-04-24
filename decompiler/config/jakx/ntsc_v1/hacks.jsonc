@@ -2107,7 +2107,14 @@
     "(method 36 net-enemy)",
     "(method 62 net-enemy)",
     // source: net-enemy-h
-    "net-enemy-init-remote"
+    "net-enemy-init-remote",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: mysql-nav-graph
+    "(method 18 mysql-nav-graph)",
+    // source: nav-control
+    "(method 16 nav-control)",
+    "(method 21 nav-control)",
+    "(method 44 nav-control)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
