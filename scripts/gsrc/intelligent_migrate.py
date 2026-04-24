@@ -893,6 +893,17 @@ def merge_files(hp_text: str, dc_text: str, verbose: bool = False) -> Tuple[str,
     # Pass 2: collect decomp-only forms. Append them at the END (simplest
     # correct choice; could be made smarter but for the test cases this is
     # enough — ambient-h and joint-h don't add net-new forms from decomp).
+    #
+    # Defmethod "append risk" guard: if the hand-port defines a NAMED method
+    # on type T and decomp produces a generic `T-method-N` defmethod on the
+    # same type, we must NOT append — it's a rename of an already-handled
+    # slot. Build a set of (type_name) -> True if that type has any named
+    # method in the hand-port; use it to veto decomp-only generic defmethods.
+    handport_types_with_named_methods = set()
+    for hp in hp_forms:
+        if hp.kind == "defmethod" and not is_generic_method_name(hp.symbol):
+            handport_types_with_named_methods.add(hp.qualifier)
+
     decomp_only_appended: List[Form] = []
     for dc in dc_forms:
         if dc.key not in hp_keys:
@@ -902,6 +913,16 @@ def merge_files(hp_text: str, dc_text: str, verbose: bool = False) -> Tuple[str,
             if dc.kind == "defmethod" and dc.symbol == "inspect":
                 decisions.append(MergeDecision(dc.key, "skipped",
                                                "defmethod inspect from decomp-only: skipped"))
+                continue
+            # Append-risk guard: decomp-only generic defmethod against a type
+            # whose methods are already hand-named in hand-port. Suppress.
+            if (dc.kind == "defmethod"
+                and is_generic_method_name(dc.symbol)
+                and dc.qualifier in handport_types_with_named_methods):
+                decisions.append(MergeDecision(
+                    dc.key, "skipped",
+                    f"defmethod {dc.symbol}: generic-named, hand-port has "
+                    f"named methods on {dc.qualifier} — append suppressed"))
                 continue
             decisions.append(MergeDecision(dc.key, "decomp",
                                            f"{dc.kind} {dc.symbol}: new from decomp"))
