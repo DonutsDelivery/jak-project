@@ -51679,7 +51679,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern common-owner (function editable editable object))
-(define-extern update-light-sphere-from-editable-light (function editable-light object))
+(define-extern update-light-sphere-from-editable-light (function none)) ;; editable-light deftype is block-commented; revert P9 backport
 (define-extern load-editable-lights (function editable-array symbol))
 (define-extern *editable-sample-region* object)
 (define-extern *editable-light-region* object)
@@ -51698,7 +51698,7 @@
 (define-extern execute-move (function editable-array editable-command mouse-info manipulator symbol))
 (define-extern get-light-value (function uint float))
 (define-extern set-light-value (function int float object))
-(define-extern keybd-set-time-of-day! (function int time-of-day-palette-id object))
+(define-extern keybd-set-time-of-day! (function none)) ;; time-of-day-palette-id undefined in jakx; revert P9 backport
 (define-extern lookup-bsp-by-name (function none))
 (define-extern editable-player-init (function none)) ;; (function symbol none :behavior editable-player)
 (define-extern set-editable-name (function string object))
@@ -52039,7 +52039,7 @@
 (define-extern get-nav-graph-editor (function none)) ;; (function nav-graph-editor)
 (define-extern exit-nav-graph-editor (function none))
 (define-extern nav-graph-set-level (function symbol object))
-(define-extern set-minimap-edge-flag (function nav-minimap-edge-flag none))
+(define-extern set-minimap-edge-flag (function none)) ;; nav-minimap-edge-flag undefined in jakx; revert P9 backport
 (define-extern set-vehicle-edit-mode (function symbol none))
 (define-extern translate-nav-graph (function float float float symbol))
 (define-extern update-nav-meshes (function symbol))
@@ -52270,7 +52270,7 @@
 (define-extern mouse-intersect-triangle (function vector vector vector vector float))
 (define-extern *clean-vertex-array* object)
 (define-extern *clean-index-array* object)
-(define-extern poly-flag-to-string (function object nav-mesh-poly-flag object))
+(define-extern poly-flag-to-string (function none)) ;; nav-mesh-poly-flag undefined in jakx; revert P9 backport
 (define-extern point-in-cone (function vector vector vector vector symbol))
 (define-extern segment-in-cone (function vector vector vector vector symbol))
 (define-extern point-in-triangle (function vector vector vector vector symbol))
@@ -52287,7 +52287,7 @@
 (define-extern nav-mesh-editor-load (function string object))
 (define-extern nav-mesh-editor-set-level (function symbol object))
 (define-extern nav-set-lev (function string object))
-(define-extern nav-set-flag (function nav-mesh-poly-flag object))
+(define-extern nav-set-flag (function none)) ;; nav-mesh-poly-flag undefined in jakx; revert P9 backport
 (define-extern nav-mesh-editor-init (function symbol object :behavior nav-mesh-editor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -59453,7 +59453,7 @@
 (define-extern *time-of-day* object)
 ;;(define-extern anim-test-sequence object)
 ;;(define-extern animation-info object)
-(define-extern birth-pickup-at-point (function vector pickup-type float symbol process-tree fact-info (pointer process) :behavior process))
+(define-extern birth-pickup-at-point (function none)) ;; pickup-type undefined in jakx; revert P9 backport
 ;; (define-extern bone-work object) ;; clobbers active deftype
 ;;(define-extern breadcrumb-array object)
 ;; (define-extern cam-debug-tri object) ;; clobbers active deftype
