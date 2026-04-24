@@ -72,7 +72,12 @@ def _status_is_stale(snap: "StatusSnapshot") -> bool:
     Stale conditions:
       - File missing or unparseable
       - Captures an in-progress crash (has_assertion, partial processed count)
-      - Was written against a different HEAD than current
+
+    Note: we intentionally do NOT trigger on SHA mismatch alone. In a batch
+    loop, status.md is written pre-commit, then HEAD advances at commit time.
+    status.md's recorded SHA lags by one commit, but its CONTENT reflects
+    the current working-tree state (= HEAD post-commit). Triggering rescan
+    on SHA mismatch would waste a full scanner run between every iteration.
     """
     if not snap.valid:
         return True
@@ -80,14 +85,6 @@ def _status_is_stale(snap: "StatusSnapshot") -> bool:
         return True
     if snap.processed > 0 and snap.total > 0 and snap.processed < snap.total:
         return True
-    # SHA comparison
-    if STATUS_MD.exists():
-        text = STATUS_MD.read_text()
-        m = _RE_STATUS_HEAD_SHA.search(text)
-        if m:
-            head = _current_head_sha()
-            if head and not head.startswith(m.group(1)):
-                return True
     return False
 
 
