@@ -2320,7 +2320,14 @@
     "ignore-refreshing-callback",
     // source: net-mgr-medius-cache
     "(method 11 medius-cache)",
-    "(method 11 medius-cached-info)"
+    "(method 11 medius-cached-info)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-mgr-medius-clans
+    "clan-invitations-sent-callback",
+    "clan-member-list-callback",
+    "clan-msg-callback-all",
+    "clan-msg-callback-my",
+    "get-my-clans-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
