@@ -56,18 +56,19 @@
     (new (symbol type process int float float float) _type_)
     (water-control-method-9 (_type_) none)
     (water-control-method-10 (_type_) none)
-    (start-bobbing! (_type_ float int int) none)
-    (distance-from-surface (_type_) float)
-    (spawn-ripples (_type_ float vector int vector symbol) none)
-    (display-water-marks? (_type_) symbol)
-    (enter-water (_type_) none)
+    (water-control-method-11 (_type_ float int int) none)
+    (water-control-method-12 (_type_) float)
+    (water-control-method-13 (_type_ float vector int vector symbol) none)
+    (water-control-method-14 (_type_) symbol)
+    (water-control-method-15 (_type_) none)
     (water-control-method-16 (_type_) none)
     (water-control-method-17 (_type_) none)
     )
   )
 
+;; ERROR: failed type prop at 380: Could not figure out load: (set! a2 (l.hu (+ gp 292)))
 
-(defmethod display-water-marks? ((this water-control))
+(defmethod water-control-method-14 ((this water-control))
   *display-water-marks*
   )
 
@@ -89,12 +90,11 @@
       (set! (-> v1-6 attack-id) a0-2)
       (set! (-> v0-0 attack-id) a0-2)
       )
-    (set! (-> v0-0 enter-water-sound) (static-sound-name "swim-enter"))
     v0-0
     )
   )
 
-(defmethod distance-from-surface ((this water-control))
+(defmethod water-control-method-12 ((this water-control))
   (- (-> this top 0 y) (-> this height))
   )
 

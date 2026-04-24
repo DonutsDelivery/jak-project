@@ -1,3 +1,120 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+
+;; this file is debug only
+(declare-file (debug))
+
+(defskelgroup skel-ragdoll-test wlander-male -1 -1 ((-1 (meters 999999))) :bounds (static-spherem 0 0 0 4))
+
+(define *ragdoll-test-ragdoll-setup*
+  (new 'static 'ragdoll-setup
+    :scale (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 0.0))
+    :bg-collide-with (collide-spec backgnd player-list)
+    :joint-setup (new 'static 'boxed-array :type ragdoll-joint-setup
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup :parent-joint -1)
+      (new 'static 'ragdoll-joint-setup)
+      (new 'static 'ragdoll-joint-setup)
+      )
+    )
+  )
+
+(deftype ragdoll-test (process-focusable)
+  ((ragdoll-proc  uint64)
+   )
+  (:state-methods
+    reform
+    tweak
+    freefall-reform
+    freefall
+    idle
+    )
+  )
+
+
+(defstate reform (ragdoll-test)
+  :virtual #t
+  :enter (behavior ()
+    (set! (-> self state-time) (the-as uint (current-time)))
+    )
+  :exit (behavior ()
+    (cond
+      ((!= *external-cam-mode* 'locked)
+       )
+      ((view-get-active-target)
+       (set! *external-cam-mode* #f)
+       )
+      (else
+        (set! *external-cam-mode* 'pad-0)
+        )
+      )
+    )
+  :trans L67
+  :code sleep-code
+  :post transform-post
+  )
+
+(defstate tweak (ragdoll-test)
+  :virtual #t
+  :event L62
+  :enter L58
+  :exit L53
+  :trans L46
+  :code sleep-code
+  :post transform-post
+  )
+
+(defstate freefall-reform (ragdoll-test)
+  :virtual #t
+  :enter (behavior ()
+    (set! (-> self state-time) (the-as uint (current-time)))
+    )
+  :trans L40
+  :code sleep-code
+  :post transform-post
+  )
+
+(defstate freefall (ragdoll-test)
+  :virtual #t
+  :event L35
+  :enter L31
+  :exit L27
+  :trans L21
+  :code sleep-code
+  :post transform-post
+  )
+
+(defstate idle (ragdoll-test)
+  :virtual #t
+  :enter (behavior ()
+    (set! (-> self state-time) (the-as uint (current-time)))
+    )
+  :trans L5
+  :code sleep-code
+  :post transform-post
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
