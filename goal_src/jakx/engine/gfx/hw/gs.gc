@@ -769,88 +769,12 @@ MIPMAP. MIPTBP1 sets levels 1 to 3, MIPTBP2 sets levels 4 to 6."
    )
   )
 
-(deftype gif-tag-regs (uint64)
-  ((regs0   gif-reg-id :offset 0  :size 4)
-   (regs1   gif-reg-id :offset 4  :size 4)
-   (regs2   gif-reg-id :offset 8  :size 4)
-   (regs3   gif-reg-id :offset 12  :size 4)
-   (regs4   gif-reg-id :offset 16  :size 4)
-   (regs5   gif-reg-id :offset 20  :size 4)
-   (regs6   gif-reg-id :offset 24  :size 4)
-   (regs7   gif-reg-id :offset 28  :size 4)
-   (regs8   gif-reg-id :offset 32  :size 4)
-   (regs9   gif-reg-id :offset 36 :size 4)
-   (regs10  gif-reg-id :offset 40 :size 4)
-   (regs11  gif-reg-id :offset 44 :size 4)
-   (regs12  gif-reg-id :offset 48 :size 4)
-   (regs13  gif-reg-id :offset 52 :size 4)
-   (regs14  gif-reg-id :offset 56 :size 4)
-   (regs15  gif-reg-id :offset 60 :size 4)
-   )
-  )
-
-(deftype gif-tag-regs-32 (uint32)
-  ((regs0   gif-reg-id :offset 0  :size 4)
-   (regs1   gif-reg-id :offset 4  :size 4)
-   (regs2   gif-reg-id :offset 8  :size 4)
-   (regs3   gif-reg-id :offset 12  :size 4)
-   (regs4   gif-reg-id :offset 16  :size 4)
-   (regs5   gif-reg-id :offset 20  :size 4)
-   (regs6   gif-reg-id :offset 24  :size 4)
-   (regs7   gif-reg-id :offset 28  :size 4))
-  )
-
-;; we unfortunately kind of need this
-(defmacro gif-tag->static-array (tag regs)
-  "Allocates a new static array of two uint64's making up the gif-tag and the tag registers"
-
-  `(new 'static 'array uint64 2 ,tag ,regs)
-  )
-
-(defmacro gif-prim (prim-type)
-  `(new 'static 'gs-prim :prim (gs-prim-type ,prim-type) :iip 1 :abe 1)
-  )
-
-(defmacro gs-reg-list (&rest reg-ids)
-  "Generate a giftag register descriptor list from reg-ids."
-
-  (let ((reg-count (length reg-ids)))
-    (when (> (length reg-ids) 16)
-      (ferror "too many regs passed to gs-reg-list")
-      )
-    (let ((list-to-splice '())
-          (cur-lst reg-ids)
-          (i -1))
-
-        ;; this is questionable.
-        (while (and (not (null? cur-lst)) (< i 15))
-          (push! list-to-splice (cons 'gif-reg-id (cons (car cur-lst) '())))
-          (push! list-to-splice (string->symbol-format ":regs{}" (inc! i)))
-          (pop! cur-lst)
-          )
-
-        `(new 'static 'gif-tag-regs
-            ,@list-to-splice
-            )
-        )
-  #| ;; the opengoal compiler does not have enough constant propagation for this for now
-    (let ((i -1))
-
-      `(the-as gif-tag-regs (logior ,@(apply (lambda (x)
-          `(shl (the-as uint (gif-reg-id ,x)) ,(* 4 (inc! i)))
-                ) reg-ids)
-              ))
-
-      )|#
-    )
-  )
-
 (deftype gs-gif-tag (structure)
-  ((qword  uint128)
-   (tag    gif-tag64       :overlay-at qword)
-   (regs   gif-tag-regs    :offset   8)
-   (dword  uint64        2 :overlay-at qword)
-   (word   uint32        4 :overlay-at qword)
+  ((qword  qword         :inline)
+   (tag    gif-tag64       :overlay-at (-> qword data 0))
+   (regs   gif-tag-regs    :overlay-at (-> qword data 2))
+   (dword  uint64        2 :overlay-at (-> qword data 0))
+   (word   uint32        4 :overlay-at (-> qword data 0))
    )
   )
 
@@ -863,7 +787,7 @@ MIPMAP. MIPTBP1 sets levels 1 to 3, MIPTBP2 sets levels 4 to 6."
   "Unused type for building a dynamically sized gif packet."
   ((reg-count  int32)
    (gif-tag    gs-gif-tag  :inline)
-   (gif-tag0   uint128     :overlay-at (-> gif-tag qword))
+   (gif-tag0   uint128     :overlay-at (-> gif-tag qword data 0))
    (args       uint64      1)
    )
   (:methods

@@ -191,7 +191,7 @@
    (blend-data           merc-blend-data)
    (blend-ctrl           merc-blend-ctrl)
    (merc-effect-version  uint8)
-   (effect-bits          effect-bits)
+   (effect-bits          uint8)
    (frag-count           uint16)
    (blend-frag-count     uint16)
    (tri-count            uint16)
@@ -201,7 +201,7 @@
    (extra-info           merc-extra-info)
    )
   (:methods
-    (login-adgifs (_type_) none)
+    (merc-effect-method-9 (_type_) none)
     )
   )
 
@@ -382,9 +382,6 @@ Consists of a header and a list of [[merc-effect]]s."
    (send-query               symbol)
    (query                    ripple-merc-query)
    )
-  (:methods
-    (new (symbol type) _type_)
-    )
   )
 
 
