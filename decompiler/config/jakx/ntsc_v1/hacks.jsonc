@@ -2012,7 +2012,10 @@
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: headset
     "(method 17 headset)",
-    "headset-udp-callback"
+    "headset-udp-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: hud
+    "hud-post"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
