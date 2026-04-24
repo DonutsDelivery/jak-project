@@ -1918,7 +1918,11 @@
     // source: generic-effect
     "generic-envmap-proc",
     "generic-no-light",
-    "generic-no-light+envmap"
+    "generic-no-light+envmap",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: generic-effect
+    "generic-envmap-only-proc",
+    "generic-light"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
