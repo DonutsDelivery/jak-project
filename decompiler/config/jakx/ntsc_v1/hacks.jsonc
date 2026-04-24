@@ -2086,7 +2086,11 @@
     // source: net-eco
     "eco-mgr-init-by-other",
     // source: net-eco-types
-    "(method 53 eco-blue)"
+    "(method 53 eco-blue)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-eco
+    "(method 35 eco-mgr)",
+    "(method 44 eco-mgr)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
