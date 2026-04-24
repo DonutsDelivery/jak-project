@@ -1899,7 +1899,12 @@
     "vis-cull-all?",
     // source: font
     "(method 10 font-context)",
-    "draw-string3d-asm"
+    "draw-string3d-asm",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: editable-player
+    "dm-editable-flag-pick-func",
+    // source: font
+    "get-string-length-asm"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
