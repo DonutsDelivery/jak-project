@@ -46523,20 +46523,18 @@
 
 
 
-#|
 (deftype strings-extra-struct (structure)
-  ((text uint8 128 :offset-assert 0)
-   (extra        basic       :offset-assert 128)
-   (extra-object basic       :offset-assert 128)
-   (extra-int    int32       :offset-assert 128)
-   (extra-int16 uint8 2 :offset-assert 128)
+  ((text         uint8 128                     :offset-assert 0)
+   (extra        basic                         :offset-assert 128)
+   (extra-object basic        :overlay-at extra)
+   (extra-int    int32        :overlay-at extra)
+   (extra-int16  uint16 2     :overlay-at extra)
    )
   :method-count-assert 9
   :size-assert         #x84
   :flag-assert         #x900000084
   ;; field extra uses ~A with a signed load. field extra-object uses ~A with a signed load.
   )
-|#
 
 
 
