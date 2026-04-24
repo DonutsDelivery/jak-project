@@ -2008,7 +2008,11 @@
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: hud
     "(method 9 hud-sprite)",
-    "hud-string-draw-all"
+    "hud-string-draw-all",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: headset
+    "(method 17 headset)",
+    "headset-udp-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
