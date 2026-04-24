@@ -1,3 +1,63 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+
+(deftype hoff-text-floater (process)
+  ((screen-from  vector  :inline)
+   (float-rate   float)
+   (duration     uint64)
+   (state-time   uint64)
+   (context      basic)
+   (text         basic)
+   )
+  (:methods
+    (hoff-text-floater-method-9 () none)
+    (hoff-text-floater-method-10 () none)
+    (hoff-text-floater-method-11 () none)
+    (hoff-text-floater-method-12 () none)
+    (hoff-text-floater-method-13 () none)
+    (hoff-text-floater-method-14 () none)
+    (run () _type_ :state)
+    )
+  )
+
+
+(deftype hoff-text-floater-init-params (structure)
+  ((world-from           vector  :inline)
+   (float-rate           float)
+   (duration             uint32)
+   (in-view              int32)
+   (in-static-string     basic)
+   (alloc-string-length  uint8)
+   (color                uint8)
+   (scale                float)
+   (flags                uint16)
+   )
+  )
+
+
+(defmethod relocate ((this hoff-text-floater) (offset int))
+  (let ((v1-0 (-> this text)))
+    (if (and (>= (the-as int v1-0) (-> *kernel-context* relocating-min))
+             (< (the-as int v1-0) (-> *kernel-context* relocating-max))
+             )
+        (&+! (-> this text) offset)
+        )
+    )
+  (if (nonzero? (-> this context))
+      (&+! (-> this context) offset)
+      )
+  (call-parent-method this offset)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((gp-0
+        (new 'static 'state :name 'run :next #f :exit #f :parent #f :code #f :trans #f :post #f :enter #f :event #f)
+        )
+      )
+  (method-set! hoff-text-floater 15 gp-0)
+  (set! (-> gp-0 enter) L4)
+  (set! (-> gp-0 trans) (the-as (function object) L1))
+  (set! (-> gp-0 code) sleep-code)
+  )

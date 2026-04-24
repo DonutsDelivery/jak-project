@@ -6,3 +6,151 @@
 
 
 
+
+(define *text-display-nice-shot* (the-as array #f))
+
+(define *text-display-nice-shot-proc* (the-as object #f))
+
+(deftype text-display-nice-shot (in-game-hud)
+  ()
+  )
+
+
+;; WARN: Return type mismatch in-game-hud vs text-display-nice-shot.
+(defmethod relocate ((this text-display-nice-shot) (offset int))
+  (set! *text-display-nice-shot-proc* this)
+  (if (nonzero? *text-display-nice-shot-proc*)
+      (set! *text-display-nice-shot-proc* (+ (the-as uint *text-display-nice-shot-proc*) offset))
+      )
+  (the-as text-display-nice-shot ((method-of-type in-game-hud relocate) this offset))
+  )
+
+(defmethod hud-method-26 ((this text-display-nice-shot))
+  (set! (-> this items) *text-display-nice-shot*)
+  (set! (-> this manager) (new 'static 'text-display-manager))
+  (set! *text-display-nice-shot-proc* this)
+  ((method-of-type in-game-hud hud-method-26) this)
+  )
+
+(defmethod deactivate ((this text-display-nice-shot))
+  "Make a process dead, clean it up, remove it from the active pool, and return to dead pool."
+  (set! *text-display-nice-shot-proc* (the-as object #f))
+  ((method-of-type in-game-hud deactivate) this)
+  )
+
+(defmethod hud-method-24 ((this text-display-nice-shot))
+  (when *debug-hud*
+    (set! (-> this real-items) *text-display-nice-shot*)
+    (hud-method-26 this)
+    )
+  ((method-of-type in-game-hud hud-method-24) this)
+  (none)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(defmethod hud-method-17 ((this text-display-nice-shot))
+  #f
+  )
+
+(defmethod hud-method-22 ((this text-display-nice-shot))
+  #f
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; type hud-headset-talker is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *hud-headset-talker-race* (the-as array #f))
+
+(define *hud-headset-talker-race-proc* (the-as object #f))
+
+(deftype hud-headset-talker-race (in-game-hud)
+  ()
+  )
+
+
+;; WARN: Return type mismatch in-game-hud vs hud-headset-talker-race.
+(defmethod relocate ((this hud-headset-talker-race) (offset int))
+  (set! *hud-headset-talker-race-proc* this)
+  (if (nonzero? *hud-headset-talker-race-proc*)
+      (set! *hud-headset-talker-race-proc* (+ (the-as uint *hud-headset-talker-race-proc*) offset))
+      )
+  (the-as hud-headset-talker-race ((method-of-type in-game-hud relocate) this offset))
+  )
+
+(defmethod hud-method-26 ((this hud-headset-talker-race))
+  (set! (-> this items) *hud-headset-talker-race*)
+  (set! (-> this manager) (new 'static 'basic-manager))
+  (set! *hud-headset-talker-race-proc* this)
+  ((method-of-type in-game-hud hud-method-26) this)
+  )
+
+(defmethod deactivate ((this hud-headset-talker-race))
+  "Make a process dead, clean it up, remove it from the active pool, and return to dead pool."
+  (set! *hud-headset-talker-race-proc* (the-as object #f))
+  ((method-of-type in-game-hud deactivate) this)
+  )
+
+(defmethod hud-method-24 ((this hud-headset-talker-race))
+  (when *debug-hud*
+    (set! (-> this real-items) *hud-headset-talker-race*)
+    (hud-method-26 this)
+    )
+  ((method-of-type in-game-hud hud-method-24) this)
+  (none)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *hud-headset-talker-other* (the-as array #f))
+
+(define *hud-headset-talker-other-proc* (the-as object #f))
+
+(deftype hud-headset-talker-other (in-game-hud)
+  ()
+  )
+
+
+;; WARN: Return type mismatch in-game-hud vs hud-headset-talker-other.
+(defmethod relocate ((this hud-headset-talker-other) (offset int))
+  (set! *hud-headset-talker-other-proc* this)
+  (if (nonzero? *hud-headset-talker-other-proc*)
+      (set! *hud-headset-talker-other-proc* (+ (the-as uint *hud-headset-talker-other-proc*) offset))
+      )
+  (the-as hud-headset-talker-other ((method-of-type in-game-hud relocate) this offset))
+  )
+
+(defmethod hud-method-26 ((this hud-headset-talker-other))
+  (set! (-> this items) *hud-headset-talker-other*)
+  (set! (-> this manager) (new 'static 'basic-manager))
+  (set! *hud-headset-talker-other-proc* this)
+  ((method-of-type in-game-hud hud-method-26) this)
+  )
+
+(defmethod deactivate ((this hud-headset-talker-other))
+  "Make a process dead, clean it up, remove it from the active pool, and return to dead pool."
+  (set! *hud-headset-talker-other-proc* (the-as object #f))
+  ((method-of-type in-game-hud deactivate) this)
+  )
+
+(defmethod hud-method-24 ((this hud-headset-talker-other))
+  (when *debug-hud*
+    (set! (-> this real-items) *hud-headset-talker-other*)
+    (hud-method-26 this)
+    )
+  ((method-of-type in-game-hud hud-method-24) this)
+  (none)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *last-talker-ids* #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.

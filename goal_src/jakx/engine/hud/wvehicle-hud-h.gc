@@ -6,3 +6,26 @@
 
 
 
+
+(deftype fx-struct (structure)
+  ((offset-x    int32)
+   (offset-y    int32)
+   (scale-x     basic)
+   (scale-y     basic)
+   (alpha       basic)
+   (angle       basic)
+   (total-time  uint32)
+   )
+  )
+
+
+;; type hud-vehicle is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *default-fast-curve* (new 'static 'curve2d-fast
+                               :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+                               :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 2.0 3.0))
+                               :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 1.0))
+                               )
+        )
