@@ -1982,7 +1982,16 @@
     "(method 10 cpu-thread)",
     "(method 11 cpu-thread)",
     "throw",
-    "throw-dispatch"
+    "throw-dispatch",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: gkernel
+    "run-function-in-process",
+    "set-to-run-bootstrap",
+    // source: gstring
+    "name=",
+    "string-word-wrap",
+    // source: headset
+    "headset-init-by-other"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
