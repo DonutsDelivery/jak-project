@@ -1923,6 +1923,7 @@
     ]
   ],
   "(method 13 cloth-system)": [
+    [2, "a0", "basic"],
     [
       143,
       "a1",
@@ -2758,6 +2759,7 @@
     ]
   ],
   "(method 9 game-info)": [
+    [61, "s3", "basic"],
     [
       617,
       "s0",
@@ -3158,6 +3160,7 @@
     ]
   ],
   "(method 22 game-info)": [
+    [29, "a0", "basic"],
     [
       235,
       "s1",
@@ -16063,6 +16066,7 @@
     ]
   ],
   "(method 10 sparticle-launcher)": [
+    [3, "a0", "basic"],
     [
       [
         28,
@@ -39766,6 +39770,7 @@
     [4, "gp", "construction-object"]
   ],
   "(method 0 collide-shape)": [
+    [26, "gp", "basic"],
     [25, "gp", "collide-shape"]
   ],
   "(method 10 nav-control)": [
@@ -39778,6 +39783,7 @@
     [11, "gp", "oil-trail"]
   ],
   "(method 10 sparks-work)": [
+    [3, "a0", "basic"],
     [2, "a0", "sparks-work"]
   ],
   "(method 103 net-player-race)": [
@@ -39790,6 +39796,7 @@
     [1, "gp", "net-player-race"]
   ],
   "(method 106 net-player-race)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player-race"]
   ],
   "(method 107 net-player-race)": [
@@ -39805,12 +39812,15 @@
     [0, "a0", "nav-mesh-poly"]
   ],
   "(method 11 sparks-work)": [
+    [2, "a0", "basic"],
     [1, "a0", "sparks-work"]
   ],
   "(method 110 net-player-deathrace)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player-deathrace"]
   ],
   "(method 110 net-player-rushhour)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player-rushhour"]
   ],
   "(method 12 nav-mesh-editable)": [
@@ -39832,6 +39842,7 @@
     [3, "gp", "oil-trail"]
   ],
   "(method 14 cloth-system)": [
+    [2, "a0", "basic"],
     [1, "a0", "cloth-system"]
   ],
   "(method 14 nav-mesh-editable)": [
@@ -39850,6 +39861,7 @@
     [1, "gp", "nav-mesh-editable"]
   ],
   "(method 15 net-powerup)": [
+    [4, "a0", "basic"],
     [3, "a0", "net-powerup"]
   ],
   "(method 15 red-sentry-bot)": [
@@ -39862,6 +39874,7 @@
     [0, "a0", "process-nettable"]
   ],
   "(method 16 wvehicle)": [
+    [5, "gp", "basic"],
     [4, "gp", "wvehicle"]
   ],
   "(method 17 lightning-tracker)": [
@@ -39871,18 +39884,23 @@
     [2, "a0", "nav-control"]
   ],
   "(method 17 net-player)": [
+    [5, "gp", "basic"],
     [4, "gp", "net-player"]
   ],
   "(method 17 net-powerup)": [
+    [20, "gp", "basic"],
     [19, "gp", "net-powerup"]
   ],
   "(method 17 vehicle)": [
+    [2, "a0", "basic"],
     [1, "a0", "vehicle"]
   ],
   "(method 18 hud-player-positions)": [
+    [5, "a0", "basic"],
     [4, "a0", "hud-player-positions"]
   ],
   "(method 18 hud-player-progress)": [
+    [5, "a0", "basic"],
     [4, "a0", "hud-player-progress"]
   ],
   "(method 18 nav-mesh-editable)": [
@@ -39895,15 +39913,19 @@
     [0, "a0", "process-nettable"]
   ],
   "(method 18 red-sentry-bot)": [
+    [2, "a0", "basic"],
     [1, "a0", "red-sentry-bot"]
   ],
   "(method 18 v-toad-shot)": [
+    [3, "a0", "basic"],
     [2, "a0", "v-toad-shot"]
   ],
   "(method 19 hud-indicator)": [
+    [2, "a0", "basic"],
     [1, "a0", "hud-indicator"]
   ],
   "(method 19 process-nettable)": [
+    [2, "a0", "basic"],
     [1, "a0", "process-nettable"]
   ],
   "(method 20 http-downloader)": [
@@ -39922,24 +39944,29 @@
     [0, "a0", "nav-control"]
   ],
   "(method 24 hud-player-indicators)": [
+    [1, "a0", "basic"],
     [0, "a0", "hud-player-indicators"]
   ],
   "(method 24 net-process-mgr)": [
     [18, "gp", "net-process-mgr"]
   ],
   "(method 25 load-state)": [
+    [3, "a0", "basic"],
     [2, "a0", "load-state"]
   ],
   "(method 25 net-process-mgr)": [
+    [1, "a0", "basic"],
     [0, "a0", "net-process-mgr"]
   ],
   "(method 26 net-process-mgr)": [
     [0, "a0", "net-process-mgr"]
   ],
   "(method 27 net-process-mgr)": [
+    [5, "a0", "basic"],
     [4, "a0", "net-process-mgr"]
   ],
   "(method 27 process-nettable)": [
+    [6, "a0", "basic"],
     [5, "a0", "process-nettable"]
   ],
   "(method 28 nav-control)": [
@@ -39950,6 +39977,7 @@
     [7, "gp", "nav-mesh"]
   ],
   "(method 28 net-process-mgr)": [
+    [5, "a0", "basic"],
     [4, "a0", "net-process-mgr"]
   ],
   "(method 29 nav-control)": [
@@ -39965,9 +39993,11 @@
     [0, "gp", "nav-graph-editor"]
   ],
   "(method 30 net-process-mgr)": [
+    [6, "a0", "basic"],
     [5, "a0", "net-process-mgr"]
   ],
   "(method 31 net-process-mgr)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-process-mgr"]
   ],
   "(method 32 net-process-mgr)": [
@@ -39977,42 +40007,54 @@
     [0, "a0", "nav-graph-editor"]
   ],
   "(method 35 eco-mgr)": [
+    [2, "a0", "basic"],
     [1, "a0", "eco-mgr"]
   ],
   "(method 35 net-enemy)": [
     [0, "a0", "net-enemy"]
   ],
   "(method 35 net-game-mgr)": [
+    [7, "gp", "basic"],
     [6, "gp", "net-game-mgr"]
   ],
   "(method 35 net-player)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player"]
   ],
   "(method 35 net-powerup)": [
+    [49, "a0", "basic"],
     [48, "a0", "net-powerup"]
   ],
   "(method 35 net-projectile)": [
+    [117, "a0", "basic"],
     [116, "a0", "net-projectile"]
   ],
   "(method 35 net-simple-destruct-mgr)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-simple-destruct-mgr"]
   ],
   "(method 35 net-test)": [
+    [8, "gp", "basic"],
     [7, "gp", "net-test"]
   ],
   "(method 35 red-sentry-bot)": [
+    [69, "a0", "basic"],
     [68, "a0", "red-sentry-bot"]
   ],
   "(method 35 sphere-hash)": [
+    [3, "a0", "basic"],
     [2, "a0", "sphere-hash"]
   ],
   "(method 36 net-enemy)": [
+    [1, "a0", "basic"],
     [0, "a0", "net-enemy"]
   ],
   "(method 36 net-game-mgr)": [
+    [1, "a0", "basic"],
     [0, "a0", "net-game-mgr"]
   ],
   "(method 36 rigid-body-control)": [
+    [3, "a0", "basic"],
     [2, "a0", "rigid-body-control"]
   ],
   "(method 37 nav-graph-editor)": [
@@ -40022,48 +40064,61 @@
     [28, "gp", "net-process-mgr"]
   ],
   "(method 38 process-nettable)": [
+    [3, "a0", "basic"],
     [2, "a0", "process-nettable"]
   ],
   "(method 39 nav-graph-editor)": [
+    [2, "a0", "basic"],
     [1, "a0", "nav-graph-editor"]
   ],
   "(method 39 net-process-mgr)": [
+    [5, "a0", "basic"],
     [4, "a0", "net-process-mgr"]
   ],
   "(method 39 process-nettable)": [
+    [3, "a0", "basic"],
     [2, "a0", "process-nettable"]
   ],
   "(method 40 nav-graph-editor)": [
+    [2, "a0", "basic"],
     [1, "a0", "nav-graph-editor"]
   ],
   "(method 40 net-process-mgr)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-process-mgr"]
   ],
   "(method 41 nav-graph-editor)": [
+    [2, "a0", "basic"],
     [1, "a0", "nav-graph-editor"]
   ],
   "(method 42 nav-control)": [
     [0, "a0", "nav-control"]
   ],
   "(method 42 nav-graph-editor)": [
+    [2, "a0", "basic"],
     [1, "a0", "nav-graph-editor"]
   ],
   "(method 43 nav-graph-editor)": [
+    [2, "a0", "basic"],
     [1, "a0", "nav-graph-editor"]
   ],
   "(method 43 process-drawable)": [
+    [32, "a0", "basic"],
     [31, "a0", "process-drawable"]
   ],
   "(method 44 nav-graph-editor)": [
+    [2, "a0", "basic"],
     [1, "a0", "nav-graph-editor"]
   ],
   "(method 44 net-simple-destruct-mgr)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-simple-destruct-mgr"]
   ],
   "(method 45 net-player)": [
     [24, "a0", "net-player"]
   ],
   "(method 47 eco-mgr)": [
+    [7, "a0", "basic"],
     [6, "a0", "eco-mgr"]
   ],
   "(method 47 nav-graph-editor)": [
@@ -40076,18 +40131,23 @@
     [0, "gp", "nav-graph-editor"]
   ],
   "(method 48 net-player)": [
+    [6, "gp", "basic"],
     [5, "gp", "net-player"]
   ],
   "(method 48 net-player-artifact)": [
+    [6, "a0", "basic"],
     [5, "a0", "net-player-artifact"]
   ],
   "(method 48 net-player-boss-battle)": [
+    [8, "gp", "basic"],
     [7, "gp", "net-player-boss-battle"]
   ],
   "(method 48 net-player-deathrace)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player-deathrace"]
   ],
   "(method 48 net-player-rushhour)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player-rushhour"]
   ],
   "(method 48 net-process-mgr)": [
@@ -40097,6 +40157,7 @@
     [4, "gp", "nav-graph-editor"]
   ],
   "(method 49 net-process-mgr)": [
+    [4, "a0", "basic"],
     [3, "a0", "net-process-mgr"]
   ],
   "(method 50 nav-graph-editor)": [
@@ -40109,9 +40170,11 @@
     [1, "gp", "editable-player"]
   ],
   "(method 51 nav-graph-editor)": [
+    [7, "gp", "basic"],
     [6, "gp", "nav-graph-editor"]
   ],
   "(method 52 artifact)": [
+    [3, "a0", "basic"],
     [2, "a0", "artifact"]
   ],
   "(method 52 editable-player)": [
@@ -40127,6 +40190,7 @@
     [0, "a0", "simple-prim-zbuf-mask"]
   ],
   "(method 53 artifact-draw)": [
+    [4, "a0", "basic"],
     [3, "a0", "artifact-draw"]
   ],
   "(method 53 editable-player)": [
@@ -40139,9 +40203,11 @@
     [6, "a0", "net-game-mgr"]
   ],
   "(method 53 net-process-mgr)": [
+    [4, "a0", "basic"],
     [3, "a0", "net-process-mgr"]
   ],
   "(method 54 joint-exploder)": [
+    [3, "a0", "basic"],
     [2, "a0", "joint-exploder"]
   ],
   "(method 54 nav-graph-editor)": [
@@ -40151,15 +40217,18 @@
     [37, "gp", "nav-mesh-editor"]
   ],
   "(method 54 net-player-deathmatch)": [
+    [4, "a0", "basic"],
     [3, "a0", "net-player-deathmatch"]
   ],
   "(method 54 net-player-race)": [
     [1, "a0", "net-player-race"]
   ],
   "(method 54 net-process-mgr)": [
+    [4, "a0", "basic"],
     [3, "a0", "net-process-mgr"]
   ],
   "(method 54 net-world)": [
+    [78, "a0", "basic"],
     [77, "a0", "net-world"]
   ],
   "(method 54 simple-prim)": [
@@ -40172,48 +40241,61 @@
     [0, "a0", "nav-mesh-editor"]
   ],
   "(method 55 net-player)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player"]
   ],
   "(method 55 net-process-mgr)": [
+    [5, "a0", "basic"],
     [4, "a0", "net-process-mgr"]
   ],
   "(method 55 simple-prim-particle-binding)": [
     [0, "a0", "simple-prim-particle-binding"]
   ],
   "(method 55 v-wpn-purple-shield)": [
+    [2, "a0", "basic"],
     [1, "a0", "v-wpn-purple-shield"]
   ],
   "(method 55 v-wpn-red-drone-gun)": [
+    [2, "a0", "basic"],
     [1, "a0", "v-wpn-red-drone-gun"]
   ],
   "(method 55 v-wpn-red-mine-launcher)": [
+    [2, "a0", "basic"],
     [1, "a0", "v-wpn-red-mine-launcher"]
   ],
   "(method 55 v-wpn-red-oil)": [
+    [2, "a0", "basic"],
     [1, "a0", "v-wpn-red-oil"]
   ],
   "(method 55 v-wpn-red-sentry-gun)": [
+    [2, "a0", "basic"],
     [1, "a0", "v-wpn-red-sentry-gun"]
   ],
   "(method 55 v-wpn-red-smoke)": [
+    [2, "a0", "basic"],
     [1, "a0", "v-wpn-red-smoke"]
   ],
   "(method 55 v-wpn-red-tractor-beam)": [
+    [2, "a0", "basic"],
     [1, "a0", "v-wpn-red-tractor-beam"]
   ],
   "(method 55 v-wpn-red-turbo-preventor)": [
+    [2, "a0", "basic"],
     [1, "a0", "v-wpn-red-turbo-preventor"]
   ],
   "(method 56 nav-mesh-editor)": [
     [0, "a0", "nav-mesh-editor"]
   ],
   "(method 56 net-game-mgr)": [
+    [13, "a0", "basic"],
     [12, "a0", "net-game-mgr"]
   ],
   "(method 56 net-player-deathmatch)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player-deathmatch"]
   ],
   "(method 56 net-process-mgr)": [
+    [5, "a0", "basic"],
     [4, "a0", "net-process-mgr"]
   ],
   "(method 57 nav-mesh-editor)": [
@@ -40223,21 +40305,26 @@
     [0, "a0", "net-enemy"]
   ],
   "(method 57 net-game-mgr)": [
+    [4, "a0", "basic"],
     [3, "a0", "net-game-mgr"]
   ],
   "(method 57 net-game-mgr-artifact)": [
+    [15, "a0", "basic"],
     [14, "a0", "net-game-mgr-artifact"]
   ],
   "(method 57 net-game-mgr-deathmatch)": [
+    [6, "a0", "basic"],
     [5, "a0", "net-game-mgr-deathmatch"]
   ],
   "(method 57 net-game-mgr-race)": [
+    [11, "gp", "basic"],
     [10, "gp", "net-game-mgr-race"]
   ],
   "(method 58 nav-graph-editor)": [
     [2, "gp", "nav-graph-editor"]
   ],
   "(method 58 net-game-mgr)": [
+    [5, "a0", "basic"],
     [4, "a0", "net-game-mgr"]
   ],
   "(method 58 net-game-mgr-boss-battle)": [
@@ -40268,6 +40355,7 @@
     [4, "gp", "item-num-selection"]
   ],
   "(method 59 map-menu)": [
+    [5, "gp", "basic"],
     [4, "gp", "map-menu"]
   ],
   "(method 59 nav-graph-editor)": [
@@ -40292,12 +40380,15 @@
     [0, "gp", "chat-window-menu"]
   ],
   "(method 60 index-sprite-list-menu)": [
+    [2, "a0", "basic"],
     [1, "a0", "index-sprite-list-menu"]
   ],
   "(method 60 nav-graph-editor)": [
+    [3, "a0", "basic"],
     [2, "a0", "nav-graph-editor"]
   ],
   "(method 60 net-game-mgr)": [
+    [86, "a0", "basic"],
     [85, "a0", "net-game-mgr"]
   ],
   "(method 60 prim-strip-menu)": [
@@ -40313,9 +40404,11 @@
     [7, "gp", "dropdown-item"]
   ],
   "(method 61 nav-graph-editor)": [
+    [3, "a0", "basic"],
     [2, "a0", "nav-graph-editor"]
   ],
   "(method 61 net-game-mgr)": [
+    [7, "a0", "basic"],
     [6, "a0", "net-game-mgr"]
   ],
   "(method 61 net-player-race)": [
@@ -40325,6 +40418,7 @@
     [8, "gp", "options-bar-indicator"]
   ],
   "(method 61 vehicle)": [
+    [2, "a0", "basic"],
     [1, "a0", "vehicle"]
   ],
   "(method 61 vehicle-wheel)": [
@@ -40337,12 +40431,15 @@
     [2, "gp", "nav-graph-editor"]
   ],
   "(method 62 net-enemy)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-enemy"]
   ],
   "(method 62 net-player)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player"]
   ],
   "(method 62 wvehicle)": [
+    [3, "a0", "basic"],
     [2, "a0", "wvehicle"]
   ],
   "(method 63 base-menu)": [
@@ -40352,24 +40449,30 @@
     [0, "gp", "nav-graph-editor"]
   ],
   "(method 63 net-player)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player"]
   ],
   "(method 63 net-simple-destruct)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-simple-destruct"]
   ],
   "(method 64 base-menu)": [
     [0, "gp", "base-menu"]
   ],
   "(method 64 nav-graph-editor)": [
+    [5, "a0", "basic"],
     [4, "a0", "nav-graph-editor"]
   ],
   "(method 64 net-player)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player"]
   ],
   "(method 64 red-sentry-bot)": [
+    [8, "a0", "basic"],
     [7, "a0", "red-sentry-bot"]
   ],
   "(method 64 vehicle)": [
+    [3, "a0", "basic"],
     [2, "a0", "vehicle"]
   ],
   "(method 64 wvehicle)": [
@@ -40385,6 +40488,7 @@
     [0, "a0", "nav-graph-editor"]
   ],
   "(method 65 net-player)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player"]
   ],
   "(method 65 selection-menu-manager)": [
@@ -40403,6 +40507,7 @@
     [0, "a0", "nav-graph-editor"]
   ],
   "(method 66 net-player)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player"]
   ],
   "(method 66 prim-strip-menu)": [
@@ -40412,6 +40517,7 @@
     [0, "a0", "rigid-body-object"]
   ],
   "(method 66 vehicle-wheel)": [
+    [2, "a0", "basic"],
     [1, "a0", "vehicle-wheel"]
   ],
   "(method 67 basic-list-selection)": [
@@ -40436,12 +40542,14 @@
     [4, "gp", "item-num-selection"]
   ],
   "(method 67 net-player)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player"]
   ],
   "(method 67 player-ct-string-menu)": [
     [10, "gp", "player-ct-string-menu"]
   ],
   "(method 67 rigid-body-object)": [
+    [1, "a0", "basic"],
     [0, "a0", "rigid-body-object"]
   ],
   "(method 67 string-list-selection)": [
@@ -40454,9 +40562,11 @@
     [0, "a0", "nav-graph-editor"]
   ],
   "(method 68 net-game-mgr)": [
+    [65, "a0", "basic"],
     [64, "a0", "net-game-mgr"]
   ],
   "(method 68 net-player)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player"]
   ],
   "(method 68 rigid-body-object)": [
@@ -40466,84 +40576,103 @@
     [0, "gp", "string-menu"]
   ],
   "(method 69 net-simple-destruct)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-simple-destruct"]
   ],
   "(method 69 v-tiger)": [
+    [8, "gp", "basic"],
     [7, "gp", "v-tiger"]
   ],
   "(method 69 vehicle)": [
+    [8, "gp", "basic"],
     [7, "gp", "vehicle"]
   ],
   "(method 69 wvehicle)": [
+    [8, "gp", "basic"],
     [7, "gp", "wvehicle"]
   ],
   "(method 70 net-player-race)": [
     [0, "a0", "net-player-race"]
   ],
   "(method 71 net-world)": [
+    [350, "a0", "basic"],
     [349, "a0", "net-world"]
   ],
   "(method 71 rigid-body-object)": [
+    [2, "a0", "basic"],
     [1, "a0", "rigid-body-object"]
   ],
   "(method 72 net-game-mgr-assassin)": [
     [22, "a0", "net-game-mgr-assassin"]
   ],
   "(method 72 net-world)": [
+    [20, "a0", "basic"],
     [19, "a0", "net-world"]
   ],
   "(method 73 net-world)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-world"]
   ],
   "(method 74 net-enemy)": [
     [3, "gp", "net-enemy"]
   ],
   "(method 74 net-projectile)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-projectile"]
   ],
   "(method 75 v-toad-shot)": [
     [0, "a0", "v-toad-shot"]
   ],
   "(method 76 net-player)": [
+    [35, "a0", "basic"],
     [34, "a0", "net-player"]
   ],
   "(method 77 net-world)": [
     [98, "a0", "net-world"]
   ],
   "(method 77 rigid-body-object)": [
+    [1, "a0", "basic"],
     [0, "a0", "rigid-body-object"]
   ],
   "(method 77 vehicle)": [
+    [1, "a0", "basic"],
     [0, "a0", "vehicle"]
   ],
   "(method 81 net-game-mgr-deathmatch)": [
     [30, "gp", "net-game-mgr-deathmatch"]
   ],
   "(method 81 net-player)": [
+    [1, "a0", "basic"],
     [0, "a0", "net-player"]
   ],
   "(method 82 net-enemy)": [
     [0, "a0", "net-enemy"]
   ],
   "(method 82 net-game-mgr-deathmatch)": [
+    [6, "a0", "basic"],
     [5, "a0", "net-game-mgr-deathmatch"]
   ],
   "(method 82 net-player-race)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player-race"]
   ],
   "(method 82 rigid-body-object)": [
+    [7, "a0", "basic"],
     [6, "a0", "rigid-body-object"]
   ],
   "(method 83 net-enemy)": [
     [1, "gp", "net-enemy"]
   ],
   "(method 83 net-game-mgr-deathmatch)": [
+    [4, "a0", "basic"],
     [3, "a0", "net-game-mgr-deathmatch"]
   ],
   "(method 83 net-player-race)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player-race"]
   ],
   "(method 83 rigid-body-object)": [
+    [5, "a0", "basic"],
     [4, "a0", "rigid-body-object"]
   ],
   "(method 85 net-enemy)": [
@@ -40553,9 +40682,11 @@
     [30, "gp", "net-game-mgr-artifact"]
   ],
   "(method 85 net-game-mgr-race)": [
+    [7, "a0", "basic"],
     [6, "a0", "net-game-mgr-race"]
   ],
   "(method 85 net-player-race)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player-race"]
   ],
   "(method 87 vehicle-wheel)": [
@@ -40577,33 +40708,42 @@
     [0, "a0", "net-player-deathmatch"]
   ],
   "(method 90 net-player-race)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player-race"]
   ],
   "(method 91 net-player-deathmatch)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player-deathmatch"]
   ],
   "(method 91 net-player-race)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player-race"]
   ],
   "(method 92 vehicle-wheel)": [
     [0, "a0", "vehicle-wheel"]
   ],
   "(method 93 net-player)": [
+    [2, "a0", "basic"],
     [1, "a0", "net-player"]
   ],
   "(method 95 net-player)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player"]
   ],
   "(method 96 net-player-assassin)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player-assassin"]
   ],
   "(method 96 net-player-deathmatch)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player-deathmatch"]
   ],
   "(method 96 net-player-deathrace)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player-deathrace"]
   ],
   "(method 96 net-player-rushhour)": [
+    [3, "a0", "basic"],
     [2, "a0", "net-player-rushhour"]
   ],
   "(method 98 net-player-race)": [
@@ -40678,5 +40818,188 @@
   ],
   "(code intro driver)": [
     [16, "a0", "int"]
+  ],
+  "(method 11 crash-camera)": [
+    [3, "a0", "basic"]
+  ],
+  "(method 11 victor-prefix-camera)": [
+    [3, "a0", "basic"]
+  ],
+  "(method 12 crash-camera)": [
+    [4, "a0", "basic"]
+  ],
+  "(method 12 hud-manager-death-indicator)": [
+    [45, "a0", "basic"]
+  ],
+  "(method 12 prototype-node-group)": [
+    [4, "a0", "basic"]
+  ],
+  "(method 18 mine-a)": [
+    [2, "a0", "basic"]
+  ],
+  "(method 18 mine-b)": [
+    [2, "a0", "basic"]
+  ],
+  "(method 19 cash-hud)": [
+    [2, "a0", "basic"]
+  ],
+  "(method 19 hud-cash-stats)": [
+    [17, "a0", "basic"]
+  ],
+  "(method 19 hud-item-hang-time-seconds)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 19 hud-item-hang-time-tenths-seconds)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 19 hud-item-number)": [
+    [2, "a0", "basic"]
+  ],
+  "(method 19 hud-item-player-score)": [
+    [17, "a0", "basic"]
+  ],
+  "(method 19 hud-item-power-slide-distance)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 19 hud-item-power-slide-distance-tenths)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 19 sparticle-launch-control)": [
+    [2, "a0", "basic"]
+  ],
+  "(method 20 mine-b)": [
+    [1, "a0", "basic"]
+  ],
+  "(method 24 hud-medal-results)": [
+    [24, "gp", "basic"]
+  ],
+  "(method 35 mine-a)": [
+    [3, "a0", "basic"]
+  ],
+  "(method 35 mine-b)": [
+    [3, "a0", "basic"]
+  ],
+  "(method 35 v-yellow-guided-missile)": [
+    [6, "a0", "basic"]
+  ],
+  "(method 55 v-wpn-yellow-chain-gun)": [
+    [2, "a0", "basic"]
+  ],
+  "(method 55 v-wpn-yellow-default-gun)": [
+    [2, "a0", "basic"]
+  ],
+  "(method 55 v-wpn-yellow-grenade)": [
+    [4, "a0", "basic"]
+  ],
+  "(method 55 v-wpn-yellow-guided-missile)": [
+    [4, "a0", "basic"]
+  ],
+  "(method 55 v-wpn-yellow-seismic-blaster)": [
+    [2, "a0", "basic"]
+  ],
+  "(method 57 net-world)": [
+    [1, "v1", "basic"]
+  ],
+  "(method 62 mine-a)": [
+    [51, "s5", "basic"]
+  ],
+  "(method 63 mine-a)": [
+    [2, "a0", "basic"]
+  ],
+  "(method 65 mine-b)": [
+    [51, "s5", "basic"]
+  ],
+  "(method 66 mine-b)": [
+    [2, "a0", "basic"]
+  ],
+  "(method 66 v-bear)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-bobcat)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-cheetah)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-cougar)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-daxtermobile)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-falcon)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-gila)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-leopard)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-mongoose)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-panther)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-possum)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-snake)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-tiger)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-wolf)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 66 v-wombat)": [
+    [2, "s5", "basic"]
+  ],
+  "(method 80 v-yellow-guided-missile)": [
+    [2, "a0", "basic"]
+  ],
+  "(method 9 in-game-menu-hud)": [
+    [5, "a0", "basic"]
+  ],
+  "choose-target-camera": [
+    [5, "a0", "basic"]
+  ],
+  "get-non-conflicting-driver": [
+    [16, "a0", "basic"]
+  ],
+  "player-wait-control-hook": [
+    [8, "a0", "basic"]
+  ],
+  "powerup-motion-parabola": [
+    [2, "a0", "basic"]
+  ],
+  "rapid-fire-control-emitter-from-world": [
+    [21, "gp", "basic"]
+  ],
+  "red-sentry-bot-init-by-other": [
+    [6, "a0", "basic"]
+  ],
+  "spawn-mine": [
+    [5, "a0", "basic"]
+  ],
+  "spawn-net-projectile": [
+    [3, "v1", "basic"]
+  ],
+  "target-camera-heuristic-cam-point!": [
+    [8, "a0", "basic"]
+  ],
+  "target-camera-heuristic-fov": [
+    [6, "a0", "basic"]
+  ],
+  "target-camera-heuristic-look-at!": [
+    [6, "a0", "basic"]
+  ],
+  "target-camera-test-los": [
+    [5, "a0", "basic"]
+  ],
+  "vis-cull-all?": [
+    [3, "a0", "basic"]
   ]
 }
