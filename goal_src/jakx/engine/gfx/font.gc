@@ -12,12 +12,172 @@
 
 ;; DECOMP BEGINS
 
-;; method 9 of font-context: compute calc-mat, scaled-width/height, hvdf-offset/shadow/outlines
-;; in *font-work* from the font-context's origin, scale, and flags.
-(defmethod font-context-method-9 ((this font-context) (arg0 matrix))
-  (when (not *viewport-array*)
-    (return (the-as font-context 0))
+(define *font-random-generator* (the-as object (new 'global 'random-generator)))
+
+(define *font-curve-ghosting*
+  (the-as array (new 'static 'boxed-array :type vector
+                  (new 'static 'vector :data (new 'static 'array float 4 0.0 0.2 0.7 1.8))
+                  (new 'static 'vector :data (new 'static 'array float 4 0.2 0.25 0.7 0.7))
+                  (new 'static 'vector :data (new 'static 'array float 4 0.22 0.4 1.0 1.0))
+                  )
+                )
+  )
+
+(define *font-curve-ghosting-2*
+  (the-as array (new 'static 'boxed-array :type vector
+                  (new 'static 'vector :data (new 'static 'array float 4 0.0 0.2 0.0 0.0))
+                  (new 'static 'vector :data (new 'static 'array float 4 0.2 0.5 1.0 2.0))
+                  )
+                )
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *loading-pad-leftx* (the-as object 0.0))
+
+(define *loading-pad-lefty* (the-as object 0.0))
+
+(define *loading-pad-rightx* (the-as object 0.0))
+
+(define *loading-pad-righty* (the-as object 0.0))
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
+;; ERROR: failed type prop at 2: Could not figure out load: (set! a0 (l.bu (+ v1 4)))
+;; WARN: Return type mismatch none vs font-context.
+(defmethod font-context-method-11 ((a0-0 font-context) (a1-0 int))
+  (local-vars
+    (v0-0 int)
+    (v1-0 int)
+    (v1-1 none)
+    (v1-2 none)
+    (v1-3 none)
+    (a0-1 none)
+    (a0-3 none)
+    (a0-4 none)
+    (a0-5 none)
+    (a0-6 none)
+    (a0-9 none)
+    (a0-11 none)
+    (a0-12 none)
+    (a0-13 none)
+    (a1-1 none)
+    (a1-2 none)
+    (a1-3 none)
     )
+  (when (begin (set! v0-0 0) (set! v1-0 a1-0) (set! a0-1 (the-as none (l.bu (+ v1-0 4)))) (nonzero? a0-1))
+    (when (begin
+            (while (begin (set! a0-9 (the-as none (l.bu (+ v1-0 4)))) (nonzero? a0-9))
+              (when (begin
+                      (or (begin
+                            (set! a0-3 (the-as none (l.bu (+ v1-0 4))))
+                            (set! a0-4 (the-as none (+ a0-3 -10)))
+                            (set! a1-1 (the-as none (zero? a0-4)))
+                            a1-1
+                            )
+                          (begin
+                            (set! a0-6 (the-as none (l.bu (+ v1-0 4))))
+                            (set! a1-2 (the-as none (+ a0-6 -13)))
+                            (set! a0-5 (the-as none (zero? a1-2)))
+                            )
+                          )
+                      a0-5
+                      )
+                (set! v0-0 (the-as int (+ v0-0 1)))
+                (set! a0-8 (the-as none v0-0))
+                )
+              (set! v1-0 (the-as int (+ v1-0 1)))
+              )
+            (and (begin
+                   (set! v1-1 (the-as none (+ v1-0 -1)))
+                   (set! a0-11 (the-as none (l.bu (+ v1-1 4))))
+                   (set! a0-12 (the-as none (+ a0-11 -10)))
+                   (set! a1-3 (the-as none (nonzero? a0-12)))
+                   a1-3
+                   )
+                 (begin
+                   (set! v1-3 (the-as none (l.bu (+ v1-1 4))))
+                   (set! a0-13 (the-as none (+ v1-3 -13)))
+                   (set! v1-2 (the-as none (nonzero? a0-13)))
+                   )
+                 )
+            v1-2
+            )
+      (set! v0-0 (the-as int (+ v0-0 1)))
+      (set! v1-5 (the-as none v0-0))
+      )
+    )
+  (ret-value v0-0)
+  )
+
+;; WARN: Return type mismatch int vs font-context.
+;; ERROR: Expression building failed: In (method 12 font-context): At op 14, used int to float on a font-context from f0-0: (gpr->fpr (font-context-method-11 this (the-as int arg0)))
+(defmethod font-context-method-12 ((this font-context) (arg0 float))
+  (local-vars
+    (v0-0 font-context)
+    (v0-1 int)
+    (v1-3 type)
+    (v1-4 font-context)
+    (v1-5 float)
+    (a0-1 font-context)
+    (t9-0 (function font-context int font-context))
+    (f0-0 font-context)
+    (f0-1 float)
+    (f0-2 float)
+    (f0-3 float)
+    (f1-0 float)
+    (f1-1 float)
+    (f1-2 float)
+    (f2-0 float)
+    (f3-0 float)
+    (f30-0 float)
+    )
+  (if (logtest? (-> this flags) (font-flags large))
+      32.0
+      16.0
+      )
+  (set! f30-0 (if (logtest? (-> this flags) (font-flags large))
+                  32.0
+                  16.0
+                  )
+        )
+  (set! a0-1 this)
+  (set! v1-3 (-> a0-1 type))
+  (set! t9-0 (method-of-object a0-1 font-context-method-11))
+  (set! v0-0 (font-context-method-11 this (the-as int arg0)))
+  (set! v1-4 v0-0)
+  (set! f0-0 (gpr->fpr (font-context-method-11 this (the-as int arg0))))
+  (set! f0-1 (i2f f0-0))
+  (set! f1-0 (*.s f30-0 f0-1))
+  (set! f0-2 (-> this calc-origin y))
+  (set! v1-5 0.5)
+  (set! f2-0 (gpr->fpr v1-5))
+  (set! f3-0 (-> this scaled-height))
+  (set! f1-1 (-.s f3-0 f1-0))
+  (set! f1-2 (*.s f2-0 f1-1))
+  (set! f0-3 (+.s f0-2 f1-2))
+  (set! (-> this calc-origin y) f0-3)
+  (set! v1-6 (fpr->gpr f0-3))
+  (set! v0-1 0)
+  (ret-value v0-1)
+  )
+
+;; WARN: Return type mismatch int vs font-context.
+(defmethod font-context-method-9 ((this font-context) (arg0 matrix))
   (let ((s5-0 (-> *viewport-array* default)))
     (-> this mat)
     (let ((v1-2 (-> this calc-mat))
@@ -91,153 +251,249 @@
   (the-as font-context 0)
   )
 
-;; draw-string-init-justify: jakx-native mips2c. Justify pre-pass —
-;; walks the string once, writes per-line starting-x into
-;; font-work.justify[] based on left/center/right flags. Called by
-;; draw-string-asm-packed at entry. Returns a uint128 (packed — low
-;; 32 bits = last-line width float, discarded by caller).
-(def-mips2c draw-string-init-justify (function string dma-buffer font-context uint128))
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; draw-string-asm-packed: jakx-native mips2c. Takes (string, dma-buffer,
-;; font-context) and returns a uint128 (packed — low 32 bits = accumulated
-;; x-extent as IEEE float). See game/mips2c/jakx_functions/font.cpp.
-(def-mips2c draw-string-asm-packed (function string dma-buffer font-context uint128))
+;; ERROR: function has no type analysis. Cannot decompile.
 
-;; JAKX bitmap-font draw-string.
-;;
-;; jak3's mips2c `draw-string-asm` reads jak3 offsets against jakx's 187-byte
-;; font-context and corrupts memory (session-8 root cause). The real jakx
-;; mips2c is 18k lines of MIPS — too expensive to port for a title menu.
-;;
-;; Instead, draw glyphs from an embedded 3x5 bitmap font. Each printable
-;; ASCII char is 3 columns × 5 rows × 1 bit; on-pixels emit a small rect
-;; through draw-sprite2d-xy. Font data lives in *jakx-bitmap-font-3x5*.
-;;
-;; Only uppercase ASCII + digits + a few punctuation are encoded. Unknown
-;; chars render as an open rectangle (4 corner pixels).
-;;
-;; Pixel size scales off font-context.scale. This is NOT pixel-accurate to
-;; the PS2 font — it's a legibility substitute until the real glyph renderer
-;; lands.
-(defconstant JAKX-BITMAP-FONT-COLS 3)
-(defconstant JAKX-BITMAP-FONT-ROWS 5)
-
-;; Each entry is 3 bytes (one per column). Each byte has 5 bits active:
-;; bit N = pixel at row N in that column. Index = (char - 32) for chars in
-;; 0x20..0x7F. Lowercase letters fold to uppercase before lookup.
-(define *jakx-bitmap-font-3x5*
-  (new 'static 'array uint8 192
-    ;; 0x20 ' '                  0x21 '!'                   0x22 '"'
-    #x00 #x00 #x00               #x00 #x17 #x00             #x03 #x00 #x03
-    ;; 0x23 '#' (= 3 horiz)      0x24 '$' (= S)             0x25 '%'
-    #x0a #x1f #x0a               #x12 #x15 #x09             #x11 #x04 #x11
-    ;; 0x26 '&'                  0x27 "'"                   0x28 '('
-    #x0a #x15 #x1a               #x00 #x03 #x00             #x0e #x11 #x00
-    ;; 0x29 ')'                  0x2a '*'                   0x2b '+'
-    #x00 #x11 #x0e               #x05 #x02 #x05             #x04 #x0e #x04
-    ;; 0x2c ','                  0x2d '-'                   0x2e '.'
-    #x00 #x18 #x00               #x04 #x04 #x04             #x00 #x10 #x00
-    ;; 0x2f '/'                  0x30 '0'                   0x31 '1'
-    #x18 #x04 #x03               #x1f #x11 #x1f             #x12 #x1f #x10
-    ;; 0x32 '2'                  0x33 '3'                   0x34 '4'
-    #x19 #x15 #x16               #x11 #x15 #x0e             #x07 #x04 #x1f
-    ;; 0x35 '5'                  0x36 '6'                   0x37 '7'
-    #x07 #x15 #x0d               #x0e #x15 #x09             #x19 #x05 #x03
-    ;; 0x38 '8'                  0x39 '9'                   0x3a ':'
-    #x0a #x15 #x0a               #x12 #x15 #x0e             #x00 #x0a #x00
-    ;; 0x3b ';'                  0x3c '<'                   0x3d '='
-    #x00 #x1a #x00               #x04 #x0a #x11             #x0a #x0a #x0a
-    ;; 0x3e '>'                  0x3f '?'                   0x40 '@'
-    #x11 #x0a #x04               #x01 #x15 #x02             #x0e #x15 #x0e
-    ;; 0x41 'A'                  0x42 'B'                   0x43 'C'
-    #x1e #x05 #x1e               #x1f #x15 #x0a             #x0e #x11 #x11
-    ;; 0x44 'D'                  0x45 'E'                   0x46 'F'
-    #x1f #x11 #x0e               #x1f #x15 #x11             #x1f #x05 #x01
-    ;; 0x47 'G'                  0x48 'H'                   0x49 'I'
-    #x0e #x11 #x1d               #x1f #x04 #x1f             #x11 #x1f #x11
-    ;; 0x4a 'J'                  0x4b 'K'                   0x4c 'L'
-    #x08 #x10 #x0f               #x1f #x04 #x11             #x1f #x10 #x10
-    ;; 0x4d 'M'                  0x4e 'N'                   0x4f 'O'
-    #x1f #x06 #x1f               #x1f #x0e #x1f             #x0e #x11 #x0e
-    ;; 0x50 'P'                  0x51 'Q'                   0x52 'R'
-    #x1f #x05 #x02               #x0e #x19 #x16             #x1f #x05 #x1a
-    ;; 0x53 'S'                  0x54 'T'                   0x55 'U'
-    #x12 #x15 #x09               #x01 #x1f #x01             #x1f #x10 #x1f
-    ;; 0x56 'V'                  0x57 'W'                   0x58 'X'
-    #x0f #x10 #x0f               #x1f #x0c #x1f             #x1b #x04 #x1b
-    ;; 0x59 'Y'                  0x5a 'Z'                   0x5b '['
-    #x03 #x1c #x03               #x19 #x15 #x13             #x1f #x11 #x00
-    ;; 0x5c '\'                  0x5d ']'                   0x5e '^'
-    #x03 #x04 #x18               #x00 #x11 #x1f             #x02 #x01 #x02
-    ;; 0x5f '_'                  0x60 '`'                   0x61..unused..
-    #x10 #x10 #x10               #x01 #x02 #x00             #x00 #x00 #x00
+;; ERROR: failed type prop at 32: Called a function, but we do not know its type
+;; WARN: Return type mismatch uint128 vs draw-string-result.
+(defun draw-string ((a0-0 string) (a1-0 dma-buffer) (a2-0 font-context))
+  (local-vars
+    (v0-0 int)
+    (v0-1 int)
+    (v0-2 uint128)
+    (v0-3 font-context)
+    (v0-4 none)
+    (v0-5 none)
+    (v0-6 none)
+    (v0-7 none)
+    (v0-8 none)
+    (v0-9 none)
+    (v1-0 type)
+    (v1-1 int)
+    (v1-2 int)
+    (v1-5 font-flags)
+    (v1-6 font-flags)
+    (v1-7 type)
+    (v1-10 none)
+    (v1-12 none)
+    (v1-13 none)
+    (v1-15 none)
+    (v1-19 none)
+    (v1-20 none)
+    (v1-21 none)
+    (v1-22 none)
+    (v1-23 none)
+    (v1-24 none)
+    (v1-25 none)
+    (v1-26 none)
+    (v1-27 none)
+    (a0-1 dma-buffer)
+    (a0-2 string)
+    (a0-3 font-context)
+    (a0-5 none)
+    (a0-7 none)
+    (a0-12 none)
+    (a0-13 none)
+    (a0-14 none)
+    (a0-15 none)
+    (a0-16 none)
+    (a0-17 none)
+    (a0-18 none)
+    (a0-19 none)
+    (a0-20 none)
+    (a0-21 none)
+    (a1-1 string)
+    (a2-3 none)
+    (s1-0 int)
+    (s1-1 none)
+    (s2-0 int)
+    (s2-1 none)
+    (s3-0 uint128)
+    (s3-1 none)
+    (t9-0 (function dma-buffer int))
+    (t9-1 (function string int))
+    (t9-2 (function font-context int int font-context))
+    (t9-3 function)
+    (t9-4 none)
+    (t9-5 none)
+    (t9-6 none)
+    (t9-7 none)
+    (t9-8 none)
+    (t9-9 none)
+    (gp-0 font-context)
+    (f0-0 none)
+    (f0-1 none)
+    (f0-2 none)
+    (f0-3 none)
+    (f1-0 none)
+    (f1-1 none)
+    (f1-2 none)
+    (f2-0 none)
     )
-  )
-
-(defun font-work-setup-hvdf! ()
-  "GOAL-level stub for the hvdf-setup portion of (method 10 font-context).
-   Real jakx asm (decompiler_out/jakx/font_ir2.asm:2982) populates
-   *font-work* hvdf-offset/shadow/outline from *viewport-array* each time
-   a font-context is applied. Without it, offset 4736 stays zero and
-   mips2c draw-string-asm-packed projects every glyph to y=-2048,
-   off-screen. Until method 10 gets a proper mips2c port, copy
-   *math-camera* hvdf-off into all 6 hvdf slots. Shadow/outline land on
-   the same pixel as the base (no visible shadow/outline effect) but the
-   main glyph lands on-screen."
-  (let ((src (-> *math-camera* hvdf-off)))
-    (vector-copy! (-> *font-work* hvdf-offset) src)
-    (vector-copy! (-> *font-work* hvdf-shadow) src)
-    (vector-copy! (-> *font-work* hvdf-outline0) src)
-    (vector-copy! (-> *font-work* hvdf-outline1) src)
-    (vector-copy! (-> *font-work* hvdf-outline2) src)
-    (vector-copy! (-> *font-work* hvdf-outline3) src)
+  (if (begin
+        (set! gp-0 a2-0)
+        (set! s3-0 (-> gp-0 origin quad))
+        (set! t9-0 dma-buffer-free)
+        (set! a0-1 a1-0)
+        (set! v0-0 (call! a0-1))
+        (set! s2-0 v0-0)
+        (set! s1-0 13)
+        (set! a0-2 a0-0)
+        (set! v1-0 string)
+        (set! t9-1 (method-of-type v1-0 length))
+        (set! v0-1 (call! a0-2))
+        (set! v1-1 v0-1)
+        (set! v1-2 (*.si s1-0 v1-1))
+        (<.ui s2-0 v1-2)
+        )
+      (return (set! v0-2 s3-0))
+      )
+  (cond
+    ((begin (set! v1-5 (-> gp-0 flags)) (set! v1-6 (logand v1-5 512)) (nonzero? v1-6))
+     (set! a0-3 gp-0)
+     (set! v1-7 (-> a0-3 type))
+     (set! t9-2 (method-of-type v1-7 font-context-method-10))
+     (set! a1-1 a0-0)
+     (call! a0-3 a1-1 a2-0)
+     (set! v1-8 v0-3)
+     (set! t9-3 draw-string3d-asm)
+     (set! a0-4 a0-0)
+     (set! a1-2 a1-0)
+     (set! a2-1 gp-0)
+     (set! v0-2 (the-as uint128 (call!)))
+     (set! v1-9 (the-as none v0-2))
+     )
+    (else
+      (cond
+        ((begin
+           (set! a0-5 (the-as none gp-0))
+           (set! v1-10 (the-as none (l.wu (+ a0-5 -4))))
+           (set! t9-4 (the-as none (l.wu (+ v1-10 52))))
+           (set! a1-3 (the-as none a0-0))
+           (call!)
+           (set! v1-11 (the-as none v0-4))
+           (set! t9-5 (the-as none draw-string-init-justify))
+           (set! a0-6 (the-as none a0-0))
+           (set! a1-4 (the-as none a1-0))
+           (set! a2-2 (the-as none gp-0))
+           (set! v0-5 (the-as none (call!)))
+           (set! s3-1 (the-as none v0-5))
+           (set! v1-12 (the-as none (-> gp-0 effect)))
+           (nonzero? v1-12)
+           )
+         (when (begin (set! v1-13 (the-as none 8)) (set! a0-7 (the-as none (l.bu (+ gp-0 181)))) (!= a0-7 v1-13))
+           (set! s2-1 (the-as none char-effect-compute-colors))
+           (set! s1-1 (the-as none *font-char-effect*))
+           (set! a0-8 (the-as none a0-0))
+           (set! v1-15 (the-as none string))
+           (set! t9-6 (the-as none (l.wu (+ v1-15 32))))
+           (call!)
+           (set! a1-5 (the-as none v0-6))
+           (set! a2-3 (the-as none (l.bu (+ gp-0 182))))
+           (set! a3-0 (the-as none gp-0))
+           (set! t9-7 (the-as none s2-1))
+           (set! a0-9 (the-as none s1-1))
+           (call!)
+           (set! v1-16 (the-as none v0-7))
+           )
+         (set! t9-8 (the-as none draw-effect-string))
+         (set! a0-10 (the-as none a0-0))
+         (set! a1-6 (the-as none a1-0))
+         (set! a2-4 (the-as none gp-0))
+         (call!)
+         (set! v1-17 (the-as none v0-8))
+         )
+        (else
+          (set! t9-9 (the-as none draw-string-asm-packed))
+          (set! a0-11 (the-as none a0-0))
+          (set! a1-7 (the-as none a1-0))
+          (set! a2-5 (the-as none gp-0))
+          (set! v0-9 (the-as none (call!)))
+          (set! s3-1 (the-as none v0-9))
+          (set! v1-18 (the-as none s3-1))
+          )
+        )
+      (set! v1-19 (the-as none L474))
+      (set! v1-20 (the-as none (l.d v1-19)))
+      (set! v1-21 (the-as none (sll v1-20 32)))
+      (set! v1-22 (the-as none (logand s3-1 v1-21)))
+      (set! a0-12 (the-as none s3-1))
+      (set! f0-0 (the-as none (gpr->fpr a0-12)))
+      (set! f1-0 (the-as none (l.f (+ gp-0 168))))
+      (set! a0-13 (the-as none *video-params*))
+      (set! f2-0 (the-as none (l.f (+ a0-13 16))))
+      (set! f1-1 (the-as none (*.s f1-0 f2-0)))
+      (set! f0-1 (the-as none (*.s f0-0 f1-1)))
+      (set! a0-14 (the-as none (fpr->gpr f0-1)))
+      (set! a0-15 (the-as none (sll a0-14 32)))
+      (set! a0-16 (the-as none (srl a0-15 32)))
+      (set! v1-23 (the-as none (logior v1-22 a0-16)))
+      (set! a0-17 (the-as none v1-23))
+      (set! v1-24 (the-as none L474))
+      (set! v1-25 (the-as none (l.d v1-24)))
+      (set! v1-26 (the-as none (logand a0-17 v1-25)))
+      (set! a0-18 (the-as none (sra a0-17 32)))
+      (set! f0-2 (the-as none (gpr->fpr a0-18)))
+      (set! f1-2 (the-as none (l.f (+ gp-0 168))))
+      (set! f0-3 (the-as none (*.s f0-2 f1-2)))
+      (set! a0-19 (the-as none (fpr->gpr f0-3)))
+      (set! a0-20 (the-as none (sll a0-19 32)))
+      (set! a0-21 (the-as none (srl a0-20 0)))
+      (set! v1-27 (the-as none (logior v1-26 a0-21)))
+      (set! v0-2 (the-as uint128 v1-27))
+      (set! v1-28 (the-as none v0-2))
+      )
     )
-  (none)
+  (ret-value v0-2)
   )
 
-(defun draw-string ((arg0 string) (arg1 dma-buffer) (arg2 font-context))
-  "Render `arg0` via the real jakx mips2c draw-string-asm-packed routine.
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
-   draw-string-asm-packed is a direct C++ port of the PS2 asm (see
-   game/mips2c/jakx_functions/font.cpp). It emits per-glyph char-packets
-   to `arg1` with proper calc-mat projection and 5-pass outline/shadow
-   effects. The returned uint128 is reinterpreted as draw-string-result
-   so callers that read its `length` field (the accumulated x-extent
-   as a float in the low 32 bits) fall through correctly."
-  (set-context! *font-work* arg2)
-  (the-as draw-string-result (draw-string-asm-packed arg0 arg1 arg2))
-  )
-
-; (def-mips2c get-string-length (function string font-context draw-string-result))
-(def-mips2c get-string-length-asm (function string font-context draw-string-result))
-
-(#when PC_PORT
-;; og:preserve-this get-string-length is an asm function, but for PC port we use a trampoline in order to inject hacks more easily
-(defun get-string-length ((text string) (ctx font-context))
-  "return the length of a string, in gs framebuffer units"
-  (let ((orig-scale (-> ctx scale))
-        (result (begin (#when PC_PORT ;; debug font scaling.
-                                      (unless (logtest? (-> ctx flags) (font-flags large pc-hack))
-                                        (*! (-> ctx scale) (get-debug-font-scale-factor))))
-                       (get-string-length-asm text ctx))))
-    (set! (-> ctx scale) orig-scale)
-    result)
-  )
-
-)
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
 (defun draw-string-xy ((arg0 string) (arg1 dma-buffer) (arg2 int) (arg3 int) (arg4 font-color) (arg5 font-flags))
-  (let ((s4-0 (new 'stack 'font-context *font-default-matrix* arg2 arg3 0.0 arg4 arg5)))
-    (set-context! *font-work* s4-0)
-    (draw-string arg0 arg1 s4-0)
+  (let ((t9-0 (method-of-type font-context new))
+        (a0-1 (new 'stack-no-clear 'font-context))
+        (a1-1 font-context)
+        )
+    *font-default-matrix*
+    #x4b002032
+    (let ((a2-2 (t9-0 (the-as symbol a0-1) a1-1)))
+      (when (logtest? arg5 (font-flags right))
+        (let ((v1-4 a2-2))
+          (set! (-> v1-4 origin x) (the float 0.0))
+          (set! (-> v1-4 origin y) (the float arg3))
+          )
+        (set-width! a2-2 arg2)
+        )
+      (draw-string arg0 arg1 a2-2)
+      )
     )
   )
 
-;; WARN: Return type mismatch float vs none.
+;; ERROR: Expression building failed: In draw-string-adv: [OP: 8] - Floating point math attempted on invalid types: float and draw-string-result in op (+.s f0-0 f1-0).
 (defun draw-string-adv ((arg0 string) (arg1 dma-buffer) (arg2 font-context))
-  (set-context! *font-work* arg2)
-  (let ((v1-2 (draw-string arg0 arg1 arg2)))
-    (+! (-> arg2 origin x) (-> v1-2 length))
+  (local-vars
+    (v0-0 draw-string-result)
+    (v0-1 float)
+    (v1-0 draw-string-result)
+    (v1-1 draw-string-result)
+    (a2-1 font-context)
+    (t9-0 (function string dma-buffer font-context draw-string-result))
+    (f0-0 float)
+    (f0-1 float)
+    (f1-0 draw-string-result)
     )
-  (none)
+  (set! t9-0 draw-string)
+  (set! a2-1 arg2)
+  (set! v0-0 (draw-string arg0 arg1 arg2))
+  (set! v1-0 v0-0)
+  (set! f0-0 (-> arg2 origin x))
+  (set! v1-1 v1-0)
+  (set! f1-0 (gpr->fpr v1-0))
+  (set! f0-1 (+.s f0-0 f1-0))
+  (set! (-> arg2 origin x) f0-1)
+  (set! v0-1 (fpr->gpr f0-1))
+  (ret-value v0-1)
   )

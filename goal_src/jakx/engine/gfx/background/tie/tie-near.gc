@@ -7,7 +7,22 @@
 
 ;; DECOMP BEGINS
 
+;; type tie-near-consts is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define tie-near-vu1-block #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
 (defun tie-scissor-make-perspective-matrix ((arg0 matrix) (arg1 matrix))
-  (column-scale-matrix! arg0 (-> *math-camera* hmge-scale) arg1)
-  (none)
+  (column-scale-matrix! arg0 (-> (view-get-active-math-camera) hmge-scale) arg1)
   )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
