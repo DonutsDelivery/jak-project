@@ -2397,7 +2397,14 @@
     "(method 48 net-player)",
     "(method 95 net-player)",
     "net-player-init-local",
-    "use-target-cam-base-helper"
+    "use-target-cam-base-helper",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-player
+    "(method 17 net-player)",
+    "(method 93 net-player)",
+    "all-players-spawned-vehicles?",
+    "local-human-player-above-height?",
+    "playback-cam"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
