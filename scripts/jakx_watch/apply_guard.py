@@ -47,7 +47,14 @@ _RE_DECOMP_PROGRESS = re.compile(
 )
 _RE_FILES_TOTAL = re.compile(r"^files total:\s+(\d+)", re.MULTILINE)
 _RE_SPLIT_FAILED = re.compile(r"^\s+split-failed\s+:\s+(\d+)", re.MULTILINE)
-_RE_ASSERTION = re.compile(r"Assertion failed|FATAL crashes", re.MULTILINE)
+# Match only actual crash content — not the "## FATAL crashes" section header,
+# which is present on every clean run. "Assertion failed" = literal C++ assert;
+# "files blocked by crash" with non-zero count = scanner recorded crashes.
+_RE_ASSERTION = re.compile(r"Assertion failed", re.MULTILINE)
+_RE_BLOCKED_COUNT = re.compile(
+    r"decomp progress:\s*\d+/\d+\s+processed\s*\((\d+)\s+files?\s+blocked",
+    re.MULTILINE,
+)
 
 
 @dataclasses.dataclass
@@ -98,7 +105,9 @@ def read_status() -> StatusSnapshot:
     sm = _RE_SPLIT_FAILED.search(text)
     split_failed = int(sm.group(1)) if sm else -1
 
-    has_assertion = bool(_RE_ASSERTION.search(text))
+    blocked_match = _RE_BLOCKED_COUNT.search(text)
+    blocked_count = int(blocked_match.group(1)) if blocked_match else 0
+    has_assertion = bool(_RE_ASSERTION.search(text)) or blocked_count > 0
 
     # Parse top-8 ERROR categories block
     categories: dict[str, int] = {}
