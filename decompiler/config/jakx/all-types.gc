@@ -15853,7 +15853,7 @@
     (ocean-method-30 (_type_ uint uint) none) ;; 30
     (ocean-method-31 (_type_ int int) none) ;; 31
     (ocean-method-32 (_type_ uint uint) int) ;; 32
-    (ocean-method-33 (_type_ dma-buffer uint uint int int symbol) int) ;; 33
+    (ocean-method-33 (_type_ dma-buffer uint uint int int symbol) none) ;; 33
     (ocean-method-34 (_type_ dma-buffer uint uint int int int) int) ;; 34
     (ocean-method-35 (_type_ ocean-trans-mask int int vector) none) ;; 35
     (ocean-method-36 (_type_ uint uint uint uint) none) ;; 36
