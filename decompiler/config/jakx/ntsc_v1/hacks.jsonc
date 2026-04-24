@@ -2193,7 +2193,12 @@
     "(method 35 net-game-mgr)",
     "(method 51 net-game-mgr)",
     "(method 56 net-game-mgr)",
-    "(method 7 net-game-mgr)"
+    "(method 7 net-game-mgr)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-game-mgr
+    "(method 36 net-game-mgr)",
+    "(method 58 net-game-mgr)",
+    "net-game-mgr-default-handler"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
