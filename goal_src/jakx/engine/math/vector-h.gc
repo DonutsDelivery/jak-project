@@ -297,18 +297,6 @@
   )
 
 
-(deftype vector4uh (structure)
-  ((data  uint16  4)
-   (x     uint16  :overlay-at (-> data 0))
-   (y     uint16  :overlay-at (-> data 1))
-   (z     uint16  :overlay-at (-> data 2))
-   (w     uint16  :overlay-at (-> data 3))
-   (long  uint64  :overlay-at (-> data 0))
-   )
-  :pack-me
-  )
-
-
 (deftype vector8h (structure)
   ((data  int16    8)
    (quad  uint128  :overlay-at (-> data 0))
@@ -329,17 +317,17 @@
   this
   )
 
-(define *null-vector* (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 1.0)))
+(define *null-vector* (new 'static 'vector :w 1.0))
 
-(define *identity-vector* (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 1.0)))
+(define *identity-vector* (new 'static 'vector :x 1.0 :y 1.0 :z 1.0 :w 1.0))
 
-(define *x-vector* (new 'static 'vector :data (new 'static 'array float 4 1.0 0.0 0.0 1.0)))
+(define *x-vector* (new 'static 'vector :x 1.0 :w 1.0))
 
-(define *y-vector* (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.0 1.0)))
+(define *y-vector* (new 'static 'vector :y 1.0 :w 1.0))
 
-(define *z-vector* (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 1.0 1.0)))
+(define *z-vector* (new 'static 'vector :z 1.0 :w 1.0))
 
-(define *up-vector* (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.0 1.0)))
+(define *up-vector* (new 'static 'vector :y 1.0 :w 1.0))
 
 (deftype vector4s-3 (structure)
   ((data    float    12)
@@ -383,6 +371,23 @@
 
 (deftype isphere (vec4s)
   ()
+  )
+
+(defmacro static-vector (x y z w)
+  "Creates a static vector."
+  `(new 'static 'vector :x ,x :y ,y :z ,z :w ,w)
+  )
+(defmacro static-vectorm (x y z)
+  "Creates a static vector using meters. `w` is set to 1.0"
+  `(new 'static 'vector :x (meters ,x) :y (meters ,y) :z (meters ,z) :w 1.0)
+  )
+(defmacro static-spherem (x y z r)
+  "Creates a static vector using meters where the w component is used as sphere radius. For a 'real' sphere, use [[static-bspherem]]."
+  `(new 'static 'vector :x (meters ,x) :y (meters ,y) :z (meters ,z) :w (meters ,r))
+  )
+(defmacro static-bspherem (x y z r)
+  "Creates a static sphere using meters."
+  `(new 'static 'sphere :x (meters ,x) :y (meters ,y) :z (meters ,z) :w (meters ,r))
   )
 
 (deftype box8s (structure)
@@ -438,12 +443,17 @@
   :pack-me
   )
 
-
-(defun vector-dot ((arg0 vector) (arg1 vector))
+(defun vector-dot ((a vector) (b vector))
   "Take the dot product of two vectors.
-   Only does the x, y, z compoments.
-   Originally handwritten assembly to space out loads and use FPU accumulator"
-  (vector-dot arg0 arg1)
+Only does the x, y, z compoments.
+Originally handwritten assembly to space out loads and use FPU accumulator"
+  (declare (inline))
+  (let ((result 0.))
+    (+! result (* (-> a x) (-> b x)))
+    (+! result (* (-> a y) (-> b y)))
+    (+! result (* (-> a z) (-> b z)))
+    result
+    )
   )
 
 (defun vector-dot-vu ((arg0 vector) (arg1 vector))
@@ -462,10 +472,17 @@
     )
   )
 
-(defun vector4-dot ((arg0 vector) (arg1 vector))
+(defun vector4-dot ((a vector) (b vector))
   "Take the dot product of two vectors.
-   Does the x, y, z, and w compoments"
-  (vector4-dot arg0 arg1)
+Does the x, y, z, and w compoments"
+  (declare (inline))
+  (let ((result 0.))
+    (+! result (* (-> a x) (-> b x)))
+    (+! result (* (-> a y) (-> b y)))
+    (+! result (* (-> a z) (-> b z)))
+    (+! result (* (-> a w) (-> b w)))
+    result
+    )
   )
 
 (defun vector4-dot-vu ((arg0 vector) (arg1 vector))
@@ -491,105 +508,100 @@
     )
   )
 
-;; ERROR: Unsupported inline assembly instruction kind - [mula.s f0, f2]
-;; ERROR: Unsupported inline assembly instruction kind - [madd.s f0, f1, f3]
-(defun vector-xz-dot ((arg0 vector) (arg1 vector))
-  (local-vars (f0-1 float))
-  (let ((f0-0 (-> arg0 x))
-        (f1-0 (-> arg0 z))
-        (f2-0 (-> arg1 x))
-        (f3-0 (-> arg1 z))
-        )
-    (.mula.s f0-0 f2-0)
-    (.madd.s f0-1 f1-0 f3-0)
-    )
-  f0-1
+(defmacro print-vf (vf &key (name #f))
+  "Print out a vf register as a vector."
+  `(let ((temp (new 'stack 'vector)))
+     (.svf temp ,vf)
+     ,(if name
+          `(format #t "~A: ~`vector`P~%" (quote ,name) temp)
+          `(format #t "~`vector`P~%" temp)
+          )
+     )
   )
 
-(defun vector+! ((arg0 vector) (arg1 vector) (arg2 vector))
+(defmacro print-vf-hex (vf)
+  "Print out a vf register as 4x 32-bit hexadecimal integers"
+  `(let ((temp (new 'stack 'vector4w)))
+     (.svf temp ,vf)
+     (format #t "~`vector4w`P~%" temp)
+     )
+  )
+
+(defmacro print-vf-dec (vf)
+  "Print out a vf register as 4x 32-bit base-10 integers"
+  `(let ((temp (new 'stack 'vector4w)))
+     (.svf temp ,vf)
+     (format #t " ~d ~d ~d ~d~%" (-> temp data 0) (-> temp data 1) (-> temp data 2) (-> temp data 3))
+     )
+  )
+
+(defun vector+! ((dst vector) (a vector) (b vector))
   "Set dst = a + b. The w component of dst is set to 0."
-  (rlet ((vf0 :class vf)
-         (vf4 :class vf)
-         (vf5 :class vf)
-         (vf6 :class vf)
-         )
+  (declare (inline))
+  (rlet ((vf0 :class vf :reset-here #t)
+         (vf1 :class vf :reset-here #t)
+         (vf2 :class vf :reset-here #t)
+         (vf3 :class vf :reset-here #t))
+    ;; load vectors
+    (.lvf vf2 a)
+    (.lvf vf3 b)
     (init-vf0-vector)
-    (.lvf vf4 (&-> arg1 quad))
-    (.lvf vf5 (&-> arg2 quad))
-    (.mov.vf.w vf6 vf0)
-    (.add.vf.xyz vf6 vf4 vf5)
-    (.svf (&-> arg0 quad) vf6)
-    arg0
+    ;; add
+    (.add.vf vf1 vf2 vf3)
+    ;; set w = 1
+    (.blend.vf.w vf1 vf1 vf0)
+    ;; store
+    (.svf dst vf1)
     )
+  dst
   )
 
-(defun vector-! ((arg0 vector) (arg1 vector) (arg2 vector))
+(defun vector-! ((dst vector) (a vector) (b vector))
   "Set dst = a - b. The w componenent of dst is set to 0."
-  (vector-! arg0 arg1 arg2)
-  )
-
-(defun vector-zero! ((arg0 vector))
-  "Set xyzw to 0."
-  (set! (-> arg0 quad) (the-as uint128 0))
-  arg0
-  )
-
-(defun vector-reset! ((arg0 vector))
-  "Set vector to <0,0,0,1>."
-  (rlet ((vf0 :class vf))
+  (declare (inline))
+  (rlet ((vf0 :class vf :reset-here #t)
+         (vf1 :class vf :reset-here #t)
+         (vf2 :class vf :reset-here #t)
+         (vf3 :class vf :reset-here #t))
+    ;; load vectors
+    (.lvf vf2 a)
+    (.lvf vf3 b)
     (init-vf0-vector)
-    (.svf (&-> arg0 quad) vf0)
-    arg0
+    ;; subtract
+    (.sub.vf vf1 vf2 vf3)
+    ;; set w = 1
+    (.blend.vf.w vf1 vf1 vf0)
+    ;; store
+    (.svf dst vf1)
     )
+  dst
+  )
+
+(defun vector-zero! ((dst vector))
+  "Set xyzw to 0."
+  (declare (inline))
+  (rlet ((vf1 :class vf :reset-here #t))
+    ;; set vf1 = 0
+    (.xor.vf vf1 vf1 vf1)
+    ;; store the 0
+    (.svf dst vf1)
+    )
+  dst
+  )
+
+(defun vector-reset! ((dst vector))
+  "Set vector to <0,0,0,1>."
+  (declare (inline))
+  (vector-zero! dst)
+  (set! (-> dst w) 1.0)
+  dst
   )
 
 (defun vector-copy! ((arg0 vector) (arg1 vector))
   "Copy arg1 to arg0."
+  (declare (inline))
   (set! (-> arg0 quad) (-> arg1 quad))
   arg0
-  )
-
-(defun vector-xz-! ((arg0 vector) (arg1 vector) (arg2 vector))
-  (rlet ((vf0 :class vf)
-         (vf10 :class vf)
-         (vf11 :class vf)
-         (vf12 :class vf)
-         )
-    (init-vf0-vector)
-    (.lvf vf11 (&-> arg1 quad))
-    (.lvf vf12 (&-> arg2 quad))
-    (.sub.vf.yw vf10 vf0 vf0)
-    (.sub.vf.xz vf10 vf11 vf12)
-    (.svf (&-> arg0 quad) vf10)
-    arg0
-    )
-  )
-
-(defun vector-xz+! ((arg0 vector) (arg1 vector) (arg2 vector))
-  (rlet ((vf0 :class vf)
-         (vf10 :class vf)
-         (vf11 :class vf)
-         (vf12 :class vf)
-         )
-    (init-vf0-vector)
-    (.lvf vf11 (&-> arg1 quad))
-    (.lvf vf12 (&-> arg2 quad))
-    (.sub.vf.yw vf10 vf0 vf0)
-    (.add.vf.xz vf10 vf11 vf12)
-    (.svf (&-> arg0 quad) vf10)
-    arg0
-    )
-  )
-
-(defun vector-vector-project-compute-length! ((arg0 vector) (arg1 vector) (arg2 vector))
-  (vector-float*! arg0 arg2 (/ (vector-dot arg1 arg2) (vector-length-squared arg2)))
-  )
-
-(defun vector-vector-perpendicular! ((arg0 vector) (arg1 vector) (arg2 vector))
-  (let ((s2-0 (new 'stack-no-clear 'vector)))
-    (vector-float*! s2-0 arg2 (/ (vector-dot arg1 arg2) (vector-length-squared arg2)))
-    (vector-! arg0 arg1 s2-0)
-    )
   )
 
 (defun vector-length< ((arg0 vector) (arg1 float))
@@ -605,3 +617,13 @@
   )
 
 (define *zero-vector* (new 'static 'vector))
+
+(defmacro new-stack-vector0 ()
+  "Get a stack vector that's set to 0.
+   This is more efficient than (new 'stack 'vector) because
+   this doesn't call the constructor."
+  `(let ((vec (new 'stack-no-clear 'vector)))
+     (set! (-> vec quad) (the-as uint128 0))
+     vec
+     )
+  )
