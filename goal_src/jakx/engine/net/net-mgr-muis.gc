@@ -6,3 +6,74 @@
 
 
 
+
+(define *net-universe-is-ngs* (the-as object #f))
+
+(define *jakx-patch-file* "JAKX.PAT----------------------")
+
+(define *jakx-patch-tmp* #f)
+
+(define *net-patch-url* #f)
+
+(define *net-patch-version* #f)
+
+;; type universe-choice is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *universe-choice-ct* (the-as object 0))
+
+(define *universe-choices* #f)
+
+(define *medius-muis-hostname* (the-as object #f))
+
+(define *medius-muis-port* (the-as object #x2757))
+
+(define *medius-muis-id* (the-as object 1))
+
+(define *found-id* (the-as object -1))
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
+(let ((gp-0 (new 'static 'state
+              :name 'getting-universe-information
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (method-set! net-mgr 17 gp-0)
+  (set! (-> gp-0 event) (the-as (function process int symbol event-message-block object) L20))
+  (set! (-> gp-0 code) L2)
+  )
+
+(let ((gp-1 (new 'static 'state
+              :name 'dns-lookup
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (method-set! net-mgr 18 gp-1)
+  (set! (-> gp-1 code) L1)
+  )

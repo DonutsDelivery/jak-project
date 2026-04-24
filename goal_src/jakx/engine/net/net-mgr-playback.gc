@@ -6,3 +6,64 @@
 
 
 
+
+(define *playback-stream* (new 'static 'file-stream))
+
+(define *playback-name* (the-as object (new 'global 'string 128 "logs/9-2_20-45-10_192.168.1.2")))
+
+(define *playback-start-time* (the-as object 0))
+
+(define *playback-log-start-time* (the-as object 0))
+
+(define *playback-buf-mem* #f)
+
+(define *playback-buf* #f)
+
+(define *playback-next-event-time* (the-as object 0))
+
+(define *playback-time* (the-as object 0))
+
+(define *playback-bytes-left* (the-as object 0))
+
+(define *playback-machine* (the-as object 0))
+
+(define *playback-delay* (the-as object 0))
+
+(define *playback-event-header* #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(let ((gp-0 (new 'static 'state
+              :name 'starting-playback-game
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (method-set! net-mgr 36 gp-0)
+  (set! (-> gp-0 code) L42)
+  )
+
+(let ((gp-1 (new 'static 'state
+              :name 'playing-playback-game
+              :next #f
+              :exit #f
+              :parent #f
+              :code #f
+              :trans #f
+              :post #f
+              :enter #f
+              :event #f
+              )
+            )
+      )
+  (method-set! net-mgr 37 gp-1)
+  (set! (-> gp-1 event) (the-as (function process int symbol event-message-block object) L36))
+  (set! (-> gp-1 code) L1)
+  )

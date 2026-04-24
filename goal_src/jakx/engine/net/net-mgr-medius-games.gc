@@ -6,3 +6,65 @@
 
 
 
+
+(deftype medius-filter (structure)
+  ((field     int32)
+   (comp-op   int32)
+   (base-val  int32)
+   )
+  (:methods
+    (medius-filter-method-9 () none)
+    )
+  )
+
+
+(define *medius-filters* #f)
+
+(define *medius-server-filters* #f)
+
+(define *medius-desired-server-filters* #f)
+
+(dotimes (v1-4 6)
+  (set! (-> (the-as (pointer int32) (+ (* v1-4 16) (the-as int *medius-filters*)))) -1)
+  )
+
+(dotimes (v1-7 3)
+  (set! (-> (the-as (pointer int32) (+ (* v1-7 16) (the-as int *medius-server-filters*)))) -1)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; WARN: Return type mismatch function vs symbol.
+(defmethod medius-cached-info-method-9 ((this medius-cached-info-game-status))
+  (the-as symbol medius-game-status-info-retrieve-behavior)
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *unfiltered-game-ct* (the-as object 0))
+
+(define *game-end-idx* (the-as object 0))
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.

@@ -6,3 +6,88 @@
 
 
 
+
+(define *chat-msg-buffer* #f)
+
+(define *chat-msg-string-ct* (the-as object 0))
+
+(define *chat-msg-strings*
+  (the-as array (new 'static 'boxed-array :type object :length 0 :allocated-length 16))
+  )
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; type received-chat-msg is defined here, but it is unknown to the decompiler
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *received-chat-msg-ct* (the-as object 0))
+
+(define *received-chat-msgs* #f)
+
+(define *chat-msg-string* (the-as object (new 'global 'string 600 (the-as string #f))))
+
+(define *chat-msg-string2* (the-as object (new 'global 'string 600 (the-as string #f))))
+
+(define *chat-msg-player* (the-as object (new 'global 'string 600 (the-as string #f))))
+
+;; type lobby-chat-string is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type lobby-chat-string) 3 L157)
+
+;; type lobby-chat-window is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type lobby-chat-window) 3 L154)
+
+(define *lobby-chat-window* #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(deftype magic-chat (structure)
+  ((prefix            basic)
+   (popup-text-id     uint32)
+   (send-lobby-event  basic)
+   (has-player-name   basic)
+   (add-clan-id       basic)
+   (buddies-only      basic)
+   (resp-type         basic)
+   (stale-player      basic)
+   )
+  )
+
+
+(define *magic-chat* (the-as array #f))
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(define *chat-msg-box* #f)
+
+(define *chat-popup-sx* (the-as object 400))
+
+(define *r2-press-time* (the-as object -1))
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+(method-set! (the-as type lobby-chat-window) 10 L9)
+
+(method-set! (the-as type lobby-chat-window) 12 L6)
+
+(method-set! (the-as type lobby-chat-window) 9 L5)
+
+(method-set! (the-as type lobby-chat-window) 11 L1)
