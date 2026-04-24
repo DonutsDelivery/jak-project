@@ -2289,7 +2289,16 @@
     "(method 28 hud-item-string)",
     // source: net-mgr-async
     "medius-simple-request-callback",
-    "trivial-callback"
+    "trivial-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-mgr-async
+    "mgcl-simple-request-callback",
+    // source: net-mgr-chat
+    "is-whitespace",
+    // source: net-mgr-dme
+    "lan-game-find-callback",
+    "net-app-msg-callback",
+    "net-sys-msg-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
