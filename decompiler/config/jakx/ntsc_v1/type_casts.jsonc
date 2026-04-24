@@ -41046,5 +41046,68 @@
   ],
   "(method 94 net-player-rushhour)": [
     [0, "v1", "float"]
+  ],
+  "(method 25 mem-buffer)": [
+    [2, "a1", "vector"]
+  ],
+  "(method 29 rigid-body-control)": [
+    [34, "s5", "vector"]
+  ],
+  "(method 57 simple-prim-particle-binding)": [
+    [2, "a3", "vector"]
+  ],
+  "(method 65 vehicle-wheel)": [
+    [41, "s4", "vector"]
+  ],
+  "add-clut-texture-anim-layer-func": [
+    [17, "s5", "vector"]
+  ],
+  "birth-func-set-quat": [
+    [3, "v1", "vector"]
+  ],
+  "birth-func-setup-beam": [
+    [3, "v1", "vector"]
+  ],
+  "blend-clut-texture-anim-layer-func": [
+    [17, "s5", "vector"]
+  ],
+  "collide-planes-intersect": [
+    [1, "a1", "sphere"]
+  ],
+  "collide-planes-test1": [
+    [3, "a3", "sphere"]
+  ],
+  "compute-veh-eco-owner-score": [
+    [9, "a2", "vector"]
+  ],
+  "copy-alpha-texture-anim-layer-func": [
+    [102, "s3", "vector"]
+  ],
+  "copy-clut-alpha-texture-anim-layer-func": [
+    [97, "s3", "vector"]
+  ],
+  "default-texture-anim-layer-func": [
+    [19, "s3", "vector"]
+  ],
+  "dest-blend-clut-texture-anim-layer-func": [
+    [17, "s5", "vector"]
+  ],
+  "draw-debug-line-sphere": [
+    [10, "a0", "sphere"]
+  ],
+  "draw-debug-sphere": [
+    [8, "a0", "sphere"]
+  ],
+  "moving-sphere-moving-sphere-intersect": [
+    [12, "s5", "sphere"]
+  ],
+  "moving-sphere-sphere-intersect": [
+    [8, "s3", "sphere"]
+  ],
+  "no-alpha-texture-anim-layer-func": [
+    [19, "s3", "vector"]
+  ],
+  "set-alpha-texture-anim-layer-func": [
+    [96, "s4", "vector"]
   ]
 }
