@@ -36074,6 +36074,8 @@
 
 
 #|
+;; Real definition is at L16268 (already active). The regen-speculative
+;; commented version below is dead — activating it just creates a duplicate.
 (deftype drawable-inline-array-node (drawable-inline-array)
   ((length  int16              :offset-assert 2)
    (data    draw-node :dynamic :offset-assert 32) ;; guessed by decompiler
