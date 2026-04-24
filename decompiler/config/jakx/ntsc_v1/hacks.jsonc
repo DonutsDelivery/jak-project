@@ -2035,7 +2035,10 @@
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: lights
     "add-light-sphere-to-light-group",
-    "light-hash-get-bucket-index"
+    "light-hash-get-bucket-index",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: load-state
+    "(method 25 load-state)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
