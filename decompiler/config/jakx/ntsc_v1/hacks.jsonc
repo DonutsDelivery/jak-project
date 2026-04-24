@@ -2281,7 +2281,15 @@
     "http-downloader-init-by-other",
     // source: net-hud
     "(method 14 hud-effect)",
-    "(method 9 basic-manager)"
+    "(method 9 basic-manager)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-hud
+    "(method 24 in-game-hud)",
+    "(method 26 in-game-hud)",
+    "(method 28 hud-item-string)",
+    // source: net-mgr-async
+    "medius-simple-request-callback",
+    "trivial-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
