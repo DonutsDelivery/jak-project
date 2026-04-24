@@ -2038,7 +2038,10 @@
     "light-hash-get-bucket-index",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: load-state
-    "(method 25 load-state)"
+    "(method 25 load-state)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: helmet
+    "helmet-hud-init-by-other"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
