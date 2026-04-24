@@ -2041,7 +2041,13 @@
     "(method 25 load-state)",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: helmet
-    "helmet-hud-init-by-other"
+    "helmet-hud-init-by-other",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: menu2-COMMON-GAME
+    "(method 59 map-menu)",
+    "(method 60 index-sprite-list-menu)",
+    "(method 65 map-menu)",
+    "base-menu-event-handler"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
