@@ -10,14 +10,15 @@
 (defmethod print ((this transformq))
   (format #t "#<transformq @ #x~X~%" this)
   (format #t "~T~Ttrans:~F ~F ~F ~F ~%" (-> this trans x) (-> this trans y) (-> this trans z) (-> this trans w))
-  (format #t "~T~Tquat:  ~F ~F ~F ~F ~%" (-> this quat x) (-> this quat y) (-> this quat z) (-> this quat w))
+  (format #t "~T~Tquat:  ~F ~F ~F ~F ~%" (-> this rot x) (-> this rot y) (-> this rot z) (-> this rot w))
   (format #t "~T~Tscale:~F ~F ~F ~F>" (-> this scale x) (-> this scale y) (-> this scale z) (-> this scale w))
   this
   )
 
+;; WARN: Return type mismatch vector vs quaternion.
 (defmethod get-quaternion ((this trsqv))
   "Get the quat for this [[trsqv]]."
-  (-> this quat)
+  (the-as quaternion (-> this rot))
   )
 
 (defmethod set-quaternion! ((this trsqv) (arg0 quaternion))
@@ -40,7 +41,7 @@
    The vel is a maximum velocity limit.
    The frame count is the time constant (first order).
    There's some logic to avoid rapidly changing directions"
-  (let* ((f0-0 (deg-diff (quaternion-y-angle (-> this quat)) (vector-y-angle arg0)))
+  (let* ((f0-0 (deg-diff (quaternion-y-angle (the-as quaternion (-> this rot))) (vector-y-angle arg0)))
          (f1-2 (fmin (* arg1 (seconds-per-frame)) (/ (* 5.0 (fabs f0-0)) (the float arg2))))
          (f30-0 (fmax (fmin f0-0 f1-2) (- f1-2)))
          )
@@ -49,13 +50,13 @@
             (cond
               ((or (= f0-2 0.0)
                    (and (< 0.0 f30-0) (< 0.0 f0-2))
-                   (or (and (< f30-0 0.0) (< f0-2 0.0)) (time-elapsed? (-> this angle-change-time) (seconds 0.2)))
+                   (or (and (< f30-0 0.0) (< f0-2 0.0)) (time-elapsed? (the-as int (-> this angle-change-time)) (seconds 0.2)))
                    )
-               (set-time! (-> this angle-change-time))
+               (set! (-> this angle-change-time) (the-as uint (current-time)))
                f30-0
                )
               (else
-                (* 0.000000001 f30-0)
+                (/ f30-0 1000000000)
                 )
               )
             )
@@ -203,18 +204,16 @@
             (cond
               ((!= s2-0 0.0)
                (let* ((v1-5 (vector-cross! (new 'stack-no-clear 'vector) s1-2 sv-272))
-                      ;; og:preserve-this inlined vector-dot
-                      ; (f0-3 (-> sv-256 x))
-                      ; (f1-3 (-> sv-256 y))
-                      ; (f2-0 (-> sv-256 z))
-                      ; (f3-0 (-> v1-5 x))
-                      ; (f4-0 (-> v1-5 y))
-                      ; (f5-0 (-> v1-5 z))
+                      (f0-3 (-> sv-256 x))
+                      (f1-3 (-> sv-256 y))
+                      (f2-0 (-> sv-256 z))
+                      (f3-0 (-> v1-5 x))
+                      (f4-0 (-> v1-5 y))
+                      (f5-0 (-> v1-5 z))
                       )
-                 (set! f0-4 (vector-dot sv-256 v1-5))
-                 ; (.mula.s f0-3 f3-0)
-                 ; (.madda.s f1-3 f4-0)
-                 ; (.madd.s f0-4 f2-0 f5-0)
+                 (.mula.s f0-3 f3-0)
+                 (.madda.s f1-3 f4-0)
+                 (.madd.s f0-4 f2-0 f5-0)
                  )
                (if (< (* f0-4 s2-0) 0.0)
                    (matrix-from-two-vectors-the-long-way-smooth! s0-1 s1-2 sv-272 arg1 arg3)
@@ -240,7 +239,7 @@
   (forward-up->quaternion
     (get-quaternion this)
     (vector-normalize-copy! (new 'stack-no-clear 'vector) arg0 1.0)
-    (new 'static 'vector :y 1.0 :w 1.0)
+    (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.0 1.0))
     )
   )
 
@@ -249,18 +248,18 @@
   (forward-up->quaternion
     (get-quaternion this)
     (vector-normalize! (vector-! (new 'stack-no-clear 'vector) arg0 (-> this trans)) 1.0)
-    (new 'static 'vector :y 1.0 :w 1.0)
+    (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.0 1.0))
     )
   )
 
 (defun transformq-copy! ((arg0 transformq) (arg1 transformq))
   "Set arg0 = arg1."
   (let ((v1-0 (-> arg1 trans quad))
-        (a2-0 (-> arg1 quat quad))
+        (a2-0 (-> arg1 rot quad))
         (a1-1 (-> arg1 scale quad))
         )
     (set! (-> arg0 trans quad) v1-0)
-    (set! (-> arg0 quat quad) a2-0)
+    (set! (-> arg0 rot quad) a2-0)
     (set! (-> arg0 scale quad) a1-1)
     )
   arg0
@@ -277,7 +276,7 @@
          (vf5 :class vf)
          )
     (init-vf0-vector)
-    (quaternion->matrix arg0 (-> arg1 quat))
+    (quaternion->matrix arg0 (the-as quaternion (-> arg1 rot)))
     (cond
       (#f
         (set! (-> arg0 trans quad) (-> arg1 trans quad))
@@ -313,7 +312,7 @@
          (vf5 :class vf)
          )
     (init-vf0-vector)
-    (quaternion->matrix arg0 (-> arg1 quat))
+    (quaternion->matrix arg0 (the-as quaternion (-> arg1 rot)))
     (.lvf vf1 (&-> arg1 scale quad))
     (.lvf vf3 (&-> arg0 rvec quad))
     (.lvf vf4 (&-> arg0 uvec quad))
@@ -342,7 +341,7 @@
          (vf6 :class vf)
          )
     (init-vf0-vector)
-    (quaternion->matrix arg0 (-> arg1 quat))
+    (quaternion->matrix arg0 (the-as quaternion (-> arg1 rot)))
     (.lvf vf1 (&-> arg1 scale quad))
     (.lvf vf2 (&-> arg1 trans quad))
     (.lvf vf6 (&-> arg2 quad))
@@ -376,7 +375,7 @@
          (vf6 :class vf)
          )
     (init-vf0-vector)
-    (quaternion->matrix arg0 (-> arg1 quat))
+    (quaternion->matrix arg0 (the-as quaternion (-> arg1 rot)))
     (.lvf vf1 (&-> arg1 scale quad))
     (.lvf vf2 (&-> arg1 trans quad))
     (.lvf vf6 (&-> arg2 quad))
@@ -408,7 +407,7 @@
          (vf6 :class vf)
          )
     (init-vf0-vector)
-    (quaternion->matrix arg0 (-> arg1 quat))
+    (quaternion->matrix arg0 (the-as quaternion (-> arg1 rot)))
     (let ((v1-0 (new 'stack-no-clear 'vector)))
       (set! (-> v1-0 x) (/ 1.0 (-> arg2 x)))
       (set! (-> v1-0 y) (/ 1.0 (-> arg2 y)))
@@ -449,7 +448,7 @@
          (vf6 :class vf)
          )
     (init-vf0-vector)
-    (quaternion->matrix arg0 (-> arg1 quat))
+    (quaternion->matrix arg0 (the-as quaternion (-> arg1 rot)))
     (.lvf vf1 (&-> arg1 scale quad))
     (.lvf vf2 (&-> arg1 trans quad))
     (.lvf vf6 (&-> arg2 quad))

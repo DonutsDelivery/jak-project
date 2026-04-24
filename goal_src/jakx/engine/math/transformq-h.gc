@@ -14,20 +14,6 @@
 
 ;; DECOMP BEGINS
 
-(deftype transformq (transform)
-  "A transform, but the rotation is represented with a quaternion."
-  ((quat  quaternion  :inline :overlay-at (-> rot data 0))
-   )
-  )
-
-
-(deftype trsq (trs)
-  "A trs, but the rotation is represented with a quaternion."
-  ((quat  quaternion  :inline :overlay-at (-> rot data 0))
-   )
-  )
-
-
 (deftype trsqv (trsq)
   "A transform with:
 - type information (child of [[basic]])
@@ -44,7 +30,7 @@ As a result, this type has a lot of weird methods and extra stuff hidden in it."
    (rotv                   vector      :inline)
    (scalev                 vector      :inline)
    (dir-targ               quaternion  :inline)
-   (angle-change-time      time-frame)
+   (angle-change-time      uint64)
    (old-y-angle-diff       float)
    )
   (:methods

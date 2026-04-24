@@ -8,7 +8,6 @@
 ;; DECOMP BEGINS
 
 (defun set-eul! ((arg0 euler-angles) (arg1 float) (arg2 float) (arg3 float) (arg4 int))
-  "Set euler angles and the flag bits."
   (set! (-> arg0 x) arg1)
   (set! (-> arg0 y) arg2)
   (set! (-> arg0 z) arg3)
@@ -17,10 +16,9 @@
   )
 
 (defun eul->matrix ((arg0 matrix) (arg1 euler-angles))
-  "Convert from euler angles to 4x4 matrix."
   (matrix-identity! arg0)
   (let ((s5-0 (new 'stack-no-clear 'vector)))
-    (vector-copy! s5-0 arg1)
+    (set! (-> s5-0 quad) (-> arg1 quad))
     (when (= (logand (the int (-> s5-0 w)) 1) 1)
       (let ((f0-2 (-> s5-0 x)))
         (set! (-> s5-0 x) (-> s5-0 z))
@@ -98,8 +96,6 @@
   )
 
 (defun matrix->eul ((arg0 euler-angles) (arg1 matrix) (arg2 int))
-  "Convert matrix to euler angles with given order flag.
-   Not clear how this works if the matrix has more than just a rotation."
   0
   0
   0
@@ -197,7 +193,6 @@
   )
 
 (defun eul->quat ((arg0 quaternion) (arg1 euler-angles))
-  "Convert euler angles to quaternion, not very efficient."
   (let ((s5-0 (new 'stack-no-clear 'matrix)))
     (eul->matrix s5-0 arg1)
     (matrix->quaternion arg0 s5-0)
@@ -206,7 +201,6 @@
   )
 
 (defun quat->eul ((arg0 euler-angles) (arg1 quaternion) (arg2 int))
-  "Convert quaternion to euler angles with given order, not very efficient."
   (let ((s5-0 (new 'stack-no-clear 'matrix)))
     (quaternion->matrix s5-0 arg1)
     (matrix->eul arg0 s5-0 arg2)

@@ -57,7 +57,7 @@
   (let ((s5-0 (new 'stack-no-clear 'matrix)))
     (vector-cross! (-> s5-0 rvec) arg2 arg1)
     (vector-cross! (-> s5-0 uvec) arg1 (-> s5-0 rvec))
-    (vector-copy! (-> s5-0 fvec) arg1)
+    (set! (-> s5-0 fvec quad) (-> arg1 quad))
     (quaternion-normalize! (matrix->quaternion arg0 s5-0))
     )
   )
@@ -144,9 +144,7 @@
          (vf2 :class vf)
          )
     (.lvf vf1 (&-> arg1 quad))
-    ;; og:preserve-this
-    ;; (.sub.vf vf2 vf2 vf2)
-    (.xor.vf vf2 vf2 vf2)
+    (.sub.vf vf2 vf2 vf2)
     (.sub.vf vf1 vf2 vf1)
     (.svf (&-> arg0 quad) vf1)
     arg0
@@ -162,9 +160,7 @@
          (vf2 :class vf)
          )
     (.lvf vf1 (&-> arg1 quad))
-    ;; og:preserve-this
-    ;; (.sub.vf vf2 vf2 vf2)
-    (.xor.vf vf2 vf2 vf2)
+    (.sub.vf vf2 vf2 vf2)
     (.sub.vf.xyz vf2 vf2 vf1)
     (.add.vf.w vf2 vf2 vf1)
     (.svf (&-> arg0 quad) vf2)
@@ -246,11 +242,10 @@
     (.add.mul.y.vf.w acc vf0 vf2 acc)
     (.add.mul.x.vf.w vf2 vf0 vf2 acc)
     (.isqrt.vf Q vf0 vf2 :fsf #b11 :ftf #b11)
-    ;; og:preserve-this
-    ;; (.wait.vf)
+    (.wait.vf)
     (.mul.vf vf2 vf1 Q)
-    ;; (.nop.vf)
-    ;; (.nop.vf)
+    (.nop.vf)
+    (.nop.vf)
     (.svf (&-> arg0 quad) vf2)
     arg0
     )
@@ -270,9 +265,7 @@
     (init-vf0-vector)
     (.lvf vf1 (&-> arg1 quad))
     (.mul.vf vf2 vf1 vf1)
-    ;; og:preserve-this
-    ;; (.sub.vf vf3 vf3 vf3)
-    (.xor.vf vf3 vf3 vf3)
+    (.sub.vf vf3 vf3 vf3)
     (.add.z.vf.w acc vf2 vf2)
     (.add.mul.y.vf.w acc vf0 vf2 acc)
     (.add.mul.x.vf.w vf2 vf0 vf2 acc)
@@ -437,60 +430,7 @@
     )
   )
 
-(defun quaternion->matrix-2 ((arg0 matrix) (arg1 quaternion))
-  "Unused alternate quaternion->matrix function."
-  (/ 0 0)
-  arg0
-  ; (local-vars (v1-1 uint128) (a1-1 uint128) (a1-2 uint128) (a2-0 uint128) (a3-0 uint128))
-  ; (rlet ((acc :class vf)
-  ;        (vf0 :class vf)
-  ;        (vf1 :class vf)
-  ;        (vf2 :class vf)
-  ;        (vf3 :class vf)
-  ;        (vf4 :class vf)
-  ;        (vf5 :class vf)
-  ;        (vf6 :class vf)
-  ;        (vf7 :class vf)
-  ;        (vf8 :class vf)
-  ;        )
-  ;   (init-vf0-vector)
-  ;   (let ((v1-0 (-> arg1 vec quad)))
-  ;     (.pexew a1-1 v1-0)
-  ;     (.mov vf1 v1-0)
-  ;     (.prot3w a2-0 a1-1)
-  ;     (.pcpyud a1-2 v1-0 a1-1)
-  ;     (.mov vf4 a2-0)
-  ;     (let ((a2-1 #x3f800000))
-  ;       (.add.vf vf5 vf1 vf1)
-  ;       (.sub.y.vf.y vf4 vf0 vf4)
-  ;       (.pextlw a3-0 v1-0 a1-2)
-  ;       (.mov vf3 a1-2)
-  ;       (.pextuw v1-1 v1-0 a3-0)
-  ;       (.mov vf2 v1-1)
-  ;       (set! (-> arg0 trans quad) (the-as uint128 0))
-  ;       (.sub.x.vf.x vf3 vf0 vf3)
-  ;       (set! (-> arg0 trans w) (the-as float a2-1))
-  ;       (.sub.z.vf.z vf2 vf0 vf2)
-  ;       (.outer.product.a.vf acc vf5 vf4)
-  ;       (.outer.product.b.vf vf8 vf4 vf5 acc)
-  ;       (.outer.product.a.vf acc vf5 vf3)
-  ;       (.outer.product.b.vf vf7 vf3 vf5 acc)
-  ;       (.outer.product.a.vf acc vf5 vf2)
-  ;       (.outer.product.b.vf vf6 vf2 vf5 acc)
-  ;       (.add.w.vf.z vf8 vf8 vf0)
-  ;       (.add.w.vf.y vf7 vf7 vf0)
-  ;       (.add.w.vf.x vf6 vf6 vf0)
-  ;       (.svf (&-> arg0 quad 2) vf8)
-  ;       (set! (-> arg0 data 11) (the-as float a2-1))
-  ;       (.svf (&-> arg0 quad 1) vf7)
-  ;       (set! (-> arg0 data 7) (the-as float a2-1))
-  ;       (.svf (&-> arg0 quad 0) vf6)
-  ;       (set! (-> arg0 data 3) (the-as float a2-1))
-  ;       )
-  ;     )
-  ;   arg0
-  ;   )
-  )
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
 (defun matrix->quaternion ((arg0 quaternion) (arg1 matrix))
   "Convert a rotation matrix to a quaternion."
@@ -533,7 +473,7 @@
                     )
                   )
                 )
-            (set! (-> arg0 data a2-0) (/ f0-12 2))
+            (set! (-> arg0 vec data a2-0) (/ f0-12 2))
             (if (!= f0-12 0.0)
                 (set! f0-12 (/ 0.5 f0-12))
                 )
@@ -544,14 +484,14 @@
                      f0-12
                      )
                   )
-            (set! (-> arg0 data a3-0)
+            (set! (-> arg0 vec data a3-0)
                   (* (+ (-> (the-as (pointer float) (+ (+ (* a3-0 4) (* a2-0 16)) (the-as int arg1))))
                         (-> (the-as (pointer float) (+ (+ (* a2-0 4) (* a3-0 16)) (the-as int arg1))))
                         )
                      f0-12
                      )
                   )
-            (set! (-> arg0 data v1-4)
+            (set! (-> arg0 vec data v1-4)
                   (* (+ (-> (the-as (pointer float) (+ (+ (* v1-4 4) (* a2-0 16)) (the-as int arg1))))
                         (-> (the-as (pointer float) (+ (+ (* a2-0 4) (* v1-4 16)) (the-as int arg1))))
                         )
@@ -850,7 +790,7 @@
   "Get the first row of the rotation matrix for this quaternion."
   (let ((s5-0 (new-stack-matrix0)))
     (quaternion->matrix s5-0 arg1)
-    (vector-copy! arg0 (-> s5-0 rvec))
+    (set! (-> arg0 quad) (-> s5-0 rvec quad))
     )
   arg0
   )
@@ -859,7 +799,7 @@
   "Get the second row of the rotation matrix for this quaternion."
   (let ((s5-0 (new-stack-matrix0)))
     (quaternion->matrix s5-0 arg1)
-    (vector-copy! arg0 (-> s5-0 uvec))
+    (set! (-> arg0 quad) (-> s5-0 uvec quad))
     )
   arg0
   )
@@ -868,7 +808,7 @@
   "Get the third row of the rotation matrix for this quaternion."
   (let ((s5-0 (new-stack-matrix0)))
     (quaternion->matrix s5-0 arg1)
-    (vector-copy! arg0 (-> s5-0 fvec))
+    (set! (-> arg0 quad) (-> s5-0 fvec quad))
     )
   arg0
   )
@@ -905,28 +845,52 @@
 
 (defun quaternion-rotate-local-x! ((arg0 quaternion) (arg1 quaternion) (arg2 float))
   "Rotate existing quaternion along x axis."
-  (let ((a2-1 (quaternion-vector-angle! (new-stack-quaternion0) (new 'static 'vector :x 1.0 :w 1.0) arg2)))
+  (let ((a2-1 (quaternion-vector-angle!
+                (new-stack-quaternion0)
+                (new 'static 'vector :data (new 'static 'array float 4 1.0 0.0 0.0 1.0))
+                arg2
+                )
+              )
+        )
     (quaternion-normalize! (quaternion*! arg0 arg1 a2-1))
     )
   )
 
 (defun quaternion-rotate-local-y! ((arg0 quaternion) (arg1 quaternion) (arg2 float))
   "Rotate existing quaternion along y axis."
-  (let ((a2-1 (quaternion-vector-angle! (new-stack-quaternion0) (new 'static 'vector :y 1.0 :w 1.0) arg2)))
+  (let ((a2-1 (quaternion-vector-angle!
+                (new-stack-quaternion0)
+                (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.0 1.0))
+                arg2
+                )
+              )
+        )
     (quaternion-normalize! (quaternion*! arg0 arg1 a2-1))
     )
   )
 
 (defun quaternion-rotate-local-z! ((arg0 quaternion) (arg1 quaternion) (arg2 float))
   "Rotate existing quaternion along z axis."
-  (let ((a2-1 (quaternion-vector-angle! (new-stack-quaternion0) (new 'static 'vector :z 1.0 :w 1.0) arg2)))
+  (let ((a2-1 (quaternion-vector-angle!
+                (new-stack-quaternion0)
+                (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 1.0 1.0))
+                arg2
+                )
+              )
+        )
     (quaternion-normalize! (quaternion*! arg0 arg1 a2-1))
     )
   )
 
 (defun quaternion-rotate-y! ((arg0 quaternion) (arg1 quaternion) (arg2 float))
   "Rotate existing quaternion along y axis (right multiply)."
-  (let ((a1-2 (quaternion-vector-angle! (new-stack-quaternion0) (new 'static 'vector :y 1.0 :w 1.0) arg2)))
+  (let ((a1-2 (quaternion-vector-angle!
+                (new-stack-quaternion0)
+                (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.0 1.0))
+                arg2
+                )
+              )
+        )
     (quaternion-normalize! (quaternion*! arg0 a1-2 arg1))
     )
   )
@@ -978,26 +942,28 @@
     )
   )
 
-(defun vector-rotate-around-axis! ((arg0 vector) (arg1 vector) (arg2 float) (arg3 vector))
+(defun vector-rotate-around-axis! ((arg0 vector) (arg1 quaternion) (arg2 float) (arg3 vector))
   "Rotate along y so z-axis points to match another. Use arg3 as the max rotation amount."
   (let ((a2-1 (quaternion-vector-angle! (new 'stack-no-clear 'quaternion) arg3 arg2)))
-    (vector-orient-by-quat! arg0 arg1 a2-1)
+    (vector-orient-by-quat! arg0 (-> arg1 vec) a2-1)
     )
   )
 
 (defun vector-rotate-x! ((arg0 vector) (arg1 vector) (arg2 float))
   "Rotate vector along x axis."
-  (vector-rotate-around-axis! arg0 arg1 arg2 *x-vector*)
+  (vector-rotate-around-axis! arg0 (the-as quaternion arg1) arg2 *x-vector*)
   )
 
 (defun vector-rotate-y! ((arg0 vector) (arg1 vector) (arg2 float))
   "Rotate vector along y axis."
-  (vector-rotate-around-axis! arg0 arg1 arg2 *y-vector*)
+  (vector-rotate-around-axis! arg0 (the-as quaternion arg1) arg2 *y-vector*)
   )
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
 (defun vector-rotate-z! ((arg0 vector) (arg1 vector) (arg2 float))
   "Rotate vector along z axis."
-  (vector-rotate-around-axis! arg0 arg1 arg2 *z-vector*)
+  (vector-rotate-around-axis! arg0 (the-as quaternion arg1) arg2 *z-vector*)
   )
 
 (defun vector-y-angle ((arg0 vector))
@@ -1012,7 +978,11 @@
 
 (defun quaternion<-rotate-y-vector ((arg0 quaternion) (arg1 vector))
   "Create a quaternion representing only the yaw of the given vector."
-  (quaternion-vector-angle! arg0 (new 'static 'vector :y 1.0 :w 1.0) (vector-y-angle arg1))
+  (quaternion-vector-angle!
+    arg0
+    (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.0 1.0))
+    (vector-y-angle arg1)
+    )
   )
 
 (defun-debug quaternion-validate ((arg0 quaternion))
