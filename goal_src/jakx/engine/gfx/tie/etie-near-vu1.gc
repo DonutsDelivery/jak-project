@@ -7,3 +7,71 @@
 
 ;; DECOMP BEGINS
 
+(deftype etn-consts (structure)
+  ((gifbufs  qword            :inline)
+   (adgif    qword            :inline)
+   (alpha    qword            :inline)
+   (strgif   generic-gif-tag  :inline)
+   (envgif   generic-gif-tag  :inline)
+   (envmap   adgif-shader     :inline)
+   (pers0    vector           :inline)
+   (pers1    vector           :inline)
+   (hvdf     vector           :inline)
+   (invh     vector           :inline)
+   (guard    vector           :inline)
+   )
+  )
+
+
+(deftype etn-matrix (structure)
+  ((rmtx   matrix   :inline)
+   (nmtx   matrix3  :inline)
+   (morph  float    :overlay-at (-> nmtx data 3))
+   (fog    float    :overlay-at (-> nmtx data 7))
+   (fade   uint32   :overlay-at (-> nmtx data 11))
+   (tint   qword    :inline)
+   )
+  )
+
+
+(deftype etn-vtx (structure)
+  ((pos  vector  :inline)
+   (clr  vector  :inline)
+   (tex  vector  :inline)
+   (tx2  vector  :inline)
+   )
+  )
+
+
+(deftype etn-plane (structure)
+  ((point    uint32)
+   (prev     uint32)
+   (outfunc  uint32)
+   (flags    uint32)
+   (out      etn-vtx  :inline)
+   (in       etn-vtx  :inline)
+   )
+  )
+
+
+(define etn-vu1-block #f)
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
+
+;; ERROR: function has no type analysis. Cannot decompile.
