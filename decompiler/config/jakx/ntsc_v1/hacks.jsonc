@@ -1886,7 +1886,14 @@
     // source: find-nearest
     "sorted-targ-validator-is-player-vehicle",
     // source: fmv-player
-    "fmv-player-init-by-other"
+    "fmv-player-init-by-other",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: entity
+    "vis-dist-ok?",
+    // source: font
+    "char-effect-compute2",
+    "draw-string-asm-packed",
+    "draw-string-init-justify"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
