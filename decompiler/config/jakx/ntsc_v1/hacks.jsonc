@@ -1967,7 +1967,15 @@
     "part-tracker-subsampler-init",
     "simple-prim-init-by-other",
     // source: generic-tie
-    "generic-tie-dma-to-spad-sync"
+    "generic-tie-dma-to-spad-sync",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: generic-tie
+    "generic-tie-convert",
+    "generic-tie-convert-proc",
+    // source: gkernel
+    "reset-and-call",
+    "return-from-thread",
+    "return-from-thread-dead"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
