@@ -1837,7 +1837,24 @@
     "dma-sync-fast",
     "dma-sync-with-count",
     // source: drift
-    "drift-editor-init-by-other"
+    "drift-editor-init-by-other",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: collide-probe
+    "collide-probe-instance-tie",
+    // source: collide-shape
+    "find-ground-point",
+    // source: draw-node
+    "draw-node-cull",
+    // source: drawable
+    "line-in-view-frustum-any?",
+    "real-main-draw-hook",
+    "sphere-in-view-frustum-any?",
+    // source: driver
+    "driver-init-by-other",
+    // source: dynamic-mem
+    "mem-alloc-scert",
+    "mem-free-scert",
+    "mem-realloc-scert"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
