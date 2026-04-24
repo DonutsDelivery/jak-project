@@ -1920,7 +1920,9 @@
       123,
       "s5",
       "process-focusable"
-    ]
+    ],
+    [2, "gp", "cloth-on-skeleton"],
+    [2, "a0", "uint32"]
   ],
   "(method 13 cloth-system)": [
     [2, "a0", "basic"],
@@ -2071,7 +2073,9 @@
       "_stack_",
       212,
       "float"
-    ]
+    ],
+    [227, "gp", "cloth-system"],
+    [227, "v1", "int32"]
   ],
   "(method 22 cloth-system)": [
     [
@@ -2103,7 +2107,9 @@
       "_stack_",
       164,
       "float"
-    ]
+    ],
+    [197, "gp", "cloth-system"],
+    [197, "v1", "int32"]
   ],
   "(method 10 cloth-on-skeleton)": [
     [
@@ -2140,7 +2146,9 @@
       99,
       "v0",
       "joint"
-    ]
+    ],
+    [2, "gp", "cloth-on-skeleton"],
+    [2, "v1", "uint32"]
   ],
   "emerc-vu1-init-buffer": [
     [
@@ -2522,7 +2530,8 @@
       12,
       "a3",
       "int"
-    ]
+    ],
+    [1, "v1", "level-group"]
   ],
   "drawable-load": [
     [
@@ -2604,7 +2613,8 @@
       71,
       "s3",
       "gui-connection"
-    ]
+    ],
+    [75, "s4", "engine"]
   ],
   "(method 17 gui-control)": [
     [
@@ -2664,7 +2674,8 @@
       127,
       "a0",
       "gui-connection"
-    ]
+    ],
+    [130, "v0", "int32"]
   ],
   "(method 10 gui-control)": [
     [
@@ -4744,7 +4755,8 @@
       69,
       "a0",
       "process-focusable"
-    ]
+    ],
+    [12, "v1", "view"]
   ],
   "manipy-init": [
     [
@@ -11294,7 +11306,8 @@
       171,
       "s0",
       "(function object object object)"
-    ]
+    ],
+    [8, "s3", "int32"]
   ],
   "(method 10 level)": [
     [
@@ -14995,7 +15008,9 @@
       ],
       "s1",
       "collide-shape-moving"
-    ]
+    ],
+    [156, "s1", "collide-shape"],
+    [156, "v1", "uint8"]
   ],
   "(method 12 collide-shape-prim-sphere)": [
     [
@@ -15049,7 +15064,9 @@
       79,
       "s4",
       "collide-shape-prim-mesh"
-    ]
+    ],
+    [83, "s4", "collide-shape-prim"],
+    [83, "s2", "meters"]
   ],
   "(method 66 collide-shape-moving)": [
     [
@@ -39167,7 +39184,8 @@
     [12, "gp", "hud-item-group"]
   ],
   "(method 10 linked-list)": [
-    [1, "a0", "linked-list"]
+    [1, "a0", "linked-list"],
+    [3, "v1", "list-link"]
   ],
   "(method 10 net-clan-ladder-stats-info)": [
     [2, "gp", "net-clan-ladder-stats-info"]
@@ -39323,7 +39341,8 @@
     [4, "gp", "race-mesh"]
   ],
   "(method 18 spartacus-editor)": [
-    [3, "gp", "spartacus-editor"]
+    [3, "gp", "spartacus-editor"],
+    [3, "a0", "uint8"]
   ],
   "(method 18 tire-trail)": [
     [3, "gp", "tire-trail"]
@@ -39365,7 +39384,8 @@
     [25, "gp", "car-info-full"]
   ],
   "(method 21 collide-cache)": [
-    [50, "a0", "collide-cache"]
+    [50, "a0", "collide-cache"],
+    [50, "a2", "int32"]
   ],
   "(method 21 hud-item-group)": [
     [12, "gp", "hud-item-group"]
@@ -39386,7 +39406,8 @@
     [292, "gp", "load-state"]
   ],
   "(method 22 spartacus-editor)": [
-    [157, "gp", "spartacus-editor"]
+    [157, "gp", "spartacus-editor"],
+    [157, "a0", "uint8"]
   ],
   "(method 23 blit-displays-work)": [
     [3, "gp", "blit-displays-work"]
@@ -39416,22 +39437,26 @@
     [0, "a0", "spartacus-editor"]
   ],
   "(method 26 hang-time-hud-single)": [
-    [30, "a0", "hang-time-hud-single"]
+    [30, "a0", "hang-time-hud-single"],
+    [31, "a0", "process-tree"]
   ],
   "(method 26 hud-item-string)": [
     [0, "a0", "hud-item-string"]
   ],
   "(method 3 attackable-hash)": [
-    [19, "gp", "attackable-hash"]
+    [19, "gp", "attackable-hash"],
+    [19, "a2", "(pointer uint64)"]
   ],
   "(method 3 bsp-header)": [
     [34, "gp", "bsp-header"]
   ],
   "(method 3 cloth-on-skeleton)": [
-    [66, "gp", "cloth-on-skeleton"]
+    [66, "gp", "cloth-on-skeleton"],
+    [66, "a2", "anchor-point-array"]
   ],
   "(method 3 cloth-system)": [
-    [66, "gp", "cloth-system"]
+    [66, "gp", "cloth-system"],
+    [66, "a2", "anchor-point-array"]
   ],
   // inspect generic-tie-interp-point: op 19 does (l.q gp) to print the
   // overlapping `quad` field. The quad field is commented out in the deftype
@@ -39500,7 +39525,8 @@
     [3, "gp", "net-world"]
   ],
   "(method 43 collide-shape)": [
-    [28, "gp", "collide-shape"]
+    [28, "gp", "collide-shape"],
+    [28, "v1", "uint8"]
   ],
   "(method 44 process-drawable)": [
     [2, "gp", "process-drawable"]
@@ -39542,7 +39568,8 @@
     [2, "gp", "helmet-hud"]
   ],
   "(method 51 net-powerup)": [
-    [0, "a0", "net-powerup"]
+    [0, "a0", "net-powerup"],
+    [3, "a1", "entity-actor"]
   ],
   "(method 51 process-focusable)": [
     [1, "a0", "process-focusable"]
@@ -39575,7 +39602,8 @@
     [1, "gp", "task-arrow"]
   ],
   "(method 54 wrong-way)": [
-    [0, "a0", "wrong-way"]
+    [0, "a0", "wrong-way"],
+    [5, "a0", "cspace-array"]
   ],
   "(method 55 joint-exploder)": [
     [4, "gp", "joint-exploder"]
@@ -39602,7 +39630,8 @@
     [0, "a0", "rigid-body-object"]
   ],
   "(method 58 net-mgr)": [
-    [11, "a0", "net-mgr"]
+    [11, "a0", "net-mgr"],
+    [14, "v1", "state"]
   ],
   "(method 58 water-anim)": [
     [7, "gp", "water-anim"]
@@ -39614,7 +39643,8 @@
     [2, "gp", "wvehicle"]
   ],
   "(method 62 rigid-body-object)": [
-    [5, "a0", "rigid-body-object"]
+    [5, "a0", "rigid-body-object"],
+    [8, "v1", "ambient-sound"]
   ],
   "(method 63 rigid-body-object)": [
     [0, "a0", "rigid-body-object"]
@@ -39641,7 +39671,8 @@
     [8, "gp", "v-mongoose"]
   ],
   "(method 7 cloth-system)": [
-    [17, "gp", "cloth-system"]
+    [17, "gp", "cloth-system"],
+    [17, "v1", "anchor-point-array"]
   ],
   "(method 7 collide-shape-moving)": [
     [0, "a0", "collide-shape-moving"]
@@ -39665,7 +39696,8 @@
     [0, "a0", "path-control"]
   ],
   "(method 7 spartacus-editor)": [
-    [36, "gp", "spartacus-editor"]
+    [36, "gp", "spartacus-editor"],
+    [36, "a0", "uint8"]
   ],
   "(method 7 vol-control)": [
     [0, "a0", "vol-control"]
@@ -39707,7 +39739,8 @@
     [10, "gp", "vehicle"]
   ],
   "(method 87 rigid-body-object)": [
-    [0, "a0", "rigid-body-object"]
+    [0, "a0", "rigid-body-object"],
+    [4, "a2", "ambient-sound"]
   ],
   "(method 87 vehicle)": [
     [1, "gp", "vehicle"]
@@ -39725,7 +39758,8 @@
     [3, "gp", "construction-object"]
   ],
   "(method 89 net-player)": [
-    [0, "a0", "net-player"]
+    [0, "a0", "net-player"],
+    [2, "v1", "symbol"]
   ],
   "(method 9 camera-facing-quad)": [
     [2, "gp", "camera-facing-quad"]
@@ -39830,7 +39864,8 @@
     [0, "a0", "nav-mesh-poly"]
   ],
   "(method 12 vehicle-section)": [
-    [0, "a0", "vehicle-section"]
+    [0, "a0", "vehicle-section"],
+    [18, "a0", "car-info-full"]
   ],
   "(method 13 nav-mesh-editable)": [
     [0, "gp", "nav-mesh-editable"]
@@ -39855,7 +39890,8 @@
     [8, "gp", "artifact"]
   ],
   "(method 15 nav-control)": [
-    [2, "a0", "nav-control"]
+    [2, "a0", "nav-control"],
+    [5, "f0", "meters"]
   ],
   "(method 15 nav-mesh-editable)": [
     [1, "gp", "nav-mesh-editable"]
@@ -39907,7 +39943,8 @@
     [3, "gp", "nav-mesh-editable"]
   ],
   "(method 18 part-tracker)": [
-    [11, "a0", "part-tracker"]
+    [11, "a0", "part-tracker"],
+    [12, "v1", "view"]
   ],
   "(method 18 process-nettable)": [
     [0, "a0", "process-nettable"]
@@ -39981,7 +40018,8 @@
     [4, "a0", "net-process-mgr"]
   ],
   "(method 29 nav-control)": [
-    [1, "a0", "nav-control"]
+    [1, "a0", "nav-control"],
+    [4, "a0", "collide-shape"]
   ],
   "(method 3 nav-graph-editor)": [
     [152, "gp", "nav-graph-editor"]
@@ -40001,7 +40039,8 @@
     [2, "a0", "net-process-mgr"]
   ],
   "(method 32 net-process-mgr)": [
-    [1, "a0", "net-process-mgr"]
+    [1, "a0", "net-process-mgr"],
+    [2, "v1", "state"]
   ],
   "(method 34 nav-graph-editor)": [
     [0, "a0", "nav-graph-editor"]
@@ -40164,7 +40203,8 @@
     [4, "gp", "nav-graph-editor"]
   ],
   "(method 50 net-enemy)": [
-    [0, "a0", "net-enemy"]
+    [0, "a0", "net-enemy"],
+    [3, "v1", "state"]
   ],
   "(method 51 editable-player)": [
     [1, "gp", "editable-player"]
@@ -40221,7 +40261,8 @@
     [3, "a0", "net-player-deathmatch"]
   ],
   "(method 54 net-player-race)": [
-    [1, "a0", "net-player-race"]
+    [1, "a0", "net-player-race"],
+    [2, "v1", "state"]
   ],
   "(method 54 net-process-mgr)": [
     [4, "a0", "basic"],
@@ -40482,7 +40523,8 @@
     [0, "gp", "index-sprite-list-menu"]
   ],
   "(method 65 map-menu)": [
-    [3, "a0", "map-menu"]
+    [3, "a0", "map-menu"],
+    [4, "a0", "cspace-array"]
   ],
   "(method 65 nav-graph-editor)": [
     [0, "a0", "nav-graph-editor"]
@@ -40570,7 +40612,8 @@
     [1, "a0", "net-player"]
   ],
   "(method 68 rigid-body-object)": [
-    [1, "a0", "rigid-body-object"]
+    [1, "a0", "rigid-body-object"],
+    [2, "a1", "ambient-sound"]
   ],
   "(method 68 string-menu)": [
     [0, "gp", "string-menu"]
@@ -40676,7 +40719,8 @@
     [4, "a0", "rigid-body-object"]
   ],
   "(method 85 net-enemy)": [
-    [0, "a0", "net-enemy"]
+    [0, "a0", "net-enemy"],
+    [1, "a1", "joint-control"]
   ],
   "(method 85 net-game-mgr-artifact)": [
     [30, "gp", "net-game-mgr-artifact"]
@@ -40782,7 +40826,8 @@
     [1, "v1", "handle"]
   ],
   "driver-head": [
-    [0, "s6", "driver"]
+    [0, "s6", "driver"],
+    [0, "v1", "basic"]
   ],
   "driver-anim": [
     [0, "s6", "driver"],
@@ -41144,5 +41189,134 @@
     [62, "a1", "(pointer gs-reg64)"],
     [64, "a1", "(pointer gs-alpha)"],
     [66, "a1", "(pointer gs-reg64)"]
+  ],
+  "(method 10 talker-speech-class)": [
+    [6, "a1", "game-info"]
+  ],
+  "(method 9 talker-speech-class)": [
+    [4, "a1", "game-info"]
+  ],
+  "(method 12 collide-cache)": [
+    [10, "s5", "collide-query"],
+    [10, "v1", "collide-spec"]
+  ],
+  "(method 13 collide-cache)": [
+    [51, "gp", "collide-query"],
+    [51, "v1", "pat-surface"]
+  ],
+  "(method 18 cloth-system)": [
+    [0, "a0", "cloth-system"],
+    [0, "v1", "uint32"]
+  ],
+  "(method 24 cloth-system)": [
+    [208, "gp", "cloth-system"],
+    [208, "v1", "int32"]
+  ],
+  "(method 25 cloth-system)": [
+    [2, "gp", "cloth-system"],
+    [2, "a0", "uint32"]
+  ],
+  "(method 26 cloth-system)": [
+    [2, "a0", "cloth-system"],
+    [2, "a1", "int32"]
+  ],
+  "(method 27 cloth-system)": [
+    [10, "s5", "cloth-system"],
+    [10, "t0", "int32"]
+  ],
+  "(method 34 cloth-system)": [
+    [1, "a0", "cloth-system"],
+    [1, "a1", "uint32"]
+  ],
+  "(method 9 cloth-system)": [
+    [1, "gp", "cloth-system"],
+    [1, "v1", "uint32"]
+  ],
+  "(method 3 game-save)": [
+    [92, "a2", "uint8"]
+  ],
+  "(method 64 driver-jak)": [
+    [10, "v1", "uint8"]
+  ],
+  "build-instance-list": [
+    [33, "v1", "int16"]
+  ],
+  "find-instance-by-index": [
+    [26, "v1", "int16"]
+  ],
+  "print-prototype-list": [
+    [26, "v1", "int16"]
+  ],
+  "(method 12 verlet-particle-system)": [
+    [3, "f1", "particle-array"]
+  ],
+  "(method 19 collide-cache)": [
+    [26, "a0", "pat-surface"]
+  ],
+  "(method 25 nav-control)": [
+    [0, "f0", "float"]
+  ],
+  "(method 27 nav-control)": [
+    [0, "f0", "meters"]
+  ],
+  "(method 105 vehicle)": [
+    [0, "v1", "float"]
+  ],
+  "(method 14 vehicle-section)": [
+    [4, "f2", "float"]
+  ],
+  "(method 20 setting-control)": [
+    [0, "v1", "engine-pers"]
+  ],
+  "(method 52 nav-graph-editor)": [
+    [0, "v1", "symbol"]
+  ],
+  "(method 58 vehicle)": [
+    [0, "f0", "float"]
+  ],
+  "(method 71 net-player)": [
+    [7, "v1", "float"]
+  ],
+  "(method 74 net-world)": [
+    [1, "a2", "symbol"]
+  ],
+  "(method 75 net-world)": [
+    [0, "v1", "symbol"]
+  ],
+  "(method 9 net-player-ladder-stats-info)": [
+    [6, "a0", "stat-info"]
+  ],
+  "(method 152 vehicle)": [
+    [1, "v1", "float"]
+  ],
+  "(method 187 wvehicle)": [
+    [36, "f2", "uint8"]
+  ],
+  "(method 202 wvehicle)": [
+    [57, "v1", "float"]
+  ],
+  "process-drawable-reset-all-cloth": [
+    [24, "a1", "uint32"]
+  ],
+  "process-drawable-set-cloth-ground-height": [
+    [24, "a2", "uint32"]
+  ],
+  "process-drawable-set-riding": [
+    [26, "a3", "uint32"]
+  ],
+  "process-drawable-set-wind-strength": [
+    [27, "a2", "uint32"]
+  ],
+  "process-drawable-show-all-cloth": [
+    [38, "a0", "uint32"]
+  ],
+  "process-drawable-slow-mo-cloth": [
+    [29, "t0", "uint32"]
+  ],
+  "sp-relaunch-particle-3d": [
+    [32, "a1", "uint32"]
+  ],
+  "spartacus-editor-init": [
+    [62, "v1", "uint8"]
   ]
 }
