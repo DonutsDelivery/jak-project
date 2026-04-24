@@ -2312,7 +2312,15 @@
     "dummy-callback",
     "get-host-by-name-callback",
     "lan-game-verify-callback",
-    "net-lanfind-exchange-callback"
+    "net-lanfind-exchange-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-mgr-medius-buddies
+    "buddies-refreshing-callback",
+    "finding-player-callback",
+    "ignore-refreshing-callback",
+    // source: net-mgr-medius-cache
+    "(method 11 medius-cache)",
+    "(method 11 medius-cached-info)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
