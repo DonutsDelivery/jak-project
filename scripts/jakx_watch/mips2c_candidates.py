@@ -1,14 +1,26 @@
 #!/usr/bin/env python3
 """Rank jak3 mips2c files + individual functions by impact on jakx decomp.
 
-For each jak3_functions/*.cpp, find all functions it installs, grep them in
-jakx's _disasm.gc output, and score by (bucket of containing file, error
-count of containing file).
+ACTIONABILITY phase (narrower):
+  Filters mips2c candidates to ONLY those currently referenced in jakx decomp.
+  For each jak3_functions/*.cpp, find all functions it installs, grep them in
+  jakx's _disasm.gc output, and score by (bucket of containing file, error
+  count of containing file).
 
 Higher score = porting that .cpp could unblock more stubs.
 
-Also writes `.jakx_watch/mips2c_queue.md` with a ranked top-10 per-FUNCTION
-port list for self-serve batched work.
+Purpose:
+  mips2c_queue.md is an ACTIONABLE work queue — only functions that would
+  have immediate decomp impact (referenced in split-failed or real-partial files).
+  Functions not yet referenced in decomp are excluded, even if they exist in jak3.
+
+Output:
+  .jakx_watch/mips2c_queue.md       — ranked top-10 per-FUNCTION port list
+  .jakx_watch/history/latest.json   — compact copy for measuring progress
+
+Compare with mips2c_candidates.md (from mips2c_candidate_scan.py) to find
+"future candidates" — functions that aren't yet blocking decomp but may become
+blockers as more deftypes activate.
 """
 from __future__ import annotations
 

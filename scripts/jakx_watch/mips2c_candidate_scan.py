@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
 """Surface mips2c port candidates for jakx from two signal sources.
 
-Signal A — jak3-has-it:
+DISCOVERY phase (broader):
+  Scans ALL jak3 mips2c functions (whether or not jakx references them).
+  Reports on decomp blockers (asm-flagged functions, type-prop failures).
+  Produces mips2c_candidates.md with a complete ranked list of potential ports.
+
+Two signals combined:
+
+Signal A — jak3-has-it (comprehensive):
   Scan jak3_functions/*.cpp for registered functions that jakx's disasm
   files reference but jakx_functions/*.cpp does not yet provide.
   Weight by how many split-failed files reference each function.
 
-Signal B — asm-error markers:
+Signal B — asm-error markers (reactive):
   Parse the most recent decompiler log for functions that the decompiler
   flagged as asm-heavy or failed to decompile:
     • "flagging as asm" / "flagged as asm" (strange stack usage)
@@ -16,8 +23,12 @@ Signal B — asm-error markers:
   Group by source file, cross-reference with jak3 mips2c.
 
 Output:
-  .jakx_watch/mips2c_candidates.md   — ranked queue for A1/A2
+  .jakx_watch/mips2c_candidates.md   — ALL candidates (even if not currently referenced)
   stdout                             — summary counts
+
+Note: mips2c_candidates.py produces a separate mips2c_queue.md that filters to
+ACTIONABLE candidates — only functions that are currently referenced in jakx decomp.
+Compare the two to find candidates that exist but aren't yet decomp blockers.
 """
 from __future__ import annotations
 
