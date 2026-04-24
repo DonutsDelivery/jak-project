@@ -40,8 +40,7 @@
 
 
 (deftype mood-fog-table (structure)
-  ((data   mood-fog  8 :inline)
-   (_data  uint128   24 :overlay-at data)
+  ((data  mood-fog  8 :inline)
    )
   )
 
@@ -60,8 +59,7 @@
 
 
 (deftype mood-color-table (structure)
-  ((data   mood-color  8 :inline)
-   (_data  uint128     16 :overlay-at data)
+  ((data  mood-color  8 :inline)
    )
   )
 
@@ -209,7 +207,6 @@
 (deftype mood-context (mood-context-core3)
   ((itimes  vector4w  4 :inline)
    (state   uint32    32)
-   (data    uint128   123 :overlay-at (-> current-fog fog-color data 0))
    )
   )
 
@@ -243,9 +240,9 @@
    (target-special-interp   float)
    (rate-special-interp     float)
    (display-flag            symbol)
-   (overide-weather-flag    symbol)
+   (override-weather-flag   basic)
    (pad                     int32)
-   (overide                 mood-weather        :inline)
+   (override                mood-weather        :inline)
    (lightning-index         int32)
    (lightning-val           int32)
    (lightning-time          int32)
@@ -264,20 +261,20 @@
    (clouds                  mood-clouds         9)
    )
   (:methods
-    (init-weather! (_type_) none)
-    (set-cloud-and-fog-interp! (_type_ float float float float) none)
-    (update-mood-range! (_type_ float float float float) none)
-    (set-time-for-random-weather! (_type_ float float) none)
-    (set-special-interps! (_type_ float float symbol) none)
+    (init-weather! (_type_) int)
+    (set-cloud-and-fog-interp! (_type_ float float float float) int)
+    (update-mood-range! (_type_ float float float float) int)
+    (set-time-for-random-weather! (_type_ float float) int)
+    (set-special-interps! (_type_ float float symbol) int)
     (weather-event-concluded? (_type_) symbol)
-    (set-lightning-time! (_type_ int int float) none)
-    (apply-mood-clouds-and-fog (_type_ mood-control-work) none)
-    (apply-mood-fog (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) none)
-    (apply-fog-height (_type_ mood-control-work float float float float) none)
-    (apply-mood-colors (_type_ mood-control-work) none)
-    (mood-control-method-20 (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) none)
-    (apply-mood-channels (_type_ mood-control-work) none)
-    (adjust-num-clouds (_type_ mood-control-work) none)
+    (set-lightning-time! (_type_ mood-control-work) int)
+    (apply-mood-clouds-and-fog (_type_ mood-control-work) int)
+    (apply-mood-fog (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) int)
+    (apply-fog-height (_type_ mood-control-work float float float float) int)
+    (apply-mood-colors (_type_ mood-control-work) int)
+    (mood-control-method-20 (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) int)
+    (apply-mood-channels (_type_ mood-control-work) int)
+    (adjust-num-clouds (_type_ mood-control-work) int)
     (gen-lightning-and-thunder! (_type_ int) none)
     (play-or-stop-lightning-sfx! (_type_ sound-spec vector) none)
     )
@@ -299,10 +296,10 @@
         )
     )
   0
-  (none)
   )
 
+;; WARN: Return type mismatch object vs symbol.
 (defmethod weather-event-concluded? ((this mood-control))
   "@returns [[#t]] if [[this::override-weather-flag]] is set, we aren't in a cutscene and [[this::current-special-interp]] is equal to `0.0`"
-  (and (-> this overide-weather-flag) (not (movie?)) (= (-> this current-special-interp) 0.0))
+  (the-as symbol (and (-> this override-weather-flag) (not (movie?)) (= (-> this current-special-interp) 0.0)))
   )

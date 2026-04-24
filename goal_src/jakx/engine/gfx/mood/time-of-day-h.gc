@@ -40,8 +40,6 @@
 ;; DECOMP BEGINS
 
 (deftype palette-fade-control (structure)
-  "Unused interface to the time-of-day control. Was used in jak 1 as an interface between level code,
-and the code in mood.gc, which set the actual fade values for time-of-day."
   ((trans       vector  :inline)
    (fade        float)
    (actor-dist  float)
@@ -50,21 +48,18 @@ and the code in mood.gc, which set the actual fade values for time-of-day."
 
 
 (deftype palette-fade-controls (basic)
-  "Unused interface to the time-of-day control. Was used in jak 1 as an interface between level code,
-and the code in mood.gc, which set the actual fade values for time-of-day."
   ((control  palette-fade-control  8 :inline)
    )
   (:methods
-    (reset! (_type_) none)
-    (set-fade! (_type_ int float float vector) object)
+    (palette-fade-controls-method-9 (_type_) none)
+    (palette-fade-controls-method-10 (_type_ int float float vector) object)
     )
   )
 
 
-(define-perm *palette-fade-controls* palette-fade-controls (new 'global 'palette-fade-controls))
+(define-perm *palette-fade-controls* object (new 'global 'palette-fade-controls))
 
 (deftype time-of-day-proc (process)
-  "Process for running things that change with the time-of-day, like lighting, sun/stars/moon, etc."
   ((hours               int32)
    (minutes             int32)
    (seconds             int32)
@@ -85,18 +80,20 @@ and the code in mood.gc, which set the actual fade values for time-of-day."
    (green-sun           sparticle-launch-control)
    (moon-count          int32)
    (moon                sparticle-launch-control)
-   (day-star-count      int32)
-   (day-star            sparticle-launch-control)
-   (day-star-enable     symbol)
    (start-timer         int32)
    )
+  (:methods
+    (time-of-day-proc-method-9 () none)
+    (time-of-day-proc-method-10 () none)
+    (time-of-day-proc-method-11 () none)
+    (time-of-day-proc-method-12 () none)
+    (time-of-day-proc-method-13 () none)
+    (time-of-day-proc-method-14 () none)
+    )
   )
 
 
 (deftype time-of-day-palette (basic)
-  "Pre-baked lighting values used by rendering code. The exact meaning of this data can vary,
-but in all cases, the time-of-day system can do linear interpolation of two palettes to
-blend between them."
   ((width   int32)
    (height  int32)
    (pad     int32)
@@ -106,42 +103,41 @@ blend between them."
 
 
 (deftype time-of-day-context (basic)
-  "A mix of inputs/outputs to the time-of-day system."
-  ((interp                float        10)
-   (current-fog           mood-fog     :inline)
-   (current-sky-color     vector       :inline)
-   (current-env-color     vector       :inline)
-   (current-prt-color     vector       :inline)
-   (current-shadow-color  vector       :inline)
-   (light-group           light-group  8 :inline)
-   (current-clouds        mood-clouds  :inline)
-   (times                 vector       8 :inline)
-   (title-light-group     light-group  :inline)
-   (rim-light-group       light-group  :inline)
-   (rim-light-group2      light-group  :inline)
-   (rim-light-group3      light-group  :inline)
-   (filter                vector       :inline)
-   (filter-color          vector       :inline)
-   (time                  float)
-   (target-interp         float)
-   (erase-color           rgba)
-   (sky                   symbol)
-   (special-mood          basic)
-   (use-camera-other      basic)
-   (title-updated         symbol)
-   (mode                  time-of-day-palette-id)
-   (overide-enable        symbol)
-   (overide-palette       time-of-day-palette-id)
-   (max-rain              float)
-   (fog-mult              float)
-   (exterior-level        basic)
-   (ocean-alpha           float)
+  ((interp                  float        18      :offset   4)
+   (current-fog             mood-fog     :inline :offset  80)
+   (current-sky-color       vector       :inline :offset 128)
+   (current-env-color       vector       :inline :offset 144)
+   (current-prt-color       vector       :inline :offset 160)
+   (current-shadow-color    vector       :inline :offset 176)
+   (light-group-arr         light-group  8       :offset 192)
+   (current-clouds          mood-clouds  :inline :offset 1728)
+   (times                   vector       8       :offset 1744)
+   (title-light-group       light-group  :inline :offset 1872)
+   (rim-light-group         light-group  :inline :offset 2064)
+   (front-rear-light-group  light-group  :inline :offset 2256)
+   (fog-override            mood-fog     :inline :offset 2448)
+   (filter                  vector       :inline :offset 2496)
+   (filter-color            vector       :inline :offset 2512)
+   (time                    float                :offset 2528)
+   (target-interp           float                :offset 2532)
+   (erase-color             rgba                 :offset 2536)
+   (sky                     symbol               :offset 2540)
+   (special-mood            basic                :offset 2544)
+   (use-camera-other        basic                :offset 2548)
+   (title-updated           symbol               :offset 2552)
+   (mode                    uint32               :offset 2556)
+   (override-enable         basic                :offset 2560)
+   (override-palette        uint32               :offset 2564)
+   (max-rain                float                :offset 2568)
+   (exterior-level          basic                :offset 2572)
+   (ocean-alpha             float                :offset 2576)
+   (shadow-override         float                :offset 2580)
+   (fog-override-interp     float                :offset 2584)
    )
   )
 
 
 (deftype time-of-day-dma (structure)
-  "Memory layout for the time-of-day interpolation functions."
   ((outa   uint32  256)
    (outb   uint32  256)
    (banka  uint32  256)
