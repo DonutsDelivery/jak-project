@@ -2343,7 +2343,14 @@
     "medius-reassign-world-id-callback",
     // source: net-mgr-medius-rooms
     "refresh-rooms-callback",
-    "room-players-refreshing-callback"
+    "room-players-refreshing-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-mgr-medius
+    "cb-get-policy",
+    "mas-connect-callback",
+    "medius-text-filter-request-callback",
+    "refreshing-games-callback",
+    "total-games-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
