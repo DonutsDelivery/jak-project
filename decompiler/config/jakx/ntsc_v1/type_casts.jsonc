@@ -39772,7 +39772,7 @@
     [0, "a0", "net-player-race"]
   ],
   "(method 11 nav-control)": [
-    [[0, 13], "a0", "nav-control"]
+    [1, "a0", "nav-control"]
   ],
   "(method 11 nav-mesh-editable)": [
     [0, "a0", "nav-mesh-editable"]
@@ -39820,7 +39820,7 @@
     [8, "gp", "artifact"]
   ],
   "(method 15 nav-control)": [
-    [[0, 13], "a0", "nav-control"]
+    [2, "a0", "nav-control"]
   ],
   "(method 15 nav-mesh-editable)": [
     [1, "gp", "nav-mesh-editable"]
@@ -39844,7 +39844,7 @@
     [0, "gp", "lightning-tracker"]
   ],
   "(method 17 nav-control)": [
-    [[0, 12], "a0", "nav-control"]
+    [2, "a0", "nav-control"]
   ],
   "(method 17 net-player)": [
     [4, "gp", "net-player"]
@@ -39895,7 +39895,7 @@
     [0, "a0", "red-sentry-bot"]
   ],
   "(method 23 nav-control)": [
-    [[0, 30], "a0", "nav-control"]
+    [0, "a0", "nav-control"]
   ],
   "(method 24 hud-player-indicators)": [
     [0, "a0", "hud-player-indicators"]
@@ -39929,7 +39929,7 @@
     [4, "a0", "net-process-mgr"]
   ],
   "(method 29 nav-control)": [
-    [[0, 6], "a0", "nav-control"]
+    [1, "a0", "nav-control"]
   ],
   "(method 3 nav-graph-editor)": [
     [152, "gp", "nav-graph-editor"]
@@ -40543,9 +40543,8 @@
   "(method 9 hud-player-positions)": [
     [2, "gp", "hud-player-positions"]
   ],
-  // method 9 gp set from a0 at op 0 (written, not read) — range cast so all gp reads see nav-control
   "(method 9 nav-control)": [
-    [[0, 123], "gp", "nav-control"]
+    [3, "gp", "nav-control"]
   ],
   "(method 9 oil-trail)": [
     [1, "gp", "oil-trail"]
@@ -40586,23 +40585,9 @@
   "(method 98 net-player-race)": [
     [0, "gp", "net-player-race"]
   ]  ,
-  // nav-control methods -- op-exact casts (cast only applies at the op where REG is read)
-  // method 16: s5=this (from `or s5, a0, r0` at op 0) — range cast covers whole function
-  "(method 16 nav-control)": [
-    [[0, 26], "s5", "nav-control"]
-  ],
-  // method 41: s5=this (from `or s5, a0, r0` at op 0) — range cast covers whole function
-  "(method 41 nav-control)": [
-    [[0, 117], "s5", "nav-control"]
-  ],
-  // method 46: s4=this (from `or s4, a0, r0` at op 0) — range cast covers whole function
-  "(method 46 nav-control)": [
-    [[0, 29], "s4", "nav-control"]
-  ],
-  // method 47: gp=this (from `or gp, a0, r0` at op 0) — range cast covers whole function
-  "(method 47 nav-control)": [
-    [[0, 100], "gp", "nav-control"]
-  ],
+  // nav-control methods 16/41/46/47 omitted — range casts on these caused OOM in form-building
+  // (nav-control.nav-state is inline, nav-state→nav-control creates a type cycle;
+  //  range casts make type_prop succeed then form-builder recurses exponentially)
   "(method 11 nav-state)": [
     [1, "a1", "nav-gap-info"]
   ],
@@ -40631,19 +40616,18 @@
     [1, "a0", "nav-control"]
   ],
   "(method 31 nav-control)": [
-    [[0, 9], "a0", "nav-control"]
+    [0, "a0", "nav-control"]
   ],
   "(method 43 nav-control)": [
-    [[0, 37], "a0", "nav-control"],
+    [1, "a0", "nav-control"],
     [11, "a1", "collide-shape"]
   ],
   "(method 44 nav-control)": [
-    [[0, 6], "a0", "nav-control"]
+    [4, "a0", "nav-control"]
   ],
-  // method 51: gp=nav-state and s5=nav-avoid-spheres-params through block merges/loops
+  // method 51 nav-state: range casts omitted (OOM risk); use single-op e290ff6e4 version
   "(method 51 nav-state)": [
-    [[0, 286], "gp", "nav-state"],
-    [[1, 286], "s5", "nav-avoid-spheres-params"]
+    [2, "s5", "nav-avoid-spheres-params"]
   ],
   "(method 9 nav-link-search-info)": [
     [3, "a1", "nav-avoid-spheres-params"]
