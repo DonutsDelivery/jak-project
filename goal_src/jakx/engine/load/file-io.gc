@@ -124,45 +124,41 @@ NOTE: this is a special type in three ways:
   (clear *file-temp-string*)
   (cond
     ((= kind (file-kind dir-tpage))
-     (format *file-temp-string* "texture-page~D/dir-tpages" TPAGE_FILE_VERSION)
+     (format *file-temp-string* "texture-page~D/dir-tpages" 8)
      )
     ((= kind (file-kind tpage))
-     ;; og:preserve-this removed texture-page8 prefix
-     ; (format *file-temp-string* "texture-page~D/tpage-~S" TPAGE_FILE_VERSION name)
-     (format *file-temp-string* "tpage-~S" name)
+     (format *file-temp-string* "texture-page~D/tpage-~S" 8 name)
      )
     ((= kind (file-kind level-bt))
-     (format *file-temp-string* "level~D/~S-bt" LEVEL_BT_FILE_VERSION name)
+     (format *file-temp-string* "level~D/~S-bt" 37 name)
      )
     ((= kind (file-kind tx))
-     (format *file-temp-string* "res~D/~S-tx" TX_FILE_VERSION name)
+     (format *file-temp-string* "res~D/~S-tx" 1 name)
      )
     ((= kind (file-kind level-vs))
-     (format *file-temp-string* "level~D/~S-vs" LEVEL_BT_FILE_VERSION name)
+     (format *file-temp-string* "level~D/~S-vs" 37 name)
      )
     ((= kind (file-kind vis))
      (format *file-temp-string* "~S.VIS" name)
      )
     ((= kind (file-kind map))
-     (format *file-temp-string* "map~D/~S-mp" MAP_FILE_VERSION name)
+     (format *file-temp-string* "map~D/~S-mp" 1 name)
      )
     ((= kind (file-kind art-group))
-     ;; og:preserve-this removed art group prefix
-     ; (format
-     ;   *file-temp-string*
-     ;   "art-group~D/~S-ag"
-     ;   (cond
-     ;     ((> ag-version-override 0)
-     ;      (empty)
-     ;      ag-version-override
-     ;      )
-     ;     (else
-     ;       ART_GROUP_FILE_VERSION
-     ;       )
-     ;     )
-     ;   name
-     ;   )
-     (format *file-temp-string* "~S-ag" name)
+     (format
+       *file-temp-string*
+       "art-group~D/~S-ag"
+       (cond
+         ((> ag-version-override 0)
+          (empty)
+          ag-version-override
+          )
+         (else
+           8
+           )
+         )
+       name
+       )
      )
     )
   *file-temp-string*
@@ -193,7 +189,7 @@ NOTE: this is a special type in three ways:
                       8
                       )
                      (((file-kind level-bt))
-                      LEVEL_BT_FILE_VERSION
+                      37
                       )
                      (((file-kind art-group))
                       8
@@ -240,4 +236,16 @@ NOTE: this is a special type in three ways:
         )
       )
     )
+  )
+
+(when (not (and (= *kernel-boot-mode* 'listener) #t))
+  (set! *sqlpipe-file-path-send* #f)
+  (set! *sqlpipe-file-path-recv* #f)
+  (set! *sqlpipe-file-buffer* (the-as pointer #f))
+  (set! file-stream-read-complete L13)
+  (set! sqlpipe-query L1)
+  (if (!= sql-query sqlpipe-query)
+      (set! old-sql-query sql-query)
+      )
+  (set! sql-query sqlpipe-query)
   )
