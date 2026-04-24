@@ -13,6 +13,24 @@ set -u
 cd "$(dirname "$0")/../.."
 ROOT="$PWD"
 
+# Serialize concurrent run.sh invocations. Multiple agents running this in parallel
+# spawns N decompilers that thrash memory (~13GB each) and race on decomp_out/.
+# Default: skip-if-locked — if another run is in progress, exit early and let the
+# in-flight run's output be the measurement. Set JAKX_WATCH_WAIT=1 to queue instead.
+mkdir -p "$ROOT/.jakx_watch"
+LOCK="$ROOT/.jakx_watch/.run.lock"
+exec 9>"$LOCK"
+if [ "${JAKX_WATCH_WAIT:-0}" = "1" ]; then
+    flock 9
+else
+    if ! flock -n 9; then
+        echo "[run.sh] another jakx_watch run is in progress — skipping this invocation." >&2
+        echo "         set JAKX_WATCH_WAIT=1 to queue instead of skip." >&2
+        exit 0
+    fi
+fi
+# lock held via fd 9 for the remainder of this shell
+
 OUT_DIR="${JAKX_WATCH_OUT_DIR:-$ROOT/.jakx_watch/decomp_out}"
 LOG_DIR="$ROOT/log"
 BIN="$ROOT/build/Release/decompiler/decompiler"
