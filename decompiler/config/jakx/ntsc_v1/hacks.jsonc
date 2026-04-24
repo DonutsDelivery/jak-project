@@ -2143,7 +2143,15 @@
     // source: nav-mesh-editor
     "(method 17 nav-mesh-editable)",
     "point-in-cone",
-    "segment-in-cone"
+    "segment-in-cone",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: nav-mesh
+    "(method 25 nav-mesh)",
+    "(method 29 nav-mesh)",
+    "(method 36 nav-mesh)",
+    "(method 45 nav-mesh)",
+    // source: nav-mesh-editor
+    "nav-mesh-editor-init"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
