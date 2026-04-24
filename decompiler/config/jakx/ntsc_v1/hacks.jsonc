@@ -1959,7 +1959,15 @@
     "generic-merc-do-chain",
     "generic-merc-execute-all",
     "generic-merc-execute-asm",
-    "generic-merc-query"
+    "generic-merc-query",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: generic-obs
+    "birth-func-simple-prim",
+    "external-camera-controller-init-by-other",
+    "part-tracker-subsampler-init",
+    "simple-prim-init-by-other",
+    // source: generic-tie
+    "generic-tie-dma-to-spad-sync"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
