@@ -36,6 +36,7 @@ from return_mismatch_scan import (  # noqa: E402
     CURRENT_TYPES,
 )
 from apply_guard import run_with_guard  # noqa: E402
+from method_body_reader import MethodBodyReader  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -173,6 +174,7 @@ def plan_fixes(
     method_line_index: dict[tuple[str, int], tuple[int, str]],
     parent_to_children: dict[str, list[str]],
     active_patterns: set[tuple[str, str]],
+    reader: MethodBodyReader | None = None,
 ) -> list[tuple[int, str, str, str]]:
     """Return list of (line_no, old_line, new_line, fix_desc).
 
@@ -232,8 +234,13 @@ def plan_fixes(
                     continue
                 child_decl = child_m.group(2)
                 if child_decl != decl and child_decl != actual:
-                    # Child has a different declared type — parent flip would
-                    # create an inconsistency. Skip.
+                    # Child declares a different type. Check if the child
+                    # BODY also returns `actual` (from decomp WARNs). If it
+                    # does, flipping parent+child to `actual` is consistent.
+                    if reader is not None:
+                        child_body = reader.actual_return(child, mnum)
+                        if child_body == actual:
+                            continue  # body agrees — will flip child below
                     consistent = False
                     break
             if not consistent:
@@ -243,7 +250,9 @@ def plan_fixes(
             if not added:
                 continue
 
-            # Also fix children that share the same (declared, actual).
+            # Also fix children whose declared type matches the parent's old
+            # type, OR whose body agrees with `actual` even if declared
+            # differently (validated via MethodBodyReader above).
             for child in sorted(children):
                 if (child, mnum) not in method_line_index:
                     continue
@@ -254,8 +263,14 @@ def plan_fixes(
                 child_m = RE_METHOD_LINE.match(child_line)
                 if not child_m:
                     continue
-                if child_m.group(2) == decl:
+                child_decl = child_m.group(2)
+                if child_decl == decl:
                     _add(child, mnum, decl, actual, " (child)")
+                elif child_decl != actual and reader is not None:
+                    # Child declares differently from both old and new type.
+                    # Only include if body confirms it returns `actual`.
+                    if reader.actual_return(child, mnum) == actual:
+                        _add(child, mnum, child_decl, actual, " (child-body-validated)")
 
     return sorted(fixes, key=lambda x: x[0])
 
@@ -377,9 +392,14 @@ def main() -> int:
     print("Building type hierarchy ...")
     _, parent_to_children = build_type_hierarchy(CURRENT_TYPES)
 
+    print("Loading method body reader (validates child return types) ...")
+    reader = MethodBodyReader(decomp_dir)
+    print(f"  {len(reader)} (type, method) body-return entries loaded")
+
     # Plan fixes
     fixes = plan_fixes(
-        method_entries, method_line_index, parent_to_children, active_patterns
+        method_entries, method_line_index, parent_to_children, active_patterns,
+        reader=reader,
     )
 
     if not fixes:
