@@ -1945,7 +1945,14 @@
     // source: generic-effect
     "generic-debug-light-proc",
     // source: generic-merc
-    "generic-merc-init-asm"
+    "generic-merc-init-asm",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: generic-merc
+    "generic-translucent",
+    "high-speed-reject",
+    "mercneric-convert",
+    "mercneric-matrix-asm",
+    "mercneric-shader-asm"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
