@@ -2004,7 +2004,11 @@
     "(method 26 hud-map)",
     // source: hud-widgets-powerhang
     "(method 19 hud-item-hang-time-seconds)",
-    "(method 19 hud-item-hang-time-tenths-seconds)"
+    "(method 19 hud-item-hang-time-tenths-seconds)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: hud
+    "(method 9 hud-sprite)",
+    "hud-string-draw-all"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
