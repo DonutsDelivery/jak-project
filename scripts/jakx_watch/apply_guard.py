@@ -55,6 +55,40 @@ _RE_BLOCKED_COUNT = re.compile(
     r"decomp progress:\s*\d+/\d+\s+processed\s*\((\d+)\s+files?\s+blocked",
     re.MULTILINE,
 )
+_RE_STATUS_HEAD_SHA = re.compile(r"last updated @ git ([0-9a-f]{7,40})", re.MULTILINE)
+
+
+def _current_head_sha() -> str:
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=ROOT
+        ).decode().strip()
+    except subprocess.CalledProcessError:
+        return ""
+
+
+def _status_is_stale(snap: "StatusSnapshot") -> bool:
+    """Return True if current status.md looks stale or crash-captured.
+    Stale conditions:
+      - File missing or unparseable
+      - Captures an in-progress crash (has_assertion, partial processed count)
+      - Was written against a different HEAD than current
+    """
+    if not snap.valid:
+        return True
+    if snap.has_assertion:
+        return True
+    if snap.processed > 0 and snap.total > 0 and snap.processed < snap.total:
+        return True
+    # SHA comparison
+    if STATUS_MD.exists():
+        text = STATUS_MD.read_text()
+        m = _RE_STATUS_HEAD_SHA.search(text)
+        if m:
+            head = _current_head_sha()
+            if head and not head.startswith(m.group(1)):
+                return True
+    return False
 
 
 @dataclasses.dataclass
@@ -222,7 +256,16 @@ def run_with_guard(
         Commit message to use when commit_on_pass=True. A minimal default is
         used when empty.
     """
+    # Ensure pre-state reflects the current HEAD, not a stale/crashed status.md
+    # from an earlier failed batch. Compare status.md's "last updated @ git SHA"
+    # header to current HEAD; rescan if they differ or if the current state
+    # looks like it was captured mid-crash.
     pre = read_status()
+    if _status_is_stale(pre):
+        print(f"[guard:{label}] status.md is stale — rescanning before pre-state read")
+        run_decompiler()
+        pre = read_status()
+
     if not pre.valid:
         return GuardResult(
             passed=False,
