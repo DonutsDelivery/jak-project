@@ -2358,7 +2358,14 @@
     "mgcl-connect-games-callback",
     "mgcl-end-game-callback",
     "mgcl-join-game-callback",
-    "mgcl-world-status-callback"
+    "mgcl-world-status-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-mgr-mgcl
+    "connect-callback-mgcl",
+    "dme-connect-callback",
+    "end-game-on-me-callback",
+    "host-change-callback",
+    "move-game-on-me-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
