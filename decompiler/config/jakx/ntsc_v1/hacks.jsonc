@@ -1771,10 +1771,716 @@
     "fmv-file-init",
     "fmv-get-time",
     "fmv-file-read",
-    "fmv-memcpy"
+    "fmv-memcpy",
     // sky-work methods (17/18/29-35) intentionally LEFT in asm_functions_by_name:
     // they diverge from jak3 and their jakx-native port isn't yet written.
     // Letting mips2c run on them would bind them but with jak3's wrong bodies.
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: ambient
+    "can-display-query?",
+    "kill-current-talker",
+    "talker-spawn-func",
+    // source: bones
+    "bones-mtx-calc-execute",
+    // source: cam-combiner
+    "cam-helper-temp",
+    // source: cloth
+    "(method 13 cloth-system)",
+    "(method 14 cloth-system)",
+    "(method 21 cloth-system)",
+    // source: collide-cache
+    "(method 22 collide-cache)",
+    // source: collide-func
+    "raw-ray-sphere-intersect",
+    "ray-cylinder-intersect",
+    "ray-triangle-intersect",
+    // source: collide-probe
+    "collide-probe-instance-tie",
+    "collide-probe-node",
+    // source: collide-shape
+    "(method 63 collide-shape-moving)",
+    "cshape-reaction-update-state",
+    "find-ground-point",
+    // source: collision-editor
+    "collision-editor-default-proc-init-by-other",
+    "collision-editor-edited-proc-init-by-other",
+    "collision-editor-init-by-other",
+    // source: default-menu
+    "debug-create-cam-restore",
+    "dm-play-task-with-continue",
+    "dm-subdiv-float",
+    // source: display
+    "vblank-handler",
+    "vif1-handler",
+    "vif1-handler-debug",
+    // source: draw-node
+    "draw-node-cull",
+    // source: drawable
+    "line-in-view-frustum-any?",
+    "real-main-draw-hook",
+    "sphere-in-view-frustum-any?",
+    // source: drift
+    "drift-editor-init-by-other",
+    // source: driver
+    "driver-init-by-other",
+    // source: dynamic-mem
+    "mem-alloc-flash",
+    "mem-alloc-lgaud",
+    "mem-alloc-nelly",
+    "mem-alloc-scert",
+    "mem-free-flash",
+    "mem-free-lgaud",
+    "mem-free-nelly",
+    "mem-free-scert",
+    "mem-realloc-flash",
+    "mem-realloc-lgaud",
+    "mem-realloc-nelly",
+    "mem-realloc-scert",
+    // source: editable-player
+    "dm-editable-flag-pick-func",
+    "dm-region-tree-pick-func",
+    // source: entity
+    "vis-cull-all?",
+    "vis-dist-ok?",
+    // source: find-nearest
+    "sorted-targ-validator-is-player-vehicle",
+    // source: fmv-player
+    "fmv-player-init-by-other",
+    // source: font
+    "char-effect-compute2",
+    "draw-string-asm-packed",
+    "draw-string-init-justify",
+    "draw-string3d-asm",
+    "get-string-length-asm",
+    // source: foreground
+    "foreground-emerc",
+    // source: game-save
+    "(method 22 game-info)",
+    "auto-save-post",
+    // source: generic-effect
+    "generic-debug-light-proc",
+    "generic-dma-from-spr",
+    "generic-envmap-only-proc",
+    "generic-interp-dproc",
+    "generic-light",
+    "generic-no-light",
+    "generic-no-light+envmap",
+    "generic-none-dma-wait",
+    // source: generic-merc
+    "generic-merc-execute-all",
+    "mercneric-matrix-asm",
+    "mercneric-shader-asm",
+    // source: generic-obs
+    "birth-func-simple-prim",
+    "external-camera-controller-init-by-other",
+    "part-tracker-subsampler-init",
+    "simple-prim-init-by-other",
+    // source: generic-tie
+    "generic-tie-convert",
+    "generic-tie-convert-proc",
+    "generic-tie-dma-to-spad-sync",
+    // source: gstring
+    "string-word-wrap",
+    // source: headset
+    "(method 17 headset)",
+    "(method 20 headset)",
+    "headset-init-by-other",
+    "headset-udp-callback",
+    // source: helmet
+    "helmet-hud-init-by-other",
+    // source: hud
+    "(method 9 hud-sprite)",
+    "hud-post",
+    "hud-string-draw-all",
+    // source: hud-classes
+    "(method 26 hud-map)",
+    // source: hud-player-indicators
+    "(method 19 hud-indicator)",
+    "(method 24 hud-player-indicators)",
+    // source: hud-widgets-powerhang
+    "(method 19 hud-item-hang-time-seconds)",
+    "(method 19 hud-item-hang-time-tenths-seconds)",
+    "(method 19 hud-item-power-slide-distance)",
+    "(method 19 hud-item-power-slide-distance-tenths)",
+    // source: in-game-menu-hud2
+    "in-game-menu-on?",
+    // source: joint
+    "decompress-fixed-data-to-accumulator",
+    "decompress-frame-data-pair-to-accumulator",
+    "decompress-frame-data-to-accumulator",
+    // source: joint-exploder
+    "(method 54 joint-exploder)",
+    // source: joint-mod
+    "joint-mod-polar-look-at-callback",
+    // source: level
+    "(method 10 level)",
+    "(method 19 level-group)",
+    "(method 20 level)",
+    // source: light-trails
+    "light-trail-tracker-common-post",
+    // source: load-state
+    "(method 25 load-state)",
+    // source: loader
+    "(method 2 gui-connection)",
+    "(method 20 gui-control)",
+    "ja-abort-spooled-anim",
+    // source: logic-target
+    "(method 59 target)",
+    "stop",
+    // source: menu2-COMMON-GAME
+    "(method 59 map-menu)",
+    "(method 60 index-sprite-list-menu)",
+    "base-menu-event-handler",
+    // source: mysql-nav-graph
+    "(method 18 mysql-nav-graph)",
+    // source: nav-control
+    "(method 16 nav-control)",
+    "(method 19 nav-mesh)",
+    "(method 21 nav-control)",
+    "(method 41 nav-state)",
+    "(method 44 nav-control)",
+    // source: nav-graph-editor
+    "(method 39 nav-graph-editor)",
+    "(method 40 nav-graph-editor)",
+    "(method 41 nav-graph-editor)",
+    "(method 42 nav-graph-editor)",
+    "(method 43 nav-graph-editor)",
+    "(method 44 nav-graph-editor)",
+    "(method 51 nav-graph-editor)",
+    "(method 60 nav-graph-editor)",
+    "(method 61 nav-graph-editor)",
+    "(method 64 nav-graph-editor)",
+    // source: nav-mesh
+    "(method 21 nav-mesh)",
+    "(method 25 nav-mesh)",
+    "(method 29 nav-mesh)",
+    "(method 30 nav-mesh)",
+    "(method 31 nav-mesh)",
+    "(method 32 nav-mesh)",
+    "(method 33 nav-mesh)",
+    "(method 34 nav-mesh)",
+    "(method 35 nav-mesh)",
+    "(method 36 nav-mesh)",
+    "(method 42 nav-mesh)",
+    "(method 43 nav-mesh)",
+    "(method 45 nav-mesh)",
+    "(method 46 nav-mesh)",
+    // source: nav-mesh-editor
+    "(method 17 nav-mesh-editable)",
+    "nav-mesh-editor-init",
+    "point-in-cone",
+    "segment-in-cone",
+    // source: nav-mesh-h
+    "(method 37 nav-mesh)",
+    // source: net-artifact
+    "(method 17 net-game-mgr-artifact)",
+    "(method 48 net-player-artifact)",
+    "(method 52 artifact)",
+    "(method 53 artifact-draw)",
+    "(method 57 net-game-mgr-artifact)",
+    "artifact-draw-init-remote",
+    "artifact-init-remote",
+    // source: net-assassin
+    "(method 96 net-player-assassin)",
+    // source: net-aux-voice
+    "aux-voice-client-connect-callback",
+    "aux-voice-client-disconnect-callback",
+    "aux-voice-local-connect-callback",
+    "aux-voice-local-disconnect-callback",
+    "aux-voice-mgr-default-handler",
+    "aux-voice-mgr-failed",
+    "aux-voice-mgr-init-by-other",
+    "aux-voice-msg-callback",
+    // source: net-boss-battle
+    "(method 48 net-player-boss-battle)",
+    // source: net-deathmatch
+    "(method 54 net-player-deathmatch)",
+    "(method 56 net-player-deathmatch)",
+    "(method 57 net-game-mgr-deathmatch)",
+    "(method 64 net-game-mgr-deathmatch)",
+    "(method 82 net-game-mgr-deathmatch)",
+    "(method 83 net-game-mgr-deathmatch)",
+    "(method 91 net-player-deathmatch)",
+    "(method 96 net-player-deathmatch)",
+    "(method 99 net-player-deathmatch)",
+    // source: net-deathrace
+    "(method 109 net-player-deathrace)",
+    "(method 110 net-player-deathrace)",
+    "(method 48 net-player-deathrace)",
+    "(method 52 net-player-deathrace)",
+    "(method 96 net-player-deathrace)",
+    // source: net-eco
+    "(method 35 eco-mgr)",
+    "(method 44 eco-mgr)",
+    "(method 47 eco-mgr)",
+    "eco-mgr-init-by-other",
+    // source: net-eco-h
+    "eco-mgr-init-remote",
+    // source: net-eco-types
+    "(method 53 eco-blue)",
+    // source: net-enemy
+    "(method 17 net-enemy)",
+    "(method 36 net-enemy)",
+    "(method 62 net-enemy)",
+    // source: net-enemy-h
+    "net-enemy-init-remote",
+    // source: net-game-mgr
+    "(method 35 net-game-mgr)",
+    "(method 36 net-game-mgr)",
+    "(method 46 net-game-mgr)",
+    "(method 51 net-game-mgr)",
+    "(method 56 net-game-mgr)",
+    "(method 57 net-game-mgr)",
+    "(method 58 net-game-mgr)",
+    "(method 60 net-game-mgr)",
+    "(method 61 net-game-mgr)",
+    "(method 62 net-player)",
+    "(method 68 net-game-mgr)",
+    "(method 69 net-game-mgr)",
+    "(method 7 net-game-mgr)",
+    "do-event-intro",
+    "late-join-spawn-players",
+    "net-game-mgr-default-handler",
+    "net-game-mgr-init-local",
+    // source: net-game-mgr-h
+    "current-finish-mode",
+    "net-game-mgr-init-remote",
+    // source: net-game-modes-h
+    "net-game-mgr-artifact-init-remote",
+    "net-game-mgr-assassin-init-remote",
+    "net-game-mgr-beasthunt-init-remote",
+    "net-game-mgr-collectable-init-remote",
+    "net-game-mgr-deathmatch-init-remote",
+    "net-game-mgr-deathrace-init-remote",
+    "net-game-mgr-football-init-remote",
+    "net-player-artifact-init-remote",
+    "net-player-assassin-init-remote",
+    "net-player-beasthunt-init-remote",
+    "net-player-collectable-init-remote",
+    "net-player-deathmatch-init-remote",
+    "net-player-deathrace-init-remote",
+    "net-player-football-init-remote",
+    "powercell-dispenser-draw-init-remote",
+    "powercell-dispenser-init-remote",
+    "powercell-footie-init-remote",
+    // source: net-game-modes2-h
+    "ctf-flag-init-remote",
+    "net-game-mgr-boss-battle-init-remote",
+    "net-game-mgr-ctf-init-remote",
+    "net-game-mgr-king-of-hill-init-remote",
+    "net-game-mgr-rushhour-init-remote",
+    "net-game-mgr-time-box-init-remote",
+    "net-game-mgr-time-trial-init-remote",
+    "net-game-mgr-training-init-remote",
+    "net-player-boss-battle-init-remote",
+    "net-player-ctf-init-remote",
+    "net-player-king-of-hill-init-remote",
+    "net-player-rushhour-init-remote",
+    "net-player-time-box-init-remote",
+    "net-player-time-trial-init-remote",
+    // source: net-http
+    "http-downloader-default-handler",
+    "http-downloader-init-by-other",
+    // source: net-hud
+    "(method 14 hud-effect)",
+    "(method 24 in-game-hud)",
+    "(method 26 in-game-hud)",
+    "(method 28 hud-item-string)",
+    "(method 9 basic-manager)",
+    // source: net-mgr
+    "net-mgr-default-handler",
+    "net-mgr-init-by-other",
+    // source: net-mgr-async
+    "medius-simple-request-callback",
+    "mgcl-simple-request-callback",
+    "trivial-callback",
+    // source: net-mgr-chat
+    "is-whitespace",
+    // source: net-mgr-dme
+    "cb-server-ping",
+    "dme-token-callback",
+    "dummy-callback",
+    "get-host-by-name-callback",
+    "lan-game-find-callback",
+    "lan-game-verify-callback",
+    "net-app-msg-callback",
+    "net-lanfind-exchange-callback",
+    "net-sys-msg-callback",
+    "remote-client-connect-callback",
+    "remote-client-disconnect-callback",
+    "remote-client-event-callback",
+    "session-master-change-callback",
+    // source: net-mgr-medius
+    "cb-get-announcements",
+    "cb-get-policy",
+    "mas-connect-callback",
+    "medius-chat-callback",
+    "medius-error-msg-callback",
+    "medius-reassign-world-id-callback",
+    "medius-text-filter-request-callback",
+    "refreshing-games-callback",
+    "total-games-callback",
+    // source: net-mgr-medius-buddies
+    "buddies-refreshing-callback",
+    "finding-player-callback",
+    "ignore-refreshing-callback",
+    // source: net-mgr-medius-cache
+    "(method 11 medius-cached-info)",
+    // source: net-mgr-medius-clans
+    "check-my-clan-invitations-callback",
+    "clan-invitations-sent-callback",
+    "clan-member-list-callback",
+    "clan-msg-callback-all",
+    "clan-msg-callback-my",
+    "get-my-clans-callback",
+    "is-clan-challenge",
+    // source: net-mgr-medius-games
+    "(method 9 medius-filter)",
+    "get-game-list-callback",
+    "in-game-players-refreshing-callback",
+    // source: net-mgr-medius-rooms
+    "refresh-rooms-callback",
+    "room-players-refreshing-callback",
+    // source: net-mgr-mgcl
+    "connect-callback-mgcl",
+    "dme-connect-callback",
+    "dme-join-callback",
+    "end-game-on-me-callback",
+    "host-change-callback",
+    "mgcl-connect-games-callback",
+    "mgcl-end-game-callback",
+    "mgcl-join-game-callback",
+    "mgcl-world-status-callback",
+    "move-game-on-me-callback",
+    // source: net-mgr-muis
+    "muis-connect-callback",
+    "muis-info-callback",
+    "muis-news-callback",
+    // source: net-player
+    "(method 17 net-player)",
+    "(method 35 net-player)",
+    "(method 48 net-player)",
+    "(method 52 net-player)",
+    "(method 55 net-player)",
+    "(method 58 net-player)",
+    "(method 61 net-player)",
+    "(method 63 net-player)",
+    "(method 64 net-player)",
+    "(method 65 net-player)",
+    "(method 66 net-player)",
+    "(method 67 net-player)",
+    "(method 68 net-player)",
+    "(method 76 net-player)",
+    "(method 81 net-player)",
+    "(method 93 net-player)",
+    "(method 95 net-player)",
+    "all-players-spawned-vehicles?",
+    "local-human-player-above-height?",
+    "net-player-default-handler",
+    "net-player-init-local",
+    "playback-cam",
+    "use-target-cam-base-helper",
+    // source: net-player-h
+    "net-player-init-remote",
+    // source: net-powerup
+    "(method 10 powerup-draw)",
+    "(method 15 net-powerup)",
+    "(method 17 net-powerup)",
+    "(method 35 net-powerup)",
+    "powerup-build-dynamic-hash",
+    "powerup-build-static-hash",
+    "powerup-check-collision",
+    "powerup-motion-parabola",
+    // source: net-powerup-h
+    "net-powerup-init-remote",
+    // source: net-process-mgr
+    "(method 25 net-process-mgr)",
+    "(method 26 net-process-mgr)",
+    "(method 27 net-process-mgr)",
+    "(method 28 net-process-mgr)",
+    "(method 30 net-process-mgr)",
+    "(method 31 net-process-mgr)",
+    "(method 39 net-process-mgr)",
+    "(method 40 net-process-mgr)",
+    "(method 42 net-process-mgr)",
+    "(method 49 net-process-mgr)",
+    "(method 53 net-process-mgr)",
+    "(method 54 net-process-mgr)",
+    "(method 55 net-process-mgr)",
+    "(method 56 net-process-mgr)",
+    "net-process-mgr-default-handler",
+    "net-process-mgr-handle-aux-msg-recv-end",
+    "net-process-mgr-handle-aux-msg-recv-end-ack",
+    "net-process-mgr-handle-aux-msg-spawn-entities",
+    "net-process-mgr-init-by-other",
+    "net-process-mgr-stop",
+    "net-process-msg-handler",
+    "update-local-net-entities",
+    // source: net-process-mgr-h
+    "read-handle",
+    // source: net-projectile
+    "(method 35 net-projectile)",
+    "(method 74 net-projectile)",
+    "net-projectile-init-by-other",
+    // source: net-projectile-h
+    "net-projectile-init-remote",
+    "spawn-net-projectile",
+    // source: net-race
+    "(method 106 net-player-race)",
+    "(method 17 net-player-race)",
+    "(method 52 net-player-race)",
+    "(method 57 net-game-mgr-race)",
+    "(method 82 net-player-race)",
+    "(method 83 net-player-race)",
+    "(method 85 net-game-mgr-race)",
+    "(method 85 net-player-race)",
+    "(method 90 net-player-race)",
+    "(method 91 net-player-race)",
+    "net-game-mgr-race-startup",
+    "race-mesh-debug-init-by-other",
+    "shuffle-race-grid",
+    // source: net-race-h
+    "net-game-mgr-race-init-remote",
+    "net-player-race-init-remote",
+    // source: net-race-hud
+    "(method 18 hud-player-positions)",
+    "(method 18 hud-player-progress)",
+    "(method 27 hud-player-positions)",
+    // source: net-rushhour
+    "(method 109 net-player-rushhour)",
+    "(method 110 net-player-rushhour)",
+    "(method 48 net-player-rushhour)",
+    "(method 52 net-player-rushhour)",
+    "(method 96 net-player-rushhour)",
+    // source: net-simple-destruct
+    "(method 35 net-simple-destruct-mgr)",
+    "(method 44 net-simple-destruct-mgr)",
+    "(method 63 net-simple-destruct)",
+    "(method 67 net-simple-destruct)",
+    "(method 69 net-simple-destruct)",
+    "get-destruct-perm",
+    // source: net-simple-destruct-h
+    "net-simple-destruct-mgr-init-remote",
+    // source: net-util
+    "auto-test-levels-init-by-other",
+    // source: net-world
+    "(method 54 net-world)",
+    "(method 57 net-world)",
+    "(method 71 net-world)",
+    "(method 72 net-world)",
+    "(method 73 net-world)",
+    "(method 76 net-world)",
+    "(method 83 net-world)",
+    "(method 84 net-world)",
+    "ai-driver-allowed",
+    "check-grand-prix-restart",
+    "get-non-conflicting-driver",
+    "is-late-join?",
+    "wait-for-levels",
+    // source: process-drawable
+    "(method 43 process-drawable)",
+    "(method 49 process-drawable)",
+    // source: process-nettable
+    "(method 19 process-nettable)",
+    "(method 20 process-nettable)",
+    "(method 24 process-nettable)",
+    "(method 27 process-nettable)",
+    "(method 30 process-nettable)",
+    "(method 34 process-nettable)",
+    "(method 35 net-test)",
+    "(method 38 process-nettable)",
+    "(method 39 process-nettable)",
+    "(method 7 process-nettable)",
+    "net-test-init-by-other",
+    "net-test-init-remote",
+    // source: projectile
+    "(method 60 projectile-bounce)",
+    "(method 63 projectile-bounce)",
+    "projectile-base-code",
+    "projectile-bounce-falling-post",
+    "projectile-update-velocity-add-gravity",
+    // source: race-mesh
+    "(method 12 race-mesh)",
+    // source: race-obs
+    "(method 10 race-banner)",
+    "(method 10 starting-linebot)",
+    "wrong-way-event-handler",
+    // source: rigid-body
+    "(method 36 rigid-body-control)",
+    "(method 66 collide-shape-moving)",
+    "(method 9 rigid-body-control)",
+    "apply-overlap-penalty-forces",
+    "check-vehicle-line-spheres-hack",
+    "ray-tube-intersect",
+    // source: rigid-body-object
+    "(method 64 rigid-body-object)",
+    "(method 67 rigid-body-object)",
+    "(method 71 rigid-body-object)",
+    "(method 77 rigid-body-object)",
+    "(method 82 rigid-body-object)",
+    "(method 83 rigid-body-object)",
+    // source: rigid-body-queue
+    "(method 10 rigid-body-queue)",
+    // source: scene
+    "process-drawable-draw-subtitles",
+    "scene-player-init",
+    // source: sparks
+    "(method 10 sparks-work)",
+    "(method 11 sparks-work)",
+    // source: spartacus-editor
+    "(method 26 hud-spartacus)",
+    "spartacus-stop",
+    // source: spatial-hash
+    "(method 24 grid-hash)",
+    "(method 26 grid-hash)",
+    "(method 34 sphere-hash)",
+    "(method 35 sphere-hash)",
+    "(method 37 spatial-hash)",
+    // source: speech
+    "(method 10 speech-channel)",
+    // source: target-pilot
+    "target-pilot-post",
+    // source: text
+    "load-game-text-info",
+    // source: texture
+    "(method 9 texture-page-dir)",
+    // source: tfrag
+    "draw-inline-array-tfrag",
+    "draw-inline-array-tfrag-scissor",
+    "stats-tfrag-asm",
+    // source: tie-methods
+    "draw-drawable-tree-instance-tie",
+    "draw-inline-array-instance-tie",
+    "draw-inline-array-prototype-tie-asm",
+    "draw-inline-array-prototype-tie-shared-asm",
+    // source: time-of-day
+    "time-of-day-interp-colors",
+    "time-of-day-interp-colors-scratch",
+    // source: trigonometry
+    "atan0",
+    "sincos!",
+    "sincos-rad!",
+    // source: vector
+    "vector=",
+    // source: vehicle
+    "(method 61 vehicle)",
+    "(method 64 vehicle)",
+    "(method 82 vehicle)",
+    // source: vehicle-debris
+    "vehicle-debris-init-by-other",
+    // source: vehicle-manager
+    "vehicle-init-by-other",
+    "vehicle-manager-init-by-other",
+    // source: vehicle-net
+    "(method 17 vehicle)",
+    "(method 18 vehicle)",
+    "(method 185 vehicle)",
+    "(method 187 vehicle)",
+    "(method 198 vehicle)",
+    // source: vehicle-reticle
+    "reticle-allowed?",
+    "vehicle-reticle-on-me-init-by-other",
+    "vehicle-reticle-on-them-init-by-other",
+    // source: vehicle-states
+    "player-wait-control-hook",
+    // source: vehicle-util
+    "(method 11 vehicle-section)",
+    "(method 69 vehicle)",
+    "(method 77 vehicle)",
+    // source: viewer
+    "(method 11 viewer)",
+    "init-viewer-for-other",
+    // source: visvol-edit
+    "visvol-editor-init-by-other",
+    // source: water
+    "find-water-simple",
+    // source: water-anim
+    "water-anim-init-by-other",
+    // source: wcar-bear
+    "(method 66 v-bear)",
+    // source: wcar-bobcat
+    "(method 66 v-bobcat)",
+    // source: wcar-cheetah
+    "(method 66 v-cheetah)",
+    // source: wcar-cougar
+    "(method 66 v-cougar)",
+    // source: wcar-daxtermobile
+    "(method 66 v-daxtermobile)",
+    // source: wcar-falcon
+    "(method 66 v-falcon)",
+    // source: wcar-gila
+    "(method 66 v-gila)",
+    // source: wcar-leopard
+    "(method 66 v-leopard)",
+    // source: wcar-mongoose
+    "(method 66 v-mongoose)",
+    // source: wcar-panther
+    "(method 66 v-panther)",
+    // source: wcar-possum
+    "(method 66 v-possum)",
+    // source: wcar-projectiles
+    "(method 18 v-toad-shot)",
+    "v-toad-shot-init-remote",
+    // source: wcar-skel-template
+    "get-car-skel-part",
+    // source: wcar-snake
+    "(method 66 v-snake)",
+    // source: wcar-tiger
+    "(method 66 v-tiger)",
+    "(method 69 v-tiger)",
+    // source: wcar-wolf
+    "(method 66 v-wolf)",
+    // source: wcar-wombat
+    "(method 66 v-wombat)",
+    // source: wind
+    "level-update-wind",
+    // source: wvehicle-ai
+    "(method 131 wvehicle)",
+    // source: wvehicle-events
+    "wv-query-handler",
+    // source: wvehicle-net
+    "(method 16 wvehicle)",
+    // source: wvehicle-physics
+    "(method 62 wvehicle)",
+    // source: wvehicle-sounds
+    "(method 144 wvehicle)",
+    "(method 170 wvehicle)",
+    // source: wvehicle-util
+    "(method 168 wvehicle)",
+    "(method 69 wvehicle)",
+    // source: wvehicle-weapons-aux
+    "(method 18 red-sentry-bot)",
+    "(method 35 red-sentry-bot)",
+    "(method 64 red-sentry-bot)",
+    "drone-base-post",
+    "red-sentry-bot-common-trans",
+    "red-sentry-bot-init-by-other",
+    "red-sentry-bot-init-remote",
+    "red-sentry-bot-poll-target",
+    "vehicle-weapon-drone-init-by-other",
+    // source: wvehicle-weapons-oil
+    "(method 10 slip-object)",
+    "(method 10 smoke-system)",
+    "(method 55 v-wpn-red-oil)",
+    "(method 55 v-wpn-red-smoke)",
+    // source: wvehicle-weapons-util
+    "global-turbo-suppressor-set!",
+    "is-friendly-fire-helper",
+    "race-player-behind-more-than",
+    "rapid-fire-control-emitter-from-world",
+    // source: wvehicle-weapons2
+    "(method 55 v-wpn-red-drone-gun)",
+    "(method 55 v-wpn-red-mine-launcher)",
+    "(method 55 v-wpn-red-sentry-gun)",
+    "(method 55 v-wpn-red-turbo-preventor)",
+    "spawn-mine",
+    // source: wvehicle-weapons3
+    "(method 10 v-wpn-red-tractor-beam)",
+    "(method 55 v-wpn-purple-shield)",
+    "(method 55 v-wpn-red-tractor-beam)",
+    // source: wvehicle-wheel
+    "(method 66 vehicle-wheel)",
+    "vehicle-wheel-init-by-other"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [

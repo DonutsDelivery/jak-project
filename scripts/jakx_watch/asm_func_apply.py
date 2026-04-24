@@ -59,8 +59,13 @@ DECOMP_OUT_PRIMARY = ROOT / ".jakx_watch" / "decomp_out" / "jakx"
 DECOMP_OUT_FALLBACK = ROOT / "decompiler_out" / "jakx"
 HACKS_JSONC = ROOT / "decompiler" / "config" / "jakx" / "ntsc_v1" / "hacks.jsonc"
 
-# VU opcodes that crash run_mips2c — skip any file containing these
-VU_CRASH_OPCODES = re.compile(r"\b(vsqi|viaddi|vlqi|viand|vmtirx)\b")
+# Opcodes that crash run_mips2c — skip any file containing these.
+# VU: vsqi/viaddi/vlqi/viand/vmtirx
+# PS2 extended FPU/MAC: mtlo1/mflo1 (extended accumulator), mula.s/madda.s/madd.s
+# (these crash get_imm() via InstructionAtom::get_imm assertion)
+VU_CRASH_OPCODES = re.compile(
+    r"\b(vsqi|viaddi|vlqi|viand|vmtirx|mtlo1|mflo1|mula\.s|madda\.s|madd\.s)\b"
+)
 
 RE_DEF_FUNCTION = re.compile(r"^;; definition for function ([\w<>!?:\-\+\*/=]+)")
 RE_DEF_METHOD = re.compile(r"^;; definition for method (\d+) of type ([\w<>!?:\-\+\*/=]+)")
