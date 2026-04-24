@@ -2365,7 +2365,16 @@
     "dme-connect-callback",
     "end-game-on-me-callback",
     "host-change-callback",
-    "move-game-on-me-callback"
+    "move-game-on-me-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-mgr
+    "net-mgr-init-by-other",
+    // source: net-mgr-mgcl
+    "dme-join-callback",
+    // source: net-mgr-muis
+    "muis-connect-callback",
+    "muis-info-callback",
+    "muis-news-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
