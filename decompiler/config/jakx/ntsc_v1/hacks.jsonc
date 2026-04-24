@@ -2015,7 +2015,17 @@
     "headset-udp-callback",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: hud
-    "hud-post"
+    "hud-post",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: in-game-menu-hud2
+    "in-game-menu-on?",
+    // source: joint
+    "decompress-fixed-data-to-accumulator",
+    "decompress-frame-data-to-accumulator",
+    // source: joint-exploder
+    "(method 54 joint-exploder)",
+    // source: joint-mod
+    "joint-mod-polar-look-at-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
