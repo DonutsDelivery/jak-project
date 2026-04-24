@@ -22,24 +22,12 @@
     :dma-ref-vtxs (new 'static 'dma-packet :dma (new 'static 'dma-tag :id (dma-tag-id ref)))
     :dma-cnt-call (new 'static 'dma-packet :dma (new 'static 'dma-tag :id (dma-tag-id cnt)))
     :matrix (new 'static 'matrix
-      :rvec (new 'static 'vector :x 1.0)
-      :uvec (new 'static 'vector :y 1.0)
-      :fvec (new 'static 'vector :z 1.0)
-      :trans (new 'static 'vector :w 1.0)
+      :rvec (new 'static 'vector :data (new 'static 'array float 4 1.0 0.0 0.0 0.0))
+      :uvec (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.0 0.0))
+      :fvec (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 1.0 0.0))
+      :trans (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 1.0))
       )
-    :base-strgif (new 'static 'generic-gif-tag
-      :fan-prim (new 'static 'gif-tag-prim
-        :pre #x1
-        :prim (new 'static 'gs-prim :prim (gs-prim-type tri-fan) :iip #x1 :tme #x1 :fge #x1 :abe #x1)
-        :nreg #x3
-        )
-      :str-prim (new 'static 'gif-tag-prim
-        :pre #x1
-        :prim (new 'static 'gs-prim :prim (gs-prim-type tri-strip) :iip #x1 :tme #x1 :fge #x1 :abe #x1)
-        :nreg #x3
-        )
-      :regs (new 'static 'gif-tag-regs-32 :regs0 (gif-reg-id st) :regs1 (gif-reg-id rgbaq) :regs2 (gif-reg-id xyzf2))
-      )
+    :base-strgif (new 'static 'generic-gif-tag :data (new 'static 'array uint32 4 #x303ec000 #x303e4000 #x412 #x0))
     :alpha-opaque (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1))
     :alpha-translucent (new 'static 'gs-adcmd :cmds (gs-reg64 alpha-1) :x #x44)
     :ztest-normal (new 'static 'gs-adcmd :cmds (gs-reg64 test-1) :x #x5026b)
@@ -53,208 +41,298 @@
     :reset-cycle-tag #x1000404
     :dma-tag-cnt #x10000000
     :envmap (new 'static 'generic-envmap-consts
-      :consts (new 'static 'vector :x 1.0 :z 0.5 :w 0.5)
-      :strgif (new 'static 'generic-gif-tag
-        :fan-prim (new 'static 'gif-tag-prim
-          :pre #x1
-          :prim (new 'static 'gs-prim :prim (gs-prim-type tri-fan) :iip #x1 :tme #x1 :abe #x1)
-          :nreg #x3
-          )
-        :str-prim (new 'static 'gif-tag-prim
-          :pre #x1
-          :prim (new 'static 'gs-prim :prim (gs-prim-type tri-strip) :iip #x1 :tme #x1 :abe #x1)
-          :nreg #x3
-          )
-        :regs (new 'static 'gif-tag-regs-32 :regs0 (gif-reg-id st) :regs1 (gif-reg-id rgbaq) :regs2 (gif-reg-id xyzf2))
-        )
-      :colors (new 'static 'vector4w :x -2139062144 :y -2139062144 :z -2139062144 :w -2139062144)
+      :consts (new 'static 'vector :data (new 'static 'array float 4 1.0 0.0 0.5 0.5))
+      :strgif (new 'static 'generic-gif-tag :data (new 'static 'array uint32 4 #x302ec000 #x302e4000 #x412 #x0))
+      :colors (new 'static 'vector4w :data (new 'static 'array int32 4 -2139062144 -2139062144 -2139062144 -2139062144))
       )
-    :light-consts (new 'static 'vector :x 255.0 :y 8388608.0)
+    :light-consts (new 'static 'vector :data (new 'static 'array float 4 255.0 8388608.0 0.0 0.0))
     )
   )
 
-(defun generic-work-init ((arg0 generic-bucket-state))
-  "Initialize the scratchpad work for generic."
-  (quad-copy!
-    (the-as pointer (-> (scratchpad-object generic-work) fx-buf work))
-    (the-as pointer *generic-consts*)
-    27
+;; ERROR: failed type prop at 25: Could not figure out load: (set! a1 (l.q v1))
+(defun generic-work-init ((a0-0 generic-bucket-state))
+  (local-vars
+    (v0-0 pointer)
+    (v0-1 none)
+    (v1-0 int)
+    (v1-1 uint)
+    (v1-2 uint)
+    (v1-3 int)
+    (v1-4 generic-effect-buffer)
+    (v1-5 adgif-shader)
+    (v1-6 adgif-shader)
+    (a0-1 generic-work)
+    (a0-2 generic-effect-work)
+    (a0-3 generic-work)
+    (a0-4 generic-work)
+    (a0-5 generic-work)
+    (a0-6 generic-work)
+    (a0-7 int)
+    (a0-8 adgif-shader)
+    (a0-9 adgif-shader)
+    (a1-0 generic-consts)
+    (a1-1 generic-work)
+    (a1-2 none)
+    (a2-0 int)
+    (a2-1 none)
+    (a3-0 none)
+    (t0-0 none)
+    (t9-0 (function pointer pointer int pointer))
     )
-  (set! (-> (scratchpad-object generic-work) saves gifbuf-adr) (-> arg0 gifbuf-adr))
-  (set! (-> (scratchpad-object generic-work) saves inbuf-adr) (-> arg0 inbuf-adr))
-  (set! (-> (scratchpad-object generic-work) saves cur-outbuf)
-        (the-as uint (-> (scratchpad-object generic-work) fx-buf))
-        )
-  (let* ((v1-6 *default-envmap-shader*)
-         (a0-9 (-> (scratchpad-object generic-work) fx-buf work consts envmap shader))
-         (a1-2 (-> v1-6 quad 0 quad))
-         (a2-1 (-> v1-6 quad 1 quad))
-         (a3-0 (-> v1-6 quad 2 quad))
-         (t0-0 (-> v1-6 quad 3 quad))
-         (v0-1 (-> v1-6 quad 4 quad))
-         )
-    (set! (-> a0-9 quad 0 quad) a1-2)
-    (set! (-> a0-9 quad 1 quad) a2-1)
-    (set! (-> a0-9 quad 2 quad) a3-0)
-    (set! (-> a0-9 quad 3 quad) t0-0)
-    (set! (-> a0-9 quad 4 quad) v0-1)
-    )
-  (none)
+  (set! t9-0 quad-copy!)
+  (set! v1-0 #x2de0)
+  (set! a0-1 (the-as generic-work #x70000000))
+  (set! a0-2 (+ v1-0 a0-1))
+  (set! a1-0 *generic-consts*)
+  (set! a2-0 27)
+  (call! a0-2 a1-0 a2-0)
+  (set! v1-1 (-> a0-0 gifbuf-adr))
+  (set! a0-3 (the-as generic-work #x70000000))
+  (set! (-> a0-3 saves gifbuf-adr) v1-1)
+  (set! v1-2 (-> a0-0 inbuf-adr))
+  (set! a0-4 (the-as generic-work #x70000000))
+  (set! (-> a0-4 saves inbuf-adr) v1-2)
+  (set! v1-3 8192)
+  (set! a0-5 (the-as generic-work #x70000000))
+  (set! v1-4 (+ v1-3 a0-5))
+  (set! a0-6 (the-as generic-work #x70000000))
+  (set! (-> a0-6 saves cur-outbuf) (the-as uint v1-4))
+  (set! v1-5 *default-envmap-shader*)
+  (set! v1-6 v1-5)
+  (set! a0-7 #x2f20)
+  (set! a1-1 (the-as generic-work #x70000000))
+  (set! a0-8 (+ a0-7 a1-1))
+  (set! a0-9 a0-8)
+  (set! a1-2 (the-as none (l.q v1-6)))
+  (set! a2-1 (the-as none (l.q (+ v1-6 16))))
+  (set! a3-0 (the-as none (l.q (+ v1-6 32))))
+  (set! t0-0 (the-as none (l.q (+ v1-6 48))))
+  (set! v0-1 (the-as none (l.q (+ v1-6 64))))
+  (s.q! a0-9 a1-2)
+  (s.q! (+ a0-9 16) a2-1)
+  (s.q! (+ a0-9 32) a3-0)
+  (s.q! (+ a0-9 48) t0-0)
+  (s.q! (+ a0-9 64) v0-1)
+  (ret-none)
   )
 
+;; ERROR: Failed store: (s.d! (+ a0-5 8) 0) at op 17
 (defun generic-upload-vu0 ()
-  "Upload generic VU0 program."
-  (none)
-  )
-
-(defun upload-vu0-program ((a0-0 vu-function) (a1-0 pointer))
-  "Upload vu-function to VU0."
-  (none)
-  )
-
-(defun generic-initialize-without-sync ((arg0 matrix) (arg1 vu-lights))
-  "Init generic, version for generic-merc, which relies on generic-merc init running after."
-  ;; (upload-vu0-program generic-vu0-block (the-as pointer #x70000054))
-  (let ((a2-0 (-> (scratchpad-object generic-work) fx-buf work consts matrix))
-        (v1-1 (-> arg0 rvec quad))
-        (a0-3 (-> arg0 uvec quad))
-        (a1-2 (-> arg0 fvec quad))
-        (a3-0 (-> arg0 trans quad))
-        )
-    (set! (-> a2-0 rvec quad) v1-1)
-    (set! (-> a2-0 uvec quad) a0-3)
-    (set! (-> a2-0 fvec quad) a1-2)
-    (set! (-> a2-0 trans quad) a3-0)
-    )
-  (if arg1
-      (quad-copy! (the-as pointer (-> (scratchpad-object generic-work) fx-buf work lights)) (the-as pointer arg1) 7)
+  (let ((gp-0 *vu0-dma-list*))
+    (let ((v1-0 gp-0))
+      (set! (-> v1-0 base) (-> v1-0 data))
+      (set! (-> v1-0 end) (the-as pointer (+ (+ (-> v1-0 allocated-length) 28) (the-as int v1-0))))
       )
+    (dma-buffer-add-vu-function gp-0 generic-vu0-block 0)
+    (let* ((v1-1 gp-0)
+           (a0-5 (-> v1-1 base))
+           )
+      (set! (-> (the-as (pointer int64) a0-5)) #x70000000)
+      (s.d! (+ a0-5 8) 0)
+      (set! (-> v1-1 base) (&+ a0-5 16))
+      )
+    (.sync.l)
+    (dma-buffer-send-chain (the-as dma-bank-source #x10008000) gp-0)
+    )
   0
   (none)
   )
 
-;; definition for function generic-initialize
-;; INFO: Used lq/sq
-;; WARN: Return type mismatch int vs none.
+;; ERROR: failed type prop at 2: Could not figure out load: (set! a3 (l.wu (+ a0 8)))
+;; ERROR: Unsupported inline assembly instruction kind - [pmaxw t5, t4, r0]
+;; ERROR: Unsupported inline assembly instruction kind - [sll t6, t4, 17]
+;; ERROR: Unsupported inline assembly instruction kind - [sll t5, t4, 1]
+;; ERROR: Unsupported inline assembly instruction kind - [sll t4, t4, 4]
+;; ERROR: Unsupported inline assembly instruction kind - [cache dxwbin t0, 0]
+;; ERROR: Unsupported inline assembly instruction kind - [cache dxwbin t0, 1]
+;; ERROR: Unsupported inline assembly instruction kind - [cache dxwbin a0, 0]
+;; ERROR: Unsupported inline assembly instruction kind - [cache dxwbin a0, 1]
+(defun upload-vu0-program ((a0-0 vu-function) (a1-0 pointer))
+  (local-vars
+    (v0-0 none)
+    (v1-0 dma-buffer)
+    (v1-1 none)
+    (a0-1 none)
+    (a0-2 none)
+    (a0-3 none)
+    (a0-4 none)
+    (a1-1 none)
+    (a2-0 int)
+    (a2-1 none)
+    (a2-2 none)
+    (a3-0 none)
+    (a3-1 none)
+    (a3-2 none)
+    (a3-3 none)
+    (t0-0 none)
+    (t0-1 none)
+    (t0-2 none)
+    (t0-3 none)
+    (t0-4 none)
+    (t1-0 none)
+    (t1-1 none)
+    (t1-2 none)
+    (t2-0 none)
+    (t3-0 none)
+    (t4-0 uint128)
+    (t4-1 none)
+    (t4-2 none)
+    (t5-0 uint128)
+    (t5-1 none)
+    (t5-2 none)
+    (t6-0 none)
+    (t6-1 none)
+    )
+  (set! v1-0 *vu0-dma-list*)
+  (set! a2-0 #x30000000)
+  (set! a3-0 (the-as none (l.wu (+ a0-0 8))))
+  (set! t0-0 (the-as none #x10000000))
+  (set! t1-0 (the-as none (l.wu (+ a0-0 4))))
+  (set! v1-1 (the-as none (-> v1-0 data)))
+  (set! t2-0 (the-as none (+ a0-0 16)))
+  (set! a0-1 (the-as none v1-1))
+  (set! t3-0 (the-as none #x4a000000))
+  (label cfg-1)
+  (set! t4-0 (the-as uint128 (+ a3-0 -127)))
+  (s.w! a0-1 a2-0)
+  (.pmaxw t5-0 t4-0 r0)
+  (s.w! (+ a0-1 4) t2-0)
+  (set! t4-1 (the-as none (- a3-0 t5-0)))
+  (s.w! (+ a0-1 8) t0-0)
+  (set! a3-0 (the-as none t5-0))
+  (s.b! a0-1 t4-1)
+  (.sll t6-0 t4-1 17)
+  (.sll t5-1 t4-1 1)
+  (set! t6-1 (the-as none (+ t6-0 t1-0)))
+  (set! t1-0 (the-as none (+ t1-0 t5-1)))
+  (set! t5-2 (the-as none (+ t6-1 t3-0)))
+  (.sll t4-2 t4-1 4)
+  (s.w! (+ a0-1 12) t5-2)
+  (set! t2-0 (the-as none (+ t2-0 t4-2)))
+  ((b! (nonzero? a3-0) L101 (set! a0-1 (+ a0-1 16))) (set! a0-1 (the-as none (+ a0-1 16))))
+  (set! a2-1 (the-as none #x70000000))
+  (set! a3-1 (the-as none #x10000000))
+  (s.d! a0-1 a2-1)
+  (set! a2-2 (the-as none (logior a3-1 #x8000)))
+  (s.d! (+ a0-1 8) 0)
+  (set! a3-2 (the-as none (l.w a2-2)))
+  (set! t0-1 (the-as none v1-1))
+  (.sync.l)
+  (.cache dxwbin t0-1 0)
+  (.sync.l)
+  (.cache dxwbin t0-1 1)
+  (.sync.l)
+  (set! t0-2 (the-as none 0))
+  (.sync.l)
+  (.cache dxwbin a0-1 0)
+  (.sync.l)
+  (.cache dxwbin a0-1 1)
+  (.sync.l)
+  (set! a0-2 (the-as none 0))
+  (set! a0-3 (the-as none (logand a3-2 256)))
+  ((b! (zero? a0-3) L103 (set! a0-4 325)) (set! a0-4 (the-as none 325)))
+  (set! a3-3 (the-as none a2-2))
+  (nop!)
+  (label cfg-4)
+  (set! t0-3 (the-as none (l.w a1-0)))
+  (nop!)
+  (set! t1-1 (the-as none (l.w a3-3)))
+  (nop!)
+  (set! t1-2 (the-as none (logand t1-1 256)))
+  (set! t0-4 (the-as none (+ t0-3 1)))
+  ((b! (nonzero? t1-2) L102 (s.w! a1-0 t0-4)) (s.w! a1-0 t0-4))
+  (set! a1-1 (the-as none 0))
+  (label cfg-6)
+  (.sync.l)
+  (s.w! (+ a2-2 32) 0)
+  (s.w! (+ a2-2 48) v1-1)
+  (.sync.l)
+  (s.w! a2-2 a0-4)
+  (.sync.l)
+  (set! v0-0 (the-as none 0))
+  (ret-none)
+  )
+
+(defun generic-initialize-without-sync ((arg0 matrix) (arg1 vu-lights))
+  (upload-vu0-program generic-vu0-block (the-as pointer #x70000054))
+  (matrix-copy! (-> (the-as generic-work #x70000000) fx-buf work consts matrix) arg0)
+  (if arg1
+      (quad-copy! (the-as pointer (-> (the-as generic-work #x70000000) fx-buf work lights)) (the-as pointer arg1) 7)
+      )
+  0
+  )
+
 (defun generic-initialize ((arg0 generic-bucket-state) (arg1 matrix) (arg2 vu-lights))
-  "Normal init for generic - sets up scratchpad and VU0."
   (generic-work-init arg0)
   (generic-upload-vu0)
-  (let ((a2-1 (-> (scratchpad-object generic-work) fx-buf work consts matrix))
-        (v1-1 (-> arg1 rvec quad))
-        (a0-2 (-> arg1 uvec quad))
-        (a1-1 (-> arg1 fvec quad))
-        (a3-0 (-> arg1 trans quad))
-        )
-    (set! (-> a2-1 rvec quad) v1-1)
-    (set! (-> a2-1 uvec quad) a0-2)
-    (set! (-> a2-1 fvec quad) a1-1)
-    (set! (-> a2-1 trans quad) a3-0)
-    )
+  (matrix-copy! (-> (the-as generic-work #x70000000) fx-buf work consts matrix) arg1)
   (if arg2
       (quad-copy! (the-as pointer (-> (the-as generic-work #x70000000) fx-buf work lights)) (the-as pointer arg2) 7)
       )
   0
-  (none)
   )
 
-;; definition for function generic-wrapup
-;; WARN: Return type mismatch uint vs none.
 (defun generic-wrapup ((arg0 generic-bucket-state))
-  (set! (-> arg0 gifbuf-adr) (-> (scratchpad-object generic-work) saves gifbuf-adr))
-  (set! (-> arg0 inbuf-adr) (-> (scratchpad-object generic-work) saves inbuf-adr))
-  (none)
+  (set! (-> arg0 gifbuf-adr) (-> (the-as generic-work #x70000000) saves gifbuf-adr))
+  (let ((v0-0 (-> (the-as generic-work #x70000000) saves inbuf-adr)))
+    (set! (-> arg0 inbuf-adr) v0-0)
+    v0-0
+    )
   )
 
-;; definition for function generic-dma-from-spr
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for function generic-light-proc
-;; INFO: function output is handled by mips2c
-(def-mips2c generic-light-proc function)
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for function generic-envmap-proc
-;; INFO: function output is handled by mips2c
-(def-mips2c generic-envmap-proc function)
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for function generic-prepare-dma-double
-;; INFO: function output is handled by mips2c
-(def-mips2c generic-prepare-dma-double function)
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for function generic-prepare-dma-single
-;; INFO: function output is handled by mips2c
-(def-mips2c generic-prepare-dma-single function)
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for function generic-envmap-dproc
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-;; definition for function generic-interp-dproc
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for function generic-no-light-proc
-;; INFO: function output is handled by mips2c
-;; (def-mips2c generic-no-light-proc function) don't need
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for function generic-no-light-dproc-only
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-;; definition for function generic-no-light-dproc
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-;; definition for function generic-no-light+envmap
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for function generic-no-light
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for function generic-envmap-only-proc
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for function generic-light
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for function generic-copy-vtx-dclr-dtex
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-;; definition for function generic-none
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-;; definition for function generic-none-dma-wait
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for symbol *warp-data*, type object
 (define *warp-data* (the-as object (malloc 'global 1024)))
 
-;; definition for function generic-warp-source-proc
-;; INFO: function output is handled by mips2c
-(def-mips2c generic-warp-source-proc (function none))
+;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition for function generic-warp-source
 ;; ERROR: Unsupported inline assembly instruction kind - [lui at, 28672]
 (defun generic-warp-source ((arg0 gsf-buffer))
-  (set! (-> (scratchpad-object generic-work) saves gsf-buf) arg0)
+  (local-vars (at-0 object))
+  (.lui at-0 28672)
+  (set! (-> (the-as generic-work at-0) saves gsf-buf) arg0)
   (generic-warp-source-proc)
   (none)
   )
 
-;; definition for function generic-warp-dest-proc
-;; INFO: function output is handled by mips2c
-(def-mips2c generic-warp-dest-proc function)
-
-;; definition for function generic-warp-dest
-;; INFO: function output is handled by mips2c
-(def-mips2c generic-warp-dest function)
-
-;; definition for function generic-warp-envmap-dest
-;; INFO: function output is handled by mips2c
-(def-mips2c generic-warp-envmap-dest function)
-
-;; definition for function generic-debug-light-proc
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; definition (debug) for function generic-post-debug
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
 ;; ERROR: function has no type analysis. Cannot decompile.
-
-
-
-

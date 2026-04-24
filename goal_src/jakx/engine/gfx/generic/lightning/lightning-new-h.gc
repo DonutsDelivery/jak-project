@@ -13,9 +13,9 @@
    (width-range-end        float)
    (tex-id                 uint32)
    (blend-mode             uint64)
-   (fade-time              time-frame)
-   (regenerate-time-start  time-frame)
-   (regenerate-time-end    time-frame)
+   (fade-time              uint64)
+   (regenerate-time-start  uint64)
+   (regenerate-time-end    uint64)
    (alpha-1-curve          curve2d-fast)
    (alpha-1-mode           uint64)
    (alpha-1-repeat-dist    float)
@@ -27,8 +27,8 @@
    (width-repeat-dist      float)
    (uv-repeat-dist         float)
    (uv-shift?              symbol)
-   (uv-shift-speed         time-frame)
-   (use-sprite-bucket?     symbol  :offset 128)
+   (uv-shift-speed         uint64)
+   (use-sprite-bucket?     symbol)
    (use-accurate-interp?   symbol)
    )
   )
@@ -39,7 +39,6 @@
    (span-flags        uint8)
    (num-inner-points  int8)
    )
-  :pack-me
   )
 
 
@@ -47,12 +46,11 @@
   ((random-offset-size-start  float)
    (inner-random-offset-size  float)
    )
-  :pack-me
   )
 
 
 (deftype lightning-spans-array (inline-array-class)
-  ((data  lightning-span  :inline :dynamic)
+  ((data  lightning-span  :dynamic :offset  16)
    )
   )
 
@@ -60,7 +58,7 @@
 (set! (-> lightning-spans-array heap-base) (the-as uint 8))
 
 (deftype lightning-spans-internal-array (inline-array-class)
-  ((data  lightning-span-internal  :inline :dynamic)
+  ((data  lightning-span-internal  :dynamic :offset  16)
    )
   )
 
@@ -82,10 +80,10 @@
    (spans-internal                 lightning-spans-internal-array)
    (strip1                         prim-strip)
    (strip2                         prim-strip)
-   (inner-point-travel-time        time-frame)
-   (start-fade-time                time-frame)
-   (new-inner-point-generate-time  time-frame)
-   (last-generate-time             time-frame)
+   (inner-point-travel-time        uint64)
+   (start-fade-time                uint64)
+   (new-inner-point-generate-time  uint64)
+   (last-generate-time             uint64)
    (base-width                     float)
    (current-uv-shift               float)
    (current-fade-scalar            float)
@@ -100,8 +98,8 @@
    (base-color                     rgba)
    )
   (:methods
-    (init! (_type_ int int lightning-appearance) none)
-    (reset-spans! (_type_) none)
+    (lightning-bolt-method-9 (_type_ int int lightning-appearance) none)
+    (lightning-bolt-method-10 (_type_) none)
     (lightning-bolt-method-11 (_type_) none)
     (lightning-bolt-method-12 (_type_) none)
     (lightning-bolt-method-13 (_type_ int) none)
@@ -109,7 +107,7 @@
     (lightning-bolt-method-15 (_type_ object int lightning-span-internal) none)
     (lightning-bolt-method-16 (_type_ vector float float vector matrix) none)
     (lightning-bolt-method-17 (_type_ uint float float curve2d-fast float) float)
-    (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none)
+    (lightning-bolt-method-18 () none)
     (lightning-bolt-method-19 (_type_ vector int int matrix float float) none)
     (lightning-bolt-method-20 (_type_ int lightning-span-internal) vector)
     (lightning-bolt-method-21 (_type_ int int float) none)
@@ -120,12 +118,15 @@
 
 (deftype lightning-new-tracker (process)
   ((bolt        lightning-bolt)
-   (lifetime    time-frame)
-   (state-time  time-frame)
+   (lifetime    uint64)
+   (state-time  uint64)
    )
   (:state-methods
-    active
     die
+    active
+    )
+  (:methods
+    (lightning-new-tracker-method-16 () none)
     )
   )
 
@@ -134,7 +135,7 @@
   ((appearance                lightning-appearance)
    (start-pt                  vector  :inline)
    (end-pt                    vector  :inline)
-   (lifetime                  time-frame)
+   (lifetime                  uint64)
    (num-inner-points          int8)
    (inner-random-offset-size  float)
    (random-offset-size-start  float)
