@@ -2114,7 +2114,14 @@
     // source: nav-control
     "(method 16 nav-control)",
     "(method 21 nav-control)",
-    "(method 44 nav-control)"
+    "(method 44 nav-control)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: nav-control
+    "(method 19 nav-mesh)",
+    "(method 41 nav-state)",
+    // source: nav-engine
+    "nav-dma-send-from-spr-no-flush",
+    "nav-dma-send-to-spr-no-flush"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
