@@ -2067,6 +2067,7 @@
 
   
 #|
+;; Duplicate — real def active at L52970. Regen artifact, do not activate.
 (deftype eco-powerup-draw (powerup-draw)
   ((vehicle-handle uint64  :offset-assert 264)
    )
@@ -16683,6 +16684,7 @@
 
 
 #|
+;; Duplicate — real def active at L16708. Regen artifact, do not activate.
 (deftype gsf-vertex-array (UNKNOWN)
   ((vtx gsf-vertex :dynamic :offset-assert 0) ;; guessed by decompiler
    )
@@ -16695,6 +16697,7 @@
 
 
 #|
+;; Duplicate — real def active at L16716. Regen artifact, do not activate.
 (deftype gsf-fx-vertex-array (UNKNOWN)
   ((data gsf-fx-vertex :dynamic :offset-assert 0) ;; guessed by decompiler
    )
@@ -32096,6 +32099,7 @@
 
 
 #|
+;; Duplicate — real def active at L59071. Regen artifact, do not activate.
 (deftype entity-more-perm-hash (structure)
   ((data                UNKNOWN 512  :offset-assert 0)
    (entity-more-perm-ct int32        :offset-assert 8192)
@@ -34783,6 +34787,7 @@
 
 
 #|
+;; Duplicate — real def active at L17013. Regen artifact, do not activate.
 (deftype art-group (art)
   ((info    file-info            :offset-assert 0) ;; guessed by decompiler
    (length  int32                :offset-assert 8)
@@ -36119,6 +36124,7 @@
 
 
 #|
+;; Duplicate — real def active at L30904. Regen artifact, do not activate.
 (deftype prototype-shrubbery (drawable-inline-array)
   ((length  int16              :offset-assert 2)
    (data    shrubbery :dynamic :offset-assert 32) ;; guessed by decompiler
@@ -36256,6 +36262,7 @@
 
 
 #|
+;; Duplicate — real def active at L31108. Regen artifact, do not activate.
 (deftype drawable-inline-array-instance-tie (drawable-inline-array)
   ((length  int16                 :offset-assert 2)
    (data    instance-tie :dynamic :offset-assert 32) ;; guessed by decompiler
@@ -36270,6 +36277,7 @@
 
 
 #|
+;; Duplicate — real def active at L31123. Regen artifact, do not activate.
 (deftype prototype-tie (drawable-inline-array)
   ((length  int16                 :offset-assert 2)
    (data    tie-fragment :dynamic :offset-assert 32) ;; guessed by decompiler
@@ -44448,6 +44456,7 @@
 
 
 #|
+;; Duplicate — real def active at L44461. Regen artifact, do not activate.
 (deftype wcar-base (wvehicle)
   ((jmod-shock-tops UNKNOWN 4 :offset-assert 4672)
    (jmod-shock-mids UNKNOWN 4 :offset-assert 4800)
@@ -51338,6 +51347,7 @@
 
 
 #|
+;; Duplicate — real def active at L51296. Regen artifact, do not activate.
 (deftype editable-array (basic)
   ((allocated-length  int32                     :offset-assert 4)
    (length            int32                     :offset-assert 8)
@@ -60318,6 +60328,7 @@
 
 ;; wvehicle-physics-work
 #|
+;; Duplicate — real def active at L5113. Regen artifact, do not activate.
 (deftype wvehicle-physics-work (structure)
   ((mat                   matrix        :inline :offset-assert 0)
    (force                 vector        :inline :offset-assert 64)
