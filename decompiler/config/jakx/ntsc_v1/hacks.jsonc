@@ -2060,7 +2060,15 @@
     "blerc-execute",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: level
-    "(method 20 level)"
+    "(method 20 level)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-assassin
+    "(method 96 net-player-assassin)",
+    // source: net-boss-battle
+    "(method 48 net-player-boss-battle)",
+    // source: net-deathmatch
+    "(method 82 net-game-mgr-deathmatch)",
+    "(method 83 net-game-mgr-deathmatch)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
