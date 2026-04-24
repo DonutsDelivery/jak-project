@@ -2383,7 +2383,14 @@
     "(method 66 net-player)",
     "net-player-default-handler",
     // source: net-player-h
-    "net-player-init-remote"
+    "net-player-init-remote",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-player
+    "(method 55 net-player)",
+    "(method 63 net-player)",
+    "(method 64 net-player)",
+    "(method 67 net-player)",
+    "(method 68 net-player)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
