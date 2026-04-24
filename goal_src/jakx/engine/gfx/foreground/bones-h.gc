@@ -68,7 +68,7 @@
 
 
 (deftype bone-calculation (structure)
-  ((flags                bone-calc-flags)
+  ((flags                uint16)
    (num-bones            uint16)
    (matrix-area          (inline-array pris-mtx))
    (joints               (inline-array joint))
@@ -77,7 +77,6 @@
    (ripple-y-scale       float)
    (ripple-normal-scale  float)
    (ripple-area          (inline-array vector))
-   (ripple-vec           vector  :inline :overlay-at ripple-scale)
    (next                 bone-calculation)
    (dummy-1              uint32)
    (dummy-2              uint32)

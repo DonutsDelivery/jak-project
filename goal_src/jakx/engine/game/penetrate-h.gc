@@ -16,7 +16,6 @@
   (red-shot 5)
   (blue-shot 6)
   (vehicle 7)
-  (knocked-off 8)
   )
 ;; ---knocked-type
 
@@ -58,45 +57,18 @@
   (eco-blue 31)
   (eco-green 32)
   (knocked 33)
-  (jak-red-shockwave 34)
+  (jak-res-shockwave 34)
   (jak-dark-nuke 35)
   (jak-dark-blackhole 36)
   (emp-blast 37)
-  (penetrate38 38)
-  (penetrate39 39)
-  (penetrate40 40)
-  (penetrate41 41)
-  (penetrate42 42)
-  (penetrate43 43)
-  (penetrate44 44)
-  (penetrate45 45)
-  (penetrate46 46)
-  (penetrate47 47)
-  (penetrate48 48)
-  (penetrate49 49)
-  (penetrate50 50)
-  (penetrate51 51)
-  (penetrate52 52)
-  (penetrate53 53)
-  (penetrate54 54)
-  (penetrate55 55)
-  (penetrate56 56)
-  (penetrate57 57)
-  (penetrate58 58)
-  (penetrate59 59)
-  (penetrate60 60)
-  (penetrate61 61)
-  (penetrate64 62)
-  (penetrate63 63)
   )
 ;; ---penetrate
 
 
 ;; DECOMP BEGINS
 
-;; WARN: Return type mismatch object vs string.
 (defun-debug penetrate->string ((arg0 penetrate))
-  (if (= (logand (penetrate jak-red-shockwave) arg0) (shl 4 32))
+  (if (= (logand (penetrate jak-res-shockwave) arg0) (shl 4 32))
       (format #t "jak-red-shockwave ")
       )
   (if (= (logand arg0 (penetrate mech-bonk)) (penetrate mech-bonk))
@@ -207,15 +179,14 @@
   (if (= (logand (penetrate enemy-dark-shot) arg0) (penetrate enemy-dark-shot))
       (format #t "enemy-dark-shot ")
       )
-  (the-as string (if (= (logand (penetrate jak-blue-shot) arg0) (penetrate jak-blue-shot))
-                     (format #t "jak-blue-shot ")
-                     )
-          )
+  (if (= (logand (penetrate jak-blue-shot) arg0) (penetrate jak-blue-shot))
+      (format #t "jak-blue-shot ")
+      )
   )
 
 (defun penetrate-using->damage ((arg0 penetrate))
   (cond
-    ((logtest? (penetrate dark-bomb dark-smack flut) arg0)
+    ((logtest? (penetrate dark-bomb dark-smack) arg0)
      15.0
      )
     ((logtest? arg0 (penetrate mech-punch mech-bonk))
@@ -273,7 +244,6 @@
                                                dark-punch
                                                dark-bomb
                                                dark-smack
-                                               flut
                                                shield
                                                explode
                                                jak-yellow-shot
@@ -288,19 +258,19 @@
                                         )
                               (cond
                                 ((or (zero? a0-1) (= a0-1 1))
-                                 (the-as int (the-as uint #x23fffdbfa))
+                                 (the-as int (the-as uint #x23fefdbfa))
                                  )
                                 ((= a0-1 2)
-                                 #x3fdecab8
+                                 #x3fcecab8
                                  )
                                 ((= a0-1 3)
-                                 #x141cc030
+                                 #x140cc030
                                  )
                                 ((= a0-1 4)
-                                 #x1cc000
+                                 #xcc000
                                  )
                                 ((= a0-1 5)
-                                 #x1cc000
+                                 #xcc000
                                  )
                                 ((or (= a0-1 6)
                                      (= a0-1 7)
@@ -313,7 +283,7 @@
                                      (= a0-1 14)
                                      (= a0-1 15)
                                      )
-                                 #x1c0000
+                                 #xc0000
                                  )
                                 (else
                                   0

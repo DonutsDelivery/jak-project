@@ -16,7 +16,6 @@
 ;; DECOMP BEGINS
 
 (deftype tfragment-stats (structure)
-  "Triangle and vertex stats for a single tfragment."
   ((num-tris    uint16  4)
    (num-dverts  uint16  4)
    )
@@ -24,7 +23,6 @@
 
 
 (deftype tfragment-debug-data (structure)
-  "Optional debug information (stats, lines) for a tfragment."
   ((stats        tfragment-stats  :inline)
    (debug-lines  (array vector-array))
    )
@@ -32,7 +30,6 @@
 
 
 (deftype generic-tfragment (structure)
-  "Unused. Could have been a way to render tfrag's through generic."
   ((dummy  int32)
    )
   )
@@ -95,12 +92,23 @@
   ()
   )
 
-(deftype drawable-tree-tfrag-water (drawable-tree-tfrag-trans)
+(deftype drawable-tree-tfrag-water (drawable-tree-tfrag)
+  ()
+  )
+
+(deftype drawable-tree-tfrag-shared (drawable-tree-tfrag)
+  ()
+  )
+
+(deftype drawable-tree-tfrag-trans-shared (drawable-tree-tfrag-shared)
+  ()
+  )
+
+(deftype drawable-tree-tfrag-water-shared (drawable-tree-tfrag-shared)
   ()
   )
 
 (deftype tfrag-dists (structure)
-  "Distances for mesh level-of-detail blending for use on VU1."
   ((data    uint32  16)
    (vector  vector  4 :overlay-at (-> data 0))
    (k0s     vector  2 :overlay-at (-> data 0))
@@ -110,14 +118,13 @@
 
 
 (deftype tfrag-data (structure)
-  "Constants for VU1 data memory for tfrag rendering."
-  ((data         uint32       56)
-   (vector       vector       14      :overlay-at (-> data 0))
-   (fog          vector       :inline :overlay-at (-> data 0))
-   (val          vector       :inline :overlay-at (-> data 4))
-   (strgif       gs-gif-tag   :inline :overlay-at (-> data 8))
-   (fangif       gs-gif-tag   :inline :overlay-at (-> data 12))
-   (adgif        gs-gif-tag   :inline :overlay-at (-> data 16))
+  ((fog          vector       :inline)
+   (data         uint32       56      :overlay-at (-> fog data 0))
+   (vector       vector       14      :overlay-at fog)
+   (val          vector       :inline :overlay-at (-> vector 4))
+   (strgif       qword        :inline :overlay-at (-> vector 8))
+   (fangif       qword        :inline :overlay-at (-> vector 12))
+   (adgif        qword        :inline :overlay-at (-> data 16))
    (hvdf-offset  vector       :inline :overlay-at (-> data 20))
    (hmge-scale   vector       :inline :overlay-at (-> data 24))
    (invh-scale   vector       :inline :overlay-at (-> data 28))
@@ -131,7 +138,6 @@
 
 
 (deftype tfrag-control (structure)
-  "VU1 'control' data containing address and counters."
   ((num-base-points            uint32)
    (num-shared-base-points     uint32)
    (num-level0-points          uint32)
@@ -157,7 +163,6 @@
 
 
 (deftype tfrag-stats (structure)
-  "TFRAG statistics computed on EE."
   ((from          int32)
    (to            int32)
    (cnt           int32)
@@ -185,7 +190,6 @@
 
 
 (deftype tfrag-work (structure)
-  "Scratch space for generating TFRAG DMA."
   ((base-tmpl                 dma-packet  :inline)
    (level-0-tmpl              dma-packet  :inline)
    (common-tmpl               dma-packet  :inline)
@@ -216,7 +220,6 @@
 
 
 (deftype tfrag-dma (structure)
-  "Memory layout for to/from scratchpad for tfrag."
   ((banka   tfragment  16 :inline)
    (bankb   tfragment  16 :inline)
    (outa    uint128    128)
