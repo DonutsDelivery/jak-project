@@ -2025,7 +2025,13 @@
     // source: joint-exploder
     "(method 54 joint-exploder)",
     // source: joint-mod
-    "joint-mod-polar-look-at-callback"
+    "joint-mod-polar-look-at-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: joint
+    "calc-animation-from-spr",
+    "decompress-frame-data-pair-to-accumulator",
+    // source: math
+    "exp"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
