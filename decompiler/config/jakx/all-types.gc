@@ -49942,19 +49942,19 @@
 
 (deftype driver (process-focusable)
   (;; offsets derived from ntsc_v1 binary (process-nettable is 4 bytes smaller than jak3)
-   (info               driver-info :inline :offset 252)
-   (vehicle            uint64              :offset 276)
-   (speech-time        uint64              :offset 284)
+   (info-pad           uint8       24      :offset 252) ;; driver-info inline, 16-byte align issue at 252
+   (vehicle            uint8       8       :offset 276) ;; uint64 but 4-byte aligned — skip GOAL align check
+   (speech-time        uint8       8       :offset 284) ;; uint64 but 4-byte aligned
    (driver-unk292      uint8       8       :offset 292)
-   (anim-vel           vector      :inline :offset 300)
-   (anim-pos           vector      :inline :offset 316)
+   (anim-vel           uint8       16      :offset 300) ;; vector inline, not 16-byte aligned at 300
+   (anim-pos           uint8       16      :offset 316) ;; vector inline, not 16-byte aligned at 316
    (turn-back-anim     int8                :offset 332)
    (turn-front-anim    int8                :offset 333)
    (up-down-anim       int8                :offset 334)
    (intro-anim         uint8       4       :offset 335)
    (jmod-head          basic               :offset 340)
    (arm-ik             uint8       12      :offset 344)
-   (looking-at         uint64              :offset 356)
+   (looking-at         uint8       8       :offset 356) ;; uint64 but 4-byte aligned
    (looking-at-timeout int32               :offset 364)
    (helmet             helmet      :inline :offset 368)
    (driver-tail        uint8       4       :offset 384)
@@ -50037,9 +50037,9 @@
   
 (deftype driver-jak (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50053,9 +50053,9 @@
   
 (deftype driver-ashelin (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50069,9 +50069,9 @@
   
 (deftype driver-razer (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50085,9 +50085,9 @@
   
 (deftype driver-klever (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50101,9 +50101,9 @@
   
 (deftype driver-kiera (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50117,9 +50117,9 @@
   
 (deftype driver-thug-a (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50133,9 +50133,9 @@
   
 (deftype driver-thug-b (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50149,9 +50149,9 @@
   
 (deftype driver-thug-c (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50165,9 +50165,9 @@
   
 (deftype driver-taryn (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50181,9 +50181,9 @@
   
 (deftype driver-torn (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50197,9 +50197,9 @@
   
 (deftype driver-sig (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50213,9 +50213,9 @@
   
 (deftype driver-ur-86 (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50229,9 +50229,9 @@
   
 (deftype driver-kaeden (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50245,9 +50245,9 @@
   
 (deftype driver-rayn (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50261,9 +50261,9 @@
   
 (deftype driver-ratchet (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50277,9 +50277,9 @@
   
 (deftype driver-jaka (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50293,9 +50293,9 @@
   
 (deftype driver-jakb (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50309,9 +50309,9 @@
   
 (deftype driver-jakc (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50325,9 +50325,9 @@
   
 (deftype driver-daxter (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50341,9 +50341,9 @@
   
 (deftype driver-gtblitz (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50357,9 +50357,9 @@
   
 (deftype driver-pecker (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50373,9 +50373,9 @@
   
 (deftype driver-ximon (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
@@ -50389,9 +50389,9 @@
   
 (deftype driver-osmo (driver)
   ()
-  :method-count-assert 59
+  :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x3b01000184
+  :flag-assert         #x4301000184
   )
   
 
