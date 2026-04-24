@@ -2165,7 +2165,14 @@
     "(method 33 nav-mesh)",
     "(method 34 nav-mesh)",
     "(method 35 nav-mesh)",
-    "(method 43 nav-mesh)"
+    "(method 43 nav-mesh)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-artifact
+    "(method 52 artifact)",
+    "(method 53 artifact-draw)",
+    "(method 57 net-game-mgr-artifact)",
+    "artifact-draw-init-remote",
+    "artifact-init-remote"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
