@@ -2250,7 +2250,15 @@
     "net-game-mgr-beasthunt-init-remote",
     "net-player-artifact-init-remote",
     "net-player-beasthunt-init-remote",
-    "powercell-footie-init-remote"
+    "powercell-footie-init-remote",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-game-modes-h
+    "net-game-mgr-collectable-init-remote",
+    "net-player-collectable-init-remote",
+    // source: net-game-modes2-h
+    "ctf-flag-init-remote",
+    "net-game-mgr-ctf-init-remote",
+    "net-player-ctf-init-remote"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
