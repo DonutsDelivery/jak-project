@@ -6648,7 +6648,8 @@
       43,
       "s1",
       "dma-buffer"
-    ]
+    ],
+    [33, "v1", "connection"]
   ],
   "lightning-trail-fractal-gen": [
     [
@@ -14889,7 +14890,8 @@
       71,
       "a0",
       "collide-shape"
-    ]
+    ],
+    [82, "v1", "connection"]
   ],
   "(method 50 collide-shape)": [
     [
@@ -15187,7 +15189,8 @@
       89,
       "a0",
       "collide-shape"
-    ]
+    ],
+    [19, "v1", "connection"]
   ],
   "(method 27 sphere-hash)": [
     [
@@ -15303,7 +15306,8 @@
       33,
       "v1",
       "symbol"
-    ]
+    ],
+    [206, "v1", "collide-shape"]
   ],
   "(method 11 memory-usage-block)": [
     [
@@ -39662,7 +39666,8 @@
     [3, "gp", "vehicle"]
   ],
   "(method 69 projectile)": [
-    [2, "gp", "projectile"]
+    [2, "gp", "projectile"],
+    [3, "v1", "collide-shape"]
   ],
   "(method 69 rigid-body-object)": [
     [1, "gp", "rigid-body-object"]
@@ -39736,7 +39741,8 @@
     [33, "gp", "wvehicle"]
   ],
   "(method 86 vehicle)": [
-    [10, "gp", "vehicle"]
+    [10, "gp", "vehicle"],
+    [11, "v1", "collide-shape"]
   ],
   "(method 87 rigid-body-object)": [
     [0, "a0", "rigid-body-object"],
@@ -41318,5 +41324,77 @@
   ],
   "spartacus-editor-init": [
     [62, "v1", "uint8"]
+  ],
+  "(method 10 focus)": [
+    [19, "v1", "collide-shape"]
+  ],
+  "(method 100 v-bear)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 v-bobcat)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 v-cheetah)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 v-cougar)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 v-daxtermobile)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 v-falcon)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 v-gila)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 v-leopard)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 v-mongoose)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 v-panther)": [
+    [2, "v1", "collide-shape"]
+  ],
+  "(method 100 v-possum)": [
+    [2, "v1", "collide-shape"]
+  ],
+  "(method 100 v-snake)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 v-tiger)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 v-wolf)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 v-wombat)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 100 vehicle)": [
+    [1, "v1", "collide-shape"]
+  ],
+  "(method 127 vehicle)": [
+    [13, "v1", "rigid-body-vehicle-constants"]
+  ],
+  "(method 137 vehicle)": [
+    [3, "v1", "collide-shape"]
+  ],
+  "(method 138 vehicle)": [
+    [4, "v1", "rigid-body-vehicle-constants"]
+  ],
+  "projectile-move-fill-all-dirs": [
+    [2, "v1", "collide-shape"]
+  ],
+  "projectile-move-fill-line-sphere": [
+    [2, "gp", "collide-shape"]
+  ],
+  "(method 20 collide-cache)": [
+    [50, "v1", "connection"]
+  ],
+  "prim-engine-execute": [
+    [48, "v1", "connection"]
   ]
 }
