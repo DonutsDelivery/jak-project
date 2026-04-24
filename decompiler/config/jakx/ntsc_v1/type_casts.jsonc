@@ -41700,5 +41700,9 @@
   ],
   "spawn-hud-top-split-bar": [
     [31, "v0", "in-game-hud"]
-  ]
+  ],
+
+  "(method 12 blit-displays-work)": [[[4, 41], "v1", "(inline-array vector4w)"], [[60, 112], "v1", "(inline-array vector4w)"]],
+  "(method 27 ocean)": [[[19, 27], "a0", "dma-packet"], [30, "s3", "matrix"], [[49, 54], "s2", "vector"]],
+  "(method 28 ocean)": [[[43, 51], "a0", "dma-packet"], [66, "a2", "(pointer int16)"], [[81, 89], "a1", "vector4w"], [[90, 98], "v1", "vector4w"], [[111, 127], "t0", "vector4w"], [[130, 268], "a1", "(inline-array vector4w)"]]
 }
