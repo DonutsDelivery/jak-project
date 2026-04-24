@@ -1882,7 +1882,12 @@
     "collision-editor-edited-proc-init-by-other",
     "collision-editor-init-by-other",
     // source: default-menu
-    "dm-subdiv-float"
+    "dm-subdiv-float",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: find-nearest
+    "sorted-targ-validator-is-player-vehicle",
+    // source: fmv-player
+    "fmv-player-init-by-other"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
