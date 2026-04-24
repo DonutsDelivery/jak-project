@@ -1822,7 +1822,22 @@
     // source: collide-mesh-h
     "(method 11 collide-mesh-cache)",
     // source: collide-probe
-    "collide-probe-node"
+    "collide-probe-node",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: display
+    "vblank-handler",
+    "vif1-handler",
+    "vif1-handler-debug",
+    // source: dma
+    "symlink2",
+    "symlink3",
+    // source: dma-h
+    "dma-count-until-done",
+    "dma-send-no-scratch",
+    "dma-sync-fast",
+    "dma-sync-with-count",
+    // source: drift
+    "drift-editor-init-by-other"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
