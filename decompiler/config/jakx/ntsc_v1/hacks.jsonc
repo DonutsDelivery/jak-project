@@ -1854,7 +1854,15 @@
     // source: dynamic-mem
     "mem-alloc-scert",
     "mem-free-scert",
-    "mem-realloc-scert"
+    "mem-realloc-scert",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: foreground
+    "foreground-draw-hud",
+    "foreground-emerc",
+    "foreground-merc",
+    // source: generic-effect
+    "generic-dma-from-spr",
+    "generic-light-proc"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
