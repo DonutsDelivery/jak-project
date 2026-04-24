@@ -2212,7 +2212,14 @@
     "(method 60 net-game-mgr)",
     "(method 61 net-game-mgr)",
     "late-join-spawn-players",
-    "net-game-mgr-init-local"
+    "net-game-mgr-init-local",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-deathmatch
+    "(method 54 net-player-deathmatch)",
+    "(method 56 net-player-deathmatch)",
+    "(method 64 net-game-mgr-deathmatch)",
+    "(method 96 net-player-deathmatch)",
+    "(method 99 net-player-deathmatch)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
