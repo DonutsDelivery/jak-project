@@ -2305,7 +2305,14 @@
     "remote-client-connect-callback",
     "remote-client-disconnect-callback",
     "remote-client-event-callback",
-    "session-master-change-callback"
+    "session-master-change-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-mgr-dme
+    "cb-server-ping",
+    "dummy-callback",
+    "get-host-by-name-callback",
+    "lan-game-verify-callback",
+    "net-lanfind-exchange-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
