@@ -10138,7 +10138,7 @@
     (texture-pool-method-18 (_type_ int) int) ;; 18
     (texture-pool-method-19 (_type_) symbol) ;; 19
     (texture-pool-method-20 (_type_) symbol) ;; 20
-    (texture-pool-method-21 (_type_) symbol) ;; 21
+    (texture-pool-method-21 (_type_) none) ;; 21
     (texture-pool-method-22 (_type_) none) ;; 22
     (texture-pool-method-23 (_type_) none) ;; 23
     (texture-pool-method-24 (_type_) int) ;; 24
@@ -11724,7 +11724,7 @@
   (:methods
     (level-method-9 (_type_) _type_) ;; 9
     (level-method-10 (_type_) _type_) ;; 10
-    (level-method-11 (_type_ int) symbol) ;; 11
+    (level-method-11 (_type_ int) none) ;; 11
     (level-method-12 (_type_) none) ;; 12 ;; (level-method-12 (_type_) none)
     (level-method-13 (_type_) symbol) ;; 13
     (level-method-14 (_type_) none) ;; 14 ;; (compute-memory-usage! (_type_ symbol) memory-usage-block)
@@ -28811,7 +28811,7 @@
     (collide-shape-method-48 (_type_ collide-spec) int) ;; 48
     (collide-shape-method-49 (_type_ int collide-spec collide-spec) int) ;; 49
     (collide-shape-method-50 () none) ;; 50 ;; (send-shoves (_type_ process touching-shapes-entry float float float) symbol)
-    (collide-shape-method-51 (_type_ collide-query vector collide-spec float float float) symbol) ;; 51
+    (collide-shape-method-51 (_type_ collide-query vector collide-spec float float float) none) ;; 51
     (collide-shape-method-52 (_type_ water-info collide-action) water-info) ;; 52
     (collide-shape-method-53 (_type_ (function collide-shape-prim none)) int) ;; 53
     (collide-shape-method-54 (_type_) collide-shape) ;; 54
@@ -34195,7 +34195,7 @@
     (nav-control-method-21 () none) ;; 21
     (nav-control-method-22 () none) ;; 22
     (nav-control-method-23 () none) ;; 23
-    (nav-control-method-24 () symbol) ;; 24
+    (nav-control-method-24 () none) ;; 24
     (nav-control-method-25 () float) ;; 25
     (nav-control-method-26 () uint) ;; 26
     (nav-control-method-27 () meters) ;; 27
@@ -34278,7 +34278,7 @@
     (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12 ;; search-for-point
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13 ;; search-for-sphere
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
-    (grid-hash-method-15 (_type_) none) ;; 15 ;; dump-grid-info
+    (grid-hash-method-15 (_type_) int) ;; 15 ;; dump-grid-info
     (grid-hash-method-16 (_type_ grid-hash-box grid-hash-box) int) ;; 16 ;; verify-bits-in-bucket
     (grid-hash-method-17 (_type_ object grid-hash-box) int) ;; 17 ;; box-of-everything
     (grid-hash-method-18 (_type_ grid-hash-box int) none) ;; 18
@@ -39495,7 +39495,7 @@
     (light-trail-tracker-method-14 () none) ;; 14
     (tracking () _type_ :state) ;; 15
     (die () _type_ :state) ;; 16
-    (should-track? (_type_ process-focusable) symbol) ;; 17
+    (should-track? (_type_ process-focusable) none) ;; 17
     (should-end? (_type_ process-focusable) symbol) ;; 18
     (should-draw? (_type_) symbol) ;; 19
     (add-crumb! (_type_ vector) none) ;; 20
@@ -40046,7 +40046,7 @@
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process) _type_)
     (rigid-body-control-method-9 (_type_ collide-shape-moving float) none) ;; 9
-    (rigid-body-control-method-10 (_type_ rigid-body-object float float) object) ;; 10
+    (rigid-body-control-method-10 (_type_ rigid-body-object float float) none) ;; 10
     (rigid-body-control-method-11 (_type_ collide-shape-moving) int) ;; 11
     (rigid-body-control-method-12 (_type_ float) int) ;; 12
     (rigid-body-control-method-13 (_type_) int) ;; 13
@@ -41227,7 +41227,7 @@
     (flow-control-method-10 (_type_ (pointer float) int) none) ;; 10
     (flow-control-method-11 (_type_ process-focusable) none) ;; 11
     (flow-control-method-12 (_type_) int) ;; 12
-    (flow-control-method-13 (_type_ water-info vector) symbol) ;; 13
+    (flow-control-method-13 (_type_ water-info vector) none) ;; 13
     )
   )
   
@@ -58877,7 +58877,7 @@
     (free-nodes (_type_) none) ;; 10
     (update-from-step-size (_type_ float) none) ;; 11
     (send-events-for-touching-shapes (_type_) none) ;; 12
-    (get-shapes-entry (_type_ object object) object) ;; 13
+    (get-shapes-entry (_type_ object object) none) ;; 13
     )
   )
 
