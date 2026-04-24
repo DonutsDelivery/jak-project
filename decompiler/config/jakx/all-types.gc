@@ -34278,7 +34278,7 @@
     (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12 ;; search-for-point
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13 ;; search-for-sphere
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
-    (grid-hash-method-15 (_type_) int) ;; 15 ;; dump-grid-info
+    (grid-hash-method-15 (_type_) none) ;; 15 ;; dump-grid-info
     (grid-hash-method-16 (_type_ grid-hash-box grid-hash-box) int) ;; 16 ;; verify-bits-in-bucket
     (grid-hash-method-17 (_type_ object grid-hash-box) int) ;; 17 ;; box-of-everything
     (grid-hash-method-18 (_type_ grid-hash-box int) none) ;; 18
