@@ -1862,7 +1862,14 @@
     "foreground-merc",
     // source: generic-effect
     "generic-dma-from-spr",
-    "generic-light-proc"
+    "generic-light-proc",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: dynamic-mem
+    "mem-alloc-flash",
+    "mem-free-flash",
+    "mem-free-lgaud",
+    "mem-realloc-flash",
+    "mem-realloc-lgaud"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
