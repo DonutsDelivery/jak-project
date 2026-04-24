@@ -2075,7 +2075,10 @@
     "(method 96 net-player-deathrace)",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: merc-blend-shape
-    "setup-blerc-chains-for-one-fragment"
+    "setup-blerc-chains-for-one-fragment",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: light-trails
+    "light-trail-tracker-common-post"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
