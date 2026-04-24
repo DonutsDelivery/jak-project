@@ -28956,12 +28956,11 @@
 
   
 
-#|
 (deftype part-tracker-init-params (structure)
   ((local-offset         vector                         :inline :offset-assert 0)
    (userdata             uint64                                 :offset-assert 16)
    (duration             time-frame                             :offset-assert 24)
-   (local-space-param    int32                                  :offset-assert 28)
+   (local-space-param    int32                                  :offset 28) ;; overlaps upper half of duration — :offset skips assert
    (group                sparticle-launch-group                 :offset-assert 32)
    (callback             (function part-tracker vector)         :offset-assert 36)
    (local-space-callback basic                                  :offset-assert 40)
@@ -28973,7 +28972,6 @@
   :size-assert         #x38
   :flag-assert         #x900000038
   )
-|#
 
   
 
@@ -39216,7 +39214,7 @@
   )
 
 
-(define-extern *part-tracker-params-default* object) ;; part-tracker-init-params
+(define-extern *part-tracker-params-default* part-tracker-init-params)
 (define-extern *part-tracker-subsampler-params-default* object) ;; part-tracker-subsampler-init-params
 (define-extern entity-lookup-part-group (function entity-actor (pointer string) symbol (pointer sparticle-launch-group)))
 (define-extern clone-anim-once (function handle symbol string none :behavior process-drawable))
@@ -39225,7 +39223,7 @@
 (define-extern manipy-init (function none)) ;; (function vector entity-actor skeleton-group vector manipy-options none :behavior manipy)
 (define-extern part-tracker-init-base (function sparticle-launch-group time-frame (function part-tracker vector) uint process-drawable object none :behavior part-tracker))
 (define-extern part-tracker-subsampler-init (function none)) ;; (function part-tracker-subsampler-init-params object :behavior part-tracker-subsampler)
-(define-extern part-tracker-init (function none)) ;; (function part-tracker-init-params object :behavior part-tracker)
+(define-extern part-tracker-init (function part-tracker-init-params object :behavior part-tracker))
 (define-extern part-tracker-track-root (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern lightning-tracker-init (function none)) ;; (function lightning-spec time-frame symbol process-drawable vector vector none :behavior lightning-tracker)
 (define-extern process-grab? (function process symbol symbol :behavior process))
@@ -59231,7 +59229,7 @@
 ;; (define-extern net-latency-metrics-params object)  ;; clobbers active deftype
 ;; (define-extern net-update-conn-errors object)  ;; clobbers active deftype
 ;; (define-extern ocean-trans-strip-array object) ;; clobbers active deftype
-;; (define-extern part-tracker-init-params object) ;; clobbers active deftype
+(define-extern part-tracker-init-params type) ;; structure type — symbol holds type descriptor
 ;; (define-extern part-tracker-subsampler object) ;; clobbers active deftype
 ;; (define-extern perf-stat-array object) ;; clobbers active deftype
 ;; (define-extern power-slide-hud-single object) ;; clobbers active deftype
