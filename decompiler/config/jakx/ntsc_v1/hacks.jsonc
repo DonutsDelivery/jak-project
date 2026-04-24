@@ -2180,7 +2180,14 @@
     // source: net-aux-voice
     "aux-voice-mgr-failed",
     "aux-voice-mgr-init-by-other",
-    "aux-voice-msg-callback"
+    "aux-voice-msg-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-aux-voice
+    "aux-voice-client-connect-callback",
+    "aux-voice-client-disconnect-callback",
+    "aux-voice-local-connect-callback",
+    "aux-voice-local-disconnect-callback",
+    "aux-voice-mgr-default-handler"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
