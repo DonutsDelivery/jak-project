@@ -2066,6 +2066,7 @@
 
 
   
+;; DEAD: duplicate
 #|
 ;; Duplicate — real def active at L52970. Regen artifact, do not activate.
 (deftype eco-powerup-draw (powerup-draw)
@@ -4520,6 +4521,7 @@
 
 
   
+;; DEAD: duplicate
 #|
 ;; vehicle-wheel moved to after rigid-body-object definition (L40041+)
 ;; Duplicate — real def is at L40156 after rigid-body-object.
@@ -5560,6 +5562,7 @@
 
 
   
+;; DEAD: duplicate
 #|
 ;; Duplicates moved here from early in file — real defs at L43939+ after vehicle-weapon-slot.
 (deftype v-wpn-yellow-chain-gun (vehicle-weapon-slot)
@@ -5704,6 +5707,7 @@
 
 
   
+;; DEAD: duplicate
 #|
 ;; Duplicates moved here — real defs at L44008+ after vehicle-weapon-slot.
 (deftype v-wpn-red-turbo-preventor (vehicle-weapon-slot)
@@ -5760,6 +5764,7 @@
 
 
   
+;; DEAD: duplicate
 #|
 ;; Duplicate — real def at L44035+ after vehicle-weapon-slot.
 (deftype v-wpn-purple-shield (vehicle-weapon-slot)
@@ -32090,6 +32095,7 @@
 
 
 
+;; DEAD: duplicate
 #|
 ;; Duplicate — real def active at L59071. Regen artifact, do not activate.
 (deftype entity-more-perm-hash (structure)
@@ -34776,6 +34782,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; DEAD: duplicate
 #|
 ;; Duplicate — real def active at L17013. Regen artifact, do not activate.
 (deftype art-group (art)
@@ -36113,6 +36120,7 @@
 
 
 
+;; DEAD: duplicate
 #|
 ;; Duplicate — real def active at L30904. Regen artifact, do not activate.
 (deftype prototype-shrubbery (drawable-inline-array)
@@ -36251,6 +36259,7 @@
 
 
 
+;; DEAD: duplicate
 #|
 ;; Duplicate — real def active at L31108. Regen artifact, do not activate.
 (deftype drawable-inline-array-instance-tie (drawable-inline-array)
@@ -36266,6 +36275,7 @@
 
 
 
+;; DEAD: duplicate
 #|
 ;; Duplicate — real def active at L31123. Regen artifact, do not activate.
 (deftype prototype-tie (drawable-inline-array)
@@ -44442,6 +44452,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+;; DEAD: duplicate
 #|
 ;; Duplicate — real def active at L44461. Regen artifact, do not activate.
 (deftype wcar-base (wvehicle)
@@ -51316,6 +51327,7 @@
 
 
 
+;; DEAD: duplicate
 #|
 ;; Duplicate — real def active at L51296. Regen artifact, do not activate.
 (deftype editable-array (basic)
@@ -59226,7 +59238,7 @@
 ;; (define-extern net-latency-metrics-params object)  ;; clobbers active deftype
 ;; (define-extern net-update-conn-errors object)  ;; clobbers active deftype
 ;; (define-extern ocean-trans-strip-array object) ;; clobbers active deftype
-(define-extern part-tracker-init-params type) ;; structure type — symbol holds type descriptor
+;; (define-extern part-tracker-init-params type) ;; structure type — symbol holds type descriptor ;; clobbers active deftype
 ;; (define-extern part-tracker-subsampler object) ;; clobbers active deftype
 ;; (define-extern perf-stat-array object) ;; clobbers active deftype
 ;; (define-extern power-slide-hud-single object) ;; clobbers active deftype
@@ -60281,6 +60293,7 @@
   )
 
 ;; wvehicle-physics-work
+;; DEAD: duplicate
 #|
 ;; Duplicate — real def active at L5113. Regen artifact, do not activate.
 (deftype wvehicle-physics-work (structure)
