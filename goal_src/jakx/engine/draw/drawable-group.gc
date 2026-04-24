@@ -65,7 +65,6 @@
       )
     )
   0
-  (none)
   )
 
 (defmethod collect-stats ((this drawable-group))
@@ -80,7 +79,6 @@
       )
     )
   0
-  (none)
   )
 
 (defmethod debug-draw ((this drawable-group))
@@ -93,7 +91,6 @@
       )
     )
   0
-  (none)
   )
 
 (defmethod unpack-vis ((this drawable-group) (arg0 (pointer int8)) (arg1 (pointer int8)))

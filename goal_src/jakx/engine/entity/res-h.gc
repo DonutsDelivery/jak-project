@@ -42,7 +42,6 @@
   )
 
 (deftype res-lump (basic)
-  "A collection of [[res-tag]]s and their data."
   ((length            int32)
    (allocated-length  int16)
    (flags             res-lump-flags)

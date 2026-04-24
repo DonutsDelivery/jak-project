@@ -25,18 +25,6 @@ A "connection" is really just a function that gets called when the engine runs, 
 ;; DECOMP BEGINS
 
 (deftype connectable (structure)
-  "A connectable is the linked-list node part of a connection.
-   The connections themselves are owned by the engine.
-
-   The `next0`/`prev0` references are used for how this belongs in the connectable list
-   belonging to the [[engine]]. These terminate on special nodes stored in the engine:
-   `alive-list`/`alive-list-end` for the active connections, and `dead-list`/`dead-list-end`
-   for the inactive.
-
-   The `next1`/`prev1` references are used to build a linked list _per process_.
-   The head of this list is the inline connectable in process and it ends with `#f`.
-   This is a bit confusing at first, but these belong to two linked lists...
-   These terminate on both ends with `#f`."
   ((next0  connectable)
    (prev0  connectable)
    (next1  connectable)
@@ -46,10 +34,6 @@ A "connection" is really just a function that gets called when the engine runs, 
 
 
 (deftype connection (connectable)
-  "This is the actual data for the connection.
-It may be used in multiple ways, but the most common is to use `param0` as a function.
-It receives `param1`, `param2`, `param3`, and the engine as the arguments.
-In some cases, the return value is checked for `'dead`."
   ((param0  basic)
    (param1  basic)
    (param2  int32)
@@ -73,7 +57,7 @@ The engine is dynamically sized based on how many connections it can store.
 
 New for Jak 2: You can use a child class of [[connection]]."
   ((name              symbol)
-   (engine-time       time-frame   :offset  16)
+   (engine-time       uint64       :offset  16)
    (allocated-length  int16        :offset  10)
    (length            int16        :offset   8)
    (element-type      type         :offset  12)
@@ -142,7 +126,7 @@ New for Jak 2: You can use a child class of [[connection]]."
     (nop!)
     (set! this (the-as connection (-> (the-as connectable this) prev1)))
     )
-  (the-as process (&+ (the-as pointer this) -108))
+  (the-as process (&+ (the-as pointer this) -124))
   )
 
 (defmethod belongs-to-engine? ((this connection) (arg0 engine))
@@ -216,8 +200,7 @@ New for Jak 2: You can use a child class of [[connection]]."
             (set! (-> (the-as connectable v1-10) prev0)
                   (the-as connectable (&- (the-as pointer v1-10) (the-as uint (-> arg2 size))))
                   )
-            ;; og:preserve-this cast changed to (pointer pointer)
-            (set! (-> (the-as (pointer pointer) v1-10)) (&+ (the-as pointer v1-10) (-> arg2 size)))
+            (set! (-> (the-as (pointer int32) v1-10)) (&+ (the-as pointer v1-10) (-> arg2 size)))
             (set! v1-10 (&+ (the-as pointer v1-10) (-> arg2 size)))
             (+! a0-6 1)
             )
@@ -225,8 +208,7 @@ New for Jak 2: You can use a child class of [[connection]]."
         (set! (-> (the-as connectable v1-10) prev0)
               (the-as connectable (&- (the-as pointer v1-10) (the-as uint (-> arg2 size))))
               )
-        ;; og:preserve-this cast changed to (pointer collectable)
-        (set! (-> (the-as (pointer connectable) v1-10)) (-> v0-0 dead-list-end))
+        (set! (-> (the-as (pointer int32) v1-10)) (-> v0-0 dead-list-end))
         )
       )
     v0-0
@@ -277,7 +259,7 @@ New for Jak 2: You can use a child class of [[connection]]."
 
 (defmethod execute-connections ((this engine) (arg0 object))
   "Run the engine!"
-  (set! (-> this engine-time) (-> *display* real-clock frame-counter))
+  (set! (-> this engine-time) (the-as uint (-> *display* real-clock frame-counter)))
   (let ((s4-0 (the-as connection (-> this alive-list-end prev0))))
     (while (!= s4-0 (-> this alive-list))
       ((the-as (function object object object object object) (-> s4-0 param0))
@@ -294,7 +276,7 @@ New for Jak 2: You can use a child class of [[connection]]."
 
 (defmethod execute-connections-and-move-to-dead ((this engine) (arg0 object))
   "Run the engine! If any objects return `'dead`, remove them."
-  (set! (-> this engine-time) (-> *display* real-clock frame-counter))
+  (set! (-> this engine-time) (the-as uint (-> *display* real-clock frame-counter)))
   (let ((s4-0 (the-as connection (-> this alive-list-end prev0))))
     (while (!= s4-0 (-> this alive-list))
       (let ((v1-3 ((the-as (function object object object object object) (-> s4-0 param0))
@@ -334,29 +316,6 @@ New for Jak 2: You can use a child class of [[connection]]."
       )
     #f
     )
-  )
-
-(defmethod inspect-all-connections ((this engine))
-  "inspect all of the connections."
-  (let ((gp-0 *kernel-symbol-warnings*))
-    (set! *kernel-symbol-warnings* #f)
-    (let* ((s4-0 (-> this alive-list next0))
-           (s3-0 (-> s4-0 next0))
-           )
-      (while (!= s4-0 (-> this alive-list-end))
-        (format
-          #t
-          "from process ~A:~%~`connection`I"
-          ((method-of-type connection get-process) (the-as connection s4-0))
-          s4-0
-          )
-        (set! s4-0 s3-0)
-        (set! s3-0 (-> s3-0 next0))
-        )
-      )
-    (set! *kernel-symbol-warnings* gp-0)
-    )
-  this
   )
 
 
@@ -519,7 +478,7 @@ the key's don't track which engine-pers they belong to.
 Unlike [[engine]], users can use [[engine-pers]] as a parent class."
   ((next         connection-pers)
    (key          object)
-   (update-time  time-frame)
+   (update-time  uint64)
    (param        object   4)
    (param-int32  int32    4 :overlay-at (-> param 0))
    (param-int64  int64    2 :overlay-at (-> param 0))
@@ -534,7 +493,7 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
    (length            int16)
    (allocated-length  int16)
    (element-type      type)
-   (execute-time      time-frame)
+   (execute-time      uint64)
    (alive-list        connection-pers)
    (dead-list         connection-pers)
    (data              connection-pers  :inline :dynamic)
@@ -542,11 +501,11 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
   (:methods
     (new (symbol type symbol int type) _type_)
     (schedule-callback (_type_ object time-frame) connection-pers)
-    (kill-callback (_type_ connection-pers) none)
-    (kill-by-key (_type_ object) none)
-    (kill-matching (_type_ (function engine-pers connection-pers object object symbol) object object) none)
-    (update-callback (_type_) none)
-    (run-pending-updates! (_type_ time-frame) none)
+    (kill-callback (_type_ connection-pers) int)
+    (kill-by-key (_type_ object) int)
+    (kill-matching (_type_ (function engine-pers connection-pers object object symbol) object object) int)
+    (update-callback (_type_) int)
+    (run-pending-updates! (_type_ time-frame) int)
     )
   )
 
@@ -567,10 +526,10 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
     (set! (-> v0-0 dead-list) (the-as connection-pers (-> v0-0 data)))
     (let ((v1-3 (the-as object (-> v0-0 data))))
       (dotimes (a0-1 arg1)
-        (set! (-> (the-as (pointer uint32) v1-3) 0) (the-as uint (&+ (the-as pointer v1-3) (-> arg2 size))))
+        (set! (-> (the-as (pointer pointer) v1-3) 0) (&+ (the-as pointer v1-3) (-> arg2 size)))
         (set! v1-3 (&+ (the-as pointer v1-3) (-> arg2 size)))
         )
-      (set! (-> (the-as (pointer symbol) (&- (the-as pointer v1-3) (the-as uint (-> arg2 size))))) #f)
+      (set! (-> (the-as (pointer int32) (&- (the-as pointer v1-3) (the-as uint (-> arg2 size))))) #f)
       )
     v0-0
     )
@@ -619,14 +578,12 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
 (defmethod kill-callback ((this engine-pers) (arg0 connection-pers))
   "Called when a connection is removed."
   0
-  (none)
   )
 
 (defmethod update-callback ((this engine-pers))
   "Called when a connection is run.
    Users can override this as needed."
   0
-  (none)
   )
 
 (defmethod kill-by-key ((this engine-pers) (arg0 object))
@@ -653,7 +610,6 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
       )
     )
   0
-  (none)
   )
 
 (defmethod kill-matching ((this engine-pers)
@@ -684,7 +640,6 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
       )
     )
   0
-  (none)
   )
 
 (defmethod run-pending-updates! ((this engine-pers) (arg0 time-frame))
@@ -699,7 +654,7 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
     (while s1-0
       (let ((s3-0 (-> s1-0 next)))
         (cond
-          ((>= (-> s1-0 update-time) s4-0)
+          ((>= (the-as int (-> s1-0 update-time)) (the-as int s4-0))
            (update-callback this)
            (set! s2-0 (&-> s1-0 next))
            )
@@ -715,7 +670,6 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
         )
       )
     )
-  (set! (-> this execute-time) arg0)
+  (set! (-> this execute-time) (the-as uint arg0))
   0
-  (none)
   )

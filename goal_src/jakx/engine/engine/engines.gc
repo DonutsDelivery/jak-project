@@ -20,7 +20,7 @@
 
 (kmemopen global "engines")
 
-(define *background-draw-engine* (new 'global 'engine 'draw 10 connection))
+(define *background-draw-engine* (new 'global 'engine 'draw 6 connection))
 
 (define *matrix-engine* (new 'global 'boxed-array handle 384))
 
@@ -36,7 +36,7 @@
   ((params    basic   3 :overlay-at param1)
    (mat-prev  matrix  :inline)
    (mat-new   matrix  :inline)
-   (hand      handle)
+   (hand      uint64)
    (flags     part-local-space-flags)
    (pad       uint32  1)
    )
@@ -46,7 +46,7 @@
 (define *cam-post-hook-engine* (new 'global 'engine 'cam-post-hook-engine 4 connection))
 
 (define *part-local-space-engine*
-  (new 'global 'engine 'particle-local-space-info 15 particle-local-space-info)
+  (new 'global 'engine 'particle-local-space-info 112 particle-local-space-info)
   )
 
 (define *camera-engine* (new 'global 'engine 'camera-eng 128 connection))
@@ -60,6 +60,8 @@
 (define *lightning-engine* (new 'global 'engine 'lightning-control 64 connection))
 
 (define *hud-engine* (new 'global 'engine 'hud 16 connection))
+
+(define *prim-client-engine* (new 'global 'engine 'prim-client 32 connection))
 
 (define *prim-engine* (new 'global 'engine 'prim-strip 128 connection))
 
