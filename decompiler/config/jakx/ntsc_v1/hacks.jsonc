@@ -1771,10 +1771,42 @@
     "fmv-file-init",
     "fmv-get-time",
     "fmv-file-read",
-    "fmv-memcpy"
+    "fmv-memcpy",
     // sky-work methods (17/18/29-35) intentionally LEFT in asm_functions_by_name:
     // they diverge from jak3 and their jakx-native port isn't yet written.
     // Letting mips2c run on them would bind them but with jak3's wrong bodies.
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: ambient
+    "can-display-query?",
+    "kill-current-talker",
+    "talker-spawn-func",
+    // source: bones
+    "bones-mtx-calc",
+    "bones-mtx-calc-execute",
+    // source: bounding-box
+    "(method 17 bounding-box)",
+    "(method 9 bounding-box)",
+    // source: cloth
+    "(method 14 cloth-system)",
+    "(method 21 cloth-system)",
+    // source: collide-cache
+    "(method 10 collide-cache-prim)",
+    "(method 10 collide-puss-work)",
+    "(method 10 collide-shape-prim-group)",
+    "(method 10 collide-shape-prim-mesh)",
+    "(method 10 collide-shape-prim-sphere)",
+    "(method 11 collide-shape-prim-group)",
+    "(method 11 collide-shape-prim-mesh)",
+    "(method 11 collide-shape-prim-sphere)",
+    "(method 17 collide-cache)",
+    "(method 22 collide-cache)",
+    "(method 9 collide-cache-prim)",
+    "(method 9 collide-puss-work)",
+    // source: collide-func
+    "collide-do-primitives",
+    "raw-ray-sphere-intersect",
+    "ray-cylinder-intersect",
+    "ray-triangle-intersect"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
