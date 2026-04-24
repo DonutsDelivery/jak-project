@@ -4700,3 +4700,4649 @@
 
 
 
+
+'*generic-ai-tuning*
+
+(define *generic-ai-tuning* (new 'static 'boxed-array :type race-ai-tuning-info
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 2252800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 1433600.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 614400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -204800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1024000.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1843200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 409600.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -307200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -409600.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1228800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1638400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              )
+        )
+
+'*snow-ai-tuning*
+
+(define *snow-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -245760.0 :behind-speed-delta 81920.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -245760.0 :behind-speed-delta 81920.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1638400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 102400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -614400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2252800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -3276800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -4300800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2867200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -81920.0 :behind-speed-delta 122880.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 114688.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 106496.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 98304.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 94208.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 81920.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 716800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 307200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 90112.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 81920.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1433600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2048000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2662400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*kras-ai-tuning*
+
+(define *kras-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -163840.0 :behind-speed-delta 122880.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -163840.0 :behind-speed-delta 122880.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1638400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 102400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -614400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1433600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2252800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -3276800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -4300800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 471040.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 90112.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -163840.0 :behind-speed-delta 73728.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 73728.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1843200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 57344.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1024000.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 49152.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 204800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -614400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 32768.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 32768.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1638400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 32768.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 614400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 57344.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 204800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 49152.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -614400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 32768.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 32768.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 32768.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -245760.0 :behind-speed-delta 245760.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 245760.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1433600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 245760.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2048000.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 245760.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2662400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 245760.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*spargus-ai-tuning*
+
+(define *spargus-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2252800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1433600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 614400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -204800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1024000.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 102400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1024000.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2662400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -3481600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 90112.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -163840.0 :behind-speed-delta 73728.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 73728.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 614400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 57344.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 204800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 49152.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -614400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 32768.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 32768.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 32768.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -245760.0 :behind-speed-delta 245760.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 245760.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1433600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 245760.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2048000.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 245760.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2662400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 245760.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*jungle-ai-tuning*
+
+(define *jungle-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4505600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3686400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2867200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2048000.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 819200.0
+      :behind-threshold -819200.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3686400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2867200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2048000.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 819200.0
+      :behind-threshold -819200.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2048000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2048000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 819200.0
+      :behind-threshold -819200.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4505600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3686400.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2867200.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry :player-ahead-distance 2048000.0 :behind-speed-delta 81920.0)
+        (new 'static 'race-ai-tuning-entry :player-ahead-distance 1228800.0 :behind-speed-delta 122880.0)
+        (new 'static 'race-ai-tuning-entry :player-ahead-distance 409600.0 :behind-speed-delta 163840.0)
+        )
+      :ahead-threshold 819200.0
+      :behind-threshold -819200.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -245760.0 :behind-speed-delta 245760.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 245760.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1433600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 245760.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2048000.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 245760.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2662400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 245760.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4505600.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3686400.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2867200.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2048000.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 16384.0
+          )
+        )
+      :ahead-threshold 1228800.0
+      :behind-threshold -4096000.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry :player-ahead-distance 4505600.0 :behind-speed-delta 204800.0)
+        (new 'static 'race-ai-tuning-entry :player-ahead-distance 3686400.0 :behind-speed-delta 163840.0)
+        (new 'static 'race-ai-tuning-entry :player-ahead-distance 2867200.0 :behind-speed-delta 122880.0)
+        (new 'static 'race-ai-tuning-entry :player-ahead-distance 2048000.0 :behind-speed-delta 81920.0)
+        (new 'static 'race-ai-tuning-entry :player-ahead-distance 1228800.0 :behind-speed-delta 40960.0)
+        (new 'static 'race-ai-tuning-entry :player-ahead-distance 409600.0)
+        )
+      :ahead-threshold 1228800.0
+      :behind-threshold -1228800.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2048000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2048000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 819200.0
+      :behind-threshold -819200.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 81920.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1433600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2048000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2662400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 819200.0
+      :behind-threshold -819200.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3686400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2867200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2048000.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 819200.0
+      :behind-threshold -819200.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2252800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1843200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1433600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1024000.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 614400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 204800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 819200.0
+      :behind-threshold -819200.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1433600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1024000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 614400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 204800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -204800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 819200.0
+      :behind-threshold -819200.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1433600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 204800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -614400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1433600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 819200.0
+      :behind-threshold -819200.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2048000.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1638400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 163840.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 307200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -512000.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -921600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1331200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1945600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2560000.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 114688.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 106496.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 98304.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1024000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 90112.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*haven-ai-tuning*
+
+(define *haven-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2252800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1433600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 614400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -204800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1024000.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -245760.0 :behind-speed-delta 49152.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 61440.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1638400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 61440.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 61440.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -3276800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 61440.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -4096000.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 61440.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 483328.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*sewer-ai-tuning*
+
+(define *sewer-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -245760.0 :behind-speed-delta 40960.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1638400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -3276800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -4915200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 40960.0
+          )
+        )
+      :ahead-threshold 614400.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 163840.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -204800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2662400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -3481600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2867200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 114688.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 106496.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 98304.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 114688.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 106496.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -81920.0 :behind-speed-delta 98304.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 98304.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 122880.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 512000.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 204800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 512000.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 8192000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 6553600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4915200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 122880.0)
+        )
+      :ahead-threshold 614400.0
+      :behind-threshold -8192000.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 5734400.0
+          :ahead-speed-delta -184320.0
+          :behind-speed-delta 102400.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -184320.0
+          :behind-speed-delta 102400.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -184320.0
+          :behind-speed-delta 102400.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -184320.0
+          :behind-speed-delta 102400.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -184320.0
+          :behind-speed-delta 102400.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -184320.0
+          :behind-speed-delta 102400.0
+          )
+        )
+      :ahead-threshold 614400.0
+      :behind-threshold -614400.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -245760.0 :behind-speed-delta 81920.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1638400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -3276800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -4915200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 614400.0
+      :behind-threshold -8192000.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*drome-ai-tuning*
+
+(define *drome-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2252800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1433600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 614400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -204800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1024000.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 307200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -204800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2662400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -3481600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4915200.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -40960.0 :behind-speed-delta 163840.0)
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 614400.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -81920.0 :behind-speed-delta 122880.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 614400.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 114688.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 106496.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 98304.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1024000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 90112.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*dromdoc-ai-tuning*
+
+(define *dromdoc-ai-tuning* (new 'static 'boxed-array :type race-ai-tuning-info
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 2252800.0
+                                    :ahead-speed-delta -245760.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 1433600.0
+                                    :ahead-speed-delta -245760.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 614400.0
+                                    :ahead-speed-delta -245760.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -204800.0
+                                    :ahead-speed-delta -245760.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1024000.0
+                                    :ahead-speed-delta -245760.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1843200.0
+                                    :ahead-speed-delta -245760.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 204800.0
+                                    :ahead-speed-delta -245760.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -307200.0
+                                    :ahead-speed-delta -245760.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1024000.0
+                                    :ahead-speed-delta -245760.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1843200.0
+                                    :ahead-speed-delta -245760.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -2662400.0
+                                    :ahead-speed-delta -245760.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -3481600.0
+                                    :ahead-speed-delta -245760.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              )
+        )
+
+'*kratour-ai-tuning*
+
+(define *kratour-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2252800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1433600.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 614400.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -204800.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1024000.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -245760.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 327680.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 204800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -204800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1024000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 163840.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 204800.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 163840.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 204800.0
+          )
+        (new 'static 'race-ai-tuning-entry)
+        (new 'static 'race-ai-tuning-entry)
+        (new 'static 'race-ai-tuning-entry)
+        (new 'static 'race-ai-tuning-entry)
+        )
+      :ahead-threshold 409600.0
+      :behind-threshold -204800.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.95
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2867200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -81920.0 :behind-speed-delta 122880.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 114688.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 106496.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 98304.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1024000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 90112.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*havtour-ai-tuning*
+
+(define *havtour-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2867200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 512000.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 102400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -4096000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 450560.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4915200.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -40960.0 :behind-speed-delta 163840.0)
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 614400.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -81920.0 :behind-speed-delta 122880.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 614400.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 114688.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 106496.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 98304.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1024000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 90112.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*canyon-ai-tuning*
+
+(define *canyon-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2867200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 716800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 360448.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4915200.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 163840.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -40960.0 :behind-speed-delta 163840.0)
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 614400.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -81920.0 :behind-speed-delta 122880.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 122880.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 614400.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 114688.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 106496.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 98304.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1024000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 90112.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*spatour-ai-tuning*
+
+(define *spatour-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2867200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 114688.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 106496.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 98304.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1024000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 90112.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*docks-ai-tuning*
+
+(define *docks-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2867200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 81920.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 921600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*icepass-ai-tuning*
+
+(define *icepass-ai-tuning* (new 'static 'boxed-array :type race-ai-tuning-info
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 4096000.0
+                                    :ahead-speed-delta -122880.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 2867200.0
+                                    :ahead-speed-delta -122880.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 1638400.0
+                                    :ahead-speed-delta -122880.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 409600.0
+                                    :ahead-speed-delta -122880.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -409600.0
+                                    :ahead-speed-delta -122880.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1228800.0
+                                    :ahead-speed-delta -122880.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 573440.0
+                                  :adventure-diff-mod 0.5
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 1024000.0
+                                    :ahead-speed-delta -122880.0
+                                    :behind-speed-delta 40960.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 409600.0
+                                    :ahead-speed-delta -122880.0
+                                    :behind-speed-delta 40960.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -409600.0
+                                    :ahead-speed-delta -122880.0
+                                    :behind-speed-delta 40960.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1228800.0
+                                    :ahead-speed-delta -122880.0
+                                    :behind-speed-delta 40960.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1843200.0
+                                    :ahead-speed-delta -122880.0
+                                    :behind-speed-delta 40960.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -2457600.0
+                                    :ahead-speed-delta -122880.0
+                                    :behind-speed-delta 40960.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 573440.0
+                                  :adventure-diff-mod 0.5
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              )
+        )
+
+'*havsew-ai-tuning*
+
+(define *havsew-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 81920.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1433600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 40960.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2048000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2867200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 40960.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*peak-ai-tuning*
+
+(define *peak-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4915200.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -40960.0 :behind-speed-delta 81920.0)
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 614400.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -81920.0 :behind-speed-delta 40960.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1638400.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -81920.0
+          :behind-speed-delta 40960.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 614400.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 122880.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 114688.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 106496.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -122880.0 :behind-speed-delta 98304.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1024000.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 90112.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -122880.0
+          :behind-speed-delta 73728.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 532480.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*icetour-ai-tuning*
+
+(define *icetour-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 4096000.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -40960.0 :behind-speed-delta 81920.0)
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1024000.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 614400.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 204800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 40960.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 98304.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 90112.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 73728.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -163840.0 :behind-speed-delta 73728.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 73728.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 614400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 57344.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 204800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 49152.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -614400.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1228800.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 32768.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -1843200.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 32768.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -2457600.0
+          :ahead-speed-delta -163840.0
+          :behind-speed-delta 32768.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 491520.0
+        :adventure-diff-mod 0.75
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*dockkra-ai-tuning*
+
+(define *dockkra-ai-tuning*
+  (new 'static 'boxed-array :type race-ai-tuning-info
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 3276800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 2457600.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1638400.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 81920.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -40960.0 :behind-speed-delta 81920.0)
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 573440.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    (new 'static 'race-ai-tuning-info
+      :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 1228800.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 819200.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance 409600.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry :ahead-speed-delta -40960.0 :behind-speed-delta 40960.0)
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -409600.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 40960.0
+          )
+        (new 'static 'race-ai-tuning-entry
+          :player-ahead-distance -819200.0
+          :ahead-speed-delta -40960.0
+          :behind-speed-delta 40960.0
+          )
+        )
+      :ahead-threshold 573440.0
+      :behind-threshold -573440.0
+      :base-speed (new 'static 'race-ai-base-speed-info
+        :adventure-minimum 614400.0
+        :adventure-diff-mod 0.5
+        :exhibition-rookie 491520.0
+        :exhibition-pro 573440.0
+        )
+      )
+    )
+  )
+
+'*ice-ai-tuning*
+
+(define *ice-ai-tuning* (new 'static 'boxed-array :type race-ai-tuning-info
+                          (new 'static 'race-ai-tuning-info
+                            :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                              (new 'static 'race-ai-tuning-entry
+                                :player-ahead-distance 2252800.0
+                                :ahead-speed-delta -245760.0
+                                :behind-speed-delta 81920.0
+                                )
+                              (new 'static 'race-ai-tuning-entry
+                                :player-ahead-distance 1433600.0
+                                :ahead-speed-delta -245760.0
+                                :behind-speed-delta 81920.0
+                                )
+                              (new 'static 'race-ai-tuning-entry
+                                :player-ahead-distance 614400.0
+                                :ahead-speed-delta -245760.0
+                                :behind-speed-delta 81920.0
+                                )
+                              (new 'static 'race-ai-tuning-entry
+                                :player-ahead-distance -204800.0
+                                :ahead-speed-delta -245760.0
+                                :behind-speed-delta 81920.0
+                                )
+                              (new 'static 'race-ai-tuning-entry
+                                :player-ahead-distance -1024000.0
+                                :ahead-speed-delta -245760.0
+                                :behind-speed-delta 81920.0
+                                )
+                              (new 'static 'race-ai-tuning-entry
+                                :player-ahead-distance -1843200.0
+                                :ahead-speed-delta -245760.0
+                                :behind-speed-delta 81920.0
+                                )
+                              )
+                            :ahead-threshold 573440.0
+                            :behind-threshold -573440.0
+                            :base-speed (new 'static 'race-ai-base-speed-info
+                              :adventure-minimum 491520.0
+                              :adventure-diff-mod 0.75
+                              :exhibition-rookie 491520.0
+                              :exhibition-pro 573440.0
+                              )
+                            )
+                          (new 'static 'race-ai-tuning-info
+                            :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                              (new 'static 'race-ai-tuning-entry
+                                :player-ahead-distance 409600.0
+                                :ahead-speed-delta -245760.0
+                                :behind-speed-delta 81920.0
+                                )
+                              (new 'static 'race-ai-tuning-entry
+                                :player-ahead-distance -204800.0
+                                :ahead-speed-delta -245760.0
+                                :behind-speed-delta 81920.0
+                                )
+                              (new 'static 'race-ai-tuning-entry
+                                :player-ahead-distance -716800.0
+                                :ahead-speed-delta -245760.0
+                                :behind-speed-delta 81920.0
+                                )
+                              (new 'static 'race-ai-tuning-entry
+                                :player-ahead-distance -1740800.0
+                                :ahead-speed-delta -245760.0
+                                :behind-speed-delta 81920.0
+                                )
+                              (new 'static 'race-ai-tuning-entry
+                                :player-ahead-distance -2560000.0
+                                :ahead-speed-delta -245760.0
+                                :behind-speed-delta 81920.0
+                                )
+                              (new 'static 'race-ai-tuning-entry
+                                :player-ahead-distance -3379200.0
+                                :ahead-speed-delta -245760.0
+                                :behind-speed-delta 81920.0
+                                )
+                              )
+                            :ahead-threshold 573440.0
+                            :behind-threshold -573440.0
+                            :base-speed (new 'static 'race-ai-base-speed-info
+                              :adventure-minimum 491520.0
+                              :adventure-diff-mod 0.75
+                              :exhibition-rookie 491520.0
+                              :exhibition-pro 573440.0
+                              )
+                            )
+                          )
+        )
+
+'*temple-ai-tuning*
+
+(define *temple-ai-tuning* (new 'static 'boxed-array :type race-ai-tuning-info
+                             (new 'static 'race-ai-tuning-info
+                               :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                 (new 'static 'race-ai-tuning-entry
+                                   :player-ahead-distance 2252800.0
+                                   :ahead-speed-delta -245760.0
+                                   :behind-speed-delta 81920.0
+                                   )
+                                 (new 'static 'race-ai-tuning-entry
+                                   :player-ahead-distance 1433600.0
+                                   :ahead-speed-delta -245760.0
+                                   :behind-speed-delta 81920.0
+                                   )
+                                 (new 'static 'race-ai-tuning-entry
+                                   :player-ahead-distance 614400.0
+                                   :ahead-speed-delta -245760.0
+                                   :behind-speed-delta 81920.0
+                                   )
+                                 (new 'static 'race-ai-tuning-entry
+                                   :player-ahead-distance -204800.0
+                                   :ahead-speed-delta -245760.0
+                                   :behind-speed-delta 81920.0
+                                   )
+                                 (new 'static 'race-ai-tuning-entry
+                                   :player-ahead-distance -1024000.0
+                                   :ahead-speed-delta -245760.0
+                                   :behind-speed-delta 81920.0
+                                   )
+                                 (new 'static 'race-ai-tuning-entry
+                                   :player-ahead-distance -1843200.0
+                                   :ahead-speed-delta -245760.0
+                                   :behind-speed-delta 81920.0
+                                   )
+                                 )
+                               :ahead-threshold 573440.0
+                               :behind-threshold -573440.0
+                               :base-speed (new 'static 'race-ai-base-speed-info
+                                 :adventure-minimum 491520.0
+                                 :adventure-diff-mod 0.75
+                                 :exhibition-rookie 491520.0
+                                 :exhibition-pro 573440.0
+                                 )
+                               )
+                             (new 'static 'race-ai-tuning-info
+                               :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                 (new 'static 'race-ai-tuning-entry
+                                   :player-ahead-distance 409600.0
+                                   :ahead-speed-delta -245760.0
+                                   :behind-speed-delta 81920.0
+                                   )
+                                 (new 'static 'race-ai-tuning-entry
+                                   :player-ahead-distance 204800.0
+                                   :ahead-speed-delta -245760.0
+                                   :behind-speed-delta 81920.0
+                                   )
+                                 (new 'static 'race-ai-tuning-entry
+                                   :player-ahead-distance -614400.0
+                                   :ahead-speed-delta -245760.0
+                                   :behind-speed-delta 81920.0
+                                   )
+                                 (new 'static 'race-ai-tuning-entry
+                                   :player-ahead-distance -1433600.0
+                                   :ahead-speed-delta -245760.0
+                                   :behind-speed-delta 81920.0
+                                   )
+                                 (new 'static 'race-ai-tuning-entry
+                                   :player-ahead-distance -2252800.0
+                                   :ahead-speed-delta -245760.0
+                                   :behind-speed-delta 81920.0
+                                   )
+                                 (new 'static 'race-ai-tuning-entry
+                                   :player-ahead-distance -3072000.0
+                                   :ahead-speed-delta -245760.0
+                                   :behind-speed-delta 81920.0
+                                   )
+                                 )
+                               :ahead-threshold 573440.0
+                               :behind-threshold -573440.0
+                               :base-speed (new 'static 'race-ai-base-speed-info
+                                 :adventure-minimum 491520.0
+                                 :adventure-diff-mod 0.75
+                                 :exhibition-rookie 491520.0
+                                 :exhibition-pro 573440.0
+                                 )
+                               )
+                             )
+        )
+
+'*canspar-ai-tuning*
+
+(define *canspar-ai-tuning* (new 'static 'boxed-array :type race-ai-tuning-info
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 3276800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 2048000.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -409600.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1638400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 204800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -614400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1024000.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1433600.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -2252800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -3072000.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              )
+        )
+
+'*havjung-ai-tuning*
+
+(define *havjung-ai-tuning* (new 'static 'boxed-array :type race-ai-tuning-info
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 3276800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 2048000.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -409600.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1638400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 102400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -307200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -409600.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1228800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1638400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -204800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -327680.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 81920.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -512000.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1228800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1638400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              )
+        )
+
+'*spartem-ai-tuning*
+
+(define *spartem-ai-tuning* (new 'static 'boxed-array :type race-ai-tuning-info
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 3276800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 2048000.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -409600.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1638400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 409600.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -307200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -409600.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1228800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1638400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              )
+        )
+
+'*iceberg-ai-tuning*
+
+(define *iceberg-ai-tuning* (new 'static 'boxed-array :type race-ai-tuning-info
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 3686400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 2252800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -409600.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1638400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 163840.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              (new 'static 'race-ai-tuning-info
+                                :tuning-entry (new 'static 'inline-array race-ai-tuning-entry 6
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 512000.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance 204800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -409600.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -819200.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1228800.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  (new 'static 'race-ai-tuning-entry
+                                    :player-ahead-distance -1638400.0
+                                    :ahead-speed-delta -163840.0
+                                    :behind-speed-delta 122880.0
+                                    )
+                                  )
+                                :ahead-threshold 573440.0
+                                :behind-threshold -573440.0
+                                :base-speed (new 'static 'race-ai-base-speed-info
+                                  :adventure-minimum 491520.0
+                                  :adventure-diff-mod 0.75
+                                  :exhibition-rookie 491520.0
+                                  :exhibition-pro 573440.0
+                                  )
+                                )
+                              )
+        )

@@ -7,134 +7,87 @@
 
 ;; DECOMP BEGINS
 
-(define *footstep-surface* (new 'static 'pat-surface :material (pat-material grass)))
+(define *footstep-surface* (the-as pat-surface 7168))
 
 (define *debug-effect-control* #f)
 
-(defun sound-name-with-material ((arg0 string) (arg1 pat-surface) (arg2 string))
-  (format
-    (clear *temp-string*)
-    "~S~S~S"
-    arg0
-    (-> (new 'static 'boxed-array :type string
-          "-unk"
-          "-ice"
-          "-qsd"
-          "-wtr"
-          "-tar"
-          "-san"
-          "-wod"
-          "-grs"
-          "-pmt"
-          "-snw"
-          "-dsn"
-          "-unk"
-          "-lav"
-          "-cwd"
-          "-grv"
-          "-drt"
-          "-mtl"
-          "-str"
-          "-pmt"
-          "-swm"
-          "-unk"
-          "-mtl"
-          "-neu"
-          "-stn"
-          "-cmt"
-          "-car"
-          "-gmt"
-          "-smt"
-          "-hwd"
-          "-sqi"
-          "-mhm"
-          "-for"
-          "-mhs"
-          "-dma"
-          )
-        (-> arg1 material)
-        )
-    arg2
+;; ERROR: failed type prop at 10: Unmatched field: start bit 10, size 6, signed? false, type pat-surface
+;; WARN: Return type mismatch none vs sound-name.
+(defun sound-name-with-material ((a0-0 string) (a1-0 pat-surface) (a2-0 string))
+  (local-vars
+    (v0-0 string)
+    (v0-1 none)
+    (v0-2 none)
+    (v1-0 int)
+    (v1-1 none)
+    (v1-2 none)
+    (v1-3 none)
+    (a0-1 string)
+    (a0-3 none)
+    (a1-1 string)
+    (a3-0 none)
+    (t9-0 (function string string))
+    (t9-1 none)
+    (t9-2 none)
+    (gp-0 (function _varargs_ object))
     )
-  (string->sound-name *temp-string*)
+  (set! gp-0 format)
+  (set! t9-0 clear)
+  (set! a0-1 *temp-string*)
+  (call! a0-1)
+  (set! a0-2 v0-0)
+  (set! a1-1 L139)
+  (set! v1-0 (sll a1-0 48))
+  (set! v1-1 (the-as none (srl v1-0 58)))
+  (set! v1-2 (the-as none (sll v1-1 2)))
+  (set! v1-3 (the-as none (+ v1-2 L110)))
+  (set! a3-0 (the-as none (l.wu (+ v1-3 12))))
+  (set! t9-1 (the-as none gp-0))
+  (set! a2-1 (the-as none a0-0))
+  (set! t0-0 (the-as none a2-0))
+  (call!)
+  (set! t9-2 (the-as none string->sound-name))
+  (set! a0-3 (the-as none *temp-string*))
+  (set! v0-2 (the-as none (call!)))
+  (ret-value v0-2)
   )
 
 (defun effect-param->sound-spec ((arg0 sound-spec) (arg1 (pointer float)) (arg2 int) (arg3 process-focusable))
   (while (> arg2 0)
     (case (the int (-> arg1 0))
-      ((3)
-       (logior! (-> arg0 mask) (sound-mask volume))
+      ((1)
        (set! (-> arg0 volume) (the int (* 1024.0 (-> arg1 1))))
        )
-      ((4)
-       (logior! (-> arg0 mask) (sound-mask volume))
+      ((2)
        (+! (-> arg0 volume) (the int (* 1024.0 (* (-> arg1 1) (rand-vu)))))
        )
-      ((5)
-       (logior! (-> arg0 mask) (sound-mask pitch))
+      ((3)
+       (logior! (-> arg0 mask) 1)
        (set! (-> arg0 pitch-mod) (the int (* 1524.0 (-> arg1 1))))
        )
-      ((6)
-       (logior! (-> arg0 mask) (sound-mask pitch))
+      ((4)
+       (logior! (-> arg0 mask) 1)
        (+! (-> arg0 pitch-mod) (the int (* 1524.0 (* (-> arg1 1) (rand-vu)))))
        )
-      ((9)
-       (logior! (-> arg0 mask) (sound-mask bend))
+      ((5)
+       (logior! (-> arg0 mask) 2)
        (set! (-> arg0 bend) (the int (* 327.66998 (-> arg1 1))))
        )
-      ((10)
-       (logior! (-> arg0 mask) (sound-mask bend))
+      ((6)
+       (logior! (-> arg0 mask) 2)
        (+! (-> arg0 bend) (the int (* 327.66998 (* (-> arg1 1) (rand-vu)))))
        )
-      ((11)
-       (logior! (-> arg0 mask) (sound-mask fo-min))
-       (set! (-> arg0 fo-min) (the int (-> arg1 1)))
+      ((7)
+       (logior! (-> arg0 flags) 2)
+       (set! (-> arg0 fo-min) (* 4096.0 (-> arg1 1)))
        )
-      ((12)
-       (logior! (-> arg0 mask) (sound-mask fo-max))
-       (set! (-> arg0 fo-max) (the int (-> arg1 1)))
+      ((8)
+       (logior! (-> arg0 flags) 4)
+       (set! (-> arg0 fo-max) (* 4096.0 (-> arg1 1)))
        )
-      ((13)
-       (logior! (-> arg0 mask) (sound-mask fo-curve))
-       (set! (-> arg0 fo-curve) (the int (-> arg1 1)))
-       )
-      ((19)
-       (set! (-> arg0 priority) (the int (-> arg1 1)))
-       )
-      ((25)
-       (logior! (-> arg0 mask) (sound-mask reg0))
-       (set! (-> arg0 reg 0) (the-as uint (-> *footstep-surface* material)))
-       (let ((v1-33 (as-type arg3 process-focusable)))
-         (when v1-33
-           (cond
-             ((focus-test? v1-33 in-air)
-              (set! (-> arg0 reg 0) (the-as uint 126))
-              )
-             ((focus-test? v1-33 touch-water)
-              (set! (-> arg0 reg 0) (the-as uint 127))
-              )
-             (else
-               (let ((v1-34 (as-type (-> v1-33 root) collide-shape-moving)))
-                 (if v1-34
-                     (set! (-> arg0 reg 0) (the-as uint (-> (the-as collide-shape-moving v1-34) ground-pat material)))
-                     )
-                 )
-               )
-             )
-           )
-         )
-       )
-      ((21)
-       (logior! (-> arg0 mask) (sound-mask reg0))
-       (set! (-> arg0 reg 0) (the-as uint (the int (-> arg1 1))))
-       )
-      ((22)
-       (logior! (-> arg0 mask) (sound-mask reg1))
-       (set! (-> arg0 reg 1) (the-as uint (the int (-> arg1 1))))
-       )
-      ((23)
-       (logior! (-> arg0 mask) (sound-mask reg2))
-       (set! (-> arg0 reg 2) (the-as uint (the int (-> arg1 1))))
+      ((9)
+       (logior! (-> arg0 flags) 8)
+       (set! (-> arg0 fo-power) (-> arg1 1))
        )
       )
     (+! arg2 -2)
@@ -160,9 +113,9 @@
            (cond
              ((!= s5-0 (-> this last-frame-group))
               (set! (-> this res) (-> s5-0 extra))
-              (let ((v1-6 (-> (lookup-tag-idx (-> s5-0 extra) 'effect-name 'base -1000000000.0) lo)))
+              (let ((v1-6 (lookup-tag-idx (-> s5-0 extra) 'effect-name 'base -1000000000.0)))
                 (set! (-> this name) (if (>= (the-as int v1-6) 0)
-                                         (&-> s5-0 extra tag v1-6)
+                                         (+ (+ (incomplete-bitfield-access v1-6) 0) (the-as int (-> s5-0 extra tag)))
                                          (the-as (pointer res-tag) #f)
                                          )
                       )
@@ -241,832 +194,1067 @@
       )
     )
   0
-  (none)
   )
 
 (defmethod play-effects-from-res-lump ((this effect-control) (arg0 float) (arg1 float) (arg2 float))
-  ;; og:preserve-this added check
-  (when (-> this name)
-    (let ((s2-0 (-> this name)))
-      (while (= (-> s2-0 0 name) 'effect-name)
-        (let ((f0-0 (-> s2-0 0 key-frame)))
-          (when (or (and (< f0-0 arg1) (< arg0 f0-0)) (= f0-0 arg2))
-            (let* ((a0-1 this)
-                  (t9-0 (method-of-object a0-1 do-effect))
-                  (v1-7 (-> this res))
-                  (a1-1 (-> s2-0 0))
-                  )
-              (t9-0
-                a0-1
-                (the-as string (-> (the-as (pointer int32) (&+ (-> v1-7 data-base) (-> a1-1 data-offset)))))
-                f0-0
-                -1
-                )
+  (let ((s2-0 (-> this name)))
+    (while (= (-> s2-0 0 name) 'effect-name)
+      (let ((f0-0 (-> s2-0 0 key-frame)))
+        (when (or (and (< f0-0 arg1) (< arg0 f0-0)) (= f0-0 arg2))
+          (let* ((a0-1 this)
+                 (t9-0 (method-of-object a0-1 do-effect))
+                 (v1-7 (-> this res))
+                 (a1-1 (-> s2-0 0))
+                 )
+            (t9-0
+              a0-1
+              (the-as string (-> (the-as (pointer int32) (&+ (-> v1-7 data-base) (-> a1-1 data-offset)))))
+              f0-0
+              -1
               )
             )
           )
-        (set! s2-0 (&-> s2-0 1))
         )
+      (set! s2-0 (&-> s2-0 1))
       )
     )
   0
-  (none)
   )
 
-;; WARN: Function (method 10 effect-control) has a return type of none, but the expression builder found a return statement.
-(defmethod do-effect ((this effect-control) (arg0 string) (arg1 float) (arg2 int))
-  (local-vars (sv-288 res-lump))
-  (let* ((v1-2 (rtype-of arg0))
-         (s3-0 (cond
-                 ((= v1-2 symbol)
-                  (symbol->string (the-as symbol arg0))
-                  )
-                 ((= v1-2 string)
-                  arg0
-                  )
-                 (else
-                   (the-as string #f)
-                   )
-                 )
-               )
-         )
+;; ERROR: failed type prop at 149: Could not figure out load: (set! t1 (l.wu (+ v1 276)))
+;; ERROR: Failed to guess stack use for 16 in (method 10 effect-control):51
+(defmethod do-effect ((a0-0 effect-control) (a1-0 string) (a2-0 float) (a3-0 int))
+  (local-vars
+    (v0-0 string)
+    (v0-1 int)
+    (v0-2 symbol)
+    (v0-3 structure)
+    (v0-4 script-context)
+    (v0-5 object)
+    (v0-6 uint128)
+    (v0-7 object)
+    (v0-8 symbol)
+    (v0-9 none)
+    (v0-10 none)
+    (v0-11 none)
+    (v0-12 none)
+    (v0-13 none)
+    (v0-14 none)
+    (v0-15 none)
+    (v0-16 none)
+    (v0-17 none)
+    (v0-18 none)
+    (v0-19 none)
+    (v0-20 none)
+    (v0-21 none)
+    (v0-22 none)
+    (v0-23 none)
+    (v0-24 none)
+    (v0-25 none)
+    (v0-26 none)
+    (v0-27 none)
+    (v0-28 none)
+    (v1-2 type)
+    (v1-3 effect-control-flag)
+    (v1-4 effect-control-flag)
+    (v1-8 type)
+    (v1-9 type)
+    (v1-10 process)
+    (v1-11 type)
+    (v1-14 type)
+    (v1-15 effect-control-flag)
+    (v1-16 effect-control-flag)
+    (v1-18 process)
+    (v1-19 int)
+    (v1-20 symbol)
+    (v1-23 uint)
+    (v1-24 uint)
+    (v1-25 symbol)
+    (v1-26 uint)
+    (v1-27 uint)
+    (v1-28 uint)
+    (v1-29 uint)
+    (v1-30 uint)
+    (v1-31 uint)
+    (v1-32 uint)
+    (v1-33 uint)
+    (v1-34 uint)
+    (v1-35 uint)
+    (v1-36 uint)
+    (v1-37 process-drawable)
+    (v1-38 trsqv)
+    (v1-39 none)
+    (v1-41 none)
+    (v1-42 none)
+    (v1-43 none)
+    (v1-44 none)
+    (v1-45 none)
+    (v1-46 none)
+    (v1-47 none)
+    (v1-48 none)
+    (v1-49 none)
+    (v1-50 none)
+    (v1-51 none)
+    (v1-52 none)
+    (v1-53 none)
+    (v1-54 none)
+    (v1-56 none)
+    (v1-58 none)
+    (v1-59 none)
+    (v1-60 none)
+    (v1-61 none)
+    (v1-62 none)
+    (v1-63 none)
+    (v1-64 none)
+    (v1-65 none)
+    (v1-66 none)
+    (v1-67 none)
+    (v1-68 none)
+    (v1-69 none)
+    (v1-70 none)
+    (v1-71 none)
+    (v1-72 none)
+    (v1-73 none)
+    (v1-74 none)
+    (v1-75 none)
+    (v1-76 none)
+    (v1-77 none)
+    (v1-78 none)
+    (v1-79 none)
+    (v1-81 none)
+    (v1-82 none)
+    (v1-83 none)
+    (v1-85 none)
+    (v1-86 none)
+    (v1-87 none)
+    (v1-88 none)
+    (v1-89 none)
+    (v1-90 none)
+    (v1-91 none)
+    (v1-92 none)
+    (v1-93 none)
+    (v1-94 none)
+    (v1-95 none)
+    (v1-96 none)
+    (v1-97 none)
+    (v1-98 none)
+    (v1-99 none)
+    (v1-100 none)
+    (v1-102 none)
+    (v1-103 none)
+    (v1-105 none)
+    (v1-106 none)
+    (v1-107 none)
+    (v1-108 none)
+    (v1-109 none)
+    (v1-110 none)
+    (v1-111 none)
+    (v1-112 none)
+    (v1-113 none)
+    (v1-114 none)
+    (v1-115 none)
+    (v1-116 none)
+    (v1-117 none)
+    (v1-118 none)
+    (v1-119 none)
+    (v1-120 none)
+    (v1-121 none)
+    (v1-122 none)
+    (v1-123 none)
+    (v1-125 none)
+    (v1-126 none)
+    (v1-127 none)
+    (v1-129 none)
+    (v1-130 none)
+    (v1-132 none)
+    (v1-133 none)
+    (v1-134 none)
+    (v1-136 none)
+    (a0-3 type)
+    (a0-4 string)
+    (a0-5 none)
+    (a0-6 string)
+    (a0-7 res-lump)
+    (a0-8 none)
+    (a0-9 script-context)
+    (a0-10 res-lump)
+    (a0-11 (pointer process))
+    (a0-12 process-drawable)
+    (a0-13 symbol)
+    (a0-14 symbol)
+    (a0-15 symbol)
+    (a0-16 symbol)
+    (a0-17 symbol)
+    (a0-18 symbol)
+    (a0-19 uint)
+    (a0-20 trsqv)
+    (a0-21 none)
+    (a0-22 none)
+    (a0-23 none)
+    (a0-24 none)
+    (a0-25 none)
+    (a0-26 none)
+    (a0-27 none)
+    (a0-29 none)
+    (a0-30 none)
+    (a0-31 none)
+    (a0-32 none)
+    (a0-33 none)
+    (a0-36 none)
+    (a0-39 none)
+    (a0-40 none)
+    (a0-41 none)
+    (a0-42 none)
+    (a0-43 none)
+    (a0-44 none)
+    (a0-45 none)
+    (a0-47 none)
+    (a0-49 none)
+    (a0-50 none)
+    (a0-51 none)
+    (a0-52 none)
+    (a0-53 none)
+    (a0-54 none)
+    (a0-55 none)
+    (a0-57 none)
+    (a0-58 none)
+    (a0-59 none)
+    (a0-60 none)
+    (a0-61 none)
+    (a0-62 none)
+    (a0-63 none)
+    (a0-65 none)
+    (a0-66 none)
+    (a1-1 string)
+    (a1-2 symbol)
+    (a1-3 type)
+    (a1-4 structure)
+    (a1-5 symbol)
+    (a1-6 none)
+    (a1-7 type)
+    (a1-9 none)
+    (a1-10 none)
+    (a1-11 none)
+    (a1-12 none)
+    (a1-13 none)
+    (a1-14 none)
+    (a1-15 none)
+    (a1-16 none)
+    (a1-17 none)
+    (a1-18 none)
+    (a1-20 none)
+    (a1-21 none)
+    (a1-22 none)
+    (a1-23 none)
+    (a1-24 none)
+    (a1-26 none)
+    (a2-1 symbol)
+    (a2-2 (pointer process))
+    (a2-3 symbol)
+    (a2-5 none)
+    (a2-6 none)
+    (a2-7 none)
+    (a2-8 none)
+    (a2-9 none)
+    (a2-10 none)
+    (a2-11 none)
+    (a2-12 none)
+    (a2-13 none)
+    (a2-14 none)
+    (a2-15 none)
+    (a2-17 none)
+    (a2-19 none)
+    (a2-20 none)
+    (a2-22 none)
+    (a2-23 none)
+    (a2-24 none)
+    (a2-25 none)
+    (a2-26 none)
+    (a2-27 none)
+    (a3-1 float)
+    (a3-2 process)
+    (a3-3 float)
+    (a3-5 none)
+    (a3-6 none)
+    (a3-7 none)
+    (a3-8 none)
+    (a3-9 none)
+    (a3-10 none)
+    (a3-11 none)
+    (a3-12 none)
+    (a3-13 none)
+    (a3-14 none)
+    (a3-15 none)
+    (a3-16 none)
+    (a3-18 none)
+    (t0-0 symbol)
+    (t0-1 symbol)
+    (t0-2 int)
+    (t0-3 none)
+    (t0-5 none)
+    (t0-6 none)
+    (t1-0 symbol)
+    (t1-1 symbol)
+    (t1-2 none)
+    (t1-3 none)
+    (t1-5 none)
+    (t2-0 pointer)
+    (t2-1 pointer)
+    (t2-3 none)
+    (s0-0 none)
+    (s1-0 none)
+    (s1-1 none)
+    (s2-0 trsqv)
+    (s2-1 none)
+    (s2-2 none)
+    (s2-3 none)
+    (s2-4 none)
+    (s3-0 string)
+    (s3-1 none)
+    (s4-1 none)
+    (s5-1 none)
+    (s5-2 none)
+    (t9-0 (function symbol string))
+    (t9-1 (function string string symbol))
+    (t9-2 (function res-lump symbol symbol float structure (pointer res-tag) pointer structure))
+    (t9-3 (function symbol type object process vector script-context))
+    (t9-4 (function script-context pair object))
+    (t9-5 (function res-lump symbol symbol float uint128 (pointer res-tag) pointer uint128))
+    (t9-6 (function process-tree event-message-block object))
+    (t9-7 (function object type symbol))
+    (t9-8 none)
+    (t9-9 none)
+    (t9-10 none)
+    (t9-11 none)
+    (t9-12 none)
+    (t9-13 none)
+    (t9-14 none)
+    (t9-15 none)
+    (t9-16 none)
+    (t9-17 none)
+    (t9-18 none)
+    (t9-19 none)
+    (t9-20 none)
+    (t9-21 none)
+    (t9-22 none)
+    (t9-23 none)
+    (t9-24 none)
+    (t9-25 none)
+    (t9-26 none)
+    (t9-27 none)
+    (gp-1 structure)
+    (gp-2 none)
+    (sp-0 none)
+    (f0-0 none)
+    (f0-1 none)
+    (f0-2 none)
+    (sv-272 none)
+    )
+  (with-pp
     (cond
-      ((logtest? (-> this flags) (effect-control-flag ecf2))
-       (return #f)
-       )
-      ((string= s3-0 "script")
-       (let ((gp-1 (the-as pair (get-property-struct
-                                  (-> this res)
-                                  'effect-script
-                                  'exact
-                                  arg1
-                                  (the-as structure #f)
-                                  (the-as (pointer res-tag) #f)
-                                  *res-static-buf*
-                                  )
-                           )
-                   )
-             )
-         (script-eval gp-1)
-         )
-       (return #f)
-       )
-      )
-    (set! arg2 (cond
-                 ((< arg2 0)
-                  (let ((v0-7 (get-property-value
-                                (-> this res)
-                                'effect-joint
-                                'exact
-                                arg1
-                                (the-as uint128 0)
-                                (the-as (pointer res-tag) #f)
-                                *res-static-buf*
-                                )
-                              )
-                        )
-                    (if (zero? v0-7)
-                        0
-                        (the-as int (+ v0-7 1))
-                        )
-                    )
+      ((begin
+         (cond
+           ((begin
+              (set! v1-2 (rtype-of a1-0))
+              (cond
+                ((begin (set! a0-3 symbol) (= v1-2 a0-3))
+                 (set! t9-0 symbol->string)
+                 (set! a0-4 a1-0)
+                 (set! v0-0 (call! a0-4))
+                 )
+                ((begin (set! a0-5 (the-as none string)) (= v1-2 a0-5))
+                 (set! v0-0 (the-as string a1-0))
+                 )
+                (else
+                  (set! v0-0 (the-as string #f))
                   )
-                 (else
-                   (empty)
-                   arg2
-                   )
-                 )
-          )
-    (when (logtest? (-> this flags) (effect-control-flag ecf0))
-      (if (send-event (-> this process) 'effect-control s3-0 arg1 arg2)
-          (return 0)
-          )
-      )
-    (cond
-      ((and (= (-> s3-0 data 0) 101)
-            (= (-> s3-0 data 1) 102)
-            (= (-> s3-0 data 2) 102)
-            (= (-> s3-0 data 3) 101)
-            (= (-> s3-0 data 4) 99)
-            (= (-> s3-0 data 5) 116)
-            (= (-> s3-0 data 6) 45)
-            )
-       (let* ((v1-38 (as-type (-> this process root) collide-shape-moving))
-              (t1-2 (if v1-38
-                        (-> (the-as collide-shape-moving v1-38) ground-pat)
-                        *footstep-surface*
-                        )
-                    )
-              )
-         (do-effect-for-surface this (the-as symbol s3-0) arg1 arg2 (-> this res) t1-2)
-         )
-       )
-      ((and (= (-> s3-0 data 0) 103)
-            (= (-> s3-0 data 1) 114)
-            (= (-> s3-0 data 2) 111)
-            (= (-> s3-0 data 3) 117)
-            (= (-> s3-0 data 4) 112)
-            (= (-> s3-0 data 5) 45)
-            )
-       (let ((s2-1 (lookup-part-group-by-name s3-0)))
-         (when (and (nonzero? s2-1) s2-1 (= (-> s2-1 type) sparticle-launch-group))
-           (if *debug-effect-control*
-               (format
-                 #t
-                 "(~5D) effect group ~A ~A frame ~F joint ~D~%"
-                 (current-time)
-                 (-> this process name)
-                 s3-0
-                 arg1
-                 arg2
-                 )
-               )
-           (cond
-             ((logtest? (-> s2-1 flags) (sp-group-flag sp13))
-              (vector-copy!
-                (-> *launch-matrix* trans)
-                (vector<-cspace! (new 'stack-no-clear 'vector) (-> this process node-list data arg2))
                 )
-              (part-tracker-spawn part-tracker-subsampler :to (-> this process) :group s2-1)
+              (set! s3-0 v0-0)
+              (set! v1-3 (-> a0-0 flags))
+              (set! v1-4 (logand v1-3 4))
+              (nonzero? v1-4)
               )
-             (else
-               (vector-copy!
-                 (-> *launch-matrix* trans)
-                 (vector<-cspace! (new 'stack-no-clear 'vector) (-> this process node-list data arg2))
-                 )
-               (part-tracker-spawn part-tracker :to (-> this process) :group s2-1)
-               )
-             )
-           )
-         )
-       )
-      ((and (= (-> s3-0 data 0) 101)
-            (= (-> s3-0 data 1) 118)
-            (= (-> s3-0 data 2) 101)
-            (= (-> s3-0 data 3) 110)
-            (= (-> s3-0 data 4) 116)
-            (= (-> s3-0 data 5) 45)
+            (return (set! v0-1 (the-as int #f)))
             )
-       (send-event (-> this process) (string->symbol s3-0) arg1 arg2)
-       )
-      ((string= s3-0 "camera-shake")
-       (activate! *camera-smush-control* 819.2 15 75 1.0 0.9 (-> *display* camera-clock))
-       )
-      ((and (= (-> s3-0 data 0) 100)
-            (= (-> s3-0 data 1) 101)
-            (= (-> s3-0 data 2) 97)
-            (= (-> s3-0 data 3) 116)
-            (= (-> s3-0 data 4) 104)
-            (= (-> s3-0 data 5) 45)
+           ((begin (set! t9-1 string=) (set! a0-6 s3-0) (set! a1-1 L109) (set! v0-2 (call! a0-6 a1-1)) v0-2)
+            (return (begin
+                      (if (begin
+                            (set! v1-8 res-lump)
+                            (set! t9-2 (method-of-type v1-8 get-property-struct))
+                            (set! a0-7 (-> a0-0 res))
+                            (set! a1-2 'effect-script)
+                            (set! a2-1 'exact)
+                            (set! t0-0 #f)
+                            (set! t1-0 #f)
+                            (set! t2-0 *res-static-buf*)
+                            (set! a3-1 a2-0)
+                            (set! v0-3 (call! a0-7 a1-2 a2-1 a3-1 t0-0 t1-0 t2-0))
+                            (set! gp-1 v0-3)
+                            (set! v1-9 script-context)
+                            (set! t9-3 (method-of-type v1-9 new))
+                            (set! a0-8 (the-as none (+ sp-0 16)))
+                            (set! a1-3 script-context)
+                            (set! v1-10 s6-0)
+                            v1-10
+                            )
+                          (set! a2-2 (-> v1-10 ppointer))
+                          )
+                      (set! a3-2 s6-0)
+                      (set! t0-1 #f)
+                      (set! v0-4 (call! a0-8 a1-3 a2-2 a3-2 t0-1))
+                      (set! a0-9 v0-4)
+                      (set! v1-11 script-context)
+                      (set! t9-4 (method-of-type v1-11 eval!))
+                      (set! a1-4 gp-1)
+                      (call! a0-9 a1-4)
+                      (set! v1-12 v0-5)
+                      (set! v0-1 (the-as int #f))
+                      )
+                    )
             )
-       (let ((s3-1 (-> (string->symbol s3-0) value)))
-         (when (and (logtest? (-> this flags) (effect-control-flag ecf1))
-                    (zero? (-> this process draw death-timer))
-                    (= (-> (the-as death-info s3-1) type) death-info)
-                    )
-           (let ((v1-131 (-> this process draw)))
-             (let ((a1-25 (-> (the-as death-info s3-1) vertex-skip))
-                   (a0-59
-                     (max
-                       2
-                       (the-as int (/ (-> (the-as death-info s3-1) timer) (the-as uint (the int (-> *display* time-factor)))))
-                       )
-                     )
-                   )
-               (when (= (-> *setting-control* user-current video-mode) 'pal)
-                 (if (< (the-as uint 1) a1-25)
-                     (set! a1-25 (/ (the-as uint (* (the-as uint 50) a1-25)) (the-as uint 60)))
-                     )
-                 )
-               (let ((a2-29 (-> *display* frames (-> *display* last-screen) run-time)))
-                 (cond
-                   ((< 9000 (the-as int a2-29))
-                    (set! a1-25 (* a1-25 4))
-                    )
-                   ((< 7000 (the-as int a2-29))
-                    (set! a1-25 (* a1-25 2))
-                    )
-                   )
-                 )
-               (set! (-> v1-131 death-vertex-skip) a1-25)
-               (set! (-> v1-131 death-effect) (-> (the-as death-info s3-1) effect))
-               (set! (-> v1-131 death-timer) (the-as uint (+ a0-59 1)))
-               )
-             (set! (-> v1-131 death-timer-org) (-> v1-131 death-timer))
-             (set! (-> v1-131 death-draw-overlap) (-> (the-as death-info s3-1) overlap))
-             )
-           (when (-> (the-as death-info s3-1) sound)
-             (let* ((s2-3 this)
-                    (s1-0 (method-of-object s2-3 play-effect-sound))
-                    (s0-0 (-> (the-as death-info s3-1) sound))
-                    )
-               (set! sv-288 (-> this res))
-               (let ((t1-5 (string->sound-name (-> (the-as death-info s3-1) sound))))
-                 (s1-0 s2-3 (the-as symbol s0-0) arg1 arg2 sv-288 t1-5)
-                 )
-               )
-             )
-           (send-event (-> this process) 'death-start (the-as death-info s3-1))
            )
+         (<0.si a3-0)
          )
+       (if (begin
+             (set! v1-14 res-lump)
+             (set! t9-5 (method-of-type v1-14 get-property-value))
+             (set! a0-10 (-> a0-0 res))
+             (set! a1-5 'effect-joint)
+             (set! a2-3 'exact)
+             (set! a3-3 a2-0)
+             (set! t0-2 0)
+             (set! t1-1 #f)
+             (set! t2-1 *res-static-buf*)
+             (set! v0-6 (call! a0-10 a1-5 a2-3 a3-3 t0-2 t1-1 t2-1))
+             (zero? v0-6)
+             )
+           (set! a3-0 0)
+           (set! a3-0 (the-as int (+ v0-6 1)))
+           )
        )
       (else
-        (play-effect-sound this (the-as symbol s3-0) arg1 arg2 (-> this res) (string->sound-name s3-0))
+        (empty)
         )
       )
+    (when (begin (set! v1-15 (-> a0-0 flags)) (set! v1-16 (logand v1-15 1)) (nonzero? v1-16))
+      (if (begin
+            (if (begin (set! a1-6 (the-as none (+ sp-0 176))) (set! v1-18 s6-0) v1-18)
+                (set! a0-11 (-> v1-18 ppointer))
+                )
+            (s.w! (+ a1-6 8) a0-11)
+            (set! v1-19 3)
+            (s.w! (+ a1-6 68) v1-19)
+            (set! v1-20 'effect-control)
+            (s.w! (+ a1-6 64) v1-20)
+            (s.d! (+ a1-6 16) s3-0)
+            (s.d! (+ a1-6 24) a2-0)
+            (s.d! (+ a1-6 32) a3-0)
+            (set! t9-6 send-event-function)
+            (set! a0-12 (-> a0-0 process))
+            (set! v0-7 (call! a0-12 a1-6))
+            v0-7
+            )
+          (return (set! v0-1 0))
+          )
+      )
+    (cond
+      ((begin
+         (and (begin (set! v1-23 (-> s3-0 data 0)) (set! v1-24 (+ v1-23 -101)) (set! a0-13 (zero? v1-24)) a0-13)
+              (begin (set! v1-26 (-> s3-0 data 1)) (set! v1-27 (+ v1-26 -102)) (set! a0-14 (zero? v1-27)) a0-14)
+              (begin (set! v1-28 (-> s3-0 data 2)) (set! v1-29 (+ v1-28 -102)) (set! a0-15 (zero? v1-29)) a0-15)
+              (begin (set! v1-30 (-> s3-0 data 3)) (set! v1-31 (+ v1-30 -101)) (set! a0-16 (zero? v1-31)) a0-16)
+              (begin (set! v1-32 (-> s3-0 data 4)) (set! v1-33 (+ v1-32 -99)) (set! a0-17 (zero? v1-33)) a0-17)
+              (begin (set! v1-34 (-> s3-0 data 5)) (set! v1-35 (+ v1-34 -116)) (set! a0-18 (zero? v1-35)) a0-18)
+              (begin (set! v1-36 (-> s3-0 data 6)) (set! a0-19 (+ v1-36 -45)) (set! v1-25 (zero? a0-19)))
+              )
+         v1-25
+         )
+       (if (begin
+             (set! v1-37 (-> a0-0 process))
+             (set! s2-0 (-> v1-37 root))
+             (set! t9-7 type?)
+             (set! a0-20 s2-0)
+             (set! a1-7 collide-shape-moving)
+             (set! v0-8 (call! a0-20 a1-7))
+             v0-8
+             )
+           (set! v1-38 s2-0)
+           )
+       (if v1-38
+           (set! t1-2 (the-as none (l.wu (+ v1-38 276))))
+           (set! t1-3 (the-as none *footstep-surface*))
+           )
+       (set! a0-21 (the-as none a0-0))
+       (set! v1-39 (the-as none (l.wu (+ a0-21 -4))))
+       (set! t9-8 (the-as none (l.wu (+ v1-39 60))))
+       (set! a2-4 (the-as none a2-0))
+       (set! t0-3 (the-as none (l.wu (+ a0-0 20))))
+       (set! a1-8 (the-as none s3-0))
+       (set! a3-4 (the-as none a3-0))
+       (call!)
+       (set! v1-40 (the-as none v0-9))
+       )
+      ((begin
+         (and (begin
+                (set! v1-41 (the-as none (-> s3-0 data 0)))
+                (set! v1-42 (the-as none (+ v1-41 -103)))
+                (set! a0-22 (the-as none (zero? v1-42)))
+                a0-22
+                )
+              (begin
+                (set! v1-44 (the-as none (l.bu (+ s3-0 5))))
+                (set! v1-45 (the-as none (+ v1-44 -114)))
+                (set! a0-23 (the-as none (zero? v1-45)))
+                a0-23
+                )
+              (begin
+                (set! v1-46 (the-as none (l.bu (+ s3-0 6))))
+                (set! v1-47 (the-as none (+ v1-46 -111)))
+                (set! a0-24 (the-as none (zero? v1-47)))
+                a0-24
+                )
+              (begin
+                (set! v1-48 (the-as none (l.bu (+ s3-0 7))))
+                (set! v1-49 (the-as none (+ v1-48 -117)))
+                (set! a0-25 (the-as none (zero? v1-49)))
+                a0-25
+                )
+              (begin
+                (set! v1-50 (the-as none (l.bu (+ s3-0 8))))
+                (set! v1-51 (the-as none (+ v1-50 -112)))
+                (set! a0-26 (the-as none (zero? v1-51)))
+                a0-26
+                )
+              (begin
+                (set! v1-52 (the-as none (l.bu (+ s3-0 9))))
+                (set! a0-27 (the-as none (+ v1-52 -45)))
+                (set! v1-43 (the-as none (zero? a0-27)))
+                )
+              )
+         v1-43
+         )
+       (when (begin
+               (and (begin
+                      (set! t9-9 (the-as none lookup-part-group-by-name))
+                      (set! a0-28 (the-as none s3-0))
+                      (set! v0-10 (the-as none (call!)))
+                      (set! s2-1 (the-as none v0-10))
+                      (nonzero? s2-1)
+                      )
+                    s2-1
+                    (begin
+                      (set! v1-54 (the-as none (l.wu (+ s2-1 -4))))
+                      (set! a0-29 (the-as none sparticle-launch-group))
+                      (set! v1-53 (the-as none (= v1-54 a0-29)))
+                      )
+                    )
+               v1-53
+               )
+         (cond
+           ((begin
+              (when (begin (set! v1-56 (the-as none *debug-effect-control*)) v1-56)
+                (set! t9-10 (the-as none format))
+                (set! a0-30 (the-as none #t))
+                (set! a1-9 (the-as none L108))
+                (set! v1-58 (the-as none (l.wu (+ s6-0 8))))
+                (set! a2-5 (the-as none (l.d (+ v1-58 20))))
+                (set! v1-59 (the-as none (l.wu a0-0)))
+                (set! a3-5 (the-as none (l.wu v1-59)))
+                (set! t0-4 (the-as none s3-0))
+                (set! t1-4 (the-as none a2-0))
+                (set! t2-2 (the-as none a3-0))
+                (call!)
+                )
+              (set! v1-60 (the-as none *launch-matrix*))
+              (set! s4-1 (the-as none (+ v1-60 48)))
+              (set! t9-11 (the-as none vector<-cspace!))
+              (set! a0-31 (the-as none (+ sp-0 256)))
+              (set! v1-61 (the-as none (sll a3-0 5)))
+              (set! v1-62 (the-as none (+ v1-61 12)))
+              (set! a1-10 (the-as none (l.wu a0-0)))
+              (set! a1-11 (the-as none (l.wu (+ a1-10 188))))
+              (set! a1-12 (the-as none (+ v1-62 a1-11)))
+              (set! v0-12 (the-as none (call!)))
+              (set! v1-63 (the-as none (l.q v0-12)))
+              (s.q! s4-1 v1-63)
+              (set! v1-64 (the-as none *part-tracker-params-default*))
+              (s.w! (+ v1-64 32) s2-1)
+              (set! v1-65 (the-as none *part-tracker-params-default*))
+              (set! v1-66 (the-as none (+ v1-65 0)))
+              (s.vf! v1-66 vf0)
+              (set! v1-67 (the-as none *part-tracker-params-default*))
+              (s.w! (+ v1-67 24) 0)
+              (set! v1-68 (the-as none *part-tracker-params-default*))
+              (s.w! (+ v1-68 36) #f)
+              (set! v1-69 (the-as none *part-tracker-params-default*))
+              (s.d! (+ v1-69 16) #f)
+              (set! v1-70 (the-as none *part-tracker-params-default*))
+              (s.w! (+ v1-70 44) #f)
+              (set! v1-71 (the-as none *launch-matrix*))
+              (set! a0-32 (the-as none *part-tracker-params-default*))
+              (s.w! (+ a0-32 48) v1-71)
+              (set! v1-72 (the-as none *part-tracker-params-default*))
+              (s.w! (+ v1-72 28) 0)
+              (set! v1-73 (the-as none *part-tracker-params-default*))
+              (s.w! (+ v1-73 40) #f)
+              (set! v1-74 (the-as none #x3f800000))
+              (set! f0-0 (the-as none (gpr->fpr v1-74)))
+              (set! v1-75 (the-as none *part-tracker-params-default*))
+              (s.f! (+ v1-75 52) f0-0)
+              (set! v1-76 (the-as none *part-tracker-params-default*))
+              (set! v1-77 (the-as none (l.hu (+ s2-1 6))))
+              (set! v1-78 (the-as none (logand v1-77 8192)))
+              (nonzero? v1-78)
+              )
+            (when (begin
+                    (set! a0-33 (the-as none *default-dead-pool*))
+                    (set! v1-79 (the-as none (l.wu (+ a0-33 -4))))
+                    (set! t9-12 (the-as none (l.wu (+ v1-79 76))))
+                    (set! a1-13 (the-as none part-tracker-subsampler))
+                    (set! a2-6 (the-as none #x4000))
+                    (set! a3-6 (the-as none 0))
+                    (set! v0-13 (the-as none (call!)))
+                    (set! s5-1 (the-as none v0-13))
+                    s5-1
+                    )
+              (set! v1-81 (the-as none part-tracker-subsampler))
+              (set! t9-13 (the-as none (l.wu (+ v1-81 52))))
+              (set! a0-34 (the-as none s5-1))
+              (set! a1-14 (the-as none (l.wu a0-0)))
+              (set! a2-7 (the-as none L107))
+              (set! a3-7 (the-as none #x70004000))
+              (call!)
+              (set! t9-14 (the-as none run-function-in-process))
+              (set! a0-35 (the-as none s5-1))
+              (set! a1-15 (the-as none part-tracker-subsampler-init))
+              (set! a2-8 (the-as none *part-tracker-params-default*))
+              (call!)
+              (set! v1-82 (the-as none (l.wu (+ s5-1 28))))
+              )
+            )
+           (else
+             (when (begin
+                     (set! a0-36 (the-as none *default-dead-pool*))
+                     (set! v1-83 (the-as none (l.wu (+ a0-36 -4))))
+                     (set! t9-15 (the-as none (l.wu (+ v1-83 76))))
+                     (set! a1-16 (the-as none part-tracker))
+                     (set! a2-9 (the-as none #x4000))
+                     (set! a3-8 (the-as none 0))
+                     (set! v0-16 (the-as none (call!)))
+                     (set! s5-2 (the-as none v0-16))
+                     s5-2
+                     )
+               (set! v1-85 (the-as none part-tracker))
+               (set! t9-16 (the-as none (l.wu (+ v1-85 52))))
+               (set! a0-37 (the-as none s5-2))
+               (set! a1-17 (the-as none (l.wu a0-0)))
+               (set! a2-10 (the-as none L106))
+               (set! a3-9 (the-as none #x70004000))
+               (call!)
+               (set! t9-17 (the-as none run-function-in-process))
+               (set! a0-38 (the-as none s5-2))
+               (set! a1-18 (the-as none part-tracker-init))
+               (set! a2-11 (the-as none *part-tracker-params-default*))
+               (call!)
+               (set! v1-86 (the-as none (l.wu (+ s5-2 28))))
+               )
+             )
+           )
+         )
+       )
+      ((begin
+         (and (begin
+                (set! v1-87 (the-as none (l.bu (+ s3-0 4))))
+                (set! v1-88 (the-as none (+ v1-87 -101)))
+                (set! a0-39 (the-as none (zero? v1-88)))
+                a0-39
+                )
+              (begin
+                (set! v1-90 (the-as none (l.bu (+ s3-0 5))))
+                (set! v1-91 (the-as none (+ v1-90 -118)))
+                (set! a0-40 (the-as none (zero? v1-91)))
+                a0-40
+                )
+              (begin
+                (set! v1-92 (the-as none (l.bu (+ s3-0 6))))
+                (set! v1-93 (the-as none (+ v1-92 -101)))
+                (set! a0-41 (the-as none (zero? v1-93)))
+                a0-41
+                )
+              (begin
+                (set! v1-94 (the-as none (l.bu (+ s3-0 7))))
+                (set! v1-95 (the-as none (+ v1-94 -110)))
+                (set! a0-42 (the-as none (zero? v1-95)))
+                a0-42
+                )
+              (begin
+                (set! v1-96 (the-as none (l.bu (+ s3-0 8))))
+                (set! v1-97 (the-as none (+ v1-96 -116)))
+                (set! a0-43 (the-as none (zero? v1-97)))
+                a0-43
+                )
+              (begin
+                (set! v1-98 (the-as none (l.bu (+ s3-0 9))))
+                (set! a0-44 (the-as none (+ v1-98 -45)))
+                (set! v1-89 (the-as none (zero? a0-44)))
+                )
+              )
+         v1-89
+         )
+       (if (begin (set! s2-2 (the-as none (+ sp-0 176))) (set! v1-99 (the-as none s6-0)) v1-99)
+           (set! a0-45 (the-as none (l.wu (+ v1-99 28))))
+           )
+       (s.w! (+ s2-2 8) a0-45)
+       (set! v1-100 (the-as none 2))
+       (s.w! (+ s2-2 68) v1-100)
+       (set! t9-18 (the-as none string->symbol))
+       (set! a0-46 (the-as none s3-0))
+       (set! v0-19 (the-as none (call!)))
+       (s.w! (+ s2-2 64) v0-19)
+       (s.d! (+ s2-2 16) a2-0)
+       (s.d! (+ s2-2 24) a3-0)
+       (set! t9-19 (the-as none send-event-function))
+       (set! a0-47 (the-as none (l.wu a0-0)))
+       (set! a1-19 (the-as none s2-2))
+       (call!)
+       (set! v1-101 (the-as none v0-20))
+       )
+      (else
+        (cond
+          ((begin
+             (set! t9-20 (the-as none string=))
+             (set! a0-48 (the-as none s3-0))
+             (set! a1-20 (the-as none L105))
+             (set! v0-21 (the-as none (call!)))
+             v0-21
+             )
+           (set! a0-49 (the-as none *camera-smush-control*))
+           (set! v1-102 (the-as none smush-control))
+           (set! t9-21 (the-as none (l.wu (+ v1-102 64))))
+           (set! a1-21 (the-as none #x444ccccd))
+           (set! a2-12 (the-as none 15))
+           (set! a3-10 (the-as none 75))
+           (set! t0-5 (the-as none #x3f800000))
+           (set! t1-5 (the-as none #x3f666666))
+           (set! v1-103 (the-as none *display*))
+           (set! t2-3 (the-as none (l.wu (+ v1-103 76))))
+           (call!)
+           (set! v1-104 (the-as none v0-22))
+           )
+          ((begin
+             (and (begin
+                    (set! v1-105 (the-as none (l.bu (+ s3-0 4))))
+                    (set! v1-106 (the-as none (+ v1-105 -100)))
+                    (set! a0-50 (the-as none (zero? v1-106)))
+                    a0-50
+                    )
+                  (begin
+                    (set! v1-108 (the-as none (l.bu (+ s3-0 5))))
+                    (set! v1-109 (the-as none (+ v1-108 -101)))
+                    (set! a0-51 (the-as none (zero? v1-109)))
+                    a0-51
+                    )
+                  (begin
+                    (set! v1-110 (the-as none (l.bu (+ s3-0 6))))
+                    (set! v1-111 (the-as none (+ v1-110 -97)))
+                    (set! a0-52 (the-as none (zero? v1-111)))
+                    a0-52
+                    )
+                  (begin
+                    (set! v1-112 (the-as none (l.bu (+ s3-0 7))))
+                    (set! v1-113 (the-as none (+ v1-112 -116)))
+                    (set! a0-53 (the-as none (zero? v1-113)))
+                    a0-53
+                    )
+                  (begin
+                    (set! v1-114 (the-as none (l.bu (+ s3-0 8))))
+                    (set! v1-115 (the-as none (+ v1-114 -104)))
+                    (set! a0-54 (the-as none (zero? v1-115)))
+                    a0-54
+                    )
+                  (begin
+                    (set! v1-116 (the-as none (l.bu (+ s3-0 9))))
+                    (set! a0-55 (the-as none (+ v1-116 -45)))
+                    (set! v1-107 (the-as none (zero? a0-55)))
+                    )
+                  )
+             v1-107
+             )
+           (when (begin
+                   (and (begin
+                          (set! t9-22 (the-as none string->symbol))
+                          (set! a0-56 (the-as none s3-0))
+                          (set! v0-23 (the-as none (call!)))
+                          (set! s3-1 (the-as none (l.w (+ v0-23 -1))))
+                          (set! v1-117 (the-as none (l.wu (+ a0-0 4))))
+                          (set! v1-118 (the-as none (logand v1-117 2)))
+                          (nonzero? v1-118)
+                          )
+                        (begin
+                          (set! v1-120 (the-as none (l.wu a0-0)))
+                          (set! v1-121 (the-as none (l.wu (+ v1-120 192))))
+                          (set! v1-122 (the-as none (l.bu (+ v1-121 132))))
+                          (zero? v1-122)
+                          )
+                        (begin
+                          (set! v1-123 (the-as none (l.wu (+ s3-1 -4))))
+                          (set! a0-57 (the-as none death-info))
+                          (set! v1-119 (the-as none (= v1-123 a0-57)))
+                          )
+                        )
+                   v1-119
+                   )
+             (if (begin
+                   (cond
+                     ((begin
+                        (when (begin
+                                (set! v1-125 (the-as none (l.wu a0-0)))
+                                (set! v1-126 (the-as none (l.wu (+ v1-125 192))))
+                                (set! a1-22 (the-as none (l.hu s3-1)))
+                                (set! a0-58 (the-as none 2))
+                                (set! a2-13 (the-as none (l.bu (+ s3-1 2))))
+                                (set! a3-11 (the-as none *display*))
+                                (set! f0-1 (the-as none (l.f (+ a3-11 124))))
+                                (set! f0-2 (the-as none (f2i f0-1)))
+                                (set! a3-12 (the-as none (fpr->gpr f0-2)))
+                                (set! a2-14 (the-as none (/.ui a2-13 a3-12)))
+                                (set! a0-59 (the-as none (max.si a0-58 a2-14)))
+                                (set! a2-15 (the-as none 'pal))
+                                (set! a3-13 (the-as none *setting-control*))
+                                (set! a3-14 (the-as none (l.wu (+ a3-13 64))))
+                                (= a3-14 a2-15)
+                                )
+                          (when (begin (set! a2-17 (the-as none 1)) (<.ui a2-17 a1-22))
+                            (set! a2-19 (the-as none 50))
+                            (set! a1-23 (the-as none (*.ui a2-19 a1-22)))
+                            (set! a2-20 (the-as none 60))
+                            (set! a1-22 (the-as none (/.ui a1-23 a2-20)))
+                            (set! a2-21 (the-as none a1-22))
+                            )
+                          )
+                        (set! a2-22 (the-as none *display*))
+                        (set! a2-23 (the-as none (l.w (+ a2-22 4))))
+                        (set! a2-24 (the-as none (sll a2-23 2)))
+                        (set! a3-15 (the-as none *display*))
+                        (set! a2-25 (the-as none (+ a2-24 a3-15)))
+                        (set! a2-26 (the-as none (l.wu (+ a2-25 8))))
+                        (set! a2-27 (the-as none (l.d (+ a2-26 60))))
+                        (set! a3-16 (the-as none 9000))
+                        (<.si a3-16 a2-27)
+                        )
+                      (set! a1-22 (the-as none (sll a1-22 2)))
+                      (set! a2-28 (the-as none a1-22))
+                      )
+                     ((begin (set! a3-18 (the-as none 7000)) (<.si a3-18 a2-27))
+                      (set! a1-22 (the-as none (sll a1-22 1)))
+                      (set! a2-30 (the-as none a1-22))
+                      )
+                     )
+                   (when (begin
+                           (s.h! (+ v1-126 134) a1-22)
+                           (set! a1-24 (the-as none (l.wu (+ s3-1 4))))
+                           (s.w! (+ v1-126 136) a1-24)
+                           (set! a0-60 (the-as none (+ a0-59 1)))
+                           (s.b! (+ v1-126 132) a0-60)
+                           (set! a0-61 (the-as none (l.bu (+ v1-126 132))))
+                           (s.b! (+ v1-126 133) a0-61)
+                           (set! a0-62 (the-as none (l.bu (+ s3-1 3))))
+                           (s.b! (+ v1-126 131) a0-62)
+                           (set! v1-127 (the-as none (l.wu (+ s3-1 8))))
+                           v1-127
+                           )
+                     (set! s2-3 (the-as none a0-0))
+                     (set! v1-129 (the-as none (l.wu (+ s2-3 -4))))
+                     (set! s1-0 (the-as none (l.wu (+ v1-129 64))))
+                     (set! s0-0 (the-as none (l.wu (+ s3-1 8))))
+                     (set! v1-130 (the-as none (l.wu (+ a0-0 20))))
+                     (set! sv-272 v1-130)
+                     (set! t9-23 (the-as none string->sound-name))
+                     (set! a0-63 (the-as none (l.wu (+ s3-1 8))))
+                     (call!)
+                     (set! t1-6 (the-as none v0-24))
+                     (set! t9-24 (the-as none s1-0))
+                     (set! a0-64 (the-as none s2-3))
+                     (set! a1-25 (the-as none s0-0))
+                     (set! a2-31 (the-as none a2-0))
+                     (set! a3-19 (the-as none a3-0))
+                     (set! t0-6 sv-272)
+                     (call!)
+                     (set! v1-131 (the-as none v0-25))
+                     )
+                   (set! a1-26 (the-as none (+ sp-0 176)))
+                   (set! v1-132 (the-as none s6-0))
+                   v1-132
+                   )
+                 (set! a0-65 (the-as none (l.wu (+ v1-132 28))))
+                 )
+             (s.w! (+ a1-26 8) a0-65)
+             (set! v1-133 (the-as none 1))
+             (s.w! (+ a1-26 68) v1-133)
+             (set! v1-134 (the-as none 'death-start))
+             (s.w! (+ a1-26 64) v1-134)
+             (s.d! (+ a1-26 16) s3-1)
+             (set! t9-25 (the-as none send-event-function))
+             (set! a0-66 (the-as none (l.wu a0-0)))
+             (call!)
+             (set! v1-135 (the-as none v0-26))
+             )
+           )
+          (else
+            (set! s2-4 (the-as none a0-0))
+            (set! v1-136 (the-as none (l.wu (+ s2-4 -4))))
+            (set! s1-1 (the-as none (l.wu (+ v1-136 64))))
+            (set! s0-1 (the-as none s3-0))
+            (set! gp-2 (the-as none (l.wu (+ a0-0 20))))
+            (set! t9-26 (the-as none string->sound-name))
+            (set! a0-67 (the-as none s3-0))
+            (call!)
+            (set! t1-7 (the-as none v0-27))
+            (set! t9-27 (the-as none s1-1))
+            (set! a0-68 (the-as none s2-4))
+            (set! a1-27 (the-as none s0-1))
+            (set! a2-32 (the-as none a2-0))
+            (set! a3-20 (the-as none a3-0))
+            (set! t0-7 (the-as none gp-2))
+            (call!)
+            (set! v1-137 (the-as none v0-28))
+            )
+          )
+        )
+      )
+    (set! v0-1 (the-as int 0))
+    (ret-value v0-1)
     )
-  0
-  (none)
   )
 
 (defmethod do-effect-for-surface ((this effect-control) (arg0 symbol) (arg1 float) (arg2 int) (arg3 basic) (arg4 pat-surface))
-  (local-vars
-    (sv-64
-      (function sparticle-system sparticle-launcher matrix sparticle-launch-state sparticle-launch-control float none)
-      )
-    (sv-80 sparticle-system)
-    (sv-96 vector)
-    (sv-112 matrix)
-    (sv-128
-      (function sparticle-system sparticle-launcher matrix sparticle-launch-state sparticle-launch-control float none)
-      )
-    (sv-144 sparticle-system)
-    (sv-160 vector)
-    (sv-176 matrix)
-    (sv-192 symbol)
-    (sv-208
-      (function sparticle-system sparticle-launcher matrix sparticle-launch-state sparticle-launch-control float none)
-      )
-    (sv-224 sparticle-system)
-    (sv-240 vector)
-    (sv-256 matrix)
-    )
-  (let ((s1-0 (the-as sound-name #f)))
-    (-> *display* frames (-> *display* last-screen) run-time)
-    (set! sv-192 arg0)
-    (cond
-      ((string= (the-as string sv-192) "effect-walk-step-left")
-       (set! s1-0 (sound-name-with-material "walk" arg4 "1"))
-       )
-      ((string= (the-as string sv-192) "effect-run-step-left")
-       (set! s1-0 (sound-name-with-material "run" arg4 "1"))
-       )
-      ((string= (the-as string sv-192) "effect-mech-step-left")
-       (set! s1-0 (sound-name-with-material "mwlk" arg4 "1"))
-       )
-      ((string= (the-as string sv-192) "effect-walk-step-right")
-       (set! s1-0 (sound-name-with-material "walk" arg4 "2"))
-       )
-      ((string= (the-as string sv-192) "effect-run-step-right")
-       (set! s1-0 (sound-name-with-material "run" arg4 "2"))
-       )
-      ((string= (the-as string sv-192) "effect-mech-step-right")
-       (set! s1-0 (sound-name-with-material "mwlk" arg4 "2"))
-       )
-      ((string= (the-as string sv-192) "effect-roll")
-       (set! s1-0 (sound-name-with-material "roll" arg4 ""))
-       )
-      ((string= (the-as string sv-192) "effect-slide")
-       (set! s1-0 (sound-name-with-material "slide" arg4 ""))
-       )
-      ((string= (the-as string sv-192) "effect-land")
-       (set! s1-0 (sound-name-with-material "land" arg4 ""))
-       )
-      ((string= (the-as string sv-192) "effect-zoom-land")
-       (set! s1-0 (sound-name-with-material "zoom-land" arg4 ""))
-       )
-      ((string= (the-as string sv-192) "effect-zoom-hit")
-       (set! s1-0 (sound-name-with-material "zoom-hit" arg4 ""))
-       )
-      ((string= (the-as string sv-192) "effect-flut-land")
-       (set! s1-0 (sound-name-with-material "flut-land" arg4 ""))
-       )
-      ((string= (the-as string sv-192) "effect-land-poof")
-       (do-effect
-         this
-         (-> (new 'static 'boxed-array :type string
-               "group-land-poof-unk"
-               "group-land-poof-ice"
-               "group-land-poof-qsd"
-               "group-land-poof-wtr"
-               "group-land-poof-tar"
-               "group-land-poof-san"
-               "group-land-poof-wod"
-               "group-land-poof-grs"
-               "group-land-poof-pmt"
-               "group-land-poof-snw"
-               "group-land-poof-dsn"
-               "group-land-poof-unk"
-               "group-land-poof-lav"
-               "group-land-poof-cwd"
-               "group-land-poof-grv"
-               "group-land-poof-drt"
-               "group-land-poof-mtl"
-               "group-land-poof-str"
-               "group-land-poof-pmt"
-               "group-land-poof-swm"
-               "group-land-poof-unk"
-               "group-land-poof-mtl"
-               "group-land-poof-neu"
-               "group-land-poof-stn"
-               "group-land-poof-cmt"
-               "group-land-poof-car"
-               "group-land-poof-gmt"
-               "group-land-poof-smt"
-               "group-land-poof-hwd"
-               "group-land-poof-sqi"
-               "group-land-poof-mhm"
-               "group-land-poof-for"
-               "group-land-poof-mhs"
-               "group-land-poof-dma"
-               )
-             (-> arg4 material)
-             )
-         arg1
-         -1
-         )
-       )
-      ((string= (the-as string sv-192) "effect-run-poof")
-       (do-effect
-         this
-         (-> (new 'static 'boxed-array :type string
-               "group-run-poof-unk"
-               "group-run-poof-ice"
-               "group-run-poof-qsd"
-               "group-run-poof-wtr"
-               "group-run-poof-tar"
-               "group-run-poof-san"
-               "group-run-poof-wod"
-               "group-run-poof-grs"
-               "group-run-poof-pmt"
-               "group-run-poof-snw"
-               "group-run-poof-dsn"
-               "group-run-poof-unk"
-               "group-run-poof-lav"
-               "group-run-poof-cwd"
-               "group-run-poof-grv"
-               "group-run-poof-drt"
-               "group-run-poof-mtl"
-               "group-run-poof-str"
-               "group-run-poof-pmt"
-               "group-run-poof-swm"
-               "group-run-poof-unk"
-               "group-run-poof-mtl"
-               "group-run-poof-neu"
-               "group-run-poof-stn"
-               "group-run-poof-cmt"
-               "group-run-poof-car"
-               "group-run-poof-gmt"
-               "group-run-poof-smt"
-               "group-run-poof-hwd"
-               "group-run-poof-sqi"
-               "group-run-poof-mhm"
-               "group-run-poof-for"
-               "group-run-poof-mhs"
-               "group-run-poof-dma"
-               )
-             (-> arg4 material)
-             )
-         arg1
-         -1
-         )
-       )
-      ((string= (the-as string sv-192) "effect-just-footprint")
-       (do-effect
-         this
-         (-> (new 'static 'boxed-array :type string
-               "group-just-footprint-unk"
-               "group-just-footprint-ice"
-               "group-just-footprint-qsd"
-               "group-just-footprint-wtr"
-               "group-just-footprint-tar"
-               "group-just-footprint-san"
-               "group-just-footprint-wod"
-               "group-just-footprint-grs"
-               "group-just-footprint-pmt"
-               "group-just-footprint-snw"
-               "group-just-footprint-dsn"
-               "group-just-footprint-unk"
-               "group-just-footprint-lav"
-               "group-just-footprint-cwd"
-               "group-just-footprint-grv"
-               "group-just-footprint-drt"
-               "group-just-footprint-mtl"
-               "group-just-footprint-str"
-               "group-just-footprint-pmt"
-               "group-just-footprint-swm"
-               "group-just-footprint-unk"
-               "group-just-footprint-mtl"
-               "group-just-footprint-neu"
-               "group-just-footprint-stn"
-               "group-just-footprint-cmt"
-               "group-just-footprint-car"
-               "group-just-footprint-gmt"
-               "group-just-footprint-smt"
-               "group-just-footprint-hwd"
-               "group-just-footprint-sqi"
-               "group-just-footprint-mhm"
-               "group-just-footprint-for"
-               "group-just-footprint-mhs"
-               "group-just-footprint-dma"
-               )
-             (-> arg4 material)
-             )
-         arg1
-         -1
-         )
-       )
-      ((string= (the-as string sv-192) "effect-just-poof")
-       (do-effect
-         this
-         (-> (new 'static 'boxed-array :type string
-               "group-just-poof-unk"
-               "group-just-poof-ice"
-               "group-just-poof-qsd"
-               "group-just-poof-wtr"
-               "group-just-poof-tar"
-               "group-just-poof-san"
-               "group-just-poof-wod"
-               "group-just-poof-grs"
-               "group-just-poof-pmt"
-               "group-just-poof-snw"
-               "group-just-poof-dsn"
-               "group-just-poof-unk"
-               "group-just-poof-lav"
-               "group-just-poof-cwd"
-               "group-just-poof-grv"
-               "group-just-poof-drt"
-               "group-just-poof-mtl"
-               "group-just-poof-str"
-               "group-just-poof-pmt"
-               "group-just-poof-swm"
-               "group-just-poof-unk"
-               "group-just-poof-mtl"
-               "group-just-poof-neu"
-               "group-just-poof-stn"
-               "group-just-poof-cmt"
-               "group-just-poof-car"
-               "group-just-poof-gmt"
-               "group-just-poof-smt"
-               "group-just-poof-hwd"
-               "group-just-poof-sqi"
-               "group-just-poof-mhm"
-               "group-just-poof-for"
-               "group-just-poof-mhs"
-               "group-just-poof-dma"
-               )
-             (-> arg4 material)
-             )
-         arg1
-         -1
-         )
-       )
-      ((string= (the-as string sv-192) "effect-slide-poof")
-       (do-effect
-         this
-         (-> (new 'static 'boxed-array :type string
-               "group-slide-poof-unk"
-               "group-slide-poof-ice"
-               "group-slide-poof-qsd"
-               "group-slide-poof-wtr"
-               "group-slide-poof-tar"
-               "group-slide-poof-san"
-               "group-slide-poof-wod"
-               "group-slide-poof-grs"
-               "group-slide-poof-pmt"
-               "group-slide-poof-snw"
-               "group-slide-poof-dsn"
-               "group-slide-poof-unk"
-               "group-slide-poof-lav"
-               "group-slide-poof-cwd"
-               "group-slide-poof-grv"
-               "group-slide-poof-drt"
-               "group-slide-poof-mtl"
-               "group-slide-poof-str"
-               "group-slide-poof-pmt"
-               "group-slide-poof-swm"
-               "group-slide-poof-unk"
-               "group-slide-poof-mtl"
-               "group-slide-poof-neu"
-               "group-slide-poof-stn"
-               "group-slide-poof-cmt"
-               "group-slide-poof-car"
-               "group-slide-poof-gmt"
-               "group-slide-poof-smt"
-               "group-slide-poof-hwd"
-               "group-slide-poof-sqi"
-               "group-slide-poof-mhm"
-               "group-slide-poof-for"
-               "group-slide-poof-mhs"
-               "group-slide-poof-dma"
-               )
-             (-> arg4 material)
-             )
-         arg1
-         -1
-         )
-       )
-      ((string= (the-as string sv-192) "effect-droppings")
-       (let ((s0-1 (-> *part-id-table* (-> (new 'static 'boxed-array :type uint32
-                                             #x8e
-                                             #x2a9
-                                             #x2aa
-                                             #x2ab
-                                             #x2ac
-                                             #x75
-                                             #x8b
-                                             #x77
-                                             #x2ad
-                                             #x79
-                                             #x2ae
-                                             #x8e
-                                             #x2af
-                                             #x8d
-                                             #x2b0
-                                             #x76
-                                             #x2b1
-                                             #x2b2
-                                             #x2ad
-                                             #x2b3
-                                             #x8e
-                                             #x2b1
-                                             #x2b4
-                                             #x8c
-                                             #x2b5
-                                             #x2b6
-                                             #x2b7
-                                             #x2b8
-                                             #x2b9
-                                             #x2ba
-                                             #x2bb
-                                             #x78
-                                             #x2bc
-                                             #x2bd
-                                             )
-                                           (-> arg4 material)
-                                           )
-                       )
-                   )
-             )
-         (when (nonzero? s0-1)
-           (set! sv-64 sp-launch-particles-var)
-           (set! sv-80 *sp-particle-system-2d*)
-           (set! sv-112 *launch-matrix*)
-           (set! sv-96 (-> sv-112 trans))
-           (let ((v1-80 (-> (vector<-cspace! (new 'stack-no-clear 'vector) (-> this process node-list data arg2)) quad)))
-             (set! (-> sv-96 quad) v1-80)
-             )
-           (let ((a3-6 #f)
-                 (t0-1 #f)
-                 (t1-1 1.0)
-                 )
-             (sv-64 sv-80 s0-1 sv-112 (the-as sparticle-launch-state a3-6) (the-as sparticle-launch-control t0-1) t1-1)
-             )
-           )
-         )
-       )
-      ((string= (the-as string sv-192) "effect-jump-droppings")
-       (let ((s0-2 (-> *part-id-table* (-> (new 'static 'boxed-array :type uint32
-                                             #x2be
-                                             #x2bf
-                                             #x2c0
-                                             #x2c1
-                                             #x2c2
-                                             #x86
-                                             #x2c3
-                                             #x89
-                                             #x2c4
-                                             #x88
-                                             #x2c5
-                                             #x2be
-                                             #x2c6
-                                             #x2c7
-                                             #x2c8
-                                             #x87
-                                             #x2c9
-                                             #x2ca
-                                             #x2c4
-                                             #x2cb
-                                             #x2be
-                                             #x2c9
-                                             #x2cc
-                                             #x2cd
-                                             #x2ce
-                                             #x2cf
-                                             #x2d0
-                                             #x2d1
-                                             #x2d2
-                                             #x2d3
-                                             #x2d4
-                                             #x8a
-                                             #x2d5
-                                             #x2d6
-                                             )
-                                           (-> arg4 material)
-                                           )
-                       )
-                   )
-             )
-         (when (nonzero? s0-2)
-           (set! sv-128 sp-launch-particles-var)
-           (set! sv-144 *sp-particle-system-2d*)
-           (set! sv-176 *launch-matrix*)
-           (set! sv-160 (-> sv-176 trans))
-           (let ((v1-97 (-> (vector<-cspace! (new 'stack-no-clear 'vector) (-> this process node-list data arg2)) quad)))
-             (set! (-> sv-160 quad) v1-97)
-             )
-           (let ((a3-7 #f)
-                 (t0-2 #f)
-                 (t1-2 1.0)
-                 )
-             (sv-128 sv-144 s0-2 sv-176 (the-as sparticle-launch-state a3-7) (the-as sparticle-launch-control t0-2) t1-2)
-             )
-           )
-         )
-       )
-      ((let ((t9-40 string=)
-             (a1-45 "effect-board-poof")
-             )
-         (t9-40 (the-as string sv-192) a1-45)
-         )
-       (let ((s0-3 (-> *part-id-table* (-> (new 'static 'boxed-array :type uint32
-                                             #x2d7
-                                             #x2d8
-                                             #x2d9
-                                             #x2da
-                                             #x2db
-                                             #x2dc
-                                             #x2dd
-                                             #x2de
-                                             #x2df
-                                             #x2e0
-                                             #x2e1
-                                             #x2d7
-                                             #x2e2
-                                             #x2e3
-                                             #x2e4
-                                             #x2e5
-                                             #x2e6
-                                             #x2e7
-                                             #x2df
-                                             #x2e8
-                                             #x2d7
-                                             #x2e6
-                                             #x2e9
-                                             #x2a2
-                                             #x2ea
-                                             #x2eb
-                                             #x2ec
-                                             #x2ed
-                                             #x2ee
-                                             #x2ef
-                                             #x2f0
-                                             #x2f1
-                                             #x2f2
-                                             #x2f3
-                                             )
-                                           (-> arg4 material)
-                                           )
-                       )
-                   )
-             )
-         (when (nonzero? s0-3)
-           (set! sv-208 sp-launch-particles-var)
-           (set! sv-224 *sp-particle-system-2d*)
-           (set! sv-256 *launch-matrix*)
-           (set! sv-240 (-> sv-256 trans))
-           (let ((v1-114 (-> (vector<-cspace! (new 'stack-no-clear 'vector) (-> this process node-list data arg2)) quad)))
-             (set! (-> sv-240 quad) v1-114)
-             )
-           (let ((a3-8 #f)
-                 (t0-3 #f)
-                 (t1-3 1.0)
-                 )
-             (sv-208 sv-224 s0-3 sv-256 (the-as sparticle-launch-state a3-8) (the-as sparticle-launch-control t0-3) t1-3)
-             )
-           )
-         )
-       )
-      )
-    (if s1-0
-        (play-effect-sound this arg0 arg1 arg2 arg3 s1-0)
-        )
-    )
   0
-  (none)
   )
 
 (defmethod play-effect-sound ((this effect-control) (arg0 symbol) (arg1 float) (arg2 int) (arg3 basic) (arg4 sound-name))
-  (local-vars (sv-112 res-tag) (sv-128 sound-name) (sv-144 basic) (sv-160 (function vector vector float)))
+  (local-vars
+    (r0-0 uint128)
+    (v1-8 uint128)
+    (sv-96 int)
+    (sv-112 res-tag)
+    (sv-128 sound-name)
+    (sv-144 basic)
+    (sv-160 (function vector vector float))
+    (sv-176 (function string (pointer uint8) string))
+    )
   (set! sv-144 arg3)
-  (let ((s0-0 arg4)
-        (gp-0 (the-as object (new 'stack 'sound-spec)))
-        (s5-0 (if (< arg2 0)
-                  (the-as vector #f)
+  (set! sv-128 arg4)
+  (let ((gp-0 (new 'stack 'sound-spec))
+        (s5-0 (sound-info-by-name sv-128))
+        (s4-0 (if (or (> arg2 0) ((method-of-type res-lump get-property-struct)
+                                  (the-as res-lump sv-144)
+                                  'effect-sound-track
+                                  'interp
+                                  -1000000000.0
+                                  (the-as structure #t)
+                                  (the-as (pointer res-tag) #f)
+                                  *res-static-buf*
+                                  )
+                      )
                   (vector<-cspace! (new 'stack-no-clear 'vector) (-> this process node-list data arg2))
+                  (the-as vector #f)
                   )
               )
         )
-    (set! (-> (the-as sound-spec gp-0) sound-name) s0-0)
-    (logior! (-> (the-as sound-spec gp-0) mask) (sound-mask volume))
-    (set! (-> (the-as sound-spec gp-0) pitch-mod) 0)
-    (set! (-> (the-as sound-spec gp-0) volume) 1024)
-    (set! sv-112 (new 'static 'res-tag))
-    (let* ((t9-2 (method-of-type res-lump get-property-data))
-           (a1-5 'effect-param)
-           (a2-1 'exact)
-           (a3-1 arg1)
-           (t0-1 #f)
-           (t1-1 (the-as (pointer res-tag) (& sv-112)))
-           (t2-0 *res-static-buf*)
-           (a1-6 (t9-2 (the-as res-lump sv-144) a1-5 a2-1 a3-1 (the-as pointer t0-1) t1-1 t2-0))
-           )
-      (when a1-6
-        (effect-param->sound-spec
-          (the-as sound-spec gp-0)
-          (the-as (pointer float) a1-6)
-          (the-as int (-> sv-112 elt-count))
-          (the-as process-focusable (-> this process))
-          )
-        (if (logtest? (-> (the-as sound-spec gp-0) mask) (sound-mask unk))
-            (return 0)
-            )
-        )
-      )
-    (let ((f0-0 (-> *setting-control* user-current under-water-pitch-mod)))
-      (when (!= f0-0 0.0)
-        (logior! (-> (the-as sound-spec gp-0) mask) (sound-mask pitch))
-        (let ((f0-1 (* 2.0 f0-0)))
-          (set! (-> (the-as sound-spec gp-0) pitch-mod)
-                (- (-> (the-as sound-spec gp-0) pitch-mod) (the int (* 1524.0 f0-1)))
+    (when s5-0
+      (set! (-> gp-0 info) s5-0)
+      (set! (-> gp-0 volume) 1024)
+      (set! sv-96 0)
+      (let* ((t9-4 (method-of-type res-lump get-property-data))
+             (a1-6 'effect-param)
+             (a2-2 'exact)
+             (a3-2 arg1)
+             (t0-2 #f)
+             (t1-2 (the-as (pointer int) (& sv-96)))
+             (t2-1 *res-static-buf*)
+             (a1-7
+               (t9-4 (the-as res-lump sv-144) a1-6 a2-2 a3-2 (the-as pointer t0-2) (the-as (pointer res-tag) t1-2) t2-1)
+               )
+             )
+        (when a1-7
+          (let ((t9-5 effect-param->sound-spec)
+                (a0-7 gp-0)
                 )
+            (let ((v1-7 (the-as uint128 sv-96)))
+              (.pcpyud v1-8 v1-7 r0-0)
+              )
+            (t9-5
+              a0-7
+              (the-as (pointer float) a1-7)
+              (shr (* (the-as int v1-8) 2) 49)
+              (the-as process-focusable (-> this process))
+              )
+            )
+          )
+        )
+      (let ((f0-0 (-> *setting-control* user-current under-water-pitch-mod)))
+        (when (!= f0-0 0.0)
+          (logior! (-> gp-0 mask) 1)
+          (let ((f0-1 (* 2.0 f0-0)))
+            (set! (-> gp-0 pitch-mod) (- (-> gp-0 pitch-mod) (the int (* 1524.0 f0-1))))
+            )
+          )
+        )
+      (if (and (logtest? (-> gp-0 flags) 4) (let ((f30-0 (-> gp-0 fo-max)))
+                                              (set! sv-160 vector-vector-distance)
+                                              (let ((a0-11 (ear-trans 0 0))
+                                                    (a1-9 s4-0)
+                                                    )
+                                                (< f30-0 (sv-160 a0-11 a1-9))
+                                                )
+                                              )
+               )
+          (return 0)
+          )
+      (when *debug-effect-control*
+        (set! sv-112 (the-as res-tag sv-128))
+        (set! sv-176 string<-charp)
+        (let ((a0-13 (clear *temp-string*))
+              (a1-10 (the-as (pointer res-tag) (& sv-112)))
+              )
+          (sv-176 a0-13 (the-as (pointer uint8) a1-10))
+          )
+        (format
+          #t
+          "(~5D) effect sound ~A ~S (~S) frame ~F joint ~D "
+          (current-time)
+          (-> this process name)
+          arg0
+          *temp-string*
+          arg1
+          arg2
+          )
+        (format
+          #t
+          "volume: ~f  pitch-mod: ~f~%"
+          (* 0.09765625 (the float (-> gp-0 volume)))
+          (* 0.000656168 (the float (-> gp-0 pitch-mod)))
+          )
+        )
+      (let ((t9-12 make-sound-instance)
+            (a0-17 (-> *sound-info* (-> s5-0 index)))
+            )
+        0
+        (let ((s5-1 (t9-12 (the-as int a0-17))))
+          (cond
+            (s5-1
+              (quad-copy! (the-as pointer s5-1) (the-as pointer gp-0) 4)
+              (set! (-> s5-1 trans quad) (-> s4-0 quad))
+              (logior! (-> s5-1 flags) 96)
+              (-> s5-1 id)
+              )
+            (else
+              0
+              )
+            )
           )
         )
       )
-    (if (or (and (nonzero? (-> (the-as sound-spec gp-0) fo-max))
-                 (let ((f30-0 (* 4096.0 (the float (-> (the-as sound-spec gp-0) fo-max)))))
-                   (set! sv-160 vector-vector-distance)
-                   (let ((a0-8 (ear-trans 0))
-                         (a1-7 s5-0)
-                         )
-                     (< f30-0 (sv-160 a0-8 a1-7))
-                     )
-                   )
-                 )
-            (= (-> (the-as (pointer int8) gp-0) 9) 126)
-            )
-        (return 0)
-        )
-    (when *debug-effect-control*
-      (set! sv-128 s0-0)
-      (string<-charp (clear *temp-string*) (the-as (pointer uint8) (& sv-128)))
-      (format
-        #t
-        "(~5D) effect sound ~A ~S (~S) frame ~F joint ~D "
-        (current-time)
-        (-> this process name)
-        arg0
-        *temp-string*
-        arg1
-        arg2
-        )
-      (format
-        #t
-        "volume: ~f  pitch-mod: ~f~%"
-        (* 0.09765625 (the float (-> (the-as sound-spec gp-0) volume)))
-        (* 0.000656168 (the float (-> (the-as sound-spec gp-0) pitch-mod)))
-        )
-      )
-    (sound-play-by-spec (the-as sound-spec gp-0) (new-sound-id) s5-0)
     )
   0
-  )
-
-(defbehavior target-land-effect target ()
-  (cond
-    ((focus-test? self flut)
-     (do-effect (-> self skel effect) "effect-land-poof" -1.0 -1)
-     (do-effect (-> self skel effect) "effect-flut-land" -1.0 -1)
-     )
-    ((focus-test? self pilot)
-     (sound-play-by-name
-       (sound-name-with-material "zoom-land" (-> self control ground-pat) "")
-       (new-sound-id)
-       (the int (* 1024.0 (/ (-> self control ground-impact-vel) (meters 15))))
-       0
-       0
-       (sound-group)
-       #t
-       )
-     )
-    ((logtest? (water-flag touch-water) (-> self water flags))
-     (do-effect (-> self skel effect) "effect-land-water" -1.0 -1)
-     )
-    (else
-      (do-effect (-> self skel effect) "effect-land-poof" -1.0 -1)
-      (do-effect (-> self skel effect) "effect-land" -1.0 -1)
-      )
-    )
-  0
-  (none)
   )
