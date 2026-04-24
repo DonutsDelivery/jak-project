@@ -39450,6 +39450,30 @@
   "(method 3 ocean)": [
     [79, "a2", "uint"]
   ],
+  // inspect touching-list: op 24 computes (+ gp 8) for touching-shapes address.
+  // The deftype has touching-shapes :offset-assert 16, but binary inspect prints
+  // address at +8. Cast a2 to uint to unblock the "add failed: touching-list <integer 8>" error.
+  "(method 3 touching-list)": [
+    [24, "a2", "uint"]
+  ],
+  // inspect projectile-bounce: op 12 does (l.d 564(gp)) for an undeclared field.
+  // projectile-bounce subtype of projectile has no declared fields but the binary
+  // has played-bounce-time (uint64 at 564), tumble-quat (quat at 572), gravity (float at 588).
+  // Cast a2 to uint64 to unblock the inspect method without modifying the deftype.
+  "(method 3 projectile-bounce)": [
+    [12, "a2", "uint64"]
+  ],
+  // inspect shadow-edge: op 14 does (l.hu 0(gp)) (halfword) but ind-0 is declared uint8.
+  // Binary treats ind-0+ind-1 as combined uint16 for inspect. Cast to uint to unblock.
+  "(method 3 shadow-edge)": [
+    [14, "a2", "uint"]
+  ],
+  // inspect sky-work: op 160 computes (+ gp 1080) for orbit[3] display address.
+  // Deftype notes binary orbit offset is 1080 but decompiler aligns to 1088 (stride 32).
+  // Cast a2 to uint to unblock the "add failed: sky-work <integer 1080>" error.
+  "(method 3 sky-work)": [
+    [160, "a2", "uint"]
+  ],
   "(method 3 talker)": [
     [17, "gp", "talker"]
   ],
@@ -40588,46 +40612,22 @@
   // nav-control methods 16/41/46/47 omitted — range casts on these caused OOM in form-building
   // (nav-control.nav-state is inline, nav-state→nav-control creates a type cycle;
   //  range casts make type_prop succeed then form-builder recurses exponentially)
-  "(method 11 nav-state)": [
-    [1, "a1", "nav-gap-info"]
-  ],
-  "(method 13 nav-control)": [
-    [0, "a0", "nav-control"]
-  ],
+  // DIAG:OOM-test — commenting out all new nav-control/nav-state entries from e290ff6e4
+  // to confirm they are the OOM culprit. nav-link-search-info entries kept (different type).
+  // "(method 11 nav-state)": [ [1, "a1", "nav-gap-info"] ],
+  // "(method 13 nav-control)": [ [0, "a0", "nav-control"] ],
+  // "(method 14 nav-control)": [ [0, "a0", "nav-control"] ],
+  // "(method 24 nav-control)": [ [0, "a0", "nav-control"] ],
+  // "(method 25 nav-control)": [ [0, "a0", "nav-control"] ],
+  // "(method 26 nav-control)": [ [0, "a0", "nav-control"] ],
+  // "(method 27 nav-control)": [ [0, "a0", "nav-control"] ],
+  // "(method 30 nav-control)": [ [1, "a0", "nav-control"] ],
+  // "(method 31 nav-control)": [ [0, "a0", "nav-control"] ],
+  // "(method 43 nav-control)": [ [1, "a0", "nav-control"], [11, "a1", "collide-shape"] ],
+  // "(method 44 nav-control)": [ [4, "a0", "nav-control"] ],
+  // "(method 51 nav-state)": [ [2, "s5", "nav-avoid-spheres-params"] ],
   "(method 13 nav-link-search-info)": [
     [2, "gp", "nav-mesh-link-search-node"]
-  ],
-  "(method 14 nav-control)": [
-    [0, "a0", "nav-control"]
-  ],
-  "(method 24 nav-control)": [
-    [0, "a0", "nav-control"]
-  ],
-  "(method 25 nav-control)": [
-    [0, "a0", "nav-control"]
-  ],
-  "(method 26 nav-control)": [
-    [0, "a0", "nav-control"]
-  ],
-  "(method 27 nav-control)": [
-    [0, "a0", "nav-control"]
-  ],
-  "(method 30 nav-control)": [
-    [1, "a0", "nav-control"]
-  ],
-  "(method 31 nav-control)": [
-    [0, "a0", "nav-control"]
-  ],
-  "(method 43 nav-control)": [
-    [1, "a0", "nav-control"],
-    [11, "a1", "collide-shape"]
-  ],
-  "(method 44 nav-control)": [
-    [4, "a0", "nav-control"]
-  ],
-  // method 51 nav-state: range casts omitted (OOM risk); use single-op e290ff6e4 version
-  "(method 51 nav-state)": [
-    [2, "s5", "nav-avoid-spheres-params"]
   ],
   "(method 9 nav-link-search-info)": [
     [3, "a1", "nav-avoid-spheres-params"]
