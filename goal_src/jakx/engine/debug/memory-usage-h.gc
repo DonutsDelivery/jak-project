@@ -24,7 +24,7 @@
 (deftype memory-usage-block (basic)
   ((work-bsp  basic)
    (length    int32)
-   (data      memory-usage-info  113 :inline)
+   (data      memory-usage-info  112 :inline)
    )
   (:methods
     (reset! (_type_) _type_)

@@ -52,7 +52,7 @@
    (normal       vector  :inline)
    (base-height  meters)
    (depth        meters)
-   (handle       handle)
+   (handle       uint64)
    (flags        water-flag)
    (prim         drawable-region-prim)
    (extra-flags  uint32)

@@ -14,7 +14,7 @@
     (let ((v1-0 (the-as object v0-0)))
       (dotimes (a2-0 bucket-count)
         (set! (-> (the-as dma-bucket v1-0) tag)
-              (new 'static 'dma-tag :id (dma-tag-id next) :addr (the-as int (&+ (the-as pointer v1-0) 16)))
+              (logior #x20000000 (shr (shl (the-as int (&+ (the-as pointer v1-0) 16)) 33) 1))
               )
         (set! (-> (the-as dma-bucket v1-0) last) (the-as (pointer dma-tag) v1-0))
         (set! v1-0 (&+ (the-as pointer v1-0) 16))
@@ -31,7 +31,7 @@
     (dotimes (v1-1 count)
       (cond
         ((= base (-> base last))
-         (set! (-> base tag) (new 'static 'dma-tag :id (dma-tag-id cnt)))
+         (set! (-> base tag) (the-as uint #x10000000))
          (set! (-> base clear) (the-as uint 0))
          0
          )

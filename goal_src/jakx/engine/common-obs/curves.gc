@@ -79,7 +79,7 @@ Not particularly efficient - each evaluation needs to check each point."
    (default-loop-behavior  loop-behavior)
    )
   (:methods
-    (allocate! (_type_ int symbol symbol) none)
+    (allocate! (_type_ int symbol symbol) int)
     (curve2d-piecewise-method-11 (_type_) none)
     )
   )
@@ -135,12 +135,11 @@ Unlike the fast version, this stores x values exactly like you'd expect."
 (set! (-> color-pair-array heap-base) (the-as uint 32))
 
 (deftype curve-color-piecewise (curve-color)
-  "Implementation of curve-color."
   ((pts                    color-pair-array)
    (default-loop-behavior  loop-behavior)
    )
   (:methods
-    (allocate! (_type_ int symbol symbol) none)
+    (allocate! (_type_ int symbol symbol) int)
     )
   )
 
@@ -154,7 +153,6 @@ Unlike the fast version, this stores x values exactly like you'd expect."
                                             )
         )
   0
-  (none)
   )
 
 (defmethod allocate! ((this curve-color-piecewise) (arg0 int) (arg1 symbol) (arg2 symbol))
@@ -166,7 +164,6 @@ Unlike the fast version, this stores x values exactly like you'd expect."
                                             )
         )
   0
-  (none)
   )
 
 (defmethod evaluate ((this curve-color-piecewise) (arg0 float) (arg1 rgbaf) (arg2 loop-behavior))
@@ -458,32 +455,26 @@ Unlike the fast version, this stores x values exactly like you'd expect."
     )
   )
 
-(if #t
-    (set! *curve-unity* (new 'static 'curve2d-fast
-                          :xs (new 'static 'vector :y -1.0 :z -2.0 :w -3.0)
-                          :ys (new 'static 'vector :x 1.0 :y 1.0 :z 2.0 :w 3.0)
-                          :one-over-x-deltas (new 'static 'vector :y 1.0 :z 1.0 :w 1.0)
-                          )
-          )
-    )
+(define *curve-unity* (new 'static 'curve2d-fast
+                        :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+                        :ys (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 2.0 3.0))
+                        :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 1.0 1.0))
+                        )
+        )
 
-(if #t
-    (set! *curve-linear-up* (new 'static 'curve2d-fast
-                              :xs (new 'static 'vector :y -1.0 :z -2.0 :w -3.0)
-                              :ys (new 'static 'vector :y 1.0 :z 2.0 :w 3.0)
-                              :one-over-x-deltas (new 'static 'vector :x 1.0 :y 1.0 :z 1.0 :w 1.0)
+(define *curve-linear-up* (new 'static 'curve2d-fast
+                            :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+                            :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 2.0 3.0))
+                            :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 1.0))
+                            )
+        )
+
+(define *curve-linear-down* (new 'static 'curve2d-fast
+                              :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+                              :ys (new 'static 'vector :data (new 'static 'array float 4 1.0 0.0 1.0 2.0))
+                              :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 -1.0 1.0 1.0 1.0))
                               )
-          )
-    )
-
-(if #t
-    (set! *curve-linear-down* (new 'static 'curve2d-fast
-                                :xs (new 'static 'vector :y -1.0 :z -2.0 :w -3.0)
-                                :ys (new 'static 'vector :x 1.0 :z 1.0 :w 2.0)
-                                :one-over-x-deltas (new 'static 'vector :x -1.0 :y 1.0 :z 1.0 :w 1.0)
-                                )
-          )
-    )
+        )
 
 (when (or (zero? *curve-linear-up-hold*) (!= loading-level global))
   (set! *curve-linear-up-hold* (new 'loading-level 'curve2d-piecewise))
@@ -498,53 +489,48 @@ Unlike the fast version, this stores x values exactly like you'd expect."
 
 (set! (-> *curve-linear-up-hold* pts data 1 second) 1.0)
 
-(if #t
-    (set! *curve-linear-up-down* (new 'static 'curve2d-fast
-                                   :xs (new 'static 'vector :y -0.5 :z -1.0 :w -2.0)
-                                   :ys (new 'static 'vector :y 1.0 :w 1.0)
-                                   :one-over-x-deltas (new 'static 'vector :x 2.0 :y -2.0 :z 1.0 :w 1.0)
-                                   )
-          )
-    )
+(define *curve-linear-up-down* (new 'static 'curve2d-fast
+                                 :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.5 -1.0 -2.0))
+                                 :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.0 1.0))
+                                 :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 2.0 -2.0 1.0 1.0))
+                                 )
+        )
 
-(if #t
-    (set! *trail-color-curve-white* (new 'static 'curve-color-fast
-                                      :xs (new 'static 'vector :y -1.0 :z -2.0 :w -3.0)
-                                      :ys (new 'static 'inline-array vector 4
-                                        (new 'static 'vector :x 1.0 :y 1.0 :z 1.0 :w 128.0)
-                                        (new 'static 'vector :x 1.0 :y 1.0 :z 1.0 :w 128.0)
-                                        (new 'static 'vector :x 1.0 :y 1.0 :z 1.0 :w 128.0)
-                                        (new 'static 'vector :x 1.0 :y 1.0 :z 1.0 :w 128.0)
-                                        )
-                                      :one-over-x-deltas (new 'static 'vector :x 1.0 :y 1.0 :z 1.0 :w 1.0)
-                                      )
-          )
+(define *trail-color-curve-white*
+  (new 'static 'curve-color-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'inline-array vector 4
+      (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 128.0))
+      )
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 1.0))
     )
+  )
 
-(if #t
-    (set! particle-color-curve-white* (new 'static 'curve-color-fast
-                                        :xs (new 'static 'vector :y -1.0 :z -2.0 :w -3.0)
-                                        :ys (new 'static 'inline-array vector 4
-                                          (new 'static 'vector :x 128.0 :y 128.0 :z 128.0 :w 128.0)
-                                          (new 'static 'vector :x 128.0 :y 128.0 :z 128.0 :w 128.0)
-                                          (new 'static 'vector :x 128.0 :y 128.0 :z 128.0 :w 128.0)
-                                          (new 'static 'vector :x 128.0 :y 128.0 :z 128.0 :w 128.0)
-                                          )
-                                        :one-over-x-deltas (new 'static 'vector :x 1.0 :y 1.0 :z 1.0 :w 1.0)
-                                        )
-          )
+(define particle-color-curve-white*
+  (new 'static 'curve-color-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'inline-array vector 4
+      (new 'static 'vector :data (new 'static 'array float 4 128.0 128.0 128.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 128.0 128.0 128.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 128.0 128.0 128.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 128.0 128.0 128.0 128.0))
+      )
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 1.0))
     )
+  )
 
-(if #t
-    (set! *trail-color-curve-red* (new 'static 'curve-color-fast
-                                    :xs (new 'static 'vector :y -0.2 :z -1.0 :w -2.0)
-                                    :ys (new 'static 'inline-array vector 4
-                                      (new 'static 'vector :x 1.0 :y 0.3 :w 128.0)
-                                      (new 'static 'vector :x 1.0 :w 128.0)
-                                      (new 'static 'vector :x 1.0 :w 128.0)
-                                      (new 'static 'vector :x 1.0 :w 128.0)
-                                      )
-                                    :one-over-x-deltas (new 'static 'vector :x 5.0 :y 1.25 :z 1.0 :w 1.0)
-                                    )
-          )
+(define *trail-color-curve-red*
+  (new 'static 'curve-color-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.2 -1.0 -2.0))
+    :ys (new 'static 'inline-array vector 4
+      (new 'static 'vector :data (new 'static 'array float 4 1.0 0.3 0.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 1.0 0.0 0.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 1.0 0.0 0.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 1.0 0.0 0.0 128.0))
+      )
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 5.0 1.25 1.0 1.0))
     )
+  )

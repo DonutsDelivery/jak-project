@@ -21,7 +21,6 @@
       )
     )
   0
-  (none)
   )
 
 (defmethod unpack-vis ((this drawable-tree-collide-fragment) (arg0 (pointer int8)) (arg1 (pointer int8)))
@@ -31,8 +30,8 @@
 ;; WARN: Return type mismatch int vs collide-fragment.
 (defmethod mem-usage ((this collide-fragment) (usage memory-usage-block) (flags int))
   (let ((s5-0 (if (logtest? flags 1)
-                  55
-                  51
+                  54
+                  50
                   )
               )
         (s4-0 (-> this mesh))
@@ -70,7 +69,6 @@
   "Draw the drawable, and typically its children.
    This usually means adding stuff to a list to be drawn later, rather than expensive drawing here."
   0
-  (none)
   )
 
 (defmethod draw ((this drawable-inline-array-collide-fragment))
@@ -84,7 +82,6 @@
       )
     )
   0
-  (none)
   )
 
 (defmethod mem-usage ((this drawable-inline-array-collide-fragment) (usage memory-usage-block) (flags int))

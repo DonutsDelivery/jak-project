@@ -23,7 +23,6 @@
     (set! *redline-index* 0)
     0
     )
-  (none)
   )
 
 (defun float-lookup-redline ((arg0 float))
@@ -43,7 +42,6 @@
     (set! *blueline-index* 0)
     0
     )
-  (none)
   )
 
 (defun float-lookup-blueline ((arg0 float))
@@ -63,7 +61,6 @@
     (set! *greenline-index* 0)
     0
     )
-  (none)
   )
 
 (defun float-lookup-greenline ((arg0 float))
@@ -83,7 +80,6 @@
     (set! *yellowline-index* 0)
     0
     )
-  (none)
   )
 
 (defun float-lookup-yellowline ((arg0 float))
@@ -103,7 +99,6 @@
     (set! *timeplot-index* 0)
     0
     )
-  (none)
   )
 
 (defun float-lookup-timeplot ((arg0 float))

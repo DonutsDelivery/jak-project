@@ -8,44 +8,61 @@
 ;; DECOMP BEGINS
 
 (defun cam-stop ()
-  (kill-by-name "camera-master" *active-pool*)
-  (kill-by-name "camera-slave" *active-pool*)
-  (kill-by-name "camera-combiner" *active-pool*)
-  (set! *camera* #f)
-  (set! *camera-combiner* #f)
-  #f
+  (when (view-get-active-camera)
+    (deactivate (view-get-active-camera))
+    (view-set-active-camera (the-as camera-master #f))
+    )
+  (when (view-get-active-camera-combiner)
+    (deactivate (view-get-active-camera-combiner))
+    (view-set-active-camera-combiner (the-as camera-combiner #f))
+    )
+  0
   )
 
 (defun cam-start ((arg0 symbol))
   (cam-stop)
-  (set! *camera-combiner* (the-as camera-combiner (ppointer->process (process-spawn
-                                                                       camera-combiner
-                                                                       :init cam-combiner-init
-                                                                       :name "camera-combiner"
-                                                                       :from *camera-dead-pool*
-                                                                       :to *camera-pool*
-                                                                       )
-                                                                     )
-                                                  )
-        )
-  (set! *camera* (the-as camera-master (ppointer->process (process-spawn
-                                                            camera-master
-                                                            :init cam-master-init
-                                                            :name "camera-master"
-                                                            :from *camera-master-dead-pool*
-                                                            :to *camera-pool*
-                                                            )
-                                                          )
-                                       )
-        )
+  (let* ((s5-0 view-set-active-camera-combiner)
+         (s4-0 (get-process *camera-dead-pool* camera-combiner #x4000 1))
+         (a0-4 (ppointer->process
+                 (when s4-0
+                   (let ((t9-2 (method-of-type camera-combiner activate)))
+                     (t9-2 (the-as camera-combiner s4-0) *camera-pool* "camera-combiner" (the-as pointer #x70004000))
+                     )
+                   (run-now-in-process s4-0 cam-combiner-init)
+                   (-> s4-0 ppointer)
+                   )
+                 )
+               )
+         )
+    (s5-0 (the-as camera-combiner a0-4))
+    )
+  (let* ((s5-1 view-set-active-camera)
+         (s4-1 (get-process *camera-master-dead-pool* camera-master #x4000 1))
+         (a0-8 (ppointer->process
+                 (when s4-1
+                   (let ((t9-6 (method-of-type camera-master activate)))
+                     (t9-6 (the-as camera-master s4-1) *camera-pool* "camera-master" (the-as pointer #x70004000))
+                     )
+                   (run-now-in-process s4-1 cam-master-init)
+                   (-> s4-1 ppointer)
+                   )
+                 )
+               )
+         )
+    (s5-1 (the-as camera-master a0-8))
+    )
   (if arg0
       (reset-cameras)
       )
   0
-  (none)
   )
 
-;; og:preserve-this — cam-start spawns camera-master/combiner processes whose
-;; inits crash on #f globals during early jakx bringup. Skipping for now.
-;; (cam-start #f)
-
+(dotimes (gp-0 2)
+  (view-push-context gp-0)
+  (let ((t9-1 cam-start)
+        (a0-1 #f)
+        )
+    (t9-1 a0-1)
+    (view-pop-context (the-as int a0-1))
+    )
+  )
