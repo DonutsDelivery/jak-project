@@ -41001,5 +41001,50 @@
   ],
   "vis-cull-all?": [
     [3, "a0", "basic"]
+  ],
+  "(method 106 net-player-boss-battle)": [
+    [0, "v1", "float"]
+  ],
+  "(method 3 collide-shape-moving)": [
+    [157, "a2", "float"]
+  ],
+  "(method 3 fact-info)": [
+    [19, "s2", "process"]
+  ],
+  "(method 3 fact-info-crate)": [
+    [19, "s2", "process"]
+  ],
+  "(method 3 fact-info-enemy)": [
+    [19, "s2", "process"]
+  ],
+  "(method 3 part-tracker-init-params)": [
+    [24, "a2", "time-frame"]
+  ],
+  "(method 53 gunmount-drawable)": [
+    [0, "v1", "cspace-array"]
+  ],
+  "(method 9 sparticle-launcher)": [
+    [2, "a3", "float"]
+  ],
+  "(method 9 spring-tracker)": [
+    [0, "f0", "float"]
+  ],
+  "(method 92 net-player-deathrace)": [
+    [0, "v1", "float"]
+  ],
+  "(method 92 net-player-rushhour)": [
+    [0, "v1", "float"]
+  ],
+  "(method 93 net-player-deathrace)": [
+    [0, "v1", "float"]
+  ],
+  "(method 93 net-player-rushhour)": [
+    [0, "v1", "float"]
+  ],
+  "(method 94 net-player-deathrace)": [
+    [0, "v1", "float"]
+  ],
+  "(method 94 net-player-rushhour)": [
+    [0, "v1", "float"]
   ]
 }
