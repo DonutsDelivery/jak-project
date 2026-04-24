@@ -1998,7 +1998,13 @@
     "(method 24 hud-player-indicators)",
     // source: hud-widgets-powerhang
     "(method 19 hud-item-power-slide-distance)",
-    "(method 19 hud-item-power-slide-distance-tenths)"
+    "(method 19 hud-item-power-slide-distance-tenths)",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: hud-classes
+    "(method 26 hud-map)",
+    // source: hud-widgets-powerhang
+    "(method 19 hud-item-hang-time-seconds)",
+    "(method 19 hud-item-hang-time-tenths-seconds)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
