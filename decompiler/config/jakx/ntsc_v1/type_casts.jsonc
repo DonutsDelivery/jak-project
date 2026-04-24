@@ -41109,5 +41109,40 @@
   ],
   "set-alpha-texture-anim-layer-func": [
     [96, "s4", "vector"]
+  ],
+  // split_store_fix: jak3→jakx type-cast copy (Failed store fix) 2026-04-24
+  "(method 10 profile-array)": [
+    [[69, 73], "a0", "(pointer uint128)"],
+    [[73, 82], "a1", "vector4w"],
+    [[82, 89], "a1", "vector4w"],
+    [[90, 96], "a0", "vector4w"],
+    [[113, 117], "a1", "(pointer uint128)"],
+    [[117, 126], "a2", "vector4w"],
+    [[126, 136], "a2", "vector4w"],
+    [[137, 149], "a1", "vector4w"],
+    [[187, 191], "t2", "(pointer int128)"],
+    [[191, 225], "t4", "vector4w"],
+    [[225, 231], "a2", "vector4w"],
+    [[231, 237], "a2", "vector4w"]
+  ],
+  "(method 33 ocean)": [
+    [[52, 60], "a0", "dma-packet"],
+    [[63, 67], "v1", "vector4w"],
+    [[93, 232], "v1", "(inline-array vector4w)"],
+    [[245, 253], "a0", "dma-packet"]
+  ],
+  "texture-anim-layer-add-clut-shader": [
+    [[23, 30], "a3", "dma-packet"],
+    [[32, 39], "a3", "gs-gif-tag"],
+    [49, "a1", "(pointer gs-tex0)"],
+    [51, "a1", "(pointer gs-reg64)"],
+    [52, "a1", "(pointer gs-tex1)"],
+    [54, "a1", "(pointer gs-reg64)"],
+    [56, "a1", "(pointer gs-test)"],
+    [58, "a1", "(pointer gs-reg64)"],
+    [60, "a1", "(pointer gs-clamp)"],
+    [62, "a1", "(pointer gs-reg64)"],
+    [64, "a1", "(pointer gs-alpha)"],
+    [66, "a1", "(pointer gs-reg64)"]
   ]
 }
