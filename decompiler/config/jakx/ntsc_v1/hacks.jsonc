@@ -2298,7 +2298,14 @@
     // source: net-mgr-dme
     "lan-game-find-callback",
     "net-app-msg-callback",
-    "net-sys-msg-callback"
+    "net-sys-msg-callback",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-mgr-dme
+    "dme-token-callback",
+    "remote-client-connect-callback",
+    "remote-client-disconnect-callback",
+    "remote-client-event-callback",
+    "session-master-change-callback"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
