@@ -7,59 +7,48 @@ mips2c_functions_by_name in hacks.jsonc.  When present, run_mips2c() is
 called on the MIPS bytecode, sets func.mips2c_output, and the decompiler
 emits INFO + a rough C++ translation instead of the ERROR marker.
 
-asm_functions_by_name does NOT suppress this error (172 entries, all still
-ERROR) — only mips2c_functions_by_name works.
+asm_functions_by_name does NOT suppress this error — only mips2c_functions_by_name works.
 
-VU-crash risk: functions with vsqi/viaddi/vlqi/viand opcodes will crash
-run_mips2c.  Only ripple.gc contains those in this build; those functions
-are skipped automatically.
+VU-crash risk: functions with vsqi/viaddi/vlqi/viand/vmtirx/mtlo1/mflo1/
+mula.s/madda.s/madd.s opcodes will crash run_mips2c via an InstructionAtom::get_imm
+assertion. The scanner checks per-function (not per-file) so only the specific
+function bodies containing crash opcodes are skipped — safe functions in VU-heavy
+files are still candidates.
 
-# REGRESSION GATE (applies to all bulk-edit applier scripts)
-#
-# Pattern enforced: before writing config changes, snapshot the current
-# "not converted" error count from status.md.  After writing and re-running
-# the decompiler (--check flag), compare.  If Δerr > 0, revert the file
-# and exit non-zero.  A positive Δerr means we made things WORSE — abort.
-#
-# Why count "not converted" specifically? It's the direct target for this
-# applier. Other error categories (unset register, load fail, etc.) are
-# orthogonal and may fluctuate independently of our edits.
-#
-# Propagate this pattern to every other applier that edits config jsoncs:
-#   - return_mismatch_apply.py: gate on WARN "Return type mismatch" count
-#   - inspect_to_type_casts.py: gate on "failed type prop" count
-# Same structure: snapshot → edit → re-run → compare → revert if positive.
+Gate: apply_guard.run_with_guard() runs the full decompiler after applying and
+reverts hacks.jsonc if total errors increase. Use --commit to auto-commit on pass.
 
 Usage:
     python3 scripts/jakx_watch/asm_func_apply.py --dry-run
     python3 scripts/jakx_watch/asm_func_apply.py --apply
-    python3 scripts/jakx_watch/asm_func_apply.py --apply --batch-size 50
-    python3 scripts/jakx_watch/asm_func_apply.py --apply --check
+    python3 scripts/jakx_watch/asm_func_apply.py --apply --batch-size 50 --commit
+    python3 scripts/jakx_watch/asm_func_apply.py --apply --skip-asm
 
 Options:
-    --dry-run      Print candidates without modifying hacks.jsonc (default)
-    --apply        Write candidates to mips2c_functions_by_name
-    --batch-size N Cap the number of new entries added (default: all)
-    --skip-asm     Skip functions already in asm_functions_by_name (more cautious)
-    --only-asm     Only process functions already in asm_functions_by_name
-    --decomp-out   Override decomp_out directory
-    --check        After applying, re-run the decompiler and gate on Δerr.
-                   If "not converted" count increases, revert hacks.jsonc and exit 1.
+    --dry-run        Print candidates without modifying hacks.jsonc (default)
+    --apply          Write candidates to mips2c_functions_by_name and run guard
+    --batch-size N   Cap the number of new entries added (default: all)
+    --skip-asm       Skip functions already in asm_functions_by_name (more cautious)
+    --only-asm       Only process functions already in asm_functions_by_name
+    --decomp-out     Override decomp_out directory
+    --commit         Auto-commit if guard passes (no errors added)
 """
 from __future__ import annotations
 
 import argparse
 import re
-import subprocess
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+from apply_guard import run_with_guard  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 DECOMP_OUT_PRIMARY = ROOT / ".jakx_watch" / "decomp_out" / "jakx"
 DECOMP_OUT_FALLBACK = ROOT / "decompiler_out" / "jakx"
 HACKS_JSONC = ROOT / "decompiler" / "config" / "jakx" / "ntsc_v1" / "hacks.jsonc"
 
-# Opcodes that crash run_mips2c — skip any file containing these.
+# Opcodes that crash run_mips2c — skip any FUNCTION body containing these.
 # VU: vsqi/viaddi/vlqi/viand/vmtirx
 # PS2 extended FPU/MAC: mtlo1/mflo1 (extended accumulator), mula.s/madda.s/madd.s
 # (these crash get_imm() via InstructionAtom::get_imm assertion)
@@ -70,34 +59,7 @@ VU_CRASH_OPCODES = re.compile(
 RE_DEF_FUNCTION = re.compile(r"^;; definition for function ([\w<>!?:\-\+\*/=]+)")
 RE_DEF_METHOD = re.compile(r"^;; definition for method (\d+) of type ([\w<>!?:\-\+\*/=]+)")
 RE_NOT_CONVERTED = re.compile(r"^;; ERROR: function was not converted to expressions\.")
-
-
-STATUS_MD = ROOT / ".jakx_watch" / "status.md"
-RE_NOT_CONVERTED_COUNT = re.compile(
-    r"^\s*(\d+)\s+function was not converted to expressions\."
-)
-
-
-def read_not_converted_count() -> int | None:
-    """Parse the 'not converted' error count from status.md top-8 ERROR table."""
-    if not STATUS_MD.exists():
-        return None
-    for line in STATUS_MD.read_text().splitlines():
-        m = RE_NOT_CONVERTED_COUNT.match(line)
-        if m:
-            return int(m.group(1))
-    return None
-
-
-def run_scanner() -> int:
-    """Run scripts/jakx_watch/run.sh with JAKX_WATCH_FORCE=1 and return exit code."""
-    env = {**__import__("os").environ, "JAKX_WATCH_FORCE": "1", "JAKX_WATCH_WAIT": "1"}
-    result = subprocess.run(
-        ["bash", str(ROOT / "scripts" / "jakx_watch" / "run.sh")],
-        env=env,
-        cwd=ROOT,
-    )
-    return result.returncode
+RE_IR2_FUNC_HEADER = re.compile(r"^; \.function\s+(.+)")
 
 
 def pick_decomp_dir(override: str | None) -> Path:
@@ -106,34 +68,75 @@ def pick_decomp_dir(override: str | None) -> Path:
     return DECOMP_OUT_PRIMARY if DECOMP_OUT_PRIMARY.exists() else DECOMP_OUT_FALLBACK
 
 
-def scan_vu_files(decomp_dir: Path) -> set[str]:
-    """Return set of source file basenames (no extension) that contain VU opcodes."""
-    vu_files: set[str] = set()
-    for ir2_asm in decomp_dir.glob("*_ir2.asm"):
-        try:
-            text = ir2_asm.read_text(errors="replace")
-        except OSError:
-            continue
-        if VU_CRASH_OPCODES.search(text):
-            # Extract the source file name (strip _ir2.asm suffix)
-            stem = ir2_asm.name[: -len("_ir2.asm")]
-            vu_files.add(stem)
-    return vu_files
+# ---------------------------------------------------------------------------
+# Per-function VU crash opcode scanner
+# ---------------------------------------------------------------------------
 
 
-def parse_not_converted(decomp_dir: Path, vu_files: set[str]) -> list[tuple[str, str]]:
-    """Parse disasm files and return list of (mips2c_key, source_file) for not-converted fns.
+def scan_vu_functions(decomp_dir: Path) -> dict[str, set[str]]:
+    """Return {file_stem: {fn_key, ...}} for functions containing VU crash opcodes.
 
-    mips2c_key format:
+    Checks each function body individually rather than skipping entire files.
+    fn_key format matches parse_not_converted output:
       - plain function: "function-name"
       - method: "(method N typename)"
+    """
+    result: dict[str, set[str]] = {}
+
+    for ir2_asm in sorted(decomp_dir.glob("*_ir2.asm")):
+        stem = ir2_asm.name[: -len("_ir2.asm")]
+        text = ir2_asm.read_text(errors="replace")
+        lines = text.splitlines()
+
+        vu_fns: set[str] = set()
+        current_fn: str | None = None
+        current_body: list[str] = []
+
+        def _flush() -> None:
+            if current_fn and VU_CRASH_OPCODES.search("\n".join(current_body)):
+                vu_fns.add(current_fn)
+
+        for line in lines:
+            m = RE_IR2_FUNC_HEADER.match(line)
+            if m:
+                _flush()
+                label = m.group(1).strip()
+                # Only track plain functions and (method N type) — skip (top-level-login …)
+                if label.startswith("(method ") or not label.startswith("("):
+                    current_fn = label
+                else:
+                    current_fn = None
+                current_body = []
+            elif current_fn is not None:
+                current_body.append(line)
+
+        _flush()
+
+        if vu_fns:
+            result[stem] = vu_fns
+
+    return result
+
+
+# ---------------------------------------------------------------------------
+# Not-converted candidate scanner
+# ---------------------------------------------------------------------------
+
+
+def parse_not_converted(
+    decomp_dir: Path,
+    vu_functions: dict[str, set[str]],
+) -> list[tuple[str, str]]:
+    """Parse disasm files and return list of (mips2c_key, source_file).
+
+    Skips only functions whose specific body contains VU crash opcodes,
+    NOT entire files that happen to contain any VU opcode anywhere.
     """
     results: list[tuple[str, str]] = []
 
     for disasm_gc in sorted(decomp_dir.glob("*_disasm.gc")):
         stem = disasm_gc.name[: -len("_disasm.gc")]
-        if stem in vu_files:
-            continue  # skip VU-crash files
+        vu_in_file = vu_functions.get(stem, set())
 
         try:
             text = disasm_gc.read_text(errors="replace")
@@ -161,11 +164,17 @@ def parse_not_converted(decomp_dir: Path, vu_files: set[str]) -> list[tuple[str,
 
             if RE_NOT_CONVERTED.match(line):
                 if last_def is not None and (lineno - last_def_line) <= 6:
-                    results.append((last_def, stem))
+                    if last_def not in vu_in_file:
+                        results.append((last_def, stem))
                 last_def = None
                 last_def_line = -1
 
     return results
+
+
+# ---------------------------------------------------------------------------
+# hacks.jsonc parsers
+# ---------------------------------------------------------------------------
 
 
 def load_existing_mips2c(hacks_text: str) -> set[str]:
@@ -208,15 +217,15 @@ def load_existing_asm(hacks_text: str) -> set[str]:
     return entries
 
 
-def apply_to_hacks(hacks_text: str, new_entries: list[tuple[str, str]]) -> str:
-    """Insert new entries into mips2c_functions_by_name and return modified text.
+# ---------------------------------------------------------------------------
+# hacks.jsonc writer
+# ---------------------------------------------------------------------------
 
-    Strategy: find the last real (non-comment) entry before the closing ']',
-    add a comma after it, then append the new entries with a comment header.
-    """
+
+def apply_to_hacks(hacks_text: str, new_entries: list[tuple[str, str]]) -> str:
+    """Insert new entries into mips2c_functions_by_name and return modified text."""
     lines = hacks_text.splitlines(keepends=True)
 
-    # Find the mips2c_functions_by_name block end (closing ']')
     mips2c_start = -1
     for i, line in enumerate(lines):
         if '"mips2c_functions_by_name"' in line:
@@ -225,7 +234,6 @@ def apply_to_hacks(hacks_text: str, new_entries: list[tuple[str, str]]) -> str:
     if mips2c_start < 0:
         raise ValueError("mips2c_functions_by_name not found in hacks.jsonc")
 
-    # Find closing ']' after mips2c_start
     close_bracket_line = -1
     for i in range(mips2c_start + 1, len(lines)):
         stripped = lines[i].strip()
@@ -235,56 +243,53 @@ def apply_to_hacks(hacks_text: str, new_entries: list[tuple[str, str]]) -> str:
     if close_bracket_line < 0:
         raise ValueError("Could not find closing ] for mips2c_functions_by_name")
 
-    # Find the last non-comment, non-empty entry before close_bracket_line
     last_entry_line = -1
     for i in range(close_bracket_line - 1, mips2c_start, -1):
         stripped = lines[i].strip()
         if stripped and not stripped.startswith("//") and not stripped.startswith("/*"):
-            # Check if this line contains a quoted string (actual entry)
             if re.search(r'"[^"]+"', stripped):
                 last_entry_line = i
                 break
 
     if last_entry_line >= 0:
-        # Ensure the last entry has a comma
         last_line = lines[last_entry_line].rstrip("\n\r")
         if not last_line.rstrip().endswith(","):
             lines[last_entry_line] = last_line.rstrip() + ",\n"
 
-    # Build new lines to insert before the closing bracket
     timestamp = __import__("datetime").date.today().isoformat()
     new_lines = [f"    // asm-func: auto-added by asm_func_apply.py {timestamp}\n"]
 
-    # Group by source file for readable output
     by_file: dict[str, list[str]] = {}
     for key, src in new_entries:
         by_file.setdefault(src, []).append(key)
 
-    entries_written = 0
     for src in sorted(by_file):
         new_lines.append(f"    // source: {src}\n")
         for key in sorted(by_file[src]):
-            entries_written += 1
             new_lines.append(f'    "{key}",\n')
 
-    # Remove trailing comma on the very last added entry (keep JSON valid)
     if new_lines:
         last_new = new_lines[-1].rstrip()
         if last_new.endswith(","):
             new_lines[-1] = last_new[:-1] + "\n"
 
-    # Insert before closing bracket
     lines[close_bracket_line:close_bracket_line] = new_lines
 
     return "".join(lines)
 
 
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--dry-run", action="store_true", default=True,
                         help="Print candidates without modifying hacks.jsonc (default)")
     parser.add_argument("--apply", action="store_true",
-                        help="Write candidates to mips2c_functions_by_name")
+                        help="Write candidates to mips2c_functions_by_name and run guard")
     parser.add_argument("--batch-size", type=int, default=0,
                         help="Cap new entries at N (0 = unlimited)")
     parser.add_argument("--skip-asm", action="store_true",
@@ -293,9 +298,8 @@ def main() -> int:
                         help="Only process functions already in asm_functions_by_name")
     parser.add_argument("--decomp-out", default=None,
                         help="Override decomp_out directory path")
-    parser.add_argument("--check", action="store_true",
-                        help="After applying, re-run the decompiler and gate on Δerr. "
-                             "If 'not converted' count increases, revert and exit 1.")
+    parser.add_argument("--commit", action="store_true",
+                        help="Auto-commit if guard passes (no errors added)")
     args = parser.parse_args()
 
     if args.apply:
@@ -312,55 +316,50 @@ def main() -> int:
 
     print(f"decomp_out: {decomp_dir}")
 
-    # Step 1: identify VU-crash files
-    vu_files = scan_vu_files(decomp_dir)
-    if vu_files:
-        print(f"VU-crash files (skipped): {sorted(vu_files)}")
+    # Step 1: per-function VU crash opcode scan
+    print("Scanning for VU crash opcodes per function ...")
+    vu_functions = scan_vu_functions(decomp_dir)
+    total_vu_fns = sum(len(v) for v in vu_functions.values())
+    print(f"  {total_vu_fns} functions with VU opcodes across {len(vu_functions)} files (skipped)")
 
-    # Step 2: parse 'not converted' functions from disasm files
-    candidates = parse_not_converted(decomp_dir, vu_files)
-    print(f"Total 'not converted' candidates: {len(candidates)}")
+    # Step 2: parse 'not converted' functions
+    candidates = parse_not_converted(decomp_dir, vu_functions)
+    print(f"  {len(candidates)} 'not converted' candidates (VU-safe)")
 
     # Step 3: load existing sets from hacks.jsonc
     hacks_text = HACKS_JSONC.read_text()
     existing_mips2c = load_existing_mips2c(hacks_text)
     existing_asm = load_existing_asm(hacks_text)
 
-    print(f"Already in mips2c_functions_by_name: {len(existing_mips2c)}")
-    print(f"Currently in asm_functions_by_name: {len(existing_asm)}")
+    print(f"  Already in mips2c_functions_by_name: {len(existing_mips2c)}")
+    print(f"  Currently in asm_functions_by_name:  {len(existing_asm)}")
 
     # Step 4: filter
     new_entries: list[tuple[str, str]] = []
-    skipped_mips2c = 0
-    skipped_asm_filter = 0
-
     for key, src in candidates:
         if key in existing_mips2c:
-            skipped_mips2c += 1
             continue
         is_asm = key in existing_asm
         if args.skip_asm and is_asm:
-            skipped_asm_filter += 1
             continue
         if args.only_asm and not is_asm:
             continue
         new_entries.append((key, src))
 
-    print(f"Skipped (already mips2c): {skipped_mips2c}")
-    if args.skip_asm:
-        print(f"Skipped (in asm_functions_by_name, --skip-asm): {skipped_asm_filter}")
-    print(f"New candidates to add: {len(new_entries)}")
+    already_mips2c = len(candidates) - len(new_entries)
+    print(f"  Skipped (already mips2c): {already_mips2c}")
+    print(f"  New candidates to add:    {len(new_entries)}")
 
     # Step 5: apply batch size cap
     if args.batch_size > 0 and len(new_entries) > args.batch_size:
-        print(f"Capping at --batch-size {args.batch_size}")
+        print(f"  Capping at --batch-size {args.batch_size}")
         new_entries = new_entries[: args.batch_size]
 
     if not new_entries:
         print("Nothing to add.")
         return 0
 
-    # Step 6: print or apply
+    # Step 6: print candidates
     print()
     print(f"{'DRY-RUN: would add' if args.dry_run else 'Adding'} {len(new_entries)} entries:")
     by_file: dict[str, list[str]] = {}
@@ -369,55 +368,48 @@ def main() -> int:
     for src in sorted(by_file):
         print(f"  [{src}]")
         for key in sorted(by_file[src]):
-            marker = "(asm)" if key in existing_asm else ""
-            print(f"    {key!r}  {marker}")
+            marker = " (asm)" if key in existing_asm else ""
+            print(f"    {key!r}{marker}")
 
     if args.dry_run:
         print()
-        print("Run with --apply to write to hacks.jsonc.")
+        print("Run with --apply to write to hacks.jsonc and gate via apply_guard.")
         return 0
 
-    # Apply
-    baseline_count = read_not_converted_count() if args.check else None
-    if args.check and baseline_count is not None:
-        print(f"Regression gate: baseline 'not converted' = {baseline_count}")
+    # Step 7: apply via guard
+    n = len(new_entries)
+    commit_msg = (
+        f"fix(jakx/hacks): mips2c-suppress {n} not-converted fns\n\n"
+        f"Per-function VU opcode filter; {n} entries added.\n\n"
+        f"Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+    )
 
-    new_text = apply_to_hacks(hacks_text, new_entries)
-    HACKS_JSONC.write_text(new_text)
-    print()
-    print(f"Written {len(new_entries)} new entries to {HACKS_JSONC.relative_to(ROOT)}")
+    def do_apply() -> list[Path]:
+        new_text = apply_to_hacks(hacks_text, new_entries)
+        HACKS_JSONC.write_text(new_text)
+        return [HACKS_JSONC]
 
-    if not args.check:
-        print("Next: JAKX_WATCH_WAIT=1 bash scripts/jakx_watch/run.sh")
-        return 0
+    print(f"\nApplying {n} entries via apply_guard ...")
+    result = run_with_guard(
+        do_apply,
+        label=f"asm-func/{n}-entries",
+        err_slack=0,
+        warn_slack=5,
+        commit_on_pass=args.commit,
+        commit_message=commit_msg,
+    )
 
-    # Regression gate: re-run scanner and compare counts
-    print()
-    print("Running decompiler scanner for regression gate (this takes a few minutes)…")
-    rc = run_scanner()
-    if rc != 0:
-        print(f"WARNING: run.sh exited {rc} — regression gate result may be unreliable")
-
-    new_count = read_not_converted_count()
-    if new_count is None:
-        print("WARNING: Could not read updated 'not converted' count from status.md")
-        return 0
-
-    delta = new_count - (baseline_count or 0)
-    print(f"Regression gate: after = {new_count}  Δ = {delta:+d}")
-
-    if delta > 0:
-        # Revert the hacks.jsonc change
-        print()
-        print(f"REGRESSION DETECTED (+{delta} 'not converted'). Reverting hacks.jsonc.")
-        HACKS_JSONC.write_text(hacks_text)
-        print("hacks.jsonc restored to pre-apply state.")
-        print("Investigate which entries caused the regression, then retry with --batch-size.")
+    if not result.passed:
+        print(f"✗ Guard failed: {result.reason}", file=sys.stderr)
         return 1
 
-    print(f"Gate PASSED (Δ = {delta:+d}). Changes are safe to commit.")
-    print(f"  git add {HACKS_JSONC.relative_to(ROOT)} && git commit -m "
-          f'"fix(jakx/hacks): mips2c-suppress not-converted fns (Δerr {delta:+d})"')
+    print(f"✓ Δerr={result.delta_err:+d}  Δwarn={result.delta_warn:+d}")
+    if args.commit:
+        if result.commit_sha:
+            print(f"  Committed as {result.commit_sha}.")
+        else:
+            print("  (commit_sha not available)")
+
     return 0
 
 
