@@ -1875,7 +1875,14 @@
     "mem-alloc-lgaud",
     "mem-alloc-nelly",
     "mem-free-nelly",
-    "mem-realloc-nelly"
+    "mem-realloc-nelly",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: collision-editor
+    "collision-editor-default-proc-init-by-other",
+    "collision-editor-edited-proc-init-by-other",
+    "collision-editor-init-by-other",
+    // source: default-menu
+    "dm-subdiv-float"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
