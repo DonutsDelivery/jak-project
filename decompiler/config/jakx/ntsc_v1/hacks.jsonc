@@ -2187,7 +2187,13 @@
     "aux-voice-client-disconnect-callback",
     "aux-voice-local-connect-callback",
     "aux-voice-local-disconnect-callback",
-    "aux-voice-mgr-default-handler"
+    "aux-voice-mgr-default-handler",
+    // asm-func: auto-added by asm_func_apply.py 2026-04-24
+    // source: net-game-mgr
+    "(method 35 net-game-mgr)",
+    "(method 51 net-game-mgr)",
+    "(method 56 net-game-mgr)",
+    "(method 7 net-game-mgr)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
