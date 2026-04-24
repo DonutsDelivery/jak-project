@@ -37061,25 +37061,21 @@
 
 
 
-#|
-(deftype default-interior-states (UNKNOWN)
+(deftype default-interior-states (structure)
   ()
-  :method-count-assert 0
-  :size-assert         #x0
-  :flag-assert         #x0
   )
-|#
 
 
 
-#|
-(deftype hiphog-states (UNKNOWN)
-  ()
-  :method-count-assert 0
-  :size-assert         #x0
-  :flag-assert         #x0
+(deftype hiphog-states (structure)
+  ((door                entity  :offset-assert 0) ;; guessed by decompiler
+   (door-current-interp float   :offset-assert 4)
+   (door-target-interp  float   :offset-assert 8)
+   )
+  :method-count-assert 9
+  :size-assert         #xc
+  :flag-assert         #x90000000c
   )
-|#
 
 
 (define-extern init-mood-fog-default (function none))
@@ -42036,7 +42032,7 @@
     (net-process-mgr-method-26 () none) ;; 26
     (net-process-mgr-method-27 () none) ;; 27
     (net-process-mgr-method-28 () none) ;; 28
-    (net-process-mgr-method-29 () int) ;; 29
+    (net-process-mgr-method-29 () none) ;; 29 ;; DIAG: reverted int (2c8f33261) for OOM investigation
     (net-process-mgr-method-30 () none) ;; 30
     (net-process-mgr-method-31 () none) ;; 31
     (net-process-mgr-method-32 () none) ;; 32
@@ -42045,27 +42041,27 @@
     (net-process-mgr-method-35 () none) ;; 35
     (net-process-mgr-method-36 () none) ;; 36
     (net-process-mgr-method-37 () none) ;; 37
-    (net-process-mgr-method-38 () symbol) ;; 38
+    (net-process-mgr-method-38 () none) ;; 38 ;; DIAG: reverted symbol (2c8f33261)
     (net-process-mgr-method-39 () none) ;; 39
     (net-process-mgr-method-40 () none) ;; 40
-    (net-process-mgr-method-41 () int) ;; 41
+    (net-process-mgr-method-41 () none) ;; 41 ;; DIAG: reverted int (2c8f33261)
     (net-process-mgr-method-42 () none) ;; 42
     (net-process-mgr-method-43 () none) ;; 43
     (net-process-mgr-method-44 () none) ;; 44
     (net-process-mgr-method-45 () none) ;; 45
-    (net-process-mgr-method-46 () uint) ;; 46
+    (net-process-mgr-method-46 () none) ;; 46 ;; DIAG: reverted uint (2c8f33261)
     (net-process-mgr-method-47 () none) ;; 47
     (net-process-mgr-method-48 () none) ;; 48
     (net-process-mgr-method-49 () none) ;; 49
     (net-process-mgr-method-50 () none) ;; 50
-    (net-process-mgr-method-51 () int) ;; 51
+    (net-process-mgr-method-51 () none) ;; 51 ;; DIAG: reverted int (2c8f33261)
     (net-process-mgr-method-52 () none) ;; 52
     (net-process-mgr-method-53 () none) ;; 53
     (net-process-mgr-method-54 () none) ;; 54
     (net-process-mgr-method-55 () none) ;; 55
     (net-process-mgr-method-56 () none) ;; 56
     (net-process-mgr-method-57 () none) ;; 57
-    (net-process-mgr-method-58 () int) ;; 58
+    (net-process-mgr-method-58 () none) ;; 58 ;; DIAG: reverted int (2c8f33261)
     )
   )
 
@@ -44999,7 +44995,7 @@
     (net-player-method-54 () none) ;; 54
     (net-player-method-55 () none) ;; 55
     (net-player-method-56 () none) ;; 56
-    (net-player-method-57 (_type_) symbol) ;; 57
+    (net-player-method-57 (_type_) none) ;; 57 ;; DIAG: reverted symbol (2c8f33261)
     (net-player-method-58 (_type_) none) ;; 58
     (net-player-method-59 () int) ;; 59
     (net-player-method-60 () none) ;; 60
@@ -45489,7 +45485,7 @@
     (net-game-mgr-method-49 () int) ;; 49
     (net-game-mgr-method-50 () symbol) ;; 50
     (net-game-mgr-method-51 () symbol) ;; 51
-    (net-game-mgr-method-52 () process) ;; 52
+    (net-game-mgr-method-52 () none) ;; 52 ;; DIAG: reverted process (2c8f33261)
     (net-game-mgr-method-53 () none) ;; 53
     (net-game-mgr-method-54 () none) ;; 54
     (net-game-mgr-method-55 () float) ;; 55
@@ -45515,7 +45511,7 @@
     (net-game-mgr-method-75 () int) ;; 75
     (net-game-mgr-method-76 () symbol) ;; 76
     (net-game-mgr-method-77 () symbol) ;; 77
-    (net-game-mgr-method-78 () int) ;; 78
+    (net-game-mgr-method-78 () none) ;; 78 ;; DIAG: reverted int (2c8f33261)
     (net-game-mgr-method-79 () none) ;; 79
     )
   )
@@ -51912,13 +51908,13 @@
     )
   (:methods
     (nav-graph-editor-method-30 () none) ;; 30
-    (nav-graph-editor-method-31 () object) ;; 31
+    (nav-graph-editor-method-31 () none) ;; 31 ;; DIAG: reverted object (2c8f33261)
     (nav-graph-editor-method-32 () none) ;; 32
     (nav-graph-editor-method-33 () none) ;; 33
-    (nav-graph-editor-method-34 () symbol) ;; 34
+    (nav-graph-editor-method-34 () none) ;; 34 ;; DIAG: reverted symbol (2c8f33261)
     (nav-graph-editor-method-35 () none) ;; 35
     (nav-graph-editor-method-36 () none) ;; 36
-    (nav-graph-editor-method-37 () symbol) ;; 37
+    (nav-graph-editor-method-37 () none) ;; 37 ;; DIAG: reverted symbol (2c8f33261)
     (nav-graph-editor-method-38 () none) ;; 38
     (nav-graph-editor-method-39 () none) ;; 39
     (nav-graph-editor-method-40 () none) ;; 40
@@ -51927,7 +51923,7 @@
     (nav-graph-editor-method-43 () none) ;; 43
     (nav-graph-editor-method-44 () none) ;; 44
     (nav-graph-editor-method-45 () none) ;; 45
-    (nav-graph-editor-method-46 () int) ;; 46
+    (nav-graph-editor-method-46 () none) ;; 46 ;; DIAG: reverted int (2c8f33261)
     (nav-graph-editor-method-47 () none) ;; 47
     (nav-graph-editor-method-48 () none) ;; 48
     (nav-graph-editor-method-49 () none) ;; 49
@@ -51940,14 +51936,14 @@
     (nav-graph-editor-method-56 () none) ;; 56
     (nav-graph-editor-method-57 () none) ;; 57
     (nav-graph-editor-method-58 () none) ;; 58
-    (nav-graph-editor-method-59 () symbol) ;; 59
+    (nav-graph-editor-method-59 () none) ;; 59 ;; DIAG: reverted symbol (2c8f33261)
     (nav-graph-editor-method-60 () none) ;; 60
     (nav-graph-editor-method-61 () none) ;; 61
     (nav-graph-editor-method-62 () none) ;; 62
     (nav-graph-editor-method-63 () none) ;; 63
     (nav-graph-editor-method-64 () none) ;; 64
-    (nav-graph-editor-method-65 () symbol) ;; 65
-    (nav-graph-editor-method-66 () symbol) ;; 66
+    (nav-graph-editor-method-65 () none) ;; 65 ;; DIAG: reverted symbol (2c8f33261)
+    (nav-graph-editor-method-66 () none) ;; 66 ;; DIAG: reverted symbol (2c8f33261)
     (nav-graph-editor-method-67 () none) ;; 67
     (nav-graph-editor-method-68 () none) ;; 68
     )
