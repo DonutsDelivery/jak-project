@@ -1965,7 +1965,7 @@
 
 (define-extern encode-net-anim-state (function none))
 (define-extern decode-net-anim-state (function none))
-(define-extern safe-mod (function none))
+(define-extern safe-mod (function float none))
 (define-extern get-dist-based-path-pos (function none))
 (define-extern get-anim-offset (function none))
 
@@ -6763,7 +6763,7 @@
 (define-extern vector-rad<-vector-deg!
   "Convert a vector in rotation units to radians, and unwrap.
    Input can be anything, output will be -2pi to pi."
-  (function vector vector none))
+  (function vector vector float))
 (define-extern vector-rad<-vector-deg/2!
   "Divide the input by two, and then convert from rotation units to radians, unwrapping.
    Not sure why this really needs to be separate the from previous function..."
@@ -9820,7 +9820,7 @@
   (function vector vector vector))
 (define-extern vector-deg-diff
   "Wrapped difference, degrees units. Will have the usual 16-bit accuracy issue."
-  (function vector vector vector none))
+  (function vector vector vector float))
 (define-extern vector-deg-lerp-clamp!
   "Apply deg-lerp-clamp to the xyz components of a vector. Sets w = 1."
   (function vector vector vector float vector))
@@ -9828,12 +9828,12 @@
 (define-extern vector3s+! (function vector vector vector vector))
 (define-extern vector3s*float! (function vector vector float vector))
 (define-extern vector3s-! (function vector vector vector vector))
-(define-extern vector4-add! "Add 2 vector4s." (function vector4 vector4 vector4 none))
-(define-extern vector4-sub! "Subtract 2 vector4s." (function vector4 vector4 vector4 none))
-(define-extern vector4-mul! "Multiple 2 vector4s." (function vector4 vector4 vector4 none))
-(define-extern vector4-scale! "arg0 = arg1 * arg2." (function vector4 vector4 float none))
-(define-extern vector4-madd! "arg0 = arg1 + arg2 * arg3." (function vector4 vector4 vector4 float none))
-(define-extern vector4-msub! "arg0 = arg1 - arg2 * arg3." (function vector4 vector4 vector4 float none))
+(define-extern vector4-add! "Add 2 vector4s." (function vector4 vector4 vector4 float))
+(define-extern vector4-sub! "Subtract 2 vector4s." (function vector4 vector4 vector4 float))
+(define-extern vector4-mul! "Multiple 2 vector4s." (function vector4 vector4 vector4 float))
+(define-extern vector4-scale! "arg0 = arg1 * arg2." (function vector4 vector4 float float))
+(define-extern vector4-madd! "arg0 = arg1 + arg2 * arg3." (function vector4 vector4 vector4 float float))
+(define-extern vector4-msub! "arg0 = arg1 - arg2 * arg3." (function vector4 vector4 vector4 float float))
 (define-extern vector4-array-add! "Apply vector4-add! to all arrays." (function (inline-array vector4) (inline-array vector4) (inline-array vector4) int none))
 (define-extern vector4-array-sub! "Apply vector4-sub! to all arrays." (function (inline-array vector4) (inline-array vector4) (inline-array vector4) int none))
 (define-extern vector4-array-mul! "Apply vector4-mul! to all arrays." (function (inline-array vector4) (inline-array vector4) (inline-array vector4) int none))
@@ -13985,7 +13985,7 @@
   :flag-assert         #x900000008
   )
 
-(define-extern fog-corrector-setup "Set the fog corrector based on the supplied math-camera." (function fog-corrector math-camera none))
+(define-extern fog-corrector-setup "Set the fog corrector based on the supplied math-camera." (function fog-corrector math-camera float))
 (define-extern *math-camera-fog-correction* fog-corrector)
 (define-extern update-math-camera
   "Compute some one-time camera constants.
@@ -47783,7 +47783,7 @@
 (define-extern *game-launched-from-room* object)
 (define-extern camera-seek-time object)
 (define-extern real-camera-seek-time object)
-(define-extern set-lobby-camera-seek-time! (function none))
+(define-extern set-lobby-camera-seek-time! (function float none))
 (define-extern *class-mode* object)
 (define-extern restore-selection-index (function none))
 (define-extern *lobby-timetrial-lock-mode* object)
