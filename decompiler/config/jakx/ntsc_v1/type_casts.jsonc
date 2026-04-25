@@ -43076,4 +43076,36 @@
       "dma-packet"
     ]
   ]
+,
+  "(method 15 light-trail)": [
+    [
+      47,
+      "a0",
+      "uint"
+    ],
+    [
+      [
+        10,
+        32
+      ],
+      "a1",
+      "light-trail-breadcrumb"
+    ],
+    [
+      [
+        34,
+        60
+      ],
+      "s3",
+      "light-trail-breadcrumb"
+    ],
+    [
+      [
+        34,
+        73
+      ],
+      "s2",
+      "light-trail-breadcrumb"
+    ]
+  ]
 }

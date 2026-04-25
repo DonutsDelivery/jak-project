@@ -8865,4 +8865,89 @@
       "vector"
     ]
   ]
+,
+  "insert-wall": [
+    [
+      32,
+      [
+        "array",
+        "int32",
+        2
+      ]
+    ]
+  ]
+,
+  "insert-box": [
+    [
+      32,
+      [
+        "array",
+        "int32",
+        8
+      ]
+    ]
+  ]
+,
+  "(method 15 light-trail)": [
+    [
+      16,
+      "light-trail-breadcrumb"
+    ]
+  ]
+,
+  "(method 19 light-trail)": [
+    [
+      16,
+      "vector"
+    ]
+  ]
+,
+  "(method 84 net-enemy)": [
+    [
+      16,
+      "vector"
+    ]
+  ]
+,
+  "(method 40 nav-mesh)": [
+    [
+      16,
+      "vector"
+    ]
+  ]
+,
+  "(method 33 nav-graph-editor)": [
+    [
+      32,
+      "vector"
+    ]
+  ]
+,
+  "(method 82 rigid-body-object)": [
+    [
+      16,
+      "rigid-body-impact"
+    ]
+  ]
+,
+  "(method 17 sphere-hash)": [
+    [
+      16,
+      "vector"
+    ]
+  ]
+,
+  "(method 136 vehicle)": [
+    [
+      16,
+      "matrix"
+    ]
+  ]
+,
+  "(method 230 wvehicle)": [
+    [
+      16,
+      "wvehicle-stack-type1"
+    ]
+  ]
 }
