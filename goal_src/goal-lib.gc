@@ -763,6 +763,13 @@
   `(set! ,result (logand #xffffffff (sar (logand #xffffffff (the-as int ,in)) ,sa)))
   )
 
+(defmacro shift-logical-left-32 (result in sa)
+  "Logical left shift on a 32-bit value, with 32-bit sign-extend output.
+   Mirrors MIPS sll: shifts left, masks to 32 bits, then sign-extends.
+   Per-file `.sll` macros (e.g. collide-hash.gc) use this same pattern."
+  `(set! ,result (sext32 (the-as int (shl (logand ,in #xffffffff) ,sa))))
+  )
+
 (defmacro /-0-guard (a b)
   "same as divide but returns -1 when divisor is zero (EE-like, DIVU)."
   `(let ((divisor ,b))
