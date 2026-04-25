@@ -7077,6 +7077,27 @@
   (special)
   (sog7)
   )
+
+(defenum sound-mask
+  :bitfield #t
+  :type uint16
+  (volume)    ;; 1
+  (pitch)     ;; 2
+  (bend)      ;; 4
+  (unused)    ;; 8
+  (time)      ;; 10
+  (trans)     ;; 20
+  (fo-min)    ;; 40
+  (fo-max)    ;; 80
+  (fo-curve)  ;; 100
+  (sm-unk1)
+  (sm-unk2)
+  (reg0)
+  (reg1)
+  (reg2)
+  (unk)
+  (unk2)
+  )
 ;; ---gsound-h:sound-group
 
 (deftype sound-stream-name (structure)
@@ -7349,6 +7370,12 @@
   :method-count-assert 9
   :size-assert         #x4
   :flag-assert         #x900000004
+  )
+
+(defenum sound-mirror-mode
+  :type uint8
+  (normal)
+  (mirrored)
   )
 
 (deftype sound-rpc-union (structure)
@@ -15253,6 +15280,27 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (declare-type resetter-spec structure)
+
+(defenum resetter-message
+  :type uint8
+  (mission-fail 0)
+  (mission-retry 1)
+  (mission-fail-or-retry 2)
+  )
+
+(defenum resetter-flag
+  :type uint16
+  :bitfield #t
+  (auto-reset 0)
+  (text-message 1)
+  (no-audio 2)
+  (no-slow-down 3)
+  (no-message 4)
+  (no-grab 5)
+  (no-draw-target 6)
+  (stop-sfx 7)
+  (no-audio-first 8)
+  )
 (deftype user-setting-data (structure)
   ((border-mode             symbol              :offset-assert 0) ;; guessed by decompiler
    (process-mask            process-mask        :offset-assert 4) ;; guessed by decompiler
@@ -19841,6 +19889,15 @@
   (:methods
     (draw-text (_type_) int) ;; 18
     )
+  )
+
+(defenum speech-type-flag
+  :type uint8
+  :bitfield #t
+  (random-order 0)
+  (linked-next 1)
+  (skip-first-time 2)
+  (first-time 3)
   )
   
 
@@ -30939,6 +30996,27 @@
   :flag-assert         #x9000000bc
   )
 
+(defenum ragdoll-flag
+  :type uint32
+  :bitfield #t
+  (rf0 0)
+  (rf1 1)
+  (rf2 2)
+  (rf3 3)
+  (rf4 4)
+  (rf5 5)
+  (rf6 6)
+  (rf7 7)
+  (mirror 8)
+  (rf9 9)
+  (rf10 10)
+  (rf11 11)
+  (rf12 12)
+  (rf13 13)
+  (rf14 14)
+  (rf15 15)
+  )
+
 (deftype ragdoll-edit-info (structure)
   ((editing         symbol           :offset-assert 0) ;; guessed by decompiler
    (current-func    uint64           :offset-assert 8)
@@ -31754,6 +31832,30 @@
     (collide-cache-method-26 (_type_) none) ;; 26
     (collide-cache-method-27 (_type_) none) ;; 27
     )
+  )
+
+(defenum search-info-flag
+  :type uint32
+  :bitfield #t
+  (abort 0)
+  (crate 1)
+  (guard 2)
+  (attackable 3)
+  (enemy 4)
+  (attackable-priority 5)
+  (high-priority 6)
+  (on-screen 7)
+  (prefer-dist 8)
+  (prefer-angle 9)
+  (prefer-xz 10)
+  (cull-angle 11)
+  (cull-angle-simple 12)
+  (cull-xz 13)
+  (back-point 14)
+  (combo 15)
+  (probe 16)
+  (probe-camera 17)
+  (prefer-center 18)
   )
 
 (defenum focus-status
@@ -33241,6 +33343,34 @@
   :method-count-assert 9
   :size-assert         #x30
   :flag-assert         #x900000030
+  )
+
+(defenum sp-cpuinfo-flag
+  :bitfield #t
+  :type uint32
+  ;; todo copied from jak 2
+  (sp-cpuinfo-flag-0 0)
+  (sp-cpuinfo-flag-1 1)
+  (sp-cpuinfo-flag-2 2)     ;; cleared after an aux has its func set to add-to-sprite-aux-lst
+  (sp-cpuinfo-flag-3 3)
+  (sp-cpuinfo-flag-4 4)
+  (sp-cpuinfo-flag-5 5)
+  (ready-to-launch 6) ;; maybe just just death?
+  (distort 7) ;; distort sprite
+  (aux-list 8)     ;; prevents relaunch, adds to aux
+  (sp-cpuinfo-flag-9 9)
+  (level0 10)
+  (level1 11)
+  (sp-cpuinfo-flag-12 12)   ;; required to relaunch
+  (sp-cpuinfo-flag-13 13)
+  (sp-cpuinfo-flag-14 14)
+  (glow 15) ;; glow sprite
+  (use-global-acc 16)
+  (launch-along-z 17)
+  (left-multiply-quat 18)
+  (right-multiply-quat 19)
+  (set-conerot 20)
+  (sp-cpuinfo-flag-21 21)
   )
 
 
@@ -34744,6 +34874,19 @@
   (pi29 29)
   (pi30 30)
   (pi31 31)
+  )
+
+(defenum secret-item-option-flags
+  :type uint8
+  :bitfield #t
+  (sf0)
+  (sf1)
+  (sf2)
+  (sf3)
+  (sf4)
+  (sf5)
+  (sf6)
+  (sf7)
   )
 
 (defenum inventory-icon
