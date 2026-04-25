@@ -43469,7 +43469,7 @@
 (define-extern *headset-mix-buffer* object)
 (define-extern *headset-decoder-ids* object)
 (define-extern *headset-decoder-ptrs* array)
-(define-extern *headset* object)
+(define-extern *headset* headset)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; stream-media-h                 ;;
@@ -43829,7 +43829,7 @@
   )
 
 
-(define-extern *net-process-mgr* object)
+(define-extern *net-process-mgr* net-process-mgr)
 (define-extern get-event-level (function symbol))
 (define-extern get-shared-level (function symbol))
 (define-extern nos (function none))
@@ -47335,7 +47335,7 @@
 (define-extern net-game-mgr-init-remote (function none))
 (define-extern *msg-map-net-game-mgr* array)
 (define-extern *net-process-class-info-net-game-mgr* net-process-class-info)
-(define-extern *net-game-mgr* object)
+(define-extern *net-game-mgr* net-game-mgr)
 (define-extern *should-update-stats* object)
 (define-extern *stats-adjusted* object)
 (define-extern current-finish-mode (function none))
@@ -49523,7 +49523,7 @@
 (define-extern lobby-vehicle-flag->string (function none))
 (define-extern *lobby-reset-mode* object)
 (define-extern *net-mgr-finish-mode* object)
-(define-extern *lobby-menu-manager* object)
+(define-extern *lobby-menu-manager* lobby-menu-manager)
 (define-extern get-selected-local-player-count (function none))
 (define-extern kiosk-code? (function symbol))
 (define-extern min-max-wrap-around (function int int int int))
@@ -49904,7 +49904,7 @@
   
 
 
-(define-extern *aux-voice-mgr* object)
+(define-extern *aux-voice-mgr* aux-voice-mgr)
 (define-extern *aux-voice-resp* object)
 (define-extern *aux-game-name* object)
 (define-extern *aux-voice-game-info* object)
@@ -49938,7 +49938,7 @@
 (define-extern *medius-mas-port* object)
 (define-extern *medius-init-in-params* object)
 (define-extern *medius-init-out-params* object)
-(define-extern *medius-connect-in-params* object)
+(define-extern *medius-connect-in-params* medius-connect-in-params)
 (define-extern *medius-connect-out-params* object)
 (define-extern *medius-public-key* object)
 (define-extern *medius-connect-info* object)
@@ -50660,7 +50660,7 @@
 (define-extern *fmv-m2v-name* object)
 (define-extern *fmv-snd-name* object)
 (define-extern *fmv-old-hflip* object)
-(define-extern *fmv-work* object)
+(define-extern *fmv-work* fmv-work)
 (define-extern *menu-movie-texture-anim-array* texture-anim-array)
 (define-extern *movie-texture-anim-array* texture-anim-array)
 (define-extern movie-texture-anim-init (function none))
@@ -54699,7 +54699,7 @@
 (define-extern init-spartacus-library (function none))
 (define-extern *spartacus-file-path* object)
 (define-extern spartacus-editor-init (function none))
-(define-extern *spartacus-editor* object)
+(define-extern *spartacus-editor* spartacus-editor)
 (define-extern spartacus-start (function none))
 (define-extern spartacus-stop (function none))
 
