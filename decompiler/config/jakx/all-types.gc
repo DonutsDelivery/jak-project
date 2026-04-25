@@ -47246,7 +47246,7 @@
     die ;; 51
     )
   (:methods
-    (powerup-draw-method-52 (_type_) int) ;; 52
+    (powerup-draw-method-52 (_type_) none) ;; 52
     (powerup-draw-method-53 (_type_ object object) none) ;; 53
     (powerup-draw-method-54 (_type_) int) ;; 54
     (powerup-draw-method-55 (_type_) int) ;; 55
