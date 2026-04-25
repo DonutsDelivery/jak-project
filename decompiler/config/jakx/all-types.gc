@@ -3105,7 +3105,7 @@
 (define-extern *high-scores-list* array)
 (define-extern *high-scores-list-proc* object)
 (define-extern spawn-high-scores-list (function object))
-(define-extern spawn-high-score-hud (function none))
+(define-extern spawn-high-score-hud (function object))
 (define-extern high-scores-on? (function object))
 (define-extern *hud-background* array)
 (define-extern *hud-background-proc* object)
@@ -3122,7 +3122,7 @@
 (define-extern *hud-background-side-view-1* array)
 (define-extern *hud-background-side-view-1-proc* object)
 (define-extern spawn-hud-background-side-view-1 (function object))
-(define-extern spawn-hud-results-background (function none))
+(define-extern spawn-hud-results-background (function object))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hud-cash                       ;;
@@ -3675,7 +3675,7 @@
 (define-extern *hud-headset-talker-other-proc* object)
 (define-extern spawn-hud-headset-talker-other (function object))
 (define-extern *last-talker-ids* object)
-(define-extern spawn-hud-headset-talker (function none))
+(define-extern spawn-hud-headset-talker (function object))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; in-game-menu-hud               ;;
@@ -3854,7 +3854,7 @@
 (define-extern *hud-in-game-menu-options-view-2* array)
 (define-extern *hud-in-game-menu-options-view-2-proc* object)
 (define-extern spawn-hud-in-game-menu-options-view-2 (function object))
-(define-extern spawn-hud-in-game-menu-options (function none))
+(define-extern spawn-hud-in-game-menu-options (function object))
 (define-extern in-game-menu-startup (function none))
 (define-extern in-game-menu-on? (function none))
 
@@ -4642,7 +4642,7 @@
 
 
 (define-extern *vehicle-wheel-constants* rigid-body-object-constants)
-(define-extern vehicle-wheel-init-by-other (function vehicle-wheel-init-params object :behavior vehicle-wheel))
+(define-extern vehicle-wheel-init-by-other (function vehicle-wheel-init-params none :behavior vehicle-wheel))
 (define-extern vehicle-wheel-spawn (function process vehicle-wheel-init-params vehicle-wheel))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -4830,7 +4830,7 @@
 
 
 (define-extern *wheel-trail-info* light-trail-composition)
-(define-extern tire-trail-tracker-init-by-other (function light-trail-tracker-spawn-params object :behavior tire-trail-tracker))
+(define-extern tire-trail-tracker-init-by-other (function light-trail-tracker-spawn-params none :behavior tire-trail-tracker))
 (define-extern spawn-tire-trail-tracker (function process light-trail-tracker-spawn-params tire-trail-tracker))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
