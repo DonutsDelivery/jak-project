@@ -1687,7 +1687,7 @@
 (define-extern *curve-jakxexplo-alpha* curve2d-fast)
 (define-extern *curve-jakxexplo-scale-x* curve2d-fast)
 (define-extern *curve-jakxexplo-scale-y* curve2d-fast)
-(define-extern *part-jakx-explosion-texture-curve-settings* object)
+(define-extern *part-jakx-explosion-texture-curve-settings* particle-curve-settings)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; menu2                          ;;
@@ -1719,7 +1719,7 @@
 (define-extern *curve-carexplo-cu-dust-alpha* curve2d-fast)
 (define-extern *curve-carexplo-cu-dust-scale-x* curve2d-fast)
 (define-extern *curve-carexplo-cu-dust-scale-y* curve2d-fast)
-(define-extern *part-intro-car-explo-closeup-dust-in-curve-settings* object)
+(define-extern *part-intro-car-explo-closeup-dust-in-curve-settings* particle-curve-settings)
 (define-extern *range-intro-carexplo-cu-color* curve-color-fast)
 (define-extern *range-intro-carexplo-cu-alpha* curve2d-fast)
 (define-extern *range-intro-carexplo-cu-scale-x* curve2d-fast)
@@ -1727,7 +1727,7 @@
 (define-extern *curve-intro-carexplo-cu-alpha* curve2d-fast)
 (define-extern *curve-intro-carexplo-cu-scale-x* curve2d-fast)
 (define-extern *curve-intro-carexplo-cu-scale-y* curve2d-fast)
-(define-extern *part-intro-car-explo-closeup-texture-curve-settings* object)
+(define-extern *part-intro-car-explo-closeup-texture-curve-settings* particle-curve-settings)
 (define-extern spt-birth-func-brightness-outro-smoke (function none))
 (define-extern *range-carexplo-fnl-dust-color* curve-color-fast)
 (define-extern *range-carexplo-fnl-dust-alpha* curve2d-fast)
@@ -1736,7 +1736,7 @@
 (define-extern *curve-carexplo-fnl-dust-alpha* curve2d-fast)
 (define-extern *curve-carexplo-fnl-dust-scale-x* curve2d-fast)
 (define-extern *curve-carexplo-fnl-dust-scale-y* curve2d-fast)
-(define-extern *part-outro-b-final-explosion-dust-in-curve-settings* object)
+(define-extern *part-outro-b-final-explosion-dust-in-curve-settings* particle-curve-settings)
 (define-extern *range-outro-carexplo-fnl-color* curve-color-fast)
 (define-extern *range-outro-carexplo-fnl-alpha* curve2d-fast)
 (define-extern *range-outro-carexplo-fnl-scale-x* curve2d-fast)
@@ -1744,7 +1744,7 @@
 (define-extern *curve-outro-carexplo-fnl-alpha* curve2d-fast)
 (define-extern *curve-outro-carexplo-fnl-scale-x* curve2d-fast)
 (define-extern *curve-outro-carexplo-fnl-scale-y* curve2d-fast)
-(define-extern *part-outro-b-final-explosion-texture-curve-settings* object)
+(define-extern *part-outro-b-final-explosion-texture-curve-settings* particle-curve-settings)
 (define-extern *range-carexplo-dust-color* curve-color-fast)
 (define-extern *range-carexplo-dust-alpha* curve2d-fast)
 (define-extern *range-carexplo-dust-scale-x* curve2d-fast)
@@ -1752,7 +1752,7 @@
 (define-extern *curve-carexplo-dust-alpha* curve2d-fast)
 (define-extern *curve-carexplo-dust-scale-x* curve2d-fast)
 (define-extern *curve-carexplo-dust-scale-y* curve2d-fast)
-(define-extern *part-intro-car-explosion-dust-in-curve-settings* object)
+(define-extern *part-intro-car-explosion-dust-in-curve-settings* particle-curve-settings)
 (define-extern *range-intro-carexplo-color* curve-color-fast)
 (define-extern *range-intro-carexplo-alpha* curve2d-fast)
 (define-extern *range-intro-carexplo-scale-x* curve2d-fast)
@@ -1760,10 +1760,10 @@
 (define-extern *curve-intro-carexplo-alpha* curve2d-fast)
 (define-extern *curve-intro-carexplo-scale-x* curve2d-fast)
 (define-extern *curve-intro-carexplo-scale-y* curve2d-fast)
-(define-extern *part-intro-car-explosion-texture-curve-settings* object)
+(define-extern *part-intro-car-explosion-texture-curve-settings* particle-curve-settings)
 (define-extern *range-intro-carexplo2-scale-x* curve2d-fast)
 (define-extern *range-intro-carexplo2-scale-y* curve2d-fast)
-(define-extern *part-intro-car-explosion-texture2-curve-settings* object)
+(define-extern *part-intro-car-explosion-texture2-curve-settings* particle-curve-settings)
 (define-extern spt-func-part-outro-b-dashboard (function none))
 (define-extern spt-func-part-outro-b-dashboard-sparks (function none))
 
@@ -4563,7 +4563,7 @@
 (define-extern *curve-carexplo-dust-alpha* curve2d-fast)
 (define-extern *curve-carexplo-dust-scale-x* curve2d-fast)
 (define-extern *curve-carexplo-dust-scale-y* curve2d-fast)
-(define-extern *part-car-explosion-dust-in-curve-settings* object)
+(define-extern *part-car-explosion-dust-in-curve-settings* particle-curve-settings)
 (define-extern *range-carexplo-color* curve-color-fast)
 (define-extern *range-carexplo-alpha* curve2d-fast)
 (define-extern *range-carexplo-scale-x* curve2d-fast)
@@ -4571,7 +4571,7 @@
 (define-extern *curve-carexplo-alpha* curve2d-fast)
 (define-extern *curve-carexplo-scale-x* curve2d-fast)
 (define-extern *curve-carexplo-scale-y* curve2d-fast)
-(define-extern *part-car-explosion-texture-curve-settings* object)
+(define-extern *part-car-explosion-texture-curve-settings* particle-curve-settings)
 (define-extern sparticle-motion-blur-dirt (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern spt-birth-func-brightness-buggy-rocks (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern spt-birth-func-part-buggy-rocks (function sparticle-system sparticle-cpuinfo sparticle-launchinfo object object none))
@@ -52972,7 +52972,7 @@
 (define-extern *curve-atoll-splash-alpha* curve2d-fast)
 (define-extern *curve-atoll-splash-scale-x* curve2d-fast)
 (define-extern *curve-atoll-splash-scale-y* curve2d-fast)
-(define-extern *part-atoll-ocean-splash-curve-settings* object)
+(define-extern *part-atoll-ocean-splash-curve-settings* particle-curve-settings)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; atoll-obs                      ;;
@@ -53295,7 +53295,7 @@
 (define-extern *curve-plowexplo-alpha* curve2d-fast)
 (define-extern *curve-plowexplo-scale-x* curve2d-fast)
 (define-extern *curve-plowexplo-scale-y* curve2d-fast)
-(define-extern *part-plow-explosion-texture-curve-settings* object)
+(define-extern *part-plow-explosion-texture-curve-settings* particle-curve-settings)
 (define-extern do-bob (function none))
 (define-extern *plow-avoidance-bbox-rad* object)
 (define-extern *plow-ignore-if-above* object)
@@ -53917,7 +53917,7 @@
 (define-extern *curve-cynsplash-alpha* curve2d-fast)
 (define-extern *curve-cynsplash-scale-x* curve2d-fast)
 (define-extern *curve-cynsplash-scale-y* curve2d-fast)
-(define-extern *part-canyon-ocean-splash-curve-settings* object)
+(define-extern *part-canyon-ocean-splash-curve-settings* particle-curve-settings)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; canyon-effects                 ;;
@@ -55384,7 +55384,7 @@
 (define-extern *curve-osplash-alpha* curve2d-fast)
 (define-extern *curve-osplash-scale-x* curve2d-fast)
 (define-extern *curve-osplash-scale-y* curve2d-fast)
-(define-extern *part-water-ocean-splash-curve-settings* object)
+(define-extern *part-water-ocean-splash-curve-settings* particle-curve-settings)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; kras-obs                       ;;
@@ -55664,7 +55664,7 @@
 (define-extern *curve-displash-alpha* curve2d-fast)
 (define-extern *curve-displash-scale-x* curve2d-fast)
 (define-extern *curve-displash-scale-y* curve2d-fast)
-(define-extern *part-desisle-ocean-splash-curve-settings* object)
+(define-extern *part-desisle-ocean-splash-curve-settings* particle-curve-settings)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; des-cactus                     ;;
@@ -56070,7 +56070,7 @@
 (define-extern *curve-alpha-lava-geyser-flame* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-scale-lava-geyser-flame-x* curve2d-fast) ;; curve2d-fast
 (define-extern *curve-scale-lava-geyser-flame-y* curve2d-fast) ;; curve2d-fast
-(define-extern *part-jungle-lavafire-small-curve-settings* object)
+(define-extern *part-jungle-lavafire-small-curve-settings* particle-curve-settings)
 (define-extern spt-func-birth-on-pop (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -58742,7 +58742,7 @@
 (define-extern *curve-alpha-snow-torch-flame* curve2d-fast)
 (define-extern *curve-snow-torch-flame-x* curve2d-fast)
 (define-extern *curve-snow-torch-flame-y* curve2d-fast)
-(define-extern *part-snow-torch-flame-curve-settings* object)
+(define-extern *part-snow-torch-flame-curve-settings* particle-curve-settings)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; spargus-ocean                  ;;
@@ -58768,7 +58768,7 @@
 (define-extern *curve-ssplash-alpha* curve2d-fast)
 (define-extern *curve-ssplash-scale-x* curve2d-fast)
 (define-extern *curve-ssplash-scale-y* curve2d-fast)
-(define-extern *part-spargus-ocean-splash-curve-settings* object)
+(define-extern *part-spargus-ocean-splash-curve-settings* particle-curve-settings)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; temple-part                    ;;
