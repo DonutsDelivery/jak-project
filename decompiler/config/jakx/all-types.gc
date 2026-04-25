@@ -35998,7 +35998,7 @@
   :flag-assert         #x2400000068
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type int int) _type_)
-    (sphere-hash-method-27 (_type_ vector int) int) ;; 27
+    (sphere-hash-method-27 (_type_) none) ;; 27
     (sphere-hash-method-28 (_type_) none) ;; 28
     (sphere-hash-method-29 (_type_ find-nav-sphere-ids-params) none) ;; 29
     (sphere-hash-method-30 (_type_ find-nav-sphere-ids-params int int) symbol) ;; 30
