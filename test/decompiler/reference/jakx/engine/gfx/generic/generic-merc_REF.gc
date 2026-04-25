@@ -1,0 +1,92 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for symbol mercneric-vu0-block, type vu-function
+(define mercneric-vu0-block (new 'static 'vu-function :length #xbe :origin #x118 :qlength 95))
+
+;; definition of type invinitdata
+(deftype invinitdata (structure)
+  ((count      uint8)
+   (init-data  uint8)
+   (init-addr  uint16)
+   )
+  )
+
+;; definition for method 3 of type invinitdata
+(defmethod inspect ((this invinitdata))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'invinitdata)
+  (format #t "~1Tcount: ~D~%" (-> this count))
+  (format #t "~1Tinit-data: ~D~%" (-> this init-data))
+  (format #t "~1Tinit-addr: ~D~%" (-> this init-addr))
+  (label cfg-4)
+  this
+  )
+
+;; definition for symbol *inv-init-table*, type (inline-array invinitdata)
+(define *inv-init-table* (new 'static 'inline-array invinitdata 8
+                           (new 'static 'invinitdata :count #x48 :init-addr #x1)
+                           (new 'static 'invinitdata :count #x38 :init-data #x24 :init-addr #xe1)
+                           (new 'static 'invinitdata :count #xbe)
+                           (new 'static 'invinitdata :count #x81 :init-data #x80 :init-addr #x3b80)
+                           (new 'static 'invinitdata :count #x88 :init-data #x50 :init-addr #x100a)
+                           (new 'static 'invinitdata :count #x7d :init-data #xb :init-addr #x81e8)
+                           (new 'static 'invinitdata :count #x7d :init-data #x1b :init-addr #x81e8)
+                           (new 'static 'invinitdata :count #x2 :init-data #x68 :init-addr #x5200)
+                           )
+        )
+
+;; definition for function generic-merc-init-asm
+;; INFO: function output is handled by mips2c
+(def-mips2c generic-merc-init-asm (function none))
+
+;; definition for function mercneric-matrix-asm
+;; INFO: function output is handled by mips2c
+(def-mips2c mercneric-matrix-asm (function none))
+
+;; definition for function mercneric-shader-asm
+;; INFO: function output is handled by mips2c
+(def-mips2c mercneric-shader-asm (function none))
+
+;; definition for function mercneric-bittable-asm
+;; INFO: function output is handled by mips2c
+(def-mips2c mercneric-bittable-asm (function none))
+
+;; definition for function mercneric-convert
+;; INFO: function output is handled by mips2c
+(def-mips2c mercneric-convert (function none))
+
+;; definition for function high-speed-reject
+;; INFO: function output is handled by mips2c
+(def-mips2c high-speed-reject (function none))
+
+;; definition for function generic-translucent
+;; INFO: function output is handled by mips2c
+(def-mips2c generic-translucent (function gsf-buffer none))
+
+;; definition for function generic-merc-query
+;; INFO: function output is handled by mips2c
+(def-mips2c generic-merc-query (function none))
+
+;; definition for function generic-merc-death
+;; INFO: function output is handled by mips2c
+(def-mips2c generic-merc-death (function none))
+
+;; definition for function generic-merc-execute-asm
+;; INFO: function output is handled by mips2c
+(def-mips2c generic-merc-execute-asm (function none))
+
+;; definition for function generic-merc-do-chain
+;; INFO: function output is handled by mips2c
+(def-mips2c generic-merc-do-chain (function mercneric-chain dma-buffer pointer))
+
+;; definition for function generic-merc-execute-all
+;; INFO: function output is handled by mips2c
+(def-mips2c generic-merc-execute-all (function dma-buffer none))
+
+
+
+

@@ -28746,6 +28746,7 @@
   (vehicle-impulse-factor         22) ;; hi 64
   (knock 23)
   (test 24)
+  (wpn-type 25)
   )
 
 (deftype attack-info (structure)
