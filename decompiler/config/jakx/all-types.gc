@@ -8462,7 +8462,7 @@
 (define-extern *cpad-debug* symbol) ;; symbol
 (define-extern service-cpads (function cpad-list))
 (define-extern buzz-stop! (function int none))
-(define-extern *mouse* mouse-info) ;; mouse-info
+(define-extern *mouse* object) ;; mouse-info blocked (UNKNOWN fields)
 (define-extern service-mouse (function none))
 (define-extern *keybd* keybd-info) ;; keybd-info
 (define-extern service-keybd (function none))
@@ -31190,7 +31190,6 @@
 
   
 
-#|
 (deftype instance-tie-work (structure)
   ((wind-const                     vector     :inline :offset-assert 0)
    (hmge-d                         vector     :inline :offset-assert 16)
@@ -31200,7 +31199,7 @@
    (far-morph                      vector     :inline :offset-assert 80)
    (dist-test                      vector     :inline :offset-assert 96)
    (min-dist                       vector     :inline :offset-assert 112)
-   (guard-plane                    plane      4       :offset-assert 128) ;; guessed by decompiler
+   (guard-plane                    plane      4 :inline :offset-assert 128) ;; guessed by decompiler
    (upload-color-0                 dma-packet :inline :offset-assert 192)
    (upload-color-1                 dma-packet :inline :offset-assert 208)
    (upload-color-2                 dma-packet :inline :offset-assert 224)
@@ -31243,9 +31242,7 @@
   :size-assert         #x22c
   :flag-assert         #x90000022c
   )
-|#
 
-  
 ;; DEAD: asset type (decompiler regen)
 
 
@@ -35097,7 +35094,7 @@
 (define-extern sprite-get-user-hvdf (function int vector))
 (define-extern *sprite-hvdf-data* sprite-hvdf-data) ;; sprite-hvdf-data
 (define-extern *sprite-hvdf-control* sprite-hvdf-control) ;; sprite-hvdf-control
-(define-extern *sprite-aux-list* sprite-aux-list) ;; sprite-aux-list
+(define-extern *sprite-aux-list* object) ;; sprite-aux-list blocked (UNKNOWN fields)
 (define-extern *sprite-array-2d* sprite-array-2d) ;; sprite-array-2d
 (define-extern *sprite-array-3d* sprite-array-3d) ;; sprite-array-3d
 
@@ -36207,7 +36204,7 @@
 ;; shrub-work                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *instance-shrub-work* instance-shrub-work) ;; instance-shrub-work
+(define-extern *instance-shrub-work* object) ;; instance-shrub-work blocked
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tfrag-near                     ;;
@@ -36516,7 +36513,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *instance-tie-work* instance-tie-work) ;; instance-tie-work
-(define-extern *prototype-tie-work* prototype-tie-work) ;; prototype-tie-work
+(define-extern *prototype-tie-work* object) ;; prototype-tie-work blocked
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tie-methods                    ;;
@@ -49826,7 +49823,7 @@
 
 
 (define-extern *debug-move-rigid-body* object)
-(define-extern *rigid-body-work* rigid-body-work) ;; rigid-body-work
+(define-extern *rigid-body-work* object) ;; rigid-body-work blocked
 (define-extern debug-draw-rigid-body-move (function none))
 (define-extern matrix-3x3-triple-transpose-product (function matrix matrix matrix matrix))
 (define-extern damping-time-adjust (function float float float))
@@ -59474,7 +59471,7 @@
 ;;(define-extern hud-results-team-view-0 object)
 ;;(define-extern hud-rushhour-stats-view-1 object)
 ;;(define-extern hud-slowmo object)
-(define-extern instance-tie-work object)
+;; (define-extern instance-tie-work object) ;; clobbers active deftype
 (define-extern knet-scert-function-0-args object)
 (define-extern knet-scert-function-2-args object)
 (define-extern knet-scert-function-3-args object)
