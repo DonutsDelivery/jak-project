@@ -11655,6 +11655,34 @@
   (movie1 17)
   (movie2 18)
   )
+
+(defenum bigmap-id
+  :type uint32
+  (city 0)
+  (comb 1)
+  (desert 2)
+  (factory 3)
+  (forest 4)
+  (mhcity 5)
+  (mine 6)
+  (nest 7)
+  (nest2 8)
+  (none 9)
+  (precursor1 10)
+  (precursor2 11)
+  (rubble 12)
+  (sewer-hum-kg 13)
+  (sewer-kg-met 14)
+  (sewer-met-hum 15)
+  (stadium 16)
+  (temple1 17)
+  (temple2 18)
+  (temple3 19)
+  (temple4 20)
+  (tower 21)
+  (volcano 22)
+  (wascity 23)
+  )
 ;; ---level-h:task-mask
 
 ;; +++level-h:level-flags
@@ -14651,11 +14679,11 @@
 (define-extern get-real-current-time (function time-frame))
 (define-extern set-display "Allocate and initialize clocks for the display." (function display display))
 (define-extern allocate-dma-buffers "Allocate the main, debug, and calc dma buffers." (function display display))
-(define-extern draw-sprite2d-xy "Draw a sprite primitive with the given color and dimensions." (function dma-buffer int int int int rgba int none))
+(define-extern draw-sprite2d-xy "Draw a sprite primitive with the given color and dimensions." (function dma-buffer int int int int rgba int pointer))
 (define-extern draw-sprite2d-xy-absolute
   "Draw a sprite primitive, setting the gs-xzyf register to exactly the values specified (no offset/clamp)."
-  (function dma-buffer int int int int rgba int none))
-(define-extern draw-quad2d "Draw a quad that fills the entire context." (function dma-buffer draw-context none))
+  (function dma-buffer int int int int rgba int pointer))
+(define-extern draw-quad2d "Draw a quad that fills the entire context." (function dma-buffer draw-context pointer))
 (define-extern screen-gradient "Fill the screen with a sprite with the given colors." (function dma-buffer rgba rgba rgba rgba none))
 (define-extern vif1-handler-debug
   "Handle the VIF1 interrupt.
@@ -20431,7 +20459,7 @@
 (define-extern light-group-process! (function vu-lights light-group vector vector none))
 (define-extern *default-lights* vu-lights) ;; vu-lights
 (define-extern vu-lights-default! (function vu-lights vu-lights))
-(define-extern init-light-hash (function none))
+(define-extern init-light-hash (function pointer))
 (define-extern light-hash-count-items (function light-hash light-sphere none))
 (define-extern light-hash-add-items (function light-hash light-sphere integer object)) ;; (function light-hash light-sphere integer object)
 (define-extern reset-light-hash (function light-hash none))
@@ -20545,6 +20573,41 @@
   :flag-assert         #x9000000a4
   )
 
+(defenum actor-option
+  :bitfield #t
+  :type uint64
+  (blocked           0) ;; 1
+  (spawns-fuel-cell  1) ;; 2
+  (draw-blocker      2) ;; 4
+  (loop              3) ;; 8
+  (reflect           4) ;; 16
+  (wait-for-cue      5) ;; 32
+  (auto-pickup       6) ;; 64
+  (fuel-cell-no-jump 7) ;; 128
+  (suck-in           8) ;; 256
+  (fade-out          9) ;; 512
+  (big-collision    10) ;; 1024
+  (racer-only       11) ;; 2048
+  (no-reaction      12) ;; 4096
+  (no-shadow        13) ;; 8192
+  (wait-for-task-complete 14) ;; 16384
+  (respawn-delay    15) ;; 32768
+
+  (no-amb-sound     16) ;; hi 1
+  (user17           17) ;; hi 2
+  (user18           18) ;; hi 4
+  (user19           19) ;; hi 8
+  (user20           20) ;; hi 16
+  (cond-hide        21) ;; hi 32
+  (cond-respawn     22) ;; hi 64
+  (fall             23) ;; hi 128
+  (mirror           24) ;; hi 256
+  (cond-low-ammo             25) ;; hi 512
+  (no-distance-check-fadeout 26) ;; 1024
+  (no-track                  27) ;; hi 2048
+  (dont-override-fact        28)
+  )
+
 
 
   
@@ -20618,6 +20681,30 @@
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
+  )
+
+(defenum align-opts
+  :bitfield #t
+  :type uint32
+  (adjust-x-vel)
+  (adjust-y-vel)
+  (adjust-xz-vel)
+  (keep-other-velocities)
+  (adjust-quat) ;; 16
+  (alop0)
+  (alop1)
+  (alop2)
+  (alop3)
+  (alop4)
+  (alop5)
+  (no-gravity)
+  (ignore-y-if-zero)
+  )
+
+(defenum align-flags
+  :bitfield #t
+  :type uint32
+  (disabled) ;; keep object velocity
   )
 
 
@@ -35174,7 +35261,7 @@
 (define-extern sprite-set-3d-quaternion! (function sprite-vec-data-3d quaternion quaternion))
 (define-extern sprite-get-3d-quaternion! (function quaternion sprite-vec-data-3d quaternion))
 (define-extern sprite-add-matrix-data (function dma-buffer uint none))
-(define-extern sprite-add-frame-data (function dma-buffer uint none))
+(define-extern sprite-add-frame-data (function dma-buffer uint pointer))
 (define-extern sprite-add-2d-chunk (function sprite-array-2d int int dma-buffer int none))
 (define-extern sprite-add-2d-all (function sprite-array-2d dma-buffer int none))
 (define-extern sprite-add-3d-chunk (function sprite-array-3d int int dma-buffer none))
@@ -35465,7 +35552,7 @@
 (define-extern add-debug-cursor (function none)) ;; (function symbol bucket-id int int mouse-buttons int)
 (define-extern *boundary-polygon* (inline-array sky-vertex)) ;; (inline-array sky-vertex)
 (define-extern init-boundary-regs (function none))
-(define-extern add-boundary-shader (function texture-id dma-buffer none))
+(define-extern add-boundary-shader (function texture-id dma-buffer pointer))
 (define-extern draw-boundary-polygon (function none))
 (define-extern render-boundary-quad (function none))
 (define-extern render-boundary-tri (function sky-vertex dma-buffer none))
@@ -36020,8 +36107,8 @@
 
 (define-extern *texture-anim-work* texture-anim-work) ;; texture-anim-work
 (define-extern texture-anim-layer-interp (function texture-anim-layer float float)) 
-(define-extern texture-anim-layer-add-shader (function dma-buffer texture-anim-layer int none))
-(define-extern texture-anim-layer-add-clut-shader (function dma-buffer texture-anim-layer int none))
+(define-extern texture-anim-layer-add-shader (function dma-buffer texture-anim-layer int pointer))
+(define-extern texture-anim-layer-add-clut-shader (function dma-buffer texture-anim-layer int pointer))
 (define-extern texture-anim-layer-draw (function dma-buffer int int texture-anim-layer symbol)) 
 (define-extern default-texture-anim-layer-func (function dma-buffer uint int int texture-anim-layer float int))
 (define-extern blend-clut-texture-anim-layer-func (function dma-buffer uint int int texture-anim-layer float int))
@@ -36029,7 +36116,7 @@
 (define-extern dest-blend-clut-texture-anim-layer-func (function dma-buffer uint int int texture-anim-layer float int))
 (define-extern move-rg-to-ba-texture-anim-layer-func (function dma-buffer uint int int texture-anim-layer float int))
 (define-extern fill-rgb-texture-anim-layer-func (function dma-buffer uint int int texture-anim-layer float int))
-(define-extern texture-anim-draw-mip-shader (function dma-buffer texture int none))
+(define-extern texture-anim-draw-mip-shader (function dma-buffer texture int pointer))
 (define-extern clear-texture-ids (function texture symbol)) 
 (define-extern texture-anim-draw-mips (function dma-buffer texture int)) 
 (define-extern texture-anim-draw-ocean-mips (function none))
@@ -36354,7 +36441,7 @@
 (define-extern draw-drawable-tree-tfrag-trans (function drawable-tree-tfrag none))
 (define-extern draw-drawable-tree-tfrag-water (function drawable-tree-tfrag none))
 (define-extern tfrag-vu1-init-buf (function bucket-id gs-test int uint symbol pointer))
-(define-extern tfrag-scissor-vu1-init-buf (function bucket-id gs-test int uint symbol none))
+(define-extern tfrag-scissor-vu1-init-buf (function bucket-id gs-test int uint symbol pointer))
 (define-extern *tfrag-init-table* (inline-array tfrag-init-data)) ;; (inline-array tfrag-init-data)
 (define-extern tfrag-vu1-init-buffers (function symbol))
 
@@ -37071,7 +37158,7 @@
 
 (define-extern *override-mood-color-table* object)
 (define-extern *override-mood-fog-table* object)
-(define-extern init-override-table (function mood-table none))
+(define-extern init-override-table (function mood-table pointer))
 (define-extern *override-table* mood-table)
 (define-extern print-mood-tables (function object))
 (define-extern desaturate-mood-colors (function float float float none))
@@ -37300,7 +37387,7 @@
 (define-extern clip-polygon-against-negative-hyperplane (function none))
 (define-extern render-sky-quad (function (inline-array sky-vertex) dma-buffer none))
 (define-extern render-sky-tri (function (inline-array sky-vertex) dma-buffer none))
-(define-extern close-sky-buffer (function dma-buffer none))
+(define-extern close-sky-buffer (function dma-buffer pointer))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; load-state                     ;;
@@ -41460,7 +41547,7 @@
 (define-extern scene-decode-continue (function basic continue-point))
 (define-extern scene-lookup (function basic scene))
 (define-extern *subtitle-work* subtitle-work) ;; subtitle-work
-(define-extern draw-subtitle-image (function subtitle-image font-context none))
+(define-extern draw-subtitle-image (function subtitle-image font-context pointer))
 (define-extern process-drawable-draw-subtitles (function none :behavior process-drawable))
 (define-extern scene-player-init (function object symbol string none :behavior scene-player))
 
@@ -49309,7 +49396,7 @@
 (define-extern *progress-save-info* mc-slot-info) ;; mc-slot-info
 (define-extern post-memcard (function none))
 (define-extern *game-name-entered* object)
-(define-extern draw-language-select (function none))
+(define-extern draw-language-select (function pointer))
 (define-extern check-language (function none))
 (define-extern *end-credits-proc* object)
 (define-extern end-end-credits (function none))
@@ -51229,7 +51316,7 @@
 (define-extern anim-tester-post (function none))
 (define-extern anim-tester-update-anim-info (function none))
 (define-extern anim-tester-reset (function none))
-(define-extern anim-tester-disp-frame-num (function none))
+(define-extern anim-tester-disp-frame-num (function pointer))
 (define-extern anim-tester-standard-event-handler (function none))
 (define-extern anim-test-obj-list-handler (function none))
 (define-extern anim-test-anim-list-handler (function none))
@@ -51766,8 +51853,11 @@
 ;; editable                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; R-4: forward-decl editable-light (full deftype block-commented above; declare-type lets externs reference it)
+(declare-type editable-light editable-sphere)
+
 (define-extern common-owner (function editable editable object))
-(define-extern update-light-sphere-from-editable-light (function none)) ;; editable-light deftype is block-commented; revert P9 backport
+(define-extern update-light-sphere-from-editable-light (function editable-light object)) ;; R-4: re-applied P9 sig (editable-light declare-typed above)
 (define-extern load-editable-lights (function editable-array symbol))
 (define-extern *editable-sample-region* editable-region)
 (define-extern *editable-light-region* editable-region)
@@ -60540,6 +60630,22 @@
   (r-analog-down 22)
   (r-analog-left 23)
   (confirm 24)
+  )
+
+(defenum abutton-idx
+  :type uint8
+  (right 0)
+  (left 1)
+  (up 2)
+  (down 3)
+  (triangle 4)
+  (circle 5)
+  (x 6)
+  (square 7)
+  (l1 8)
+  (r1 9)
+  (l2 10)
+  (r2 11)
   )
 
 ;; path-control-flag
