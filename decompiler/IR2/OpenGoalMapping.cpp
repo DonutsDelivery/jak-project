@@ -14,6 +14,7 @@ const std::map<InstructionKind, OpenGOALAsm::Function> MIPS_ASM_TO_OPEN_GOAL_FUN
     // they only use this for performance counters / Count / Debug
     // These depend on a `fake-asm` macro being defined
     {InstructionKind::MTC0, {".mtc0", {}}},
+    {InstructionKind::MFC0, {".mfc0", {}}},
     {InstructionKind::MTPC, {".mtpc", {}}},
     {InstructionKind::MFPC, {".mfpc", {}}},
     {InstructionKind::SYNCP, {".sync.p", {}}},
