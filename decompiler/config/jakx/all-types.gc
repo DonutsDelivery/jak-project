@@ -35781,7 +35781,7 @@
     (nav-state-method-41 (_type_ vector) symbol) ;; 41 ;; clamp-vector-to-mesh-cross-gaps
     (nav-state-method-42 (_type_ vector) symbol) ;; 42
     (nav-state-method-43 (_type_ vector) none) ;; 43
-    (nav-state-method-44 (_type_ vector) int) ;; 44 ;; set-travel!
+    (nav-state-method-44 (_type_ vector) none) ;; 44
     (nav-state-method-45 (_type_ vector) none) ;; 45
     (nav-state-method-46 (_type_ vector) int) ;; 46 ;; set-heading!
     (nav-state-method-47 (_type_ meters) none) ;; 47 ;; set-speed!
