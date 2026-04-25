@@ -16086,7 +16086,7 @@
 (define-extern dma-buffer-add-ref-texture "Upload a texture, by reference. Doesn't copy the texture into the DMA buffer - just a reference,
                                            so it is up to the user to make sure the texture is valid during DMA time.
                                            Doesn't set up GIF for receiving textures."
-                                           (function dma-buffer pointer int int gs-psm none))
+                                           (function dma-buffer pointer int int gs-psm symbol))
 
 (define-extern gs-find-block "Lookup offset of block in PS2's swizzled VRAM, as a block index."
               (function int int gs-psm int))
@@ -35726,7 +35726,7 @@
 (define-extern dma-from-spr (function none)) ;; function
 (define-extern merc-dma-chain-to-spr (function none)) ;; function
 (define-extern blerc-execute (function none))
-(define-extern merc-blend-shape (function process-drawable object))
+(define-extern merc-blend-shape (function process-drawable int))
 (define-extern setup-blerc-chains-for-one-fragment (function object object object object object object object))
 (define-extern setup-blerc-chains (function merc-ctrl (pointer int16) dma-buffer int)) 
 
@@ -36871,7 +36871,7 @@
 (define-extern sparticle-texture-animate (function sparticle-system sparticle-cpuinfo vector symbol))
 (define-extern sparticle-texture-day-night (function sparticle-system sparticle-cpuinfo sprite-vec-data-2d none))
 (define-extern sparticle-motion-blur (function sparticle-system sparticle-cpuinfo vector none))
-(define-extern sparticle-motion-blur-old (function object sparticle-cpuinfo sprite-vec-data-3d object))
+(define-extern sparticle-motion-blur-old (function object sparticle-cpuinfo sprite-vec-data-3d int))
 (define-extern sparticle-set-conerot (function sparticle-launcher vector none))
 (define-extern check-ground-bounce (function sparticle-system sparticle-cpuinfo sparticle-launchinfo float))
 (define-extern check-drop-group-center (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
@@ -51911,7 +51911,7 @@
 (define-extern dm-cam-externalize2 (function symbol debug-menu-msg symbol))
 (define-extern dm-editable-boolean-toggle-pick-func (function int debug-menu-msg symbol))
 (define-extern editable-menu-context-make-menus (function debug-menu-context debug-menu-context))
-(define-extern insert-sample-camera (function symbol object))
+(define-extern insert-sample-camera (function symbol int))
 (define-extern *debug-hook* pair)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -52503,13 +52503,13 @@
 (define-extern *verts-buf-2* (inline-array triangulation-vert))
 (define-extern draw-square-point (function vector object))
 (define-extern get-level-id (function string int))
-(define-extern nav-mesh-editor-new (function object))
-(define-extern nav-delete (function int object))
-(define-extern nav-mesh-editor-translate (function int float float float object))
-(define-extern nav-mesh-editor-rotate-y (function float object))
-(define-extern nav-mesh-editor-load (function string object))
-(define-extern nav-mesh-editor-set-level (function symbol object))
-(define-extern nav-set-lev (function string object))
+(define-extern nav-mesh-editor-new (function int))
+(define-extern nav-delete (function int int))
+(define-extern nav-mesh-editor-translate (function int float float float int))
+(define-extern nav-mesh-editor-rotate-y (function float int))
+(define-extern nav-mesh-editor-load (function string int))
+(define-extern nav-mesh-editor-set-level (function symbol int))
+(define-extern nav-set-lev (function string int))
 (define-extern nav-set-flag (function nav-mesh-poly-flag object)) ;; R-4: re-applied P9 sig (enum ported above)
 (define-extern nav-mesh-editor-init (function symbol object :behavior nav-mesh-editor))
 
@@ -52697,7 +52697,7 @@
 
 (define-extern *visvol-edit-info* visvol-edit-info)
 (define-extern visvol-editor-init-by-other (function handle object :behavior visvol-editor))
-(define-extern stop-visvol-edit (function object))
+(define-extern stop-visvol-edit (function int))
 (define-extern visvol-edit (function string object))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
