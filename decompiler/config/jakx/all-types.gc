@@ -16531,7 +16531,7 @@
     (ocean-method-34 (_type_ dma-buffer uint uint int int int) int) ;; 34
     (ocean-method-35 (_type_ ocean-trans-mask int int vector) none) ;; 35
     (ocean-method-36 (_type_ uint uint uint uint) none) ;; 36
-    (ocean-method-37 (_type_ dma-buffer uint uint) dma-buffer) ;; 37
+    (ocean-method-37 (_type_ matrix matrix matrix) matrix) ;; 37
     (ocean-method-38 (_type_ dma-buffer object object) dma-buffer) ;; 38
     (ocean-method-39 (_type_ dma-buffer object object) none) ;; 39
     (ocean-method-40 (_type_ dma-buffer object object object object) none) ;; 40
