@@ -11786,7 +11786,7 @@
        @param rate-interp Value to set [[this::rate-special-interp]]
        @param set-current-interp? Uses `target-interp` to set [[this::current-special-interp]
        @returns [[none]]"
-      (_type_ float float symbol) int) ;; 13
+      (_type_ float float symbol) none) ;; 13
     (weather-event-concluded? ;; TODO - guess at name
       "@returns [[#t]] if [[this::override-weather-flag]] is set, we aren't in a cutscene and [[this::current-special-interp]] is equal to `0.0`"
       (_type_) symbol) ;; 14 ;; (apply-mood-color (_type_ mood-control-work) none)
@@ -21470,7 +21470,7 @@
   )
 ;; ---penetrate-h:penetrate
 
-(define-extern penetrate->string (function penetrate object))
+(define-extern penetrate->string (function penetrate string))
 (define-extern penetrate-using->damage (function penetrate float))
 (define-extern penetrated-by-all&hit-points->penetrated-by (function penetrate int penetrate))
 (define-extern pu->knocked-type (function penetrate knocked-type))
@@ -37197,7 +37197,7 @@
 (define-extern *texture-login-data* texture-login-data) ;; texture-login-data
 (define-extern texture-usage-init (function merc-ctrl symbol))
 (define-extern texture-usage-update (function texture symbol))
-(define-extern merc-stats-display (function merc-ctrl symbol))
+(define-extern merc-stats-display (function merc-ctrl none))
 (define-extern merc-stats (function none))
 (define-extern merc-edge-stats (function none))
 (define-extern merc-vu1-add-vu-function (function dma-packet vu-function int dma-gif-packet))
@@ -38462,13 +38462,13 @@
   (:methods
     (new (symbol type) _type_) ;; 0
     (gui-control-method-9 (_type_ process gui-channel gui-action string float time-frame) none) ;; 9
-    (gui-control-method-10 (_type_ process gui-channel) int) ;; 10
-    (gui-control-method-11 (_type_ gui-connection) int) ;; 11
+    (remove-process (_type_ process gui-channel) int) ;; 10
+    (stop-str (_type_ gui-connection) int) ;; 11
     (gui-control-method-12 (_type_ process gui-channel gui-action string int float sound-id) none) ;; 12
     (gui-control-method-13 (_type_ symbol) none) ;; 13
     (gui-control-method-14 (_type_ string gui-channel gui-action) int) ;; 14
     (gui-control-method-15 (_type_ process gui-channel string sound-id) symbol) ;; 15
-    (gui-control-method-16 (_type_ gui-action sound-id gui-channel gui-action string (function gui-connection symbol) process) int) ;; 16
+    (set-action! (_type_ gui-action sound-id gui-channel gui-action string (function gui-connection symbol) process) int) ;; 16
     (gui-control-method-17 (_type_ sound-id) int) ;; 17
     (gui-control-method-18 (_type_ gui-channel) symbol) ;; 18
     (gui-control-method-19 (_type_ gui-channel gui-connection) symbol) ;; 19
@@ -38477,7 +38477,7 @@
     (gui-control-method-22 (_type_ gui-connection vector) none) ;; 22
     (gui-control-method-23 (_type_ gui-connection process symbol) none) ;; 23
     (gui-control-method-24 (_type_ gui-channel gui-channel symbol gui-connection) symbol) ;; 24
-    (gui-control-method-25 (_type_ gui-connection sound-id) int) ;; 25
+    (channel-id-set! (_type_ gui-connection sound-id) int) ;; 25
     )
   )
 
@@ -38622,7 +38622,7 @@
 (define-extern *override-mood-fog-table* object)
 (define-extern init-override-table (function mood-table pointer))
 (define-extern *override-table* mood-table)
-(define-extern print-mood-tables (function object))
+(define-extern print-mood-tables "Generates the GOAL code for defining the current state of [[*overide-table*]]" (function none))
 (define-extern desaturate-mood-colors (function float float float none))
 (define-extern desaturate-mood-fog (function (pointer mood-fog-table) float float none))
 (define-extern *debug-mood-color-table* mood-color-table) ;; mood-color-table
@@ -39634,7 +39634,7 @@
 (define-extern death-warp-in death-info) ;; death-info
 (define-extern death-warp-out death-info) ;; death-info
 (define-extern sparticle-texture-glow-soft (function sparticle-system sparticle-cpuinfo vector none))
-(define-extern merc-death-spawn (function int vector vector int)) 
+(define-extern merc-death-spawn (function int vector vector none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; water-h                        ;;
@@ -42727,13 +42727,13 @@
   :flag-assert         #x1600000060
   (:methods
     (nav-engine-method-9 (_type_ uint) uint) ;; 9
-    (nav-engine-method-10 (_type_ nav-mesh) none) ;; 10
-    (nav-engine-method-11 (_type_) none) ;; 11
+    (lay-out-spad-memory (_type_ nav-mesh) none) ;; 10
+    (set-up-mem-work (_type_) none) ;; 11
     (nav-engine-method-12 (_type_ sphere-hash nav-mesh) none) ;; 12
     (nav-engine-method-13 (_type_) none) ;; 13
-    (nav-engine-method-14 (_type_) none) ;; 14
-    (nav-engine-method-15 (_type_) none) ;; 15
-    (nav-engine-method-16 (_type_) none) ;; 16
+    (do-sphere-lookups (_type_) none) ;; 14
+    (update-nav-controls-pipelined-in-spr (_type_) none) ;; 15
+    (update-nav-controls-in-spr (_type_) none) ;; 16
     (nav-engine-method-17 (_type_ nav-engine-spr-buffer) none) ;; 17 ;; (upload-nav-to-spr (_type_ nav-engine-spr-buffer) none)
     (nav-engine-method-18 (_type_ nav-engine-spr-buffer) none) ;; 18 ;; (download-nav-from-spr (_type_ nav-engine-spr-buffer) none)
     (nav-engine-method-19 (_type_ nav-engine-spr-buffer) none) ;; 19 ;; (do-callbacks (_type_ nav-engine-spr-buffer) none)
@@ -43153,7 +43153,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern cloud-track (function process-tree process-tree (function vector none) time-frame time-frame time-frame none :behavior process))
-(define-extern eco-blue-glow (function vector int)) 
+(define-extern eco-blue-glow (function vector none))
 (define-extern process-contact-action (function process none :behavior target))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51120,7 +51120,7 @@
 (define-extern *auto-test-break* object)
 (define-extern check-entities (function none))
 (define-extern auto-test-node (function none))
-(define-extern auto-test-levels-init-by-other (function none))
+(define-extern auto-test-levels-init-by-other (function level object :behavior lprecurc-loader))
 (define-extern auto-test-levels-start (function none))
 (define-extern check-levels (function none))
 (define-extern *sound-clone* object)
@@ -53124,13 +53124,13 @@
     (manipulator-method-11 (_type_) none) ;; 11
     (manipulator-method-12 (_type_ vector) none) ;; 12
     (manipulator-method-13 (_type_ vector vector) int) ;; 13
-    (manipulator-method-14 (_type_) int) ;; 14
+    (manipulator-method-14 (_type_) none) ;; 14
     )
   )
   
 
 
-(define-extern draw-axis (function vector vector float float rgba symbol)) 
+(define-extern draw-axis (function vector vector float float rgba none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; editable-h                     ;;
@@ -53650,7 +53650,7 @@
   :size-assert         #x4c
   :flag-assert         #xb0000004c
   (:methods
-    (mysql-nav-node-method-9 (_type_) symbol) ;; 9
+    (exec-sql! (_type_) symbol) ;; 9
     (mysql-nav-node-method-10 (_type_) int) ;; 10
     )
   )
@@ -53788,20 +53788,20 @@
   :size-assert         #x430
   :flag-assert         #x1800000430
   (:methods
-    (new (symbol type) _type_) ;; 0
-    (mysql-nav-graph-method-9 (_type_ string string) symbol) ;; 9
-    (mysql-nav-graph-method-10 (_type_) symbol) ;; 10
+    (new (symbol type string) _type_) ;; 0
+    (init-from-sql! (_type_ symbol string) symbol) ;; 9
+    (exec-sql! (_type_) symbol) ;; 10
     (mysql-nav-graph-method-11 (_type_ int) int) ;; 11
     (mysql-nav-graph-method-12 (_type_ int) int) ;; 12
-    (mysql-nav-graph-method-13 (_type_) int) ;; 13
-    (mysql-nav-graph-method-14 (_type_) int) ;; 14
-    (mysql-nav-graph-method-15 (_type_ int int) int) ;; 15
-    (mysql-nav-graph-method-16 (_type_ int int) int) ;; 16
-    (mysql-nav-graph-method-17 (_type_) int) ;; 17
+    (alloc-new-node! (_type_) int) ;; 13
+    (alloc-new-edge! (_type_) int) ;; 14
+    (indexof-visnode (_type_ int int) int) ;; 15
+    (alloc-new-visnode! (_type_ int int) int) ;; 16
+    (mysql-nav-graph-method-17 (_type_) none) ;; 17
     (mysql-nav-graph-method-18 (_type_ mysql-nav-node symbol) none) ;; 18
     (mysql-nav-graph-method-19 (_type_) int) ;; 19
     (mysql-nav-graph-method-20 (_type_) int) ;; 20
-    (mysql-nav-graph-method-21 (_type_ symbol) symbol) ;; 21
+    (get-graph-type (_type_ symbol) symbol) ;; 21
     (mysql-nav-graph-method-22 (_type_) int) ;; 22
     (mysql-nav-graph-method-23 (_type_ vector vector) symbol) ;; 23
     )
@@ -54081,11 +54081,11 @@
   :size-assert         #x28
   :flag-assert         #x1300000028
   (:methods
-    (nav-mesh-editable-method-9 (_type_) none) ;; 9
+    (init-fields! (_type_) none) ;; 9
     (nav-mesh-editable-method-10 (_type_ symbol) none) ;; 10
-    (nav-mesh-editable-method-11 (_type_ vector) none) ;; 11
+    (add-vert! (_type_ vector) int) ;; 11
     (nav-mesh-editable-method-12 (_type_ vector symbol) none) ;; 12
-    (nav-mesh-editable-method-13 (_type_) symbol) ;; 13
+    (nav-mesh-editable-method-13 (_type_) none) ;; 13
     (nav-mesh-editable-method-14 (_type_ vector) none) ;; 14
     (nav-mesh-editable-method-15 (_type_ int) none) ;; 15
     (nav-mesh-editable-method-16 (_type_) symbol) ;; 16
@@ -54121,7 +54121,7 @@
   :flag-assert         #xa00000014
   (:methods
     (new (symbol type) _type_) ;; 0
-    (nav-mesh-editor-undo-method-9 (_type_) none) ;; 9
+    (init-fields! (_type_) none) ;; 9
     )
   )
   
@@ -54243,8 +54243,8 @@
 (define-extern nav-delete (function int int))
 (define-extern nav-mesh-editor-translate (function int float float float int))
 (define-extern nav-mesh-editor-rotate-y (function float int))
-(define-extern nav-mesh-editor-load (function string int))
-(define-extern nav-mesh-editor-set-level (function symbol int))
+(define-extern nav-mesh-editor-load (function string object))
+(define-extern nav-mesh-editor-set-level (function symbol object))
 (define-extern nav-set-lev (function string int))
 (define-extern nav-set-flag (function nav-mesh-poly-flag object)) ;; R-4: re-applied P9 sig (enum ported above)
 (define-extern nav-mesh-editor-init (function symbol object :behavior nav-mesh-editor))
