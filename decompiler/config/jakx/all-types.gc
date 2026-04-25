@@ -3792,7 +3792,7 @@
 (define-extern *in-game-menu-process* object)
 (define-extern *in-game-menu-on?* object)
 (define-extern in-game-menu-allowed? (function none))
-(define-extern *in-game-menu-struct* object)
+(define-extern *in-game-menu-struct* in-game-menu-struct)
 (define-extern *hud-in-game-menu-view-0* array)
 (define-extern *hud-in-game-menu-view-0-proc* object)
 (define-extern spawn-hud-in-game-menu-view-0 (function object))
@@ -27804,7 +27804,7 @@
   )
 
 
-(define-extern *level-bounding-box* object)
+(define-extern *level-bounding-box* level-bounding-box)
 (define-extern *msg-buffers* object)
 (define-extern alloc-msg-buffer (function none))
 (define-extern free-msg-buffer (function none))
@@ -38324,7 +38324,7 @@
 (define-extern birth-func-set-parent-pntr (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
 (define-extern birth-func-get-parent-quat (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
 (define-extern spt-func-camera-facing-orbiter (function sparticle-system sparticle-cpuinfo sparticle-launchinfo quaternion))
-(define-extern *particle-birth-work* object)
+(define-extern *particle-birth-work* particle-birth-work)
 (define-extern birth-func-set-quat (function int sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern birth-func-add-vel (function none))
 (define-extern birth-func-set-vel (function object sparticle-cpuinfo sparticle-launchinfo none))
@@ -43342,7 +43342,7 @@
 
 
 (define-extern *dynamic-alloc-pool* object)
-(define-extern *mem-manager* object)
+(define-extern *mem-manager* mem-manager)
 (define-extern mem-alloc-scert (function none))
 (define-extern mem-free-scert (function none))
 (define-extern mem-realloc-scert (function none))
@@ -44089,9 +44089,9 @@
 
 
 (define-extern *net-player-ladder-stats-info-array* array)
-(define-extern *net-player-ladder-stats-info* object)
+(define-extern *net-player-ladder-stats-info* net-player-ladder-stats-info)
 (define-extern *net-clan-ladder-stats-info-array* array)
-(define-extern *net-clan-ladder-stats-info* object)
+(define-extern *net-clan-ladder-stats-info* net-clan-ladder-stats-info)
 (define-extern get-skill-level (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -48090,7 +48090,7 @@
 (define-extern net-simple-destruct-mgr-init-remote (function none))
 (define-extern *msg-map-net-simple-destruct-mgr* array)
 (define-extern *net-process-class-info-net-simple-destruct-mgr* net-process-class-info)
-(define-extern *net-simple-destruct-mgr* object)
+(define-extern *net-simple-destruct-mgr* net-simple-destruct-mgr)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-hud-h                      ;;
@@ -49939,11 +49939,11 @@
 (define-extern *medius-init-in-params* object)
 (define-extern *medius-init-out-params* object)
 (define-extern *medius-connect-in-params* medius-connect-in-params)
-(define-extern *medius-connect-out-params* object)
+(define-extern *medius-connect-out-params* medius-connect-out-params)
 (define-extern *medius-public-key* object)
 (define-extern *medius-connect-info* object)
-(define-extern *medius-world-report* object)
-(define-extern *medius-player-report* object)
+(define-extern *medius-world-report* medius-world-report)
+(define-extern *medius-player-report* medius-player-report)
 (define-extern *medius-chat-message* object)
 (define-extern *medius-auth-request* object)
 (define-extern *medius-player-ladder-stats* object)
@@ -50306,7 +50306,7 @@
 (define-extern end-game-on-me-callback (function none))
 (define-extern move-game-on-me-callback (function none))
 (define-extern check-game-on-me (function none))
-(define-extern *medius-account-update-stats-request* object)
+(define-extern *medius-account-update-stats-request* medius-account-update-stats-request)
 (define-extern *medius-update-ladder-stats-wide-request* object)
 (define-extern medius-start-account-stats-update (function none))
 (define-extern medius-start-clan-stats-update (function symbol))
