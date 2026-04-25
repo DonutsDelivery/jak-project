@@ -2242,9 +2242,9 @@
     (hud-item-method-9 (_type_) none) ;; 9
     (hud-item-method-10 (_type_) none) ;; 10
     (hud-item-method-11 (_type_) int) ;; 11
-    (hud-item-method-12 (_type_) none) ;; 12
-    (hud-item-method-13 (_type_) none) ;; 13
-    (hud-item-method-14 (_type_) none) ;; 14
+    (hud-item-method-12 (_type_) symbol) ;; 12
+    (hud-item-method-13 (_type_) symbol) ;; 13
+    (hud-item-method-14 (_type_) symbol) ;; 14
     (hud-item-method-15 (_type_) none) ;; 15
     (hud-item-method-16 (_type_) none) ;; 16
     (hud-item-method-17 (_type_) none) ;; 17
@@ -3906,18 +3906,18 @@
   :size-assert         #xe4
   :flag-assert         #x24000000e4
   (:methods
-    (hud-player-positions-method-24 (_type_) none) ;; 24
-    (hud-player-positions-method-25 (_type_) none) ;; 25
+    (hud-player-positions-method-24 (_type_) symbol) ;; 24
+    (hud-player-positions-method-25 (_type_) symbol) ;; 25
     (hud-player-positions-method-26 (_type_) none) ;; 26
     (hud-player-positions-method-27 (_type_) none) ;; 27
-    (hud-player-positions-method-28 (_type_) none) ;; 28
-    (hud-player-positions-method-29 (_type_) none) ;; 29
+    (hud-player-positions-method-28 (_type_) symbol) ;; 28
+    (hud-player-positions-method-29 (_type_) symbol) ;; 29
     (hud-player-positions-method-30 (_type_) none) ;; 30
-    (hud-player-positions-method-31 (_type_) none) ;; 31
+    (hud-player-positions-method-31 (_type_) symbol) ;; 31
     (hud-player-positions-method-32 (_type_) none) ;; 32
     (hud-player-positions-method-33 (_type_) none) ;; 33
     (hud-player-positions-method-34 (_type_) none) ;; 34
-    (hud-player-positions-method-35 (_type_) none) ;; 35
+    (hud-player-positions-method-35 (_type_) symbol) ;; 35
     )
   )
 
@@ -19817,8 +19817,8 @@
     (new (symbol type) _type_) ;; 0
     (joint-control-method-9 (_type_) none) ;; 9
     (joint-control-method-10 (_type_) none) ;; 10
-    (joint-control-method-11 (_type_ symbol) none) ;; 11
-    (joint-control-method-12 (_type_ int) none) ;; 12
+    (joint-control-method-11 (_type_ symbol) int) ;; 11
+    (joint-control-method-12 (_type_ int) joint-control-channel) ;; 12
     )
   )
 
@@ -29670,13 +29670,13 @@
     (net-enemy-method-62 (_type_) none) ;; 62
     (net-enemy-method-63 (_type_) none) ;; 63
     (net-enemy-method-64 (_type_) none) ;; 64
-    (net-enemy-method-65 (_type_) none) ;; 65
+    (net-enemy-method-65 (_type_) symbol) ;; 65
     (net-enemy-method-66 (_type_) none) ;; 66
-    (net-enemy-method-67 (_type_) none) ;; 67
+    (net-enemy-method-67 (_type_) symbol) ;; 67
     (net-enemy-method-68 (_type_) none) ;; 68
     (net-enemy-method-69 (_type_) none) ;; 69
     (net-enemy-method-70 (_type_) none) ;; 70
-    (net-enemy-method-71 (_type_) none) ;; 71
+    (net-enemy-method-71 (_type_) symbol) ;; 71
     (net-enemy-method-72 (_type_) none) ;; 72
     (net-enemy-method-73 (_type_) int) ;; 73
     (net-enemy-method-74 (_type_) none) ;; 74
