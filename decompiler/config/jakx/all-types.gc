@@ -35862,7 +35862,7 @@
     (nav-control-method-37 (_type_) none) ;; 37
     (nav-control-method-38 (_type_) none) ;; 38
     (nav-control-method-39 (_type_ float) none) ;; 39
-    (nav-control-method-40 (_type_ uint) int) ;; 40
+    (set-sphere-mask! (_type_ uint) none) ;; 40
     (nav-control-method-41 (_type_) none) ;; 41
     (nav-control-method-42 (_type_ collide-shape) int) ;; 42
     (nav-control-method-43 (_type_) none) ;; 43
@@ -37584,18 +37584,18 @@
 (define-extern set-clut-alpha-texture-anim-layer-func (function dma-buffer uint int int texture-anim-layer float int))
 (define-extern dest-texture-init (function texture-anim int)) 
 (define-extern src-texture-init (function texture-anim-layer int)) 
-(define-extern src-texture-init-mt8 (function texture-anim-layer int)) 
+(define-extern src-texture-init-mt8 (function texture-anim-layer none))
 (define-extern make-noise-texture (function pointer int int int uint)) 
-(define-extern make-cloud-clut (function (pointer uint32) float float symbol)) 
-(define-extern texture-anim-cloud-clut-upload (function dma-buffer texture-anim int)) 
+(define-extern make-cloud-clut (function (pointer uint32) float float none))
+(define-extern texture-anim-cloud-clut-upload (function dma-buffer texture-anim none))
 (define-extern texture-anim-cloud-clut-init (function texture-anim int)) 
-(define-extern make-slime-clut (function (pointer uint32) symbol)) 
-(define-extern make-ramp-clut (function (pointer uint32) pointer object symbol)) 
-(define-extern make-alpha-ramp-clut (function (pointer uint32) symbol)) 
-(define-extern texture-anim-alpha-ramp-clut-upload (function dma-buffer texture-anim int)) 
-(define-extern texture-anim-alpha-ramp-clut-init (function texture-anim int)) 
+(define-extern make-slime-clut (function (pointer uint32) none))
+(define-extern make-ramp-clut (function (pointer uint32) pointer object none))
+(define-extern make-alpha-ramp-clut (function (pointer uint32) none))
+(define-extern texture-anim-alpha-ramp-clut-upload (function dma-buffer texture-anim none))
+(define-extern texture-anim-alpha-ramp-clut-init (function texture-anim none))
 (define-extern texture-anim-override-size-init (function none))
-(define-extern texture-anim-change-mt8h-init (function texture-anim int)) 
+(define-extern texture-anim-change-mt8h-init (function texture-anim none))
 (define-extern *texture-anim-pages-table* (pointer uint8)) ;; (pointer uint8)
 (define-extern *texture-anim-mip-array* (pointer uint16)) ;; (pointer uint16)
 
@@ -54373,7 +54373,7 @@
 (define-extern debug-menu-make-task-sub-menu (function symbol pair))
 (define-extern debug-menu-make-task-menu (function debug-menu-context debug-menu-item-submenu))
 (define-extern dm-play-task-with-continue (function game-task string object))
-(define-extern dm-play-task (function game-task object))
+(define-extern dm-play-task (function game-task none))
 (define-extern dm-play-race (function race-selection symbol object))
 (define-extern debug-menu-make-play-menu (function debug-menu-context debug-menu-node))
 (define-extern dm-anim-tester-flag-func (function int debug-menu-msg symbol))
