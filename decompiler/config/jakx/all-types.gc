@@ -35497,7 +35497,7 @@
     (nav-mesh-method-25 (_type_ entity) none) ;; 25 ;; init-from-entity (entity-nav-mesh commented, use entity)
     (nav-mesh-method-26 (_type_) int) ;; 26 ;; handle-birth
     (nav-mesh-method-27 (_type_) int) ;; 27 ;; handle-kill
-    (nav-mesh-method-28 (_type_) none) ;; 28 ;; update-navigation
+    (nav-mesh-method-28 (_type_ process-drawable) none) ;; 28
     (nav-mesh-method-29 (_type_) nav-control) ;; 29 ;; new-nav-control
     (nav-mesh-method-30 (_type_ nav-control) none) ;; 30 ;; remove-nav-control
     (nav-mesh-method-31 (_type_ process-drawable symbol) none) ;; 31 ;; add-process-drawable-to-nav-mesh
