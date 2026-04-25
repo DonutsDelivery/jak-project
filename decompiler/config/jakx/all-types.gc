@@ -43617,7 +43617,7 @@
   :flag-assert         #x3c01100198
   (:methods
     (joint-exploder-method-50 (_type_) none) ;; 50
-    (joint-exploder-method-51 (_type_) none) ;; 51
+    (joint-exploder-method-51 (_type_ joint-exploder-list joint-exploder-joint) none) ;; 21 ;; (TODO-RENAME-21 (_type_ joint-exploder-list joint-exploder-joint) none) ;; 51
     (joint-exploder-method-52 (_type_) none) ;; 52
     (joint-exploder-method-53 (_type_) none) ;; 53
     (joint-exploder-method-54 (_type_) none) ;; 54
