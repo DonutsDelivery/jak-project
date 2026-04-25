@@ -36330,7 +36330,7 @@
 (define-extern sound-music-load "Send load-music rpc to loader" (function sound-name int))
 (define-extern sound-music-unload "Send unload-music rpc to loader." (function int))
 (define-extern set-language "Send set-language rpc to loader. Note this is only for sound, no game text is changed." (function language-enum int))
-(define-extern sound-set-stereo-mode "Send set-stereo-mode rpc to loader." (function stereo-mode none))
+(define-extern sound-set-stereo-mode "Send set-stereo-mode rpc to loader." (function int none))
 (define-extern list-sounds "Send list-sounds rpc to loader." (function none))
 (define-extern sound-command->string (function sound-command string))
 (define-extern sound-buffer-dump "Print out all sound-commands in the buffer." (function int))
