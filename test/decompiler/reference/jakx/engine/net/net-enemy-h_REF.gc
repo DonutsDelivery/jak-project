@@ -28,7 +28,7 @@
   )
 
 ;; definition for symbol *tmp-construct-transition*, type object
-(define *tmp-construct-transition* #f)
+(define *tmp-construct-transition* (the-as object (new 'static 'net-enemy-transition)))
 
 ;; definition of type net-enemy-anim-info
 (deftype net-enemy-anim-info (structure)
@@ -230,7 +230,7 @@
   )
 
 ;; definition for symbol *net-process-class-info-net-enemy*, type object
-(define *net-process-class-info-net-enemy* #f)
+(define *net-process-class-info-net-enemy* (the-as object (new 'static 'net-process-class-info)))
 
 ;; failed to figure out what this is:
 (set! (-> (the-as net-process-class-info *net-process-class-info-net-enemy*) msg-map) *msg-map-net-enemy*)
@@ -256,7 +256,7 @@
   )
 
 ;; definition for symbol *net-enemy-list*, type object
-(define *net-enemy-list* #f)
+(define *net-enemy-list* (the-as object (new 'static 'linked-list)))
 
 ((method-of-type linked-list linked-list-method-9) (the-as linked-list *net-enemy-list*))
 

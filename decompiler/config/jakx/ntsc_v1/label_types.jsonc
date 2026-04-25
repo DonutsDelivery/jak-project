@@ -1535,5 +1535,14 @@
       "string"
     ]
   ],
-  "generic-merc": [["L178", "(inline-array invinitdata)", 8]]
+  "generic-merc": [["L178", "(inline-array invinitdata)", 8]],
+  "net-enemy-h": [
+    ["L8", "linked-list", false],
+    ["L9", "net-process-class-info", false],
+    ["L12", "net-enemy-transition", false]
+  ],
+  "net-player-h": [
+    ["L8", "(pointer uint8)", 8],
+    ["L9", "(pointer uint32)", 8]
+  ]
 }

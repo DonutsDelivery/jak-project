@@ -8053,6 +8053,7 @@
 ;; <renderer>-l<level>-<tpage>
 (defenum bucket-id
   :type int32
+  (debug 793)
   )
 
 ;; ---vu1-user-h:bucket-id
@@ -11883,6 +11884,22 @@
 ;; +++level-h:level-memory-mode
 (defenum level-memory-mode
   :type uint32
+  (micro 0)
+  (tiny 1)
+  (tiny-edge 2)
+  (tiny-center 3)
+  (small-edge 4)
+  (small-center 5)
+  (city-center 6)
+  (medium 7)
+  (large 8)
+  (alias 9)
+  (borrow 10)
+  (borrow0 11)
+  (borrow1 12)
+  (borrow2 13)
+  (borrow3 14)
+  (borrow4 15)
   )
 ;; ---level-h:level-memory-mode
 
@@ -34221,7 +34238,7 @@
   :size-assert         #x10
   :flag-assert         #xb00000010
   (:methods
-    (sparticle-launcher-method-9 (_type_ sp-field-id) none) ;; 9
+    (sparticle-launcher-method-9 (_type_ sp-field-id) sp-field-init-spec) ;; 9
     (sparticle-launcher-method-10 (_type_ string) none) ;; 10
     )
   )

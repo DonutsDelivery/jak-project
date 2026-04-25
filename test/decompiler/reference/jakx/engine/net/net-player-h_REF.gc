@@ -261,10 +261,14 @@
   )
 
 ;; definition for symbol *team-colors*, type object
-(define *team-colors* #f)
+(define *team-colors*
+  (the-as object
+    (new 'static 'array uint32 8 #x800000ff #x80ff0000 #x8000ff00 #x80dede00 #x80ffffff #x80008080 #x0 #x0)
+    )
+  )
 
 ;; definition for symbol *team-font-colors*, type object
-(define *team-font-colors* #f)
+(define *team-font-colors* (the-as object (new 'static 'array uint8 8 #x3 #x7 #x6 #x49 #x1 #x4 #x0 #x0)))
 
 
 
