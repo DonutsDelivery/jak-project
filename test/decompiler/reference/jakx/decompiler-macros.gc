@@ -14,6 +14,13 @@
   `(-> (the-as (pointer uint32) ,location) 0)
   )
 
+(defmacro incomplete-bitfield-access (type)
+  "Stub: decompiler placeholder for unresolved bitfield offsets.
+   When the decompiler can't resolve a bitfield's offset, it emits this
+   form. Resolves to 0 so (&+ ptr (incomplete-bitfield-access X))
+   reads the base of the bitfield region."
+  `(begin ,type 0))
+
 (defmacro init-vf0-vector ()
   "Initializes the VF0 vector which is a constant vector in the VU set to <0,0,0,1>"
   `(.lvf vf0 (new 'static 'vector :x 0.0 :y 0.0 :z 0.0 :w 1.0))
