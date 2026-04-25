@@ -1,5 +1,6 @@
 #include "types2.h"
 
+#include <algorithm>
 #include <set>
 
 #include "common/log/log.h"
@@ -609,13 +610,30 @@ void run(Output& out, const Input& input) {
   construct_function_entry_types(function_cache.blocks.at(0).start_types, input.function_type,
                                  stack_slots);
 
-  // Run propagation, until we get through an iteration with no changes
-  [[maybe_unused]] int blocks_run = 0;
-  [[maybe_unused]] int outer_iterations = 0;
+  // Run propagation, until we get through an iteration with no changes.
+  // Cap on outer iterations: pathological functions (e.g. (method 41 nav-control) when
+  // commented/incomplete deftypes leave loads with no inferable type) can drive
+  // non-monotonic backprop oscillation that never converges. Bail out with a clear
+  // error rather than hanging the entire decomp run. The bound scales with function
+  // size so larger functions still get headroom.
+  const int kMaxOuterIterations =
+      std::max(2000, 50 * static_cast<int>(function_cache.blocks.size()));
+  int blocks_run = 0;
+  int outer_iterations = 0;
   bool needs_rerun = true;
   bool hit_error = false;
   while (needs_rerun) {
     outer_iterations++;
+    if (outer_iterations > kMaxOuterIterations) {
+      auto err = fmt::format(
+          "Type propagation did not converge after {} iterations (pass 1, blocks_run={}, "
+          "blocks={})",
+          outer_iterations, blocks_run, function_cache.blocks.size());
+      input.func->warnings.error(err);
+      lg::error("Function {} {}", input.func->name(), err);
+      hit_error = true;
+      goto end_type_pass;
+    }
     needs_rerun = false;
 
     for (auto block_idx : function_cache.block_visit_order) {
@@ -666,6 +684,16 @@ void run(Output& out, const Input& input) {
   function_cache.blocks.at(0).needs_run = true;
   while (needs_rerun) {
     outer_iterations++;
+    if (outer_iterations > kMaxOuterIterations) {
+      auto err = fmt::format(
+          "Type propagation did not converge after {} iterations (pass 2, blocks_run={}, "
+          "blocks={})",
+          outer_iterations, blocks_run, function_cache.blocks.size());
+      input.func->warnings.error(err);
+      lg::error("Function {} {}", input.func->name(), err);
+      hit_error = true;
+      goto end_type_pass;
+    }
     needs_rerun = false;
     for (auto block_idx : function_cache.block_visit_order) {
       if (function_cache.blocks.at(block_idx).needs_run) {
