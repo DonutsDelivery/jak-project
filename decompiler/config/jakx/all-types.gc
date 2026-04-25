@@ -1813,7 +1813,7 @@
 ;; intro-part                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern spt-func-part-sparks-bits-local (function none))
+(define-extern spt-func-part-sparks-bits-local (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern *range-carexplo-cu-dust-color* curve-color-fast)
 (define-extern *range-carexplo-cu-dust-alpha* curve2d-fast)
 (define-extern *range-carexplo-cu-dust-scale-x* curve2d-fast)
@@ -1830,7 +1830,7 @@
 (define-extern *curve-intro-carexplo-cu-scale-x* curve2d-fast)
 (define-extern *curve-intro-carexplo-cu-scale-y* curve2d-fast)
 (define-extern *part-intro-car-explo-closeup-texture-curve-settings* particle-curve-settings)
-(define-extern spt-birth-func-brightness-outro-smoke (function float))
+(define-extern spt-birth-func-brightness-outro-smoke (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d float))
 (define-extern *range-carexplo-fnl-dust-color* curve-color-fast)
 (define-extern *range-carexplo-fnl-dust-alpha* curve2d-fast)
 (define-extern *range-carexplo-fnl-dust-scale-x* curve2d-fast)
@@ -1866,8 +1866,8 @@
 (define-extern *range-intro-carexplo2-scale-x* curve2d-fast)
 (define-extern *range-intro-carexplo2-scale-y* curve2d-fast)
 (define-extern *part-intro-car-explosion-texture2-curve-settings* particle-curve-settings)
-(define-extern spt-func-part-outro-b-dashboard (function none))
-(define-extern spt-func-part-outro-b-dashboard-sparks (function none))
+(define-extern spt-func-part-outro-b-dashboard (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d none))
+(define-extern spt-func-part-outro-b-dashboard-sparks (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; intro-scenes2                  ;;
@@ -1910,11 +1910,11 @@
 ;; race-part                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern spt-func-part-super-turbo-charges (function none))
-(define-extern spt-func-part-red-pellet-charges (function none))
-(define-extern spt-func-part-pellet-collect-blue-blurs (function none))
-(define-extern spt-func-part-pellet-collect-light-blurs (function none))
-(define-extern spt-birth-func-brightness-collectoid-dust (function float))
+(define-extern spt-func-part-super-turbo-charges (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern spt-func-part-red-pellet-charges (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern spt-func-part-pellet-collect-blue-blurs (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern spt-func-part-pellet-collect-light-blurs (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern spt-birth-func-brightness-collectoid-dust (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d float))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; race-obs                       ;;
@@ -12898,8 +12898,8 @@
 (define-extern *vehicle-manager* object) ;; vehicle-manager
 (define-extern vehicle-type->string (function int string))
 (define-extern driver-type->string (function int string))
-(define-extern type-from-driver-type (function none))
-(define-extern level-from-driver-type (function symbol))
+(define-extern type-from-driver-type (function int type))
+(define-extern level-from-driver-type (function int symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; game-task-h                    ;;
@@ -14146,13 +14146,13 @@
   )
 
 (define-extern *car-type-names* array)
-(define-extern type-from-vehicle-type (function none)) ;; (function vehicle-type type)
-(define-extern level-name-from-vehicle-type (function symbol))
-(define-extern car-type-from-vehicle-type (function none))
-(define-extern vehicle-type-from-car-type (function none))
-(define-extern car-type-from-level-name (function none))
-(define-extern vehicle-type-from-level-name (function none))
-(define-extern vehicle-type-from-name (function none))
+(define-extern type-from-vehicle-type (function int type))
+(define-extern level-name-from-vehicle-type (function int symbol))
+(define-extern car-type-from-vehicle-type (function int int))
+(define-extern vehicle-type-from-car-type (function int int))
+(define-extern car-type-from-level-name (function symbol int))
+(define-extern vehicle-type-from-level-name (function symbol int))
+(define-extern vehicle-type-from-name (function string int))
 (define-extern *car-part-names* array)
 (define-extern *car-part-translate-array* array)
 (define-extern *car-part-translate-names* array)
@@ -14436,7 +14436,13 @@
 
   
 (deftype blit-displays-work (structure)
-  ((pad uint8 596 :offset-assert 0)
+  ((pad-0          uint8  304 :offset-assert 0)
+   (line-color     uint64     :offset-assert 304)
+   (pad-312        uint8  248 :offset-assert 312)
+   (vu1-user-menu  uint64     :offset-assert 560)
+   (tex-user-menu  uint32     :offset-assert 568)
+   (hflip-flag     uint32     :offset-assert 572)
+   (pad-576        uint8   20 :offset-assert 576)
    )
   :method-count-assert 27
   :size-assert         #x254
@@ -51840,7 +51846,16 @@
 
 (deftype driver (process-focusable)
   (;; offsets derived from ntsc_v1 binary (process-nettable is 4 bytes smaller than jak3)
-   (info-pad           uint8       24      :offset 252) ;; driver-info inline, 16-byte align issue at 252
+   (info-skel          basic               :offset 252)
+   (info-turn-back     int8                :offset 256)
+   (info-turn-front    int8                :offset 257)
+   (info-up-down       int8                :offset 258)
+   (info-intro         uint8  4            :offset 259)
+   (info-head-node     int8                :offset 263)
+   (info-arm0-node     int8                :offset 264)
+   (info-arm1-node     int8                :offset 265)
+   (info-arm0-dist     float               :offset 268)
+   (info-arm1-dist     float               :offset 272)
    (vehicle            uint8       8       :offset 276) ;; uint64 but 4-byte aligned — skip GOAL align check
    (speech-time        uint8       8       :offset 284) ;; uint64 but 4-byte aligned
    (driver-unk292      uint8       8       :offset 292)
