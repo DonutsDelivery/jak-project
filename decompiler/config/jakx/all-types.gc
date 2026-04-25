@@ -20959,7 +20959,7 @@
 
 (define-extern invalidate-cache-line (function pointer int))
 (define-extern *bucket-map* (pointer bucket-id-16))
-(define-extern vu1-bucket-map "Map from level, texture, mode to bucket-id." (function int int merc-mode bucket-id))
+(define-extern vu1-bucket-map "Map from level, texture, mode, sub-index to bucket-id." (function int int merc-mode int bucket-id))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; engines                        ;;
@@ -32016,6 +32016,7 @@
   :size-assert         #x84
   :flag-assert         #x1c00000084
   (:methods
+    (new (symbol type int int) _type_) ;; 0
     (collide-cache-method-9 (_type_) none) ;; 9
     (collide-cache-method-10 (_type_ collide-query) float) ;; 10
     (collide-cache-method-11 (_type_ collide-query) symbol) ;; 11
@@ -45462,6 +45463,16 @@
   :flag-assert         #x900000068
   )
 
+(deftype race-line-slice-data (structure)
+  ((pad0   uint8  4 :offset-assert 0)
+   (count  int16    :offset-assert 4)
+   (pad1   uint8 10 :offset-assert 6)
+   (points uint32   :offset-assert 16)
+   )
+  :method-count-assert 9
+  :size-assert         #x14
+  :flag-assert         #x900000014
+  )
 
 
 (deftype race-line (structure)
