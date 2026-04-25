@@ -5948,7 +5948,7 @@
 (define-extern *drift-file-stream* file-stream)
 (define-extern *drift-editor* object)
 (define-extern drift-editor-init-by-other (function none))
-(define-extern start-drift (function none))
+(define-extern start-drift (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; race-mesh                      ;;
@@ -36265,7 +36265,7 @@
 (define-extern tfrag-vu1-init-buf (function bucket-id gs-test int uint symbol pointer))
 (define-extern tfrag-scissor-vu1-init-buf (function bucket-id gs-test int uint symbol none))
 (define-extern *tfrag-init-table* (inline-array tfrag-init-data)) ;; (inline-array tfrag-init-data)
-(define-extern tfrag-vu1-init-buffers (function none))
+(define-extern tfrag-vu1-init-buffers (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tfrag-work                     ;;
@@ -36340,8 +36340,8 @@
 (define-extern tie-end-buffer (function dma-buffer int)) 
 (define-extern tie-int-reg (function int string))
 (define-extern tie-float-reg (function int string))
-(define-extern tie-ints (function none))
-(define-extern tie-floats (function none))
+(define-extern tie-ints (function symbol))
+(define-extern tie-floats (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; etie-vu1                       ;;
@@ -36388,9 +36388,9 @@
 (define-extern etie-end-buffer (function dma-buffer int)) 
 (define-extern etie-float-reg-bp (function none))
 (define-extern etie-float-reg (function none))
-(define-extern etie-floats (function none))
+(define-extern etie-floats (function symbol))
 (define-extern etie-int-reg (function none))
-(define-extern etie-ints (function none))
+(define-extern etie-ints (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; etie-near-vu1                  ;;
@@ -36468,10 +36468,10 @@
 (define-extern etn-end-buffer (function none))
 (define-extern etn-float-reg-calc (function none))
 (define-extern etn-float-reg (function none))
-(define-extern etn-floats (function none))
+(define-extern etn-floats (function symbol))
 (define-extern etn-int-reg-draw (function none))
 (define-extern etn-int-reg (function none))
-(define-extern etn-ints (function none))
+(define-extern etn-ints (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tie-near                       ;;
@@ -36537,7 +36537,7 @@
 (define-extern tie-debug-one (function uint uint uint))
 (define-extern tie-debug-frag-between (function uint uint uint))
 (define-extern tie-debug-frag-one (function uint uint uint))
-(define-extern walk-tie-generic-prototypes (function none))
+(define-extern walk-tie-generic-prototypes (function symbol))
 (define-extern *pke-hack* vector) ;; vector
 (define-extern draw-inline-array-instance-tie (function pointer (inline-array instance-tie) int dma-buffer none))
 (define-extern draw-inline-array-prototype-tie-asm (function dma-buffer int prototype-array-tie none)) ;; was: (function none) — backported from jak3
@@ -36922,7 +36922,7 @@
 (define-extern dma-try-alloc-single (function none))
 (define-extern dma-try-alloc (function none))
 (define-extern dma-release (function none))
-(define-extern dma-dump (function none))
+(define-extern dma-dump (function symbol))
 (define-extern dma-is-empty (function symbol))
 (define-extern dma-get-named-buffer (function none))
 (define-extern lobby-dma-reserve-hook (function none))
@@ -38586,7 +38586,7 @@
 (define-extern camera-master-debug (function camera-master none))
 (define-extern debug-set-camera-pos-rot! (function vector matrix vector))
 (define-extern cam-restore (function none))
-(define-extern cam-restore-generic-bug (function none))
+(define-extern cam-restore-generic-bug (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; cam-start                      ;;
@@ -39847,7 +39847,7 @@
 (define-extern *scale-curve* curve2d-fast) ;; curve2d-fast
 (define-extern *scale-range* curve2d-fast) ;; curve2d-fast
 (define-extern *part-function-curve-test-curve-settings* particle-curve-settings) ;; particle-curve-settings
-(define-extern ptest (function none))
+(define-extern ptest (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; light-trails                   ;;
@@ -40634,7 +40634,7 @@
 (define-extern *debug-hook* pair)
 (define-extern *add-sphere* symbol)
 (define-extern *generic-effect-mode* int)
-(define-extern foreground-initialize-engines (function none))
+(define-extern foreground-initialize-engines (function symbol))
 (define-extern foreground-execute-cpu-vu0-engines (function none))
 (define-extern real-main-draw-hook (function none))
 (define-extern main-draw-hook (function none))
@@ -41478,7 +41478,7 @@
 (define-extern hud-string-add (function none))
 (define-extern hud-string-draw-all (function none))
 (define-extern *hud-sprite-work* hud-sprite-work) ;; hud-sprite-work
-(define-extern hud-sprite-add (function none))
+(define-extern hud-sprite-add (function symbol))
 (define-extern *debug-hud-disable* object)
 (define-extern hud-create-icon (function hud int int (pointer manipy)))
 (define-extern hud-post (function none))
@@ -42126,8 +42126,8 @@
 
 
 (define-extern *net-process-mgr* object)
-(define-extern get-event-level (function none))
-(define-extern get-shared-level (function none))
+(define-extern get-event-level (function symbol))
+(define-extern get-shared-level (function symbol))
 (define-extern nos (function none))
 (define-extern write-process-as-handle (function none))
 (define-extern write-handle (function none))
@@ -47768,7 +47768,7 @@
 (define-extern *net-mgr-finish-mode* object)
 (define-extern *lobby-menu-manager* object)
 (define-extern get-selected-local-player-count (function none))
-(define-extern kiosk-code? (function none))
+(define-extern kiosk-code? (function symbol))
 (define-extern min-max-wrap-around (function int int int int))
 (define-extern *lobby-last-selected-task-index* object)
 (define-extern *last-selected-human-ct* object)
@@ -47793,7 +47793,7 @@
 (define-extern *time-of-day-array* object)
 (define-extern *ready-room-host-id* object)
 (define-extern *keyboard-buf* object)
-(define-extern kbd-auto-activate (function none))
+(define-extern kbd-auto-activate (function symbol))
 (define-extern *return-to-secrets* object)
 (define-extern *this-create-menu-state-name* object)
 (define-extern *prev-create-menu-state-name* object)
@@ -47804,7 +47804,7 @@
 (define-extern *pending-op-serial* object)
 (define-extern *pending-op-arg-ct* object)
 (define-extern *pending-op-args* object)
-(define-extern teams-valid-to-start-game? (function none))
+(define-extern teams-valid-to-start-game? (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hostnames                      ;;
@@ -47964,7 +47964,7 @@
 (define-extern *chat-msg-string2* object)
 (define-extern *chat-msg-player* object)
 (define-extern *lobby-chat-window* object)
-(define-extern purge-top-chat-msg (function none))
+(define-extern purge-top-chat-msg (function symbol))
 (define-extern purge-all-chat-msgs (function none))
 (define-extern get-top-chat-msg (function none))
 (define-extern add-raw-popup-msg (function none))
@@ -47976,7 +47976,7 @@
 (define-extern *chat-msg-box* object)
 (define-extern *chat-popup-sx* object)
 (define-extern *r2-press-time* object)
-(define-extern temp-render-chat-messages (function none))
+(define-extern temp-render-chat-messages (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-mgr-sysmsg                 ;;
@@ -48047,7 +48047,7 @@
 (define-extern *net-last-packet-recv-times* object)
 (define-extern net-packet-recv-time-reset-client (function none))
 (define-extern net-packet-recv-time-reset-all (function none))
-(define-extern net-packet-recv-time-trouble (function none))
+(define-extern net-packet-recv-time-trouble (function symbol))
 (define-extern *fake-msg-count* object)
 (define-extern *fake-msg-read* object)
 (define-extern *fake-msgs* object)
@@ -48206,7 +48206,7 @@
 (define-extern mas-connect-callback (function none))
 (define-extern medius-text-filter-request-callback (function none))
 (define-extern net-filter-text (function none))
-(define-extern net-mgr-process-pending-behavior (function none))
+(define-extern net-mgr-process-pending-behavior (function symbol))
 (define-extern refreshing-games-callback (function none))
 (define-extern total-games-callback (function none))
 (define-extern *tmp-game-name* object)
@@ -48318,7 +48318,7 @@
 (define-extern get-clan-member-list (function none))
 (define-extern get-my-clans (function none))
 (define-extern *cur-challenge-type* object)
-(define-extern get-clan-challenges (function none))
+(define-extern get-clan-challenges (function symbol))
 (define-extern challenge-clan (function none))
 (define-extern respond-to-challenge (function none))
 (define-extern tidy-clan-challenges (function none))
@@ -48326,26 +48326,26 @@
 (define-extern invite-player-to-clan (function none))
 (define-extern revoke-clan-invite (function none))
 (define-extern retrieve-outstanding-invites (function none))
-(define-extern net-test-shit (function none))
+(define-extern net-test-shit (function symbol))
 (define-extern clan-allowed-to-join-game (function none))
 (define-extern lookup-clan-challenge (function none))
 (define-extern get-clan-challenge-pair-status (function none))
 (define-extern transfer-clan-leadership (function none))
 (define-extern set-clan-msg (function none))
 (define-extern is-clan-challenge (function none))
-(define-extern can-start-clan-challenge (function none))
+(define-extern can-start-clan-challenge (function symbol))
 (define-extern *clan-update-stats-request* object)
 (define-extern *clan-get-stats-request* object)
 (define-extern *clan-current-stats* object)
 (define-extern *enemy-clan-current-stats* object)
 (define-extern *clan-update-busy* object)
 (define-extern *this-game-penalty* object)
-(define-extern should-i-update-clan-stats (function none))
+(define-extern should-i-update-clan-stats (function symbol))
 (define-extern get-all-clan-stats (function none))
 (define-extern make-new-score (function none))
 (define-extern post-game-clan-stats-adjust (function none))
-(define-extern apply-clan-deltas (function none))
-(define-extern pre-game-clan-stats-adjust (function none))
+(define-extern apply-clan-deltas (function symbol))
+(define-extern pre-game-clan-stats-adjust (function symbol))
 (define-extern get-clans-in-challenge-info (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -48411,7 +48411,7 @@
 (define-extern get-current-room-name-and-info (function none))
 (define-extern create-room (function none))
 (define-extern find-room-by-name (function none))
-(define-extern ensure-room-is-good (function none))
+(define-extern ensure-room-is-good (function symbol))
 (define-extern test-rooms (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -48508,7 +48508,7 @@
 (define-extern *ghost-async-status* object)
 (define-extern *ghost-req-id* object)
 (define-extern send-ghost-file (function none))
-(define-extern restore-ghost-from-memcard (function none))
+(define-extern restore-ghost-from-memcard (function symbol))
 (define-extern do-get-best-ghost (function none))
 (define-extern get-best-ghost (function none))
 (define-extern nuke-all-ghosts (function none))
@@ -48516,7 +48516,7 @@
 (define-extern *async-ghost-compress-busy* object)
 (define-extern async-compress-and-upload (function none))
 (define-extern is-ghost? (function none))
-(define-extern reset-ghost (function none))
+(define-extern reset-ghost (function symbol))
 (define-extern poop2 (function none))
 (define-extern poop3 (function none))
 (define-extern poop4 (function none))
@@ -48544,7 +48544,7 @@
 (define-extern connect-callback-mgcl (function none))
 (define-extern get-mgcl-connection (function none))
 (define-extern end-game-on-me (function none))
-(define-extern create-game-on-me (function none))
+(define-extern create-game-on-me (function symbol))
 (define-extern send-end-of-game-report (function none))
 (define-extern end-game-on-me-callback (function none))
 (define-extern move-game-on-me-callback (function none))
@@ -48552,10 +48552,10 @@
 (define-extern *medius-account-update-stats-request* object)
 (define-extern *medius-update-ladder-stats-wide-request* object)
 (define-extern medius-start-account-stats-update (function none))
-(define-extern medius-start-clan-stats-update (function none))
+(define-extern medius-start-clan-stats-update (function symbol))
 (define-extern host-change-callback (function none))
 (define-extern game-connect-failed (function none))
-(define-extern wait-connect (function none))
+(define-extern wait-connect (function symbol))
 (define-extern dme-connect-callback (function none))
 (define-extern dme-join-callback (function none))
 (define-extern *sent-end-of-game-report* object)
@@ -48747,9 +48747,9 @@
 (define-extern *net-hw-initted* object)
 (define-extern *net-hw-config-id* object)
 (define-extern *net-hw-last-error* object)
-(define-extern net-hw-stop (function none))
+(define-extern net-hw-stop (function symbol))
 (define-extern net-hw-start-part1 (function none))
-(define-extern net-hw-start-part2 (function none))
+(define-extern net-hw-start-part2 (function symbol))
 (define-extern hack-reset-state (function none))
 (define-extern net-mgr-start-hardware-already-done (function none))
 (define-extern hack-start-local-game (function none))
@@ -49410,10 +49410,10 @@
 (define-extern do-encode-net-world-state (function none))
 (define-extern wait-for-lock (function none))
 (define-extern wait-for-ghost-download (function none))
-(define-extern save-vehicle-camera-inside-state (function none))
+(define-extern save-vehicle-camera-inside-state (function symbol))
 (define-extern set-net-world-time-of-day (function none))
 (define-extern wait-for-lobby-to-die (function none))
-(define-extern check-grand-prix-restart (function none))
+(define-extern check-grand-prix-restart (function symbol))
 (define-extern wait-for-levels (function none))
 (define-extern get-ai-vehicle-cup-idx (function none))
 (define-extern *tmp-string* string)
@@ -49440,7 +49440,7 @@
 (define-extern lobby-level-set! (function none))
 (define-extern set-player-car-from-level-array (function none))
 (define-extern *in-end-of-race-preload* object)
-(define-extern end-of-race-start-preload (function none))
+(define-extern end-of-race-start-preload (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; stream-media                   ;;
@@ -49872,7 +49872,7 @@
 (define-extern rb-line-sphere-test-update (function none))
 (define-extern rb-reset-perf-array (function none))
 (define-extern rb-reset-perf-times (function none))
-(define-extern rb-get-perf (function none))
+(define-extern rb-get-perf (function symbol))
 (define-extern *rb-raw-time-val* object)
 (define-extern rb-cpu-delay (function none))
 (define-extern rigid-body-queue-manager-post (function none))
@@ -50572,7 +50572,7 @@
 (define-extern *crash-camera-force-position-valid* object)
 (define-extern *target-time-speed* float)
 (define-extern target-time-go-slow (function none))
-(define-extern target-time-go-normal (function none))
+(define-extern target-time-go-normal (function symbol))
 (define-extern *plow-camera* array)
 (define-extern choose-crash-camera (function none))
 (define-extern cam-vehicle-crash state)
@@ -50801,7 +50801,7 @@
 (define-extern vehicle-manager-event-handler (function process int symbol event-message-block object :behavior vehicle-manager)) ;; was: (function none) — backported from jak3
 (define-extern vehicle-manager-init-by-other (function object :behavior vehicle-manager)) ;; was: (function none) — backported from jak3
 (define-extern vehicle-manager-start (function process int)) 
-(define-extern vehicle-manager-kill (function none))
+(define-extern vehicle-manager-kill (function symbol))
 (define-extern *car-appearance-hack* object)
 (define-extern *car-info-default* object)
 (define-extern vehicle-init-by-other (function none)) ;; (function int traffic-object-spawn-params object :behavior vehicle)
@@ -51153,11 +51153,11 @@
 (define-extern anim-tester-get-playing-item (function none))
 (define-extern initialize-anim-tester (function none))
 (define-extern anim-tester-string-get-frame!! (function none))
-(define-extern anim-tester-load-object-seqs (function none))
+(define-extern anim-tester-load-object-seqs (function symbol))
 (define-extern anim-tester-save-object-seqs (function none))
 (define-extern anim-tester-save-all-objects (function none))
 (define-extern anim-tester-add-newobj (function none))
-(define-extern anim-tester-stop (function none))
+(define-extern anim-tester-stop (function symbol))
 (define-extern anim-tester-start (function symbol))
 (define-extern anim-tester-add-object (function string none))
 (define-extern anim-tester-set-name (function none))
@@ -52398,7 +52398,7 @@
 (define-extern dm-set-recorder-path (function none))
 (define-extern dm-set-recorder-mode (function none))
 (define-extern debug-menu-make-path-modes (function none))
-(define-extern build-path-recorder-list (function none))
+(define-extern build-path-recorder-list (function symbol))
 (define-extern dm-scene-load-pick-func (function pair debug-menu-msg symbol))
 (define-extern dm-split-screen-toggle-pick-func (function none))
 (define-extern debug-create-cam-restore (function none))
@@ -52641,8 +52641,8 @@
 (define-extern *animation-adjust* object)
 (define-extern *test-hide* object)
 (define-extern *daxter-position-tweak* object)
-(define-extern edit-daxter (function none))
-(define-extern view-daxter (function none))
+(define-extern edit-daxter (function symbol))
+(define-extern view-daxter (function symbol))
 (define-extern enable-daxter (function none))
 (define-extern make-chassis-entry (function none))
 (define-extern make-roof-entry (function none))
@@ -52796,7 +52796,7 @@
 (define-extern kernel-set-interrupt-vector (function none))
 (define-extern kernel-set-level2-vector (function object object symbol)) 
 (define-extern deinstall-debug-handler (function none))
-(define-extern deinstall-debug-handlers (function none))
+(define-extern deinstall-debug-handlers (function symbol))
 (define-extern resend-exception (function object object object object symbol)) 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
