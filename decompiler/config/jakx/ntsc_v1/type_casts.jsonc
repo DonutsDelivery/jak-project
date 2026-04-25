@@ -1765,10 +1765,12 @@
   ],
   "sound-stop": [
     [
-      [
-        3,
-        8
-      ],
+      7,
+      "v1",
+      "sound-rpc-stop-sound"
+    ],
+    [
+      8,
       "v1",
       "sound-rpc-stop-sound"
     ]
@@ -1921,11 +1923,23 @@
       "s5",
       "process-focusable"
     ],
-    [2, "gp", "cloth-on-skeleton"],
-    [2, "a0", "uint32"]
+    [
+      2,
+      "gp",
+      "cloth-on-skeleton"
+    ],
+    [
+      2,
+      "a0",
+      "uint32"
+    ]
   ],
   "(method 13 cloth-system)": [
-    [2, "a0", "basic"],
+    [
+      2,
+      "a0",
+      "basic"
+    ],
     [
       143,
       "a1",
@@ -2074,8 +2088,16 @@
       212,
       "float"
     ],
-    [227, "gp", "cloth-system"],
-    [227, "v1", "int32"]
+    [
+      227,
+      "gp",
+      "cloth-system"
+    ],
+    [
+      227,
+      "v1",
+      "int32"
+    ]
   ],
   "(method 22 cloth-system)": [
     [
@@ -2108,8 +2130,16 @@
       164,
       "float"
     ],
-    [197, "gp", "cloth-system"],
-    [197, "v1", "int32"]
+    [
+      197,
+      "gp",
+      "cloth-system"
+    ],
+    [
+      197,
+      "v1",
+      "int32"
+    ]
   ],
   "(method 10 cloth-on-skeleton)": [
     [
@@ -2147,8 +2177,16 @@
       "v0",
       "joint"
     ],
-    [2, "gp", "cloth-on-skeleton"],
-    [2, "v1", "uint32"]
+    [
+      2,
+      "gp",
+      "cloth-on-skeleton"
+    ],
+    [
+      2,
+      "v1",
+      "uint32"
+    ]
   ],
   "emerc-vu1-init-buffer": [
     [
@@ -2531,7 +2569,11 @@
       "a3",
       "int"
     ],
-    [1, "v1", "level-group"]
+    [
+      1,
+      "v1",
+      "level-group"
+    ]
   ],
   "drawable-load": [
     [
@@ -2614,7 +2656,11 @@
       "s3",
       "gui-connection"
     ],
-    [75, "s4", "engine"]
+    [
+      75,
+      "s4",
+      "engine"
+    ]
   ],
   "(method 17 gui-control)": [
     [
@@ -2675,7 +2721,11 @@
       "a0",
       "gui-connection"
     ],
-    [130, "v0", "int32"]
+    [
+      130,
+      "v0",
+      "int32"
+    ]
   ],
   "(method 10 gui-control)": [
     [
@@ -2770,7 +2820,11 @@
     ]
   ],
   "(method 9 game-info)": [
-    [61, "s3", "basic"],
+    [
+      61,
+      "s3",
+      "basic"
+    ],
     [
       617,
       "s0",
@@ -3171,7 +3225,11 @@
     ]
   ],
   "(method 22 game-info)": [
-    [29, "a0", "basic"],
+    [
+      29,
+      "a0",
+      "basic"
+    ],
     [
       235,
       "s1",
@@ -4756,7 +4814,11 @@
       "a0",
       "process-focusable"
     ],
-    [12, "v1", "view"]
+    [
+      12,
+      "v1",
+      "view"
+    ]
   ],
   "manipy-init": [
     [
@@ -6649,7 +6711,11 @@
       "s1",
       "dma-buffer"
     ],
-    [33, "v1", "connection"]
+    [
+      33,
+      "v1",
+      "connection"
+    ]
   ],
   "lightning-trail-fractal-gen": [
     [
@@ -8262,7 +8328,11 @@
       "v1",
       "sprite-glow-ref-template"
     ],
-    [6, "r0", "uint32"]
+    [
+      6,
+      "r0",
+      "uint32"
+    ]
   ],
   "add-shader-to-dma": [
     [
@@ -11309,7 +11379,11 @@
       "s0",
       "(function object object object)"
     ],
-    [8, "s3", "int32"]
+    [
+      8,
+      "s3",
+      "int32"
+    ]
   ],
   "(method 10 level)": [
     [
@@ -11546,7 +11620,11 @@
     ]
   ],
   "display-loop": [
-    [70, "t9", "(function none)"]
+    [
+      70,
+      "t9",
+      "(function none)"
+    ]
   ],
   "effect-param->sound-spec": [
     [
@@ -14892,7 +14970,11 @@
       "a0",
       "collide-shape"
     ],
-    [82, "v1", "connection"]
+    [
+      82,
+      "v1",
+      "connection"
+    ]
   ],
   "(method 50 collide-shape)": [
     [
@@ -15012,8 +15094,16 @@
       "s1",
       "collide-shape-moving"
     ],
-    [156, "s1", "collide-shape"],
-    [156, "v1", "uint8"]
+    [
+      156,
+      "s1",
+      "collide-shape"
+    ],
+    [
+      156,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 12 collide-shape-prim-sphere)": [
     [
@@ -15068,8 +15158,16 @@
       "s4",
       "collide-shape-prim-mesh"
     ],
-    [83, "s4", "collide-shape-prim"],
-    [83, "s2", "meters"]
+    [
+      83,
+      "s4",
+      "collide-shape-prim"
+    ],
+    [
+      83,
+      "s2",
+      "meters"
+    ]
   ],
   "(method 66 collide-shape-moving)": [
     [
@@ -15191,7 +15289,11 @@
       "a0",
       "collide-shape"
     ],
-    [19, "v1", "connection"]
+    [
+      19,
+      "v1",
+      "connection"
+    ]
   ],
   "(method 27 sphere-hash)": [
     [
@@ -15308,7 +15410,11 @@
       "v1",
       "symbol"
     ],
-    [206, "v1", "collide-shape"]
+    [
+      206,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 11 memory-usage-block)": [
     [
@@ -16088,7 +16194,11 @@
     ]
   ],
   "(method 10 sparticle-launcher)": [
-    [3, "a0", "basic"],
+    [
+      3,
+      "a0",
+      "basic"
+    ],
     [
       [
         28,
@@ -16567,9 +16677,19 @@
   ],
   "command-get-param": [
     [
-      122,
-      "gp",
-      "bfloat"
+      93,
+      "s5",
+      "vector"
+    ],
+    [
+      105,
+      "s5",
+      "vector"
+    ],
+    [
+      108,
+      "s5",
+      "vector"
     ]
   ],
   "command-get-time": [
@@ -23253,14 +23373,30 @@
     ]
   ],
   "vehicle-manager-event-handler": [
-    [0, "a2", "symbol"],
-    [13, "a3", "event-message-block"]
+    [
+      0,
+      "a2",
+      "symbol"
+    ],
+    [
+      13,
+      "a3",
+      "event-message-block"
+    ]
   ],
   "vehicle-init-by-other": [
-    [0, "a1", "vehicle-spawn-params"]
+    [
+      0,
+      "a1",
+      "vehicle-spawn-params"
+    ]
   ],
   "vehicle-spawn": [
-    [1, "a1", "vehicle-spawn-params"],
+    [
+      1,
+      "a1",
+      "vehicle-spawn-params"
+    ],
     [
       93,
       "gp",
@@ -23268,14 +23404,30 @@
     ]
   ],
   "find-vehicle": [
-    [1, "v1", "vehicle-manager"]
+    [
+      1,
+      "v1",
+      "vehicle-manager"
+    ]
   ],
   "vehicle-in-level?": [
-    [0, "a0", "int"],
-    [1, "a1", "(pointer symbol)"]
+    [
+      0,
+      "a0",
+      "int"
+    ],
+    [
+      1,
+      "a1",
+      "(pointer symbol)"
+    ]
   ],
   "vehicle-idx-from-level-name": [
-    [6, "v1", "net-vehicle"]
+    [
+      6,
+      "v1",
+      "net-vehicle"
+    ]
   ],
   "vehicle-spawn-hack": [
     [
@@ -24384,15 +24536,29 @@
       "process-focusable"
     ]
   ],
-  // racer-state-method-11 (end-lap): a1=process-drawable; op 9 v1=ppointer address needs uint for logior
   "(method 11 racer-state)": [
-    [2, "a2", "process-drawable"],
-    [9, "v1", "uint"]
+    [
+      2,
+      "a2",
+      "process-drawable"
+    ],
+    [
+      9,
+      "v1",
+      "uint"
+    ]
   ],
-  // race-state-method-10: op 16 l.d at v1+48 = racer handle (racer-state is struct so v1 is ref); op 21 lwu from handle address
   "(method 10 race-state)": [
-    [16, "v1", "racer-state"],
-    [21, "a0", "(pointer process)"]
+    [
+      16,
+      "v1",
+      "racer-state"
+    ],
+    [
+      21,
+      "a0",
+      "(pointer process)"
+    ]
   ],
   "(method 11 race-state)": [
     [
@@ -39110,3208 +39276,8741 @@
       "process-focusable"
     ]
   ],
-  // race-control-method-9: start-dir.w holds a packed handle/pointer.
-  // v1 is typed float after ->start-dir.w; op 5 reinterprets bits as pointer for l.wu.
-  // a1 at op 6 is the lwu result (process ptr); l.w(a1+48) loads the PID for handle build.
-  // v1 at op 11 is mfc1 (float bits copied to int reg); cast to int so logior resolves.
-  // a2 at op 14: racer-state is missing a race-mesh pointer field at offset 92;
-  //   cast to (pointer uint32) so l.wu(a2+92) resolves until the deftype is fixed.
   "(method 9 race-control)": [
-    [5, "v1", "pointer"],
-    [6, "a1", "process"],
-    [11, "v1", "int"],
-    [14, "a2", "(pointer uint32)"]
+    [
+      5,
+      "v1",
+      "pointer"
+    ],
+    [
+      6,
+      "a1",
+      "process"
+    ],
+    [
+      11,
+      "v1",
+      "int"
+    ],
+    [
+      14,
+      "a2",
+      "(pointer uint32)"
+    ]
   ],
-  // font-context new: 6 extra args in GPRs; t1 carries float z in int reg — force float so mtc1/swc1 emits direct assign
   "(method 0 font-context)": [
-    [0, "a2", "pointer"],
-    [1, "a3", "int"],
-    [2, "t0", "int"],
-    [3, "t1", "float"],
-    [4, "t2", "font-color"],
-    [5, "t3", "font-flags"]
+    [
+      0,
+      "a2",
+      "pointer"
+    ],
+    [
+      1,
+      "a3",
+      "int"
+    ],
+    [
+      2,
+      "t0",
+      "int"
+    ],
+    [
+      3,
+      "t1",
+      "float"
+    ],
+    [
+      4,
+      "t2",
+      "font-color"
+    ],
+    [
+      5,
+      "t3",
+      "font-flags"
+    ]
   ],
-  // font-context-method-14: second int arg (y-coord) in a2
   "(method 14 font-context)": [
-    [3, "a2", "int"]
+    [
+      3,
+      "a2",
+      "int"
+    ]
   ],
-  // font-context-method-15: arg is int (pixel count), asm does mtc1+cvt.s.w (i2f)
   "(method 15 font-context)": [
-    [0, "a1", "int"]
+    [
+      0,
+      "a1",
+      "int"
+    ]
   ],
-  // font-context-method-16: font-color stored as raw float bits — force a1 float so mtc1 emits direct assign
   "(method 16 font-context)": [
-    [0, "a1", "float"]
+    [
+      0,
+      "a1",
+      "float"
+    ]
   ],
-  // font-context setter methods 21/22/26/27/28: type-prop loses a0/a1 at entry
   "(method 21 font-context)": [
-    [0, "a0", "font-context"],
-    [0, "a1", "int"]
+    [
+      0,
+      "a0",
+      "font-context"
+    ],
+    [
+      0,
+      "a1",
+      "int"
+    ]
   ],
   "(method 22 font-context)": [
-    [0, "a0", "font-context"],
-    [0, "a1", "int"]
+    [
+      0,
+      "a0",
+      "font-context"
+    ],
+    [
+      0,
+      "a1",
+      "int"
+    ]
   ],
   "(method 26 font-context)": [
-    [0, "a0", "font-context"],
-    [0, "a1", "float"]
+    [
+      0,
+      "a0",
+      "font-context"
+    ],
+    [
+      0,
+      "a1",
+      "float"
+    ]
   ],
   "(method 27 font-context)": [
-    [0, "a0", "font-context"],
-    [0, "a1", "uint"]
+    [
+      0,
+      "a0",
+      "font-context"
+    ],
+    [
+      0,
+      "a1",
+      "uint"
+    ]
   ],
   "(method 28 font-context)": [
-    [0, "a0", "font-context"],
-    [0, "a1", "uint"]
+    [
+      0,
+      "a0",
+      "font-context"
+    ],
+    [
+      0,
+      "a1",
+      "uint"
+    ]
   ],
   "(method 10 bsp-header)": [
-    [1, "gp", "bsp-header"]
+    [
+      1,
+      "gp",
+      "bsp-header"
+    ]
   ],
   "(method 10 hud-effect-group)": [
-    [12, "gp", "hud-effect-group"]
+    [
+      12,
+      "gp",
+      "hud-effect-group"
+    ]
   ],
   "(method 10 hud-effect-move)": [
-    [1, "gp", "hud-effect-move"]
+    [
+      1,
+      "gp",
+      "hud-effect-move"
+    ]
   ],
   "(method 10 hud-effect-offscreen)": [
-    [0, "a0", "hud-effect-offscreen"]
+    [
+      0,
+      "a0",
+      "hud-effect-offscreen"
+    ]
   ],
   "(method 10 hud-effect-scale)": [
-    [1, "gp", "hud-effect-scale"]
+    [
+      1,
+      "gp",
+      "hud-effect-scale"
+    ]
   ],
   "(method 10 hud-effect-slide)": [
-    [1, "gp", "hud-effect-slide"]
+    [
+      1,
+      "gp",
+      "hud-effect-slide"
+    ]
   ],
   "(method 10 hud-effect-throb)": [
-    [1, "gp", "hud-effect-throb"]
+    [
+      1,
+      "gp",
+      "hud-effect-throb"
+    ]
   ],
   "(method 10 hud-item-group)": [
-    [12, "gp", "hud-item-group"]
+    [
+      12,
+      "gp",
+      "hud-item-group"
+    ]
   ],
   "(method 10 linked-list)": [
-    [1, "a0", "linked-list"],
-    [3, "v1", "list-link"]
+    [
+      1,
+      "a0",
+      "linked-list"
+    ],
+    [
+      3,
+      "v1",
+      "list-link"
+    ]
   ],
   "(method 10 net-clan-ladder-stats-info)": [
-    [2, "gp", "net-clan-ladder-stats-info"]
+    [
+      2,
+      "gp",
+      "net-clan-ladder-stats-info"
+    ]
   ],
   "(method 10 net-player-ladder-stats-info)": [
-    [2, "gp", "net-player-ladder-stats-info"]
+    [
+      2,
+      "gp",
+      "net-player-ladder-stats-info"
+    ]
   ],
   "(method 10 race-line)": [
-    [0, "a0", "race-line"]
+    [
+      0,
+      "a0",
+      "race-line"
+    ]
   ],
   "(method 10 rigid-body-vehicle-constants)": [
-    [2, "a0", "rigid-body-vehicle-constants"]
+    [
+      2,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ]
   ],
   "(method 10 wvehicle)": [
-    [1, "gp", "wvehicle"]
+    [
+      1,
+      "gp",
+      "wvehicle"
+    ]
   ],
   "(method 100 net-player-boss-battle)": [
-    [12, "a0", "net-player-boss-battle"]
+    [
+      12,
+      "a0",
+      "net-player-boss-battle"
+    ]
   ],
   "(method 108 net-player-rushhour)": [
-    [11, "gp", "net-player-rushhour"]
+    [
+      11,
+      "gp",
+      "net-player-rushhour"
+    ]
   ],
   "(method 11 hud-effect)": [
-    [21, "gp", "hud-effect"]
+    [
+      21,
+      "gp",
+      "hud-effect"
+    ]
   ],
   "(method 11 hud-effect-fade)": [
-    [1, "gp", "hud-effect-fade"]
+    [
+      1,
+      "gp",
+      "hud-effect-fade"
+    ]
   ],
   "(method 11 hud-effect-group)": [
-    [12, "gp", "hud-effect-group"]
+    [
+      12,
+      "gp",
+      "hud-effect-group"
+    ]
   ],
   "(method 11 hud-item-group)": [
-    [12, "gp", "hud-item-group"]
+    [
+      12,
+      "gp",
+      "hud-item-group"
+    ]
   ],
   "(method 11 hud-text-effect-sound)": [
-    [1, "gp", "hud-text-effect-sound"]
+    [
+      1,
+      "gp",
+      "hud-text-effect-sound"
+    ]
   ],
   "(method 11 joint-mod)": [
-    [7, "gp", "joint-mod"]
+    [
+      7,
+      "gp",
+      "joint-mod"
+    ]
   ],
   "(method 11 talker-speech-class)": [
-    [5, "a0", "talker-speech-class"]
+    [
+      5,
+      "a0",
+      "talker-speech-class"
+    ]
   ],
   "(method 11 viewport-array)": [
-    [1, "a0", "viewport-array"]
+    [
+      1,
+      "a0",
+      "viewport-array"
+    ]
   ],
   "(method 113 vehicle)": [
-    [136, "gp", "vehicle"]
+    [
+      136,
+      "gp",
+      "vehicle"
+    ]
   ],
   "(method 12 hud-effect-group)": [
-    [14, "gp", "hud-effect-group"]
+    [
+      14,
+      "gp",
+      "hud-effect-group"
+    ]
   ],
   "(method 12 hud-item-group)": [
-    [16, "gp", "hud-item-group"]
+    [
+      16,
+      "gp",
+      "hud-item-group"
+    ]
   ],
   "(method 12 rapid-fire-control)": [
-    [11, "gp", "rapid-fire-control"]
+    [
+      11,
+      "gp",
+      "rapid-fire-control"
+    ]
   ],
   "(method 12 talker-speech-class)": [
-    [7, "a0", "talker-speech-class"]
+    [
+      7,
+      "a0",
+      "talker-speech-class"
+    ]
   ],
   "(method 12 top-anim-joint-control)": [
-    [50, "gp", "top-anim-joint-control"]
+    [
+      50,
+      "gp",
+      "top-anim-joint-control"
+    ]
   ],
   "(method 13 drawable-tree-instance-shrub)": [
-    [5, "a0", "drawable-tree-instance-shrub"]
+    [
+      5,
+      "a0",
+      "drawable-tree-instance-shrub"
+    ]
   ],
   "(method 13 hud-effect)": [
-    [0, "a0", "hud-effect"]
+    [
+      0,
+      "a0",
+      "hud-effect"
+    ]
   ],
   "(method 13 hud-effect-group)": [
-    [20, "gp", "hud-effect-group"]
+    [
+      20,
+      "gp",
+      "hud-effect-group"
+    ]
   ],
   "(method 13 hud-item-group)": [
-    [16, "gp", "hud-item-group"]
+    [
+      16,
+      "gp",
+      "hud-item-group"
+    ]
   ],
   "(method 13 ocean)": [
-    [4, "gp", "ocean"]
+    [
+      4,
+      "gp",
+      "ocean"
+    ]
   ],
   "(method 13 talker-speech-class)": [
-    [8, "a0", "talker-speech-class"]
+    [
+      8,
+      "a0",
+      "talker-speech-class"
+    ]
   ],
   "(method 135 vehicle)": [
-    [39, "gp", "vehicle"]
+    [
+      39,
+      "gp",
+      "vehicle"
+    ]
   ],
   "(method 14 bsp-header)": [
-    [1, "gp", "bsp-header"]
+    [
+      1,
+      "gp",
+      "bsp-header"
+    ]
   ],
   "(method 14 hud-effect)": [
-    [1, "gp", "hud-effect"]
+    [
+      1,
+      "gp",
+      "hud-effect"
+    ]
   ],
   "(method 14 hud-effect-emit-score-icon)": [
-    [3, "gp", "hud-effect-emit-score-icon"]
+    [
+      3,
+      "gp",
+      "hud-effect-emit-score-icon"
+    ]
   ],
   "(method 14 hud-effect-font-effect)": [
-    [0, "a0", "hud-effect-font-effect"]
+    [
+      0,
+      "a0",
+      "hud-effect-font-effect"
+    ]
   ],
   "(method 14 hud-effect-scale)": [
-    [5, "a0", "hud-effect-scale"]
+    [
+      5,
+      "a0",
+      "hud-effect-scale"
+    ]
   ],
   "(method 14 hud-item-group)": [
-    [16, "gp", "hud-item-group"]
+    [
+      16,
+      "gp",
+      "hud-item-group"
+    ]
   ],
   "(method 14 hud-text-effect-sound)": [
-    [1, "gp", "hud-text-effect-sound"]
+    [
+      1,
+      "gp",
+      "hud-text-effect-sound"
+    ]
   ],
   "(method 14 texture-page)": [
-    [2, "gp", "texture-page"]
+    [
+      2,
+      "gp",
+      "texture-page"
+    ]
   ],
   "(method 144 vehicle)": [
-    [2, "gp", "vehicle"]
+    [
+      2,
+      "gp",
+      "vehicle"
+    ]
   ],
   "(method 15 car-info-full)": [
-    [1, "gp", "car-info-full"]
+    [
+      1,
+      "gp",
+      "car-info-full"
+    ]
   ],
   "(method 15 hud-item-group)": [
-    [17, "gp", "hud-item-group"]
+    [
+      17,
+      "gp",
+      "hud-item-group"
+    ]
   ],
   "(method 15 vehicle)": [
-    [5, "gp", "vehicle"]
+    [
+      5,
+      "gp",
+      "vehicle"
+    ]
   ],
   "(method 16 bsp-header)": [
-    [3, "a0", "bsp-header"]
+    [
+      3,
+      "a0",
+      "bsp-header"
+    ]
   ],
   "(method 16 collide-shape-prim-group)": [
-    [6, "gp", "collide-shape-prim-group"]
+    [
+      6,
+      "gp",
+      "collide-shape-prim-group"
+    ]
   ],
   "(method 16 movie-path)": [
-    [5, "gp", "movie-path"]
+    [
+      5,
+      "gp",
+      "movie-path"
+    ]
   ],
   "(method 16 vehicle-rev-manager)": [
-    [14, "gp", "vehicle-rev-manager"]
+    [
+      14,
+      "gp",
+      "vehicle-rev-manager"
+    ]
   ],
   "(method 16 vehicle-section)": [
-    [0, "a0", "vehicle-section"]
+    [
+      0,
+      "a0",
+      "vehicle-section"
+    ]
   ],
   "(method 166 wvehicle)": [
-    [16, "gp", "wvehicle"]
+    [
+      16,
+      "gp",
+      "wvehicle"
+    ]
   ],
   "(method 17 bsp-header)": [
-    [4, "gp", "bsp-header"]
+    [
+      4,
+      "gp",
+      "bsp-header"
+    ]
   ],
   "(method 17 texture-pool)": [
-    [11, "gp", "texture-pool"]
+    [
+      11,
+      "gp",
+      "texture-pool"
+    ]
   ],
   "(method 18 bsp-header)": [
-    [1, "gp", "bsp-header"]
+    [
+      1,
+      "gp",
+      "bsp-header"
+    ]
   ],
   "(method 18 level-group)": [
-    [12, "a0", "level-group"]
+    [
+      12,
+      "a0",
+      "level-group"
+    ]
   ],
   "(method 18 race-mesh)": [
-    [4, "gp", "race-mesh"]
+    [
+      4,
+      "gp",
+      "race-mesh"
+    ]
   ],
   "(method 18 spartacus-editor)": [
-    [3, "gp", "spartacus-editor"],
-    [3, "a0", "uint8"]
+    [
+      3,
+      "gp",
+      "spartacus-editor"
+    ],
+    [
+      3,
+      "a0",
+      "uint8"
+    ]
   ],
   "(method 18 tire-trail)": [
-    [3, "gp", "tire-trail"]
+    [
+      3,
+      "gp",
+      "tire-trail"
+    ]
   ],
   "(method 19 blit-displays-work)": [
-    [0, "a0", "blit-displays-work"]
+    [
+      0,
+      "a0",
+      "blit-displays-work"
+    ]
   ],
   "(method 19 hud-artifact-indicators)": [
-    [9, "gp", "hud-artifact-indicators"]
+    [
+      9,
+      "gp",
+      "hud-artifact-indicators"
+    ]
   ],
   "(method 19 hud-item-string)": [
-    [5, "gp", "hud-item-string"]
+    [
+      5,
+      "gp",
+      "hud-item-string"
+    ]
   ],
   "(method 19 hud-points-combo)": [
-    [1, "gp", "hud-points-combo"]
+    [
+      1,
+      "gp",
+      "hud-points-combo"
+    ]
   ],
   "(method 19 in-game-menu-hud)": [
-    [1, "gp", "in-game-menu-hud"]
+    [
+      1,
+      "gp",
+      "in-game-menu-hud"
+    ]
   ],
   "(method 19 in-game-menu-hud-options)": [
-    [1, "gp", "in-game-menu-hud-options"]
+    [
+      1,
+      "gp",
+      "in-game-menu-hud-options"
+    ]
   ],
   "(method 19 spartacus-editor)": [
-    [5, "gp", "spartacus-editor"]
+    [
+      5,
+      "gp",
+      "spartacus-editor"
+    ]
   ],
   "(method 19 vehicle-section)": [
-    [0, "a0", "vehicle-section"]
+    [
+      0,
+      "a0",
+      "vehicle-section"
+    ]
   ],
   "(method 20 car-info-full)": [
-    [26, "gp", "car-info-full"]
+    [
+      26,
+      "gp",
+      "car-info-full"
+    ]
   ],
   "(method 20 hud-item-group)": [
-    [14, "gp", "hud-item-group"]
+    [
+      14,
+      "gp",
+      "hud-item-group"
+    ]
   ],
   "(method 20 spartacus-editor)": [
-    [7, "gp", "spartacus-editor"]
+    [
+      7,
+      "gp",
+      "spartacus-editor"
+    ]
   ],
   "(method 21 car-info-full)": [
-    [25, "gp", "car-info-full"]
+    [
+      25,
+      "gp",
+      "car-info-full"
+    ]
   ],
   "(method 21 collide-cache)": [
-    [50, "a0", "collide-cache"],
-    [50, "a2", "int32"]
+    [
+      50,
+      "a0",
+      "collide-cache"
+    ],
+    [
+      50,
+      "a2",
+      "int32"
+    ]
   ],
   "(method 21 hud-item-group)": [
-    [12, "gp", "hud-item-group"]
+    [
+      12,
+      "gp",
+      "hud-item-group"
+    ]
   ],
   "(method 21 hud-item-sprite)": [
-    [0, "a0", "hud-item-sprite"]
+    [
+      0,
+      "a0",
+      "hud-item-sprite"
+    ]
   ],
   "(method 21 hud-item-string)": [
-    [1, "a0", "hud-item-string"]
+    [
+      1,
+      "a0",
+      "hud-item-string"
+    ]
   ],
   "(method 21 spartacus-editor)": [
-    [7, "gp", "spartacus-editor"]
+    [
+      7,
+      "gp",
+      "spartacus-editor"
+    ]
   ],
   "(method 22 hud-item-group)": [
-    [12, "gp", "hud-item-group"]
+    [
+      12,
+      "gp",
+      "hud-item-group"
+    ]
   ],
   "(method 22 load-state)": [
-    [292, "gp", "load-state"]
+    [
+      292,
+      "gp",
+      "load-state"
+    ]
   ],
   "(method 22 spartacus-editor)": [
-    [157, "gp", "spartacus-editor"],
-    [157, "a0", "uint8"]
+    [
+      157,
+      "gp",
+      "spartacus-editor"
+    ],
+    [
+      157,
+      "a0",
+      "uint8"
+    ]
   ],
   "(method 23 blit-displays-work)": [
-    [3, "gp", "blit-displays-work"]
+    [
+      3,
+      "gp",
+      "blit-displays-work"
+    ]
   ],
   "(method 23 hud-item)": [
-    [0, "a0", "hud-item"]
+    [
+      0,
+      "a0",
+      "hud-item"
+    ]
   ],
   "(method 23 hud-item-group)": [
-    [20, "gp", "hud-item-group"]
+    [
+      20,
+      "gp",
+      "hud-item-group"
+    ]
   ],
   "(method 24 hud-indicator)": [
-    [0, "a0", "hud-indicator"]
+    [
+      0,
+      "a0",
+      "hud-indicator"
+    ]
   ],
   "(method 24 hud-item-sprite)": [
-    [0, "a0", "hud-item-sprite"]
+    [
+      0,
+      "a0",
+      "hud-item-sprite"
+    ]
   ],
   "(method 24 hud-item-string)": [
-    [0, "a0", "hud-item-string"]
+    [
+      0,
+      "a0",
+      "hud-item-string"
+    ]
   ],
   "(method 25 hud-indicator)": [
-    [0, "a0", "hud-indicator"]
+    [
+      0,
+      "a0",
+      "hud-indicator"
+    ]
   ],
   "(method 25 hud-item-string)": [
-    [0, "a0", "hud-item-string"]
+    [
+      0,
+      "a0",
+      "hud-item-string"
+    ]
   ],
   "(method 25 spartacus-editor)": [
-    [0, "a0", "spartacus-editor"]
+    [
+      0,
+      "a0",
+      "spartacus-editor"
+    ]
   ],
   "(method 26 hang-time-hud-single)": [
-    [30, "a0", "hang-time-hud-single"],
-    [31, "a0", "process-tree"]
+    [
+      30,
+      "a0",
+      "hang-time-hud-single"
+    ],
+    [
+      31,
+      "a0",
+      "process-tree"
+    ]
   ],
   "(method 26 hud-item-string)": [
-    [0, "a0", "hud-item-string"]
+    [
+      0,
+      "a0",
+      "hud-item-string"
+    ]
   ],
   "(method 3 attackable-hash)": [
-    [19, "gp", "attackable-hash"],
-    [19, "a2", "(pointer uint64)"]
+    [
+      19,
+      "gp",
+      "attackable-hash"
+    ],
+    [
+      19,
+      "a2",
+      "(pointer uint64)"
+    ]
   ],
   "(method 3 bsp-header)": [
-    [34, "gp", "bsp-header"]
+    [
+      34,
+      "gp",
+      "bsp-header"
+    ]
   ],
   "(method 3 cloth-on-skeleton)": [
-    [66, "gp", "cloth-on-skeleton"],
-    [66, "a2", "anchor-point-array"]
+    [
+      66,
+      "gp",
+      "cloth-on-skeleton"
+    ],
+    [
+      66,
+      "a2",
+      "anchor-point-array"
+    ]
   ],
   "(method 3 cloth-system)": [
-    [66, "gp", "cloth-system"],
-    [66, "a2", "anchor-point-array"]
+    [
+      66,
+      "gp",
+      "cloth-system"
+    ],
+    [
+      66,
+      "a2",
+      "anchor-point-array"
+    ]
   ],
-  // inspect generic-tie-interp-point: op 19 does (l.q gp) to print the
-  // overlapping `quad` field. The quad field is commented out in the deftype
-  // (misaligned at offset 0 as a uint128 overlay). Cast to uint128 to unblock.
   "(method 3 generic-tie-interp-point)": [
-    [19, "a2", "uint128"]
+    [
+      19,
+      "a2",
+      "uint128"
+    ]
   ],
   "(method 3 index-sprite-list-menu-info)": [
-    [116, "gp", "index-sprite-list-menu-info"]
+    [
+      116,
+      "gp",
+      "index-sprite-list-menu-info"
+    ]
   ],
   "(method 3 manipy)": [
-    [12, "gp", "manipy"]
+    [
+      12,
+      "gp",
+      "manipy"
+    ]
   ],
   "(method 3 net-process-class-info)": [
-    [35, "gp", "net-process-class-info"]
+    [
+      35,
+      "gp",
+      "net-process-class-info"
+    ]
   ],
-  // inspect ocean: op 79 computes (+ gp 216) for mid-camera-masks display address.
-  // The deftype has mid-camera-masks at :offset 224, but binary accesses at +216.
-  // Cast a2 to uint to unblock the "add failed: ocean <integer 216>" type-prop error.
   "(method 3 ocean)": [
-    [79, "a2", "uint"]
+    [
+      79,
+      "a2",
+      "uint"
+    ]
   ],
-  // inspect touching-list: op 24 computes (+ gp 8) for touching-shapes address.
-  // The deftype has touching-shapes :offset-assert 16, but binary inspect prints
-  // address at +8. Cast a2 to uint to unblock the "add failed: touching-list <integer 8>" error.
   "(method 3 touching-list)": [
-    [24, "a2", "uint"]
+    [
+      24,
+      "a2",
+      "uint"
+    ]
   ],
-  // inspect projectile-bounce: op 12 does (l.d 564(gp)) for an undeclared field.
-  // projectile-bounce subtype of projectile has no declared fields but the binary
-  // has played-bounce-time (uint64 at 564), tumble-quat (quat at 572), gravity (float at 588).
-  // Cast a2 to uint64 to unblock the inspect method without modifying the deftype.
   "(method 3 projectile-bounce)": [
-    [12, "a2", "uint64"]
+    [
+      12,
+      "a2",
+      "uint64"
+    ]
   ],
-  // inspect shadow-edge: op 14 does (l.hu 0(gp)) (halfword) but ind-0 is declared uint8.
-  // Binary treats ind-0+ind-1 as combined uint16 for inspect. Cast to uint to unblock.
   "(method 3 shadow-edge)": [
-    [14, "a2", "uint"]
+    [
+      14,
+      "a2",
+      "uint"
+    ]
   ],
-  // inspect sky-work: op 160 computes (+ gp 1080) for orbit[3] display address.
-  // Deftype notes binary orbit offset is 1080 but decompiler aligns to 1088 (stride 32).
-  // Cast a2 to uint to unblock the "add failed: sky-work <integer 1080>" error.
   "(method 3 sky-work)": [
-    [160, "a2", "uint"]
+    [
+      160,
+      "a2",
+      "uint"
+    ]
   ],
   "(method 3 talker)": [
-    [17, "gp", "talker"]
+    [
+      17,
+      "gp",
+      "talker"
+    ]
   ],
   "(method 3 vif-disasm-element)": [
-    [22, "a0", "vif-disasm-element"]
+    [
+      22,
+      "a0",
+      "vif-disasm-element"
+    ]
   ],
   "(method 31 in-game-hud)": [
-    [1, "gp", "in-game-hud"]
+    [
+      1,
+      "gp",
+      "in-game-hud"
+    ]
   ],
   "(method 31 process-nettable)": [
-    [3, "gp", "process-nettable"]
+    [
+      3,
+      "gp",
+      "process-nettable"
+    ]
   ],
   "(method 32 net-simple-destruct)": [
-    [2, "gp", "net-simple-destruct"]
+    [
+      2,
+      "gp",
+      "net-simple-destruct"
+    ]
   ],
   "(method 32 process-nettable)": [
-    [4, "gp", "process-nettable"]
+    [
+      4,
+      "gp",
+      "process-nettable"
+    ]
   ],
   "(method 35 net-world)": [
-    [3, "gp", "net-world"]
+    [
+      3,
+      "gp",
+      "net-world"
+    ]
   ],
   "(method 43 collide-shape)": [
-    [28, "gp", "collide-shape"],
-    [28, "v1", "uint8"]
+    [
+      28,
+      "gp",
+      "collide-shape"
+    ],
+    [
+      28,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 44 process-drawable)": [
-    [2, "gp", "process-drawable"]
+    [
+      2,
+      "gp",
+      "process-drawable"
+    ]
   ],
   "(method 45 process-drawable)": [
-    [0, "a0", "process-drawable"]
+    [
+      0,
+      "a0",
+      "process-drawable"
+    ]
   ],
   "(method 46 process-drawable)": [
-    [4, "gp", "process-drawable"]
+    [
+      4,
+      "gp",
+      "process-drawable"
+    ]
   ],
   "(method 47 process-drawable)": [
-    [1, "gp", "process-drawable"]
+    [
+      1,
+      "gp",
+      "process-drawable"
+    ]
   ],
   "(method 48 wvehicle)": [
-    [1, "gp", "wvehicle"]
+    [
+      1,
+      "gp",
+      "wvehicle"
+    ]
   ],
   "(method 49 eco-mgr)": [
-    [6, "a0", "eco-mgr"]
+    [
+      6,
+      "a0",
+      "eco-mgr"
+    ]
   ],
   "(method 49 net-game-mgr-boss-battle)": [
-    [1, "gp", "net-game-mgr-boss-battle"]
+    [
+      1,
+      "gp",
+      "net-game-mgr-boss-battle"
+    ]
   ],
   "(method 50 eco-mgr)": [
-    [6, "a0", "eco-mgr"]
+    [
+      6,
+      "a0",
+      "eco-mgr"
+    ]
   ],
   "(method 50 joint-exploder)": [
-    [0, "a0", "joint-exploder"]
+    [
+      0,
+      "a0",
+      "joint-exploder"
+    ]
   ],
   "(method 50 process-focusable)": [
-    [1, "a0", "process-focusable"]
+    [
+      1,
+      "a0",
+      "process-focusable"
+    ]
   ],
   "(method 51 collide-shape)": [
-    [21, "a0", "collide-shape"]
+    [
+      21,
+      "a0",
+      "collide-shape"
+    ]
   ],
   "(method 51 helmet-garage)": [
-    [2, "gp", "helmet-garage"]
+    [
+      2,
+      "gp",
+      "helmet-garage"
+    ]
   ],
   "(method 51 helmet-hud)": [
-    [2, "gp", "helmet-hud"]
+    [
+      2,
+      "gp",
+      "helmet-hud"
+    ]
   ],
   "(method 51 net-powerup)": [
-    [0, "a0", "net-powerup"],
-    [3, "a1", "entity-actor"]
+    [
+      0,
+      "a0",
+      "net-powerup"
+    ],
+    [
+      3,
+      "a1",
+      "entity-actor"
+    ]
   ],
   "(method 51 process-focusable)": [
-    [1, "a0", "process-focusable"]
+    [
+      1,
+      "a0",
+      "process-focusable"
+    ]
   ],
   "(method 51 target)": [
-    [0, "a0", "target"]
+    [
+      0,
+      "a0",
+      "target"
+    ]
   ],
   "(method 52 joint-exploder)": [
-    [3, "gp", "joint-exploder"]
+    [
+      3,
+      "gp",
+      "joint-exploder"
+    ]
   ],
   "(method 52 process-focusable)": [
-    [0, "a0", "process-focusable"]
+    [
+      0,
+      "a0",
+      "process-focusable"
+    ]
   ],
   "(method 52 water-anim)": [
-    [0, "a0", "water-anim"]
+    [
+      0,
+      "a0",
+      "water-anim"
+    ]
   ],
   "(method 53 powerup-draw)": [
-    [10, "gp", "powerup-draw"]
+    [
+      10,
+      "gp",
+      "powerup-draw"
+    ]
   ],
   "(method 53 process-focusable)": [
-    [0, "a0", "process-focusable"]
+    [
+      0,
+      "a0",
+      "process-focusable"
+    ]
   ],
   "(method 54 net-game-mgr-boss-battle)": [
-    [3, "a0", "net-game-mgr-boss-battle"]
+    [
+      3,
+      "a0",
+      "net-game-mgr-boss-battle"
+    ]
   ],
   "(method 54 net-powerup)": [
-    [1, "gp", "net-powerup"]
+    [
+      1,
+      "gp",
+      "net-powerup"
+    ]
   ],
   "(method 54 task-arrow)": [
-    [1, "gp", "task-arrow"]
+    [
+      1,
+      "gp",
+      "task-arrow"
+    ]
   ],
   "(method 54 wrong-way)": [
-    [0, "a0", "wrong-way"],
-    [5, "a0", "cspace-array"]
+    [
+      0,
+      "a0",
+      "wrong-way"
+    ],
+    [
+      5,
+      "a0",
+      "cspace-array"
+    ]
   ],
   "(method 55 joint-exploder)": [
-    [4, "gp", "joint-exploder"]
+    [
+      4,
+      "gp",
+      "joint-exploder"
+    ]
   ],
   "(method 55 scene-player)": [
-    [505, "gp", "scene-player"]
+    [
+      505,
+      "gp",
+      "scene-player"
+    ]
   ],
   "(method 56 joint-exploder)": [
-    [5, "gp", "joint-exploder"]
+    [
+      5,
+      "gp",
+      "joint-exploder"
+    ]
   ],
   "(method 56 powerup-draw)": [
-    [0, "a0", "powerup-draw"]
+    [
+      0,
+      "a0",
+      "powerup-draw"
+    ]
   ],
   "(method 56 water-anim)": [
-    [3, "gp", "water-anim"]
+    [
+      3,
+      "gp",
+      "water-anim"
+    ]
   ],
   "(method 57 joint-exploder)": [
-    [0, "a0", "joint-exploder"]
+    [
+      0,
+      "a0",
+      "joint-exploder"
+    ]
   ],
   "(method 57 pov-camera)": [
-    [0, "a0", "pov-camera"]
+    [
+      0,
+      "a0",
+      "pov-camera"
+    ]
   ],
   "(method 57 rigid-body-object)": [
-    [0, "a0", "rigid-body-object"]
+    [
+      0,
+      "a0",
+      "rigid-body-object"
+    ]
   ],
   "(method 58 net-mgr)": [
-    [11, "a0", "net-mgr"],
-    [14, "v1", "state"]
+    [
+      11,
+      "a0",
+      "net-mgr"
+    ],
+    [
+      14,
+      "v1",
+      "state"
+    ]
   ],
   "(method 58 water-anim)": [
-    [7, "gp", "water-anim"]
+    [
+      7,
+      "gp",
+      "water-anim"
+    ]
   ],
   "(method 60 net-player)": [
-    [4, "a0", "net-player"]
+    [
+      4,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 61 wvehicle)": [
-    [2, "gp", "wvehicle"]
+    [
+      2,
+      "gp",
+      "wvehicle"
+    ]
   ],
   "(method 62 rigid-body-object)": [
-    [5, "a0", "rigid-body-object"],
-    [8, "v1", "ambient-sound"]
+    [
+      5,
+      "a0",
+      "rigid-body-object"
+    ],
+    [
+      8,
+      "v1",
+      "ambient-sound"
+    ]
   ],
   "(method 63 rigid-body-object)": [
-    [0, "a0", "rigid-body-object"]
+    [
+      0,
+      "a0",
+      "rigid-body-object"
+    ]
   ],
   "(method 64 rigid-body-object)": [
-    [10, "gp", "rigid-body-object"]
+    [
+      10,
+      "gp",
+      "rigid-body-object"
+    ]
   ],
   "(method 66 vehicle-debris)": [
-    [1, "a0", "vehicle-debris"]
+    [
+      1,
+      "a0",
+      "vehicle-debris"
+    ]
   ],
   "(method 68 net-simple-destruct)": [
-    [2, "gp", "net-simple-destruct"]
+    [
+      2,
+      "gp",
+      "net-simple-destruct"
+    ]
   ],
   "(method 68 vehicle)": [
-    [3, "gp", "vehicle"]
+    [
+      3,
+      "gp",
+      "vehicle"
+    ]
   ],
   "(method 69 projectile)": [
-    [2, "gp", "projectile"],
-    [3, "v1", "collide-shape"]
+    [
+      2,
+      "gp",
+      "projectile"
+    ],
+    [
+      3,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 69 rigid-body-object)": [
-    [1, "gp", "rigid-body-object"]
+    [
+      1,
+      "gp",
+      "rigid-body-object"
+    ]
   ],
   "(method 69 v-mongoose)": [
-    [8, "gp", "v-mongoose"]
+    [
+      8,
+      "gp",
+      "v-mongoose"
+    ]
   ],
   "(method 7 cloth-system)": [
-    [17, "gp", "cloth-system"],
-    [17, "v1", "anchor-point-array"]
+    [
+      17,
+      "gp",
+      "cloth-system"
+    ],
+    [
+      17,
+      "v1",
+      "anchor-point-array"
+    ]
   ],
   "(method 7 collide-shape-moving)": [
-    [0, "a0", "collide-shape-moving"]
+    [
+      0,
+      "a0",
+      "collide-shape-moving"
+    ]
   ],
   "(method 7 driver)": [
-    [2, "gp", "driver"]
+    [
+      2,
+      "v1",
+      "pointer"
+    ]
   ],
   "(method 7 editable-array)": [
-    [0, "a0", "editable-array"]
+    [
+      0,
+      "a0",
+      "editable-array"
+    ]
   ],
   "(method 7 joint-exploder)": [
-    [61, "a0", "joint-exploder"]
+    [
+      61,
+      "a0",
+      "joint-exploder"
+    ]
   ],
   "(method 7 joint-mod)": [
-    [0, "a0", "joint-mod"]
+    [
+      0,
+      "a0",
+      "joint-mod"
+    ]
   ],
   "(method 7 manipy)": [
-    [0, "a0", "manipy"]
+    [
+      0,
+      "a0",
+      "manipy"
+    ]
   ],
   "(method 7 path-control)": [
-    [0, "a0", "path-control"]
+    [
+      0,
+      "a0",
+      "path-control"
+    ]
   ],
   "(method 7 spartacus-editor)": [
-    [36, "gp", "spartacus-editor"],
-    [36, "a0", "uint8"]
+    [
+      36,
+      "gp",
+      "spartacus-editor"
+    ],
+    [
+      36,
+      "a0",
+      "uint8"
+    ]
   ],
   "(method 7 vol-control)": [
-    [0, "a0", "vol-control"]
+    [
+      0,
+      "a0",
+      "vol-control"
+    ]
   ],
   "(method 7 wvehicle)": [
-    [28, "a0", "wvehicle"]
+    [
+      28,
+      "a0",
+      "wvehicle"
+    ]
   ],
   "(method 70 net-player)": [
-    [1, "a0", "net-player"]
+    [
+      1,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 71 construction-object)": [
-    [1, "gp", "construction-object"]
+    [
+      1,
+      "gp",
+      "construction-object"
+    ]
   ],
   "(method 71 vehicle)": [
-    [1, "gp", "vehicle"]
+    [
+      1,
+      "gp",
+      "vehicle"
+    ]
   ],
   "(method 72 rigid-body-object)": [
-    [1, "gp", "rigid-body-object"]
+    [
+      1,
+      "gp",
+      "rigid-body-object"
+    ]
   ],
   "(method 72 vehicle)": [
-    [1, "gp", "vehicle"]
+    [
+      1,
+      "gp",
+      "vehicle"
+    ]
   ],
   "(method 73 rigid-body-object)": [
-    [1, "a0", "rigid-body-object"]
+    [
+      1,
+      "a0",
+      "rigid-body-object"
+    ]
   ],
   "(method 73 vehicle)": [
-    [1, "a0", "vehicle"]
+    [
+      1,
+      "a0",
+      "vehicle"
+    ]
   ],
   "(method 78 net-world)": [
-    [0, "a0", "net-world"]
+    [
+      0,
+      "a0",
+      "net-world"
+    ]
   ],
   "(method 80 vehicle)": [
-    [2, "gp", "vehicle"]
+    [
+      2,
+      "gp",
+      "vehicle"
+    ]
   ],
   "(method 80 wvehicle)": [
-    [33, "gp", "wvehicle"]
+    [
+      33,
+      "gp",
+      "wvehicle"
+    ]
   ],
   "(method 86 vehicle)": [
-    [10, "gp", "vehicle"],
-    [11, "v1", "collide-shape"]
+    [
+      10,
+      "gp",
+      "vehicle"
+    ],
+    [
+      11,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 87 rigid-body-object)": [
-    [0, "a0", "rigid-body-object"],
-    [4, "a2", "ambient-sound"]
+    [
+      0,
+      "a0",
+      "rigid-body-object"
+    ],
+    [
+      4,
+      "a2",
+      "ambient-sound"
+    ]
   ],
   "(method 87 vehicle)": [
-    [1, "gp", "vehicle"]
+    [
+      1,
+      "gp",
+      "vehicle"
+    ]
   ],
   "(method 87 vehicle-debris)": [
-    [3, "gp", "vehicle-debris"]
+    [
+      3,
+      "gp",
+      "vehicle-debris"
+    ]
   ],
   "(method 88 vehicle)": [
-    [3, "gp", "vehicle"]
+    [
+      3,
+      "gp",
+      "vehicle"
+    ]
   ],
   "(method 88 vehicle-debris)": [
-    [2, "gp", "vehicle-debris"]
+    [
+      2,
+      "gp",
+      "vehicle-debris"
+    ]
   ],
   "(method 89 construction-object)": [
-    [3, "gp", "construction-object"]
+    [
+      3,
+      "gp",
+      "construction-object"
+    ]
   ],
   "(method 89 net-player)": [
-    [0, "a0", "net-player"],
-    [2, "v1", "symbol"]
+    [
+      0,
+      "a0",
+      "net-player"
+    ],
+    [
+      2,
+      "v1",
+      "symbol"
+    ]
   ],
   "(method 9 camera-facing-quad)": [
-    [2, "gp", "camera-facing-quad"]
+    [
+      2,
+      "gp",
+      "camera-facing-quad"
+    ]
   ],
   "(method 9 drawable-tree-instance-shrub)": [
-    [1, "gp", "drawable-tree-instance-shrub"]
+    [
+      1,
+      "gp",
+      "drawable-tree-instance-shrub"
+    ]
   ],
   "(method 9 hud-effect-group)": [
-    [12, "gp", "hud-effect-group"]
+    [
+      12,
+      "gp",
+      "hud-effect-group"
+    ]
   ],
   "(method 9 hud-effect-scale)": [
-    [1, "gp", "hud-effect-scale"]
+    [
+      1,
+      "gp",
+      "hud-effect-scale"
+    ]
   ],
   "(method 9 hud-effect-throb)": [
-    [1, "gp", "hud-effect-throb"]
+    [
+      1,
+      "gp",
+      "hud-effect-throb"
+    ]
   ],
   "(method 9 hud-indicator)": [
-    [5, "gp", "hud-indicator"]
+    [
+      5,
+      "gp",
+      "hud-indicator"
+    ]
   ],
   "(method 9 hud-item-group)": [
-    [5, "gp", "hud-item-group"]
+    [
+      5,
+      "gp",
+      "hud-item-group"
+    ]
   ],
   "(method 9 in-game-menu-hud-options)": [
-    [62, "gp", "in-game-menu-hud-options"]
+    [
+      62,
+      "gp",
+      "in-game-menu-hud-options"
+    ]
   ],
   "(method 9 nav-mesh-editable)": [
-    [8, "gp", "nav-mesh-editable"]
+    [
+      8,
+      "gp",
+      "nav-mesh-editable"
+    ]
   ],
   "(method 9 nav-mesh-poly)": [
-    [8, "gp", "nav-mesh-poly"]
+    [
+      8,
+      "gp",
+      "nav-mesh-poly"
+    ]
   ],
   "(method 9 rapid-fire-control)": [
-    [2, "a0", "rapid-fire-control"]
+    [
+      2,
+      "a0",
+      "rapid-fire-control"
+    ]
   ],
   "(method 9 rigid-body-object-constants)": [
-    [1, "a0", "rigid-body-object-constants"]
+    [
+      1,
+      "a0",
+      "rigid-body-object-constants"
+    ]
   ],
   "(method 9 texture-page)": [
-    [0, "a0", "texture-page"]
+    [
+      0,
+      "a0",
+      "texture-page"
+    ]
   ],
   "(method 90 construction-object)": [
-    [4, "gp", "construction-object"]
+    [
+      4,
+      "gp",
+      "construction-object"
+    ]
   ],
   "(method 0 collide-shape)": [
-    [26, "gp", "basic"],
-    [25, "gp", "collide-shape"]
+    [
+      26,
+      "gp",
+      "basic"
+    ],
+    [
+      25,
+      "gp",
+      "collide-shape"
+    ]
   ],
   "(method 10 nav-control)": [
-    [0, "a0", "nav-control"]
+    [
+      0,
+      "a0",
+      "nav-control"
+    ]
   ],
   "(method 10 nav-mesh-editable)": [
-    [1, "gp", "nav-mesh-editable"]
+    [
+      1,
+      "gp",
+      "nav-mesh-editable"
+    ]
   ],
   "(method 10 oil-trail)": [
-    [11, "gp", "oil-trail"]
+    [
+      11,
+      "gp",
+      "oil-trail"
+    ]
   ],
   "(method 10 sparks-work)": [
-    [3, "a0", "basic"],
-    [2, "a0", "sparks-work"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "sparks-work"
+    ]
   ],
   "(method 103 net-player-race)": [
-    [0, "gp", "net-player-race"]
+    [
+      0,
+      "gp",
+      "net-player-race"
+    ]
   ],
   "(method 104 net-player-race)": [
-    [0, "a0", "net-player-race"]
+    [
+      0,
+      "a0",
+      "net-player-race"
+    ]
   ],
   "(method 105 net-player-race)": [
-    [1, "gp", "net-player-race"]
+    [
+      1,
+      "gp",
+      "net-player-race"
+    ]
   ],
   "(method 106 net-player-race)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player-race"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player-race"
+    ]
   ],
   "(method 107 net-player-race)": [
-    [0, "a0", "net-player-race"]
+    [
+      0,
+      "a0",
+      "net-player-race"
+    ]
   ],
   "(method 11 nav-control)": [
-    [1, "a0", "nav-control"]
+    [
+      1,
+      "a0",
+      "nav-control"
+    ]
   ],
   "(method 11 nav-mesh-editable)": [
-    [0, "a0", "nav-mesh-editable"]
+    [
+      0,
+      "a0",
+      "nav-mesh-editable"
+    ]
   ],
   "(method 11 nav-mesh-poly)": [
-    [0, "a0", "nav-mesh-poly"]
+    [
+      0,
+      "a0",
+      "nav-mesh-poly"
+    ]
   ],
   "(method 11 sparks-work)": [
-    [2, "a0", "basic"],
-    [1, "a0", "sparks-work"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "sparks-work"
+    ]
   ],
   "(method 110 net-player-deathrace)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player-deathrace"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player-deathrace"
+    ]
   ],
   "(method 110 net-player-rushhour)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player-rushhour"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player-rushhour"
+    ]
   ],
   "(method 12 nav-mesh-editable)": [
-    [85, "gp", "nav-mesh-editable"]
+    [
+      85,
+      "gp",
+      "nav-mesh-editable"
+    ]
   ],
   "(method 12 nav-mesh-poly)": [
-    [0, "a0", "nav-mesh-poly"]
+    [
+      0,
+      "a0",
+      "nav-mesh-poly"
+    ]
   ],
   "(method 12 vehicle-section)": [
-    [0, "a0", "vehicle-section"],
-    [18, "a0", "car-info-full"]
+    [
+      0,
+      "a0",
+      "vehicle-section"
+    ],
+    [
+      18,
+      "a0",
+      "car-info-full"
+    ]
   ],
   "(method 13 nav-mesh-editable)": [
-    [0, "gp", "nav-mesh-editable"]
+    [
+      0,
+      "gp",
+      "nav-mesh-editable"
+    ]
   ],
   "(method 13 nav-mesh-poly)": [
-    [10, "a0", "nav-mesh-poly"]
+    [
+      10,
+      "a0",
+      "nav-mesh-poly"
+    ]
   ],
   "(method 13 oil-trail)": [
-    [3, "gp", "oil-trail"]
+    [
+      3,
+      "gp",
+      "oil-trail"
+    ]
   ],
   "(method 14 cloth-system)": [
-    [2, "a0", "basic"],
-    [1, "a0", "cloth-system"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "cloth-system"
+    ]
   ],
   "(method 14 nav-mesh-editable)": [
-    [47, "gp", "nav-mesh-editable"]
+    [
+      47,
+      "gp",
+      "nav-mesh-editable"
+    ]
   ],
   "(method 14 nav-mesh-poly)": [
-    [3, "gp", "nav-mesh-poly"]
+    [
+      3,
+      "gp",
+      "nav-mesh-poly"
+    ]
   ],
   "(method 15 artifact)": [
-    [8, "gp", "artifact"]
+    [
+      8,
+      "gp",
+      "artifact"
+    ]
   ],
   "(method 15 nav-control)": [
-    [2, "a0", "nav-control"],
-    [5, "f0", "meters"]
+    [
+      2,
+      "a0",
+      "nav-control"
+    ],
+    [
+      5,
+      "f0",
+      "meters"
+    ]
   ],
   "(method 15 nav-mesh-editable)": [
-    [1, "gp", "nav-mesh-editable"]
+    [
+      1,
+      "gp",
+      "nav-mesh-editable"
+    ]
   ],
   "(method 15 net-powerup)": [
-    [4, "a0", "basic"],
-    [3, "a0", "net-powerup"]
+    [
+      4,
+      "a0",
+      "basic"
+    ],
+    [
+      3,
+      "a0",
+      "net-powerup"
+    ]
   ],
   "(method 15 red-sentry-bot)": [
-    [4, "gp", "red-sentry-bot"]
+    [
+      4,
+      "gp",
+      "red-sentry-bot"
+    ]
   ],
   "(method 16 nav-mesh-editable)": [
-    [3, "gp", "nav-mesh-editable"]
+    [
+      3,
+      "gp",
+      "nav-mesh-editable"
+    ]
   ],
   "(method 16 process-nettable)": [
-    [0, "a0", "process-nettable"]
+    [
+      0,
+      "a0",
+      "process-nettable"
+    ]
   ],
   "(method 16 wvehicle)": [
-    [5, "gp", "basic"],
-    [4, "gp", "wvehicle"]
+    [
+      5,
+      "gp",
+      "basic"
+    ],
+    [
+      4,
+      "gp",
+      "wvehicle"
+    ]
   ],
   "(method 17 lightning-tracker)": [
-    [0, "gp", "lightning-tracker"]
+    [
+      0,
+      "gp",
+      "lightning-tracker"
+    ]
   ],
   "(method 17 nav-control)": [
-    [2, "a0", "nav-control"]
+    [
+      2,
+      "a0",
+      "nav-control"
+    ]
   ],
   "(method 17 net-player)": [
-    [5, "gp", "basic"],
-    [4, "gp", "net-player"]
+    [
+      5,
+      "gp",
+      "basic"
+    ],
+    [
+      4,
+      "gp",
+      "net-player"
+    ]
   ],
   "(method 17 net-powerup)": [
-    [20, "gp", "basic"],
-    [19, "gp", "net-powerup"]
+    [
+      20,
+      "gp",
+      "basic"
+    ],
+    [
+      19,
+      "gp",
+      "net-powerup"
+    ]
   ],
   "(method 17 vehicle)": [
-    [2, "a0", "basic"],
-    [1, "a0", "vehicle"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "vehicle"
+    ]
   ],
   "(method 18 hud-player-positions)": [
-    [5, "a0", "basic"],
-    [4, "a0", "hud-player-positions"]
+    [
+      5,
+      "a0",
+      "basic"
+    ],
+    [
+      4,
+      "a0",
+      "hud-player-positions"
+    ]
   ],
   "(method 18 hud-player-progress)": [
-    [5, "a0", "basic"],
-    [4, "a0", "hud-player-progress"]
+    [
+      5,
+      "a0",
+      "basic"
+    ],
+    [
+      4,
+      "a0",
+      "hud-player-progress"
+    ]
   ],
   "(method 18 nav-mesh-editable)": [
-    [3, "gp", "nav-mesh-editable"]
+    [
+      3,
+      "gp",
+      "nav-mesh-editable"
+    ]
   ],
   "(method 18 part-tracker)": [
-    [11, "a0", "part-tracker"],
-    [12, "v1", "view"]
+    [
+      11,
+      "a0",
+      "part-tracker"
+    ],
+    [
+      12,
+      "v1",
+      "view"
+    ]
   ],
   "(method 18 process-nettable)": [
-    [0, "a0", "process-nettable"]
+    [
+      0,
+      "a0",
+      "process-nettable"
+    ]
   ],
   "(method 18 red-sentry-bot)": [
-    [2, "a0", "basic"],
-    [1, "a0", "red-sentry-bot"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "red-sentry-bot"
+    ]
   ],
   "(method 18 v-toad-shot)": [
-    [3, "a0", "basic"],
-    [2, "a0", "v-toad-shot"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "v-toad-shot"
+    ]
   ],
   "(method 19 hud-indicator)": [
-    [2, "a0", "basic"],
-    [1, "a0", "hud-indicator"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "hud-indicator"
+    ]
   ],
   "(method 19 process-nettable)": [
-    [2, "a0", "basic"],
-    [1, "a0", "process-nettable"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "process-nettable"
+    ]
   ],
   "(method 20 http-downloader)": [
-    [16, "gp", "http-downloader"]
+    [
+      16,
+      "gp",
+      "http-downloader"
+    ]
   ],
   "(method 20 nav-control)": [
-    [2, "a0", "nav-control"]
+    [
+      2,
+      "a0",
+      "nav-control"
+    ]
   ],
   "(method 20 net-powerup)": [
-    [0, "a0", "net-powerup"]
+    [
+      0,
+      "a0",
+      "net-powerup"
+    ]
   ],
   "(method 20 red-sentry-bot)": [
-    [0, "a0", "red-sentry-bot"]
+    [
+      0,
+      "a0",
+      "red-sentry-bot"
+    ]
   ],
   "(method 23 nav-control)": [
-    [0, "a0", "nav-control"]
+    [
+      0,
+      "a0",
+      "nav-control"
+    ]
   ],
   "(method 24 hud-player-indicators)": [
-    [1, "a0", "basic"],
-    [0, "a0", "hud-player-indicators"]
+    [
+      1,
+      "a0",
+      "basic"
+    ],
+    [
+      0,
+      "a0",
+      "hud-player-indicators"
+    ]
   ],
   "(method 24 net-process-mgr)": [
-    [18, "gp", "net-process-mgr"]
+    [
+      18,
+      "gp",
+      "net-process-mgr"
+    ]
   ],
   "(method 25 load-state)": [
-    [3, "a0", "basic"],
-    [2, "a0", "load-state"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "load-state"
+    ]
   ],
   "(method 25 net-process-mgr)": [
-    [1, "a0", "basic"],
-    [0, "a0", "net-process-mgr"]
+    [
+      1,
+      "a0",
+      "basic"
+    ],
+    [
+      0,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 26 net-process-mgr)": [
-    [0, "a0", "net-process-mgr"]
+    [
+      0,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 27 net-process-mgr)": [
-    [5, "a0", "basic"],
-    [4, "a0", "net-process-mgr"]
+    [
+      5,
+      "a0",
+      "basic"
+    ],
+    [
+      4,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 27 process-nettable)": [
-    [6, "a0", "basic"],
-    [5, "a0", "process-nettable"]
+    [
+      6,
+      "a0",
+      "basic"
+    ],
+    [
+      5,
+      "a0",
+      "process-nettable"
+    ]
   ],
   "(method 28 nav-control)": [
-    [0, "a0", "nav-control"],
-    [3, "a0", "nav-control"]
+    [
+      0,
+      "a0",
+      "nav-control"
+    ],
+    [
+      3,
+      "a0",
+      "nav-control"
+    ]
   ],
   "(method 28 nav-mesh)": [
-    [7, "gp", "nav-mesh"]
+    [
+      7,
+      "gp",
+      "nav-mesh"
+    ]
   ],
   "(method 28 net-process-mgr)": [
-    [5, "a0", "basic"],
-    [4, "a0", "net-process-mgr"]
+    [
+      5,
+      "a0",
+      "basic"
+    ],
+    [
+      4,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 29 nav-control)": [
-    [1, "a0", "nav-control"],
-    [4, "a0", "collide-shape"]
+    [
+      1,
+      "a0",
+      "nav-control"
+    ],
+    [
+      4,
+      "a0",
+      "collide-shape"
+    ]
   ],
   "(method 3 nav-graph-editor)": [
-    [152, "gp", "nav-graph-editor"]
+    [
+      152,
+      "gp",
+      "nav-graph-editor"
+    ]
   ],
   "(method 3 try-to-look-at-info)": [
-    [2, "a0", "try-to-look-at-info"]
+    [
+      2,
+      "a0",
+      "try-to-look-at-info"
+    ]
   ],
   "(method 30 nav-graph-editor)": [
-    [0, "gp", "nav-graph-editor"]
+    [
+      0,
+      "gp",
+      "nav-graph-editor"
+    ]
   ],
   "(method 30 net-process-mgr)": [
-    [6, "a0", "basic"],
-    [5, "a0", "net-process-mgr"]
+    [
+      6,
+      "a0",
+      "basic"
+    ],
+    [
+      5,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 31 net-process-mgr)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-process-mgr"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 32 net-process-mgr)": [
-    [1, "a0", "net-process-mgr"],
-    [2, "v1", "state"]
+    [
+      1,
+      "a0",
+      "net-process-mgr"
+    ],
+    [
+      2,
+      "v1",
+      "state"
+    ]
   ],
   "(method 34 nav-graph-editor)": [
-    [0, "a0", "nav-graph-editor"]
+    [
+      0,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 35 eco-mgr)": [
-    [2, "a0", "basic"],
-    [1, "a0", "eco-mgr"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "eco-mgr"
+    ]
   ],
   "(method 35 net-enemy)": [
-    [0, "a0", "net-enemy"]
+    [
+      0,
+      "a0",
+      "net-enemy"
+    ]
   ],
   "(method 35 net-game-mgr)": [
-    [7, "gp", "basic"],
-    [6, "gp", "net-game-mgr"]
+    [
+      7,
+      "gp",
+      "basic"
+    ],
+    [
+      6,
+      "gp",
+      "net-game-mgr"
+    ]
   ],
   "(method 35 net-player)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 35 net-powerup)": [
-    [49, "a0", "basic"],
-    [48, "a0", "net-powerup"]
+    [
+      49,
+      "a0",
+      "basic"
+    ],
+    [
+      48,
+      "a0",
+      "net-powerup"
+    ]
   ],
   "(method 35 net-projectile)": [
-    [117, "a0", "basic"],
-    [116, "a0", "net-projectile"]
+    [
+      117,
+      "a0",
+      "basic"
+    ],
+    [
+      116,
+      "a0",
+      "net-projectile"
+    ]
   ],
   "(method 35 net-simple-destruct-mgr)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-simple-destruct-mgr"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-simple-destruct-mgr"
+    ]
   ],
   "(method 35 net-test)": [
-    [8, "gp", "basic"],
-    [7, "gp", "net-test"]
+    [
+      8,
+      "gp",
+      "basic"
+    ],
+    [
+      7,
+      "gp",
+      "net-test"
+    ]
   ],
   "(method 35 red-sentry-bot)": [
-    [69, "a0", "basic"],
-    [68, "a0", "red-sentry-bot"]
+    [
+      69,
+      "a0",
+      "basic"
+    ],
+    [
+      68,
+      "a0",
+      "red-sentry-bot"
+    ]
   ],
   "(method 35 sphere-hash)": [
-    [3, "a0", "basic"],
-    [2, "a0", "sphere-hash"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "sphere-hash"
+    ]
   ],
   "(method 36 net-enemy)": [
-    [1, "a0", "basic"],
-    [0, "a0", "net-enemy"]
+    [
+      1,
+      "a0",
+      "basic"
+    ],
+    [
+      0,
+      "a0",
+      "net-enemy"
+    ]
   ],
   "(method 36 net-game-mgr)": [
-    [1, "a0", "basic"],
-    [0, "a0", "net-game-mgr"]
+    [
+      1,
+      "a0",
+      "basic"
+    ],
+    [
+      0,
+      "a0",
+      "net-game-mgr"
+    ]
   ],
   "(method 36 rigid-body-control)": [
-    [3, "a0", "basic"],
-    [2, "a0", "rigid-body-control"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "rigid-body-control"
+    ]
   ],
   "(method 37 nav-graph-editor)": [
-    [0, "a0", "nav-graph-editor"]
+    [
+      0,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 38 net-process-mgr)": [
-    [28, "gp", "net-process-mgr"]
+    [
+      28,
+      "gp",
+      "net-process-mgr"
+    ]
   ],
   "(method 38 process-nettable)": [
-    [3, "a0", "basic"],
-    [2, "a0", "process-nettable"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "process-nettable"
+    ]
   ],
   "(method 39 nav-graph-editor)": [
-    [2, "a0", "basic"],
-    [1, "a0", "nav-graph-editor"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 39 net-process-mgr)": [
-    [5, "a0", "basic"],
-    [4, "a0", "net-process-mgr"]
+    [
+      5,
+      "a0",
+      "basic"
+    ],
+    [
+      4,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 39 process-nettable)": [
-    [3, "a0", "basic"],
-    [2, "a0", "process-nettable"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "process-nettable"
+    ]
   ],
   "(method 40 nav-graph-editor)": [
-    [2, "a0", "basic"],
-    [1, "a0", "nav-graph-editor"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 40 net-process-mgr)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-process-mgr"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 41 nav-graph-editor)": [
-    [2, "a0", "basic"],
-    [1, "a0", "nav-graph-editor"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 42 nav-control)": [
-    [0, "a0", "nav-control"]
+    [
+      0,
+      "a0",
+      "nav-control"
+    ]
   ],
   "(method 42 nav-graph-editor)": [
-    [2, "a0", "basic"],
-    [1, "a0", "nav-graph-editor"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 43 nav-graph-editor)": [
-    [2, "a0", "basic"],
-    [1, "a0", "nav-graph-editor"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 43 process-drawable)": [
-    [32, "a0", "basic"],
-    [31, "a0", "process-drawable"]
+    [
+      32,
+      "a0",
+      "basic"
+    ],
+    [
+      31,
+      "a0",
+      "process-drawable"
+    ]
   ],
   "(method 44 nav-graph-editor)": [
-    [2, "a0", "basic"],
-    [1, "a0", "nav-graph-editor"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 44 net-simple-destruct-mgr)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-simple-destruct-mgr"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-simple-destruct-mgr"
+    ]
   ],
   "(method 45 net-player)": [
-    [24, "a0", "net-player"]
+    [
+      24,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 47 eco-mgr)": [
-    [7, "a0", "basic"],
-    [6, "a0", "eco-mgr"]
+    [
+      7,
+      "a0",
+      "basic"
+    ],
+    [
+      6,
+      "a0",
+      "eco-mgr"
+    ]
   ],
   "(method 47 nav-graph-editor)": [
-    [0, "gp", "nav-graph-editor"]
+    [
+      0,
+      "gp",
+      "nav-graph-editor"
+    ]
   ],
   "(method 47 net-process-mgr)": [
-    [2, "a0", "net-process-mgr"]
+    [
+      2,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 48 nav-graph-editor)": [
-    [0, "gp", "nav-graph-editor"]
+    [
+      0,
+      "gp",
+      "nav-graph-editor"
+    ]
   ],
   "(method 48 net-player)": [
-    [6, "gp", "basic"],
-    [5, "gp", "net-player"]
+    [
+      6,
+      "gp",
+      "basic"
+    ],
+    [
+      5,
+      "gp",
+      "net-player"
+    ]
   ],
   "(method 48 net-player-artifact)": [
-    [6, "a0", "basic"],
-    [5, "a0", "net-player-artifact"]
+    [
+      6,
+      "a0",
+      "basic"
+    ],
+    [
+      5,
+      "a0",
+      "net-player-artifact"
+    ]
   ],
   "(method 48 net-player-boss-battle)": [
-    [8, "gp", "basic"],
-    [7, "gp", "net-player-boss-battle"]
+    [
+      8,
+      "gp",
+      "basic"
+    ],
+    [
+      7,
+      "gp",
+      "net-player-boss-battle"
+    ]
   ],
   "(method 48 net-player-deathrace)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player-deathrace"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player-deathrace"
+    ]
   ],
   "(method 48 net-player-rushhour)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player-rushhour"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player-rushhour"
+    ]
   ],
   "(method 48 net-process-mgr)": [
-    [0, "a0", "net-process-mgr"]
+    [
+      0,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 49 nav-graph-editor)": [
-    [4, "gp", "nav-graph-editor"]
+    [
+      4,
+      "gp",
+      "nav-graph-editor"
+    ]
   ],
   "(method 49 net-process-mgr)": [
-    [4, "a0", "basic"],
-    [3, "a0", "net-process-mgr"]
+    [
+      4,
+      "a0",
+      "basic"
+    ],
+    [
+      3,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 50 nav-graph-editor)": [
-    [4, "gp", "nav-graph-editor"]
+    [
+      4,
+      "gp",
+      "nav-graph-editor"
+    ]
   ],
   "(method 50 net-enemy)": [
-    [0, "a0", "net-enemy"],
-    [3, "v1", "state"]
+    [
+      0,
+      "a0",
+      "net-enemy"
+    ],
+    [
+      3,
+      "v1",
+      "state"
+    ]
   ],
   "(method 51 editable-player)": [
-    [1, "gp", "editable-player"]
+    [
+      1,
+      "gp",
+      "editable-player"
+    ]
   ],
   "(method 51 nav-graph-editor)": [
-    [7, "gp", "basic"],
-    [6, "gp", "nav-graph-editor"]
+    [
+      7,
+      "gp",
+      "basic"
+    ],
+    [
+      6,
+      "gp",
+      "nav-graph-editor"
+    ]
   ],
   "(method 52 artifact)": [
-    [3, "a0", "basic"],
-    [2, "a0", "artifact"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "artifact"
+    ]
   ],
   "(method 52 editable-player)": [
-    [57, "gp", "editable-player"]
+    [
+      57,
+      "gp",
+      "editable-player"
+    ]
   ],
   "(method 52 net-mgr)": [
-    [56, "gp", "net-mgr"]
+    [
+      56,
+      "gp",
+      "net-mgr"
+    ]
   ],
   "(method 52 simple-prim)": [
-    [0, "a0", "simple-prim"]
+    [
+      0,
+      "a0",
+      "simple-prim"
+    ]
   ],
   "(method 52 simple-prim-zbuf-mask)": [
-    [0, "a0", "simple-prim-zbuf-mask"]
+    [
+      0,
+      "a0",
+      "simple-prim-zbuf-mask"
+    ]
   ],
   "(method 53 artifact-draw)": [
-    [4, "a0", "basic"],
-    [3, "a0", "artifact-draw"]
+    [
+      4,
+      "a0",
+      "basic"
+    ],
+    [
+      3,
+      "a0",
+      "artifact-draw"
+    ]
   ],
   "(method 53 editable-player)": [
-    [0, "gp", "editable-player"]
+    [
+      0,
+      "gp",
+      "editable-player"
+    ]
   ],
   "(method 53 nav-graph-editor)": [
-    [0, "a0", "nav-graph-editor"]
+    [
+      0,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 53 net-game-mgr)": [
-    [6, "a0", "net-game-mgr"]
+    [
+      6,
+      "a0",
+      "net-game-mgr"
+    ]
   ],
   "(method 53 net-process-mgr)": [
-    [4, "a0", "basic"],
-    [3, "a0", "net-process-mgr"]
+    [
+      4,
+      "a0",
+      "basic"
+    ],
+    [
+      3,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 54 joint-exploder)": [
-    [3, "a0", "basic"],
-    [2, "a0", "joint-exploder"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "joint-exploder"
+    ]
   ],
   "(method 54 nav-graph-editor)": [
-    [0, "a0", "nav-graph-editor"]
+    [
+      0,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 54 nav-mesh-editor)": [
-    [37, "gp", "nav-mesh-editor"]
+    [
+      37,
+      "gp",
+      "nav-mesh-editor"
+    ]
   ],
   "(method 54 net-player-deathmatch)": [
-    [4, "a0", "basic"],
-    [3, "a0", "net-player-deathmatch"]
+    [
+      4,
+      "a0",
+      "basic"
+    ],
+    [
+      3,
+      "a0",
+      "net-player-deathmatch"
+    ]
   ],
   "(method 54 net-player-race)": [
-    [1, "a0", "net-player-race"],
-    [2, "v1", "state"]
+    [
+      1,
+      "a0",
+      "net-player-race"
+    ],
+    [
+      2,
+      "v1",
+      "state"
+    ]
   ],
   "(method 54 net-process-mgr)": [
-    [4, "a0", "basic"],
-    [3, "a0", "net-process-mgr"]
+    [
+      4,
+      "a0",
+      "basic"
+    ],
+    [
+      3,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 54 net-world)": [
-    [78, "a0", "basic"],
-    [77, "a0", "net-world"]
+    [
+      78,
+      "a0",
+      "basic"
+    ],
+    [
+      77,
+      "a0",
+      "net-world"
+    ]
   ],
   "(method 54 simple-prim)": [
-    [7, "gp", "simple-prim"]
+    [
+      7,
+      "gp",
+      "simple-prim"
+    ]
   ],
   "(method 55 nav-graph-editor)": [
-    [0, "a0", "nav-graph-editor"]
+    [
+      0,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 55 nav-mesh-editor)": [
-    [0, "a0", "nav-mesh-editor"]
+    [
+      0,
+      "a0",
+      "nav-mesh-editor"
+    ]
   ],
   "(method 55 net-player)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 55 net-process-mgr)": [
-    [5, "a0", "basic"],
-    [4, "a0", "net-process-mgr"]
+    [
+      5,
+      "a0",
+      "basic"
+    ],
+    [
+      4,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 55 simple-prim-particle-binding)": [
-    [0, "a0", "simple-prim-particle-binding"]
+    [
+      0,
+      "a0",
+      "simple-prim-particle-binding"
+    ]
   ],
   "(method 55 v-wpn-purple-shield)": [
-    [2, "a0", "basic"],
-    [1, "a0", "v-wpn-purple-shield"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "v-wpn-purple-shield"
+    ]
   ],
   "(method 55 v-wpn-red-drone-gun)": [
-    [2, "a0", "basic"],
-    [1, "a0", "v-wpn-red-drone-gun"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "v-wpn-red-drone-gun"
+    ]
   ],
   "(method 55 v-wpn-red-mine-launcher)": [
-    [2, "a0", "basic"],
-    [1, "a0", "v-wpn-red-mine-launcher"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "v-wpn-red-mine-launcher"
+    ]
   ],
   "(method 55 v-wpn-red-oil)": [
-    [2, "a0", "basic"],
-    [1, "a0", "v-wpn-red-oil"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "v-wpn-red-oil"
+    ]
   ],
   "(method 55 v-wpn-red-sentry-gun)": [
-    [2, "a0", "basic"],
-    [1, "a0", "v-wpn-red-sentry-gun"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "v-wpn-red-sentry-gun"
+    ]
   ],
   "(method 55 v-wpn-red-smoke)": [
-    [2, "a0", "basic"],
-    [1, "a0", "v-wpn-red-smoke"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "v-wpn-red-smoke"
+    ]
   ],
   "(method 55 v-wpn-red-tractor-beam)": [
-    [2, "a0", "basic"],
-    [1, "a0", "v-wpn-red-tractor-beam"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "v-wpn-red-tractor-beam"
+    ]
   ],
   "(method 55 v-wpn-red-turbo-preventor)": [
-    [2, "a0", "basic"],
-    [1, "a0", "v-wpn-red-turbo-preventor"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "v-wpn-red-turbo-preventor"
+    ]
   ],
   "(method 56 nav-mesh-editor)": [
-    [0, "a0", "nav-mesh-editor"]
+    [
+      0,
+      "a0",
+      "nav-mesh-editor"
+    ]
   ],
   "(method 56 net-game-mgr)": [
-    [13, "a0", "basic"],
-    [12, "a0", "net-game-mgr"]
+    [
+      13,
+      "a0",
+      "basic"
+    ],
+    [
+      12,
+      "a0",
+      "net-game-mgr"
+    ]
   ],
   "(method 56 net-player-deathmatch)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player-deathmatch"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player-deathmatch"
+    ]
   ],
   "(method 56 net-process-mgr)": [
-    [5, "a0", "basic"],
-    [4, "a0", "net-process-mgr"]
+    [
+      5,
+      "a0",
+      "basic"
+    ],
+    [
+      4,
+      "a0",
+      "net-process-mgr"
+    ]
   ],
   "(method 57 nav-mesh-editor)": [
-    [0, "gp", "nav-mesh-editor"]
+    [
+      0,
+      "gp",
+      "nav-mesh-editor"
+    ]
   ],
   "(method 57 net-enemy)": [
-    [0, "a0", "net-enemy"]
+    [
+      0,
+      "a0",
+      "net-enemy"
+    ]
   ],
   "(method 57 net-game-mgr)": [
-    [4, "a0", "basic"],
-    [3, "a0", "net-game-mgr"]
+    [
+      4,
+      "a0",
+      "basic"
+    ],
+    [
+      3,
+      "a0",
+      "net-game-mgr"
+    ]
   ],
   "(method 57 net-game-mgr-artifact)": [
-    [15, "a0", "basic"],
-    [14, "a0", "net-game-mgr-artifact"]
+    [
+      15,
+      "a0",
+      "basic"
+    ],
+    [
+      14,
+      "a0",
+      "net-game-mgr-artifact"
+    ]
   ],
   "(method 57 net-game-mgr-deathmatch)": [
-    [6, "a0", "basic"],
-    [5, "a0", "net-game-mgr-deathmatch"]
+    [
+      6,
+      "a0",
+      "basic"
+    ],
+    [
+      5,
+      "a0",
+      "net-game-mgr-deathmatch"
+    ]
   ],
   "(method 57 net-game-mgr-race)": [
-    [11, "gp", "basic"],
-    [10, "gp", "net-game-mgr-race"]
+    [
+      11,
+      "gp",
+      "basic"
+    ],
+    [
+      10,
+      "gp",
+      "net-game-mgr-race"
+    ]
   ],
   "(method 58 nav-graph-editor)": [
-    [2, "gp", "nav-graph-editor"]
+    [
+      2,
+      "gp",
+      "nav-graph-editor"
+    ]
   ],
   "(method 58 net-game-mgr)": [
-    [5, "a0", "basic"],
-    [4, "a0", "net-game-mgr"]
+    [
+      5,
+      "a0",
+      "basic"
+    ],
+    [
+      4,
+      "a0",
+      "net-game-mgr"
+    ]
   ],
   "(method 58 net-game-mgr-boss-battle)": [
-    [13, "a0", "net-game-mgr-boss-battle"]
+    [
+      13,
+      "a0",
+      "net-game-mgr-boss-battle"
+    ]
   ],
   "(method 58 net-game-mgr-deathmatch)": [
-    [13, "a0", "net-game-mgr-deathmatch"]
+    [
+      13,
+      "a0",
+      "net-game-mgr-deathmatch"
+    ]
   ],
   "(method 58 net-game-mgr-race)": [
-    [13, "a0", "net-game-mgr-race"]
+    [
+      13,
+      "a0",
+      "net-game-mgr-race"
+    ]
   ],
   "(method 58 net-game-mgr-rushhour)": [
-    [13, "a0", "net-game-mgr-rushhour"]
+    [
+      13,
+      "a0",
+      "net-game-mgr-rushhour"
+    ]
   ],
   "(method 59 basic-list-selection)": [
-    [1, "a0", "basic-list-selection"]
+    [
+      1,
+      "a0",
+      "basic-list-selection"
+    ]
   ],
   "(method 59 dropdown-item)": [
-    [24, "gp", "dropdown-item"]
+    [
+      24,
+      "gp",
+      "dropdown-item"
+    ]
   ],
   "(method 59 index-sprite-list-menu)": [
-    [2, "gp", "index-sprite-list-menu"]
+    [
+      2,
+      "gp",
+      "index-sprite-list-menu"
+    ]
   ],
   "(method 59 item-list-selection)": [
-    [0, "gp", "item-list-selection"]
+    [
+      0,
+      "gp",
+      "item-list-selection"
+    ]
   ],
   "(method 59 item-num-selection)": [
-    [4, "gp", "item-num-selection"]
+    [
+      4,
+      "gp",
+      "item-num-selection"
+    ]
   ],
   "(method 59 map-menu)": [
-    [5, "gp", "basic"],
-    [4, "gp", "map-menu"]
+    [
+      5,
+      "gp",
+      "basic"
+    ],
+    [
+      4,
+      "gp",
+      "map-menu"
+    ]
   ],
   "(method 59 nav-graph-editor)": [
-    [0, "a0", "nav-graph-editor"]
+    [
+      0,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 59 options-bar-indicator)": [
-    [8, "gp", "options-bar-indicator"]
+    [
+      8,
+      "gp",
+      "options-bar-indicator"
+    ]
   ],
   "(method 59 prim-strip-menu)": [
-    [1, "gp", "prim-strip-menu"]
+    [
+      1,
+      "gp",
+      "prim-strip-menu"
+    ]
   ],
   "(method 59 sprite-menu)": [
-    [4, "gp", "sprite-menu"]
+    [
+      4,
+      "gp",
+      "sprite-menu"
+    ]
   ],
   "(method 59 string-menu)": [
-    [2, "gp", "string-menu"]
+    [
+      2,
+      "gp",
+      "string-menu"
+    ]
   ],
   "(method 60 big-text-menu)": [
-    [7, "gp", "big-text-menu"]
+    [
+      7,
+      "gp",
+      "big-text-menu"
+    ]
   ],
   "(method 60 chat-window-menu)": [
-    [0, "gp", "chat-window-menu"]
+    [
+      0,
+      "gp",
+      "chat-window-menu"
+    ]
   ],
   "(method 60 index-sprite-list-menu)": [
-    [2, "a0", "basic"],
-    [1, "a0", "index-sprite-list-menu"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "index-sprite-list-menu"
+    ]
   ],
   "(method 60 nav-graph-editor)": [
-    [3, "a0", "basic"],
-    [2, "a0", "nav-graph-editor"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 60 net-game-mgr)": [
-    [86, "a0", "basic"],
-    [85, "a0", "net-game-mgr"]
+    [
+      86,
+      "a0",
+      "basic"
+    ],
+    [
+      85,
+      "a0",
+      "net-game-mgr"
+    ]
   ],
   "(method 60 prim-strip-menu)": [
-    [0, "gp", "prim-strip-menu"]
+    [
+      0,
+      "gp",
+      "prim-strip-menu"
+    ]
   ],
   "(method 60 sprite-ptr-menu)": [
-    [19, "gp", "sprite-ptr-menu"]
+    [
+      19,
+      "gp",
+      "sprite-ptr-menu"
+    ]
   ],
   "(method 60 string-menu)": [
-    [1, "gp", "string-menu"]
+    [
+      1,
+      "gp",
+      "string-menu"
+    ]
   ],
   "(method 61 dropdown-item)": [
-    [7, "gp", "dropdown-item"]
+    [
+      7,
+      "gp",
+      "dropdown-item"
+    ]
   ],
   "(method 61 nav-graph-editor)": [
-    [3, "a0", "basic"],
-    [2, "a0", "nav-graph-editor"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 61 net-game-mgr)": [
-    [7, "a0", "basic"],
-    [6, "a0", "net-game-mgr"]
+    [
+      7,
+      "a0",
+      "basic"
+    ],
+    [
+      6,
+      "a0",
+      "net-game-mgr"
+    ]
   ],
   "(method 61 net-player-race)": [
-    [0, "a0", "net-player-race"]
+    [
+      0,
+      "a0",
+      "net-player-race"
+    ]
   ],
   "(method 61 options-bar-indicator)": [
-    [8, "gp", "options-bar-indicator"]
+    [
+      8,
+      "gp",
+      "options-bar-indicator"
+    ]
   ],
   "(method 61 vehicle)": [
-    [2, "a0", "basic"],
-    [1, "a0", "vehicle"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "vehicle"
+    ]
   ],
   "(method 61 vehicle-wheel)": [
-    [2, "gp", "vehicle-wheel"]
+    [
+      2,
+      "gp",
+      "vehicle-wheel"
+    ]
   ],
   "(method 62 basic-list-selection)": [
-    [6, "gp", "basic-list-selection"]
+    [
+      6,
+      "gp",
+      "basic-list-selection"
+    ]
   ],
   "(method 62 nav-graph-editor)": [
-    [2, "gp", "nav-graph-editor"]
+    [
+      2,
+      "gp",
+      "nav-graph-editor"
+    ]
   ],
   "(method 62 net-enemy)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-enemy"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-enemy"
+    ]
   ],
   "(method 62 net-player)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 62 wvehicle)": [
-    [3, "a0", "basic"],
-    [2, "a0", "wvehicle"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "wvehicle"
+    ]
   ],
   "(method 63 base-menu)": [
-    [1, "gp", "base-menu"]
+    [
+      1,
+      "gp",
+      "base-menu"
+    ]
   ],
   "(method 63 nav-graph-editor)": [
-    [0, "gp", "nav-graph-editor"]
+    [
+      0,
+      "gp",
+      "nav-graph-editor"
+    ]
   ],
   "(method 63 net-player)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 63 net-simple-destruct)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-simple-destruct"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-simple-destruct"
+    ]
   ],
   "(method 64 base-menu)": [
-    [0, "gp", "base-menu"]
+    [
+      0,
+      "gp",
+      "base-menu"
+    ]
   ],
   "(method 64 nav-graph-editor)": [
-    [5, "a0", "basic"],
-    [4, "a0", "nav-graph-editor"]
+    [
+      5,
+      "a0",
+      "basic"
+    ],
+    [
+      4,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 64 net-player)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 64 red-sentry-bot)": [
-    [8, "a0", "basic"],
-    [7, "a0", "red-sentry-bot"]
+    [
+      8,
+      "a0",
+      "basic"
+    ],
+    [
+      7,
+      "a0",
+      "red-sentry-bot"
+    ]
   ],
   "(method 64 vehicle)": [
-    [3, "a0", "basic"],
-    [2, "a0", "vehicle"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "vehicle"
+    ]
   ],
   "(method 64 wvehicle)": [
-    [7, "gp", "wvehicle"]
+    [
+      7,
+      "gp",
+      "wvehicle"
+    ]
   ],
   "(method 65 index-sprite-list-menu)": [
-    [0, "gp", "index-sprite-list-menu"]
+    [
+      0,
+      "gp",
+      "index-sprite-list-menu"
+    ]
   ],
   "(method 65 map-menu)": [
-    [3, "a0", "map-menu"],
-    [4, "a0", "cspace-array"]
+    [
+      3,
+      "a0",
+      "map-menu"
+    ],
+    [
+      4,
+      "a0",
+      "cspace-array"
+    ]
   ],
   "(method 65 nav-graph-editor)": [
-    [0, "a0", "nav-graph-editor"]
+    [
+      0,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 65 net-player)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 65 selection-menu-manager)": [
-    [2, "gp", "selection-menu-manager"]
+    [
+      2,
+      "gp",
+      "selection-menu-manager"
+    ]
   ],
   "(method 65 sprite-menu)": [
-    [134, "gp", "sprite-menu"]
+    [
+      134,
+      "gp",
+      "sprite-menu"
+    ]
   ],
   "(method 66 big-text-menu)": [
-    [4, "gp", "big-text-menu"]
+    [
+      4,
+      "gp",
+      "big-text-menu"
+    ]
   ],
   "(method 66 index-sprite-list-menu)": [
-    [3, "gp", "index-sprite-list-menu"]
+    [
+      3,
+      "gp",
+      "index-sprite-list-menu"
+    ]
   ],
   "(method 66 nav-graph-editor)": [
-    [0, "a0", "nav-graph-editor"]
+    [
+      0,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 66 net-player)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 66 prim-strip-menu)": [
-    [225, "gp", "prim-strip-menu"]
+    [
+      225,
+      "gp",
+      "prim-strip-menu"
+    ]
   ],
   "(method 66 rigid-body-object)": [
-    [0, "a0", "rigid-body-object"]
+    [
+      0,
+      "a0",
+      "rigid-body-object"
+    ]
   ],
   "(method 66 vehicle-wheel)": [
-    [2, "a0", "basic"],
-    [1, "a0", "vehicle-wheel"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "vehicle-wheel"
+    ]
   ],
   "(method 67 basic-list-selection)": [
-    [4, "gp", "basic-list-selection"]
+    [
+      4,
+      "gp",
+      "basic-list-selection"
+    ]
   ],
   "(method 67 dropdown-item)": [
-    [4, "gp", "dropdown-item"]
+    [
+      4,
+      "gp",
+      "dropdown-item"
+    ]
   ],
   "(method 67 dynamic-string-menu)": [
-    [7, "gp", "dynamic-string-menu"]
+    [
+      7,
+      "gp",
+      "dynamic-string-menu"
+    ]
   ],
   "(method 67 games-list-selection)": [
-    [12, "gp", "games-list-selection"]
+    [
+      12,
+      "gp",
+      "games-list-selection"
+    ]
   ],
   "(method 67 item-list-selection)": [
-    [4, "gp", "item-list-selection"]
+    [
+      4,
+      "gp",
+      "item-list-selection"
+    ]
   ],
   "(method 67 item-num-max-selection)": [
-    [4, "gp", "item-num-max-selection"]
+    [
+      4,
+      "gp",
+      "item-num-max-selection"
+    ]
   ],
   "(method 67 item-num-selection)": [
-    [4, "gp", "item-num-selection"]
+    [
+      4,
+      "gp",
+      "item-num-selection"
+    ]
   ],
   "(method 67 net-player)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 67 player-ct-string-menu)": [
-    [10, "gp", "player-ct-string-menu"]
+    [
+      10,
+      "gp",
+      "player-ct-string-menu"
+    ]
   ],
   "(method 67 rigid-body-object)": [
-    [1, "a0", "basic"],
-    [0, "a0", "rigid-body-object"]
+    [
+      1,
+      "a0",
+      "basic"
+    ],
+    [
+      0,
+      "a0",
+      "rigid-body-object"
+    ]
   ],
   "(method 67 string-list-selection)": [
-    [4, "gp", "string-list-selection"]
+    [
+      4,
+      "gp",
+      "string-list-selection"
+    ]
   ],
   "(method 67 string-menu)": [
-    [170, "gp", "string-menu"]
+    [
+      170,
+      "gp",
+      "string-menu"
+    ]
   ],
   "(method 68 nav-graph-editor)": [
-    [0, "a0", "nav-graph-editor"]
+    [
+      0,
+      "a0",
+      "nav-graph-editor"
+    ]
   ],
   "(method 68 net-game-mgr)": [
-    [65, "a0", "basic"],
-    [64, "a0", "net-game-mgr"]
+    [
+      65,
+      "a0",
+      "basic"
+    ],
+    [
+      64,
+      "a0",
+      "net-game-mgr"
+    ]
   ],
   "(method 68 net-player)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 68 rigid-body-object)": [
-    [1, "a0", "rigid-body-object"],
-    [2, "a1", "ambient-sound"]
+    [
+      1,
+      "a0",
+      "rigid-body-object"
+    ],
+    [
+      2,
+      "a1",
+      "ambient-sound"
+    ]
   ],
   "(method 68 string-menu)": [
-    [0, "gp", "string-menu"]
+    [
+      0,
+      "gp",
+      "string-menu"
+    ]
   ],
   "(method 69 net-simple-destruct)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-simple-destruct"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-simple-destruct"
+    ]
   ],
   "(method 69 v-tiger)": [
-    [8, "gp", "basic"],
-    [7, "gp", "v-tiger"]
+    [
+      8,
+      "gp",
+      "basic"
+    ],
+    [
+      7,
+      "gp",
+      "v-tiger"
+    ]
   ],
   "(method 69 vehicle)": [
-    [8, "gp", "basic"],
-    [7, "gp", "vehicle"]
+    [
+      8,
+      "gp",
+      "basic"
+    ],
+    [
+      7,
+      "gp",
+      "vehicle"
+    ]
   ],
   "(method 69 wvehicle)": [
-    [8, "gp", "basic"],
-    [7, "gp", "wvehicle"]
+    [
+      8,
+      "gp",
+      "basic"
+    ],
+    [
+      7,
+      "gp",
+      "wvehicle"
+    ]
   ],
   "(method 70 net-player-race)": [
-    [0, "a0", "net-player-race"]
+    [
+      0,
+      "a0",
+      "net-player-race"
+    ]
   ],
   "(method 71 net-world)": [
-    [350, "a0", "basic"],
-    [349, "a0", "net-world"]
+    [
+      350,
+      "a0",
+      "basic"
+    ],
+    [
+      349,
+      "a0",
+      "net-world"
+    ]
   ],
   "(method 71 rigid-body-object)": [
-    [2, "a0", "basic"],
-    [1, "a0", "rigid-body-object"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "rigid-body-object"
+    ]
   ],
   "(method 72 net-game-mgr-assassin)": [
-    [22, "a0", "net-game-mgr-assassin"]
+    [
+      22,
+      "a0",
+      "net-game-mgr-assassin"
+    ]
   ],
   "(method 72 net-world)": [
-    [20, "a0", "basic"],
-    [19, "a0", "net-world"]
+    [
+      20,
+      "a0",
+      "basic"
+    ],
+    [
+      19,
+      "a0",
+      "net-world"
+    ]
   ],
   "(method 73 net-world)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-world"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-world"
+    ]
   ],
   "(method 74 net-enemy)": [
-    [3, "gp", "net-enemy"]
+    [
+      3,
+      "gp",
+      "net-enemy"
+    ]
   ],
   "(method 74 net-projectile)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-projectile"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-projectile"
+    ]
   ],
   "(method 75 v-toad-shot)": [
-    [0, "a0", "v-toad-shot"]
+    [
+      0,
+      "a0",
+      "v-toad-shot"
+    ]
   ],
   "(method 76 net-player)": [
-    [35, "a0", "basic"],
-    [34, "a0", "net-player"]
+    [
+      35,
+      "a0",
+      "basic"
+    ],
+    [
+      34,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 77 net-world)": [
-    [98, "a0", "net-world"]
+    [
+      98,
+      "a0",
+      "net-world"
+    ]
   ],
   "(method 77 rigid-body-object)": [
-    [1, "a0", "basic"],
-    [0, "a0", "rigid-body-object"]
+    [
+      1,
+      "a0",
+      "basic"
+    ],
+    [
+      0,
+      "a0",
+      "rigid-body-object"
+    ]
   ],
   "(method 77 vehicle)": [
-    [1, "a0", "basic"],
-    [0, "a0", "vehicle"]
+    [
+      1,
+      "a0",
+      "basic"
+    ],
+    [
+      0,
+      "a0",
+      "vehicle"
+    ]
   ],
   "(method 81 net-game-mgr-deathmatch)": [
-    [30, "gp", "net-game-mgr-deathmatch"]
+    [
+      30,
+      "gp",
+      "net-game-mgr-deathmatch"
+    ]
   ],
   "(method 81 net-player)": [
-    [1, "a0", "basic"],
-    [0, "a0", "net-player"]
+    [
+      1,
+      "a0",
+      "basic"
+    ],
+    [
+      0,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 82 net-enemy)": [
-    [0, "a0", "net-enemy"]
+    [
+      0,
+      "a0",
+      "net-enemy"
+    ]
   ],
   "(method 82 net-game-mgr-deathmatch)": [
-    [6, "a0", "basic"],
-    [5, "a0", "net-game-mgr-deathmatch"]
+    [
+      6,
+      "a0",
+      "basic"
+    ],
+    [
+      5,
+      "a0",
+      "net-game-mgr-deathmatch"
+    ]
   ],
   "(method 82 net-player-race)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player-race"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player-race"
+    ]
   ],
   "(method 82 rigid-body-object)": [
-    [7, "a0", "basic"],
-    [6, "a0", "rigid-body-object"]
+    [
+      7,
+      "a0",
+      "basic"
+    ],
+    [
+      6,
+      "a0",
+      "rigid-body-object"
+    ]
   ],
   "(method 83 net-enemy)": [
-    [1, "gp", "net-enemy"]
+    [
+      1,
+      "gp",
+      "net-enemy"
+    ]
   ],
   "(method 83 net-game-mgr-deathmatch)": [
-    [4, "a0", "basic"],
-    [3, "a0", "net-game-mgr-deathmatch"]
+    [
+      4,
+      "a0",
+      "basic"
+    ],
+    [
+      3,
+      "a0",
+      "net-game-mgr-deathmatch"
+    ]
   ],
   "(method 83 net-player-race)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player-race"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player-race"
+    ]
   ],
   "(method 83 rigid-body-object)": [
-    [5, "a0", "basic"],
-    [4, "a0", "rigid-body-object"]
+    [
+      5,
+      "a0",
+      "basic"
+    ],
+    [
+      4,
+      "a0",
+      "rigid-body-object"
+    ]
   ],
   "(method 85 net-enemy)": [
-    [0, "a0", "net-enemy"],
-    [1, "a1", "joint-control"]
+    [
+      0,
+      "a0",
+      "net-enemy"
+    ],
+    [
+      1,
+      "a1",
+      "joint-control"
+    ]
   ],
   "(method 85 net-game-mgr-artifact)": [
-    [30, "gp", "net-game-mgr-artifact"]
+    [
+      30,
+      "gp",
+      "net-game-mgr-artifact"
+    ]
   ],
   "(method 85 net-game-mgr-race)": [
-    [7, "a0", "basic"],
-    [6, "a0", "net-game-mgr-race"]
+    [
+      7,
+      "a0",
+      "basic"
+    ],
+    [
+      6,
+      "a0",
+      "net-game-mgr-race"
+    ]
   ],
   "(method 85 net-player-race)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player-race"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player-race"
+    ]
   ],
   "(method 87 vehicle-wheel)": [
-    [2, "gp", "vehicle-wheel"]
+    [
+      2,
+      "gp",
+      "vehicle-wheel"
+    ]
   ],
   "(method 88 vehicle-wheel)": [
-    [1, "gp", "vehicle-wheel"]
+    [
+      1,
+      "gp",
+      "vehicle-wheel"
+    ]
   ],
   "(method 9 hud-player-positions)": [
-    [2, "gp", "hud-player-positions"]
+    [
+      2,
+      "gp",
+      "hud-player-positions"
+    ]
   ],
   "(method 9 nav-control)": [
-    [3, "gp", "nav-control"]
+    [
+      3,
+      "gp",
+      "nav-control"
+    ]
   ],
   "(method 9 oil-trail)": [
-    [1, "gp", "oil-trail"]
+    [
+      1,
+      "gp",
+      "oil-trail"
+    ]
   ],
   "(method 90 net-player-deathmatch)": [
-    [0, "a0", "net-player-deathmatch"]
+    [
+      0,
+      "a0",
+      "net-player-deathmatch"
+    ]
   ],
   "(method 90 net-player-race)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player-race"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player-race"
+    ]
   ],
   "(method 91 net-player-deathmatch)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player-deathmatch"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player-deathmatch"
+    ]
   ],
   "(method 91 net-player-race)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player-race"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player-race"
+    ]
   ],
   "(method 92 vehicle-wheel)": [
-    [0, "a0", "vehicle-wheel"]
+    [
+      0,
+      "a0",
+      "vehicle-wheel"
+    ]
   ],
   "(method 93 net-player)": [
-    [2, "a0", "basic"],
-    [1, "a0", "net-player"]
+    [
+      2,
+      "a0",
+      "basic"
+    ],
+    [
+      1,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 95 net-player)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player"
+    ]
   ],
   "(method 96 net-player-assassin)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player-assassin"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player-assassin"
+    ]
   ],
   "(method 96 net-player-deathmatch)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player-deathmatch"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player-deathmatch"
+    ]
   ],
   "(method 96 net-player-deathrace)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player-deathrace"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player-deathrace"
+    ]
   ],
   "(method 96 net-player-rushhour)": [
-    [3, "a0", "basic"],
-    [2, "a0", "net-player-rushhour"]
+    [
+      3,
+      "a0",
+      "basic"
+    ],
+    [
+      2,
+      "a0",
+      "net-player-rushhour"
+    ]
   ],
   "(method 98 net-player-race)": [
-    [0, "gp", "net-player-race"]
-  ]  ,
-  // nav-control methods 16/41/46/47 omitted — range casts on these caused OOM in form-building
-  // (nav-control.nav-state is inline, nav-state→nav-control creates a type cycle;
-  //  range casts make type_prop succeed then form-builder recurses exponentially)
-  // DIAG:OOM-test — commenting out all new nav-control/nav-state entries from e290ff6e4
-  // to confirm they are the OOM culprit. nav-link-search-info entries kept (different type).
-  // "(method 11 nav-state)": [ [1, "a1", "nav-gap-info"] ],
-  // "(method 13 nav-control)": [ [0, "a0", "nav-control"] ],
-  // "(method 14 nav-control)": [ [0, "a0", "nav-control"] ],
-  // "(method 24 nav-control)": [ [0, "a0", "nav-control"] ],
-  // "(method 25 nav-control)": [ [0, "a0", "nav-control"] ],
-  // "(method 26 nav-control)": [ [0, "a0", "nav-control"] ],
-  // "(method 27 nav-control)": [ [0, "a0", "nav-control"] ],
-  // "(method 30 nav-control)": [ [1, "a0", "nav-control"] ],
-  // "(method 31 nav-control)": [ [0, "a0", "nav-control"] ],
-  // "(method 43 nav-control)": [ [1, "a0", "nav-control"], [11, "a1", "collide-shape"] ],
-  // "(method 44 nav-control)": [ [4, "a0", "nav-control"] ],
-  // "(method 51 nav-state)": [ [2, "s5", "nav-avoid-spheres-params"] ],
+    [
+      0,
+      "gp",
+      "net-player-race"
+    ]
+  ],
   "(method 13 nav-link-search-info)": [
-    [2, "gp", "nav-mesh-link-search-node"]
+    [
+      2,
+      "gp",
+      "nav-mesh-link-search-node"
+    ]
   ],
   "(method 9 nav-link-search-info)": [
-    [3, "a1", "nav-avoid-spheres-params"]
+    [
+      3,
+      "a1",
+      "nav-avoid-spheres-params"
+    ]
   ],
   "(method 11 nav-link-search-info)": [
-    [0, "a1", "nav-mesh-link-search-node"]
+    [
+      0,
+      "a1",
+      "nav-mesh-link-search-node"
+    ]
   ],
-
-  // driver.gc type_casts — fix s6/vehicle/field loads for behavior functions and methods
   "driver-trans": [
-    [0, "s6", "driver"],
-    [1, "v1", "handle"]
+    [
+      0,
+      "s6",
+      "driver"
+    ],
+    [
+      1,
+      "v1",
+      "handle"
+    ]
   ],
   "driver-head": [
-    [0, "s6", "driver"],
-    [0, "v1", "basic"]
+    [
+      0,
+      "s6",
+      "driver"
+    ],
+    [
+      0,
+      "v1",
+      "basic"
+    ]
   ],
   "driver-anim": [
-    [0, "s6", "driver"],
-    [4, "f2", "float"]
+    [
+      0,
+      "s6",
+      "driver"
+    ],
+    [
+      4,
+      "f2",
+      "float"
+    ]
   ],
   "driver-event-handler": [
-    [0, "s6", "driver"]
+    [
+      0,
+      "s6",
+      "driver"
+    ]
   ],
   "driver-init-by-other": [
-    [0, "s6", "driver"]
+    [
+      0,
+      "s6",
+      "driver"
+    ]
   ],
   "(method 3 driver)": [
-    [17, "a2", "handle"]
-  ],
-  "(method 7 driver)": [
-    [2, "v1", "pointer"]
+    [
+      17,
+      "a2",
+      "handle"
+    ]
   ],
   "(method 65 driver)": [
-    [0, "a1", "draw-control-status"],
-    [0, "a2", "draw-control-status"]
+    [
+      0,
+      "a1",
+      "draw-control-status"
+    ],
+    [
+      0,
+      "a2",
+      "draw-control-status"
+    ]
   ],
   "(method 66 driver)": [
-    [1, "v1", "handle"]
+    [
+      1,
+      "v1",
+      "handle"
+    ]
   ],
   "(code idle driver)": [
-    [7, "a0", "int"]
+    [
+      7,
+      "a0",
+      "int"
+    ]
   ],
   "(enter intro driver)": [
-    [0, "v1", "int"]
+    [
+      0,
+      "v1",
+      "int"
+    ]
   ],
   "(exit intro driver)": [
-    [0, "v1", "int"]
+    [
+      0,
+      "v1",
+      "int"
+    ]
   ],
   "(code intro driver)": [
-    [16, "a0", "int"]
+    [
+      16,
+      "a0",
+      "int"
+    ]
   ],
   "(method 11 crash-camera)": [
-    [3, "a0", "basic"]
+    [
+      3,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 11 victor-prefix-camera)": [
-    [3, "a0", "basic"]
+    [
+      3,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 12 crash-camera)": [
-    [4, "a0", "basic"]
+    [
+      4,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 12 hud-manager-death-indicator)": [
-    [45, "a0", "basic"]
+    [
+      45,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 12 prototype-node-group)": [
-    [4, "a0", "basic"]
+    [
+      4,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 18 mine-a)": [
-    [2, "a0", "basic"]
+    [
+      2,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 18 mine-b)": [
-    [2, "a0", "basic"]
+    [
+      2,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 19 cash-hud)": [
-    [2, "a0", "basic"]
+    [
+      2,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 19 hud-cash-stats)": [
-    [17, "a0", "basic"]
+    [
+      17,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 19 hud-item-hang-time-seconds)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 19 hud-item-hang-time-tenths-seconds)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 19 hud-item-number)": [
-    [2, "a0", "basic"]
+    [
+      2,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 19 hud-item-player-score)": [
-    [17, "a0", "basic"]
+    [
+      17,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 19 hud-item-power-slide-distance)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 19 hud-item-power-slide-distance-tenths)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 19 sparticle-launch-control)": [
-    [2, "a0", "basic"]
+    [
+      2,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 20 mine-b)": [
-    [1, "a0", "basic"]
+    [
+      1,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 24 hud-medal-results)": [
-    [24, "gp", "basic"]
+    [
+      24,
+      "gp",
+      "basic"
+    ]
   ],
   "(method 35 mine-a)": [
-    [3, "a0", "basic"]
+    [
+      3,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 35 mine-b)": [
-    [3, "a0", "basic"]
+    [
+      3,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 35 v-yellow-guided-missile)": [
-    [6, "a0", "basic"]
+    [
+      6,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 55 v-wpn-yellow-chain-gun)": [
-    [2, "a0", "basic"]
+    [
+      2,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 55 v-wpn-yellow-default-gun)": [
-    [2, "a0", "basic"]
+    [
+      2,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 55 v-wpn-yellow-grenade)": [
-    [4, "a0", "basic"]
+    [
+      4,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 55 v-wpn-yellow-guided-missile)": [
-    [4, "a0", "basic"]
+    [
+      4,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 55 v-wpn-yellow-seismic-blaster)": [
-    [2, "a0", "basic"]
+    [
+      2,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 57 net-world)": [
-    [1, "v1", "basic"]
+    [
+      1,
+      "v1",
+      "basic"
+    ]
   ],
   "(method 62 mine-a)": [
-    [51, "s5", "basic"]
+    [
+      51,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 63 mine-a)": [
-    [2, "a0", "basic"]
+    [
+      2,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 65 mine-b)": [
-    [51, "s5", "basic"]
+    [
+      51,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 mine-b)": [
-    [2, "a0", "basic"]
+    [
+      2,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 66 v-bear)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-bobcat)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-cheetah)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-cougar)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-daxtermobile)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-falcon)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-gila)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-leopard)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-mongoose)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-panther)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-possum)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-snake)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-tiger)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-wolf)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 66 v-wombat)": [
-    [2, "s5", "basic"]
+    [
+      2,
+      "s5",
+      "basic"
+    ]
   ],
   "(method 80 v-yellow-guided-missile)": [
-    [2, "a0", "basic"]
+    [
+      2,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 9 in-game-menu-hud)": [
-    [5, "a0", "basic"]
+    [
+      5,
+      "a0",
+      "basic"
+    ]
   ],
   "choose-target-camera": [
-    [5, "a0", "basic"]
+    [
+      5,
+      "a0",
+      "basic"
+    ]
   ],
   "get-non-conflicting-driver": [
-    [16, "a0", "basic"]
+    [
+      16,
+      "a0",
+      "basic"
+    ]
   ],
   "player-wait-control-hook": [
-    [8, "a0", "basic"]
+    [
+      8,
+      "a0",
+      "basic"
+    ]
   ],
   "powerup-motion-parabola": [
-    [2, "a0", "basic"]
+    [
+      2,
+      "a0",
+      "basic"
+    ]
   ],
   "rapid-fire-control-emitter-from-world": [
-    [21, "gp", "basic"]
+    [
+      21,
+      "gp",
+      "basic"
+    ]
   ],
   "red-sentry-bot-init-by-other": [
-    [6, "a0", "basic"]
+    [
+      6,
+      "a0",
+      "basic"
+    ]
   ],
   "spawn-mine": [
-    [5, "a0", "basic"]
+    [
+      5,
+      "a0",
+      "basic"
+    ]
   ],
   "spawn-net-projectile": [
-    [3, "v1", "basic"]
+    [
+      3,
+      "v1",
+      "basic"
+    ]
   ],
   "target-camera-heuristic-cam-point!": [
-    [8, "a0", "basic"]
+    [
+      8,
+      "a0",
+      "basic"
+    ]
   ],
   "target-camera-heuristic-fov": [
-    [6, "a0", "basic"]
+    [
+      6,
+      "a0",
+      "basic"
+    ]
   ],
   "target-camera-heuristic-look-at!": [
-    [6, "a0", "basic"]
+    [
+      6,
+      "a0",
+      "basic"
+    ]
   ],
   "target-camera-test-los": [
-    [5, "a0", "basic"]
+    [
+      5,
+      "a0",
+      "basic"
+    ]
   ],
   "vis-cull-all?": [
-    [3, "a0", "basic"]
+    [
+      3,
+      "a0",
+      "basic"
+    ]
   ],
   "(method 106 net-player-boss-battle)": [
-    [0, "v1", "float"]
+    [
+      0,
+      "v1",
+      "float"
+    ]
   ],
   "(method 3 collide-shape-moving)": [
-    [157, "a2", "float"]
+    [
+      157,
+      "a2",
+      "float"
+    ]
   ],
   "(method 3 fact-info)": [
-    [19, "s2", "process"]
+    [
+      19,
+      "s2",
+      "process"
+    ]
   ],
   "(method 3 fact-info-crate)": [
-    [19, "s2", "process"]
+    [
+      19,
+      "s2",
+      "process"
+    ]
   ],
   "(method 3 fact-info-enemy)": [
-    [19, "s2", "process"]
+    [
+      19,
+      "s2",
+      "process"
+    ]
   ],
   "(method 3 part-tracker-init-params)": [
-    [24, "a2", "time-frame"]
+    [
+      24,
+      "a2",
+      "time-frame"
+    ]
   ],
   "(method 53 gunmount-drawable)": [
-    [0, "v1", "cspace-array"]
+    [
+      0,
+      "v1",
+      "cspace-array"
+    ]
   ],
   "(method 9 sparticle-launcher)": [
-    [2, "a3", "float"]
+    [
+      2,
+      "a3",
+      "float"
+    ]
   ],
   "(method 9 spring-tracker)": [
-    [0, "f0", "float"]
+    [
+      0,
+      "f0",
+      "float"
+    ]
   ],
   "(method 92 net-player-deathrace)": [
-    [0, "v1", "float"]
+    [
+      0,
+      "v1",
+      "float"
+    ]
   ],
   "(method 92 net-player-rushhour)": [
-    [0, "v1", "float"]
+    [
+      0,
+      "v1",
+      "float"
+    ]
   ],
   "(method 93 net-player-deathrace)": [
-    [0, "v1", "float"]
+    [
+      0,
+      "v1",
+      "float"
+    ]
   ],
   "(method 93 net-player-rushhour)": [
-    [0, "v1", "float"]
+    [
+      0,
+      "v1",
+      "float"
+    ]
   ],
   "(method 94 net-player-deathrace)": [
-    [0, "v1", "float"]
+    [
+      0,
+      "v1",
+      "float"
+    ]
   ],
   "(method 94 net-player-rushhour)": [
-    [0, "v1", "float"]
+    [
+      0,
+      "v1",
+      "float"
+    ]
   ],
   "(method 25 mem-buffer)": [
-    [2, "a1", "vector"]
+    [
+      2,
+      "a1",
+      "vector"
+    ]
   ],
   "(method 29 rigid-body-control)": [
-    [34, "s5", "vector"]
+    [
+      34,
+      "s5",
+      "vector"
+    ]
   ],
   "(method 57 simple-prim-particle-binding)": [
-    [2, "a3", "vector"]
+    [
+      2,
+      "a3",
+      "vector"
+    ]
   ],
   "(method 65 vehicle-wheel)": [
-    [41, "s4", "vector"]
+    [
+      41,
+      "s4",
+      "vector"
+    ]
   ],
   "add-clut-texture-anim-layer-func": [
-    [17, "s5", "vector"]
+    [
+      17,
+      "s5",
+      "vector"
+    ]
   ],
   "birth-func-set-quat": [
-    [3, "v1", "vector"]
+    [
+      3,
+      "v1",
+      "vector"
+    ]
   ],
   "birth-func-setup-beam": [
-    [3, "v1", "vector"]
+    [
+      3,
+      "v1",
+      "vector"
+    ]
   ],
   "blend-clut-texture-anim-layer-func": [
-    [17, "s5", "vector"]
+    [
+      17,
+      "s5",
+      "vector"
+    ]
   ],
   "collide-planes-intersect": [
-    [1, "a1", "sphere"]
+    [
+      1,
+      "a1",
+      "sphere"
+    ]
   ],
   "collide-planes-test1": [
-    [3, "a3", "sphere"]
+    [
+      3,
+      "a3",
+      "sphere"
+    ]
   ],
   "compute-veh-eco-owner-score": [
-    [9, "a2", "vector"]
+    [
+      9,
+      "a2",
+      "vector"
+    ]
   ],
   "copy-alpha-texture-anim-layer-func": [
-    [102, "s3", "vector"]
+    [
+      102,
+      "s3",
+      "vector"
+    ]
   ],
   "copy-clut-alpha-texture-anim-layer-func": [
-    [97, "s3", "vector"]
+    [
+      97,
+      "s3",
+      "vector"
+    ]
   ],
   "default-texture-anim-layer-func": [
-    [19, "s3", "vector"]
+    [
+      19,
+      "s3",
+      "vector"
+    ]
   ],
   "dest-blend-clut-texture-anim-layer-func": [
-    [17, "s5", "vector"]
+    [
+      17,
+      "s5",
+      "vector"
+    ]
   ],
   "draw-debug-line-sphere": [
-    [10, "a0", "sphere"]
+    [
+      10,
+      "a0",
+      "sphere"
+    ]
   ],
   "draw-debug-sphere": [
-    [8, "a0", "sphere"]
+    [
+      8,
+      "a0",
+      "sphere"
+    ]
   ],
   "moving-sphere-moving-sphere-intersect": [
-    [12, "s5", "sphere"]
+    [
+      12,
+      "s5",
+      "sphere"
+    ]
   ],
   "moving-sphere-sphere-intersect": [
-    [8, "s3", "sphere"]
+    [
+      8,
+      "s3",
+      "sphere"
+    ]
   ],
   "no-alpha-texture-anim-layer-func": [
-    [19, "s3", "vector"]
+    [
+      19,
+      "s3",
+      "vector"
+    ]
   ],
   "set-alpha-texture-anim-layer-func": [
-    [96, "s4", "vector"]
+    [
+      96,
+      "s4",
+      "vector"
+    ]
   ],
-  // split_store_fix: jak3→jakx type-cast copy (Failed store fix) 2026-04-24
   "(method 10 profile-array)": [
-    [[69, 73], "a0", "(pointer uint128)"],
-    [[73, 82], "a1", "vector4w"],
-    [[82, 89], "a1", "vector4w"],
-    [[90, 96], "a0", "vector4w"],
-    [[113, 117], "a1", "(pointer uint128)"],
-    [[117, 126], "a2", "vector4w"],
-    [[126, 136], "a2", "vector4w"],
-    [[137, 149], "a1", "vector4w"],
-    [[187, 191], "t2", "(pointer int128)"],
-    [[191, 225], "t4", "vector4w"],
-    [[225, 231], "a2", "vector4w"],
-    [[231, 237], "a2", "vector4w"]
+    [
+      [
+        69,
+        73
+      ],
+      "a0",
+      "(pointer uint128)"
+    ],
+    [
+      [
+        73,
+        82
+      ],
+      "a1",
+      "vector4w"
+    ],
+    [
+      [
+        82,
+        89
+      ],
+      "a1",
+      "vector4w"
+    ],
+    [
+      [
+        90,
+        96
+      ],
+      "a0",
+      "vector4w"
+    ],
+    [
+      [
+        113,
+        117
+      ],
+      "a1",
+      "(pointer uint128)"
+    ],
+    [
+      [
+        117,
+        126
+      ],
+      "a2",
+      "vector4w"
+    ],
+    [
+      [
+        126,
+        136
+      ],
+      "a2",
+      "vector4w"
+    ],
+    [
+      [
+        137,
+        149
+      ],
+      "a1",
+      "vector4w"
+    ],
+    [
+      [
+        187,
+        191
+      ],
+      "t2",
+      "(pointer int128)"
+    ],
+    [
+      [
+        191,
+        225
+      ],
+      "t4",
+      "vector4w"
+    ],
+    [
+      [
+        225,
+        231
+      ],
+      "a2",
+      "vector4w"
+    ],
+    [
+      [
+        231,
+        237
+      ],
+      "a2",
+      "vector4w"
+    ]
   ],
   "(method 33 ocean)": [
-    [[52, 60], "a0", "dma-packet"],
-    [[63, 67], "v1", "vector4w"],
-    [[93, 232], "v1", "(inline-array vector4w)"],
-    [[245, 253], "a0", "dma-packet"]
+    [
+      [
+        52,
+        60
+      ],
+      "a0",
+      "dma-packet"
+    ],
+    [
+      [
+        63,
+        67
+      ],
+      "v1",
+      "vector4w"
+    ],
+    [
+      [
+        93,
+        232
+      ],
+      "v1",
+      "(inline-array vector4w)"
+    ],
+    [
+      [
+        245,
+        253
+      ],
+      "a0",
+      "dma-packet"
+    ]
   ],
   "texture-anim-layer-add-clut-shader": [
-    [[23, 30], "a3", "dma-packet"],
-    [[32, 39], "a3", "gs-gif-tag"],
-    [49, "a1", "(pointer gs-tex0)"],
-    [51, "a1", "(pointer gs-reg64)"],
-    [52, "a1", "(pointer gs-tex1)"],
-    [54, "a1", "(pointer gs-reg64)"],
-    [56, "a1", "(pointer gs-test)"],
-    [58, "a1", "(pointer gs-reg64)"],
-    [60, "a1", "(pointer gs-clamp)"],
-    [62, "a1", "(pointer gs-reg64)"],
-    [64, "a1", "(pointer gs-alpha)"],
-    [66, "a1", "(pointer gs-reg64)"]
+    [
+      [
+        23,
+        30
+      ],
+      "a3",
+      "dma-packet"
+    ],
+    [
+      [
+        32,
+        39
+      ],
+      "a3",
+      "gs-gif-tag"
+    ],
+    [
+      49,
+      "a1",
+      "(pointer gs-tex0)"
+    ],
+    [
+      51,
+      "a1",
+      "(pointer gs-reg64)"
+    ],
+    [
+      52,
+      "a1",
+      "(pointer gs-tex1)"
+    ],
+    [
+      54,
+      "a1",
+      "(pointer gs-reg64)"
+    ],
+    [
+      56,
+      "a1",
+      "(pointer gs-test)"
+    ],
+    [
+      58,
+      "a1",
+      "(pointer gs-reg64)"
+    ],
+    [
+      60,
+      "a1",
+      "(pointer gs-clamp)"
+    ],
+    [
+      62,
+      "a1",
+      "(pointer gs-reg64)"
+    ],
+    [
+      64,
+      "a1",
+      "(pointer gs-alpha)"
+    ],
+    [
+      66,
+      "a1",
+      "(pointer gs-reg64)"
+    ]
   ],
   "(method 10 talker-speech-class)": [
-    [6, "a1", "game-info"]
+    [
+      6,
+      "a1",
+      "game-info"
+    ]
   ],
   "(method 9 talker-speech-class)": [
-    [4, "a1", "game-info"]
+    [
+      4,
+      "a1",
+      "game-info"
+    ]
   ],
   "(method 12 collide-cache)": [
-    [10, "s5", "collide-query"],
-    [10, "v1", "collide-spec"]
+    [
+      10,
+      "s5",
+      "collide-query"
+    ],
+    [
+      10,
+      "v1",
+      "collide-spec"
+    ]
   ],
   "(method 13 collide-cache)": [
-    [51, "gp", "collide-query"],
-    [51, "v1", "pat-surface"]
+    [
+      51,
+      "gp",
+      "collide-query"
+    ],
+    [
+      51,
+      "v1",
+      "pat-surface"
+    ]
   ],
   "(method 18 cloth-system)": [
-    [0, "a0", "cloth-system"],
-    [0, "v1", "uint32"]
+    [
+      0,
+      "a0",
+      "cloth-system"
+    ],
+    [
+      0,
+      "v1",
+      "uint32"
+    ]
   ],
   "(method 24 cloth-system)": [
-    [208, "gp", "cloth-system"],
-    [208, "v1", "int32"]
+    [
+      208,
+      "gp",
+      "cloth-system"
+    ],
+    [
+      208,
+      "v1",
+      "int32"
+    ]
   ],
   "(method 25 cloth-system)": [
-    [2, "gp", "cloth-system"],
-    [2, "a0", "uint32"]
+    [
+      2,
+      "gp",
+      "cloth-system"
+    ],
+    [
+      2,
+      "a0",
+      "uint32"
+    ]
   ],
   "(method 26 cloth-system)": [
-    [2, "a0", "cloth-system"],
-    [2, "a1", "int32"]
+    [
+      2,
+      "a0",
+      "cloth-system"
+    ],
+    [
+      2,
+      "a1",
+      "int32"
+    ]
   ],
   "(method 27 cloth-system)": [
-    [10, "s5", "cloth-system"],
-    [10, "t0", "int32"]
+    [
+      10,
+      "s5",
+      "cloth-system"
+    ],
+    [
+      10,
+      "t0",
+      "int32"
+    ]
   ],
   "(method 34 cloth-system)": [
-    [1, "a0", "cloth-system"],
-    [1, "a1", "uint32"]
+    [
+      1,
+      "a0",
+      "cloth-system"
+    ],
+    [
+      1,
+      "a1",
+      "uint32"
+    ]
   ],
   "(method 9 cloth-system)": [
-    [1, "gp", "cloth-system"],
-    [1, "v1", "uint32"]
+    [
+      1,
+      "gp",
+      "cloth-system"
+    ],
+    [
+      1,
+      "v1",
+      "uint32"
+    ]
   ],
   "(method 3 game-save)": [
-    [92, "a2", "uint8"]
+    [
+      92,
+      "a2",
+      "uint8"
+    ]
   ],
   "(method 64 driver-jak)": [
-    [10, "v1", "uint8"]
+    [
+      10,
+      "v1",
+      "uint8"
+    ]
   ],
   "build-instance-list": [
-    [33, "v1", "int16"]
+    [
+      33,
+      "v1",
+      "int16"
+    ]
   ],
   "find-instance-by-index": [
-    [26, "v1", "int16"]
+    [
+      26,
+      "v1",
+      "int16"
+    ]
   ],
   "print-prototype-list": [
-    [26, "v1", "int16"]
+    [
+      26,
+      "v1",
+      "int16"
+    ]
   ],
   "(method 12 verlet-particle-system)": [
-    [3, "f1", "particle-array"]
+    [
+      3,
+      "f1",
+      "particle-array"
+    ]
   ],
   "(method 19 collide-cache)": [
-    [26, "a0", "pat-surface"]
+    [
+      26,
+      "a0",
+      "pat-surface"
+    ]
   ],
   "(method 25 nav-control)": [
-    [0, "f0", "float"]
+    [
+      0,
+      "f0",
+      "float"
+    ]
   ],
   "(method 27 nav-control)": [
-    [0, "f0", "meters"]
+    [
+      0,
+      "f0",
+      "meters"
+    ]
   ],
   "(method 105 vehicle)": [
-    [0, "v1", "float"]
+    [
+      0,
+      "v1",
+      "float"
+    ]
   ],
   "(method 14 vehicle-section)": [
-    [4, "f2", "float"]
+    [
+      4,
+      "f2",
+      "float"
+    ]
   ],
   "(method 20 setting-control)": [
-    [0, "v1", "engine-pers"]
+    [
+      0,
+      "v1",
+      "engine-pers"
+    ]
   ],
   "(method 52 nav-graph-editor)": [
-    [0, "v1", "symbol"]
+    [
+      0,
+      "v1",
+      "symbol"
+    ]
   ],
   "(method 58 vehicle)": [
-    [0, "f0", "float"]
+    [
+      0,
+      "f0",
+      "float"
+    ]
   ],
   "(method 71 net-player)": [
-    [7, "v1", "float"]
+    [
+      7,
+      "v1",
+      "float"
+    ]
   ],
   "(method 74 net-world)": [
-    [1, "a2", "symbol"]
+    [
+      1,
+      "a2",
+      "symbol"
+    ]
   ],
   "(method 75 net-world)": [
-    [0, "v1", "symbol"]
+    [
+      0,
+      "v1",
+      "symbol"
+    ]
   ],
   "(method 9 net-player-ladder-stats-info)": [
-    [6, "a0", "stat-info"]
+    [
+      6,
+      "a0",
+      "stat-info"
+    ]
   ],
   "(method 152 vehicle)": [
-    [1, "v1", "float"]
+    [
+      1,
+      "v1",
+      "float"
+    ]
   ],
   "(method 187 wvehicle)": [
-    [36, "f2", "uint8"]
+    [
+      36,
+      "f2",
+      "uint8"
+    ]
   ],
   "(method 202 wvehicle)": [
-    [57, "v1", "float"]
+    [
+      57,
+      "v1",
+      "float"
+    ]
   ],
   "process-drawable-reset-all-cloth": [
-    [24, "a1", "uint32"]
+    [
+      24,
+      "a1",
+      "uint32"
+    ]
   ],
   "process-drawable-set-cloth-ground-height": [
-    [24, "a2", "uint32"]
+    [
+      24,
+      "a2",
+      "uint32"
+    ]
   ],
   "process-drawable-set-riding": [
-    [26, "a3", "uint32"]
+    [
+      26,
+      "a3",
+      "uint32"
+    ]
   ],
   "process-drawable-set-wind-strength": [
-    [27, "a2", "uint32"]
+    [
+      27,
+      "a2",
+      "uint32"
+    ]
   ],
   "process-drawable-show-all-cloth": [
-    [38, "a0", "uint32"]
+    [
+      38,
+      "a0",
+      "uint32"
+    ]
   ],
   "process-drawable-slow-mo-cloth": [
-    [29, "t0", "uint32"]
+    [
+      29,
+      "t0",
+      "uint32"
+    ]
   ],
   "sp-relaunch-particle-3d": [
-    [32, "a1", "uint32"]
+    [
+      32,
+      "a1",
+      "uint32"
+    ]
   ],
   "spartacus-editor-init": [
-    [62, "v1", "uint8"]
+    [
+      62,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 10 focus)": [
-    [19, "v1", "collide-shape"]
+    [
+      19,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-bear)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-bobcat)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-cheetah)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-cougar)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-daxtermobile)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-falcon)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-gila)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-leopard)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-mongoose)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-panther)": [
-    [2, "v1", "collide-shape"]
+    [
+      2,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-possum)": [
-    [2, "v1", "collide-shape"]
+    [
+      2,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-snake)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-tiger)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-wolf)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 v-wombat)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 100 vehicle)": [
-    [1, "v1", "collide-shape"]
+    [
+      1,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 127 vehicle)": [
-    [13, "v1", "rigid-body-vehicle-constants"]
+    [
+      13,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ]
   ],
   "(method 137 vehicle)": [
-    [3, "v1", "collide-shape"]
+    [
+      3,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "(method 138 vehicle)": [
-    [4, "v1", "rigid-body-vehicle-constants"]
+    [
+      4,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ]
   ],
   "projectile-move-fill-all-dirs": [
-    [2, "v1", "collide-shape"]
+    [
+      2,
+      "v1",
+      "collide-shape"
+    ]
   ],
   "projectile-move-fill-line-sphere": [
-    [2, "gp", "collide-shape"]
+    [
+      2,
+      "gp",
+      "collide-shape"
+    ]
   ],
   "(method 20 collide-cache)": [
-    [50, "v1", "connection"]
+    [
+      50,
+      "v1",
+      "connection"
+    ]
   ],
   "prim-engine-execute": [
-    [48, "v1", "connection"]
+    [
+      48,
+      "v1",
+      "connection"
+    ]
   ],
   "(method 62 driver-ashelin)": [
-    [8, "gp", "driver-ashelin"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-ashelin"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-daxter)": [
-    [8, "gp", "driver-daxter"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-daxter"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-gtblitz)": [
-    [8, "gp", "driver-gtblitz"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-gtblitz"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-jak)": [
-    [8, "gp", "driver-jak"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-jak"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-jaka)": [
-    [8, "gp", "driver-jaka"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-jaka"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-jakb)": [
-    [8, "gp", "driver-jakb"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-jakb"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-jakc)": [
-    [8, "gp", "driver-jakc"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-jakc"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-kaeden)": [
-    [8, "gp", "driver-kaeden"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-kaeden"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-kiera)": [
-    [8, "gp", "driver-kiera"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-kiera"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-klever)": [
-    [8, "gp", "driver-klever"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-klever"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-osmo)": [
-    [8, "gp", "driver-osmo"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-osmo"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-pecker)": [
-    [8, "gp", "driver-pecker"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-pecker"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-ratchet)": [
-    [8, "gp", "driver-ratchet"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-ratchet"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 157 wvehicle)": [
-    [14, "gp", "wvehicle"]
+    [
+      14,
+      "gp",
+      "wvehicle"
+    ]
   ],
   "(method 62 driver-rayn)": [
-    [8, "gp", "driver-rayn"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-rayn"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-razer)": [
-    [8, "gp", "driver-razer"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-razer"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-sig)": [
-    [8, "gp", "driver-sig"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-sig"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-taryn)": [
-    [8, "gp", "driver-taryn"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-taryn"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-thug-a)": [
-    [8, "gp", "driver-thug-a"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-thug-a"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-thug-b)": [
-    [8, "gp", "driver-thug-b"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-thug-b"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-thug-c)": [
-    [8, "gp", "driver-thug-c"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-thug-c"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-torn)": [
-    [8, "gp", "driver-torn"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-torn"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-ur-86)": [
-    [8, "gp", "driver-ur-86"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-ur-86"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "(method 62 driver-ximon)": [
-    [8, "gp", "driver-ximon"],
-    [8, "v1", "uint8"]
+    [
+      8,
+      "gp",
+      "driver-ximon"
+    ],
+    [
+      8,
+      "v1",
+      "uint8"
+    ]
   ],
   "vehicle-reticle-on-them-init-by-other": [
-    [51, "s6", "process"],
-    [51, "v1", "string"]
+    [
+      51,
+      "s6",
+      "process"
+    ],
+    [
+      51,
+      "v1",
+      "string"
+    ]
   ],
   "spawn-hud-cash-stats-side-view-0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-cash-stats-side-view-1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-cash-stats-single": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-cash-stats-top-view-0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-cash-stats-top-view-1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-high-scores-list": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-artifact-indicators-view0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-artifact-indicators-view1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-assassin-indicators-view0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-assassin-indicators-view1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-background": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-background-side-view-0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-background-side-view-1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-background-top-view-0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-background-top-view-1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-game-end-grand-prix": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-game-end-side-view-0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-game-end-top-view-0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-game-end-view-0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-player-indicators-view0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-player-indicators-view1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-results-grand-prix": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-results-grand-prix-totals": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-results-medal-1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-results-team-view-1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-single0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-single1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-single2": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-single3": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-single4": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-view-10": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-view-11": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-view-12": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-view-13": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-view-14": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-view-20": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-view-21": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-view-22": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-view-23": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-death-indicator-view-24": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hang-time-hud-single": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-headset-talker-other": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-headset-talker-race": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-points-combo-display0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-points-combo-display1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-points-combo-display2": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-points-combo-display3": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-points-combo-display4": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-points-icon-display0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-points-icon-display1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-points-icon-display2": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-points-icon-display3": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-points-icon-display4": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-results-medal": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-results-team-view-0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-results-view-0": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-results-view-1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-power-slide-hud-single": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-text-display-deflected-view-1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-text-display-deflected-view-2": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-text-display-nice-shot": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-text-display-sblastered-view-1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-text-display-sblastered-view-2": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-text-display-supernova-backfire-view-1": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-text-display-supernova-backfire-view-2": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-side-split-bar": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-slowmo": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
   "spawn-hud-top-split-bar": [
-    [31, "v0", "in-game-hud"]
+    [
+      31,
+      "v0",
+      "in-game-hud"
+    ]
   ],
-
-  "(method 12 blit-displays-work)": [[[4, 41], "v1", "(inline-array vector4w)"], [[60, 112], "v1", "(inline-array vector4w)"]],
-  "(method 27 ocean)": [[[19, 27], "a0", "dma-packet"], [30, "s3", "matrix"], [[49, 54], "s2", "vector"]],
-  "(method 28 ocean)": [[[43, 51], "a0", "dma-packet"], [66, "a2", "(pointer int16)"], [[81, 89], "a1", "vector4w"], [[90, 98], "v1", "vector4w"], [[111, 127], "t0", "vector4w"], [[130, 268], "a1", "(inline-array vector4w)"]],
+  "(method 12 blit-displays-work)": [
+    [
+      [
+        4,
+        41
+      ],
+      "v1",
+      "(inline-array vector4w)"
+    ],
+    [
+      [
+        60,
+        112
+      ],
+      "v1",
+      "(inline-array vector4w)"
+    ]
+  ],
+  "(method 27 ocean)": [
+    [
+      [
+        19,
+        27
+      ],
+      "a0",
+      "dma-packet"
+    ],
+    [
+      30,
+      "s3",
+      "matrix"
+    ],
+    [
+      [
+        49,
+        54
+      ],
+      "s2",
+      "vector"
+    ]
+  ],
+  "(method 28 ocean)": [
+    [
+      [
+        43,
+        51
+      ],
+      "a0",
+      "dma-packet"
+    ],
+    [
+      66,
+      "a2",
+      "(pointer int16)"
+    ],
+    [
+      [
+        81,
+        89
+      ],
+      "a1",
+      "vector4w"
+    ],
+    [
+      [
+        90,
+        98
+      ],
+      "v1",
+      "vector4w"
+    ],
+    [
+      [
+        111,
+        127
+      ],
+      "t0",
+      "vector4w"
+    ],
+    [
+      [
+        130,
+        268
+      ],
+      "a1",
+      "(inline-array vector4w)"
+    ]
+  ],
   "artifact-draw-init-remote": [
-    [0, "s6", "artifact-draw"]
+    [
+      0,
+      "s6",
+      "artifact-draw"
+    ]
   ],
   "artifact-init-remote": [
-    [0, "s6", "artifact"]
+    [
+      0,
+      "s6",
+      "artifact"
+    ]
   ],
   "auto-test-levels-init-by-other": [
-    [0, "s6", "auto-test-levels"]
+    [
+      0,
+      "s6",
+      "auto-test-levels"
+    ]
   ],
   "aux-voice-mgr-init-by-other": [
-    [0, "s6", "aux-voice-mgr"]
+    [
+      0,
+      "s6",
+      "aux-voice-mgr"
+    ]
   ],
   "collision-editor-default-proc-init-by-other": [
-    [0, "s6", "collision-editor-default-proc"]
+    [
+      0,
+      "s6",
+      "collision-editor-default-proc"
+    ]
   ],
   "collision-editor-edited-proc-init-by-other": [
-    [0, "s6", "collision-editor-edited-proc"]
+    [
+      0,
+      "s6",
+      "collision-editor-edited-proc"
+    ]
   ],
   "collision-editor-init-by-other": [
-    [0, "s6", "collision-editor"]
+    [
+      0,
+      "s6",
+      "collision-editor"
+    ]
   ],
   "ctf-flag-init-remote": [
-    [0, "s6", "ctf-flag"]
+    [
+      0,
+      "s6",
+      "ctf-flag"
+    ]
   ],
   "drift-editor-init-by-other": [
-    [0, "s6", "drift-editor"]
+    [
+      0,
+      "s6",
+      "drift-editor"
+    ]
   ],
   "eco-mgr-init-by-other": [
-    [0, "s6", "eco-mgr"]
+    [
+      0,
+      "s6",
+      "eco-mgr"
+    ]
   ],
   "eco-mgr-init-remote": [
-    [0, "s6", "eco-mgr"]
+    [
+      0,
+      "s6",
+      "eco-mgr"
+    ]
   ],
   "external-camera-controller-init-by-other": [
-    [0, "s6", "external-camera-controller"]
+    [
+      0,
+      "s6",
+      "external-camera-controller"
+    ]
   ],
   "fmv-player-init-by-other": [
-    [0, "s6", "fmv-player"]
+    [
+      0,
+      "s6",
+      "fmv-player"
+    ]
   ],
   "headset-init-by-other": [
-    [0, "s6", "headset"]
+    [
+      0,
+      "s6",
+      "headset"
+    ]
   ],
   "helmet-hud-init-by-other": [
-    [0, "s6", "helmet-hud"]
+    [
+      0,
+      "s6",
+      "helmet-hud"
+    ]
   ],
   "http-downloader-init-by-other": [
-    [0, "s6", "http-downloader"]
+    [
+      0,
+      "s6",
+      "http-downloader"
+    ]
   ],
   "mine-a-init-by-other": [
-    [0, "s6", "mine-a"]
+    [
+      0,
+      "s6",
+      "mine-a"
+    ]
   ],
   "mine-a-init-remote": [
-    [0, "s6", "mine-a"]
+    [
+      0,
+      "s6",
+      "mine-a"
+    ]
   ],
   "mine-b-init-by-other": [
-    [0, "s6", "mine-b"]
+    [
+      0,
+      "s6",
+      "mine-b"
+    ]
   ],
   "mine-b-init-remote": [
-    [0, "s6", "mine-b"]
+    [
+      0,
+      "s6",
+      "mine-b"
+    ]
   ],
   "muzzle-flash-init-by-other": [
-    [0, "s6", "muzzle-flash"]
+    [
+      0,
+      "s6",
+      "muzzle-flash"
+    ]
   ],
   "net-enemy-init-remote": [
-    [0, "s6", "net-enemy"]
+    [
+      0,
+      "s6",
+      "net-enemy"
+    ]
   ],
   "net-game-mgr-artifact-init-remote": [
-    [0, "s6", "net-game-mgr-artifact"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-artifact"
+    ]
   ],
   "net-game-mgr-assassin-init-remote": [
-    [0, "s6", "net-game-mgr-assassin"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-assassin"
+    ]
   ],
   "net-game-mgr-beasthunt-init-remote": [
-    [0, "s6", "net-game-mgr-beasthunt"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-beasthunt"
+    ]
   ],
   "net-game-mgr-boss-battle-init-remote": [
-    [0, "s6", "net-game-mgr-boss-battle"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-boss-battle"
+    ]
   ],
   "net-game-mgr-collectable-init-remote": [
-    [0, "s6", "net-game-mgr-collectable"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-collectable"
+    ]
   ],
   "net-game-mgr-ctf-init-remote": [
-    [0, "s6", "net-game-mgr-ctf"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-ctf"
+    ]
   ],
   "net-game-mgr-deathmatch-init-remote": [
-    [0, "s6", "net-game-mgr-deathmatch"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-deathmatch"
+    ]
   ],
   "net-game-mgr-deathrace-init-remote": [
-    [0, "s6", "net-game-mgr-deathrace"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-deathrace"
+    ]
   ],
   "net-game-mgr-football-init-remote": [
-    [0, "s6", "net-game-mgr-football"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-football"
+    ]
   ],
   "net-game-mgr-init-remote": [
-    [0, "s6", "net-game-mgr"]
+    [
+      0,
+      "s6",
+      "net-game-mgr"
+    ]
   ],
   "net-game-mgr-king-of-hill-init-remote": [
-    [0, "s6", "net-game-mgr-king-of-hill"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-king-of-hill"
+    ]
   ],
   "net-game-mgr-race-init-remote": [
-    [0, "s6", "net-game-mgr-race"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-race"
+    ]
   ],
   "net-game-mgr-rushhour-init-remote": [
-    [0, "s6", "net-game-mgr-rushhour"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-rushhour"
+    ]
   ],
   "net-game-mgr-time-box-init-remote": [
-    [0, "s6", "net-game-mgr-time-box"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-time-box"
+    ]
   ],
   "net-game-mgr-time-trial-init-remote": [
-    [0, "s6", "net-game-mgr-time-trial"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-time-trial"
+    ]
   ],
   "net-game-mgr-training-init-remote": [
-    [0, "s6", "net-game-mgr-training"]
+    [
+      0,
+      "s6",
+      "net-game-mgr-training"
+    ]
   ],
   "net-mgr-init-by-other": [
-    [0, "s6", "net-mgr"]
+    [
+      0,
+      "s6",
+      "net-mgr"
+    ]
   ],
   "net-player-artifact-init-remote": [
-    [0, "s6", "net-player-artifact"]
+    [
+      0,
+      "s6",
+      "net-player-artifact"
+    ]
   ],
   "net-player-assassin-init-remote": [
-    [0, "s6", "net-player-assassin"]
+    [
+      0,
+      "s6",
+      "net-player-assassin"
+    ]
   ],
   "net-player-beasthunt-init-remote": [
-    [0, "s6", "net-player-beasthunt"]
+    [
+      0,
+      "s6",
+      "net-player-beasthunt"
+    ]
   ],
   "net-player-boss-battle-init-remote": [
-    [0, "s6", "net-player-boss-battle"]
+    [
+      0,
+      "s6",
+      "net-player-boss-battle"
+    ]
   ],
   "net-player-collectable-init-remote": [
-    [0, "s6", "net-player-collectable"]
+    [
+      0,
+      "s6",
+      "net-player-collectable"
+    ]
   ],
   "net-player-ctf-init-remote": [
-    [0, "s6", "net-player-ctf"]
+    [
+      0,
+      "s6",
+      "net-player-ctf"
+    ]
   ],
   "net-player-deathmatch-init-remote": [
-    [0, "s6", "net-player-deathmatch"]
+    [
+      0,
+      "s6",
+      "net-player-deathmatch"
+    ]
   ],
   "net-player-deathrace-init-remote": [
-    [0, "s6", "net-player-deathrace"]
+    [
+      0,
+      "s6",
+      "net-player-deathrace"
+    ]
   ],
   "net-player-football-init-remote": [
-    [0, "s6", "net-player-football"]
+    [
+      0,
+      "s6",
+      "net-player-football"
+    ]
   ],
   "net-player-init-remote": [
-    [0, "s6", "net-player"]
+    [
+      0,
+      "s6",
+      "net-player"
+    ]
   ],
   "net-player-king-of-hill-init-remote": [
-    [0, "s6", "net-player-king-of-hill"]
+    [
+      0,
+      "s6",
+      "net-player-king-of-hill"
+    ]
   ],
   "net-player-race-init-remote": [
-    [0, "s6", "net-player-race"]
+    [
+      0,
+      "s6",
+      "net-player-race"
+    ]
   ],
   "net-player-rushhour-init-remote": [
-    [0, "s6", "net-player-rushhour"]
+    [
+      0,
+      "s6",
+      "net-player-rushhour"
+    ]
   ],
   "net-player-time-box-init-remote": [
-    [0, "s6", "net-player-time-box"]
+    [
+      0,
+      "s6",
+      "net-player-time-box"
+    ]
   ],
   "net-player-time-trial-init-remote": [
-    [0, "s6", "net-player-time-trial"]
+    [
+      0,
+      "s6",
+      "net-player-time-trial"
+    ]
   ],
   "net-powerup-init-remote": [
-    [0, "s6", "net-powerup"]
+    [
+      0,
+      "s6",
+      "net-powerup"
+    ]
   ],
   "net-process-mgr-init-by-other": [
-    [0, "s6", "net-process-mgr"]
+    [
+      0,
+      "s6",
+      "net-process-mgr"
+    ]
   ],
   "net-projectile-init-by-other": [
-    [0, "s6", "net-projectile"]
+    [
+      0,
+      "s6",
+      "net-projectile"
+    ]
   ],
   "net-projectile-init-remote": [
-    [0, "s6", "net-projectile"]
+    [
+      0,
+      "s6",
+      "net-projectile"
+    ]
   ],
   "net-simple-destruct-mgr-init-remote": [
-    [0, "s6", "net-simple-destruct-mgr"]
+    [
+      0,
+      "s6",
+      "net-simple-destruct-mgr"
+    ]
   ],
   "net-test-init-by-other": [
-    [0, "s6", "net-test"]
+    [
+      0,
+      "s6",
+      "net-test"
+    ]
   ],
   "net-test-init-remote": [
-    [0, "s6", "net-test"]
+    [
+      0,
+      "s6",
+      "net-test"
+    ]
   ],
   "net-world-init-remote": [
-    [0, "s6", "net-world"]
+    [
+      0,
+      "s6",
+      "net-world"
+    ]
   ],
   "powercell-dispenser-draw-init-remote": [
-    [0, "s6", "powercell-dispenser-draw"]
+    [
+      0,
+      "s6",
+      "powercell-dispenser-draw"
+    ]
   ],
   "powercell-dispenser-init-remote": [
-    [0, "s6", "powercell-dispenser"]
+    [
+      0,
+      "s6",
+      "powercell-dispenser"
+    ]
   ],
   "powercell-footie-init-remote": [
-    [0, "s6", "powercell-footie"]
+    [
+      0,
+      "s6",
+      "powercell-footie"
+    ]
   ],
   "race-mesh-debug-init-by-other": [
-    [0, "s6", "race-mesh-debug"]
+    [
+      0,
+      "s6",
+      "race-mesh-debug"
+    ]
   ],
   "red-sentry-bot-init-remote": [
-    [0, "s6", "red-sentry-bot"]
+    [
+      0,
+      "s6",
+      "red-sentry-bot"
+    ]
   ],
   "save-memcard-init-by-other": [
-    [0, "s6", "save-memcard"]
+    [
+      0,
+      "s6",
+      "save-memcard"
+    ]
   ],
   "simple-prim-init-by-other": [
-    [0, "s6", "simple-prim"]
+    [
+      0,
+      "s6",
+      "simple-prim"
+    ]
   ],
   "v-toad-shot-init-remote": [
-    [0, "s6", "v-toad-shot"]
+    [
+      0,
+      "s6",
+      "v-toad-shot"
+    ]
   ],
   "v-wpn-yellow-guided-missile-init-remote": [
-    [0, "s6", "v-wpn-yellow-guided-missile"]
+    [
+      0,
+      "s6",
+      "v-wpn-yellow-guided-missile"
+    ]
   ],
   "v-yellow-guided-missile-init-remote": [
-    [0, "s6", "v-yellow-guided-missile"]
+    [
+      0,
+      "s6",
+      "v-yellow-guided-missile"
+    ]
   ],
   "vehicle-AI-control-timer-init-by-other": [
-    [0, "s6", "vehicle-AI-control-timer"]
+    [
+      0,
+      "s6",
+      "vehicle-AI-control-timer"
+    ]
   ],
   "vehicle-debris-init-by-other": [
-    [0, "s6", "vehicle-debris"]
+    [
+      0,
+      "s6",
+      "vehicle-debris"
+    ]
   ],
   "vehicle-init-remote": [
-    [0, "s6", "vehicle"]
+    [
+      0,
+      "s6",
+      "vehicle"
+    ]
   ],
   "vehicle-manager-init-by-other": [
-    [0, "s6", "vehicle-manager"]
+    [
+      0,
+      "s6",
+      "vehicle-manager"
+    ]
   ],
   "vehicle-reticle-on-me-init-by-other": [
-    [0, "s6", "vehicle-reticle-on-me"]
+    [
+      0,
+      "s6",
+      "vehicle-reticle-on-me"
+    ]
   ],
   "vehicle-weapon-drone-init-by-other": [
-    [0, "s6", "vehicle-weapon-drone"]
+    [
+      0,
+      "s6",
+      "vehicle-weapon-drone"
+    ]
   ],
   "visvol-editor-init-by-other": [
-    [0, "s6", "visvol-editor"]
+    [
+      0,
+      "s6",
+      "visvol-editor"
+    ]
   ],
   "water-anim-init-by-other": [
-    [0, "s6", "water-anim"]
+    [
+      0,
+      "s6",
+      "water-anim"
+    ]
   ],
   "(top-level-login atoll-part)": [
-    [2, "a0", "(array sparticle-launch-group)"]
+    [
+      2,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
   "(top-level-login debug-part)": [
-    [7, "a0", "(array sparticle-launch-group)"],
-    [16, "a0", "(array sparticle-launch-group)"],
-    [31, "a0", "(array sparticle-launch-group)"],
-    [61, "a0", "(array sparticle-launch-group)"],
-    [79, "a0", "(array sparticle-launch-group)"],
-    [82, "a0", "(array sparticle-launch-group)"],
-    [112, "a0", "(array sparticle-launch-group)"],
-    [139, "a0", "(array sparticle-launch-group)"],
-    [151, "a0", "(array sparticle-launch-group)"],
-    [154, "a0", "(array sparticle-launch-group)"],
-    [178, "a0", "(array sparticle-launch-group)"],
-    [181, "a0", "(array sparticle-launch-group)"],
-    [205, "a0", "(array sparticle-launch-group)"],
-    [232, "a0", "(array sparticle-launch-group)"],
-    [244, "a0", "(array sparticle-launch-group)"],
-    [279, "a0", "(array sparticle-launch-group)"],
-    [282, "a0", "(array sparticle-launch-group)"],
-    [285, "a0", "(array sparticle-launch-group)"],
-    [297, "a0", "(array sparticle-launch-group)"],
-    [312, "a0", "(array sparticle-launch-group)"]
+    [
+      7,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      16,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      31,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      61,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      79,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      82,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      112,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      139,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      151,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      154,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      178,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      181,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      205,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      232,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      244,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      279,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      282,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      285,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      297,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      312,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
   "(top-level-login intro-part)": [
-    [44, "a0", "(array sparticle-launch-group)"],
-    [53, "a0", "(array sparticle-launch-group)"],
-    [59, "a0", "(array sparticle-launch-group)"],
-    [68, "a0", "(array sparticle-launch-group)"],
-    [77, "a0", "(array sparticle-launch-group)"],
-    [88, "a0", "(array sparticle-launch-group)"],
-    [97, "a0", "(array sparticle-launch-group)"],
-    [106, "a0", "(array sparticle-launch-group)"],
-    [115, "a0", "(array sparticle-launch-group)"],
-    [124, "a0", "(array sparticle-launch-group)"],
-    [281, "a0", "(array sparticle-launch-group)"],
-    [296, "a0", "(array sparticle-launch-group)"],
-    [302, "a0", "(array sparticle-launch-group)"],
-    [308, "a0", "(array sparticle-launch-group)"],
-    [314, "a0", "(array sparticle-launch-group)"],
-    [322, "a0", "(array sparticle-launch-group)"],
-    [331, "a0", "(array sparticle-launch-group)"],
-    [340, "a0", "(array sparticle-launch-group)"],
-    [352, "a0", "(array sparticle-launch-group)"],
-    [367, "a0", "(array sparticle-launch-group)"],
-    [557, "a0", "(array sparticle-launch-group)"],
-    [569, "a0", "(array sparticle-launch-group)"],
-    [575, "a0", "(array sparticle-launch-group)"],
-    [581, "a0", "(array sparticle-launch-group)"],
-    [587, "a0", "(array sparticle-launch-group)"],
-    [593, "a0", "(array sparticle-launch-group)"],
-    [608, "a0", "(array sparticle-launch-group)"],
-    [617, "a0", "(array sparticle-launch-group)"],
-    [623, "a0", "(array sparticle-launch-group)"],
-    [629, "a0", "(array sparticle-launch-group)"],
-    [635, "a0", "(array sparticle-launch-group)"],
-    [641, "a0", "(array sparticle-launch-group)"],
-    [647, "a0", "(array sparticle-launch-group)"],
-    [653, "a0", "(array sparticle-launch-group)"],
-    [659, "a0", "(array sparticle-launch-group)"],
-    [819, "a0", "(array sparticle-launch-group)"],
-    [828, "a0", "(array sparticle-launch-group)"],
-    [834, "a0", "(array sparticle-launch-group)"],
-    [897, "a0", "(array sparticle-launch-group)"],
-    [906, "a0", "(array sparticle-launch-group)"],
-    [912, "a0", "(array sparticle-launch-group)"],
-    [924, "a0", "(array sparticle-launch-group)"],
-    [936, "a0", "(array sparticle-launch-group)"],
-    [942, "a0", "(array sparticle-launch-group)"],
-    [948, "a0", "(array sparticle-launch-group)"],
-    [954, "a0", "(array sparticle-launch-group)"],
-    [963, "a0", "(array sparticle-launch-group)"],
-    [972, "a0", "(array sparticle-launch-group)"],
-    [981, "a0", "(array sparticle-launch-group)"],
-    [993, "a0", "(array sparticle-launch-group)"],
-    [1008, "a0", "(array sparticle-launch-group)"],
-    [1020, "a0", "(array sparticle-launch-group)"],
-    [1032, "a0", "(array sparticle-launch-group)"],
-    [1041, "a0", "(array sparticle-launch-group)"],
-    [1050, "a0", "(array sparticle-launch-group)"],
-    [1059, "a0", "(array sparticle-launch-group)"],
-    [1065, "a0", "(array sparticle-launch-group)"],
-    [1074, "a0", "(array sparticle-launch-group)"],
-    [1083, "a0", "(array sparticle-launch-group)"],
-    [1092, "a0", "(array sparticle-launch-group)"],
-    [1101, "a0", "(array sparticle-launch-group)"],
-    [1110, "a0", "(array sparticle-launch-group)"],
-    [1125, "a0", "(array sparticle-launch-group)"],
-    [1134, "a0", "(array sparticle-launch-group)"],
-    [1143, "a0", "(array sparticle-launch-group)"],
-    [1158, "a0", "(array sparticle-launch-group)"],
-    [1164, "a0", "(array sparticle-launch-group)"],
-    [1170, "a0", "(array sparticle-launch-group)"],
-    [1176, "a0", "(array sparticle-launch-group)"],
-    [1185, "a0", "(array sparticle-launch-group)"],
-    [1194, "a0", "(array sparticle-launch-group)"],
-    [1203, "a0", "(array sparticle-launch-group)"],
-    [1212, "a0", "(array sparticle-launch-group)"],
-    [1218, "a0", "(array sparticle-launch-group)"],
-    [1224, "a0", "(array sparticle-launch-group)"],
-    [1230, "a0", "(array sparticle-launch-group)"],
-    [1239, "a0", "(array sparticle-launch-group)"],
-    [1248, "a0", "(array sparticle-launch-group)"],
-    [1257, "a0", "(array sparticle-launch-group)"],
-    [1266, "a0", "(array sparticle-launch-group)"],
-    [1275, "a0", "(array sparticle-launch-group)"],
-    [1281, "a0", "(array sparticle-launch-group)"],
-    [1287, "a0", "(array sparticle-launch-group)"],
-    [1293, "a0", "(array sparticle-launch-group)"],
-    [1299, "a0", "(array sparticle-launch-group)"],
-    [1314, "a0", "(array sparticle-launch-group)"],
-    [1323, "a0", "(array sparticle-launch-group)"],
-    [1329, "a0", "(array sparticle-launch-group)"],
-    [1335, "a0", "(array sparticle-launch-group)"],
-    [1347, "a0", "(array sparticle-launch-group)"],
-    [1362, "a0", "(array sparticle-launch-group)"],
-    [1371, "a0", "(array sparticle-launch-group)"],
-    [1385, "a0", "(array sparticle-launch-group)"],
-    [1393, "a0", "(array sparticle-launch-group)"],
-    [1399, "a0", "(array sparticle-launch-group)"],
-    [1405, "a0", "(array sparticle-launch-group)"],
-    [1411, "a0", "(array sparticle-launch-group)"],
-    [1420, "a0", "(array sparticle-launch-group)"],
-    [1429, "a0", "(array sparticle-launch-group)"],
-    [1444, "a0", "(array sparticle-launch-group)"],
-    [1453, "a0", "(array sparticle-launch-group)"],
-    [1468, "a0", "(array sparticle-launch-group)"],
-    [1474, "a0", "(array sparticle-launch-group)"],
-    [1480, "a0", "(array sparticle-launch-group)"],
-    [1486, "a0", "(array sparticle-launch-group)"],
-    [1492, "a0", "(array sparticle-launch-group)"],
-    [1498, "a0", "(array sparticle-launch-group)"],
-    [1504, "a0", "(array sparticle-launch-group)"],
-    [1510, "a0", "(array sparticle-launch-group)"],
-    [1516, "a0", "(array sparticle-launch-group)"],
-    [1522, "a0", "(array sparticle-launch-group)"],
-    [1528, "a0", "(array sparticle-launch-group)"],
-    [1534, "a0", "(array sparticle-launch-group)"],
-    [1540, "a0", "(array sparticle-launch-group)"],
-    [1546, "a0", "(array sparticle-launch-group)"],
-    [1552, "a0", "(array sparticle-launch-group)"],
-    [1558, "a0", "(array sparticle-launch-group)"],
-    [1564, "a0", "(array sparticle-launch-group)"],
-    [1570, "a0", "(array sparticle-launch-group)"],
-    [1576, "a0", "(array sparticle-launch-group)"],
-    [1582, "a0", "(array sparticle-launch-group)"],
-    [1588, "a0", "(array sparticle-launch-group)"],
-    [1594, "a0", "(array sparticle-launch-group)"]
+    [
+      44,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      53,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      59,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      68,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      77,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      88,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      97,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      106,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      115,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      124,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      281,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      296,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      302,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      308,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      314,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      322,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      331,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      340,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      352,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      367,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      557,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      569,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      575,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      581,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      587,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      593,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      608,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      617,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      623,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      629,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      635,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      641,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      647,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      653,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      659,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      819,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      828,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      834,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      897,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      906,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      912,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      924,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      936,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      942,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      948,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      954,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      963,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      972,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      981,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      993,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1008,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1020,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1032,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1041,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1050,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1059,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1065,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1074,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1083,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1092,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1101,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1110,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1125,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1134,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1143,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1158,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1164,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1170,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1176,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1185,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1194,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1203,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1212,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1218,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1224,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1230,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1239,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1248,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1257,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1266,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1275,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1281,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1287,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1293,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1299,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1314,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1323,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1329,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1335,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1347,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1362,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1371,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1385,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1393,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1399,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1405,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1411,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1420,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1429,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1444,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1453,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1468,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1474,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1480,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1486,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1492,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1498,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1504,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1510,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1516,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1522,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1528,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1534,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1540,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1546,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1552,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1558,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1564,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1570,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1576,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1582,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1588,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      1594,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
   "(top-level-login menu2-part)": [
-    [2, "a0", "(array sparticle-launch-group)"],
-    [8, "a0", "(array sparticle-launch-group)"],
-    [14, "a0", "(array sparticle-launch-group)"]
+    [
+      2,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      8,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      14,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
   "(top-level-login race-part)": [
-    [2, "a0", "(array sparticle-launch-group)"],
-    [29, "a0", "(array sparticle-launch-group)"],
-    [56, "a0", "(array sparticle-launch-group)"],
-    [83, "a0", "(array sparticle-launch-group)"],
-    [110, "a0", "(array sparticle-launch-group)"],
-    [128, "a0", "(array sparticle-launch-group)"],
-    [143, "a0", "(array sparticle-launch-group)"],
-    [149, "a0", "(array sparticle-launch-group)"],
-    [155, "a0", "(array sparticle-launch-group)"],
-    [164, "a0", "(array sparticle-launch-group)"],
-    [176, "a0", "(array sparticle-launch-group)"],
-    [188, "a0", "(array sparticle-launch-group)"],
-    [194, "a0", "(array sparticle-launch-group)"],
-    [221, "a0", "(array sparticle-launch-group)"],
-    [224, "a0", "(array sparticle-launch-group)"],
-    [227, "a0", "(array sparticle-launch-group)"],
-    [230, "a0", "(array sparticle-launch-group)"],
-    [233, "a0", "(array sparticle-launch-group)"],
-    [341, "a0", "(array sparticle-launch-group)"],
-    [347, "a0", "(array sparticle-launch-group)"],
-    [353, "a0", "(array sparticle-launch-group)"],
-    [359, "a0", "(array sparticle-launch-group)"],
-    [365, "a0", "(array sparticle-launch-group)"],
-    [395, "a0", "(array sparticle-launch-group)"],
-    [404, "a0", "(array sparticle-launch-group)"],
-    [425, "a0", "(array sparticle-launch-group)"],
-    [446, "a0", "(array sparticle-launch-group)"],
-    [455, "a0", "(array sparticle-launch-group)"],
-    [464, "a0", "(array sparticle-launch-group)"],
-    [479, "a0", "(array sparticle-launch-group)"],
-    [493, "a0", "(array sparticle-launch-group)"],
-    [505, "a0", "(array sparticle-launch-group)"],
-    [516, "a0", "(array sparticle-launch-group)"],
-    [525, "a0", "(array sparticle-launch-group)"],
-    [537, "a0", "(array sparticle-launch-group)"],
-    [548, "a0", "(array sparticle-launch-group)"],
-    [561, "a0", "(array sparticle-launch-group)"],
-    [576, "a0", "(array sparticle-launch-group)"]
+    [
+      2,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      29,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      56,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      83,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      110,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      128,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      143,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      149,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      155,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      164,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      176,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      188,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      194,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      221,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      224,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      227,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      230,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      233,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      341,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      347,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      353,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      359,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      365,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      395,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      404,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      425,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      446,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      455,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      464,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      479,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      493,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      505,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      516,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      525,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      537,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      548,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      561,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      576,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
   "(top-level-login vehicle-part)": [
-    [27, "a0", "(array sparticle-launch-group)"],
-    [42, "a0", "(array sparticle-launch-group)"],
-    [51, "a0", "(array sparticle-launch-group)"],
-    [57, "a0", "(array sparticle-launch-group)"],
-    [99, "a0", "(array sparticle-launch-group)"],
-    [153, "a0", "(array sparticle-launch-group)"],
-    [171, "a0", "(array sparticle-launch-group)"]
+    [
+      27,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      42,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      51,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      57,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      99,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      153,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      171,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
   "(top-level-login water-part)": [
-    [29, "a0", "(array sparticle-launch-group)"],
-    [177, "a0", "(array sparticle-launch-group)"]
+    [
+      29,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      177,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
   "(top-level-login wvehicle-part)": [
-    [2, "a0", "(array sparticle-launch-group)"],
-    [14, "a0", "(array sparticle-launch-group)"],
-    [23, "a0", "(array sparticle-launch-group)"],
-    [29, "a0", "(array sparticle-launch-group)"],
-    [186, "a0", "(array sparticle-launch-group)"],
-    [243, "a0", "(array sparticle-launch-group)"],
-    [246, "a0", "(array sparticle-launch-group)"],
-    [249, "a0", "(array sparticle-launch-group)"],
-    [252, "a0", "(array sparticle-launch-group)"],
-    [338, "a0", "(array sparticle-launch-group)"],
-    [430, "a0", "(array sparticle-launch-group)"]
+    [
+      2,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      14,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      23,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      29,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      186,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      243,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      246,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      249,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      252,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      338,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      430,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
-  // Sampler MMIO writes to EE Timer 0 (#x10000000) — jak3-canonical casts ported verbatim.
-  // jakx ops shifted vs jak3 (jakx STORE is op 15 not 14); cast at STORE op.
   "(top-level-login sampler)": [
-    [15, "v1", "timer-bank"]
+    [
+      15,
+      "v1",
+      "timer-bank"
+    ]
   ],
   "sampler-start": [
-    [1, "v1", "timer-bank"],
-    [3, "v1", "timer-bank"],
-    [6, "a0", "timer-bank"],
-    [24, "a0", "timer-bank"]
+    [
+      1,
+      "v1",
+      "timer-bank"
+    ],
+    [
+      3,
+      "v1",
+      "timer-bank"
+    ],
+    [
+      6,
+      "a0",
+      "timer-bank"
+    ],
+    [
+      24,
+      "a0",
+      "timer-bank"
+    ]
   ],
   "sampler-stop": [
-    [1, "v1", "timer-bank"],
-    [12, "v1", "timer-bank"]
-  ],
-  // Sound RPC writes — get-sound-buffer-entry returns pointer; each caller
-  // writes its specific sound-rpc-* sub-type. Field offsets verified against
-  // jakx all-types.gc deftypes.
-  "sound-stop": [
-    [7, "v1", "sound-rpc-stop-sound"],
-    [8, "v1", "sound-rpc-stop-sound"]
+    [
+      1,
+      "v1",
+      "timer-bank"
+    ],
+    [
+      12,
+      "v1",
+      "timer-bank"
+    ]
   ],
   "sound-set-globals": [
-    [4, "gp", "sound-rpc-set-globals"],
-    [12, "gp", "sound-rpc-set-globals"],
-    [13, "gp", "sound-rpc-set-globals"],
-    [33, "gp", "sound-rpc-set-globals"]
+    [
+      4,
+      "gp",
+      "sound-rpc-set-globals"
+    ],
+    [
+      12,
+      "gp",
+      "sound-rpc-set-globals"
+    ],
+    [
+      13,
+      "gp",
+      "sound-rpc-set-globals"
+    ],
+    [
+      33,
+      "gp",
+      "sound-rpc-set-globals"
+    ]
   ],
   "sound-instance-play": [
-    [9, "s5", "sound-rpc-play"],
-    [11, "s5", "sound-rpc-play"],
-    [14, "s5", "sound-rpc-play"],
-    [34, "s5", "sound-rpc-play"]
+    [
+      9,
+      "s5",
+      "sound-rpc-play"
+    ],
+    [
+      11,
+      "s5",
+      "sound-rpc-play"
+    ],
+    [
+      14,
+      "s5",
+      "sound-rpc-play"
+    ],
+    [
+      34,
+      "s5",
+      "sound-rpc-play"
+    ]
   ],
-  // command-get-param stores a 4-vector via label-loaded pointer; ops 93/105/108
-  // lose label type after intermediate float math, store float at +4/+8/+12.
-  "command-get-param": [
-    [93, "s5", "vector"],
-    [105, "s5", "vector"],
-    [108, "s5", "vector"]
-  ],
-  // More *part-group-id-table* writes (sparticle-launch-group cluster).
   "(top-level-login spartacus)": [
-    [4, "a0", "(array sparticle-launch-group)"],
-    [10, "a0", "(array sparticle-launch-group)"],
-    [16, "a0", "(array sparticle-launch-group)"],
-    [25, "a0", "(array sparticle-launch-group)"],
-    [34, "a0", "(array sparticle-launch-group)"],
-    [49, "a0", "(array sparticle-launch-group)"],
-    [64, "a0", "(array sparticle-launch-group)"],
-    [100, "a0", "(array sparticle-launch-group)"],
-    [130, "a0", "(array sparticle-launch-group)"],
-    [160, "a0", "(array sparticle-launch-group)"],
-    [171, "a0", "(array sparticle-launch-group)"],
-    [180, "a0", "(array sparticle-launch-group)"],
-    [195, "a0", "(array sparticle-launch-group)"]
+    [
+      4,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      10,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      16,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      25,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      34,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      49,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      64,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      100,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      130,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      160,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      171,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      180,
+      "a0",
+      "(array sparticle-launch-group)"
+    ],
+    [
+      195,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
   "(top-level-login net-artifact)": [
-    [220, "a0", "(array sparticle-launch-group)"]
+    [
+      220,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
   "(top-level-login net-deathrace)": [
-    [225, "a0", "(array sparticle-launch-group)"]
+    [
+      225,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
   "(top-level-login net-race-hud)": [
-    [80, "a0", "(array sparticle-launch-group)"]
+    [
+      80,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
   "(top-level-login powerups)": [
-    [22, "a0", "(array sparticle-launch-group)"]
+    [
+      22,
+      "a0",
+      "(array sparticle-launch-group)"
+    ]
   ],
-  // *ocean-map-atoll* symbol typed `object` in jakx; should be `ocean-map`.
-  // Field offsets confirmed against ocean-map deftype (32=colors, 36=mid-indices,
-  // 40=trans-indices, 44=near-indices, 48=mid-masks).
   "(top-level-login atoll-ocean)": [
-    [14, "a0", "ocean-map"],
-    [17, "a0", "ocean-map"],
-    [20, "a0", "ocean-map"],
-    [23, "a0", "ocean-map"],
-    [26, "v1", "ocean-map"]
+    [
+      14,
+      "a0",
+      "ocean-map"
+    ],
+    [
+      17,
+      "a0",
+      "ocean-map"
+    ],
+    [
+      20,
+      "a0",
+      "ocean-map"
+    ],
+    [
+      23,
+      "a0",
+      "ocean-map"
+    ],
+    [
+      26,
+      "v1",
+      "ocean-map"
+    ]
   ],
-  // *minimap* symbol typed `object`; should be `minimap` (offset 272 = engine field).
   "(top-level-login minimap)": [
-    [17, "gp", "minimap"]
+    [
+      17,
+      "gp",
+      "minimap"
+    ]
   ],
-  // *medius-buddies* / *medius-buddies-online* / *medius-ignores* /
-  // *medius-room-players* / *medius-recent-players* / *medius-in-game-players* /
-  // *medius-local-game-players* / *medius-outstanding-clan-invites* and
-  // *medius-clan-cache* are all typed `object` in jakx; symbol type should be
-  // medius-cache-index-array (or its subtype medius-player-index-array).
-  // Each store at offset +4 sets max-ct (int32). Cast a0 to base type.
   "(top-level-login net-mgr-medius-players-h)": [
-    [55, "a0", "medius-cache-index-array"],
-    [60, "a0", "medius-cache-index-array"],
-    [65, "a0", "medius-cache-index-array"],
-    [70, "a0", "medius-cache-index-array"],
-    [75, "a0", "medius-cache-index-array"],
-    [80, "a0", "medius-cache-index-array"],
-    [85, "a0", "medius-cache-index-array"],
-    [90, "a0", "medius-cache-index-array"],
-    [95, "a0", "medius-cache-index-array"],
-    [100, "a0", "medius-cache-index-array"]
+    [
+      55,
+      "a0",
+      "medius-cache-index-array"
+    ],
+    [
+      60,
+      "a0",
+      "medius-cache-index-array"
+    ],
+    [
+      65,
+      "a0",
+      "medius-cache-index-array"
+    ],
+    [
+      70,
+      "a0",
+      "medius-cache-index-array"
+    ],
+    [
+      75,
+      "a0",
+      "medius-cache-index-array"
+    ],
+    [
+      80,
+      "a0",
+      "medius-cache-index-array"
+    ],
+    [
+      85,
+      "a0",
+      "medius-cache-index-array"
+    ],
+    [
+      90,
+      "a0",
+      "medius-cache-index-array"
+    ],
+    [
+      95,
+      "a0",
+      "medius-cache-index-array"
+    ],
+    [
+      100,
+      "a0",
+      "medius-cache-index-array"
+    ]
   ],
-  // *v-mongoose-constants* and other vehicle constants symbols are typed `object`
-  // in jakx; should be `rigid-body-vehicle-constants`. Field offsets confirmed:
-  // +3236 = explosion (vehicle-explosion-info), +3244 = debris (debris-static-params).
-  // 15 vehicle init blocks * 2 stores each = 30 op casts.
   "(top-level-login wcar)": [
-    [6, "a0", "rigid-body-vehicle-constants"],
-    [8, "v1", "rigid-body-vehicle-constants"],
-    [13, "a0", "rigid-body-vehicle-constants"],
-    [15, "v1", "rigid-body-vehicle-constants"],
-    [20, "a0", "rigid-body-vehicle-constants"],
-    [22, "v1", "rigid-body-vehicle-constants"],
-    [27, "a0", "rigid-body-vehicle-constants"],
-    [29, "v1", "rigid-body-vehicle-constants"],
-    [34, "a0", "rigid-body-vehicle-constants"],
-    [36, "v1", "rigid-body-vehicle-constants"],
-    [41, "a0", "rigid-body-vehicle-constants"],
-    [43, "v1", "rigid-body-vehicle-constants"],
-    [48, "a0", "rigid-body-vehicle-constants"],
-    [50, "v1", "rigid-body-vehicle-constants"],
-    [55, "a0", "rigid-body-vehicle-constants"],
-    [57, "v1", "rigid-body-vehicle-constants"],
-    [62, "a0", "rigid-body-vehicle-constants"],
-    [64, "v1", "rigid-body-vehicle-constants"],
-    [69, "a0", "rigid-body-vehicle-constants"],
-    [71, "v1", "rigid-body-vehicle-constants"],
-    [76, "a0", "rigid-body-vehicle-constants"],
-    [78, "v1", "rigid-body-vehicle-constants"],
-    [83, "a0", "rigid-body-vehicle-constants"],
-    [85, "v1", "rigid-body-vehicle-constants"],
-    [90, "a0", "rigid-body-vehicle-constants"],
-    [92, "v1", "rigid-body-vehicle-constants"],
-    [104, "a0", "rigid-body-vehicle-constants"],
-    [106, "v1", "rigid-body-vehicle-constants"],
-    [111, "a0", "rigid-body-vehicle-constants"],
-    [113, "v1", "rigid-body-vehicle-constants"]
+    [
+      6,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      8,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      13,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      15,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      20,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      22,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      27,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      29,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      34,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      36,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      41,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      43,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      48,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      50,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      55,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      57,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      62,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      64,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      69,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      71,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      76,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      78,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      83,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      85,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      90,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      92,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      104,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      106,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      111,
+      "a0",
+      "rigid-body-vehicle-constants"
+    ],
+    [
+      113,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ]
   ],
-  // camera-seek-time is declared float in all-types.gc but the decompiler types
-  // the symbol-load as object on top-level — without this hint the gpr->fpr
-  // conversion at op 44 produces an object operand for div.s at op 45 and
-  // expression-building bails with "Floating point division attempted on
-  // invalid types" (split-failed). Per SPLIT_FAILED_DIAGNOSIS.md File 4.
   "(top-level-login lobby-menu-manager-h)": [
-    [43, "v1", "float"]
-  ]
-,
+    [
+      43,
+      "v1",
+      "float"
+    ]
+  ],
   "camera-fov-draw": [
     [
       16,
@@ -42383,8 +48082,7 @@
       "v1",
       "(pointer vector)"
     ]
-  ]
-,
+  ],
   "camera-bounding-box-draw": [
     [
       6,
@@ -42536,8 +48234,7 @@
       "v1",
       "cam-dbg-scratch"
     ]
-  ]
-,
+  ],
   "camera-sphere": [
     [
       [
@@ -42602,8 +48299,7 @@
       "a1",
       "cam-dbg-scratch"
     ]
-  ]
-,
+  ],
   "camera-line-draw": [
     [
       36,
@@ -42665,16 +48361,14 @@
       "a0",
       "cam-dbg-scratch"
     ]
-  ]
-,
+  ],
   "camera-line-setup": [
     [
       2,
       "a0",
       "cam-dbg-scratch"
     ]
-  ]
-,
+  ],
   "camera-line2d": [
     [
       4,
@@ -42721,8 +48415,7 @@
       "a0",
       "cam-dbg-scratch"
     ]
-  ]
-,
+  ],
   "cam-line-dma": [
     [
       32,
@@ -42792,8 +48485,7 @@
       "a0",
       "(pointer uint64)"
     ]
-  ]
-,
+  ],
   "print-continues": [
     [
       2,
@@ -42818,8 +48510,7 @@
       "v1",
       "continue-point"
     ]
-  ]
-,
+  ],
   "(method 27 editable)": [
     [
       [
@@ -42839,16 +48530,14 @@
       "s4",
       "pair"
     ]
-  ]
-,
+  ],
   "(method 9 editable)": [
     [
       35,
       "a0",
       "editable-light"
     ]
-  ]
-,
+  ],
   "common-owner": [
     [
       18,
@@ -42870,16 +48559,14 @@
       "a2",
       "pair"
     ]
-  ]
-,
+  ],
   "dm-editable-boolean-toggle-pick-func": [
     [
       5,
       "v1",
-      "(pointer float)"
+      "(pointer symbol)"
     ]
-  ]
-,
+  ],
   "joint-mod-joint-set-world-handler": [
     [
       [
@@ -42889,8 +48576,7 @@
       "s5",
       "joint-mod"
     ]
-  ]
-,
+  ],
   "(anon-function 35 generic-obs)": [
     [
       65,
@@ -42937,8 +48623,7 @@
       "a0",
       "collide-shape"
     ]
-  ]
-,
+  ],
   "update-mood-mountain": [
     [
       [
@@ -42948,8 +48633,7 @@
       "gp",
       "mountain-states"
     ]
-  ]
-,
+  ],
   "(method 19 mysql-nav-graph)": [
     [
       42,
@@ -42966,16 +48650,14 @@
       "a0",
       "mysql-nav-edge"
     ]
-  ]
-,
+  ],
   "(method 20 res-lump)": [
     [
       341,
       "t0",
       "(pointer uint128)"
     ]
-  ]
-,
+  ],
   "(method 20 tire-trail)": [
     [
       [
@@ -42993,16 +48675,14 @@
       "s4",
       "tire-trail-crumb"
     ]
-  ]
-,
+  ],
   "(method 58 joint-exploder)": [
     [
       222,
       "s4",
       "joint-exploder-list"
     ]
-  ]
-,
+  ],
   "joint-mod-joint-set-handler": [
     [
       [
@@ -43012,8 +48692,7 @@
       "s4",
       "joint-mod"
     ]
-  ]
-,
+  ],
   "joint-mod-foot-rot-handler": [
     [
       [
@@ -43031,8 +48710,7 @@
       "s5",
       "joint-mod"
     ]
-  ]
-,
+  ],
   "(method 17 ocean)": [
     [
       [
@@ -43042,8 +48720,7 @@
       "a0",
       "dma-packet"
     ]
-  ]
-,
+  ],
   "service-cpads": [
     [
       [
@@ -43053,8 +48730,7 @@
       "s3",
       "pad-buttons"
     ]
-  ]
-,
+  ],
   "(method 35 ocean)": [
     [
       [
@@ -43064,8 +48740,7 @@
       "a0",
       "dma-packet"
     ]
-  ]
-,
+  ],
   "(method 15 light-trail)": [
     [
       47,
@@ -43096,16 +48771,14 @@
       "s2",
       "light-trail-breadcrumb"
     ]
-  ]
-,
+  ],
   "point-poly-distance-min": [
     [
       94,
       "f0",
       "float"
     ]
-  ]
-,
+  ],
   "(method 16 mysql-nav-graph)": [
     [
       [
@@ -43125,8 +48798,7 @@
       "a1",
       "mysql-nav-visnode"
     ]
-  ]
-,
+  ],
   "(method 17 mysql-nav-graph)": [
     [
       7,
@@ -43154,16 +48826,14 @@
       "a2",
       "mysql-nav-node"
     ]
-  ]
-,
+  ],
   "joint-mod-debug-draw": [
     [
       8,
       "a3",
       "float"
     ]
-  ]
-,
+  ],
   "(method 10 history-iterator)": [
     [
       [
@@ -43173,8 +48843,7 @@
       "a2",
       "history-elt"
     ]
-  ]
-,
+  ],
   "(method 10 history)": [
     [
       [
@@ -43184,8 +48853,7 @@
       "a1",
       "history-elt"
     ]
-  ]
-,
+  ],
   "init-haze-vert-array": [
     [
       43,
@@ -43197,8 +48865,7 @@
       "v1",
       "cloud-vertex"
     ]
-  ]
-,
+  ],
   "collide-upload-vu0": [
     [
       16,
@@ -43210,8 +48877,7 @@
       "a0",
       "(pointer uint64)"
     ]
-  ]
-,
+  ],
   "(method 9 actor-link-info)": [
     [
       [
@@ -43221,8 +48887,7 @@
       "s3",
       "entity-actor"
     ]
-  ]
-,
+  ],
   "make-noise-texture": [
     [
       32,
@@ -43249,8 +48914,7 @@
       "t2",
       "(pointer uint128)"
     ]
-  ]
-,
+  ],
   "sparticle-track-root": [
     [
       2,
@@ -43262,8 +48926,7 @@
       "v1",
       "collide-shape"
     ]
-  ]
-,
+  ],
   "part-tracker-track-root": [
     [
       2,
@@ -43275,8 +48938,7 @@
       "v1",
       "collide-shape"
     ]
-  ]
-,
+  ],
   "anim-tester-save-all-objects": [
     [
       [
@@ -43291,8 +48953,7 @@
       "v1",
       "anim-test-obj"
     ]
-  ]
-,
+  ],
   "generic-upload-vu0": [
     [
       16,
@@ -43304,8 +48965,7 @@
       "a0",
       "(pointer uint64)"
     ]
-  ]
-,
+  ],
   "(method 42 ocean)": [
     [
       [
@@ -43315,8 +48975,7 @@
       "a1",
       "dma-packet"
     ]
-  ]
-,
+  ],
   "etie-end-buffer": [
     [
       [
@@ -43334,8 +48993,7 @@
       "a0",
       "(pointer vif-tag)"
     ]
-  ]
-,
+  ],
   "etie-ints": [
     [
       [
@@ -43345,8 +49003,7 @@
       "gp",
       "(pointer uint32)"
     ]
-  ]
-,
+  ],
   "etn-end-buffer": [
     [
       [
@@ -43364,8 +49021,7 @@
       "a0",
       "(pointer vif-tag)"
     ]
-  ]
-,
+  ],
   "etn-ints": [
     [
       [
@@ -43375,16 +49031,14 @@
       "gp",
       "(pointer uint32)"
     ]
-  ]
-,
+  ],
   "(method 16 nav-engine)": [
     [
       92,
       "gp",
       "nav-engine-spr-buffer"
     ]
-  ]
-,
+  ],
   "(method 13 editable-plane)": [
     [
       [
@@ -43394,8 +49048,7 @@
       "s3",
       "(inline-array vector)"
     ]
-  ]
-,
+  ],
   "(method 13 editable-face)": [
     [
       [
@@ -43405,8 +49058,7 @@
       "s3",
       "(inline-array vector)"
     ]
-  ]
-,
+  ],
   "camera-plot-float-func": [
     [
       56,
@@ -43678,8 +49330,7 @@
       "a1",
       "cam-dbg-scratch"
     ]
-  ]
-,
+  ],
   "cam-debug-draw-tris": [
     [
       20,
@@ -43691,8 +49342,7 @@
       "a0",
       "cam-dbg-scratch"
     ]
-  ]
-,
+  ],
   "real-joint-mod-gun-look-at-handler": [
     [
       1,
@@ -43704,8 +49354,7 @@
       "v1",
       "joint-mod"
     ]
-  ]
-,
+  ],
   "joint-mod-scale-handler": [
     [
       [
@@ -43715,8 +49364,7 @@
       "s5",
       "joint-mod"
     ]
-  ]
-,
+  ],
   "(method 18 game-info)": [
     [
       [
