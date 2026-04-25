@@ -3941,24 +3941,24 @@
 
 
 (define-extern *starting-race-grid* object)
-(define-extern shuffle-race-grid (function none))
-(define-extern change-to-eye-position (function none))
-(define-extern set-race-camera-matrix (function none))
-(define-extern cam-race-intro-update (function none))
+(define-extern shuffle-race-grid (function object object none))
+(define-extern change-to-eye-position (function object object object none))
+(define-extern set-race-camera-matrix (function object object object none))
+(define-extern cam-race-intro-update (function object object object object none))
 (define-extern cam-race-intro state)
-(define-extern set-race-end-camera (function none))
-(define-extern get-race-line-info (function none))
-(define-extern adjust-position-to-above-ground (function none))
+(define-extern set-race-end-camera (function object object none))
+(define-extern get-race-line-info (function object object object none))
+(define-extern adjust-position-to-above-ground (function object none))
 (define-extern cam-race-end-side-view (function none))
 (define-extern cam-race-end-low-fixed (function none))
-(define-extern cam-race-end-high-aiming (function symbol))
+(define-extern cam-race-end-high-aiming (function object symbol))
 (define-extern do-race-end (function none))
 (define-extern cam-race-end state)
-(define-extern get-nearest-race-point (function none))
+(define-extern get-nearest-race-point (function object none))
 (define-extern net-game-mgr-race-startup (function none))
-(define-extern race-info-find-ground (function none))
-(define-extern race-mesh-debug-init-by-other (function none))
-(define-extern spawn-race-mesh-debug (function symbol))
+(define-extern race-info-find-ground (function object object none))
+(define-extern race-mesh-debug-init-by-other (function object none))
+(define-extern spawn-race-mesh-debug (function object symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-race-hud                   ;;
@@ -47376,11 +47376,11 @@
     (net-player-race-method-99 (_type_) none) ;; 99
     (net-player-race-method-100 (_type_) none) ;; 100
     (net-player-race-method-101 (_type_) none) ;; 101
-    (net-player-race-method-102 (_type_) none) ;; 102
+    (net-player-race-method-102 (_type_ object object) none) ;; 102
     (net-player-race-method-103 (_type_) none) ;; 103
-    (net-player-race-method-104 (_type_) none) ;; 104
-    (net-player-race-method-105 (_type_) none) ;; 105
-    (net-player-race-method-106 (_type_) none) ;; 106
+    (net-player-race-method-104 (_type_ object) none) ;; 104
+    (net-player-race-method-105 (_type_ object) none) ;; 105
+    (net-player-race-method-106 (_type_ object) none) ;; 106
     (net-player-race-method-107 (_type_) none) ;; 107
     )
   )
@@ -47405,7 +47405,7 @@
     racing ;; 81
     )
   (:methods
-    (net-game-mgr-race-method-82 (_type_) none) ;; 82
+    (net-game-mgr-race-method-82 (_type_ object object) none) ;; 82
     (net-game-mgr-race-method-83 (_type_) none) ;; 83
     (net-game-mgr-race-method-84 (_type_) none) ;; 84
     (net-game-mgr-race-method-85 (_type_) none) ;; 85
@@ -62802,4 +62802,124 @@
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
+  )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Lane SM batch 3 — activated deftypes (jak3 → jakx)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; from jak3 all-types.gc L63509
+(deftype museum-char (structure)
+  ((skel                    string          :offset-assert 0)
+   (anim                    uint32          :offset-assert 4)
+   (height-min              float           :offset-assert 8)
+   (height-max              float           :offset-assert 12)
+   (zoom-min                float           :offset-assert 16)
+   (zoom-max                float           :offset-assert 20)
+   (scale                   float           :offset-assert 24)
+   (text-id                 text-id         :offset-assert 28)
+   (cloth-reset-time        time-frame      :offset-assert 32)
+   (use-orient-cloth-reset? symbol          :offset-assert 40)
+   (outtake-num             uint32          :offset-assert 44)
+   (outtake                 (array string)  :offset-assert 48)
+   )
+  :method-count-assert 9
+  :size-assert         #x34
+  :flag-assert         #x900000034
+  )
+
+;; from jak3 all-types.gc L31868
+(deftype tie-init-data (structure)
+  ((tie-bucket                      bucket-id  :offset-assert 0)
+   (tie-scissor-bucket              bucket-id  :offset-assert 4)
+   (tie-envmap-bucket               bucket-id  :offset-assert 8)
+   (tie-envmap-scissor-bucket       bucket-id  :offset-assert 12)
+   (tie-vanish-bucket               bucket-id  :offset-assert 16)
+   (tie-trans-bucket                bucket-id  :offset-assert 20)
+   (tie-scissor-trans-bucket        bucket-id  :offset-assert 24)
+   (tie-envmap-trans-bucket         bucket-id  :offset-assert 28)
+   (tie-envmap-scissor-trans-bucket bucket-id  :offset-assert 32)
+   (tie-water-bucket                bucket-id  :offset-assert 36)
+   (tie-scissor-water-bucket        bucket-id  :offset-assert 40)
+   (tie-envmap-water-bucket         bucket-id  :offset-assert 44)
+   (tie-envmap-scissor-water-bucket bucket-id  :offset-assert 48)
+   )
+  :method-count-assert 9
+  :size-assert         #x34
+  :flag-assert         #x900000034
+  )
+
+;; from jak3 all-types.gc L14852
+(deftype resetter-params (structure)
+  ((message      resetter-message      :offset-assert 0)
+   (flags        resetter-flag         :offset-assert 2)
+   (fail         resetter-spec :inline :offset-assert 4)
+   (retry        resetter-spec :inline :offset-assert 20)
+   (reset-delay  uint32                :offset-assert 36 :decomp-as time-frame)
+   (task         game-task             :offset-assert 40)
+   (text-message text-id               :offset-assert 44)
+   )
+  :method-count-assert 9
+  :size-assert         #x30
+  :flag-assert         #x900000030
+  )
+
+;; from jak3 all-types.gc L21801
+(deftype part-tracker-subsampler-init-params (structure)
+  ((userdata      uint64  :offset-assert 0)
+   (duration      time-frame :offset-assert 8)
+   (group         sparticle-launch-group :offset-assert 16)
+   (callback      (function part-tracker vector) :offset-assert 20)
+   (target        process-drawable :offset-assert 24)
+   (mat-joint     object  :offset-assert 28) ;; can be *launch-matrix* or joint idx
+   (subsample-num float   :offset-assert 32)
+   )
+  :method-count-assert 9
+  :size-assert         #x24
+  :flag-assert         #x900000024
+  ;; field userdata uses ~A with a 64-bit load. field mat-joint uses ~A with a signed load.
+  )
+
+;; from jak3 all-types.gc L30437
+(deftype sprite-frame-data (structure)
+  "Data sent to VU1 which is constant over a frame, like giftag templates, camera/fog constants..."
+  (;;(data               UNKNOWN      42      :offset-assert 0)
+   (cdata              vector       16 :inline  :offset-assert 0) ;; guessed by decompiler
+   ;(fdata              UNKNOWN      26      :offset-assert 256)
+   (xy-array           vector       8  :inline     :offset 0) ;; guessed by decompiler
+   (st-array           vector       4  :inline     :offset 128) ;; guessed by decompiler
+   (xyz-array          vector       4  :inline     :offset 192) ;; guessed by decompiler
+   (hmge-scale         vector       :inline :offset 256)
+   (consts             vector       :inline :offset 272)
+   (pfog0              float                :offset 272)
+   (deg-to-rad         float                :offset 276)
+   (min-scale          float                :offset 280)
+   (inv-area           float                :offset 284)
+   (adgif-giftag       gs-gif-tag        :inline :offset-assert 288) ;; gs-gif-tag :inline
+   (sprite-2d-giftag   gs-gif-tag        :inline :offset-assert 304) ;; gs-gif-tag :inline
+   (sprite-2d-giftag-2 gs-gif-tag        :inline :offset-assert 320) ;; gs-gif-tag :inline
+   (sincos-01          vector       :inline :offset-assert 336)
+   (sincos-23          vector       :inline :offset-assert 352)
+   (sincos-45          vector       :inline :offset-assert 368)
+   (sincos-67          vector       :inline :offset-assert 384)
+   (sincos-89          vector       :inline :offset-assert 400)
+   (basis-x            vector       :inline :offset-assert 416)
+   (basis-y            vector       :inline :offset-assert 432)
+   (sprite-3d-giftag   gs-gif-tag        :inline :offset-assert 448) ;; gs-gif-tag :inline
+   (sprite-3d-giftag-2 gs-gif-tag        :inline :offset-assert 464) ;; gs-gif-tag :inline
+   (screen-shader      adgif-shader :inline :offset-assert 480)
+   (inv-hmge-scale     vector       :inline :offset 576)
+   (stq-offset         vector       :inline :offset-assert 592)
+   (stq-scale          vector       :inline :offset-assert 608)
+   (rgba-plain         qword        :inline :offset-assert 624)
+   (warp-giftag        gs-gif-tag        :inline :offset-assert 640) ;; gs-gif-tag :inline
+   (fog-clamp          vector       :inline :offset-assert 656)
+   (fog-min            float                :offset 656 :score 1)
+   (fog-max            float                :offset 660 :score 1)
+   (max-scale          float                :offset 664 :score 1)
+   )
+  :method-count-assert 9
+  :size-assert         #x2a0
+  :flag-assert         #x9000002a0
   )
