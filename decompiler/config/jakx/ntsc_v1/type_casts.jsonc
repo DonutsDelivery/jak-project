@@ -41704,5 +41704,245 @@
 
   "(method 12 blit-displays-work)": [[[4, 41], "v1", "(inline-array vector4w)"], [[60, 112], "v1", "(inline-array vector4w)"]],
   "(method 27 ocean)": [[[19, 27], "a0", "dma-packet"], [30, "s3", "matrix"], [[49, 54], "s2", "vector"]],
-  "(method 28 ocean)": [[[43, 51], "a0", "dma-packet"], [66, "a2", "(pointer int16)"], [[81, 89], "a1", "vector4w"], [[90, 98], "v1", "vector4w"], [[111, 127], "t0", "vector4w"], [[130, 268], "a1", "(inline-array vector4w)"]]
+  "(method 28 ocean)": [[[43, 51], "a0", "dma-packet"], [66, "a2", "(pointer int16)"], [[81, 89], "a1", "vector4w"], [[90, 98], "v1", "vector4w"], [[111, 127], "t0", "vector4w"], [[130, 268], "a1", "(inline-array vector4w)"]],
+  "artifact-draw-init-remote": [
+    [0, "s6", "artifact-draw"]
+  ],
+  "artifact-init-remote": [
+    [0, "s6", "artifact"]
+  ],
+  "auto-test-levels-init-by-other": [
+    [0, "s6", "auto-test-levels"]
+  ],
+  "aux-voice-mgr-init-by-other": [
+    [0, "s6", "aux-voice-mgr"]
+  ],
+  "collision-editor-default-proc-init-by-other": [
+    [0, "s6", "collision-editor-default-proc"]
+  ],
+  "collision-editor-edited-proc-init-by-other": [
+    [0, "s6", "collision-editor-edited-proc"]
+  ],
+  "collision-editor-init-by-other": [
+    [0, "s6", "collision-editor"]
+  ],
+  "ctf-flag-init-remote": [
+    [0, "s6", "ctf-flag"]
+  ],
+  "drift-editor-init-by-other": [
+    [0, "s6", "drift-editor"]
+  ],
+  "eco-mgr-init-by-other": [
+    [0, "s6", "eco-mgr"]
+  ],
+  "eco-mgr-init-remote": [
+    [0, "s6", "eco-mgr"]
+  ],
+  "external-camera-controller-init-by-other": [
+    [0, "s6", "external-camera-controller"]
+  ],
+  "fmv-player-init-by-other": [
+    [0, "s6", "fmv-player"]
+  ],
+  "headset-init-by-other": [
+    [0, "s6", "headset"]
+  ],
+  "helmet-hud-init-by-other": [
+    [0, "s6", "helmet-hud"]
+  ],
+  "http-downloader-init-by-other": [
+    [0, "s6", "http-downloader"]
+  ],
+  "mine-a-init-by-other": [
+    [0, "s6", "mine-a"]
+  ],
+  "mine-a-init-remote": [
+    [0, "s6", "mine-a"]
+  ],
+  "mine-b-init-by-other": [
+    [0, "s6", "mine-b"]
+  ],
+  "mine-b-init-remote": [
+    [0, "s6", "mine-b"]
+  ],
+  "muzzle-flash-init-by-other": [
+    [0, "s6", "muzzle-flash"]
+  ],
+  "net-enemy-init-remote": [
+    [0, "s6", "net-enemy"]
+  ],
+  "net-game-mgr-artifact-init-remote": [
+    [0, "s6", "net-game-mgr-artifact"]
+  ],
+  "net-game-mgr-assassin-init-remote": [
+    [0, "s6", "net-game-mgr-assassin"]
+  ],
+  "net-game-mgr-beasthunt-init-remote": [
+    [0, "s6", "net-game-mgr-beasthunt"]
+  ],
+  "net-game-mgr-boss-battle-init-remote": [
+    [0, "s6", "net-game-mgr-boss-battle"]
+  ],
+  "net-game-mgr-collectable-init-remote": [
+    [0, "s6", "net-game-mgr-collectable"]
+  ],
+  "net-game-mgr-ctf-init-remote": [
+    [0, "s6", "net-game-mgr-ctf"]
+  ],
+  "net-game-mgr-deathmatch-init-remote": [
+    [0, "s6", "net-game-mgr-deathmatch"]
+  ],
+  "net-game-mgr-deathrace-init-remote": [
+    [0, "s6", "net-game-mgr-deathrace"]
+  ],
+  "net-game-mgr-football-init-remote": [
+    [0, "s6", "net-game-mgr-football"]
+  ],
+  "net-game-mgr-init-remote": [
+    [0, "s6", "net-game-mgr"]
+  ],
+  "net-game-mgr-king-of-hill-init-remote": [
+    [0, "s6", "net-game-mgr-king-of-hill"]
+  ],
+  "net-game-mgr-race-init-remote": [
+    [0, "s6", "net-game-mgr-race"]
+  ],
+  "net-game-mgr-rushhour-init-remote": [
+    [0, "s6", "net-game-mgr-rushhour"]
+  ],
+  "net-game-mgr-time-box-init-remote": [
+    [0, "s6", "net-game-mgr-time-box"]
+  ],
+  "net-game-mgr-time-trial-init-remote": [
+    [0, "s6", "net-game-mgr-time-trial"]
+  ],
+  "net-game-mgr-training-init-remote": [
+    [0, "s6", "net-game-mgr-training"]
+  ],
+  "net-mgr-init-by-other": [
+    [0, "s6", "net-mgr"]
+  ],
+  "net-player-artifact-init-remote": [
+    [0, "s6", "net-player-artifact"]
+  ],
+  "net-player-assassin-init-remote": [
+    [0, "s6", "net-player-assassin"]
+  ],
+  "net-player-beasthunt-init-remote": [
+    [0, "s6", "net-player-beasthunt"]
+  ],
+  "net-player-boss-battle-init-remote": [
+    [0, "s6", "net-player-boss-battle"]
+  ],
+  "net-player-collectable-init-remote": [
+    [0, "s6", "net-player-collectable"]
+  ],
+  "net-player-ctf-init-remote": [
+    [0, "s6", "net-player-ctf"]
+  ],
+  "net-player-deathmatch-init-remote": [
+    [0, "s6", "net-player-deathmatch"]
+  ],
+  "net-player-deathrace-init-remote": [
+    [0, "s6", "net-player-deathrace"]
+  ],
+  "net-player-football-init-remote": [
+    [0, "s6", "net-player-football"]
+  ],
+  "net-player-init-remote": [
+    [0, "s6", "net-player"]
+  ],
+  "net-player-king-of-hill-init-remote": [
+    [0, "s6", "net-player-king-of-hill"]
+  ],
+  "net-player-race-init-remote": [
+    [0, "s6", "net-player-race"]
+  ],
+  "net-player-rushhour-init-remote": [
+    [0, "s6", "net-player-rushhour"]
+  ],
+  "net-player-time-box-init-remote": [
+    [0, "s6", "net-player-time-box"]
+  ],
+  "net-player-time-trial-init-remote": [
+    [0, "s6", "net-player-time-trial"]
+  ],
+  "net-powerup-init-remote": [
+    [0, "s6", "net-powerup"]
+  ],
+  "net-process-mgr-init-by-other": [
+    [0, "s6", "net-process-mgr"]
+  ],
+  "net-projectile-init-by-other": [
+    [0, "s6", "net-projectile"]
+  ],
+  "net-projectile-init-remote": [
+    [0, "s6", "net-projectile"]
+  ],
+  "net-simple-destruct-mgr-init-remote": [
+    [0, "s6", "net-simple-destruct-mgr"]
+  ],
+  "net-test-init-by-other": [
+    [0, "s6", "net-test"]
+  ],
+  "net-test-init-remote": [
+    [0, "s6", "net-test"]
+  ],
+  "net-world-init-remote": [
+    [0, "s6", "net-world"]
+  ],
+  "powercell-dispenser-draw-init-remote": [
+    [0, "s6", "powercell-dispenser-draw"]
+  ],
+  "powercell-dispenser-init-remote": [
+    [0, "s6", "powercell-dispenser"]
+  ],
+  "powercell-footie-init-remote": [
+    [0, "s6", "powercell-footie"]
+  ],
+  "race-mesh-debug-init-by-other": [
+    [0, "s6", "race-mesh-debug"]
+  ],
+  "red-sentry-bot-init-remote": [
+    [0, "s6", "red-sentry-bot"]
+  ],
+  "save-memcard-init-by-other": [
+    [0, "s6", "save-memcard"]
+  ],
+  "simple-prim-init-by-other": [
+    [0, "s6", "simple-prim"]
+  ],
+  "v-toad-shot-init-remote": [
+    [0, "s6", "v-toad-shot"]
+  ],
+  "v-wpn-yellow-guided-missile-init-remote": [
+    [0, "s6", "v-wpn-yellow-guided-missile"]
+  ],
+  "v-yellow-guided-missile-init-remote": [
+    [0, "s6", "v-yellow-guided-missile"]
+  ],
+  "vehicle-AI-control-timer-init-by-other": [
+    [0, "s6", "vehicle-AI-control-timer"]
+  ],
+  "vehicle-debris-init-by-other": [
+    [0, "s6", "vehicle-debris"]
+  ],
+  "vehicle-init-remote": [
+    [0, "s6", "vehicle"]
+  ],
+  "vehicle-manager-init-by-other": [
+    [0, "s6", "vehicle-manager"]
+  ],
+  "vehicle-reticle-on-me-init-by-other": [
+    [0, "s6", "vehicle-reticle-on-me"]
+  ],
+  "vehicle-weapon-drone-init-by-other": [
+    [0, "s6", "vehicle-weapon-drone"]
+  ],
+  "visvol-editor-init-by-other": [
+    [0, "s6", "visvol-editor"]
+  ],
+  "water-anim-init-by-other": [
+    [0, "s6", "water-anim"]
+  ]
 }
