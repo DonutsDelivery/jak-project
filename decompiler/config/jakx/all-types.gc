@@ -6795,8 +6795,8 @@
 ;; euler                          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern set-eul! (function euler-angles float float float int euler-angles))
-(define-extern eul->matrix (function matrix euler-angles matrix))
+(define-extern set-eul! "Set euler angles and the flag bits." (function euler-angles float float float int euler-angles))
+(define-extern eul->matrix "Convert from euler angles to 4x4 matrix." (function matrix euler-angles matrix))
 (define-extern matrix->eul (function euler-angles matrix int euler-angles))
 (define-extern eul->quat (function quaternion euler-angles quaternion))
 (define-extern quat->eul (function euler-angles quaternion int euler-angles))
@@ -8418,9 +8418,9 @@
 
 
 (define-extern *vif-disasm-table* (array vif-disasm-element)) ;; (array vif-disasm-element)
-(define-extern disasm-vif-details (function symbol (pointer uint8) vif-cmd int symbol))
+(define-extern disasm-vif-details "Disassemble the data stored in a vif unpack." (function symbol (pointer uint8) vif-cmd int symbol))
 (define-extern disasm-vif-tag (function (pointer vif-tag) int symbol symbol int))
-(define-extern disasm-dma-tag (function dma-tag symbol object)) 
+(define-extern disasm-dma-tag "Disassemble just the 64-byte dma tag" (function dma-tag symbol none))
 (define-extern *dma-disasm* symbol) ;; symbol
 (define-extern disasm-dma-list (function dma-packet symbol symbol symbol int symbol))
 
@@ -21148,7 +21148,7 @@
   :size-assert         #x38
   :flag-assert         #xa00000038
   (:methods
-    (set-gravity-length (_type_ float) int) ;; 9
+    (set-gravity-length (_type_ float) none) ;; 9
     )
   )
 
@@ -29682,7 +29682,7 @@
   :flag-assert         #x1400000050
   (:methods
     (new (symbol type collide-shape uint int) _type_) ;; 0
-    (debug-draw (_type_) int) ;; 9
+    (debug-draw (_type_) none) ;; 9
     (add-fg-prim-using-box (_type_ collide-cache) object) ;; 10
     (add-fg-prim-using-line-sphere (_type_ collide-cache object) object) ;; 11
     (overlaps-others-test (_type_ overlaps-others-params collide-shape-prim) symbol) ;; 12
@@ -29782,30 +29782,30 @@
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process-drawable collide-list-enum) _type_)
     (collide-shape-method-28 (_type_ vector) int) ;; 28
     (collide-shape-method-29 (_type_ vector) int) ;; 29
-    (collide-shape-method-30 (_type_) int) ;; 30
+    (debug-draw (_type_) none) ;; 30
     (collide-shape-method-31 (_type_ float collide-query) int) ;; 31
-    (collide-shape-method-32 (_type_ vector collide-query meters) int) ;; 32
-    (collide-shape-method-33 (_type_ uint) collide-shape-prim) ;; 33
-    (collide-shape-method-34 (_type_ uint) collide-shape-prim) ;; 34
+    (fill-cache-integrate-and-collide (_type_ vector collide-query meters) none) ;; 32
+    (find-prim-by-id (_type_ uint) collide-shape-prim) ;; 33
+    (find-prim-by-id-logtest (_type_ uint) collide-shape-prim) ;; 34
     (collide-shape-method-35 (_type_) joint-control-status) ;; 35
     (collide-shape-method-36 (_type_ bounding-box float collide-spec) symbol) ;; 36
-    (collide-shape-method-37 (_type_ vector) int) ;; 37
-    (collide-shape-method-38 (_type_) int) ;; 38
+    (integrate-and-collide! (_type_ vector) none) ;; 37
+    (find-collision-meshes (_type_) none) ;; 38
     (collide-shape-method-39 (_type_ collide-shape collide-query) symbol) ;; 39
     (collide-shape-method-40 (_type_ overlaps-others-params) object) ;; 40
-    (collide-shape-method-41 (_type_ attack-info float) vector) ;; 41
-    (collide-shape-method-42 (_type_ collide-shape collide-query) symbol) ;; 42
+    (shove-to-closest-point-on-path (_type_ attack-info float) vector) ;; 41
+    (should-push-away (_type_ collide-shape collide-query) symbol) ;; 42
     (collide-shape-method-43 (_type_ pull-rider-info) none) ;; 43
     (collide-shape-method-44 (_type_) none) ;; 44
     (collide-shape-method-45 (_type_) collide-spec) ;; 45
     (collide-shape-method-46 (_type_) int) ;; 46
     (collide-shape-method-47 (_type_ collide-spec) int) ;; 47
     (collide-shape-method-48 (_type_ collide-spec) int) ;; 48
-    (collide-shape-method-49 (_type_ int collide-spec collide-spec) int) ;; 49
+    (modify-collide-as! (_type_ int collide-spec collide-spec) none) ;; 49
     (collide-shape-method-50 (_type_) none) ;; 50 ;; (send-shoves (_type_ process touching-shapes-entry float float float) symbol)
     (collide-shape-method-51 (_type_ collide-query vector collide-spec float float float) none) ;; 51
     (collide-shape-method-52 (_type_ water-info collide-action) water-info) ;; 52
-    (collide-shape-method-53 (_type_ (function collide-shape-prim none)) int) ;; 53
+    (iterate-prims (_type_ (function collide-shape-prim none)) none) ;; 53
     (collide-shape-method-54 (_type_) collide-shape) ;; 54
     )
   )
@@ -30427,10 +30427,10 @@
   :flag-assert         #xd00003c10
   (:methods
     (new (symbol type) _type_) ;; 0
-    (touching-prims-entry-pool-method-9 (_type_) touching-prims-entry) ;; 9
-    (touching-prims-entry-pool-method-10 (_type_) int) ;; 10
-    (touching-prims-entry-pool-method-11 (_type_) int) ;; 11
-    (touching-prims-entry-pool-method-12 (_type_ touching-prims-entry) touching-prims-entry) ;; 12
+    (alloc-node (_type_) touching-prims-entry) ;; 9
+    (get-free-node-count (_type_) int) ;; 10
+    (init-list! (_type_) none) ;; 11
+    (free-node (_type_ touching-prims-entry) touching-prims-entry) ;; 12
     )
   )
   
@@ -30452,8 +30452,8 @@
     (touching-shapes-entry-method-9 (_type_) touching-prims-entry) ;; 9
     (touching-shapes-entry-method-10 (_type_ touching-shapes-entry) touching-prims-entry) ;; 10
     (touching-shapes-entry-method-11 (_type_ collide-shape) collide-shape) ;; 11
-    (touching-shapes-entry-method-12 (_type_ collide-shape uint) touching-prims-entry) ;; 12
-    (touching-shapes-entry-method-13 (_type_ collide-shape collide-action collide-action) basic) ;; 13
+    (prims-touching? (_type_ collide-shape uint) touching-prims-entry) ;; 12
+    (prims-touching-action? (_type_ collide-shape collide-action collide-action) basic) ;; 13
     (touching-shapes-entry-method-14 (_type_) int) ;; 14
     )
   )
@@ -30785,12 +30785,12 @@
   :flag-assert         #xf00000024
   (:methods
     (new (symbol type process-drawable) _type_) ;; 0
-    (effect-control-method-9 (_type_) int) ;; 9
+    (effect-control-method-9 (_type_) none) ;; 9
     (do-effect (_type_ string float int) int) ;; 10
     (do-effect-for-surface (_type_ symbol float int basic pat-surface) int) ;; 11
     (play-effect-sound (_type_ symbol float int basic sound-name) int) ;; 12
     (set-channel-offset! (_type_ int) int) ;; 13
-    (play-effects-from-res-lump (_type_ float float float) int) ;; 14
+    (play-effects-from-res-lump (_type_ float float float) none) ;; 14
     )
   )
 
@@ -31835,8 +31835,8 @@
   :flag-assert         #x900000078
   )
 
-(define-extern inspect-bsp-tree "Attempt to print a bsp-tree, but it is actually broken since the jak 2 bsp format change" (function bsp-header bsp-node bsp-header))
-(define-extern map-bsp-tree "Attempt to call a function on all bsp-tree nodes, but it is actually broken since the jak 2 bsp format" (function (function bsp-node none) bsp-header bsp-node bsp-header))
+(define-extern inspect-bsp-tree "Attempt to print a bsp-tree, but it is actually broken since the jak 2 bsp format change" (function bsp-header bsp-node none))
+(define-extern map-bsp-tree "Attempt to call a function on all bsp-tree nodes, but it is actually broken since the jak 2 bsp format" (function (function bsp-node none) bsp-header bsp-node none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; collide-cache-h                ;;
@@ -33759,8 +33759,8 @@
   (:methods
     (tracking-spline-method-9 (_type_) int) ;; 9 — body returns int
     (tracking-spline-method-10 (_type_ vector) int) ;; 10 — body returns int
-    (debug-point-info (_type_ int) int) ;; 11
-    (debug-all-points (_type_) int) ;; 12
+    (debug-point-info (_type_ int) none) ;; 11
+    (debug-all-points (_type_) none) ;; 12
     (tracking-spline-method-13 (_type_ int) int) ;; 13 — body returns int
     (tracking-spline-method-14 (_type_ tracking-spline-sampler) int) ;; 14 — body returns int
     (tracking-spline-method-15 (_type_) int) ;; 15 — body returns int
@@ -34482,7 +34482,7 @@
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type process symbol) _type_)
     (actor-link-info-method-9 (_type_ type) int) ;; 9
-    (actor-link-info-method-10 (_type_) int) ;; 10
+    (actor-count-before (_type_) int) ;; 10
     (actor-link-info-method-11 (_type_) actor-link-info) ;; 11
     (actor-link-info-method-12 (_type_) entity-actor) ;; 12
     (actor-link-info-method-13 (_type_) entity-actor) ;; 13
@@ -34490,14 +34490,14 @@
     (actor-link-info-method-15 (_type_) process) ;; 15
     (actor-link-info-method-16 (_type_ (function entity-actor object object) object) int) ;; 16
     (actor-link-info-method-17 (_type_ (function entity-actor object object) object) int) ;; 17
-    (actor-link-info-method-18 (_type_ (function entity-actor object object) object) int) ;; 18
+    (_type_ (function entity-actor object object) object) int) ;; 18
     (actor-link-info-method-19 (_type_ symbol) symbol) ;; 19
     (actor-link-info-method-20 (_type_ symbol) object) ;; 20
     (actor-link-info-method-21 (_type_ symbol) object) ;; 21
     (actor-link-info-method-22 (_type_ symbol) symbol) ;; 22
     (actor-link-info-method-23 (_type_ symbol) symbol) ;; 23
     (actor-link-info-method-24 (_type_ symbol) symbol) ;; 24
-    (actor-link-info-method-25 (_type_) int) ;; 25
+    (actor-count (_type_) int) ;; 25
     )
   )
 
@@ -36887,9 +36887,9 @@
 ;; debug-sphere                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern make-debug-sphere-table (function vector-array float float vector-array))
+(define-extern make-debug-sphere-table "Create a table of lines on a sphere." (function vector-array float float vector-array))
 (define-extern *debug-sphere-table* (array vector-array)) ;; (array vector-array)
-(define-extern add-debug-sphere-from-table (function bucket-id vector meters rgba int int)) 
+(define-extern add-debug-sphere-from-table "Draw a sphere out of debug lines, using the precomputed table of lines." (function bucket-id vector meters rgba int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; debug                          ;;
@@ -37721,10 +37721,10 @@
   )
 
 
-(define-extern unpack-comp-rle (function (pointer int8) (pointer int8) (pointer int8)))
-(define-extern unpack-comp-huf (function (pointer uint8) (pointer uint8) uint huf-dictionary-node int)) 
-(define-extern unpack-comp-lzo (function (pointer uint8) (pointer uint8) int)) 
-(define-extern pack-comp-rle (function (pointer uint8) (pointer uint8) int int (pointer uint8)))
+(define-extern unpack-comp-rle "Decompress data compressed with run-length encoding." (function (pointer int8) (pointer int8) (pointer int8)))
+(define-extern unpack-comp-huf "Decompress data compressed with huffman encoding." (function (pointer uint8) (pointer uint8) uint huf-dictionary-node none))
+(define-extern unpack-comp-lzo "Decompress data compressed with LZO encoding." (function (pointer uint8) (pointer uint8) none))
+(define-extern pack-comp-rle "Compress data, used for map mask stuff." (function (pointer uint8) (pointer uint8) int int (pointer uint8)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; background                     ;;
@@ -39771,7 +39771,7 @@
 (define-extern math-camera-matrix (function matrix))
 (define-extern camera-angle (function float))
 (define-extern camera-teleport-to-entity (function entity-actor symbol :behavior process))
-(define-extern camera-teleport-to-entity-named (function string int)) 
+(define-extern camera-teleport-to-entity-named (function string none))
 (define-extern camera-teleport-to-location (function float float float int)) 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -39781,10 +39781,10 @@
 (define-extern reset-follow (function symbol object :behavior camera-master))
 (define-extern reset-target-tracking (function object :behavior camera-master))
 (define-extern master-track-target (function object :behavior camera-master))
-(define-extern setup-slave-for-hopefull (function camera-slave int))
+(define-extern setup-slave-for-hopefull (function camera-slave none))
 (define-extern master-is-hopeful-better? (function camera-slave camera-slave symbol :behavior camera-master))
 (define-extern master-choose-entity (function cam-setting-data symbol :behavior camera-master))
-(define-extern cam-master-set-entity (function cam-setting-data int)) 
+(define-extern cam-master-set-entity (function cam-setting-data none))
 (define-extern cam-master-activate-slave (function symbol int)) 
 (define-extern cam-master-active state) ;; (state camera-master)
 (define-extern cam-master-init (function none :behavior camera-master))
@@ -50629,7 +50629,7 @@
 ;; capture                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern gs-set-default-store-image (function gs-store-image-packet int int gs-psm int int int int int))
+(define-extern gs-set-default-store-image "Set up a gs-store-image-packet for copying VRAM data to RAM." (function gs-store-image-packet int int gs-psm int int int int int))
 (define-extern *capture-tga-temp* object)
 (define-extern store-image (function screen-shot-work none))
 
@@ -53523,8 +53523,8 @@
 
 (define-extern *editable-temp-id* int) ;; int
 (define-extern *editable-default-name* string) ;; string
-(define-extern editable-command->string (function editable-command string)) ;; (function editable-command string)
-(define-extern editable-filter->string (function editable-filter basic string)) ;; (function editable-filter basic string)
+(define-extern editable-command->string (function editable-command string))
+(define-extern editable-filter->string (function editable-filter basic string))
 (define-extern *editable-work* editable-work) ;; editable-work
 (define-extern *editable* (pointer editable-player)) ;; (pointer editable-player)
 
