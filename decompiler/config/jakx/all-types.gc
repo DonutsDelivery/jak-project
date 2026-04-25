@@ -1958,7 +1958,7 @@
 (define-extern check-for-player-dead (function none))
 (define-extern wrong-way-init-by-other (function none))
 (define-extern wrong-way-spawn (function process))
-(define-extern *race-banner-subtract* object)
+(define-extern *race-banner-subtract* float)
 (define-extern starting-linebot-init-by-other (function none))
 (define-extern starting-linebot-spawn (function process))
 (define-extern race-banner-handler (function symbol))
@@ -7576,7 +7576,7 @@
   )
 
 (define-extern *debug-sound-sliders* object)
-(define-extern *music-volume-ducked-by-sound* object)
+(define-extern *music-volume-ducked-by-sound* float)
 (define-extern *music-lock* object)
 (define-extern *current-sound-id* sound-id)
 (define-extern *sound-iop-info* sound-iop-info)
@@ -12832,8 +12832,8 @@
 (define-extern *record-fma-path-dry-run* object) ;; TODO
 (define-extern *record-fma-real* object) ;; TODO
 (define-extern *record-fma-low-res* object) ;; TODO
-(define-extern *record-fma-start* object) ;; TODO
-(define-extern *record-fma-end* object) ;; TODO
+(define-extern *record-fma-start* float) ;; TODO
+(define-extern *record-fma-end* float) ;; TODO
 (define-extern *record-fma-pal* object) ;; TODO
 (define-extern *profile-slot* object) ;; TODO
 (define-extern *game-mode* symbol)
@@ -15677,10 +15677,10 @@
     )
   )
 
-(define-extern *settings-dialog-volume* object)
-(define-extern *settings-music-volume* object)
-(define-extern *settings-sfx-volume* object)
-(define-extern *settings-music-seek-speed* object)
+(define-extern *settings-dialog-volume* float)
+(define-extern *settings-music-volume* float)
+(define-extern *settings-sfx-volume* float)
+(define-extern *settings-music-seek-speed* float)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; memory-usage-h                 ;;
@@ -20087,8 +20087,8 @@
     )
   )
 
-(define-extern *music-volume-during-speech* object)
-(define-extern *sfx-volume-during-speech* object)
+(define-extern *music-volume-during-speech* float)
+(define-extern *sfx-volume-during-speech* float)
 (define-extern pecker-can-speak? (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -36338,7 +36338,7 @@
 (define-extern update-volume-with-falloff (function sound-instance float))
 (define-extern *sound-priority-level* int)
 (define-extern *sound-duck-amount* float)
-(define-extern *sound-priority-duck* object)
+(define-extern *sound-priority-duck* float)
 (define-extern *music-ducked-last-frame?* symbol)
 (define-extern *slow-mo-last-frame?* symbol)
 (define-extern set-sound-priority-duck-amount (function float float))
@@ -37668,10 +37668,10 @@
 (define-extern in-out-curve (function none))
 (define-extern char-effect-compute-colors (function none))
 (define-extern char-effect-compute2 (function none))
-(define-extern *loading-pad-leftx* object)
-(define-extern *loading-pad-lefty* object)
-(define-extern *loading-pad-rightx* object)
-(define-extern *loading-pad-righty* object)
+(define-extern *loading-pad-leftx* float)
+(define-extern *loading-pad-lefty* float)
+(define-extern *loading-pad-rightx* float)
+(define-extern *loading-pad-righty* float)
 (define-extern char-effect-compute (function none))
 (define-extern draw-string-init-justify (function none))
 (define-extern draw-string-no-asm (function none))
@@ -51079,7 +51079,7 @@
   
 
 
-(define-extern *closest-player-dist-sq* object)
+(define-extern *closest-player-dist-sq* float)
 (define-extern get-closest-human-player (function none))
 (define-extern get-closest-human-or-ai-player (function none))
 (define-extern search-for-code (function none))
@@ -52336,7 +52336,7 @@
 (define-extern *plow-camera* array)
 (define-extern choose-crash-camera (function none))
 (define-extern cam-vehicle-crash state)
-(define-extern *camera-training-lifetime* object)
+(define-extern *camera-training-lifetime* float)
 (define-extern set-training-camera-lifetime (function none))
 (define-extern cam-training state)
 (define-extern *victor-prefix-camera-array* array)
@@ -54579,7 +54579,7 @@
 
 
 (define-extern *seat-offset* object)
-(define-extern *daxter-rotate* object)
+(define-extern *daxter-rotate* float)
 (define-extern daxter-init-by-other (function none))
 (define-extern daxter-spawn (function process))
 (define-extern *animation-adjust* object)
@@ -62653,3 +62653,67 @@
   (csrf31)
   )
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Lane SM batch 1 — activated deftypes (jak3 → jakx)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; from jak3 all-types.gc L68402
+(deftype power-game-cell (structure)
+  ((up    uint8  :offset-assert 0)
+   (right uint8  :offset-assert 1)
+   (down  uint8  :offset-assert 2)
+   (left  uint8  :offset-assert 3)
+   )
+  :pack-me
+  :method-count-assert 9
+  :size-assert         #x4
+  :flag-assert         #x900000004
+  )
+
+;; from jak3 all-types.gc L53324
+(deftype vehicle-attach-point (structure)
+  ((local-pos vector :inline :offset-assert 0)
+   (rot       vector :inline :offset-assert 16)
+   )
+  :method-count-assert 9
+  :size-assert         #x20
+  :flag-assert         #x900000020
+  )
+
+;; from jak3 all-types.gc L50113
+(deftype formation-info (structure)
+  ((composition (array uint8)  :offset-assert 0)
+   (layout      (array vector) :offset-assert 4)
+   )
+  :method-count-assert 9
+  :size-assert         #x8
+  :flag-assert         #x900000008
+  )
+
+;; from jak3 all-types.gc L60605
+(deftype gekko-ik-setup (structure)
+  ((elbow-index    int32  :offset-assert 0)
+   (hand-index     int32  :offset-assert 4)
+   (effector-index int32  :offset-assert 8)
+   (hand-dist      float  :offset-assert 12)
+   )
+  :method-count-assert 9
+  :size-assert         #x10
+  :flag-assert         #x900000010
+  )
+
+;; from jak3 all-types.gc L49844
+(deftype kg-squad-member-settings (structure)
+  ((object-type              traffic-type  :offset-assert 0)
+   (max-target-count         int8   :offset-assert 1)
+   (min-target-count         int8   :offset-assert 2)
+   (target-count             int8   :offset-assert 3)
+   (enemy-type               traffic-type  :offset-assert 4)
+   (toggle-shield-percentage float  :offset-assert 8)
+   (heat-shield-percentage   float  :offset-assert 12)
+   )
+  :method-count-assert 9
+  :size-assert         #x10
+  :flag-assert         #x900000010
+  )
