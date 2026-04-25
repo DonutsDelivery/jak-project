@@ -20099,7 +20099,7 @@
     (speech-control-method-12 (_type_ process-drawable speech-type) int) ;; 12
     (speech-control-method-13 (_type_ process-drawable speech-type int) int) ;; 13
     (speech-control-method-14 (_type_ handle) int) ;; 14
-    (speech-control-method-15 (_type_) int) ;; 15
+    (speech-control-method-15 (_type_ handle) none) ;; 15
     (speech-control-method-16 (_type_) none) ;; 16
     )
   )
