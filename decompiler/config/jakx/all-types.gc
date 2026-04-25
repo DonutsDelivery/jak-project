@@ -35757,7 +35757,7 @@
     (nav-state-method-17 (_type_) float) ;; 17 ;; get-rotation-rate
     (nav-state-method-18 (_type_ vector vector vector) symbol) ;; 18 ;; try-projecting-to-current-poly
     (nav-state-method-19 (_type_) nav-poly) ;; 19 ;; get-current-poly
-    (nav-state-method-20 (_type_ (pointer nav-state)) none) ;; 20 ;; copy-nav-state!
+    (nav-state-method-20 (_type_ (pointer nav-state)) none) ;; 20
     (nav-state-method-21 (_type_) none) ;; 21
     (nav-state-method-22 (_type_) none) ;; 22
     (nav-state-method-23 (_type_) none) ;; 23
