@@ -34288,7 +34288,7 @@
   :size-assert         #x40
   :flag-assert         #xa00000040
   (:methods
-    (sparticle-launch-group-method-9 (_type_ process) none) ;; 9
+    (create-launch-control (_type_ process) sparticle-launch-control) ;; 9
     )
   )
   
@@ -52947,11 +52947,11 @@
 (define-extern anim-tester-num-print (function none))
 (define-extern *anim-tester* (pointer anim-tester)) ;; (pointer anim-tester)
 (define-extern anim-test-obj-init (function none))
-(define-extern anim-test-sequence-init (function none))
+(define-extern anim-test-sequence-init (function anim-test-sequence anim-test-obj none))
 (define-extern anim-test-seq-item-copy! (function none))
 (define-extern anim-test-obj-item-valid? (function none))
 (define-extern anim-test-obj-remove-invalid (function none))
-(define-extern anim-tester-real-post (function none))
+(define-extern anim-tester-real-post (function none :behavior anim-tester))
 (define-extern anim-tester-post (function none))
 (define-extern anim-tester-update-anim-info (function none))
 (define-extern anim-tester-reset (function none))
@@ -52963,13 +52963,13 @@
 (define-extern anim-test-field-highlight-lw object)
 (define-extern anim-tester-adjust-frame (function none))
 (define-extern anim-tester-pick-item-setup (function none))
-(define-extern anim-test-seq-mark-as-edited (function none))
+(define-extern anim-test-seq-mark-as-edited (function anim-test-sequence none))
 (define-extern anim-test-edit-seq-insert-item (function none))
 (define-extern anim-test-edit-sequence-list-handler (function none))
 (define-extern anim-tester-interface (function none))
 (define-extern anim-tester-get-playing-item (function none))
 (define-extern initialize-anim-tester (function none))
-(define-extern anim-tester-string-get-frame!! (function symbol))
+(define-extern anim-tester-string-get-frame!! (function list-field string symbol))
 (define-extern anim-tester-load-object-seqs (function symbol))
 (define-extern anim-tester-save-object-seqs (function none))
 (define-extern anim-tester-save-all-objects (function none))
