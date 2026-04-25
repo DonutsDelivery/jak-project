@@ -30454,7 +30454,7 @@
     (touching-shapes-entry-method-11 (_type_ collide-shape) collide-shape) ;; 11
     (prims-touching? (_type_ collide-shape uint) touching-prims-entry) ;; 12
     (prims-touching-action? (_type_ collide-shape collide-action collide-action) basic) ;; 13
-    (touching-shapes-entry-method-14 (_type_) int) ;; 14
+    (free-touching-prims-list (_type_) none) ;; 14
     )
   )
 
