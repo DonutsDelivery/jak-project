@@ -5918,22 +5918,22 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *wcar-explosion-info* vehicle-explosion-info)
-(define-extern *v-mongoose-constants* object)
-(define-extern *v-falcon-constants* object)
-(define-extern *v-wombat-constants* object)
-(define-extern *v-possum-constants* object)
-(define-extern *v-bobcat-constants* object)
-(define-extern *v-cougar-constants* object)
-(define-extern *v-wolf-constants* object)
-(define-extern *v-bear-constants* object)
-(define-extern *v-leopard-constants* object)
-(define-extern *v-panther-constants* object)
-(define-extern *v-tiger-constants* object)
-(define-extern *v-cheetah-constants* object)
-(define-extern *v-gila-constants* object)
+(define-extern *v-mongoose-constants* rigid-body-vehicle-constants)
+(define-extern *v-falcon-constants* rigid-body-vehicle-constants)
+(define-extern *v-wombat-constants* rigid-body-vehicle-constants)
+(define-extern *v-possum-constants* rigid-body-vehicle-constants)
+(define-extern *v-bobcat-constants* rigid-body-vehicle-constants)
+(define-extern *v-cougar-constants* rigid-body-vehicle-constants)
+(define-extern *v-wolf-constants* rigid-body-vehicle-constants)
+(define-extern *v-bear-constants* rigid-body-vehicle-constants)
+(define-extern *v-leopard-constants* rigid-body-vehicle-constants)
+(define-extern *v-panther-constants* rigid-body-vehicle-constants)
+(define-extern *v-tiger-constants* rigid-body-vehicle-constants)
+(define-extern *v-cheetah-constants* rigid-body-vehicle-constants)
+(define-extern *v-gila-constants* rigid-body-vehicle-constants)
 (define-extern *v-snake-constants* rigid-body-vehicle-constants)
-(define-extern *v-daxtermobile-constants* object)
-(define-extern *v-drone-constants* object)
+(define-extern *v-daxtermobile-constants* rigid-body-vehicle-constants)
+(define-extern *v-drone-constants* rigid-body-vehicle-constants)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; vehicle-antenna                ;;
@@ -6101,7 +6101,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(define-extern *minimap* object) ;; minimap
+(define-extern *minimap* minimap) ;; minimap
 (define-extern *minimap-class-list* object) ;; (inline-array minimap-class-node)
 (define-extern lookup-minimap-texture-by-name (function string string (pointer texture-page) texture))
 
@@ -12109,6 +12109,189 @@
     )
   )
 
+(defenum game-vehicles
+  :type uint64
+  :bitfield #t
+  (v-turtle 0)
+  (v-snake 1)
+  (v-scorpion 2)
+  (v-toad 3)
+  (v-fox 4)
+  (v-rhino 5)
+  (v-mirage 6)
+  (v-x-ride 7)
+  )
+
+(defenum game-vehicle-u8
+  :type uint8
+  :bitfield #t
+  :copy-entries game-vehicles
+  )
+
+(defenum game-secrets
+  :type uint64
+  :bitfield #t
+  (hero-mode 0)
+  (scene-player-1 1)
+  (scene-player-2 2)
+  (scene-player-3 3)
+  (title-commentary 4)
+  (level-select-1 5)
+  (level-select-2 6)
+  (level-select-3 7)
+  (scrap-book-1 8)
+  (scrap-book-2 9)
+  (scrap-book-3 10)
+  (model-viewer-1 11)
+  (model-viewer-2 12)
+  (model-viewer-3 13)
+  (toggle-beard 14)
+  (hflip-screen 15)
+  (endless-ammo 16)
+  (invulnerable 17)
+  (endless-dark 18)
+  (endless-light 19)
+  (gs20 20)
+  (gs21 21)
+  (gungame-ratchet 22)
+  (big-head 23)
+  (little-head 24)
+  (fast-movie 25)
+  (slow-movie 26)
+  (unlimited-turbos 27)
+  (vehicle-hit-points 28)
+  (board-fast 29)
+  (vehicle-fox 30)
+  (vehicle-mirage 31)
+  (vehicle-x-ride 32)
+  (kleever-diaper 33)
+  (bad-weather 34)
+  (fast-weather 35)
+  (daxter-pants 36)
+  (darkjak-tracking 37)
+  (jak-is-jak2 38)
+  (statistics 39)
+  (button-invis 40)
+  (gun-dark-4 41)
+  (gun-upgrade-red-1 42)
+  (gun-upgrade-red-2 43)
+  (gun-upgrade-red-3 44)
+  (gun-upgrade-yellow-1 45)
+  (gun-upgrade-yellow-2 46)
+  (gun-upgrade-yellow-3 47)
+  (gun-upgrade-blue-1 48)
+  (gun-upgrade-blue-2 49)
+  (gun-upgrade-blue-3 50)
+  (gun-upgrade-dark-1 51)
+  (gun-upgrade-dark-2 52)
+  (gun-upgrade-dark-3 53)
+  (gun-upgrade-ammo-red 54)
+  (gun-upgrade-ammo-yellow 55)
+  (gun-upgrade-ammo-blue 56)
+  (gun-upgrade-ammo-dark 57)
+  (gs58 58)
+  (gs59 59)
+  (gs60 60)
+  (gs61 61)
+  (gs62 62)
+  (gs63 63)
+  )
+
+(defenum game-score
+  :type uint64
+  (none)
+  (gs0)
+  (gs1)
+  (gs2)
+  (gs3)
+  (gs4)
+  (gs5)
+  (gs6)
+  (gs7)
+  (gs8)
+  (gs9)
+  (gs10)
+  (gs11)
+  (gs12)
+  (gs13)
+  (gs14)
+  (gs15)
+  (gs16)
+  (gs17)
+  (gs18)
+  (gs19)
+  (gs20)
+  )
+
+(defenum game-feature
+  :type uint64
+  :bitfield #t
+  (feature0 0)
+  (feature1 1)
+  (feature2 2)
+  (feature3 3)
+  (feature4 4)
+  (gun 5)
+  (gun-red-1 6)
+  (gun-red-2 7)
+  (gun-red-3 8)
+  (gun-yellow-1 9)
+  (gun-yellow-2 10)
+  (gun-yellow-3 11)
+  (gun-blue-1 12)
+  (gun-blue-2 13)
+  (gun-blue-3 14)
+  (gun-dark-1 15)
+  (gun-dark-2 16)
+  (gun-dark-3 17)
+  (board 18)
+  (feature19 19)
+  (sidekick 20)
+  (feature21 21)
+  (feature22 22)
+  (gun-upgrade-yellow-ammo-1 23)
+  (gun-upgrade-yellow-ammo-2 24)
+  (gun-upgrade-red-ammo-1 25)
+  (gun-upgrade-red-ammo-2 26)
+  (gun-upgrade-blue-ammo-1 27)
+  (gun-upgrade-blue-ammo-2 28)
+  (gun-upgrade-dark-ammo-1 29)
+  (gun-upgrade-dark-ammo-2 30)
+  (feature31 31)
+  (feature32 32)
+  (feature33 33)
+  (feature34 34)
+  (feature35 35)
+  (feature36 36)
+  (board-launch 37)
+  (board-trail 38)
+  (board-zap 39)
+  (darkjak 40)
+  (darkjak-smack 41)
+  (darkjak-bomb0 42)
+  (darkjak-bomb1 43)
+  (darkjak-tracking 44)
+  (darkjak-invinc 45)
+  (lightjak 46)
+  (lightjak-regen 47)
+  (lightjak-swoop 48)
+  (lightjak-freeze 49)
+  (lightjak-shield 50)
+  (artifact-invis 51)
+  (armor0 52)
+  (armor1 53)
+  (armor2 54)
+  (armor3 55)
+  (jakc 56)
+  (lighteco 57)
+  (darkeco 58)
+  (feature59 59)
+  (feature60 60)
+  (feature61 61)
+  (feature62 62)
+  (feature63 63)
+  )
+
   
 
 
@@ -13014,6 +13197,14 @@
   (grand-prix 17)
   (boss-battle 18)
   (score-lower-is-better 19)
+  )
+
+(defenum game-task-flags
+  :bitfield #t
+  :type uint8
+  (gatflag-00)
+  (gatflag-01)
+  (gatflag-02)
   )
 ;; ---game-task-h:game-task-node-flag
 
@@ -31037,6 +31228,46 @@
     )
   )
 
+(defenum focus-status
+  :type uint64
+  :bitfield #t
+  (disable 0) ;; if set, all collide checks fail
+  (dead 1)    ;; if set, all collide checks fail
+  (ignore 2)
+  (inactive 3)
+  (dangerous 4)
+  (in-air 5)
+  (hit 6)
+  (grabbed 7)
+  (in-head 8)
+  (touch-water 9)
+  (on-water 10)
+  (under-water 11)
+  (edge-grab 12)
+  (pole 13)
+  (pilot-riding 14)
+  (flut 15)
+  (tube 16)
+  (light 17)
+  (board 18)
+  (gun 19)
+  (pilot 20) ;; also racer?
+  (mech 21)
+  (dark 22)
+  (rail 23)
+  (halfpipe 24)
+  (carry 25)
+  (super 26)
+  (shooting 27)
+  (indax 28)
+  (arrestable 29)
+  (teleporting 30)
+  (invulnerable 31)
+  (turret 32)
+  (no-gravity 33)
+  (gun-no-target 34)
+  )
+
 (deftype collide-list-item (structure)
   ((mesh instance-tie  :offset-assert 0) ;; guessed by decompiler
    (inst basic         :offset-assert 4)
@@ -34302,6 +34533,13 @@
     )
   )
 
+(defenum guard-type
+  :type uint8
+  (tazer 0)
+  (rifle 1)
+  (grenade 2)
+  )
+
 (deftype nav-location (structure)
   ((nav-mesh basic     :offset-assert 0)
    (nav-poly nav-poly  :offset-assert 4)
@@ -36927,7 +37165,7 @@
 ;; sparticle-launcher is already defined!
 
 (define-extern *part-id-table* (array sparticle-launcher)) ;; (array sparticle-launcher)
-(define-extern *part-group-id-table* object) ;; (array sparticle-launch-group)
+(define-extern *part-group-id-table* (array sparticle-launch-group)) ;; (array sparticle-launch-group)
 (define-extern *launch-control-table* object)
 (define-extern *sp-temp* float) ;; float
 (define-extern count-launch-controls-in-table (function none))
@@ -39379,6 +39617,15 @@
   (:methods
     (allocate! "Allocate memory for points." (_type_ int symbol symbol) int) ;; 10
     )
+  )
+
+(defenum fma-sphere-mode
+  :type uint32
+  :bitfield #t
+  (nav 0)
+  (kill-once 1)
+  (danger 2)
+  (deadly-overlap 3)
   )
 
 (define-extern rgbaf-lerp! "Lerp all four components of rgba." (function rgbaf rgbaf rgbaf float rgbaf))
@@ -53349,7 +53596,7 @@
 (define-extern *ocean-trans-indices-atoll* ocean-trans-indices)
 (define-extern *ocean-mid-indices-atoll* ocean-mid-indices)
 (define-extern *ocean-mid-masks-atoll* ocean-mid-masks)
-(define-extern *ocean-map-atoll* object)
+(define-extern *ocean-map-atoll* ocean-map)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; atoll-effects                  ;;
@@ -59904,6 +60151,43 @@
   (ammo-light-random 48)
   (ammo-dark-light-random 49)
   (light-random 50)
+  )
+
+(defenum game-items
+  :type uint64
+  :bitfield #t
+  (amulet0 0)
+  (amulet1 1)
+  (amulet2 2)
+  (pass-front-gate 3)
+  (seal-of-mar 4)
+  (cypher-gliph 5)
+  (artifact-holocube 6)
+  (artifact-av-reflector 7)
+  (artifact-av-prism 8)
+  (artifact-av-generator 9)
+  (artifact-av-map 10)
+  (light-eco-crystal0 11)
+  (light-eco-crystal1 12)
+  (light-eco-crystal2 13)
+  (light-eco-crystal3 14)
+  (dark-eco-crystal0 15)
+  (dark-eco-crystal1 16)
+  (dark-eco-crystal2 17)
+  (dark-eco-crystal3 18)
+  (item19 19)
+  (item20 20)
+  (item21 21)
+  (item22 22)
+  (item23 23)
+  (item24 24)
+  (item25 25)
+  (item26 26)
+  (item27 27)
+  (item28 28)
+  (item29 29)
+  (item30 30)
+  (item31 31)
   )
 
 (define-extern birth-pickup-at-point (function vector pickup-type float symbol process-tree fact-info (pointer process) :behavior process)) ;; R-4: re-applied P9 sig (enum ported above)
