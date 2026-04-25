@@ -19257,7 +19257,7 @@
   (:methods
     (camera-facing-quad-method-10 (_type_) none) ;; 10
     (camera-facing-quad-method-11 (_type_) none) ;; 11
-    (camera-facing-quad-method-12 (_type_) none) ;; 12
+    (camera-facing-quad-method-12 (_type_ prim-strip vector rgba float float) none) ;; 12
     (camera-facing-quad-method-13 (_type_) none) ;; 13
     )
   )
