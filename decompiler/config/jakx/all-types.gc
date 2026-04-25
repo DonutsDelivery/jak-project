@@ -19538,7 +19538,7 @@
     (want-sound-banks (_type_ (pointer symbol)) none) ;; 12
     (want-display-level (_type_ symbol symbol) int) ;; 13
     (load-state-method-14 (_type_ symbol) int) ;; 14
-    (load-state-method-15 (_type_ symbol symbol) int) ;; 15
+    (load-state-method-15 (_type_ symbol) none) ;; 15
     (load-state-method-16 (_type_ symbol symbol) int) ;; 16
     (load-state-method-17 (_type_ float) int) ;; 17
     (load-state-method-18 (_type_ pair) int) ;; 18
