@@ -814,6 +814,26 @@
       25,
       "v1",
       "dma-tag"
+    ],
+    [
+      "_stack_",
+      16,
+      "uint"
+    ],
+    [
+      "_stack_",
+      32,
+      "dma-packet"
+    ],
+    [
+      "_stack_",
+      64,
+      "dma-packet"
+    ],
+    [
+      "_stack_",
+      80,
+      "dma-packet"
     ]
   ],
   "(method 3 connection-minimap)": [
