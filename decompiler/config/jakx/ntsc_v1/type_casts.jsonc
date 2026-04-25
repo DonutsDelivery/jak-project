@@ -42165,5 +42165,37 @@
     [252, "a0", "(array sparticle-launch-group)"],
     [338, "a0", "(array sparticle-launch-group)"],
     [430, "a0", "(array sparticle-launch-group)"]
+  ],
+  // Sampler MMIO writes to EE Timer 0 (#x10000000) — jak3-canonical casts ported verbatim.
+  "(top-level-login sampler)": [
+    [14, "v1", "timer-bank"]
+  ],
+  "sampler-start": [
+    [1, "v1", "timer-bank"],
+    [3, "v1", "timer-bank"],
+    [6, "a0", "timer-bank"],
+    [24, "a0", "timer-bank"]
+  ],
+  "sampler-stop": [
+    [1, "v1", "timer-bank"],
+    [12, "v1", "timer-bank"]
+  ],
+  // Sound RPC writes — get-sound-buffer-entry returns pointer; each caller
+  // writes its specific sound-rpc-* sub-type. Field offsets verified against
+  // jakx all-types.gc deftypes.
+  "sound-stop": [
+    [8, "v1", "sound-rpc-stop-sound"]
+  ],
+  "sound-set-globals": [
+    [4, "gp", "sound-rpc-set-globals"],
+    [12, "gp", "sound-rpc-set-globals"],
+    [13, "gp", "sound-rpc-set-globals"],
+    [33, "gp", "sound-rpc-set-globals"]
+  ],
+  "sound-instance-play": [
+    [9, "s5", "sound-rpc-play"],
+    [11, "s5", "sound-rpc-play"],
+    [14, "s5", "sound-rpc-play"],
+    [34, "s5", "sound-rpc-play"]
   ]
 }
