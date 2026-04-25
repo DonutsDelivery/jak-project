@@ -38471,7 +38471,7 @@
     (set-action! (_type_ gui-action sound-id gui-channel gui-action string (function gui-connection symbol) process) int) ;; 16
     (gui-control-method-17 (_type_ sound-id) int) ;; 17
     (gui-control-method-18 (_type_ gui-channel) symbol) ;; 18
-    (gui-control-method-19 (_type_ gui-channel gui-connection) symbol) ;; 19
+    (handle-command-list (_type_ gui-channel gui-connection) symbol) ;; 19
     (gui-control-method-20 (_type_ sound-id symbol int int int float) gui-connection) ;; 20
     (gui-control-method-21 (_type_ gui-connection) none) ;; 21
     (gui-control-method-22 (_type_ gui-connection vector) none) ;; 22
