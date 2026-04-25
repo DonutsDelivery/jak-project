@@ -35785,7 +35785,7 @@
     (nav-state-method-45 (_type_ vector) none) ;; 45
     (nav-state-method-46 (_type_ vector) int) ;; 46 ;; set-heading!
     (nav-state-method-47 (_type_ meters) none) ;; 47 ;; set-speed!
-    (nav-state-method-48 (_type_ nav-control) int) ;; 48 ;; reset!
+    (nav-state-method-48 (_type_ float) none) ;; 48
     (nav-state-method-49 (_type_) int) ;; 49
     (nav-state-method-50 (_type_ object) none) ;; 50 ;; navigate-using-best-dir-use-existing-avoid-spheres (nav-avoid-spheres-params)
     (nav-state-method-51 (_type_) none) ;; 51
