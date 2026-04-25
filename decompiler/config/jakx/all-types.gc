@@ -46741,8 +46741,8 @@
   :size-assert         #x38
   :flag-assert         #xb00000038
   (:methods
-    (net-player-respawn-info-method-9 (_type_) none) ;; 9
-    (net-player-respawn-info-method-10 (_type_) none) ;; 10
+    (net-player-respawn-info-method-9 (_type_ object) none) ;; 9
+    (net-player-respawn-info-method-10 (_type_ object) none) ;; 10
     )
   )
 
@@ -46797,23 +46797,23 @@
     die ;; 44
     )
   (:methods
-    (net-player-method-45 (_type_) symbol) ;; 45
-    (net-player-method-46 (_type_) none) ;; 46
-    (net-player-method-47 (_type_) int) ;; 47
+    (net-player-method-45 (_type_ object object object object) symbol) ;; 45
+    (net-player-method-46 (_type_ object) none) ;; 46
+    (net-player-method-47 (_type_ object) int) ;; 47
     (net-player-method-48 (_type_) none) ;; 48
     (net-player-method-49 (_type_) none) ;; 49
-    (net-player-method-50 (_type_) symbol) ;; 50
-    (net-player-method-51 (_type_) none) ;; 51
+    (net-player-method-50 (_type_ object) symbol) ;; 50
+    (net-player-method-51 (_type_ object) none) ;; 51
     (net-player-method-52 (_type_) object) ;; 52
     (net-player-method-53 (_type_) symbol) ;; 53
-    (net-player-method-54 (_type_) none) ;; 54
+    (net-player-method-54 (_type_ object) none) ;; 54
     (net-player-method-55 (_type_) none) ;; 55
-    (net-player-method-56 (_type_) none) ;; 56
-    (net-player-method-57 (_type_) symbol) ;; 57
-    (net-player-method-58 (_type_) none) ;; 58
-    (net-player-method-59 (_type_) int) ;; 59
-    (net-player-method-60 (_type_) none) ;; 60
-    (net-player-method-61 (_type_) none) ;; 61
+    (net-player-method-56 (_type_ object) none) ;; 56
+    (net-player-method-57 (_type_ object object object object) symbol) ;; 57
+    (net-player-method-58 (_type_ object object object object object) none) ;; 58
+    (net-player-method-59 (_type_ object) int) ;; 59
+    (net-player-method-60 (_type_ object) none) ;; 60
+    (net-player-method-61 (_type_ object) none) ;; 61
     (net-player-method-62 (_type_) none) ;; 62
     (net-player-method-63 (_type_) none) ;; 63
     (net-player-method-64 (_type_) none) ;; 64
@@ -46829,11 +46829,11 @@
     (net-player-method-74 (_type_) symbol) ;; 74
     (net-player-method-75 (_type_) none) ;; 75
     (net-player-method-76 (_type_) symbol) ;; 76
-    (net-player-method-77 (_type_) none) ;; 77
-    (net-player-method-78 (_type_) none) ;; 78
+    (net-player-method-77 (_type_ object object) none) ;; 77
+    (net-player-method-78 (_type_ object) none) ;; 78
     (net-player-method-79 (_type_) int) ;; 79
-    (net-player-method-80 (_type_) none) ;; 80
-    (net-player-method-81 (_type_) none) ;; 81
+    (net-player-method-80 (_type_ object) none) ;; 80
+    (net-player-method-81 (_type_ object) none) ;; 81
     (net-player-method-82 (_type_) none) ;; 82
     (net-player-method-83 (_type_) int) ;; 83
     (net-player-method-84 (_type_) none) ;; 84
@@ -46841,7 +46841,7 @@
     (net-player-method-86 (_type_) none) ;; 86
     (net-player-method-87 (_type_) int) ;; 87
     (net-player-method-88 (_type_) none) ;; 88
-    (net-player-method-89 (_type_) none) ;; 89
+    (net-player-method-89 (_type_ object) none) ;; 89
     (net-player-method-90 (_type_) none) ;; 90
     (net-player-method-91 (_type_) symbol) ;; 91
     (net-player-method-92 (_type_) int) ;; 92
@@ -46849,7 +46849,7 @@
     (net-player-method-94 (_type_) none) ;; 94
     (net-player-method-95 (_type_) none) ;; 95
     (net-player-method-96 (_type_) int) ;; 96
-    (net-player-method-97 (_type_) none) ;; 97
+    (net-player-method-97 (_type_ object) none) ;; 97
     )
   )
 
@@ -51051,10 +51051,10 @@
 (define-extern playback-cam (function none))
 (define-extern all-players-spawned-vehicles? (function none))
 (define-extern local-human-player-above-height? (function none))
-(define-extern find-ground-info (function none))
+(define-extern find-ground-info (function object object object object object none))
 (define-extern get-player-pos (function int vector))
-(define-extern vehicle-rev-manager-init-by-other (function none))
-(define-extern vehicle-rev-manager-spawn (function process))
+(define-extern vehicle-rev-manager-init-by-other (function object object none))
+(define-extern vehicle-rev-manager-spawn (function object object process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-util                       ;;
