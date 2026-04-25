@@ -415,14 +415,32 @@ void Env::set_types(const std::vector<TypeState>& block_init_types,
     }
   }
 
+  // In release builds ASSERT is a no-op, so check explicitly.
+  // Two failure modes must be caught here:
+  //  (a) op_end_types is empty (types2 completely failed / recovery failed): m_op_init_types
+  //      has size 0 so the loop would vacuously succeed and incorrectly set m_has_types.
+  //  (b) Some entries remain nullptr (types2 converged some blocks but not all): those
+  //      would null-deref in get_types_before_op() → SIGSEGV in Release builds.
+  // Guard: require non-empty AND all entries non-null.
+  bool all_types_valid = !m_op_init_types.empty();
   for (auto x : m_op_init_types) {
-    ASSERT(x);
+    if (!x) {
+      all_types_valid = false;
+      break;
+    }
   }
 
-  m_has_types = true;
+  if (all_types_valid) {
+    m_has_types = true;
+  } else {
+    // Wipe the partial state so downstream passes don't accidentally read stale entries.
+    m_op_init_types.clear();
+    m_op_end_types.clear();
+    m_block_init_types.clear();
+  }
 
-  // check the actual return type:
-  if (my_type.last_arg() != TypeSpec("none")) {
+  // check the actual return type (only safe when type data is fully populated):
+  if (m_has_types && my_type.last_arg() != TypeSpec("none")) {
     auto as_end = dynamic_cast<const FunctionEndOp*>(atomic_ops.ops.back().get());
     if (as_end) {
       m_type_analysis_return_type = get_types_before_op((int)atomic_ops.ops.size() - 1)

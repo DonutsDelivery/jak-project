@@ -802,6 +802,11 @@ void ObjectFileDB::ir2_build_expressions(int seg, const Config& config, ObjectFi
                                  dts)) {
         func.ir2.print_debug_forms = true;
         func.ir2.expressions_succeeded = true;
+      } else {
+        // Expression building failed (exception thrown mid-form-tree modification).
+        // Null out top_form so ir2_rewrite_inline_asm_instructions doesn't walk the
+        // partially-modified (and potentially corrupted) form tree → SIGSEGV.
+        func.ir2.top_form = nullptr;
       }
     }
   });
@@ -843,9 +848,18 @@ void ObjectFileDB::ir2_add_store_errors(int seg, ObjectFileData& data) {
 void ObjectFileDB::ir2_rewrite_inline_asm_instructions(int seg, ObjectFileData& data) {
   for_each_function_in_seg_in_obj(seg, data, [&](Function& func) {
     (void)data;
-    if (func.ir2.top_form && func.ir2.env.has_type_analysis()) {
-      if (rewrite_inline_asm_instructions(func.ir2.top_form, *func.ir2.form_pool, func, dts)) {
-        func.ir2.print_debug_forms = true;
+    // Skip if no form tree or if type analysis produced partial/null type pointers.
+    // types_succeeded guards against the case where top_form exists but the form
+    // elements contain stale type references that cause null-deref SIGSEGV.
+    if (func.ir2.top_form && func.ir2.env.has_type_analysis() &&
+        func.ir2.env.types_succeeded) {
+      try {
+        if (rewrite_inline_asm_instructions(func.ir2.top_form, *func.ir2.form_pool, func, dts)) {
+          func.ir2.print_debug_forms = true;
+        }
+      } catch (const std::exception& e) {
+        func.warnings.error("rewrite_inline_asm_instructions failed: {}", e.what());
+        func.ir2.top_form = nullptr;
       }
     }
   });
