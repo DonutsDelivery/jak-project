@@ -37040,8 +37040,8 @@
   ;; field out uses ~A with a signed load.
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type uint) _type_)
-    (history-iterator-method-9 (_type_ history-elt) none) ;; 9 ;; (frame-counter-delta (_type_ history-elt) time-frame)
-    (history-iterator-method-10 (_type_) none) ;; 10 ;; (update-entries! (_type_) history-elt)
+    (history-iterator-method-9 (_type_ history-elt) time-frame) ;; 9 ;; (frame-counter-delta (_type_ history-elt) time-frame)
+    (history-iterator-method-10 (_type_) history-elt) ;; 10 ;; (update-entries! (_type_) history-elt)
     (history-iterator-method-11 (_type_ history-elt) float) ;; 11 ;; (get-age (_type_ history-elt) float)
     )
   )
@@ -37059,7 +37059,7 @@
   :flag-assert         #xb00000010
   (:methods
     (new (symbol type) _type_) ;; 0
-    (history-method-9 (_type_) none) ;; 9
+    (history-method-9 (_type_) history-elt) ;; 9
     (history-method-10 (_type_) none) ;; 10
     )
   )
