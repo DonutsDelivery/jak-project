@@ -8233,7 +8233,7 @@
   (:methods
     (postprocess-data! "Create the collapsed summary of the collected data." (_type_) int) ;; 9
     (draw-bars! "Generate DMA data for drawing the profile bars." (_type_ dma-buffer int) int) ;; 10
-    (draw-text! "Generate DMA data for drawing the profile information screen." (_type_) int) ;; 11
+    (draw-text! (_type_) none) ;; 11
     )
   )
 
