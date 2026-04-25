@@ -51284,7 +51284,7 @@
     (udp-layer-method-14 (_type_) none) ;; 14
     (udp-layer-method-15 (_type_) none) ;; 15
     (udp-layer-method-16 (_type_) none) ;; 16
-    (udp-layer-method-17 (_type_) none) ;; 17
+    (udp-layer-method-17 (_type_ int) int) ;; 17
     (udp-layer-method-18 (_type_) none) ;; 18
     (udp-layer-method-19 (_type_) none) ;; 19
     )
