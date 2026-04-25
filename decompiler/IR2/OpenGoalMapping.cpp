@@ -73,10 +73,21 @@ const std::map<InstructionKind, OpenGOALAsm::Function> MIPS_ASM_TO_OPEN_GOAL_FUN
     // flag these as unsupported.
     {InstructionKind::MULAS, {".mula.s", {}}},
     {InstructionKind::MADDAS, {".madda.s", {}}},
+    {InstructionKind::MADDS, {".madd.s", {}}},
+    {InstructionKind::MSUBS, {".msub.s", {}}},
+    {InstructionKind::MSUBAS, {".msuba.s", {}}},
 
     // Cache management — `cache dxwbin` is a no-op for the decompiler/runtime
     // (jakx-x86 doesn't have an EE-style data cache to invalidate).
     {InstructionKind::CACHE_DXWBIN, {".cache.dxwbin", {}}},
+
+    // EE MMI parallel-arithmetic ops (already used in jak3 sources via
+    // `.paddb`-style dot-prefix calls; no GOAL macro needed beyond the
+    // existing builtin asm-form support).
+    {InstructionKind::PADDW, {".paddw", {}}},
+    {InstructionKind::PADDH, {".paddh", {}}},
+    {InstructionKind::PXOR, {".pxor", {}}},
+    {InstructionKind::PROT3W, {".prot3w", {}}},
 
     // ---- COP2 -----
     // TODO - VMOVE supports dest, but OpenGOAL does NOT yet!
