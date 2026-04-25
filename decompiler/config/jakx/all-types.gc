@@ -14169,7 +14169,7 @@
 (define-extern *car-level-array* car-level-array)
 (define-extern *car-default-base-color* array)
 (define-extern *car-default-stripe-color* array)
-(define-extern *car-upgrade-info* object)
+(define-extern *car-upgrade-info* (pointer upgrade-info))
 (define-extern *car-part-type-to-text-table* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -16025,7 +16025,7 @@
     (sky-work-method-23 (_type_ sky-vertex cloud-vertex) none) ;; 23
     (sky-work-method-24 (_type_ dma-buffer) none) ;; 24
     (sky-work-method-25 (_type_ vector vector haze-lights float) int) ;; 25
-    (sky-work-method-26 (_type_) none) ;; 26
+    (sky-work-method-26 (_type_ int int uint) none) ;; 26
     (sky-work-method-27 (_type_ sky-vertex sky-vertex haze-vertex) none) ;; 27
     (sky-work-method-28 (_type_ dma-buffer) none) ;; 28
     (sky-work-method-29 (_type_ dma-buffer) none) ;; 29
@@ -19579,10 +19579,10 @@
     (load-state-method-20 (_type_) int) ;; 20
     (load-state-method-21 (_type_) int) ;; 21
     (load-state-method-22 (_type_) none) ;; 22
-    (load-state-method-23 (_type_) symbol) ;; 23
+    (load-state-method-23 (_type_ uint int int) symbol) ;; 23
     (load-state-method-24 (_type_ uint int) none) ;; 24
     (load-state-method-25 (_type_) none) ;; 25
-    (load-state-method-26 (_type_) none) ;; 26
+    (load-state-method-26 (_type_ uint int int) none) ;; 26
     )
   )
 
@@ -27995,7 +27995,7 @@
     (net-mgr-method-53 (_type_) int) ;; 53
     (net-mgr-method-54 (_type_) symbol) ;; 54
     (net-mgr-method-55 (_type_) symbol) ;; 55
-    (net-mgr-method-56 (_type_) symbol) ;; 56
+    (net-mgr-method-56 (_type_ uint int int) symbol) ;; 56
     (net-mgr-method-57 (_type_ int int) none) ;; 57
     (net-mgr-method-58 (_type_) none) ;; 58
     (net-mgr-method-59 (_type_) int) ;; 59
@@ -30742,7 +30742,7 @@
     (net-enemy-method-76 (_type_) none) ;; 76
     (net-enemy-method-77 (_type_) none) ;; 77
     (net-enemy-method-78 (_type_) none) ;; 78
-    (net-enemy-method-79 (_type_) none) ;; 79
+    (net-enemy-method-79 (_type_ int int int) none) ;; 79
     (net-enemy-method-80 (_type_) none) ;; 80
     (net-enemy-method-81 (_type_) none) ;; 81
     (net-enemy-method-82 (_type_) none) ;; 82
@@ -36005,7 +36005,7 @@
     (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
-    (grid-hash-method-15 (_type_) none) ;; 15 ;; dump-grid-info
+    (grid-hash-method-15 (_type_ int int int) none) ;; 15 ;; dump-grid-info
     (grid-hash-method-16 (_type_ rgba) none) ;; 16
     (grid-hash-method-17 (_type_) none) ;; 17
     (grid-hash-method-18 (_type_ grid-hash-box grid-hash-box) none) ;; 18
@@ -37159,7 +37159,7 @@
   :flag-assert         #xb00000010
   (:methods
     (new (symbol type) _type_) ;; 0
-    (history-method-9 (_type_) history-elt) ;; 9
+    (history-method-9 (_type_ uint uint uint) history-elt) ;; 9
     (clear-history-entries! (_type_) none) ;; 10
     )
   )
@@ -39692,7 +39692,7 @@
   :size-assert         #x60
   :flag-assert         #xa00000060
   (:methods
-    (actor-hash-buckets-method-9 (_type_) int) ;; 9
+    (actor-hash-buckets-method-9 (_type_ int int int) int) ;; 9
     )
   )
   
@@ -43428,7 +43428,7 @@
   (:methods
     (mem-manager-method-9 (_type_ uint int) none) ;; 9
     (mem-manager-method-10 (_type_ uint) none) ;; 10
-    (mem-manager-method-11 (_type_) none) ;; 11
+    (mem-manager-method-11 (_type_ uint uint int) none) ;; 11
     (mem-manager-method-12 (_type_ int int) none) ;; 12
     (mem-manager-method-13 (_type_) none) ;; 13
     (mem-manager-method-14 (_type_) none) ;; 14
@@ -43544,11 +43544,11 @@
     (headset-method-24 (_type_) none) ;; 24
     (headset-method-25 (_type_ int) none) ;; 25
     (headset-method-26 (_type_) none) ;; 26
-    (headset-method-27 (_type_) none) ;; 27
+    (headset-method-27 (_type_ int uint int) none) ;; 27
     (headset-method-28 (_type_) none) ;; 28
     (headset-method-29 (_type_ pointer) symbol) ;; 29
     (headset-method-30 (_type_) none) ;; 30
-    (headset-method-31 (_type_) int) ;; 31
+    (headset-method-31 (_type_ uint uint int) int) ;; 31
     (headset-method-32 (_type_) int) ;; 32
     )
   )
@@ -45076,7 +45076,7 @@
   :size-assert         #x38
   :flag-assert         #x1400000038
   (:methods
-    (vehicle-section-method-9 (_type_) none) ;; 9
+    (vehicle-section-method-9 (_type_ int int int) none) ;; 9
     (vehicle-section-method-10 (_type_ uint) none) ;; 10
     (vehicle-section-method-11 (_type_) none) ;; 11
     (vehicle-section-method-12 (_type_) none) ;; 12
@@ -48393,7 +48393,7 @@
     (eco-mgr-method-45 (_type_) none) ;; 45
     (eco-mgr-method-46 (_type_) none) ;; 46
     (eco-mgr-method-47 (_type_) symbol) ;; 47
-    (eco-mgr-method-48 (_type_) none) ;; 48
+    (eco-mgr-method-48 (_type_ int int uint) none) ;; 48
     (eco-mgr-method-49 (_type_ int) int) ;; 49
     (eco-mgr-method-50 (_type_) int) ;; 50
     )
@@ -51809,7 +51809,7 @@
   :size-assert         #x10
   :flag-assert         #xc00000010
   (:methods
-    (helmet-method-9 (_type_) none) ;; 9
+    (helmet-method-9 (_type_ int int int) none) ;; 9
     (helmet-method-10 (_type_ uint int) none) ;; 10
     (helmet-method-11 (_type_ uint) none) ;; 11
     )
