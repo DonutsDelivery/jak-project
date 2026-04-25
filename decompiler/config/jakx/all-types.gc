@@ -30503,7 +30503,7 @@
   :flag-assert         #x3b00700100
   (:methods
     (process-focusable-method-50 (_type_) int) ;; 50
-    (process-focusable-method-51 (_type_) vector) ;; 51
+    (process-focusable-method-51 (_type_ int) vector) ;; 51
     (process-focusable-method-52 (_type_) vector) ;; 52
     (process-focusable-method-53 (_type_) vector) ;; 53
     (process-focusable-method-54 (_type_) int) ;; 54
