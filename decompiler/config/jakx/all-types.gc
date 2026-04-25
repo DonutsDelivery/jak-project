@@ -2239,7 +2239,7 @@
   :size-assert         #x28
   :flag-assert         #x1800000028
   (:methods
-    (hud-item-method-9 (_type_) none) ;; 9
+    (hud-item-method-9 (_type_) symbol) ;; 9
     (hud-item-method-10 (_type_) none) ;; 10
     (hud-item-method-11 (_type_) int) ;; 11
     (hud-item-method-12 (_type_) symbol) ;; 12
@@ -2249,7 +2249,7 @@
     (hud-item-method-16 (_type_) none) ;; 16
     (hud-item-method-17 (_type_) none) ;; 17
     (hud-item-method-18 (_type_) none) ;; 18
-    (hud-item-method-19 (_type_) none) ;; 19
+    (hud-item-method-19 (_type_) symbol) ;; 19
     (hud-item-method-20 (_type_) int) ;; 20
     (hud-item-method-21 (_type_) none) ;; 21
     (hud-item-method-22 (_type_) none) ;; 22
@@ -2784,7 +2784,7 @@
   :size-assert         #x48
   :flag-assert         #x1900000048
   (:methods
-    (hud-results-method-24 (_type_) none) ;; 24
+    (hud-results-method-24 (_type_) symbol) ;; 24
     )
   )
   
@@ -3205,7 +3205,7 @@
   :flag-assert         #xf00000289
   (:methods
     (hud-manager-death-indicator-method-12 (_type_) none) ;; 12
-    (hud-manager-death-indicator-method-13 (_type_) none) ;; 13
+    (hud-manager-death-indicator-method-13 (_type_) symbol) ;; 13
     (hud-manager-death-indicator-method-14 (_type_) none) ;; 14
     )
   )
@@ -3622,8 +3622,8 @@
   :size-assert         #x98
   :flag-assert         #x1a00000098
   (:methods
-    (in-game-menu-hud-method-24 (_type_) none) ;; 24
-    (in-game-menu-hud-method-25 (_type_) none) ;; 25
+    (in-game-menu-hud-method-24 (_type_) symbol) ;; 24
+    (in-game-menu-hud-method-25 (_type_) symbol) ;; 25
     )
   )
 
@@ -18501,7 +18501,7 @@
     (oil-trail-method-13 (_type_) none) ;; 13
     (oil-trail-method-14 (_type_) none) ;; 14
     (oil-trail-method-15 (_type_) none) ;; 15
-    (oil-trail-method-16 (_type_) none) ;; 16
+    (oil-trail-method-16 (_type_) symbol) ;; 16
     )
   )
 
@@ -26922,7 +26922,7 @@
     (mem-buffer-method-43 (_type_) none) ;; 43
     (mem-buffer-method-44 (_type_) int) ;; 44
     (mem-buffer-method-45 (_type_) int) ;; 45
-    (mem-buffer-method-46 (_type_) none) ;; 46
+    (mem-buffer-method-46 (_type_) symbol) ;; 46
     (mem-buffer-method-47 (_type_) none) ;; 47
     (mem-buffer-method-48 (_type_) none) ;; 48
     (mem-buffer-method-49 (_type_) int) ;; 49
@@ -27087,8 +27087,8 @@
     (net-mgr-method-51 (_type_) none) ;; 51
     (net-mgr-method-52 (_type_) none) ;; 52
     (net-mgr-method-53 (_type_) int) ;; 53
-    (net-mgr-method-54 (_type_) none) ;; 54
-    (net-mgr-method-55 (_type_) none) ;; 55
+    (net-mgr-method-54 (_type_) symbol) ;; 54
+    (net-mgr-method-55 (_type_) symbol) ;; 55
     (net-mgr-method-56 (_type_) none) ;; 56
     (net-mgr-method-57 (_type_) none) ;; 57
     (net-mgr-method-58 (_type_) none) ;; 58
@@ -27240,9 +27240,9 @@
     (process-nettable-method-20 (_type_) none) ;; 20
     (process-nettable-method-21 (_type_) none) ;; 21
     (process-nettable-method-22 (_type_) none) ;; 22
-    (process-nettable-method-23 (_type_) none) ;; 23
-    (process-nettable-method-24 (_type_) none) ;; 24
-    (process-nettable-method-25 (_type_) none) ;; 25
+    (process-nettable-method-23 (_type_) symbol) ;; 23
+    (process-nettable-method-24 (_type_) symbol) ;; 24
+    (process-nettable-method-25 (_type_) symbol) ;; 25
     (process-nettable-method-26 (_type_) none) ;; 26
     (process-nettable-method-27 (_type_) none) ;; 27
     (process-nettable-method-28 (_type_) int) ;; 28
@@ -28953,7 +28953,7 @@
   (:methods
     (part-spawner-method-14 (_type_) _type_ :state) ;; 14
     (part-spawner-method-15 (_type_) symbol) ;; 15
-    (part-spawner-method-16 (_type_) none) ;; 16
+    (part-spawner-method-16 (_type_) symbol) ;; 16
     )
   )
 
@@ -43879,7 +43879,7 @@
   :size-assert         #x20
   :flag-assert         #x1500000020
   (:methods
-    (race-mesh-method-9 (_type_ int int rgba rgba) none)
+    (race-mesh-method-9 (_type_ int int rgba rgba) symbol)
     (race-mesh-method-10 (_type_ int int) symbol)
     (race-mesh-method-11 (_type_ int) none)
     (race-mesh-method-12 (_type_) none)
@@ -43947,7 +43947,7 @@
     (vehicle-weapon-slot-method-54 (_type_) none) ;; 54
     (vehicle-weapon-slot-method-55 (_type_) none) ;; 55
     (vehicle-weapon-slot-method-56 (_type_) none) ;; 56
-    (vehicle-weapon-slot-method-57 (_type_) none) ;; 57
+    (vehicle-weapon-slot-method-57 (_type_) symbol) ;; 57
     (vehicle-weapon-slot-method-58 (_type_) none) ;; 58
     (vehicle-weapon-slot-method-59 (_type_) none) ;; 59
     )
@@ -46367,7 +46367,7 @@
   :flag-assert         #x4b01b00231
   (:methods
     (net-projectile-method-72 (_type_) none)
-    (net-projectile-method-73 (_type_) none)
+    (net-projectile-method-73 (_type_) symbol)
     (net-projectile-method-74 (_type_) none)
     )
   )
@@ -46694,7 +46694,7 @@
     (base-menu-method-61 (_type_) symbol) ;; 61
     (base-menu-method-62 (_type_) int) ;; 62
     (base-menu-method-63 (_type_) none) ;; 63
-    (base-menu-method-64 (_type_) none) ;; 64
+    (base-menu-method-64 (_type_) symbol) ;; 64
     )
   )
   
@@ -48470,7 +48470,7 @@
   :size-assert         #xa0
   :flag-assert         #xa000000a0
   (:methods
-    (ghost-file-method-9 (_type_) none) ;; 9
+    (ghost-file-method-9 (_type_) symbol) ;; 9
     )
   )
 
@@ -50505,7 +50505,7 @@
     (crash-camera-method-12 (_type_) none) ;; 12
     (crash-camera-method-13 (_type_) none) ;; 13
     (crash-camera-method-14 (_type_) none) ;; 14
-    (crash-camera-method-15 (_type_) none) ;; 15
+    (crash-camera-method-15 (_type_) symbol) ;; 15
     (crash-camera-method-16 (_type_) none) ;; 16
     (crash-camera-method-17 (_type_) none) ;; 17
     (crash-camera-method-18 (_type_) none) ;; 18
@@ -51368,8 +51368,8 @@
   :flag-assert         #xd00000030
   (:methods
     (new (symbol type) _type_) ;; 0
-    (editable-region-method-9 (_type_ editable-array int int) none) ;; 9
-    (editable-region-method-10 (_type_ int) none) ;; 10
+    (editable-region-method-9 (_type_ editable-array int int) symbol) ;; 9
+    (editable-region-method-10 (_type_ int) symbol) ;; 10
     (editable-region-method-11 (_type_ vector int) none) ;; 11
     (editable-region-method-12 (_type_) none) ;; 12
     )
@@ -51745,7 +51745,7 @@
   :size-assert         #x4c
   :flag-assert         #xa0000004c
   (:methods
-    (mysql-nav-edge-method-9 (_type_) none) ;; 9
+    (mysql-nav-edge-method-9 (_type_) symbol) ;; 9
     )
   )
 
@@ -51817,7 +51817,7 @@
   :size-assert         #x1c
   :flag-assert         #xa0000001c
   (:methods
-    (mysql-nav-visnode-method-9 (_type_) none) ;; 9
+    (mysql-nav-visnode-method-9 (_type_) symbol) ;; 9
     )
   )
   
@@ -52238,8 +52238,8 @@
     (nav-mesh-editor-method-53 (_type_) int) ;; 53
     (nav-mesh-editor-method-54 (_type_) none) ;; 54
     (nav-mesh-editor-method-55 (_type_) symbol) ;; 55
-    (nav-mesh-editor-method-56 (_type_) none) ;; 56
-    (nav-mesh-editor-method-57 (_type_) none) ;; 57
+    (nav-mesh-editor-method-56 (_type_) symbol) ;; 56
+    (nav-mesh-editor-method-57 (_type_) symbol) ;; 57
     )
   )
   
