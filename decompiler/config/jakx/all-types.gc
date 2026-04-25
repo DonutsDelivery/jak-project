@@ -31818,8 +31818,8 @@
   :flag-assert         #x900000078
   )
 
-(define-extern inspect-bsp-tree "Attempt to print a bsp-tree, but it is actually broken since the jak 2 bsp format change" (function bsp-header bsp-node none))
-(define-extern map-bsp-tree "Attempt to call a function on all bsp-tree nodes, but it is actually broken since the jak 2 bsp format" (function (function bsp-node none) bsp-header bsp-node none))
+(define-extern inspect-bsp-tree "Attempt to print a bsp-tree, but it is actually broken since the jak 2 bsp format change" (function bsp-header bsp-node bsp-header))
+(define-extern map-bsp-tree "Attempt to call a function on all bsp-tree nodes, but it is actually broken since the jak 2 bsp format" (function (function bsp-node none) bsp-header bsp-node bsp-header))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; collide-cache-h                ;;
