@@ -29029,7 +29029,7 @@
   (:methods
     (abort? (_type_) symbol) ;; 55
     (target-grabbed? (_type_) symbol) ;; 56
-    (set-stack-size! (_type_) int) ;; 57
+    (set-stack-size! (_type_) none) ;; 57
     (pov-camera-method-58 (_type_) int) ;; 58
     (target-released? (_type_) symbol) ;; 59
     )
