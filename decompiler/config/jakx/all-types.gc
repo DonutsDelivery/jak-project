@@ -47332,7 +47332,7 @@
     (net-game-mgr-method-59 (_type_) int) ;; 59
     (net-game-mgr-method-60 (_type_) none) ;; 60
     (net-game-mgr-method-61 (_type_) none) ;; 61
-    (net-game-mgr-method-62 (_type_ object) symbol) ;; 62
+    (net-game-mgr-method-62 (engine) connectable) ;; 62
     (net-game-mgr-method-63 (_type_) int) ;; 63
     (net-game-mgr-method-64 (_type_) int) ;; 64
     (net-game-mgr-method-65 (_type_ object) string) ;; 65
