@@ -41227,7 +41227,7 @@
     (should-end? (_type_ process-focusable) symbol) ;; 18
     (should-draw? (_type_) symbol) ;; 19
     (add-crumb! (_type_ vector) none) ;; 20
-    (get-tracked-object-pos (_type_ process-focusable vector) vector) ;; 21
+    (get-tracked-object-pos (_type_ vector) none) ;; 21
     )
   )
   
