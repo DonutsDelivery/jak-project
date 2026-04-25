@@ -30737,7 +30737,7 @@
        check that the [[collide-spec]] of the focus and the process match."
       (_type_ process-focusable) object) ;; 10
     (reset-to-collide-spec "Reset this focus with the given [[collide-spec]]." (_type_ collide-spec) int) ;; 11
-    (try-update-focus "Try to set the `handle` of this focus to the given process." (_type_ process-focusable) symbol) ;; 12
+    (try-update-focus (_type_ process-focusable) symbol) ;; 12
     )
   )
 
