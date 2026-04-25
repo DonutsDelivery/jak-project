@@ -19542,7 +19542,7 @@
     (load-state-method-16 (_type_ symbol symbol) int) ;; 16
     (load-state-method-17 (_type_ float) int) ;; 17
     (load-state-method-18 (_type_ pair) int) ;; 18
-    (load-state-method-19 (_type_) int) ;; 19
+    (load-state-method-19 (_type_ pair) int) ;; 19
     (load-state-method-20 (_type_) int) ;; 20
     (load-state-method-21 (_type_) int) ;; 21
     (load-state-method-22 (_type_) none) ;; 22
