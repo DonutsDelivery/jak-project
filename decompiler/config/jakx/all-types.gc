@@ -4701,25 +4701,25 @@
 (define-extern *curve-grenade-linear-toad-trail* curve2d-fast) ;; curve2d-fast
 (define-extern *grenade-1-trail* object)
 (define-extern *trail-color-curve-grenade-purple* curve-color-fast)
-(define-extern *grenade-2-trail* object)
+(define-extern *grenade-2-trail* light-trail-composition)
 (define-extern *curve-yellow-tracker-linear-up-red* object)
 (define-extern *trail-color-curve-yellow-tracker-grenade* curve-color-fast)
 (define-extern *trail-color-curve-red-mine* curve-color-fast)
 (define-extern *curve-yellow-tracker-linear-trail* curve2d-fast)
-(define-extern *yellow-tracking-rocket-trail* object)
+(define-extern *yellow-tracking-rocket-trail* light-trail-composition)
 (define-extern *curve-missile-linear-up* curve2d-fast)
 (define-extern *trail-color-curve-car-missile* curve-color-fast)
 (define-extern *trail-color-curve-car-missile-II* curve-color-fast)
 (define-extern *curve-missile-trail-width* curve2d-fast)
-(define-extern *car-missile-trail* object)
-(define-extern *car-missile-trail-II* object)
+(define-extern *car-missile-trail* light-trail-composition)
+(define-extern *car-missile-trail-II* light-trail-composition)
 (define-extern *trail-color-curve-success-seeker* curve-color-fast)
-(define-extern *success-seeker-trail* object)
+(define-extern *success-seeker-trail* light-trail-composition)
 (define-extern *curve-mine-width* object)
 (define-extern *trail-color-purple-mine* curve-color-fast)
 (define-extern *trail-color-red-mine* curve-color-fast)
-(define-extern *mine-trail-red* object)
-(define-extern *mine-trail-purple* object)
+(define-extern *mine-trail-red* light-trail-composition)
+(define-extern *mine-trail-purple* light-trail-composition)
 (define-extern shield-flash-part-callback (function none))
 (define-extern *weapon-drone-glow-template* object)
 (define-extern *weapon-drone-visor-template* object)
@@ -48435,14 +48435,18 @@
   (:methods
     (base-menu-method-50 (_type_) none) ;; 50
     (base-menu-method-51 (_type_) none) ;; 51
-    (base-menu-method-52 (_type_) none) ;; 52
+    )
+  (:state-methods
+    running ;; 52
+    )
+  (:methods
     (base-menu-method-53 (_type_) none) ;; 53
     (base-menu-method-54 (_type_) none) ;; 54
     (base-menu-method-55 (_type_) none) ;; 55
     (base-menu-method-56 (_type_) none) ;; 56
     (base-menu-method-57 (_type_) none) ;; 57
     (base-menu-method-58 (_type_) none) ;; 58
-    (base-menu-method-59 (_type_) int) ;; 59
+    (base-menu-method-59 (_type_) sound-id) ;; 59
     (base-menu-method-60 (_type_) int) ;; 60
     (base-menu-method-61 (_type_) symbol) ;; 61
     (base-menu-method-62 (_type_) int) ;; 62
@@ -62712,6 +62716,88 @@
    (enemy-type               traffic-type  :offset-assert 4)
    (toggle-shield-percentage float  :offset-assert 8)
    (heat-shield-percentage   float  :offset-assert 12)
+   )
+  :method-count-assert 9
+  :size-assert         #x10
+  :flag-assert         #x900000010
+  )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Lane SM batch 2 — activated deftypes (jak3 → jakx)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; from jak3 all-types.gc L50024
+(deftype mh-squad-member-settings (structure)
+  ((object-type              traffic-type  :offset-assert 0)
+   (max-target-count         int8   :offset-assert 1)
+   (min-target-count         int8   :offset-assert 2)
+   (target-count             int8   :offset-assert 3)
+   (toggle-shield-percentage float  :offset-assert 4)
+   (heat-shield-percentage   float  :offset-assert 8)
+   )
+  :method-count-assert 9
+  :size-assert         #xc
+  :flag-assert         #x90000000c
+  )
+
+;; from jak3 all-types.gc L74540
+(deftype gunship-info (structure)
+  ((proc        handle  :offset-assert 0)
+   (want-target uint8   :offset-assert 8)
+   (cur-state   symbol  :offset-assert 12)
+   (difficulty  float   :offset-assert 16)
+   )
+  :method-count-assert 9
+  :size-assert         #x14
+  :flag-assert         #x900000014
+  )
+
+;; from jak3 all-types.gc L54616
+(deftype glider-thermal-info (structure)
+  ((pos          vector :inline :offset-assert 0)
+   (r            float          :offset 12)
+   (hheight      float          :offset-assert 16)
+   (windspeed    float          :offset-assert 20)
+   (curpos       float          :offset-assert 24)
+   (thermal-time time-frame     :offset-assert 32)
+   )
+  :method-count-assert 10
+  :size-assert         #x28
+  :flag-assert         #xa00000028
+  (:methods
+    (to-static-macro (_type_ object) none) ;; 9
+    )
+  )
+
+;; from jak3 all-types.gc L54632
+(deftype glider-ring-info (structure)
+  ((pos        vector :inline :offset-assert 0)
+   (forw       vector :inline :offset-assert 16)
+   (boost      float          :offset-assert 32)
+   (dist       float          :offset-assert 36)
+   (xdist      float          :offset-assert 40)
+   (ydist      float          :offset-assert 44)
+   (toff       time-frame     :offset-assert 48)
+   (speedmod   float          :offset-assert 56)
+   (shootable  symbol         :offset-assert 60)
+   (lastring   symbol         :offset-assert 64)
+   (checkpoint uint8          :offset-assert 68)
+   )
+  :method-count-assert 10
+  :size-assert         #x45
+  :flag-assert         #xa00000045
+  (:methods
+    (to-static-macro (_type_ object) none) ;; 9
+    )
+  )
+
+;; from jak3 all-types.gc L47680
+(deftype target-turret-info (structure)
+  ((idle-anim      int32  :offset-assert 0)
+   (camera-joint   int32  :offset-assert 4)
+   (explode-sg     skeleton-group :offset-assert 8)
+   (explode-params explosion-init-params :offset-assert 12)
    )
   :method-count-assert 9
   :size-assert         #x10
