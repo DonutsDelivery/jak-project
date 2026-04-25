@@ -4,6 +4,16 @@
   `(- (logand #xffffffff (the-as uint ,in)) (the-as uint #f))
   )
 
+(defmacro s.w! (location value)
+  "Utility macro to store a 32-bit value at a given address. Performs _no_ type checking."
+  `(set! (-> (the-as (pointer uint32) ,location) 0) (the-as uint32 ,value))
+  )
+
+(defmacro l.wu (location)
+  "Load an unsigned 32-bit value from a given address. Performs _no_ type checking."
+  `(-> (the-as (pointer uint32) ,location) 0)
+  )
+
 (defmacro init-vf0-vector ()
   "Initializes the VF0 vector which is a constant vector in the VU set to <0,0,0,1>"
   `(.lvf vf0 (new 'static 'vector :x 0.0 :y 0.0 :z 0.0 :w 1.0))
@@ -1760,6 +1770,10 @@
                   )
           )
     )
+  )
+
+(defmacro square (x)
+  `(* ,x ,x)
   )
 
 (import "goal_src/jak3/engine/data/tpages.gc")
