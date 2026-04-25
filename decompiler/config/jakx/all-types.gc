@@ -34746,7 +34746,7 @@
     (hud-method-17 (_type_) symbol) ;; 17
     (hud-method-18 (_type_) symbol) ;; 18
     (hud-method-19 (_type_) symbol) ;; 19
-    (hud-method-20 (_type_) symbol) ;; 20
+    (hud-method-20 (engine) connectable) ;; 20
     (hud-method-21 (_type_) symbol) ;; 21
     (hud-method-22 (engine) connectable) ;; 22
     (hud-method-23 (engine) connectable) ;; 23
