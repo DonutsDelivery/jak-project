@@ -4575,9 +4575,11 @@
       ]
     ]
   ],
-  // race-state-method-10: send-event call places event-message-block at sp+16
   "(method 10 race-state)": [
-    [16, "event-message-block"]
+    [
+      16,
+      "event-message-block"
+    ]
   ],
   "(method 12 race-state)": [
     [
@@ -8627,15 +8629,240 @@
       "transformq"
     ]
   ],
-  "(method 54 ocean)": [[16, "vector"]],
-  "(method 55 ocean)": [[16, "vector"]],
-  "(method 56 ocean)": [[16, "vector"]],
-  "(method 57 ocean)": [[16, "vector"]],
-  "(method 58 ocean)": [[16, "vector"]],
-  "(method 59 ocean)": [[16, "vector"]],
-  "(method 60 ocean)": [[16, "vector"]],
-  "(method 61 ocean)": [[16, "vector"]],
-  "driver-spawn": [[16, "driver-initialize-params"]],
-
-  "(method 28 ocean)": [[16, "vector"]]
+  "(method 54 ocean)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 55 ocean)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 56 ocean)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 57 ocean)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 58 ocean)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 59 ocean)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 60 ocean)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 61 ocean)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "driver-spawn": [
+    [
+      16,
+      "driver-initialize-params"
+    ]
+  ],
+  "(method 28 ocean)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "camera-slave-debug": [
+    [
+      16,
+      "vector"
+    ],
+    [
+      32,
+      "vector"
+    ],
+    [
+      48,
+      "matrix"
+    ],
+    [
+      128,
+      "curve"
+    ]
+  ],
+  "execute-mouse-move": [
+    [
+      16,
+      "vector"
+    ],
+    [
+      32,
+      "vector"
+    ],
+    [
+      48,
+      "vector"
+    ],
+    [
+      64,
+      "vector"
+    ],
+    [
+      80,
+      "vector"
+    ],
+    [
+      112,
+      "vector"
+    ]
+  ],
+  "execute-move": [
+    [
+      16,
+      "vector"
+    ],
+    [
+      32,
+      "vector"
+    ]
+  ],
+  "update-manipulator-position": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 12 nav-mesh-editable)": [
+    [
+      32,
+      "vector"
+    ]
+  ],
+  "(method 46 ocean)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 23 mysql-nav-graph)": [
+    [
+      16,
+      [
+        "inline-array",
+        "vector",
+        5
+      ]
+    ]
+  ],
+  "(post draw-closest-minimap nav-graph-editor)": [
+    [
+      64,
+      [
+        "inline-array",
+        "vector",
+        5
+      ]
+    ]
+  ],
+  "(method 54 task-arrow)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 185 vehicle)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "cam-layout-save-interesting": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "cam-layout-save-align": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "cam-layout-save-pivot": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 13 ocean)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(code die aux-voice-mgr)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "wait-connect": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 112 wvehicle)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 19 hud-lap)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "process-drawable-birth-fuel-cell": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "target-camera-heuristic-fov": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 132 vehicle)": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "(method 88 vehicle)": [
+    [
+      16,
+      "vector"
+    ]
+  ]
 }
