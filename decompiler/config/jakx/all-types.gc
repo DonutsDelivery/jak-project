@@ -8219,7 +8219,7 @@
     (get-total-time "Get the duration of the top-level event (typically, the whole frame)" (_type_) int) ;; 9
     (start-frame! "Restart the profiler for the start of a frame." (_type_) int) ;; 10
     (start-segment! "Start an event." (_type_ symbol rgba) int) ;; 11
-    (end-segment! "Stop the most recently started event." (_type_) int) ;; 12
+    (end-segment! (_type_) none) ;; 12
     )
   )
 
