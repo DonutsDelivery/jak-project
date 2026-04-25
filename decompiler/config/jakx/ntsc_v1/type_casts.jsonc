@@ -43196,4 +43196,41 @@
       "history-elt"
     ]
   ]
+,
+  "init-haze-vert-array": [
+    [
+      43,
+      "a0",
+      "cloud-vertex"
+    ],
+    [
+      44,
+      "v1",
+      "cloud-vertex"
+    ]
+  ]
+,
+  "collide-upload-vu0": [
+    [
+      16,
+      "a0",
+      "dma-packet"
+    ],
+    [
+      17,
+      "a0",
+      "(pointer uint64)"
+    ]
+  ]
+,
+  "(method 9 actor-link-info)": [
+    [
+      [
+        0,
+        36
+      ],
+      "s3",
+      "entity-actor"
+    ]
+  ]
 }
