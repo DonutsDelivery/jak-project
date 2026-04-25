@@ -630,6 +630,9 @@
 (declare-type net-player process-nettable)
 (declare-type rigid-body-object basic)
 (declare-type vehicle rigid-body-object)
+(declare-type museum-char structure)
+(declare-type part-tracker-subsampler-init-params structure)
+(declare-type sprite-frame-data structure)
 (declare-type spark-launch-params structure)
 (declare-type wvehicle-wheel-launcher-spec structure)
 (declare-type sp-field-init-spec structure)
@@ -40923,7 +40926,7 @@
 (define-extern manipy-post (function none :behavior manipy))
 (define-extern manipy-init (function none)) ;; (function vector entity-actor skeleton-group vector manipy-options none :behavior manipy)
 (define-extern part-tracker-init-base (function sparticle-launch-group time-frame (function part-tracker vector) uint process-drawable object none :behavior part-tracker))
-(define-extern part-tracker-subsampler-init (function none)) ;; (function part-tracker-subsampler-init-params object :behavior part-tracker-subsampler)
+(define-extern part-tracker-subsampler-init (function part-tracker-subsampler-init-params object :behavior part-tracker-subsampler))
 (define-extern part-tracker-init (function part-tracker-init-params object :behavior part-tracker))
 (define-extern part-tracker-track-root (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern lightning-tracker-init (function lightning-spec time-frame symbol process-drawable vector vector none :behavior lightning-tracker)) ;; was: (function none) — backported from jak3
@@ -57170,8 +57173,8 @@
 
 
 (define-extern *credits-chars* array)
-(define-extern hirez-viewer-init-by-other (function none)) ;; (function museum-char symbol symbol object :behavior hirez-viewer)
-(define-extern spawn-hirez-viewer (function none)) ;; (function museum-char symbol symbol handle)
+(define-extern hirez-viewer-init-by-other (function museum-char symbol symbol object :behavior hirez-viewer))
+(define-extern spawn-hirez-viewer (function museum-char symbol symbol handle))
 (define-extern draw-end-credits (function level float symbol))
 (define-extern end-credits-character-viewer-init-by-other (function none))
 (define-extern update-stuff (function none))
@@ -58636,7 +58639,7 @@
    (total-item-ct    int32  :offset-assert 608)
    (physical-item-ct int32  :offset-assert 612)
    )
-  :method-count-assert 78
+  :method-count-assert 77
   :size-assert         #x268
   :flag-assert         #x4e01e00268
   (:methods
