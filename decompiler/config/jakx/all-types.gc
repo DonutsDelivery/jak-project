@@ -51381,7 +51381,7 @@
   (:methods
     (water-anim-method-50 (_type_) none) ;; 50
     (idle () _type_ :state) ;; 51
-    (water-anim-method-52 (_type_) none) ;; 52
+    (water-anim-method-52 (_type_ vector) int) ;; 52
     (water-anim-method-53 (_type_ vector) float) ;; 53
     (water-anim-method-54 (_type_) none) ;; 54
     (water-anim-method-55 (_type_) none) ;; 55
