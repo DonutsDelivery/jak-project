@@ -7077,27 +7077,6 @@
   (special)
   (sog7)
   )
-
-(defenum sound-mask
-  :bitfield #t
-  :type uint16
-  (volume)    ;; 1
-  (pitch)     ;; 2
-  (bend)      ;; 4
-  (unused)    ;; 8
-  (time)      ;; 10
-  (trans)     ;; 20
-  (fo-min)    ;; 40
-  (fo-max)    ;; 80
-  (fo-curve)  ;; 100
-  (sm-unk1)
-  (sm-unk2)
-  (reg0)
-  (reg1)
-  (reg2)
-  (unk)
-  (unk2)
-  )
 ;; ---gsound-h:sound-group
 
 (deftype sound-stream-name (structure)
@@ -7372,12 +7351,6 @@
   :flag-assert         #x900000004
   )
 
-(defenum sound-mirror-mode
-  :type uint8
-  (normal)
-  (mirrored)
-  )
-
 (deftype sound-rpc-union (structure)
   ((data              uint32                      12 :offset-assert 0) ;; guessed by decompiler
    (load-bank         sound-rpc-load-bank            :offset-assert 0 :overlay-at data)
@@ -7565,14 +7538,6 @@
     (set-falloff-mode! (_type_ int) int) ;; 15
     (stop! (_type_) int) ;; 16
     )
-  )
-
-(defenum timer-clock-selection
-  :type uint8
-  (busclk 0)
-  (busclk/16 1)
-  (busclk/256 2)
-  (hblank 3)
   )
 
 (define-extern *debug-sound-sliders* object)
@@ -15267,14 +15232,6 @@
   :flag-assert         #x900000024
   )
 
-(defenum trail-node-flag
-  :type uint8
-  :bitfield #t
-  (tnf0 0) ;; unused??
-  (tnf1 1)
-  (tnf2 2)
-  )
-
 (defenum conn-flag
   :type uint8
   :bitfield #t
@@ -15296,36 +15253,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (declare-type resetter-spec structure)
-
-(defenum resetter-message
-  :type uint8
-  (mission-fail 0)
-  (mission-retry 1)
-  (mission-fail-or-retry 2)
-  )
-
-(defenum resetter-flag
-  :type uint16
-  :bitfield #t
-  (auto-reset 0)
-  (text-message 1)
-  (no-audio 2)
-  (no-slow-down 3)
-  (no-message 4)
-  (no-grab 5)
-  (no-draw-target 6)
-  (stop-sfx 7)
-  (no-audio-first 8)
-  )
-
-(defenum task-manager-mask
-  :type uint32
-  :bitfield #t
-  (intro-scene)
-  (resolution-scene)
-  (time-limit)
-  (auto-complete)
-  )
 (deftype user-setting-data (structure)
   ((border-mode             symbol              :offset-assert 0) ;; guessed by decompiler
    (process-mask            process-mask        :offset-assert 4) ;; guessed by decompiler
@@ -19847,20 +19774,6 @@
   ;; field param1 uses ~A with a signed load. field param2 uses ~A with a signed load. field param3 uses ~A with a signed load.
   )
 
-(defenum talker-flags
-  :type uint16
-  :bitfield #t
-  (play-only-once 0)
-  (reduce-volume 1)
-  (auto-save-on-each-start 2)
-  (auto-save-once-on-exit 3)
-  (only-play-in-region 4)
-  (fade-in 5)
-  (slide-in 6)
-  (bigger-font 7)
-  (long-timeout 8)
-  )
-
 ;; (deftype gui-control (basic)
 ;;   ()
 ;;   :flag-assert #x1a00001080
@@ -19928,15 +19841,6 @@
   (:methods
     (draw-text (_type_) int) ;; 18
     )
-  )
-
-(defenum speech-type-flag
-  :type uint8
-  :bitfield #t
-  (random-order 0)
-  (linked-next 1)
-  (skip-first-time 2)
-  (first-time 3)
   )
   
 
@@ -20150,17 +20054,6 @@
   :method-count-assert 9
   :size-assert         #x3000
   :flag-assert         #x900003000
-  )
-
-(defenum prototype-flags
-  :bitfield #t
-  :type uint16
-  (disable     0) ;; set from debug menu, for debugging
-  (tpage-alpha 2)
-  (vanish      3)
-  (visible     5) ;; set by prototypes-game-visible-set! to hide things on purpose
-  (no-collide  6)
-  (tpage-water 7)
   )
   
 
@@ -21133,43 +21026,6 @@
   (:methods
     (set-gravity-length (_type_ float) int) ;; 9
     )
-  )
-
-(defenum surface-flag
-  :bitfield #t
-  :type uint32
-
-  (look-around         0) ;; 1
-  (xz-local            1) ;; 2
-  (smooth-collision    2) ;; 4
-  (no-turn-around      3) ;; 8
-  (turn-to-pad         4) ;; 16
-  (turn-to-vel         5) ;; 32
-  (no-jump             6) ;; 64
-  (no-attack           7) ;; 128
-  (no-hands            8) ;; 256
-  (no-feet             9) ;; 512
-  (check-edge         10) ;; 1024
-  (air                11) ;; 2048
-  (attack             12) ;; 4096
-  (duck               13) ;; 8192
-  (momentum           14) ;; 16384
-  (turn-when-centered 15) ;; 32768
-
-  (turn-to-alt        16) ;; hi 1
-  (spin               17) ;; hi 2
-  (super              18) ;; hi 4
-  (gun-inactive       19) ;; hi 8
-  (gun-hide           20) ;; hi 16
-  (gun-off            21) ;; hi 32
-  (gun-fast-exit      22) ;; hi 64
-  (gun-direct         23) ;; hi 128
-  (gun-strafe         24) ;; hi 256
-  (gun-no-twist       25) ;; hi 512
-  (laser-hide         26) ;; hi 1024
-  (no-board           27) ;; hi 2048
-  (gun-turn-fast      28) ;; hi 4096
-  (sf29 29)
   )
 
 (define-extern time-to-apex (function float float int))
@@ -28963,12 +28819,6 @@
     )
   )
 
-(defenum sync-flags
-  :type uint64
-  :bitfield #t
-  (pong 0)
-  )
-
 
 (define-extern *scene-player* (pointer scene-player))
 (define-extern *debug-menu-scene-play* object)
@@ -29100,18 +28950,6 @@
   (gun-look-at)
   (foot-rot)
   (joint-set-world)
-  )
-
-(defenum track-mode
-  :bitfield #t
-  :type uint16
-  (track-on       0) ;; 1
-  (track-x        1) ;; 2
-  (track-y        2) ;; 4
-  (lock-on        3) ;; 8
-  (no-trans       4) ;; 16
-  (no-rotate      5) ;; 32
-  (no-scale       6) ;; 64
   )
 
 (defenum joint-mod-ik-flags
@@ -30172,20 +30010,6 @@
     (simple-prim-method-55 (_type_) none) ;; 55
     )
   )
-
-(defenum task-arrow-flags
-  :type uint32
-  :bitfield #t
-  (taf0 0)
-  (taf1 1)
-  (taf2 2)
-  (taf3 3)
-  (taf4 4)
-  (taf5 5)
-  (taf6 6)
-  (taf7 7)
-  (taf8 8)
-  )
   
 
 
@@ -30495,20 +30319,6 @@
     (process-focusable-method-57 (_type_) int) ;; 57
     (process-focusable-method-58 (_type_) int) ;; 58
     )
-  )
-
-(defenum process-taskable-flags
-  :type uint32
-  :bitfield #t
-  (ptf0 0)
-  (ptf1 1)
-  (ptf2 2)
-  (ptf3 3)
-  (ptf4 4)
-  (ptf5 5)
-  (ptf6 6)
-  (ptf7 7)
-  (ptf8 8)
   )
 
 (defenum enemy-option
@@ -31104,27 +30914,6 @@
   :flag-assert         #x9000000bc
   )
 
-(defenum ragdoll-flag
-  :type uint32
-  :bitfield #t
-  (rf0 0)
-  (rf1 1)
-  (rf2 2)
-  (rf3 3)
-  (rf4 4)
-  (rf5 5)
-  (rf6 6)
-  (rf7 7)
-  (mirror 8)
-  (rf9 9)
-  (rf10 10)
-  (rf11 11)
-  (rf12 12)
-  (rf13 13)
-  (rf14 14)
-  (rf15 15)
-  )
-
 (deftype ragdoll-edit-info (structure)
   ((editing         symbol           :offset-assert 0) ;; guessed by decompiler
    (current-func    uint64           :offset-assert 8)
@@ -31263,43 +31052,6 @@
     (ragdoll-proc-method-19 (_type_) none) ;; 19
     (ragdoll-proc-method-20 (_type_) none) ;; 20
     )
-  )
-
-(defenum projectile-options
-  :bitfield #t
-  :type uint64
-  (po0 0)
-  (po1 1)
-  (po2 2)
-  (po3 3)
-  (po4 4)
-  (po5 5)
-  (po6 6)
-  (po7 7)
-  (po8 8)
-  (po9 9)
-  (po10 10)
-  (po11 11)
-  (po12 12)
-  (po13 13)
-  (po14 14)
-  (po15 15)
-  (po16 16)
-  (po17 17)
-  (po18 18)
-  (po19 19)
-  (po20 20)
-  (po21 21)
-  (po22 22)
-  (po23 23)
-  (po24 24)
-  (po25 25)
-  (po26 26)
-  (po27 27)
-  (po28 28)
-  (po29 29)
-  (po30 30)
-  (po31 31)
   )
   
 
@@ -31675,12 +31427,6 @@
   (hover-find-closest)
   (update-los)
 )
-
-(defenum texture-page-flag
-  :type uint16
-  :bitfield #t
-  (alpha-enable 0)
-  )
   
 
 
@@ -31946,30 +31692,6 @@
     (collide-cache-method-26 (_type_) none) ;; 26
     (collide-cache-method-27 (_type_) none) ;; 27
     )
-  )
-
-(defenum search-info-flag
-  :type uint32
-  :bitfield #t
-  (abort 0)
-  (crate 1)
-  (guard 2)
-  (attackable 3)
-  (enemy 4)
-  (attackable-priority 5)
-  (high-priority 6)
-  (on-screen 7)
-  (prefer-dist 8)
-  (prefer-angle 9)
-  (prefer-xz 10)
-  (cull-angle 11)
-  (cull-angle-simple 12)
-  (cull-xz 13)
-  (back-point 14)
-  (combo 15)
-  (probe 16)
-  (probe-camera 17)
-  (prefer-center 18)
   )
 
 (defenum focus-status
@@ -33459,34 +33181,6 @@
   :flag-assert         #x900000030
   )
 
-(defenum sp-cpuinfo-flag
-  :bitfield #t
-  :type uint32
-  ;; todo copied from jak 2
-  (sp-cpuinfo-flag-0 0)
-  (sp-cpuinfo-flag-1 1)
-  (sp-cpuinfo-flag-2 2)     ;; cleared after an aux has its func set to add-to-sprite-aux-lst
-  (sp-cpuinfo-flag-3 3)
-  (sp-cpuinfo-flag-4 4)
-  (sp-cpuinfo-flag-5 5)
-  (ready-to-launch 6) ;; maybe just just death?
-  (distort 7) ;; distort sprite
-  (aux-list 8)     ;; prevents relaunch, adds to aux
-  (sp-cpuinfo-flag-9 9)
-  (level0 10)
-  (level1 11)
-  (sp-cpuinfo-flag-12 12)   ;; required to relaunch
-  (sp-cpuinfo-flag-13 13)
-  (sp-cpuinfo-flag-14 14)
-  (glow 15) ;; glow sprite
-  (use-global-acc 16)
-  (launch-along-z 17)
-  (left-multiply-quat 18)
-  (right-multiply-quat 19)
-  (set-conerot 20)
-  (sp-cpuinfo-flag-21 21)
-  )
-
 
   
 (deftype sprite-array-2d (basic)
@@ -34097,56 +33791,6 @@
   (symbol 5)
   (launcher 6)
   (float-store 7)
-  )
-
-(defenum sp-launch-state-flags
-  :bitfield #t
-  :type uint16
-  (sp0)
-  (sp1)
-  (sp2)
-  )
-
-(defenum sp-group-item-flag
-  :bitfield #t
-  :type uint16
-  (is-3d)
-  (sp1)
-  (sp2)
-  (sp3)
-  (sp4)
-  (sp5)
-  (sp6)
-  (sp7)
-  (sp8)
-  (sp9)
-  (sp10)
-  (sp11)
-  (sp12)
-  (sp13)
-  (sp14)
-  (sp15)
-  )
-
-(defenum sp-group-flag
-  :bitfield #t
-  :type uint16
-  (sp0)
-  (sp1)
-  (sp2)
-  (sp3)
-  (sp4)
-  (sp5)
-  (sp6)
-  (sp7)
-  (sp8)
-  (sp9)
-  (sp10)
-  (sp11)
-  (sp12)
-  (sp13)
-  (sp14)
-  (sp15)
   )
 
 (deftype sparticle-birthinfo (structure)
@@ -35003,56 +34647,6 @@
   :flag-assert         #x1e186018e4
   )
 
-(defenum progress-icon-flags
-  :type uint32
-  :bitfield #t
-  (pi0 0)
-  (pi1 1)
-  (pi2 2)
-  (pi3 3)
-  (pi4 4)
-  (pi5 5)
-  (pi6 6)
-  (pi7 7)
-  (pi8 8)
-  (pi9 9)
-  (pi10 10)
-  (pi11 11)
-  (pi12 12)
-  (pi13 13)
-  (pi14 14)
-  (pi15 15)
-  (pi16 16)
-  (pi17 17)
-  (pi18 18)
-  (pi19 19)
-  (pi20 20)
-  (pi21 21)
-  (pi22 22)
-  (pi23 23)
-  (pi24 24)
-  (pi25 25)
-  (pi26 26)
-  (pi27 27)
-  (pi28 28)
-  (pi29 29)
-  (pi30 30)
-  (pi31 31)
-  )
-
-(defenum secret-item-option-flags
-  :type uint8
-  :bitfield #t
-  (sf0)
-  (sf1)
-  (sf2)
-  (sf3)
-  (sf4)
-  (sf5)
-  (sf6)
-  (sf7)
-  )
-
 (defenum inventory-icon
   :type uint32
   (icon0 0)
@@ -35500,101 +35094,6 @@
     (nav-mesh-method-45 (_type_ nav-poly) nav-poly) ;; 45
     (nav-mesh-method-46 (_type_ nav-poly) nav-poly) ;; 46
     )
-  )
-
-(defenum traffic-type
-  :type uint8
-  (civilian-male 0)
-  (civilian-female 1)
-  (civilian-fat 2)
-  (civilian-pilot 3)
-  (guard-pilot 4)
-  (citizen-task 5)
-  (guard-a 6)
-  (guard-b 7)
-  (metalhead-grunt 8)
-  (metalhead-flitter 9)
-  (metalhead-predator 10)
-  (wlander-male 11)
-  (wlander-female 12)
-  (formation 13)
-  (roboguard 14)
-  (spydroid 15)
-  (flying-turret 16)
-  (civilian-bike-a 17)
-  (civilian-bike-b 18)
-  (civilian-bike-c 19)
-  (civilian-car-a 20)
-  (civilian-car-b 21)
-  (civilian-car-c 22)
-  (vehicle-task 23)
-  (guard-bike 24)
-  (guard-car 25)
-  (guard-transport 26)
-  (kg-pickup 27)
-  (bike-d 28)
-  (max 29)
-  (invalid0 -1)
-  (invalid #xffffffff)
-  )
-
-(defenum vehicle-type
-  :type int32
-  (h-bike-a 0)
-  (h-bike-b 1)
-  (h-bike-c 2)
-  (h-car-a  3)
-  (h-car-b  4)
-  (h-car-c  5)
-  (h-bike-d 6)
-  (h-hellcat 7)
-  (h-warf 8)
-  (h-glider 9)
-  (h-sled 10)
-  (h-kg-pickup 11)
-  (v-turtle 12)
-  (v-snake 13)
-  (v-scorpion 14)
-  (v-toad 15)
-  (v-fox 16)
-  (v-rhino 17)
-  (v-mirage 18)
-  (v-x-ride 19)
-  (v-marauder 20)
-  (v-faccar 21)
-  (v-catapult 22)
-  (v-marauder-b 23)
-  (test-car 25)
-  (wbike-test 26)
-  (vt27 27)
-  (evan-test-bike 29)
-  )
-
-(defenum vehicle-type-u8
-  :type uint8
-  :copy-entries vehicle-type
-  )
-
-(defenum traffic-spawn-flags
-  :type uint32
-  :bitfield #t
-  (tsf0 0)
-  (tsf1 1)
-  (tsf2 2)
-  (tsf3 3)
-  (tsf4 4)
-  (tsf5 5)
-  (tsf6 6)
-  (tsf7 7)
-  (tsf8 8)
-  (tsf9 9)
-  (tsf10 10)
-  (tsf11 11)
-  (tsf12 12)
-  (tsf13 13)
-  (tsf14 14)
-  (tsf15 15)
-  (tsf16 16)
   )
 
 (defenum guard-type
@@ -36585,13 +36084,6 @@
   :method-count-assert 9
   :size-assert         #x4c
   :flag-assert         #x90000004c
-  )
-
-(defenum sprite-aux-type
-  :bitfield #f
-  :type uint32
-  (distort 0)
-  (glow 1)
   )
 
 
@@ -38245,12 +37737,6 @@
   :size-assert         #x140
   :flag-assert         #x900000140
   )
-
-(defenum spooler-flags
-  :bitfield #t
-  :type uint32
-  (blackout-on-stall)
-  )
   
 
 
@@ -39816,13 +39302,6 @@
     (plane-volume-method-10 (_type_) int) ;; 10
     (plane-volume-method-11 (_type_ vector float) symbol) ;; 11
     )
-  )
-
-(defenum vol-flags
-  :bitfield #t
-  :type uint32
-  (display?)
-  (vol-flags-1)
   )
 
 
@@ -45438,40 +44917,6 @@
     )
   )
 
-(defenum race-state-enum
-  :type uint8
-  (rs0)
-  (rs1)
-  (rs2)
-  (rs3)
-  (rs4)
-  (rs5)
-  (rs6)
-  (rs7)
-  (rs8)
-  )
-
-(defenum race-flag
-  :type uint8
-  (rf0 0)
-  (rf1 1)
-  (rf2 2)
-  (rf3 3)
-  (rf4 4)
-  (rf5 5)
-  (rf6 6)
-  (rf7 7)
-  (rf8 8)
-  (rf9 9)
-  (rf10 10)
-  (rf11 11)
-  (rf12 12)
-  (rf13 13)
-  (rf14 14)
-  (rf15 15)
-  (rf16 16)
-  )
-
 
 
   
@@ -45602,13 +45047,6 @@
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
-  )
-
-(defenum race-mesh-flag
-  :type uint8
-  :bitfield #t
-  (rmf0 0)
-  (rmf1 1)
   )
   
 
@@ -49534,8 +48972,8 @@
 (define-extern *ready-room-human-ct* object)
 (define-extern *ready-room-ai-ct* object)
 (define-extern *game-launched-from-room* object)
-(define-extern camera-seek-time object)
-(define-extern real-camera-seek-time object)
+(define-extern camera-seek-time float)
+(define-extern real-camera-seek-time float)
 (define-extern set-lobby-camera-seek-time! (function float float))
 (define-extern *class-mode* object)
 (define-extern restore-selection-index (function none))
@@ -52554,37 +51992,6 @@
     )
   )
 
-(defenum racer-state-flags
-  :type uint8
-  :bitfield #t
-  (rsf0 0)
-  (rsf1 1)
-  (rsf2 2)
-  (rsf3 3)
-  (rsf4 4)
-  (rsf5 5)
-  (rsf6 6)
-  (rsf7 7)
-  )
-
-(defenum racer-info-flag
-  :type uint8
-  :bitfield #t
-  (rif0 0)
-  (rif1 1)
-  (rif2 2)
-  (rif3 3)
-  (rif4 4)
-  (rif5 5)
-  (rif6 6)
-  (rif7 7)
-  )
-
-(defenum race-info-flag
-  :type uint8
-  :bitfield #t
-  )
-
 
   
 
@@ -54177,14 +53584,6 @@
   :method-count-assert 9
   :size-assert         #xc
   :flag-assert         #x90000000c
-  )
-
-(defenum visvol-edit-func
-  :type uint64
-  (visvol-positive 0)
-  (visvol-negative 1)
-  (adjust-sphere 2)
-  (adjust-vis-distance 3)
   )
 
 
@@ -62242,74 +61641,6 @@
   :method-count-assert 72
   :size-assert         #x231
   :flag-assert         #x4801b00231
-  )
-
-(defenum target-geo
-  :type int32
-  (uninitialized -2)
-  (none -1)
-  (jakb 4) ;; jak 2 model
-  (jakb-old 5) ;; weird broken jak 2 model
-  (jakc 6) ;; jak 3 model
-  )
-
-(defenum target-flags
-  :type uint32
-  :bitfield #t
-  (tf0 0)
-  (tf1 1)
-  (tf2 2)
-  (tinvuln1 3)
-  (tf4 4)
-  (tf5 5)
-  (tf6 6)
-  (prevent-jump 7)
-  (prevent-attack 8)
-  (prevent-duck 9)
-  (tf10 10)
-  (tf11 11)
-  (tf12 12)
-  (tf13 13)
-  (tf14 14)
-  (tf15 15)
-  (tf16 16)
-  (prevent-board 17)
-  (prevent-gun 18)
-  (lleg-still 19)
-  (rleg-still 20)
-  (lleg-no-ik 21)
-  (rleg-no-ik 22)
-  (prevent-double-jump 23)
-  (disable-attacks 24)
-  (tinvuln2 25)
-  (tf26 26)
-  (tf27 27)
-  (invisible 28)
-  (tf29 29)
-  (tf30 30)
-  (tf31 31)
-  )
-
-(defenum target-effect
-  :type uint64
-  :bitfield #t
-  (te0 0)
-  (te1 1)
-  (te2 2)
-  (te3 3)
-  (te4 4)
-  (te5 5)
-  (te6 6)
-  )
-
-(defenum target-anim
-  :type int32
-  (uninitialized -2)
-  (unknown -1)
-  (default 0)
-  (board 1)
-  (dark 2)
-  (light 3)
   )
 
 ;; joint-mod-polar-look-at stub
