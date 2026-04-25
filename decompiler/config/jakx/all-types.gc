@@ -35926,7 +35926,7 @@
     (grid-hash-method-9 (_type_ int vector vector) int) ;; 9 ;; update-grid-for-objects-in-box
     (grid-hash-method-10 (_type_) int) ;; 10 ;; clear-bucket-array
     (grid-hash-method-11 (_type_ int vector vector vector) none) ;; 11
-    (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12 ;; search-for-point
+    (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
     (grid-hash-method-15 (_type_) none) ;; 15 ;; dump-grid-info
