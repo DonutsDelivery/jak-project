@@ -39384,7 +39384,7 @@
 (define-extern text-is-loading symbol)
 (define-extern load-game-text-info (function string (pointer object) kheap int)) ;; (function string (pointer object) kheap int)
 (define-extern load-level-text-files (function int none))
-(define-extern draw-debug-text-box (function font-context none))
+(define-extern draw-debug-text-box "Draws some lines" (function font-context none))
 (define-extern *print-game-text-work* print-game-text-work)
 (define-extern hyphenate-word (function string int))
 (define-extern print-game-text (function string font-context symbol int bucket-id string dma-buffer float)) ;; (function string font-context symbol int bucket-id float)
@@ -39433,10 +39433,10 @@
 (define-extern creates-new-method? (function type int symbol))
 (define-extern overrides-parent-method? (function type int symbol))
 (define-extern describe-methods (function type symbol))
-(define-extern indent-to (function int symbol)) 
-(define-extern probe-traverse-draw-node (function draw-node int int)) 
-(define-extern probe-traverse-inline-array-node (function drawable-inline-array-node int symbol)) 
-(define-extern probe-traverse-collide-fragment (function drawable-tree-collide-fragment int symbol)) 
+(define-extern indent-to (function int none))
+(define-extern probe-traverse-draw-node (function draw-node int none))
+(define-extern probe-traverse-inline-array-node (function drawable-inline-array-node int none))
+(define-extern probe-traverse-collide-fragment (function drawable-tree-collide-fragment int none))
 (define-extern *collide-probe-stack* collide-probe-stack) ;; collide-probe-stack
 (define-extern collide-vu0-block vu-function)
 (define-extern collide-probe-node (function (inline-array draw-node) int collide-list int))
@@ -40064,7 +40064,7 @@
 (define-extern clmf-to-index-attr (function symbol))
 (define-extern clmf-to-focalpull-attr (function symbol))
 (define-extern clmf-to-edit (function symbol :behavior cam-layout))
-(define-extern clmf-to-select (function symbol))
+(define-extern clmf-to-select (function symbol)) ;; (function symbol)
 (define-extern clmf-look-through (function symbol :behavior cam-layout))
 (define-extern fov->maya (function float float))
 (define-extern cam-layout-save-cam-rot (function symbol string entity-actor none))
@@ -40072,17 +40072,17 @@
 (define-extern cam-layout-save-pivot (function symbol string entity-actor none))
 (define-extern cam-layout-save-align (function symbol string entity-actor none))
 (define-extern cam-layout-save-interesting (function symbol string entity-actor none))
-(define-extern cam-layout-save-fov (function symbol string entity-actor none))
-(define-extern cam-layout-save-focalpull (function symbol string entity-actor none))
+(define-extern cam-layout-save-fov (function symbol string entity-actor none)) ;; (function symbol string entity-actor string)
+(define-extern cam-layout-save-focalpull (function symbol string entity-actor none)) ;; (function symbol string entity-actor string)
 (define-extern cam-layout-save-flags (function symbol string entity-actor none))
 (define-extern cam-layout-save-focalpull-flags (function symbol string entity-actor none))
 (define-extern cam-layout-save-campoints-flags (function symbol string entity-actor none))
-(define-extern cam-layout-save-introsplinetime (function symbol string entity-actor none))
-(define-extern cam-layout-save-introsplineexitval (function symbol string entity-actor none))
+(define-extern cam-layout-save-introsplinetime (function symbol string entity-actor none)) ;; (function symbol string entity-actor string)
+(define-extern cam-layout-save-introsplineexitval (function symbol string entity-actor none)) ;; (function symbol string entity-actor string)
 (define-extern cam-layout-save-interptime (function symbol string entity-actor none))
 (define-extern cam-layout-save-splineoffset (function symbol string entity-actor none))
-(define-extern cam-layout-save-spline-follow-dist-offset (function symbol string entity-actor none))
-(define-extern cam-layout-save-campointsoffset (function symbol string entity-actor none))
+(define-extern cam-layout-save-spline-follow-dist-offset (function symbol string entity-actor none)) ;; (function symbol string entity-actor string)
+(define-extern cam-layout-save-campointsoffset (function symbol string entity-actor none)) ;; (function symbol string entity-actor string)
 (define-extern cam-layout-save-tiltAdjust (function symbol string entity-actor none))
 (define-extern cam-layout-save-stringMinLength (function symbol string entity-actor none))
 (define-extern cam-layout-save-stringMaxLength (function symbol string entity-actor none))
@@ -40092,8 +40092,8 @@
 (define-extern cam-layout-save-maxAngle (function symbol string entity-actor none))
 (define-extern clmf-save-single (function entity-camera symbol symbol file-stream :behavior cam-layout))
 (define-extern clmf-save-one (function symbol symbol :behavior cam-layout))
-(define-extern clmf-save-all (function symbol symbol :behavior cam-layout))
-(define-extern clmf-cam-flag-toggle (function int int symbol :behavior cam-layout))
+(define-extern clmf-save-all (function symbol symbol :behavior cam-layout)) ;; (function symbol symbol :behavior cam-layout)
+(define-extern clmf-cam-flag-toggle (function int int symbol :behavior cam-layout)) ;; (function int int symbol :behavior cam-layout)
 (define-extern clmf-cam-flag (function string uint uint symbol :behavior cam-layout))
 (define-extern clmf-cam-float-adjust (function symbol (pointer float) symbol :behavior cam-layout))
 (define-extern clmf-cam-meters (function meters symbol symbol :behavior cam-layout))
@@ -40990,7 +40990,7 @@
 (define-extern *lightning-globals* lightning-globals) ;; lightning-globals
 (define-extern *lightning* symbol) ;; symbol
 (define-extern lightning-draw-all (function none))
-(define-extern unlink-lightning-spec-by-heap (function kheap int)) 
+(define-extern unlink-lightning-spec-by-heap (function kheap none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; light-trails-h                 ;;
@@ -42996,7 +42996,7 @@
   :flag-assert         #xe00000040
   (:methods
     (new (symbol type) _type_) ;; 0
-    (flow-control-method-9 (_type_) none) ;; 9
+    (draw-path (_type_) none) ;; 9
     (flow-control-method-10 (_type_ (pointer float) int) none) ;; 10
     (flow-control-method-11 (_type_ process-focusable) none) ;; 11
     (find-and-push-things (_type_) none) ;; 12
@@ -54433,7 +54433,7 @@
 
 (define-extern *visvol-edit-info* visvol-edit-info)
 (define-extern visvol-editor-init-by-other (function handle object :behavior visvol-editor))
-(define-extern stop-visvol-edit (function int))
+(define-extern stop-visvol-edit (function object))
 (define-extern visvol-edit (function string object))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
