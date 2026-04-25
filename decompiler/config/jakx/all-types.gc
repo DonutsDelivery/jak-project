@@ -785,7 +785,7 @@
   :flag-assert         #x110000002c
   (:methods
     (new "Allocate a dead pool and set up dead processes" (symbol type int int string) _type_) ;; 0
-    (dead-pool-method-14 (_type_) none) ;; 14
+    (dead-pool-method-14 (_type_ type int object) none) ;; 14
     (get-process "Allocate a process from the pool, or #f if it fails." (_type_ type int object) process) ;; 15
     (return-process "Return a process to the pool." (_type_ process) int) ;; 16
     )
@@ -10934,7 +10934,7 @@
     (trail-graph-method-25 (_type_ int) int) ;; 25
     (trail-graph-method-26 (_type_) int) ;; 26
     (trail-graph-method-27 (_type_) int) ;; 27
-    (trail-graph-method-28 (_type_) none) ;; 28 ;; (trail-graph-method-28 (_type_ trail-conn-search int int) symbol)
+    (trail-graph-method-28 (_type_ trail-conn-search int int) none) ;; 28 ;; (trail-graph-method-28 (_type_ trail-conn-search int int) symbol)
     (trail-graph-method-29 (_type_ vector vector trail-cached-search-info) int) ;; 29
     (trail-graph-method-30 (_type_) int) ;; 30
     (trail-graph-method-31 (_type_ int) none) ;; 31
@@ -11730,7 +11730,7 @@
     (level-method-11 (_type_ int) none) ;; 11
     (level-method-12 (_type_) none) ;; 12 ;; (level-method-12 (_type_) none)
     (level-method-13 (_type_) symbol) ;; 13
-    (level-method-14 (_type_) none) ;; 14 ;; (compute-memory-usage! (_type_ symbol) memory-usage-block)
+    (level-method-14 (_type_ symbol) none) ;; 14 ;; (compute-memory-usage! (_type_ symbol) memory-usage-block)
     (level-method-15 (_type_) symbol) ;; 15
     (level-method-16 (_type_ level-vis-info uint (pointer uint8)) symbol) ;; 16
     (level-method-17 (_type_) _type_) ;; 17
@@ -11942,10 +11942,10 @@
   :flag-assert         #x1000000118
   (:methods
     (minimap-method-9 (_type_) none) ;; 9 ;; (debug-draw (_type_) none)
-    (minimap-method-10 (_type_) none) ;; 10 ;; (get-trail-for-connection (_type_ connection-minimap symbol) minimap-trail)
+    (minimap-method-10 (_type_ connection-minimap symbol) none) ;; 10 ;; (get-trail-for-connection (_type_ connection-minimap symbol) minimap-trail)
     (minimap-method-11 (_type_) none) ;; 11 ;; (get-icon-draw-pos (_type_ connection-minimap minimap-trail vector float vector) symbol)
-    (minimap-method-12 (_type_) none) ;; 12 ;; (add-icon! (_type_ process uint int vector int) connection-minimap)
-    (minimap-method-13 (_type_) int) ;; 13 ;; (free-trail-by-connection (_type_ connection-minimap) none)
+    (minimap-method-12 (_type_ process uint int vector int) none) ;; 12 ;; (add-icon! (_type_ process uint int vector int) connection-minimap)
+    (minimap-method-13 (_type_ connection-minimap) int) ;; 13 ;; (free-trail-by-connection (_type_ connection-minimap) none)
     (minimap-method-14 (_type_) none) ;; 14 ;; (update-trails (_type_) none)
     (minimap-method-15 (_type_ dma-buffer vector4w symbol) symbol) ;; 15
     )
@@ -13810,24 +13810,24 @@
   :size-assert         #x254
   :flag-assert         #x1b00000254
   (:methods
-    (blit-displays-work-method-9 (_type_) none) ;; 9
-    (blit-displays-work-method-10 (_type_) none) ;; 10
-    (blit-displays-work-method-11 (_type_) none) ;; 11
-    (blit-displays-work-method-12 (_type_) none) ;; 12
-    (blit-displays-work-method-13 (_type_) none) ;; 13
-    (blit-displays-work-method-14 (_type_) none) ;; 14
-    (blit-displays-work-method-15 (_type_) none) ;; 15
-    (blit-displays-work-method-16 (_type_) none) ;; 16
-    (blit-displays-work-method-17 (_type_) none) ;; 17
-    (blit-displays-work-method-18 (_type_) none) ;; 18
+    (blit-displays-work-method-9 (_type_ dma-buffer int int int) none) ;; 9
+    (blit-displays-work-method-10 (_type_ dma-buffer int int int) none) ;; 10
+    (blit-displays-work-method-11 (_type_ dma-buffer int) none) ;; 11
+    (blit-displays-work-method-12 (_type_ dma-buffer float int float) none) ;; 12
+    (blit-displays-work-method-13 (_type_ dma-buffer int int int) none) ;; 13
+    (blit-displays-work-method-14 (_type_ dma-buffer vector) none) ;; 14
+    (blit-displays-work-method-15 (_type_ dma-buffer) none) ;; 15
+    (blit-displays-work-method-16 (_type_ dma-buffer int) none) ;; 16
+    (blit-displays-work-method-17 (_type_ vector int float symbol) none) ;; 17
+    (blit-displays-work-method-18 (_type_ dma-buffer float float) none) ;; 18
     (blit-displays-work-method-19 (_type_) none) ;; 19
-    (blit-displays-work-method-20 (_type_) none) ;; 20
+    (blit-displays-work-method-20 (_type_ dma-buffer) none) ;; 20
     (blit-displays-work-method-21 (_type_) none) ;; 21
     (blit-displays-work-method-22 (_type_) none) ;; 22
     (blit-displays-work-method-23 (_type_) none) ;; 23
-    (blit-displays-work-method-24 (_type_) none) ;; 24
-    (blit-displays-work-method-25 (_type_) none) ;; 25
-    (blit-displays-work-method-26 (_type_) int) ;; 26
+    (blit-displays-work-method-24 (_type_ symbol) none) ;; 24
+    (blit-displays-work-method-25 (_type_ symbol) none) ;; 25
+    (blit-displays-work-method-26 (_type_ symbol) int) ;; 26
     )
   )
   
@@ -15339,7 +15339,7 @@
     (sky-work-method-30 (_type_ dma-buffer) none) ;; 30
     (sky-work-method-31 (_type_ dma-buffer) none) ;; 31
     (sky-work-method-32 (_type_ dma-buffer) none) ;; 32
-    (sky-work-method-33 (_type_) none) ;; 33
+    (sky-work-method-33 (_type_ matrix sky-upload-data) none) ;; 33
     (sky-work-method-34 (_type_) none) ;; 34
     (sky-work-method-35 (_type_ dma-buffer) none) ;; 35
     (sky-work-method-36 (_type_ dma-buffer) none) ;; 36
@@ -15789,7 +15789,7 @@
   :size-assert         #x34
   :flag-assert         #xb00000034
   (:methods
-    (ocean-map-method-9 (_type_) int) ;; 9
+    (ocean-map-method-9 (_type_ float) int) ;; 9
     (ocean-map-method-10 (_type_) number) ;; 10
     )
   )
@@ -15844,7 +15844,7 @@
     (ocean-method-21 (_type_ float float) none) ;; 21
     (ocean-method-22 (_type_ dma-buffer int) none) ;; 22
     (ocean-method-23 (_type_ dma-buffer int) int) ;; 23
-    (ocean-method-24 (_type_) none) ;; 24 ;; (ocean-near-setup-constants (_type_ ocean-near-constants) none)
+    (ocean-method-24 (_type_ ocean-near-constants) none) ;; 24 ;; (ocean-near-setup-constants (_type_ ocean-near-constants) none)
     (ocean-method-25 (_type_ dma-buffer) none) ;; 25
     (ocean-method-26 (_type_ dma-buffer) none) ;; 26
     (ocean-method-27 (_type_ dma-buffer vector) none) ;; 27
@@ -15867,7 +15867,7 @@
     (ocean-method-44 (_type_ vector vector matrix) vector) ;; 44
     (ocean-method-45 (_type_ dma-buffer vector) symbol) ;; 45
     (ocean-method-46 (_type_ pointer int int vector) none) ;; 46
-    (ocean-method-47 (_type_) none) ;; 47 ;; (ocean-mid-setup-constants (_type_ ocean-mid-constants) none)
+    (ocean-method-47 (_type_ ocean-mid-constants) none) ;; 47 ;; (ocean-mid-setup-constants (_type_ ocean-mid-constants) none)
     (ocean-method-48 (_type_ dma-buffer) int) ;; 48
     (ocean-method-49 (_type_ uint uint) int) ;; 49
     (ocean-method-50 (_type_ uint uint) int) ;; 50
@@ -15902,8 +15902,8 @@
     (ocean-method-79 (_type_ (pointer rgba)) none) ;; 79
     (ocean-method-80 (_type_ dma-buffer) none) ;; 80
     (ocean-method-81 (_type_ dma-buffer) none) ;; 81
-    (ocean-method-82 (_type_) none) ;; 82
-    (ocean-method-83 (_type_) none) ;; 83
+    (ocean-method-82 (_type_ dma-buffer float) none) ;; 82
+    (ocean-method-83 (_type_ dma-buffer sky-upload-data vector4w float) none) ;; 83
     )
   )
   
@@ -18996,8 +18996,8 @@
     (game-info-method-10 (_type_ symbol float handle) float) ;; 10
     (game-info-method-11 (_type_ game-task) symbol) ;; 11
     (game-info-method-12 (_type_ string) int) ;; 12
-    (game-info-method-13 (_type_) none) ;; 13 ;; (actor-perm (_type_ actor-id) entity-perm)
-    (game-info-method-14 (_type_) none) ;; 14 ;; (task-perm-by-index (_type_ int) entity-perm)
+    (game-info-method-13 (_type_ actor-id) none) ;; 13 ;; (actor-perm (_type_ actor-id) entity-perm)
+    (game-info-method-14 (_type_ int) none) ;; 14 ;; (task-perm-by-index (_type_ int) entity-perm)
     (game-info-method-15 (_type_ level) int) ;; 15
     (game-info-method-16 (_type_ level) int) ;; 16
     (game-info-method-17 (_type_ symbol) _type_) ;; 17
@@ -19817,8 +19817,8 @@
     (new (symbol type) _type_) ;; 0
     (joint-control-method-9 (_type_) none) ;; 9
     (joint-control-method-10 (_type_) none) ;; 10
-    (joint-control-method-11 (_type_) none) ;; 11
-    (joint-control-method-12 (_type_) none) ;; 12
+    (joint-control-method-11 (_type_ symbol) none) ;; 11
+    (joint-control-method-12 (_type_ int) none) ;; 12
     )
   )
 
@@ -20469,8 +20469,8 @@
   :flag-assert         #xc00000028
   (:methods
     (new (symbol type) _type_) ;; 0
-    (fact-info-method-9 (_type_) none) ;; 9
-    (fact-info-method-10 (_type_) none) ;; 10
+    (fact-info-method-9 (_type_ symbol process-tree fact-info int symbol) none) ;; 9
+    (fact-info-method-10 (_type_ symbol) none) ;; 10
     (fact-info-method-11 (_type_) int) ;; 11
     )
   )
@@ -30120,8 +30120,8 @@
   :size-assert         #x148
   :flag-assert         #x1200000148
   (:methods
-    (ragdoll-edit-info-method-9 (_type_) none) ;; 9 ;; (has-joint? (_type_ ragdoll-joint) symbol)
-    (ragdoll-edit-info-method-10 (_type_) none) ;; 10 ;; (ragdoll-edit-info-method-10 (_type_ object ragdoll-joint) symbol)
+    (ragdoll-edit-info-method-9 (_type_ ragdoll-joint) none) ;; 9 ;; (has-joint? (_type_ ragdoll-joint) symbol)
+    (ragdoll-edit-info-method-10 (_type_ object ragdoll-joint) none) ;; 10 ;; (ragdoll-edit-info-method-10 (_type_ object ragdoll-joint) symbol)
     (ragdoll-edit-info-method-11 (_type_) none) ;; 11 ;; (fill-child-stack! (_type_ ragdoll) none)
     (ragdoll-edit-info-method-12 (_type_) none) ;; 12
     (ragdoll-edit-info-method-13 (_type_) none) ;; 13 ;; (cycle-joints! (_type_ ragdoll) none)
@@ -30202,9 +30202,9 @@
     (ragdoll-method-10 (_type_ process-drawable symbol vector symbol) none) ;; 10
     (ragdoll-method-11 (_type_ time-frame) none) ;; 11
     (ragdoll-method-12 (_type_) none) ;; 12 ;; (get-parent-joint (_type_ (inline-array ragdoll-joint)) ragdoll-joint)
-    (ragdoll-method-13 (_type_) none) ;; 13 ;; (ragdoll-method-13 (_type_ ragdoll-edit-info ragdoll-joint matrix matrix) none)
-    (ragdoll-method-14 (_type_) none) ;; 14 ;; (ragdoll-method-14 (_type_ process-drawable ragdoll-joint object matrix) none)
-    (ragdoll-method-15 (_type_) none) ;; 15 ;; (ragdoll-method-15 (_type_ process-drawable ragdoll-edit-info) none)
+    (ragdoll-method-13 (_type_ ragdoll-edit-info ragdoll-joint matrix matrix) none) ;; 13 ;; (ragdoll-method-13 (_type_ ragdoll-edit-info ragdoll-joint matrix matrix) none)
+    (ragdoll-method-14 (_type_ process-drawable ragdoll-joint object matrix) none) ;; 14 ;; (ragdoll-method-14 (_type_ process-drawable ragdoll-joint object matrix) none)
+    (ragdoll-method-15 (_type_ process-drawable ragdoll-edit-info) none) ;; 15 ;; (ragdoll-method-15 (_type_ process-drawable ragdoll-edit-info) none)
     (ragdoll-method-16 (_type_ process-drawable ragdoll-setup) none) ;; 16
     (ragdoll-method-17 (_type_ process-drawable) none) ;; 17
     (ragdoll-method-18 (_type_) none) ;; 18 ;; (ragdoll-method-18 (_type_) none)
@@ -30233,8 +30233,8 @@
     (ragdoll-proc-method-14 (_type_) _type_ :state) ;; 14
     (ragdoll-proc-method-15 (_type_ symbol vector symbol) none) ;; 15
     (ragdoll-proc-method-16 (_type_ time-frame) none) ;; 16
-    (ragdoll-proc-method-17 (_type_) none) ;; 17 ;; (ragdoll-proc-method-17 (_type_ ragdoll-edit-info) none)
-    (ragdoll-proc-method-18 (_type_) none) ;; 18 ;; (ragdoll-proc-method-18 (_type_ ragdoll-edit-info) none)
+    (ragdoll-proc-method-17 (_type_ ragdoll-edit-info) none) ;; 17 ;; (ragdoll-proc-method-17 (_type_ ragdoll-edit-info) none)
+    (ragdoll-proc-method-18 (_type_ ragdoll-edit-info) none) ;; 18 ;; (ragdoll-proc-method-18 (_type_ ragdoll-edit-info) none)
     (ragdoll-proc-method-19 (_type_) none) ;; 19
     (ragdoll-proc-method-20 (_type_) none) ;; 20
     )
@@ -32864,7 +32864,7 @@
   :flag-assert         #xb00000010
   (:methods
     (sparticle-launcher-method-9 (_type_) none) ;; 9
-    (sparticle-launcher-method-10 (_type_) none) ;; 10
+    (sparticle-launcher-method-10 (_type_ string) none) ;; 10
     )
   )
   
@@ -32933,7 +32933,7 @@
   :size-assert         #x40
   :flag-assert         #xa00000040
   (:methods
-    (sparticle-launch-group-method-9 (_type_) none) ;; 9
+    (sparticle-launch-group-method-9 (_type_ process) none) ;; 9
     )
   )
   
@@ -32958,13 +32958,13 @@
   :size-assert         #x70
   :flag-assert         #x1600000070
   (:methods
-    (sparticle-launch-control-method-14 (_type_) none) ;; 14
-    (sparticle-launch-control-method-15 (_type_) none) ;; 15
-    (sparticle-launch-control-method-16 (_type_) none) ;; 16
-    (sparticle-launch-control-method-17 (_type_) none) ;; 17
-    (sparticle-launch-control-method-18 (_type_) none) ;; 18
+    (sparticle-launch-control-method-14 (_type_ sparticle-launch-group process-drawable) none) ;; 14
+    (sparticle-launch-control-method-15 (_type_ vector) none) ;; 15
+    (sparticle-launch-control-method-16 (_type_ vector) none) ;; 16
+    (sparticle-launch-control-method-17 (_type_ matrix) none) ;; 17
+    (sparticle-launch-control-method-18 (_type_ cspace) none) ;; 18
     (sparticle-launch-control-method-19 (_type_) none) ;; 19
-    (sparticle-launch-control-method-20 (_type_) none) ;; 20
+    (sparticle-launch-control-method-20 (_type_ particle-local-space-info) none) ;; 20
     (sparticle-launch-control-method-21 (_type_) none) ;; 21
     )
   )
@@ -34228,43 +34228,43 @@
   :flag-assert         #x3000000120
   (:methods
     (nav-control-method-9 (_type_) none) ;; 9
-    (nav-control-method-10 (_type_) symbol) ;; 10
-    (nav-control-method-11 (_type_) none) ;; 11
-    (nav-control-method-12 (_type_) none) ;; 12
-    (nav-control-method-13 (_type_) nav-poly) ;; 13
-    (nav-control-method-14 (_type_) none) ;; 14
-    (nav-control-method-15 (_type_) none) ;; 15
-    (nav-control-method-16 (_type_) none) ;; 16
-    (nav-control-method-17 (_type_) none) ;; 17
-    (nav-control-method-18 (_type_) none) ;; 18
-    (nav-control-method-19 (_type_) none) ;; 19
-    (nav-control-method-20 (_type_) none) ;; 20
-    (nav-control-method-21 (_type_) none) ;; 21
-    (nav-control-method-22 (_type_) none) ;; 22
+    (nav-control-method-10 (_type_ vector) symbol) ;; 10
+    (nav-control-method-11 (_type_ vector) none) ;; 11
+    (nav-control-method-12 (_type_ vector vector nav-poly) none) ;; 12
+    (nav-control-method-13 (_type_ vector) nav-poly) ;; 13
+    (nav-control-method-14 (_type_ nav-poly vector vector vector) none) ;; 14
+    (nav-control-method-15 (_type_ vector) none) ;; 15
+    (nav-control-method-16 (_type_ vector float) none) ;; 16
+    (nav-control-method-17 (_type_ vector float) none) ;; 17
+    (nav-control-method-18 (_type_ nav-avoid-spheres-params) none) ;; 18
+    (nav-control-method-19 (_type_ nav-avoid-spheres-params) none) ;; 19
+    (nav-control-method-20 (_type_ vector nav-poly vector float symbol clamp-travel-vector-to-mesh-return-info) none) ;; 20
+    (nav-control-method-21 (_type_ vector nav-poly vector clamp-travel-vector-to-mesh-return-info) none) ;; 21
+    (nav-control-method-22 (_type_ vector nav-avoid-spheres-params) none) ;; 22
     (nav-control-method-23 (_type_) none) ;; 23
-    (nav-control-method-24 (_type_) none) ;; 24
+    (nav-control-method-24 (_type_ vector int) none) ;; 24
     (nav-control-method-25 (_type_) float) ;; 25
     (nav-control-method-26 (_type_) uint) ;; 26
     (nav-control-method-27 (_type_) meters) ;; 27
     (nav-control-method-28 (_type_) int) ;; 28
     (nav-control-method-29 (_type_) none) ;; 29
-    (nav-control-method-30 (_type_) none) ;; 30
-    (nav-control-method-31 (_type_) none) ;; 31
-    (nav-control-method-32 (_type_) none) ;; 32
-    (nav-control-method-33 (_type_) none) ;; 33
+    (nav-control-method-30 (_type_ sphere) none) ;; 30
+    (nav-control-method-31 (_type_ sphere) none) ;; 31
+    (nav-control-method-32 (_type_ float) none) ;; 32
+    (nav-control-method-33 (_type_ float) none) ;; 33
     (nav-control-method-34 (_type_) none) ;; 34
-    (nav-control-method-35 (_type_) none) ;; 35
+    (nav-control-method-35 (_type_ float) none) ;; 35
     (nav-control-method-36 (_type_) none) ;; 36
     (nav-control-method-37 (_type_) none) ;; 37
     (nav-control-method-38 (_type_) none) ;; 38
-    (nav-control-method-39 (_type_) none) ;; 39
-    (nav-control-method-40 (_type_) int) ;; 40
+    (nav-control-method-39 (_type_ float) none) ;; 39
+    (nav-control-method-40 (_type_ uint) int) ;; 40
     (nav-control-method-41 (_type_) none) ;; 41
-    (nav-control-method-42 (_type_) int) ;; 42
+    (nav-control-method-42 (_type_ collide-shape) int) ;; 42
     (nav-control-method-43 (_type_) none) ;; 43
     (nav-control-method-44 (_type_) none) ;; 44
-    (nav-control-method-45 (_type_) none) ;; 45
-    (nav-control-method-46 (_type_) none) ;; 46
+    (nav-control-method-45 (_type_ vector vector vector) none) ;; 45
+    (nav-control-method-46 (_type_ symbol) none) ;; 46
     (nav-control-method-47 (_type_) none) ;; 47
     )
   )
@@ -35431,9 +35431,9 @@
   ;; field out uses ~A with a signed load.
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type uint) _type_)
-    (history-iterator-method-9 (_type_) none) ;; 9 ;; (frame-counter-delta (_type_ history-elt) time-frame)
+    (history-iterator-method-9 (_type_ history-elt) none) ;; 9 ;; (frame-counter-delta (_type_ history-elt) time-frame)
     (history-iterator-method-10 (_type_) none) ;; 10 ;; (update-entries! (_type_) history-elt)
-    (history-iterator-method-11 (_type_) none) ;; 11 ;; (get-age (_type_ history-elt) float)
+    (history-iterator-method-11 (_type_ history-elt) none) ;; 11 ;; (get-age (_type_ history-elt) float)
     )
   )
 
@@ -38765,7 +38765,7 @@
   :flag-assert         #x1000000040
   (:methods
     (verlet-particle-system-method-11 (_type_) int) ;; 11
-    (verlet-particle-system-method-12 (_type_) none) ;; 12
+    (verlet-particle-system-method-12 (_type_ float) none) ;; 12
     (verlet-particle-system-method-13 (_type_) int) ;; 13
     (verlet-particle-system-method-14 (_type_) none) ;; 14
     (verlet-particle-system-method-15 (_type_) none) ;; 15
@@ -39426,9 +39426,9 @@
     (light-trail-method-13 (_type_) connection) ;; 13
     (light-trail-method-14 (_type_) int) ;; 14
     (light-trail-method-15 (_type_) pointer) ;; 15
-    (light-trail-method-16 (_type_) none) ;; 16
+    (light-trail-method-16 (_type_ prim-strip vector rgba float float) none) ;; 16
     (light-trail-method-17 (_type_ vector rgba float vector float) none) ;; 17
-    (light-trail-method-18 (_type_) none) ;; 18
+    (light-trail-method-18 (_type_ light-trail-breadcrumb int vector vector) none) ;; 18
     (light-trail-method-19 (_type_ float int) none) ;; 19
     (light-trail-method-20 (_type_) int) ;; 20
     (light-trail-method-21 (_type_ vector) int) ;; 21
@@ -39768,7 +39768,7 @@
     (lightning-bolt-method-15 (_type_ object int lightning-span-internal) int) ;; 15
     (lightning-bolt-method-16 (_type_ vector float float vector matrix) none) ;; 16
     (lightning-bolt-method-17 (_type_ uint float float curve2d-fast float) float) ;; 17
-    (lightning-bolt-method-18 (_type_) none) ;; 18 ;; (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none)
+    (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none) ;; 18 ;; (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none)
     (lightning-bolt-method-19 (_type_ vector int int matrix float float) vector) ;; 19
     (lightning-bolt-method-20 (_type_ int lightning-span-internal) vector) ;; 20
     (lightning-bolt-method-21 (_type_ int int float) int) ;; 21
@@ -41011,11 +41011,11 @@
     (nav-engine-method-14 (_type_) none) ;; 14
     (nav-engine-method-15 (_type_) none) ;; 15
     (nav-engine-method-16 (_type_) none) ;; 16
-    (nav-engine-method-17 (_type_) none) ;; 17 ;; (upload-nav-to-spr (_type_ nav-engine-spr-buffer) none)
-    (nav-engine-method-18 (_type_) none) ;; 18 ;; (download-nav-from-spr (_type_ nav-engine-spr-buffer) none)
-    (nav-engine-method-19 (_type_) none) ;; 19 ;; (do-callbacks (_type_ nav-engine-spr-buffer) none)
-    (nav-engine-method-20 (_type_) none) ;; 20 ;; (reloc-ptrs-to-spad (_type_ nav-engine-spr-buffer) none)
-    (nav-engine-method-21 (_type_) none) ;; 21 ;; (reloc-ptrs-to-mem (_type_ nav-engine-spr-buffer) none)
+    (nav-engine-method-17 (_type_ nav-engine-spr-buffer) none) ;; 17 ;; (upload-nav-to-spr (_type_ nav-engine-spr-buffer) none)
+    (nav-engine-method-18 (_type_ nav-engine-spr-buffer) none) ;; 18 ;; (download-nav-from-spr (_type_ nav-engine-spr-buffer) none)
+    (nav-engine-method-19 (_type_ nav-engine-spr-buffer) none) ;; 19 ;; (do-callbacks (_type_ nav-engine-spr-buffer) none)
+    (nav-engine-method-20 (_type_ nav-engine-spr-buffer) none) ;; 20 ;; (reloc-ptrs-to-spad (_type_ nav-engine-spr-buffer) none)
+    (nav-engine-method-21 (_type_ nav-engine-spr-buffer) none) ;; 21 ;; (reloc-ptrs-to-mem (_type_ nav-engine-spr-buffer) none)
     )
   )
 |#
@@ -51287,7 +51287,7 @@
   :flag-assert         #xf000000b0
   (:methods
     (manipulator-method-9 (_type_) none) ;; 9
-    (manipulator-method-10 (_type_) none) ;; 10
+    (manipulator-method-10 (_type_ vector vector) none) ;; 10
     (manipulator-method-11 (_type_) none) ;; 11
     (manipulator-method-12 (_type_ vector) none) ;; 12
     (manipulator-method-13 (_type_ vector vector) int) ;; 13
@@ -51371,9 +51371,9 @@
   :flag-assert         #xd00000030
   (:methods
     (new (symbol type) _type_) ;; 0
-    (editable-region-method-9 (_type_) none) ;; 9
-    (editable-region-method-10 (_type_) none) ;; 10
-    (editable-region-method-11 (_type_) none) ;; 11
+    (editable-region-method-9 (_type_ editable-array int int) none) ;; 9
+    (editable-region-method-10 (_type_ int) none) ;; 10
+    (editable-region-method-11 (_type_ vector int) none) ;; 11
     (editable-region-method-12 (_type_) none) ;; 12
     )
   )
@@ -51887,15 +51887,15 @@
     (mysql-nav-graph-method-12 (_type_ int) int) ;; 12
     (mysql-nav-graph-method-13 (_type_) int) ;; 13
     (mysql-nav-graph-method-14 (_type_) int) ;; 14
-    (mysql-nav-graph-method-15 (_type_) int) ;; 15
-    (mysql-nav-graph-method-16 (_type_) int) ;; 16
+    (mysql-nav-graph-method-15 (_type_ int int) int) ;; 15
+    (mysql-nav-graph-method-16 (_type_ int int) int) ;; 16
     (mysql-nav-graph-method-17 (_type_) int) ;; 17
-    (mysql-nav-graph-method-18 (_type_) none) ;; 18
+    (mysql-nav-graph-method-18 (_type_ mysql-nav-node symbol) none) ;; 18
     (mysql-nav-graph-method-19 (_type_) int) ;; 19
     (mysql-nav-graph-method-20 (_type_) int) ;; 20
-    (mysql-nav-graph-method-21 (_type_) symbol) ;; 21
+    (mysql-nav-graph-method-21 (_type_ symbol) symbol) ;; 21
     (mysql-nav-graph-method-22 (_type_) int) ;; 22
-    (mysql-nav-graph-method-23 (_type_) symbol) ;; 23
+    (mysql-nav-graph-method-23 (_type_ vector vector) symbol) ;; 23
     )
   )
   
@@ -52142,12 +52142,12 @@
   :flag-assert         #x1300000028
   (:methods
     (nav-mesh-editable-method-9 (_type_) none) ;; 9
-    (nav-mesh-editable-method-10 (_type_) none) ;; 10
-    (nav-mesh-editable-method-11 (_type_) none) ;; 11
-    (nav-mesh-editable-method-12 (_type_) none) ;; 12
+    (nav-mesh-editable-method-10 (_type_ symbol) none) ;; 10
+    (nav-mesh-editable-method-11 (_type_ vector) none) ;; 11
+    (nav-mesh-editable-method-12 (_type_ vector symbol) none) ;; 12
     (nav-mesh-editable-method-13 (_type_) none) ;; 13
-    (nav-mesh-editable-method-14 (_type_) none) ;; 14
-    (nav-mesh-editable-method-15 (_type_) none) ;; 15
+    (nav-mesh-editable-method-14 (_type_ vector) none) ;; 14
+    (nav-mesh-editable-method-15 (_type_ int) none) ;; 15
     (nav-mesh-editable-method-16 (_type_) none) ;; 16
     (nav-mesh-editable-method-17 (_type_) none) ;; 17
     (nav-mesh-editable-method-18 (_type_) none) ;; 18
@@ -52441,8 +52441,8 @@
   :flag-assert         #xc00000018
   (:methods
     (visvol-edit-info-method-9 (_type_) none) ;; 9
-    (visvol-edit-info-method-10 (_type_) none) ;; 10
-    (visvol-edit-info-method-11 (_type_) none) ;; 11
+    (visvol-edit-info-method-10 (_type_ process-drawable) none) ;; 10
+    (visvol-edit-info-method-11 (_type_ process-drawable) none) ;; 11
     )
   )
 
