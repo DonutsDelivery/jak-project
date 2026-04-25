@@ -14801,7 +14801,7 @@
     (set-start-line! (_type_) _type_) ;; 22
     (set-scale! (font-context float) font-context) ;; 23
     (set-alpha! (font-context float) font-context) ;; 24
-    (font-context-method-25 (_type_) font-context) ;; 25
+    (font-context-method-25 (_type_ float) none) ;; 25
     (font-context-method-26 (_type_ float) font-context) ;; 26
     (font-context-method-27 (_type_ uint) font-context) ;; 27
     (font-context-method-28 (_type_ uint) font-context) ;; 28
