@@ -63014,3 +63014,64 @@
   (conveyor)
   (none)
   )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Lane SM2 batch 2 - chained on batch 1 types
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; from jak3 all-types.gc L70957 - depends on triangle-dists (batch 1)
+(deftype assault-room-collision (structure)
+  ((cam-matrix    matrix         :inline :offset-assert 0)
+   (cam-pos       vector         :inline :offset-assert 64)
+   (clip-dists    triangle-dists :inline :offset-assert 80)
+   (hoz-clip-dist float                  :offset-assert 88)
+   )
+  :method-count-assert 9
+  :size-assert         #x5c
+  :flag-assert         #x90000005c
+  )
+
+;; from jak3 all-types.gc L70968 - depends on assault-cam-info + assault-room-collision (batches 1-2)
+(deftype assault-room (structure)
+  ((center-pos     vector                 :inline :offset-assert 0)
+   (cam-info       assault-cam-info               :offset-assert 16)
+   (collision      assault-room-collision         :offset-assert 20)
+   (node-positions (array vector)                 :offset-assert 24)
+   )
+  :method-count-assert 9
+  :size-assert         #x1c
+  :flag-assert         #x90000001c
+  )
+
+;; from jak3 all-types.gc L47119 - depends on bombbot-node (batch 1)
+(deftype bombbot-path (structure)
+  ((node-count uint16                       :offset-assert 0)
+   (node       (inline-array bombbot-node)  :offset-assert 4) ;; guessed by decompiler
+   )
+  :method-count-assert 9
+  :size-assert         #x8
+  :flag-assert         #x900000008
+  )
+
+;; from jak3 all-types.gc L57865 - depends on vehicle-wheel-surface-flag/-type (batch 1)
+(deftype vehicle-wheel-surface (structure)
+  ((flags            vehicle-wheel-surface-flag   :offset-assert 0)
+   (surface-type     vehicle-wheel-surface-type   :offset-assert 1)
+   (friction         float                        :offset-assert 4)
+   (drag             float                        :offset-assert 8)
+   (depth            float                        :offset-assert 12)
+   (damage           float                        :offset-assert 16)
+   (tire-roll-mix    float                      4 :offset-assert 20)
+   (tire-roll-hum    float                        :offset 20)
+   (tire-roll-dirt   float                        :offset 24)
+   (tire-roll-sand   float                        :offset 28)
+   (tire-roll-knobby float                        :offset 32)
+   (tire-slide-mix   float                      2 :offset-assert 36)
+   (tire-slide-road  float                        :offset 36)
+   (tire-slide-dirt  float                        :offset 40)
+   )
+  :method-count-assert 9
+  :size-assert         #x2c
+  :flag-assert         #x90000002c
+  )
