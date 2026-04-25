@@ -49,16 +49,21 @@ DECOMP_OUT_FALLBACK = ROOT / "decompiler_out" / "jakx"
 HACKS_JSONC = ROOT / "decompiler" / "config" / "jakx" / "ntsc_v1" / "hacks.jsonc"
 
 # Opcodes that crash run_mips2c — skip any FUNCTION body containing these.
-# VU: vsqi/viaddi/vlqi/viand/vmtirx
+# VU integer/control: vsqi/viaddi/vlqi/viand/vmtirx
 # PS2 extended FPU/MAC: mtlo1/mflo1 (extended accumulator), mula.s/madda.s/madd.s
 # Label-immediate forms (lui/ori/ld with `L<n>` operand): the mips2c emitter
 # calls InstructionAtom::get_imm() expecting an IMM atom but finds a LABEL,
 # tripping the same assertion at decompiler/Disasm/Instruction.cpp:118.
+# VU float broadcast forms (`v<op>.<bcst>` and `v<op>x[yzw]…`) — same get_imm()
+# assertion, observed in race-obs (race-banner-init-by-other → vaddx.w /
+# vmaddw.xyz / vmulax.xyzw) and qmtc2.i (interlocked COP2 move).
 # Observed crash sites: (method 99 net-player-race) [`lui v1, L914`],
-# (method 57 net-game-mgr-deathmatch).
+# (method 57 net-game-mgr-deathmatch), race-banner-init-by-other.
 VU_CRASH_OPCODES = re.compile(
     r"\b(vsqi|viaddi|vlqi|viand|vmtirx|mtlo1|mflo1|mula\.s|madda\.s|madd\.s)\b"
     r"|\b(lui|ori|ld)\b[^\n]*\bL\d+\b"
+    r"|\bv\w*\.(?:x|y|z|w|xy|xz|xw|yz|yw|zw|xyz|xyw|xzw|yzw|xyzw)\b"
+    r"|\bqmtc2\.i\b"
 )
 
 RE_DEF_FUNCTION = re.compile(r"^;; definition for function ([\w<>!?:\-\+\*/=]+)")
