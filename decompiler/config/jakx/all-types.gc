@@ -29528,9 +29528,9 @@
   :flag-assert         #x3b00700100
   (:methods
     (process-focusable-method-50 (_type_) int) ;; 50
-    (process-focusable-method-51 (_type_) none) ;; 51
-    (process-focusable-method-52 (_type_) none) ;; 52
-    (process-focusable-method-53 (_type_) none) ;; 53
+    (process-focusable-method-51 (_type_) vector) ;; 51
+    (process-focusable-method-52 (_type_) vector) ;; 52
+    (process-focusable-method-53 (_type_) vector) ;; 53
     (process-focusable-method-54 (_type_) int) ;; 54
     (process-focusable-method-55 (_type_) int) ;; 55
     (process-focusable-method-56 (_type_) int) ;; 56
@@ -37130,9 +37130,9 @@
   )
 
 
-(define-extern init-mood-fog-default (function none))
-(define-extern init-mood-fog-temple (function none))
-(define-extern init-mood-fog-drome (function none))
+(define-extern init-mood-fog-default (function vector))
+(define-extern init-mood-fog-temple (function vector))
+(define-extern init-mood-fog-drome (function vector))
 (define-extern update-mood-default-interior (function mood-context none :behavior time-of-day-proc))
 (define-extern update-mood-default-interior-ambient (function mood-context none :behavior time-of-day-proc))
 (define-extern update-rustyh-lights (function none))
@@ -37216,7 +37216,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern level-base-level-name (function symbol object))
-(define-extern add-want-level (function (inline-array level-buffer-state) (pointer int64) symbol symbol symbol symbol object))
+(define-extern add-want-level (function (inline-array level-buffer-state) (pointer int64) symbol symbol symbol symbol int))
 (define-extern *display-load-commands* symbol)
 (define-extern *backup-load-state* load-state)
 (define-extern *load-state* load-state)
@@ -41223,7 +41223,7 @@
 (define-extern find-water-1 (function water-sphere water-info water-info symbol))
 (define-extern find-water-2 (function (inline-array water-sphere) int water-info water-info process-drawable water-info))
 (define-extern find-water-simple (function none))
-(define-extern find-water-with-spheres (function (inline-array water-sphere) int water-info object))
+(define-extern find-water-with-spheres (function (inline-array water-sphere) int water-info int))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; water-flow                     ;;
