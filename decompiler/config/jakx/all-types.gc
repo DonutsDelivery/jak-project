@@ -4164,7 +4164,7 @@
 (define-extern *boss-hud-proc* object)
 (define-extern spawn-boss-hud (function object))
 (define-extern *boss-battle-continue-busy* object)
-(define-extern boss-battle-continue (function none))
+(define-extern boss-battle-continue (function object object none))
 (define-extern boss-battle-task (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -4346,7 +4346,7 @@
 (define-extern spawn-unused-hud-deathmatch-score-drop-view-2 (function none))
 (define-extern spawn-hud-deathmatch-score-drop (function none))
 (define-extern spawn-hud-deathmatch (function none))
-(define-extern get-best-defensive-powerup (function none))
+(define-extern get-best-defensive-powerup (function object object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-assassin                   ;;
@@ -47462,7 +47462,7 @@
   :size-assert         #x1c0
   :flag-assert         #x64013001c0
   (:methods
-    (net-player-deathmatch-method-98 (_type_) none) ;; 98
+    (net-player-deathmatch-method-98 (_type_ object object) none) ;; 98
     (net-player-deathmatch-method-99 (_type_) none) ;; 99
     )
   )
@@ -47505,7 +47505,7 @@
   :flag-assert         #x5600c0014d
   (:methods
     (net-game-mgr-assassin-method-84 (_type_) none) ;; 84
-    (net-game-mgr-assassin-method-85 (_type_) none) ;; 85
+    (net-game-mgr-assassin-method-85 (_type_ object) none) ;; 85
     )
   )
 
@@ -47523,8 +47523,8 @@
   :size-assert         #x210
   :flag-assert         #x6f01800210
   (:methods
-    (net-player-deathrace-method-108 (_type_) none) ;; 108
-    (net-player-deathrace-method-109 (_type_) none) ;; 109
+    (net-player-deathrace-method-108 (_type_ object object) none) ;; 108
+    (net-player-deathrace-method-109 (_type_ object) none) ;; 109
     (net-player-deathrace-method-110 (_type_) none) ;; 110
     )
   )
@@ -47655,7 +47655,7 @@
   :size-assert         #x194
   :flag-assert         #x5601100194
   (:methods
-    (net-game-mgr-artifact-method-84 (_type_) none) ;; 84
+    (net-game-mgr-artifact-method-84 (_type_ object object) none) ;; 84
     (net-game-mgr-artifact-method-85 (_type_) none) ;; 85
     )
   )
@@ -47847,8 +47847,8 @@
   :size-assert         #x220
   :flag-assert         #x6f01900220
   (:methods
-    (net-player-rushhour-method-108 (_type_) none) ;; 108
-    (net-player-rushhour-method-109 (_type_) none) ;; 109
+    (net-player-rushhour-method-108 (_type_ object object) none) ;; 108
+    (net-player-rushhour-method-109 (_type_ object) none) ;; 109
     (net-player-rushhour-method-110 (_type_) none) ;; 110
     )
   )
@@ -55003,8 +55003,8 @@
 (define-extern artifact-draw-init-remote (function none))
 (define-extern *msg-map-artifact-draw* array)
 (define-extern *net-process-class-info-artifact-draw* net-process-class-info)
-(define-extern get-artifact-position (function none))
-(define-extern get-artifact-color (function none))
+(define-extern get-artifact-position (function object object none))
+(define-extern get-artifact-color (function object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ctf-part                       ;;
