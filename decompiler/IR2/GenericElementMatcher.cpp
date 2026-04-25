@@ -890,6 +890,9 @@ MatchResult match(const Matcher& spec, Form* input, const Env* const env) {
 }
 
 MatchResult match(const Matcher& spec, FormElement* input, const Env* const env) {
+  if (!input) {
+    return {};
+  }
   Form hack;
   hack.elts().push_back(input);
   MatchResult result;

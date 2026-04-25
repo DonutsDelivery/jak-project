@@ -787,8 +787,7 @@ void ObjectFileDB::ir2_cfg_build_pass(int seg, ObjectFileData& data) {
 void ObjectFileDB::ir2_build_expressions(int seg, const Config& config, ObjectFileData& data) {
   for_each_function_in_seg_in_obj(seg, data, [&](Function& func) {
     (void)data;
-    if (func.ir2.top_form && func.ir2.env.has_type_analysis() && func.ir2.env.has_local_vars() &&
-        func.ir2.env.types_succeeded) {
+    if (func.ir2.top_form && func.ir2.env.has_type_analysis() && func.ir2.env.has_local_vars()) {
       auto name = func.name();
       auto arg_config = config.function_arg_names.find(name);
       auto var_config = config.function_var_overrides.find(name);
@@ -848,11 +847,7 @@ void ObjectFileDB::ir2_add_store_errors(int seg, ObjectFileData& data) {
 void ObjectFileDB::ir2_rewrite_inline_asm_instructions(int seg, ObjectFileData& data) {
   for_each_function_in_seg_in_obj(seg, data, [&](Function& func) {
     (void)data;
-    // Skip if no form tree or if type analysis produced partial/null type pointers.
-    // types_succeeded guards against the case where top_form exists but the form
-    // elements contain stale type references that cause null-deref SIGSEGV.
-    if (func.ir2.top_form && func.ir2.env.has_type_analysis() &&
-        func.ir2.env.types_succeeded) {
+    if (func.ir2.top_form && func.ir2.env.has_type_analysis()) {
       try {
         if (rewrite_inline_asm_instructions(func.ir2.top_form, *func.ir2.form_pool, func, dts)) {
           func.ir2.print_debug_forms = true;

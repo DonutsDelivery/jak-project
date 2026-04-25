@@ -8527,7 +8527,7 @@
   :size-assert         #x98
   :flag-assert         #xa00000098
   (:methods
-    (symbol type int) _type_) ;; 0
+    (new (symbol type int) _type_) ;; 0
     (cpad-info-method-9 (_type_) int) ;; 9
     )
   )
@@ -34490,7 +34490,7 @@
     (actor-link-info-method-15 (_type_) process) ;; 15
     (actor-link-info-method-16 (_type_ (function entity-actor object object) object) int) ;; 16
     (actor-link-info-method-17 (_type_ (function entity-actor object object) object) int) ;; 17
-    (_type_ (function entity-actor object object) object) int) ;; 18
+    (actor-link-info-method-18 (_type_ (function entity-actor object object) object) int) ;; 18
     (actor-link-info-method-19 (_type_ symbol) symbol) ;; 19
     (actor-link-info-method-20 (_type_ symbol) object) ;; 20
     (actor-link-info-method-21 (_type_ symbol) object) ;; 21
@@ -51120,7 +51120,7 @@
 (define-extern *auto-test-break* object)
 (define-extern check-entities (function none))
 (define-extern auto-test-node (function none))
-(define-extern auto-test-levels-init-by-other (function level object :behavior lprecurc-loader))
+(define-extern auto-test-levels-init-by-other (function level object :behavior process))
 (define-extern auto-test-levels-start (function none))
 (define-extern check-levels (function none))
 (define-extern *sound-clone* object)
@@ -53086,7 +53086,7 @@
   
 
 
-(define-extern save-memcard-init-by-other (function level object :behavior lprecurc-loader))
+(define-extern save-memcard-init-by-other (function level object :behavior process))
 (define-extern *debug-save-memcard-dead-pool* object)
 (define-extern start-save-memcard (function none))
 (define-extern *part-tester-name* string) ;; string

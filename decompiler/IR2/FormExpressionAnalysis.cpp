@@ -2079,7 +2079,7 @@ FormElement* SimpleExpressionElement::update_from_stack_logor_or_logand_helper(
       // I have only one example for this, so I think this unlikely to work in all cases.
       if (m_expr.get_arg(1).is_var()) {
         auto eti = env.dts->ts.try_enum_lookup(arg1_type.base_type());
-        if (eti) {
+        if (eti && eti->is_bitfield()) {
           auto integer = get_goal_integer_constant(strip_int_or_uint_cast(args.at(0)), env);
           if (integer && ((s64)*integer) < 0) {
             // clearing a bitfield.
