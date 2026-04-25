@@ -19701,7 +19701,7 @@
     (game-info-method-15 (_type_ level) int) ;; 15
     (game-info-method-16 (_type_ level) int) ;; 16
     (game-info-method-17 (_type_ symbol) _type_) ;; 17
-    (game-info-method-18 (_type_) continue-point) ;; 18
+    (game-info-method-18 (_type_ string) continue-point) ;; 18
     (game-info-method-19 (_type_ string) continue-point) ;; 19
     (game-info-method-20 (_type_ basic symbol) continue-point) ;; 20
     (game-info-method-21 (_type_) none) ;; 21
