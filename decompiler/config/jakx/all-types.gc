@@ -36702,7 +36702,7 @@
 (define-extern sprite-set-3d-quaternion! (function sprite-vec-data-3d quaternion quaternion))
 (define-extern sprite-get-3d-quaternion! (function quaternion sprite-vec-data-3d quaternion))
 (define-extern sprite-add-matrix-data (function dma-buffer uint none))
-(define-extern sprite-add-frame-data (function dma-buffer uint pointer))
+(define-extern sprite-add-frame-data (function dma-buffer uint none))
 (define-extern sprite-add-2d-chunk (function sprite-array-2d int int dma-buffer int none))
 (define-extern sprite-add-2d-all (function sprite-array-2d dma-buffer int none))
 (define-extern sprite-add-3d-chunk (function sprite-array-3d int int dma-buffer none))
@@ -37585,7 +37585,7 @@
 (define-extern dest-texture-init (function texture-anim int)) 
 (define-extern src-texture-init (function texture-anim-layer int)) 
 (define-extern src-texture-init-mt8 (function texture-anim-layer none))
-(define-extern make-noise-texture (function pointer int int int uint)) 
+(define-extern make-noise-texture (function pointer int int int none))
 (define-extern make-cloud-clut (function (pointer uint32) float float none))
 (define-extern texture-anim-cloud-clut-upload (function dma-buffer texture-anim none))
 (define-extern texture-anim-cloud-clut-init (function texture-anim int)) 
@@ -38099,7 +38099,7 @@
 (define-extern etn-magic (function none))
 (define-extern etn-init-consts (function none))
 (define-extern etn-init-engine (function none))
-(define-extern etn-end-buffer (function none))
+(define-extern etn-end-buffer "Set up DMA to finish TIE." (function dma-buffer none))
 (define-extern etn-float-reg-calc (function string))
 (define-extern etn-float-reg (function string))
 (define-extern etn-floats (function symbol))
@@ -43633,7 +43633,7 @@
   )
   
 
-(define-extern joint-exploder-joint-callback "Postbind callback to set bones to the result of the joint-exploder." (function draw-control cspace-array joint-control none))
+(define-extern joint-exploder-joint-callback (function draw-control cspace-array joint-control none))
 (define-extern joint-exploder-init-by-other (function skeleton-group int joint-exploder-tuning joint-exploder-static-params object :behavior joint-exploder))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -52972,7 +52972,7 @@
 (define-extern anim-tester-string-get-frame!! (function list-field string symbol))
 (define-extern anim-tester-load-object-seqs (function symbol))
 (define-extern anim-tester-save-object-seqs (function none))
-(define-extern anim-tester-save-all-objects (function none))
+(define-extern anim-tester-save-all-objects (function anim-tester symbol))
 (define-extern anim-tester-add-newobj (function none))
 (define-extern anim-tester-stop (function symbol))
 (define-extern anim-tester-start (function symbol))
@@ -53799,7 +53799,7 @@
     (alloc-new-visnode! (_type_ int int) int) ;; 16
     (mysql-nav-graph-method-17 (_type_) none) ;; 17
     (mysql-nav-graph-method-18 (_type_ mysql-nav-node symbol) none) ;; 18
-    (mysql-nav-graph-method-19 (_type_) int) ;; 19
+    (mysql-nav-graph-method-19 (_type_) none) ;; 19
     (mysql-nav-graph-method-20 (_type_) none) ;; 20
     (get-graph-type (_type_ symbol) symbol) ;; 21
     (mysql-nav-graph-method-22 (_type_) int) ;; 22

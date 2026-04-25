@@ -43233,4 +43233,166 @@
       "entity-actor"
     ]
   ]
+,
+  "make-noise-texture": [
+    [
+      32,
+      "t6",
+      "(pointer uint128)"
+    ],
+    [
+      34,
+      "t7",
+      "(pointer uint128)"
+    ],
+    [
+      36,
+      "t4",
+      "(pointer uint128)"
+    ],
+    [
+      42,
+      "t3",
+      "(pointer uint128)"
+    ],
+    [
+      44,
+      "t2",
+      "(pointer uint128)"
+    ]
+  ]
+,
+  "sparticle-track-root": [
+    [
+      2,
+      "v1",
+      "process-drawable"
+    ],
+    [
+      3,
+      "v1",
+      "collide-shape"
+    ]
+  ]
+,
+  "part-tracker-track-root": [
+    [
+      2,
+      "v1",
+      "process-drawable"
+    ],
+    [
+      3,
+      "v1",
+      "collide-shape"
+    ]
+  ]
+,
+  "anim-tester-save-all-objects": [
+    [
+      [
+        4,
+        19
+      ],
+      "gp",
+      "anim-test-obj"
+    ],
+    [
+      17,
+      "v1",
+      "anim-test-obj"
+    ]
+  ]
+,
+  "generic-upload-vu0": [
+    [
+      16,
+      "a0",
+      "dma-packet"
+    ],
+    [
+      17,
+      "a0",
+      "(pointer uint64)"
+    ]
+  ]
+,
+  "(method 42 ocean)": [
+    [
+      [
+        8,
+        16
+      ],
+      "a1",
+      "dma-packet"
+    ]
+  ]
+,
+  "etie-end-buffer": [
+    [
+      [
+        47,
+        54
+      ],
+      "a1",
+      "dma-packet"
+    ],
+    [
+      [
+        58,
+        69
+      ],
+      "a0",
+      "(pointer vif-tag)"
+    ]
+  ]
+,
+  "etie-ints": [
+    [
+      [
+        3,
+        30
+      ],
+      "gp",
+      "(pointer uint32)"
+    ]
+  ]
+,
+  "etn-end-buffer": [
+    [
+      [
+        47,
+        54
+      ],
+      "a1",
+      "dma-packet"
+    ],
+    [
+      [
+        58,
+        69
+      ],
+      "a0",
+      "(pointer vif-tag)"
+    ]
+  ]
+,
+  "etn-ints": [
+    [
+      [
+        3,
+        30
+      ],
+      "gp",
+      "(pointer uint32)"
+    ]
+  ]
+,
+  "(method 16 nav-engine)": [
+    [
+      92,
+      "gp",
+      "nav-engine-spr-buffer"
+    ]
+  ]
 }
