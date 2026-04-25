@@ -42206,5 +42206,33 @@
     [93, "s5", "vector"],
     [105, "s5", "vector"],
     [108, "s5", "vector"]
+  ],
+  // More *part-group-id-table* writes (sparticle-launch-group cluster).
+  "(top-level-login spartacus)": [
+    [4, "a0", "(array sparticle-launch-group)"],
+    [10, "a0", "(array sparticle-launch-group)"],
+    [16, "a0", "(array sparticle-launch-group)"],
+    [25, "a0", "(array sparticle-launch-group)"],
+    [34, "a0", "(array sparticle-launch-group)"],
+    [49, "a0", "(array sparticle-launch-group)"],
+    [64, "a0", "(array sparticle-launch-group)"],
+    [100, "a0", "(array sparticle-launch-group)"],
+    [130, "a0", "(array sparticle-launch-group)"],
+    [160, "a0", "(array sparticle-launch-group)"],
+    [171, "a0", "(array sparticle-launch-group)"],
+    [180, "a0", "(array sparticle-launch-group)"],
+    [195, "a0", "(array sparticle-launch-group)"]
+  ],
+  "(top-level-login net-artifact)": [
+    [220, "a0", "(array sparticle-launch-group)"]
+  ],
+  "(top-level-login net-deathrace)": [
+    [225, "a0", "(array sparticle-launch-group)"]
+  ],
+  "(top-level-login net-race-hud)": [
+    [80, "a0", "(array sparticle-launch-group)"]
+  ],
+  "(top-level-login powerups)": [
+    [22, "a0", "(array sparticle-launch-group)"]
   ]
 }
