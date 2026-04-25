@@ -31494,9 +31494,49 @@
 
   
 (deftype target (process-focusable)
-  ((self     target            :override)
-   (ppointer (pointer target)  :override)
-   (target-data uint8 592 :offset-assert 256) ;; placeholder to reach size 0x350
+  ((self                   target           :override)
+   (ppointer               (pointer target) :override)
+   ;; target's own fields, derived from inspect method asm (GOAL offset = MIPS offset + 4)
+   (vehicle                uint64           :offset-assert 256)  ;; MIPS 252
+   (game                   uint32           :offset-assert 264)  ;; MIPS 260
+   (dummy-0                uint8   4        :offset-assert 268)
+   (init-time              uint64           :offset-assert 272)  ;; MIPS 268
+   (teleport-time          uint64           :offset-assert 280)  ;; MIPS 276
+   (state-hook-time        uint64           :offset-assert 288)  ;; MIPS 284
+   (state-hook             uint32           :offset-assert 296)  ;; MIPS 292
+   (cam-user-mode          uint32           :offset-assert 300)  ;; MIPS 296
+   (anim-seed              uint64           :offset-assert 304)  ;; MIPS 300
+   (dummy-1                uint8  24        :offset-assert 312)
+   (current-level          uint32           :offset-assert 336)  ;; MIPS 332
+   (dummy-2                uint8  60        :offset-assert 340)
+   (saved-owner            uint64           :offset-assert 400)  ;; MIPS 396
+   (excitement             float            :offset-assert 408)  ;; MIPS 404
+   (dummy-3                uint8   4        :offset-assert 412)
+   (shock-effect-time      uint64           :offset-assert 416)  ;; MIPS 412
+   (fp-hud                 uint64           :offset-assert 424)  ;; MIPS 420
+   (no-load-wait           uint64           :offset-assert 432)  ;; MIPS 428
+   (no-look-around-wait    uint64           :offset-assert 440)  ;; MIPS 436
+   (burn-proc              uint64           :offset-assert 448)  ;; MIPS 444
+   (pre-joint-hook         uint32           :offset-assert 456)  ;; MIPS 452
+   (dummy-4                uint8   4        :offset-assert 460)
+   (notify                 uint64           :offset-assert 464)  ;; MIPS 460
+   (mode-cache             uint32           :offset-assert 472)  ;; MIPS 468
+   (dummy-5                uint8   4        :offset-assert 476)
+   (mode-param1            uint64           :offset-assert 480)  ;; MIPS 476
+   (mode-param2            uint64           :offset-assert 488)  ;; MIPS 484
+   (mode-param3            uint64           :offset-assert 496)  ;; MIPS 492
+   (major-mode-exit-hook   uint32           :offset-assert 504)  ;; MIPS 500
+   (major-mode-event-hook  uint32           :offset-assert 508)  ;; MIPS 504
+   (sub-mode-exit-hook     uint32           :offset-assert 512)  ;; MIPS 508
+   (dummy-6                uint8   4        :offset-assert 516)
+   (target-effect          uint64           :offset-assert 520)  ;; MIPS 516
+   (color-effect           uint32           :offset-assert 528)  ;; MIPS 524
+   (dummy-7                uint8   4        :offset-assert 532)
+   (color-effect-start-time uint64          :offset-assert 536)  ;; MIPS 532
+   (color-effect-duration  uint64           :offset-assert 544)  ;; MIPS 540
+   (yes-state              uint32           :offset-assert 552)  ;; MIPS 548
+   (no-state               uint32           :offset-assert 556)  ;; MIPS 552
+   (target-extra           uint8  288       :offset-assert 560)
    )
   :method-count-assert 60
   :size-assert         #x350
