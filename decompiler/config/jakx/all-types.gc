@@ -28926,7 +28926,7 @@
   :flag-assert         #x120000008c
   ;; field on-running uses ~A with a signed load. field on-complete uses ~A with a signed load.
   (:methods
-    (scene-method-16 (_type_ spool-anim) spool-anim) ;; 16
+    (init-spool-by-scene! (_type_ spool-anim) spool-anim) ;; 16
     (scene-method-17 (_type_) scene) ;; 17
     )
   )
@@ -30265,11 +30265,11 @@
     (compute-trans-at-time (_type_ float vector) vector) ;; 9
     (compute-transv-at-time (_type_ float vector) vector) ;; 10
     (compute-time-until-apex (_type_) float) ;; 11
-    (setup-from-to-duration! (_type_ vector vector float float) int) ;; 12
-    (setup-from-to-xz-vel! (_type_ vector vector float float) int) ;; 13
-    (setup-from-to-y-vel! (_type_ vector vector float float) int) ;; 14
-    (setup-from-to-height! (_type_ vector vector float float) int) ;; 15
-    (setup-from-to-duration-and-height! (_type_ vector vector float float) int) ;; 16
+    (setup-from-to-duration! (_type_ vector vector float float) none) ;; 12
+    (setup-from-to-xz-vel! (_type_ vector vector float float) none) ;; 13
+    (setup-from-to-y-vel! (_type_ vector vector float float) none) ;; 14
+    (setup-from-to-height! (_type_ vector vector float float) none) ;; 15
+    (setup-from-to-duration-and-height! (_type_ vector vector float float) none) ;; 16
     (debug-draw (_type_) none) ;; 17
     )
   )
@@ -30289,8 +30289,8 @@
   :flag-assert         #xc00000050
   (:methods
     (new (symbol type process-drawable int float collide-spec) _type_) ;; 0
-    (impact-control-method-9 (_type_ process-drawable int float collide-spec) impact-control) ;; 9
-    (impact-control-method-10 (_type_) int) ;; 10
+    (initialize (_type_ process-drawable int float collide-spec) impact-control) ;; 9
+    (update-from-cspace (_type_) none) ;; 10
     (impact-control-method-11 (_type_ collide-query process pat-surface) float) ;; 11
     )
   )
@@ -30304,8 +30304,8 @@
   :size-assert         #x20
   :flag-assert         #xc00000020
   (:methods
-    (new (symbol type) _type_) ;; 0
-    (point-tracker-method-9 (_type_ vector vector) point-tracker) ;; 9
+    (new (symbol type vector vector) _type_) ;; 0
+    (initialize (_type_ vector vector) point-tracker) ;; 9
     (point-tracker-method-10 (_type_ vector vector vector float) vector) ;; 10
     (point-tracker-method-11 (_type_ vector vector vector float) vector) ;; 11
     )
@@ -31613,7 +31613,7 @@
   :flag-assert         #xe00000034
   (:methods
     (perf-stat-method-9 (_type_) none) ;; 9 ;; (perf-stat-method-9 (_type_) none)
-    (perf-stat-method-10 (_type_ string basic) int) ;; 10
+    (print-to-stream (_type_ string basic) none) ;; 10
     (perf-stat-method-11 (_type_) int) ;; 11
     (perf-stat-method-12 (_type_) int) ;; 12
     (perf-stat-method-13 (_type_ uint uint uint) int) ;; 13
@@ -36545,11 +36545,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *merc-global-stats* merc-global-stats) ;; merc-global-stats
-(define-extern clear-tr-stat (function tr-stat none))
+(define-extern clear-tr-stat "Reset all statistics to 0." (function tr-stat none))
 (define-extern *stat-string-tfrag* string) ;; string
 (define-extern *stat-string-tfrag-scissor* string) ;; string
 (define-extern *stat-string-total* string) ;; string
-(define-extern print-tr-stat (function tr-stat string string none))
+(define-extern print-tr-stat "Print a single tr-stat to the screen." (function tr-stat string string none))
 (define-extern print-terrain-stats (function none))
 (define-extern update-subdivide-settings! (function subdivide-settings math-camera int none))
 (define-extern *subdivide-settings* subdivide-settings) ;; subdivide-settings
@@ -36877,7 +36877,7 @@
 (define-extern sprite-glow-init-consts (function sprite-glow-consts none)) ;; was: (function none) — backported from jak3
 (define-extern sprite-glow-init-engine (function dma-buffer none))
 (define-extern *sprite-glow-dma-packet-data* sprite-glow-dma-packet-data) ;; sprite-glow-dma-packet-data
-(define-extern sprite-glow-add-sprite (function dma-buffer sprite-vec-data-2d float float float adgif-shader none))
+(define-extern sprite-glow-add-sprite "Generate DMA to draw a single sprite from the aux-list." (function dma-buffer sprite-vec-data-2d float float float adgif-shader none))
 (define-extern sprite-glow-add-simple-sprite (function dma-buffer sprite-glow-dma-packet-data sprite-glow-data pointer none))
 (define-extern sprite-glow-draw (function dma-buffer none))
 (define-extern add-shader-to-dma (function dma-buffer adgif-shader))
@@ -37626,7 +37626,7 @@
 
 (define-extern *sky-texture-anim-array* texture-anim-array) ;; (texture-anim-array texture-anim)
 (define-extern set-fog-height! (function float float))
-(define-extern set-cloud-minmax! (function float float float))
+(define-extern set-cloud-minmax! (function float float none))
 (define-extern *default-pris-texture-anim-array* texture-anim-array)
 (define-extern *car-texture-anim-array-work* car-texture-anim-array-work)
 (define-extern car-texture-anim-layer-func (function none))
@@ -37975,7 +37975,7 @@
 (define-extern tie-int-reg (function int string))
 (define-extern tie-float-reg (function int string))
 (define-extern tie-ints (function symbol))
-(define-extern tie-floats (function symbol))
+(define-extern tie-floats "Dump TIE float regs for debug." (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; etie-vu1                       ;;
@@ -38798,8 +38798,8 @@
 (define-extern birth-func-omega-normal-orient (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
 (define-extern birth-func-rain (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
 (define-extern check-drop-level-rain (function sparticle-system sparticle-cpuinfo vector none))
-(define-extern check-drop-level-rain2 (function sparticle-system sparticle-cpuinfo vector symbol))
-(define-extern check-drop-level-splash (function sparticle-system sparticle-cpuinfo vector symbol))
+(define-extern check-drop-level-rain2 (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern check-drop-level-splash (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern cam-master-effect (function none :behavior camera-master))
 (define-extern sparticle-track-sun (function int sparticle-cpuinfo matrix none))
 
@@ -39383,8 +39383,8 @@
 (define-extern convert-korean-text (function string string))
 (define-extern text-is-loading symbol)
 (define-extern load-game-text-info (function string (pointer object) kheap int)) ;; (function string (pointer object) kheap int)
-(define-extern load-level-text-files (function int int)) ;; (function int none)
-(define-extern draw-debug-text-box (function font-context none)) ;; (function font-context none)
+(define-extern load-level-text-files (function int none))
+(define-extern draw-debug-text-box (function font-context none))
 (define-extern *print-game-text-work* print-game-text-work)
 (define-extern hyphenate-word (function string int))
 (define-extern print-game-text (function string font-context symbol int bucket-id string dma-buffer float)) ;; (function string font-context symbol int bucket-id float)
@@ -39566,7 +39566,7 @@
 
 
 (define-extern *grid-hash-work* grid-hash-work) ;; grid-hash-work
-(define-extern validate-bucket-bits (function grid-hash (pointer grid-hash-word) int))
+(define-extern validate-bucket-bits (function grid-hash (pointer grid-hash-word) symbol))
 (define-extern draw-grid (function vector vector (pointer int8) rgba none))
 (define-extern draw-sphere-box (function sphere rgba none))
 (define-extern draw-line-sphere (function vector vector float rgba none))
@@ -39693,7 +39693,7 @@
     (water-control-method-9 (_type_) none) ;; 9
     (water-control-method-10 (_type_) none) ;; 10
     (water-control-method-11 (_type_ float int int) none) ;; 11
-    (water-control-method-12 (_type_) float) ;; 12
+    (distance-from-surface (_type_) float) ;; 12
     (water-control-method-13 (_type_ float vector int vector symbol) none) ;; 13
     (water-control-method-14 (_type_) symbol) ;; 14
     (water-control-method-15 (_type_) none) ;; 15
@@ -39835,8 +39835,8 @@
   :flag-assert         #xc00000018
   (:methods
     (plane-volume-method-9 (_type_ symbol vector-array vector-array) plane-volume) ;; 9
-    (plane-volume-method-10 (_type_) int) ;; 10
-    (plane-volume-method-11 (_type_ vector float) symbol) ;; 11
+    (debug-draw (_type_) none) ;; 10
+    (point-in-vol? (_type_ vector float) symbol) ;; 11
     )
   )
 
@@ -42413,7 +42413,7 @@
 (define-extern *video-mode* int)
 (define-extern set-video-mode (function symbol int)) 
 (define-extern get-video-mode (function symbol))
-(define-extern set-aspect-ratio (function symbol int)) 
+(define-extern set-aspect-ratio (function symbol none))
 (define-extern get-aspect-ratio (function symbol))
 (define-extern set-progressive-scan (function symbol int)) 
 (define-extern get-progressive-scan (function symbol))
@@ -42999,7 +42999,7 @@
     (flow-control-method-9 (_type_) none) ;; 9
     (flow-control-method-10 (_type_ (pointer float) int) none) ;; 10
     (flow-control-method-11 (_type_ process-focusable) none) ;; 11
-    (flow-control-method-12 (_type_) int) ;; 12
+    (find-and-push-things (_type_) none) ;; 12
     (flow-control-method-13 (_type_ water-info vector) none) ;; 13
     )
   )
@@ -52511,7 +52511,7 @@
 ;; vehicle-effects                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern calc-fade-vals (function float object)) 
+(define-extern calc-fade-vals (function float none))
 (define-extern *vehicle-headlight-glow-template* sprite-glow-data) ;; sprite-glow-data
 (define-extern *vehicle-taillight-glow-template* sprite-glow-data) ;; sprite-glow-data
 (define-extern *vehicle-thruster-glow-template* sprite-glow-data) ;; sprite-glow-data
