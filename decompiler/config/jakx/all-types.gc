@@ -155,6 +155,11 @@
   (galician 24)
   )
 
+(defenum language-enum-s32
+  :type int32
+  :copy-entries language-enum
+  )
+
 (define-extern *debug-segment* symbol)
 (define-extern nothing (function none))
 (define-extern _format (function _varargs_ object))
@@ -11033,6 +11038,187 @@
     (trail-graph-method-33 (_type_ int) symbol) ;; 33
     )
   )
+
+(defenum minimap-class
+  :type uint16
+  (none 0)
+  (onintent 1)
+  (vinroom 2)
+  (sewer-kg 3)
+  (sewer-genb 4)
+  (sewer-slumb 5)
+  (hiphog 6)
+  (gungame 7)
+  (gun-yellow 8)
+  (desert-nest-entrance 9)
+  (guard 10)
+  (parking-spot 11)
+  (goal 12)
+  (goal-no-trail 13)
+  (goal-no-trail-bigmap 14)
+  (cty-sniper-vicinity 15)
+  (forest 16)
+  (wascity-gungame 17)
+  (city-transport 18)
+  (wascity-leaper-race 19)
+  (wascity-pre-game 20)
+  (desert-transport 21)
+  (waspal 22)
+  (stadium 23)
+  (wasteland-arena 24)
+  (guard-frustum 25)
+  (wasdoors 26)
+  (gun-dark 27)
+  (spargus-city 28)
+  (racer 29)
+  (racer-target 30)
+  (racer-errol 31)
+  (monk-temple 32)
+  (bbush-desd 33)
+  (bbush-desc 34)
+  (bbush-desa 35)
+  (bbush-desg 36)
+  (bbush-desh 37)
+  (bbush-desc-2 38)
+  (bbush-dese 39)
+  (bbush-desb 40)
+  (bbush-desa-2 41)
+  (bbush-desc-3 42)
+  (bbush-desg-2 43)
+  (bbush-desd-2 44)
+  (bbush-desg-3 45)
+  (bbush-dese-2 46)
+  (bbush-dese-3 47)
+  (bbush-desd-3 48)
+  (bbush-desb-2 49)
+  (bbush-wasa-1 50)
+  (bbush-wasa-2 51)
+  (bbush-wasa-3 52)
+  (bbush-wasa-4 53)
+  (bbush-wasb-2 54)
+  (bbush-wasb-1 55)
+  (bbush-wasb-4 56)
+  (bbush-wasb-3 57)
+  (bbush-desg-4 58)
+  (bbush-wasb-5 59)
+  (bbush-wasb-6 60)
+  (bbush-desa-3 61)
+  (bbush-wasa-5 62)
+  (bbush-desd-4 63)
+  (bbush-desd-5 64)
+  (bbush-sluma-1 65)
+  (bbush-genb-1 66)
+  (bbush-slumb-1 67)
+  (bbush-slumb-3 68)
+  (bbush-desc-4 69)
+  (bbush-inda-1 70)
+  (bbush-dese-4 71)
+  (bbush-desc-5 72)
+  (bbush-desb-3 73)
+  (bbush-wasa-6 74)
+  (bbush-wasb-7 75)
+  (bbush-indb-1 76)
+  (bbush-desf 77)
+  (bbush-port-1 78)
+  (bbush-genb-2 79)
+  (bbush-genb-3 80)
+  (bbush-genb-4 81)
+  (bbush-slumb-4 82)
+  (bbush-slumc-1 83)
+  (bbush-dese-5 84)
+  (bbush-post-game 85)
+  (bbush-slumc-2 86)
+  (bbush-sluma-2 87)
+  (bbush-sluma-3 88)
+  (bbush-indb-2 89)
+  (bbush-indb-3 90)
+  (bbush-inda-2 91)
+  (bbush-inda-3 92)
+  (bbush-inda-4 93)
+  (bbush-inda-5 94)
+  (bbush-port-4 95)
+  (bbush-port-5 96)
+  (bbush-port-6 97)
+  (bbush-port-7 98)
+  (bbush-port-8 99)
+  (bbush-desb-4 100)
+  (atoll-valve 101)
+  (atoll-ashelin 102)
+  (mountain-lens 103)
+  (mountain-shard 104)
+  (mountain-gear 105)
+  (ruins-hut 106)
+  (forest-samos 107)
+  (metalhead 108)
+  (kleever-arena 109)
+  (seem-wascitya 110)
+  (seem-wascityb 111)
+  (kleever-wasdoors 112)
+  (damus-wasdoors 113)
+  (damus-waspal 114)
+  (damus-arena 115)
+  (kleever-wascityb 116)
+  (red-clamped-dot 117)
+  (tiny-red-dot 118)
+  (desert-temple 119)
+  (desert-oasis 120)
+  (desert-corral 121)
+  (sig-wasdoors 122)
+  (freehq 123)
+  (green-clamped-dot 124)
+  (nest-cocoon 125)
+  (nest-bridge 126)
+  (factory 127)
+  (big-orange-flashing-clamped-dot 128)
+  (big-red-flashing-clamped-dot 129)
+  (big-green-flashing-clamped-dot 130)
+  (big-purple-flashing-clamped-dot 131)
+  (medium-purple-dot 132)
+  (parked-vehicle 133)
+  (samos-genb 134)
+  (projectile 135)
+  (desertb-race 136)
+  (big-red-flashing-trail-dot 137)
+  (big-green-flashing-trail-dot 138)
+  (robot-frustum 139)
+  (desert-marauder-village 140)
+  (gray-clamped-dot 141)
+  (volcano-monk 142)
+  (volcano-collapsing-rock 143)
+  (volcano-stone-lid 144)
+  (volcano-dark-maker-idol 145)
+  (medium-green-dot 146)
+  (big-red-flashing-dot 147)
+  (factory-clamped-target 148)
+  (factory-clamped-tower 149)
+  (desglide-ring-dot 150)
+  (desglide-thermal-dot 151)
+  (mine-elevator 152)
+  (mine-armor 153)
+  (mine-sign-up 154)
+  (mine-sign-down 155)
+  (mine-door 156)
+  (ruins-elec-gate 157)
+  (ruins-goal 158)
+  (dp-bipedal 159)
+  (neo-wasp 160)
+  (dark-maker 161)
+  (templea-door 162)
+  (templeb-watchers 163)
+  (templeb-regen 164)
+  (templeb-warpgate 165)
+  (templex-darkmaker 166)
+  (temple-tests-door 167)
+  (templeb-freeze 168)
+  (temple-elev 169)
+  (factoryc-vehicle 170)
+  (templeb-defend 171)
+  (templeb-seem 172)
+  (temple-defend-door-1 173)
+  (temple-defend-door-2 174)
+  (temple-defend-door-3 175)
+  (palace-ruins 176)
+  )
   
 
 
@@ -20613,6 +20799,27 @@
   ;; field param1 uses ~A with a signed load. field param2 uses ~A with a signed load. field param3 uses ~A with a signed load.
   )
 
+(defenum lightning-spec-flags
+  :type uint16
+  :bitfield #t
+  (lsf0 0)
+  (lsf1 1)
+  (lsf2 2)
+  (lsf3 3)
+  (lsf4 4)
+  (lsf5 5)
+  (lsf6 6)
+  (lsf7 7)
+  (lsf8 8)
+  (lsf9 9)
+  (lsf10 10)
+  (lsf11 11)
+  (lsf12 12)
+  (lsf13 13)
+  (lsf14 14)
+  (lsf15 15)
+  )
+
 (define-extern *background-draw-engine* engine)
 (define-extern *matrix-engine* (array handle))
 (define-extern *cloth-engine* (array handle))
@@ -20678,6 +20885,15 @@
   :method-count-assert 9
   :size-assert         #x94
   :flag-assert         #x900000094
+  )
+
+(defenum lightning-mode
+  :type uint8
+  (lm-1 -1)
+  (lm0 0)
+  (lm1 1)
+  (lm2 2)
+  (lm3 3)
   )
 
 
@@ -28964,6 +29180,16 @@
   :flag-assert         #x900000008
   )
 
+(defenum joint-mod-polar-flags
+  :type uint32
+  :bitfield #t
+  (no-z-rot 0)
+  (blending-to-zero 1)
+  (negate-nose 2)
+  (negate-ear 3)
+  (negate-up 4)
+  )
+
 
 
   
@@ -29367,6 +29593,16 @@
   :method-count-assert 55
   :size-assert         #x1d8
   :flag-assert         #x37000001d8
+  )
+
+(defenum manipy-options
+  :bitfield #t
+  :type uint32
+  (mo0 0)
+  (mo1 1)
+  (mo2 2)
+  (mo3 3)
+  (mo4 4)
   )
 
 #|
@@ -40050,6 +40286,14 @@
   :size-assert         #x10
   :flag-assert         #xe00000010
   )
+
+(defenum lie-mode
+  :type uint64
+  (appearance0)
+  (appearance1)
+  (appearance2)
+  (use-two-strips 3)
+  )
   
 
 
@@ -40107,6 +40351,13 @@
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
+  )
+
+(defenum light-trail-decision
+  :type uint64
+  (added 0)
+  (not-added 1)
+  (reset 2)
   )
   
 
@@ -51995,6 +52246,25 @@
   (:states
     part-tester-idle
     )
+  )
+
+(defenum manipulator-mode
+  :type uint32
+  (mm0 0)
+  (mm1 1)
+  (mm2 2)
+  )
+
+(defenum manipulator-action
+  :type uint32
+  (ma0 0)
+  (ma1 1)
+  (ma2 2)
+  (ma3 3)
+  (ma4 4)
+  (ma5 5)
+  (ma6 6)
+  (ma7 7)
   )
   
 
