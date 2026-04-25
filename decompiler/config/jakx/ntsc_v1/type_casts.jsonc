@@ -42234,5 +42234,55 @@
   ],
   "(top-level-login powerups)": [
     [22, "a0", "(array sparticle-launch-group)"]
+  ],
+  // *ocean-map-atoll* symbol typed `object` in jakx; should be `ocean-map`.
+  // Field offsets confirmed against ocean-map deftype (32=colors, 36=mid-indices,
+  // 40=trans-indices, 44=near-indices, 48=mid-masks).
+  "(top-level-login atoll-ocean)": [
+    [14, "a0", "ocean-map"],
+    [17, "a0", "ocean-map"],
+    [20, "a0", "ocean-map"],
+    [23, "a0", "ocean-map"],
+    [26, "v1", "ocean-map"]
+  ],
+  // *minimap* symbol typed `object`; should be `minimap` (offset 272 = engine field).
+  "(top-level-login minimap)": [
+    [17, "gp", "minimap"]
+  ],
+  // *v-mongoose-constants* and other vehicle constants symbols are typed `object`
+  // in jakx; should be `rigid-body-vehicle-constants`. Field offsets confirmed:
+  // +3236 = explosion (vehicle-explosion-info), +3244 = debris (debris-static-params).
+  // 15 vehicle init blocks * 2 stores each = 30 op casts.
+  "(top-level-login wcar)": [
+    [6, "a0", "rigid-body-vehicle-constants"],
+    [8, "v1", "rigid-body-vehicle-constants"],
+    [13, "a0", "rigid-body-vehicle-constants"],
+    [15, "v1", "rigid-body-vehicle-constants"],
+    [20, "a0", "rigid-body-vehicle-constants"],
+    [22, "v1", "rigid-body-vehicle-constants"],
+    [27, "a0", "rigid-body-vehicle-constants"],
+    [29, "v1", "rigid-body-vehicle-constants"],
+    [34, "a0", "rigid-body-vehicle-constants"],
+    [36, "v1", "rigid-body-vehicle-constants"],
+    [41, "a0", "rigid-body-vehicle-constants"],
+    [43, "v1", "rigid-body-vehicle-constants"],
+    [48, "a0", "rigid-body-vehicle-constants"],
+    [50, "v1", "rigid-body-vehicle-constants"],
+    [55, "a0", "rigid-body-vehicle-constants"],
+    [57, "v1", "rigid-body-vehicle-constants"],
+    [62, "a0", "rigid-body-vehicle-constants"],
+    [64, "v1", "rigid-body-vehicle-constants"],
+    [69, "a0", "rigid-body-vehicle-constants"],
+    [71, "v1", "rigid-body-vehicle-constants"],
+    [76, "a0", "rigid-body-vehicle-constants"],
+    [78, "v1", "rigid-body-vehicle-constants"],
+    [83, "a0", "rigid-body-vehicle-constants"],
+    [85, "v1", "rigid-body-vehicle-constants"],
+    [90, "a0", "rigid-body-vehicle-constants"],
+    [92, "v1", "rigid-body-vehicle-constants"],
+    [104, "a0", "rigid-body-vehicle-constants"],
+    [106, "v1", "rigid-body-vehicle-constants"],
+    [111, "a0", "rigid-body-vehicle-constants"],
+    [113, "v1", "rigid-body-vehicle-constants"]
   ]
 }
