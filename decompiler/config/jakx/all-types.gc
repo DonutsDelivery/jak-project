@@ -37062,7 +37062,7 @@
   ;; field out uses ~A with a signed load.
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type uint) _type_)
-    (history-iterator-method-9 (_type_ history-elt) time-frame) ;; 9 ;; (frame-counter-delta (_type_ history-elt) time-frame)
+    (history-iterator-method-9 (_type_ history-elt) time-frame) ;; 9
     (history-iterator-method-10 (_type_) history-elt) ;; 10
     (history-iterator-method-11 (_type_ history-elt) float) ;; 11
     )
