@@ -33602,7 +33602,7 @@
   (:methods
     (add! (_type_ sprite-glow-data) none) ;; 9
     (draw-all-sprites! (_type_ dma-buffer) none) ;; 10
-    (clear! "Reset the list." (_type_) int) ;; 11
+    (clear! (_type_) none) ;; 11
     )
   )
 
