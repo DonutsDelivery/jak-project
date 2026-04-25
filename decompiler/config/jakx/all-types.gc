@@ -35937,7 +35937,7 @@
     (grid-hash-method-20 (_type_ grid-hash-box (pointer uint8)) none) ;; 20 ;; do-search!
     (grid-hash-method-21 (_type_ grid-hash-box vector vector) int) ;; 21 ;; set-up-box
     (grid-hash-method-22 (_type_ grid-hash-box sphere) none) ;; 22 ;; sphere-to-grid-box
-    (grid-hash-method-23 (_type_ grid-hash-box vector vector float) int) ;; 23 ;; line-sphere-to-grid-box
+    (grid-hash-method-23 (_type_ grid-hash-box vector vector) none) ;; 23
     (grid-hash-method-24 (_type_) none) ;; 24 ;; update-grid
     (grid-hash-method-25 (_type_) none) ;; 25
     (grid-hash-method-26 (_type_) none) ;; 26
