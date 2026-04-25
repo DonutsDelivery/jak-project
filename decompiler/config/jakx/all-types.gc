@@ -42106,8 +42106,8 @@
     (net-process-mgr-method-41 (_type_) int) ;; 41
     (net-process-mgr-method-42 (_type_) none) ;; 42
     (net-process-mgr-method-43 (_type_) none) ;; 43
-    (net-process-mgr-method-44 (_type_) none) ;; 44
-    (net-process-mgr-method-45 (_type_) none) ;; 45
+    (net-process-mgr-method-44 (_type_) int) ;; 44
+    (net-process-mgr-method-45 (_type_) int) ;; 45
     (net-process-mgr-method-46 (_type_) uint) ;; 46
     (net-process-mgr-method-47 (_type_) none) ;; 47
     (net-process-mgr-method-48 (_type_) none) ;; 48
@@ -45091,7 +45091,7 @@
     (net-player-method-89 (_type_) none) ;; 89
     (net-player-method-90 (_type_) none) ;; 90
     (net-player-method-91 (_type_) symbol) ;; 91
-    (net-player-method-92 (_type_) none) ;; 92
+    (net-player-method-92 (_type_) int) ;; 92
     (net-player-method-93 (_type_) none) ;; 93
     (net-player-method-94 (_type_) none) ;; 94
     (net-player-method-95 (_type_) none) ;; 95
@@ -45225,7 +45225,7 @@
     (net-world-method-50 (_type_) none) ;; 50
     (net-world-method-51 (_type_) none) ;; 51
     (net-world-method-52 (_type_) none) ;; 52
-    (net-world-method-53 (_type_) none) ;; 53
+    (net-world-method-53 (_type_) symbol) ;; 53
     (net-world-method-54 (_type_) symbol) ;; 54
     (net-world-method-55 (_type_) none) ;; 55
     (net-world-method-56 (_type_) none) ;; 56
@@ -45246,12 +45246,12 @@
     (net-world-method-71 (_type_) symbol) ;; 71
     (net-world-method-72 (_type_) none) ;; 72
     (net-world-method-73 (_type_) none) ;; 73
-    (net-world-method-74 (_type_) none) ;; 74
+    (net-world-method-74 (_type_) int) ;; 74
     (net-world-method-75 (_type_) none) ;; 75
     (net-world-method-76 (_type_) none) ;; 76
     (net-world-method-77 (_type_) none) ;; 77
     (net-world-method-78 (_type_) none) ;; 78
-    (net-world-method-79 (_type_) none) ;; 79
+    (net-world-method-79 (_type_) symbol) ;; 79
     (net-world-method-80 (_type_) symbol) ;; 80
     (net-world-method-81 (_type_) none) ;; 81
     (net-world-method-82 (_type_) none) ;; 82
@@ -52006,13 +52006,13 @@
     (nav-graph-editor-method-49 (_type_) symbol) ;; 49
     (nav-graph-editor-method-50 (_type_) none) ;; 50
     (nav-graph-editor-method-51 (_type_) none) ;; 51
-    (nav-graph-editor-method-52 (_type_) none) ;; 52
+    (nav-graph-editor-method-52 (_type_) int) ;; 52
     (nav-graph-editor-method-53 (_type_) none) ;; 53
     (nav-graph-editor-method-54 (_type_) none) ;; 54
     (nav-graph-editor-method-55 (_type_) none) ;; 55
-    (nav-graph-editor-method-56 (_type_) none) ;; 56
+    (nav-graph-editor-method-56 (_type_) int) ;; 56
     (nav-graph-editor-method-57 (_type_) none) ;; 57
-    (nav-graph-editor-method-58 (_type_) none) ;; 58
+    (nav-graph-editor-method-58 (_type_) int) ;; 58
     (nav-graph-editor-method-59 (_type_) symbol) ;; 59
     (nav-graph-editor-method-60 (_type_) none) ;; 60
     (nav-graph-editor-method-61 (_type_) none) ;; 61
