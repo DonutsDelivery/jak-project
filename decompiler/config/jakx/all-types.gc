@@ -1888,7 +1888,7 @@
   
 
 
-(define-extern task-arrow-init-by-other (function none)) ;; (function task-arrow-params object :behavior task-arrow)
+(define-extern task-arrow-init-by-other (function task-arrow-params object :behavior task-arrow))
 (define-extern task-arrow-spawn (function task-arrow-params process-tree process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2161,10 +2161,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *explosion-effect-suppress* object)
-(define-extern explosion-init-by-other (function none)) ;; (function explosion-init-params object :behavior explosion)
+(define-extern explosion-init-by-other (function explosion-init-params object :behavior explosion))
 (define-extern explosion-spawn-legacy-version (function process-drawable type explosion-init-params (pointer process)))
 (define-extern explosion-spawn (function explosion-init-params process-drawable none))
-(define-extern find-closest-solid-sphere-prim (function none)) ;; (function collide-shape vector collide-spec collide-shape-prim)
+(define-extern find-closest-solid-sphere-prim (function collide-shape vector collide-spec collide-shape-prim))
 (define-extern *explosion-debug-sphere* sphere) ;; sphere
 (define-extern explosion-handle-touch-with-ccheck (function none))
 (define-extern explosion-handle-touch-without-ccheck (function none))
@@ -4734,8 +4734,8 @@
 
 
 (define-extern *wheel-trail-info* light-trail-composition)
-(define-extern tire-trail-tracker-init-by-other (function none)) ;; (function light-trail-tracker-spawn-params object :behavior tire-trail-tracker)
-(define-extern spawn-tire-trail-tracker (function none)) ;; (function process light-trail-tracker-spawn-params tire-trail-tracker)
+(define-extern tire-trail-tracker-init-by-other (function light-trail-tracker-spawn-params object :behavior tire-trail-tracker))
+(define-extern spawn-tire-trail-tracker (function process light-trail-tracker-spawn-params tire-trail-tracker))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-sounds                ;;
@@ -6012,7 +6012,7 @@
 
 (define-extern *minimap* object) ;; minimap
 (define-extern *minimap-class-list* object) ;; (inline-array minimap-class-node)
-(define-extern lookup-minimap-texture-by-name (function none)) ;; (function string string (pointer texture-page) texture)
+(define-extern lookup-minimap-texture-by-name (function string string (pointer texture-page) texture))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; jakx-init                      ;;
@@ -28477,7 +28477,7 @@
   
 
 
-(define-extern joint-mod-debug-draw (function none)) ;; (function joint-mod none)
+(define-extern joint-mod-debug-draw "Debug draw the bone transform for the associated bone of a joint-mod" (function joint-mod none))
 (define-extern joint-mod-spinner-callback (function cspace transformq none))
 (define-extern joint-mod-rotate-local-callback (function cspace transformq none))
 (define-extern joint-mod-trans-rot-local-callback (function none))
@@ -37878,8 +37878,8 @@
 (define-extern find-ground-point (function control-info vector float float vector))
 (define-extern collide-shape-moving-angle-set! (function collide-shape-moving vector vector none))
 (define-extern cshape-reaction-update-state (function control-info collide-query vector none))
-(define-extern cshape-reaction-default (function none)) ;; (function control-info collide-query vector vector collide-status)
-(define-extern cshape-reaction-just-move (function none)) ;; (function control-info collide-query vector collide-status)
+(define-extern cshape-reaction-default (function control-info collide-query vector vector collide-status))
+(define-extern cshape-reaction-just-move (function control-info collide-query vector collide-status))
 (define-extern collide-shape-draw-debug-marks (function none))
 (define-extern *col-timer* stopwatch) ;; stopwatch
 (define-extern *frame-timer* stopwatch) ;; stopwatch
@@ -39953,7 +39953,7 @@
 ;; projectile                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern cshape-reaction-projectile (function none)) ;; (function control-info collide-query vector vector collide-status)
+(define-extern cshape-reaction-projectile (function control-info collide-query vector vector collide-status))
 (define-extern projectile-event-handler (function process int symbol event-message-block projectile :behavior projectile))
 (define-extern projectile-move-fill-all-dirs (function projectile none))
 (define-extern projectile-move-fill-line-sphere (function projectile none))
@@ -39964,7 +39964,7 @@
 (define-extern projectile-bounce-update-velocity (function projectile-bounce none :behavior projectile))
 (define-extern projectile-bounce-falling-post (function none :behavior projectile-bounce))
 (define-extern projectile-bounce-move (function projectile-bounce none))
-(define-extern projectile-bounce-reaction (function none)) ;; (function control-info collide-query vector vector collide-status)
+(define-extern projectile-bounce-reaction (function control-info collide-query vector vector collide-status))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; rigid-body-h                   ;;
