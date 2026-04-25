@@ -15676,7 +15676,7 @@
     (setting-control-method-17 (_type_ symbol object object object) connection) ;; 17
     (setting-control-method-18 (_type_) user-setting-data) ;; 18
     (move-connection-to-dead (_type_) user-setting-data) ;; 19
-    (setting-control-method-20 (_type_) symbol) ;; 20
+    (setting-control-method-20 (_type_ object) connectable) ;; 20
     (remove-setting-by-arg0 (_type_ object) int) ;; 21
     (set-setting-by-param (_type_ symbol object object object) connection) ;; 22
     (setting-control-method-23 (_type_) none) ;; 23
