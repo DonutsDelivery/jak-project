@@ -609,6 +609,19 @@
 (declare-type event-message-block structure)
 (declare-type level basic)
 
+
+;; Lane N — forward-decl cluster
+(declare-type connectable structure)
+(declare-type task-arrow process-drawable)
+(declare-type race-state structure)
+(declare-type powerup-draw process-drawable)
+(declare-type explosion process-drawable)
+(declare-type trsq basic)
+(declare-type trsqv trsq)
+(declare-type collide-shape trsqv)
+(declare-type collide-shape-prim basic)
+(declare-type grand-prix structure)
+
 (defenum process-mask
   :type uint32
   :bitfield #t
