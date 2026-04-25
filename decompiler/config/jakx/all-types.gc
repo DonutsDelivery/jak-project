@@ -5398,7 +5398,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern check-travel (function none))
-(define-extern *previous-angle* object)
+(define-extern *previous-angle* float)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-net                   ;;
@@ -49730,7 +49730,7 @@
 (define-extern fake-chat-msg (function none))
 (define-extern send-chat-with-clan-id (function none))
 (define-extern send-chat-with-game-id (function none))
-(define-extern *chat-msg-box* object)
+(define-extern *chat-msg-box* vector)
 (define-extern *chat-popup-sx* object)
 (define-extern *r2-press-time* object)
 (define-extern temp-render-chat-messages (function symbol))
@@ -54582,7 +54582,7 @@
   
 
 
-(define-extern *seat-offset* object)
+(define-extern *seat-offset* vector)
 (define-extern *daxter-rotate* float)
 (define-extern daxter-init-by-other (function none))
 (define-extern daxter-spawn (function process))
