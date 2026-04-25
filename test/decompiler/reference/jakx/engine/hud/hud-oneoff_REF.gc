@@ -1,0 +1,108 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition of type hoff-text-floater
+(deftype hoff-text-floater (process)
+  ((screen-from  vector  :inline)
+   (float-rate   float)
+   (duration     uint64)
+   (state-time   uint64)
+   (context      basic)
+   (text         basic)
+   )
+  (:methods
+    (hoff-text-floater-method-9 (_type_) none)
+    (run () _type_ :state)
+    (hoff-text-floater-method-11 (_type_) none)
+    (hoff-text-floater-method-12 (_type_) none)
+    (hoff-text-floater-method-13 (_type_) none)
+    (hoff-text-floater-method-14 (_type_) none)
+    (hoff-text-floater-method-15 (_type_) none)
+    )
+  )
+
+;; definition for method 3 of type hoff-text-floater
+(defmethod inspect ((this hoff-text-floater))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (let ((t9-0 (method-of-type process inspect)))
+    (t9-0 this)
+    )
+  (format #t "~2Tscreen-from: #<vector @ #x~X>~%" (-> this stack))
+  (format #t "~2Tfloat-rate: ~f~%" (-> this float-rate))
+  (format #t "~2Tduration: ~D~%" (-> this duration))
+  (format #t "~2Tstate-time: ~D~%" (-> this state-time))
+  (format #t "~2Tcontext: ~A~%" (-> this context))
+  (format #t "~2Ttext: ~A~%" (-> this text))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type hoff-text-floater-init-params
+(deftype hoff-text-floater-init-params (structure)
+  ((world-from           vector  :inline)
+   (float-rate           float)
+   (duration             uint32)
+   (in-view              int32)
+   (in-static-string     basic)
+   (alloc-string-length  uint8)
+   (color                uint8)
+   (scale                float)
+   (flags                uint16)
+   )
+  )
+
+;; definition for method 3 of type hoff-text-floater-init-params
+(defmethod inspect ((this hoff-text-floater-init-params))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'hoff-text-floater-init-params)
+  (format #t "~1Tworld-from: #<vector @ #x~X>~%" (-> this world-from))
+  (format #t "~1Tfloat-rate: ~f~%" (-> this float-rate))
+  (format #t "~1Tduration: ~D~%" (-> this duration))
+  (format #t "~1Tin-view: ~D~%" (-> this in-view))
+  (format #t "~1Tin-static-string: ~A~%" (-> this in-static-string))
+  (format #t "~1Talloc-string-length: ~D~%" (-> this alloc-string-length))
+  (format #t "~1Tcolor: ~D~%" (-> this color))
+  (format #t "~1Tscale: ~f~%" (-> this scale))
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (label cfg-4)
+  this
+  )
+
+;; definition for method 7 of type hoff-text-floater
+(defmethod relocate ((this hoff-text-floater) (offset int))
+  (let ((v1-0 (-> this text)))
+    (if (and (>= (the-as int v1-0) (-> *kernel-context* relocating-min))
+             (< (the-as int v1-0) (-> *kernel-context* relocating-max))
+             )
+        (&+! (-> this text) offset)
+        )
+    )
+  (if (nonzero? (-> this context))
+      (&+! (-> this context) offset)
+      )
+  (call-parent-method this offset)
+  )
+
+;; definition for function hoff-text-floater-init-by-other
+;; INFO: function output is handled by mips2c
+(def-mips2c hoff-text-floater-init-by-other (function none))
+
+;; failed to figure out what this is:
+(defstate run (hoff-text-floater)
+  :virtual #t
+  :enter (behavior ()
+    (set! (-> self state-time) (the-as uint (current-time)))
+    )
+  :trans L1
+  :code sleep-code
+  )
+
+
+
+

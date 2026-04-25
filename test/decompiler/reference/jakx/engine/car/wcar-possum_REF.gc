@@ -1,0 +1,36 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition of type v-possum
+(deftype v-possum (wcar-base)
+  ()
+  )
+
+;; definition for method 3 of type v-possum
+(defmethod inspect ((this v-possum))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (let ((t9-0 (method-of-type wcar-base inspect)))
+    (t9-0 this)
+    )
+  (label cfg-4)
+  this
+  )
+
+;; definition for method 115 of type v-possum
+;; INFO: function output is handled by mips2c
+(defmethod-mips2c "(method 115 v-possum)" 115 v-possum)
+
+;; definition for method 100 of type v-possum
+;; INFO: function output is handled by mips2c
+(defmethod-mips2c "(method 100 v-possum)" 100 v-possum)
+
+;; definition for method 66 of type v-possum
+;; INFO: function output is handled by mips2c
+(defmethod-mips2c "(method 66 v-possum)" 66 v-possum)
+
+
+
+
