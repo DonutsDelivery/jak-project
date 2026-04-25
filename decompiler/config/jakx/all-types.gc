@@ -14435,7 +14435,7 @@
     (blit-displays-work-method-17 (_type_ vector int float symbol) none) ;; 17
     (blit-displays-work-method-18 (_type_ dma-buffer float float) none) ;; 18
     (blit-displays-work-method-19 (_type_) none) ;; 19
-    (blit-displays-work-method-20 (_type_ dma-buffer) none) ;; 20
+    (blit-displays-work-method-20 (_type_ int) int) ;; 20
     (blit-displays-work-method-21 (_type_) none) ;; 21
     (blit-displays-work-method-22 (_type_) none) ;; 22
     (blit-displays-work-method-23 (_type_) none) ;; 23
