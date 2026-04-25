@@ -35782,7 +35782,7 @@
     (nav-state-method-42 (_type_ vector) symbol) ;; 42
     (nav-state-method-43 (_type_ vector) none) ;; 43
     (nav-state-method-44 (_type_ vector) int) ;; 44 ;; set-travel!
-    (nav-state-method-45 (_type_ vector) int) ;; 45 ;; set-velocity!
+    (nav-state-method-45 (_type_ vector) none) ;; 45
     (nav-state-method-46 (_type_ vector) int) ;; 46 ;; set-heading!
     (nav-state-method-47 (_type_ meters) none) ;; 47 ;; set-speed!
     (nav-state-method-48 (_type_ nav-control) int) ;; 48 ;; reset!
