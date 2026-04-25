@@ -8598,7 +8598,7 @@
 (define-extern cpad-set-buzz! (function cpad-info int int time-frame none))
 (define-extern *cpad-list* cpad-list) ;; cpad-list
 (define-extern *cpad-debug* symbol) ;; symbol
-(define-extern service-cpads (function cpad-list))
+(define-extern service-cpads "Read from cpads and update vibration." (function cpad-list))
 (define-extern buzz-stop! "Set the buzz to 0 on both vibration motors of the given cpad." (function int none))
 (define-extern *mouse* mouse-info) ;; mouse-info activated (Init 13)
 (define-extern service-mouse (function none))
@@ -36503,13 +36503,13 @@
 (define-extern joint-mod-ik-callback (function cspace transformq none :behavior process))
 (define-extern real-joint-mod-gun-look-at-handler (function cspace transformq none :behavior process))
 (define-extern joint-mod-gun-look-at-handler (function cspace transformq none :behavior process))
-(define-extern joint-mod-foot-rot-handler (function cspace transformq none :behavior process))
+(define-extern joint-mod-foot-rot-handler "Joint mod callback to pitch the foot to match the ground." (function cspace transformq none :behavior process))
 (define-extern last-try-to-look-at-data try-to-look-at-info) ;; try-to-look-at-info
 (define-extern joint-mod-look-at-handler (function cspace transformq none :behavior process))
 (define-extern joint-mod-world-look-at-handler (function cspace transformq none :behavior process))
 (define-extern joint-mod-rotate-handler (function cspace transformq none :behavior process))
 (define-extern joint-mod-scale-handler (function cspace transformq none :behavior process))
-(define-extern joint-mod-joint-set-handler (function cspace transformq none :behavior process))
+(define-extern joint-mod-joint-set-handler "Callback for set joint mod." (function cspace transformq none :behavior process))
 (define-extern joint-mod-joint-set-world-handler (function cspace transformq none :behavior process))
 (define-extern joint-mod-joint-set*-handler (function cspace transformq none :behavior process))
 (define-extern joint-mod-joint-set*-world-handler (function cspace transformq none :behavior process))
@@ -36878,7 +36878,7 @@
 (define-extern sprite-glow-init-engine (function dma-buffer none))
 (define-extern *sprite-glow-dma-packet-data* sprite-glow-dma-packet-data) ;; sprite-glow-dma-packet-data
 (define-extern sprite-glow-add-sprite "Generate DMA to draw a single sprite from the aux-list." (function dma-buffer sprite-vec-data-2d float float float adgif-shader none))
-(define-extern sprite-glow-add-simple-sprite (function dma-buffer sprite-glow-dma-packet-data sprite-glow-data pointer none))
+(define-extern sprite-glow-add-simple-sprite "Generate DMA to draw a single sprite from the simple sprite system." (function dma-buffer sprite-glow-dma-packet-data sprite-glow-data pointer none))
 (define-extern sprite-glow-draw (function dma-buffer none))
 (define-extern add-shader-to-dma (function dma-buffer adgif-shader))
 (define-extern *simple-sprite-system* simple-sprite-system) ;; simple-sprite-system
