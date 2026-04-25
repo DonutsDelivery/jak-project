@@ -43692,4 +43692,65 @@
       "cam-dbg-scratch"
     ]
   ]
+,
+  "real-joint-mod-gun-look-at-handler": [
+    [
+      1,
+      "v1",
+      "joint-mod"
+    ],
+    [
+      2,
+      "v1",
+      "joint-mod"
+    ]
+  ]
+,
+  "joint-mod-scale-handler": [
+    [
+      [
+        1,
+        14
+      ],
+      "s5",
+      "joint-mod"
+    ]
+  ]
+,
+  "(method 18 game-info)": [
+    [
+      [
+        5,
+        29
+      ],
+      "s5",
+      "pair"
+    ],
+    [
+      8,
+      "v1",
+      "symbol"
+    ],
+    [
+      9,
+      "v1",
+      "level-load-info"
+    ],
+    [
+      [
+        11,
+        18
+      ],
+      "s3",
+      "continue-point"
+    ],
+    [
+      [
+        11,
+        24
+      ],
+      "s4",
+      "pair"
+    ]
+  ]
 }

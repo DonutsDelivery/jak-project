@@ -29797,7 +29797,7 @@
     (should-push-away (_type_ collide-shape collide-query) symbol) ;; 42
     (collide-shape-method-43 (_type_ pull-rider-info) none) ;; 43
     (pull-riders! (_type_) symbol) ;; 44
-    (collide-shape-method-45 (_type_) collide-spec) ;; 45
+    (do-push-aways (_type_) collide-spec) ;; 45
     (collide-shape-method-46 (_type_) int) ;; 46
     (collide-shape-method-47 (_type_ collide-spec) int) ;; 47
     (collide-shape-method-48 (_type_ collide-spec) int) ;; 48
@@ -36501,14 +36501,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern joint-mod-ik-callback (function cspace transformq none :behavior process))
-(define-extern real-joint-mod-gun-look-at-handler (function cspace transformq none :behavior process))
+(define-extern real-joint-mod-gun-look-at-handler "Joint mod callback for pointing the gun (implementation)." (function cspace transformq none :behavior process))
 (define-extern joint-mod-gun-look-at-handler (function cspace transformq none :behavior process))
 (define-extern joint-mod-foot-rot-handler "Joint mod callback to pitch the foot to match the ground." (function cspace transformq none :behavior process))
 (define-extern last-try-to-look-at-data try-to-look-at-info) ;; try-to-look-at-info
 (define-extern joint-mod-look-at-handler (function cspace transformq none :behavior process))
 (define-extern joint-mod-world-look-at-handler (function cspace transformq none :behavior process))
 (define-extern joint-mod-rotate-handler (function cspace transformq none :behavior process))
-(define-extern joint-mod-scale-handler (function cspace transformq none :behavior process))
+(define-extern joint-mod-scale-handler "Callback for scale joint mod." (function cspace transformq none :behavior process))
 (define-extern joint-mod-joint-set-handler "Callback for set joint mod." (function cspace transformq none :behavior process))
 (define-extern joint-mod-joint-set-world-handler (function cspace transformq none :behavior process))
 (define-extern joint-mod-joint-set*-handler (function cspace transformq none :behavior process))
