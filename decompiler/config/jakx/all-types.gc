@@ -34865,7 +34865,7 @@
 (define-extern matrix-from-joint-anim-frame (function joint-anim-compressed-control int int matrix))
 (define-extern matrix-from-control-channel! (function matrix joint joint-control-channel matrix))
 (define-extern matrix-from-control-pair! (function matrix joint-control-channel joint int matrix))
-(define-extern matrix-from-control! (function none)) ;; (function matrix-stack joint joint-control symbol matrix)
+(define-extern matrix-from-control! (function matrix-stack joint joint-control symbol matrix)) ;; was: (function none) — backported from jak3
 (define-extern cspace<-cspace! (function cspace cspace matrix))
 (define-extern cspace<-cspace-normalized! (function cspace cspace matrix))
 (define-extern cspace<-parent-joint! (function cspace (pointer process-drawable) int matrix))
@@ -34949,7 +34949,7 @@
 (define-extern print-terrain-stats (function none))
 (define-extern update-subdivide-settings! (function subdivide-settings math-camera int none))
 (define-extern *subdivide-settings* subdivide-settings) ;; subdivide-settings
-(define-extern set-tfrag-dists! (function none)) ;; (function tfrag-dists none)
+(define-extern set-tfrag-dists! (function tfrag-dists none)) ;; was: (function none) — backported from jak3
 (define-extern *terrain-context* object) ;; terrain-context
 (define-extern GSH_ENABLE symbol) ;; symbol
 (define-extern GSH_BUCKET bucket-id)
@@ -35078,7 +35078,7 @@
 
 
 
-(define-extern sprite-setup-header (function none)) ;; (function sprite-header int none)
+(define-extern sprite-setup-header (function sprite-header int none)) ;; was: (function none) — backported from jak3
 (define-extern clear-sprite-aux-list (function none))
 (define-extern add-to-sprite-aux-list (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d uint none))
 (define-extern sprite-setup-frame-data (function none)) ;; (function sprite-frame-data uint none)
@@ -35258,7 +35258,7 @@
 
 (define-extern *sprite-glow-templates* array)
 (define-extern sprite-glow-vu1-block vu-function)
-(define-extern sprite-glow-init-consts (function none)) ;; (function sprite-glow-consts none)
+(define-extern sprite-glow-init-consts (function sprite-glow-consts none)) ;; was: (function none) — backported from jak3
 (define-extern sprite-glow-init-engine (function dma-buffer none))
 (define-extern *sprite-glow-dma-packet-data* sprite-glow-dma-packet-data) ;; sprite-glow-dma-packet-data
 (define-extern sprite-glow-add-sprite (function dma-buffer sprite-vec-data-2d float float float adgif-shader none))
@@ -36033,7 +36033,7 @@
 
 (define-extern *blit-displays-work* object) ;; blit-displays-work
 (define-extern clear-zbuf (function none))
-(define-extern draw-color-bars (function none)) ;; (function blit-displays-work none)
+(define-extern draw-color-bars (function blit-displays-work none)) ;; was: (function none) — backported from jak3
 (define-extern draw-raw-image (function bucket-id art-group int vector vector level int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -36188,7 +36188,7 @@
 (define-extern shrub-vu1-block vu-function)
 (define-extern shrub-num-tris (function shrubbery uint))
 (define-extern shrub-make-perspective-matrix (function matrix matrix matrix))
-(define-extern shrub-init-view-data (function none)) ;; (function shrub-view-data symbol)
+(define-extern shrub-init-view-data (function shrub-view-data symbol)) ;; was: (function none) — backported from jak3
 (define-extern shrub-upload-view-data (function dma-buffer symbol))
 (define-extern shrub-time (function int int int int int int))
 (define-extern shrub-do-init-frame (function dma-buffer symbol))
@@ -36228,7 +36228,7 @@
 
 (define-extern *tfrag-display-stats* symbol) ;; symbol
 (define-extern tfrag-vu1-block vu-function)
-(define-extern tfrag-data-setup (function none)) ;; (function tfrag-data int int none)
+(define-extern tfrag-data-setup (function tfrag-data int int none)) ;; was: (function none) — backported from jak3
 (define-extern add-tfrag-mtx-0 (function dma-buffer symbol pointer))
 (define-extern add-tfrag-mtx-1 (function dma-buffer symbol pointer))
 (define-extern add-tfrag-data (function dma-buffer int int none))
@@ -36338,7 +36338,7 @@
 
 
 (define-extern tie-vu1-block vu-function)
-(define-extern tie-init-consts (function none)) ;; (function tie-consts gs-alpha gs-test gs-test none)
+(define-extern tie-init-consts (function tie-consts gs-alpha gs-test gs-test none)) ;; was: (function none) — backported from jak3
 (define-extern tie-init-engine (function dma-buffer gs-alpha gs-test gs-test none))
 (define-extern tie-end-buffer (function dma-buffer int)) 
 (define-extern tie-int-reg (function int string))
@@ -36543,10 +36543,10 @@
 (define-extern walk-tie-generic-prototypes (function none))
 (define-extern *pke-hack* vector) ;; vector
 (define-extern draw-inline-array-instance-tie (function pointer (inline-array instance-tie) int dma-buffer none))
-(define-extern draw-inline-array-prototype-tie-asm (function none)) ;; (function dma-buffer int prototype-array-tie none)
+(define-extern draw-inline-array-prototype-tie-asm (function dma-buffer int prototype-array-tie none)) ;; was: (function none) — backported from jak3
 (define-extern draw-inline-array-prototype-tie-shared-asm (function none))
 (define-extern instance-tie-patch-buckets (function dma-buffer level object))
-(define-extern draw-drawable-tree-instance-tie (function none)) ;; (function drawable-tree-instance-tie level none)
+(define-extern draw-drawable-tree-instance-tie (function drawable-tree-instance-tie level none)) ;; was: (function none) — backported from jak3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; prim                           ;;
@@ -37199,8 +37199,8 @@
 (define-extern *haze-vert-array* object) ;; haze-vert-array
 (define-extern *haze-poly* (inline-array sky-vertex)) ;; (inline-array sky-vertex)
 (define-extern init-haze-vert-array (function symbol))
-(define-extern sky-make-sun-data (function none)) ;; (function sky-work int float none)
-(define-extern sky-make-moon-data (function none)) ;; (function sky-work float none)
+(define-extern sky-make-sun-data (function sky-work int float none)) ;; was: (function none) — backported from jak3
+(define-extern sky-make-moon-data (function sky-work float none)) ;; was: (function none) — backported from jak3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sky-tng                        ;;
@@ -37807,7 +37807,7 @@
 (define-extern collide-probe-instance-tie-collide-frags (function none))
 (define-extern collide-probe-instance-tie (function object int collide-list int int))
 (define-extern collide-probe-collide-fragment-tree-make-list (function drawable-tree-collide-fragment collide-list none))
-(define-extern collide-probe-instance-tie-tree-make-list (function none)) ;; (function drawable-tree-instance-tie collide-list int)
+(define-extern collide-probe-instance-tie-tree-make-list (function drawable-tree-instance-tie collide-list int)) ;; was: (function none) — backported from jak3
 (define-extern collide-upload-vu0 (function none))
 (define-extern collide-probe-make-list (function level collide-list symbol)) 
 (define-extern distc (function vector vector float))
@@ -39872,7 +39872,7 @@
 (define-extern matrix<-vector-yz2! (function matrix vector vector matrix))
 (define-extern choose-nice-perp (function vector vector))
 (define-extern lightning-new-tracker-init-by-other (function lightning-tracker-init-params object :behavior lightning-new-tracker)) ;; was: (function none) — backported from jak3
-(define-extern create-lightning-tracker-new (function none)) ;; (function lightning-tracker-init-params lightning-new-tracker)
+(define-extern create-lightning-tracker-new (function lightning-tracker-init-params lightning-new-tracker)) ;; was: (function none) — backported from jak3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; target-util                    ;;
@@ -41487,8 +41487,8 @@
 (define-extern hud-post (function none))
 (define-extern hud-handler (function none))
 (define-extern hud-init-by-other (function object :behavior hud))
-(define-extern set-hud-piece-position! (function none)) ;; (function hud-sprite int int none)
-(define-extern set-as-offset-from! (function none)) ;; (function hud-sprite vector4w int int none)
+(define-extern set-hud-piece-position! (function hud-sprite int int none)) ;; was: (function none) — backported from jak3
+(define-extern set-as-offset-from! (function hud-sprite vector4w int int none)) ;; was: (function none) — backported from jak3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hud-classes                    ;;
@@ -52036,7 +52036,7 @@
 (define-extern get-node-draw-position (function vector mysql-nav-node vector))
 (define-extern nav-graph-editor-init-by-other (function string symbol object :behavior nav-graph-editor))
 (define-extern run-nav-graph-editor (function symbol (pointer process)))
-(define-extern get-nav-graph-editor (function none)) ;; (function nav-graph-editor)
+(define-extern get-nav-graph-editor (function nav-graph-editor)) ;; was: (function none) — backported from jak3
 (define-extern exit-nav-graph-editor (function none))
 (define-extern nav-graph-set-level (function symbol object))
 (define-extern set-minimap-edge-flag (function none)) ;; nav-minimap-edge-flag undefined in jakx; revert P9 backport
