@@ -8950,4 +8950,58 @@
       "wvehicle-stack-type1"
     ]
   ]
+,
+  "(method 13 editable-plane)": [
+    [
+      64,
+      [
+        "inline-array",
+        "vector",
+        4
+      ]
+    ]
+  ]
+,
+  "(method 13 editable-face)": [
+    [
+      64,
+      [
+        "inline-array",
+        "vector",
+        6
+      ]
+    ]
+  ]
+,
+  "light-hash-get-bucket-index": [
+    [
+      16,
+      "vector4w"
+    ]
+  ]
+,
+  "(method 47 nav-control)": [
+    [
+      16,
+      "find-nav-sphere-ids-params"
+    ]
+  ]
+,
+  "(method 16 grid-hash)": [
+    [
+      16,
+      "vector"
+    ],
+    [
+      32,
+      "vector"
+    ]
+  ]
+,
+  "(method 11 trsqv)": [
+    [
+      16,
+      "vector"
+    ]
+  ]
 }
