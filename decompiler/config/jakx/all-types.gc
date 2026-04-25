@@ -62241,6 +62241,7 @@
 (define-extern medius-server-authentication-response object)
 (define-extern string<? (function string string symbol))
 (define-extern string= (function string string symbol))
+(define-extern charp<-string (function (pointer uint8) string int))
 ;;(define-extern string-menu object)
 ;; (define-extern sky-color-day object) ;; clobbers active deftype
 ;;(define-extern shadow-vu1-constants object)
