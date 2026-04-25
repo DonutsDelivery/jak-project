@@ -42249,6 +42249,24 @@
   "(top-level-login minimap)": [
     [17, "gp", "minimap"]
   ],
+  // *medius-buddies* / *medius-buddies-online* / *medius-ignores* /
+  // *medius-room-players* / *medius-recent-players* / *medius-in-game-players* /
+  // *medius-local-game-players* / *medius-outstanding-clan-invites* and
+  // *medius-clan-cache* are all typed `object` in jakx; symbol type should be
+  // medius-cache-index-array (or its subtype medius-player-index-array).
+  // Each store at offset +4 sets max-ct (int32). Cast a0 to base type.
+  "(top-level-login net-mgr-medius-players-h)": [
+    [55, "a0", "medius-cache-index-array"],
+    [60, "a0", "medius-cache-index-array"],
+    [65, "a0", "medius-cache-index-array"],
+    [70, "a0", "medius-cache-index-array"],
+    [75, "a0", "medius-cache-index-array"],
+    [80, "a0", "medius-cache-index-array"],
+    [85, "a0", "medius-cache-index-array"],
+    [90, "a0", "medius-cache-index-array"],
+    [95, "a0", "medius-cache-index-array"],
+    [100, "a0", "medius-cache-index-array"]
+  ],
   // *v-mongoose-constants* and other vehicle constants symbols are typed `object`
   // in jakx; should be `rigid-body-vehicle-constants`. Field offsets confirmed:
   // +3236 = explosion (vehicle-explosion-info), +3244 = debris (debris-static-params).
