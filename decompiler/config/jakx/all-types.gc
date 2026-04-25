@@ -35780,7 +35780,7 @@
     (nav-state-method-40 (_type_ vector) none) ;; 40 ;; do-navigation-to-destination
     (nav-state-method-41 (_type_ vector) symbol) ;; 41 ;; clamp-vector-to-mesh-cross-gaps
     (nav-state-method-42 (_type_ vector) symbol) ;; 42
-    (nav-state-method-43 (_type_ vector) int) ;; 43 ;; set-virtual-cur-pos!
+    (nav-state-method-43 (_type_ vector) none) ;; 43
     (nav-state-method-44 (_type_ vector) int) ;; 44 ;; set-travel!
     (nav-state-method-45 (_type_ vector) int) ;; 45 ;; set-velocity!
     (nav-state-method-46 (_type_ vector) int) ;; 46 ;; set-heading!
