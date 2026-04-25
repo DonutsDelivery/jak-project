@@ -45215,7 +45215,7 @@
     (vehicle-method-127 (_type_ process-focusable) none) ;; 127
     (vehicle-method-128 (_type_) int) ;; 128
     (vehicle-method-129 (_type_ object) int) ;; 129 ;; (vehicle-method-129 (_type_ object) none)
-    (vehicle-method-130 (_type_ object) int) ;; 130 ;; (vehicle-method-130 (_type_ object) none)
+    (vehicle-method-130 (_type_ vehicle-controls) none) ;; 130
     (vehicle-method-131 (_type_) none) ;; 131 ;; (vehicle-method-131 (_type_ traffic-object-spawn-params) none)
     (vehicle-method-132 (_type_) none) ;; 132 ;; (vehicle-method-132 (_type_ traffic-object-spawn-params) none)
     (vehicle-method-133 (_type_ vehicle-controls) none) ;; 133
