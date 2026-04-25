@@ -8419,7 +8419,7 @@
 
 (define-extern *vif-disasm-table* (array vif-disasm-element)) ;; (array vif-disasm-element)
 (define-extern disasm-vif-details "Disassemble the data stored in a vif unpack." (function symbol (pointer uint8) vif-cmd int symbol))
-(define-extern disasm-vif-tag (function (pointer vif-tag) int symbol symbol int))
+(define-extern disasm-vif-tag "Disassemble vif tag, and possibly the associated data." (function (pointer vif-tag) int symbol symbol int))
 (define-extern disasm-dma-tag "Disassemble just the 64-byte dma tag" (function dma-tag symbol none))
 (define-extern *dma-disasm* symbol) ;; symbol
 (define-extern disasm-dma-list (function dma-packet symbol symbol symbol int symbol))
