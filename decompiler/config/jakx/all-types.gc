@@ -43725,7 +43725,7 @@
   (:methods
     (do-collision (_type_ int) none) ;; 15
     (update-box! (_type_ int) int) ;; 16
-    (debris-group-method-17 (_type_) none) ;; 17
+    (debris-group-method-17 (_type_ int) none) ;; 17
     )
   )
   
