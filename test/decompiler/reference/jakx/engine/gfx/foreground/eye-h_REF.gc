@@ -1,0 +1,150 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition of type eye
+(deftype eye (structure)
+  ((x             float)
+   (y             float)
+   (lid           float)
+   (pad0          uint32)
+   (iris-scale    float)
+   (pupil-scale   float)
+   (lid-scale     float)
+   (pad1          uint32)
+   (tbp           int32)
+   (shader-count  uint32)
+   (pad2          uint8  40)
+   )
+  )
+
+;; definition for method 3 of type eye
+(defmethod inspect ((this eye))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'eye)
+  (format #t "~1Tdata[2] @ #x~X~%" (&-> this x))
+  (format #t "~1Tx: ~f~%" (-> this x))
+  (format #t "~1Ty: ~f~%" (-> this y))
+  (format #t "~1Tlid: ~f~%" (-> this lid))
+  (format #t "~1Tiris-scale: ~f~%" (-> this iris-scale))
+  (format #t "~1Tpupil-scale: ~f~%" (-> this pupil-scale))
+  (format #t "~1Tlid-scale: ~f~%" (-> this lid-scale))
+  (format #t "~1Ttbp: ~D~%" (-> this tbp))
+  (format #t "~1Tshader-count: ~D~%" (-> this shader-count))
+  (format #t "~1Tshader[8] @ #x~X~%" (-> this pad2))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type eye-control
+(deftype eye-control (structure)
+  ((process             uint64)
+   (random-time         uint16)
+   (bucket              uint16)
+   (blink               float)
+   (shaders             (inline-array adgif-shader))
+   (left                eye    :inline)
+   (right               eye    :inline)
+   (level-index         int16)
+   (high-res?           symbol)
+   (level-texture-page  uint32)
+   (pad                 uint8  64)
+   )
+  )
+
+;; definition for method 3 of type eye-control
+(defmethod inspect ((this eye-control))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'eye-control)
+  (format #t "~1Tprocess: ~D~%" (-> this process))
+  (format #t "~1Trandom-time: ~D~%" (-> this random-time))
+  (format #t "~1Tbucket: ~D~%" (-> this bucket))
+  (format #t "~1Tblink: ~f~%" (-> this blink))
+  (format #t "~1Tshaders: #x~X~%" (-> this shaders))
+  (format #t "~1Teyes[2] @ #x~X~%" (-> this left))
+  (format #t "~1Tleft: #<eye @ #x~X>~%" (-> this left))
+  (format #t "~1Tright: #<eye @ #x~X>~%" (-> this right))
+  (format #t "~1Tlevel-index: ~D~%" (-> this level-index))
+  (format #t "~1Thigh-res?: ~A~%" (-> this high-res?))
+  (format #t "~1Tlevel-texture-page: ~D~%" (-> this level-texture-page))
+  (format #t "~1Tart-group-name: ~g~%" (-> this pad))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type eye-control-array
+(deftype eye-control-array (basic)
+  ((data  eye-control  32 :inline)
+   )
+  )
+
+;; definition for method 3 of type eye-control-array
+(defmethod inspect ((this eye-control-array))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tdata[32] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type eye-work
+(deftype eye-work (structure)
+  ((sprite-tmpl   dma-gif-packet  :inline)
+   (sprite-tmpl2  dma-gif-packet  :inline)
+   (adgif-tmpl    dma-gif-packet  :inline)
+   (blink-table   float           10)
+   )
+  )
+
+;; definition for method 3 of type eye-work
+(defmethod inspect ((this eye-work))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'eye-work)
+  (format #t "~1Tsprite-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this sprite-tmpl))
+  (format #t "~1Tsprite-tmpl2: #<dma-gif-packet @ #x~X>~%" (-> this sprite-tmpl2))
+  (format #t "~1Tadgif-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this adgif-tmpl))
+  (format #t "~1Tblink-table[10] @ #x~X~%" (-> this blink-table))
+  (label cfg-4)
+  this
+  )
+
+;; definition for symbol *eye-control-array*, type eye-control-array
+(define *eye-control-array* (new 'static 'eye-control-array))
+
+;; failed to figure out what this is:
+(dotimes (ctrl-idx 32)
+  (let ((eye-ctrl (-> *eye-control-array* data ctrl-idx)))
+    (set! (-> eye-ctrl process) (the-as uint #f))
+    (set! (-> eye-ctrl random-time) (the-as uint 60))
+    (set! (-> eye-ctrl blink) 0.0)
+    (set! (-> eye-ctrl shaders) (the-as (inline-array adgif-shader) #f))
+    (set! (-> eye-ctrl level-index) -1)
+    (set! (-> eye-ctrl high-res?) #f)
+    (set! (-> eye-ctrl pad 0) (the-as uint 0))
+    (dotimes (eye-idx 2)
+      (let ((a2-10 (+ (the-as uint eye-ctrl) (* 80 eye-idx))))
+        (s.w! (+ a2-10 68) 0)
+        )
+      (dotimes (shader-idx 8)
+        (let ((a3-2 (+ (+ (* shader-idx 4) (* 80 eye-idx)) (the-as int eye-ctrl))))
+          (s.w! (+ a3-2 72) #f)
+          )
+        )
+      )
+    )
+  )
+
+
+
+
