@@ -1865,7 +1865,7 @@
 (define-extern *race-banner-subtract* object)
 (define-extern starting-linebot-init-by-other (function none))
 (define-extern starting-linebot-spawn (function none))
-(define-extern race-banner-handler (function none))
+(define-extern race-banner-handler (function symbol))
 (define-extern race-banner-init-by-other (function none))
 (define-extern race-banner-spawn (function none))
 
@@ -2247,7 +2247,7 @@
     (hud-item-method-14 (_type_) symbol) ;; 14
     (hud-item-method-15 (_type_) none) ;; 15
     (hud-item-method-16 (_type_) none) ;; 16
-    (hud-item-method-17 (_type_) none) ;; 17
+    (hud-item-method-17 (_type_) symbol) ;; 17
     (hud-item-method-18 (_type_) none) ;; 18
     (hud-item-method-19 (_type_) symbol) ;; 19
     (hud-item-method-20 (_type_) int) ;; 20
@@ -2275,7 +2275,7 @@
     (hud-effect-method-10 (_type_) int) ;; 10
     (hud-effect-method-11 (_type_) none) ;; 11
     (hud-effect-method-12 (_type_) none) ;; 12
-    (hud-effect-method-13 (_type_) none) ;; 13
+    (hud-effect-method-13 (_type_) symbol) ;; 13
     (hud-effect-method-14 (_type_) none) ;; 14
     )
   )
@@ -2652,7 +2652,7 @@
   :size-assert         #x38
   :flag-assert         #x1900000038
   (:methods
-    (hud-score-single-method-24 (_type_) none) ;; 24
+    (hud-score-single-method-24 (_type_) symbol) ;; 24
     )
   )
 
@@ -3534,7 +3534,7 @@
 (define-extern spawn-unused-hud-points-icon-display (function none))
 (define-extern set-to-upper-right (function none))
 (define-extern create-points-icon-from-screen-pos (function none))
-(define-extern create-points-icon (function none))
+(define-extern create-points-icon (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hud-widgets-4                  ;;
@@ -3789,7 +3789,7 @@
 (define-extern set-battle-camera-matrix (function none))
 (define-extern cam-battle-intro-player-update (function none))
 (define-extern cam-battle-intro-update (function none))
-(define-extern update-framing (function none))
+(define-extern update-framing (function symbol))
 (define-extern do-battle-intro (function none))
 (define-extern cam-battle-intro state)
 (define-extern print-intro-text (function none))
@@ -3805,7 +3805,7 @@
 (define-extern wait-for-all-net-players (function none))
 (define-extern play-mode-startup-hook (function none))
 (define-extern get-game-mgr-type (function none))
-(define-extern spawn-game-mgr (function none))
+(define-extern spawn-game-mgr (function symbol))
 (define-extern *backup-player-ladder-stats* object)
 (define-extern *tmp-awards* object)
 (define-extern *award-table* array)
@@ -3855,14 +3855,14 @@
 (define-extern adjust-position-to-above-ground (function none))
 (define-extern cam-race-end-side-view (function none))
 (define-extern cam-race-end-low-fixed (function none))
-(define-extern cam-race-end-high-aiming (function none))
+(define-extern cam-race-end-high-aiming (function symbol))
 (define-extern do-race-end (function none))
 (define-extern cam-race-end state)
 (define-extern get-nearest-race-point (function none))
 (define-extern net-game-mgr-race-startup (function none))
 (define-extern race-info-find-ground (function none))
 (define-extern race-mesh-debug-init-by-other (function none))
-(define-extern spawn-race-mesh-debug (function none))
+(define-extern spawn-race-mesh-debug (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-race-hud                   ;;
@@ -4315,7 +4315,7 @@
   :flag-assert         #x1a00000048
   (:methods
     (hud-vehicle-eco-bar-method-24 (_type_) none) ;; 24
-    (hud-vehicle-eco-bar-method-25 (_type_) none) ;; 25
+    (hud-vehicle-eco-bar-method-25 (_type_) symbol) ;; 25
     )
   )
 
@@ -5531,8 +5531,8 @@
 
 
 (define-extern smoke-system-local-space (function none))
-(define-extern sift-down (function none))
-(define-extern heap-sort (function none))
+(define-extern sift-down (function symbol))
+(define-extern heap-sort (function symbol))
 (define-extern clear-strip (function none))
 (define-extern lightning-sphere-init-by-other (function none))
 (define-extern lightning-sphere-spawn (function none))
@@ -15012,7 +15012,7 @@
     (setting-control-method-17 (_type_ symbol object object object) connection) ;; 17
     (setting-control-method-18 (_type_) user-setting-data) ;; 18
     (move-connection-to-dead (_type_) user-setting-data) ;; 19
-    (setting-control-method-20 (_type_) none) ;; 20
+    (setting-control-method-20 (_type_) symbol) ;; 20
     (remove-setting-by-arg0 (_type_ object) int) ;; 21
     (set-setting-by-param (_type_ symbol object object object) connection) ;; 22
     (setting-control-method-23 (_type_) none) ;; 23
@@ -19676,7 +19676,7 @@
   (:methods
     (prototype-node-group-method-9 (_type_) none) ;; 9
     (prototype-node-group-method-10 (_type_) none) ;; 10
-    (prototype-node-group-method-11 (_type_) none) ;; 11
+    (prototype-node-group-method-11 (_type_) symbol) ;; 11
     (prototype-node-group-method-12 (_type_) none) ;; 12
     (prototype-node-group-method-13 (_type_) none) ;; 13
     (prototype-node-group-method-14 (_type_) none) ;; 14
@@ -27089,7 +27089,7 @@
     (net-mgr-method-53 (_type_) int) ;; 53
     (net-mgr-method-54 (_type_) symbol) ;; 54
     (net-mgr-method-55 (_type_) symbol) ;; 55
-    (net-mgr-method-56 (_type_) none) ;; 56
+    (net-mgr-method-56 (_type_) symbol) ;; 56
     (net-mgr-method-57 (_type_) none) ;; 57
     (net-mgr-method-58 (_type_) none) ;; 58
     (net-mgr-method-59 (_type_) int) ;; 59
@@ -27141,7 +27141,7 @@
 (define-extern *net-available-game-ct* object)
 (define-extern *net-available-games* object)
 (define-extern *net-active-game* object)
-(define-extern net-mgr-notify-connect (function none))
+(define-extern net-mgr-notify-connect (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; obj-list                       ;;
@@ -29627,7 +29627,7 @@
   (:methods
     (red-sentry-bot-method-64 (_type_) none) ;; 64
     (red-sentry-bot-method-65 (_type_) collide-shape) ;; 65
-    (red-sentry-bot-method-66 (_type_) none) ;; 66
+    (red-sentry-bot-method-66 (_type_) symbol) ;; 66
     )
   )
   
@@ -35327,7 +35327,7 @@
 (define-extern internal-draw-debug-text-3d (function bucket-id string vector font-color vector2h pointer))
 (define-extern add-debug-outline-triangle (function symbol bucket-id vector vector vector rgba symbol))
 (define-extern add-debug-triangle-normal (function symbol bucket-id vector vector vector rgba symbol))
-(define-extern add-debug-flat-triangle-noclip (function none))
+(define-extern add-debug-flat-triangle-noclip (function symbol))
 (define-extern *debug-lines* (inline-array debug-line)) ;; (inline-array debug-line)
 (define-extern *debug-lines-trk* debug-tracking-thang) ;; debug-tracking-thang
 (define-extern *debug-text-3ds* (inline-array debug-text-3d)) ;; (inline-array debug-text-3d)
@@ -35563,7 +35563,7 @@
 (define-extern *texture-login-data* texture-login-data) ;; texture-login-data
 (define-extern texture-usage-init (function merc-ctrl symbol))
 (define-extern texture-usage-update (function texture symbol))
-(define-extern merc-stats-display (function merc-ctrl none))
+(define-extern merc-stats-display (function merc-ctrl symbol))
 (define-extern merc-stats (function none))
 (define-extern merc-edge-stats (function none))
 (define-extern merc-vu1-add-vu-function (function dma-packet vu-function int dma-gif-packet))
@@ -35618,7 +35618,7 @@
 (define-extern ripple-apply-wave-table (function merc-effect symbol))
 (define-extern ripple-execute (function none))
 (define-extern ripple-matrix-scale (function merc-effect none))
-(define-extern ripple-add-debug-sphere (function process-drawable vector float float none))
+(define-extern ripple-add-debug-sphere (function process-drawable vector float float symbol))
 (define-extern ripple-slow-add-sine-waves (function ripple-wave-set float float float))
 (define-extern ripple-find-height (function process-drawable int vector float))
 
@@ -36110,7 +36110,7 @@
 (define-extern finish-tfrag-trans (function none))
 (define-extern finish-tfrag-water (function none))
 (define-extern finish-tie (function none))
-(define-extern finish-texture-mask (function none))
+(define-extern finish-texture-mask (function symbol))
 (define-extern finish-texture (function none))
 (define-extern finish-background (function none))
 
@@ -36211,7 +36211,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern tnear-vu1-block vu-function)
-(define-extern tfrag-details (function tfragment none))
+(define-extern tfrag-details (function tfragment symbol))
 (define-extern clip-restore (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -36503,7 +36503,7 @@
 (define-extern tie-near-vu1-block object)
 (define-extern tie-near-init-consts (function none))
 (define-extern tie-near-init-engine (function none))
-(define-extern tie-near-end-buffer (function none))
+(define-extern tie-near-end-buffer (function symbol))
 (define-extern tie-scissor-make-perspective-matrix (function matrix matrix matrix))
 (define-extern tie-near-int-reg (function none))
 (define-extern tie-near-float-reg (function none))
@@ -36673,7 +36673,7 @@
 (define-extern local-space-camera (function particle-local-space-info none))
 (define-extern local-space-proc-joint (function particle-local-space-info none))
 (define-extern local-space-proc-root (function none))
-(define-extern spawn-level-particles-for-camera (function none))
+(define-extern spawn-level-particles-for-camera (function symbol))
 (define-extern execute-part-engine (function none))
 (define-extern check-particles (function none))
 (define-extern sparticle-track-root (function object sparticle-cpuinfo vector none))
@@ -36690,7 +36690,7 @@
 (define-extern birth-func-random-next-time (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
 (define-extern sparticle-respawn-heights (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern sparticle-respawn-timer (function sparticle-system sparticle-cpuinfo vector none))
-(define-extern sparticle-texture-animate (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern sparticle-texture-animate (function sparticle-system sparticle-cpuinfo vector symbol))
 (define-extern sparticle-texture-day-night (function sparticle-system sparticle-cpuinfo sprite-vec-data-2d none))
 (define-extern sparticle-motion-blur (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern sparticle-motion-blur-old (function object sparticle-cpuinfo sprite-vec-data-3d object))
@@ -36919,12 +36919,12 @@
 
 (define-extern *dma-block-lists* array)
 (define-extern can-place-block? (function symbol))
-(define-extern dma-try-alloc-single (function none))
+(define-extern dma-try-alloc-single (function symbol))
 (define-extern dma-try-alloc (function none))
 (define-extern dma-release (function none))
 (define-extern dma-dump (function symbol))
 (define-extern dma-is-empty (function symbol))
-(define-extern dma-get-named-buffer (function none))
+(define-extern dma-get-named-buffer (function symbol))
 (define-extern lobby-dma-reserve-hook (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -37158,8 +37158,8 @@
 (define-extern birth-func-omega-normal-orient (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
 (define-extern birth-func-rain (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
 (define-extern check-drop-level-rain (function sparticle-system sparticle-cpuinfo vector none))
-(define-extern check-drop-level-rain2 (function sparticle-system sparticle-cpuinfo vector none))
-(define-extern check-drop-level-splash (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern check-drop-level-rain2 (function sparticle-system sparticle-cpuinfo vector symbol))
+(define-extern check-drop-level-splash (function sparticle-system sparticle-cpuinfo vector symbol))
 (define-extern cam-master-effect (function none :behavior camera-master))
 (define-extern sparticle-track-sun (function int sparticle-cpuinfo matrix none))
 
@@ -37901,7 +37901,7 @@
 (define-extern collide-planes-intersect (function none))
 (define-extern collide-planes-test0 (function none))
 (define-extern collide-planes-test1 (function none))
-(define-extern collide-planes (function none))
+(define-extern collide-planes (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; spatial-hash                   ;;
@@ -39908,7 +39908,7 @@
 ;; logic-target                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern draw-history (function control-info none))
+(define-extern draw-history (function control-info symbol))
 (define-extern target-history-print (function history-iterator symbol))
 (define-extern target-print-stats (function target symbol symbol))
 (define-extern target-move-dist (function time-frame float :behavior target))
@@ -40613,14 +40613,14 @@
 (define-extern prototype-bucket-recalc-fields (function prototype-bucket prototype-bucket)) ;; prototype-bucket not live
 (define-extern print-prototype-intersection-list (function none))
 (define-extern print-prototype-list (function none))
-(define-extern draw-instance-info (function string none))
+(define-extern draw-instance-info (function string symbol))
 (define-extern set-shadow-by-name (function string int int none))
 (define-extern get-shadow-by-name (function string none))
 (define-extern teleport-camera-by-name (function string none))
 (define-extern teleport-camera-by-pos (function float float float none))
 (define-extern calc-vu1-shadow (function light-group draw-control float)) ;; draw-control not live
-(define-extern calc-shadow-masks (function light-group draw-control uint none)) ;; draw-control not live
-(define-extern calc-realtime-lights (function light-group draw-control uint none)) ;; draw-control not live
+(define-extern calc-shadow-masks (function light-group draw-control uint symbol)) ;; draw-control not live
+(define-extern calc-realtime-lights (function light-group draw-control uint symbol)) ;; draw-control not live
 (define-extern calc-vu1-lights (function vu-lights draw-control symbol none)) ;; draw-control not live
 (define-extern calc-particle-average-color (function none))
 (define-extern calc-particle-directional-color (function none))
@@ -40628,7 +40628,7 @@
 (define-extern dma-add-process-drawable (function process-drawable draw-control symbol dma-buffer none)) ;; process-drawable/draw-control not live
 (define-extern *hud-lights* vu-lights)
 (define-extern dma-add-process-drawable-hud (function process-drawable draw-control float dma-buffer none)) ;; process-drawable/draw-control not live
-(define-extern add-process-drawable (function process-drawable draw-control symbol dma-buffer none)) ;; process-drawable/draw-control not live
+(define-extern add-process-drawable (function process-drawable draw-control symbol dma-buffer symbol)) ;; process-drawable/draw-control not live
 (define-extern foreground-engine-execute (function engine int)) 
 (define-extern main-debug-hook (function none))
 (define-extern *debug-hook* pair)
@@ -40783,7 +40783,7 @@
   )
 
 
-(define-extern col-rend-draw (function col-rend col-rend-filter none))
+(define-extern col-rend-draw (function col-rend col-rend-filter symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; relocate                       ;;
@@ -40890,7 +40890,7 @@
 (define-extern *additional-spawner-count* object)
 (define-extern *additional-spawners* object)
 (define-extern register-additional-spawner (function none))
-(define-extern unregister-spawner-at-index (function none))
+(define-extern unregister-spawner-at-index (function symbol))
 (define-extern *camera-pos-0* object)
 (define-extern *camera-pos-1* object)
 (define-extern vis-cull-all? (function none))
@@ -41095,7 +41095,7 @@
 (define-extern get-nav-mesh (function actor-id nav-mesh))
 (define-extern find-nearest-nav-mesh (function vector float nav-mesh))
 (define-extern point-to-poly-boundary (function nav-poly vector vector float))
-(define-extern find-first-containing-nav-mesh (function none))
+(define-extern find-first-containing-nav-mesh (function symbol))
 (define-extern find-nav-mesh (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -41207,9 +41207,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern check-water-level-drop (function sparticle-system sparticle-cpuinfo vector none))
-(define-extern check-water-level-drop-and-die (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern check-water-level-drop-and-die (function sparticle-system sparticle-cpuinfo vector symbol))
 (define-extern check-water-level-drop-and-die-motion (function sparticle-system sparticle-cpuinfo vector none))
-(define-extern check-water-level-above-and-die (function sparticle-system sparticle-cpuinfo vector none))
+(define-extern check-water-level-above-and-die (function sparticle-system sparticle-cpuinfo vector symbol))
 (define-extern check-water-level-drop-motion (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern *water-simple-alpha-curve-in* curve2d-piecewise) ;; curve2d-piecewise
 (define-extern *growing-curve* curve2d-piecewise) ;; curve2d-piecewise
@@ -42406,7 +42406,7 @@
   :flag-assert         #xc00000018
   (:methods
     (medius-cached-info-method-9 (_type_) symbol) ;; 9
-    (medius-cached-info-method-10 (_type_) none) ;; 10
+    (medius-cached-info-method-10 (_type_) symbol) ;; 10
     (medius-cached-info-method-11 (_type_) none) ;; 11
     )
   )
@@ -42455,7 +42455,7 @@
   :size-assert         #x8
   :flag-assert         #xd00000008
   (:methods
-    (medius-cache-index-array-method-9 (_type_) none) ;; 9
+    (medius-cache-index-array-method-9 (_type_) symbol) ;; 9
     (medius-cache-index-array-method-10 (_type_) none) ;; 10
     (medius-cache-index-array-method-11 (_type_) none) ;; 11
     (medius-cache-index-array-method-12 (_type_) symbol) ;; 12
@@ -43884,7 +43884,7 @@
     (race-mesh-method-11 (_type_ int) none)
     (race-mesh-method-12 (_type_) none)
     (race-mesh-method-13 (_type_ race-mesh-slice-query) none)
-    (race-mesh-method-14 (_type_ race-mesh-slice-query) none)
+    (race-mesh-method-14 (_type_ race-mesh-slice-query) symbol)
     (race-mesh-method-15 (_type_ int race-mesh-slice-query) none)
     (race-mesh-method-16 (_type_ race-mesh-slice-query) none)
     (race-mesh-method-17 (_type_ race-mesh-slice-query) symbol)
@@ -43919,7 +43919,7 @@
   
 
 
-(define-extern output-race-mesh (function race-line none))
+(define-extern output-race-mesh (function race-line symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-weapons-h             ;;
@@ -45353,8 +45353,8 @@
 (define-extern *net-player-names* object)
 (define-extern *prebuilt-ai-vehicles* array)
 (define-extern *net-vehicles* array)
-(define-extern find-vehicle-info (function none))
-(define-extern find-prebuilt-ai-vehicle (function none))
+(define-extern find-vehicle-info (function symbol))
+(define-extern find-prebuilt-ai-vehicle (function symbol))
 (define-extern *net-drivers* array)
 (define-extern get-vehicle-name (function none))
 (define-extern *protect-vehicle-slot-1* object)
@@ -47288,7 +47288,7 @@
   :size-assert         #x230
   :flag-assert         #x4301a00230
   (:methods
-    (big-text-menu-method-66 (_type_) none) ;; 66
+    (big-text-menu-method-66 (_type_) symbol) ;; 66
     )
   )
   
@@ -47967,7 +47967,7 @@
 (define-extern purge-top-chat-msg (function symbol))
 (define-extern purge-all-chat-msgs (function none))
 (define-extern get-top-chat-msg (function object))
-(define-extern add-raw-popup-msg (function none))
+(define-extern add-raw-popup-msg (function symbol))
 (define-extern *magic-chat* array)
 (define-extern handle-chat-msg (function none))
 (define-extern fake-chat-msg (function none))
@@ -48059,12 +48059,12 @@
 (define-extern net-sys-msg-callback (function none))
 (define-extern kick-machines (function none))
 (define-extern write-init-complete-msg (function none))
-(define-extern handle-machine-connect (function none))
+(define-extern handle-machine-connect (function symbol))
 (define-extern handle-machine-disconnect (function none))
 (define-extern remote-client-connect-callback (function none))
 (define-extern remote-client-disconnect-callback (function none))
 (define-extern remote-client-event-callback (function none))
-(define-extern init-complete-msg-handler (function none))
+(define-extern init-complete-msg-handler (function symbol))
 (define-extern chat-msg-handler (function none))
 (define-extern session-master-change-callback (function none))
 (define-extern dme-token-callback (function none))
@@ -48089,12 +48089,12 @@
 (define-extern *tmp-addr* object)
 (define-extern *tmp-game* object)
 (define-extern *lan-game-verified* object)
-(define-extern memeq (function none))
+(define-extern memeq (function symbol))
 (define-extern lan-game-verify-callback (function none))
 (define-extern *net-msg-pending* object)
 (define-extern send-fake-msg (function none))
 (define-extern verify-msg (function none))
-(define-extern net-send-msg (function none))
+(define-extern net-send-msg (function symbol))
 (define-extern parse-ip (function none))
 (define-extern *tmp-hostname* string)
 (define-extern format-ip (function none))
@@ -48136,7 +48136,7 @@
     )
   (:methods
     (aux-voice-mgr-method-20 (_type_) int) ;; 20
-    (aux-voice-mgr-method-21 (_type_) none) ;; 21
+    (aux-voice-mgr-method-21 (_type_) symbol) ;; 21
     (aux-voice-mgr-method-22 (_type_) none) ;; 22
     (aux-voice-mgr-method-23 (_type_) none) ;; 23
     (aux-voice-mgr-method-24 (_type_) none) ;; 24
@@ -48305,7 +48305,7 @@
 (define-extern *tmp-clan* medius-cached-info-clan) ;; medius-cached-info-clan
 (define-extern *tmp-clan-members* object)
 (define-extern medius-clan-info-retrieve-behavior (function none))
-(define-extern clan-create (function none))
+(define-extern clan-create (function symbol))
 (define-extern clan-disband (function none))
 (define-extern clan-leave (function none))
 (define-extern clan-remove-player (function none))
@@ -48328,10 +48328,10 @@
 (define-extern retrieve-outstanding-invites (function none))
 (define-extern net-test-shit (function symbol))
 (define-extern clan-allowed-to-join-game (function none))
-(define-extern lookup-clan-challenge (function none))
+(define-extern lookup-clan-challenge (function symbol))
 (define-extern get-clan-challenge-pair-status (function none))
 (define-extern transfer-clan-leadership (function none))
-(define-extern set-clan-msg (function none))
+(define-extern set-clan-msg (function symbol))
 (define-extern is-clan-challenge (function none))
 (define-extern can-start-clan-challenge (function symbol))
 (define-extern *clan-update-stats-request* object)
@@ -48343,7 +48343,7 @@
 (define-extern should-i-update-clan-stats (function symbol))
 (define-extern get-all-clan-stats (function none))
 (define-extern make-new-score (function none))
-(define-extern post-game-clan-stats-adjust (function none))
+(define-extern post-game-clan-stats-adjust (function symbol))
 (define-extern apply-clan-deltas (function symbol))
 (define-extern pre-game-clan-stats-adjust (function symbol))
 (define-extern get-clans-in-challenge-info (function none))
@@ -48751,16 +48751,16 @@
 (define-extern net-hw-start-part1 (function none))
 (define-extern net-hw-start-part2 (function symbol))
 (define-extern hack-reset-state (function none))
-(define-extern net-mgr-start-hardware-already-done (function none))
+(define-extern net-mgr-start-hardware-already-done (function symbol))
 (define-extern hack-start-local-game (function none))
 (define-extern artist-clean-up-net-mgr (function none))
 (define-extern *artist-continue-busy* object)
 (define-extern artist-continue (function none))
 (define-extern listener-continue (function none))
 (define-extern listener-task (function none))
-(define-extern select-continue-point (function none))
+(define-extern select-continue-point (function symbol))
 (define-extern set-local-vehicle (function none))
-(define-extern qo (function none))
+(define-extern qo (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-process-mgr                ;;
@@ -48799,8 +48799,8 @@
 (define-extern go-running (function none))
 (define-extern *prev-time-of-day-time* object)
 (define-extern tweak-local-net-entities (function none))
-(define-extern update-local-net-entities (function none))
-(define-extern net-process-msg-handler (function none))
+(define-extern update-local-net-entities (function symbol))
+(define-extern net-process-msg-handler (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-http                       ;;
@@ -49353,7 +49353,7 @@
 (define-extern crappy-atof (function none))
 (define-extern tweak-sound (function none))
 (define-extern read-sound-info-tweaks (function none))
-(define-extern process-is-in-tree (function none))
+(define-extern process-is-in-tree (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-predict                    ;;
@@ -49421,7 +49421,7 @@
 (define-extern *place-players* array)
 (define-extern *place-player-ct* object)
 (define-extern allow-machine-to-join (function none))
-(define-extern allow-machine-to-join-rec (function none))
+(define-extern allow-machine-to-join-rec (function symbol))
 (define-extern *bkp-cols* object)
 (define-extern do-decode-net-world-state (function none))
 (define-extern player-connected? (function none))
@@ -49433,12 +49433,12 @@
 (define-extern request-game-start (function none))
 (define-extern is-late-join? (function object))
 (define-extern driver-allowed (function none))
-(define-extern ai-driver-allowed (function none))
+(define-extern ai-driver-allowed (function symbol))
 (define-extern get-total-humans (function none))
 (define-extern get-total-skill-level (function none))
 (define-extern get-player-clan-info (function none))
 (define-extern lobby-level-set! (function none))
-(define-extern set-player-car-from-level-array (function none))
+(define-extern set-player-car-from-level-array (function symbol))
 (define-extern *in-end-of-race-preload* object)
 (define-extern end-of-race-start-preload (function symbol))
 
@@ -50506,8 +50506,8 @@
     (crash-camera-method-13 (_type_) none) ;; 13
     (crash-camera-method-14 (_type_) none) ;; 14
     (crash-camera-method-15 (_type_) symbol) ;; 15
-    (crash-camera-method-16 (_type_) none) ;; 16
-    (crash-camera-method-17 (_type_) none) ;; 17
+    (crash-camera-method-16 (_type_) symbol) ;; 16
+    (crash-camera-method-17 (_type_) symbol) ;; 17
     (crash-camera-method-18 (_type_) none) ;; 18
     )
   )
@@ -50805,9 +50805,9 @@
 (define-extern *car-appearance-hack* object)
 (define-extern *car-info-default* object)
 (define-extern vehicle-init-by-other (function none)) ;; (function int traffic-object-spawn-params object :behavior vehicle)
-(define-extern vehicle-idx-from-level-name (function none))
-(define-extern vehicle-in-level? (function none))
-(define-extern vehicle-spawn (function none)) ;; (function vehicle-type traffic-object-spawn-params process-drawable)
+(define-extern vehicle-idx-from-level-name (function symbol))
+(define-extern vehicle-in-level? (function symbol))
+(define-extern vehicle-spawn (function symbol)) ;; (function vehicle-type traffic-object-spawn-params process-drawable)
 (define-extern find-vehicle (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -50891,13 +50891,13 @@
 
 (define-extern *search-info* search-info) ;; search-info
 (define-extern find-nearest-focusable (function none)) ;; (function (array collide-shape) vector float search-info-flag search-info-flag vector vector float process-focusable)
-(define-extern in-process-array? (function none))
+(define-extern in-process-array? (function symbol))
 (define-extern fst-insertion-helper (function none))
 (define-extern find-sorted-targets! (function none))
 (define-extern find-sorted-targets-faster! (function none))
 (define-extern sorted-targ-validator-test-collision (function none))
 (define-extern sorted-targ-validator-is-player-vehicle (function none))
-(define-extern sorted-targ-validator-is-any-vehicle (function none))
+(define-extern sorted-targ-validator-is-any-vehicle (function symbol))
 (define-extern sorted-targ-validator-player-needs-los (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51152,7 +51152,7 @@
 (define-extern anim-tester-interface (function none))
 (define-extern anim-tester-get-playing-item (function none))
 (define-extern initialize-anim-tester (function none))
-(define-extern anim-tester-string-get-frame!! (function none))
+(define-extern anim-tester-string-get-frame!! (function symbol))
 (define-extern anim-tester-load-object-seqs (function symbol))
 (define-extern anim-tester-save-object-seqs (function none))
 (define-extern anim-tester-save-all-objects (function none))
@@ -51696,7 +51696,7 @@
 (define-extern get-light-value (function uint float))
 (define-extern set-light-value (function int float object))
 (define-extern keybd-set-time-of-day! (function none)) ;; time-of-day-palette-id undefined in jakx; revert P9 backport
-(define-extern lookup-bsp-by-name (function none))
+(define-extern lookup-bsp-by-name (function symbol))
 (define-extern editable-player-init (function symbol none :behavior editable-player)) ;; was: (function none) — backported from jak3
 (define-extern set-editable-name (function string object))
 (define-extern select-editable-by-name (function string object))
@@ -52036,11 +52036,11 @@
 (define-extern get-nav-graph-editor (function nav-graph-editor)) ;; was: (function none) — backported from jak3
 (define-extern exit-nav-graph-editor (function none))
 (define-extern nav-graph-set-level (function symbol object))
-(define-extern set-minimap-edge-flag (function none)) ;; nav-minimap-edge-flag undefined in jakx; revert P9 backport
+(define-extern set-minimap-edge-flag (function symbol)) ;; nav-minimap-edge-flag undefined in jakx; revert P9 backport
 (define-extern set-vehicle-edit-mode (function symbol none))
 (define-extern translate-nav-graph (function float float float symbol))
 (define-extern update-nav-meshes (function symbol))
-(define-extern delete-node-nav-mesh (function int none))
+(define-extern delete-node-nav-mesh (function int symbol))
 (define-extern smooth-nav-graph (function string symbol))
 (define-extern update-height (function string symbol))
 (define-extern update-width (function string symbol))
@@ -52267,7 +52267,7 @@
 (define-extern mouse-intersect-triangle (function vector vector vector vector float))
 (define-extern *clean-vertex-array* (inline-array vector))
 (define-extern *clean-index-array* (pointer int32))
-(define-extern poly-flag-to-string (function none)) ;; nav-mesh-poly-flag undefined in jakx; revert P9 backport
+(define-extern poly-flag-to-string (function symbol)) ;; nav-mesh-poly-flag undefined in jakx; revert P9 backport
 (define-extern point-in-cone (function vector vector vector vector symbol))
 (define-extern segment-in-cone (function vector vector vector vector symbol))
 (define-extern point-in-triangle (function vector vector vector vector symbol))
@@ -52318,14 +52318,14 @@
 (define-extern dm-select-race-path (function object debug-menu-msg int int))
 (define-extern dm-select-start-record-scene (function none))
 (define-extern dm-select-end-record-scene (function none))
-(define-extern dm-setting-player1-controls (function none))
-(define-extern dm-setting-player2-controls (function none))
+(define-extern dm-setting-player1-controls (function symbol))
+(define-extern dm-setting-player2-controls (function symbol))
 (define-extern dm-setting-vehicle-tuning-engine (function none))
 (define-extern dm-setting-vehicle-tuning-gearbox (function none))
 (define-extern dm-setting-vehicle-tuning-armor (function none))
 (define-extern dm-setting-vehicle-tuning-turbo (function none))
-(define-extern dm-setting-net-vehicle (function none))
-(define-extern dm-setting-net-player-count (function none))
+(define-extern dm-setting-net-vehicle (function symbol))
+(define-extern dm-setting-net-player-count (function symbol))
 (define-extern dm-setting-language (function int debug-menu-msg symbol))
 (define-extern dm-setting-subtitle-language (function int debug-menu-msg symbol))
 (define-extern dm-setting-audio-language (function int debug-menu-msg symbol))
@@ -52335,15 +52335,15 @@
 (define-extern dm-scissor-subdiv-draw-func (function int debug-menu-msg symbol))
 (define-extern dm-foreground-subdiv-draw-func (function int debug-menu-msg symbol))
 (define-extern dm-col-rend-on-func (function object debug-menu-msg symbol))
-(define-extern dm-col-cache-on-func (function none))
+(define-extern dm-col-cache-on-func (function symbol))
 (define-extern dm-col-rend-outline-func (function object debug-menu-msg symbol))
 (define-extern dm-col-rend-back-face-func (function object debug-menu-msg symbol))
 (define-extern dm-col-rend-normals-func (function object debug-menu-msg symbol))
 (define-extern dm-col-rend-ghost-hidden-func (function object debug-menu-msg symbol))
 (define-extern dm-col-rend-track-func (function int debug-menu-msg symbol))
 (define-extern dm-col-rend-show-only-toggle-func (function uint debug-menu-msg symbol))
-(define-extern dm-col-rend-show-material-func (function none))
-(define-extern dm-col-rend-show-event-func (function none))
+(define-extern dm-col-rend-show-material-func (function symbol))
+(define-extern dm-col-rend-show-event-func (function symbol))
 (define-extern dm-col-rend-show-only-set-func (function uint debug-menu-msg symbol))
 (define-extern dm-col-rend-cspec-toggle (function uint debug-menu-msg symbol))
 (define-extern dm-col-rend-size (function object debug-menu-msg float float))
@@ -52395,8 +52395,8 @@
 (define-extern *enable-instance-tie-menu* debug-menu) ;; debug-menu
 (define-extern build-instance-list (function object int)) 
 (define-extern *path-recorder-menu* object)
-(define-extern dm-set-recorder-path (function none))
-(define-extern dm-set-recorder-mode (function none))
+(define-extern dm-set-recorder-path (function symbol))
+(define-extern dm-set-recorder-mode (function symbol))
 (define-extern debug-menu-make-path-modes (function none))
 (define-extern build-path-recorder-list (function symbol))
 (define-extern dm-scene-load-pick-func (function pair debug-menu-msg symbol))
@@ -52657,7 +52657,7 @@
 ;; wvehicle-weapons-debug         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern set-veh-weapon (function none))
+(define-extern set-veh-weapon (function symbol))
 (define-extern dm-set-veh-weapon (function none))
 (define-extern set-vehicle-light-eco (function none))
 (define-extern dm-set-veh-leco (function none))
@@ -52789,13 +52789,13 @@
 (define-extern kernel-read-function (function object (pointer int32) int)) 
 (define-extern kernel-read (function none))
 (define-extern kernel-check-hardwired-addresses (function none))
-(define-extern install-default-debug-handler (function object none))
+(define-extern install-default-debug-handler (function object symbol))
 (define-extern install-debug-handler (function object none))
 (define-extern return-from-exception (function object none))
 (define-extern kernel-set-exception-vector (function object int)) 
 (define-extern kernel-set-interrupt-vector (function none))
 (define-extern kernel-set-level2-vector (function object object symbol)) 
-(define-extern deinstall-debug-handler (function none))
+(define-extern deinstall-debug-handler (function symbol))
 (define-extern deinstall-debug-handlers (function symbol))
 (define-extern resend-exception (function object object object object symbol)) 
 
