@@ -11712,6 +11712,45 @@
   (ocean-all 20)
   (desert 21)
   )
+
+(defenum city-map-bits
+  :type uint64
+  :bitfield #t
+  (cmb0 0)
+  (cmb1 1)
+  (cmb2 2)
+  (cmb3 3)
+  (cmb4 4)
+  (cmb5 5)
+  (cmb6 6)
+  (cmb7 7)
+  (cmb8 8)
+  (cmb9 9)
+  (cmb10 10)
+  (cmb11 11)
+  (cmb12 12)
+  (cmb13 13)
+  (cmb14 14)
+  (cmb15 15)
+  (cmb16 16)
+  (cmb17 17)
+  (cmb18 18)
+  (cmb19 19)
+  (cmb20 20)
+  (cmb21 21)
+  (cmb22 22)
+  (cmb23 23)
+  (cmb24 24)
+  (cmb25 25)
+  (cmb26 26)
+  (cmb27 27)
+  (cmb28 28)
+  (cmb29 29)
+  (cmb30 30)
+  (cmb31 31)
+  (cmb32 32)
+  (cmb33 33)
+  )
 ;; ---level-h:level-flags
 
 (deftype level-load-info (basic)
@@ -14779,6 +14818,18 @@
   :flag-assert         #x900000024
   )
 
+(defenum conn-flag
+  :type uint8
+  :bitfield #t
+  (cf0 0)
+  (cf1 1)
+  (cf2 2)
+  (cf3 3)
+  (cf4 4)
+  (cf5 5)
+  (cf6 6)
+  )
+
 
 (define-extern *CAMERA-bank* camera-bank)
 (define-extern *CAMERA_MASTER-bank* camera-master-bank) ;; camera-master-bank
@@ -17622,6 +17673,19 @@
   :flag-assert         #x900000010
   )
 
+(defenum effect-bits
+  :type uint8
+  :bitfield #t
+  (texscroll 0)
+  (no-fade-out 1) ;; translucent.
+  (ripple 2)
+  (emerc 3) ;; envmap??
+  (ignore-tod-for-envmap-tint 4) ;; color thing
+  (force-mercneric 5) ;; some mercneric-only effect
+  (cross-fade 6) ;; WARP?
+  (ignore-alpha 7)
+  )
+
 ;; moved from end of merc-h definitions
 (deftype merc-blend-data (structure) ;; was unknown!
   "Packed BLERC data."
@@ -19991,6 +20055,13 @@
   :method-count-assert 9
   :size-assert         #x3640
   :flag-assert         #x900003640
+  )
+
+(defenum bone-calc-flags
+  :type uint16
+  :bitfield #t
+  (write-ripple-data 0)
+  (no-cam-rot 1)
   )
   
 
@@ -28981,6 +29052,13 @@
     )
   )
 
+(defenum collide-list-enum
+  (hit-by-player)
+  (usually-hit-by-player)
+  (hit-by-others)
+  (player)
+  )
+
 (declare-type collide-query structure)
 (declare-type water-info structure)
 (deftype collide-shape (trsqv)
@@ -29715,6 +29793,38 @@
     (process-focusable-method-57 (_type_) int) ;; 57
     (process-focusable-method-58 (_type_) int) ;; 58
     )
+  )
+
+(defenum enemy-option
+  :bitfield #t
+  :type uint32
+  (user0              0) ;; 1
+  (user1              1) ;; 2
+  (user2              2) ;; 4
+  (user3              3) ;; 8
+  (user4              4) ;; 16
+  (user5              5) ;; 32
+  (user6              6) ;; 64
+  (user7              7) ;; 128
+  (user8              8) ;; 256
+  (user9              9) ;; 512
+  (user10            10) ;; 1024
+  (user11            11) ;; 2048
+  (user12            12) ;; 4096
+  (user13            13) ;; 8192
+  (user14            14) ;; 16k
+  (user15            15)
+
+  (dormant           16) ;; hi 1
+  (dormant-aware     17) ;; hi 2
+  (ambush            18) ;; hi 4
+  (spawner           19) ;; hi 8
+  (prespawned        20) ;; hi 16
+  (multi-focus       21) ;; hi 32
+  (has-trigger       22)
+  (idle-til-trigger  23) ;; hi 128
+  (knocked-into-water 24) ;; hi 256
+  (water             25) ;; hi 512
   )
 
 (deftype mine-a (process-focusable)
@@ -38413,6 +38523,19 @@
   :flag-assert         #x900000004
   )
 
+(defenum clm-item-action-options
+  :type uint64
+  :bitfield #t
+  (clm0 0)
+  (clm1 1)
+  (clm2 2)
+  (clm3 3)
+  (clm4 4)
+  (clm5 5)
+  (clm6 6)
+  (clm7 7)
+  )
+
 
 
 (deftype clm-item-action (structure)
@@ -40572,6 +40695,40 @@
   :method-count-assert 9
   :size-assert         #x4
   :flag-assert         #x900000004
+  )
+
+(defenum board-tricks
+  :type uint32
+  :bitfield #f
+  (none 0)
+  (board-spin 1)
+  (board-boost 2)
+  (board-flip 3)
+  (board-rail 4)
+  (board-rail-jump 5)
+  (board-nosegrab 6)
+  (board-board-spin 7)
+  (board-board-flip 8)
+  (board-noseflip 9)
+  (board-kickflip 10)
+  (board-kickspin 11)
+  (board-method 12)
+  (board-method-cross 13)
+  (board-backgrab 14)
+  (board-airwalk 15)
+  (board-jump 16)
+  (board-duck-jump 17)
+  (board-quick-jump 18)
+  (darkjak 19)
+  (darkjak-bomb0 20)
+  (darkjak-bomb1 21)
+  (darkjak-smack 22)
+  (darkjak-tracking 23)
+  (lightjak 24)
+  (lightjak-regen 25)
+  (lightjak-swoop 26)
+  (lightjak-freeze 27)
+  (lightjak-shield 28)
   )
 
 
@@ -43424,6 +43581,14 @@
   (:methods
     (rigid-body-vehicle-constants-method-10 (_type_) int) ;; 10
     )
+  )
+
+(defenum cty-faction
+  :type uint8
+  (ff 0)
+  (kg 1)
+  (mh 2)
+  (invalid 128)
   )
   
 
@@ -52752,6 +52917,14 @@
     (collision-editor-method-14 (_type_) none) ;; 19
     (collision-editor-method-15 (_type_) none) ;; 20
     )
+  )
+
+(defenum collision-editor-func
+  :type uint64
+  (analog 0)
+  (edit 1)
+  (print-collision 2)
+  (stop-editor 3)
   )
   
 
