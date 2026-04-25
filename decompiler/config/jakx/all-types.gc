@@ -19535,8 +19535,8 @@
     (load-state-method-9 (_type_) _type_) ;; 9
     (load-state-method-10 (_type_) int) ;; 10
     (load-state-method-11 (_type_ (pointer symbol)) int) ;; 11
-    (load-state-method-12 (_type_ (pointer symbol)) int) ;; 12
-    (load-state-method-13 (_type_ symbol symbol) int) ;; 13
+    (want-sound-banks (_type_ (pointer symbol)) none) ;; 12
+    (want-display-level (_type_ symbol symbol) int) ;; 13
     (load-state-method-14 (_type_ symbol) int) ;; 14
     (load-state-method-15 (_type_ symbol symbol) int) ;; 15
     (load-state-method-16 (_type_ symbol symbol) int) ;; 16
@@ -19708,7 +19708,7 @@
     (game-info-method-22 (_type_) none) ;; 22 ;; (save-game (_type_ game-save string) game-save)
     (game-info-method-23 (_type_) none) ;; 23 ;; (load-game (_type_ game-save) game-save)
     (game-info-method-24 (_type_ symbol int) int) ;; 24
-    (game-info-method-25 (_type_ symbol int) float) ;; 25
+    (you-suck-scale (_type_ symbol int) float) ;; 25
     (get-next-attack-id! (_type_) uint) ;; 26
     (game-info-method-27 (_type_) none) ;; 27 ;; (game-info-method-27 (_type_ game-score float) int)
     (game-info-method-28 (_type_ int) (pointer float)) ;; 28
@@ -19908,10 +19908,10 @@
   ;; field on-close uses ~A with a signed load.
   (:methods
     (talker-speech-class-method-9 (_type_) symbol) ;; 9
-    (talker-speech-class-method-10 (_type_) none) ;; 10
-    (talker-speech-class-method-11 (_type_) none) ;; 11
+    (mark-played! (_type_) none) ;; 10
+    (reset-state! (_type_) none) ;; 11
     (talker-speech-class-method-12 (_type_ int) none) ;; 12
-    (talker-speech-class-method-13 (_type_ int) none) ;; 13
+    (no-play! (_type_ int) none) ;; 13
     )
   )
 
@@ -21071,8 +21071,8 @@
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type lightning-spec process float) _type_)
     (lightning-control-method-9 (_type_) none) ;; 9 ;; (change-mode (_type_ lightning-mode) lightning-mode)
     (lightning-control-method-10 (_type_) none) ;; 10 ;; (get-mode (_type_) lightning-mode)
-    (lightning-control-method-11 (_type_ int vector) int) ;; 11
-    (lightning-control-method-12 (_type_ vector) none) ;; 12
+    (set-point! (_type_ int vector) none) ;; 11
+    (set-first-meet-point (_type_ vector) none) ;; 12
     (lightning-control-method-13 (_type_ vector) vector) ;; 13
     )
   )
@@ -21347,7 +21347,7 @@
   :flag-assert         #xd00000053
   (:methods
     (new (symbol type) _type_) ;; 0
-    (fact-info-enemy-method-12 (_type_ int) int) ;; 12
+    (clear-mask-bits (_type_ int) none) ;; 12
     )
   )
   
@@ -29417,13 +29417,13 @@
 (define-extern joint-mod-spinner-callback (function cspace transformq none))
 (define-extern joint-mod-rotate-local-callback (function cspace transformq none))
 (define-extern joint-mod-trans-rot-local-callback (function none))
-(define-extern vector<-cspace2! (function vector cspace vector))
-(define-extern joint-mod-rotate-world-callback (function cspace transformq matrix))
-(define-extern joint-mod-set-local-callback (function cspace transformq none))
+(define-extern vector<-cspace2! "Same as vector<-cspace! Convert a bone matrix from a cspace to the origin of the bone frame." (function vector cspace vector))
+(define-extern joint-mod-rotate-world-callback "Callback for joint-mod-rotate-world. See comment on that type." (function cspace transformq none))
+(define-extern joint-mod-set-local-callback "Callback for joint-mod-rotate-local. See comment on that type." (function cspace transformq none))
 (define-extern joint-mod-add-local-callback (function cspace transformq none))
 (define-extern joint-mod-set-world-callback (function cspace transformq matrix))
 (define-extern joint-mod-set-world-no-trans-callback (function cspace transformq vector))
-(define-extern joint-mod-blend-local-callback (function cspace transformq none))
+(define-extern joint-mod-blend-local-callback "Callback for joint-mod-blend-local. See comment on that type." (function cspace transformq none))
 (define-extern joint-mod-blend-world-callback (function cspace transformq none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -29555,7 +29555,7 @@
   :flag-assert         #xb00000290
   (:methods
     (add-rider (_type_ handle) collide-rider) ;; 9
-    (prepare (_type_) int) ;; 10
+    (prepare (_type_) none) ;; 10
     )
   )
 
@@ -29791,7 +29791,7 @@
     (collide-shape-method-36 (_type_ bounding-box float collide-spec) symbol) ;; 36
     (integrate-and-collide! (_type_ vector) none) ;; 37
     (find-collision-meshes (_type_) none) ;; 38
-    (collide-shape-method-39 (_type_ collide-shape collide-query) symbol) ;; 39
+    (on-platform (_type_ collide-shape collide-query) symbol) ;; 39
     (collide-shape-method-40 (_type_ overlaps-others-params) object) ;; 40
     (shove-to-closest-point-on-path (_type_ attack-info float) vector) ;; 41
     (should-push-away (_type_ collide-shape collide-query) symbol) ;; 42
@@ -33788,9 +33788,9 @@
   :size-assert         #x18
   :flag-assert         #xd00000018
   (:methods
-    (init (_type_ float float float float) int) ;; 9
-    (copy-to (_type_ _type_) int) ;; 10
-    (update! (_type_ float) int) ;; 11
+    (init (_type_ float float float float) none) ;; 9
+    (copy-to (_type_ _type_) none) ;; 10
+    (update! (_type_ float) none) ;; 11
     (jump-to-target! (_type_ float) float) ;; 12
     )
   )
@@ -33807,7 +33807,7 @@
   :size-assert         #x3c
   :flag-assert         #xb0000003c
   (:methods
-    (init (_type_ vector float float float) int) ;; 9
+    (init (_type_ vector float float float) none) ;; 9
     (update! (_type_ vector) int) ;; 10
     )
   )
@@ -34515,7 +34515,7 @@
 
 (define-extern *redline-table* (pointer float)) ;; (pointer float)
 (define-extern *redline-index* int) ;; int
-(define-extern float-save-redline (function float int)) 
+(define-extern float-save-redline (function float none))
 (define-extern float-lookup-redline (function float float))
 (define-extern *blueline-table* (pointer float)) ;; (pointer float)
 (define-extern *blueline-index* int) ;; int
@@ -34686,10 +34686,10 @@
   :size-assert         #x20
   :flag-assert         #xd00000020
   (:methods
-    (hud-box-method-9 (_type_ dma-buffer) none) ;; 9
+    (draw-box-prim-only (_type_ dma-buffer) none) ;; 9
     (hud-box-method-10 (_type_ dma-buffer) none) ;; 10
     (hud-box-method-11 (_type_ dma-buffer) none) ;; 11
-    (hud-box-method-12 (_type_ dma-buffer) none) ;; 12
+    (draw-box-alpha-3 (_type_ dma-buffer) none) ;; 12
     )
   )
   
@@ -36386,7 +36386,7 @@
 (define-extern make-sqrt-table "Generate integer square-root table used in the IOP." (function none))
 (define-extern doppler-pitch-shift "Compute pitch shift for the doppler effect. This is done assuming the listener is *target* and has *target*'s velocity." (function vector vector float))
 (define-extern sound-bank-reload "Start a background process to unload all sound banks, then load them again." (function none))
-(define-extern sound-bank-reload-common (function none))
+(define-extern sound-bank-reload-common "Start a background process to unload all sound banks, then load them again." (function none))
 (define-extern *jukebox-onoff* symbol)
 (define-extern *last-music-position* uint)
 (define-extern jukebox-onoff (function symbol int))
@@ -37082,13 +37082,13 @@
   (:methods
     (new (symbol type) _type_) ;; 0
     (history-method-9 (_type_) history-elt) ;; 9
-    (history-method-10 (_type_) none) ;; 10
+    (clear-history-entries! (_type_) none) ;; 10
     )
   )
   
 
 
-(define-extern history-channel->string (function int string)) ;; (function history-channel string)
+(define-extern history-channel->string (function history-channel string))
 (define-extern *history* history) ;; history
 (define-extern history-print (function history-iterator none))
 (define-extern history-draw (function history-iterator none))
@@ -37326,7 +37326,7 @@
 (define-extern generic-setup-shrub-constants (function generic-shrub-constants int int int int)) 
 (define-extern generic-add-shrub-constants (function dma-buffer int int int pointer))
 (define-extern generic-init-buf (function dma-buffer gs-zbuf none))
-(define-extern generic-vu1-init-buf (function bucket-id gs-zbuf int)) 
+(define-extern generic-vu1-init-buf (function bucket-id gs-zbuf none))
 (define-extern generic-vu1-init-buf-special (function bucket-id gs-zbuf int)) 
 (define-extern generic-vu1-init-buffers (function none))
 
@@ -39595,7 +39595,7 @@
   :size-assert         #x8
   :flag-assert         #xa00000008
   (:methods
-    (actor-hash-bucket-method-9 (_type_ collide-shape) int) ;; 9
+    (add-actor-cshape (_type_ collide-shape) none) ;; 9
     )
   )
 
@@ -40978,7 +40978,7 @@
 
 (define-extern *lightning-spec-id-table* (array lightning-spec)) ;; (array lightning-spec)
 (define-extern *lightning-gcf* gcf-control) ;; gcf-control
-(define-extern lightning-fractal-gen (function (inline-array vector) int int float lightning-spec int)) 
+(define-extern lightning-fractal-gen (function (inline-array vector) int int float lightning-spec none))
 (define-extern lightning-uniform-gen (function (inline-array vector) int int float lightning-spec none))
 (define-extern lightning-trail-uniform-gen (function (inline-array vector) (inline-array vector) float int symbol))
 (define-extern lightning-trail-fractal-gen (function (inline-array vector) (inline-array vector) int int float lightning-spec int)) 
@@ -41445,15 +41445,15 @@
     (lightning-bolt-method-11 (_type_) int) ;; 11
     (lightning-bolt-method-12 (_type_) int) ;; 12
     (lightning-bolt-method-13 (_type_ int) int) ;; 13
-    (lightning-bolt-method-14 (_type_) uint) ;; 14
-    (lightning-bolt-method-15 (_type_ object int lightning-span-internal) int) ;; 15
+    (lightning-bolt-method-14 (_type_) int) ;; 14
+    (lightning-bolt-method-15 (_type_ object int lightning-span-internal) none) ;; 15
     (lightning-bolt-method-16 (_type_ vector float float vector matrix) none) ;; 16
     (lightning-bolt-method-17 (_type_ uint float float curve2d-fast float) float) ;; 17
     (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none) ;; 18 ;; (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none)
     (lightning-bolt-method-19 (_type_ vector int int matrix float float) vector) ;; 19
     (lightning-bolt-method-20 (_type_ int lightning-span-internal) vector) ;; 20
-    (lightning-bolt-method-21 (_type_ int int float) int) ;; 21
-    (lightning-bolt-method-22 (_type_) number) ;; 22
+    (lightning-bolt-method-21 (_type_ int int float) none) ;; 21
+    (lightning-bolt-method-22 (_type_) none) ;; 22
     )
   )
   
@@ -43633,7 +43633,7 @@
   )
   
 
-(define-extern joint-exploder-joint-callback (function draw-control cspace-array joint-control int)) 
+(define-extern joint-exploder-joint-callback "Postbind callback to set bones to the result of the joint-exploder." (function draw-control cspace-array joint-control none))
 (define-extern joint-exploder-init-by-other (function skeleton-group int joint-exploder-tuning joint-exploder-static-params object :behavior joint-exploder))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -50870,8 +50870,8 @@
   ;; :flag-assert         #xc00000070
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type int) _type_)
-    (game-save-method-9 (_type_ string) _type_) ;; 9
-    (game-save-method-10 (_type_ string) _type_) ;; 10
+    (save-to-file (_type_ string) _type_) ;; 9
+    (load-from-file (_type_ string) _type_) ;; 10
     (debug-inspect (_type_ symbol) _type_) ;; 11 ;; (debug-inspect (_type_ symbol) _type_)
     )
   )
@@ -51348,7 +51348,7 @@
   :size-assert         #x14
   :flag-assert         #xb00000014
   (:methods
-    (idle-control-method-9 (_type_ (inline-array idle-control-frame)) none) ;; 9
+    (init! (_type_ (inline-array idle-control-frame)) none) ;; 9
     (idle-control-method-10 (_type_ process-drawable) symbol) ;; 10
     )
   )
@@ -54278,8 +54278,8 @@
 (define-extern dm-subdiv-float (function symbol debug-menu-msg float float float))
 (define-extern dm-subdiv-int (function symbol debug-menu-msg int int int))
 (define-extern dm-select-race-path (function object debug-menu-msg int int))
-(define-extern dm-select-start-record-scene (function none))
-(define-extern dm-select-end-record-scene (function none))
+(define-extern dm-select-start-record-scene (function object debug-menu-msg int int))
+(define-extern dm-select-end-record-scene (function object debug-menu-msg int int))
 (define-extern dm-setting-player1-controls (function symbol))
 (define-extern dm-setting-player2-controls (function symbol))
 (define-extern dm-setting-vehicle-tuning-engine (function none))
@@ -54340,11 +54340,11 @@
 (define-extern dm-strip-lines-toggle-pick-func (function int debug-menu-msg symbol))
 (define-extern dm-strip-lines-set-pick-func (function strip-lines-controls debug-menu-msg symbol))
 (define-extern dm-edit-instance-toggle-pick-func (function int debug-menu-msg symbol))
-(define-extern all-texture-tweak-adjust (function texture-page-dir float int)) 
+(define-extern all-texture-tweak-adjust (function texture-page-dir float none))
 (define-extern dm-float-field-tie-rvanish-func (function symbol debug-menu-msg float float float))
 (define-extern dm-float-field-tie-vanish-far-func (function symbol debug-menu-msg float float float))
 (define-extern dm-bug-report-output-pick-func (function symbol debug-menu-msg symbol))
-(define-extern dm-bug-report-report-pick-func (function symbol debug-menu-msg int)) 
+(define-extern dm-bug-report-report-pick-func (function symbol debug-menu-msg none))
 (define-extern debug-menu-node<? (function debug-menu-node debug-menu-node symbol))
 (define-extern dm-shader-pick-func (function texture-id debug-menu-msg symbol))
 (define-extern *shader-pick-menu* debug-menu) ;; debug-menu
