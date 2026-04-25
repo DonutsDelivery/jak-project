@@ -1979,7 +1979,7 @@
   
 
 
-(define-extern task-arrow-init-by-other (function none)) ;; (function task-arrow-params object :behavior task-arrow)
+(define-extern task-arrow-init-by-other (function task-arrow-params object :behavior task-arrow))
 (define-extern task-arrow-spawn (function task-arrow-params process-tree process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2252,7 +2252,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *explosion-effect-suppress* object)
-(define-extern explosion-init-by-other (function none)) ;; (function explosion-init-params object :behavior explosion)
+(define-extern explosion-init-by-other (function explosion-init-params object :behavior explosion))
 (define-extern explosion-spawn-legacy-version (function process-drawable type explosion-init-params (pointer process)))
 (define-extern explosion-spawn (function explosion-init-params process-drawable process))
 (define-extern find-closest-solid-sphere-prim (function none)) ;; (function collide-shape vector collide-spec collide-shape-prim)
@@ -4825,8 +4825,8 @@
 
 
 (define-extern *wheel-trail-info* light-trail-composition)
-(define-extern tire-trail-tracker-init-by-other (function none)) ;; (function light-trail-tracker-spawn-params object :behavior tire-trail-tracker)
-(define-extern spawn-tire-trail-tracker (function none)) ;; (function process light-trail-tracker-spawn-params tire-trail-tracker)
+(define-extern tire-trail-tracker-init-by-other (function light-trail-tracker-spawn-params object :behavior tire-trail-tracker))
+(define-extern spawn-tire-trail-tracker (function process light-trail-tracker-spawn-params tire-trail-tracker))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-sounds                ;;
@@ -6103,7 +6103,7 @@
 
 (define-extern *minimap* object) ;; minimap
 (define-extern *minimap-class-list* object) ;; (inline-array minimap-class-node)
-(define-extern lookup-minimap-texture-by-name (function none)) ;; (function string string (pointer texture-page) texture)
+(define-extern lookup-minimap-texture-by-name (function string string (pointer texture-page) texture))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; jakx-init                      ;;
@@ -28655,7 +28655,7 @@
   
 
 
-(define-extern joint-mod-debug-draw (function none)) ;; (function joint-mod none)
+(define-extern joint-mod-debug-draw "Debug draw the bone transform for the associated bone of a joint-mod" (function joint-mod none))
 (define-extern joint-mod-spinner-callback (function cspace transformq none))
 (define-extern joint-mod-rotate-local-callback (function cspace transformq none))
 (define-extern joint-mod-trans-rot-local-callback (function none))
@@ -59676,7 +59676,64 @@
 (define-extern *time-of-day* (pointer time-of-day-proc))
 ;;(define-extern anim-test-sequence object)
 ;;(define-extern animation-info object)
-(define-extern birth-pickup-at-point (function none)) ;; pickup-type undefined in jakx; revert P9 backport
+
+;; R-4: port pickup-type from jak3 (enum used by birth-pickup-at-point below)
+(defenum pickup-type
+  :type int32
+  (none 0)
+  (eco-yellow 1)
+  (eco-red 2)
+  (eco-blue 3)
+  (eco-dark 4)
+  (eco-green 5)
+  (eco-pill-green 6)
+  (eco-pill-dark 7)
+  (eco-pill-light 8)
+  (eco-pill-random 9)
+  (money 10)
+  (fuel-cell 11)
+  (buzzer 12)
+  (darkjak 13)
+  (lightjak 14)
+  (ammo-yellow 15)
+  (ammo-red 16)
+  (ammo-blue 17)
+  (ammo-dark 18)
+  (shield 19)
+  (health 20)
+  (trick-point 21)
+  (trick-judge 22)
+  (gem 23)
+  (skill 24)
+  (karma 25)
+  (gun-red-1 26)
+  (gun-red-2 27)
+  (gun-red-3 28)
+  (gun-yellow-1 29)
+  (gun-yellow-2 30)
+  (gun-yellow-3 31)
+  (gun-blue-1 32)
+  (gun-blue-2 33)
+  (gun-blue-3 34)
+  (gun-dark-1 35)
+  (gun-dark-2 36)
+  (gun-dark-3 37)
+  (board 38)
+  (pass-red 39)
+  (pass-green 40)
+  (pass-yellow 41)
+  (pass-blue 42)
+  (ammo-random 43)
+  (health-max 44)
+  (light-eco-crystal 45)
+  (dark-eco-crystal 46)
+  (pass-slumb-genb 47)
+  (ammo-light-random 48)
+  (ammo-dark-light-random 49)
+  (light-random 50)
+  )
+
+(define-extern birth-pickup-at-point (function vector pickup-type float symbol process-tree fact-info (pointer process) :behavior process)) ;; R-4: re-applied P9 sig (enum ported above)
 ;; (define-extern bone-work object) ;; clobbers active deftype
 ;;(define-extern breadcrumb-array object)
 ;; (define-extern cam-debug-tri object) ;; clobbers active deftype
