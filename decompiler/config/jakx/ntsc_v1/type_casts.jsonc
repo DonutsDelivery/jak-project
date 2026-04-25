@@ -42167,8 +42167,9 @@
     [430, "a0", "(array sparticle-launch-group)"]
   ],
   // Sampler MMIO writes to EE Timer 0 (#x10000000) — jak3-canonical casts ported verbatim.
+  // jakx ops shifted vs jak3 (jakx STORE is op 15 not 14); cast at STORE op.
   "(top-level-login sampler)": [
-    [14, "v1", "timer-bank"]
+    [15, "v1", "timer-bank"]
   ],
   "sampler-start": [
     [1, "v1", "timer-bank"],
@@ -42184,6 +42185,7 @@
   // writes its specific sound-rpc-* sub-type. Field offsets verified against
   // jakx all-types.gc deftypes.
   "sound-stop": [
+    [7, "v1", "sound-rpc-stop-sound"],
     [8, "v1", "sound-rpc-stop-sound"]
   ],
   "sound-set-globals": [
@@ -42197,5 +42199,12 @@
     [11, "s5", "sound-rpc-play"],
     [14, "s5", "sound-rpc-play"],
     [34, "s5", "sound-rpc-play"]
+  ],
+  // command-get-param stores a 4-vector via label-loaded pointer; ops 93/105/108
+  // lose label type after intermediate float math, store float at +4/+8/+12.
+  "command-get-param": [
+    [93, "s5", "vector"],
+    [105, "s5", "vector"],
+    [108, "s5", "vector"]
   ]
 }
