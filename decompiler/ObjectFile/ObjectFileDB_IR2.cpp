@@ -817,12 +817,19 @@ void ObjectFileDB::ir2_insert_lets(int seg, ObjectFileData& data) {
       try {
         insert_lets(func, func.ir2.env, *func.ir2.form_pool, func.ir2.top_form, stats.let);
       } catch (const std::exception& e) {
-        const auto err = fmt::format(
-            "Error while inserting lets: {}. Make sure that the return type is not "
-            "none if something is actually returned.",
-            e.what());
-        lg::warn("{}", err);
-        func.warnings.error(err);
+        // Let-pass partial failure. The function still decompiled
+        // successfully through expression building; failing to insert lets
+        // just means it'll have explicit `set!` forms instead of `let` blocks.
+        // Previously we recorded this as `;; ERROR: Error while inserting
+        // lets:`, which prevented files from reaching real-clean even when
+        // the rest of decompilation was fine. Logging only — let the function
+        // emit without the error marker.
+        const auto warn = fmt::format(
+            "Let-pass failure in {}: {} (function decompiles without let "
+            "structure but is otherwise valid)",
+            func.name(), e.what());
+        lg::warn("{}", warn);
+        func.warnings.warning(warn);
       }
     }
   });

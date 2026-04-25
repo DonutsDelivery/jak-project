@@ -35,8 +35,8 @@
   (:methods
     (touching-prims-entry-method-9 (_type_ vector) vector)
     (touching-prims-entry-method-10 (_type_ vector) vector)
-    (touching-prims-entry-method-11 () none)
-    (touching-prims-entry-method-12 () symbol)
+    (touching-prims-entry-method-11 (_type_) none)
+    (touching-prims-entry-method-12 (_type_) symbol)
     )
   )
 
@@ -64,10 +64,10 @@
    )
   (:methods
     (new (symbol type) _type_)
-    (touching-prims-entry-pool-method-9 (_type_) touching-prims-entry)
-    (touching-prims-entry-pool-method-10 (_type_) int)
-    (touching-prims-entry-pool-method-11 (_type_) none)
-    (touching-prims-entry-pool-method-12 (_type_ touching-prims-entry) touching-prims-entry)
+    (alloc-node (_type_) touching-prims-entry)
+    (get-free-node-count (_type_) int)
+    (init-list! (_type_) none)
+    (free-node (_type_ touching-prims-entry) touching-prims-entry)
     )
   )
 
@@ -86,7 +86,7 @@
 
 ;; definition for method 11 of type touching-prims-entry-pool
 ;; WARN: Return type mismatch int vs none.
-(defmethod touching-prims-entry-pool-method-11 ((this touching-prims-entry-pool))
+(defmethod init-list! ((this touching-prims-entry-pool))
   (let ((prev (the-as touching-prims-entry #f)))
     (let ((current (the-as touching-prims-entry (-> this nodes))))
       (set! (-> this head) current)
@@ -114,9 +114,7 @@
         )
     (-> type-to-make size)
     (let ((gp-0 (t9-0 allocation v1-1)))
-      ((method-of-type touching-prims-entry-pool touching-prims-entry-pool-method-11)
-       (the-as touching-prims-entry-pool gp-0)
-       )
+      ((method-of-type touching-prims-entry-pool init-list!) (the-as touching-prims-entry-pool gp-0))
       (the-as touching-prims-entry-pool gp-0)
       )
     )
@@ -131,13 +129,14 @@
    (handle1    uint64)
    (handle2    uint64)
    )
+  :pack-me
   (:methods
     (touching-shapes-entry-method-9 (_type_) touching-prims-entry)
     (touching-shapes-entry-method-10 (_type_ touching-shapes-entry) touching-prims-entry)
     (touching-shapes-entry-method-11 (_type_ collide-shape) collide-shape)
-    (touching-shapes-entry-method-12 (_type_ collide-shape uint) touching-prims-entry)
-    (touching-shapes-entry-method-13 (_type_ collide-shape collide-action collide-action) basic)
-    (touching-shapes-entry-method-14 (_type_) none)
+    (prims-touching? (_type_ collide-shape uint) touching-prims-entry)
+    (prims-touching-action? (_type_ collide-shape collide-action collide-action) basic)
+    (free-touching-prims-list (_type_) none)
     )
   )
 
@@ -162,16 +161,15 @@
 (deftype touching-list (structure)
   ((num-touching-shapes  int32)
    (resolve-u            int8)
-   (pad0                 uint8  3)
-   (touching-shapes      uint8)
+   (touching-shapes      touching-shapes-entry  32 :inline)
    )
   (:methods
     (new (symbol type) _type_)
-    (add-touching-prims (_type_ object object float object object) none)
+    (add-touching-prims (_type_ collide-shape-prim collide-shape-prim float collide-tri-result collide-tri-result) none)
     (free-nodes (_type_) none)
     (update-from-step-size (_type_ float) none)
     (send-events-for-touching-shapes (_type_) none)
-    (get-shapes-entry (_type_ object object) object)
+    (get-shapes-entry (_type_ object object) none)
     )
   )
 
@@ -184,7 +182,7 @@
   (format #t "[~8x] ~A~%" this 'touching-list)
   (format #t "~1Tnum-touching-shapes: ~D~%" (-> this num-touching-shapes))
   (format #t "~1Tresolve-u: ~D~%" (-> this resolve-u))
-  (format #t "~1Ttouching-shapes[32] @ #x~X~%" (&-> this touching-shapes))
+  (format #t "~1Ttouching-shapes[32] @ #x~X~%" (-> this touching-shapes))
   (label cfg-4)
   this
   )
@@ -217,11 +215,11 @@
 
 (kmemopen global "collide-touching-lists")
 
-;; definition (perm) for symbol *touching-prims-entry-pool*, type object
-(define-perm *touching-prims-entry-pool* object (new 'global 'touching-prims-entry-pool))
+;; definition (perm) for symbol *touching-prims-entry-pool*, type touching-prims-entry-pool
+(define-perm *touching-prims-entry-pool* touching-prims-entry-pool (new 'global 'touching-prims-entry-pool))
 
-;; definition (perm) for symbol *touching-list*, type object
-(define-perm *touching-list* object (new 'global 'touching-list))
+;; definition (perm) for symbol *touching-list*, type touching-list
+(define-perm *touching-list* touching-list (new 'global 'touching-list))
 
 (kmemclose)
 

@@ -1,0 +1,21 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for function init-stream-media-params
+;; WARN: Return type mismatch int vs none.
+(defun init-stream-media-params ((arg0 sprite-header) (arg1 int))
+  (set! (-> arg0 header 0 vector4w y) 0)
+  0
+  (none)
+  )
+
+;; definition for function stream-media-end-recording
+;; WARN: Return type mismatch int vs none.
+(defun stream-media-end-recording ()
+  0
+  (none)
+  )
+
+
+
+

@@ -30445,6 +30445,7 @@
    (handle1   uint64                :offset-assert 16) ;; handle
    (handle2   uint64                :offset-assert 24) ;; handle
    )
+  :pack-me
   :method-count-assert 15
   :size-assert         #x20
   :flag-assert         #xf00000020
@@ -39686,12 +39687,12 @@
    (drip-height       meters                :offset-assert 276)
    (drip-mult         float                 :offset-assert 280)
    (distort-time      time-frame            :offset-assert 288)
-   (enter-water-sound sound-name            :offset-assert 304)
-   (normal            vector        :inline :offset-assert 320)
+   (enter-water-sound uint16                :offset 296)
+   (normal            vector        :inline :offset 304)
    )
   :method-count-assert 18
-  :size-assert         #x150
-  :flag-assert         #x1200000150
+  :size-assert         #x140
+  :flag-assert         #x1200000140
   (:methods
     (new (symbol type process int float float float) _type_) ;; 0
     (water-control-method-9 (_type_) none) ;; 9
@@ -41962,7 +41963,6 @@
 
   
 
-#|
 (deftype rb-debug-state-record (structure)
   ((flags           uint16             :offset-assert 0)
    (time-remaining  float              :offset-assert 4)
@@ -41974,36 +41974,35 @@
    (friction-factor float              :offset-assert 28)
    (position        vector     :inline :offset-assert 32)
    (rot             vector     :inline :offset-assert 48)
-   (rotation        quaternion :inline :offset-assert 48)
+   (rotation        quaternion :inline :offset 48)
    (lin-momentum    vector     :inline :offset-assert 64)
    (ang-momentum    vector     :inline :offset-assert 80)
    (force           vector     :inline :offset-assert 96)
-   (torque          vector     :inline :offset-assert 224)
+   (pad1            uint8  112 :offset 112)
+   (torque          vector     :inline :offset 224)
+   (pad2            uint8  112 :offset 240)
    )
   :method-count-assert 11
   :size-assert         #x160
   :flag-assert         #xb00000160
   (:methods
     (rb-debug-state-record-method-9 (_type_) none) ;; 9
-;; DEAD: physics debug structure
     (rb-debug-state-record-method-10 (_type_) none) ;; 10
     )
   )
-|#
 
   
 
 
 
 
-#|
 (deftype rb-debugger (structure)
   ((user-mode      uint8            :offset-assert 0)
    (hook-control   uint8            :offset-assert 1)
    (flags          uint8            :offset-assert 2)
    (target-count   int8             :offset-assert 3)
-   (target-array uint8 8 :offset-assert 8)
-   (pad0 uint8 256 :offset-assert 72)
+   (target-array uint8 8 :offset 8)
+   (pad0 uint8 256 :offset 72)
    (playback-index int32            :offset-assert 328)
    (recorder-index int32            :offset-assert 332)
    (begin-index    int32            :offset-assert 336)
@@ -42012,7 +42011,7 @@
    (buffer-len     int32            :offset-assert 348)
    (buffer-size    int32            :offset-assert 352)
    (total-size     int32            :offset-assert 356)
-   (buffer-start   uint8 :dynamic :offset-assert 368)
+   (buffer-start   uint8 :dynamic :offset 368)
    )
   :method-count-assert 21
   :size-assert         #x170
@@ -42032,7 +42031,6 @@
     (rb-debugger-method-20 (_type_) none) ;; 20
     )
   )
-|#
 
 
 
@@ -48688,14 +48686,14 @@
 
   
 (deftype index-sprite-list-menu-info (sprite-menu-info)
-  ((index-list  basic  :offset-assert 60)
-   (horiz-list? basic  :offset-assert 64)
-   (item-offset int32  :offset-assert 68)
-   (color-array basic  :offset-assert 72)
+  ((index-list  basic  :offset 68)
+   (horiz-list? basic  :offset 72)
+   (item-offset int32  :offset 76)
+   (color-array basic  :offset 80)
    )
   :method-count-assert 9
-  :size-assert         #x4c
-  :flag-assert         #x90000004c
+  :size-assert         #x54
+  :flag-assert         #x900000054
   )
   
 
@@ -60913,11 +60911,11 @@
 (deftype touching-list (structure)
   ((num-touching-shapes  int32                    :offset-assert 0)
    (resolve-u            int8                     :offset-assert 4)
-   (touching-shapes      touching-shapes-entry 32 :inline :offset-assert 16)
+   (touching-shapes      touching-shapes-entry 32 :inline :offset-assert 8)
    )
   :method-count-assert 14
-  :size-assert         #x410
-  :flag-assert         #xe00000410
+  :size-assert         #x408
+  :flag-assert         #xe00000408
   (:methods
     (new (symbol type) _type_) ;; 0
     (add-touching-prims (_type_ collide-shape-prim collide-shape-prim float collide-tri-result collide-tri-result) none) ;; 9

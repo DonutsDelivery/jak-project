@@ -2489,6 +2489,13 @@
       "uint"
     ]
   ],
+  "(method 2 handle)": [
+    [
+      9,
+      "v1",
+      "(pointer process)"
+    ]
+  ],
   "create-interpolated2-joint-animation-frame": [
     [
       [
@@ -10822,6 +10829,10 @@
       48,
       "flow-section"
     ]
+  ],
+  "(method 12 focus)": [
+    [4, "v1", "(pointer process)"],
+    [20, "v1", "uint"]
   ],
   "(method 12 flow-control)": [
     [
@@ -40141,11 +40152,6 @@
     ]
   ],
   "(method 3 index-sprite-list-menu-info)": [
-    [
-      116,
-      "gp",
-      "index-sprite-list-menu-info"
-    ]
   ],
   "(method 3 manipy)": [
     [
@@ -40169,11 +40175,6 @@
     ]
   ],
   "(method 3 touching-list)": [
-    [
-      24,
-      "a2",
-      "uint"
-    ]
   ],
   "(method 3 projectile-bounce)": [
     [
@@ -40189,12 +40190,18 @@
       "uint"
     ]
   ],
+  "(method 3 rigid-body-control)": [
+    [14, "gp", "(pointer uint16)"],
+    [16, "gp", "(pointer uint16)"]
+  ],
   "(method 3 sky-work)": [
     [
       160,
       "a2",
       "uint"
     ]
+  ],
+  "(method 3 water-control)": [
   ],
   "(method 3 talker)": [
     [

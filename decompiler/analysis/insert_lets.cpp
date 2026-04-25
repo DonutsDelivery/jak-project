@@ -3926,20 +3926,29 @@ LetStats insert_lets(const Function& func,
   }
 
   // Part 8: recognize loop forms
+  // Per-let try/catch so a single rewrite failure (e.g. unordered_map::at on
+  // a stale matcher binding) doesn't poison the whole function's let-pass.
   top_level_form->apply_form([&](Form* f) {
     for (auto& elt : f->elts()) {
       auto as_let = dynamic_cast<LetElement*>(elt);
       if (as_let) {
-        auto rewritten = rewrite_let(as_let, env, pool, let_rewrite_stats);
-        if (rewritten) {
-          rewritten->parent_form = f;
-          elt = rewritten;
+        try {
+          auto rewritten = rewrite_let(as_let, env, pool, let_rewrite_stats);
+          if (rewritten) {
+            rewritten->parent_form = f;
+            elt = rewritten;
+          }
+        } catch (const std::exception& e) {
+          lg::warn("[insert_lets/part8] rewrite_let threw in {}: {}; keeping basic let",
+                   func.name(), e.what());
         }
       }
     }
   });
 
-  // Part 9: compact recursive lets:
+  // Part 9: compact recursive lets
+  // Wrapped per-let to localize failures (multi-let rewrite has many .at() calls
+  // on matcher result maps that can throw on edge cases).
   bool changed = true;
   while (changed) {
     changed = false;
@@ -3956,55 +3965,71 @@ LetStats insert_lets(const Function& func,
           continue;
         }
 
-        for (auto& e : inner_let->entries()) {
-          as_let->add_entry(e);
-        }
+        try {
+          for (auto& e : inner_let->entries()) {
+            as_let->add_entry(e);
+          }
 
-        as_let->set_body(inner_let->body());
+          as_let->set_body(inner_let->body());
 
-        // rewrite:
-        form->at(idx) = rewrite_multi_let(as_let, env, pool, let_rewrite_stats);
-        ASSERT(form->at(idx)->parent_form == form);
+          // rewrite:
+          form->at(idx) = rewrite_multi_let(as_let, env, pool, let_rewrite_stats);
+          ASSERT(form->at(idx)->parent_form == form);
 
-        // check star
-        for (auto& e : inner_let->entries()) {
-          if (!as_let->is_star()) {
-            RegAccessSet used;
-            e.src->collect_vars(used, true);
-            std::unordered_set<std::string> used_by_name;
-            for (auto used_var : used) {
-              used_by_name.insert(env.get_variable_name(used_var));
-            }
-            for (auto& old_entry : as_let->entries()) {
-              if (used_by_name.find(env.get_variable_name(old_entry.dest)) != used_by_name.end()) {
-                as_let->make_let_star();
-                break;
+          // check star
+          for (auto& e : inner_let->entries()) {
+            if (!as_let->is_star()) {
+              RegAccessSet used;
+              e.src->collect_vars(used, true);
+              std::unordered_set<std::string> used_by_name;
+              for (auto used_var : used) {
+                used_by_name.insert(env.get_variable_name(used_var));
+              }
+              for (auto& old_entry : as_let->entries()) {
+                if (used_by_name.find(env.get_variable_name(old_entry.dest)) !=
+                    used_by_name.end()) {
+                  as_let->make_let_star();
+                  break;
+                }
               }
             }
           }
-        }
 
-        changed = true;
+          changed = true;
+        } catch (const std::exception& e) {
+          lg::warn("[insert_lets/part9] multi-let rewrite threw in {}: {}; "
+                   "leaving nested lets unflattened",
+                   func.name(), e.what());
+        }
       }
     });
   }
 
   // Part 10: rewrite let sequences
+  // Per-sequence try/catch so a stale binding in one 3-let window doesn't kill
+  // surrounding sequences.
   top_level_form->apply_form([&](Form* f) {
     auto& form_elts = f->elts();
     for (size_t i = 0; i < form_elts.size(); ++i) {
       if (i + 2 < form_elts.size() && dynamic_cast<LetElement*>(form_elts[i]) &&
           dynamic_cast<LetElement*>(form_elts[i + 1]) &&
           dynamic_cast<LetElement*>(form_elts[i + 2])) {
-        auto rw = rewrite_let_sequence(
-            {dynamic_cast<LetElement*>(form_elts[i]), dynamic_cast<LetElement*>(form_elts[i + 1]),
-             dynamic_cast<LetElement*>(form_elts[i + 2])},
-            env, pool, let_rewrite_stats);
-        if (rw) {
-          form_elts.erase(form_elts.begin() + i + 2);
-          form_elts.erase(form_elts.begin() + i + 1);
-          form_elts.at(i) = rw;
-          rw->parent_form = f;
+        try {
+          auto rw = rewrite_let_sequence(
+              {dynamic_cast<LetElement*>(form_elts[i]),
+               dynamic_cast<LetElement*>(form_elts[i + 1]),
+               dynamic_cast<LetElement*>(form_elts[i + 2])},
+              env, pool, let_rewrite_stats);
+          if (rw) {
+            form_elts.erase(form_elts.begin() + i + 2);
+            form_elts.erase(form_elts.begin() + i + 1);
+            form_elts.at(i) = rw;
+            rw->parent_form = f;
+          }
+        } catch (const std::exception& e) {
+          lg::warn("[insert_lets/part10] let-sequence rewrite threw in {}: {}; "
+                   "leaving sequence unfused",
+                   func.name(), e.what());
         }
       }
     }
