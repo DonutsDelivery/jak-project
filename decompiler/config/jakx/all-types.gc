@@ -16493,57 +16493,57 @@
   (:methods
     (ocean-method-11 (_type_ vector symbol) none) ;; 11
     (ocean-method-12 (_type_) none) ;; 12 ;; (draw! (_type_) none)
-    (ocean-method-13 (_type_) none) ;; 13 ;; (update-map (_type_) none)
+    (ocean-method-13 (_type_ object) none) ;; 13 ;; (update-map (_type_) none)
     (ocean-method-14 (_type_ ocean-wave-info uint float) none) ;; 14
     (ocean-method-15 (_type_ matrix matrix) none) ;; 15
     (ocean-method-16 (_type_) none) ;; 16 ;; (generate-verts (_type_ ocean-vert-array ocean-height-array) none)
     (ocean-method-17 (_type_ vector ocean-vertex) none) ;; 17
     (ocean-method-18 (_type_ (pointer ocean-colors) (pointer ocean-colors)) int) ;; 18
-    (ocean-method-19 (_type_ dma-buffer) none) ;; 19
+    (ocean-method-19 (_type_ dma-buffer object) none) ;; 19
     (ocean-method-20 (_type_ dma-buffer) pointer) ;; 20
-    (ocean-method-21 (_type_ float float) none) ;; 21
-    (ocean-method-22 (_type_ dma-buffer int) none) ;; 22
+    (ocean-method-21 (_type_ float float object) none) ;; 21
+    (ocean-method-22 (_type_ dma-buffer int object object) none) ;; 22
     (ocean-method-23 (_type_ dma-buffer int) int) ;; 23
-    (ocean-method-24 (_type_ ocean-near-constants) none) ;; 24 ;; (ocean-near-setup-constants (_type_ ocean-near-constants) none)
-    (ocean-method-25 (_type_ dma-buffer) none) ;; 25
-    (ocean-method-26 (_type_ dma-buffer) none) ;; 26
-    (ocean-method-27 (_type_ dma-buffer vector) none) ;; 27
-    (ocean-method-28 (_type_ dma-buffer uint uint) none) ;; 28
-    (ocean-method-29 (_type_ dma-buffer) none) ;; 29
-    (ocean-method-30 (_type_ uint uint) none) ;; 30
-    (ocean-method-31 (_type_ int int) none) ;; 31
+    (ocean-method-24 (_type_ ocean-near-constants object) none) ;; 24 ;; (ocean-near-setup-constants (_type_ ocean-near-constants) none)
+    (ocean-method-25 (_type_ dma-buffer object) none) ;; 25
+    (ocean-method-26 (_type_ dma-buffer object) none) ;; 26
+    (ocean-method-27 (_type_ dma-buffer vector object object object object object) none) ;; 27
+    (ocean-method-28 (_type_ dma-buffer uint uint object object object object) none) ;; 28
+    (ocean-method-29 (_type_ dma-buffer object object object) none) ;; 29
+    (ocean-method-30 (_type_ uint uint object object object) none) ;; 30
+    (ocean-method-31 (_type_ int int object object) none) ;; 31
     (ocean-method-32 (_type_ uint uint) int) ;; 32
     (ocean-method-33 (_type_ dma-buffer uint uint int int symbol) none) ;; 33
     (ocean-method-34 (_type_ dma-buffer uint uint int int int) int) ;; 34
     (ocean-method-35 (_type_ ocean-trans-mask int int vector) none) ;; 35
     (ocean-method-36 (_type_ uint uint uint uint) none) ;; 36
     (ocean-method-37 (_type_ dma-buffer uint uint) dma-buffer) ;; 37
-    (ocean-method-38 (_type_ dma-buffer) dma-buffer) ;; 38
-    (ocean-method-39 (_type_ dma-buffer) none) ;; 39
-    (ocean-method-40 (_type_ dma-buffer) none) ;; 40
+    (ocean-method-38 (_type_ dma-buffer object object) dma-buffer) ;; 38
+    (ocean-method-39 (_type_ dma-buffer object object) none) ;; 39
+    (ocean-method-40 (_type_ dma-buffer object object object object) none) ;; 40
     (ocean-method-41 (_type_ dma-buffer int) none) ;; 41
     (ocean-method-42 (_type_ dma-buffer uint) int) ;; 42
     (ocean-method-43 (_type_ matrix matrix matrix) matrix) ;; 43
     (ocean-method-44 (_type_ vector vector matrix) vector) ;; 44
     (ocean-method-45 (_type_ dma-buffer vector) symbol) ;; 45
-    (ocean-method-46 (_type_ pointer int int vector) none) ;; 46
-    (ocean-method-47 (_type_ ocean-mid-constants) none) ;; 47 ;; (ocean-mid-setup-constants (_type_ ocean-mid-constants) none)
-    (ocean-method-48 (_type_ dma-buffer) int) ;; 48
-    (ocean-method-49 (_type_ uint uint) int) ;; 49
-    (ocean-method-50 (_type_ uint uint) int) ;; 50
+    (ocean-method-46 (_type_ pointer int int vector object object object) none) ;; 46
+    (ocean-method-47 (_type_ ocean-mid-constants object object object object object object) none) ;; 47 ;; (ocean-mid-setup-constants (_type_ ocean-mid-constants) none)
+    (ocean-method-48 (_type_ dma-buffer object object object) int) ;; 48
+    (ocean-method-49 (_type_ uint uint object object) int) ;; 49
+    (ocean-method-50 (_type_ uint uint object object) int) ;; 50
     (ocean-method-51 (_type_ uint uint) none) ;; 51
     (ocean-method-52 (_type_ dma-buffer int int int int float) int) ;; 52
     (ocean-method-53 (_type_ dma-buffer uint uint (pointer float) int symbol) none) ;; 53
-    (ocean-method-54 (_type_ dma-buffer uint uint) int) ;; 54
-    (ocean-method-55 (_type_ dma-buffer uint uint) int) ;; 55
-    (ocean-method-56 (_type_ dma-buffer uint uint) int) ;; 56
-    (ocean-method-57 (_type_ dma-buffer) int) ;; 57
-    (ocean-method-58 (_type_ dma-buffer) int) ;; 58
-    (ocean-method-59 (_type_ dma-buffer) int) ;; 59
-    (ocean-method-60 (_type_ dma-buffer) int) ;; 60
-    (ocean-method-61 (_type_ dma-buffer) int) ;; 61
-    (ocean-method-62 (_type_ dma-buffer) int) ;; 62 — body returns int
-    (ocean-method-63 (_type_ dma-buffer) none) ;; 63
+    (ocean-method-54 (_type_ dma-buffer uint uint object) int) ;; 54
+    (ocean-method-55 (_type_ dma-buffer uint uint object) int) ;; 55
+    (ocean-method-56 (_type_ dma-buffer uint uint object) int) ;; 56
+    (ocean-method-57 (_type_ dma-buffer object object object) int) ;; 57
+    (ocean-method-58 (_type_ dma-buffer object object object) int) ;; 58
+    (ocean-method-59 (_type_ dma-buffer object object object) int) ;; 59
+    (ocean-method-60 (_type_ dma-buffer object object object) int) ;; 60
+    (ocean-method-61 (_type_ dma-buffer object object object) int) ;; 61
+    (ocean-method-62 (_type_ dma-buffer object object) int) ;; 62 — body returns int
+    (ocean-method-63 (_type_ dma-buffer object) none) ;; 63
     (ocean-method-64 (_type_ dma-buffer) none) ;; 64
     (ocean-method-65 (_type_ dma-buffer) none) ;; 65
     (ocean-method-66 (_type_ dma-buffer) none) ;; 66
