@@ -62870,6 +62870,19 @@
   :flag-assert         #x900000034
   )
 
+;; from jak3 all-types.gc L14814 — needed for inline use in resetter-params below
+(deftype resetter-spec (structure)
+  ((continue   string         :offset-assert 0)
+   (node       game-task-node :offset-assert 4)
+   (reset-mode symbol         :offset-assert 8)
+   (execute    basic          :offset-assert 12)
+   )
+  :pack-me
+  :method-count-assert 9
+  :size-assert         #x10
+  :flag-assert         #x900000010
+  )
+
 ;; from jak3 all-types.gc L14852
 (deftype resetter-params (structure)
   ((message      resetter-message      :offset-assert 0)
