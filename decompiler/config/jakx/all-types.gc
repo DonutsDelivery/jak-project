@@ -39098,8 +39098,8 @@
 (define-extern ja-group-size (function int :behavior process-drawable))
 (define-extern ja-eval (function int :behavior process-drawable))
 (define-extern ja-blend-eval (function int :behavior process-drawable))
-(define-extern cloth-post (function none :behavior process-drawable))
-(define-extern ja-post (function none :behavior process-drawable))
+(define-extern cloth-post (function symbol :behavior process-drawable))
+(define-extern ja-post (function symbol :behavior process-drawable))
 (define-extern sleep-code (function symbol :behavior process))
 (define-extern transform-and-sleep (function none :behavior process-drawable))
 (define-extern transform-and-sleep-code (function none :behavior process-drawable))
@@ -51876,7 +51876,26 @@
 (define-extern execute-move (function editable-array editable-command mouse-info manipulator symbol))
 (define-extern get-light-value (function uint float))
 (define-extern set-light-value (function int float object))
-(define-extern keybd-set-time-of-day! (function none)) ;; time-of-day-palette-id undefined in jakx; revert P9 backport
+
+;; R-4: port time-of-day-palette-id from jak3 (enum used by keybd-set-time-of-day! below)
+(defenum time-of-day-palette-id
+  :type uint32
+  :bitfield #t
+  (unk0       0)
+  (unk1       1)
+  (unk2       2)
+  (unk3       3)
+  (palette-0  4)
+  (palette-1  5)
+  (palette-2  6)
+  (palette-3  7)
+  (palette-4  8)
+  (palette-5  9)
+  (palette-6 10)
+  (palette-7 11)
+  )
+
+(define-extern keybd-set-time-of-day! (function int time-of-day-palette-id object)) ;; R-4: re-applied P9 sig (enum ported above)
 (define-extern lookup-bsp-by-name (function symbol))
 (define-extern editable-player-init (function symbol none :behavior editable-player)) ;; was: (function none) — backported from jak3
 (define-extern set-editable-name (function string object))
@@ -52217,7 +52236,22 @@
 (define-extern get-nav-graph-editor (function nav-graph-editor)) ;; was: (function none) — backported from jak3
 (define-extern exit-nav-graph-editor (function none))
 (define-extern nav-graph-set-level (function symbol object))
-(define-extern set-minimap-edge-flag (function symbol)) ;; nav-minimap-edge-flag undefined in jakx; revert P9 backport
+
+;; R-4: port nav-minimap-edge-flag from jak3 (enum used by set-minimap-edge-flag below)
+(defenum nav-minimap-edge-flag
+  "This string value is stored in their SQL database"
+  :type int32
+  :bitfield #t
+  (blocker         0)
+  (one-way         1)
+  (pass-port-mh    2)
+  (pass-port-inda  3)
+  (pass-inda-indb  4)
+  (pass-indb-sluma 5)
+  (pass-slumb-genb 6)
+  )
+
+(define-extern set-minimap-edge-flag (function nav-minimap-edge-flag none)) ;; R-4: re-applied P9 sig (enum ported above)
 (define-extern set-vehicle-edit-mode (function symbol none))
 (define-extern translate-nav-graph (function float float float symbol))
 (define-extern update-nav-meshes (function symbol))
@@ -52448,7 +52482,18 @@
 (define-extern mouse-intersect-triangle (function vector vector vector vector float))
 (define-extern *clean-vertex-array* (inline-array vector))
 (define-extern *clean-index-array* (pointer int32))
-(define-extern poly-flag-to-string (function symbol)) ;; nav-mesh-poly-flag undefined in jakx; revert P9 backport
+
+;; R-4: port nav-mesh-poly-flag from jak3 (enum used by poly-flag-to-string + nav-set-flag below)
+(defenum nav-mesh-poly-flag
+  :type uint32
+  :bitfield #t
+  (gap   0)
+  (off   1)
+  (nmpf2 2)
+  (user0 3)
+  )
+
+(define-extern poly-flag-to-string (function object nav-mesh-poly-flag object)) ;; R-4: re-applied P9 sig (enum ported above)
 (define-extern point-in-cone (function vector vector vector vector symbol))
 (define-extern segment-in-cone (function vector vector vector vector symbol))
 (define-extern point-in-triangle (function vector vector vector vector symbol))
@@ -52465,7 +52510,7 @@
 (define-extern nav-mesh-editor-load (function string object))
 (define-extern nav-mesh-editor-set-level (function symbol object))
 (define-extern nav-set-lev (function string object))
-(define-extern nav-set-flag (function none)) ;; nav-mesh-poly-flag undefined in jakx; revert P9 backport
+(define-extern nav-set-flag (function nav-mesh-poly-flag object)) ;; R-4: re-applied P9 sig (enum ported above)
 (define-extern nav-mesh-editor-init (function symbol object :behavior nav-mesh-editor))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
