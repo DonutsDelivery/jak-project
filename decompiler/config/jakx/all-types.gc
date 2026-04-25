@@ -41775,25 +41775,25 @@
     (rigid-body-control-method-19 (_type_ vector vector) none) ;; 19
     (rigid-body-control-method-20 (_type_ vector) int) ;; 20
     (rigid-body-control-method-21 (_type_ vector vector float) int) ;; 21
-    (rigid-body-control-method-22 (_type_ vector vector) int) ;; 22
+    (rigid-body-control-method-22 (_type_ vector vector object) int) ;; 22
     (rigid-body-control-method-23 (_type_ vector vector) int) ;; 23
     (rigid-body-control-method-24 (_type_ vector vector) vector) ;; 24
-    (rigid-body-control-method-25 (_type_ vector) vector) ;; 25
-    (rigid-body-control-method-26 (_type_) none) ;; 26
+    (rigid-body-control-method-25 (_type_ vector object) vector) ;; 25
+    (rigid-body-control-method-26 (_type_ object object) none) ;; 26
     (rigid-body-control-method-27 (_type_ rigid-body-info vector quaternion (function rigid-body-object float)) none) ;; 27
     (rigid-body-control-method-28 (_type_ vector quaternion) int) ;; 28
-    (rigid-body-control-method-29 (_type_ object) none) ;; 29
-    (rigid-body-control-method-30 (_type_ object) none) ;; 30
+    (rigid-body-control-method-29 (_type_ object object object object) none) ;; 29
+    (rigid-body-control-method-30 (_type_ object object) none) ;; 30
     (rigid-body-control-method-31 (_type_ object) none) ;; 31
     (rigid-body-control-method-32 (_type_ object) none) ;; 32
-    (rigid-body-control-method-33 (_type_ object) none) ;; 33
+    (rigid-body-control-method-33 (_type_ object object) none) ;; 33
     (rigid-body-control-method-34 (_type_) none) ;; 34
-    (rigid-body-control-method-35 (_type_) none) ;; 35
-    (rigid-body-control-method-36 (_type_) none) ;; 36
-    (rigid-body-control-method-37 (_type_) none) ;; 37
-    (rigid-body-control-method-38 (_type_) none) ;; 38
-    (rigid-body-control-method-39 (_type_) none) ;; 39
-    (rigid-body-control-method-40 (_type_) none) ;; 40
+    (rigid-body-control-method-35 (_type_ object object object) none) ;; 35
+    (rigid-body-control-method-36 (_type_ object) none) ;; 36
+    (rigid-body-control-method-37 (_type_ object) none) ;; 37
+    (rigid-body-control-method-38 (_type_ object) none) ;; 38
+    (rigid-body-control-method-39 (_type_ object) none) ;; 39
+    (rigid-body-control-method-40 (_type_ object) none) ;; 40
     )
   )
 
@@ -41863,13 +41863,13 @@
     (rigid-body-object-method-59 (_type_) none) ;; 59
     (rigid-body-object-method-60 (_type_) none) ;; 60
     (rigid-body-object-method-61 (_type_) int) ;; 61
-    (rigid-body-object-method-62 (_type_) none) ;; 62
+    (rigid-body-object-method-62 (_type_ object) none) ;; 62
     (rigid-body-object-method-63 (_type_) none) ;; 63
-    (rigid-body-object-method-64 (_type_) none) ;; 64
-    (rigid-body-object-method-65 (_type_) int) ;; 65
+    (rigid-body-object-method-64 (_type_ object) none) ;; 64
+    (rigid-body-object-method-65 (_type_ object) int) ;; 65
     (rigid-body-object-method-66 (_type_) int) ;; 66
     (rigid-body-object-method-67 (_type_) none) ;; 67
-    (rigid-body-object-method-68 (_type_) none) ;; 68
+    (rigid-body-object-method-68 (_type_ object object) none) ;; 68
     (rigid-body-object-method-69 (_type_) none) ;; 69
     (rigid-body-object-method-70 (_type_) int) ;; 70
     (rigid-body-object-method-71 (_type_) none) ;; 71
@@ -41879,13 +41879,13 @@
     (rigid-body-object-method-75 (_type_) none) ;; 75
     (rigid-body-object-method-76 (_type_) none) ;; 76
     (rigid-body-object-method-77 (_type_) none) ;; 77
-    (rigid-body-object-method-78 (_type_) int) ;; 78
-    (rigid-body-object-method-79 (_type_) none) ;; 79
-    (rigid-body-object-method-80 (_type_) int) ;; 80
-    (rigid-body-object-method-81 (_type_) none) ;; 81
-    (rigid-body-object-method-82 (_type_) symbol) ;; 82
-    (rigid-body-object-method-83 (_type_) symbol) ;; 83
-    (rigid-body-object-method-84 (_type_) none) ;; 84
+    (rigid-body-object-method-78 (_type_ object object) int) ;; 78
+    (rigid-body-object-method-79 (_type_ object object) none) ;; 79
+    (rigid-body-object-method-80 (_type_ object) int) ;; 80
+    (rigid-body-object-method-81 (_type_ object object object object) none) ;; 81
+    (rigid-body-object-method-82 (_type_ object object object object) symbol) ;; 82
+    (rigid-body-object-method-83 (_type_ object object) symbol) ;; 83
+    (rigid-body-object-method-84 (_type_ object object) none) ;; 84
     (rigid-body-object-method-85 (_type_) int) ;; 85
     (rigid-body-object-method-86 (_type_) int) ;; 86
     (rigid-body-object-method-87 (_type_) none) ;; 87
@@ -45224,8 +45224,8 @@
     (vehicle-method-155 (_type_) int) ;; 155
     (vehicle-method-156 (_type_) none) ;; 156
     (vehicle-method-157 (_type_) none) ;; 157
-    (vehicle-method-158 (_type_) none) ;; 158
-    (vehicle-method-159 (_type_) none) ;; 159
+    (vehicle-method-158 (_type_ object) none) ;; 158
+    (vehicle-method-159 (_type_ object) none) ;; 159
     (vehicle-method-160 (_type_) none) ;; 160
     (vehicle-method-161 (_type_) none) ;; 161
     (vehicle-method-162 (_type_) int) ;; 162
