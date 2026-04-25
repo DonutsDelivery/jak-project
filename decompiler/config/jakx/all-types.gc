@@ -20342,8 +20342,8 @@
 (define-extern vu-lights-default! (function vu-lights vu-lights))
 (define-extern init-light-hash (function none))
 (define-extern light-hash-count-items (function light-hash light-sphere none))
-(define-extern light-hash-add-items (function none)) ;; (function light-hash light-sphere integer object)
-(define-extern reset-light-hash (function none))
+(define-extern light-hash-add-items (function light-hash light-sphere integer object)) ;; (function light-hash light-sphere integer object)
+(define-extern reset-light-hash (function light-hash none))
 (define-extern update-light-hash (function light-hash none))
 (define-extern lookup-light-sphere-by-name (function string light-hash light-sphere))
 (define-extern light-hash-get-bucket-index (function light-hash vector int))
@@ -36194,8 +36194,8 @@
 (define-extern shrub-do-init-frame (function dma-buffer symbol))
 (define-extern shrub-init-frame (function dma-buffer gs-test symbol))
 (define-extern shrub-upload-model (function shrubbery dma-buffer int symbol))
-(define-extern draw-inline-array-instance-shrub (function none)) ;; (function dma-buffer drawable int (inline-array prototype-bucket-shrub) none)
-(define-extern draw-prototype-inline-array-shrub (function none)) ;; (function int (inline-array prototype-bucket-shrub) pointer)
+(define-extern draw-inline-array-instance-shrub (function dma-buffer drawable int (inline-array prototype-bucket-shrub) none)) ;; (function dma-buffer drawable int (inline-array prototype-bucket-shrub) none)
+(define-extern draw-prototype-inline-array-shrub (function int (inline-array prototype-bucket-shrub) pointer)) ;; (function int (inline-array prototype-bucket-shrub) pointer)
 (define-extern draw-drawable-tree-instance-shrub (function drawable-tree-instance-shrub level none))
 (define-extern *dma-test* object) ;; dma-test
 (define-extern *dma-test-work* dma-test-work) ;; dma-test-work
@@ -39293,7 +39293,7 @@
 (define-extern process-drawable-pair-random-point! (function process-drawable process-drawable vector float vector))
 (define-extern simple-prim-init-by-other (function vector vector texture-id object :behavior simple-prim)) ;; was: (function none) — backported from jak3
 (define-extern birth-func-simple-prim (function int sparticle-cpuinfo sparticle-launchinfo none))
-(define-extern external-camera-controller-init-by-other (function none)) ;; (function entity time-frame symbol object :behavior external-camera-controller)
+(define-extern external-camera-controller-init-by-other (function entity time-frame symbol object :behavior external-camera-controller)) ;; (function entity time-frame symbol object :behavior external-camera-controller)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; lightning                      ;;
@@ -40608,8 +40608,8 @@
 (define-extern error-sphere (function drawable-error string int)) 
 (define-extern *edit-instance* string)
 (define-extern *instance-mem-usage* memory-usage-block)
-(define-extern find-instance-by-name-level (function none)) ;; prototype-bucket not live
-(define-extern find-instance-by-name (function none)) ;; prototype-bucket not live
+(define-extern find-instance-by-name-level (function string level prototype-bucket)) ;; prototype-bucket not live
+(define-extern find-instance-by-name (function string prototype-bucket)) ;; prototype-bucket not live
 (define-extern prototypes-game-visible-set! (function pair symbol level int))
 (define-extern find-instance-by-index (function type int bsp-header prototype-bucket)) ;; prototype-bucket not live
 (define-extern prototype-bucket-type (function prototype-bucket type)) ;; prototype-bucket not live
@@ -40621,17 +40621,17 @@
 (define-extern get-shadow-by-name (function string none))
 (define-extern teleport-camera-by-name (function string none))
 (define-extern teleport-camera-by-pos (function float float float none))
-(define-extern calc-vu1-shadow (function none)) ;; draw-control not live
+(define-extern calc-vu1-shadow (function light-group draw-control none)) ;; draw-control not live
 (define-extern calc-shadow-masks (function light-group draw-control uint none)) ;; draw-control not live
 (define-extern calc-realtime-lights (function light-group draw-control uint none)) ;; draw-control not live
 (define-extern calc-vu1-lights (function vu-lights draw-control symbol none)) ;; draw-control not live
 (define-extern calc-particle-average-color (function none))
 (define-extern calc-particle-directional-color (function none))
 (define-extern real-dma-add-process-drawable (function none))
-(define-extern dma-add-process-drawable (function none)) ;; process-drawable/draw-control not live
+(define-extern dma-add-process-drawable (function process-drawable draw-control symbol dma-buffer none)) ;; process-drawable/draw-control not live
 (define-extern *hud-lights* vu-lights)
-(define-extern dma-add-process-drawable-hud (function none)) ;; process-drawable/draw-control not live
-(define-extern add-process-drawable (function none)) ;; process-drawable/draw-control not live
+(define-extern dma-add-process-drawable-hud (function process-drawable draw-control float dma-buffer none)) ;; process-drawable/draw-control not live
+(define-extern add-process-drawable (function process-drawable draw-control symbol dma-buffer none)) ;; process-drawable/draw-control not live
 (define-extern foreground-engine-execute (function engine int)) 
 (define-extern main-debug-hook (function none))
 (define-extern *debug-hook* pair)
@@ -51669,8 +51669,8 @@
 
 (define-extern *editable-temp-id* int) ;; int
 (define-extern *editable-default-name* string) ;; string
-(define-extern editable-command->string (function none)) ;; (function editable-command string)
-(define-extern editable-filter->string (function none)) ;; (function editable-filter basic string)
+(define-extern editable-command->string (function editable-command string)) ;; (function editable-command string)
+(define-extern editable-filter->string (function editable-filter basic string)) ;; (function editable-filter basic string)
 (define-extern *editable-work* object) ;; editable-work
 (define-extern *editable* object) ;; (pointer editable-player)
 

@@ -207,6 +207,26 @@
       "L699",
       "uint64",
       true
+    ],
+    [
+      "L701",
+      "uint64",
+      true
+    ],
+    [
+      "L700",
+      "uint64",
+      true
+    ],
+    [
+      "L698",
+      "uint64",
+      true
+    ],
+    [
+      "L702",
+      "uint64",
+      true
     ]
   ],
   "bones": [
@@ -1112,9 +1132,6 @@
     ]
   ],
   "tie-methods": [
-    // "L268" entry removed — referenced `tie-init-data` which is not
-    // activated in all-types.gc. Blocked 324 files with rc=134 in 14b308c3e.
-    // Re-add this entry after activating `tie-init-data` deftype.
     [
       "L270",
       "(pointer bucket-id)",
@@ -1274,6 +1291,165 @@
     ]
   ],
   "foreground": [
-    ["L216", "vector"]
+    [
+      "L216",
+      "vector"
+    ]
+  ],
+  "cam-states-dbg": [
+    [
+      "L59",
+      "vector"
+    ],
+    [
+      "L60",
+      "vector"
+    ]
+  ],
+  "font-data": [
+    [
+      "L1",
+      "(inline-array vector)",
+      250
+    ],
+    [
+      "L2",
+      "(inline-array vector)",
+      250
+    ]
+  ],
+  "joint-mod": [
+    [
+      "L212",
+      "(inline-array vector)",
+      3
+    ]
+  ],
+  "merc-blend-shape": [
+    [
+      "L71",
+      "(pointer int16)",
+      40
+    ]
+  ],
+  "mood": [
+    [
+      "L265",
+      "vector"
+    ]
+  ],
+  "sky-data": [
+    [
+      "L26",
+      "(inline-array sky-vertex)",
+      12
+    ],
+    [
+      "L25",
+      "(inline-array sky-vertex)",
+      12
+    ],
+    [
+      "L23",
+      "(inline-array sky-vertex)",
+      648
+    ],
+    [
+      "L21",
+      "(inline-array sky-vertex)",
+      144
+    ]
+  ],
+  "sky-tng": [
+    [
+      "L130",
+      "vector"
+    ],
+    [
+      "L131",
+      "uint64",
+      true
+    ],
+    [
+      "L132",
+      "uint64",
+      true
+    ],
+    [
+      "L133",
+      "uint64",
+      true
+    ],
+    [
+      "L134",
+      "uint64",
+      true
+    ],
+    [
+      "L135",
+      "uint64",
+      true
+    ]
+  ],
+  "sprite-glow": [
+    [
+      "L27",
+      "dma-packet"
+    ]
+  ],
+  "wcar": [
+    [
+      "L111",
+      "(inline-array vector)",
+      2
+    ],
+    [
+      "L110",
+      "vector"
+    ],
+    [
+      "L109",
+      "vector"
+    ],
+    [
+      "L108",
+      "vector"
+    ],
+    [
+      "L107",
+      "vector"
+    ],
+    [
+      "L105",
+      "vector"
+    ],
+    [
+      "L104",
+      "vector"
+    ],
+    [
+      "L103",
+      "vector"
+    ],
+    [
+      "L106",
+      "vector"
+    ],
+    [
+      "L102",
+      "vector"
+    ],
+    [
+      "L101",
+      "vector"
+    ],
+    [
+      "L100",
+      "vector"
+    ],
+    [
+      "L99",
+      "vector"
+    ]
   ]
 }
