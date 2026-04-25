@@ -14797,7 +14797,7 @@
     (set-height! (font-context int) font-context) ;; 18
     (set-projection! (font-context float) font-context) ;; 19
     (set-color! (font-context font-color) font-context) ;; 20
-    (set-flags! (font-context font-flags) font-context) ;; 21
+    (set-flags! (_type_) _type_) ;; 21
     (set-start-line! (_type_) _type_) ;; 22
     (set-scale! (font-context float) font-context) ;; 23
     (set-alpha! (font-context float) font-context) ;; 24
