@@ -34743,7 +34743,7 @@
     hud-in ;; 16
     )
   (:methods
-    (hud-method-17 (_type_) symbol) ;; 17
+    (hud-method-17 (engine) connectable) ;; 17
     (hud-method-18 (_type_) symbol) ;; 18
     (hud-method-19 (engine) connectable) ;; 19
     (hud-method-20 (engine) connectable) ;; 20
