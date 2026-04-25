@@ -4573,7 +4573,7 @@
 (define-extern *curve-carexplo-scale-y* curve2d-fast)
 (define-extern *part-car-explosion-texture-curve-settings* particle-curve-settings)
 (define-extern sparticle-motion-blur-dirt (function sparticle-system sparticle-cpuinfo vector none))
-(define-extern spt-birth-func-brightness-buggy-rocks (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
+(define-extern spt-birth-func-brightness-buggy-rocks (function sparticle-system sparticle-cpuinfo sparticle-launchinfo float))
 (define-extern spt-birth-func-part-buggy-rocks (function sparticle-system sparticle-cpuinfo sparticle-launchinfo object object none))
 (define-extern spt-birth-func-part-dbuggy-debris (function sparticle-system sparticle-cpuinfo sparticle-launchinfo object object none))
 (define-extern spt-birth-func-brightness-buggy-snow (function none))
@@ -4631,7 +4631,7 @@
 (define-extern *wasted-missile-vec* object)
 (define-extern *wasted-missile-origin?* object)
 (define-extern birth-func-wasted-missile (function none))
-(define-extern birth-func-copy-rotate-z-to-rot-z (function none))
+(define-extern birth-func-copy-rotate-z-to-rot-z (function float))
 (define-extern spt-birth-func-b-part-turbo-suppressed (function none))
 (define-extern spt-func-part-turbo-suppressed (function none))
 (define-extern birth-func-adopt-velocity (function none))
@@ -12272,8 +12272,8 @@
 
 
 (define-extern *vehicle-manager* object) ;; vehicle-manager
-(define-extern vehicle-type->string (function none))
-(define-extern driver-type->string (function none))
+(define-extern vehicle-type->string (function int string))
+(define-extern driver-type->string (function int string))
 (define-extern type-from-driver-type (function none))
 (define-extern level-from-driver-type (function symbol))
 
@@ -20531,7 +20531,7 @@
 
 
 (define-extern *FACT-bank* fact-bank) ;; fact-bank
-(define-extern pickup-type->string (function none)) ;; (function pickup-type string)
+(define-extern pickup-type->string (function int string)) ;; (function pickup-type string)
 (define-extern *fact-info-enemy-defaults* fact-info-enemy-defaults) ;; fact-info-enemy-defaults
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -30485,7 +30485,7 @@
   
 
 
-(define-extern perf-stat-bucket->string (function none)) ;; (function perf-stat-bucket string)
+(define-extern perf-stat-bucket->string (function int string)) ;; (function perf-stat-bucket string)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; bsp-h                          ;;
@@ -35454,7 +35454,7 @@
   
 
 
-(define-extern history-channel->string (function none)) ;; (function history-channel string)
+(define-extern history-channel->string (function int string)) ;; (function history-channel string)
 (define-extern *history* history) ;; history
 (define-extern history-print (function history-iterator none))
 (define-extern history-draw (function history-iterator none))
@@ -35991,8 +35991,8 @@
 
 
 (define-extern *sky-texture-anim-array* texture-anim-array) ;; (texture-anim-array texture-anim)
-(define-extern set-fog-height! (function float none))
-(define-extern set-cloud-minmax! (function float float none))
+(define-extern set-fog-height! (function float float))
+(define-extern set-cloud-minmax! (function float float float))
 (define-extern *default-pris-texture-anim-array* texture-anim-array)
 (define-extern *car-texture-anim-array-work* object)
 (define-extern car-texture-anim-layer-func (function none))
@@ -40618,7 +40618,7 @@
 (define-extern get-shadow-by-name (function string none))
 (define-extern teleport-camera-by-name (function string none))
 (define-extern teleport-camera-by-pos (function float float float none))
-(define-extern calc-vu1-shadow (function light-group draw-control none)) ;; draw-control not live
+(define-extern calc-vu1-shadow (function light-group draw-control float)) ;; draw-control not live
 (define-extern calc-shadow-masks (function light-group draw-control uint none)) ;; draw-control not live
 (define-extern calc-realtime-lights (function light-group draw-control uint none)) ;; draw-control not live
 (define-extern calc-vu1-lights (function vu-lights draw-control symbol none)) ;; draw-control not live
