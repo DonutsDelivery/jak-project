@@ -1965,7 +1965,7 @@
 
 (define-extern encode-net-anim-state (function none))
 (define-extern decode-net-anim-state (function none))
-(define-extern safe-mod (function float none))
+(define-extern safe-mod (function float float))
 (define-extern get-dist-based-path-pos (function none))
 (define-extern get-anim-offset (function none))
 
@@ -5019,7 +5019,7 @@
   :size-assert         #x8
   :flag-assert         #xa00000008
   (:methods
-    (spring-tracker-method-9 (_type_) none) ;; 9
+    (spring-tracker-method-9 (_type_) float) ;; 9
     )
   )
 
@@ -27514,7 +27514,7 @@
   (:methods
     (banner-countdown () _type_ :state) ;; 50
     (banner-go () _type_ :state) ;; 51
-    (race-banner-method-52 (_type_) none) ;; 52
+    (race-banner-method-52 (_type_) float) ;; 52
     )
   )
 
@@ -35430,7 +35430,7 @@
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type uint) _type_)
     (history-iterator-method-9 (_type_ history-elt) none) ;; 9 ;; (frame-counter-delta (_type_ history-elt) time-frame)
     (history-iterator-method-10 (_type_) none) ;; 10 ;; (update-entries! (_type_) history-elt)
-    (history-iterator-method-11 (_type_ history-elt) none) ;; 11 ;; (get-age (_type_ history-elt) float)
+    (history-iterator-method-11 (_type_ history-elt) float) ;; 11 ;; (get-age (_type_ history-elt) float)
     )
   )
 
@@ -39616,7 +39616,7 @@
   :size-assert         #x80
   :flag-assert         #x1900000080
   (:methods
-    (tire-trail-method-23 (_type_ vector vector float) none) ;; 23
+    (tire-trail-method-23 (_type_ vector vector float) float) ;; 23
     (tire-trail-method-24 (_type_) none) ;; 24
     )
   )
@@ -43272,7 +43272,7 @@
     (vehicle-section-method-10 (_type_) none) ;; 10
     (vehicle-section-method-11 (_type_) none) ;; 11
     (vehicle-section-method-12 (_type_) none) ;; 12
-    (vehicle-section-method-13 (_type_) none) ;; 13
+    (vehicle-section-method-13 (_type_) float) ;; 13
     (vehicle-section-method-14 (_type_) none) ;; 14
     (vehicle-section-method-15 (_type_) none) ;; 15
     (vehicle-section-method-16 (_type_) symbol) ;; 16
@@ -47783,7 +47783,7 @@
 (define-extern *game-launched-from-room* object)
 (define-extern camera-seek-time object)
 (define-extern real-camera-seek-time object)
-(define-extern set-lobby-camera-seek-time! (function float none))
+(define-extern set-lobby-camera-seek-time! (function float float))
 (define-extern *class-mode* object)
 (define-extern restore-selection-index (function none))
 (define-extern *lobby-timetrial-lock-mode* object)
@@ -49603,7 +49603,7 @@
     (water-anim-method-50 (_type_) none) ;; 50
     (idle () _type_ :state) ;; 51
     (water-anim-method-52 (_type_) none) ;; 52
-    (water-anim-method-53 (_type_) none) ;; 53
+    (water-anim-method-53 (_type_) float) ;; 53
     (water-anim-method-54 (_type_) none) ;; 54
     (water-anim-method-55 (_type_) none) ;; 55
     (water-anim-method-56 (_type_) none) ;; 56
