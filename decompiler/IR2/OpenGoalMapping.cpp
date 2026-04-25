@@ -63,6 +63,15 @@ const std::map<InstructionKind, OpenGOALAsm::Function> MIPS_ASM_TO_OPEN_GOAL_FUN
     {InstructionKind::SLT, {"set-on-less-than", {}}},
     {InstructionKind::SLTI, {"set-on-less-than", {}}},
     {InstructionKind::SRA, {"shift-arith-right-32", {}}},
+    {InstructionKind::SRL, {"shift-logical-right-32", {}}},
+
+    // EE FPU accumulator ops — emit as `.mula.s` / `.madda.s` macros which
+    // expand to `(set! acc (* a b))` / `(set! acc (+ acc (* a b)))` in
+    // GOAL source. Per-file macro defs exist already (e.g.
+    // jak3/engine/math/trigonometry.gc); the decompiler just needs to not
+    // flag these as unsupported.
+    {InstructionKind::MULAS, {".mula.s", {}}},
+    {InstructionKind::MADDAS, {".madda.s", {}}},
 
     // ---- COP2 -----
     // TODO - VMOVE supports dest, but OpenGOAL does NOT yet!

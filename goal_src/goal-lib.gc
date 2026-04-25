@@ -757,6 +757,12 @@
   `(set! ,result (sext32 (sar (logand #xffffffff (the-as int ,in)) ,sa)))
   )
 
+(defmacro shift-logical-right-32 (result in sa)
+  "Logical right shift on a 32-bit value, zero-fill from the top.
+   Mirrors MIPS srl: no sign extension on shifted-in bits."
+  `(set! ,result (logand #xffffffff (sar (logand #xffffffff (the-as int ,in)) ,sa)))
+  )
+
 (defmacro /-0-guard (a b)
   "same as divide but returns -1 when divisor is zero (EE-like, DIVU)."
   `(let ((divisor ,b))
