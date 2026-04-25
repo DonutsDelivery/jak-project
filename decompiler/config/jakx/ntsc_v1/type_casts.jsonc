@@ -42302,5 +42302,13 @@
     [106, "v1", "rigid-body-vehicle-constants"],
     [111, "a0", "rigid-body-vehicle-constants"],
     [113, "v1", "rigid-body-vehicle-constants"]
+  ],
+  // camera-seek-time is declared float in all-types.gc but the decompiler types
+  // the symbol-load as object on top-level — without this hint the gpr->fpr
+  // conversion at op 44 produces an object operand for div.s at op 45 and
+  // expression-building bails with "Floating point division attempted on
+  // invalid types" (split-failed). Per SPLIT_FAILED_DIAGNOSIS.md File 4.
+  "(top-level-login lobby-menu-manager-h)": [
+    [43, "v1", "float"]
   ]
 }
