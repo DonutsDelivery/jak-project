@@ -2887,10 +2887,10 @@
   
 
 
-(define-extern score-is-time (function none))
+(define-extern score-is-time (function symbol))
 (define-extern set-stats-text (function none))
 (define-extern *had-gold* object)
-(define-extern is-nonstandard-mode-ignore-split? (function none))
+(define-extern is-nonstandard-mode-ignore-split? (function symbol))
 (define-extern is-nonstandard-mode? (function none))
 (define-extern *reset-hud-results* object)
 (define-extern *last-game-mgr-grand-prix* object)
@@ -2942,7 +2942,7 @@
 (define-extern *hud-results-grand-prix-totals* array)
 (define-extern *hud-results-grand-prix-totals-proc* object)
 (define-extern spawn-hud-results-grand-prix-totals (function none))
-(define-extern grand-prix-totals-on? (function none))
+(define-extern grand-prix-totals-on? (function symbol))
 (define-extern *hud-results-medal-1* array)
 (define-extern *hud-results-medal-1-proc* object)
 (define-extern spawn-hud-results-medal-1 (function none))
@@ -3125,11 +3125,11 @@
   
 
 
-(define-extern medal-uses-score? (function none))
+(define-extern medal-uses-score? (function symbol))
 (define-extern get-medal-ignore-gamestate (function none))
 (define-extern settings-multiplier (function none))
 (define-extern cup-multiplier (function none))
-(define-extern medal-instead-of-place? (function none))
+(define-extern medal-instead-of-place? (function symbol))
 (define-extern *last-cash-game-mgr-for-player-0* object)
 (define-extern *last-cash-game-mgr-for-player-1* object)
 (define-extern *hud-game-end-grand-prix* array)
@@ -3145,7 +3145,7 @@
 (define-extern *hud-game-end-top-view-0-proc* object)
 (define-extern spawn-hud-game-end-top-view-0 (function none))
 (define-extern spawn-hud-game-end (function none))
-(define-extern end-game-menu-on? (function none))
+(define-extern end-game-menu-on? (function symbol))
 (define-extern *hud-cash-stats-single* array)
 (define-extern *hud-cash-stats-single-proc* object)
 (define-extern spawn-hud-cash-stats-single (function none))
@@ -3815,7 +3815,7 @@
 (define-extern quit-game-stats-update (function none))
 (define-extern current-level-difficulty (function none))
 (define-extern difficulty-stats (function none))
-(define-extern are-we-in-time-trial-mode? (function none))
+(define-extern are-we-in-time-trial-mode? (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-race                       ;;
@@ -8280,7 +8280,7 @@
   )
 
 
-(define-extern *vif-disasm-table* array) ;; (array vif-disasm-element)
+(define-extern *vif-disasm-table* (array vif-disasm-element)) ;; (array vif-disasm-element)
 (define-extern disasm-vif-details (function symbol (pointer uint8) vif-cmd int symbol))
 (define-extern disasm-vif-tag (function (pointer vif-tag) int symbol symbol int))
 (define-extern disasm-dma-tag (function dma-tag symbol object)) 
@@ -8462,7 +8462,7 @@
 (define-extern *cpad-debug* symbol) ;; symbol
 (define-extern service-cpads (function cpad-list))
 (define-extern buzz-stop! (function int none))
-(define-extern *mouse* object) ;; mouse-info
+(define-extern *mouse* mouse-info) ;; mouse-info
 (define-extern service-mouse (function none))
 (define-extern *keybd* keybd-info) ;; keybd-info
 (define-extern service-keybd (function none))
@@ -10945,7 +10945,7 @@
   
 
 
-(define-extern *trail-graph* object) ;; trail-graph
+(define-extern *trail-graph* trail-graph) ;; trail-graph
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; connect                        ;;
@@ -14523,7 +14523,7 @@
   )
 
 
-(define-extern *palette-fade-controls* object) ;; palette-fade-controls
+(define-extern *palette-fade-controls* palette-fade-controls) ;; palette-fade-controls
 (define-extern *time-of-day-context* time-of-day-context)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -14543,7 +14543,7 @@
 
 
 (define-extern *profile-spec-array* (inline-array profile-spec)) ;; (inline-array profile-spec)
-(define-extern *profile-translate-array* array) ;; (pointer uint64)
+(define-extern *profile-translate-array* (pointer uint64)) ;; (pointer uint64)
 (define-extern *profile-work* profile-work) ;; profile-work
 (define-extern *profile-x* int) ;; int
 (define-extern *profile-y* int) ;; int
@@ -19448,7 +19448,7 @@
   
 
 
-(define-extern *wind-scales* array) ;; (array uint8)
+(define-extern *wind-scales* (array uint8)) ;; (array uint8)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; prototype-h                    ;;
@@ -29490,8 +29490,8 @@
   
 
 
-(define-extern *touching-prims-entry-pool* object) ;; touching-prims-entry-pool
-(define-extern *touching-list* object) ;; touching-list
+(define-extern *touching-prims-entry-pool* touching-prims-entry-pool) ;; touching-prims-entry-pool
+(define-extern *touching-list* touching-list) ;; touching-list
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; process-drawable-h             ;;
@@ -30242,7 +30242,7 @@
   
 
 
-(define-extern *ragdoll-edit-info* object) ;; ragdoll-edit-info
+(define-extern *ragdoll-edit-info* ragdoll-edit-info) ;; ragdoll-edit-info
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; projectile-h                   ;;
@@ -31457,7 +31457,7 @@
   
 
 
-(define-extern *instance-tie-work-copy* object) ;; instance-tie-work
+(define-extern *instance-tie-work-copy* instance-tie-work) ;; instance-tie-work
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tfrag-h                        ;;
@@ -32373,7 +32373,7 @@
   )
 
 
-(define-extern *eye-control-array* object) ;; eye-control-array
+(define-extern *eye-control-array* eye-control-array) ;; eye-control-array
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; camera-h                       ;;
@@ -34950,7 +34950,7 @@
 (define-extern update-subdivide-settings! (function subdivide-settings math-camera int none))
 (define-extern *subdivide-settings* subdivide-settings) ;; subdivide-settings
 (define-extern set-tfrag-dists! (function tfrag-dists none)) ;; was: (function none) — backported from jak3
-(define-extern *terrain-context* object) ;; terrain-context
+(define-extern *terrain-context* terrain-context) ;; terrain-context
 (define-extern GSH_ENABLE symbol) ;; symbol
 (define-extern GSH_BUCKET bucket-id)
 (define-extern GSH_WHICH_STAT int) ;; int
@@ -35095,9 +35095,9 @@
 (define-extern sprite-allocate-user-hvdf (function int))
 (define-extern sprite-release-user-hvdf (function int none))
 (define-extern sprite-get-user-hvdf (function int vector))
-(define-extern *sprite-hvdf-data* object) ;; sprite-hvdf-data
+(define-extern *sprite-hvdf-data* sprite-hvdf-data) ;; sprite-hvdf-data
 (define-extern *sprite-hvdf-control* sprite-hvdf-control) ;; sprite-hvdf-control
-(define-extern *sprite-aux-list* object) ;; sprite-aux-list
+(define-extern *sprite-aux-list* sprite-aux-list) ;; sprite-aux-list
 (define-extern *sprite-array-2d* sprite-array-2d) ;; sprite-array-2d
 (define-extern *sprite-array-3d* sprite-array-3d) ;; sprite-array-3d
 
@@ -35122,7 +35122,7 @@
   
 
 
-(define-extern *sprite-distorter-sine-tables* object) ;; sprite-distorter-sine-tables
+(define-extern *sprite-distorter-sine-tables* sprite-distorter-sine-tables) ;; sprite-distorter-sine-tables
 (define-extern sprite-distorter-generate-tables (function none))
 (define-extern sprite-distort-vu1-block vu-function)
 (define-extern sprite-init-distorter (function dma-buffer none))
@@ -35458,7 +35458,7 @@
 
 
 (define-extern history-channel->string (function none)) ;; (function history-channel string)
-(define-extern *history* object) ;; history
+(define-extern *history* history) ;; history
 (define-extern history-print (function history-iterator none))
 (define-extern history-draw (function history-iterator none))
 
@@ -35613,7 +35613,7 @@
 
 
 
-(define-extern *ripple-globals* object) ;; ripple-globals
+(define-extern *ripple-globals* ripple-globals) ;; ripple-globals
 (define-extern ripple-make-request (function ripple-wave merc-effect none))
 (define-extern ripple-update-waveform-offs (function ripple-wave-set clock none))
 (define-extern ripple-execute-init (function none))
@@ -35902,7 +35902,7 @@
   
 
 
-(define-extern *shadow-vu1-data* object) ;; shadow-vu1-data
+(define-extern *shadow-vu1-data* shadow-vu1-data) ;; shadow-vu1-data
 (define-extern shadow-vu1-block vu-function)
 (define-extern shadow-vu1-add-constants (function dma-buffer int none))
 (define-extern shadow-vu1-patch-consts (function symbol int none))
@@ -36031,7 +36031,7 @@
 
 
 
-(define-extern *blit-displays-work* object) ;; blit-displays-work
+(define-extern *blit-displays-work* blit-displays-work) ;; blit-displays-work
 (define-extern clear-zbuf (function none))
 (define-extern draw-color-bars (function blit-displays-work none)) ;; was: (function none) — backported from jak3
 (define-extern draw-raw-image (function bucket-id art-group int vector vector level int none))
@@ -36099,7 +36099,7 @@
 ;; background                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *background-work* object) ;; background-work
+(define-extern *background-work* background-work) ;; background-work
 (define-extern background-vu0-block vu-function)
 (define-extern background-upload-vu0 (function none))
 (define-extern init-background (function none))
@@ -36197,7 +36197,7 @@
 (define-extern draw-inline-array-instance-shrub (function dma-buffer drawable int (inline-array prototype-bucket-shrub) none)) ;; (function dma-buffer drawable int (inline-array prototype-bucket-shrub) none)
 (define-extern draw-prototype-inline-array-shrub (function int (inline-array prototype-bucket-shrub) pointer)) ;; (function int (inline-array prototype-bucket-shrub) pointer)
 (define-extern draw-drawable-tree-instance-shrub (function drawable-tree-instance-shrub level none))
-(define-extern *dma-test* object) ;; dma-test
+(define-extern *dma-test* dma-test) ;; dma-test
 (define-extern *dma-test-work* dma-test-work) ;; dma-test-work
 (define-extern init-dma-test (function none))
 (define-extern dma-test-func (function none))
@@ -36207,7 +36207,7 @@
 ;; shrub-work                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *instance-shrub-work* object) ;; instance-shrub-work
+(define-extern *instance-shrub-work* instance-shrub-work) ;; instance-shrub-work
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tfrag-near                     ;;
@@ -36515,8 +36515,8 @@
 ;; tie-work                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *instance-tie-work* object) ;; instance-tie-work
-(define-extern *prototype-tie-work* object) ;; prototype-tie-work
+(define-extern *instance-tie-work* instance-tie-work) ;; instance-tie-work
+(define-extern *prototype-tie-work* prototype-tie-work) ;; prototype-tie-work
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tie-methods                    ;;
@@ -36652,10 +36652,10 @@
 (define-extern unlink-part-group-by-heap (function kheap int))
 (define-extern sp-init-fields! (function (pointer float) (inline-array sp-field-init-spec) sp-field-id sp-field-id symbol (inline-array sp-field-init-spec)))
 (define-extern *sp-launcher-lock* symbol) ;; symbol
-(define-extern *sp-launch-queue* object) ;; sp-launch-queue
+(define-extern *sp-launch-queue* sp-launch-queue) ;; sp-launch-queue
 (define-extern *sp-launcher-enable* symbol) ;; symbol
 (define-extern particle-setup-adgif (function adgif-shader int none))
-(define-extern *particle-adgif-cache* object) ;; particle-adgif-cache
+(define-extern *particle-adgif-cache* particle-adgif-cache) ;; particle-adgif-cache
 (define-extern particle-adgif-cache-flush (function none))
 (define-extern particle-adgif (function adgif-shader texture-id none))
 (define-extern particle-adgif-callback (function adgif-shader texture-id none))
@@ -36738,8 +36738,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern sp-particle-copy! (function sparticle-cpuinfo sparticle-cpuinfo none))
-(define-extern *sp-particle-system-2d* object) ;; sparticle-system
-(define-extern *sp-particle-system-3d* object) ;; sparticle-system
+(define-extern *sp-particle-system-2d* sparticle-system) ;; sparticle-system
+(define-extern *sp-particle-system-3d* sparticle-system) ;; sparticle-system
 (define-extern sp-get-block-size (function sparticle-system int int))
 (define-extern sp-get-approx-alloc-size (function sparticle-system int int))
 (define-extern sp-free-particle (function sparticle-system int sparticle-cpuinfo sprite-vec-data-2d none))
@@ -36855,7 +36855,7 @@
 (define-extern ja-play-spooled-anim (function none)) ;; (function spool-anim art-joint-anim art-joint-anim (function process-drawable symbol) spooler-flags int :behavior process-drawable)
 (define-extern ja-play-spooled-no-sync-anim (function none))
 (define-extern ja-abort-spooled-anim (function spool-anim art-joint-anim int int :behavior process-drawable))
-(define-extern *gui-control* object) ;; gui-control
+(define-extern *gui-control* gui-control) ;; gui-control
 (define-extern *art-control* external-art-control) ;; external-art-control
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -37019,14 +37019,14 @@
 (define-extern update-mood-interior (function mood-context symbol float))
 (define-extern update-mood-interior-ambient (function mood-context symbol float vector))
 (define-extern update-mood-flames (function mood-context int int int float float float float :behavior time-of-day-proc))
-(define-extern *flash0* array) ;; (array float)
-(define-extern *flash1* array) ;; (array float)
-(define-extern *flash2* array) ;; (array float)
-(define-extern *flash3* array) ;; (array float)
-(define-extern *flash4* array) ;; (array float)
-(define-extern *flash5* array) ;; (array float)
-(define-extern *flash6* array) ;; (array float)
-(define-extern *flash7* array) ;; (array float)
+(define-extern *flash0* (array float)) ;; (array float)
+(define-extern *flash1* (array float)) ;; (array float)
+(define-extern *flash2* (array float)) ;; (array float)
+(define-extern *flash3* (array float)) ;; (array float)
+(define-extern *flash4* (array float)) ;; (array float)
+(define-extern *flash5* (array float)) ;; (array float)
+(define-extern *flash6* (array float)) ;; (array float)
+(define-extern *flash7* (array float)) ;; (array float)
 (define-extern update-mood-light (function mood-context int int float float float float float float))
 (define-extern update-mood-lava (function mood-context int int float float float float float float))
 (define-extern update-mood-flicker (function mood-context int int int))
@@ -37190,13 +37190,13 @@
 ;; sky-data                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *sky-work* object) ;; sky-work
+(define-extern *sky-work* sky-work) ;; sky-work
 (define-extern sky-base-polygons (inline-array sky-vertex)) ;; (inline-array sky-vertex)
 (define-extern sky-roof-polygons (inline-array sky-vertex)) ;; (inline-array sky-vertex)
-(define-extern *cloud-vert-array* object) ;; cloud-vert-array
+(define-extern *cloud-vert-array* cloud-vert-array) ;; cloud-vert-array
 (define-extern *cloud-poly* (inline-array sky-vertex)) ;; (inline-array sky-vertex)
 (define-extern init-cloud-vert-array (function symbol))
-(define-extern *haze-vert-array* object) ;; haze-vert-array
+(define-extern *haze-vert-array* haze-vert-array) ;; haze-vert-array
 (define-extern *haze-poly* (inline-array sky-vertex)) ;; (inline-array sky-vertex)
 (define-extern init-haze-vert-array (function symbol))
 (define-extern sky-make-sun-data (function sky-work int float none)) ;; was: (function none) — backported from jak3
@@ -37800,7 +37800,7 @@
 (define-extern probe-traverse-draw-node (function draw-node int int)) 
 (define-extern probe-traverse-inline-array-node (function drawable-inline-array-node int symbol)) 
 (define-extern probe-traverse-collide-fragment (function drawable-tree-collide-fragment int symbol)) 
-(define-extern *collide-probe-stack* object) ;; collide-probe-stack
+(define-extern *collide-probe-stack* collide-probe-stack) ;; collide-probe-stack
 (define-extern collide-vu0-block vu-function)
 (define-extern collide-probe-node (function (inline-array draw-node) int collide-list int))
 (define-extern print-out (function int object))
@@ -37895,7 +37895,7 @@
 ;; collide                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *collide-vif0-init* array) ;; (array uint32)
+(define-extern *collide-vif0-init* (array uint32)) ;; (array uint32)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; collide-planes                 ;;
@@ -37982,7 +37982,7 @@
 
 
 (define-extern *actor-hash* spatial-hash) ;; spatial-hash
-(define-extern *actor-hash-buckets* object) ;; actor-hash-buckets
+(define-extern *actor-hash-buckets* actor-hash-buckets) ;; actor-hash-buckets
 (define-extern update-actor-hash (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -38383,7 +38383,7 @@
 (define-extern *volume-normal-current* int) ;; int
 (define-extern *volume-normal* vector-array) ;; vector-array
 (define-extern *volume-descriptor-current* int) ;; int
-(define-extern *volume-descriptor* object) ;; vol-control
+(define-extern *volume-descriptor* vol-control) ;; vol-control
 (define-extern cam-layout-print (function int int string pointer))
 (define-extern cam-layout-intersect-dist (function vector vector vector float))
 (define-extern cam-layout-entity-volume-info-create (function entity-camera symbol symbol :behavior cam-layout))
@@ -38547,10 +38547,10 @@
 (define-extern *camera-old-cpu* object)
 (define-extern *camera-old-vu* object)
 (define-extern *camera-old-tfrag-bytes* object)
-(define-extern *camera-old-level* object)
-(define-extern *camera-old-stat-string-tfrag* object)
-(define-extern *camera-old-stat-string-tfrag-near* object)
-(define-extern *camera-old-stat-string-total* object)
+(define-extern *camera-old-level* string)
+(define-extern *camera-old-stat-string-tfrag* string)
+(define-extern *camera-old-stat-string-tfrag-near* string)
+(define-extern *camera-old-stat-string-total* string)
 (define-extern cam-slave-options->string (function cam-slave-options object string))
 (define-extern cam-index-options->string (function cam-index-options object string))
 (define-extern slave-los-state->string (function slave-los-state string))
@@ -38566,9 +38566,9 @@
 (define-extern camera-cross (function vector vector vector vector4w meters none))
 (define-extern camera-bounding-box-draw (function bounding-box basic rgba none))
 (define-extern *cam-debug-los-tri-current* object)
-(define-extern *cam-debug-los-tri* object)
+(define-extern *cam-debug-los-tri* (inline-array cam-debug-tri))
 (define-extern *cam-debug-coll-tri-current* object)
-(define-extern *cam-debug-coll-tri* object)
+(define-extern *cam-debug-coll-tri* (inline-array cam-debug-tri))
 (define-extern cam-debug-reset-coll-tri (function none))
 (define-extern cam-debug-add-los-tri (function (inline-array collide-cache-tri) vector vector none))
 (define-extern cam-debug-add-coll-tri (function cam-debug-tri vector cam-debug-tri none))
@@ -38582,7 +38582,7 @@
 (define-extern *cam-collision-record-first* object)
 (define-extern *cam-collision-record-last* object)
 (define-extern *cam-collision-record-show* object)
-(define-extern *cam-collision-record* object)
+(define-extern *cam-collision-record* cam-collision-record-array)
 (define-extern cam-collision-record-save (function vector vector int symbol camera-slave none))
 (define-extern cam-collision-record-step (function int none))
 (define-extern cam-collision-record-draw (function none))
@@ -41480,7 +41480,7 @@
 (define-extern hud-string-init (function none))
 (define-extern hud-string-add (function none))
 (define-extern hud-string-draw-all (function none))
-(define-extern *hud-sprite-work* object) ;; hud-sprite-work
+(define-extern *hud-sprite-work* hud-sprite-work) ;; hud-sprite-work
 (define-extern hud-sprite-add (function none))
 (define-extern *debug-hud-disable* object)
 (define-extern hud-create-icon (function hud int int (pointer manipy)))
@@ -49216,8 +49216,8 @@
 (define-extern title-fade-out (function float int))
 (define-extern direction-press (function time-frame time-frame symbol symbol))
 (define-extern *scrap-book-3* array)
-(define-extern *scrap-book-1* array) ;; (array int16)
-(define-extern *scrap-book-2* array) ;; (array int16)
+(define-extern *scrap-book-1* (array int16)) ;; (array int16)
+(define-extern *scrap-book-2* (array int16)) ;; (array int16)
 (define-extern *progress-save-info* mc-slot-info) ;; mc-slot-info
 (define-extern post-memcard (function none))
 (define-extern *game-name-entered* object)
@@ -49629,7 +49629,7 @@
   )
 
 
-(define-extern *water-anim-look* array) ;; (array water-anim-look)
+(define-extern *water-anim-look* (array water-anim-look)) ;; (array water-anim-look)
 (define-extern water-anim-event-handler (function process int symbol event-message-block object :behavior water-anim)) ;; was: (function none) — backported from jak3
 (define-extern water-anim-init-by-other (function entity-actor object :behavior water-anim)) ;; was: (function none) — backported from jak3
 
@@ -49826,7 +49826,7 @@
 
 
 (define-extern *debug-move-rigid-body* object)
-(define-extern *rigid-body-work* object) ;; rigid-body-work
+(define-extern *rigid-body-work* rigid-body-work) ;; rigid-body-work
 (define-extern debug-draw-rigid-body-move (function none))
 (define-extern matrix-3x3-triple-transpose-product (function matrix matrix matrix matrix))
 (define-extern damping-time-adjust (function float float float))
@@ -49870,7 +49870,7 @@
 
 
 (define-extern *rigid-body-queue* object)
-(define-extern *rigid-body-queue-manager* object) ;; rigid-body-queue-manager
+(define-extern *rigid-body-queue-manager* rigid-body-queue-manager) ;; rigid-body-queue-manager
 (define-extern *rb-line-sphere-test* object)
 (define-extern rb-line-sphere-test-update (function none))
 (define-extern rb-reset-perf-array (function none))
@@ -50892,7 +50892,7 @@
   
 
 
-(define-extern *search-info* object) ;; search-info
+(define-extern *search-info* search-info) ;; search-info
 (define-extern find-nearest-focusable (function none)) ;; (function (array collide-shape) vector float search-info-flag search-info-flag vector vector float process-focusable)
 (define-extern in-process-array? (function none))
 (define-extern fst-insertion-helper (function none))
@@ -51671,8 +51671,8 @@
 (define-extern *editable-default-name* string) ;; string
 (define-extern editable-command->string (function editable-command string)) ;; (function editable-command string)
 (define-extern editable-filter->string (function editable-filter basic string)) ;; (function editable-filter basic string)
-(define-extern *editable-work* object) ;; editable-work
-(define-extern *editable* object) ;; (pointer editable-player)
+(define-extern *editable-work* editable-work) ;; editable-work
+(define-extern *editable* (pointer editable-player)) ;; (pointer editable-player)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; editable                       ;;
@@ -51681,9 +51681,9 @@
 (define-extern common-owner (function editable editable object))
 (define-extern update-light-sphere-from-editable-light (function none)) ;; editable-light deftype is block-commented; revert P9 backport
 (define-extern load-editable-lights (function editable-array symbol))
-(define-extern *editable-sample-region* object)
-(define-extern *editable-light-region* object)
-(define-extern *editable-entity-region* object)
+(define-extern *editable-sample-region* editable-region)
+(define-extern *editable-light-region* editable-region)
+(define-extern *editable-entity-region* editable-region)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; editable-player                ;;
@@ -52032,7 +52032,7 @@
   
 
 
-(define-extern *nav-graph-editor* object) ;; (pointer nav-graph-editor)
+(define-extern *nav-graph-editor* (pointer nav-graph-editor)) ;; (pointer nav-graph-editor)
 (define-extern get-node-draw-position (function vector mysql-nav-node vector))
 (define-extern nav-graph-editor-init-by-other (function string symbol object :behavior nav-graph-editor))
 (define-extern run-nav-graph-editor (function symbol (pointer process)))
@@ -52248,7 +52248,7 @@
   
 
 
-(define-extern *nav-mesh-editor* object) ;; nav-mesh-editor
+(define-extern *nav-mesh-editor* (pointer nav-mesh-editor)) ;; nav-mesh-editor
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; nav-mesh-editor                ;;
@@ -52268,16 +52268,16 @@
 
 (define-extern snap-level-navmesh (function vector vector symbol))
 (define-extern mouse-intersect-triangle (function vector vector vector vector float))
-(define-extern *clean-vertex-array* object)
-(define-extern *clean-index-array* object)
+(define-extern *clean-vertex-array* (inline-array vector))
+(define-extern *clean-index-array* (pointer int32))
 (define-extern poly-flag-to-string (function none)) ;; nav-mesh-poly-flag undefined in jakx; revert P9 backport
 (define-extern point-in-cone (function vector vector vector vector symbol))
 (define-extern segment-in-cone (function vector vector vector vector symbol))
 (define-extern point-in-triangle (function vector vector vector vector symbol))
 (define-extern segments-intersect (function vector vector vector vector symbol))
 (define-extern is-diagonal (function int (inline-array triangulation-vert) vector-array int int int symbol))
-(define-extern *verts-buf-1* object)
-(define-extern *verts-buf-2* object)
+(define-extern *verts-buf-1* (inline-array triangulation-vert))
+(define-extern *verts-buf-2* (inline-array triangulation-vert))
 (define-extern draw-square-point (function vector object))
 (define-extern get-level-id (function string int))
 (define-extern nav-mesh-editor-new (function object))
@@ -52294,7 +52294,7 @@
 ;; sampler                        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *sampler-mem* object)
+(define-extern *sampler-mem* pointer)
 (define-extern *sampler-compare* object)
 (define-extern *sampler-count* object)
 (define-extern *sampler-above-range-count* object)
@@ -52472,7 +52472,7 @@
   
 
 
-(define-extern *visvol-edit-info* object)
+(define-extern *visvol-edit-info* visvol-edit-info)
 (define-extern visvol-editor-init-by-other (function handle object :behavior visvol-editor))
 (define-extern stop-visvol-edit (function object))
 (define-extern visvol-edit (function string object))
@@ -52553,7 +52553,7 @@
 
 (define-extern collision-editor-default-proc-init-by-other (function object :behavior collision-editor-default-proc)) ;; was: (function none) — backported from jak3
 (define-extern collision-editor-edited-proc-init-by-other (function object :behavior collision-editor-edited-proc)) ;; was: (function none) — backported from jak3
-(define-extern *collision-editor-mesh-names* array) ;; (array string)
+(define-extern *collision-editor-mesh-names* (array string)) ;; (array string)
 (define-extern *collision-editor-art-group-name* string) ;; string
 (define-extern collision-editor-add-mesh-to-ccache (function collide-shape-prim-group collide-cache object)) 
 (define-extern print-default-collision (function process-drawable none))
@@ -55119,7 +55119,7 @@
 ;; credits-h                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *credits-ids* array) ;; (array text-id)
+(define-extern *credits-ids* (array text-id)) ;; (array text-id)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; credits-cloth                  ;;
@@ -59449,8 +59449,8 @@
 ;; Auto-extern batch 4
 (define-extern *cty-attack-controller* object)
 (define-extern *cty-faction-manager* object)
-(define-extern *debug-vertex-stats* object)
-(define-extern *time-of-day* object)
+(define-extern *debug-vertex-stats* debug-vertex-stats)
+(define-extern *time-of-day* (pointer time-of-day-proc))
 ;;(define-extern anim-test-sequence object)
 ;;(define-extern animation-info object)
 (define-extern birth-pickup-at-point (function none)) ;; pickup-type undefined in jakx; revert P9 backport
@@ -59462,7 +59462,7 @@
 (define-extern editable-sample object)
 ;; (define-extern eznet-combination object)  ;; clobbers active deftype
 ;;(define-extern flow-control object)
-(define-extern fuel-cell object)
+(define-extern fuel-cell type)
 ;; (define-extern gui-control object) ;; clobbers active deftype
 ;;(define-extern helmet-garage object)
 ;;(define-extern hud-artifact-indicators-view0 object)
