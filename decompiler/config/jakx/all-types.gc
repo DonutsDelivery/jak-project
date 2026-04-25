@@ -7567,6 +7567,14 @@
     )
   )
 
+(defenum timer-clock-selection
+  :type uint8
+  (busclk 0)
+  (busclk/16 1)
+  (busclk/256 2)
+  (hblank 3)
+  )
+
 (define-extern *debug-sound-sliders* object)
 (define-extern *music-volume-ducked-by-sound* object)
 (define-extern *music-lock* object)
@@ -15300,6 +15308,15 @@
   (no-draw-target 6)
   (stop-sfx 7)
   (no-audio-first 8)
+  )
+
+(defenum task-manager-mask
+  :type uint32
+  :bitfield #t
+  (intro-scene)
+  (resolution-scene)
+  (time-limit)
+  (auto-complete)
   )
 (deftype user-setting-data (structure)
   ((border-mode             symbol              :offset-assert 0) ;; guessed by decompiler
@@ -29077,6 +29094,18 @@
   (joint-set-world)
   )
 
+(defenum track-mode
+  :bitfield #t
+  :type uint16
+  (track-on       0) ;; 1
+  (track-x        1) ;; 2
+  (track-y        2) ;; 4
+  (lock-on        3) ;; 8
+  (no-trans       4) ;; 16
+  (no-rotate      5) ;; 32
+  (no-scale       6) ;; 64
+  )
+
 (defenum joint-mod-ik-flags
   :bitfield #t
   :type uint32
@@ -30134,6 +30163,20 @@
     (simple-prim-method-54 (_type_) none) ;; 54
     (simple-prim-method-55 (_type_) none) ;; 55
     )
+  )
+
+(defenum task-arrow-flags
+  :type uint32
+  :bitfield #t
+  (taf0 0)
+  (taf1 1)
+  (taf2 2)
+  (taf3 3)
+  (taf4 4)
+  (taf5 5)
+  (taf6 6)
+  (taf7 7)
+  (taf8 8)
   )
   
 
@@ -31624,6 +31667,12 @@
   (hover-find-closest)
   (update-los)
 )
+
+(defenum texture-page-flag
+  :type uint16
+  :bitfield #t
+  (alpha-enable 0)
+  )
   
 
 
@@ -35443,6 +35492,64 @@
     (nav-mesh-method-45 (_type_ nav-poly) nav-poly) ;; 45
     (nav-mesh-method-46 (_type_ nav-poly) nav-poly) ;; 46
     )
+  )
+
+(defenum traffic-type
+  :type uint8
+  (civilian-male 0)
+  (civilian-female 1)
+  (civilian-fat 2)
+  (civilian-pilot 3)
+  (guard-pilot 4)
+  (citizen-task 5)
+  (guard-a 6)
+  (guard-b 7)
+  (metalhead-grunt 8)
+  (metalhead-flitter 9)
+  (metalhead-predator 10)
+  (wlander-male 11)
+  (wlander-female 12)
+  (formation 13)
+  (roboguard 14)
+  (spydroid 15)
+  (flying-turret 16)
+  (civilian-bike-a 17)
+  (civilian-bike-b 18)
+  (civilian-bike-c 19)
+  (civilian-car-a 20)
+  (civilian-car-b 21)
+  (civilian-car-c 22)
+  (vehicle-task 23)
+  (guard-bike 24)
+  (guard-car 25)
+  (guard-transport 26)
+  (kg-pickup 27)
+  (bike-d 28)
+  (max 29)
+  (invalid0 -1)
+  (invalid #xffffffff)
+  )
+
+(defenum traffic-spawn-flags
+  :type uint32
+  :bitfield #t
+  (tsf0 0)
+  (tsf1 1)
+  (tsf2 2)
+  (tsf3 3)
+  (tsf4 4)
+  (tsf5 5)
+  (tsf6 6)
+  (tsf7 7)
+  (tsf8 8)
+  (tsf9 9)
+  (tsf10 10)
+  (tsf11 11)
+  (tsf12 12)
+  (tsf13 13)
+  (tsf14 14)
+  (tsf15 15)
+  (tsf16 16)
   )
 
 (defenum guard-type
@@ -62075,6 +62182,52 @@
   :method-count-assert 72
   :size-assert         #x231
   :flag-assert         #x4801b00231
+  )
+
+(defenum target-geo
+  :type int32
+  (uninitialized -2)
+  (none -1)
+  (jakb 4) ;; jak 2 model
+  (jakb-old 5) ;; weird broken jak 2 model
+  (jakc 6) ;; jak 3 model
+  )
+
+(defenum target-flags
+  :type uint32
+  :bitfield #t
+  (tf0 0)
+  (tf1 1)
+  (tf2 2)
+  (tinvuln1 3)
+  (tf4 4)
+  (tf5 5)
+  (tf6 6)
+  (prevent-jump 7)
+  (prevent-attack 8)
+  (prevent-duck 9)
+  (tf10 10)
+  (tf11 11)
+  (tf12 12)
+  (tf13 13)
+  (tf14 14)
+  (tf15 15)
+  (tf16 16)
+  (prevent-board 17)
+  (prevent-gun 18)
+  (lleg-still 19)
+  (rleg-still 20)
+  (lleg-no-ik 21)
+  (rleg-no-ik 22)
+  (prevent-double-jump 23)
+  (disable-attacks 24)
+  (tinvuln2 25)
+  (tf26 26)
+  (tf27 27)
+  (invisible 28)
+  (tf29 29)
+  (tf30 30)
+  (tf31 31)
   )
 
 (defenum target-effect
