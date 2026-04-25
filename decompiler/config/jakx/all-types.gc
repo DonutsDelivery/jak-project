@@ -1945,17 +1945,17 @@
 
 
 (define-extern wrong-way-linebot-init-by-other (function none))
-(define-extern wrong-way-linebot-spawn (function none))
+(define-extern wrong-way-linebot-spawn (function process))
 (define-extern set-position-and-orientation (function none))
 (define-extern set-children-position-and-orientation (function none))
 (define-extern wrong-way-event-handler (function none))
 (define-extern check-for-kill-player (function none))
 (define-extern check-for-player-dead (function none))
 (define-extern wrong-way-init-by-other (function none))
-(define-extern wrong-way-spawn (function none))
+(define-extern wrong-way-spawn (function process))
 (define-extern *race-banner-subtract* object)
 (define-extern starting-linebot-init-by-other (function none))
-(define-extern starting-linebot-spawn (function none))
+(define-extern starting-linebot-spawn (function process))
 (define-extern race-banner-handler (function symbol))
 (define-extern race-banner-init-by-other (function none))
 (define-extern race-banner-spawn (function none))
@@ -2254,7 +2254,7 @@
 (define-extern *explosion-effect-suppress* object)
 (define-extern explosion-init-by-other (function none)) ;; (function explosion-init-params object :behavior explosion)
 (define-extern explosion-spawn-legacy-version (function process-drawable type explosion-init-params (pointer process)))
-(define-extern explosion-spawn (function explosion-init-params process-drawable none))
+(define-extern explosion-spawn (function explosion-init-params process-drawable process))
 (define-extern find-closest-solid-sphere-prim (function none)) ;; (function collide-shape vector collide-spec collide-shape-prim)
 (define-extern *explosion-debug-sphere* sphere) ;; sphere
 (define-extern explosion-handle-touch-with-ccheck (function none))
@@ -4198,7 +4198,7 @@
 
 (define-extern sabotage-sequence-trans (function none))
 (define-extern sabotage-sequence-init-by-other (function none))
-(define-extern sabotage-sequence-start (function none))
+(define-extern sabotage-sequence-start (function process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hud-oneoff                     ;;
@@ -5626,22 +5626,22 @@
 (define-extern heap-sort (function symbol))
 (define-extern clear-strip (function none))
 (define-extern lightning-sphere-init-by-other (function none))
-(define-extern lightning-sphere-spawn (function none))
+(define-extern lightning-sphere-spawn (function process))
 (define-extern vector+float*-ignore-w! (function none))
 (define-extern smoke-update (function none))
 (define-extern smoke-render (function none))
 (define-extern smoke-spawn (function none))
 (define-extern smoke-system-init-by-other (function none))
-(define-extern smoke-system-spawn (function none))
+(define-extern smoke-system-spawn (function process))
 (define-extern slip-object-init-by-other (function none))
-(define-extern slip-object-spawn (function none))
+(define-extern slip-object-spawn (function process))
 (define-extern oil-slick-init-by-other (function none))
-(define-extern oil-slick-spawn (function none))
+(define-extern oil-slick-spawn (function process))
 (define-extern oil-trail-emit (function none))
 (define-extern oil-emitter-init-by-other (function none))
-(define-extern oil-emitter-spawn (function none))
+(define-extern oil-emitter-spawn (function process))
 (define-extern oil-flame-emitter-init-by-other (function none))
-(define-extern oil-flame-emitter-spawn (function none))
+(define-extern oil-flame-emitter-spawn (function process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-weapons               ;;
@@ -5968,7 +5968,7 @@
 
 (define-extern *vehicle-antenna-state* object)
 (define-extern vehicle-antenna-init-by-other (function none))
-(define-extern vehicle-antenna-spawn (function none))
+(define-extern vehicle-antenna-spawn (function process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; euler-h                        ;;
@@ -49345,7 +49345,7 @@
 (define-extern *msg-map-net-test* array)
 (define-extern *net-process-class-info-net-test* net-process-class-info)
 (define-extern net-test-init-by-other (function none))
-(define-extern spawn-local (function none))
+(define-extern spawn-local (function process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-player                     ;;
@@ -49388,7 +49388,7 @@
 (define-extern find-ground-info (function none))
 (define-extern get-player-pos (function int vector))
 (define-extern vehicle-rev-manager-init-by-other (function none))
-(define-extern vehicle-rev-manager-spawn (function none))
+(define-extern vehicle-rev-manager-spawn (function process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-util                       ;;
@@ -50810,7 +50810,7 @@
 
 (define-extern *vehicle-debris-constants* object)
 (define-extern vehicle-debris-init-by-other (function none))
-(define-extern vehicle-debris-spawn (function none))
+(define-extern vehicle-debris-spawn (function process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; vehicle-effects                ;;
@@ -52728,7 +52728,7 @@
 (define-extern *seat-offset* object)
 (define-extern *daxter-rotate* object)
 (define-extern daxter-init-by-other (function none))
-(define-extern daxter-spawn (function none))
+(define-extern daxter-spawn (function process))
 (define-extern *animation-adjust* object)
 (define-extern *test-hide* object)
 (define-extern *daxter-position-tweak* object)
