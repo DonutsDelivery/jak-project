@@ -51,9 +51,14 @@ HACKS_JSONC = ROOT / "decompiler" / "config" / "jakx" / "ntsc_v1" / "hacks.jsonc
 # Opcodes that crash run_mips2c — skip any FUNCTION body containing these.
 # VU: vsqi/viaddi/vlqi/viand/vmtirx
 # PS2 extended FPU/MAC: mtlo1/mflo1 (extended accumulator), mula.s/madda.s/madd.s
-# (these crash get_imm() via InstructionAtom::get_imm assertion)
+# Label-immediate forms (lui/ori/ld with `L<n>` operand): the mips2c emitter
+# calls InstructionAtom::get_imm() expecting an IMM atom but finds a LABEL,
+# tripping the same assertion at decompiler/Disasm/Instruction.cpp:118.
+# Observed crash sites: (method 99 net-player-race) [`lui v1, L914`],
+# (method 57 net-game-mgr-deathmatch).
 VU_CRASH_OPCODES = re.compile(
     r"\b(vsqi|viaddi|vlqi|viand|vmtirx|mtlo1|mflo1|mula\.s|madda\.s|madd\.s)\b"
+    r"|\b(lui|ori|ld)\b[^\n]*\bL\d+\b"
 )
 
 RE_DEF_FUNCTION = re.compile(r"^;; definition for function ([\w<>!?:\-\+\*/=]+)")
