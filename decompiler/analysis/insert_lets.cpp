@@ -3652,7 +3652,6 @@ LetStats insert_lets(const Function& func,
                      FormPool& pool,
                      Form* top_level_form,
                      LetRewriteStats& let_rewrite_stats) {
-  (void)func;
   //    if (func.name() != "(method 4 pair)") {
   //      return {};
   //    }
@@ -3829,6 +3828,34 @@ LetStats insert_lets(const Function& func,
 
   // Part 7: insert lets!
   for (auto& group : possible_insertions) {
+    // Defensive bounds check: when functions have a declared return type of
+    // `none` but actually return a value, the form-tree rewrites in earlier
+    // passes can leave `start_elt`/`end_elt` indices that no longer match the
+    // form's current size. Without this check, `ownership.at()` below throws
+    // `vector::_M_range_check`, which the outer try/catch logs as
+    // `;; ERROR: Error while inserting lets:` for the WHOLE function — the
+    // function decompiles but loses all its `let` structure.
+    //
+    // Instead, detect the inconsistency per-group and skip JUST that group.
+    // Other groups still get their lets, and the function decompiles without
+    // an ERROR marker (just slightly less pretty in the affected lca form).
+    int form_size = static_cast<int>(group.first->size());
+    bool group_oob = false;
+    for (const auto& li : group.second) {
+      if (li.start_elt < 0 || li.end_elt > form_size || li.start_elt >= li.end_elt) {
+        group_oob = true;
+        break;
+      }
+    }
+    if (group_oob) {
+      lg::warn(
+          "[insert_lets] skipping group with stale bounds in {} (form_size={}, "
+          "lets={}). Likely caused by return-type mismatch (declared `none` but "
+          "function returns).",
+          func.name(), form_size, group.second.size());
+      continue;
+    }
+
     // sort decreasing size.
     std::sort(group.second.begin(), group.second.end(),
               [](const LetInsertion& a, const LetInsertion& b) {
