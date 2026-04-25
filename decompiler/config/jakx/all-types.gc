@@ -36425,8 +36425,10 @@
 (define-extern ray-triangle-intersect (function none))
 (define-extern collide-do-primitives (function none))
 (define-extern moving-sphere-triangle-intersect (function vector vector float collide-cache-tri vector vector float))
-(define-extern moving-sphere-sphere-intersect (function none))
-(define-extern moving-sphere-moving-sphere-intersect (function none))
+;; Lane2-RecipeX: replaced stub (jak1 test/decompiler/reference/jak1/engine/collide/collide-func_REF.gc)
+(define-extern moving-sphere-sphere-intersect (function vector vector vector vector none))
+;; Lane2-RecipeX: replaced stub (jak1 test/decompiler/reference/jak1/engine/collide/collide-func_REF.gc)
+(define-extern moving-sphere-moving-sphere-intersect (function vector vector vector vector vector none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; joint                          ;;
@@ -38135,7 +38137,8 @@
 
 
 (define-extern tie-near-vu1-block object)
-(define-extern tie-near-init-consts (function none))
+;; Lane2-RecipeX: replaced stub (jak1 test/decompiler/reference/jak1/engine/gfx/tie/tie-near_REF.gc)
+(define-extern tie-near-init-consts (function tie-near-consts int none))
 (define-extern tie-near-init-engine (function none))
 (define-extern tie-near-end-buffer (function symbol))
 (define-extern tie-scissor-make-perspective-matrix (function matrix matrix matrix))
@@ -39382,7 +39385,8 @@
 (define-extern *level-text-file-load-flag* symbol)
 (define-extern convert-korean-text (function string string))
 (define-extern text-is-loading symbol)
-(define-extern load-game-text-info (function string (pointer object) kheap int)) ;; (function string (pointer object) kheap int)
+;; Lane2-RecipeX: replaced stub (jak3 test/decompiler/reference/jak3/engine/ui/text_REF.gc)
+(define-extern load-game-text-info (function string (pointer object) kheap none))
 (define-extern load-level-text-files (function int none))
 (define-extern draw-debug-text-box "Draws some lines" (function font-context none))
 (define-extern *print-game-text-work* print-game-text-work)
@@ -39793,7 +39797,8 @@
 ;; cam-combiner                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern cam-helper-temp (function (pointer camera-slave) (pointer camera-slave) float matrix :behavior camera-combiner))
+;; Lane2-RecipeX: replaced stub (jak3 test/decompiler/reference/jak3/engine/camera/cam-combiner_REF.gc)
+(define-extern cam-helper-temp (function (pointer camera-slave) (pointer camera-slave) float none))
 (define-extern cam-combiner-active state) ;; (state camera-combiner)
 (define-extern cam-combiner-init (function none :behavior camera-combiner))
 
@@ -43152,7 +43157,8 @@
 ;; powerups                       ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern cloud-track (function process-tree process-tree (function vector none) time-frame time-frame time-frame none :behavior process))
+;; Lane2-RecipeX: replaced stub (jak3 test/decompiler/reference/jak3/engine/common-obs/powerups_REF.gc)
+(define-extern cloud-track (function process-tree process-tree (function vector none) time-frame time-frame time-frame none))
 (define-extern eco-blue-glow (function vector none))
 (define-extern process-contact-action (function process none :behavior target))
 
@@ -62242,6 +62248,16 @@
 (define-extern string<? (function string string symbol))
 (define-extern string= (function string string symbol))
 (define-extern charp<-string (function (pointer uint8) string int))
+;; --- Lane 2 Recipe X cycle 1: REF-derived externs ---
+;; from jak3 REF: test/decompiler/reference/jak3/engine/common-obs/debris_REF.gc
+(define-extern debris-group-init-by-other (function debris-tuning debris-static-params process-drawable none))
+;; from jak3 REF: test/decompiler/reference/jak3/engine/common-obs/debris_REF.gc
+(define-extern debris-spawn (function process-drawable debris-tuning debris-static-params process-drawable none))
+;; from jak3 REF: test/decompiler/reference/jak3/engine/process-drawable/process-drawable_REF.gc
+(define-extern skeleton-group->draw-control (function process-drawable skeleton-group (pointer cspace-array) none))
+;; from jak3 REF: test/decompiler/reference/jak3/engine/process-drawable/process-drawable_REF.gc
+(define-extern ja-min? (function int none))
+;; --- end Recipe X cycle 1 ---
 ;;(define-extern string-menu object)
 ;; (define-extern sky-color-day object) ;; clobbers active deftype
 ;;(define-extern shadow-vu1-constants object)
