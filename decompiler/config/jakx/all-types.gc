@@ -32341,18 +32341,18 @@
 
 #|
 (deftype instance-shrub-work (structure)
-  ((dummy                           qword             3       :offset-assert 0) ;; guessed by decompiler
-   (chaina                          qword             8       :offset-assert 48) ;; guessed by decompiler
-   (chainb                          qword             8       :offset-assert 176) ;; guessed by decompiler
-   (colors                          rgba              1024    :offset-assert 304) ;; guessed by decompiler
-   (matrix-tmpl                     qword             20      :offset-assert 4400) ;; guessed by decompiler
-   (count-tmpl                      vector4w          20      :offset-assert 4720) ;; guessed by decompiler
+  ((dummy                           qword             3       :offset-assert 0)
+   (chaina                          qword             8       :offset-assert 48)
+   (chainb                          qword             8       :offset-assert 176)
+   (colors                          rgba              1024    :offset-assert 304)
+   (matrix-tmpl                     qword             20      :offset-assert 4400)
+   (count-tmpl                      vector4w          20      :offset-assert 4720)
    (mscalf-tmpl                     dma-packet        :inline :offset-assert 5040)
    (mscalf-ret-tmpl                 dma-packet        :inline :offset-assert 5056)
    (adgif-tmpl                      dma-gif-packet    :inline :offset-assert 5072)
    (billboard-tmpl                  dma-gif-packet    :inline :offset-assert 5104)
    (billboard-const                 vector            :inline :offset-assert 5136)
-   (shrub-near-packets              shrub-near-packet 6       :offset-assert 5152) ;; guessed by decompiler
+   (shrub-near-packets              shrub-near-packet 6       :offset-assert 5152)
    (dma-ref                         dma-packet        :inline :offset-assert 6016)
    (dma-end                         dma-packet        :inline :offset-assert 6032)
    (wind-const                      vector            :inline :offset-assert 6048)
@@ -32365,12 +32365,12 @@
    (bb-color                        vector            :inline :offset-assert 6160)
    (min-dist                        vector            :inline :offset-assert 6176)
    (temp-vec                        vector            :inline :offset-assert 6192)
-   (guard-plane                     plane             4       :offset-assert 6208) ;; guessed by decompiler
-   (plane                           plane             4       :offset-assert 6272) ;; guessed by decompiler
-   (last                            uint32            4       :offset-assert 6336) ;; guessed by decompiler
-   (next                            uint32            4       :offset-assert 6352) ;; guessed by decompiler
-   (count                           uint16            4       :offset-assert 6368) ;; guessed by decompiler
-   (mod-count                       uint16            4       :offset-assert 6376) ;; guessed by decompiler
+   (guard-plane                     plane             4       :offset-assert 6208)
+   (plane                           plane             4       :offset-assert 6272)
+   (last                            uint32            4       :offset-assert 6336)
+   (next                            uint32            4       :offset-assert 6352)
+   (count                           uint16            4       :offset-assert 6368)
+   (mod-count                       uint16            4       :offset-assert 6376)
    (wind-vectors                    uint32                    :offset-assert 6384)
    (instance-ptr                    uint32                    :offset-assert 6388)
    (chain-ptr                       uint32                    :offset-assert 6392)
@@ -32381,18 +32381,18 @@
    (to-spr                          uint32                    :offset-assert 6412)
    (from-spr                        uint32                    :offset-assert 6416)
    (shrub-count                     uint32                    :offset-assert 6420)
-   (stack-ptr                       uint32                    :offset-assert 6400)
-   (node                            uint32            6       :offset-assert 6428) ;; guessed by decompiler
-   (length                          uint32            6       :offset-assert 6452) ;; guessed by decompiler
+   (stack-ptr2                      uint32                    :overlay-at stack-ptr)
+   (node                            uint32            6       :offset 6428)
+   (length                          uint32            6       :offset-assert 6452)
    (prototypes                      uint32                    :offset-assert 6476)
-   (bucket-ptr                      uint32                    :offset-assert 6404)
-   (start-bank                      uint8             20      :offset-assert 6484) ;; guessed by decompiler
+   (bucket-ptr2                     uint32                    :overlay-at bucket-ptr)
+   (start-bank                      uint8             20      :offset 6484)
    (buffer-index                    uint32                    :offset-assert 6504)
    (current-spr                     uint32                    :offset-assert 6508)
    (current-mem                     uint32                    :offset-assert 6512)
    (current-shrub-near-packet       uint32                    :offset-assert 6516)
    (current-shrub-near-trans-packet uint32                    :offset-assert 6520)
-   (to-spr                          uint32                    :offset-assert 6412)
+   (to-spr2                         uint32                    :overlay-at to-spr)
    (dma-buffer                      basic                     :offset-assert 6528)
    (near-last                       uint32                    :offset-assert 6532)
    (near-next                       uint32                    :offset-assert 6536)
@@ -54321,8 +54321,8 @@
 
 (define-extern *sampler-mem* pointer)
 (define-extern *sampler-compare* object)
-(define-extern *sampler-count* object)
-(define-extern *sampler-above-range-count* object)
+(define-extern *sampler-count* int)
+(define-extern *sampler-above-range-count* int)
 (define-extern timer0-handler (function none))
 (define-extern sampler-start (function none))
 (define-extern sampler-stop (function none))
