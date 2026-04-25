@@ -34319,7 +34319,7 @@
     (sparticle-launch-control-method-17 (_type_ matrix) none) ;; 17
     (sparticle-launch-control-method-18 (_type_ cspace) none) ;; 18
     (sparticle-launch-control-method-19 (_type_) none) ;; 19
-    (sparticle-launch-control-method-20 (_type_ particle-local-space-info) none) ;; 20
+    (sparticle-launch-control-method-20 (_type_ int) int) ;; 20
     (sparticle-launch-control-method-21 (_type_) none) ;; 21
     )
   )
