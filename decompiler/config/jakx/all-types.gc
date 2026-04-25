@@ -174,6 +174,7 @@
 
 (declare-type cpad-info basic)
 (declare-type mouse-info basic)
+(declare-type mouse-buttons uint32) ;; defenum at L62583, forward-declared for mouse-info fields
 (define-extern cpad-open (function cpad-info int cpad-info))
 (define-extern cpad-get-data (function cpad-info cpad-info))
 (define-extern scf-get-territory (function int)) ;; not actually a scf function...
@@ -8538,41 +8539,42 @@
    )
   :method-count-assert 9
   :size-assert         #x10
-;; DEAD: disabled mouse-info
   :flag-assert         #x900000010
   )
 
 
 
-#|
+;; mouse-info: activated from jak3 all-types.gc clean deftype (Init 13 / split-failed pad)
+;; mouse-buttons forward-declared earlier (defenum at L62583)
 (deftype mouse-info (basic)
-  ((active             symbol          :offset-assert 4) ;; guessed by decompiler
-   (cursor             symbol          :offset-assert 8) ;; guessed by decompiler
-   (valid              symbol          :offset-assert 12) ;; guessed by decompiler
-   (id                 uint8           :offset-assert 16)
-   (status             uint16          :offset-assert 18)
-   (button0            uint16          :offset-assert 20)
-   (deltax             int8            :offset-assert 22)
-   (deltay             int8            :offset-assert 23)
-   (wheel              uint8           :offset-assert 24)
-   (change-time        uint64          :offset-assert 32) ;; time-frame
-   (button0-abs        mouse-buttons 3 :offset-assert 40) ;; guessed by decompiler
-   (button0-shadow-abs mouse-buttons 1 :offset-assert 52) ;; guessed by decompiler
-   (button0-rel        mouse-buttons 3 :offset-assert 56) ;; guessed by decompiler
-   (pos                vector        2 :offset-assert 80) ;; guessed by decompiler
-   (UNKNOWN            UNKNOWN         :offset-assert -1) ;; field could not be read.
-   (posx               float           :offset-assert 80)
-   (posy               float           :offset-assert 84)
-   (oldposx            float           :offset-assert 96)
-   (oldposy            float           :offset-assert 100)
-   (speedx             float           :offset-assert 92)
-   (speedy             float           :offset-assert 108)
+  ((active             symbol                  :offset-assert 4) ;; guessed by decompiler
+   (cursor             symbol                  :offset-assert 8)
+   (valid              symbol                  :offset-assert 12) ;; guessed by decompiler
+   (id                 uint8                   :offset-assert 16)
+   (status             uint16                  :offset-assert 18)
+   (button0            uint16                  :offset-assert 20)
+   (deltax             int8                    :offset-assert 22)
+   (deltay             int8                    :offset-assert 23)
+   (wheel              uint8                   :offset-assert 24)
+   (change-time        time-frame              :offset-assert 32)
+   (button0-abs        mouse-buttons 3         :offset-assert 40) ;; guessed by decompiler
+   (button0-shadow-abs mouse-buttons 1         :offset-assert 52) ;; guessed by decompiler
+   (button0-rel        mouse-buttons 3         :offset-assert 56) ;; guessed by decompiler
+   (pos                vector        2 :inline :offset-assert 80) ;; guessed by decompiler
+   (posx               float           :offset 80)
+   (posy               float           :offset 84)
+   (oldposx            float           :offset 96 :do-not-decompile)
+   (oldposy            float           :offset 100)
+   (speedx             float           :offset 92)
+   (speedy             float           :offset 108)
    )
   :method-count-assert 9
   :size-assert         #x70
   :flag-assert         #x900000070
+  (:methods
+    (new (symbol type) _type_) ;; 0
+    )
   )
-|#
 
 
 
@@ -8596,7 +8598,7 @@
 (define-extern *cpad-debug* symbol) ;; symbol
 (define-extern service-cpads (function cpad-list))
 (define-extern buzz-stop! (function int none))
-(define-extern *mouse* object) ;; mouse-info blocked (UNKNOWN fields)
+(define-extern *mouse* mouse-info) ;; mouse-info activated (Init 13)
 (define-extern service-mouse (function none))
 (define-extern *keybd* keybd-info) ;; keybd-info
 (define-extern service-keybd (function none))
@@ -61126,7 +61128,7 @@
 ;; (define-extern medius-room type)  ;; clobbers active deftype at earlier line
 ;; (define-extern medius-set-localization-params-request type)  ;; clobbers active deftype at earlier line
 ;; (define-extern medius-simple-response type)  ;; clobbers active deftype at earlier line
-(define-extern mouse-info type)
+;; (define-extern mouse-info type) ;; clobbers active deftype at L8548
 ;; (define-extern nav-find-corner-portal-params type) ;; clobbers active deftype
 ;; (define-extern net-dme-version type)  ;; clobbers active deftype at earlier line
 ;; (define-extern net-enemy type)  ;; clobbers active deftype at earlier line
