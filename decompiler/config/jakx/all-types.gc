@@ -46800,7 +46800,7 @@
     (net-player-method-45 (_type_ object object object object) symbol) ;; 45
     (net-player-method-46 (_type_ object) none) ;; 46
     (net-player-method-47 (_type_ object) int) ;; 47
-    (net-player-method-48 (_type_) none) ;; 48
+    (net-player-method-48 (_type_ object object object object) none) ;; 48
     (net-player-method-49 (_type_) none) ;; 49
     (net-player-method-50 (_type_ object) symbol) ;; 50
     (net-player-method-51 (_type_ object) none) ;; 51
@@ -46843,7 +46843,7 @@
     (net-player-method-88 (_type_) none) ;; 88
     (net-player-method-89 (_type_ object) none) ;; 89
     (net-player-method-90 (_type_) none) ;; 90
-    (net-player-method-91 (_type_) symbol) ;; 91
+    (net-player-method-91 (_type_ object) symbol) ;; 91
     (net-player-method-92 (_type_) int) ;; 92
     (net-player-method-93 (_type_) none) ;; 93
     (net-player-method-94 (_type_) none) ;; 94
@@ -47310,10 +47310,10 @@
     (net-game-mgr-method-59 (_type_) int) ;; 59
     (net-game-mgr-method-60 (_type_) none) ;; 60
     (net-game-mgr-method-61 (_type_) none) ;; 61
-    (net-game-mgr-method-62 (_type_) symbol) ;; 62
+    (net-game-mgr-method-62 (_type_ object) symbol) ;; 62
     (net-game-mgr-method-63 (_type_) int) ;; 63
     (net-game-mgr-method-64 (_type_) int) ;; 64
-    (net-game-mgr-method-65 (_type_) string) ;; 65
+    (net-game-mgr-method-65 (_type_ object) string) ;; 65
     (net-game-mgr-method-66 (_type_ object) none) ;; 66
     (net-game-mgr-method-67 (_type_ object) none) ;; 67
     (net-game-mgr-method-68 (_type_) none) ;; 68
