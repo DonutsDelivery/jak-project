@@ -43108,4 +43108,92 @@
       "light-trail-breadcrumb"
     ]
   ]
+,
+  "point-poly-distance-min": [
+    [
+      94,
+      "f0",
+      "float"
+    ]
+  ]
+,
+  "(method 16 mysql-nav-graph)": [
+    [
+      [
+        39,
+        54
+      ],
+      "v1",
+      "mysql-nav-visnode"
+    ],
+    [
+      29,
+      "a1",
+      "mysql-nav-visnode"
+    ],
+    [
+      24,
+      "a1",
+      "mysql-nav-visnode"
+    ]
+  ]
+,
+  "(method 17 mysql-nav-graph)": [
+    [
+      7,
+      "a1",
+      "mysql-nav-node"
+    ],
+    [
+      22,
+      "a1",
+      "mysql-nav-edge"
+    ],
+    [
+      [
+        39,
+        59
+      ],
+      "a1",
+      "mysql-nav-edge"
+    ],
+    [
+      [
+        48,
+        58
+      ],
+      "a2",
+      "mysql-nav-node"
+    ]
+  ]
+,
+  "joint-mod-debug-draw": [
+    [
+      8,
+      "a3",
+      "float"
+    ]
+  ]
+,
+  "(method 10 history-iterator)": [
+    [
+      [
+        20,
+        35
+      ],
+      "a2",
+      "history-elt"
+    ]
+  ]
+,
+  "(method 10 history)": [
+    [
+      [
+        8,
+        10
+      ],
+      "a1",
+      "history-elt"
+    ]
+  ]
 }
