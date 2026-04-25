@@ -8527,7 +8527,7 @@
   :size-assert         #x98
   :flag-assert         #xa00000098
   (:methods
-    (new (symbol type) _type_) ;; 0
+    (symbol type int) _type_) ;; 0
     (cpad-info-method-9 (_type_) int) ;; 9
     )
   )
@@ -8593,13 +8593,13 @@
 
 
 (define-extern *cheat-mode* symbol)
-(define-extern cpad-invalid! (function cpad-info cpad-info))
+(define-extern cpad-invalid! "Reset all data in a [[cpad-info]]." (function cpad-info cpad-info))
 (define-extern analog-input (function int float float float float float))
 (define-extern cpad-set-buzz! (function cpad-info int int time-frame none))
 (define-extern *cpad-list* cpad-list) ;; cpad-list
 (define-extern *cpad-debug* symbol) ;; symbol
 (define-extern service-cpads (function cpad-list))
-(define-extern buzz-stop! (function int none))
+(define-extern buzz-stop! "Set the buzz to 0 on both vibration motors of the given cpad." (function int none))
 (define-extern *mouse* mouse-info) ;; mouse-info activated (Init 13)
 (define-extern service-mouse (function none))
 (define-extern *keybd* keybd-info) ;; keybd-info
@@ -15979,8 +15979,8 @@
   :size-assert         #x2784
   :flag-assert         #x2500002784
   (:methods
-    (sky-work-method-9 (_type_ int float float float) int) ;; 9
-    (sky-work-method-10 (_type_ int float float float float float float) int) ;; 10
+    (init-sun-data! (_type_ int float float float) none) ;; 9
+    (init-orbit-settings! (_type_ int float float float float float float) none) ;; 10
     (sky-work-method-11 (_type_ float) int) ;; 11
     (sky-work-method-12 (_type_ float float) int) ;; 12
     (sky-work-method-13 (_type_ dma-buffer vector) int) ;; 13
@@ -17067,7 +17067,7 @@
   :flag-assert         #x1300000020
   (:methods
     (drawable-tree-region-prim-method-17 (_type_ vector) symbol) ;; 17
-    (debug-print (_type_ vector object) int) ;; 18
+    (debug-print (_type_ vector object) none) ;; 18
     )
   )
 
@@ -28781,7 +28781,7 @@
   :flag-assert         #xa000000a8
   ;; field handle is likely a value type.
   (:methods
-    (attack-info-method-9 (_type_ attack-info process-drawable process-drawable) int) ;; 9
+    (attack-info-method-9 (_type_ attack-info process-drawable process-drawable) none) ;; 9
     )
   )
 
@@ -30472,8 +30472,8 @@
 ;; process-drawable-h             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern cspace-by-name-no-fail (function process-drawable string cspace))
-(define-extern cspace-index-by-name-no-fail (function process-drawable string int))
+(define-extern cspace-by-name-no-fail "Like [[cspace-by-name]], but prints an error if the [[cspace]] was not found and returns the `node-list`." (function process-drawable string cspace))
+(define-extern cspace-index-by-name-no-fail "Like [[cspace-index-by-name]], but prints an error if the [[cspace]] was not found and returns 0." (function process-drawable string int))
 (define-extern num-func-none (function joint-control-channel float float float float :behavior process))
 (define-extern num-func-+! (function joint-control-channel float float float float :behavior process))
 (define-extern num-func--! (function joint-control-channel float float float float :behavior process))
@@ -30482,7 +30482,7 @@
 (define-extern num-func-loop-set! (function joint-control-channel float float float float :behavior process))
 (define-extern num-func-seek! (function joint-control-channel float float float float :behavior process))
 (define-extern num-func-blend-in! (function joint-control-channel float float float float :behavior process))
-(define-extern joint-channel-float-delete! (function joint-control-channel int)) 
+(define-extern joint-channel-float-delete! (function joint-control-channel none))
 (define-extern num-func-interp-play! (function joint-control-channel float float float float :behavior process))
 (define-extern num-func-interp1-play! (function joint-control-channel float float float float :behavior process))
 (define-extern num-func-chan (function joint-control-channel float float float float :behavior process))
@@ -31430,7 +31430,7 @@
   
 
 
-(define-extern spawn-projectile (function type projectile-init-by-other-params process-tree dead-pool (pointer process)))
+(define-extern spawn-projectile "Create a new process for a projectile of the given type." (function type projectile-init-by-other-params process-tree dead-pool (pointer process)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; find-nearest-h                 ;;
@@ -32366,7 +32366,7 @@
   )
 
 
-(define-extern shrubbery-login-post-texture (function shrubbery symbol)) 
+(define-extern shrubbery-login-post-texture "Do some weird fix-up to the shrubbery textures. this is likely to present normal-looking adgifs to the texture system, but then we scramble them up for easier consumption by VU1." (function shrubbery none))
 (define-extern *shrub-state* int) ;; int
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -33587,7 +33587,7 @@
   :size-assert         #x40
   :flag-assert         #xa00000040
   (:methods
-    (set-trans (_type_ vector) int) ;; 9
+    (set-trans (_type_ vector) none) ;; 9
     )
   )
 
@@ -34369,7 +34369,7 @@
 
 
 (define-extern *launch-matrix* matrix) ;; matrix
-(define-extern compute-rot-in-screenspace (function vector float))
+(define-extern compute-rot-in-screenspace "Unclear what this does, but I'm not actually sure it makes sense. Unused" (function vector float))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; sparticle-h                    ;;
@@ -35832,28 +35832,28 @@
   :flag-assert         #x3000000120
   (:methods
     (nav-control-method-9 (_type_) none) ;; 9
-    (nav-control-method-10 (_type_ vector) symbol) ;; 10
+    (point-in-bsphere? (_type_ vector) symbol) ;; 10
     (nav-control-method-11 (_type_ vector) none) ;; 11
     (nav-control-method-12 (_type_ vector vector nav-poly) none) ;; 12
-    (nav-control-method-13 (_type_ vector) nav-poly) ;; 13
+    (find-nearest-poly-to-point (_type_ vector) nav-poly) ;; 13
     (nav-control-method-14 (_type_ nav-poly vector vector vector) none) ;; 14
     (nav-control-method-15 (_type_ vector) none) ;; 15
     (nav-control-method-16 (_type_ vector float) none) ;; 16
-    (nav-control-method-17 (_type_ vector float) none) ;; 17
-    (nav-control-method-18 (_type_ nav-avoid-spheres-params) none) ;; 18
-    (nav-control-method-19 (_type_ nav-avoid-spheres-params) none) ;; 19
-    (nav-control-method-20 (_type_ vector nav-poly vector float symbol clamp-travel-vector-to-mesh-return-info) none) ;; 20
+    (is-in-mesh? (_type_ vector float) symbol) ;; 17
+    (avoid-spheres-1! (_type_ nav-avoid-spheres-params) symbol) ;; 18
+    (avoid-spheres-2! (_type_ nav-avoid-spheres-params) symbol) ;; 19
+    (clamp-vector-to-mesh-cross-gaps (_type_ vector nav-poly vector float symbol clamp-travel-vector-to-mesh-return-info) none) ;; 20
     (nav-control-method-21 (_type_ vector nav-poly vector clamp-travel-vector-to-mesh-return-info) none) ;; 21
     (nav-control-method-22 (_type_ vector nav-avoid-spheres-params) none) ;; 22
-    (nav-control-method-23 (_type_) none) ;; 23
+    (set-spheres-from-nav-ids (_type_) none) ;; 23
     (nav-control-method-24 (_type_ vector int) none) ;; 24
     (nav-control-method-25 (_type_) float) ;; 25
     (nav-control-method-26 (_type_) uint) ;; 26
     (nav-control-method-27 (_type_) meters) ;; 27
-    (nav-control-method-28 (_type_) int) ;; 28
-    (nav-control-method-29 (_type_) none) ;; 29
-    (nav-control-method-30 (_type_ sphere) none) ;; 30
-    (nav-control-method-31 (_type_ sphere) none) ;; 31
+    (enable-extra-sphere! (_type_) none) ;; 28
+    (disable-extra-sphere! (_type_) none) ;; 29
+    (copy-extra-nav-sphere! (_type_ sphere) none) ;; 30
+    (set-extra-nav-sphere-xyz! (_type_ sphere) none) ;; 31
     (nav-control-method-32 (_type_ float) none) ;; 32
     (nav-control-method-33 (_type_ float) none) ;; 33
     (nav-control-method-34 (_type_ meters) none) ;; 34
@@ -40787,7 +40787,7 @@
 ;; region                         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern region-tree-execute (function symbol vector vector int)) 
+(define-extern region-tree-execute (function symbol vector vector none))
 (define-extern region-execute (function none))
 (define-extern region-prim-lookup-by-id (function int symbol int drawable-region-prim))
 (define-extern region-lookup-by-id (function int region))
@@ -41785,7 +41785,7 @@
     (rigid-body-control-method-10 (_type_ rigid-body-object float float) none) ;; 10
     (rigid-body-control-method-11 (_type_ collide-shape-moving) int) ;; 11
     (rigid-body-control-method-12 (_type_ float) int) ;; 12
-    (rigid-body-control-method-13 (_type_) int) ;; 13
+    (init-velocities! (_type_) none) ;; 13
     (rigid-body-control-method-14 (_type_ float) none) ;; 14
     (rigid-body-control-method-15 (_type_) none) ;; 15
     (rigid-body-control-method-16 (_type_) int) ;; 16
@@ -53086,7 +53086,7 @@
   
 
 
-(define-extern save-memcard-init-by-other (function none))
+(define-extern save-memcard-init-by-other (function level object :behavior lprecurc-loader))
 (define-extern *debug-save-memcard-dead-pool* object)
 (define-extern start-save-memcard (function none))
 (define-extern *part-tester-name* string) ;; string
