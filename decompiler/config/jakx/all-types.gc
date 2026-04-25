@@ -29796,7 +29796,7 @@
     (shove-to-closest-point-on-path (_type_ attack-info float) vector) ;; 41
     (should-push-away (_type_ collide-shape collide-query) symbol) ;; 42
     (collide-shape-method-43 (_type_ pull-rider-info) none) ;; 43
-    (collide-shape-method-44 (_type_) none) ;; 44
+    (pull-riders! (_type_) symbol) ;; 44
     (collide-shape-method-45 (_type_) collide-spec) ;; 45
     (collide-shape-method-46 (_type_) int) ;; 46
     (collide-shape-method-47 (_type_ collide-spec) int) ;; 47
@@ -38724,7 +38724,7 @@
 (define-extern update-mood-default (function mood-context float int none :behavior time-of-day-proc))
 (define-extern update-mood-copy-parent (function mood-context object int none))
 (define-extern get-sphere-interp (function sphere vector float float float))
-(define-extern update-mood-default-exterior (function none))
+(define-extern update-mood-default-exterior (function mood-context float int none :behavior time-of-day-proc))
 (define-extern init-mood-mountain (function mood-context uint))
 (define-extern update-mood-mountain (function mood-context float int none :behavior time-of-day-proc))
 
@@ -41539,7 +41539,7 @@
 (define-extern *scale-curve* curve2d-fast) ;; curve2d-fast
 (define-extern *scale-range* curve2d-fast) ;; curve2d-fast
 (define-extern *part-function-curve-test-curve-settings* particle-curve-settings) ;; particle-curve-settings
-(define-extern ptest (function symbol))
+(define-extern ptest (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; light-trails                   ;;
