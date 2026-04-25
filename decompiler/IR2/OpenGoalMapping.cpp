@@ -88,6 +88,18 @@ const std::map<InstructionKind, OpenGOALAsm::Function> MIPS_ASM_TO_OPEN_GOAL_FUN
     {InstructionKind::PADDH, {".paddh", {}}},
     {InstructionKind::PXOR, {".pxor", {}}},
     {InstructionKind::PROT3W, {".prot3w", {}}},
+    {InstructionKind::PCPYH, {".pcpyh", {}}},
+
+    // Load Upper Immediate — used as a standalone asm form when the typical
+    // LUI/ORI 32-bit-load pattern wasn't matched. Already used in jakx
+    // hand-ports (e.g. generic-effect.gc: `(.lui at-0 28672)`).
+    {InstructionKind::LUI, {".lui", {}}},
+
+    // COP2 control register reads/writes (Clipping flag, etc.). The `.i`
+    // (interlock) suffix is part of the macro name, matching jakx
+    // hand-ports like sprite-distort.gc / math-camera.gc.
+    {InstructionKind::CFC2, {".cfc2.i", {}}},
+    {InstructionKind::CTC2, {".ctc2.i", {}}},
 
     // ---- COP2 -----
     // TODO - VMOVE supports dest, but OpenGOAL does NOT yet!
