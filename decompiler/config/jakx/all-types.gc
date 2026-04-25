@@ -33601,7 +33601,7 @@
   :flag-assert         #xc00000008
   (:methods
     (add! "Add a sprite to the list, to be drawn later." (_type_ sprite-glow-data) int) ;; 9
-    (draw-all-sprites! "Submit all sprites to the sprite-glow renderer" (_type_ dma-buffer) int) ;; 10
+    (draw-all-sprites! (_type_ dma-buffer) none) ;; 10
     (clear! "Reset the list." (_type_) int) ;; 11
     )
   )
