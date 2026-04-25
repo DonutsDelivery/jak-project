@@ -2730,7 +2730,7 @@
   
 
 
-(define-extern team-has-local-humans? (function none))
+(define-extern team-has-local-humans? (function symbol))
 (define-extern get-player-id-by-team (function none))
 (define-extern *hud-slowmo* array)
 (define-extern *hud-slowmo-proc* object)
@@ -2891,7 +2891,7 @@
 (define-extern set-stats-text (function none))
 (define-extern *had-gold* object)
 (define-extern is-nonstandard-mode-ignore-split? (function symbol))
-(define-extern is-nonstandard-mode? (function none))
+(define-extern is-nonstandard-mode? (function symbol))
 (define-extern *reset-hud-results* object)
 (define-extern *last-game-mgr-grand-prix* object)
 (define-extern *hud-results-medal* array)
@@ -3811,7 +3811,7 @@
 (define-extern *award-table* array)
 (define-extern overall-score-amount-to-gamble (function none))
 (define-extern award-overall-score (function none))
-(define-extern got-other-players (function none))
+(define-extern got-other-players (function symbol))
 (define-extern quit-game-stats-update (function none))
 (define-extern current-level-difficulty (function none))
 (define-extern difficulty-stats (function none))
@@ -5812,7 +5812,7 @@
 (define-extern v-wpn-unpack-msg! (function none))
 (define-extern vehicle-get-weapon-level (function none))
 (define-extern global-turbo-suppressor-set! (function none))
-(define-extern should-suppress-eco? (function none))
+(define-extern should-suppress-eco? (function symbol))
 (define-extern rapid-fire-control-emitter-from-world (function none))
 (define-extern rapid-fire-control-initialize-from-vehicle (function none))
 (define-extern is-friendly-fire-helper (function none))
@@ -10254,7 +10254,7 @@
   :size-assert         #x80
   :flag-assert         #xf00000080
   (:methods
-    (texture-page-method-9 (_type_) none) ;; 9 ;; (remove-data-from-heap (_type_ kheap) _type_)
+    (texture-page-method-9 (_type_ kheap) none) ;; 9 ;; (remove-data-from-heap (_type_ kheap) _type_)
     (texture-page-method-10 (_type_ int int) int) ;; 10
     (texture-page-method-11 (_type_ int int) texture-page) ;; 11
     (texture-page-method-12 (_type_ dma-buffer tex-upload-mode) int) ;; 12
@@ -10312,7 +10312,7 @@
   :size-assert         #x14
   :flag-assert         #xb00000014
   (:methods
-    (texture-page-dir-method-9 (_type_) none) ;; 9 ;; (unlink-shaders-in-heap (_type_ kheap) int)
+    (texture-page-dir-method-9 (_type_ kheap) none) ;; 9 ;; (unlink-shaders-in-heap (_type_ kheap) int)
     (texture-page-dir-method-10 (_type_) none) ;; 10
     )
   )
@@ -12275,7 +12275,7 @@
 (define-extern vehicle-type->string (function none))
 (define-extern driver-type->string (function none))
 (define-extern type-from-driver-type (function none))
-(define-extern level-from-driver-type (function none))
+(define-extern level-from-driver-type (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; game-task-h                    ;;
@@ -13515,7 +13515,7 @@
 
 (define-extern *car-type-names* array)
 (define-extern type-from-vehicle-type (function none)) ;; (function vehicle-type type)
-(define-extern level-name-from-vehicle-type (function none))
+(define-extern level-name-from-vehicle-type (function symbol))
 (define-extern car-type-from-vehicle-type (function none))
 (define-extern vehicle-type-from-car-type (function none))
 (define-extern car-type-from-level-name (function none))
@@ -16188,15 +16188,15 @@
   (:methods
     (login "Initialize the object after it is loaded." (_type_) _type_);; 9
     (draw "Draw the drawable, and typically its children.
-           This usually means adding stuff to a list to be drawn later, rather than expensive drawing here." (_type_) int) ;; 10
-    (drawable-method-11 (_type_) int) ;; 11 ;; (fill-collide-list-from-box (_type_ int collide-list collide-query) int)
-    (drawable-method-12 (_type_) int) ;; 12 ;; (fill-collide-list-from-line-sphere (_type_ int collide-list collide-query) int)
+           This usually means adding stuff to a list to be drawn later, rather than expensive drawing here." (_type_) none) ;; 10
+    (drawable-method-11 (_type_) none) ;; 11 ;; (fill-collide-list-from-box (_type_ int collide-list collide-query) int)
+    (drawable-method-12 (_type_) none) ;; 12 ;; (fill-collide-list-from-line-sphere (_type_ int collide-list collide-query) int)
     (collect-stats "Collect triangle/perf statistics for rendering.
                     This is only called when viewing stats.
-                    The vis-bits and culling registers are loaded during this time." (_type_) int) ;; 13
-    (debug-draw "Debug-draw a drawable and its children. Typically uses the debug-draw functions." (_type_) int) ;; 14
+                    The vis-bits and culling registers are loaded during this time." (_type_) none) ;; 13
+    (debug-draw "Debug-draw a drawable and its children. Typically uses the debug-draw functions." (_type_) none) ;; 14
     (unpack-vis (_type_ (pointer int8) (pointer int8)) (pointer int8)) ;; 15
-    (collect-regions "Fill the region-prim-list with regions that intersect the sphere." (_type_ sphere int region-prim-list) int) ;; 16
+    (collect-regions "Fill the region-prim-list with regions that intersect the sphere." (_type_ sphere int region-prim-list) none) ;; 16
     )
   )
 
@@ -30201,7 +30201,7 @@
     (ragdoll-method-9 (_type_ matrix process-drawable) none) ;; 9
     (ragdoll-method-10 (_type_ process-drawable symbol vector symbol) none) ;; 10
     (ragdoll-method-11 (_type_ time-frame) none) ;; 11
-    (ragdoll-method-12 (_type_) none) ;; 12 ;; (get-parent-joint (_type_ (inline-array ragdoll-joint)) ragdoll-joint)
+    (ragdoll-method-12 (_type_ (inline-array ragdoll-joint)) none) ;; 12 ;; (get-parent-joint (_type_ (inline-array ragdoll-joint)) ragdoll-joint)
     (ragdoll-method-13 (_type_ ragdoll-edit-info ragdoll-joint matrix matrix) none) ;; 13 ;; (ragdoll-method-13 (_type_ ragdoll-edit-info ragdoll-joint matrix matrix) none)
     (ragdoll-method-14 (_type_ process-drawable ragdoll-joint object matrix) none) ;; 14 ;; (ragdoll-method-14 (_type_ process-drawable ragdoll-joint object matrix) none)
     (ragdoll-method-15 (_type_ process-drawable ragdoll-edit-info) none) ;; 15 ;; (ragdoll-method-15 (_type_ process-drawable ragdoll-edit-info) none)
@@ -32863,7 +32863,7 @@
   :size-assert         #x10
   :flag-assert         #xb00000010
   (:methods
-    (sparticle-launcher-method-9 (_type_) none) ;; 9
+    (sparticle-launcher-method-9 (_type_ sp-field-id) none) ;; 9
     (sparticle-launcher-method-10 (_type_ string) none) ;; 10
     )
   )
@@ -33707,8 +33707,8 @@
   
 
 
-(define-extern get-knot-name (function none))
-(define-extern get-distmap-name (function none))
+(define-extern get-knot-name (function symbol))
+(define-extern get-distmap-name (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; nav-mesh-h                     ;;
@@ -34252,7 +34252,7 @@
     (nav-control-method-31 (_type_ sphere) none) ;; 31
     (nav-control-method-32 (_type_ float) none) ;; 32
     (nav-control-method-33 (_type_ float) none) ;; 33
-    (nav-control-method-34 (_type_) none) ;; 34
+    (nav-control-method-34 (_type_ meters) none) ;; 34
     (nav-control-method-35 (_type_ float) none) ;; 35
     (nav-control-method-36 (_type_) none) ;; 36
     (nav-control-method-37 (_type_) none) ;; 37
@@ -36921,12 +36921,12 @@
 
 
 (define-extern *dma-block-lists* array)
-(define-extern can-place-block? (function none))
+(define-extern can-place-block? (function symbol))
 (define-extern dma-try-alloc-single (function none))
 (define-extern dma-try-alloc (function none))
 (define-extern dma-release (function none))
 (define-extern dma-dump (function none))
-(define-extern dma-is-empty (function none))
+(define-extern dma-is-empty (function symbol))
 (define-extern dma-get-named-buffer (function none))
 (define-extern lobby-dma-reserve-hook (function none))
 
@@ -40897,7 +40897,7 @@
 (define-extern *camera-pos-0* object)
 (define-extern *camera-pos-1* object)
 (define-extern vis-cull-all? (function none))
-(define-extern vis-dist-additional-ok? (function none))
+(define-extern vis-dist-additional-ok? (function symbol))
 (define-extern vis-dist-ok? (function none))
 (define-extern entity-by-name (function string entity))
 (define-extern entity-by-type (function type entity-actor))
