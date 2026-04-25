@@ -5971,7 +5971,7 @@
 
 
 
-(define-extern *vehicle-antenna-state* object)
+(define-extern *vehicle-antenna-state* vehicle-antenna-state)
 (define-extern vehicle-antenna-init-by-other (function none))
 (define-extern vehicle-antenna-spawn (function process))
 
@@ -6042,7 +6042,7 @@
 
 
 (define-extern *drift-file-stream* file-stream)
-(define-extern *drift-editor* object)
+(define-extern *drift-editor* drift-editor)
 (define-extern drift-editor-init-by-other (function none))
 (define-extern start-drift (function symbol))
 
@@ -16601,7 +16601,7 @@
   )
 
 
-(define-extern *car-texture-work* object)
+(define-extern *car-texture-work* car-texture-work)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; texture                        ;;
@@ -37606,7 +37606,7 @@
 (define-extern set-fog-height! (function float float))
 (define-extern set-cloud-minmax! (function float float float))
 (define-extern *default-pris-texture-anim-array* texture-anim-array)
-(define-extern *car-texture-anim-array-work* object)
+(define-extern *car-texture-anim-array-work* car-texture-anim-array-work)
 (define-extern car-texture-anim-layer-func (function none))
 (define-extern *default-car-texture-anim-array* texture-anim-array)
 (define-extern set-car-highlight! (function none))
@@ -43115,7 +43115,7 @@
 
 (define-extern *movie-path-dir* object)
 (define-extern *movie-path-filename* object)
-(define-extern *movie-path* object)
+(define-extern *movie-path* movie-path)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; pov-camera                     ;;
@@ -47993,7 +47993,7 @@
   
 
 
-(define-extern *ctf-flag* object)
+(define-extern *ctf-flag* ctf-flag)
 (define-extern *ctf-red-base* object)
 (define-extern *ctf-blue-base* object)
 (define-extern net-player-ctf-init-remote (function none))
@@ -49944,7 +49944,7 @@
 (define-extern *medius-connect-info* object)
 (define-extern *medius-world-report* medius-world-report)
 (define-extern *medius-player-report* medius-player-report)
-(define-extern *medius-chat-message* object)
+(define-extern *medius-chat-message* medius-chat-message)
 (define-extern *medius-auth-request* object)
 (define-extern *medius-player-ladder-stats* object)
 (define-extern *medius-account-name* object)
@@ -49967,7 +49967,7 @@
 (define-extern refreshing-games-callback (function none))
 (define-extern total-games-callback (function none))
 (define-extern *tmp-game-name* object)
-(define-extern *medius-join-game-response* object)
+(define-extern *medius-join-game-response* medius-join-game-response)
 (define-extern *medius-policy* object)
 (define-extern *medius-policy-length* object)
 (define-extern *medius-language* object)
@@ -50261,7 +50261,7 @@
 (define-extern *ghost-download-ptr* object)
 (define-extern *ghost-download-len* object)
 (define-extern *ghost-tmp-buf* object)
-(define-extern *ghost-info* object)
+(define-extern *ghost-info* ghost-info)
 (define-extern *ghost-async-status* object)
 (define-extern *ghost-req-id* object)
 (define-extern send-ghost-file (function none))
@@ -50283,7 +50283,7 @@
 ;; net-mgr-mgcl                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *medius-server-session-begin-request* object)
+(define-extern *medius-server-session-begin-request* medius-server-session-begin-request)
 (define-extern *mgcl-init-in-params* object)
 (define-extern *mgcl-init-out-params* object)
 (define-extern *mgcl-connect-in-params* object)
@@ -50292,7 +50292,7 @@
 (define-extern *mgcl-server-report* object)
 (define-extern *mgcl-access-key* object)
 (define-extern *player-entered-ready-room* object)
-(define-extern *medius-server-join-game-response* object)
+(define-extern *medius-server-join-game-response* medius-server-join-game-response)
 (define-extern mgcl-join-game-callback (function none))
 (define-extern mgcl-end-game-callback (function none))
 (define-extern mgcl-world-status-callback (function none))
@@ -50596,7 +50596,7 @@
   )
 
 
-(define-extern *http-downloader* object)
+(define-extern *http-downloader* http-downloader)
 (define-extern *http-request-string* object)
 (define-extern http-downloader-init-by-other (function none))
 (define-extern http-start-fetch (function none))
@@ -51630,9 +51630,9 @@
   )
 
 
-(define-extern *rigid-body-queue* object)
+(define-extern *rigid-body-queue* rigid-body-queue)
 (define-extern *rigid-body-queue-manager* rigid-body-queue-manager) ;; rigid-body-queue-manager
-(define-extern *rb-line-sphere-test* object)
+(define-extern *rb-line-sphere-test* rb-line-sphere-test)
 (define-extern rb-line-sphere-test-update (function none))
 (define-extern rb-reset-perf-array (function none))
 (define-extern rb-reset-perf-times (function none))
@@ -56404,7 +56404,7 @@
 (define-extern net-player-training-init-remote (function none))
 (define-extern *msg-map-net-player-training* array)
 (define-extern *net-process-class-info-net-player-training* net-process-class-info)
-(define-extern *training-info* object)
+(define-extern *training-info* training-info)
 (define-extern training-wait-for-speech-end (function none))
 (define-extern training-trans (function none))
 (define-extern disable-green-eco-for-entity (function none))
@@ -58494,10 +58494,10 @@
   
 
 
-(define-extern *interface-cam* object)
+(define-extern *interface-cam* interface-cam)
 (define-extern interface-cam-init-by-other (function none))
 (define-extern activate-bar (function none))
-(define-extern *garage-cinema* object)
+(define-extern *garage-cinema* garage-cinema)
 (define-extern garage-cinema-init-by-other (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -58507,7 +58507,7 @@
 (define-extern *background-menu-info* object)
 (define-extern *logo-menu-info* object)
 (define-extern *logo-subtitle-menu-info* object)
-(define-extern *base-menu-info* object)
+(define-extern *base-menu-info* base-menu-info)
 (define-extern *single-event-menu-info* object)
 (define-extern *options-menu-info* object)
 (define-extern *video-options-menu-info* object)
@@ -59559,7 +59559,7 @@
 (define-extern *tune-performance-text-ids* array)
 (define-extern *body-parts-text-ids* array)
 (define-extern *respray-paintjob-text-ids* array)
-(define-extern *paintjob-menu* object)
+(define-extern *paintjob-menu* paintjob-menu)
 (define-extern *customize-menu-info* object)
 (define-extern *vehicle-selection-menu-info* object)
 (define-extern *cash-bar-extra* array)
