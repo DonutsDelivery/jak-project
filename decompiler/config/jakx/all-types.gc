@@ -20055,6 +20055,17 @@
   :size-assert         #x3000
   :flag-assert         #x900003000
   )
+
+(defenum prototype-flags
+  :bitfield #t
+  :type uint16
+  (disable     0) ;; set from debug menu, for debugging
+  (tpage-alpha 2)
+  (vanish      3)
+  (visible     5) ;; set by prototypes-game-visible-set! to hide things on purpose
+  (no-collide  6)
+  (tpage-water 7)
+  )
   
 
 
@@ -30321,6 +30332,20 @@
     )
   )
 
+(defenum process-taskable-flags
+  :type uint32
+  :bitfield #t
+  (ptf0 0)
+  (ptf1 1)
+  (ptf2 2)
+  (ptf3 3)
+  (ptf4 4)
+  (ptf5 5)
+  (ptf6 6)
+  (ptf7 7)
+  (ptf8 8)
+  )
+
 (defenum enemy-option
   :bitfield #t
   :type uint32
@@ -31052,6 +31077,43 @@
     (ragdoll-proc-method-19 (_type_) none) ;; 19
     (ragdoll-proc-method-20 (_type_) none) ;; 20
     )
+  )
+
+(defenum projectile-options
+  :bitfield #t
+  :type uint64
+  (po0 0)
+  (po1 1)
+  (po2 2)
+  (po3 3)
+  (po4 4)
+  (po5 5)
+  (po6 6)
+  (po7 7)
+  (po8 8)
+  (po9 9)
+  (po10 10)
+  (po11 11)
+  (po12 12)
+  (po13 13)
+  (po14 14)
+  (po15 15)
+  (po16 16)
+  (po17 17)
+  (po18 18)
+  (po19 19)
+  (po20 20)
+  (po21 21)
+  (po22 22)
+  (po23 23)
+  (po24 24)
+  (po25 25)
+  (po26 26)
+  (po27 27)
+  (po28 28)
+  (po29 29)
+  (po30 30)
+  (po31 31)
   )
   
 
@@ -34645,6 +34707,43 @@
   :method-count-assert 30
   :size-assert         #x18e4
   :flag-assert         #x1e186018e4
+  )
+
+(defenum progress-icon-flags
+  :type uint32
+  :bitfield #t
+  (pi0 0)
+  (pi1 1)
+  (pi2 2)
+  (pi3 3)
+  (pi4 4)
+  (pi5 5)
+  (pi6 6)
+  (pi7 7)
+  (pi8 8)
+  (pi9 9)
+  (pi10 10)
+  (pi11 11)
+  (pi12 12)
+  (pi13 13)
+  (pi14 14)
+  (pi15 15)
+  (pi16 16)
+  (pi17 17)
+  (pi18 18)
+  (pi19 19)
+  (pi20 20)
+  (pi21 21)
+  (pi22 22)
+  (pi23 23)
+  (pi24 24)
+  (pi25 25)
+  (pi26 26)
+  (pi27 27)
+  (pi28 28)
+  (pi29 29)
+  (pi30 30)
+  (pi31 31)
   )
 
 (defenum inventory-icon
@@ -44917,6 +45016,40 @@
     )
   )
 
+(defenum race-state-enum
+  :type uint8
+  (rs0)
+  (rs1)
+  (rs2)
+  (rs3)
+  (rs4)
+  (rs5)
+  (rs6)
+  (rs7)
+  (rs8)
+  )
+
+(defenum race-flag
+  :type uint8
+  (rf0 0)
+  (rf1 1)
+  (rf2 2)
+  (rf3 3)
+  (rf4 4)
+  (rf5 5)
+  (rf6 6)
+  (rf7 7)
+  (rf8 8)
+  (rf9 9)
+  (rf10 10)
+  (rf11 11)
+  (rf12 12)
+  (rf13 13)
+  (rf14 14)
+  (rf15 15)
+  (rf16 16)
+  )
+
 
 
   
@@ -45047,6 +45180,13 @@
   :method-count-assert 9
   :size-assert         #x20
   :flag-assert         #x900000020
+  )
+
+(defenum race-mesh-flag
+  :type uint8
+  :bitfield #t
+  (rmf0 0)
+  (rmf1 1)
   )
   
 
@@ -51990,6 +52130,37 @@
     (vehicle-manager-method-17 (_type_) int) ;; 17
     (vehicle-manager-method-18 (_type_) int) ;; 18
     )
+  )
+
+(defenum racer-state-flags
+  :type uint8
+  :bitfield #t
+  (rsf0 0)
+  (rsf1 1)
+  (rsf2 2)
+  (rsf3 3)
+  (rsf4 4)
+  (rsf5 5)
+  (rsf6 6)
+  (rsf7 7)
+  )
+
+(defenum racer-info-flag
+  :type uint8
+  :bitfield #t
+  (rif0 0)
+  (rif1 1)
+  (rif2 2)
+  (rif3 3)
+  (rif4 4)
+  (rif5 5)
+  (rif6 6)
+  (rif7 7)
+  )
+
+(defenum race-info-flag
+  :type uint8
+  :bitfield #t
   )
 
 
