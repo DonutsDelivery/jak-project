@@ -36318,7 +36318,7 @@
 (define-extern *sound-loader-rpc* rpc-buffer-pair)
 (define-extern sound-name= "Are two sound names the same?" (function sound-name sound-name symbol))
 (define-extern str-is-playing? "Is any streaming audio playing?" (function symbol))
-(define-extern str-id-is-playing? "Is any streaming audio with the given ID playing?" (function sound-id symbol))
+(define-extern str-id-is-playing? "Is any streaming audio with the given ID playing?" (function int symbol))
 (define-extern current-str-pos "Get the current stream position of the given sound ID, or -1 if it is not playing." (function sound-id int))
 (define-extern current-str-status "Get the status of the stream playing the given sound, or 0 if it is not playing." (function sound-id stream-status))
 (define-extern *dnas-is-running* symbol)
@@ -36330,7 +36330,7 @@
 (define-extern sound-music-load "Send load-music rpc to loader" (function sound-name int))
 (define-extern sound-music-unload "Send unload-music rpc to loader." (function int))
 (define-extern set-language "Send set-language rpc to loader. Note this is only for sound, no game text is changed." (function language-enum int))
-(define-extern sound-set-stereo-mode "Send set-stereo-mode rpc to loader." (function int none))
+(define-extern sound-set-stereo-mode "Send set-stereo-mode rpc to loader." (function stereo-mode none))
 (define-extern list-sounds "Send list-sounds rpc to loader." (function none))
 (define-extern sound-command->string (function sound-command string))
 (define-extern sound-buffer-dump "Print out all sound-commands in the buffer." (function int))
@@ -36383,7 +36383,7 @@
 (define-extern show-iop-info "Display iop info on screen." (function dma-buffer int))
 (define-extern show-iop-memory "Display iop memory stats on screen" (function dma-buffer int))
 (define-extern ear-trans "Get the current location of the ear. Use 1 for the settings ear-handle, or 0 for the camera." (function int int vector))
-(define-extern make-sqrt-table "Generate integer square-root table used in the IOP." (function none))
+(define-extern make-sqrt-table "Generate integer square-root table used in the IOP." (function int))
 (define-extern doppler-pitch-shift "Compute pitch shift for the doppler effect. This is done assuming the listener is *target* and has *target*'s velocity." (function vector vector float))
 (define-extern sound-bank-reload "Start a background process to unload all sound banks, then load them again." (function none))
 (define-extern sound-bank-reload-common "Start a background process to unload all sound banks, then load them again." (function none))
@@ -37892,7 +37892,7 @@
   )
 
 
-(define-extern edge-debug-lines (function (array vector-array) symbol)) 
+(define-extern edge-debug-lines (function (array vector-array) none))
 (define-extern draw-drawable-tree-tfrag (function drawable-tree-tfrag none))
 (define-extern draw-drawable-tree-tfrag-trans (function drawable-tree-tfrag none))
 (define-extern draw-drawable-tree-tfrag-water (function drawable-tree-tfrag none))
@@ -38020,10 +38020,10 @@
 (define-extern etie-init-consts (function etie-consts gs-alpha none))
 (define-extern etie-init-engine (function dma-buffer gs-alpha gs-test none))
 (define-extern etie-end-buffer (function dma-buffer int)) 
-(define-extern etie-float-reg-bp (function none))
-(define-extern etie-float-reg (function none))
+(define-extern etie-float-reg-bp (function int string))
+(define-extern etie-float-reg (function int string))
 (define-extern etie-floats (function symbol))
-(define-extern etie-int-reg (function none))
+(define-extern etie-int-reg (function int string))
 (define-extern etie-ints (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -53800,7 +53800,7 @@
     (mysql-nav-graph-method-17 (_type_) none) ;; 17
     (mysql-nav-graph-method-18 (_type_ mysql-nav-node symbol) none) ;; 18
     (mysql-nav-graph-method-19 (_type_) int) ;; 19
-    (mysql-nav-graph-method-20 (_type_) int) ;; 20
+    (mysql-nav-graph-method-20 (_type_) none) ;; 20
     (get-graph-type (_type_ symbol) symbol) ;; 21
     (mysql-nav-graph-method-22 (_type_) int) ;; 22
     (mysql-nav-graph-method-23 (_type_ vector vector) symbol) ;; 23
