@@ -11446,7 +11446,7 @@
        Schedule an update to happen in arg1 seconds."
       (_type_ object time-frame) connection-pers) ;; 9
     (kill-callback "Called when a connection is removed." (_type_ connection-pers) int) ;; 10
-    (kill-by-key "Remove connections with this key, calling `kill-callback`." (_type_ object) int) ;; 11
+    (kill-by-key (_type_ object) none) ;; 11
     (kill-matching
       "Call the given function on each connection. If it returns truthy, kill that connection."
       (_type_ (function engine-pers connection-pers object object symbol) object object) int) ;; 12
