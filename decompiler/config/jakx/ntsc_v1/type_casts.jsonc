@@ -49518,5 +49518,26 @@
       "s5",
       "process-drawable"
     ]
+  ],
+  "(method 37 eco-mgr)": [
+    [1, "a1", "net-process-class-info"],
+    [5, "a0", "(pointer symbol)"],
+    [14, "a0", "(pointer symbol)"],
+    [23, "a0", "(pointer symbol)"],
+    [32, "a0", "(pointer symbol)"]
+  ],
+  "(method 37 net-enemy)": [
+    [1, "a1", "net-process-class-info"],
+    [5, "a0", "(pointer symbol)"],
+    [14, "a0", "(pointer symbol)"]
+  ],
+  "(method 37 net-player)": [
+    [1, "a1", "net-process-class-info"],
+    [5, "a0", "(pointer symbol)"],
+    [14, "a0", "(pointer symbol)"]
+  ],
+  "(top-level-login net-enemy-h)": [
+    [64, "a0", "net-process-class-info"],
+    [71, "a0", "net-process-class-info"]
   ]
 }

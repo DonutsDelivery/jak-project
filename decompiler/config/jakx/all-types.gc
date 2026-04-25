@@ -15802,6 +15802,7 @@
    (min-halo  float  :offset-assert 16)
    (max-halo  float  :offset-assert 20)
    )
+  :allow-misaligned
   :method-count-assert 9
   :size-assert         #x18
   :flag-assert         #x900000018
@@ -15957,7 +15958,7 @@
    (time             float                   :offset-assert 1072)
    (off-s            uint16                  :offset-assert 1076)
    (off-t            uint16                  :offset-assert 1078)
-   (orbit            sky-orbit       3 :inline) ;; binary: 1080; decompiler aligns to 1088 (stride 32)
+   (orbit            sky-orbit       3 :inline :offset-assert 1080)
    (upload-data      sky-upload-data :inline :offset-assert 1184)
    (ambi-color       vector          :inline :offset-assert 1376)
    (ambi-color-lower vector          :inline :offset-assert 1392)
@@ -16479,10 +16480,10 @@
    (all-on             symbol                   :offset 64)
    (ocean-facing       uint32                   :offset 68)
    (mid-mask-ptrs      pointer          36      :offset 72)
-   (mid-camera-masks   uint64           36      :offset 224)
-   (trans-mask-ptrs    pointer          64      :offset 512)
-   (trans-camera-masks ocean-trans-mask 16 :inline :offset 768)
-   (trans-temp-masks   uint32           16      :offset 832)
+   (mid-camera-masks   uint64           36      :offset 216)
+   (trans-mask-ptrs    pointer          64      :offset 504)
+   (trans-camera-masks ocean-trans-mask 16 :inline :offset 760)
+   (trans-temp-masks   uint32           16      :offset 824)
    (haze-lights        haze-lights      :inline :offset 896)
    (near-mask-indices  uint16           16      :offset 1020)
    (mid-minx           uint8                    :offset 1052)
@@ -28127,7 +28128,7 @@
     (process-nettable-method-34 (_type_ object object) none) ;; 34
     (process-nettable-method-35 (_type_ object) int) ;; 35
     (process-nettable-method-36 (_type_) int) ;; 36
-    (process-nettable-method-37 (_type_ object) none) ;; 37
+    (process-nettable-method-37 (_type_ net-process-class-info) none) ;; 37
     (process-nettable-method-38 (_type_ object) none) ;; 38
     (process-nettable-method-39 (_type_ object) none) ;; 39
     (process-nettable-method-40 (_type_) net-process-class-info) ;; 40
