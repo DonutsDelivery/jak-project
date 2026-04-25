@@ -166,12 +166,8 @@
     "light-hash-count-items",
     "light-hash-get-bucket-index",
     "nav-state-patch-pointers",
-    "(method 20 nav-engine)",
     "nav-dma-send-to-spr-no-flush",
     "nav-dma-send-from-spr-no-flush",
-    "(method 17 nav-engine)",
-    "(method 18 nav-engine)",
-    "(method 21 nav-engine)",
     "(method 39 nav-state)",
     "ripple-create-wave-table",  // VU integer ops (vsqi/viaddi/vlqi/viand) crash mips2c
     "ripple-execute-init",       // VU integer ops; keep in asm
@@ -2124,6 +2120,10 @@
     // source: nav-engine
     "nav-dma-send-from-spr-no-flush",
     "nav-dma-send-to-spr-no-flush",
+    "(method 17 nav-engine)",
+    "(method 18 nav-engine)",
+    "(method 20 nav-engine)",
+    "(method 21 nav-engine)",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: nav-engine
     "nav-state-patch-pointers",

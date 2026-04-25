@@ -6656,6 +6656,10 @@
       "target"
     ]
   ],
+  "target-get-any-pos": [
+    [19, "gp", "(pointer uint32)"],
+    [22, "gp", "(pointer uint32)"]
+  ],
   "(trans target-float)": [
     [
       130,
@@ -18815,7 +18819,8 @@
       ],
       "s3",
       "nav-mesh"
-    ]
+    ],
+    [53, "a3", "int"]
   ],
   "nav-control-validate": [
     [
@@ -18835,6 +18840,9 @@
       "gp",
       "connection"
     ]
+  ],
+  "(method 24 nav-mesh)": [
+    [[23, 90], "s4", "nav-engine"]
   ],
   "(method 25 nav-mesh)": [
     [

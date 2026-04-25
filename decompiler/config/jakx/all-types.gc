@@ -29795,6 +29795,8 @@
    (riders              (inline-array collide-rider)  :offset-assert 164) ;; guessed by decompiler
    (penetrate-using     penetrate                     :offset-assert 168)
    (penetrated-by       penetrate                     :offset-assert 176)
+   (backup-collide-as   collide-spec                  :offset-assert 184)
+   (backup-collide-with collide-spec                  :offset-assert 188)
    (event-priority      uint8                         :offset 192)
    (rider-max-momentum  float                         :offset-assert 196)
    )
@@ -35556,7 +35558,7 @@
     (nav-mesh-method-21 (_type_ vector nav-poly vector clamp-travel-vector-to-mesh-return-info) none) ;; 21
     (nav-mesh-method-22 (_type_ clamp-travel-vector-to-mesh-return-info) int) ;; 22
     (nav-mesh-method-23 (_type_ vector nav-poly int int) int) ;; 23
-    (nav-mesh-method-24 (_type_ vector vector) none) ;; 24
+    (nav-mesh-method-24 (_type_ vector vector int) none) ;; 24
     (nav-mesh-method-25 (_type_ entity) none) ;; 25 ;; init-from-entity (entity-nav-mesh commented, use entity)
     (nav-mesh-method-26 (_type_) int) ;; 26 ;; handle-birth
     (nav-mesh-method-27 (_type_) int) ;; 27 ;; handle-kill
@@ -42754,17 +42756,15 @@
    (nav-count int8                        :offset-assert 14)
    (i-pass    int8                        :offset-assert 15)
    )
+  :pack-me
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
   )
-  
 
 
 
-  
 
-#|
 (deftype nav-engine (structure)
   ((spr-addr              uint32                    :offset-assert 0)
    (nav-work-addr         uint32                    :offset-assert 4)
@@ -42775,15 +42775,15 @@
    (buf-nav-control-count int8                      :offset-assert 24)
    (max-pass-count        int8                      :offset-assert 25)
    (output-sphere-hash    uint8                     :offset-assert 26)
-   (work-buf-array        nav-engine-spr-buffer   3 :offset-assert 28) ;; guessed by decompiler
-   (spr-work              nav-mesh-work             :offset-assert 4)
+   (work-buf-array        nav-engine-spr-buffer   3 :inline :offset-assert 28)
+   (spr-work              nav-mesh-work             :overlay-at nav-work-addr)
    (mem-work              nav-mesh-work             :offset-assert 76)
-   (spr-mesh              nav-mesh                  :offset-assert 8) ;; guessed by decompiler
+   (spr-mesh              nav-mesh                  :overlay-at nav-mesh-addr)
    (mem-mesh              nav-mesh                  :offset-assert 80) ;; guessed by decompiler
-   (spr-poly-array        uint32                    :offset-assert 12)
+   (spr-poly-array        uint32                    :overlay-at poly-array-addr)
    (mem-poly-array        (inline-array nav-poly)   :offset-assert 84) ;; guessed by decompiler
-   (hash-sphere-list      uint32                    :offset-assert 16)
-   (hash-buckets          uint32                    :offset-assert 20)
+   (hash-sphere-list      uint32                    :overlay-at hash-sphere-addr)
+   (hash-buckets          uint32                    :overlay-at hash-buckets-addr)
    (to-spr-wait           uint32                    :offset-assert 88)
    (from-spr-wait         uint32                    :offset-assert 92)
    )
@@ -42795,7 +42795,7 @@
     (lay-out-spad-memory (_type_ nav-mesh) none) ;; 10
     (set-up-mem-work (_type_) none) ;; 11
     (nav-engine-method-12 (_type_ sphere-hash nav-mesh) none) ;; 12
-    (nav-engine-method-13 (_type_) none) ;; 13
+    (nav-engine-method-13 (_type_ find-nav-sphere-ids-params int int) none) ;; 13
     (do-sphere-lookups (_type_) none) ;; 14
     (update-nav-controls-pipelined-in-spr (_type_) none) ;; 15
     (update-nav-controls-in-spr (_type_) none) ;; 16
@@ -42806,9 +42806,6 @@
     (nav-engine-method-21 (_type_ nav-engine-spr-buffer) none) ;; 21 ;; (reloc-ptrs-to-mem (_type_ nav-engine-spr-buffer) none)
     )
   )
-|#
-
-  
 
 
 (define-extern nav-dma-send-to-spr-no-flush (function pointer pointer int none))
@@ -61647,7 +61644,7 @@
 ;; (define-extern medius-status-response object)  ;; clobbers active deftype
 ;;(define-extern minimap-draw-work object)
 ;; (define-extern mysql-nav-node-array object) ;; clobbers active deftype
-(define-extern nav-engine object)
+;; (define-extern nav-engine object) ;; clobbers active deftype
 (define-extern nav-find-corner-work object)
 ;; (define-extern nav-graph-editor object)  ;; clobbers active deftype
 ;;(define-extern nav-mesh-editor object)
