@@ -43786,45 +43786,45 @@
     (net-process-mgr-method-17 (_type_) none) ;; 17
     (net-process-mgr-method-18 (_type_) none) ;; 18
     (net-process-mgr-method-19 (_type_) none) ;; 19
-    (net-process-mgr-method-20 (_type_) none) ;; 20
-    (net-process-mgr-method-21 (_type_) none) ;; 21
-    (net-process-mgr-method-22 (_type_) none) ;; 22
+    (net-process-mgr-method-20 (_type_ object) none) ;; 20
+    (net-process-mgr-method-21 (_type_ object object object object) none) ;; 21
+    (net-process-mgr-method-22 (_type_ object) none) ;; 22
     (net-process-mgr-method-23 (_type_) none) ;; 23
-    (net-process-mgr-method-24 (_type_) symbol) ;; 24
-    (net-process-mgr-method-25 (_type_) none) ;; 25
-    (net-process-mgr-method-26 (_type_) none) ;; 26
-    (net-process-mgr-method-27 (_type_) none) ;; 27
-    (net-process-mgr-method-28 (_type_) none) ;; 28
+    (net-process-mgr-method-24 (_type_ object object object) symbol) ;; 24
+    (net-process-mgr-method-25 (_type_ object object object) none) ;; 25
+    (net-process-mgr-method-26 (_type_ object object object) none) ;; 26
+    (net-process-mgr-method-27 (_type_ object object object) none) ;; 27
+    (net-process-mgr-method-28 (_type_ object object object) none) ;; 28
     (net-process-mgr-method-29 (_type_) int) ;; 29
-    (net-process-mgr-method-30 (_type_) none) ;; 30
-    (net-process-mgr-method-31 (_type_) none) ;; 31
-    (net-process-mgr-method-32 (_type_) symbol) ;; 32
-    (net-process-mgr-method-33 (_type_) none) ;; 33
-    (net-process-mgr-method-34 (_type_) none) ;; 34
+    (net-process-mgr-method-30 (_type_ object object object object) none) ;; 30
+    (net-process-mgr-method-31 (_type_ object object object) none) ;; 31
+    (net-process-mgr-method-32 (_type_ object object) symbol) ;; 32
+    (net-process-mgr-method-33 (_type_ object object) none) ;; 33
+    (net-process-mgr-method-34 (_type_ object object) none) ;; 34
     (net-process-mgr-method-35 (_type_) none) ;; 35
-    (net-process-mgr-method-36 (_type_) none) ;; 36
+    (net-process-mgr-method-36 (_type_ object object) none) ;; 36
     (net-process-mgr-method-37 (_type_) none) ;; 37
     (net-process-mgr-method-38 (_type_) symbol) ;; 38
-    (net-process-mgr-method-39 (_type_) none) ;; 39
+    (net-process-mgr-method-39 (_type_ object object object) none) ;; 39
     (net-process-mgr-method-40 (_type_) none) ;; 40
     (net-process-mgr-method-41 (_type_) int) ;; 41
-    (net-process-mgr-method-42 (_type_) none) ;; 42
-    (net-process-mgr-method-43 (_type_) none) ;; 43
+    (net-process-mgr-method-42 (_type_ object) none) ;; 42
+    (net-process-mgr-method-43 (_type_ object object object object) none) ;; 43
     (net-process-mgr-method-44 (_type_) int) ;; 44
     (net-process-mgr-method-45 (_type_) int) ;; 45
-    (net-process-mgr-method-46 (_type_) uint) ;; 46
-    (net-process-mgr-method-47 (_type_) none) ;; 47
+    (net-process-mgr-method-46 (_type_ object) uint) ;; 46
+    (net-process-mgr-method-47 (_type_ object object) none) ;; 47
     (net-process-mgr-method-48 (_type_) none) ;; 48
-    (net-process-mgr-method-49 (_type_) none) ;; 49
-    (net-process-mgr-method-50 (_type_) none) ;; 50
+    (net-process-mgr-method-49 (_type_ object object) none) ;; 49
+    (net-process-mgr-method-50 (_type_ object object object) none) ;; 50
     (net-process-mgr-method-51 (_type_) int) ;; 51
-    (net-process-mgr-method-52 (_type_) none) ;; 52
-    (net-process-mgr-method-53 (_type_) none) ;; 53
-    (net-process-mgr-method-54 (_type_) none) ;; 54
-    (net-process-mgr-method-55 (_type_) none) ;; 55
-    (net-process-mgr-method-56 (_type_) none) ;; 56
-    (net-process-mgr-method-57 (_type_) none) ;; 57
-    (net-process-mgr-method-58 (_type_) int) ;; 58
+    (net-process-mgr-method-52 (_type_ object) none) ;; 52
+    (net-process-mgr-method-53 (_type_ object object object object) none) ;; 53
+    (net-process-mgr-method-54 (_type_ object object) none) ;; 54
+    (net-process-mgr-method-55 (_type_ object object object) none) ;; 55
+    (net-process-mgr-method-56 (_type_ object object object) none) ;; 56
+    (net-process-mgr-method-57 (_type_ object) none) ;; 57
+    (net-process-mgr-method-58 (_type_ object) int) ;; 58
     )
   )
 
@@ -50545,19 +50545,19 @@
 
 
 (define-extern net-process-mgr-init-by-other (function none))
-(define-extern spawn-net-entity (function none))
+(define-extern spawn-net-entity (function object none))
 (define-extern *net-process-table* array)
 (define-extern net-process-mgr-start (function none))
 (define-extern net-process-mgr-stop (function none))
-(define-extern net-process-mgr-handle-aux-msg-recv-end (function none))
-(define-extern net-process-mgr-handle-aux-msg-recv-end-ack (function none))
-(define-extern net-process-mgr-handle-aux-msg-spawn-entities (function none))
-(define-extern net-process-mgr-default-handler (function none))
+(define-extern net-process-mgr-handle-aux-msg-recv-end (function object object none))
+(define-extern net-process-mgr-handle-aux-msg-recv-end-ack (function object object none))
+(define-extern net-process-mgr-handle-aux-msg-spawn-entities (function object object none))
+(define-extern net-process-mgr-default-handler (function object object object object none))
 (define-extern go-running (function none))
 (define-extern *prev-time-of-day-time* object)
 (define-extern tweak-local-net-entities (function none))
-(define-extern update-local-net-entities (function symbol))
-(define-extern net-process-msg-handler (function symbol))
+(define-extern update-local-net-entities (function object symbol))
+(define-extern net-process-msg-handler (function object object symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-http                       ;;
