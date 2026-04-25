@@ -33600,7 +33600,7 @@
   :size-assert         #x8
   :flag-assert         #xc00000008
   (:methods
-    (add! "Add a sprite to the list, to be drawn later." (_type_ sprite-glow-data) int) ;; 9
+    (add! (_type_ sprite-glow-data) none) ;; 9
     (draw-all-sprites! (_type_ dma-buffer) none) ;; 10
     (clear! "Reset the list." (_type_) int) ;; 11
     )
