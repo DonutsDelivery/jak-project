@@ -35485,7 +35485,7 @@
     (nav-mesh-method-13 (_type_ nav-poly vector) vector) ;; 13 ;; poly-centroid
     (nav-mesh-method-14 (_type_ nav-poly vector) vector) ;; 14 ;; poly-centroid-local
     (nav-mesh-method-15 (_type_ nav-poly nav-poly) nav-poly) ;; 15 ;; lookup-poly-on-route-to-target
-    (nav-mesh-method-16 (_type_ nav-poly nav-poly nav-route-portal) (inline-array nav-vertex)) ;; 16 ;; get-route-portal
+    (nav-mesh-method-16 (_type_ nav-poly nav-poly nav-route-portal) (inline-array nav-vertex)) ;; 16
     (nav-mesh-method-17 (_type_) none) ;; 17
     (nav-mesh-method-18 (_type_ nav-ray) meters) ;; 18 ;; advance-ray-to-nearest-poly-edge-or-dest!
     (nav-mesh-method-19 (_type_ nav-poly vector vector float) meters) ;; 19 ;; try-move-along-ray
