@@ -37974,7 +37974,7 @@
 (define-extern tie-end-buffer "Set up DMA to finish TIE." (function dma-buffer none))
 (define-extern tie-int-reg (function int string))
 (define-extern tie-float-reg (function int string))
-(define-extern tie-ints (function symbol))
+(define-extern tie-ints (function none))
 (define-extern tie-floats (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -40080,7 +40080,7 @@
 (define-extern cam-layout-save-introsplinetime (function symbol string entity-actor none)) ;; (function symbol string entity-actor string)
 (define-extern cam-layout-save-introsplineexitval (function symbol string entity-actor none)) ;; (function symbol string entity-actor string)
 (define-extern cam-layout-save-interptime (function symbol string entity-actor none))
-(define-extern cam-layout-save-splineoffset (function symbol string entity-actor none))
+(define-extern cam-layout-save-splineoffset (function symbol string entity-actor none)) ;; (function symbol string entity-actor string)
 (define-extern cam-layout-save-spline-follow-dist-offset (function symbol string entity-actor none)) ;; (function symbol string entity-actor string)
 (define-extern cam-layout-save-campointsoffset (function symbol string entity-actor none)) ;; (function symbol string entity-actor string)
 (define-extern cam-layout-save-tiltAdjust (function symbol string entity-actor none))
@@ -52781,7 +52781,7 @@
 (define-extern glst-init-list! "Clears the provided [[glst-list]]" (function glst-list glst-list))
 (define-extern glst-find-node-by-name (function glst-list string glst-node))
 (define-extern glst-get-node-by-index (function glst-list int glst-node))
-(define-extern glst-length-of-longest-name (function glst-list int))
+(define-extern glst-length-of-longest-name "Returns the length of the longest `privname`" (function glst-list int))
 (define-extern glst-get-node-index "Given a [[glst-node]] return it's position in the [[glst-list]]" (function glst-list glst-node int))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
