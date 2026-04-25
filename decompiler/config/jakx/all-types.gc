@@ -11039,6 +11039,33 @@
     )
   )
 
+(defenum minimap-flag
+  :type uint32
+  :bitfield #t
+  (active 0)
+  (fade-in 1)
+  (fade-out 2)
+  (clamp 3)
+  (trail 4)
+  (task-graph 5)
+  (flash 6)
+  (minimap 7)
+  (background 8)
+  (task 9)
+  (enemy 10)
+  (frustum 11)
+  (racer 12)
+  (bigmap 13)
+  (bigmap-only 14)
+  (goal 15)
+  (local-only 16)
+  (transport 17)
+  (ctywide 18)
+  (wasall 19)
+  (waswide 20)
+  (desert 21)
+  )
+
 (defenum minimap-class
   :type uint16
   (none 0)
@@ -29528,6 +29555,14 @@
   (usually-hit-by-player)
   (hit-by-others)
   (player)
+  )
+
+(defenum nav-flags
+  :type uint8
+  :bitfield #t
+  (has-root-sphere 0)
+  (has-extra-sphere 1)
+  (has-child-spheres 2)
   )
 
 (declare-type collide-query structure)
@@ -52694,6 +52729,14 @@
   :flag-assert         #x900000814
   )
 
+(defenum mysql-save-flag
+  :type uint32
+  :bitfield #t
+  (delete 1)
+  (update 2)
+  (insert 3)
+  )
+
   
 
 
@@ -52841,6 +52884,38 @@
   :size-assert         #x10
   :flag-assert         #xe00000010
   )
+
+(defenum nav-directionality
+  :type uint32
+  :bitfield #f
+  (default 0)
+  (directed 1)
+  (bi_directional 2)
+  )
+
+(defenum nav-clock-type
+  "This string value is stored in their SQL database"
+  :type uint32
+  :bitfield #f
+  (no-clock 0)
+  (clock2 1)
+  (clock3 2)
+  (clock4 3)
+  )
+
+(defenum nav-clock-mask
+  "This string value is stored in their SQL database"
+  :type uint32
+  :bitfield #t
+  (phase-1 0)
+  (phase-1a 1)
+  (phase-2 2)
+  (phase-2a 3)
+  (phase-3 4)
+  (phase-3a 5)
+  (phase-4 6)
+  (phase-4a 7)
+  )
   
 
 
@@ -52949,6 +53024,17 @@
     (mysql-nav-graph-method-22 (_type_) int) ;; 22
     (mysql-nav-graph-method-23 (_type_ vector vector) symbol) ;; 23
     )
+  )
+
+(defenum nav-com-type
+  :type uint32
+  (undo-move-node 0)
+  (undo-delete-edge 1)
+  (undo-delete-node 2)
+  (undo-new-node 3)
+  (undo-new-edge 4)
+  (undo-delete-visnode 5)
+  (undo-new-visnode 6)
   )
   
 
@@ -53186,6 +53272,12 @@
   :method-count-assert 14
   :size-assert         #x10
   :flag-assert         #xe00000010
+  )
+
+(defenum nav-mesh-editable-flag
+  :type uint32
+  :bitfield #t
+  (nmef0 0)
   )
   
 
@@ -61648,6 +61740,14 @@
   (r1 9)
   (l2 10)
   (r2 11)
+  )
+
+(defenum mouse-buttons
+  :bitfield #t
+  :type uint32
+  (left)
+  (right)
+  (middle)
   )
 
 ;; path-control-flag
