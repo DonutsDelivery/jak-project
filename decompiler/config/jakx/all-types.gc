@@ -1805,7 +1805,7 @@
 (define-extern default-base-menu-post (function none))
 (define-extern base-menu-event-handler (function none))
 (define-extern base-menu-init-by-other (function none))
-(define-extern menu-clear-strip (function none))
+(define-extern menu-clear-strip (function int none))
 (define-extern METERS_PER_TEXEL object)
 (define-extern find-first-selectable (function none))
 
@@ -1956,20 +1956,20 @@
 
 
 (define-extern wrong-way-linebot-init-by-other (function none))
-(define-extern wrong-way-linebot-spawn (function process))
+(define-extern wrong-way-linebot-spawn (function int process))
 (define-extern set-position-and-orientation (function none))
 (define-extern set-children-position-and-orientation (function none))
 (define-extern wrong-way-event-handler (function none))
 (define-extern check-for-kill-player (function none))
 (define-extern check-for-player-dead (function none))
-(define-extern wrong-way-init-by-other (function none))
-(define-extern wrong-way-spawn (function process))
+(define-extern wrong-way-init-by-other (function int int none))
+(define-extern wrong-way-spawn (function int int int process))
 (define-extern *race-banner-subtract* float)
-(define-extern starting-linebot-init-by-other (function none))
-(define-extern starting-linebot-spawn (function process))
-(define-extern race-banner-handler (function symbol))
+(define-extern starting-linebot-init-by-other (function int int int none))
+(define-extern starting-linebot-spawn (function int int int int process))
+(define-extern race-banner-handler (function int uint symbol))
 (define-extern race-banner-init-by-other (function none))
-(define-extern race-banner-spawn (function none))
+(define-extern race-banner-spawn (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; camera-facing-quad             ;;
@@ -2243,7 +2243,7 @@
 (define-extern *tmp-was-allocated* object)
 (define-extern *destruct-powerup-names* array)
 (define-extern get-destruct-perm (function none))
-(define-extern count-powerups (function none))
+(define-extern count-powerups (function uint none))
 (define-extern rand-spawn-pickup (function none))
 (define-extern spawn-pickups-from-destructible (function none))
 (define-extern init-local-net-simple-destruct-mgr (function none))
@@ -3037,7 +3037,7 @@
   
 
 
-(define-extern calc-grand-prix-score (function none))
+(define-extern calc-grand-prix-score (function uint none))
 (define-extern *hud-results-grand-prix* array)
 (define-extern *hud-results-grand-prix-proc* object)
 (define-extern spawn-hud-results-grand-prix (function object))
@@ -3609,14 +3609,14 @@
 (define-extern *text-display-sblastered-view-2* array)
 (define-extern *text-display-sblastered-view-2-proc* object)
 (define-extern spawn-text-display-sblastered-view-2 (function object))
-(define-extern display-sblastered-text-to-view (function none))
+(define-extern display-sblastered-text-to-view (function int none))
 (define-extern *text-display-supernova-backfire-view-1* array)
 (define-extern *text-display-supernova-backfire-view-1-proc* object)
 (define-extern spawn-text-display-supernova-backfire-view-1 (function object))
 (define-extern *text-display-supernova-backfire-view-2* array)
 (define-extern *text-display-supernova-backfire-view-2-proc* object)
 (define-extern spawn-text-display-supernova-backfire-view-2 (function object))
-(define-extern display-supernova-backfire-text-to-view (function none))
+(define-extern display-supernova-backfire-text-to-view (function int none))
 (define-extern change-to-screen-space (function none))
 (define-extern *hud-points-icon-display0* array)
 (define-extern *hud-points-icon-display0-proc* object)
@@ -3634,8 +3634,8 @@
 (define-extern *hud-points-icon-display4-proc* object)
 (define-extern spawn-hud-points-icon-display4 (function object))
 (define-extern spawn-unused-hud-points-icon-display (function none))
-(define-extern set-to-upper-right (function none))
-(define-extern create-points-icon-from-screen-pos (function none))
+(define-extern set-to-upper-right (function int none))
+(define-extern create-points-icon-from-screen-pos (function int int int none))
 (define-extern create-points-icon (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -4208,8 +4208,8 @@
 
 
 (define-extern sabotage-sequence-trans (function none))
-(define-extern sabotage-sequence-init-by-other (function none))
-(define-extern sabotage-sequence-start (function process))
+(define-extern sabotage-sequence-init-by-other (function uint none))
+(define-extern sabotage-sequence-start (function int process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hud-oneoff                     ;;
@@ -4656,7 +4656,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern birth-func-set-pos-vel (function none))
-(define-extern birth-func-adopt-velocity-vehicle (function none))
+(define-extern birth-func-adopt-velocity-vehicle (function uint uint none))
 (define-extern sparticle-adopt-accel-vehicle (function none))
 (define-extern *range-carexplo-dust-color* curve-color-fast)
 (define-extern *range-carexplo-dust-alpha* curve2d-fast)
@@ -4678,9 +4678,9 @@
 (define-extern spt-birth-func-brightness-buggy-rocks (function sparticle-system sparticle-cpuinfo sparticle-launchinfo float))
 (define-extern spt-birth-func-part-buggy-rocks (function sparticle-system sparticle-cpuinfo sparticle-launchinfo object object none))
 (define-extern spt-birth-func-part-dbuggy-debris (function sparticle-system sparticle-cpuinfo sparticle-launchinfo object object none))
-(define-extern spt-birth-func-brightness-buggy-snow (function none))
-(define-extern spt-birth-func-part-wv-snow (function none))
-(define-extern spt-birth-func-part-wv-grass (function none))
+(define-extern spt-birth-func-brightness-buggy-snow (function sparticle-launchinfo none))
+(define-extern spt-birth-func-part-wv-snow (function int sparticle-cpuinfo sparticle-launchinfo int int none))
+(define-extern spt-birth-func-part-wv-grass (function int sparticle-cpuinfo sparticle-launchinfo int int none))
 (define-extern *range-wv-wsplash-color* curve-color-fast) ;; curve-color-fast
 (define-extern *range-wv-wsplash-alpha* curve2d-fast) ;; curve2d-fast
 (define-extern *range-wv-wsplash-scale-x* curve2d-fast) ;; curve2d-fast
@@ -5011,15 +5011,15 @@
 (define-extern reticle-on-him-color-enemy object)
 (define-extern reticle-on-him-spinner-color-enemy object)
 (define-extern reticle-allowed? (function none))
-(define-extern vehicle-reticle-base-init-by-other (function none))
+(define-extern vehicle-reticle-base-init-by-other (function uint none))
 (define-extern vehicle-reticle-base-trans (function none))
-(define-extern v-reticle-update-missile (function none))
+(define-extern v-reticle-update-missile (function uint uint none))
 (define-extern vehicle-reticle-on-me-init-by-other (function none))
 (define-extern vehicle-reticle-on-me-helper-missile-inc (function none))
 (define-extern vehicle-reticle-on-me-helper-peacemaker-inc (function none))
 (define-extern vehicle-reticle-on-them-init-by-other (function none))
-(define-extern targeting-reticle-for-this-weapon-type? (function none))
-(define-extern targeting-reticle-line-of-sight? (function none))
+(define-extern targeting-reticle-for-this-weapon-type? (function uint none))
+(define-extern targeting-reticle-line-of-sight? (function uint uint none))
 (define-extern draw-reticle-on-them (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -5028,24 +5028,24 @@
 
 (define-extern *freeze-hangtime* object)
 (define-extern wv-player-post-move-update (function none))
-(define-extern find-nearest-camera (function none))
+(define-extern find-nearest-camera (function vector none))
 (define-extern estimate-eng-torque-from-gear (function none))
 (define-extern plot-engine-torque-curve (function none))
 (define-extern plot-x-with-transform (function none))
-(define-extern vehicle-handle->net-player (function none))
+(define-extern vehicle-handle->net-player (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-events                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern handle-weapon-removed-event (function none))
-(define-extern handle-weapon-moved-event (function none))
-(define-extern wv-weapon-pickup-helper (function none))
+(define-extern handle-weapon-removed-event (function uint uint none))
+(define-extern handle-weapon-moved-event (function uint uint uint none))
+(define-extern wv-weapon-pickup-helper (function uint int none))
 (define-extern wv-pickup-handler (function none))
 (define-extern wv-set-handler (function none))
 (define-extern wv-query-handler (function none))
-(define-extern wv-go-handler (function none))
-(define-extern wv-weapon-handler (function none))
+(define-extern wv-go-handler (function uint uint none))
+(define-extern wv-weapon-handler (function uint int uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-util                  ;;
@@ -5101,12 +5101,12 @@
   
 
 
-(define-extern whoosh-shake-camera (function none))
-(define-extern vehicle-respawn-invul-init-by-other (function none))
-(define-extern vehicle-respawn-invul-spawn (function none))
-(define-extern vehicle-suppress-look-init-by-other (function none))
-(define-extern suppress-look-start (function none))
-(define-extern local-space-proc-vehicle-turbo (function none))
+(define-extern whoosh-shake-camera (function int int int none))
+(define-extern vehicle-respawn-invul-init-by-other (function uint none))
+(define-extern vehicle-respawn-invul-spawn (function int none))
+(define-extern vehicle-suppress-look-init-by-other (function uint none))
+(define-extern suppress-look-start (function int none))
+(define-extern local-space-proc-vehicle-turbo (function uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-ai                    ;;
@@ -5126,8 +5126,8 @@
   )
 
 
-(define-extern get-portal-corner-point (function none))
-(define-extern consider-attacking (function none))
+(define-extern get-portal-corner-point (function uint vector int none))
+(define-extern consider-attacking (function uint uint uint none))
 (define-extern *wvehicle-ai-steering-params* array)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -5632,27 +5632,27 @@
   
 
 
-(define-extern smoke-system-local-space (function none))
-(define-extern sift-down (function symbol))
-(define-extern heap-sort (function symbol))
-(define-extern clear-strip (function none))
+(define-extern smoke-system-local-space (function uint none))
+(define-extern sift-down (function uint int int symbol))
+(define-extern heap-sort (function uint int symbol))
+(define-extern clear-strip (function int none))
 (define-extern lightning-sphere-init-by-other (function none))
-(define-extern lightning-sphere-spawn (function process))
-(define-extern vector+float*-ignore-w! (function none))
+(define-extern lightning-sphere-spawn (function int int int int int process))
+(define-extern vector+float*-ignore-w! (function int int int int none))
 (define-extern smoke-update (function none))
 (define-extern smoke-render (function none))
 (define-extern smoke-spawn (function none))
-(define-extern smoke-system-init-by-other (function none))
-(define-extern smoke-system-spawn (function process))
+(define-extern smoke-system-init-by-other (function uint int none))
+(define-extern smoke-system-spawn (function int int process))
 (define-extern slip-object-init-by-other (function none))
-(define-extern slip-object-spawn (function process))
-(define-extern oil-slick-init-by-other (function none))
-(define-extern oil-slick-spawn (function process))
+(define-extern slip-object-spawn (function int int int int int process))
+(define-extern oil-slick-init-by-other (function uint none))
+(define-extern oil-slick-spawn (function int process))
 (define-extern oil-trail-emit (function none))
-(define-extern oil-emitter-init-by-other (function none))
-(define-extern oil-emitter-spawn (function process))
-(define-extern oil-flame-emitter-init-by-other (function none))
-(define-extern oil-flame-emitter-spawn (function process))
+(define-extern oil-emitter-init-by-other (function uint none))
+(define-extern oil-emitter-spawn (function int int process))
+(define-extern oil-flame-emitter-init-by-other (function uint none))
+(define-extern oil-flame-emitter-spawn (function int int process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-weapons               ;;
@@ -5795,7 +5795,7 @@
 (define-extern red-sentry-bot-init-by-other (function none))
 (define-extern red-sentry-bot-common-trans (function none))
 (define-extern red-sentry-bot-poll-target (function none))
-(define-extern sentry-bot-base-handler (function none))
+(define-extern sentry-bot-base-handler (function int uint none))
 (define-extern v-wpn-yellow-bulldog-rapid-fire-control-params object)
 (define-extern v-wpn-yellow-bulldog-II-rapid-fire-control-params object)
 (define-extern drone-compute-pos! (function none))
@@ -5896,25 +5896,25 @@
 ;; wvehicle-weapons-util          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern v-wpn-base-init-by-other (function none))
+(define-extern v-wpn-base-init-by-other (function uint int int none))
 (define-extern warning-hud-draw (function none))
-(define-extern v-wpn-type->color (function none))
-(define-extern v-wpn-type->gunmount-config (function none))
-(define-extern v-wpn-missile-init-by-other (function none))
-(define-extern make-vehicle-weapon-slot (function none))
+(define-extern v-wpn-type->color (function int none))
+(define-extern v-wpn-type->gunmount-config (function int none))
+(define-extern v-wpn-missile-init-by-other (function int uint int none))
+(define-extern make-vehicle-weapon-slot (function int uint int none))
 (define-extern v-wpn-choose-increasing-lethality (function none))
 (define-extern v-wpn-get-mask (function none))
-(define-extern v-wpn-num-available (function none))
+(define-extern v-wpn-num-available (function int int none))
 (define-extern v-wpn-choose-random (function none))
-(define-extern v-wpn-get-available-types (function none))
+(define-extern v-wpn-get-available-types (function int none))
 (define-extern race-player-behind-more-than (function none))
-(define-extern v-wpn-get-selection-table (function none))
-(define-extern v-wpn-mask-selection-table! (function none))
-(define-extern v-wpn-pack-msg (function none))
-(define-extern v-wpn-unpack-msg! (function none))
-(define-extern vehicle-get-weapon-level (function none))
-(define-extern global-turbo-suppressor-set! (function none))
-(define-extern should-suppress-eco? (function symbol))
+(define-extern v-wpn-get-selection-table (function int int none))
+(define-extern v-wpn-mask-selection-table! (function uint uint int none))
+(define-extern v-wpn-pack-msg (function uint int none))
+(define-extern v-wpn-unpack-msg! (function uint int none))
+(define-extern vehicle-get-weapon-level (function uint uint none))
+(define-extern global-turbo-suppressor-set! (function int none))
+(define-extern should-suppress-eco? (function int symbol))
 (define-extern rapid-fire-control-emitter-from-world (function none))
 (define-extern rapid-fire-control-initialize-from-vehicle (function none))
 (define-extern is-friendly-fire-helper (function none))
@@ -5978,8 +5978,8 @@
 
 
 (define-extern *vehicle-antenna-state* vehicle-antenna-state)
-(define-extern vehicle-antenna-init-by-other (function none))
-(define-extern vehicle-antenna-spawn (function process))
+(define-extern vehicle-antenna-init-by-other (function uint none))
+(define-extern vehicle-antenna-spawn (function int process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; euler-h                        ;;
@@ -6072,8 +6072,8 @@
   )
 
 
-(define-extern test-find-line-info (function none))
-(define-extern test-find-closest-point (function none))
+(define-extern test-find-line-info (function int none))
+(define-extern test-find-closest-point (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; race-ai-tuning                 ;;
@@ -7658,11 +7658,11 @@
 
 (define-extern *ticks-per-frame* int)
 (define-extern timer-init (function timer-bank timer-mode int))
-(define-extern bcd-conv (function none))
+(define-extern bcd-conv (function int none))
 (define-extern *month-days* object)
-(define-extern is-leap (function none))
-(define-extern mdy-to-day (function none))
-(define-extern rtclock-to-secs (function none))
+(define-extern is-leap (function int none))
+(define-extern mdy-to-day (function uint uint int none))
+(define-extern rtclock-to-secs (function uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; vif-h                          ;;
@@ -14045,10 +14045,11 @@
    (rookie         uint8  :offset-assert 6)
    (pro            uint8  :offset-assert 7)
    (cost-increment float  :offset-assert 8)
+   (pad4           uint32 :offset-assert 12)
    )
   :method-count-assert 9
-  :size-assert         #xc
-  :flag-assert         #x90000000c
+  :size-assert         #x10
+  :flag-assert         #x900000010
   )
 
 (deftype upgrade-info-array (structure)
@@ -14216,7 +14217,7 @@
 
 (define-extern *screen-shot-work* screen-shot-work) ;; screen-shot-work
 (define-extern *image-name* string) ;; string
-(define-extern *capture-tga-buffer* object)
+(define-extern *capture-tga-buffer* (pointer uint8))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; math-camera-h                  ;;
@@ -16702,8 +16703,8 @@
                 removes them from RAM. This is a bit of hack. Later font setup code expects the font texture
                 to be in common, and they will eventually be moved into the upper 8-bits of the depth buffer."
                (function texture-pool texture-page kheap int texture-page))
-(define-extern locate-sub (function none))
-(define-extern warp-locate-sub (function none))
+(define-extern locate-sub (function uint uint uint int none))
+(define-extern warp-locate-sub (function uint uint uint int none))
 (define-extern texture-page-common-boot-allocate
                "Allocator function for texture loaded at startup time.
                 For jak 3, this seems to always do default-allocate (permanently in vram?)"
@@ -16715,7 +16716,7 @@
                                   for different mip levels. By jak 2, the background system switched to masks and uses
                                   the -pris variant of this function."
                 (function texture-pool texture-pool-segment texture-page tex-upload-mode bucket-id int))
-(define-extern upload-vram-pages-car (function none))
+(define-extern upload-vram-pages-car (function uint uint int none))
 (define-extern update-vram-pages
                "Likely a debug function for checking the logic of upload-vram-pages. Unused"
                (function texture-pool texture-pool-segment texture-page tex-upload-mode int))
@@ -16758,7 +16759,7 @@
                "Add this adgif shader to the linked list of shaders associated with the given texture ID.
                 Will allocate the link array if it's not already."
                (function texture-id adgif-shader texture-page-dir-entry))
-(define-extern unlink-textures-by-level (function none))
+(define-extern unlink-textures-by-level (function uint none))
 (define-extern adgif-shader<-texture! (function adgif-shader texture adgif-shader))
 (define-extern adgif-shader-update! "Update k based on uv-dist" (function adgif-shader texture none))
 (define-extern adgif-shader<-texture-with-update! (function adgif-shader texture adgif-shader))
@@ -28041,13 +28042,13 @@
 (define-extern *dme-initted* object)
 (define-extern *medius-initted* object)
 (define-extern *mgcl-initted* object)
-(define-extern encode-net-available-game-info (function none))
-(define-extern decode-net-available-game-info (function none))
+(define-extern encode-net-available-game-info (function uint int none))
+(define-extern decode-net-available-game-info (function uint int none))
 (define-extern *net-mgr-scratch* object)
 (define-extern *net-available-game-ct* object)
 (define-extern *net-available-games* object)
 (define-extern *net-active-game* object)
-(define-extern net-mgr-notify-connect (function symbol))
+(define-extern net-mgr-notify-connect (function int int symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; obj-list                       ;;
@@ -28077,7 +28078,7 @@
     )
   )
 
-(define-extern fixup-relocated-link (function none))
+(define-extern fixup-relocated-link (function uint uint uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; process-nettable-h             ;;
@@ -28171,7 +28172,7 @@
 (define-extern *net-process-class-count* number)
 (define-extern *net-process-class-array* array)
 (define-extern *net-process-class-names* object)
-(define-extern net-process-class-register (function none))
+(define-extern net-process-class-register (function uint none))
 (define-extern write-msg-map-rec (function process-drawable net-process-class-info none))
 
 ;; smoke-system (parent process-nettable — activated here for parent-ordering)
@@ -29450,7 +29451,7 @@
 (define-extern joint-mod-debug-draw "Debug draw the bone transform for the associated bone of a joint-mod" (function joint-mod none))
 (define-extern joint-mod-spinner-callback (function cspace transformq none))
 (define-extern joint-mod-rotate-local-callback (function cspace transformq none))
-(define-extern joint-mod-trans-rot-local-callback (function none))
+(define-extern joint-mod-trans-rot-local-callback (function uint uint none))
 (define-extern vector<-cspace2! "Same as vector<-cspace! Convert a bone matrix from a cspace to the origin of the bone frame." (function vector cspace vector))
 (define-extern joint-mod-rotate-world-callback "Callback for joint-mod-rotate-world. See comment on that type." (function cspace transformq none))
 (define-extern joint-mod-set-local-callback "Callback for joint-mod-rotate-local. See comment on that type." (function cspace transformq none))
@@ -35285,8 +35286,8 @@
   
 
 
-(define-extern get-knot-name (function symbol))
-(define-extern get-distmap-name (function symbol))
+(define-extern get-knot-name (function int symbol))
+(define-extern get-distmap-name (function int symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; nav-mesh-h                     ;;
@@ -36388,7 +36389,7 @@
   :flag-assert         #xf00000020
   )
 
-(define-extern sound-mp-fix-trans (function none))
+(define-extern sound-mp-fix-trans (function int int none))
 (define-extern *sound-loop-engine* engine-sound-pers)
 (define-extern *sound-player-rpc* rpc-buffer-pair)
 (define-extern *sound-loader-rpc* rpc-buffer-pair)
@@ -36564,8 +36565,8 @@
 (define-extern cspace<-matrix-joint-flip-z! (function cspace matrix int)) 
 (define-extern cspace<-parented-transformq-joint! (function cspace transformq none))
 (define-extern cspace<-parented-transformq-joint-flip-z! (function cspace transformq int)) 
-(define-extern clear-frame-accumulator (function none))
-(define-extern normalize-frame-quaternions (function none))
+(define-extern clear-frame-accumulator (function uint none))
+(define-extern normalize-frame-quaternions (function uint none))
 (define-extern decompress-fixed-data-to-accumulator (function none))
 (define-extern decompress-frame-data-to-accumulator (function none))
 (define-extern decompress-frame-data-pair-to-accumulator (function none))
@@ -36614,7 +36615,7 @@
 (define-extern mem-usage-bsp-tree (function bsp-header bsp-node memory-usage-block int none))
 (define-extern *test-shrub* int) ;; int
 (define-extern bsp-camera-asm (function bsp-header vector none))
-(define-extern print-collide-stats (function none))
+(define-extern print-collide-stats (function int none))
 (define-extern level-remap-texture (function texture-id texture-id))
 (define-extern build-masks (function bsp-header none))
 
@@ -37039,7 +37040,7 @@
 (define-extern internal-draw-debug-text-3d (function bucket-id string vector font-color vector2h pointer))
 (define-extern add-debug-outline-triangle (function symbol bucket-id vector vector vector rgba symbol))
 (define-extern add-debug-triangle-normal (function symbol bucket-id vector vector vector rgba symbol))
-(define-extern add-debug-flat-triangle-noclip (function symbol))
+(define-extern add-debug-flat-triangle-noclip (function int int int int int int symbol))
 (define-extern *debug-lines* (inline-array debug-line)) ;; (inline-array debug-line)
 (define-extern *debug-lines-trk* debug-tracking-thang) ;; debug-tracking-thang
 (define-extern *debug-text-3ds* (inline-array debug-text-3d)) ;; (inline-array debug-text-3d)
@@ -37356,9 +37357,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern diag-frag-print (function merc-effect int symbol)) 
-(define-extern debug-merc-highres-runtime (function none))
-(define-extern debug-merc-size-runtime (function none))
-(define-extern debug-merc-fade-runtime (function none))
+(define-extern debug-merc-highres-runtime (function uint none))
+(define-extern debug-merc-size-runtime (function uint none))
+(define-extern debug-merc-fade-runtime (function uint none))
 (define-extern foreground-check-longest-edge (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -37483,16 +37484,16 @@
 
 ;; gsf-vertex is already defined!
 
-(define-extern generic-tie-dma-to-spad (function none))
+(define-extern generic-tie-dma-to-spad (function int int none))
 (define-extern generic-tie-dma-to-spad-sync (function none))
 (define-extern *generic-tie* object)
-(define-extern generic-tie-decompress (function none))
+(define-extern generic-tie-decompress (function int int int int int none))
 (define-extern generic-tie-upload-next (function none))
 (define-extern generic-tie-convert-proc (function none))
 (define-extern generic-tie-convert (function none))
 (define-extern generic-tie-display-stats (function none))
 (define-extern generic-tie-debug (function none))
-(define-extern generic-tie-execute (function none))
+(define-extern generic-tie-execute (function int uint int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; shadow-cpu                     ;;
@@ -37653,7 +37654,7 @@
 (define-extern texture-anim-draw-mip-shader (function dma-buffer texture int pointer))
 (define-extern clear-texture-ids (function texture symbol)) 
 (define-extern texture-anim-draw-mips (function dma-buffer texture int)) 
-(define-extern texture-anim-draw-ocean-mips (function none))
+(define-extern texture-anim-draw-ocean-mips (function uint uint none))
 (define-extern update-texture-anim (function bucket-id texture-anim-array none))
 (define-extern no-alpha-texture-anim-layer-func (function dma-buffer uint int int texture-anim-layer float int))
 (define-extern copy-alpha-texture-anim-layer-func (function dma-buffer uint int int texture-anim-layer float int))
@@ -37683,7 +37684,7 @@
 
 (define-extern *fog-texture-tbp* object)
 (define-extern fog-texture-anim-init (function texture-anim int))
-(define-extern fog-texture-anim-init2 (function none))
+(define-extern fog-texture-anim-init2 (function int none))
 (define-extern *fog-texture-work* fog-texture-work) ;; fog-texture-work
 (define-extern real-fog-texture-anim-func (function dma-buffer texture-anim int))
 (define-extern fog-texture-anim-func (function dma-buffer texture-anim int))
@@ -37709,7 +37710,7 @@
 (define-extern *car-texture-anim-array-work* car-texture-anim-array-work)
 (define-extern car-texture-anim-layer-func (function none))
 (define-extern *default-car-texture-anim-array* texture-anim-array)
-(define-extern set-car-highlight! (function none))
+(define-extern set-car-highlight! (function int int int none))
 (define-extern update-car-texture-anim-array (function none))
 (define-extern *default-water-texture-anim-array* texture-anim-array) ;; (texture-anim-array texture-anim)
 (define-extern *default-hud-texture-anim-array* texture-anim-array)
@@ -37719,7 +37720,7 @@
 (define-extern *this-way-water-texture-anim-array* texture-anim-array)
 (define-extern this-way-water-texture-anim-func (function none))
 (define-extern *ocean-texture-anim-array* texture-anim-array)
-(define-extern ocean-texture-anim-time-func (function float))
+(define-extern ocean-texture-anim-time-func (function int float))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; blit-displays                  ;;
@@ -37741,7 +37742,7 @@
 
 
 (define-extern *blit-displays-work* blit-displays-work) ;; blit-displays-work
-(define-extern clear-zbuf (function none))
+(define-extern clear-zbuf (function uint none))
 (define-extern draw-color-bars (function blit-displays-work none)) ;; was: (function none) — backported from jak3
 (define-extern draw-raw-image (function bucket-id art-group int vector vector level int none))
 
@@ -37766,7 +37767,7 @@
 (define-extern *font-curve-ghosting-2* array)
 (define-extern evaluate-font-curve (function none))
 (define-extern in-out-curve (function none))
-(define-extern char-effect-compute-colors (function none))
+(define-extern char-effect-compute-colors (function uint int int none))
 (define-extern char-effect-compute2 (function none))
 (define-extern *loading-pad-leftx* float)
 (define-extern *loading-pad-lefty* float)
@@ -37814,8 +37815,8 @@
 (define-extern init-background (function none))
 (define-extern upload-vis-bits (function level level bsp-header none))
 (define-extern set-background-regs! (function level none))
-(define-extern set-tie-guard-planes! (function none))
-(define-extern set-shrub-guard-planes! (function none))
+(define-extern set-tie-guard-planes! (function uint none))
+(define-extern set-shrub-guard-planes! (function uint none))
 (define-extern set-subdivide-settings! (function level none))
 (define-extern finish-shrub (function none))
 (define-extern finish-tfrag (function none))
@@ -38174,15 +38175,15 @@
 
 
 (define-extern etn-vu1-block object)
-(define-extern etn-magic (function none))
+(define-extern etn-magic (function int none))
 (define-extern etn-init-consts (function none))
-(define-extern etn-init-engine (function none))
+(define-extern etn-init-engine (function int int int none))
 (define-extern etn-end-buffer "Set up DMA to finish TIE." (function dma-buffer none))
-(define-extern etn-float-reg-calc (function string))
-(define-extern etn-float-reg (function string))
+(define-extern etn-float-reg-calc (function int string))
+(define-extern etn-float-reg (function int string))
 (define-extern etn-floats (function symbol))
-(define-extern etn-int-reg-draw (function string))
-(define-extern etn-int-reg (function string))
+(define-extern etn-int-reg-draw (function int string))
+(define-extern etn-int-reg (function int string))
 (define-extern etn-ints (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -38215,11 +38216,11 @@
 (define-extern tie-near-vu1-block object)
 ;; Lane2-RecipeX: replaced stub (jak1 test/decompiler/reference/jak1/engine/gfx/tie/tie-near_REF.gc)
 (define-extern tie-near-init-consts (function tie-near-consts int none))
-(define-extern tie-near-init-engine (function none))
-(define-extern tie-near-end-buffer (function symbol))
+(define-extern tie-near-init-engine (function int int int int none))
+(define-extern tie-near-end-buffer (function int symbol))
 (define-extern tie-scissor-make-perspective-matrix (function matrix matrix matrix))
-(define-extern tie-near-int-reg (function string))
-(define-extern tie-near-float-reg (function string))
+(define-extern tie-near-int-reg (function int string))
+(define-extern tie-near-float-reg (function int string))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tie-work                       ;;
@@ -38470,8 +38471,8 @@
 (define-extern sp-process-block (function sparticle-system int sprite-array-2d int none))
 (define-extern sp-process-particle-system (function sparticle-system int sprite-array-2d none))
 (define-extern *particles-flag* symbol) ;; symbol
-(define-extern forall-particles-with-control-runner (function none))
-(define-extern forall-particles-with-control (function none))
+(define-extern forall-particles-with-control-runner (function int int uint none))
+(define-extern forall-particles-with-control (function int int int int none))
 (define-extern sparticle-kill-it (function sparticle-system sparticle-cpuinfo none))
 (define-extern sparticle-60-to-50 (function sparticle-system sparticle-cpuinfo pointer none))
 (define-extern sparticle-50-to-60 (function sparticle-system sparticle-cpuinfo pointer none))
@@ -38637,13 +38638,13 @@
 
 
 (define-extern *dma-block-lists* array)
-(define-extern can-place-block? (function symbol))
-(define-extern dma-try-alloc-single (function symbol))
+(define-extern can-place-block? (function int int int int symbol))
+(define-extern dma-try-alloc-single (function int int int int symbol))
 (define-extern dma-try-alloc (function none))
-(define-extern dma-release (function none))
+(define-extern dma-release (function int none))
 (define-extern dma-dump (function symbol))
 (define-extern dma-is-empty (function symbol))
-(define-extern dma-get-named-buffer (function symbol))
+(define-extern dma-get-named-buffer (function int uint int symbol))
 (define-extern lobby-dma-reserve-hook (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -38721,9 +38722,9 @@
   )
 
 
-(define-extern set-movie-time! (function none))
-(define-extern set-movie-fog! (function none))
-(define-extern set-movie-color! (function none))
+(define-extern set-movie-time! (function int int uint none))
+(define-extern set-movie-fog! (function int int int int int none))
+(define-extern set-movie-color! (function int int none))
 (define-extern palette-select-special (function mood-context-core3 symbol))
 (define-extern clear-mood-times (function mood-context symbol))
 (define-extern update-mood-itimes (function mood-context int))
@@ -38855,13 +38856,13 @@
 (define-extern update-mood-default-interior (function mood-context none :behavior time-of-day-proc))
 (define-extern update-mood-default-interior-ambient (function mood-context none :behavior time-of-day-proc))
 (define-extern update-rustyh-lights (function none))
-(define-extern update-mood-rustyh (function none))
-(define-extern set-rustyh-effect-light! (function none))
+(define-extern update-mood-rustyh (function int none))
+(define-extern set-rustyh-effect-light! (function int none))
 (define-extern update-hiphog-lights (function mood-context none))
 (define-extern update-mood-hiphog (function mood-context float none :behavior time-of-day-proc))
 (define-extern update-garage-brdroom-lights (function none))
 (define-extern update-mood-garage-brdroom (function none))
-(define-extern set-garage-switched! (function none))
+(define-extern set-garage-switched! (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; jungle-shared                  ;;
@@ -39413,7 +39414,7 @@
 (define-extern bg "Debug function to start playing a given level." (function symbol none))
 (define-extern play "Start (or restart) the game!
                      This will start up the display process, and load the initial level." (function symbol symbol int))
-(define-extern play2 (function none))
+(define-extern play2 (function symbol symbol none))
 (define-extern play-boot
                "Function called by the C Kernel to start the game (wrapper around play)." (function none))
 (define-extern sound-bank-name->mode (function symbol sound-bank-mode))
@@ -39700,7 +39701,7 @@
 
 (define-extern *actor-hash* spatial-hash) ;; spatial-hash
 (define-extern *actor-hash-buckets* actor-hash-buckets) ;; actor-hash-buckets
-(define-extern update-actor-hash (function none))
+(define-extern update-actor-hash (function int int int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; merc-death                     ;;
@@ -40652,7 +40653,7 @@
 (define-extern ja-step (function int float :behavior process-drawable))
 (define-extern ja-rate (function int float :behavior process-drawable))
 (define-extern ja-linear-vel (function int vector :behavior process-drawable))
-(define-extern ja-linear-dist (function none))
+(define-extern ja-linear-dist (function int int none))
 (define-extern ja-distance-covered (function none))
 (define-extern ja-channel-set! (function int int :behavior process-drawable))
 (define-extern ja-channel-push! (function int time-frame int :behavior process-drawable))
@@ -40683,8 +40684,8 @@
 (define-extern process-drawable-show-all-cloth (function process-drawable symbol symbol)) 
 (define-extern process-drawable-slow-mo-cloth (function process-drawable symbol symbol)) 
 (define-extern process-drawable-cloth-command (function process-drawable pair symbol)) 
-(define-extern process-drawable-local-transq-for-joint! (function none))
-(define-extern process-drawable-local-trans-for-joint! (function none))
+(define-extern process-drawable-local-transq-for-joint! (function uint int int int none))
+(define-extern process-drawable-local-trans-for-joint! (function uint int int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; curves                         ;;
@@ -41715,9 +41716,9 @@
   )
 
 (define-extern *attackable-hash* attackable-hash)
-(define-extern attackable-hash-copy! (function none))
-(define-extern attackable-hash-exchange! (function none))
-(define-extern attackable-hash-update (function none))
+(define-extern attackable-hash-copy! (function uint int int none))
+(define-extern attackable-hash-exchange! (function uint int int none))
+(define-extern attackable-hash-update (function uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; projectile                     ;;
@@ -42403,7 +42404,7 @@
 (define-extern line-in-view-frustum? (function vector vector symbol))
 (define-extern sphere-in-view-frustum-any? (function none))
 (define-extern line-in-view-frustum-any? (function none))
-(define-extern find-nearest-camera-distance (function float))
+(define-extern find-nearest-camera-distance (function vector float))
 (define-extern vis-cull (function int symbol))
 (define-extern vis-cull-debug (function work-area int symbol)) ;; (function work-area int symbol) -- work-area type not live
 (define-extern error-sphere (function drawable-error string int)) 
@@ -42415,7 +42416,7 @@
 (define-extern find-instance-by-index (function type int bsp-header prototype-bucket)) ;; prototype-bucket not live
 (define-extern prototype-bucket-type (function prototype-bucket type)) ;; prototype-bucket not live
 (define-extern prototype-bucket-recalc-fields (function prototype-bucket prototype-bucket)) ;; prototype-bucket not live
-(define-extern print-prototype-intersection-list (function none))
+(define-extern print-prototype-intersection-list (function int none))
 (define-extern print-prototype-list (function none))
 (define-extern draw-instance-info (function string symbol))
 (define-extern set-shadow-by-name (function string int int none))
@@ -42443,10 +42444,10 @@
 (define-extern real-main-draw-hook (function none))
 (define-extern main-draw-hook (function none))
 (define-extern *draw-hook* (function none))
-(define-extern init-init-buffer (function none))
-(define-extern init-end-buffer (function none))
+(define-extern init-init-buffer (function int uint int int none))
+(define-extern init-end-buffer (function int uint none))
 (define-extern screen-shot-scale (function int string none))
-(define-extern screen-shot-debug (function none))
+(define-extern screen-shot-debug (function string none))
 (define-extern screen-shot (function none))
 (define-extern display-frame-start (function display int float none))
 (define-extern display-frame-finish (function display display))
@@ -42693,12 +42694,12 @@
 (define-extern *vis-actors* symbol)
 (define-extern *additional-spawner-count* object)
 (define-extern *additional-spawners* object)
-(define-extern register-additional-spawner (function none))
-(define-extern unregister-spawner-at-index (function symbol))
+(define-extern register-additional-spawner (function uint none))
+(define-extern unregister-spawner-at-index (function uint symbol))
 (define-extern *camera-pos-0* object)
 (define-extern *camera-pos-1* object)
 (define-extern vis-cull-all? (function none))
-(define-extern vis-dist-additional-ok? (function symbol))
+(define-extern vis-dist-additional-ok? (function int int symbol))
 (define-extern vis-dist-ok? (function none))
 (define-extern entity-by-name (function string entity))
 (define-extern entity-by-type (function type entity-actor))
@@ -42728,7 +42729,7 @@
 (define-extern check-for-rougue-process (function process int int level int)) 
 (define-extern process-drawable-scale-from-entity! (function process-drawable entity int)) 
 (define-extern process-drawable-from-entity! (function process-drawable entity-actor process-drawable))
-(define-extern reset-actors-by-game-type (function none))
+(define-extern reset-actors-by-game-type (function symbol none))
 (define-extern reset-actors (function symbol int)) 
 (define-extern reset-cameras (function none))
 (define-extern entity-birth-no-kill (function entity process))
@@ -42955,7 +42956,7 @@
 (define-extern debug-nav-validate-current-poly (function nav-mesh nav-poly vector symbol))
 (define-extern debug-report-nav-stats (function none))
 (define-extern get-nav-control (function process-drawable nav-mesh none))
-(define-extern get-pos-from-node (function none))
+(define-extern get-pos-from-node (function uint uint none))
 (define-extern add-nav-sphere (function nav-control sphere int none))
 (define-extern add-collide-shape-spheres (function nav-control collide-shape sphere none))
 (define-extern circle-tangent-directions (function vector vector vector vector vector))
@@ -43275,7 +43276,7 @@
 (define-extern *hud-string-free-list* object)
 (define-extern *font-hud-context* object)
 (define-extern hud-string-init (function none))
-(define-extern hud-string-add (function none))
+(define-extern hud-string-add (function uint none))
 (define-extern hud-string-draw-all (function none))
 (define-extern *hud-sprite-work* hud-sprite-work) ;; hud-sprite-work
 (define-extern hud-sprite-add (function symbol))
@@ -43306,7 +43307,7 @@
 
 
 (define-extern *race-map-info-array* object)
-(define-extern hud-map-init-by-other (function none))
+(define-extern hud-map-init-by-other (function int int none))
 (define-extern hack-set-level-bbox (function none))
 (define-extern init-level-bbox-from-map (function none))
 
@@ -43929,9 +43930,9 @@
 (define-extern get-event-level (function symbol))
 (define-extern get-shared-level (function symbol))
 (define-extern nos (function none))
-(define-extern write-process-as-handle (function none))
-(define-extern write-handle (function none))
-(define-extern read-handle (function none))
+(define-extern write-process-as-handle (function uint none))
+(define-extern write-handle (function int int none))
+(define-extern read-handle (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; statistics                     ;;
@@ -44188,7 +44189,7 @@
 (define-extern *net-player-ladder-stats-info* net-player-ladder-stats-info)
 (define-extern *net-clan-ladder-stats-info-array* array)
 (define-extern *net-clan-ladder-stats-info* net-clan-ladder-stats-info)
-(define-extern get-skill-level (function none))
+(define-extern get-skill-level (function uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-mgr-medius-cache-h         ;;
@@ -44608,7 +44609,7 @@
 
 
 (define-extern *material-to-rb-material-table* object)
-(define-extern rigid-body-surface-type-from-material (function none))
+(define-extern rigid-body-surface-type-from-material (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; vehicle-h                      ;;
@@ -46830,7 +46831,7 @@
 
 (define-extern rpm->radians-per-sec (function float degrees))
 (define-extern radians-per-sec->rpm (function degrees float))
-(define-extern vehicle-shielded? (function none))
+(define-extern vehicle-shielded? (function uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-player-h                   ;;
@@ -47201,10 +47202,10 @@
 (define-extern net-play-mode-race? (function none))
 (define-extern get-task-node-id-from-location-and-event (function none))
 (define-extern *default-vehicle-load-parts* object)
-(define-extern encode-green-room-stats (function none))
-(define-extern decode-green-room-stats (function none))
-(define-extern encode-net-world-state (function none))
-(define-extern decode-net-world-state (function none))
+(define-extern encode-green-room-stats (function uint int none))
+(define-extern decode-green-room-stats (function uint int none))
+(define-extern encode-net-world-state (function uint int none))
+(define-extern decode-net-world-state (function uint int none))
 (define-extern net-world-init-remote (function none))
 (define-extern *msg-map-net-world* array)
 (define-extern *net-process-class-info-net-world* net-process-class-info)
@@ -47212,12 +47213,12 @@
 (define-extern *net-player-names* object)
 (define-extern *prebuilt-ai-vehicles* array)
 (define-extern *net-vehicles* array)
-(define-extern find-vehicle-info (function symbol))
-(define-extern find-prebuilt-ai-vehicle (function symbol))
+(define-extern find-vehicle-info (function int symbol))
+(define-extern find-prebuilt-ai-vehicle (function int symbol))
 (define-extern *net-drivers* array)
-(define-extern get-vehicle-name (function none))
+(define-extern get-vehicle-name (function int none))
 (define-extern *protect-vehicle-slot-1* object)
-(define-extern protect-vehicle-slot-1 (function none))
+(define-extern protect-vehicle-slot-1 (function int none))
 (define-extern *in-end-of-race-preload* object)
 (define-extern *race-end-camera-pos-valid* object)
 (define-extern *race-end-camera-pos* object)
@@ -47346,7 +47347,7 @@
 (define-extern net-powerup-init-remote (function none))
 (define-extern *msg-map-net-powerup* array)
 (define-extern *net-process-class-info-net-powerup* net-process-class-info)
-(define-extern powerup-draw-init-by-other (function none))
+(define-extern powerup-draw-init-by-other (function int int uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-game-mgr-h                 ;;
@@ -49287,13 +49288,13 @@
 (define-extern *player-4-extra* object)
 (define-extern *player-5-extra* object)
 (define-extern *player-6-extra* object)
-(define-extern get-extra-player-string (function none))
+(define-extern get-extra-player-string (function int none))
 (define-extern set-index (function none))
 ;; DEAD: UI/menu infrastructure
 (define-extern *selection-cache-array* object)
 (define-extern *selection-cache-index* object)
 (define-extern *last-lobby-state* object)
-(define-extern insert-selection-cache (function none))
+(define-extern insert-selection-cache (function int int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; keyboard                       ;;
@@ -49626,7 +49627,7 @@
 
 
 
-(define-extern lobby-vehicle-flag->string (function none))
+(define-extern lobby-vehicle-flag->string (function int none))
 (define-extern *lobby-reset-mode* object)
 (define-extern *net-mgr-finish-mode* object)
 (define-extern *lobby-menu-manager* lobby-menu-manager)
@@ -49732,13 +49733,13 @@
 (define-extern mgcl-simple-request-callback (function none))
 (define-extern *net-error-icon* object)
 (define-extern display-net-problem-icon (function none))
-(define-extern lobby-fatal-error (function none))
+(define-extern lobby-fatal-error (function int none))
 (define-extern timeout-lobby-fatal-error (function none))
-(define-extern net-async-wait (function none))
+(define-extern net-async-wait (function time-frame int none))
 (define-extern dme-disconnect (function none))
-(define-extern mgcl-disconnect (function none))
-(define-extern medius-disconnect (function none))
-(define-extern do-disconnect (function none))
+(define-extern mgcl-disconnect (function int none))
+(define-extern medius-disconnect (function int none))
+(define-extern do-disconnect (function int int int none))
 (define-extern *net-mgr-pending-behavior-result* object)
 (define-extern *net-mgr-pending-behavior-result-extra* object)
 
@@ -49819,7 +49820,7 @@
 (define-extern *chat-msg-string-ct* object)
 (define-extern *chat-msg-strings* array)
 (define-extern is-whitespace (function none))
-(define-extern split-chat-msg (function none))
+(define-extern split-chat-msg (function int none))
 (define-extern do-split-chat-msg (function none))
 (define-extern *received-chat-msg-ct* object)
 (define-extern *received-chat-msgs* object)
@@ -49830,12 +49831,12 @@
 (define-extern purge-top-chat-msg (function symbol))
 (define-extern purge-all-chat-msgs (function none))
 (define-extern get-top-chat-msg (function object))
-(define-extern add-raw-popup-msg (function symbol))
+(define-extern add-raw-popup-msg (function int int int symbol))
 (define-extern *magic-chat* array)
 (define-extern handle-chat-msg (function none))
 (define-extern fake-chat-msg (function none))
-(define-extern send-chat-with-clan-id (function none))
-(define-extern send-chat-with-game-id (function none))
+(define-extern send-chat-with-clan-id (function int int int none))
+(define-extern send-chat-with-game-id (function int int int none))
 (define-extern *chat-msg-box* vector)
 (define-extern *chat-popup-sx* object)
 (define-extern *r2-press-time* object)
@@ -49846,7 +49847,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *sys-msg-cheat* object)
-(define-extern handle-sys-msg (function none))
+(define-extern handle-sys-msg (function uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-mgr                        ;;
@@ -49861,21 +49862,21 @@
 (define-extern *net-memory-callbacks* object)
 (define-extern *net-mgr-notify-engine* object)
 (define-extern net-mgr-init-by-other (function none))
-(define-extern net-mgr-start (function none))
+(define-extern net-mgr-start (function int none))
 (define-extern net-mgr-stop (function none))
 (define-extern net-mgr-default-handler (function none))
 (define-extern *pause-time* object)
 (define-extern *prev-total-pause-time* object)
 (define-extern *last-pause-state* object)
-(define-extern handle-pause (function none))
-(define-extern handle-unpause (function none))
+(define-extern handle-pause (function int none))
+(define-extern handle-unpause (function int none))
 (define-extern pause-check (function none))
-(define-extern handle-pause-request (function none))
+(define-extern handle-pause-request (function int int none))
 (define-extern *tmp-mac* object)
 (define-extern find-ip-map (function none))
 (define-extern *tmpstring* string)
 (define-extern *already-formatted-prefix* object)
-(define-extern get-player-name (function none))
+(define-extern get-player-name (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-mgr-dme                    ;;
@@ -49908,7 +49909,7 @@
 (define-extern *medius-joined-game-info* object)
 (define-extern *net-app-name* string)
 (define-extern *net-last-packet-recv-times* object)
-(define-extern net-packet-recv-time-reset-client (function none))
+(define-extern net-packet-recv-time-reset-client (function int none))
 (define-extern net-packet-recv-time-reset-all (function none))
 (define-extern net-packet-recv-time-trouble (function symbol))
 (define-extern *fake-msg-count* object)
@@ -49916,32 +49917,32 @@
 (define-extern *fake-msgs* object)
 (define-extern *in-msg-callback* object)
 (define-extern *cb-buf* object)
-(define-extern do-net-app-msg-callback (function none))
+(define-extern do-net-app-msg-callback (function int uint none))
 (define-extern net-app-msg-callback (function none))
 (define-extern lan-game-find-callback (function none))
 (define-extern net-sys-msg-callback (function none))
-(define-extern kick-machines (function none))
-(define-extern write-init-complete-msg (function none))
-(define-extern handle-machine-connect (function symbol))
-(define-extern handle-machine-disconnect (function none))
+(define-extern kick-machines (function int int none))
+(define-extern write-init-complete-msg (function int none))
+(define-extern handle-machine-connect (function int symbol))
+(define-extern handle-machine-disconnect (function int none))
 (define-extern remote-client-connect-callback (function none))
 (define-extern remote-client-disconnect-callback (function none))
 (define-extern remote-client-event-callback (function none))
-(define-extern init-complete-msg-handler (function symbol))
-(define-extern chat-msg-handler (function none))
+(define-extern init-complete-msg-handler (function int int symbol))
+(define-extern chat-msg-handler (function int int none))
 (define-extern session-master-change-callback (function none))
 (define-extern dme-token-callback (function none))
 (define-extern *last-ping-latency* object)
 (define-extern *last-ping-time* object)
 (define-extern *avg-ping* object)
-(define-extern ping-report-msg-handler (function none))
+(define-extern ping-report-msg-handler (function int int none))
 (define-extern cb-server-ping (function none))
 (define-extern consider-server-ping (function none))
 (define-extern dummy-callback (function none))
 (define-extern *lanfind-scratch* object)
 (define-extern *lanfind-scratch-buf* object)
 (define-extern net-lanfind-exchange-callback (function none))
-(define-extern kick-msg-handler (function none))
+(define-extern kick-msg-handler (function int none))
 (define-extern *rsa-key-dont-use-this-for-release* object)
 (define-extern *headset-buffers-received* object)
 (define-extern *headset-buffers-played* object)
@@ -49952,23 +49953,23 @@
 (define-extern *tmp-addr* object)
 (define-extern *tmp-game* object)
 (define-extern *lan-game-verified* object)
-(define-extern memeq (function symbol))
+(define-extern memeq (function uint uint int symbol))
 (define-extern lan-game-verify-callback (function none))
 (define-extern *net-msg-pending* object)
-(define-extern send-fake-msg (function none))
-(define-extern verify-msg (function none))
-(define-extern net-send-msg (function symbol))
-(define-extern parse-ip (function none))
+(define-extern send-fake-msg (function int none))
+(define-extern verify-msg (function int none))
+(define-extern net-send-msg (function int int int symbol))
+(define-extern parse-ip (function uint none))
 (define-extern *tmp-hostname* string)
-(define-extern format-ip (function none))
-(define-extern format-ip-raw (function none))
+(define-extern format-ip (function int string none))
+(define-extern format-ip-raw (function int none))
 (define-extern net-get-local-ip (function none))
 (define-extern *ip-lookup* object)
 (define-extern get-host-by-name-callback (function none))
 (define-extern *dns-string* object)
 (define-extern *dns-string2* object)
 (define-extern get-host-by-name (function none))
-(define-extern net-get-client-ip (function none))
+(define-extern net-get-client-ip (function int none))
 (define-extern per-process-hook (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -50024,9 +50025,9 @@
 (define-extern aux-voice-mgr-activate (function none))
 (define-extern aux-voice-mgr-deactivate (function none))
 (define-extern aux-voice-mgr-failed (function none))
-(define-extern do-aux-voice-msg-callback (function none))
+(define-extern do-aux-voice-msg-callback (function int uint none))
 (define-extern aux-voice-msg-callback (function none))
-(define-extern aux-voice-acct-id-callback (function none))
+(define-extern aux-voice-acct-id-callback (function int int none))
 (define-extern aux-voice-mgr-default-handler (function none))
 (define-extern aux-voice-local-disconnect-callback (function none))
 (define-extern aux-voice-client-connect-callback (function none))
@@ -50065,7 +50066,7 @@
 (define-extern *chat-tmp-string* object)
 (define-extern medius-chat-callback (function none))
 (define-extern medius-reassign-world-id-callback (function none))
-(define-extern lobby-non-fatal-error (function none))
+(define-extern lobby-non-fatal-error (function int none))
 (define-extern mas-connect-callback (function none))
 (define-extern medius-text-filter-request-callback (function none))
 (define-extern net-filter-text (function none))
@@ -50123,17 +50124,17 @@
 ;; net-mgr-medius-cache           ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern medius-cache-tick (function none))
+(define-extern medius-cache-tick (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-mgr-medius-players         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern add-recent-opponent (function none))
+(define-extern add-recent-opponent (function uint none))
 (define-extern get-recent-players (function none))
 (define-extern *tmp-player* medius-cached-info-player) ;; medius-cached-info-player
-(define-extern medius-player-info-retrieve-behavior (function none))
-(define-extern update-client-state (function none))
+(define-extern medius-player-info-retrieve-behavior (function uint none))
+(define-extern update-client-state (function int none))
 (define-extern init-player-lists (function none))
 (define-extern *tmp-player-name* object)
 (define-extern get-player-amplitude (function none))
@@ -50153,7 +50154,7 @@
 (define-extern ignore-removing-player (function none))
 (define-extern finding-player-callback (function none))
 (define-extern finding-player (function none))
-(define-extern retrieve-player-lists (function none))
+(define-extern retrieve-player-lists (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-mgr-medius-clans           ;;
@@ -50167,8 +50168,8 @@
 (define-extern clan-member-list-callback (function none))
 (define-extern *tmp-clan* medius-cached-info-clan) ;; medius-cached-info-clan
 (define-extern *tmp-clan-members* object)
-(define-extern medius-clan-info-retrieve-behavior (function none))
-(define-extern clan-create (function symbol))
+(define-extern medius-clan-info-retrieve-behavior (function int none))
+(define-extern clan-create (function int symbol))
 (define-extern clan-disband (function none))
 (define-extern clan-leave (function none))
 (define-extern clan-remove-player (function none))
@@ -50190,11 +50191,11 @@
 (define-extern revoke-clan-invite (function none))
 (define-extern retrieve-outstanding-invites (function none))
 (define-extern net-test-shit (function symbol))
-(define-extern clan-allowed-to-join-game (function none))
-(define-extern lookup-clan-challenge (function symbol))
-(define-extern get-clan-challenge-pair-status (function none))
+(define-extern clan-allowed-to-join-game (function uint none))
+(define-extern lookup-clan-challenge (function int int symbol))
+(define-extern get-clan-challenge-pair-status (function int int int none))
 (define-extern transfer-clan-leadership (function none))
-(define-extern set-clan-msg (function symbol))
+(define-extern set-clan-msg (function int symbol))
 (define-extern is-clan-challenge (function none))
 (define-extern can-start-clan-challenge (function symbol))
 (define-extern *clan-update-stats-request* object)
@@ -50205,11 +50206,11 @@
 (define-extern *this-game-penalty* object)
 (define-extern should-i-update-clan-stats (function symbol))
 (define-extern get-all-clan-stats (function none))
-(define-extern make-new-score (function none))
-(define-extern post-game-clan-stats-adjust (function symbol))
+(define-extern make-new-score (function uint uint int int none))
+(define-extern post-game-clan-stats-adjust (function int symbol))
 (define-extern apply-clan-deltas (function symbol))
 (define-extern pre-game-clan-stats-adjust (function symbol))
-(define-extern get-clans-in-challenge-info (function none))
+(define-extern get-clans-in-challenge-info (function uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-mgr-medius-ladders         ;;
@@ -50300,17 +50301,17 @@
 (define-extern *medius-server-filters* object)
 (define-extern *medius-desired-server-filters* object)
 (define-extern medius-game-status-info-retrieve-behavior (function none))
-(define-extern get-game-status-cached (function none))
+(define-extern get-game-status-cached (function int none))
 (define-extern in-game-players-refreshing-callback (function none))
 (define-extern refresh-game-info (function none))
-(define-extern filter-game (function none))
+(define-extern filter-game (function uint none))
 (define-extern *unfiltered-game-ct* object)
 (define-extern *game-end-idx* object)
 (define-extern get-game-list-callback (function none))
 (define-extern get-game-list (function none))
-(define-extern clear-game-list-filters (function none))
+(define-extern clear-game-list-filters (function int int none))
 (define-extern set-filter-state (function none))
-(define-extern refresh-lan-games (function none))
+(define-extern refresh-lan-games (function int none))
 (define-extern filter-test (function none))
 (define-extern get-all-games (function none))
 
@@ -50359,7 +50360,7 @@
 
 
 (define-extern task-level-to-idx (function none))
-(define-extern ghost-crc-ok (function none))
+(define-extern ghost-crc-ok (function int none))
 (define-extern *ghost-tmp-string* string)
 (define-extern *ghost-file-ct* object)
 (define-extern *ghost-files* object)
@@ -50370,12 +50371,12 @@
 (define-extern *ghost-info* ghost-info)
 (define-extern *ghost-async-status* object)
 (define-extern *ghost-req-id* object)
-(define-extern send-ghost-file (function none))
+(define-extern send-ghost-file (function uint int none))
 (define-extern restore-ghost-from-memcard (function symbol))
 (define-extern do-get-best-ghost (function none))
-(define-extern get-best-ghost (function none))
+(define-extern get-best-ghost (function int int none))
 (define-extern nuke-all-ghosts (function none))
-(define-extern get-best-ghost-info (function none))
+(define-extern get-best-ghost-info (function int none))
 (define-extern *async-ghost-compress-busy* object)
 (define-extern async-compress-and-upload (function none))
 (define-extern is-ghost? (function object))
@@ -50406,7 +50407,7 @@
 (define-extern send-game-update (function none))
 (define-extern connect-callback-mgcl (function none))
 (define-extern get-mgcl-connection (function none))
-(define-extern end-game-on-me (function none))
+(define-extern end-game-on-me (function int none))
 (define-extern create-game-on-me (function symbol))
 (define-extern send-end-of-game-report (function none))
 (define-extern end-game-on-me-callback (function none))
@@ -50414,7 +50415,7 @@
 (define-extern check-game-on-me (function none))
 (define-extern *medius-account-update-stats-request* medius-account-update-stats-request)
 (define-extern *medius-update-ladder-stats-wide-request* object)
-(define-extern medius-start-account-stats-update (function none))
+(define-extern medius-start-account-stats-update (function int int none))
 (define-extern medius-start-clan-stats-update (function symbol))
 (define-extern host-change-callback (function none))
 (define-extern game-connect-failed (function none))
@@ -50458,8 +50459,8 @@
 
 (define-extern *net-colarb-last-reqs* object)
 (define-extern net-colarb-clear (function none))
-(define-extern colarb-request-msg-callback (function none))
-(define-extern net-colarb-request-id (function none))
+(define-extern colarb-request-msg-callback (function int none))
+(define-extern net-colarb-request-id (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-init                       ;;
@@ -50613,16 +50614,16 @@
 (define-extern net-hw-stop (function symbol))
 (define-extern net-hw-start-part1 (function none))
 (define-extern net-hw-start-part2 (function symbol))
-(define-extern hack-reset-state (function none))
-(define-extern net-mgr-start-hardware-already-done (function symbol))
+(define-extern hack-reset-state (function int none))
+(define-extern net-mgr-start-hardware-already-done (function int symbol))
 (define-extern hack-start-local-game (function none))
 (define-extern artist-clean-up-net-mgr (function none))
 (define-extern *artist-continue-busy* object)
-(define-extern artist-continue (function none))
+(define-extern artist-continue (function uint int none))
 (define-extern listener-continue (function none))
 (define-extern listener-task (function none))
-(define-extern select-continue-point (function symbol))
-(define-extern set-local-vehicle (function none))
+(define-extern select-continue-point (function uint symbol))
+(define-extern set-local-vehicle (function uint none))
 (define-extern qo (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -50705,7 +50706,7 @@
 (define-extern *http-downloader* http-downloader)
 (define-extern *http-request-string* object)
 (define-extern http-downloader-init-by-other (function none))
-(define-extern http-start-fetch (function none))
+(define-extern http-start-fetch (function int none))
 (define-extern http-downloader-default-handler (function none))
 (define-extern *socket-blocking* object)
 
@@ -50770,7 +50771,7 @@
 (define-extern *menu-movie-texture-anim-array* texture-anim-array)
 (define-extern *movie-texture-anim-array* texture-anim-array)
 (define-extern movie-texture-anim-init (function none))
-(define-extern movie-texture-anim-func (function none))
+(define-extern movie-texture-anim-func (function uint int none))
 (define-extern fmv-file-init (function none))
 (define-extern fmv-get-time (function none))
 (define-extern fmv-memcpy (function none))
@@ -50778,7 +50779,7 @@
 (define-extern fmv-fade-out (function none))
 (define-extern fmv-player-init-by-other (function none))
 (define-extern fmv-player-run (function string none))
-(define-extern fmv-player-run-texture (function none))
+(define-extern fmv-player-run-texture (function int int none))
 (define-extern fmv-player-terminate (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51190,8 +51191,8 @@
 
 
 (define-extern *closest-player-dist-sq* float)
-(define-extern get-closest-human-player (function none))
-(define-extern get-closest-human-or-ai-player (function none))
+(define-extern get-closest-human-player (function int none))
+(define-extern get-closest-human-or-ai-player (function int none))
 (define-extern search-for-code (function none))
 (define-extern *poop* object)
 (define-extern *pooplen* object)
@@ -51203,9 +51204,9 @@
 (define-extern broadcast-message (function none))
 (define-extern *auto-test-break* object)
 (define-extern check-entities (function none))
-(define-extern auto-test-node (function none))
+(define-extern auto-test-node (function int none))
 (define-extern auto-test-levels-init-by-other (function level object :behavior process))
-(define-extern auto-test-levels-start (function none))
+(define-extern auto-test-levels-start (function int none))
 (define-extern check-levels (function none))
 (define-extern *sound-clone* object)
 (define-extern *sound-info-fields* array)
@@ -51216,7 +51217,7 @@
 (define-extern crappy-atof (function none))
 (define-extern tweak-sound (function none))
 (define-extern read-sound-info-tweaks (function none))
-(define-extern process-is-in-tree (function symbol))
+(define-extern process-is-in-tree (function uint symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-predict                    ;;
@@ -51237,12 +51238,12 @@
 (define-extern *net-ip* object)
 (define-extern *net-log-id* object)
 (define-extern net-log-world-ident (function none))
-(define-extern net-log-start (function none))
+(define-extern net-log-start (function int int none))
 (define-extern net-log-remove-lock (function none))
 (define-extern net-log-stop (function none))
-(define-extern net-log-client (function none))
-(define-extern net-log-msg (function none))
-(define-extern net-log-comment (function none))
+(define-extern net-log-client (function int int none))
+(define-extern net-log-msg (function int uint int int int none))
+(define-extern net-log-comment (function uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-world                      ;;
@@ -51380,7 +51381,7 @@
 (define-extern *udp-buffer* object)
 (define-extern *udp-layer* object)
 (define-extern *nat-addr* object)
-(define-extern udp-announce-msg-callback (function none))
+(define-extern udp-announce-msg-callback (function int int none))
 (define-extern fw-test-2 (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51397,9 +51398,9 @@
 (define-extern headset-init-by-other (function none))
 (define-extern headset-activate (function none))
 (define-extern headset-deactivate (function none))
-(define-extern headset-audio-msg-callback (function none))
+(define-extern headset-audio-msg-callback (function int int none))
 (define-extern headset-udp-callback (function none))
-(define-extern should-talk-to (function none))
+(define-extern should-talk-to (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; idle-control                   ;;
@@ -51504,7 +51505,7 @@
 ;; rigid-body-debug               ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern adjust-playback-index (function none))
+(define-extern adjust-playback-index (function uint int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; rigid-body-surface             ;;
@@ -51744,7 +51745,7 @@
 (define-extern rb-reset-perf-times (function none))
 (define-extern rb-get-perf (function symbol))
 (define-extern *rb-raw-time-val* object)
-(define-extern rb-cpu-delay (function none))
+(define-extern rb-cpu-delay (function uint none))
 (define-extern rigid-body-queue-manager-post (function none))
 (define-extern rigid-body-queue-manager-init-by-other (function rigid-body-queue object :behavior rigid-body-queue-manager)) ;; was: (function none) — backported from jak3
 (define-extern rigid-body-queue-manager-spawn (function rigid-body-queue process-tree process))
@@ -51791,8 +51792,8 @@
 ;; spartacus                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern spartacus-birth-func-set-color (function none))
-(define-extern spt-birth-func-spartacus-part-steam (function none))
+(define-extern spartacus-birth-func-set-color (function uint uint none))
+(define-extern spt-birth-func-spartacus-part-steam (function int sparticle-cpuinfo sparticle-launchinfo int int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; driver                         ;;
@@ -51906,14 +51907,14 @@
 
 
 
-(define-extern joint-mod-head-handler (function none))
+(define-extern joint-mod-head-handler (function uint none))
 (define-extern driver-trans (function none))
 (define-extern driver-post (function none))
 (define-extern driver-head (function none))
 (define-extern driver-anim (function none))
-(define-extern driver-event-handler (function none))
+(define-extern driver-event-handler (function int uint none))
 (define-extern driver-init-by-other (function none))
-(define-extern driver-spawn (function none))
+(define-extern driver-spawn (function int basic int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; helmet                         ;;
@@ -51953,9 +51954,9 @@
 
 
 (define-extern helmet-hud-init-by-other (function none))
-(define-extern helmet-hud-spawn (function none))
-(define-extern helmet-garage-init-by-other (function none))
-(define-extern helmet-garage-spawn (function none))
+(define-extern helmet-hud-spawn (function uint none))
+(define-extern helmet-garage-init-by-other (function uint int int none))
+(define-extern helmet-garage-spawn (function uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; driver-jak                     ;;
@@ -52598,7 +52599,7 @@
 
 (define-extern *vehicle-debris-constants* object)
 (define-extern vehicle-debris-init-by-other (function none))
-(define-extern vehicle-debris-spawn (function process))
+(define-extern vehicle-debris-spawn (function int int process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; vehicle-effects                ;;
@@ -52621,11 +52622,11 @@
 (define-extern *vehicle-shadow-control* shadow-control) ;; shadow-control
 (define-extern *vehicle-shadow-control-disabled* shadow-control) ;; shadow-control
 (define-extern vehicle-event-handler (function process int symbol event-message-block object :behavior vehicle))
-(define-extern get-player-id (function none))
+(define-extern get-player-id (function uint none))
 (define-extern twiddle-collision-cache-verts (function none))
-(define-extern vehicle-damage-local-space-0 (function none))
-(define-extern vehicle-damage-local-space-1 (function none))
-(define-extern get-vehicle-player-id (function none))
+(define-extern vehicle-damage-local-space-0 (function uint none))
+(define-extern vehicle-damage-local-space-1 (function uint none))
+(define-extern get-vehicle-player-id (function uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wcar-skel-template             ;;
@@ -52715,10 +52716,10 @@
 (define-extern *car-appearance-hack* object)
 (define-extern *car-info-default* object)
 (define-extern vehicle-init-by-other (function none)) ;; (function int traffic-object-spawn-params object :behavior vehicle)
-(define-extern vehicle-idx-from-level-name (function symbol))
-(define-extern vehicle-in-level? (function symbol))
+(define-extern vehicle-idx-from-level-name (function int symbol))
+(define-extern vehicle-in-level? (function int int symbol))
 (define-extern vehicle-spawn (function symbol)) ;; (function vehicle-type traffic-object-spawn-params process-drawable)
-(define-extern find-vehicle (function none))
+(define-extern find-vehicle (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; vehicle-hud                    ;;
@@ -52758,8 +52759,8 @@
 (define-extern *last-latencies* object)
 (define-extern encode-vehicle-net-state (function none))
 (define-extern decode-vehicle-net-state (function none))
-(define-extern encode-vehicle-net-construction (function none))
-(define-extern decode-vehicle-net-construction (function none))
+(define-extern encode-vehicle-net-construction (function uint int none))
+(define-extern decode-vehicle-net-construction (function uint int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; target-pilot                   ;;
@@ -52801,13 +52802,13 @@
 
 (define-extern *search-info* search-info) ;; search-info
 (define-extern find-nearest-focusable (function none)) ;; (function (array collide-shape) vector float search-info-flag search-info-flag vector vector float process-focusable)
-(define-extern in-process-array? (function symbol))
-(define-extern fst-insertion-helper (function none))
+(define-extern in-process-array? (function uint uint symbol))
+(define-extern fst-insertion-helper (function uint uint int int none))
 (define-extern find-sorted-targets! (function none))
 (define-extern find-sorted-targets-faster! (function none))
 (define-extern sorted-targ-validator-test-collision (function none))
 (define-extern sorted-targ-validator-is-player-vehicle (function none))
-(define-extern sorted-targ-validator-is-any-vehicle (function symbol))
+(define-extern sorted-targ-validator-is-any-vehicle (function int symbol))
 (define-extern sorted-targ-validator-player-needs-los (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -53668,7 +53669,7 @@
   )
 
 (define-extern keybd-set-time-of-day! (function int time-of-day-palette-id object)) ;; R-4: re-applied P9 sig (enum ported above)
-(define-extern lookup-bsp-by-name (function symbol))
+(define-extern lookup-bsp-by-name (function uint int symbol))
 (define-extern editable-player-init (function symbol none :behavior editable-player)) ;; was: (function none) — backported from jak3
 (define-extern set-editable-name (function string object))
 (define-extern select-editable-by-name (function string object))
@@ -54373,14 +54374,14 @@
 (define-extern dm-select-race-path (function object debug-menu-msg int int))
 (define-extern dm-select-start-record-scene (function object debug-menu-msg int int))
 (define-extern dm-select-end-record-scene (function object debug-menu-msg int int))
-(define-extern dm-setting-player1-controls (function symbol))
-(define-extern dm-setting-player2-controls (function symbol))
-(define-extern dm-setting-vehicle-tuning-engine (function none))
-(define-extern dm-setting-vehicle-tuning-gearbox (function none))
-(define-extern dm-setting-vehicle-tuning-armor (function none))
-(define-extern dm-setting-vehicle-tuning-turbo (function none))
-(define-extern dm-setting-net-vehicle (function symbol))
-(define-extern dm-setting-net-player-count (function symbol))
+(define-extern dm-setting-player1-controls (function int int symbol))
+(define-extern dm-setting-player2-controls (function int int symbol))
+(define-extern dm-setting-vehicle-tuning-engine (function int int none))
+(define-extern dm-setting-vehicle-tuning-gearbox (function int int none))
+(define-extern dm-setting-vehicle-tuning-armor (function int int none))
+(define-extern dm-setting-vehicle-tuning-turbo (function int int none))
+(define-extern dm-setting-net-vehicle (function int int symbol))
+(define-extern dm-setting-net-player-count (function int int symbol))
 (define-extern dm-setting-language (function int debug-menu-msg symbol))
 (define-extern dm-setting-subtitle-language (function int debug-menu-msg symbol))
 (define-extern dm-setting-audio-language (function int debug-menu-msg symbol))
@@ -54390,15 +54391,15 @@
 (define-extern dm-scissor-subdiv-draw-func (function int debug-menu-msg symbol))
 (define-extern dm-foreground-subdiv-draw-func (function int debug-menu-msg symbol))
 (define-extern dm-col-rend-on-func (function object debug-menu-msg symbol))
-(define-extern dm-col-cache-on-func (function symbol))
+(define-extern dm-col-cache-on-func (function int symbol))
 (define-extern dm-col-rend-outline-func (function object debug-menu-msg symbol))
 (define-extern dm-col-rend-back-face-func (function object debug-menu-msg symbol))
 (define-extern dm-col-rend-normals-func (function object debug-menu-msg symbol))
 (define-extern dm-col-rend-ghost-hidden-func (function object debug-menu-msg symbol))
 (define-extern dm-col-rend-track-func (function int debug-menu-msg symbol))
 (define-extern dm-col-rend-show-only-toggle-func (function uint debug-menu-msg symbol))
-(define-extern dm-col-rend-show-material-func (function symbol))
-(define-extern dm-col-rend-show-event-func (function symbol))
+(define-extern dm-col-rend-show-material-func (function int int symbol))
+(define-extern dm-col-rend-show-event-func (function int int symbol))
 (define-extern dm-col-rend-show-only-set-func (function uint debug-menu-msg symbol))
 (define-extern dm-col-rend-cspec-toggle (function uint debug-menu-msg symbol))
 (define-extern dm-col-rend-size (function object debug-menu-msg float float))
@@ -54450,12 +54451,12 @@
 (define-extern *enable-instance-tie-menu* debug-menu) ;; debug-menu
 (define-extern build-instance-list (function object int)) 
 (define-extern *path-recorder-menu* object)
-(define-extern dm-set-recorder-path (function symbol))
-(define-extern dm-set-recorder-mode (function symbol))
-(define-extern debug-menu-make-path-modes (function none))
+(define-extern dm-set-recorder-path (function int int symbol))
+(define-extern dm-set-recorder-mode (function int int symbol))
+(define-extern debug-menu-make-path-modes (function int none))
 (define-extern build-path-recorder-list (function symbol))
 (define-extern dm-scene-load-pick-func (function pair debug-menu-msg symbol))
-(define-extern dm-split-screen-toggle-pick-func (function none))
+(define-extern dm-split-screen-toggle-pick-func (function uint int none))
 (define-extern debug-create-cam-restore (function none))
 (define-extern debug-menu-make-camera-mode-menu (function debug-menu debug-menu debug-menu-node))
 (define-extern debug-menu-make-camera-menu (function debug-menu-context debug-menu-item-submenu))
@@ -54699,8 +54700,8 @@
 
 (define-extern *seat-offset* vector)
 (define-extern *daxter-rotate* float)
-(define-extern daxter-init-by-other (function none))
-(define-extern daxter-spawn (function process))
+(define-extern daxter-init-by-other (function uint none))
+(define-extern daxter-spawn (function int process))
 (define-extern *animation-adjust* object)
 (define-extern *test-hide* object)
 (define-extern *daxter-position-tweak* object)
@@ -54720,11 +54721,11 @@
 ;; wvehicle-weapons-debug         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern set-veh-weapon (function symbol))
-(define-extern dm-set-veh-weapon (function none))
-(define-extern set-vehicle-light-eco (function none))
-(define-extern dm-set-veh-leco (function none))
-(define-extern test-vehicle-weapon (function none))
+(define-extern set-veh-weapon (function int int int symbol))
+(define-extern dm-set-veh-weapon (function float int none))
+(define-extern set-vehicle-light-eco (function float int none))
+(define-extern dm-set-veh-leco (function int none))
+(define-extern test-vehicle-weapon (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; spartacus-editor               ;;
@@ -54858,7 +54859,7 @@
 (define-extern kernel-set-exception-vector (function object int)) 
 (define-extern kernel-set-interrupt-vector (function none))
 (define-extern kernel-set-level2-vector (function object object symbol)) 
-(define-extern deinstall-debug-handler (function symbol))
+(define-extern deinstall-debug-handler (function int symbol))
 (define-extern deinstall-debug-handlers (function symbol))
 (define-extern resend-exception (function object object object object symbol)) 
 
@@ -54868,11 +54869,11 @@
 
 (define-extern copy-string<-string
                "Copy a string. No bounds check. Writes null terminator." (function string string string))
-(define-extern to-upper (function none))
+(define-extern to-upper (function uint none))
 (define-extern string=
                "Check for string equality."
                (function string string symbol))
-(define-extern nocase-string= (function none))
+(define-extern nocase-string= (function uint uint none))
 (define-extern string-prefix=
                "Check if a string starts with a given string."
                (function string string symbol))
