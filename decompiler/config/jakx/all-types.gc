@@ -15671,7 +15671,7 @@
     (setting-control-method-12 (_type_ process symbol) none) ;; 12
     (add-setting (_type_ engine-pers object) none) ;; 13
     (persist-with-delay (_type_ object) connectable) ;; 14
-    (set-setting (_type_ object) connectable) ;; 15
+    (set-setting (_type_ process symbol object object object) connection) ;; 15
     (remove-setting (_type_ object) none) ;; 16
     (setting-control-method-17 (_type_ symbol object object object) connection) ;; 17
     (setting-control-method-18 (_type_) user-setting-data) ;; 18
