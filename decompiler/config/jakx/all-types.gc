@@ -12591,6 +12591,16 @@
 (defenum subdivide-setting
   :type int64
   )
+
+(defenum ocean-height-hack
+  :type int64
+  ; (zero 1)
+  ; (far-below 2)
+  ; (sewer-start 3)
+  ; (sewer-hi 4)
+  ; (sewer-med 5)
+  ; (sewer-lo 6)
+  )
 ;; ---main-h:subdivide-setting
 
 (deftype frame-stats (structure)
@@ -31213,6 +31223,76 @@
     (target-pilot-start handle symbol symbol)
     )
   )
+
+(defenum pat-mode
+  :type uint8
+  (ground 0)
+  (wall 1)
+  (obstacle 2)
+  (halfpipe 3)
+  )
+
+(defenum pat-material
+  :type uint8
+  (unknown     0)
+  (ice         1)
+  (quicksand   2)
+  (waterbottom 3)
+  (tar         4)
+  (sand        5)
+  (wood        6)
+  (grass       7)
+  (pcmetal     8)
+  (snow        9)
+  (deepsnow   10)
+  (hotcoals   11)
+  (lava       12)
+  (crwood     13)
+  (gravel     14)
+  (dirt       15)
+  (metal      16)
+  (straw      17)
+  (tube       18)
+  (swamp      19)
+  (stopproj   20)
+  (rotate     21)
+  (neutral    22)
+  (stone      23)
+  (crmetal    24)
+  (carpet     25)
+  (grmetal    26)
+  (shmetal    27)
+  (hdwood     28)
+  (squish     29)
+  (mhshroom   30)
+  (forest     31)
+  (mhswamp    32)
+  (dmaker     33)
+  )
+
+(defenum pat-event
+  :type uint8
+  (none        0)
+  (deadly      1)
+  (endlessfall 2)
+  (burn        3)
+  (deadlyup    4)
+  (burnup      5)
+  (melt        6)
+  (slide       7)
+  (lip         8)
+  (lipramp     9)
+  (shock      10)
+  (shockup    11)
+  (hide       12)
+  (rail       13)
+  (slippery   14)
+  (drag       15)
+  (waterfloor 16)
+  (hang       17)
+  (fry        18)
+  (slime      19)
+  )
   
 
 
@@ -31286,6 +31366,67 @@
   :size-assert         #x10
   :flag-assert         #xe00000010
   )
+
+(defenum perf-stat-bucket
+  :type uint32 ;; guess
+  (all-code)
+  (spatial-hash-build)
+  (spatial-hash-search)
+  (collide)
+  (collide-list)
+  (collide-fill)
+  (actor-hash)
+  (nav)
+  (nav-dma-all)
+  (nav-dma-read)
+  (nav-dma-write) ;; 10
+  (nav-dma-work)
+  (nav-part1)
+  (nav-part2)
+  (nav-part3)
+  (nav-part4)
+  (nav-part5)
+  (nav-part6)
+  (nav-part7)
+  (nav-part8)
+  (nav-part9) ;; 20
+  (nav-part10)
+  (add-to-translation)
+  (update-current-poly)
+  (clamp-vector-to-mesh)
+  (ray-step)
+  (update-spheres)
+  (travel-around-spheres)
+  (avoid-spheres)
+  (check-vector-collision-with-nav-spheres)
+  (find-nearest-poly) ;; 30
+  (find-containing-poly)
+  (generate-velocity)
+  (apply-rotation)
+  (apply-velocity)
+  (travel-post)
+  (common-post)
+  (misc)
+  (mercneric)
+  (tie-generic)
+  (background) ;; 40
+  (drawable)
+  (tfrag)
+  (tfrag-scissor)
+  (inst-shrub)
+  (proto-shrub)
+  (inst-tie)
+  (proto-tie)
+  (bones)
+  (camera)
+  (foreground) ;; 50
+  (hover-path)
+  (hover-spheres)
+  (hover-update)
+  (hover-move)
+  (hover-find-closest)
+  (update-los)
+)
   
 
 
@@ -40809,6 +40950,14 @@
   :method-count-assert 9
   :size-assert         #x44
   :flag-assert         #x900000044
+  )
+
+(defenum particle-curve-flags
+  :type uint64
+  :bitfield #t
+  (pcf0 0)
+  (pcf1 1)
+  (pcf2 2)
   )
 
 
@@ -52735,6 +52884,19 @@
   (delete 1)
   (update 2)
   (insert 3)
+  )
+
+(defenum nav-node-flag
+  "This string value is stored in their SQL database"
+  :type uint32
+  :bitfield #t
+  (blocker 0)
+  (pov 1)
+  (visited 2)
+  (blocked 3)
+  (pedestrian 4)
+  (selected 5)
+  (hidden 6)
   )
 
   
