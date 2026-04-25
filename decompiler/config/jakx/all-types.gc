@@ -2347,8 +2347,8 @@
     (hud-item-method-18 (_type_) none) ;; 18
     (hud-item-method-19 (_type_) symbol) ;; 19
     (hud-item-method-20 (_type_) int) ;; 20
-    (hud-item-method-21 (_type_) none) ;; 21
-    (hud-item-method-22 (_type_) none) ;; 22
+    (hud-item-method-21 (_type_) int) ;; 21
+    (hud-item-method-22 (_type_) int) ;; 22
     (hud-item-method-23 (_type_) none) ;; 23
     )
   )
@@ -49534,8 +49534,8 @@
 (define-extern *ready-room-human-ct* object)
 (define-extern *ready-room-ai-ct* object)
 (define-extern *game-launched-from-room* object)
-(define-extern camera-seek-time object)
-(define-extern real-camera-seek-time object)
+(define-extern camera-seek-time float)
+(define-extern real-camera-seek-time float)
 (define-extern set-lobby-camera-seek-time! (function float float))
 (define-extern *class-mode* object)
 (define-extern restore-selection-index (function none))
