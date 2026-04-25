@@ -35774,7 +35774,7 @@
     (nav-state-method-34 (_type_) none) ;; 34
     (nav-state-method-35 (_type_) none) ;; 35
     (nav-state-method-36 (_type_ vector) int) ;; 36 ;; add-offset-to-target!
-    (nav-state-method-37 (_type_) int) ;; 37 ;; navigate-v2!
+    (nav-state-method-37 (_type_) none) ;; 37
     (nav-state-method-38 (_type_ nav-poly) int) ;; 38 ;; set-current-poly!
     (nav-state-method-39 (_type_) symbol) ;; 39
     (nav-state-method-40 (_type_ vector) none) ;; 40 ;; do-navigation-to-destination
