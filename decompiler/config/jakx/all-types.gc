@@ -19146,6 +19146,19 @@
   :flag-assert #x900000004
   )
 
+(defenum highscore-flags
+  :bitfield #t
+  :type uint8
+  (time)
+  (hf1 1)
+  (hf2 2)
+  (hf3 3)
+  (hf4 4)
+  (hf5 5)
+  (hf6 6)
+  (hf7 7)
+  )
+
 (deftype highscore-info (structure)
   ((flags uint8  :offset-assert 0) ;; highscore-flags
    )
@@ -20018,6 +20031,12 @@
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
+  )
+
+(defenum instance-flags
+  :type uint16
+  :bitfield #t
+  (no-collide 0)
   )
   
 
@@ -28662,6 +28681,32 @@
   :flag-assert         #x900004b10
   )
 
+(defenum joint-mod-mode
+  :bitfield #t
+  :type uint32
+  (flex-blend)
+  (look-at)
+  (world-look-at)
+  (rotate)
+  (joint-set)
+  (joint-set*)
+  (rotate2) ;; ??
+  (reset)
+  (polar-look-at)
+  (joint-set*-world)
+  (gun-look-at)
+  (foot-rot)
+  (joint-set-world)
+  )
+
+(defenum joint-mod-ik-flags
+  :bitfield #t
+  :type uint32
+  (enable)
+  (elbow-trans-neg)
+  (elbow-rot-neg)
+  )
+
 (define-extern drawable-vertex-ratio (function drawable debug-vertex-stats int)) ;; NOTE - defined in kernel?
 
 (deftype stack-debug (structure)
@@ -28743,6 +28788,15 @@
   :method-count-assert 9
   :size-assert         #x2c
   :flag-assert         #x90000002c
+  )
+
+(defenum joint-mod-base-flags
+  :bitfield #t
+  :type uint16
+  (attached 0)
+  (trans 1)
+  (quat 2)
+  (scale 3)
   )
 
 
@@ -33751,6 +33805,27 @@
     )
   )
 
+(defenum hud-sprite-flags
+  :type uint32
+  :bitfield #t
+  (hsf0 0)
+  (hsf1 1)
+  (hsf2 2)
+  (hsf3 3)
+  (hsf4 4)
+  (hsf5 5)
+  (hsf6 6)
+  (hsf7 7)
+  (hsf8 8)
+  (hsf9 9)
+  (hsf10 10)
+  (hsf11 11)
+  (hsf12 12)
+  (hsf13 13)
+  (hsf14 14)
+  (hsf15 15)
+  )
+
 
 
 
@@ -33846,6 +33921,14 @@
   :method-count-assert 9
   :size-assert         #x28
   :flag-assert         #x900000028
+  )
+
+(defenum hud-flags
+  :type uint32
+  :bitfield #t
+  (disable 0)
+  (should-die 1)
+  (show 2)
   )
   
 
@@ -34150,6 +34233,74 @@
   :method-count-assert 30
   :size-assert         #x18e4
   :flag-assert         #x1e186018e4
+  )
+
+(defenum inventory-icon
+  :type uint32
+  (icon0 0)
+  (icon1 1)
+  (icon2 2)
+  (icon3 3)
+  (icon4 4)
+  (icon5 5)
+  (icon6 6)
+  (icon7 7)
+  (icon8 8)
+  (icon9 9)
+  (icon10 10)
+  (icon11 11)
+  (icon12 12)
+  (icon13 13)
+  (icon14 14)
+  (icon15 15)
+  (v-turtle 16)
+  (v-snake 17)
+  (v-toad 18)
+  (v-scorpion 19)
+  (v-rhino 20)
+  (v-fox 21)
+  (v-mirage 22)
+  (v-x-ride 23)
+  (armor3 24)
+  (armor0 25)
+  (armor1 26)
+  (armor2 27)
+  (darkjak-bomb0 28)
+  (darkjak-bomb1 29)
+  (artifact-invis 30)
+  (darkjak-smack 31)
+  (lightjak-swoop 32)
+  (lightjak-regen 33)
+  (lightjak-shield 34)
+  (lightjak-freeze 35)
+  (gun-red-1 36)
+  (gun-red-2 37)
+  (gun-red-3 38)
+  (gun-yellow-1 39)
+  (gun-yellow-2 40)
+  (gun-yellow-3 41)
+  (gun-blue-1 42)
+  (gun-blue-2 43)
+  (gun-blue-3 44)
+  (gun-dark-1 45)
+  (gun-dark-2 46)
+  (gun-dark-3 47)
+  (pass-wascity 48)
+  (amulet2 49)
+  (amulet0 50)
+  (amulet1 51)
+  (seal-of-mar 52)
+  (board 53)
+  (pass-factory 54)
+  (artifact-holocube 55)
+  (artifact-beam-generator 56)
+  (artifact-prism 57)
+  (artifact-quantum-reflector 58)
+  (artifact-time-map 59)
+  (light-eco-crystal 60)
+  (dark-eco-crystal 61)
+  (eco-sphere 62)
+  (icon63 63)
   )
   
 
@@ -35841,6 +35992,21 @@
   :method-count-assert 9
   :size-assert         #xc
   :flag-assert         #x90000000c
+  )
+
+(defenum history-channel
+  :type uint8
+  (trans 0)
+  (transv 1)
+  (transv-in 2)
+  (transv-out 3)
+  (intersect 4)
+  (local-normal 5)
+  (surface-normal 6)
+  (collide-status 7)
+  (pat 8)
+  (time 9)
+  (friction 10)
   )
 
 
@@ -50213,6 +50379,13 @@
   :method-count-assert 9
   :size-assert         #xc
   :flag-assert         #x90000000c
+  )
+
+(defenum idle-control-cmd
+  :type uint8
+  (reset 0)
+  (play 1)
+  (push 2)
   )
 
 
