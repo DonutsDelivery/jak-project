@@ -21,6 +21,33 @@
    reads the base of the bitfield region."
   `(begin ,type 0))
 
+;; EE FPU multiply-accumulate inline-asm shim.
+;;
+;; The decompiler emits (.mula.s/.madda.s/.madd.s/.msuba.s/.msub.s ...)
+;; as passthroughs for the EE FPU's MULA/MADDA/MADD/MSUBA/MSUB family,
+;; which use a hidden ACC register. For offline-test compile validation
+;; (we don't run this code, only verify it compiles), we simulate ACC
+;; with a global float and rewrite the ops as ordinary set!/+/-/*.
+;; jak3 uses per-function (rlet ((acc :class fpr)) ...) wrapping but
+;; that requires a decompiler patch. The global-acc approach lets the
+;; existing decomp output (which has no rlet wrap) compile cleanly.
+(define acc (the float 0.0))
+
+(defmacro .mula.s (a b)
+  `(set! acc (the float (* ,a ,b))))
+
+(defmacro .madda.s (a b)
+  `(set! acc (the float (+ acc (* ,a ,b)))))
+
+(defmacro .madd.s (a b c)
+  `(set! ,a (the float (+ acc (* ,b ,c)))))
+
+(defmacro .msuba.s (a b)
+  `(set! acc (the float (- acc (* ,a ,b)))))
+
+(defmacro .msub.s (a b c)
+  `(set! ,a (the float (- acc (* ,b ,c)))))
+
 (defmacro init-vf0-vector ()
   "Initializes the VF0 vector which is a constant vector in the VU set to <0,0,0,1>"
   `(.lvf vf0 (new 'static 'vector :x 0.0 :y 0.0 :z 0.0 :w 1.0))
