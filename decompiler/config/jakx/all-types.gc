@@ -35570,6 +35570,11 @@
   (evan-test-bike 29)
   )
 
+(defenum vehicle-type-u8
+  :type uint8
+  :copy-entries vehicle-type
+  )
+
 (defenum traffic-spawn-flags
   :type uint32
   :bitfield #t
