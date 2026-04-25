@@ -39106,7 +39106,7 @@
 (define-extern kill-current-talker (function pair pair symbol none))
 (define-extern string->talker-speech (function string talker-speech-class))
 (define-extern talker-spawn-func (function talker-speech-class process-tree vector region sound-id))
-(define-extern talker-init (function none)) ;; (function talker-speech-class vector region none :behavior talker)
+(define-extern talker-init (function talker-speech-class vector region none :behavior talker)) ;; was: (function none) — backported from jak3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; speech                         ;;
@@ -39282,16 +39282,16 @@
 (define-extern part-tracker-subsampler-init (function none)) ;; (function part-tracker-subsampler-init-params object :behavior part-tracker-subsampler)
 (define-extern part-tracker-init (function part-tracker-init-params object :behavior part-tracker))
 (define-extern part-tracker-track-root (function sparticle-system sparticle-cpuinfo vector none))
-(define-extern lightning-tracker-init (function none)) ;; (function lightning-spec time-frame symbol process-drawable vector vector none :behavior lightning-tracker)
+(define-extern lightning-tracker-init (function lightning-spec time-frame symbol process-drawable vector vector none :behavior lightning-tracker)) ;; was: (function none) — backported from jak3
 (define-extern process-grab? (function process symbol symbol :behavior process))
 (define-extern process-release? (function process symbol :behavior process))
 (define-extern camera-look-at (function pair uint process))
 (define-extern ja-anim-done? (function process symbol))
 (define-extern camera-pov-from (function pair uint process))
-(define-extern touch-tracker-init (function none)) ;; (function vector float time-frame none :behavior touch-tracker)
+(define-extern touch-tracker-init (function vector float time-frame none :behavior touch-tracker)) ;; was: (function none) — backported from jak3
 (define-extern process-drawable-random-point! (function process-drawable vector vector))
 (define-extern process-drawable-pair-random-point! (function process-drawable process-drawable vector float vector))
-(define-extern simple-prim-init-by-other (function none)) ;; (function vector vector texture-id object :behavior simple-prim)
+(define-extern simple-prim-init-by-other (function vector vector texture-id object :behavior simple-prim)) ;; was: (function none) — backported from jak3
 (define-extern birth-func-simple-prim (function int sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern external-camera-controller-init-by-other (function none)) ;; (function entity time-frame symbol object :behavior external-camera-controller)
 
@@ -39608,9 +39608,9 @@
 
 
 
-(define-extern light-trail-tracker-init-by-other (function none)) ;; (function light-trail-tracker-spawn-params object :behavior light-trail-tracker)
-(define-extern weapon-trail-tracker-init-by-other (function none)) ;; (function weapon-trail-tracker-spawn-params object :behavior weapon-trail-tracker)
-(define-extern tread-trail-tracker-init-by-other (function none)) ;; (function light-trail-tracker-spawn-params object :behavior tread-trail-tracker)
+(define-extern light-trail-tracker-init-by-other (function light-trail-tracker-spawn-params object :behavior light-trail-tracker)) ;; was: (function none) — backported from jak3
+(define-extern weapon-trail-tracker-init-by-other (function weapon-trail-tracker-spawn-params object :behavior weapon-trail-tracker)) ;; was: (function none) — backported from jak3
+(define-extern tread-trail-tracker-init-by-other (function light-trail-tracker-spawn-params object :behavior tread-trail-tracker)) ;; was: (function none) — backported from jak3
 
 ;; tire-trail cluster (activated here — parent light-trail at L39962, light-trail-tracker at L40087)
 (deftype tire-trail (light-trail)
@@ -39859,7 +39859,7 @@
 (define-extern compute-trail-scaled-t (function uint float float float float float vector float))
 (define-extern *dist-cache-array* (pointer float)) ;; (pointer float)
 (define-extern *total-length* float) ;; float
-(define-extern light-trail-tracker-common-post (function none)) ;; (function object :behavior light-trail-tracker)
+(define-extern light-trail-tracker-common-post (function object :behavior light-trail-tracker)) ;; was: (function none) — backported from jak3
 (define-extern estimate-light-trail-mem-usage (function uint uint int))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -39871,7 +39871,7 @@
 (define-extern *lightning-alpha-subtractive* gs-alpha) ;; gs-alpha
 (define-extern matrix<-vector-yz2! (function matrix vector vector matrix))
 (define-extern choose-nice-perp (function vector vector))
-(define-extern lightning-new-tracker-init-by-other (function none)) ;; (function lightning-tracker-init-params object :behavior lightning-new-tracker)
+(define-extern lightning-new-tracker-init-by-other (function lightning-tracker-init-params object :behavior lightning-new-tracker)) ;; was: (function none) — backported from jak3
 (define-extern create-lightning-tracker-new (function none)) ;; (function lightning-tracker-init-params lightning-new-tracker)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -49630,8 +49630,8 @@
 
 
 (define-extern *water-anim-look* array) ;; (array water-anim-look)
-(define-extern water-anim-event-handler (function none)) ;; (function process int symbol event-message-block object :behavior water-anim)
-(define-extern water-anim-init-by-other (function none)) ;; (function entity-actor object :behavior water-anim)
+(define-extern water-anim-event-handler (function process int symbol event-message-block object :behavior water-anim)) ;; was: (function none) — backported from jak3
+(define-extern water-anim-init-by-other (function entity-actor object :behavior water-anim)) ;; was: (function none) — backported from jak3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; rigid-body-debug               ;;
@@ -49879,7 +49879,7 @@
 (define-extern *rb-raw-time-val* object)
 (define-extern rb-cpu-delay (function none))
 (define-extern rigid-body-queue-manager-post (function none))
-(define-extern rigid-body-queue-manager-init-by-other (function none)) ;; (function rigid-body-queue object :behavior rigid-body-queue-manager)
+(define-extern rigid-body-queue-manager-init-by-other (function rigid-body-queue object :behavior rigid-body-queue-manager)) ;; was: (function none) — backported from jak3
 (define-extern rigid-body-queue-manager-spawn (function rigid-body-queue process-tree process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -49918,7 +49918,7 @@
 
 
 (define-extern *ragdoll-test-ragdoll-setup* ragdoll-setup) ;; ragdoll-setup
-(define-extern ragdoll-test-init-by-other (function none)) ;; (function ragdoll-setup entity-actor object :behavior ragdoll-test)
+(define-extern ragdoll-test-init-by-other (function ragdoll-setup entity-actor object :behavior ragdoll-test)) ;; was: (function none) — backported from jak3
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; spartacus                      ;;
@@ -50801,8 +50801,8 @@
   
 
 
-(define-extern vehicle-manager-event-handler (function none)) ;; (function process int symbol event-message-block object :behavior vehicle-manager)
-(define-extern vehicle-manager-init-by-other (function none)) ;; (function object :behavior vehicle-manager)
+(define-extern vehicle-manager-event-handler (function process int symbol event-message-block object :behavior vehicle-manager)) ;; was: (function none) — backported from jak3
+(define-extern vehicle-manager-init-by-other (function object :behavior vehicle-manager)) ;; was: (function none) — backported from jak3
 (define-extern vehicle-manager-start (function process int)) 
 (define-extern vehicle-manager-kill (function none))
 (define-extern *car-appearance-hack* object)
@@ -51700,7 +51700,7 @@
 (define-extern set-light-value (function int float object))
 (define-extern keybd-set-time-of-day! (function none)) ;; time-of-day-palette-id undefined in jakx; revert P9 backport
 (define-extern lookup-bsp-by-name (function none))
-(define-extern editable-player-init (function none)) ;; (function symbol none :behavior editable-player)
+(define-extern editable-player-init (function symbol none :behavior editable-player)) ;; was: (function none) — backported from jak3
 (define-extern set-editable-name (function string object))
 (define-extern select-editable-by-name (function string object))
 (define-extern *editable-menu-context* debug-menu-context) ;; debug-menu-context
@@ -52551,8 +52551,8 @@
   )
 
 
-(define-extern collision-editor-default-proc-init-by-other (function none)) ;; (function object :behavior collision-editor-default-proc)
-(define-extern collision-editor-edited-proc-init-by-other (function none)) ;; (function object :behavior collision-editor-edited-proc)
+(define-extern collision-editor-default-proc-init-by-other (function object :behavior collision-editor-default-proc)) ;; was: (function none) — backported from jak3
+(define-extern collision-editor-edited-proc-init-by-other (function object :behavior collision-editor-edited-proc)) ;; was: (function none) — backported from jak3
 (define-extern *collision-editor-mesh-names* array) ;; (array string)
 (define-extern *collision-editor-art-group-name* string) ;; string
 (define-extern collision-editor-add-mesh-to-ccache (function collide-shape-prim-group collide-cache object)) 
@@ -52561,7 +52561,7 @@
 (define-extern collision-edit-get-max-prim (function process-drawable int))
 (define-extern collision-edit-get-prim (function process-drawable int collide-shape-prim))
 (define-extern *collision-edit-info* collision-edit-info) ;; collision-edit-info
-(define-extern collision-editor-init-by-other (function none)) ;; (function handle object :behavior collision-editor)
+(define-extern collision-editor-init-by-other (function handle object :behavior collision-editor)) ;; was: (function none) — backported from jak3
 (define-extern stop-collision-edit (function none))
 (define-extern collision-edit (function process (pointer process)))
 
