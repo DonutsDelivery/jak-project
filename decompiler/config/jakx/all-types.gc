@@ -36466,11 +36466,11 @@
 (define-extern etn-init-consts (function none))
 (define-extern etn-init-engine (function none))
 (define-extern etn-end-buffer (function none))
-(define-extern etn-float-reg-calc (function none))
-(define-extern etn-float-reg (function none))
+(define-extern etn-float-reg-calc (function string))
+(define-extern etn-float-reg (function string))
 (define-extern etn-floats (function symbol))
-(define-extern etn-int-reg-draw (function none))
-(define-extern etn-int-reg (function none))
+(define-extern etn-int-reg-draw (function string))
+(define-extern etn-int-reg (function string))
 (define-extern etn-ints (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -36505,8 +36505,8 @@
 (define-extern tie-near-init-engine (function none))
 (define-extern tie-near-end-buffer (function symbol))
 (define-extern tie-scissor-make-perspective-matrix (function matrix matrix matrix))
-(define-extern tie-near-int-reg (function none))
-(define-extern tie-near-float-reg (function none))
+(define-extern tie-near-int-reg (function string))
+(define-extern tie-near-float-reg (function string))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tie-work                       ;;
@@ -52875,7 +52875,7 @@
 (define-extern string-strip-leading-whitespace! "Strip leading whitespace." (function string symbol))
 (define-extern string-strip-trailing-whitespace! "String trailing whitespace." (function string symbol))
 (define-extern string-strip-whitespace! "Strip whitespace from the beginning and end of a string" (function string symbol))
-(define-extern string-upcase "Uppercase characters. If convert-dash is set, - will be uppercased to _" (function string string symbol none))
+(define-extern string-upcase "Uppercase characters. If convert-dash is set, - will be uppercased to _" (function string string symbol string))
 (define-extern string-get-arg!! (function string string symbol))
 (define-extern string->int "Convert string to int." (function string int))
 (define-extern string->float "Convert string to float. Finally implemented!" (function string float))
