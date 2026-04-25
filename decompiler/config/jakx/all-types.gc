@@ -62343,10 +62343,14 @@
 
 ;; projectile-bounce stub — inherits full projectile
 (deftype projectile-bounce (projectile)
-  ()
+  ((dummy-pb-0         uint8      7        :offset-assert 561)
+   (played-bounce-time uint64              :offset-assert 568)  ;; MIPS 564
+   (tumble-quat        quaternion :inline  :offset-assert 576)  ;; MIPS addr 572
+   (gravity            float               :offset-assert 592)  ;; MIPS 588
+   )
   :method-count-assert 72
-  :size-assert         #x231
-  :flag-assert         #x4801b00231
+  :size-assert         #x254
+  :flag-assert         #x4801d00254
   )
 
 (defenum target-geo
