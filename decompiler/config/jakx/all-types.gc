@@ -1728,7 +1728,7 @@
 (define-extern *curve-intro-carexplo-cu-scale-x* curve2d-fast)
 (define-extern *curve-intro-carexplo-cu-scale-y* curve2d-fast)
 (define-extern *part-intro-car-explo-closeup-texture-curve-settings* particle-curve-settings)
-(define-extern spt-birth-func-brightness-outro-smoke (function none))
+(define-extern spt-birth-func-brightness-outro-smoke (function float))
 (define-extern *range-carexplo-fnl-dust-color* curve-color-fast)
 (define-extern *range-carexplo-fnl-dust-alpha* curve2d-fast)
 (define-extern *range-carexplo-fnl-dust-scale-x* curve2d-fast)
@@ -1812,7 +1812,7 @@
 (define-extern spt-func-part-red-pellet-charges (function none))
 (define-extern spt-func-part-pellet-collect-blue-blurs (function none))
 (define-extern spt-func-part-pellet-collect-light-blurs (function none))
-(define-extern spt-birth-func-brightness-collectoid-dust (function none))
+(define-extern spt-birth-func-brightness-collectoid-dust (function float))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; race-obs                       ;;
@@ -36007,7 +36007,7 @@
 (define-extern *this-way-water-texture-anim-array* texture-anim-array)
 (define-extern this-way-water-texture-anim-func (function none))
 (define-extern *ocean-texture-anim-array* texture-anim-array)
-(define-extern ocean-texture-anim-time-func (function none))
+(define-extern ocean-texture-anim-time-func (function float))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; blit-displays                  ;;
@@ -40599,7 +40599,7 @@
 (define-extern line-in-view-frustum? (function vector vector symbol))
 (define-extern sphere-in-view-frustum-any? (function none))
 (define-extern line-in-view-frustum-any? (function none))
-(define-extern find-nearest-camera-distance (function none))
+(define-extern find-nearest-camera-distance (function float))
 (define-extern vis-cull (function int symbol))
 (define-extern vis-cull-debug (function work-area int symbol)) ;; (function work-area int symbol) -- work-area type not live
 (define-extern error-sphere (function drawable-error string int)) 
