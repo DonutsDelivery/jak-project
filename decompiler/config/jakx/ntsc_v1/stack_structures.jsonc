@@ -94,11 +94,7 @@
   "string->sound-name": [
     [
       16,
-      [
-        "array",
-        "sound-name",
-        1
-      ]
+      "qword"
     ]
   ],
   "sound-name->string": [
@@ -8864,8 +8860,7 @@
       16,
       "vector"
     ]
-  ]
-,
+  ],
   "insert-wall": [
     [
       32,
@@ -8875,8 +8870,7 @@
         2
       ]
     ]
-  ]
-,
+  ],
   "insert-box": [
     [
       32,
@@ -8886,71 +8880,61 @@
         8
       ]
     ]
-  ]
-,
+  ],
   "(method 15 light-trail)": [
     [
       16,
       "light-trail-breadcrumb"
     ]
-  ]
-,
+  ],
   "(method 19 light-trail)": [
     [
       16,
       "vector"
     ]
-  ]
-,
+  ],
   "(method 84 net-enemy)": [
     [
       16,
       "vector"
     ]
-  ]
-,
+  ],
   "(method 40 nav-mesh)": [
     [
       16,
       "vector"
     ]
-  ]
-,
+  ],
   "(method 33 nav-graph-editor)": [
     [
       32,
       "vector"
     ]
-  ]
-,
+  ],
   "(method 82 rigid-body-object)": [
     [
       16,
       "rigid-body-impact"
     ]
-  ]
-,
+  ],
   "(method 17 sphere-hash)": [
     [
       16,
       "vector"
     ]
-  ]
-,
+  ],
   "(method 136 vehicle)": [
     [
       16,
       "matrix"
     ]
-  ]
-,
+  ],
   "(method 230 wvehicle)": [
     [
       16,
       "wvehicle-stack-type1"
     ]
-  ]
-,
+  ],
   "(method 13 editable-plane)": [
     [
       64,
@@ -8960,8 +8944,7 @@
         4
       ]
     ]
-  ]
-,
+  ],
   "(method 13 editable-face)": [
     [
       64,
@@ -8971,22 +8954,19 @@
         6
       ]
     ]
-  ]
-,
+  ],
   "light-hash-get-bucket-index": [
     [
       16,
       "vector4w"
     ]
-  ]
-,
+  ],
   "(method 47 nav-control)": [
     [
       16,
       "find-nav-sphere-ids-params"
     ]
-  ]
-,
+  ],
   "(method 16 grid-hash)": [
     [
       16,
@@ -8996,15 +8976,13 @@
       32,
       "vector"
     ]
-  ]
-,
+  ],
   "(method 11 trsqv)": [
     [
       16,
       "vector"
     ]
-  ]
-,
+  ],
   "(method 41 nav-mesh)": [
     [
       16,
