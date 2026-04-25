@@ -2055,18 +2055,18 @@
   :size-assert         #x8c
   :flag-assert         #xc0000008c
   (:methods
-    (net-anim-control-method-9 (_type_) none) ;; 9
-    (net-anim-control-method-10 (_type_) none) ;; 10
-    (net-anim-control-method-11 (_type_) none) ;; 11
+    (net-anim-control-method-9 (_type_ object object object) none) ;; 9
+    (net-anim-control-method-10 (_type_ object object object object) none) ;; 10
+    (net-anim-control-method-11 (_type_ object object object object object object) none) ;; 11
     )
   )
 
 
-(define-extern encode-net-anim-state (function none))
-(define-extern decode-net-anim-state (function none))
+(define-extern encode-net-anim-state (function object object none))
+(define-extern decode-net-anim-state (function object object none))
 (define-extern safe-mod (function float float))
-(define-extern get-dist-based-path-pos (function none))
-(define-extern get-anim-offset (function none))
+(define-extern get-dist-based-path-pos (function object object none))
+(define-extern get-anim-offset (function object object object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-enemy-h                    ;;
