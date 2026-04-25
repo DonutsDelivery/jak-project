@@ -41108,7 +41108,7 @@
     (light-trail-method-14 (_type_) int) ;; 14
     (light-trail-method-15 (_type_) none) ;; 15
     (light-trail-method-16 (_type_ prim-strip vector rgba float float) none) ;; 16
-    (light-trail-method-17 (_type_ vector rgba float vector float) none) ;; 17
+    (light-trail-method-17 (_type_ prim-strip vector rgba float float) none) ;; 17
     (light-trail-method-18 (_type_ light-trail-breadcrumb int vector vector) none) ;; 18
     (light-trail-method-19 (_type_ light-trail-breadcrumb int vector vector) none) ;; 19
     (light-trail-method-20 (_type_) int) ;; 20
