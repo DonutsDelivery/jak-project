@@ -60960,7 +60960,7 @@
     (debug-draw (_type_) none) ;; 9
     (get-point-in-path! (_type_ vector float symbol) vector) ;; 10
     (get-random-point (_type_ vector) vector) ;; 11
-    (path-control-method-12 (_type_ vector float float) vector) ;; 12
+    (path-control-method-12 (_type_ float) quaternion) ;; 12
     (displacement-between-two-points-normalized! (_type_ vector float) vector) ;; 13
     (get-point-at-percent-along-path! (_type_ vector float symbol) vector) ;; 14
     (path-control-method-15 (_type_ vector float float) vector) ;; 15
