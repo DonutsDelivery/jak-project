@@ -28091,10 +28091,10 @@
     (run-logic? "Should this process be run? Checked by execute-process-tree." (_type_) symbol) ;; 12
     (process-tree-method-13 (_type_) none) ;; 13
     (process-nettable-method-14 (_type_) none) ;; 14
-    (process-nettable-method-15 (_type_) int) ;; 15
+    (process-nettable-method-15 (_type_ object) int) ;; 15
     (process-nettable-method-16 (_type_) int) ;; 16
-    (process-nettable-method-17 (_type_) int) ;; 17
-    (process-nettable-method-18 (_type_) int) ;; 18
+    (process-nettable-method-17 (_type_ object object object) int) ;; 17
+    (process-nettable-method-18 (_type_ object) int) ;; 18
     (process-nettable-method-19 (_type_) none) ;; 19
     (process-nettable-method-20 (_type_) none) ;; 20
     (process-nettable-method-21 (_type_) none) ;; 21
@@ -28102,22 +28102,22 @@
     (process-nettable-method-23 (_type_) symbol) ;; 23
     (process-nettable-method-24 (_type_) symbol) ;; 24
     (process-nettable-method-25 (_type_) symbol) ;; 25
-    (process-nettable-method-26 (_type_) none) ;; 26
-    (process-nettable-method-27 (_type_) none) ;; 27
-    (process-nettable-method-28 (_type_) int) ;; 28
-    (process-nettable-method-29 (_type_) none) ;; 29
-    (process-nettable-method-30 (_type_) none) ;; 30
-    (process-nettable-method-31 (_type_) none) ;; 31
-    (process-nettable-method-32 (_type_) int) ;; 32
-    (process-nettable-method-33 (_type_) none) ;; 33
-    (process-nettable-method-34 (_type_) none) ;; 34
-    (process-nettable-method-35 (_type_) int) ;; 35
+    (process-nettable-method-26 (_type_ object object) none) ;; 26
+    (process-nettable-method-27 (_type_ object) none) ;; 27
+    (process-nettable-method-28 (_type_ object) int) ;; 28
+    (process-nettable-method-29 (_type_ object object object) none) ;; 29
+    (process-nettable-method-30 (_type_ object object) none) ;; 30
+    (process-nettable-method-31 (_type_ object) none) ;; 31
+    (process-nettable-method-32 (_type_ object) int) ;; 32
+    (process-nettable-method-33 (_type_ object) none) ;; 33
+    (process-nettable-method-34 (_type_ object object) none) ;; 34
+    (process-nettable-method-35 (_type_ object) int) ;; 35
     (process-nettable-method-36 (_type_) int) ;; 36
-    (process-nettable-method-37 (_type_) none) ;; 37
-    (process-nettable-method-38 (_type_) none) ;; 38
-    (process-nettable-method-39 (_type_) none) ;; 39
+    (process-nettable-method-37 (_type_ object) none) ;; 37
+    (process-nettable-method-38 (_type_ object) none) ;; 38
+    (process-nettable-method-39 (_type_ object) none) ;; 39
     (process-nettable-method-40 (_type_) net-process-class-info) ;; 40
-    (process-nettable-method-41 (_type_) process) ;; 41
+    (process-nettable-method-41 (_type_ object) process) ;; 41
     )
   )
 
