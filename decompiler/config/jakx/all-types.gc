@@ -35924,7 +35924,7 @@
   (:methods
     (new (symbol type int) _type_) ;; 0
     (grid-hash-method-9 (_type_ int vector vector) none) ;; 9
-    (grid-hash-method-10 (_type_) int) ;; 10 ;; clear-bucket-array
+    (grid-hash-method-10 (_type_) none) ;; 10
     (grid-hash-method-11 (_type_ int vector vector vector) none) ;; 11
     (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13
