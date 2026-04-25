@@ -42736,7 +42736,7 @@
     (update-nav-controls-in-spr (_type_) none) ;; 16
     (nav-engine-method-17 (_type_ nav-engine-spr-buffer) none) ;; 17 ;; (upload-nav-to-spr (_type_ nav-engine-spr-buffer) none)
     (nav-engine-method-18 (_type_ nav-engine-spr-buffer) none) ;; 18 ;; (download-nav-from-spr (_type_ nav-engine-spr-buffer) none)
-    (nav-engine-method-19 (_type_ nav-engine-spr-buffer) none) ;; 19 ;; (do-callbacks (_type_ nav-engine-spr-buffer) none)
+    (nav-engine-method-19 (_type_ nav-engine-spr-buffer) none) ;; 19
     (nav-engine-method-20 (_type_ nav-engine-spr-buffer) none) ;; 20 ;; (reloc-ptrs-to-spad (_type_ nav-engine-spr-buffer) none)
     (nav-engine-method-21 (_type_ nav-engine-spr-buffer) none) ;; 21 ;; (reloc-ptrs-to-mem (_type_ nav-engine-spr-buffer) none)
     )
