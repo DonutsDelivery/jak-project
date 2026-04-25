@@ -41,7 +41,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-OFFLINE_TEST = ROOT / "build" / "Release" / "bin" / "offline-test"
+OFFLINE_TEST = ROOT / "build" / "Release" / "offline-test"
 JAKX_CONFIG = ROOT / "test" / "offline" / "config" / "jakx" / "config.jsonc"
 JAKX_REFS = ROOT / "test" / "decompiler" / "reference" / "jakx"
 ISO_DIR = ROOT / "iso_data"
