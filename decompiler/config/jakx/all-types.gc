@@ -12151,7 +12151,7 @@
     (level-method-19 (_type_) _type_) ;; 19
     (level-method-20 (_type_ vector object) none) ;; 20
     (level-method-21 (_type_ string) art-group) ;; 21
-    (level-method-22 (_type_ symbol) int) ;; 22
+    (set-proto-vis! (_type_ symbol) int) ;; 22
     (lookup-text (_type_ text-id symbol) string) ;; 23
     (level-method-24 (_type_) none) ;; 24 ;; (level-method-24 (_type_) none)
     (level-method-25 (_type_) _type_) ;; 25
@@ -14431,17 +14431,17 @@
     (blit-displays-work-method-13 (_type_ dma-buffer int int int) none) ;; 13
     (blit-displays-work-method-14 (_type_ dma-buffer vector) none) ;; 14
     (blit-displays-work-method-15 (_type_ dma-buffer) none) ;; 15
-    (blit-displays-work-method-16 (_type_ dma-buffer int) none) ;; 16
-    (blit-displays-work-method-17 (_type_ vector int float symbol) none) ;; 17
+    (draw-zoom-blur (_type_ dma-buffer int) none) ;; 16
+    (setup-zoom-blur-2d (_type_ vector int float symbol) none) ;; 17
     (blit-displays-work-method-18 (_type_ dma-buffer float float) none) ;; 18
     (blit-displays-work-method-19 (_type_) none) ;; 19
     (blit-displays-work-method-20 (_type_ int) int) ;; 20
-    (blit-displays-work-method-21 (_type_) none) ;; 21
-    (blit-displays-work-method-22 (_type_) none) ;; 22
-    (blit-displays-work-method-23 (_type_) none) ;; 23
-    (blit-displays-work-method-24 (_type_ symbol) none) ;; 24
+    (get-menu-mode (_type_) symbol) ;; 21
+    (get-screen-copied (_type_) symbol) ;; 22
+    (get-horizontal-flip-flag (_type_) symbol) ;; 23
+    (set-menu-mode (_type_ symbol) symbol) ;; 24
     (blit-displays-work-method-25 (_type_ symbol) none) ;; 25
-    (blit-displays-work-method-26 (_type_ symbol) int) ;; 26
+    (set-horizontal-flip-flag (_type_ symbol) symbol) ;; 26
     )
   )
   
@@ -20556,7 +20556,7 @@
   (:methods
     (new (symbol type) _type_) ;; 0
     (joint-control-method-9 (_type_) float) ;; 9
-    (joint-control-method-10 (_type_) none) ;; 10
+    (update-anim-data (_type_) none) ;; 10
     (joint-control-method-11 (_type_ symbol) int) ;; 11
     (joint-control-method-12 (_type_ int) joint-control-channel) ;; 12
     )
@@ -21068,7 +21068,7 @@
   :size-assert         #xa4
   :flag-assert         #xe000000a4
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type lightning-spec process float) _type_)
+    (new (symbol type lightning-spec process float) _type_) ;; 0
     (lightning-control-method-9 (_type_) none) ;; 9 ;; (change-mode (_type_ lightning-mode) lightning-mode)
     (lightning-control-method-10 (_type_) none) ;; 10 ;; (get-mode (_type_) lightning-mode)
     (set-point! (_type_ int vector) none) ;; 11
@@ -29795,7 +29795,7 @@
     (collide-shape-method-40 (_type_ overlaps-others-params) object) ;; 40
     (shove-to-closest-point-on-path (_type_ attack-info float) vector) ;; 41
     (should-push-away (_type_ collide-shape collide-query) symbol) ;; 42
-    (collide-shape-method-43 (_type_ pull-rider-info) none) ;; 43
+    (pull-rider! (_type_ pull-rider-info) none) ;; 43
     (pull-riders! (_type_) symbol) ;; 44
     (do-push-aways (_type_) collide-spec) ;; 45
     (collide-shape-method-46 (_type_) int) ;; 46
@@ -30373,7 +30373,7 @@
     (cubic-curve-method-10 (_type_ vector float) vector) ;; 10
     (cubic-curve-method-11 (_type_ vector float) vector) ;; 11
     (cubic-curve-method-12 (_type_ vector float) vector) ;; 12
-    (cubic-curve-method-13 (_type_) int) ;; 13 ;; (debug-draw-curve (_type_) none)
+    (debug-draw-curve (_type_) none) ;; 13
     )
   )
 
@@ -40492,7 +40492,7 @@
   ;; field cloth-flag is likely a value type.
   (:methods
     (cloth-system-method-16 (_type_ cloth-params) none) ;; 16
-    (cloth-system-method-17 (_type_) int) ;; 17
+    (debug-draw-spheres (_type_) none) ;; 17
     (cloth-system-method-18 (_type_) none) ;; 18
     (cloth-system-method-19 (_type_) symbol) ;; 19
     (cloth-system-method-20 (_type_) symbol) ;; 20
@@ -41445,7 +41445,7 @@
   :size-assert         #x74
   :flag-assert         #x1700000074
   (:methods
-    (lightning-bolt-method-9 (_type_ int int lightning-appearance) int) ;; 9
+    (init! (_type_ int int lightning-appearance) none) ;; 9
     (lightning-bolt-method-10 (_type_ uint) none) ;; 10
     (lightning-bolt-method-11 (_type_) int) ;; 11
     (lightning-bolt-method-12 (_type_) int) ;; 12
@@ -43002,7 +43002,7 @@
   (:methods
     (new (symbol type) _type_) ;; 0
     (draw-path (_type_) none) ;; 9
-    (flow-control-method-10 (_type_ (pointer float) int) none) ;; 10
+    (setup (_type_ (pointer float) int) none) ;; 10
     (flow-control-method-11 (_type_ process-focusable) none) ;; 11
     (find-and-push-things (_type_) none) ;; 12
     (flow-control-method-13 (_type_ water-info vector) none) ;; 13
@@ -53294,7 +53294,7 @@
   :flag-assert         #x2400000030
 ;; DEAD: editor infrastructure
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type vector editable-region) _type_)
+    (new (symbol type vector editable-region) _type_) ;; 0
     )
   )
 |#
@@ -54518,7 +54518,7 @@
   :flag-assert         #xc0000001c
   (:methods
     (collision-edit-info-method-9 (_type_) none) ;; 9
-    (collision-edit-info-method-10 (_type_ process-drawable) int) ;; 10
+    (draw-menu (_type_ process-drawable) none) ;; 10
     (collision-edit-info-method-11 (_type_ process-drawable) symbol) ;; 11
     )
   )
