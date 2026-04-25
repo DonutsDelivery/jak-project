@@ -53377,7 +53377,7 @@
   :flag-assert         #x2500000044
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type vector float editable-region) _type_)
-    (editable-entity-method-36 (_type_) none) ;; 36 ;; (editable-entity-method-36 (_type_) none)
+    (editable-entity-method-36 (_type_) none) ;; 36
     )
   )
 |#
