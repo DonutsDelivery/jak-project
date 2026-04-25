@@ -53406,7 +53406,7 @@
   :flag-assert         #x2600000058
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type editable-region) _type_)
-    (editable-face-method-36 (_type_) none) ;; 36 ;; (editable-face-method-36 (_type_) none)
+    (editable-face-method-36 (_type_ (inline-array vector)) int) ;; 36
     (editable-face-method-37 (_type_) none) ;; 37 ;; (editable-face-method-37 (_type_) none)
     )
   )
