@@ -17052,7 +17052,7 @@
   :size-assert         #x20
   :flag-assert         #x1400000020
   (:methods
-    (debug-draw-region (_type_ int) int) ;; 17
+    (debug-draw-region (_type_ int) none) ;; 17
     (track-region (_type_ region-prim-area) symbol) ;; 18
     (within-area? "@returns Whether or not the object overlaps with the provided [[region-prim-area]]'s extent" (_type_ region-prim-area) symbol) ;; 19
     )
@@ -60914,7 +60914,7 @@
   :flag-assert         #xe00000410
   (:methods
     (new (symbol type) _type_) ;; 0
-    (add-touching-prims (_type_ object object float object object) none) ;; 9
+    (add-touching-prims (_type_ collide-shape-prim collide-shape-prim float collide-tri-result collide-tri-result) none) ;; 9
     (free-nodes (_type_) none) ;; 10
     (update-from-step-size (_type_ float) none) ;; 11
     (send-events-for-touching-shapes (_type_) none) ;; 12
