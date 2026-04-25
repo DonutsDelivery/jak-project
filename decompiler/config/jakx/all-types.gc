@@ -19822,6 +19822,20 @@
   ;; field param1 uses ~A with a signed load. field param2 uses ~A with a signed load. field param3 uses ~A with a signed load.
   )
 
+(defenum talker-flags
+  :type uint16
+  :bitfield #t
+  (play-only-once 0)
+  (reduce-volume 1)
+  (auto-save-on-each-start 2)
+  (auto-save-once-on-exit 3)
+  (only-play-in-region 4)
+  (fade-in 5)
+  (slide-in 6)
+  (bigger-font 7)
+  (long-timeout 8)
+  )
+
 ;; (deftype gui-control (basic)
 ;;   ()
 ;;   :flag-assert #x1a00001080
@@ -21094,6 +21108,43 @@
   (:methods
     (set-gravity-length (_type_ float) int) ;; 9
     )
+  )
+
+(defenum surface-flag
+  :bitfield #t
+  :type uint32
+
+  (look-around         0) ;; 1
+  (xz-local            1) ;; 2
+  (smooth-collision    2) ;; 4
+  (no-turn-around      3) ;; 8
+  (turn-to-pad         4) ;; 16
+  (turn-to-vel         5) ;; 32
+  (no-jump             6) ;; 64
+  (no-attack           7) ;; 128
+  (no-hands            8) ;; 256
+  (no-feet             9) ;; 512
+  (check-edge         10) ;; 1024
+  (air                11) ;; 2048
+  (attack             12) ;; 4096
+  (duck               13) ;; 8192
+  (momentum           14) ;; 16384
+  (turn-when-centered 15) ;; 32768
+
+  (turn-to-alt        16) ;; hi 1
+  (spin               17) ;; hi 2
+  (super              18) ;; hi 4
+  (gun-inactive       19) ;; hi 8
+  (gun-hide           20) ;; hi 16
+  (gun-off            21) ;; hi 32
+  (gun-fast-exit      22) ;; hi 64
+  (gun-direct         23) ;; hi 128
+  (gun-strafe         24) ;; hi 256
+  (gun-no-twist       25) ;; hi 512
+  (laser-hide         26) ;; hi 1024
+  (no-board           27) ;; hi 2048
+  (gun-turn-fast      28) ;; hi 4096
+  (sf29 29)
   )
 
 (define-extern time-to-apex (function float float int))
@@ -28887,6 +28938,12 @@
     )
   )
 
+(defenum sync-flags
+  :type uint64
+  :bitfield #t
+  (pong 0)
+  )
+
 
 (define-extern *scene-player* (pointer scene-player))
 (define-extern *debug-menu-scene-play* object)
@@ -33985,6 +34042,56 @@
   (float-store 7)
   )
 
+(defenum sp-launch-state-flags
+  :bitfield #t
+  :type uint16
+  (sp0)
+  (sp1)
+  (sp2)
+  )
+
+(defenum sp-group-item-flag
+  :bitfield #t
+  :type uint16
+  (is-3d)
+  (sp1)
+  (sp2)
+  (sp3)
+  (sp4)
+  (sp5)
+  (sp6)
+  (sp7)
+  (sp8)
+  (sp9)
+  (sp10)
+  (sp11)
+  (sp12)
+  (sp13)
+  (sp14)
+  (sp15)
+  )
+
+(defenum sp-group-flag
+  :bitfield #t
+  :type uint16
+  (sp0)
+  (sp1)
+  (sp2)
+  (sp3)
+  (sp4)
+  (sp5)
+  (sp6)
+  (sp7)
+  (sp8)
+  (sp9)
+  (sp10)
+  (sp11)
+  (sp12)
+  (sp13)
+  (sp14)
+  (sp15)
+  )
+
 (deftype sparticle-birthinfo (structure)
   ((sprite       uint32   :offset-assert 0)
    (anim         int32    :offset-assert 4)
@@ -36328,6 +36435,13 @@
   :flag-assert         #x90000004c
   )
 
+(defenum sprite-aux-type
+  :bitfield #f
+  :type uint32
+  (distort 0)
+  (glow 1)
+  )
+
 
 
   
@@ -37978,6 +38092,12 @@
   :method-count-assert 9
   :size-assert         #x140
   :flag-assert         #x900000140
+  )
+
+(defenum spooler-flags
+  :bitfield #t
+  :type uint32
+  (blackout-on-stall)
   )
   
 
@@ -61955,6 +62075,28 @@
   :method-count-assert 72
   :size-assert         #x231
   :flag-assert         #x4801b00231
+  )
+
+(defenum target-effect
+  :type uint64
+  :bitfield #t
+  (te0 0)
+  (te1 1)
+  (te2 2)
+  (te3 3)
+  (te4 4)
+  (te5 5)
+  (te6 6)
+  )
+
+(defenum target-anim
+  :type int32
+  (uninitialized -2)
+  (unknown -1)
+  (default 0)
+  (board 1)
+  (dark 2)
+  (light 3)
   )
 
 ;; joint-mod-polar-look-at stub
