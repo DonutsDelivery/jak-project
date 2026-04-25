@@ -3882,31 +3882,31 @@
 (define-extern spawn-special-intro-hud-view (function object))
 (define-extern spawn-special-intro-hud (function none))
 (define-extern spawn-intro-hud (function none))
-(define-extern set-battle-camera-matrix (function none))
-(define-extern cam-battle-intro-player-update (function none))
-(define-extern cam-battle-intro-update (function none))
-(define-extern update-framing (function symbol))
+(define-extern set-battle-camera-matrix (function object object object object object object none))
+(define-extern cam-battle-intro-player-update (function object object none))
+(define-extern cam-battle-intro-update (function object object object none))
+(define-extern update-framing (function object symbol))
 (define-extern do-battle-intro (function none))
 (define-extern cam-battle-intro state)
-(define-extern print-intro-text (function none))
-(define-extern cam-event-intro-update (function none))
+(define-extern print-intro-text (function object none))
+(define-extern cam-event-intro-update (function object object object none))
 (define-extern do-event-intro (function none))
 (define-extern cam-event-intro state)
-(define-extern calc-team-score (function none))
+(define-extern calc-team-score (function object none))
 (define-extern net-game-mgr-default-handler (function none))
 (define-extern reset-game-now (function none))
 (define-extern check-body-part-award (function none))
 (define-extern net-game-mgr-init-local (function none))
 (define-extern late-join-spawn-players (function none))
 (define-extern wait-for-all-net-players (function none))
-(define-extern play-mode-startup-hook (function none))
-(define-extern get-game-mgr-type (function none))
-(define-extern spawn-game-mgr (function symbol))
+(define-extern play-mode-startup-hook (function object none))
+(define-extern get-game-mgr-type (function object none))
+(define-extern spawn-game-mgr (function object symbol))
 (define-extern *backup-player-ladder-stats* object)
 (define-extern *tmp-awards* object)
 (define-extern *award-table* array)
-(define-extern overall-score-amount-to-gamble (function none))
-(define-extern award-overall-score (function none))
+(define-extern overall-score-amount-to-gamble (function object none))
+(define-extern award-overall-score (function object none))
 (define-extern got-other-players (function symbol))
 (define-extern quit-game-stats-update (function none))
 (define-extern current-level-difficulty (function none))
@@ -47293,16 +47293,16 @@
     )
   (:methods
     (net-game-mgr-method-44 (_type_) none) ;; 44
-    (net-game-mgr-method-45 (_type_) none) ;; 45
+    (net-game-mgr-method-45 (_type_ object) none) ;; 45
     (net-game-mgr-method-46 (_type_) symbol) ;; 46
     (net-game-mgr-method-47 (_type_) none) ;; 47
     (net-game-mgr-method-48 (_type_) symbol) ;; 48
     (net-game-mgr-method-49 (_type_) int) ;; 49
     (net-game-mgr-method-50 (_type_) symbol) ;; 50
     (net-game-mgr-method-51 (_type_) symbol) ;; 51
-    (net-game-mgr-method-52 (_type_) process) ;; 52
-    (net-game-mgr-method-53 (_type_) none) ;; 53
-    (net-game-mgr-method-54 (_type_) none) ;; 54
+    (net-game-mgr-method-52 (_type_ object) process) ;; 52
+    (net-game-mgr-method-53 (_type_ object) none) ;; 53
+    (net-game-mgr-method-54 (_type_ object object object object) none) ;; 54
     (net-game-mgr-method-55 (_type_) float) ;; 55
     (net-game-mgr-method-56 (_type_) none) ;; 56
     (net-game-mgr-method-57 (_type_) none) ;; 57
@@ -47314,8 +47314,8 @@
     (net-game-mgr-method-63 (_type_) int) ;; 63
     (net-game-mgr-method-64 (_type_) int) ;; 64
     (net-game-mgr-method-65 (_type_) string) ;; 65
-    (net-game-mgr-method-66 (_type_) none) ;; 66
-    (net-game-mgr-method-67 (_type_) none) ;; 67
+    (net-game-mgr-method-66 (_type_ object) none) ;; 66
+    (net-game-mgr-method-67 (_type_ object) none) ;; 67
     (net-game-mgr-method-68 (_type_) none) ;; 68
     (net-game-mgr-method-69 (_type_) int) ;; 69
     (net-game-mgr-method-70 (_type_) symbol) ;; 70
@@ -47325,7 +47325,7 @@
     (net-game-mgr-method-74 (_type_) int) ;; 74
     (net-game-mgr-method-75 (_type_) int) ;; 75
     (net-game-mgr-method-76 (_type_) symbol) ;; 76
-    (net-game-mgr-method-77 (_type_) symbol) ;; 77
+    (net-game-mgr-method-77 (_type_ object) symbol) ;; 77
     (net-game-mgr-method-78 (_type_) int) ;; 78
     (net-game-mgr-method-79 (_type_) none) ;; 79
     )
