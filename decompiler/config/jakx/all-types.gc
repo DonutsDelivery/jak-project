@@ -36397,8 +36397,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern transformq-copy! "Set arg0 = arg1." (function transformq transformq transformq))
-(define-extern matrix<-transformq! "Convert to 4x4 affine transform." (function matrix transformq matrix))
-(define-extern matrix<-no-trans-transformq! "Create 4x4 affine transform with no translation." (function matrix transformq matrix))
+(define-extern matrix<-transformq! (function matrix transformq matrix))
+(define-extern matrix<-no-trans-transformq! (function matrix transformq matrix))
 (define-extern matrix<-transformq+trans!
   "Convert to affine transform with an additional translation (in the local frame)."
   (function matrix transformq vector matrix))
@@ -37722,8 +37722,8 @@
 
 
 (define-extern unpack-comp-rle "Decompress data compressed with run-length encoding." (function (pointer int8) (pointer int8) (pointer int8)))
-(define-extern unpack-comp-huf "Decompress data compressed with huffman encoding." (function (pointer uint8) (pointer uint8) uint huf-dictionary-node none))
-(define-extern unpack-comp-lzo "Decompress data compressed with LZO encoding." (function (pointer uint8) (pointer uint8) none))
+(define-extern unpack-comp-huf (function (pointer uint8) (pointer uint8) uint huf-dictionary-node none))
+(define-extern unpack-comp-lzo (function (pointer uint8) (pointer uint8) none))
 (define-extern pack-comp-rle "Compress data, used for map mask stuff." (function (pointer uint8) (pointer uint8) int int (pointer uint8)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -37971,11 +37971,11 @@
 (define-extern tie-vu1-block vu-function)
 (define-extern tie-init-consts (function tie-consts gs-alpha gs-test gs-test none)) ;; was: (function none) — backported from jak3
 (define-extern tie-init-engine (function dma-buffer gs-alpha gs-test gs-test none))
-(define-extern tie-end-buffer (function dma-buffer int)) 
+(define-extern tie-end-buffer "Set up DMA to finish TIE." (function dma-buffer none))
 (define-extern tie-int-reg (function int string))
 (define-extern tie-float-reg (function int string))
 (define-extern tie-ints (function symbol))
-(define-extern tie-floats "Dump TIE float regs for debug." (function none))
+(define-extern tie-floats (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; etie-vu1                       ;;
@@ -52511,7 +52511,7 @@
 ;; vehicle-effects                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern calc-fade-vals (function float none))
+(define-extern calc-fade-vals "@unused just a debugging print function" (function float none))
 (define-extern *vehicle-headlight-glow-template* sprite-glow-data) ;; sprite-glow-data
 (define-extern *vehicle-taillight-glow-template* sprite-glow-data) ;; sprite-glow-data
 (define-extern *vehicle-thruster-glow-template* sprite-glow-data) ;; sprite-glow-data
@@ -54831,20 +54831,20 @@
 (define-extern string<?
                "Slightly incorrect ordering of strings."
                (function string string symbol))
-(define-extern string>? "Slightly incorrect ordering of strings." (function string string symbol))
-(define-extern string<=? "Slightly incorrect ordering of strings." (function string string symbol))
-(define-extern string>=? "Slightly incorrect ordering of strings." (function string string symbol))
+(define-extern string>? (function string string symbol))
+(define-extern string<=? (function string string symbol))
+(define-extern string>=? (function string string symbol))
 (define-extern *string-tmp-str* string)
 (define-extern string-skip-to-char "Advance to the given character."
                (function (pointer uint8) uint (pointer uint8)))
-(define-extern string-cat-to-last-char "Append append-str to end of base-str, up to the last occurance of char" (function string string uint (pointer uint8)))
+(define-extern string-cat-to-last-char (function string string uint (pointer uint8)))
 (define-extern string-skip-whitespace "Jump over whitespace chars."
                (function (pointer uint8) (pointer uint8)))
 (define-extern string-suck-up! "Move the string forward so the pointer is now at the beginning."
                (function string (pointer uint8) symbol))
-(define-extern string-strip-leading-whitespace! "Strip leading whitespace." (function string symbol))
-(define-extern string-strip-trailing-whitespace! "String trailing whitespace." (function string symbol))
-(define-extern string-strip-whitespace! "Strip whitespace from the beginning and end of a string" (function string symbol))
+(define-extern string-strip-leading-whitespace! (function string symbol))
+(define-extern string-strip-trailing-whitespace! (function string symbol))
+(define-extern string-strip-whitespace! (function string symbol))
 (define-extern string-upcase "Uppercase characters. If convert-dash is set, - will be uppercased to _" (function string string symbol string))
 (define-extern string-get-arg!! (function string string symbol))
 (define-extern string->int "Convert string to int." (function string int))
