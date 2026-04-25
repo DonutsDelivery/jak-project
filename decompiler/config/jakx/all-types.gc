@@ -14111,12 +14111,12 @@
   (:methods
     (car-info-full-method-9 (_type_) none) ;; 9
     (car-info-full-method-10 (_type_) none) ;; 10
-    (car-info-full-method-11 (_type_) int) ;; 11
-    (car-info-full-method-12 (_type_) none) ;; 12
+    (car-info-full-method-11 (_type_ car-hsv-color) int) ;; 11
+    (car-info-full-method-12 (_type_ car-hsv-color) none) ;; 12
     (car-info-full-method-13 (_type_) int) ;; 13
-    (car-info-full-method-14 (_type_) none) ;; 14
+    (car-info-full-method-14 (_type_ uint) none) ;; 14
     (car-info-full-method-15 (_type_) none) ;; 15
-    (car-info-full-method-16 (_type_) none) ;; 16
+    (car-info-full-method-16 (_type_ bucket-id) none) ;; 16
     (car-info-full-method-17 (_type_) none) ;; 17
     (car-info-full-method-18 (_type_) none) ;; 18
     (car-info-full-method-19 (_type_) none) ;; 19
