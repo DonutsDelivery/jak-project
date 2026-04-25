@@ -59554,9 +59554,9 @@
    (value       float                          :offset-assert 600)
    (sat-lum-pos vector                 :inline :offset-assert 608)
    )
-  :method-count-assert 70
+  :method-count-assert 69
   :size-assert         #x270
-  :flag-assert         #x4601e00270
+  :flag-assert         #x4501e00270
   (:state-methods
     running ;; 52
     )
@@ -61681,7 +61681,7 @@
 ;; (define-extern patch-group object)  ;; clobbers active deftype
 (define-extern prototype-tie-work object)
 ;;(define-extern race-mesh-hash object)
-(define-extern sprite-frame-data object)
+;; (define-extern sprite-frame-data object) ;; clobbers active deftype (Lane SM round 1 batch 3)
 ;;(define-extern text-display-deflected-view-1 object)
 ;;(define-extern tire-trail-tracker object)
 ;; (define-extern v-wpn-red-smoke object) ;; activated as deftype
@@ -62955,4 +62955,62 @@
   :method-count-assert 9
   :size-assert         #x2a0
   :flag-assert         #x9000002a0
+  )
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Lane SM2 batch 1 — small struct + enum activations
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; from jak3 all-types.gc L70948 — small struct, no deps
+(deftype triangle-dists (structure)
+  ((dist0 float  :offset-assert 0)
+   (dist1 float  :offset-assert 4)
+   )
+  :method-count-assert 9
+  :size-assert         #x8
+  :flag-assert         #x900000008
+  )
+
+;; from jak3 all-types.gc L70939 — pos + matrix
+(deftype assault-cam-info (structure)
+  ((pos vector :inline :offset-assert 0)
+   (mat matrix :inline :offset-assert 16)
+   )
+  :method-count-assert 9
+  :size-assert         #x50
+  :flag-assert         #x900000050
+  )
+
+;; from jak3 all-types.gc L47107 — bombbot path node (vector + nav-mesh-id)
+(deftype bombbot-node (structure)
+  ((position    vector :inline :offset-assert 0)
+   (nav-mesh-id uint32         :offset-assert 16)
+   (pos-x       float          :offset 0)
+   (pos-y       float          :offset 4)
+   (pos-z       float          :offset 8)
+   )
+  :method-count-assert 9
+  :size-assert         #x14
+  :flag-assert         #x900000014
+  )
+
+;; from jak3 all-types.gc L57844 — wheel surface flag enum
+(defenum vehicle-wheel-surface-flag
+  :type uint8
+  :bitfield #t
+  (moving)
+  )
+
+;; from jak3 all-types.gc L57852 — wheel surface type enum
+(defenum vehicle-wheel-surface-type
+  :type uint8
+  (stone)
+  (dirt)
+  (sand)
+  (quicksand)
+  (water)
+  (wall)
+  (conveyor)
+  (none)
   )
