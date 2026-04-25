@@ -12181,6 +12181,7 @@
 
 (deftype level-group (basic)
   ((length            int32                    :offset-assert 4)
+   (log-in-level-bsp  bsp-header               :offset-assert 8)
    (top-level level :offset 12) ;; added
    (entity-link       entity-links             :offset-assert 16)
    (border?           symbol                   :offset-assert 20) ;; guessed by decompiler
@@ -19051,14 +19052,18 @@
   )
 
 (deftype shadow-edge (structure)
-  ((ind-0 uint8  :offset-assert 0)
-   (ind-1 uint8  :offset-assert 1)
-   (tri-0 uint8  :offset-assert 2)
-   (tri-1 uint8  :offset-assert 3)
+  ((ind-0 uint16 :offset-assert 0)
+   (ind-1 uint16 :offset-assert 2)
+   (tri-0 uint16 :offset-assert 4)
+   (tri-1 uint16 :offset-assert 6)
+   (byte-0 uint8 :overlay-at ind-0)
+   (byte-1 uint8 :offset 1)
+   (byte-2 uint8 :overlay-at ind-1)
+   (byte-3 uint8 :offset 3)
    )
   :method-count-assert 9
-  :size-assert         #x4
-  :flag-assert         #x900000004
+  :size-assert         #x8
+  :flag-assert         #x900000008
   )
 
 (deftype shadow-tri (structure)
@@ -34634,9 +34639,8 @@
 
 
 
-#|
 (deftype hud-corners (structure)
-  ((data uint8 4 :offset-assert 0)
+  ((data uint8 32 :offset-assert 0)
    )
   :method-count-assert 10
   :size-assert         #x20
@@ -34645,7 +34649,6 @@
     (hud-corners-method-9 (_type_) none) ;; 9
     )
   )
-|#
 
 
 
