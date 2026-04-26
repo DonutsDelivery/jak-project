@@ -1114,6 +1114,7 @@
 (define-extern *user* symbol)
 (define-extern scf-get-volume "Defined in the kernel" (function int))
 (define-extern scf-get-language "Defined in the kernel" (function language-enum))
+(define-extern scf-get-aspect "Defined in the kernel" (function uint))
 (define-extern remove-exit
                "Remove the top stack frame. If you have no other stack frames, you can use this before a `go`
                 to skip the `exit` of the state you are currently in."
