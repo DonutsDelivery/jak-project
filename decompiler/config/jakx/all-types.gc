@@ -1069,11 +1069,12 @@
    (trans-hook       function                                                          :offset-assert 88) ;; jak3@80+8=88, MIPS 84 ✓ (gstate sw #f,84)
    (post-hook        function                                                          :offset-assert 92) ;; jak3@84+8=92, MIPS 88 ✓
    (event-hook       (function process int symbol event-message-block object)         :offset-assert 96) ;; jak3@88+8=96, MIPS 92 ✓
-   (allocated-length int32                                                             :offset-assert 100) ;; jak3@92+8=100
-   (heap-base        pointer                                                           :offset-assert 104) ;; jak3@96+8=104
-   (heap-top         pointer                                                           :offset-assert 108) ;; jak3@100+8=108
-   (heap-cur         pointer                                                           :offset-assert 112) ;; jak3@104+8=112
-   (stack-frame-top  stack-frame                                                       :offset-assert 124) ;; guessed by decompiler
+   (allocated-length int32                                                             :offset-assert 100) ;; MIPS 96 ✓ (gkernel:new lw 96)
+   (pad-unknown      uint32                                                    2)                          ;; GOAL 104-111, 8 bytes (like jak2's pad-unknown-0), MIPS 100-107
+   (heap-base        pointer                                                           :offset-assert 112) ;; MIPS 108 ✓ (gkernel:new sw 108 = process+140)
+   (heap-top         pointer                                                           :offset-assert 116) ;; MIPS 112 ✓ (gkernel:new sw 112 = process+140+size)
+   (heap-cur         pointer                                                           :offset-assert 120) ;; MIPS 116 ✓ (gkernel:new sw 116 = process+140)
+   (stack-frame-top  stack-frame                                                       :offset-assert 124) ;; MIPS 120 ✓ (gstate:lwu 120, gkernel:new sw 120)
    (connection-list  connectable                                              :inline  :offset-assert 128)
    (stack            uint8                                                    :dynamic :offset-assert 144) ;; guessed by decompiler
    )
