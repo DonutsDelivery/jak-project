@@ -20116,7 +20116,7 @@
     (speech-channel-method-13 (_type_) int) ;; 13
     (speech-channel-method-14 (_type_ speech-type float) int) ;; 14
     (speech-channel-method-15 (_type_ uint) none) ;; 15
-    (speech-channel-method-16 (_type_ int) none) ;; 16
+    (speech-channel-method-16 (_type_ int) int) ;; 16
     )
   )
 
@@ -29821,7 +29821,7 @@
     (collide-shape-method-29 (_type_ vector) int) ;; 29
     (debug-draw (_type_) int) ;; 30
     (collide-shape-method-31 (_type_ float collide-query) int) ;; 31
-    (fill-cache-integrate-and-collide (_type_ vector collide-query meters) none) ;; 32
+    (fill-cache-integrate-and-collide (_type_ vector collide-query meters) int) ;; 32
     (find-prim-by-id (_type_ uint) collide-shape-prim) ;; 33
     (find-prim-by-id-logtest (_type_ uint) collide-shape-prim) ;; 34
     (collide-shape-method-35 (_type_) joint-control-status) ;; 35
@@ -35869,7 +35869,7 @@
     (nav-state-method-52 (_type_) int) ;; 52 ;; navigate-using-route-portals
     (nav-state-method-53 (_type_) int) ;; 53
     (nav-state-method-54 (_type_) int) ;; 54 ;; navigate-within-poly
-    (nav-state-method-55 (_type_) none) ;; 55
+    (nav-state-method-55 (_type_) int) ;; 55
     (nav-state-method-56 (_type_) int) ;; 56
     )
   )
@@ -36006,7 +36006,7 @@
     (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
-    (grid-hash-method-15 (_type_ int int int) int) ;; 15 ;; dump-grid-info
+    (grid-hash-method-15 (_type_ int int int) none) ;; 15 ;; dump-grid-info
     (grid-hash-method-16 (_type_ rgba) int) ;; 16
     (grid-hash-method-17 (_type_) int) ;; 17
     (grid-hash-method-18 (_type_ grid-hash-box grid-hash-box) none) ;; 18
@@ -41528,7 +41528,7 @@
     (lightning-bolt-method-12 (_type_) int) ;; 12
     (lightning-bolt-method-13 (_type_ int) int) ;; 13
     (lightning-bolt-method-14 (_type_) uint) ;; 14
-    (lightning-bolt-method-15 (_type_ object int lightning-span-internal) none) ;; 15
+    (lightning-bolt-method-15 (_type_ object int lightning-span-internal) int) ;; 15
     (lightning-bolt-method-16 (_type_ vector float float vector matrix) none) ;; 16
     (lightning-bolt-method-17 (_type_ uint float float curve2d-fast float) float) ;; 17
     (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none) ;; 18 ;; (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none)
