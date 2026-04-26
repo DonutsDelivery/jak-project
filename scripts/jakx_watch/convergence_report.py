@@ -63,9 +63,16 @@ def label_of(row: dict) -> str:
 
 
 def per_applier_yield(rows: list[dict]) -> dict:
-    """For each applier label, sum Δrc / Δftp / Δrm vs prior STABLE row."""
+    """For each applier label, sum Δpass / Δrc / Δftp / Δrm vs prior STABLE row.
+
+    Δpass (offline_test_pass) is the PRIMARY yield signal — real correctness
+    via compile + bytematch transitivity. Δrc is the leading indicator only
+    (text-scan proxy). When Δrc moves but Δpass doesn't, the applier is
+    producing rc-shaped noise (suppress-not-fix pattern).
+    """
     yields = defaultdict(lambda: {
         "n_commits": 0,
+        "delta_pass_sum": 0,
         "delta_rc_sum": 0,
         "delta_ftp_sum": 0,
         "delta_rm_sum": 0,
@@ -78,6 +85,10 @@ def per_applier_yield(rows: list[dict]) -> dict:
         if prev_stable is not None:
             label = label_of(r)
             yields[label]["n_commits"] += 1
+            yields[label]["delta_pass_sum"] += (
+                r.get("offline_test_pass", 0)
+                - prev_stable.get("offline_test_pass", 0)
+            )
             yields[label]["delta_rc_sum"] += (
                 r.get("files_real_clean", 0) - prev_stable.get("files_real_clean", 0)
             )
@@ -217,6 +228,12 @@ def position_summary(rows: list[dict]) -> dict:
     return {
         "ts": latest.get("ts"),
         "sha": latest.get("sha"),
+        "ot_attempted": latest.get("offline_test_attempted", 0),
+        "ot_pass": latest.get("offline_test_pass", 0),
+        "ot_partial": latest.get("offline_test_partial", 0),
+        "ot_pass_pct": latest.get("offline_test_pass_pct", 0.0),
+        "ot_stale": latest.get("offline_test_stale", True),
+        "ot_age_sec": latest.get("offline_test_age_sec", 0),
         "rc_position": f"{latest.get('files_real_clean', 0)}/{latest.get('files_total', 0)}"
                        f" ({latest.get('files_real_clean_pct', 0):.2f}%)",
         "sig_position": f"{latest.get('method_decls_complete', 0)}/{latest.get('method_decls_total', 0)}"
@@ -233,7 +250,20 @@ def render(rows: list[dict]) -> str:
     pos = position_summary(rows)
     if pos:
         out.append(f"\n=== POSITION (latest stable, {pos['sha']} {pos['ts']}) ===")
-        out.append(f"  rc:  {pos['rc_position']}   ← primary, ceiling 100%")
+        # PRIMARY: real correctness (compile + bytematch via _REF.gc transitivity)
+        if pos["ot_attempted"] > 0:
+            stale_marker = "  ⚠ STALE" if pos["ot_stale"] else ""
+            out.append(f"  pass: {pos['ot_pass']}/{pos['ot_attempted']} "
+                       f"({pos['ot_pass_pct']:.2f}%) "
+                       f"← PRIMARY (compile + _REF.gc match){stale_marker}")
+            out.append(f"        partial: {pos['ot_partial']} "
+                       f"(amber: compile or compare failed)")
+            out.append(f"        data age: {pos['ot_age_sec']}s")
+        else:
+            out.append(f"  pass: (no offline_test data — run offline_test_pass.py)"
+                       f"  ← PRIMARY missing")
+        # LEADING INDICATOR (text-scan proxy, NOT correctness)
+        out.append(f"  rc:  {pos['rc_position']}   ← leading indicator only (text proxy)")
         out.append(f"  sig: {pos['sig_position']}   ← signature completeness")
         out.append(f"  ftp remaining:  {pos['ftp_remaining']}   ← largest unworked pile")
         out.append(f"  rns remaining:  {pos['rns_remaining']}")
@@ -241,16 +271,20 @@ def render(rows: list[dict]) -> str:
         out.append(f"  fsr remaining:  {pos['fsr_remaining']}")
 
     out.append(f"\n=== PER-APPLIER YIELD (Σ deltas vs prior stable row) ===")
+    out.append(f"  Δpass = PRIMARY (real correctness via compile + bytematch).")
+    out.append(f"  Δrc   = leading indicator only (text-scan proxy). Watch for")
+    out.append(f"          Δrc>>Δpass — that's rc-shaped noise (suppress-not-fix).")
     yld = per_applier_yield(rows)
     if not yld:
         out.append("  (no stable transitions yet — need 2+ stable rows)")
     else:
-        out.append(f"  {'applier':<35} {'n':>3}  {'Δrc':>6} {'Δftp':>7} {'Δrm':>6} {'Δrns':>6}")
-        for label, y in sorted(yld.items(), key=lambda x: x[1]["delta_rc_sum"]):
+        out.append(f"  {'applier':<35} {'n':>3}  {'Δpass':>6} {'Δrc':>6} {'Δftp':>7} {'Δrm':>6} {'Δrns':>6}")
+        for label, y in sorted(yld.items(), key=lambda x: -x[1]["delta_pass_sum"]):
             out.append(f"  {label:<35} {y['n_commits']:>3}  "
-                       f"{y['delta_rc_sum']:>+6d} {y['delta_ftp_sum']:>+7d} "
+                       f"{y['delta_pass_sum']:>+6d} {y['delta_rc_sum']:>+6d} "
+                       f"{y['delta_ftp_sum']:>+7d} "
                        f"{y['delta_rm_sum']:>+6d} {y['delta_rns_sum']:>+6d}")
-        out.append("  (negative Δ = improvement on count metrics; positive Δ = improvement on rc)")
+        out.append("  (positive Δpass/Δrc = improvement; negative Δftp/Δrm/Δrns = improvement)")
 
     out.append(f"\n=== CROSS-PATTERN COMPOUNDING ===")
     out.append("  Commits where applier's primary moved AND a different metric")
