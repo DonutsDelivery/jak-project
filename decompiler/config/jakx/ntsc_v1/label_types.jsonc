@@ -708,7 +708,8 @@
       "L7",
       "medius-cached-info-clan",
       true
-    ]
+    ],
+    ["L351", "medius-cached-info-clan", false]
   ],
   "part-tester": [
     [
@@ -1184,7 +1185,8 @@
       true
     ],
     ["L538", "uint64", true],
-    ["L537", "uint64", true]
+    ["L537", "uint64", true],
+    ["L541", "uint64", true]
   ],
   "wvehicle-hud": [
     ["L660", "uint64", true],
@@ -1263,7 +1265,8 @@
       "cloth-params"
     ],
     ["L127", "cloth-params"],
-    ["L124", "cloth-params"]
+    ["L124", "cloth-params"],
+    ["L123", "cloth-params"]
   ],
   "mem-buffer-h": [
     ["L71", "uint8", 1024],
