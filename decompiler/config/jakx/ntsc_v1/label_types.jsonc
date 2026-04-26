@@ -231,7 +231,10 @@
       "L702",
       "uint64",
       true
-    ]
+    ],
+    ["L697", "uint64", true],
+    ["L690", "uint64", true],
+    ["L565", "uint64", true]
   ],
   "bones": [
     [
@@ -395,7 +398,8 @@
       "L690",
       "uint64",
       true
-    ]
+    ],
+    ["L688", "uint64", true]
   ],
   "drift": [
     [
@@ -695,6 +699,7 @@
       "medius-cached-info-clan",
       true
     ],
+    ["L6", "medius-cached-info-clan", false],
     [
       "L7",
       "medius-cached-info-clan",
@@ -712,6 +717,7 @@
       "uint64",
       true
     ],
+    ["L165", "uint64", true],
     [
       "L164",
       "uint64",
@@ -1172,7 +1178,8 @@
       "L548",
       "uint64",
       true
-    ]
+    ],
+    ["L538", "uint64", true]
   ],
   "wvehicle-hud": [
     ["L660", "uint64", true],
@@ -1249,7 +1256,8 @@
     [
       "L126",
       "cloth-params"
-    ]
+    ],
+    ["L127", "cloth-params"]
   ],
   "mem-buffer-h": [
     ["L71", "uint8", 1024],
@@ -1569,5 +1577,18 @@
   "speech-mizo": [
     ["L1","speech-info",false],["L18","speech-info",false],["L26","speech-info",false],
     ["L30","speech-info",false],["L64","speech-info",false],["L94","speech-info",false]
+  ],
+  "collide-planes": [
+    ["L60", "vector4w"],
+    ["L63", "vector4w"]
+  ],
+  "dynamic-patch": [
+    ["L32", "uint64", true]
+  ],
+  "sparticle-launcher": [
+    ["L406", "particle-birth-work"]
+  ],
+  "title-obs": [
+    ["L226", "vector"]
   ]
 }
