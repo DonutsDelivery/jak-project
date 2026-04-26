@@ -1061,15 +1061,14 @@
    (main-thread      cpu-thread                                                        :offset-assert 56) ;; guessed by decompiler
    (top-thread       cpu-thread                                                        :offset-assert 60) ;; guessed by decompiler
    (entity           entity-actor                                                      :offset-assert 64) ;; guessed by decompiler
-   (level            level                                                             :offset-assert 68) ;; guessed by decompiler
-   (state            state                                                             :offset-assert 72) ;; guessed by decompiler
-   (prev-state       state                                                             :offset-assert 76) ;; guessed by decompiler
-   (next-state       state                                                             :offset-assert 80) ;; guessed by decompiler
-   (state-stack      (array state)                                                     :offset-assert 84) ;; guessed by decompiler
-   (trans-hook       function                                                          :offset-assert 88) ;; guessed by decompiler
-   (post-hook        function                                                          :offset-assert 92) ;; guessed by decompiler
-   (event-hook       (function process int symbol event-message-block object)          :offset-assert 96) ;; guessed by decompiler
-   (allocated-length int32                                                             :offset-assert 100)
+   (state            state                                                             :offset-assert 68) ;; jakx: state@68, level absent (gstate IR2 op59)
+   (prev-state       state                                                             :offset-assert 72) ;; binary@72
+   (next-state       state                                                             :offset-assert 76) ;; binary@76 (cam-combiner sw 76 before enter-state)
+   (state-stack      (array state)                                                     :offset-assert 80) ;; binary@80
+   (trans-hook       function                                                          :offset-assert 84) ;; binary@84 (gstate IR2 sw #f,84)
+   (post-hook        function                                                          :offset-assert 88) ;; binary@88
+   (event-hook       function                                                          :offset-assert 92) ;; binary@92 (simplified type to avoid type-prop regression)
+   (allocated-length int32                                                             :offset-assert 96) ;; binary@96
    (heap-base        pointer                                                           :offset 112) ;; guessed by decompiler
    (heap-top         pointer                                                           :offset-assert 116) ;; guessed by decompiler
    (heap-cur         pointer                                                           :offset-assert 120) ;; guessed by decompiler
