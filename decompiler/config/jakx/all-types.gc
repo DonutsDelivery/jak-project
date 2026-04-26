@@ -48630,11 +48630,17 @@
   :method-count-assert 65
   :size-assert         #x218
   :flag-assert         #x4101900218
-  (:methods
-    (base-menu-method-50 (_type_) none) ;; 50
-    (base-menu-method-51 (_type_) none) ;; 51
-    )
   (:state-methods
+    ;; binary evidence (menu2-COMMON-GAME_ir2.asm): static defstates bound
+    ;; to these slots have :name 'wait-enter / 'enter / 'running, IR2
+    ;; type-prop infers <method (state base-menu)>. Old (:methods) decl
+    ;; as `(_type_) none` triggered "Virtual defstate ... not a valid
+    ;; virtual state type" errors across menu2-COMMON-GAME (76 errs).
+    ;; Cascade: dropdown-fade + descendants (city/task/venue) had
+    ;; :method-count-assert that counted slot 51 enter as ADD; it's now
+    ;; an inherited override, so their counts drop 72→71.
+    wait-enter ;; 50
+    enter ;; 51
     running ;; 52
     )
   (:methods
@@ -59574,11 +59580,13 @@
   
 (deftype dropdown-fade (dropdown-item)
   ()
-  :method-count-assert 72
+  :method-count-assert 71
   :size-assert         #x250
-  :flag-assert         #x4801c00250
+  :flag-assert         #x4701c00250
   (:state-methods
-    enter ;; 51
+    ;; enter@51 inherited as state from base-menu (cycle 28). Was ADD,
+    ;; now override (no slot added). Only exit@55 still ADDs a slot.
+    enter ;; 51 (override)
     exit ;; 55
     )
   )
@@ -59589,9 +59597,9 @@
   
 (deftype dropdown-city (dropdown-fade)
   ()
-  :method-count-assert 72
+  :method-count-assert 71
   :size-assert         #x250
-  :flag-assert         #x4801c00250
+  :flag-assert         #x4701c00250
   )
   
 
@@ -59600,9 +59608,9 @@
   
 (deftype dropdown-venue (dropdown-fade)
   ()
-  :method-count-assert 72
+  :method-count-assert 71
   :size-assert         #x250
-  :flag-assert         #x4801c00250
+  :flag-assert         #x4701c00250
   )
   
 
@@ -59612,9 +59620,9 @@
 (deftype dropdown-task (dropdown-fade)
   ((medal-msg-start-time uint32  :offset-assert 592)
    )
-  :method-count-assert 72
+  :method-count-assert 71
   :size-assert         #x254
-  :flag-assert         #x4801d00254
+  :flag-assert         #x4701d00254
   )
   
 
