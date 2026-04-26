@@ -155,6 +155,12 @@ def cmd_store_cast(game: str, batch: int = 15) -> list[str]:
             "--apply", "--commit", "--batch-size", str(batch)]
 
 
+def cmd_sig_passthrough(game: str, top: int = 30) -> list[str]:
+    """Opus's sig_passthrough_apply tool — supports --game flag, uses apply_guard."""
+    return ["python3", "scripts/jakx_watch/sig_passthrough_apply.py",
+            "--game", game, "--top", str(top), "--apply", "--commit"]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--game", default="all", choices=("all",) + GAMES,
@@ -164,10 +170,12 @@ def main() -> int:
     ap.add_argument("--zero-delta-stop", type=int, default=1,
                     help="Stop after N consecutive zero-Δ iterations across all target games")
     ap.add_argument("--tools",
-                    default="consensus,return_mismatch,type_cast,store_cast",
+                    default="consensus,return_mismatch,sig_passthrough,type_cast,store_cast",
                     help="Comma-separated tool names to chain per iteration")
     ap.add_argument("--top", type=int, default=5,
                     help="--top N for return_mismatch_apply (default: 5)")
+    ap.add_argument("--sig-top", type=int, default=30,
+                    help="--top N for sig_passthrough_apply (default: 30)")
     ap.add_argument("--batch-size", type=int, default=15,
                     help="--batch-size for type_cast / store_cast extractors")
     args = ap.parse_args()
@@ -179,7 +187,7 @@ def main() -> int:
         target_games = [args.game]
 
     tools = [t.strip() for t in args.tools.split(",") if t.strip()]
-    valid_tools = {"consensus", "return_mismatch", "type_cast", "store_cast"}
+    valid_tools = {"consensus", "return_mismatch", "sig_passthrough", "type_cast", "store_cast"}
     for t in tools:
         if t not in valid_tools:
             print(f"ERROR: unknown tool '{t}'. Valid: {sorted(valid_tools)}", file=sys.stderr)
@@ -216,6 +224,9 @@ def main() -> int:
             if "return_mismatch" in tools:
                 run_tool(f"return_mismatch [{game}]",
                          cmd_return_mismatch(game, args.top))
+            if "sig_passthrough" in tools:
+                run_tool(f"sig_passthrough [{game}]",
+                         cmd_sig_passthrough(game, args.sig_top))
             if "type_cast" in tools:
                 run_tool(f"type_cast [{game}]",
                          cmd_type_cast(game, args.batch_size))
