@@ -77,6 +77,15 @@ def paths_for(game: str) -> dict:
     }
 
 
+# Backward-compatibility module constants for scripts importing these
+# (e.g. ir2_store_cast_extract.py). Default to jakx paths.
+_default_cfg = paths_for("jakx")
+ALL_TYPES = _default_cfg["all_types"]
+TYPE_CASTS_JAKX = _default_cfg["type_casts"]
+DECOMP_OUT_PRIMARY = _default_cfg["decomp_primary"]
+DECOMP_OUT_FALLBACK = _default_cfg["decomp_fallback"]
+
+
 # --- all-types.gc parsing (robust to compound field types) ------------------
 
 _ATOM = r"[\w<>\-!?:\+\*/=]+"
