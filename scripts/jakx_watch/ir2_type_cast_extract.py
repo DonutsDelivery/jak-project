@@ -38,7 +38,6 @@ import argparse
 import bisect
 import json
 import re
-import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -56,24 +55,22 @@ GAMES = ("jak1", "jak2", "jak3", "jakx")
 def paths_for(game: str) -> dict:
     """Return path config dict for a game.
 
-    Only jakx has a guarded `.jakx_watch/` decomp pipeline; jak1/2/3 read
-    from the global `decompiler_out/{game}` directory and have no
-    apply_guard infrastructure (caller must validate manually).
+    All games have apply_guard support now (jakx via scripts/jakx_watch/run.sh,
+    jak1/2/3 via scripts/game_watch/run.sh). The primary decomp output lives
+    under ``.<game>_watch/decomp_out/<game>``; fallback is the older global
+    ``decompiler_out/<game>`` (used when the game-watch dir hasn't been
+    bootstrapped yet — first dry-run before any apply).
     """
     cfg_dir = ROOT / "decompiler" / "config" / game
-    if game == "jakx":
-        decomp_primary = ROOT / ".jakx_watch" / "decomp_out" / "jakx"
-        decomp_fallback = ROOT / "decompiler_out" / "jakx"
-    else:
-        decomp_primary = ROOT / "decompiler_out" / game
-        decomp_fallback = None
+    decomp_primary = ROOT / f".{game}_watch" / "decomp_out" / game
+    decomp_fallback = ROOT / "decompiler_out" / game
     return {
         "game": game,
         "decomp_primary": decomp_primary,
         "decomp_fallback": decomp_fallback,
         "type_casts": cfg_dir / "ntsc_v1" / "type_casts.jsonc",
         "all_types": cfg_dir / "all-types.gc",
-        "guarded": game == "jakx",
+        "guarded": True,
     }
 
 
@@ -784,57 +781,28 @@ def main() -> int:
         f"and look up its field at offset N in all-types.gc. Far more\n"
         f"reliable than op-number porting (which drifts with basic\n"
         f"block reordering).\n\n"
+        f"Gated via apply_guard --game {args.game} (err_slack={args.err_slack}).\n\n"
+        "Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>"
     )
-    if cfg["guarded"]:
-        commit_msg += f"Gated via apply_guard (err_slack={args.err_slack}).\n\n"
-    else:
-        commit_msg += (
-            f"Note: {args.game} has no apply_guard infrastructure — entries\n"
-            f"derived from IR2 pre-type annotations + all-types.gc field\n"
-            f"lookups. Validate manually via decompiler re-run.\n\n"
-        )
-    commit_msg += "Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>"
 
-    if cfg["guarded"]:
-        print(f"\nApplying {total} entries via apply_guard ...")
-        result = run_with_guard(
-            do_apply,
-            label=f"ir2-prectype/{total}",
-            err_slack=args.err_slack,
-            warn_slack=max(5, args.err_slack),
-            commit_on_pass=args.commit,
-            commit_message=commit_msg,
-        )
+    print(f"\nApplying {total} entries via apply_guard --game {args.game} ...")
+    result = run_with_guard(
+        do_apply,
+        label=f"ir2-prectype/{args.game}/{total}",
+        err_slack=args.err_slack,
+        warn_slack=max(5, args.err_slack),
+        commit_on_pass=args.commit,
+        commit_message=commit_msg,
+        game=args.game,
+    )
 
-        if not result.passed:
-            print(f"FAIL: {result.reason}", file=sys.stderr)
-            return 1
+    if not result.passed:
+        print(f"FAIL: {result.reason}", file=sys.stderr)
+        return 1
 
-        print(f"PASS: Δerr={result.delta_err:+d}  Δwarn={result.delta_warn:+d}")
-        if args.commit and result.commit_sha:
-            print(f"  committed as {result.commit_sha}")
-        return 0
-
-    # Unguarded path (jak1/jak2/jak3): write + (optionally) commit. Caller
-    # validates via manual decomp.
-    print(f"\nApplying {total} entries (unguarded — no auto-revert) ...")
-    written = do_apply()
-    print(f"  wrote {written[0].relative_to(ROOT)}")
-
-    if args.commit:
-        rel = str(type_casts_path.relative_to(ROOT))
-        try:
-            subprocess.run(["git", "add", rel], cwd=ROOT, check=True)
-            subprocess.run(["git", "commit", "-m", commit_msg], cwd=ROOT, check=True)
-            sha = subprocess.check_output(
-                ["git", "rev-parse", "--short", "HEAD"], cwd=ROOT
-            ).decode().strip()
-            print(f"  committed as {sha}")
-        except subprocess.CalledProcessError as e:
-            print(f"FAIL: git commit failed: {e}", file=sys.stderr)
-            return 1
-    else:
-        print("  (--commit not set — file written but not committed)")
+    print(f"PASS: Δerr={result.delta_err:+d}  Δwarn={result.delta_warn:+d}")
+    if args.commit and result.commit_sha:
+        print(f"  committed as {result.commit_sha}")
     return 0
 
 

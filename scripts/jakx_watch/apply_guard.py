@@ -39,6 +39,17 @@ from typing import Callable
 ROOT = Path(__file__).resolve().parents[2]
 STATUS_MD = ROOT / ".jakx_watch" / "status.md"
 
+GAMES = ("jak1", "jak2", "jak3", "jakx")
+
+
+def status_md_for(game: str) -> Path:
+    """Return the status.md path for a given game.
+
+    jakx → .jakx_watch/status.md (full scanner suite, scripts/jakx_watch/run.sh)
+    jak1/2/3 → .<game>_watch/status.md (minimal, scripts/game_watch/run.sh)
+    """
+    return ROOT / f".{game}_watch" / "status.md"
+
 _RE_ERR_TOTAL = re.compile(r"^inline ERROR markers:\s+(\d+)", re.MULTILINE)
 _RE_WARN_TOTAL = re.compile(r"^inline WARN\s+markers:\s+(\d+)", re.MULTILINE)
 _RE_REAL_CLEAN = re.compile(r"^\s*real-clean\s*:\s*(\d+)", re.MULTILINE)
@@ -117,11 +128,12 @@ class GuardResult:
     commit_sha: str = ""
 
 
-def read_status() -> StatusSnapshot:
-    """Parse current status.md. Returns invalid snapshot on parse failure."""
-    if not STATUS_MD.exists():
+def read_status(game: str = "jakx") -> StatusSnapshot:
+    """Parse the game's status.md. Returns invalid snapshot on parse failure."""
+    status_md = status_md_for(game)
+    if not status_md.exists():
         return StatusSnapshot(-1, -1, {})
-    text = STATUS_MD.read_text()
+    text = status_md.read_text()
     em = _RE_ERR_TOTAL.search(text)
     wm = _RE_WARN_TOTAL.search(text)
     errors = int(em.group(1)) if em else -1
@@ -174,24 +186,36 @@ def read_status() -> StatusSnapshot:
     )
 
 
-def run_decompiler() -> int:
-    """Run the jakx_watch decompiler pass. Returns exit code."""
-    env = {**os.environ, "JAKX_WATCH_FORCE": "1", "JAKX_WATCH_WAIT": "1"}
-    result = subprocess.run(
-        ["bash", "scripts/jakx_watch/run.sh"],
-        cwd=ROOT,
-        env=env,
-    )
+def run_decompiler(game: str = "jakx") -> int:
+    """Run the game-watch decompiler pass. Returns exit code.
+
+    jakx → scripts/jakx_watch/run.sh (full scanner suite)
+    jak1/2/3 → scripts/game_watch/run.sh --game <game> (minimal)
+    """
+    if game == "jakx":
+        env = {**os.environ, "JAKX_WATCH_FORCE": "1", "JAKX_WATCH_WAIT": "1"}
+        result = subprocess.run(
+            ["bash", "scripts/jakx_watch/run.sh"],
+            cwd=ROOT,
+            env=env,
+        )
+    else:
+        env = {**os.environ, "GAME_WATCH_FORCE": "1", "GAME_WATCH_WAIT": "1"}
+        result = subprocess.run(
+            ["bash", "scripts/game_watch/run.sh", "--game", game],
+            cwd=ROOT,
+            env=env,
+        )
     return result.returncode
 
 
-def revert_files(paths: list[Path]) -> None:
+def revert_files(paths: list[Path], game: str = "jakx") -> None:
     """Git-restore files to HEAD state.
 
-    Also invalidates status.md so the next run_with_guard call re-runs
-    the decompiler. status.md was written from the now-reverted working
-    tree; without invalidation the next batch reads a stale pre-state.
-    (Opus cycle 17 finding 2026-04-26.)
+    Also invalidates the game's status.md so the next run_with_guard call
+    re-runs the decompiler. status.md was written from the now-reverted
+    working tree; without invalidation the next batch reads a stale
+    pre-state. (Opus cycle 17 finding 2026-04-26.)
     """
     if not paths:
         return
@@ -201,8 +225,9 @@ def revert_files(paths: list[Path]) -> None:
         cwd=ROOT,
         check=True,
     )
-    if STATUS_MD.exists():
-        STATUS_MD.unlink()
+    status_md = status_md_for(game)
+    if status_md.exists():
+        status_md.unlink()
 
 
 def commit_files(paths: list[Path], message: str) -> str:
@@ -231,6 +256,7 @@ def run_with_guard(
     category_regressions_allowed: dict[str, int] | None = None,
     commit_on_pass: bool = False,
     commit_message: str = "",
+    game: str = "jakx",
 ) -> GuardResult:
     """Apply edits and gate on decompiler regression.
 
@@ -271,11 +297,17 @@ def run_with_guard(
     # from an earlier failed batch. Compare status.md's "last updated @ git SHA"
     # header to current HEAD; rescan if they differ or if the current state
     # looks like it was captured mid-crash.
-    pre = read_status()
+    if game not in GAMES:
+        return GuardResult(
+            passed=False,
+            reason=f"unknown game '{game}' — must be one of {GAMES}",
+        )
+
+    pre = read_status(game)
     if _status_is_stale(pre):
         print(f"[guard:{label}] status.md is stale — rescanning before pre-state read")
-        run_decompiler()
-        pre = read_status()
+        run_decompiler(game)
+        pre = read_status(game)
 
     if not pre.valid:
         return GuardResult(
@@ -290,17 +322,17 @@ def run_with_guard(
     edit_count = len(changed_files) if changed_files else 0
     print(f"[guard:{label}] {edit_count} file(s) modified; running decompiler …")
 
-    rc = run_decompiler()
+    rc = run_decompiler(game)
     if rc not in (0, 1):
         print(f"[guard:{label}] decompiler exit {rc} — possible crash", file=sys.stderr)
 
-    post = read_status()
+    post = read_status(game)
     if not post.valid:
         print(
             f"[guard:{label}] status.md unreadable after run (decompiler crash?) — reverting",
             file=sys.stderr,
         )
-        revert_files(changed_files)
+        revert_files(changed_files, game)
         return GuardResult(
             passed=False,
             reason="status.md unreadable after decompiler run",
@@ -322,7 +354,7 @@ def run_with_guard(
             f"'FATAL crashes' — decompiler crashed, reverting",
             file=sys.stderr,
         )
-        revert_files(changed_files)
+        revert_files(changed_files, game)
         return GuardResult(
             passed=False,
             reason="decompiler assertion crash in post-state",
@@ -341,7 +373,7 @@ def run_with_guard(
                 f"(drop={coverage_drop}, tolerance={coverage_drop_tolerance}), reverting",
                 file=sys.stderr,
             )
-            revert_files(changed_files)
+            revert_files(changed_files, game)
             return GuardResult(
                 passed=False,
                 reason=(
@@ -362,7 +394,7 @@ def run_with_guard(
                 f"{pre.files_total} → {post.files_total} (drop={files_drop}), reverting",
                 file=sys.stderr,
             )
-            revert_files(changed_files)
+            revert_files(changed_files, game)
             return GuardResult(
                 passed=False,
                 reason=(
@@ -384,7 +416,7 @@ def run_with_guard(
                 f"(grew={split_grew}, slack={split_failed_slack}), reverting",
                 file=sys.stderr,
             )
-            revert_files(changed_files)
+            revert_files(changed_files, game)
             return GuardResult(
                 passed=False,
                 reason=f"split-failed grew by {split_grew} (pre={pre.split_failed} post={post.split_failed})",
@@ -400,7 +432,7 @@ def run_with_guard(
             f"(Δwarn={delta_warn:+d}), reverting",
             file=sys.stderr,
         )
-        revert_files(changed_files)
+        revert_files(changed_files, game)
         return GuardResult(
             passed=False,
             reason=f"WARNs did not decrease (Δwarn={delta_warn:+d})",
@@ -417,7 +449,7 @@ def run_with_guard(
             f"[guard:{label}] FAIL — real-clean dropped by {-delta_rc} ({pre.real_clean}→{post.real_clean}), reverting",
             file=sys.stderr,
         )
-        revert_files(changed_files)
+        revert_files(changed_files, game)
         return GuardResult(
             passed=False,
             reason=f"real-clean dropped by {-delta_rc} ({pre.real_clean}→{post.real_clean})",
@@ -439,7 +471,7 @@ def run_with_guard(
             f"[guard:{label}] FAIL — errors grew by {delta_err} (slack={err_slack} + noise-floor={noise_floor} for rc+{delta_rc}), reverting",
             file=sys.stderr,
         )
-        revert_files(changed_files)
+        revert_files(changed_files, game)
         return GuardResult(
             passed=False,
             reason=f"errors grew by {delta_err} (effective slack: {effective_slack}, rc delta: {delta_rc:+d})",
@@ -471,7 +503,7 @@ def run_with_guard(
                     f"(allowance={allowance}), reverting",
                     file=sys.stderr,
                 )
-                revert_files(changed_files)
+                revert_files(changed_files, game)
                 return GuardResult(
                     passed=False,
                     reason=f"category '{cat_substr}' grew by {grown} (allowed: {allowance})",
