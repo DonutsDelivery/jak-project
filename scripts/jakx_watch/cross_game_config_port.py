@@ -56,6 +56,168 @@ def load_jsonc(path):
     return json.loads(text)
 
 
+def find_array_close(text, start):
+    """Given index of a `[` in `text`, return index of its matching `]`.
+
+    String- and comment-aware: skips // line comments, /* */ block comments,
+    and double-quoted strings (with backslash escapes). Returns -1 if no match.
+    """
+    depth = 0
+    i = start
+    n = len(text)
+    while i < n:
+        c = text[i]
+        # Line comment
+        if c == "/" and i + 1 < n and text[i + 1] == "/":
+            j = text.find("\n", i)
+            i = j if j != -1 else n
+            continue
+        # Block comment
+        if c == "/" and i + 1 < n and text[i + 1] == "*":
+            j = text.find("*/", i + 2)
+            i = (j + 2) if j != -1 else n
+            continue
+        # String
+        if c == '"':
+            i += 1
+            while i < n:
+                if text[i] == "\\" and i + 1 < n:
+                    i += 2
+                    continue
+                if text[i] == '"':
+                    i += 1
+                    break
+                i += 1
+            continue
+        if c == "[":
+            depth += 1
+        elif c == "]":
+            depth -= 1
+            if depth == 0:
+                return i
+        i += 1
+    return -1
+
+
+def find_function_array(text, func_name):
+    """Find the `[...]` block for `"<func_name>": [...]` in `text`.
+
+    Returns (open_idx, close_idx) where open_idx is the `[` and close_idx is
+    the matching `]`. Returns None if not found.
+    """
+    # Match the function name as a JSON string key. Function names can contain
+    # parens, spaces, and other chars — escape with re.escape.
+    pattern = re.compile(
+        r'"' + re.escape(func_name) + r'"\s*:\s*\[',
+        re.MULTILINE,
+    )
+    m = pattern.search(text)
+    if not m:
+        return None
+    open_idx = m.end() - 1  # index of the `[`
+    close_idx = find_array_close(text, open_idx)
+    if close_idx == -1:
+        return None
+    return (open_idx, close_idx)
+
+
+def format_entry(entry, indent="    "):
+    """Format a type_cast entry [op, "reg", "type"] as compact JSON."""
+    return indent + json.dumps(entry, separators=(", ", ": "))
+
+
+def surgical_insert(text, candidates):
+    """Insert new entries into the type_casts.jsonc text without reformatting.
+
+    For each (func, [entries]) in candidates:
+      - If func exists: insert new entries before the closing `]` of its array
+      - If func is new: insert before the closing `}` of the top-level object
+
+    Preserves all comments, original formatting, and entry ordering.
+    """
+    # Process in reverse text order so earlier inserts don't shift later
+    # offsets. First, find all insertion points.
+    existing_inserts = []  # (close_idx, [entries], existing_keys)
+    new_funcs = []         # (func, [entries])
+
+    for func, entries in candidates:
+        loc = find_function_array(text, func)
+        if loc is None:
+            new_funcs.append((func, entries))
+            continue
+        open_idx, close_idx = loc
+        # Parse existing array contents to find duplicate keys
+        try:
+            arr_text = text[open_idx : close_idx + 1]
+            # Strip comments + trailing commas for parse
+            clean = re.sub(r"//[^\n]*", "", arr_text)
+            clean = re.sub(r"/\*.*?\*/", "", clean, flags=re.DOTALL)
+            clean = re.sub(r",(\s*\])", r"\1", clean)
+            existing = json.loads(clean)
+        except (json.JSONDecodeError, ValueError):
+            existing = []
+        existing_keys = set()
+        for e in existing:
+            if isinstance(e, list) and len(e) >= 3 and not isinstance(e[0], list):
+                existing_keys.add((e[0], e[1]))
+        existing_inserts.append((close_idx, entries, existing_keys))
+
+    # Apply existing-function inserts in reverse offset order
+    existing_inserts.sort(key=lambda x: -x[0])
+    for close_idx, entries, existing_keys in existing_inserts:
+        new_entries = [e for e in entries
+                       if (e[0], e[1]) not in existing_keys]
+        if not new_entries:
+            continue
+        # Find indent of the closing ]
+        line_start = text.rfind("\n", 0, close_idx) + 1
+        close_indent = text[line_start:close_idx]
+        entry_indent = close_indent + "  "
+        # Walk back from close_idx to find the last non-whitespace character —
+        # the anchor where we attach the insertion.
+        anchor = close_idx - 1
+        while anchor >= 0 and text[anchor] in " \t\r\n":
+            anchor -= 1
+        last_ch = text[anchor] if anchor >= 0 else ""
+        needs_comma = last_ch not in ("[", ",")
+        body = ",\n".join(format_entry(e, entry_indent) for e in new_entries)
+        prefix = "," if needs_comma else ""
+        # Replace text[anchor+1 : close_idx] (whitespace before close) with
+        # our insertion that ends with a fresh "\n<close_indent>" before `]`.
+        insertion = prefix + "\n" + body + "\n" + close_indent
+        text = text[:anchor + 1] + insertion + text[close_idx:]
+
+    # Append new functions before the top-level closing }
+    if new_funcs:
+        # Find the top-level closing `}` by walking from end skipping whitespace
+        close_idx = len(text) - 1
+        while close_idx >= 0 and text[close_idx] in " \t\r\n":
+            close_idx -= 1
+        if close_idx >= 0 and text[close_idx] == "}":
+            line_start = text.rfind("\n", 0, close_idx) + 1
+            close_indent = text[line_start:close_idx]
+            entry_indent = close_indent + "  "
+            arr_indent = entry_indent + "  "
+            # Find anchor (last non-whitespace before close)
+            anchor = close_idx - 1
+            while anchor >= 0 and text[anchor] in " \t\r\n":
+                anchor -= 1
+            last_ch = text[anchor] if anchor >= 0 else ""
+            needs_comma = last_ch not in ("{", ",")
+            chunks = []
+            for func, entries in new_funcs:
+                entry_strs = [format_entry(e, arr_indent) for e in entries]
+                chunks.append(
+                    f'{entry_indent}"{func}": [\n'
+                    + ",\n".join(entry_strs)
+                    + f'\n{entry_indent}]'
+                )
+            prefix = "," if needs_comma else ""
+            insertion = prefix + "\n" + ",\n".join(chunks) + "\n" + close_indent
+            text = text[:anchor + 1] + insertion + text[close_idx:]
+    return text
+
+
 def find_failing_function(ir2_text, error_line_no):
     lines = ir2_text.splitlines()
     for i in range(error_line_no, max(0, error_line_no - 200), -1):
@@ -191,25 +353,8 @@ def main():
     def apply_edits():
         # Re-load latest jakx casts (in case file changed)
         text = TYPE_CASTS_JAKX.read_text()
-        # Clean parse for edits
-        clean = re.sub(r"//[^\n]*", "", text)
-        clean = re.sub(r"/\*.*?\*/", "", clean, flags=re.DOTALL)
-        clean = re.sub(r",(\s*[}\]])", r"\1", clean)
-        d = json.loads(clean)
-        for func, entries in candidates:
-            if func in d:
-                # Append non-duplicate entries
-                existing_keys = set()
-                for e in d[func]:
-                    if isinstance(e, list) and len(e) >= 3 and not isinstance(e[0], list):
-                        existing_keys.add((e[0], e[1]))
-                for new in entries:
-                    if (new[0], new[1]) not in existing_keys:
-                        d[func].append(new)
-            else:
-                d[func] = entries
-        # Pretty-write back
-        TYPE_CASTS_JAKX.write_text(json.dumps(d, indent=2) + "\n")
+        text = surgical_insert(text, candidates)
+        TYPE_CASTS_JAKX.write_text(text)
         return [TYPE_CASTS_JAKX]
 
     label = f"cross-port-jak3-{total_new}-entries"
