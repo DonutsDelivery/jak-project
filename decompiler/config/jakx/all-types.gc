@@ -15697,7 +15697,7 @@
     (setting-control-method-9 (_type_ process symbol object object object) connection) ;; 9
     (setting-control-method-10 (_type_ symbol time-frame symbol symbol float int) none) ;; 10
     (setting-control-method-11 (_type_ process symbol object object object) connection) ;; 11
-    (setting-control-method-12 (_type_ process symbol) none) ;; 12
+    (setting-control-method-12 (_type_ process symbol object) none) ;; 12
     (add-setting (_type_ engine-pers object) none) ;; 13
     (persist-with-delay (_type_ symbol time-frame symbol symbol float int) none) ;; 14
     (set-setting (_type_ process symbol object object object) connection) ;; 15
@@ -19218,7 +19218,7 @@
   (:methods
     (oil-trail-method-10 (_type_ uint) uint) ;; 10
     (oil-trail-method-11 (_type_) none) ;; 11
-    (oil-trail-method-12 (_type_) none) ;; 12
+    (oil-trail-method-12 (_type_ object object object) none) ;; 12
     (oil-trail-method-13 (_type_) none) ;; 13
     (oil-trail-method-14 (_type_) none) ;; 14
     (oil-trail-method-15 (_type_ pointer) none) ;; 15
@@ -46055,7 +46055,7 @@
     (rapid-fire-control-method-9 (_type_ int int) none) ;; 9
     (rapid-fire-control-method-10 (_type_ int int) none) ;; 10
     (rapid-fire-control-method-11 (_type_) none) ;; 11
-    (rapid-fire-control-method-12 (_type_) none) ;; 12
+    (rapid-fire-control-method-12 (_type_ object object object) none) ;; 12
     )
   )
 
