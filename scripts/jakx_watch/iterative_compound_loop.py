@@ -47,20 +47,52 @@ def status_md_for(game: str) -> Path:
     return ROOT / f".{game}_watch" / "status.md"
 
 
-def read_status(game: str) -> tuple[int, int, int]:
-    """Parse rc / err / warn from game's status.md. Returns (-1, -1, -1) if missing."""
+def read_status_safe(game: str, max_wait: int = 60) -> tuple[int, int, int]:
+    """Read game's status.md, but only if it appears stable.
+
+    Stable = file exists, was modified >5 sec ago (settled), and reports a
+    plausible files_total (>= 100 for jakx, >= 50 for others — guards against
+    mid-decomp partial renders that show files_total=24 etc).
+    Returns (-1, -1, -1) if can't get a stable read within max_wait seconds.
+    """
     sp = status_md_for(game)
-    if not sp.exists():
-        return (-1, -1, -1)
-    text = sp.read_text()
-    rc_m = _RE_RC.search(text)
-    err_m = _RE_ERR.search(text)
-    warn_m = _RE_WARN.search(text)
-    return (
-        int(rc_m.group(1)) if rc_m else -1,
-        int(err_m.group(1)) if err_m else -1,
-        int(warn_m.group(1)) if warn_m else -1,
+    deadline = time.time() + max_wait
+    min_files = 100 if game == "jakx" else 50
+    while time.time() < deadline:
+        if sp.exists() and time.time() - sp.stat().st_mtime > 5:
+            text = sp.read_text()
+            ft_m = re.search(r"^files total:\s+(\d+)", text, re.MULTILINE)
+            if ft_m and int(ft_m.group(1)) >= min_files:
+                rc_m = _RE_RC.search(text)
+                err_m = _RE_ERR.search(text)
+                warn_m = _RE_WARN.search(text)
+                return (
+                    int(rc_m.group(1)) if rc_m else -1,
+                    int(err_m.group(1)) if err_m else -1,
+                    int(warn_m.group(1)) if warn_m else -1,
+                )
+        time.sleep(3)
+    print(f"[loop] WARN: {game} status.md not stable after {max_wait}s")
+    return (-1, -1, -1)
+
+
+def git_head_sha() -> str:
+    r = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT,
+                       capture_output=True, text=True)
+    return r.stdout.strip() if r.returncode == 0 else ""
+
+
+def commits_since(start_sha: str) -> list[str]:
+    """List commits made since start_sha (exclusive)."""
+    if not start_sha:
+        return []
+    r = subprocess.run(
+        ["git", "log", "--oneline", f"{start_sha}..HEAD"],
+        cwd=ROOT, capture_output=True, text=True,
     )
+    if r.returncode != 0:
+        return []
+    return [l.strip() for l in r.stdout.splitlines() if l.strip()]
 
 
 def run_decompiler(game: str) -> int:
@@ -157,23 +189,22 @@ def main() -> int:
     print(f"[loop] tools per iter: {tools}")
     print(f"[loop] max-iters: {args.max_iters}, zero-delta-stop: {args.zero_delta_stop}")
 
-    # Initial baseline per game
+    # Initial baseline — only stable read at start (race-free reference point)
+    print(f"\n[loop] reading stable baselines (waiting for status.md to settle)...")
     baselines: dict[str, tuple[int, int, int]] = {}
     for g in target_games:
-        rc, err, warn = read_status(g)
-        if rc < 0:
-            print(f"[loop] {g}: status.md missing — bootstrapping decomp")
-            run_decompiler(g)
-            rc, err, warn = read_status(g)
+        rc, err, warn = read_status_safe(g)
         baselines[g] = (rc, err, warn)
         print(f"[loop] {g} baseline: rc={rc} err={err} warn={warn}")
 
     session_start = dict(baselines)
+    session_start_sha = git_head_sha()
+    print(f"[loop] session start HEAD: {session_start_sha[:10]}")
 
-    zero_delta_count = 0
+    no_progress_count = 0
     for it in range(1, args.max_iters + 1):
         print(f"\n{'='*64}\n[loop] ITERATION {it}\n{'='*64}")
-        iter_start = {g: read_status(g) for g in target_games}
+        iter_start_sha = git_head_sha()
 
         # 1) Cross-game consensus (operates on all games at once)
         if "consensus" in tools:
@@ -193,38 +224,42 @@ def main() -> int:
                 if cmd is not None:
                     run_tool(f"store_cast [{game}]", cmd)
 
-        # Measure
-        iter_end = {g: read_status(g) for g in target_games}
-        any_change = False
-        print(f"\n[loop] iter {it} per-game deltas:")
-        for g in target_games:
-            ds_rc = iter_end[g][0] - iter_start[g][0]
-            ds_err = iter_end[g][1] - iter_start[g][1]
-            ds_warn = iter_end[g][2] - iter_start[g][2]
-            print(f"[loop]   {g}: rc={ds_rc:+d} err={ds_err:+d} warn={ds_warn:+d}  "
-                  f"(abs: rc={iter_end[g][0]} err={iter_end[g][1]} warn={iter_end[g][2]})")
-            if ds_rc != 0 or ds_err != 0 or ds_warn != 0:
-                any_change = True
+        # Convergence: measure by COMMITS made (race-free, vs status.md
+        # which races with concurrent decomps).
+        iter_commits = commits_since(iter_start_sha)
+        print(f"\n[loop] iter {it}: {len(iter_commits)} commits landed")
+        for c in iter_commits:
+            print(f"[loop]   {c}")
 
-        if not any_change:
-            zero_delta_count += 1
-            print(f"[loop] zero-delta iteration ({zero_delta_count}/{args.zero_delta_stop})")
-            if zero_delta_count >= args.zero_delta_stop:
-                print(f"[loop] converged after {it} iterations")
+        if not iter_commits:
+            no_progress_count += 1
+            print(f"[loop] no-progress iteration ({no_progress_count}/{args.zero_delta_stop})")
+            if no_progress_count >= args.zero_delta_stop:
+                print(f"[loop] converged after {it} iterations (no commits)")
                 break
         else:
-            zero_delta_count = 0
+            no_progress_count = 0
 
-    # Session summary
+    # Session summary — final stable read (after all decomps settle)
     print(f"\n{'='*64}")
     print(f"[loop] SESSION SUMMARY")
     print(f"{'='*64}")
+    final_sha = git_head_sha()
+    all_commits = commits_since(session_start_sha)
+    print(f"[loop] HEAD: {session_start_sha[:10]} → {final_sha[:10]}")
+    print(f"[loop] Total commits this session: {len(all_commits)}")
+    for c in all_commits:
+        print(f"[loop]   {c}")
+    print()
     for g in target_games:
-        final = read_status(g)
+        final = read_status_safe(g, max_wait=120)
         start = session_start[g]
-        print(f"[loop] {g}: rc {start[0]:>4}→{final[0]:<4} (Δ{final[0]-start[0]:+d})  "
-              f"err {start[1]:>5}→{final[1]:<5} (Δ{final[1]-start[1]:+d})  "
-              f"warn {start[2]:>5}→{final[2]:<5} (Δ{final[2]-start[2]:+d})")
+        if final[0] < 0:
+            print(f"[loop] {g}: (status not stable yet — check manually after decomp completes)")
+        else:
+            print(f"[loop] {g}: rc {start[0]:>4}→{final[0]:<4} (Δ{final[0]-start[0]:+d})  "
+                  f"err {start[1]:>5}→{final[1]:<5} (Δ{final[1]-start[1]:+d})  "
+                  f"warn {start[2]:>5}→{final[2]:<5} (Δ{final[2]-start[2]:+d})")
     return 0
 
 
