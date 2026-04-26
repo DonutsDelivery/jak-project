@@ -13954,7 +13954,7 @@
 (define-extern game-task-node-flag->string (function game-task-node-flag string))
 (define-extern game-task-node-command->string (function game-task-node-command string))
 
-(define-extern *traffic-engine* traffic-engine)
+(define-extern *traffic-engine* symbol) ;; traffic-engine type not yet activated
 
 (define-extern *game-movie* (array game-movie))
 
@@ -22755,20 +22755,18 @@
 
 
 
-#|
 (deftype medius-account-login-response (structure)
-  ((message-id uint8 21 :offset-assert 0)
-   (status-code     int32                       :offset-assert 24)
-   (account-id      int32                       :offset-assert 28)
-   (account-type    int32                       :offset-assert 32)
-   (medius-world-id int32                       :offset-assert 36)
-   (connect-info    net-connection-info :inline :offset-assert 40)
+  ((message-id      uint8 21  :offset-assert 0)
+   (status-code     int32     :offset-assert 24)
+   (account-id      int32     :offset-assert 28)
+   (account-type    int32     :offset-assert 32)
+   (medius-world-id int32     :offset-assert 36)
+   (connect-info    uint8 154 :offset-assert 40) ;; net-connection-info flattened (inline 16-byte align)
    )
   :method-count-assert 9
   :size-assert         #xc2
   :flag-assert         #x9000000c2
   )
-|#
 
 
 
@@ -26911,19 +26909,17 @@
 
 
 
-#|
 (deftype medius-file-get-meta-data-response (structure)
-  ((medius-file-info          medius-file           :inline :offset-assert 0)
-   (medius-meta-data-response medius-file-meta-data :inline :offset-assert 172)
-   (status-code               int32                         :offset-assert 484)
-   (message-id uint8 21 :offset-assert 488)
-   (end-of-list               int8                          :offset-assert 509)
+  ((medius-file-info          medius-file :inline :offset-assert 0)  ;; 172 bytes at 0 (16-aligned OK)
+   (medius-meta-data-response uint8 312   :offset-assert 172) ;; medius-file-meta-data flattened
+   (status-code               int32       :offset-assert 484)
+   (message-id                uint8 21    :offset-assert 488)
+   (end-of-list               int8        :offset-assert 509)
    )
   :method-count-assert 9
   :size-assert         #x1fe
   :flag-assert         #x9000001fe
   )
-|#
 
 
 
@@ -26943,19 +26939,17 @@
 
 
 
-#|
 (deftype medius-file-search-by-meta-data-response (structure)
-  ((medius-file-info          medius-file           :inline :offset-assert 0)
-   (medius-meta-data-response medius-file-meta-data :inline :offset-assert 172)
-   (status-code               int32                         :offset-assert 484)
-   (message-id uint8 21 :offset-assert 488)
-   (end-of-list               int8                          :offset-assert 509)
+  ((medius-file-info          medius-file :inline :offset-assert 0)  ;; 172 bytes at 0 (16-aligned OK)
+   (medius-meta-data-response uint8 312   :offset-assert 172) ;; medius-file-meta-data flattened
+   (status-code               int32       :offset-assert 484)
+   (message-id                uint8 21    :offset-assert 488)
+   (end-of-list               int8        :offset-assert 509)
    )
   :method-count-assert 9
   :size-assert         #x1fe
   :flag-assert         #x9000001fe
   )
-|#
 
 
 
@@ -27022,17 +27016,15 @@
 
 
 
-#|
 (deftype medius-server-set-attributes-request (structure)
-  ((message-id uint8 21 :offset-assert 0)
-   (attributes            int32               :offset-assert 24)
-   (listen-server-address net-address :inline :offset-assert 28)
+  ((message-id            uint8 21 :offset-assert 0)
+   (attributes            int32    :offset-assert 24)
+   (listen-server-address uint8 24 :offset-assert 28) ;; net-address flattened (inline 16-byte align)
    )
   :method-count-assert 9
   :size-assert         #x34
   :flag-assert         #x900000034
   )
-|#
 
 
 
