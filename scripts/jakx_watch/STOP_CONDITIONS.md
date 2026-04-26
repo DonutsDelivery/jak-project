@@ -90,6 +90,73 @@ pre-convergence-log commits (~305 in jakx config+source since
 commit) and the file documents that fact rather than pretending
 otherwise.
 
+**G0.5 — A cycle without a primary-metric reading is mostly blind.**
+Pre-G0, a cycle without rc reading was only mildly bad because
+several proxies existed. Post-G0, pass IS the metric — a cycle
+without it has no answer to "are we compounding?" Treat refresh
+of offline-test data as a first-class action, not a side effect.
+
+Refresh priority rule: at cycle start, if `data age > 3600s`
+(stale per current threshold) AND no agent currently holds the
+decomp lock, **run `offline_test_pass.py` BEFORE any other
+dispatch decision.** The fresh pass numbers inform every
+subsequent choice. Skipping refresh because "no apply queued"
+is the wrong reasoning — the read itself IS the cycle's value
+when nothing else can land.
+
+Track stale-cycle frequency: convergence_report renders
+`data age: Ns`. If 3+ consecutive cycles run on stale data,
+the offline-test cadence (~5 min per run, blocked by decomp
+locks) is too slow relative to cycle cadence (~6 min cron).
+Two cadences need re-aligning: either slower cron, faster
+offline-test, or snapshot-based validation that doesn't
+contend for HEAD.
+
+**G0.6 — Lock contention is becoming load-bearing on cycle outcome.**
+Observed pattern (2026-04-26 cycles 26-27): consecutive cycles
+prevented from apply by parallel-session lock contention
+(Opus background shells, Sonnet mid-turn decomp, force-decomp
+runs all racing for the same HEAD-validated decomp dir).
+
+If 3+ consecutive cycles open with locks held, treat as signal,
+not coincidence — the bottleneck has shifted from "do we have
+appliers" to "can we get measurement windows." That's a
+different problem and probably needs:
+  - Lane scheduling (only one heavy decomp at a time, others
+    wait), or
+  - Snapshot-based validation infrastructure (apply_guard runs
+    against a frozen IR2 snapshot rather than HEAD, so multiple
+    appliers can validate against the same baseline without
+    blocking each other)
+
+Don't build snapshot-validation yet (premature; only 2
+consecutive lock-blocks observed). But flag in handoff so it
+doesn't become invisible normalization. The signal is "third
+fire in a row could not get a measurement window" — not "we
+should have grabbed a window earlier."
+
+**G0.7 — Two named pass ratios, both primary, diverge informatively.**
+  - `verifiable_correctness_rate = pass / test_scope`
+    "of files we CAN verify, how many actually pass?"
+    Drift indicator for applier quality.
+  - `total_verified_coverage = pass / emitted`
+    "of all emitted files, how much of the project is verified?"
+    Drift indicator for project completion.
+
+When they diverge:
+  - rate climbs while coverage stagnates → appliers polishing
+    the easy fraction; new files aren't reaching verification
+  - rate stagnates while coverage climbs → test_scope growing
+    faster than appliers can keep up; verification is finding
+    real new ground; potentially harder territory
+  - both climb → genuine progress (compounding correctness)
+  - both stagnate → null cycle; investigate whether work is
+    landing in the right places
+
+The convergence report renders both as PRIMARY with explicit
+semantic labels. Reports that quote only one number should
+include both for honesty.
+
 ## Why this file exists
 
 Findings from prior cycles compress into headlines between sessions

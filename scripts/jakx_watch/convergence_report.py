@@ -264,15 +264,25 @@ def render(rows: list[dict]) -> str:
             stale_marker = "  ⚠ STALE" if pos["ot_stale"] else ""
             scope_pct = pos['ot_pass_pct']
             broad_pct = (100.0 * pos["ot_pass"] / files_total) if files_total else 0.0
-            out.append(f"  pass: {pos['ot_pass']}/{pos['ot_attempted']} "
-                       f"({scope_pct:.2f}% of test scope) "
-                       f"← PRIMARY (compile + _REF.gc match){stale_marker}")
-            out.append(f"        {pos['ot_pass']}/{files_total} "
-                       f"({broad_pct:.2f}% of all emitted) "
-                       f"← BROADER denominator (per G0.3 — selection bias warning)")
-            out.append(f"        test_scope: {pos['ot_attempted']} of {files_total} "
+            # Two named ratios with explicit semantics — they diverge in different
+            # conditions and the divergence is informative:
+            #   verifiable_correctness_rate = pass / test_scope
+            #     "of the files we CAN verify, how many are correct?"
+            #   total_verified_coverage     = pass / emitted
+            #     "how much of the whole project is verified-correct?"
+            out.append(f"  verifiable_correctness_rate: "
+                       f"{pos['ot_pass']}/{pos['ot_attempted']} "
+                       f"({scope_pct:.2f}%) "
+                       f"← of files in test scope, how many actually pass?{stale_marker}")
+            out.append(f"  total_verified_coverage:     "
+                       f"{pos['ot_pass']}/{files_total} "
+                       f"({broad_pct:.2f}%) "
+                       f"← of all emitted, how much is verified-correct? "
+                       f"(the more honest 'done' number)")
+            out.append(f"  test_scope:                  "
+                       f"{pos['ot_attempted']} of {files_total} "
                        f"({100.0*pos['ot_attempted']/files_total:.1f}% _REF.gc coverage) "
-                       f"← Δtest_scope is its own signal")
+                       f"← Δtest_scope is its own signal (per G0.3)")
             out.append(f"        partial: {pos['ot_partial']} "
                        f"(amber: compile or compare failed)")
             out.append(f"        data age: {pos['ot_age_sec']}s")
