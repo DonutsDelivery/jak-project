@@ -49681,5 +49681,67 @@
     [36, "a3", "cam-dbg-scratch"],
     [39, "t0", "cam-dbg-scratch"],
     [45, "a0", "cam-dbg-scratch"]
+  ],
+  "(method 2 array)": [
+    [23, "gp", "(array int32)"],
+    [43, "gp", "(array uint32)"],
+    [63, "gp", "(array int64)"],
+    [83, "gp", "(array uint64)"],
+    [102, "gp", "(array int8)"],
+    [121, "gp", "(array uint8)"],
+    [141, "gp", "(array int16)"],
+    [161, "gp", "(array uint16)"],
+    [186, "gp", "(array uint128)"],
+    [204, "gp", "(array int32)"],
+    [223, "gp", "(array float)"],
+    [232, "gp", "(array float)"],
+    [249, "gp", "(array basic)"],
+    [258, "gp", "(array basic)"]
+  ],
+  "(method 3 array)": [
+    [51, "gp", "(array int32)"],
+    [69, "gp", "(array uint32)"],
+    [87, "gp", "(array int64)"],
+    [105, "gp", "(array uint64)"],
+    [122, "gp", "(array int8)"],
+    [139, "gp", "(array int8)"],
+    [157, "gp", "(array int16)"],
+    [175, "gp", "(array uint16)"],
+    [198, "gp", "(array uint128)"],
+    [214, "gp", "(array int32)"],
+    [233, "gp", "(array float)"],
+    [250, "gp", "(array basic)"]
+  ],
+  "check-for-rougue-process": [
+    [133, "gp", "part-tracker"],
+    [157, "gp", "part-spawner"],
+    [184, "v1", "process-drawable"],
+    [187, "v1", "process-drawable"],
+    [192, "v1", "process-drawable"],
+    [199, "v1", "process-drawable"],
+    [209, "v1", "process-drawable"],
+    [212, "v1", "process-drawable"],
+    [217, "v1", "process-drawable"],
+    [224, "v1", "process-drawable"]
+  ],
+  "flatten-joint-control-to-spr": [
+    [195, "v1", "terrain-context"],
+    [65, "a3", "(pointer float)"],
+    [67, "a3", "(pointer float)"],
+    [47, "a2", "pointer"],
+    [118, "a2", "pointer"],
+    [24, "a3", "(pointer float)"],
+    [17, "a2", "int"]
+  ],
+  "dm-editable-light-float-func": [
+    [36, "a0", "(pointer float)"],
+    [88, "v1", "(pointer float)"],
+    [140, "v1", "(pointer float)"],
+    [81, "a2", "uint"],
+    [88, "a1", "int"]
+  ],
+  "dm-float-field-tie-vanish-far-func": [
+    [25, "s2", "prototype-bucket-tie"],
+    [31, "s2", "prototype-bucket-tie"]
   ]
 }
