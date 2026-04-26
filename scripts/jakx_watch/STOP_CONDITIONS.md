@@ -1,6 +1,49 @@
 # Compound-loop stop conditions + negative-results ledger
 
-Last reviewed: 2026-04-26 (cycle 25)
+Last reviewed: 2026-04-26 (cycle 26 — water111 metric critique landed)
+
+## G0 (FOUNDATIONAL): Compile-pass is primary, rc is leading indicator
+
+**Status:** SATISFIED as of master `2124aea66` / `0129b1717` (2026-04-26).
+
+Background: water111 (OpenGOAL maintainer) Discord critique 2026-04-26
+established that rc/no-errors is a text-scan proxy, not a correctness
+signal. type_cast adds, method-count raises, sig stubs all silence ERROR
+markers without producing semantically correct GOAL — the metric
+incentivizes suppress-not-fix.
+
+The actual correctness signal is **`offline_test_pass`**: files that
+goalc-compile AND match their `_REF.gc` text (transitively bytematching
+the original PS2 .o). For jakx, infrastructure exists today: 227 _REF.gc
+files seeded under `test/decompiler/reference/jakx/`, populated by
+`scripts/jakx_watch/offline_test_pass.py` into
+`.jakx_watch/history/latest.json`. `convergence_metric.py` reads this and
+surfaces it as the primary metric in every snapshot.
+
+**Rules:**
+- Per-applier yield, "did we compound" claims, acceleration trends, lane
+  ranking decisions: anchor on Δ`offline_test_pass`, never on Δrc alone.
+- `convergence_report.py` displays Δpass left of Δrc and warns when
+  Δrc>>Δpass — that's the suppress-not-fix signature.
+- Every compounding/yield claim made BEFORE 2026-04-26 master `2124aea66`
+  is provisional. Re-evaluate in light of pass-data once enough rows
+  accumulate.
+- The wvehicle method-count raise (sha `3b105e769c`, +35 rc) is the
+  canonical case to revisit: did its rc gain come with a pass gain, or
+  was it rc-shaped noise? Track explicitly across the next 5+ cycles.
+- TODO: enhance `offline_test_pass.py` to split compile-only-pass from
+  compare-only-pass (currently amber conflates "didn't compile" with
+  "compiled but text-differs from _REF.gc"). The latter is fine and
+  often just needs a `_REF.gc` refresh.
+- TODO: `offline_test_pass_pct` denominator is the test-scope subset
+  (currently 214 of 619 emitted files). The "real" position number could
+  also be computed against 619 — discuss before publishing claims about
+  total project completeness.
+
+Backfill of pass-data for past commits is impractical (each requires
+checkout + full decomp + offline-test = ~10min per commit, conflicts
+with active sessions). Accept that and let new commits accumulate
+honest data going forward.
 
 ## Why this file exists
 
