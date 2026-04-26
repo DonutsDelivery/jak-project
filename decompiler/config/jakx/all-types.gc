@@ -1997,7 +1997,7 @@
 ;; race-manager                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *race-state* object) ;; race-state
+(define-extern *race-state* race-state) ;; race-state
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-anim                       ;;
@@ -6113,7 +6113,7 @@
 
 
 (define-extern *minimap* minimap) ;; minimap
-(define-extern *minimap-class-list* object) ;; (inline-array minimap-class-node)
+(define-extern *minimap-class-list* (inline-array minimap-class-node)) ;; (inline-array minimap-class-node)
 (define-extern lookup-minimap-texture-by-name (function string string (pointer texture-page) texture))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -13954,7 +13954,7 @@
 (define-extern game-task-node-flag->string (function game-task-node-flag string))
 (define-extern game-task-node-command->string (function game-task-node-command string))
 
-(define-extern *traffic-engine* symbol)
+(define-extern *traffic-engine* traffic-engine)
 
 (define-extern *game-movie* (array game-movie))
 
@@ -37075,7 +37075,7 @@
 (define-extern history-draw-and-update (function pos-history symbol vector symbol))
 (define-extern dma-timeout-cam (function vector))
 (define-extern display-file-info (function int))
-(define-extern add-debug-cursor (function none)) ;; (function symbol bucket-id int int mouse-buttons int)
+(define-extern add-debug-cursor (function symbol bucket-id int int mouse-buttons int)) ;; (function symbol bucket-id int int mouse-buttons int)
 (define-extern *boundary-polygon* (inline-array sky-vertex)) ;; (inline-array sky-vertex)
 (define-extern init-boundary-regs (function none))
 (define-extern add-boundary-shader (function texture-id dma-buffer pointer))
@@ -37364,7 +37364,7 @@
 (define-extern texscroll-make-request (function merc-effect int)) 
 (define-extern texscroll-execute (function none))
 (define-extern vu-lights<-light-group! (function vu-lights light-group none))
-(define-extern foreground-add-mtx-calc (function none)) ;; (function bone-calculation (inline-array pris-mtx) bone-calc-flags bone-calculation)
+(define-extern foreground-add-mtx-calc (function bone-calculation (inline-array pris-mtx) bone-calc-flags bone-calculation)) ;; (function bone-calculation (inline-array pris-mtx) bone-calc-flags bone-calculation)
 (define-extern foreground-wrapup (function none))
 (define-extern *default-shadow-settings* shadow-settings) ;; shadow-settings
 (define-extern foreground-shadow (function draw-control (inline-array pris-mtx) pointer pointer))
@@ -37908,7 +37908,7 @@
 ;; shrub-work                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *instance-shrub-work* object) ;; instance-shrub-work blocked
+(define-extern *instance-shrub-work* instance-shrub-work) ;; instance-shrub-work blocked
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tfrag-near                     ;;
@@ -38218,7 +38218,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *instance-tie-work* instance-tie-work) ;; instance-tie-work
-(define-extern *prototype-tie-work* object) ;; prototype-tie-work blocked
+(define-extern *prototype-tie-work* prototype-tie-work) ;; prototype-tie-work blocked
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tie-methods                    ;;
@@ -39587,8 +39587,8 @@
 (define-extern find-ground-point (function control-info vector float float vector))
 (define-extern collide-shape-moving-angle-set! (function collide-shape-moving vector vector none))
 (define-extern cshape-reaction-update-state (function control-info collide-query vector none))
-(define-extern cshape-reaction-default (function none)) ;; (function control-info collide-query vector vector collide-status)
-(define-extern cshape-reaction-just-move (function none)) ;; (function control-info collide-query vector collide-status)
+(define-extern cshape-reaction-default (function control-info collide-query vector vector collide-status)) ;; (function control-info collide-query vector vector collide-status)
+(define-extern cshape-reaction-just-move (function control-info collide-query vector collide-status)) ;; (function control-info collide-query vector collide-status)
 (define-extern collide-shape-draw-debug-marks (function none))
 (define-extern *col-timer* stopwatch) ;; stopwatch
 (define-extern *frame-timer* stopwatch) ;; stopwatch
@@ -41715,7 +41715,7 @@
 ;; projectile                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern cshape-reaction-projectile (function none)) ;; (function control-info collide-query vector vector collide-status)
+(define-extern cshape-reaction-projectile (function control-info collide-query vector vector collide-status)) ;; (function control-info collide-query vector vector collide-status)
 (define-extern projectile-event-handler (function process int symbol event-message-block projectile :behavior projectile))
 (define-extern projectile-move-fill-all-dirs (function projectile none))
 (define-extern projectile-move-fill-line-sphere (function projectile none))
@@ -41726,7 +41726,7 @@
 (define-extern projectile-bounce-update-velocity (function projectile-bounce none :behavior projectile))
 (define-extern projectile-bounce-falling-post (function none :behavior projectile-bounce))
 (define-extern projectile-bounce-move (function projectile-bounce none))
-(define-extern projectile-bounce-reaction (function none)) ;; (function control-info collide-query vector vector collide-status)
+(define-extern projectile-bounce-reaction (function control-info collide-query vector vector collide-status)) ;; (function control-info collide-query vector vector collide-status)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; rigid-body-h                   ;;
@@ -51686,7 +51686,7 @@
 
 
 (define-extern *debug-move-rigid-body* object)
-(define-extern *rigid-body-work* object) ;; rigid-body-work blocked
+(define-extern *rigid-body-work* rigid-body-work) ;; rigid-body-work blocked
 (define-extern debug-draw-rigid-body-move (function none))
 (define-extern matrix-3x3-triple-transpose-product (function matrix matrix matrix matrix))
 (define-extern damping-time-adjust (function float float float))
