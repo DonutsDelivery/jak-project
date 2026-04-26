@@ -36006,7 +36006,7 @@
     (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
-    (grid-hash-method-15 (_type_ int int int) int) ;; 15 ;; dump-grid-info
+    (grid-hash-method-15 (_type_ int int int) none) ;; 15 ;; dump-grid-info
     (grid-hash-method-16 (_type_ rgba) int) ;; 16
     (grid-hash-method-17 (_type_) int) ;; 17
     (grid-hash-method-18 (_type_ grid-hash-box grid-hash-box) none) ;; 18
@@ -61061,7 +61061,7 @@
     (path-control-method-12 (_type_ vector float float) none) ;; 12
     (displacement-between-two-points-normalized! (_type_ vector float) vector) ;; 13
     (get-point-at-percent-along-path! (_type_ vector float symbol) vector) ;; 14
-    (path-control-method-15 (_type_ vector float float) vector) ;; 15
+    (path-control-method-15 (_type_ vector float float) none) ;; 15
     (displacement-between-points-at-percent-normalized! (_type_ vector float) vector) ;; 16
     (get-num-segments (_type_) float) ;; 17
     (total-distance (_type_) float) ;; 18
