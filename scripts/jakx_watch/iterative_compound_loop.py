@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 """iterative_compound_loop.py — chain ALL extractors across ALL games until convergence.
 
+BEFORE TOUCHING THE WIRING QUEUE: read scripts/jakx_watch/STOP_CONDITIONS.md.
+It carries the negative-results ledger and the gates (G1: yield/hour beats
+single-tool baseline before wiring next tool; G2: cross_port at --max-batch=10
+with --dry-run first; G3: no auto-revert of committed iterations; G4: no
+speculative blacklist expiry). Findings compress between sessions — the
+qualifications live in that file so they don't get lost.
+
 Each iteration runs:
   1. cross_game_return_mismatch_consensus (cross-corroborated, all games)
   2. For each target game, in order:
