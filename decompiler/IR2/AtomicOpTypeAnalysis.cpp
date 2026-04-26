@@ -752,6 +752,11 @@ TP_Type SimpleExpression::get_type_int2(const TypeState& input,
     return TP_Type::make_from_ts(TypeSpec("int"));
   }
 
+  // or Rd, Rs, r0 is a MIPS move pseudo-instruction — propagate the source type
+  if (m_kind == Kind::OR && m_args[1].is_int() && m_args[1].get_int() == 0) {
+    return arg0_type;
+  }
+
   throw std::runtime_error(fmt::format("Cannot get_type_int2: {}, args {} and {}",
                                        to_form(env.file->labels, env).print(), arg0_type.print(),
                                        arg1_type.print()));
