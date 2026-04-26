@@ -81,21 +81,38 @@ if [ "$FORCE" != "1" ] && [ -f "$CFG_HASH_FILE" ]; then
     fi
 fi
 
-# Wipe output so stale files from earlier (maybe-deeper) runs don't pollute
-# the measurement. Our out dir lives entirely under .jakx_watch/, so this is
-# safe — it's never where sessions 1/2 write.
-if [ -d "$OUT_DIR/jakx" ]; then
+# Scoped-decomp support (apply_guard's --scope flag):
+#   JAKX_WATCH_ALLOWED_OBJECTS — JSON array of object names (default: []).
+#                                Passed to decompiler's allowed_objects to
+#                                restrict re-decomp to a subset (~30 sec for
+#                                ~50 files vs ~10 min for the full ~600).
+#   JAKX_WATCH_NO_WIPE         — if "1", do NOT wipe OUT_DIR before decomp.
+#                                Required for scoped runs so unscoped IR2
+#                                files retain their state and measure.py
+#                                reports cumulative metrics.
+ALLOWED_OBJECTS_JSON="${JAKX_WATCH_ALLOWED_OBJECTS:-[]}"
+NO_WIPE="${JAKX_WATCH_NO_WIPE:-0}"
+
+if [ "$NO_WIPE" != "1" ] && [ -d "$OUT_DIR/jakx" ]; then
     rm -rf "$OUT_DIR/jakx"
     echo "wiped previous $OUT_DIR/jakx" | tee -a "$RUN_LOG"
+elif [ "$NO_WIPE" = "1" ]; then
+    echo "NO_WIPE=1 — preserving existing $OUT_DIR/jakx for scoped re-decomp" \
+      | tee -a "$RUN_LOG"
 fi
 
 # Run decomp. The decompiler appends its own timestamped log in $LOG_DIR;
 # we mirror stdout/stderr to our run log so we have a stable handle.
 echo "-- running decompiler --" | tee -a "$RUN_LOG"
+echo "allowed_objects: $ALLOWED_OBJECTS_JSON" | tee -a "$RUN_LOG"
+OVERRIDE_JSON=$(printf '{"decompile_code": true, "levels_extract": false, "allowed_objects": %s, "generate_all_types": false}' "$ALLOWED_OBJECTS_JSON")
+# Sentinel for "files actually emitted by THIS run" check (NO_WIPE-safe).
+SENTINEL="$ROOT/.jakx_watch/.run_sentinel.$$"
+touch "$SENTINEL"
 set +e
 "$BIN" "$CFG" "$ISO" "$OUT_DIR" \
     --version ntsc_v1 \
-    --config-override '{"decompile_code": true, "levels_extract": false, "allowed_objects": [], "generate_all_types": false}' \
+    --config-override "$OVERRIDE_JSON" \
     >>"$RUN_LOG" 2>&1
 RC=$?
 set -e
@@ -108,8 +125,13 @@ echo "-- decompiler exited rc=$RC (elapsed ${ELAPSED}s) --" | tee -a "$RUN_LOG"
 DECOMP_LOG=$(ls -t "$LOG_DIR"/decompiler.*.log 2>/dev/null | head -1)
 
 # Success-ish: if we emitted any _disasm.gc files, measurement is meaningful.
-N_OUT=$(find "$OUT_DIR/jakx" -name '*_disasm.gc' 2>/dev/null | wc -l)
-echo "emitted $N_OUT _disasm.gc files" | tee -a "$RUN_LOG"
+# Use sentinel-newer count so NO_WIPE runs don't falsely pass on stale files.
+N_OUT_FRESH=$(find "$OUT_DIR/jakx" -name '*_disasm.gc' -newer "$SENTINEL" 2>/dev/null | wc -l)
+N_OUT_TOTAL=$(find "$OUT_DIR/jakx" -name '*_disasm.gc' 2>/dev/null | wc -l)
+rm -f "$SENTINEL"
+echo "emitted $N_OUT_FRESH new (of $N_OUT_TOTAL total) _disasm.gc files" | tee -a "$RUN_LOG"
+# Backwards-compat: full-decomp paths use N_OUT below.
+N_OUT="$N_OUT_FRESH"
 
 if [ "$N_OUT" = "0" ]; then
     echo "NO output files emitted — types likely failed to load." | tee -a "$RUN_LOG"

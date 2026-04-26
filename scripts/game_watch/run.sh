@@ -111,17 +111,34 @@ if [ "$FORCE" != "1" ] && [ -f "$CFG_HASH_FILE" ]; then
     fi
 fi
 
-# Wipe previous decomp output (private to .<game>_watch/, never global decompiler_out).
-if [ -d "$OUT_DIR/$GAME" ]; then
+# Scoped-decomp support (apply_guard's --scope flag):
+#   GAME_WATCH_ALLOWED_OBJECTS — JSON array of object names (default: []).
+#                                Restricts decomp to a subset for fast
+#                                regression-validation in the compounding loop.
+#   GAME_WATCH_NO_WIPE         — if "1", preserve existing OUT_DIR so unscoped
+#                                IR2 retains state and measure reports
+#                                cumulative metrics.
+ALLOWED_OBJECTS_JSON="${GAME_WATCH_ALLOWED_OBJECTS:-[]}"
+NO_WIPE="${GAME_WATCH_NO_WIPE:-0}"
+
+if [ "$NO_WIPE" != "1" ] && [ -d "$OUT_DIR/$GAME" ]; then
     rm -rf "$OUT_DIR/$GAME"
     echo "wiped previous $OUT_DIR/$GAME" | tee -a "$RUN_LOG"
+elif [ "$NO_WIPE" = "1" ]; then
+    echo "NO_WIPE=1 — preserving existing $OUT_DIR/$GAME for scoped re-decomp" \
+      | tee -a "$RUN_LOG"
 fi
 
 echo "-- running decompiler --" | tee -a "$RUN_LOG"
+echo "allowed_objects: $ALLOWED_OBJECTS_JSON" | tee -a "$RUN_LOG"
+OVERRIDE_JSON=$(printf '{"decompile_code": true, "levels_extract": false, "allowed_objects": %s, "generate_all_types": false}' "$ALLOWED_OBJECTS_JSON")
+# Sentinel for "files actually emitted by THIS run" check (NO_WIPE-safe).
+SENTINEL="$WATCH_DIR/.run_sentinel.$$"
+touch "$SENTINEL"
 set +e
 "$BIN" "$CFG" "$ISO" "$OUT_DIR" \
     --version ntsc_v1 \
-    --config-override '{"decompile_code": true, "levels_extract": false, "allowed_objects": [], "generate_all_types": false}' \
+    --config-override "$OVERRIDE_JSON" \
     >>"$RUN_LOG" 2>&1
 RC=$?
 set -e
@@ -130,8 +147,12 @@ END=$(date +%s)
 ELAPSED=$((END - START))
 echo "-- decompiler exited rc=$RC (elapsed ${ELAPSED}s) --" | tee -a "$RUN_LOG"
 
-N_OUT=$(find "$OUT_DIR/$GAME" -name '*_disasm.gc' 2>/dev/null | wc -l)
-echo "emitted $N_OUT _disasm.gc files" | tee -a "$RUN_LOG"
+# Use sentinel-newer count so NO_WIPE runs don't falsely pass on stale files.
+N_OUT_FRESH=$(find "$OUT_DIR/$GAME" -name '*_disasm.gc' -newer "$SENTINEL" 2>/dev/null | wc -l)
+N_OUT_TOTAL=$(find "$OUT_DIR/$GAME" -name '*_disasm.gc' 2>/dev/null | wc -l)
+rm -f "$SENTINEL"
+echo "emitted $N_OUT_FRESH new (of $N_OUT_TOTAL total) _disasm.gc files" | tee -a "$RUN_LOG"
+N_OUT="$N_OUT_FRESH"
 
 if [ "$N_OUT" = "0" ]; then
     echo "NO output files emitted — types likely failed to load." | tee -a "$RUN_LOG"

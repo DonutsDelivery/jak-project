@@ -41,7 +41,8 @@ from return_mismatch_apply import (  # noqa: E402
     build_type_hierarchy,
 )
 from method_body_reader import MethodBodyReader  # noqa: E402
-from apply_guard import run_with_guard  # noqa: E402
+from apply_guard import run_with_guard, bisect_apply  # noqa: E402
+import blacklist as _bl  # noqa: E402
 
 GAMES = ("jak1", "jak2", "jak3")
 
@@ -59,6 +60,48 @@ def parse_pattern(s: str) -> tuple[str, str]:
         raise argparse.ArgumentTypeError(f"pattern must be 'declared:actual', got {s!r}")
     decl, actual = s.split(":", 1)
     return (decl, actual)
+
+
+def parse_fix_tag(tag: str) -> tuple[str, str, str] | None:
+    """Extract (type, method, 'decl:actual') from a fix tag.
+    Tag format: 'TYPE::method-N: DECL → ACTUAL ...'
+    Returns None if the tag doesn't parse (e.g. unexpected format).
+    """
+    try:
+        head, rest = tag.split(": ", 1)
+        type_part, method = head.split("::", 1)
+        decl_actual = rest.split(" → ", 1)
+        decl = decl_actual[0].strip()
+        actual = decl_actual[1].split(" ", 1)[0].strip()
+        return (type_part, method, f"{decl}:{actual}")
+    except (ValueError, IndexError):
+        return None
+
+
+def extract_edited_types_from_fixes(fixes: list) -> set[str]:
+    """Pull type names out of fix tags. Used for impact_set scoping."""
+    out: set[str] = set()
+    for _, _, _, tag in fixes:
+        parsed = parse_fix_tag(tag)
+        if parsed:
+            out.add(parsed[0])
+    return out
+
+
+def filter_blacklisted(fixes: list, game: str) -> tuple[list, int]:
+    """Drop fixes already on the blacklist. Returns (kept_fixes, n_skipped)."""
+    if not fixes:
+        return fixes, 0
+    kept = []
+    skipped = 0
+    for f in fixes:
+        _, _, _, tag = f
+        parsed = parse_fix_tag(tag)
+        if parsed and _bl.is_blacklisted(game, parsed[0], parsed[1], parsed[2]):
+            skipped += 1
+            continue
+        kept.append(f)
+    return kept, skipped
 
 
 def commit_change(game: str, all_types: Path, summary: str) -> str:
@@ -91,6 +134,12 @@ def main() -> int:
     ap.add_argument("--no-guard", action="store_true",
                     help="Skip apply_guard regression-check (faster, no auto-revert). "
                          "Default: use apply_guard now that .<game>_watch/ infra exists.")
+    ap.add_argument("--bisect", action="store_true",
+                    help="On guard failure, recursively halve the fix set to "
+                         "isolate bad apples. Each isolated bad fix is added "
+                         "to .compound_loop/blacklist.json. Pairs well with "
+                         "COMPOUND_LOOP_SCOPED=1 (each bisect step is a "
+                         "scoped ~30s decomp instead of 10min).")
     args = ap.parse_args()
 
     decomp_dir, all_types = paths_for(args.game)
@@ -120,6 +169,14 @@ def main() -> int:
     fixes = plan_fixes(method_entries, method_line_index, parent_to_children,
                        active_patterns, reader=reader)
     print(f"[{args.game}] planned {len(fixes)} edits")
+
+    # Filter against persistent blacklist (fixes that previously failed
+    # apply_guard's regression-gate). Without this filter, every iteration
+    # would re-attempt the same losing patches and waste a decomp cycle.
+    fixes, skipped_bl = filter_blacklisted(fixes, args.game)
+    if skipped_bl:
+        print(f"[{args.game}] skipped {skipped_bl} blacklisted candidate(s); "
+              f"{len(fixes)} remain")
 
     if not fixes:
         print(f"[{args.game}] nothing to do")
@@ -175,6 +232,33 @@ def main() -> int:
     msg = (f"fix({args.game}/all-types): {summary}\n\n"
            f"Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>\n")
 
+    edited_types = extract_edited_types_from_fixes(fixes)
+
+    if args.bisect:
+        # Recursive bisect: kept_fixes commit in subsets, blacklisted_fixes
+        # are isolated bad apples added to .compound_loop/blacklist.json.
+        msg_template = (f"fix({args.game}/all-types): return-mismatch "
+                        f"bisect-pass ({{n}} fixes) [{{label}}]\n\n"
+                        f"Co-Authored-By: Claude Opus 4.7 (1M context) "
+                        f"<noreply@anthropic.com>\n")
+
+        def apply_subset(subset):
+            apply_fixes(all_types, subset)
+
+        kept, blacklisted = bisect_apply(
+            fixes, all_types,
+            apply_fn=apply_subset,
+            label=f"return-mismatch-{args.game}",
+            game=args.game,
+            extract_blacklist_key=lambda f: parse_fix_tag(f[3]),
+            extract_edited_types=extract_edited_types_from_fixes,
+            commit_on_pass=args.commit,
+            commit_message_template=msg_template,
+        )
+        print(f"\n[{args.game}] BISECT DONE: {len(kept)}/{len(fixes)} fixes kept; "
+              f"{len(blacklisted)} blacklisted")
+        return 0
+
     def edit_fn():
         apply_fixes(all_types, fixes)
         return [all_types]
@@ -185,6 +269,7 @@ def main() -> int:
         commit_on_pass=args.commit,
         commit_message=msg,
         game=args.game,
+        edited_types=edited_types,
     )
     if not result.passed:
         print(f"[{args.game}] FAIL — {result.reason}")

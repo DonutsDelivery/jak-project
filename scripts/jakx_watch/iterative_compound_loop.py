@@ -26,6 +26,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import re
 import subprocess
@@ -35,8 +36,36 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPTS = ROOT / "scripts" / "jakx_watch"
+STATE_DIR = ROOT / ".compound_loop"
+STATE_FILE = STATE_DIR / "state.json"
 
 GAMES = ("jak1", "jak2", "jak3", "jakx")
+
+# Adaptive top-N: each tool/game pair tracks its current "top" value and how
+# many consecutive zero-progress iterations it has had. After N=1 zero-progress
+# iter, top doubles (capped at TOP_CAP). On any progress, top resets to default.
+TOP_CAP = 200
+TOP_DEFAULTS = {
+    "return_mismatch": 5,
+    "sig_passthrough": 30,
+    # type_cast / store_cast use --batch-size, not --top; their "top" here
+    # is treated as batch-size.
+    "type_cast": 15,
+    "store_cast": 15,
+}
+
+# Map commit message tags → tool name (for attribution after each iter).
+COMMIT_TAG_TO_TOOL = [
+    ("return-mismatch", "return_mismatch"),
+    ("sig_passthrough", "sig_passthrough"),
+    ("sig-passthrough", "sig_passthrough"),
+    ("type_cast", "type_cast"),
+    ("type-cast", "type_cast"),
+    ("type-casts", "type_cast"),
+    ("store_cast", "store_cast"),
+    ("store-cast", "store_cast"),
+    ("consensus", "consensus"),
+]
 
 _RE_RC = re.compile(r"^\s*real-clean\s*:\s*(\d+)", re.MULTILINE)
 _RE_ERR = re.compile(r"^inline ERROR markers:\s+(\d+)", re.MULTILINE)
@@ -45,6 +74,83 @@ _RE_WARN = re.compile(r"^inline WARN\s+markers:\s+(\d+)", re.MULTILINE)
 
 def status_md_for(game: str) -> Path:
     return ROOT / f".{game}_watch" / "status.md"
+
+
+# ---- Adaptive top-N state ---------------------------------------------------
+
+def load_state() -> dict:
+    """Load persistent loop state. Returns empty schema on first run."""
+    if not STATE_FILE.exists():
+        return {"tools": {}}
+    try:
+        return json.loads(STATE_FILE.read_text())
+    except (json.JSONDecodeError, OSError):
+        return {"tools": {}}
+
+
+def save_state(state: dict) -> None:
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    tmp = STATE_FILE.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(state, indent=2) + "\n")
+    tmp.replace(STATE_FILE)
+
+
+def get_top(state: dict, tool: str, game: str) -> int:
+    """Return the current top/batch-size for a (tool, game) pair."""
+    return (state.get("tools", {})
+                 .get(tool, {})
+                 .get(game, {})
+                 .get("top", TOP_DEFAULTS.get(tool, 5)))
+
+
+def update_top(state: dict, tool: str, game: str,
+               had_progress: bool) -> tuple[int, int]:
+    """Update state for a (tool, game) after an iteration.
+
+    Returns (new_top, prev_top). If progress: reset to default. If not: bump.
+    """
+    tools = state.setdefault("tools", {})
+    tdata = tools.setdefault(tool, {})
+    gdata = tdata.setdefault(game, {"top": TOP_DEFAULTS.get(tool, 5),
+                                    "empty_iters": 0})
+    prev_top = gdata.get("top", TOP_DEFAULTS.get(tool, 5))
+    if had_progress:
+        # Reset on progress — gives easy patterns a chance to catch up
+        gdata["top"] = TOP_DEFAULTS.get(tool, 5)
+        gdata["empty_iters"] = 0
+    else:
+        gdata["empty_iters"] = gdata.get("empty_iters", 0) + 1
+        # Bump on first zero-progress iter; keep doubling if it persists
+        new_top = min(prev_top * 2, TOP_CAP)
+        gdata["top"] = new_top
+    return gdata["top"], prev_top
+
+
+def attribute_commits(commits: list[str], target_games: list[str]) -> dict[tuple[str, str], int]:
+    """Parse commit messages to count commits per (tool, game).
+
+    Commit format: "<sha> fix(<game>/<scope>): <tag>..." or similar.
+    Returns {(tool, game): count}.
+    """
+    counts: dict[tuple[str, str], int] = {}
+    for c in commits:
+        c_lower = c.lower()
+        # Find game
+        found_game = None
+        for g in target_games:
+            # e.g. "fix(jak2/all-types)" or "fix(jak2):" — match game token
+            if f"({g}/" in c_lower or f"({g})" in c_lower or f"/{g}/" in c_lower:
+                found_game = g
+                break
+        if not found_game:
+            continue
+        # Find tool by tag
+        for tag, tool in COMMIT_TAG_TO_TOOL:
+            if tag in c_lower:
+                key = (tool, found_game)
+                counts[key] = counts.get(key, 0) + 1
+                break
+    return counts
 
 
 def read_status_safe(game: str, max_wait: int = 60) -> tuple[int, int, int]:
@@ -109,13 +215,25 @@ def run_decompiler(game: str) -> int:
     return r.returncode
 
 
-def run_tool(label: str, cmd: list[str], timeout: int = 1800) -> int:
-    """Run a tool, print the last few output lines."""
-    print(f"\n[loop] {label}")
+def run_tool(label: str, cmd: list[str], timeout: int = 1800,
+             scoped: bool = False) -> int:
+    """Run a tool, print the last few output lines.
+
+    scoped: if True, sets COMPOUND_LOOP_SCOPED=1 so apply_guard auto-computes
+    a scoped decomp from edited_types. Tools that don't pass edited_types
+    fall through to full decomp regardless. The env var is opt-in fast mode.
+    """
+    print(f"\n[loop] {label}{' (scoped)' if scoped else ' (full)'}")
     print(f"[loop]   $ {' '.join(cmd)}")
     t0 = time.time()
+    env = {**os.environ}
+    if scoped:
+        env["COMPOUND_LOOP_SCOPED"] = "1"
+    else:
+        env.pop("COMPOUND_LOOP_SCOPED", None)
     try:
-        r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=timeout)
+        r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True,
+                           timeout=timeout, env=env)
         dt = time.time() - t0
         out = (r.stdout or "") + (r.stderr or "")
         print(f"[loop]   exit={r.returncode} ({dt:.1f}s)")
@@ -178,6 +296,16 @@ def main() -> int:
                     help="--top N for sig_passthrough_apply (default: 30)")
     ap.add_argument("--batch-size", type=int, default=15,
                     help="--batch-size for type_cast / store_cast extractors")
+    ap.add_argument("--checkpoint-every", type=int, default=5,
+                    help="Force full decomp every N iterations as a "
+                         "trust-but-verify gate against scoped-decomp reward "
+                         "hacking (default: 5; 0 = disable, always scoped)")
+    ap.add_argument("--no-scoped", action="store_true",
+                    help="Disable scoped fast-mode entirely; every iteration "
+                         "uses full decomp like the pre-fast era")
+    ap.add_argument("--no-adaptive", action="store_true",
+                    help="Disable adaptive top-N (use --top / --sig-top / "
+                         "--batch-size as fixed values, not seeds)")
     args = ap.parse_args()
 
     if args.game == "all":
@@ -193,9 +321,25 @@ def main() -> int:
             print(f"ERROR: unknown tool '{t}'. Valid: {sorted(valid_tools)}", file=sys.stderr)
             return 1
 
+    # Adaptive top-N state (persists across sessions). Override defaults with
+    # caller-supplied --top / --sig-top / --batch-size so they act as floors.
+    state = load_state()
+    if args.no_adaptive:
+        # Pin every (tool, game) to caller-supplied values
+        for tool in ("return_mismatch", "sig_passthrough", "type_cast", "store_cast"):
+            tools_d = state.setdefault("tools", {}).setdefault(tool, {})
+            base = (args.top if tool == "return_mismatch"
+                    else args.sig_top if tool == "sig_passthrough"
+                    else args.batch_size)
+            for g in target_games:
+                tools_d[g] = {"top": base, "empty_iters": 0, "pinned": True}
+        save_state(state)
+
     print(f"[loop] target games: {target_games}")
     print(f"[loop] tools per iter: {tools}")
     print(f"[loop] max-iters: {args.max_iters}, zero-delta-stop: {args.zero_delta_stop}")
+    print(f"[loop] adaptive top-N: {'OFF (pinned)' if args.no_adaptive else 'ON'}, "
+          f"checkpoint-every: {args.checkpoint_every}")
 
     # Initial baseline — only stable read at start (race-free reference point)
     print(f"\n[loop] reading stable baselines (waiting for status.md to settle)...")
@@ -209,31 +353,55 @@ def main() -> int:
     session_start_sha = git_head_sha()
     print(f"[loop] session start HEAD: {session_start_sha[:10]}")
 
+    # Checkpoint state — full-decomp gate against scoped-mode reward hacking.
+    # Each checkpoint records (sha, per-game metrics). Regression vs prior
+    # checkpoint is a strong signal that scoped iterations missed something.
+    checkpoint_sha = session_start_sha
+    checkpoint_metrics: dict[str, tuple[int, int, int]] = dict(session_start)
+
     no_progress_count = 0
     for it in range(1, args.max_iters + 1):
-        print(f"\n{'='*64}\n[loop] ITERATION {it}\n{'='*64}")
+        # Checkpoint policy:
+        #   - Iteration is FULL if --no-scoped, OR if no scoped support yet,
+        #     OR if it % checkpoint_every == 0 AND it > 0.
+        #   - Otherwise SCOPED (fast).
+        is_checkpoint = (
+            args.no_scoped
+            or args.checkpoint_every <= 0
+            or (it % args.checkpoint_every == 0)
+        )
+        scoped_iter = not is_checkpoint
+        mode = "CHECKPOINT (full)" if is_checkpoint else "SCOPED (fast)"
+        print(f"\n{'='*64}\n[loop] ITERATION {it} — {mode}\n{'='*64}")
         iter_start_sha = git_head_sha()
 
         # 1) Cross-game consensus (operates on all games at once)
         if "consensus" in tools:
-            run_tool("consensus", cmd_consensus())
+            run_tool("consensus", cmd_consensus(), scoped=scoped_iter)
 
-        # 2-4) Per-game tools, in game order
+        # 2-4) Per-game tools, in game order. Each tool reads its current
+        # adaptive top from state (or floor from CLI flag, whichever is
+        # higher — CLI flag acts as a floor, not an override).
         for game in target_games:
             print(f"\n[loop] --- game: {game} ---")
             if "return_mismatch" in tools:
-                run_tool(f"return_mismatch [{game}]",
-                         cmd_return_mismatch(game, args.top))
+                top = max(get_top(state, "return_mismatch", game), args.top)
+                run_tool(f"return_mismatch [{game}] top={top}",
+                         cmd_return_mismatch(game, top), scoped=scoped_iter)
             if "sig_passthrough" in tools:
-                run_tool(f"sig_passthrough [{game}]",
-                         cmd_sig_passthrough(game, args.sig_top))
+                top = max(get_top(state, "sig_passthrough", game), args.sig_top)
+                run_tool(f"sig_passthrough [{game}] top={top}",
+                         cmd_sig_passthrough(game, top), scoped=scoped_iter)
             if "type_cast" in tools:
-                run_tool(f"type_cast [{game}]",
-                         cmd_type_cast(game, args.batch_size))
+                bs = max(get_top(state, "type_cast", game), args.batch_size)
+                run_tool(f"type_cast [{game}] batch={bs}",
+                         cmd_type_cast(game, bs), scoped=scoped_iter)
             if "store_cast" in tools:
-                cmd = cmd_store_cast(game, args.batch_size)
+                bs = max(get_top(state, "store_cast", game), args.batch_size)
+                cmd = cmd_store_cast(game, bs)
                 if cmd is not None:
-                    run_tool(f"store_cast [{game}]", cmd)
+                    run_tool(f"store_cast [{game}] batch={bs}", cmd,
+                             scoped=scoped_iter)
 
         # Convergence: measure by COMMITS made (race-free, vs status.md
         # which races with concurrent decomps).
@@ -241,6 +409,21 @@ def main() -> int:
         print(f"\n[loop] iter {it}: {len(iter_commits)} commits landed")
         for c in iter_commits:
             print(f"[loop]   {c}")
+
+        # Adaptive top-N: attribute commits to (tool, game), bump tops for
+        # any pair with zero progress, reset for pairs that produced commits.
+        if not args.no_adaptive:
+            commit_attrib = attribute_commits(iter_commits, target_games)
+            for tool in ("return_mismatch", "sig_passthrough", "type_cast", "store_cast"):
+                if tool not in tools:
+                    continue
+                for g in target_games:
+                    had_progress = commit_attrib.get((tool, g), 0) > 0
+                    new_top, prev_top = update_top(state, tool, g, had_progress)
+                    if new_top != prev_top:
+                        action = "↓ reset" if had_progress else "↑ bump"
+                        print(f"[loop]   {tool}[{g}] top {prev_top}→{new_top} ({action})")
+            save_state(state)
 
         if not iter_commits:
             no_progress_count += 1
@@ -250,6 +433,42 @@ def main() -> int:
                 break
         else:
             no_progress_count = 0
+
+        # On checkpoint iterations: read post-checkpoint metrics and compare
+        # to prior checkpoint. Soft-veto (log) on regression — full revert of
+        # scoped iterations is risky enough to require human triage.
+        if is_checkpoint:
+            print(f"\n[loop] CHECKPOINT @ iter {it}: comparing metrics to prior checkpoint")
+            current_sha = git_head_sha()
+            ckpt_commits = commits_since(checkpoint_sha)
+            print(f"[loop]   {len(ckpt_commits)} commits since last checkpoint "
+                  f"({checkpoint_sha[:10]} → {current_sha[:10]})")
+            regression_detected = False
+            for g in target_games:
+                cur_rc, cur_err, cur_warn = read_status_safe(g)
+                old_rc, old_err, old_warn = checkpoint_metrics[g]
+                if cur_rc < 0:
+                    print(f"[loop]   {g}: (status not stable; skip checkpoint compare)")
+                    continue
+                drc = cur_rc - old_rc
+                derr = cur_err - old_err
+                print(f"[loop]   {g}: rc {old_rc:>4}→{cur_rc:<4} (Δ{drc:+d})  "
+                      f"err {old_err:>5}→{cur_err:<5} (Δ{derr:+d})")
+                # Regression rule: rc dropped (no noise floor at checkpoint —
+                # we're comparing two FULL decomps, both authoritative).
+                if drc < 0:
+                    print(f"[loop]   {g}: ⚠ CHECKPOINT REGRESSION rc dropped {drc} "
+                          f"— scoped iterations may have missed a global break")
+                    regression_detected = True
+                checkpoint_metrics[g] = (cur_rc, cur_err, cur_warn)
+            if regression_detected:
+                print(f"[loop] ⚠ regression spans {len(ckpt_commits)} commit(s) "
+                      f"between {checkpoint_sha[:10]}…{current_sha[:10]}")
+                print(f"[loop]   to investigate: git log {checkpoint_sha[:10]}..{current_sha[:10]}")
+                print(f"[loop]   to revert all: git reset --hard {checkpoint_sha[:10]}")
+                # Continuing rather than auto-reverting: bisect-on-revert
+                # (task #48) will handle this more granularly via apply_guard.
+            checkpoint_sha = current_sha
 
     # Session summary — final stable read (after all decomps settle)
     print(f"\n{'='*64}")
