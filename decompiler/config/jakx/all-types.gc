@@ -8060,6 +8060,10 @@
 ;; <renderer>-l<level>-<tpage>
 (defenum bucket-id
   :type int32
+  (bucket0 0)
+  (bucket1 1)
+  (bucket2 2)
+  (blit 3)
   (debug 793)
   )
 
@@ -15383,6 +15387,7 @@
    (ambient                 (pointer process)   :offset-assert 48) ;; guessed by decompiler
    (video-mode              symbol              :offset-assert 52) ;; guessed by decompiler
    (aspect-ratio            symbol              :offset-assert 56) ;; guessed by decompiler
+   (set-video-mode          symbol              :offset-assert 60)
    (auto-save               symbol              :offset 72) ;; guessed by decompiler
    (rotate-arena-minimap    symbol              :offset-assert 76)
    (bg-r                    float               :offset-assert 80)
