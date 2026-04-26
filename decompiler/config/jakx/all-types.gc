@@ -4712,7 +4712,7 @@
 (define-extern *curve-toad-linear-up-red* curve2d-piecewise)
 (define-extern *trail-color-curve-grenade-yellow* curve-color-fast)
 (define-extern *curve-grenade-linear-toad-trail* curve2d-fast) ;; curve2d-fast
-(define-extern *grenade-1-trail* object)
+(define-extern *grenade-1-trail* light-trail-composition)
 (define-extern *trail-color-curve-grenade-purple* curve-color-fast)
 (define-extern *grenade-2-trail* light-trail-composition)
 (define-extern *curve-yellow-tracker-linear-up-red* curve2d-piecewise)
@@ -11798,7 +11798,7 @@
     (weather-event-concluded? ;; TODO - guess at name
       "@returns [[#t]] if [[this::override-weather-flag]] is set, we aren't in a cutscene and [[this::current-special-interp]] is equal to `0.0`"
       (_type_) symbol) ;; 14 ;; (apply-mood-color (_type_ mood-control-work) none)
-    (set-lightning-time! (_type_ mood-control-work) int) ;; 15
+    (set-lightning-time! (_type_ mood-control-work int float) int) ;; 15
     (apply-mood-clouds-and-fog (_type_ mood-control-work) int) ;; 16 ;; (adjust-num-clouds! (_type_ mood-control-work) none)
     (apply-mood-fog (_type_ mood-control-work mood-color-table mood-color-table mood-color-table float) int) ;; 17
     (apply-fog-height (_type_ mood-control-work float float float float) int) ;; 18
@@ -12381,7 +12381,7 @@
   (:methods
     (minimap-method-9 (_type_) none) ;; 9 ;; (debug-draw (_type_) none)
     (minimap-method-10 (_type_ connection-minimap symbol) none) ;; 10 ;; (get-trail-for-connection (_type_ connection-minimap symbol) minimap-trail)
-    (minimap-method-11 (_type_) none) ;; 11 ;; (get-icon-draw-pos (_type_ connection-minimap minimap-trail vector float vector) symbol)
+    (minimap-method-11 (_type_ connection-minimap object vector) none) ;; 11 ;; (get-icon-draw-pos (_type_ connection-minimap minimap-trail vector float vector) symbol)
     (minimap-method-12 (_type_ process uint int vector int) none) ;; 12 ;; (add-icon! (_type_ process uint int vector int) connection-minimap)
     (minimap-method-13 (_type_ connection-minimap) int) ;; 13 ;; (free-trail-by-connection (_type_ connection-minimap) none)
     (minimap-method-14 (_type_ uint uint) none) ;; 14 ;; (update-trails (_type_) none)
@@ -16573,7 +16573,7 @@
     (ocean-method-39 (_type_ dma-buffer object object) none) ;; 39
     (ocean-method-40 (_type_ dma-buffer object object object object) none) ;; 40
     (ocean-method-41 (_type_ dma-buffer int) none) ;; 41
-    (ocean-method-42 (_type_ dma-buffer) int) ;; 42
+    (ocean-method-42 (_type_ dma-buffer uint) int) ;; 42
     (ocean-method-43 (_type_ matrix matrix matrix) matrix) ;; 43
     (ocean-method-44 (_type_ vector vector matrix) symbol) ;; 44
     (ocean-method-45 (_type_ uint uint) symbol) ;; 45
@@ -19733,7 +19733,7 @@
   :size-assert         #x6a8
   :flag-assert         #x1f000006a8
   (:methods
-    (game-info-method-9 (_type_) none) ;; 9 ;; (initialize! (_type_ symbol game-save string resetter-spec) _type_)
+    (game-info-method-9 (_type_ symbol object string) none) ;; 9 ;; (initialize! (_type_ symbol game-save string resetter-spec) _type_)
     (game-info-method-10 (_type_ symbol float handle) float) ;; 10
     (game-info-method-11 (_type_ game-task) symbol) ;; 11
     (game-info-method-12 (_type_ string) int) ;; 12
@@ -19747,11 +19747,11 @@
     (game-info-method-20 (_type_ basic symbol) continue-point) ;; 20
     (game-info-method-21 (_type_) int) ;; 21
     (game-info-method-22 (_type_) none) ;; 22 ;; (save-game (_type_ game-save string) game-save)
-    (game-info-method-23 (_type_) none) ;; 23 ;; (load-game (_type_ game-save) game-save)
+    (game-info-method-23 (_type_ object) none) ;; 23 ;; (load-game (_type_ game-save) game-save)
     (game-info-method-24 (_type_ symbol int) int) ;; 24
     (you-suck-scale (_type_ symbol int) float) ;; 25
     (get-next-attack-id! (_type_) uint) ;; 26
-    (game-info-method-27 (_type_) none) ;; 27 ;; (game-info-method-27 (_type_ game-score float) int)
+    (game-info-method-27 (_type_ object float) none) ;; 27 ;; (game-info-method-27 (_type_ game-score float) int)
     (game-info-method-28 (_type_ int) (pointer float)) ;; 28
     (game-info-method-29 (_type_ int) int) ;; 29
     (game-info-method-30 (_type_ int float) none) ;; 30
@@ -29829,7 +29829,7 @@
     (collide-shape-method-47 (_type_ collide-spec) int) ;; 47
     (collide-shape-method-48 (_type_ collide-spec) int) ;; 48
     (modify-collide-as! (_type_ int collide-spec collide-spec) int) ;; 49
-    (collide-shape-method-50 (_type_) none) ;; 50 ;; (send-shoves (_type_ process touching-shapes-entry float float float) symbol)
+    (collide-shape-method-50 (_type_ process object float) none) ;; 50 ;; (send-shoves (_type_ process touching-shapes-entry float float float) symbol)
     (collide-shape-method-51 (_type_ collide-query vector collide-spec float float float) none) ;; 51
     (collide-shape-method-52 (_type_ water-info collide-action) water-info) ;; 52
     (iterate-prims (_type_ (function collide-shape-prim none)) none) ;; 53
@@ -30437,7 +30437,7 @@
   (:methods
     (touching-prims-entry-method-9 (_type_ vector) vector) ;; 9
     (touching-prims-entry-method-10 (_type_ vector) vector) ;; 10
-    (touching-prims-entry-method-11 (_type_) none) ;; 11 ;; (get-touched-prim (_type_ collide-shape touching-shapes-entry) collide-shape-prim)
+    (touching-prims-entry-method-11 (_type_ collide-shape object) none) ;; 11 ;; (get-touched-prim (_type_ collide-shape touching-shapes-entry) collide-shape-prim)
     (touching-prims-entry-method-12 (_type_ int uint) symbol) ;; 12 ;; (get-touched-tri (_type_ collide-shape touching-shapes-entry) collide-tri-result)
     )
   )
@@ -39610,7 +39610,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern collide-planes-intersect (function none))
-(define-extern collide-planes-test0 (function none))
+(define-extern collide-planes-test0 (function vector float float none))
 (define-extern collide-planes-test1 (function none))
 (define-extern collide-planes (function symbol))
 
@@ -53032,28 +53032,28 @@
 (define-extern *DISP_LIST-bank* DISP_LIST-bank)
 (define-extern display-list-control (function none))
 (define-extern *ANIM_TESTER-bank* anim-tester-bank)
-(define-extern anim-tester-num-print (function none))
+(define-extern anim-tester-num-print (function basic none))
 (define-extern *anim-tester* (pointer anim-tester)) ;; (pointer anim-tester)
-(define-extern anim-test-obj-init (function none))
+(define-extern anim-test-obj-init (function anim-test-obj none))
 (define-extern anim-test-sequence-init (function anim-test-sequence anim-test-obj none))
-(define-extern anim-test-seq-item-copy! (function none))
-(define-extern anim-test-obj-item-valid? (function none))
+(define-extern anim-test-seq-item-copy! (function anim-test-seq-item none))
+(define-extern anim-test-obj-item-valid? (function anim-test-obj none))
 (define-extern anim-test-obj-remove-invalid (function none))
 (define-extern anim-tester-real-post (function none :behavior anim-tester))
 (define-extern anim-tester-post (function none))
 (define-extern anim-tester-update-anim-info (function none))
 (define-extern anim-tester-reset (function none))
-(define-extern anim-tester-disp-frame-num (function pointer))
-(define-extern anim-tester-standard-event-handler (function none))
-(define-extern anim-test-obj-list-handler (function none))
+(define-extern anim-tester-disp-frame-num (function string float float pointer))
+(define-extern anim-tester-standard-event-handler (function process int none))
+(define-extern anim-test-obj-list-handler (function int none))
 (define-extern anim-test-anim-list-handler (function none))
 (define-extern anim-test-sequence-list-handler (function none))
 (define-extern anim-test-field-highlight-lw object)
-(define-extern anim-tester-adjust-frame (function none))
-(define-extern anim-tester-pick-item-setup (function none))
+(define-extern anim-tester-adjust-frame (function float none))
+(define-extern anim-tester-pick-item-setup (function anim-test-seq-item none))
 (define-extern anim-test-seq-mark-as-edited (function anim-test-sequence none))
-(define-extern anim-test-edit-seq-insert-item (function none))
-(define-extern anim-test-edit-sequence-list-handler (function none))
+(define-extern anim-test-edit-seq-insert-item (function anim-test-seq-item none))
+(define-extern anim-test-edit-sequence-list-handler (function int none))
 (define-extern anim-tester-interface (function none))
 (define-extern anim-tester-get-playing-item (function none))
 (define-extern initialize-anim-tester (function none))
@@ -53061,7 +53061,7 @@
 (define-extern anim-tester-load-object-seqs (function symbol))
 (define-extern anim-tester-save-object-seqs (function none))
 (define-extern anim-tester-save-all-objects (function anim-tester symbol))
-(define-extern anim-tester-add-newobj (function none))
+(define-extern anim-tester-add-newobj (function anim-tester string none))
 (define-extern anim-tester-stop (function symbol))
 (define-extern anim-tester-start (function symbol))
 (define-extern anim-tester-add-object (function string none))
@@ -53996,9 +53996,9 @@
   (:methods
     (nav-graph-editor-method-30 (_type_) none) ;; 30
     (nav-graph-editor-method-31 (_type_ string string string) object) ;; 31
-    (nav-graph-editor-method-32 (_type_) none) ;; 32
-    (nav-graph-editor-method-33 (_type_) none) ;; 33
-    (nav-graph-editor-method-34 (_type_) symbol) ;; 34
+    (nav-graph-editor-method-32 (_type_ int) none) ;; 32
+    (nav-graph-editor-method-33 (_type_ int) none) ;; 33
+    (nav-graph-editor-method-34 (_type_ int object) symbol) ;; 34
     (nav-graph-editor-method-35 (_type_ int) int) ;; 35
     (nav-graph-editor-method-36 (_type_) none) ;; 36
     (nav-graph-editor-method-37 (_type_) symbol) ;; 37
@@ -54101,7 +54101,7 @@
   (:methods
     (new (symbol type) _type_) ;; 0 ;; (new (symbol type) _type_)
     (nav-mesh-poly-method-9 (_type_) none) ;; 9
-    (nav-mesh-poly-method-10 (_type_) none) ;; 10 ;; (nav-mesh-poly-method-10 (_type_) none)
+    (nav-mesh-poly-method-10 (_type_ object) none) ;; 10 ;; (nav-mesh-poly-method-10 (_type_) none)
     (nav-mesh-poly-method-11 (_type_ int) none) ;; 11 ;; (nav-mesh-poly-method-11 (_type_) none)
     (nav-mesh-poly-method-12 (_type_ int) none) ;; 12
     (nav-mesh-poly-method-13 (_type_ int) none) ;; 13
