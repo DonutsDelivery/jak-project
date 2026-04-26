@@ -16,5 +16,6 @@ constexpr PerGameVersion<int> SYMBOL_TO_STRING_MEM_OFFSET_DECOMP = {
     8167 * 8, jak2::SYM_TO_STRING_OFFSET, -99999, -99999,  // not supported this way!
 };
 
-constexpr PerGameVersion<int> OFFSET_OF_NEXT_STATE_STORE = {72, 64, 68, 68};
+// jakx: next-state is at GOAL offset 76; MIPS store offset = GOAL - 4 = 72
+constexpr PerGameVersion<int> OFFSET_OF_NEXT_STATE_STORE = {72, 64, 68, 72};
 }  // namespace decompiler

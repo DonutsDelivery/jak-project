@@ -949,7 +949,7 @@ TypeState StoreOp::propagate_types_internal(const TypeState& input,
   // look for setting the next state of the current process
   IR2_RegOffset ro;
   if (get_as_reg_offset(m_addr, &ro)) {
-    if (ro.reg == Register(Reg::GPR, Reg::S6) && ro.offset == 72) {
+    if (ro.reg == Register(Reg::GPR, Reg::S6) && ro.offset == OFFSET_OF_NEXT_STATE_STORE[env.version]) {
       output.next_state_type = m_value.get_type(input, env, dts);
     }
   }
