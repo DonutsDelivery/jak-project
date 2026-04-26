@@ -37900,7 +37900,7 @@
 ;; shrub-work                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *instance-shrub-work* instance-shrub-work) ;; instance-shrub-work blocked
+(define-extern *instance-shrub-work* symbol) ;; instance-shrub-work type not yet activated
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tfrag-near                     ;;
@@ -38210,7 +38210,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *instance-tie-work* instance-tie-work) ;; instance-tie-work
-(define-extern *prototype-tie-work* prototype-tie-work) ;; prototype-tie-work blocked
+(define-extern *prototype-tie-work* symbol) ;; prototype-tie-work type not yet activated
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tie-methods                    ;;
@@ -51678,7 +51678,7 @@
 
 
 (define-extern *debug-move-rigid-body* object)
-(define-extern *rigid-body-work* rigid-body-work) ;; rigid-body-work blocked
+(define-extern *rigid-body-work* symbol) ;; rigid-body-work type not yet activated
 (define-extern debug-draw-rigid-body-move (function none))
 (define-extern matrix-3x3-triple-transpose-product (function matrix matrix matrix matrix))
 (define-extern damping-time-adjust (function float float float))
