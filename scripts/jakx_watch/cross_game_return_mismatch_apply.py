@@ -41,6 +41,7 @@ from return_mismatch_apply import (  # noqa: E402
     build_type_hierarchy,
 )
 from method_body_reader import MethodBodyReader  # noqa: E402
+from apply_guard import run_with_guard  # noqa: E402
 
 GAMES = ("jak1", "jak2", "jak3")
 
@@ -87,6 +88,9 @@ def main() -> int:
                     help="Stage + commit after apply")
     ap.add_argument("--no-body-validate", action="store_true",
                     help="Skip MethodBodyReader child-body validation")
+    ap.add_argument("--no-guard", action="store_true",
+                    help="Skip apply_guard regression-check (faster, no auto-revert). "
+                         "Default: use apply_guard now that .<game>_watch/ infra exists.")
     args = ap.parse_args()
 
     decomp_dir, all_types = paths_for(args.game)
@@ -146,21 +150,47 @@ def main() -> int:
             print(f"    + {new.strip()}")
         return 0
 
-    print(f"\n[{args.game}] applying {len(fixes)} edits to {all_types}")
-    apply_fixes(all_types, fixes)
-    print(f"[{args.game}] applied")
+    # Build short summary for commit message
+    if len(active_patterns) == 1:
+        d, a = next(iter(active_patterns))
+        summary = f"return-mismatch {d}→{a} ({len(fixes)} methods)"
+    else:
+        summary = (f"return-mismatch batch ({len(fixes)} methods, "
+                   f"{len(pattern_count)} patterns)")
 
-    if args.commit:
-        # Build short summary for commit message
-        if len(active_patterns) == 1:
-            d, a = next(iter(active_patterns))
-            summary = f"return-mismatch {d}→{a} ({len(fixes)} methods)"
-        else:
-            summary = (f"return-mismatch batch ({len(fixes)} methods, "
-                       f"{len(pattern_count)} patterns)")
-        sha = commit_change(args.game, all_types, summary)
-        print(f"[{args.game}] committed {sha}")
+    if args.no_guard:
+        # Old behavior: write directly, optional commit, no validation.
+        print(f"\n[{args.game}] applying {len(fixes)} edits to {all_types} (NO GUARD)")
+        apply_fixes(all_types, fixes)
+        print(f"[{args.game}] applied")
+        if args.commit:
+            sha = commit_change(args.game, all_types, summary)
+            print(f"[{args.game}] committed {sha}")
+        return 0
 
+    # Default: use apply_guard for auto-validation.
+    # Requires .<game>_watch/ infrastructure (jakx always has it; jak1/2/3
+    # supported via scripts/game_watch/run.sh + measure_minimal.py).
+    print(f"\n[{args.game}] applying {len(fixes)} edits via apply_guard ...")
+    msg = (f"fix({args.game}/all-types): {summary}\n\n"
+           f"Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>\n")
+
+    def edit_fn():
+        apply_fixes(all_types, fixes)
+        return [all_types]
+
+    result = run_with_guard(
+        edit_fn,
+        label=f"return-mismatch-{args.game}",
+        commit_on_pass=args.commit,
+        commit_message=msg,
+        game=args.game,
+    )
+    if not result.passed:
+        print(f"[{args.game}] FAIL — {result.reason}")
+        return 2
+    print(f"[{args.game}] PASS — Δerr={result.delta_err}, Δwarn={result.delta_warn}, "
+          f"sha={result.commit_sha[:10] if result.commit_sha else '(no commit)'}")
     return 0
 
 
