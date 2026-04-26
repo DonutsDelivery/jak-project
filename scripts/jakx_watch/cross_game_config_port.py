@@ -34,7 +34,20 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPTS = ROOT / "scripts" / "jakx_watch"
 RESEARCH = ROOT / ".jakx_watch" / "research"
-DECOMP_OUT = ROOT / ".jakx_watch" / "decomp_out" / "jakx"
+
+
+def _decomp_out_dir() -> Path:
+    """Mirror convergence_metric.decomp_out_dir: prefer .jakx_watch/decomp_out
+    when populated, fall back to decompiler_out/jakx. Without this, when watch
+    dir is empty (post-cleanup or scope-only mode), scan returns 0 candidates
+    silently."""
+    primary = ROOT / ".jakx_watch" / "decomp_out" / "jakx"
+    if primary.exists() and any(primary.glob("*_ir2.asm")):
+        return primary
+    return ROOT / "decompiler_out" / "jakx"
+
+
+DECOMP_OUT = _decomp_out_dir()
 TYPE_CASTS_JAKX = ROOT / "decompiler" / "config" / "jakx" / "ntsc_v1" / "type_casts.jsonc"
 TYPE_CASTS_JAK3 = ROOT / "decompiler" / "config" / "jak3" / "ntsc_v1" / "type_casts.jsonc"
 
