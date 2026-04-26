@@ -186,7 +186,13 @@ def run_decompiler() -> int:
 
 
 def revert_files(paths: list[Path]) -> None:
-    """Git-restore files to HEAD state."""
+    """Git-restore files to HEAD state.
+
+    Also invalidates status.md so the next run_with_guard call re-runs
+    the decompiler. status.md was written from the now-reverted working
+    tree; without invalidation the next batch reads a stale pre-state.
+    (Opus cycle 17 finding 2026-04-26.)
+    """
     if not paths:
         return
     rel_paths = [str(p.relative_to(ROOT)) for p in paths]
@@ -195,6 +201,8 @@ def revert_files(paths: list[Path]) -> None:
         cwd=ROOT,
         check=True,
     )
+    if STATUS_MD.exists():
+        STATUS_MD.unlink()
 
 
 def commit_files(paths: list[Path], message: str) -> str:
