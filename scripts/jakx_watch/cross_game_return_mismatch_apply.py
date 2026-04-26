@@ -42,7 +42,11 @@ from return_mismatch_apply import (  # noqa: E402
 )
 from method_body_reader import MethodBodyReader  # noqa: E402
 from apply_guard import run_with_guard, bisect_apply  # noqa: E402
-import blacklist as _bl  # noqa: E402
+from fix_tag_helpers import (  # noqa: E402
+    parse_fix_tag,
+    extract_edited_types_from_fixes,
+    filter_blacklisted,
+)
 
 GAMES = ("jak1", "jak2", "jak3")
 
@@ -60,48 +64,6 @@ def parse_pattern(s: str) -> tuple[str, str]:
         raise argparse.ArgumentTypeError(f"pattern must be 'declared:actual', got {s!r}")
     decl, actual = s.split(":", 1)
     return (decl, actual)
-
-
-def parse_fix_tag(tag: str) -> tuple[str, str, str] | None:
-    """Extract (type, method, 'decl:actual') from a fix tag.
-    Tag format: 'TYPE::method-N: DECL → ACTUAL ...'
-    Returns None if the tag doesn't parse (e.g. unexpected format).
-    """
-    try:
-        head, rest = tag.split(": ", 1)
-        type_part, method = head.split("::", 1)
-        decl_actual = rest.split(" → ", 1)
-        decl = decl_actual[0].strip()
-        actual = decl_actual[1].split(" ", 1)[0].strip()
-        return (type_part, method, f"{decl}:{actual}")
-    except (ValueError, IndexError):
-        return None
-
-
-def extract_edited_types_from_fixes(fixes: list) -> set[str]:
-    """Pull type names out of fix tags. Used for impact_set scoping."""
-    out: set[str] = set()
-    for _, _, _, tag in fixes:
-        parsed = parse_fix_tag(tag)
-        if parsed:
-            out.add(parsed[0])
-    return out
-
-
-def filter_blacklisted(fixes: list, game: str) -> tuple[list, int]:
-    """Drop fixes already on the blacklist. Returns (kept_fixes, n_skipped)."""
-    if not fixes:
-        return fixes, 0
-    kept = []
-    skipped = 0
-    for f in fixes:
-        _, _, _, tag = f
-        parsed = parse_fix_tag(tag)
-        if parsed and _bl.is_blacklisted(game, parsed[0], parsed[1], parsed[2]):
-            skipped += 1
-            continue
-        kept.append(f)
-    return kept, skipped
 
 
 def commit_change(game: str, all_types: Path, summary: str) -> str:

@@ -35,8 +35,13 @@ from return_mismatch_scan import (  # noqa: E402
     RE_METHOD_LINE,
     CURRENT_TYPES,
 )
-from apply_guard import run_with_guard  # noqa: E402
+from apply_guard import run_with_guard, bisect_apply  # noqa: E402
 from method_body_reader import MethodBodyReader  # noqa: E402
+from fix_tag_helpers import (  # noqa: E402
+    parse_fix_tag,
+    extract_edited_types_from_fixes,
+    filter_blacklisted,
+)
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -343,6 +348,14 @@ def parse_args() -> argparse.Namespace:
         "--decomp-out",
         help="Override the decompiler output directory.",
     )
+    ap.add_argument(
+        "--bisect",
+        action="store_true",
+        help="On guard failure, recursively halve the fix set to isolate "
+             "bad apples. Each isolated bad fix is added to "
+             ".compound_loop/blacklist.json. Pairs with COMPOUND_LOOP_SCOPED=1 "
+             "for ~150x speedup per bisect step.",
+    )
     return ap.parse_args()
 
 
@@ -402,6 +415,13 @@ def main() -> int:
         reader=reader,
     )
 
+    # Drop entries that previously failed apply_guard. Without this filter
+    # every iteration re-attempts the same losers and burns a decomp pass.
+    fixes, skipped_bl = filter_blacklisted(fixes, "jakx")
+    if skipped_bl:
+        print(f"[blacklist] skipped {skipped_bl} previously-failed candidates; "
+              f"{len(fixes)} remain")
+
     if not fixes:
         print("No fixable methods found (all skipped by pattern/skip-vtable/consistency).")
         return 0
@@ -429,6 +449,33 @@ def main() -> int:
 
     print(f"\nApplying {len(fixes)} edits via apply_guard ...")
 
+    edited_types = extract_edited_types_from_fixes(fixes)
+
+    if getattr(args, "bisect", False):
+        # Recursive bisect: kept_fixes commit in subsets, blacklisted_fixes
+        # are isolated bad apples added to .compound_loop/blacklist.json.
+        msg_template = (f"fix(jakx/all-types): return-mismatch "
+                        f"bisect-pass ({{n}} fixes) [{{label}}]\n\n"
+                        f"Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>\n")
+
+        def apply_subset(subset):
+            apply_fixes(CURRENT_TYPES, subset)
+
+        kept, blacklisted = bisect_apply(
+            fixes, CURRENT_TYPES,
+            apply_fn=apply_subset,
+            label=f"return-mismatch-jakx",
+            game="jakx",
+            extract_blacklist_key=lambda f: parse_fix_tag(f[3]),
+            extract_edited_types=extract_edited_types_from_fixes,
+            commit_on_pass=args.commit,
+            commit_message_template=msg_template,
+            warn_must_decrease=True,
+        )
+        print(f"\nBISECT DONE: {len(kept)}/{len(fixes)} fixes kept; "
+              f"{len(blacklisted)} blacklisted")
+        return 0
+
     def do_apply() -> list[Path]:
         apply_fixes(CURRENT_TYPES, fixes)
         return [CURRENT_TYPES]
@@ -440,6 +487,7 @@ def main() -> int:
         warn_must_decrease=True,
         commit_on_pass=args.commit,
         commit_message=msg,
+        edited_types=edited_types,
     )
 
     if not result.passed:
