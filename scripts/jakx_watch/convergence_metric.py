@@ -53,8 +53,17 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 COMPOUND_LOOP_DIR = ROOT / ".compound_loop"
 CONVERGENCE_LOG = COMPOUND_LOOP_DIR / "convergence.jsonl"
-OFFLINE_TEST_LATEST = ROOT / ".jakx_watch" / "history" / "latest.json"
-OFFLINE_TEST_MAX_AGE_SEC = 3600  # data older than 1h = treat as missing
+# Dedicated file written ONLY by offline_test_pass.py; cannot be clobbered by
+# watch.sh status pipeline. Falls back to the shared latest.json if dedicated
+# file doesn't exist yet (initial-setup window).
+OFFLINE_TEST_DEDICATED = ROOT / ".jakx_watch" / "history" / "offline_test_latest.json"
+OFFLINE_TEST_LATEST_FALLBACK = ROOT / ".jakx_watch" / "history" / "latest.json"
+OFFLINE_TEST_MAX_AGE_SEC = 14400  # data older than 4h = treat as missing.
+# Was 3600 (1h); too aggressive — offline-test takes ~5 min so it doesn't
+# get refreshed often, and time alone is a weak staleness signal. The real
+# staleness check should be "data's git_sha is no longer in HEAD ancestry"
+# but that needs more code; 4h covers a typical fire cadence + buffer.
+# TODO: replace time-based staleness with HEAD-ancestry-based staleness.
 
 GAMES = ("jak1", "jak2", "jak3", "jakx")
 
@@ -223,38 +232,50 @@ def head_sha() -> str:
 
 
 def read_offline_test_results(game: str) -> dict:
-    """Read offline_test_pass.py results from .jakx_watch/history/latest.json.
+    """Read offline_test_pass.py results from dedicated file (or fallback).
 
-    Returns a dict with offline_test_attempted/pass/partial counts. Falls back
-    to zeros + offline_test_stale=True when file is missing, malformed, or
-    older than OFFLINE_TEST_MAX_AGE_SEC.
+    Returns a dict with offline_test_attempted/pass/partial counts. When data
+    is missing, malformed, or older than OFFLINE_TEST_MAX_AGE_SEC, returns
+    {offline_test_missing: True} with NO numeric fields — so the snap omits
+    them and per_applier_yield can detect "no data" via .get() returning None
+    rather than treating zeros as a real measurement.
 
     For jakx, "pass" = green = goalc-compiles AND matches _REF.gc text. This
     is the bytematch-by-transitivity correctness signal. "partial" = amber =
-    at least one of compile/compare failed; doesn't separate compile-only
-    pass from compare-only pass yet (TODO: enhance offline_test_pass.py to
-    split these — would let us see goalc-compiles-but-text-differs files,
-    which are likely fine but need _REF.gc refresh).
+    at least one of compile/compare failed.
+
+    Source precedence: dedicated file > fallback file. Dedicated file is
+    written only by offline_test_pass.py (cannot be clobbered by watch.sh).
+    Fallback to latest.json supports the transition window before dedicated
+    file exists.
     """
     if game != "jakx":
-        return {"offline_test_attempted": 0, "offline_test_pass": 0,
-                "offline_test_partial": 0, "offline_test_stale": True}
-    if not OFFLINE_TEST_LATEST.exists():
-        return {"offline_test_attempted": 0, "offline_test_pass": 0,
-                "offline_test_partial": 0, "offline_test_stale": True}
-    age = datetime.now().timestamp() - OFFLINE_TEST_LATEST.stat().st_mtime
+        return {"offline_test_missing": True}
+    src = None
+    if OFFLINE_TEST_DEDICATED.exists():
+        src = OFFLINE_TEST_DEDICATED
+    elif OFFLINE_TEST_LATEST_FALLBACK.exists():
+        src = OFFLINE_TEST_LATEST_FALLBACK
+    if src is None:
+        return {"offline_test_missing": True, "offline_test_reason": "file not found"}
+    age = datetime.now().timestamp() - src.stat().st_mtime
+    if age > OFFLINE_TEST_MAX_AGE_SEC:
+        return {"offline_test_missing": True, "offline_test_reason": "stale",
+                "offline_test_age_sec": int(age)}
     try:
-        data = json.loads(OFFLINE_TEST_LATEST.read_text())
+        data = json.loads(src.read_text())
     except (json.JSONDecodeError, OSError):
-        return {"offline_test_attempted": 0, "offline_test_pass": 0,
-                "offline_test_partial": 0, "offline_test_stale": True}
+        return {"offline_test_missing": True, "offline_test_reason": "parse"}
     ot = data.get("offline_test", {})
+    if not ot or "green" not in ot:
+        # Field absent or empty — likely watch.sh clobber when reading fallback
+        return {"offline_test_missing": True, "offline_test_reason": "field absent"}
     return {
         "offline_test_attempted": ot.get("candidates", 0),
         "offline_test_pass": len(ot.get("green", [])),
         "offline_test_partial": len(ot.get("amber", [])),
-        "offline_test_stale": age > OFFLINE_TEST_MAX_AGE_SEC,
         "offline_test_age_sec": int(age),
+        "offline_test_source": src.name,
     }
 
 
@@ -279,6 +300,17 @@ def compute(game: str, wait_for_stable: bool = True) -> dict:
         ir2 = scan_ir2_metrics(decomp_dir)
         unstable = ir2["files_total"] < MIN_PLAUSIBLE_IR2
     ot = read_offline_test_results(game)
+    # When data is missing, omit numeric fields entirely so per_applier_yield
+    # treats them as None (skip Δ) rather than zero (false regression).
+    if ot.get("offline_test_missing"):
+        ot_fields_for_snap = {
+            "offline_test_missing": True,
+            "offline_test_reason": ot.get("offline_test_reason", "unknown"),
+        }
+        if "offline_test_age_sec" in ot:
+            ot_fields_for_snap["offline_test_age_sec"] = ot["offline_test_age_sec"]
+    else:
+        ot_fields_for_snap = ot
     snap = {
         "ts": datetime.now().isoformat(timespec="seconds"),
         "sha": head_sha()[:12],
@@ -286,10 +318,10 @@ def compute(game: str, wait_for_stable: bool = True) -> dict:
         "unstable": unstable,
         # PRIMARY position metric: real correctness via bytematch-by-transitivity
         # (compiles + matches _REF.gc). Pre-compile-pass yield claims are provisional.
-        **ot,
+        **ot_fields_for_snap,
         "offline_test_pass_pct": (
             round(100.0 * ot["offline_test_pass"] / ot["offline_test_attempted"], 2)
-            if ot.get("offline_test_attempted") else 0.0
+            if ot.get("offline_test_attempted") else None
         ),
         # Position metrics with ceilings
         "method_decls_total": total_decls,

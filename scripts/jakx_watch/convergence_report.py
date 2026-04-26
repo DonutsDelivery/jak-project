@@ -73,6 +73,7 @@ def per_applier_yield(rows: list[dict]) -> dict:
     yields = defaultdict(lambda: {
         "n_commits": 0,
         "delta_pass_sum": 0,
+        "n_pass_data_pairs": 0,  # how many transitions had pass data on BOTH sides
         "delta_rc_sum": 0,
         "delta_ftp_sum": 0,
         "delta_rm_sum": 0,
@@ -85,10 +86,14 @@ def per_applier_yield(rows: list[dict]) -> dict:
         if prev_stable is not None:
             label = label_of(r)
             yields[label]["n_commits"] += 1
-            yields[label]["delta_pass_sum"] += (
-                r.get("offline_test_pass", 0)
-                - prev_stable.get("offline_test_pass", 0)
-            )
+            # Δpass: only credit when BOTH rows have actual offline_test data.
+            # Missing data → skip the delta (don't treat absent field as 0,
+            # which would be a false regression when fields disappear).
+            r_pass = r.get("offline_test_pass") if not r.get("offline_test_missing") else None
+            p_pass = prev_stable.get("offline_test_pass") if not prev_stable.get("offline_test_missing") else None
+            if r_pass is not None and p_pass is not None:
+                yields[label]["delta_pass_sum"] += r_pass - p_pass
+                yields[label]["n_pass_data_pairs"] += 1
             yields[label]["delta_rc_sum"] += (
                 r.get("files_real_clean", 0) - prev_stable.get("files_real_clean", 0)
             )

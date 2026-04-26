@@ -46,6 +46,13 @@ JAKX_CONFIG = ROOT / "test" / "offline" / "config" / "jakx" / "config.jsonc"
 JAKX_REFS = ROOT / "test" / "decompiler" / "reference" / "jakx"
 ISO_DIR = ROOT / "iso_data"
 LATEST = ROOT / ".jakx_watch" / "history" / "latest.json"
+# Dedicated authoritative file for offline_test results — convergence_metric
+# reads here. latest.json is shared with watch.sh/run.sh which overwrite the
+# offline_test annotation on every status-render pipeline; that loses our
+# data and pollutes per-applier Δpass with false zeros (saw this 2026-04-26
+# at 08:09 — convergence row recorded pass=0 because watch.sh had just
+# rewritten latest.json without preserving offline_test field).
+OFFLINE_LATEST = ROOT / ".jakx_watch" / "history" / "offline_test_latest.json"
 ALL_TYPES = ROOT / "decompiler" / "config" / "jakx" / "all-types.gc"
 
 
@@ -476,13 +483,21 @@ def main() -> int:
             print(f"  ~ {n}")
 
     # Persist into the latest snapshot for downstream tooling.
-    snap["offline_test"] = {
+    ot_data = {
         "green": results["green"],
         "amber": results["amber"],
         "amber_reasons": results.get("amber_reasons", {}),
         "candidates": len(candidates),
     }
+    snap["offline_test"] = ot_data
     LATEST.write_text(json.dumps(snap, indent=2))
+    # Also write to dedicated file that no other tool touches; convergence_metric
+    # reads from here so watch.sh's latest.json overwrite can't clobber it.
+    OFFLINE_LATEST.write_text(json.dumps({
+        "ts": snap.get("ts"),
+        "git_sha": snap.get("git_sha"),
+        "offline_test": ot_data,
+    }, indent=2))
     return 0
 
 
