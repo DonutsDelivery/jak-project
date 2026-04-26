@@ -2281,6 +2281,13 @@
 (define-extern *v-wpn-available-yellow* array)
 (define-extern *v-wpn-available-red* array)
 (define-extern *v-wpn-available-purple* array)
+(deftype weapon-select-info (structure)
+  ((word0   uint32 :offset-assert 0)
+   (entries pointer :offset-assert 4)
+   (word2   uint32 :offset-assert 8)
+   (word3   uint32 :offset-assert 12))
+  :size-assert #x10)
+
 (define-extern *weapon-select-table-yellow-even* object)
 (define-extern *weapon-select-table-red-even* object)
 (define-extern *weapon-select-table-yellow-default* object)
@@ -4708,7 +4715,7 @@
 (define-extern *grenade-1-trail* object)
 (define-extern *trail-color-curve-grenade-purple* curve-color-fast)
 (define-extern *grenade-2-trail* light-trail-composition)
-(define-extern *curve-yellow-tracker-linear-up-red* object)
+(define-extern *curve-yellow-tracker-linear-up-red* curve2d-piecewise)
 (define-extern *trail-color-curve-yellow-tracker-grenade* curve-color-fast)
 (define-extern *trail-color-curve-red-mine* curve-color-fast)
 (define-extern *curve-yellow-tracker-linear-trail* curve2d-fast)
@@ -4721,7 +4728,7 @@
 (define-extern *car-missile-trail-II* light-trail-composition)
 (define-extern *trail-color-curve-success-seeker* curve-color-fast)
 (define-extern *success-seeker-trail* light-trail-composition)
-(define-extern *curve-mine-width* object)
+(define-extern *curve-mine-width* curve2d-piecewise)
 (define-extern *trail-color-purple-mine* curve-color-fast)
 (define-extern *trail-color-red-mine* curve-color-fast)
 (define-extern *mine-trail-red* light-trail-composition)
@@ -27839,7 +27846,7 @@
 
 
 (define-extern *level-bounding-box* level-bounding-box)
-(define-extern *msg-buffers* object)
+(define-extern *msg-buffers* (pointer mem-buffer))
 (define-extern alloc-msg-buffer (function none))
 (define-extern free-msg-buffer (function none))
 

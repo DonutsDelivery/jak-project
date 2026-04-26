@@ -425,16 +425,10 @@
       "hud-manager-death-indicator",
       true
     ],
-    [
-      "L915",
-      "uint64",
-      true
-    ],
-    [
-      "L916",
-      "uint64",
-      true
-    ]
+    ["L915", "uint64", true],
+    ["L916", "uint64", true],
+    ["L917", "uint64", true],
+    ["L918", "uint64", true]
   ],
   "hud-widgets-3": [
     [
@@ -804,6 +798,19 @@
       false
     ]
   ],
+  "wvehicle-weapons-data": [
+    ["L18", "weapon-select-info", false],
+    ["L21", "weapon-select-info", false],
+    ["L23", "weapon-select-info", false],
+    ["L26", "weapon-select-info", false],
+    ["L29", "weapon-select-info", false],
+    ["L32", "weapon-select-info", false],
+    ["L35", "weapon-select-info", false],
+    ["L38", "weapon-select-info", false],
+    ["L41", "weapon-select-info", false],
+    ["L44", "weapon-select-info", false],
+    ["L47", "weapon-select-info", false]
+  ],
   "wvehicle-weapons-part": [
     [
       "L373",
@@ -862,28 +869,15 @@
     ]
   ],
   "hud-cash": [
-    [
-      "L1056",
-      "uint64",
-      true
-    ],
-    [
-      "L1053",
-      "uint64",
-      true
-    ]
+    ["L1056", "uint64", true],
+    ["L1053", "uint64", true],
+    ["L1054", "uint64", true],
+    ["L1055", "uint64", true]
   ],
   "hud-high-scores": [
-    [
-      "L339",
-      "uint64",
-      true
-    ],
-    [
-      "L337",
-      "uint64",
-      true
-    ]
+    ["L339", "uint64", true],
+    ["L337", "uint64", true],
+    ["L338", "uint64", true]
   ],
   "hud-results-grand-prix": [
     [
@@ -893,40 +887,33 @@
     ]
   ],
   "hud-results": [
-    [
-      "L1482",
-      "uint64",
-      true
-    ],
-    [
-      "L1485",
-      "uint64",
-      true
-    ]
+    ["L1482", "uint64", true],
+    ["L1485", "uint64", true],
+    ["L1483", "uint64", true],
+    ["L1484", "uint64", true],
+    ["L1486", "uint64", true],
+    ["L1487", "uint64", true],
+    ["L1488", "uint64", true],
+    ["L1489", "uint64", true],
+    ["L1490", "uint64", true]
   ],
   "hud-widgets": [
-    [
-      "L455",
-      "uint64",
-      true
-    ],
-    [
-      "L447",
-      "uint64",
-      true
-    ]
+    ["L455", "uint64", true],
+    ["L447", "uint64", true],
+    ["L446", "uint64", true],
+    ["L448", "uint64", true],
+    ["L449", "uint64", true],
+    ["L450", "uint64", true],
+    ["L451", "uint64", true],
+    ["L452", "uint64", true],
+    ["L453", "uint64", true],
+    ["L454", "uint64", true]
   ],
   "in-game-menu-hud": [
-    [
-      "L388",
-      "uint64",
-      true
-    ],
-    [
-      "L386",
-      "uint64",
-      true
-    ]
+    ["L388", "uint64", true],
+    ["L386", "uint64", true],
+    ["L387", "uint64", true],
+    ["L389", "uint64", true]
   ],
   "intro-scenes2": [
     [
@@ -1091,16 +1078,15 @@
     ["L332","uint64",true],["L333","uint64",true],["L334","uint64",true],["L335","uint64",true]
   ],
   "task-control-h": [
-    [
-      "L971",
-      "uint64",
-      true
-    ],
-    [
-      "L973",
-      "uint64",
-      true
-    ]
+    ["L971", "uint64", true],
+    ["L973", "uint64", true],
+    ["L972", "uint64", true],
+    ["L974", "uint64", true],
+    ["L975", "uint64", true],
+    ["L976", "uint64", true],
+    ["L977", "uint64", true],
+    ["L978", "uint64", true],
+    ["L979", "uint64", true]
   ],
   "task-control": [
     [
@@ -1189,16 +1175,12 @@
     ]
   ],
   "wvehicle-hud": [
-    [
-      "L660",
-      "uint64",
-      true
-    ],
-    [
-      "L656",
-      "uint64",
-      true
-    ]
+    ["L660", "uint64", true],
+    ["L656", "uint64", true],
+    ["L658", "uint64", true],
+    ["L661", "uint64", true],
+    ["L657", "uint64", true],
+    ["L659", "uint64", true]
   ],
   "wvehicle-weapons-proj": [
     [
@@ -1208,6 +1190,11 @@
     ],
     [
       "L769",
+      "uint64",
+      true
+    ],
+    [
+      "L768",
       "uint64",
       true
     ],
@@ -1232,6 +1219,21 @@
       true
     ],
     [
+      "L918",
+      "uint64",
+      true
+    ],
+    [
+      "L917",
+      "uint64",
+      true
+    ],
+    [
+      "L916",
+      "uint64",
+      true
+    ],
+    [
       "L835",
       "vector"
     ]
@@ -1248,6 +1250,12 @@
       "L126",
       "cloth-params"
     ]
+  ],
+  "mem-buffer-h": [
+    ["L71", "uint8", 1024],
+    ["L70", "uint8", 1024],
+    ["L69", "uint8", 1024],
+    ["L68", "uint8", 1024]
   ],
   "game-info": [
     [
@@ -1518,5 +1526,48 @@
   "net-player-h": [
     ["L8", "(pointer uint8)", 8],
     ["L9", "(pointer uint32)", 8]
+  ],
+  "speech-jak": [
+    ["L1","speech-info",false],["L9","speech-info",false],["L15","speech-info",false],
+    ["L42","speech-info",false],["L80","speech-info",false],["L90","speech-info",false],
+    ["L104","speech-info",false],["L149","speech-info",false],["L156","speech-info",false],
+    ["L159","speech-info",false],["L211","speech-info",false],["L244","speech-info",false],
+    ["L252","speech-info",false],["L287","speech-info",false],["L311","speech-info",false],
+    ["L367","speech-info",false],["L393","speech-info",false],["L403","speech-info",false],
+    ["L407","speech-info",false],["L471","speech-info",false],["L513","speech-info",false],
+    ["L523","speech-info",false],["L545","speech-info",false],["L565","speech-info",false],
+    ["L625","speech-info",false],["L697","speech-info",false]
+  ],
+  "speech-daxter": [
+    ["L1","speech-info",false],["L7","speech-info",false],["L27","speech-info",false],
+    ["L43","speech-info",false],["L59","speech-info",false],["L67","speech-info",false],
+    ["L71","speech-info",false],["L89","speech-info",false],["L155","speech-info",false],
+    ["L229","speech-info",false],["L267","speech-info",false],["L319","speech-info",false],
+    ["L335","speech-info",false],["L365","speech-info",false],["L393","speech-info",false],
+    ["L451","speech-info",false],["L482","speech-info",false],["L566","speech-info",false]
+  ],
+  "speech-pecker": [
+    ["L1","speech-info",false],["L24","speech-info",false],["L32","speech-info",false],
+    ["L48","speech-info",false],["L62","speech-info",false],["L88","speech-info",false],
+    ["L110","speech-info",false],["L152","speech-info",false],["L168","speech-info",false],
+    ["L178","speech-info",false],["L182","speech-info",false],["L194","speech-info",false],
+    ["L252","speech-info",false],["L330","speech-info",false],["L390","speech-info",false],
+    ["L422","speech-info",false],["L453","speech-info",false],["L523","speech-info",false],
+    ["L637","speech-info",false],["L671","speech-info",false],["L687","speech-info",false],
+    ["L717","speech-info",false]
+  ],
+  "speech-gtblitz": [
+    ["L1","speech-info",false],["L5","speech-info",false],["L21","speech-info",false],
+    ["L39","speech-info",false],["L73","speech-info",false],["L100","speech-info",false],
+    ["L152","speech-info",false],["L170","speech-info",false],["L178","speech-info",false],
+    ["L182","speech-info",false],["L199","speech-info",false],["L213","speech-info",false],
+    ["L263","speech-info",false],["L363","speech-info",false],["L427","speech-info",false],
+    ["L463","speech-info",false],["L506","speech-info",false],["L614","speech-info",false],
+    ["L724","speech-info",false],["L754","speech-info",false],["L770","speech-info",false],
+    ["L802","speech-info",false]
+  ],
+  "speech-mizo": [
+    ["L1","speech-info",false],["L18","speech-info",false],["L26","speech-info",false],
+    ["L30","speech-info",false],["L64","speech-info",false],["L94","speech-info",false]
   ]
 }
