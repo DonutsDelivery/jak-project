@@ -646,6 +646,22 @@ def run_with_guard(
         sha = commit_files(changed_files, msg)
         print(f"[guard:{label}] committed as {sha}")
 
+        # Log convergence snapshot AFTER commit (sha is captured in row).
+        # This gives inter-applier signal "for free" — every commit's row
+        # in convergence.jsonl shows which metrics moved. If a return-mismatch
+        # commit drops failed_type_prop_errors, that's compound signal across
+        # patterns. If only return_mismatch_warns moves, the lanes are
+        # independent. Without this, "are we compounding" was unanswerable.
+        try:
+            sys.path.insert(0, str(Path(__file__).parent))
+            from convergence_metric import compute, append_log
+            snap = compute(game)
+            snap["label"] = label  # which applier produced this commit
+            append_log(snap)
+        except Exception as e:
+            print(f"[guard:{label}] convergence_metric snapshot failed: {e}",
+                  file=sys.stderr)
+
     return GuardResult(
         passed=True,
         reason="OK",

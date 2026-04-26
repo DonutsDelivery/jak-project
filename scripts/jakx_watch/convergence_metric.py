@@ -54,6 +54,55 @@ def decomp_out_dir(game: str) -> Path:
     return ROOT / "decompiler_out" / game
 
 
+# Minimum plausible file count — guards against picking an empty / barely
+# initialized dir as a "stable" snapshot. The actual file count can vary
+# legitimately as type-load failures crash specific files in/out of decomp,
+# so we don't enforce a per-game floor.
+MIN_PLAUSIBLE_IR2 = 50
+
+
+def stable_decomp_dir(
+    game: str, max_wait: int = 30, max_age_seconds: int = 3600,
+) -> Path | None:
+    """Return a decomp dir that looks settled and recent, or None.
+
+    Stable = newest IR2 mtime in (now - max_age, now - 5sec). 5sec age is
+    enough to confirm the decomp pipeline finished writing (no torn reads).
+    max_age default 1h: after that, the snap describes state that may not
+    match HEAD — refuse rather than log a misleading "current" row.
+
+    File-count floor is just MIN_PLAUSIBLE_IR2 (50) to guard against
+    near-empty dirs. The actual count can legitimately swing as type-load
+    failures crash files in/out of decomp, so we don't enforce per-game
+    floors.
+
+    Watch dir is preferred when settled+recent (it's the freshest); falls
+    back to canonical decompiler_out/<game>/ if watch is empty/stale.
+    Returns None when no dir qualifies.
+    """
+    import time as _time
+    deadline = _time.time() + max_wait
+
+    while _time.time() < deadline:
+        watch = ROOT / f".{game}_watch" / "decomp_out" / game
+        canon = ROOT / "decompiler_out" / game
+        now = _time.time()
+
+        for cand in (watch, canon):
+            if not cand.exists():
+                continue
+            files = list(cand.glob("*_ir2.asm"))
+            if len(files) < MIN_PLAUSIBLE_IR2:
+                continue
+            newest = max((p.stat().st_mtime for p in files), default=0)
+            age = now - newest
+            if 5 <= age <= max_age_seconds:
+                return cand
+        _time.sleep(2)
+
+    return None
+
+
 def all_types_path(game: str) -> Path:
     return ROOT / "decompiler" / "config" / game / "all-types.gc"
 
@@ -161,16 +210,31 @@ def head_sha() -> str:
         return ""
 
 
-def compute(game: str) -> dict:
-    """Compute the full metric snapshot for game."""
+def compute(game: str, wait_for_stable: bool = True) -> dict:
+    """Compute the full metric snapshot for game.
+
+    If wait_for_stable, pick a decomp dir whose file count is plausible and
+    whose newest IR2 settled >5 sec ago. Falls back to whichever dir has the
+    most files. If no stable dir found, marks snap with unstable=True so
+    downstream analysis can filter races out.
+    """
     types_path = all_types_path(game)
-    decomp_dir = decomp_out_dir(game)
+    if wait_for_stable:
+        decomp_dir = stable_decomp_dir(game)
+    else:
+        decomp_dir = decomp_out_dir(game)
     total_decls, complete_decls = count_signatures(types_path)
-    ir2 = scan_ir2_metrics(decomp_dir)
+    if decomp_dir is None:
+        ir2 = scan_ir2_metrics(ROOT / "nonexistent")  # zeros
+        unstable = True
+    else:
+        ir2 = scan_ir2_metrics(decomp_dir)
+        unstable = ir2["files_total"] < MIN_PLAUSIBLE_IR2
     snap = {
         "ts": datetime.now().isoformat(timespec="seconds"),
         "sha": head_sha()[:12],
         "game": game,
+        "unstable": unstable,
         # Position metrics with ceilings
         "method_decls_total": total_decls,
         "method_decls_complete": complete_decls,
@@ -214,23 +278,28 @@ def show_trend(n: int, game_filter: str | None = None) -> None:
         print("(no rows match)")
         return
     print(f"\n{'ts':<20} {'sha':<10} {'game':<5} {'sig%':<6} "
-          f"{'rc%':<6} {'rm':<6} {'ftp':<6} {'unk':<6}")
-    print("-" * 70)
-    prev = None
+          f"{'rc%':<6} {'rm':<6} {'ftp':<6} {'fsr':<5} {'rns':<5} {'!':<2}")
+    print("-" * 80)
+    prev_stable = None
     for r in rows:
+        marker = "RACE" if r.get("unstable") else "  "
         line = (f"{r['ts']:<20} {r['sha']:<10} {r['game']:<5} "
                 f"{r['method_decls_complete_pct']:<6.2f} "
                 f"{r['files_real_clean_pct']:<6.2f} "
                 f"{r['return_mismatch_warns']:<6d} "
                 f"{r['failed_type_prop_errors']:<6d} "
-                f"{r['unknown_type_refs']:<6d}")
-        if prev:
-            d_sig = r['method_decls_complete'] - prev['method_decls_complete']
-            d_rc = r['files_real_clean'] - prev['files_real_clean']
-            d_rm = r['return_mismatch_warns'] - prev['return_mismatch_warns']
-            line += f"   Δsig{d_sig:+d} Δrc{d_rc:+d} Δrm{d_rm:+d}"
+                f"{r.get('failed_static_ref_errors', 0):<5d} "
+                f"{r.get('reg_not_set_errors', 0):<5d} "
+                f"{marker:<4}")
+        # Only compute deltas against previous STABLE row
+        if prev_stable and not r.get("unstable"):
+            d_sig = r['method_decls_complete'] - prev_stable['method_decls_complete']
+            d_rc = r['files_real_clean'] - prev_stable['files_real_clean']
+            d_ftp = r['failed_type_prop_errors'] - prev_stable['failed_type_prop_errors']
+            line += f"   Δsig{d_sig:+d} Δrc{d_rc:+d} Δftp{d_ftp:+d}"
         print(line)
-        prev = r
+        if not r.get("unstable"):
+            prev_stable = r
 
 
 def _main() -> int:
