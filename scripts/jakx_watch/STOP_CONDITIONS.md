@@ -1,5 +1,8 @@
 # Compound-loop stop conditions + negative-results ledger
 
+> G0 rationale and complete framing in [WHY_G0.md](WHY_G0.md) — read before
+> proposing new appliers, new metrics, or revisiting rc as primary.
+
 Last reviewed: 2026-04-26 (cycle 26 — water111 metric critique landed)
 
 ## G0 (FOUNDATIONAL): Compile-pass is primary, rc is leading indicator
