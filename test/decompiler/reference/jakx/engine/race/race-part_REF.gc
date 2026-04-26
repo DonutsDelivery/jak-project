@@ -1,0 +1,629 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 179) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 603) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 600) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 602) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 605) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 601) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 604) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 606) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 607) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 180) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 611) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 608) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 610) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 613) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 609) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 612) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 614) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 615) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 181) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 619) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 616) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 618) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 621) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 617) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 620) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 622) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 623) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 182) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 627) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 624) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 626) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 629) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 625) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 628) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 630) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 631) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 183) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 632) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 633) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 634) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 635) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 636) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 184) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 637) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 640) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 638) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 639) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 185) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 641) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 186) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 642) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 187) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 643) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 644) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 188) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 645) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 646) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 647) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 189) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 648) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 649) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 650) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 190) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 651) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 191) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 652) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 653) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 654) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 655) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 656) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 657) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 658) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 659) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 192) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 193) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 194) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 195) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 196) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 693) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 694) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 666) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 669) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 672) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 675) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 676) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 677) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 678) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 679) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 680) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 660) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 661) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 662) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 663) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 664) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 665) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 667) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 670) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 673) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 674) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 671) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 668) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 681) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 682) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 683) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 684) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 685) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 686) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 687) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 688) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 689) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 690) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 691) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 692) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 197) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 695) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 198) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 696) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 199) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 697) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 200) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 698) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 201) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 702) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 703) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 706) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 705) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 701) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 704) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 699) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 700) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 707) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 202) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 708) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 709) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 203) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 710) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 715) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 711) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 712) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 713) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 714) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 204) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 716) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 721) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 717) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 718) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 719) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 720) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 205) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 722) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 723) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 206) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 724) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 725) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 207) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 727) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 728) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 726) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 729) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 208) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 730) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 732) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 731) #f)
+
+;; definition for function spt-func-part-super-turbo-charges
+(defun spt-func-part-super-turbo-charges ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 vector))
+  (sparticle-motion-blur arg0 arg1 arg2)
+  (spt-func-relative-pos arg0 arg1 (the-as sprite-vec-data-3d arg2))
+  (none)
+  )
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 209) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 734) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 735) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 733) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 210) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 736) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 737) #f)
+
+;; definition for function spt-func-part-red-pellet-charges
+(defun spt-func-part-red-pellet-charges ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 vector))
+  (sparticle-motion-blur arg0 arg1 arg2)
+  (spt-func-relative-pos arg0 arg1 (the-as sprite-vec-data-3d arg2))
+  (none)
+  )
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 211) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 738) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 739) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 212) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 740) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 741) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 742) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 213) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 743) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 744) #f)
+
+;; definition for function spt-func-part-pellet-collect-blue-blurs
+(defun spt-func-part-pellet-collect-blue-blurs ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 vector))
+  (sparticle-motion-blur arg0 arg1 arg2)
+  (spt-func-relative-pos arg0 arg1 (the-as sprite-vec-data-3d arg2))
+  (none)
+  )
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 214) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 745) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 746) #f)
+
+;; definition for function spt-func-part-pellet-collect-light-blurs
+(defun spt-func-part-pellet-collect-light-blurs ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 vector))
+  (sparticle-motion-blur arg0 arg1 arg2)
+  (spt-func-relative-pos arg0 arg1 (the-as sprite-vec-data-3d arg2))
+  (none)
+  )
+
+;; definition for function spt-birth-func-brightness-collectoid-dust
+(defun spt-birth-func-brightness-collectoid-dust ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 sprite-vec-data-3d))
+  (let ((s5-0 (+ (mod (the-as int (rand-uint31-gen *random-generator*)) 51) 100))
+        (s3-0 (+ (logand 0 (rand-uint31-gen *random-generator*)) 150))
+        (s4-0 (+ (mod (the-as int (rand-uint31-gen *random-generator*)) 101) 50))
+        (v1-7 (+ (mod (the-as int (rand-uint31-gen *random-generator*)) 101) 50))
+        )
+    (set! (-> arg2 r-g-b-a x) (the float (- s5-0 (the-as int s3-0))))
+    (set! (-> arg2 r-g-b-a y) (the float (- s5-0 s4-0)))
+    (set! (-> arg2 r-g-b-a z) (the float (- s5-0 v1-7)))
+    )
+  )
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 215) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 747) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 749) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 750) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 748) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 216) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 751) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 753) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 754) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 755) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 752) #f)
+
+
+
+

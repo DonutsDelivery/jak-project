@@ -1,0 +1,374 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for symbol *vehicle-manager*, type object
+(define *vehicle-manager* (the-as object #f))
+
+;; definition (debug) for function vehicle-type->string
+(defun-debug vehicle-type->string ((arg0 int))
+  (let ((v1-0 arg0))
+    (cond
+      ((zero? v1-0)
+       "v-mongoose"
+       )
+      ((= v1-0 2)
+       "v-wombat"
+       )
+      ((= v1-0 13)
+       "v-snake"
+       )
+      ((= v1-0 4)
+       "v-bobcat"
+       )
+      ((= v1-0 9)
+       "v-panther"
+       )
+      ((= v1-0 16)
+       "v-dart"
+       )
+      ((= v1-0 14)
+       "v-daxtermobile"
+       )
+      ((= v1-0 11)
+       "v-cheetah"
+       )
+      ((= v1-0 17)
+       "test-bike"
+       )
+      ((= v1-0 7)
+       "v-bear"
+       )
+      ((= v1-0 1)
+       "v-falcon"
+       )
+      ((= v1-0 12)
+       "v-gila"
+       )
+      ((= v1-0 20)
+       "any"
+       )
+      ((= v1-0 15)
+       "v-drone"
+       )
+      ((= v1-0 3)
+       "v-possum"
+       )
+      ((= v1-0 18)
+       "test-car"
+       )
+      ((= v1-0 8)
+       "v-leopard"
+       )
+      ((= v1-0 19)
+       "none"
+       )
+      ((= v1-0 6)
+       "v-wolf"
+       )
+      ((= v1-0 10)
+       "v-tiger"
+       )
+      ((= v1-0 5)
+       "v-cougar"
+       )
+      (else
+        "*unknown*"
+        )
+      )
+    )
+  )
+
+;; definition (debug) for function driver-type->string
+(defun-debug driver-type->string ((arg0 int))
+  (let ((v1-0 arg0))
+    (cond
+      ((= v1-0 8)
+       "d-taryn"
+       )
+      ((= v1-0 14)
+       "d-ratchet"
+       )
+      ((= v1-0 3)
+       "d-klever"
+       )
+      ((= v1-0 16)
+       "d-jakb"
+       )
+      ((= v1-0 20)
+       "d-pecker"
+       )
+      ((= v1-0 2)
+       "d-razer"
+       )
+      ((= v1-0 6)
+       "d-thug-b"
+       )
+      ((= v1-0 10)
+       "d-sig"
+       )
+      ((= v1-0 18)
+       "d-daxter"
+       )
+      ((= v1-0 9)
+       "d-torn"
+       )
+      ((= v1-0 4)
+       "d-kiera"
+       )
+      ((= v1-0 22)
+       "d-osmo"
+       )
+      ((= v1-0 7)
+       "d-thug-c"
+       )
+      ((= v1-0 12)
+       "d-kaeden"
+       )
+      ((= v1-0 1)
+       "d-ashelin"
+       )
+      ((= v1-0 11)
+       "d-ur-86"
+       )
+      ((zero? v1-0)
+       "d-jak"
+       )
+      ((= v1-0 23)
+       "none"
+       )
+      ((= v1-0 15)
+       "d-jaka"
+       )
+      ((= v1-0 17)
+       "d-jakc"
+       )
+      ((= v1-0 13)
+       "d-rayn"
+       )
+      ((= v1-0 5)
+       "d-thug-a"
+       )
+      ((= v1-0 21)
+       "d-ximon"
+       )
+      ((= v1-0 19)
+       "d-gtblitz"
+       )
+      (else
+        "*unknown*"
+        )
+      )
+    )
+  )
+
+;; definition for function type-from-driver-type
+(defun type-from-driver-type ((arg0 int))
+  (let ((v1-0 arg0))
+    (cond
+      ((zero? v1-0)
+       driver-jak
+       )
+      ((= v1-0 1)
+       driver-ashelin
+       )
+      ((= v1-0 2)
+       driver-razer
+       )
+      ((= v1-0 3)
+       driver-klever
+       )
+      ((= v1-0 4)
+       driver-kiera
+       )
+      ((= v1-0 5)
+       driver-thug-a
+       )
+      ((= v1-0 6)
+       driver-thug-b
+       )
+      ((= v1-0 7)
+       driver-thug-c
+       )
+      ((= v1-0 8)
+       driver-taryn
+       )
+      ((= v1-0 9)
+       driver-torn
+       )
+      ((= v1-0 10)
+       driver-sig
+       )
+      ((= v1-0 11)
+       driver-ur-86
+       )
+      ((= v1-0 12)
+       driver-kaeden
+       )
+      ((= v1-0 13)
+       driver-rayn
+       )
+      ((= v1-0 14)
+       driver-ratchet
+       )
+      ((= v1-0 15)
+       driver-jaka
+       )
+      ((= v1-0 16)
+       driver-jakb
+       )
+      ((= v1-0 17)
+       driver-jakc
+       )
+      ((= v1-0 18)
+       driver-daxter
+       )
+      ((= v1-0 19)
+       driver-gtblitz
+       )
+      ((= v1-0 20)
+       driver-pecker
+       )
+      ((= v1-0 21)
+       driver-ximon
+       )
+      ((= v1-0 22)
+       driver-osmo
+       )
+      (else
+        (the-as type #f)
+        )
+      )
+    )
+  )
+
+;; definition for function level-from-driver-type
+(defun level-from-driver-type ((arg0 int))
+  (let ((v1-0 arg0))
+    (cond
+      ((zero? v1-0)
+       'jaklev
+       )
+      ((= v1-0 1)
+       'ashlev
+       )
+      ((= v1-0 2)
+       'razlev
+       )
+      ((= v1-0 3)
+       'klelev
+       )
+      ((= v1-0 4)
+       'kielev
+       )
+      ((= v1-0 5)
+       'thalev
+       )
+      ((= v1-0 6)
+       'thblev
+       )
+      ((= v1-0 7)
+       'thclev
+       )
+      ((= v1-0 8)
+       'tarlev
+       )
+      ((= v1-0 9)
+       'torlev
+       )
+      ((= v1-0 10)
+       'siglev
+       )
+      ((= v1-0 11)
+       'ur8lev
+       )
+      ((= v1-0 12)
+       'kaelev
+       )
+      ((= v1-0 13)
+       'raylev
+       )
+      ((= v1-0 14)
+       'ratlev
+       )
+      ((= v1-0 15)
+       'jkalev
+       )
+      ((= v1-0 16)
+       'jkblev
+       )
+      ((= v1-0 17)
+       'jkclev
+       )
+      ((= v1-0 18)
+       'daxlev
+       )
+      ((= v1-0 19)
+       'gtblev
+       )
+      ((= v1-0 20)
+       'peclev
+       )
+      ((= v1-0 21)
+       'ximlev
+       )
+      ((= v1-0 22)
+       'osmlev
+       )
+      (else
+        #f
+        )
+      )
+    )
+  )
+
+;; definition of type vehicle-spawn-params
+(deftype vehicle-spawn-params (structure)
+  ((behavior         uint64)
+   (nav-mesh         basic)
+   (position         vector      :inline)
+   (rotation         quaternion  :inline)
+   (velocity         vector      :inline)
+   (handle           uint64)
+   (handle-parent    uint64)
+   (user-data        uint32)
+   (entity           basic)
+   (flags            uint32)
+   (player-id        int8)
+   (level-slot       int8)
+   (driver-type      uint8)
+   (driver-slot      int8)
+   (impact-callback  basic)
+   (proc             basic)
+   )
+  )
+
+;; definition for method 3 of type vehicle-spawn-params
+(defmethod inspect ((this vehicle-spawn-params))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'vehicle-spawn-params)
+  (format #t "~1Tbehavior: ~D~%" (-> this behavior))
+  (format #t "~1Tnav-mesh: ~A~%" (-> this nav-mesh))
+  (format #t "~1Tposition: #<vector @ #x~X>~%" (-> this position))
+  (format #t "~1Trotation: #<quaternion @ #x~X>~%" (-> this rotation))
+  (format #t "~1Tvelocity: #<vector @ #x~X>~%" (-> this velocity))
+  (format #t "~1Thandle: ~D~%" (-> this handle))
+  (format #t "~1Thandle-parent: ~D~%" (-> this handle-parent))
+  (format #t "~1Tuser-data: ~D~%" (-> this user-data))
+  (format #t "~1Tentity: ~A~%" (-> this entity))
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (format #t "~1Tplayer-id: ~D~%" (-> this player-id))
+  (format #t "~1Tlevel-slot: ~D~%" (-> this level-slot))
+  (format #t "~1Tdriver-type: ~D~%" (-> this driver-type))
+  (format #t "~1Tdriver-slot: ~D~%" (-> this driver-slot))
+  (format #t "~1Timpact-callback: ~A~%" (-> this impact-callback))
+  (format #t "~1Tproc: ~A~%" (-> this proc))
+  (label cfg-4)
+  this
+  )
+
+
+
+

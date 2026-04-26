@@ -35,7 +35,7 @@
   (:methods
     (eco-method-52 (_type_) none)
     (eco-method-53 (_type_) int)
-    (eco-method-54 (_type_) none)
+    (eco-method-54 (_type_ int uint) none)
     (eco-method-55 (_type_) int)
     )
   )
@@ -65,8 +65,8 @@
     (eco-mgr-method-45 (_type_) none)
     (eco-mgr-method-46 (_type_) none)
     (eco-mgr-method-47 (_type_) symbol)
-    (eco-mgr-method-48 (_type_) none)
-    (eco-mgr-method-49 (_type_) int)
+    (eco-mgr-method-48 (_type_ int int uint) none)
+    (eco-mgr-method-49 (_type_ int) int)
     (eco-mgr-method-50 (_type_) int)
     )
   )
@@ -94,7 +94,6 @@
   )
 
 ;; definition for method 37 of type eco-mgr
-;; WARN: Return type mismatch int vs none.
 (defmethod process-nettable-method-37 ((this eco-mgr) (arg0 net-process-class-info))
   (set! (-> (the-as (pointer symbol) (+ (* (-> arg0 msg-count) 4) (the-as int (-> arg0 msg-map)))) 3)
         'req-owner
@@ -111,7 +110,6 @@
   (set! (-> (the-as (pointer symbol) (+ (* (-> arg0 msg-count) 4) (the-as int (-> arg0 msg-map)))) 3) 'respawn)
   (+! (-> arg0 msg-count) 1)
   0
-  (none)
   )
 
 ;; definition for symbol *msg-map-eco-mgr*, type array
@@ -128,11 +126,7 @@
 
 (set! (-> *net-process-class-info-eco-mgr* owner-type) eco-mgr)
 
-;; failed to figure out what this is:
-(let ((t9-9 net-process-class-register))
-  *net-process-class-info-eco-mgr*
-  (t9-9)
-  )
+(net-process-class-register (the-as uint *net-process-class-info-eco-mgr*))
 
 ;; definition for method 40 of type eco-mgr
 (defmethod process-nettable-method-40 ((this eco-mgr))

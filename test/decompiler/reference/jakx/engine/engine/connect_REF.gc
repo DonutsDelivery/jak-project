@@ -745,7 +745,6 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
 
 ;; definition for method 11 of type engine-pers
 (defmethod kill-by-key ((this engine-pers) (arg0 object))
-  "Remove connections with this key, calling `kill-callback`."
   (let ((s4-0 (&-> this alive-list))
         (s2-0 (-> this alive-list))
         )

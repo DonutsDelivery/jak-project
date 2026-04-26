@@ -9,7 +9,7 @@
    )
   (:methods
     (process-focusable-method-50 (_type_) int)
-    (process-focusable-method-51 (_type_ int) vector)
+    (process-focusable-method-51 (_type_ int) object)
     (process-focusable-method-52 (_type_) vector)
     (process-focusable-method-53 (_type_) vector)
     (process-focusable-method-54 (_type_) int)
@@ -50,24 +50,22 @@
   )
 
 ;; definition for method 51 of type process-focusable
-;; WARN: Return type mismatch object vs vector.
 (defmethod process-focusable-method-51 ((this process-focusable) (arg0 int))
   (let ((gp-0 (-> this root)))
-    (the-as vector (cond
-                     ((zero? arg0)
-                      (-> gp-0 trans)
-                      )
-                     ((and (= arg0 1) (type? gp-0 collide-shape-moving))
-                      (&-> (the-as collide-shape-moving gp-0) csm-pad 200)
-                      )
-                     ((and (or (= arg0 2) (= arg0 3) (= arg0 10)) (type? gp-0 collide-shape))
-                      (-> (the-as collide-shape-moving gp-0) root-prim prim-core)
-                      )
-                     (else
-                       (-> gp-0 trans)
-                       )
-                     )
-            )
+    (cond
+      ((zero? arg0)
+       (-> gp-0 trans)
+       )
+      ((and (= arg0 1) (type? gp-0 collide-shape-moving))
+       (&-> (the-as collide-shape-moving gp-0) csm-pad 200)
+       )
+      ((and (or (= arg0 2) (= arg0 3) (= arg0 10)) (type? gp-0 collide-shape))
+       (-> (the-as collide-shape-moving gp-0) root-prim prim-core)
+       )
+      (else
+        (-> gp-0 trans)
+        )
+      )
     )
   )
 

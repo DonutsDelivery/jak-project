@@ -135,7 +135,7 @@
   )
 
 ;; definition for function init-mood-mountain
-;; WARN: Return type mismatch none vs uint.
+;; WARN: Return type mismatch sp-field-init-spec vs uint.
 (defun init-mood-mountain ((arg0 mood-context))
   (let ((gp-0 (-> arg0 state)))
     (let ((a0-1 (-> *part-id-table* 1)))

@@ -243,9 +243,9 @@
 (defun str-ambient-play ((name string))
   "Start playing ambient (unused?)."
   (set! *que-str-lock* #t)
-  (let ((s5-0 (the-as play-chunk-msg (add-element *play-str-rpc*))))
-    (set! (-> s5-0 basename 0 name 0) (the-as uint 36))
-    (copyn-charp<-string (&-> s5-0 basename 0 name 1) name 48)
+  (let ((s5-0 (the-as load-chunk-msg (add-element *play-str-rpc*))))
+    (set! (-> s5-0 basename name 0) (the-as uint 36))
+    (copyn-charp<-string (&-> s5-0 basename name 1) name 48)
     (set! (-> s5-0 result) (the-as uint 0))
     )
   0
@@ -258,9 +258,9 @@
 (defun str-ambient-stop ((name string))
   "Stop playing ambient (unused?)."
   (set! *que-str-lock* #t)
-  (let ((s5-0 (the-as play-chunk-msg (add-element *play-str-rpc*))))
-    (set! (-> s5-0 basename 0 name 0) (the-as uint 36))
-    (copyn-charp<-string (&-> s5-0 basename 0 name 1) name 48)
+  (let ((s5-0 (the-as load-chunk-msg (add-element *play-str-rpc*))))
+    (set! (-> s5-0 basename name 0) (the-as uint 36))
+    (copyn-charp<-string (&-> s5-0 basename name 1) name 48)
     (set! (-> s5-0 result) (the-as uint 1))
     )
   0
@@ -381,8 +381,60 @@
   )
 
 ;; definition for function dgo-load-link
-;; INFO: function output is handled by mips2c
-(def-mips2c dgo-load-link (function dgo-header kheap uint symbol symbol symbol))
+(defun dgo-load-link ((object-file dgo-header) (heap kheap) (end-of-buffer uint) (print-login symbol) (loaded-from-top symbol))
+  "Start the async linker on a GOAL object file that was just loaded."
+  (dynamic-patch-hook)
+  (let ((s4-0 (the-as object (&+ object-file 64))))
+    (cond
+      ((>= (the-as int (+ (the-as uint s4-0) (-> object-file length))) (the-as int (-> heap top-base)))
+       (format
+         0
+         "ERROR: -----> dgo file header ~g #x~X has overrun heap #x~X by ~D bytes.  This is very bad!~%"
+         (-> object-file rootname)
+         object-file
+         heap
+         (- (+ (the-as uint s4-0) (-> object-file length)) (the-as uint (-> heap top-base)))
+         )
+       )
+      ((and (< (the-as int object-file) (the-as int end-of-buffer))
+            (>= (the-as int (+ (the-as uint s4-0) (-> object-file length))) (the-as int end-of-buffer))
+            )
+       (format
+         0
+         "ERROR: -----> dgo file header ~g #x~X has overrun heap #x~X by ~D bytes.  This is very bad!~%"
+         (-> object-file rootname)
+         object-file
+         heap
+         (- (+ (the-as uint s4-0) (-> object-file length)) end-of-buffer)
+         )
+       )
+      )
+    (if loaded-from-top
+        (format
+          0
+          "NOTICE: loaded ~g, ~D bytes (~f K) at top ~D at #x~X - #x~X~%"
+          (-> object-file rootname)
+          (-> object-file length)
+          (* 0.0009765625 (the float (-> object-file length)))
+          (&- (&+ (the-as pointer s4-0) (-> object-file length)) (the-as uint (-> heap base)))
+          object-file
+          (&+ (the-as pointer s4-0) (-> object-file length))
+          )
+        )
+    (string<-charp (clear *dgo-name*) (-> object-file rootname))
+    (nonzero? (link-begin
+                (the-as pointer s4-0)
+                (-> *dgo-name* data)
+                (the-as int (-> object-file length))
+                heap
+                (if print-login
+                    (link-flag output-load-msg output-load-true-msg execute-login print-login fast-link)
+                    (link-flag output-load-msg output-load-true-msg execute-login fast-link)
+                    )
+                )
+              )
+    )
+  )
 
 ;; definition for function destroy-mem
 ;; WARN: Return type mismatch int vs none.

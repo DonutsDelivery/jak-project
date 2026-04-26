@@ -1,0 +1,86 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition of type race-control
+(deftype race-control (structure)
+  ((state        race-state)
+   (racer-state  racer-state)
+   (mesh         basic)
+   (line         race-line)
+   )
+  (:methods
+    (race-control-method-9 (_type_ race-state racer-state race-line) none)
+    )
+  )
+
+;; definition for method 3 of type race-control
+(defmethod inspect ((this race-control))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'race-control)
+  (format #t "~1Tstate: #<race-state @ #x~X>~%" (-> this state))
+  (format #t "~1Tracer-state: #<racer-state @ #x~X>~%" (-> this racer-state))
+  (format #t "~1Tmesh: ~A~%" (-> this mesh))
+  (format #t "~1Tline: #<race-line @ #x~X>~%" (-> this line))
+  (label cfg-4)
+  this
+  )
+
+;; definition for method 9 of type race-control
+;; WARN: Return type mismatch int vs none.
+(defmethod race-control-method-9 ((this race-control) (arg0 race-state) (arg1 racer-state) (arg2 race-line))
+  (set! (-> this state) (the-as race-state arg1))
+  (set! (-> this racer-state) (the-as racer-state arg2))
+  (let ((v1-0 (if arg0
+                  (-> arg0 start-dir w)
+                  )
+              )
+        )
+    (set! (-> this racer-state racer)
+          (the-as uint (logior (if (the-as float v1-0)
+                                   (shl (-> (the-as process (-> (the-as (pointer uint32) v1-0))) pid) 32)
+                                   0
+                                   )
+                               (the-as float v1-0)
+                               )
+                  )
+          )
+    )
+  (set! (-> this mesh) (the-as basic (-> (the-as (pointer uint32) arg1) 23)))
+  (set! (-> this line) #f)
+  0
+  (none)
+  )
+
+;; definition for function output-race-mesh
+(defun output-race-mesh ((arg0 race-line))
+  (when (and arg0 (-> arg0 gap-indices))
+    (let ((gp-0 (the-as race-line-slice-data (-> arg0 gap-indices))))
+      (dotimes (s5-0 (-> gp-0 count))
+        (format
+          #t
+          "~d ~f  ~m ~m ~m  "
+          s5-0
+          (-> (&+ (the-as (pointer float) (* s5-0 32)) (-> gp-0 points)) 3)
+          (-> (&+ (the-as (pointer float) (-> gp-0 points)) (* s5-0 32)) 0)
+          (-> (&+ (the-as (pointer float) (-> gp-0 points)) (* s5-0 32)) 1)
+          (-> (&+ (the-as (pointer float) (-> gp-0 points)) (* s5-0 32)) 2)
+          )
+        (format
+          #t
+          "~m ~m ~m~%"
+          (-> (&+ (the-as (pointer float) (-> gp-0 points)) (* s5-0 32)) 4)
+          (-> (&+ (the-as (pointer float) (-> gp-0 points)) (* s5-0 32)) 5)
+          (-> (&+ (the-as (pointer float) (-> gp-0 points)) (* s5-0 32)) 6)
+          )
+        )
+      )
+    #f
+    )
+  )
+
+
+
+

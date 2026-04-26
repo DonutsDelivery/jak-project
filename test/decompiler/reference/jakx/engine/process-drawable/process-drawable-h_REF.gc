@@ -4,6 +4,7 @@
 ;; definition for function cspace-by-name-no-fail
 ;; WARN: Return type mismatch object vs cspace.
 (defun cspace-by-name-no-fail ((proc process-drawable) (name string))
+  "Like [[cspace-by-name]], but prints an error if the [[cspace]] was not found and returns the `node-list`."
   (let ((v0-0 (the-as object (cspace-by-name proc name))))
     (the-as cspace (cond
                      ((the-as cspace v0-0)
@@ -21,6 +22,7 @@
 
 ;; definition for function cspace-index-by-name-no-fail
 (defun cspace-index-by-name-no-fail ((proc process-drawable) (name string))
+  "Like [[cspace-index-by-name]], but prints an error if the [[cspace]] was not found and returns 0."
   (let ((idx (cspace-index-by-name proc name)))
     (cond
       ((< idx 0)
@@ -98,6 +100,7 @@
   )
 
 ;; definition for function joint-channel-float-delete!
+;; WARN: Return type mismatch int vs none.
 (defun joint-channel-float-delete! ((chan joint-control-channel))
   (let ((v1-0 (-> chan parent)))
     (+! (-> v1-0 float-channels) -1)
@@ -114,6 +117,7 @@
       )
     )
   0
+  (none)
   )
 
 ;; definition for function num-func-interp-play!

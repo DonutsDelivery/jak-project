@@ -24,7 +24,7 @@
   (:methods
     (update-lap-distance (_type_ race-state) none)
     (begin-lap (_type_ race-state) none)
-    (end-lap (_type_ race-state) none)
+    (end-lap (_type_ process-drawable) int)
     )
   )
 

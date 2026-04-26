@@ -55,6 +55,7 @@
   )
 
 ;; definition for method 10 of type drawable-group
+;; WARN: Return type mismatch int vs none.
 (defmethod draw ((this drawable-group))
   "Draw the drawable, and typically its children.
    This usually means adding stuff to a list to be drawn later, rather than expensive drawing here."
@@ -66,9 +67,11 @@
       )
     )
   0
+  (none)
   )
 
 ;; definition for method 13 of type drawable-group
+;; WARN: Return type mismatch int vs none.
 (defmethod collect-stats ((this drawable-group))
   "Collect triangle/perf statistics for rendering.
    This is only called when viewing stats.
@@ -81,9 +84,11 @@
       )
     )
   0
+  (none)
   )
 
 ;; definition for method 14 of type drawable-group
+;; WARN: Return type mismatch int vs none.
 (defmethod debug-draw ((this drawable-group))
   "Debug-draw a drawable and its children. Typically uses the debug-draw functions."
   (when (vis-cull (-> this id))
@@ -94,6 +99,7 @@
       )
     )
   0
+  (none)
   )
 
 ;; definition for method 15 of type drawable-group

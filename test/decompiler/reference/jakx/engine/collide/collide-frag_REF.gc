@@ -8,6 +8,7 @@
   )
 
 ;; definition for method 10 of type drawable-tree-collide-fragment
+;; WARN: Return type mismatch int vs none.
 (defmethod draw ((this drawable-tree-collide-fragment))
   "Draw the drawable, and typically its children.
    This usually means adding stuff to a list to be drawn later, rather than expensive drawing here."
@@ -17,6 +18,7 @@
       )
     )
   0
+  (none)
   )
 
 ;; definition for method 15 of type drawable-tree-collide-fragment
@@ -65,13 +67,16 @@
   )
 
 ;; definition for method 10 of type collide-fragment
+;; WARN: Return type mismatch int vs none.
 (defmethod draw ((this collide-fragment))
   "Draw the drawable, and typically its children.
    This usually means adding stuff to a list to be drawn later, rather than expensive drawing here."
   0
+  (none)
   )
 
 ;; definition for method 10 of type drawable-inline-array-collide-fragment
+;; WARN: Return type mismatch int vs none.
 (defmethod draw ((this drawable-inline-array-collide-fragment))
   "Draw the drawable, and typically its children.
    This usually means adding stuff to a list to be drawn later, rather than expensive drawing here."
@@ -83,6 +88,7 @@
       )
     )
   0
+  (none)
   )
 
 ;; definition for method 8 of type drawable-inline-array-collide-fragment

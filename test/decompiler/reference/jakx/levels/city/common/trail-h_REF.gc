@@ -97,7 +97,7 @@
    (cost         uint16)
    )
   (:methods
-    (trail-conn-method-9 () none)
+    (trail-conn-method-9 (_type_) none)
     )
   )
 
@@ -303,7 +303,7 @@
     (trail-graph-method-25 (_type_ int) int)
     (trail-graph-method-26 (_type_) int)
     (trail-graph-method-27 (_type_) int)
-    (trail-graph-method-28 () none)
+    (trail-graph-method-28 (_type_ trail-conn-search int int) none)
     (trail-graph-method-29 (_type_ vector vector trail-cached-search-info) int)
     (trail-graph-method-30 (_type_) int)
     (trail-graph-method-31 (_type_ int) none)
@@ -354,8 +354,8 @@
   this
   )
 
-;; definition for symbol *trail-graph*, type object
-(define *trail-graph* (the-as object #f))
+;; definition for symbol *trail-graph*, type trail-graph
+(define *trail-graph* (the-as trail-graph #f))
 
 
 

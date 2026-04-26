@@ -36,7 +36,7 @@
     (lookup-text! (_type_ text-id symbol) string)
     (game-text-info-method-10 (_type_ text-id symbol) int)
     (game-text-info-method-11 (_type_ string) string)
-    (game-text-info-method-12 () int)
+    (game-text-info-method-12 (_type_) int)
     )
   )
 

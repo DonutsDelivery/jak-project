@@ -69,7 +69,7 @@
    )
   (:methods
     (perf-stat-method-9 (_type_) none)
-    (perf-stat-method-10 (_type_ string basic) int)
+    (print-to-stream (_type_ string basic) none)
     (perf-stat-method-11 (_type_) int)
     (perf-stat-method-12 (_type_) int)
     (perf-stat-method-13 (_type_ uint uint uint) int)

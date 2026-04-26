@@ -1,0 +1,72 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for function target-nearest-dist
+;; WARN: Return type mismatch int vs none.
+(defun target-nearest-dist ()
+  0
+  (none)
+  )
+
+;; definition for function target-get-any-pos
+;; WARN: Return type mismatch object vs none.
+(defun target-get-any-pos ()
+  (local-vars (gp-1 object))
+  (let ((gp-0 (the-as object #f)))
+    (dotimes (s5-0 *view-count*)
+      (if (view-get-target s5-0)
+          (set! gp-0 (view-get-target s5-0))
+          )
+      )
+    (set! gp-1 (cond
+                 ((and (the-as basic gp-0) (+ (-> (the-as (pointer uint32) gp-0) 46) 12))
+                  (+ (-> (the-as (pointer uint32) gp-0) 46) 12)
+                  )
+                 (else
+                   (let ((t9-2 view-push-context)
+                         (a0-2 0)
+                         )
+                     (t9-2 a0-2)
+                     (set! gp-1 (camera-pos))
+                     (view-pop-context a0-2)
+                     )
+                   gp-1
+                   )
+                 )
+          )
+    )
+  (none)
+  )
+
+;; failed to figure out what this is:
+(defstate target-float (target)
+  :event target-generic-event-handler
+  :enter L8
+  :exit (behavior ()
+    (let ((t9-0 make-sound-instance)
+          (a0-0 (-> *sound-info* 314))
+          )
+      0
+      (let ((v1-1 (t9-0 (the-as int a0-0))))
+        (cond
+          (v1-1
+            (set! (-> v1-1 fo-power) 0.0)
+            (logior! (-> v1-1 flags) 328)
+            (-> v1-1 id)
+            )
+          (else
+            0
+            )
+          )
+        )
+      )
+    (target-exit)
+    )
+  :trans L1
+  :code sleep-code
+  :post target-post
+  )
+
+
+
+

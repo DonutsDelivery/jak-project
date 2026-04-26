@@ -542,11 +542,11 @@
 ;; definition for symbol *record-fma-low-res*, type object
 (define *record-fma-low-res* (the-as object #f))
 
-;; definition for symbol *record-fma-start*, type object
-(define *record-fma-start* (the-as object 0))
+;; definition for symbol *record-fma-start*, type float
+(define *record-fma-start* 0.0)
 
-;; definition for symbol *record-fma-end*, type object
-(define *record-fma-end* (the-as object 0))
+;; definition for symbol *record-fma-end*, type float
+(define *record-fma-end* 0.0)
 
 ;; definition for symbol *record-fma-pal*, type object
 (define *record-fma-pal* (the-as object #f))

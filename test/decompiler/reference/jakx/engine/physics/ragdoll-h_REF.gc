@@ -19,15 +19,15 @@
    (last-frame-dur   uint64)
    )
   (:methods
-    (ragdoll-edit-info-method-9 () none)
-    (ragdoll-edit-info-method-10 () none)
-    (ragdoll-edit-info-method-11 () none)
+    (ragdoll-edit-info-method-9 (_type_ ragdoll-joint) none)
+    (ragdoll-edit-info-method-10 (_type_ object ragdoll-joint) none)
+    (ragdoll-edit-info-method-11 (_type_) none)
     (ragdoll-edit-info-method-12 (_type_) none)
-    (ragdoll-edit-info-method-13 () none)
-    (ragdoll-edit-info-method-14 () none)
+    (ragdoll-edit-info-method-13 (_type_) none)
+    (ragdoll-edit-info-method-14 (_type_) none)
     (ragdoll-edit-info-method-15 (_type_) none)
-    (ragdoll-edit-info-method-16 () none)
-    (ragdoll-edit-info-method-17 () none)
+    (ragdoll-edit-info-method-16 (_type_) none)
+    (ragdoll-edit-info-method-17 (_type_) none)
     )
   )
 
@@ -56,11 +56,19 @@
   this
   )
 
-;; definition for symbol *ragdoll-edit-info*, type object
-(define *ragdoll-edit-info* (the-as object 0))
+;; definition for symbol *ragdoll-edit-info*, type ragdoll-edit-info
+(define *ragdoll-edit-info* (the-as ragdoll-edit-info 0))
 
-;; definition for symbol *ragdoll-edit-info*, type object
-(define *ragdoll-edit-info* #f)
+;; definition for symbol *ragdoll-edit-info*, type ragdoll-edit-info
+(define *ragdoll-edit-info* (new 'static 'ragdoll-edit-info
+                              :editing #t
+                              :current-func #x9
+                              :single-step #x2
+                              :collision #t
+                              :gravity #t
+                              :skel-visible #x1
+                              )
+        )
 
 ;; definition of type ragdoll-joint-setup
 (deftype ragdoll-joint-setup (structure)
@@ -215,10 +223,10 @@
     (ragdoll-method-9 (_type_ matrix process-drawable) none)
     (ragdoll-method-10 (_type_ process-drawable symbol vector symbol) none)
     (ragdoll-method-11 (_type_ time-frame) none)
-    (ragdoll-method-12 (_type_) none)
-    (ragdoll-method-13 (_type_) none)
-    (ragdoll-method-14 (_type_) none)
-    (ragdoll-method-15 (_type_) none)
+    (ragdoll-method-12 (_type_ (inline-array ragdoll-joint)) none)
+    (ragdoll-method-13 (_type_ ragdoll-edit-info ragdoll-joint matrix matrix) none)
+    (ragdoll-method-14 (_type_ process-drawable ragdoll-joint object matrix) none)
+    (ragdoll-method-15 (_type_ process-drawable ragdoll-edit-info) none)
     (ragdoll-method-16 (_type_ process-drawable ragdoll-setup) none)
     (ragdoll-method-17 (_type_ process-drawable) none)
     (ragdoll-method-18 (_type_) none)
@@ -276,15 +284,15 @@
    (last-attack-id  uint32)
    )
   (:state-methods
-    ragdoll-proc-method-14
+    (ragdoll-proc-method-14 _type_)
     )
   (:methods
     (ragdoll-proc-method-15 (_type_ symbol vector symbol) none)
     (ragdoll-proc-method-16 (_type_ time-frame) none)
-    (ragdoll-proc-method-17 () none)
-    (ragdoll-proc-method-18 () none)
+    (ragdoll-proc-method-17 (_type_ ragdoll-edit-info) none)
+    (ragdoll-proc-method-18 (_type_ ragdoll-edit-info) none)
     (ragdoll-proc-method-19 (_type_) none)
-    (ragdoll-proc-method-20 () none)
+    (ragdoll-proc-method-20 (_type_) none)
     )
   )
 

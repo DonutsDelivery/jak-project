@@ -68,8 +68,8 @@
    (scissor-on-screen    uint64        :offset 680)
    )
   (:methods
-    (viewport-method-9 (_type_) none)
-    (viewport-method-10 (_type_) none)
+    (viewport-method-9 (_type_ int) none)
+    (viewport-method-10 (_type_ int) none)
     (viewport-method-11 (_type_) int)
     (viewport-method-12 (_type_) int)
     (viewport-method-13 (_type_) int)
@@ -163,8 +163,8 @@
    )
   (:methods
     (viewport-array-method-9 (_type_ viewport) int)
-    (viewport-array-method-10 () none)
-    (viewport-array-method-11 () none)
+    (viewport-array-method-10 (_type_ uint) none)
+    (viewport-array-method-11 (_type_) none)
     )
   )
 

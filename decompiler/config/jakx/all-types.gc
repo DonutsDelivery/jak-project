@@ -16568,7 +16568,7 @@
     (ocean-method-41 (_type_ dma-buffer int) none) ;; 41
     (ocean-method-42 (_type_ dma-buffer) int) ;; 42
     (ocean-method-43 (_type_ matrix matrix matrix) matrix) ;; 43
-    (ocean-method-44 (_type_ vector vector matrix) vector) ;; 44
+    (ocean-method-44 (_type_ vector vector matrix) symbol) ;; 44
     (ocean-method-45 (_type_ uint uint) symbol) ;; 45
     (ocean-method-46 (_type_ pointer int int vector object object object) none) ;; 46
     (ocean-method-47 (_type_ ocean-mid-constants object object object object object object) none) ;; 47 ;; (ocean-mid-setup-constants (_type_ ocean-mid-constants) none)
@@ -29830,7 +29830,7 @@
     (find-collision-meshes (_type_) int) ;; 38
     (on-platform (_type_ collide-shape collide-query) symbol) ;; 39
     (collide-shape-method-40 (_type_ overlaps-others-params) object) ;; 40
-    (shove-to-closest-point-on-path (_type_ attack-info float) vector) ;; 41
+    (shove-to-closest-point-on-path (_type_ attack-info float) int) ;; 41
     (should-push-away (_type_ collide-shape collide-query) symbol) ;; 42
     (pull-rider! (_type_ pull-rider-info) none) ;; 43
     (pull-riders! (_type_) symbol) ;; 44
@@ -30541,7 +30541,7 @@
   :flag-assert         #x3b00700100
   (:methods
     (process-focusable-method-50 (_type_) int) ;; 50
-    (process-focusable-method-51 (_type_ int) vector) ;; 51
+    (process-focusable-method-51 (_type_ int) object) ;; 51
     (process-focusable-method-52 (_type_) vector) ;; 52
     (process-focusable-method-53 (_type_) vector) ;; 53
     (process-focusable-method-54 (_type_) int) ;; 54
@@ -34088,7 +34088,7 @@
   :flag-assert         #x1208b00938
   (:methods
     (camera-master-method-14 (_type_ vector) vector) ;; 14
-    (camera-master-method-15 (_type_ vector) vector) ;; 15
+    (camera-master-method-15 (_type_ vector) none) ;; 15
     (camera-master-method-16 (_type_ vector) vector) ;; 16
     (camera-master-method-17 (_type_ int) none) ;; 17
     )
@@ -34565,8 +34565,8 @@
     (actor-link-info-method-11 (_type_) actor-link-info) ;; 11
     (actor-link-info-method-12 (_type_) entity-actor) ;; 12
     (actor-link-info-method-13 (_type_) entity-actor) ;; 13
-    (actor-link-info-method-14 (_type_) process) ;; 14
-    (actor-link-info-method-15 (_type_) process) ;; 15
+    (actor-link-info-method-14 (_type_) basic) ;; 14
+    (actor-link-info-method-15 (_type_) basic) ;; 15
     (actor-link-info-method-16 (_type_ (function entity-actor object object) object) int) ;; 16
     (actor-link-info-method-17 (_type_ (function entity-actor object object) object) int) ;; 17
     (actor-link-info-method-18 (_type_ (function entity-actor object object) object) int) ;; 18
@@ -45319,8 +45319,8 @@
     (vehicle-method-155 (_type_) int) ;; 155
     (vehicle-method-156 (_type_) none) ;; 156
     (vehicle-method-157 (_type_) none) ;; 157
-    (vehicle-method-158 (_type_ float) quaternion) ;; 158
-    (vehicle-method-159 (_type_ float) quaternion) ;; 159
+    (vehicle-method-158 (_type_ float) int) ;; 158
+    (vehicle-method-159 (_type_ float) int) ;; 159
     (vehicle-method-160 (_type_) none) ;; 160
     (vehicle-method-161 (_type_) none) ;; 161
     (vehicle-method-162 (_type_) int) ;; 162
@@ -48554,7 +48554,7 @@
     (base-menu-method-56 (_type_) none) ;; 56
     (base-menu-method-57 (_type_) none) ;; 57
     (base-menu-method-58 (_type_) none) ;; 58
-    (base-menu-method-59 (_type_) sound-id) ;; 59
+    (base-menu-method-59 (_type_) int) ;; 59
     (base-menu-method-60 (_type_) int) ;; 60
     (base-menu-method-61 (_type_) symbol) ;; 61
     (base-menu-method-62 (_type_) int) ;; 62
@@ -61058,7 +61058,7 @@
     (debug-draw (_type_) none) ;; 9
     (get-point-in-path! (_type_ vector float symbol) vector) ;; 10
     (get-random-point (_type_ vector) vector) ;; 11
-    (path-control-method-12 (_type_ vector float float) vector) ;; 12
+    (path-control-method-12 (_type_ vector float float) none) ;; 12
     (displacement-between-two-points-normalized! (_type_ vector float) vector) ;; 13
     (get-point-at-percent-along-path! (_type_ vector float symbol) vector) ;; 14
     (path-control-method-15 (_type_ vector float float) vector) ;; 15
@@ -61077,7 +61077,7 @@
     (path-control-method-28 (_type_ vector vector symbol) float) ;; 28
     (path-control-method-29 (_type_ vector int float) float) ;; 29
     (should-display-marks? (_type_) symbol) ;; 30
-    (displacement-between-two-points! (_type_ vector float float) vector) ;; 31
+    (displacement-between-two-points! (_type_ vector float float) symbol) ;; 31
     (path-control-method-32 (_type_) none) ;; 32
     )
   )

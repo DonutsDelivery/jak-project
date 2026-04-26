@@ -2,6 +2,7 @@
 (in-package goal)
 
 ;; definition (debug) for function penetrate->string
+;; WARN: Return type mismatch object vs string.
 (defun-debug penetrate->string ((arg0 penetrate))
   (if (= (logand (penetrate jak-res-shockwave) arg0) (shl 4 32))
       (format #t "jak-red-shockwave ")
@@ -114,9 +115,10 @@
   (if (= (logand (penetrate enemy-dark-shot) arg0) (penetrate enemy-dark-shot))
       (format #t "enemy-dark-shot ")
       )
-  (if (= (logand (penetrate jak-blue-shot) arg0) (penetrate jak-blue-shot))
-      (format #t "jak-blue-shot ")
-      )
+  (the-as string (if (= (logand (penetrate jak-blue-shot) arg0) (penetrate jak-blue-shot))
+                     (format #t "jak-blue-shot ")
+                     )
+          )
   )
 
 ;; definition for function penetrate-using->damage

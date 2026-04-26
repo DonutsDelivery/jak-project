@@ -93,15 +93,15 @@
                              )
   )
 
-((method-of-object *medius-player-cache* medius-cache-method-12))
+(medius-cache-method-12 *medius-player-cache*)
 
 ;; definition of type medius-player
 (deftype medius-player (medius-cache-index)
   ()
   (:methods
-    (medius-player-method-11 () none)
-    (medius-player-method-12 () none)
-    (medius-player-method-13 () none)
+    (medius-player-method-11 (_type_) none)
+    (medius-player-method-12 (_type_) none)
+    (medius-player-method-13 (_type_) none)
     )
   )
 
@@ -140,101 +140,61 @@
 (define *medius-buddies* #f)
 
 ;; failed to figure out what this is:
-(let ((v1-8 100)
-      (a0-9 *medius-buddies*)
-      )
-  (s.w! (+ a0-9 4) v1-8)
-  )
+(set! (-> (the-as medius-cache-index-array *medius-buddies*) max-ct) 100)
 
 ;; definition for symbol *medius-buddies-online*, type object
 (define *medius-buddies-online* #f)
 
 ;; failed to figure out what this is:
-(let ((v1-10 100)
-      (a0-10 *medius-buddies-online*)
-      )
-  (s.w! (+ a0-10 4) v1-10)
-  )
+(set! (-> (the-as medius-cache-index-array *medius-buddies-online*) max-ct) 100)
 
 ;; definition for symbol *medius-ignores*, type object
 (define *medius-ignores* #f)
 
 ;; failed to figure out what this is:
-(let ((v1-12 32)
-      (a0-11 *medius-ignores*)
-      )
-  (s.w! (+ a0-11 4) v1-12)
-  )
+(set! (-> (the-as medius-cache-index-array *medius-ignores*) max-ct) 32)
 
 ;; definition for symbol *medius-room-players*, type object
 (define *medius-room-players* #f)
 
 ;; failed to figure out what this is:
-(let ((v1-14 256)
-      (a0-12 *medius-room-players*)
-      )
-  (s.w! (+ a0-12 4) v1-14)
-  )
+(set! (-> (the-as medius-cache-index-array *medius-room-players*) max-ct) 256)
 
 ;; definition for symbol *medius-recent-players*, type object
 (define *medius-recent-players* #f)
 
 ;; failed to figure out what this is:
-(let ((v1-16 32)
-      (a0-13 *medius-recent-players*)
-      )
-  (s.w! (+ a0-13 4) v1-16)
-  )
+(set! (-> (the-as medius-cache-index-array *medius-recent-players*) max-ct) 32)
 
 ;; definition for symbol *medius-in-game-players*, type object
 (define *medius-in-game-players* #f)
 
 ;; failed to figure out what this is:
-(let ((v1-18 8)
-      (a0-14 *medius-in-game-players*)
-      )
-  (s.w! (+ a0-14 4) v1-18)
-  )
+(set! (-> (the-as medius-cache-index-array *medius-in-game-players*) max-ct) 8)
 
 ;; definition for symbol *medius-local-game-players*, type object
 (define *medius-local-game-players* #f)
 
 ;; failed to figure out what this is:
-(let ((v1-20 8)
-      (a0-15 *medius-local-game-players*)
-      )
-  (s.w! (+ a0-15 4) v1-20)
-  )
+(set! (-> (the-as medius-cache-index-array *medius-local-game-players*) max-ct) 8)
 
 ;; definition for symbol *medius-outstanding-clan-invites*, type object
 (define *medius-outstanding-clan-invites* #f)
 
 ;; failed to figure out what this is:
-(let ((v1-22 64)
-      (a0-16 *medius-outstanding-clan-invites*)
-      )
-  (s.w! (+ a0-16 4) v1-22)
-  )
+(set! (-> (the-as medius-cache-index-array *medius-outstanding-clan-invites*) max-ct) 64)
 
 ;; definition for symbol *medius-mute-list*, type object
 (define *medius-mute-list* #f)
 
 ;; failed to figure out what this is:
-(let ((v1-24 24)
-      (a0-17 *medius-mute-list*)
-      )
-  (s.w! (+ a0-17 4) v1-24)
-  )
+(set! (-> (the-as medius-cache-index-array *medius-mute-list*) max-ct) 24)
 
 ;; definition for symbol *medius-clan-members-online*, type object
 (define *medius-clan-members-online* #f)
 
 ;; failed to figure out what this is:
-(let ((v1-26 64)
-      (a0-18 *medius-clan-members-online*)
-      )
-  (s.w! (+ a0-18 4) v1-26)
-  )
+(set! (-> (the-as medius-cache-index-array *medius-clan-members-online*) max-ct) 64)
 
 ;; definition for symbol *medius-my-player*, type medius-cached-info-player
 (define *medius-my-player* (new 'static 'medius-cached-info-player))

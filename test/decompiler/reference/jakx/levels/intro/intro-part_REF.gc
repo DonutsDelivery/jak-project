@@ -1,0 +1,1906 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; this file is debug only
+(declare-file (debug))
+
+;; failed to figure out what this is:
+(let ((a0-0 (new 'static 'skeleton-group
+              :name "skel-thuga"
+              :extra #f
+              :info #f
+              :art-group-name "thuga"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 40960.0))
+              :version 8
+              :shadow 2
+              :shadow-joint-index 3
+              :origin-joint-index 3
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-0 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-0 clothing length) (-> a0-0 clothing allocated-length))
+    )
+  (set! (-> a0-0 jgeo) 0)
+  (set! (-> a0-0 janim) 3)
+  (set! (-> a0-0 mgeo 0) 1)
+  (set! (-> a0-0 lod-dist 0) 4095996000.0)
+  (add-to-loading-level a0-0)
+  )
+
+;; failed to figure out what this is:
+(let ((a0-1 (new 'static 'skeleton-group
+              :name "skel-thugb"
+              :extra #f
+              :info #f
+              :art-group-name "thugb"
+              :bounds (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 40960.0))
+              :version 8
+              :shadow 2
+              :shadow-joint-index 3
+              :origin-joint-index 3
+              :clothing #f
+              )
+            )
+      )
+  (when #f
+    (set! (-> a0-1 clothing) (new 'static 'boxed-array :type cloth-params))
+    (set! (-> a0-1 clothing length) (-> a0-1 clothing allocated-length))
+    )
+  (set! (-> a0-1 jgeo) 0)
+  (set! (-> a0-1 janim) 3)
+  (set! (-> a0-1 mgeo 0) 1)
+  (set! (-> a0-1 lod-dist 0) 4095996000.0)
+  (add-to-loading-level a0-1)
+  )
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 56) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 342) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 343) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 57) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 344) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 58) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 345) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 346) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 59) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 347) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 348) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 60) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 349) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 350) #f)
+
+;; definition for function spt-func-part-sparks-bits-local
+(defun spt-func-part-sparks-bits-local ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 vector))
+  (sparticle-motion-blur arg0 arg1 arg2)
+  (spt-func-relative-pos arg0 arg1 (the-as sprite-vec-data-3d arg2))
+  (none)
+  )
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 61) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 351) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 352) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 62) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 353) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 354) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 63) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 355) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 356) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 64) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 357) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 358) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 65) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 364) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 360) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 366) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 361) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 362) #f)
+
+;; definition for symbol *range-carexplo-cu-dust-color*, type curve-color-fast
+(define *range-carexplo-cu-dust-color*
+  (new 'static 'curve-color-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'inline-array vector 4
+      (new 'static 'vector :data (new 'static 'array float 4 30.0 30.0 30.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 128.0))
+      )
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-carexplo-cu-dust-alpha*, type curve2d-fast
+(define *range-carexplo-cu-dust-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 64.0 32.0 33.0 34.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 -32.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-carexplo-cu-dust-scale-x*, type curve2d-fast
+(define *range-carexplo-cu-dust-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 8.0 20.0 21.0 22.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 12.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-carexplo-cu-dust-scale-y*, type curve2d-fast
+(define *range-carexplo-cu-dust-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 8.0 20.0 21.0 22.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 12.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *curve-carexplo-cu-dust-alpha*, type curve2d-fast
+(define *curve-carexplo-cu-dust-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.3 -0.8 -1.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 0.6 1.0 0.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 2.0 0.79999995 -5.0000005 1.0))
+    )
+  )
+
+;; definition for symbol *curve-carexplo-cu-dust-scale-x*, type curve2d-fast
+(define *curve-carexplo-cu-dust-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.5 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.2 0.8 1.2 2.2))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.2 0.8000001 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *curve-carexplo-cu-dust-scale-y*, type curve2d-fast
+(define *curve-carexplo-cu-dust-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.5 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.2 0.8 1.2 2.2))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.2 0.8000001 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *part-intro-car-explo-closeup-dust-in-curve-settings*, type particle-curve-settings
+(define *part-intro-car-explo-closeup-dust-in-curve-settings*
+  (new 'static 'particle-curve-settings :lifetime-base #x258 :lifetime-offset #x12c :flags #x1)
+  )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 362 init-specs 14 initial-valuef)
+      (the-as float *part-intro-car-explo-closeup-dust-in-curve-settings*)
+      )
+
+(set! (-> *part-intro-car-explo-closeup-dust-in-curve-settings* color-start) *range-carexplo-cu-dust-color*)
+
+(set! (-> *part-intro-car-explo-closeup-dust-in-curve-settings* alpha-start) *range-carexplo-cu-dust-alpha*)
+
+(set! (-> *part-intro-car-explo-closeup-dust-in-curve-settings* scale-x-start)
+      *range-carexplo-cu-dust-scale-x*
+      )
+
+(set! (-> *part-intro-car-explo-closeup-dust-in-curve-settings* scale-y-start)
+      *range-carexplo-cu-dust-scale-y*
+      )
+
+(set! (-> *part-intro-car-explo-closeup-dust-in-curve-settings* r-scalar) #f)
+
+(set! (-> *part-intro-car-explo-closeup-dust-in-curve-settings* g-scalar) #f)
+
+(set! (-> *part-intro-car-explo-closeup-dust-in-curve-settings* b-scalar) #f)
+
+(set! (-> *part-intro-car-explo-closeup-dust-in-curve-settings* a-scalar) *curve-carexplo-cu-dust-alpha*)
+
+(set! (-> *part-intro-car-explo-closeup-dust-in-curve-settings* scale-x-scalar)
+      *curve-carexplo-cu-dust-scale-x*
+      )
+
+(set! (-> *part-intro-car-explo-closeup-dust-in-curve-settings* scale-y-scalar)
+      *curve-carexplo-cu-dust-scale-y*
+      )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 363) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 365) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 367) #f)
+
+;; definition for symbol *range-intro-carexplo-cu-color*, type curve-color-fast
+(define *range-intro-carexplo-cu-color*
+  (new 'static 'curve-color-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'inline-array vector 4
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      )
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-intro-carexplo-cu-alpha*, type curve2d-fast
+(define *range-intro-carexplo-cu-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 128.0 128.0 129.0 130.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-intro-carexplo-cu-scale-x*, type curve2d-fast
+(define *range-intro-carexplo-cu-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 6.0 10.0 11.0 12.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 4.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-intro-carexplo-cu-scale-y*, type curve2d-fast
+(define *range-intro-carexplo-cu-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 6.0 10.0 11.0 12.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 4.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *curve-intro-carexplo-cu-alpha*, type curve2d-fast
+(define *curve-intro-carexplo-cu-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.05 -0.7 -1.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.8 0.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 20.0 -0.3076923 -2.6666665 1.0))
+    )
+  )
+
+;; definition for symbol *curve-intro-carexplo-cu-scale-x*, type curve2d-fast
+(define *curve-intro-carexplo-cu-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.8 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 1.5 2.5))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.25 2.5000002 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *curve-intro-carexplo-cu-scale-y*, type curve2d-fast
+(define *curve-intro-carexplo-cu-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.8 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 1.5 2.5))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.25 2.5000002 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *part-intro-car-explo-closeup-texture-curve-settings*, type particle-curve-settings
+(define *part-intro-car-explo-closeup-texture-curve-settings*
+  (new 'static 'particle-curve-settings :lifetime-base #x96 :lifetime-offset #xb4 :flags #x1)
+  )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 367 init-specs 16 initial-valuef)
+      (the-as float *part-intro-car-explo-closeup-texture-curve-settings*)
+      )
+
+(set! (-> *part-intro-car-explo-closeup-texture-curve-settings* color-start) *range-intro-carexplo-cu-color*)
+
+(set! (-> *part-intro-car-explo-closeup-texture-curve-settings* alpha-start) *range-intro-carexplo-cu-alpha*)
+
+(set! (-> *part-intro-car-explo-closeup-texture-curve-settings* scale-x-start)
+      *range-intro-carexplo-cu-scale-x*
+      )
+
+(set! (-> *part-intro-car-explo-closeup-texture-curve-settings* scale-y-start)
+      *range-intro-carexplo-cu-scale-y*
+      )
+
+(set! (-> *part-intro-car-explo-closeup-texture-curve-settings* r-scalar) #f)
+
+(set! (-> *part-intro-car-explo-closeup-texture-curve-settings* g-scalar) #f)
+
+(set! (-> *part-intro-car-explo-closeup-texture-curve-settings* b-scalar) #f)
+
+(set! (-> *part-intro-car-explo-closeup-texture-curve-settings* a-scalar) *curve-intro-carexplo-cu-alpha*)
+
+(set! (-> *part-intro-car-explo-closeup-texture-curve-settings* scale-x-scalar)
+      *curve-intro-carexplo-cu-scale-x*
+      )
+
+(set! (-> *part-intro-car-explo-closeup-texture-curve-settings* scale-y-scalar)
+      *curve-intro-carexplo-cu-scale-y*
+      )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 368) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 359) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 66) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 371) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 369) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 370) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 372) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 67) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 373) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 68) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 374) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 69) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 375) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 70) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 376) #f)
+
+;; definition for function spt-birth-func-brightness-outro-smoke
+(defun spt-birth-func-brightness-outro-smoke ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 sprite-vec-data-3d))
+  (let ((s5-0 (+ (mod (the-as int (rand-uint31-gen *random-generator*)) 121) 50))
+        (s3-0 (+ (mod (the-as int (rand-uint31-gen *random-generator*)) 41) 40))
+        (s4-0 (+ (logand 0 (rand-uint31-gen *random-generator*)) 120))
+        (v1-6 (+ (logand 0 (rand-uint31-gen *random-generator*)) 170))
+        )
+    (set! (-> arg2 r-g-b-a x) (the float (- s5-0 s3-0)))
+    (set! (-> arg2 r-g-b-a y) (the float (- s5-0 (the-as int s4-0))))
+    (set! (-> arg2 r-g-b-a z) (the float (- s5-0 (the-as int v1-6))))
+    )
+  )
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 71) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 377) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 378) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 72) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 379) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 380) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 73) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 381) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 382) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 383) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 74) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 384) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 386) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 385) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 387) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 75) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 400) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 401) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 402) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 389) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 404) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 405) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 406) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 407) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 403) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 394) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 390) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 408) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 391) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 392) #f)
+
+;; definition for symbol *range-carexplo-fnl-dust-color*, type curve-color-fast
+(define *range-carexplo-fnl-dust-color*
+  (new 'static 'curve-color-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'inline-array vector 4
+      (new 'static 'vector :data (new 'static 'array float 4 30.0 30.0 30.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 128.0))
+      )
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-carexplo-fnl-dust-alpha*, type curve2d-fast
+(define *range-carexplo-fnl-dust-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 128.0 64.0 65.0 66.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 -64.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-carexplo-fnl-dust-scale-x*, type curve2d-fast
+(define *range-carexplo-fnl-dust-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 8.0 10.0 11.0 12.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 2.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-carexplo-fnl-dust-scale-y*, type curve2d-fast
+(define *range-carexplo-fnl-dust-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 8.0 10.0 11.0 12.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 2.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *curve-carexplo-fnl-dust-alpha*, type curve2d-fast
+(define *curve-carexplo-fnl-dust-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.3 -0.8 -1.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 0.6 1.0 0.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 2.0 0.79999995 -5.0000005 1.0))
+    )
+  )
+
+;; definition for symbol *curve-carexplo-fnl-dust-scale-x*, type curve2d-fast
+(define *curve-carexplo-fnl-dust-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.5 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.2 0.8 1.2 2.2))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.2 0.8000001 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *curve-carexplo-fnl-dust-scale-y*, type curve2d-fast
+(define *curve-carexplo-fnl-dust-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.5 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.2 0.8 1.2 2.2))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.2 0.8000001 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *part-outro-b-final-explosion-dust-in-curve-settings*, type particle-curve-settings
+(define *part-outro-b-final-explosion-dust-in-curve-settings*
+  (new 'static 'particle-curve-settings :lifetime-base #x258 :lifetime-offset #x12c :flags #x1)
+  )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 392 init-specs 14 initial-valuef)
+      (the-as float *part-outro-b-final-explosion-dust-in-curve-settings*)
+      )
+
+(set! (-> *part-outro-b-final-explosion-dust-in-curve-settings* color-start) *range-carexplo-fnl-dust-color*)
+
+(set! (-> *part-outro-b-final-explosion-dust-in-curve-settings* alpha-start) *range-carexplo-fnl-dust-alpha*)
+
+(set! (-> *part-outro-b-final-explosion-dust-in-curve-settings* scale-x-start)
+      *range-carexplo-fnl-dust-scale-x*
+      )
+
+(set! (-> *part-outro-b-final-explosion-dust-in-curve-settings* scale-y-start)
+      *range-carexplo-fnl-dust-scale-y*
+      )
+
+(set! (-> *part-outro-b-final-explosion-dust-in-curve-settings* r-scalar) #f)
+
+(set! (-> *part-outro-b-final-explosion-dust-in-curve-settings* g-scalar) #f)
+
+(set! (-> *part-outro-b-final-explosion-dust-in-curve-settings* b-scalar) #f)
+
+(set! (-> *part-outro-b-final-explosion-dust-in-curve-settings* a-scalar) *curve-carexplo-fnl-dust-alpha*)
+
+(set! (-> *part-outro-b-final-explosion-dust-in-curve-settings* scale-x-scalar)
+      *curve-carexplo-fnl-dust-scale-x*
+      )
+
+(set! (-> *part-outro-b-final-explosion-dust-in-curve-settings* scale-y-scalar)
+      *curve-carexplo-fnl-dust-scale-y*
+      )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 393) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 395) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 396) #f)
+
+;; definition for symbol *range-outro-carexplo-fnl-color*, type curve-color-fast
+(define *range-outro-carexplo-fnl-color*
+  (new 'static 'curve-color-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'inline-array vector 4
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      )
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-outro-carexplo-fnl-alpha*, type curve2d-fast
+(define *range-outro-carexplo-fnl-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 128.0 128.0 129.0 130.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-outro-carexplo-fnl-scale-x*, type curve2d-fast
+(define *range-outro-carexplo-fnl-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 3.0 5.0 6.0 7.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 2.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-outro-carexplo-fnl-scale-y*, type curve2d-fast
+(define *range-outro-carexplo-fnl-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 3.0 5.0 6.0 7.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 2.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *curve-outro-carexplo-fnl-alpha*, type curve2d-fast
+(define *curve-outro-carexplo-fnl-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.05 -0.7 -1.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.8 0.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 20.0 -0.3076923 -2.6666665 1.0))
+    )
+  )
+
+;; definition for symbol *curve-outro-carexplo-fnl-scale-x*, type curve2d-fast
+(define *curve-outro-carexplo-fnl-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.8 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 1.5 2.5))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.25 2.5000002 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *curve-outro-carexplo-fnl-scale-y*, type curve2d-fast
+(define *curve-outro-carexplo-fnl-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.8 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 1.5 2.5))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.25 2.5000002 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *part-outro-b-final-explosion-texture-curve-settings*, type particle-curve-settings
+(define *part-outro-b-final-explosion-texture-curve-settings*
+  (new 'static 'particle-curve-settings :lifetime-base #x96 :lifetime-offset #xb4 :flags #x1)
+  )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 396 init-specs 16 initial-valuef)
+      (the-as float *part-outro-b-final-explosion-texture-curve-settings*)
+      )
+
+(set! (-> *part-outro-b-final-explosion-texture-curve-settings* color-start) *range-outro-carexplo-fnl-color*)
+
+(set! (-> *part-outro-b-final-explosion-texture-curve-settings* alpha-start) *range-outro-carexplo-fnl-alpha*)
+
+(set! (-> *part-outro-b-final-explosion-texture-curve-settings* scale-x-start)
+      *range-outro-carexplo-fnl-scale-x*
+      )
+
+(set! (-> *part-outro-b-final-explosion-texture-curve-settings* scale-y-start)
+      *range-outro-carexplo-fnl-scale-y*
+      )
+
+(set! (-> *part-outro-b-final-explosion-texture-curve-settings* r-scalar) #f)
+
+(set! (-> *part-outro-b-final-explosion-texture-curve-settings* g-scalar) #f)
+
+(set! (-> *part-outro-b-final-explosion-texture-curve-settings* b-scalar) #f)
+
+(set! (-> *part-outro-b-final-explosion-texture-curve-settings* a-scalar) *curve-outro-carexplo-fnl-alpha*)
+
+(set! (-> *part-outro-b-final-explosion-texture-curve-settings* scale-x-scalar)
+      *curve-outro-carexplo-fnl-scale-x*
+      )
+
+(set! (-> *part-outro-b-final-explosion-texture-curve-settings* scale-y-scalar)
+      *curve-outro-carexplo-fnl-scale-y*
+      )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 397) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 398) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 399) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 388) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 76) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 409) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 411) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 410) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 77) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 412) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 78) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 413) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 79) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 414) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 80) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 415) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 81) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 416) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 417) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 418) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 419) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 82) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 420) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 421) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 83) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 422) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 84) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 424) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 85) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 425) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 86) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 426) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 87) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 427) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 88) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 428) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 89) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 429) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 90) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 435) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 431) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 437) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 432) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 434) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 440) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 433) #f)
+
+;; definition for symbol *range-carexplo-dust-color*, type curve-color-fast
+(define *range-carexplo-dust-color*
+  (new 'static 'curve-color-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'inline-array vector 4
+      (new 'static 'vector :data (new 'static 'array float 4 30.0 30.0 30.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 0.0 0.0 0.0 128.0))
+      )
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-carexplo-dust-alpha*, type curve2d-fast
+(define *range-carexplo-dust-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 64.0 32.0 33.0 34.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 -32.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-carexplo-dust-scale-x*, type curve2d-fast
+(define *range-carexplo-dust-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 8.0 20.0 21.0 22.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 12.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-carexplo-dust-scale-y*, type curve2d-fast
+(define *range-carexplo-dust-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 8.0 20.0 21.0 22.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 12.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *curve-carexplo-dust-alpha*, type curve2d-fast
+(define *curve-carexplo-dust-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.3 -0.8 -1.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 0.6 1.0 0.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 2.0 0.79999995 -5.0000005 1.0))
+    )
+  )
+
+;; definition for symbol *curve-carexplo-dust-scale-x*, type curve2d-fast
+(define *curve-carexplo-dust-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.5 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.2 0.8 1.2 2.2))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.2 0.8000001 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *curve-carexplo-dust-scale-y*, type curve2d-fast
+(define *curve-carexplo-dust-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.5 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.2 0.8 1.2 2.2))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.2 0.8000001 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *part-intro-car-explosion-dust-in-curve-settings*, type particle-curve-settings
+(define *part-intro-car-explosion-dust-in-curve-settings*
+  (new 'static 'particle-curve-settings :lifetime-base #x258 :lifetime-offset #x12c :flags #x1)
+  )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 433 init-specs 15 initial-valuef)
+      (the-as float *part-intro-car-explosion-dust-in-curve-settings*)
+      )
+
+(set! (-> *part-intro-car-explosion-dust-in-curve-settings* color-start) *range-carexplo-dust-color*)
+
+(set! (-> *part-intro-car-explosion-dust-in-curve-settings* alpha-start) *range-carexplo-dust-alpha*)
+
+(set! (-> *part-intro-car-explosion-dust-in-curve-settings* scale-x-start) *range-carexplo-dust-scale-x*)
+
+(set! (-> *part-intro-car-explosion-dust-in-curve-settings* scale-y-start) *range-carexplo-dust-scale-y*)
+
+(set! (-> *part-intro-car-explosion-dust-in-curve-settings* r-scalar) #f)
+
+(set! (-> *part-intro-car-explosion-dust-in-curve-settings* g-scalar) #f)
+
+(set! (-> *part-intro-car-explosion-dust-in-curve-settings* b-scalar) #f)
+
+(set! (-> *part-intro-car-explosion-dust-in-curve-settings* a-scalar) *curve-carexplo-dust-alpha*)
+
+(set! (-> *part-intro-car-explosion-dust-in-curve-settings* scale-x-scalar) *curve-carexplo-dust-scale-x*)
+
+(set! (-> *part-intro-car-explosion-dust-in-curve-settings* scale-y-scalar) *curve-carexplo-dust-scale-y*)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 436) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 438) #f)
+
+;; definition for symbol *range-intro-carexplo-color*, type curve-color-fast
+(define *range-intro-carexplo-color*
+  (new 'static 'curve-color-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'inline-array vector 4
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      (new 'static 'vector :data (new 'static 'array float 4 255.0 255.0 255.0 128.0))
+      )
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-intro-carexplo-alpha*, type curve2d-fast
+(define *range-intro-carexplo-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 128.0 128.0 129.0 130.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-intro-carexplo-scale-x*, type curve2d-fast
+(define *range-intro-carexplo-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 6.0 10.0 11.0 12.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 4.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-intro-carexplo-scale-y*, type curve2d-fast
+(define *range-intro-carexplo-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 6.0 10.0 11.0 12.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 4.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *curve-intro-carexplo-alpha*, type curve2d-fast
+(define *curve-intro-carexplo-alpha*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.05 -0.7 -1.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 0.8 0.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 20.0 -0.3076923 -2.6666665 1.0))
+    )
+  )
+
+;; definition for symbol *curve-intro-carexplo-scale-x*, type curve2d-fast
+(define *curve-intro-carexplo-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.8 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 1.5 2.5))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.25 2.5000002 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *curve-intro-carexplo-scale-y*, type curve2d-fast
+(define *curve-intro-carexplo-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -0.8 -1.0 -2.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 0.0 1.0 1.5 2.5))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 1.25 2.5000002 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *part-intro-car-explosion-texture-curve-settings*, type particle-curve-settings
+(define *part-intro-car-explosion-texture-curve-settings*
+  (new 'static 'particle-curve-settings :lifetime-base #x96 :lifetime-offset #xb4 :flags #x1)
+  )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 438 init-specs 16 initial-valuef)
+      (the-as float *part-intro-car-explosion-texture-curve-settings*)
+      )
+
+(set! (-> *part-intro-car-explosion-texture-curve-settings* color-start) *range-intro-carexplo-color*)
+
+(set! (-> *part-intro-car-explosion-texture-curve-settings* alpha-start) *range-intro-carexplo-alpha*)
+
+(set! (-> *part-intro-car-explosion-texture-curve-settings* scale-x-start) *range-intro-carexplo-scale-x*)
+
+(set! (-> *part-intro-car-explosion-texture-curve-settings* scale-y-start) *range-intro-carexplo-scale-y*)
+
+(set! (-> *part-intro-car-explosion-texture-curve-settings* r-scalar) #f)
+
+(set! (-> *part-intro-car-explosion-texture-curve-settings* g-scalar) #f)
+
+(set! (-> *part-intro-car-explosion-texture-curve-settings* b-scalar) #f)
+
+(set! (-> *part-intro-car-explosion-texture-curve-settings* a-scalar) *curve-intro-carexplo-alpha*)
+
+(set! (-> *part-intro-car-explosion-texture-curve-settings* scale-x-scalar) *curve-intro-carexplo-scale-x*)
+
+(set! (-> *part-intro-car-explosion-texture-curve-settings* scale-y-scalar) *curve-intro-carexplo-scale-y*)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 439) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 430) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 91) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 441) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 442) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 92) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 443) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 93) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 445) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 446) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 448) #f)
+
+;; definition for symbol *range-intro-carexplo2-scale-x*, type curve2d-fast
+(define *range-intro-carexplo2-scale-x*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 20.0 40.0 41.0 42.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 20.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *range-intro-carexplo2-scale-y*, type curve2d-fast
+(define *range-intro-carexplo2-scale-y*
+  (new 'static 'curve2d-fast
+    :xs (new 'static 'vector :data (new 'static 'array float 4 0.0 -1.0 -2.0 -3.0))
+    :ys (new 'static 'vector :data (new 'static 'array float 4 20.0 40.0 41.0 42.0))
+    :one-over-x-deltas (new 'static 'vector :data (new 'static 'array float 4 20.0 1.0 1.0 1.0))
+    )
+  )
+
+;; definition for symbol *part-intro-car-explosion-texture2-curve-settings*, type particle-curve-settings
+(define *part-intro-car-explosion-texture2-curve-settings*
+  (new 'static 'particle-curve-settings :lifetime-base #x10e :lifetime-offset #xb4 :flags #x1)
+  )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 448 init-specs 16 initial-valuef)
+      (the-as float *part-intro-car-explosion-texture2-curve-settings*)
+      )
+
+(set! (-> *part-intro-car-explosion-texture2-curve-settings* color-start) *range-intro-carexplo-color*)
+
+(set! (-> *part-intro-car-explosion-texture2-curve-settings* alpha-start) *range-intro-carexplo-alpha*)
+
+(set! (-> *part-intro-car-explosion-texture2-curve-settings* scale-x-start) *range-intro-carexplo2-scale-x*)
+
+(set! (-> *part-intro-car-explosion-texture2-curve-settings* scale-y-start) *range-intro-carexplo2-scale-y*)
+
+(set! (-> *part-intro-car-explosion-texture2-curve-settings* r-scalar) #f)
+
+(set! (-> *part-intro-car-explosion-texture2-curve-settings* g-scalar) #f)
+
+(set! (-> *part-intro-car-explosion-texture2-curve-settings* b-scalar) #f)
+
+(set! (-> *part-intro-car-explosion-texture2-curve-settings* a-scalar) *curve-intro-carexplo-alpha*)
+
+(set! (-> *part-intro-car-explosion-texture2-curve-settings* scale-x-scalar) *curve-intro-carexplo-scale-x*)
+
+(set! (-> *part-intro-car-explosion-texture2-curve-settings* scale-y-scalar) *curve-intro-carexplo-scale-y*)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 449) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 444) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 447) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 94) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 450) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 451) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 95) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 452) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 96) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 453) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 455) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 454) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 97) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 456) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 457) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 458) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 98) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 459) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 99) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 460) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 100) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 461) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 101) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 462) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 463) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 102) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 464) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 465) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 103) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 466) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 467) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 104) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 468) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 469) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 470) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 105) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 471) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 473) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 472) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 474) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 106) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 475) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 477) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 476) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 107) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 478) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 480) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 479) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 108) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 481) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 482) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 109) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 483) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 484) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 110) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 485) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 486) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 111) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 487) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 112) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 488) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 489) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 113) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 490) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 491) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 114) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 492) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 493) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 115) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 494) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 495) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 116) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 496) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 497) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 117) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 498) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 500) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 499) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 501) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 118) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 502) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 503) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 119) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 504) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 505) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 120) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 506) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 507) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 508) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 509) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 121) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 510) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 122) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 511) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 123) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 512) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 124) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 513) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 514) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 125) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 515) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 516) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 126) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 517) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 518) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 127) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 519) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 520) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 128) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 521) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 129) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 522) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 130) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 523) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 131) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 524) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 423) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 132) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 525) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 526) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 133) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 527) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 528) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 134) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 529) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 530) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 135) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 531) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 532) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 136) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 533) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 137) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 534) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 138) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 535) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 139) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 536) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 140) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 537) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 539) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 538) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 540) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 141) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 541) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 542) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 142) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 543) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 143) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 544) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 144) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 545) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 546) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 547) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 145) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 548) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 550) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 549) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 551) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 146) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 552) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 553) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 147) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 554) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 556) #f)
+
+;; definition for function spt-func-part-outro-b-dashboard
+(defun spt-func-part-outro-b-dashboard ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 sprite-vec-data-3d))
+  (spt-func-relative-pos arg0 arg1 arg2)
+  (sparticle-2d-spline-align-instant arg0 arg1 (the-as sprite-vec-data-2d arg2))
+  (none)
+  )
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 555) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 148) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 557) #f)
+
+;; definition for function spt-func-part-outro-b-dashboard-sparks
+(defun spt-func-part-outro-b-dashboard-sparks ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 sprite-vec-data-3d))
+  (spt-func-relative-pos arg0 arg1 arg2)
+  (sparticle-motion-blur arg0 arg1 (-> arg2 x-y-z-sx))
+  (none)
+  )
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 149) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 558) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 150) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 559) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 151) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 560) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 152) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 561) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 562) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 153) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 563) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 564) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 154) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 565) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 566) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 567) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 568) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 155) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 569) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 570) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 156) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 571) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 572) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 573) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 574) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 157) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 575) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 158) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 576) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 159) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 577) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 160) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 578) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 161) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 579) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 162) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 580) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 163) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 581) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 164) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 582) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 165) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 583) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 166) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 584) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 167) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 585) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 168) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 586) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 169) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 587) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 170) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 588) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 171) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 589) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 172) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 590) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 173) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 591) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 174) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 592) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 175) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 593) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 176) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 594) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 177) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 595) #f)
+
+;; failed to figure out what this is:
+(set! (-> (the-as (array sparticle-launch-group) *part-group-id-table*) 178) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 596) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 597) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 598) #f)
+
+;; failed to figure out what this is:
+(set! (-> *part-id-table* 599) #f)
+
+
+
+

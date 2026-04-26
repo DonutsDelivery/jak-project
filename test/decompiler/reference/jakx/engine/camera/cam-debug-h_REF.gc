@@ -11,6 +11,7 @@
 (define *redline-index* 0)
 
 ;; definition for function float-save-redline
+;; WARN: Return type mismatch int vs none.
 (defun float-save-redline ((arg0 float))
   (set! (-> *redline-table* *redline-index*) arg0)
   (set! *redline-index* (+ *redline-index* 1))
@@ -18,6 +19,7 @@
     (set! *redline-index* 0)
     0
     )
+  (none)
   )
 
 ;; definition for function float-lookup-redline

@@ -1,0 +1,84 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition of type blit-displays-work
+(deftype blit-displays-work (structure)
+  ((pad-0                  uint8  304)
+   (line-color             uint64)
+   (pad-312                uint8  248)
+   (vu1-user-menu          uint64)
+   (tex-user-menu          uint32)
+   (hflip-flag             uint32)
+   (scan-alpha             float)
+   (scanline               uint32)
+   (progress-interp        float)
+   (progress-interp-dest   float)
+   (progress-interp-speed  float)
+   )
+  (:methods
+    (blit-displays-work-method-9 (_type_ dma-buffer int int int) none)
+    (blit-displays-work-method-10 (_type_ dma-buffer int int int) none)
+    (blit-displays-work-method-11 (_type_ dma-buffer int) none)
+    (blit-displays-work-method-12 (_type_ dma-buffer float int float) none)
+    (blit-displays-work-method-13 (_type_ dma-buffer int int int) none)
+    (blit-displays-work-method-14 (_type_ dma-buffer vector) none)
+    (blit-displays-work-method-15 (_type_ dma-buffer) none)
+    (draw-zoom-blur (_type_ dma-buffer int) none)
+    (setup-zoom-blur-2d (_type_ vector int float symbol) none)
+    (blit-displays-work-method-18 (_type_ dma-buffer float float) none)
+    (blit-displays-work-method-19 (_type_) uint)
+    (blit-displays-work-method-20 (_type_ int) int)
+    (get-menu-mode (_type_) symbol)
+    (get-screen-copied (_type_) symbol)
+    (get-horizontal-flip-flag (_type_) symbol)
+    (set-menu-mode (_type_ symbol) symbol)
+    (blit-displays-work-method-25 (_type_ symbol) none)
+    (set-horizontal-flip-flag (_type_ symbol) symbol)
+    )
+  )
+
+;; definition for method 3 of type blit-displays-work
+(defmethod inspect ((this blit-displays-work))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'blit-displays-work)
+  (format #t "~1Tadgif-tmpl: #<dma-gif-packet @ #x~X>~%" (-> this pad-0))
+  (format #t "~1Tsprite-tmpl: #<dma-gif-packet @ #x~X>~%" (&-> this pad-0 32))
+  (format #t "~1Tcontrast-tmpl: #<dma-gif-packet @ #x~X>~%" (&-> this pad-0 64))
+  (format #t "~1Tsprite-slow-tmpl: #<dma-gif-packet @ #x~X>~%" (&-> this pad-0 96))
+  (format #t "~1Tscreen-tmpl: #<dma-gif-packet @ #x~X>~%" (&-> this pad-0 128))
+  (format #t "~1Tblur-tmpl: #<dma-gif-packet @ #x~X>~%" (&-> this pad-0 160))
+  (format #t "~1Tblur-tmpl2: #<dma-gif-packet @ #x~X>~%" (&-> this pad-0 192))
+  (format #t "~1Tline-tmpl: #<dma-gif-packet @ #x~X>~%" (&-> this pad-0 224))
+  (format #t "~1Tscan-tmpl: #<dma-gif-packet @ #x~X>~%" (&-> this pad-0 256))
+  (format #t "~1Tcolor: #<vector4w @ #x~X>~%" (&-> this pad-0 288))
+  (format #t "~1Tline-color: ~D~%" (-> this line-color))
+  (format #t "~1Tscan-colors[15] @ #x~X~%" (&-> this pad-312 8))
+  (format #t "~1Tvu1-enable-user-menu: ~D~%" (-> this vu1-user-menu))
+  (format #t "~1Ttexture-enable-user-menu: ~D~%" (-> this tex-user-menu))
+  (format #t "~1Thorizontal-flip-flag: ~A~%" (-> this hflip-flag))
+  (format #t "~1Tscan-alpha: ~f~%" (-> this scan-alpha))
+  (format #t "~1Tscanline: ~D~%" (-> this scanline))
+  (format #t "~1Tprogress-interp: ~f~%" (-> this progress-interp))
+  (format #t "~1Tprogress-interp-dest: ~f~%" (-> this progress-interp-dest))
+  (format #t "~1Tprogress-interp-speed: ~f~%" (-> this progress-interp-speed))
+  (label cfg-4)
+  this
+  )
+
+;; definition for method 19 of type blit-displays-work
+(defmethod blit-displays-work-method-19 ((this blit-displays-work))
+  (-> this hflip-flag)
+  )
+
+;; definition for method 20 of type blit-displays-work
+(defmethod blit-displays-work-method-20 ((this blit-displays-work) (arg0 int))
+  (set! (-> this hflip-flag) (the-as uint arg0))
+  arg0
+  )
+
+
+
+

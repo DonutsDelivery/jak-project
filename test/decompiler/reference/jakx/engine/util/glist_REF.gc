@@ -11,6 +11,7 @@
 
 ;; definition for function glst-remove
 (defun glst-remove ((arg0 glst-list) (arg1 glst-node))
+  "Removes the provided [[glst-node]] from the list and returns it back"
   (let ((v1-0 arg1))
     "return the previous node in the list"
     (let ((v1-1 (-> v1-0 prev))
@@ -91,18 +92,21 @@
 
 ;; definition for function glst-add-tail
 (defun glst-add-tail ((arg0 glst-list) (arg1 glst-node))
+  "Adds the provided [[glst-node]] to the end of the [[glst-list]]"
   (glst-insert-before arg0 (the-as glst-node (&-> arg0 tail)) arg1)
   arg1
   )
 
 ;; definition for function glst-add-head
 (defun glst-add-head ((arg0 glst-list) (arg1 glst-node))
+  "Adds the provided [[glst-node]] to the beginning of the [[glst-list]]"
   (glst-insert-after arg0 (the-as glst-node arg0) arg1)
   arg1
   )
 
 ;; definition for function glst-init-list!
 (defun glst-init-list! ((arg0 glst-list))
+  "Clears the provided [[glst-list]]"
   (set! (-> arg0 head) (the-as glst-node (&-> arg0 tail)))
   (set! (-> arg0 tail) #f)
   (set! (-> arg0 tailpred) (the-as glst-node (&-> arg0 head)))
@@ -151,6 +155,7 @@
 
 ;; definition for function glst-length-of-longest-name
 (defun glst-length-of-longest-name ((arg0 glst-list))
+  "Returns the length of the longest `privname`"
   (let ((gp-0 0))
     (let ((v1-0 arg0))
       "return the start of the list"
@@ -175,6 +180,7 @@
 
 ;; definition for function glst-get-node-index
 (defun glst-get-node-index ((arg0 glst-list) (arg1 glst-node))
+  "Given a [[glst-node]] return it's position in the [[glst-list]]"
   (let ((v1-0 0))
     "return the start of the list"
     (let ((a0-1 (-> arg0 head)))

@@ -118,6 +118,7 @@
 
 ;; definition for function glst-set-name!
 (defun glst-set-name! ((arg0 glst-named-node) (arg1 string))
+  "Sets the `privname` of the provided [[glst-named-node]]"
   (set! (-> arg0 privname) arg1)
   arg1
   )

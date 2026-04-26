@@ -12,7 +12,7 @@
    (run-distance    meters)
    )
   (:methods
-    (set-gravity-length (_type_ float) int)
+    (set-gravity-length (_type_ float) none)
     )
   )
 
@@ -35,10 +35,12 @@
   )
 
 ;; definition for method 9 of type dynamics
+;; WARN: Return type mismatch int vs none.
 (defmethod set-gravity-length ((this dynamics) (arg0 float))
   (set! (-> this gravity-length) arg0)
   (vector-float*! (-> this gravity) (-> this gravity-normal) arg0)
   0
+  (none)
   )
 
 ;; definition for function time-to-apex

@@ -219,7 +219,9 @@ This requires storing the data for all shrubs prototype twice!"
 
 ;; definition for function shrubbery-login-post-texture
 ;; INFO: Used lq/sq
+;; WARN: Return type mismatch symbol vs none.
 (defun shrubbery-login-post-texture ((arg0 shrubbery))
+  "Do some weird fix-up to the shrubbery textures. this is likely to present normal-looking adgifs to the texture system, but then we scramble them up for easier consumption by VU1."
   (let* ((v1-1 (-> arg0 header data 0))
          (a1-1 (the-as object (+ (the-as uint (-> arg0 header)) (* (+ (-> arg0 header data 1) 1) 16))))
          (a2-5 (the-as object (+ (the-as int a1-1) (* v1-1 64))))
@@ -247,7 +249,7 @@ This requires storing the data for all shrubs prototype twice!"
         )
       )
     )
-  #f
+  (none)
   )
 
 ;; definition for symbol *shrub-state*, type int

@@ -161,10 +161,10 @@ Multiple channels are used to blend animations together."
    )
   (:methods
     (new (symbol type) _type_)
-    (joint-control-method-9 () none)
-    (joint-control-method-10 () none)
-    (joint-control-method-11 () none)
-    (joint-control-method-12 () none)
+    (joint-control-method-9 (_type_) float)
+    (update-anim-data (_type_) none)
+    (joint-control-method-11 (_type_ symbol) int)
+    (joint-control-method-12 (_type_ int) joint-control-channel)
     )
   )
 

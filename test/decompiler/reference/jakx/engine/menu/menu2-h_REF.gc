@@ -220,12 +220,12 @@
     (base-menu-method-56 (_type_) none)
     (base-menu-method-57 (_type_) none)
     (base-menu-method-58 (_type_) none)
-    (base-menu-method-59 (_type_) sound-id)
+    (base-menu-method-59 (_type_) int)
     (base-menu-method-60 (_type_) int)
     (base-menu-method-61 (_type_) symbol)
     (base-menu-method-62 (_type_) int)
     (base-menu-method-63 (_type_) none)
-    (base-menu-method-64 (_type_) symbol)
+    (base-menu-method-64 (_type_ int) symbol)
     )
   )
 
@@ -309,7 +309,7 @@
    (enabled               basic)
    )
   (:methods
-    (selection-menu-manager-method-65 (_type_) none)
+    (selection-menu-manager-method-65 (_type_ int) none)
     (selection-menu-manager-method-66 (_type_) int)
     )
   )

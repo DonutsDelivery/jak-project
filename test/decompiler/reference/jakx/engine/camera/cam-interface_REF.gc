@@ -217,6 +217,7 @@
   )
 
 ;; definition for function camera-teleport-to-entity-named
+;; WARN: Return type mismatch int vs none.
 (defun camera-teleport-to-entity-named ((arg0 string))
   (let ((a0-3 (as-type (entity-by-name arg0) entity-actor)))
     (if a0-3
@@ -225,6 +226,7 @@
         )
     )
   0
+  (none)
   )
 
 ;; definition for function camera-teleport-to-location

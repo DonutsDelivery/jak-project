@@ -90,7 +90,7 @@
    (ipu               basic)
    )
   (:methods
-    (scene-method-16 (_type_ spool-anim) spool-anim)
+    (init-spool-by-scene! (_type_ spool-anim) spool-anim)
     (scene-method-17 (_type_) scene)
     )
   )

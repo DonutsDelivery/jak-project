@@ -12,7 +12,7 @@
    (data       uint8  :dynamic :offset  32)
    )
   (:methods
-    (new (symbol type uint uint) _type_)
+    (new (symbol type uint uint) rpc-buffer)
     )
   )
 

@@ -17,10 +17,10 @@
    )
   (:methods
     (talker-speech-class-method-9 (_type_) symbol)
-    (talker-speech-class-method-10 (_type_) none)
-    (talker-speech-class-method-11 (_type_) none)
+    (mark-played! (_type_) none)
+    (reset-state! (_type_) none)
     (talker-speech-class-method-12 (_type_ int) none)
-    (talker-speech-class-method-13 (_type_ int) none)
+    (no-play! (_type_ int) none)
     )
   )
 

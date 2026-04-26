@@ -84,7 +84,7 @@
     )
   (:methods
     (net-player-method-45 (_type_ object object object object) symbol)
-    (net-player-method-46 (_type_ object) none)
+    (net-player-method-46 (_type_ object) int)
     (net-player-method-47 (_type_ object) int)
     (net-player-method-48 (_type_ object object object object) none)
     (net-player-method-49 (_type_) none)
@@ -120,13 +120,13 @@
     (net-player-method-79 (_type_) int)
     (net-player-method-80 (_type_ object) none)
     (net-player-method-81 (_type_ object) none)
-    (net-player-method-82 (_type_) none)
+    (net-player-method-82 (_type_) int)
     (net-player-method-83 (_type_) int)
     (net-player-method-84 (_type_) none)
-    (net-player-method-85 (_type_) none)
+    (net-player-method-85 (_type_) int)
     (net-player-method-86 (_type_) none)
     (net-player-method-87 (_type_) int)
-    (net-player-method-88 (_type_) none)
+    (net-player-method-88 (_type_) int)
     (net-player-method-89 (_type_ object) none)
     (net-player-method-90 (_type_) none)
     (net-player-method-91 (_type_ object) symbol)
@@ -135,7 +135,7 @@
     (net-player-method-94 (_type_) none)
     (net-player-method-95 (_type_) none)
     (net-player-method-96 (_type_) int)
-    (net-player-method-97 (_type_ object) none)
+    (net-player-method-97 (_type_ object) int)
     )
   )
 
@@ -202,7 +202,6 @@
   )
 
 ;; definition for method 37 of type net-player
-;; WARN: Return type mismatch int vs none.
 (defmethod process-nettable-method-37 ((this net-player) (arg0 net-process-class-info))
   (set! (-> (the-as (pointer symbol) (+ (* (-> arg0 msg-count) 4) (the-as int (-> arg0 msg-map)))) 3)
         'score-changed
@@ -213,7 +212,6 @@
         )
   (+! (-> arg0 msg-count) 1)
   0
-  (none)
   )
 
 ;; definition for symbol *msg-map-net-player*, type array
@@ -230,11 +228,7 @@
 
 (set! (-> *net-process-class-info-net-player* owner-type) net-player)
 
-;; failed to figure out what this is:
-(let ((t9-7 net-process-class-register))
-  *net-process-class-info-net-player*
-  (t9-7)
-  )
+(net-process-class-register (the-as uint *net-process-class-info-net-player*))
 
 ;; definition for method 40 of type net-player
 (defmethod process-nettable-method-40 ((this net-player))

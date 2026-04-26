@@ -1,17 +1,17 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; definition for symbol *settings-dialog-volume*, type object
-(define *settings-dialog-volume* (the-as object 0.95))
+;; definition for symbol *settings-dialog-volume*, type float
+(define *settings-dialog-volume* 0.95)
 
-;; definition for symbol *settings-music-volume*, type object
-(define *settings-music-volume* (the-as object 0.7))
+;; definition for symbol *settings-music-volume*, type float
+(define *settings-music-volume* 0.7)
 
-;; definition for symbol *settings-sfx-volume*, type object
-(define *settings-sfx-volume* (the-as object 0.75))
+;; definition for symbol *settings-sfx-volume*, type float
+(define *settings-sfx-volume* 0.75)
 
-;; definition for symbol *settings-music-seek-speed*, type object
-(define *settings-music-seek-speed* (the-as object 2.0))
+;; definition for symbol *settings-music-seek-speed*, type float
+(define *settings-music-seek-speed* 2.0)
 
 ;; definition of type user-setting-data
 (deftype user-setting-data (structure)
@@ -718,17 +718,17 @@
     (setting-control-method-11 (_type_ process symbol object object object) connection)
     (setting-control-method-12 (_type_ process symbol) none)
     (add-setting (_type_ engine-pers object) none)
-    (persist-with-delay (_type_ object) connectable)
-    (set-setting (_type_ object) connectable)
+    (persist-with-delay (_type_ symbol time-frame symbol symbol float int) none)
+    (set-setting (_type_ process symbol object object object) connection)
     (remove-setting (_type_ object) none)
-    (setting-control-method-17 (_type_ symbol object object object) connection)
+    (setting-control-method-17 (_type_ engine-pers object) none)
     (setting-control-method-18 (_type_) user-setting-data)
-    (move-connection-to-dead (_type_) user-setting-data)
-    (setting-control-method-20 () none)
+    (move-connection-to-dead (_type_ object) connectable)
+    (setting-control-method-20 (_type_ object) connectable)
     (remove-setting-by-arg0 (_type_ object) int)
     (set-setting-by-param (_type_ symbol object object object) connection)
     (setting-control-method-23 (_type_) none)
-    (setting-control-method-24 () none)
+    (setting-control-method-24 (_type_) none)
     )
   )
 

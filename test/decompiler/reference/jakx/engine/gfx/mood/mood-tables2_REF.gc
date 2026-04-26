@@ -11,7 +11,6 @@
 (define *override-mood-fog-table* #f)
 
 ;; definition for function init-override-table
-;; WARN: Return type mismatch pointer vs none.
 (defun init-override-table ((arg0 mood-table))
   (set! (-> arg0 mood-fog-table) (new 'debug 'mood-fog-table))
   (set! (-> arg0 mood-color-table) (new 'debug 'mood-color-table))
@@ -21,7 +20,6 @@
   (set! (-> arg0 mood-interp-table) *mood-interp-table*)
   (mem-copy! (the-as pointer (-> arg0 mood-fog-table)) (the-as pointer *no-cloud-clear-mood-fog-table*) 384)
   (mem-copy! (the-as pointer (-> arg0 mood-color-table)) (the-as pointer *no-cloud-mood-color-table*) 256)
-  (none)
   )
 
 ;; definition for symbol *override-table*, type mood-table
@@ -32,6 +30,7 @@
 ;; definition for function print-mood-tables
 ;; WARN: Return type mismatch object vs none.
 (defun print-mood-tables ()
+  "Generates the GOAL code for defining the current state of [[*overide-table*]]"
   (mem-copy!
     (the-as pointer (-> *override-table* mood-fog-table))
     (the-as pointer *override-mood-fog-table*)

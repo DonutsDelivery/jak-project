@@ -1,11 +1,11 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; definition for symbol *music-volume-during-speech*, type object
-(define *music-volume-during-speech* (the-as object 0.85))
+;; definition for symbol *music-volume-during-speech*, type float
+(define *music-volume-during-speech* 0.85)
 
-;; definition for symbol *sfx-volume-during-speech*, type object
-(define *sfx-volume-during-speech* (the-as object 1.0))
+;; definition for symbol *sfx-volume-during-speech*, type float
+(define *sfx-volume-during-speech* 1.0)
 
 ;; definition for function pecker-can-speak?
 (defun pecker-can-speak? ()
@@ -38,10 +38,10 @@
    (flags  speech-info-flag)
    )
   (:methods
-    (speech-info-method-9 () none)
-    (speech-info-method-10 () none)
-    (speech-info-method-11 () none)
-    (speech-info-method-12 () none)
+    (speech-info-method-9 (_type_) none)
+    (speech-info-method-10 (_type_ string int) object)
+    (speech-info-method-11 (_type_ int int) object)
+    (speech-info-method-12 (_type_) int)
     )
   )
 
@@ -103,11 +103,11 @@
     (speech-channel-method-9 (_type_ process-drawable speech-type) int)
     (speech-channel-method-10 (_type_ handle) none)
     (speech-channel-method-11 (_type_) none)
-    (speech-channel-method-12 (_type_) none)
+    (speech-channel-method-12 (_type_ int int) none)
     (speech-channel-method-13 (_type_) int)
     (speech-channel-method-14 (_type_ speech-type float) int)
-    (speech-channel-method-15 () none)
-    (speech-channel-method-16 () none)
+    (speech-channel-method-15 (_type_ uint) none)
+    (speech-channel-method-16 (_type_ int) int)
     )
   )
 
@@ -141,14 +141,14 @@
   ((channels  speech-channel  22 :inline)
    )
   (:methods
-    (speech-control-method-9 (_type_) int)
-    (speech-control-method-10 () int)
+    (speech-control-method-9 (_type_ int int) none)
+    (speech-control-method-10 (_type_ handle) int)
     (speech-control-method-11 (_type_) none)
     (speech-control-method-12 (_type_ process-drawable speech-type) int)
     (speech-control-method-13 (_type_ process-drawable speech-type int) int)
     (speech-control-method-14 (_type_ handle) int)
-    (speech-control-method-15 (_type_) int)
-    (speech-control-method-16 (_type_) none)
+    (speech-control-method-15 (_type_ handle) none)
+    (speech-control-method-16 (_type_ uint int) int)
     )
   )
 

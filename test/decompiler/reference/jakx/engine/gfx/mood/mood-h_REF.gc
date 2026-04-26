@@ -633,7 +633,7 @@
     (set-cloud-and-fog-interp! (_type_ float float float float) int)
     (update-mood-range! (_type_ float float float float) int)
     (set-time-for-random-weather! (_type_ float float) int)
-    (set-special-interps! (_type_ float float symbol) int)
+    (set-special-interps! (_type_ float float symbol) none)
     (weather-event-concluded? (_type_) symbol)
     (set-lightning-time! (_type_ mood-control-work) int)
     (apply-mood-clouds-and-fog (_type_ mood-control-work) int)
@@ -696,6 +696,7 @@
   )
 
 ;; definition for method 13 of type mood-control
+;; WARN: Return type mismatch int vs none.
 (defmethod set-special-interps! ((this mood-control) (target-interp float) (rate-interp float) (set-current-interp? symbol))
   "Sets the `*-special-interp` values with the given values
    @param! this The [[mood-control]]
@@ -711,6 +712,7 @@
         )
     )
   0
+  (none)
   )
 
 ;; definition for method 14 of type mood-control

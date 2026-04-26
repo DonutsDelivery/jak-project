@@ -79,13 +79,15 @@
 (set! (-> *part-id-table* 43) #f)
 
 ;; definition for function merc-death-spawn
+;; WARN: Return type mismatch int vs none.
 (defun merc-death-spawn ((arg0 int) (arg1 vector) (arg2 vector))
   (let ((v1-2 (-> *part-id-table* arg0)))
     (if (and (nonzero? v1-2) (= (-> v1-2 type) sparticle-launcher))
-        (sp-launch-particles-death (the-as sparticle-system *sp-particle-system-2d*) v1-2 arg1)
+        (sp-launch-particles-death *sp-particle-system-2d* v1-2 arg1)
         )
     )
   0
+  (none)
   )
 
 

@@ -45,8 +45,8 @@
   this
   )
 
-;; definition (perm) for symbol *palette-fade-controls*, type object
-(define-perm *palette-fade-controls* object (new 'global 'palette-fade-controls))
+;; definition (perm) for symbol *palette-fade-controls*, type palette-fade-controls
+(define-perm *palette-fade-controls* palette-fade-controls (new 'global 'palette-fade-controls))
 
 ;; definition of type time-of-day-proc
 (deftype time-of-day-proc (process)
@@ -73,12 +73,12 @@
    (start-timer         int32)
    )
   (:methods
-    (time-of-day-proc-method-9 () none)
-    (time-of-day-proc-method-10 () none)
-    (time-of-day-proc-method-11 () none)
-    (time-of-day-proc-method-12 () none)
-    (time-of-day-proc-method-13 () none)
-    (time-of-day-proc-method-14 () none)
+    (time-of-day-proc-method-9 (_type_) none)
+    (time-of-day-proc-method-10 (_type_) none)
+    (time-of-day-proc-method-11 (_type_) none)
+    (time-of-day-proc-method-12 (_type_) none)
+    (time-of-day-proc-method-13 (_type_) none)
+    (time-of-day-proc-method-14 (_type_) none)
     )
   )
 

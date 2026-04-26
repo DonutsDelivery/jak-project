@@ -1,0 +1,210 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for function raw-ray-sphere-intersect
+;; INFO: function output is handled by mips2c
+(def-mips2c raw-ray-sphere-intersect (function none))
+
+;; definition for function ray-sphere-intersect
+;; WARN: Return type mismatch none vs float.
+(defun ray-sphere-intersect ((arg0 vector) (arg1 vector) (arg2 vector) (arg3 float))
+  (rlet ((vf1 :class vf)
+         (vf2 :class vf)
+         )
+    (.lvf vf1 (&-> arg0 quad))
+    (.lvf vf2 (&-> arg2 quad))
+    (.sub.vf vf1 vf1 vf2)
+    (.lvf vf2 (&-> arg1 quad))
+    (the-as float (raw-ray-sphere-intersect))
+    )
+  )
+
+;; definition for function ray-circle-intersect
+;; WARN: Return type mismatch none vs float.
+(defun ray-circle-intersect ((arg0 vector) (arg1 vector) (arg2 vector) (arg3 float))
+  (rlet ((vf0 :class vf)
+         (vf1 :class vf)
+         (vf2 :class vf)
+         )
+    (init-vf0-vector)
+    (.lvf vf1 (&-> arg0 quad))
+    (.mov.vf.y vf1 vf0)
+    (.lvf vf2 (&-> arg2 quad))
+    (.mov.vf.y vf2 vf0)
+    (.sub.vf vf1 vf1 vf2)
+    (.lvf vf2 (&-> arg1 quad))
+    (.mov.vf.y vf2 vf0)
+    (the-as float (raw-ray-sphere-intersect))
+    )
+  )
+
+;; definition for function ray-cylinder-intersect
+;; INFO: function output is handled by mips2c
+(def-mips2c ray-cylinder-intersect (function vector vector vector vector float float vector float))
+
+;; definition for function ray-plane-intersect
+(defun ray-plane-intersect ((arg0 vector) (arg1 vector) (arg2 vector) (arg3 vector) (arg4 vector) (arg5 vector) (arg6 vector))
+  (local-vars (v1-0 float) (v1-1 float) (a2-1 float))
+  (rlet ((acc :class vf)
+         (Q :class vf)
+         (vf0 :class vf)
+         (vf1 :class vf)
+         (vf2 :class vf)
+         (vf3 :class vf)
+         (vf4 :class vf)
+         (vf5 :class vf)
+         (vf6 :class vf)
+         (vf7 :class vf)
+         (vf8 :class vf)
+         (vf9 :class vf)
+         )
+    (init-vf0-vector)
+    (.lvf vf3 (&-> arg5 quad))
+    (.lvf vf1 (&-> arg4 quad))
+    (.lvf vf2 (&-> arg6 quad))
+    (.sub.vf vf1 vf3 vf1)
+    (.sub.vf vf2 vf3 vf2)
+    (.lvf vf6 (&-> arg2 quad))
+    (.lvf vf7 (&-> arg3 quad))
+    (.sub.vf vf8 vf3 vf6)
+    (.outer.product.a.vf acc vf2 vf1)
+    (.outer.product.b.vf vf4 vf1 vf2 acc)
+    (.mul.vf vf8 vf8 vf4)
+    (.mul.vf vf9 vf7 vf4)
+    (.mul.vf vf5 vf4 vf4)
+    (.add.y.vf.x vf8 vf8 vf8)
+    (.add.y.vf.x vf9 vf9 vf9)
+    (.add.y.vf.x vf5 vf5 vf5)
+    (.add.z.vf.x vf8 vf8 vf8)
+    (.add.z.vf.x vf9 vf9 vf9)
+    (.add.z.vf.x vf5 vf5 vf5)
+    (.mov v1-0 vf9)
+    (.mov a2-1 vf8)
+    (.isqrt.vf Q vf0 vf5 :fsf #b11 :ftf #b0)
+    (let ((f1-0 a2-1)
+          (f2-0 v1-0)
+          )
+      (cond
+        ((!= f2-0 0.0)
+         (let ((f1-1 (/ f1-0 f2-0)))
+           (.mov.vf.w vf4 vf0)
+           (.wait.vf)
+           (.mul.vf.xyz vf4 vf4 Q)
+           (let ((v0-0 f1-1))
+             (.mov vf8 v0-0)
+             (.svf (&-> arg1 quad) vf4)
+             (.mul.x.vf acc vf7 vf8)
+             (.add.mul.w.vf.xyz vf7 vf6 vf0 acc)
+             (.svf (&-> arg0 quad) vf7)
+             (.mov v1-1 vf7)
+             v0-0
+             )
+           )
+         )
+        (else
+          -100000000.0
+          )
+        )
+      )
+    )
+  )
+
+;; definition for function ray-triangle-intersect
+;; INFO: function output is handled by mips2c
+(def-mips2c ray-triangle-intersect (function none))
+
+;; definition for function collide-do-primitives
+;; INFO: function output is handled by mips2c
+(def-mips2c collide-do-primitives (function none))
+
+;; definition for function moving-sphere-triangle-intersect
+;; INFO: function output is handled by mips2c
+(def-mips2c moving-sphere-triangle-intersect (function vector vector float collide-cache-tri vector vector float))
+
+;; definition for function moving-sphere-sphere-intersect
+;; WARN: Return type mismatch float vs none.
+(defun moving-sphere-sphere-intersect ((arg0 vector) (arg1 vector) (arg2 vector) (arg3 vector))
+  (rlet ((vf0 :class vf)
+         (vf4 :class vf)
+         (vf5 :class vf)
+         (vf6 :class vf)
+         )
+    (init-vf0-vector)
+    (let ((f30-0 (ray-sphere-intersect arg0 arg1 arg2 (+ (-> (the-as sphere arg0) r) (-> arg2 w)))))
+      (when (>= f30-0 0.0)
+        (let ((s4-0 (new 'stack-no-clear 'inline-array 'vector 2)))
+          (vector+float*! (-> s4-0 0) arg0 arg1 f30-0)
+          (vector-! (-> s4-0 1) (-> s4-0 0) arg2)
+          (vector-normalize! (-> s4-0 1) (-> arg2 w))
+          (let ((v1-4 (-> s4-0 1)))
+            (.lvf vf4 (&-> arg2 quad))
+            (.lvf vf5 (&-> v1-4 quad))
+            )
+          )
+        (.mov.vf.w vf6 vf0)
+        (.add.vf.xyz vf6 vf4 vf5)
+        (.svf (&-> arg3 quad) vf6)
+        )
+      )
+    (none)
+    )
+  )
+
+;; definition for function moving-sphere-moving-sphere-intersect
+;; INFO: Used lq/sq
+;; WARN: Return type mismatch number vs none.
+(defun moving-sphere-moving-sphere-intersect ((arg0 vector) (arg1 vector) (arg2 vector) (arg3 vector) (arg4 vector))
+  (rlet ((acc :class vf)
+         (vf0 :class vf)
+         (vf4 :class vf)
+         (vf5 :class vf)
+         (vf6 :class vf)
+         (vf7 :class vf)
+         )
+    (init-vf0-vector)
+    (let ((f30-0 (the-as number (ray-sphere-intersect
+                                  arg0
+                                  (vector-! (new-stack-vector0) arg1 arg3)
+                                  arg2
+                                  (+ (-> (the-as sphere arg0) r) (-> arg2 w))
+                                  )
+                         )
+                 )
+          )
+      (set! f30-0 (cond
+                    ((and (>= (the-as float f30-0) 0.0) (>= 1.0 (the-as float f30-0)))
+                     (let ((v1-5 (vector-normalize! (vector-! (new-stack-vector0) arg2 arg0) (-> arg0 w))))
+                       (let ((a0-4 arg4))
+                         (let ((a1-4 (the-as float f30-0)))
+                           (.mov vf7 a1-4)
+                           )
+                         (.lvf vf5 (&-> arg1 quad))
+                         (.lvf vf4 (&-> arg0 quad))
+                         (.add.x.vf.w vf6 vf0 vf0)
+                         (.mul.x.vf.xyz acc vf5 vf7)
+                         (.add.mul.w.vf.xyz vf6 vf4 vf0 acc)
+                         (.svf (&-> a0-4 quad) vf6)
+                         )
+                       (let ((a0-5 arg4))
+                         (.lvf vf4 (&-> arg4 quad))
+                         (.lvf vf5 (&-> v1-5 quad))
+                         (.mov.vf.w vf6 vf0)
+                         (.add.vf.xyz vf6 vf4 vf5)
+                         (.svf (&-> a0-5 quad) vf6)
+                         )
+                       )
+                     f30-0
+                     )
+                    (else
+                      -100000000.0
+                      )
+                    )
+            )
+      )
+    (none)
+    )
+  )
+
+
+
+

@@ -1,0 +1,731 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for symbol *car-type-names*, type array
+(define *car-type-names* (the-as array (new 'static 'boxed-array :type string
+                                         "mongoose"
+                                         "falcon"
+                                         "wombat"
+                                         "possum"
+                                         "bobcat"
+                                         "cougar"
+                                         "wolf"
+                                         "bear"
+                                         "leopard"
+                                         "panther"
+                                         "tiger"
+                                         "cheetah"
+                                         "gila"
+                                         "snake"
+                                         "daxtermobile"
+                                         )
+                                       )
+        )
+
+;; definition for function type-from-vehicle-type
+(defun type-from-vehicle-type ((arg0 int))
+  (let ((v1-0 arg0))
+    (cond
+      ((zero? v1-0)
+       v-mongoose
+       )
+      ((= v1-0 1)
+       v-falcon
+       )
+      ((= v1-0 2)
+       v-wombat
+       )
+      ((= v1-0 3)
+       v-possum
+       )
+      ((= v1-0 4)
+       v-bobcat
+       )
+      ((= v1-0 5)
+       v-cougar
+       )
+      ((= v1-0 6)
+       v-wolf
+       )
+      ((= v1-0 7)
+       v-bear
+       )
+      ((= v1-0 8)
+       v-leopard
+       )
+      ((= v1-0 9)
+       v-panther
+       )
+      ((= v1-0 10)
+       v-tiger
+       )
+      ((= v1-0 11)
+       v-cheetah
+       )
+      ((= v1-0 12)
+       v-gila
+       )
+      ((= v1-0 13)
+       v-snake
+       )
+      ((= v1-0 14)
+       v-daxtermobile
+       )
+      ((= v1-0 15)
+       v-drone
+       )
+      (else
+        (the-as type #f)
+        )
+      )
+    )
+  )
+
+;; definition for function level-name-from-vehicle-type
+(defun level-name-from-vehicle-type ((arg0 int))
+  (let ((v1-0 arg0))
+    (cond
+      ((zero? v1-0)
+       'mongl
+       )
+      ((= v1-0 1)
+       'falcl
+       )
+      ((= v1-0 2)
+       'wombl
+       )
+      ((= v1-0 3)
+       'possl
+       )
+      ((= v1-0 4)
+       'bobcl
+       )
+      ((= v1-0 5)
+       'cougl
+       )
+      ((= v1-0 6)
+       'wolfl
+       )
+      ((= v1-0 7)
+       'bearl
+       )
+      ((= v1-0 8)
+       'leopl
+       )
+      ((= v1-0 9)
+       'pantl
+       )
+      ((= v1-0 10)
+       'tigel
+       )
+      ((= v1-0 11)
+       'cheel
+       )
+      ((= v1-0 12)
+       'gilal
+       )
+      ((= v1-0 13)
+       'snakl
+       )
+      ((= v1-0 14)
+       'daxtl
+       )
+      ((= v1-0 15)
+       'drone
+       )
+      (else
+        #f
+        )
+      )
+    )
+  )
+
+;; definition for function car-type-from-vehicle-type
+(defun car-type-from-vehicle-type ((arg0 int))
+  (if (< (the-as uint arg0) (the-as uint 15))
+      arg0
+      -1
+      )
+  )
+
+;; definition for function vehicle-type-from-car-type
+(defun vehicle-type-from-car-type ((arg0 int))
+  arg0
+  )
+
+;; definition for function car-type-from-level-name
+(defun car-type-from-level-name ((arg0 symbol))
+  (case arg0
+    (('mongl)
+     0
+     )
+    (('falcl)
+     1
+     )
+    (('wombl)
+     2
+     )
+    (('possl)
+     3
+     )
+    (('bobcl)
+     4
+     )
+    (('cougl)
+     5
+     )
+    (('wolfl)
+     6
+     )
+    (('bearl)
+     7
+     )
+    (('leopl)
+     8
+     )
+    (('pantl)
+     9
+     )
+    (('tigel)
+     10
+     )
+    (('cheel)
+     11
+     )
+    (('gilal)
+     12
+     )
+    (('snakl)
+     13
+     )
+    (('daxtl)
+     14
+     )
+    (else
+      -1
+      )
+    )
+  )
+
+;; definition for function vehicle-type-from-level-name
+(defun vehicle-type-from-level-name ((arg0 symbol))
+  (car-type-from-level-name arg0)
+  )
+
+;; definition for function vehicle-type-from-name
+(defun vehicle-type-from-name ((arg0 string))
+  (cond
+    ((string= arg0 "mongoose")
+     0
+     )
+    ((string= arg0 "falcon")
+     1
+     )
+    ((string= arg0 "wombat")
+     2
+     )
+    ((string= arg0 "possum")
+     3
+     )
+    ((string= arg0 "bobcat")
+     4
+     )
+    ((string= arg0 "cougar")
+     5
+     )
+    ((string= arg0 "wolf")
+     6
+     )
+    ((string= arg0 "bear")
+     7
+     )
+    ((string= arg0 "leopard")
+     8
+     )
+    ((string= arg0 "panther")
+     9
+     )
+    ((string= arg0 "tiger")
+     10
+     )
+    ((string= arg0 "cheetah")
+     11
+     )
+    ((string= arg0 "gila")
+     12
+     )
+    ((string= arg0 "snake")
+     13
+     )
+    ((string= arg0 "daxtermobile")
+     14
+     )
+    (else
+      (the-as int #f)
+      )
+    )
+  )
+
+;; definition for symbol *car-part-names*, type array
+(define *car-part-names* (the-as array (new 'static 'boxed-array :type string
+                                         "lf-fender"
+                                         "rf-fender"
+                                         "lr-fender"
+                                         "rr-fender"
+                                         "l-door"
+                                         "r-door"
+                                         "f-bumper"
+                                         "r-bumper"
+                                         "hood"
+                                         "trunk"
+                                         "roof"
+                                         "wheel"
+                                         "antenna"
+                                         "helmet"
+                                         )
+                                       )
+        )
+
+;; definition of type car-layer-textures
+(deftype car-layer-textures (structure)
+  ((dest        basic)
+   (base        basic)
+   (stripe      basic)
+   (detail      basic)
+   (damage      basic)
+   (wheel-dest  basic  :overlay-at dest)
+   (wheel-base  basic  :overlay-at base)
+   (wheel-blur  basic  :overlay-at stripe)
+   (tread-dest  basic  :overlay-at detail)
+   (tread-base  basic  :overlay-at damage)
+   (tread-blur  basic)
+   )
+  :pack-me
+  )
+
+;; definition for method 3 of type car-layer-textures
+(defmethod inspect ((this car-layer-textures))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'car-layer-textures)
+  (format #t "~1Tdata[6] @ #x~X~%" (&-> this dest))
+  (format #t "~1Tdest: ~A~%" (-> this dest))
+  (format #t "~1Tbase: ~A~%" (-> this base))
+  (format #t "~1Tstripe: ~A~%" (-> this stripe))
+  (format #t "~1Tdetail: ~A~%" (-> this detail))
+  (format #t "~1Tdamage: ~A~%" (-> this damage))
+  (format #t "~1Twheel-dest: ~A~%" (-> this dest))
+  (format #t "~1Twheel-base: ~A~%" (-> this base))
+  (format #t "~1Twheel-blur: ~A~%" (-> this stripe))
+  (format #t "~1Ttread-dest: ~A~%" (-> this detail))
+  (format #t "~1Ttread-base: ~A~%" (-> this damage))
+  (format #t "~1Ttread-blur: ~A~%" (-> this tread-blur))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type car-textures
+(deftype car-textures (structure)
+  ((data  car-layer-textures  14 :inline)
+   )
+  )
+
+;; definition for method 3 of type car-textures
+(defmethod inspect ((this car-textures))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'car-textures)
+  (format #t "~1Tdata[14] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type car-rgb-color
+(deftype car-rgb-color (vector4w)
+  ((red    int32  :overlay-at (-> data 0))
+   (green  int32  :overlay-at (-> data 1))
+   (blue   int32  :overlay-at (-> data 2))
+   (alpha  int32  :overlay-at (-> data 3))
+   )
+  (:methods
+    (car-rgb-color-method-9 (_type_) none)
+    (car-rgb-color-method-10 (_type_) int)
+    (car-rgb-color-method-11 (_type_ int) int)
+    )
+  )
+
+;; definition for method 3 of type car-rgb-color
+;; INFO: Used lq/sq
+(defmethod inspect ((this car-rgb-color))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'car-rgb-color)
+  (format #t "~1Tdata[4] @ #x~X~%" (-> this data))
+  (format #t "~1Tx: ~D~%" (-> this x))
+  (format #t "~1Ty: ~D~%" (-> this y))
+  (format #t "~1Tz: ~D~%" (-> this z))
+  (format #t "~1Tw: ~D~%" (-> this w))
+  (format #t "~1Tdword[2] @ #x~X~%" (-> this data))
+  (format #t "~1Tquad: ~D~%" (-> this quad))
+  (format #t "~1Tred: ~D~%" (-> this x))
+  (format #t "~1Tgreen: ~D~%" (-> this y))
+  (format #t "~1Tblue: ~D~%" (-> this z))
+  (format #t "~1Talpha: ~D~%" (-> this w))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type car-hsv-color
+(deftype car-hsv-color (vector)
+  ((hue         float  :overlay-at (-> data 0))
+   (saturation  float  :overlay-at (-> data 1))
+   (value       float  :overlay-at (-> data 2))
+   )
+  (:methods
+    (car-hsv-color-method-9 (_type_) none)
+    )
+  )
+
+;; definition for method 3 of type car-hsv-color
+;; INFO: Used lq/sq
+(defmethod inspect ((this car-hsv-color))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'car-hsv-color)
+  (format #t "~1Tdata[4] @ #x~X~%" (-> this data))
+  (format #t "~1Tx: ~f~%" (-> this x))
+  (format #t "~1Ty: ~f~%" (-> this y))
+  (format #t "~1Tz: ~f~%" (-> this z))
+  (format #t "~1Tw: ~f~%" (-> this w))
+  (format #t "~1Tquad: ~D~%" (-> this quad))
+  (format #t "~1Thue: ~f~%" (-> this x))
+  (format #t "~1Tsaturation: ~f~%" (-> this y))
+  (format #t "~1Tvalue: ~f~%" (-> this z))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type car-part-info
+(deftype car-part-info (structure)
+  ((short-name-id  uint32)
+   (name-id        uint32)
+   (task           uint16)
+   (flags          uint8)
+   (medal          uint8)
+   (part-id        uint8)
+   (pad            uint8)
+   )
+  )
+
+;; definition for method 3 of type car-part-info
+(defmethod inspect ((this car-part-info))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'car-part-info)
+  (format #t "~1Tshort-name-id: ~D~%" (-> this short-name-id))
+  (format #t "~1Tname-id: ~D~%" (-> this name-id))
+  (format #t "~1Ttask: ~D~%" (-> this task))
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (format #t "~1Tmedal: ~D~%" (-> this medal))
+  (format #t "~1Tpart-id: ~D~%" (-> this part-id))
+  (format #t "~1Tpad: ~D~%" (-> this pad))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type tuning-info
+(deftype tuning-info (uint32)
+  ()
+  )
+
+;; definition of type upgrade-info
+(deftype upgrade-info (structure)
+  ((cost            float)
+   (base            uint8)
+   (max             uint8)
+   (rookie          uint8)
+   (pro             uint8)
+   (cost-increment  float)
+   (pad4            uint32)
+   )
+  )
+
+;; definition for method 3 of type upgrade-info
+(defmethod inspect ((this upgrade-info))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'upgrade-info)
+  (format #t "~1Tcost: ~f~%" (-> this cost))
+  (format #t "~1Tbase: ~D~%" (-> this base))
+  (format #t "~1Tmax: ~D~%" (-> this max))
+  (format #t "~1Trookie: ~D~%" (-> this rookie))
+  (format #t "~1Tpro: ~D~%" (-> this pro))
+  (format #t "~1Tcost-increment: ~f~%" (-> this cost-increment))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type upgrade-info-array
+(deftype upgrade-info-array (structure)
+  ((data  upgrade-info  4 :inline)
+   )
+  )
+
+;; definition for method 3 of type upgrade-info-array
+(defmethod inspect ((this upgrade-info-array))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'upgrade-info-array)
+  (format #t "~1Tdata[4] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type car-upgrade-info-array
+(deftype car-upgrade-info-array (structure)
+  ((data  upgrade-info-array  15 :inline)
+   )
+  )
+
+;; definition for method 3 of type car-upgrade-info-array
+(defmethod inspect ((this car-upgrade-info-array))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'car-upgrade-info-array)
+  (format #t "~1Tdata[15] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type car-info
+(deftype car-info (structure)
+  ((base-color     car-rgb-color  :inline)
+   (stripe-color   car-rgb-color  :inline)
+   (car-type       int8)
+   (current-parts  uint8          11)
+   (tuning         uint32)
+   (flags          uint32)
+   )
+  )
+
+;; definition for method 3 of type car-info
+(defmethod inspect ((this car-info))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'car-info)
+  (format #t "~1Tbase-color: #<car-rgb-color @ #x~X>~%" (-> this base-color))
+  (format #t "~1Tstripe-color: #<car-rgb-color @ #x~X>~%" (-> this stripe-color))
+  (format #t "~1Tcar-type: ~D~%" (-> this car-type))
+  (format #t "~1Tcurrent-parts[11] @ #x~X~%" (-> this current-parts))
+  (format #t "~1Ttuning: ~D~%" (-> this tuning))
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type car-info-save
+(deftype car-info-save (structure)
+  ((car-type      int8)
+   (base-color    uint32)
+   (stripe-color  uint32)
+   (parts         uint8  11)
+   (tuning        uint32)
+   (flags         uint32)
+   )
+  )
+
+;; definition for method 3 of type car-info-save
+(defmethod inspect ((this car-info-save))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'car-info-save)
+  (format #t "~1Tcar-type: ~D~%" (-> this car-type))
+  (format #t "~1Tbase-color: ~D~%" (-> this base-color))
+  (format #t "~1Tstripe-color: ~D~%" (-> this stripe-color))
+  (format #t "~1Tparts[11] @ #x~X~%" (-> this parts))
+  (format #t "~1Ttuning: ~D~%" (-> this tuning))
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type car-info-full
+(deftype car-info-full (car-info)
+  ((level               basic)
+   (wheel-blur          float)
+   (tread-texture       basic)
+   (textures            car-textures)
+   (first-tbp           uint32)
+   (last-tbp            uint32)
+   (damage              uint8        14)
+   (lights              vu-lights    :inline)
+   (shield-vu-lights    vu-lights    :inline)
+   (shield-light-group  light-group  :inline)
+   )
+  (:methods
+    (car-info-full-method-9 (_type_) none)
+    (car-info-full-method-10 (_type_) int)
+    (car-info-full-method-11 (_type_ car-hsv-color) int)
+    (car-info-full-method-12 (_type_ car-hsv-color) int)
+    (car-info-full-method-13 (_type_) int)
+    (car-info-full-method-14 (_type_ uint) int)
+    (car-info-full-method-15 (_type_) int)
+    (car-info-full-method-16 (_type_ bucket-id) int)
+    (car-info-full-method-17 (_type_) int)
+    (car-info-full-method-18 (_type_) none)
+    (car-info-full-method-19 (_type_ int int) int)
+    (car-info-full-method-20 (_type_) none)
+    (car-info-full-method-21 (_type_) none)
+    )
+  )
+
+;; definition for method 3 of type car-info-full
+(defmethod inspect ((this car-info-full))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'car-info-full)
+  (format #t "~1Tbase-color: #<car-rgb-color @ #x~X>~%" (-> this base-color))
+  (format #t "~1Tstripe-color: #<car-rgb-color @ #x~X>~%" (-> this stripe-color))
+  (format #t "~1Tcar-type: ~D~%" (-> this car-type))
+  (format #t "~1Tcurrent-parts[11] @ #x~X~%" (-> this current-parts))
+  (format #t "~1Ttuning: ~D~%" (-> this tuning))
+  (format #t "~1Tflags: ~D~%" (-> this flags))
+  (format #t "~1Tlevel: ~A~%" (-> this level))
+  (format #t "~1Twheel-blur: ~f~%" (-> this wheel-blur))
+  (format #t "~1Ttread-texture: ~A~%" (-> this tread-texture))
+  (format #t "~1Ttextures: #<car-textures @ #x~X>~%" (-> this textures))
+  (format #t "~1Tfirst-tbp: ~D~%" (-> this first-tbp))
+  (format #t "~1Tlast-tbp: ~D~%" (-> this last-tbp))
+  (format #t "~1Tdamage[14] @ #x~X~%" (-> this damage))
+  (format #t "~1Tlights: #<vu-lights @ #x~X>~%" (-> this lights))
+  (format #t "~1Tshield-vu-lights: #<vu-lights @ #x~X>~%" (-> this shield-vu-lights))
+  (format #t "~1Tshield-light-group: #<light-group @ #x~X>~%" (-> this shield-light-group))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type car-info-array
+(deftype car-info-array (structure)
+  ((data  car-info  15 :inline)
+   )
+  )
+
+;; definition for method 3 of type car-info-array
+(defmethod inspect ((this car-info-array))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'car-info-array)
+  (format #t "~1Tdata[15] @ #x~X~%" (-> this data))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type car-level-array
+(deftype car-level-array (basic)
+  ((data      car-info-full  6 :inline)
+   (textures  car-textures   6 :inline)
+   )
+  (:methods
+    (car-level-array-method-9 (_type_) int)
+    )
+  )
+
+;; definition for method 3 of type car-level-array
+(defmethod inspect ((this car-level-array))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tdata[6] @ #x~X~%" (-> this data))
+  (format #t "~1Ttextures[6] @ #x~X~%" (-> this textures))
+  (label cfg-4)
+  this
+  )
+
+;; definition for symbol *car-part-translate-array*, type array
+(define *car-part-translate-array*
+  (the-as array (new 'static 'boxed-array :type uint8 #x0 #x0 #x1 #x1 #x2 #x2 #x3 #x4 #x5 #x6 #x7 #x8 #x9 #xa))
+  )
+
+;; definition for symbol *car-part-translate-names*, type array
+(define *car-part-translate-names* (the-as array (new 'static 'boxed-array :type string
+                                                   "f-fender"
+                                                   "r-fender"
+                                                   "door"
+                                                   "f-bumper"
+                                                   "r-bumper"
+                                                   "hood"
+                                                   "trunk"
+                                                   "roof"
+                                                   "wheel"
+                                                   "antenna"
+                                                   "helmet"
+                                                   )
+                                                 )
+        )
+
+;; definition for symbol *car-look-names*, type array
+(define *car-look-names* (the-as array (new 'static 'boxed-array :type string
+                                         "none"
+                                         "a"
+                                         "b"
+                                         "c"
+                                         "d"
+                                         "e"
+                                         "f"
+                                         "g"
+                                         "h"
+                                         "i"
+                                         "j"
+                                         "k"
+                                         "l"
+                                         "m"
+                                         "n"
+                                         "o"
+                                         "p"
+                                         "q"
+                                         "r"
+                                         "s"
+                                         "t"
+                                         "u"
+                                         "v"
+                                         )
+                                       )
+        )
+
+;; definition for symbol *car-layer-names*, type array
+(define *car-layer-names*
+  (the-as array (new 'static 'boxed-array :type string "dest" "base" "stripe" "detail" "damage"))
+  )
+
+;; definition for symbol *car-string-name*, type object
+(define *car-string-name* (the-as object (new 'global 'string 40 (the-as string #f))))
+
+
+
+
