@@ -39,12 +39,12 @@
               )
         )
     (set! (-> this racer-state racer)
-          (the-as uint (logior (if (the-as float v1-0)
-                                   (shl (-> (the-as process (-> (the-as (pointer uint32) v1-0))) pid) 32)
-                                   0
-                                   )
-                               (the-as float v1-0)
-                               )
+          (the-as handle (logior (if (the-as float v1-0)
+                                     (shl (-> (the-as process (-> (the-as (pointer uint32) v1-0))) pid) 32)
+                                     0
+                                     )
+                                 (the-as float v1-0)
+                                 )
                   )
           )
     )

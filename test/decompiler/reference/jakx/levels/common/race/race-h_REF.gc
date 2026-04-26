@@ -6,7 +6,7 @@
   ((position                 vector  :inline)
    (start-position           vector  :inline)
    (last-race-mesh-position  vector  :inline)
-   (racer                    uint64)
+   (racer                    handle)
    (lap-distance             float)
    (lap                      float)
    (prev-racer-lap           float)

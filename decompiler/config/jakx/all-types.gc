@@ -45541,7 +45541,7 @@
   ((position                vector    :inline :offset-assert 0)
    (start-position          vector    :inline :offset-assert 16)
    (last-race-mesh-position vector    :inline :offset-assert 32)
-   (racer                   uint64            :offset-assert 48) ;; handle
+   (racer                   handle            :offset-assert 48)
    (lap-distance            float             :offset-assert 56)
    (lap                     float             :offset-assert 60)
    (prev-racer-lap          float             :offset-assert 64)

@@ -147,7 +147,7 @@
     (speech-control-method-12 (_type_ process-drawable speech-type) int)
     (speech-control-method-13 (_type_ process-drawable speech-type int) int)
     (speech-control-method-14 (_type_ handle) int)
-    (speech-control-method-15 (_type_ handle) none)
+    (speech-control-method-15 (_type_ handle) int)
     (speech-control-method-16 (_type_ uint int) int)
     )
   )

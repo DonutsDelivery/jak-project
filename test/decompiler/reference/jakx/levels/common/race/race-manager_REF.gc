@@ -5,13 +5,14 @@
 ;; INFO: Used lq/sq
 (defmethod end-lap ((this racer-state) (arg0 process-drawable))
   (let ((v1-0 (process->ppointer arg0)))
-    (set! (-> this racer) (the-as uint (logior (if (the-as (pointer process-drawable) v1-0)
-                                                   (shl (-> (the-as (pointer process-drawable) v1-0) 0 pid) 32)
-                                                   0
-                                                   )
-                                               (the-as uint v1-0)
-                                               )
-                                  )
+    (set! (-> this racer)
+          (the-as handle (logior (if (the-as (pointer process-drawable) v1-0)
+                                     (shl (-> (the-as (pointer process-drawable) v1-0) 0 pid) 32)
+                                     0
+                                     )
+                                 (the-as uint v1-0)
+                                 )
+                  )
           )
     )
   (when arg0
@@ -39,7 +40,6 @@
   )
 
 ;; definition for method 10 of type race-state
-;; WARN: .subu (32-bit) used on a uint at idx 17. This probably should be a handle.
 (defmethod race-state-method-10 ((this race-state))
   (with-pp
     (dotimes (s5-0 (-> this racer-count))
@@ -54,7 +54,7 @@
               )
           (t9-0
             (and (nonzero? (l32-false-check v1-4)) (let ((a2-1 (-> v1-4 0)))
-                                                     (if (= (sar v1-4 32) (-> a2-1 pid))
+                                                     (if (= (-> v1-4 pid) (-> a2-1 pid))
                                                          a2-1
                                                          )
                                                      )
@@ -68,8 +68,8 @@
     )
   )
 
-;; definition for symbol *race-state*, type object
-(define *race-state* #f)
+;; definition for symbol *race-state*, type race-state
+(define *race-state* (new 'static 'race-state))
 
 
 

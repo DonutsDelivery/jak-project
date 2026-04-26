@@ -28,6 +28,7 @@
    (ambient                          (pointer process))
    (video-mode                       symbol)
    (aspect-ratio                     symbol)
+   (set-video-mode                   symbol)
    (auto-save                        symbol    :offset  72)
    (rotate-arena-minimap             symbol)
    (bg-r                             float)

@@ -1,0 +1,230 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition of type mgclinitialize-in-params
+(deftype mgclinitialize-in-params (structure)
+  ((p-local-key-pair                                 rsa-keypair)
+   (status                                           int32)
+   (my-server-create-game-callback                   basic)
+   (my-server-create-game-callback-user-data         basic)
+   (my-server-create-game-with-attributes-callback   basic)
+   (my-server-create-game-with-attributes-user-data  basic)
+   (my-server-join-game-callback                     basic)
+   (my-server-join-game-callback-user-data           basic)
+   (my-server-end-game-callback                      basic)
+   (my-server-end-game-callback-user-data            basic)
+   (my-server-world-status-callback                  basic)
+   (my-server-world-status-callback-user-data        basic)
+   (my-server-connect-games-callback                 basic)
+   (my-server-connect-games-user-data                basic)
+   (max-clients-per-connection                       int32)
+   (application-id                                   int32)
+   (p-application-key-pair                           rsa-keypair)
+   )
+  )
+
+;; definition for method 3 of type mgclinitialize-in-params
+(defmethod inspect ((this mgclinitialize-in-params))
+  (when (not this)
+    (set! this this)
+    (goto cfg-11)
+    )
+  (format #t "[~8x] ~A~%" this 'mgclinitialize-in-params)
+  (format #t "~1Tp-local-key-pair: #<rsa-keypair @ #x~X>~%" (-> this p-local-key-pair))
+  (let ((t9-2 format)
+        (a0-3 #t)
+        (a1-2 "~1Tstatus: #x~X : ~S~%")
+        (a2-2 (-> this status))
+        (v1-2 (-> this status))
+        )
+    (t9-2 a0-3 a1-2 a2-2 (cond
+                           ((= v1-2 #xffffff)
+                            "extra-dmeinit-status"
+                            )
+                           ((= v1-2 1)
+                            "dmenot-initialized"
+                            )
+                           ((zero? v1-2)
+                            "dmeinitialized"
+                            )
+                           (else
+                             "*unknown*"
+                             )
+                           )
+          )
+    )
+  (format #t "~1Tmy-server-create-game-callback: ~A~%" (-> this my-server-create-game-callback))
+  (format
+    #t
+    "~1Tmy-server-create-game-callback-user-data: ~A~%"
+    (-> this my-server-create-game-callback-user-data)
+    )
+  (format
+    #t
+    "~1Tmy-server-create-game-with-attributes-callback: ~A~%"
+    (-> this my-server-create-game-with-attributes-callback)
+    )
+  (format
+    #t
+    "~1Tmy-server-create-game-with-attributes-user-data: ~A~%"
+    (-> this my-server-create-game-with-attributes-user-data)
+    )
+  (format #t "~1Tmy-server-join-game-callback: ~A~%" (-> this my-server-join-game-callback))
+  (format #t "~1Tmy-server-join-game-callback-user-data: ~A~%" (-> this my-server-join-game-callback-user-data))
+  (format #t "~1Tmy-server-end-game-callback: ~A~%" (-> this my-server-end-game-callback))
+  (format #t "~1Tmy-server-end-game-callback-user-data: ~A~%" (-> this my-server-end-game-callback-user-data))
+  (format #t "~1Tmy-server-world-status-callback: ~A~%" (-> this my-server-world-status-callback))
+  (format
+    #t
+    "~1Tmy-server-world-status-callback-user-data: ~A~%"
+    (-> this my-server-world-status-callback-user-data)
+    )
+  (format #t "~1Tmy-server-connect-games-callback: ~A~%" (-> this my-server-connect-games-callback))
+  (format #t "~1Tmy-server-connect-games-user-data: ~A~%" (-> this my-server-connect-games-user-data))
+  (format #t "~1Tmax-clients-per-connection: ~D~%" (-> this max-clients-per-connection))
+  (format #t "~1Tapplication-id: ~D~%" (-> this application-id))
+  (format #t "~1Tp-application-key-pair: #<rsa-keypair @ #x~X>~%" (-> this p-application-key-pair))
+  (label cfg-11)
+  this
+  )
+
+;; definition of type mgclinitialize-out-params
+(deftype mgclinitialize-out-params (structure)
+  ((error-code  int32)
+   )
+  )
+
+;; definition for method 3 of type mgclinitialize-out-params
+(defmethod inspect ((this mgclinitialize-out-params))
+  (when (not this)
+    (set! this this)
+    (goto cfg-47)
+    )
+  (format #t "[~8x] ~A~%" this 'mgclinitialize-out-params)
+  (let ((t9-1 format)
+        (a0-2 #t)
+        (a1-1 "~1Terror-code: #x~X : ~S~%")
+        (a2-1 (-> this error-code))
+        (v1-2 (-> this error-code))
+        )
+    (t9-1 a0-2 a1-1 a2-1 (cond
+                           ((= v1-2 -19)
+                            "mgcl-num-game-worlds-per-lobby-world-exceeded"
+                            )
+                           ((= v1-2 -2)
+                            "mgcl-connection-failed"
+                            )
+                           ((= v1-2 -13)
+                            "mgcl-invalid-arg"
+                            )
+                           ((= v1-2 -8)
+                            "mgcl-network-error"
+                            )
+                           ((= v1-2 -17)
+                            "mgcl-dme-error"
+                            )
+                           ((= v1-2 -5)
+                            "mgcl-send-failed"
+                            )
+                           ((= v1-2 -18)
+                            "mgcl-call-mgcl-close-before-reinitializing"
+                            )
+                           ((= v1-2 -9)
+                            "mgcl-authentication-failed"
+                            )
+                           ((= v1-2 -4)
+                            "mgcl-not-connected"
+                            )
+                           ((zero? v1-2)
+                            "mgcl-success"
+                            )
+                           ((= v1-2 -12)
+                            "mgcl-unsuccessful"
+                            )
+                           ((= v1-2 -14)
+                            "mgcl-natresolve-failed"
+                            )
+                           ((= v1-2 -10)
+                            "mgcl-sessionbegin-failed"
+                            )
+                           ((= v1-2 -16)
+                            "mgcl-worldid-inuse"
+                            )
+                           ((= v1-2 -6)
+                            "mgcl-initialization-failed"
+                            )
+                           ((= v1-2 -7)
+                            "mgcl-shutdown-error"
+                            )
+                           ((= v1-2 -11)
+                            "mgcl-sessionend-failed"
+                            )
+                           ((= v1-2 #xffffff)
+                            "extra-mgclstatus-code"
+                            )
+                           ((= v1-2 -3)
+                            "mgcl-disconnect-failed"
+                            )
+                           ((= v1-2 -15)
+                            "mgcl-game-name-exists"
+                            )
+                           ((= v1-2 -1)
+                            "mgcl-connection-error"
+                            )
+                           (else
+                             "*unknown*"
+                             )
+                           )
+          )
+    )
+  (label cfg-47)
+  this
+  )
+
+;; type net-lanpeer-desc is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type net-lanpeer-desc) 3 L108)
+
+;; type net-initialize-in-params is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type net-initialize-in-params) 3 L100)
+
+;; type net-host-peer-to-peer-in-params is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type net-host-peer-to-peer-in-params) 3 L97)
+
+;; type net-resolve-addr-data is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type net-resolve-addr-data) 3 L40)
+
+;; type net-resolve-addr-in-params is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type net-resolve-addr-in-params) 3 L37)
+
+;; type net-incoming-client-in-params is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type net-incoming-client-in-params) 3 L34)
+
+;; type net-type-broadcast-schedule is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type net-type-broadcast-schedule) 3 L23)
+
+;; type net-type-field is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type net-type-field) 3 L20)
+
+;; type net-type-structure is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type net-type-structure) 3 L17)
+
+;; type net-lanfind-exchange-callback-in-args is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type net-lanfind-exchange-callback-in-args) 3 L9)
+
+;; type net-lanfind-callback-data-args is defined here, but it is unknown to the decompiler
+
+(method-set! (the-as type net-lanfind-callback-data-args) 3 L1)
+
+
+
+

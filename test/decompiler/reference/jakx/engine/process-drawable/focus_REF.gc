@@ -11,7 +11,7 @@
     (clear-focused (_type_) int)
     (collide-spec-match? (_type_ process-focusable) object)
     (reset-to-collide-spec (_type_ collide-spec) int)
-    (try-update-focus (_type_ process-focusable) symbol)
+    (try-update-focus (_type_ process-focusable) none)
     )
   )
 
@@ -50,6 +50,7 @@
   )
 
 ;; definition for method 12 of type focus
+;; WARN: Return type mismatch symbol vs none.
 ;; WARN: .subu (32-bit) used on a uint at idx 1. This probably should be a handle.
 (defmethod try-update-focus ((this focus) (proc process-focusable))
   (let ((v1-0 (the-as object (-> this handle))))
@@ -75,6 +76,7 @@
       #t
       )
     )
+  (none)
   )
 
 ;; definition for method 9 of type focus

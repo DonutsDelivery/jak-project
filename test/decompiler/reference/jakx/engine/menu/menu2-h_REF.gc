@@ -210,10 +210,12 @@
    (pad                int8)
    (hidden?            basic)
    )
+  (:state-methods
+    wait-enter
+    enter
+    running
+    )
   (:methods
-    (base-menu-method-50 (_type_) none)
-    (base-menu-method-51 (_type_) none)
-    (running () _type_ :state)
     (base-menu-method-53 (_type_) none)
     (base-menu-method-54 (_type_) none)
     (base-menu-method-55 (_type_) none)

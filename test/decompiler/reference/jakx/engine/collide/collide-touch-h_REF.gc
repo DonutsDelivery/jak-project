@@ -35,7 +35,7 @@
   (:methods
     (touching-prims-entry-method-9 (_type_ vector) vector)
     (touching-prims-entry-method-10 (_type_ vector) vector)
-    (touching-prims-entry-method-11 (_type_) none)
+    (touching-prims-entry-method-11 (_type_ collide-shape object) none)
     (touching-prims-entry-method-12 (_type_ int uint) symbol)
     )
   )
@@ -130,10 +130,10 @@
   :pack-me
   (:methods
     (touching-shapes-entry-method-9 (_type_) touching-prims-entry)
-    (touching-shapes-entry-method-10 (_type_ touching-shapes-entry) touching-prims-entry)
+    (touching-shapes-entry-method-10 (_type_ touching-shapes-entry) collide-shape)
     (touching-shapes-entry-method-11 (_type_ collide-shape) collide-shape)
     (prims-touching? (_type_ collide-shape uint) touching-prims-entry)
-    (prims-touching-action? (_type_ collide-shape collide-action collide-action) basic)
+    (prims-touching-action? (_type_ collide-shape collide-action collide-action) touching-prims-entry)
     (free-touching-prims-list (_type_) int)
     )
   )
@@ -206,9 +206,8 @@
   )
 
 ;; definition for method 10 of type touching-shapes-entry
-;; WARN: Return type mismatch collide-shape vs touching-prims-entry.
 (defmethod touching-shapes-entry-method-10 ((this touching-shapes-entry) (arg0 touching-shapes-entry))
-  (the-as touching-prims-entry (-> arg0 cshape1))
+  (-> arg0 cshape1)
   )
 
 (kmemopen global "collide-touching-lists")

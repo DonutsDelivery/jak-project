@@ -59,7 +59,7 @@ O(n^2) 'check everybody against everybody' collision loop."
     (grid-hash-method-12 (_type_ vector) (pointer uint8))
     (grid-hash-method-13 (_type_ vector float) (pointer uint8))
     (grid-hash-method-14 (_type_ rgba) none)
-    (grid-hash-method-15 (_type_ int int int) int)
+    (grid-hash-method-15 (_type_ int int int) none)
     (grid-hash-method-16 (_type_ rgba) int)
     (grid-hash-method-17 (_type_) int)
     (grid-hash-method-18 (_type_ grid-hash-box grid-hash-box) none)
