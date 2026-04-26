@@ -46375,6 +46375,76 @@
   :method-count-assert 272
   :size-assert         #x1234
   :flag-assert         #x11011b01234
+  (:methods
+    (wvehicle-method-204 (_type_) none) ;; 204
+    (wvehicle-method-205 (_type_) none) ;; 205
+    (wvehicle-method-206 (_type_) none) ;; 206
+    (wvehicle-method-207 (_type_) none) ;; 207
+    (wvehicle-method-208 (_type_) none) ;; 208
+    (wvehicle-method-209 (_type_) none) ;; 209
+    (wvehicle-method-210 (_type_) none) ;; 210
+    (wvehicle-method-211 (_type_) none) ;; 211
+    (wvehicle-method-212 (_type_) none) ;; 212
+    (wvehicle-method-213 (_type_) none) ;; 213
+    (wvehicle-method-214 (_type_) none) ;; 214
+    (wvehicle-method-215 (_type_) none) ;; 215
+    (wvehicle-method-216 (_type_) none) ;; 216
+    (wvehicle-method-217 (_type_) none) ;; 217
+    (wvehicle-method-218 (_type_) none) ;; 218
+    (wvehicle-method-219 (_type_) none) ;; 219
+    (wvehicle-method-220 (_type_) none) ;; 220
+    (wvehicle-method-221 (_type_) none) ;; 221
+    (wvehicle-method-222 (_type_) none) ;; 222
+    (wvehicle-method-223 (_type_) none) ;; 223
+    (wvehicle-method-224 (_type_) none) ;; 224
+    (wvehicle-method-225 (_type_) none) ;; 225
+    (wvehicle-method-226 (_type_) none) ;; 226
+    (wvehicle-method-227 (_type_) none) ;; 227
+    (wvehicle-method-228 (_type_) none) ;; 228
+    (wvehicle-method-229 (_type_) none) ;; 229
+    (wvehicle-method-230 (_type_) none) ;; 230
+    (wvehicle-method-231 (_type_) none) ;; 231
+    (wvehicle-method-232 (_type_) none) ;; 232
+    (wvehicle-method-233 (_type_) none) ;; 233
+    (wvehicle-method-234 (_type_) none) ;; 234
+    (wvehicle-method-235 (_type_) none) ;; 235
+    (wvehicle-method-236 (_type_) none) ;; 236
+    (wvehicle-method-237 (_type_) none) ;; 237
+    (wvehicle-method-238 (_type_) none) ;; 238
+    (wvehicle-method-239 (_type_) none) ;; 239
+    (wvehicle-method-240 (_type_) none) ;; 240
+    (wvehicle-method-241 (_type_) none) ;; 241
+    (wvehicle-method-242 (_type_) none) ;; 242
+    (wvehicle-method-243 (_type_) none) ;; 243
+    (wvehicle-method-244 (_type_) none) ;; 244
+    (wvehicle-method-245 (_type_) none) ;; 245
+    (wvehicle-method-246 (_type_) none) ;; 246
+    (wvehicle-method-247 (_type_) none) ;; 247
+    (wvehicle-method-248 (_type_) none) ;; 248
+    (wvehicle-method-249 (_type_) none) ;; 249
+    (wvehicle-method-250 (_type_) none) ;; 250
+    (wvehicle-method-251 (_type_) none) ;; 251
+    (wvehicle-method-252 (_type_) none) ;; 252
+    (wvehicle-method-253 (_type_) none) ;; 253
+    (wvehicle-method-254 (_type_) none) ;; 254
+    (wvehicle-method-255 (_type_) none) ;; 255
+    (wvehicle-method-256 (_type_) none) ;; 256
+    (wvehicle-method-257 (_type_) none) ;; 257
+    (wvehicle-method-258 (_type_) none) ;; 258
+    (wvehicle-method-259 (_type_) none) ;; 259
+    (wvehicle-method-260 (_type_) none) ;; 260
+    (wvehicle-method-261 (_type_) none) ;; 261
+    (wvehicle-method-262 (_type_) none) ;; 262
+    (wvehicle-method-263 (_type_) none) ;; 263
+    (wvehicle-method-264 (_type_) none) ;; 264
+    (wvehicle-method-265 (_type_) none) ;; 265
+    (wvehicle-method-266 (_type_) none) ;; 266
+    (wvehicle-method-267 (_type_) none) ;; 267
+    (wvehicle-method-268 (_type_) none) ;; 268
+    (wvehicle-method-269 (_type_) none) ;; 269
+    (wvehicle-method-270 (_type_) none) ;; 270
+    (wvehicle-method-271 (_type_) none) ;; 271
+    )
   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wcar-base                      ;;
@@ -46396,9 +46466,9 @@
 
 (deftype wcar-base (wvehicle)
   ((wcar-base-pad uint8 396 :offset 4660))
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
 
 
@@ -46410,9 +46480,9 @@
 
 (deftype v-mongoose (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46426,9 +46496,9 @@
   
 (deftype v-falcon (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46442,9 +46512,9 @@
   
 (deftype v-wombat (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46458,9 +46528,9 @@
   
 (deftype v-possum (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46474,9 +46544,9 @@
   
 (deftype v-bobcat (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46490,9 +46560,9 @@
   
 (deftype v-cougar (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46506,9 +46576,9 @@
   
 (deftype v-wolf (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46522,9 +46592,9 @@
   
 (deftype v-bear (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46538,9 +46608,9 @@
   
 (deftype v-leopard (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46554,9 +46624,9 @@
   
 (deftype v-panther (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46570,9 +46640,9 @@
   
 (deftype v-tiger (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46586,9 +46656,9 @@
   
 (deftype v-cheetah (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46602,9 +46672,9 @@
   
 (deftype v-gila (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46618,9 +46688,9 @@
   
 (deftype v-snake (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -46634,9 +46704,9 @@
   
 (deftype v-daxtermobile (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
@@ -56628,9 +56698,9 @@
   
 (deftype v-drone (wcar-base)
   ()
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x13c0
-  :flag-assert         #xcc133013c0
+  :flag-assert         #x110133013c0
   )
   
 
