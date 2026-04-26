@@ -4839,6 +4839,7 @@
     ]
   ],
   "manipy-init": [
+    [0, "s6", "manipy"],
     [
       207,
       "v0",
@@ -49743,5 +49744,44 @@
   "dm-float-field-tie-vanish-far-func": [
     [25, "s2", "prototype-bucket-tie"],
     [31, "s2", "prototype-bucket-tie"]
+  ],
+  "initialize-anim-tester": [
+    [0, "s6", "anim-tester"]
+  ],
+  "daxter-init-by-other": [
+    [0, "s6", "daxter"]
+  ],
+  "test-process-init-by-other": [
+    [0, "s6", "test-process"]
+  ],
+  "race-banner-init-by-other": [
+    [0, "s6", "race-banner"]
+  ],
+  "starting-linebot-init-by-other": [
+    [0, "s6", "starting-linebot"]
+  ],
+  "wrong-way-init-by-other": [
+    [0, "s6", "wrong-way"]
+  ],
+  "wrong-way-linebot-init-by-other": [
+    [0, "s6", "wrong-way-linebot"]
+  ],
+  "set-children-position-and-orientation": [
+    [0, "s6", "process-drawable"]
+  ],
+  "vehicle-antenna-init-by-other": [
+    [0, "s6", "process-drawable"]
+  ],
+  "oil-slick-init-by-other": [
+    [0, "s6", "oil-slick"]
+  ],
+  "slip-object-init-by-other": [
+    [0, "s6", "slip-object"]
+  ],
+  "lightning-sphere-init-by-other": [
+    [0, "s6", "lightning-sphere"]
+  ],
+  "v-wpn-base-init-by-other": [
+    [0, "s6", "process-drawable"]
   ]
 }
