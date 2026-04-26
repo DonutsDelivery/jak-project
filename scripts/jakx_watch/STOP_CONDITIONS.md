@@ -35,16 +35,24 @@ Wiring queue (do NOT drain without G1 evidence at each step):
 
 ### G2: cross_game_config_port runs at --max-batch=10 with --dry-run first
 
-Even batch=10 has reverted recently: `99b6d95f5` → `de7d6b282`. The cycle
-prompt's `--max-batch=50` is unsafe; the candidate pool needs
-re-establishment before raising.
+Status as of 2026-04-26 06:45: batch=10 has reverted **twice consecutively**:
+- `99b6d95f5` → `de7d6b282` (cycle 24, possibly formatter-bug-related)
+- attempt @ 06:34 on `shadow-dma-init` 10-cast batch → reverted by
+  apply_guard (Δerr +11, Δrc +0). 10m39s wall, post-formatter-fix code.
 
-Required sequence:
-1. `--dry-run` to inspect the candidate pool — does it look like the
-   reverted 99b6d95f5 batch?
-2. `--max-batch=10` maximum
-3. Only consider raising after **3 consecutive non-reverted commits** at
-   batch=10
+Two reverts at batch=10 across two days strongly suggests the problem is
+candidate-quality, not batch size. Likely: op_idx drift between jak3 and
+jakx (cast at op N in jak3 hits a different op in jakx → wrong type).
+
+**Don't fire cross_port again until one of:**
+- op_idx-drift detection added (skip casts where jakx function structure
+  ≠ jak3 function structure)
+- --max-batch=1 forced single-cast attempts to identify which casts
+  individually transfer
+- Source-pool change (e.g. only port casts from functions where jakx
+  body byte-matches jak3 body)
+
+Cycle prompt's `--max-batch=50` remains unsafe.
 
 ### G3: Auto-revert of committed iterations is permanently deferred
 
