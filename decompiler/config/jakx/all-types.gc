@@ -30758,7 +30758,7 @@
        check that the [[collide-spec]] of the focus and the process match."
       (_type_ process-focusable) object) ;; 10
     (reset-to-collide-spec "Reset this focus with the given [[collide-spec]]." (_type_ collide-spec) int) ;; 11
-    (try-update-focus (_type_ process-focusable) symbol) ;; 12
+    (try-update-focus (_type_ process-focusable) none) ;; 12
     )
   )
 
@@ -41518,7 +41518,7 @@
     (lightning-bolt-method-19 (_type_ vector int int matrix float float) vector) ;; 19
     (lightning-bolt-method-20 (_type_ int lightning-span-internal) vector) ;; 20
     (lightning-bolt-method-21 (_type_ int int float) int) ;; 21
-    (lightning-bolt-method-22 (_type_) none) ;; 22
+    (lightning-bolt-method-22 (_type_) number) ;; 22
     )
   )
   
