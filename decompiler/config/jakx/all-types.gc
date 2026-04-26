@@ -22551,8 +22551,9 @@
   
 
 (deftype net-lanfind-exchange-callback-out-args (structure)
-  ((b-respond-to-sender int32            :offset-assert 0)
-   (details             net-data :inline :offset-assert 4)
+  ((b-respond-to-sender int32  :offset-assert 0)
+   (details-n-size      int32  :offset-assert 4) ;; net-data flattened (inline 16-byte align bug)
+   (details-p-data      basic  :offset-assert 8)
    )
   :method-count-assert 9
   :size-assert         #xc
@@ -22567,13 +22568,14 @@
   
 
 (deftype net-lanfind-in-params (structure)
-  ((b-default-set        int32            :offset-assert 0)
-   (session-type         int32            :offset-assert 4)
-   (filter               uint32           :offset-assert 8)
-   (details              net-data :inline :offset-assert 12)
-   (udpport              uint32           :offset-assert 20)
-   (pfn-lanfind-callback basic            :offset-assert 24)
-   (p-user-data          basic            :offset-assert 28)
+  ((b-default-set        int32   :offset-assert 0)
+   (session-type         int32   :offset-assert 4)
+   (filter               uint32  :offset-assert 8)
+   (details-n-size       int32   :offset-assert 12) ;; net-data flattened (inline 16-byte align bug)
+   (details-p-data       basic   :offset-assert 16)
+   (udpport              uint32  :offset-assert 20)
+   (pfn-lanfind-callback basic   :offset-assert 24)
+   (p-user-data          basic   :offset-assert 28)
    )
   :method-count-assert 9
   :size-assert         #x20
