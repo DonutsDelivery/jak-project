@@ -5,22 +5,32 @@ rc/err are derivatives. They tell you "things got better" but not "we are 47%
 of the way to done." Without a ceiling you can't tell acceleration from
 deceleration; +47 rc this session could be 5% of remaining work or 0.5%.
 
+PRIMARY METRIC IS files_offline_test_pass — files that goalc-compile AND
+match _REF.gc text (transitively bytematching the original PS2 .o). rc is
+demoted to "leading indicator we glance at." water111 (OpenGOAL maintainer)
+critique 2026-04-26: rc/no-errors ≠ correct decompilation, since type_cast
+adds, method-count raises, sig stubs all silence ERROR markers without
+producing semantically correct GOAL. Compile-pass is the real signal.
+
 This computes position metrics for jakx. Each metric has a defined ceiling
 so the fraction-completed is a real number, not a vibe:
 
-  signatures_complete  — methods with non-degenerate signatures
-                         (decl_return matches body_return AND no `object`
-                         parameter types AND not stub method-N)
-                         CEILING: total method declarations
-  unknown_type_refs    — IR2 references to types the decompiler can't
-                         resolve. Each is a typing gap.
-                         CEILING: 0
-  failed_type_prop_ops — type-prop failures across all IR2 ops
-                         CEILING: 0
-  return_mismatch      — methods with declared-return ≠ body-return
-                         CEILING: 0 (subset of signatures_complete)
-  files_real_clean     — files with 0 ERROR markers
-                         CEILING: total IR2 files
+  files_offline_test_pass  — files in offline-test that BOTH goalc-compile
+                             AND match their _REF.gc text. Real correctness
+                             via bytematch-by-transitivity.
+                             CEILING: files_offline_test_attempted (the rc
+                             subset that has _REF.gc + isn't skip_compile)
+                             SOURCE: .jakx_watch/history/latest.json from
+                             scripts/jakx_watch/offline_test_pass.py
+  method_decls_complete    — methods with non-degenerate signatures
+                             CEILING: total method declarations
+  failed_type_prop_errors  — type-prop failures across all IR2 ops
+                             CEILING: 0 (lower = better)
+  return_mismatch_warns    — methods with declared-return ≠ body-return
+                             CEILING: 0
+  files_real_clean         — files with 0 ERROR markers (LEADING INDICATOR
+                             ONLY — text-scan proxy, not correctness)
+                             CEILING: files_total
 
 Output: appended to .compound_loop/convergence.jsonl as one row per run.
 Each row: {ts, sha, game, ...metrics}. Trend = diff successive rows.
@@ -43,6 +53,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 COMPOUND_LOOP_DIR = ROOT / ".compound_loop"
 CONVERGENCE_LOG = COMPOUND_LOOP_DIR / "convergence.jsonl"
+OFFLINE_TEST_LATEST = ROOT / ".jakx_watch" / "history" / "latest.json"
+OFFLINE_TEST_MAX_AGE_SEC = 3600  # data older than 1h = treat as missing
 
 GAMES = ("jak1", "jak2", "jak3", "jakx")
 
@@ -210,6 +222,42 @@ def head_sha() -> str:
         return ""
 
 
+def read_offline_test_results(game: str) -> dict:
+    """Read offline_test_pass.py results from .jakx_watch/history/latest.json.
+
+    Returns a dict with offline_test_attempted/pass/partial counts. Falls back
+    to zeros + offline_test_stale=True when file is missing, malformed, or
+    older than OFFLINE_TEST_MAX_AGE_SEC.
+
+    For jakx, "pass" = green = goalc-compiles AND matches _REF.gc text. This
+    is the bytematch-by-transitivity correctness signal. "partial" = amber =
+    at least one of compile/compare failed; doesn't separate compile-only
+    pass from compare-only pass yet (TODO: enhance offline_test_pass.py to
+    split these — would let us see goalc-compiles-but-text-differs files,
+    which are likely fine but need _REF.gc refresh).
+    """
+    if game != "jakx":
+        return {"offline_test_attempted": 0, "offline_test_pass": 0,
+                "offline_test_partial": 0, "offline_test_stale": True}
+    if not OFFLINE_TEST_LATEST.exists():
+        return {"offline_test_attempted": 0, "offline_test_pass": 0,
+                "offline_test_partial": 0, "offline_test_stale": True}
+    age = datetime.now().timestamp() - OFFLINE_TEST_LATEST.stat().st_mtime
+    try:
+        data = json.loads(OFFLINE_TEST_LATEST.read_text())
+    except (json.JSONDecodeError, OSError):
+        return {"offline_test_attempted": 0, "offline_test_pass": 0,
+                "offline_test_partial": 0, "offline_test_stale": True}
+    ot = data.get("offline_test", {})
+    return {
+        "offline_test_attempted": ot.get("candidates", 0),
+        "offline_test_pass": len(ot.get("green", [])),
+        "offline_test_partial": len(ot.get("amber", [])),
+        "offline_test_stale": age > OFFLINE_TEST_MAX_AGE_SEC,
+        "offline_test_age_sec": int(age),
+    }
+
+
 def compute(game: str, wait_for_stable: bool = True) -> dict:
     """Compute the full metric snapshot for game.
 
@@ -230,17 +278,27 @@ def compute(game: str, wait_for_stable: bool = True) -> dict:
     else:
         ir2 = scan_ir2_metrics(decomp_dir)
         unstable = ir2["files_total"] < MIN_PLAUSIBLE_IR2
+    ot = read_offline_test_results(game)
     snap = {
         "ts": datetime.now().isoformat(timespec="seconds"),
         "sha": head_sha()[:12],
         "game": game,
         "unstable": unstable,
+        # PRIMARY position metric: real correctness via bytematch-by-transitivity
+        # (compiles + matches _REF.gc). Pre-compile-pass yield claims are provisional.
+        **ot,
+        "offline_test_pass_pct": (
+            round(100.0 * ot["offline_test_pass"] / ot["offline_test_attempted"], 2)
+            if ot.get("offline_test_attempted") else 0.0
+        ),
         # Position metrics with ceilings
         "method_decls_total": total_decls,
         "method_decls_complete": complete_decls,
         "method_decls_complete_pct": (
             round(100.0 * complete_decls / total_decls, 2) if total_decls else 0.0
         ),
+        # Leading indicator (text-scan proxy, NOT correctness — see water111
+        # critique 2026-04-26). Keep for trend, but don't anchor decisions on it.
         "files_real_clean_pct": (
             round(100.0 * ir2["files_real_clean"] / ir2["files_total"], 2)
             if ir2["files_total"] else 0.0
