@@ -1516,36 +1516,16 @@
     ]
   ],
   "dgo-load-link": [
-    [
-      7,
-      "s4",
-      "uint"
-    ],
-    [
-      17,
-      "s4",
-      "uint"
-    ],
-    [
-      55,
-      "s4",
-      "uint"
-    ],
-    [
-      27,
-      "s4",
-      "uint"
-    ],
-    [
-      37,
-      "s4",
-      "uint"
-    ],
-    [
-      60,
-      "s4",
-      "pointer"
-    ]
+    [[10, 60], "s4", "uint"],
+    [[60, 90], "s4", "pointer"]
+  ],
+  "keybd-read-ascii": [
+    [51, "a1", "int"],
+    [[55, 60], "a0", "int"]
+  ],
+  "read-event-header": [
+    [[6, 14], "v1", "(pointer uint16)"],
+    [[22, 24], "a0", "(pointer uint16)"]
   ],
   "ramdisk-load": [
     [
@@ -1993,7 +1973,8 @@
       17,
       "a1",
       "process-drawable"
-    ]
+    ],
+    [1, "gp", "cloth-on-skeleton"]
   ],
   "(method 25 cloth-on-skeleton)": [
     [
@@ -2694,7 +2675,8 @@
       75,
       "s4",
       "engine"
-    ]
+    ],
+    [75, "gp", "gui-control"]
   ],
   "(method 17 gui-control)": [
     [
@@ -2759,7 +2741,8 @@
       130,
       "v0",
       "int32"
-    ]
+    ],
+    [130, "v1", "connection"]
   ],
   "(method 10 gui-control)": [
     [
@@ -2863,7 +2846,8 @@
       617,
       "s0",
       "(function cpu-thread function symbol symbol continue-point game-save resetter-spec none)"
-    ]
+    ],
+    [168, "gp", "game-info"]
   ],
   "(method 9 lod-set)": [
     [
@@ -15123,7 +15107,8 @@
       ],
       "s1",
       "collide-shape-moving"
-    ]
+    ],
+    [156, "s1", "collide-shape"]
   ],
   "(method 12 collide-shape-prim-sphere)": [
     [
@@ -16281,7 +16266,8 @@
       ],
       "s2",
       "(array int32)"
-    ]
+    ],
+    [39, "gp", "sparticle-cpuinfo"]
   ],
   "execute-particle-local-space-engine": [
     [
@@ -39968,7 +39954,8 @@
       7,
       "gp",
       "spartacus-editor"
-    ]
+    ],
+    [9, "gp", "spartacus-editor"]
   ],
   "(method 21 car-info-full)": [
     [
@@ -40669,7 +40656,8 @@
       2,
       "v1",
       "pointer"
-    ]
+    ],
+    [2, "gp", "driver"]
   ],
   "(method 7 editable-array)": [
     [
@@ -43749,7 +43737,8 @@
       17,
       "a2",
       "handle"
-    ]
+    ],
+    [17, "gp", "driver"]
   ],
   "(method 65 driver)": [
     [
@@ -43768,7 +43757,8 @@
       1,
       "v1",
       "handle"
-    ]
+    ],
+    [1, "s3", "driver"]
   ],
   "(code idle driver)": [
     [
@@ -44244,21 +44234,24 @@
       19,
       "s2",
       "process"
-    ]
+    ],
+    [19, "gp", "fact-info"]
   ],
   "(method 3 fact-info-crate)": [
     [
       19,
       "s2",
       "process"
-    ]
+    ],
+    [19, "gp", "fact-info-crate"]
   ],
   "(method 3 fact-info-enemy)": [
     [
       19,
       "s2",
       "process"
-    ]
+    ],
+    [19, "gp", "fact-info-enemy"]
   ],
   "(method 3 part-tracker-init-params)": [
     [
@@ -44804,14 +44797,16 @@
       92,
       "a2",
       "uint8"
-    ]
+    ],
+    [92, "gp", "game-save"]
   ],
   "(method 64 driver-jak)": [
     [
       10,
       "v1",
       "uint8"
-    ]
+    ],
+    [10, "gp", "driver-jak"]
   ],
   "build-instance-list": [
     [
@@ -44825,7 +44820,8 @@
       26,
       "v1",
       "int16"
-    ]
+    ],
+    [26, "t1", "drawable-tree"]
   ],
   "print-prototype-list": [
     [
@@ -44867,7 +44863,8 @@
       0,
       "v1",
       "float"
-    ]
+    ],
+    [0, "a0", "vehicle"]
   ],
   "(method 14 vehicle-section)": [
     [
@@ -44935,21 +44932,24 @@
       1,
       "v1",
       "float"
-    ]
+    ],
+    [1, "gp", "vehicle"]
   ],
   "(method 187 wvehicle)": [
     [
       36,
       "f2",
       "uint8"
-    ]
+    ],
+    [36, "gp", "wvehicle"]
   ],
   "(method 202 wvehicle)": [
     [
       57,
       "v1",
       "float"
-    ]
+    ],
+    [57, "gp", "wvehicle"]
   ],
   "process-drawable-reset-all-cloth": [
     [
@@ -44991,21 +44991,24 @@
       29,
       "t0",
       "uint32"
-    ]
+    ],
+    [29, "a2", "cloth-system"]
   ],
   "sp-relaunch-particle-3d": [
     [
       32,
       "a1",
       "uint32"
-    ]
+    ],
+    [32, "gp", "sparticle-cpuinfo"]
   ],
   "spartacus-editor-init": [
     [
       62,
       "v1",
       "uint8"
-    ]
+    ],
+    [62, "s6", "process"]
   ],
   "(method 10 focus)": [
     [
@@ -45019,105 +45022,120 @@
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-bobcat)": [
     [
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-cheetah)": [
     [
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-cougar)": [
     [
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-daxtermobile)": [
     [
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-falcon)": [
     [
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-gila)": [
     [
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-leopard)": [
     [
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-mongoose)": [
     [
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-panther)": [
     [
       2,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [3, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-possum)": [
     [
       2,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [3, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-snake)": [
     [
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-tiger)": [
     [
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-wolf)": [
     [
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-wombat)": [
     [
       1,
       "v1",
       "collide-shape"
-    ]
+    ],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 vehicle)": [
     [
@@ -49565,5 +49583,62 @@
     [71, "a0", "net-process-class-info"]
   ],
   "(method 3 collide-query)": [[121, "f0", "float"], [142, "f0", "float"]],
-  "(method 12 medius-cache)": [[15, "a1", "(pointer int32)"]]
+  "(method 12 medius-cache)": [
+    [5, "a3", "uint"],
+    [6, "a2", "(pointer int32)"],
+    [10, "a2", "uint"],
+    [11, "a1", "(pointer int32)"],
+    [15, "a1", "(pointer int32)"]
+  ],
+  "dma-buffer-add-vu-function": [
+    [[8, 16], "t2", "(pointer dma-packet)"],
+    [16, "t2", "(pointer uint64)"],
+    [[17, 35], "t2", "(pointer dma-packet)"]
+  ],
+  "(method 0 collide-cache)": [
+    [0, "a2", "int"],
+    [1, "a3", "int"]
+  ],
+  "output-race-mesh": [
+    [[4, 54], "gp", "race-line-slice-data"],
+    [13, "v1", "(pointer float)"],
+    [18, "v1", "(pointer float)"],
+    [23, "v1", "(pointer float)"],
+    [28, "v1", "(pointer float)"],
+    [37, "v1", "(pointer float)"],
+    [42, "v1", "(pointer float)"],
+    [47, "v1", "(pointer float)"]
+  ],
+  "ragdoll-test-init-by-other": [
+    [112, "a0", "(pointer int32)"],
+    [116, "a0", "uint64"],
+    [116, "v1", "uint64"]
+  ],
+  "(top-level-login title-obs)": [
+    [61, "v1", "state"],
+    [65, "v1", "state"],
+    [69, "v1", "state"],
+    [75, "v1", "state"]
+  ],
+  "(code write-file drift-editor)": [
+    [51, "v1", "(pointer float)"]
+  ],
+  "(method 18 drift-editor)": [
+    [19, "v1", "(pointer float)"]
+  ],
+  "(method 11 cloth-system)": [
+    [1, "gp", "cloth-system"]
+  ],
+  "(method 12 race-line)": [
+    [6, "s3", "race-line"]
+  ],
+  "(method 14 race-line)": [
+    [6, "gp", "race-line"]
+  ],
+  "(method 79 v-yellow-guided-missile)": [
+    [52, "a0", "trsqv"]
+  ],
+  "find-instance-by-name-level": [
+    [11, "v1", "drawable-tree"]
+  ]
 }
