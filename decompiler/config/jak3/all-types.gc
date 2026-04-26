@@ -12609,13 +12609,13 @@
     (generate-verts (_type_ ocean-vert-array ocean-height-array) none) ;; 16
     (add-colors! (_type_ vector ocean-vertex) int) ;; 17
     (ocean-method-18 (_type_ (pointer ocean-colors) (pointer ocean-colors)) none) ;; 18
-    (init-buffer! (_type_ dma-buffer) none) ;; 19
+    (init-buffer! (_type_ dma-buffer) pointer) ;; 19
     (end-buffer! (_type_ dma-buffer) int) ;; 20
     (set-corners! (_type_ float float) float) ;; 21
     (ocean-near-add-call (_type_ dma-buffer int) int) ;; 22
     (ocean-near-add-call-flush (_type_ dma-buffer int) int) ;; 23
     (ocean-near-setup-constants (_type_ ocean-near-constants) int) ;; 24
-    (ocean-near-add-constants (_type_ dma-buffer) none) ;; 25
+    (ocean-near-add-constants (_type_ dma-buffer) pointer) ;; 25
     (ocean-near-add-heights (_type_ dma-buffer) int) ;; 26
     (ocean-near-add-matrices (_type_ dma-buffer vector) int) ;; 27
     (ocean-near-add-upload (_type_ dma-buffer uint uint) int) ;; 28
@@ -12659,7 +12659,7 @@
     (ocean-method-66 (_type_ dma-buffer) int) ;; 66
     (ocean-method-67 (_type_ dma-buffer) int) ;; 67
     (render-ocean-far (_type_ dma-buffer int) int) ;; 68
-    (draw-ocean-far (_type_ dma-buffer) none) ;; 69
+    (draw-ocean-far (_type_ dma-buffer) uint) ;; 69
     (ocean-texture-setup-constants (_type_ ocean-texture-constants) int) ;; 70
     (ocean-texture-add-constants (_type_ dma-buffer) int) ;; 71
     (ocean-texture-add-envmap (_type_ dma-buffer) int) ;; 72
@@ -18943,10 +18943,10 @@
   (:methods
     (new (symbol type lightning-spec process float) _type_) ;; 0
     (change-mode (_type_ lightning-mode) lightning-mode) ;; 9
-    (get-mode (_type_) lightning-mode) ;; 10
+    (get-mode (_type_) uint) ;; 10
     (set-point! (_type_ int vector) int) ;; 11
     (set-first-meet-point (_type_ vector) none) ;; 12
-    (set-last-meet-point (_type_ vector) none) ;; 13
+    (set-last-meet-point (_type_ vector) vector) ;; 13
     )
   )
 
@@ -21215,7 +21215,7 @@
     (overlap-test (_type_ collide-mesh-cache-tri vector) symbol) ;; 10
     (should-push-away-test (_type_ collide-mesh-cache-tri collide-tri-result vector float) float) ;; 11
     (sphere-on-platform-test (_type_ collide-mesh-cache-tri collide-tri-result vector float) float) ;; 12
-    (unpack-mesh-to-cache! (_type_ (inline-array collide-mesh-cache-tri) matrix) none) ;; 13
+    (unpack-mesh-to-cache! (_type_ (inline-array collide-mesh-cache-tri) int) none) ;; 13
     (collide-mesh-math-1 (_type_ object object) none) ;; 14
     (collide-mesh-math-2 (_type_ object object object) none) ;; 15
     )
@@ -21529,13 +21529,13 @@
     (fill-cache-for-shape (_type_ float collide-query) int) ;; 31
     (fill-cache-integrate-and-collide (_type_ vector collide-query meters) none) ;; 32
     (find-prim-by-id (_type_ uint) collide-shape-prim) ;; 33
-    (find-prim-by-id-logtest (_type_ uint) collide-shape-prim) ;; 34
-    (detect-riders! (_type_) symbol) ;; 35
+    (find-prim-by-id-logtest (_type_ uint) int) ;; 34
+    (detect-riders! (_type_) joint-control-status) ;; 35
     (build-bounding-box-for-shape (_type_ bounding-box float collide-spec) symbol) ;; 36
     (integrate-and-collide! (_type_ vector) none) ;; 37
     (find-collision-meshes (_type_) int) ;; 38
     (on-platform (_type_ collide-shape collide-query) symbol) ;; 39
-    (find-overlapping-shapes (_type_ overlaps-others-params) symbol) ;; 40
+    (find-overlapping-shapes (_type_ overlaps-others-params) object) ;; 40
     (shove-to-closest-point-on-path (_type_ attack-info float) int) ;; 41
     (should-push-away (_type_ collide-shape collide-query) symbol) ;; 42
     (pull-rider! (_type_ pull-rider-info) object) ;; 43
@@ -21549,7 +21549,7 @@
     (above-ground? (_type_ collide-query vector collide-spec float float float) symbol) ;; 51
     (water-info-init! (_type_ water-info collide-action) water-info) ;; 52
     (iterate-prims (_type_ (function collide-shape-prim none)) none) ;; 53
-    (pusher-init (_type_) none) ;; 54
+    (pusher-init (_type_) collide-shape) ;; 54
     )
   )
 
@@ -23544,7 +23544,7 @@
     (projectile-method-34 (_type_) symbol) ;; 34 ;; (kill-projectile! (_type_) symbol)
     (proj-event-handler (_type_ process int symbol event-message-block) object) ;; 35
     (handle-proj-hit! (_type_ process event-message-block) object) ;; 36
-    (deal-damage! (_type_ process event-message-block) symbol) ;; 37
+    (deal-damage! (_type_ process event-message-block) object) ;; 37
     (made-impact? (_type_) symbol) ;; 38
     (projectile-method-39 (_type_) int) ;; 39 ;; (play-impact-sound! (_type_) none)
     (projectile-method-40 (_type_) int) ;; 40
@@ -24144,7 +24144,7 @@
   :flag-assert         #xe00000034
   (:methods
     (perf-stat-method-9 () none) ;; 9 ;; (perf-stat-method-9 () none)
-    (print-to-stream (_type_ string basic) none) ;; 10
+    (print-to-stream (_type_ string basic) perf-stat) ;; 10
     (start-profiling! (_type_) none) ;; 11
     (stop-profiling! (_type_) none) ;; 12
     (update-wait-stats (_type_ uint uint uint) int) ;; 13
@@ -24332,8 +24332,8 @@
   :size-assert         #x190
   :flag-assert         #x1300000190
   (:methods
-    (birth (_type_) none) ;; 17
-    (deactivate-entities (_type_) none) ;; 18
+    (birth (_type_) bsp-header) ;; 17
+    (deactivate-entities (_type_) bsp-header) ;; 18
     )
   )
 
@@ -26243,8 +26243,8 @@
   (:methods
     (next-actor (_type_) entity-actor) ;; 27
     (prev-actor (_type_) entity-actor) ;; 28
-    (debug-print (_type_ symbol type) none) ;; 29
-    (toggle-status (_type_ entity-perm-status symbol) none) ;; 30
+    (debug-print (_type_ symbol type) entity-actor) ;; 29
+    (toggle-status (_type_ entity-perm-status symbol) entity-perm-status) ;; 30
     (get-simple-travel-vector (_type_ vector vector vector object float) nav-mesh) ;; 31
     (project-point-to-nav-mesh (_type_ vector vector nav-poly float) nav-poly) ;; 32
     )
@@ -27532,7 +27532,7 @@
   :flag-assert         #xc00000034
   (:methods
     (draw (_type_ dma-buffer level symbol) none) ;; 9
-    (hud-sprite-method-10 (_type_ dma-buffer level int int int int) object) ;; 10
+    (hud-sprite-method-10 (_type_ dma-buffer level int int int int) int) ;; 10
     (hud-sprite-method-11 (_type_ hud-sprite vector4w int int) int) ;; 11
     )
   )
@@ -27610,7 +27610,7 @@
     (draw (_type_) int) ;; 15
     (update-values! (_type_) int) ;; 16
     (init-callback (_type_) int) ;; 17
-    (event-callback (_type_ process int symbol event-message-block) object) ;; 18
+    (event-callback (_type_ process int symbol event-message-block) symbol) ;; 18
     (hud-method-19 (_type_) int) ;; 19
     (hud-method-20 (_type_) int) ;; 20
     (hud-method-21 (_type_) int) ;; 21
@@ -28094,7 +28094,7 @@
     )
   (:methods
     (init-defaults (_type_) object) ;; 24
-    (respond-to-cpad (_type_) object) ;; 25
+    (respond-to-cpad (_type_) int) ;; 25
     (gone? (_type_) object) ;; 26
     (can-go-back? (_type_) symbol) ;; 27
     (get-state-check-card (_type_ symbol) symbol) ;; 28
@@ -29423,11 +29423,11 @@
     (debug-draw (_type_) none) ;; 9
     (point-in-bsphere? (_type_ vector) symbol) ;; 10
     (find-poly-containing-point-1 (_type_ vector) nav-poly) ;; 11
-    (closest-point-on-mesh (_type_ vector vector nav-poly) nav-poly) ;; 12
+    (closest-point-on-mesh (_type_ vector vector nav-poly) float) ;; 12
     (find-nearest-poly-to-point (_type_ vector) nav-poly) ;; 13
     (project-point-onto-plane-of-poly (_type_ nav-poly vector vector vector) int) ;; 14
     (find-poly-containing-point-2 (_type_ vector) nav-poly) ;; 15
-    (is-above-poly-max-height? (_type_ vector float) symbol) ;; 16
+    (is-above-poly-max-height? (_type_ vector float) object) ;; 16
     (is-in-mesh? (_type_ vector float) symbol) ;; 17
     (avoid-spheres-1! (_type_ nav-avoid-spheres-params) symbol) ;; 18
     (avoid-spheres-2! (_type_ nav-avoid-spheres-params) symbol) ;; 19
@@ -29851,13 +29851,13 @@
     active ;; 29
     )
   (:methods
-    (rigid-body-object-method-30 (_type_) object) ;; 30
+    (rigid-body-object-method-30 (_type_) int) ;; 30
     (apply-gravity! (_type_ float) int) ;; 31
     (rigid-body-object-method-32 (_type_) int) ;; 32
     (alloc-rbody-control! (_type_ rigid-body-object-constants) int) ;; 33 ;; (init-skel-and-rigid-body (_type_) none)
     (init-collision! (_type_) int) ;; 34
     (init-rbody-control! (_type_) int) ;; 35
-    (go-idle (_type_) object) ;; 36 ;; (do-engine-sounds (_type_) none)
+    (go-idle (_type_) int) ;; 36 ;; (do-engine-sounds (_type_) none)
     (rigid-body-object-method-37 (_type_) int) ;; 37
     (rigid-body-object-method-38 (_type_) int) ;; 38
     (rbody-post (_type_) int) ;; 39
@@ -29866,7 +29866,7 @@
     (rigid-body-object-method-42 (_type_) int) ;; 42
     (rigid-body-object-method-43 (_type_) int) ;; 43
     (impulse-handler (_type_) int) ;; 44
-    (go-active (_type_) object) ;; 45
+    (go-active (_type_) int) ;; 45
     (apply-damage (_type_ float rigid-body-impact) int) ;; 46
     (impulse-force<-penetrate (_type_ rigid-body-impact attack-info penetrate) int) ;; 47
     (on-impact (_type_ rigid-body-impact) int) ;; 48
@@ -32177,11 +32177,11 @@
     (stop-str (_type_ gui-connection) int) ;; 11
     (gui-control-method-12 (_type_ process gui-channel gui-action string int float sound-id) sound-id) ;; 12
     (update (_type_ symbol) int) ;; 13
-    (lookup-gui-connection-id (_type_ string gui-channel gui-action) sound-id) ;; 14
+    (lookup-gui-connection-id (_type_ string gui-channel gui-action) int) ;; 14
     (lookup-gui-connection (_type_ process gui-channel string sound-id) gui-connection) ;; 15
     (set-action! (_type_ gui-action sound-id gui-channel gui-action string (function gui-connection symbol) process) int) ;; 16
-    (get-status (_type_ sound-id) gui-status) ;; 17 ;; (get-status (_type_ sound-id) gui-status)
-    (gui-control-method-18 (_type_ gui-channel) symbol) ;; 18
+    (get-status (_type_ sound-id) int) ;; 17 ;; (get-status (_type_ sound-id) gui-status)
+    (gui-control-method-18 (_type_ gui-channel) object) ;; 18
     (handle-command-list (_type_ gui-channel gui-connection) symbol) ;; 19
     (sound-params-set! (_type_ sound-id symbol int int int float) gui-connection) ;; 20
     (gui-control-method-21 (_type_ gui-connection) int) ;; 21
@@ -35428,7 +35428,7 @@
     (lightning-bolt-method-19 (_type_ vector int int matrix float float) none) ;; 19
     (lightning-bolt-method-20 (_type_ int lightning-span-internal) vector) ;; 20
     (lightning-bolt-method-21 (_type_ int int float) int) ;; 21
-    (lightning-bolt-method-22 (_type_) none) ;; 22
+    (lightning-bolt-method-22 (_type_) number) ;; 22
     )
   )
 
@@ -35579,7 +35579,7 @@
     (drag! (_type_ carry-info) int) ;; 11
     (drop-impl! (_type_ carry-info) int) ;; 12
     (carry-info-method-13 (_type_) symbol) ;; 13
-    (carry! (_type_ carry-info vector vector) none) ;; 14
+    (carry! (_type_ carry-info vector vector) vector) ;; 14
     (drop! (_type_ carry-info) none) ;; 15
     (translate! (_type_) symbol) ;; 16
     )
@@ -36605,7 +36605,7 @@
     exit ;; 22, old: (exit () _type_ :state)
     )
   (:methods
-    (init (_type_) none) ;; 23
+    (init (_type_) remote) ;; 23
     (get-track-pt-and-scale (_type_ vector) float) ;; 24
     (post-common (_type_) int) ;; 25
     )
@@ -38880,7 +38880,7 @@
     )
   (:methods
     (init-common (_type_ entity-actor pickup-type float) object) ;; 29
-    (initialize-effects (_type_ pickup-type) none) ;; 30
+    (initialize-effects (_type_ pickup-type) ambient-sound) ;; 30
     (go-to-initial-state (_type_) object) ;; 31
     (initialize-options (_type_ int float fact-info) collectable) ;; 32
     (initialize-allocations (_type_) int) ;; 33
@@ -39275,8 +39275,8 @@
     fall ;; 35
     )
   (:methods
-    (init! (_type_ entity-actor) none) ;; 36
-    (init-skel! (_type_) none) ;; 37
+    (init! (_type_ entity-actor) crate) ;; 36
+    (init-skel! (_type_) crate) ;; 37
     (init-collision! (_type_) int) ;; 38
     (params-set! (_type_ symbol symbol) none) ;; 39
     (go-initial-state (_type_) int) ;; 40
@@ -40112,7 +40112,7 @@
     (save-region! (_type_ editable-array int int) symbol) ;; 9 ;; (editable-region-method-9 (_type_ editable-array int int) symbol)
     (editable-region-method-10 (_type_ int) symbol) ;; 10 ;; (editable-region-method-10 (_type_ int) symbol)
     (print-region-info (_type_ vector int) int) ;; 11 ;; (editable-region-method-11 (_type_ vector int) none)
-    (editable-region-method-12 (_type_) editable-filter) ;; 12 ;; (editable-region-method-12 (_type_) editable-filter)
+    (editable-region-method-12 (_type_) int) ;; 12 ;; (editable-region-method-12 (_type_) editable-filter)
     )
   )
 
@@ -40844,7 +40844,7 @@
     (nav-mesh-poly-method-11 (_type_ int) int) ;; 11
     (nav-mesh-poly-method-12 (_type_ int) int) ;; 12
     (nav-mesh-poly-method-13 (_type_ int) int) ;; 13
-    (nav-mesh-poly-method-14 (_type_ int int) object) ;; 14
+    (nav-mesh-poly-method-14 (_type_ int int) int) ;; 14
     )
   )
 
@@ -41563,7 +41563,7 @@
     (alloc-root! (_type_) none) ;; 25
     (water-anim-init! (_type_) none) ;; 26
     (stub (_type_) symbol) ;; 27
-    (set-offset-and-look! (_type_) none) ;; 28
+    (set-offset-and-look! (_type_) quaternion) ;; 28
     )
   )
 
@@ -41596,7 +41596,7 @@
     idle ;; 20
     )
   (:methods
-    (init! (_type_ (inline-array vector) float) none) ;; 21
+    (init! (_type_ (inline-array vector) int) none) ;; 21
     )
   )
 
@@ -42764,7 +42764,7 @@
     (do-collision-response (_type_ joint-exploder-list) int) ;; 22
     (init-joint-list (_type_) int) ;; 23
     (remove-from-list-and-reset "Remove a joint from the list and clear its transform" (_type_ joint-exploder-list int) int) ;; 24
-    (final-adjust (_type_ joint-exploder-list int) int) ;; 25
+    (final-adjust (_type_ joint-exploder-list int) symbol) ;; 25
     (integrate-and-kill (_type_ joint-exploder-list) int) ;; 26
     (remove-joint-from-list "Remove a joint from the linked list and invalidate the bbox." (_type_ joint-exploder-list int) int) ;; 27
     (adjust-bbox-for-limits-along-axis (_type_ joint-exploder-list int) joint-exploder-list) ;; 28
@@ -42953,8 +42953,8 @@
     hidden ;; 22
     )
   (:methods
-    (init-skel-and-collide! (_type_) none) ;; 23
-    (init-defaults! (_type_) none) ;; 24
+    (init-skel-and-collide! (_type_) draw-control) ;; 23
+    (init-defaults! (_type_) float) ;; 24
     (eval-on-notice (_type_) continue-point) ;; 25
     )
   )
@@ -43779,7 +43779,7 @@
     (spawner-do-jump (_type_ battle-spawner) int) ;; 44
     (spawner-hittable? (_type_ battle-spawner) symbol) ;; 45
     (spawner-in-intro? (_type_ battle-spawner) symbol) ;; 46
-    (set-battle-music (_type_) none) ;; 47
+    (set-battle-music (_type_) battle-flags) ;; 47
     (unset-battle-music (_type_) int) ;; 48
     (update-allies-list (_type_) int) ;; 49
     (beaten? (_type_) symbol) ;; 50
@@ -52475,7 +52475,7 @@
     )
   (:methods
     (conveyor-method-21 (_type_) float) ;; 21
-    (get-skel (_type_) art-group) ;; 22
+    (get-skel (_type_) symbol) ;; 22
     (alloc-trsqv! (_type_) int) ;; 23
     (init-fields! (_type_) int) ;; 24
     (alloc-sound! (_type_) object) ;; 25
@@ -54049,7 +54049,7 @@
     (vehicle-method-140 (_type_) int) ;; 140
     (vehicle-method-141 (_type_) symbol) ;; 141
     (vehicle-method-142 (_type_) none) ;; 142
-    (vehicle-method-143 (_type_ process) object) ;; 143
+    (vehicle-method-143 (_type_ process) int) ;; 143
     (vehicle-method-144 (_type_) int) ;; 144
     (vehicle-method-145 (_type_) int) ;; 145
     (vehicle-method-146 (_type_ vector) int) ;; 146
@@ -54985,7 +54985,7 @@
     (get-params (_type_) elec-gate-params) ;; 24
     (elec-gate-method-25 (_type_) int) ;; 25 ;; (set-palette! (_type_) none)
     (elec-gate-method-26 (_type_) int) ;; 26 ;; (set-state! (_type_) none)
-    (go-initial-state (_type_) object) ;; 27
+    (go-initial-state (_type_) int) ;; 27
     (spawn-particles (_type_ sparticle-launch-control) int) ;; 28 ;; (set-elec-scale-if-close! (_type_ float) none)
     (set-elec-scale! (_type_ float) int) ;; 29
     (elec-gate-method-30 (_type_ float) int) ;; 30
@@ -56673,8 +56673,8 @@
     (debug-draw-slice (_type_ int) symbol) ;; 11
     (debug-draw-edges (_type_) int) ;; 12
     (race-mesh-method-13 (_type_ race-mesh-slice-query) int) ;; 13
-    (race-mesh-method-14 (_type_ race-mesh-slice-query) none) ;; 14
-    (race-mesh-method-15 (_type_ int race-mesh-slice-query) none) ;; 15
+    (race-mesh-method-14 (_type_ race-mesh-slice-query) float) ;; 14
+    (race-mesh-method-15 (_type_ int race-mesh-slice-query) vector) ;; 15
     (race-mesh-method-16 (_type_ race-mesh-slice-query) int) ;; 16
     (race-mesh-method-17 (_type_ race-mesh-slice-query) symbol) ;; 17
     (race-mesh-method-18 (_type_ race-mesh-hash-search int int race-mesh-slice-query) symbol) ;; 18
@@ -59140,7 +59140,7 @@
   (:methods
     (reset-task! (_type_) none) ;; 9
     (ai-task-method-10 (_type_ bot) int) ;; 10
-    (ai-task-method-11 (_type_ bot) object) ;; 11
+    (ai-task-method-11 (_type_ bot) int) ;; 11
     )
   )
 
