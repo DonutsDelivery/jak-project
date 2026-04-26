@@ -17533,6 +17533,29 @@
 (defenum cloth-flag
   :type uint64
   :bitfield #t
+  (no-gravity 0)
+  (use-wind 1)
+  (need-reset 2)
+  (double-sided 3)
+  (suppress-mesh-failure 4)
+  (active 5)
+  (check-ground 6)
+  (flip-normals 7)
+  (wraps 8)
+  (inited 9)
+  (no-draw 10)
+  (need-setup 11)
+  (use-global-wind 12)
+  (autogen-uvs 13)
+  (use-momentum 14)
+  (use-parent-momentum 15)
+  (riding 16)
+  (hidden 17)
+  (local-space 18)
+  (local-space-xyz 19)
+  (local-space-y 20)
+  (use-old-resets 21)
+  (using-alt-tex 22)
   )
 ;; ---cloth-art-h:cloth-flag
 
@@ -46349,9 +46372,9 @@
 
 (deftype wvehicle (vehicle)
   ((wvehicle-pad uint8 2523 :offset 2137))
-  :method-count-assert 204
+  :method-count-assert 272
   :size-assert         #x1234
-  :flag-assert         #xcc11b01234
+  :flag-assert         #x11011b01234
   )
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wcar-base                      ;;
