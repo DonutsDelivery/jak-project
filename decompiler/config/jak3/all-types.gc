@@ -4454,7 +4454,7 @@
 (define-extern reset-vif1-path (function none))
 (define-extern ultimate-memcpy (function pointer pointer uint none))
 (define-extern symlink2 (function none))
-(define-extern symlink3 (function none))
+(define-extern symlink3 (function object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dma-buffer                     ;;
