@@ -49669,5 +49669,17 @@
   ],
   "splash-spawn": [
     [16, "v1", "part-tracker-init-params"]
+  ],
+  "camera-fov-frame": [
+    [87, "a0", "vector4w"],
+    [128, "a0", "vector4w"],
+    [169, "a0", "vector4w"],
+    [7, "a0", "cam-dbg-scratch"],
+    [18, "a0", "cam-dbg-scratch"],
+    [29, "a0", "cam-dbg-scratch"],
+    [33, "a2", "cam-dbg-scratch"],
+    [36, "a3", "cam-dbg-scratch"],
+    [39, "t0", "cam-dbg-scratch"],
+    [45, "a0", "cam-dbg-scratch"]
   ]
 }

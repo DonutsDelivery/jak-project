@@ -21726,17 +21726,15 @@
 
 
 
-#|
 (deftype net-type-lookup-response (structure)
-  ((asz-ipaddresses uint8 16 :offset-assert 0)
-   (n-ipaddresses   uint32     :offset-assert 256)
-   (error-code      int32      :offset-assert 260)
+  ((asz-ipaddresses uint8 256 :offset-assert 0) ;; char[256] IP address strings
+   (n-ipaddresses   uint32    :offset-assert 256)
+   (error-code      int32     :offset-assert 260)
    )
   :method-count-assert 9
   :size-assert         #x108
   :flag-assert         #x900000108
   )
-|#
 
 
 
@@ -21942,19 +21940,17 @@
 
 
 
-#|
 (deftype net-rgbarray (structure)
-  ((cb-size   int32      :offset-assert 0)
-   (line-size int32      :offset-assert 4)
-   (xsize     int32      :offset-assert 8)
-   (ysize     int32      :offset-assert 12)
-   (data uint8 16 :offset-assert 16)
+  ((cb-size   int32    :offset-assert 0)
+   (line-size int32    :offset-assert 4)
+   (xsize     int32    :offset-assert 8)
+   (ysize     int32    :offset-assert 12)
+   (data      uint8 64 :offset-assert 16) ;; 64-byte pixel data buffer
    )
   :method-count-assert 9
   :size-assert         #x50
   :flag-assert         #x900000050
   )
-|#
 
 ;; DEAD: network infrastructure
 
@@ -21962,19 +21958,16 @@
 
   
 
-#|
 (deftype net-stream-media-video-play-data (structure)
-  ((client-index     int32         :offset-assert 0)
-   (p-rgbarray       net-rgbarray  :offset-assert 4)
-   (b-data-processed int32         :offset-assert 8)
-   (p-user-data      basic         :offset-assert 12)
+  ((client-index     int32        :offset-assert 0)
+   (p-rgbarray       net-rgbarray :offset-assert 4)
+   (b-data-processed int32        :offset-assert 8)
+   (p-user-data      basic        :offset-assert 12)
    )
   :method-count-assert 9
   :size-assert         #x10
   :flag-assert         #x900000010
-  ;; field p-user-data uses ~A with a signed load.
   )
-|#
 
   
 
@@ -22557,7 +22550,6 @@
 
   
 
-#|
 (deftype net-lanfind-exchange-callback-out-args (structure)
   ((b-respond-to-sender int32            :offset-assert 0)
    (details             net-data :inline :offset-assert 4)
@@ -22566,7 +22558,6 @@
   :size-assert         #xc
   :flag-assert         #x90000000c
   )
-|#
 
   
 ;; DEAD: network infrastructure
@@ -22575,7 +22566,6 @@
 
   
 
-#|
 (deftype net-lanfind-in-params (structure)
   ((b-default-set        int32            :offset-assert 0)
    (session-type         int32            :offset-assert 4)
@@ -22589,7 +22579,6 @@
   :size-assert         #x20
   :flag-assert         #x900000020
   )
-|#
 
   
 
