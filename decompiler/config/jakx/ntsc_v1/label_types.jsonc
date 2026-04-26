@@ -233,8 +233,10 @@
       true
     ],
     ["L697", "uint64", true],
+    ["L696", "uint64", true],
     ["L690", "uint64", true],
-    ["L565", "uint64", true]
+    ["L565", "uint64", true],
+    ["L564", "uint64", true]
   ],
   "bones": [
     [
@@ -399,7 +401,8 @@
       "uint64",
       true
     ],
-    ["L688", "uint64", true]
+    ["L688", "uint64", true],
+    ["L691", "uint64", true]
   ],
   "drift": [
     [
@@ -699,6 +702,7 @@
       "medius-cached-info-clan",
       true
     ],
+    ["L4", "medius-cached-info-clan", false],
     ["L6", "medius-cached-info-clan", false],
     [
       "L7",
@@ -1179,7 +1183,8 @@
       "uint64",
       true
     ],
-    ["L538", "uint64", true]
+    ["L538", "uint64", true],
+    ["L537", "uint64", true]
   ],
   "wvehicle-hud": [
     ["L660", "uint64", true],
@@ -1257,7 +1262,8 @@
       "L126",
       "cloth-params"
     ],
-    ["L127", "cloth-params"]
+    ["L127", "cloth-params"],
+    ["L124", "cloth-params"]
   ],
   "mem-buffer-h": [
     ["L71", "uint8", 1024],
@@ -1583,7 +1589,8 @@
     ["L63", "vector4w"]
   ],
   "dynamic-patch": [
-    ["L32", "uint64", true]
+    ["L32", "uint64", true],
+    ["L33", "uint64", true]
   ],
   "sparticle-launcher": [
     ["L406", "particle-birth-work"]
