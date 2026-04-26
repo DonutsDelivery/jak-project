@@ -19756,6 +19756,8 @@
    (driver-info2                         uint32                         2       :offset 1696)
    (driver-unlock                        uint32                                 :offset 1696)
    (driver-award                         uint32                                 :offset 1700)
+   (civilians-killed float :offset 324)
+   (skill float :offset 108)
    )
   :method-count-assert 31
   :size-assert         #x6a8
