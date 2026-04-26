@@ -1060,18 +1060,19 @@
    (pid int32)
    (main-thread      cpu-thread                                                        :offset-assert 56) ;; guessed by decompiler
    (top-thread       cpu-thread                                                        :offset-assert 60) ;; guessed by decompiler
-   (entity           entity-actor                                                      :offset-assert 64) ;; guessed by decompiler
-   (state            state                                                             :offset-assert 68) ;; jakx: state@68, level absent (gstate IR2 op59)
-   (prev-state       state                                                             :offset-assert 72) ;; binary@72
-   (next-state       state                                                             :offset-assert 76) ;; binary@76 (cam-combiner sw 76 before enter-state)
-   (state-stack      (array state)                                                     :offset-assert 80) ;; binary@80
-   (trans-hook       function                                                          :offset-assert 84) ;; binary@84 (gstate IR2 sw #f,84)
-   (post-hook        function                                                          :offset-assert 88) ;; binary@88
-   (event-hook       function                                                          :offset-assert 92) ;; binary@92 (simplified type to avoid type-prop regression)
-   (allocated-length int32                                                             :offset-assert 96) ;; binary@96
-   (heap-base        pointer                                                           :offset 112) ;; guessed by decompiler
-   (heap-top         pointer                                                           :offset-assert 116) ;; guessed by decompiler
-   (heap-cur         pointer                                                           :offset-assert 120) ;; guessed by decompiler
+   (entity           entity-actor                                                      :offset-assert 64) ;; MIPS 60 ✓
+   (level            level                                                             :offset-assert 68) ;; jak3@60+8=68, MIPS 64
+   (state            state                                                             :offset-assert 72) ;; jak3@64+8=72, MIPS 68
+   (prev-state       state                                                             :offset-assert 76) ;; jak3@68+8=76, MIPS 72
+   (next-state       state                                                             :offset-assert 80) ;; jak3@72+8=80, MIPS 76 ✓ (sw 76(s6) before enter-state)
+   (state-stack      (array state)                                                     :offset-assert 84) ;; jak3@76+8=84, MIPS 80
+   (trans-hook       function                                                          :offset-assert 88) ;; jak3@80+8=88, MIPS 84 ✓ (gstate sw #f,84)
+   (post-hook        function                                                          :offset-assert 92) ;; jak3@84+8=92, MIPS 88 ✓
+   (event-hook       (function process int symbol event-message-block object)         :offset-assert 96) ;; jak3@88+8=96, MIPS 92 ✓
+   (allocated-length int32                                                             :offset-assert 100) ;; jak3@92+8=100
+   (heap-base        pointer                                                           :offset-assert 104) ;; jak3@96+8=104
+   (heap-top         pointer                                                           :offset-assert 108) ;; jak3@100+8=108
+   (heap-cur         pointer                                                           :offset-assert 112) ;; jak3@104+8=112
    (stack-frame-top  stack-frame                                                       :offset-assert 124) ;; guessed by decompiler
    (connection-list  connectable                                              :inline  :offset-assert 128)
    (stack            uint8                                                    :dynamic :offset-assert 144) ;; guessed by decompiler
