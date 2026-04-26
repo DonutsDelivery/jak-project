@@ -48642,20 +48642,13 @@
     wait-enter ;; 50
     enter ;; 51
     running ;; 52
-    ;; binary evidence (menu2-COMMON-GAME_ir2.asm lines 1352/1384/1394/1401):
-    ;; (method-set! base-menu N gp-X) where gp-X is `(new 'static 'state :name 'NAME)`.
-    ;; Each slot in this group is a virtual state, not a function.
-    hide ;; 53
     )
   (:methods
+    (base-menu-method-53 (_type_) none) ;; 53
     (base-menu-method-54 (_type_) none) ;; 54
-    )
-  (:state-methods
-    exit ;; 55
-    die ;; 56
-    dummy ;; 57
-    )
-  (:methods
+    (base-menu-method-55 (_type_) none) ;; 55
+    (base-menu-method-56 (_type_) none) ;; 56
+    (base-menu-method-57 (_type_) none) ;; 57
     (base-menu-method-58 (_type_) none) ;; 58
     (base-menu-method-59 (_type_) int) ;; 59
     (base-menu-method-60 (_type_) int) ;; 60
@@ -59587,14 +59580,14 @@
   
 (deftype dropdown-fade (dropdown-item)
   ()
-  :method-count-assert 70
+  :method-count-assert 71
   :size-assert         #x250
-  :flag-assert         #x4601c00250
+  :flag-assert         #x4701c00250
   (:state-methods
-    ;; enter@51 + exit@55 both inherited as states from base-menu (cycle 28).
-    ;; Were ADDs, now overrides. dropdown-fade adds zero new slots.
+    ;; enter@51 inherited as state from base-menu (cycle 28). Was ADD,
+    ;; now override (no slot added). Only exit@55 still ADDs a slot.
     enter ;; 51 (override)
-    exit ;; 55 (override)
+    exit ;; 55
     )
   )
   
@@ -59604,9 +59597,9 @@
   
 (deftype dropdown-city (dropdown-fade)
   ()
-  :method-count-assert 70
+  :method-count-assert 71
   :size-assert         #x250
-  :flag-assert         #x4601c00250
+  :flag-assert         #x4701c00250
   )
   
 
@@ -59615,9 +59608,9 @@
   
 (deftype dropdown-venue (dropdown-fade)
   ()
-  :method-count-assert 70
+  :method-count-assert 71
   :size-assert         #x250
-  :flag-assert         #x4601c00250
+  :flag-assert         #x4701c00250
   )
   
 
@@ -59627,9 +59620,9 @@
 (deftype dropdown-task (dropdown-fade)
   ((medal-msg-start-time uint32  :offset-assert 592)
    )
-  :method-count-assert 70
+  :method-count-assert 71
   :size-assert         #x254
-  :flag-assert         #x4601d00254
+  :flag-assert         #x4701d00254
   )
   
 
