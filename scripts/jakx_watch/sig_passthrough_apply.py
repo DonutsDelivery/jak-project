@@ -234,6 +234,93 @@ def build_new_extern_line(
 
 
 # ---------------------------------------------------------------------------
+# Cross-port type-guesser
+# ---------------------------------------------------------------------------
+# Goal: replace plain `object` placeholders with real param types when a
+# sibling game (jak2/jak3) declares the same method on a same-named type.
+# Exact-name match only — no fuzzy logic. Whatever doesn't match falls back
+# to `object`.
+
+# Cache of (game → list[str] of all-types.gc lines) so we don't re-read
+# the multi-megabyte file once per candidate.
+_ALL_TYPES_CACHE: dict[str, list[str]] = {}
+
+
+def _load_all_types(game: str) -> list[str] | None:
+    if game in _ALL_TYPES_CACHE:
+        return _ALL_TYPES_CACHE[game] or None
+    path = ROOT / "decompiler" / "config" / game / "all-types.gc"
+    if not path.exists():
+        _ALL_TYPES_CACHE[game] = []
+        return None
+    lines = path.read_text(errors="replace").splitlines()
+    _ALL_TYPES_CACHE[game] = lines
+    return lines
+
+
+def lookup_sibling_method_params(
+    type_name: str, method_num: int, sibling_games: list[str],
+) -> list[str] | None:
+    """Look up (method N TYPE) in each sibling game's all-types.gc.
+
+    Returns the non-this param atoms from the first sibling that has it,
+    or None if no sibling has the method. Sibling order is priority order.
+    """
+    for sg in sibling_games:
+        lines = _load_all_types(sg)
+        if lines is None:
+            continue
+        idx = find_method_in_deftype(lines, type_name, method_num)
+        if idx is None:
+            continue
+        m = RE_METHOD_LINE.match(lines[idx])
+        if not m:
+            continue
+        atoms = split_param_atoms(m.group("params"))
+        return atoms
+    return None
+
+
+def lookup_sibling_extern_params(
+    func_name: str, sibling_games: list[str],
+) -> list[str] | None:
+    """Look up (define-extern FUNC (function ARGS RET)) in each sibling.
+
+    Returns ARGS (excluding RET). None if not found.
+    """
+    for sg in sibling_games:
+        lines = _load_all_types(sg)
+        if lines is None:
+            continue
+        idx = find_function_def_extern(lines, func_name)
+        if idx is None:
+            continue
+        m = re.match(
+            r"^(\(define-extern\s+\S+\s+\(function)(?P<args>[^()]*)\)\)$",
+            lines[idx].rstrip("\n"),
+        )
+        if not m:
+            continue
+        atoms = split_param_atoms(m.group("args"))
+        if len(atoms) < 1:
+            continue
+        return atoms[:-1]  # drop return type
+    return None
+
+
+def sibling_games_for(game: str) -> list[str]:
+    """Priority order: closest-relative first.
+
+    jakx ← jak3 ← jak2 ← jak1.  jak3 ← jak2 ← jak1.  etc.
+    """
+    chain = ["jakx", "jak3", "jak2", "jak1"]
+    if game not in chain:
+        return []
+    i = chain.index(game)
+    return chain[i + 1:]
+
+
+# ---------------------------------------------------------------------------
 # Candidate planning
 # ---------------------------------------------------------------------------
 
@@ -255,8 +342,17 @@ def plan_edits(
     candidates: list[dict],
     all_types_lines: list[str],
     skip_no_sig: bool = True,
+    sibling_games: list[str] | None = None,
 ) -> list[dict]:
-    """For each candidate, compute the (line_index, new_line, ...) change."""
+    """For each candidate, compute the (line_index, new_line, ...) change.
+
+    sibling_games:
+        If non-empty, look up missing param types from these games' all-types.gc
+        (priority order). Falls back to `object` for params not found.
+        If empty/None, all fillers are `object` (legacy behavior).
+    """
+    if sibling_games is None:
+        sibling_games = []
     plans: list[dict] = []
     for c in candidates:
         kind, mnum, name = parse_func_key(c["function"])
@@ -266,8 +362,27 @@ def plan_edits(
                 if skip_no_sig:
                     continue
                 continue
+            fillers = None
+            sibling_match = False
+            if sibling_games:
+                sib = lookup_sibling_method_params(name, mnum, sibling_games)
+                if sib is not None:
+                    # Existing local atoms: derive from the line itself so we
+                    # only fill the *new* slots beyond what's already there.
+                    m = RE_METHOD_LINE.match(all_types_lines[idx])
+                    local_atoms = split_param_atoms(m.group("params")) if m else []
+                    n_have = len(local_atoms)
+                    needed = c["min_params_needed"]
+                    # Use sibling atoms in positions [n_have .. needed)
+                    if len(sib) >= needed:
+                        fillers = sib[n_have:needed]
+                        sibling_match = True
+                    elif len(sib) > n_have:
+                        # partial: use what we can, pad rest with object
+                        fillers = sib[n_have:] + ["object"] * (needed - len(sib))
+                        sibling_match = True
             built = build_new_method_line(
-                all_types_lines[idx], c["min_params_needed"]
+                all_types_lines[idx], c["min_params_needed"], fillers=fillers
             )
             if not built:
                 continue
@@ -279,14 +394,34 @@ def plan_edits(
                 "old_line": all_types_lines[idx],
                 "new_line": new_line,
                 "n_added": n_added,
+                "sibling_match": sibling_match,
             })
         else:
             # plain function: try define-extern
             idx = find_function_def_extern(all_types_lines, name)
             if idx is None:
                 continue
+            fillers = None
+            sibling_match = False
+            if sibling_games:
+                sib = lookup_sibling_extern_params(name, sibling_games)
+                if sib is not None:
+                    line = all_types_lines[idx].rstrip("\n")
+                    mm = re.match(
+                        r"^(\(define-extern\s+\S+\s+\(function)(?P<args>[^()]*)\)\)$",
+                        line,
+                    )
+                    local_atoms = split_param_atoms(mm.group("args"))[:-1] if mm else []
+                    n_have = len(local_atoms)
+                    needed = c["min_params_needed"]
+                    if len(sib) >= needed:
+                        fillers = sib[n_have:needed]
+                        sibling_match = True
+                    elif len(sib) > n_have:
+                        fillers = sib[n_have:] + ["object"] * (needed - len(sib))
+                        sibling_match = True
             built = build_new_extern_line(
-                all_types_lines[idx], c["min_params_needed"]
+                all_types_lines[idx], c["min_params_needed"], fillers=fillers,
             )
             if not built:
                 continue
@@ -298,6 +433,7 @@ def plan_edits(
                 "old_line": all_types_lines[idx],
                 "new_line": new_line,
                 "n_added": n_added,
+                "sibling_match": sibling_match,
             })
     # Sort by file (deterministic) then by min_params_needed desc
     plans.sort(key=lambda p: (-p["min_params_needed"], p["function"]))
@@ -329,6 +465,10 @@ def main() -> int:
                     help="Auto-commit if guard passes")
     ap.add_argument("--err-slack", type=int, default=0)
     ap.add_argument("--decomp-out", default=None)
+    ap.add_argument("--no-cross-port", action="store_true",
+                    help="Disable sibling-game param lookup (fallback: `object`)")
+    ap.add_argument("--cross-port-only", action="store_true",
+                    help="Only apply edits where a sibling-game signature was found")
     args = ap.parse_args()
 
     cfg = paths_for(args.game)
@@ -351,13 +491,22 @@ def main() -> int:
     all_types_lines = all_types_path.read_text(errors="replace").splitlines(keepends=True)
     # build_field_index expects lines without keepends in place; preserve newlines
     # for write-out fidelity.
-    plans_all = plan_edits(cands, [l.rstrip("\n") for l in all_types_lines])
-    print(f"{len(plans_all)} fixable")
+    siblings = [] if args.no_cross_port else sibling_games_for(args.game)
+    plans_all = plan_edits(
+        cands, [l.rstrip("\n") for l in all_types_lines], sibling_games=siblings,
+    )
+    n_with_sibling = sum(1 for p in plans_all if p.get("sibling_match"))
+    print(f"{len(plans_all)} fixable ({n_with_sibling} with sibling sig)")
+
+    if args.cross_port_only:
+        plans_all = [p for p in plans_all if p.get("sibling_match")]
+        print(f"--cross-port-only: filtered to {len(plans_all)}")
 
     plans = plans_all[: args.top]
     print(f"\nProposing {len(plans)} edits:")
     for p in plans[:30]:
-        print(f"  {p['function']}  +{p['n_added']} (need a{ARG_REGS.index(p['missing_reg'])})")
+        tag = "[sib]" if p.get("sibling_match") else "[obj]"
+        print(f"  {tag} {p['function']}  +{p['n_added']} (need a{ARG_REGS.index(p['missing_reg'])})")
     if len(plans) > 30:
         print(f"  ... ({len(plans) - 30} more)")
 
