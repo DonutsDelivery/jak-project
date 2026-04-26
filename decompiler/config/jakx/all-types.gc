@@ -15186,7 +15186,7 @@
 
 
 (define-extern *profile-spec-array* (inline-array profile-spec)) ;; (inline-array profile-spec)
-(define-extern *profile-translate-array* (pointer uint64)) ;; (pointer uint64)
+(define-extern *profile-translate-array* (pointer uint8)) ;; byte index array
 (define-extern *profile-work* profile-work) ;; profile-work
 (define-extern *profile-x* int) ;; int
 (define-extern *profile-y* int) ;; int
@@ -37684,7 +37684,7 @@
 
 (define-extern *fog-texture-tbp* object)
 (define-extern fog-texture-anim-init (function texture-anim int))
-(define-extern fog-texture-anim-init2 (function int none))
+(define-extern fog-texture-anim-init2 (function texture-anim none))
 (define-extern *fog-texture-work* fog-texture-work) ;; fog-texture-work
 (define-extern real-fog-texture-anim-func (function dma-buffer texture-anim int))
 (define-extern fog-texture-anim-func (function dma-buffer texture-anim int))
@@ -44194,6 +44194,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-mgr-medius-cache-h         ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 
 (deftype medius-cached-info (basic)
@@ -51861,36 +51862,39 @@
 
 
 (deftype driver (process-focusable)
-  (;; offsets derived from ntsc_v1 binary (process-nettable is 4 bytes smaller than jak3)
-   (info-skel          basic               :offset 252)
-   (info-turn-back     int8                :offset 256)
-   (info-turn-front    int8                :offset 257)
-   (info-up-down       int8                :offset 258)
-   (info-intro         uint8  4            :offset 259)
-   (info-head-node     int8                :offset 263)
-   (info-arm0-node     int8                :offset 264)
-   (info-arm1-node     int8                :offset 265)
-   (info-arm0-dist     float               :offset 268)
-   (info-arm1-dist     float               :offset 272)
-   (vehicle            uint8       8       :offset 276) ;; uint64 but 4-byte aligned — skip GOAL align check
-   (speech-time        uint8       8       :offset 284) ;; uint64 but 4-byte aligned
-   (driver-unk292      uint8       8       :offset 292)
-   (anim-vel           uint8       16      :offset 300) ;; vector inline, not 16-byte aligned at 300
-   (anim-pos           uint8       16      :offset 316) ;; vector inline, not 16-byte aligned at 316
-   (turn-back-anim     int8                :offset 332)
-   (turn-front-anim    int8                :offset 333)
-   (up-down-anim       int8                :offset 334)
-   (intro-anim         uint8       4       :offset 335)
-   (jmod-head          basic               :offset 340)
-   (arm-ik             uint8       12      :offset 344)
-   (looking-at         uint8       8       :offset 356) ;; uint64 but 4-byte aligned
-   (looking-at-timeout int32               :offset 364)
-   (helmet             helmet      :inline :offset 368)
-   (driver-tail        uint8       4       :offset 384)
+  (;; GOAL_offset = MIPS_offset + 4 (BasicType::get_offset() correction).
+   ;; process-focusable ends at GOAL 256; driver fields start there.
+   ;; info-head-node/arm0/arm1-node were already at correct GOAL offsets (263/264/265).
+   ;; helmet requires GOAL 16B alignment: first slot ≥ 372 = 384 (accepts GOAL align, MIPS 380).
+   (info-skel          basic               :offset 256) ;; MIPS 252
+   (info-turn-back     int8                :offset 260) ;; MIPS 256
+   (info-turn-front    int8                :offset 261) ;; MIPS 257
+   (info-up-down       int8                :offset 262) ;; MIPS 258
+   (info-head-node     int8                :offset 263) ;; MIPS 259
+   (info-arm0-node     int8                :offset 264) ;; MIPS 260
+   (info-arm1-node     int8                :offset 265) ;; MIPS 261
+   (info-intro         uint8  4            :offset 266) ;; MIPS 262-265
+   (info-arm0-dist     float               :offset 272) ;; MIPS 268
+   (info-arm1-dist     float               :offset 276) ;; MIPS 272
+   (vehicle            uint8       8       :offset 280) ;; uint64 but 4-byte aligned — MIPS 276
+   (speech-time        uint8       8       :offset 288) ;; uint64 but 4-byte aligned — MIPS 284
+   (driver-unk292      uint8       8       :offset 296) ;; MIPS 292
+   (anim-vel           uint8       16      :offset 304) ;; vector inline, not 16-byte aligned at 304 — MIPS 300
+   (anim-pos           uint8       16      :offset 320) ;; vector inline, not 16-byte aligned at 320 — MIPS 316
+   (turn-back-anim     int8                :offset 336) ;; MIPS 332
+   (turn-front-anim    int8                :offset 337) ;; MIPS 333
+   (up-down-anim       int8                :offset 338) ;; MIPS 334
+   (intro-anim         uint8       4       :offset 339) ;; MIPS 335
+   (jmod-head          basic               :offset 344) ;; MIPS 340
+   (arm-ik             uint8       12      :offset 348) ;; MIPS 344
+   (looking-at         uint8       8       :offset 360) ;; uint64 but 4-byte aligned — MIPS 356
+   (looking-at-timeout int32               :offset 368) ;; MIPS 364
+   (helmet             helmet      :inline :offset 384) ;; MIPS 368 (16B mem-aligned; GOAL 384 = next 16B GOAL slot)
+   (driver-tail        uint8       4       :offset 400) ;; MIPS 396
    )
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   (:state-methods
     idle  ;; 59
     intro ;; 60
@@ -51967,8 +51971,8 @@
 (deftype driver-jak (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -51983,8 +51987,8 @@
 (deftype driver-ashelin (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -51999,8 +52003,8 @@
 (deftype driver-razer (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52015,8 +52019,8 @@
 (deftype driver-klever (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52031,8 +52035,8 @@
 (deftype driver-kiera (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52047,8 +52051,8 @@
 (deftype driver-thug-a (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52063,8 +52067,8 @@
 (deftype driver-thug-b (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52079,8 +52083,8 @@
 (deftype driver-thug-c (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52095,8 +52099,8 @@
 (deftype driver-taryn (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52111,8 +52115,8 @@
 (deftype driver-torn (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52127,8 +52131,8 @@
 (deftype driver-sig (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52143,8 +52147,8 @@
 (deftype driver-ur-86 (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52159,8 +52163,8 @@
 (deftype driver-kaeden (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52175,8 +52179,8 @@
 (deftype driver-rayn (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52191,8 +52195,8 @@
 (deftype driver-ratchet (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52207,8 +52211,8 @@
 (deftype driver-jaka (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52223,8 +52227,8 @@
 (deftype driver-jakb (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52239,8 +52243,8 @@
 (deftype driver-jakc (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52255,8 +52259,8 @@
 (deftype driver-daxter (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52271,8 +52275,8 @@
 (deftype driver-gtblitz (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52287,8 +52291,8 @@
 (deftype driver-pecker (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52303,8 +52307,8 @@
 (deftype driver-ximon (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
@@ -52319,8 +52323,8 @@
 (deftype driver-osmo (driver)
   ()
   :method-count-assert 67
-  :size-assert         #x184
-  :flag-assert         #x4301000184
+  :size-assert         #x194
+  :flag-assert         #x4301100194
   )
   
 
