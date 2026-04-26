@@ -418,6 +418,21 @@ def run_with_guard(
             reason="status.md unreadable before edit — aborting without changes",
         )
 
+    # Cycle 24 fix: even after a rescan, if the pre-state still shows a fatal
+    # crash, the baseline is meaningless — applying edits on top of it would
+    # commit against a poisoned baseline. Refuse to proceed; the crash is
+    # almost certainly an uncommitted-WIP issue the caller needs to resolve.
+    if pre.has_assertion:
+        return GuardResult(
+            passed=False,
+            reason=(
+                "pre-state shows decomp crash (FATAL crashes / unknown type / "
+                "C++ ASSERTION / blocked files) — refusing to commit against a "
+                "broken baseline. Likely uncommitted WIP breaking decomp; "
+                "stash or revert and retry."
+            ),
+        )
+
     print(f"[guard:{label}] pre-state: errors={pre.errors} warns={pre.warns}")
 
     # Apply edits
