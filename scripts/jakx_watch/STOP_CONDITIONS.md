@@ -45,6 +45,51 @@ checkout + full decomp + offline-test = ~10min per commit, conflicts
 with active sessions). Accept that and let new commits accumulate
 honest data going forward.
 
+### G0 corollaries (added 2026-04-26 cycle 26.5)
+
+**G0.1 — Δpass is the WHOLE test, not "Δpass alongside Δrc."**
+A common back-door framing: "If Δpass tracks Δrc, the lane is real.
+If they diverge, kill the lane." That phrasing leaves room for
+"Δrc moved but Δpass flat — maybe test scope just doesn't cover those
+files, keep running." NO. The decision rule is Δpass > 0; nothing else.
+Δrc has zero confirmation power once compile-pass is primary. If a lane
+moves +50 rc and +0 pass, it's null OR suppress-not-fix; the next batch
+isn't going to clarify which. Kill the lane and reclaim cycle budget.
+
+**G0.2 — G0 is an EPOCH BOUNDARY, not just a metric change.**
+Pre-G0 design decisions (drift filter, apply_guard's rc-primary logic,
+all current appliers' candidate-selection heuristics) were optimized
+against rc. Most probably still make sense under pass, but each
+deserves an explicit re-examination pass. Inheritance ≠ validation.
+The drift filter survives because its design philosophy (positive
+evidence required) aligns with pass — but that's a happy accident,
+not a pre-G0 design principle. Audit checklist for each applier:
+  - What evidence does it require to add a candidate?
+  - Is the candidate's effect on PASS measurable (not just rc)?
+  - Could it produce +rc/+0 pass commits as a normal output?
+If yes to the last question, the applier needs a redesign or a
+post-apply pass-gate, not just continued operation under pass-monitoring.
+
+**G0.3 — test_scope_size is its own first-class signal.**
+Pass denominator is currently 214 of 619 emitted files (35% test
+coverage). Selection is non-random — _REF.gc files exist for files
+someone already verified, biasing the test scope toward easier/more-
+mature files. If pass-rate climbs to 99% within the 214 while the
+214 doesn't grow, the appliers are polishing the easy fraction and
+doing nothing for the 405 unverifiable files. Track Δtest_scope
+explicitly. Convergence_report should display test_scope_size
+alongside pass count, and pass_pct against the broader denominator
+(/619) alongside the test-scope ratio (/214).
+
+**G0.4 — Historical retrospective queue lives at**
+`.compound_loop/post_g0_retrospective.md`. Any future commit with
+Δrc ≥ 10 (or ≤ -10) gets appended to that file with status
+AWAITING_RETRO. Drain as decomp/offline-test cycles permit. Most
+pre-convergence-log commits (~305 in jakx config+source since
+2026-04-25) are UNRECOVERABLE (denominator changed commit-to-
+commit) and the file documents that fact rather than pretending
+otherwise.
+
 ## Why this file exists
 
 Findings from prior cycles compress into headlines between sessions

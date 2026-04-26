@@ -251,11 +251,23 @@ def render(rows: list[dict]) -> str:
     if pos:
         out.append(f"\n=== POSITION (latest stable, {pos['sha']} {pos['ts']}) ===")
         # PRIMARY: real correctness (compile + bytematch via _REF.gc transitivity)
+        # Show BOTH denominators per G0.3:
+        #   pass/attempted = pass-rate within test scope (selection-biased subset)
+        #   pass/total     = pass-rate against all emitted files (true population)
+        files_total = int(pos['rc_position'].split('/')[1].split(' ')[0]) if pos['rc_position'] else 0
         if pos["ot_attempted"] > 0:
             stale_marker = "  ⚠ STALE" if pos["ot_stale"] else ""
+            scope_pct = pos['ot_pass_pct']
+            broad_pct = (100.0 * pos["ot_pass"] / files_total) if files_total else 0.0
             out.append(f"  pass: {pos['ot_pass']}/{pos['ot_attempted']} "
-                       f"({pos['ot_pass_pct']:.2f}%) "
+                       f"({scope_pct:.2f}% of test scope) "
                        f"← PRIMARY (compile + _REF.gc match){stale_marker}")
+            out.append(f"        {pos['ot_pass']}/{files_total} "
+                       f"({broad_pct:.2f}% of all emitted) "
+                       f"← BROADER denominator (per G0.3 — selection bias warning)")
+            out.append(f"        test_scope: {pos['ot_attempted']} of {files_total} "
+                       f"({100.0*pos['ot_attempted']/files_total:.1f}% _REF.gc coverage) "
+                       f"← Δtest_scope is its own signal")
             out.append(f"        partial: {pos['ot_partial']} "
                        f"(amber: compile or compare failed)")
             out.append(f"        data age: {pos['ot_age_sec']}s")
@@ -271,9 +283,10 @@ def render(rows: list[dict]) -> str:
         out.append(f"  fsr remaining:  {pos['fsr_remaining']}")
 
     out.append(f"\n=== PER-APPLIER YIELD (Σ deltas vs prior stable row) ===")
-    out.append(f"  Δpass = PRIMARY (real correctness via compile + bytematch).")
-    out.append(f"  Δrc   = leading indicator only (text-scan proxy). Watch for")
-    out.append(f"          Δrc>>Δpass — that's rc-shaped noise (suppress-not-fix).")
+    out.append(f"  Δpass is the WHOLE test (per G0.1). Lane validity = Δpass > 0.")
+    out.append(f"  Δrc has zero confirmation power — shown for context only.")
+    out.append(f"  +rc/+0 pass commits are null OR suppress-not-fix; either way the")
+    out.append(f"  lane gets killed, not 'monitored further.'")
     yld = per_applier_yield(rows)
     if not yld:
         out.append("  (no stable transitions yet — need 2+ stable rows)")
