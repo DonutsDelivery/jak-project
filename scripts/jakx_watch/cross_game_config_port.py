@@ -247,6 +247,11 @@ def main():
     ap.add_argument("--commit", action="store_true")
     ap.add_argument("--max-batch", type=int, default=50,
                     help="Cap candidates per run")
+    ap.add_argument("--no-drift-check", action="store_true",
+                    help="Disable op_idx_drift filter (legacy mode). "
+                         "Default: skip casts whose op-shape differs between "
+                         "jak3 and jakx — this filter exists because batch=10 "
+                         "reverted twice without it (de7d6b282, 06:34am).")
     args = ap.parse_args()
 
     print("[cross-port] loading jak3 type_casts ...", end=" ", flush=True)
@@ -261,12 +266,26 @@ def main():
     jakx_errors = scan_jakx_errors()
     print(f"{len(jakx_errors)} functions with type-prop errors")
 
+    # Op-idx-drift filter: when jakx's function structure has drifted from
+    # jak3's at the cast's op_idx, the cast hits the wrong instruction →
+    # type regression. Two reverts at batch=10 (de7d6b282, 06:34am revert)
+    # came from this. Filter is opt-out via --no-drift-check for evidence
+    # gathering or comparison.
+    use_drift_check = not args.no_drift_check
+    if use_drift_check:
+        sys.path.insert(0, str(Path(__file__).parent))
+        try:
+            from op_idx_drift import drift_check
+        except ImportError as e:
+            print(f"[cross-port] WARN: op_idx_drift unavailable ({e}); "
+                  f"falling back to no-drift mode", file=sys.stderr)
+            use_drift_check = False
+
     candidates = []  # list of (func, [entries to add])
     skipped_no_jak3 = 0
     skipped_already_have = 0
-    # Loose match: port jak3's casts for any function where jakx has ANY
-    # error. Op indices drift between games (Lane 2 cycle 4 finding); the
-    # rc-positive bisect-revert in apply_guard handles bad ports.
+    skipped_drifted = 0
+    drift_reasons: dict[str, int] = {}
     for func, error_ops in jakx_errors.items():
         if func not in jak3_casts:
             skipped_no_jak3 += 1
@@ -295,13 +314,28 @@ def main():
             if (op, reg) in existing_op_regs:
                 skipped_already_have += 1
                 continue
+            # Drift check: jakx's IR2 shape at this op must match jak3's.
+            if use_drift_check:
+                r = drift_check(func, op, src_game="jak3", dst_game="jakx")
+                if not r.transferable:
+                    skipped_drifted += 1
+                    # Categorize for the report
+                    cat = r.reason.split(":")[0]
+                    drift_reasons[cat] = drift_reasons.get(cat, 0) + 1
+                    continue
             new_entries.append(e)
         if new_entries:
             candidates.append((func, new_entries))
 
     total_new = sum(len(e) for _, e in candidates)
     print(f"\n[cross-port] candidates: {total_new} entries across {len(candidates)} functions")
-    print(f"[cross-port] skipped: {skipped_no_jak3} functions not in jak3, {skipped_already_have} (already have cast)")
+    print(f"[cross-port] skipped: {skipped_no_jak3} functions not in jak3, "
+          f"{skipped_already_have} already have cast, "
+          f"{skipped_drifted} op-idx drifted")
+    if use_drift_check and drift_reasons:
+        print(f"[cross-port] drift breakdown:")
+        for reason, n in sorted(drift_reasons.items(), key=lambda x: -x[1]):
+            print(f"  {n:>5}  {reason}")
 
     if args.max_batch and total_new > args.max_batch:
         # Keep the top max_batch entries (high-value funcs first by entry count)
