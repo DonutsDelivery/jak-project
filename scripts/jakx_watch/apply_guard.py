@@ -41,6 +41,7 @@ STATUS_MD = ROOT / ".jakx_watch" / "status.md"
 
 _RE_ERR_TOTAL = re.compile(r"^inline ERROR markers:\s+(\d+)", re.MULTILINE)
 _RE_WARN_TOTAL = re.compile(r"^inline WARN\s+markers:\s+(\d+)", re.MULTILINE)
+_RE_REAL_CLEAN = re.compile(r"^\s*real-clean\s*:\s*(\d+)", re.MULTILINE)
 _RE_CATEGORY_LINE = re.compile(r"^\s+(\d+)\s+(.+)$")
 _RE_DECOMP_PROGRESS = re.compile(
     r"decomp progress:\s*(\d+)/(\d+)\s+processed"
@@ -99,6 +100,7 @@ class StatusSnapshot:
     files_total: int = -1   # "files total:" line (may differ from total)
     split_failed: int = -1  # split-failed count
     has_assertion: bool = False  # "Assertion failed" in status.md
+    real_clean: int = -1  # real-clean count (PRIMARY metric per user 2026-04-25)
 
     @property
     def valid(self) -> bool:
@@ -136,6 +138,9 @@ def read_status() -> StatusSnapshot:
     sm = _RE_SPLIT_FAILED.search(text)
     split_failed = int(sm.group(1)) if sm else -1
 
+    rcm = _RE_REAL_CLEAN.search(text)
+    real_clean = int(rcm.group(1)) if rcm else -1
+
     blocked_match = _RE_BLOCKED_COUNT.search(text)
     blocked_count = int(blocked_match.group(1)) if blocked_match else 0
     has_assertion = bool(_RE_ASSERTION.search(text)) or blocked_count > 0
@@ -165,6 +170,7 @@ def read_status() -> StatusSnapshot:
         files_total=files_total,
         split_failed=split_failed,
         has_assertion=has_assertion,
+        real_clean=real_clean,
     )
 
 
@@ -395,19 +401,50 @@ def run_with_guard(
             edit_count=edit_count,
         )
 
-    # --- VETO 6: total error delta ---
-    if delta_err > err_slack:
+    # --- VETO 6a: real-clean DECREASED (PRIMARY metric, per user 2026-04-25)
+    # If rc went down, ALWAYS revert regardless of err delta. We lost a known-good file.
+    delta_rc = (post.real_clean - pre.real_clean) if (pre.real_clean >= 0 and post.real_clean >= 0) else 0
+    if delta_rc < 0:
         print(
-            f"[guard:{label}] FAIL — errors grew by {delta_err} (slack={err_slack}), reverting",
+            f"[guard:{label}] FAIL — real-clean dropped by {-delta_rc} ({pre.real_clean}→{post.real_clean}), reverting",
             file=sys.stderr,
         )
         revert_files(changed_files)
         return GuardResult(
             passed=False,
-            reason=f"errors grew by {delta_err} (allowed slack: {err_slack})",
+            reason=f"real-clean dropped by {-delta_rc} ({pre.real_clean}→{post.real_clean})",
             delta_err=delta_err,
             delta_warn=delta_warn,
             edit_count=edit_count,
+        )
+
+    # --- VETO 6b: error delta exceeds noise-floor for unlocked content
+    # User rule (2026-04-25): err can grow when files unlock (newly-visible errors).
+    # Noise floor: ~13.5 errors per newly-unlocked file. So allow err growth if it
+    # stays below (rc_growth × 13.5) plus the explicit err_slack.
+    # If rc grew → err growth is expected; only veto if it FAR exceeds noise floor.
+    # If rc unchanged or err_slack is exceeded with no rc growth → veto.
+    noise_floor = max(0, delta_rc * 14)  # 14 ≈ 13.5 rounded up, conservative
+    effective_slack = err_slack + noise_floor
+    if delta_err > effective_slack:
+        print(
+            f"[guard:{label}] FAIL — errors grew by {delta_err} (slack={err_slack} + noise-floor={noise_floor} for rc+{delta_rc}), reverting",
+            file=sys.stderr,
+        )
+        revert_files(changed_files)
+        return GuardResult(
+            passed=False,
+            reason=f"errors grew by {delta_err} (effective slack: {effective_slack}, rc delta: {delta_rc:+d})",
+            delta_err=delta_err,
+            delta_warn=delta_warn,
+            edit_count=edit_count,
+        )
+
+    # If rc grew, log positively even if err nudged up
+    if delta_rc > 0:
+        print(
+            f"[guard:{label}] rc+{delta_rc} ({pre.real_clean}→{post.real_clean}) — err Δ {delta_err:+d} within noise floor",
+            file=sys.stderr,
         )
 
     # Check per-category regressions
