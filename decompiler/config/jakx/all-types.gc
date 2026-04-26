@@ -37067,7 +37067,7 @@
 (define-extern history-draw-and-update (function pos-history symbol vector symbol))
 (define-extern dma-timeout-cam (function vector))
 (define-extern display-file-info (function int))
-(define-extern add-debug-cursor (function symbol bucket-id int int mouse-buttons int)) ;; (function symbol bucket-id int int mouse-buttons int)
+(define-extern add-debug-cursor (function symbol bucket-id int int int int)) ;; (function symbol bucket-id int int mouse-buttons int) — mouse-buttons not declared
 (define-extern *boundary-polygon* (inline-array sky-vertex)) ;; (inline-array sky-vertex)
 (define-extern init-boundary-regs (function none))
 (define-extern add-boundary-shader (function texture-id dma-buffer pointer))
@@ -37356,7 +37356,7 @@
 (define-extern texscroll-make-request (function merc-effect int)) 
 (define-extern texscroll-execute (function none))
 (define-extern vu-lights<-light-group! (function vu-lights light-group none))
-(define-extern foreground-add-mtx-calc (function bone-calculation (inline-array pris-mtx) bone-calc-flags bone-calculation)) ;; (function bone-calculation (inline-array pris-mtx) bone-calc-flags bone-calculation)
+(define-extern foreground-add-mtx-calc (function bone-calculation (inline-array pris-mtx) int bone-calculation)) ;; (function bone-calculation (inline-array pris-mtx) bone-calc-flags bone-calculation) — bone-calc-flags not declared
 (define-extern foreground-wrapup (function none))
 (define-extern *default-shadow-settings* shadow-settings) ;; shadow-settings
 (define-extern foreground-shadow (function draw-control (inline-array pris-mtx) pointer pointer))
@@ -39579,8 +39579,8 @@
 (define-extern find-ground-point (function control-info vector float float vector))
 (define-extern collide-shape-moving-angle-set! (function collide-shape-moving vector vector none))
 (define-extern cshape-reaction-update-state (function control-info collide-query vector none))
-(define-extern cshape-reaction-default (function control-info collide-query vector vector collide-status)) ;; (function control-info collide-query vector vector collide-status)
-(define-extern cshape-reaction-just-move (function control-info collide-query vector collide-status)) ;; (function control-info collide-query vector collide-status)
+(define-extern cshape-reaction-default (function control-info collide-query vector vector uint)) ;; (function control-info collide-query vector vector collide-status) — collide-status enum not declared
+(define-extern cshape-reaction-just-move (function control-info collide-query vector uint)) ;; (function control-info collide-query vector collide-status) — collide-status enum not declared
 (define-extern collide-shape-draw-debug-marks (function none))
 (define-extern *col-timer* stopwatch) ;; stopwatch
 (define-extern *frame-timer* stopwatch) ;; stopwatch
@@ -41707,7 +41707,7 @@
 ;; projectile                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern cshape-reaction-projectile (function control-info collide-query vector vector collide-status)) ;; (function control-info collide-query vector vector collide-status)
+(define-extern cshape-reaction-projectile (function control-info collide-query vector vector uint)) ;; (function control-info collide-query vector vector collide-status) — collide-status enum not declared
 (define-extern projectile-event-handler (function process int symbol event-message-block projectile :behavior projectile))
 (define-extern projectile-move-fill-all-dirs (function projectile none))
 (define-extern projectile-move-fill-line-sphere (function projectile none))
@@ -41718,7 +41718,7 @@
 (define-extern projectile-bounce-update-velocity (function projectile-bounce none :behavior projectile))
 (define-extern projectile-bounce-falling-post (function none :behavior projectile-bounce))
 (define-extern projectile-bounce-move (function projectile-bounce none))
-(define-extern projectile-bounce-reaction (function control-info collide-query vector vector collide-status)) ;; (function control-info collide-query vector vector collide-status)
+(define-extern projectile-bounce-reaction (function control-info collide-query vector vector uint)) ;; (function control-info collide-query vector vector collide-status) — collide-status enum not declared
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; rigid-body-h                   ;;
