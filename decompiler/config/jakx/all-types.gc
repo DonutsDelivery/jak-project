@@ -20133,7 +20133,7 @@
     (speech-control-method-12 (_type_ process-drawable speech-type) int) ;; 12
     (speech-control-method-13 (_type_ process-drawable speech-type int) int) ;; 13
     (speech-control-method-14 (_type_ handle) int) ;; 14
-    (speech-control-method-15 (_type_ handle) none) ;; 15
+    (speech-control-method-15 (_type_ handle) int) ;; 15
     (speech-control-method-16 (_type_ uint int) int) ;; 16
     )
   )
@@ -30477,10 +30477,10 @@
   :flag-assert         #xf00000020
   (:methods
     (touching-shapes-entry-method-9 (_type_) touching-prims-entry) ;; 9
-    (touching-shapes-entry-method-10 (_type_ touching-shapes-entry) touching-prims-entry) ;; 10
+    (touching-shapes-entry-method-10 (_type_ touching-shapes-entry) collide-shape) ;; 10
     (touching-shapes-entry-method-11 (_type_ collide-shape) collide-shape) ;; 11
     (prims-touching? (_type_ collide-shape uint) touching-prims-entry) ;; 12
-    (prims-touching-action? (_type_ collide-shape collide-action collide-action) basic) ;; 13
+    (prims-touching-action? (_type_ collide-shape collide-action collide-action) touching-prims-entry) ;; 13
     (free-touching-prims-list (_type_) int) ;; 14
     )
   )
