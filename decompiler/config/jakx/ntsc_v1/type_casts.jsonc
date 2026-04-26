@@ -45203,7 +45203,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-ashelin"]
   ],
   "(method 62 driver-daxter)": [
     [
@@ -45215,7 +45216,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-daxter"]
   ],
   "(method 62 driver-gtblitz)": [
     [
@@ -45227,7 +45229,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-gtblitz"]
   ],
   "(method 62 driver-jak)": [
     [
@@ -45239,7 +45242,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-jak"]
   ],
   "(method 62 driver-jaka)": [
     [
@@ -45251,7 +45255,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-jaka"]
   ],
   "(method 62 driver-jakb)": [
     [
@@ -45263,7 +45268,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-jakb"]
   ],
   "(method 62 driver-jakc)": [
     [
@@ -45275,7 +45281,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-jakc"]
   ],
   "(method 62 driver-kaeden)": [
     [
@@ -45287,7 +45294,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-kaeden"]
   ],
   "(method 62 driver-kiera)": [
     [
@@ -45299,7 +45307,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-kiera"]
   ],
   "(method 62 driver-klever)": [
     [
@@ -45311,7 +45320,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-klever"]
   ],
   "(method 62 driver-osmo)": [
     [
@@ -45323,7 +45333,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-osmo"]
   ],
   "(method 62 driver-pecker)": [
     [
@@ -45335,7 +45346,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-pecker"]
   ],
   "(method 62 driver-ratchet)": [
     [
@@ -45347,7 +45359,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-ratchet"]
   ],
   "(method 157 wvehicle)": [
     [
@@ -45366,7 +45379,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-rayn"]
   ],
   "(method 62 driver-razer)": [
     [
@@ -45378,7 +45392,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-razer"]
   ],
   "(method 62 driver-sig)": [
     [
@@ -45390,7 +45405,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-sig"]
   ],
   "(method 62 driver-taryn)": [
     [
@@ -45402,7 +45418,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-taryn"]
   ],
   "(method 62 driver-thug-a)": [
     [
@@ -45414,7 +45431,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-thug-a"]
   ],
   "(method 62 driver-thug-b)": [
     [
@@ -45426,7 +45444,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-thug-b"]
   ],
   "(method 62 driver-thug-c)": [
     [
@@ -45438,7 +45457,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-thug-c"]
   ],
   "(method 62 driver-torn)": [
     [
@@ -45450,7 +45470,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-torn"]
   ],
   "(method 62 driver-ur-86)": [
     [
@@ -45462,7 +45483,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [30, "gp", "driver-ur-86"]
   ],
   "(method 62 driver-ximon)": [
     [
@@ -45474,7 +45496,8 @@
       8,
       "v1",
       "uint8"
-    ]
+    ],
+    [34, "gp", "driver-ximon"]
   ],
   "vehicle-reticle-on-them-init-by-other": [
     [
@@ -49640,5 +49663,11 @@
   ],
   "find-instance-by-name-level": [
     [11, "v1", "drawable-tree"]
+  ],
+  "(method 20 vehicle)": [
+    [33, "gp", "vehicle"]
+  ],
+  "splash-spawn": [
+    [16, "v1", "part-tracker-init-params"]
   ]
 }
