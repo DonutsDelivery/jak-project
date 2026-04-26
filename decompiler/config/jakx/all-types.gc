@@ -12262,8 +12262,8 @@
     (level-group-method-29 (_type_ (pointer symbol)) symbol) ;; 29
     (level-group-method-30 (_type_ int) int) ;; 30
     (level-group-method-31 (_type_ int int) int) ;; 31
-    (level-group-method-32 (_type_) none) ;; 32
-    (level-group-method-33 (_type_) none) ;; 33
+    (level-group-method-32 (_type_) level) ;; 32
+    (level-group-method-33 (_type_) level) ;; 33
     )
   )
 
@@ -20134,7 +20134,7 @@
     (speech-control-method-13 (_type_ process-drawable speech-type int) int) ;; 13
     (speech-control-method-14 (_type_ handle) int) ;; 14
     (speech-control-method-15 (_type_ handle) none) ;; 15
-    (speech-control-method-16 (_type_ uint int) none) ;; 16
+    (speech-control-method-16 (_type_ uint int) int) ;; 16
     )
   )
 
@@ -36006,7 +36006,7 @@
     (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
-    (grid-hash-method-15 (_type_ int int int) none) ;; 15 ;; dump-grid-info
+    (grid-hash-method-15 (_type_ int int int) int) ;; 15 ;; dump-grid-info
     (grid-hash-method-16 (_type_ rgba) int) ;; 16
     (grid-hash-method-17 (_type_) int) ;; 17
     (grid-hash-method-18 (_type_ grid-hash-box grid-hash-box) none) ;; 18
