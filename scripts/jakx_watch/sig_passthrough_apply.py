@@ -320,6 +320,97 @@ def sibling_games_for(game: str) -> list[str]:
     return chain[i + 1:]
 
 
+# GOAL builtin types — always considered "present" (no deftype needed).
+# Conservative set; missing entries just fall back to `object` filler.
+_BUILTIN_TYPES = frozenset({
+    "object", "structure", "basic", "symbol", "pair", "type",
+    "int", "uint", "int8", "uint8", "int16", "uint16",
+    "int32", "uint32", "int64", "uint64", "int128", "uint128",
+    "float", "vu-function", "string", "vector", "vector4w",
+    "matrix", "quaternion", "function",
+    "array", "pointer", "inline-array",
+    "kheap", "process", "handle", "none", "_type_",
+    "boxed-array", "stack-frame",
+    "qword", "uint8q", "binteger", "integer-type",
+})
+
+# Pattern for compound type expressions like (pointer X) or (array uint8).
+# Returns just the base type name(s) referenced (excluding the compound wrapper).
+_RE_COMPOUND_TYPE_REF = re.compile(r"\b([a-zA-Z_][a-zA-Z0-9_\-?!*]*)\b")
+
+
+def _extract_referents(atom: str) -> set[str]:
+    """Extract referent type names from a param atom.
+
+    `int` → {int}
+    `(pointer connection-minimap)` → {pointer, connection-minimap}
+    `(array uint8)` → {array, uint8}
+    """
+    return set(_RE_COMPOUND_TYPE_REF.findall(atom))
+
+
+def types_declared_at(game: str) -> dict[str, int]:
+    """Return name → line_index for the FIRST `(deftype NAME ...)` line.
+
+    Cached. Used for forward-reference detection: a type is only
+    "present at line K" if its deftype line index is < K.
+
+    Skips deftypes inside `#|...|#` block comments — those aren't
+    visible to the type loader. Detection is conservative (line-by-line
+    scan); nested `#|` blocks would defeat it but jakx all-types.gc
+    doesn't use them.
+    """
+    cache_attr = f"_types_at_{game}"
+    if hasattr(types_declared_at, cache_attr):
+        return getattr(types_declared_at, cache_attr)
+    lines = _load_all_types(game) or []
+    declared: dict[str, int] = {}
+    in_comment = False
+    for i, line in enumerate(lines):
+        if in_comment:
+            if "|#" in line:
+                in_comment = False
+            continue
+        if line.lstrip().startswith("#|"):
+            if "|#" not in line[line.index("#|") + 2:]:
+                in_comment = True
+            continue
+        m = re.match(r"^\(deftype\s+([a-zA-Z_][a-zA-Z0-9_\-?!*]*)\b", line)
+        if m and m.group(1) not in declared:
+            declared[m.group(1)] = i
+    setattr(types_declared_at, cache_attr, declared)
+    return declared
+
+
+def filter_atoms_by_position(
+    atoms: list[str], game: str, edit_line_idx: int,
+) -> list[str]:
+    """Replace any atom referencing a not-yet-declared type with `object`.
+
+    Considers a type "available at edit_line_idx" if either:
+      - it's a GOAL builtin (always available), or
+      - it has a `(deftype NAME ...)` line at index < edit_line_idx in
+        the target game's all-types.gc.
+
+    Forward references crash type-load (see cycle 24: nav-mesh-editable
+    referenced by nav-mesh-poly-method-10 but declared 50 lines after).
+    """
+    declared_at = types_declared_at(game)
+    filtered: list[str] = []
+    for atom in atoms:
+        refs = _extract_referents(atom)
+        ok = True
+        for r in refs:
+            if r in _BUILTIN_TYPES:
+                continue
+            if r in declared_at and declared_at[r] < edit_line_idx:
+                continue
+            ok = False
+            break
+        filtered.append(atom if ok else "object")
+    return filtered
+
+
 # ---------------------------------------------------------------------------
 # Candidate planning
 # ---------------------------------------------------------------------------
@@ -343,6 +434,7 @@ def plan_edits(
     all_types_lines: list[str],
     skip_no_sig: bool = True,
     sibling_games: list[str] | None = None,
+    target_game: str | None = None,
 ) -> list[dict]:
     """For each candidate, compute the (line_index, new_line, ...) change.
 
@@ -350,6 +442,12 @@ def plan_edits(
         If non-empty, look up missing param types from these games' all-types.gc
         (priority order). Falls back to `object` for params not found.
         If empty/None, all fillers are `object` (legacy behavior).
+    target_game:
+        Required when sibling_games is non-empty. Sibling param atoms are
+        filtered against this game's declared types — atoms referencing
+        types missing from the target are replaced with `object` to avoid
+        crashing decomp's type-load (cycle 24 evidence: `minimap-trail`
+        from jak3's minimap-method-11 isn't declared in jakx).
     """
     if sibling_games is None:
         sibling_games = []
@@ -381,6 +479,8 @@ def plan_edits(
                         # partial: use what we can, pad rest with object
                         fillers = sib[n_have:] + ["object"] * (needed - len(sib))
                         sibling_match = True
+                    if fillers and target_game is not None:
+                        fillers = filter_atoms_by_position(fillers, target_game, idx)
             built = build_new_method_line(
                 all_types_lines[idx], c["min_params_needed"], fillers=fillers
             )
@@ -420,6 +520,8 @@ def plan_edits(
                     elif len(sib) > n_have:
                         fillers = sib[n_have:] + ["object"] * (needed - len(sib))
                         sibling_match = True
+                    if fillers and target_game is not None:
+                        fillers = filter_atoms_by_position(fillers, target_game, idx)
             built = build_new_extern_line(
                 all_types_lines[idx], c["min_params_needed"], fillers=fillers,
             )
@@ -493,7 +595,8 @@ def main() -> int:
     # for write-out fidelity.
     siblings = [] if args.no_cross_port else sibling_games_for(args.game)
     plans_all = plan_edits(
-        cands, [l.rstrip("\n") for l in all_types_lines], sibling_games=siblings,
+        cands, [l.rstrip("\n") for l in all_types_lines],
+        sibling_games=siblings, target_game=args.game,
     )
     n_with_sibling = sum(1 for p in plans_all if p.get("sibling_match"))
     print(f"{len(plans_all)} fixable ({n_with_sibling} with sibling sig)")
