@@ -4038,7 +4038,7 @@ and the state of the VU memory buffers at the end of the bucket."
 (define-extern reset-vif1-path (function none))
 (define-extern ultimate-memcpy (function pointer pointer uint none))
 (define-extern symlink2 (function none))
-(define-extern symlink3 (function none))
+(define-extern symlink3 (function object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; dma-buffer                     ;;
@@ -27392,7 +27392,7 @@ Consists of a header and a list of [[merc-effect]]s."
 ;; (define-extern etn-vu1-block object)
 ;; (define-extern etn-magic function)
 ;; (define-extern etn-init-consts function)
-(define-extern etn-init-engine (function dma-buffer none))
+(define-extern etn-init-engine (function dma-buffer object none))
 (define-extern etn-end-buffer (function dma-buffer none))
 ;; (define-extern etn-float-reg-calc function)
 ;; (define-extern etn-float-reg function)
