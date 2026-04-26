@@ -38,6 +38,7 @@ import argparse
 import bisect
 import json
 import re
+import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -46,10 +47,34 @@ sys.path.insert(0, str(Path(__file__).parent))
 from apply_guard import run_with_guard  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
-DECOMP_OUT_PRIMARY = ROOT / ".jakx_watch" / "decomp_out" / "jakx"
-DECOMP_OUT_FALLBACK = ROOT / "decompiler_out" / "jakx"
-TYPE_CASTS_JAKX = ROOT / "decompiler" / "config" / "jakx" / "ntsc_v1" / "type_casts.jsonc"
-ALL_TYPES = ROOT / "decompiler" / "config" / "jakx" / "all-types.gc"
+
+# --- per-game path configuration ------------------------------------------
+
+GAMES = ("jak1", "jak2", "jak3", "jakx")
+
+
+def paths_for(game: str) -> dict:
+    """Return path config dict for a game.
+
+    Only jakx has a guarded `.jakx_watch/` decomp pipeline; jak1/2/3 read
+    from the global `decompiler_out/{game}` directory and have no
+    apply_guard infrastructure (caller must validate manually).
+    """
+    cfg_dir = ROOT / "decompiler" / "config" / game
+    if game == "jakx":
+        decomp_primary = ROOT / ".jakx_watch" / "decomp_out" / "jakx"
+        decomp_fallback = ROOT / "decompiler_out" / "jakx"
+    else:
+        decomp_primary = ROOT / "decompiler_out" / game
+        decomp_fallback = None
+    return {
+        "game": game,
+        "decomp_primary": decomp_primary,
+        "decomp_fallback": decomp_fallback,
+        "type_casts": cfg_dir / "ntsc_v1" / "type_casts.jsonc",
+        "all_types": cfg_dir / "all-types.gc",
+        "guarded": game == "jakx",
+    }
 
 
 # --- all-types.gc parsing (robust to compound field types) ------------------
@@ -532,8 +557,14 @@ def extend_existing_key(path: Path, key: str, new_entries: list[list]) -> bool:
 
 # --- main ------------------------------------------------------------------
 
-def pick_decomp_dir() -> Path:
-    return DECOMP_OUT_PRIMARY if DECOMP_OUT_PRIMARY.exists() else DECOMP_OUT_FALLBACK
+def pick_decomp_dir(cfg: dict) -> Path:
+    primary = cfg["decomp_primary"]
+    if primary.exists():
+        return primary
+    fallback = cfg["decomp_fallback"]
+    if fallback is not None and fallback.exists():
+        return fallback
+    return primary  # caller checks .exists() and reports error
 
 
 def _read_skip_set(path: str | None) -> set[str]:
@@ -570,27 +601,36 @@ def main() -> int:
                     help="Which register to cast: base (resolve the load) or dst "
                          "(type the load result). 'both' emits two entries per load. "
                          "Default 'base' — most reliable for fixing load errors.")
+    ap.add_argument("--game", choices=GAMES, default="jakx",
+                    help="Target game. jakx uses apply_guard; jak1/2/3 skip guard "
+                         "(write+commit only — caller validates manually).")
     args = ap.parse_args()
 
     if args.apply:
         args.dry_run = False
 
-    decomp_dir = Path(args.decomp_out) if args.decomp_out else pick_decomp_dir()
+    cfg = paths_for(args.game)
+    type_casts_path = cfg["type_casts"]
+    all_types_path = cfg["all_types"]
+
+    decomp_dir = Path(args.decomp_out) if args.decomp_out else pick_decomp_dir(cfg)
     if not decomp_dir.exists():
         print(f"ERROR: decomp_out not found: {decomp_dir}", file=sys.stderr)
         return 1
 
+    print(f"game:        {args.game}")
     print(f"decomp_out:  {decomp_dir}")
-    print(f"type_casts:  {TYPE_CASTS_JAKX.relative_to(ROOT)}")
-    print(f"all-types:   {ALL_TYPES.relative_to(ROOT)}")
+    print(f"type_casts:  {type_casts_path.relative_to(ROOT)}")
+    print(f"all-types:   {all_types_path.relative_to(ROOT)}")
+    print(f"guarded:     {cfg['guarded']}")
 
     print("Building field index ...", end=" ", flush=True)
-    fields, parents = build_field_index(ALL_TYPES)
+    fields, parents = build_field_index(all_types_path)
     print(f"{len(fields)} types, "
           f"{sum(len(v) for v in fields.values())} fields")
 
     print("Loading existing type_casts.jsonc ...", end=" ", flush=True)
-    existing = load_jsonc(TYPE_CASTS_JAKX)
+    existing = load_jsonc(type_casts_path)
     print(f"{len(existing)} keys, "
           f"{sum(len(v) for v in existing.values())} entries")
 
@@ -722,40 +762,70 @@ def main() -> int:
                 brand_new[fn] = entries
         for fn, entries in sorted(to_extend.items()):
             entries.sort(key=lambda e: e[0])
-            ok = extend_existing_key(TYPE_CASTS_JAKX, fn, entries)
+            ok = extend_existing_key(type_casts_path, fn, entries)
             if not ok:
                 print(f"WARN: failed to extend key {fn!r}", file=sys.stderr)
         if brand_new:
-            append_new_keys(TYPE_CASTS_JAKX, brand_new)
-        return [TYPE_CASTS_JAKX]
+            append_new_keys(type_casts_path, brand_new)
+        return [type_casts_path]
 
     commit_msg = (
-        f"fix(jakx/type-casts): ir2-prectype extract {total} loads\n\n"
+        f"fix({args.game}/type-casts): ir2-prectype extract {total} loads\n\n"
         f"Heuristic: read base-register pre-type from IR2 asm annotation\n"
         f"and look up its field at offset N in all-types.gc. Far more\n"
-        f"reliable than jak3 op-number porting (which drifts with basic\n"
+        f"reliable than op-number porting (which drifts with basic\n"
         f"block reordering).\n\n"
-        f"Gated via apply_guard (err_slack={args.err_slack}).\n\n"
-        f"Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>"
     )
+    if cfg["guarded"]:
+        commit_msg += f"Gated via apply_guard (err_slack={args.err_slack}).\n\n"
+    else:
+        commit_msg += (
+            f"Note: {args.game} has no apply_guard infrastructure — entries\n"
+            f"derived from IR2 pre-type annotations + all-types.gc field\n"
+            f"lookups. Validate manually via decompiler re-run.\n\n"
+        )
+    commit_msg += "Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>"
 
-    print(f"\nApplying {total} entries via apply_guard ...")
-    result = run_with_guard(
-        do_apply,
-        label=f"ir2-prectype/{total}",
-        err_slack=args.err_slack,
-        warn_slack=max(5, args.err_slack),
-        commit_on_pass=args.commit,
-        commit_message=commit_msg,
-    )
+    if cfg["guarded"]:
+        print(f"\nApplying {total} entries via apply_guard ...")
+        result = run_with_guard(
+            do_apply,
+            label=f"ir2-prectype/{total}",
+            err_slack=args.err_slack,
+            warn_slack=max(5, args.err_slack),
+            commit_on_pass=args.commit,
+            commit_message=commit_msg,
+        )
 
-    if not result.passed:
-        print(f"FAIL: {result.reason}", file=sys.stderr)
-        return 1
+        if not result.passed:
+            print(f"FAIL: {result.reason}", file=sys.stderr)
+            return 1
 
-    print(f"PASS: Δerr={result.delta_err:+d}  Δwarn={result.delta_warn:+d}")
-    if args.commit and result.commit_sha:
-        print(f"  committed as {result.commit_sha}")
+        print(f"PASS: Δerr={result.delta_err:+d}  Δwarn={result.delta_warn:+d}")
+        if args.commit and result.commit_sha:
+            print(f"  committed as {result.commit_sha}")
+        return 0
+
+    # Unguarded path (jak1/jak2/jak3): write + (optionally) commit. Caller
+    # validates via manual decomp.
+    print(f"\nApplying {total} entries (unguarded — no auto-revert) ...")
+    written = do_apply()
+    print(f"  wrote {written[0].relative_to(ROOT)}")
+
+    if args.commit:
+        rel = str(type_casts_path.relative_to(ROOT))
+        try:
+            subprocess.run(["git", "add", rel], cwd=ROOT, check=True)
+            subprocess.run(["git", "commit", "-m", commit_msg], cwd=ROOT, check=True)
+            sha = subprocess.check_output(
+                ["git", "rev-parse", "--short", "HEAD"], cwd=ROOT
+            ).decode().strip()
+            print(f"  committed as {sha}")
+        except subprocess.CalledProcessError as e:
+            print(f"FAIL: git commit failed: {e}", file=sys.stderr)
+            return 1
+    else:
+        print("  (--commit not set — file written but not committed)")
     return 0
 
 
