@@ -49609,9 +49609,9 @@
   "(method 3 collide-query)": [[121, "f0", "float"], [142, "f0", "float"]],
   "(method 12 medius-cache)": [
     [5, "a3", "uint"],
-    [6, "a2", "(pointer int32)"],
+    [6, "a2", "medius-cached-info"],
     [10, "a2", "uint"],
-    [11, "a1", "(pointer int32)"],
+    [11, "a1", "medius-cached-info"],
     [15, "a1", "(pointer int32)"]
   ],
   "dma-buffer-add-vu-function": [
@@ -49783,5 +49783,17 @@
   ],
   "v-wpn-base-init-by-other": [
     [[0, 999], "s6", "process-drawable"]
+  ],
+  "calc-grand-prix-score": [
+    [0, "a0", "net-player"]
+  ],
+  "handle-sys-msg": [
+    [[0, 10], "gp", "net-type-system-message-data"]
+  ],
+  "(method 10 mem-manager)": [
+    [2, "v1", "memblock"]
+  ],
+  "(method 9 mem-manager)": [
+    [[43, 61], "s5", "memblock"]
   ]
 }
