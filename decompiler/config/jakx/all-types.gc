@@ -28341,10 +28341,32 @@
 
 ;; manipy: minimal process-drawable subclass (same size as parent)
 (deftype manipy (process-drawable)
-  ()
+  ((new-trans-hook        (function none)   :offset-assert 248)
+   (cur-trans-hook        (function none)   :offset-assert 252)
+   (cur-event-hook        (function none)   :offset-assert 256)
+   (new-joint-anim        art-joint-anim    :offset-assert 260)
+   (new-joint-anim-blend  uint64            :offset-assert 264)
+   (new-joint-anim-frame  float             :offset-assert 272)
+   (anim-mode             symbol            :offset-assert 276)
+   (cur-grab-handle       handle            :offset-assert 280)
+   (cur-target-handle     handle            :offset-assert 288)
+   (old-grab-pos          vector   :inline  :offset-assert 304)
+   (joint                 basic 4            :offset-assert 320)
+   (new-post-hook         (function none)   :offset-assert 336)
+   (cur-post-hook         (function none)   :offset-assert 340)
+   (clone-copy-trans      symbol            :offset-assert 344)
+   (shadow-backup         shadow-geo        :offset-assert 348)
+   (draw?                 symbol            :offset-assert 352)
+   (userdata              uint64            :offset-assert 360)
+   (prefix                basic             :offset-assert 368)
+   (shadow-volume-joint   int32             :offset-assert 372)
+   (speed                 float             :offset-assert 376)
+   (user-uint64           uint64   4        :offset-assert 384)
+   (options               uint32            :offset-assert 416)
+   )
   :method-count-assert 50
-  :size-assert         #xf8
-  :flag-assert         #x32007000f8
+  :size-assert         #x1a4
+  :flag-assert         #x32012001a4
   )
 
 ;; this-way (process-drawable subtype with idle state — was pre-parent)
@@ -30023,8 +30045,8 @@
 (deftype part-tracker-init-params (structure)
   ((local-offset         vector                         :inline :offset-assert 0)
    (userdata             uint64                                 :offset-assert 16)
-   (duration             time-frame                             :offset-assert 24)
-   (local-space-param    int32                                  :offset 28) ;; overlaps upper half of duration — :offset skips assert
+   (duration             uint32                                 :offset-assert 24)
+   (local-space-param    int32                                  :offset-assert 28)
    (group                sparticle-launch-group                 :offset-assert 32)
    (callback             (function part-tracker vector)         :offset-assert 36)
    (local-space-callback basic                                  :offset-assert 40)
@@ -44222,6 +44244,7 @@
    (accessed-time int32   :offset-assert 8)
    (fetched-time  int32   :offset-assert 12)
    (status        uint64  :offset-assert 16)
+   (status-ptr    (pointer medius-cached-info) :offset 16 :overlay-at status)
    )
   :method-count-assert 12
   :size-assert         #x18
@@ -51972,7 +51995,7 @@
    (info-intro         uint8  4            :offset 266) ;; MIPS 262-265
    (info-arm0-dist     float               :offset 272) ;; MIPS 268
    (info-arm1-dist     float               :offset 276) ;; MIPS 272
-   (vehicle            uint8       8       :offset 280) ;; uint64 but 4-byte aligned — MIPS 276
+   (vehicle            handle              :offset 280) ;; MIPS 276
    (speech-time        uint8       8       :offset 288) ;; uint64 but 4-byte aligned — MIPS 284
    (driver-unk292      uint8       8       :offset 296) ;; MIPS 292
    (anim-vel           uint8       16      :offset 304) ;; vector inline, not 16-byte aligned at 304 — MIPS 300
