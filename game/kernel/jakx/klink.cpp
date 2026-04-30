@@ -454,6 +454,13 @@ uint32_t link_control::jakx_work_v5() {
           break;
       }
     }
+    // Final check: verify etype fields before returning
+    if (m_object_data.offset) {
+      u32 val_ety = *(u32*)(m_object_data.c() + 0x4e94cc);
+      u32 val_ps0 = *(u32*)(m_object_data.c() + 0x4e719c);
+      printf("[jakx_work_v5] END-OF-LINK: obj_base=0x%x ds+0x4e94cc(etype)=0x%x ds+0x4e719c(ps0)=0x%x\n",
+             m_object_data.offset, val_ety, val_ps0);
+    }
     m_entry = m_object_data + 4;
     return 1;
   } else {
