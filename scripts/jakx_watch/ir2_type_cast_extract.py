@@ -187,10 +187,15 @@ def _parse_field_line(line: str) -> tuple[str, str, int] | None:
     return (name_tok, type_tok, offset)
 
 
-def build_field_index(all_types_path: Path) -> tuple[dict, dict]:
-    """Parse all-types.gc. Returns (fields, parents)."""
+def build_field_index(all_types_path: Path) -> tuple[dict, dict, dict]:
+    """Parse all-types.gc. Returns (fields, parents, children).
+
+    children maps each type to the set of types that directly inherit from it.
+    Used by guess_subclass_with_field for the subclass-downcast heuristic.
+    """
     fields: dict[str, dict[int, tuple[str, str]]] = {}
     parents: dict[str, str] = {}
+    children: dict[str, set[str]] = {}
 
     lines = all_types_path.read_text(errors="replace").splitlines()
     in_block_comment = False
@@ -212,8 +217,12 @@ def build_field_index(all_types_path: Path) -> tuple[dict, dict]:
         dm = RE_DEFTYPE.match(stripped)
         if dm:
             current_type = dm.group(1)
-            parents[current_type] = dm.group(2)
+            parent_type = dm.group(2)
+            parents[current_type] = parent_type
             fields.setdefault(current_type, {})
+            children.setdefault(current_type, set())
+            children.setdefault(parent_type, set())
+            children[parent_type].add(current_type)
             in_fields = False
             seen_fields_open = False
             continue
@@ -244,7 +253,38 @@ def build_field_index(all_types_path: Path) -> tuple[dict, dict]:
             # Don't overwrite existing entries at same offset (first win).
             fields[current_type].setdefault(foff, (fname, ftype))
 
-    return fields, parents
+    return fields, parents, children
+
+
+def guess_subclass_with_field(
+    base_type: str,
+    offset: int,
+    fields: dict,
+    parents: dict,
+    children: dict,
+    _visited: set | None = None,
+) -> str | None:
+    """Return the unique subclass of base_type that has a field at offset.
+
+    Searches the entire subtree rooted at base_type (BFS). Returns the
+    subclass type name only when exactly ONE descendant has a field at that
+    offset (after walking its own inheritance chain). Returns None if zero or
+    more than one candidate exists — ambiguous cases are skipped to stay safe.
+    """
+    if _visited is None:
+        _visited = {base_type}
+    candidates: list[str] = []
+    queue = list(children.get(base_type, set()))
+    while queue:
+        child = queue.pop()
+        if child in _visited:
+            continue
+        _visited.add(child)
+        if resolve_field_type(fields, parents, child, offset) is not None:
+            candidates.append(child)
+        # Always descend — a grandchild may have the field even if child doesn't
+        queue.extend(c for c in children.get(child, set()) if c not in _visited)
+    return candidates[0] if len(candidates) == 1 else None
 
 
 def resolve_field_type(
@@ -631,7 +671,7 @@ def main() -> int:
     print(f"guarded:     {cfg['guarded']}")
 
     print("Building field index ...", end=" ", flush=True)
-    fields, parents = build_field_index(all_types_path)
+    fields, parents, children = build_field_index(all_types_path)
     print(f"{len(fields)} types, "
           f"{sum(len(v) for v in fields.values())} fields")
 
@@ -669,6 +709,21 @@ def main() -> int:
             continue
         field_type = resolve_field_type(fields, parents, pretype, err.offset)
         if field_type is None:
+            # Subclass-downcast fallback: if exactly one subclass of pretype has
+            # a field at this offset, cast the BASE register to that subclass.
+            # This tells the decompiler "this register holds the more specific type"
+            # and lets it resolve not just this load but all subsequent field
+            # accesses from the same register — the compounding mechanism.
+            sub = guess_subclass_with_field(pretype, err.offset, fields, parents, children)
+            if sub is not None:
+                sub_field_type = resolve_field_type(fields, parents, sub, err.offset)
+                if sub_field_type is not None:
+                    if not existing_covers(existing, err.fn_key, err.op_num, err.base_reg):
+                        skip_key = f"{err.fn_key}|{err.op_num}|{err.base_reg}"
+                        if skip_key not in skip_set:
+                            candidates.append((err, err.base_reg, sub))
+                            reasons["subclass-downcast"] += 1
+                            continue
             reasons["field-not-found"] += 1
             continue
         # `cast_target` determines the cast register(s).
