@@ -506,11 +506,9 @@
   )
 
 ;; failed to figure out what this is:
-(let ((v1-76 *medius-clan-members-31*)
-      (a0-46 (the-as none (l.wu (+ (the-as uint (-> *medius-clan-cache* objects)) 136))))
+(set! (-> (the-as medius-cached-info-clan (l.wu (+ (the-as uint (-> *medius-clan-cache* objects)) 136))) members)
+      (the-as medius-player-index-array *medius-clan-members-31*)
       )
-  (s.w! (+ a0-46 344) v1-76)
-  )
 
 ;; failed to figure out what this is:
 (let ((v1-77 (the-as none *medius-clan-members-30*))

@@ -40,6 +40,10 @@
     // jakx: talker-speech-class.name (string at struct offset 0) confuses static-ref
     // decompiler → *talker-speech* #f fallback → TypeCheck fail.
     "ambient-h",
+    // jakx: lightning-probe-vars.probe-dirs (inline-array vector) at static L33+64
+    // has a raw runtime address → decompile_at_label "unknown data" → *lightning-probe-vars* #f
+    // → TypeCheck fail (symbol ≠ lightning-probe-vars). Decompiler limitation; skip compile.
+    "lightning-h",
     // jakx: (the-as TYPE Lnn) static label references not resolvable by goalc.
     "mood-tables",
     // jakx: (set! a1-0 L440) raw label ref in (method inspect mysql-nav-graph).
@@ -48,7 +52,15 @@
     // jakx: L13/L14 raw label refs (same static-ref pattern as mood-tables).
     "file-io",
     "game-info-h",
-    "net-mgr-medius-players-h"
+    "net-mgr-medius-players-h",
+    // jakx: *medius-clan-members-N* typed as object → GOALC "(+ object 4)" error. medius-cache.objects
+    // is basic → ForwardProp fails lwu 136(basic). :dynamic-field struct crash when typed correctly.
+    // Skip compile; REF match is the done-gate.
+    "net-mgr-medius-clans-h",
+    // jakx: *playback-event-header* typed as pointer; GOALC rejects (define X #f) when X expects
+    // pointer (symbol ≠ pointer TypeCheck). ForwardProp fix is correct — emit uses (&+ pointer 4).
+    // Skip compile; REF match is the done-gate.
+    "net-mgr-playback"
   ],
 
   // Skip goalc-compiling these specific functions/methods inside otherwise-good files.

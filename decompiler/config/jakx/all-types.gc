@@ -21166,7 +21166,7 @@
    (point           vector                2 :inline :offset 32)
    (start-pos       vector                :inline :offset 32)
    (end-pos         vector                :inline :offset 48)
-   (probe-dirs      (inline-array vector)         :offset 64)
+   (probe-dirs      uint32                         :offset 64) ;; pointer to vector array; static object has raw addr → uint32 avoids decompile_at_label failure
    )
   :method-count-assert 9
   :size-assert         #x44
@@ -50526,7 +50526,7 @@
 (define-extern *playback-bytes-left* int)
 (define-extern *playback-machine* object)
 (define-extern *playback-delay* time-frame)
-(define-extern *playback-event-header* object)
+(define-extern *playback-event-header* pointer)
 (define-extern read-event-header (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

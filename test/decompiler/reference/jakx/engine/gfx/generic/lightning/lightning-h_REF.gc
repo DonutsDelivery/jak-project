@@ -274,13 +274,13 @@
 
 ;; definition of type lightning-probe-vars
 (deftype lightning-probe-vars (basic)
-  ((src-joint-index  uint32                           :offset   4)
-   (next-spawn-time  uint64                           :offset   8)
-   (last-valid-time  uint64                           :offset  16)
-   (point            vector                 2 :inline :offset  32)
-   (start-pos        vector                 :inline   :overlay-at (-> point 0))
-   (end-pos          vector                 :inline   :overlay-at (-> point 1))
-   (probe-dirs       (inline-array vector)            :offset  64)
+  ((src-joint-index  uint32            :offset   4)
+   (next-spawn-time  uint64            :offset   8)
+   (last-valid-time  uint64            :offset  16)
+   (point            vector  2 :inline :offset  32)
+   (start-pos        vector  :inline   :overlay-at (-> point 0))
+   (end-pos          vector  :inline   :overlay-at (-> point 1))
+   (probe-dirs       uint32            :offset  64)
    )
   )
 

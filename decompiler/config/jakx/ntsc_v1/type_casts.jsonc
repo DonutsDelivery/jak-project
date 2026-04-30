@@ -1527,6 +1527,11 @@
     [[6, 14], "v1", "(pointer uint16)"],
     [[22, 24], "a0", "(pointer uint16)"]
   ],
+  // net-mgr-medius-clans-h top-level-login op236: lwu 136(objects-as-basic) fails ForwardProp.
+  // op237 cascades to <uninitialized>. Cast a0 at [237,238] so emit uses (-> a0 members) correctly.
+  "(top-level-login net-mgr-medius-clans-h)": [
+    [[237, 238], "a0", "medius-cached-info-clan"]
+  ],
   "ramdisk-load": [
     [
       [
