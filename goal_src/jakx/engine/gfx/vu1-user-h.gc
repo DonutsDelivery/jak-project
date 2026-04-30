@@ -26,6 +26,13 @@
 ;; <renderer>-l<level>-<tpage>
 (defenum bucket-id
   :type int32
+  (hfrag 8)
+  (debug-no-zbuf1 577)
+  (hud-draw-hud-alpha 579)
+  (tex-hud-pris2 580)
+  (hud-draw-pris2 581)
+  (debug 583)
+  (debug-no-zbuf2 584)
   )
 
 ;; ---bucket-id
