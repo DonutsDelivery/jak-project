@@ -163,11 +163,11 @@ that gets accessed by the accompanying process."
 
 (deftype entity-actor (entity)
   "Child class of [[entity]] used to spawn [[process-drawable]] actors."
-  ((etype      type        :offset  56)
+  ((kill-mask  task-mask)
+   (etype      type)
    (task       game-task)
-   (kill-mask  task-mask   :offset  52)
    (vis-id     int16)
-   (quat       quaternion  :inline)
+   (quat       quaternion  :inline :offset 80)
    )
   (:methods
     (next-actor (_type_) entity-actor)

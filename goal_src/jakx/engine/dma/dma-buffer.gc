@@ -422,46 +422,23 @@
   (shr (+ (&- (-> dma-buf end) (the-as uint (-> dma-buf base))) 15) 4)
   )
 
-;; ERROR: Failed store: (s.w! (+ t2-0 8) t3-5) at op 23
-;; ERROR: Failed store: (s.w! (+ t2-0 12) t3-8) at op 32
 (defun dma-buffer-add-vu-function ((dma-buf dma-buffer) (vu-func vu-function) (flush-path-3 int))
   "Add DMA tags to load the given VU function. The destination in vu instruction memory
    is specific inside the vu-function. This does NOT copy the vu-function into the buffer,
    but creates a reference to the existing VU function."
-  (let ((v1-0 (the-as object (+ (the-as uint vu-func) 16)))
-        (a3-0 (-> vu-func qlength))
-        (a1-1 (-> vu-func origin))
+  (let ((func-ptr (the-as pointer (&-> vu-func data 4)))
+        (qlen (#if PC_PORT 0 (-> vu-func qlength)))
+        (origin (-> vu-func origin))
         )
-    (while (> a3-0 0)
-      (let ((t0-1 (min 127 a3-0)))
-        (let* ((t1-1 dma-buf)
-               (t2-0 (-> t1-1 base))
-               )
-          (set! (-> (the-as (pointer int64) t2-0))
-                (logior (logior #x30000000 (shr (shl t0-1 48) 48)) (shr (shl (the-as int v1-0) 33) 1))
-                )
-          (let ((t3-5 (shr
-                        (shl
-                          (if (zero? flush-path-3)
-                              16
-                              19
-                              )
-                          57
-                          )
-                        33
-                        )
-                      )
-                )
-            (s.w! (+ t2-0 8) t3-5)
-            )
-          (let ((t3-8 (logior (logior #x4a000000 (shr (shl a1-1 48) 48)) (shr (shl (* t0-1 2) 56) 40))))
-            (s.w! (+ t2-0 12) t3-8)
-            )
-          (set! (-> t1-1 base) (&+ t2-0 16))
-          )
-        (set! v1-0 (+ (the-as uint v1-0) (* t0-1 16)))
-        (set! a3-0 (- a3-0 t0-1))
-        (+! a1-1 (* t0-1 2))
+    (while (> qlen 0)
+      (let ((qwc-now (min 127 qlen)))
+        (dma-buffer-add-ref-vif2 dma-buf qwc-now func-ptr
+                    (new 'static 'vif-tag :cmd (if (zero? flush-path-3) (vif-cmd flushe) (vif-cmd flusha)))
+                    (new 'static 'vif-tag :cmd (vif-cmd mpg) :num (shl qwc-now 1) :imm origin)
+                    )
+        (&+! func-ptr (shl qwc-now 4))
+        (set! qlen (- qlen qwc-now))
+        (+! origin (shl qwc-now 1))
         )
       )
     )
