@@ -479,8 +479,10 @@
 
 
 (deftype sound-bank-state (structure)
-  ((name  symbol)
-   (mode  sound-bank-mode)
+  ((name      symbol)
+   (mode      sound-bank-mode)
+   (high      basic)
+   (str-name  basic)
    )
   :pack-me
   )
