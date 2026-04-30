@@ -4,17 +4,24 @@
 Builds on the goalc_compile_audit.py (Tier 2) to answer the deeper question:
 does the decompiled+recompiled GOAL produce the same binary as the original?
 
-CURRENT LIMITATION: raw byte comparison fails because of linker relocations.
-The original .o files contain 0xff/0x00 placeholders where the linker patches
-addresses. goalc uses different placeholder encodings. Full bytematch requires
-relocation normalization (zeroing out relocation-dependent bytes before comparing).
+FUNDAMENTAL LIMITATION — ARCHITECTURE MISMATCH (not just relocations):
+The original PS2 objects contain MIPS R5900 machine code (fixed 4-byte instructions).
+goalc output contains x86_64 machine code (variable 1-15 byte instructions).
+These are completely different instruction sets and will NEVER byte-match.
 
-What this script DOES measure (as a proxy):
-  - Code section SIZE match: same size ≈ same code structure (not the same as correct)
-  - Size ratio distribution: tells you how far off the decompiled output is
+Relocation normalization would NOT fix this — the architecture gap is the blocker.
 
-Step 1 (this script): size comparison — quick, reveals gross correctness issues.
-Step 2 (TODO): relocation normalization — needed for actual byte comparison.
+Consequence: true Tier 3 (bytecode comparison against PS2 originals) is structurally
+impossible in the OpenGOAL toolchain, which cross-compiles GOAL to x86_64 rather
+than reproducing PS2 MIPS. The only real Tier 3 verification is behavioral:
+run the game on OpenGOAL and check it plays correctly.
+
+What this script DOES measure (as a curiosity only):
+  - Code section SIZE: x86_64 size vs MIPS size. This has NO semantic meaning
+    for correctness — different instruction densities make sizes incomparable.
+  - The "exact size match" (drawable-h) is coincidental for near-empty segments.
+
+Why this script was written: to investigate whether bytematch was feasible (answer: no).
 
 Prerequisites:
   1. Run the compile audit first: goalc_compile_audit.py (gets compile-pass list)
