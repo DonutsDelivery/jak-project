@@ -6,6 +6,7 @@
   ((character-encoding-type  int32)
    (language-type            int32)
    )
+  :pack-me
   )
 
 ;; definition for method 3 of type net-localization-params
@@ -132,6 +133,7 @@
   ((n-version   uint32)
    (sz-version  uint8  16)
    )
+  :pack-me
   )
 
 ;; definition for method 3 of type net-dme-version
@@ -1967,6 +1969,7 @@
 (deftype rsa-key (structure)
   ((key  uint8  64)
    )
+  :pack-me
   )
 
 ;; definition for method 3 of type rsa-key
@@ -2565,6 +2568,7 @@
    (p-token-ownership-notify-callback-data  basic)
    (b-use-token                             int32)
    )
+  :pack-me
   )
 
 ;; definition for method 3 of type net-token-params
@@ -3207,6 +3211,7 @@
    (address       uint8  16)
    (port          uint32)
    )
+  :pack-me
   )
 
 ;; definition for method 3 of type net-address
@@ -3269,6 +3274,7 @@
 (deftype net-address-list (structure)
   ((a-address-list  uint8  48)
    )
+  :pack-me
   )
 
 ;; definition for method 3 of type net-address-list

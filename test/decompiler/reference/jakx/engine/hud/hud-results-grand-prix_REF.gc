@@ -1,0 +1,320 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition for function calc-grand-prix-score
+;; WARN: Return type mismatch int vs none.
+(defun calc-grand-prix-score ((arg0 uint))
+  (let ((v1-0 (-> (the-as net-player arg0) rank)))
+    (cond
+      ((zero? v1-0)
+       10
+       )
+      ((= v1-0 1)
+       8
+       )
+      ((= v1-0 2)
+       6
+       )
+      ((= v1-0 3)
+       4
+       )
+      ((= v1-0 4)
+       2
+       )
+      (else
+        1
+        )
+      )
+    )
+  (none)
+  )
+
+;; definition for symbol *hud-results-grand-prix*, type array
+(define *hud-results-grand-prix* (the-as array #f))
+
+;; definition for symbol *hud-results-grand-prix-proc*, type object
+(define *hud-results-grand-prix-proc* (the-as object #f))
+
+;; definition of type hud-results-grand-prix
+(deftype hud-results-grand-prix (in-game-hud)
+  ()
+  )
+
+;; definition for method 3 of type hud-results-grand-prix
+(defmethod inspect ((this hud-results-grand-prix))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (let ((t9-0 (method-of-type in-game-hud inspect)))
+    (t9-0 this)
+    )
+  (label cfg-4)
+  this
+  )
+
+;; definition for method 7 of type hud-results-grand-prix
+;; WARN: Return type mismatch in-game-hud vs hud-results-grand-prix.
+(defmethod relocate ((this hud-results-grand-prix) (offset int))
+  (set! *hud-results-grand-prix-proc* this)
+  (if (nonzero? *hud-results-grand-prix-proc*)
+      (set! *hud-results-grand-prix-proc* (+ (the-as uint *hud-results-grand-prix-proc*) offset))
+      )
+  (the-as hud-results-grand-prix ((method-of-type in-game-hud relocate) this offset))
+  )
+
+;; definition for method 26 of type hud-results-grand-prix
+(defmethod hud-method-26 ((this hud-results-grand-prix))
+  (set! (-> this items) *hud-results-grand-prix*)
+  (set! (-> this manager) (new 'static 'basic-manager))
+  (set! *hud-results-grand-prix-proc* this)
+  ((method-of-type in-game-hud hud-method-26) this)
+  )
+
+;; definition for method 10 of type hud-results-grand-prix
+(defmethod deactivate ((this hud-results-grand-prix))
+  "Make a process dead, clean it up, remove it from the active pool, and return to dead pool."
+  (set! *hud-results-grand-prix-proc* (the-as object #f))
+  ((method-of-type in-game-hud deactivate) this)
+  )
+
+;; definition for method 24 of type hud-results-grand-prix
+(defmethod hud-method-24 ((this hud-results-grand-prix))
+  (when *debug-hud*
+    (set! (-> this real-items) *hud-results-grand-prix*)
+    (hud-method-26 this)
+    )
+  ((method-of-type in-game-hud hud-method-24) this)
+  (none)
+  )
+
+;; definition for function spawn-hud-results-grand-prix
+(defun spawn-hud-results-grand-prix ()
+  (cond
+    (*hud-results-grand-prix-proc*
+      *hud-results-grand-prix-proc*
+      )
+    (*net-game-mgr*
+      (let ((v0-0 (ppointer->process (process-spawn
+                                       hud-results-grand-prix
+                                       :init hud-init-by-other
+                                       :name "hud-results-grand-prix"
+                                       :to *net-game-mgr*
+                                       )
+                                     )
+                  )
+            )
+        (when (the-as process v0-0)
+          (set! (-> (the-as in-game-hud v0-0) inited-strings-count) 0)
+          0
+          )
+        v0-0
+        )
+      )
+    (else
+      #f
+      )
+    )
+  )
+
+;; definition for method 22 of type hud-results-grand-prix
+(defmethod hud-method-22 ((this engine))
+  #f
+  )
+
+;; definition for symbol *hud-results-grand-prix-totals*, type array
+(define *hud-results-grand-prix-totals* (the-as array #f))
+
+;; definition for symbol *hud-results-grand-prix-totals-proc*, type object
+(define *hud-results-grand-prix-totals-proc* (the-as object #f))
+
+;; definition of type hud-results-grand-prix-totals
+(deftype hud-results-grand-prix-totals (in-game-hud)
+  ()
+  )
+
+;; definition for method 3 of type hud-results-grand-prix-totals
+(defmethod inspect ((this hud-results-grand-prix-totals))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (let ((t9-0 (method-of-type in-game-hud inspect)))
+    (t9-0 this)
+    )
+  (label cfg-4)
+  this
+  )
+
+;; definition for method 7 of type hud-results-grand-prix-totals
+;; WARN: Return type mismatch in-game-hud vs hud-results-grand-prix-totals.
+(defmethod relocate ((this hud-results-grand-prix-totals) (offset int))
+  (set! *hud-results-grand-prix-totals-proc* this)
+  (if (nonzero? *hud-results-grand-prix-totals-proc*)
+      (set! *hud-results-grand-prix-totals-proc* (+ (the-as uint *hud-results-grand-prix-totals-proc*) offset))
+      )
+  (the-as hud-results-grand-prix-totals ((method-of-type in-game-hud relocate) this offset))
+  )
+
+;; definition for method 26 of type hud-results-grand-prix-totals
+(defmethod hud-method-26 ((this hud-results-grand-prix-totals))
+  (set! (-> this items) *hud-results-grand-prix-totals*)
+  (set! (-> this manager) (new 'static 'basic-manager))
+  (set! *hud-results-grand-prix-totals-proc* this)
+  ((method-of-type in-game-hud hud-method-26) this)
+  )
+
+;; definition for method 10 of type hud-results-grand-prix-totals
+(defmethod deactivate ((this hud-results-grand-prix-totals))
+  "Make a process dead, clean it up, remove it from the active pool, and return to dead pool."
+  (set! *hud-results-grand-prix-totals-proc* (the-as object #f))
+  ((method-of-type in-game-hud deactivate) this)
+  )
+
+;; definition for method 24 of type hud-results-grand-prix-totals
+(defmethod hud-method-24 ((this hud-results-grand-prix-totals))
+  (when *debug-hud*
+    (set! (-> this real-items) *hud-results-grand-prix-totals*)
+    (hud-method-26 this)
+    )
+  ((method-of-type in-game-hud hud-method-24) this)
+  (none)
+  )
+
+;; definition for function spawn-hud-results-grand-prix-totals
+(defun spawn-hud-results-grand-prix-totals ()
+  (cond
+    (*hud-results-grand-prix-totals-proc*
+      *hud-results-grand-prix-totals-proc*
+      )
+    (*net-game-mgr*
+      (let ((v0-0 (ppointer->process (process-spawn
+                                       hud-results-grand-prix-totals
+                                       :init hud-init-by-other
+                                       :name "hud-results-grand-prix-totals"
+                                       :to *net-game-mgr*
+                                       )
+                                     )
+                  )
+            )
+        (when (the-as process v0-0)
+          (set! (-> (the-as in-game-hud v0-0) inited-strings-count) 0)
+          0
+          )
+        v0-0
+        )
+      )
+    (else
+      #f
+      )
+    )
+  )
+
+;; definition for method 22 of type hud-results-grand-prix-totals
+(defmethod hud-method-22 ((this engine))
+  #f
+  )
+
+;; definition for method 23 of type hud-results-grand-prix-totals
+(defmethod hud-method-23 ((this engine))
+  #f
+  )
+
+;; definition for function grand-prix-totals-on?
+(defun grand-prix-totals-on? ()
+  (!= *hud-results-grand-prix-totals-proc* #f)
+  )
+
+;; definition for symbol *hud-results-medal-1*, type array
+(define *hud-results-medal-1* (the-as array #f))
+
+;; definition for symbol *hud-results-medal-1-proc*, type object
+(define *hud-results-medal-1-proc* (the-as object #f))
+
+;; definition of type hud-results-medal-1
+(deftype hud-results-medal-1 (in-game-hud)
+  ()
+  )
+
+;; definition for method 3 of type hud-results-medal-1
+(defmethod inspect ((this hud-results-medal-1))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (let ((t9-0 (method-of-type in-game-hud inspect)))
+    (t9-0 this)
+    )
+  (label cfg-4)
+  this
+  )
+
+;; definition for method 7 of type hud-results-medal-1
+;; WARN: Return type mismatch in-game-hud vs hud-results-medal-1.
+(defmethod relocate ((this hud-results-medal-1) (offset int))
+  (set! *hud-results-medal-1-proc* this)
+  (if (nonzero? *hud-results-medal-1-proc*)
+      (set! *hud-results-medal-1-proc* (+ (the-as uint *hud-results-medal-1-proc*) offset))
+      )
+  (the-as hud-results-medal-1 ((method-of-type in-game-hud relocate) this offset))
+  )
+
+;; definition for method 26 of type hud-results-medal-1
+(defmethod hud-method-26 ((this hud-results-medal-1))
+  (set! (-> this items) *hud-results-medal-1*)
+  (set! (-> this manager) (new 'static 'basic-manager))
+  (set! *hud-results-medal-1-proc* this)
+  ((method-of-type in-game-hud hud-method-26) this)
+  )
+
+;; definition for method 10 of type hud-results-medal-1
+(defmethod deactivate ((this hud-results-medal-1))
+  "Make a process dead, clean it up, remove it from the active pool, and return to dead pool."
+  (set! *hud-results-medal-1-proc* (the-as object #f))
+  ((method-of-type in-game-hud deactivate) this)
+  )
+
+;; definition for method 24 of type hud-results-medal-1
+(defmethod hud-method-24 ((this hud-results-medal-1))
+  (when *debug-hud*
+    (set! (-> this real-items) *hud-results-medal-1*)
+    (hud-method-26 this)
+    )
+  ((method-of-type in-game-hud hud-method-24) this)
+  (none)
+  )
+
+;; definition for function spawn-hud-results-medal-1
+(defun spawn-hud-results-medal-1 ()
+  (cond
+    (*hud-results-medal-1-proc*
+      *hud-results-medal-1-proc*
+      )
+    (*net-game-mgr*
+      (let ((v0-0
+              (ppointer->process
+                (process-spawn hud-results-medal-1 :init hud-init-by-other :name "hud-results-medal-1" :to *net-game-mgr*)
+                )
+              )
+            )
+        (when (the-as process v0-0)
+          (set! (-> (the-as in-game-hud v0-0) inited-strings-count) 0)
+          0
+          )
+        v0-0
+        )
+      )
+    (else
+      #f
+      )
+    )
+  )
+
+;; definition for method 22 of type hud-results-medal-1
+(defmethod hud-method-22 ((this engine))
+  #f
+  )
+
+
+
+

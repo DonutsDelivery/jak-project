@@ -181,17 +181,181 @@
   this
   )
 
-;; type net-lanpeer-desc is defined here, but it is unknown to the decompiler
+;; definition of type net-lanpeer-desc
+(deftype net-lanpeer-desc (structure)
+  ((dme-version       net-dme-version          :inline)
+   (net-platform-id   int32)
+   (application-id    int32)
+   (peer-address      net-address              :inline)
+   (localization      net-localization-params  :inline)
+   (application-name  uint8                    72)
+   (user-name         uint8                    32)
+   )
+  )
 
-(method-set! (the-as type net-lanpeer-desc) 3 L108)
+;; definition for method 3 of type net-lanpeer-desc
+(defmethod inspect ((this net-lanpeer-desc))
+  (when (not this)
+    (set! this this)
+    (goto cfg-13)
+    )
+  (format #t "[~8x] ~A~%" this 'net-lanpeer-desc)
+  (format #t "~1Tdme-version: #<net-dme-version @ #x~X>~%" (-> this dme-version))
+  (let ((t9-2 format)
+        (a0-3 #t)
+        (a1-2 "~1Tnet-platform-id: #x~X : ~S~%")
+        (a2-2 (-> this net-platform-id))
+        (v1-2 (-> this net-platform-id))
+        )
+    (t9-2 a0-3 a1-2 a2-2 (cond
+                           ((= v1-2 2)
+                            "enum-net-platform-id-psp"
+                            )
+                           ((= v1-2 #xffffff)
+                            "extra-enum-net-platform-id"
+                            )
+                           ((zero? v1-2)
+                            "enum-net-platform-id-unknown"
+                            )
+                           ((= v1-2 1)
+                            "enum-net-platform-id-ps2"
+                            )
+                           (else
+                             "*unknown*"
+                             )
+                           )
+          )
+    )
+  (format #t "~1Tapplication-id: ~D~%" (-> this application-id))
+  (format #t "~1Tpeer-address: #<net-address @ #x~X>~%" (-> this peer-address))
+  (format #t "~1Tlocalization: #<net-localization-params @ #x~X>~%" (-> this localization))
+  (format #t "~1Tapplication-name[72] @ #x~X~%" (-> this application-name))
+  (format #t "~1Tuser-name[32] @ #x~X~%" (-> this user-name))
+  (label cfg-13)
+  this
+  )
 
-;; type net-initialize-in-params is defined here, but it is unknown to the decompiler
+;; definition of type net-initialize-in-params
+(deftype net-initialize-in-params (structure)
+  ((b-default-set                   int32)
+   (localization                    net-localization-params  :inline)
+   (application-id                  int32)
+   (application-name                uint8                    72)
+   (p-local-key-pair                rsa-keypair)
+   (p-application-key-pair          rsa-keypair)
+   (connectivity-type               int32)
+   (udp-bind-port                   int32)
+   (upn-pmemory-ceiling             int32)
+   (b-enable-lanbroadcast-comms     int32)
+   (pf-system-message-callback      basic)
+   (p-system-message-callback-data  basic)
+   )
+  )
 
-(method-set! (the-as type net-initialize-in-params) 3 L100)
+;; definition for method 3 of type net-initialize-in-params
+(defmethod inspect ((this net-initialize-in-params))
+  (when (not this)
+    (set! this this)
+    (goto cfg-13)
+    )
+  (format #t "[~8x] ~A~%" this 'net-initialize-in-params)
+  (format #t "~1Tb-default-set: ~D~%" (-> this b-default-set))
+  (format #t "~1Tlocalization: #<net-localization-params @ #x~X>~%" (-> this localization))
+  (format #t "~1Tapplication-id: ~D~%" (-> this application-id))
+  (format #t "~1Tapplication-name[72] @ #x~X~%" (-> this application-name))
+  (format #t "~1Tp-local-key-pair: #<rsa-keypair @ #x~X>~%" (-> this p-local-key-pair))
+  (format #t "~1Tp-application-key-pair: #<rsa-keypair @ #x~X>~%" (-> this p-application-key-pair))
+  (let ((t9-7 format)
+        (a0-8 #t)
+        (a1-7 "~1Tconnectivity-type: #x~X : ~S~%")
+        (a2-7 (-> this connectivity-type))
+        (v1-2 (-> this connectivity-type))
+        )
+    (t9-7 a0-8 a1-7 a2-7 (cond
+                           ((= v1-2 -1)
+                            "extra-net-connectivity-type"
+                            )
+                           ((= v1-2 1)
+                            "net-connectivity-internet"
+                            )
+                           ((zero? v1-2)
+                            "net-connectivity-none"
+                            )
+                           ((= v1-2 2)
+                            "net-connectivity-lan"
+                            )
+                           (else
+                             "*unknown*"
+                             )
+                           )
+          )
+    )
+  (format #t "~1Tudp-bind-port: ~D~%" (-> this udp-bind-port))
+  (format #t "~1Tupn-pmemory-ceiling: ~D~%" (-> this upn-pmemory-ceiling))
+  (format #t "~1Tb-enable-lanbroadcast-comms: ~D~%" (-> this b-enable-lanbroadcast-comms))
+  (format #t "~1Tpf-system-message-callback: ~A~%" (-> this pf-system-message-callback))
+  (format #t "~1Tp-system-message-callback-data: ~A~%" (-> this p-system-message-callback-data))
+  (label cfg-13)
+  this
+  )
 
-;; type net-host-peer-to-peer-in-params is defined here, but it is unknown to the decompiler
+;; definition of type net-host-peer-to-peer-in-params
+(deftype net-host-peer-to-peer-in-params (structure)
+  ((b-default-set                             int32)
+   (pf-local-connect-callback                 basic)
+   (p-local-connect-callback-data             basic)
+   (pf-local-disconnect-callback              basic)
+   (p-local-disconnect-callback-data          basic)
+   (pf-remote-client-connect-callback         basic)
+   (p-remote-client-connect-callback-data     basic)
+   (pf-remote-client-disconnect-callback      basic)
+   (p-remote-client-disconnect-callback-data  basic)
+   (pf-system-status-callback                 basic)
+   (p-system-status-callback-data             basic)
+   (max-clients                               uint32)
+   (stream-media-params                       net-stream-media-params  :inline)
+   (user-specified                            int32)
+   (b-enab-disconnect-fwd                     int32)
+   (token-params                              net-token-params         :inline)
+   (b-use-time-base                           int32)
+   (send-buffer-size                          uint32)
+   (recv-buffer-size                          uint32)
+   )
+  )
 
-(method-set! (the-as type net-host-peer-to-peer-in-params) 3 L97)
+;; definition for method 3 of type net-host-peer-to-peer-in-params
+(defmethod inspect ((this net-host-peer-to-peer-in-params))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'net-host-peer-to-peer-in-params)
+  (format #t "~1Tb-default-set: ~D~%" (-> this b-default-set))
+  (format #t "~1Tpf-local-connect-callback: ~A~%" (-> this pf-local-connect-callback))
+  (format #t "~1Tp-local-connect-callback-data: ~A~%" (-> this p-local-connect-callback-data))
+  (format #t "~1Tpf-local-disconnect-callback: ~A~%" (-> this pf-local-disconnect-callback))
+  (format #t "~1Tp-local-disconnect-callback-data: ~A~%" (-> this p-local-disconnect-callback-data))
+  (format #t "~1Tpf-remote-client-connect-callback: ~A~%" (-> this pf-remote-client-connect-callback))
+  (format #t "~1Tp-remote-client-connect-callback-data: ~A~%" (-> this p-remote-client-connect-callback-data))
+  (format #t "~1Tpf-remote-client-disconnect-callback: ~A~%" (-> this pf-remote-client-disconnect-callback))
+  (format
+    #t
+    "~1Tp-remote-client-disconnect-callback-data: ~A~%"
+    (-> this p-remote-client-disconnect-callback-data)
+    )
+  (format #t "~1Tpf-system-status-callback: ~A~%" (-> this pf-system-status-callback))
+  (format #t "~1Tp-system-status-callback-data: ~A~%" (-> this p-system-status-callback-data))
+  (format #t "~1Tmax-clients: ~D~%" (-> this max-clients))
+  (format #t "~1Tstream-media-params: #<net-stream-media-params @ #x~X>~%" (-> this stream-media-params))
+  (format #t "~1Tuser-specified: ~D~%" (-> this user-specified))
+  (format #t "~1Tb-enab-disconnect-fwd: ~D~%" (-> this b-enab-disconnect-fwd))
+  (format #t "~1Ttoken-params: #<net-token-params @ #x~X>~%" (-> this token-params))
+  (format #t "~1Tb-use-time-base: ~D~%" (-> this b-use-time-base))
+  (format #t "~1Tsend-buffer-size: ~D~%" (-> this send-buffer-size))
+  (format #t "~1Trecv-buffer-size: ~D~%" (-> this recv-buffer-size))
+  (label cfg-4)
+  this
+  )
 
 ;; type net-resolve-addr-data is defined here, but it is unknown to the decompiler
 

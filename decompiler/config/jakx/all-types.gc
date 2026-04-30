@@ -21573,6 +21573,7 @@
   ((character-encoding-type int32  :offset-assert 0)
    (language-type           int32  :offset-assert 4)
    )
+  :pack-me
   :method-count-assert 9
   :size-assert         #x8
   :flag-assert         #x900000008
@@ -21597,6 +21598,7 @@
   ((n-version  uint32     :offset-assert 0)
    (sz-version uint8 16 :offset-assert 4)
    )
+  :pack-me
   :method-count-assert 9
   :size-assert         #x14
   :flag-assert         #x900000014
@@ -21801,6 +21803,7 @@
 (deftype rsa-key (structure)
   ((key uint8 64 :offset-assert 0)
    )
+  :pack-me
   :method-count-assert 9
   :size-assert         #x40
   :flag-assert         #x900000040
@@ -21884,6 +21887,7 @@
    (p-token-ownership-notify-callback-data basic  :offset-assert 4)
    (b-use-token                            int32  :offset-assert 8)
    )
+  :pack-me
   :method-count-assert 9
   :size-assert         #xc
   :flag-assert         #x90000000c
@@ -22097,6 +22101,7 @@
    (address      uint8 16  :offset-assert 4)
    (port         uint32    :offset-assert 20)
    )
+  :pack-me
   :method-count-assert 9
   :size-assert         #x18
   :flag-assert         #x900000018
@@ -22107,6 +22112,7 @@
 (deftype net-address-list (structure)
   ((a-address-list uint8 48 :offset-assert 0)
    )
+  :pack-me
   :method-count-assert 9
   :size-assert         #x30
   :flag-assert         #x900000030
@@ -22690,6 +22696,7 @@
    (lobby-name            uint8   64 :offset-assert 12)
    (game-name             uint8   64 :offset-assert 76)
    )
+  :pack-me
   :method-count-assert 9
   :size-assert         #x8c
   :flag-assert         #x90000008c
@@ -24580,17 +24587,15 @@
 
 
 
-#|
 (deftype medius-get-ladder-stats-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (status-code int32      :offset-assert 24)
-   (stats uint8 15 :offset-assert 28)
+   (stats int32 15 :offset-assert 28)
    )
   :method-count-assert 9
   :size-assert         #x58
   :flag-assert         #x900000058
   )
-|#
 
 
 
@@ -25219,7 +25224,6 @@
 
 
 
-#|
 (deftype medius-join-game-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (session-key uint8 17 :offset-assert 21)
@@ -25234,7 +25238,6 @@
   :size-assert         #xc4
   :flag-assert         #x9000000c4
   )
-|#
 
 
 
@@ -25272,7 +25275,6 @@
 
 
 
-#|
 (deftype medius-ladder-list-extra-info-response0 (structure)
   ((message-id uint8 21 :offset-assert 0)
    (status-code     int32                              :offset-assert 24)
@@ -25287,14 +25289,12 @@
   :size-assert         #x1d1
   :flag-assert         #x9000001d1
   )
-|#
 ;; DEAD: medius (online feature)
 
 
 
 
 
-#|
 (deftype medius-ladder-list-extra-info-response (structure)
   ((message-id uint8 21 :offset-assert 0)
    (status-code     int32                              :offset-assert 24)
@@ -25310,7 +25310,6 @@
   :size-assert         #x1d5
   :flag-assert         #x9000001d5
   )
-|#
 
 
 
@@ -26161,51 +26160,45 @@
 
 
 
-#|
 (deftype medius-update-ladder-stats-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (ladder-type int32      :offset-assert 24)
-   (stats uint8 15 :offset-assert 28)
+   (stats int32 15 :offset-assert 28)
    )
   :method-count-assert 9
   :size-assert         #x58
   :flag-assert         #x900000058
   )
-|#
 ;; DEAD: medius (online feature)
 
 
 
 
 
-#|
 (deftype medius-update-ladder-stats-wide-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (ladder-type int32       :offset-assert 24)
-   (stats uint8 100 :offset-assert 28)
+   (stats int32 100 :offset-assert 28)
    )
   :method-count-assert 9
   :size-assert         #x1ac
   :flag-assert         #x9000001ac
   )
-|#
 ;; DEAD: medius (online feature)
 
 
 
 
 
-#|
 (deftype medius-update-clan-ladder-stats-wide-delta-request (structure)
   ((message-id uint8 21 :offset-assert 0)
    (clan-id    int32       :offset-assert 24)
-   (stats uint8 100 :offset-assert 28)
+   (stats int32 100 :offset-assert 28)
    )
   :method-count-assert 9
   :size-assert         #x1ac
   :flag-assert         #x9000001ac
   )
-|#
 
 
 
@@ -26576,6 +26569,7 @@
    (streamable-flag         uint32      :offset-assert 268)
    (streaming-data-rate     uint32      :offset-assert 272)
    )
+  :pack-me
   :method-count-assert 9
   :size-assert         #x114
   :flag-assert         #x900000114
@@ -26589,6 +26583,7 @@
   ((key uint8 56 :offset-assert 0)
    (value uint8 256 :offset-assert 56)
    )
+  :pack-me
   :method-count-assert 9
   :size-assert         #x138
   :flag-assert         #x900000138
@@ -26844,7 +26839,6 @@
 
 
 
-#|
 (deftype medius-file-update-attributes-request (structure)
   ((medius-file-info               medius-file            :inline :offset-assert 0)
    (medius-file-updated-attributes medius-file-attributes :inline :offset-assert 172)
@@ -26854,7 +26848,6 @@
   :size-assert         #x1d5
   :flag-assert         #x9000001d5
   )
-|#
 
 
 
@@ -26888,7 +26881,6 @@
 
 
 
-#|
 (deftype medius-file-get-attributes-response (structure)
   ((medius-file-info                medius-file            :inline :offset-assert 0)
    (medius-file-attributes-response medius-file-attributes :inline :offset-assert 172)
@@ -26899,14 +26891,12 @@
   :size-assert         #x1d9
   :flag-assert         #x9000001d9
   )
-|#
 ;; DEAD: medius (online feature)
 
 
 
 
 
-#|
 (deftype medius-file-update-meta-data-request (structure)
   ((medius-file-info        medius-file           :inline :offset-assert 0)
    (medius-update-meta-data medius-file-meta-data :inline :offset-assert 172)
@@ -26916,7 +26906,6 @@
   :size-assert         #x1f9
   :flag-assert         #x9000001f9
   )
-|#
 
 
 
@@ -27557,7 +27546,6 @@
 
 
 
-#|
 (deftype net-lanpeer-desc (structure)
   ((dme-version      net-dme-version         :inline :offset-assert 0)
    (net-platform-id  int32                           :offset-assert 20)
@@ -27571,14 +27559,12 @@
   :size-assert         #xa4
   :flag-assert         #x9000000a4
   )
-|#
 ;; DEAD: network infrastructure
 
 
 
 
 
-#|
 (deftype net-initialize-in-params (structure)
   ((b-default-set                  int32                           :offset-assert 0)
    (localization                   net-localization-params :inline :offset-assert 4)
@@ -27598,7 +27584,6 @@
   :flag-assert         #x900000078
   ;; field p-system-message-callback-data uses ~A with a signed load.
   )
-|#
 
 ;; DEAD: network infrastructure
 
@@ -27606,7 +27591,6 @@
 
   
 
-#|
 (deftype net-host-peer-to-peer-in-params (structure)
   ((b-default-set                            int32                           :offset-assert 0)
    (pf-local-connect-callback                basic                           :offset-assert 4)
@@ -27633,7 +27617,6 @@
   :flag-assert         #x9000000c0
   ;; field p-local-connect-callback-data uses ~A with a signed load. field p-local-disconnect-callback-data uses ~A with a signed load. field p-remote-client-connect-callback-data uses ~A with a signed load. field p-remote-client-disconnect-callback-data uses ~A with a signed load. field p-system-status-callback-data uses ~A with a signed load.
   )
-|#
 
   
 ;; DEAD: network infrastructure

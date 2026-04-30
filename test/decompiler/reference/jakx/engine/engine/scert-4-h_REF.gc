@@ -1361,6 +1361,7 @@
    (lobby-name             uint8  64)
    (game-name              uint8  64)
    )
+  :pack-me
   )
 
 ;; definition for method 3 of type medius-player-online-state

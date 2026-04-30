@@ -1242,9 +1242,231 @@
   this
   )
 
-;; type medius-get-ladder-stats-response is defined here, but it is unknown to the decompiler
+;; definition of type medius-get-ladder-stats-response
+(deftype medius-get-ladder-stats-response (structure)
+  ((message-id   uint8  21)
+   (status-code  int32)
+   (stats        int32  15)
+   )
+  )
 
-(method-set! (the-as type medius-get-ladder-stats-response) 3 L1293)
+;; definition for method 3 of type medius-get-ladder-stats-response
+(defmethod inspect ((this medius-get-ladder-stats-response))
+  (when (not this)
+    (set! this this)
+    (goto cfg-133)
+    )
+  (format #t "[~8x] ~A~%" this 'medius-get-ladder-stats-response)
+  (format #t "~1Tmessage-id[21] @ #x~X~%" (-> this message-id))
+  (let ((t9-2 format)
+        (a0-3 #t)
+        (a1-2 "~1Tstatus-code: #x~X : ~S~%")
+        (a2-2 (-> this status-code))
+        (v1-2 (-> this status-code))
+        )
+    (t9-2 a0-3 a1-2 a2-2 (cond
+                           ((= v1-2 -980)
+                            "medius-filter-not-found"
+                            )
+                           ((= v1-2 -983)
+                            "medius-clear-game-list-filter-failed"
+                            )
+                           ((= v1-2 -963)
+                            "medius-file-does-not-exist"
+                            )
+                           ((= v1-2 -990)
+                            "medius-not-clan-leader"
+                            )
+                           ((= v1-2 -986)
+                            "medius-exceeds-max-worlds"
+                            )
+                           ((= v1-2 -959)
+                            "medius-cache-failure"
+                            )
+                           ((= v1-2 -971)
+                            "medius-clan-not-found"
+                            )
+                           ((= v1-2 -991)
+                            "medius-wmerror"
+                            )
+                           ((zero? v1-2)
+                            "medius-success"
+                            )
+                           ((= v1-2 -955)
+                            "medius-key-error"
+                            )
+                           ((= v1-2 -993)
+                            "medius-incorrect-login-step"
+                            )
+                           ((= v1-2 -982)
+                            "medius-get-game-list-filter-failed"
+                            )
+                           ((= v1-2 -946)
+                            "medius-server-busy"
+                            )
+                           ((= v1-2 -951)
+                            "medius-leader-cannot-leave-clan"
+                            )
+                           ((= v1-2 -969)
+                            "medius-session-key-invalid"
+                            )
+                           ((= v1-2 -972)
+                            "medius-player-banned"
+                            )
+                           ((= v1-2 -978)
+                            "medius-invalid-password"
+                            )
+                           ((= v1-2 -996)
+                            "medius-end-session-failed"
+                            )
+                           ((= v1-2 -950)
+                            "medius-feature-not-enabled"
+                            )
+                           ((= v1-2 -992)
+                            "medius-already-leader-of-clan"
+                            )
+                           ((= v1-2 -999)
+                            "medius-account-already-exists"
+                            )
+                           ((= v1-2 -970)
+                            "medius-clan-name-in-use"
+                            )
+                           ((= v1-2 -948)
+                            "medius-world-is-full"
+                            )
+                           ((= v1-2 -954)
+                            "medius-incompatible-app-id"
+                            )
+                           ((= v1-2 -988)
+                            "medius-dberror"
+                            )
+                           ((= v1-2 -976)
+                            "medius-channel-not-found"
+                            )
+                           ((= v1-2 -952)
+                            "medius-machine-banned"
+                            )
+                           ((= v1-2 -975)
+                            "medius-game-name-exists"
+                            )
+                           ((= v1-2 #xffffff)
+                            "extra-medius-callback-status"
+                            )
+                           ((= v1-2 -943)
+                            "medius-password-not-uccompliant"
+                            )
+                           ((= v1-2 -944)
+                            "medius-account-not-uccompliant"
+                            )
+                           ((= v1-2 -967)
+                            "medius-filter-failed"
+                            )
+                           ((= v1-2 -974)
+                            "medius-channel-name-exists"
+                            )
+                           ((= v1-2 -945)
+                            "medius-num-game-worlds-per-lobby-world-exceeded"
+                            )
+                           ((= v1-2 -994)
+                            "medius-registration-failed"
+                            )
+                           ((= v1-2 -968)
+                            "medius-text-string-invalid"
+                            )
+                           ((= v1-2 -949)
+                            "medius-dnassignature-logged-in"
+                            )
+                           ((= v1-2 -981)
+                            "medius-num-filters-at-max"
+                            )
+                           ((= v1-2 -973)
+                            "medius-game-name-not-found"
+                            )
+                           ((= v1-2 -995)
+                            "medius-login-failed"
+                            )
+                           ((= v1-2 -977)
+                            "medius-game-not-found"
+                            )
+                           ((= v1-2 -953)
+                            "medius-account-banned"
+                            )
+                           ((= v1-2 -979)
+                            "medius-invalid-request-msg"
+                            )
+                           ((= v1-2 -956)
+                            "medius-max-exceeded"
+                            )
+                           ((= v1-2 -958)
+                            "medius-data-already-exists"
+                            )
+                           ((= v1-2 3)
+                            "medius-world-created-size-reduced"
+                            )
+                           ((= v1-2 -966)
+                            "medius-fail"
+                            )
+                           ((= v1-2 -962)
+                            "medius-file-already-exists"
+                            )
+                           ((= v1-2 -960)
+                            "medius-file-quota-exceeded"
+                            )
+                           ((= v1-2 4)
+                            "medius-pass"
+                            )
+                           ((= v1-2 1)
+                            "medius-no-result"
+                            )
+                           ((= v1-2 -985)
+                            "medius-request-denied"
+                            )
+                           ((= v1-2 -1000)
+                            "medius-begin-session-failed"
+                            )
+                           ((= v1-2 -987)
+                            "medius-dmeerror"
+                            )
+                           ((= v1-2 -997)
+                            "medius-account-logged-in"
+                            )
+                           ((= v1-2 -964)
+                            "medius-file-no-permissions"
+                            )
+                           ((= v1-2 -989)
+                            "medius-player-not-privileged"
+                            )
+                           ((= v1-2 -947)
+                            "medius-not-clan-member"
+                            )
+                           ((= v1-2 2)
+                            "medius-request-accepted"
+                            )
+                           ((= v1-2 -961)
+                            "medius-file-invalid-filename"
+                            )
+                           ((= v1-2 -957)
+                            "medius-data-does-not-exist"
+                            )
+                           ((= v1-2 -965)
+                            "medius-file-internal-access-error"
+                            )
+                           ((= v1-2 -984)
+                            "medius-set-game-list-filter-failed"
+                            )
+                           ((= v1-2 -998)
+                            "medius-account-not-found"
+                            )
+                           (else
+                             "*unknown*"
+                             )
+                           )
+          )
+    )
+  (format #t "~1Tstats[15] @ #x~X~%" (-> this stats))
+  (label cfg-133)
+  this
+  )
 
 ;; definition of type medius-get-ladder-stats-wide-request
 (deftype medius-get-ladder-stats-wide-request (structure)

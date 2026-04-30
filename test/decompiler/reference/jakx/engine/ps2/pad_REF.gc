@@ -637,16 +637,15 @@
        (set! (-> mouse button0-rel 0) (logclear (-> mouse button0-abs 0) (-> mouse button0-abs 1)))
        )
       )
-    (when (and (-> mouse active) (-> mouse valid) (-> mouse cursor))
-      (let ((t9-6 add-debug-cursor))
-        #t
-        794
-        (+ (the int (-> mouse posx)) 256)
-        (+ (the int (-> mouse posy)) 208)
-        (-> mouse button0-abs 0)
-        (t9-6)
+    (if (and (-> mouse active) (-> mouse valid) (-> mouse cursor))
+        (add-debug-cursor
+          #t
+          (bucket-id debug-cursor)
+          (+ (the int (-> mouse posx)) 256)
+          (+ (the int (-> mouse posy)) 208)
+          (the-as int (-> mouse button0-abs 0))
+          )
         )
-      )
     )
   (none)
   )

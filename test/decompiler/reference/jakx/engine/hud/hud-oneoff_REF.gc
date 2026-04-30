@@ -99,7 +99,39 @@
   :enter (behavior ()
     (set! (-> self state-time) (the-as uint (current-time)))
     )
-  :trans L1
+  :trans (behavior ()
+    (let ((v1-0 (-> self context))
+          (f0-0 (-> self screen-from x))
+          (f1-0 (-> self screen-from y))
+          )
+      (s.f! (+ v1-0 28) f0-0)
+      (s.f! (+ v1-0 32) f1-0)
+      )
+    (print-game-text
+      (the-as string (-> self text))
+      (the-as font-context (-> self context))
+      #f
+      44
+      (bucket-id debug-hud-7)
+      (the-as string #f)
+      (the-as dma-buffer #f)
+      )
+    (let ((f0-3 (/ (the float (- (current-time) (the-as int (-> self state-time)))) (the float (-> self duration))))
+          (v1-5 (-> self context))
+          )
+      (cond
+        ((>= f0-3 1.0)
+         (go empty-state)
+         )
+        (else
+          (let ((f0-4 (- 1.0 f0-3)))
+            (s.f! (+ v1-5 4) f0-4)
+            )
+          (set! (-> self screen-from y) (- (-> self screen-from y) (* (-> self float-rate) (seconds-per-frame))))
+          )
+        )
+      )
+    )
   :code sleep-code
   )
 
