@@ -426,7 +426,19 @@
 ;; failed to figure out what this is:
 (defstate idle (krasmale)
   :virtual #t
-  :code L17
+  :code (behavior ()
+    (until #f
+      (ja-no-eval :group! (-> self anim)
+                  :num! (seek! (the float (+ (-> (the-as (pointer uint16) (-> (the-as krasmale (-> self anim)) self)) 0) -1)))
+                  :frame-num 0.0
+                  )
+      (until (ja-done? 0)
+        (suspend)
+        (ja :num! (seek!))
+        )
+      )
+    #f
+    )
   :post (behavior ()
     (ja-post)
     )
@@ -517,7 +529,19 @@
 ;; failed to figure out what this is:
 (defstate idle (krasfemale)
   :virtual #t
-  :code L6
+  :code (behavior ()
+    (until #f
+      (ja-no-eval :group! (-> self anim)
+                  :num! (seek! (the float (+ (-> (the-as (pointer uint16) (-> (the-as krasfemale (-> self anim)) self)) 0) -1)))
+                  :frame-num 0.0
+                  )
+      (until (ja-done? 0)
+        (suspend)
+        (ja :num! (seek!))
+        )
+      )
+    #f
+    )
   :post (behavior ()
     (ja-post)
     )
