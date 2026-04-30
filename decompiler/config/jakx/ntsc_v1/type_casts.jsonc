@@ -5047,6 +5047,30 @@
       "process-drawable"
     ]
   ],
+  "(code idle krasmale)": [
+    [
+      6,
+      "v1",
+      "krasmale"
+    ],
+    [
+      7,
+      "v1",
+      "(pointer uint16)"
+    ]
+  ],
+  "(code idle krasfemale)": [
+    [
+      6,
+      "v1",
+      "krasfemale"
+    ],
+    [
+      7,
+      "v1",
+      "(pointer uint16)"
+    ]
+  ],
   "(code idle swingpole)": [
     [
       6,
@@ -15409,6 +15433,11 @@
     ]
   ],
   "(anon-function 2 memory-usage)": [
+    [
+      206,
+      "v1",
+      "collide-shape"
+    ],
     [
       211,
       "v1",

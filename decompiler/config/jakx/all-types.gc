@@ -29859,7 +29859,10 @@
 
   
 (deftype collide-shape-moving (collide-shape)
-  ((csm-pad uint8 272 :offset 200))
+  ((csm-pad-1  uint8    264  :offset 200)  ;; pads GOAL 200-463
+   (coverage   float         :offset 464)  ;; MIPS 460 = GOAL 464
+   (dynam      dynamics      :offset 468)  ;; MIPS 464 = GOAL 468 — accessed by target-float enter/trans
+   )
   :method-count-assert 55
   :size-assert         #x1d8
   :flag-assert         #x37000001d8
@@ -31516,8 +31519,9 @@
 
   
 (deftype target (process-focusable)
-  ((self                   target           :override)
-   (ppointer               (pointer target) :override)
+  ((self                   target               :override)
+   (ppointer               (pointer target)     :override)
+   (root                   collide-shape-moving :override)  ;; jak3-backed: target.root is csm, not trsqv
    ;; target's own fields, derived from inspect method asm (GOAL offset = MIPS offset + 4)
    (vehicle                uint64           :offset-assert 256)  ;; MIPS 252
    (game                   uint32           :offset-assert 264)  ;; MIPS 260
