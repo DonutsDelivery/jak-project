@@ -53,9 +53,8 @@ Without this corrector, the fogginess of the world would change as the FOV chang
 
 (define *math-camera-fog-correction* (new 'global 'fog-corrector))
 
-;; ERROR: failed type prop at 302: Could not figure out load: (set! v1 (l.w (+ s5 588)))
-;; WARN: Return type mismatch none vs math-camera.
-(defun update-math-camera ((a0-0 math-camera) (a1-0 symbol) (a2-0 symbol) (a3-0 float))
+;; jak3 port with jakx additions (set-aspect-ratio, fov-correction-factor from binary)
+(defun update-math-camera ((arg0 math-camera) (arg1 symbol) (arg2 symbol) (arg3 float))
   "Compute some one-time camera constants.
    These should only change when changing aspect ratio."
   (local-vars
