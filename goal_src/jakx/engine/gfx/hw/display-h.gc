@@ -108,6 +108,8 @@ At any point in time, there are 3 frames in progress:
   )
 
 
+(define-extern set-display (function display display))
+
 (defmethod new display ((allocation symbol) (type-to-make type) (arg0 int) (arg1 int) (arg2 int) (arg3 int) (arg4 int))
   (let ((gp-0 (object-new allocation type-to-make (the-as int (-> type-to-make size)))))
     (set-display gp-0)
@@ -186,6 +188,8 @@ At any point in time, there are 3 frames in progress:
     gp-0
     )
   )
+
+(define-extern *display* display)
 
 (define *pre-draw-hook* (the-as (function object none) nothing))
 
