@@ -44802,12 +44802,8 @@
     [92, "gp", "game-save"]
   ],
   "(method 64 driver-jak)": [
-    [
-      10,
-      "v1",
-      "uint8"
-    ],
-    [10, "gp", "driver-jak"]
+    [10, "gp", "driver-jak"],
+    [14, "a0", "process"]
   ],
   "build-instance-list": [
     [
@@ -49743,7 +49739,8 @@
   ],
   "dm-float-field-tie-vanish-far-func": [
     [25, "s2", "prototype-bucket-tie"],
-    [31, "s2", "prototype-bucket-tie"]
+    [31, "s2", "prototype-bucket-tie"],
+    [28, "s2", "prototype-bucket-tie"]
   ],
   "initialize-anim-tester": [
     [[0, 999], "s6", "anim-tester"]
@@ -49788,12 +49785,39 @@
     [0, "a0", "net-player"]
   ],
   "handle-sys-msg": [
-    [[0, 10], "gp", "net-type-system-message-data"]
+    [[0, 10], "gp", "net-type-system-message-data"],
+    [51, "gp", "net-type-system-message-data"]
   ],
   "(method 10 mem-manager)": [
-    [2, "v1", "memblock"]
+    [[0, 47], "v1", "memblock"]
   ],
   "(method 9 mem-manager)": [
-    [[43, 61], "s5", "memblock"]
+    [44, "s5", "memblock"],
+    [46, "s5", "memblock"],
+    [51, "s5", "memblock"],
+    [55, "s5", "memblock"],
+    [56, "s5", "memblock"],
+    [61, "s5", "memblock"]
+  ],
+  "(method 271 wvehicle)": [
+    [17, "v1", "rigid-body-vehicle-constants"]
+  ],
+  "(method 3 medius-cached-info)": [
+    [24, "gp", "medius-cached-info"]
+  ],
+  "check-start-load": [
+    [0, "s6", "net-world"]
+  ],
+  "dm-float-field-tie-rvanish-func": [
+    [25, "s2", "prototype-bucket-tie"]
+  ],
+  "draw-instance-info": [
+    [188, "s5", "prototype-bucket-tie"]
+  ],
+  "load-sound-banks": [
+    [6, "s6", "net-world"]
+  ],
+  "wait-for-lock": [
+    [39, "s6", "net-world"]
   ]
 }
