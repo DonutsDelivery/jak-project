@@ -11,7 +11,12 @@
 ;; DECOMP BEGINS
 
 (deftype ellipsoid (vector)
-  ()
+  ((height  float  :overlay-at (-> data 1))
+   (width   float  :overlay-at (-> data 0))
+   (length  float  :overlay-at (-> data 2))
+   (h       float  :overlay-at (-> data 1))
+   (l       float  :overlay-at (-> data 2))
+   )
   )
 
 (deftype curve (structure)
@@ -58,7 +63,7 @@ This stores the parameters and state for evaluating this curve."
    )
   :pack-me
   (:methods
-    (lissajous-method-9 (_type_ vector) vector)
+    (evaluate! (_type_ vector) vector)
     )
   )
 
@@ -71,7 +76,7 @@ stepping forward the dynamics."
    (rate     lissajous  :inline)
    )
   (:methods
-    (lissajous-interp-method-9 (_type_ vector) vector)
-    (lissajous-interp-method-10 (_type_) float)
+    (evaluate! (_type_ vector) vector)
+    (update! (_type_) float)
     )
   )

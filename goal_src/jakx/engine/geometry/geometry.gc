@@ -1646,11 +1646,11 @@
   (vector-normalize! arg0 1.0)
   )
 
-(defmethod lissajous-interp-method-9 ((this lissajous-interp) (arg0 vector))
-  (lissajous-method-9 (-> this current) arg0)
+(defmethod evaluate! ((this lissajous-interp) (arg0 vector))
+  (evaluate! (-> this current) arg0)
   )
 
-(defmethod lissajous-interp-method-10 ((this lissajous-interp))
+(defmethod update! ((this lissajous-interp))
   (seek! (-> this current x-mag) (-> this dest x-mag) (-> this rate x-mag))
   (seek! (-> this current y-mag) (-> this dest y-mag) (-> this rate y-mag))
   (seek! (-> this current theta-rate) (-> this dest theta-rate) (-> this rate theta-rate))
@@ -1662,7 +1662,7 @@
         )
   )
 
-(defmethod lissajous-method-9 ((this lissajous) (arg0 vector))
+(defmethod evaluate! ((this lissajous) (arg0 vector))
   0.0
   0.0
   (let ((f30-0 (* (cos (* (-> this theta) (-> this wx))) (-> this x-mag)))
