@@ -81,9 +81,11 @@ Val* Compiler::compile_define(const goos::Object& form, const goos::Object& rest
       }
       m_symbol_types.set(sym.as_symbol(), in_gpr->type());
     } else if (!explicit_no_typecheck) {
-      // Type check is required
-      typecheck(form, *existing_type, in_gpr->type(),
-                fmt::format("define on existing symbol {}", sym.as_symbol().name_ptr));
+      // Use allow_false variant so (define X #f) works for pointer-typed globals.
+      // set! already uses this path; define was inconsistently using plain typecheck.
+      typecheck_reg_type_allow_false(form, *existing_type, compiled_val,
+                                     fmt::format("define on existing symbol {}",
+                                                 sym.as_symbol().name_ptr));
     }
   }
 
