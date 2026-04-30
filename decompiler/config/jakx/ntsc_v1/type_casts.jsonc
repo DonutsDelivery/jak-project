@@ -1,4 +1,14 @@
 {
+  // race-manager: handle dereference pattern.
+  // Op 20: sllv a0,v1,r0 extracts the (pointer process) from v1-4 (handle).
+  // Cast v1 to (pointer process) for ops 20-22 so the collapsed form compiles.
+  "(method 10 race-state)": [
+    [
+      [20, 22],
+      "v1",
+      "(pointer process)"
+    ]
+  ],
   "(method 0 cpu-thread)": [
     [
       [

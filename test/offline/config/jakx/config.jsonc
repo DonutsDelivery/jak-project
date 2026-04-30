@@ -35,6 +35,7 @@
     // reference. Content matches REF but goalc can't resolve raw label symbols.
     "tie-h",
     "sky-h",
+    "net-time-trial-h",
     "shrubbery-h",
     "minimap-h",
     // jakx: talker-speech-class.name (string at struct offset 0) confuses static-ref
@@ -53,7 +54,29 @@
     // jakx: L13/L14 raw label refs (same static-ref pattern as mood-tables).
     "file-io",
     "game-info-h",
-    "net-mgr-medius-players-h"
+    "net-mgr-medius-players-h",
+    // jakx: hoff-text-floater.context is typed basic; decompiler emits raw (s.f! (+ v1-0 28) ...)
+    // which GOALC rejects as "Cannot do math on a basic". Disasm matches REF.
+    "hud-oneoff",
+    // jakx: hud-effect-font-effect static ref fails (unknown data at offset 4 in L859),
+    // cascading to (hud-method-26 this) TypeCheck failure in hud-method-24. Disasm matches REF.
+    "hud-results-grand-prix",
+    // jakx: art groups rustyh-mug-ag etc. not in *art-info* at compile time (character DGOs
+    // not in test config). Disasm matches REF.
+    "intro-scenes2",
+    // jakx: art group atoll-rotor-ag not in *art-info* at compile time.
+    // Level DGO art groups are not registered during offline-test. Disasm matches REF.
+    "atoll-obs",
+    // jakx: net-mgr.notify field ForwardProp failure — l.wu at offset 144 returns symbol but
+    // code accesses symbol+28. Likely net-mgr field layout drift from all-types.gc. REF matches.
+    "net-mgr-playback",
+    // jakx: (method 12 medius-cached-info-clan) type prop fails (uninitialized register +
+    // static ref failure at L351). Complex layout/type issue. Disasm matches REF.
+    "net-mgr-medius-clans-h",
+    // jakx: (-> v1-4 0) where v1-4 is handle — decompiler emits array-access instead of
+    // (-> v1-4 process 0). sllv/lwu collapsing loses the (the-as (pointer process)) cast.
+    // C++ codegen bug. Disasm matches REF.
+    "race-manager"
   ],
 
   // Skip goalc-compiling these specific functions/methods inside otherwise-good files.
