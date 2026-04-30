@@ -25,12 +25,6 @@
     "subdivide",
     "shadow-cpu-h",
     "foreground",
-    // jakx: *bucket-map* typed (pointer bucket-id-16); GOALC rejects (define X #f) with pointer type.
-    // Type is correct; skip compile, REF already matches.
-    "foreground-h",
-    // jakx: *usb-to-ascii-map* typed (pointer uint8); GOALC rejects (define X #f) with pointer type.
-    // Type is correct; skip compile, REF already matches.
-    "pad",
     "tie-methods",
     "scene-actor",
     // jakx: unresolved <static-data-LN> placeholder for *net-play-mode-text-ids*
@@ -47,8 +41,9 @@
     // decompiler → *talker-speech* #f fallback → TypeCheck fail.
     "ambient-h",
     // jakx: lightning-probe-vars.probe-dirs (inline-array vector) at static L33+64
-    // has a raw runtime address → decompile_at_label "unknown data" → *lightning-probe-vars* #f
-    // → TypeCheck fail (symbol ≠ lightning-probe-vars). Decompiler limitation; skip compile.
+    // holds a raw runtime address → decompile_at_label "unknown data" → *lightning-probe-vars* #f.
+    // Jak3 has the same upstream limitation for the same reason (runtime-address in static data).
+    // Not addressable from config; this is a decompiler structural gap.
     "lightning-h",
     // jakx: (the-as TYPE Lnn) static label references not resolvable by goalc.
     "mood-tables",
@@ -58,33 +53,7 @@
     // jakx: L13/L14 raw label refs (same static-ref pattern as mood-tables).
     "file-io",
     "game-info-h",
-    "net-mgr-medius-players-h",
-    // jakx: *medius-clan-members-N* typed as object → GOALC "(+ object 4)" error. medius-cache.objects
-    // is basic → ForwardProp fails lwu 136(basic). :dynamic-field struct crash when typed correctly.
-    // Skip compile; REF match is the done-gate.
-    "net-mgr-medius-clans-h",
-    // jakx: *playback-event-header* typed as pointer; GOALC rejects (define X #f) when X expects
-    // pointer (symbol ≠ pointer TypeCheck). ForwardProp fix is correct — emit uses (&+ pointer 4).
-    // Skip compile; REF match is the done-gate.
-    "net-mgr-playback",
-    // jakx: race-manager emits (-> handle 0) for process-field extraction from handle type.
-    // GOALC rejects array-index on handle. REF matches current disasm; skip compile.
-    "race-manager",
-    // jakx: hoff-text-floater.context typed as basic; trans handler does (s.f! (+ basic 28) f).
-    // GOALC rejects math on basic type. REF matches; skip compile.
-    "hud-oneoff",
-    // jakx: decompile_at_label failure on hud-effect-font-effect (unknown data at L859+4)
-    // cascades → TypeCheck got "object" expecting "function". REF matches; skip compile.
-    "hud-results-grand-prix",
-    // jakx: (code idle krasmale/krasfemale) type-prop at op 6: l.wu (+ v1 32) fails —
-    // v1 is state-event-handler pointer but ForwardProp can't infer type. REF matches; skip compile.
-    "intro-scenes2",
-    // jakx: (anon-function 2 memory-usage) type-prop at op 206: l.wu (+ v1 156) fails →
-    // cascades to TypeCheck got uint32 expecting function. REF matches; skip compile.
-    "memory-usage",
-    // jakx: (enter/trans target-float) type-prop at op 19/16: l.wu (+ a0 464) fails —
-    // a0 is process-drawable but offset 464 is beyond inferred size. REF matches; skip compile.
-    "target"
+    "net-mgr-medius-players-h"
   ],
 
   // Skip goalc-compiling these specific functions/methods inside otherwise-good files.
