@@ -4,14 +4,14 @@
 ;; definition for symbol *playback-stream*, type file-stream
 (define *playback-stream* (new 'static 'file-stream))
 
-;; definition for symbol *playback-name*, type object
-(define *playback-name* (the-as object (new 'global 'string 128 "logs/9-2_20-45-10_192.168.1.2")))
+;; definition for symbol *playback-name*, type string
+(define *playback-name* (new 'global 'string 128 "logs/9-2_20-45-10_192.168.1.2"))
 
-;; definition for symbol *playback-start-time*, type object
-(define *playback-start-time* (the-as object 0))
+;; definition for symbol *playback-start-time*, type time-frame
+(define *playback-start-time* (the-as time-frame 0))
 
-;; definition for symbol *playback-log-start-time*, type object
-(define *playback-log-start-time* (the-as object 0))
+;; definition for symbol *playback-log-start-time*, type time-frame
+(define *playback-log-start-time* (the-as time-frame 0))
 
 ;; definition for symbol *playback-buf-mem*, type object
 (define *playback-buf-mem* #f)
@@ -19,11 +19,11 @@
 ;; definition for symbol *playback-buf*, type object
 (define *playback-buf* #f)
 
-;; definition for symbol *playback-next-event-time*, type object
-(define *playback-next-event-time* (the-as object 0))
+;; definition for symbol *playback-next-event-time*, type time-frame
+(define *playback-next-event-time* (the-as time-frame 0))
 
-;; definition for symbol *playback-time*, type object
-(define *playback-time* (the-as object 0))
+;; definition for symbol *playback-time*, type time-frame
+(define *playback-time* (the-as time-frame 0))
 
 ;; definition for symbol *playback-bytes-left*, type int
 (define *playback-bytes-left* 0)
@@ -31,8 +31,8 @@
 ;; definition for symbol *playback-machine*, type object
 (define *playback-machine* (the-as object 0))
 
-;; definition for symbol *playback-delay*, type object
-(define *playback-delay* (the-as object 0))
+;; definition for symbol *playback-delay*, type time-frame
+(define *playback-delay* (the-as time-frame 0))
 
 ;; definition for symbol *playback-event-header*, type object
 (define *playback-event-header* #f)
@@ -61,24 +61,12 @@
 (defstate starting-playback-game (net-mgr)
   :virtual #t
   :code (behavior ()
-    (let ((v1-0 *playback-name*))
-      (s.b! (+ v1-0 4) 0)
-      )
-    (let ((t9-0 format))
-      *playback-name*
-      "~G"
-      (the-as none (+ (the-as uint *net-log-name*) 4))
-      (t9-0)
-      )
-    (let ((t9-1 (the-as none file-stream-open)))
-      (the-as none *playback-stream*)
-      (the-as none *playback-name*)
-      (the-as none 'read)
-      (t9-1)
-      )
+    (set! (-> *playback-name* data 0) (the-as uint 0))
+    (format *playback-name* "~G" (-> *net-log-name* data))
+    (file-stream-open *playback-stream* *playback-name* 'read)
     (read-event-header)
-    (set! *playback-start-time* (l.d (+ (the-as uint (-> self clock)) 20)))
-    (set! *playback-log-start-time* (l.w (+ (the-as uint *playback-event-header*) 4)))
+    (set! *playback-start-time* (current-time))
+    (set! *playback-log-start-time* (the-as time-frame (l.w (+ (the-as uint *playback-event-header*) 4))))
     (let ((t9-3 (the-as none file-stream-length)))
       (the-as none *playback-stream*)
       (set! *playback-bytes-left* (the-as int (t9-3)))
@@ -142,14 +130,9 @@
   :code (behavior ()
     (local-vars (sp-0 none))
     (loop
-      (while (let ((v1-5 (the-as none (+ (the-as uint (- (current-time) (the-as int *playback-start-time*)))
-                                         (the-as uint *playback-log-start-time*)
-                                         )
-                                 )
-                         )
-                   )
+      (while (let ((v1-5 (+ (- (current-time) *playback-start-time*) *playback-log-start-time*)))
                (set! *playback-time* v1-5)
-               (< (the-as int v1-5) (the-as int (l.w (+ (the-as uint *playback-event-header*) 4))))
+               (< v1-5 (the-as time-frame (l.w (+ (the-as uint *playback-event-header*) 4))))
                )
         (let ((v1-1 (the-as none (+ (the-as uint *playback-time*) (the-as uint *playback-delay*)))))
           (s.w! (+ self 168) v1-1)

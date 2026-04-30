@@ -50549,16 +50549,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *playback-stream* file-stream)
-(define-extern *playback-name* object)
-(define-extern *playback-start-time* object)
-(define-extern *playback-log-start-time* object)
+(define-extern *playback-name* string)
+(define-extern *playback-start-time* time-frame)
+(define-extern *playback-log-start-time* time-frame)
 (define-extern *playback-buf-mem* object)
 (define-extern *playback-buf* object)
-(define-extern *playback-next-event-time* object)
-(define-extern *playback-time* object)
+(define-extern *playback-next-event-time* time-frame)
+(define-extern *playback-time* time-frame)
 (define-extern *playback-bytes-left* int)
 (define-extern *playback-machine* object)
-(define-extern *playback-delay* object)
+(define-extern *playback-delay* time-frame)
 (define-extern *playback-event-header* object)
 (define-extern read-event-header (function none))
 
@@ -51351,7 +51351,7 @@
 (define-extern *lock-stream* file-stream)
 (define-extern *lock-name* object)
 (define-extern *net-log-stream* file-stream)
-(define-extern *net-log-name* object)
+(define-extern *net-log-name* string)
 (define-extern *net-ip-string* object)
 (define-extern *net-log-buf-mem* object)
 (define-extern *net-log-buf* object)
@@ -54992,7 +54992,7 @@
 
 (define-extern copy-string<-string
                "Copy a string. No bounds check. Writes null terminator." (function string string string))
-(define-extern to-upper (function uint none))
+(define-extern to-upper (function uint uint))
 (define-extern string=
                "Check for string equality."
                (function string string symbol))
