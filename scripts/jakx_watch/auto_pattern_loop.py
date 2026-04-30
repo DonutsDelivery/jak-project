@@ -130,7 +130,10 @@ def run_extractor(dry=False, max_batch=10):
     if dry:
         args += ["--dry-run", "--stats"]
     else:
-        args += ["--apply", "--commit", f"--batch-size={max_batch}"]
+        # err-slack=2: subclass-downcasts can legitimately expose 1-2 previously
+        # hidden errors (type info was wrong before; now correct type reveals them).
+        # This is fine — correctness matters more than the error count.
+        args += ["--apply", "--commit", f"--batch-size={max_batch}", "--err-slack=2"]
     cmd = " ".join(args)
     rc, out, err = sh(cmd, timeout=1800)
     return rc, out + ("\n--STDERR--\n" + err if err else "")

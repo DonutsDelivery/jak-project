@@ -110,6 +110,13 @@ _UNUSABLE_BASE_TYPES = {
     "<uninitialized>",
 }
 
+# Additional types too generic for subclass-downcast guessing. These are
+# container/abstract bases where "one subclass at this offset" is accidental
+# (the offset means different things in different subclasses).
+_SUBCLASS_DOWNCAST_BLOCKLIST = {
+    "array", "glst-node", "glst-list", "inline-array",
+}
+
 
 def _extract_sexpr(text: str, start: int) -> tuple[str, int]:
     """Given text[start] is '(', return (sexpr_str, index_after_close).
@@ -714,6 +721,11 @@ def main() -> int:
             # This tells the decompiler "this register holds the more specific type"
             # and lets it resolve not just this load but all subsequent field
             # accesses from the same register — the compounding mechanism.
+            # Skip generic container types where "one subclass at offset N" is
+            # coincidental and the cast is likely wrong.
+            if pretype in _SUBCLASS_DOWNCAST_BLOCKLIST:
+                reasons["field-not-found"] += 1
+                continue
             sub = guess_subclass_with_field(pretype, err.offset, fields, parents, children)
             if sub is not None:
                 sub_field_type = resolve_field_type(fields, parents, sub, err.offset)
