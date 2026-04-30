@@ -709,6 +709,7 @@
   ((error-threshold-magnitude  float)
    (pf-threshold-callback      basic  :overlay-at error-threshold-magnitude)
    )
+  :pack-me
   )
 
 ;; definition for method 3 of type anonymous-0

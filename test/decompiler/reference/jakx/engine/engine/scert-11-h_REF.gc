@@ -191,6 +191,7 @@
    (application-name  uint8                    72)
    (user-name         uint8                    32)
    )
+  :pack-me
   )
 
 ;; definition for method 3 of type net-lanpeer-desc
@@ -357,37 +358,453 @@
   this
   )
 
-;; type net-resolve-addr-data is defined here, but it is unknown to the decompiler
+;; definition of type net-resolve-addr-data
+(deftype net-resolve-addr-data (structure)
+  ((b-is-set      int32)
+   (error-code    int32)
+   (address-list  net-address-list  :inline)
+   )
+  )
 
-(method-set! (the-as type net-resolve-addr-data) 3 L40)
+;; definition for method 3 of type net-resolve-addr-data
+(defmethod inspect ((this net-resolve-addr-data))
+  (when (not this)
+    (set! this this)
+    (goto cfg-111)
+    )
+  (format #t "[~8x] ~A~%" this 'net-resolve-addr-data)
+  (format #t "~1Tb-is-set: ~D~%" (-> this b-is-set))
+  (let ((t9-2 format)
+        (a0-3 #t)
+        (a1-2 "~1Terror-code: #x~X : ~S~%")
+        (a2-2 (-> this error-code))
+        (v1-2 (-> this error-code))
+        )
+    (t9-2 a0-3 a1-2 a2-2 (cond
+                           ((= v1-2 50)
+                            "net-error-bad-port"
+                            )
+                           ((= v1-2 35)
+                            "net-error-comm-error"
+                            )
+                           ((= v1-2 42)
+                            "net-error-stream-media-comm"
+                            )
+                           ((= v1-2 16)
+                            "net-error-bad-mode"
+                            )
+                           ((= v1-2 34)
+                            "net-error-bad-server-version"
+                            )
+                           ((= v1-2 8)
+                            "net-error-bad-index"
+                            )
+                           ((= v1-2 41)
+                            "net-error-stream-media"
+                            )
+                           ((= v1-2 11)
+                            "net-error-object-not-shared"
+                            )
+                           ((= v1-2 51)
+                            "net-error-bad-connectivity-type"
+                            )
+                           ((= v1-2 31)
+                            "net-error-msg-too-large"
+                            )
+                           ((= v1-2 43)
+                            "net-error-mutex"
+                            )
+                           ((= v1-2 25)
+                            "net-error-too-many-pending-events"
+                            )
+                           ((= v1-2 19)
+                            "net-error-no-free-object"
+                            )
+                           ((= v1-2 33)
+                            "net-error-not-implemented"
+                            )
+                           ((= v1-2 48)
+                            "net-error-token-not-enabled"
+                            )
+                           ((= v1-2 7)
+                            "net-error-bad-session-master"
+                            )
+                           ((= v1-2 12)
+                            "net-error-bad-packet-received"
+                            )
+                           ((= v1-2 46)
+                            "net-error-lookup-error"
+                            )
+                           ((= v1-2 9)
+                            "net-error-bad-data-stream-channel"
+                            )
+                           ((= v1-2 39)
+                            "net-error-sizeof-param-mismatch"
+                            )
+                           ((= v1-2 37)
+                            "net-error-udperror"
+                            )
+                           ((= v1-2 32)
+                            "net-error-security"
+                            )
+                           ((= v1-2 26)
+                            "net-error-udpnot-enabled"
+                            )
+                           ((zero? v1-2)
+                            "net-error-none"
+                            )
+                           ((= v1-2 13)
+                            "net-error-send-failed"
+                            )
+                           ((= v1-2 21)
+                            "net-error-client-not-valid"
+                            )
+                           ((= v1-2 45)
+                            "net-error-hostname-error"
+                            )
+                           ((= v1-2 38)
+                            "net-error-set-defaults-not-called"
+                            )
+                           ((= v1-2 3)
+                            "net-error-connection-failed"
+                            )
+                           ((= v1-2 10)
+                            "net-error-bad-pointer"
+                            )
+                           ((= v1-2 14)
+                            "net-error-timed-out"
+                            )
+                           ((= v1-2 #xffffff)
+                            "extra-net-error-code"
+                            )
+                           ((= v1-2 30)
+                            "net-error-unknown"
+                            )
+                           ((= v1-2 2)
+                            "net-error-connection-lost"
+                            )
+                           ((= v1-2 24)
+                            "net-error-msg-error"
+                            )
+                           ((= v1-2 20)
+                            "net-error-open-data-stream-failed"
+                            )
+                           ((= v1-2 15)
+                            "net-error-bad-connection-index"
+                            )
+                           ((= v1-2 4)
+                            "net-error-client-rejected"
+                            )
+                           ((= v1-2 1)
+                            "net-error-not-connected"
+                            )
+                           ((= v1-2 44)
+                            "net-error-server-error"
+                            )
+                           ((= v1-2 23)
+                            "net-error-invalid-arg"
+                            )
+                           ((= v1-2 28)
+                            "net-error-game-is-full"
+                            )
+                           ((= v1-2 17)
+                            "net-error-dme-not-initialized"
+                            )
+                           ((= v1-2 6)
+                            "net-error-new-client"
+                            )
+                           ((= v1-2 27)
+                            "net-error-update"
+                            )
+                           ((= v1-2 36)
+                            "net-error-buffer-error"
+                            )
+                           ((= v1-2 47)
+                            "net-error-timebase-error"
+                            )
+                           ((= v1-2 29)
+                            "net-error-host-game-failed"
+                            )
+                           ((= v1-2 18)
+                            "net-error-init-failed"
+                            )
+                           ((= v1-2 49)
+                            "net-error-token-error"
+                            )
+                           ((= v1-2 40)
+                            "net-error-deprecated"
+                            )
+                           ((= v1-2 5)
+                            "net-error-disconnect-failed"
+                            )
+                           ((= v1-2 22)
+                            "net-error-memory"
+                            )
+                           (else
+                             "*unknown*"
+                             )
+                           )
+          )
+    )
+  (format #t "~1Taddress-list: #<net-address-list @ #x~X>~%" (-> this address-list))
+  (label cfg-111)
+  this
+  )
 
-;; type net-resolve-addr-in-params is defined here, but it is unknown to the decompiler
+;; definition of type net-resolve-addr-in-params
+(deftype net-resolve-addr-in-params (structure)
+  ((b-default-set             int32)
+   (pf-resolve-addr-callback  basic)
+   (nat-service-address       net-address  :inline)
+   )
+  )
 
-(method-set! (the-as type net-resolve-addr-in-params) 3 L37)
+;; definition for method 3 of type net-resolve-addr-in-params
+(defmethod inspect ((this net-resolve-addr-in-params))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'net-resolve-addr-in-params)
+  (format #t "~1Tb-default-set: ~D~%" (-> this b-default-set))
+  (format #t "~1Tpf-resolve-addr-callback: ~A~%" (-> this pf-resolve-addr-callback))
+  (format #t "~1Tnat-service-address: #<net-address @ #x~X>~%" (-> this nat-service-address))
+  (label cfg-4)
+  this
+  )
 
-;; type net-incoming-client-in-params is defined here, but it is unknown to the decompiler
+;; definition of type net-incoming-client-in-params
+(deftype net-incoming-client-in-params (structure)
+  ((b-default-set          int32)
+   (incoming-address-list  net-address-list  :inline)
+   (pub-key                rsa-key           :inline)
+   )
+  )
 
-(method-set! (the-as type net-incoming-client-in-params) 3 L34)
+;; definition for method 3 of type net-incoming-client-in-params
+(defmethod inspect ((this net-incoming-client-in-params))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'net-incoming-client-in-params)
+  (format #t "~1Tb-default-set: ~D~%" (-> this b-default-set))
+  (format #t "~1Tincoming-address-list: #<net-address-list @ #x~X>~%" (-> this incoming-address-list))
+  (format #t "~1Tpub-key: #<rsa-key @ #x~X>~%" (-> this pub-key))
+  (label cfg-4)
+  this
+  )
 
-;; type net-type-broadcast-schedule is defined here, but it is unknown to the decompiler
+;; definition of type net-type-broadcast-schedule
+(deftype net-type-broadcast-schedule (structure)
+  ((min-update-interval   uint32)
+   (error-threshold-type  int32)
+   (threshold-data        anonymous-0  :inline)
+   (transport-flags       int8)
+   )
+  )
 
-(method-set! (the-as type net-type-broadcast-schedule) 3 L23)
+;; definition for method 3 of type net-type-broadcast-schedule
+(defmethod inspect ((this net-type-broadcast-schedule))
+  (when (not this)
+    (set! this this)
+    (goto cfg-19)
+    )
+  (format #t "[~8x] ~A~%" this 'net-type-broadcast-schedule)
+  (format #t "~1Tmin-update-interval: ~D~%" (-> this min-update-interval))
+  (let ((t9-2 format)
+        (a0-3 #t)
+        (a1-2 "~1Terror-threshold-type: #x~X : ~S~%")
+        (a2-2 (-> this error-threshold-type))
+        (v1-2 (-> this error-threshold-type))
+        )
+    (t9-2 a0-3 a1-2 a2-2 (cond
+                           ((= v1-2 3)
+                            "threshold-ratio-magnitude"
+                            )
+                           ((= v1-2 #xffffff)
+                            "extra-net-threshold-method"
+                            )
+                           ((= v1-2 5)
+                            "threshold-callback"
+                            )
+                           ((= v1-2 1)
+                            "threshold-equality"
+                            )
+                           ((zero? v1-2)
+                            "no-threshold"
+                            )
+                           ((= v1-2 4)
+                            "threshold-anchor-delta"
+                            )
+                           ((= v1-2 2)
+                            "threshold-absolute-magnitude"
+                            )
+                           (else
+                             "*unknown*"
+                             )
+                           )
+          )
+    )
+  (format #t "~1Tthreshold-data: #<anonymous-0 @ #x~X>~%" (-> this threshold-data))
+  (format #t "~1Ttransport-flags: ~D~%" (-> this transport-flags))
+  (label cfg-19)
+  this
+  )
 
-;; type net-type-field is defined here, but it is unknown to the decompiler
+;; definition of type net-type-field
+(deftype net-type-field (structure)
+  ((offset           int32)
+   (element-size     int32)
+   (element-count    int32)
+   (e-type           int32)
+   (update-schedule  net-type-broadcast-schedule  :inline)
+   )
+  )
 
-(method-set! (the-as type net-type-field) 3 L20)
+;; definition for method 3 of type net-type-field
+(defmethod inspect ((this net-type-field))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'net-type-field)
+  (format #t "~1Toffset: ~D~%" (-> this offset))
+  (format #t "~1Telement-size: ~D~%" (-> this element-size))
+  (format #t "~1Telement-count: ~D~%" (-> this element-count))
+  (format #t "~1Te-type: ~D~%" (-> this e-type))
+  (format #t "~1Tupdate-schedule: #<net-type-broadcast-schedule @ #x~X>~%" (-> this update-schedule))
+  (label cfg-4)
+  this
+  )
 
-;; type net-type-structure is defined here, but it is unknown to the decompiler
+;; definition of type net-type-structure
+(deftype net-type-structure (structure)
+  ((total-size          int32)
+   (field-count         int32)
+   (name                uint8  32)
+   (child-field-type    int32  64)
+   (child-field-offset  int32  64)
+   )
+  )
 
-(method-set! (the-as type net-type-structure) 3 L17)
+;; definition for method 3 of type net-type-structure
+(defmethod inspect ((this net-type-structure))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'net-type-structure)
+  (format #t "~1Ttotal-size: ~D~%" (-> this total-size))
+  (format #t "~1Tfield-count: ~D~%" (-> this field-count))
+  (format #t "~1Tname[32] @ #x~X~%" (-> this name))
+  (format #t "~1Tchild-field-type[64] @ #x~X~%" (-> this child-field-type))
+  (format #t "~1Tchild-field-offset[64] @ #x~X~%" (-> this child-field-offset))
+  (label cfg-4)
+  this
+  )
 
-;; type net-lanfind-exchange-callback-in-args is defined here, but it is unknown to the decompiler
+;; definition of type net-lanfind-exchange-callback-in-args
+(deftype net-lanfind-exchange-callback-in-args (structure)
+  ((connection-handle  basic)
+   (session-type       int32)
+   (peer-desc          net-lanpeer-desc  :inline)
+   (details            net-data          :inline)
+   (p-user-data        basic)
+   )
+  )
 
-(method-set! (the-as type net-lanfind-exchange-callback-in-args) 3 L9)
+;; definition for method 3 of type net-lanfind-exchange-callback-in-args
+(defmethod inspect ((this net-lanfind-exchange-callback-in-args))
+  (when (not this)
+    (set! this this)
+    (goto cfg-13)
+    )
+  (format #t "[~8x] ~A~%" this 'net-lanfind-exchange-callback-in-args)
+  (format #t "~1Tconnection-handle: ~A~%" (-> this connection-handle))
+  (let ((t9-2 format)
+        (a0-3 #t)
+        (a1-2 "~1Tsession-type: #x~X : ~S~%")
+        (a2-2 (-> this session-type))
+        (v1-2 (-> this session-type))
+        )
+    (t9-2 a0-3 a1-2 a2-2 (cond
+                           ((= v1-2 2)
+                            "net-session-type-integrated-server"
+                            )
+                           ((= v1-2 #xffffff)
+                            "extra-net-session-type"
+                            )
+                           ((= v1-2 1)
+                            "net-session-type-peer"
+                            )
+                           ((zero? v1-2)
+                            "net-session-type-game"
+                            )
+                           (else
+                             "*unknown*"
+                             )
+                           )
+          )
+    )
+  (format #t "~1Tpeer-desc: #<net-lanpeer-desc @ #x~X>~%" (-> this peer-desc))
+  (format #t "~1Tdetails: #<net-data @ #x~X>~%" (-> this details))
+  (format #t "~1Tp-user-data: ~A~%" (-> this p-user-data))
+  (label cfg-13)
+  this
+  )
 
-;; type net-lanfind-callback-data-args is defined here, but it is unknown to the decompiler
+;; definition of type net-lanfind-callback-data-args
+(deftype net-lanfind-callback-data-args (structure)
+  ((n-num-clients      int16)
+   (n-max-num-clients  int16)
+   (session-type       int32)
+   (peer-desc          net-lanpeer-desc  :inline)
+   (details            net-data          :inline)
+   (p-user-data        basic)
+   )
+  )
 
-(method-set! (the-as type net-lanfind-callback-data-args) 3 L1)
+;; definition for method 3 of type net-lanfind-callback-data-args
+(defmethod inspect ((this net-lanfind-callback-data-args))
+  (when (not this)
+    (set! this this)
+    (goto cfg-13)
+    )
+  (format #t "[~8x] ~A~%" this 'net-lanfind-callback-data-args)
+  (format #t "~1Tn-num-clients: ~D~%" (-> this n-num-clients))
+  (format #t "~1Tn-max-num-clients: ~D~%" (-> this n-max-num-clients))
+  (let ((t9-3 format)
+        (a0-4 #t)
+        (a1-3 "~1Tsession-type: #x~X : ~S~%")
+        (a2-3 (-> this session-type))
+        (v1-2 (-> this session-type))
+        )
+    (t9-3 a0-4 a1-3 a2-3 (cond
+                           ((= v1-2 2)
+                            "net-session-type-integrated-server"
+                            )
+                           ((= v1-2 #xffffff)
+                            "extra-net-session-type"
+                            )
+                           ((= v1-2 1)
+                            "net-session-type-peer"
+                            )
+                           ((zero? v1-2)
+                            "net-session-type-game"
+                            )
+                           (else
+                             "*unknown*"
+                             )
+                           )
+          )
+    )
+  (format #t "~1Tpeer-desc: #<net-lanpeer-desc @ #x~X>~%" (-> this peer-desc))
+  (format #t "~1Tdetails: #<net-data @ #x~X>~%" (-> this details))
+  (format #t "~1Tp-user-data: ~A~%" (-> this p-user-data))
+  (label cfg-13)
+  this
+  )
 
 
 

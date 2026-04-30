@@ -1765,9 +1765,31 @@
   this
   )
 
-;; type medius-file-get-meta-data-request is defined here, but it is unknown to the decompiler
+;; definition of type medius-file-get-meta-data-request
+(deftype medius-file-get-meta-data-request (structure)
+  ((medius-file-info                medius-file            :inline)
+   (medius-meta-data-requested-key  medius-file-meta-data  :inline)
+   (message-id                      uint8                  21)
+   )
+  )
 
-(method-set! (the-as type medius-file-get-meta-data-request) 3 L375)
+;; definition for method 3 of type medius-file-get-meta-data-request
+(defmethod inspect ((this medius-file-get-meta-data-request))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'medius-file-get-meta-data-request)
+  (format #t "~1Tmedius-file-info: #<medius-file @ #x~X>~%" (-> this medius-file-info))
+  (format
+    #t
+    "~1Tmedius-meta-data-requested-key: #<medius-file-meta-data @ #x~X>~%"
+    (-> this medius-meta-data-requested-key)
+    )
+  (format #t "~1Tmessage-id[21] @ #x~X~%" (-> this message-id))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type medius-file-get-meta-data-response
 (deftype medius-file-get-meta-data-response (structure)
@@ -2505,13 +2527,70 @@
   this
   )
 
-;; type medius-server-authentication-request is defined here, but it is unknown to the decompiler
+;; definition of type medius-server-authentication-request
+(deftype medius-server-authentication-request (structure)
+  ((message-id    uint8             21)
+   (trust-level   int32)
+   (address-list  net-address-list  :inline)
+   )
+  )
 
-(method-set! (the-as type medius-server-authentication-request) 3 L158)
+;; definition for method 3 of type medius-server-authentication-request
+(defmethod inspect ((this medius-server-authentication-request))
+  (when (not this)
+    (set! this this)
+    (goto cfg-11)
+    )
+  (format #t "[~8x] ~A~%" this 'medius-server-authentication-request)
+  (format #t "~1Tmessage-id[21] @ #x~X~%" (-> this message-id))
+  (let ((t9-2 format)
+        (a0-3 #t)
+        (a1-2 "~1Ttrust-level: #x~X : ~S~%")
+        (a2-2 (-> this trust-level))
+        (v1-2 (-> this trust-level))
+        )
+    (t9-2 a0-3 a1-2 a2-2 (cond
+                           ((= v1-2 1)
+                            "mgcl-not-trusted"
+                            )
+                           ((zero? v1-2)
+                            "mgcl-trusted"
+                            )
+                           ((= v1-2 #xffffff)
+                            "extra-mgcltrust-level-code"
+                            )
+                           (else
+                             "*unknown*"
+                             )
+                           )
+          )
+    )
+  (format #t "~1Taddress-list: #<net-address-list @ #x~X>~%" (-> this address-list))
+  (label cfg-11)
+  this
+  )
 
-;; type medius-server-authentication-response is defined here, but it is unknown to the decompiler
+;; definition of type medius-server-authentication-response
+(deftype medius-server-authentication-response (structure)
+  ((message-id    uint8                21)
+   (confirmation  int8)
+   (connect-info  net-connection-info  :inline)
+   )
+  )
 
-(method-set! (the-as type medius-server-authentication-response) 3 L155)
+;; definition for method 3 of type medius-server-authentication-response
+(defmethod inspect ((this medius-server-authentication-response))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'medius-server-authentication-response)
+  (format #t "~1Tmessage-id[21] @ #x~X~%" (-> this message-id))
+  (format #t "~1Tconfirmation: ~D~%" (-> this confirmation))
+  (format #t "~1Tconnect-info: #<net-connection-info @ #x~X>~%" (-> this connect-info))
+  (label cfg-4)
+  this
+  )
 
 ;; definition of type medius-server-set-attributes-request
 (deftype medius-server-set-attributes-request (structure)

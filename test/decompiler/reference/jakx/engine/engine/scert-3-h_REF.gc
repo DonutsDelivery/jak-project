@@ -654,6 +654,7 @@
   ((n-size  int32)
    (p-data  basic)
    )
+  :pack-me
   )
 
 ;; definition for method 3 of type net-data
@@ -3298,6 +3299,7 @@
    (a-session-key  uint8  17)
    (a-access-key   uint8  17)
    )
+  :pack-me
   )
 
 ;; definition for method 3 of type net-connection-info
