@@ -8,7 +8,12 @@
     "CGO/GAME.CGO",
     "CGO/ENGINE.CGO",
     "CGO/COMMON.CGO",
-    "CGO/ART.CGO"
+    "CGO/ART.CGO",
+    // Level DGOs — added so compile-audit can test all emitted files, not just CGO subset.
+    "DGO/ATL.DGO",
+    "DGO/ATOLLART.DGO",
+    "DGO/ATOLLS.DGO",
+    "DGO/ATX.DGO"
   ],
 
   // Skip goalc-compiling these (they decompile but we know the output won't compile
