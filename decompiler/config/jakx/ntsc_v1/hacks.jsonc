@@ -41,9 +41,7 @@
   "hint_inline_assembly_functions": [],
   "asm_functions_by_name": [
     "get-car-skel-part",        // wcar-skel-template: CFG building failed; flag-asm to unblock split-failed file (SPLIT_FAILED_DIAGNOSIS.md §9)
-    "vector=",                  // vector: CFG building failed; uses pceqw/ppach SIMD instructions
     "end-perf-stat-collection", // wind: CFG building failed
-    "level-update-wind",        // wind: CFG building failed
     "target-pilot-post",        // target-pilot: CFG building failed
     "get-string-length",
     "name=",
@@ -1752,8 +1750,12 @@
     // particle-curves — jakx-native ports in
     // game/mips2c/jakx_functions/particle_curves.cpp. Structurally
     // identical to jak3; jakx namespace only.
-    // live-func-curve — in asm_functions_by_name (mips2c validation fails with 2094 errors)
-    // birth-func-curve — in asm_functions_by_name (mips2c hits VU instructions; viand/vmtirx/vsqi)
+    "live-func-curve",
+    "birth-func-curve",
+    // source: vector (pceqw/ppach SIMD; mips2c stubs OK, no C++ impl needed)
+    "vector=",
+    // source: wind (CFG build quirk; mips2c stubs OK)
+    "level-update-wind",
     // wvehicle-part — jakx-native port in
     // game/mips2c/jakx_functions/wvehicle_part.cpp. Diverges from jak3:
     //   sparticle-motion-blur-dirt: calls view-get-active-target (split-
@@ -2044,6 +2046,7 @@
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: helmet
     "helmet-hud-init-by-other",
+    "hoff-text-floater-init-by-other",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: menu2-COMMON-GAME
     "(method 59 map-menu)",
@@ -2392,6 +2395,7 @@
     "net-player-init-remote",
     // asm-func: auto-added by asm_func_apply.py 2026-04-24
     // source: net-player
+    "(method 55 eco-powerup-draw)",
     "(method 55 net-player)",
     "(method 63 net-player)",
     "(method 64 net-player)",

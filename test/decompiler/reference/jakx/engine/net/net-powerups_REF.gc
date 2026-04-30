@@ -178,8 +178,14 @@
   )
 
 ;; definition for method 11 of type eco-light
-;; INFO: function output is handled by mips2c
-(defmethod-mips2c "(method 11 eco-light)" 11 eco-light)
+;; WARN: Return type mismatch int vs object.
+(defmethod init-from-entity! ((this eco-light) (arg0 entity-actor))
+  (stack-size-set! (-> this main-thread) 32)
+  (logior! (-> this mask) (process-mask actor-pause))
+  (process-entity-status! this (entity-perm-status dead) #t)
+  (go empty-state)
+  0
+  )
 
 
 

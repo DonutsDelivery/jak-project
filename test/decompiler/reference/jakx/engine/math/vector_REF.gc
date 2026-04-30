@@ -385,7 +385,7 @@
     (when (or (!= f0-1 0.0) (!= f2-1 0.0))
       (let* ((f1-5 (* f0-1 arg3))
              (f0-3 (* f2-1 arg3))
-             (f2-4 (sqrtf (+ (* f1-5 f1-5) (* f0-3 f0-3))))
+             (f2-4 (sqrtf (+ (square f1-5) (square f0-3))))
              )
         (cond
           ((>= arg2 f2-4)
@@ -417,7 +417,7 @@
     (when (or (!= f0-1 0.0) (!= f2-1 0.0))
       (let* ((f1-5 (* f0-1 arg3))
              (f0-3 (* f2-1 arg3))
-             (f2-4 (sqrtf (+ (* f1-5 f1-5) (* f0-3 f0-3))))
+             (f2-4 (sqrtf (+ (square f1-5) (square f0-3))))
              )
         (cond
           ((>= arg2 f2-4)
@@ -451,7 +451,7 @@
       (let* ((f2-6 (* f0-1 arg3))
              (f1-3 (* f1-2 arg3))
              (f0-4 (* f3-1 arg3))
-             (f3-5 (sqrtf (+ (* f2-6 f2-6) (* f1-3 f1-3) (* f0-4 f0-4))))
+             (f3-5 (sqrtf (+ (square f2-6) (square f1-3) (square f0-4))))
              )
         (cond
           ((>= arg2 f3-5)
@@ -1325,7 +1325,6 @@
   )
 
 ;; definition for function vector-deg-diff
-;; WARN: Return type mismatch float vs none.
 (defun vector-deg-diff ((arg0 vector) (arg1 vector) (arg2 vector))
   "Wrapped difference, degrees units. Will have the usual 16-bit accuracy issue."
   (local-vars
@@ -1354,7 +1353,7 @@
     (.itof.vf vf1 vf1)
     (.svf (&-> arg0 quad) vf1)
     (.mov v0-0 vf1)
-    (none)
+    v0-0
     )
   )
 
@@ -1416,7 +1415,6 @@
   )
 
 ;; definition for function vector4-add!
-;; WARN: Return type mismatch float vs none.
 (defun vector4-add! ((arg0 vector4) (arg1 vector4) (arg2 vector4))
   "Add 2 vector4s."
   (local-vars (v0-0 float))
@@ -1429,12 +1427,11 @@
     (.add.vf vf4 vf5 vf6)
     (.svf (&-> arg0 quad) vf4)
     (.mov v0-0 vf4)
-    (none)
+    v0-0
     )
   )
 
 ;; definition for function vector4-sub!
-;; WARN: Return type mismatch float vs none.
 (defun vector4-sub! ((arg0 vector4) (arg1 vector4) (arg2 vector4))
   "Subtract 2 vector4s."
   (local-vars (v0-0 float))
@@ -1447,12 +1444,11 @@
     (.sub.vf vf4 vf5 vf6)
     (.svf (&-> arg0 quad) vf4)
     (.mov v0-0 vf4)
-    (none)
+    v0-0
     )
   )
 
 ;; definition for function vector4-mul!
-;; WARN: Return type mismatch float vs none.
 (defun vector4-mul! ((arg0 vector4) (arg1 vector4) (arg2 vector4))
   "Multiple 2 vector4s."
   (local-vars (v0-0 float))
@@ -1465,12 +1461,11 @@
     (.mul.vf vf4 vf5 vf6)
     (.svf (&-> arg0 quad) vf4)
     (.mov v0-0 vf4)
-    (none)
+    v0-0
     )
   )
 
 ;; definition for function vector4-scale!
-;; WARN: Return type mismatch float vs none.
 (defun vector4-scale! ((arg0 vector4) (arg1 vector4) (arg2 float))
   "arg0 = arg1 * arg2."
   (local-vars (v0-0 float))
@@ -1483,12 +1478,11 @@
     (.mul.x.vf vf4 vf5 vf6)
     (.svf (&-> arg0 quad) vf4)
     (.mov v0-0 vf4)
-    (none)
+    v0-0
     )
   )
 
 ;; definition for function vector4-madd!
-;; WARN: Return type mismatch float vs none.
 (defun vector4-madd! ((arg0 vector4) (arg1 vector4) (arg2 vector4) (arg3 float))
   "arg0 = arg1 + arg2 * arg3."
   (local-vars (v0-0 float))
@@ -1507,12 +1501,11 @@
     (.add.mul.x.vf vf4 vf6 vf7 acc)
     (.svf (&-> arg0 quad) vf4)
     (.mov v0-0 vf4)
-    (none)
+    v0-0
     )
   )
 
 ;; definition for function vector4-msub!
-;; WARN: Return type mismatch float vs none.
 (defun vector4-msub! ((arg0 vector4) (arg1 vector4) (arg2 vector4) (arg3 float))
   "arg0 = arg1 - arg2 * arg3."
   (local-vars (v0-0 float))
@@ -1531,7 +1524,7 @@
     (.sub.mul.x.vf vf4 vf6 vf7 acc)
     (.svf (&-> arg0 quad) vf4)
     (.mov v0-0 vf4)
-    (none)
+    v0-0
     )
   )
 
