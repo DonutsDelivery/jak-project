@@ -57,7 +57,7 @@
        (-> gp-0 trans)
        )
       ((and (= arg0 1) (type? gp-0 collide-shape-moving))
-       (&-> (the-as collide-shape-moving gp-0) csm-pad 200)
+       (&-> (the-as collide-shape-moving gp-0) csm-pad-1 200)
        )
       ((and (or (= arg0 2) (= arg0 3) (= arg0 10)) (type? gp-0 collide-shape))
        (-> (the-as collide-shape-moving gp-0) root-prim prim-core)
