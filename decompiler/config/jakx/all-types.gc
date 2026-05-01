@@ -62444,6 +62444,7 @@
 (define-extern get-nav-graph-editor (function nav-graph-editor))
 (define-extern tie-init-consts (function tie-consts gs-alpha gs-test gs-test none))
 (define-extern sprite-setup-header (function sprite-header int none))
+(define-extern set-tfrag-dists! (function tfrag-dists none))
 ;; --- end Recipe X cycle 1 ---
 ;;(define-extern string-menu object)
 ;; (define-extern sky-color-day object) ;; clobbers active deftype
