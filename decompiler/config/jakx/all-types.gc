@@ -54434,7 +54434,7 @@
 (define-extern nav-mesh-editor-rotate-y (function float int))
 (define-extern nav-mesh-editor-load (function string object))
 (define-extern nav-mesh-editor-set-level (function symbol object))
-(define-extern nav-set-lev (function string int))
+(define-extern nav-set-lev (function string object))
 (define-extern nav-set-flag (function nav-mesh-poly-flag object)) ;; R-4: re-applied P9 sig (enum ported above)
 (define-extern nav-mesh-editor-init (function symbol object :behavior nav-mesh-editor))
 
