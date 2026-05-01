@@ -36637,7 +36637,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *merc-global-stats* merc-global-stats) ;; merc-global-stats
-(define-extern clear-tr-stat "Reset all statistics to 0." (function tr-stat none))
+(define-extern clear-tr-stat (function tr-stat none))
 (define-extern *stat-string-tfrag* string) ;; string
 (define-extern *stat-string-tfrag-scissor* string) ;; string
 (define-extern *stat-string-total* string) ;; string
