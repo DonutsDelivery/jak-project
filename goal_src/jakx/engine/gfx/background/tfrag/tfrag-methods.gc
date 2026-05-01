@@ -200,7 +200,7 @@
       (collect-stats (-> this arrays s5-0))
       )
     )
-  0
+  (none)
   )
 
 (defmethod collect-stats ((this drawable-tree-tfrag-trans))
@@ -223,7 +223,7 @@
       (collect-stats (-> this arrays s5-0))
       )
     )
-  0
+  (none)
   )
 
 (defmethod collect-stats ((this drawable-tree-tfrag-water))
@@ -246,7 +246,7 @@
       (collect-stats (-> this arrays s5-0))
       )
     )
-  0
+  (none)
   )
 
 (defmethod collect-stats ((this drawable-inline-array-tfrag))
@@ -262,7 +262,7 @@
         )
       )
     )
-  0
+  (none)
   )
 
 (defmethod collect-stats ((this drawable-inline-array-tfrag-trans))
@@ -278,7 +278,7 @@
         )
       )
     )
-  0
+  (none)
   )
 
 (defmethod collect-stats ((this drawable-inline-array-tfrag-water))
@@ -294,7 +294,7 @@
         )
       )
     )
-  0
+  (none)
   )
 
 (defmethod debug-draw ((this drawable-tree-tfrag))
@@ -304,7 +304,7 @@
       (debug-draw (-> this arrays s5-0))
       )
     )
-  0
+  (none)
   )
 
 (defmethod debug-draw ((this drawable-tree-tfrag-trans))
@@ -314,7 +314,7 @@
       (debug-draw (-> this arrays s5-0))
       )
     )
-  0
+  (none)
   )
 
 (defmethod debug-draw ((this drawable-tree-tfrag-water))
@@ -324,7 +324,7 @@
       (debug-draw (-> this arrays s5-0))
       )
     )
-  0
+  (none)
   )
 
 (defmethod debug-draw ((this drawable-inline-array-tfrag))
@@ -336,12 +336,12 @@
           )
       )
     )
-  0
+  (none)
   )
 
 (defmethod debug-draw ((this tfragment))
   "Debug-draw a drawable and its children. Typically uses the debug-draw functions."
   (-> *display* frames (-> *display* on-screen) global-buf)
   (edge-debug-lines (-> this debug-data debug-lines))
-  0
+  (none)
   )
