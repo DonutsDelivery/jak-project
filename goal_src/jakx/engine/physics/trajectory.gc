@@ -115,11 +115,11 @@
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-(method-set! (the-as type combo-tracker) 13 L24)
+(method-set! (the-as type combo-tracker) 13 nothing)
 
-(method-set! (the-as type combo-tracker) 12 L20)
+(method-set! (the-as type combo-tracker) 12 nothing)
 
-(method-set! (the-as type combo-tracker) 11 L13)
+(method-set! (the-as type combo-tracker) 11 nothing)
 
 (defun traj2d-calc-initial-speed-using-tilt ((arg0 traj2d-params))
   (let ((f0-4 (* (- (* (-> arg0 x) (tan (-> arg0 initial-tilt))) (-> arg0 y)) (/ 2.0 (-> arg0 gravity)))))
