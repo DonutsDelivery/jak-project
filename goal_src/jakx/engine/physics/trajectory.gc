@@ -101,11 +101,7 @@
   0
   )
 
-(method-set! trajectory 17 (if *debug-segment*
-                               L55
-                               nothing
-                               )
-             )
+(method-set! trajectory 17 nothing)
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
