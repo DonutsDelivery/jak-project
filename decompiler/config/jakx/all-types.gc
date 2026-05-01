@@ -53135,7 +53135,7 @@
 (define-extern *ANIM_TESTER-bank* anim-tester-bank)
 (define-extern anim-tester-num-print (function basic none))
 (define-extern *anim-tester* (pointer anim-tester)) ;; (pointer anim-tester)
-(define-extern anim-test-obj-init (function anim-test-obj none))
+(define-extern anim-test-obj-init (function anim-test-obj list-control none))
 (define-extern anim-test-sequence-init (function anim-test-sequence anim-test-obj none))
 (define-extern anim-test-seq-item-copy! (function anim-test-seq-item none))
 (define-extern anim-test-obj-item-valid? (function anim-test-obj none))
