@@ -41542,7 +41542,7 @@
     (lightning-bolt-method-12 (_type_) int) ;; 12
     (lightning-bolt-method-13 (_type_ int) int) ;; 13
     (lightning-bolt-method-14 (_type_) uint) ;; 14
-    (lightning-bolt-method-15 (_type_ object int lightning-span-internal) int) ;; 15
+    (lightning-bolt-method-15 (_type_ object int lightning-span-internal) none) ;; 15
     (lightning-bolt-method-16 (_type_ vector float float vector matrix) none) ;; 16
     (lightning-bolt-method-17 (_type_ uint float float curve2d-fast float) float) ;; 17
     (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none) ;; 18 ;; (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none)
