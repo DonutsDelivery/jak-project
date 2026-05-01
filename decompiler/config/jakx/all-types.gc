@@ -38116,7 +38116,7 @@
 (define-extern etie-float-reg (function int string))
 (define-extern etie-floats (function symbol))
 (define-extern etie-int-reg (function int string))
-(define-extern etie-ints (function symbol))
+(define-extern etie-ints (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; etie-near-vu1                  ;;
