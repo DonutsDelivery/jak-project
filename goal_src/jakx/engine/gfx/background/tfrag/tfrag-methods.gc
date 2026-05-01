@@ -177,7 +177,7 @@
   "Collect triangle/perf statistics for rendering.
    This is only called when viewing stats.
    The vis-bits and culling registers are loaded during this time."
-  0
+  (none)
   )
 
 (defmethod collect-stats ((this drawable-tree-tfrag))
