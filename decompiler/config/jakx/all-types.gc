@@ -3156,7 +3156,7 @@
     (hud-cash-stats-method-24 (_type_) none) ;; 24
     (hud-cash-stats-method-25 (_type_) none) ;; 25
     (hud-cash-stats-method-26 (_type_) none) ;; 26
-    (hud-cash-stats-method-27 (_type_) int) ;; 27
+    (hud-cash-stats-method-27 (_type_) none) ;; 27
     )
   )
 
@@ -4489,7 +4489,7 @@
   :size-assert         #xd8
   :flag-assert         #x19000000d8
   (:methods
-    (hud-weapon-field-method-24 (_type_) int) ;; 24
+    (hud-weapon-field-method-24 (_type_) none) ;; 24
     )
   )
 
@@ -17104,7 +17104,7 @@
   :size-assert         #x20
   :flag-assert         #x1400000020
   (:methods
-    (debug-draw-region (_type_ int) int) ;; 17
+    (debug-draw-region (_type_ int) none) ;; 17
     (track-region (_type_ region-prim-area) symbol) ;; 18
     (within-area? "@returns Whether or not the object overlaps with the provided [[region-prim-area]]'s extent" (_type_ region-prim-area) symbol) ;; 19
     )
@@ -20635,7 +20635,7 @@
   (:methods
     (new (symbol type) _type_) ;; 0
     (joint-control-method-9 (_type_) float) ;; 9
-    (update-anim-data (_type_) int) ;; 10
+    (update-anim-data (_type_) none) ;; 10
     (joint-control-method-11 (_type_ symbol) int) ;; 11
     (joint-control-method-12 (_type_ int) joint-control-channel) ;; 12
     )
@@ -27783,11 +27783,11 @@
     (mem-buffer-method-10 (_type_) none) ;; 10
     (mem-buffer-method-11 (_type_) none) ;; 11
     (mem-buffer-method-12 (_type_) none) ;; 12
-    (mem-buffer-method-13 (_type_) int) ;; 13
-    (mem-buffer-method-14 (_type_) int) ;; 14
-    (mem-buffer-method-15 (_type_) int) ;; 15
-    (mem-buffer-method-16 (_type_) int) ;; 16
-    (mem-buffer-method-17 (_type_) int) ;; 17
+    (mem-buffer-method-13 (_type_) none) ;; 13
+    (mem-buffer-method-14 (_type_) none) ;; 14
+    (mem-buffer-method-15 (_type_) none) ;; 15
+    (mem-buffer-method-16 (_type_) none) ;; 16
+    (mem-buffer-method-17 (_type_) none) ;; 17
     (mem-buffer-method-18 (_type_) none) ;; 18
     (mem-buffer-method-19 (_type_) none) ;; 19
     (mem-buffer-method-20 (_type_) none) ;; 20
@@ -27820,7 +27820,7 @@
     (mem-buffer-method-47 (_type_) none) ;; 47
     (mem-buffer-method-48 (_type_) none) ;; 48
     (mem-buffer-method-49 (_type_) int) ;; 49
-    (mem-buffer-method-50 (_type_) int) ;; 50
+    (mem-buffer-method-50 (_type_) none) ;; 50
     (mem-buffer-method-51 (_type_) none) ;; 51
     )
   )
@@ -27836,8 +27836,8 @@
   :flag-assert         #xc00000020
   (:methods
     (level-bounding-box-method-9 (_type_) none) ;; 9
-    (level-bounding-box-method-10 (_type_) int) ;; 10
-    (level-bounding-box-method-11 (_type_) int) ;; 11
+    (level-bounding-box-method-10 (_type_) none) ;; 10
+    (level-bounding-box-method-11 (_type_) none) ;; 11
     )
   )
 
@@ -29018,7 +29018,7 @@
     play-anim ;; 52
     )
   (:methods
-    (scene-player-method-53 (_type_ string symbol) int) ;; 53
+    (scene-player-method-53 (_type_ string symbol) none) ;; 53
     (scene-player-method-54 (_type_ scene symbol) scene) ;; 54
     (scene-player-method-55 (_type_ float float) int) ;; 55
     )
@@ -30422,7 +30422,7 @@
     (cubic-curve-method-10 (_type_ vector float) vector) ;; 10
     (cubic-curve-method-11 (_type_ vector float) vector) ;; 11
     (cubic-curve-method-12 (_type_ vector float) vector) ;; 12
-    (debug-draw-curve (_type_) int) ;; 13
+    (debug-draw-curve (_type_) none) ;; 13
     )
   )
 
@@ -30787,7 +30787,7 @@
        check that the [[collide-spec]] of the focus and the process match."
       (_type_ process-focusable) object) ;; 10
     (reset-to-collide-spec "Reset this focus with the given [[collide-spec]]." (_type_ collide-spec) int) ;; 11
-    (try-update-focus (_type_ process-focusable) symbol) ;; 12
+    (try-update-focus (_type_ process-focusable) none) ;; 12
     )
   )
 
@@ -36019,7 +36019,7 @@
     (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
-    (grid-hash-method-15 (_type_ int int int) int) ;; 15 ;; dump-grid-info
+    (grid-hash-method-15 (_type_ int int int) none) ;; 15 ;; dump-grid-info
     (grid-hash-method-16 (_type_ rgba) int) ;; 16
     (grid-hash-method-17 (_type_) int) ;; 17
     (grid-hash-method-18 (_type_ grid-hash-box grid-hash-box) none) ;; 18
@@ -39930,7 +39930,7 @@
   :flag-assert         #xc00000018
   (:methods
     (plane-volume-method-9 (_type_ symbol vector-array vector-array) plane-volume) ;; 9
-    (debug-draw (_type_) int) ;; 10
+    (debug-draw (_type_) none) ;; 10
     (point-in-vol? (_type_ vector float) symbol) ;; 11
     )
   )
@@ -43441,7 +43441,7 @@
   :flag-assert         #x1000000008
   (:methods
     (mem-manager-method-9 (_type_ uint int) none) ;; 9
-    (mem-manager-method-10 (_type_ uint) int) ;; 10
+    (mem-manager-method-10 (_type_ uint) none) ;; 10
     (mem-manager-method-11 (_type_ uint uint int) none) ;; 11
     (mem-manager-method-12 (_type_ int int) int) ;; 12
     (mem-manager-method-13 (_type_) int) ;; 13
@@ -45343,7 +45343,7 @@
     (vehicle-method-165 (_type_) int) ;; 165
     (vehicle-method-166 (_type_) none) ;; 166
     (vehicle-method-167 (_type_ object) none) ;; 167
-    (vehicle-method-168 (_type_) int) ;; 168
+    (vehicle-method-168 (_type_) none) ;; 168
     (vehicle-method-169 (_type_) int) ;; 169
     (vehicle-method-170 (_type_) int) ;; 170
     (vehicle-method-171 (_type_) int) ;; 171
@@ -45818,9 +45818,9 @@
     )
   (:methods
     (vehicle-weapon-slot-method-52 (_type_) none) ;; 52
-    (vehicle-weapon-slot-method-53 (_type_) int) ;; 53
-    (vehicle-weapon-slot-method-54 (_type_) int) ;; 54
-    (vehicle-weapon-slot-method-55 (_type_) int) ;; 55
+    (vehicle-weapon-slot-method-53 (_type_) none) ;; 53
+    (vehicle-weapon-slot-method-54 (_type_) none) ;; 54
+    (vehicle-weapon-slot-method-55 (_type_) none) ;; 55
     (vehicle-weapon-slot-method-56 (_type_) none) ;; 56
     (vehicle-weapon-slot-method-57 (_type_) symbol) ;; 57
     (vehicle-weapon-slot-method-58 (_type_) none) ;; 58
@@ -46009,7 +46009,7 @@
   :flag-assert         #x3600800101
   (:methods
     (gunmount-drawable-method-50 (_type_) none) ;; 50
-    (gunmount-drawable-method-51 (_type_) int) ;; 51
+    (gunmount-drawable-method-51 (_type_) none) ;; 51
     (gunmount-drawable-method-52 (_type_) none) ;; 52
     (gunmount-drawable-method-53 (_type_) none) ;; 53
     )
@@ -46392,7 +46392,7 @@
     (wvehicle-method-222 (_type_) none) ;; 222
     (wvehicle-method-223 (_type_) none) ;; 223
     (wvehicle-method-224 (_type_) none) ;; 224
-    (wvehicle-method-225 (_type_) int) ;; 225
+    (wvehicle-method-225 (_type_) none) ;; 225
     (wvehicle-method-226 (_type_) none) ;; 226
     (wvehicle-method-227 (_type_) none) ;; 227
     (wvehicle-method-228 (_type_) none) ;; 228
@@ -46405,7 +46405,7 @@
     (wvehicle-method-235 (_type_) none) ;; 235
     (wvehicle-method-236 (_type_) none) ;; 236
     (wvehicle-method-237 (_type_) none) ;; 237
-    (wvehicle-method-238 (_type_) int) ;; 238
+    (wvehicle-method-238 (_type_) none) ;; 238
     (wvehicle-method-239 (_type_) none) ;; 239
     (wvehicle-method-240 (_type_) none) ;; 240
     (wvehicle-method-241 (_type_) none) ;; 241
@@ -46428,7 +46428,7 @@
     (wvehicle-method-258 (_type_) none) ;; 258
     (wvehicle-method-259 (_type_) none) ;; 259
     (wvehicle-method-260 (_type_) none) ;; 260
-    (wvehicle-method-261 (_type_) int) ;; 261
+    (wvehicle-method-261 (_type_) none) ;; 261
     (wvehicle-method-262 (_type_) none) ;; 262
     (wvehicle-method-263 (_type_) none) ;; 263
     (wvehicle-method-264 (_type_) none) ;; 264
@@ -47395,7 +47395,7 @@
     (net-powerup-method-51 (_type_) none) ;; 51
     (net-powerup-method-52 (_type_) none) ;; 52
     (net-powerup-method-53 (_type_) symbol) ;; 53
-    (net-powerup-method-54 (_type_) object) ;; 54
+    (net-powerup-method-54 (_type_) none) ;; 54
     (net-powerup-method-55 (_type_ object) none) ;; 55
     )
   )
@@ -47573,7 +47573,7 @@
     (net-player-race-method-104 (_type_ object) none) ;; 104
     (net-player-race-method-105 (_type_ object) none) ;; 105
     (net-player-race-method-106 (_type_ object) none) ;; 106
-    (net-player-race-method-107 (_type_) symbol) ;; 107
+    (net-player-race-method-107 (_type_) none) ;; 107
     )
   )
 
@@ -50787,7 +50787,7 @@
     die ;; 19
     )
   (:methods
-    (http-downloader-method-20 (_type_) symbol) ;; 20
+    (http-downloader-method-20 (_type_) none) ;; 20
     (http-downloader-method-21 (_type_) symbol) ;; 21
     (http-downloader-method-22 (_type_) none) ;; 22
     )
@@ -51559,7 +51559,7 @@
     (idle () _type_ :state) ;; 51
     (water-anim-method-52 (_type_ vector) int) ;; 52
     (water-anim-method-53 (_type_ vector) float) ;; 53
-    (water-anim-method-54 (_type_) symbol) ;; 54
+    (water-anim-method-54 (_type_) none) ;; 54
     (water-anim-method-55 (_type_) none) ;; 55
     (water-anim-method-56 (_type_) none) ;; 56
     (water-anim-method-57 (_type_) symbol) ;; 57
@@ -54096,8 +54096,8 @@
   (:methods
     (nav-graph-editor-method-30 (_type_) none) ;; 30
     (nav-graph-editor-method-31 (_type_ string string string) object) ;; 31
-    (nav-graph-editor-method-32 (_type_ int) symbol) ;; 32
-    (nav-graph-editor-method-33 (_type_ int) symbol) ;; 33
+    (nav-graph-editor-method-32 (_type_ int) none) ;; 32
+    (nav-graph-editor-method-33 (_type_ int) none) ;; 33
     (nav-graph-editor-method-34 (_type_ int object) symbol) ;; 34
     (nav-graph-editor-method-35 (_type_ int) int) ;; 35
     (nav-graph-editor-method-36 (_type_) none) ;; 36
@@ -54109,7 +54109,7 @@
     (nav-graph-editor-method-42 (_type_) none) ;; 42
     (nav-graph-editor-method-43 (_type_) none) ;; 43
     (nav-graph-editor-method-44 (_type_) none) ;; 44
-    (nav-graph-editor-method-45 (_type_) object) ;; 45
+    (nav-graph-editor-method-45 (_type_) none) ;; 45
     (nav-graph-editor-method-46 (_type_) int) ;; 46
     (nav-graph-editor-method-47 (_type_) symbol) ;; 47
     (nav-graph-editor-method-48 (_type_) symbol) ;; 48
@@ -54700,7 +54700,7 @@
   :flag-assert         #xc0000001c
   (:methods
     (collision-edit-info-method-9 (_type_) none) ;; 9
-    (draw-menu (_type_ process-drawable) int) ;; 10
+    (draw-menu (_type_ process-drawable) none) ;; 10
     (collision-edit-info-method-11 (_type_ process-drawable) int) ;; 11
     )
   )
@@ -61197,7 +61197,7 @@
     die ;; 51
     )
   (:methods
-    (eco-method-52 (_type_) object) ;; 52
+    (eco-method-52 (_type_) none) ;; 52
     (eco-method-53 (_type_) int) ;; 53
     (eco-method-54 (_type_ int uint) none) ;; 54
     (eco-method-55 (_type_) int) ;; 55
