@@ -62447,6 +62447,7 @@
 (define-extern sprite-setup-header (function sprite-header int none))
 (define-extern set-tfrag-dists! (function tfrag-dists none))
 (define-extern create-lightning-tracker-new (function lightning-tracker-init-params lightning-new-tracker))
+(define-extern deg-diff (function float float float))
 ;; --- end Recipe X cycle 1 ---
 ;;(define-extern string-menu object)
 ;; (define-extern sky-color-day object) ;; clobbers active deftype
