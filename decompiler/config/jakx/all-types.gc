@@ -1294,7 +1294,7 @@
    This will be equal to the last call of (rand-vu).
    This will not update the random generator."
   (function float))
-(define-extern rand-vu-float-range "Get a random float in between arg0 and arg1." (function float float float))
+(define-extern rand-vu-float-range (function float float float))
 (define-extern rand-vu-percent? "Get a boolean that's true with the given probability (in 0, 1)." (function float symbol))
 (define-extern rand-vu-int-range "Get an integer in the given range (inclusive)." (function int int int))
 (define-extern rand-vu-int-count "Get an integer in the range [0, max)." (function int int))
