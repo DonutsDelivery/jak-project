@@ -177,7 +177,6 @@
   "Collect triangle/perf statistics for rendering.
    This is only called when viewing stats.
    The vis-bits and culling registers are loaded during this time."
-  (stats-tfrag-asm this)
   0
   )
 
