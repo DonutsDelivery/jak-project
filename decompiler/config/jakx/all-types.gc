@@ -36641,7 +36641,7 @@
 (define-extern *stat-string-tfrag* string) ;; string
 (define-extern *stat-string-tfrag-scissor* string) ;; string
 (define-extern *stat-string-total* string) ;; string
-(define-extern print-tr-stat "Print a single tr-stat to the screen." (function tr-stat string string none))
+(define-extern print-tr-stat (function tr-stat string string none))
 (define-extern print-terrain-stats (function none))
 (define-extern update-subdivide-settings! (function subdivide-settings math-camera int none))
 (define-extern *subdivide-settings* subdivide-settings) ;; subdivide-settings
