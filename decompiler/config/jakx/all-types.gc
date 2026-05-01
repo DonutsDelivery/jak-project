@@ -36020,7 +36020,7 @@
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
     (grid-hash-method-15 (_type_ int int int) none) ;; 15 ;; dump-grid-info
-    (grid-hash-method-16 (_type_ rgba) int) ;; 16
+    (grid-hash-method-16 (_type_ rgba) none) ;; 16
     (grid-hash-method-17 (_type_) int) ;; 17
     (grid-hash-method-18 (_type_ grid-hash-box grid-hash-box) int) ;; 18
     (grid-hash-method-19 (_type_ object grid-hash-box) int) ;; 19
