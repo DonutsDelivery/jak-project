@@ -78,414 +78,1462 @@
 (declare-type traffic-engine basic)
 (define-extern task-manager-init-by-other (function game-task-node-info symbol object :behavior task-manager))
 
+(declare-type game-movie basic)
+(declare-type grand-prix basic)
+
 ;; DECOMP BEGINS
 
-(local-vars
-  (v0-0 type)
-  (v0-1 none)
-  (v0-2 type)
-  (v0-3 none)
-  (v0-4 type)
-  (v0-5 none)
-  (v0-6 type)
-  (v0-7 none)
-  (v0-8 type)
-  (v0-9 none)
-  (v0-10 type)
-  (v0-11 none)
-  (v0-12 type)
-  (v0-13 none)
-  (v0-14 type)
-  (v0-15 none)
-  (v0-16 type)
-  (v0-17 none)
-  (v0-18 (array game-movie))
-  (v1-0 symbol)
-  (v1-1 (function game-task string))
-  (v1-2 (function none))
-  (v1-3 (function string game-task))
-  (v1-4 symbol)
-  (v1-5 (function game-task-actor string))
-  (v1-6 (function none))
-  (v1-7 symbol)
-  (v1-8 (function game-task-action string))
-  (v1-9 (function none))
-  (v1-10 symbol)
-  (v1-11 (function game-task-medal string))
-  (v1-12 (function none))
-  (v1-13 type)
-  (v1-14 none)
-  (v1-15 symbol)
-  (v1-16 (function game-task-node-flag string))
-  (v1-17 (function none))
-  (v1-18 symbol)
-  (v1-19 (function game-task-node-command string))
-  (v1-20 (function none))
-  (v1-21 type)
-  (v1-22 none)
-  (v1-23 type)
-  (v1-24 none)
-  (v1-25 type)
-  (v1-26 none)
-  (v1-27 type)
-  (v1-28 none)
-  (v1-29 type)
-  (v1-30 none)
-  (v1-31 type)
-  (v1-32 none)
-  (v1-33 type)
-  (v1-34 none)
-  (v1-35 type)
-  (v1-36 none)
-  (a0-0 symbol)
-  (a0-1 type)
-  (a0-2 symbol)
-  (a0-3 type)
-  (a0-4 symbol)
-  (a0-5 type)
-  (a0-6 symbol)
-  (a0-7 type)
-  (a0-8 symbol)
-  (a0-9 type)
-  (a0-10 symbol)
-  (a0-11 type)
-  (a0-12 symbol)
-  (a0-13 type)
-  (a0-14 symbol)
-  (a0-15 type)
-  (a0-16 symbol)
-  (a0-17 type)
-  (a1-0 type)
-  (a1-1 int)
-  (a1-2 type)
-  (a1-3 int)
-  (a1-4 type)
-  (a1-5 int)
-  (a1-6 type)
-  (a1-7 int)
-  (a1-8 type)
-  (a1-9 int)
-  (a1-10 type)
-  (a1-11 int)
-  (a1-12 type)
-  (a1-13 int)
-  (a1-14 type)
-  (a1-15 int)
-  (a1-16 type)
-  (a1-17 int)
-  (a2-0 none)
-  (a2-1 (function game-task-event game-task-event))
-  (a2-2 none)
-  (a2-3 (function game-task-node-stats game-task-node-stats))
-  (a2-4 none)
-  (a2-5 (function game-task-advanced-options game-task-advanced-options))
-  (a2-6 none)
-  (a2-7 (function game-task-node-info game-task-node-info))
-  (a2-8 none)
-  (a2-9 (function game-task-info game-task-info))
-  (a2-10 none)
-  (a2-11 (function game-task-control game-task-control))
-  (a2-12 none)
-  (a2-13 (function ambient-control ambient-control))
-  (a2-14 none)
-  (a2-15 (function game-movie game-movie))
-  (a2-16 none)
-  (a2-17 (function grand-prix grand-prix))
-  (t9-0 (function symbol type int type))
-  (t9-1 (function type int object none))
-  (t9-2 (function symbol type int type))
-  (t9-3 (function type int object none))
-  (t9-4 (function symbol type int type))
-  (t9-5 (function type int object none))
-  (t9-6 (function symbol type int type))
-  (t9-7 (function type int object none))
-  (t9-8 (function symbol type int type))
-  (t9-9 (function type int object none))
-  (t9-10 (function symbol type int type))
-  (t9-11 (function type int object none))
-  (t9-12 (function symbol type int type))
-  (t9-13 (function type int object none))
-  (t9-14 (function symbol type int type))
-  (t9-15 (function type int object none))
-  (t9-16 (function symbol type int type))
-  (t9-17 (function type int object none))
+;; +++task-control-h:game-task-medal
+(defenum game-task-medal
+  :type int32
+  (none 0)
+  (bronze 1)
+  (silver 2)
+  (gold 3)
   )
+;; ---task-control-h:game-task-medal
 
-(cond
-  ((begin (set! v1-0 *debug-segment*) v1-0)
-   (set! v1-1 L280)
-   (set! game-task->string v1-1)
-   )
-  (else
-    (set! v1-2 nothing)
-    (set! game-task->string (the-as (function game-task string) v1-2))
-    )
-  )
-
-(cond
-  ((begin (set! v1-3 L1) (set! c-string->game-task v1-3) (set! v1-4 *debug-segment*) v1-4)
-   (set! v1-5 L200)
-   (set! game-task-actor->string v1-5)
-   )
-  (else
-    (set! v1-6 nothing)
-    (set! game-task-actor->string (the-as (function game-task-actor string) v1-6))
-    )
-  )
-
-(cond
-  ((begin (set! v1-7 *debug-segment*) v1-7)
-   (set! v1-8 L190)
-   (set! game-task-action->string v1-8)
-   )
-  (else
-    (set! v1-9 nothing)
-    (set! game-task-action->string (the-as (function game-task-action string) v1-9))
-    )
-  )
-
-(cond
-  ((begin (set! v1-10 *debug-segment*) v1-10)
-   (set! v1-11 L184)
-   (set! game-task-medal->string v1-11)
-   )
-  (else
-    (set! v1-12 nothing)
-    (set! game-task-medal->string (the-as (function game-task-medal string) v1-12))
-    )
-  )
-
-(cond
-  ((begin
-     (set! v1-13 type)
-     (set! t9-0 (method-of-type v1-13 new))
-     (set! a0-0 'game-task-event)
-     (set! a1-0 basic)
-     (set! v1-14 (the-as none L971))
-     (set! a2-0 (the-as none (l.d v1-14)))
-     (call! a0-0 a1-0 a2-0)
-     (set! t9-1 method-set!)
-     (set! a0-1 game-task-event)
-     (set! a1-1 3)
-     (set! a2-1 L181)
-     (call! a0-1 a1-1 a2-1)
-     (set! v1-15 *debug-segment*)
-     v1-15
+;; og:preserve-this ported from jakx ir2
+(defun-debug game-task->string ((task game-task))
+  (case task
+    (((game-task canspar-timetrial))
+     "canspar-timetrial"
      )
-   (set! v1-16 L160)
-   (set! game-task-node-flag->string v1-16)
-   )
-  (else
-    (set! v1-17 nothing)
-    (set! game-task-node-flag->string (the-as (function game-task-node-flag string) v1-17))
+    (((game-task havjung-rushhour))
+     "havjung-rushhour"
+     )
+    (((game-task dockkra-rushhour))
+     "dockkra-rushhour"
+     )
+    (((game-task canspar-deathrace))
+     "canspar-deathrace"
+     )
+    (((game-task havjung-deathrace))
+     "havjung-deathrace"
+     )
+    (((game-task coliseum-king-of-hill))
+     "coliseum-king-of-hill"
+     )
+    (((game-task desisle-hunt))
+     "desisle-hunt"
+     )
+    (((game-task havsew-rushhour))
+     "havsew-rushhour"
+     )
+    (((game-task coliseum-assassin))
+     "coliseum-assassin"
+     )
+    (((game-task coliseum-artifact))
+     "coliseum-artifact"
+     )
+    (((game-task havtour-race))
+     "havtour-race"
+     )
+    (((game-task kras-training))
+     "kras-training"
+     )
+    (((game-task drome-race))
+     "drome-race"
+     )
+    (((game-task spartem-race))
+     "spartem-race"
+     )
+    (((game-task peak-rushhour))
+     "peak-rushhour"
+     )
+    (((game-task drome-deathrace))
+     "drome-deathrace"
+     )
+    (((game-task none))
+     "none"
+     )
+    (((game-task snobowl-assassin))
+     "snobowl-assassin"
+     )
+    (((game-task dromdoc-timetrial))
+     "dromdoc-timetrial"
+     )
+    (((game-task havsew-timetrial))
+     "havsew-timetrial"
+     )
+    (((game-task kcross-ctf))
+     "kcross-ctf"
+     )
+    (((game-task kras-football))
+     "kras-football"
+     )
+    (((game-task desarena-deathmatch))
+     "desarena-deathmatch"
+     )
+    (((game-task drome-timetrial))
+     "drome-timetrial"
+     )
+    (((game-task iceberg-football))
+     "iceberg-football"
+     )
+    (((game-task docks-deathrace))
+     "docks-deathrace"
+     )
+    (((game-task atoll-assassin))
+     "atoll-assassin"
+     )
+    (((game-task canyon-deathrace))
+     "canyon-deathrace"
+     )
+    (((game-task havjung-race))
+     "havjung-race"
+     )
+    (((game-task docks-race))
+     "docks-race"
+     )
+    (((game-task kras-race))
+     "kras-race"
+     )
+    (((game-task docks-timetrial))
+     "docks-timetrial"
+     )
+    (((game-task icepass-timetrial))
+     "icepass-timetrial"
+     )
+    (((game-task dummy0))
+     "dummy0"
+     )
+    (((game-task snobowl-deathmatch))
+     "snobowl-deathmatch"
+     )
+    (((game-task eco-blue-button))
+     "eco-blue-button"
+     )
+    (((game-task snow-football))
+     "snow-football"
+     )
+    (((game-task jungle-rushhour))
+     "jungle-rushhour"
+     )
+    (((game-task canspar-football))
+     "canspar-football"
+     )
+    (((game-task havsew-timebox))
+     "havsew-timebox"
+     )
+    (((game-task snobowl-artifact))
+     "snobowl-artifact"
+     )
+    (((game-task icetour-timetrial))
+     "icetour-timetrial"
+     )
+    (((game-task drome-timebox))
+     "drome-timebox"
+     )
+    (((game-task temple-rushhour))
+     "temple-rushhour"
+     )
+    (((game-task snow-race))
+     "snow-race"
+     )
+    (((game-task dromdoc-timebox))
+     "dromdoc-timebox"
+     )
+    (((game-task peak-timebox))
+     "peak-timebox"
+     )
+    (((game-task sewer-deathrace))
+     "sewer-deathrace"
+     )
+    (((game-task desarena-king-of-hill))
+     "desarena-king-of-hill"
+     )
+    (((game-task iceberg-rushhour))
+     "iceberg-rushhour"
+     )
+    (((game-task jungle-deathrace))
+     "jungle-deathrace"
+     )
+    (((game-task complete))
+     "complete"
+     )
+    (((game-task iceberg-deathrace))
+     "iceberg-deathrace"
+     )
+    (((game-task desarena-assassin))
+     "desarena-assassin"
+     )
+    (((game-task peak-deathrace))
+     "peak-deathrace"
+     )
+    (((game-task sewer-race))
+     "sewer-race"
+     )
+    (((game-task sewer-timetrial))
+     "sewer-timetrial"
+     )
+    (((game-task docks-timebox))
+     "docks-timebox"
+     )
+    (((game-task temple-deathrace))
+     "temple-deathrace"
+     )
+    (((game-task temple-timetrial))
+     "temple-timetrial"
+     )
+    (((game-task icepass-timebox))
+     "icepass-timebox"
+     )
+    (((game-task atoll-artifact))
+     "atoll-artifact"
+     )
+    (((game-task cliffs-ctf))
+     "cliffs-ctf"
+     )
+    (((game-task havjung-timetrial))
+     "havjung-timetrial"
+     )
+    (((game-task spatour-timetrial))
+     "spatour-timetrial"
+     )
+    (((game-task kcross-assassin))
+     "kcross-assassin"
+     )
+    (((game-task haven-deathrace))
+     "haven-deathrace"
+     )
+    (((game-task dockkra-deathrace))
+     "dockkra-deathrace"
+     )
+    (((game-task ice-football))
+     "ice-football"
+     )
+    (((game-task kratour-timetrial))
+     "kratour-timetrial"
+     )
+    (((game-task icepass-football))
+     "icepass-football"
+     )
+    (((game-task canspar-rushhour))
+     "canspar-rushhour"
+     )
+    (((game-task desisle-ctf))
+     "desisle-ctf"
+     )
+    (((game-task havsew-deathrace))
+     "havsew-deathrace"
+     )
+    (((game-task canyon-race))
+     "canyon-race"
+     )
+    (((game-task ice-timetrial))
+     "ice-timetrial"
+     )
+    (((game-task haven-race))
+     "haven-race"
+     )
+    (((game-task haven-timetrial))
+     "haven-timetrial"
+     )
+    (((game-task jungle-timebox))
+     "jungle-timebox"
+     )
+    (((game-task spargus-timetrial))
+     "spargus-timetrial"
+     )
+    (((game-task drome-football))
+     "drome-football"
+     )
+    (((game-task kras-timetrial))
+     "kras-timetrial"
+     )
+    (((game-task ice-training))
+     "ice-training"
+     )
+    (((game-task spartem-deathrace))
+     "spartem-deathrace"
+     )
+    (((game-task havtour-timetrial))
+     "havtour-timetrial"
+     )
+    (((game-task spargus-deathrace))
+     "spargus-deathrace"
+     )
+    (((game-task sewer-timebox))
+     "sewer-timebox"
+     )
+    (((game-task temple-timebox))
+     "temple-timebox"
+     )
+    (((game-task iceberg-race))
+     "iceberg-race"
+     )
+    (((game-task atoll-hunt))
+     "atoll-hunt"
+     )
+    (((game-task coliseum-ctf))
+     "coliseum-ctf"
+     )
+    (((game-task spartem-timetrial))
+     "spartem-timetrial"
+     )
+    (((game-task canspar-timebox))
+     "canspar-timebox"
+     )
+    (((game-task canyon-football))
+     "canyon-football"
+     )
+    (((game-task dockkra-race))
+     "dockkra-race"
+     )
+    (((game-task kcross-hunt))
+     "kcross-hunt"
+     )
+    (((game-task havjung-timebox))
+     "havjung-timebox"
+     )
+    (((game-task ice-deathrace))
+     "ice-deathrace"
+     )
+    (((game-task kcross-deathmatch))
+     "kcross-deathmatch"
+     )
+    (((game-task dromdoc-football))
+     "dromdoc-football"
+     )
+    (((game-task snow-timetrial))
+     "snow-timetrial"
+     )
+    (((game-task docks-football))
+     "docks-football"
+     )
+    (((game-task icepass-rushhour))
+     "icepass-rushhour"
+     )
+    (((game-task brdroom-intro-b))
+     "brdroom-intro-b"
+     )
+    (((game-task atoll-deathmatch))
+     "atoll-deathmatch"
+     )
+    (((game-task kras-rushhour))
+     "kras-rushhour"
+     )
+    (((game-task peak-football))
+     "peak-football"
+     )
+    (((game-task canspar-race))
+     "canspar-race"
+     )
+    (((game-task kcross-artifact))
+     "kcross-artifact"
+     )
+    (((game-task ice-race))
+     "ice-race"
+     )
+    (((game-task haven-timebox))
+     "haven-timebox"
+     )
+    (((game-task drome-rushhour))
+     "drome-rushhour"
+     )
+    (((game-task cliffs-assassin))
+     "cliffs-assassin"
+     )
+    (((game-task iceberg-timetrial))
+     "iceberg-timetrial"
+     )
+    (((game-task jungle-football))
+     "jungle-football"
+     )
+    (((game-task peak-race))
+     "peak-race"
+     )
+    (((game-task snobowl-ctf))
+     "snobowl-ctf"
+     )
+    (((game-task spargus-football))
+     "spargus-football"
+     )
+    (((game-task kratour-boss-battle))
+     "kratour-boss-battle"
+     )
+    (((game-task snow-rushhour))
+     "snow-rushhour"
+     )
+    (((game-task havsew-race))
+     "havsew-race"
+     )
+    (((game-task ice-timebox))
+     "ice-timebox"
+     )
+    (((game-task temple-football))
+     "temple-football"
+     )
+    (((game-task sewer-football))
+     "sewer-football"
+     )
+    (((game-task cliffs-training))
+     "cliffs-training"
+     )
+    (((game-task spartem-football))
+     "spartem-football"
+     )
+    (((game-task dromdoc-rushhour))
+     "dromdoc-rushhour"
+     )
+    (((game-task jungle-training))
+     "jungle-training"
+     )
+    (((game-task dockkra-timetrial))
+     "dockkra-timetrial"
+     )
+    (((game-task spartem-timebox))
+     "spartem-timebox"
+     )
+    (((game-task desarena-ctf))
+     "desarena-ctf"
+     )
+    (((game-task icepass-race))
+     "icepass-race"
+     )
+    (((game-task docks-rushhour))
+     "docks-rushhour"
+     )
+    (((game-task eco-yellow-button))
+     "eco-yellow-button"
+     )
+    (((game-task atoll-ctf))
+     "atoll-ctf"
+     )
+    (((game-task canyon-rushhour))
+     "canyon-rushhour"
+     )
+    (((game-task artist-artist))
+     "artist-artist"
+     )
+    (((game-task snow-training2))
+     "snow-training2"
+     )
+    (((game-task havsew-football))
+     "havsew-football"
+     )
+    (((game-task dromdoc-deathrace))
+     "dromdoc-deathrace"
+     )
+    (((game-task kras-timebox))
+     "kras-timebox"
+     )
+    (((game-task cliffs-hunt))
+     "cliffs-hunt"
+     )
+    (((game-task cliffs-deathmatch))
+     "cliffs-deathmatch"
+     )
+    (((game-task haven-football))
+     "haven-football"
+     )
+    (((game-task kras-deathrace))
+     "kras-deathrace"
+     )
+    (((game-task iceberg-timebox))
+     "iceberg-timebox"
+     )
+    (((game-task desisle-assassin))
+     "desisle-assassin"
+     )
+    (((game-task canyon-timetrial))
+     "canyon-timetrial"
+     )
+    (((game-task spargus-rushhour))
+     "spargus-rushhour"
+     )
+    (((game-task icetour-race))
+     "icetour-race"
+     )
+    (((game-task havjng-football))
+     "havjung-football"
+     )
+    (((game-task coliseum-deathmatch))
+     "coliseum-deathmatch"
+     )
+    (((game-task cliffs-king-of-hill))
+     "cliffs-king-of-hill"
+     )
+    (((game-task icepass-deathrace))
+     "icepass-deathrace"
+     )
+    (((game-task cliffs-artifact))
+     "cliffs-artifact"
+     )
+    (((game-task jungle-race))
+     "jungle-race"
+     )
+    (((game-task spartem-rushhour))
+     "spartem-rushhour"
+     )
+    (((game-task snow-timebox))
+     "snow-timebox"
+     )
+    (((game-task sewer-rushhour))
+     "sewer-rushhour"
+     )
+    (((game-task dockkra-football))
+     "dockkra-football"
+     )
+    (((game-task max))
+     "max"
+     )
+    (((game-task city-win))
+     "city-win"
+     )
+    (((game-task snow-deathrace))
+     "snow-deathrace"
+     )
+    (((game-task city-start))
+     "city-start"
+     )
+    (((game-task dockkra-timebox))
+     "dockkra-timebox"
+     )
+    (((game-task desisle-deathmatch))
+     "desisle-deathmatch"
+     )
+    (((game-task kcross-king-of-hill))
+     "kcross-king-of-hill"
+     )
+    (((game-task dromdoc-race))
+     "dromdoc-race"
+     )
+    (((game-task temple-race))
+     "temple-race"
+     )
+    (((game-task desarena-artifact))
+     "desarena-artifact"
+     )
+    (((game-task peak-timetrial))
+     "peak-timetrial"
+     )
+    (((game-task spargus-timebox))
+     "spargus-timebox"
+     )
+    (((game-task ice-rushhour))
+     "ice-rushhour"
+     )
+    (((game-task spatour-race))
+     "spatour-race"
+     )
+    (((game-task eco-red-button))
+     "eco-red-button"
+     )
+    (((game-task jungle-timetrial))
+     "jungle-timetrial"
+     )
+    (((game-task canyon-timebox))
+     "canyon-timebox"
+     )
+    (((game-task kratour-race))
+     "kratour-race"
+     )
+    (((game-task desisle-artifact))
+     "desisle-artifact"
+     )
+    (((game-task spargus-race))
+     "spargus-race"
+     )
+    (((game-task haven-rushhour))
+     "haven-rushhour"
+     )
+    (((game-task snowbowl-king-of-hill))
+     "snobowl-king-of-hill"
+     )
+    (else
+      "*unknown*"
+      )
     )
   )
 
-(cond
-  ((begin (set! v1-18 *debug-segment*) v1-18)
-   (set! v1-19 L85)
-   (set! game-task-node-command->string v1-19)
-   )
-  (else
-    (set! v1-20 nothing)
-    (set! game-task-node-command->string (the-as (function game-task-node-command string) v1-20))
+
+;; og:preserve-this ported from jakx ir2
+(defun c-string->game-task ((arg0 string))
+  (the-as game-task -1)
+  )
+
+
+;; og:preserve-this ported from jakx ir2
+(defun-debug game-task-actor->string ((arg0 game-task-actor))
+  (case arg0
+    (((game-task-actor damus-wasdoors))
+     "damus-wasdoors"
+     )
+    (((game-task-actor unused-slot-17))
+     "unused-slot-17"
+     )
+    (((game-task-actor damus-desert))
+     "damus-desert"
+     )
+    (((game-task-actor unused-slot-14))
+     "unused-slot-14"
+     )
+    (((game-task-actor minimap))
+     "minimap"
+     )
+    (((game-task-actor sig-wasdoors))
+     "sig-wasdoors"
+     )
+    (((game-task-actor jinx-hiphog))
+     "jinx-hiphog"
+     )
+    (((game-task-actor gun-gungame))
+     "gun-gungame"
+     )
+    (((game-task-actor torn-freehq))
+     "torn-freehq"
+     )
+    (((game-task-actor unused-slot-20))
+     "unused-slot-20"
+     )
+    (((game-task-actor torn-hipbooth))
+     "torn-hipbooth"
+     )
+    (((game-task-actor kleever-wasdoors))
+     "kleever-wasdoors"
+     )
+    (((game-task-actor was-pre-game-deserte))
+     "was-pre-game-deserte"
+     )
+    (((game-task-actor keira-garage))
+     "keira-garage"
+     )
+    (((game-task-actor damus-waspal))
+     "damus-waspal"
+     )
+    (((game-task-actor keira-freehq))
+     "keira-freehq"
+     )
+    (((game-task-actor samos-freehq))
+     "samos-freehq"
+     )
+    (((game-task-actor unused-slot-9))
+     "unused-slot-9"
+     )
+    (((game-task-actor unused-slot-10))
+     "unused-slot-10"
+     )
+    (((game-task-actor unused-slot-23))
+     "unused-slot-23"
+     )
+    (((game-task-actor onin-freehq))
+     "onin-freehq"
+     )
+    (((game-task-actor kleever-wascityb))
+     "kleever-wascityb"
+     )
+    (((game-task-actor samos-onintent))
+     "samos-onintent"
+     )
+    (((game-task-actor ashelin-talkbox))
+     "ashelin-talkbox"
+     )
+    (((game-task-actor kleever-arena))
+     "kleever-arena"
+     )
+    (((game-task-actor tess-gungame))
+     "tess-gungame"
+     )
+    (((game-task-actor none))
+     "none"
+     )
+    (((game-task-actor seem-leaper))
+     "seem-leaper"
+     )
+    (((game-task-actor unused-slot-13))
+     "unused-slot-13"
+     )
+    (((game-task-actor damus-wascity))
+     "damus-wascity"
+     )
+    (((game-task-actor unused-slot-26))
+     "unused-slot-26"
+     )
+    (((game-task-actor monk-mummy))
+     "monk-mummy"
+     )
+    (((game-task-actor onin-talkbox))
+     "onin-talkbox"
+     )
+    (((game-task-actor unused-slot-29))
+     "unused-slot-29"
+     )
+    (((game-task-actor unused-slot-8))
+     "unused-slot-8"
+     )
+    (((game-task-actor vin-vinroom))
+     "vin-vinroom"
+     )
+    (((game-task-actor torn-hiphog))
+     "torn-hiphog"
+     )
+    (((game-task-actor sig-nest))
+     "sig-nest"
+     )
+    (((game-task-actor daxter))
+     "daxter"
+     )
+    (((game-task-actor samos-talkbox))
+     "samos-talkbox"
+     )
+    (((game-task-actor seem-wascitya))
+     "seem-wascitya"
+     )
+    (((game-task-actor unused-slot-19))
+     "unused-slot-19"
+     )
+    (((game-task-actor ashelin-freehq))
+     "ashelin-freehq"
+     )
+    (((game-task-actor wascity-leaper))
+     "wascity-leaper"
+     )
+    (((game-task-actor unused-slot-16))
+     "unused-slot-16"
+     )
+    (((game-task-actor veger-cave))
+     "veger-cave"
+     )
+    (((game-task-actor sig-talkbox))
+     "sig-talkbox"
+     )
+    (((game-task-actor wascity-turret))
+     "wascity-turret"
+     )
+    (((game-task-actor unused-slot-22))
+     "unused-slot-22"
+     )
+    (((game-task-actor power-game-vinroom))
+     "power-game-vinroom"
+     )
+    (((game-task-actor was-pre-game-wascityb))
+     "was-pre-game-wascityb"
+     )
+    (((game-task-actor damus-arena))
+     "damus-arena"
+     )
+    (((game-task-actor keira-genb))
+     "keira-genb"
+     )
+    (((game-task-actor samos-genb))
+     "samos-genb"
+     )
+    (((game-task-actor unused-slot-31))
+     "unused-slot-31"
+     )
+    (((game-task-actor unused-slot-12))
+     "unused-slot-12"
+     )
+    (((game-task-actor unused-slot-28))
+     "unused-slot-28"
+     )
+    (((game-task-actor torn-hiptable))
+     "torn-hiptable"
+     )
+    (((game-task-actor unused-slot-25))
+     "unused-slot-25"
+     )
+    (((game-task-actor ashelin-oasis))
+     "ashelin-oasis"
+     )
+    (((game-task-actor onin-onintent))
+     "onin-onintent"
+     )
+    (((game-task-actor pecker))
+     "pecker"
+     )
+    (((game-task-actor unused-slot-15))
+     "unused-slot-15"
+     )
+    (((game-task-actor unused-slot-18))
+     "unused-slot-18"
+     )
+    (((game-task-actor damus-ruins))
+     "damus-ruins"
+     )
+    (((game-task-actor veger-ruins))
+     "veger-ruins"
+     )
+    (((game-task-actor kleever-pen))
+     "kleever-pen"
+     )
+    (((game-task-actor torn-hipbar))
+     "torn-hipbar"
+     )
+    (((game-task-actor oracle-oracle))
+     "oracle-oracle"
+     )
+    (((game-task-actor unused-slot-21))
+     "unused-slot-21"
+     )
+    (((game-task-actor seem-temple))
+     "seem-temple"
+     )
+    (((game-task-actor seem-wascity))
+     "seem-wascity"
+     )
+    (((game-task-actor unused-slot-30))
+     "unused-slot-30"
+     )
+    (((game-task-actor pecker-onintent))
+     "pecker-onintent"
+     )
+    (((game-task-actor unused-slot-11))
+     "unused-slot-11"
+     )
+    (((game-task-actor monk-wascity))
+     "monk-wascity"
+     )
+    (((game-task-actor unused-slot-24))
+     "unused-slot-24"
+     )
+    (((game-task-actor unused-slot-27))
+     "unused-slot-27"
+     )
+    (else
+      "*unknown*"
+      )
     )
   )
 
-(set! v1-21 type)
 
-(set! t9-2 (method-of-type v1-21 new))
-
-(set! a0-2 'game-task-node-stats)
-
-(set! a1-2 structure)
-
-(set! v1-22 (the-as none L973))
-
-(set! a2-2 (the-as none (l.d v1-22)))
-
-(call! a0-2 a1-2 a2-2)
-
-(set! t9-3 method-set!)
-
-(set! a0-3 game-task-node-stats)
-
-(set! a1-3 3)
-
-(set! a2-3 L82)
-
-(call! a0-3 a1-3 a2-3)
-
-(set! v1-23 type)
-
-(set! t9-4 (method-of-type v1-23 new))
-
-(set! a0-4 'game-task-advanced-options)
-
-(set! a1-4 structure)
-
-(set! v1-24 (the-as none L977))
-
-(set! a2-4 (the-as none (l.d v1-24)))
-
-(call! a0-4 a1-4 a2-4)
-
-(set! t9-5 method-set!)
-
-(set! a0-5 game-task-advanced-options)
-
-(set! a1-5 3)
-
-(set! a2-5 L79)
-
-(call! a0-5 a1-5 a2-5)
-
-(set! v1-25 type)
-
-(set! t9-6 (method-of-type v1-25 new))
-
-(set! a0-6 'game-task-node-info)
-
-(set! a1-6 basic)
-
-(set! v1-26 (the-as none L979))
-
-(set! a2-6 (the-as none (l.d v1-26)))
-
-(call! a0-6 a1-6 a2-6)
-
-(set! t9-7 method-set!)
-
-(set! a0-7 game-task-node-info)
-
-(set! a1-7 3)
-
-(set! a2-7 L57)
-
-(call! a0-7 a1-7 a2-7)
-
-(set! v1-27 type)
-
-(set! t9-8 (method-of-type v1-27 new))
-
-(set! a0-8 'game-task-info)
-
-(set! a1-8 basic)
-
-(set! v1-28 (the-as none L978))
-
-(set! a2-8 (the-as none (l.d v1-28)))
-
-(call! a0-8 a1-8 a2-8)
-
-(set! t9-9 method-set!)
-
-(set! a0-9 game-task-info)
-
-(set! a1-9 3)
-
-(set! a2-9 L54)
-
-(call! a0-9 a1-9 a2-9)
-
-(set! v1-29 type)
-
-(set! t9-10 (method-of-type v1-29 new))
-
-(set! a0-10 'game-task-control)
-
-(set! a1-10 basic)
-
-(set! v1-30 (the-as none L972))
-
-(set! a2-10 (the-as none (l.d v1-30)))
-
-(call! a0-10 a1-10 a2-10)
-
-(set! t9-11 method-set!)
-
-(set! a0-11 game-task-control)
-
-(set! a1-11 3)
-
-(set! a2-11 L51)
-
-(call! a0-11 a1-11 a2-11)
-
-(set! v1-31 type)
-
-(set! t9-12 (method-of-type v1-31 new))
-
-(set! a0-12 'ambient-control)
-
-(set! a1-12 structure)
-
-(set! v1-32 (the-as none L974))
-
-(set! a2-12 (the-as none (l.d v1-32)))
-
-(call! a0-12 a1-12 a2-12)
-
-(set! t9-13 method-set!)
-
-(set! a0-13 ambient-control)
-
-(set! a1-13 3)
-
-(set! a2-13 L48)
-
-(call! a0-13 a1-13 a2-13)
-
-(set! *traffic-engine* #f)
-
-(set! v1-33 type)
-
-(set! t9-14 (method-of-type v1-33 new))
-
-(set! a0-14 'game-movie)
-
-(set! a1-14 structure)
-
-(set! v1-34 (the-as none L975))
-
-(set! a2-14 (the-as none (l.d v1-34)))
-
-(call! a0-14 a1-14 a2-14)
-
-(set! t9-15 method-set!)
-
-(set! a0-15 game-movie)
-
-(set! a1-15 3)
-
-(set! a2-15 L45)
-
-(call! a0-15 a1-15 a2-15)
-
-(set! v1-35 type)
-
-(set! t9-16 (method-of-type v1-35 new))
-
-(set! a0-16 'grand-prix)
-
-(set! a1-16 structure)
-
-(set! v1-36 (the-as none L976))
-
-(set! a2-16 (the-as none (l.d v1-36)))
-
-(call! a0-16 a1-16 a2-16)
-
-(set! t9-17 method-set!)
-
-(set! a0-17 grand-prix)
-
-(set! a1-17 3)
-
-(set! a2-17 L42)
-
-(call! a0-17 a1-17 a2-17)
-
-(set! v0-18 L3)
-
-(set! *game-movie* v0-18)
+;; og:preserve-this ported from jakx ir2
+(defun-debug game-task-action->string ((arg0 game-task-action))
+  (case arg0
+    (((game-task-action idle))
+     "idle"
+     )
+    (((game-task-action play))
+     "play"
+     )
+    (((game-task-action show))
+     "show"
+     )
+    (((game-task-action talk))
+     "talk"
+     )
+    (((game-task-action hide))
+     "hide"
+     )
+    (((game-task-action say))
+     "say"
+     )
+    (((game-task-action trade))
+     "trade"
+     )
+    (((game-task-action menu))
+     "menu"
+     )
+    (else
+      "*unknown*"
+      )
+    )
+  )
+
+
+;; og:preserve-this ported from jakx ir2
+(defun-debug game-task-medal->string ((arg0 game-task-medal))
+  (case arg0
+    (((game-task-medal bronze))
+     "bronze"
+     )
+    (((game-task-medal silver))
+     "silver"
+     )
+    (((game-task-medal gold))
+     "gold"
+     )
+    (((game-task-medal none))
+     "none"
+     )
+    (else
+      "*unknown*"
+      )
+    )
+  )
+
+
+;; og:preserve-this ported from jakx ir2
+(defun-debug game-task-node-flag->string ((arg0 game-task-node-flag))
+  (if (= (logand (game-task-node-flag boss-battle) arg0) (game-task-node-flag boss-battle))
+      (format #t "boss-battle ")
+      )
+  (if (= (logand arg0 (game-task-node-flag clear-task-mask)) (game-task-node-flag clear-task-mask))
+      (format #t "clear-task-mask ")
+      )
+  (if (= (logand arg0 (game-task-node-flag haven-city)) (game-task-node-flag haven-city))
+      (format #t "haven-city ")
+      )
+  (if (= (logand arg0 (game-task-node-flag unlocked)) (game-task-node-flag unlocked))
+      (format #t "unlocked ")
+      )
+  (if (= (logand arg0 (game-task-node-flag kras-city)) (game-task-node-flag kras-city))
+      (format #t "kras-city ")
+      )
+  (if (= (logand (game-task-node-flag qualifier) arg0) (game-task-node-flag qualifier))
+      (format #t "qualifier ")
+      )
+  (if (= (logand arg0 (game-task-node-flag cup4)) (game-task-node-flag cup4))
+      (format #t "cup4 ")
+      )
+  (if (= (logand arg0 (game-task-node-flag set-task-mask)) (game-task-node-flag set-task-mask))
+      (format #t "set-task-mask ")
+      )
+  (if (= (logand arg0 (game-task-node-flag closed)) (game-task-node-flag closed))
+      (format #t "closed ")
+      )
+  (if (= (logand arg0 (game-task-node-flag cup3)) (game-task-node-flag cup3))
+      (format #t "cup3 ")
+      )
+  (if (= (logand arg0 (game-task-node-flag data)) (game-task-node-flag data))
+      (format #t "data ")
+      )
+  (if (= (logand (game-task-node-flag grand-prix) arg0) (game-task-node-flag grand-prix))
+      (format #t "grand-prix ")
+      )
+  (if (= (logand arg0 (game-task-node-flag cup2)) (game-task-node-flag cup2))
+      (format #t "cup2 ")
+      )
+  (if (= (logand arg0 (game-task-node-flag close-task)) (game-task-node-flag close-task))
+      (format #t "close-task ")
+      )
+  (if (= (logand arg0 (game-task-node-flag icelands)) (game-task-node-flag icelands))
+      (format #t "icelands ")
+      )
+  (if (= (logand arg0 (game-task-node-flag cup1)) (game-task-node-flag cup1))
+      (format #t "cup1 ")
+      )
+  (if (= (logand arg0 (game-task-node-flag abs-task-mask)) (game-task-node-flag abs-task-mask))
+      (format #t "abs-task-mask ")
+      )
+  (if (= (logand (game-task-node-flag score-lower-is-better) arg0) (game-task-node-flag score-lower-is-better))
+      (format #t "score-lower-is-better ")
+      )
+  (if (= (logand arg0 (game-task-node-flag spargus)) (game-task-node-flag spargus))
+      (format #t "spargus ")
+      )
+  (the-as string (if (= (logand arg0 (game-task-node-flag intro-b)) (game-task-node-flag intro-b))
+                     (format #t "intro-b ")
+                     )
+          )
+  )
+
+
+;; og:preserve-this ported from jakx ir2
+(defun-debug game-task-node-command->string ((arg0 game-task-node-command))
+  (case arg0
+    (((game-task-node-command sub-board-trail))
+     "sub-board-trail"
+     )
+    (((game-task-node-command add-gun-yellow-1))
+     "add-gun-yellow-1"
+     )
+    (((game-task-node-command add-gun-yellow-2))
+     "add-gun-yellow-2"
+     )
+    (((game-task-node-command add-board-trail))
+     "add-board-trail"
+     )
+    (((game-task-node-command add-vehicle-snake))
+     "add-vehicle-snake"
+     )
+    (((game-task-node-command add-board-zap))
+     "add-board-zap"
+     )
+    (((game-task-node-command add-darkjak-smack))
+     "add-darkjak-smack"
+     )
+    (((game-task-node-command add-gun-yellow-ammo-2))
+     "add-gun-yellow-ammo-2"
+     )
+    (((game-task-node-command add-gun-red-1))
+     "add-gun-red-1"
+     )
+    (((game-task-node-command add-star-map))
+     "add-star-map"
+     )
+    (((game-task-node-command add-darkeco))
+     "add-darkeco"
+     )
+    (((game-task-node-command add-darkjak))
+     "add-darkjak"
+     )
+    (((game-task-node-command add-light-eco-crystal))
+     "add-light-eco-crystal"
+     )
+    (((game-task-node-command add-gun-blue-2))
+     "add-gun-blue-2"
+     )
+    (((game-task-node-command add-gun-dark-3))
+     "add-gun-dark-3"
+     )
+    (((game-task-node-command add-av-cube))
+     "add-av-cube"
+     )
+    (((game-task-node-command add-board-training))
+     "add-board-training"
+     )
+    (((game-task-node-command add-vehicle-toad))
+     "add-vehicle-toad"
+     )
+    (((game-task-node-command add-darkjak-tracking))
+     "add-darkjak-tracking"
+     )
+    (((game-task-node-command none))
+     "none"
+     )
+    (((game-task-node-command add-lighteco))
+     "add-lighteco"
+     )
+    (((game-task-node-command add-artifact-invis))
+     "add-artifact-invis"
+     )
+    (((game-task-node-command add-seal))
+     "add-seal"
+     )
+    (((game-task-node-command add-darkjak-bomb0))
+     "add-darkjak-bomb0"
+     )
+    (((game-task-node-command add-amulet-1))
+     "add-amulet-1"
+     )
+    (((game-task-node-command add-gun-red-ammo-2))
+     "add-gun-red-ammo-2"
+     )
+    (((game-task-node-command add-vehicle-scorpion))
+     "add-vehicle-scorpion"
+     )
+    (((game-task-node-command add-gun-blue-1))
+     "add-gun-blue-1"
+     )
+    (((game-task-node-command sub-sidekick))
+     "sub-sidekick"
+     )
+    (((game-task-node-command add-av-generator))
+     "add-av-generator"
+     )
+    (((game-task-node-command add-sidekick))
+     "add-sidekick"
+     )
+    (((game-task-node-command add-pass-indb-sluma))
+     "add-pass-indb-sluma"
+     )
+    (((game-task-node-command add-amulet-2))
+     "add-amulet-2"
+     )
+    (((game-task-node-command add-vehicle-turtle))
+     "add-vehicle-turtle"
+     )
+    (((game-task-node-command add-gun-yellow-ammo-1))
+     "add-gun-yellow-ammo-1"
+     )
+    (((game-task-node-command add-dark-eco-crystal))
+     "add-dark-eco-crystal"
+     )
+    (((game-task-node-command add-pass-port-inda))
+     "add-pass-port-inda"
+     )
+    (((game-task-node-command add-gun-dark-2))
+     "add-gun-dark-2"
+     )
+    (((game-task-node-command add-av-prism))
+     "add-av-prism"
+     )
+    (((game-task-node-command add-vehicle-rhino))
+     "add-vehicle-rhino"
+     )
+    (((game-task-node-command add-board-launch))
+     "add-board-launch"
+     )
+    (((game-task-node-command add-armor-3))
+     "add-armor-3"
+     )
+    (((game-task-node-command add-cypher-gliph))
+     "add-cypher-gliph"
+     )
+    (((game-task-node-command add-pass-port-mh))
+     "add-pass-port-mh"
+     )
+    (((game-task-node-command add-armor-2))
+     "add-armor-2"
+     )
+    (((game-task-node-command add-darkjak-bomb1))
+     "add-darkjak-bomb1"
+     )
+    (((game-task-node-command add-armor-1))
+     "add-armor-1"
+     )
+    (((game-task-node-command add-pass-front-gate))
+     "add-pass-front-gate"
+     )
+    (((game-task-node-command add-lightjak-swoop))
+     "add-lightjak-swoop"
+     )
+    (((game-task-node-command add-gun-blue-3))
+     "add-gun-blue-3"
+     )
+    (((game-task-node-command add-pass-slumb-genb))
+     "add-pass-slumb-genb"
+     )
+    (((game-task-node-command add-armor-0))
+     "add-armor-0"
+     )
+    (((game-task-node-command add-lightjak-shield))
+     "add-lightjak-shield"
+     )
+    (((game-task-node-command add-lightjak-regen))
+     "add-lightjak-regen"
+     )
+    (((game-task-node-command add-gun-blue-ammo-1))
+     "add-gun-blue-ammo-1"
+     )
+    (((game-task-node-command add-gun-blue-ammo-2))
+     "add-gun-blue-ammo-2"
+     )
+    (((game-task-node-command add-gun-red-ammo-1))
+     "add-gun-red-ammo-1"
+     )
+    (((game-task-node-command add-gun-red-3))
+     "add-gun-red-3"
+     )
+    (((game-task-node-command sub-board))
+     "sub-board"
+     )
+    (((game-task-node-command add-gun-red-2))
+     "add-gun-red-2"
+     )
+    (((game-task-node-command add-lightjak-freeze))
+     "add-lightjak-freeze"
+     )
+    (((game-task-node-command add-darkjak-invinc))
+     "add-darkjak-invinc"
+     )
+    (((game-task-node-command add-board))
+     "add-board"
+     )
+    (((game-task-node-command add-pass-inda-indb))
+     "add-pass-inda-indb"
+     )
+    (((game-task-node-command add-gun-dark-ammo-2))
+     "add-gun-dark-ammo-2"
+     )
+    (((game-task-node-command add-gun-dark-1))
+     "add-gun-dark-1"
+     )
+    (((game-task-node-command add-av-map))
+     "add-av-map"
+     )
+    (((game-task-node-command add-gun-yellow-3))
+     "add-gun-yellow-3"
+     )
+    (((game-task-node-command add-gun-dark-ammo-1))
+     "add-gun-dark-ammo-1"
+     )
+    (((game-task-node-command add-jakc))
+     "add-jakc"
+     )
+    (((game-task-node-command add-amulet-3))
+     "add-amulet-3"
+     )
+    (((game-task-node-command add-av-reflector))
+     "add-av-reflector"
+     )
+    (((game-task-node-command add-lightjak))
+     "add-lightjak"
+     )
+    (else
+      "*unknown*"
+      )
+    )
+  )
+
+
+;; og:preserve-this ported from jak3
+(deftype game-task-event (basic)
+  ((actor      game-task-actor)
+   (action     game-task-action)
+   (skull-cost uint8)
+   (tex        uint8            :overlay-at skull-cost)
+   (icon       uint16           :overlay-at skull-cost)
+   (flags      game-task-flags  :offset   3)
+   (scene      string           :offset   8)
+   (distance   meters)
+   )
+  )
+
+;; og:preserve-this ported from jak3
+(deftype resetter-spec (structure)
+  ((continue    string)
+   (node        game-task-node)
+   (reset-mode  symbol)
+   (execute     basic)
+   )
+  :pack-me
+  )
+
+;; og:preserve-this ported from jak3
+(deftype resetter-params (structure)
+  ((message       resetter-message)
+   (flags         resetter-flag)
+   (fail          resetter-spec  :inline)
+   (retry         resetter-spec  :inline)
+   (reset-delay   uint32)
+   (task          game-task)
+   (text-message  text-id)
+   )
+  )
+
+;; og:preserve-this ported from jak3
+(deftype task-manager-info (structure)
+  ((mask                       task-manager-mask)
+   (level                      symbol)
+   (type-to-spawn              symbol)
+   (time-limit                 int32)
+   (manager                    handle)
+   (intro-scene                object)
+   (resolution-scene           object)
+   (resolution-scene-continue  object)
+   (final-node                 game-task-node)
+   (vehicle-type               uint8)
+   (sphere-count               int8)
+   (index                      int8)
+   (intro-delay                uint16)
+   (sphere-array               (inline-array sphere))
+   (on-complete                pair)
+   (on-fail                    pair)
+   (user-count                 int32)
+   )
+  )
+
+;; og:preserve-this ported from jak3
+(deftype task-reset-info (structure)
+  ((restart-info  resetter-params)
+   (quit-info     resetter-params)
+   (fail-info     resetter-params)
+   (death-info    resetter-params)
+   )
+  )
+
+;; og:preserve-this jakx-specific type from ir2 inspect
+(deftype game-task-node-stats (structure)
+  ((death-count  uint32)
+   (vehicle      uint32)
+   (medal        game-task-medal)
+   (ranking      uint32)
+   (score        float)
+   (time         float)
+   (duration     float)
+   (order        uint32)
+   (end-mode     uint32)
+   (cash         uint32)
+   (tuning       uint32)
+   )
+  )
+
+;; og:preserve-this jakx-specific type from ir2 inspect
+(deftype game-task-advanced-options (structure)
+  ((data    uint32  8)
+   (lword   uint64  :overlay-at (-> data 0))
+   (weapons uint32  :overlay-at (-> data 0))
+   (flags   uint8   :offset 4)
+   (param1  uint8   :offset 5)
+   (param2  uint8   :offset 6)
+   (param3  uint8   :offset 7)
+   )
+  )
+
+;; og:preserve-this jakx-specific version of game-task-node-info from ir2 inspect
+(deftype game-task-node-info (basic)
+  ((level                              symbol)
+   (task                               game-task)
+   (net-play-mode                      uint8)
+   (name                               string)
+   (max-humans                         uint8)
+   (max-cpu                            uint8)
+   (min-players                        uint8)
+   (when-open                          (array game-task-event))
+   (flags                              game-task-node-flag)
+   (task-mask                          task-mask)
+   (borrow                             pair)
+   (close-time                         uint32)
+   (description                        text-id)
+   (intro-scene                        string)
+   (outro-scene                        string)
+   (time-of-day                        int32)
+   (task-sound-description             string)
+   (ipu                                basic)
+   (gold-array                         float  2)
+   (silver-array                       float  2)
+   (bronze-array                       float  2)
+   (gold                               float)
+   (silver                             float)
+   (bronze                             float)
+   (gold-hero                          float)
+   (silver-hero                        float)
+   (bronze-hero                        float)
+   (medals-data                        uint32)
+   (medals                             uint8  4  :overlay-at medals-data)
+   (unlocked                           uint32)
+   (game-score-index                   int32)
+   (adv-score                          int32)
+   (exb-score                          int32)
+   (ai-tuning-indices                  basic)
+   (sound-bank                         symbol)
+   (play-count                         uint32)
+   (time-limit                         uint32)
+   (ai-difficulty                      uint8)
+   (ai-easier-after                    uint8)
+   (ai-min-difficulty                  uint8)
+   (ai-difficulty-step                 uint8)
+   (default-advanced-options           game-task-advanced-options)
+   (user-advanced-options              game-task-advanced-options)
+   (default-advanced-options-adventure game-task-advanced-options)
+   (adventure-drivers                  basic)
+   (race-start-speech                  basic)
+   (gp-start-speech                    basic)
+   (gp-win-speech                      basic)
+   (gp-finish-speech                   basic)
+   (high-scores-default                basic)
+   (high-scores                        basic)
+   )
+  (:methods
+    (get-idx-in-task-list (_type_) int)
+    (open! (_type_ symbol) int)
+    (game-task-node-info-method-11 (_type_ symbol) none)
+    (game-task-node-info-method-12 (_type_) symbol)
+    (eval-game-task-cmd! (_type_) none)
+    )
+  )
+
+;; og:preserve-this jakx-specific version of game-task-info from ir2 inspect
+(deftype game-task-info (basic)
+  ((name                        string)
+   (task-level                  int32)
+   (text-name                   text-id)
+   (text-id-long                text-id)
+   (single-player               symbol)
+   (kiosk-play-node             game-task-node)
+   (play-node                   game-task-node)
+   (play-continue               string)
+   (split-continue              string)
+   (kiosk-play-continue         string)
+   (kiosk-online-play-continue  string)
+   )
+  (:methods
+    (get-play-list-idx (_type_) int)
+    )
+  )
+
+;; og:preserve-this ported from jak3
+(deftype game-task-control (basic)
+  ((counter        uint32)
+   (actor          game-task-actor)
+   (current-node   game-task-node)
+   (current-event  game-task-event)
+   )
+  (:methods
+    (new (symbol type game-task-actor) _type_)
+    (get-current-task-event (_type_) game-task-event)
+    )
+  )
+
+;; og:preserve-this ported from jak3
+(deftype task-manager (process)
+  ((node-info       game-task-node-info)
+   (info            task-manager-info)
+   (lev-name        symbol)
+   (fail-on-death?  symbol)
+   (fail-now        symbol)
+   (restart-now     symbol)
+   (allow-fail      symbol)
+   (state-time      time-frame)
+   (start-time      time-frame)
+   (time-limit      time-frame)
+   (arrow           handle)
+   (player-vehicle  handle)
+   (hud             handle  4)
+   (hud-timer       handle  :overlay-at (-> hud 0))
+   (hud-counter     handle  :overlay-at (-> hud 1))
+   (intro-time      time-frame)
+   )
+  (:state-methods
+    wait
+    active
+    complete
+    resolution
+    (fail resetter-params)
+    (restart symbol)
+    )
+  (:methods
+    (init! (_type_) none)
+    (set-time-limit (_type_) none)
+    (kill-all-children (_type_) none)
+    (hud-timer-handler (_type_) none)
+    (ready? (_type_) object)
+    (task-manager-method-25 (_type_) none)
+    (task-manager-method-26 (_type_) none)
+    (task-manager-method-27 (_type_) none)
+    (task-manager-method-28 (_type_) none)
+    (go-fail (_type_) object)
+    (taskman-event-handler (_type_ process int symbol event-message-block) object)
+    (on-fail (_type_ symbol) resetter-params)
+    )
+  )
+
+;; og:preserve-this ported from jak3
+(deftype ambient-control (structure)
+  ((last-ambient-time  time-frame)
+   (last-ambient       string)
+   (last-ambient-id    sound-id)
+   )
+  :pack-me
+  (:methods
+    (ambient-control-method-9 () none)
+    (ambient-control-method-10 () none)
+    (ambient-control-method-11 () none)
+    )
+  )
+
+;; og:preserve-this jakx-specific grand-prix type from ir2 inspect
+;; Updated with full field list from all-types.gc (ir2 inspect)
+(deftype grand-prix (basic)
+  ((name                string)
+   (score               uint16)
+   (flags               uint16)
+   (saved-data2         uint16   2)
+   (saved-data          uint32   :overlay-at (-> saved-data2 0))
+   (trophy              uint16   :overlay-at (-> saved-data2 0))
+   (play-count          uint16   :overlay-at (-> saved-data2 1))
+   (drivers             symbol)
+   (task                uint16   3)
+   (task1               uint16   :overlay-at (-> task 0))
+   (task2               uint16   :overlay-at (-> task 1))
+   (task3               uint16   :overlay-at (-> task 2))
+   (cup                 uint32)
+   (intro               string)
+   (outro               string)
+   (ai-tuning-indices1  pair)
+   (ai-tuning-indices2  pair)
+   (ai-tuning-indices3  pair)
+   (sound-description   string)
+   (boss                uint16)
+   (boss-drivers        symbol)
+   )
+  )
+
+;; og:preserve-this jakx-specific game-movie type from ir2 inspect
+(deftype game-movie (basic)
+  ((name   string)
+   (score  uint32)
+   (flags  uint32)
+   (cup    uint32)
+   )
+  )
+
+;; *game-movie* is a static array initialized in task-control-h top-level (failed decompile)
+;; Defined here as placeholder so game-task.gc can reference it
+(define *game-movie* (the-as (array game-movie) (new 'static 'boxed-array :type game-movie)))
+
+(define *traffic-engine* (the-as traffic-engine #f))
