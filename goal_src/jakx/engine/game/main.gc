@@ -68,7 +68,7 @@
           (dotimes (i (-> *level* length))
             (let ((lev (-> *level* level i)))
               (when (or (= (-> lev status) 'active) (= (-> lev status) 'alive) (= (-> lev status) 'loaded) (= (-> lev status) 'loading))
-                (set! (-> lev-names i) (symbol->string (bsp-name lev))))))
+                (set! (-> lev-names i) (symbol->string (level-method-13 lev))))))
           (__pc-set-levels lev-names)))
       (update-camera)
       ;; Seed non-zero mood times on active levels so background DMA packets

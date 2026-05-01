@@ -91,7 +91,7 @@
         )
       )
 
-    (copyn-charp<-string (the (pointer uint8) (&-> data-ptr 23)) (symbol->string (bsp-name lev)) 32)
+    (copyn-charp<-string (the (pointer uint8) (&-> data-ptr 23)) (symbol->string (level-method-13 lev)) 32)
     )
   (&+! (-> dma-buf base) (* 16 25))
   )
