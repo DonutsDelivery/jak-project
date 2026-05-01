@@ -62442,6 +62442,7 @@
 ;; from jak3 REF: test/decompiler/reference/jak3/engine/process-drawable/process-drawable_REF.gc
 (define-extern ja-min? (function int none))
 (define-extern get-nav-graph-editor (function nav-graph-editor))
+(define-extern tie-init-consts (function tie-consts gs-alpha gs-test gs-test none))
 ;; --- end Recipe X cycle 1 ---
 ;;(define-extern string-menu object)
 ;; (define-extern sky-color-day object) ;; clobbers active deftype
