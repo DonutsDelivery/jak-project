@@ -42000,7 +42000,7 @@
     (rigid-body-object-method-81 (_type_ object object object object) none) ;; 81
     (rigid-body-object-method-82 (_type_ object object object object) symbol) ;; 82
     (rigid-body-object-method-83 (_type_ object object) symbol) ;; 83
-    (rigid-body-object-method-84 (_type_ rigid-body-impact touching-shapes-entry) none) ;; 84
+    (rigid-body-object-method-84 (_type_ rigid-body-impact touching-shapes-entry) int) ;; 84
     (rigid-body-object-method-85 (_type_) int) ;; 85
     (rigid-body-object-method-86 (_type_) int) ;; 86
     (rigid-body-object-method-87 (_type_) int) ;; 87
