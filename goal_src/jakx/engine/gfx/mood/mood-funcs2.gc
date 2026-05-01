@@ -6,215 +6,284 @@
 ;; dgos: GAME
 
 ;; DECOMP BEGINS
+;; NOTE: rebuilt from decompiler_out/jakx/mood-funcs2_disasm.gc
 
-(local-vars
-  (v0-0 type)
-  (v0-1 none)
-  (v0-2 type)
-  (v0-3 none)
-  (v0-4 type)
-  (v0-5 none)
-  (v0-6 type)
-  (v0-7 none)
-  (v0-8 function)
-  (v1-0 function)
-  (v1-1 function)
-  (v1-2 function)
-  (v1-3 type)
-  (v1-4 int)
-  (v1-5 (function mood-context none :behavior time-of-day-proc))
-  (v1-6 (function mood-context none :behavior time-of-day-proc))
-  (v1-7 type)
-  (v1-8 none)
-  (v1-9 function)
-  (v1-10 function)
-  (v1-11 function)
-  (v1-12 type)
-  (v1-13 int)
-  (v1-14 (function mood-context none))
-  (v1-15 (function mood-context float none :behavior time-of-day-proc))
-  (v1-16 type)
-  (v1-17 none)
-  (v1-18 function)
-  (v1-19 function)
-  (a0-0 symbol)
-  (a0-1 type)
-  (a0-2 symbol)
-  (a0-3 type)
-  (a0-4 symbol)
-  (a0-5 object)
-  (a0-6 symbol)
-  (a0-7 type)
-  (a1-0 type)
-  (a1-1 int)
-  (a1-2 type)
-  (a1-3 int)
-  (a1-4 type)
-  (a1-5 int)
-  (a1-6 type)
-  (a1-7 int)
-  (a2-0 int)
-  (a2-1 function)
-  (a2-2 none)
-  (a2-3 (function rustyh-states rustyh-states))
-  (a2-4 int)
-  (a2-5 function)
-  (a2-6 none)
-  (a2-7 (function garage-states garage-states))
-  (t9-0 (function symbol type int type))
-  (t9-1 (function type int object none))
-  (t9-2 (function symbol type int type))
-  (t9-3 (function type int object none))
-  (t9-4 (function symbol type int type))
-  (t9-5 (function type int object none))
-  (t9-6 (function symbol type int type))
-  (t9-7 (function type int object none))
+(defun init-mood-fog-default ()
+  (let ((v1-1 (-> *time-of-day-context* fog-override)))
+    (set-vector! (-> v1-1 fog-color) 150.0 165.0 220.0 128.0)
+    (set-vector! (-> v1-1 fog-dists) 2048000.0 12288000.0 255.0 150.0)
+    (let ((v0-0 (-> v1-1 erase-color)))
+      (set! (-> v0-0 x) 0.0)
+      (set! (-> v0-0 y) 0.0)
+      (set! (-> v0-0 z) 0.0)
+      (set! (-> v0-0 w) 128.0)
+      v0-0
+      )
+    )
   )
 
-(set! v1-0 L28)
-
-(set! init-mood-fog-default v1-0)
-
-(set! v1-1 L27)
-
-(set! init-mood-fog-temple v1-1)
-
-(set! v1-2 L26)
-
-(set! init-mood-fog-drome v1-2)
-
-(set! v1-3 type)
-
-(set! t9-0 (method-of-type v1-3 new))
-
-(set! a0-0 'default-interior-states)
-
-(set! a1-0 structure)
-
-(set! v1-4 9)
-
-(set! a2-0 (sll v1-4 32))
-
-(call! a0-0 a1-0 a2-0)
-
-(set! t9-1 method-set!)
-
-(set! a0-1 default-interior-states)
-
-(set! a1-1 3)
-
-(set! a2-1 L39)
-
-(call! a0-1 a1-1 a2-1)
-
-(set! v1-5 L23)
-
-(set! update-mood-default-interior v1-5)
-
-(set! v1-6 L20)
-
-(set! update-mood-default-interior-ambient v1-6)
-
-(set! v1-7 type)
-
-(set! t9-2 (method-of-type v1-7 new))
-
-(set! a0-2 'rustyh-states)
-
-(set! a1-2 structure)
-
-(set! v1-8 (the-as none L47))
-
-(set! a2-2 (the-as none (l.d v1-8)))
-
-(call! a0-2 a1-2 a2-2)
-
-(set! t9-3 method-set!)
-
-(set! a0-3 rustyh-states)
-
-(set! a1-3 3)
-
-(set! a2-3 L36)
-
-(call! a0-3 a1-3 a2-3)
-
-(set! v1-9 L19)
-
-(set! update-rustyh-lights v1-9)
-
-(set! v1-10 L16)
-
-(set! update-mood-rustyh v1-10)
-
-(set! v1-11 L13)
-
-(set! set-rustyh-effect-light! v1-11)
-
-(set! v1-12 type)
-
-(set! t9-4 (method-of-type v1-12 new))
-
-(set! a0-4 'hiphog-states)
-
-(set! a1-4 structure)
-
-(set! v1-13 9)
-
-(set! a2-4 (sll v1-13 32))
-
-(call! a0-4 a1-4 a2-4)
-
-(set! t9-5 method-set!)
-
-(set! a0-5 hiphog-states)
-
-(set! a1-5 3)
-
-(set! a2-5 L33)
-
-(call! a0-5 a1-5 a2-5)
-
-(set! v1-14 L12)
-
-(set! update-hiphog-lights v1-14)
-
-(set! v1-15 L9)
-
-(set! update-mood-hiphog v1-15)
-
-(set! v1-16 type)
-
-(set! t9-6 (method-of-type v1-16 new))
-
-(set! a0-6 'garage-states)
-
-(set! a1-6 structure)
-
-(set! v1-17 (the-as none L47))
-
-(set! a2-6 (the-as none (l.d v1-17)))
-
-(call! a0-6 a1-6 a2-6)
-
-(set! t9-7 method-set!)
-
-(set! a0-7 garage-states)
-
-(set! a1-7 3)
-
-(set! a2-7 L30)
-
-(call! a0-7 a1-7 a2-7)
-
-(set! v1-18 L8)
-
-(set! update-garage-brdroom-lights v1-18)
-
-(set! v1-19 L3)
-
-(set! update-mood-garage-brdroom v1-19)
-
-(set! v0-8 L1)
-
-(set! set-garage-switched! v0-8)
+(defun init-mood-fog-temple ()
+  (let ((v1-1 (-> *time-of-day-context* fog-override)))
+    (set-vector! (-> v1-1 fog-color) 160.0 150.0 200.0 128.0)
+    (set-vector! (-> v1-1 fog-dists) 131072.0 3072000.0 255.0 200.0)
+    (let ((v0-0 (-> v1-1 erase-color)))
+      (set! (-> v0-0 x) 0.0)
+      (set! (-> v0-0 y) 0.0)
+      (set! (-> v0-0 z) 0.0)
+      (set! (-> v0-0 w) 128.0)
+      v0-0
+      )
+    )
+  )
+
+(defun init-mood-fog-drome ()
+  (let ((v1-1 (-> *time-of-day-context* fog-override)))
+    (set-vector! (-> v1-1 fog-color) 150.0 165.0 220.0 128.0)
+    (set-vector! (-> v1-1 fog-dists) 131072.0 6826668.0 255.0 162.0)
+    (let ((v0-0 (-> v1-1 erase-color)))
+      (set! (-> v0-0 x) 0.0)
+      (set! (-> v0-0 y) 0.0)
+      (set! (-> v0-0 z) 0.0)
+      (set! (-> v0-0 w) 128.0)
+      v0-0
+      )
+    )
+  )
+
+(deftype default-interior-states (structure)
+  ()
+  )
+
+(defbehavior update-mood-default-interior time-of-day-proc ((arg0 mood-context))
+  (update-mood-interior arg0 #f)
+  (cond
+    ((< (the-as uint 8) (-> *time-of-day-context* mode))
+     (palette-select-special arg0)
+     )
+    (else
+      (-> arg0 state)
+      (set! (-> arg0 times 0 w) 1.0)
+      (set! (-> arg0 times 1 w) 1.0)
+      (set! (-> arg0 times 2 w) 0.0)
+      (set! (-> arg0 times 3 w) 0.0)
+      (set! (-> arg0 times 4 w) 0.0)
+      (set! (-> arg0 times 5 w) 0.0)
+      (set! (-> arg0 times 6 w) 0.0)
+      (set! (-> arg0 times 7 w) 0.0)
+      )
+    )
+  0
+  (none)
+  )
+
+(defbehavior update-mood-default-interior-ambient time-of-day-proc ((arg0 mood-context))
+  (update-mood-interior arg0 #t)
+  (cond
+    ((< (the-as uint 8) (-> *time-of-day-context* mode))
+     (palette-select-special arg0)
+     )
+    (else
+      (-> arg0 state)
+      (set! (-> arg0 times 0 w) 1.0)
+      (set! (-> arg0 times 1 w) 1.0)
+      (set! (-> arg0 times 2 w) 1.0)
+      (set! (-> arg0 times 3 w) 1.0)
+      (set! (-> arg0 times 4 w) 1.0)
+      (set! (-> arg0 times 5 w) 1.0)
+      (set! (-> arg0 times 6 w) 1.0)
+      (set! (-> arg0 times 7 w) 1.0)
+      )
+    )
+  0
+  (none)
+  )
+
+(deftype rustyh-states (structure)
+  ((effect  float)
+   )
+  )
+
+;; NOTE: Stubbed - update-rustyh-lights was not converted to expressions
+(defun update-rustyh-lights ((arg0 mood-context))
+  (format 0 "call to update-rustyh-lights~%")
+  (none)
+  )
+
+;; NOTE: Stubbed - update-mood-rustyh failed type prop
+(defbehavior update-mood-rustyh time-of-day-proc ((arg0 mood-context))
+  (format 0 "call to update-mood-rustyh~%")
+  (none)
+  )
+
+;; NOTE: Stubbed - set-rustyh-effect-light! uses unresolved gpr->fpr
+(defun set-rustyh-effect-light! ((arg0 float))
+  (format 0 "call to set-rustyh-effect-light!~%")
+  (none)
+  )
+
+(deftype hiphog-states (structure)
+  ((door                 entity)
+   (door-current-interp  float)
+   (door-target-interp   float)
+   )
+  )
+
+(defun update-hiphog-lights ((arg0 mood-context))
+  (let ((t1-0 (-> arg0 light-group))
+        (t0-0 (-> arg0 light-group 1))
+        (a3-0 (-> arg0 light-group 2))
+        (a2-0 (-> arg0 light-group 3))
+        (a1-0 (-> arg0 light-group 4))
+        (v1-0 (-> arg0 light-group 5))
+        )
+    (set-vector! (-> t1-0 0 dir0 color) 0.0 0.0 0.0 1.0)
+    (set-vector! (-> t1-0 0 ambi color) 0.11 0.109 0.175 1.0)
+    (set-vector! (-> t0-0 dir0 color) 0.945 0.648 0.523 1.0)
+    (let ((a0-4 (-> t0-0 dir0)))
+      (set! (-> a0-4 direction x) 0.0)
+      (set! (-> a0-4 direction y) 1.0)
+      (set! (-> a0-4 direction z) 0.0)
+      (set! (-> a0-4 direction w) 1.0)
+      )
+    (set! (-> t0-0 dir0 extra x) 1.0)
+    (set-vector! (-> t0-0 ambi color) 0.197 0.124 0.062 1.0)
+    (set! (-> t0-0 ambi extra x) 1.0)
+    (set-vector! (-> a3-0 dir0 color) 0.945 0.648 0.523 1.0)
+    (set-vector! (-> a3-0 dir1 color) 1.0 0.237 0.386 1.0)
+    (set-vector! (-> a3-0 ambi color) 0.197 0.124 0.062 1.0)
+    (let ((a0-11 (-> a3-0 dir0)))
+      (set! (-> a0-11 direction x) 0.0)
+      (set! (-> a0-11 direction y) 1.0)
+      (set! (-> a0-11 direction z) 0.0)
+      (set! (-> a0-11 direction w) 1.0)
+      )
+    (let ((a0-12 (-> a3-0 dir1)))
+      (set! (-> a0-12 direction x) 0.0)
+      (set! (-> a0-12 direction y) -1.0)
+      (set! (-> a0-12 direction z) 0.0)
+      (set! (-> a0-12 direction w) 1.0)
+      )
+    (set! (-> a3-0 dir0 extra x) 1.0)
+    (set! (-> a3-0 dir1 extra x) 1.0)
+    (set! (-> a3-0 ambi extra x) 1.0)
+    (set-vector! (-> a2-0 dir0 color) 0.945 0.648 0.523 1.0)
+    (set-vector! (-> a2-0 dir1 color) 0.02 0.97 0.0 1.0)
+    (set-vector! (-> a2-0 dir2 color) 1.0 0.237 0.386 1.0)
+    (set-vector! (-> a2-0 ambi color) 0.197 0.124 0.062 1.0)
+    (let ((a0-20 (-> a2-0 dir0)))
+      (set! (-> a0-20 direction x) 0.0)
+      (set! (-> a0-20 direction y) 1.0)
+      (set! (-> a0-20 direction z) 0.0)
+      (set! (-> a0-20 direction w) 1.0)
+      )
+    (let ((a0-21 (-> a2-0 dir1)))
+      (set! (-> a0-21 direction x) 0.0)
+      (set! (-> a0-21 direction y) -1.0)
+      (set! (-> a0-21 direction z) 0.0)
+      (set! (-> a0-21 direction w) 1.0)
+      )
+    (let ((a0-22 (-> a2-0 dir2)))
+      (set! (-> a0-22 direction x) 1.0)
+      (set! (-> a0-22 direction y) 0.0)
+      (set! (-> a0-22 direction z) 0.0)
+      (set! (-> a0-22 direction w) 1.0)
+      )
+    (set! (-> a2-0 dir0 extra x) 1.0)
+    (set! (-> a2-0 dir1 extra x) 1.0)
+    (set! (-> a2-0 dir2 extra x) 1.0)
+    (set! (-> a2-0 ambi extra x) 1.0)
+    (set-vector! (-> a1-0 dir0 color) 0.945 0.648 0.523 1.0)
+    (set-vector! (-> a1-0 dir1 color) 0.02 0.97 0.0 1.0)
+    (set-vector! (-> a1-0 dir2 color) 1.0 0.237 0.386 1.0)
+    (set-vector! (-> a1-0 ambi color) 0.197 0.124 0.062 1.0)
+    (let ((a0-31 (-> a1-0 dir0)))
+      (set! (-> a0-31 direction x) 0.0)
+      (set! (-> a0-31 direction y) 1.0)
+      (set! (-> a0-31 direction z) 0.0)
+      (set! (-> a0-31 direction w) 1.0)
+      )
+    (let ((a0-32 (-> a1-0 dir1)))
+      (set! (-> a0-32 direction x) 0.0)
+      (set! (-> a0-32 direction y) -1.0)
+      (set! (-> a0-32 direction z) 0.0)
+      (set! (-> a0-32 direction w) 1.0)
+      )
+    (let ((a0-33 (-> a1-0 dir2)))
+      (set! (-> a0-33 direction x) -1.0)
+      (set! (-> a0-33 direction y) 0.0)
+      (set! (-> a0-33 direction z) 0.0)
+      (set! (-> a0-33 direction w) 1.0)
+      )
+    (set! (-> a1-0 dir0 extra x) 1.0)
+    (set! (-> a1-0 dir1 extra x) 1.0)
+    (set! (-> a1-0 dir2 extra x) 1.0)
+    (set! (-> a1-0 ambi extra x) 1.0)
+    (set-vector! (-> v1-0 dir0 color) 0.9992 0.6868 0.7258 1.0)
+    (set-vector! (-> v1-0 dir1 color) 0.9992 0.6868 0.7258 1.0)
+    (set-vector! (-> v1-0 dir2 color) 0.9 0.9 0.9 1.0)
+    (set-vector! (-> v1-0 ambi color) 0.197 0.124 0.062 1.0)
+    (let ((a0-42 (-> v1-0 dir0)))
+      (set! (-> a0-42 direction x) 0.028)
+      (set! (-> a0-42 direction y) 0.731)
+      (set! (-> a0-42 direction z) -0.681)
+      (set! (-> a0-42 direction w) 1.0)
+      )
+    (let ((a0-43 (-> v1-0 dir1)))
+      (set! (-> a0-43 direction x) -0.472)
+      (set! (-> a0-43 direction y) 0.719)
+      (set! (-> a0-43 direction z) 0.519)
+      (set! (-> a0-43 direction w) 1.0)
+      )
+    (let ((a0-44 (-> v1-0 dir2)))
+      (set! (-> a0-44 direction x) 0.242)
+      (set! (-> a0-44 direction y) 0.786)
+      (set! (-> a0-44 direction z) 0.567)
+      (set! (-> a0-44 direction w) 1.0)
+      )
+    (set! (-> v1-0 dir0 extra x) 1.0)
+    (set! (-> v1-0 dir1 extra x) 0.75)
+    (set! (-> v1-0 dir2 extra x) 0.0)
+    (set! (-> v1-0 ambi extra x) 1.0)
+    )
+  0
+  (none)
+  )
+
+(defbehavior update-mood-hiphog time-of-day-proc ((arg0 mood-context) (arg1 float))
+  (update-mood-interior arg0 #t)
+  (set! (-> arg0 light-group 0 dir0 extra x) 0.0)
+  (cond
+    ((< (the-as uint 8) (-> *time-of-day-context* mode))
+     (palette-select-special arg0)
+     )
+    (else
+      (set! (-> arg0 times 1 w) 1.0)
+      (-> arg0 state)
+      )
+    )
+  0
+  (none)
+  )
+
+(deftype garage-states (structure)
+  ((switched  float)
+   )
+  )
+
+;; NOTE: Stubbed - update-garage-brdroom-lights was not converted to expressions
+(defun update-garage-brdroom-lights ((arg0 mood-context))
+  (format 0 "call to update-garage-brdroom-lights~%")
+  (none)
+  )
+
+;; NOTE: Stubbed - update-mood-garage-brdroom was not converted to expressions
+(defbehavior update-mood-garage-brdroom time-of-day-proc ((arg0 mood-context) (arg1 float) (arg2 int))
+  (format 0 "call to update-mood-garage-brdroom~%")
+  (none)
+  )
+
+;; NOTE: Stubbed - set-garage-switched! uses unresolved gpr->fpr
+(defun set-garage-switched! ((arg0 float))
+  (format 0 "call to set-garage-switched!~%")
+  (none)
+  )
