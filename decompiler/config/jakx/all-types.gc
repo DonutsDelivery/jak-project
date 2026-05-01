@@ -36970,7 +36970,7 @@
 (define-extern sprite-glow-init-engine (function dma-buffer none))
 (define-extern *sprite-glow-dma-packet-data* sprite-glow-dma-packet-data) ;; sprite-glow-dma-packet-data
 (define-extern sprite-glow-add-sprite (function dma-buffer sprite-vec-data-2d float float float adgif-shader none))
-(define-extern sprite-glow-add-simple-sprite "Generate DMA to draw a single sprite from the simple sprite system." (function dma-buffer sprite-glow-dma-packet-data sprite-glow-data pointer none))
+(define-extern sprite-glow-add-simple-sprite (function dma-buffer sprite-glow-dma-packet-data sprite-glow-data pointer none))
 (define-extern sprite-glow-draw (function dma-buffer none))
 (define-extern add-shader-to-dma (function dma-buffer adgif-shader))
 (define-extern *simple-sprite-system* simple-sprite-system) ;; simple-sprite-system
