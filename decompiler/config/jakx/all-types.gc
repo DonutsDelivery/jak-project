@@ -6474,6 +6474,7 @@
     (roll-relative-to-gravity "Get our roll, relative to 'down' from gravity." (_type_) float) ;; 25
     (set-and-limit-velocity (_type_ int vector float) trsqv) ;; 26
     (get-quaternion "Get the quat for this [[trsqv]]." (_type_) quaternion) ;; 27
+      (set-roll-to-grav! (_type_ float) quaternion) ;; 15
     )
   )
 
