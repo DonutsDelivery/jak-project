@@ -53139,7 +53139,7 @@
 (define-extern anim-test-sequence-init (function anim-test-sequence anim-test-obj none))
 (define-extern anim-test-seq-item-copy! (function anim-test-seq-item none))
 (define-extern anim-test-obj-item-valid? (function anim-test-obj none))
-(define-extern anim-test-obj-remove-invalid (function none))
+(define-extern anim-test-obj-remove-invalid (function anim-test-obj symbol))
 (define-extern anim-tester-real-post (function none :behavior anim-tester))
 (define-extern anim-tester-post (function none))
 (define-extern anim-tester-update-anim-info (function none))
