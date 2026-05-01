@@ -4174,17 +4174,10 @@
   ],
   "generic-add-constants": [
     [
-      10,
-      "a0",
-      "dma-packet"
-    ],
-    [
-      15,
-      "a0",
-      "dma-packet"
-    ],
-    [
-      8,
+      [
+        8,
+        16
+      ],
       "a0",
       "dma-packet"
     ]
