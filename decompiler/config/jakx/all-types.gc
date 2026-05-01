@@ -15725,7 +15725,7 @@
     (persist-with-delay (_type_ symbol time-frame symbol symbol float int) none) ;; 14
     (set-setting (_type_ process symbol object object object) connection) ;; 15
     (remove-setting (_type_ object) none) ;; 16
-    (setting-control-method-17 (_type_ engine-pers object) none) ;; 17
+    (setting-control-method-17 (_type_ engine-pers object) int) ;; 17
     (setting-control-method-18 (_type_) user-setting-data) ;; 18
     (move-connection-to-dead (_type_ object) connectable) ;; 19
     (setting-control-method-20 (_type_ object) connectable) ;; 20
