@@ -41904,7 +41904,7 @@
     (rigid-body-control-method-33 (_type_ object object) none) ;; 33
     (rigid-body-control-method-34 (_type_ int int) none) ;; 34
     (rigid-body-control-method-35 (_type_ object object object) none) ;; 35
-    (rigid-body-control-method-36 (_type_ object) none) ;; 36
+    (rigid-body-control-method-36 (_type_ object) int) ;; 36
     (rigid-body-control-method-37 (_type_ object) int) ;; 37
     (rigid-body-control-method-38 (_type_ object) int) ;; 38
     (rigid-body-control-method-39 (_type_ object) int) ;; 39
