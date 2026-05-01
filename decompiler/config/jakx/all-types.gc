@@ -46401,7 +46401,7 @@
     (wvehicle-method-230 (_type_ vector) int) ;; 230
     (wvehicle-method-231 (_type_) none) ;; 231
     (wvehicle-method-232 (_type_) none) ;; 232
-    (wvehicle-method-233 (_type_) none) ;; 233
+    (wvehicle-method-233 (_type_ process-focusable) symbol) ;; 233
     (wvehicle-method-234 (_type_) none) ;; 234
     (wvehicle-method-235 (_type_) none) ;; 235
     (wvehicle-method-236 (_type_) none) ;; 236
