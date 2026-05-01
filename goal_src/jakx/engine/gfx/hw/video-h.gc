@@ -27,4 +27,10 @@
   )
 
 
-(define *video-params* #f)
+(define *video-params* (new 'static 'video-params
+                         :set-video-mode #f
+                         :reset-video-mode #f
+                         :relative-x-scale 1.0
+                         :relative-x-scale-reciprical 1.0
+                         )
+        )
