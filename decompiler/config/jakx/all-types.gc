@@ -53394,7 +53394,7 @@
     (new (symbol type) _type_) ;; 0
     (editable-region-method-9 (_type_ editable-array int int) symbol) ;; 9
     (editable-region-method-10 (_type_ int) symbol) ;; 10
-    (editable-region-method-11 (_type_ vector int) none) ;; 11
+    (editable-region-method-11 (_type_ vector int) int) ;; 11
     (editable-region-method-12 (_type_) none) ;; 12
     )
   )
