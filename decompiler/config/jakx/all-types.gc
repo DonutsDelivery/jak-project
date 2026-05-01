@@ -53734,7 +53734,7 @@
 ;; editable-player                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern cleanup-selection (function editable-array object))
+(define-extern cleanup-selection (function editable-array none))
 (define-extern insert-box (function editable-array vector vector object))
 (define-extern insert-wall (function editable-array vector vector object))
 (define-extern update-manipulator-position (function editable-array manipulator matrix))
