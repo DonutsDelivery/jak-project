@@ -1,11 +1,13 @@
 {
-  // race-manager: handle dereference pattern.
-  // Op 20: sllv a0,v1,r0 extracts the (pointer process) from v1-4 (handle).
-  // Cast v1 to (pointer process) for ops 20-22 so the collapsed form compiles.
   "(method 10 race-state)": [
     [
-      [20, 22],
+      16,
       "v1",
+      "racer-state"
+    ],
+    [
+      21,
+      "a0",
       "(pointer process)"
     ]
   ],
@@ -1313,12 +1315,12 @@
   ],
   "(method 3 collide-query)": [
     [
-      116,
+      121,
       "f0",
       "float"
     ],
     [
-      137,
+      142,
       "f0",
       "float"
     ]
@@ -1526,21 +1528,65 @@
     ]
   ],
   "dgo-load-link": [
-    [[10, 60], "s4", "uint"],
-    [[60, 90], "s4", "pointer"]
+    [
+      [
+        10,
+        60
+      ],
+      "s4",
+      "uint"
+    ],
+    [
+      [
+        60,
+        90
+      ],
+      "s4",
+      "pointer"
+    ]
   ],
   "keybd-read-ascii": [
-    [51, "a1", "int"],
-    [[55, 60], "a0", "int"]
+    [
+      51,
+      "a1",
+      "int"
+    ],
+    [
+      [
+        55,
+        60
+      ],
+      "a0",
+      "int"
+    ]
   ],
   "read-event-header": [
-    [[6, 14], "v1", "(pointer uint16)"],
-    [[22, 24], "a0", "(pointer uint16)"]
+    [
+      [
+        6,
+        14
+      ],
+      "v1",
+      "(pointer uint16)"
+    ],
+    [
+      [
+        22,
+        24
+      ],
+      "a0",
+      "(pointer uint16)"
+    ]
   ],
-  // net-mgr-medius-clans-h top-level-login op236: lwu 136(objects-as-basic) fails ForwardProp.
-  // op237 cascades to <uninitialized>. Cast a0 at [237,238] so emit uses (-> a0 members) correctly.
   "(top-level-login net-mgr-medius-clans-h)": [
-    [[237, 238], "a0", "medius-cached-info-clan"]
+    [
+      [
+        237,
+        238
+      ],
+      "a0",
+      "medius-cached-info-clan"
+    ]
   ],
   "ramdisk-load": [
     [
@@ -1989,7 +2035,11 @@
       "a1",
       "process-drawable"
     ],
-    [1, "gp", "cloth-on-skeleton"]
+    [
+      1,
+      "gp",
+      "cloth-on-skeleton"
+    ]
   ],
   "(method 25 cloth-on-skeleton)": [
     [
@@ -2691,7 +2741,11 @@
       "s4",
       "engine"
     ],
-    [75, "gp", "gui-control"]
+    [
+      75,
+      "gp",
+      "gui-control"
+    ]
   ],
   "(method 17 gui-control)": [
     [
@@ -2757,7 +2811,11 @@
       "v0",
       "int32"
     ],
-    [130, "v1", "connection"]
+    [
+      130,
+      "v1",
+      "connection"
+    ]
   ],
   "(method 10 gui-control)": [
     [
@@ -2862,7 +2920,11 @@
       "s0",
       "(function cpu-thread function symbol symbol continue-point game-save resetter-spec none)"
     ],
-    [168, "gp", "game-info"]
+    [
+      168,
+      "gp",
+      "game-info"
+    ]
   ],
   "(method 9 lod-set)": [
     [
@@ -4854,7 +4916,14 @@
     ]
   ],
   "manipy-init": [
-    [[0, 999], "s6", "manipy"],
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "manipy"
+    ],
     [
       207,
       "v0",
@@ -6681,8 +6750,16 @@
     ]
   ],
   "target-get-any-pos": [
-    [19, "gp", "(pointer uint32)"],
-    [22, "gp", "(pointer uint32)"]
+    [
+      19,
+      "gp",
+      "(pointer uint32)"
+    ],
+    [
+      22,
+      "gp",
+      "(pointer uint32)"
+    ]
   ],
   "(trans target-float)": [
     [
@@ -10866,8 +10943,16 @@
     ]
   ],
   "(method 12 focus)": [
-    [4, "v1", "(pointer process)"],
-    [20, "v1", "uint"]
+    [
+      4,
+      "v1",
+      "(pointer process)"
+    ],
+    [
+      20,
+      "v1",
+      "uint"
+    ]
   ],
   "(method 12 flow-control)": [
     [
@@ -15147,8 +15232,7 @@
       ],
       "s1",
       "collide-shape-moving"
-    ],
-    [156, "s1", "collide-shape"]
+    ]
   ],
   "(method 12 collide-shape-prim-sphere)": [
     [
@@ -16312,7 +16396,11 @@
       "s2",
       "(array int32)"
     ],
-    [39, "gp", "sparticle-cpuinfo"]
+    [
+      39,
+      "gp",
+      "sparticle-cpuinfo"
+    ]
   ],
   "execute-particle-local-space-engine": [
     [
@@ -18851,7 +18939,11 @@
       "s3",
       "nav-mesh"
     ],
-    [53, "a3", "int"]
+    [
+      53,
+      "a3",
+      "int"
+    ]
   ],
   "nav-control-validate": [
     [
@@ -18873,7 +18965,14 @@
     ]
   ],
   "(method 24 nav-mesh)": [
-    [[23, 90], "s4", "nav-engine"]
+    [
+      [
+        23,
+        90
+      ],
+      "s4",
+      "nav-engine"
+    ]
   ],
   "(method 25 nav-mesh)": [
     [
@@ -23167,8 +23266,16 @@
     ]
   ],
   "(code target-pilot-start)": [
-    [5, "a1", "(pointer process)"],
-    [27, "a0", "(pointer process)"]
+    [
+      5,
+      "a1",
+      "(pointer process)"
+    ],
+    [
+      27,
+      "a0",
+      "(pointer process)"
+    ]
   ],
   "target-pilot-init": [
     [
@@ -24615,18 +24722,6 @@
       9,
       "v1",
       "uint"
-    ]
-  ],
-  "(method 10 race-state)": [
-    [
-      16,
-      "v1",
-      "racer-state"
-    ],
-    [
-      21,
-      "a0",
-      "(pointer process)"
     ]
   ],
   "(method 11 race-state)": [
@@ -40005,7 +40100,11 @@
       "gp",
       "spartacus-editor"
     ],
-    [9, "gp", "spartacus-editor"]
+    [
+      9,
+      "gp",
+      "spartacus-editor"
+    ]
   ],
   "(method 21 car-info-full)": [
     [
@@ -40212,8 +40311,7 @@
       "(pointer uint128)"
     ]
   ],
-  "(method 3 index-sprite-list-menu-info)": [
-  ],
+  "(method 3 index-sprite-list-menu-info)": [],
   "(method 3 manipy)": [
     [
       12,
@@ -40235,8 +40333,7 @@
       "uint"
     ]
   ],
-  "(method 3 touching-list)": [
-  ],
+  "(method 3 touching-list)": [],
   "(method 3 projectile-bounce)": [
     [
       12,
@@ -40252,8 +40349,16 @@
     ]
   ],
   "(method 3 rigid-body-control)": [
-    [14, "gp", "(pointer uint16)"],
-    [16, "gp", "(pointer uint16)"]
+    [
+      14,
+      "gp",
+      "(pointer uint16)"
+    ],
+    [
+      16,
+      "gp",
+      "(pointer uint16)"
+    ]
   ],
   "(method 3 sky-work)": [
     [
@@ -40262,8 +40367,7 @@
       "uint"
     ]
   ],
-  "(method 3 water-control)": [
-  ],
+  "(method 3 water-control)": [],
   "(method 3 talker)": [
     [
       17,
@@ -40707,7 +40811,11 @@
       "v1",
       "pointer"
     ],
-    [2, "gp", "driver"]
+    [
+      2,
+      "gp",
+      "driver"
+    ]
   ],
   "(method 7 editable-array)": [
     [
@@ -43788,7 +43896,11 @@
       "a2",
       "handle"
     ],
-    [17, "gp", "driver"]
+    [
+      17,
+      "gp",
+      "driver"
+    ]
   ],
   "(method 65 driver)": [
     [
@@ -43808,7 +43920,11 @@
       "v1",
       "handle"
     ],
-    [1, "s3", "driver"]
+    [
+      1,
+      "s3",
+      "driver"
+    ]
   ],
   "(code idle driver)": [
     [
@@ -44285,7 +44401,11 @@
       "s2",
       "process"
     ],
-    [19, "gp", "fact-info"]
+    [
+      19,
+      "gp",
+      "fact-info"
+    ]
   ],
   "(method 3 fact-info-crate)": [
     [
@@ -44293,7 +44413,11 @@
       "s2",
       "process"
     ],
-    [19, "gp", "fact-info-crate"]
+    [
+      19,
+      "gp",
+      "fact-info-crate"
+    ]
   ],
   "(method 3 fact-info-enemy)": [
     [
@@ -44301,7 +44425,11 @@
       "s2",
       "process"
     ],
-    [19, "gp", "fact-info-enemy"]
+    [
+      19,
+      "gp",
+      "fact-info-enemy"
+    ]
   ],
   "(method 3 part-tracker-init-params)": [
     [
@@ -44848,11 +44976,23 @@
       "a2",
       "uint8"
     ],
-    [92, "gp", "game-save"]
+    [
+      92,
+      "gp",
+      "game-save"
+    ]
   ],
   "(method 64 driver-jak)": [
-    [10, "gp", "driver-jak"],
-    [15, "a0", "process"]
+    [
+      10,
+      "gp",
+      "driver-jak"
+    ],
+    [
+      15,
+      "a0",
+      "process"
+    ]
   ],
   "build-instance-list": [
     [
@@ -44867,7 +45007,11 @@
       "v1",
       "int16"
     ],
-    [26, "t1", "drawable-tree"]
+    [
+      26,
+      "t1",
+      "drawable-tree"
+    ]
   ],
   "print-prototype-list": [
     [
@@ -44910,7 +45054,11 @@
       "v1",
       "float"
     ],
-    [0, "a0", "vehicle"]
+    [
+      0,
+      "a0",
+      "vehicle"
+    ]
   ],
   "(method 14 vehicle-section)": [
     [
@@ -44979,7 +45127,11 @@
       "v1",
       "float"
     ],
-    [1, "gp", "vehicle"]
+    [
+      1,
+      "gp",
+      "vehicle"
+    ]
   ],
   "(method 187 wvehicle)": [
     [
@@ -44987,7 +45139,11 @@
       "f2",
       "uint8"
     ],
-    [36, "gp", "wvehicle"]
+    [
+      36,
+      "gp",
+      "wvehicle"
+    ]
   ],
   "(method 202 wvehicle)": [
     [
@@ -44995,7 +45151,11 @@
       "v1",
       "float"
     ],
-    [57, "gp", "wvehicle"]
+    [
+      57,
+      "gp",
+      "wvehicle"
+    ]
   ],
   "process-drawable-reset-all-cloth": [
     [
@@ -45038,7 +45198,11 @@
       "t0",
       "uint32"
     ],
-    [29, "a2", "cloth-system"]
+    [
+      29,
+      "a2",
+      "cloth-system"
+    ]
   ],
   "sp-relaunch-particle-3d": [
     [
@@ -45046,7 +45210,11 @@
       "a1",
       "uint32"
     ],
-    [32, "gp", "sparticle-cpuinfo"]
+    [
+      32,
+      "gp",
+      "sparticle-cpuinfo"
+    ]
   ],
   "spartacus-editor-init": [
     [
@@ -45054,7 +45222,11 @@
       "v1",
       "uint8"
     ],
-    [62, "s6", "process"]
+    [
+      62,
+      "s6",
+      "process"
+    ]
   ],
   "(method 10 focus)": [
     [
@@ -45069,7 +45241,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-bobcat)": [
     [
@@ -45077,7 +45253,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-cheetah)": [
     [
@@ -45085,7 +45265,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-cougar)": [
     [
@@ -45093,7 +45277,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-daxtermobile)": [
     [
@@ -45101,7 +45289,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-falcon)": [
     [
@@ -45109,7 +45301,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-gila)": [
     [
@@ -45117,7 +45313,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-leopard)": [
     [
@@ -45125,7 +45325,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-mongoose)": [
     [
@@ -45133,7 +45337,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-panther)": [
     [
@@ -45141,7 +45349,11 @@
       "v1",
       "collide-shape"
     ],
-    [3, "v1", "collide-shape-prim"]
+    [
+      3,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-possum)": [
     [
@@ -45149,7 +45361,11 @@
       "v1",
       "collide-shape"
     ],
-    [3, "v1", "collide-shape-prim"]
+    [
+      3,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-snake)": [
     [
@@ -45157,7 +45373,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-tiger)": [
     [
@@ -45165,7 +45385,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-wolf)": [
     [
@@ -45173,7 +45397,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 v-wombat)": [
     [
@@ -45181,7 +45409,11 @@
       "v1",
       "collide-shape"
     ],
-    [2, "v1", "collide-shape-prim"]
+    [
+      2,
+      "v1",
+      "collide-shape-prim"
+    ]
   ],
   "(method 100 vehicle)": [
     [
@@ -45250,7 +45482,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-ashelin"]
+    [
+      34,
+      "gp",
+      "driver-ashelin"
+    ]
   ],
   "(method 62 driver-daxter)": [
     [
@@ -45263,7 +45499,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-daxter"]
+    [
+      34,
+      "gp",
+      "driver-daxter"
+    ]
   ],
   "(method 62 driver-gtblitz)": [
     [
@@ -45276,7 +45516,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-gtblitz"]
+    [
+      34,
+      "gp",
+      "driver-gtblitz"
+    ]
   ],
   "(method 62 driver-jak)": [
     [
@@ -45289,7 +45533,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-jak"]
+    [
+      34,
+      "gp",
+      "driver-jak"
+    ]
   ],
   "(method 62 driver-jaka)": [
     [
@@ -45302,7 +45550,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-jaka"]
+    [
+      34,
+      "gp",
+      "driver-jaka"
+    ]
   ],
   "(method 62 driver-jakb)": [
     [
@@ -45315,7 +45567,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-jakb"]
+    [
+      34,
+      "gp",
+      "driver-jakb"
+    ]
   ],
   "(method 62 driver-jakc)": [
     [
@@ -45328,7 +45584,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-jakc"]
+    [
+      34,
+      "gp",
+      "driver-jakc"
+    ]
   ],
   "(method 62 driver-kaeden)": [
     [
@@ -45341,7 +45601,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-kaeden"]
+    [
+      34,
+      "gp",
+      "driver-kaeden"
+    ]
   ],
   "(method 62 driver-kiera)": [
     [
@@ -45354,7 +45618,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-kiera"]
+    [
+      34,
+      "gp",
+      "driver-kiera"
+    ]
   ],
   "(method 62 driver-klever)": [
     [
@@ -45367,7 +45635,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-klever"]
+    [
+      34,
+      "gp",
+      "driver-klever"
+    ]
   ],
   "(method 62 driver-osmo)": [
     [
@@ -45380,7 +45652,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-osmo"]
+    [
+      34,
+      "gp",
+      "driver-osmo"
+    ]
   ],
   "(method 62 driver-pecker)": [
     [
@@ -45393,7 +45669,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-pecker"]
+    [
+      34,
+      "gp",
+      "driver-pecker"
+    ]
   ],
   "(method 62 driver-ratchet)": [
     [
@@ -45406,7 +45686,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-ratchet"]
+    [
+      34,
+      "gp",
+      "driver-ratchet"
+    ]
   ],
   "(method 157 wvehicle)": [
     [
@@ -45426,7 +45710,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-rayn"]
+    [
+      34,
+      "gp",
+      "driver-rayn"
+    ]
   ],
   "(method 62 driver-razer)": [
     [
@@ -45439,7 +45727,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-razer"]
+    [
+      34,
+      "gp",
+      "driver-razer"
+    ]
   ],
   "(method 62 driver-sig)": [
     [
@@ -45452,7 +45744,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-sig"]
+    [
+      34,
+      "gp",
+      "driver-sig"
+    ]
   ],
   "(method 62 driver-taryn)": [
     [
@@ -45465,7 +45761,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-taryn"]
+    [
+      34,
+      "gp",
+      "driver-taryn"
+    ]
   ],
   "(method 62 driver-thug-a)": [
     [
@@ -45478,7 +45778,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-thug-a"]
+    [
+      34,
+      "gp",
+      "driver-thug-a"
+    ]
   ],
   "(method 62 driver-thug-b)": [
     [
@@ -45491,7 +45795,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-thug-b"]
+    [
+      34,
+      "gp",
+      "driver-thug-b"
+    ]
   ],
   "(method 62 driver-thug-c)": [
     [
@@ -45504,7 +45812,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-thug-c"]
+    [
+      34,
+      "gp",
+      "driver-thug-c"
+    ]
   ],
   "(method 62 driver-torn)": [
     [
@@ -45517,7 +45829,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-torn"]
+    [
+      34,
+      "gp",
+      "driver-torn"
+    ]
   ],
   "(method 62 driver-ur-86)": [
     [
@@ -45530,7 +45846,11 @@
       "v1",
       "uint8"
     ],
-    [30, "gp", "driver-ur-86"]
+    [
+      30,
+      "gp",
+      "driver-ur-86"
+    ]
   ],
   "(method 62 driver-ximon)": [
     [
@@ -45543,7 +45863,11 @@
       "v1",
       "uint8"
     ],
-    [34, "gp", "driver-ximon"]
+    [
+      34,
+      "gp",
+      "driver-ximon"
+    ]
   ],
   "vehicle-reticle-on-them-init-by-other": [
     [
@@ -49631,248 +49955,869 @@
     ]
   ],
   "(method 37 eco-mgr)": [
-    [1, "a1", "net-process-class-info"],
-    [5, "a0", "(pointer symbol)"],
-    [14, "a0", "(pointer symbol)"],
-    [23, "a0", "(pointer symbol)"],
-    [32, "a0", "(pointer symbol)"]
+    [
+      1,
+      "a1",
+      "net-process-class-info"
+    ],
+    [
+      5,
+      "a0",
+      "(pointer symbol)"
+    ],
+    [
+      14,
+      "a0",
+      "(pointer symbol)"
+    ],
+    [
+      23,
+      "a0",
+      "(pointer symbol)"
+    ],
+    [
+      32,
+      "a0",
+      "(pointer symbol)"
+    ]
   ],
   "(method 37 net-enemy)": [
-    [1, "a1", "net-process-class-info"],
-    [5, "a0", "(pointer symbol)"],
-    [14, "a0", "(pointer symbol)"]
+    [
+      1,
+      "a1",
+      "net-process-class-info"
+    ],
+    [
+      5,
+      "a0",
+      "(pointer symbol)"
+    ],
+    [
+      14,
+      "a0",
+      "(pointer symbol)"
+    ]
   ],
   "(method 37 net-player)": [
-    [1, "a1", "net-process-class-info"],
-    [5, "a0", "(pointer symbol)"],
-    [14, "a0", "(pointer symbol)"]
+    [
+      1,
+      "a1",
+      "net-process-class-info"
+    ],
+    [
+      5,
+      "a0",
+      "(pointer symbol)"
+    ],
+    [
+      14,
+      "a0",
+      "(pointer symbol)"
+    ]
   ],
   "(top-level-login net-enemy-h)": [
-    [64, "a0", "net-process-class-info"],
-    [71, "a0", "net-process-class-info"]
+    [
+      64,
+      "a0",
+      "net-process-class-info"
+    ],
+    [
+      71,
+      "a0",
+      "net-process-class-info"
+    ]
   ],
-  "(method 3 collide-query)": [[121, "f0", "float"], [142, "f0", "float"]],
   "(method 12 medius-cache)": [
-    [5, "a3", "uint"],
-    [6, "a2", "medius-cached-info"],
-    [10, "a2", "uint"],
-    [11, "a1", "medius-cached-info"],
-    [12, "a1", "medius-cached-info"],
-    [15, "a1", "(pointer int32)"]
+    [
+      5,
+      "a3",
+      "uint"
+    ],
+    [
+      6,
+      "a2",
+      "medius-cached-info"
+    ],
+    [
+      10,
+      "a2",
+      "uint"
+    ],
+    [
+      11,
+      "a1",
+      "medius-cached-info"
+    ],
+    [
+      12,
+      "a1",
+      "medius-cached-info"
+    ],
+    [
+      15,
+      "a1",
+      "(pointer int32)"
+    ]
   ],
   "dma-buffer-add-vu-function": [
-    [[8, 16], "t2", "(pointer dma-packet)"],
-    [16, "t2", "(pointer uint64)"],
-    [[17, 35], "t2", "(pointer dma-packet)"]
+    [
+      [
+        8,
+        16
+      ],
+      "t2",
+      "(pointer dma-packet)"
+    ],
+    [
+      16,
+      "t2",
+      "(pointer uint64)"
+    ],
+    [
+      [
+        17,
+        35
+      ],
+      "t2",
+      "(pointer dma-packet)"
+    ]
   ],
   "(method 0 collide-cache)": [
-    [0, "a2", "int"],
-    [1, "a3", "int"]
+    [
+      0,
+      "a2",
+      "int"
+    ],
+    [
+      1,
+      "a3",
+      "int"
+    ]
   ],
   "output-race-mesh": [
-    [[4, 54], "gp", "race-line-slice-data"],
-    [13, "v1", "(pointer float)"],
-    [18, "v1", "(pointer float)"],
-    [23, "v1", "(pointer float)"],
-    [28, "v1", "(pointer float)"],
-    [37, "v1", "(pointer float)"],
-    [42, "v1", "(pointer float)"],
-    [47, "v1", "(pointer float)"]
+    [
+      [
+        4,
+        54
+      ],
+      "gp",
+      "race-line-slice-data"
+    ],
+    [
+      13,
+      "v1",
+      "(pointer float)"
+    ],
+    [
+      18,
+      "v1",
+      "(pointer float)"
+    ],
+    [
+      23,
+      "v1",
+      "(pointer float)"
+    ],
+    [
+      28,
+      "v1",
+      "(pointer float)"
+    ],
+    [
+      37,
+      "v1",
+      "(pointer float)"
+    ],
+    [
+      42,
+      "v1",
+      "(pointer float)"
+    ],
+    [
+      47,
+      "v1",
+      "(pointer float)"
+    ]
   ],
   "ragdoll-test-init-by-other": [
-    [112, "a0", "(pointer int32)"],
-    [116, "a0", "uint64"],
-    [116, "v1", "uint64"]
+    [
+      112,
+      "a0",
+      "(pointer int32)"
+    ],
+    [
+      116,
+      "a0",
+      "uint64"
+    ],
+    [
+      116,
+      "v1",
+      "uint64"
+    ]
   ],
   "(top-level-login title-obs)": [
-    [61, "v1", "state"],
-    [65, "v1", "state"],
-    [69, "v1", "state"],
-    [75, "v1", "state"]
+    [
+      61,
+      "v1",
+      "state"
+    ],
+    [
+      65,
+      "v1",
+      "state"
+    ],
+    [
+      69,
+      "v1",
+      "state"
+    ],
+    [
+      75,
+      "v1",
+      "state"
+    ]
   ],
   "(code write-file drift-editor)": [
-    [51, "v1", "(pointer float)"]
+    [
+      51,
+      "v1",
+      "(pointer float)"
+    ]
   ],
   "(method 18 drift-editor)": [
-    [19, "v1", "(pointer float)"]
+    [
+      19,
+      "v1",
+      "(pointer float)"
+    ]
   ],
   "(method 11 cloth-system)": [
-    [1, "gp", "cloth-system"]
+    [
+      1,
+      "gp",
+      "cloth-system"
+    ]
   ],
   "(method 12 race-line)": [
-    [6, "s3", "race-line"]
+    [
+      6,
+      "s3",
+      "race-line"
+    ]
   ],
   "(method 14 race-line)": [
-    [6, "gp", "race-line"]
+    [
+      6,
+      "gp",
+      "race-line"
+    ]
   ],
   "(method 79 v-yellow-guided-missile)": [
-    [52, "a0", "trsqv"]
+    [
+      52,
+      "a0",
+      "trsqv"
+    ]
   ],
   "find-instance-by-name-level": [
-    [11, "v1", "drawable-tree"]
+    [
+      11,
+      "v1",
+      "drawable-tree"
+    ]
   ],
   "(method 20 vehicle)": [
-    [33, "gp", "vehicle"]
+    [
+      33,
+      "gp",
+      "vehicle"
+    ]
   ],
   "splash-spawn": [
-    [16, "v1", "part-tracker-init-params"]
+    [
+      16,
+      "v1",
+      "part-tracker-init-params"
+    ]
   ],
   "camera-fov-frame": [
-    [87, "a0", "vector4w"],
-    [128, "a0", "vector4w"],
-    [169, "a0", "vector4w"],
-    [7, "a0", "cam-dbg-scratch"],
-    [18, "a0", "cam-dbg-scratch"],
-    [29, "a0", "cam-dbg-scratch"],
-    [33, "a2", "cam-dbg-scratch"],
-    [36, "a3", "cam-dbg-scratch"],
-    [39, "t0", "cam-dbg-scratch"],
-    [45, "a0", "cam-dbg-scratch"]
+    [
+      87,
+      "a0",
+      "vector4w"
+    ],
+    [
+      128,
+      "a0",
+      "vector4w"
+    ],
+    [
+      169,
+      "a0",
+      "vector4w"
+    ],
+    [
+      7,
+      "a0",
+      "cam-dbg-scratch"
+    ],
+    [
+      18,
+      "a0",
+      "cam-dbg-scratch"
+    ],
+    [
+      29,
+      "a0",
+      "cam-dbg-scratch"
+    ],
+    [
+      33,
+      "a2",
+      "cam-dbg-scratch"
+    ],
+    [
+      36,
+      "a3",
+      "cam-dbg-scratch"
+    ],
+    [
+      39,
+      "t0",
+      "cam-dbg-scratch"
+    ],
+    [
+      45,
+      "a0",
+      "cam-dbg-scratch"
+    ]
   ],
   "(method 2 array)": [
-    [23, "gp", "(array int32)"],
-    [43, "gp", "(array uint32)"],
-    [63, "gp", "(array int64)"],
-    [83, "gp", "(array uint64)"],
-    [102, "gp", "(array int8)"],
-    [121, "gp", "(array uint8)"],
-    [141, "gp", "(array int16)"],
-    [161, "gp", "(array uint16)"],
-    [186, "gp", "(array uint128)"],
-    [204, "gp", "(array int32)"],
-    [223, "gp", "(array float)"],
-    [232, "gp", "(array float)"],
-    [249, "gp", "(array basic)"],
-    [258, "gp", "(array basic)"]
+    [
+      23,
+      "gp",
+      "(array int32)"
+    ],
+    [
+      43,
+      "gp",
+      "(array uint32)"
+    ],
+    [
+      63,
+      "gp",
+      "(array int64)"
+    ],
+    [
+      83,
+      "gp",
+      "(array uint64)"
+    ],
+    [
+      102,
+      "gp",
+      "(array int8)"
+    ],
+    [
+      121,
+      "gp",
+      "(array uint8)"
+    ],
+    [
+      141,
+      "gp",
+      "(array int16)"
+    ],
+    [
+      161,
+      "gp",
+      "(array uint16)"
+    ],
+    [
+      186,
+      "gp",
+      "(array uint128)"
+    ],
+    [
+      204,
+      "gp",
+      "(array int32)"
+    ],
+    [
+      223,
+      "gp",
+      "(array float)"
+    ],
+    [
+      232,
+      "gp",
+      "(array float)"
+    ],
+    [
+      249,
+      "gp",
+      "(array basic)"
+    ],
+    [
+      258,
+      "gp",
+      "(array basic)"
+    ]
   ],
   "(method 3 array)": [
-    [51, "gp", "(array int32)"],
-    [69, "gp", "(array uint32)"],
-    [87, "gp", "(array int64)"],
-    [105, "gp", "(array uint64)"],
-    [122, "gp", "(array int8)"],
-    [139, "gp", "(array int8)"],
-    [157, "gp", "(array int16)"],
-    [175, "gp", "(array uint16)"],
-    [198, "gp", "(array uint128)"],
-    [214, "gp", "(array int32)"],
-    [233, "gp", "(array float)"],
-    [250, "gp", "(array basic)"]
+    [
+      51,
+      "gp",
+      "(array int32)"
+    ],
+    [
+      69,
+      "gp",
+      "(array uint32)"
+    ],
+    [
+      87,
+      "gp",
+      "(array int64)"
+    ],
+    [
+      105,
+      "gp",
+      "(array uint64)"
+    ],
+    [
+      122,
+      "gp",
+      "(array int8)"
+    ],
+    [
+      139,
+      "gp",
+      "(array int8)"
+    ],
+    [
+      157,
+      "gp",
+      "(array int16)"
+    ],
+    [
+      175,
+      "gp",
+      "(array uint16)"
+    ],
+    [
+      198,
+      "gp",
+      "(array uint128)"
+    ],
+    [
+      214,
+      "gp",
+      "(array int32)"
+    ],
+    [
+      233,
+      "gp",
+      "(array float)"
+    ],
+    [
+      250,
+      "gp",
+      "(array basic)"
+    ]
   ],
   "check-for-rougue-process": [
-    [133, "gp", "part-tracker"],
-    [157, "gp", "part-spawner"],
-    [184, "v1", "process-drawable"],
-    [187, "v1", "process-drawable"],
-    [192, "v1", "process-drawable"],
-    [199, "v1", "process-drawable"],
-    [209, "v1", "process-drawable"],
-    [212, "v1", "process-drawable"],
-    [217, "v1", "process-drawable"],
-    [224, "v1", "process-drawable"]
+    [
+      133,
+      "gp",
+      "part-tracker"
+    ],
+    [
+      157,
+      "gp",
+      "part-spawner"
+    ],
+    [
+      184,
+      "v1",
+      "process-drawable"
+    ],
+    [
+      187,
+      "v1",
+      "process-drawable"
+    ],
+    [
+      192,
+      "v1",
+      "process-drawable"
+    ],
+    [
+      199,
+      "v1",
+      "process-drawable"
+    ],
+    [
+      209,
+      "v1",
+      "process-drawable"
+    ],
+    [
+      212,
+      "v1",
+      "process-drawable"
+    ],
+    [
+      217,
+      "v1",
+      "process-drawable"
+    ],
+    [
+      224,
+      "v1",
+      "process-drawable"
+    ]
   ],
   "flatten-joint-control-to-spr": [
-    [195, "v1", "terrain-context"],
-    [65, "a3", "(pointer float)"],
-    [67, "a3", "(pointer float)"],
-    [47, "a2", "pointer"],
-    [118, "a2", "pointer"],
-    [24, "a3", "(pointer float)"],
-    [17, "a2", "int"]
+    [
+      195,
+      "v1",
+      "terrain-context"
+    ],
+    [
+      65,
+      "a3",
+      "(pointer float)"
+    ],
+    [
+      67,
+      "a3",
+      "(pointer float)"
+    ],
+    [
+      47,
+      "a2",
+      "pointer"
+    ],
+    [
+      118,
+      "a2",
+      "pointer"
+    ],
+    [
+      24,
+      "a3",
+      "(pointer float)"
+    ],
+    [
+      17,
+      "a2",
+      "int"
+    ]
   ],
   "dm-editable-light-float-func": [
-    [36, "a0", "(pointer float)"],
-    [88, "v1", "(pointer float)"],
-    [140, "v1", "(pointer float)"],
-    [81, "a2", "uint"],
-    [88, "a1", "int"]
+    [
+      36,
+      "a0",
+      "(pointer float)"
+    ],
+    [
+      88,
+      "v1",
+      "(pointer float)"
+    ],
+    [
+      140,
+      "v1",
+      "(pointer float)"
+    ],
+    [
+      81,
+      "a2",
+      "uint"
+    ],
+    [
+      88,
+      "a1",
+      "int"
+    ]
   ],
   "dm-float-field-tie-vanish-far-func": [
-    [25, "s2", "prototype-bucket-tie"],
-    [31, "s2", "prototype-bucket-tie"],
-    [28, "s2", "prototype-bucket-tie"]
+    [
+      25,
+      "s2",
+      "prototype-bucket-tie"
+    ],
+    [
+      31,
+      "s2",
+      "prototype-bucket-tie"
+    ],
+    [
+      28,
+      "s2",
+      "prototype-bucket-tie"
+    ]
   ],
   "initialize-anim-tester": [
-    [[0, 999], "s6", "anim-tester"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "anim-tester"
+    ]
   ],
   "daxter-init-by-other": [
-    [[0, 999], "s6", "daxter"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "daxter"
+    ]
   ],
   "test-process-init-by-other": [
-    [[0, 999], "s6", "test-process"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "test-process"
+    ]
   ],
   "race-banner-init-by-other": [
-    [[0, 999], "s6", "race-banner"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "race-banner"
+    ]
   ],
   "starting-linebot-init-by-other": [
-    [[0, 999], "s6", "starting-linebot"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "starting-linebot"
+    ]
   ],
   "wrong-way-init-by-other": [
-    [[0, 999], "s6", "wrong-way"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "wrong-way"
+    ]
   ],
   "wrong-way-linebot-init-by-other": [
-    [[0, 999], "s6", "wrong-way-linebot"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "wrong-way-linebot"
+    ]
   ],
   "set-children-position-and-orientation": [
-    [[0, 999], "s6", "process-drawable"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "process-drawable"
+    ]
   ],
   "vehicle-antenna-init-by-other": [
-    [[0, 999], "s6", "process-drawable"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "process-drawable"
+    ]
   ],
   "oil-slick-init-by-other": [
-    [[0, 999], "s6", "oil-slick"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "oil-slick"
+    ]
   ],
   "slip-object-init-by-other": [
-    [[0, 999], "s6", "slip-object"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "slip-object"
+    ]
   ],
   "lightning-sphere-init-by-other": [
-    [[0, 999], "s6", "lightning-sphere"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "lightning-sphere"
+    ]
   ],
   "v-wpn-base-init-by-other": [
-    [[0, 999], "s6", "process-drawable"]
+    [
+      [
+        0,
+        999
+      ],
+      "s6",
+      "process-drawable"
+    ]
   ],
   "calc-grand-prix-score": [
-    [0, "a0", "net-player"]
+    [
+      0,
+      "a0",
+      "net-player"
+    ]
   ],
   "handle-sys-msg": [
-    [[0, 10], "gp", "net-type-system-message-data"],
-    [51, "gp", "net-type-system-message-data"]
+    [
+      [
+        0,
+        10
+      ],
+      "gp",
+      "net-type-system-message-data"
+    ],
+    [
+      51,
+      "gp",
+      "net-type-system-message-data"
+    ]
   ],
   "(method 10 mem-manager)": [
-    [[0, 47], "v1", "memblock"]
+    [
+      [
+        0,
+        47
+      ],
+      "v1",
+      "memblock"
+    ]
   ],
   "(method 9 mem-manager)": [
-    [44, "s5", "memblock"],
-    [46, "s5", "memblock"],
-    [50, "a0", "memblock"],
-    [51, "s5", "memblock"],
-    [55, "s5", "memblock"],
-    [56, "s5", "memblock"],
-    [61, "s5", "memblock"]
+    [
+      44,
+      "s5",
+      "memblock"
+    ],
+    [
+      46,
+      "s5",
+      "memblock"
+    ],
+    [
+      50,
+      "a0",
+      "memblock"
+    ],
+    [
+      51,
+      "s5",
+      "memblock"
+    ],
+    [
+      55,
+      "s5",
+      "memblock"
+    ],
+    [
+      56,
+      "s5",
+      "memblock"
+    ],
+    [
+      61,
+      "s5",
+      "memblock"
+    ]
   ],
   "(method 271 wvehicle)": [
-    [17, "v1", "rigid-body-vehicle-constants"]
+    [
+      17,
+      "v1",
+      "rigid-body-vehicle-constants"
+    ]
   ],
   "(method 3 medius-cached-info)": [
-    [24, "gp", "medius-cached-info"]
+    [
+      24,
+      "gp",
+      "medius-cached-info"
+    ]
   ],
   "check-start-load": [
-    [0, "s6", "net-world"]
+    [
+      0,
+      "s6",
+      "net-world"
+    ]
   ],
   "dm-float-field-tie-rvanish-func": [
-    [25, "s2", "prototype-bucket-tie"]
+    [
+      25,
+      "s2",
+      "prototype-bucket-tie"
+    ]
   ],
   "draw-instance-info": [
-    [188, "s5", "prototype-bucket-tie"]
+    [
+      188,
+      "s5",
+      "prototype-bucket-tie"
+    ]
   ],
   "load-sound-banks": [
-    [6, "s6", "net-world"]
+    [
+      6,
+      "s6",
+      "net-world"
+    ]
   ],
   "wait-for-lock": [
-    [39, "s6", "net-world"]
+    [
+      39,
+      "s6",
+      "net-world"
+    ]
   ],
   "(trans run hoff-text-floater)": [
-    [0, "v1", "int32"],
-    [24, "v1", "int32"]
+    [
+      0,
+      "v1",
+      "int32"
+    ],
+    [
+      24,
+      "v1",
+      "int32"
+    ]
   ]
 }
