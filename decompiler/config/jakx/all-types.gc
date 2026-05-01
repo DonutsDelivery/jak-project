@@ -54166,7 +54166,7 @@
 (define-extern set-vehicle-edit-mode (function symbol none))
 (define-extern translate-nav-graph (function float float float symbol))
 (define-extern update-nav-meshes (function symbol))
-(define-extern delete-node-nav-mesh (function int symbol))
+(define-extern delete-node-nav-mesh (function int none))
 (define-extern smooth-nav-graph (function string symbol))
 (define-extern update-height (function string symbol))
 (define-extern update-width (function string symbol))
