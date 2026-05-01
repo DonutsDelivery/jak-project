@@ -43708,7 +43708,7 @@
     (joint-exploder-method-50 (_type_ int int) none) ;; 50
     (joint-exploder-method-51 (_type_ joint-exploder-list joint-exploder-joint) none) ;; 21 ;; (TODO-RENAME-21 (_type_ joint-exploder-list joint-exploder-joint) none) ;; 51
     (joint-exploder-method-52 (_type_) none) ;; 52
-    (joint-exploder-method-53 (_type_) none) ;; 53
+    (joint-exploder-method-53 (_type_) int) ;; 53
     (joint-exploder-method-54 (_type_) none) ;; 54
     (joint-exploder-method-55 (_type_) none) ;; 55
     (joint-exploder-method-56 (_type_ joint-exploder-list) none) ;; 56
