@@ -41198,7 +41198,7 @@
   :flag-assert         #x1700000080
   (:methods
     (light-trail-method-10 (_type_ int int) none) ;; 10
-    (light-trail-method-11 (_type_) float) ;; 11
+    (light-trail-method-11 (_type_) none) ;; 11
     (light-trail-method-12 (_type_) int) ;; 12
     (light-trail-method-13 (_type_) connection) ;; 13
     (light-trail-method-14 (_type_) int) ;; 14
