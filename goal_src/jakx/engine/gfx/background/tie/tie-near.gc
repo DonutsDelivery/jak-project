@@ -21,6 +21,7 @@
 
 (defun tie-scissor-make-perspective-matrix ((arg0 matrix) (arg1 matrix))
   (column-scale-matrix! arg0 (-> (view-get-active-math-camera) hmge-scale) arg1)
+  (none)
   )
 
 ;; ERROR: function has no type analysis. Cannot decompile.
