@@ -39290,12 +39290,14 @@
   ],
   "shadow-vu0-upload": [
     [
-      [
-        16,
-        18
-      ],
+      16,
       "a0",
       "dma-packet"
+    ],
+    [
+      17,
+      "a0",
+      "(pointer uint64)"
     ]
   ],
   "shadow-make-invert-buf": [
