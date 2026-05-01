@@ -62455,6 +62455,7 @@
 (define-extern append-character-to-string (function string uint8 int))
 (define-extern set-as-offset-from! (function hud-sprite vector4w int int none))
 (define-extern vector-sincos! (function vector vector matrix vector))
+(define-extern string-charp= (function string (pointer uint8) symbol))
 ;; --- end Recipe X cycle 1 ---
 ;;(define-extern string-menu object)
 ;; (define-extern sky-color-day object) ;; clobbers active deftype
