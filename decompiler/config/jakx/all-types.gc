@@ -35946,7 +35946,7 @@
     (set-extra-nav-sphere-xyz! (_type_ sphere) int) ;; 31
     (nav-control-method-32 (_type_ float) int) ;; 32
     (nav-control-method-33 (_type_ float) int) ;; 33
-    (nav-control-method-34 (_type_ float) int) ;; 34
+    (nav-control-method-34 (_type_ float) none) ;; 34
     (nav-control-method-35 (_type_ float) none) ;; 35
     (nav-control-method-36 (_type_ float) none) ;; 36
     (nav-control-method-37 (_type_ float) none) ;; 37
