@@ -333,10 +333,10 @@
   (the-as penetrate 2)
   )
 
-;; type rb-debug-state-record is defined here, but it is unknown to the decompiler
+(deftype rb-debug-state-record (structure)
+  ()
+  )
 
-(method-set! (the-as type rb-debug-state-record) 3 L11)
-
-;; type rb-debugger is defined here, but it is unknown to the decompiler
-
-(method-set! (the-as type rb-debugger) 3 L8)
+(deftype rb-debugger (structure)
+  ()
+  )

@@ -222,11 +222,6 @@
   (none)
   )
 
-;; get-penetrate-using-from-attack-event: jak3 combat system
-(defun get-penetrate-using-from-attack-event ((arg0 process-drawable) (arg1 basic))
-  (the-as uint 0)
-  )
-
 ;; target-danger-set!: jak3 danger system
 (defun target-danger-set! ((arg0 symbol) (arg1 symbol))
   (none)
@@ -608,12 +603,6 @@
           )
         )
       )
-    (let ((s3-1 (-> s4-0 task-perm-list)))
-      (dotimes (s2-1 (-> s3-1 length))
-        (update (-> s3-1 data s2-1) arg0 (the-as entity-perm-status perm))
-        )
-      (logior! (-> s3-1 data 1 status) (entity-perm-status complete))
-      )
     (let ((s4-1 (-> s4-0 perm-list)))
       (dotimes (s3-2 (-> s4-1 length))
         (update (-> s4-1 data s3-2) arg0 (the-as entity-perm-status perm))
@@ -791,12 +780,10 @@
           (set! (-> slot perm aid) (the-as actor-id (-> actor aid)))
           (set! (-> slot level) lev)
           (when (zero? (mod i 50))
-            (let ((raw-etype (-> (the-as (pointer uint32) (+ (the-as uint actor) 60)) 0)))
-              (format 0 "[bsp-init-actors!] actor ~D/~D idx=~D aid=#x~X etype=#x~X actorp=#x~X raw60=#x~X~%"
-                      i (-> bsp actors length) idx (-> actor aid)
-                      (the-as int (-> actor etype))
-                      (the-as int actor)
-                      raw-etype))))))
+            (format 0 "[bsp-init-actors!] actor ~D/~D idx=~D aid=#x~X etype=#x~X actorp=#x~X~%"
+                    i (-> bsp actors length) idx (-> actor aid)
+                    (the-as int (-> actor etype))
+                    (the-as int actor))))))
     (format 0 "[bsp-init-actors!] entity-links populated len=~D~%" (-> lev entity length)))
   (none))
 
