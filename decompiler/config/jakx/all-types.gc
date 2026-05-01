@@ -54700,7 +54700,7 @@
   :size-assert         #x1c
   :flag-assert         #xc0000001c
   (:methods
-    (collision-edit-info-method-9 (_type_) none) ;; 9
+    (collision-edit-info-method-9 (_type_) int) ;; 9
     (draw-menu (_type_ process-drawable) none) ;; 10
     (collision-edit-info-method-11 (_type_ process-drawable) int) ;; 11
     )
