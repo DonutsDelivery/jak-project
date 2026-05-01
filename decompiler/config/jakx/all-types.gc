@@ -36023,7 +36023,7 @@
     (grid-hash-method-16 (_type_ rgba) int) ;; 16
     (grid-hash-method-17 (_type_) int) ;; 17
     (grid-hash-method-18 (_type_ grid-hash-box grid-hash-box) none) ;; 18
-    (grid-hash-method-19 (_type_ object grid-hash-box) none) ;; 19
+    (grid-hash-method-19 (_type_ object grid-hash-box) int) ;; 19
     (grid-hash-method-20 (_type_ grid-hash-box (pointer uint8)) none) ;; 20 ;; do-search!
     (grid-hash-method-21 (_type_ grid-hash-box vector vector) int) ;; 21 ;; set-up-box
     (grid-hash-method-22 (_type_ grid-hash-box sphere) none) ;; 22 ;; sphere-to-grid-box
