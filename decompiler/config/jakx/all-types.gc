@@ -62437,7 +62437,7 @@
 ;; from jak3 REF: test/decompiler/reference/jak3/engine/common-obs/debris_REF.gc
 (define-extern debris-group-init-by-other (function debris-tuning debris-static-params process-drawable none))
 ;; from jak3 REF: test/decompiler/reference/jak3/engine/common-obs/debris_REF.gc
-(define-extern debris-spawn (function process-drawable debris-tuning debris-static-params process-drawable none))
+(define-extern debris-spawn (function process-drawable debris-tuning debris-static-params process-drawable (pointer debris-group)))
 ;; from jak3 REF: test/decompiler/reference/jak3/engine/process-drawable/process-drawable_REF.gc
 (define-extern skeleton-group->draw-control (function process-drawable skeleton-group (pointer cspace-array) none))
 ;; from jak3 REF: test/decompiler/reference/jak3/engine/process-drawable/process-drawable_REF.gc
