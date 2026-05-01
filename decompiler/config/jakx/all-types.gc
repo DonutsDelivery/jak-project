@@ -53151,7 +53151,7 @@
 (define-extern anim-test-sequence-list-handler (function none))
 (define-extern anim-test-field-highlight-lw object)
 (define-extern anim-tester-adjust-frame (function float none))
-(define-extern anim-tester-pick-item-setup (function anim-test-seq-item none))
+(define-extern anim-tester-pick-item-setup (function anim-test-seq-item anim-test-sequence none))
 (define-extern anim-test-seq-mark-as-edited (function anim-test-sequence none))
 (define-extern anim-test-edit-seq-insert-item (function anim-test-seq-item none))
 (define-extern anim-test-edit-sequence-list-handler (function int none))
