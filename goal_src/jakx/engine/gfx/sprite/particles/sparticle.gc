@@ -51,7 +51,14 @@
 ;; ERROR: Function may read a register that is not set: t0
 ;; ERROR: Function may read a register that is not set: t1
 ;; ERROR: Function may read a register that is not set: t2
-(defmethod new sparticle-system ((a0-0 symbol) (a1-0 type))
+(defmethod new sparticle-system ((allocation symbol)
+                                 (type-to-make type)
+                                 (arg0 int)
+                                 (arg1 int)
+                                 (arg2 symbol)
+                                 (arg3 pointer)
+                                 (arg4 (inline-array adgif-shader))
+                                 )
   (format 0 "call to new sparticle-system~%")
   (break!)
   (the-as sparticle-system 0)
@@ -59,27 +66,12 @@
 
 (kmemopen global "part-systems")
 
-(let ((t9-3 (method-of-type sparticle-system new))
-      (a0-3 'global)
-      (a1-3 sparticle-system)
-      )
-  1920
-  128
-  (-> *sprite-array-2d* vec-data)
-  (-> *sprite-array-2d* adgif-data)
-  (set! *sp-particle-system-2d* (t9-3 a0-3 a1-3))
+(define *sp-particle-system-2d*
+  (new 'global 'sparticle-system 1920 128 #f (-> *sprite-array-2d* vec-data) (-> *sprite-array-2d* adgif-data))
   )
 
-(let ((t9-4 (method-of-type sparticle-system new))
-      (a0-4 'global)
-      (a1-4 sparticle-system)
-      )
-  384
-  0
-  #t
-  (-> *sprite-array-3d* vec-data)
-  (-> *sprite-array-3d* adgif-data)
-  (set! *sp-particle-system-3d* (t9-4 a0-4 a1-4))
+(define *sp-particle-system-3d*
+  (new 'global 'sparticle-system 384 0 #t (-> *sprite-array-3d* vec-data) (-> *sprite-array-3d* adgif-data))
   )
 
 (kmemclose)
