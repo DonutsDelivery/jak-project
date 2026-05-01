@@ -54430,7 +54430,7 @@
 (define-extern get-level-id (function string int))
 (define-extern nav-mesh-editor-new (function int))
 (define-extern nav-delete (function int int))
-(define-extern nav-mesh-editor-translate (function int float float float int))
+(define-extern nav-mesh-editor-translate (function int float float float object))
 (define-extern nav-mesh-editor-rotate-y (function float int))
 (define-extern nav-mesh-editor-load (function string object))
 (define-extern nav-mesh-editor-set-level (function symbol object))
