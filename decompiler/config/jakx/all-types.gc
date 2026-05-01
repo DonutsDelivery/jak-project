@@ -38197,7 +38197,7 @@
 (define-extern etn-floats (function symbol))
 (define-extern etn-int-reg-draw (function int string))
 (define-extern etn-int-reg (function int string))
-(define-extern etn-ints (function symbol))
+(define-extern etn-ints (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tie-near                       ;;
