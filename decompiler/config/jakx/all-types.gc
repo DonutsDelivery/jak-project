@@ -54204,7 +54204,7 @@
     (nav-mesh-poly-method-9 (_type_) none) ;; 9
     (nav-mesh-poly-method-10 (_type_ object) none) ;; 10 ;; (nav-mesh-poly-method-10 (_type_) none)
     (nav-mesh-poly-method-11 (_type_ int) none) ;; 11 ;; (nav-mesh-poly-method-11 (_type_) none)
-    (nav-mesh-poly-method-12 (_type_ int) none) ;; 12
+    (nav-mesh-poly-method-12 (_type_ int) int) ;; 12
     (nav-mesh-poly-method-13 (_type_ int) none) ;; 13
     (nav-mesh-poly-method-14 (_type_ int uint) int) ;; 14 ;; (nav-mesh-poly-method-14 (_type_) none)
     )
