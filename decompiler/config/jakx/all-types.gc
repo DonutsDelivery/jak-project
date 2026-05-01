@@ -41536,7 +41536,7 @@
   :flag-assert         #x1700000074
   (:methods
     (init! (_type_ int int lightning-appearance) none) ;; 9
-    (lightning-bolt-method-10 (_type_ uint) int) ;; 10
+    (lightning-bolt-method-10 (_type_ uint) none) ;; 10
     (lightning-bolt-method-11 (_type_) int) ;; 11
     (lightning-bolt-method-12 (_type_) int) ;; 12
     (lightning-bolt-method-13 (_type_ int) int) ;; 13
