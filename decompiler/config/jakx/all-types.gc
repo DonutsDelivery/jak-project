@@ -53768,7 +53768,7 @@
 (define-extern set-editable-name (function string object))
 (define-extern select-editable-by-name (function string object))
 (define-extern *editable-menu-context* debug-menu-context) ;; debug-menu-context
-(define-extern editable-menu-command (function int object))
+(define-extern editable-menu-command (function int none))
 (define-extern editable-menu-command-no-close (function int object))
 (define-extern dm-region-tree-pick-func (function symbol debug-menu-msg symbol))
 (define-extern dm-editable-flag-pick-func (function editable-flag debug-menu-msg symbol))
