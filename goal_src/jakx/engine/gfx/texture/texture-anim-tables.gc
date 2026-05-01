@@ -7,117 +7,41 @@
 
 ;; DECOMP BEGINS
 
-(local-vars
-  (v0-0 type)
-  (v0-1 none)
-  (v0-2 function)
-  (v1-0 texture-anim-array)
-  (v1-1 (function float none))
-  (v1-2 (function float float none))
-  (v1-3 texture-anim-array)
-  (v1-4 type)
-  (v1-5 none)
-  (v1-6 object)
-  (v1-7 function)
-  (v1-8 pointer)
-  (v1-9 symbol)
-  (v1-10 function)
-  (v1-11 (function none))
-  (v1-12 function)
-  (v1-13 pointer)
-  (v1-14 pointer)
-  (v1-15 pointer)
-  (v1-16 pointer)
-  (v1-17 pointer)
-  (v1-18 pointer)
-  (v1-19 function)
-  (v1-20 pointer)
-  (a0-0 symbol)
-  (a0-1 type)
-  (a1-0 type)
-  (a1-1 int)
-  (a2-0 none)
-  (a2-1 (function car-texture-anim-array-work car-texture-anim-array-work))
-  (t9-0 (function symbol type int type))
-  (t9-1 (function type int object none))
-  )
+;; These globals were defined by static data tables in the PS2 version.
+;; Replaced with #f stubs for PC port compilation pass.
 
-(cond
-  ((begin
-     (set! v1-0 L139)
-     (set! *sky-texture-anim-array* v1-0)
-     (set! v1-1 L16)
-     (set! set-fog-height! v1-1)
-     (set! v1-2 L15)
-     (set! set-cloud-minmax! v1-2)
-     (set! v1-3 L134)
-     (set! *default-pris-texture-anim-array* v1-3)
-     (set! v1-4 type)
-     (set! t9-0 (method-of-type v1-4 new))
-     (set! a0-0 'car-texture-anim-array-work)
-     (set! a1-0 structure)
-     (set! v1-5 (the-as none L163))
-     (set! a2-0 (the-as none (l.d v1-5)))
-     (call! a0-0 a1-0 a2-0)
-     (set! t9-1 method-set!)
-     (set! a0-1 car-texture-anim-array-work)
-     (set! a1-1 3)
-     (set! a2-1 L154)
-     (call! a0-1 a1-1 a2-1)
-     (set! v1-6 L133)
-     (set! *car-texture-anim-array-work* v1-6)
-     (set! v1-7 L11)
-     (set! car-texture-anim-layer-func v1-7)
-     (set! v1-8 L126)
-     (set! *default-car-texture-anim-array* (the-as texture-anim-array v1-8))
-     (set! v1-9 *debug-segment*)
-     v1-9
-     )
-   (set! v1-10 L153)
-   (set! set-car-highlight! v1-10)
-   )
-  (else
-    (set! v1-11 nothing)
-    (set! set-car-highlight! v1-11)
-    )
-  )
+(define *sky-texture-anim-array* (the-as (texture-anim-array texture-anim) #f))
 
-(set! v1-12 L8)
+(define *default-pris-texture-anim-array* (the-as (texture-anim-array texture-anim) #f))
 
-(set! update-car-texture-anim-array v1-12)
+(define *default-car-texture-anim-array* (the-as texture-anim-array #f))
 
-(set! v1-13 L116)
+(define *default-water-texture-anim-array* (the-as texture-anim-array #f))
 
-(set! *default-water-texture-anim-array* (the-as texture-anim-array v1-13))
+(define *default-hud-texture-anim-array* (the-as texture-anim-array #f))
 
-(set! v1-14 L89)
+(define *ctf-pris-texture-anim-array* (the-as texture-anim-array #f))
 
-(set! *default-hud-texture-anim-array* (the-as texture-anim-array v1-14))
+(define *ctf-water-texture-anim-array* (the-as texture-anim-array #f))
 
-(set! v1-15 L73)
+(define *fcshield-water-texture-anim-array* (the-as texture-anim-array #f))
 
-(set! *ctf-pris-texture-anim-array* (the-as texture-anim-array v1-15))
+(define *this-way-water-texture-anim-array* (the-as texture-anim-array #f))
 
-(set! v1-16 L57)
+(define *ocean-texture-anim-array* (the-as texture-anim-array #f))
 
-(set! *ctf-water-texture-anim-array* (the-as texture-anim-array v1-16))
+(define *car-texture-anim-array-work* #f)
 
-(set! v1-17 L50)
+(define car-texture-anim-layer-func (the-as (function dma-buffer uint int int texture-anim-layer float int) nothing))
 
-(set! *fcshield-water-texture-anim-array* (the-as texture-anim-array v1-17))
+(define update-car-texture-anim-array (the-as (function bucket-id texture-anim-array none) nothing))
 
-(set! v1-18 L25)
+(define set-car-highlight! (the-as (function none) nothing))
 
-(set! *this-way-water-texture-anim-array* (the-as texture-anim-array v1-18))
+(define set-fog-height! (the-as (function float none) nothing))
 
-(set! v1-19 L2)
+(define set-cloud-minmax! (the-as (function float float none) nothing))
 
-(set! this-way-water-texture-anim-func v1-19)
+(define this-way-water-texture-anim-func (the-as (function dma-buffer texture-anim none) nothing))
 
-(set! v1-20 L18)
-
-(set! *ocean-texture-anim-array* (the-as texture-anim-array v1-20))
-
-(set! v0-2 L1)
-
-(set! ocean-texture-anim-time-func v0-2)
+(define ocean-texture-anim-time-func (the-as (function float none) nothing))
