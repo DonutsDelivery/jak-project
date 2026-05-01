@@ -15725,7 +15725,7 @@
     (persist-with-delay (_type_ symbol time-frame symbol symbol float int) none) ;; 14
     (set-setting (_type_ process symbol object object object) connection) ;; 15
     (remove-setting (_type_ object) none) ;; 16
-    (setting-control-method-17 (_type_ engine-pers object) int) ;; 17
+    (setting-control-method-17 (_type_ engine-pers object) none) ;; 17
     (setting-control-method-18 (_type_) user-setting-data) ;; 18
     (move-connection-to-dead (_type_ object) connectable) ;; 19
     (setting-control-method-20 (_type_ object) connectable) ;; 20
@@ -16589,7 +16589,7 @@
     (ocean-method-39 (_type_ dma-buffer object object) none) ;; 39
     (ocean-method-40 (_type_ dma-buffer object object object object) none) ;; 40
     (ocean-method-41 (_type_ dma-buffer int) none) ;; 41
-    (ocean-method-42 (_type_ dma-buffer) int) ;; 42
+    (ocean-method-42 (_type_ dma-buffer uint) int) ;; 42
     (ocean-method-43 (_type_ matrix matrix matrix) matrix) ;; 43
     (ocean-method-44 (_type_ vector vector matrix) symbol) ;; 44
     (ocean-method-45 (_type_ uint uint) symbol) ;; 45
@@ -20173,8 +20173,8 @@
   :size-assert         #xdc0
   :flag-assert         #x1100000dc0
   (:methods
-    (speech-control-method-9 (_type_) int) ;; 9
-    (speech-control-method-10 (_type_) int) ;; 10
+    (speech-control-method-9 (_type_ int int) none) ;; 9
+    (speech-control-method-10 (_type_ handle) int) ;; 10
     (speech-control-method-11 (_type_) none) ;; 11
     (speech-control-method-12 (_type_ process-drawable speech-type) int) ;; 12
     (speech-control-method-13 (_type_ process-drawable speech-type int) int) ;; 13
@@ -35876,7 +35876,7 @@
     (nav-state-method-45 (_type_ vector) int) ;; 45
     (nav-state-method-46 (_type_ vector) int) ;; 46 ;; set-heading!
     (nav-state-method-47 (_type_ meters) none) ;; 47 ;; set-speed!
-    (nav-state-method-48 (_type_ float) none) ;; 48
+    (nav-state-method-48 (_type_ float) int) ;; 48
     (nav-state-method-49 (_type_ int) int) ;; 49
     (nav-state-method-50 (_type_ object) none) ;; 50 ;; navigate-using-best-dir-use-existing-avoid-spheres (nav-avoid-spheres-params)
     (nav-state-method-51 (_type_) none) ;; 51
@@ -35945,14 +35945,14 @@
     (disable-extra-sphere! (_type_) int) ;; 29
     (copy-extra-nav-sphere! (_type_ sphere) int) ;; 30
     (set-extra-nav-sphere-xyz! (_type_ sphere) int) ;; 31
-    (nav-control-method-32 (_type_ float) none) ;; 32
-    (nav-control-method-33 (_type_ float) none) ;; 33
-    (nav-control-method-34 (_type_ float) none) ;; 34
-    (nav-control-method-35 (_type_ float) none) ;; 35
-    (nav-control-method-36 (_type_ float) none) ;; 36
-    (nav-control-method-37 (_type_ float) none) ;; 37
-    (nav-control-method-38 (_type_ float) none) ;; 38
-    (nav-control-method-39 (_type_ float) none) ;; 39
+    (nav-control-method-32 (_type_ float) int) ;; 32
+    (nav-control-method-33 (_type_ float) int) ;; 33
+    (nav-control-method-34 (_type_ float) int) ;; 34
+    (nav-control-method-35 (_type_ float) int) ;; 35
+    (nav-control-method-36 (_type_ float) int) ;; 36
+    (nav-control-method-37 (_type_ float) int) ;; 37
+    (nav-control-method-38 (_type_ float) int) ;; 38
+    (nav-control-method-39 (_type_ float) int) ;; 39
     (set-sphere-mask! (_type_ uint) int) ;; 40
     (nav-control-method-41 (_type_) none) ;; 41
     (nav-control-method-42 (_type_) none) ;; 42
@@ -36021,10 +36021,10 @@
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
     (grid-hash-method-15 (_type_ int int int) none) ;; 15 ;; dump-grid-info
-    (grid-hash-method-16 (_type_ rgba) none) ;; 16
+    (grid-hash-method-16 (_type_ rgba) int) ;; 16
     (grid-hash-method-17 (_type_) int) ;; 17
-    (grid-hash-method-18 (_type_ grid-hash-box grid-hash-box) int) ;; 18
-    (grid-hash-method-19 (_type_ object grid-hash-box) int) ;; 19
+    (grid-hash-method-18 (_type_ grid-hash-box grid-hash-box) none) ;; 18
+    (grid-hash-method-19 (_type_ object grid-hash-box) none) ;; 19
     (grid-hash-method-20 (_type_ grid-hash-box (pointer uint8)) none) ;; 20 ;; do-search!
     (grid-hash-method-21 (_type_ grid-hash-box vector vector) int) ;; 21 ;; set-up-box
     (grid-hash-method-22 (_type_ grid-hash-box sphere) none) ;; 22 ;; sphere-to-grid-box
@@ -41537,12 +41537,12 @@
   :flag-assert         #x1700000074
   (:methods
     (init! (_type_ int int lightning-appearance) none) ;; 9
-    (lightning-bolt-method-10 (_type_ uint) none) ;; 10
+    (lightning-bolt-method-10 (_type_ uint) int) ;; 10
     (lightning-bolt-method-11 (_type_) int) ;; 11
     (lightning-bolt-method-12 (_type_) int) ;; 12
     (lightning-bolt-method-13 (_type_ int) int) ;; 13
     (lightning-bolt-method-14 (_type_) uint) ;; 14
-    (lightning-bolt-method-15 (_type_ object int lightning-span-internal) none) ;; 15
+    (lightning-bolt-method-15 (_type_ object int lightning-span-internal) int) ;; 15
     (lightning-bolt-method-16 (_type_ vector float float vector matrix) none) ;; 16
     (lightning-bolt-method-17 (_type_ uint float float curve2d-fast float) float) ;; 17
     (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none) ;; 18 ;; (lightning-bolt-method-18 (_type_ prim-strip vector rgba float float) none)
@@ -41904,7 +41904,7 @@
     (rigid-body-control-method-33 (_type_ object object) none) ;; 33
     (rigid-body-control-method-34 (_type_ int int) none) ;; 34
     (rigid-body-control-method-35 (_type_ object object object) none) ;; 35
-    (rigid-body-control-method-36 (_type_ object) int) ;; 36
+    (rigid-body-control-method-36 (_type_ object) none) ;; 36
     (rigid-body-control-method-37 (_type_ object) int) ;; 37
     (rigid-body-control-method-38 (_type_ object) int) ;; 38
     (rigid-body-control-method-39 (_type_ object) int) ;; 39
@@ -41977,7 +41977,7 @@
   (:methods
     (rigid-body-object-method-59 (_type_) none) ;; 59
     (rigid-body-object-method-60 (_type_) none) ;; 60
-    (rigid-body-object-method-61 (_type_) none) ;; 61
+    (rigid-body-object-method-61 (_type_) int) ;; 61
     (rigid-body-object-method-62 (_type_ float) int) ;; 62
     (rigid-body-object-method-63 (_type_) int) ;; 63
     (rigid-body-object-method-64 (_type_ object) none) ;; 64
@@ -41987,7 +41987,7 @@
     (rigid-body-object-method-68 (_type_ object object) int) ;; 68
     (rigid-body-object-method-69 (_type_) int) ;; 69
     (rigid-body-object-method-70 (_type_) int) ;; 70
-    (rigid-body-object-method-71 (_type_) int) ;; 71
+    (rigid-body-object-method-71 (_type_) none) ;; 71
     (rigid-body-object-method-72 (_type_) none) ;; 72
     (rigid-body-object-method-73 (_type_) none) ;; 73
     (rigid-body-object-method-74 (_type_) none) ;; 74
@@ -42000,7 +42000,7 @@
     (rigid-body-object-method-81 (_type_ object object object object) none) ;; 81
     (rigid-body-object-method-82 (_type_ object object object object) symbol) ;; 82
     (rigid-body-object-method-83 (_type_ object object) symbol) ;; 83
-    (rigid-body-object-method-84 (_type_ rigid-body-impact touching-shapes-entry) int) ;; 84
+    (rigid-body-object-method-84 (_type_ rigid-body-impact touching-shapes-entry) none) ;; 84
     (rigid-body-object-method-85 (_type_) int) ;; 85
     (rigid-body-object-method-86 (_type_) int) ;; 86
     (rigid-body-object-method-87 (_type_) int) ;; 87
@@ -62449,13 +62449,7 @@
 (define-extern create-lightning-tracker-new (function lightning-tracker-init-params lightning-new-tracker))
 (define-extern deg-diff (function float float float))
 (define-extern deg- (function float float float))
-(define-extern string-skip-whitespace (function (pointer uint8) (pointer uint8)))
-(define-extern string-skip-to-char (function (pointer uint8) uint (pointer uint8)))
-(define-extern copy-charp<-charp (function (pointer uint8) (pointer uint8) (pointer uint8)))
-(define-extern append-character-to-string (function string uint8 int))
 (define-extern set-as-offset-from! (function hud-sprite vector4w int int none))
-(define-extern string-charp= (function string (pointer uint8) symbol))
-(define-extern string-suck-up! (function string (pointer uint8) symbol))
 ;; --- end Recipe X cycle 1 ---
 ;;(define-extern string-menu object)
 ;; (define-extern sky-color-day object) ;; clobbers active deftype
