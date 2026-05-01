@@ -37813,7 +37813,7 @@
   )
 
 
-(define-extern unpack-comp-rle "Decompress data compressed with run-length encoding." (function (pointer int8) (pointer int8) (pointer int8)))
+(define-extern unpack-comp-rle (function (pointer int8) (pointer int8) (pointer int8)))
 (define-extern unpack-comp-huf (function (pointer uint8) (pointer uint8) uint huf-dictionary-node none))
 (define-extern unpack-comp-lzo (function (pointer uint8) (pointer uint8) none))
 (define-extern pack-comp-rle (function (pointer uint8) (pointer uint8) int int (pointer uint8)))
