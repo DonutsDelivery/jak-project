@@ -7,6 +7,59 @@
 
 ;; DECOMP BEGINS
 
+;; og:preserve-this
+(defenum texture-anim-pc
+  (start-anim-array 12)
+  (finish-anim-array 13)
+  (erase-and-init 14)
+  (upload-clut-16-16 15)
+  (upload-generic-vram 16)
+  (set-shader 17)
+  (draw 18)
+  (move-rg-to-ba 19)
+  (set-clut-alpha 20)
+  (copy-clut-alpha 21)
+  (set-alpha 22)
+  )
+
+(deftype texture-anim-pc-upload (structure)
+  ((data pointer)
+   (width uint16)
+   (height uint16)
+   (dest uint32)
+   (format gs-psm)
+   (force-to-gpu uint8)
+   (pad uint8 2)
+   )
+  :size-assert 16
+  )
+
+(deftype texture-anim-pc-texture-transform (structure)
+  ((src-tbp uint32)
+   (dest-tbp uint32)
+   (pad0 uint32)
+   (pad1 uint32)
+   )
+  )
+
+(defmacro pc-texture-anim-flag (kind buf &key (qwc 0))
+  `(dma-buffer-add-cnt-vif2
+     ,buf
+     ,qwc
+     (new 'static 'vif-tag :cmd (vif-cmd pc-port) :imm (texture-anim-pc ,kind))
+     (new 'static 'vif-tag)
+     )
+  )
+
+(defmacro pc-texture-anim-flag-id (kind buf &key (qwc 0))
+  `(dma-buffer-add-cnt-vif2
+     ,buf
+     ,qwc
+     (new 'static 'vif-tag :cmd (vif-cmd pc-port) :imm ,kind)
+     (new 'static 'vif-tag)
+     )
+  )
+
 (define *texture-anim-work*
   (new 'static 'texture-anim-work
     :erase-tmpl (new 'static 'dma-gif-packet
