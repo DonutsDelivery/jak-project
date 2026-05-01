@@ -1958,7 +1958,7 @@
 
 
 (define-extern wrong-way-linebot-init-by-other (function none))
-(define-extern wrong-way-linebot-spawn (function int process))
+(define-extern wrong-way-linebot-spawn (function process process))
 (define-extern set-position-and-orientation (function none))
 (define-extern set-children-position-and-orientation (function none))
 (define-extern wrong-way-event-handler (function none))
