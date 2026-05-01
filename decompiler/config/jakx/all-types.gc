@@ -38379,7 +38379,7 @@
 (define-extern lookup-part-group-by-name (function string sparticle-launch-group))
 (define-extern lookup-part-group-pointer-by-name (function string (pointer object)))
 (define-extern part-group-pointer? (function pointer symbol))
-(define-extern unlink-part-group-by-heap (function kheap int))
+(define-extern unlink-part-group-by-heap (function kheap none))
 (define-extern sp-init-fields! (function (pointer float) (inline-array sp-field-init-spec) sp-field-id sp-field-id symbol (inline-array sp-field-init-spec)))
 (define-extern *sp-launcher-lock* symbol) ;; symbol
 (define-extern *sp-launch-queue* sp-launch-queue) ;; sp-launch-queue
