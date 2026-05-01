@@ -62451,6 +62451,7 @@
 (define-extern deg- (function float float float))
 (define-extern string-skip-whitespace (function (pointer uint8) (pointer uint8)))
 (define-extern string-skip-to-char (function (pointer uint8) uint (pointer uint8)))
+(define-extern copy-charp<-charp (function (pointer uint8) (pointer uint8) (pointer uint8)))
 ;; --- end Recipe X cycle 1 ---
 ;;(define-extern string-menu object)
 ;; (define-extern sky-color-day object) ;; clobbers active deftype
