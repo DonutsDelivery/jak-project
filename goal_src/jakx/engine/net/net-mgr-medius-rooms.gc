@@ -19,13 +19,13 @@
 
 ;; type medius-room-array is defined here, but it is unknown to the decompiler
 
-(method-set! (the-as type medius-room-array) 3 L131)
+;; SCAFFOLDING: method-set! on unknown type medius-room-array removed
 
 (define *medius-rooms* #f)
 
 (define *last-normal-room* (the-as object -1))
 
-(method-set! (the-as type medius-room-array) 9 L113)
+;; SCAFFOLDING: method-set! on unknown type medius-room-array removed
 
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 

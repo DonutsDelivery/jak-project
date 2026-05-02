@@ -31,7 +31,7 @@
 
 ;; type ghost-info is defined here, but it is unknown to the decompiler
 
-(method-set! (the-as type ghost-info) 3 L300)
+;; SCAFFOLDING: method-set! on unknown type ghost-info removed
 
 (define *ghost-info* #f)
 
