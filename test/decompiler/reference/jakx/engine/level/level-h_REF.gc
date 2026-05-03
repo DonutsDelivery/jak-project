@@ -627,7 +627,7 @@
     (level-group-method-9 (_type_ symbol) level)
     (level-group-method-10 (_type_ symbol) level)
     (level-group-method-11 (_type_ pointer symbol) level)
-    (level-group-method-12 (_type_ symbol symbol) symbol)
+    (level-group-method-12 (_type_ symbol symbol) level)
     (level-group-method-13 (_type_) int)
     (level-group-method-14 (_type_ symbol type string) none)
     (level-group-method-15 (_type_ symbol) none)

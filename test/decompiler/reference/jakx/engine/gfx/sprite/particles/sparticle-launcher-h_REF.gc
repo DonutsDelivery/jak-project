@@ -82,8 +82,8 @@
    (level-flag  int32)
    )
   (:methods
-    (sparticle-launcher-method-9 () none)
-    (sparticle-launcher-method-10 () none)
+    (sparticle-launcher-method-9 (_type_ sp-field-id) sp-field-init-spec)
+    (sparticle-launcher-method-10 (_type_ string) none)
     )
   )
 
@@ -195,7 +195,7 @@
    (bounds           sphere  :inline)
    )
   (:methods
-    (sparticle-launch-group-method-9 () none)
+    (create-launch-control (_type_ process) sparticle-launch-control)
     )
   )
 
@@ -228,27 +228,28 @@
 
 ;; definition of type sparticle-launch-control
 (deftype sparticle-launch-control (inline-array-class)
-  ((group                sparticle-launch-group              :offset  16)
-   (proc                 process-drawable                    :offset  20)
-   (local-clock          int32                               :offset  24)
-   (local-space-binding  particle-local-space-info           :offset  28)
-   (matrix               int8                                :offset  32)
-   (pointer-control      uint32                              :offset  36)
-   (last-spawn-frame     int32                               :offset  40)
-   (last-spawn-time      int32                               :offset  44)
-   (origin               matrix                     :inline  :offset  48)
-   (center               vector                     :inline  :overlay-at (-> origin trans))
-   (sl-data              uint8                      :dynamic :offset 112)
+  ((group                sparticle-launch-group                      :offset  16)
+   (proc                 process-drawable                            :offset  20)
+   (local-clock          int32                                       :offset  24)
+   (local-space-binding  particle-local-space-info                   :offset  28)
+   (matrix               int8                                        :offset  32)
+   (pointer-control      uint32                                      :offset  36)
+   (last-spawn-frame     int32                                       :offset  40)
+   (last-spawn-time      int32                                       :offset  44)
+   (origin               matrix                     :inline          :offset  48)
+   (center               vector                     :inline          :overlay-at (-> origin trans))
+   (sl-data              uint8                      :dynamic         :offset 112)
+   (data                 sparticle-launch-state     :inline :dynamic :offset 112)
    )
   (:methods
-    (sparticle-launch-control-method-14 () none)
-    (sparticle-launch-control-method-15 () none)
-    (sparticle-launch-control-method-16 () none)
-    (sparticle-launch-control-method-17 () none)
-    (sparticle-launch-control-method-18 () none)
-    (sparticle-launch-control-method-19 () none)
-    (sparticle-launch-control-method-20 () none)
-    (sparticle-launch-control-method-21 () none)
+    (sparticle-launch-control-method-14 (_type_ sparticle-launch-group process-drawable) none)
+    (sparticle-launch-control-method-15 (_type_ vector) symbol)
+    (sparticle-launch-control-method-16 (_type_ vector) none)
+    (sparticle-launch-control-method-17 (_type_ matrix) none)
+    (sparticle-launch-control-method-18 (_type_ cspace) none)
+    (sparticle-launch-control-method-19 (_type_) none)
+    (sparticle-launch-control-method-20 (_type_ int) int)
+    (sparticle-launch-control-method-21 (_type_) none)
     )
   )
 
@@ -316,74 +317,31 @@
   )
 
 ;; definition for method 0 of type sparticle-subsampler
-;; ERROR: failed type prop at 17: At op 17, called enter-state, but the current next-state has type none, which is not a valid state.
-;; WARN: Return type mismatch none vs sparticle-subsampler.
 ;; ERROR: Function may read a register that is not set: a2
 ;; ERROR: Function may read a register that is not set: a3
 ;; ERROR: Function may read a register that is not set: t0
 ;; ERROR: Function may read a register that is not set: t1
 ;; ERROR: Function may read a register that is not set: t2
-(defmethod new sparticle-subsampler ((a0-0 symbol) (a1-0 type))
-  (local-vars
-    (v0-0 sparticle-subsampler)
-    (v0-1 none)
-    (v0-2 none)
-    (v0-3 none)
-    (v1-0 type)
-    (v1-1 type)
-    (v1-3 (state string process-drawable))
-    (a0-1 string)
-    (a0-2 none)
-    (a1-1 type)
-    (a2-0 none)
-    (a2-1 uint)
-    (a3-0 none)
-    (t0-0 none)
-    (t1-0 none)
-    (t2-0 none)
-    (s1-0 sparticle-subsampler)
-    (t9-0 function)
-    (t9-1 function)
-    (t9-2 none)
-    (f0-0 none)
-    (f0-1 none)
-    )
-  (with-pp
-    (when (begin
-            (set! v1-0 object)
-            (set! t9-0 (method-of-type v1-0 new))
-            (set! v1-1 a1-0)
-            (set! a2-1 (-> a1-0 size))
-            (set! a1-1 v1-1)
-            (set! v0-0 (call! a0-0 a1-1 a2-1))
-            (set! s1-0 v0-0)
-            (zero? s1-0)
-            )
-      (set! t9-1 enter-state)
-      (set! a0-1 L5)
-      (set! v1-3 process-drawable-art-error)
-      (set! (-> s6-0 next-state) v1-3)
-      (call!)
-      (set! v1-4 (the-as none v0-1))
-      )
+(defmethod new sparticle-subsampler ((allocation symbol) (type-to-make type))
+  (local-vars (a2-0 none) (a3-0 none) (t0-0 none) (t1-0 none) (t2-0 none))
+  (let ((s1-0 (object-new allocation type-to-make (the-as int (-> type-to-make size)))))
+    (if (zero? s1-0)
+        (go process-drawable-art-error "sparticle-subsampler")
+        )
     (set! (-> s1-0 per-meter-method?) (the-as basic t1-0))
     (set! (-> s1-0 part-id) (the-as uint a3-0))
     (set! (-> s1-0 inited?) #f)
     (set! (-> s1-0 sp-system) (the-as sparticle-system a2-0))
-    (set! f0-0 (the-as none (gpr->fpr t0-0)))
-    (set! (-> s1-0 spt-num) (the-as float f0-0))
-    (set! f0-1 (the-as none (gpr->fpr t2-0)))
-    (set! (-> s1-0 min-emit) (the-as float f0-1))
-    (set! t9-2 (the-as none matrix-identity!))
-    (set! a0-2 (the-as none (-> s1-0 spawn-mat)))
-    (call!)
-    (set! v0-3 (the-as none s1-0))
-    (ret-value v0-3)
+    (set! (-> s1-0 spt-num) (the-as float (gpr->fpr t0-0)))
+    (set! (-> s1-0 min-emit) (the-as float (gpr->fpr t2-0)))
+    (matrix-identity! (-> s1-0 spawn-mat))
+    s1-0
     )
   )
 
 ;; definition for function compute-rot-in-screenspace
 (defun compute-rot-in-screenspace ((arg0 vector))
+  "Unclear what this does, but I'm not actually sure it makes sense. Unused"
   0.0
   (let ((a0-1 (-> (math-camera-matrix) fvec)))
     0.0
