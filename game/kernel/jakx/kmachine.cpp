@@ -532,7 +532,8 @@ void InitMachineScheme() {
   if (strcmp(DebugBootLevel, "#f") == 0) {
     intern_from_c(-1, 0, "*kernel-boot-level*")->value() = s7.offset;
   } else {
-    ASSERT_NOT_REACHED();
+    intern_from_c(-1, 0, "*kernel-boot-level*")->value() =
+        intern_from_c(-1, 0, DebugBootLevel).offset;
   }
   intern_from_c(-1, 0, "*kernel-boot-art-group*")->value() = make_string_from_c(DebugBootArtGroup);
 
