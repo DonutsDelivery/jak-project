@@ -140,7 +140,9 @@
                       (let ((a0-27 (-> s5-1 vis-info v1-40)))
                         (when a0-27
                           (if (!= a0-27 s4-0)
-                              (set! (-> a0-27 current-vis-string) (the-as uint -1))
+                              (dotimes (k 4)
+                                (set! (-> a0-27 current-vis-string k) (the-as uint32 #xffffffff))
+                                )
                               )
                           )
                         )

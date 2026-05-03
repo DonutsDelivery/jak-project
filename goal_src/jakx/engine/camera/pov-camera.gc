@@ -253,7 +253,7 @@
        (cond
          ((type? (-> block param 0) string)
           (let ((v1-7 (the-as joint (get-art-by-name-method
-                                      (-> (the-as process-drawable (-> self hand process 0)) draw jgeo)
+                                      (-> (the-as process-drawable (handle->process (-> self hand))) draw jgeo)
                                       (the-as string (-> block param 0))
                                       (the-as type #f)
                                       )
@@ -300,7 +300,7 @@
         )
       )
     (set! (-> self had-valid-frame) #f)
-    (let ((gp-0 (-> self hand process 0)))
+    (let ((gp-0 (handle->process (-> self hand))))
       (vector<-cspace!
         (-> self old-pos)
         (-> (the-as process-drawable gp-0) node-list data (-> self cam-joint-index))
@@ -317,7 +317,7 @@
     )
   :code (behavior ()
     (until #f
-      (let ((s2-0 (-> self hand process 0)))
+      (let ((s2-0 (handle->process (-> self hand))))
         (when (not s2-0)
           (format #t "ERROR<GMJ>: othercam parent invalid~%")
           (deactivate self)
@@ -365,11 +365,11 @@
           )
         )
       (suspend)
-      (let ((a0-27 (-> self hand process 0)))
+      (let ((a0-27 (handle->process (-> self hand))))
         (when (or (-> self die?) (and (not (-> self survive-anim-end?)) (ja-anim-done? a0-27)))
           (let ((gp-1 (current-time)))
             (while (and (not (time-elapsed? gp-1 (seconds 60)))
-                        (or (and (-> self entity) (not (is-object-visible? (-> self level) (-> self entity extra vis-id))))
+                        (or (and (-> self entity) (not ((method-of-type level is-object-visible?) (-> self level) (-> self entity extra vis-id))))
                             (< 81920.0 (vector-vector-distance (camera-pos) (-> *math-camera* trans)))
                             )
                         )

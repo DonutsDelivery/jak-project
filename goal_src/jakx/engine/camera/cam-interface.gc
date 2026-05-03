@@ -5,6 +5,18 @@
 ;; name in dgo: cam-interface
 ;; dgos: GAME
 
+(declare-type camera-combiner process)
+(declare-type camera-master process)
+(define-extern view-get-active-camera-combiner (function camera-combiner))
+(define-extern view-get-active-math-camera (function math-camera))
+(define-extern view-get-math-camera (function int math-camera))
+(define-extern view-get-active-camera (function camera-master))
+(define-extern view-set-active-camera (function camera-master none))
+(define-extern view-set-active-camera-combiner (function camera-combiner none))
+(define-extern view-push-context (function int none))
+(define-extern view-pop-context (function int none))
+(define-extern *view-count* int)
+
 ;; DECOMP BEGINS
 
 (defun position-in-front-of-camera! ((arg0 vector) (arg1 float) (arg2 float))

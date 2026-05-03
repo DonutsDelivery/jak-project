@@ -63,8 +63,8 @@
   )
 ;; ---cam-master-options-u32
 
-(define-extern cam-stop (function symbol))
-(define-extern cam-start (function symbol none))
+(define-extern cam-stop (function int))
+(define-extern cam-start (function symbol int))
 
 (declare-type camera-slave process)
 (declare-type cam-rotation-tracker structure)

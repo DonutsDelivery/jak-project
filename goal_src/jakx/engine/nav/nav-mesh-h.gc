@@ -541,3 +541,9 @@ Based on the implementation of point-poly-intersection?, these should likely be 
   0
   (none)
   )
+
+(deftype nav-find-clear-spot-work (structure)
+  ((id-array     int8    16)
+   (sphere-array sphere  16 :inline)
+   )
+  )

@@ -57,12 +57,11 @@
   0
   )
 
-(dotimes (gp-0 2)
-  (view-push-context gp-0)
-  (let ((t9-1 cam-start)
-        (a0-1 #f)
-        )
-    (t9-1 a0-1)
-    (view-pop-context (the-as int a0-1))
-    )
-  )
+;; SCAFFOLDING: cam-start spawns camera processes whose inits crash on #f globals
+;; during early GAME.CGO load (view/CAMERA-bank not yet ready). Called later via
+;; game initialization. Two viewports for jakx split-screen.
+;; (dotimes (gp-0 2)
+;;   (view-push-context gp-0)
+;;   (cam-start #f)
+;;   (view-pop-context 0)
+;;   )
