@@ -7,17 +7,22 @@
 
 ;; DECOMP BEGINS
 
-(define *default-mood-range* (the-as mood-range L2529))
+;; SCAFFOLDING: L-labels reference static binary data; use zeroed placeholders
+(define *default-mood-range* (new 'static 'mood-range))
 
-(define *mood-range-1* (the-as mood-range L2528))
+(define *mood-range-1* (new 'static 'mood-range))
 
-(define *mood-range-snow* (the-as mood-range L2527))
+(define *mood-range-snow* (new 'static 'mood-range))
 
 (define default-level #f)
 
-(set! (-> default-level name) #f)
+;; SCAFFOLDING: spurious decompiler output; default-level is #f above, cannot dereference
+;; (set! (-> default-level name) #f)
 
 (define intro #f)
+
+;; SCAFFOLDING: jak3-only level refs used in intro-scenes.gc (absent from jakx)
+(define-extern ctyfarma level-load-info)
 
 (define title #f)
 
