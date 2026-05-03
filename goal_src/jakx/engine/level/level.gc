@@ -261,7 +261,7 @@
   (the-as level #f)
   )
 
-(defmethod level-group-method-29 ((this level-group) (arg0 (pointer symbol)))
+(defmethod is-load-allowed? ((this level-group) (arg0 (pointer symbol)))
   "Does the exclusive-load setting allow us to load this level?"
   (let ((v1-1 (the-as pair (-> *setting-control* user-current exclusive-load))))
     (if (or (not v1-1) (null? v1-1))
@@ -430,7 +430,7 @@
   0
   )
 
-(defmethod level-group-method-26 ((this level-group) (arg0 symbol) (arg1 symbol))
+(defmethod level-status? ((this level-group) (arg0 symbol) (arg1 symbol))
   (if (not arg0)
       (return #f)
       )
@@ -444,7 +444,7 @@
           (let ((v1-14 (-> s4-0 info borrow borrow-info s3-1)))
             (when v1-14
               (when (car (cdr v1-14))
-                (let ((v1-15 (level-group-method-26 this (the-as symbol (car v1-14)) arg1)))
+                (let ((v1-15 (level-status? this (the-as symbol (car v1-14)) arg1)))
                   (if (!= v1-15 (-> s4-0 status))
                       (return v1-15)
                       )
@@ -546,9 +546,9 @@
 ;; WARN: Return type mismatch none vs symbol.
 ;; ERROR: Function may read a register that is not set: a2
 ;; ERROR: Unsupported inline assembly instruction kind - [addiu a0, a0, 56]
-(defmethod level-method-11 ((a0-0 level) (a1-0 int))
-  ;; NOTE: Stubbed - level-method-11 has PS2 constructs
-  (format 0 "call to level-method-11~%")
+(defmethod is-object-visible? ((a0-0 level) (a1-0 int))
+  ;; NOTE: Stubbed - is-object-visible? has PS2 constructs
+  (format 0 "call to is-object-visible?~%")
   #f
   )
 
@@ -720,7 +720,7 @@
     )
   )
 
-(defmethod level-group-method-22 ((this level-group) (arg0 string) (arg1 (pointer level)))
+(defmethod art-group-get-by-name ((this level-group) (arg0 string) (arg1 (pointer level)))
   (countdown (s4-0 19)
     (let ((s3-0 (-> *level* level s4-0)))
       (when (or (= (-> s3-0 status) 'active) (= (-> s3-0 status) 'reserved))
@@ -770,9 +770,37 @@
 
 ;; ERROR: failed type prop at 86: Could not figure out load: (set! v1 (l.wu v1))
 ;; ERROR: Failed to guess stack use for 16 in play:70
-(defun play ((a0-0 symbol) (a1-0 symbol))
-  ;; NOTE: Stubbed - play has PS2 constructs
-  (format 0 "call to play~%")
+(defun play ((arg0 symbol) (arg1 symbol))
+  "Start (or restart) the game!
+   This will start up the display process, and load the initial level.
+   SCAFFOLDING: minimal port of jak3's play. Most level-loading deps
+   (level-get-for-use, init-level-system, level-status-update!,
+   add-borrow-levels, activate-levels!) don't yet exist in jakx.
+   This minimal version handles the *kernel-boot-level* branch via bg
+   when set, and falls through to a no-op title path otherwise."
+  (kmemopen global "level-boot")
+  (start-debug "call to play! arg0=~A arg1=~A~%" arg0 arg1)
+  (when *kernel-boot-level*
+    (start-debug "play: *kernel-boot-level*=~A — calling bg~%" *kernel-boot-level*)
+    (bg (string->symbol (the-as string *kernel-boot-level*)))
+    (on #f)
+    (kmemclose)
+    (kmemclose)
+    (return 0)
+    )
+  ;; SCAFFOLDING: no title flow yet — would call init-level-system,
+  ;; level-get-for-use, level-status-update! etc. (none exist by name in jakx yet).
+  ;; Best-effort: try to start the display process (on #t) so display-loop runs
+  ;; and we can see what it does without loaded levels. on() will spawn display
+  ;; and may immediately kill it if no level is loaded — that's expected and OK.
+  (set! (-> *level* vis?) arg0)
+  (set! (-> *level* play?) #t)
+  (start-debug "play: no *kernel-boot-level* — attempting (on #t) display spawn~%")
+  (on #t)
+  (start-debug "play: (on #t) returned, *dproc*=~A~%" *dproc*)
+  (kmemclose)
+  (kmemclose)
+  0
   (none)
   )
 
@@ -780,8 +808,15 @@
 
 ;; ERROR: failed type prop at 20: Call to run-function-in-process or set-to-run at op 20 with an invalid function type: function
 (defun play-boot ()
-  ;; NOTE: Stubbed - play-boot has PS2 constructs
-  (format 0 "call to play-boot~%")
+  "Function called by the C Kernel to start the game (wrapper around play)."
+  (start-debug "call to play-boot!~%")
+  (process-spawn-function
+    process
+    (lambda () (play #t #t) (none))
+    :from *4k-dead-pool*
+    :stack *kernel-dram-stack*
+    )
+  0
   (none)
   )
 
@@ -919,9 +954,9 @@
     (set! (-> s5-0 2) #f)
     (set! (-> s5-0 1) arg0)
     (set! (-> s5-0 0) (-> (level-get-target-inside *level*) name))
-    (load-state-method-11 *load-state* s5-0)
+    (want-levels *load-state* s5-0)
     )
-  (load-state-method-13 *load-state* arg0 'display)
+  (want-display-level *load-state* arg0 'display)
   0
   (none)
   )
