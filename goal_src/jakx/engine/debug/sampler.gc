@@ -9,71 +9,40 @@
 
 ;; DECOMP BEGINS
 
-(local-vars
-  (v0-1 none)
-  (v0-2 none)
-  (v0-3 none)
-  (v1-0 symbol)
-  (v1-1 int)
-  (v1-2 symbol)
-  (v1-3 function)
-  (v1-4 none)
-  (v1-5 int)
-  (v1-6 none)
-  (v1-7 none)
-  (v1-8 none)
-  (v1-9 none)
-  (a0-0 int)
-  (a1-0 function)
-  (t9-0 type)
+;; this file is debug only
+(declare-file (debug))
+
+(define *sampler-mem* (the-as pointer #f))
+
+(define *sampler-compare* (the-as uint 1))
+
+(define *sampler-count* 0)
+
+;; ERROR: function was not converted to expressions. Cannot decompile.
+
+;; og:preserve-this
+; (set! (-> (the-as timer-bank #x10000000) mode) (new 'static 'timer-mode))
+
+(defun-debug sampler-start ()
+  (set! (-> (the-as timer-bank #x10000000) mode) (new 'static 'timer-mode))
+  (set! (-> (the-as timer-bank #x10000000) count) (the-as uint 0))
+  (set! (-> (the-as timer-bank #x10000000) comp) *sampler-compare*)
+  (if (not *sampler-mem*)
+      (set! *sampler-mem* (malloc 'debug #x1000000))
+      )
+  (when (nonzero? *sampler-mem*)
+    (mem-set32! *sampler-mem* #x400000 0)
+    (set! (-> (the-as timer-bank #x10000000) mode)
+          (new 'static 'timer-mode :clks (timer-clock-selection busclk/256) :zret #x1 :cue #x1 :cmpe #x1 :equf #x1)
+          )
+    (set! *sampler-count* 0)
+    0
+    )
+  (none)
   )
 
-(when (begin (set! v1-0 *debug-segment*) v1-0)
-  (cond
-    ((begin
-       (set! *sampler-mem* (the-as object #f))
-       (set! v1-1 10)
-       (set! *sampler-compare* v1-1)
-       (set! *sampler-count* (the-as object 0))
-       (set! *sampler-above-range-count* (the-as object 0))
-       (set! v1-2 *debug-segment*)
-       v1-2
-       )
-     (set! v1-3 L6)
-     (set! timer0-handler v1-3)
-     )
-    (else
-      (set! v1-4 (the-as none nothing))
-      (set! timer0-handler (the-as function v1-4))
-      )
-    )
-  (cond
-    ((begin
-       (set! v1-5 #x10000000)
-       (s.w! (+ v1-5 16) 0)
-       (set! t9-0 install-handler)
-       (set! a0-0 9)
-       (set! a1-0 timer0-handler)
-       (call!)
-       (set! v1-6 (the-as none *debug-segment*))
-       v1-6
-       )
-     (set! v1-7 (the-as none L2))
-     (set! sampler-start (the-as function v1-7))
-     )
-    (else
-      (set! v1-8 (the-as none nothing))
-      (set! sampler-start (the-as function v1-8))
-      )
-    )
-  (cond
-    ((begin (set! v1-9 (the-as none *debug-segment*)) v1-9)
-     (set! v0-2 (the-as none L1))
-     (set! sampler-stop (the-as function v0-2))
-     )
-    (else
-      (set! v0-3 (the-as none nothing))
-      (set! sampler-stop (the-as function v0-3))
-      )
-    )
+(defun-debug sampler-stop ()
+  (set! (-> (the-as timer-bank #x10000000) mode) (new 'static 'timer-mode))
+  0
+  (none)
   )

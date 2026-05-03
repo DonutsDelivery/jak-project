@@ -5,6 +5,8 @@
 ;; name in dgo: nav-graph-editor
 ;; dgos: GAME
 
+;; SCAFFOLDING - jak3 copy had nav-node-flag type incompatibilities
+
 (declare-type nav-graph-editor process)
 (define-extern run-nav-graph-editor (function symbol symbol (pointer nav-graph-editor)))
 (define-extern get-nav-graph-editor (function nav-graph-editor))
@@ -24,523 +26,169 @@
   )
 ;; ---nav-com-type
 
-
-;; DECOMP BEGINS
-
-;; this file is debug only
+;; og:preserve-this
 (declare-file (debug))
 
 (deftype nav-graph-command (structure)
-  ((com-type  uint32)
+  ((com-type  nav-com-type)
    (id        int32)
    (index     int32)
    (move-vec  vector  :inline)
    )
   )
 
-
 (deftype nav-graph-command-array (inline-array-class)
-  ((data  nav-graph-command  :dynamic :offset  16)
+  ((data  nav-graph-command  :inline :dynamic)
    )
   )
 
-
 (set! (-> nav-graph-command-array heap-base) (the-as uint 32))
 
-;; type nav-graph-editor is defined here, but it is unknown to the decompiler
-
-(method-set! (the-as type nav-graph-editor) 3 L403)
-
-(define *nav-graph-editor* (the-as object #f))
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-(method-set! (the-as type nav-graph-editor) 67 L398)
-
-(method-set! (the-as type nav-graph-editor) 68 L397)
-
-(method-set! (the-as type nav-graph-editor) 10 L396)
-
-(method-set! (the-as type nav-graph-editor) 7 L395)
-
-(method-set! (the-as type nav-graph-editor) 65 L391)
-
-(method-set! (the-as type nav-graph-editor) 66 L389)
-
-(method-set! (the-as type nav-graph-editor) 59 L380)
-
-(method-set! (the-as type nav-graph-editor) 32 L368)
-
-(method-set! (the-as type nav-graph-editor) 35 L367)
-
-(method-set! (the-as type nav-graph-editor) 33 L364)
-
-(method-set! (the-as type nav-graph-editor) 31 L363)
-
-(method-set! (the-as type nav-graph-editor) 30 L331)
-
-(method-set! (the-as type nav-graph-editor) 37 L328)
-
-(method-set! (the-as type nav-graph-editor) 36 L325)
-
-(method-set! (the-as type nav-graph-editor) 38 L308)
-
-(method-set! (the-as type nav-graph-editor) 46 L307)
-
-(method-set! (the-as type nav-graph-editor) 47 L300)
-
-(method-set! (the-as type nav-graph-editor) 49 L294)
-
-(method-set! (the-as type nav-graph-editor) 50 L287)
-
-(method-set! (the-as type nav-graph-editor) 48 L281)
-
-(method-set! (the-as type nav-graph-editor) 34 L278)
-
-(method-set! (the-as type nav-graph-editor) 52 L277)
-
-(method-set! (the-as type nav-graph-editor) 53 L276)
-
-(method-set! (the-as type nav-graph-editor) 54 L275)
-
-(method-set! (the-as type nav-graph-editor) 55 L274)
-
-(method-set! (the-as type nav-graph-editor) 63 L261)
-
-(method-set! (the-as type nav-graph-editor) 56 L258)
-
-(method-set! (the-as type nav-graph-editor) 58 L255)
-
-(method-set! (the-as type nav-graph-editor) 57 L253)
-
-(method-set! (the-as type nav-graph-editor) 62 L249)
-
-(method-set! (the-as type nav-graph-editor) 60 L240)
-
-(method-set! (the-as type nav-graph-editor) 61 L226)
-
-(method-set! (the-as type nav-graph-editor) 64 L224)
-
-(method-set! (the-as type nav-graph-editor) 51 L219)
-
-(method-set! (the-as type nav-graph-editor) 39 L216)
-
-(let ((gp-0 (new 'static 'state
-              :name 'move-node
-              :next #f
-              :exit #f
-              :parent #f
-              :code #f
-              :trans #f
-              :post #f
-              :enter #f
-              :event #f
-              )
-            )
-      )
-  (method-set! (the-as type nav-graph-editor) 15 gp-0)
-  (set! (-> gp-0 enter) L215)
-  (set! (-> gp-0 code) sleep-code)
-  (set! (-> gp-0 post) L214)
-  )
-
-(let ((gp-1 (new 'static 'state
-              :name 'adjust-plane
-              :next #f
-              :exit #f
-              :parent #f
-              :code #f
-              :trans #f
-              :post #f
-              :enter #f
-              :event #f
-              )
-            )
-      )
-  (method-set! (the-as type nav-graph-editor) 20 gp-1)
-  (set! (-> gp-1 trans) (the-as (function object) L210))
-  (set! (-> gp-1 code) sleep-code)
-  (set! (-> gp-1 post) L209)
-  )
-
-(let ((gp-2 (new 'static 'state
-              :name 'move-plane
-              :next #f
-              :exit #f
-              :parent #f
-              :code #f
-              :trans #f
-              :post #f
-              :enter #f
-              :event #f
-              )
-            )
-      )
-  (method-set! (the-as type nav-graph-editor) 16 gp-2)
-  (set! (-> gp-2 enter) L208)
-  (set! (-> gp-2 trans) (the-as (function object) L206))
-  (set! (-> gp-2 code) sleep-code)
-  (set! (-> gp-2 post) L205)
-  )
-
-(method-set! (the-as type nav-graph-editor) 42 L195)
-
-(let ((gp-3 (new 'static 'state
-              :name 'create-edge
-              :next #f
-              :exit #f
-              :parent #f
-              :code #f
-              :trans #f
-              :post #f
-              :enter #f
-              :event #f
-              )
-            )
-      )
-  (method-set! (the-as type nav-graph-editor) 19 gp-3)
-  (set! (-> gp-3 enter) L191)
-  (set! (-> gp-3 code) sleep-code)
-  (set! (-> gp-3 post) L190)
-  )
-
-(method-set! (the-as type nav-graph-editor) 41 L185)
-
-(let ((gp-4 (new 'static 'state
-              :name 'edit-edge
-              :next #f
-              :exit #f
-              :parent #f
-              :code #f
-              :trans #f
-              :post #f
-              :enter #f
-              :event #f
-              )
-            )
-      )
-  (method-set! (the-as type nav-graph-editor) 18 gp-4)
-  (set! (-> gp-4 enter) L184)
-  (set! (-> gp-4 code) sleep-code)
-  (set! (-> gp-4 post) L183)
-  )
-
-(let ((gp-5 (new 'static 'state
-              :name 'adjust-edge-visibility
-              :next #f
-              :exit #f
-              :parent #f
-              :code #f
-              :trans #f
-              :post #f
-              :enter #f
-              :event #f
-              )
-            )
-      )
-  (method-set! (the-as type nav-graph-editor) 25 gp-5)
-  (set! (-> gp-5 enter) L182)
-  (set! (-> gp-5 exit) (the-as (function object) L181))
-  (set! (-> gp-5 code) sleep-code)
-  (set! (-> gp-5 post) L175)
-  )
-
-(let ((gp-6 (new 'static 'state
-              :name 'adjust-node-angle
-              :next #f
-              :exit #f
-              :parent #f
-              :code #f
-              :trans #f
-              :post #f
-              :enter #f
-              :event #f
-              )
-            )
-      )
-  (method-set! (the-as type nav-graph-editor) 23 gp-6)
-  (set! (-> gp-6 enter) L174)
-  (set! (-> gp-6 code) sleep-code)
-  (set! (-> gp-6 post) L171)
-  )
-
-(let ((gp-7 (new 'static 'state
-              :name 'adjust-node-radius
-              :next #f
-              :exit #f
-              :parent #f
-              :code #f
-              :trans #f
-              :post #f
-              :enter #f
-              :event #f
-              )
-            )
-      )
-  (method-set! (the-as type nav-graph-editor) 24 gp-7)
-  (set! (-> gp-7 enter) L170)
-  (set! (-> gp-7 code) sleep-code)
-  (set! (-> gp-7 post) L166)
-  )
-
-(let ((gp-8 (new 'static 'state
-              :name 'adjust-edge-width
-              :next #f
-              :exit #f
-              :parent #f
-              :code #f
-              :trans #f
-              :post #f
-              :enter #f
-              :event #f
-              )
-            )
-      )
-  (method-set! (the-as type nav-graph-editor) 26 gp-8)
-  (set! (-> gp-8 enter) L165)
-  (set! (-> gp-8 code) sleep-code)
-  (set! (-> gp-8 post) L161)
-  )
-
-(let ((gp-9 (new 'static 'state
-              :name 'adjust-edge-density
-              :next #f
-              :exit #f
-              :parent #f
-              :code #f
-              :trans #f
-              :post #f
-              :enter #f
-              :event #f
-              )
-            )
-      )
-  (method-set! (the-as type nav-graph-editor) 27 gp-9)
-  (set! (-> gp-9 enter) L160)
-  (set! (-> gp-9 code) sleep-code)
-  (set! (-> gp-9 post) L156)
-  )
-
-(method-set! (the-as type nav-graph-editor) 43 L143)
-
-(let ((gp-10 (new 'static 'state
-               :name 'adjust-it
-               :next #f
-               :exit #f
-               :parent #f
-               :code #f
-               :trans #f
-               :post #f
-               :enter #f
-               :event #f
-               )
-             )
-      )
-  (method-set! (the-as type nav-graph-editor) 21 gp-10)
-  (set! (-> gp-10 enter) L142)
-  (set! (-> gp-10 code) sleep-code)
-  (set! (-> gp-10 post) L137)
-  )
-
-(method-set! (the-as type nav-graph-editor) 44 L123)
-
-(let ((gp-11 (new 'static 'state
-               :name 'adjust-minimap
-               :next #f
-               :exit #f
-               :parent #f
-               :code #f
-               :trans #f
-               :post #f
-               :enter #f
-               :event #f
-               )
-             )
-      )
-  (method-set! (the-as type nav-graph-editor) 22 gp-11)
-  (set! (-> gp-11 enter) L122)
-  (set! (-> gp-11 code) sleep-code)
-  (set! (-> gp-11 post) L118)
-  )
-
-(let ((gp-12 (new 'static 'state
-               :name 'draw-closest-minimap
-               :next #f
-               :exit #f
-               :parent #f
-               :code #f
-               :trans #f
-               :post #f
-               :enter #f
-               :event #f
-               )
-             )
-      )
-  (method-set! (the-as type nav-graph-editor) 28 gp-12)
-  (set! (-> gp-12 enter) L117)
-  (set! (-> gp-12 code) sleep-code)
-  (set! (-> gp-12 post) L112)
-  )
-
-(method-set! (the-as type nav-graph-editor) 40 L101)
-
-(let ((gp-13 (new 'static 'state
-               :name 'create
-               :next #f
-               :exit #f
-               :parent #f
-               :code #f
-               :trans #f
-               :post #f
-               :enter #f
-               :event #f
-               )
-             )
-      )
-  (method-set! (the-as type nav-graph-editor) 17 gp-13)
-  (set! (-> gp-13 enter) L100)
-  (set! (-> gp-13 code) sleep-code)
-  (set! (-> gp-13 post) L97)
-  )
-
-(method-set! (the-as type nav-graph-editor) 45 L95)
-
-(let ((gp-14 (new 'static 'state
-               :name 'create-pov
-               :next #f
-               :exit #f
-               :parent #f
-               :code #f
-               :trans #f
-               :post #f
-               :enter #f
-               :event #f
-               )
-             )
-      )
-  (method-set! (the-as type nav-graph-editor) 29 gp-14)
-  (set! (-> gp-14 enter) L91)
-  (set! (-> gp-14 code) sleep-code)
-  (set! (-> gp-14 post) L90)
-  )
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: failed type prop at 14: Could not figure out load: (set! t9 (l.wu (+ v1 52)))
-;; WARN: Return type mismatch none vs (pointer process).
-;; ERROR: Function may read a register that is not set: a1
-(defun run-nav-graph-editor ((a0-0 symbol))
-  (local-vars
-    (v0-0 process)
-    (v0-1 none)
-    (v0-2 none)
-    (v0-3 none)
-    (v0-4 none)
-    (v1-0 object)
-    (v1-1 type)
-    (v1-2 object)
-    (v1-4 none)
-    (v1-5 none)
-    (a0-1 dead-pool)
-    (a0-5 none)
-    (a1-0 none)
-    (a1-1 object)
-    (a1-2 none)
-    (a1-3 none)
-    (a2-0 int)
-    (a2-1 none)
-    (a3-0 int)
-    (a3-1 none)
-    (a3-3 none)
-    (s3-0 process)
-    (s4-0 symbol)
-    (t9-0 (function dead-pool type int object process))
-    (t9-1 none)
-    (t9-2 none)
-    (t9-3 none)
+(deftype nav-graph-editor (process)
+  ((nav-graph            mysql-nav-graph)
+   (mode                 symbol)
+   (command-id           int32)
+   (max-command          int32)
+   (selected-index       int32)
+   (selected-dist        float)
+   (selected-node-edge?  symbol)
+   (closest-node         int32)
+   (dist-closest-node    float)
+   (closest-edge         int32)
+   (dist-closest-edge    float)
+   (mouse-pos            vector          :inline)
+   (mouse-hit            vector          :inline)
+   (mouse-hit-pick       vector          :inline)
+   (mouse-normal         vector          :inline)
+   (mouse-spos-hold      vector          :inline)
+   (edge-src             int32)
+   (edge-dst             int32)
+   (edge-visibility      int32)
+   (vehicle-edit-mode    symbol)
+   (hover-edit-mode      symbol)
+   (plane-height         float)
+   (plane-height-hold    float)
+   (minimap-make-mode    uint8)
+   (clipping-dist        float)
+   (default-node         mysql-nav-node  :inline)
+   (default-edge         mysql-nav-edge  :inline)
+   (command-array        nav-graph-command-array)
+   )
+  (:state-methods
+    move-node
+    move-plane
+    create
+    edit-edge
+    create-edge
+    adjust-plane
+    adjust-it
+    adjust-minimap
+    adjust-node-angle
+    adjust-node-radius
+    adjust-edge-visibility
+    adjust-edge-width
+    adjust-edge-density
+    draw-closest-minimap
+    create-pov
     )
-  (when (begin (set! v1-0 *nav-graph-editor*) (not v1-0))
-    (when (begin
-            (when (begin
-                    (set! a0-1 *default-dead-pool*)
-                    (set! v1-1 (-> a0-1 type))
-                    (set! t9-0 (method-of-type v1-1 get-process))
-                    (set! a1-1 nav-graph-editor)
-                    (set! a2-0 #x4000)
-                    (set! a3-0 1)
-                    (set! v0-0 (call! a0-1 a1-1 a2-0 a3-0))
-                    (set! s3-0 v0-0)
-                    s3-0
-                    )
-              (if (begin
-                    (set! v1-2 nav-graph-editor)
-                    (set! t9-1 (the-as none (l.wu (+ v1-2 52))))
-                    (set! a0-2 (the-as none s3-0))
-                    (set! a1-2 (the-as none *default-pool*))
-                    (set! a2-1 (the-as none L415))
-                    (set! a3-1 (the-as none #x70004000))
-                    (call!)
-                    (set! t9-2 (the-as none run-function-in-process))
-                    (set! a0-3 (the-as none s3-0))
-                    (set! a1-3 (the-as none nav-graph-editor-init-by-other))
-                    (set! a2-2 (the-as none a0-0))
-                    a1-0
-                    )
-                  (set! a3-2 (the-as none a1-0))
-                  (set! a3-3 (the-as none 'unknown))
-                  )
-              (call!)
-              (set! s4-0 (the-as symbol (l.wu (+ s3-0 28))))
-              )
-            a1-0
-            )
-      (when (begin (set! v1-4 (the-as none *nav-graph-editor*)) v1-4)
-        (set! a0-5 (the-as none (l.wu v1-4)))
-        (set! v1-5 (the-as none (l.wu (+ a0-5 -4))))
-        (set! t9-3 (the-as none (l.wu (+ v1-5 284))))
-        (set! a1-4 (the-as none a0-0))
-        (set! a2-3 (the-as none a1-0))
-        (call!)
-        (set! a0-6 (the-as none v0-3))
-        )
-      )
+  (:methods
+    (nav-graph-editor-method-29 (_type_) none)
+    (nav-graph-editor-method-30 (_type_ string string string) object)
+    (nav-graph-editor-method-31 (_type_ int) symbol)
+    (nav-graph-editor-method-32 (_type_ int) symbol)
+    (nav-graph-editor-method-33 (_type_ int int) object)
+    (nav-graph-editor-method-34 (_type_ int) none)
+    (nav-graph-editor-method-35 (_type_ vector vector) none)
+    (nav-graph-editor-method-36 (_type_) none)
+    (nav-graph-editor-method-37 (_type_) object)
+    (nav-graph-editor-method-38 (_type_) none)
+    (nav-graph-editor-method-39 (_type_) none)
+    (nav-graph-editor-method-40 (_type_) none)
+    (nav-graph-editor-method-41 (_type_) none)
+    (nav-graph-editor-method-42 (_type_) none)
+    (nav-graph-editor-method-43 (_type_) none)
+    (nav-graph-editor-method-44 (_type_) none)
+    (nav-graph-editor-method-45 (_type_) none)
+    (nav-graph-editor-method-46 (_type_) none)
+    (nav-graph-editor-method-47 (_type_) symbol)
+    (nav-graph-editor-method-48 (_type_) none)
+    (nav-graph-editor-method-49 (_type_) symbol)
+    (nav-graph-editor-method-50 (_type_) none)
+    (inc-cmd-id! (_type_) int)
+    (alloc-new-cmd! (_type_ int) nav-graph-command)
+    (get-last-cmd (_type_) nav-graph-command)
+    (nav-graph-editor-method-54 (_type_) none)
+    (nav-graph-editor-method-55 (_type_) none)
+    (nav-graph-editor-method-56 (_type_) int)
+    (nav-graph-editor-method-57 (_type_ int int) none)
+    (nav-graph-editor-method-58 (_type_ int) symbol)
+    (nav-graph-editor-method-59 (_type_ int) none)
+    (nav-graph-editor-method-60 (_type_ int) none)
+    (nav-graph-editor-method-61 (_type_ int int) none)
+    (nav-graph-editor-method-62 (_type_) symbol)
+    (nav-graph-editor-method-63 (_type_) none)
+    (nav-graph-editor-method-64 (_type_) none)
+    (nav-graph-editor-method-65 (_type_) none)
+    (nav-graph-editor-method-66 (_type_ symbol string) none)
+    (nav-graph-editor-method-67 (_type_) none)
     )
-  (set! v0-4 (the-as none s4-0))
-  (ret-value v0-4)
   )
 
-;; ERROR: function has no type analysis. Cannot decompile.
+(define *nav-graph-editor* (the-as (pointer nav-graph-editor) #f))
 
-;; ERROR: failed type prop at 4: Could not figure out load: (set! v1 (l.wu v1))
-;; WARN: Return type mismatch symbol vs none.
+(defun get-node-draw-position ((arg0 vector) (arg1 mysql-nav-node))
+  (vector-copy! arg0 (-> arg1 position))
+  arg0
+  )
+
+(defmethod nav-graph-editor-method-29 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-30 ((this nav-graph-editor) (a string) (b string) (c string)) #f)
+(defmethod nav-graph-editor-method-31 ((this nav-graph-editor) (a int)) #f)
+(defmethod nav-graph-editor-method-32 ((this nav-graph-editor) (a int)) #f)
+(defmethod nav-graph-editor-method-33 ((this nav-graph-editor) (a int) (b int)) #f)
+(defmethod nav-graph-editor-method-34 ((this nav-graph-editor) (a int)) (none))
+(defmethod nav-graph-editor-method-35 ((this nav-graph-editor) (a vector) (b vector)) (none))
+(defmethod nav-graph-editor-method-36 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-37 ((this nav-graph-editor)) #f)
+(defmethod nav-graph-editor-method-38 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-39 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-40 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-41 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-42 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-43 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-44 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-45 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-46 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-47 ((this nav-graph-editor)) #f)
+(defmethod nav-graph-editor-method-48 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-49 ((this nav-graph-editor)) #f)
+(defmethod nav-graph-editor-method-50 ((this nav-graph-editor)) (none))
+(defmethod inc-cmd-id! ((this nav-graph-editor)) 0)
+(defmethod alloc-new-cmd! ((this nav-graph-editor) (a int)) (the-as nav-graph-command #f))
+(defmethod get-last-cmd ((this nav-graph-editor)) (the-as nav-graph-command #f))
+(defmethod nav-graph-editor-method-54 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-55 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-56 ((this nav-graph-editor)) 0)
+(defmethod nav-graph-editor-method-57 ((this nav-graph-editor) (a int) (b int)) (none))
+(defmethod nav-graph-editor-method-58 ((this nav-graph-editor) (a int)) #f)
+(defmethod nav-graph-editor-method-59 ((this nav-graph-editor) (a int)) (none))
+(defmethod nav-graph-editor-method-60 ((this nav-graph-editor) (a int)) (none))
+(defmethod nav-graph-editor-method-61 ((this nav-graph-editor) (a int) (b int)) (none))
+(defmethod nav-graph-editor-method-62 ((this nav-graph-editor)) #f)
+(defmethod nav-graph-editor-method-63 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-64 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-65 ((this nav-graph-editor)) (none))
+(defmethod nav-graph-editor-method-66 ((this nav-graph-editor) (a symbol) (b string)) (none))
+(defmethod nav-graph-editor-method-67 ((this nav-graph-editor)) (none))
+
+(defun run-nav-graph-editor ((arg0 symbol) (arg1 symbol))
+  (the-as (pointer nav-graph-editor) #f)
+  )
+
+(defun get-nav-graph-editor ()
+  (the-as nav-graph-editor #f)
+  )
+
 (defun exit-nav-graph-editor ()
-  (local-vars (v0-1 none) (v1-0 object) (v1-1 object) (v1-2 none) (v1-3 none) (a0-0 symbol) (t9-0 none))
-  (when (begin (set! v1-0 *nav-graph-editor*) v1-0)
-    (when (begin (set! v1-1 *nav-graph-editor*) v1-1)
-      (set! v1-2 (the-as none (l.wu v1-1)))
-      (set! a0-0 (the-as symbol (l.wu (+ v1-2 32))))
-      )
-    (set! v1-3 (the-as none (l.wu (+ a0-0 -4))))
-    (set! t9-0 (the-as none (l.wu (+ v1-3 56))))
-    (call!)
-    )
-  (ret-none)
+  (none)
   )
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.

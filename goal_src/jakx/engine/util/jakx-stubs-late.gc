@@ -12,6 +12,7 @@
 (declare-type race-path-group structure)
 (declare-type race-path structure)
 (declare-type pecker-npc process-taskable)
+(declare-type view basic)
 
 ;; title-control lives in TITLE.DGO (title-obs.o), which loads after GAME.CGO.
 ;; spawn-title-control is our wrapper in title-obs.gc; level.gc calls it as a
@@ -233,8 +234,8 @@
   )
 
 ;; vehicle-manager-start: jakx vehicle system init
-(defun vehicle-manager-start ()
-  (none)
+(defun vehicle-manager-start ((arg0 process))
+  0
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -249,10 +250,8 @@
   (none)
   )
 
-;; view-get-active: jakx view system (returns basic, view type defined later)
-(defun view-get-active ()
-  (the-as basic #f)
-  )
+;; view-get-active: NOT stubbed here — view type requires full deftype.
+;; The real defun is in view.gc (compiled at 63%).  No files at 30% call (view-get-active) directly.
 
 ;; find-instance-by-name-level: jak3 debug function
 (defun find-instance-by-name-level ((arg0 string) (arg1 basic))
@@ -351,7 +350,7 @@
               )
             )
           )
-        (let ((s3-1 (-> s4-0 bsp nav-meshes)))
+        (let ((s3-1 (the-as (array entity-nav-mesh) (-> s4-0 bsp nav-meshes))))
           (when (nonzero? s3-1)
             (dotimes (s2-1 (-> s3-1 length))
               (let ((s1-1 (-> s3-1 s2-1)))
@@ -362,7 +361,7 @@
               )
             )
           )
-        (let ((s3-2 (-> s4-0 bsp race-meshes)))
+        (let ((s3-2 (the-as (array entity-race-mesh) (-> s4-0 bsp race-meshes))))
           (when (nonzero? s3-2)
             (dotimes (s2-2 (-> s3-2 length))
               (let ((s1-2 (-> s3-2 s2-2)))
@@ -373,7 +372,7 @@
               )
             )
           )
-        (let ((s4-1 (-> s4-0 bsp cameras)))
+        (let ((s4-1 (the-as (array entity-camera) (-> s4-0 bsp cameras))))
           (when (nonzero? s4-1)
             (dotimes (s3-3 (-> s4-1 length))
               (let ((s2-3 (-> s4-1 s3-3)))

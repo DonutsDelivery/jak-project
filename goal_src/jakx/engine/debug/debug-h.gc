@@ -44,6 +44,9 @@
   )
 
 
+(define-extern *debug-vertex-stats* debug-vertex-stats)
+(define-extern drawable-vertex-ratio (function drawable debug-vertex-stats int))
+
 (define *color-black* (new 'static 'rgba :a #x80))
 
 (define *color-white* (new 'static 'rgba :r #xff :g #xff :b #xff :a #x80))

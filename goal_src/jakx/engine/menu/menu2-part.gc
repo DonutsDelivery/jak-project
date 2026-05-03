@@ -7,27 +7,16 @@
 
 
 
-(let ((v1-0 #f)
-      (a0-0 *part-group-id-table*)
-      )
-  (s.w! (+ a0-0 224) v1-0)
-  )
+;; SCAFFOLDING: s.w! on typed array rewritten as typed access (offsets 224/228/232 = indices 52/53/54)
+(set! (-> *part-group-id-table* 52) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 333) #f)
 
-(let ((v1-2 #f)
-      (a0-2 *part-group-id-table*)
-      )
-  (s.w! (+ a0-2 228) v1-2)
-  )
+(set! (-> *part-group-id-table* 53) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 334) #f)
 
-(let ((v1-4 #f)
-      (a0-4 *part-group-id-table*)
-      )
-  (s.w! (+ a0-4 232) v1-4)
-  )
+(set! (-> *part-group-id-table* 54) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 336) #f)
 
@@ -106,60 +95,7 @@
 
 (define *part-jakx-explosion-texture-curve-settings* #f)
 
+;; SCAFFOLDING: settings struct s.w! calls skipped — *part-jakx-explosion-texture-curve-settings* is #f
 (set! (-> *part-id-table* 340 init-specs 16 initial-valuef)
       (the-as float *part-jakx-explosion-texture-curve-settings*)
       )
-
-(let ((v1-35 *range-jakxexplo-color*)
-      (a0-15 *part-jakx-explosion-texture-curve-settings*)
-      )
-  (s.w! a0-15 v1-35)
-  )
-
-(let ((v1-36 *range-jakxexplo-alpha*)
-      (a0-16 *part-jakx-explosion-texture-curve-settings*)
-      )
-  (s.w! (+ a0-16 4) v1-36)
-  )
-
-(let ((v1-37 *range-jakxexplo-scale-x*)
-      (a0-17 *part-jakx-explosion-texture-curve-settings*)
-      )
-  (s.w! (+ a0-17 8) v1-37)
-  )
-
-(let ((v1-38 *range-jakxexplo-scale-y*)
-      (a0-18 *part-jakx-explosion-texture-curve-settings*)
-      )
-  (s.w! (+ a0-18 12) v1-38)
-  )
-
-(let ((v1-39 *part-jakx-explosion-texture-curve-settings*))
-  (s.w! (+ v1-39 16) #f)
-  )
-
-(let ((v1-40 *part-jakx-explosion-texture-curve-settings*))
-  (s.w! (+ v1-40 20) #f)
-  )
-
-(let ((v1-41 *part-jakx-explosion-texture-curve-settings*))
-  (s.w! (+ v1-41 24) #f)
-  )
-
-(let ((v1-42 *curve-jakxexplo-alpha*)
-      (a0-19 *part-jakx-explosion-texture-curve-settings*)
-      )
-  (s.w! (+ a0-19 28) v1-42)
-  )
-
-(let ((v1-43 *curve-jakxexplo-scale-x*)
-      (a0-20 *part-jakx-explosion-texture-curve-settings*)
-      )
-  (s.w! (+ a0-20 32) v1-43)
-  )
-
-(let ((v0-0 *curve-jakxexplo-scale-y*)
-      (v1-44 *part-jakx-explosion-texture-curve-settings*)
-      )
-  (s.w! (+ v1-44 36) v0-0)
-  )

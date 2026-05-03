@@ -24,7 +24,6 @@
     (-> v1-0 id)
     )
   0
-  (none)
   )
 
 (kmemopen global "sound-loop-engine")
@@ -710,8 +709,8 @@
       (set! (-> s5-0 params volume) (-> spec volume))
       (set! (-> s5-0 params pitch-mod) (-> spec pitch-mod))
       (set! (-> s5-0 params bend) (-> spec bend))
-      (set! (-> s5-0 params fo-min) (-> spec fo-min))
-      (set! (-> s5-0 params fo-max) (-> spec fo-max))
+      (set! (-> s5-0 params fo-min) (the int (-> spec fo-min)))
+      (set! (-> s5-0 params fo-max) (the int (-> spec fo-max)))
       (set! (-> s5-0 params fo-curve) (-> spec fo-curve))
       (set! (-> s5-0 params priority) (-> spec priority))
       (let ((s3-1 self))
@@ -964,7 +963,7 @@
              (set! (-> s5-1 pitch-mod) (-> this pitch))
              (set! (-> s5-1 bend) 0)
              (set! (-> s5-1 sound-name) (-> this name))
-             (set! (-> s5-1 fo-max) (-> this falloff-far))
+             (set! (-> s5-1 fo-max) (the float (-> this falloff-far)))
              (set! (-> s5-1 fo-curve) (-> this falloff-mode))
              (set! (-> s5-1 mask) (sound-mask))
              (if (-> this params)

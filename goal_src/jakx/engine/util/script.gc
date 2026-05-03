@@ -3601,7 +3601,7 @@
               (cond
                 ((nonzero? s5-0)
                  (let ((s4-0 (new 'static 'fact-info)))
-                   (set! (-> s4-0 options) (actor-option))
+                   (set! (-> s4-0 options) (the-as uint32 (actor-option)))
                    (let* ((v1-2 (-> arg0 param 4))
                           (a0-3 (-> (the-as pair v1-2) car))
                           )

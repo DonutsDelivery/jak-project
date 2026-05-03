@@ -92,21 +92,21 @@
    (hidden?            basic)
    )
   (:methods
-    (base-menu-method-50 () none)
-    (base-menu-method-51 () none)
-    (base-menu-method-52 () none)
-    (base-menu-method-53 () none)
-    (base-menu-method-54 () none)
-    (base-menu-method-55 () none)
-    (base-menu-method-56 () none)
-    (base-menu-method-57 () none)
-    (base-menu-method-58 () none)
-    (base-menu-method-59 () none)
-    (base-menu-method-60 () none)
-    (base-menu-method-61 () none)
-    (base-menu-method-62 () none)
-    (base-menu-method-63 () none)
-    (base-menu-method-64 () none)
+    (base-menu-method-50 (_type_) none)
+    (base-menu-method-51 (_type_) none)
+    (base-menu-method-52 (_type_) none)
+    (base-menu-method-53 (_type_) none)
+    (base-menu-method-54 (_type_) none)
+    (base-menu-method-55 (_type_) none)
+    (base-menu-method-56 (_type_) none)
+    (base-menu-method-57 (_type_) none)
+    (base-menu-method-58 (_type_) none)
+    (base-menu-method-59 (_type_) none)
+    (base-menu-method-60 (_type_) none)
+    (base-menu-method-61 (_type_) none)
+    (base-menu-method-62 (_type_) none)
+    (base-menu-method-63 (_type_) none)
+    (base-menu-method-64 (_type_) none)
     )
   )
 
@@ -121,7 +121,7 @@
 (deftype map-menu (base-menu)
   ()
   (:methods
-    (map-menu-method-65 () none)
+    (map-menu-method-65 (_type_) none)
     )
   )
 
@@ -132,8 +132,8 @@
    (enabled               basic)
    )
   (:methods
-    (selection-menu-manager-method-65 () none)
-    (selection-menu-manager-method-66 () none)
+    (selection-menu-manager-method-65 (_type_) none)
+    (selection-menu-manager-method-66 (_type_) none)
     )
   )
 
@@ -183,21 +183,14 @@
 
 
 ;; type hud-sprite-array is defined here, but it is unknown to the decompiler
-
-(method-set! (the-as type hud-sprite-array) 3 L103)
-
-(let ((v1-14 64)
-      (a0-28 hud-sprite-array)
-      )
-  (s.h! (+ a0-28 12) v1-14)
-  )
+;; SCAFFOLDING: method-set!/s.h! on unknown type hud-sprite-array removed
 
 (deftype sprite-menu (base-menu)
   ((sprites  basic)
    (alpha    float)
    )
   (:methods
-    (sprite-menu-method-65 () none)
+    (sprite-menu-method-65 (_type_) none)
     )
   )
 
@@ -206,7 +199,7 @@
   ((strip  basic)
    )
   (:methods
-    (menu-prim-strip-client-method-10 () none)
+    (menu-prim-strip-client-method-10 (_type_) none)
     )
   )
 
@@ -216,7 +209,7 @@
    (colors          basic)
    )
   (:methods
-    (prim-strip-menu-method-66 () none)
+    (prim-strip-menu-method-66 (_type_) none)
     )
   )
 
@@ -281,14 +274,7 @@
 
 
 ;; type menu-string-array is defined here, but it is unknown to the decompiler
-
-(method-set! (the-as type menu-string-array) 3 L73)
-
-(let ((v1-25 80)
-      (a0-49 menu-string-array)
-      )
-  (s.h! (+ a0-49 12) v1-25)
-  )
+;; SCAFFOLDING: method-set!/s.h! on unknown type menu-string-array removed
 
 (deftype string-menu-info (sprite-menu-info)
   ((strings-info  basic)
@@ -302,8 +288,8 @@
    (text-ids  basic)
    )
   (:methods
-    (string-menu-method-67 () none)
-    (string-menu-method-68 () none)
+    (string-menu-method-67 (_type_) none)
+    (string-menu-method-68 (_type_) none)
     )
   )
 
@@ -371,7 +357,7 @@
    (selected-offset     vector  :inline)
    )
   (:methods
-    (dropdown-item-method-69 () none)
+    (dropdown-item-method-69 (_type_) none)
     )
   )
 
@@ -470,6 +456,6 @@
    (temp-string  basic)
    )
   (:methods
-    (big-text-menu-method-66 () none)
+    (big-text-menu-method-66 (_type_) none)
     )
   )

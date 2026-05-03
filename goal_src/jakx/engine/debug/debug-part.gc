@@ -14,21 +14,13 @@
 
 (set! (-> *part-id-table* 46) #f)
 
-(let ((v1-2 #f)
-      (a0-1 *part-group-id-table*)
-      )
-  (s.w! (+ a0-1 36) v1-2)
-  )
+(set! (-> *part-group-id-table* 7) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 47) #f)
 
 (set! (-> *part-id-table* 48) #f)
 
-(let ((v1-5 #f)
-      (a0-4 *part-group-id-table*)
-      )
-  (s.w! (+ a0-4 40) v1-5)
-  )
+(set! (-> *part-group-id-table* 8) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 50) #f)
 
@@ -38,11 +30,7 @@
 
 (set! (-> *part-id-table* 52) #f)
 
-(let ((v1-10 #f)
-      (a0-9 *part-group-id-table*)
-      )
-  (s.w! (+ a0-9 44) v1-10)
-  )
+(set! (-> *part-group-id-table* 9) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 59) #f)
 
@@ -62,11 +50,7 @@
 
 (set! (-> *part-id-table* 58) #f)
 
-(let ((v1-20 #f)
-      (a0-19 *part-group-id-table*)
-      )
-  (s.w! (+ a0-19 48) v1-20)
-  )
+(set! (-> *part-group-id-table* 10) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 67) #f)
 
@@ -78,17 +62,9 @@
 
 (set! (-> *part-id-table* 66) #f)
 
-(let ((v1-26 #f)
-      (a0-25 *part-group-id-table*)
-      )
-  (s.w! (+ a0-25 52) v1-26)
-  )
+(set! (-> *part-group-id-table* 11) (the-as sparticle-launch-group #f))
 
-(let ((v1-27 #f)
-      (a0-26 *part-group-id-table*)
-      )
-  (s.w! (+ a0-26 56) v1-27)
-  )
+(set! (-> *part-group-id-table* 12) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 73) #f)
 
@@ -108,11 +84,7 @@
 
 (set! (-> *part-id-table* 62) #f)
 
-(let ((v1-37 #f)
-      (a0-36 *part-group-id-table*)
-      )
-  (s.w! (+ a0-36 60) v1-37)
-  )
+(set! (-> *part-group-id-table* 13) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 81) #f)
 
@@ -130,11 +102,7 @@
 
 (set! (-> *part-id-table* 84) #f)
 
-(let ((v1-46 #f)
-      (a0-45 *part-group-id-table*)
-      )
-  (s.w! (+ a0-45 64) v1-46)
-  )
+(set! (-> *part-group-id-table* 14) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 87) #f)
 
@@ -142,17 +110,9 @@
 
 (set! (-> *part-id-table* 86) #f)
 
-(let ((v1-50 #f)
-      (a0-49 *part-group-id-table*)
-      )
-  (s.w! (+ a0-49 68) v1-50)
-  )
+(set! (-> *part-group-id-table* 15) (the-as sparticle-launch-group #f))
 
-(let ((v1-51 #f)
-      (a0-50 *part-group-id-table*)
-      )
-  (s.w! (+ a0-50 72) v1-51)
-  )
+(set! (-> *part-group-id-table* 16) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 94) #f)
 
@@ -168,17 +128,9 @@
 
 (set! (-> *part-id-table* 88) #f)
 
-(let ((v1-59 #f)
-      (a0-58 *part-group-id-table*)
-      )
-  (s.w! (+ a0-58 76) v1-59)
-  )
+(set! (-> *part-group-id-table* 17) (the-as sparticle-launch-group #f))
 
-(let ((v1-60 #f)
-      (a0-59 *part-group-id-table*)
-      )
-  (s.w! (+ a0-59 80) v1-60)
-  )
+(set! (-> *part-group-id-table* 18) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 100) #f)
 
@@ -194,11 +146,7 @@
 
 (set! (-> *part-id-table* 101) #f)
 
-(let ((v1-68 #f)
-      (a0-67 *part-group-id-table*)
-      )
-  (s.w! (+ a0-67 84) v1-68)
-  )
+(set! (-> *part-group-id-table* 19) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 106) #f)
 
@@ -216,11 +164,7 @@
 
 (set! (-> *part-id-table* 109) #f)
 
-(let ((v1-77 #f)
-      (a0-76 *part-group-id-table*)
-      )
-  (s.w! (+ a0-76 88) v1-77)
-  )
+(set! (-> *part-group-id-table* 20) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 112) #f)
 
@@ -228,11 +172,7 @@
 
 (set! (-> *part-id-table* 111) #f)
 
-(let ((v1-81 #f)
-      (a0-80 *part-group-id-table*)
-      )
-  (s.w! (+ a0-80 92) v1-81)
-  )
+(set! (-> *part-group-id-table* 21) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 113) #f)
 
@@ -246,45 +186,10 @@
 
 ;; ERROR: failed type prop at 1: Could not figure out load: (set! v1 (l.wu v1))
 (defun sparticle-track-root-money ((a0-0 sparticle-system) (a1-0 sparticle-cpuinfo) (a2-0 vector))
-  (local-vars
-    (v0-0 none)
-    (v1-0 basic)
-    (v1-1 none)
-    (v1-2 none)
-    (v1-3 none)
-    (v1-4 none)
-    (a0-1 none)
-    (a0-3 none)
-    (a1-1 none)
-    (f0-0 none)
-    (f0-1 none)
-    (f0-2 none)
-    (f0-3 none)
-    (f1-0 none)
-    )
-  (when (begin
-          (set! v1-0 (-> a1-0 control))
-          (set! v1-1 (the-as none (l.wu v1-0)))
-          (set! v1-2 (the-as none (l.wu (+ v1-1 16))))
-          (set! a0-1 (the-as none hud-money))
-          (set! a1-1 (the-as none (l.wu (+ v1-2 -4))))
-          (!= a1-1 a0-1)
-          )
-    (set! v1-3 (the-as none (l.wu (+ v1-2 184))))
-    (set! v1-4 (the-as none (+ v1-3 12)))
-    (set! f0-0 (the-as none (l.f v1-4)))
-    (s.f! a2-0 f0-0)
-    (set! a0-3 (the-as none #x45000000))
-    (set! f0-1 (the-as none (gpr->fpr a0-3)))
-    (set! f1-0 (the-as none (l.f (+ v1-4 4))))
-    (set! f0-2 (the-as none (+.s f0-1 f1-0)))
-    (s.f! (+ a2-0 4) f0-2)
-    (set! f0-3 (the-as none (l.f (+ v1-4 8))))
-    (s.f! (+ a2-0 8) f0-3)
-    (set! v1-5 (the-as none (fpr->gpr f0-3)))
-    )
-  (set! v0-0 (the-as none 0))
-  (ret-none)
+  ;; SCAFFOLDING
+  (format 0 "call to sparticle-track-root-money~%")
+  (break!)
+  (none)
   )
 
 (set! (-> *part-id-table* 118) #f)
@@ -297,23 +202,11 @@
 
 (set! (-> *part-id-table* 122) #f)
 
-(let ((v1-93 #f)
-      (a0-91 *part-group-id-table*)
-      )
-  (s.w! (+ a0-91 96) v1-93)
-  )
+(set! (-> *part-group-id-table* 22) (the-as sparticle-launch-group #f))
 
-(let ((v1-94 #f)
-      (a0-92 *part-group-id-table*)
-      )
-  (s.w! (+ a0-92 100) v1-94)
-  )
+(set! (-> *part-group-id-table* 23) (the-as sparticle-launch-group #f))
 
-(let ((v1-95 #f)
-      (a0-93 *part-group-id-table*)
-      )
-  (s.w! (+ a0-93 104) v1-95)
-  )
+(set! (-> *part-group-id-table* 24) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 125) #f)
 
@@ -321,11 +214,7 @@
 
 (set! (-> *part-id-table* 127) #f)
 
-(let ((v1-99 #f)
-      (a0-97 *part-group-id-table*)
-      )
-  (s.w! (+ a0-97 108) v1-99)
-  )
+(set! (-> *part-group-id-table* 25) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 130) #f)
 
@@ -335,11 +224,7 @@
 
 (set! (-> *part-id-table* 129) #f)
 
-(let ((v1-104 #f)
-      (a0-102 *part-group-id-table*)
-      )
-  (s.w! (+ a0-102 112) v1-104)
-  )
+(set! (-> *part-group-id-table* 26) (the-as sparticle-launch-group #f))
 
 (set! (-> *part-id-table* 133) #f)
 
