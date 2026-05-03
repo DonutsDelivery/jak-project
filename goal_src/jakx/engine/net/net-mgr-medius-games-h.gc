@@ -27,7 +27,7 @@
                              )
   )
 
-((method-of-object *medius-game-status-cache* medius-cache-method-12))
+(medius-cache-method-12 *medius-game-status-cache*)
 
 ;; type medius-game-array is defined here, but it is unknown to the decompiler
 

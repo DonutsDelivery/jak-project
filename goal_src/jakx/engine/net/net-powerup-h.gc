@@ -3,27 +3,9 @@
 
 ;; ERROR: top level function was not converted to expressions. Cannot decompile.
 
+(define *powerup-static-hash* (the-as spatial-hash #f))
 
-
-
-
-(let ((t9-0 (method-of-type spatial-hash new))
-      (a0-0 'global)
-      (a1-0 spatial-hash)
-      )
-  8192
-  512
-  (set! *powerup-static-hash* (t9-0 a0-0 a1-0))
-  )
-
-(let ((t9-1 (method-of-type spatial-hash new))
-      (a0-1 'global)
-      (a1-1 spatial-hash)
-      )
-  4096
-  64
-  (set! *powerup-dynamic-hash* (t9-1 a0-1 a1-1))
-  )
+(define *powerup-dynamic-hash* (the-as spatial-hash #f))
 
 (deftype net-powerup-motion-info (basic)
   ((motion-hook      basic)
@@ -32,10 +14,10 @@
    (rest-pos         vector  :inline)
    )
   (:methods
-    (net-powerup-motion-info-method-9 () none)
-    (net-powerup-motion-info-method-10 () none)
-    (net-powerup-motion-info-method-11 () none)
-    (net-powerup-motion-info-method-12 () symbol)
+    (net-powerup-motion-info-method-9 (_type_) none)
+    (net-powerup-motion-info-method-10 (_type_) none)
+    (net-powerup-motion-info-method-11 (_type_) none)
+    (net-powerup-motion-info-method-12 (_type_) symbol)
     )
   )
 
@@ -61,20 +43,20 @@
    (motion-info          basic)
    )
   (:methods
-    (net-powerup-method-42 () none)
-    (net-powerup-method-43 () none)
-    (net-powerup-method-44 () none)
-    (net-powerup-method-45 () none)
-    (net-powerup-method-46 () none)
-    (net-powerup-method-47 () none)
-    (net-powerup-method-48 () none)
-    (net-powerup-method-49 () none)
-    (net-powerup-method-50 () none)
-    (net-powerup-method-51 () none)
-    (net-powerup-method-52 () none)
-    (net-powerup-method-53 () symbol)
-    (net-powerup-method-54 () none)
-    (net-powerup-method-55 () none)
+    (net-powerup-method-42 (_type_) none)
+    (net-powerup-method-43 (_type_) none)
+    (net-powerup-method-44 (_type_) none)
+    (net-powerup-method-45 (_type_) none)
+    (net-powerup-method-46 (_type_) none)
+    (net-powerup-method-47 (_type_) none)
+    (net-powerup-method-48 (_type_) none)
+    (net-powerup-method-49 (_type_) none)
+    (net-powerup-method-50 (_type_) none)
+    (net-powerup-method-51 (_type_) none)
+    (net-powerup-method-52 (_type_) none)
+    (net-powerup-method-53 (_type_) symbol)
+    (net-powerup-method-54 (_type_) none)
+    (net-powerup-method-55 (_type_) none)
     )
   )
 
@@ -83,124 +65,32 @@
 
 ;; ERROR: failed type prop at 21: Call to run-function-in-process or set-to-run at op 21 with an invalid function type: function
 ;; ERROR: Function may read a register that is not set: a1
-(defmethod process-nettable-method-41 ((this net-powerup))
-  (local-vars
-    (v0-0 process)
-    (v0-1 process-tree)
-    (v0-2 none)
-    (v0-4 none)
-    (v1-0 type)
-    (v1-1 symbol)
-    (v1-2 type)
-    (v1-3 none)
-    (a0-0 dead-pool)
-    (a0-1 process)
-    (a1-0 none)
-    (a1-1 type)
-    (a1-2 process-tree)
-    (a1-3 function)
-    (a2-0 int)
-    (a2-1 string)
-    (a3-0 int)
-    (a3-1 int)
-    (s5-0 process)
-    (t9-0 (function dead-pool type int object process))
-    (t9-1 (function net-powerup process-tree string pointer process-tree))
-    (t9-2 function)
-    )
-  (when (begin
-          (when (begin
-                  (set! a0-0 *default-dead-pool*)
-                  (set! v1-0 (-> a0-0 type))
-                  (set! t9-0 (method-of-type v1-0 get-process))
-                  (set! a1-1 net-powerup)
-                  (set! a2-0 #x4000)
-                  (set! a3-0 1)
-                  (set! v0-0 (call! a0-0 a1-1 a2-0 a3-0))
-                  (set! s5-0 v0-0)
-                  s5-0
-                  )
-            (set! v1-2 net-powerup)
-            (set! t9-1 (method-of-type v1-2 activate))
-            (set! a0-1 s5-0)
-            (set! a1-2 *default-pool*)
-            (set! a2-1 L16)
-            (set! a3-1 #x70004000)
-            (call! a0-1 a1-2 a2-1 a3-1)
-            (set! t9-2 run-function-in-process)
-            (set! a0-2 s5-0)
-            (set! a1-3 net-powerup-init-remote)
-            (set! a2-2 a1-0)
-            (call!)
-            (set! v1-1 (the-as symbol (-> s5-0 ppointer)))
-            )
-          v1-1
-          )
-    (set! v1-3 (the-as none (l.wu v1-1)))
-    (set! v0-4 (the-as none (l.wu (+ v1-3 32))))
-    )
-  (ret-none)
+(defmethod process-nettable-method-41 ((this net-powerup) (arg0 object))
+  ;; SCAFFOLDING
+  (format 0 "call to process-nettable-method-41~%")
+  (break!)
+  (the-as process #f)
   )
 
 ;; ERROR: failed type prop at 1: Could not figure out load: (set! a0 (l.w (+ a1 4)))
 ;; ERROR: Function may read a register that is not set: a1
-(defmethod process-nettable-method-37 ((this net-powerup))
-  (local-vars
-    (v0-0 none)
-    (v1-0 symbol)
-    (v1-1 none)
-    (v1-2 none)
-    (a0-0 none)
-    (a0-1 none)
-    (a0-2 none)
-    (a1-0 none)
-    (a2-0 none)
-    )
-  (set! v1-0 'picked-up)
-  (set! a0-0 (the-as none (l.w (+ a1-0 4))))
-  (set! a0-1 (the-as none (sll a0-0 2)))
-  (set! a2-0 (the-as none (l.wu a1-0)))
-  (set! a0-2 (the-as none (+ a0-1 a2-0)))
-  (s.w! (+ a0-2 12) v1-0)
-  (set! v1-1 (the-as none (l.w (+ a1-0 4))))
-  (set! v1-2 (the-as none (+ v1-1 1)))
-  (s.w! (+ a1-0 4) v1-2)
-  (set! v0-0 (the-as none 0))
-  (ret-none)
+(defmethod process-nettable-method-37 ((this net-powerup) (arg0 net-process-class-info))
+  ;; SCAFFOLDING
+  (format 0 "call to process-nettable-method-37~%")
+  (break!)
+  0
   )
 
 (define *msg-map-net-powerup*
   (the-as array (new 'static 'boxed-array :type symbol :length 0 :allocated-length 64))
   )
 
-(define *net-process-class-info-net-powerup* #f)
+(define *net-process-class-info-net-powerup* (the-as net-process-class-info #f))
 
-(let ((v1-8 *msg-map-net-powerup*)
-      (a0-10 *net-process-class-info-net-powerup*)
-      )
-  (s.w! a0-10 v1-8)
-  )
+;; SCAFFOLDING: broken s.w!/register-call blocks on uninitialized class-info removed
 
-(write-msg-map-rec
-  (the-as process-drawable net-powerup)
-  (the-as net-process-class-info *net-process-class-info-net-powerup*)
-  )
-
-(let ((v1-9 net-powerup)
-      (a0-12 *net-process-class-info-net-powerup*)
-      )
-  (s.w! (+ a0-12 24) v1-9)
-  )
-
-(let ((t9-11 net-process-class-register))
-  *net-process-class-info-net-powerup*
-  (t9-11)
-  )
-
-;; WARN: Return type mismatch object vs none.
 (defmethod process-nettable-method-40 ((this net-powerup))
   *net-process-class-info-net-powerup*
-  (none)
   )
 
 (deftype powerup-draw (process-drawable)
@@ -209,13 +99,13 @@
    (part-time    int32)
    )
   (:methods
-    (powerup-draw-method-50 () none)
-    (powerup-draw-method-51 () none)
-    (powerup-draw-method-52 () none)
-    (powerup-draw-method-53 () symbol)
-    (powerup-draw-method-54 () none)
-    (powerup-draw-method-55 () none)
-    (powerup-draw-method-56 () none)
+    (powerup-draw-method-50 (_type_) none)
+    (powerup-draw-method-51 (_type_) none)
+    (powerup-draw-method-52 (_type_) none)
+    (powerup-draw-method-53 (_type_) symbol)
+    (powerup-draw-method-54 (_type_) none)
+    (powerup-draw-method-55 (_type_) none)
+    (powerup-draw-method-56 (_type_) none)
     )
   )
 

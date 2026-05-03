@@ -1,0 +1,56 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; name: process-nettable-type-h.gc
+;; name in dgo: process-nettable-type-h
+;; dgos: GAME
+
+;; Forward type definition required before game-h.gc (process-drawable inherits from process-nettable).
+;; The full implementation lives in process-nettable-h.gc.
+
+(deftype net-process-id (uint16)
+  ()
+  )
+
+(deftype process-nettable (process)
+  ((owner-idx             int8)
+   (net-flags             uint64)
+   (desired-owner-idx     int8)
+   (net-id                uint16)
+   (jump-in-send-pending  uint16)
+   (prox                  basic)
+   (owner-link            list-link  :inline)
+   (active-link           list-link  :inline)
+   )
+  (:methods
+    (new (symbol type string) _type_)
+    (process-nettable-method-14 (_type_) none)
+    (process-nettable-method-15 (_type_) int)
+    (process-nettable-method-16 (_type_) int)
+    (process-nettable-method-17 (_type_) int)
+    (process-nettable-method-18 (_type_) none)
+    (process-nettable-method-19 (_type_) none)
+    (process-nettable-method-20 (_type_) none)
+    (process-nettable-method-21 (_type_) none)
+    (process-nettable-method-22 (_type_) none)
+    (process-nettable-method-23 (_type_) none)
+    (process-nettable-method-24 (_type_) none)
+    (process-nettable-method-25 (_type_) none)
+    (process-nettable-method-26 (_type_) none)
+    (process-nettable-method-27 (_type_) none)
+    (process-nettable-method-28 (_type_) none)
+    (process-nettable-method-29 (_type_) none)
+    (process-nettable-method-30 (_type_) none)
+    (process-nettable-method-31 (_type_) none)
+    (process-nettable-method-32 (_type_) none)
+    (process-nettable-method-33 (_type_) none)
+    (process-nettable-method-34 (_type_) none)
+    (process-nettable-method-35 (_type_) int)
+    (process-nettable-method-36 (_type_) int)
+    (process-nettable-method-37 (_type_) none)
+    (process-nettable-method-38 (_type_) none)
+    (process-nettable-method-39 (_type_) none)
+    (process-nettable-method-40 (_type_) none)
+    (process-nettable-method-41 (_type_) none)
+    )
+  )

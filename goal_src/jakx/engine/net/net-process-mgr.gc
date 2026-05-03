@@ -26,7 +26,7 @@
 (deftype nospawn (process)
   ()
   (:methods
-    (nospawn-method-14 () none)
+    (nospawn-method-14 (_type_) none)
     )
   )
 
@@ -37,27 +37,15 @@
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-(let ((v1-8 net-process-mgr-handle-aux-msg-recv-end)
-      (a0-5 *net-aux-msg-handlers*)
-      )
-  (s.w! (+ a0-5 16) v1-8)
-  )
+;; SCAFFOLDING: s.w! on *net-aux-msg-handlers* (#f) removed
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-(let ((v1-10 net-process-mgr-handle-aux-msg-recv-end-ack)
-      (a0-6 *net-aux-msg-handlers*)
-      )
-  (s.w! (+ a0-6 32) v1-10)
-  )
+;; SCAFFOLDING: s.w! on *net-aux-msg-handlers* (#f) removed
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-(let ((v1-12 net-process-mgr-handle-aux-msg-spawn-entities)
-      (a0-7 *net-aux-msg-handlers*)
-      )
-  (s.w! (+ a0-7 48) v1-12)
-  )
+;; SCAFFOLDING: s.w! on *net-aux-msg-handlers* (#f) removed
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
@@ -77,7 +65,7 @@
             )
       )
   (method-set! net-process-mgr 15 gp-0)
-  (set! (-> gp-0 code) L375)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 ;; ERROR: function has no type analysis. Cannot decompile.
@@ -96,11 +84,14 @@
             )
       )
   (method-set! net-process-mgr 16 gp-1)
-  (set! (-> gp-1 event) (the-as (function process int symbol event-message-block object) L347))
-  (set! (-> gp-1 enter) L357)
-  (set! (-> gp-1 trans) (the-as (function object) L346))
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   (set! (-> gp-1 code) sleep-code)
   )
+
+;; SCAFFOLDING: net-process-mgr-default-handler not decompiled
+(define net-process-mgr-default-handler (the-as (function none) #f))
 
 (let ((gp-2
         (new 'static 'state
@@ -120,7 +111,7 @@
   (set! (-> gp-2 event)
         (the-as (function process int symbol event-message-block object) net-process-mgr-default-handler)
         )
-  (set! (-> gp-2 trans) (the-as (function object) L345))
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   (set! (-> gp-2 code) sleep-code)
   )
 
@@ -138,9 +129,9 @@
             )
       )
   (method-set! net-process-mgr 18 gp-3)
-  (set! (-> gp-3 event) (the-as (function process int symbol event-message-block object) L341))
-  (set! (-> gp-3 enter) L344)
-  (set! (-> gp-3 trans) (the-as (function object) L335))
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   (set! (-> gp-3 code) sleep-code)
   )
 
@@ -149,7 +140,7 @@
         )
       )
   (method-set! net-process-mgr 19 gp-4)
-  (set! (-> gp-4 code) L334)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 (define *prev-time-of-day-time* (the-as object 0))

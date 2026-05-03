@@ -20,10 +20,6 @@
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-(let ((v1-4 colarb-request-msg-callback)
-      (a0-2 *net-aux-msg-handlers*)
-      )
-  (s.w! (+ a0-2 144) v1-4)
-  )
+;; SCAFFOLDING: s.w! on *net-aux-msg-handlers* (#f) removed — colarb-request-msg-callback undefined
 
 ;; ERROR: function has no type analysis. Cannot decompile.

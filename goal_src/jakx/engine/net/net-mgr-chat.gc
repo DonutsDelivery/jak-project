@@ -36,12 +36,10 @@
 (define *chat-msg-player* (the-as object (new 'global 'string 600 (the-as string #f))))
 
 ;; type lobby-chat-string is defined here, but it is unknown to the decompiler
-
-(method-set! (the-as type lobby-chat-string) 3 L157)
+;; SCAFFOLDING: method-set! on unknown type lobby-chat-string removed
 
 ;; type lobby-chat-window is defined here, but it is unknown to the decompiler
-
-(method-set! (the-as type lobby-chat-window) 3 L154)
+;; SCAFFOLDING: method-set! on unknown type lobby-chat-window removed
 
 (define *lobby-chat-window* #f)
 
@@ -84,10 +82,4 @@
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-(method-set! (the-as type lobby-chat-window) 10 L9)
-
-(method-set! (the-as type lobby-chat-window) 12 L6)
-
-(method-set! (the-as type lobby-chat-window) 9 L5)
-
-(method-set! (the-as type lobby-chat-window) 11 L1)
+;; SCAFFOLDING: method-set!/s.h! on unknown type lobby-chat-window removed (L9/L6/L5/L1 unresolvable)

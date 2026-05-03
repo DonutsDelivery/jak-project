@@ -15,10 +15,10 @@
    (data          uint32)
    )
   (:methods
-    (headset-queue-method-9 () int)
-    (headset-queue-method-10 () none)
-    (headset-queue-method-11 () none)
-    (headset-queue-method-12 () int)
+    (headset-queue-method-9 (_type_) int)
+    (headset-queue-method-10 (_type_) none)
+    (headset-queue-method-11 (_type_) none)
+    (headset-queue-method-12 (_type_) int)
     )
   )
 
@@ -64,8 +64,44 @@
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-;; type headset is defined here, but it is unknown to the decompiler
-
-;; ERROR: function has no type analysis. Cannot decompile.
+;; SCAFFOLDING: headset deftype (all-types.gc line 43534, process child, 33 methods)
+(deftype headset (process)
+  ((flags                   uint32              :offset 128)
+   (decoders                uint8   320         :offset 132)
+   (client-to-decoder       uint8   16          :offset 452)
+   (encoder-io              uint8   21          :offset 468)
+   (last-speech-time        int32               :offset 492)
+   (prev-operation          basic               :offset 496)
+   (bytes-in-playback-queue int32               :offset 500)
+   (first-send              basic               :offset 504)
+   (frame-ct                int32               :offset 508)
+   (client-talking          uint8   16          :offset 512)
+   )
+  (:methods
+    (headset-method-14 (_type_) none) ;; 14
+    )
+  (:state-methods
+    active   ;; 15
+    die      ;; 16
+    )
+  (:methods
+    (headset-method-17 (_type_) none) ;; 17
+    (headset-method-18 (_type_) int) ;; 18
+    (headset-method-19 (_type_) none) ;; 19
+    (headset-method-20 (_type_) none) ;; 20
+    (headset-method-21 (_type_) none) ;; 21
+    (headset-method-22 (_type_) none) ;; 22
+    (headset-method-23 (_type_) none) ;; 23
+    (headset-method-24 (_type_) none) ;; 24
+    (headset-method-25 (_type_ int) none) ;; 25
+    (headset-method-26 (_type_) none) ;; 26
+    (headset-method-27 (_type_ int uint int) int) ;; 27
+    (headset-method-28 (_type_) none) ;; 28
+    (headset-method-29 (_type_ pointer) symbol) ;; 29
+    (headset-method-30 (_type_) none) ;; 30
+    (headset-method-31 (_type_ uint uint int) int) ;; 31
+    (headset-method-32 (_type_) int) ;; 32
+    )
+  )
 
 (define *headset* (the-as object #f))

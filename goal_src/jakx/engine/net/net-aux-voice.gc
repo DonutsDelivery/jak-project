@@ -14,14 +14,14 @@
    (connect-handle  basic)
    )
   (:methods
-    (aux-voice-mgr-method-9 () none)
-    (aux-voice-mgr-method-10 () none)
-    (aux-voice-mgr-method-11 () none)
-    (aux-voice-mgr-method-12 () none)
-    (aux-voice-mgr-method-13 () none)
-    (aux-voice-mgr-method-14 () none)
-    (aux-voice-mgr-method-20 () none)
-    (aux-voice-mgr-method-21 () none)
+    (aux-voice-mgr-method-9 (_type_) none)
+    (aux-voice-mgr-method-10 (_type_) none)
+    (aux-voice-mgr-method-11 (_type_) none)
+    (aux-voice-mgr-method-12 (_type_) none)
+    (aux-voice-mgr-method-13 (_type_) none)
+    (aux-voice-mgr-method-14 (_type_) none)
+    (aux-voice-mgr-method-20 (_type_) none)
+    (aux-voice-mgr-method-21 (_type_) none)
     (die () _type_ :state)
     (startup () _type_ :state)
     (creating () _type_ :state)
@@ -78,13 +78,12 @@
 
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 
+;; SCAFFOLDING: aux-voice-mgr-default-handler couldn't be decompiled; stub so state event refs compile
+(define aux-voice-mgr-default-handler (the-as (function none) #f))
+
 ;; ERROR: function has no type analysis. Cannot decompile.
 
-(let ((v1-14 aux-voice-acct-id-callback)
-      (a0-5 *net-aux-msg-handlers*)
-      )
-  (s.w! (+ a0-5 192) v1-14)
-  )
+;; SCAFFOLDING: s.w! on *net-aux-msg-handlers* (#f) removed — aux-voice-acct-id-callback undefined
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
@@ -95,16 +94,14 @@
         )
       )
   (method-set! aux-voice-mgr 19 gp-0)
-  (set! (-> gp-0 code) L71)
+  ;; SCAFFOLDING: L71 is unresolvable MIPS label
   )
 
 ;; ERROR: Function may read a register that is not set: a0
 (defmethod aux-voice-mgr-method-20 ((this aux-voice-mgr))
-  (local-vars (this none))
-  (s.w! (+ this 140) 0)
-  (s.w! (+ this 152) 0)
-  (set! *aux-voice-mgr* this)
-  0
+  ;; SCAFFOLDING
+  (format 0 "call to aux-voice-mgr-method-20~%")
+  (break!)
   (none)
   )
 
@@ -132,7 +129,7 @@
   (set! (-> gp-1 event)
         (the-as (function process int symbol event-message-block object) aux-voice-mgr-default-handler)
         )
-  (set! (-> gp-1 code) L46)
+  ;; SCAFFOLDING: L46 is unresolvable MIPS label
   )
 
 (let ((gp-2
@@ -153,7 +150,7 @@
   (set! (-> gp-2 event)
         (the-as (function process int symbol event-message-block object) aux-voice-mgr-default-handler)
         )
-  (set! (-> gp-2 code) L38)
+  ;; SCAFFOLDING: L38 is unresolvable MIPS label
   )
 
 (let ((gp-3
@@ -174,7 +171,7 @@
   (set! (-> gp-3 event)
         (the-as (function process int symbol event-message-block object) aux-voice-mgr-default-handler)
         )
-  (set! (-> gp-3 code) L20)
+  ;; SCAFFOLDING: L20 is unresolvable MIPS label
   )
 
 (define *aux-voice-last-update* (the-as object 0))
@@ -199,8 +196,7 @@
   (set! (-> gp-4 event)
         (the-as (function process int symbol event-message-block object) aux-voice-mgr-default-handler)
         )
-  (set! (-> gp-4 exit) (the-as (function object) L7))
-  (set! (-> gp-4 code) L8)
+  ;; SCAFFOLDING: L7/L8 are unresolvable MIPS labels
   )
 
 ;; ERROR: failed type prop at 6: Could not figure out load: (set! v1 (l.w (+ s5 148)))
@@ -209,110 +205,8 @@
 ;; ERROR: Function may read a register that is not set: a1
 ;; ERROR: Function may read a register that is not set: a2
 (defmethod aux-voice-mgr-method-21 ((this aux-voice-mgr))
-  (local-vars
-    (v0-1 none)
-    (v0-2 none)
-    (v0-3 none)
-    (v0-4 none)
-    (v0-5 none)
-    (v0-6 none)
-    (v1-0 none)
-    (v1-2 none)
-    (v1-4 none)
-    (v1-5 none)
-    (v1-6 none)
-    (v1-7 none)
-    (v1-10 none)
-    (v1-11 none)
-    (v1-12 none)
-    (v1-13 none)
-    (v1-14 none)
-    (v1-15 none)
-    (v1-16 none)
-    (v1-17 none)
-    (v1-18 none)
-    (a0-0 none)
-    (a0-1 int)
-    (a0-2 none)
-    (a0-4 none)
-    (a0-6 none)
-    (a0-7 none)
-    (a0-8 none)
-    (a1-0 none)
-    (a1-1 none)
-    (a1-2 none)
-    (a1-3 none)
-    (a1-4 none)
-    (a2-0 none)
-    (a2-1 none)
-    (a2-2 none)
-    (t9-0 none)
-    (t9-1 none)
-    (t9-2 none)
-    (t9-3 none)
-    (t9-4 none)
-    (gp-0 none)
-    (sp-0 none)
-    )
-  (if (begin
-        (when (begin (set! gp-0 (the-as none (+ sp-0 16))) (set! v1-0 a2-0) (set! a0-1 -2) (= v1-0 a0-1))
-          (set! v1-2 (the-as none (l.w (+ a0-0 148))))
-          (set! a2-0 (the-as none v1-2))
-          (set! v1-3 (the-as none a2-0))
-          )
-        (set! v1-4 (the-as none 1))
-        (set! a0-2 (the-as none (l.w (+ a0-0 144))))
-        (set! v1-5 (the-as none (ash.si v1-4 a0-2)))
-        (set! v1-6 (the-as none (lognot v1-5)))
-        (set! v1-7 (the-as none (logand a2-0 v1-6)))
-        (zero? v1-7)
-        )
-      (return (empty-form))
-      )
-  (when (begin
-          (set! t9-0 (the-as none mem-clear!))
-          (set! a0-4 (the-as none (+ gp-0 0)))
-          (set! a1-1 (the-as none 64))
-          (call!)
-          (set! v1-10 (the-as none (l.w (+ a0-0 152))))
-          (s.w! gp-0 v1-10)
-          (set! v1-11 (the-as none 128))
-          (s.b! (+ gp-0 4) v1-11)
-          (set! v1-12 (the-as none *aux-voice-msg-id*))
-          (s.w! (+ gp-0 8) v1-12)
-          (set! a0-5 (the-as none a1-0))
-          (set! v1-13 (the-as none mem-buffer))
-          (set! t9-1 (the-as none (l.wu (+ v1-13 60))))
-          (set! v0-2 (the-as none (call!)))
-          (set! v1-14 (the-as none v0-2))
-          (s.w! (+ gp-0 56) v1-14)
-          (set! v1-15 (the-as none (l.wu a1-0)))
-          (s.w! (+ gp-0 60) v1-15)
-          (set! v1-16 (the-as none 256))
-          (s.w! (+ gp-0 12) v1-16)
-          (s.w! (+ gp-0 48) 0)
-          (set! t9-2 (the-as none mem-copy!))
-          (set! a0-6 (the-as none (+ gp-0 16)))
-          (set! a1-2 (the-as none (+ a0-0 148)))
-          (set! a2-1 (the-as none 2))
-          (call!)
-          (set! v1-17 (the-as none 16))
-          (s.w! (+ gp-0 52) v1-17)
-          (set! v1-18 (the-as none 19))
-          (set! *scert-function-id* v1-18)
-          (set! t9-3 (the-as none knet-scert-function-2-args))
-          (set! a0-7 (the-as none (+ gp-0 0)))
-          (set! a1-3 (the-as none (+ gp-0 64)))
-          (set! v0-4 (the-as none (call!)))
-          (set! a2-2 (the-as none v0-4))
-          (nonzero? a2-2)
-          )
-    (set! t9-4 (the-as none format))
-    (set! a0-8 (the-as none 0))
-    (set! a1-4 (the-as none L101))
-    (call!)
-    (set! v1-20 (the-as none v0-5))
-    )
-  (set! v0-6 (the-as none 0))
-  (ret-none)
+  ;; SCAFFOLDING
+  (format 0 "call to aux-voice-mgr-method-21~%")
+  (break!)
+  (none)
   )

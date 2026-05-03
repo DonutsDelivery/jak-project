@@ -45,7 +45,7 @@
             )
       )
   (method-set! net-enemy 59 gp-0)
-  (set! (-> gp-0 enter) L236)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   (set! (-> gp-0 code) sleep-code)
   )
 
@@ -81,12 +81,12 @@
             )
       )
   (method-set! net-enemy 60 gp-1)
-  (set! (-> gp-1 event) (the-as (function process int symbol event-message-block object) L92))
-  (set! (-> gp-1 enter) L126)
-  (set! (-> gp-1 exit) (the-as (function object) L89))
-  (set! (-> gp-1 trans) (the-as (function object) L114))
-  (set! (-> gp-1 code) L115)
-  (set! (-> gp-1 post) L91)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 (let ((gp-2 (new 'static 'state
@@ -103,9 +103,9 @@
             )
       )
   (method-set! net-enemy 61 gp-2)
-  (set! (-> gp-2 enter) L72)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   (set! (-> gp-2 code) sleep-code)
-  (set! (-> gp-2 post) L71)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 ;; ERROR: function has no type analysis. Cannot decompile.

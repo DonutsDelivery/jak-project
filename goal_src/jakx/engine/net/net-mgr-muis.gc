@@ -57,8 +57,8 @@
             )
       )
   (method-set! net-mgr 17 gp-0)
-  (set! (-> gp-0 event) (the-as (function process int symbol event-message-block object) L20))
-  (set! (-> gp-0 code) L2)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 (let ((gp-1 (new 'static 'state
@@ -75,5 +75,5 @@
             )
       )
   (method-set! net-mgr 18 gp-1)
-  (set! (-> gp-1 code) L1)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )

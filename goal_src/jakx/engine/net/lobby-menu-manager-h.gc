@@ -2,216 +2,46 @@
 (in-package goal)
 
 ;; ERROR: top level function was not converted to expressions. Cannot decompile.
-
-
-
-
-
-(local-vars
-  (v0-0 type)
-  (v0-1 none)
-  (v0-2 function)
-  (v1-3 type)
-  (v1-4 function)
-  (v1-5 function)
-  (v1-6 (function int int int int))
-  (v1-7 float)
-  (v1-8 float)
-  (v1-9 object)
-  (v1-10 function)
-  (v1-11 int)
-  (v1-12 function)
-  (v1-13 (array menu-option-info))
-  (v1-14 object)
-  (v1-15 array)
-  (v1-16 object)
-  (v1-17 (array menu-option-info))
-  (v1-18 object)
-  (v1-19 array)
-  (v1-20 object)
-  (v1-21 object)
-  (v1-22 function)
-  (v1-23 object)
-  (a0-0 symbol)
-  (a0-1 type)
-  (a0-2 object)
-  (a0-3 object)
-  (a1-0 type)
-  (a1-1 int)
-  (a2-0 uint)
-  (a2-1 function)
-  (t9-0 (function symbol type int type))
-  (t9-1 (function type int object none))
-  (f0-0 float)
-  (f0-1 float)
-  (f0-2 float)
-  (f1-0 object)
-  )
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-(set! v1-3 type)
-
-(set! t9-0 (method-of-type type new))
-
-(set! a0-0 'lobby-menu-manager)
-
-(set! a1-0 process)
-
-(set! a2-0 (the-as uint #xc4012001b0))
-
-(call! a0-0 a1-0 a2-0)
-
-(set! t9-1 method-set!)
-
-(set! a0-1 lobby-menu-manager)
-
-(set! a1-1 3)
-
-(set! a2-1 L65)
-
-(call! a0-1 a1-1 a2-1)
-
-(set! *lobby-reset-mode* (the-as object #f))
-
-(set! *net-mgr-finish-mode* (the-as object #f))
-
-(set! *lobby-menu-manager* (the-as object #f))
-
-(set! v1-4 L35)
-
-(set! get-selected-local-player-count v1-4)
-
-(set! v1-5 L31)
-
-(set! kiosk-code? v1-5)
-
-(set! v1-6 L26)
-
-(set! min-max-wrap-around v1-6)
-
-(set! *lobby-last-selected-task-index* (the-as object 0))
-
-(set! *last-selected-human-ct* (the-as object 0))
-
-(set! *last-selected-ai-ct* (the-as object 0))
-
-(set! *last-selected-buddy-ct* (the-as object 0))
-
-(set! *last-selected-clan-ct* (the-as object 0))
-
-(set! *lobby-menu-manager-game-connection-type* (the-as object 0))
-
-(set! *lobby-handling-db-error* (the-as object #f))
-
-(set! *no-net-hw-warning-shown* (the-as object #f))
-
-(set! *ready-room-human-ct* (the-as object 0))
-
-(set! *ready-room-ai-ct* (the-as object 0))
-
-(set! *game-launched-from-room* (the-as object #f))
-
-(set! v1-7 0.5)
-
-(set! f0-0 0.5)
-
-(set! camera-seek-time f0-0)
-
-(set! v1-8 1.0)
-
-(set! f0-1 1.0)
-
-(set! v1-9 camera-seek-time)
-
-(set! f1-0 (gpr->fpr camera-seek-time))
-
-(set! f0-2 (/.s f0-1 f1-0))
-
-(set! real-camera-seek-time f0-2)
-
-(set! v1-10 L23)
-
-(set! set-lobby-camera-seek-time! v1-10)
-
-(set! v1-11 1)
-
-(set! *class-mode* v1-11)
-
-(set! v1-12 L17)
-
-(set! restore-selection-index v1-12)
-
-(set! *lobby-timetrial-lock-mode* (the-as object #f))
-
-(set! v1-13 L61)
-
-(set! *vehicle-class-data* v1-13)
-
-(set! v1-14 L57)
-
-(set! *vehicle-class* v1-14)
-
-(set! v1-15 *vehicle-class-data*)
-
-(set! a0-2 *vehicle-class*)
-
-(s.w! a0-2 v1-15)
-
-(set! v1-16 *vehicle-class*)
-
-(s.w! (+ v1-16 4) 0)
-
-(set! v1-17 L47)
-
-(set! *time-of-day-data* v1-17)
-
-(set! v1-18 L43)
-
-(set! *time-of-day-array* v1-18)
-
-(set! v1-19 *time-of-day-data*)
-
-(set! a0-3 *time-of-day-array*)
-
-(s.w! a0-3 v1-19)
-
-(set! v1-20 *time-of-day-array*)
-
-(s.w! (+ v1-20 4) 0)
-
-(set! *ready-room-host-id* (the-as object 0))
-
-(set! v1-21 L42)
-
-(set! *keyboard-buf* v1-21)
-
-(set! v1-22 L12)
-
-(set! kbd-auto-activate v1-22)
-
-(set! *return-to-secrets* (the-as object #f))
-
-(set! *this-create-menu-state-name* (the-as object #f))
-
-(set! *prev-create-menu-state-name* (the-as object #f))
-
-(set! *lobby-fast-connect* (the-as object #f))
-
-(set! *lobby-body-parts-return-state-name* (the-as object #f))
-
-(set! *eligible-for-body-part-award* (the-as object #f))
-
-(set! *pending-op* (the-as object #f))
-
-(set! *pending-op-serial* (the-as object 0))
-
-(set! *pending-op-arg-ct* (the-as object 0))
-
-(set! v1-23 L41)
-
-(set! *pending-op-args* v1-23)
-
-(set! v0-2 L1)
-
-(set! teams-valid-to-start-game? v0-2)
+;; SCAFFOLDING: entire file replaced with stubs (MIPS labels L1-L65 unresolvable, call!/s.w!/gpr->fpr)
+
+(define *lobby-reset-mode* (the-as object #f))
+(define *net-mgr-finish-mode* (the-as object #f))
+(define *lobby-menu-manager* (the-as object #f))
+(define get-selected-local-player-count (the-as (function none) #f))
+(define kiosk-code? (the-as (function none) #f))
+(define min-max-wrap-around (the-as (function int int int int) #f))
+(define *lobby-last-selected-task-index* (the-as object 0))
+(define *last-selected-human-ct* (the-as object 0))
+(define *last-selected-ai-ct* (the-as object 0))
+(define *last-selected-buddy-ct* (the-as object 0))
+(define *last-selected-clan-ct* (the-as object 0))
+(define *lobby-menu-manager-game-connection-type* (the-as object 0))
+(define *lobby-handling-db-error* (the-as object #f))
+(define *no-net-hw-warning-shown* (the-as object #f))
+(define *ready-room-human-ct* (the-as object 0))
+(define *ready-room-ai-ct* (the-as object 0))
+(define *game-launched-from-room* (the-as object #f))
+(define camera-seek-time (the-as float 0.5))
+(define real-camera-seek-time (the-as float 2.0))
+(define set-lobby-camera-seek-time! (the-as (function none) #f))
+(define *class-mode* (the-as object 1))
+(define restore-selection-index (the-as (function none) #f))
+(define *lobby-timetrial-lock-mode* (the-as object #f))
+(define *vehicle-class-data* (the-as array #f))
+(define *vehicle-class* (the-as object #f))
+(define *time-of-day-data* (the-as array #f))
+(define *time-of-day-array* (the-as object #f))
+(define *ready-room-host-id* (the-as object 0))
+(define *keyboard-buf* (the-as object #f))
+(define kbd-auto-activate (the-as (function none) #f))
+(define *return-to-secrets* (the-as object #f))
+(define *this-create-menu-state-name* (the-as object #f))
+(define *prev-create-menu-state-name* (the-as object #f))
+(define *lobby-fast-connect* (the-as object #f))
+(define *lobby-body-parts-return-state-name* (the-as object #f))
+(define *eligible-for-body-part-award* (the-as object #f))
+(define *pending-op* (the-as object #f))
+(define *pending-op-serial* (the-as object 0))
+(define *pending-op-arg-ct* (the-as object 0))
+(define *pending-op-args* (the-as array #f))
+(define teams-valid-to-start-game? (the-as (function none) #f))

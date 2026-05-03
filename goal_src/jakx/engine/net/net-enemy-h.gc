@@ -45,15 +45,67 @@
   )
 
 
-;; type net-enemy is defined here, but it is unknown to the decompiler
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
+;; SCAFFOLDING: net-enemy deftype (all-types.gc line 30709)
+(deftype net-enemy (process-focusable)
+  ((flags                  uint64                     :offset 256)
+   (info                   net-enemy-info             :offset 264)
+   (ragdoll-proc           uint64                     :offset 272)
+   (health                 float                      :offset 280)
+   (local-damage           float                      :offset 284)
+   (killed-by              int8                       :offset 288)
+   (last-health-send-time  int32                      :offset 292)
+   (net-anim               net-anim-control   :inline :offset 304)
+   (minimap                connection-minimap         :offset 444)
+   (transitions            uint8              240     :offset 448)
+   (transition-ct          int32                      :offset 688)
+   (last-attack-time       int32                      :offset 692)
+   (vehicle-penetrate-time int32                      :offset 696)
+   (paths                  basic                      :offset 700)
+   (pending-impulse-valid  basic                      :offset 704)
+   (pending-impulse        uint8 68           :offset 720)
+   (last-transition-time   int32                      :offset 788)
+   (last-attack-id         int32                      :offset 792)
+   (vel-for-ragdoll        vector             :inline :offset 800)
+   (nav-poly               nav-poly                   :offset 816)
+   (snap-flags             uint64                     :offset 824)
+   (prev-pos               vector             :inline :offset 832)
+   (forward-path-vector    vector             :inline :offset 848)
+   (enemy-link             list-link          :inline :offset 864)
+   )
+  :method-count-assert 87
+  :size-assert         #x368
+  :flag-assert         #x5702f00368
+  (:methods
+    (net-enemy-method-59 (_type_) none)
+    (net-enemy-method-60 (_type_) none)
+    (net-enemy-method-61 (_type_) none)
+    (net-enemy-method-62 (_type_) none)
+    (net-enemy-method-63 (_type_) none)
+    (net-enemy-method-64 (_type_) int)
+    (net-enemy-method-65 (_type_) symbol)
+    (net-enemy-method-66 (_type_) none)
+    (net-enemy-method-67 (_type_) symbol)
+    (net-enemy-method-68 (_type_) none)
+    (net-enemy-method-69 (_type_) int)
+    (net-enemy-method-70 (_type_) none)
+    (net-enemy-method-71 (_type_) symbol)
+    (net-enemy-method-72 (_type_ uint) none)
+    (net-enemy-method-73 (_type_ int) int)
+    (net-enemy-method-74 (_type_) none)
+    (net-enemy-method-75 (_type_) none)
+    (net-enemy-method-76 (_type_) none)
+    (net-enemy-method-77 (_type_) none)
+    (net-enemy-method-78 (_type_) none)
+    (net-enemy-method-79 (_type_ int int int) none)
+    (net-enemy-method-80 (_type_) none)
+    (net-enemy-method-81 (_type_) none)
+    (net-enemy-method-82 (_type_) int)
+    (net-enemy-method-83 (_type_) none)
+    (net-enemy-method-84 (_type_) none)
+    (net-enemy-method-85 (_type_) none)
+    (net-enemy-method-86 (_type_) none)
+    )
+  )
 
 (define *msg-map-net-enemy*
   (the-as array (new 'static 'boxed-array :type symbol :length 0 :allocated-length 64))
@@ -61,32 +113,9 @@
 
 (define *net-process-class-info-net-enemy* #f)
 
-(let ((v1-8 *msg-map-net-enemy*)
-      (a0-10 *net-process-class-info-net-enemy*)
-      )
-  (s.w! a0-10 v1-8)
-  )
-
-(write-msg-map-rec
-  (the-as process-drawable net-enemy)
-  (the-as net-process-class-info *net-process-class-info-net-enemy*)
-  )
-
-(let ((v1-9 net-enemy)
-      (a0-12 *net-process-class-info-net-enemy*)
-      )
-  (s.w! (+ a0-12 24) v1-9)
-  )
-
-(let ((t9-11 net-process-class-register))
-  *net-process-class-info-net-enemy*
-  (t9-11)
-  )
+;; SCAFFOLDING: *net-process-class-info-net-enemy* is #f — skip s.w!/write-msg-map-rec null writes
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
 (define *net-enemy-list* #f)
 
-*net-enemy-list*
-
-((method-of-type linked-list linked-list-method-9))

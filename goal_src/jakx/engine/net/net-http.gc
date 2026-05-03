@@ -9,13 +9,39 @@
 
 (define *http-downloader* #f)
 
-(let ((v1-1 *http-downloader*))
-  (s.d! v1-1 #f)
-  )
+;; SCAFFOLDING: s.d! on *http-downloader* (#f) removed
 
 (define *http-request-string* (the-as object (new 'global 'string 160 (the-as string #f))))
 
 ;; type http-downloader is defined here, but it is unknown to the decompiler
+
+(deftype http-downloader (process)
+  ((socket      int32        :offset 144)
+   (buffer      uint8  1024  :offset 148)
+   (hostname    uint8  128   :offset 1172)
+   (url         uint8  128   :offset 1300)
+   (ip          int32        :offset 1428)
+   (port        int32        :offset 1432)
+   (http-rc     int32        :offset 1436)
+   (content-len int32        :offset 1440)
+   (quench      basic        :offset 1444)
+   )
+  (:methods
+    (http-downloader-method-14 (_type_) none)
+    (resolving () _type_ :state)
+    (connecting () _type_ :state)
+    (fetching-headers () _type_ :state)
+    (fetching-data () _type_ :state)
+    (die () _type_ :state)
+    (http-downloader-method-20 (_type_) none)
+    (http-downloader-method-21 (_type_) symbol)
+    (http-downloader-method-22 (_type_) none)
+    )
+  )
+
+
+;; SCAFFOLDING: http-downloader-default-handler not decompiled
+(define http-downloader-default-handler (the-as (function none) #f))
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
@@ -49,7 +75,7 @@
   (set! (-> gp-0 event)
         (the-as (function process int symbol event-message-block object) http-downloader-default-handler)
         )
-  (set! (-> gp-0 code) L69)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 (define *socket-blocking* (the-as object 0))
@@ -72,7 +98,7 @@
   (set! (-> gp-1 event)
         (the-as (function process int symbol event-message-block object) http-downloader-default-handler)
         )
-  (set! (-> gp-1 code) L49)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 (let ((gp-2
@@ -93,7 +119,7 @@
   (set! (-> gp-2 event)
         (the-as (function process int symbol event-message-block object) http-downloader-default-handler)
         )
-  (set! (-> gp-2 code) L22)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 (let ((gp-3
@@ -114,7 +140,7 @@
   (set! (-> gp-3 event)
         (the-as (function process int symbol event-message-block object) http-downloader-default-handler)
         )
-  (set! (-> gp-3 code) L4)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 (let ((gp-4
@@ -122,7 +148,7 @@
         )
       )
   (method-set! http-downloader 19 gp-4)
-  (set! (-> gp-4 code) L3)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 ;; ERROR: function has no type analysis. Cannot decompile.

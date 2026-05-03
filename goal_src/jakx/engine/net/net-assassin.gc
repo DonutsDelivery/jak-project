@@ -1,6 +1,47 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
+;; SCAFFOLDING: minimal deftypes for deathmatch/assassin net types
+(deftype net-player-deathmatch (net-player)
+  ((target-vehicle     uint64)
+   (last-attack-time   uint64)
+   (last-attacker      uint64)
+   (dropdown-score     uint64)
+   (next-spawn-seed    int32)
+   (last-push-time     int32)
+   (free-powerup-timer uint64)
+   )
+  (:methods
+    (net-player-deathmatch-method-98 (_type_ object object) none)
+    (net-player-deathmatch-method-99 (_type_) none)
+    )
+  )
+
+(deftype net-game-mgr-deathmatch (net-game-mgr)
+  ((spawner-array basic)
+   (spawner-count int8)
+   )
+  (:methods
+    (net-game-mgr-deathmatch-method-80 (_type_) none)
+    (net-game-mgr-deathmatch-method-81 (_type_) none)
+    (net-game-mgr-deathmatch-method-82 (_type_) none)
+    (net-game-mgr-deathmatch-method-83 (_type_) none)
+    )
+  )
+
+(deftype net-player-assassin (net-player-deathmatch)
+  ()
+  )
+
+(deftype net-game-mgr-assassin (net-game-mgr-deathmatch)
+  ((mark uint8 24)
+   )
+  (:methods
+    (net-game-mgr-assassin-method-84 (_type_) none)
+    (net-game-mgr-assassin-method-85 (_type_ object) none)
+    )
+  )
+
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
@@ -29,7 +70,7 @@
       )
   (inherit-state gp-0 (the-as state (method-of-type net-player-deathmatch net-player-method-43)))
   (method-set! net-player-assassin 43 gp-0)
-  (set! (-> gp-0 trans) (the-as (function object) L22))
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 ;; ERROR: failed type prop at 3: Could not figure out load: (set! v1 (l.wu (+ a0 -4)))
@@ -37,118 +78,10 @@
 ;; ERROR: Function may read a register that is not set: a0
 ;; ERROR: Function may read a register that is not set: a1
 (defmethod net-player-method-96 ((this net-player-assassin))
-  (local-vars
-    (v0-0 none)
-    (v0-1 none)
-    (v0-2 none)
-    (v0-3 none)
-    (v1-0 none)
-    (v1-1 none)
-    (v1-2 none)
-    (v1-3 none)
-    (v1-4 none)
-    (v1-5 none)
-    (v1-6 none)
-    (v1-7 none)
-    (v1-8 none)
-    (v1-9 none)
-    (v1-10 none)
-    (v1-11 none)
-    (v1-12 none)
-    (v1-13 none)
-    (v1-14 none)
-    (v1-15 none)
-    (v1-16 none)
-    (a0-0 none)
-    (a0-1 none)
-    (a0-2 none)
-    (a0-3 none)
-    (a0-4 none)
-    (a0-5 none)
-    (a0-7 none)
-    (a0-8 none)
-    (a1-0 none)
-    (a1-1 none)
-    (a1-3 none)
-    (t9-0 none)
-    (t9-1 none)
-    (t9-2 none)
-    (t9-3 none)
-    (sp-0 none)
-    )
-  (with-pp
-    (when (begin
-            (and (begin
-                   (or (begin
-                         (set! a0-1 a0-0)
-                         (set! v1-0 (the-as none (l.wu (+ a0-1 -4))))
-                         (set! t9-0 (the-as none (l.wu (+ v1-0 104))))
-                         (set! v0-0 (the-as none (call!)))
-                         (set! v1-1 (the-as none v0-0))
-                         v1-1
-                         )
-                       (and (begin
-                              (and (begin (set! v1-3 (the-as none (l.b (+ a0-0 284)))) (set! a0-2 (the-as none (>=0.si v1-3))) a0-2)
-                                   (begin (set! v1-5 (the-as none (l.b (+ a0-0 284)))) (set! v1-4 (the-as none (<.si v1-5 16))))
-                                   )
-                              (not v1-4)
-                              )
-                            (begin
-                              (cond
-                                ((begin (set! v1-6 (the-as none *net-mgr*)) v1-6)
-                                 (set! v1-7 (the-as none *net-mgr*))
-                                 (set! v1-8 (the-as none (l.w (+ v1-7 152))))
-                                 )
-                                (else
-                                  (set! v1-8 (the-as none 0))
-                                  )
-                                )
-                              (set! a0-3 (the-as none *net-mgr*))
-                              (set! a0-4 (the-as none (l.w (+ a0-3 156))))
-                              (set! v1-2 (the-as none (= v1-8 a0-4)))
-                              )
-                            )
-                       )
-                   v1-2
-                   )
-                 (begin
-                   (set! a0-5 (the-as none (l.wu (+ a0-0 208))))
-                   (set! v1-10 (the-as none (l.wu (+ a0-5 -4))))
-                   (set! t9-1 (the-as none (l.wu (+ v1-10 356))))
-                   (set! a1-1 (the-as none (l.b (+ a0-0 284))))
-                   (set! v0-1 (the-as none (call!)))
-                   (set! v1-11 (the-as none v0-1))
-                   (set! v1-9 (the-as none (= a1-0 v1-11)))
-                   )
-                 )
-            v1-9
-            )
-      (if (begin
-            (set! v1-12 (the-as none net-player-deathmatch))
-            (set! t9-2 (the-as none (l.wu (+ v1-12 400))))
-            (set! a0-6 (the-as none a0-0))
-            (set! a1-2 (the-as none a1-0))
-            (call!)
-            (set! a1-3 (the-as none (+ sp-0 16)))
-            (set! v1-13 (the-as none s6-0))
-            v1-13
-            )
-          (set! a0-7 (the-as none (l.wu (+ v1-13 28))))
-          )
-      (s.w! (+ a1-3 8) a0-7)
-      (set! v1-14 (the-as none 2))
-      (s.w! (+ a1-3 68) v1-14)
-      (set! v1-15 (the-as none 'mark-killed))
-      (s.w! (+ a1-3 64) v1-15)
-      (set! v1-16 (the-as none (l.b (+ a0-0 284))))
-      (s.d! (+ a1-3 16) v1-16)
-      (s.d! (+ a1-3 24) a1-0)
-      (set! t9-3 (the-as none send-event-function))
-      (set! a0-8 (the-as none (l.wu (+ a0-0 208))))
-      (set! v0-2 (the-as none (call!)))
-      )
-    (ret-value v0-2)
-    )
+  ;; SCAFFOLDING
+  (format 0 "call to net-player-method-96~%")
+  (break!)
+  0
   )
 
 (let ((gp-1 (new 'static 'state
@@ -166,8 +99,8 @@
       )
   (inherit-state gp-1 (the-as state (method-of-type net-game-mgr-deathmatch net-game-mgr-method-43)))
   (method-set! net-game-mgr-assassin 43 gp-1)
-  (set! (-> gp-1 event) (the-as (function process int symbol event-message-block object) L8))
-  (set! (-> gp-1 enter) L6)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 ;; ERROR: function has no type analysis. Cannot decompile.

@@ -3,32 +3,20 @@
 
 ;; ERROR: top level function was not converted to expressions. Cannot decompile.
 
-
-
-
-
 (define *ghosts-enabled* (the-as object #t))
 
 ;; type timetrial-snapshot is defined here, but it is unknown to the decompiler
-
 ;; ERROR: function has no type analysis. Cannot decompile.
-
 ;; type timetrial-recording is defined here, but it is unknown to the decompiler
 
-(method-set! (the-as type timetrial-recording) 3 L6)
+;; SCAFFOLDING: method-set! on unknown types timetrial-snapshot/timetrial-recording removed
 
 (define *ghost-rec* #f)
 
 (define *ghost-upload-proc* #f)
 
-(let ((v1-5 *ghost-upload-proc*))
-  (s.d! v1-5 #f)
-  )
+;; SCAFFOLDING: s.d! on #f pointers removed
 
 (define *ghost-download-proc* #f)
 
-(let ((v1-7 *ghost-download-proc*))
-  (s.d! v1-7 #f)
-  )
-
-(method-set! (the-as type timetrial-recording) 12 L1)
+;; SCAFFOLDING: s.d! on #f pointers removed

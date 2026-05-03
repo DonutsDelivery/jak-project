@@ -2,673 +2,140 @@
 (in-package goal)
 
 ;; ERROR: top level function was not converted to expressions. Cannot decompile.
-
-
-
-
-
-(local-vars
-  (v0-0 type)
-  (v0-1 none)
-  (v0-2 type)
-  (v0-3 none)
-  (v0-4 type)
-  (v0-5 none)
-  (v0-6 type)
-  (v0-7 none)
-  (v0-8 type)
-  (v0-9 none)
-  (v0-10 type)
-  (v0-11 none)
-  (v0-12 none)
-  (v0-13 none)
-  (v0-14 none)
-  (v0-15 none)
-  (v0-16 none)
-  (v0-17 type)
-  (v0-18 none)
-  (v0-19 type)
-  (v0-20 none)
-  (v0-21 type)
-  (v0-22 none)
-  (v0-23 none)
-  (v0-24 none)
-  (v0-25 type)
-  (v0-26 none)
-  (v0-27 type)
-  (v0-28 none)
-  (v0-29 int)
-  (v1-0 function)
-  (v1-1 function)
-  (v1-2 type)
-  (v1-3 int)
-  (v1-4 type)
-  (v1-5 type)
-  (v1-6 type)
-  (v1-7 function)
-  (v1-8 function)
-  (v1-9 type)
-  (v1-10 function)
-  (v1-11 function)
-  (v1-12 type)
-  (v1-13 function)
-  (v1-14 (array symbol))
-  (v1-15 none)
-  (v1-16 array)
-  (v1-17 type)
-  (v1-18 type)
-  (v1-19 none)
-  (v1-20 type)
-  (v1-21 (array prebuilt-ai-vehicle))
-  (v1-22 type)
-  (v1-23 (array net-vehicle))
-  (v1-24 function)
-  (v1-25 function)
-  (v1-26 array)
-  (v1-27 int)
-  (v1-30 array)
-  (v1-31 int)
-  (v1-32 int)
-  (v1-34 none)
-  (v1-35 none)
-  (v1-36 none)
-  (v1-37 none)
-  (v1-38 none)
-  (v1-39 none)
-  (v1-40 none)
-  (v1-41 none)
-  (v1-42 none)
-  (v1-43 none)
-  (v1-46 type)
-  (v1-47 (array net-driver))
-  (v1-48 function)
-  (v1-49 function)
-  (v1-50 none)
-  (v1-51 type)
-  (a0-0 symbol)
-  (a0-1 type)
-  (a0-2 symbol)
-  (a0-3 type)
-  (a0-4 symbol)
-  (a0-5 type)
-  (a0-6 symbol)
-  (a0-7 type)
-  (a0-8 symbol)
-  (a0-9 type)
-  (a0-10 symbol)
-  (a0-11 type)
-  (a0-12 type)
-  (a0-13 type)
-  (a0-14 object)
-  (a0-15 type)
-  (a0-16 object)
-  (a0-17 object)
-  (a0-18 type)
-  (a0-19 symbol)
-  (a0-20 type)
-  (a0-21 symbol)
-  (a0-22 type)
-  (a0-23 symbol)
-  (a0-24 type)
-  (a0-25 int)
-  (a0-26 array)
-  (a0-27 none)
-  (a0-28 none)
-  (a0-29 none)
-  (a0-30 none)
-  (a0-31 none)
-  (a0-32 symbol)
-  (a0-33 type)
-  (a0-34 symbol)
-  (a0-35 type)
-  (a1-0 type)
-  (a1-1 int)
-  (a1-2 type)
-  (a1-3 int)
-  (a1-4 type)
-  (a1-5 int)
-  (a1-6 type)
-  (a1-7 int)
-  (a1-8 type)
-  (a1-9 int)
-  (a1-10 type)
-  (a1-11 int)
-  (a1-12 int)
-  (a1-13 int)
-  (a1-14 object)
-  (a1-15 int)
-  (a1-16 type)
-  (a1-17 int)
-  (a1-18 type)
-  (a1-19 int)
-  (a1-20 type)
-  (a1-21 int)
-  (a1-22 int)
-  (a1-23 int)
-  (a1-24 uint)
-  (a1-25 none)
-  (a1-26 none)
-  (a1-27 none)
-  (a1-28 type)
-  (a1-29 int)
-  (a1-30 type)
-  (a1-31 int)
-  (a2-0 uint)
-  (a2-1 (function vehicle-load-parts vehicle-load-parts))
-  (a2-2 uint)
-  (a2-3 (function net-world-game-options net-world-game-options))
-  (a2-4 uint)
-  (a2-5 (function net-world-staging-player net-world-staging-player))
-  (a2-6 uint)
-  (a2-7 (function green-room-stats green-room-stats))
-  (a2-8 uint)
-  (a2-9 (function net-world-state net-world-state))
-  (a2-10 uint)
-  (a2-11 (function net-world net-world))
-  (a2-12 (function none))
-  (a2-13 (function none))
-  (a2-14 (function none))
-  (a2-15 uint)
-  (a2-16 (function net-player-name net-player-name))
-  (a2-17 uint)
-  (a2-18 (function prebuilt-ai-vehicle prebuilt-ai-vehicle))
-  (a2-19 uint)
-  (a2-20 (function net-vehicle net-vehicle))
-  (a2-21 array)
-  (a2-22 none)
-  (a2-23 uint)
-  (a2-24 (function net-driver net-driver))
-  (a2-25 uint)
-  (a2-26 (function race-end-cam race-end-cam))
-  (s3-0 uint)
-  (s3-1 none)
-  (s4-0 none)
-  (s5-0 int)
-  (t9-0 (function symbol type int type))
-  (t9-1 (function type int object none))
-  (t9-2 (function symbol type int type))
-  (t9-3 (function type int object none))
-  (t9-4 (function symbol type int type))
-  (t9-5 (function type int object none))
-  (t9-6 (function symbol type int type))
-  (t9-7 (function type int object none))
-  (t9-8 (function symbol type int type))
-  (t9-9 (function type int object none))
-  (t9-10 (function symbol type int type))
-  (t9-11 (function type int object none))
-  (t9-12 (function type int object none))
-  (t9-13 (function type int object none))
-  (t9-14 (function process-drawable net-process-class-info none))
-  (t9-15 (function none))
-  (t9-16 (function type int object none))
-  (t9-17 (function symbol type int type))
-  (t9-18 (function type int object none))
-  (t9-19 (function symbol type int type))
-  (t9-20 (function type int object none))
-  (t9-21 (function symbol type int type))
-  (t9-22 (function type int object none))
-  (t9-23 function)
-  (t9-24 none)
-  (t9-25 (function symbol type int type))
-  (t9-26 (function type int object none))
-  (t9-27 (function symbol type int type))
-  (t9-28 (function type int object none))
-  (gp-0 int)
-  )
-
-(set! *ghost-info-ptr* (the-as object #f))
-
-(set! v1-0 L34)
-
-(set! net-play-mode-race? v1-0)
-
-(set! v1-1 L28)
-
-(set! get-task-node-id-from-location-and-event v1-1)
-
-(set! v1-2 type)
-
-(set! t9-0 (method-of-type v1-2 new))
-
-(set! a0-0 'vehicle-load-parts)
-
-(set! a1-0 uint64)
-
-(set! a2-0 (the-as uint #x900000008))
-
-(call! a0-0 a1-0 a2-0)
-
-(set! v1-3 #x1249249)
-
-(set! *default-vehicle-load-parts* v1-3)
-
-(set! t9-1 method-set!)
-
-(set! a0-1 vehicle-load-parts)
-
-(set! a1-1 3)
-
-(set! a2-1 L27)
-
-(call! a0-1 a1-1 a2-1)
-
-(set! v1-4 type)
-
-(set! t9-2 (method-of-type v1-4 new))
-
-(set! a0-2 'net-world-game-options)
-
-(set! a1-2 structure)
-
-(set! a2-2 (the-as uint #x900000008))
-
-(call! a0-2 a1-2 a2-2)
-
-(set! t9-3 method-set!)
-
-(set! a0-3 net-world-game-options)
-
-(set! a1-3 3)
-
-(set! a2-3 L289)
-
-(call! a0-3 a1-3 a2-3)
-
-(set! v1-5 type)
-
-(set! t9-4 (method-of-type v1-5 new))
-
-(set! a0-4 'net-world-staging-player)
-
-(set! a1-4 structure)
-
-(set! a2-4 (the-as uint #xa00000020))
-
-(call! a0-4 a1-4 a2-4)
-
-(set! t9-5 method-set!)
-
-(set! a0-5 net-world-staging-player)
-
-(set! a1-5 3)
-
-(set! a2-5 L286)
-
-(call! a0-5 a1-5 a2-5)
-
-(set! v1-6 type)
-
-(set! t9-6 (method-of-type v1-6 new))
-
-(set! a0-6 'green-room-stats)
-
-(set! a1-6 structure)
-
-(set! a2-6 (the-as uint #x90000001a))
-
-(call! a0-6 a1-6 a2-6)
-
-(set! t9-7 method-set!)
-
-(set! a0-7 green-room-stats)
-
-(set! a1-7 3)
-
-(set! a2-7 L283)
-
-(call! a0-7 a1-7 a2-7)
-
-(set! v1-7 L26)
-
-(set! encode-green-room-stats v1-7)
-
-(set! v1-8 L25)
-
-(set! decode-green-room-stats v1-8)
-
-(set! v1-9 type)
-
-(set! t9-8 (method-of-type v1-9 new))
-
-(set! a0-8 'net-world-state)
-
-(set! a1-8 structure)
-
-(set! a2-8 (the-as uint #x90000037b))
-
-(call! a0-8 a1-8 a2-8)
-
-(set! t9-9 method-set!)
-
-(set! a0-9 net-world-state)
-
-(set! a1-9 3)
-
-(set! a2-9 L280)
-
-(call! a0-9 a1-9 a2-9)
-
-(set! v1-10 L24)
-
-(set! encode-net-world-state v1-10)
-
-(set! v1-11 L23)
-
-(set! decode-net-world-state v1-11)
-
-(set! v1-12 type)
-
-(set! t9-10 (method-of-type v1-12 new))
-
-(set! a0-10 'net-world)
-
-(set! a1-10 process-nettable)
-
-(set! a2-10 (the-as uint #x5703f0047a))
-
-(call! a0-10 a1-10 a2-10)
-
-(set! t9-11 method-set!)
-
-(set! a0-11 net-world)
-
-(set! a1-11 3)
-
-(set! a2-11 L277)
-
-(call! a0-11 a1-11 a2-11)
-
-(set! v1-13 L22)
-
-(set! net-world-init-remote v1-13)
-
-(set! t9-12 method-set!)
-
-(set! a0-12 net-world)
-
-(set! a1-12 41)
-
-(set! a2-12 L19)
-
-(call! a0-12 a1-12 a2-12)
-
-(set! t9-13 method-set!)
-
-(set! a0-13 net-world)
-
-(set! a1-13 37)
-
-(set! a2-13 L18)
-
-(call! a0-13 a1-13 a2-13)
-
-(set! v1-14 L229)
-
-(set! *msg-map-net-world* v1-14)
-
-(set! v1-15 (the-as none L228))
-
-(set! *net-process-class-info-net-world* v1-15)
-
-(set! v1-16 *msg-map-net-world*)
-
-(set! a0-14 *net-process-class-info-net-world*)
-
-(s.w! a0-14 v1-16)
-
-(set! t9-14 write-msg-map-rec)
-
-(set! a0-15 net-world)
-
-(set! a1-14 *net-process-class-info-net-world*)
-
-(call! a0-15 a1-14)
-
-(set! v1-17 net-world)
-
-(set! a0-16 *net-process-class-info-net-world*)
-
-(s.w! (+ a0-16 24) v1-17)
-
-(set! t9-15 net-process-class-register)
-
-(set! a0-17 *net-process-class-info-net-world*)
-
-(call!)
-
-(set! t9-16 method-set!)
-
-(set! a0-18 net-world)
-
-(set! a1-15 40)
-
-(set! a2-14 L17)
-
-(call! a0-18 a1-15 a2-14)
-
-(set! *net-world* #f)
-
-(set! v1-18 type)
-
-(set! t9-17 (method-of-type v1-18 new))
-
-(set! a0-19 'net-player-name)
-
-(set! a1-16 structure)
-
-(set! a2-15 (the-as uint #xa00000060))
-
-(call! a0-19 a1-16 a2-15)
-
-(set! t9-18 method-set!)
-
-(set! a0-20 net-player-name)
-
-(set! a1-17 3)
-
-(set! a2-16 L274)
-
-(call! a0-20 a1-17 a2-16)
-
-(set! v1-19 (the-as none L227))
-
-(set! *net-player-names* v1-19)
-
-(set! v1-20 type)
-
-(set! t9-19 (method-of-type v1-20 new))
-
-(set! a0-21 'prebuilt-ai-vehicle)
-
-(set! a1-18 structure)
-
-(set! a2-17 (the-as uint #x900000010))
-
-(call! a0-21 a1-18 a2-17)
-
-(set! t9-20 method-set!)
-
-(set! a0-22 prebuilt-ai-vehicle)
-
-(set! a1-19 3)
-
-(set! a2-18 L271)
-
-(call! a0-22 a1-19 a2-18)
-
-(set! v1-21 L196)
-
-(set! *prebuilt-ai-vehicles* v1-21)
-
-(set! v1-22 type)
-
-(set! t9-21 (method-of-type v1-22 new))
-
-(set! a0-23 'net-vehicle)
-
-(set! a1-20 structure)
-
-(set! a2-19 (the-as uint #x900000028))
-
-(call! a0-23 a1-20 a2-19)
-
-(set! t9-22 method-set!)
-
-(set! a0-24 net-vehicle)
-
-(set! a1-21 3)
-
-(set! a2-20 L268)
-
-(call! a0-24 a1-21 a2-20)
-
-(set! v1-23 L150)
-
-(set! *net-vehicles* v1-23)
-
-(set! v1-24 L12)
-
-(set! find-vehicle-info v1-24)
-
-(set! v1-25 L7)
-
-(set! find-prebuilt-ai-vehicle v1-25)
-
-(set! v1-26 *net-vehicles*)
-
-(set! v1-27 (-> v1-26 length))
-
-(set! a0-25 0)
-
-(set! a1-22 (sll a0-25 2))
-
-(set! a2-21 *net-vehicles*)
-
-(set! a1-23 (+ a1-22 a2-21))
-
-(set! a1-24 (l.wu (+ a1-23 12)))
-
-(while (<.si a0-25 v1-27)
-  (set! a1-25 (the-as none (l.wu (+ a1-24 36))))
-  (s.w! a1-25 0)
-  (set! a0-25 (the-as int (+ a0-25 1)))
-  (set! a1-26 (the-as none (sll a0-25 2)))
-  (set! a2-22 (the-as none *net-vehicles*))
-  (set! a1-27 (the-as none (+ a1-26 a2-22)))
-  (set! a1-24 (the-as uint (l.wu (+ a1-27 12))))
-  )
-
-(set! v1-30 *prebuilt-ai-vehicles*)
-
-(set! gp-0 (-> v1-30 length))
-
-(set! s5-0 0)
-
-(set! v1-31 (sll s5-0 2))
-
-(set! a0-26 *prebuilt-ai-vehicles*)
-
-(set! v1-32 (+ v1-31 a0-26))
-
-(set! s3-0 (l.wu (+ v1-32 12)))
-
-(while (<.si s5-0 gp-0)
-  (when (begin
-          (set! t9-23 find-vehicle-info)
-          (set! a0-27 (the-as none (l.bu (+ s3-0 4))))
-          (set! v0-23 (the-as none (call!)))
-          (set! s4-0 (the-as none v0-23))
-          (not s4-0)
-          )
-    (break!)
-    (set! v1-34 (the-as none 0))
+;; SCAFFOLDING: entire file replaced with stub (broken MIPS local-vars block)
+
+;; Minimal deftypes for structures used in net-world.gc methods.
+(deftype net-world-staging-player (structure)
+  ((blob  uint8  32 :offset-assert 0)
+   )
+  (:methods
+    (net-world-staging-player-method-9 (_type_) int)
     )
-  (set! s3-1 (the-as none (l.wu s3-0)))
-  (set! a0-28 (the-as none (l.wu (+ s4-0 36))))
-  (set! v1-35 (the-as none (l.wu (+ a0-28 -4))))
-  (set! t9-24 (the-as none (l.wu (+ v1-35 32))))
-  (set! v0-24 (the-as none (call!)))
-  (set! v1-36 (the-as none v0-24))
-  (set! v1-37 (the-as none (sll v1-36 2)))
-  (set! a0-29 (the-as none (l.wu (+ s4-0 36))))
-  (set! v1-38 (the-as none (+ v1-37 a0-29)))
-  (s.w! (+ v1-38 12) s3-1)
-  (set! v1-39 (the-as none (l.wu (+ s4-0 36))))
-  (set! v1-40 (the-as none (l.w v1-39)))
-  (set! v1-41 (the-as none (+ v1-40 1)))
-  (set! a0-30 (the-as none (l.wu (+ s4-0 36))))
-  (s.w! a0-30 v1-41)
-  (set! s5-0 (the-as int (+ s5-0 1)))
-  (set! v1-42 (the-as none (sll s5-0 2)))
-  (set! a0-31 (the-as none *prebuilt-ai-vehicles*))
-  (set! v1-43 (the-as none (+ v1-42 a0-31)))
-  (set! s3-0 (the-as uint (l.wu (+ v1-43 12))))
   )
 
-(set! v1-46 type)
+(deftype net-player-name (structure)
+  ((name        uint8 32 :offset-assert 0)
+   (format-name uint8 64 :offset-assert 32)
+   )
+  (:methods
+    (net-player-name-method-9 (_type_) none)
+    )
+  )
 
-(set! t9-25 (method-of-type v1-46 new))
+;; Full deftype replacing forward-declare; blob fields for complex types not yet ported.
+(deftype net-world (process-nettable)
+  ((net-state-blob          uint8   892  :offset 192)  ;; net-world-state = 0x37b bytes
+   (is-late-join            symbol       :offset 1084)
+   (need-start-load         symbol       :offset 1088)
+   (current-garage-player   int32        :offset 1092)
+   (current-garage-spare-slot int32      :offset 1096)
+   (cont                    symbol       :offset 1100)
+   (task                    uint8        :offset 1104)
+   (task-node               uint16       :offset 1106)
+   (task-info               int32        :offset 1108)   ;; placeholder
+   (task-node-info          int32        :offset 1112)   ;; placeholder
+   (player-to-vehicle-slot-map uint8 24  :offset 1116)
+   (vehicle-slot-to-player-map uint8  6  :offset 1140)
+   )
+  (:state-methods
+    running       ;; 42
+    demo-screen   ;; 43
+    play-movie    ;; 44
+    )
+  (:methods
+    (net-world-method-45 (_type_ object) symbol) ;; 45
+    (net-world-method-46 (_type_ object) int) ;; 46
+    (net-world-method-47 (_type_ object object object object) none) ;; 47
+    (net-world-method-48 (_type_ object object) none) ;; 48
+    (net-world-method-49 (_type_ object object) none) ;; 49
+    (net-world-method-50 (_type_ object object) none) ;; 50
+    (net-world-method-51 (_type_ object object) none) ;; 51
+    (net-world-method-52 (_type_ object object) none) ;; 52
+    (net-world-method-53 (_type_ object object object) object) ;; 53
+    (net-world-method-54 (_type_) symbol) ;; 54
+    (net-world-method-55 (_type_ object object object) none) ;; 55
+    (net-world-method-56 (_type_ object object object object) int) ;; 56
+    (net-world-method-57 (_type_ object) none) ;; 57
+    (net-world-method-58 (_type_ object) int) ;; 58
+    (net-world-method-59 (_type_ object) int) ;; 59
+    (net-world-method-60 (_type_ object object) none) ;; 60
+    (net-world-method-61 (_type_ object) none) ;; 61
+    (net-world-method-62 (_type_ object object) none) ;; 62
+    (net-world-method-63 (_type_) none) ;; 63
+    (net-world-method-64 (_type_ object) none) ;; 64
+    (net-world-method-65 (_type_ object) none) ;; 65
+    (net-world-method-66 (_type_ object) int) ;; 66
+    (net-world-method-67 (_type_ object) none) ;; 67
+    (net-world-method-68 (_type_ object) none) ;; 68
+    (net-world-method-69 (_type_ object) none) ;; 69
+    (net-world-method-70 (_type_) int) ;; 70
+    (net-world-method-71 (_type_) symbol) ;; 71
+    (net-world-method-72 (_type_) none) ;; 72
+    (net-world-method-73 (_type_ object) none) ;; 73
+    (net-world-method-74 (_type_ object) int) ;; 74
+    (net-world-method-75 (_type_ object) int) ;; 75
+    (net-world-method-76 (_type_ object) none) ;; 76
+    (net-world-method-77 (_type_) none) ;; 77
+    (net-world-method-78 (_type_) none) ;; 78
+    (net-world-method-79 (_type_) symbol) ;; 79
+    (net-world-method-80 (_type_) symbol) ;; 80
+    (net-world-method-81 (_type_) none) ;; 81
+    (net-world-method-82 (_type_) int) ;; 82
+    (net-world-method-83 (_type_ object) none) ;; 83
+    (net-world-method-84 (_type_ object) none) ;; 84
+    (net-world-method-85 (_type_ object) int) ;; 85
+    (net-world-method-86 (_type_ object) int) ;; 86
+    )
+  )
 
-(set! a0-32 'net-driver)
+(define *ghost-info-ptr* (the-as object #f))
 
-(set! a1-28 structure)
+(define net-play-mode-race? (the-as (function none) #f))
 
-(set! a2-23 (the-as uint #x900000044))
+(define get-task-node-id-from-location-and-event (the-as (function none) #f))
 
-(call! a0-32 a1-28 a2-23)
+(define *default-vehicle-load-parts* (the-as object #x1249249))
 
-(set! t9-26 method-set!)
+(define encode-green-room-stats (the-as (function uint int none) #f))
 
-(set! a0-33 net-driver)
+(define decode-green-room-stats (the-as (function uint int none) #f))
 
-(set! a1-29 3)
+(define encode-net-world-state (the-as (function uint int none) #f))
 
-(set! a2-24 L265)
+(define decode-net-world-state (the-as (function uint int none) #f))
 
-(call! a0-33 a1-29 a2-24)
+(define net-world-init-remote (the-as (function none) #f))
 
-(set! v1-47 L39)
+(define *msg-map-net-world*
+  (the-as array (new 'static 'boxed-array :type symbol :length 0 :allocated-length 64))
+  )
 
-(set! *net-drivers* v1-47)
+(define *net-process-class-info-net-world* (the-as net-process-class-info #f))
 
-(set! v1-48 L4)
+;; SCAFFOLDING: defmethods for net-world moved to net-world.gc (need full type)
 
-(set! get-vehicle-name v1-48)
+(define *net-world* (the-as net-world #f))
 
-(set! *protect-vehicle-slot-1* (the-as object #f))
+(define *net-player-names* (the-as object #f))
 
-(set! v1-49 L1)
+(define *prebuilt-ai-vehicles* (the-as array #f))
 
-(set! protect-vehicle-slot-1 v1-49)
+(define *net-vehicles* (the-as array #f))
 
-(set! *in-end-of-race-preload* (the-as object #f))
+(define find-vehicle-info (the-as (function int symbol) #f))
 
-(set! *race-end-camera-pos-valid* (the-as object #f))
+(define find-prebuilt-ai-vehicle (the-as (function int symbol) #f))
 
-(set! v1-50 (the-as none L37))
+(define *net-drivers* (the-as array #f))
 
-(set! *race-end-camera-pos* v1-50)
+(define get-vehicle-name (the-as (function int none) #f))
 
-(set! v1-51 type)
+(define *protect-vehicle-slot-1* (the-as object #f))
 
-(set! t9-27 (method-of-type v1-51 new))
+(define protect-vehicle-slot-1 (the-as (function int none) #f))
 
-(set! a0-34 'race-end-cam)
+(define *in-end-of-race-preload* (the-as object #f))
 
-(set! a1-30 process)
+(define *race-end-camera-pos-valid* (the-as object #f))
 
-(set! a2-25 (the-as uint #xf00000090))
-
-(call! a0-34 a1-30 a2-25)
-
-(set! t9-28 method-set!)
-
-(set! a0-35 race-end-cam)
-
-(set! a1-31 3)
-
-(set! a2-26 L233)
-
-(call! a0-35 a1-31 a2-26)
-
-(set! v0-29 0)
+(define *race-end-camera-pos* (the-as object #f))

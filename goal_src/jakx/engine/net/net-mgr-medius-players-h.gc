@@ -3,6 +3,19 @@
 
 ;; ERROR: top level function was not converted to expressions. Cannot decompile.
 
+;; SCAFFOLDING: medius-player-online-state not compiled from a -h.gc file; stub here
+(deftype medius-player-online-state (structure)
+  ((connect-status        int32  :offset-assert 0)
+   (medius-lobby-world-id int32  :offset-assert 4)
+   (medius-game-world-id  int32  :offset-assert 8)
+   (lobby-name            uint8  64 :offset-assert 12)
+   (game-name             uint8  64 :offset-assert 76)
+   )
+  :pack-me
+  :size-assert         #x8c
+  :flag-assert         #x90000008c
+  )
+
 
 
 
@@ -64,14 +77,14 @@
                              )
   )
 
-((method-of-object *medius-player-cache* medius-cache-method-12))
+(medius-cache-method-12 *medius-player-cache*)
 
 (deftype medius-player (medius-cache-index)
   ()
   (:methods
-    (medius-player-method-11 () none)
-    (medius-player-method-12 () none)
-    (medius-player-method-13 () none)
+    (medius-player-method-11 (_type_) none)
+    (medius-player-method-12 (_type_) none)
+    (medius-player-method-13 (_type_) none)
     )
   )
 
@@ -81,85 +94,17 @@
   )
 
 
+;; SCAFFOLDING: broken s.w! stores on #f pointers removed
 (define *medius-buddies* #f)
-
-(let ((v1-8 100)
-      (a0-9 *medius-buddies*)
-      )
-  (s.w! (+ a0-9 4) v1-8)
-  )
-
 (define *medius-buddies-online* #f)
-
-(let ((v1-10 100)
-      (a0-10 *medius-buddies-online*)
-      )
-  (s.w! (+ a0-10 4) v1-10)
-  )
-
 (define *medius-ignores* #f)
-
-(let ((v1-12 32)
-      (a0-11 *medius-ignores*)
-      )
-  (s.w! (+ a0-11 4) v1-12)
-  )
-
 (define *medius-room-players* #f)
-
-(let ((v1-14 256)
-      (a0-12 *medius-room-players*)
-      )
-  (s.w! (+ a0-12 4) v1-14)
-  )
-
 (define *medius-recent-players* #f)
-
-(let ((v1-16 32)
-      (a0-13 *medius-recent-players*)
-      )
-  (s.w! (+ a0-13 4) v1-16)
-  )
-
 (define *medius-in-game-players* #f)
-
-(let ((v1-18 8)
-      (a0-14 *medius-in-game-players*)
-      )
-  (s.w! (+ a0-14 4) v1-18)
-  )
-
 (define *medius-local-game-players* #f)
-
-(let ((v1-20 8)
-      (a0-15 *medius-local-game-players*)
-      )
-  (s.w! (+ a0-15 4) v1-20)
-  )
-
 (define *medius-outstanding-clan-invites* #f)
-
-(let ((v1-22 64)
-      (a0-16 *medius-outstanding-clan-invites*)
-      )
-  (s.w! (+ a0-16 4) v1-22)
-  )
-
 (define *medius-mute-list* #f)
-
-(let ((v1-24 24)
-      (a0-17 *medius-mute-list*)
-      )
-  (s.w! (+ a0-17 4) v1-24)
-  )
-
 (define *medius-clan-members-online* #f)
-
-(let ((v1-26 64)
-      (a0-18 *medius-clan-members-online*)
-      )
-  (s.w! (+ a0-18 4) v1-26)
-  )
 
 (define *medius-my-player* (new 'static 'medius-cached-info-player))
 

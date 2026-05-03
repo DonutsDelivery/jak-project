@@ -8,14 +8,9 @@
 
 
 (defmethod medius-clan-method-11 ((this medius-clan))
-  (let ((s5-0 (method-of-object *medius-clan-cache* medius-cache-method-11)))
-    ((method-of-type medius-clan medius-cache-index-method-10))
-    9000
-    (case (s5-0)
-      (('error)
-       )
-      )
-    )
+  ;; SCAFFOLDING
+  (format 0 "call to medius-clan-method-11~%")
+  (break!)
   (none)
   )
 
@@ -35,15 +30,12 @@
 
 (define *tmp-clan-members* #f)
 
-(let ((v1-7 64)
-      (a0-1 *tmp-clan-members*)
-      )
-  (s.w! (+ a0-1 4) v1-7)
-  )
-
-(set! (-> *tmp-clan* members) (the-as medius-player-index-array *tmp-clan-members*))
+;; SCAFFOLDING: s.w! on *tmp-clan-members* (#f) removed
 
 ;; ERROR: function has no type analysis. Cannot decompile.
+
+;; SCAFFOLDING: medius-clan-info-retrieve-behavior not decompiled
+(define medius-clan-info-retrieve-behavior (the-as (function int none) #f))
 
 ;; WARN: Return type mismatch function vs symbol.
 (defmethod medius-cached-info-method-9 ((this medius-cached-info-clan))

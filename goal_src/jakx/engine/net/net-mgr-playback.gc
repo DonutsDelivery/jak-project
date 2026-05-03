@@ -47,7 +47,7 @@
             )
       )
   (method-set! net-mgr 36 gp-0)
-  (set! (-> gp-0 code) L42)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
 (let ((gp-1 (new 'static 'state
@@ -64,6 +64,6 @@
             )
       )
   (method-set! net-mgr 37 gp-1)
-  (set! (-> gp-1 event) (the-as (function process int symbol event-message-block object) L36))
-  (set! (-> gp-1 code) L1)
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   )

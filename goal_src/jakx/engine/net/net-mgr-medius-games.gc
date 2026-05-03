@@ -13,7 +13,7 @@
    (base-val  int32)
    )
   (:methods
-    (medius-filter-method-9 () none)
+    (medius-filter-method-9 (_type_) none)
     )
   )
 
@@ -24,17 +24,14 @@
 
 (define *medius-desired-server-filters* #f)
 
-(dotimes (v1-4 6)
-  (set! (-> (the-as (pointer int32) (+ (* v1-4 16) (the-as int *medius-filters*)))) -1)
-  )
-
-(dotimes (v1-7 3)
-  (set! (-> (the-as (pointer int32) (+ (* v1-7 16) (the-as int *medius-server-filters*)))) -1)
-  )
+;; SCAFFOLDING: dotimes on #f pointer (*medius-filters*/*medius-server-filters*) removed
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
 ;; ERROR: function has no type analysis. Cannot decompile.
+
+;; SCAFFOLDING: medius-game-status-info-retrieve-behavior not decompiled
+(define medius-game-status-info-retrieve-behavior (the-as (function none) #f))
 
 ;; WARN: Return type mismatch function vs symbol.
 (defmethod medius-cached-info-method-9 ((this medius-cached-info-game-status))
