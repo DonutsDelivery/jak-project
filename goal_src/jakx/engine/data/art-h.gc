@@ -302,6 +302,7 @@ Each process-drawable has a draw-control."
    (max-lod               int8     :overlay-at (-> lod-set max-lod))
    (force-lod             int8)
    (cur-lod               int8)
+   (desired-lod           int8)
    (cur-lods              int8     2)
    (effect-masks          uint64   2)
    (prev-seg-mask         uint64)
@@ -352,3 +353,30 @@ Each process-drawable has a draw-control."
 (defmethod get-skeleton-origin ((this draw-control))
   (-> this skeleton bones 0 transform trans)
   )
+
+;; SCAFFOLDING -- jak3 clean version
+(deftype art-joint-anim-manager-slot (structure)
+  "Record for an animation which is additionally compressed with LZO compression over the entire animation."
+  ((anim        art-joint-anim)
+   (comp-data   uint32)
+   (time-stamp  uint64)
+   )
+  )
+
+(deftype art-joint-anim-manager (basic)
+  "Cache for LZO decompression of animations."
+  ((heap        kheap                        :inline)
+   (free-index  int32)
+   (slot        art-joint-anim-manager-slot  64 :inline)
+   )
+  (:methods
+    (new (symbol type int) _type_)
+    (decompress (_type_ art-joint-anim) art-joint-anim)
+    (mark-anim-in-use (_type_ art-joint-anim) art-joint-anim)
+    (unload-from-slot (_type_ int) art-joint-anim)
+    (used-bytes-for-slot (_type_ int) int)
+    (unload-from-heap (_type_ kheap) none)
+    )
+  )
+
+(import "goal_src/jak3/engine/data/part-groups.gc")

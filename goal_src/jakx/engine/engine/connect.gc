@@ -200,7 +200,7 @@ New for Jak 2: You can use a child class of [[connection]]."
             (set! (-> (the-as connectable v1-10) prev0)
                   (the-as connectable (&- (the-as pointer v1-10) (the-as uint (-> arg2 size))))
                   )
-            (set! (-> (the-as (pointer int32) v1-10)) (&+ (the-as pointer v1-10) (-> arg2 size)))
+            (set! (-> (the-as (pointer pointer) v1-10)) (&+ (the-as pointer v1-10) (-> arg2 size)))
             (set! v1-10 (&+ (the-as pointer v1-10) (-> arg2 size)))
             (+! a0-6 1)
             )
@@ -208,7 +208,7 @@ New for Jak 2: You can use a child class of [[connection]]."
         (set! (-> (the-as connectable v1-10) prev0)
               (the-as connectable (&- (the-as pointer v1-10) (the-as uint (-> arg2 size))))
               )
-        (set! (-> (the-as (pointer int32) v1-10)) (-> v0-0 dead-list-end))
+        (set! (-> (the-as (pointer connectable) v1-10)) (-> v0-0 dead-list-end))
         )
       )
     v0-0
@@ -529,7 +529,7 @@ Unlike [[engine]], users can use [[engine-pers]] as a parent class."
         (set! (-> (the-as (pointer pointer) v1-3) 0) (&+ (the-as pointer v1-3) (-> arg2 size)))
         (set! v1-3 (&+ (the-as pointer v1-3) (-> arg2 size)))
         )
-      (set! (-> (the-as (pointer int32) (&- (the-as pointer v1-3) (the-as uint (-> arg2 size))))) #f)
+      (set! (-> (the-as (pointer symbol) (&- (the-as pointer v1-3) (the-as uint (-> arg2 size))))) #f)
       )
     v0-0
     )

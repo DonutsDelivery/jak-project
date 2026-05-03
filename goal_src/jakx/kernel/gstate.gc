@@ -300,6 +300,11 @@
   )
 
 (defun inherit-state ((arg0 state) (arg1 state))
+  ;; SCAFFOLDING: defensive NULL-check — many decompiled net files pass an
+  ;; uninitialized method slot here. Skip the inherit when arg1 is null.
+  (when (zero? (the-as int arg1))
+    (return arg0)
+    )
   (set! (-> arg0 parent) (-> arg1 parent)) ;; huh???
   (set! (-> arg0 exit) (-> arg1 exit))
   (set! (-> arg0 code) (-> arg1 code))

@@ -11,6 +11,7 @@
 (declare-type process-drawable process)
 (define-extern external-art-buffer-init (function external-art-buffer int))
 (define-extern ja-abort-spooled-anim (function spool-anim art-joint-anim int int :behavior process-drawable))
+(define-extern ja-play-spooled-anim (function spool-anim art-joint-anim art-joint-anim (function process-drawable symbol) uint32 object :behavior process-drawable))
 (declare-type art basic)
 (declare-type art-group art)
 (define-extern *stack-top* pointer)
@@ -199,3 +200,5 @@ to a pair of external-art-buffers."
    (data     uint8  :dynamic)
    )
   )
+
+(define-extern *art-control* external-art-control)

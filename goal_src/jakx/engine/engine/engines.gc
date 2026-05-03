@@ -36,7 +36,7 @@
   ((params    basic   3 :overlay-at param1)
    (mat-prev  matrix  :inline)
    (mat-new   matrix  :inline)
-   (hand      uint64)
+   (hand      handle)
    (flags     part-local-space-flags)
    (pad       uint32  1)
    )

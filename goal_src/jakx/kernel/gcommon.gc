@@ -942,7 +942,7 @@ The stride is stored in the heap-base of the inline-array-class child class."
   (:methods
     (new (symbol type int) _type_)
     (push-back (_type_ object) int)
-    (inline-array-class-method-10 () none)
+    (inline-array-class-method-10 (_type_) none)
     (clear-1 (_type_) symbol)
     (clear-2 (_type_) none)
     (pop-front (_type_ int) pointer)

@@ -10,6 +10,7 @@
 (define-extern mark-permanent-holds (function pair object))
 (define-extern add-want-level (function (inline-array level-buffer-state) (pointer int64) symbol symbol symbol symbol object))
 (define-extern *backup-load-state* load-state)
+(define-extern want-force-inside (function load-state symbol symbol none))
 
 
 ;; DECOMP BEGINS
@@ -149,7 +150,7 @@
   )
 
 ;; ERROR: Failed load: (set! a1-7 (-> (the-as (pointer uint32) (+ a1-6 576)))) at op 71
-(defmethod load-state-method-11 ((this load-state) (arg0 (pointer symbol)))
+(defmethod want-levels ((this load-state) (arg0 (pointer symbol)))
   ;; NOTE: Stubbed - load-state-method-11 has PS2 constructs (s.w!, local-vars, etc.)
   (format 0 "call to load-state-method-11~%")
   0
@@ -172,8 +173,9 @@
 ;; ERROR: failed type prop at 292: Could not figure out load: (set! v1 (-> (the-as (pointer uint32) (+ gp 4224))))
 ;; ERROR: Function may read a register that is not set: a0
 (defmethod load-state-method-22 ((this load-state))
-  ;; NOTE: Stubbed - load-state-method-22 has PS2 constructs (s.w!, local-vars, etc.)
+  ;; SCAFFOLDING
   (format 0 "call to load-state-method-22~%")
+  (break!)
   0
   )
 
@@ -210,34 +212,39 @@
 
 ;; ERROR: Function may read a register that is not set: a2
 ;; ERROR: Function may read a register that is not set: a3
-(defmethod load-state-method-14 ((this load-state) (arg0 symbol))
-  ;; NOTE: Stubbed - load-state-method-14 has PS2 constructs (s.w!, local-vars, etc.)
-  (format 0 "call to load-state-method-14~%")
+(defmethod want-vis-level ((this load-state) (arg0 symbol))
+  ;; NOTE: Stubbed
+  (format 0 "call to want-vis-level~%")
   0
   )
 
 ;; ERROR: Failed store: (s.w! (+ v1-2 4) arg1) at op 8
-(defmethod load-state-method-13 ((this load-state) (arg0 symbol) (arg1 symbol))
-  ;; NOTE: Stubbed - load-state-method-13 has PS2 constructs (s.w!, local-vars, etc.)
-  (format 0 "call to load-state-method-13~%")
+(defmethod want-display-level ((this load-state) (arg0 symbol) (arg1 symbol))
+  ;; NOTE: Stubbed
+  (format 0 "call to want-display-level~%")
   0
   )
 
-(defmethod load-state-method-15 ((this load-state) (arg0 symbol) (arg1 symbol))
+(defmethod load-state-method-15 ((this load-state) (arg0 symbol))
   (let ((v1-0 (lookup-level-info arg0)))
     (if v1-0
         (set! arg0 (-> v1-0 name))
         )
     )
   (set! (-> this vis-nick) arg0)
-  0
+  (none)
   )
 
 ;; ERROR: Failed store: (s.w! (+ v1-2 8) arg1) at op 8
-(defmethod load-state-method-16 ((this load-state) (arg0 symbol) (arg1 symbol))
-  ;; NOTE: Stubbed - load-state-method-16 has PS2 constructs (s.w!, local-vars, etc.)
-  (format 0 "call to load-state-method-16~%")
+(defmethod want-force-vis ((this load-state) (arg0 symbol) (arg1 symbol))
+  ;; NOTE: Stubbed
+  (format 0 "call to want-force-vis~%")
   0
+  )
+
+(defun want-force-inside ((this load-state) (arg0 symbol) (arg1 symbol))
+  ;; SCAFFOLDING - jakx has no binary equivalent; drives load-state force-inside? field
+  (none)
   )
 
 ;; ERROR: Function may read a register that is not set: a2
@@ -338,42 +345,35 @@
 ;; ERROR: Function may read a register that is not set: a0
 ;; ERROR: Function may read a register that is not set: a1
 (defmethod load-state-method-25 ((this load-state))
-  ;; NOTE: Stubbed - load-state-method-25 has PS2 constructs (s.w!, local-vars, etc.)
+  ;; SCAFFOLDING
   (format 0 "call to load-state-method-25~%")
+  (break!)
   (none)
   )
 
-;; ERROR: failed type prop at 65: Called a function, but we do not know its type
-;; ERROR: Function may read a register that is not set: a0
-;; ERROR: Function may read a register that is not set: a1
-;; ERROR: Function may read a register that is not set: a2
-;; ERROR: Function may read a register that is not set: a3
-(defmethod load-state-method-23 ((this load-state))
-  ;; NOTE: Stubbed - load-state-method-23 has PS2 constructs (s.w!, local-vars, etc.)
+(defmethod load-state-method-23 ((this load-state) (arg0 uint) (arg1 int) (arg2 int))
+  ;; SCAFFOLDING
   (format 0 "call to load-state-method-23~%")
-  #f
+  (break!)
+  0
   )
 
-;; ERROR: failed type prop at 1: add failed: <uninitialized> <integer 1>
-
-;; ERROR: Function may read a register that is not set: a0
-;; ERROR: Function may read a register that is not set: a1
-;; ERROR: Function may read a register that is not set: a2
-;; ERROR: Function may read a register that is not set: a3
-(defmethod load-state-method-26 ((this load-state))
-  ;; NOTE: Stubbed - load-state-method-26 has PS2 constructs (s.w!, local-vars, etc.)
+(defmethod load-state-method-26 ((this load-state) (arg0 uint) (arg1 int) (arg2 int))
+  ;; SCAFFOLDING
   (format 0 "call to load-state-method-26~%")
-  (none)
+  (break!)
+  0
   )
 
-;; ERROR: failed type prop at 0: add failed: <uninitialized> <integer 12>
-
-;; ERROR: Function may read a register that is not set: a0
-;; ERROR: Function may read a register that is not set: a1
-;; ERROR: Function may read a register that is not set: a2
-(defmethod load-state-method-24 ((this load-state))
-  ;; NOTE: Stubbed - load-state-method-24 has PS2 constructs (s.w!, local-vars, etc.)
+(defmethod load-state-method-24 ((this load-state) (arg0 uint) (arg1 int))
+  ;; SCAFFOLDING
   (format 0 "call to load-state-method-24~%")
+  (break!)
+  0
+  )
+
+(defmethod add-borrow-levels ((this load-state))
+  ;; SCAFFOLDING
   (none)
   )
 

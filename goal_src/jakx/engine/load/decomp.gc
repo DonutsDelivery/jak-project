@@ -34,7 +34,7 @@
 
 ;; ERROR: failed type prop at 239: Could not figure out load: (set! t1 (l.q a1))
 ;; ERROR: Function may read a register that is not set: t0
-(defmethod level-method-16 ((a0-0 level) (a1-0 level-vis-info) (a2-0 uint) (a3-0 (pointer uint8)))
+(defmethod update-vis! ((a0-0 level) (a1-0 level-vis-info) (a2-0 uint) (a3-0 (pointer uint8)))
   (format 0 "call to level-method-16~%")
   (break!)
   #f
