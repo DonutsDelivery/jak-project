@@ -31,10 +31,10 @@
 
 
 ;; +++vehicle-flag
+;; SCAFFOLDING: :copy-entries rigid-body-object-flag removed — redefines same names at different bits
 (defenum vehicle-flag
   :type uint64
   :bitfield #t
-  :copy-entries rigid-body-object-flag
   (suppress-physics 4)
   (in-air 5)
   (on-ground 6)
@@ -84,6 +84,33 @@
   (suppress-look 50)
   (disable-weapons 51)
   (superhero 52)
+  ;; SCAFFOLDING: jak3/jakx compat bits (not in original jakx bitfield)
+  (impact 53)
+  (dead 54)
+  (disturbed 55)
+  (flight-level-transition 56)
+  (on-flight-level 57)
+  (persistent 58)
+  (player-dismounting 59)
+  (player-impulse-force 60)
+  (player-touching 61)
+  (traffic-managed 62)
+  (player-contact-force 63)
+  ;; bits 0-3 unused in jakx main enum — use for remaining compat flags
+  (enable-collision 0)
+  (player-edge-grabbing 1)
+  (player-standing-on 2)
+  (waiting-for-player 3)
+  (no-hijack 0)
+  (camera-bike-mode 1)
+  (camera-rapid-tracking-mode 2)
+  (gun-dark-2-zero-g 3)
+  (in-pursuit 0)
+  (net-player-driving 1)
+  (target-in-sight 2)
+  (damaged 3)
+  (alert 0)
+  (rammed-target 1)
   )
 ;; ---vehicle-flag
 

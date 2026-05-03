@@ -7,91 +7,21 @@
 
 ;; DECOMP BEGINS
 
-(defskelgroup skel-air-train-fma air-train-fma air-train-fma-lod0-jg air-train-fma-idle-ja
-              ((air-train-fma-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 2 -2 12.5)
-              :shadow air-train-fma-shadow-mg
-              :origin-joint-index 3
-              :shadow-joint-index 3
-              )
-
-(defskelgroup skel-beacon beacon beacon-lod0-jg beacon-idle-ja
-              ((beacon-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 0 0 2)
-              :origin-joint-index 3
-              )
-
-(defskelgroup skel-handcuffs handcuffs handcuffs-lod0-jg handcuffs-idle-ja
-              ((handcuffs-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 0 0 2)
-              :origin-joint-index 3
-              )
-
-(defskelgroup skel-hellcat-lowres-fma hellcat-lowres-fma hellcat-lowres-fma-lod0-jg hellcat-lowres-fma-idle-ja
-              ((hellcat-lowres-fma-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 0 0 6.8)
-              :origin-joint-index 3
-              )
-
-(defskelgroup skel-ctypal-palace-break ctypal-palace-break ctypal-palace-break-lod0-jg ctypal-palace-break-idle-ja
-              ((ctypal-palace-break-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 0 0 500)
-              :origin-joint-index 3
-              )
-
-(defskelgroup skel-ctypal-palace-break-a ctypal-palace-break ctypal-palace-break-a-lod0-jg ctypal-palace-break-a-idle-ja
-              ((ctypal-palace-break-a-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 0 0 750)
-              :origin-joint-index 3
-              )
-
-(defskelgroup skel-ctypal-palace-break-b ctypal-palace-break ctypal-palace-break-b-lod0-jg ctypal-palace-break-b-idle-ja
-              ((ctypal-palace-break-b-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 0 0 1000)
-              :origin-joint-index 3
-              )
-
-(defskelgroup skel-ctypal-palace-break-c ctypal-palace-break ctypal-palace-break-c-lod0-jg ctypal-palace-break-c-idle-ja
-              ((ctypal-palace-break-c-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 0 0 640)
-              :origin-joint-index 3
-              )
-
-(defskelgroup skel-ctypal-palace-break-d ctypal-palace-break ctypal-palace-break-d-lod0-jg ctypal-palace-break-d-idle-ja
-              ((ctypal-palace-break-d-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 0 0 640)
-              :origin-joint-index 3
-              )
-
-(defskelgroup skel-ctypal-palace-break-e ctypal-palace-break ctypal-palace-break-e-lod0-jg ctypal-palace-break-e-idle-ja
-              ((ctypal-palace-break-e-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 0 0 640)
-              :origin-joint-index 3
-              )
-
-(defskelgroup skel-ctypal-cable-break ctypal-cable-break ctypal-cable-break-lod0-jg ctypal-cable-break-idle-ja
-              ((ctypal-cable-break-lod0-mg (meters 999999)))
-              :bounds (static-spherem 200 0 0 640)
-              :origin-joint-index 3
-              )
-
-(defskelgroup skel-ctypal-support-break ctypal-support-break ctypal-support-break-lod0-jg ctypal-support-break-idle-ja
-              ((ctypal-support-break-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 -150 0 300)
-              :origin-joint-index 3
-              )
-
-(defskelgroup skel-ctypal-rail ctypal-rail ctypal-rail-lod0-jg ctypal-rail-idle-ja
-              ((ctypal-rail-lod0-mg (meters 999999)))
-              :bounds (static-spherem -40 0 35 75)
-              :origin-joint-index 3
-              )
-
-(defskelgroup skel-ctypal-base-break ctypal-base-break ctypal-base-break-lod0-jg ctypal-base-break-idle-ja
-              ((ctypal-base-break-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 0 0 500)
-              :origin-joint-index 3
-              )
+;; SCAFFOLDING: defskelgroup stubs (art groups in level DGO, not available at compile time)
+(define skel-air-train-fma (the-as skeleton-group #f))
+(define skel-beacon (the-as skeleton-group #f))
+(define skel-handcuffs (the-as skeleton-group #f))
+(define skel-hellcat-lowres-fma (the-as skeleton-group #f))
+(define skel-ctypal-palace-break (the-as skeleton-group #f))
+(define skel-ctypal-palace-break-a (the-as skeleton-group #f))
+(define skel-ctypal-palace-break-b (the-as skeleton-group #f))
+(define skel-ctypal-palace-break-c (the-as skeleton-group #f))
+(define skel-ctypal-palace-break-d (the-as skeleton-group #f))
+(define skel-ctypal-palace-break-e (the-as skeleton-group #f))
+(define skel-ctypal-cable-break (the-as skeleton-group #f))
+(define skel-ctypal-support-break (the-as skeleton-group #f))
+(define skel-ctypal-rail (the-as skeleton-group #f))
+(define skel-ctypal-base-break (the-as skeleton-group #f))
 
 (load-scene
   (new 'static 'scene

@@ -38,7 +38,7 @@
   (none)
   )
 
-(defmethod init-callback ((this hud-vehicle-health))
+(defmethod hud-method-17 ((this hud-vehicle-health))
   (vehicle-entity-hack 27)
   (set! (-> this gui-id)
         (add-process *gui-control* this (gui-channel hud-lower-left-2) (gui-action play) (-> this name) 81920.0 0)

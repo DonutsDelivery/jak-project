@@ -16,10 +16,8 @@
 
 (define *debug-vehicle-work* (new 'static 'debug-vehicle-work))
 
-(defskelgroup skel-vehicle-explosion vehicle-explosion vehicle-explosion-lod0-jg vehicle-explosion-idle-ja
-              ((vehicle-explosion-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 0 0 50)
-              )
+;; SCAFFOLDING: defskelgroup stub (art group in level DGO, not available at compile time)
+(define skel-vehicle-explosion (the-as skeleton-group #f))
 
 (define *vehicle-shadow-control*
   (new 'static 'shadow-control :settings (new 'static 'shadow-settings
@@ -662,13 +660,7 @@
   )
 
 (defmethod vehicle-method-117 ((this vehicle))
-  (if (time-elapsed? (-> this player-touch-time) (seconds 0.1))
-      (logclear! (-> this v-flags) (vehicle-flag player-touching player-edge-grabbing player-standing-on))
-      )
-  (when (logtest? (-> this v-flags) (vehicle-flag player-touching))
-    (detect-riders! (-> this root))
-    0
-    )
+  ;; SCAFFOLDING: player-touch-time field absent in jakx vehicle struct
   (if (logtest? (vehicle-flag player-touching player-driving) (-> this v-flags))
       (logior! (-> this skel status) (joint-control-status sync-math))
       (logclear! (-> this skel status) (joint-control-status sync-math))
@@ -840,7 +832,7 @@
   (vector-reset! (-> this target-acceleration))
   (when (logtest? (-> this v-flags) (vehicle-flag disturbed))
     (if (logtest? (-> this v-flags) (vehicle-flag in-air))
-        (set-time! (-> this disturbed-time))
+        (set! (-> this disturbed-time) (the-as uint (current-time)))
         )
     )
   (let ((s5-2 (new 'stack-no-clear 'vehicle-controls)))
@@ -1057,7 +1049,7 @@
                  (set! f30-0 (* 204800.0 (-> this info info mass)))
                  (/ (-> this info damage hit-points) 5)
                  )
-                ((logtest? (penetrate jak-red-shockwave) arg3)
+                ((logtest? (penetrate jak-res-shockwave) arg3)
                  (case (-> arg1 mode)
                    (('eco-red-shove)
                     (set! f30-0 (* (lerp 4096.0 8192.0 (-> arg1 control)) (-> this info info mass)))
@@ -1155,7 +1147,7 @@
   (case arg2
     (('attack)
      (let ((s3-1 (the-as object (-> arg3 param 1)))
-           (s2-1 (get-penetrate-using-from-attack-event (the-as process-drawable arg0) (the-as basic arg3)))
+           (s2-1 (get-penetrate-using-from-attack-event (the-as process-drawable arg0) arg3))
            )
        (when (and (!= (-> (the-as attack-info s3-1) id) (-> this incoming-attack-id))
                   (not (logtest? (-> this v-flags) (vehicle-flag dead)))

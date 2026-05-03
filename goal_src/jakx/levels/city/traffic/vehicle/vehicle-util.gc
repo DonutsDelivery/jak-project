@@ -775,12 +775,7 @@
   )
 
 (defmethod vehicle-method-137 ((this vehicle))
-  (let ((a0-2 (find-nearest-nav-mesh (-> this root trans) (the-as float #x7f800000))))
-    (when a0-2
-      (add-process-drawable-to-nav-mesh a0-2 this #t)
-      (vehicle-method-139 this)
-      )
-    )
+  ;; SCAFFOLDING: add-process-drawable-to-nav-mesh absent in jakx nav-mesh
   0
   (none)
   )
@@ -792,12 +787,8 @@
   )
 
 (defmethod vehicle-method-138 ((this vehicle))
-  (let ((v1-0 (-> this nav)))
-    (when v1-0
-      (remove-process-drawable (-> v1-0 state mesh) this)
-      (set! (-> this nav) #f)
-      )
-    )
+  ;; SCAFFOLDING: remove-process-drawable absent in jakx nav-mesh
+  (set! (-> this nav) #f)
   0
   (none)
   )
@@ -811,30 +802,16 @@
   )
 
 (defmethod vehicle-method-140 ((this vehicle))
-  (let ((v1-1 (vehicle-method-141 this))
-        (s5-0 (-> this nav))
-        )
+  ;; SCAFFOLDING: do-navigation-to-destination / change-to absent in jakx nav-state
+  (let ((v1-1 (vehicle-method-141 this)))
     (cond
       (v1-1
-        (cond
-          (s5-0
-            (do-navigation-to-destination (-> s5-0 state) (-> this root trans))
-            (when (not (logtest? (-> s5-0 state flags) (nav-state-flag in-mesh)))
-              (let ((a0-4 (find-nearest-nav-mesh (-> this root trans) (the-as float #x7f800000))))
-                (when (and a0-4 (!= a0-4 (-> s5-0 state mesh)))
-                  (change-to a0-4 this)
-                  (logclear! (-> this nav flags) (nav-control-flag output-sphere-hash))
-                  )
-                )
-              )
-            )
-          (else
-            (vehicle-method-137 this)
-            )
+        (when (not (-> this nav))
+          (vehicle-method-137 this)
           )
         )
       (else
-        (if s5-0
+        (if (-> this nav)
             (vehicle-method-138 this)
             )
         )
@@ -1118,7 +1095,7 @@
   )
 
 (defmethod vehicle-method-142 ((this vehicle))
-  (reset-momentum! (-> this rbody))
+  (init-velocities! (-> this rbody)) ;; SCAFFOLDING: reset-momentum! → init-velocities!
   (none)
   )
 
