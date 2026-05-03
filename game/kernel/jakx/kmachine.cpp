@@ -176,10 +176,8 @@ void InitParms(int argc, const char* const* argv) {
     // the default level is "#f".
     if (arg == "-level" && i + 1 < argc) {
       std::string levelName = argv[++i];
-      std::string symbolId = argv[++i];
-      Msg(6, "dkernel: level %s %s\n", levelName.c_str(), symbolId.c_str());
+      Msg(6, "dkernel: level %s\n", levelName.c_str());
       kstrcpy(DebugBootLevel, levelName.c_str());
-      ASSERT_NOT_REACHED();  // symbol ID junk
       // DebugBootLevelID = DecodeSymbolId(atoi(argv[2])) + 1;
     }
 
