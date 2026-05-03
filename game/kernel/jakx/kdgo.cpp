@@ -12,6 +12,8 @@
 #include "game/kernel/common/kprint.h"
 #include "game/kernel/jakx/kboot.h"
 #include "game/kernel/jakx/klink.h"
+#include "game/kernel/jakx/kscheme.h"
+#include "common/symbols.h"
 #include "game/kernel/jakx/kmachine.h"
 #include "game/overlord/jakx/rpc_interface.h"
 
@@ -197,8 +199,15 @@ void load_and_link_dgo_from_c(const char* name,
     char objName[64];
     strcpy(objName, (dgoObj + 4).cast<char>().c());  // name from dgo object header
     {
+      u32 str_t_before = jakx::u32_in_fixed_sym(jakx_symbols::FIX_SYM_STRING_TYPE);
+      printf("[LINK-OBJ %d] %s\n", objCount, objName);
+      fflush(stdout);
       auto p = scoped_prof(fmt::format("link-{}", objName).c_str());
       link_and_exec(obj, objName, objSize, heap, linkFlag, jump_from_c_to_goal);  // link now!
+      u32 str_t_after = jakx::u32_in_fixed_sym(jakx_symbols::FIX_SYM_STRING_TYPE);
+      if (str_t_after != str_t_before) {
+        printf("[STRING-TYPE-CHANGED] obj=%s: 0x%x -> 0x%x\n", objName, str_t_before, str_t_after);
+      }
     }
 
     // inform IOP we are done

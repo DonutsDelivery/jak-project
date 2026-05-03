@@ -543,6 +543,10 @@ uint32_t typelink_v3(Ptr<uint8_t> link, Ptr<uint8_t> data) {
   }
 
   // intern the GOAL type, creating the vtable if it doesn't exist.
+  u32 type_type_val = jakx::u32_in_fixed_sym(jakx_symbols::FIX_SYM_TYPE_TYPE);
+  if (!type_type_val || (type_type_val & 3)) {
+    printf("[typelink_v3] BAD type_type=0x%x when linking '%s'\n", type_type_val, sym_name);
+  }
   auto type_ptr = jakx::intern_type_from_c(-1, 0, sym_name, method_count);
 
   // prepare to read the locations of the type pointers
@@ -777,12 +781,9 @@ void link_control::jakx_finish(bool jump_from_c_to_goal) {
       auto entry = m_entry;
       auto name = basename_goal(m_object_name);
       strcpy(Ptr<char>(LINK_CONTROL_NAME_ADDR).c(), name);
-      // printf(" about to call... (0x%x)\n", entry.offset);
       Ptr<jakx::Type> type(*((entry - 4).cast<u32>()));
-      // printf(" type is %s\n", jakx::sym_to_cstring(type->symbol));
       jakx::call_method_of_type_arg2(entry.offset, type, GOAL_RELOC_METHOD, m_heap.offset,
                                      Ptr<char>(LINK_CONTROL_NAME_ADDR).offset);
-      // printf("  done with call!\n");
     }
   }
 
@@ -813,10 +814,19 @@ Ptr<uint8_t> link_and_exec(Ptr<uint8_t> data,
   link_control lc;
   lc.jakx_begin(data, name, size, heap, flags);
   uint32_t done;
+  u32 str_t0 = jakx::u32_in_fixed_sym(jakx_symbols::FIX_SYM_STRING_TYPE);
   do {
     done = lc.jakx_work();
   } while (!done);
+  u32 str_t1 = jakx::u32_in_fixed_sym(jakx_symbols::FIX_SYM_STRING_TYPE);
+  if (str_t1 != str_t0) {
+    printf("[link_and_exec] TYPELINK changed string_t 0x%x->0x%x for '%s'\n", str_t0, str_t1, name);
+  }
   lc.jakx_finish(jump_from_c_to_goal);
+  u32 str_t2 = jakx::u32_in_fixed_sym(jakx_symbols::FIX_SYM_STRING_TYPE);
+  if (str_t2 != str_t1) {
+    printf("[link_and_exec] EXECUTE changed string_t 0x%x->0x%x for '%s'\n", str_t1, str_t2, name);
+  }
   return lc.m_entry;
 }
 

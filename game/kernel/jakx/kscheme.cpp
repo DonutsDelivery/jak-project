@@ -87,6 +87,22 @@ u64 alloc_from_heap(u32 heap_symbol, u32 type, s32 size, u32 pp) {
       return kmalloc(heap_ptr, size, KMALLOC_MEMSET, "global-object").offset;
     }
 
+    // Guard: detect invalid symbol pointer before crash
+    {
+      u32 sym_off = typ->symbol.offset;
+      u32 expected_min = s7.offset;
+      u32 expected_max = s7.offset + 0x100000;  // symbol table < 1MB past s7
+      if (sym_off < expected_min || sym_off > expected_max) {
+        u32 string_t = u32_in_fixed_sym(FIX_SYM_STRING_TYPE);
+        u32 func_t   = u32_in_fixed_sym(FIX_SYM_FUNCTION_TYPE);
+        u32 type_t   = u32_in_fixed_sym(FIX_SYM_TYPE_TYPE);
+        u32 sym_t    = u32_in_fixed_sym(FIX_SYM_SYMBOL_TYPE);
+        printf("[alloc_from_heap] BAD sym: type=0x%x sym=0x%x heap=0x%x | string_t=0x%x func_t=0x%x type_t=0x%x sym_t=0x%x\n",
+               type, sym_off, heap_symbol, string_t, func_t, type_t, sym_t);
+        return kmalloc(heap_ptr, size, KMALLOC_MEMSET, "global-object").offset;
+      }
+    }
+
     Ptr<String> gstr = sym_to_string(typ->symbol);
     if (!gstr->len) {  // string has nothing in it.
       return kmalloc(heap_ptr, size, KMALLOC_MEMSET, "global-object").offset;
@@ -631,6 +647,9 @@ Ptr<Symbol4<u32>> find_slot_in_area(u32 start, u32 end) {
     auto sym = Ptr<Symbol4<u32>>(i);
     auto str = sym_to_string(sym);
     if (!str.offset) {
+      if (i == s7.offset + FIX_SYM_STRING_TYPE) {
+        printf("[find_slot] WARNING: FIX_SYM_STRING_TYPE slot (s7+0x10) appears empty!\n");
+      }
       return sym;
     }
   }
@@ -639,7 +658,17 @@ Ptr<Symbol4<u32>> find_slot_in_area(u32 start, u32 end) {
   return Ptr<Symbol4<u32>>(0);
 }
 
+static u32 s_last_string_t = 0;
+
 Ptr<Symbol4<u32>> intern_from_c_ht(const char* name) {
+  {
+    u32 cur = u32_in_fixed_sym(FIX_SYM_STRING_TYPE);
+    if (s_last_string_t != 0 && cur != s_last_string_t) {
+      printf("[intern_ht] string_t CHANGED 0x%x->0x%x before interning '%s'\n",
+             s_last_string_t, cur, name);
+    }
+    if (cur) s_last_string_t = cur;
+  }
   auto existing = find_symbol_from_c_ht(name);
   if (existing.offset) {
     return existing;
@@ -654,6 +683,7 @@ Ptr<Symbol4<u32>> intern_from_c_ht(const char* name) {
   NumSymbols++;
   *sym_to_string_ptr(slot) = Ptr<String>(make_string_from_c(name));
   g_symbol_hash_table[name] = (slot.offset - s7.offset) / 4;
+  printf("[intern_new] '%s' -> s7+0x%x\n", name, slot.offset - s7.offset);
   return slot;
 }
 
@@ -899,6 +929,14 @@ Ptr<Type> alloc_and_init_type(Ptr<Symbol4<Ptr<Type>>> sym,
   sym->value() = the_type;
   the_type->allocated_size = type_size;
   the_type->padded_size = ((type_size + 0xf) & 0xfff0);
+  {
+    u32 sym_off = sym.offset - s7.offset;
+    if (sym_off == FIX_SYM_STRING_TYPE || sym_off == FIX_SYM_TYPE_TYPE ||
+        sym_off == FIX_SYM_FUNCTION_TYPE || sym_off == FIX_SYM_SYMBOL_TYPE) {
+      printf("[alloc_and_init_type] FIX 0x%x stored 0x%x (raw=0x%x, sym_addr=0x%x)\n",
+             sym_off, the_type.offset, type_mem, sym.offset);
+    }
+  }
   return the_type;
 }
 
@@ -971,6 +1009,11 @@ Ptr<Type> set_fixed_type(u32 offset,
                          u32 inspect) {
   Ptr<Symbol4<Ptr<Type>>> type_symbol(s7.offset + offset);
   Ptr<Type> symbol_value = type_symbol->value();
+
+  if (offset == FIX_SYM_STRING_TYPE || offset == FIX_SYM_TYPE_TYPE) {
+    printf("[set_fixed_type] '%s' offset=0x%x slot_addr=0x%x current_val=0x%x\n",
+           name, offset, type_symbol.offset, symbol_value.offset);
+  }
 
   // set the symbol's name and hash
   *sym_to_string_ptr(type_symbol) = Ptr<String>(make_string_from_c(name));
@@ -1085,6 +1128,16 @@ u64 type_typep(Ptr<Type> t1, Ptr<Type> t2) {
 
 u64 method_set(u32 type_, u32 method_id, u32 method) {
   Ptr<Type> type(type_);
+
+  if (type.offset == 0 || type.offset == s7.offset) {
+    printf("[method_set] NULL/false type for method_id=%u method=0x%x\n", method_id, method);
+    return 0;
+  }
+  if (method_id >= type->num_methods) {
+    printf("[method_set] OOB: type=0x%x num_methods=%u method_id=%u method=0x%x\n",
+           type.offset, (u32)type->num_methods, method_id, method);
+    return 0;
+  }
 
   auto existing_method = type->get_method(method_id).offset;
 
@@ -1566,6 +1619,11 @@ int InitHeapAndSymbol() {
   alloc_and_init_type((s7 + FIX_SYM_SYMBOL_TYPE).cast<Symbol4<Ptr<Type>>>(), 9, true);
   alloc_and_init_type((s7 + FIX_SYM_STRING_TYPE).cast<Symbol4<Ptr<Type>>>(), 9, true);
   alloc_and_init_type((s7 + FIX_SYM_FUNCTION_TYPE).cast<Symbol4<Ptr<Type>>>(), 9, true);
+
+  printf("[InitHeapAndSymbol] s7=0x%x type_t=0x%x sym_t=0x%x string_t=0x%x func_t=0x%x\n",
+         s7.offset,
+         u32_in_fixed_sym(FIX_SYM_TYPE_TYPE), u32_in_fixed_sym(FIX_SYM_SYMBOL_TYPE),
+         u32_in_fixed_sym(FIX_SYM_STRING_TYPE), u32_in_fixed_sym(FIX_SYM_FUNCTION_TYPE));
 
   set_fixed_symbol(FIX_SYM_FALSE, "#f", s7.offset + FIX_SYM_FALSE);
   set_fixed_symbol(FIX_SYM_TRUE, "#t", s7.offset + FIX_SYM_TRUE);
