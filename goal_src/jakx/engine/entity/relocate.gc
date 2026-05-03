@@ -5,6 +5,8 @@
 ;; name in dgo: relocate
 ;; dgos: GAME
 
+(define-extern forall-particles-with-key (function sparticle-launch-control (function sparticle-system sparticle-cpuinfo none) symbol symbol none))
+
 ;; DECOMP BEGINS
 
 (defmethod relocate ((this process) (offset int))
@@ -131,9 +133,6 @@
   (if (nonzero? (-> this skel))
       (&+! (-> this skel) offset)
       )
-  (if (nonzero? (-> this align))
-      (&+! (-> this align) offset)
-      )
   (if (nonzero? (-> this path))
       (&+! (-> this path) offset)
       )
@@ -149,14 +148,8 @@
   (if (nonzero? (-> this part))
       (&+! (-> this part) offset)
       )
-  (if (nonzero? (-> this water))
-      (&+! (-> this water) offset)
-      )
   (if (nonzero? (-> this sound))
       (&+! (-> this sound) offset)
-      )
-  (if (nonzero? (-> this carry))
-      (&+! (-> this carry) offset)
       )
   (if (nonzero? (-> this rbody))
       (&+! (-> this rbody) offset)
@@ -326,7 +319,7 @@
       (let ((v1-1 (-> *kernel-context* relocating-offset)))
         (set! (-> arg1 key) (the-as sparticle-launch-control (+ (the-as int (-> arg1 key)) v1-1)))
         (if (-> arg1 binding)
-            (set! (-> arg1 binding) (the-as sparticle-launch-state (+ (the-as int (-> arg1 binding)) v1-1)))
+            (set! (-> arg1 binding) (the-as int (+ (the-as int (-> arg1 binding)) v1-1)))
             )
         )
       0

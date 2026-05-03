@@ -77,15 +77,16 @@
   )
 
 ;; definition for method 17 of type game-info
-;; ERROR: failed type prop at 1: add failed: game-info int
 (defmethod game-info-method-17 ((this game-info) (arg0 symbol))
-  (format 0 "call to game-info-method-17~%")
-  (break!)
-  (the-as game-info 0)
+  ;; SCAFFOLDING: initialize player current-continue to default
+  (let ((idx (the-as int arg0)))
+    (set! (-> this player-info idx current-continue) (the-as continue-point *default-continue*))
+    )
+  this
   )
 
 ;; definition for method 18 of type game-info
-(defmethod game-info-method-18 ((this game-info))
+(defmethod get-current-continue-forced ((this game-info))
   (if (not *default-continue*)
       (return (the-as continue-point #f))
       )
@@ -94,7 +95,7 @@
 
 ;; definition for method 19 of type game-info
 ;; ERROR: failed type prop at 30
-(defmethod game-info-method-19 ((this game-info) (arg0 string))
+(defmethod get-continue-by-name ((this game-info) (arg0 string))
   (if (not arg0)
       (return (the-as continue-point #f))
       )
@@ -103,7 +104,7 @@
 
 ;; definition for method 20 of type game-info
 ;; ERROR: failed type prop at 4
-(defmethod game-info-method-20 ((this game-info) (arg0 basic) (arg1 symbol))
+(defmethod set-continue! ((this game-info) (arg0 basic) (arg1 symbol))
   (format 0 "call to game-info-method-20~%")
   (break!)
   (the-as continue-point #f)
@@ -156,7 +157,7 @@
 
 ;; definition for method 29 of type game-info
 (defmethod game-info-method-29 ((this game-info) (arg0 int))
-  (when (and (level-group-method-20 *level*)
+  (when (and (level-get-target-inside *level*)
              (>= (- (-> *display* game-clock frame-counter) (the-as int (-> this death-time))) (seconds 2))
              )
     (let ((s5-0 (-> *game-info* sub-task-list)))
@@ -182,10 +183,10 @@
 
 ;; definition for method 9 of type game-info
 ;; ERROR: function was not converted to expressions. Cannot decompile.
-(defmethod game-info-method-9 ((this game-info))
-  (format 0 "call to game-info-method-9~%")
+(defmethod initialize! ((this game-info) (arg0 symbol) (arg1 game-save) (arg2 string) (arg3 resetter-spec))
+  (format 0 "call to initialize!~%")
   (break!)
-  (none)
+  this
   )
 
 ;; definition for method 10 of type game-info
@@ -341,7 +342,8 @@
 
 ;; definition for function bug-report-display
 ;; ERROR: function was not converted to expressions. Cannot decompile.
-(defun bug-report-display ()
+(defun bug-report-display ((arg0 symbol))
+  ;; SCAFFOLDING
   (format 0 "call to bug-report-display~%")
   (break!)
   0

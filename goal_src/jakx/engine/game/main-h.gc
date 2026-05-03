@@ -135,9 +135,12 @@
 ;; +++main-h:race-selection
 (defenum race-selection
   :type int64
-  (desertb-race-record 0)
   (rs1 1)
-  (desrally-record 2)
+  (rs2 2)
+  (rs3 3)
+  (rs4 4)
+  (rs5 5)
+  (rs6 6)
   )
 ;; ---main-h:race-selection
 
@@ -453,7 +456,7 @@
    )
   (:methods
     (draw (_type_) int)
-    (screen-filter-method-10 (_type_ vector vector float bucket-id int int symbol) int)
+    (setup (_type_ vector vector float bucket-id int int symbol) int)
     (disable (_type_) int)
     )
   )
@@ -525,3 +528,5 @@
 (define *first-boot* #t)
 
 (define *cheat-temp* (the-as (pointer int32) (malloc 'global 32)))
+
+(define *ambient-sound-class* #t)

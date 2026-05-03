@@ -95,6 +95,7 @@
     (get-water-height (_type_) meters)
     (get-notice-time (_type_) time-frame)
     (get-inv-mass (_type_) float)
+    (process-focusable-method-58 (_type_ vector) float) ;; 58
     )
   )
 

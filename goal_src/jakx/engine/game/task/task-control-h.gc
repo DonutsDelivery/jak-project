@@ -1397,6 +1397,8 @@
    (gp-finish-speech                   basic)
    (high-scores-default                basic)
    (high-scores                        basic)
+   (parent-node                        game-task-node  4)
+   (manager                            task-manager-info)
    )
   (:methods
     (get-idx-in-task-list (_type_) int)
@@ -1490,9 +1492,9 @@
    )
   :pack-me
   (:methods
-    (ambient-control-method-9 () none)
-    (ambient-control-method-10 () none)
-    (ambient-control-method-11 () none)
+    (ambient-control-method-9 (_type_) none)
+    (ambient-control-method-10 (_type_) none)
+    (ambient-control-method-11 (_type_) none)
     )
   )
 

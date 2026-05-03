@@ -1,8 +1,114 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; ERROR: top level function was not converted to expressions. Cannot decompile.
+;; name: car-info-h.gc
+;; name in dgo: car-info-h
+;; dgos: GAME
+
+;; DECOMP BEGINS
+
+(deftype car-layer-textures (structure)
+  ((dest       basic)
+   (base       basic)
+   (stripe     basic)
+   (detail     basic)
+   (damage     basic)
+   (wheel-dest basic :overlay-at dest)
+   (wheel-base basic :overlay-at base)
+   (wheel-blur basic :overlay-at stripe)
+   (tread-dest basic :overlay-at detail)
+   (tread-base basic :overlay-at damage)
+   (tread-blur basic :offset 20)
+   )
+  :pack-me
+  )
 
 
+(deftype car-textures (structure)
+  ((data car-layer-textures 14 :inline)
+   )
+  )
 
 
+(deftype car-rgb-color (vector4w)
+  ((red   int32 :offset 0)
+   (green int32 :offset 4)
+   (blue  int32 :offset 8)
+   (alpha int32 :offset 12)
+   )
+  (:methods
+    (car-rgb-color-method-9 (_type_) none)
+    (car-rgb-color-method-10 (_type_) int)
+    (car-rgb-color-method-11 (_type_ int) int)
+    )
+  )
+
+
+(deftype car-hsv-color (vector)
+  ((hue        float :offset 0)
+   (saturation float :offset 4)
+   (value      float :offset 8)
+   )
+  (:methods
+    (car-hsv-color-method-9 (_type_) none)
+    )
+  )
+
+
+(deftype car-info (structure)
+  ((base-color    car-rgb-color :inline)
+   (stripe-color  car-rgb-color :inline)
+   (car-type      int8)
+   (current-parts uint8 11)
+   (tuning        uint32)
+   (flags         uint32)
+   )
+  )
+
+
+(deftype car-info-array (structure)
+  ((data car-info 15 :inline)
+   )
+  )
+
+
+(deftype car-info-full (car-info)
+  ((level            basic)
+   (wheel-blur       float)
+   (tread-texture    basic)
+   (textures         car-textures)
+   (first-tbp        uint32)
+   (last-tbp         uint32)
+   (damage           uint8 14)
+   (lights           vu-lights   :inline)
+   (shield-vu-lights vu-lights   :inline)
+   (shield-light-group light-group :inline)
+   )
+  (:methods
+    (car-info-full-method-9 (_type_) none)
+    (car-info-full-method-10 (_type_) int)
+    (car-info-full-method-11 (_type_ car-hsv-color) int)
+    (car-info-full-method-12 (_type_ car-hsv-color) int)
+    (car-info-full-method-13 (_type_) int)
+    (car-info-full-method-14 (_type_ uint) int)
+    (car-info-full-method-15 (_type_) int)
+    (car-info-full-method-16 (_type_ bucket-id) int)
+    (car-info-full-method-17 (_type_) int)
+    (car-info-full-method-18 (_type_) none)
+    (car-info-full-method-19 (_type_ int int) int)
+    (car-info-full-method-20 (_type_) none)
+    (car-info-full-method-21 (_type_) none)
+    )
+  )
+
+
+(deftype car-level-array (basic)
+  ((data     car-info-full 6 :inline)
+   (textures car-textures  6 :inline)
+   )
+  (:methods
+    (car-level-array-method-9 (_type_) int)
+    )
+  )
+
+(define-extern *car-level-array* car-level-array)

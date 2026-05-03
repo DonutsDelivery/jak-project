@@ -7,9 +7,5 @@
   )
 
 
-(defskelgroup skel-driver-ashelin ashelin 1 4
-              ((2 (meters 20)) (3 (meters 999999)))
-              :bounds (static-spherem 0 0 0 4)
-              )
-
-;; ERROR: function has no type analysis. Cannot decompile.
+;; SCAFFOLDING: defskelgroup stub (art group in level DGO, not available at compile time)
+(define skel-driver-ashelin (the-as skeleton-group #f))

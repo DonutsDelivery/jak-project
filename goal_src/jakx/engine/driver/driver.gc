@@ -9,35 +9,13 @@
 ;; Unported sections marked ;; SCAFFOLDING.
 
 ;; +++driver:helmet-skel-groups
-
-(defskelgroup skel-helmet-a helmet-a helmet-a-lod0-jg helmet-a-idle-ja
-              ((helmet-a-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 1 0 3)
-              )
-
-(defskelgroup skel-helmet-b helmet-b helmet-b-lod0-jg helmet-b-idle-ja
-              ((helmet-b-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 1 0 3)
-              )
-
-(defskelgroup skel-helmet-c helmet-c helmet-c-lod0-jg helmet-c-idle-ja
-              ((helmet-c-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 1 0 3)
-              )
-
-(defskelgroup skel-helmet-d helmet-d helmet-d-lod0-jg helmet-d-idle-ja
-              ((helmet-d-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 1 0 3)
-              )
-
-(defskelgroup skel-helmet-e helmet-e helmet-e-lod0-jg helmet-e-idle-ja
-              ((helmet-e-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 1 0 3)
-              )
-
-(defskelgroup skel-helmet-f helmet-f helmet-f-lod0-jg helmet-f-idle-ja
-              ((helmet-f-lod0-mg (meters 999999)))
-              :bounds (static-spherem 0 1 0 3)
+;; SCAFFOLDING: defskelgroup fails in jakx env (art groups in level DGOs, not in *art-info* at compile time)
+(define skel-helmet-a (the-as skeleton-group #f))
+(define skel-helmet-b (the-as skeleton-group #f))
+(define skel-helmet-c (the-as skeleton-group #f))
+(define skel-helmet-d (the-as skeleton-group #f))
+(define skel-helmet-e (the-as skeleton-group #f))
+(define skel-helmet-f (the-as skeleton-group #f)
               )
 
 ;; ---driver:helmet-skel-groups
@@ -135,7 +113,7 @@
 (deftype driver (process-focusable)
   (;; offsets derived from ntsc_v1 binary analysis
    ;; process-nettable is 4 bytes smaller than jak3, shifting all fields -4 vs jak3
-   (info              driver-info :inline :offset 252) ;; 24 bytes, 4-byte aligned
+   (info-blob         uint8       24      :offset 252) ;; driver-info inline: not 16-byte aligned, use blob
    (vehicle           uint8       8       :offset 276) ;; uint64 handle, misaligned — use uint8 8
    (speech-time       uint8       8       :offset 284) ;; uint64 clock handle, misaligned
    (driver-unk292     uint8       8       :offset 292)
@@ -154,18 +132,18 @@
    )
   :method-count-assert 67
   :size-assert         #x184
-  :flag-assert         #x4301000184
+  :flag-assert         #x4301100184
   (:state-methods
-    idle  ;; 59
-    intro ;; 60
-    die   ;; 61
+    idle  ;; 60
+    intro ;; 61
+    die   ;; 62
     )
   (:methods
-    (driver-method-62 (_type_) none) ;; 62
     (driver-method-63 (_type_) none) ;; 63
     (driver-method-64 (_type_) none) ;; 64
     (driver-method-65 (_type_) none) ;; 65
     (driver-method-66 (_type_) none) ;; 66
+    (driver-method-67 (_type_) none) ;; 67
     )
   )
 
@@ -206,7 +184,7 @@
       (set! (-> (the-as (pointer uint32) (+ (the-as int this) 348)) 0) (+ arm1 (the-as uint off)))
       )
     )
-  ((find-parent-method driver 7) this off)
+  ((the-as (function driver int driver) (find-parent-method driver 7)) this off)
   )
 
 ;; definition for method 65 of type driver
@@ -304,7 +282,7 @@
 
 ;; definition for method 63 of type driver — create collide shape
 (defmethod driver-method-63 ((this driver))
-  (let ((s5-0 (new 'process 'collide-shape this (the-as uint 0))))
+  (let ((s5-0 (new 'process 'collide-shape this (the-as collide-list-enum 0))))
     (set! (-> s5-0 penetrated-by) (the-as penetrate -1))
     (let ((v1-3 (new 'process 'collide-shape-prim-sphere s5-0 (the-as uint 0))))
       (set! (-> v1-3 prim-core collide-as) (collide-spec bot))
@@ -324,7 +302,7 @@
         (set! (-> (the-as (pointer uint32) (+ (the-as int s5-0) 184)) 0) (the-as uint v1-7))
         )
       )
-    (set! (-> this root) (the-as trsqv s5-0))
+    (set! (-> this root) s5-0)
     )
   0
   (none)
@@ -339,13 +317,12 @@
 ;; definition for function driver-init-by-other
 ;; SCAFFOLDING — minimal init: resize thread, setup skel+collide, copy anim indices, init-skel, go idle
 (defbehavior driver-init-by-other driver ((params driver-initialize-params))
-  ;; resize cpu-thread stack to 64 bytes (to match binary)
-  ((method-of-object (-> self main-thread) 13) (-> self main-thread) 64)
-  ;; call virtual method-62 (per-driver skel/info setup) then method-63 (collide setup)
-  ((method-of-object self driver-method-62) self)
+  ;; SCAFFOLDING: skip cpu-thread stack resize (method-of-object integer not supported)
+  ;; SCAFFOLDING: skip skel/info setup method-62 (not implemented)
+  ;; collide setup
   ((method-of-object self driver-method-63) self)
-  ;; copy animation channel indices from driver-info to self fields
-  (let ((info (-> self info)))
+  ;; copy animation channel indices from driver-info blob at offset 252
+  (let ((info (the-as driver-info (+ (the-as int self) 252))))
     (set! (-> self turn-back-anim) (-> info turn-back-anim))
     (set! (-> self turn-front-anim) (-> info turn-front-anim))
     (set! (-> self up-down-anim) (-> info up-down-anim))
@@ -359,11 +336,7 @@
           (the-as entity-actor
                   (+ (the-as int *level*) (* 1440 (+ level-slot 12)) 544)))
     )
-  ;; initialize skeleton (process-drawable-method-42 = init-skel equivalent)
-  ((method-of-object self process-drawable-method-42)
-   self
-   (the-as skeleton-group (-> self info skel))
-   0)
+  ;; SCAFFOLDING: skeleton init skipped (process-drawable-method-42 name differs in jakx)
   ;; SCAFFOLDING: skip vehicle handle, speech-time, jmod-head, helmet setup
   ;; go to idle state
   (go (method-of-object self idle))
@@ -372,155 +345,10 @@
 
 ;; definition for function driver-spawn
 (defun driver-spawn ()
-  (local-vars
-    (v0-0 none)
-    (v0-1 none)
-    (v0-2 process)
-    (v0-3 none)
-    (v0-4 none)
-    (v0-5 none)
-    (v1-0 none)
-    (v1-4 type)
-    (v1-5 symbol)
-    (v1-6 type)
-    (a0-0 none)
-    (a0-3 int)
-    (a0-4 dead-pool)
-    (a0-5 none)
-    (a1-0 none)
-    (a1-1 none)
-    (a1-2 none)
-    (a1-3 none)
-    (a1-4 none)
-    (a1-5 none)
-    (a1-6 none)
-    (a1-7 none)
-    (a1-9 none)
-    (a1-10 none)
-    (a1-11 none)
-    (a1-13 none)
-    (a1-15 none)
-    (a2-0 none)
-    (a2-1 none)
-    (a2-2 none)
-    (a2-3 none)
-    (a2-4 none)
-    (a2-5 none)
-    (a2-6 none)
-    (a2-7 none)
-    (a2-8 none)
-    (a2-9 int)
-    (a3-0 none)
-    (a3-1 none)
-    (a3-2 int)
-    (a3-3 none)
-    (s0-0 object)
-    (s1-0 symbol)
-    (s1-1 driver-initialize-params)
-    (s3-1 (function process process-tree string pointer process-tree))
-    (s4-1 process)
-    (s5-0 none)
-    (t9-0 (function none))
-    (t9-1 (function none))
-    (t9-2 (function dead-pool type int object process))
-    (t9-3 (function symbol string))
-    (t9-4 none)
-    (t9-5 none)
-    (gp-0 symbol)
-    )
-  (when (begin
-          (set! gp-0 #f)
-          (set! t9-0 type-from-driver-type)
-          (set! a0-1 a0-0)
-          (set! v0-0 (call!))
-          (set! s5-0 v0-0)
-          (set! s1-0 #f)
-          (set! t9-1 level-from-driver-type)
-          (set! a0-2 a0-0)
-          (set! v0-1 (call!))
-          (set! v1-0 v0-1)
-          (set! a0-3 0)
-          (while (<.si a0-3 6)
-            (when (begin
-                    (and (begin
-                           (set! a1-1 (the-as none *level*))
-                           (set! a2-1 (the-as none 1440))
-                           (set! a3-0 (the-as none (+ a0-3 12)))
-                           (set! a2-2 (the-as none (*.si a2-1 a3-0)))
-                           (set! a1-2 (the-as none (+ a1-1 a2-2)))
-                           (set! a1-3 (the-as none (l.wu (+ a1-2 544))))
-                           (set! a2-3 (the-as none (= a1-3 v1-0)))
-                           a2-3
-                           )
-                         (begin
-                           (set! a1-5 (the-as none *level*))
-                           (set! a2-4 (the-as none 1440))
-                           (set! a3-1 (the-as none (+ a0-3 12)))
-                           (set! a2-5 (the-as none (*.si a2-4 a3-1)))
-                           (set! a1-6 (the-as none (+ a1-5 a2-5)))
-                           (set! a1-7 (the-as none (l.wu (+ a1-6 560))))
-                           (set! a2-6 (the-as none 'active))
-                           (set! a1-4 (the-as none (= a1-7 a2-6)))
-                           )
-                         )
-                    a1-4
-                    )
-              (set! a1-9 (the-as none 1440))
-              (set! a2-7 (the-as none (+ a0-3 12)))
-              (set! a1-10 (the-as none (*.si a1-9 a2-7)))
-              (set! a1-11 (the-as none (+ a1-10 544)))
-              (set! a2-8 (the-as none *level*))
-              (set! s1-0 (the-as symbol (+ a1-11 a2-8)))
-              (set! a2-0 (the-as none (+ a0-3 12)))
-              (set! a1-12 (the-as none a2-0))
-              )
-            (set! a0-3 (the-as int (+ a0-3 1)))
-            )
-          s1-0
-          )
-    (when (begin
-            (when (begin
-                    (set! s1-1 (new 'stack-no-clear 'driver-initialize-params))
-                    (set! (-> s1-1 vehicle) (the-as basic a1-0))
-                    (set! (-> s1-1 level-slot) (the-as int a2-0))
-                    (set! (-> s1-1 driver-type) (the-as uint a0-0))
-                    (set! a0-4 *default-dead-pool*)
-                    (set! v1-4 (-> a0-4 type))
-                    (set! t9-2 (method-of-type v1-4 get-process))
-                    (set! a1-13 s5-0)
-                    (set! a2-9 #x4000)
-                    (set! a3-2 1)
-                    (set! v0-2 (call! a0-4 a1-13 a2-9 a3-2))
-                    (set! s4-1 v0-2)
-                    s4-1
-                    )
-              (set! v1-6 process)
-              (set! s3-1 (method-of-type v1-6 activate))
-              (set! s2-1 s4-1)
-              (set! s0-0 *rigid-body-queue-manager*)
-              (set! t9-3 symbol->string)
-              (set! a0-5 (the-as none (l.wu s5-0)))
-              (call!)
-              (set! a2-10 (the-as none v0-3))
-              (set! a3-3 (the-as none #x70004000))
-              (set! t9-4 (the-as none s3-1))
-              (set! a0-6 (the-as none s2-1))
-              (set! a1-14 (the-as none s0-0))
-              (call!)
-              (set! t9-5 (the-as none run-function-in-process))
-              (set! a0-7 (the-as none s4-1))
-              (set! a1-15 (the-as none driver-init-by-other))
-              (set! a2-11 (the-as none s1-1))
-              (call!)
-              (set! v1-5 (the-as symbol (-> s4-1 ppointer)))
-              )
-            v1-5
-            )
-      (set! gp-0 (the-as symbol (-> (the-as process-drawable s4-1) ppointer)))
-      )
-    )
-  (set! v0-6 (the-as none gp-0))
-  (ret-none)
+  ;; SCAFFOLDING
+  (format 0 "call to driver-spawn~%")
+  (break!)
+  (none)
   )
 
 (let ((a0-0 (new 'static 'skeleton-group
@@ -542,7 +370,7 @@
   (set! (-> a0-0 janim) 2)
   (set! (-> a0-0 mgeo 0) 1)
   (set! (-> a0-0 lod-dist 0) 4095996000.0)
-  (add-to-loading-level a0-0)
+  ;; SCAFFOLDING:   (add-to-loading-level a0-0)
   )
 
 (let ((a0-1 (new 'static 'skeleton-group
@@ -564,7 +392,7 @@
   (set! (-> a0-1 janim) 2)
   (set! (-> a0-1 mgeo 0) 1)
   (set! (-> a0-1 lod-dist 0) 4095996000.0)
-  (add-to-loading-level a0-1)
+  ;; SCAFFOLDING:   (add-to-loading-level a0-1)
   )
 
 (let ((a0-2 (new 'static 'skeleton-group
@@ -586,7 +414,7 @@
   (set! (-> a0-2 janim) 2)
   (set! (-> a0-2 mgeo 0) 1)
   (set! (-> a0-2 lod-dist 0) 4095996000.0)
-  (add-to-loading-level a0-2)
+  ;; SCAFFOLDING:   (add-to-loading-level a0-2)
   )
 
 (let ((a0-3 (new 'static 'skeleton-group
@@ -608,7 +436,7 @@
   (set! (-> a0-3 janim) 2)
   (set! (-> a0-3 mgeo 0) 1)
   (set! (-> a0-3 lod-dist 0) 4095996000.0)
-  (add-to-loading-level a0-3)
+  ;; SCAFFOLDING:   (add-to-loading-level a0-3)
   )
 
 (let ((a0-4 (new 'static 'skeleton-group
@@ -630,7 +458,7 @@
   (set! (-> a0-4 janim) 2)
   (set! (-> a0-4 mgeo 0) 1)
   (set! (-> a0-4 lod-dist 0) 4095996000.0)
-  (add-to-loading-level a0-4)
+  ;; SCAFFOLDING:   (add-to-loading-level a0-4)
   )
 
 (let ((a0-5 (new 'static 'skeleton-group
@@ -652,193 +480,5 @@
   (set! (-> a0-5 janim) 2)
   (set! (-> a0-5 mgeo 0) 1)
   (set! (-> a0-5 lod-dist 0) 4095996000.0)
-  (add-to-loading-level a0-5)
+  ;; SCAFFOLDING:   (add-to-loading-level a0-5)
   )
-
-(deftype helmet (structure)
-  ((node-list   basic)
-   (draw        basic)
-   (node-index  int8)
-   (scale       float)
-   )
-  (:methods
-    (helmet-method-9 (_type_) none)
-    (helmet-method-10 (_type_) none)
-    (helmet-method-11 (_type_) none)
-    )
-  )
-
-
-(deftype driver-initialize-params (structure)
-  ((vehicle      basic)
-   (level-slot   int8)
-   (driver-type  uint8)
-   )
-  )
-
-
-;; type driver-info is defined here, but it is unknown to the decompiler
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; type joint-mod-head is defined here, but it is unknown to the decompiler
-
-(method-set! (the-as type joint-mod-head) 3 L170)
-
-(deftype driver (process-focusable)
-  ((driver-pad  uint8  132 :offset 256)
-   )
-  )
-
-;; ERROR: failed type prop at 17: Could not figure out load: (set! a2 (l.d (+ gp 276)))
-
-;; ERROR: failed type prop at 2: Could not figure out load: (set! v1 (l.wu (+ gp 344)))
-;; WARN: Return type mismatch none vs driver.
-(defmethod relocate ((a0-0 driver) (a1-0 int))
-  (local-vars
-    (v0-0 none)
-    (v0-1 none)
-    (v0-2 none)
-    (v0-3 none)
-    (v0-4 none)
-    (v1-0 none)
-    (v1-2 none)
-    (v1-4 none)
-    (v1-6 none)
-    (v1-7 none)
-    (v1-8 none)
-    (v1-10 none)
-    (v1-12 none)
-    (v1-14 none)
-    (v1-15 none)
-    (v1-16 none)
-    (v1-18 none)
-    (v1-20 none)
-    (v1-21 none)
-    (v1-22 none)
-    (a0-1 none)
-    (a0-2 none)
-    (a0-3 none)
-    (a0-4 none)
-    (a1-4 none)
-    (t9-0 none)
-    (t9-1 none)
-    (t9-2 none)
-    (t9-3 none)
-    (t9-4 none)
-    )
-  (when (begin
-          (when (begin (set! v1-0 (the-as none (l.wu (+ a0-0 344)))) (nonzero? v1-0))
-            (when (begin
-                    (set! a0-1 (the-as none (l.wu (+ a0-0 344))))
-                    (set! v1-2 (the-as none (l.wu (+ a0-1 -4))))
-                    (set! t9-0 (the-as none (l.wu (+ v1-2 44))))
-                    (set! a1-1 (the-as none a1-0))
-                    (call!)
-                    (set! v1-3 (the-as none v0-0))
-                    (set! v1-4 (the-as none (l.wu (+ a0-0 344))))
-                    (nonzero? v1-4)
-                    )
-              (set! v1-6 (the-as none (l.wu (+ a0-0 344))))
-              (set! v1-7 (the-as none (+ v1-6 a1-0)))
-              (s.w! (+ a0-0 344) v1-7)
-              )
-            )
-          (set! v1-8 (the-as none (l.wu (+ a0-0 348))))
-          (nonzero? v1-8)
-          )
-    (when (begin
-            (set! a0-2 (the-as none (l.wu (+ a0-0 348))))
-            (set! v1-10 (the-as none (l.wu (+ a0-2 -4))))
-            (set! t9-1 (the-as none (l.wu (+ v1-10 44))))
-            (set! a1-2 (the-as none a1-0))
-            (call!)
-            (set! v1-11 (the-as none v0-1))
-            (set! v1-12 (the-as none (l.wu (+ a0-0 348))))
-            (nonzero? v1-12)
-            )
-      (set! v1-14 (the-as none (l.wu (+ a0-0 348))))
-      (set! v1-15 (the-as none (+ v1-14 a1-0)))
-      (s.w! (+ a0-0 348) v1-15)
-      )
-    )
-  (when (begin (set! v1-16 (the-as none (l.wu (+ a0-0 340)))) (nonzero? v1-16))
-    (when (begin (set! v1-18 (the-as none (l.wu (+ a0-0 340)))) (nonzero? v1-18))
-      (set! v1-20 (the-as none (l.wu (+ a0-0 340))))
-      (set! v1-21 (the-as none (+ v1-20 a1-0)))
-      (s.w! (+ a0-0 340) v1-21)
-      )
-    )
-  (set! a0-3 (the-as none (+ a0-0 368)))
-  (set! v1-22 (the-as none helmet))
-  (set! t9-2 (the-as none (l.wu (+ v1-22 44))))
-  (set! a1-3 (the-as none a1-0))
-  (call!)
-  (set! v1-23 (the-as none v0-2))
-  (set! t9-3 (the-as none find-parent-method))
-  (set! a0-4 (the-as none driver))
-  (set! a1-4 (the-as none 7))
-  (set! v0-3 (the-as none (call!)))
-  (set! t9-4 (the-as none v0-3))
-  (set! a0-5 (the-as none a0-0))
-  (set! a1-5 (the-as none a1-0))
-  (set! v0-4 (the-as none (call!)))
-  (ret-value v0-4)
-  )
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-(method-set! (the-as type joint-mod-head) 9 L119)
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-(let ((gp-0
-        (new 'static 'state :name 'idle :next #f :exit #f :parent #f :code #f :trans #f :post #f :enter #f :event #f)
-        )
-      )
-  (method-set! driver 59 gp-0)
-  (set! (-> gp-0 event) (the-as (function process int symbol event-message-block object) driver-event-handler))
-  (set! (-> gp-0 trans) (the-as (function object) L43))
-  (set! (-> gp-0 code) L41)
-  (set! (-> gp-0 post) driver-post)
-  )
-
-(let ((gp-1
-        (new 'static 'state :name 'intro :next #f :exit #f :parent #f :code #f :trans #f :post #f :enter #f :event #f)
-        )
-      )
-  (method-set! driver 60 gp-1)
-  (set! (-> gp-1 event) (the-as (function process int symbol event-message-block object) driver-event-handler))
-  (set! (-> gp-1 enter) L38)
-  (set! (-> gp-1 exit) (the-as (function object) L35))
-  (set! (-> gp-1 code) L27)
-  (set! (-> gp-1 post) driver-post)
-  )
-
-(let ((gp-2
-        (new 'static 'state :name 'die :next #f :exit #f :parent #f :code #f :trans #f :post #f :enter #f :event #f)
-        )
-      )
-  (method-set! driver 61 gp-2)
-  (set! (-> gp-2 code) L26)
-  )
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.

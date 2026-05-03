@@ -29,13 +29,7 @@
   )
 
 (defmethod rigid-body-object-method-53 ((this rigid-body-object) (arg0 float))
-  (when (logtest? (-> this flags) (rigid-body-object-flag player-impulse-force player-contact-force))
-    (when (logtest? (-> this flags) (rigid-body-object-flag player-impulse-force))
-      (logclear! (-> this flags) (rigid-body-object-flag player-impulse-force))
-      (vector-float*! (-> this player-force) (-> this player-force) (/ 1.0 arg0))
-      )
-    (apply-impact! (-> this rbody) (-> this player-force-position) (-> this player-force))
-    )
+  ;; SCAFFOLDING: player-force/player-force-position removed in jakx
   0
   (none)
   )
@@ -43,7 +37,7 @@
 (defmethod apply-gravity! ((this rigid-body-object) (arg0 float))
   (let ((a1-1 (new 'stack-no-clear 'vector)))
     (vector-reset! a1-1)
-    (set! (-> a1-1 y) (* -1.0 (-> this info extra gravity) (-> this rbody info mass)))
+    (set! (-> a1-1 y) (* -1.0 (-> this info gravity) (-> this rbody info mass)))
     (add-force! (-> this rbody) a1-1)
     )
   0
@@ -77,7 +71,7 @@
 
 (defmethod alloc-rbody-control! ((this rigid-body-object) (arg0 rigid-body-object-constants))
   (set! (-> this info) arg0)
-  (set! (-> this rbody) (new 'process 'rigid-body-control this))
+  (set! (-> this rbody) (new 'process 'rigid-body-control))
   (update-transforms (-> this root))
   (init!
     (-> this rbody)
@@ -87,7 +81,7 @@
     (the-as (function rigid-body-object float) (method-of-object this apply-gravity!))
     )
   (rigid-body-object-method-37 this)
-  (set! (-> this max-time-step) (-> arg0 extra max-time-step))
+  (set! (-> this max-time-step) (-> arg0 max-time-step))
   (set! (-> this root max-iteration-count) (the-as uint 4))
   (when (nonzero? (-> this skel))
     (let ((v1-16 (-> this skel root-channel 0)))
@@ -135,14 +129,10 @@
                                           :angular-damping 1.0
                                           :bounce-factor 0.5
                                           :friction-factor 0.1
+                                          :gravity (meters 80)
+                                          :max-time-step 0.033333335
                                           :cm-offset-joint (new 'static 'vector :w 1.0)
                                           :inertial-tensor-box (new 'static 'array meters 3 (meters 4) (meters 4) (meters 4))
-                                          )
-                                        :extra (new 'static 'rigid-body-object-extra-info
-                                          :max-time-step 0.033333335
-                                          :gravity (meters 80)
-                                          :idle-distance (meters 50)
-                                          :attack-force-scale 1.0
                                           )
                                         :name '*rigid-body-object-constants*
                                         )
@@ -178,7 +168,7 @@
 (defmethod rbody-post ((this rigid-body-object))
   (rigid-body-object-method-32 this)
   (rigid-body-object-method-38 this)
-  (update-rbody-transform! (-> this rbody) (-> this root))
+  (update-rbody-transform! (-> this rbody) (the-as collide-shape-moving (-> this root)))
   (rigid-body-object-method-30 this)
   (update-transforms (-> this root))
   0
@@ -225,7 +215,7 @@
 
 (defmethod impulse-handler ((this rigid-body-object))
   (logior! (-> this flags) (rigid-body-object-flag disturbed))
-  (set-time! (-> this disturbed-time))
+  (set! (-> this disturbed-time) (the-as uint (current-time)))
   (if (not (logtest? (-> this rbody flags) (rigid-body-flag enable-physics)))
       (apply-momentum! this)
       )
@@ -284,7 +274,7 @@
   0.0
   (let ((f0-1 0.0))
     (cond
-      ((logtest? (penetrate jak-red-shockwave) arg2)
+      ((logtest? (penetrate jak-res-shockwave) arg2)
        (set! f0-1 (* 81920.0 (-> arg1 control)))
        (set! f1-1 (-> arg1 damage))
        )
@@ -308,7 +298,7 @@
         (set! f1-1 2.0)
         )
       )
-    (set! (-> arg0 impulse) (* f0-1 (-> this info extra attack-force-scale)))
+    (set! (-> arg0 impulse) (* f0-1 1.0)) ;; SCAFFOLDING: attack-force-scale not in jakx
     )
   (apply-damage this f1-1 arg0)
   0
@@ -407,6 +397,7 @@
   )
 
 (defmethod rbody-event-handler ((this rigid-body-object) (arg0 process) (arg1 int) (arg2 symbol) (arg3 event-message-block))
+  ;; SCAFFOLDING: jak3-only fields (player-touch-time, player-force-position, player-force) removed in jakx
   (case arg2
     (('impact-impulse)
      (let ((s5-1 (-> arg3 param 0)))
@@ -429,7 +420,6 @@
          (when s3-0
            (when (logtest? (-> s3-0 mask) (process-mask target))
              (logior! (-> this flags) (rigid-body-object-flag player-touching))
-             (set-time! (-> this player-touch-time))
              (impulse-handler this)
              )
            (if (not (logtest? (-> s3-0 mask) (process-mask target)))
@@ -441,7 +431,7 @@
      )
     (('attack)
      (let ((s3-1 (the-as object (-> arg3 param 1)))
-           (t0-1 (get-penetrate-using-from-attack-event (the-as process-drawable arg0) (the-as basic arg3)))
+           (t0-1 (get-penetrate-using-from-attack-event (the-as process-drawable arg0) arg3))
            )
        (when (!= (-> (the-as attack-info s3-1) id) (-> this incoming-attack-id))
          (set! (-> this incoming-attack-id) (-> (the-as attack-info s3-1) id))
@@ -456,60 +446,15 @@
        )
      )
     (('edge-grabbed 'pilot-edge-grab)
-     (let ((s5-2 (the-as object (-> arg3 param 0))))
-       (when (not (logtest? (-> this flags) (rigid-body-object-flag player-impulse-force)))
-         (let ((a0-25 (as-type arg0 process-focusable)))
-           (when a0-25
-             (let ((f0-1 (/ 163840.0 (get-inv-mass a0-25))))
-               (logior! (-> this flags) (rigid-body-object-flag player-touching player-edge-grabbing player-contact-force))
-               (vector-copy! (-> this player-force-position) (-> (the-as attack-info s5-2) attacker-velocity))
-               (vector-reset! (-> this player-force))
-               (set! (-> this player-force y) (* -1.0 f0-1))
-               )
-             )
-           )
-         )
-       )
      (not (logtest? (-> this focus-status) (focus-status dead inactive)))
      )
     (('ridden)
-     (let ((v1-47 (the-as object (-> arg3 param 0))))
-       (when (the-as uint v1-47)
-         (let ((a0-34 (as-type (handle->process (-> (the-as focus v1-47) handle)) process-focusable)))
-           (when (and a0-34
-                      (logtest? (-> a0-34 mask) (process-mask target))
-                      (not (logtest? (-> (the-as process-focusable a0-34) focus-status) (focus-status on-water under-water)))
-                      )
-             (when (not (logtest? (-> this flags) (rigid-body-object-flag player-impulse-force)))
-               (logior! (-> this flags) (rigid-body-object-flag player-touching player-standing-on player-contact-force))
-               (vector-copy! (-> this player-force-position) (-> (the-as process-focusable a0-34) root trans))
-               (vector-reset! (-> this player-force))
-               (let ((f0-4 (/ 163840.0 (get-inv-mass (the-as process-focusable a0-34))))
-                     (f1-1 1.0)
-                     )
-                 (set! (-> this player-force y) (* -1.0 f0-4 f1-1))
-                 )
-               )
-             )
-           )
-         )
-       )
      )
     (('bonk)
-     (when #t
-       (let ((s4-1 (as-type arg0 process-focusable)))
-         (when s4-1
-           (logior! (-> this flags) (rigid-body-object-flag player-touching player-impulse-force))
-           (set-time! (-> this player-touch-time))
-           (impulse-handler this)
-           (vector-copy! (-> this player-force-position) (-> (the-as process-focusable s4-1) root trans))
-           (let ((f30-2 (* 0.00012207031 (the-as float (-> arg3 param 1))))
-                 (f0-9 (/ 163840.0 (get-inv-mass (the-as process-focusable s4-1))))
-                 )
-             (vector-reset! (-> this player-force))
-             (set! (-> this player-force y) (* (/ f0-9 -10) f30-2))
-             )
-           )
+     (let ((s4-1 (as-type arg0 process-focusable)))
+       (when s4-1
+         (logior! (-> this flags) (rigid-body-object-flag player-touching player-impulse-force))
+         (impulse-handler this)
          )
        )
      )
@@ -526,7 +471,7 @@
 (defstate idle (rigid-body-object)
   :virtual #t
   :trans (behavior ()
-    (if (and *target* (and (>= (-> self info extra idle-distance)
+    (if (and *target* (and (>= (meters 50) ;; SCAFFOLDING: idle-distance not in jakx
                                (vector-vector-distance (-> self root trans) (-> *target* control trans))
                                )
                            (not (logtest? (focus-status teleporting) (-> *target* focus-status)))
@@ -543,7 +488,7 @@
   :virtual #t
   :event rigid-body-object-event-handler
   :trans (behavior ()
-    (if (or (not *target*) (or (< (+ 4096.0 (-> self info extra idle-distance))
+    (if (or (not *target*) (or (< (+ 4096.0 (meters 50)) ;; SCAFFOLDING: idle-distance not in jakx
                                   (vector-vector-distance (-> self root trans) (-> *target* control trans))
                                   )
                                (focus-test? *target* teleporting)

@@ -259,7 +259,6 @@
       )
     )
   0
-  (none)
   )
 
 (defmethod lods-assign! ((this draw-control) (lods lod-set))
@@ -269,7 +268,6 @@
     (lod-set! this lod)
     )
   0
-  (none)
   )
 
 (defmethod setup-masks ((this draw-control) (arg0 int) (arg1 int))
@@ -296,7 +294,6 @@
       )
     )
   0
-  (none)
   )
 
 (defmethod setup-lods! ((this lod-set) (skelgroup skeleton-group) (ag art-group) (entity entity))
@@ -516,7 +513,6 @@
       )
     )
   0
-  (none)
   )
 
 (defmethod do-joint-math ((this draw-control) (joints cspace-array) (jcontrol joint-control))
@@ -563,7 +559,6 @@
       (if *display-cloth-spheres*
         (draw-cloth-spheres (the process-drawable (-> this process))))))
     0
-    (none)
     )
   )
 
@@ -573,19 +568,16 @@
       (set! (-> v1-2 prim-core collide-as) (collide-spec))
       (set! (-> v1-2 prim-core collide-with) (collide-spec))
       )
-    0
     )
   (if (nonzero? (-> this skel))
       (ja-channel-set! 0)
       )
   (process-entity-status! this (entity-perm-status dead) #t)
-  0
   (none)
   )
 
 (defmethod relocate-nav ((this process-drawable) (arg0 int))
   (set! (-> this nav) (the-as nav-control (&+ (the-as pointer (-> this nav)) arg0)))
-  0
   (none)
   )
 
@@ -698,7 +690,7 @@
       )
     )
   0
-  (none)
+
   )
 
 (defstate process-drawable-art-error (process-drawable)
@@ -1517,14 +1509,15 @@
           )
       )
     )
-  0
   (none)
+
   )
 
-;; WARN: Function ja-post has a return type of none, but the expression builder found a return statement.
 (defbehavior ja-post process-drawable ()
   (when (nonzero? (-> self draw))
-    (let ((gp-1 (logtest? (-> self draw status) (draw-control-status uninited))))
+    (let ((gp-1 (logtest? (-> self draw status) (draw-control-status uninited)))
+          (did-sync #f)
+          )
       (logclear! (-> self draw status) (draw-control-status no-draw-temp uninited))
       (when (nonzero? (-> self skel))
         (evaluate-joint-control self)
@@ -1534,23 +1527,24 @@
               (update-transforms (the-as collide-shape (-> self root)))
               )
           (cloth-post)
-          (return #f)
+          (set! did-sync #t)
           )
         )
-      )
-    (let ((gp-2 *matrix-engine*))
-      (when (= (-> gp-2 length) (-> gp-2 allocated-length))
-        (format 0 "Matrix engine is too small!~%")
-        (format *stdcon* "Matrix engine is too small!~%")
-        (break!)
-        0
+      (when (not did-sync)
+        (let ((gp-2 *matrix-engine*))
+          (when (= (-> gp-2 length) (-> gp-2 allocated-length))
+            (format 0 "Matrix engine is too small!~%")
+            (format *stdcon* "Matrix engine is too small!~%")
+            (break!)
+            0
+            )
+          (set! (-> gp-2 (-> gp-2 length)) (process->handle self))
+          (+! (-> gp-2 length) 1)
+          )
+        (cloth-post)
         )
-      (set! (-> gp-2 (-> gp-2 length)) (process->handle self))
-      (+! (-> gp-2 length) 1)
       )
-    (cloth-post)
     )
-  0
   (none)
   )
 
@@ -1692,7 +1686,6 @@
         (sound-play-by-spec (the-as sound-spec arg6) (new-sound-id) (the-as vector #t))
         )
     )
-  0
   (none)
   )
 
@@ -1923,9 +1916,8 @@
         )
       )
     (set-time! (-> this update-time))
-    0
-    (none)
     )
+  (none)
   )
 
 ;; WARN: new jak 2 until loop case, check carefully
@@ -1947,7 +1939,7 @@
   (logior! (-> self mask) (process-mask sleep))
   (suspend)
   0
-  (none)
+
   )
 
 (defbehavior transform-and-sleep-code process-drawable ()
@@ -1960,7 +1952,7 @@
   (logior! (-> self mask) (process-mask sleep-code))
   (suspend)
   0
-  (none)
+
   )
 
 (defbehavior transform-post process-drawable ()
@@ -1972,7 +1964,7 @@
 (defbehavior rider-trans process-drawable ()
   (detect-riders! (the-as collide-shape (-> self root)))
   0
-  (none)
+
   )
 
 (defbehavior rider-post process-drawable ()
@@ -1983,7 +1975,7 @@
     (do-push-aways cshape)
     )
   0
-  (none)
+
   )
 
 (defbehavior pusher-post process-drawable ()
@@ -2047,9 +2039,9 @@
     (let ((s5-0 (-> v1-0 extra perm task))
           (s4-0 (new 'static 'fact-info))
           )
-      (set! (-> s4-0 options) (actor-option))
+      (set! (-> s4-0 options) (the-as uint32 (actor-option)))
       (if arg2
-          (set! (-> s4-0 options) (actor-option auto-pickup))
+          (set! (-> s4-0 options) (the-as uint32 (actor-option auto-pickup)))
           )
       (when (and (nonzero? s5-0) (not (task-complete? *game-info* s5-0)))
         (label cfg-12)
@@ -2062,7 +2054,7 @@
       )
     )
   0
-  (none)
+
   )
 
 ;; WARN: Found some very strange gotos. Check result carefully, this is not well tested.
@@ -2260,7 +2252,7 @@
              )
     (dotimes (i (-> proc draw cloth-instances length))
       (if (not arg1)
-          (hide! (-> proc draw cloth-instances i))
+          ((method-of-type cloth-system hide!) (-> proc draw cloth-instances i))
           (logclear! (-> proc draw cloth-instances i flags) (cloth-flag hidden))
           )
       )

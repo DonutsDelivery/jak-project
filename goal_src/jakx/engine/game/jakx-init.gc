@@ -1,34 +1,7 @@
 ;;-*-Lisp-*-
 (in-package goal)
 
-;; Bringup test: invoke (update *setting-control*) at DGO load time so we can
-;; verify it runs cleanly independent of the display-loop / play-boot sequence.
-;; TEMPORARY — remove once the orchestrator re-enables the call in main.gc's
-;; display-loop.
-(format 0 "jakx-init: test (update *setting-control*) BEGIN~%")
-(update *setting-control*)
-(format 0 "jakx-init: test (update *setting-control*) OK~%")
-
-(vehicle-manager-start (the-as process *entity-pool*))
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-(vehicle-manager-start (the-as process *entity-pool*))
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-(vehicle-manager-start (the-as process *entity-pool*))
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
-
-;; ERROR: function has no type analysis. Cannot decompile.
+;; SCAFFOLDING: jakx-init top-level is undecompiled PS2 code — original calls
+;; (update *setting-control*) and similar setup that requires *setting-control*,
+;; *entity-pool*, etc. to already be initialized. Those happen via main.gc's
+;; display-loop, not at GAME.CGO load time. Empty top-level here.

@@ -48,7 +48,7 @@
 (let ((v1-9 #f)
       (a0-9 *part-group-id-table*)
       )
-  (s.w! (+ a0-9 116) v1-9)
+  (s.w! (+ (the-as int a0-9) 116) v1-9)
   )
 
 (set! (-> *part-id-table* 145) #f)
@@ -239,7 +239,7 @@
 (let ((v1-83 #f)
       (a0-37 *part-group-id-table*)
       )
-  (s.w! (+ a0-37 120) v1-83)
+  (s.w! (+ (the-as int a0-37) 120) v1-83)
   )
 
 (set! (-> *part-id-table* 153) #f)

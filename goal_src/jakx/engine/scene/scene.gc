@@ -35,7 +35,7 @@
                             arg0
                             )
                            ((= (-> arg0 type) string)
-                            (get-continue-by-name *game-info* (the-as string arg0))
+                            ((method-of-type game-info get-continue-by-name) *game-info* (the-as string arg0))
                             )
                            (else
                              (the-as basic #f)
@@ -1957,10 +1957,6 @@
   )
 
 (defmethod load-scene ((this scene))
-  (let ((v1-1 (-> *level* loading-level)))
-    (if v1-1
-        (set-loaded-art (-> v1-1 art-group) this)
-        )
-    )
+  ;; SCAFFOLDING: temporarily disabled to diagnose crash
   this
   )

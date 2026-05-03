@@ -16,7 +16,7 @@
     (clear-focused (_type_) int)
     (collide-spec-match? (_type_ process-focusable) object)
     (reset-to-collide-spec (_type_ collide-spec) int)
-    (try-update-focus (_type_ process-focusable) symbol)
+    (focus-on! (_type_ process-focusable) symbol)
     )
   )
 
@@ -28,118 +28,24 @@
   0
   )
 
-;; ERROR: failed type prop at 19: Could not figure out load: (set! v1 (l.wu (+ v1 156)))
-;; WARN: Return type mismatch symbol vs object.
-(defmethod collide-spec-match? ((a0-0 focus) (a1-0 process-focusable))
+;; SCAFFOLDING -- jak3 clean version
+(defmethod collide-spec-match? ((this focus) (proc process-focusable))
   "If the focused process is not dead,
    check that the [[collide-spec]] of the focus and the process match."
-  (local-vars
-    (v0-0 symbol)
-    (v0-1 symbol)
-    (v0-2 symbol)
-    (v1-0 symbol)
-    (v1-1 symbol)
-    (v1-2 trsqv)
-    (v1-3 none)
-    (v1-4 none)
-    (v1-5 none)
-    (a0-1 uint)
-    (a0-2 uint)
-    (a0-3 trsqv)
-    (a0-4 collide-spec)
-    (a1-1 type)
-    (s5-0 trsqv)
-    (t9-0 (function object type symbol))
+  (when (and proc (not (logtest? (-> proc focus-status) (focus-status disable dead))))
+    (let ((cshape (as-type (-> proc root) collide-shape)))
+      (and cshape (logtest? (-> this collide-with) (-> cshape root-prim prim-core collide-as)))
+      )
     )
-  (when (begin
-          (and (begin a1-0) (begin
-                              (set! v1-1 #t)
-                              (set! a0-1 (-> a1-0 focus-status))
-                              (set! a0-2 (logand a0-1 3))
-                              (cmove-#f-nonzero v1-0 a0-2 v1-1)
-                              )
-               )
-          v1-0
-          )
-    (if (begin
-          (set! s5-0 (-> a1-0 root))
-          (set! t9-0 type?)
-          (set! a0-3 s5-0)
-          (set! a1-1 collide-shape)
-          (set! v0-1 (call! a0-3 a1-1))
-          v0-1
-          )
-        (set! v1-2 s5-0)
-        )
-    (and v1-2 (begin
-                (set! v0-2 #t)
-                (set! a0-4 (-> a0-0 collide-with))
-                (set! v1-3 (the-as none (l.wu (+ v1-2 156))))
-                (set! v1-4 (the-as none (l.wu (+ v1-3 28))))
-                (set! v1-5 (the-as none (logand a0-4 v1-4)))
-                (cmove-#f-zero v0-0 v1-5 v0-2)
-                )
-         )
-    )
-  (ret-value v0-0)
   )
 
-;; ERROR: failed type prop at 5: Could not figure out load: (set! a2 (l.wu a2))
-;; WARN: Return type mismatch none vs symbol.
-(defmethod try-update-focus ((a0-0 focus) (a1-0 process-focusable))
+;; SCAFFOLDING -- jak3 clean version (focus-on! renamed to focus-on!)
+(defmethod focus-on! ((this focus) (proc process-focusable))
   "Try to set the `handle` of this focus to the given process."
-  (local-vars
-    (v0-0 none)
-    (v1-0 uint)
-    (v1-1 none)
-    (v1-2 none)
-    (v1-3 none)
-    (v1-4 none)
-    (v1-5 none)
-    (a1-1 none)
-    (a1-2 none)
-    (a1-3 none)
-    (a2-0 int)
-    (a2-1 uint)
-    (a2-2 none)
-    (a3-0 none)
+  (when (!= (handle->process (the-as handle (-> this handle))) proc)
+    (set! (-> this handle) (the-as uint (process->handle proc)))
+    #t
     )
-  (when (begin
-          (and (begin (set! v1-0 (-> a0-0 handle)) (set! a2-0 (subu-s7 v1-0)) (nonzero? a2-0))
-               (begin
-                 (if (begin
-                       (set! a2-1 v1-0)
-                       (set! a2-2 (the-as none (l.wu a2-1)))
-                       (set! a3-0 (the-as none (l.w (+ a2-2 48))))
-                       (set! v1-2 (the-as none (sra v1-0 32)))
-                       (= v1-2 a3-0)
-                       )
-                     (set! v1-1 (the-as none a2-2))
-                     )
-                 (set! a2-3 (the-as none v1-1))
-                 )
-               )
-          (!= v1-1 a1-0)
-          )
-    (if a1-0
-        (set! v1-3 (the-as none (l.wu (+ a1-0 28))))
-        )
-    (cond
-      (v1-3
-        (set! a1-1 (the-as none (l.wu v1-3)))
-        (set! a1-2 (the-as none (l.w (+ a1-1 48))))
-        (set! a1-3 (the-as none (sll a1-2 32)))
-        )
-      (else
-        (set! a1-3 (the-as none 0))
-        )
-      )
-    (set! v1-4 (the-as none v1-3))
-    (set! v1-5 (the-as none (logior a1-3 v1-4)))
-    (s.d! a0-0 v1-5)
-    (set! v0-0 (the-as none #t))
-    )
-  (ret-value v0-0)
   )
 
 (defmethod clear-focused ((this focus))
