@@ -1100,7 +1100,6 @@
     (set! (-> this upload-data sun v1-0 r-halo) arg2)
     (set! (-> this upload-data sun v1-0 r-aurora) arg3)
     )
-  0
   (none)
   )
 
@@ -1112,7 +1111,7 @@
   (set! (-> this orbit arg0 dist) arg4)
   (set! (-> this orbit arg0 min-halo) arg5)
   (set! (-> this orbit arg0 max-halo) arg6)
-  0
+  (none)
   )
 
 (defun sky-make-sun-data ((arg0 sky-work) (arg1 int) (arg2 float))

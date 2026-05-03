@@ -131,19 +131,21 @@
     (hidden? (_type_) object)
     (draw (_type_) none)
     (update-values! (_type_) none)
-    (init-callback (_type_) none)
-    (event-callback (_type_ process int symbol event-message-block) object)
+    (hud-method-17 (_type_) none)   ;; jakx slot 17
+    (hud-method-18 (_type_) symbol) ;; jakx slot 18
     (hud-method-19 (_type_) none)
     (hud-method-20 (_type_) none)
     (hud-method-21 (_type_) none)
     (hud-method-22 (_type_) none)
     (hud-method-23 (_type_) none)
-    (check-ready-and-maybe-show (_type_ symbol) symbol)
-    (update-value-callback (_type_ int int) none)
-    (alloc-string-if-needed (_type_ int) none)
+    (hud-method-24 (_type_) none)          ;; jakx slot 24
+    (hud-method-25 (_type_ int int) none) ;; was update-value-callback
+    (hud-method-26 (_type_) int)           ;; jakx slot 26
+    (hud-method-27 (_type_) symbol)        ;; jakx slot 27
+    (hud-method-28 (_type_) none)          ;; jakx slot 28
     )
   (:states
-    hud-arriving
+    hud-arriving  ;; slot 29 in jakx-goal (jak3 had 27 — scaffold only)
     hud-hidden
     hud-in
     (hud-leaving float)

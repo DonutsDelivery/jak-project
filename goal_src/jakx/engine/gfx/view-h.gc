@@ -54,22 +54,3 @@
 (define *view-count* 1)
 
 (define *view-assert* #f)
-
-(deftype view (basic)
-  ((index            int8)
-   (control-scheme   uint8)
-   (camera           camera-master)
-   (camera-combiner  camera-combiner)
-   (target           basic)
-   (math-camera      math-camera)
-   )
-  )
-
-
-(define *views* (new 'static 'boxed-array :type view :length 0 :allocated-length 2))
-
-(define *view-context-stack* (new 'static 'boxed-array :type int32 :length 0 :allocated-length 8))
-
-(define *view-context-stack-ptr* -1)
-
-(define *view-default* 0)

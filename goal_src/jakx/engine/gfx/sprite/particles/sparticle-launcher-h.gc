@@ -13,6 +13,9 @@
 (define-extern particle-adgif-cache-flush (function none))
 (define-extern particle-adgif-callback (function adgif-shader texture-id none))
 (define-extern sp-launch-particles-death (function sparticle-system object vector none))
+(declare-type sparticle-launcher basic)
+(declare-type sparticle-launch-state structure)
+(define-extern sp-launch-particles-var (function sparticle-system sparticle-launcher matrix sparticle-launch-state sparticle-launch-control float none))
 (define-extern execute-part-engine (function none))
 (define-extern execute-particle-local-space-engine (function int none))
 
@@ -404,6 +407,7 @@
 
 (define-extern local-space-proc-joint (function particle-local-space-info none))
 (define-extern *particle-quat* quaternion)
+(define-extern *particle-vel* vector)
 
 ;; DECOMP BEGINS
 
@@ -517,6 +521,7 @@
    (origin               matrix                     :inline  :offset  48)
    (center               vector                     :inline  :overlay-at (-> origin trans))
    (sl-data              uint8                      :dynamic :offset 112)
+   (data                 sparticle-launch-state     :dynamic :inline :overlay-at sl-data)
    )
   (:methods
     (initialize (_type_ sparticle-launch-group process-drawable) none)
@@ -527,6 +532,7 @@
     (sparticle-launch-control-method-20 (_type_) none)
     (sparticle-launch-control-method-21 (_type_) none)
     (kill-particles (_type_) none)
+    (set-local-space-info (_type_ particle-local-space-info) none)
     )
   )
 
@@ -545,8 +551,8 @@
    )
   (:methods
     (new (symbol type) _type_)
-    (sparticle-subsampler-method-9 (_type_ vector) vector)
-    (sparticle-subsampler-method-10 (_type_ matrix) matrix)
+    (init-with-vec! (_type_ vector) vector)
+    (init-with-mat! (_type_ matrix) matrix)
     )
   )
 

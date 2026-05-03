@@ -11,69 +11,69 @@
 
 ;; DECOMP BEGINS
 
-(define *no-cloud-haze-mood-fog-table* (the-as mood-fog-table L36))
+(define *no-cloud-haze-mood-fog-table* (the-as mood-fog-table #f))
 
-(define *no-cloud-clear-mood-fog-table* (the-as mood-fog-table L35))
+(define *no-cloud-clear-mood-fog-table* (the-as mood-fog-table #f))
 
-(define *no-cloud-smog-mood-fog-table* (the-as mood-fog-table L34))
+(define *no-cloud-smog-mood-fog-table* (the-as mood-fog-table #f))
 
-(define *overcast-fog-mood-fog-table* (the-as mood-fog-table L33))
+(define *overcast-fog-mood-fog-table* (the-as mood-fog-table #f))
 
-(define *overcast-clear-mood-fog-table* (the-as mood-fog-table L32))
+(define *overcast-clear-mood-fog-table* (the-as mood-fog-table #f))
 
-(define *overcast-rain-mood-fog-table* (the-as mood-fog-table L31))
+(define *overcast-rain-mood-fog-table* (the-as mood-fog-table #f))
 
-(define *storm-fog-mood-fog-table* (the-as mood-fog-table L30))
+(define *storm-fog-mood-fog-table* (the-as mood-fog-table #f))
 
-(define *storm-clear-mood-fog-table* (the-as mood-fog-table L29))
+(define *storm-clear-mood-fog-table* (the-as mood-fog-table #f))
 
-(define *storm-rain-mood-fog-table* (the-as mood-fog-table L28))
+(define *storm-rain-mood-fog-table* (the-as mood-fog-table #f))
 
-(define *desert-mood-fog-table* (the-as mood-fog-table L27))
+(define *desert-mood-fog-table* (the-as mood-fog-table #f))
 
-(define *sandstorm-start-mood-fog-table* (the-as mood-fog-table L26))
+(define *sandstorm-start-mood-fog-table* (the-as mood-fog-table #f))
 
-(define *sandstorm-end-mood-fog-table* (the-as mood-fog-table L25))
+(define *sandstorm-end-mood-fog-table* (the-as mood-fog-table #f))
 
-(define *no-cloud-mood-color-table* (the-as mood-color-table L24))
+(define *no-cloud-mood-color-table* (the-as mood-color-table #f))
 
-(define *overcast-mood-color-table* (the-as mood-color-table L23))
+(define *overcast-mood-color-table* (the-as mood-color-table #f))
 
-(define *storm-mood-color-table* (the-as mood-color-table L22))
+(define *storm-mood-color-table* (the-as mood-color-table #f))
 
-(define *desert-mood-color-table* (the-as mood-color-table L21))
+(define *desert-mood-color-table* (the-as mood-color-table #f))
 
-(define *sandstorm-start-mood-color-table* (the-as mood-color-table L20))
+(define *sandstorm-start-mood-color-table* (the-as mood-color-table #f))
 
-(define *sandstorm-end-mood-color-table* (the-as mood-color-table L19))
+(define *sandstorm-end-mood-color-table* (the-as mood-color-table #f))
 
-(define *no-cloud-mood-channel-group* (the-as mood-channel-group L18))
+(define *no-cloud-mood-channel-group* (the-as mood-channel-group #f))
 
-(define *overcast-mood-channel-group* (the-as mood-channel-group L17))
+(define *overcast-mood-channel-group* (the-as mood-channel-group #f))
 
-(define *stormy-mood-channel-group* (the-as mood-channel-group L16))
+(define *stormy-mood-channel-group* (the-as mood-channel-group #f))
 
-(define *clouds-000* (the-as mood-clouds L15))
+(define *clouds-000* (the-as mood-clouds #f))
 
-(define *clouds-125* (the-as mood-clouds L14))
+(define *clouds-125* (the-as mood-clouds #f))
 
-(define *clouds-250* (the-as mood-clouds L13))
+(define *clouds-250* (the-as mood-clouds #f))
 
-(define *clouds-375* (the-as mood-clouds L12))
+(define *clouds-375* (the-as mood-clouds #f))
 
-(define *clouds-500* (the-as mood-clouds L11))
+(define *clouds-500* (the-as mood-clouds #f))
 
-(define *clouds-625* (the-as mood-clouds L10))
+(define *clouds-625* (the-as mood-clouds #f))
 
-(define *clouds-750* (the-as mood-clouds L9))
+(define *clouds-750* (the-as mood-clouds #f))
 
-(define *clouds-875* (the-as mood-clouds L8))
+(define *clouds-875* (the-as mood-clouds #f))
 
-(define *clouds-1000* (the-as mood-clouds L7))
+(define *clouds-1000* (the-as mood-clouds #f))
 
-(define *mood-direction-table* (the-as mood-direction-table L6))
+(define *mood-direction-table* (the-as mood-direction-table #f))
 
-(define *mood-sky-table* (the-as mood-sky-table L5))
+(define *mood-sky-table* (the-as mood-sky-table #f))
 
 (define *mood-interp-table* #f)
 

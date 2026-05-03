@@ -12,6 +12,8 @@
   (no-cam-rot 1)
   )
 
+(define-extern bones-mtx-calc-execute (function none))
+
 ;; DECOMP BEGINS
 
 (deftype bone-buffer (structure)

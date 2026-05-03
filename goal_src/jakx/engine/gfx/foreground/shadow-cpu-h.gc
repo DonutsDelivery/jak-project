@@ -175,15 +175,6 @@
   )
 
 
-(deftype shadow-edge (structure)
-  ((ind-0  uint8)
-   (ind-1  uint8)
-   (tri-0  uint8)
-   (tri-1  uint8)
-   )
-  )
-
-
 (deftype shadow-frag-header (structure)
   ((qwc-data          uint32)
    (num-joints        uint32)
@@ -222,32 +213,10 @@
    )
   )
 
-
-(defmethod new shadow-control ((allocation symbol)
-                             (type-to-make type)
-                             (arg0 float)
-                             (arg1 float)
-                             (arg2 float)
-                             (arg3 vector)
-                             (arg4 shadow-flags)
-                             (arg5 float)
-                             )
-  (let ((v0-0 (object-new allocation type-to-make (the-as int (-> type-to-make size)))))
-    (if arg3
-        (set! (-> v0-0 settings center quad) (-> arg3 quad))
-        )
-    (set! (-> v0-0 settings flags) arg4)
-    (set-vector! (-> v0-0 settings shadow-dir) 0.0 -1.0 0.0 arg2)
-    (set-vector! (-> v0-0 settings bot-plane) 0.0 1.0 0.0 (- arg0))
-    (set-vector! (-> v0-0 settings top-plane) 0.0 1.0 0.0 (- arg1))
-    (set! (-> v0-0 settings fade-dist) arg5)
-    (set! (-> v0-0 settings shadow-type) 0)
-    v0-0
-    )
-  )
-
 (define *shadow* #f)
 
 (define *shadow-object* #f)
 
 (define *shadow-debug* #f)
+
+(define *shadow-dma-buf* (new 'global 'dma-buffer 512))

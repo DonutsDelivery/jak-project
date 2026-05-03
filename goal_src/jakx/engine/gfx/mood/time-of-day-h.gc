@@ -6,6 +6,8 @@
 ;; dgos: GAME
 
 (define-extern time-of-day-setup (function symbol symbol))
+(define-extern *override-mood-color-table* mood-color-table)
+(define-extern *override-mood-fog-table* mood-fog-table)
 
 ;; +++time-of-day-palette-id
 (defenum time-of-day-palette-id
@@ -80,15 +82,18 @@
    (green-sun           sparticle-launch-control)
    (moon-count          int32)
    (moon                sparticle-launch-control)
+   (day-star-count      int32)
+   (day-star            sparticle-launch-control)
+   (day-star-enable     symbol)
    (start-timer         int32)
    )
   (:methods
-    (time-of-day-proc-method-9 () none)
-    (time-of-day-proc-method-10 () none)
-    (time-of-day-proc-method-11 () none)
-    (time-of-day-proc-method-12 () none)
-    (time-of-day-proc-method-13 () none)
-    (time-of-day-proc-method-14 () none)
+    (time-of-day-proc-method-9 (_type_) none)
+    (time-of-day-proc-method-10 (_type_) none)
+    (time-of-day-proc-method-11 (_type_) none)
+    (time-of-day-proc-method-12 (_type_) none)
+    (time-of-day-proc-method-13 (_type_) none)
+    (time-of-day-proc-method-14 (_type_) none)
     )
   )
 

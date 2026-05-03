@@ -5,20 +5,74 @@
 (defun view-push-context ((arg0 int))
   (when (>= *view-context-stack-ptr* 8)
     (break!)
-    0
     )
   (set! *view-context-stack-ptr* (+ *view-context-stack-ptr* 1))
   (set! (-> *view-context-stack* *view-context-stack-ptr*) arg0)
-  0
+  (none)
   )
 
 (defun view-pop-context ((arg0 int))
   (when (< *view-context-stack-ptr* 0)
     (break!)
-    0
     )
   (set! *view-context-stack-ptr* (+ *view-context-stack-ptr* -1))
-  0
+  (none)
+  )
+
+(defun view-get-real-active ()
+  (if (>= *view-context-stack-ptr* 0)
+      (-> *views* (-> *view-context-stack* *view-context-stack-ptr*))
+      (the-as view #f)
+      )
+  )
+
+(defun view-get-active ()
+  (the-as view
+    (if (>= *view-context-stack-ptr* 0)
+        (-> *views* (-> *view-context-stack* *view-context-stack-ptr*))
+        (begin
+          (when *view-assert*
+            (break!)
+            )
+          (-> *views* *view-default*)
+          )
+        )
+    )
+  )
+
+(defun view-get-active-index ()
+  (let ((v1-1 (the-as view
+                 (if (>= *view-context-stack-ptr* 0)
+                     (-> *views* (-> *view-context-stack* *view-context-stack-ptr*))
+                     (begin
+                       (when *view-assert*
+                         (break!)
+                         )
+                       (-> *views* *view-default*)
+                       )
+                     )
+                 )))
+    (if v1-1
+        (-> v1-1 index)
+        -1
+        )
+    )
+  )
+
+(defun view-get-real-active-index ()
+  (let ((v1-0 (view-get-real-active)))
+    (if v1-0
+        (-> v1-0 index)
+        -1
+        )
+    )
+  )
+
+(defun view-get-index ((arg0 view))
+  (if arg0
+      (-> arg0 index)
+      -1
+      )
   )
 
 (defun view-get-active-target ()
@@ -44,7 +98,7 @@
 
 (defun view-set-active-camera ((arg0 camera-master))
   (set! (-> (view-get-active) camera) arg0)
-  arg0
+  (none)
   )
 
 (defun view-get-active-camera-combiner ()
@@ -57,7 +111,7 @@
 
 (defun view-set-active-camera-combiner ((arg0 camera-combiner))
   (set! (-> (view-get-active) camera-combiner) arg0)
-  arg0
+  (none)
   )
 
 (defun view-get-active-math-camera ()
@@ -73,105 +127,12 @@
   arg0
   )
 
-(defun view-get-real-active ()
-  (with-pp
-    (cond
-      ((and pp (-> pp view))
-       (-> pp view)
-       )
-      ((>= *view-context-stack-ptr* 0)
-       (-> *views* (-> *view-context-stack* *view-context-stack-ptr*))
-       )
-      (else
-        (the-as view #f)
-        )
-      )
-    )
-  )
-
-(defun view-get-active ()
-  (with-pp
-    (cond
-      ((and pp (-> pp view))
-       (-> pp view)
-       )
-      ((>= *view-context-stack-ptr* 0)
-       (-> *views* (-> *view-context-stack* *view-context-stack-ptr*))
-       )
-      (else
-        (when *view-assert*
-          (break!)
-          0
-          )
-        (-> *views* *view-default*)
-        )
-      )
-    )
-  )
-
-(defun view-get-index ((arg0 view))
-  (if arg0
-      (-> arg0 index)
-      -1
-      )
-  )
-
-(defun view-get-active-index ()
-  (with-pp
-    (let ((v1-1 (cond
-                  ((and pp (-> pp view))
-                   (-> pp view)
-                   )
-                  ((>= *view-context-stack-ptr* 0)
-                   (-> *views* (-> *view-context-stack* *view-context-stack-ptr*))
-                   )
-                  (else
-                    (when *view-assert*
-                      (break!)
-                      0
-                      )
-                    (-> *views* *view-default*)
-                    )
-                  )
-                )
-          )
-      (if v1-1
-          (-> v1-1 index)
-          -1
-          )
-      )
-    )
-  )
-
-(defun view-get-real-active-index ()
-  (let ((v1-0 (view-get-real-active)))
-    (if v1-0
-        (-> v1-0 index)
-        -1
-        )
-    )
-  )
-
 ;; ERROR: failed type prop at 5: Could not figure out load: (set! a2 (l.b a0))
 (defun view-print ((a0-0 view))
-  (local-vars
-    (v0-0 none)
-    (v0-1 none)
-    (v1-0 symbol)
-    (a0-1 basic)
-    (a1-0 string)
-    (a2-0 none)
-    (a2-1 none)
-    (t9-0 (function _varargs_ object))
-    )
-  (if (begin (set! t9-0 format) (set! v1-0 #t) (set! a1-0 L47) (set! a0-1 (-> a0-0 target)) a0-1)
-      (set! a2-0 (the-as none (l.b a0-1)))
-      (set! a2-1 (the-as none -1))
-      )
-  (set! a0-2 (the-as none v1-0))
-  (call!)
-  (set! v0-1 (the-as none 0))
-  (ret-none)
+  ;; SCAFFOLDING
+  (format 0 "call to view-print~%")
+  (break!)
+  (none)
   )
 
 (dotimes (gp-0 2)

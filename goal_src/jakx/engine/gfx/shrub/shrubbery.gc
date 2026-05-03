@@ -521,12 +521,10 @@
   (none)
   )
 
-;; ERROR: failed type prop at 1: Could not figure out load: (set! v1 (l.w (+ v1 936)))
-;; WARN: Return type mismatch none vs int.
 (defmethod draw ((a0-0 drawable-tree-instance-shrub))
   (format 0 "call to draw~%")
   (break!)
-  (none)
+  0
   )
 
 (defmethod unpack-vis ((this drawable-tree-instance-shrub) (arg0 (pointer int8)) (arg1 (pointer int8)))
@@ -536,9 +534,7 @@
 ;; ERROR: failed type prop at 5: Could not figure out load: (set! v1 (l.wu (+ a0 4)))
 ;; WARN: Return type mismatch none vs int.
 (defmethod collect-stats ((a0-0 drawable-tree-instance-shrub))
-  (format 0 "call to collect-stats~%")
-  (break!)
-  (none)
+  0
   )
 
 (deftype dma-test (structure)
@@ -561,8 +557,7 @@
 ;; WARN: Return type mismatch uint128 vs none.
 ;; ERROR: Failed store: (s.q! (+ v1-0 1616) v0-0) at op 29
 (defun init-dma-test ()
-  (format 0 "call to init-dma-test~%")
-  (break!)
+  ;; SCAFFOLDING: PS2 DMA test init, no-op on PC
   (none)
   )
 

@@ -41,8 +41,8 @@
    (data       (inline-array sprite-glow-data))
    )
   (:methods
-    (add! (_type_ sprite-glow-data) int)
-    (draw-all-sprites! (_type_ dma-buffer) int)
-    (clear! (_type_) int)
+    (add! (_type_ sprite-glow-data) none)
+    (draw-all-sprites! (_type_ dma-buffer) none)
+    (clear! (_type_) none)
     )
   )

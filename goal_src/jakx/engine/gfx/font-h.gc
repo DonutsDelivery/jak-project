@@ -158,11 +158,11 @@
     (set-start-line! (font-context uint) font-context)
     (set-scale! (font-context float) font-context)
     (set-alpha! (font-context float) font-context)
-    (font-context-method-25 () none)
+    (font-context-method-25 (_type_) none)
     (font-context-method-26 (font-context float) font-context)
     (font-context-method-27 (font-context uint) font-context)
     (font-context-method-28 (font-context uint) font-context)
-    (font-context-method-29 () none)
+    (font-context-method-29 (_type_) none)
     )
   )
 

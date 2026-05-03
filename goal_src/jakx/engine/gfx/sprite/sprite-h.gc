@@ -82,3 +82,28 @@
    (data         uint128  1)
    )
   )
+
+
+;; SCAFFOLDING -- jak3 clean version; sprite-header not present in jakx decompiler output header
+(deftype sprite-header (structure)
+  "Header for the data sent to VU1 renderer."
+  ((header       qword  1 :inline)
+   (num-sprites  int32  :overlay-at (-> header 0 data 0))
+   )
+  )
+
+
+;; SCAFFOLDING -- jak3 clean version; 76 HVDF slots
+(deftype sprite-hvdf-data (structure)
+  ((data  qword  76 :inline)
+   )
+  )
+
+
+;; SCAFFOLDING -- jak3 clean version
+(deftype sprite-hvdf-control (structure)
+  ((alloc  int8  76)
+   )
+  )
+
+

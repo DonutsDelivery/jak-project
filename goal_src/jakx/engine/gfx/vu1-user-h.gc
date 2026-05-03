@@ -27,6 +27,10 @@
 (defenum bucket-id
   :type int32
   (hfrag 8)
+  (generic-sprite-1 569)
+  (particles 570)
+  (generic-sprite-2 571)
+  (generic-sprite-3 574)
   (debug-no-zbuf1 577)
   (hud-draw-hud-alpha 579)
   (tex-hud-pris2 580)

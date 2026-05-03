@@ -140,7 +140,7 @@
    )
   (:methods
     (new (symbol type) _type_)
-    (math-camera-method-9 () none)
+    (math-camera-method-9 (_type_) none)
     )
   )
 
@@ -217,6 +217,7 @@
   this
   )
 
+(define-extern *math-camera* math-camera)
 
 
 

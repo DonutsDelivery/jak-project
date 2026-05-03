@@ -3,3 +3,19 @@
 
 ;; SCAFFOLDING: top-level PS2 initialization code removed (MIPS labels unresolvable)
 ;; Original file registered in-game menu HUD types and set spawn-hud-in-game-menu-networked.
+
+(deftype in-game-menu-hud (hud-item-group)
+  ((start-time      uint64)
+   (selection-index int8)
+   (old-clock-ratio uint32 22)
+   (sound-id        uint32)
+   )
+  (:methods
+    (in-game-menu-hud-method-24 (_type_) symbol)
+    (in-game-menu-hud-method-25 (_type_) symbol)
+    )
+  )
+
+(deftype in-game-menu-hud-options (in-game-menu-hud)
+  ()
+  )

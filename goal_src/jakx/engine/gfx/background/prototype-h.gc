@@ -95,7 +95,7 @@
    (envmap-fade-far              float)
    (envmap-shader                adgif-shader)
    (tint-color                   uint32)
-   (collide-hash-fragment-array  uint32)
+   (collide-hash-fragment-array  collide-hash-fragment-array)
    (tie-colors                   time-of-day-palette)
    (data                         uint32   :dynamic)
    (color-index-qwc              uint32   :dynamic :offset 184)
@@ -170,7 +170,7 @@
 (deftype prototype-array-tie (array)
   ()
   (:methods
-    (prototype-array-tie-method-9 () none)
+    (prototype-array-tie-method-9 (_type_) none)
     )
   )
 
@@ -202,12 +202,12 @@
    (data                  uint8  8144)
    )
   (:methods
-    (prototype-node-group-method-9 () none)
-    (prototype-node-group-method-10 () none)
-    (prototype-node-group-method-11 () none)
-    (prototype-node-group-method-12 () none)
-    (prototype-node-group-method-13 () none)
-    (prototype-node-group-method-14 () none)
+    (prototype-node-group-method-9 (_type_) none)
+    (prototype-node-group-method-10 (_type_) none)
+    (prototype-node-group-method-11 (_type_) none)
+    (prototype-node-group-method-12 (_type_) none)
+    (prototype-node-group-method-13 (_type_) none)
+    (prototype-node-group-method-14 (_type_) none)
     )
   )
 

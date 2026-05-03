@@ -7,18 +7,12 @@
 
 ;; DECOMP BEGINS
 
-(texture-pool-method-11 *texture-pool*)
-
-(init! *sky-texture-anim-array*)
-
-(init! *ocean-texture-anim-array*)
-
-(init! *default-pris-texture-anim-array*)
-
-(init! *default-car-texture-anim-array*)
-
-(init! *default-water-texture-anim-array*)
-
-(init! *default-hud-texture-anim-array*)
+;; SCAFFOLDING: texture-pool-method-11 + the texture-anim-array init! calls
+;; require fully-wired DMA, font-work, tpage data, and real texture-anim-array
+;; globals. The anim-array globals are stubbed to #f in texture-anim-tables.gc,
+;; and texture-pool-method-11 sends a DMA chain to 0x10009000 that crashes
+;; during early boot before the GS pipeline is fully set up. Disabled until
+;; those prerequisites land — the only thing this top-level still needs to do
+;; is kmemclose().
 
 (kmemclose)

@@ -5,6 +5,9 @@
 ;; name in dgo: background-h
 ;; dgos: GAME
 
+(define-extern init-background (function none))
+(define-extern finish-background (function none))
+
 ;; DECOMP BEGINS
 
 ;; type background-work is defined here, but it is unknown to the decompiler

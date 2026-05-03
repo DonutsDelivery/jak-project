@@ -191,6 +191,10 @@ At any point in time, there are 3 frames in progress:
 
 (define-extern *display* display)
 
+(defmacro current-frame ()
+  `(-> *display* frames (-> *display* on-screen))
+  )
+
 (define *pre-draw-hook* (the-as (function object none) nothing))
 
 (define *post-draw-hook* (the-as (function dma-buffer none) nothing))

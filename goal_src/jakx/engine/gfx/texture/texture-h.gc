@@ -38,6 +38,9 @@
 (defenum link-test-flags
   :type uint32
   :bitfield #t
+  (needs-log-in 8)
+  (bit-9 9)
+  (backup-sprite-tex 10)
   )
 ;; ---link-test-flags
 
@@ -98,8 +101,8 @@ as the tpage number and index of the texture within the tpage."
     (texture-pool-method-23 (_type_) none)
     (texture-pool-method-24 (_type_) none)
     (texture-pool-method-25 (_type_) none)
-    (texture-pool-method-26 () none)
-    (texture-pool-method-27 () int)
+    (texture-pool-method-26 (_type_) none)
+    (texture-pool-method-27 (_type_) int)
     )
   )
 
@@ -200,12 +203,12 @@ Lower number segments are larger and have hi-res versions of textures."
    (data       texture               :dynamic)
    )
   (:methods
-    (texture-page-method-9 () none)
+    (texture-page-method-9 (_type_ kheap) none)
     (texture-page-method-10 (_type_ int int) int)
     (texture-page-method-11 (_type_ int int) texture-page)
     (texture-page-method-12 (_type_ dma-buffer tex-upload-mode) int)
     (texture-page-method-13 (_type_ tex-upload-mode) int)
-    (texture-page-method-14 () none)
+    (texture-page-method-14 (_type_) none)
     )
   )
 
@@ -221,7 +224,7 @@ an adgif shader easily."
 (deftype texture-link (structure)
   "An overlay structure containing a shader-ptr that points to the next adgif-shader
 in a linked list."
-  ((next  shader-ptr)
+  ((next  shader-ptr  1)
    )
   )
 
@@ -248,8 +251,8 @@ This is static data loaded from the DVD at boot."
    (entries  texture-page-dir-entry  1 :inline)
    )
   (:methods
-    (texture-page-dir-method-9 () none)
-    (texture-page-dir-method-10 () none)
+    (texture-page-dir-method-9 (_type_) none)
+    (texture-page-dir-method-10 (_type_) none)
     )
   )
 
@@ -612,4 +615,13 @@ of the texture."
   )
 
 
-(define *texture-page-translate* #f)
+(define-extern *texture-page-translate* (array texture-page-translate-item))
+
+(define *eyes-texture-base* (new 'static 'texture-base))
+
+(defmacro get-texture (name tpage)
+  `(lookup-texture-by-id ,(string->symbol-format "{}-{}" name tpage)))
+
+(import "goal_src/jak3/engine/data/tpages.gc")
+(import "goal_src/jak3/engine/data/textures.gc")
+(import "goal_src/jakx/engine/data/textures-overrides.gc")

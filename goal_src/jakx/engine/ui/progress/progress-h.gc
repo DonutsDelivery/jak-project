@@ -326,7 +326,7 @@
   (:methods
     (respond-progress (_type_ progress symbol) int)
     (draw-option (_type_ progress font-context int symbol) none)
-    (menu-option-method-11 () none)
+    (menu-option-method-11 (_type_) none)
     )
   )
 

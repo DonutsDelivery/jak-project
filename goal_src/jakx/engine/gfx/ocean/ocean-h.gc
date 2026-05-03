@@ -134,9 +134,10 @@
   )
 
 
-;; type ocean-wave-frames is defined here, but it is unknown to the decompiler
-
-(method-set! (the-as type ocean-wave-frames) 3 L41)
+(deftype ocean-wave-frames (structure)
+  ((frame  ocean-wave-data  64 :inline)
+   )
+  )
 
 (deftype ocean-texture-constants (structure)
   ((giftag     qword     :inline)
@@ -404,6 +405,7 @@
     (ocean-method-81 (_type_ dma-buffer) none)
     (ocean-method-82 (_type_) none)
     (ocean-method-83 (_type_) none)
+    (do-tex-scroll! (_type_) none)
     )
   )
 

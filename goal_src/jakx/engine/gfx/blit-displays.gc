@@ -150,10 +150,11 @@
 ;; ERROR: Function may read a register that is not set: a0
 ;; ERROR: Function may read a register that is not set: a1
 ;; ERROR: Function may read a register that is not set: a2
-(defmethod blit-displays-work-method-21 ((this blit-displays-work))
-  (format 0 "call to blit-displays-work-method-21~%")
+(defmethod get-menu-mode ((this blit-displays-work))
+  ;; SCAFFOLDING
+  (format 0 "call to get-menu-mode~%")
   (break!)
-  (none)
+  #f
   )
 
 ;; type blur-coords is defined here, but it is unknown to the decompiler
@@ -176,10 +177,11 @@
 ;; ERROR: Function may read a register that is not set: a0
 ;; ERROR: Function may read a register that is not set: a1
 ;; ERROR: Function may read a register that is not set: a2
-(defmethod blit-displays-work-method-23 ((this blit-displays-work))
-  (format 0 "call to blit-displays-work-method-23~%")
+(defmethod get-horizontal-flip-flag ((this blit-displays-work))
+  ;; SCAFFOLDING
+  (format 0 "call to get-horizontal-flip-flag~%")
   (break!)
-  (none)
+  #f
   )
 
 ;; ERROR: failed type prop at 5: add failed: <uninitialized> <integer 28>
@@ -188,27 +190,23 @@
 ;; ERROR: Function may read a register that is not set: a1
 ;; ERROR: Function may read a register that is not set: a2
 ;; ERROR: Function may read a register that is not set: a3
-(defmethod blit-displays-work-method-24 ((this blit-displays-work))
+(defmethod blit-displays-work-method-24 ((this blit-displays-work) (arg0 symbol))
+  ;; SCAFFOLDING
   (format 0 "call to blit-displays-work-method-24~%")
   (break!)
   (none)
   )
 
-;; ERROR: failed type prop at 1: add failed: <uninitialized> <integer 28>
-
-;; ERROR: Function may read a register that is not set: a0
-;; ERROR: Function may read a register that is not set: a1
-;; ERROR: Function may read a register that is not set: a2
-(defmethod blit-displays-work-method-25 ((this blit-displays-work))
+(defmethod blit-displays-work-method-25 ((this blit-displays-work) (arg0 symbol))
+  ;; SCAFFOLDING
   (format 0 "call to blit-displays-work-method-25~%")
   (break!)
   (none)
   )
 
-;; ERROR: failed type prop at 37: add failed: basic <integer 28>
-
-(defmethod blit-displays-work-method-26 ((this blit-displays-work))
+(defmethod blit-displays-work-method-26 ((this blit-displays-work) (arg0 symbol))
+  ;; SCAFFOLDING
   (format 0 "call to blit-displays-work-method-26~%")
   (break!)
-  (none)
+  0
   )

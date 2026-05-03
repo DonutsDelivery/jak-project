@@ -7,6 +7,8 @@
 
 (define-extern setup-blerc-chains (function merc-ctrl (pointer int16) dma-buffer none))
 
+(def-mips2c setup-blerc-chains-for-one-fragment (function object object object object object object object))
+
 ;; when true, uses the PC float blerc implementation.
 (define *use-fp-blerc* #t)
 
@@ -229,12 +231,14 @@
     (logclear! (-> arg0 skel status) (joint-control-status blend-shape-valid))
     (setup-blerc-chains
       (-> arg0 draw lod-set lod 0 geo)
-      #f
+      (the-as (pointer int16) #f)
       (-> *display* frames (-> *display* on-screen) global-buf)
       )
     )
   0
   )
+
+(def-mips2c setup-blerc-chains-for-one-fragment (function object object object object object object object))
 
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 
@@ -282,7 +286,7 @@
                          (* (-> (the-as merc-fragment-control s1-0) fp-qwc) 16)
                          )
                       )
-                (set! s1-0 (+ (the-as uint s1-0) (* (-> (the-as merc-fragment-control s1-0) mat-xfer-count) 2) 4))
+                (set! s1-0 (the-as structure (+ (the-as uint s1-0) (* (-> (the-as merc-fragment-control s1-0) mat-xfer-count) 2) 4)))
                 (set! s0-0
                       (+ (the-as int s0-0) (* (the-as uint a0-14) (+ (-> (the-as merc-blend-ctrl sv-32) nonzero-index-count) 1)))
                       )
@@ -301,4 +305,5 @@
       )
     )
   0
+  (none)
   )

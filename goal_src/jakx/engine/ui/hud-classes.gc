@@ -86,7 +86,7 @@
       (if (and (< (-> this values 1 target) 270) (< 270 (+ (-> this values 1 target) v1-10)))
           (set! (-> this values 1 target) 270)
           )
-      (if (or (-> *game-info* wanted-flash) (!= (-> this values 1 target) 270))
+      (if (or #f (!= (-> this values 1 target) 270))
           (set! (-> this values 1 target) (mod (+ (-> this values 1 target) v1-10) 360))
           )
       )
@@ -95,7 +95,7 @@
   (none)
   )
 
-(defmethod init-callback ((this hud-map))
+(defmethod hud-method-17 ((this hud-map))
   (set! (-> this gui-id)
         (add-process *gui-control* this (gui-channel hud-lower-right) (gui-action hidden) (-> this name) 81920.0 0)
         )
@@ -115,7 +115,7 @@
   (none)
   )
 
-(defmethod update-value-callback ((this hud-health) (arg0 int) (arg1 int))
+(defmethod hud-method-25 ((this hud-health) (arg0 int) (arg1 int))
   (if (and (= arg0 4) (> arg1 0))
       (sound-play "inc-pickup" :pitch 0.5)
       )
@@ -243,22 +243,13 @@
   )
 
 (defmethod update-values! ((this hud-health))
-  (set! (-> this values 0 target) (the int (-> *target* fact health)))
-  (set! (-> this values 1 target) (the-as int (-> *target* fact health-pickup-time)))
-  (set! (-> this values 2 target) (min 100 (the int (+ 0.5 (-> *target* game eco-pill-dark)))))
-  (set! (-> this values 3 target) (the-as int (-> *target* fact eco-pill-dark-pickup-time)))
-  (set! (-> this values 4 target) (the int (-> *target* fact health-max)))
-  (set! (-> this values 5 target) (min 100 (the int (+ 0.5 (-> *target* game eco-pill-light)))))
-  (set! (-> this values 6 target) (the-as int (-> *target* fact eco-pill-light-pickup-time)))
-  (if (focus-test? *target* dark)
-      (+! (-> this values 7 target) 1)
-      )
+  ;; SCAFFOLDING - jak3 health/eco-pill fields not in jakx fact-info-target
   ((method-of-type hud update-values!) this)
   0
   (none)
   )
 
-(defmethod init-callback ((this hud-health))
+(defmethod hud-method-17 ((this hud-health))
   (set! (-> this gui-id)
         (add-process *gui-control* this (gui-channel hud-lower-left-1) (gui-action hidden) (-> this name) 81920.0 0)
         )
@@ -316,13 +307,13 @@
   )
 
 (defmethod update-values! ((this hud-skullgem))
-  (set! (-> this values 0 target) (the int (-> *target* game gem)))
+  ;; SCAFFOLDING - jak3 gem field not in jakx game-info
   ((method-of-type hud update-values!) this)
   0
   (none)
   )
 
-(defmethod init-callback ((this hud-skullgem))
+(defmethod hud-method-17 ((this hud-skullgem))
   (set! (-> this gui-id)
         (add-process *gui-control* this (gui-channel hud-center-left) (gui-action hidden) (-> this name) 81920.0 0)
         )
@@ -343,7 +334,7 @@
   (none)
   )
 
-(defmethod update-value-callback ((this hud-skullgem) (arg0 int) (arg1 int))
+(defmethod hud-method-25 ((this hud-skullgem) (arg0 int) (arg1 int))
   (let ((v1-3 (- (-> this values arg0 target) (-> this values arg0 current))))
     (cond
       ((< 20 v1-3)
@@ -384,13 +375,13 @@
   )
 
 (defmethod update-values! ((this hud-skill))
-  (set! (-> this values 0 target) (the int (-> *target* game skill)))
+  ;; SCAFFOLDING - jak3 skill field not in jakx game-info
   ((method-of-type hud update-values!) this)
   0
   (none)
   )
 
-(defmethod init-callback ((this hud-skill))
+(defmethod hud-method-17 ((this hud-skill))
   (set! (-> this gui-id)
         (add-process *gui-control* this (gui-channel hud-middle-left) (gui-action hidden) (-> this name) 81920.0 0)
         )
@@ -411,7 +402,7 @@
   (none)
   )
 
-(defmethod update-value-callback ((this hud-skill) (arg0 int) (arg1 int))
+(defmethod hud-method-25 ((this hud-skill) (arg0 int) (arg1 int))
   (if (> arg1 0)
       (sound-play "inc-pickup" :pitch 0.5)
       )
@@ -433,13 +424,13 @@
   )
 
 (defmethod update-values! ((this hud-score))
-  (set! (-> this values 0 target) (the int (-> *game-info* score)))
+  ;; SCAFFOLDING - jak3 score field not in jakx game-info
   ((method-of-type hud update-values!) this)
   0
   (none)
   )
 
-(defmethod init-callback ((this hud-score))
+(defmethod hud-method-17 ((this hud-score))
   (set! (-> this gui-id)
         (add-process *gui-control* this (gui-channel hud-center-right) (gui-action hidden) (-> this name) 81920.0 0)
         )
@@ -488,52 +479,19 @@
   (none)
   )
 
-;; WARN: Return type mismatch uint vs object.
-(defmethod event-callback ((this hud-timer) (arg0 process) (arg1 int) (arg2 symbol) (arg3 event-message-block))
-  (case arg2
-    (('alert)
-     (let ((v0-0 (-> arg3 param 0)))
-       (set! (-> this values 3 target) (the-as int v0-0))
-       v0-0
-       )
-     )
-    )
+(defmethod hud-method-18 ((this hud-timer))
+  #f
   )
 
 (defmethod update-values! ((this hud-timer))
-  (set! (-> this values 0 target) (/ (-> *game-info* timer) #x4650))
-  (set! (-> this values 1 target) (/ (mod (-> *game-info* timer) #x4650) 300))
-  (let ((v1-8 (abs (- (-> this values 1 target) (-> this values 2 target)))))
-    (when (> v1-8 0)
-      (set! (-> this values 2 target) (-> this values 1 target))
-      (cond
-        ((<= (-> this values 3 target) 0)
-         (if (and (< (-> this values 0 target) 1)
-                  (< (-> this values 1 target) (the-as int (-> *setting-control* user-current timer-warn-seconds)))
-                  )
-             (sound-play "timer-warn")
-             (sound-play "timer-beep")
-             )
-         )
-        ((= (-> this values 3 target) 1)
-         (sound-play "warn-beep1")
-         )
-        ((= (-> this values 3 target) 2)
-         (sound-play "warn-beep2")
-         )
-        ((>= (-> this values 3 target) 3)
-         (sound-play "warn-beep3")
-         )
-        )
-      )
-    )
+  ;; SCAFFOLDING - jak3 timer field not in jakx game-info
   (logclear! (-> this flags) (hud-flags disable))
   ((method-of-type hud update-values!) this)
   0
   (none)
   )
 
-(defmethod init-callback ((this hud-timer))
+(defmethod hud-method-17 ((this hud-timer))
   (set! (-> this gui-id)
         (add-process *gui-control* this (gui-channel hud-upper-center) (gui-action hidden) (-> this name) 81920.0 0)
         )
@@ -568,13 +526,13 @@
   )
 
 (defmethod update-values! ((this hud-big-score))
-  (set! (-> this values 0 target) (the int (-> *game-info* score)))
+  ;; SCAFFOLDING - jak3 score field not in jakx game-info
   ((method-of-type hud update-values!) this)
   0
   (none)
   )
 
-(defmethod init-callback ((this hud-big-score))
+(defmethod hud-method-17 ((this hud-big-score))
   (set! (-> this gui-id)
         (add-process *gui-control* this (gui-channel hud-upper-center) (gui-action hidden) (-> this name) 81920.0 0)
         )
@@ -626,7 +584,7 @@
   (none)
   )
 
-(defmethod init-callback ((this hud-goal))
+(defmethod hud-method-17 ((this hud-goal))
   (set! (-> this gui-id)
         (add-process *gui-control* this (gui-channel hud-upper-left) (gui-action hidden) (-> this name) 81920.0 0)
         )
@@ -685,7 +643,7 @@
   (none)
   )
 
-(defmethod init-callback ((this hud-miss))
+(defmethod hud-method-17 ((this hud-miss))
   (set! (-> this gui-id)
         (add-process *gui-control* this (gui-channel hud-upper-right) (gui-action hidden) (-> this name) 81920.0 0)
         )
@@ -747,7 +705,7 @@
   (none)
   )
 
-(defmethod init-callback ((this hud-progress))
+(defmethod hud-method-17 ((this hud-progress))
   (set! (-> this gui-id)
         (add-process *gui-control* this (gui-channel hud-upper-center-2) (gui-action hidden) (-> this name) 81920.0 0)
         )
@@ -950,7 +908,7 @@
   (set! sv-48 0)
   (set! sv-56 0)
   (set! sv-64 (new 'stack-no-clear 'hud-sprite))
-  (set! sv-72 (the int (get-max-ammo-for-gun *game-info* (the-as pickup-type (-> this values 0 current)))))
+  (set! sv-72 0) ;; SCAFFOLDING - get-max-ammo-for-gun not in jakx
   (set! sv-80 20)
   (set! sv-88 -1)
   (set! sv-96 -1)
@@ -1123,7 +1081,7 @@
           (if (and (zero? s5-0) (nonzero? (-> this values 1 current)))
               (set! s5-0 1)
               )
-          (when (not (-> *setting-control* user-current gun-special-mode))
+          (when (not #f)
             (with-dma-buffer-add-bucket ((s3-0 (-> *display* frames (-> *display* on-screen) global-buf))
                                          (bucket-id hud-draw-hud-alpha)
                                          )
@@ -1155,7 +1113,7 @@
       )
     (let ((s5-1
             (+ (if (and (logtest? (-> *target* game features) (game-feature gun))
-                        (and (-> *setting-control* user-current gun)
+                        (and #f ;; SCAFFOLDING: gun not in jakx user-setting-data
                              (logtest? (logand (-> *setting-control* user-current features) (game-feature gun-red-1))
                                        (-> *target* game features)
                                        )
@@ -1165,7 +1123,7 @@
                    0
                    )
                (if (and (logtest? (-> *target* game features) (game-feature gun))
-                        (and (-> *setting-control* user-current gun)
+                        (and #f ;; SCAFFOLDING: gun not in jakx user-setting-data
                              (logtest? (logand (-> *setting-control* user-current features) (game-feature gun-red-2))
                                        (-> *target* game features)
                                        )
@@ -1175,7 +1133,7 @@
                    0
                    )
                (if (and (logtest? (-> *target* game features) (game-feature gun))
-                        (and (-> *setting-control* user-current gun)
+                        (and #f ;; SCAFFOLDING: gun not in jakx user-setting-data
                              (logtest? (logand (-> *setting-control* user-current features) (game-feature gun-red-3))
                                        (-> *target* game features)
                                        )
@@ -1207,7 +1165,7 @@
       )
     (let ((s5-2
             (+ (if (and (logtest? (-> *target* game features) (game-feature gun))
-                        (-> *setting-control* user-current gun)
+                        #f ;; SCAFFOLDING: gun not in jakx user-setting-data
                         (logtest? (logand (-> *setting-control* user-current features) (game-feature gun-yellow-1))
                                   (-> *target* game features)
                                   )
@@ -1216,7 +1174,7 @@
                    0
                    )
                (if (and (logtest? (-> *target* game features) (game-feature gun))
-                        (and (-> *setting-control* user-current gun)
+                        (and #f ;; SCAFFOLDING: gun not in jakx user-setting-data
                              (logtest? (logand (-> *setting-control* user-current features) (game-feature gun-yellow-2))
                                        (-> *target* game features)
                                        )
@@ -1226,7 +1184,7 @@
                    0
                    )
                (if (and (logtest? (-> *target* game features) (game-feature gun))
-                        (and (-> *setting-control* user-current gun)
+                        (and #f ;; SCAFFOLDING: gun not in jakx user-setting-data
                              (logtest? (logand (-> *setting-control* user-current features) (game-feature gun-yellow-3))
                                        (-> *target* game features)
                                        )
@@ -1258,7 +1216,7 @@
       )
     (let ((s5-3
             (+ (if (and (logtest? (-> *target* game features) (game-feature gun))
-                        (-> *setting-control* user-current gun)
+                        #f ;; SCAFFOLDING: gun not in jakx user-setting-data
                         (logtest? (logand (-> *setting-control* user-current features) (game-feature gun-blue-1))
                                   (-> *target* game features)
                                   )
@@ -1267,7 +1225,7 @@
                    0
                    )
                (if (and (logtest? (-> *target* game features) (game-feature gun))
-                        (and (-> *setting-control* user-current gun)
+                        (and #f ;; SCAFFOLDING: gun not in jakx user-setting-data
                              (logtest? (logand (-> *setting-control* user-current features) (game-feature gun-blue-2))
                                        (-> *target* game features)
                                        )
@@ -1277,7 +1235,7 @@
                    0
                    )
                (if (and (logtest? (-> *target* game features) (game-feature gun))
-                        (and (-> *setting-control* user-current gun)
+                        (and #f ;; SCAFFOLDING: gun not in jakx user-setting-data
                              (logtest? (logand (-> *setting-control* user-current features) (game-feature gun-blue-3))
                                        (-> *target* game features)
                                        )
@@ -1309,7 +1267,7 @@
       )
     (let ((s5-4
             (+ (if (and (logtest? (-> *target* game features) (game-feature gun))
-                        (-> *setting-control* user-current gun)
+                        #f ;; SCAFFOLDING: gun not in jakx user-setting-data
                         (logtest? (logand (-> *setting-control* user-current features) (game-feature gun-dark-1))
                                   (-> *target* game features)
                                   )
@@ -1318,7 +1276,7 @@
                    0
                    )
                (if (and (logtest? (-> *target* game features) (game-feature gun))
-                        (and (-> *setting-control* user-current gun)
+                        (and #f ;; SCAFFOLDING: gun not in jakx user-setting-data
                              (logtest? (logand (game-feature gun-dark-2) (-> *setting-control* user-current features))
                                        (-> *target* game features)
                                        )
@@ -1328,7 +1286,7 @@
                    0
                    )
                (if (and (logtest? (-> *target* game features) (game-feature gun))
-                        (and (-> *setting-control* user-current gun)
+                        (and #f ;; SCAFFOLDING: gun not in jakx user-setting-data
                              (logtest? (logand (game-feature gun-dark-3) (-> *setting-control* user-current features))
                                        (-> *target* game features)
                                        )
@@ -1367,7 +1325,7 @@
       (set! (-> this strings 0 color) (font-color red))
       (set! (-> this strings 0 color) (font-color white))
       )
-  (if (and (-> *setting-control* user-current gun-special-mode) (= (-> this values 0 current) 29))
+  (if (and #f (= (-> this values 0 current) 29))
       (clear (-> this strings 0 text))
       )
   ((method-of-type hud draw) this)
@@ -1376,32 +1334,15 @@
   )
 
 (defmethod update-values! ((this hud-gun))
-  (cond
-    ((focus-test? *target* gun)
-     (let ((v1-2 (-> this values 0 target)))
-       (set! (-> this values 0 target) (the-as int (-> *target* gun using-gun-type)))
-       (if (!= v1-2 (-> this values 0 target))
-           (sound-play "gun-switch")
-           )
-       )
-     (set! (-> this values 1 target)
-           (the int (-> *target* game gun-ammo (+ (gun->ammo (-> *target* gun using-gun-type)) -15)))
-           )
-     (logclear! (-> this flags) (hud-flags disable))
-     (logior! (-> this flags) (hud-flags show))
-     )
-    (else
-      (logior! (-> this flags) (hud-flags disable))
-      (logclear! (-> this flags) (hud-flags show))
-      (send-event this 'hide)
-      )
-    )
+  ;; SCAFFOLDING - jak3 gun-ammo/using-gun-type not in jakx
+  (logior! (-> this flags) (hud-flags disable))
+  (logclear! (-> this flags) (hud-flags show))
   ((method-of-type hud update-values!) this)
   0
   (none)
   )
 
-(defmethod init-callback ((this hud-gun))
+(defmethod hud-method-17 ((this hud-gun))
   (set! (-> this gui-id)
         (add-process *gui-control* this (gui-channel hud-upper-right) (gui-action hidden) (-> this name) 81920.0 0)
         )

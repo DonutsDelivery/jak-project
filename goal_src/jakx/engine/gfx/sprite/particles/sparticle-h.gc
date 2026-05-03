@@ -89,6 +89,7 @@
    (clock-index    uint8)
    (user1-int16    uint16)
    (control        basic)
+   (key            sparticle-launch-control :overlay-at control)
    (binding        int32)
    (vel            vector3s            :inline :overlay-at (-> vel-sxvel data 0))
    (accel          vector3s            :inline :overlay-at (-> acc data 0))

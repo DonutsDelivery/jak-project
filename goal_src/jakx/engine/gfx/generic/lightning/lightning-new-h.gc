@@ -107,8 +107,8 @@
     (lightning-bolt-method-15 (_type_ object int lightning-span-internal) none)
     (lightning-bolt-method-16 (_type_ vector float float vector matrix) none)
     (lightning-bolt-method-17 (_type_ uint float float curve2d-fast float) float)
-    (lightning-bolt-method-18 () none)
-    (lightning-bolt-method-19 (_type_ vector int int matrix float float) none)
+    (lightning-bolt-method-18 (_type_) none)
+    (lightning-bolt-method-19 (_type_ vector int int matrix float float) vector)
     (lightning-bolt-method-20 (_type_ int lightning-span-internal) vector)
     (lightning-bolt-method-21 (_type_ int int float) none)
     (lightning-bolt-method-22 (_type_) none)
@@ -121,12 +121,14 @@
    (lifetime    uint64)
    (state-time  uint64)
    )
-  (:state-methods
+  (:methods
+    (die () _type_ :state)
+    (active () _type_ :state)
+    (lightning-new-tracker-method-16 (_type_) none)
+    )
+  (:states
     die
     active
-    )
-  (:methods
-    (lightning-new-tracker-method-16 () none)
     )
   )
 

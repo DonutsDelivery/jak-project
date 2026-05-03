@@ -11,12 +11,12 @@
    (text         basic)
    )
   (:methods
-    (hoff-text-floater-method-9 () none)
-    (hoff-text-floater-method-10 () none)
-    (hoff-text-floater-method-11 () none)
-    (hoff-text-floater-method-12 () none)
-    (hoff-text-floater-method-13 () none)
-    (hoff-text-floater-method-14 () none)
+    (hoff-text-floater-method-9 (_type_) none)
+    (hoff-text-floater-method-10 (_type_) none)
+    (hoff-text-floater-method-11 (_type_) none)
+    (hoff-text-floater-method-12 (_type_) none)
+    (hoff-text-floater-method-13 (_type_) none)
+    (hoff-text-floater-method-14 (_type_) none)
     (run () _type_ :state)
     )
   )
@@ -57,7 +57,7 @@
         )
       )
   (method-set! hoff-text-floater 15 gp-0)
-  (set! (-> gp-0 enter) L4)
-  (set! (-> gp-0 trans) (the-as (function object) L1))
+  ;; SCAFFOLDING: unresolvable MIPS label removed
+  ;; SCAFFOLDING: unresolvable MIPS label removed
   (set! (-> gp-0 code) sleep-code)
   )

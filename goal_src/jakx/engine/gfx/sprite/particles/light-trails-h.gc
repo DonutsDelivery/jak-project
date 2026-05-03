@@ -91,17 +91,17 @@
   (:methods
     (light-trail-method-10 (_type_) none)
     (light-trail-method-11 (_type_ vector time-frame) int)
-    (light-trail-method-12 (_type_) none)
+    (light-trail-method-12 (_type_) int)
     (light-trail-method-13 (_type_) int)
     (light-trail-method-14 (_type_) none)
     (light-trail-method-15 (_type_) none)
-    (light-trail-method-16 () none)
-    (light-trail-method-17 (_type_ vector rgba float vector float) symbol)
-    (light-trail-method-18 () none)
+    (light-trail-method-16 (_type_) none)
+    (light-trail-method-17 (_type_ vector rgba float vector float) int)
+    (light-trail-method-18 (_type_) none)
     (light-trail-method-19 (_type_ float int) none)
     (light-trail-method-20 (_type_) none)
     (light-trail-method-21 (_type_ vector) none)
-    (light-trail-method-22 () none)
+    (light-trail-method-22 (_type_) none)
     )
   )
 
@@ -116,7 +116,7 @@
   ()
   (:methods
     (weapon-trail-method-23 (_type_ vector vector) none)
-    (weapon-trail-method-24 () none)
+    (weapon-trail-method-24 (_type_) none)
     )
   )
 
@@ -131,7 +131,7 @@
   ()
   (:methods
     (tread-trail-method-23 (_type_ vector vector) none)
-    (tread-trail-method-24 () none)
+    (tread-trail-method-24 (_type_) none)
     )
   )
 
@@ -161,14 +161,18 @@
    (last-add-frame-val    uint32)
    )
   (:methods
-    (light-trail-tracker-method-14 () none)
+    (light-trail-tracker-method-14 (_type_) none)
     (tracking () _type_ :state)
     (die () _type_ :state)
-    (should-track? (_type_ process-focusable) symbol)
+    (should-track? (_type_ process-focusable) int)
     (should-end? (_type_ process-focusable) symbol)
     (should-draw? (_type_) symbol)
     (add-crumb! (_type_ vector) none)
     (get-tracked-object-pos (_type_ process-focusable vector) vector)
+    )
+  (:states
+    tracking
+    die
     )
   )
 
@@ -179,7 +183,10 @@
    (joint1      int16)
    (state-time  uint64)
    )
-  (:state-methods
+  (:methods
+    (hang-on () _type_ :state)
+    )
+  (:states
     hang-on
     )
   )
@@ -205,7 +212,12 @@
 (deftype light-trail-tracker-projectile (light-trail-tracker)
   ((state-time  uint64)
    )
-  (:state-methods
+  (:methods
+    (hang-on () _type_ :state)
+    )
+  (:states
     hang-on
     )
   )
+
+(define-extern light-trail-tracker-common-post (function object))

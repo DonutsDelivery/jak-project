@@ -61,3 +61,8 @@
   (the-as sparticle-launch-group #f)
   )
 
+(defmethod set-local-space-info ((this sparticle-launch-control) (arg0 particle-local-space-info))
+  (set! (-> this local-space-binding) arg0)
+  (none)
+  )
+

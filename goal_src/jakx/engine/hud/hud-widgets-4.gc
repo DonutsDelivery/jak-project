@@ -50,11 +50,11 @@
 ;; ERROR: function has no type analysis. Cannot decompile.
 
 (defmethod hud-method-17 ((this text-display-nice-shot))
-  #f
+  (none)
   )
 
 (defmethod hud-method-22 ((this text-display-nice-shot))
-  #f
+  (none)
   )
 
 ;; ERROR: function has no type analysis. Cannot decompile.

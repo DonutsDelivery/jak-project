@@ -21,74 +21,18 @@
 
 (def-mips2c render-sky-tri (function (inline-array sky-vertex) dma-buffer none))
 
-;; WARN: Return type mismatch pointer vs none.
-;; ERROR: Function may read a register that is not set: ra
-;; ERROR: Unsupported inline assembly instruction kind - [jr ra]
 (defun close-sky-buffer ((arg0 dma-buffer))
-  (local-vars (ra-0 none))
-  (nop!)
-  (let ((v1-0 #x8000)
-        (v0-0 (-> arg0 base))
-        )
-    (set! (-> (the-as (pointer int128) v0-0)) 0)
-    (nop!)
-    (set! (-> (the-as (pointer int32) v0-0)) v1-0)
-    (let ((v0-1 (&+ v0-0 16)))
-      (.jr ra-0)
-      (set! (-> arg0 base) v0-1)
-      )
+  ;; SCAFFOLDING: writes end-of-dma-chain packet (128-bit zero then 0x8000 tag), advances base by 16.
+  (let* ((v0-0 (-> arg0 base))
+         (v0-1 (&+ v0-0 16))
+         )
+    (set! (-> (the-as (pointer uint128) v0-0)) (the-as uint128 0))
+    (set! (-> (the-as (pointer int32) v0-0)) #x8000)
+    (set! (-> arg0 base) v0-1)
     )
   (none)
   )
 
-(method-set! (the-as type sky-work) 14 L95)
-
-(method-set! (the-as type sky-work) 15 L92)
-
-(method-set! (the-as type sky-work) 12 L89)
-
-(method-set! (the-as type sky-work) 16 L86)
-
-(method-set! (the-as type sky-work) 17 L85)
-
-(method-set! (the-as type sky-work) 11 L82)
-
-(method-set! (the-as type sky-work) 18 L81)
-
-(method-set! (the-as type sky-work) 19 L80)
-
-(method-set! (the-as type sky-work) 20 L77)
-
-(method-set! (the-as type sky-work) 21 L76)
-
-(method-set! (the-as type sky-work) 22 L75)
-
-(method-set! (the-as type sky-work) 23 L67)
-
-(method-set! (the-as type sky-work) 24 L66)
-
-(method-set! (the-as type sky-work) 25 L63)
-
-(method-set! (the-as type sky-work) 26 L62)
-
-(method-set! (the-as type sky-work) 27 L57)
-
-(method-set! (the-as type sky-work) 28 L53)
-
-(method-set! (the-as type sky-work) 29 L49)
-
-(method-set! (the-as type sky-work) 30 L44)
-
-(method-set! (the-as type sky-work) 31 L41)
-
-(method-set! (the-as type sky-work) 32 L32)
-
-(method-set! (the-as type sky-work) 33 L26)
-
-(method-set! (the-as type sky-work) 34 L25)
-
-(method-set! (the-as type sky-work) 35 L24)
-
-(method-set! (the-as type sky-work) 36 L22)
-
-(method-set! (the-as type sky-work) 13 L1)
+;; SCAFFOLDING: sky-work method-set! calls reference L-labels (raw MIPS binary offsets) that
+;; do not exist as named symbols in GOAL. Method installation is skipped; methods remain at
+;; their default (nothing) until mips2c ports are wired in.

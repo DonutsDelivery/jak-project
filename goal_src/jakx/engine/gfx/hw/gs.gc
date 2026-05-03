@@ -847,7 +847,7 @@ MIPMAP. MIPTBP1 sets levels 1 to 3, MIPTBP2 sets levels 4 to 6."
     )
   (set! (-> (&-> arg0 args (-> arg0 reg-count)) 0) (the-as uint arg2))
   (+! (-> arg0 reg-count) 1)
-  (none)
+  arg0
   )
 
 (defun close-gif-packet ((arg0 gif-packet) (arg1 int))
@@ -855,7 +855,7 @@ MIPMAP. MIPTBP1 sets levels 1 to 3, MIPTBP2 sets levels 4 to 6."
   (set! (-> arg0 gif-tag tag)
         (new 'static 'gif-tag64 :nloop #x1 :flg (gif-flag reg-list) :eop arg1 :nreg (-> arg0 reg-count))
         )
-  arg0
+  (none)
   )
 
 (deftype draw-context (basic)

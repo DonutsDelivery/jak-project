@@ -76,7 +76,7 @@
 (defmethod draw ((a0-0 drawable-tree-instance-tie))
   (format 0 "call to draw~%")
   (break!)
-  (none)
+  0
   )
 
 ;; ERROR: failed type prop at 26: Could not figure out load: (set! t0 (l.hu (+ t0 124)))
@@ -84,12 +84,12 @@
 (defmethod collect-stats ((a0-0 drawable-tree-instance-tie))
   (format 0 "call to collect-stats~%")
   (break!)
-  (none)
+  0
   )
 
 ;; ERROR: failed type prop at 13: Could not figure out load: (set! a0 (l.wu (+ v1 12)))
 (defmethod debug-draw ((a0-0 drawable-tree-instance-tie))
   (format 0 "call to debug-draw~%")
   (break!)
-  (none)
+  0
   )
