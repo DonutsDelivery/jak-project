@@ -219,13 +219,29 @@ normally.
     )
   )
 
-;; ERROR: function was not converted to expressions. Cannot decompile.
-
 (define *sin-poly-vec*
   (new 'static 'vector :data (new 'static 'array float 4 -0.16666014 0.008326521 -0.0001956241 0.0000023042373))
   )
 
 (define *sin-poly-vec2* (new 'static 'vector :data (new 'static 'array float 4 0.999998 0.0 0.0 0.0)))
+
+(defun sin-rad ((arg0 float))
+  "Compute the sine of an angle in radians. No unwrap, should be in -pi, pi."
+  (let* ((f1-0 (* arg0 arg0))
+         (f2-0 (* arg0 f1-0))
+         (f3-0 (* f1-0 f1-0))
+         (f4-0 (* f2-0 f1-0))
+         (f5-0 (* f3-0 f2-0))
+         (f6-0 (* f4-0 f3-0))
+         )
+    (+ (* arg0 (the-as float #x3f7fffde))
+       (* f2-0 (the-as float #xbe2aa8f5))
+       (* f4-0 (the-as float #x3c086bf6))
+       (* f5-0 (the-as float #xb94d2072))
+       (* f6-0 (the-as float #x361aa27f))
+       )
+    )
+  )
 
 (defun vector-sin-rad! ((arg0 vector) (arg1 vector))
   "Taylor series approximation of sine on all 4 elements in a vector.
@@ -267,6 +283,22 @@ normally.
 
 (define *cos-poly-vec*
   (new 'static 'vector :data (new 'static 'array float 4 -0.49998003 0.041620404 -0.0013636408 0.000020170546))
+  )
+
+(defun cos-rad ((arg0 float))
+  "Cosine with taylor series. Input is in radians, in -pi, pi."
+  (let* ((f1-0 (* arg0 arg0))
+         (f3-0 (* f1-0 f1-0))
+         (f4-0 (* f3-0 f1-0))
+         (f5-0 (* f3-0 f3-0))
+         )
+    (+ (* 1.0 1.0)
+       (* (the-as float #xbefffd62) f1-0)
+       (* (the-as float #x3d2a7a28) f3-0)
+       (* (the-as float #xbab2bc31) f4-0)
+       (* (the-as float #x37a933eb) f5-0)
+       )
+    )
   )
 
 ;; ERROR: Bad vector register dependency: vf2
@@ -359,57 +391,25 @@ normally.
 
 ;; WARN: Return type mismatch float vs none.
 (defun vector-rad<-vector-deg! ((out vector) (in vector))
-  "Convert a vector in rotation units to radians, and unwrap.
-   Input can be anything, output will be -2pi to pi."
-  (local-vars (v0-0 float) (v1-1 uint128) (v1-2 uint128) (v1-3 uint128))
-  (rlet ((vf1 :class vf)
-         (vf2 :class vf)
-         )
-    (let ((v1-0 #x38c90fda))
-      (.lvf vf1 (&-> in quad))
-      (.ftoi.vf vf1 vf1)
-      (.mov vf2 v1-0)
-      )
-    (.mov v1-1 vf1)
-    (.pw.sll v1-2 v1-1 16)
-    (.pw.sra v1-3 v1-2 16)
-    (.mov vf1 v1-3)
-    (.itof.vf vf1 vf1)
-    (.mul.x.vf vf1 vf1 vf2)
-    (.svf (&-> out quad) vf1)
-    (.mov v0-0 vf1)
-    (none)
-    )
+  ;; SCAFFOLDING
+  (format 0 "call to vector-rad<-vector-deg!~%")
+  (break!)
+  (none)
   )
 
 ;; WARN: Return type mismatch float vs int.
 (defun vector-rad<-vector-deg/2! ((out vector) (in vector))
-  "Divide the input by two, and then convert from rotation units to radians, unwrapping.
-   Not sure why this really needs to be separate the from previous function..."
-  (local-vars (v0-0 float) (v1-1 uint128) (v1-2 uint128) (v1-3 uint128))
-  (rlet ((vf1 :class vf)
-         (vf2 :class vf)
-         )
-    (let ((v1-0 #x38c90fda))
-      (let ((a2-0 #x3f000000))
-        (.lvf vf1 (&-> in quad))
-        (.mov vf2 a2-0)
-        )
-      (.mul.x.vf vf1 vf1 vf2)
-      (.ftoi.vf vf1 vf1)
-      (.mov vf2 v1-0)
-      )
-    (.mov v1-1 vf1)
-    (.pw.sll v1-2 v1-1 16)
-    (.pw.sra v1-3 v1-2 16)
-    (.mov vf1 v1-3)
-    (.itof.vf vf1 vf1)
-    (.mul.x.vf vf1 vf1 vf2)
-    (.svf (&-> out quad) vf1)
-    (.mov v0-0 vf1)
-    (the-as int v0-0)
-    )
+  ;; SCAFFOLDING
+  (format 0 "call to vector-rad<-vector-deg/2!~%")
+  (break!)
+  0
   )
+
+(defun sincos! ((out vector) (x float))
+  "Compute sine and cosine of x (rotation units), store in out.x (sin) and out.y (cos)"
+  (set! (-> out x) (sin x))
+  (set! (-> out y) (cos x))
+  out)
 
 (defun vector-sincos! ((arg0 vector) (arg1 vector) (arg2 vector))
   "Compute sine and cosine of each element in a vector, in rotation units"

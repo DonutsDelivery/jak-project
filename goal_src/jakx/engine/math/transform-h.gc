@@ -7,17 +7,27 @@
 
 ;; DECOMP BEGINS
 
-(deftype transformq (structure)
+(deftype transform (structure)
+  "Transformation. w components of vectors should be 1.0"
   ((trans  vector  :inline)
    (rot    vector  :inline)
    (scale  vector  :inline)
    )
   )
 
+(deftype transformq (structure)
+  ((trans  vector      :inline)
+   (rot    vector      :inline)
+   (quat   quaternion  :inline :overlay-at rot)
+   (scale  vector      :inline)
+   )
+  )
+
 
 (deftype trsq (basic)
-  ((trans  vector  :inline)
-   (rot    vector  :inline)
-   (scale  vector  :inline)
+  ((trans  vector      :inline)
+   (rot    vector      :inline)
+   (quat   quaternion  :inline :overlay-at rot)
+   (scale  vector      :inline)
    )
   )

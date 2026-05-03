@@ -1004,13 +1004,10 @@
   )
 
 (defun vector-cvt.s.w! ((arg0 vector) (arg1 vector))
-  "Convert float to int32."
-  (rlet ((vf1 :class vf))
-    (.lvf vf1 (&-> arg1 quad))
-    (.itof.vf vf1 vf1)
-    (.svf (&-> arg0 quad) vf1)
-    arg0
-    )
+  ;; SCAFFOLDING
+  (format 0 "call to vector-cvt.s.w!~%")
+  (break!)
+  (none)
   )
 
 (defun rot-zxy-from-vector! ((arg0 vector) (arg1 vector))
@@ -1210,19 +1207,10 @@
   )
 
 (defun vector-degi ((arg0 vector) (arg1 vector))
-  "Convert a vector (in _rotations_) to degrees units, stored in an int.
-   Truncates to the nearest _rotation_.
-   Neither the input or output is a commonly used form.
-   Unsurprisingly, this strange function is never used."
-  (local-vars (v1-0 uint128) (v1-1 uint128))
-  (rlet ((vf1 :class vf))
-    (.lvf vf1 (&-> arg1 quad))
-    (.ftoi.vf vf1 vf1)
-    (.mov v1-0 vf1)
-    (.pw.sll v1-1 v1-0 16)
-    (set! (-> arg0 quad) v1-1)
-    arg0
-    )
+  ;; SCAFFOLDING
+  (format 0 "call to vector-degi~%")
+  (break!)
+  (none)
   )
 
 (defun vector-degf ((arg0 vector) (arg1 vector))
@@ -1242,53 +1230,18 @@
   )
 
 (defun vector-degmod ((arg0 vector) (arg1 vector))
-  "This one is actually right. Wraps degrees units (in floats, like they should be)
-   to +/- half a rotation."
-  (local-vars (v1-0 uint128) (v1-1 uint128) (v1-2 uint128))
-  (rlet ((vf1 :class vf))
-    (.lvf vf1 (&-> arg1 quad))
-    (.ftoi.vf vf1 vf1)
-    (.mov v1-0 vf1)
-    (.pw.sll v1-1 v1-0 16)
-    (.pw.sra v1-2 v1-1 16)
-    (.mov vf1 v1-2)
-    (.itof.vf vf1 vf1)
-    (.svf (&-> arg0 quad) vf1)
-    arg0
-    )
+  ;; SCAFFOLDING
+  (format 0 "call to vector-degmod~%")
+  (break!)
+  (none)
   )
 
 ;; WARN: Return type mismatch float vs none.
 (defun vector-deg-diff ((arg0 vector) (arg1 vector) (arg2 vector))
-  "Wrapped difference, degrees units. Will have the usual 16-bit accuracy issue."
-  (local-vars
-    (v0-0 float)
-    (v1-0 uint128)
-    (v1-1 uint128)
-    (v1-2 uint128)
-    (v1-3 uint128)
-    (a1-1 uint128)
-    (a1-2 uint128)
-    )
-  (rlet ((vf1 :class vf)
-         (vf2 :class vf)
-         )
-    (.lvf vf1 (&-> arg1 quad))
-    (.lvf vf2 (&-> arg2 quad))
-    (.ftoi.vf vf1 vf1)
-    (.ftoi.vf vf2 vf2)
-    (.mov a1-1 vf1)
-    (.mov v1-0 vf2)
-    (.pw.sll a1-2 a1-1 16)
-    (.pw.sll v1-1 v1-0 16)
-    (.psubw v1-2 a1-2 v1-1)
-    (.pw.sra v1-3 v1-2 16)
-    (.mov vf1 v1-3)
-    (.itof.vf vf1 vf1)
-    (.svf (&-> arg0 quad) vf1)
-    (.mov v0-0 vf1)
-    (none)
-    )
+  ;; SCAFFOLDING
+  (format 0 "call to vector-deg-diff~%")
+  (break!)
+  (none)
   )
 
 (defun vector-deg-lerp-clamp! ((arg0 vector) (arg1 vector) (arg2 vector) (arg3 float))
@@ -1465,7 +1418,7 @@
     (set! arg2 (the-as (inline-array vector4) (-> arg2 1)))
     (set! arg0 (the-as (inline-array vector4) (-> arg0 1)))
     )
-  (none)
+  #f
   )
 
 ;; WARN: Return type mismatch symbol vs none.
@@ -1550,7 +1503,7 @@
     (set! arg2 (the-as (inline-array vector4) (-> arg2 1)))
     (set! arg0 (the-as (inline-array vector4) (-> arg0 1)))
     )
-  #f
+  (none)
   )
 
 (defun spheres-overlap? ((arg0 sphere) (arg1 sphere))

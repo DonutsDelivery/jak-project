@@ -136,6 +136,7 @@ O(n^2) 'check everybody against everybody' collision loop."
     (fill-actor-list-for-box (_type_ vector (pointer collide-shape) int) int)
     (fill-actor-list-for-sphere (_type_ vector vector float (pointer collide-shape) int int) int)
     (fill-actor-list-for-line-sphere (_type_ vector vector float (pointer collide-shape) int int) int)
+    (spatial-hash-method-38 (_type_ vector (pointer collide-shape)) int)
     (fill-actor-list-for-vec+r (_type_ vector (pointer collide-shape)) int)
     (spatial-hash-method-39 (_type_ object hash-object-info) int)
     )

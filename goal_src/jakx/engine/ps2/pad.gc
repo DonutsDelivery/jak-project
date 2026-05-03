@@ -860,7 +860,7 @@
          )
         ((= (-> keyboard keys key-idx) 2)
          (set! (-> keyboard keys key-idx) (the-as uint 0))
-         0
+         (none)
          )
         )
       )

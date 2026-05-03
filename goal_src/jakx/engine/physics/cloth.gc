@@ -117,21 +117,21 @@
   )
 
 (defmethod verlet-particle-system-method-11 ((this verlet-particle-system))
-  (none)
+  0
   )
 
 ;; ERROR: failed type prop at 1: Could not figure out load: (set! a1 (l.d (+ a0 132)))
-(defmethod cloth-system-method-34 ((a0-0 cloth-system))
-  (format #f "call to cloth-system-method-34~%")
+(defmethod hide! ((a0-0 cloth-system))
+  (format #f "call to hide!~%")
   (none)
   )
 
 ;; ERROR: failed type prop at 1: Could not figure out load: (set! v1 (l.d (+ gp 132)))
-;; WARN: Return type mismatch none vs int.
 ;; ERROR: Function may read a register that is not set: a0
 (defmethod verlet-particle-system-method-11 ((this cloth-system))
+  ;; SCAFFOLDING
   (format #f "call to verlet-particle-system-method-11~%")
-  (none)
+  0
   )
 
 ;; ERROR: failed type prop at 3: Could not figure out load: (set! f1 (l.f (+ a0 4)))
@@ -178,6 +178,7 @@
 ;; WARN: Return type mismatch none vs int.
 ;; ERROR: Function may read a register that is not set: a0
 (defmethod run-one-iteration ((this cloth-system))
+  ;; SCAFFOLDING
   (format #f "call to run-one-iteration~%")
   (none)
   )
@@ -409,6 +410,7 @@
 ;; ERROR: failed type prop at 6: Could not figure out load: (set! a0 (l.wu a0))
 ;; WARN: Return type mismatch none vs int.
 (defmethod reset-locations ((a0-0 cloth-on-skeleton))
+  ;; SCAFFOLDING
   (format #f "call to reset-locations~%")
   (none)
   )
@@ -441,7 +443,7 @@
 ;; ERROR: Function may read a register that is not set: a0
 (defmethod verlet-particle-system-method-11 ((this cloth-on-skeleton))
   (format #f "call to verlet-particle-system-method-11~%")
-  (none)
+  0
   )
 
 ;; WARN: Return type mismatch int vs cloth-flag.
@@ -471,7 +473,7 @@
 ;; ERROR: failed type prop at 1: Could not figure out load: (set! s5 (l.w (+ a1 -2)))
 ;; ERROR: Function may read a register that is not set: a0
 ;; ERROR: Function may read a register that is not set: a1
-(defmethod cloth-system-method-37 ((this cloth-system))
-  (format #f "call to cloth-system-method-37~%")
+(defmethod cloth-system-cmd-handler ((this cloth-system) (arg0 pair))
+  (format #f "call to cloth-system-cmd-handler~%")
   (none)
   )
