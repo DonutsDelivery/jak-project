@@ -12264,7 +12264,7 @@
     (level-group-method-9 (_type_ symbol) level) ;; 9
     (level-group-method-10 (_type_ symbol) level) ;; 10
     (level-group-method-11 (_type_ pointer symbol) level) ;; 11
-    (level-group-method-12 (_type_ symbol symbol) symbol) ;; 12
+    (level-group-method-12 (_type_ symbol symbol) level) ;; 12
     (level-group-method-13 (_type_) int) ;; 13
     (level-group-method-14 (_type_ symbol type string) none) ;; 14
     (level-group-method-15 (_type_ symbol) none) ;; 15
@@ -15731,7 +15731,7 @@
     (setting-control-method-20 (_type_ object) connectable) ;; 20
     (remove-setting-by-arg0 (_type_ object) int) ;; 21
     (set-setting-by-param (_type_ symbol object object object) connection) ;; 22
-    (setting-control-method-23 (_type_) none) ;; 23
+    (update (_type_) none) ;; 23
     (setting-control-method-24 (_type_) none) ;; 24
     )
   )
@@ -34401,6 +34401,7 @@
    (origin              matrix                    :inline  :offset 48)
    (center              vector                    :inline  :offset 96)
    (sl-data             uint8                     :dynamic :offset 112) ;; sparticle-launch-state
+   (data                sparticle-launch-state    :dynamic :inline :overlay-at sl-data)
    )
   :method-count-assert 22
   :size-assert         #x70
