@@ -27,7 +27,10 @@
 
 (define-extern level-remap-texture (function texture-id texture-id))
 (define-extern lookup-level-info (function symbol level-load-info))
-(define-extern get-level-by-heap-ptr-and-status (function level-group pointer symbol level))
+;; 2026-05-05: removed bogus (define-extern get-level-by-heap-ptr-and-status ...)
+;; — it's a method on level-group (declared at line ~463 of this file, defined
+;; at level.gc:232). The extern caused callers to dispatch as a function call
+;; against an unbound symbol → null fn → 0x2123000000 crash on atoll DGO link.
 
 
 ;; +++vis-info-flag
