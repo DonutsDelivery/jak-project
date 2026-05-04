@@ -1309,6 +1309,10 @@
         )
       )
     )
+  ;; JAKX BOOT-PATH STUB: *car-level-array* and *texture-page-translate* are
+  ;; define-extern'd but never assigned -> null. Skip car-tbp dirty-masking and
+  ;; texture-page translation iteration until those globals are populated.
+  (when (and (nonzero? (the-as int *car-level-array*)) (nonzero? (the-as int *texture-page-translate*)))
   (dotimes (s5-0 6)
     (let ((a3-0 (* (-> *car-level-array* data s5-0 first-tbp) 256))
           (v1-10 (* (-> *car-level-array* data s5-0 last-tbp) 256))
@@ -1332,6 +1336,7 @@
           )
       )
     )
+  ) ;; end (when (and *car-level-array* *texture-page-translate*) ...)
   (dotimes (gp-1 6)
     (let ((v1-24 (-> *level* level (+ gp-1 6))))
       (let ((a0-23 gp-1))

@@ -9,28 +9,24 @@
 
 ;; ERROR: Expression building failed: In edge-debug-lines: Failed to decompile integer enum. Value 785 (0x311) wasn't found in enum bucket-id
 (defun edge-debug-lines ((arg0 (array vector-array)))
-  (format 0 "call to edge-debug-lines~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — no-op so draw chain continues
   #f
   )
 
 ;; ERROR: failed type prop at 91: add failed: object <integer 2196>
 
 (defun draw-drawable-tree-tfrag ((a0-0 drawable-tree-tfrag))
-  (format 0 "call to draw-drawable-tree-tfrag~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — no-op so draw chain continues
   (none)
   )
 
 (defun draw-drawable-tree-tfrag-trans ((a0-0 drawable-tree-tfrag))
-  (format 0 "call to draw-drawable-tree-tfrag-trans~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — no-op so draw chain continues
   (none)
   )
 
 (defun draw-drawable-tree-tfrag-water ((a0-0 drawable-tree-tfrag))
-  (format 0 "call to draw-drawable-tree-tfrag-water~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — no-op so draw chain continues
   (none)
   )
 
@@ -94,8 +90,7 @@
 ;; ERROR: Failed store: (s.w! (+ v1-28 12) 0) at op 85
 ;; ERROR: Failed store: (s.w! (+ v1-30 4) s4-1) at op 89
 (defun tfrag-scissor-vu1-init-buf ((arg0 bucket-id) (arg1 gs-test) (arg2 int) (arg3 uint) (arg4 symbol))
-  (format 0 "call to tfrag-scissor-vu1-init-buf~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — no-op so draw chain continues
   0
   )
 
@@ -115,8 +110,9 @@
 ;; WARN: Return type mismatch symbol vs none.
 ;; ERROR: Expression building failed: In tfrag-vu1-init-buffers: Failed to decompile bitfield enum level-flags. Original value is 0x400 but we could only make 0x0 using the available fields.
 (defun tfrag-vu1-init-buffers ()
-  (format 0 "call to tfrag-vu1-init-buffers~%")
-  (break!)
+  ;; JAKX BOOT-PATH 2026-05-05: was (break!) — replaced with no-op to let
+  ;; display-frame-finish complete. Real body sets up VU1 micro-buffers;
+  ;; without it, tfrag rendering will produce nothing but boot continues.
   (none)
   )
 
@@ -124,48 +120,42 @@
 ;; ERROR: failed type prop at 1: Could not figure out load: (set! v1 (l.w v1))
 ;; WARN: Return type mismatch none vs int.
 (defmethod draw ((a0-0 drawable-tree-tfrag))
-  (format 0 "call to draw~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — no-op so draw chain continues
   0
   )
 
 ;; ERROR: failed type prop at 1: Could not figure out load: (set! v1 (l.w (+ v1 156)))
 ;; WARN: Return type mismatch none vs int.
 (defmethod draw ((a0-0 drawable-tree-tfrag-trans))
-  (format 0 "call to draw~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — no-op so draw chain continues
   0
   )
 
 ;; ERROR: failed type prop at 1: Could not figure out load: (set! v1 (l.w (+ v1 312)))
 ;; WARN: Return type mismatch none vs int.
 (defmethod draw ((a0-0 drawable-tree-tfrag-water))
-  (format 0 "call to draw~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — no-op so draw chain continues
   0
   )
 
 ;; ERROR: failed type prop at 1: Could not figure out load: (set! v1 (l.w (+ v1 468)))
 ;; WARN: Return type mismatch none vs int.
 (defmethod draw ((a0-0 drawable-tree-tfrag-shared))
-  (format 0 "call to draw~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — no-op so draw chain continues
   0
   )
 
 ;; ERROR: failed type prop at 1: Could not figure out load: (set! v1 (l.w (+ v1 624)))
 ;; WARN: Return type mismatch none vs int.
 (defmethod draw ((a0-0 drawable-tree-tfrag-trans-shared))
-  (format 0 "call to draw~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — no-op so draw chain continues
   0
   )
 
 ;; ERROR: failed type prop at 1: Could not figure out load: (set! v1 (l.w (+ v1 780)))
 ;; WARN: Return type mismatch none vs int.
 (defmethod draw ((a0-0 drawable-tree-tfrag-water-shared))
-  (format 0 "call to draw~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — no-op so draw chain continues
   0
   )
 

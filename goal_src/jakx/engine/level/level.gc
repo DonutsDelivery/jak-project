@@ -914,12 +914,17 @@
 ;; ERROR: failed type prop at 8: Could not figure out load: (set! s3 (l.wu (+ v1 4)))
 ;; WARN: Return type mismatch none vs level.
 (defmethod birth ((this level))
-  "JAKX BOOT-PATH PATCH 2026-05-05: stub now sets status='alive so the
-   recursive level-status-update! 'alive call (level.gc:609) breaks
-   recursion. Without this, status stays 'loaded and birth is called
-   forever. Real jak3 body adds drawables, allocates display-list, etc."
-  (format 0 "[birth] STUB: level ~A status=loaded -> alive~%" (-> this name))
-  (set! (-> this status) 'alive)
+  "JAKX BOOT-PATH PATCH 2026-05-05: stub. If bsp non-null, advance to 'alive
+   (lets level reach 'active for rendering). If bsp null (level has no BSP
+   file loaded), leave status='loaded so update-visible/render-level won't
+   try to deref a null bsp pointer."
+  (cond
+    ((-> this bsp)
+     (format 0 "[birth] STUB: level ~A has bsp; status loaded -> alive; display?=display~%" (-> this name))
+     (set! (-> this display?) 'display)
+     (set! (-> this status) 'alive))
+    (else
+     (format 0 "[birth] STUB: level ~A bsp=null; leaving status=loaded~%" (-> this name))))
   this
   )
 
@@ -1448,9 +1453,57 @@
   )
 
 (defmethod assign-draw-indices ((this level-group))
-  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
-  ;; canonical jak3 name; body restoration pending.
-  (format 0 "call to assign-draw-indices~%")
+  "Assign the order for levels to be drawn. Ported from jak3 level.gc.
+   2026-05-05: was stub; without it, draw-level[i] stayed null and
+   drawable-tree-array's draw method crashed deref'ing display? on null."
+  (local-vars (t0-3 symbol))
+  (set! (-> this draw-level-count) 0)
+  (dotimes (v1-0 11)
+    (let ((f0-0 100000.0)
+          (a1-1 (the-as level #f))
+          )
+      (dotimes (a2-0 (-> this length))
+        (let ((a3-3 (-> this level a2-0)))
+          (when (= (-> a3-3 status) 'active)
+            (set! t0-3 (and (< (-> a3-3 draw-priority) f0-0) (begin
+                                                               (dotimes (t0-4 (-> this draw-level-count))
+                                                                 (when (= a3-3 (-> this draw-level t0-4))
+                                                                   (set! t0-3 #f)
+                                                                   (goto cfg-14)
+                                                                   )
+                                                                 )
+                                                               #t
+                                                               )
+                            )
+                  )
+            (label cfg-14)
+            (when t0-3
+              (set! a1-1 a3-3)
+              (set! f0-0 (-> a1-1 draw-priority))
+              )
+            )
+          )
+        )
+      (when a1-1
+        (set! (-> this draw-level (-> this draw-level-count)) a1-1)
+        (set! (-> a1-1 draw-index) (-> this draw-level-count))
+        (+! (-> this draw-level-count) 1)
+        )
+      )
+    )
+  (while (< (-> this draw-level-count) 11)
+    (set! (-> this draw-level (-> this draw-level-count)) #f)
+    (+! (-> this draw-level-count) 1)
+    )
+  (set! (-> this draw-level 10) (-> this level-default))
+  (set! (-> (&-> this level-default draw-index) 0) 10)
+  (dotimes (v1-13 11)
+    (let ((a2-9 (-> this level v1-13)))
+      (if a2-9
+          (set! (-> this draw-index-map v1-13) (the-as uint (-> a2-9 draw-index)))
+          )
+      )
+    )
   0
   )
 

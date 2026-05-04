@@ -115,7 +115,7 @@
               ((or (not (-> s5-1 force-all-visible?)) (-> s5-1 inside-boxes?))
                (cond
                  ((or *artist-all-visible* (not (-> s5-1 vis-info 0)))
-                  (quad-copy! (-> s5-1 vis-bits) (-> s5-1 bsp all-visible-list) a2-0)
+                  (quad-copy! (-> s5-1 vis-bits 0) (-> s5-1 bsp all-visible-list) a2-0)
                   (if (= (-> s5-1 all-visible?) 'loading)
                       (set! (-> s5-1 all-visible?) #t)
                       )
@@ -153,12 +153,12 @@
                  ((and (= (-> s5-1 all-visible?) 'loading) (-> *level* play?))
                   )
                  (else
-                   (quad-copy! (-> s5-1 vis-bits) (-> s5-1 bsp all-visible-list) a2-0)
+                   (quad-copy! (-> s5-1 vis-bits 0) (-> s5-1 bsp all-visible-list) a2-0)
                    )
                  )
                )
               (else
-                (quad-copy! (-> s5-1 vis-bits) (-> s5-1 bsp all-visible-list) a2-0)
+                (quad-copy! (-> s5-1 vis-bits 0) (-> s5-1 bsp all-visible-list) a2-0)
                 )
               )
             )
@@ -321,13 +321,9 @@
 
 (defun update-camera ()
   (with-pp
-    (format 0 "[update-camera] entry~%")
     (let ((gp-0 *math-camera*))
-      (format 0 "[update-camera] before matrix-copy!~%")
       (matrix-copy! (-> gp-0 prev-inv-camera-rot) (-> gp-0 inv-camera-rot))
-      (format 0 "[update-camera] after matrix-copy!~%")
       (vector-copy! (-> gp-0 prev-trans) (-> gp-0 trans))
-      (format 0 "[update-camera] after vector-copy! *start-timer*=~A~%" *start-timer*)
       (when *start-timer*
         (when (= *timer-value* 180)
           (format
@@ -363,21 +359,18 @@
         (set! *timer-value* 0)
         0
         )
-      (format 0 "[update-camera] before get-menu-mode call; *blit-displays-work*=~A~%" *blit-displays-work*)
       (let ((f0-9 (if (get-menu-mode *blit-displays-work*)
                       11650.845
                       (-> gp-0 fov)
                       )
                   )
             )
-        (format 0 "[update-camera] f0-9=~F before update-math-camera~%" f0-9)
         (update-math-camera
           gp-0
           (-> *setting-control* user-current video-mode)
           (-> *setting-control* user-current aspect-ratio)
           f0-9
           )
-        (format 0 "[update-camera] update-math-camera returned~%")
         )
       (cond
         ((or (= *master-mode* 'pause) (or (= *master-mode* 'freeze) (= *master-mode* 'progress) *progress-process*))

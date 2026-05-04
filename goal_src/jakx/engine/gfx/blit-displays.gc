@@ -65,7 +65,6 @@
 ;; ERROR: Function may read a register that is not set: a2
 ;; ERROR: Function may read a register that is not set: a3
 (defmethod blit-displays-work-method-9 ((this blit-displays-work))
-  (format 0 "call to blit-displays-work-method-9~%")
   (break!)
   (none)
   )
@@ -75,7 +74,6 @@
 ;; ERROR: Function may read a register that is not set: a1
 ;; ERROR: Function may read a register that is not set: a2
 (defmethod blit-displays-work-method-10 ((this blit-displays-work))
-  (format 0 "call to blit-displays-work-method-10~%")
   (break!)
   (none)
   )
@@ -86,7 +84,6 @@
 ;; ERROR: Function may read a register that is not set: a2
 ;; ERROR: Function may read a register that is not set: t0
 (defmethod blit-displays-work-method-12 ((this blit-displays-work))
-  (format 0 "call to blit-displays-work-method-12~%")
   (break!)
   (none)
   )
@@ -96,7 +93,6 @@
 ;; ERROR: Function may read a register that is not set: a1
 ;; ERROR: Function may read a register that is not set: a2
 (defmethod blit-displays-work-method-13 ((this blit-displays-work))
-  (format 0 "call to blit-displays-work-method-13~%")
   (break!)
   (none)
   )
@@ -105,7 +101,6 @@
 ;; ERROR: Function may read a register that is not set: a0
 ;; ERROR: Function may read a register that is not set: a1
 (defmethod blit-displays-work-method-14 ((this blit-displays-work))
-  (format 0 "call to blit-displays-work-method-14~%")
   (break!)
   (none)
   )
@@ -114,7 +109,6 @@
 ;; ERROR: Function may read a register that is not set: a0
 ;; ERROR: Function may read a register that is not set: a1
 (defmethod blit-displays-work-method-15 ((this blit-displays-work))
-  (format 0 "call to blit-displays-work-method-15~%")
   (break!)
   (none)
   )
@@ -125,7 +119,6 @@
 ;; ERROR: Function may read a register that is not set: a2
 ;; ERROR: Function may read a register that is not set: a3
 (defmethod blit-displays-work-method-16 ((this blit-displays-work))
-  (format 0 "call to blit-displays-work-method-16~%")
   (break!)
   (none)
   )
@@ -135,7 +128,6 @@
 ;; ERROR: failed type prop at 425: Could not figure out load: (set! a0 (l.d (+ gp 304)))
 ;; ERROR: Function may read a register that is not set: a0
 (defmethod blit-displays-work-method-17 ((this blit-displays-work))
-  (format 0 "call to blit-displays-work-method-17~%")
   (break!)
   (none)
   )
@@ -144,7 +136,6 @@
 
 ;; ERROR: failed type prop at 106: Could not figure out load: (set! a0 (l.q (+ a0 96)))
 (defun draw-raw-image ((a0-0 bucket-id) (a1-0 art-group) (a2-0 int) (a3-0 vector) (t0-0 vector) (t1-0 level) (t2-0 int))
-  (format 0 "call to draw-raw-image~%")
   (break!)
   (none)
   )
@@ -157,7 +148,6 @@
   ;; SCAFFOLDING — break! removed 2026-05-05; get-menu-mode is reached during
   ;; display-loop boot path (called transitively from display-sync or update-camera).
   ;; Returning #f means "not in a menu," which is correct for level-boot path.
-  (format 0 "[get-menu-mode] entry this=~A~%" this)
   #f
   )
 
@@ -172,7 +162,6 @@
 ;; ERROR: Function may read a register that is not set: a3
 ;; ERROR: Function may read a register that is not set: t0
 (defmethod blit-displays-work-method-22 ((this blit-displays-work))
-  (format 0 "call to blit-displays-work-method-22~%")
   (break!)
   (none)
   )
@@ -183,7 +172,6 @@
 ;; ERROR: Function may read a register that is not set: a2
 (defmethod get-horizontal-flip-flag ((this blit-displays-work))
   ;; SCAFFOLDING
-  (format 0 "call to get-horizontal-flip-flag~%")
   (break!)
   #f
   )
@@ -196,21 +184,18 @@
 ;; ERROR: Function may read a register that is not set: a3
 (defmethod blit-displays-work-method-24 ((this blit-displays-work) (arg0 symbol))
   ;; SCAFFOLDING
-  (format 0 "call to blit-displays-work-method-24~%")
   (break!)
   (none)
   )
 
 (defmethod blit-displays-work-method-25 ((this blit-displays-work) (arg0 symbol))
   ;; SCAFFOLDING
-  (format 0 "call to blit-displays-work-method-25~%")
   (break!)
   (none)
   )
 
 (defmethod blit-displays-work-method-26 ((this blit-displays-work) (arg0 symbol))
   ;; SCAFFOLDING
-  (format 0 "call to blit-displays-work-method-26~%")
   (break!)
   0
   )

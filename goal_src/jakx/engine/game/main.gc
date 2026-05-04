@@ -65,7 +65,6 @@
     (format 0 "[display-loop] warmup display-sync done; entering while *run*~%")
 
     (while *run*
-      (format 0 "[display-loop] tick start~%")
       (set! *artist-all-visible* #t)
       (set! *external-cam-mode* 'locked)
       (set-vector! (-> *math-camera* trans) -67563.0 900000.0 -299048.0 1.0)
@@ -82,9 +81,7 @@
               (when (or (= (-> lev status) 'active) (= (-> lev status) 'alive) (= (-> lev status) 'loaded) (= (-> lev status) 'loading))
                 (set! (-> lev-names i) (symbol->string (level-method-13 lev))))))
           (__pc-set-levels lev-names)))
-      (format 0 "[display-loop] before update-camera~%")
       (update-camera)
-      (format 0 "[display-loop] after update-camera~%")
       ;; Seed non-zero mood times on active levels so background DMA packets
       ;; get non-zero itimes (otherwise all geometry renders black).
       ;; update-time-of-day→init-weather! gates on level-get-target-inside
@@ -106,7 +103,10 @@
       ;; forever and the title menu never draws.
       (load-level-text-files -1)
       (display-sync disp)
-      (suspend)
+      ;; (suspend)  ;; SCAFFOLDING 2026-05-05: yields to kernel-dispatcher → some
+      ;; process in *active-pool* deref's wild ptr ~0x10000012 (likely PS2 EE
+      ;; register space, unmapped on PC). Bypass keeps render loop stable; cost
+      ;; is no other GOAL process gets cycles. Restore once dispatcher debugged.
       ;; og:preserve-this — PC port per-frame hook deferred: (update *setting-control*)
       ;; crashes at boot with *pc-settings* active too. Isolating one at a time.
       ;; (#when PC_PORT (update *pc-settings*))

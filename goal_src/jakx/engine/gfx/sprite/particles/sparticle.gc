@@ -293,8 +293,8 @@
 ;; ERROR: failed type prop at 34: add failed: sparticle-cpuinfo <integer 9216>
 
 (defun forall-particles-runner ((a0-0 (function sparticle-system sparticle-cpuinfo pointer none)) (a1-0 sparticle-system))
-  (format 0 "call to forall-particles-runner~%")
-  (break!)
+  ;; JAKX BOOT-PATH STUB: real iterator decomp incomplete; (break!) was crashing
+  ;; remap-all-particles every frame. No-op until particles ported.
   (none)
   )
 

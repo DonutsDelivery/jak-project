@@ -861,3 +861,21 @@
   arg0
   (the-as entity-actor #f)
   )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; VU1 init-buffer stubs 2026-05-05
+;; tie/merc/emerc/generic-vu1-init-buffers are define-extern'd in drawable.gc
+;; with no implementation. display-frame-finish calls them every frame —
+;; without bodies, each is a null fn dispatch crash. Real bodies upload
+;; vu1 microcode/data; without them, those rendering paths produce nothing
+;; but boot continues so atoll geometry can render via tfrag.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun tie-vu1-init-buffers () (none))
+(defun merc-vu1-init-buffers () (none))
+(defun emerc-vu1-init-buffers () (none))
+(defun generic-vu1-init-buffers () (none))
+
+;; particle-adgif-cache-flush is define-extern'd in sparticle-launcher-h.gc with
+;; no body; called every frame by display-frame-finish -> null fn dispatch.
+(defun particle-adgif-cache-flush () (none))

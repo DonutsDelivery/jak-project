@@ -9,7 +9,20 @@
 
 (defun vector-cross! ((arg0 vector) (arg1 vector) (arg2 vector))
   "Compute the cross product. The w component is set to junk."
-  (vector-cross! arg0 arg1 arg2)
+  ;; JAKX BOOT-PATH 2026-05-05: was recursive stub; ported from jak3 vector.gc.
+  (declare (inline))
+  (rlet ((acc :class vf)
+         (vf1 :class vf)
+         (vf2 :class vf)
+         (vf3 :class vf)
+         )
+    (.lvf vf1 (&-> arg1 quad))
+    (.lvf vf2 (&-> arg2 quad))
+    (.outer.product.a.vf acc vf1 vf2)
+    (.outer.product.b.vf vf3 vf2 vf1 acc)
+    (.svf (&-> arg0 quad) vf3)
+    arg0
+    )
   )
 
 (defun vector-xz-cross! ((arg0 vector) (arg1 vector) (arg2 vector))

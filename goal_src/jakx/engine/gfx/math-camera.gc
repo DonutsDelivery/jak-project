@@ -63,7 +63,6 @@ Without this corrector, the fogginess of the world would change as the FOV chang
 (defun update-math-camera ((arg0 math-camera) (arg1 symbol) (arg2 symbol) (arg3 float))
   ;; SCAFFOLDING — break! removed 2026-05-05; reached via display-sync /
   ;; display-frame-start. No-op return lets boot path continue without crashing.
-  (format 0 "[update-math-camera] entry/exit~%")
   (none)
   )
 

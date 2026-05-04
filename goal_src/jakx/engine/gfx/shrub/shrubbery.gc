@@ -111,8 +111,7 @@
     (t9-1 none)
     (t9-2 none)
     )
-  (format 0 "call to mem-usage~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — stubbed to no-op
   (the-as drawable-tree-instance-shrub 0)
   )
 
@@ -182,8 +181,7 @@
 ;; ERROR: failed type prop at 23: Couldn't figure out logior: (logior a1 a2) (uint and (pointer int32))
 
 (defmethod login ((a0-0 shrubbery))
-  (format 0 "call to login~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — stubbed to no-op
   (the-as shrubbery 0)
   )
 
@@ -245,8 +243,7 @@
 ;; WARN: Return type mismatch none vs drawable-tree-instance-shrub.
 (defmethod login ((a0-0 drawable-tree-instance-shrub))
   "Initialize the object after it is loaded."
-  (format 0 "call to login~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — stubbed to no-op
   (the-as drawable-tree-instance-shrub 0)
   )
 
@@ -306,8 +303,7 @@
     (s5-0 int)
     (t9-0 function)
     )
-  (format 0 "call to shrub-upload-view-data~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — stubbed to no-op
   #f
   )
 
@@ -365,8 +361,7 @@
 ;; ERROR: Failed store: (s.d! (+ a0-7 56) v1-3) at op 44
 (defun shrub-init-frame ((arg0 dma-buffer) (arg1 gs-test))
   (shrub-do-init-frame arg0)
-  (format 0 "call to shrub-init-frame~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — stubbed to no-op
   (none)
   )
 
@@ -516,14 +511,12 @@
     (t9-2 none)
     (gp-0 none)
     )
-  (format 0 "call to draw-drawable-tree-instance-shrub~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — stubbed to no-op
   (none)
   )
 
 (defmethod draw ((a0-0 drawable-tree-instance-shrub))
-  (format 0 "call to draw~%")
-  (break!)
+  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — stubbed to no-op
   0
   )
 

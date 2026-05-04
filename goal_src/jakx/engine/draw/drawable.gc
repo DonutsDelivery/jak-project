@@ -214,7 +214,6 @@
    profile bars, post-draw-hook. Real engines will fill these back in as
    we port tfrag/tie/merc/texture-pool machinery. For now: mark buckets,
    add end-marker, return the display."
-  (format 0 "[dff] entry on-screen=~D~%" (-> arg0 on-screen))
   (let* ((s4-0 (-> arg0 frames (-> arg0 on-screen)))
          (s5-0 (-> s4-0 calc-buf))
          )
@@ -242,24 +241,15 @@
         )
       )
     ;; VU1 init + texture upload — mirrors jak3 display-frame-finish:1946-1970.
-    (format 0 "[dff] calling tfrag-vu1-init-buffers draw-level[0]=~A~%" (-> *level* draw-level 0))
     (tfrag-vu1-init-buffers)
-    (format 0 "[dff] calling tie-vu1-init-buffers~%")
     (tie-vu1-init-buffers)
-    (format 0 "[dff] done tie-vu1-init-buffers~%")
     (merc-vu1-init-buffers)
-    (format 0 "[dff] post-merc~%")
     (emerc-vu1-init-buffers)
-    (format 0 "[dff] post-emerc~%")
     (generic-vu1-init-buffers)
-    (format 0 "[dff] post-generic~%")
     ;; update-sprites / update-warp-and-hud don't exist in jakx yet — skipped.
     (particle-adgif-cache-flush)
-    (format 0 "[dff] post-adgif~%")
     (remap-all-particles)
-    (format 0 "[dff] post-remap~%")
     (upload-textures *texture-pool*)
-    (format 0 "[dff] post-upload~%")
     ;; update-eyes skipped — eye rendering not yet ported for jakx
     ;; Skip bucket patching on the first frame when display-frame-start
     ;; hasn't run yet (bucket-group is still 0).
@@ -296,9 +286,7 @@
   "Wait for prev frame, vsync, submit this frame's DMA, start next frame.
    Trimmed from jak3: removed all the run-half-speed / force-sync /
    dog-ratio feedback logic — always vsync via pc-maybe-vsync."
-  (format 0 "[display-sync] entry~%")
   (sync-path 0 0)
-  (format 0 "[display-sync] sync-path done~%")
   (let* ((s4-0 (-> arg0 last-screen))
          (s2-0 (shl (timer-count (the-as timer-bank #x10000800)) 48))
          (s5-0 (shl (-> arg0 frames s4-0 start-time) 48))
@@ -312,7 +300,6 @@
           )
       (set! (-> arg0 frames s4-0 run-time) (#if PC_PORT 0 (the int s3-0)))
       (set! f30-1 (pc-maybe-vsync))
-      (format 0 "[display-sync] pc-maybe-vsync done~%")
       (let ((s4-1 (-> arg0 on-screen)))
         ;; accumulate run time
         (let ((v1-50 (timer-count (the-as timer-bank #x10000800))))
@@ -339,11 +326,8 @@
                 )
             )
           )
-        (format 0 "[display-sync] before determine-pause-mode~%")
         (determine-pause-mode)
-        (format 0 "[display-sync] before display-frame-start~%")
         (display-frame-start arg0 s4-1 f30-1)
-        (format 0 "[display-sync] display-frame-start done~%")
         )
       )
     )
@@ -393,7 +377,10 @@
 (defun main-draw-hook ()
   (foreground-initialize-engines)
   (reset! *prim-work*)
-  (draw *sky-work*)
+  ;; JAKX BOOT-PATH 2026-05-05: (draw *sky-work*) skipped — sky-work draw
+  ;; method is undefined in jakx, causing null fn dispatch. Atoll geometry
+  ;; renders without sky; restore once sky-work draw method is ported.
+  ;; (draw *sky-work*)
   (flush-cache 0)
   (foreground-engine-execute *foreground-draw-engine*)
 
@@ -406,9 +393,13 @@
   (set! *spawn-actors* #t)
   (actors-update *level*)
 
-  (init-background)
+  ;; JAKX BOOT-PATH 2026-05-05: init-background / finish-background are
+  ;; declared via define-extern but have no implementation in jakx
+  ;; (background-work type not decompiled). Skipping so execute-connections
+  ;; can run — that's what actually queues bsp drawable DMA via add-bsp-drawable.
+  ;; (init-background)
   (execute-connections *background-draw-engine* #f)
-  (finish-background)
+  ;; (finish-background)
   (none))
 
 (define *draw-hook* main-draw-hook)
