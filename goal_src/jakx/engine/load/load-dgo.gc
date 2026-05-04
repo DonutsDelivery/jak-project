@@ -69,9 +69,13 @@
 
 
 (when (zero? *load-dgo-rpc*)
-  (set! *load-dgo-rpc* (new 'global 'rpc-buffer-pair (the-as uint 64) (the-as uint 1) 4))
-  (set! *load-str-rpc* (new 'global 'rpc-buffer-pair (the-as uint 80) (the-as uint 1) 5))
-  (set! *play-str-rpc* (new 'global 'rpc-buffer-pair (the-as uint 256) (the-as uint 4) 6))
+  ;; 2026-05-05: ports were 4/5/6 — off by one from C++ channel constants
+  ;; (DGO=3, STR=4, PLAY=5 in game/common/*_rpc_types.h). With the wrong
+  ;; ports, *load-dgo-rpc* hit RPC_STR which asserts size==sizeof(RPC_Str_Cmd)
+  ;; with the DGO-sized send buffer, killing the boot. jak3/jak2 use 3/4/5.
+  (set! *load-dgo-rpc* (new 'global 'rpc-buffer-pair (the-as uint 64) (the-as uint 1) 3))
+  (set! *load-str-rpc* (new 'global 'rpc-buffer-pair (the-as uint 80) (the-as uint 1) 4))
+  (set! *play-str-rpc* (new 'global 'rpc-buffer-pair (the-as uint 256) (the-as uint 4) 5))
   (set! *load-str-lock* #f)
   (set! *que-str-lock* #f)
   (set! *dgo-name* (new 'global 'string 64 (the-as string #f)))

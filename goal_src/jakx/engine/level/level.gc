@@ -640,10 +640,28 @@
 
 (define *cached-dgo-count* (the-as object 0))
 
-;; ERROR: Expression building failed: In load-buffer-resize: Failed to decompile integer enum. Value 1 (0x1) wasn't found in enum level-memory-mode
 (defun load-buffer-resize ((arg0 level) (arg1 dgo-header))
-  ;; NOTE: Stubbed - load-buffer-resize has PS2 constructs
-  (format 0 "call to load-buffer-resize~%")
+  "Resize and relocate the DGO load buffers, making sure there is enough room
+   to both load objects and heap alloc in the linker. Ported from jak3
+   2026-05-05; tiny/tiny-edge size caps preserved."
+  (case (-> arg0 load-buffer-mode)
+    (((level-memory-mode tiny))
+     (set! (-> arg0 load-buffer-size) (the-as uint (min (* 1100 1024) (the-as int (-> arg0 load-buffer-size)))))
+     )
+    (((level-memory-mode tiny-edge))
+     (set! (-> arg0 load-buffer-size) (+ (-> arg1 length) (* 2 1024)))
+     )
+    )
+  (let ((v1-4 (logand -64 (+ (-> arg0 load-buffer-size) 63))))
+    (if (= arg1 (the-as dgo-header (-> arg0 load-buffer 0)))
+        (set! (-> arg0 load-buffer 0) (- (-> arg0 load-buffer 1) v1-4))
+        (set! (-> arg0 load-buffer 1)
+              (the-as uint (&- (logand -64 (&+ (-> arg0 heap top-base) 0)) (the-as uint v1-4)))
+              )
+        )
+    )
+  (set! (-> arg0 heap top) (the-as pointer (-> arg0 load-buffer 0)))
+  0
   (none)
   )
 
@@ -791,11 +809,74 @@
 ;; ERROR: failed type prop at 750: Couldn't figure out integer multiplication: (*.si a0 a1) (<integer 1440> and object)
 
 ;; WARN: Return type mismatch none vs level.
-(defmethod load-begin ((a0-0 level))
-  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
-  ;; canonical jak3 name; body restoration pending.
-  (format 0 "call to load-begin~%")
-  a0-0
+(defmethod load-begin ((this level))
+  "MVP port 2026-05-05 from jak3 (engine/level/level.gc:1000-1755).
+   Skips PS2 page-allocation and borrow-slot logic; carves the full
+   *level*.heap region for this single loading level (jakx's level
+   heap is sized ~12MB which fits one level worth of streamed data).
+   Reaches the actual dgo-load-begin RPC call so the IOP-side load
+   path can fire and load-continue can advance the state machine."
+  (dotimes (v1-0 3)
+    (set! (-> this borrow-level v1-0) #f)
+    )
+  (set! (-> this borrow-from-level) #f)
+  (set! (-> this memory-mask) (the-as uint 0))
+  ;; Single-level heap: take all of *level*.heap.
+  (let ((h (-> this heap)))
+    (set! (-> h base) (-> *level* heap base))
+    (set! (-> h current) (-> h base))
+    (set! (-> h top-base) (-> *level* heap top-base))
+    (set! (-> h top) (-> h top-base))
+    )
+  (set! (-> *level* loading-level) this)
+  (set! (-> this level-type) #f)
+  (set! (-> this nickname) #f)
+  (set! (-> this bsp) #f)
+  (set! (-> this entity) #f)
+  (set! (-> this linking) #f)
+  (set! (-> this load-start-time) (the-as uint (-> *display* real-clock frame-counter)))
+  (set! (-> this load-stop-time) (the-as uint 0))
+  (set! (-> this display-start-time) (the-as uint 0))
+  (set! (-> this part-engine) #f)
+  (dotimes (v1-258 4)
+    (set! (-> this user-object v1-258) #f)
+    )
+  (set! (-> this load-id) (the-as uint (new-sound-id)))
+  (set! (-> this status) 'loading)
+  (if (= (-> this load-name) (-> this info visname))
+      (format (clear *temp-string*) "~S" (-> this info nickname))
+      (format (clear *temp-string*) "~S" (-> this name))
+      )
+  (set! (-> *temp-string* data 8) (the-as uint 0))
+  (format *temp-string* ".DGO")
+  (set! (-> this heap top) (-> this heap top-base))
+  (set! (-> *level* load-level) (-> this load-name))
+  (set! (-> *level* load-size) (the-as uint 0))
+  (set! (-> *level* load-time) 0.0)
+  (set! (-> *level* load-login-time) 0.0)
+  (set! (-> this code-memory-start) (-> this heap current))
+  (format 0 "[load-begin] ~A → DGO ~A; heap base=~X top=~X load-id=~D~%"
+          (-> this name) *temp-string* (-> this heap base) (-> this heap top) (-> this load-id))
+  ;; Allocate two top buffers — same per-buffer size jak3 uses for the
+  ;; default (non-borrow, non-micro) path.
+  (let* ((buf-sz #x1b5800)
+         (buf2 (kmalloc (-> this heap) buf-sz (kmalloc-flags align-64 top) "dgo-level-buf-2"))
+         (buf1 (kmalloc (-> this heap) buf-sz (kmalloc-flags align-64 top) "dgo-level-buf-1"))
+         )
+    (set! (-> this load-buffer 0) (the-as uint buf1))
+    (set! (-> this load-buffer 1) (the-as uint buf2))
+    (set! (-> this load-buffer-size) (the-as uint buf-sz))
+    (set! (-> this load-buffer-mode) (level-memory-mode micro))
+    (format 0 "[load-begin] buf1=~X buf2=~X size=~X — calling dgo-load-begin~%" buf1 buf2 buf-sz)
+    (dgo-load-begin
+      *temp-string*
+      (the-as uint128 (-> this load-id))
+      buf1
+      buf2
+      (logand -64 (&+ (-> this heap current) 63))
+      )
+    )
+  this
   )
 
 ;; ERROR: failed type prop at 7: Could not figure out load: (set! v1 (l.hu (+ s5 126)))
