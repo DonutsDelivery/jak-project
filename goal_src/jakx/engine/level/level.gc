@@ -556,12 +556,137 @@
   (none)
   )
 
-;; ERROR: failed type prop at 99: Could not figure out load: (set! a0 (l.w a0))
-(defmethod load-continue ((a0-0 level))
-  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
-  ;; canonical jak3 name; body restoration pending.
-  (format 0 "call to load-continue~%")
-  a0-0
+(defmethod load-continue ((this level))
+  "Main function to run level loading/linking.
+   Called by the engine to make progress on loading levels."
+  ;; Body restored 2026-05-04 from 1c1685105:goal_src/jakx/engine/level/level.gc:739.
+  ;; No deftype drift — load-buffer/load-buffer-mode/load-buffer-last/linking/heap
+  ;; slots identical on master. Some called helpers still stubbed (load-buffer-resize,
+  ;; level-update-after-load), but the body itself compiles and dispatches correctly.
+  ;; Real execution requires successful DGO load to drive the state machine — not
+  ;; reached today, so the stubbed helper calls don't fire on current boot.
+  (local-vars (sv-16 symbol))
+  (when (-> this linking)
+    (when (nonzero? (link-resume))
+      (set! (-> this linking) #f)
+      (case (-> this status)
+        (('loading)
+         (when (not (-> *texture-relocate-later* memcpy))
+           (cond
+             ((= (-> this load-buffer-mode) (level-memory-mode borrow))
+              (let ((a2-0 (logand -64 (&+ (-> this heap current) 63))))
+                (dgo-load-continue a2-0 a2-0 a2-0)
+                )
+              )
+             (else
+               (load-buffer-resize this (-> this load-buffer-last))
+               (dgo-load-continue
+                 (the-as pointer (-> this load-buffer 0))
+                 (the-as pointer (-> this load-buffer 1))
+                 (logand -64 (&+ (-> this heap current) 63))
+                 )
+               )
+             )
+           )
+         )
+        (('loading-bt)
+         (level-status-update! this 'loading-done)
+         (level-status-update! this 'loaded)
+         )
+        )
+      )
+    (set! this this)
+    (goto cfg-39)
+    )
+  (when (-> *texture-relocate-later* memcpy)
+    (relocate-later)
+    (load-buffer-resize this (-> this load-buffer-last))
+    (dgo-load-continue
+      (the-as pointer (-> this load-buffer 0))
+      (the-as pointer (-> this load-buffer 1))
+      (logand -64 (&+ (-> this heap current) 63))
+      )
+    (set! this this)
+    (goto cfg-39)
+    )
+  (case (-> this status)
+    (('loading)
+     (set! sv-16 (the-as symbol #f))
+     (let ((s5-0 (dgo-load-get-next (& sv-16))))
+       (when s5-0
+         (set! (-> this load-buffer-last) (the-as dgo-header s5-0))
+         (+! (-> *level* load-size) (-> (the-as (pointer uint32) s5-0)))
+         (set! (-> *level* load-time)
+               (* 0.016666668 (the float (- (-> *display* real-clock integral-frame-counter) *dgo-time*)))
+               )
+         (set! (-> *level* load-login-time)
+               (* 0.016666668 (the float (- (-> *display* real-clock integral-frame-counter) *dgo-time*)))
+               )
+         (cond
+           ((not sv-16)
+            (cond
+              ((= (-> this load-buffer-mode) (level-memory-mode borrow))
+               (cond
+                 ((dgo-load-link (the-as dgo-header s5-0) (-> this heap) (the-as uint (-> this heap top-base)) *print-login* #f)
+                  (when (not (-> *texture-relocate-later* memcpy))
+                    (let ((a2-8 (logand -64 (&+ (-> this heap current) 63))))
+                      (dgo-load-continue a2-8 a2-8 a2-8)
+                      )
+                    )
+                  )
+                 (else
+                   (set! (-> this linking) #t)
+                   )
+                 )
+               )
+              ((dgo-load-link (the-as dgo-header s5-0) (-> this heap) (-> this load-buffer 1) *print-login* #f)
+               (when (not (-> *texture-relocate-later* memcpy))
+                 (load-buffer-resize this (the-as dgo-header s5-0))
+                 (dgo-load-continue
+                   (the-as pointer (-> this load-buffer 0))
+                   (the-as pointer (-> this load-buffer 1))
+                   (logand -64 (&+ (-> this heap current) 63))
+                   )
+                 )
+               )
+              (else
+                (set! (-> this linking) #t)
+                )
+              )
+            )
+           (else
+             (set! (-> this heap top) (-> this heap top-base))
+             (level-status-update! this 'loading-bt)
+             )
+           )
+         )
+       )
+     )
+    (('login)
+     (level-update-after-load this *login-state*)
+     )
+    (('loading-bt)
+     (let ((a0-36 (logand -64 (&+ (-> this heap current) 63))))
+       (cond
+         ((dgo-load-link
+            (the-as dgo-header a0-36)
+            (-> this heap)
+            (the-as uint (-> this heap top-base))
+            *print-login*
+            #t
+            )
+          (level-status-update! this 'loading-done)
+          (level-status-update! this 'loaded)
+          )
+         (else
+           (set! (-> this linking) #t)
+           )
+         )
+       )
+     )
+    )
+  (label cfg-39)
+  this
   )
 
 ;; ERROR: failed type prop at 118: add failed: <value x 4> '#f
@@ -910,7 +1035,7 @@
       )
     )
   (add-borrow-levels *load-state*)
-  (format 0 "[bg] returning — level-get-for-use/load-continue bodies still stubbed on master~%")
+  (format 0 "[bg] returning — level-get-for-use body still stubbed on master~%")
   0
   (none)
   )
@@ -924,9 +1049,9 @@
    level-loading deps exist by canonical name (init-level-system,
    activate-levels!, level-get-for-use, level-status-update!,
    level-get-most-disposable, load-continue). Real bodies:
-   init-level-system, activate-levels!, level-status-update!.
-   Still-stubbed: level-get-for-use, level-get-most-disposable,
-   load-continue. Genuinely missing: add-borrow-levels.
+   init-level-system, activate-levels!, level-status-update!,
+   load-continue. Still-stubbed: level-get-for-use,
+   level-get-most-disposable. Genuinely missing: add-borrow-levels.
    This minimal version handles the *kernel-boot-level* branch via bg
    when set, and falls through to a no-op title path otherwise."
   (kmemopen global "level-boot")
