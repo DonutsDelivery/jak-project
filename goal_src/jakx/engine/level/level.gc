@@ -460,13 +460,85 @@
     )
   )
 
-;; ERROR: failed type prop at 44: Called a function, but we do not know its type
-(defmethod level-status-update! ((a0-0 level) (a1-0 symbol))
-  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
-  ;; canonical jak3 name; body restoration pending. Called by activate-levels!
-  ;; and (will be) by level-get-for-use, so highest-leverage body to restore.
-  (format 0 "call to level-status-update!~%")
-  a0-0
+(defmethod level-status-update! ((this level) (arg0 symbol))
+  "Try to update the level to the given status, calling whatever is needed to make it happen.
+   This can do both loading, linking, login, and activation.
+   This is somewhat similar to level-get-for-use, but requires that you already have the level object.
+   This function is the way to transition from loaded to alive/active."
+  ;; Body restored 2026-05-04 from 1c1685105 (commit 'full geometry draw pipeline').
+  ;; Adapted for master deftype: dotimes-20 → dotimes-10 because master's
+  ;; closest-object[10] is the smaller of the two arrays cleared (texture-mask[19]).
+  ;; Originally 1c1685105 had closest-object[10] + texture-mask[20] adjacent — the
+  ;; loop wrote past closest-object into texture-mask. Master's layout reorganised;
+  ;; bounding to closest-object's size is the safe minimum to clear.
+  (case arg0
+    (('inactive)
+     (-> this status)
+     (unload! this)
+     )
+    (('loading)
+     (case (-> this status)
+       (('inactive)
+        (load-begin this)
+        )
+       )
+     )
+    (('loading-bt)
+     (case (-> this status)
+       (('loading)
+        (set! (-> this status) arg0)
+        (do-nothing *level*)
+        (load-continue this)
+        )
+       )
+     )
+    (('loading-done)
+     (case (-> this status)
+       (('loading-bt)
+        (set! (-> this status) arg0)
+        (do-nothing *level*)
+        )
+       )
+     )
+    (('loaded)
+     (case (-> this status)
+       (('loading-done)
+        (login-begin this)
+        )
+       (('alive 'active)
+        (deactivate this)
+        )
+       )
+     )
+    (('alive 'active)
+     (when *dproc*
+       (case (-> this status)
+         (('loaded)
+          (birth this)
+          (level-status-update! this arg0)
+          )
+         (('alive)
+          (when (and *dproc* (= arg0 'active))
+            (when (zero? (-> this display-start-time))
+              (set! (-> this display-start-time) (the-as uint (-> *display* real-clock frame-counter)))
+              0
+              )
+            (remove-by-param1 *background-draw-engine* (the-as int (-> this bsp)))
+            (add-connection *background-draw-engine* *dproc* add-bsp-drawable (-> this bsp) this #f)
+            (dotimes (v1-49 10)
+              (set! (-> this closest-object v1-49) 0.0)
+              (set! (-> this texture-mask v1-49 mask quad) (the-as uint128 0))
+              )
+            (set! (-> this status) 'active)
+            (do-nothing *level*)
+            (assign-draw-indices *level*)
+            )
+          )
+         )
+       )
+     )
+    )
+  this
   )
 
 (define *login-state* (new 'global 'login-state))
@@ -779,8 +851,9 @@
 ;;            on level-get-for-use return + load-continue body, both stubbed),
 ;;            *load-state* reset!/want setup (reset! mapping unclear,
 ;;            depends on s5-1), set-continue! (stubbed with break!),
-;;            activate-levels! (real body, but calls stubbed
-;;            level-status-update! → no-op until that body restored),
+;;            activate-levels! (real body, calls level-status-update!
+;;            which now has a real body too — but the path is gated on
+;;            successful level load first, so still effectively no-op now),
 ;;            time-of-day branches (out of scope for verification).
 ;; Goal: load packages from level-load-info so boot reaches further than
 ;; the previous "call to bg" idle. NOT a full restoration. See memory note
@@ -837,7 +910,7 @@
       )
     )
   (add-borrow-levels *load-state*)
-  (format 0 "[bg] returning — level-get-for-use/load-continue/level-status-update! bodies still stubbed on master~%")
+  (format 0 "[bg] returning — level-get-for-use/load-continue bodies still stubbed on master~%")
   0
   (none)
   )
@@ -850,9 +923,10 @@
    SCAFFOLDING: minimal port of jak3's play. As of 2026-05-04 most
    level-loading deps exist by canonical name (init-level-system,
    activate-levels!, level-get-for-use, level-status-update!,
-   level-get-most-disposable, load-continue) but only init-level-system
-   and activate-levels! have real bodies — the others are stubs awaiting
-   restoration. add-borrow-levels still genuinely missing.
+   level-get-most-disposable, load-continue). Real bodies:
+   init-level-system, activate-levels!, level-status-update!.
+   Still-stubbed: level-get-for-use, level-get-most-disposable,
+   load-continue. Genuinely missing: add-borrow-levels.
    This minimal version handles the *kernel-boot-level* branch via bg
    when set, and falls through to a no-op title path otherwise."
   (kmemopen global "level-boot")
@@ -867,8 +941,8 @@
     )
   ;; SCAFFOLDING: no title flow yet — would call init-level-system,
   ;; level-get-for-use, level-status-update! etc. All present by canonical
-  ;; name as of 2026-05-04, but level-get-for-use and level-status-update!
-  ;; still have stub bodies — wiring them up here would just hit those stubs.
+  ;; name as of 2026-05-04, but level-get-for-use still has a stub body —
+  ;; wiring up here would hit it.
   ;; Best-effort: try to start the display process (on #t) so display-loop runs
   ;; and we can see what it does without loaded levels. on() will spawn display
   ;; and may immediately kill it if no level is loaded — that's expected and OK.
