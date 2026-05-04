@@ -760,11 +760,72 @@
   this
   )
 
-;; ERROR: failed type prop at 142: Could not figure out load: (set! v1 (l.wu v1))
-;; ERROR: Failed to guess stack use for 16 in bg:127
-(defun bg ((a0-0 symbol))
-  ;; NOTE: Stubbed - bg has PS2 constructs
-  (format 0 "call to bg~%")
+;; STRIPPED-RESTORATION: minimum-viable bg from 1c1685105 with branches
+;; pruned for missing helpers/slots on master.
+;;   KEPT:    lookup-level-info, visname/name reads, *level* vis? set,
+;;            memory-mode borrow check, packages loop, add-borrow-levels.
+;;   SKIPPED: level-get-for-use (missing), load-continue loop (depends on
+;;            level-get-for-use return), *load-state* reset!/want setup
+;;            (reset! mapping unclear, depends on s5-1), set-continue!
+;;            (stubbed with break!), activate-levels! (missing),
+;;            time-of-day branches (out of scope for verification).
+;; Goal: load packages from level-load-info so boot reaches further than
+;; the previous "call to bg" idle. NOT a full restoration. See memory note
+;; project_jakx_render_path_trade_2026-05-04.md for full restoration recipe.
+(defun bg ((arg0 symbol))
+  (set! *cheat-mode* (if *debug-segment* 'debug #f))
+  (let ((v1-2 (lookup-level-info arg0)))
+    (when (or (zero? (the-as int v1-2)) (= v1-2 (the-as level-load-info #f)))
+      (format 0 "[bg] lookup-level-info ~A returned #f — level table empty (no static level-load-info instances defined). Aborting bg cleanly.~%" arg0)
+      (return 0)
+      )
+    (format 0 "[bg] lookup-level-info ~A → name=~A visname=~A~%" arg0 (-> v1-2 name) (-> v1-2 visname))
+    (cond
+      ((= (-> v1-2 visname) arg0)
+       (set! (-> *level* vis?) #t)
+       (set! arg0 (-> v1-2 name))
+       )
+      (else
+        (set! (-> *level* vis?) #f)
+        (set! (-> *kernel-context* low-memory-message) #f)
+        )
+      )
+    (let ((a0-8 (-> v1-2 memory-mode)))
+      (if (or (= a0-8 (level-memory-mode borrow)) (or (= a0-8 (level-memory-mode borrow0))
+                                                      (= a0-8 (level-memory-mode borrow1))
+                                                      (= a0-8 (level-memory-mode borrow2))
+                                                      (= a0-8 (level-memory-mode borrow3))
+                                                      (= a0-8 (level-memory-mode borrow4))
+                                                      (= a0-8 (level-memory-mode borrow-city-small))
+                                                      )
+              )
+          (set! (-> v1-2 memory-mode) (level-memory-mode small-edge))
+          )
+      )
+    (format 0 "[bg] memory-mode after adjust=~A~%" (-> v1-2 memory-mode))
+    (let* ((s5-0 (-> v1-2 packages))
+           (a0-12 (car s5-0))
+           )
+      (format 0 "[bg] packages=~A~%" s5-0)
+      (while (not (null? s5-0))
+        (case (rtype-of a0-12)
+          ((symbol)
+           (format 0 "[bg]   load-package symbol ~A~%" a0-12)
+           (load-package (symbol->string (the-as symbol a0-12)) global)
+           )
+          ((string)
+           (format 0 "[bg]   load-package string ~A~%" a0-12)
+           (load-package (the-as string a0-12) global)
+           )
+          )
+        (set! s5-0 (cdr s5-0))
+        (set! a0-12 (car s5-0))
+        )
+      )
+    )
+  (add-borrow-levels *load-state*)
+  (format 0 "[bg] returning — level-get-for-use/load-continue/activate-levels! missing on master~%")
+  0
   (none)
   )
 
@@ -782,7 +843,7 @@
   (start-debug "call to play! arg0=~A arg1=~A~%" arg0 arg1)
   (when *kernel-boot-level*
     (start-debug "play: *kernel-boot-level*=~A — calling bg~%" *kernel-boot-level*)
-    (bg (string->symbol (the-as string *kernel-boot-level*)))
+    (bg *kernel-boot-level*)
     (on #f)
     (kmemclose)
     (kmemclose)
