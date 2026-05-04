@@ -420,9 +420,10 @@
 
 ;; WARN: Return type mismatch symbol vs level.
 ;; ERROR: Function may read a register that is not set: a3
-(defmethod level-group-method-12 ((a0-0 level-group) (a1-0 symbol) (a2-0 symbol))
-  ;; NOTE: Stubbed - level-group-method-12 has PS2 constructs
-  (format 0 "call to level-group-method-12~%")
+(defmethod level-get-for-use ((a0-0 level-group) (a1-0 symbol) (a2-0 symbol))
+  ;; NOTE: Stubbed - body absent on master (was 88 lines at 1c1685105). Slot
+  ;; renamed 2026-05-04 to canonical jak3 name; body restoration pending.
+  (format 0 "call to level-get-for-use~%")
   (the-as level 0)
   )
 
@@ -460,9 +461,11 @@
   )
 
 ;; ERROR: failed type prop at 44: Called a function, but we do not know its type
-(defmethod level-method-26 ((a0-0 level) (a1-0 symbol))
-  ;; NOTE: Stubbed - level-method-26 has PS2 constructs
-  (format 0 "call to level-method-26~%")
+(defmethod level-status-update! ((a0-0 level) (a1-0 symbol))
+  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
+  ;; canonical jak3 name; body restoration pending. Called by activate-levels!
+  ;; and (will be) by level-get-for-use, so highest-leverage body to restore.
+  (format 0 "call to level-status-update!~%")
   a0-0
   )
 
@@ -482,9 +485,10 @@
   )
 
 ;; ERROR: failed type prop at 99: Could not figure out load: (set! a0 (l.w a0))
-(defmethod level-method-17 ((a0-0 level))
-  ;; NOTE: Stubbed - level-method-17 has PS2 constructs
-  (format 0 "call to level-method-17~%")
+(defmethod load-continue ((a0-0 level))
+  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
+  ;; canonical jak3 name; body restoration pending.
+  (format 0 "call to load-continue~%")
   a0-0
   )
 
@@ -739,9 +743,10 @@
   (the-as art-group #f)
   )
 
-(defmethod level-group-method-13 ((this level-group))
+(defmethod activate-levels! ((this level-group))
+  "Make all levels 'active!"
   (dotimes (s5-0 (-> this length))
-    (level-method-26 (-> this level s5-0) 'active)
+    (level-status-update! (-> this level s5-0) 'active)
     )
   0
   )
@@ -762,13 +767,16 @@
   )
 
 ;; STRIPPED-RESTORATION: minimum-viable bg from 1c1685105 with branches
-;; pruned for missing helpers/slots on master.
+;; pruned for stubbed/missing helpers on master (2026-05-04 update: most
+;; "missing" helpers were renames discovered via slot-shape sweep).
 ;;   KEPT:    lookup-level-info, visname/name reads, *level* vis? set,
 ;;            memory-mode borrow check, packages loop, add-borrow-levels.
-;;   SKIPPED: level-get-for-use (missing), load-continue loop (depends on
-;;            level-get-for-use return), *load-state* reset!/want setup
-;;            (reset! mapping unclear, depends on s5-1), set-continue!
-;;            (stubbed with break!), activate-levels! (missing),
+;;   SKIPPED: level-get-for-use (stubbed body), load-continue loop (depends
+;;            on level-get-for-use return + load-continue body, both stubbed),
+;;            *load-state* reset!/want setup (reset! mapping unclear,
+;;            depends on s5-1), set-continue! (stubbed with break!),
+;;            activate-levels! (real body, but calls stubbed
+;;            level-status-update! → no-op until that body restored),
 ;;            time-of-day branches (out of scope for verification).
 ;; Goal: load packages from level-load-info so boot reaches further than
 ;; the previous "call to bg" idle. NOT a full restoration. See memory note
@@ -825,7 +833,7 @@
       )
     )
   (add-borrow-levels *load-state*)
-  (format 0 "[bg] returning — level-get-for-use/load-continue/activate-levels! missing on master~%")
+  (format 0 "[bg] returning — level-get-for-use/load-continue/level-status-update! bodies still stubbed on master~%")
   0
   (none)
   )
@@ -835,10 +843,12 @@
 (defun play ((arg0 symbol) (arg1 symbol))
   "Start (or restart) the game!
    This will start up the display process, and load the initial level.
-   SCAFFOLDING: minimal port of jak3's play. Most level-loading deps
-   (level-get-for-use, level-status-update!, add-borrow-levels,
-   activate-levels!) don't yet exist in jakx by name (init-level-system
-   exists as the renamed level-group-method-21 since 2026-05-04).
+   SCAFFOLDING: minimal port of jak3's play. As of 2026-05-04 most
+   level-loading deps exist by canonical name (init-level-system,
+   activate-levels!, level-get-for-use, level-status-update!,
+   level-get-most-disposable, load-continue) but only init-level-system
+   and activate-levels! have real bodies — the others are stubs awaiting
+   restoration. add-borrow-levels still genuinely missing.
    This minimal version handles the *kernel-boot-level* branch via bg
    when set, and falls through to a no-op title path otherwise."
   (kmemopen global "level-boot")
@@ -851,9 +861,10 @@
     (kmemclose)
     (return 0)
     )
-  ;; SCAFFOLDING: no title flow yet — would call init-level-system
-  ;; (now present), level-get-for-use, level-status-update! etc.
-  ;; (the latter two still don't exist by canonical name on master).
+  ;; SCAFFOLDING: no title flow yet — would call init-level-system,
+  ;; level-get-for-use, level-status-update! etc. All present by canonical
+  ;; name as of 2026-05-04, but level-get-for-use and level-status-update!
+  ;; still have stub bodies — wiring them up here would just hit those stubs.
   ;; Best-effort: try to start the display process (on #t) so display-loop runs
   ;; and we can see what it does without loaded levels. on() will spawn display
   ;; and may immediately kill it if no level is loaded — that's expected and OK.
@@ -1029,9 +1040,10 @@
 
 ;; WARN: Return type mismatch none vs level.
 ;; ERROR: Function may read a register that is not set: a1
-(defmethod level-group-method-30 ((a0-0 level-group))
-  ;; NOTE: Stubbed - level-group-method-30 has PS2 constructs
-  (format 0 "call to level-group-method-30~%")
+(defmethod level-get-most-disposable ((a0-0 level-group))
+  ;; NOTE: Stubbed - body absent on master (was 30 lines at 1c1685105). Slot
+  ;; renamed 2026-05-04 to canonical jak3 name; body restoration pending.
+  (format 0 "call to level-get-most-disposable~%")
   (the-as level 0)
   )
 

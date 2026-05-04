@@ -425,7 +425,7 @@
            (level-group-method-10 *level* 'alive)
            (level-group-method-10 *level* 'active)
            )
-       (level-group-method-13 *level*)
+       (activate-levels! *level*)
        (when (not arg0)
          (let ((gp-1 (entity-by-type camera-start)))
            (when (and gp-1 (type? gp-1 entity-actor))
