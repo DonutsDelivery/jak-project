@@ -427,7 +427,7 @@
   (the-as level 0)
   )
 
-(defmethod level-group-method-27 ((this level-group))
+(defmethod do-nothing ((this level-group))
   0
   )
 
@@ -503,17 +503,19 @@
 ;; ERROR: failed type prop at 750: Couldn't figure out integer multiplication: (*.si a0 a1) (<integer 1440> and object)
 
 ;; WARN: Return type mismatch none vs level.
-(defmethod level-method-18 ((a0-0 level))
-  ;; NOTE: Stubbed - level-method-18 has PS2 constructs
-  (format 0 "call to level-method-18~%")
+(defmethod load-begin ((a0-0 level))
+  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
+  ;; canonical jak3 name; body restoration pending.
+  (format 0 "call to load-begin~%")
   a0-0
   )
 
 ;; ERROR: failed type prop at 7: Could not figure out load: (set! v1 (l.hu (+ s5 126)))
 ;; WARN: Return type mismatch none vs level.
-(defmethod level-method-19 ((a0-0 level))
-  ;; NOTE: Stubbed - level-method-19 has PS2 constructs
-  (format 0 "call to level-method-19~%")
+(defmethod login-begin ((a0-0 level))
+  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
+  ;; canonical jak3 name; body restoration pending.
+  (format 0 "call to login-begin~%")
   a0-0
   )
 
@@ -530,17 +532,19 @@
 
 ;; ERROR: failed type prop at 8: Could not figure out load: (set! s3 (l.wu (+ v1 4)))
 ;; WARN: Return type mismatch none vs level.
-(defmethod level-method-25 ((a0-0 level))
-  ;; NOTE: Stubbed - level-method-25 has PS2 constructs
-  (format 0 "call to level-method-25~%")
+(defmethod birth ((a0-0 level))
+  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
+  ;; canonical jak3 name; body restoration pending.
+  (format 0 "call to birth~%")
   a0-0
   )
 
 ;; ERROR: failed type prop at 31: Called something that was not a function: object
 ;; WARN: Return type mismatch none vs level.
-(defmethod level-method-9 ((a0-0 level))
-  ;; NOTE: Stubbed - level-method-9 has PS2 constructs
-  (format 0 "call to level-method-9~%")
+(defmethod deactivate ((a0-0 level))
+  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
+  ;; canonical jak3 name; body restoration pending.
+  (format 0 "call to deactivate~%")
   a0-0
   )
 
@@ -1000,9 +1004,10 @@
   0
   )
 
-(defmethod level-group-method-16 ((this level-group))
-  ;; NOTE: Stubbed - level-group-method-16 has PS2 constructs
-  (format 0 "call to level-group-method-16~%")
+(defmethod assign-draw-indices ((this level-group))
+  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
+  ;; canonical jak3 name; body restoration pending.
+  (format 0 "call to assign-draw-indices~%")
   0
   )
 
