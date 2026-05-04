@@ -29,3 +29,35 @@
   (set! *setting-control* (new 'global 'setting-control 64))
   (kmemclose)
   )
+
+;; JAKX BOOT-PATH STUBS 2026-05-05: settings.gc body is undecompiled (register asm).
+;; Methods on setting-control whose method-table slots are null cause 0x2123000000
+;; null fn dispatches when called from display-loop / camera / level activation.
+;; Stub minimum required so display-loop can spin without crashing. Replace with
+;; real bodies once settings.gc is decompiled or hand-ported.
+
+(defmethod update ((this setting-control))
+  "JAKX STUB: setting-control update was unimplemented; null method dispatch crashed
+   display-loop (main.gc:49). No-op stub keeps display-loop spinning."
+  (none)
+  )
+
+(defmethod apply-settings ((this setting-control))
+  "JAKX STUB: returns user-current pointer."
+  (-> this user-current)
+  )
+
+(defmethod move-connection-to-dead ((this setting-control))
+  "JAKX STUB."
+  (-> this user-current)
+  )
+
+(defmethod setting-control-method-20 ((this setting-control))
+  "JAKX STUB."
+  (none)
+  )
+
+(defmethod setting-control-method-24 ((this setting-control))
+  "JAKX STUB."
+  (none)
+  )

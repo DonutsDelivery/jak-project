@@ -881,11 +881,23 @@
 
 ;; ERROR: failed type prop at 7: Could not figure out load: (set! v1 (l.hu (+ s5 126)))
 ;; WARN: Return type mismatch none vs level.
-(defmethod login-begin ((a0-0 level))
-  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
-  ;; canonical jak3 name; body restoration pending.
-  (format 0 "call to login-begin~%")
-  a0-0
+(defmethod login-begin ((this level))
+  "JAKX BOOT-PATH PORT 2026-05-05: minimal port of jak3 login-begin.
+   atoll DGO has no BSP file, so the bsp=#f branch must advance rather
+   than unload. Both branches now set status='loaded so level-status-update!
+   'alive can fire next and drive birth -> active. Full jak3 body (tfrag-gs-test,
+   login-level-textures, build-masks) deferred until jakx BSPs are wired."
+  (cond
+    ((-> this bsp)
+     (format 0 "[login-begin] STUB: level ~A has bsp — body deferred~%" (-> this name))
+     (set! (-> this status) 'loaded)
+     )
+    (else
+      (format 0 "[login-begin] level ~A no bsp — advancing status='loaded~%" (-> this name))
+      (set! (-> this status) 'loaded)
+      )
+    )
+  this
   )
 
 ;; WARN: Found some very strange gotos. Check result carefully, this is not well tested.
@@ -901,11 +913,14 @@
 
 ;; ERROR: failed type prop at 8: Could not figure out load: (set! s3 (l.wu (+ v1 4)))
 ;; WARN: Return type mismatch none vs level.
-(defmethod birth ((a0-0 level))
-  ;; NOTE: Stubbed - body absent on master. Slot renamed 2026-05-04 to
-  ;; canonical jak3 name; body restoration pending.
-  (format 0 "call to birth~%")
-  a0-0
+(defmethod birth ((this level))
+  "JAKX BOOT-PATH PATCH 2026-05-05: stub now sets status='alive so the
+   recursive level-status-update! 'alive call (level.gc:609) breaks
+   recursion. Without this, status stays 'loaded and birth is called
+   forever. Real jak3 body adds drawables, allocates display-list, etc."
+  (format 0 "[birth] STUB: level ~A status=loaded -> alive~%" (-> this name))
+  (set! (-> this status) 'alive)
+  this
   )
 
 ;; ERROR: failed type prop at 31: Called something that was not a function: object
@@ -1118,9 +1133,16 @@
 
 (defmethod activate-levels! ((this level-group))
   "Make all levels 'active!"
+  (format 0 "[activate-levels!] start length=~D~%" (-> this length))
   (dotimes (s5-0 (-> this length))
+    (let ((lvl (-> this level s5-0)))
+      (format 0 "[activate-levels!] iter=~D level=~A status=~A~%"
+              s5-0 (-> lvl name) (-> lvl status))
+      )
     (level-status-update! (-> this level s5-0) 'active)
+    (format 0 "[activate-levels!] iter=~D done~%" s5-0)
     )
+  (format 0 "[activate-levels!] end~%")
   0
   )
 
@@ -1275,9 +1297,13 @@
   (when *kernel-boot-level*
     (start-debug "play: *kernel-boot-level*=~A — calling bg~%" *kernel-boot-level*)
     (bg *kernel-boot-level*)
+    (start-debug "play: bg returned, calling (on #f)~%")
     (on #f)
+    (start-debug "play: (on #f) returned, kmemclose~%")
     (kmemclose)
+    (start-debug "play: kmemclose 1 done~%")
     (kmemclose)
+    (start-debug "play: kmemclose 2 done; returning~%")
     (return 0)
     )
   ;; SCAFFOLDING: no title flow yet — would call init-level-system,

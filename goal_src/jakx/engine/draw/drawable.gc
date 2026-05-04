@@ -298,6 +298,7 @@
    dog-ratio feedback logic — always vsync via pc-maybe-vsync."
   (format 0 "[display-sync] entry~%")
   (sync-path 0 0)
+  (format 0 "[display-sync] sync-path done~%")
   (let* ((s4-0 (-> arg0 last-screen))
          (s2-0 (shl (timer-count (the-as timer-bank #x10000800)) 48))
          (s5-0 (shl (-> arg0 frames s4-0 start-time) 48))
@@ -311,6 +312,7 @@
           )
       (set! (-> arg0 frames s4-0 run-time) (#if PC_PORT 0 (the int s3-0)))
       (set! f30-1 (pc-maybe-vsync))
+      (format 0 "[display-sync] pc-maybe-vsync done~%")
       (let ((s4-1 (-> arg0 on-screen)))
         ;; accumulate run time
         (let ((v1-50 (timer-count (the-as timer-bank #x10000800))))
@@ -337,8 +339,11 @@
                 )
             )
           )
+        (format 0 "[display-sync] before determine-pause-mode~%")
         (determine-pause-mode)
+        (format 0 "[display-sync] before display-frame-start~%")
         (display-frame-start arg0 s4-1 f30-1)
+        (format 0 "[display-sync] display-frame-start done~%")
         )
       )
     )

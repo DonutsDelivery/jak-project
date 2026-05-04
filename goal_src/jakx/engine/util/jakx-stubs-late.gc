@@ -847,3 +847,17 @@
 (define-extern pc-fmv-play (function string none))
 (define-extern pc-fmv-stop (function none))
 (define-extern pc-fmv-is-done (function int))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Boot-path stubs 2026-05-05
+;; entity-by-type was declared in entity-h.gc with no body — its symbol was unbound,
+;; so calling it null-dispatched (0x2123000000) right after activate-levels! in `on`
+;; (main.gc:430). Returning #f lets the camera-start search skip; boot advances.
+;; Real body iterates entity tables; restore once entity system is ported.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defun entity-by-type ((arg0 type))
+  "JAKX BOOT-PATH STUB: returns #f so callers' (when ent ...) skips."
+  arg0
+  (the-as entity-actor #f)
+  )

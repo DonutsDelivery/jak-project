@@ -34,10 +34,13 @@
    Still skipped vs jak3: matrix-engine process, time-of-day-context init,
    actor-hash, collide-rider-pool prep, blerc-init, vblank-handler install,
    display-loop-main body. Re-enable as their dependencies settle."
+  (format 0 "[display-loop] entry~%")
   (stack-size-set! (-> self main-thread) 512)
+  (format 0 "[display-loop] stack-size-set! done~%")
 
   (let ((disp *display*))
     (set! *teleport* #t)
+    (format 0 "[display-loop] *teleport* set; calling (update *setting-control*)~%")
 
     ;; og:preserve-this — now safe: subagent fixed target-pos, entity-by-name,
     ;; and add-blackout (all were declared extern with no impl). Verified the
@@ -47,6 +50,7 @@
     ;; user-current likely needs full init that only fires after a level loads.
     ;; Once on() guard restored, display-loop is killed before this runs.
     (update *setting-control*)
+    (format 0 "[display-loop] (update *setting-control*) done~%")
 
 
     (set! (-> disp frames 0 start-time)
@@ -58,8 +62,10 @@
     ;; warmup: first display-sync runs display-frame-start which sets up
     ;; the bucket chain on the on-screen frame.
     (display-sync disp)
+    (format 0 "[display-loop] warmup display-sync done; entering while *run*~%")
 
     (while *run*
+      (format 0 "[display-loop] tick start~%")
       (set! *artist-all-visible* #t)
       (set! *external-cam-mode* 'locked)
       (set-vector! (-> *math-camera* trans) -67563.0 900000.0 -299048.0 1.0)
@@ -76,7 +82,9 @@
               (when (or (= (-> lev status) 'active) (= (-> lev status) 'alive) (= (-> lev status) 'loaded) (= (-> lev status) 'loading))
                 (set! (-> lev-names i) (symbol->string (level-method-13 lev))))))
           (__pc-set-levels lev-names)))
+      (format 0 "[display-loop] before update-camera~%")
       (update-camera)
+      (format 0 "[display-loop] after update-camera~%")
       ;; Seed non-zero mood times on active levels so background DMA packets
       ;; get non-zero itimes (otherwise all geometry renders black).
       ;; update-time-of-day→init-weather! gates on level-get-target-inside
@@ -426,18 +434,24 @@
            (level-group-method-10 *level* 'active)
            )
        (activate-levels! *level*)
+       (format 0 "[on] after activate-levels! arg0=~A~%" arg0)
        (when (not arg0)
+         (format 0 "[on] entering entity-by-type block~%")
          (let ((gp-1 (entity-by-type camera-start)))
+           (format 0 "[on] entity-by-type returned ~A~%" gp-1)
            (when (and gp-1 (type? gp-1 entity-actor))
              (while (not (camera-teleport-to-entity gp-1))
                (suspend)
                )
              )
            )
+         (format 0 "[on] entity-by-type block done~%")
          )
+       (format 0 "[on] checking art-group boot~%")
        (if (and (= *kernel-boot-message* 'art-group) *kernel-boot-art-group*)
            (anim-tester-add-object *kernel-boot-art-group*)
            )
+       (format 0 "[on] cond branch done~%")
        )
       (else
         ;; 2026-05-03 cycle diag: lifting this kill ran display-loop into

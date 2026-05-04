@@ -54,7 +54,10 @@
 
 ;; DECOMP BEGINS
 
-(define *blit-displays-work* #f)
+;; JAKX BOOT-PATH 2026-05-05: was #f (0), causing get-menu-mode dispatch on null
+;; in update-camera (cam-update.gc:362). Allocate an instance so method dispatch
+;; resolves to the get-menu-mode stub (returns #f).
+(define *blit-displays-work* (new 'global 'blit-displays-work))
 
 ;; ERROR: failed type prop at 0: Could not figure out load: (set! v1 (l.wu (+ a1 4)))
 ;; ERROR: Function may read a register that is not set: a0
@@ -151,9 +154,10 @@
 ;; ERROR: Function may read a register that is not set: a1
 ;; ERROR: Function may read a register that is not set: a2
 (defmethod get-menu-mode ((this blit-displays-work))
-  ;; SCAFFOLDING
-  (format 0 "call to get-menu-mode~%")
-  (break!)
+  ;; SCAFFOLDING — break! removed 2026-05-05; get-menu-mode is reached during
+  ;; display-loop boot path (called transitively from display-sync or update-camera).
+  ;; Returning #f means "not in a menu," which is correct for level-boot path.
+  (format 0 "[get-menu-mode] entry this=~A~%" this)
   #f
   )
 
