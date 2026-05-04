@@ -452,7 +452,12 @@
                      )
             )
       )
-    (when (not level)
+    ;; 2026-05-05: jak3 decompile here had `(when (not level)` — a decompiler
+    ;; misnaming where s5-1 was emitted as the literal type `level`.
+    ;; (not level) is always #f (the level type is a non-#f basic), so the
+    ;; early-return never fired and the next deref of s5-1 segfaulted when
+    ;; level-get-most-disposable returned #f. Corrected to (not s5-1).
+    (when (not s5-1)
       (format 0 "ERROR: could not find a slot to load ~A into.~%" arg0)
       (set! s5-1 (the-as level #f))
       (goto cfg-28)
@@ -529,6 +534,21 @@
       (-> s4-0 status)
       )
     )
+  )
+
+(defmethod unload! ((this level))
+  "STUB 2026-05-05: real unload! body is substantial (jak3 level.gc:2253-...
+   ~90 lines, calls deactivate, dgo-load-cancel, link-reset, art-method-10,
+   etc.). For boot-path safety we early-return when status is already
+   'inactive — level-status-update! 'inactive on a fresh slot is a no-op
+   in that case. Otherwise log and return; no actual unloading happens yet.
+   Restoring full body is follow-up once boot reaches DGO load."
+  (when (= (-> this status) 'inactive)
+    (return this)
+    )
+  (format 0 "[unload!] STUB: level ~A status=~A — body not ported, no-op~%"
+          (-> this name) (-> this status))
+  this
   )
 
 (defmethod level-status-update! ((this level) (arg0 symbol))
@@ -1105,8 +1125,52 @@
         )
       )
     )
+  ;; EXTENSION 2026-05-05: drive the level-get-for-use + load-continue loop.
+  ;; Mirrors jak3 bg (engine/level/level.gc:2782-2796) with two differences:
+  ;; 1) reset! is invoked via load-state-method-9 (the canonical name on jakx);
+  ;; 2) set-continue! is skipped (stubbed in jakx — break! body, would crash).
+  ;; Goal: get past package-load idle and exercise level loading. Logs s5-1
+  ;; (level returned), status transitions, and dproc activation. Every step
+  ;; logs so a future log walker can see exactly where the boot stalls.
+  (let ((s5-1 (level-get-for-use *level* arg0 'active)))
+    (format 0 "[bg] level-get-for-use ~A → ~A~%" arg0 s5-1)
+    (let ((iter 0))
+      (while (and s5-1
+                  (or (= (-> s5-1 status) 'loading) (= (-> s5-1 status) 'loading-bt) (= (-> s5-1 status) 'login))
+                  (not *dproc*))
+        (set! iter (+ iter 1))
+        (when (zero? (mod iter 32))
+          (format 0 "[bg]   load-continue iter=~D status=~A *dproc*=~A~%" iter (-> s5-1 status) *dproc*)
+          )
+        (load-continue s5-1)
+        )
+      (format 0 "[bg] load-continue loop exit: iter=~D s5-1=~A status=~A *dproc*=~A~%"
+              iter s5-1 (if s5-1 (-> s5-1 status) 'no-level) *dproc*)
+      )
+    (when s5-1
+      ;; reset *load-state* and tag the just-loaded level as the display target.
+      (load-state-method-9 *load-state*)
+      (set! (-> *load-state* vis-nick) (-> s5-1 name))
+      (set! (-> *load-state* want 0 name) (-> s5-1 name))
+      (set! (-> *load-state* want 0 display?) 'display)
+      (format 0 "[bg] *load-state* configured: vis-nick=~A want[0]=~A display=display~%"
+              (-> *load-state* vis-nick) (-> *load-state* want 0 name))
+      ;; want-sound from continue-point (jakx continue-point want-sound is array-1).
+      (when (-> s5-1 info continues)
+        (let ((cp (the-as continue-point (car (-> s5-1 info continues)))))
+          (dotimes (i 1)
+            (set! (-> *load-state* want-sound i name) (-> cp want-sound i))
+            (set! (-> *load-state* want-sound i mode) (sound-bank-mode unknown))
+            )
+          (format 0 "[bg] continue-point ~A: want-sound[0]=~A~%" (-> cp name) (-> cp want-sound 0))
+          )
+        )
+      )
+    )
   (add-borrow-levels *load-state*)
-  (format 0 "[bg] returning — minimal-stripped body finished (level-get-for-use loop still skipped pending bg full-body restore)~%")
+  (activate-levels! *level*)
+  (set! *print-login* #f)
+  (format 0 "[bg] returning — extended body finished (level-get-for-use + load-continue loop run; set-continue! still stubbed)~%")
   0
   (none)
   )
@@ -1317,11 +1381,35 @@
 
 ;; WARN: Return type mismatch none vs level.
 ;; ERROR: Function may read a register that is not set: a1
-(defmethod level-get-most-disposable ((a0-0 level-group))
-  ;; NOTE: Stubbed - body absent on master (was 30 lines at 1c1685105). Slot
-  ;; renamed 2026-05-04 to canonical jak3 name; body restoration pending.
-  (format 0 "call to level-get-most-disposable~%")
-  (the-as level 0)
+(defmethod level-get-most-disposable ((this level-group))
+  "Get the level inside this level-group that should be used to load a new level.
+   2026-05-05: Body restored from jak3 (engine/level/level.gc:2574). The
+   priority-based active-fallback branch is dropped because jakx's level-load-info
+   deftype lost the `priority` slot; first-three loops (inactive/loading/loaded)
+   cover the common case where slots are free at boot."
+  (dotimes (v1-0 (-> this length))
+    (case (-> this level v1-0 status)
+      (('inactive)
+       (return (-> this level v1-0))
+       )
+      )
+    )
+  (dotimes (v1-6 (-> this length))
+    (case (-> this level v1-6 status)
+      (('loading 'loading-bt)
+       (return (-> this level v1-6))
+       )
+      )
+    )
+  (dotimes (v1-12 (-> this length))
+    (case (-> this level v1-12 status)
+      (('loaded)
+       (return (-> this level v1-12))
+       )
+      )
+    )
+  ;; SKIPPED: jak3's active-fallback-with-priority — jakx dropped priority slot.
+  (the-as level #f)
   )
 
 ;; ERROR: failed type prop at 1: Couldn't figure out integer multiplication: (*.si v1 a1) (<integer 1440> and <uninitialized>)
