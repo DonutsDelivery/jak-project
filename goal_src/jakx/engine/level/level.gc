@@ -620,7 +620,8 @@
   this
   )
 
-(defmethod level-group-method-21 ((this level-group) (arg0 symbol))
+(defmethod init-level-system ((this level-group) (arg0 symbol))
+  "If needed, initialize the level system by loading common/art packages and allocating level heaps."
   (when (zero? (-> *level* heap base))
     (kmemopen global "level-heaps")
     (when (nmember "game" *kernel-packages*)
@@ -835,8 +836,9 @@
   "Start (or restart) the game!
    This will start up the display process, and load the initial level.
    SCAFFOLDING: minimal port of jak3's play. Most level-loading deps
-   (level-get-for-use, init-level-system, level-status-update!,
-   add-borrow-levels, activate-levels!) don't yet exist in jakx.
+   (level-get-for-use, level-status-update!, add-borrow-levels,
+   activate-levels!) don't yet exist in jakx by name (init-level-system
+   exists as the renamed level-group-method-21 since 2026-05-04).
    This minimal version handles the *kernel-boot-level* branch via bg
    when set, and falls through to a no-op title path otherwise."
   (kmemopen global "level-boot")
@@ -849,8 +851,9 @@
     (kmemclose)
     (return 0)
     )
-  ;; SCAFFOLDING: no title flow yet — would call init-level-system,
-  ;; level-get-for-use, level-status-update! etc. (none exist by name in jakx yet).
+  ;; SCAFFOLDING: no title flow yet — would call init-level-system
+  ;; (now present), level-get-for-use, level-status-update! etc.
+  ;; (the latter two still don't exist by canonical name on master).
   ;; Best-effort: try to start the display process (on #t) so display-loop runs
   ;; and we can see what it does without loaded levels. on() will spawn display
   ;; and may immediately kill it if no level is loaded — that's expected and OK.

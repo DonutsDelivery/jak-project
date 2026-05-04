@@ -470,7 +470,7 @@
     (level-group-method-18 (_type_) none)
     (level-group-method-19 (_type_) int)
     (level-get-target-inside (_type_) level)
-    (level-group-method-21 (_type_ symbol) int)
+    (init-level-system (_type_ symbol) int)
     (art-group-get-by-name (_type_ string (pointer level)) art-group)
     (level-group-method-23 (_type_) int)
     (level-group-method-24 (_type_) int)
