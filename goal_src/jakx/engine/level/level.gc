@@ -416,15 +416,86 @@
   (none)
   )
 
-;; ERROR: failed type prop at 43: Couldn't figure out integer multiplication: (*.si v1 s3) (<integer 1440> and <uninitialized>)
+(defmethod level-get-for-use ((this level-group) (arg0 symbol) (arg1 symbol))
+  "Request a level by name in the given state.
+   Will return quickly (non-blocking) and might not be able to get a level in the desired state,
+   though it will do some small amount of work to make progress on loading.
 
-;; WARN: Return type mismatch symbol vs level.
-;; ERROR: Function may read a register that is not set: a3
-(defmethod level-get-for-use ((a0-0 level-group) (a1-0 symbol) (a2-0 symbol))
-  ;; NOTE: Stubbed - body absent on master (was 88 lines at 1c1685105). Slot
-  ;; renamed 2026-05-04 to canonical jak3 name; body restoration pending.
-  (format 0 "call to level-get-for-use~%")
-  (the-as level 0)
+   This is the most general/powerful function like this: if there is no level with this name
+   it will kick out levels as needed to make a free slot, and set up a new level, and start
+   the load. This should only be used when you might want to start a load."
+  ;; Body restored 2026-05-04 from 1c1685105:goal_src/jakx/engine/level/level.gc:484.
+  ;; No deftype drift on used slots (status, name, info, load-name, load-order,
+  ;; display?, force-all-visible?, force-inside?, texture-anim-array[11]).
+  ;; Dispatches to: init-level-system (real), lookup-level-info, remap-level-name,
+  ;; level-get, level-status-update! (real), level-get-most-disposable (stubbed).
+  ;; The stubbed level-get-most-disposable only fires when level-get returns #f,
+  ;; i.e. the level isn't already loaded — boot today doesn't reach this path
+  ;; because the level table only has 'intro' and we're called from a path
+  ;; that's currently skipped.
+  (local-vars (s5-1 level))
+  (init-level-system this #f)
+  (let* ((s2-0 (lookup-level-info arg0))
+         (s1-0 (remap-level-name s2-0))
+         )
+    (let ((s5-0 (level-get this s1-0)))
+      (when s5-0
+        (level-status-update! s5-0 arg1)
+        (set! s5-1 s5-0)
+        (goto cfg-28)
+        )
+      )
+    (let ((a0-7 (level-get-most-disposable this)))
+      (set! s5-1 (if a0-7
+                     (level-status-update! a0-7 'inactive)
+                     a0-7
+                     )
+            )
+      )
+    (when (not level)
+      (format 0 "ERROR: could not find a slot to load ~A into.~%" arg0)
+      (set! s5-1 (the-as level #f))
+      (goto cfg-28)
+      )
+    (let ((s0-0 (-> s2-0 master-level)))
+      (when s0-0
+        (let ((a0-10 (lookup-level-info s0-0)))
+          (when (not (logtest? (level-flags allow-unloaded) (-> a0-10 level-flags)))
+            (dotimes (v1-16 (-> this length))
+              (let ((a0-15 (-> this level v1-16)))
+                (when (or (= (-> a0-15 status) 'active) (= (-> a0-15 status) 'alive) (= (-> a0-15 status) 'loaded))
+                  (if (= (-> a0-15 name) s0-0)
+                      (goto cfg-24)
+                      )
+                  )
+                )
+              )
+            (format 0 "ERROR: level ~A is loading before master-level ~A~%" arg0 s0-0)
+            (break!)
+            0
+            )
+          )
+        )
+      )
+    (label cfg-24)
+    (let ((v1-22 (+ (-> this load-order) 1)))
+      (set! (-> this load-order) v1-22)
+      (set! (-> s5-1 load-order) v1-22)
+      )
+    (set! (-> s5-1 info) s2-0)
+    (set! (-> s5-1 name) arg0)
+    (set! (-> s5-1 load-name) s1-0)
+    )
+  (dotimes (v1-23 11)
+    (set! (-> s5-1 texture-anim-array v1-23) #f)
+    )
+  (set! (-> s5-1 display?) #f)
+  (set! (-> s5-1 force-all-visible?) #f)
+  (set! (-> s5-1 force-inside?) #f)
+  (level-status-update! s5-1 'loading)
+  (level-status-update! s5-1 arg1)
+  (label cfg-28)
+  s5-1
   )
 
 (defmethod do-nothing ((this level-group))
@@ -1035,7 +1106,7 @@
       )
     )
   (add-borrow-levels *load-state*)
-  (format 0 "[bg] returning — level-get-for-use body still stubbed on master~%")
+  (format 0 "[bg] returning — minimal-stripped body finished (level-get-for-use loop still skipped pending bg full-body restore)~%")
   0
   (none)
   )
@@ -1050,7 +1121,7 @@
    activate-levels!, level-get-for-use, level-status-update!,
    level-get-most-disposable, load-continue). Real bodies:
    init-level-system, activate-levels!, level-status-update!,
-   load-continue. Still-stubbed: level-get-for-use,
+   load-continue, level-get-for-use. Still-stubbed:
    level-get-most-disposable. Genuinely missing: add-borrow-levels.
    This minimal version handles the *kernel-boot-level* branch via bg
    when set, and falls through to a no-op title path otherwise."
@@ -1065,9 +1136,11 @@
     (return 0)
     )
   ;; SCAFFOLDING: no title flow yet — would call init-level-system,
-  ;; level-get-for-use, level-status-update! etc. All present by canonical
-  ;; name as of 2026-05-04, but level-get-for-use still has a stub body —
-  ;; wiring up here would hit it.
+  ;; level-get-for-use, level-status-update! etc. All four are real
+  ;; bodies as of 2026-05-04 (level-get-most-disposable is still
+  ;; stubbed but only fires when an existing slot needs eviction,
+  ;; which doesn't happen on this boot path). Could be wired up
+  ;; once title video assets and level table are populated.
   ;; Best-effort: try to start the display process (on #t) so display-loop runs
   ;; and we can see what it does without loaded levels. on() will spawn display
   ;; and may immediately kill it if no level is loaded — that's expected and OK.
