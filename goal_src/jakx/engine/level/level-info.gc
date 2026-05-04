@@ -602,7 +602,55 @@
 
 (define dislectf #f)
 
-(define atoll #f)
+;; PARTIAL RESTORATION 2026-05-04: atoll level-load-info from
+;; 1c1685105:level-info.gc:20722-20772, fitted to current master deftype.
+;; Drops: run-packages, music-bank, extra-sound-bank, ocean-alpha, priority,
+;; bigmap-id, fog-height, max-rain (all slots removed in master's level-h.gc).
+;; Substitutes: mood-func 'init-mood-atoll → 'update-mood-default (atoll-specific
+;; mood func not yet ported; default mood is real on master, no stubs introduced).
+;; Resizes: continue-point want-sound from symbol-3 → symbol-1 (master deftype).
+;; Goal: give bg('atoll) a real level-load-info to walk; ATL.DGO already builds.
+;; See memory note project_jakx_render_path_trade_2026-05-04.md.
+(define atoll
+  (new 'static 'level-load-info
+    :name 'atoll
+    :visname 'atoll-vis
+    :nickname 'atl
+    :dbname 'atoll
+    :taskname 'default
+    :index #x129
+    :master-level #f
+    :packages '()
+    :memory-mode (level-memory-mode large)
+    :mood-func 'update-mood-default
+    :special-mood #f
+    :ocean #f
+    :draw-priority 10.0
+    :base-task-mask (task-mask task0)
+    :continues '((new 'static 'continue-point
+        :name "atoll-start"
+        :level 'atoll
+        :trans (static-vectorm 0 10 0)
+        :camera-trans (static-vectorm 0 5 -20)
+        :quat (new 'static 'vector4h :data (new 'static 'array int16 4 0 0 0 #x7fff))
+        :camera-rot (new 'static 'array int16 9 #x7fff 0 0 0 #x7fff 0 0 0 #x7fff)
+        :on-goto #f
+        :vis-nick 'atl
+        :vehicle-type #x1b
+        :want-count 1
+        :want (new 'static 'inline-array level-buffer-state-small 1
+          (new 'static 'level-buffer-state-small :name 'atoll :display? 'display)
+          )
+        :want-sound (new 'static 'array symbol 1 #f)
+        )
+      )
+    :callback-list '()
+    :borrow #f
+    :bottom-height (meters -150)
+    :fog-mult 1.0
+    :mood-range (new 'static 'mood-range :max-cloud 1.0 :min-fog 0.5 :max-fog 1.0)
+    )
+  )
 
 (define atollx #f)
 
