@@ -40,11 +40,27 @@
   this
   )
 
-;; SCAFFOLDING -- minimal stub for jakx
+;; JAKX BOOT-PATH 2026-05-05: ported from jak3 bsp.gc:136 to wire tfrag rendering.
+;; Sets per-level tfrag-gs-test that tfrag-init-buffer reads when emitting the
+;; DIRECT vifcode the C++ TFragment::handle_initialization expects.
+;; jakx bsp-header lacks texture-flags slot, so alpha-enable branch (jak3-only)
+;; is unreachable — use the safer aref-26 variant unconditionally.
 (defmethod login ((this bsp-header))
   "Initialize the object after it is loaded."
   (if (nonzero? (-> this drawable-trees))
       (login (-> this drawable-trees))
+      )
+  (set! (-> this level tfrag-gs-test)
+        (new 'static 'gs-test
+          :ate #x1
+          :atst (gs-atest greater-equal)
+          :aref #x26
+          :zte #x1
+          :ztst (gs-ztest greater-equal)
+          )
+        )
+  (if (nonzero? (-> this hfrag-drawable))
+      (login (-> this hfrag-drawable))
       )
   this
   )

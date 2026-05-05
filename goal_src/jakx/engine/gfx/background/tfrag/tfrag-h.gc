@@ -117,14 +117,18 @@
   )
 
 
+;; JAKX BOOT-PATH 2026-05-05: strgif/fangif/adgif slots retyped from qword to
+;; gs-gif-tag to match jak3 tfrag-h.gc. gs-gif-tag wraps a qword inline and
+;; exposes `tag`/`regs` overlay fields the tfrag-data-setup body needs.
+;; Size unchanged (both 16 bytes).
 (deftype tfrag-data (structure)
   ((fog          vector       :inline)
    (data         uint32       56      :overlay-at (-> fog data 0))
    (vector       vector       14      :overlay-at fog)
    (val          vector       :inline :overlay-at (-> vector 4))
-   (strgif       qword        :inline :overlay-at (-> vector 8))
-   (fangif       qword        :inline :overlay-at (-> vector 12))
-   (adgif        qword        :inline :overlay-at (-> data 16))
+   (strgif       gs-gif-tag   :inline :overlay-at (-> vector 8))
+   (fangif       gs-gif-tag   :inline :overlay-at (-> vector 12))
+   (adgif        gs-gif-tag   :inline :overlay-at (-> data 16))
    (hvdf-offset  vector       :inline :overlay-at (-> data 20))
    (hmge-scale   vector       :inline :overlay-at (-> data 24))
    (invh-scale   vector       :inline :overlay-at (-> data 28))

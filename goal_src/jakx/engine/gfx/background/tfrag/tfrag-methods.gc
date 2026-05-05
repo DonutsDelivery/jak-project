@@ -107,14 +107,43 @@
 
 (define *tfrag-init-table* #f)
 
-;; WARN: Return type mismatch symbol vs none.
-;; ERROR: Expression building failed: In tfrag-vu1-init-buffers: Failed to decompile bitfield enum level-flags. Original value is 0x400 but we could only make 0x0 using the available fields.
+;; JAKX BOOT-PATH 2026-05-05: emit the init+end chain into each level's tfrag
+;; bucket directly via with-dma-buffer-add-bucket. Cannot use tfrag-vu1-init-buf
+;; because it gates on `(!= bucket bucket->last)` (bucket has data) — and
+;; drawable-tree-tfrag::draw is a no-op stub in jakx, so the bucket stays empty
+;; and the wrapper never fires. Inlined approach lets the init chain fire even
+;; without GOAL-side fragment data; the C++ TFragment renderer reads the
+;; pc_port_data block and renders the level's geometry from C++-cached arrays.
+(define *tfrag-pc-port-frame-counter* 0)
 (defun tfrag-vu1-init-buffers ()
-  ;; JAKX BOOT-PATH 2026-05-05: was (break!) — replaced with no-op to let
-  ;; display-frame-finish complete. Real body sets up VU1 micro-buffers;
-  ;; without it, tfrag rendering will produce nothing but boot continues.
-  (none)
-  )
+  (+! *tfrag-pc-port-frame-counter* 1)
+  (let ((trace? (zero? (mod *tfrag-pc-port-frame-counter* 60))))
+    (dotimes (gp-0 10)
+      (let ((s5-0 (-> *level* draw-level gp-0)))
+        (set! *pc-tfrag-draw-level* s5-0)
+        (when s5-0
+          (when trace?
+            (format 0 "[tfrag-pc] frame=~D slot=~D lev=~A status=~A draw-idx=~D~%"
+                    *tfrag-pc-port-frame-counter*
+                    gp-0
+                    (-> s5-0 name)
+                    (-> s5-0 status)
+                    (-> s5-0 draw-index)))
+          (let ((s3-0 (-> s5-0 tfrag-gs-test))
+                (use-other (logtest? (-> s5-0 info level-flags) (level-flags use-camera-other)))
+                (slot (-> s5-0 draw-index))
+                )
+            (with-dma-buffer-add-bucket ((dma-buf (-> *display* frames (-> *display* on-screen) global-buf))
+                                         (the bucket-id (+ (bucket-id tfrag-l0-tfrag) (* slot 12))))
+              (tfrag-init-buffer dma-buf s3-0 0 use-other)
+              (tfrag-end-buffer dma-buf (the int (-> s5-0 tfrag-last-calls 0)))
+              )
+            )
+          )
+        )
+      )
+    )
+  (none))
 
 
 ;; ERROR: failed type prop at 1: Could not figure out load: (set! v1 (l.w v1))

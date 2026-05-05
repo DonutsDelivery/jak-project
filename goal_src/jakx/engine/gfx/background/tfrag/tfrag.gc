@@ -89,6 +89,106 @@
 
 (define tfrag-vu1-block (new 'static 'vu-function :length #x74b :qlength #x3a6))
 
+;; JAKX BOOT-PATH 2026-05-05: ported from jak3 tfrag.gc:187. Fills the tfrag-data
+;; quadwords (fog/val/ambient/strgif/fangif/adgif/hvdf/hmge/invh/guard/dists)
+;; that VU1 reads — the PC TFragment renderer ignores most of these but the
+;; chain shape is required so handle_initialization sees DIRECT vif.
+(defun tfrag-data-setup ((arg0 tfrag-data) (arg1 int) (arg2 int))
+  "Set up VU1 constants"
+  (let ((v1-0 *math-camera*))
+    (let ((a0-1 (-> arg0 data)))
+      (set! (-> a0-1 0) (the-as uint (-> v1-0 pfog0)))
+      (set! (-> a0-1 1) (the-as uint (-> v1-0 fog-min)))
+      (set! (-> a0-1 2) (the-as uint (-> v1-0 fog-max)))
+      (set! (-> a0-1 3) (the-as uint 3072.0))
+      )
+    (set-vector! (-> arg0 val) 0.5 1.0 2048.0 0.0)
+    (set-vector! (-> arg0 ambient) 1.0 1.0 1.0 1.0)
+    (let ((a0-4 arg2))
+      (cond
+        ((zero? a0-4)
+         (set! (-> arg0 strgif tag)
+               (new 'static 'gif-tag64
+                 :pre #x1
+                 :nreg #x3
+                 :prim (new 'static 'gs-prim :prim (gs-prim-type tri-strip) :iip #x1 :tme #x1 :fge #x1 :abe arg1)
+                 )
+               )
+         (set! (-> arg0 fangif tag)
+               (new 'static 'gif-tag64
+                 :pre #x1
+                 :nreg #x3
+                 :prim (new 'static 'gs-prim :prim (gs-prim-type tri-fan) :iip #x1 :tme #x1 :fge #x1 :abe arg1)
+                 )
+               )
+         )
+        ((= a0-4 1)
+         (set! (-> arg0 strgif tag)
+               (new 'static 'gif-tag64
+                 :pre #x1
+                 :nreg #x3
+                 :prim (new 'static 'gs-prim :prim (gs-prim-type line-strip) :iip #x1 :tme #x1 :fge #x1 :abe arg1)
+                 )
+               )
+         (set! (-> arg0 fangif tag)
+               (new 'static 'gif-tag64
+                 :pre #x1
+                 :nreg #x3
+                 :prim (new 'static 'gs-prim :prim (gs-prim-type line-strip) :iip #x1 :tme #x1 :fge #x1 :abe arg1)
+                 )
+               )
+         )
+        ((= a0-4 2)
+         (set! (-> arg0 strgif tag)
+               (new 'static 'gif-tag64
+                 :pre #x1
+                 :nreg #x3
+                 :prim (new 'static 'gs-prim :prim (gs-prim-type tri-strip) :iip #x1 :fge #x1 :abe arg1)
+                 )
+               )
+         (set! (-> arg0 fangif tag)
+               (new 'static 'gif-tag64
+                 :pre #x1
+                 :nreg #x3
+                 :prim (new 'static 'gs-prim :prim (gs-prim-type tri-fan) :iip #x1 :fge #x1 :abe arg1)
+                 )
+               )
+         )
+        ((= a0-4 3)
+         (set! (-> arg0 strgif tag)
+               (new 'static 'gif-tag64
+                 :pre #x1
+                 :nreg #x3
+                 :prim (new 'static 'gs-prim :prim (gs-prim-type line-strip) :iip #x1 :tme #x1 :fge #x1 :abe arg1)
+                 )
+               )
+         (set! (-> arg0 fangif tag)
+               (new 'static 'gif-tag64
+                 :pre #x1
+                 :nreg #x3
+                 :prim (new 'static 'gs-prim :prim (gs-prim-type tri-fan) :iip #x1 :tme #x1 :fge #x1 :abe arg1)
+                 )
+               )
+         )
+        )
+      )
+    (set! (-> arg0 strgif regs)
+          (new 'static 'gif-tag-regs :regs0 (gif-reg-id st) :regs1 (gif-reg-id rgbaq) :regs2 (gif-reg-id xyzf2))
+          )
+    (set! (-> arg0 fangif regs)
+          (new 'static 'gif-tag-regs :regs0 (gif-reg-id st) :regs1 (gif-reg-id rgbaq) :regs2 (gif-reg-id xyzf2))
+          )
+    (set! (-> arg0 adgif tag) (new 'static 'gif-tag64 :nloop #x5 :nreg #x1))
+    (set! (-> arg0 adgif regs) (new 'static 'gif-tag-regs :regs0 (gif-reg-id a+d)))
+    (vector-copy! (-> arg0 hvdf-offset) (-> v1-0 hvdf-off))
+    (vector-copy! (-> arg0 hmge-scale) (-> v1-0 hmge-scale))
+    (vector-copy! (-> arg0 invh-scale) (-> v1-0 inv-hmge-scale))
+    (vector-copy! (-> arg0 guard) (-> v1-0 guard))
+    )
+  (set-tfrag-dists! (-> arg0 dists))
+  (none)
+  )
+
 ;; ERROR: function has no type analysis. Cannot decompile.
 
 (defun add-tfrag-mtx-0 ((arg0 dma-buffer) (arg1 symbol))
@@ -147,34 +247,28 @@
     )
   )
 
-;; ERROR: failed type prop at 20: Called a function, but we do not know its type
-(defun add-tfrag-data ((a0-0 dma-buffer) (a1-0 int) (a2-0 int))
-  (local-vars
-    (v0-0 none)
-    (v0-1 none)
-    (v1-0 dma-buffer)
-    (v1-1 none)
-    (v1-2 none)
-    (v1-3 dma-packet)
-    (a0-1 dma-packet)
-    (a0-2 dma-packet)
-    (a0-3 pointer)
-    (a0-4 none)
-    (a0-5 none)
-    (a3-0 int)
-    (a3-1 int)
-    (a3-2 int)
-    (a3-3 int)
-    (t0-0 int)
-    (t0-1 int)
-    (t0-2 int)
-    (t0-3 int)
-    (t1-0 int)
-    (t1-1 int)
-    (t9-0 function)
+;; JAKX BOOT-PATH 2026-05-05: ported from jak3 tfrag.gc:340. Emits the 14-qwc
+;; unpack-v4-32 + tfrag-data + mscal cnt that VU1 (and the C++ chain-shape
+;; check) expects after the matrices.
+(defun add-tfrag-data ((arg0 dma-buffer) (arg1 int) (arg2 int))
+  "Add DMA for tfrag constants."
+  (let* ((a3-0 14)
+         (v1-0 arg0)
+         (a0-1 (the-as dma-packet (-> v1-0 base)))
+         )
+    (set! (-> a0-1 dma) (new 'static 'dma-tag :id (dma-tag-id cnt) :qwc a3-0))
+    (set! (-> a0-1 vif0) (new 'static 'vif-tag :imm #x404 :cmd (vif-cmd stcycl)))
+    (set! (-> a0-1 vif1) (new 'static 'vif-tag :imm #x290 :cmd (vif-cmd unpack-v4-32) :num a3-0))
+    (set! (-> v1-0 base) (the-as pointer (&+ a0-1 16)))
     )
-  (format 0 "call to add-tfrag-data~%")
-  (break!)
+  (tfrag-data-setup (the-as tfrag-data (-> arg0 base)) arg1 arg2)
+  (&+! (-> arg0 base) 224)
+  (let ((v1-3 (the-as dma-packet (-> arg0 base))))
+    (set! (-> v1-3 dma) (new 'static 'dma-tag :id (dma-tag-id cnt)))
+    (set! (-> v1-3 vif0) (new 'static 'vif-tag))
+    (set! (-> v1-3 vif1) (new 'static 'vif-tag :cmd (vif-cmd mscal) :msk #x1))
+    (set! (-> arg0 base) (the-as pointer (&+ v1-3 16)))
+    )
   (none)
   )
 
@@ -213,21 +307,40 @@
 
 (set! (-> t-stat cnt) 0)
 
-;; ERROR: Failed store: (s.w! (+ a1-14 8) 0) at op 45
-;; ERROR: Failed store: (s.w! (+ a1-14 12) a2-5) at op 47
-;; ERROR: Failed store: (s.d! (+ a1-16 8) a2-8) at op 56
-;; ERROR: Failed store: (s.d! (+ a1-18 8) a2-9) at op 63
-;; ERROR: Failed store: (s.d! (+ a1-18 16) a2-10) at op 65
-;; ERROR: Failed store: (s.d! (+ a1-18 24) a2-11) at op 67
-;; ERROR: Failed store: (s.d! (+ a1-18 32) a2-12) at op 69
-;; ERROR: Failed store: (s.d! (+ a1-18 40) a2-13) at op 71
-;; ERROR: Failed store: (s.d! (+ a1-18 48) v1-4) at op 73
-;; ERROR: Failed store: (s.d! (+ a1-18 56) v1-5) at op 75
-;; ERROR: Failed store: (s.w! (+ v1-7 8) a0-21) at op 95
-;; ERROR: Failed store: (s.w! (+ v1-7 12) a0-22) at op 97
+;; JAKX BOOT-PATH 2026-05-05: ported from jak3 tfrag.gc:400. Emits the chain
+;; the C++ TFragment::handle_initialization recognizes:
+;;   VU function upload → gs-set (NOP+DIRECT vif, the looks_like_init signal) →
+;;   matrix0 → matrix1 → tfrag-data (mscal) → pc-tfrag3-data → BASE/OFFSET
 (defun tfrag-init-buffer ((arg0 dma-buffer) (arg1 gs-test) (arg2 int) (arg3 symbol))
-  (format 0 "call to tfrag-init-buffer~%")
-  (break!)
+  "Initialize DMA bucket for Tfrag rendering."
+  (let ((v1-0 *display*)
+        (a0-6 (+ (* (+ (/ (-> tfrag-vu1-block qlength) 127) 1) 16) 480))
+        )
+    (+! (-> v1-0 mem-reserve-size) a0-6)
+    (when (not (-> v1-0 dma-buffer-overflow))
+      (let ((a2-1 (-> v1-0 frames (-> v1-0 on-screen) global-buf)))
+        (if (< (-> a2-1 real-buffer-end) (the-as int (&+ (-> a2-1 base) a0-6)))
+            (set! (-> v1-0 dma-buffer-overflow) #t)
+            )
+        )
+      (when (not (-> v1-0 dma-buffer-overflow))
+        (dma-buffer-add-vu-function arg0 tfrag-vu1-block 1)
+        (dma-buffer-add-gs-set arg0 (test-1 arg1))
+        (add-tfrag-mtx-0 arg0 arg3)
+        (add-tfrag-mtx-1 arg0 arg3)
+        (add-tfrag-data arg0 arg2 (the-as int *subdivide-draw-mode*))
+        (#when PC_PORT
+          (add-pc-tfrag3-data arg0 *pc-tfrag-draw-level* 0)
+          )
+        (let ((v1-5 (the-as dma-packet (-> arg0 base))))
+          (set! (-> v1-5 dma) (new 'static 'dma-tag :id (dma-tag-id cnt)))
+          (set! (-> v1-5 vif0) (new 'static 'vif-tag :cmd (vif-cmd base)))
+          (set! (-> v1-5 vif1) (new 'static 'vif-tag :imm #x148 :cmd (vif-cmd offset)))
+          (set! (-> arg0 base) (the-as pointer (&+ v1-5 16)))
+          )
+        )
+      )
+    )
   (none)
   )
 
