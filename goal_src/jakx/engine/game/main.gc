@@ -147,10 +147,7 @@
       ;; forever and the title menu never draws.
       (load-level-text-files -1)
       (display-sync disp)
-      ;; (suspend)  ;; SCAFFOLDING 2026-05-05: yields to kernel-dispatcher → some
-      ;; process in *active-pool* deref's wild ptr ~0x10000012 (likely PS2 EE
-      ;; register space, unmapped on PC). Bypass keeps render loop stable; cost
-      ;; is no other GOAL process gets cycles. Restore once dispatcher debugged.
+      (suspend)
       ;; og:preserve-this — PC port per-frame hook deferred: (update *setting-control*)
       ;; crashes at boot with *pc-settings* active too. Isolating one at a time.
       ;; (#when PC_PORT (update *pc-settings*))
