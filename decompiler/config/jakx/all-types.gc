@@ -5037,7 +5037,7 @@
 
 (define-extern *freeze-hangtime* object)
 (define-extern wv-player-post-move-update (function none))
-(define-extern find-nearest-camera (function vector none))
+;; find-nearest-camera moved to line ~14703 (after camera-combiner declare-type)
 (define-extern estimate-eng-torque-from-gear (function none))
 (define-extern plot-engine-torque-curve (function none))
 (define-extern plot-x-with-transform (function none))
@@ -14699,6 +14699,7 @@
 (define-extern view-get-active-camera-combiner (function camera-combiner))
 (define-extern view-get-camera-combiner (function int camera-combiner))
 (define-extern view-set-active-camera-combiner (function camera-combiner camera-combiner))
+(define-extern find-nearest-camera (function vector camera-combiner))
 (define-extern view-get-active-math-camera (function math-camera))
 (define-extern view-get-math-camera (function int math-camera))
 (define-extern view-set-active-math-camera (function math-camera math-camera))
