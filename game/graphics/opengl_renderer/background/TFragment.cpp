@@ -1,5 +1,7 @@
 #include "TFragment.h"
 
+#include <unordered_set>
+
 #include "game/graphics/opengl_renderer/dma_helpers.h"
 
 #include "third-party/imgui/imgui.h"
@@ -14,6 +16,11 @@ bool looks_like_tfrag_init(const DmaFollower& follow) {
          follow.current_tag_vifcode1().kind == VifCode::Kind::DIRECT &&
          follow.current_tag_vifcode1().immediate == 2;
 }
+
+// JAKX BOOT-PATH 2026-05-05: instrumentation gate. Logs per-bucket state on
+// first render() call, then stays silent. Confirms or rejects the
+// "chain shape doesn't match handle_initialization" hypothesis without spam.
+std::unordered_set<int> g_jakx_tfrag_render_logged;
 }  // namespace
 
 TFragment::TFragment(const std::string& name,
@@ -137,8 +144,25 @@ void TFragment::render(DmaFollower& dma,
     return;
   }
 
+  // JAKX BOOT-PATH 2026-05-05: log first render call per bucket. Captures
+  // first DMA tag shape + looks_like_tfrag_init result + bail point so we can
+  // confirm/reject the chain-shape hypothesis without instrumenting GOAL side.
+  bool jakx_log = g_jakx_tfrag_render_logged.insert(m_my_id).second;
+  if (jakx_log) {
+    auto vc0 = dma.current_tag_vifcode0();
+    auto vc1 = dma.current_tag_vifcode1();
+    fmt::print("[TFragment-instr/{}] first-render: vif0.kind={} vif0.imm={} vif1.kind={} vif1.imm={} "
+               "looks_like_init={} (need vif0=NOP[{}] vif1=DIRECT[{}] vif1.imm=2)\n",
+               m_name, (int)vc0.kind, vc0.immediate, (int)vc1.kind, vc1.immediate,
+               looks_like_tfrag_init(dma) ? "YES" : "NO",
+               (int)VifCode::Kind::NOP, (int)VifCode::Kind::DIRECT);
+  }
+
   std::string level_name;
   while (looks_like_tfrag_init(dma)) {
+    if (jakx_log) {
+      fmt::print("[TFragment-instr/{}] entering handle_initialization\n", m_name);
+    }
     handle_initialization(dma);
     if (level_name.empty()) {
       level_name = m_pc_port_data.level_name;
@@ -156,7 +180,14 @@ void TFragment::render(DmaFollower& dma,
   }
 
   if (level_name.empty()) {
+    if (jakx_log) {
+      fmt::print("[TFragment-instr/{}] BAIL: level_name empty after init loop\n", m_name);
+    }
     return;
+  }
+  if (jakx_log) {
+    fmt::print("[TFragment-instr/{}] PROCEED: level_name='{}' — calling render_matching_trees\n",
+               m_name, level_name);
   }
   {
     setup_for_level(m_tree_kinds, level_name, render_state);
@@ -513,6 +544,90 @@ void TFragment::render_tree(int geom,
   cull_check_all_slow(settings.camera.planes, tree.vis->vis_nodes, settings.occlusion_culling,
                       m_cache.vis_temp.data());
 
+  // JAKX BOOT-PATH 2026-05-05: discriminator instrumentation. Logs first call per
+  // bucket only (so it doesn't spam). Captures vis_temp content + camera planes/trans
+  // + occlusion_culling pointer + per-draw frustum/multidraw outcome for the first 5
+  // draws. Three discriminator outcomes:
+  //   A) vis_temp all-zero  → GOAL not computing visibility / planes wrong
+  //   B) vis_temp non-zero but multidraw_indices.second==0 for all → vis_groups
+  //      reference different nodes than vis_temp populates (data binding mismatch)
+  //   C) multidraw counts non-zero but num_triangles==0 → empty draws.
+  static std::unordered_set<std::string> s_render_disc_logged;
+  bool disc_log = s_render_disc_logged.insert(m_name).second;
+  if (disc_log) {
+    size_t vis_node_count = tree.vis ? tree.vis->vis_nodes.size() : 0;
+    size_t vis_temp_size = m_cache.vis_temp.size();
+    size_t check_bytes = std::min<size_t>(vis_node_count, vis_temp_size);
+    int nonzero_vis_count = 0;
+    for (size_t i = 0; i < check_bytes; i++) {
+      if (m_cache.vis_temp[i]) nonzero_vis_count++;
+    }
+    fmt::print("[render_disc/{}] vis_nodes={} vis_temp_nonzero={}/{} occl_ptr={} occl_valid={}\n",
+               m_name, (int)vis_node_count, nonzero_vis_count, (int)check_bytes,
+               (settings.occlusion_culling ? "non-null" : "NULL"),
+               render_state->occlusion_vis[m_level_id].valid ? "true" : "false");
+    if (settings.occlusion_culling) {
+      const u8* p = settings.occlusion_culling;
+      fmt::print("[render_disc/{}] occl_first16: "
+                 "{:02x} {:02x} {:02x} {:02x} {:02x} {:02x} {:02x} {:02x} "
+                 "{:02x} {:02x} {:02x} {:02x} {:02x} {:02x} {:02x} {:02x}\n",
+                 m_name, p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7],
+                 p[8], p[9], p[10], p[11], p[12], p[13], p[14], p[15]);
+    }
+    if (check_bytes > 0) {
+      const u8* v = m_cache.vis_temp.data();
+      size_t print_n = std::min<size_t>(check_bytes, 16);
+      fmt::print("[render_disc/{}] vis_temp_first{}:", m_name, (int)print_n);
+      for (size_t i = 0; i < print_n; i++) fmt::print(" {:02x}", v[i]);
+      fmt::print("\n");
+    }
+    const auto& cam = settings.camera;
+    fmt::print("[render_disc/{}] cam.planes[0]=({:.3f},{:.3f},{:.3f},{:.3f}) "
+               "cam.trans=({:.3f},{:.3f},{:.3f},{:.3f})\n",
+               m_name,
+               cam.planes[0].x(), cam.planes[0].y(), cam.planes[0].z(), cam.planes[0].w(),
+               cam.trans.x(), cam.trans.y(), cam.trans.z(), cam.trans.w());
+    fmt::print("[render_disc/{}] cam.planes[1]=({:.3f},{:.3f},{:.3f},{:.3f}) "
+               "cam.planes[2]=({:.3f},{:.3f},{:.3f},{:.3f}) "
+               "cam.planes[3]=({:.3f},{:.3f},{:.3f},{:.3f})\n",
+               m_name,
+               cam.planes[1].x(), cam.planes[1].y(), cam.planes[1].z(), cam.planes[1].w(),
+               cam.planes[2].x(), cam.planes[2].y(), cam.planes[2].z(), cam.planes[2].w(),
+               cam.planes[3].x(), cam.planes[3].y(), cam.planes[3].z(), cam.planes[3].w());
+    // sample a draw: count how many vis_groups reference UINT16_MAX (always-visible)
+    // vs index-into-vis-array, and how many of the indexed ones are non-zero.
+    if (tree.draws && !tree.draws->empty()) {
+      size_t sample_n = std::min<size_t>(tree.draws->size(), 5);
+      for (size_t di = 0; di < sample_n; di++) {
+        const auto& draw = tree.draws->operator[](di);
+        size_t vg_total = draw.vis_groups.size();
+        int vg_alwaysvis = 0, vg_indexed_vis = 0, vg_indexed_total = 0, vg_oob = 0;
+        u32 vg_tris_visible = 0;
+        for (const auto& grp : draw.vis_groups) {
+          if (grp.vis_idx_in_pc_bvh == UINT16_MAX) {
+            vg_alwaysvis++;
+            vg_tris_visible += grp.num_tris;
+          } else {
+            vg_indexed_total++;
+            if (grp.vis_idx_in_pc_bvh < check_bytes) {
+              if (m_cache.vis_temp[grp.vis_idx_in_pc_bvh]) {
+                vg_indexed_vis++;
+                vg_tris_visible += grp.num_tris;
+              }
+            } else {
+              vg_oob++;
+            }
+          }
+        }
+        fmt::print("[render_disc/{}] draw#{} vg_total={} alwaysvis={} idx_total={} idx_vis={} "
+                   "oob={} num_tris_total={} tris_visible={} idx_first={}\n",
+                   m_name, (int)di, (int)vg_total, vg_alwaysvis, vg_indexed_total,
+                   vg_indexed_vis, vg_oob, (int)draw.num_triangles, (int)vg_tris_visible,
+                   (int)draw.unpacked.idx_of_first_idx_in_full_buffer);
+      }
+    }
+  }
+
   u32 total_tris;
   if (render_state->no_multidraw) {
     u32 idx_buffer_size = make_index_list_from_vis_string(
@@ -527,6 +642,23 @@ void TFragment::render_tree(int geom,
   }
 
   prof.add_tri(total_tris);
+
+  // JAKX BOOT-PATH 2026-05-05: post-multidraw per-draw outcome (paired with
+  // pre-multidraw discriminator above).
+  if (disc_log) {
+    if (tree.draws && !tree.draws->empty()) {
+      size_t sample_n = std::min<size_t>(tree.draws->size(), 5);
+      for (size_t di = 0; di < sample_n; di++) {
+        const auto& draw = tree.draws->operator[](di);
+        const auto& md = m_cache.multidraw_offset_per_stripdraw[di];
+        const auto& sd = m_cache.draw_idx_temp[di];
+        fmt::print("[render_disc/{}] post-md draw#{} num_tris_total={} "
+                   "multidraw=(first={},second={}) singledraw=(first={},second={})\n",
+                   m_name, (int)di, (int)draw.num_triangles,
+                   md.first, md.second, sd.first, sd.second);
+      }
+    }
+  }
 
   // draw-call count log — first 3 calls per instance
   {

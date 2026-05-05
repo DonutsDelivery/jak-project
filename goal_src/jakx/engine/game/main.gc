@@ -15,6 +15,9 @@
 
 (define-extern anim-tester-add-object (function string none))
 
+;; JAKX BOOT-PATH 2026-05-05 INSTR
+(define *jakx-cam-instr-count* 0)
+
 ;; *dproc* and *run* are declared in main-h.gc. We set *run* so our loop runs.
 (set! *run* #t)
 
@@ -64,7 +67,9 @@
     (display-sync disp)
     (format 0 "[display-loop] warmup display-sync done; entering while *run*~%")
 
+    (format 0 "[goal-cam-instr] BEFORE-while~%")
     (while *run*
+      (format 0 "[goal-cam-instr] LOOP-TOP~%")
       (set! *artist-all-visible* #t)
       (set! *external-cam-mode* 'locked)
       (set-vector! (-> *math-camera* trans) -67563.0 900000.0 -299048.0 1.0)
@@ -81,7 +86,46 @@
               (when (or (= (-> lev status) 'active) (= (-> lev status) 'alive) (= (-> lev status) 'loaded) (= (-> lev status) 'loading))
                 (set! (-> lev-names i) (symbol->string (level-method-13 lev))))))
           (__pc-set-levels lev-names)))
+      (set! *jakx-cam-instr-count* (+ *jakx-cam-instr-count* 1))
+      (when (= *jakx-cam-instr-count* 1)
+        (format 0 "[goal-cam-instr] HIT-FIRST-ITER~%")
+        (format 0 "[goal-cam-instr] count=~D~%" *jakx-cam-instr-count*))
+      (when (= *jakx-cam-instr-count* 1)
+        (format 0 "[goal-cam-instr] PRE-update-camera~%"))
       (update-camera)
+      (when (= *jakx-cam-instr-count* 1)
+        (format 0 "[goal-cam-instr] POST-update-camera~%"))
+      ;; JAKX BOOT-PATH 2026-05-05 INSTR: log math-camera planes for first 3
+      ;; iterations after update-camera returns to confirm whether
+      ;; update-view-planes produced valid planes, NaN, or never ran. Uses our
+      ;; own counter (frame-counter starts at seconds(1000), so a < 3 gate would
+      ;; never fire).
+      (set! *jakx-cam-instr-count* (+ *jakx-cam-instr-count* 1))
+      (when (< *jakx-cam-instr-count* 4)
+        (format 0 "[goal-cam-instr] iter=~D plane[0]=(~F ~F ~F ~F)~%"
+          *jakx-cam-instr-count*
+          (-> *math-camera* plane 0 x) (-> *math-camera* plane 0 y)
+          (-> *math-camera* plane 0 z) (-> *math-camera* plane 0 w))
+        (format 0 "[goal-cam-instr] plane[1]=(~F ~F ~F ~F)~%"
+          (-> *math-camera* plane 1 x) (-> *math-camera* plane 1 y)
+          (-> *math-camera* plane 1 z) (-> *math-camera* plane 1 w))
+        (format 0 "[goal-cam-instr] cam.trans=(~F ~F ~F)~%"
+          (-> *math-camera* trans x) (-> *math-camera* trans y) (-> *math-camera* trans z))
+        (format 0 "[goal-cam-instr] x-ratio=~F y-ratio=~F d=~F f=~F~%"
+          (-> *math-camera* x-ratio) (-> *math-camera* y-ratio)
+          (-> *math-camera* d) (-> *math-camera* f))
+        (format 0 "[goal-cam-instr] fov=~F fov-corr=~F art-fix-frust=~A art-fix-vis=~A~%"
+          (-> *math-camera* fov) (-> *math-camera* fov-correction-factor)
+          *artist-fix-frustum* *artist-fix-visible*)
+        (format 0 "[goal-cam-instr] inv-rvec=(~F ~F ~F ~F)~%"
+          (-> *math-camera* inv-camera-rot rvec x) (-> *math-camera* inv-camera-rot rvec y)
+          (-> *math-camera* inv-camera-rot rvec z) (-> *math-camera* inv-camera-rot rvec w))
+        (format 0 "[goal-cam-instr] inv-fvec=(~F ~F ~F ~F)~%"
+          (-> *math-camera* inv-camera-rot fvec x) (-> *math-camera* inv-camera-rot fvec y)
+          (-> *math-camera* inv-camera-rot fvec z) (-> *math-camera* inv-camera-rot fvec w))
+        (format 0 "[goal-cam-instr] inv-trans=(~F ~F ~F ~F)~%"
+          (-> *math-camera* inv-camera-rot trans x) (-> *math-camera* inv-camera-rot trans y)
+          (-> *math-camera* inv-camera-rot trans z) (-> *math-camera* inv-camera-rot trans w)))
       ;; Seed non-zero mood times on active levels so background DMA packets
       ;; get non-zero itimes (otherwise all geometry renders black).
       ;; update-time-of-day→init-weather! gates on level-get-target-inside
