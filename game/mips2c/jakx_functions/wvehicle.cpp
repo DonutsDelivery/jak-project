@@ -2007,4 +2007,1385 @@ void link() {
 
 } // namespace method_134_wvehicle
 
+
+namespace wv_player_post_move_update {
+struct Cache {
+  void* freeze_hangtime; // *freeze-hangtime*
+  void* net_game_mgr; // *net-game-mgr*
+  void* net_mgr; // *net-mgr*
+  void* net_players; // *net-players*
+  void* random_generator; // *random-generator*
+  void* setting_control; // *setting-control*
+  void* sound_info; // *sound-info*
+  void* viewport_array; // *viewport-array*
+  void* add_hang_time; // add-hang-time
+  void* kill_hud; // kill-hud
+  void* make_sound_instance; // make-sound-instance
+  void* process_focusable; // process-focusable
+  void* rand_uint31_gen; // rand-uint31-gen
+  void* revive_hud; // revive-hud
+  void* send_event_function; // send-event-function
+  void* set_slide_distance; // set-slide-distance
+  void* sound_stop; // sound-stop
+  void* spawn_hang_time_hud_single; // spawn-hang-time-hud-single
+  void* spawn_power_slide_hud_single; // spawn-power-slide-hud-single
+  void* stats_biggest_air; // stats-biggest-air
+  void* type; // type?
+} cache;
+
+u64 execute(void* ctxt) {
+  auto* c = (ExecutionContext*)ctxt;
+  bool bc = false;
+  u32 call_addr = 0;
+  bool cop1_bc = false;
+  c->daddiu(sp, sp, -160);                          // daddiu sp, sp, -160
+  c->sd(ra, 0, sp);                                 // sd ra, 0(sp)
+  c->sq(s4, 96, sp);                                // sq s4, 96(sp)
+  c->sq(s5, 112, sp);                               // sq s5, 112(sp)
+  c->sq(gp, 128, sp);                               // sq gp, 128(sp)
+  c->swc1(f30, 144, sp);                            // swc1 f30, 144(sp)
+  c->mov64(gp, a0);                                 // or gp, a0, r0
+  c->mov64(s4, a1);                                 // or s4, a1, r0
+  c->mov64(s5, a2);                                 // or s5, a2, r0
+  c->load_symbol2(v1, cache.freeze_hangtime);       // lw v1, *freeze-hangtime*(s7)
+  if (((s64)c->sgpr64(s7)) != ((s64)c->sgpr64(v1))) {// bnel s7, v1, L260
+    c->mov64(v1, v1);                               // or v1, v1, r0
+    goto block_5;
+  }
+  
+block_2:
+  c->ld(v1, 260, gp);                               // ld v1, 260(gp)
+  c->andi(v1, v1, 32);                              // andi v1, v1, 32
+  if (((s64)c->sgpr64(v1)) == ((s64)0)) {           // beql v1, r0, L260
+    c->mov64(v1, s7);                               // or v1, s7, r0
+    goto block_5;
+  }
+  
+block_4:
+  c->daddiu(v1, s7, 4);                             // daddiu v1, s7, 4
+  c->lui(a0, 1);                                    // lui a0, 1
+  c->dsll32(a0, a0, 0);                             // dsll32 a0, a0, 0
+  c->ld(a1, 260, gp);                               // ld a1, 260(gp)
+  c->and_(a0, a0, a1);                              // and a0, a0, a1
+  c->movn(v1, s7, a0);                              // movn v1, s7, a0
+  
+block_5:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L300
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_99;}                          // branch non-likely
+
+  c->sw(s4, 3904, gp);                              // sw s4, 3904(gp)
+  c->lui(v1, 15194);                                // lui v1, 15194
+  c->ori(v1, v1, 29710);                            // ori v1, v1, 29710
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->lwu(v1, 796, gp);                              // lwu v1, 796(gp)
+  c->dsubu(v1, s4, v1);                             // dsubu v1, s4, v1
+  c->mtc1(f1, v1);                                  // mtc1 f1, v1
+  c->cvtsw(f1, f1);                                 // cvt.s.w f1, f1
+  c->muls(f30, f0, f1);                             // mul.s f30, f0, f1
+  c->swc1(f30, 3940, gp);                           // swc1 f30, 3940(gp)
+  c->lui(v1, 16192);                                // lui v1, 16192
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  cop1_bc = c->fprs[f0] < c->fprs[f30];             // c.lt.s f0, f30
+  bc = !cop1_bc;                                    // bc1f L295
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_89;}                          // branch non-likely
+
+  c->mov64(a0, gp);                                 // or a0, gp, r0
+  c->lwu(v1, -4, a0);                               // lwu v1, -4(a0)
+  c->lwu(t9, 116, v1);                              // lwu t9, 116(v1)
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L267
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_22;}                          // branch non-likely
+
+  c->lb(v1, 2116, gp);                              // lb v1, 2116(gp)
+  c->load_symbol2(a0, cache.net_mgr);               // lw a0, *net-mgr*(s7)
+  bc = c->sgpr64(s7) == c->sgpr64(a0);              // beq s7, a0, L261
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_10;}                          // branch non-likely
+
+  c->load_symbol2(a0, cache.net_mgr);               // lw a0, *net-mgr*(s7)
+  c->lw(a0, 152, a0);                               // lw a0, 152(a0)
+  //beq r0, r0, L262                                // beq r0, r0, L262
+  // nop                                            // sll r0, r0, 0
+  goto block_11;                                    // branch always
+
+  
+block_10:
+  c->addiu(a0, r0, 0);                              // addiu a0, r0, 0
+  
+block_11:
+  c->dsll(a0, a0, 1);                               // dsll a0, a0, 1
+  c->daddiu(a0, a0, 1);                             // daddiu a0, a0, 1
+  c->dsubu(v1, v1, a0);                             // dsubu v1, v1, a0
+  c->daddiu(a0, s7, 4);                             // daddiu a0, s7, 4
+  c->movn(a0, s7, v1);                              // movn a0, s7, v1
+  if (((s64)c->sgpr64(s7)) != ((s64)c->sgpr64(a0))) {// bnel s7, a0, L265
+    c->mov64(v1, a0);                               // or v1, a0, r0
+    goto block_17;
+  }
+  
+block_13:
+  c->lb(v1, 2116, gp);                              // lb v1, 2116(gp)
+  c->load_symbol2(a0, cache.net_mgr);               // lw a0, *net-mgr*(s7)
+  bc = c->sgpr64(s7) == c->sgpr64(a0);              // beq s7, a0, L263
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_15;}                          // branch non-likely
+
+  c->load_symbol2(a0, cache.net_mgr);               // lw a0, *net-mgr*(s7)
+  c->lw(a0, 152, a0);                               // lw a0, 152(a0)
+  //beq r0, r0, L264                                // beq r0, r0, L264
+  // nop                                            // sll r0, r0, 0
+  goto block_16;                                    // branch always
+
+  
+block_15:
+  c->addiu(a0, r0, 0);                              // addiu a0, r0, 0
+  
+block_16:
+  c->dsll(a0, a0, 1);                               // dsll a0, a0, 1
+  c->dsubu(a0, v1, a0);                             // dsubu a0, v1, a0
+  c->daddiu(v1, s7, 4);                             // daddiu v1, s7, 4
+  c->movn(v1, s7, a0);                              // movn v1, s7, a0
+  
+block_17:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L267
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_22;}                          // branch non-likely
+
+  c->daddiu(a1, sp, 16);                            // daddiu a1, sp, 16
+  c->mov64(v1, s6);                                 // or v1, s6, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L266
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_20;}                          // branch non-likely
+
+  c->lwu(a0, 28, v1);                               // lwu a0, 28(v1)
+  
+block_20:
+  c->sw(a0, 8, a1);                                 // sw a0, 8(a1)
+  c->addiu(v1, r0, 1);                              // addiu v1, r0, 1
+  c->sw(v1, 68, a1);                                // sw v1, 68(a1)
+  c->load_symbol_addr(v1, cache.stats_biggest_air); // daddiu v1, s7, stats-biggest-air
+  c->sw(v1, 64, a1);                                // sw v1, 64(a1)
+  c->lui(v1, 17302);                                // lui v1, 17302
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->muls(f0, f0, f30);                             // mul.s f0, f0, f30
+  c->mfc1(v1, f0);                                  // mfc1 v1, f0
+  c->sd(v1, 16, a1);                                // sd v1, 16(a1)
+  c->load_symbol2(t9, cache.send_event_function);   // lw t9, send-event-function(s7)
+  c->load_symbol2(a0, cache.net_game_mgr);          // lw a0, *net-game-mgr*(s7)
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  c->lb(v1, 2116, gp);                              // lb v1, 2116(gp)
+  c->dsll(v1, v1, 2);                               // dsll v1, v1, 2
+  c->load_symbol2(a0, cache.net_players);           // lw a0, *net-players*(s7)
+  c->daddu(v1, v1, a0);                             // daddu v1, v1, a0
+  c->lwu(a0, 12, v1);                               // lwu a0, 12(v1)
+  bc = c->sgpr64(s7) == c->sgpr64(a0);              // beq s7, a0, L267
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_22;}                          // branch non-likely
+
+  c->lwu(v1, -4, a0);                               // lwu v1, -4(a0)
+  c->lwu(t9, 276, v1);                              // lwu t9, 276(v1)
+  c->lui(v1, 17302);                                // lui v1, 17302
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->muls(f0, f0, f30);                             // mul.s f0, f0, f30
+  c->cvtws(f0, f0);                                 // cvt.w.s f0, f0
+  c->mfc1(a1, f0);                                  // mfc1 a1, f0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  
+block_22:
+  c->daddiu(a1, sp, 16);                            // daddiu a1, sp, 16
+  c->mov64(v1, s6);                                 // or v1, s6, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L268
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_24;}                          // branch non-likely
+
+  c->lwu(a0, 28, v1);                               // lwu a0, 28(v1)
+  
+block_24:
+  c->sw(a0, 8, a1);                                 // sw a0, 8(a1)
+  c->addiu(v1, r0, 1);                              // addiu v1, r0, 1
+  c->sw(v1, 68, a1);                                // sw v1, 68(a1)
+  c->load_symbol_addr(v1, cache.add_hang_time);     // daddiu v1, s7, add-hang-time
+  c->sw(v1, 64, a1);                                // sw v1, 64(a1)
+  c->lui(v1, 15194);                                // lui v1, 15194
+  c->ori(v1, v1, 29710);                            // ori v1, v1, 29710
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->lwu(v1, 8, s6);                                // lwu v1, 8(s6)
+  c->ld(v1, 20, v1);                                // ld v1, 20(v1)
+  c->lwu(a0, 8, s6);                                // lwu a0, 8(s6)
+  c->ld(a0, 28, a0);                                // ld a0, 28(a0)
+  c->dsubu(v1, v1, a0);                             // dsubu v1, v1, a0
+  c->mtc1(f1, v1);                                  // mtc1 f1, v1
+  c->cvtsw(f1, f1);                                 // cvt.s.w f1, f1
+  c->muls(f0, f0, f1);                              // mul.s f0, f0, f1
+  c->mfc1(v1, f0);                                  // mfc1 v1, f0
+  c->sd(v1, 16, a1);                                // sd v1, 16(a1)
+  c->load_symbol2(t9, cache.send_event_function);   // lw t9, send-event-function(s7)
+  c->ld(v1, 3932, gp);                              // ld v1, 3932(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L270
+    c->mov64(a0, s7);                               // or a0, s7, r0
+    goto block_29;
+  }
+  
+block_26:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a2, 0, a0);                                // lwu a2, 0(a0)
+  c->lw(a0, 48, a2);                                // lw a0, 48(a2)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a0);              // bne v1, a0, L269
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_28;}                          // branch non-likely
+
+  c->mov64(a0, a2);                                 // or a0, a2, r0
+  
+block_28:
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_29:
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  c->ld(v1, 260, gp);                               // ld v1, 260(gp)
+  c->andi(v1, v1, 32);                              // andi v1, v1, 32
+  if (((s64)c->sgpr64(v1)) == ((s64)0)) {           // beql v1, r0, L273
+    c->mov64(v1, s7);                               // or v1, s7, r0
+    goto block_40;
+  }
+  
+block_31:
+  c->load_symbol2(v1, cache.setting_control);       // lw v1, *setting-control*(s7)
+  c->lwc1(f0, 492, v1);                             // lwc1 f0, 492(v1)
+  c->mtc1(f1, r0);                                  // mtc1 f1, r0
+  cop1_bc = c->fprs[f0] == c->fprs[f1];             // c.eq.s f0, f1
+  bc = cop1_bc;                                     // bc1t L271
+  c->daddiu(v1, s7, 4);                             // daddiu v1, s7, 4
+  if (bc) {goto block_33;}                          // branch non-likely
+
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  
+block_33:
+  if (((s64)c->sgpr64(s7)) == ((s64)c->sgpr64(v1))) {// beql s7, v1, L273
+    c->mov64(v1, v1);                               // or v1, v1, r0
+    goto block_40;
+  }
+  
+block_35:
+  c->ld(v1, 3932, gp);                              // ld v1, 3932(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L273
+    c->mov64(v1, s7);                               // or v1, s7, r0
+    goto block_40;
+  }
+  
+block_37:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a0, 0, a0);                                // lwu a0, 0(a0)
+  c->lw(a1, 48, a0);                                // lw a1, 48(a0)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a1);              // bne v1, a1, L272
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_39;}                          // branch non-likely
+
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_39:
+  c->mov64(a0, v1);                                 // or a0, v1, r0
+  
+block_40:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L276
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_45;}                          // branch non-likely
+
+  c->load_symbol2(t9, cache.make_sound_instance);   // lw t9, make-sound-instance(s7)
+  c->load_symbol2(v1, cache.sound_info);            // lw v1, *sound-info*(s7)
+  c->lwu(a0, 1296, v1);                             // lwu a0, 1296(v1)
+  c->lwu(a1, 3880, gp);                             // lwu a1, 3880(gp)
+  c->mov64(a2, s7);                                 // or a2, s7, r0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L274
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_43;}                          // branch non-likely
+
+  c->lwu(v1, 80, v1);                               // lwu v1, 80(v1)
+  //beq r0, r0, L275                                // beq r0, r0, L275
+  // nop                                            // sll r0, r0, 0
+  goto block_44;                                    // branch always
+
+  
+block_43:
+  c->addiu(v1, r0, 0);                              // addiu v1, r0, 0
+  
+block_44:
+  c->sw(v1, 3880, gp);                              // sw v1, 3880(gp)
+  //beq r0, r0, L277                                // beq r0, r0, L277
+  // nop                                            // sll r0, r0, 0
+  goto block_46;                                    // branch always
+
+  
+block_45:
+  c->load_symbol2(t9, cache.sound_stop);            // lw t9, sound-stop(s7)
+  c->lwu(a0, 3880, gp);                             // lwu a0, 3880(gp)
+  c->daddiu(a1, s7, 4);                             // daddiu a1, s7, #t
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->sw(r0, 3880, gp);                              // sw r0, 3880(gp)
+  c->gprs[v1].du64[0] = 0;                          // or v1, r0, r0
+  
+block_46:
+  c->ld(v1, 3924, gp);                              // ld v1, 3924(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L279
+    c->mov64(v1, s7);                               // or v1, s7, r0
+    goto block_51;
+  }
+  
+block_48:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a0, 0, a0);                                // lwu a0, 0(a0)
+  c->lw(a1, 48, a0);                                // lw a1, 48(a0)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a1);              // bne v1, a1, L278
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_50;}                          // branch non-likely
+
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_50:
+  c->mov64(a0, v1);                                 // or a0, v1, r0
+  
+block_51:
+  bc = c->sgpr64(s7) != c->sgpr64(v1);              // bne s7, v1, L294
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_88;}                          // branch non-likely
+
+  c->ld(v1, 260, gp);                               // ld v1, 260(gp)
+  c->andi(v1, v1, 8);                               // andi v1, v1, 8
+  if (((s64)c->sgpr64(v1)) != ((s64)0)) {           // bnel v1, r0, L286
+    c->mov64(v1, s7);                               // or v1, s7, r0
+    goto block_71;
+  }
+  
+block_54:
+  c->ld(v1, 3932, gp);                              // ld v1, 3932(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L281
+    c->mov64(v1, s7);                               // or v1, s7, r0
+    goto block_59;
+  }
+  
+block_56:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a0, 0, a0);                                // lwu a0, 0(a0)
+  c->lw(a1, 48, a0);                                // lw a1, 48(a0)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a1);              // bne v1, a1, L280
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_58;}                          // branch non-likely
+
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_58:
+  c->mov64(a0, v1);                                 // or a0, v1, r0
+  
+block_59:
+  if (((s64)c->sgpr64(s7)) == ((s64)c->sgpr64(v1))) {// beql s7, v1, L285
+    c->mov64(v1, v1);                               // or v1, v1, r0
+    goto block_69;
+  }
+  
+block_61:
+  c->daddiu(a1, sp, 16);                            // daddiu a1, sp, 16
+  c->mov64(v1, s6);                                 // or v1, s6, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L282
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_63;}                          // branch non-likely
+
+  c->lwu(a0, 28, v1);                               // lwu a0, 28(v1)
+  
+block_63:
+  c->sw(a0, 8, a1);                                 // sw a0, 8(a1)
+  c->sw(r0, 68, a1);                                // sw r0, 68(a1)
+  c->load_symbol_addr(v1, cache.revive_hud);        // daddiu v1, s7, revive-hud
+  c->sw(v1, 64, a1);                                // sw v1, 64(a1)
+  c->load_symbol2(t9, cache.send_event_function);   // lw t9, send-event-function(s7)
+  c->ld(v1, 3932, gp);                              // ld v1, 3932(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L284
+    c->mov64(a0, s7);                               // or a0, s7, r0
+    goto block_68;
+  }
+  
+block_65:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a2, 0, a0);                                // lwu a2, 0(a0)
+  c->lw(a0, 48, a2);                                // lw a0, 48(a2)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a0);              // bne v1, a0, L283
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_67;}                          // branch non-likely
+
+  c->mov64(a0, a2);                                 // or a0, a2, r0
+  
+block_67:
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_68:
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  
+block_69:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L286
+  c->daddiu(v1, s7, 4);                             // daddiu v1, s7, 4
+  if (bc) {goto block_71;}                          // branch non-likely
+
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  
+block_71:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L294
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_88;}                          // branch non-likely
+
+  c->load_symbol2(v1, cache.viewport_array);        // lw v1, *viewport-array*(s7)
+  c->lwu(v1, 0, v1);                                // lwu v1, 0(v1)
+  bc = c->sgpr64(v1) != 0;                          // bne v1, r0, L290
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_79;}                          // branch non-likely
+
+  c->load_symbol2(t9, cache.spawn_hang_time_hud_single);// lw t9, spawn-hang-time-hud-single(s7)
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(a0, v0);                                 // or a0, v0, r0
+  bc = c->sgpr64(s7) == c->sgpr64(a0);              // beq s7, a0, L287
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_75;}                          // branch non-likely
+
+  c->lwu(v1, 28, a0);                               // lwu v1, 28(a0)
+  
+block_75:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L288
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_77;}                          // branch non-likely
+
+  c->lwu(a0, 0, v1);                                // lwu a0, 0(v1)
+  c->lw(a0, 48, a0);                                // lw a0, 48(a0)
+  c->dsll32(a0, a0, 0);                             // dsll32 a0, a0, 0
+  //beq r0, r0, L289                                // beq r0, r0, L289
+  // nop                                            // sll r0, r0, 0
+  goto block_78;                                    // branch always
+
+  
+block_77:
+  c->addiu(a0, r0, 0);                              // addiu a0, r0, 0
+  
+block_78:
+  c->sllv(v1, v1, r0);                              // sllv v1, v1, r0
+  c->or_(v1, a0, v1);                               // or v1, a0, v1
+  c->sd(v1, 3932, gp);                              // sd v1, 3932(gp)
+  
+block_79:
+  c->daddiu(a1, sp, 16);                            // daddiu a1, sp, 16
+  c->mov64(v1, s6);                                 // or v1, s6, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L291
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_81;}                          // branch non-likely
+
+  c->lwu(a0, 28, v1);                               // lwu a0, 28(v1)
+  
+block_81:
+  c->sw(a0, 8, a1);                                 // sw a0, 8(a1)
+  c->addiu(v1, r0, 1);                              // addiu v1, r0, 1
+  c->sw(v1, 68, a1);                                // sw v1, 68(a1)
+  c->load_symbol_addr(v1, cache.add_hang_time);     // daddiu v1, s7, add-hang-time
+  c->sw(v1, 64, a1);                                // sw v1, 64(a1)
+  c->lui(v1, 16192);                                // lui v1, 16192
+  c->sd(v1, 16, a1);                                // sd v1, 16(a1)
+  c->load_symbol2(t9, cache.send_event_function);   // lw t9, send-event-function(s7)
+  c->ld(v1, 3932, gp);                              // ld v1, 3932(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L293
+    c->mov64(a0, s7);                               // or a0, s7, r0
+    goto block_86;
+  }
+  
+block_83:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a2, 0, a0);                                // lwu a2, 0(a0)
+  c->lw(a0, 48, a2);                                // lw a0, 48(a2)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a0);              // bne v1, a0, L292
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_85;}                          // branch non-likely
+
+  c->mov64(a0, a2);                                 // or a0, a2, r0
+  
+block_85:
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_86:
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  c->load_symbol2(t9, cache.rand_uint31_gen);       // lw t9, rand-uint31-gen(s7)
+  c->load_symbol2(a0, cache.random_generator);      // lw a0, *random-generator*(s7)
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  c->dsra(v1, v1, 8);                               // dsra v1, v1, 8
+  c->lui(a0, 16256);                                // lui a0, 16256
+  c->or_(v1, a0, v1);                               // or v1, a0, v1
+  c->lui(a0, -16512);                               // lui a0, -16512
+  c->mtc1(f0, a0);                                  // mtc1 f0, a0
+  c->mtc1(f1, v1);                                  // mtc1 f1, v1
+  c->adds(f0, f0, f1);                              // add.s f0, f0, f1
+  c->mfc1(v1, f0);                                  // mfc1 v1, f0
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->lui(v1, 15820);                                // lui v1, 15820
+  c->ori(v1, v1, 52429);                            // ori v1, v1, 52429
+  c->mtc1(f1, v1);                                  // mtc1 f1, v1
+  cop1_bc = c->fprs[f0] < c->fprs[f1];              // c.lt.s f0, f1
+  bc = !cop1_bc;                                    // bc1f L294
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_88;}                          // branch non-likely
+
+  c->lb(v1, 2116, gp);                              // lb v1, 2116(gp)
+  c->dsll(v1, v1, 2);                               // dsll v1, v1, 2
+  c->load_symbol2(a0, cache.net_players);           // lw a0, *net-players*(s7)
+  c->daddu(v1, v1, a0);                             // daddu v1, v1, a0
+  c->lwu(a0, 12, v1);                               // lwu a0, 12(v1)
+  c->lwu(v1, -4, a0);                               // lwu v1, -4(a0)
+  c->lwu(t9, 368, v1);                              // lwu t9, 368(v1)
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  
+block_88:
+  //beq r0, r0, L299                                // beq r0, r0, L299
+  // nop                                            // sll r0, r0, 0
+  goto block_98;                                    // branch always
+
+  
+block_89:
+  c->load_symbol2(v1, cache.freeze_hangtime);       // lw v1, *freeze-hangtime*(s7)
+  bc = c->sgpr64(s7) != c->sgpr64(v1);              // bne s7, v1, L299
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_98;}                          // branch non-likely
+
+  c->daddiu(a1, sp, 16);                            // daddiu a1, sp, 16
+  c->mov64(v1, s6);                                 // or v1, s6, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L296
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_92;}                          // branch non-likely
+
+  c->lwu(a0, 28, v1);                               // lwu a0, 28(v1)
+  
+block_92:
+  c->sw(a0, 8, a1);                                 // sw a0, 8(a1)
+  c->addiu(v1, r0, 1);                              // addiu v1, r0, 1
+  c->sw(v1, 68, a1);                                // sw v1, 68(a1)
+  c->load_symbol_addr(v1, cache.kill_hud);          // daddiu v1, s7, kill-hud
+  c->sw(v1, 64, a1);                                // sw v1, 64(a1)
+  c->addiu(v1, r0, 150);                            // addiu v1, r0, 150
+  c->sd(v1, 16, a1);                                // sd v1, 16(a1)
+  c->load_symbol2(t9, cache.send_event_function);   // lw t9, send-event-function(s7)
+  c->ld(v1, 3932, gp);                              // ld v1, 3932(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L298
+    c->mov64(a0, s7);                               // or a0, s7, r0
+    goto block_97;
+  }
+  
+block_94:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a2, 0, a0);                                // lwu a2, 0(a0)
+  c->lw(a0, 48, a2);                                // lw a0, 48(a2)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a0);              // bne v1, a0, L297
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_96;}                          // branch non-likely
+
+  c->mov64(a0, a2);                                 // or a0, a2, r0
+  
+block_96:
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_97:
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  c->sd(s7, 3932, gp);                              // sd s7, 3932(gp)
+  c->load_symbol2(t9, cache.sound_stop);            // lw t9, sound-stop(s7)
+  c->lwu(a0, 3880, gp);                             // lwu a0, 3880(gp)
+  c->daddiu(a1, s7, 4);                             // daddiu a1, s7, #t
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->sw(r0, 3880, gp);                              // sw r0, 3880(gp)
+  c->mtc1(f0, r0);                                  // mtc1 f0, r0
+  c->swc1(f0, 3940, gp);                            // swc1 f0, 3940(gp)
+  c->mfc1(v1, f0);                                  // mfc1 v1, f0
+  
+block_98:
+  //beq r0, r0, L304                                // beq r0, r0, L304
+  // nop                                            // sll r0, r0, 0
+  goto block_108;                                   // branch always
+
+  
+block_99:
+  c->load_symbol2(v1, cache.freeze_hangtime);       // lw v1, *freeze-hangtime*(s7)
+  bc = c->sgpr64(s7) != c->sgpr64(v1);              // bne s7, v1, L304
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_108;}                         // branch non-likely
+
+  c->daddiu(a1, sp, 16);                            // daddiu a1, sp, 16
+  c->mov64(v1, s6);                                 // or v1, s6, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L301
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_102;}                         // branch non-likely
+
+  c->lwu(a0, 28, v1);                               // lwu a0, 28(v1)
+  
+block_102:
+  c->sw(a0, 8, a1);                                 // sw a0, 8(a1)
+  c->addiu(v1, r0, 1);                              // addiu v1, r0, 1
+  c->sw(v1, 68, a1);                                // sw v1, 68(a1)
+  c->load_symbol_addr(v1, cache.kill_hud);          // daddiu v1, s7, kill-hud
+  c->sw(v1, 64, a1);                                // sw v1, 64(a1)
+  c->addiu(v1, r0, 150);                            // addiu v1, r0, 150
+  c->sd(v1, 16, a1);                                // sd v1, 16(a1)
+  c->load_symbol2(t9, cache.send_event_function);   // lw t9, send-event-function(s7)
+  c->ld(v1, 3932, gp);                              // ld v1, 3932(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L303
+    c->mov64(a0, s7);                               // or a0, s7, r0
+    goto block_107;
+  }
+  
+block_104:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a2, 0, a0);                                // lwu a2, 0(a0)
+  c->lw(a0, 48, a2);                                // lw a0, 48(a2)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a0);              // bne v1, a0, L302
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_106;}                         // branch non-likely
+
+  c->mov64(a0, a2);                                 // or a0, a2, r0
+  
+block_106:
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_107:
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  c->sd(s7, 3932, gp);                              // sd s7, 3932(gp)
+  c->load_symbol2(t9, cache.sound_stop);            // lw t9, sound-stop(s7)
+  c->lwu(a0, 3880, gp);                             // lwu a0, 3880(gp)
+  c->daddiu(a1, s7, 4);                             // daddiu a1, s7, #t
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->sw(r0, 3880, gp);                              // sw r0, 3880(gp)
+  c->mtc1(f0, r0);                                  // mtc1 f0, r0
+  c->swc1(f0, 3940, gp);                            // swc1 f0, 3940(gp)
+  c->mfc1(v1, f0);                                  // mfc1 v1, f0
+  
+block_108:
+  c->lui(v1, 15872);                                // lui v1, 15872
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->lwc1(f1, 2448, gp);                            // lwc1 f1, 2448(gp)
+  cop1_bc = c->fprs[f0] < c->fprs[f1];              // c.lt.s f0, f1
+  bc = !cop1_bc;                                    // bc1f L332
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_177;}                         // branch non-likely
+
+  c->mtc1(f0, r0);                                  // mtc1 f0, r0
+  c->lui(v1, -16768);                               // lui v1, -16768
+  c->mtc1(f1, v1);                                  // mtc1 f1, v1
+  c->lui(v1, 15194);                                // lui v1, 15194
+  c->ori(v1, v1, 29710);                            // ori v1, v1, 29710
+  c->mtc1(f2, v1);                                  // mtc1 f2, v1
+  c->lwu(v1, 2452, gp);                             // lwu v1, 2452(gp)
+  c->dsubu(v1, s4, v1);                             // dsubu v1, s4, v1
+  c->mtc1(f3, v1);                                  // mtc1 f3, v1
+  c->cvtsw(f3, f3);                                 // cvt.s.w f3, f3
+  c->muls(f2, f2, f3);                              // mul.s f2, f2, f3
+  c->adds(f1, f1, f2);                              // add.s f1, f1, f2
+  c->maxs(f30, f0, f1);                             // max.s f30, f0, f1
+  c->sw(r0, 3912, gp);                              // sw r0, 3912(gp)
+  c->lwc1(f0, 3916, gp);                            // lwc1 f0, 3916(gp)
+  c->lwu(v1, 228, gp);                              // lwu v1, 228(gp)
+  c->daddiu(v1, v1, 140);                           // daddiu v1, v1, 140
+  c->lqc2(vf1, 0, v1);                              // lqc2 vf1, 0(v1)
+  c->vmul(DEST::xyzw, vf1, vf1, vf1);               // vmul.xyzw vf1, vf1, vf1
+  c->vmula_bc(DEST::w, BC::x, vf0, vf1);            // vmulax.w acc, vf0, vf1
+  c->vmadda_bc(DEST::w, BC::y, vf0, vf1);           // vmadday.w acc, vf0, vf1
+  c->vmadd_bc(DEST::w, BC::z, vf1, vf0, vf1);       // vmaddz.w vf1, vf0, vf1
+  c->vsqrt(vf1, BC::w);                             // vsqrt Q, vf1.w
+  c->vadd_bc(DEST::x, BC::w, vf1, vf0, vf0);        // vaddw.x vf1, vf0, vf0
+  c->vwaitq();                                      // vwaitq
+  c->vmulq(DEST::x, vf1, vf1);                      // vmulq.x vf1, vf1, Q
+  // nop                                            // vnop
+  // nop                                            // vnop
+  c->mov128_gpr_vf(v1, vf1);                        // qmfc2.i v1, vf1
+  c->mtc1(f1, v1);                                  // mtc1 f1, v1
+  c->mtc1(f2, s5);                                  // mtc1 f2, s5
+  c->muls(f1, f1, f2);                              // mul.s f1, f1, f2
+  c->adds(f0, f0, f1);                              // add.s f0, f0, f1
+  c->swc1(f0, 3916, gp);                            // swc1 f0, 3916(gp)
+  c->lui(v1, 18504);                                // lui v1, 18504
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->lwc1(f1, 3916, gp);                            // lwc1 f1, 3916(gp)
+  cop1_bc = c->fprs[f0] < c->fprs[f1];              // c.lt.s f0, f1
+  bc = cop1_bc;                                     // bc1t L305
+  c->daddiu(v1, s7, 4);                             // daddiu v1, s7, 4
+  if (bc) {goto block_111;}                         // branch non-likely
+
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  
+block_111:
+  if (((s64)c->sgpr64(s7)) == ((s64)c->sgpr64(v1))) {// beql s7, v1, L308
+    c->mov64(v1, v1);                               // or v1, v1, r0
+    goto block_120;
+  }
+  
+block_113:
+  c->ld(v1, 3932, gp);                              // ld v1, 3932(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L307
+    c->mov64(v1, s7);                               // or v1, s7, r0
+    goto block_118;
+  }
+  
+block_115:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a0, 0, a0);                                // lwu a0, 0(a0)
+  c->lw(a1, 48, a0);                                // lw a1, 48(a0)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a1);              // bne v1, a1, L306
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_117;}                         // branch non-likely
+
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_117:
+  c->mov64(a0, v1);                                 // or a0, v1, r0
+  
+block_118:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L308
+  c->daddiu(v1, s7, 4);                             // daddiu v1, s7, 4
+  if (bc) {goto block_120;}                         // branch non-likely
+
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  
+block_120:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L331
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_176;}                         // branch non-likely
+
+  c->daddiu(a1, sp, 16);                            // daddiu a1, sp, 16
+  c->mov64(v1, s6);                                 // or v1, s6, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L309
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_123;}                         // branch non-likely
+
+  c->lwu(a0, 28, v1);                               // lwu a0, 28(v1)
+  
+block_123:
+  c->sw(a0, 8, a1);                                 // sw a0, 8(a1)
+  c->addiu(v1, r0, 1);                              // addiu v1, r0, 1
+  c->sw(v1, 68, a1);                                // sw v1, 68(a1)
+  c->load_symbol_addr(v1, cache.set_slide_distance);// daddiu v1, s7, set-slide-distance
+  c->sw(v1, 64, a1);                                // sw v1, 64(a1)
+  c->lwc1(f0, 3916, gp);                            // lwc1 f0, 3916(gp)
+  c->mfc1(v1, f0);                                  // mfc1 v1, f0
+  c->sd(v1, 16, a1);                                // sd v1, 16(a1)
+  c->load_symbol2(t9, cache.send_event_function);   // lw t9, send-event-function(s7)
+  c->ld(v1, 3924, gp);                              // ld v1, 3924(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L311
+    c->mov64(a0, s7);                               // or a0, s7, r0
+    goto block_128;
+  }
+  
+block_125:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a2, 0, a0);                                // lwu a2, 0(a0)
+  c->lw(a0, 48, a2);                                // lw a0, 48(a2)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a0);              // bne v1, a0, L310
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_127;}                         // branch non-likely
+
+  c->mov64(a0, a2);                                 // or a0, a2, r0
+  
+block_127:
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_128:
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  c->ld(v1, 260, gp);                               // ld v1, 260(gp)
+  c->andi(v1, v1, 8);                               // andi v1, v1, 8
+  if (((s64)c->sgpr64(v1)) != ((s64)0)) {           // bnel v1, r0, L318
+    c->mov64(v1, s7);                               // or v1, s7, r0
+    goto block_147;
+  }
+  
+block_130:
+  c->ld(v1, 3924, gp);                              // ld v1, 3924(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L313
+    c->mov64(v1, s7);                               // or v1, s7, r0
+    goto block_135;
+  }
+  
+block_132:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a0, 0, a0);                                // lwu a0, 0(a0)
+  c->lw(a1, 48, a0);                                // lw a1, 48(a0)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a1);              // bne v1, a1, L312
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_134;}                         // branch non-likely
+
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_134:
+  c->mov64(a0, v1);                                 // or a0, v1, r0
+  
+block_135:
+  if (((s64)c->sgpr64(s7)) == ((s64)c->sgpr64(v1))) {// beql s7, v1, L317
+    c->mov64(v1, v1);                               // or v1, v1, r0
+    goto block_145;
+  }
+  
+block_137:
+  c->daddiu(a1, sp, 16);                            // daddiu a1, sp, 16
+  c->mov64(v1, s6);                                 // or v1, s6, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L314
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_139;}                         // branch non-likely
+
+  c->lwu(a0, 28, v1);                               // lwu a0, 28(v1)
+  
+block_139:
+  c->sw(a0, 8, a1);                                 // sw a0, 8(a1)
+  c->sw(r0, 68, a1);                                // sw r0, 68(a1)
+  c->load_symbol_addr(v1, cache.revive_hud);        // daddiu v1, s7, revive-hud
+  c->sw(v1, 64, a1);                                // sw v1, 64(a1)
+  c->load_symbol2(t9, cache.send_event_function);   // lw t9, send-event-function(s7)
+  c->ld(v1, 3924, gp);                              // ld v1, 3924(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L316
+    c->mov64(a0, s7);                               // or a0, s7, r0
+    goto block_144;
+  }
+  
+block_141:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a2, 0, a0);                                // lwu a2, 0(a0)
+  c->lw(a0, 48, a2);                                // lw a0, 48(a2)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a0);              // bne v1, a0, L315
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_143;}                         // branch non-likely
+
+  c->mov64(a0, a2);                                 // or a0, a2, r0
+  
+block_143:
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_144:
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  
+block_145:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L318
+  c->daddiu(v1, s7, 4);                             // daddiu v1, s7, 4
+  if (bc) {goto block_147;}                         // branch non-likely
+
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  
+block_147:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L322
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_155;}                         // branch non-likely
+
+  c->load_symbol2(v1, cache.viewport_array);        // lw v1, *viewport-array*(s7)
+  c->lwu(v1, 0, v1);                                // lwu v1, 0(v1)
+  bc = c->sgpr64(v1) != 0;                          // bne v1, r0, L322
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_155;}                         // branch non-likely
+
+  c->load_symbol2(t9, cache.spawn_power_slide_hud_single);// lw t9, spawn-power-slide-hud-single(s7)
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(a0, v0);                                 // or a0, v0, r0
+  bc = c->sgpr64(s7) == c->sgpr64(a0);              // beq s7, a0, L319
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_151;}                         // branch non-likely
+
+  c->lwu(v1, 28, a0);                               // lwu v1, 28(a0)
+  
+block_151:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L320
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_153;}                         // branch non-likely
+
+  c->lwu(a0, 0, v1);                                // lwu a0, 0(v1)
+  c->lw(a0, 48, a0);                                // lw a0, 48(a0)
+  c->dsll32(a0, a0, 0);                             // dsll32 a0, a0, 0
+  //beq r0, r0, L321                                // beq r0, r0, L321
+  // nop                                            // sll r0, r0, 0
+  goto block_154;                                   // branch always
+
+  
+block_153:
+  c->addiu(a0, r0, 0);                              // addiu a0, r0, 0
+  
+block_154:
+  c->sllv(v1, v1, r0);                              // sllv v1, v1, r0
+  c->or_(v1, a0, v1);                               // or v1, a0, v1
+  c->sd(v1, 3924, gp);                              // sd v1, 3924(gp)
+  c->mtc1(f0, r0);                                  // mtc1 f0, r0
+  c->swc1(f0, 3944, gp);                            // swc1 f0, 3944(gp)
+  c->mfc1(v1, f0);                                  // mfc1 v1, f0
+  
+block_155:
+  c->ld(v1, 3924, gp);                              // ld v1, 3924(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L324
+    c->mov64(v1, s7);                               // or v1, s7, r0
+    goto block_160;
+  }
+  
+block_157:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a0, 0, a0);                                // lwu a0, 0(a0)
+  c->lw(a1, 48, a0);                                // lw a1, 48(a0)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a1);              // bne v1, a1, L323
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_159;}                         // branch non-likely
+
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_159:
+  c->mov64(a0, v1);                                 // or a0, v1, r0
+  
+block_160:
+  if (((s64)c->sgpr64(s7)) == ((s64)c->sgpr64(v1))) {// beql s7, v1, L326
+    c->mov64(v1, v1);                               // or v1, v1, r0
+    goto block_168;
+  }
+  
+block_162:
+  c->lwc1(f0, 3944, gp);                            // lwc1 f0, 3944(gp)
+  c->lwc1(f1, 3916, gp);                            // lwc1 f1, 3916(gp)
+  cop1_bc = c->fprs[f0] < c->fprs[f1];              // c.lt.s f0, f1
+  bc = cop1_bc;                                     // bc1t L325
+  c->daddiu(v1, s7, 4);                             // daddiu v1, s7, 4
+  if (bc) {goto block_164;}                         // branch non-likely
+
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  
+block_164:
+  if (((s64)c->sgpr64(s7)) == ((s64)c->sgpr64(v1))) {// beql s7, v1, L326
+    c->mov64(v1, v1);                               // or v1, v1, r0
+    goto block_168;
+  }
+  
+block_166:
+  c->load_symbol2(v1, cache.setting_control);       // lw v1, *setting-control*(s7)
+  c->lwc1(f0, 492, v1);                             // lwc1 f0, 492(v1)
+  c->mtc1(f1, r0);                                  // mtc1 f1, r0
+  cop1_bc = c->fprs[f0] == c->fprs[f1];             // c.eq.s f0, f1
+  bc = cop1_bc;                                     // bc1t L326
+  c->daddiu(v1, s7, 4);                             // daddiu v1, s7, 4
+  if (bc) {goto block_168;}                         // branch non-likely
+
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  
+block_168:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L331
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_176;}                         // branch non-likely
+
+  c->load_symbol2(t9, cache.make_sound_instance);   // lw t9, make-sound-instance(s7)
+  c->load_symbol2(v1, cache.sound_info);            // lw v1, *sound-info*(s7)
+  c->lwu(a0, 1300, v1);                             // lwu a0, 1300(v1)
+  c->addiu(a1, r0, 0);                              // addiu a1, r0, 0
+  c->mov64(a2, s7);                                 // or a2, s7, r0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L327
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_171;}                         // branch non-likely
+
+  c->lwu(v1, 80, v1);                               // lwu v1, 80(v1)
+  //beq r0, r0, L328                                // beq r0, r0, L328
+  // nop                                            // sll r0, r0, 0
+  goto block_172;                                   // branch always
+
+  
+block_171:
+  c->addiu(v1, r0, 0);                              // addiu v1, r0, 0
+  
+block_172:
+  //beq r0, r0, L330                                // beq r0, r0, L330
+  // nop                                            // sll r0, r0, 0
+  goto block_174;                                   // branch always
+
+  
+block_173:
+  c->lui(v1, 18080);                                // lui v1, 18080
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->lwc1(f1, 3944, gp);                            // lwc1 f1, 3944(gp)
+  c->adds(f0, f0, f1);                              // add.s f0, f0, f1
+  c->swc1(f0, 3944, gp);                            // swc1 f0, 3944(gp)
+  
+block_174:
+  c->lwc1(f0, 3944, gp);                            // lwc1 f0, 3944(gp)
+  c->lwc1(f1, 3916, gp);                            // lwc1 f1, 3916(gp)
+  cop1_bc = c->fprs[f0] < c->fprs[f1];              // c.lt.s f0, f1
+  bc = cop1_bc;                                     // bc1t L329
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_173;}                         // branch non-likely
+
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  
+block_176:
+  c->lui(v1, 16256);                                // lui v1, 16256
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->lwc1(f1, 700, gp);                             // lwc1 f1, 700(gp)
+  c->lui(v1, 16128);                                // lui v1, 16128
+  c->mtc1(f2, v1);                                  // mtc1 f2, v1
+  c->muls(f2, f2, f30);                             // mul.s f2, f2, f30
+  c->mtc1(f3, s5);                                  // mtc1 f3, s5
+  c->muls(f2, f2, f3);                              // mul.s f2, f2, f3
+  c->adds(f1, f1, f2);                              // add.s f1, f1, f2
+  c->mins(f0, f0, f1);                              // min.s f0, f0, f1
+  c->swc1(f0, 700, gp);                             // swc1 f0, 700(gp)
+  c->mfc1(v1, f0);                                  // mfc1 v1, f0
+  //beq r0, r0, L343                                // beq r0, r0, L343
+  // nop                                            // sll r0, r0, 0
+  goto block_200;                                   // branch always
+
+  
+block_177:
+  c->lwu(v1, 3912, gp);                             // lwu v1, 3912(gp)
+  c->lwu(a0, 8, s6);                                // lwu a0, 8(s6)
+  c->ld(a0, 20, a0);                                // ld a0, 20(a0)
+  c->lwu(a1, 8, s6);                                // lwu a1, 8(s6)
+  c->ld(a1, 28, a1);                                // ld a1, 28(a1)
+  c->dsubu(a0, a0, a1);                             // dsubu a0, a0, a1
+  c->daddu(v1, v1, a0);                             // daddu v1, v1, a0
+  c->sw(v1, 3912, gp);                              // sw v1, 3912(gp)
+  c->addiu(v1, r0, 75);                             // addiu v1, r0, 75
+  c->lwu(a0, 3912, gp);                             // lwu a0, 3912(gp)
+  c->sltu(v1, v1, a0);                              // sltu v1, v1, a0
+  bc = c->sgpr64(v1) == 0;                          // beq v1, r0, L333
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_179;}                         // branch non-likely
+
+  c->mtc1(f0, r0);                                  // mtc1 f0, r0
+  c->swc1(f0, 3916, gp);                            // swc1 f0, 3916(gp)
+  c->mfc1(v1, f0);                                  // mfc1 v1, f0
+  
+block_179:
+  c->mov64(a0, gp);                                 // or a0, gp, r0
+  c->lwu(v1, -4, a0);                               // lwu v1, -4(a0)
+  c->lwu(t9, 116, v1);                              // lwu t9, 116(v1)
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L339
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_192;}                         // branch non-likely
+
+  c->lb(v1, 2116, gp);                              // lb v1, 2116(gp)
+  c->load_symbol2(a0, cache.net_mgr);               // lw a0, *net-mgr*(s7)
+  bc = c->sgpr64(s7) == c->sgpr64(a0);              // beq s7, a0, L334
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_182;}                         // branch non-likely
+
+  c->load_symbol2(a0, cache.net_mgr);               // lw a0, *net-mgr*(s7)
+  c->lw(a0, 152, a0);                               // lw a0, 152(a0)
+  //beq r0, r0, L335                                // beq r0, r0, L335
+  // nop                                            // sll r0, r0, 0
+  goto block_183;                                   // branch always
+
+  
+block_182:
+  c->addiu(a0, r0, 0);                              // addiu a0, r0, 0
+  
+block_183:
+  c->dsll(a0, a0, 1);                               // dsll a0, a0, 1
+  c->dsubu(v1, v1, a0);                             // dsubu v1, v1, a0
+  c->daddiu(a0, s7, 4);                             // daddiu a0, s7, 4
+  c->movn(a0, s7, v1);                              // movn a0, s7, v1
+  if (((s64)c->sgpr64(s7)) != ((s64)c->sgpr64(a0))) {// bnel s7, a0, L338
+    c->mov64(v1, a0);                               // or v1, a0, r0
+    goto block_189;
+  }
+  
+block_185:
+  c->lb(v1, 2116, gp);                              // lb v1, 2116(gp)
+  c->load_symbol2(a0, cache.net_mgr);               // lw a0, *net-mgr*(s7)
+  bc = c->sgpr64(s7) == c->sgpr64(a0);              // beq s7, a0, L336
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_187;}                         // branch non-likely
+
+  c->load_symbol2(a0, cache.net_mgr);               // lw a0, *net-mgr*(s7)
+  c->lw(a0, 152, a0);                               // lw a0, 152(a0)
+  //beq r0, r0, L337                                // beq r0, r0, L337
+  // nop                                            // sll r0, r0, 0
+  goto block_188;                                   // branch always
+
+  
+block_187:
+  c->addiu(a0, r0, 0);                              // addiu a0, r0, 0
+  
+block_188:
+  c->dsll(a0, a0, 1);                               // dsll a0, a0, 1
+  c->daddiu(a0, a0, 1);                             // daddiu a0, a0, 1
+  c->dsubu(a0, v1, a0);                             // dsubu a0, v1, a0
+  c->daddiu(v1, s7, 4);                             // daddiu v1, s7, 4
+  c->movn(v1, s7, a0);                              // movn v1, s7, a0
+  
+block_189:
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L339
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_192;}                         // branch non-likely
+
+  c->lb(v1, 2116, gp);                              // lb v1, 2116(gp)
+  c->dsll(v1, v1, 2);                               // dsll v1, v1, 2
+  c->load_symbol2(a0, cache.net_players);           // lw a0, *net-players*(s7)
+  c->daddu(v1, v1, a0);                             // daddu v1, v1, a0
+  c->lwu(a0, 12, v1);                               // lwu a0, 12(v1)
+  bc = c->sgpr64(s7) == c->sgpr64(a0);              // beq s7, a0, L339
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_192;}                         // branch non-likely
+
+  c->lwu(v1, -4, a0);                               // lwu v1, -4(a0)
+  c->lwu(t9, 280, v1);                              // lwu t9, 280(v1)
+  c->lui(v1, 14720);                                // lui v1, 14720
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->lwc1(f1, 3916, gp);                            // lwc1 f1, 3916(gp)
+  c->muls(f0, f0, f1);                              // mul.s f0, f0, f1
+  c->mfc1(a1, f0);                                  // mfc1 a1, f0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  
+block_192:
+  c->daddiu(a1, sp, 16);                            // daddiu a1, sp, 16
+  c->mov64(v1, s6);                                 // or v1, s6, r0
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L340
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_194;}                         // branch non-likely
+
+  c->lwu(a0, 28, v1);                               // lwu a0, 28(v1)
+  
+block_194:
+  c->sw(a0, 8, a1);                                 // sw a0, 8(a1)
+  c->addiu(v1, r0, 1);                              // addiu v1, r0, 1
+  c->sw(v1, 68, a1);                                // sw v1, 68(a1)
+  c->load_symbol_addr(v1, cache.kill_hud);          // daddiu v1, s7, kill-hud
+  c->sw(v1, 64, a1);                                // sw v1, 64(a1)
+  c->addiu(v1, r0, 300);                            // addiu v1, r0, 300
+  c->sd(v1, 16, a1);                                // sd v1, 16(a1)
+  c->load_symbol2(t9, cache.send_event_function);   // lw t9, send-event-function(s7)
+  c->ld(v1, 3924, gp);                              // ld v1, 3924(gp)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L342
+    c->mov64(a0, s7);                               // or a0, s7, r0
+    goto block_199;
+  }
+  
+block_196:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a2, 0, a0);                                // lwu a2, 0(a0)
+  c->lw(a0, 48, a2);                                // lw a0, 48(a2)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a0);              // bne v1, a0, L341
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_198;}                         // branch non-likely
+
+  c->mov64(a0, a2);                                 // or a0, a2, r0
+  
+block_198:
+  c->mov64(v1, a0);                                 // or v1, a0, r0
+  
+block_199:
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  c->sd(s7, 3924, gp);                              // sd s7, 3924(gp)
+  c->sw(s4, 2452, gp);                              // sw s4, 2452(gp)
+  
+block_200:
+  c->addiu(s5, r0, 0);                              // addiu s5, r0, 0
+  //beq r0, r0, L350                                // beq r0, r0, L350
+  // nop                                            // sll r0, r0, 0
+  goto block_214;                                   // branch always
+
+  
+block_201:
+  c->dsll(v1, s5, 3);                               // dsll v1, s5, 3
+  c->daddu(v1, v1, gp);                             // daddu v1, v1, gp
+  c->ld(v1, 3948, v1);                              // ld v1, 3948(v1)
+  c->subu(a0, v1, s7);                              // subu a0, v1, s7
+  if (((s64)c->sgpr64(a0)) == ((s64)0)) {           // beql a0, r0, L346
+    c->mov64(s4, s7);                               // or s4, s7, r0
+    goto block_206;
+  }
+  
+block_203:
+  c->sllv(a0, v1, r0);                              // sllv a0, v1, r0
+  c->lwu(a0, 0, a0);                                // lwu a0, 0(a0)
+  c->lw(a1, 48, a0);                                // lw a1, 48(a0)
+  c->dsra32(v1, v1, 0);                             // dsra32 v1, v1, 0
+  bc = c->sgpr64(v1) != c->sgpr64(a1);              // bne v1, a1, L345
+  c->mov64(s4, s7);                                 // or s4, s7, r0
+  if (bc) {goto block_205;}                         // branch non-likely
+
+  c->mov64(s4, a0);                                 // or s4, a0, r0
+  
+block_205:
+  c->mov64(v1, s4);                                 // or v1, s4, r0
+  
+block_206:
+  c->load_symbol2(t9, cache.type);                  // lw t9, type?(s7)
+  c->mov64(a0, s4);                                 // or a0, s4, r0
+  c->load_symbol2(a1, cache.process_focusable);     // lw a1, process-focusable(s7)
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  bc = c->sgpr64(s7) == c->sgpr64(v0);              // beq s7, v0, L347
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_208;}                         // branch non-likely
+
+  c->mov64(v1, s4);                                 // or v1, s4, r0
+  
+block_208:
+  if (((s64)c->sgpr64(s7)) == ((s64)c->sgpr64(v1))) {// beql s7, v1, L348
+    c->mov64(a0, v1);                               // or a0, v1, r0
+    goto block_211;
+  }
+  
+block_210:
+  c->daddiu(a0, s7, 4);                             // daddiu a0, s7, 4
+  c->ld(a1, 244, v1);                               // ld a1, 244(v1)
+  c->andi(a1, a1, 16384);                           // andi a1, a1, 16384
+  c->movz(a0, s7, a1);                              // movz a0, s7, a1
+  
+block_211:
+  bc = c->sgpr64(s7) == c->sgpr64(a0);              // beq s7, a0, L349
+  c->mov64(a0, s7);                                 // or a0, s7, r0
+  if (bc) {goto block_213;}                         // branch non-likely
+
+  c->mov64(a0, gp);                                 // or a0, gp, r0
+  c->lwu(a1, -4, a0);                               // lwu a1, -4(a0)
+  c->lwu(t9, 932, a1);                              // lwu t9, 932(a1)
+  c->lwu(v1, 184, v1);                              // lwu v1, 184(v1)
+  c->daddiu(a1, v1, 12);                            // daddiu a1, v1, 12
+  c->mov64(a2, s5);                                 // or a2, s5, r0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(a0, v0);                                 // or a0, v0, r0
+  
+block_213:
+  c->daddiu(s5, s5, 1);                             // daddiu s5, s5, 1
+  
+block_214:
+  c->lwu(v1, 252, gp);                              // lwu v1, 252(gp)
+  c->lb(v1, 3041, v1);                              // lb v1, 3041(v1)
+  c->slt(v1, s5, v1);                               // slt v1, s5, v1
+  bc = c->sgpr64(v1) != 0;                          // bne v1, r0, L344
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_201;}                         // branch non-likely
+
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  c->gprs[v0].du64[0] = 0;                          // or v0, r0, r0
+  c->ld(ra, 0, sp);                                 // ld ra, 0(sp)
+  c->lwc1(f30, 144, sp);                            // lwc1 f30, 144(sp)
+  c->lq(gp, 128, sp);                               // lq gp, 128(sp)
+  c->lq(s5, 112, sp);                               // lq s5, 112(sp)
+  c->lq(s4, 96, sp);                                // lq s4, 96(sp)
+  //jr ra                                           // jr ra
+  c->daddiu(sp, sp, 160);                           // daddiu sp, sp, 160
+  goto end_of_function;                             // return
+
+  // nop                                            // sll r0, r0, 0
+  // nop                                            // sll r0, r0, 0
+end_of_function:
+  return c->gprs[v0].du64[0];
+}
+
+void link() {
+  cache.freeze_hangtime = intern_from_c(-1, 0, "*freeze-hangtime*").c();
+  cache.net_game_mgr = intern_from_c(-1, 0, "*net-game-mgr*").c();
+  cache.net_mgr = intern_from_c(-1, 0, "*net-mgr*").c();
+  cache.net_players = intern_from_c(-1, 0, "*net-players*").c();
+  cache.random_generator = intern_from_c(-1, 0, "*random-generator*").c();
+  cache.setting_control = intern_from_c(-1, 0, "*setting-control*").c();
+  cache.sound_info = intern_from_c(-1, 0, "*sound-info*").c();
+  cache.viewport_array = intern_from_c(-1, 0, "*viewport-array*").c();
+  cache.add_hang_time = intern_from_c(-1, 0, "add-hang-time").c();
+  cache.kill_hud = intern_from_c(-1, 0, "kill-hud").c();
+  cache.make_sound_instance = intern_from_c(-1, 0, "make-sound-instance").c();
+  cache.process_focusable = intern_from_c(-1, 0, "process-focusable").c();
+  cache.rand_uint31_gen = intern_from_c(-1, 0, "rand-uint31-gen").c();
+  cache.revive_hud = intern_from_c(-1, 0, "revive-hud").c();
+  cache.send_event_function = intern_from_c(-1, 0, "send-event-function").c();
+  cache.set_slide_distance = intern_from_c(-1, 0, "set-slide-distance").c();
+  cache.sound_stop = intern_from_c(-1, 0, "sound-stop").c();
+  cache.spawn_hang_time_hud_single = intern_from_c(-1, 0, "spawn-hang-time-hud-single").c();
+  cache.spawn_power_slide_hud_single = intern_from_c(-1, 0, "spawn-power-slide-hud-single").c();
+  cache.stats_biggest_air = intern_from_c(-1, 0, "stats-biggest-air").c();
+  cache.type = intern_from_c(-1, 0, "type?").c();
+  gLinkedFunctionTable.reg("wv-player-post-move-update", execute, 160);
+}
+
+} // namespace wv_player_post_move_update
+
 } // namespace Mips2C::jakx
