@@ -536,6 +536,7 @@
   "net-enemy.o"
   "explosion.o"
   "wvehicle-weapons-data.o"
+  "wvehicle-events.o"
   "net-hud.o"
   "hud-effects.o"
   "hud-widgets.o"

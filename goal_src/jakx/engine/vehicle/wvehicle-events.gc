@@ -1,0 +1,46 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; name: wvehicle-events.gc
+;; name in dgo: wvehicle-events
+;; dgos: GAME
+
+;; Stub port of wvehicle-events. Original (decompiler_out/jakx/wvehicle-events_disasm.gc,
+;; 1370 lines, 24 ;; ERROR markers, 4 unconvertible bodies) split into:
+;;   - 2 wvehicle method overrides (80=rbody-event-handler, 81=attack-handler)
+;;   - 7 event-handler functions (wv-go-handler, wv-weapon-handler, wv-pickup-handler,
+;;     wv-set-handler, wv-query-handler, handle-weapon-removed-event, handle-weapon-moved-event,
+;;     wv-weapon-pickup-helper). 4 of these were unconvertible by the decomp.
+;; All bodies are placeholders so GAME.CGO has the object file. Behavior is intentionally
+;; inert — wvehicle is not currently spawned at boot, so a non-functional handler
+;; cannot regress observable state. Per-handler porting is incremental from here.
+
+(defun wv-go-handler ()
+  (none))
+
+(defun wv-weapon-handler ()
+  (none))
+
+(defun wv-pickup-handler ()
+  (none))
+
+(defun wv-set-handler ()
+  (none))
+
+(defun wv-query-handler ()
+  (none))
+
+(defun handle-weapon-removed-event ()
+  (none))
+
+(defun handle-weapon-moved-event ()
+  (none))
+
+(defun wv-weapon-pickup-helper ()
+  (none))
+
+(defmethod rbody-event-handler ((this wvehicle) (proc process) (argc int) (message symbol) (block event-message-block))
+  (the-as object 0))
+
+(defmethod attack-handler ((this wvehicle) (proc process-drawable) (info attack-info) (tshape touching-shapes-entry) (pen penetrate))
+  (the-as symbol #f))
