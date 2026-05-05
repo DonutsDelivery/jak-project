@@ -261,6 +261,7 @@ set(RUNTIME_SOURCE
         mips2c/jakx_functions/sparticle_launcher.cpp
         mips2c/jakx_functions/spatial_hash.cpp
         mips2c/jakx_functions/texture.cpp
+        mips2c/jakx_functions/wvehicle.cpp
         mips2c/jakx_functions/wvehicle_part.cpp
         mips2c/mips2c_table.cpp
         overlord/common/dma.cpp

@@ -2431,7 +2431,10 @@
     "(method 115 v-panther)",
     "(method 66 v-possum)",
     "(method 100 v-possum)",
-    "(method 115 v-possum)"
+    "(method 115 v-possum)",
+    // wvehicle methods that fail to decompile to GOAL expressions
+    // (Tier 2 mips2c wraps; bodies in game/mips2c/jakx_functions/wvehicle.cpp)
+    "(method 64 wvehicle)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
