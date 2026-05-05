@@ -45787,6 +45787,7 @@
    (mesh        basic        :offset-assert 8) ;; actually race-mesh (stubbed)
    (line        race-line    :offset-assert 12)
    )
+  :pack-me
   :method-count-assert 10
   :size-assert         #x10
   :flag-assert         #xa00000010
@@ -46369,7 +46370,8 @@
 
 
 (deftype wvehicle (vehicle)
-  ((wvehicle-pad uint8 2523 :offset 2137))
+  ((wvehicle-pad uint8 2523 :offset 2137)
+   (race         race-control :inline :offset 2168))
   :method-count-assert 272
   :size-assert         #x1234
   :flag-assert         #x11011b01234
