@@ -5043,7 +5043,7 @@
 (define-extern estimate-eng-torque-from-gear (function wvehicle float int float))
 (define-extern plot-engine-torque-curve (function wvehicle matrix float float rgba none))
 (define-extern plot-x-with-transform (function matrix float float float rgba none))
-(define-extern vehicle-handle->net-player (function int none))
+(define-extern vehicle-handle->net-player (function handle net-player))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-events                ;;
