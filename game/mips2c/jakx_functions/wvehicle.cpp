@@ -7092,4 +7092,82 @@ void link() {
 
 } // namespace estimate_eng_torque_from_gear
 
+namespace method_224_wvehicle {
+u64 execute(void* ctxt) {
+  auto* c = (ExecutionContext*)ctxt;
+  bool bc = false;
+  u32 call_addr = 0;
+  bool cop1_bc = false;
+  c->lwu(v1, 252, a0);                              // lwu v1, 252(a0)
+  c->lwc1(f0, 2336, a0);                            // lwc1 f0, 2336(a0)
+  c->lwc1(f1, 720, a0);                             // lwc1 f1, 720(a0)
+  c->muls(f0, f0, f1);                              // mul.s f0, f0, f1
+  c->lui(a3, 16256);                                // lui a3, 16256
+  c->mtc1(f1, a3);                                  // mtc1 f1, a3
+  c->lwc1(f2, 216, v1);                             // lwc1 f2, 216(v1)
+  c->adds(f1, f1, f2);                              // add.s f1, f1, f2
+  c->muls(f0, f0, f1);                              // mul.s f0, f0, f1
+  c->lui(a3, -16948);                               // lui a3, -16948
+  c->ori(a3, a3, 52429);                            // ori a3, a3, 52429
+  c->mtc1(f1, a3);                                  // mtc1 f1, a3
+  c->mtc1(f2, a2);                                  // mtc1 f2, a2
+  c->mtc1(f3, r0);                                  // mtc1 f3, r0
+  c->lui(a2, 16256);                                // lui a2, 16256
+  c->mtc1(f4, a2);                                  // mtc1 f4, a2
+  c->mtc1(f5, a1);                                  // mtc1 f5, a1
+  c->lwc1(f6, 240, v1);                             // lwc1 f6, 240(v1)
+  c->subs(f5, f5, f6);                              // sub.s f5, f5, f6
+  c->lwc1(f6, 244, v1);                             // lwc1 f6, 244(v1)
+  c->divs(f5, f5, f6);                              // div.s f5, f5, f6
+  c->muls(f5, f5, f5);                              // mul.s f5, f5, f5
+  c->mfc1(a2, f5);                                  // mfc1 a2, f5
+  c->mtc1(f5, a2);                                  // mtc1 f5, a2
+  c->subs(f4, f4, f5);                              // sub.s f4, f4, f5
+  c->maxs(f3, f3, f4);                              // max.s f3, f3, f4
+  c->muls(f2, f2, f3);                              // mul.s f2, f2, f3
+  c->lui(a2, -16512);                               // lui a2, -16512
+  c->mtc1(f3, a2);                                  // mtc1 f3, a2
+  c->mtc1(f4, a1);                                  // mtc1 f4, a1
+  c->lwc1(f5, 240, v1);                             // lwc1 f5, 240(v1)
+  c->divs(f4, f4, f5);                              // div.s f4, f4, f5
+  c->muls(f3, f3, f4);                              // mul.s f3, f3, f4
+  c->lwc1(f4, 216, v1);                             // lwc1 f4, 216(v1)
+  c->muls(f3, f3, f4);                              // mul.s f3, f3, f4
+  c->lwc1(f4, 2380, a0);                            // lwc1 f4, 2380(a0)
+  c->mtc1(f5, r0);                                  // mtc1 f5, r0
+  cop1_bc = c->fprs[f4] == c->fprs[f5];             // c.eq.s f4, f5
+  bc = !cop1_bc;                                    // bc1f L367
+  // nop                                            // sll r0, r0, 0
+  if (bc) {goto block_2;}                           // branch non-likely
+
+  c->lui(v1, 16000);                                // lui v1, 16000
+  //beq r0, r0, L368                                // beq r0, r0, L368
+  // nop                                            // sll r0, r0, 0
+  goto block_3;                                     // branch always
+
+
+block_2:
+  c->lui(v1, 16256);                                // lui v1, 16256
+
+block_3:
+  c->mtc1(f4, v1);                                  // mtc1 f4, v1
+  c->muls(f3, f3, f4);                              // mul.s f3, f3, f4
+  c->adds(f2, f2, f3);                              // add.s f2, f2, f3
+  c->maxs(f1, f1, f2);                              // max.s f1, f1, f2
+  c->muls(f0, f0, f1);                              // mul.s f0, f0, f1
+  c->mfc1(v0, f0);                                  // mfc1 v0, f0
+  //jr ra                                           // jr ra
+  c->daddu(sp, sp, r0);                             // daddu sp, sp, r0
+  goto end_of_function;                             // return
+
+end_of_function:
+  return c->gprs[v0].du64[0];
+}
+
+void link() {
+  gLinkedFunctionTable.reg("(method 224 wvehicle)", execute, 0);
+}
+
+} // namespace method_224_wvehicle
+
 } // namespace Mips2C::jakx
