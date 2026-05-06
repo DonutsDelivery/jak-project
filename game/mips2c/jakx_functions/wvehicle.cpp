@@ -6226,4 +6226,137 @@ void link() {
 
 } // namespace method_214_wvehicle
 
+namespace plot_x_with_transform {
+struct Cache {
+  void* draw_debug_line; // draw-debug-line
+  void* vector_matrix; // vector-matrix*!
+} cache;
+
+u64 execute(void* ctxt) {
+  auto* c = (ExecutionContext*)ctxt;
+  bool bc = false;
+  u32 call_addr = 0;
+  c->daddiu(sp, sp, -176);                          // daddiu sp, sp, -176
+  c->sd(ra, 0, sp);                                 // sd ra, 0(sp)
+  c->sq(s1, 80, sp);                                // sq s1, 80(sp)
+  c->sq(s2, 96, sp);                                // sq s2, 96(sp)
+  c->sq(s3, 112, sp);                               // sq s3, 112(sp)
+  c->sq(s4, 128, sp);                               // sq s4, 128(sp)
+  c->sq(s5, 144, sp);                               // sq s5, 144(sp)
+  c->sq(gp, 160, sp);                               // sq gp, 160(sp)
+  c->mov64(s5, a0);                                 // or s5, a0, r0
+  c->mov64(s1, a1);                                 // or s1, a1, r0
+  c->mov64(s2, a2);                                 // or s2, a2, r0
+  c->mov64(s3, a3);                                 // or s3, a3, r0
+  c->mov64(s4, t0);                                 // or s4, t0, r0
+  c->daddiu(gp, sp, 16);                            // daddiu gp, sp, 16
+  c->daddiu(v1, gp, 16);                            // daddiu v1, gp, 16
+  c->sqc2(vf0, 0, v1);                              // sqc2 vf0, 0(v1)
+  c->mtc1(f0, s1);                                  // mtc1 f0, s1
+  c->swc1(f0, 16, gp);                              // swc1 f0, 16(gp)
+  c->mtc1(f0, s2);                                  // mtc1 f0, s2
+  c->swc1(f0, 20, gp);                              // swc1 f0, 20(gp)
+  c->daddu(v1, r0, gp);                             // daddu v1, r0, gp
+  c->daddiu(a0, gp, 16);                            // daddiu a0, gp, 16
+  c->lq(a0, 0, a0);                                 // lq a0, 0(a0)
+  c->sq(a0, 0, v1);                                 // sq a0, 0(v1)
+  c->lwc1(f0, 0, gp);                               // lwc1 f0, 0(gp)
+  c->mtc1(f1, s3);                                  // mtc1 f1, s3
+  c->subs(f0, f0, f1);                              // sub.s f0, f0, f1
+  c->swc1(f0, 0, gp);                               // swc1 f0, 0(gp)
+  c->lwc1(f0, 16, gp);                              // lwc1 f0, 16(gp)
+  c->mtc1(f1, s3);                                  // mtc1 f1, s3
+  c->adds(f0, f0, f1);                              // add.s f0, f0, f1
+  c->swc1(f0, 16, gp);                              // swc1 f0, 16(gp)
+  c->load_symbol2(t9, cache.vector_matrix);         // lw t9, vector-matrix*!(s7)
+  c->daddiu(a0, gp, 32);                            // daddiu a0, gp, 32
+  c->daddu(a1, r0, gp);                             // daddu a1, r0, gp
+  c->mov64(a2, s5);                                 // or a2, s5, r0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(t9, cache.vector_matrix);         // lw t9, vector-matrix*!(s7)
+  c->daddiu(a0, gp, 48);                            // daddiu a0, gp, 48
+  c->daddiu(a1, gp, 16);                            // daddiu a1, gp, 16
+  c->mov64(a2, s5);                                 // or a2, s5, r0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(t9, cache.draw_debug_line);       // lw t9, draw-debug-line(s7)
+  c->daddiu(a0, gp, 32);                            // daddiu a0, gp, 32
+  c->daddiu(a1, gp, 48);                            // daddiu a1, gp, 48
+  c->addiu(a2, r0, 785);                            // addiu a2, r0, 785
+  c->mov64(a3, s4);                                 // or a3, s4, r0
+  c->mov64(t0, s7);                                 // or t0, s7, r0
+  c->addiu(t1, r0, -1);                             // addiu t1, r0, -1
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mtc1(f0, s1);                                  // mtc1 f0, s1
+  c->swc1(f0, 16, gp);                              // swc1 f0, 16(gp)
+  c->mtc1(f0, s2);                                  // mtc1 f0, s2
+  c->swc1(f0, 20, gp);                              // swc1 f0, 20(gp)
+  c->daddu(v1, r0, gp);                             // daddu v1, r0, gp
+  c->daddiu(a0, gp, 16);                            // daddiu a0, gp, 16
+  c->lq(a0, 0, a0);                                 // lq a0, 0(a0)
+  c->sq(a0, 0, v1);                                 // sq a0, 0(v1)
+  c->lwc1(f0, 4, gp);                               // lwc1 f0, 4(gp)
+  c->mtc1(f1, s3);                                  // mtc1 f1, s3
+  c->subs(f0, f0, f1);                              // sub.s f0, f0, f1
+  c->swc1(f0, 4, gp);                               // swc1 f0, 4(gp)
+  c->lwc1(f0, 20, gp);                              // lwc1 f0, 20(gp)
+  c->mtc1(f1, s3);                                  // mtc1 f1, s3
+  c->adds(f0, f0, f1);                              // add.s f0, f0, f1
+  c->swc1(f0, 20, gp);                              // swc1 f0, 20(gp)
+  c->load_symbol2(t9, cache.vector_matrix);         // lw t9, vector-matrix*!(s7)
+  c->daddiu(a0, gp, 32);                            // daddiu a0, gp, 32
+  c->daddu(a1, r0, gp);                             // daddu a1, r0, gp
+  c->mov64(a2, s5);                                 // or a2, s5, r0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(t9, cache.vector_matrix);         // lw t9, vector-matrix*!(s7)
+  c->daddiu(a0, gp, 48);                            // daddiu a0, gp, 48
+  c->daddiu(a1, gp, 16);                            // daddiu a1, gp, 16
+  c->mov64(a2, s5);                                 // or a2, s5, r0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(t9, cache.draw_debug_line);       // lw t9, draw-debug-line(s7)
+  c->daddiu(a0, gp, 32);                            // daddiu a0, gp, 32
+  c->daddiu(a1, gp, 48);                            // daddiu a1, gp, 48
+  c->addiu(a2, r0, 785);                            // addiu a2, r0, 785
+  c->mov64(t0, s7);                                 // or t0, s7, r0
+  c->addiu(t1, r0, -1);                             // addiu t1, r0, -1
+  c->mov64(a3, s4);                                 // or a3, s4, r0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  c->gprs[v0].du64[0] = 0;                          // or v0, r0, r0
+  c->ld(ra, 0, sp);                                 // ld ra, 0(sp)
+  c->lq(gp, 160, sp);                               // lq gp, 160(sp)
+  c->lq(s5, 144, sp);                               // lq s5, 144(sp)
+  c->lq(s4, 128, sp);                               // lq s4, 128(sp)
+  c->lq(s3, 112, sp);                               // lq s3, 112(sp)
+  c->lq(s2, 96, sp);                                // lq s2, 96(sp)
+  c->lq(s1, 80, sp);                                // lq s1, 80(sp)
+  //jr ra                                           // jr ra
+  c->daddiu(sp, sp, 176);                           // daddiu sp, sp, 176
+  goto end_of_function;                             // return
+
+  // nop                                            // sll r0, r0, 0
+  // nop                                            // sll r0, r0, 0
+end_of_function:
+  return c->gprs[v0].du64[0];
+}
+
+void link() {
+  cache.draw_debug_line = intern_from_c(-1, 0, "draw-debug-line").c();
+  cache.vector_matrix = intern_from_c(-1, 0, "vector-matrix*!").c();
+  gLinkedFunctionTable.reg("plot-x-with-transform", execute, 176);
+}
+
+} // namespace plot_x_with_transform
+
 } // namespace Mips2C::jakx
