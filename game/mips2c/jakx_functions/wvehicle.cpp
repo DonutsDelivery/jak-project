@@ -4029,4 +4029,306 @@ void link() {
 
 } // namespace method_218_wvehicle
 
+namespace method_217_wvehicle {
+struct Cache {
+  void* cos; // cos
+  void* quaternion; // quaternion*!
+  void* quaternion_copy; // quaternion-copy!
+  void* quaternion_identity; // quaternion-identity!
+  void* quaternion_normalize; // quaternion-normalize!
+  void* quaternion_set; // quaternion-set!
+  void* quaternion_vector_angle; // quaternion-vector-angle!
+  void* sin; // sin
+  void* vector_matrix; // vector-matrix*!
+} cache;
+
+u64 execute(void* ctxt) {
+  auto* c = (ExecutionContext*)ctxt;
+  bool bc = false;
+  u32 call_addr = 0;
+  c->daddiu(sp, sp, -336);                          // daddiu sp, sp, -336
+  c->sd(ra, 0, sp);                                 // sd ra, 0(sp)
+  c->sq(s3, 272, sp);                               // sq s3, 272(sp)
+  c->sq(s4, 288, sp);                               // sq s4, 288(sp)
+  c->sq(s5, 304, sp);                               // sq s5, 304(sp)
+  c->sq(gp, 320, sp);                               // sq gp, 320(sp)
+  c->mov64(s3, a0);                                 // or s3, a0, r0
+  c->mov64(s5, a1);                                 // or s5, a1, r0
+  c->mov64(s4, a2);                                 // or s4, a2, r0
+  c->daddiu(gp, sp, 16);                            // daddiu gp, sp, 16
+  c->daddiu(v1, gp, 144);                           // daddiu v1, gp, 144
+  c->lui(a0, 16256);                                // lui a0, 16256
+  c->mtc1(f0, a0);                                  // mtc1 f0, a0
+  c->swc1(f0, 0, v1);                               // swc1 f0, 0(v1)
+  c->mtc1(f0, r0);                                  // mtc1 f0, r0
+  c->swc1(f0, 4, v1);                               // swc1 f0, 4(v1)
+  c->mtc1(f0, r0);                                  // mtc1 f0, r0
+  c->swc1(f0, 8, v1);                               // swc1 f0, 8(v1)
+  c->lui(a0, 16256);                                // lui a0, 16256
+  c->mtc1(f0, a0);                                  // mtc1 f0, a0
+  c->swc1(f0, 12, v1);                              // swc1 f0, 12(v1)
+  c->daddiu(v1, gp, 160);                           // daddiu v1, gp, 160
+  c->mtc1(f0, r0);                                  // mtc1 f0, r0
+  c->swc1(f0, 0, v1);                               // swc1 f0, 0(v1)
+  c->lui(a0, 16256);                                // lui a0, 16256
+  c->mtc1(f0, a0);                                  // mtc1 f0, a0
+  c->swc1(f0, 4, v1);                               // swc1 f0, 4(v1)
+  c->mtc1(f0, r0);                                  // mtc1 f0, r0
+  c->swc1(f0, 8, v1);                               // swc1 f0, 8(v1)
+  c->lui(a0, 16256);                                // lui a0, 16256
+  c->mtc1(f0, a0);                                  // mtc1 f0, a0
+  c->swc1(f0, 12, v1);                              // swc1 f0, 12(v1)
+  c->load_symbol2(t9, cache.quaternion_copy);       // lw t9, quaternion-copy!(s7)
+  c->daddiu(a0, gp, 112);                           // daddiu a0, gp, 112
+  c->lwu(v1, 184, s3);                              // lwu v1, 184(s3)
+  c->daddiu(a1, v1, 28);                            // daddiu a1, v1, 28
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->daddu(v1, r0, gp);                             // daddu v1, r0, gp
+  c->lwu(a0, 228, s3);                              // lwu a0, 228(s3)
+  c->daddiu(a3, a0, 172);                           // daddiu a3, a0, 172
+  c->lq(a0, 0, a3);                                 // lq a0, 0(a3)
+  c->lq(a1, 16, a3);                                // lq a1, 16(a3)
+  c->lq(a2, 32, a3);                                // lq a2, 32(a3)
+  c->lq(a3, 48, a3);                                // lq a3, 48(a3)
+  c->sq(a0, 0, v1);                                 // sq a0, 0(v1)
+  c->sq(a1, 16, v1);                                // sq a1, 16(v1)
+  c->sq(a2, 32, v1);                                // sq a2, 32(v1)
+  c->sq(a3, 48, v1);                                // sq a3, 48(v1)
+  c->lwc1(f0, 56, s4);                              // lwc1 f0, 56(s4)
+  c->lwc1(f1, 32, s4);                              // lwc1 f1, 32(s4)
+  c->lwc1(f2, 44, s4);                              // lwc1 f2, 44(s4)
+  c->muls(f1, f1, f2);                              // mul.s f1, f1, f2
+  c->adds(f0, f0, f1);                              // add.s f0, f0, f1
+  c->lui(v1, -16512);                               // lui v1, -16512
+  c->mtc1(f1, v1);                                  // mtc1 f1, v1
+  c->lwc1(f2, 184, s5);                             // lwc1 f2, 184(s5)
+  c->muls(f1, f1, f2);                              // mul.s f1, f1, f2
+  c->lwc1(f2, 48, s4);                              // lwc1 f2, 48(s4)
+  c->muls(f1, f1, f2);                              // mul.s f1, f1, f2
+  c->adds(f0, f0, f1);                              // add.s f0, f0, f1
+  c->swc1(f0, 240, gp);                             // swc1 f0, 240(gp)
+  c->lui(v1, -16512);                               // lui v1, -16512
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->lui(v1, 16256);                                // lui v1, 16256
+  c->mtc1(f1, v1);                                  // mtc1 f1, v1
+  c->lwc1(f2, 240, gp);                             // lwc1 f2, 240(gp)
+  c->lwc1(f3, 36, s4);                              // lwc1 f3, 36(s4)
+  c->divs(f2, f2, f3);                              // div.s f2, f2, f3
+  c->mins(f1, f1, f2);                              // min.s f1, f1, f2
+  c->maxs(f0, f0, f1);                              // max.s f0, f0, f1
+  c->swc1(f0, 248, s5);                             // swc1 f0, 248(s5)
+  c->lui(v1, 16256);                                // lui v1, 16256
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->lwc1(f1, 248, s5);                             // lwc1 f1, 248(s5)
+  c->muls(f1, f1, f1);                              // mul.s f1, f1, f1
+  c->mfc1(v1, f1);                                  // mfc1 v1, f1
+  c->mtc1(f1, v1);                                  // mtc1 f1, v1
+  c->subs(f0, f0, f1);                              // sub.s f0, f0, f1
+  c->sqrts(f0, f0);                                 // sqrt.s f0, f0
+  c->swc1(f0, 252, s5);                             // swc1 f0, 252(s5)
+  c->load_symbol2(t9, cache.quaternion_identity);   // lw t9, quaternion-identity!(s7)
+  c->daddiu(a0, gp, 128);                           // daddiu a0, gp, 128
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(t9, cache.sin);                   // lw t9, sin(s7)
+  c->lwc1(f0, 80, s4);                              // lwc1 f0, 80(s4)
+  c->mfc1(a0, f0);                                  // mfc1 a0, f0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mtc1(f0, v0);                                  // mtc1 f0, v0
+  c->lwc1(f1, 204, s5);                             // lwc1 f1, 204(s5)
+  c->muls(f0, f0, f1);                              // mul.s f0, f0, f1
+  c->swc1(f0, 136, gp);                             // swc1 f0, 136(gp)
+  c->load_symbol2(t9, cache.cos);                   // lw t9, cos(s7)
+  c->lwc1(f0, 80, s4);                              // lwc1 f0, 80(s4)
+  c->mfc1(a0, f0);                                  // mfc1 a0, f0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mtc1(f0, v0);                                  // mtc1 f0, v0
+  c->swc1(f0, 140, gp);                             // swc1 f0, 140(gp)
+  c->ld(v1, 16, s4);                                // ld v1, 16(s4)
+  c->andi(v1, v1, 32);                              // andi v1, v1, 32
+  bc = c->sgpr64(v1) == 0;                          // beq v1, r0, L365
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_2;}                           // branch non-likely
+
+  c->load_symbol2(t9, cache.quaternion_set);        // lw t9, quaternion-set!(s7)
+  c->daddiu(a0, gp, 64);                            // daddiu a0, gp, 64
+  c->addiu(a1, r0, 0);                              // addiu a1, r0, 0
+  c->addiu(a2, r0, 0);                              // addiu a2, r0, 0
+  c->lwc1(f0, 248, s5);                             // lwc1 f0, 248(s5)
+  c->lwc1(f1, 204, s5);                             // lwc1 f1, 204(s5)
+  c->muls(f0, f0, f1);                              // mul.s f0, f0, f1
+  c->mfc1(a3, f0);                                  // mfc1 a3, f0
+  c->lui(v1, 16256);                                // lui v1, 16256
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->lwc1(f1, 252, s5);                             // lwc1 f1, 252(s5)
+  c->adds(f0, f0, f1);                              // add.s f0, f0, f1
+  c->mfc1(t0, f0);                                  // mfc1 t0, f0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(t9, cache.quaternion_normalize);  // lw t9, quaternion-normalize!(s7)
+  c->daddiu(a0, gp, 64);                            // daddiu a0, gp, 64
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(t9, cache.quaternion);            // lw t9, quaternion*!(s7)
+  c->daddiu(a0, gp, 128);                           // daddiu a0, gp, 128
+  c->daddiu(a1, gp, 128);                           // daddiu a1, gp, 128
+  c->daddiu(a2, gp, 64);                            // daddiu a2, gp, 64
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+
+block_2:
+  c->daddiu(v1, gp, 176);                           // daddiu v1, gp, 176
+  c->daddu(a0, r0, s4);                             // daddu a0, r0, s4
+  c->lq(a0, 0, a0);                                 // lq a0, 0(a0)
+  c->sq(a0, 0, v1);                                 // sq a0, 0(v1)
+  c->lwc1(f0, 176, gp);                             // lwc1 f0, 176(gp)
+  c->lwc1(f1, 36, s4);                              // lwc1 f1, 36(s4)
+  c->lwc1(f2, 52, s4);                              // lwc1 f2, 52(s4)
+  c->adds(f1, f1, f2);                              // add.s f1, f1, f2
+  c->adds(f0, f0, f1);                              // add.s f0, f0, f1
+  c->swc1(f0, 176, gp);                             // swc1 f0, 176(gp)
+  c->lwc1(f0, 176, gp);                             // lwc1 f0, 176(gp)
+  c->lwc1(f1, 204, s5);                             // lwc1 f1, 204(s5)
+  c->muls(f0, f0, f1);                              // mul.s f0, f0, f1
+  c->swc1(f0, 176, gp);                             // swc1 f0, 176(gp)
+  c->lwc1(f0, 180, gp);                             // lwc1 f0, 180(gp)
+  c->lwc1(f1, 56, s4);                              // lwc1 f1, 56(s4)
+  c->adds(f0, f0, f1);                              // add.s f0, f0, f1
+  c->swc1(f0, 180, gp);                             // swc1 f0, 180(gp)
+  c->daddiu(v1, s5, 16);                            // daddiu v1, s5, 16
+  c->daddiu(a0, gp, 176);                           // daddiu a0, gp, 176
+  c->daddiu(a1, s5, 48);                            // daddiu a1, s5, 48
+  c->lwc1(f0, 40, s4);                              // lwc1 f0, 40(s4)
+  c->lwc1(f1, 204, s5);                             // lwc1 f1, 204(s5)
+  c->muls(f0, f0, f1);                              // mul.s f0, f0, f1
+  c->lqc2(vf2, 0, a1);                              // lqc2 vf2, 0(a1)
+  c->lqc2(vf1, 0, a0);                              // lqc2 vf1, 0(a0)
+  c->mfc1(a0, f0);                                  // mfc1 a0, f0
+  c->mov128_vf_gpr(vf3, a0);                        // qmtc2.i vf3, a0
+  c->vadd_bc(DEST::w, BC::x, vf4, vf0, vf0);        // vaddx.w vf4, vf0, vf0
+  c->vmula_bc(DEST::xyzw, BC::x, vf2, vf3);         // vmulax.xyzw acc, vf2, vf3
+  c->vmadd_bc(DEST::xyz, BC::w, vf4, vf1, vf0);     // vmaddw.xyz vf4, vf1, vf0
+  c->sqc2(vf4, 0, v1);                              // sqc2 vf4, 0(v1)
+  c->daddiu(v1, gp, 176);                           // daddiu v1, gp, 176
+  c->daddu(a0, r0, s4);                             // daddu a0, r0, s4
+  c->lq(a0, 0, a0);                                 // lq a0, 0(a0)
+  c->sq(a0, 0, v1);                                 // sq a0, 0(v1)
+  c->lwc1(f0, 176, gp);                             // lwc1 f0, 176(gp)
+  c->lwc1(f1, 36, s4);                              // lwc1 f1, 36(s4)
+  c->lwc1(f2, 252, s5);                             // lwc1 f2, 252(s5)
+  c->muls(f1, f1, f2);                              // mul.s f1, f1, f2
+  c->adds(f0, f0, f1);                              // add.s f0, f0, f1
+  c->swc1(f0, 176, gp);                             // swc1 f0, 176(gp)
+  c->lwc1(f0, 176, gp);                             // lwc1 f0, 176(gp)
+  c->lwc1(f1, 204, s5);                             // lwc1 f1, 204(s5)
+  c->muls(f0, f0, f1);                              // mul.s f0, f0, f1
+  c->swc1(f0, 176, gp);                             // swc1 f0, 176(gp)
+  c->lwc1(f0, 180, gp);                             // lwc1 f0, 180(gp)
+  c->lwc1(f1, 240, gp);                             // lwc1 f1, 240(gp)
+  c->adds(f0, f0, f1);                              // add.s f0, f0, f1
+  c->swc1(f0, 180, gp);                             // swc1 f0, 180(gp)
+  c->daddiu(v1, gp, 176);                           // daddiu v1, gp, 176
+  c->daddiu(a0, gp, 176);                           // daddiu a0, gp, 176
+  c->daddiu(a1, s5, 48);                            // daddiu a1, s5, 48
+  c->lwc1(f0, 40, s4);                              // lwc1 f0, 40(s4)
+  c->lwc1(f1, 204, s5);                             // lwc1 f1, 204(s5)
+  c->muls(f0, f0, f1);                              // mul.s f0, f0, f1
+  c->lqc2(vf2, 0, a1);                              // lqc2 vf2, 0(a1)
+  c->lqc2(vf1, 0, a0);                              // lqc2 vf1, 0(a0)
+  c->mfc1(a0, f0);                                  // mfc1 a0, f0
+  c->mov128_vf_gpr(vf3, a0);                        // qmtc2.i vf3, a0
+  c->vadd_bc(DEST::w, BC::x, vf4, vf0, vf0);        // vaddx.w vf4, vf0, vf0
+  c->vmula_bc(DEST::xyzw, BC::x, vf2, vf3);         // vmulax.xyzw acc, vf2, vf3
+  c->vmadd_bc(DEST::xyz, BC::w, vf4, vf1, vf0);     // vmaddw.xyz vf4, vf1, vf0
+  c->sqc2(vf4, 0, v1);                              // sqc2 vf4, 0(v1)
+  c->load_symbol2(t9, cache.vector_matrix);         // lw t9, vector-matrix*!(s7)
+  c->daddiu(a0, gp, 192);                           // daddiu a0, gp, 192
+  c->daddiu(a1, gp, 176);                           // daddiu a1, gp, 176
+  c->daddu(a2, r0, gp);                             // daddu a2, r0, gp
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(t9, cache.quaternion_vector_angle);// lw t9, quaternion-vector-angle!(s7)
+  c->daddiu(a0, gp, 96);                            // daddiu a0, gp, 96
+  c->daddiu(a1, gp, 160);                           // daddiu a1, gp, 160
+  c->lwc1(f0, 192, s5);                             // lwc1 f0, 192(s5)
+  c->mfc1(a2, f0);                                  // mfc1 a2, f0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(t9, cache.quaternion_vector_angle);// lw t9, quaternion-vector-angle!(s7)
+  c->daddiu(a0, gp, 80);                            // daddiu a0, gp, 80
+  c->daddiu(a1, gp, 144);                           // daddiu a1, gp, 144
+  c->lwc1(f0, 196, s5);                             // lwc1 f0, 196(s5)
+  c->mfc1(a2, f0);                                  // mfc1 a2, f0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(t9, cache.quaternion);            // lw t9, quaternion*!(s7)
+  c->daddiu(a0, gp, 64);                            // daddiu a0, gp, 64
+  c->daddiu(a1, gp, 96);                            // daddiu a1, gp, 96
+  c->daddiu(a2, gp, 128);                           // daddiu a2, gp, 128
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(t9, cache.quaternion);            // lw t9, quaternion*!(s7)
+  c->daddiu(a0, gp, 64);                            // daddiu a0, gp, 64
+  c->daddiu(a1, gp, 64);                            // daddiu a1, gp, 64
+  c->daddiu(a2, gp, 80);                            // daddiu a2, gp, 80
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(t9, cache.quaternion);            // lw t9, quaternion*!(s7)
+  c->daddiu(a0, s5, 128);                           // daddiu a0, s5, 128
+  c->daddiu(a1, gp, 112);                           // daddiu a1, gp, 112
+  c->daddiu(a2, gp, 64);                            // daddiu a2, gp, 64
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->daddiu(v1, s5, 112);                           // daddiu v1, s5, 112
+  c->daddiu(a0, gp, 192);                           // daddiu a0, gp, 192
+  c->lq(a0, 0, a0);                                 // lq a0, 0(a0)
+  c->sq(a0, 0, v1);                                 // sq a0, 0(v1)
+  c->gprs[v0].du64[0] = 0;                          // or v0, r0, r0
+  c->ld(ra, 0, sp);                                 // ld ra, 0(sp)
+  c->lq(gp, 320, sp);                               // lq gp, 320(sp)
+  c->lq(s5, 304, sp);                               // lq s5, 304(sp)
+  c->lq(s4, 288, sp);                               // lq s4, 288(sp)
+  c->lq(s3, 272, sp);                               // lq s3, 272(sp)
+  //jr ra                                           // jr ra
+  c->daddiu(sp, sp, 336);                           // daddiu sp, sp, 336
+  goto end_of_function;                             // return
+
+  // nop                                            // sll r0, r0, 0
+  // nop                                            // sll r0, r0, 0
+end_of_function:
+  return c->gprs[v0].du64[0];
+}
+
+void link() {
+  cache.cos = intern_from_c(-1, 0, "cos").c();
+  cache.quaternion = intern_from_c(-1, 0, "quaternion*!").c();
+  cache.quaternion_copy = intern_from_c(-1, 0, "quaternion-copy!").c();
+  cache.quaternion_identity = intern_from_c(-1, 0, "quaternion-identity!").c();
+  cache.quaternion_normalize = intern_from_c(-1, 0, "quaternion-normalize!").c();
+  cache.quaternion_set = intern_from_c(-1, 0, "quaternion-set!").c();
+  cache.quaternion_vector_angle = intern_from_c(-1, 0, "quaternion-vector-angle!").c();
+  cache.sin = intern_from_c(-1, 0, "sin").c();
+  cache.vector_matrix = intern_from_c(-1, 0, "vector-matrix*!").c();
+  gLinkedFunctionTable.reg("(method 217 wvehicle)", execute, 336);
+}
+
+} // namespace method_217_wvehicle
+
 } // namespace Mips2C::jakx
