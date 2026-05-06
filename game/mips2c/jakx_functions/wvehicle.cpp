@@ -7045,4 +7045,51 @@ void link() {
 
 } // namespace method_61_wvehicle
 
+namespace estimate_eng_torque_from_gear {
+u64 execute(void* ctxt) {
+  auto* c = (ExecutionContext*)ctxt;
+  bool bc = false;
+  u32 call_addr = 0;
+  c->daddiu(sp, sp, -32);                           // daddiu sp, sp, -32
+  c->sd(ra, 0, sp);                                 // sd ra, 0(sp)
+  c->swc1(f30, 16, sp);                             // swc1 f30, 16(sp)
+  c->mtc1(f0, r0);                                  // mtc1 f0, r0
+  c->dsll(v1, a2, 2);                               // dsll v1, a2, 2
+  c->lwu(a2, 252, a0);                              // lwu a2, 252(a0)
+  c->daddu(v1, v1, a2);                             // daddu v1, v1, a2
+  c->lwc1(f0, 280, v1);                             // lwc1 f0, 280(v1)
+  c->lwc1(f1, 2384, a0);                            // lwc1 f1, 2384(a0)
+  c->divs(f30, f0, f1);                             // div.s f30, f0, f1
+  c->mtc1(f0, a1);                                  // mtc1 f0, a1
+  c->muls(f0, f0, f30);                             // mul.s f0, f0, f30
+  c->lwu(v1, -4, a0);                               // lwu v1, -4(a0)
+  c->lwu(t9, 912, v1);                              // lwu t9, 912(v1)
+  c->mfc1(a1, f0);                                  // mfc1 a1, f0
+  c->lui(a2, 16256);                                // lui a2, 16256
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(v1, v0);                                 // or v1, v0, r0
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->muls(f0, f0, f30);                             // mul.s f0, f0, f30
+  c->gprs[v1].du64[0] = 0;                          // or v1, r0, r0
+  c->mfc1(v0, f0);                                  // mfc1 v0, f0
+  c->ld(ra, 0, sp);                                 // ld ra, 0(sp)
+  c->lwc1(f30, 16, sp);                             // lwc1 f30, 16(sp)
+  //jr ra                                           // jr ra
+  c->daddiu(sp, sp, 32);                            // daddiu sp, sp, 32
+  goto end_of_function;                             // return
+
+  // nop                                            // sll r0, r0, 0
+  // nop                                            // sll r0, r0, 0
+end_of_function:
+  return c->gprs[v0].du64[0];
+}
+
+void link() {
+  gLinkedFunctionTable.reg("estimate-eng-torque-from-gear", execute, 32);
+}
+
+} // namespace estimate_eng_torque_from_gear
+
 } // namespace Mips2C::jakx
