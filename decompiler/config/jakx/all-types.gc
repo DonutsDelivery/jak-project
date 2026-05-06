@@ -5042,7 +5042,7 @@
 ;; find-nearest-camera moved to line ~14703 (after camera-combiner declare-type)
 (define-extern estimate-eng-torque-from-gear (function none))
 (define-extern plot-engine-torque-curve (function wvehicle matrix float float rgba none))
-(define-extern plot-x-with-transform (function none))
+(define-extern plot-x-with-transform (function matrix float float float rgba none))
 (define-extern vehicle-handle->net-player (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
