@@ -462,6 +462,7 @@ namespace method_134_wvehicle { extern void link(); }
 namespace method_217_wvehicle { extern void link(); }
 namespace method_218_wvehicle { extern void link(); }
 namespace method_219_wvehicle { extern void link(); }
+namespace method_220_wvehicle { extern void link(); }
 namespace wv_player_post_move_update { extern void link(); }
 // ripple.cpp port (see game/mips2c/jakx_functions/ripple.cpp)
 namespace ripple_matrix_scale { extern void link(); }
@@ -937,7 +938,7 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      {"wvehicle-part", {jakx::sparticle_motion_blur_dirt::link}},
      // wvehicle: jakx-native methods that fail to decompile to GOAL expressions
      // (decompiler emits raw mips2c instead). See game/mips2c/jakx_functions/wvehicle.cpp.
-     {"wvehicle", {jakx::method_64_wvehicle::link, jakx::method_134_wvehicle::link, jakx::method_217_wvehicle::link, jakx::method_218_wvehicle::link, jakx::method_219_wvehicle::link, jakx::wv_player_post_move_update::link}},
+     {"wvehicle", {jakx::method_64_wvehicle::link, jakx::method_134_wvehicle::link, jakx::method_217_wvehicle::link, jakx::method_218_wvehicle::link, jakx::method_219_wvehicle::link, jakx::method_220_wvehicle::link, jakx::wv_player_post_move_update::link}},
      // ripple: jakx-native ports (see game/mips2c/jakx_functions/ripple.cpp).
      // All four functions are structurally identical to jak3; jakx namespace only.
      {"ripple",
