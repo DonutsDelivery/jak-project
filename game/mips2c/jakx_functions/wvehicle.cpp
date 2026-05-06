@@ -7170,4 +7170,100 @@ void link() {
 
 } // namespace method_224_wvehicle
 
+namespace method_157_wvehicle {
+struct Cache {
+  void* debug_player_vehicle_unkillable; // *debug-player-vehicle-unkillable*
+  void* debug_segment; // *debug-segment*
+  void* stats_target; // *stats-target*
+  void* find_parent_method; // find-parent-method
+  void* wvehicle; // wvehicle
+} cache;
+
+u64 execute(void* ctxt) {
+  auto* c = (ExecutionContext*)ctxt;
+  bool bc = false;
+  u32 call_addr = 0;
+  c->daddiu(sp, sp, -96);                           // daddiu sp, sp, -96
+  c->sd(ra, 0, sp);                                 // sd ra, 0(sp)
+  c->sd(fp, 8, sp);                                 // sd fp, 8(sp)
+  c->mov64(fp, t9);                                 // or fp, t9, r0
+  c->sq(s3, 16, sp);                                // sq s3, 16(sp)
+  c->sq(s4, 32, sp);                                // sq s4, 32(sp)
+  c->sq(s5, 48, sp);                                // sq s5, 48(sp)
+  c->sq(gp, 64, sp);                                // sq gp, 64(sp)
+  c->swc1(f30, 80, sp);                             // swc1 f30, 80(sp)
+  c->mov64(gp, a0);                                 // or gp, a0, r0
+  c->load_symbol2(t9, cache.find_parent_method);    // lw t9, find-parent-method(s7)
+  c->load_symbol2(a0, cache.wvehicle);              // lw a0, wvehicle(s7)
+  c->addiu(a1, r0, 157);                            // addiu a1, r0, 157
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->mov64(t9, v0);                                 // or t9, v0, r0
+  c->mov64(a0, gp);                                 // or a0, gp, r0
+  call_addr = c->gprs[t9].du32[0];                  // function call:
+  c->sll(v0, ra, 0);                                // sll v0, ra, 0
+  c->jalr(call_addr);                               // jalr ra, t9
+  c->load_symbol2(v1, cache.debug_segment);         // lw v1, *debug-segment*(s7)
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L12
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_3;}                           // branch non-likely
+
+  c->load_symbol2(v1, cache.debug_player_vehicle_unkillable);// lw v1, *debug-player-vehicle-unkillable*(s7)
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L12
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_3;}                           // branch non-likely
+
+  c->lui(v1, 16256);                                // lui v1, 16256
+  c->mtc1(f0, v1);                                  // mtc1 f0, v1
+  c->swc1(f0, 700, gp);                             // swc1 f0, 700(gp)
+  c->mfc1(v1, f0);                                  // mfc1 v1, f0
+
+block_3:
+  c->load_symbol2(v1, cache.debug_segment);         // lw v1, *debug-segment*(s7)
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L13
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_6;}                           // branch non-likely
+
+  c->load_symbol2(v1, cache.stats_target);          // lw v1, *stats-target*(s7)
+  bc = c->sgpr64(s7) == c->sgpr64(v1);              // beq s7, v1, L13
+  c->mov64(v1, s7);                                 // or v1, s7, r0
+  if (bc) {goto block_6;}                           // branch non-likely
+
+  // stub: debug format("MPH ~0,,1f (~0,,1M) HP ~4,,2f (~4,,1f%)~%", ...)
+  // call elided - L370 string ref + meters-per-sec->mph cache symbol
+  // not emitted by mips2c. Branch only reached when both *debug-segment*
+  // and *stats-target* are set; eliding loses debug print only.
+
+block_6:
+  c->gprs[v0].du64[0] = 0;                          // or v0, r0, r0
+  c->ld(ra, 0, sp);                                 // ld ra, 0(sp)
+  c->ld(fp, 8, sp);                                 // ld fp, 8(sp)
+  c->lwc1(f30, 80, sp);                             // lwc1 f30, 80(sp)
+  c->lq(gp, 64, sp);                                // lq gp, 64(sp)
+  c->lq(s5, 48, sp);                                // lq s5, 48(sp)
+  c->lq(s4, 32, sp);                                // lq s4, 32(sp)
+  c->lq(s3, 16, sp);                                // lq s3, 16(sp)
+  //jr ra                                           // jr ra
+  c->daddiu(sp, sp, 96);                            // daddiu sp, sp, 96
+  goto end_of_function;                             // return
+
+  // nop                                            // sll r0, r0, 0
+  // nop                                            // sll r0, r0, 0
+  // nop                                            // sll r0, r0, 0
+end_of_function:
+  return c->gprs[v0].du64[0];
+}
+
+void link() {
+  cache.debug_player_vehicle_unkillable = intern_from_c(-1, 0, "*debug-player-vehicle-unkillable*").c();
+  cache.debug_segment = intern_from_c(-1, 0, "*debug-segment*").c();
+  cache.stats_target = intern_from_c(-1, 0, "*stats-target*").c();
+  cache.find_parent_method = intern_from_c(-1, 0, "find-parent-method").c();
+  cache.wvehicle = intern_from_c(-1, 0, "wvehicle").c();
+  gLinkedFunctionTable.reg("(method 157 wvehicle)", execute, 96);
+}
+
+} // namespace method_157_wvehicle
+
 } // namespace Mips2C::jakx
