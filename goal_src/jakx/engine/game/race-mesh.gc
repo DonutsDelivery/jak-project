@@ -65,7 +65,7 @@
   (:methods
     (race-mesh-method-9 (_type_ int int rgba rgba) symbol)
     (race-mesh-method-10 (_type_ int int) symbol)
-    (race-mesh-method-11 (_type_ int) none)
+    (race-mesh-method-11 (_type_ race-mesh-slice-query) none)
     (race-mesh-method-12 (_type_ race-line int) none)
     (race-mesh-method-13 (_type_ race-mesh-slice-query int float symbol) none)
     (race-mesh-method-14 (_type_ race-mesh-slice-query int symbol) symbol)
@@ -158,7 +158,7 @@
   )
 
 ;; ERROR: failed type prop at 5: Could not figure out load: (set! v1 (l.h (+ s5 16)))
-(defmethod race-mesh-method-11 ((a0-0 race-mesh) (a1-0 int))
+(defmethod race-mesh-method-11 ((a0-0 race-mesh) (a1-0 race-mesh-slice-query))
   ;; SCAFFOLDING
   (format 0 "call to race-mesh-method-11~%")
   (break!)
