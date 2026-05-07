@@ -35588,7 +35588,7 @@
     (nav-mesh-method-21 (_type_ vector nav-poly vector clamp-travel-vector-to-mesh-return-info) none) ;; 21
     (nav-mesh-method-22 (_type_ clamp-travel-vector-to-mesh-return-info) int) ;; 22
     (nav-mesh-method-23 (_type_ vector nav-poly int int) int) ;; 23
-    (nav-mesh-method-24 (_type_ vector vector int) int) ;; 24
+    (nav-mesh-method-24 (_type_ vector vector int int) int) ;; 24
     (nav-mesh-method-25 (_type_ entity) none) ;; 25 ;; init-from-entity (entity-nav-mesh commented, use entity)
     (nav-mesh-method-26 (_type_ uint) int) ;; 26 ;; handle-birth
     (nav-mesh-method-27 (_type_ uint int) int) ;; 27 ;; handle-kill
