@@ -4168,6 +4168,22 @@
       "race-mesh-slice-query"
     ]
   ],
+  "test-find-closest-point": [
+    [
+      16,
+      "vector"
+    ]
+  ],
+  "test-find-line-info": [
+    [
+      16,
+      "race-line-query-info"
+    ],
+    [
+      128,
+      "vector"
+    ]
+  ],
   "(method 17 race-mesh)": [
     [
       16,
