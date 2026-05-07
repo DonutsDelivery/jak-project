@@ -34555,7 +34555,7 @@
   :size-assert         #x10
   :flag-assert         #x1a00000010
   (:methods
-    (new (_type_ symbol type object) _type_) ;; 0 ;; (new (symbol type process symbol) _type_)
+    (new (_type_ type type object) _type_) ;; 0
     (actor-link-info-method-9 (_type_ type) int) ;; 9
     (actor-count-before (_type_) int) ;; 10
     (actor-link-info-method-11 (_type_) actor-link-info) ;; 11
