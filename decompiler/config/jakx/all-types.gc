@@ -35883,7 +35883,7 @@
     (nav-state-method-48 (_type_ float) int) ;; 48
     (nav-state-method-49 (_type_ int) int) ;; 49
     (nav-state-method-50 (_type_ object) none) ;; 50 ;; navigate-using-best-dir-use-existing-avoid-spheres (nav-avoid-spheres-params)
-    (nav-state-method-51 (_type_) none) ;; 51
+    (nav-state-method-51 (_type_ nav-state) none) ;; 51
     (nav-state-method-52 (_type_) int) ;; 52 ;; navigate-using-route-portals
     (nav-state-method-53 (_type_) int) ;; 53
     (nav-state-method-54 (_type_) int) ;; 54 ;; navigate-within-poly
