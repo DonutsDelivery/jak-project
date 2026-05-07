@@ -72,7 +72,7 @@
    (extra-points      int16)
    (points            uint32)
    (gap-indices       uint32)
-   (slices            uint32)
+   (slices            (pointer int16))
    (pad               uint32)
    )
   (:methods

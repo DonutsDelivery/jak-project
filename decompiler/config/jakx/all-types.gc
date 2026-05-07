@@ -45512,7 +45512,7 @@
    (extra-points     int16          :offset-assert 46)
    (points           uint32         :offset-assert 48)
    (gap-indices      uint32         :offset-assert 52)
-   (slices           uint32         :offset-assert 56)
+   (slices           (pointer int16) :offset-assert 56)
    (pad              uint32         :offset-assert 60)
    )
   :method-count-assert 15
