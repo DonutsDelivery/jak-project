@@ -4211,7 +4211,7 @@
   
 
 
-(define-extern sabotage-sequence-trans (function none))
+(define-extern sabotage-sequence-trans (function none :behavior sabotage-sequence))
 (define-extern sabotage-sequence-init-by-other (function uint none))
 (define-extern sabotage-sequence-start (function int process))
 
@@ -5016,7 +5016,7 @@
 (define-extern reticle-on-him-spinner-color-enemy object)
 (define-extern reticle-allowed? (function none))
 (define-extern vehicle-reticle-base-init-by-other (function uint none))
-(define-extern vehicle-reticle-base-trans (function none))
+(define-extern vehicle-reticle-base-trans (function none :behavior vehicle-reticle-base))
 (define-extern v-reticle-update-missile (function uint uint none))
 (define-extern vehicle-reticle-on-me-init-by-other (function none :behavior vehicle-reticle-on-me))
 (define-extern vehicle-reticle-on-me-helper-missile-inc (function none))
@@ -43278,7 +43278,7 @@
 (define-extern hud-sprite-add (function symbol))
 (define-extern *debug-hud-disable* object)
 (define-extern hud-create-icon (function hud int int (pointer manipy)))
-(define-extern hud-post (function none))
+(define-extern hud-post (function none :behavior hud))
 (define-extern hud-handler (function none))
 (define-extern hud-init-by-other (function object :behavior hud))
 (define-extern set-hud-piece-position! (function hud-sprite int int none)) ;; was: (function none) — backported from jak3
@@ -51821,7 +51821,7 @@
 (define-extern rb-get-perf (function symbol))
 (define-extern *rb-raw-time-val* object)
 (define-extern rb-cpu-delay (function uint none))
-(define-extern rigid-body-queue-manager-post (function none))
+(define-extern rigid-body-queue-manager-post (function none :behavior rigid-body-queue-manager))
 (define-extern rigid-body-queue-manager-init-by-other (function rigid-body-queue object :behavior rigid-body-queue-manager)) ;; was: (function none) — backported from jak3
 (define-extern rigid-body-queue-manager-spawn (function rigid-body-queue process-tree process))
 
@@ -51986,8 +51986,8 @@
 
 
 (define-extern joint-mod-head-handler (function uint none))
-(define-extern driver-trans (function none))
-(define-extern driver-post (function none))
+(define-extern driver-trans (function none :behavior driver))
+(define-extern driver-post (function none :behavior driver))
 (define-extern driver-head (function none))
 (define-extern driver-anim (function none))
 (define-extern driver-event-handler (function int uint none))
@@ -53124,7 +53124,7 @@
 (define-extern anim-test-obj-item-valid? (function anim-test-obj anim-test-seq-item symbol))
 (define-extern anim-test-obj-remove-invalid (function anim-test-obj symbol))
 (define-extern anim-tester-real-post (function none :behavior anim-tester))
-(define-extern anim-tester-post (function none))
+(define-extern anim-tester-post (function none :behavior anim-tester))
 (define-extern anim-tester-update-anim-info (function none))
 (define-extern anim-tester-reset (function none))
 (define-extern anim-tester-disp-frame-num (function string float float pointer))
@@ -54790,7 +54790,7 @@
 (define-extern make-chassis-entry (function none))
 (define-extern make-roof-entry (function none))
 (define-extern make-trunk-entry (function none))
-(define-extern daxter-post (function none))
+(define-extern daxter-post (function none :behavior daxter))
 (define-extern hide-appear-post (function none))
 (define-extern check-hide (function none))
 (define-extern check-standard-trans (function none))
@@ -55445,7 +55445,7 @@
 (define-extern launch-nearby-players (function none))
 (define-extern *flip-speed* object)
 (define-extern *flip-blend* object)
-(define-extern plow-trans (function none))
+(define-extern plow-trans (function none :behavior plow))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; brdroom-obs                    ;;
