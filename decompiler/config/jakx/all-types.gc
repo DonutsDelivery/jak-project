@@ -2241,7 +2241,7 @@
 (define-extern *destruct-powerup-names* array)
 (define-extern get-destruct-perm (function object none))
 (define-extern count-powerups (function uint none))
-(define-extern rand-spawn-pickup (function none))
+(define-extern rand-spawn-pickup (function object object object object object object none))
 (define-extern spawn-pickups-from-destructible (function object object none))
 (define-extern init-local-net-simple-destruct-mgr (function none))
 
@@ -2252,7 +2252,7 @@
 (define-extern play-anim-along-path (function object object object none))
 (define-extern advance-anim-by-motion (function object object none))
 (define-extern *tmp-transition* object)
-(define-extern net-enemy-default-handler (function none))
+(define-extern net-enemy-default-handler (function object object object object none))
 (define-extern kill-all-enemies (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -5046,8 +5046,8 @@
 (define-extern handle-weapon-moved-event (function uint uint uint none))
 (define-extern wv-weapon-pickup-helper (function uint int none))
 (define-extern wv-pickup-handler (function object object object none))
-(define-extern wv-set-handler (function none))
-(define-extern wv-query-handler (function none))
+(define-extern wv-set-handler (function object object object none))
+(define-extern wv-query-handler (function object object object none))
 (define-extern wv-go-handler (function uint uint none))
 (define-extern wv-weapon-handler (function uint int uint none))
 
@@ -5470,7 +5470,7 @@
 (define-extern *mine-b-hack* object)
 (define-extern *msg-map-v-yellow-guided-missile* array)
 (define-extern *net-process-class-info-v-yellow-guided-missile* object)
-(define-extern guided-missile-moving-event-handler (function none))
+(define-extern guided-missile-moving-event-handler (function object object object object none))
 (define-extern guided-missile-base-trans (function none))
 (define-extern v-yellow-defaultgun-hitspang-params object)
 (define-extern v-wpn-yellow-chaingun-1-hitspang-params object)
@@ -5751,7 +5751,7 @@
   
 
 
-(define-extern vws-focus-search-base (function none))
+(define-extern vws-focus-search-base (function object object object object object object none))
 (define-extern gunmount-common-trans (function none))
 (define-extern gunmount-common-post (function none))
 (define-extern gunmount-event-handler (function none))
@@ -38857,7 +38857,7 @@
 (define-extern update-hiphog-lights (function mood-context none))
 (define-extern update-mood-hiphog (function mood-context float none :behavior time-of-day-proc))
 (define-extern update-garage-brdroom-lights (function object none))
-(define-extern update-mood-garage-brdroom (function none))
+(define-extern update-mood-garage-brdroom (function object object object none))
 (define-extern set-garage-switched! (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -42425,7 +42425,7 @@
 (define-extern calc-vu1-lights (function vu-lights draw-control symbol none)) ;; draw-control not live
 (define-extern calc-particle-average-color (function object object none))
 (define-extern calc-particle-directional-color (function object object object none))
-(define-extern real-dma-add-process-drawable (function none))
+(define-extern real-dma-add-process-drawable (function object object object object none))
 (define-extern dma-add-process-drawable (function process-drawable draw-control symbol dma-buffer none)) ;; process-drawable/draw-control not live
 (define-extern *hud-lights* vu-lights)
 (define-extern dma-add-process-drawable-hud (function process-drawable draw-control float dma-buffer none)) ;; process-drawable/draw-control not live
@@ -50845,7 +50845,7 @@
 (define-extern *fmv-work* fmv-work)
 (define-extern *menu-movie-texture-anim-array* texture-anim-array)
 (define-extern *movie-texture-anim-array* texture-anim-array)
-(define-extern movie-texture-anim-init (function none))
+(define-extern movie-texture-anim-init (function object none))
 (define-extern movie-texture-anim-func (function uint int none))
 (define-extern fmv-file-init (function none))
 (define-extern fmv-get-time (function none))
