@@ -2145,7 +2145,6 @@
 
 
 (define-extern *tmp-construct-transition* object)
-(define-extern net-enemy-init-remote (function none))
 (define-extern *msg-map-net-enemy* array)
 (define-extern *net-process-class-info-net-enemy* object)
 (define-extern *net-enemy-list* object)
@@ -5435,7 +5434,6 @@
   
 
 
-(define-extern v-toad-shot-init-remote (function none))
 (define-extern *msg-map-v-toad-shot* array)
 (define-extern *net-process-class-info-v-toad-shot* object)
 
@@ -5470,17 +5468,14 @@
   
 
 
-(define-extern mine-a-init-remote (function none))
 (define-extern *msg-map-mine-a* array)
 (define-extern *net-process-class-info-mine-a* object)
 (define-extern mine-a-init-by-other (function none))
-(define-extern mine-b-init-remote (function none))
 (define-extern *msg-map-mine-b* array)
 (define-extern *net-process-class-info-mine-b* object)
 (define-extern mine-b-common-trans (function none))
 (define-extern *mine-b-hack* object)
 (define-extern mine-b-init-by-other (function none))
-(define-extern v-yellow-guided-missile-init-remote (function none))
 (define-extern *msg-map-v-yellow-guided-missile* array)
 (define-extern *net-process-class-info-v-yellow-guided-missile* object)
 (define-extern guided-missile-moving-event-handler (function none))
@@ -5779,7 +5774,6 @@
 (define-extern v-wpn-yellow-chain-gun-II-rapid-fire-control-params object)
 (define-extern hack-sparticle-track-gun (function none))
 (define-extern v-wpn-yellow-default-gun-rapid-fire-control-params object)
-(define-extern v-wpn-yellow-guided-missile-init-remote (function none))
 (define-extern *msg-map-v-wpn-yellow-guided-missile* array)
 (define-extern *net-process-class-info-v-wpn-yellow-guided-missile* object)
 (define-extern guided-missile-gen-proj-no-targ-helper (function none))
@@ -5797,7 +5791,6 @@
 
 
 
-(define-extern red-sentry-bot-init-remote (function none))
 (define-extern *msg-map-red-sentry-bot* array)
 (define-extern *net-process-class-info-red-sentry-bot* object)
 (define-extern v-wpn-sentrybot-rapid-fire-control-params object)
@@ -63569,3 +63562,12 @@
   :size-assert         #x28
   :flag-assert         #x900000028
   )
+
+;; init-remote :behavior tags moved past forward-ref deftypes
+(define-extern net-enemy-init-remote (function none :behavior net-enemy))
+(define-extern v-toad-shot-init-remote (function none :behavior v-toad-shot))
+(define-extern mine-a-init-remote (function none :behavior mine-a))
+(define-extern mine-b-init-remote (function none :behavior mine-b))
+(define-extern v-yellow-guided-missile-init-remote (function none :behavior v-yellow-guided-missile))
+(define-extern v-wpn-yellow-guided-missile-init-remote (function none :behavior v-wpn-yellow-guided-missile))
+(define-extern red-sentry-bot-init-remote (function none :behavior red-sentry-bot))
