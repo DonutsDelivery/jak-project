@@ -35963,7 +35963,7 @@
     (nav-control-method-43 (_type_ collide-shape) none) ;; 43
     (nav-control-method-44 (_type_) none) ;; 44
     (nav-control-method-45 (_type_ vector vector vector) none) ;; 45
-    (nav-control-method-46 (_type_ symbol) none) ;; 46
+    (nav-control-method-46 (_type_ symbol vector float) sphere) ;; 46
     (nav-control-method-47 (_type_ symbol vector float int) symbol) ;; 47
     )
   )
