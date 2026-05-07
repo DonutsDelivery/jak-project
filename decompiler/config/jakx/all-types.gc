@@ -2863,8 +2863,8 @@
 (deftype hud-results-base (hud-item-group)
   ((spawn-time        int32  :offset-assert 44)
    (start-time        int32  :offset-assert 48)
-   (grand-prix        basic  :offset-assert 52)
-   (grand-prix-totals basic  :offset-assert 56)
+   (grand-prix        symbol :offset-assert 52)
+   (grand-prix-totals symbol :offset-assert 56)
    )
   :method-count-assert 24
   :size-assert         #x3c
@@ -2906,7 +2906,7 @@
 
 (deftype hud-medal-results (hud-results-base)
   ((i-got-medal        uint8  :offset-assert 60)
-   (has-sent-inc-event basic  :offset-assert 64)
+   (has-sent-inc-event symbol :offset-assert 64)
    )
   :method-count-assert 25
   :size-assert         #x44
