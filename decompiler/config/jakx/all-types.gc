@@ -1807,7 +1807,6 @@
 
 (define-extern *last-menu-action* object)
 (define-extern default-base-menu-post (function none))
-(define-extern base-menu-event-handler (function none))
 (define-extern base-menu-init-by-other (function none))
 (define-extern menu-clear-strip (function int none))
 (define-extern METERS_PER_TEXEL object)
@@ -1963,7 +1962,6 @@
 (define-extern wrong-way-linebot-spawn (function process process))
 (define-extern set-position-and-orientation (function none))
 (define-extern set-children-position-and-orientation (function none))
-(define-extern wrong-way-event-handler (function none))
 (define-extern check-for-kill-player (function none))
 (define-extern check-for-player-dead (function none))
 (define-extern wrong-way-init-by-other (function int int none))
@@ -5766,7 +5764,6 @@
 (define-extern gunmount-common-post (function none))
 (define-extern gunmount-drawable-init-by-other (function none))
 (define-extern gunmount-event-handler (function none))
-(define-extern muzzle-flash-event-handler (function none))
 (define-extern muzzle-flash-init-by-other (function none))
 (define-extern gunmount-get-change-anim (function none))
 (define-extern gunmount-generic-event-handler (function none))
@@ -63571,3 +63568,8 @@
 (define-extern v-yellow-guided-missile-init-remote (function none :behavior v-yellow-guided-missile))
 (define-extern v-wpn-yellow-guided-missile-init-remote (function none :behavior v-wpn-yellow-guided-missile))
 (define-extern red-sentry-bot-init-remote (function none :behavior red-sentry-bot))
+
+;; event-handler :behavior tags moved past forward-ref deftypes
+(define-extern base-menu-event-handler (function process int symbol event-message-block object :behavior base-menu))
+(define-extern wrong-way-event-handler (function process int symbol event-message-block object :behavior wrong-way))
+(define-extern muzzle-flash-event-handler (function process int symbol event-message-block object :behavior muzzle-flash))
