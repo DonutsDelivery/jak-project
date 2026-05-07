@@ -236,7 +236,7 @@
     // "DGO/KRASFOOT.DGO",
     // "DGO/KRASS.DGO",
     // "DGO/KRASTBOX.DGO",
-    // "DGO/KRASTRN.DGO",
+    ,"DGO/KRASTRN.DGO"
     // "DGO/KRASTT.DGO",
     // "DGO/KRASW.DGO",
     // "DGO/KRATFOOT.DGO",
@@ -385,7 +385,8 @@
   "levels_to_extract": [
     "ATL.DGO",
     "ATOLLART.DGO",
-    "ATOLLS.DGO"
+    "ATOLLS.DGO",
+    "KRASTRN.DGO"
   ],
 
   // some objects are part of STR files (streaming data).

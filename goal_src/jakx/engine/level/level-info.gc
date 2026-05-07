@@ -166,7 +166,40 @@
 
 (define krastbox #f)
 
-(define krastrn #f)
+;; PARTIAL RESTORATION 2026-05-07: krastrn level-load-info from PS2 binary
+;; (decompiler_out/jakx/level-info_ir2.asm L2016), fitted to current master
+;; deftype shape. krastrn is the in-game training/tutorial level (Kras City
+;; training arena, referenced by game-task kras-training task=7).
+;; Source: PS2 binary only — no 1c1685105/jak3 hand-port source exists for
+;; kras-* levels (1c1685105:level-info.gc is jak3-rooted, has no kras refs).
+;; Substitutes: mood-range *default-mood-range* (PS2 ref) -> inline static
+;; literal (atoll precedent); :master-level krasw kept but krasw still
+;; stubbed, so loader sees #f master.
+;; See .jakx_watch/krasw_restoration_recon.md for full slot-by-slot table.
+(define krastrn
+  (new 'static 'level-load-info
+    :name 'krastrn
+    :visname 'krastrn-vis
+    :nickname 'krastrn
+    :dbname 'krastrn
+    :taskname 'default
+    :index #x3c
+    :master-level #f
+    :packages '()
+    :memory-mode (level-memory-mode small-center)
+    :mood-func 'update-mood-default
+    :special-mood #f
+    :ocean #f
+    :draw-priority 10.0
+    :base-task-mask (task-mask task0)
+    :continues '()
+    :callback-list '()
+    :borrow #f
+    :bottom-height (meters -20)
+    :fog-mult 1.0
+    :mood-range (new 'static 'mood-range :max-cloud 1.0 :min-fog 0.5 :max-fog 1.0)
+    )
+  )
 
 (define krasa #f)
 

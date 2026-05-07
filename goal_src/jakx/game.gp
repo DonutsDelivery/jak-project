@@ -88,6 +88,10 @@
 ;; Named ATL.DGO to match level info nickname 'atl (loader requests ATL.DGO).
 (cgo-file "atoll.gd" '())
 
+;; tutorial level — krastrn (Kras City training arena). Code objects (net-training)
+;; not yet ported; only level data/visibility.
+(cgo-file "krastrn.gd" '())
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Groups
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
