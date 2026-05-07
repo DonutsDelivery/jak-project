@@ -1640,5 +1640,13 @@
   ],
   "dynamic-mem": [
     ["L98", "(pointer uint8)", 307200]
+  ],
+  "headset-h": [
+    ["L3", "(pointer uint8)", 16],
+    ["L4", "(pointer uint8)", 640],
+    ["L5", "(pointer uint8)", 640],
+    ["L6", "(pointer uint8)", 400],
+    ["L7", "(pointer uint8)", 2048],
+    ["L8", "(pointer uint8)", 2048]
   ]
 }
