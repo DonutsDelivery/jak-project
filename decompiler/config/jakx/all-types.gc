@@ -2875,8 +2875,8 @@
 
 (deftype hud-rank-name-score (hud-item-group)
   ((player-id         int32  :offset-assert 44)
-   (grand-prix        basic  :offset-assert 48)
-   (grand-prix-totals basic  :offset-assert 52)
+   (grand-prix        symbol :offset-assert 48)
+   (grand-prix-totals symbol :offset-assert 52)
    )
   :method-count-assert 25
   :size-assert         #x38
@@ -5304,10 +5304,10 @@
    (enemy-distance         float          :offset-assert 84)
    (hud-direction-arrow-01 basic          :offset-assert 88)
    (hud-namebar-shape-01   basic          :offset-assert 92)
-   (offscreen              basic          :offset-assert 96)
-   (only-direction-arrows  basic          :offset-assert 100)
-   (fade-at-distance       basic          :offset-assert 104)
-   (no-direction-indicator basic          :offset-assert 108)
+   (offscreen              symbol         :offset-assert 96)
+   (only-direction-arrows  symbol         :offset-assert 100)
+   (fade-at-distance       symbol         :offset-assert 104)
+   (no-direction-indicator symbol         :offset-assert 108)
    (indicator-alpha        float          :offset-assert 112)
    )
   :method-count-assert 27
