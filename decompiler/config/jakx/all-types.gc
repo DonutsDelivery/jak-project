@@ -2501,7 +2501,7 @@
   ((slide-type       uint64  :offset-assert 32)
    (slide-time       float   :offset-assert 40)
    (start-time       int32   :offset-assert 44)
-   (message-is-enter basic   :offset-assert 48)
+   (message-is-enter symbol  :offset-assert 48)
    )
   :method-count-assert 15
   :size-assert         #x34
@@ -2551,7 +2551,7 @@
 (deftype hud-effect-fade (hud-effect)
   ((fade-time   float  :offset-assert 28)
    (start-time  int32  :offset-assert 32)
-   (fade-out-on basic  :offset-assert 36)
+   (fade-out-on symbol :offset-assert 36)
    )
   :method-count-assert 15
   :size-assert         #x28
@@ -2565,7 +2565,7 @@
    (target-scale float  :offset-assert 32)
    (start-scale  float  :offset-assert 36)
    (start-time   int32  :offset-assert 40)
-   (dont-move-me basic  :offset-assert 44)
+   (dont-move-me symbol :offset-assert 44)
    )
   :method-count-assert 15
   :size-assert         #x30
@@ -2659,9 +2659,9 @@
 
 (deftype hud-clock (hud-item-group)
   ((clock-id        int8    :offset-assert 44)
-   (count-up        basic   :offset-assert 48)
-   (fixed-time?     basic   :offset-assert 52)
-   (show-before-red basic   :offset-assert 56)
+   (count-up        symbol  :offset-assert 48)
+   (fixed-time?     symbol  :offset-assert 52)
+   (show-before-red symbol  :offset-assert 56)
    (red-time        int32   :offset-assert 60)
    (text-id         uint32  :offset-assert 64)
    (fixed-time-val  int32   :offset-assert 68)
@@ -2677,7 +2677,7 @@
 
 
 (deftype hud-medal (hud-item-group)
-  ((score-as-time basic  :offset-assert 44)
+  ((score-as-time symbol :offset-assert 44)
    )
   :method-count-assert 24
   :size-assert         #x30
@@ -2687,8 +2687,8 @@
 
 
 (deftype hud-lap (hud-item-group)
-  ((show-total-laps    basic  :offset-assert 44)
-   (is-net-player-race basic  :offset-assert 48)
+  ((show-total-laps    symbol :offset-assert 44)
+   (is-net-player-race symbol :offset-assert 48)
    (total-laps         int8   :offset-assert 52)
    (current-laps       int8   :offset-assert 53)
    )
@@ -2757,8 +2757,8 @@
 
 
 (deftype hud-score-single (hud-item-group)
-  ((need-event-before-update basic  :offset-assert 44)
-   (other-human              basic  :offset-assert 48)
+  ((need-event-before-update symbol :offset-assert 44)
+   (other-human              symbol :offset-assert 48)
    (display-score            int32  :offset-assert 52)
    )
   :method-count-assert 25
@@ -2772,8 +2772,8 @@
 
 
 (deftype hud-leader-score (hud-item-group)
-  ((force-visible basic  :offset-assert 44)
-   (only-humans   basic  :offset-assert 48)
+  ((force-visible symbol :offset-assert 44)
+   (only-humans   symbol :offset-assert 48)
    )
   :method-count-assert 24
   :size-assert         #x34
@@ -2783,7 +2783,7 @@
 
 
 (deftype hud-item-score-list (hud-item-group)
-  ((ignore-self             basic  :offset-assert 44)
+  ((ignore-self             symbol :offset-assert 44)
    (active-net-player-count int32  :offset-assert 48)
    )
   :method-count-assert 24
@@ -2805,8 +2805,8 @@
 
 
 (deftype hud-place-event (hud-item-group)
-  ((should-be-visible basic  :offset-assert 44)
-   (hide-titles       basic  :offset-assert 48)
+  ((should-be-visible symbol :offset-assert 44)
+   (hide-titles       symbol :offset-assert 48)
    )
   :method-count-assert 24
   :size-assert         #x34
