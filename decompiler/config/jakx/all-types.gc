@@ -47612,10 +47612,10 @@
   )
 
 
-(define-extern net-player-race-init-remote (function none))
+(define-extern net-player-race-init-remote (function none :behavior net-player-race))
 (define-extern *msg-map-net-player-race* array)
 (define-extern *net-process-class-info-net-player-race* net-process-class-info)
-(define-extern net-game-mgr-race-init-remote (function none))
+(define-extern net-game-mgr-race-init-remote (function none :behavior net-game-mgr-race))
 (define-extern *msg-map-net-game-mgr-race* array)
 (define-extern *net-process-class-info-net-game-mgr-race* net-process-class-info)
 
