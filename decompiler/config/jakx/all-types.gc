@@ -2209,7 +2209,7 @@
 (define-extern *eco-nearby-array* array)
 (define-extern *eco-last-processed* object)
 (define-extern init-local-net-eco-mgr (function none))
-(define-extern compute-veh-eco-owner-score (function none))
+(define-extern compute-veh-eco-owner-score (function object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-eco-types                  ;;
@@ -2239,18 +2239,18 @@
 (define-extern *net-simple-destruct-indices* object)
 (define-extern *tmp-was-allocated* object)
 (define-extern *destruct-powerup-names* array)
-(define-extern get-destruct-perm (function none))
+(define-extern get-destruct-perm (function object none))
 (define-extern count-powerups (function uint none))
 (define-extern rand-spawn-pickup (function none))
-(define-extern spawn-pickups-from-destructible (function none))
+(define-extern spawn-pickups-from-destructible (function object object none))
 (define-extern init-local-net-simple-destruct-mgr (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-enemy                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern play-anim-along-path (function none))
-(define-extern advance-anim-by-motion (function none))
+(define-extern play-anim-along-path (function object object object none))
+(define-extern advance-anim-by-motion (function object object none))
 (define-extern *tmp-transition* object)
 (define-extern net-enemy-default-handler (function none))
 (define-extern kill-all-enemies (function none))
@@ -2265,8 +2265,8 @@
 (define-extern explosion-spawn (function explosion-init-params process-drawable process))
 (define-extern find-closest-solid-sphere-prim (function none)) ;; (function collide-shape vector collide-spec collide-shape-prim)
 (define-extern *explosion-debug-sphere* sphere) ;; sphere
-(define-extern explosion-handle-touch-with-ccheck (function none))
-(define-extern explosion-handle-touch-without-ccheck (function none))
+(define-extern explosion-handle-touch-with-ccheck (function object object none))
+(define-extern explosion-handle-touch-without-ccheck (function object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-weapons-data          ;;
@@ -2837,7 +2837,7 @@
 
 
 (define-extern team-has-local-humans? (function symbol))
-(define-extern get-player-id-by-team (function none))
+(define-extern get-player-id-by-team (function object none))
 (define-extern *hud-slowmo* array)
 (define-extern *hud-slowmo-proc* object)
 (define-extern spawn-hud-slowmo (function object))
@@ -2994,7 +2994,7 @@
 
 
 (define-extern score-is-time (function symbol))
-(define-extern set-stats-text (function none))
+(define-extern set-stats-text (function object object object none))
 (define-extern *had-gold* object)
 (define-extern is-nonstandard-mode-ignore-split? (function symbol))
 (define-extern is-nonstandard-mode? (function symbol))
@@ -3017,7 +3017,7 @@
 (define-extern spawn-hud-results-team-view-1 (function object))
 (define-extern spawn-hud-results-team (function none))
 (define-extern spawn-hud-results (function none))
-(define-extern calc-player-rank (function none))
+(define-extern calc-player-rank (function object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; hud-results-grand-prix         ;;
@@ -3232,7 +3232,7 @@
 
 
 (define-extern medal-uses-score? (function symbol))
-(define-extern get-medal-ignore-gamestate (function none))
+(define-extern get-medal-ignore-gamestate (function object none))
 (define-extern settings-multiplier (function none))
 (define-extern cup-multiplier (function none))
 (define-extern medal-instead-of-place? (function symbol))
@@ -3621,7 +3621,7 @@
 (define-extern *text-display-supernova-backfire-view-2-proc* object)
 (define-extern spawn-text-display-supernova-backfire-view-2 (function object))
 (define-extern display-supernova-backfire-text-to-view (function int none))
-(define-extern change-to-screen-space (function none))
+(define-extern change-to-screen-space (function object object none))
 (define-extern *hud-points-icon-display0* array)
 (define-extern *hud-points-icon-display0-proc* object)
 (define-extern spawn-hud-points-icon-display0 (function object))
@@ -4702,8 +4702,8 @@
 (define-extern birth-func-explosion-aligned-velocity (function none))
 (define-extern birth-func-vws-adopt-velocity (function none))
 (define-extern spt-birth-func-brightness-oil (function none))
-(define-extern spt-func-part-oil-emit (function none))
-(define-extern spt-func-part-oil-emit-sparkle (function none))
+(define-extern spt-func-part-oil-emit (function object object object none))
+(define-extern spt-func-part-oil-emit-sparkle (function object object object none))
 (define-extern check-scorp-shell-level1 (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern check-scorp-shell-level2 (function sparticle-system sparticle-cpuinfo vector none))
 (define-extern *curve-toad-linear-up-red* curve2d-piecewise)
@@ -4730,21 +4730,21 @@
 (define-extern *trail-color-red-mine* curve-color-fast)
 (define-extern *mine-trail-red* light-trail-composition)
 (define-extern *mine-trail-purple* light-trail-composition)
-(define-extern shield-flash-part-callback (function none))
+(define-extern shield-flash-part-callback (function object none))
 (define-extern *weapon-drone-glow-template* object)
 (define-extern *weapon-drone-visor-template* object)
 (define-extern *wasted-missile-colors* object)
 (define-extern *wasted-missile-vec* object)
 (define-extern *wasted-missile-origin?* object)
-(define-extern birth-func-wasted-missile (function none))
+(define-extern birth-func-wasted-missile (function object object object none))
 (define-extern birth-func-copy-rotate-z-to-rot-z (function float))
-(define-extern spt-birth-func-b-part-turbo-suppressed (function none))
-(define-extern spt-func-part-turbo-suppressed (function none))
+(define-extern spt-birth-func-b-part-turbo-suppressed (function object object object object none))
+(define-extern spt-func-part-turbo-suppressed (function object object object none))
 (define-extern birth-func-adopt-velocity (function none))
 (define-extern sparticle-adopt-accel (function none))
 (define-extern sparticle-seek-owner (function none))
 (define-extern birth-func-dark-eco-bubble (function none))
-(define-extern spt-func-bubble-alternate (function none))
+(define-extern spt-func-bubble-alternate (function object object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-effects               ;;
@@ -4915,7 +4915,7 @@
   )
 
 
-(define-extern update-engine-mix-state (function none))
+(define-extern update-engine-mix-state (function object object object none))
 (define-extern *debug-engine-sound-work* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -5014,17 +5014,17 @@
 (define-extern reticle-on-him-spinner object)
 (define-extern reticle-on-him-color-enemy object)
 (define-extern reticle-on-him-spinner-color-enemy object)
-(define-extern reticle-allowed? (function none))
+(define-extern reticle-allowed? (function object none))
 (define-extern vehicle-reticle-base-init-by-other (function uint none))
 (define-extern vehicle-reticle-base-trans (function none :behavior vehicle-reticle-base))
 (define-extern v-reticle-update-missile (function uint uint none))
 (define-extern vehicle-reticle-on-me-init-by-other (function none :behavior vehicle-reticle-on-me))
-(define-extern vehicle-reticle-on-me-helper-missile-inc (function none))
-(define-extern vehicle-reticle-on-me-helper-peacemaker-inc (function none))
+(define-extern vehicle-reticle-on-me-helper-missile-inc (function object none))
+(define-extern vehicle-reticle-on-me-helper-peacemaker-inc (function object none))
 (define-extern vehicle-reticle-on-them-init-by-other (function none :behavior vehicle-reticle-on-them))
 (define-extern targeting-reticle-for-this-weapon-type? (function uint none))
 (define-extern targeting-reticle-line-of-sight? (function uint uint none))
-(define-extern draw-reticle-on-them (function none))
+(define-extern draw-reticle-on-them (function object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle                       ;;
@@ -5045,7 +5045,7 @@
 (define-extern handle-weapon-removed-event (function uint uint none))
 (define-extern handle-weapon-moved-event (function uint uint uint none))
 (define-extern wv-weapon-pickup-helper (function uint int none))
-(define-extern wv-pickup-handler (function none))
+(define-extern wv-pickup-handler (function object object object none))
 (define-extern wv-set-handler (function none))
 (define-extern wv-query-handler (function none))
 (define-extern wv-go-handler (function uint uint none))
@@ -5407,7 +5407,7 @@
 ;; wvehicle-race                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern check-travel (function none))
+(define-extern check-travel (function object object object none))
 (define-extern *previous-angle* float)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -5755,7 +5755,7 @@
 (define-extern gunmount-common-trans (function none))
 (define-extern gunmount-common-post (function none))
 (define-extern gunmount-event-handler (function none))
-(define-extern gunmount-get-change-anim (function none))
+(define-extern gunmount-get-change-anim (function object object none))
 (define-extern gunmount-generic-event-handler (function none))
 (define-extern v-wpn-yellow-chain-gun-I-rapid-fire-control-params object)
 (define-extern v-wpn-yellow-chain-gun-II-rapid-fire-control-params object)
@@ -5763,9 +5763,9 @@
 (define-extern v-wpn-yellow-default-gun-rapid-fire-control-params object)
 (define-extern *msg-map-v-wpn-yellow-guided-missile* array)
 (define-extern *net-process-class-info-v-wpn-yellow-guided-missile* object)
-(define-extern guided-missile-gen-proj-no-targ-helper (function none))
-(define-extern guided-missile-gen-proj-targ-helper (function none))
-(define-extern seismic-blaster-affects-player? (function none))
+(define-extern guided-missile-gen-proj-no-targ-helper (function object object none))
+(define-extern guided-missile-gen-proj-targ-helper (function object object object none))
+(define-extern seismic-blaster-affects-player? (function object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-weapons-aux           ;;
@@ -5781,14 +5781,14 @@
 (define-extern *msg-map-red-sentry-bot* array)
 (define-extern *net-process-class-info-red-sentry-bot* object)
 (define-extern v-wpn-sentrybot-rapid-fire-control-params object)
-(define-extern sentrybot-poke-yaw! (function none))
-(define-extern sentrybot-poke-pitch! (function none))
+(define-extern sentrybot-poke-yaw! (function object object none))
+(define-extern sentrybot-poke-pitch! (function object object none))
 (define-extern red-sentry-bot-common-trans (function none))
 (define-extern red-sentry-bot-poll-target (function none))
 (define-extern sentry-bot-base-handler (function int uint none))
 (define-extern v-wpn-yellow-bulldog-rapid-fire-control-params object)
 (define-extern v-wpn-yellow-bulldog-II-rapid-fire-control-params object)
-(define-extern drone-compute-pos! (function none))
+(define-extern drone-compute-pos! (function object object none))
 (define-extern drone-trans-set-pos (function none))
 (define-extern drone-trans-twitchy-rot (function none))
 (define-extern drone-trans-rot-at-target (function none))
@@ -5848,8 +5848,8 @@
   
 
 
-(define-extern mine-compute-landing-point! (function none))
-(define-extern spawn-mine (function none))
+(define-extern mine-compute-landing-point! (function object object object none))
+(define-extern spawn-mine (function object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-weapons3              ;;
@@ -5879,24 +5879,24 @@
 
 
 
-(define-extern shield-jiggle-scale! (function none))
+(define-extern shield-jiggle-scale! (function object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-weapons-util          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern v-wpn-base-init-by-other (function uint int int none))
-(define-extern warning-hud-draw (function none))
+(define-extern warning-hud-draw (function object object object none))
 (define-extern v-wpn-type->color (function int none))
 (define-extern v-wpn-type->gunmount-config (function int none))
 (define-extern v-wpn-missile-init-by-other (function int uint int none))
 (define-extern make-vehicle-weapon-slot (function int uint int none))
-(define-extern v-wpn-choose-increasing-lethality (function none))
-(define-extern v-wpn-get-mask (function none))
+(define-extern v-wpn-choose-increasing-lethality (function object object none))
+(define-extern v-wpn-get-mask (function object none))
 (define-extern v-wpn-num-available (function int int none))
-(define-extern v-wpn-choose-random (function none))
+(define-extern v-wpn-choose-random (function object object none))
 (define-extern v-wpn-get-available-types (function int none))
-(define-extern race-player-behind-more-than (function none))
+(define-extern race-player-behind-more-than (function object object none))
 (define-extern v-wpn-get-selection-table (function int int none))
 (define-extern v-wpn-mask-selection-table! (function uint uint int none))
 (define-extern v-wpn-pack-msg (function uint int none))
@@ -5904,9 +5904,9 @@
 (define-extern vehicle-get-weapon-level (function uint uint none))
 (define-extern global-turbo-suppressor-set! (function int none))
 (define-extern should-suppress-eco? (function int symbol))
-(define-extern rapid-fire-control-emitter-from-world (function none))
-(define-extern rapid-fire-control-initialize-from-vehicle (function none))
-(define-extern is-friendly-fire-helper (function none))
+(define-extern rapid-fire-control-emitter-from-world (function object object object object none))
+(define-extern rapid-fire-control-initialize-from-vehicle (function object object none))
+(define-extern is-friendly-fire-helper (function object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wcar-skel                      ;;
@@ -27827,7 +27827,7 @@
 (define-extern *level-bounding-box* level-bounding-box)
 (define-extern *msg-buffers* (pointer mem-buffer))
 (define-extern alloc-msg-buffer (function none))
-(define-extern free-msg-buffer (function none))
+(define-extern free-msg-buffer (function object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-mgr-h                      ;;
@@ -36814,7 +36814,7 @@
 
 
 (define-extern *sprite-distorter-sine-tables* sprite-distorter-sine-tables) ;; sprite-distorter-sine-tables
-(define-extern sprite-distorter-generate-tables (function none))
+(define-extern sprite-distorter-generate-tables (function object object none))
 (define-extern sprite-distort-vu1-block vu-function)
 (define-extern sprite-init-distorter (function dma-buffer none))
 (define-extern sprite-draw-distorters (function dma-buffer none))
@@ -37669,7 +37669,7 @@
 (define-extern make-alpha-ramp-clut (function (pointer uint32) none))
 (define-extern texture-anim-alpha-ramp-clut-upload (function dma-buffer texture-anim none))
 (define-extern texture-anim-alpha-ramp-clut-init (function texture-anim none))
-(define-extern texture-anim-override-size-init (function none))
+(define-extern texture-anim-override-size-init (function object none))
 (define-extern texture-anim-change-mt8h-init (function texture-anim none))
 (define-extern *texture-anim-pages-table* (pointer uint8)) ;; (pointer uint8)
 (define-extern *texture-anim-mip-array* (pointer uint16)) ;; (pointer uint16)
@@ -37704,7 +37704,7 @@
 (define-extern set-cloud-minmax! (function float float none))
 (define-extern *default-pris-texture-anim-array* texture-anim-array)
 (define-extern *car-texture-anim-array-work* car-texture-anim-array-work)
-(define-extern car-texture-anim-layer-func (function none))
+(define-extern car-texture-anim-layer-func (function object none))
 (define-extern *default-car-texture-anim-array* texture-anim-array)
 (define-extern set-car-highlight! (function int int int none))
 (define-extern update-car-texture-anim-array (function none))
@@ -37761,20 +37761,20 @@
 (define-extern *font-random-generator* object)
 (define-extern *font-curve-ghosting* array)
 (define-extern *font-curve-ghosting-2* array)
-(define-extern evaluate-font-curve (function none))
-(define-extern in-out-curve (function none))
+(define-extern evaluate-font-curve (function object object none))
+(define-extern in-out-curve (function object object object none))
 (define-extern char-effect-compute-colors (function uint int int none))
 (define-extern char-effect-compute2 (function none))
 (define-extern *loading-pad-leftx* float)
 (define-extern *loading-pad-lefty* float)
 (define-extern *loading-pad-rightx* float)
 (define-extern *loading-pad-righty* float)
-(define-extern char-effect-compute (function none))
+(define-extern char-effect-compute (function object object object object none))
 (define-extern draw-string-init-justify (function none))
-(define-extern draw-string-no-asm (function none))
+(define-extern draw-string-no-asm (function object object object none))
 (define-extern draw-string-asm-packed (function none))
 (define-extern draw-string3d-asm (function none))
-(define-extern draw-effect-string (function none))
+(define-extern draw-effect-string (function object object object none))
 (define-extern draw-string (function string dma-buffer font-context draw-string-result))
 (define-extern get-string-length-asm (function none))
 (define-extern get-string-length (function string font-context draw-string-result))
@@ -37890,7 +37890,7 @@
 
 (define-extern mem-usage-shrub-walk (function draw-node int memory-usage-block int draw-node))
 (define-extern highres-shrub-login (function draw-node none))
-(define-extern highres-prototype-shrub-login (function none))
+(define-extern highres-prototype-shrub-login (function object none))
 (define-extern shrub-vu1-block vu-function)
 (define-extern shrub-num-tris (function shrubbery uint))
 (define-extern shrub-make-perspective-matrix (function matrix matrix matrix))
@@ -38172,7 +38172,7 @@
 
 (define-extern etn-vu1-block object)
 (define-extern etn-magic (function int none))
-(define-extern etn-init-consts (function none))
+(define-extern etn-init-consts (function object object none))
 (define-extern etn-init-engine (function int int int none))
 (define-extern etn-end-buffer "Set up DMA to finish TIE." (function dma-buffer none))
 (define-extern etn-float-reg-calc (function int string))
@@ -38383,12 +38383,12 @@
 (define-extern sp-relaunch-setup-fields (function object sparticle-launcher sparticle-cpuinfo sprite-vec-data-3d none))
 (define-extern sp-relaunch-particle-2d (function object sparticle-launcher sparticle-cpuinfo sprite-vec-data-2d none))
 (define-extern sp-relaunch-particle-3d (function object sparticle-launcher sparticle-cpuinfo sprite-vec-data-3d none))
-(define-extern get-matching-control-table-index (function none))
-(define-extern kill-all-particles-with-control (function none))
+(define-extern get-matching-control-table-index (function object object none))
+(define-extern kill-all-particles-with-control (function object none))
 (define-extern execute-particle-local-space-engine (function int none))
 (define-extern local-space-camera (function particle-local-space-info none))
 (define-extern local-space-proc-joint (function particle-local-space-info none))
-(define-extern local-space-proc-root (function none))
+(define-extern local-space-proc-root (function object none))
 (define-extern spawn-level-particles-for-camera (function symbol))
 (define-extern execute-part-engine (function none))
 (define-extern check-particles (function none))
@@ -38430,7 +38430,7 @@
 (define-extern birth-func-set-vel-range (function none))
 (define-extern birth-func-texture-group (function int sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern rot-to-particle (function degrees sprite-vec-data-2d matrix none))
-(define-extern rot-to-particle-no-flip (function none))
+(define-extern rot-to-particle-no-flip (function object object none))
 (define-extern birth-func-flip-based-on-scale (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
 (define-extern sparticle-2d-spline-align (function object sparticle-cpuinfo sprite-vec-data-2d object none))
 (define-extern sparticle-2d-spline-align-no-flip (function none))
@@ -38566,7 +38566,7 @@
 (define-extern external-art-buffer-init (function external-art-buffer int))
 (define-extern *preload-spool-anims* symbol) ;; symbol
 (define-extern ja-play-spooled-anim (function none)) ;; (function spool-anim art-joint-anim art-joint-anim (function process-drawable symbol) spooler-flags int :behavior process-drawable)
-(define-extern ja-play-spooled-no-sync-anim (function none))
+(define-extern ja-play-spooled-no-sync-anim (function object object object object none))
 (define-extern ja-abort-spooled-anim (function spool-anim art-joint-anim int int :behavior process-drawable))
 (define-extern *gui-control* gui-control) ;; gui-control
 (define-extern *art-control* external-art-control) ;; external-art-control
@@ -38636,7 +38636,7 @@
 (define-extern *dma-block-lists* array)
 (define-extern can-place-block? (function int int int int symbol))
 (define-extern dma-try-alloc-single (function int int int int symbol))
-(define-extern dma-try-alloc (function none))
+(define-extern dma-try-alloc (function object object object object none))
 (define-extern dma-release (function int none))
 (define-extern dma-dump (function symbol))
 (define-extern dma-is-empty (function symbol))
@@ -38748,8 +38748,8 @@
 (define-extern update-mood-pulse (function mood-context int int float float float float float))
 (define-extern update-mood-strobe (function mood-context int int int float float))
 (define-extern update-mood-caustics (function mood-context int float float float float float))
-(define-extern override-mood-fog (function none))
-(define-extern override-mood-color (function none))
+(define-extern override-mood-fog (function object object object object none))
+(define-extern override-mood-color (function object object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; mood-funcs                     ;;
@@ -38851,12 +38851,12 @@
 (define-extern init-mood-fog-drome (function vector))
 (define-extern update-mood-default-interior (function mood-context none :behavior time-of-day-proc))
 (define-extern update-mood-default-interior-ambient (function mood-context none :behavior time-of-day-proc))
-(define-extern update-rustyh-lights (function none))
+(define-extern update-rustyh-lights (function object none))
 (define-extern update-mood-rustyh (function int none))
 (define-extern set-rustyh-effect-light! (function int none))
 (define-extern update-hiphog-lights (function mood-context none))
 (define-extern update-mood-hiphog (function mood-context float none :behavior time-of-day-proc))
-(define-extern update-garage-brdroom-lights (function none))
+(define-extern update-garage-brdroom-lights (function object none))
 (define-extern update-mood-garage-brdroom (function none))
 (define-extern set-garage-switched! (function int none))
 
@@ -39473,7 +39473,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern add-collide-debug-box (function vector rgba int)) 
-(define-extern print-collide-cache-tri-count (function none))
+(define-extern print-collide-cache-tri-count (function object none))
 (define-extern print-exceeded-max-cache-tris (function none))
 (define-extern fill-bg-using-box-new (function collide-cache object collide-query none))
 (define-extern fill-bg-using-line-sphere-new (function collide-cache object collide-query none))
@@ -39566,7 +39566,7 @@
   :flag-assert         #x900000030
   )
 
-(define-extern should-push-away-test-mesh (function none))
+(define-extern should-push-away-test-mesh (function object object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; collide-touch                  ;;
@@ -39615,9 +39615,9 @@
 ;; collide-planes                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern collide-planes-intersect (function none))
+(define-extern collide-planes-intersect (function object object none))
 (define-extern collide-planes-test0 (function vector float float none))
-(define-extern collide-planes-test1 (function none))
+(define-extern collide-planes-test1 (function object object object object none))
 (define-extern collide-planes (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -40650,7 +40650,7 @@
 (define-extern ja-rate (function int float :behavior process-drawable))
 (define-extern ja-linear-vel (function int vector :behavior process-drawable))
 (define-extern ja-linear-dist (function int int none))
-(define-extern ja-distance-covered (function none))
+(define-extern ja-distance-covered (function object none))
 (define-extern ja-channel-set! (function int int :behavior process-drawable))
 (define-extern ja-channel-push! (function int time-frame int :behavior process-drawable))
 (define-extern ja-channel-float! (function art-joint-anim float float float joint-control-channel :behavior process-drawable))
@@ -42423,8 +42423,8 @@
 (define-extern calc-shadow-masks (function light-group draw-control uint symbol)) ;; draw-control not live
 (define-extern calc-realtime-lights (function light-group draw-control uint symbol)) ;; draw-control not live
 (define-extern calc-vu1-lights (function vu-lights draw-control symbol none)) ;; draw-control not live
-(define-extern calc-particle-average-color (function none))
-(define-extern calc-particle-directional-color (function none))
+(define-extern calc-particle-average-color (function object object none))
+(define-extern calc-particle-directional-color (function object object object none))
 (define-extern real-dma-add-process-drawable (function none))
 (define-extern dma-add-process-drawable (function process-drawable draw-control symbol dma-buffer none)) ;; process-drawable/draw-control not live
 (define-extern *hud-lights* vu-lights)
@@ -42872,8 +42872,8 @@
 (define-extern *nav-mesh-work* nav-mesh-work) ;; nav-mesh-work
 (define-extern *default-nav-mesh* nav-mesh) ;; nav-mesh
 (define-extern *nav-mesh-id-hash* array)
-(define-extern id-hash-find-free-index (function none))
-(define-extern id-hash-find-matching-index (function none))
+(define-extern id-hash-find-free-index (function object none))
+(define-extern id-hash-find-matching-index (function object none))
 (define-extern nav-mesh-connect-from-ent (function process-drawable symbol))
 (define-extern connection-validate (function connection none))
 (define-extern connection-list-validate (function (inline-array connection) symbol))
@@ -42892,7 +42892,7 @@
 (define-extern find-nearest-nav-mesh (function vector float nav-mesh))
 (define-extern point-to-poly-boundary (function nav-poly vector vector float))
 (define-extern find-first-containing-nav-mesh (function symbol))
-(define-extern find-nav-mesh (function none))
+(define-extern find-nav-mesh (function object object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; nav-control                    ;;
@@ -43279,7 +43279,7 @@
 (define-extern *debug-hud-disable* object)
 (define-extern hud-create-icon (function hud int int (pointer manipy)))
 (define-extern hud-post (function none :behavior hud))
-(define-extern hud-handler (function none))
+(define-extern hud-handler (function object object object object none))
 (define-extern hud-init-by-other (function object :behavior hud))
 (define-extern set-hud-piece-position! (function hud-sprite int int none)) ;; was: (function none) — backported from jak3
 (define-extern set-as-offset-from! (function hud-sprite vector4w int int none)) ;; was: (function none) — backported from jak3
@@ -43304,8 +43304,8 @@
 
 (define-extern *race-map-info-array* object)
 (define-extern hud-map-init-by-other (function int int none))
-(define-extern hack-set-level-bbox (function none))
-(define-extern init-level-bbox-from-map (function none))
+(define-extern hack-set-level-bbox (function object object object object none))
+(define-extern init-level-bbox-from-map (function object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; progress                       ;;
@@ -45392,7 +45392,7 @@
 (define-extern vehicle-init-remote (function none :behavior vehicle))
 (define-extern *msg-map-vehicle* array)
 (define-extern *net-process-class-info-vehicle* net-process-class-info)
-(define-extern vehicle-get-flag-attach-point (function none))
+(define-extern vehicle-get-flag-attach-point (function object none))
 (define-extern meters-per-sec->mph (function degrees float))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -46175,7 +46175,7 @@
   )
 
 (define-extern V_R_MINE1_ARMED? object)
-(define-extern weapon-mask->type (function none))
+(define-extern weapon-mask->type (function object none))
 (define-extern *weapon-suppression-table* object)
 (define-extern v-wpn-base-common-trans (function none))
 (define-extern v-wpn-event-base (function none))
@@ -47268,8 +47268,8 @@
   )
 
 (define-extern *ghost-info-ptr* object)
-(define-extern net-play-mode-race? (function none))
-(define-extern get-task-node-id-from-location-and-event (function none))
+(define-extern net-play-mode-race? (function object none))
+(define-extern get-task-node-id-from-location-and-event (function object object none))
 (define-extern *default-vehicle-load-parts* object)
 (define-extern encode-green-room-stats (function uint int none))
 (define-extern decode-green-room-stats (function uint int none))
@@ -48356,7 +48356,7 @@
 (define-extern net-projectile-init-remote (function none :behavior net-projectile))
 (define-extern *msg-map-net-projectile* array)
 (define-extern *net-process-class-info-net-projectile* net-process-class-info)
-(define-extern spawn-net-projectile (function none))
+(define-extern spawn-net-projectile (function object object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-time-trial-h               ;;
@@ -49364,7 +49364,7 @@
 (define-extern *player-5-extra* object)
 (define-extern *player-6-extra* object)
 (define-extern get-extra-player-string (function int none))
-(define-extern set-index (function none))
+(define-extern set-index (function object object none))
 ;; DEAD: UI/menu infrastructure
 (define-extern *selection-cache-array* object)
 (define-extern *selection-cache-index* object)
@@ -49896,7 +49896,7 @@
 (define-extern *chat-msg-strings* array)
 (define-extern is-whitespace (function none))
 (define-extern split-chat-msg (function int none))
-(define-extern do-split-chat-msg (function none))
+(define-extern do-split-chat-msg (function object none))
 (define-extern *received-chat-msg-ct* object)
 (define-extern *received-chat-msgs* object)
 (define-extern *chat-msg-string* object)
@@ -49908,7 +49908,7 @@
 (define-extern get-top-chat-msg (function object))
 (define-extern add-raw-popup-msg (function int int int symbol))
 (define-extern *magic-chat* array)
-(define-extern handle-chat-msg (function none))
+(define-extern handle-chat-msg (function object none))
 (define-extern fake-chat-msg (function none))
 (define-extern send-chat-with-clan-id (function int int int none))
 (define-extern send-chat-with-game-id (function int int int none))
@@ -50043,7 +50043,7 @@
 (define-extern get-host-by-name-callback (function none))
 (define-extern *dns-string* object)
 (define-extern *dns-string2* object)
-(define-extern get-host-by-name (function none))
+(define-extern get-host-by-name (function object object none))
 (define-extern net-get-client-ip (function int none))
 (define-extern per-process-hook (function none))
 
@@ -50144,7 +50144,7 @@
 (define-extern lobby-non-fatal-error (function int none))
 (define-extern mas-connect-callback (function none))
 (define-extern medius-text-filter-request-callback (function none))
-(define-extern net-filter-text (function none))
+(define-extern net-filter-text (function object object none))
 (define-extern net-mgr-process-pending-behavior (function symbol))
 (define-extern refreshing-games-callback (function none))
 (define-extern total-games-callback (function none))
@@ -50158,7 +50158,7 @@
 (define-extern *medius-announcement-ids* object)
 (define-extern cb-get-announcements (function none))
 (define-extern get-announcements (function none))
-(define-extern mark-announcement-as-read (function none))
+(define-extern mark-announcement-as-read (function object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-mgr-muis                   ;;
@@ -50212,7 +50212,7 @@
 (define-extern update-client-state (function int none))
 (define-extern init-player-lists (function none))
 (define-extern *tmp-player-name* object)
-(define-extern get-player-amplitude (function none))
+(define-extern get-player-amplitude (function object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-mgr-medius-buddies         ;;
@@ -50221,14 +50221,14 @@
 (define-extern *medius-player-account-id* object)
 (define-extern buddies-refreshing-callback (function none))
 (define-extern buddies-refreshing (function none))
-(define-extern buddies-adding-player (function none))
-(define-extern buddies-removing-player (function none))
+(define-extern buddies-adding-player (function object none))
+(define-extern buddies-removing-player (function object none))
 (define-extern ignore-refreshing-callback (function none))
 (define-extern ignore-refreshing (function none))
-(define-extern ignore-adding-player (function none))
-(define-extern ignore-removing-player (function none))
+(define-extern ignore-adding-player (function object none))
+(define-extern ignore-removing-player (function object none))
 (define-extern finding-player-callback (function none))
-(define-extern finding-player (function none))
+(define-extern finding-player (function object none))
 (define-extern retrieve-player-lists (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -50247,29 +50247,29 @@
 (define-extern clan-create (function int symbol))
 (define-extern clan-disband (function none))
 (define-extern clan-leave (function none))
-(define-extern clan-remove-player (function none))
-(define-extern respond-to-clan-invite (function none))
+(define-extern clan-remove-player (function object none))
+(define-extern respond-to-clan-invite (function object object none))
 (define-extern *in-clan* object)
 (define-extern get-my-clans-callback (function none))
 (define-extern clan-invitations-sent-callback (function none))
 (define-extern check-my-clan-invitations-callback (function none))
 (define-extern check-my-clan-invitations (function none))
-(define-extern get-clan-member-list (function none))
+(define-extern get-clan-member-list (function object object none))
 (define-extern get-my-clans (function none))
 (define-extern *cur-challenge-type* object)
 (define-extern get-clan-challenges (function symbol))
-(define-extern challenge-clan (function none))
-(define-extern respond-to-challenge (function none))
+(define-extern challenge-clan (function object none))
+(define-extern respond-to-challenge (function object object none))
 (define-extern tidy-clan-challenges (function none))
 (define-extern retrieve-my-clan-data (function none))
-(define-extern invite-player-to-clan (function none))
-(define-extern revoke-clan-invite (function none))
+(define-extern invite-player-to-clan (function object none))
+(define-extern revoke-clan-invite (function object none))
 (define-extern retrieve-outstanding-invites (function none))
 (define-extern net-test-shit (function symbol))
 (define-extern clan-allowed-to-join-game (function uint none))
 (define-extern lookup-clan-challenge (function int int symbol))
 (define-extern get-clan-challenge-pair-status (function int int int none))
-(define-extern transfer-clan-leadership (function none))
+(define-extern transfer-clan-leadership (function object none))
 (define-extern set-clan-msg (function int symbol))
 (define-extern is-clan-challenge (function none))
 (define-extern can-start-clan-challenge (function symbol))
@@ -50341,15 +50341,15 @@
 (define-extern *medius-rooms* object)
 (define-extern *last-normal-room* object)
 (define-extern refresh-rooms-callback (function none))
-(define-extern refresh-rooms (function none))
+(define-extern refresh-rooms (function object object object object none))
 (define-extern *tmp-clan-string* object)
-(define-extern join-room (function none))
+(define-extern join-room (function object none))
 (define-extern room-players-refreshing-callback (function none))
 (define-extern get-players-in-room (function none))
-(define-extern get-room-name (function none))
+(define-extern get-room-name (function object object none))
 (define-extern get-current-room-name-and-info (function none))
-(define-extern create-room (function none))
-(define-extern find-room-by-name (function none))
+(define-extern create-room (function object object object object none))
+(define-extern find-room-by-name (function object none))
 (define-extern ensure-room-is-good (function symbol))
 (define-extern test-rooms (function none))
 
@@ -50375,17 +50375,17 @@
 (define-extern *medius-filters* object)
 (define-extern *medius-server-filters* object)
 (define-extern *medius-desired-server-filters* object)
-(define-extern medius-game-status-info-retrieve-behavior (function none))
+(define-extern medius-game-status-info-retrieve-behavior (function object none))
 (define-extern get-game-status-cached (function int none))
 (define-extern in-game-players-refreshing-callback (function none))
-(define-extern refresh-game-info (function none))
+(define-extern refresh-game-info (function object object none))
 (define-extern filter-game (function uint none))
 (define-extern *unfiltered-game-ct* object)
 (define-extern *game-end-idx* object)
 (define-extern get-game-list-callback (function none))
-(define-extern get-game-list (function none))
+(define-extern get-game-list (function object object none))
 (define-extern clear-game-list-filters (function int int none))
-(define-extern set-filter-state (function none))
+(define-extern set-filter-state (function object none))
 (define-extern refresh-lan-games (function int none))
 (define-extern filter-test (function none))
 (define-extern get-all-games (function none))
@@ -50434,7 +50434,7 @@
 
 
 
-(define-extern task-level-to-idx (function none))
+(define-extern task-level-to-idx (function object none))
 (define-extern ghost-crc-ok (function int none))
 (define-extern *ghost-tmp-string* string)
 (define-extern *ghost-file-ct* object)
@@ -50448,12 +50448,12 @@
 (define-extern *ghost-req-id* object)
 (define-extern send-ghost-file (function uint int none))
 (define-extern restore-ghost-from-memcard (function symbol))
-(define-extern do-get-best-ghost (function none))
+(define-extern do-get-best-ghost (function object object none))
 (define-extern get-best-ghost (function int int none))
 (define-extern nuke-all-ghosts (function none))
 (define-extern get-best-ghost-info (function int none))
 (define-extern *async-ghost-compress-busy* object)
-(define-extern async-compress-and-upload (function none))
+(define-extern async-compress-and-upload (function object object object none))
 (define-extern is-ghost? (function object))
 (define-extern reset-ghost (function symbol))
 (define-extern poop2 (function none))
@@ -50695,8 +50695,8 @@
 (define-extern artist-clean-up-net-mgr (function none))
 (define-extern *artist-continue-busy* object)
 (define-extern artist-continue (function uint int none))
-(define-extern listener-continue (function none))
-(define-extern listener-task (function none))
+(define-extern listener-continue (function object none))
+(define-extern listener-task (function object none))
 (define-extern select-continue-point (function uint symbol))
 (define-extern set-local-vehicle (function uint none))
 (define-extern qo (function symbol))
@@ -51146,7 +51146,7 @@
 
 
 (define-extern title-control-init (function object :behavior title-control))
-(define-extern title-control-spawn (function none))
+(define-extern title-control-spawn (function object none))
 (define-extern title-screen-change (function string int string int symbol symbol int :behavior title-control))
 (define-extern title-progress (function symbol int))
 (define-extern title-fade-out (function float int))
@@ -51169,7 +51169,7 @@
 
 (define-extern *dynamic-patches* object)
 (define-extern *dynamic-patch-size* object)
-(define-extern dynamic-patch-hook (function none))
+(define-extern dynamic-patch-hook (function object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; process-nettable               ;;
@@ -51276,7 +51276,7 @@
 (define-extern *channel-id-ct* object)
 (define-extern *channel-ids* object)
 (define-extern *user-ct* object)
-(define-extern broadcast-message (function none))
+(define-extern broadcast-message (function object none))
 (define-extern *auto-test-break* object)
 (define-extern check-entities (function none))
 (define-extern auto-test-node (function int none))
@@ -51289,8 +51289,8 @@
 (define-extern *tmp-buf* object)
 (define-extern *tmp-buf-len* object)
 (define-extern read-sound-line (function none))
-(define-extern crappy-atof (function none))
-(define-extern tweak-sound (function none))
+(define-extern crappy-atof (function object none))
+(define-extern tweak-sound (function object object object none))
 (define-extern read-sound-info-tweaks (function none))
 (define-extern process-is-in-tree (function uint symbol))
 
@@ -51775,7 +51775,7 @@
 (define-extern damping-time-adjust (function float float float))
 (define-extern apply-overlap-penalty-forces (function none))
 (define-extern ray-tube-intersect (function none))
-(define-extern collide-sphere-with-line-sphere-hack (function none))
+(define-extern collide-sphere-with-line-sphere-hack (function object object object none))
 (define-extern check-vehicle-line-spheres-hack (function none))
 (define-extern transform-rigid-body-prims (function collide-shape-prim matrix symbol))
 
@@ -52523,31 +52523,31 @@
 (define-extern cam-vehicle-update (function none))
 (define-extern cam-vehicle state)
 (define-extern *target-camera-runtime* object)
-(define-extern target-cam-runtime-push (function none))
+(define-extern target-cam-runtime-push (function object object none))
 (define-extern *freeze-camera* array)
 (define-extern *crash-camera-array* (array crash-camera))
 (define-extern *crash-camera-force-position* object)
 (define-extern *crash-camera-force-position-valid* object)
 (define-extern *target-time-speed* float)
-(define-extern target-time-go-slow (function none))
+(define-extern target-time-go-slow (function object object none))
 (define-extern target-time-go-normal (function symbol))
 (define-extern *plow-camera* array)
-(define-extern choose-crash-camera (function none))
+(define-extern choose-crash-camera (function object object none))
 (define-extern cam-vehicle-crash state)
 (define-extern *camera-training-lifetime* float)
-(define-extern set-training-camera-lifetime (function none))
+(define-extern set-training-camera-lifetime (function object none))
 (define-extern cam-training state)
 (define-extern *victor-prefix-camera-array* array)
 (define-extern choose-victor-prefix-camera (function none))
 (define-extern target-camera-active? (function none))
 (define-extern *target-camera-array* array)
 (define-extern vehicle-AI-control-timer-init-by-other (function none :behavior vehicle-AI-control-timer))
-(define-extern target-camera-heuristic-cam-point! (function none))
-(define-extern target-camera-heuristic-look-at! (function none))
-(define-extern target-camera-heuristic-fov (function none))
-(define-extern target-camera-test-los (function none))
-(define-extern choose-target-camera (function none))
-(define-extern camera-go-target (function none))
+(define-extern target-camera-heuristic-cam-point! (function object object object object none))
+(define-extern target-camera-heuristic-look-at! (function object object object object none))
+(define-extern target-camera-heuristic-fov (function object object object object none))
+(define-extern target-camera-test-los (function object object object object none))
+(define-extern choose-target-camera (function object object none))
+(define-extern camera-go-target (function object none))
 (define-extern cam-akira-mode-enter (function none))
 (define-extern cam-vehicle-shot state)
 
@@ -52632,7 +52632,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern sparticle-vehicle-direction-light (function none))
-(define-extern sparticle-sparks-birth (function none))
+(define-extern sparticle-sparks-birth (function object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; vehicle-debris                 ;;
@@ -52701,7 +52701,7 @@
 (define-extern *vehicle-shadow-control-disabled* shadow-control) ;; shadow-control
 (define-extern vehicle-event-handler (function process int symbol event-message-block object :behavior vehicle))
 (define-extern get-player-id (function uint none))
-(define-extern twiddle-collision-cache-verts (function none))
+(define-extern twiddle-collision-cache-verts (function object none))
 (define-extern vehicle-damage-local-space-0 (function uint none))
 (define-extern vehicle-damage-local-space-1 (function uint none))
 (define-extern get-vehicle-player-id (function uint none))
@@ -52719,7 +52719,7 @@
 
 (define-extern *car-part-art-group-names* array)
 (define-extern *v-tmp-str* string)
-(define-extern debug-draw-merc (function none))
+(define-extern debug-draw-merc (function object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; vehicle-physics                ;;
@@ -52731,7 +52731,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern vehicle-idle-post (function none))
-(define-extern player-wait-control-hook (function none))
+(define-extern player-wait-control-hook (function object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; vehicle-manager                ;;
@@ -52835,8 +52835,8 @@
 
 (define-extern *vehicle-remote-spawn-data* object)
 (define-extern *last-latencies* object)
-(define-extern encode-vehicle-net-state (function none))
-(define-extern decode-vehicle-net-state (function none))
+(define-extern encode-vehicle-net-state (function object object none))
+(define-extern decode-vehicle-net-state (function object object none))
 (define-extern encode-vehicle-net-construction (function uint int none))
 (define-extern decode-vehicle-net-construction (function uint int none))
 
@@ -52882,12 +52882,12 @@
 (define-extern find-nearest-focusable (function none)) ;; (function (array collide-shape) vector float search-info-flag search-info-flag vector vector float process-focusable)
 (define-extern in-process-array? (function uint uint symbol))
 (define-extern fst-insertion-helper (function uint uint int int none))
-(define-extern find-sorted-targets! (function none))
-(define-extern find-sorted-targets-faster! (function none))
+(define-extern find-sorted-targets! (function object object object object none))
+(define-extern find-sorted-targets-faster! (function object object object object none))
 (define-extern sorted-targ-validator-test-collision (function none))
 (define-extern sorted-targ-validator-is-player-vehicle (function none))
 (define-extern sorted-targ-validator-is-any-vehicle (function int symbol))
-(define-extern sorted-targ-validator-player-needs-los (function none))
+(define-extern sorted-targ-validator-player-needs-los (function object object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; glist-h                        ;;
@@ -53125,7 +53125,7 @@
 (define-extern anim-test-obj-remove-invalid (function anim-test-obj symbol))
 (define-extern anim-tester-real-post (function none :behavior anim-tester))
 (define-extern anim-tester-post (function none :behavior anim-tester))
-(define-extern anim-tester-update-anim-info (function none))
+(define-extern anim-tester-update-anim-info (function object none))
 (define-extern anim-tester-reset (function none))
 (define-extern anim-tester-disp-frame-num (function string float float pointer))
 (define-extern anim-tester-standard-event-handler (function process int none))
@@ -53143,14 +53143,14 @@
 (define-extern initialize-anim-tester (function none))
 (define-extern anim-tester-string-get-frame!! (function list-field string symbol))
 (define-extern anim-tester-load-object-seqs (function symbol))
-(define-extern anim-tester-save-object-seqs (function none))
+(define-extern anim-tester-save-object-seqs (function object none))
 (define-extern anim-tester-save-all-objects (function anim-tester symbol))
 (define-extern anim-tester-add-newobj (function anim-tester string none))
 (define-extern anim-tester-stop (function symbol))
 (define-extern anim-tester-start (function symbol))
 (define-extern anim-tester-add-object (function string none))
 (define-extern anim-tester-set-name (function string object))
-(define-extern anim-tester-add-sequence (function none))
+(define-extern anim-tester-add-sequence (function object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; viewer                         ;;
@@ -53261,7 +53261,7 @@
 
 (define-extern save-memcard-init-by-other (function level object :behavior process))
 (define-extern *debug-save-memcard-dead-pool* object)
-(define-extern start-save-memcard (function none))
+(define-extern start-save-memcard (function object none))
 (define-extern *part-tester-name* string) ;; string
 (define-extern part-tester-init-by-other (function vector none :behavior process-drawable))
 (define-extern *debug-part-dead-pool* dead-pool) ;; dead-pool
@@ -56596,16 +56596,16 @@
 (define-extern *vehicle-hud-training-proc* object)
 (define-extern spawn-vehicle-hud-training (function none))
 (define-extern kill-vehicle-hud-training (function none))
-(define-extern net-player-training-init-remote (function none))
+(define-extern net-player-training-init-remote (function object none))
 (define-extern *msg-map-net-player-training* array)
 (define-extern *net-process-class-info-net-player-training* net-process-class-info)
 (define-extern *training-info* training-info)
 (define-extern training-wait-for-speech-end (function none))
 (define-extern training-trans (function none))
-(define-extern disable-green-eco-for-entity (function none))
+(define-extern disable-green-eco-for-entity (function object none))
 (define-extern disable-green-eco (function none))
 (define-extern training1-goal1 (function none))
-(define-extern spawn-green-eco-for-entity (function none))
+(define-extern spawn-green-eco-for-entity (function object none))
 (define-extern spawn-green-eco (function none))
 (define-extern training1-goal2 (function none))
 (define-extern training2-goal1 (function none))
@@ -57515,8 +57515,8 @@
 (define-extern *firework-colors* object)
 (define-extern *firework-vec* object)
 (define-extern *firework-origin?* object)
-(define-extern birth-func-firework (function none))
-(define-extern spt-func-part-firework1-burst (function none))
+(define-extern birth-func-firework (function object object object none))
+(define-extern spt-func-part-firework1-burst (function object object object none))
 (define-extern *range-osplash-color* curve-color-fast)
 (define-extern *range-osplash-alpha* curve2d-fast)
 (define-extern *range-osplash-scale-x* curve2d-fast)
