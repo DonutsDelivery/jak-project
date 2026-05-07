@@ -49,6 +49,17 @@
    )
   )
 
+(deftype race-mesh-hash-search (structure)
+  ((best-dist             float)
+   (debug-cells-searched  int32)
+   (debug-slices-searched int32)
+   (pad12                 uint32)
+   (bounds                bounding-box4w :inline)
+   (cell-quads            vector         2 :inline)
+   (slice-quads           vector         4 :inline)
+   )
+  )
+
 (deftype race-mesh (basic)
   ((version         uint8)
    (flags           uint8)
@@ -73,7 +84,7 @@
     (race-mesh-method-16 (_type_ int race-mesh-slice-query) none)
     (race-mesh-method-17 (_type_ race-mesh-slice-query) int)
     (race-mesh-method-18 (_type_ race-mesh-slice-query) none)
-    (race-mesh-method-19 (_type_ int race-mesh-slice-query) symbol)
+    (race-mesh-method-19 (_type_ race-mesh-hash-search int int race-mesh-slice-query) symbol)
     (race-mesh-method-20 (_type_ int race-mesh-slice-query) none)
     )
   )
@@ -133,7 +144,7 @@
 ;; WARN: Return type mismatch none vs symbol.
 ;; ERROR: Function may read a register that is not set: a3
 ;; ERROR: Function may read a register that is not set: t0
-(defmethod race-mesh-method-19 ((a0-0 race-mesh) (a1-0 int) (a2-0 race-mesh-slice-query))
+(defmethod race-mesh-method-19 ((a0-0 race-mesh) (a1-0 race-mesh-hash-search) (a2-0 int) (a3-0 int) (t0-0 race-mesh-slice-query))
   ;; SCAFFOLDING
   (format 0 "call to race-mesh-method-19~%")
   (break!)
