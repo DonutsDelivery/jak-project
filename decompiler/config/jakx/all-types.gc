@@ -53194,6 +53194,7 @@
 
 
 (define-extern *viewer-sg* skeleton-group) ;; skeleton-group
+(define-extern *viewer* viewer)
 (define-extern viewer-string string) ;; string
 (define-extern viewer-ja-name string) ;; string
 (define-extern viewer-geo-name string) ;; string
