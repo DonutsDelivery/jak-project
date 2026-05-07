@@ -4659,9 +4659,9 @@
 ;; wvehicle-part                  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern birth-func-set-pos-vel (function none))
+(define-extern birth-func-set-pos-vel (function object object object none))
 (define-extern birth-func-adopt-velocity-vehicle (function uint uint none))
-(define-extern sparticle-adopt-accel-vehicle (function none))
+(define-extern sparticle-adopt-accel-vehicle (function object object none))
 (define-extern *range-carexplo-dust-color* curve-color-fast)
 (define-extern *range-carexplo-dust-alpha* curve2d-fast)
 (define-extern *range-carexplo-dust-scale-x* curve2d-fast)
@@ -4698,10 +4698,10 @@
 ;; wvehicle-weapons-part          ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern birth-func-explosion-adopt-velocity (function none))
-(define-extern birth-func-explosion-aligned-velocity (function none))
-(define-extern birth-func-vws-adopt-velocity (function none))
-(define-extern spt-birth-func-brightness-oil (function none))
+(define-extern birth-func-explosion-adopt-velocity (function object object object object object none))
+(define-extern birth-func-explosion-aligned-velocity (function object object object object object none))
+(define-extern birth-func-vws-adopt-velocity (function object object object object object none))
+(define-extern spt-birth-func-brightness-oil (function object object object none))
 (define-extern spt-func-part-oil-emit (function object object object none))
 (define-extern spt-func-part-oil-emit-sparkle (function object object object none))
 (define-extern check-scorp-shell-level1 (function sparticle-system sparticle-cpuinfo vector none))
@@ -4740,10 +4740,10 @@
 (define-extern birth-func-copy-rotate-z-to-rot-z (function float))
 (define-extern spt-birth-func-b-part-turbo-suppressed (function object object object object none))
 (define-extern spt-func-part-turbo-suppressed (function object object object none))
-(define-extern birth-func-adopt-velocity (function none))
-(define-extern sparticle-adopt-accel (function none))
-(define-extern sparticle-seek-owner (function none))
-(define-extern birth-func-dark-eco-bubble (function none))
+(define-extern birth-func-adopt-velocity (function object object object object object none))
+(define-extern sparticle-adopt-accel (function object object none))
+(define-extern sparticle-seek-owner (function object object object none))
+(define-extern birth-func-dark-eco-bubble (function object object none))
 (define-extern spt-func-bubble-alternate (function object object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -5476,7 +5476,7 @@
 (define-extern v-wpn-yellow-chaingun-1-hitspang-params object)
 (define-extern v-wpn-yellow-chaingun-2-hitspang-params object)
 (define-extern v-wpn-bulldog-hitspang-params object)
-(define-extern rapid-fire-callback-gun-hitspang (function none))
+(define-extern rapid-fire-callback-gun-hitspang (function object object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-weapons-oil           ;;
@@ -5754,12 +5754,12 @@
 (define-extern vws-focus-search-base (function object object object object object object none))
 (define-extern gunmount-common-trans (function none))
 (define-extern gunmount-common-post (function none))
-(define-extern gunmount-event-handler (function none))
+(define-extern gunmount-event-handler (function object object object object none))
 (define-extern gunmount-get-change-anim (function object object none))
-(define-extern gunmount-generic-event-handler (function none))
+(define-extern gunmount-generic-event-handler (function object object object object none))
 (define-extern v-wpn-yellow-chain-gun-I-rapid-fire-control-params object)
 (define-extern v-wpn-yellow-chain-gun-II-rapid-fire-control-params object)
-(define-extern hack-sparticle-track-gun (function none))
+(define-extern hack-sparticle-track-gun (function object object object none))
 (define-extern v-wpn-yellow-default-gun-rapid-fire-control-params object)
 (define-extern *msg-map-v-wpn-yellow-guided-missile* array)
 (define-extern *net-process-class-info-v-wpn-yellow-guided-missile* object)
@@ -36433,7 +36433,7 @@
 (define-extern *slow-mo-last-frame?* symbol)
 (define-extern set-sound-priority-duck-amount (function float float))
 (define-extern unset-sound-priority-duck-amount (function float))
-(define-extern build-sound-list (function none))
+(define-extern build-sound-list (function object object object object none))
 (define-extern *sound-player-enable* symbol)
 (define-extern swap-sound-buffers "Per-frame update of sound system - update loop-engine, update ear trans, send player RPC, check for missing/dirty CD." (function vector vector vector vector vector float int))
 (define-extern get-sound-buffer-entry "Allocate a new entry in the player RPC queue, to be flushed on the next frame." (function pointer))
@@ -37714,7 +37714,7 @@
 (define-extern *ctf-water-texture-anim-array* texture-anim-array)
 (define-extern *fcshield-water-texture-anim-array* texture-anim-array)
 (define-extern *this-way-water-texture-anim-array* texture-anim-array)
-(define-extern this-way-water-texture-anim-func (function none))
+(define-extern this-way-water-texture-anim-func (function object object none))
 (define-extern *ocean-texture-anim-array* texture-anim-array)
 (define-extern ocean-texture-anim-time-func (function int float))
 
@@ -38413,7 +38413,7 @@
 (define-extern sparticle-set-conerot (function sparticle-launcher vector none))
 (define-extern check-ground-bounce (function sparticle-system sparticle-cpuinfo sparticle-launchinfo float))
 (define-extern check-drop-group-center (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
-(define-extern check-drop-group-center-with-offset (function none))
+(define-extern check-drop-group-center-with-offset (function object object object none))
 (define-extern check-bubble-height (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern check-raise-group-center (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern birth-func-y->userdata (function sparticle-system sparticle-cpuinfo matrix none))
@@ -38424,16 +38424,16 @@
 (define-extern spt-func-camera-facing-orbiter (function sparticle-system sparticle-cpuinfo sparticle-launchinfo quaternion))
 (define-extern *particle-birth-work* particle-birth-work)
 (define-extern birth-func-set-quat (function int sparticle-cpuinfo sparticle-launchinfo none))
-(define-extern birth-func-add-vel (function none))
+(define-extern birth-func-add-vel (function object object none))
 (define-extern birth-func-set-vel (function object sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern birth-func-set-vel-2d (function sparticle-system sparticle-cpuinfo sparticle-launchinfo none))
-(define-extern birth-func-set-vel-range (function none))
+(define-extern birth-func-set-vel-range (function object object none))
 (define-extern birth-func-texture-group (function int sparticle-cpuinfo sparticle-launchinfo none))
 (define-extern rot-to-particle (function degrees sprite-vec-data-2d matrix none))
 (define-extern rot-to-particle-no-flip (function object object none))
 (define-extern birth-func-flip-based-on-scale (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
 (define-extern sparticle-2d-spline-align (function object sparticle-cpuinfo sprite-vec-data-2d object none))
-(define-extern sparticle-2d-spline-align-no-flip (function none))
+(define-extern sparticle-2d-spline-align-no-flip (function object object object none))
 (define-extern sparticle-2d-spline-align-instant (function object sparticle-cpuinfo sprite-vec-data-2d none))
 (define-extern birth-func-inherit-size (function sparticle-system sparticle-cpuinfo sprite-vec-data-3d sparticle-launcher sparticle-launch-state none))
 (define-extern birth-func-texture-group-2d (function object sparticle-cpuinfo sparticle-launchinfo object object none))
@@ -38479,7 +38479,7 @@
 (define-extern remap-particle (function sparticle-system sparticle-cpuinfo pointer none))
 (define-extern remap-all-particles (function none))
 (define-extern process-particles (function none))
-(define-extern spt-func-on-omega-height-die (function none))
+(define-extern spt-func-on-omega-height-die (function object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; entity-table                   ;;
@@ -46178,7 +46178,7 @@
 (define-extern weapon-mask->type (function object none))
 (define-extern *weapon-suppression-table* object)
 (define-extern v-wpn-base-common-trans (function none))
-(define-extern v-wpn-event-base (function none))
+(define-extern v-wpn-event-base (function object object object none))
 (define-extern *cheat-defaultgun-in-race* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -52631,7 +52631,7 @@
 ;; vehicle-part                   ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern sparticle-vehicle-direction-light (function none))
+(define-extern sparticle-vehicle-direction-light (function object object object none))
 (define-extern sparticle-sparks-birth (function object object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -52884,7 +52884,7 @@
 (define-extern fst-insertion-helper (function uint uint int int none))
 (define-extern find-sorted-targets! (function object object object object none))
 (define-extern find-sorted-targets-faster! (function object object object object none))
-(define-extern sorted-targ-validator-test-collision (function none))
+(define-extern sorted-targ-validator-test-collision (function object object object none))
 (define-extern sorted-targ-validator-is-player-vehicle (function none))
 (define-extern sorted-targ-validator-is-any-vehicle (function int symbol))
 (define-extern sorted-targ-validator-player-needs-los (function object object object object none))
@@ -57507,11 +57507,11 @@
 ;; kras-part                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern spt-func-birth-on-die1 (function none))
-(define-extern spt-func-birth-on-die2 (function none))
-(define-extern spt-func-birth-on-die3 (function none))
-(define-extern spt-func-birth-on-die4 (function none))
-(define-extern spt-func-rocket (function none))
+(define-extern spt-func-birth-on-die1 (function object object object none))
+(define-extern spt-func-birth-on-die2 (function object object object none))
+(define-extern spt-func-birth-on-die3 (function object object object none))
+(define-extern spt-func-birth-on-die4 (function object object object none))
+(define-extern spt-func-rocket (function object object object none))
 (define-extern *firework-colors* object)
 (define-extern *firework-vec* object)
 (define-extern *firework-origin?* object)
