@@ -66,7 +66,7 @@
 
 
 (deftype hud-effect (basic)
-  ((message       basic)
+  ((message       symbol)
    (active        basic)
    (pending       basic)
    (delay         int32)
@@ -370,7 +370,7 @@
    (font-effect-color  uint8)
    (color              uint8)
    (font-flags         uint16)
-   (has-outline        basic)
+   (has-outline        symbol)
    )
   (:methods
     (hud-item-string-method-24 (_type_) none)
