@@ -13807,7 +13807,7 @@
    (task-mask                          task-mask                          :offset-assert 28)
    (borrow                             pair                               :offset-assert 32) ;; guessed by decompiler
    (close-time                         uint32                             :offset-assert 36)
-   (description                        text-id                            :offset-assert 40) ;; guessed by decompiler
+   (description                        uint32                             :offset-assert 40) ;; text-id (enum unpopulated)
    (intro-scene                        basic                              :offset-assert 44)
    (outro-scene                        basic                              :offset-assert 48)
    (time-of-day                        int32                              :offset-assert 52)
@@ -13828,7 +13828,7 @@
    (game-score-index                   uint8                              :offset 91)
    (adv-score                          int16                              :offset-assert 92)
    (exb-score                          int16                              :offset-assert 94)
-   (ai-tuning-indices                  basic                              :offset-assert 96)
+   (ai-tuning-indices                  pair                               :offset-assert 96)
    (sound-bank                         basic                              :offset-assert 100)
    (play-count                         uint32                             :offset-assert 104)
    (time-limit                         uint32                             :offset-assert 108)
