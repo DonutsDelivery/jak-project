@@ -49963,6 +49963,18 @@
       "race-mesh-slice"
     ]
   ],
+  "(method 19 race-mesh)": [
+    [
+      30,
+      "a1",
+      "(pointer uint16)"
+    ],
+    [
+      31,
+      "v1",
+      "race-mesh-hash-cell"
+    ]
+  ],
   "(method 10 race-mesh)": [
     [
       13,
