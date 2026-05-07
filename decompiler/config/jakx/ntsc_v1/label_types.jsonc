@@ -1021,6 +1021,11 @@
       "L142",
       "(pointer uint8)",
       32
+    ],
+    [
+      "L141",
+      "(pointer uint8)",
+      16
     ]
   ],
   "hud-cash": [
@@ -2826,6 +2831,11 @@
       "L691",
       "(pointer uint8)",
       32
+    ],
+    [
+      "L677",
+      "(pointer uint8)",
+      16
     ]
   ],
   "wvehicle-weapons": [
@@ -2870,6 +2880,11 @@
     ],
     [
       "L846",
+      "(pointer uint8)",
+      32
+    ],
+    [
+      "L836",
       "(pointer uint8)",
       32
     ]
@@ -3971,6 +3986,11 @@
       "L347",
       "(pointer uint8)",
       32
+    ],
+    [
+      "L346",
+      "(pointer uint8)",
+      32
     ]
   ],
   "rigid-body-surface-h": [
@@ -3995,6 +4015,11 @@
       "L373",
       "(pointer uint8)",
       64
+    ],
+    [
+      "L372",
+      "(pointer uint8)",
+      160
     ]
   ],
   "timer-h": [
@@ -4057,6 +4082,11 @@
       "L319",
       "(pointer uint8)",
       160
+    ],
+    [
+      "L318",
+      "(pointer uint8)",
+      16
     ]
   ],
   "net-mgr-medius-games": [
@@ -4091,6 +4121,11 @@
       "L321",
       "(pointer uint8)",
       368
+    ],
+    [
+      "L320",
+      "(pointer uint8)",
+      16
     ]
   ],
   "net-mgr-medius-rooms": [
@@ -4120,6 +4155,11 @@
       "L87",
       "(pointer uint8)",
       128
+    ],
+    [
+      "L86",
+      "(pointer uint8)",
+      1664
     ]
   ],
   "net-mgr": [
@@ -4135,6 +4175,11 @@
     ],
     [
       "L139",
+      "(pointer uint8)",
+      16
+    ],
+    [
+      "L119",
       "(pointer uint8)",
       16
     ]
@@ -4194,6 +4239,11 @@
       "L356",
       "(pointer uint8)",
       32
+    ],
+    [
+      "L355",
+      "(pointer uint8)",
+      48
     ]
   ],
   "process-nettable-h": [
@@ -4251,6 +4301,11 @@
       "L168",
       "(pointer uint8)",
       800
+    ],
+    [
+      "L167",
+      "(pointer uint8)",
+      800
     ]
   ],
   "net-simple-destruct": [
@@ -4282,6 +4337,11 @@
       "L117",
       "(pointer uint8)",
       160
+    ],
+    [
+      "L116",
+      "(pointer uint8)",
+      384
     ]
   ],
   "net-colarb": [
@@ -4321,6 +4381,11 @@
     ],
     [
       "L120",
+      "(pointer uint8)",
+      32
+    ],
+    [
+      "L119",
       "(pointer uint8)",
       32
     ]
