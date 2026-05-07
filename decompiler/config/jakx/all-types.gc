@@ -42826,7 +42826,7 @@
     (set-up-mem-work (_type_) int) ;; 11
     (nav-engine-method-12 (_type_ sphere-hash nav-mesh) int) ;; 12
     (nav-engine-method-13 (_type_ find-nav-sphere-ids-params int int) int) ;; 13
-    (do-sphere-lookups (_type_) int) ;; 14
+    (do-sphere-lookups (_type_ symbol vector float int) int) ;; 14
     (update-nav-controls-pipelined-in-spr (_type_) int) ;; 15
     (update-nav-controls-in-spr (_type_) int) ;; 16
     (nav-engine-method-17 (_type_ nav-engine-spr-buffer) none) ;; 17 ;; (upload-nav-to-spr (_type_ nav-engine-spr-buffer) none)
