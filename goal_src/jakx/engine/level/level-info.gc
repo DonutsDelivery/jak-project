@@ -179,7 +179,7 @@
     :taskname 'default
     :index #x39
     :master-level #f
-    :packages '("krasw")
+    :packages '() ;; PS2 had ("krasw") but no KRASW.CGO exists in OpenGOAL build (only ART/COMMON/ENGINE/GAME/KERNEL CGOs). Crash 0x...0080b at load-package "krasw" in IOP RPC. atoll/krastrn use '() too.
     :memory-mode (level-memory-mode large)
     :mood-func 'update-mood-default-exterior
     :special-mood #f
