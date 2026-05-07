@@ -776,7 +776,12 @@ end_type_pass:
       }
       auto& type = instr.unknown_label_tag->selected_type.value();
       int idx = instr.unknown_label_tag->label_idx;
-      env.file->label_db->set_and_get_previous(idx, type, false, {});
+      // Respect user-provided label_types.jsonc entry — type-prop guesses
+      // are sometimes wrong (e.g. picks `int` when the static buffer is a
+      // raw byte blob). User overrides via label_types.jsonc must win.
+      if (!env.file->label_db->lookup(idx).from_user) {
+        env.file->label_db->set_and_get_previous(idx, type, false, {});
+      }
     }
 
     if (instr.unknown_stack_structure_tag) {
