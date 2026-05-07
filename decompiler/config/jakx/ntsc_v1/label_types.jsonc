@@ -2836,6 +2836,11 @@
       "L677",
       "(pointer uint8)",
       16
+    ],
+    [
+      "L676",
+      "(pointer uint8)",
+      16
     ]
   ],
   "wvehicle-weapons": [
@@ -4020,6 +4025,11 @@
       "L372",
       "(pointer uint8)",
       160
+    ],
+    [
+      "L368",
+      "(pointer uint8)",
+      80
     ]
   ],
   "timer-h": [
@@ -4087,6 +4097,11 @@
       "L318",
       "(pointer uint8)",
       16
+    ],
+    [
+      "L317",
+      "(pointer uint8)",
+      160
     ]
   ],
   "net-mgr-medius-games": [
@@ -4126,6 +4141,11 @@
       "L320",
       "(pointer uint8)",
       16
+    ],
+    [
+      "L319",
+      "(pointer uint8)",
+      192
     ]
   ],
   "net-mgr-medius-rooms": [
@@ -4180,6 +4200,11 @@
     ],
     [
       "L119",
+      "(pointer uint8)",
+      16
+    ],
+    [
+      "L117",
       "(pointer uint8)",
       16
     ]
@@ -4242,6 +4267,11 @@
     ],
     [
       "L355",
+      "(pointer uint8)",
+      48
+    ],
+    [
+      "L354",
       "(pointer uint8)",
       48
     ]
@@ -4342,6 +4372,11 @@
       "L116",
       "(pointer uint8)",
       384
+    ],
+    [
+      "L115",
+      "(pointer uint8)",
+      64
     ]
   ],
   "net-colarb": [
@@ -4388,6 +4423,11 @@
       "L119",
       "(pointer uint8)",
       32
+    ],
+    [
+      "L109",
+      "(pointer uint8)",
+      64
     ]
   ],
   "net-mgr-sysmsg": [
