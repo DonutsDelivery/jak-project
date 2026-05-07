@@ -2263,7 +2263,7 @@
 (define-extern explosion-init-by-other (function explosion-init-params object object :behavior explosion))
 (define-extern explosion-spawn-legacy-version (function process-drawable type explosion-init-params (pointer process)))
 (define-extern explosion-spawn (function explosion-init-params process-drawable process))
-(define-extern find-closest-solid-sphere-prim (function none)) ;; (function collide-shape vector collide-spec collide-shape-prim)
+(define-extern find-closest-solid-sphere-prim (function object object object none)) ;; (function collide-shape vector collide-spec collide-shape-prim)
 (define-extern *explosion-debug-sphere* sphere) ;; sphere
 (define-extern explosion-handle-touch-with-ccheck (function object object object object object none))
 (define-extern explosion-handle-touch-without-ccheck (function object object object object object none))
@@ -36949,7 +36949,7 @@
 
 (define-extern *sprite-glow-templates* array)
 (define-extern sprite-glow-vu1-block vu-function)
-(define-extern sprite-glow-init-consts (function sprite-glow-consts none)) ;; was: (function none) — backported from jak3
+(define-extern sprite-glow-init-consts (function sprite-glow-consts object none)) ;; was: (function none) — backported from jak3
 (define-extern sprite-glow-init-engine (function dma-buffer object none))
 (define-extern *sprite-glow-dma-packet-data* sprite-glow-dma-packet-data) ;; sprite-glow-dma-packet-data
 (define-extern sprite-glow-add-sprite (function dma-buffer sprite-vec-data-2d float float float adgif-shader none))
@@ -37254,8 +37254,8 @@
 (define-extern blerc-stats-init (function none))
 (define-extern blerc-init (function none))
 (define-extern blerc-a-fragment (function none)) ;; function
-(define-extern dma-from-spr (function none)) ;; function
-(define-extern merc-dma-chain-to-spr (function none)) ;; function
+(define-extern dma-from-spr (function object object object none)) ;; function
+(define-extern merc-dma-chain-to-spr (function object object none)) ;; function
 (define-extern blerc-execute (function none))
 (define-extern merc-blend-shape (function process-drawable int))
 (define-extern setup-blerc-chains-for-one-fragment (function object object object object object object object))
@@ -37397,11 +37397,11 @@
 
 (define-extern generic-vu1-block vu-function)
 (define-extern generic-setup-constants (function generic-constants object none))
-(define-extern generic-add-constants (function dma-buffer pointer))
+(define-extern generic-add-constants (function dma-buffer object pointer))
 (define-extern generic-setup-shrub-constants (function generic-shrub-constants int int int int)) 
 (define-extern generic-add-shrub-constants (function dma-buffer int int int pointer))
 (define-extern generic-init-buf (function dma-buffer gs-zbuf object object none))
-(define-extern generic-vu1-init-buf (function bucket-id gs-zbuf none))
+(define-extern generic-vu1-init-buf (function bucket-id gs-zbuf object object none))
 (define-extern generic-vu1-init-buf-special (function bucket-id gs-zbuf object object int))
 (define-extern generic-vu1-init-buffers (function none))
 
@@ -38565,7 +38565,7 @@
 (define-extern art-group-load-check (function string kheap int art-group))
 (define-extern external-art-buffer-init (function external-art-buffer int))
 (define-extern *preload-spool-anims* symbol) ;; symbol
-(define-extern ja-play-spooled-anim (function none)) ;; (function spool-anim art-joint-anim art-joint-anim (function process-drawable symbol) spooler-flags int :behavior process-drawable)
+(define-extern ja-play-spooled-anim (function object object object object object none)) ;; (function spool-anim art-joint-anim art-joint-anim (function process-drawable symbol) spooler-flags int :behavior process-drawable)
 (define-extern ja-play-spooled-no-sync-anim (function object object object object object none))
 (define-extern ja-abort-spooled-anim (function spool-anim art-joint-anim int int :behavior process-drawable))
 (define-extern *gui-control* gui-control) ;; gui-control
@@ -38932,7 +38932,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern level-base-level-name (function symbol object))
-(define-extern add-want-level (function (inline-array level-buffer-state) (pointer int64) symbol symbol symbol symbol int))
+(define-extern add-want-level (function (inline-array level-buffer-state) (pointer int64) symbol symbol symbol symbol object int))
 (define-extern *display-load-commands* symbol)
 (define-extern *backup-load-state* load-state)
 (define-extern *load-state* load-state)
@@ -39407,16 +39407,16 @@
                                        have prepared a heap for this level. This level will then
                                        be configured to use this heap." (function level level-memory-mode none))
 (define-extern level-update-after-load "Run the post-load state machine to login level data." (function level login-state level))
-(define-extern bg "Debug function to start playing a given level." (function symbol none))
+(define-extern bg "Debug function to start playing a given level." (function symbol object object object object object object none))
 (define-extern play "Start (or restart) the game!
-                     This will start up the display process, and load the initial level." (function symbol symbol int))
+                     This will start up the display process, and load the initial level." (function symbol symbol object object object int))
 (define-extern play2 (function symbol symbol none))
 (define-extern play-boot
                "Function called by the C Kernel to start the game (wrapper around play)." (function none))
 (define-extern sound-bank-name->mode (function symbol sound-bank-mode))
 (define-extern *sound-bank-string* array)
 (define-extern update-sound-banks (function load-state (inline-array sound-bank-state) symbol)) 
-(define-extern show-level (function symbol none))
+(define-extern show-level (function symbol object object object object object object none))
 (define-extern *default-level* level)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -39521,7 +39521,7 @@
 (define-extern collide-probe-instance-tie-collide-frags (function none))
 (define-extern collide-probe-instance-tie (function object int collide-list int int))
 (define-extern collide-probe-collide-fragment-tree-make-list (function drawable-tree-collide-fragment collide-list object none))
-(define-extern collide-probe-instance-tie-tree-make-list (function drawable-tree-instance-tie collide-list int)) ;; was: (function none) — backported from jak3
+(define-extern collide-probe-instance-tie-tree-make-list (function drawable-tree-instance-tie collide-list object int)) ;; was: (function none) — backported from jak3
 (define-extern collide-upload-vu0 (function none))
 (define-extern collide-probe-make-list (function level collide-list object symbol))
 (define-extern distc (function vector vector float))
@@ -41021,7 +41021,7 @@
 (define-extern clone-anim-once (function handle symbol string none :behavior process-drawable))
 (define-extern clone-anim (function handle symbol string none :behavior process-drawable))
 (define-extern manipy-post (function none :behavior manipy))
-(define-extern manipy-init (function none)) ;; (function vector entity-actor skeleton-group vector manipy-options none :behavior manipy)
+(define-extern manipy-init (function object object object object object none)) ;; (function vector entity-actor skeleton-group vector manipy-options none :behavior manipy)
 (define-extern part-tracker-init-base (function sparticle-launch-group time-frame (function part-tracker vector) uint process-drawable object none :behavior part-tracker))
 (define-extern part-tracker-subsampler-init (function part-tracker-subsampler-init-params object :behavior part-tracker-subsampler))
 (define-extern part-tracker-init (function part-tracker-init-params object object object object object object :behavior part-tracker))
@@ -42538,7 +42538,7 @@
 (define-extern disc-idle state)
 (define-extern disc-error-proc-init-by-other (function object none :behavior disc-error-proc))
 (define-extern display-loop-main (function display object object object object none))
-(define-extern display-loop "Main loop for running the game." (function int :behavior process))
+(define-extern display-loop "Main loop for running the game." (function object object object object object int :behavior process))
 (define-extern on "Start the display process." (function symbol process))
 (define-extern off "Stop the display process." (function none))
 
@@ -42719,7 +42719,7 @@
 (define-extern *pid-string* string)
 (define-extern debug-actor (function string none))
 (define-extern debug-actor-process (function process none))
-(define-extern draw-actor-marks (function process none))
+(define-extern draw-actor-marks (function process object object object none))
 (define-extern init-entity (function process entity-actor type process))
 (define-extern entity-deactivate-handler (function process entity-actor symbol)) 
 (define-extern check-for-rougue-process (function process int int level int)) 
@@ -42728,12 +42728,12 @@
 (define-extern reset-actors-by-game-type (function symbol none))
 (define-extern reset-actors (function symbol int)) 
 (define-extern reset-cameras (function none))
-(define-extern entity-birth-no-kill (function entity process))
+(define-extern entity-birth-no-kill (function entity object process))
 (define-extern entity-task-complete-on (function entity int)) 
 (define-extern entity-task-complete-off (function entity int)) 
 (define-extern process-entity-status! (function process entity-perm-status symbol entity-perm-status))
 (define-extern find-nearest-entity (function vector type entity))
-(define-extern entity-speed-test (function string entity))
+(define-extern entity-speed-test (function string object entity))
 (define-extern dump-entity-remap (function object object none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -43013,7 +43013,7 @@
 (define-extern *color-curve-tan-brown* curve-color-piecewise) ;; curve-color-piecewise
 (define-extern *water-wake-trail* light-trail-composition) ;; light-trail-composition
 (define-extern part-water-splash-callback (function part-tracker none))
-(define-extern splash-spawn (function float vector int none))
+(define-extern splash-spawn (function float vector int object object object object object none))
 (define-extern rings-water-spawn (function float vector vector float float int)) 
 (define-extern water-info<-region (function water-info drawable-region-prim (inline-array water-sphere) collide-action process-drawable water-info))
 (define-extern find-water-1 (function water-sphere water-info water-info symbol))
@@ -51102,7 +51102,7 @@
 (define-extern auto-idle state)
 (define-extern auto-save-error-proc-init-by-other (function object none :behavior auto-save-error-proc))
 (define-extern progress-allowed? (function symbol))
-(define-extern auto-save-command (function symbol int int process-tree symbol (pointer auto-save)))
+(define-extern auto-save-command (function symbol int int process-tree symbol object (pointer auto-save)))
 (define-extern auto-save-check (function int))
 (define-extern auto-save-user (function (pointer auto-save)))
 
@@ -51335,7 +51335,7 @@
 (define-extern convert-load-parts-to-car-info (function object object none))
 (define-extern convert-car-info-to-load-parts (function object none))
 (define-extern cleanup-at-game-end (function none))
-(define-extern check-start-load (function none))
+(define-extern check-start-load (function object object object object object object object none))
 (define-extern *font-context-loading* object)
 (define-extern do-loading-text (function none))
 (define-extern *movie-string* object)
@@ -51351,7 +51351,7 @@
 (define-extern wait-for-ghost-download (function none))
 (define-extern save-vehicle-camera-inside-state (function symbol))
 (define-extern set-net-world-time-of-day (function object none))
-(define-extern wait-for-lobby-to-die (function none))
+(define-extern wait-for-lobby-to-die (function object object object object object object object none))
 (define-extern check-grand-prix-restart (function symbol))
 (define-extern wait-for-levels (function object none))
 (define-extern get-ai-vehicle-cup-idx (function none))
@@ -51376,7 +51376,7 @@
 (define-extern get-total-humans (function none))
 (define-extern get-total-skill-level (function none))
 (define-extern get-player-clan-info (function object none))
-(define-extern lobby-level-set! (function object object object none))
+(define-extern lobby-level-set! (function object object object object object object object none))
 (define-extern set-player-car-from-level-array (function object symbol))
 (define-extern *in-end-of-race-preload* object)
 (define-extern end-of-race-start-preload (function symbol))
@@ -52793,10 +52793,10 @@
 (define-extern vehicle-manager-kill (function symbol))
 (define-extern *car-appearance-hack* object)
 (define-extern *car-info-default* object)
-(define-extern vehicle-init-by-other (function none)) ;; (function int traffic-object-spawn-params object :behavior vehicle)
+(define-extern vehicle-init-by-other (function object object none)) ;; (function int traffic-object-spawn-params object :behavior vehicle)
 (define-extern vehicle-idx-from-level-name (function int symbol))
 (define-extern vehicle-in-level? (function int int symbol))
-(define-extern vehicle-spawn (function symbol)) ;; (function vehicle-type traffic-object-spawn-params process-drawable)
+(define-extern vehicle-spawn (function object object symbol)) ;; (function vehicle-type traffic-object-spawn-params process-drawable)
 (define-extern find-vehicle (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -52879,7 +52879,7 @@
 
 
 (define-extern *search-info* search-info) ;; search-info
-(define-extern find-nearest-focusable (function none)) ;; (function (array collide-shape) vector float search-info-flag search-info-flag vector vector float process-focusable)
+(define-extern find-nearest-focusable (function object object object object object object object object none)) ;; (function (array collide-shape) vector float search-info-flag search-info-flag vector vector float process-focusable)
 (define-extern in-process-array? (function uint uint symbol))
 (define-extern fst-insertion-helper (function uint uint int int none))
 (define-extern find-sorted-targets! (function object object object object object none))
@@ -54127,7 +54127,7 @@
 (define-extern *nav-graph-editor* (pointer nav-graph-editor)) ;; (pointer nav-graph-editor)
 (define-extern get-node-draw-position (function vector mysql-nav-node vector))
 (define-extern nav-graph-editor-init-by-other (function string symbol object :behavior nav-graph-editor))
-(define-extern run-nav-graph-editor (function symbol (pointer process)))
+(define-extern run-nav-graph-editor (function symbol object (pointer process)))
 (define-extern get-nav-graph-editor (function nav-graph-editor)) ;; was: (function none) — backported from jak3
 (define-extern exit-nav-graph-editor (function none))
 (define-extern nav-graph-set-level (function symbol object))
