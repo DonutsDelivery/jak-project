@@ -173,7 +173,7 @@
 (define krasw
   (new 'static 'level-load-info
     :name 'krasw
-    :visname 'krasw  ;; krasw.go bundles vis (no separate krasw-vis.o in DGO)
+    :visname 'krasw-vis  ;; visname must be distinct symbol from name (atoll/krastrn precedent); krasw still doesn't exist as separate vis but symbol must differ
     :nickname 'krasw
     :dbname 'krasw
     :taskname 'default
