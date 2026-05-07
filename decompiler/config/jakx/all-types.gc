@@ -13886,7 +13886,7 @@
    (task-level                 uint8            :offset-assert 8)
    (text-name                  uint32           :offset-assert 12) ;; text-id (enum unpopulated)
    (text-id-long               uint32           :offset-assert 16)
-   (single-player              basic            :offset-assert 20)
+   (single-player              symbol           :offset-assert 20)
    (kiosk-play-node            game-task-node   :offset-assert 24) ;; game-task-node
    (play-node                  game-task-node   :offset-assert 26) ;; game-task-node
    (play-continue              string           :offset-assert 28) ;; guessed by decompiler
@@ -43959,8 +43959,8 @@
 
 (deftype stat-info (structure)
   ((text-id      uint32  :offset-assert 0)
-   (taskname     basic   :offset-assert 4)
-   (name         basic   :offset-assert 8)
+   (taskname     symbol  :offset-assert 4)
+   (name         symbol  :offset-assert 8)
    (offset       int32   :offset-assert 12)
    (tp           uint64  :offset-assert 16)
    (scale        float   :offset-assert 24)
