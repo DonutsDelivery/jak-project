@@ -160,7 +160,54 @@
 
 (define krattbox #f)
 
-(define krasw #f)
+;; PARTIAL RESTORATION 2026-05-07: krasw level-load-info from PS2 binary
+;; (decompiler_out/jakx/level-info_ir2.asm L2027), fitted to current master
+;; deftype shape. krasw is the open Kras City race hub (first wide-track
+;; tutorial level, referenced by kras-rail-break dynamic actor + intro-scenes3
+;; cinematics). KRASW.DGO extraction is parked at the kras-pump-break method
+;; 45 / state-slot crash gate (see feedback_jakx_kras_pump_break_method45_gate.md);
+;; this entry is goal_src-only — DGO loading not enabled.
+;; PS2 had 9 continue-points (kras-wide-start + kras-wide-1..8); ship 1 first
+;; for boot test parity with atoll/krastrn.
+;; See .jakx_watch/krasw_restoration_recon.md for full slot-by-slot table.
+(define krasw
+  (new 'static 'level-load-info
+    :name 'krasw
+    :visname 'krasw-vis
+    :nickname 'krasw
+    :dbname 'krasw
+    :taskname 'default
+    :index #x39
+    :master-level #f
+    :packages '("krasw")
+    :memory-mode (level-memory-mode large)
+    :mood-func 'update-mood-default-exterior
+    :special-mood #f
+    :ocean #f
+    :draw-priority 10.0
+    :base-task-mask (task-mask task0)
+    :continues '((new 'static 'continue-point
+        :name "kras-wide-start"
+        :level 'krasw
+        :trans (static-vectorm 0 10 0)
+        :camera-trans (static-vectorm 0 5 -20)
+        :quat (new 'static 'vector4h :data
+               (new 'static 'array int16 4 0 0 0 #x7fff))
+        :camera-rot (new 'static 'array int16 9
+               #x7fff 0 0 0 #x7fff 0 0 0 #x7fff)
+        :on-goto #f
+        :vis-nick 'krasw
+        :vehicle-type #x1b
+        :want-count 1
+        :want (new 'static 'inline-array level-buffer-state-small 1
+          (new 'static 'level-buffer-state-small
+               :name 'krasw :display? 'display))
+        :want-sound (new 'static 'array symbol 1 #f)))
+    :callback-list '()
+    :borrow #f
+    :bottom-height (meters -100)
+    :fog-mult 1.0
+    :mood-range (new 'static 'mood-range :max-cloud 1.0 :min-fog 0.5 :max-fog 1.0)))
 
 (define krass #f)
 
