@@ -10633,10 +10633,10 @@
    (func-id      symbol                                          :offset-assert 4 :overlay-at func) ;; guessed by decompiler
    (init-func    (function texture-anim int)                     :offset-assert 8) ;; guessed by decompiler
    (init-func-id symbol                                          :offset-assert 8 :overlay-at init-func) ;; guessed by decompiler
-   (mip-func     basic                                           :offset-assert 12)
-   (mip-func-id  basic                                           :offset-assert 12 :overlay-at mip-func)
-   (time-func    basic                                           :offset-assert 16)
-   (time-func-id basic                                           :offset-assert 16 :overlay-at time-func)
+   (mip-func     (function dma-buffer texture int)              :offset-assert 12)
+   (mip-func-id  symbol                                          :offset-assert 12 :overlay-at mip-func)
+   (time-func    (function texture-anim int)                     :offset-assert 16)
+   (time-func-id symbol                                          :offset-assert 16 :overlay-at time-func)
    (tex          texture                                         :offset-assert 20) ;; guessed by decompiler
    (tex-name     string                                          :offset-assert 24) ;; guessed by decompiler
    (extra        vector                                 :inline  :offset-assert 32)
