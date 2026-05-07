@@ -282,7 +282,35 @@
     )
   )
 
-(define krasb #f)
+;; PARTIAL RESTORATION 2026-05-07: krasb level-load-info from PS2 binary
+;; (decompiler_out/jakx/level-info_ir2.asm L2014). Auxiliary Kras City borrow
+;; level (sibling to krasa/krasc). Same shape as krasa (cycle 7) — only index,
+;; nickname, and name symbols differ. DGO loading parked at kras-pump-break
+;; method 45 gate; goal_src-only.
+(define krasb
+  (new 'static 'level-load-info
+    :name 'krasb
+    :visname 'krasb-vis
+    :nickname 'krb
+    :dbname 'krasb
+    :taskname 'default
+    :index #x3e
+    :master-level #f
+    :packages '()
+    :memory-mode (level-memory-mode tiny)
+    :mood-func 'update-mood-default-exterior
+    :special-mood #f
+    :ocean #f
+    :draw-priority 10.0
+    :base-task-mask (task-mask task0)
+    :continues '()
+    :callback-list '()
+    :borrow #f
+    :bottom-height (meters -15)
+    :fog-mult 1.0
+    :mood-range (new 'static 'mood-range :max-cloud 1.0 :min-fog 0.5 :max-fog 1.0)
+    )
+  )
 
 (define krasc #f)
 
