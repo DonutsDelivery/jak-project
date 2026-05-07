@@ -35510,7 +35510,7 @@
   :flag-assert         #xb000000a0
   (:methods
     (clamp-travel-vector-to-mesh-return-info-method-9 (_type_) none) ;; 9
-    (clamp-travel-vector-to-mesh-return-info-method-10 (_type_) none) ;; 10
+    (clamp-travel-vector-to-mesh-return-info-method-10 (_type_ vector nav-poly int int) none) ;; 10
     )
   )
 
