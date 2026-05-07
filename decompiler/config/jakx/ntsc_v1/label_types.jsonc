@@ -121,6 +121,11 @@
       "L3",
       "array",
       true
+    ],
+    [
+      "L2",
+      "(pointer uint8)",
+      960
     ]
   ],
   "math": [
@@ -2943,6 +2948,11 @@
       "L68",
       "uint8",
       1024
+    ],
+    [
+      "L72",
+      "(pointer uint8)",
+      68
     ]
   ],
   "game-info": [
@@ -2980,7 +2990,8 @@
     ],
     [
       "L215",
-      "(pointer bucket-id-16)"
+      "(pointer uint8)",
+      76
     ]
   ],
   "cam-states-dbg": [
@@ -3213,6 +3224,11 @@
     [
       "L198",
       "string"
+    ],
+    [
+      "L200",
+      "(pointer uint8)",
+      28
     ]
   ],
   "generic-merc": [
@@ -4454,6 +4470,27 @@
       "L64",
       "(pointer uint8)",
       1584
+    ]
+  ],
+  "minimap": [
+    [
+      "L105",
+      "(pointer uint8)",
+      724
+    ]
+  ],
+  "tfrag-methods": [
+    [
+      "L92",
+      "(pointer uint8)",
+      380
+    ]
+  ],
+  "water": [
+    [
+      "L102",
+      "(pointer uint8)",
+      492
     ]
   ]
 }
