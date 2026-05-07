@@ -2707,7 +2707,15 @@ void StackSpillLoadOp::propagate_types2(types2::Instruction& instr,
 
   auto* type_in = input_types.try_find_stack_spill_slot(m_offset);
   ASSERT(type_in);
-  instr.types[m_dst.reg()]->type = type_in->type;
+  // FPR loads via lwc1 are always float, regardless of how the slot was stored.
+  // This handles the lui+mtc1+swc1+lwc1 float-via-int constant pattern where the
+  // GPR holds the float bit-pattern as an integer, gets transferred to FPR, spilled
+  // to stack as int, then reloaded via lwc1.
+  if (m_dst.reg().get_kind() == Reg::FPR) {
+    instr.types[m_dst.reg()]->type = TP_Type::make_from_ts(TypeSpec("float"));
+  } else {
+    instr.types[m_dst.reg()]->type = type_in->type;
+  }
 }
 
 void ConditionalMoveFalseOp::propagate_types2(types2::Instruction& instr,

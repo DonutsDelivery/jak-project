@@ -1588,7 +1588,15 @@ TypeState StackSpillLoadOp::propagate_types_internal(const TypeState& input,
 
   auto& loaded_type = input.get_slot(m_offset);
   auto result = input;
-  result.get(m_dst.reg()) = loaded_type;
+  // FPR loads via lwc1 are always float, regardless of how the slot was stored.
+  // This handles the lui+mtc1+swc1+lwc1 float-via-int constant pattern where the
+  // GPR holds the float bit-pattern as an integer, gets transferred to FPR, spilled
+  // to stack as int, then reloaded via lwc1.
+  if (m_dst.reg().get_kind() == Reg::FPR) {
+    result.get(m_dst.reg()) = TP_Type::make_from_ts(TypeSpec("float"));
+  } else {
+    result.get(m_dst.reg()) = loaded_type;
+  }
   return result;
 }
 
