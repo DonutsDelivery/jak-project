@@ -35843,7 +35843,7 @@
   (:methods
     (nav-state-method-9 (_type_) int) ;; 9 ;; debug-draw
     (nav-state-method-10 (_type_) int) ;; 10
-    (nav-state-method-11 (_type_ object) symbol) ;; 11 ;; plan-over-pat1-polys-using-route (nav-gap-info)
+    (nav-state-method-11 (_type_ nav-gap-info) symbol) ;; 11 ;; plan-over-pat1-polys-using-route
     (nav-state-method-12 (_type_ vector) vector) ;; 12 ;; get-velocity
     (nav-state-method-13 (_type_ vector) vector) ;; 13 ;; get-travel
     (nav-state-method-14 (_type_ vector) vector) ;; 14 ;; get-heading
