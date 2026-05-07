@@ -944,6 +944,11 @@
       "L68",
       "(pointer uint8)",
       16
+    ],
+    [
+      "L63",
+      "(pointer uint8)",
+      16
     ]
   ],
   "wvehicle-weapons-part": [
@@ -1011,6 +1016,11 @@
       "L191",
       "(pointer uint8)",
       64
+    ],
+    [
+      "L142",
+      "(pointer uint8)",
+      32
     ]
   ],
   "hud-cash": [
@@ -1276,6 +1286,11 @@
     ],
     [
       "L210",
+      "(pointer uint8)",
+      1024
+    ],
+    [
+      "L209",
       "(pointer uint8)",
       1024
     ]
@@ -2806,6 +2821,11 @@
       "L713",
       "(pointer uint8)",
       32
+    ],
+    [
+      "L691",
+      "(pointer uint8)",
+      32
     ]
   ],
   "wvehicle-weapons": [
@@ -2845,6 +2865,11 @@
     ],
     [
       "L855",
+      "(pointer uint8)",
+      32
+    ],
+    [
+      "L846",
       "(pointer uint8)",
       32
     ]
@@ -3849,6 +3874,11 @@
       "L449",
       "(pointer uint8)",
       16
+    ],
+    [
+      "L448",
+      "(pointer uint8)",
+      16
     ]
   ],
   "daxter": [
@@ -3936,6 +3966,11 @@
       "L366",
       "(pointer uint8)",
       32
+    ],
+    [
+      "L347",
+      "(pointer uint8)",
+      32
     ]
   ],
   "rigid-body-surface-h": [
@@ -3955,6 +3990,11 @@
       "L376",
       "(pointer uint8)",
       16
+    ],
+    [
+      "L373",
+      "(pointer uint8)",
+      64
     ]
   ],
   "timer-h": [
@@ -3972,6 +4012,11 @@
     ],
     [
       "L343",
+      "(pointer uint8)",
+      16
+    ],
+    [
+      "L342",
       "(pointer uint8)",
       16
     ]
@@ -4007,6 +4052,11 @@
       "L320",
       "(pointer uint8)",
       16
+    ],
+    [
+      "L319",
+      "(pointer uint8)",
+      160
     ]
   ],
   "net-mgr-medius-games": [
@@ -4017,6 +4067,11 @@
     ],
     [
       "L170",
+      "(pointer uint8)",
+      48
+    ],
+    [
+      "L169",
       "(pointer uint8)",
       48
     ]
@@ -4031,6 +4086,11 @@
       "L322",
       "(pointer uint8)",
       32
+    ],
+    [
+      "L321",
+      "(pointer uint8)",
+      368
     ]
   ],
   "net-mgr-medius-rooms": [
@@ -4055,6 +4115,11 @@
       "L88",
       "(pointer uint8)",
       128
+    ],
+    [
+      "L87",
+      "(pointer uint8)",
+      128
     ]
   ],
   "net-mgr": [
@@ -4067,6 +4132,11 @@
       "L140",
       "(pointer uint8)",
       128
+    ],
+    [
+      "L139",
+      "(pointer uint8)",
+      16
     ]
   ],
   "vehicle-debris": [
@@ -4119,6 +4189,11 @@
       "L357",
       "(pointer uint8)",
       432
+    ],
+    [
+      "L356",
+      "(pointer uint8)",
+      32
     ]
   ],
   "process-nettable-h": [
@@ -4171,6 +4246,11 @@
       "L169",
       "(pointer uint8)",
       800
+    ],
+    [
+      "L168",
+      "(pointer uint8)",
+      800
     ]
   ],
   "net-simple-destruct": [
@@ -4197,6 +4277,11 @@
       "L118",
       "(pointer uint8)",
       400
+    ],
+    [
+      "L117",
+      "(pointer uint8)",
+      160
     ]
   ],
   "net-colarb": [
@@ -4216,6 +4301,11 @@
       "L17",
       "(pointer uint8)",
       16
+    ],
+    [
+      "L16",
+      "(pointer uint8)",
+      16
     ]
   ],
   "net-mgr-async": [
@@ -4228,6 +4318,11 @@
       "L121",
       "(pointer uint8)",
       128
+    ],
+    [
+      "L120",
+      "(pointer uint8)",
+      32
     ]
   ],
   "net-mgr-sysmsg": [
