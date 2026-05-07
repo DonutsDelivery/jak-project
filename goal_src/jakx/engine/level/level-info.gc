@@ -248,7 +248,39 @@
     )
   )
 
-(define krasa #f)
+;; PARTIAL RESTORATION 2026-05-07: krasa level-load-info from PS2 binary
+;; (decompiler_out/jakx/level-info_ir2.asm L2015), fitted to current master
+;; deftype shape. krasa is one of three auxiliary Kras City borrow levels
+;; (krasa/krasb/krasc) referenced by krasw continue-points as borrow targets.
+;; Substitutes: ocean *ocean-map-kras* (PS2 ref) -> #f (not on master, no
+;; ocean module yet in jakx); :master-level/borrow #f (PS2 had borrow info
+;; via L2018+, defer to krasw-loader-cycle). DGO loading remains parked at
+;; the kras-pump-break method-45 / state-slot crash gate; this entry is
+;; goal_src-only.
+(define krasa
+  (new 'static 'level-load-info
+    :name 'krasa
+    :visname 'krasa-vis
+    :nickname 'kra
+    :dbname 'krasa
+    :taskname 'default
+    :index #x3d
+    :master-level #f
+    :packages '()
+    :memory-mode (level-memory-mode tiny)
+    :mood-func 'update-mood-default-exterior
+    :special-mood #f
+    :ocean #f
+    :draw-priority 10.0
+    :base-task-mask (task-mask task0)
+    :continues '()
+    :callback-list '()
+    :borrow #f
+    :bottom-height (meters -15)
+    :fog-mult 1.0
+    :mood-range (new 'static 'mood-range :max-cloud 1.0 :min-fog 0.5 :max-fog 1.0)
+    )
+  )
 
 (define krasb #f)
 
