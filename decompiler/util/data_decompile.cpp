@@ -1074,7 +1074,16 @@ const std::unordered_map<
          }},
         {GameVersion::JakX,
          {
-             // TODO
+             {"sparticle-launcher",
+              {{"init-specs", ArrayFieldDecompMeta(TypeSpec("sp-field-init-spec"), 16)}}},
+             {"sparticle-launch-group",
+              {{"launcher", ArrayFieldDecompMeta(TypeSpec("sparticle-group-item"), 32)}}},
+             {"lightning-probe-vars",
+              {{"probe-dirs", ArrayFieldDecompMeta(TypeSpec("vector"), 16)}}},
+             {"continue-point",
+              {{"want", ArrayFieldDecompMeta(TypeSpec("level-buffer-state-small"), 8)}}},
+             {"nav-network-info",
+              {{"adjacency", ArrayFieldDecompMeta(TypeSpec("nav-network-adjacency"), 16)}}},
          }}};
 
 goos::Object decompile_structure(const TypeSpec& type,
