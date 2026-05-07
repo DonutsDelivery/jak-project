@@ -1807,7 +1807,6 @@
 
 (define-extern *last-menu-action* object)
 (define-extern default-base-menu-post (function none))
-(define-extern base-menu-init-by-other (function none))
 (define-extern menu-clear-strip (function int none))
 (define-extern METERS_PER_TEXEL object)
 (define-extern find-first-selectable (function none))
@@ -1958,7 +1957,6 @@
   
 
 
-(define-extern wrong-way-linebot-init-by-other (function none))
 (define-extern wrong-way-linebot-spawn (function process process))
 (define-extern set-position-and-orientation (function none))
 (define-extern set-children-position-and-orientation (function none))
@@ -1970,7 +1968,6 @@
 (define-extern starting-linebot-init-by-other (function int int int none))
 (define-extern starting-linebot-spawn (function int int int int process))
 (define-extern race-banner-handler (function int uint symbol))
-(define-extern race-banner-init-by-other (function none))
 (define-extern race-banner-spawn (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2211,7 +2208,6 @@
 (define-extern *eco-nearby-ct* object)
 (define-extern *eco-nearby-array* array)
 (define-extern *eco-last-processed* object)
-(define-extern eco-mgr-init-by-other (function none))
 (define-extern init-local-net-eco-mgr (function none))
 (define-extern compute-veh-eco-owner-score (function none))
 
@@ -5468,12 +5464,10 @@
 
 (define-extern *msg-map-mine-a* array)
 (define-extern *net-process-class-info-mine-a* object)
-(define-extern mine-a-init-by-other (function none))
 (define-extern *msg-map-mine-b* array)
 (define-extern *net-process-class-info-mine-b* object)
 (define-extern mine-b-common-trans (function none))
 (define-extern *mine-b-hack* object)
-(define-extern mine-b-init-by-other (function none))
 (define-extern *msg-map-v-yellow-guided-missile* array)
 (define-extern *net-process-class-info-v-yellow-guided-missile* object)
 (define-extern guided-missile-moving-event-handler (function none))
@@ -5640,7 +5634,6 @@
 (define-extern sift-down (function uint int int symbol))
 (define-extern heap-sort (function uint int symbol))
 (define-extern clear-strip (function int none))
-(define-extern lightning-sphere-init-by-other (function none))
 (define-extern lightning-sphere-spawn (function int int int int int process))
 (define-extern vector+float*-ignore-w! (function int int int int none))
 (define-extern smoke-update (function none))
@@ -5648,7 +5641,6 @@
 (define-extern smoke-spawn (function none))
 (define-extern smoke-system-init-by-other (function uint int none))
 (define-extern smoke-system-spawn (function int int process))
-(define-extern slip-object-init-by-other (function none))
 (define-extern slip-object-spawn (function int int int int int process))
 (define-extern oil-slick-init-by-other (function uint none))
 (define-extern oil-slick-spawn (function int process))
@@ -5762,9 +5754,7 @@
 (define-extern vws-focus-search-base (function none))
 (define-extern gunmount-common-trans (function none))
 (define-extern gunmount-common-post (function none))
-(define-extern gunmount-drawable-init-by-other (function none))
 (define-extern gunmount-event-handler (function none))
-(define-extern muzzle-flash-init-by-other (function none))
 (define-extern gunmount-get-change-anim (function none))
 (define-extern gunmount-generic-event-handler (function none))
 (define-extern v-wpn-yellow-chain-gun-I-rapid-fire-control-params object)
@@ -5793,7 +5783,6 @@
 (define-extern v-wpn-sentrybot-rapid-fire-control-params object)
 (define-extern sentrybot-poke-yaw! (function none))
 (define-extern sentrybot-poke-pitch! (function none))
-(define-extern red-sentry-bot-init-by-other (function none))
 (define-extern red-sentry-bot-common-trans (function none))
 (define-extern red-sentry-bot-poll-target (function none))
 (define-extern sentry-bot-base-handler (function int uint none))
@@ -5804,7 +5793,6 @@
 (define-extern drone-trans-twitchy-rot (function none))
 (define-extern drone-trans-rot-at-target (function none))
 (define-extern drone-base-post (function none))
-(define-extern vehicle-weapon-drone-init-by-other (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-weapons2              ;;
@@ -63573,3 +63561,17 @@
 (define-extern base-menu-event-handler (function process int symbol event-message-block object :behavior base-menu))
 (define-extern wrong-way-event-handler (function process int symbol event-message-block object :behavior wrong-way))
 (define-extern muzzle-flash-event-handler (function process int symbol event-message-block object :behavior muzzle-flash))
+
+;; init-by-other :behavior tags moved past forward-ref deftypes
+(define-extern base-menu-init-by-other (function none :behavior base-menu))
+(define-extern wrong-way-linebot-init-by-other (function none :behavior wrong-way-linebot))
+(define-extern race-banner-init-by-other (function none :behavior race-banner))
+(define-extern eco-mgr-init-by-other (function none :behavior eco-mgr))
+(define-extern mine-a-init-by-other (function none :behavior mine-a))
+(define-extern mine-b-init-by-other (function none :behavior mine-b))
+(define-extern lightning-sphere-init-by-other (function none :behavior lightning-sphere))
+(define-extern slip-object-init-by-other (function none :behavior slip-object))
+(define-extern gunmount-drawable-init-by-other (function none :behavior gunmount-drawable))
+(define-extern muzzle-flash-init-by-other (function none :behavior muzzle-flash))
+(define-extern red-sentry-bot-init-by-other (function none :behavior red-sentry-bot))
+(define-extern vehicle-weapon-drone-init-by-other (function none :behavior vehicle-weapon-drone))
