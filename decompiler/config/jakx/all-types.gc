@@ -37158,7 +37158,7 @@
   :flag-assert         #xc00000028
   ;; field out uses ~A with a signed load.
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type uint) _type_)
+    (new (symbol type uint) _type_) ;; 0
     (history-iterator-method-9 (_type_ history-elt) time-frame) ;; 9
     (history-iterator-method-10 (_type_) history-elt) ;; 10
     (history-iterator-method-11 (_type_ history-elt) float) ;; 11
@@ -37177,7 +37177,7 @@
   :size-assert         #x10
   :flag-assert         #xb00000010
   (:methods
-    (new (symbol type) _type_) ;; 0
+    (new (symbol type int) _type_) ;; 0
     (history-method-9 (_type_ uint uint uint) history-elt) ;; 9
     (clear-history-entries! (_type_) int) ;; 10
     )
