@@ -21378,7 +21378,7 @@
   :size-assert         #x28
   :flag-assert         #xc00000028
   (:methods
-    (new (_type_ symbol type object object) _type_) ;; 0
+    (new (_type_ type type object object) _type_) ;; 0
     (fact-info-method-9 (_type_ symbol process-tree fact-info int symbol) none) ;; 9
     (fact-info-method-10 (_type_ symbol) none) ;; 10
     (fact-info-method-11 (_type_) int) ;; 11
@@ -29405,7 +29405,7 @@
   :size-assert         #x28
   :flag-assert         #xb00000028
   (:methods
-    (new (_type_ symbol type object object) _type_) ;; 0 ;; (new (symbol type process-drawable int float) _type_)
+    (new (_type_ type type object object) _type_) ;; 0 ;; (new (symbol type process-drawable int float) _type_)
     (joint-mod-ik-method-9 (_type_ vector) int) ;; 9
     (joint-mod-ik-method-10 (_type_ symbol) int) ;; 10
     )
@@ -29807,7 +29807,7 @@
   :flag-assert         #x37000000c8
   ;; field penetrate is likely a value type. field penetrate is likely a value type.
   (:methods
-    (new (_type_ symbol type object) _type_) ;; 0 ;; (new (symbol type process-drawable collide-list-enum) _type_)
+    (new (_type_ type type object) _type_) ;; 0 ;; (new (symbol type process-drawable collide-list-enum) _type_)
     (collide-shape-method-28 (_type_ vector) int) ;; 28
     (collide-shape-method-29 (_type_ vector) int) ;; 29
     (debug-draw (_type_) int) ;; 30
@@ -34417,7 +34417,7 @@
   :size-assert         #x68
   :flag-assert         #xb00000068
   (:methods
-    (new (_type_ symbol type object object object object) _type_) ;; 0 ;; (new (symbol type sparticle-system sparticle-launcher float) _type_)
+    (new (_type_ type type object object object object) _type_) ;; 0 ;; (new (symbol type sparticle-system sparticle-launcher float) _type_)
     (sparticle-subsampler-method-9 (_type_ vector) vector) ;; 9
     (sparticle-subsampler-method-10 (_type_ matrix) matrix) ;; 10
     )
@@ -36070,7 +36070,7 @@
   :size-assert         #x68
   :flag-assert         #x2400000068
   (:methods
-    (new (_type_ symbol type object) _type_) ;; 0 ;; (new (symbol type int int) _type_)
+    (new (_type_ type type object) _type_) ;; 0 ;; (new (symbol type int int) _type_)
     (sphere-hash-method-27 (_type_) int) ;; 27
     (sphere-hash-method-28 (_type_) none) ;; 28
     (sphere-hash-method-29 (_type_ find-nav-sphere-ids-params) none) ;; 29
@@ -36101,7 +36101,7 @@
   :size-assert         #x74
   :flag-assert         #x2a00000074
   (:methods
-    (new (_type_ symbol type object) _type_) ;; 0 ;; (new (symbol type int int) _type_)
+    (new (_type_ type type object) _type_) ;; 0 ;; (new (symbol type int int) _type_)
     (spatial-hash-method-36 (_type_ vector vector float (pointer collide-shape) int int) int) ;; 36
     (spatial-hash-method-37 (_type_ vector vector float (pointer collide-shape) int int) int) ;; 37
     (spatial-hash-method-38 (_type_ vector (pointer collide-shape)) int) ;; 38
@@ -43065,7 +43065,7 @@
   :size-assert         #x40
   :flag-assert         #xe00000040
   (:methods
-    (new (_type_ symbol type object) _type_) ;; 0
+    (new (_type_ type type object) _type_) ;; 0
     (draw-path (_type_) none) ;; 9
     (setup (_type_ (pointer float) int) none) ;; 10
     (flow-control-method-11 (_type_ process-focusable) int) ;; 11
