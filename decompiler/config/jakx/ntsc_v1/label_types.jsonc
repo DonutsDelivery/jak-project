@@ -939,6 +939,11 @@
       "L69",
       "(pointer uint8)",
       16
+    ],
+    [
+      "L68",
+      "(pointer uint8)",
+      16
     ]
   ],
   "wvehicle-weapons-part": [
@@ -999,6 +1004,11 @@
     ],
     [
       "L192",
+      "(pointer uint8)",
+      64
+    ],
+    [
+      "L191",
       "(pointer uint8)",
       64
     ]
@@ -1263,6 +1273,11 @@
       "L138",
       "(pointer uint8)",
       512
+    ],
+    [
+      "L210",
+      "(pointer uint8)",
+      1024
     ]
   ],
   "scert-3-h": [
@@ -2786,6 +2801,11 @@
       "L730",
       "(pointer uint8)",
       32
+    ],
+    [
+      "L713",
+      "(pointer uint8)",
+      32
     ]
   ],
   "wvehicle-weapons": [
@@ -2820,6 +2840,11 @@
     ],
     [
       "L856",
+      "(pointer uint8)",
+      32
+    ],
+    [
+      "L855",
       "(pointer uint8)",
       32
     ]
@@ -3819,6 +3844,11 @@
       "L450",
       "(pointer uint8)",
       8
+    ],
+    [
+      "L449",
+      "(pointer uint8)",
+      16
     ]
   ],
   "daxter": [
@@ -3882,6 +3912,11 @@
       "L137",
       "(pointer uint8)",
       32
+    ],
+    [
+      "L136",
+      "(pointer uint8)",
+      16
     ]
   ],
   "wcar-projectiles": [
@@ -3894,6 +3929,11 @@
   "wvehicle-weapons-aux": [
     [
       "L367",
+      "(pointer uint8)",
+      32
+    ],
+    [
+      "L366",
       "(pointer uint8)",
       32
     ]
@@ -3910,6 +3950,11 @@
       "L377",
       "(pointer uint8)",
       48
+    ],
+    [
+      "L376",
+      "(pointer uint8)",
+      16
     ]
   ],
   "timer-h": [
@@ -3924,6 +3969,11 @@
       "L344",
       "(pointer uint8)",
       48
+    ],
+    [
+      "L343",
+      "(pointer uint8)",
+      16
     ]
   ],
   "construction-obs-h": [
@@ -3952,6 +4002,11 @@
       "L321",
       "(pointer uint8)",
       80
+    ],
+    [
+      "L320",
+      "(pointer uint8)",
+      16
     ]
   ],
   "net-mgr-medius-games": [
@@ -3959,6 +4014,11 @@
       "L171",
       "(pointer uint8)",
       96
+    ],
+    [
+      "L170",
+      "(pointer uint8)",
+      48
     ]
   ],
   "net-mgr-dme": [
@@ -3966,6 +4026,11 @@
       "L323",
       "(pointer uint8)",
       120
+    ],
+    [
+      "L322",
+      "(pointer uint8)",
+      32
     ]
   ],
   "net-mgr-medius-rooms": [
@@ -3973,6 +4038,11 @@
       "L128",
       "(pointer uint8)",
       128
+    ],
+    [
+      "L127",
+      "(pointer uint8)",
+      256
     ]
   ],
   "net-mgr-muis": [
@@ -3980,11 +4050,21 @@
       "L89",
       "(pointer uint8)",
       128
+    ],
+    [
+      "L88",
+      "(pointer uint8)",
+      128
     ]
   ],
   "net-mgr": [
     [
       "L141",
+      "(pointer uint8)",
+      128
+    ],
+    [
+      "L140",
       "(pointer uint8)",
       128
     ]
@@ -4022,6 +4102,11 @@
       "L777",
       "(pointer uint8)",
       320
+    ],
+    [
+      "L776",
+      "(pointer uint8)",
+      32
     ]
   ],
   "net-mgr-medius-clans": [
@@ -4029,6 +4114,11 @@
       "L358",
       "(pointer uint8)",
       320
+    ],
+    [
+      "L357",
+      "(pointer uint8)",
+      432
     ]
   ],
   "process-nettable-h": [
@@ -4043,6 +4133,11 @@
       "L59",
       "(pointer uint8)",
       512
+    ],
+    [
+      "L58",
+      "(pointer uint8)",
+      16
     ]
   ],
   "net-powerup": [
@@ -4071,6 +4166,11 @@
       "L170",
       "(pointer uint8)",
       800
+    ],
+    [
+      "L169",
+      "(pointer uint8)",
+      800
     ]
   ],
   "net-simple-destruct": [
@@ -4092,6 +4192,11 @@
       "L119",
       "(pointer uint8)",
       1024
+    ],
+    [
+      "L118",
+      "(pointer uint8)",
+      400
     ]
   ],
   "net-colarb": [
@@ -4106,6 +4211,11 @@
       "L18",
       "(pointer uint8)",
       1024
+    ],
+    [
+      "L17",
+      "(pointer uint8)",
+      16
     ]
   ],
   "net-mgr-async": [
@@ -4113,6 +4223,11 @@
       "L122",
       "(pointer uint8)",
       1024
+    ],
+    [
+      "L121",
+      "(pointer uint8)",
+      128
     ]
   ],
   "net-mgr-sysmsg": [
@@ -4127,6 +4242,11 @@
       "L123",
       "(pointer uint8)",
       1024
+    ],
+    [
+      "L122",
+      "(pointer uint8)",
+      288
     ]
   ],
   "sparks": [
