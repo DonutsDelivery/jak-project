@@ -92,6 +92,12 @@
 ;; not yet ported; only level data/visibility.
 (cgo-file "krastrn.gd" '())
 
+;; first wide tutorial level — krasw (Kras City open hub). KRASW.DGO unblocked
+;; via no_type_analysis on kras-pump-break methods 43-45 (Lane C #2). Code
+;; objects (kras-effects, kras-part, kras-obs, kras-ocean, construction-obs)
+;; not yet ported; only tpages, art groups, and krasw level binary.
+(cgo-file "krasw.gd" '())
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Groups
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
