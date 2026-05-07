@@ -45764,7 +45764,7 @@
     (race-mesh-method-11 (_type_ int) none)
     (race-mesh-method-12 (_type_ race-line int) none)
     (race-mesh-method-13 (_type_ race-mesh-slice-query) none)
-    (race-mesh-method-14 (_type_ race-mesh-slice-query) symbol)
+    (race-mesh-method-14 (_type_ race-mesh-slice-query int symbol) symbol)
     (race-mesh-method-15 (_type_ race-mesh-slice-query) float) ;; 15
     (race-mesh-method-16 (_type_ int race-mesh-slice-query) none)
     (race-mesh-method-17 (_type_ race-mesh-slice-query) int) ;; 17
