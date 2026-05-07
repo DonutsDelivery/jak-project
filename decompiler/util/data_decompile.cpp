@@ -1551,7 +1551,15 @@ goos::Object decompile_structure(const TypeSpec& type,
           if (word.symbol_name() == "#f") {
             field_defs_out.emplace_back(
                 field.name(), pretty_print::to_symbol(fmt::format("{}", word.symbol_name())));
-          } else if (!ts.tc(field.type(), TypeSpec("symbol"))) {
+          } else if (!ts.tc(field.type(), TypeSpec("symbol")) &&
+                     field.type() != TypeSpec("basic") &&
+                     field.type() != TypeSpec("structure") &&
+                     field.type() != TypeSpec("object")) {
+            // In jak2/3/X, symbol is a sibling of basic under structure (NOT a
+            // child of basic as in jak1). GOAL static data routinely places
+            // symbol pointers in basic / structure / object slots. Accept those
+            // as valid carriers for SYM_PTR data instead of bailing with
+            // "unknown data".
             continue;
           } else if (word.symbol_name() == "#t") {
             field_defs_out.emplace_back(
