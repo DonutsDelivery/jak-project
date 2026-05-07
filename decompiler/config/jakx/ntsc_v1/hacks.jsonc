@@ -14,7 +14,15 @@
     // wvehicle-weapons-h top-level crashes decompiler with assertion
     // is_var() at IR2/AtomicOp.h:156 after "add failed: int object" at op 14.
     // Skipping type analysis prevents crash while preserving 193 downstream files.
-    "(top-level-login wvehicle-weapons-h)"
+    "(top-level-login wvehicle-weapons-h)",
+    // Lane C #2: kras-pump-break methods 43-45 — PS2 binary type-info has these
+    // slots typed as `(state _type_)` while master deftype declares them as
+    // regular methods. Trying to reconcile via :state-methods declaration in
+    // deftype caused decompiler to die at slot 43 instead (cycle B5). Skip
+    // type analysis for these methods so KRASW.DGO can extract.
+    "(method 43 kras-pump-break)",
+    "(method 44 kras-pump-break)",
+    "(method 45 kras-pump-break)"
   ],
   "cond_with_else_max_lengths": [
     [
