@@ -42934,8 +42934,8 @@
     (nav-link-search-info-method-9 (_type_ uint) none) ;; 9
     (nav-link-search-info-method-10 (_type_) int) ;; 10
     (nav-link-search-info-method-11 (_type_ uint) none) ;; 11
-    (nav-link-search-info-method-12 (_type_ int) int) ;; 12
-    (nav-link-search-info-method-13 (_type_) none) ;; 13
+    (nav-link-search-info-method-12 (_type_ nav-mesh-link-search-node) nav-mesh-link-search-node) ;; 12
+    (nav-link-search-info-method-13 (_type_ nav-mesh-link-search-node) none) ;; 13
     (nav-link-search-info-method-14 (_type_) none) ;; 14
     (nav-link-search-info-method-15 (_type_ uint) none) ;; 15
     (nav-link-search-info-method-16 (_type_ nav-mesh-link-search-node) none) ;; 16
