@@ -4271,7 +4271,7 @@
   )
 
 
-(define-extern hoff-text-floater-init-by-other (function none))
+(define-extern hoff-text-floater-init-by-other (function none :behavior hoff-text-floater))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-deathmatch                 ;;
@@ -5022,10 +5022,10 @@
 (define-extern vehicle-reticle-base-init-by-other (function uint none))
 (define-extern vehicle-reticle-base-trans (function none))
 (define-extern v-reticle-update-missile (function uint uint none))
-(define-extern vehicle-reticle-on-me-init-by-other (function none))
+(define-extern vehicle-reticle-on-me-init-by-other (function none :behavior vehicle-reticle-on-me))
 (define-extern vehicle-reticle-on-me-helper-missile-inc (function none))
 (define-extern vehicle-reticle-on-me-helper-peacemaker-inc (function none))
-(define-extern vehicle-reticle-on-them-init-by-other (function none))
+(define-extern vehicle-reticle-on-them-init-by-other (function none :behavior vehicle-reticle-on-them))
 (define-extern targeting-reticle-for-this-weapon-type? (function uint none))
 (define-extern targeting-reticle-line-of-sight? (function uint uint none))
 (define-extern draw-reticle-on-them (function none))
@@ -6050,7 +6050,7 @@
 
 (define-extern *drift-file-stream* file-stream)
 (define-extern *drift-editor* drift-editor)
-(define-extern drift-editor-init-by-other (function none))
+(define-extern drift-editor-init-by-other (function none :behavior drift-editor))
 (define-extern start-drift (function symbol))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -42548,7 +42548,7 @@
 (define-extern main-cheats (function none))
 (define-extern end-display (function display int)) 
 (define-extern disc-idle state)
-(define-extern disc-error-proc-init-by-other (function none))
+(define-extern disc-error-proc-init-by-other (function none :behavior disc-error-proc))
 (define-extern display-loop-main (function display none))
 (define-extern display-loop "Main loop for running the game." (function int :behavior process))
 (define-extern on "Start the display process." (function symbol process))
@@ -49948,7 +49948,7 @@
 (define-extern *net-log-write* object)
 (define-extern *net-memory-callbacks* object)
 (define-extern *net-mgr-notify-engine* object)
-(define-extern net-mgr-init-by-other (function none))
+(define-extern net-mgr-init-by-other (function none :behavior net-mgr))
 (define-extern net-mgr-start (function int none))
 (define-extern net-mgr-stop (function none))
 (define-extern net-mgr-default-handler (function none))
@@ -50108,7 +50108,7 @@
 (define-extern *aux-voice-enabled* object)
 (define-extern *aux-voice-last-startup* object)
 (define-extern *aux-voice-acct-ids* object)
-(define-extern aux-voice-mgr-init-by-other (function none))
+(define-extern aux-voice-mgr-init-by-other (function none :behavior aux-voice-mgr))
 (define-extern aux-voice-mgr-activate (function none))
 (define-extern aux-voice-mgr-deactivate (function none))
 (define-extern aux-voice-mgr-failed (function none))
@@ -50738,7 +50738,7 @@
 
 
 
-(define-extern net-process-mgr-init-by-other (function none))
+(define-extern net-process-mgr-init-by-other (function none :behavior net-process-mgr))
 (define-extern spawn-net-entity (function object none))
 (define-extern *net-process-table* array)
 (define-extern net-process-mgr-start (function none))
@@ -50792,7 +50792,7 @@
 
 (define-extern *http-downloader* http-downloader)
 (define-extern *http-request-string* object)
-(define-extern http-downloader-init-by-other (function none))
+(define-extern http-downloader-init-by-other (function none :behavior http-downloader))
 (define-extern http-start-fetch (function int none))
 (define-extern http-downloader-default-handler (function none))
 (define-extern *socket-blocking* object)
@@ -50864,7 +50864,7 @@
 (define-extern fmv-memcpy (function none))
 (define-extern fmv-file-read (function none))
 (define-extern fmv-fade-out (function none))
-(define-extern fmv-player-init-by-other (function none))
+(define-extern fmv-player-init-by-other (function none :behavior fmv-player))
 (define-extern fmv-player-run (function string none))
 (define-extern fmv-player-run-texture (function int int none))
 (define-extern fmv-player-terminate (function none))
@@ -51112,7 +51112,7 @@
 (define-extern auto-save-post (function pointer :behavior auto-save))
 (define-extern auto-save-init-by-other (function symbol process int int symbol object :behavior auto-save))
 (define-extern auto-idle state)
-(define-extern auto-save-error-proc-init-by-other (function none))
+(define-extern auto-save-error-proc-init-by-other (function none :behavior auto-save-error-proc))
 (define-extern progress-allowed? (function symbol))
 (define-extern auto-save-command (function symbol int int process-tree symbol (pointer auto-save)))
 (define-extern auto-save-check (function int))
@@ -51204,7 +51204,7 @@
 (define-extern net-test-init-remote (function none :behavior net-test))
 (define-extern *msg-map-net-test* array)
 (define-extern *net-process-class-info-net-test* net-process-class-info)
-(define-extern net-test-init-by-other (function none))
+(define-extern net-test-init-by-other (function none :behavior net-test))
 (define-extern spawn-local (function process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51404,7 +51404,7 @@
 ;; net-projectile                 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern net-projectile-init-by-other (function none))
+(define-extern net-projectile-init-by-other (function none :behavior net-projectile))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; udp-layer                      ;;
@@ -51482,7 +51482,7 @@
 (define-extern *decoder-queue-1-buf* object)
 (define-extern *decoder-queue-0-buf* object)
 (define-extern *decoder-queue-buffers* array)
-(define-extern headset-init-by-other (function none))
+(define-extern headset-init-by-other (function none :behavior headset))
 (define-extern headset-activate (function none))
 (define-extern headset-deactivate (function none))
 (define-extern headset-audio-msg-callback (function int int none))
@@ -52003,7 +52003,7 @@
 (define-extern driver-head (function none))
 (define-extern driver-anim (function none))
 (define-extern driver-event-handler (function int uint none))
-(define-extern driver-init-by-other (function none))
+(define-extern driver-init-by-other (function none :behavior driver))
 (define-extern driver-spawn (function int basic int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -52043,7 +52043,7 @@
   
 
 
-(define-extern helmet-hud-init-by-other (function none))
+(define-extern helmet-hud-init-by-other (function none :behavior helmet-hud))
 (define-extern helmet-hud-spawn (function uint none))
 (define-extern helmet-garage-init-by-other (function uint int int none))
 (define-extern helmet-garage-spawn (function uint none))
@@ -52553,7 +52553,7 @@
 (define-extern choose-victor-prefix-camera (function none))
 (define-extern target-camera-active? (function none))
 (define-extern *target-camera-array* array)
-(define-extern vehicle-AI-control-timer-init-by-other (function none))
+(define-extern vehicle-AI-control-timer-init-by-other (function none :behavior vehicle-AI-control-timer))
 (define-extern target-camera-heuristic-cam-point! (function none))
 (define-extern target-camera-heuristic-look-at! (function none))
 (define-extern target-camera-heuristic-fov (function none))
@@ -52688,7 +52688,7 @@
 
 
 (define-extern *vehicle-debris-constants* object)
-(define-extern vehicle-debris-init-by-other (function none))
+(define-extern vehicle-debris-init-by-other (function none :behavior vehicle-debris))
 (define-extern vehicle-debris-spawn (function int int process))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -53279,7 +53279,7 @@
 (define-extern *debug-part-dead-pool* dead-pool) ;; dead-pool
 (define-extern start-part (function none))
 (define-extern test-idle state)
-(define-extern test-process-init-by-other (function none))
+(define-extern test-process-init-by-other (function none :behavior test-process))
 (define-extern start-test (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55285,16 +55285,16 @@
   
 
 
-(define-extern ctf-base-b-init-by-other (function none))
+(define-extern ctf-base-b-init-by-other (function none :behavior ctf-base-b))
 (define-extern ctf-base-b-spawn (function none))
-(define-extern ctf-base-c-init-by-other (function none))
+(define-extern ctf-base-c-init-by-other (function none :behavior ctf-base-c))
 (define-extern ctf-base-c-spawn (function none))
 (define-extern flag-at-base? (function none))
 (define-extern seek-default-size (function none))
 (define-extern move-captured-flag (function none))
-(define-extern ctf-captured-flag-init-by-other (function none))
+(define-extern ctf-captured-flag-init-by-other (function none :behavior ctf-captured-flag))
 (define-extern ctf-captured-flag-spawn (function none))
-(define-extern ctf-flag-init-by-other (function none))
+(define-extern ctf-flag-init-by-other (function none :behavior ctf-flag))
 (define-extern ctf-flag-spawn (function none))
 (define-extern flag-post (function none))
 (define-extern movement-post (function none))
@@ -55550,7 +55550,7 @@
 (define-extern raceline-weapon-init-remote (function none :behavior raceline-weapon))
 (define-extern *msg-map-raceline-weapon* array)
 (define-extern *net-process-class-info-raceline-weapon* net-process-class-info)
-(define-extern raceline-weapon-init-by-other (function none))
+(define-extern raceline-weapon-init-by-other (function none :behavior raceline-weapon))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; wvehicle-weapons-chicken-drone ;;
@@ -56021,7 +56021,7 @@
 
 (define-extern spt-func-cell-grabbed (function none))
 (define-extern powercell-subdraw-init-by-other (function none))
-(define-extern powercell-footie-init-by-other (function none))
+(define-extern powercell-footie-init-by-other (function none :behavior powercell-footie))
 (define-extern powercell-footie-update-pos-on-vehicle (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -57218,7 +57218,7 @@
   
 
 
-(define-extern coli-break-object-init-by-other (function none))
+(define-extern coli-break-object-init-by-other (function none :behavior coli-break-object))
 (define-extern coli-statue-female-s-break-spawn (function none))
 (define-extern coli-statue-female-s-break-a-spawn (function none))
 (define-extern coli-statue-female-s-break-b-spawn (function none))
@@ -57380,9 +57380,9 @@
 (define-extern hirez-viewer-init-by-other (function museum-char symbol symbol object :behavior hirez-viewer))
 (define-extern spawn-hirez-viewer (function museum-char symbol symbol handle))
 (define-extern draw-end-credits (function level float symbol))
-(define-extern end-credits-character-viewer-init-by-other (function none))
+(define-extern end-credits-character-viewer-init-by-other (function none :behavior end-credits-character-viewer))
 (define-extern update-stuff (function none))
-(define-extern end-credits-proc-init-by-other (function none))
+(define-extern end-credits-proc-init-by-other (function none :behavior end-credits-proc))
 (define-extern activate-end-credits-proc (function none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -57453,7 +57453,7 @@
 
 (define-extern *train-constants* object)
 (define-extern *train-headlight-glow-template* object)
-(define-extern train-car-init-by-other (function none))
+(define-extern train-car-init-by-other (function none :behavior train-car))
 (define-extern train-car-spawn (function none))
 (define-extern *desired-number-of-cars* object)
 (define-extern position-train-car (function none))
@@ -57687,7 +57687,7 @@
   )
 
 
-(define-extern kras-pump-break-draw-init-by-other (function none))
+(define-extern kras-pump-break-draw-init-by-other (function none :behavior kras-pump-break-draw))
 (define-extern kras-pump-break-init-remote (function none :behavior kras-pump-break))
 (define-extern *msg-map-kras-pump-break* array)
 (define-extern *net-process-class-info-kras-pump-break* net-process-class-info)
@@ -58371,7 +58371,7 @@
 (define-extern *jungle-clay-jar-a-debris-params* debris-static-params)
 (define-extern *jungle-clay-jar-b-debris-params* debris-static-params)
 (define-extern spawn-flame (function none))
-(define-extern jungle-stone-snake-head-draw-init-by-other (function none))
+(define-extern jungle-stone-snake-head-draw-init-by-other (function none :behavior jungle-stone-snake-head-draw))
 (define-extern jungle-stone-snake-head-init-remote (function none :behavior jungle-stone-snake-head))
 (define-extern *msg-map-jungle-stone-snake-head* array)
 (define-extern *net-process-class-info-jungle-stone-snake-head* net-process-class-info)
@@ -58702,10 +58702,10 @@
 
 
 (define-extern *interface-cam* interface-cam)
-(define-extern interface-cam-init-by-other (function none))
+(define-extern interface-cam-init-by-other (function none :behavior interface-cam))
 (define-extern activate-bar (function none))
 (define-extern *garage-cinema* garage-cinema)
-(define-extern garage-cinema-init-by-other (function none))
+(define-extern garage-cinema-init-by-other (function none :behavior garage-cinema))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; lobby-menu-data                ;;
@@ -58786,7 +58786,7 @@
 (define-extern jak-selection-clear? (function none))
 (define-extern jak-owner (function none))
 (define-extern *timetrial-ghost-time-string* string)
-(define-extern lobby-menu-manager-init-by-other (function none))
+(define-extern lobby-menu-manager-init-by-other (function none :behavior lobby-menu-manager))
 (define-extern lobby-start (function none))
 (define-extern flash-game-started (function none))
 (define-extern update-lobby-camera (function none))
