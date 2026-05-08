@@ -39680,6 +39680,7 @@
    (max-length int16                            :offset-assert 2)
    (data       (inline-array actor-cshape-ptr)  :offset-assert 4) ;; guessed by decompiler
    )
+  :allow-misaligned
   :method-count-assert 10
   :size-assert         #x8
   :flag-assert         #xa00000008
@@ -39694,7 +39695,7 @@
 (deftype actor-hash-buckets (structure)
   ((hash spatial-hash                :offset-assert 0) ;; guessed by decompiler
    (list engine                      :offset-assert 4) ;; guessed by decompiler
-   (data actor-hash-bucket 4 :inline :offset-assert 16) ;; guessed by decompiler
+   (data actor-hash-bucket 4 :inline :offset-assert 8) ;; jak3 layout, confirmed by L15 static
    (tpos vector            :inline   :offset-assert 80)
    )
   :method-count-assert 10
