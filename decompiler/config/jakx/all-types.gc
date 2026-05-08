@@ -27770,11 +27770,11 @@
     (mem-buffer-method-15 (_type_ object) int) ;; 15
     (mem-buffer-method-16 (_type_ object) int) ;; 16
     (mem-buffer-method-17 (_type_ object) int) ;; 17
-    (mem-buffer-method-18 (_type_ object) none) ;; 18
-    (mem-buffer-method-19 (_type_ object) none) ;; 19
-    (mem-buffer-method-20 (_type_ object) none) ;; 20
-    (mem-buffer-method-21 (_type_ object) none) ;; 21
-    (mem-buffer-method-22 (_type_ object) none) ;; 22
+    (mem-buffer-method-18 (_type_ object) int) ;; 18
+    (mem-buffer-method-19 (_type_ object) int) ;; 19
+    (mem-buffer-method-20 (_type_ object) int) ;; 20
+    (mem-buffer-method-21 (_type_ object) int) ;; 21
+    (mem-buffer-method-22 (_type_ object) int) ;; 22
     (mem-buffer-method-23 (_type_ object) none) ;; 23
     (mem-buffer-method-24 (_type_ object object) none) ;; 24
     (mem-buffer-method-25 (_type_ object) none) ;; 25
@@ -36013,13 +36013,13 @@
   :flag-assert         #x1b00000058
   (:methods
     (new (symbol type int) _type_) ;; 0
-    (grid-hash-method-9 (_type_ int vector vector) none) ;; 9
+    (grid-hash-method-9 (_type_ int vector vector) int) ;; 9
     (grid-hash-method-10 (_type_) int) ;; 10
     (grid-hash-method-11 (_type_ int vector vector vector) int) ;; 11
     (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
-    (grid-hash-method-15 (_type_ int int int) none) ;; 15 ;; dump-grid-info
+    (grid-hash-method-15 (_type_ int int int) int) ;; 15 ;; dump-grid-info
     (grid-hash-method-16 (_type_ rgba) int) ;; 16
     (grid-hash-method-17 (_type_) int) ;; 17
     (grid-hash-method-18 (_type_ grid-hash-box grid-hash-box) none) ;; 18
@@ -45324,7 +45324,7 @@
     (vehicle-method-142 (_type_) symbol) ;; 142 ;; (vehicle-method-142 (_type_) none)
     (vehicle-method-143 (_type_ process) int) ;; 143
     (vehicle-method-144 (_type_) none) ;; 144 ;; (vehicle-method-144 (_type_) none)
-    (vehicle-method-145 (_type_) int) ;; 145
+    (vehicle-method-145 (_type_) none) ;; 145
     (vehicle-method-146 (_type_) int) ;; 146
     (vehicle-method-147 (_type_ object) int) ;; 147 ;; (vehicle-method-147 (_type_ object) none)
     (vehicle-method-148 (_type_ object) int) ;; 148 ;; (vehicle-method-148 (_type_ object) none)
@@ -46403,9 +46403,9 @@
     (wvehicle-method-227 (_type_) none) ;; 227
     (wvehicle-method-228 (_type_ object object) none) ;; 228
     (wvehicle-method-229 (_type_ object object) none) ;; 229
-    (wvehicle-method-230 (_type_ vector) int) ;; 230
+    (wvehicle-method-230 (_type_ vector) none) ;; 230
     (wvehicle-method-231 (_type_ int) process-focusable) ;; 231
-    (wvehicle-method-232 (_type_ int process-focusable) int) ;; 232
+    (wvehicle-method-232 (_type_ int process-focusable) none) ;; 232
     (wvehicle-method-233 (_type_ process-focusable) symbol) ;; 233
     (wvehicle-method-234 (_type_) none) ;; 234
     (wvehicle-method-235 (_type_ object object object) none) ;; 235
@@ -54137,9 +54137,9 @@
     (nav-graph-editor-method-52 (_type_) int) ;; 52
     (nav-graph-editor-method-53 (_type_ int) none) ;; 53
     (nav-graph-editor-method-54 (_type_) nav-graph-command) ;; 54
-    (nav-graph-editor-method-55 (_type_) int) ;; 55
+    (nav-graph-editor-method-55 (_type_) none) ;; 55
     (nav-graph-editor-method-56 (_type_) int) ;; 56
-    (nav-graph-editor-method-57 (_type_) int) ;; 57
+    (nav-graph-editor-method-57 (_type_) none) ;; 57
     (nav-graph-editor-method-58 (_type_ int int) int) ;; 58
     (nav-graph-editor-method-59 (_type_ int) symbol) ;; 59
     (nav-graph-editor-method-60 (_type_) none) ;; 60
