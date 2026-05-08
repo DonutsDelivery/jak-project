@@ -48354,7 +48354,7 @@
 (define-extern net-projectile-init-remote (function object none :behavior net-projectile))
 (define-extern *msg-map-net-projectile* array)
 (define-extern *net-process-class-info-net-projectile* net-process-class-info)
-(define-extern spawn-net-projectile (function object object object object none))
+(define-extern spawn-net-projectile (function object object object dead-pool none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-time-trial-h               ;;
