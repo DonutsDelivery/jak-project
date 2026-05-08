@@ -27765,11 +27765,11 @@
     (mem-buffer-method-10 (_type_ object object) none) ;; 10
     (mem-buffer-method-11 (_type_) none) ;; 11
     (mem-buffer-method-12 (_type_) none) ;; 12
-    (mem-buffer-method-13 (_type_) none) ;; 13
-    (mem-buffer-method-14 (_type_ object) none) ;; 14
-    (mem-buffer-method-15 (_type_ object) none) ;; 15
-    (mem-buffer-method-16 (_type_ object) none) ;; 16
-    (mem-buffer-method-17 (_type_ object) none) ;; 17
+    (mem-buffer-method-13 (_type_) int) ;; 13
+    (mem-buffer-method-14 (_type_ object) int) ;; 14
+    (mem-buffer-method-15 (_type_ object) int) ;; 15
+    (mem-buffer-method-16 (_type_ object) int) ;; 16
+    (mem-buffer-method-17 (_type_ object) int) ;; 17
     (mem-buffer-method-18 (_type_ object) none) ;; 18
     (mem-buffer-method-19 (_type_ object) none) ;; 19
     (mem-buffer-method-20 (_type_ object) none) ;; 20
@@ -27802,7 +27802,7 @@
     (mem-buffer-method-47 (_type_ object) none) ;; 47
     (mem-buffer-method-48 (_type_ object object) none) ;; 48
     (mem-buffer-method-49 (_type_) int) ;; 49
-    (mem-buffer-method-50 (_type_) none) ;; 50
+    (mem-buffer-method-50 (_type_) int) ;; 50
     (mem-buffer-method-51 (_type_ object) none) ;; 51
     )
   )
@@ -30613,7 +30613,7 @@
     die     ;; 61
     )
   (:methods
-    (mine-a-method-62 (_type_) none) ;; 62
+    (mine-a-method-62 (_type_) int) ;; 62
     (mine-a-method-63 (_type_ object) none) ;; 63
     )
   )
@@ -30644,7 +30644,7 @@
     die          ;; 64
     )
   (:methods
-    (mine-b-method-65 (_type_) none) ;; 65
+    (mine-b-method-65 (_type_) int) ;; 65
     (mine-b-method-66 (_type_ object) none) ;; 66
     )
   )
@@ -43907,11 +43907,11 @@
     (net-process-mgr-method-24 (_type_ object object object) symbol) ;; 24
     (net-process-mgr-method-25 (_type_ object object object) none) ;; 25
     (net-process-mgr-method-26 (_type_ object object object) none) ;; 26
-    (net-process-mgr-method-27 (_type_ object object object) none) ;; 27
+    (net-process-mgr-method-27 (_type_ object object object) int) ;; 27
     (net-process-mgr-method-28 (_type_ object object object) none) ;; 28
     (net-process-mgr-method-29 (_type_) int) ;; 29
     (net-process-mgr-method-30 (_type_ object object object object) none) ;; 30
-    (net-process-mgr-method-31 (_type_ object object object) none) ;; 31
+    (net-process-mgr-method-31 (_type_ object object object) int) ;; 31
     (net-process-mgr-method-32 (_type_ object object) symbol) ;; 32
     (net-process-mgr-method-33 (_type_ object object) none) ;; 33
     (net-process-mgr-method-34 (_type_ object object) none) ;; 34
@@ -43933,7 +43933,7 @@
     (net-process-mgr-method-50 (_type_ object object object) none) ;; 50
     (net-process-mgr-method-51 (_type_) int) ;; 51
     (net-process-mgr-method-52 (_type_ object) none) ;; 52
-    (net-process-mgr-method-53 (_type_ object object object object) none) ;; 53
+    (net-process-mgr-method-53 (_type_ object object object object) int) ;; 53
     (net-process-mgr-method-54 (_type_ object object) none) ;; 54
     (net-process-mgr-method-55 (_type_ object object object) none) ;; 55
     (net-process-mgr-method-56 (_type_ object object object) none) ;; 56
@@ -45347,7 +45347,7 @@
     (vehicle-method-165 (_type_) int) ;; 165
     (vehicle-method-166 (_type_) none) ;; 166
     (vehicle-method-167 (_type_ object) none) ;; 167
-    (vehicle-method-168 (_type_) none) ;; 168
+    (vehicle-method-168 (_type_) int) ;; 168
     (vehicle-method-169 (_type_) int) ;; 169
     (vehicle-method-170 (_type_) int) ;; 170
     (vehicle-method-171 (_type_) int) ;; 171
@@ -45358,7 +45358,7 @@
     (vehicle-method-176 (_type_ object) int) ;; 176
     (vehicle-method-177 (_type_) int) ;; 177
     (vehicle-method-178 (_type_) float) ;; 178
-    (vehicle-method-179 (_type_ float) none) ;; 179
+    (vehicle-method-179 (_type_ float) int) ;; 179
     (vehicle-method-180 (_type_) int) ;; 180
     (vehicle-method-181 (_type_ object) none) ;; 181
     (vehicle-method-182 (_type_ object) int) ;; 182
@@ -45822,8 +45822,8 @@
     )
   (:methods
     (vehicle-weapon-slot-method-52 (_type_ object) none) ;; 52
-    (vehicle-weapon-slot-method-53 (_type_) none) ;; 53
-    (vehicle-weapon-slot-method-54 (_type_) none) ;; 54
+    (vehicle-weapon-slot-method-53 (_type_) int) ;; 53
+    (vehicle-weapon-slot-method-54 (_type_) int) ;; 54
     (vehicle-weapon-slot-method-55 (_type_) none) ;; 55
     (vehicle-weapon-slot-method-56 (_type_) none) ;; 56
     (vehicle-weapon-slot-method-57 (_type_) symbol) ;; 57
@@ -46398,7 +46398,7 @@
     (wvehicle-method-222 (_type_) none) ;; 222
     (wvehicle-method-223 (_type_) none) ;; 223
     (wvehicle-method-224 (_type_ float float) none) ;; 224
-    (wvehicle-method-225 (_type_ float) none) ;; 225
+    (wvehicle-method-225 (_type_ float) int) ;; 225
     (wvehicle-method-226 (_type_) none) ;; 226
     (wvehicle-method-227 (_type_) none) ;; 227
     (wvehicle-method-228 (_type_ object object) none) ;; 228
@@ -46411,7 +46411,7 @@
     (wvehicle-method-235 (_type_ object object object) none) ;; 235
     (wvehicle-method-236 (_type_) none) ;; 236
     (wvehicle-method-237 (_type_) none) ;; 237
-    (wvehicle-method-238 (_type_) none) ;; 238
+    (wvehicle-method-238 (_type_) int) ;; 238
     (wvehicle-method-239 (_type_) none) ;; 239
     (wvehicle-method-240 (_type_) none) ;; 240
     (wvehicle-method-241 (_type_ object object) none) ;; 241
@@ -46434,7 +46434,7 @@
     (wvehicle-method-258 (_type_ object object) none) ;; 258
     (wvehicle-method-259 (_type_ object object) none) ;; 259
     (wvehicle-method-260 (_type_) none) ;; 260
-    (wvehicle-method-261 (_type_) none) ;; 261
+    (wvehicle-method-261 (_type_) int) ;; 261
     (wvehicle-method-262 (_type_ int) none) ;; 262
     (wvehicle-method-263 (_type_) none) ;; 263
     (wvehicle-method-264 (_type_) none) ;; 264
@@ -47180,7 +47180,7 @@
     (net-world-method-54 (_type_) symbol) ;; 54
     (net-world-method-55 (_type_ object object object) none) ;; 55
     (net-world-method-56 (_type_ object object object object) int) ;; 56
-    (net-world-method-57 (_type_ object) none) ;; 57
+    (net-world-method-57 (_type_ object) int) ;; 57
     (net-world-method-58 (_type_ object) int) ;; 58
     (net-world-method-59 (_type_ object) int) ;; 59
     (net-world-method-60 (_type_ object object) none) ;; 60
@@ -47195,8 +47195,8 @@
     (net-world-method-69 (_type_ object) none) ;; 69
     (net-world-method-70 (_type_) int) ;; 70
     (net-world-method-71 (_type_) symbol) ;; 71
-    (net-world-method-72 (_type_) none) ;; 72
-    (net-world-method-73 (_type_ object) none) ;; 73
+    (net-world-method-72 (_type_) int) ;; 72
+    (net-world-method-73 (_type_ object) int) ;; 73
     (net-world-method-74 (_type_ object) int) ;; 74
     (net-world-method-75 (_type_ object) int) ;; 75
     (net-world-method-76 (_type_ object) none) ;; 76
@@ -47574,7 +47574,7 @@
     (net-player-race-method-101 (_type_) none) ;; 101
     (net-player-race-method-102 (_type_ object object) none) ;; 102
     (net-player-race-method-103 (_type_) none) ;; 103
-    (net-player-race-method-104 (_type_ object) none) ;; 104
+    (net-player-race-method-104 (_type_ object) int) ;; 104
     (net-player-race-method-105 (_type_ object) none) ;; 105
     (net-player-race-method-106 (_type_ object) none) ;; 106
     (net-player-race-method-107 (_type_) none) ;; 107
@@ -48367,7 +48367,7 @@
   (:methods
     (v-yellow-guided-missile-method-78 (_type_) none) ;; 78
     (v-yellow-guided-missile-method-79 (_type_) none) ;; 79
-    (v-yellow-guided-missile-method-80 (_type_) none) ;; 80
+    (v-yellow-guided-missile-method-80 (_type_) int) ;; 80
     )
   )
   
