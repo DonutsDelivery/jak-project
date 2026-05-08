@@ -36182,8 +36182,8 @@
     idle-texture-fma ;; 17
     )
   (:methods
-    (fmv-player-method-13 (_type_) none) ;; 18
-    (fmv-player-method-14 (_type_) none) ;; 19
+    (fmv-player-method-13 (_type_ object object object) none) ;; 18
+    (fmv-player-method-14 (_type_ object object) none) ;; 19
     (fmv-player-method-15 (_type_) none) ;; 20
     (fmv-player-method-16 (_type_) none) ;; 21
     (fmv-player-method-17 (_type_) none) ;; 22
