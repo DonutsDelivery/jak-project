@@ -19754,17 +19754,17 @@
   :flag-assert         #x1f000006a8
   (:methods
     (game-info-method-9 (_type_ symbol object string object) none) ;; 9 ;; (initialize! (_type_ symbol game-save string resetter-spec) _type_)
-    (game-info-method-10 (_type_ symbol float handle) float) ;; 10
+    (game-info-method-10 (_type_ symbol float handle) symbol) ;; 10
     (game-info-method-11 (_type_ game-task) symbol) ;; 11
     (game-info-method-12 (_type_ string) int) ;; 12
-    (game-info-method-13 (_type_ actor-id) none) ;; 13 ;; (actor-perm (_type_ actor-id) entity-perm)
+    (game-info-method-13 (_type_ actor-id) entity-perm) ;; 13 ;; (actor-perm (_type_ actor-id) entity-perm)
     (game-info-method-14 (_type_ int) none) ;; 14 ;; (task-perm-by-index (_type_ int) entity-perm)
     (game-info-method-15 (_type_ level) none) ;; 15
-    (game-info-method-16 (_type_ level) int) ;; 16
+    (game-info-method-16 (_type_ level) game-info) ;; 16
     (game-info-method-17 (_type_ symbol) _type_) ;; 17
     (game-info-method-18 (_type_ string) continue-point) ;; 18
-    (game-info-method-19 (_type_ string) continue-point) ;; 19
-    (game-info-method-20 (_type_ basic symbol object) continue-point) ;; 20
+    (game-info-method-19 (_type_ string) symbol) ;; 19
+    (game-info-method-20 (_type_ basic symbol object) none) ;; 20
     (game-info-method-21 (_type_) int) ;; 21
     (game-info-method-22 (_type_) none) ;; 22 ;; (save-game (_type_ game-save string) game-save)
     (game-info-method-23 (_type_ object) none) ;; 23 ;; (load-game (_type_ game-save) game-save)
@@ -36019,7 +36019,7 @@
     (grid-hash-method-12 (_type_ vector) (pointer uint8)) ;; 12
     (grid-hash-method-13 (_type_ vector float) (pointer uint8)) ;; 13
     (grid-hash-method-14 (_type_ rgba) none) ;; 14 ;; draw
-    (grid-hash-method-15 (_type_ int int int) int) ;; 15 ;; dump-grid-info
+    (grid-hash-method-15 (_type_ int int int) none) ;; 15 ;; dump-grid-info
     (grid-hash-method-16 (_type_ rgba) int) ;; 16
     (grid-hash-method-17 (_type_) int) ;; 17
     (grid-hash-method-18 (_type_ grid-hash-box grid-hash-box) none) ;; 18
@@ -45337,8 +45337,8 @@
     (vehicle-method-155 (_type_) int) ;; 155
     (vehicle-method-156 (_type_) none) ;; 156
     (vehicle-method-157 (_type_) none) ;; 157
-    (vehicle-method-158 (_type_ float) quaternion) ;; 158
-    (vehicle-method-159 (_type_ float) quaternion) ;; 159
+    (vehicle-method-158 (_type_ float) int) ;; 158
+    (vehicle-method-159 (_type_ float) int) ;; 159
     (vehicle-method-160 (_type_) none) ;; 160
     (vehicle-method-161 (_type_) none) ;; 161
     (vehicle-method-162 (_type_) int) ;; 162
@@ -45824,7 +45824,7 @@
     (vehicle-weapon-slot-method-52 (_type_ object) none) ;; 52
     (vehicle-weapon-slot-method-53 (_type_) int) ;; 53
     (vehicle-weapon-slot-method-54 (_type_) int) ;; 54
-    (vehicle-weapon-slot-method-55 (_type_) none) ;; 55
+    (vehicle-weapon-slot-method-55 (_type_) int) ;; 55
     (vehicle-weapon-slot-method-56 (_type_) none) ;; 56
     (vehicle-weapon-slot-method-57 (_type_) symbol) ;; 57
     (vehicle-weapon-slot-method-58 (_type_ object) none) ;; 58
@@ -46404,9 +46404,9 @@
     (wvehicle-method-228 (_type_ object object) none) ;; 228
     (wvehicle-method-229 (_type_ object object) none) ;; 229
     (wvehicle-method-230 (_type_ vector) none) ;; 230
-    (wvehicle-method-231 (_type_ int) process-focusable) ;; 231
+    (wvehicle-method-231 (_type_ int) none) ;; 231
     (wvehicle-method-232 (_type_ int process-focusable) none) ;; 232
-    (wvehicle-method-233 (_type_ process-focusable) symbol) ;; 233
+    (wvehicle-method-233 (_type_ process-focusable) none) ;; 233
     (wvehicle-method-234 (_type_) none) ;; 234
     (wvehicle-method-235 (_type_ object object object) none) ;; 235
     (wvehicle-method-236 (_type_) none) ;; 236
@@ -61168,10 +61168,10 @@
     (debug-draw (_type_) none) ;; 9
     (get-point-in-path! (_type_ vector float symbol) vector) ;; 10
     (get-random-point (_type_ vector) vector) ;; 11
-    (path-control-method-12 (_type_ float object object) quaternion) ;; 12
+    (path-control-method-12 (_type_ float object object) none) ;; 12
     (displacement-between-two-points-normalized! (_type_ vector float) vector) ;; 13
     (get-point-at-percent-along-path! (_type_ vector float symbol) vector) ;; 14
-    (path-control-method-15 (_type_ vector float float) none) ;; 15
+    (path-control-method-15 (_type_ vector float float) quaternion) ;; 15
     (displacement-between-points-at-percent-normalized! (_type_ vector float) vector) ;; 16
     (get-num-segments (_type_) float) ;; 17
     (total-distance (_type_) float) ;; 18
@@ -61188,7 +61188,7 @@
     (path-control-method-29 (_type_ vector int float) float) ;; 29
     (should-display-marks? (_type_) symbol) ;; 30
     (displacement-between-two-points! (_type_ vector float float) symbol) ;; 31
-    (path-control-method-32 (_type_ object object object) none) ;; 32
+    (path-control-method-32 (_type_ object object object) object) ;; 32
     )
   )
 
