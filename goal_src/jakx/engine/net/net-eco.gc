@@ -9,7 +9,7 @@
 
 (define *eco-mgr* (the-as object #f))
 
-(define *eco-ct* (the-as object 0))
+(define *eco-ct* 0)
 
 (define *eco-array*
   (the-as array (new 'static 'boxed-array :type entity-actor :length 0 :allocated-length 1024))
@@ -19,13 +19,13 @@
 
 (define *eco-dynamic-hash* (new 'global 'spatial-hash 4096 64))
 
-(define *eco-nearby-ct* (the-as object 0))
+(define *eco-nearby-ct* 0)
 
 (define *eco-nearby-array*
   (the-as array (new 'static 'boxed-array :type int16 :length 0 :allocated-length 1024))
   )
 
-(define *eco-last-processed* (the-as object 0))
+(define *eco-last-processed* 0)
 
 (defmethod relocate ((this eco-mgr) (offset int))
   (set! *eco-mgr* this)

@@ -28,7 +28,7 @@
 
 (define *mgcl-session-key* #f)
 
-(define *mgcl-confirmation-offset* (the-as object 0))
+(define *mgcl-confirmation-offset* 0)
 
 ;; ERROR: Function may read a register that is not set: a0
 (defmethod net-mgr-method-53 ((this net-mgr))

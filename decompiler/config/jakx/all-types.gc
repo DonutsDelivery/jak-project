@@ -2201,13 +2201,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *eco-mgr* object)
-(define-extern *eco-ct* object)
+(define-extern *eco-ct* int)
 (define-extern *eco-array* array)
 (define-extern *eco-static-hash* object)
 (define-extern *eco-dynamic-hash* object)
-(define-extern *eco-nearby-ct* object)
+(define-extern *eco-nearby-ct* int)
 (define-extern *eco-nearby-array* array)
-(define-extern *eco-last-processed* object)
+(define-extern *eco-last-processed* int)
 (define-extern init-local-net-eco-mgr (function none))
 (define-extern compute-veh-eco-owner-score (function object object object none))
 
@@ -2235,7 +2235,7 @@
 ;; net-simple-destruct            ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *net-simple-destruct-ct* object)
+(define-extern *net-simple-destruct-ct* int)
 (define-extern *net-simple-destruct-indices* object)
 (define-extern *tmp-was-allocated* object)
 (define-extern *destruct-powerup-names* array)
@@ -49815,7 +49815,7 @@
 (define-extern *medius-session-key* object)
 (define-extern *mgcl-session-key-valid* object)
 (define-extern *mgcl-session-key* object)
-(define-extern *mgcl-confirmation-offset* object)
+(define-extern *mgcl-confirmation-offset* int)
 (define-extern do-net-update (function none))
 (define-extern medius-simple-request-callback (function none))
 (define-extern trivial-callback (function none))

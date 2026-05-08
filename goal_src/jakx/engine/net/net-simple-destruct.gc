@@ -7,7 +7,7 @@
 
 
 
-(define *net-simple-destruct-ct* (the-as object 0))
+(define *net-simple-destruct-ct* 0)
 
 (define *net-simple-destruct-indices* #f)
 
