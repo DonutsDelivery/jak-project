@@ -10225,6 +10225,13 @@
       "(pointer int32)"
     ]
   ],
+  "finish-tie": [
+    [
+      183,
+      "a0",
+      "prototype-node-group"
+    ]
+  ],
   "(method 16 drawable-inline-array-node)": [
     [
       [
@@ -39967,6 +39974,21 @@
       5,
       "gp",
       "movie-path"
+    ],
+    [
+      10,
+      "a0",
+      "curve-control"
+    ],
+    [
+      20,
+      "a0",
+      "curve-control"
+    ],
+    [
+      223,
+      "a0",
+      "curve-control"
     ]
   ],
   "(method 16 vehicle-rev-manager)": [
@@ -43388,7 +43410,17 @@
     [
       2,
       "a0",
-      "basic"
+      "cash-hud"
+    ],
+    [
+      7,
+      "a0",
+      "cash-hud"
+    ],
+    [
+      12,
+      "a0",
+      "cash-hud"
     ]
   ],
   "(method 19 hud-cash-stats)": [
