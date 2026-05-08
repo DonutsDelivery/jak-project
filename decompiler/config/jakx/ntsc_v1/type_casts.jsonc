@@ -43714,7 +43714,12 @@
     [
       5,
       "a0",
-      "basic"
+      "wvehicle"
+    ],
+    [
+      14,
+      "a0",
+      "wvehicle"
     ]
   ],
   "get-non-conflicting-driver": [
@@ -43770,28 +43775,48 @@
     [
       8,
       "a0",
-      "basic"
+      "wvehicle"
+    ],
+    [
+      13,
+      "s3",
+      "wvehicle"
     ]
   ],
   "target-camera-heuristic-fov": [
     [
       6,
       "a0",
-      "basic"
+      "wvehicle"
+    ],
+    [
+      14,
+      "s3",
+      "wvehicle"
     ]
   ],
   "target-camera-heuristic-look-at!": [
     [
       6,
       "a0",
-      "basic"
+      "wvehicle"
+    ],
+    [
+      14,
+      "s3",
+      "wvehicle"
     ]
   ],
   "target-camera-test-los": [
     [
       5,
       "a0",
-      "basic"
+      "wvehicle"
+    ],
+    [
+      11,
+      "a0",
+      "wvehicle"
     ]
   ],
   "vis-cull-all?": [
