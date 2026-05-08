@@ -4200,7 +4200,7 @@
     idle ;; 15
     )
   (:methods
-    (sabotage-sequence-method-11 (_type_) none) ;; 16
+    (sabotage-sequence-method-11 (_type_ object object float) none) ;; 16
     (sabotage-sequence-method-12 (_type_) none) ;; 17
     (sabotage-sequence-method-13 (_type_) none) ;; 18
     (sabotage-sequence-method-14 (_type_) none) ;; 19
