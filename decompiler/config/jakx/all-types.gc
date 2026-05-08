@@ -45404,7 +45404,7 @@
 (define-extern vehicle-init-remote (function object none :behavior vehicle))
 (define-extern *msg-map-vehicle* array)
 (define-extern *net-process-class-info-vehicle* net-process-class-info)
-(define-extern vehicle-get-flag-attach-point (function object none))
+(define-extern vehicle-get-flag-attach-point (function (pointer uint32) none))
 (define-extern meters-per-sec->mph (function degrees float))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
