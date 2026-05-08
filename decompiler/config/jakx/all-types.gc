@@ -51365,7 +51365,7 @@
 (define-extern net-world-init-local (function none))
 (define-extern init-local-world (function none))
 (define-extern do-ghost-ai-setup (function object none))
-(define-extern get-non-conflicting-driver (function object object object none))
+(define-extern get-non-conflicting-driver (function net-world object object none))
 (define-extern set-ai-vehicle (function object object none))
 (define-extern request-game-start (function none))
 (define-extern is-late-join? (function object))
