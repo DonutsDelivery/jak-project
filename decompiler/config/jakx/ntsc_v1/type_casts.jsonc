@@ -40841,7 +40841,8 @@
       10,
       "gp",
       "rigid-body-object"
-    ]
+    ],
+    [11, "a0", "collide-shape"]
   ],
   "(method 66 vehicle-debris)": [
     [
@@ -42587,6 +42588,7 @@
       "vehicle"
     ]
   ],
+  "(method 61 vehicle-debris)": [[7, "a0", "collide-shape"]],
   "(method 61 vehicle-wheel)": [
     [
       2,
@@ -42966,7 +42968,8 @@
       2,
       "a0",
       "rigid-body-object"
-    ]
+    ],
+    [23, "a0", "collide-shape"]
   ],
   "(method 72 net-game-mgr-assassin)": [
     [
