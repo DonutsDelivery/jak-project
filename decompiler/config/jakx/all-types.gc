@@ -46072,6 +46072,7 @@
   :size-assert         #x44
   :flag-assert         #xd00000044
   (:methods
+    (new (symbol type object int object) _type_) ;; 0
     (rapid-fire-control-method-9 (_type_ int int) none) ;; 9
     (rapid-fire-control-method-10 (_type_ int int) none) ;; 10
     (rapid-fire-control-method-11 (_type_ object object object object object) none) ;; 11
