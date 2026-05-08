@@ -41876,7 +41876,7 @@
   :flag-assert         #x2900000130
   ;; field rigid-body-flag is likely a value type.
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type process) _type_)
+    (new (symbol type process) _type_) ;; 0
     (rigid-body-control-method-9 (_type_ collide-shape-moving float) none) ;; 9
     (rigid-body-control-method-10 (_type_ rigid-body-object float float) none) ;; 10
     (rigid-body-control-method-11 (_type_ collide-shape-moving) int) ;; 11
@@ -43840,6 +43840,9 @@
    (scale-rand-lo               float          :offset-assert 88)
    (scale-rand-hi               float          :offset-assert 92)
    )
+  (:methods
+    (new (symbol type uint) _type_) ;; 0
+    )
   :method-count-assert 9
   :size-assert         #x60
   :flag-assert         #x900000060
@@ -53368,6 +53371,9 @@
 ;; editable-array stub — used as field type in editable-player etc.
 (deftype editable-array (basic)
   ()
+  (:methods
+    (new (symbol type int) _type_) ;; 0
+    )
   :method-count-assert 9
   :size-assert         #x4
   :flag-assert         #x900000004
@@ -61180,6 +61186,9 @@
 ;; vol-control stub
 (deftype vol-control (basic)
   ()
+  (:methods
+    (new (symbol type process-drawable) _type_) ;; 0
+    )
   :method-count-assert 9
   :size-assert         #x4
   :flag-assert         #x900000004
