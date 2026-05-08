@@ -30346,14 +30346,14 @@
 
   
 (deftype combo-tracker (point-tracker)
-  ((target          uint64  :offset-assert 32)
-   (move-start-time uint64  :offset-assert 40)
+  ((target          handle      :offset-assert 32)
+   (move-start-time time-frame  :offset-assert 40)
    )
   :method-count-assert 14
   :size-assert         #x30
   :flag-assert         #xe00000030
   (:methods
-    (combo-tracker-method-12 (_type_) none)
+    (combo-tracker-method-12 (_type_ vector vector process time-frame) combo-tracker)
     (combo-tracker-method-13 (_type_ handle vector float vector float) process-focusable)
     )
   )
