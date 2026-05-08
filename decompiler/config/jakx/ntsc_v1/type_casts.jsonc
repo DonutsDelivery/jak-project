@@ -39746,6 +39746,16 @@
       1,
       "gp",
       "hud-effect-fade"
+    ],
+    [
+      50,
+      "a0",
+      "hud-item"
+    ],
+    [
+      55,
+      "s5",
+      "hud-item"
     ]
   ],
   "(method 11 hud-effect-group)": [
@@ -43508,35 +43518,28 @@
     [
       2,
       "a0",
-      "basic"
+      "sparticle-launch-control"
     ]
   ],
   "(method 20 mine-b)": [
     [
       1,
       "a0",
-      "basic"
-    ]
-  ],
-  "(method 24 hud-medal-results)": [
-    [
-      24,
-      "gp",
-      "basic"
+      "mine-b"
     ]
   ],
   "(method 35 mine-a)": [
     [
       3,
       "a0",
-      "basic"
+      "mine-a"
     ]
   ],
   "(method 35 mine-b)": [
     [
       3,
       "a0",
-      "basic"
+      "mine-b"
     ]
   ],
   "(method 35 v-yellow-guided-missile)": [
@@ -43585,7 +43588,7 @@
     [
       1,
       "v1",
-      "basic"
+      "net-world"
     ]
   ],
   "(method 62 mine-a)": [
