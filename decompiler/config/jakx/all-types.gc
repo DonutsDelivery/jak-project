@@ -28490,7 +28490,7 @@
     (idle () _type_ :state) ;; 50
     (die () _type_ :state) ;; 51
     (leave () _type_ :state) ;; 52
-    (task-arrow-method-53 (_type_ object) none) ;; 53
+    (task-arrow-method-53 (_type_ vector) none) ;; 53
     (task-arrow-method-54 (_type_) none) ;; 54
     )
   )
