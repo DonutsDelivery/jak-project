@@ -27763,8 +27763,8 @@
   (:methods
     (mem-buffer-method-9 (_type_ object) none) ;; 9
     (mem-buffer-method-10 (_type_ object object) none) ;; 10
-    (mem-buffer-method-11 (_type_) none) ;; 11
-    (mem-buffer-method-12 (_type_) none) ;; 12
+    (mem-buffer-method-11 (_type_) uint) ;; 11
+    (mem-buffer-method-12 (_type_) uint) ;; 12
     (mem-buffer-method-13 (_type_) int) ;; 13
     (mem-buffer-method-14 (_type_ object) int) ;; 14
     (mem-buffer-method-15 (_type_ object) int) ;; 15
@@ -30614,7 +30614,7 @@
     )
   (:methods
     (mine-a-method-62 (_type_) int) ;; 62
-    (mine-a-method-63 (_type_ object) none) ;; 63
+    (mine-a-method-63 (_type_ object) quaternion) ;; 63
     )
   )
 
@@ -30645,7 +30645,7 @@
     )
   (:methods
     (mine-b-method-65 (_type_) int) ;; 65
-    (mine-b-method-66 (_type_ object) none) ;; 66
+    (mine-b-method-66 (_type_ object) quaternion) ;; 66
     )
   )
 
@@ -46435,7 +46435,7 @@
     (wvehicle-method-259 (_type_ object object) none) ;; 259
     (wvehicle-method-260 (_type_) none) ;; 260
     (wvehicle-method-261 (_type_) int) ;; 261
-    (wvehicle-method-262 (_type_ int) none) ;; 262
+    (wvehicle-method-262 (_type_ int) symbol) ;; 262
     (wvehicle-method-263 (_type_) none) ;; 263
     (wvehicle-method-264 (_type_) none) ;; 264
     (wvehicle-method-265 (_type_ object object) none) ;; 265
@@ -47177,7 +47177,7 @@
     (net-world-method-51 (_type_ object object) none) ;; 51
     (net-world-method-52 (_type_ object object) none) ;; 52
     (net-world-method-53 (_type_ object object object) object) ;; 53
-    (net-world-method-54 (_type_) symbol) ;; 54
+    (net-world-method-54 (_type_) int) ;; 54
     (net-world-method-55 (_type_ object object object) none) ;; 55
     (net-world-method-56 (_type_ object object object object) int) ;; 56
     (net-world-method-57 (_type_ object) int) ;; 57
@@ -47194,7 +47194,7 @@
     (net-world-method-68 (_type_ object) none) ;; 68
     (net-world-method-69 (_type_ object) none) ;; 69
     (net-world-method-70 (_type_) int) ;; 70
-    (net-world-method-71 (_type_) symbol) ;; 71
+    (net-world-method-71 (_type_) int) ;; 71
     (net-world-method-72 (_type_) int) ;; 72
     (net-world-method-73 (_type_ object) int) ;; 73
     (net-world-method-74 (_type_ object) int) ;; 74
@@ -47577,7 +47577,7 @@
     (net-player-race-method-104 (_type_ object) int) ;; 104
     (net-player-race-method-105 (_type_ object) none) ;; 105
     (net-player-race-method-106 (_type_ object) none) ;; 106
-    (net-player-race-method-107 (_type_) none) ;; 107
+    (net-player-race-method-107 (_type_) symbol) ;; 107
     )
   )
 
@@ -54114,8 +54114,8 @@
   (:methods
     (nav-graph-editor-method-30 (_type_) none) ;; 30
     (nav-graph-editor-method-31 (_type_ string string string) object) ;; 31
-    (nav-graph-editor-method-32 (_type_ int) none) ;; 32
-    (nav-graph-editor-method-33 (_type_ int) none) ;; 33
+    (nav-graph-editor-method-32 (_type_ int) symbol) ;; 32
+    (nav-graph-editor-method-33 (_type_ int) symbol) ;; 33
     (nav-graph-editor-method-34 (_type_ int object) symbol) ;; 34
     (nav-graph-editor-method-35 (_type_ int) int) ;; 35
     (nav-graph-editor-method-36 (_type_) none) ;; 36
@@ -54127,7 +54127,7 @@
     (nav-graph-editor-method-42 (_type_) none) ;; 42
     (nav-graph-editor-method-43 (_type_) none) ;; 43
     (nav-graph-editor-method-44 (_type_) none) ;; 44
-    (nav-graph-editor-method-45 (_type_) none) ;; 45
+    (nav-graph-editor-method-45 (_type_) object) ;; 45
     (nav-graph-editor-method-46 (_type_) int) ;; 46
     (nav-graph-editor-method-47 (_type_) symbol) ;; 47
     (nav-graph-editor-method-48 (_type_) symbol) ;; 48
@@ -54136,7 +54136,7 @@
     (nav-graph-editor-method-51 (_type_) none) ;; 51
     (nav-graph-editor-method-52 (_type_) int) ;; 52
     (nav-graph-editor-method-53 (_type_ int) none) ;; 53
-    (nav-graph-editor-method-54 (_type_) nav-graph-command) ;; 54
+    (nav-graph-editor-method-54 (_type_) none) ;; 54
     (nav-graph-editor-method-55 (_type_) none) ;; 55
     (nav-graph-editor-method-56 (_type_) int) ;; 56
     (nav-graph-editor-method-57 (_type_) none) ;; 57
@@ -54149,8 +54149,8 @@
     (nav-graph-editor-method-64 (_type_) none) ;; 64
     (nav-graph-editor-method-65 (_type_) symbol) ;; 65
     (nav-graph-editor-method-66 (_type_) symbol) ;; 66
-    (nav-graph-editor-method-67 (_type_ symbol string) symbol) ;; 67
-    (nav-graph-editor-method-68 (_type_) symbol) ;; 68
+    (nav-graph-editor-method-67 (_type_ symbol string) none) ;; 67
+    (nav-graph-editor-method-68 (_type_) none) ;; 68
     )
   )
 ;; partial old block (removed):
