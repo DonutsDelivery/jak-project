@@ -14172,7 +14172,7 @@
 (define-extern *car-level-array* car-level-array)
 (define-extern *car-default-base-color* array)
 (define-extern *car-default-stripe-color* array)
-(define-extern *car-upgrade-info* (pointer upgrade-info))
+(define-extern *car-upgrade-info* (inline-array upgrade-info))
 (define-extern *car-part-type-to-text-table* object)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
