@@ -33235,23 +33235,25 @@
 (deftype region-prim-area (structure)
   ((region-prim-list        region-prim-list       :inline :offset 0)
    (pos                     vector                 :inline :offset 1296)
-   (ray                     vector                 :inline :offset 1312)
-   (region-enter-count      int32                          :offset 1344)
-   (region-enter-list       region                 320     :offset 1348) ;; guessed by decompiler
-   (region-enter-prim-list  drawable-region-sphere 320     :offset 2628) ;; guessed by decompiler
-   (region-exit-count       int32                          :offset 3908)
-   (region-exit-list        region                 320     :offset 3912) ;; guessed by decompiler
-   (region-exit-prim-list   drawable-region-sphere 320     :offset 5192) ;; guessed by decompiler
-   (region-inside-count     int32                          :offset 6472)
-   (region-inside-list      region                 320     :offset 6476) ;; guessed by decompiler
-   (region-inside-prim-list drawable-region-sphere 320     :offset 7756) ;; guessed by decompiler
-   (region-start-count      int32                          :offset 9036)
-   (region-start-list       region                 320     :offset 9040) ;; guessed by decompiler
-   (region-start-prim-list  drawable-region-sphere 320     :offset 10320) ;; guessed by decompiler
+   (exit-pos                vector                 :inline :offset 1312)
+   (ray                     vector                 :inline :offset 1328)
+   (exit-ray                vector                 :inline :offset 1344)
+   (region-enter-count      int32                          :offset 1360)
+   (region-enter-list       region                 320     :offset 1364) ;; guessed by decompiler
+   (region-enter-prim-list  drawable-region-sphere 320     :offset 2644) ;; guessed by decompiler
+   (region-exit-count       int32                          :offset 3924)
+   (region-exit-list        region                 320     :offset 3928) ;; guessed by decompiler
+   (region-exit-prim-list   drawable-region-sphere 320     :offset 5208) ;; guessed by decompiler
+   (region-inside-count     int32                          :offset 6488)
+   (region-inside-list      region                 320     :offset 6492) ;; guessed by decompiler
+   (region-inside-prim-list drawable-region-sphere 320     :offset 7772) ;; guessed by decompiler
+   (region-start-count      int32                          :offset 9052)
+   (region-start-list       region                 320     :offset 9056) ;; guessed by decompiler
+   (region-start-prim-list  drawable-region-sphere 320     :offset 10336) ;; guessed by decompiler
    )
   :method-count-assert 13
-  :size-assert         #x2d50
-  :flag-assert         #xd00002d50
+  :size-assert         #x2d60
+  :flag-assert         #xd00002d60
   (:methods
     (region-prim-area-method-9 (_type_ drawable-region-sphere) int) ;; 9
     (region-prim-area-method-10 (_type_ drawable-region-sphere) none) ;; 10
