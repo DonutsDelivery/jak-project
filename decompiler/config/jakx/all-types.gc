@@ -31518,7 +31518,7 @@
    (cam-user-mode          uint32           :offset-assert 300)  ;; MIPS 296
    (anim-seed              uint64           :offset-assert 304)  ;; MIPS 300
    (dummy-1                uint8  24        :offset-assert 312)
-   (current-level          uint32           :offset-assert 336)  ;; MIPS 332
+   (current-level          level            :offset-assert 336)  ;; MIPS 332
    (dummy-2                uint8  60        :offset-assert 340)
    (saved-owner            uint64           :offset-assert 400)  ;; MIPS 396
    (excitement             float            :offset-assert 408)  ;; MIPS 404
