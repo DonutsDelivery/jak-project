@@ -29246,6 +29246,9 @@
   :method-count-assert 9
   :size-assert         #x2c
   :flag-assert         #x90000002c
+  (:methods
+    (new (symbol type process-drawable int vector float) _type_) ;; 0
+    )
   )
 
 (defenum joint-mod-base-flags
