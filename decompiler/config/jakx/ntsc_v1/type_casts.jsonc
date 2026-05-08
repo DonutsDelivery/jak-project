@@ -43067,6 +43067,13 @@
       "net-game-mgr-race"
     ]
   ],
+  "(method 86 net-game-mgr-race)": [
+    [
+      4,
+      "a0",
+      "race-mesh"
+    ]
+  ],
   "(method 85 net-player-race)": [
     [
       2,
@@ -43689,7 +43696,7 @@
     [
       2,
       "a0",
-      "basic"
+      "net-powerup-motion-info"
     ]
   ],
   "rapid-fire-control-emitter-from-world": [
@@ -50288,6 +50295,13 @@
       ],
       "s6",
       "starting-linebot"
+    ]
+  ],
+  "stop": [
+    [
+      22,
+      "a0",
+      "process"
     ]
   ],
   "wrong-way-init-by-other": [
