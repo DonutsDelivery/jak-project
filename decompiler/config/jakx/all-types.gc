@@ -52731,7 +52731,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *car-part-temp-string* string)
-(define-extern get-car-skel-part (function none))
+(define-extern get-car-skel-part (function level string art-group art-joint-anim))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; vehicle-util                   ;;
