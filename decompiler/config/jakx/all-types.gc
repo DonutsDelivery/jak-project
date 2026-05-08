@@ -63571,5 +63571,5 @@
 (define-extern slip-object-init-by-other (function object object object object object none :behavior slip-object))
 (define-extern gunmount-drawable-init-by-other (function object object object none :behavior gunmount-drawable))
 (define-extern muzzle-flash-init-by-other (function object object none :behavior muzzle-flash))
-(define-extern red-sentry-bot-init-by-other (function object object object object none :behavior red-sentry-bot))
+(define-extern red-sentry-bot-init-by-other (function object object vehicle object none :behavior red-sentry-bot))
 (define-extern vehicle-weapon-drone-init-by-other (function object none :behavior vehicle-weapon-drone))
