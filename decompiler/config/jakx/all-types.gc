@@ -53717,6 +53717,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; R-4: forward-decl editable-light (full deftype block-commented above; declare-type lets externs reference it)
+(declare-type editable-sphere editable-point) ;; Lane G C2: parent of editable-light needs declare-type too (deftype at 53487 is block-commented)
 (declare-type editable-light editable-sphere)
 
 (define-extern common-owner (function editable editable object))
