@@ -33143,6 +33143,9 @@
    (close  float 20 :offset-assert 44) ;; guessed by decompiler
    (far    float 20 :offset-assert 124) ;; guessed by decompiler
    )
+  (:methods
+    (new (symbol type float float) _type_)
+    )
   :method-count-assert 9
   :size-assert         #xcc
   :flag-assert         #x9000000cc
