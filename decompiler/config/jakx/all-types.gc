@@ -51049,7 +51049,7 @@
   ;; :size-assert         #x70
   ;; :flag-assert         #xc00000070
   (:methods
-    (new (symbol type) _type_) ;; 0 ;; (new (symbol type int) _type_)
+    (new (symbol type int) _type_) ;; 0
     (save-to-file (_type_ string) _type_) ;; 9
     (load-from-file (_type_ string) _type_) ;; 10
     (debug-inspect (_type_ symbol) _type_) ;; 11 ;; (debug-inspect (_type_ symbol) _type_)
@@ -53091,6 +53091,9 @@
    (seq-index     int32                :offset-assert 136)
    (seq-hindex    int32                :offset-assert 140)
    )
+  (:methods
+    (new (symbol type object string basic) _type_) ;; 0
+    )
   :method-count-assert 9
   :size-assert         #x90
   :flag-assert         #x900000090
@@ -53107,6 +53110,9 @@
    (list-con     list-control  :inline :offset-assert 36)
    (parent       anim-test-obj         :offset-assert 116)
    )
+  (:methods
+    (new (symbol type object string) _type_) ;; 0
+    )
   :method-count-assert 9
   :size-assert         #x78
   :flag-assert         #x900000078
@@ -53126,6 +53132,9 @@
    (flags       int32               :offset-assert 36)
    (parent      anim-test-sequence  :offset-assert 40)
    )
+  (:methods
+    (new (symbol type object string) _type_) ;; 0
+    )
   :method-count-assert 9
   :size-assert         #x2c
   :flag-assert         #x90000002c
