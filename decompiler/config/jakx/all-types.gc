@@ -28054,7 +28054,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (deftype net-process-class-info (structure)
-  ((msg-map           basic  :offset-assert 0)
+  ((msg-map           (array symbol)  :offset-assert 0)
    (msg-count         int32  :offset-assert 4)
    (send-packet-count int32  :offset-assert 8)
    (recv-packet-count int32  :offset-assert 12)
