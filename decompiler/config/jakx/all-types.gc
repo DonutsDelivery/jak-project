@@ -39416,7 +39416,7 @@
 (define-extern bg "Debug function to start playing a given level." (function symbol object object object object object object none))
 (define-extern play "Start (or restart) the game!
                      This will start up the display process, and load the initial level." (function symbol symbol object object object int))
-(define-extern play2 (function symbol symbol none))
+(define-extern play2 (function symbol symbol object object object none))
 (define-extern play-boot
                "Function called by the C Kernel to start the game (wrapper around play)." (function none))
 (define-extern sound-bank-name->mode (function symbol sound-bank-mode))
