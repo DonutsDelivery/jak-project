@@ -2379,7 +2379,7 @@
   (:methods
     (hud-effect-method-9 (_type_) int) ;; 9
     (hud-effect-method-10 (_type_) int) ;; 10
-    (hud-effect-method-11 (_type_) none) ;; 11
+    (hud-effect-method-11 (_type_ object object object object) none) ;; 11
     (hud-effect-method-12 (_type_ basic) basic) ;; 12
     (hud-effect-method-13 (_type_ object object object object) symbol) ;; 13
     (hud-effect-method-14 (_type_) none) ;; 14
@@ -34832,7 +34832,7 @@
     (hud-method-24 (_type_) none) ;; 24
     (hud-method-25 (_type_) symbol) ;; 25
     (hud-method-26 (_type_) int) ;; 26
-    (hud-method-27 (_type_) symbol) ;; 27
+    (hud-method-27 (_type_ object object object object) symbol) ;; 27
     (hud-method-28 (_type_) none) ;; 28
     (hud-method-29 (_type_ int) int) ;; 29
     )
