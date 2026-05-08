@@ -47424,12 +47424,11 @@
 
 
 
-#|
 (deftype net-game-mgr-vehicle-info (structure)
-  ((all-vehicles uint8 6 :offset-assert 0)
-   (local-vehicles uint8 6 :offset-assert 24)
-   (ai-vehicles uint8 6 :offset-assert 48)
-   (player-vehicles uint8 6 :offset-assert 72)
+  ((all-vehicles uint8 24 :offset-assert 0)
+   (local-vehicles uint8 24 :offset-assert 24)
+   (ai-vehicles uint8 24 :offset-assert 48)
+   (player-vehicles uint8 24 :offset-assert 72)
    (all-vehicle-count    int8      :offset-assert 96)
    (local-vehicle-count  int8      :offset-assert 97)
    (ai-vehicle-count     int8      :offset-assert 98)
@@ -47439,7 +47438,6 @@
   :size-assert         #x64
   :flag-assert         #x900000064
   )
-|#
 
 
 
