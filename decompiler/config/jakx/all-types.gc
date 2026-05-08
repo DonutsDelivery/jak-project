@@ -49810,7 +49810,7 @@
 
 (define-extern *medius-last-response* object)
 (define-extern *mgcl-last-response* object)
-(define-extern *async-request-ct* object)
+(define-extern *async-request-ct* int)
 (define-extern *medius-session-key-valid* object)
 (define-extern *medius-session-key* object)
 (define-extern *mgcl-session-key-valid* object)

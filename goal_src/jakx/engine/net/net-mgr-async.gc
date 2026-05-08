@@ -18,7 +18,7 @@
 
 (define *mgcl-last-response* #f)
 
-(define *async-request-ct* (the-as object 0))
+(define *async-request-ct* 0)
 
 (define *medius-session-key-valid* (the-as object #f))
 
