@@ -33720,7 +33720,8 @@
    (pad1         uint32         :offset-assert 28)
    (tbp          int32          :offset-assert 32)
    (shader-count uint32         :offset-assert 36)
-   (pad2         uint8       40 :offset-assert 40)
+   (shader       adgif-shader 8 :offset-assert 40)
+   (pad2         uint8        8 :offset-assert 72)
    )
   :method-count-assert 9
   :size-assert         #x50
@@ -33736,8 +33737,9 @@
    (bucket             uint16                              :offset-assert 10)
    (blink              float                               :offset-assert 12)
    (shaders            (inline-array adgif-shader)         :offset-assert 16) ;; guessed by decompiler
-   (left               eye                         :inline :offset-assert 32)
-   (right              eye                         :inline :offset-assert 112)
+   (eyes               eye  2                      :inline :offset-assert 32)
+   (left               eye                         :inline :overlay-at (-> eyes 0))
+   (right              eye                         :inline :overlay-at (-> eyes 1))
    (level-index        int16                               :offset-assert 192)
    (high-res?          symbol                              :offset-assert 196) ;; guessed by decompiler
    (level-texture-page uint32                              :offset-assert 200)
