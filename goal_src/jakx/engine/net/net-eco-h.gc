@@ -43,8 +43,8 @@
 
 ;; SCAFFOLDING: eco subtypes from all-types.gc line 61209
 (deftype eco-blue (eco)
-  ((launcher    uint8 20)
-   (birth-accum uint8 20)
+  ((launcher    sparticle-launcher 5)
+   (birth-accum float              5)
    )
   )
 

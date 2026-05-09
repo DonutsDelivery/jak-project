@@ -61254,8 +61254,8 @@
   )
 
 (deftype eco-blue (eco)
-  ((launcher    uint8 20 :offset-assert 248)
-   (birth-accum uint8 20 :offset-assert 268)
+  ((launcher    sparticle-launcher 5 :offset-assert 248)
+   (birth-accum float              5 :offset-assert 268)
    )
   :method-count-assert 56
   :size-assert         #x120
