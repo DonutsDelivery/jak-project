@@ -61066,12 +61066,15 @@
 
 ;; scene-player stub superseded by full definition at L28907
 
-;; joint-mod stub
+;; joint-mod minimal port (C57 — basic-only, no cspace/process-drawable refs to avoid C54 regression)
 (deftype joint-mod (basic)
-  ()
+  ((mode    uint32 :offset-assert 4)
+   (process basic  :offset-assert 8)
+   (joint   basic  :offset-assert 12)
+   )
   :method-count-assert 9
-  :size-assert         #x4
-  :flag-assert         #x900000004
+  :size-assert         #x10
+  :flag-assert         #x900000010
   )
 
 #|
