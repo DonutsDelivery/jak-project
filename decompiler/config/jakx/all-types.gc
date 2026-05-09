@@ -28043,7 +28043,7 @@
   :flag-assert         #xc00000008
   (:methods
     (linked-list-method-9 (_type_) int) ;; 9
-    (linked-list-method-10 (_type_ int) int) ;; 10
+    (linked-list-method-10 (_type_ list-link) int) ;; 10
     (linked-list-method-11 (_type_ uint) none) ;; 11
     )
   )
