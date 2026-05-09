@@ -47438,7 +47438,7 @@
 (define-extern net-powerup-init-remote (function object none :behavior net-powerup))
 (define-extern *msg-map-net-powerup* array)
 (define-extern *net-process-class-info-net-powerup* net-process-class-info)
-(define-extern powerup-draw-init-by-other (function int int uint none))
+(define-extern powerup-draw-init-by-other (function process vector process none :behavior powerup-draw))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; net-game-mgr-h                 ;;
