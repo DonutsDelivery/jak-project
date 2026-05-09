@@ -731,6 +731,46 @@
       "(pointer uint32)"
     ]
   ],
+  "clear-vu0-mem": [
+    [
+      [
+        0,
+        15
+      ],
+      "v1",
+      "(pointer uint32)"
+    ]
+  ],
+  "clear-vu1-mem": [
+    [
+      [
+        0,
+        15
+      ],
+      "v1",
+      "(pointer uint32)"
+    ]
+  ],
+  "dump-vu1-mem": [
+    [
+      [
+        0,
+        100
+      ],
+      "gp",
+      "(pointer uint32)"
+    ]
+  ],
+  "dump-vu1-range": [
+    [
+      [
+        0,
+        100
+      ],
+      "s4",
+      "(pointer uint32)"
+    ]
+  ],
   "ultimate-memcpy": [
     [
       [
