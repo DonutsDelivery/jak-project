@@ -56643,6 +56643,7 @@
 (define-extern *vehicle-hud-training-proc* object)
 (define-extern spawn-vehicle-hud-training (function none))
 (define-extern kill-vehicle-hud-training (function none))
+(define-extern net-player-training type)
 (define-extern net-player-training-init-remote (function object none))
 (define-extern *msg-map-net-player-training* array)
 (define-extern *net-process-class-info-net-player-training* net-process-class-info)
