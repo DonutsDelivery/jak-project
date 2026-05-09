@@ -38868,13 +38868,13 @@
 (define-extern init-mood-fog-drome (function vector))
 (define-extern update-mood-default-interior (function mood-context none :behavior time-of-day-proc))
 (define-extern update-mood-default-interior-ambient (function mood-context none :behavior time-of-day-proc))
-(define-extern update-rustyh-lights (function object none))
-(define-extern update-mood-rustyh (function int none))
+(define-extern update-rustyh-lights (function mood-context none))
+(define-extern update-mood-rustyh (function mood-context none :behavior time-of-day-proc))
 (define-extern set-rustyh-effect-light! (function int none))
 (define-extern update-hiphog-lights (function mood-context none))
 (define-extern update-mood-hiphog (function mood-context float none :behavior time-of-day-proc))
-(define-extern update-garage-brdroom-lights (function object none))
-(define-extern update-mood-garage-brdroom (function object object object none))
+(define-extern update-garage-brdroom-lights (function mood-context none))
+(define-extern update-mood-garage-brdroom (function mood-context float int none :behavior time-of-day-proc))
 (define-extern set-garage-switched! (function int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -43241,7 +43241,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Lane2-RecipeX: replaced stub (jak3 test/decompiler/reference/jak3/engine/common-obs/powerups_REF.gc)
-(define-extern cloud-track (function process-tree process-tree (function vector none) time-frame time-frame time-frame none))
+(define-extern cloud-track (function process-tree process-tree (function vector none) time-frame time-frame time-frame none :behavior process))
 (define-extern eco-blue-glow (function vector none))
 (define-extern process-contact-action (function process none :behavior target))
 
