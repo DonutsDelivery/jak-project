@@ -39889,7 +39889,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Lane2-RecipeX: replaced stub (jak3 test/decompiler/reference/jak3/engine/camera/cam-combiner_REF.gc)
-(define-extern cam-helper-temp (function (pointer camera-slave) (pointer camera-slave) float none))
+(define-extern cam-helper-temp (function (pointer camera-slave) (pointer camera-slave) float matrix :behavior camera-combiner))
 (define-extern cam-combiner-active state) ;; (state camera-combiner)
 (define-extern cam-combiner-init (function none :behavior camera-combiner))
 
