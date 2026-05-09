@@ -4542,5 +4542,33 @@
   ],
   "dynamic-mem": [
     ["L98", "memblock"]
+  ],
+  "wcar-cheetah": [
+    ["L95", "vector"], ["L96", "vector"], ["L97", "vector"],
+    ["L98", "vector"], ["L99", "vector"], ["L100", "vector"], ["L101", "vector"]
+  ],
+  "wcar-cougar": [
+    ["L95", "vector"], ["L96", "vector"], ["L97", "vector"],
+    ["L98", "vector"], ["L99", "vector"], ["L100", "vector"], ["L101", "vector"]
+  ],
+  "wcar-daxtermobile": [
+    ["L95", "vector"], ["L96", "vector"], ["L97", "vector"],
+    ["L98", "vector"], ["L99", "vector"], ["L100", "vector"], ["L101", "vector"]
+  ],
+  "wcar-falcon": [
+    ["L95", "vector"], ["L96", "vector"], ["L97", "vector"],
+    ["L98", "vector"], ["L99", "vector"], ["L100", "vector"], ["L101", "vector"]
+  ],
+  "wcar-leopard": [
+    ["L95", "vector"], ["L96", "vector"], ["L97", "vector"],
+    ["L98", "vector"], ["L99", "vector"], ["L100", "vector"], ["L101", "vector"]
+  ],
+  "wcar-wolf": [
+    ["L95", "vector"], ["L96", "vector"], ["L97", "vector"],
+    ["L98", "vector"], ["L99", "vector"], ["L100", "vector"], ["L101", "vector"]
+  ],
+  "wcar-wombat": [
+    ["L95", "vector"], ["L96", "vector"], ["L97", "vector"],
+    ["L98", "vector"], ["L99", "vector"], ["L100", "vector"], ["L101", "vector"]
   ]
 }
