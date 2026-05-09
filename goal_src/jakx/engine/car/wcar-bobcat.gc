@@ -26,55 +26,6 @@
   ()
   )
 
-;; -----------------------------------------------------------------------------
-;; init-collision! (slot 65) — v-bobcat override.
-;; Identical to wcar-base's init-collision! except the root collide-shape-prim
-;; is flagged `rideable` so the player can drive the bobcat. Ported from
-;; .jakx_watch/decomp_out/jakx/wcar-bobcat_disasm.gc.
-;; -----------------------------------------------------------------------------
-(defmethod init-collision! ((this v-bobcat))
-  (let ((s5-0 (new 'process 'collide-shape-moving this (collide-list-enum usually-hit-by-player))))
-    (set! (-> s5-0 dynam) (copy *standard-dynamics* 'process))
-    (set! (-> s5-0 reaction) cshape-reaction-default)
-    (set! (-> s5-0 no-reaction)
-          (the-as (function collide-shape-moving collide-query vector vector object) nothing))
-    (set! (-> s5-0 penetrate-using) (penetrate vehicle))
-    (let ((s4-0 (new 'process 'collide-shape-prim-group s5-0 (the-as uint 7) 0)))
-      (set! (-> s5-0 total-prims) (the-as uint 8))
-      (set! (-> s4-0 prim-core action) (collide-action solid rideable))
-      (set! (-> s5-0 root-prim) s4-0))
-    (let ((a0-5 (new 'process 'collide-shape-prim-sphere s5-0 (the-as uint 321))))
-      (set! (-> a0-5 prim-core action) (collide-action solid))
-      (set! (-> a0-5 transform-index) 0))
-    (let ((a0-7 (new 'process 'collide-shape-prim-sphere s5-0 (the-as uint 322))))
-      (set! (-> a0-7 prim-core action) (collide-action solid))
-      (set! (-> a0-7 transform-index) 0))
-    (let ((a0-9 (new 'process 'collide-shape-prim-sphere s5-0 (the-as uint 596))))
-      (set! (-> a0-9 prim-core action) (collide-action solid))
-      (set! (-> a0-9 transform-index) 0))
-    (let ((a0-11 (new 'process 'collide-shape-prim-sphere s5-0 (the-as uint 616))))
-      (set! (-> a0-11 prim-core action) (collide-action solid))
-      (set! (-> a0-11 transform-index) 0))
-    (let ((a0-13 (new 'process 'collide-shape-prim-sphere s5-0 (the-as uint 323))))
-      (set! (-> a0-13 prim-core action) (collide-action solid))
-      (set! (-> a0-13 transform-index) 0))
-    (let ((v1-20 (new 'process 'collide-shape-prim-sphere s5-0 (the-as uint 1919))))
-      (set! (-> v1-20 prim-core action) (collide-action solid nav-sphere))
-      (set! (-> v1-20 transform-index) 0)
-      (set! (-> v1-20 nav-radius) 20480.0))
-    (let ((v1-22 (new 'process 'collide-shape-prim-sphere s5-0 (the-as uint 588))))
-      (set! (-> v1-22 prim-core action) (collide-action solid nav-sphere))
-      (set! (-> v1-22 transform-index) 0)
-      (set! (-> v1-22 nav-radius) 20480.0))
-    (set! (-> s5-0 nav-radius) 20480.0)
-    (let ((v1-24 (-> s5-0 root-prim)))
-      (set! (-> s5-0 backup-collide-as) (-> v1-24 prim-core collide-as))
-      (set! (-> s5-0 backup-collide-with) (-> v1-24 prim-core collide-with)))
-    (set! (-> this root) s5-0))
-  0
-  (none))
-
-
-;; Method overrides 3 (inspect), 66 (init-from-entity), 100 (task-complete-hook),
-;; and 115 (update-shocks) are deferred. 100/115 fail decomp lifting (likely
-;; asm-heavy / VU code) and need mips2c or C++ patches; 66 is clean but long.
+;; Method overrides (3 inspect, 65 build-collide-shape, 66 init-from-entity,
+;; 100 task-complete-hook, 115 update-shocks) deferred until wcar-base 65/115
+;; land and the L* static vectors are rebuilt.
