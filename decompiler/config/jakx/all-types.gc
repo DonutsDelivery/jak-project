@@ -32359,20 +32359,19 @@
 
   
 
-#|
 (deftype instance-shrub-work (structure)
-  ((dummy                           qword             3       :offset-assert 0)
-   (chaina                          qword             8       :offset-assert 48)
-   (chainb                          qword             8       :offset-assert 176)
+  ((dummy                           qword             3 :inline :offset-assert 0)
+   (chaina                          qword             8 :inline :offset-assert 48)
+   (chainb                          qword             8 :inline :offset-assert 176)
    (colors                          rgba              1024    :offset-assert 304)
-   (matrix-tmpl                     qword             20      :offset-assert 4400)
-   (count-tmpl                      vector4w          20      :offset-assert 4720)
+   (matrix-tmpl                     qword             20 :inline :offset-assert 4400)
+   (count-tmpl                      vector4w          20 :inline :offset-assert 4720)
    (mscalf-tmpl                     dma-packet        :inline :offset-assert 5040)
    (mscalf-ret-tmpl                 dma-packet        :inline :offset-assert 5056)
    (adgif-tmpl                      dma-gif-packet    :inline :offset-assert 5072)
    (billboard-tmpl                  dma-gif-packet    :inline :offset-assert 5104)
    (billboard-const                 vector            :inline :offset-assert 5136)
-   (shrub-near-packets              shrub-near-packet 6       :offset-assert 5152)
+   (shrub-near-packets              shrub-near-packet 6 :inline :offset-assert 5152)
    (dma-ref                         dma-packet        :inline :offset-assert 6016)
    (dma-end                         dma-packet        :inline :offset-assert 6032)
    (wind-const                      vector            :inline :offset-assert 6048)
@@ -32385,8 +32384,8 @@
    (bb-color                        vector            :inline :offset-assert 6160)
    (min-dist                        vector            :inline :offset-assert 6176)
    (temp-vec                        vector            :inline :offset-assert 6192)
-   (guard-plane                     plane             4       :offset-assert 6208)
-   (plane                           plane             4       :offset-assert 6272)
+   (guard-plane                     plane             4 :inline :offset-assert 6208)
+   (plane                           plane             4 :inline :offset-assert 6272)
    (last                            uint32            4       :offset-assert 6336)
    (next                            uint32            4       :offset-assert 6352)
    (count                           uint16            4       :offset-assert 6368)
@@ -32413,7 +32412,7 @@
    (current-shrub-near-packet       uint32                    :offset-assert 6516)
    (current-shrub-near-trans-packet uint32                    :offset-assert 6520)
    (to-spr2                         uint32                    :overlay-at to-spr)
-   (dma-buffer                      basic                     :offset-assert 6528)
+   (dma-buffer                      basic                     :offset 6528)
    (near-last                       uint32                    :offset-assert 6532)
    (near-next                       uint32                    :offset-assert 6536)
    (near-count                      uint32                    :offset-assert 6540)
@@ -32433,7 +32432,6 @@
   :size-assert         #x19bc
   :flag-assert         #x9000019bc
   )
-|#
 
   
 
@@ -37940,7 +37938,7 @@
 ;; shrub-work                     ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern *instance-shrub-work* symbol) ;; instance-shrub-work type not yet activated
+(define-extern *instance-shrub-work* instance-shrub-work)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tfrag-near                     ;;
