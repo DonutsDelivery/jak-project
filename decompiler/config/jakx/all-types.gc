@@ -32191,6 +32191,13 @@
    )
   )
 
+(deftype cquery-with-vec (structure)
+  "task-arrow::53 — collide-query plus a scratch vector. Ported from jak3 (jakx variant: 1 vec only)."
+  ((cquery collide-query :inline)
+   (vec0   vector        :inline)
+   )
+  )
+
 (define-extern *collide-test-flag* symbol)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
