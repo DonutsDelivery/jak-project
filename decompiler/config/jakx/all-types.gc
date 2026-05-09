@@ -14003,7 +14003,7 @@
   :size-assert         #x10
   :flag-assert         #xc00000010
   (:methods
-    (car-rgb-color-method-9 (_type_ object) none) ;; 9
+    (car-rgb-color-method-9 (_type_) none) ;; 9
     (car-rgb-color-method-10 (_type_) int) ;; 10
     (car-rgb-color-method-11 (_type_ int) int) ;; 11
     )
@@ -14018,7 +14018,7 @@
   :size-assert         #x10
   :flag-assert         #xa00000010
   (:methods
-    (car-hsv-color-method-9 (_type_ object) none) ;; 9
+    (car-hsv-color-method-9 (_type_) none) ;; 9
     )
   )
 
@@ -16021,7 +16021,7 @@
     (sky-work-method-13 (_type_ dma-buffer vector) int) ;; 13
     (sky-work-method-14 (_type_ uint) none) ;; 14
     (sky-work-method-15 (_type_ matrix) int) ;; 15
-    (sky-work-method-16 (_type_ object) none) ;; 16
+    (sky-work-method-16 (_type_) none) ;; 16
     (sky-work-method-17 (_type_) none) ;; 17
     (sky-work-method-18 (_type_) none) ;; 18
     (sky-work-method-19 (_type_ vector vector cloud-lights vector vector) none) ;; 19
@@ -16041,7 +16041,7 @@
     (sky-work-method-33 (_type_ matrix sky-upload-data) none) ;; 33
     (sky-work-method-34 (_type_) none) ;; 34
     (sky-work-method-35 (_type_ dma-buffer) none) ;; 35
-    (sky-work-method-36 (_type_ dma-buffer object) none) ;; 36
+    (sky-work-method-36 (_type_ dma-buffer) none) ;; 36
     )
   )
 
@@ -16549,7 +16549,7 @@
     (ocean-method-17 (_type_ vector ocean-vertex) none) ;; 17
     (ocean-method-18 (_type_ (pointer ocean-colors) (pointer ocean-colors)) int) ;; 18
     (ocean-method-19 (_type_ dma-buffer object) none) ;; 19
-    (ocean-method-20 (_type_ dma-buffer object) pointer) ;; 20
+    (ocean-method-20 (_type_ dma-buffer) pointer) ;; 20
     (ocean-method-21 (_type_ float float object) none) ;; 21
     (ocean-method-22 (_type_ dma-buffer int object object) none) ;; 22
     (ocean-method-23 (_type_ dma-buffer int) int) ;; 23
@@ -16591,7 +16591,7 @@
     (ocean-method-59 (_type_ dma-buffer object object object) int) ;; 59
     (ocean-method-60 (_type_ dma-buffer object object object) int) ;; 60
     (ocean-method-61 (_type_ dma-buffer object object object) int) ;; 61
-    (ocean-method-62 (_type_ dma-buffer object object object) int) ;; 62 — body returns int
+    (ocean-method-62 (_type_ dma-buffer object object) int) ;; 62 — body returns int
     (ocean-method-63 (_type_ dma-buffer object) none) ;; 63
     (ocean-method-64 (_type_ dma-buffer) none) ;; 64
     (ocean-method-65 (_type_ dma-buffer) none) ;; 65
@@ -20059,7 +20059,7 @@
   :size-assert         #x10
   :flag-assert         #xd00000010
   (:methods
-    (speech-info-method-9 (_type_ object object object) none) ;; 9
+    (speech-info-method-9 (_type_) none) ;; 9
     (speech-info-method-10 (_type_ string int) object) ;; 10
     (speech-info-method-11 (_type_ int int) object) ;; 11
     (speech-info-method-12 (_type_) int) ;; 12
@@ -20139,7 +20139,7 @@
   (:methods
     (speech-channel-method-9 (_type_ process-drawable speech-type) int) ;; 9
     (speech-channel-method-10 (_type_ handle) none) ;; 10
-    (speech-channel-method-11 (_type_ object object object object object) none) ;; 11
+    (speech-channel-method-11 (_type_) none) ;; 11
     (speech-channel-method-12 (_type_ int int) none) ;; 12
     (speech-channel-method-13 (_type_) int) ;; 13
     (speech-channel-method-14 (_type_ speech-type float) int) ;; 14
@@ -34690,7 +34690,7 @@
   :size-assert         #x40
   :flag-assert         #xa00000040
   (:methods
-    (hud-string-method-9 (_type_ object) none) ;; 9
+    (hud-string-method-9 (_type_) none) ;; 9
 ;; DEAD: UI/menu infrastructure
     )
   )
@@ -34726,7 +34726,7 @@
   :size-assert         #x20
   :flag-assert         #xa00000020
   (:methods
-    (hud-corners-method-9 (_type_ object object object object object) none) ;; 9
+    (hud-corners-method-9 (_type_) none) ;; 9
     )
   )
 
@@ -41995,7 +41995,7 @@
     (rigid-body-object-method-62 (_type_ float) int) ;; 62
     (rigid-body-object-method-63 (_type_) int) ;; 63
     (rigid-body-object-method-64 (_type_ object) none) ;; 64
-    (rigid-body-object-method-65 (_type_ object) int) ;; 65
+    (rigid-body-object-method-65 (_type_) int) ;; 65
     (rigid-body-object-method-66 (_type_) int) ;; 66
     (rigid-body-object-method-67 (_type_) none) ;; 67
     (rigid-body-object-method-68 (_type_ object object) int) ;; 68
@@ -47017,7 +47017,7 @@
     (net-player-method-50 (_type_ object) symbol) ;; 50
     (net-player-method-51 (_type_ object) none) ;; 51
     (net-player-method-52 (_type_) object) ;; 52
-    (net-player-method-53 (_type_ object object object object object object) symbol) ;; 53
+    (net-player-method-53 (_type_) symbol) ;; 53
     (net-player-method-54 (_type_ object) none) ;; 54
     (net-player-method-55 (_type_) none) ;; 55
     (net-player-method-56 (_type_ object) none) ;; 56
@@ -47043,7 +47043,7 @@
     (net-player-method-76 (_type_) symbol) ;; 76
     (net-player-method-77 (_type_ object object) none) ;; 77
     (net-player-method-78 (_type_ object) none) ;; 78
-    (net-player-method-79 (_type_ object) int) ;; 79
+    (net-player-method-79 (_type_) int) ;; 79
     (net-player-method-80 (_type_ object) none) ;; 80
     (net-player-method-81 (_type_ object) none) ;; 81
     (net-player-method-82 (_type_) int) ;; 82
@@ -47060,7 +47060,7 @@
     (net-player-method-93 (_type_) none) ;; 93
     (net-player-method-94 (_type_) none) ;; 94
     (net-player-method-95 (_type_) none) ;; 95
-    (net-player-method-96 (_type_ object) int) ;; 96
+    (net-player-method-96 (_type_) int) ;; 96
     (net-player-method-97 (_type_ object) int) ;; 97
     )
   )
@@ -49261,7 +49261,7 @@
   :size-assert         #x230
   :flag-assert         #x4301a00230
   (:methods
-    (big-text-menu-method-66 (_type_ object object) symbol) ;; 66
+    (big-text-menu-method-66 (_type_) symbol) ;; 66
     )
   )
   
