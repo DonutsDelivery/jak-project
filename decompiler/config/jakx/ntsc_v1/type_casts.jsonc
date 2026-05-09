@@ -50890,6 +50890,14 @@
     ]
   ],
 
+  "(method 61 ocean)": [
+    [[3, 200], "gp", "(inline-array ocean-vertex)"]
+  ],
+
+  "(method 62 ocean)": [
+    [[3, 186], "s3", "(inline-array ocean-vertex)"]
+  ],
+
   "make-joint-jump-tables": [
     [5, "a0", "terrain-context"],
     [11, "a0", "terrain-context"],
