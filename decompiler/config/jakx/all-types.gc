@@ -4652,7 +4652,7 @@
 
 
 (define-extern *vehicle-wheel-constants* rigid-body-object-constants)
-(define-extern vehicle-wheel-init-by-other (function vehicle-wheel-init-params none :behavior vehicle-wheel))
+(define-extern vehicle-wheel-init-by-other (function vehicle-wheel-init-params object :behavior vehicle-wheel))
 (define-extern vehicle-wheel-spawn (function process vehicle-wheel-init-params vehicle-wheel))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -4840,7 +4840,7 @@
 
 
 (define-extern *wheel-trail-info* light-trail-composition)
-(define-extern tire-trail-tracker-init-by-other (function light-trail-tracker-spawn-params none :behavior tire-trail-tracker))
+(define-extern tire-trail-tracker-init-by-other (function light-trail-tracker-spawn-params object :behavior tire-trail-tracker))
 (define-extern spawn-tire-trail-tracker (function process light-trail-tracker-spawn-params tire-trail-tracker))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -38379,7 +38379,7 @@
 (define-extern lookup-part-group-by-name (function string sparticle-launch-group))
 (define-extern lookup-part-group-pointer-by-name (function string (pointer object)))
 (define-extern part-group-pointer? (function pointer symbol))
-(define-extern unlink-part-group-by-heap (function kheap none))
+(define-extern unlink-part-group-by-heap (function kheap int))
 (define-extern sp-init-fields! (function (pointer float) (inline-array sp-field-init-spec) sp-field-id sp-field-id symbol (inline-array sp-field-init-spec)))
 (define-extern *sp-launcher-lock* symbol) ;; symbol
 (define-extern *sp-launch-queue* sp-launch-queue) ;; sp-launch-queue
@@ -39476,7 +39476,7 @@
 (define-extern convert-korean-text (function string string))
 (define-extern text-is-loading symbol)
 ;; Lane2-RecipeX: replaced stub (jak3 test/decompiler/reference/jak3/engine/ui/text_REF.gc)
-(define-extern load-game-text-info (function string (pointer object) kheap none))
+(define-extern load-game-text-info (function string (pointer object) kheap int))
 (define-extern load-level-text-files (function int none))
 (define-extern draw-debug-text-box "Draws some lines" (function font-context none))
 (define-extern *print-game-text-work* print-game-text-work)
@@ -53752,7 +53752,7 @@
 ;; editable-player                ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern cleanup-selection (function editable-array none))
+(define-extern cleanup-selection (function editable-array object))
 (define-extern insert-box (function editable-array vector vector object))
 (define-extern insert-wall (function editable-array vector vector object))
 (define-extern update-manipulator-position (function editable-array manipulator matrix))
@@ -53786,7 +53786,7 @@
 (define-extern set-editable-name (function string object))
 (define-extern select-editable-by-name (function string object))
 (define-extern *editable-menu-context* debug-menu-context) ;; debug-menu-context
-(define-extern editable-menu-command (function int none))
+(define-extern editable-menu-command (function int object))
 (define-extern editable-menu-command-no-close (function int object))
 (define-extern dm-region-tree-pick-func (function symbol debug-menu-msg symbol))
 (define-extern dm-editable-flag-pick-func (function editable-flag debug-menu-msg symbol))
@@ -54579,7 +54579,7 @@
 (define-extern debug-menu-make-task-sub-menu (function symbol pair))
 (define-extern debug-menu-make-task-menu (function debug-menu-context debug-menu-item-submenu))
 (define-extern dm-play-task-with-continue (function game-task string object))
-(define-extern dm-play-task (function game-task none))
+(define-extern dm-play-task (function game-task object))
 (define-extern dm-play-race (function race-selection symbol object))
 (define-extern debug-menu-make-play-menu (function debug-menu-context debug-menu-node))
 (define-extern dm-anim-tester-flag-func (function int debug-menu-msg symbol))
@@ -62455,13 +62455,13 @@
 (define-extern charp<-string (function (pointer uint8) string int))
 ;; --- Lane 2 Recipe X cycle 1: REF-derived externs ---
 ;; from jak3 REF: test/decompiler/reference/jak3/engine/common-obs/debris_REF.gc
-(define-extern debris-group-init-by-other (function debris-tuning debris-static-params process-drawable none))
+(define-extern debris-group-init-by-other (function debris-tuning debris-static-params process-drawable object :behavior debris-group))
 ;; from jak3 REF: test/decompiler/reference/jak3/engine/common-obs/debris_REF.gc
 (define-extern debris-spawn (function process-drawable debris-tuning debris-static-params process-drawable (pointer debris-group)))
 ;; from jak3 REF: test/decompiler/reference/jak3/engine/process-drawable/process-drawable_REF.gc
-(define-extern skeleton-group->draw-control (function process-drawable skeleton-group (pointer cspace-array) none))
+(define-extern skeleton-group->draw-control (function process-drawable skeleton-group (pointer cspace-array) draw-control))
 ;; from jak3 REF: test/decompiler/reference/jak3/engine/process-drawable/process-drawable_REF.gc
-(define-extern ja-min? (function int none))
+(define-extern ja-min? (function int symbol :behavior process-drawable))
 (define-extern get-nav-graph-editor (function nav-graph-editor))
 (define-extern tie-init-consts (function tie-consts gs-alpha gs-test gs-test none))
 (define-extern sprite-setup-header (function sprite-header int none))
