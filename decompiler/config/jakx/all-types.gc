@@ -29845,9 +29845,14 @@
 
   
 (deftype collide-shape-moving (collide-shape)
-  ((csm-pad-1  uint8    264  :offset 200)  ;; pads GOAL 200-463
-   (coverage   float         :offset 464)  ;; MIPS 460 = GOAL 464
-   (dynam      dynamics      :offset 468)  ;; MIPS 464 = GOAL 468 — accessed by target-float enter/trans
+  ((csm-pad-pre  uint8    116  :offset 200)  ;; GOAL 200..315 — opaque pad (MIPS 196..311)
+   (reaction     (function control-info collide-query vector vector uint)
+                              :offset 316)  ;; MIPS 312 — cshape-reaction-default sig
+   (no-reaction  (function control-info collide-query vector vector none)
+                              :offset 320)  ;; MIPS 316 — nothing-typed sentinel
+   (csm-pad-post uint8    140  :offset 324)  ;; GOAL 324..463 — opaque pad (MIPS 320..459)
+   (coverage     float         :offset 464)  ;; MIPS 460 = GOAL 464
+   (dynam        dynamics      :offset 468)  ;; MIPS 464 = GOAL 468 — accessed by target-float enter/trans
    )
   :method-count-assert 55
   :size-assert         #x1d8
