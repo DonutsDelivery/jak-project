@@ -46826,6 +46826,27 @@
       "visvol-editor"
     ]
   ],
+  "visvol-edit": [
+    [17, "a0", "uint"],
+    [17, "v1", "uint"],
+    [19, "v1", "handle"],
+    [22, "v1", "handle"],
+    [23, "a0", "(pointer process)"],
+    [25, "v1", "handle"],
+    [40, "a0", "uint"],
+    [40, "v1", "uint"],
+    [41, "gp", "handle"]
+  ],
+  "(trans idle visvol-editor)": [
+    [8, "a0", "(pointer process)"]
+  ],
+  "(method 10 visvol-edit-info)": [
+    [[243, 252], "s4", "(pointer float)"],
+    [[476, 497], "v1", "(pointer float)"],
+    [[531, 552], "v1", "(pointer float)"],
+    [475, "a2", "vector"],
+    [530, "a2", "vector"]
+  ],
   "water-anim-init-by-other": [
     [
       0,
