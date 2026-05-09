@@ -2482,7 +2482,7 @@
 
 
 (deftype hud-effect-group (hud-effect)
-  ((items basic  :offset-assert 28)
+  ((items (array hud-effect)  :offset-assert 28)
    )
   :method-count-assert 15
   :size-assert         #x20
