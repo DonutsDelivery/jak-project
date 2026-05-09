@@ -51896,7 +51896,7 @@
 ;; spartacus                      ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define-extern spartacus-birth-func-set-color (function uint uint object object object none))
+(define-extern spartacus-birth-func-set-color (function uint uint sparticle-launchinfo object sparticle-launch-state none))
 (define-extern spt-birth-func-spartacus-part-steam (function int sparticle-cpuinfo sparticle-launchinfo int int none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
