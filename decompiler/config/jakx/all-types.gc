@@ -10455,7 +10455,7 @@
   :flag-assert         #xb00000014
   (:methods
     (texture-page-dir-method-9 (_type_ kheap) none) ;; 9 ;; (unlink-shaders-in-heap (_type_ kheap) int)
-    (texture-page-dir-method-10 (_type_ object object) none) ;; 10
+    (texture-page-dir-method-10 (_type_) none) ;; 10
     )
   )
   
@@ -14329,7 +14329,7 @@
   :flag-assert         #xa000006b4
   (:methods
     (new (symbol type) _type_) ;; 0
-    (math-camera-method-9 (_type_ object object object object) none) ;; 9
+    (math-camera-method-9 (_type_) none) ;; 9
     )
   )
 
@@ -15258,7 +15258,7 @@
     (lookup-text! (_type_ text-id symbol) string) ;; 9
     (game-text-info-method-10 (_type_ text-id symbol) int) ;; 10
     (game-text-info-method-11 (_type_ string) string) ;; 11
-    (game-text-info-method-12 (_type_ object object) int) ;; 12
+    (game-text-info-method-12 (_type_) int) ;; 12
     )
   )
 
@@ -29549,7 +29549,7 @@
   :size-assert         #xbb90
   :flag-assert         #xd0000bb90
   (:methods
-    (populate-for-prim-mesh (_type_ collide-shape-prim-mesh object object object) collide-mesh-cache-entry) ;; 9
+    (populate-for-prim-mesh (_type_ collide-shape-prim-mesh) collide-mesh-cache-entry) ;; 9
     (is-id? "Does this cache have the given ID?" (_type_ int) symbol) ;; 10
     (next-id!
       "Reset all used entries in the cache and increment the ID.
@@ -29986,7 +29986,7 @@
   ;; field userdata uses ~A with a 64-bit load.
   (:methods
     (part-tracker-method-9 (_type_) none) ;; 9
-    (part-tracker-method-10 (_type_ object object object object) none) ;; 10
+    (part-tracker-method-10 (_type_) none) ;; 10
     (part-tracker-method-11 (_type_) none) ;; 11
     (part-tracker-method-12 (_type_) none) ;; 12
     (part-tracker-method-13 (_type_) none) ;; 13
@@ -31421,7 +31421,7 @@
     (projectile-method-55 (_type_) int)
     (projectile-method-56 (_type_) int)
     (projectile-method-57 (_type_) int)
-    (projectile-method-58 (_type_ object) int)
+    (projectile-method-58 (_type_) int)
     (projectile-method-59 (_type_) int)
     (projectile-method-60 (_type_) int)
     (projectile-method-61 (_type_) int)
@@ -38569,7 +38569,7 @@
     (new (symbol type) _type_) ;; 0
     (gui-control-method-9 (_type_ process gui-channel gui-action string float time-frame) none) ;; 9
     (remove-process (_type_ process gui-channel) int) ;; 10
-    (stop-str (_type_ gui-connection object object object) int) ;; 11
+    (stop-str (_type_ gui-connection) int) ;; 11
     (gui-control-method-12 (_type_ process gui-channel gui-action string int float sound-id) none) ;; 12
     (gui-control-method-13 (_type_ symbol) none) ;; 13
     (gui-control-method-14 (_type_ string gui-channel gui-action) int) ;; 14
@@ -38583,7 +38583,7 @@
     (gui-control-method-22 (_type_ gui-connection vector) none) ;; 22
     (gui-control-method-23 (_type_ gui-connection process symbol) none) ;; 23
     (gui-control-method-24 (_type_ gui-channel gui-channel symbol gui-connection) symbol) ;; 24
-    (channel-id-set! (_type_ gui-connection sound-id object object) int) ;; 25
+    (channel-id-set! (_type_ gui-connection sound-id) int) ;; 25
     )
   )
 
@@ -44390,7 +44390,7 @@
   :size-assert         #x184
   :flag-assert         #xd00000184
   (:methods
-    (medius-cached-info-clan-method-12 (_type_ object) none) ;; 12
+    (medius-cached-info-clan-method-12 (_type_) none) ;; 12
     )
   )
 
@@ -44582,7 +44582,7 @@
   :size-assert         #x131
   :flag-assert         #x1200000131
   (:methods
-    (net-predictor-simple-method-9 (_type_ object object) none) ;; 9
+    (net-predictor-simple-method-9 (_type_) none) ;; 9
     (net-predictor-simple-method-10 (_type_ int) int) ;; 10
     (net-predictor-simple-method-11 (_type_ int int) int) ;; 11
     (net-predictor-simple-method-12 (_type_) none) ;; 12
