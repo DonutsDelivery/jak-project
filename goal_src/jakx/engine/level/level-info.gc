@@ -223,6 +223,11 @@
 ;; literal (atoll precedent); :master-level krasw kept but krasw still
 ;; stubbed, so loader sees #f master.
 ;; See .jakx_watch/krasw_restoration_recon.md for full slot-by-slot table.
+;; K2.1 PATCH 2026-05-09: minimal :continues entry. Modelled on atoll's L798-814 continue-point.
+;; Reason: empty :continues prevents initialize! from setting up player spawn + buffer-state install
+;; even after login-begin/birth un-stub. Decomp-source: PS2 binary level-info_ir2.asm did not
+;; produce a usable continue-point for krastrn, so this is hand-authored from atoll precedent.
+;; vehicle-type #x1b matches atoll (bobcat aid, confirm post-K2.3 if vehicle spawn fails).
 (define krastrn
   (new 'static 'level-load-info
     :name 'krastrn
@@ -239,7 +244,23 @@
     :ocean #f
     :draw-priority 10.0
     :base-task-mask (task-mask task0)
-    :continues '()
+    :continues '((new 'static 'continue-point
+        :name "krastrn-start"
+        :level 'krastrn
+        :trans (static-vectorm 0 10 0)
+        :camera-trans (static-vectorm 0 5 -20)
+        :quat (new 'static 'vector4h :data (new 'static 'array int16 4 0 0 0 #x7fff))
+        :camera-rot (new 'static 'array int16 9 #x7fff 0 0 0 #x7fff 0 0 0 #x7fff)
+        :on-goto #f
+        :vis-nick 'krastrn
+        :vehicle-type #x1b
+        :want-count 1
+        :want (new 'static 'inline-array level-buffer-state-small 1
+          (new 'static 'level-buffer-state-small :name 'krastrn :display? 'display)
+          )
+        :want-sound (new 'static 'array symbol 1 #f)
+        )
+      )
     :callback-list '()
     :borrow #f
     :bottom-height (meters -20)
