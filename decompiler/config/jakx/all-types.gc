@@ -28142,8 +28142,8 @@
 (define-extern *net-process-class-count* number)
 (define-extern *net-process-class-array* array)
 (define-extern *net-process-class-names* object)
-(define-extern net-process-class-register (function uint none))
-(define-extern write-msg-map-rec (function process-drawable net-process-class-info none))
+(define-extern net-process-class-register (function net-process-class-info none))
+(define-extern write-msg-map-rec (function type net-process-class-info none))
 
 ;; smoke-system (parent process-nettable — activated here for parent-ordering)
 (deftype smoke-system (process-nettable)
