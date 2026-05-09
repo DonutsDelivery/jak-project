@@ -32036,7 +32036,7 @@
     (collide-cache-method-16 (_type_ collide-query) float) ;; 16
     (collide-cache-method-17 (_type_ collide-query) symbol) ;; 17
     (fill-from-bg (_type_ (function collide-hash int collide-list collide-query int) (function collide-cache collide-list collide-query none) collide-query) int) ;; 18
-    (collide-cache-method-19 (_type_ object object object object object object) none) ;; 19
+    (collide-cache-method-19 (_type_) none) ;; 19
     (collide-cache-method-20 (_type_ collide-query) none) ;; 20
     (collide-cache-method-21 (_type_ water-control) symbol) ;; 21
     (collide-cache-method-22 (_type_) none) ;; 22 ;; (collide-cache-method-22 (_type_) none)
