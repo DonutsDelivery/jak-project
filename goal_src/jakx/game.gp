@@ -98,6 +98,11 @@
 ;; not yet ported; only tpages, art groups, and krasw level binary.
 (cgo-file "krasw.gd" '())
 
+;; first vehicle art DGO — bobcl (Bobcat car, tutorial vehicle). 1 chassis +
+;; 25 bodywork variants + 22 wheel variants + bobcl.go level binary.
+;; Code objects (wcar-bobcat.o) not yet ported — only art groups + level binary.
+(cgo-file "bobcl.gd" '())
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Groups
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
