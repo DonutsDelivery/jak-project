@@ -711,6 +711,44 @@
       "(pointer uint32)"
     ]
   ],
+  "dma-send-to-spr": [
+    [
+      [
+        4,
+        28
+      ],
+      "s5",
+      "(pointer uint32)"
+    ]
+  ],
+  "dma-send-from-spr": [
+    [
+      [
+        4,
+        28
+      ],
+      "s5",
+      "(pointer uint32)"
+    ]
+  ],
+  "ultimate-memcpy": [
+    [
+      [
+        4,
+        50
+      ],
+      "s4",
+      "(pointer uint32)"
+    ],
+    [
+      [
+        4,
+        50
+      ],
+      "s3",
+      "(pointer uint32)"
+    ]
+  ],
   "dma-bucket-insert-tag": [
     [
       [
