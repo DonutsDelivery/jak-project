@@ -51352,7 +51352,7 @@
 (define-extern *waiting-for-lock* object)
 (define-extern *net-world-entity-hash* object)
 (define-extern set-net-task-mask (function none))
-(define-extern convert-load-parts-to-car-info (function object object none))
+(define-extern convert-load-parts-to-car-info (function uint car-info none))
 (define-extern convert-car-info-to-load-parts (function object none))
 (define-extern cleanup-at-game-end (function none))
 (define-extern check-start-load (function object object object object object object object none))
