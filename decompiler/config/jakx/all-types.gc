@@ -61791,6 +61791,8 @@
 (define-extern mc-load (function none))
 (define-extern mc-load-common (function none))
 (define-extern mc-load-ghost (function none))
+(define-extern target-title-start (state target))
+(define-extern *boot-video-mode* int)
 (define-extern fmv-get-mem-requirements (function none))
 (define-extern knet-lg-tick (function none))
 (define-extern knet-lg-set-recording (function none))
