@@ -45821,7 +45821,7 @@
     idle-base ;; 51
     )
   (:methods
-    (vehicle-weapon-slot-method-52 (_type_ object) none) ;; 52
+    (vehicle-weapon-slot-method-52 (_type_ vector) none) ;; 52
     (vehicle-weapon-slot-method-53 (_type_) int) ;; 53
     (vehicle-weapon-slot-method-54 (_type_) int) ;; 54
     (vehicle-weapon-slot-method-55 (_type_) int) ;; 55
