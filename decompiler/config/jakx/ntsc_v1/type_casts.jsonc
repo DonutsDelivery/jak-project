@@ -691,6 +691,26 @@
       "(pointer uint64)"
     ]
   ],
+  "dma-send-to-spr-no-flush": [
+    [
+      [
+        4,
+        25
+      ],
+      "s5",
+      "(pointer uint32)"
+    ]
+  ],
+  "dma-send-from-spr-no-flush": [
+    [
+      [
+        4,
+        25
+      ],
+      "s5",
+      "(pointer uint32)"
+    ]
+  ],
   "dma-bucket-insert-tag": [
     [
       [
