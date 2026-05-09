@@ -882,18 +882,22 @@
 ;; ERROR: failed type prop at 7: Could not figure out load: (set! v1 (l.hu (+ s5 126)))
 ;; WARN: Return type mismatch none vs level.
 (defmethod login-begin ((this level))
-  "JAKX BOOT-PATH PORT 2026-05-05: minimal port of jak3 login-begin.
-   atoll DGO has no BSP file, so the bsp=#f branch must advance rather
-   than unload. Both branches now set status='loaded so level-status-update!
-   'alive can fire next and drive birth -> active. Full jak3 body (tfrag-gs-test,
-   login-level-textures, build-masks) deferred until jakx BSPs are wired."
+  "JAKX BOOT-PATH PHASE-2A.1 (Change 1+2): if bsp non-null and has
+   drawable-trees, invoke (login bsp) to walk them via bsp-header.login
+   (bsp.gc:48). Also invoke level-update-after-load (Change 2) to walk
+   art-group-array and login each art-group — required for krastrn whose
+   geometry lives in actor/merc art-groups (training-wall-ag, etc.) rather
+   than C++-side tfrag (which is how atoll renders). Atoll regression
+   guard: nonzero? on drawable-trees skips bsp-login when atoll's bsp has
+   null drawable-trees (atoll's tfrag comes from atoll.fr3 C++-side)."
   (cond
     ((-> this bsp)
-     (format 0 "[login-begin] STUB: level ~A has bsp — body deferred~%" (-> this name))
+     (when (nonzero? (-> this bsp drawable-trees))
+       (login (-> this bsp)))
+     (level-update-after-load this *login-state*)
      (set! (-> this status) 'loaded)
      )
     (else
-      (format 0 "[login-begin] level ~A no bsp — advancing status='loaded~%" (-> this name))
       (set! (-> this status) 'loaded)
       )
     )
@@ -905,10 +909,25 @@
 ;; ERROR: Unsupported inline assembly instruction kind - [mfc0 v1, Count]
 ;; ERROR: Unsupported inline assembly instruction kind - [mfc0 s5, Count]
 ;; ERROR: Unsupported inline assembly instruction kind - [mfc0 v1, Count]
-(defun level-update-after-load ((a0-0 level) (a1-0 login-state))
-  ;; NOTE: Stubbed - level-update-after-load has PS2 constructs
-  (format 0 "call to level-update-after-load~%")
-  (the-as level 0)
+(defun level-update-after-load ((arg0 level) (arg1 login-state))
+  "JAKX BOOT-PATH PHASE-2A.1 Change 2: minimal art-group-array login walk.
+   Mirrors jak3 level.gc:1886-1900. Skips drawable-tree walk (already
+   handled by Change 1's bsp-header.login) and link-art-to-master (no
+   defmethod body in jakx → null-dispatch). Sets login-level-index so
+   downstream login machinery can attribute art-elements to this level."
+  (let ((s2-0 (-> arg0 art-group art-group-array)))
+    (when (nonzero? s2-0)
+      (let ((s1-0 (-> *kernel-context* login-level-index)))
+        (set! (-> *kernel-context* login-level-index) (-> arg0 index))
+        (dotimes (i (-> s2-0 length))
+          (let ((s0-0 (-> s2-0 i)))
+            (when s0-0
+              (login s0-0))))
+        (set! (-> *kernel-context* login-level-index) s1-0)
+        )
+      )
+    )
+  arg0
   )
 
 ;; ERROR: failed type prop at 8: Could not figure out load: (set! s3 (l.wu (+ v1 4)))
