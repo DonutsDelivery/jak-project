@@ -32347,7 +32347,7 @@
    (vertex-tmpl dma-packet :inline :offset-assert 64)
    (mscal-tmpl  dma-packet :inline :offset-assert 80)
    (init-tmpl   dma-packet :inline :offset-assert 96)
-   (init-data   qword      8       :offset-assert 112) ;; guessed by decompiler
+   (init-data   qword      2 :inline :offset-assert 112) ;; jak3-port
    )
   :method-count-assert 9
   :size-assert         #x90
