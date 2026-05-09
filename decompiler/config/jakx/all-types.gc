@@ -44,6 +44,7 @@
 (define-extern options-bar-indicator type)
 
 ;; Auto-extern batch 24 — second wave unknown-symbol unblocks
+(define-extern hud-money type)
 (define-extern hud-deathmatch-score-drop-view-10 type)
 (define-extern medius-add-player-to-clan-response type)
 (define-extern medius-binary-message type)

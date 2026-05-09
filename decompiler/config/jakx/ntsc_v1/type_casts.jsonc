@@ -49215,6 +49215,48 @@
       "collide-shape"
     ]
   ],
+  "sparticle-track-root-money": [
+    [
+      1,
+      "v1",
+      "(pointer process-drawable)"
+    ],
+    [
+      2,
+      "v1",
+      "process-drawable"
+    ],
+    [
+      3,
+      "v1",
+      "collide-shape"
+    ],
+    [
+      6,
+      "v1",
+      "(pointer trsqv)"
+    ],
+    [
+      7,
+      "v1",
+      "trsqv"
+    ],
+    [
+      11,
+      "a0",
+      "float"
+    ],
+    [
+      [8, 17],
+      "v1",
+      "vector"
+    ],
+    [
+      [9, 17],
+      "a2",
+      "vector"
+    ]
+  ],
   "part-tracker-track-root": [
     [
       2,
