@@ -961,6 +961,15 @@ void PrototypeBucketTie::read_from_file(TypedRef ref,
       int length = read_plain_data_field<int32_t>(collide_array, "length", dts);
       auto r = get_field_ref(collide_array, "fragments", dts);
       for (int i = 0; i < length; i++) {
+        // SCAFFOLDING (Cycle 75): jakx tie buckets in krasa/krastrn have a
+        // sentinel TYPE_PTR (data=0xFFFFFFFF) at every collide-fragment slot
+        // instead of a real label PTR. Skip those so the rest of the bucket
+        // (geometry, tie-colors) extracts.
+        const auto& rw = r.data->words_by_seg.at(r.seg).at(r.byte_offset / 4);
+        if (rw.kind() != decompiler::LinkedWord::PTR) {
+          r.byte_offset += 4;
+          continue;
+        }
         collide_hash_frags.push_back(deref_label(r));
         r.byte_offset += 4;
       }
@@ -1109,6 +1118,20 @@ void PrototypeArrayTie::read_from_file(TypedRef ref,
   for (u32 i = 0; i < length; i++) {
     Ref slot = data_ref;
     slot.byte_offset += 4 * i;
+
+    // SCAFFOLDING (Cycle 75): jakx levels may have TYPE_PTR sentinels in the
+    // prototype-bucket-tie array. Skip non-PTR slots so the rest extract.
+    {
+      const auto& slot_word =
+          slot.data->words_by_seg.at(slot.seg).at(slot.byte_offset / 4);
+      if (slot_word.kind() != decompiler::LinkedWord::PTR) {
+        lg::warn(
+            "PrototypeArrayTie: skipping bucket {}/{} at word {} (kind={} data={}) — not a label PTR",
+            i, length, slot.byte_offset / 4, (int)slot_word.kind(), slot_word.data);
+        continue;
+      }
+    }
+
     Ref thing = deref_label(slot);
     thing.byte_offset -= 4;
     auto type = get_type_of_basic(thing);
@@ -1158,10 +1181,26 @@ void DrawableTreeInstanceTie::read_from_file(TypedRef ref,
   length = read_plain_data_field<s16>(ref, "length", dts);
   bsphere.read_from_file(get_field_ref(ref, "bsphere", dts));
 
-  auto pt = deref_label(get_field_ref(ref, "prototypes", dts));
-  pt.byte_offset -= 4;
-
-  prototypes.read_from_file(typed_ref_from_basic(pt, dts), dts, version);
+  // SCAFFOLDING (Cycle 75): jakx tie trees in krasa/krastrn have a sentinel
+  // TYPE_PTR (data=0xFFFFFFFF) at the prototypes field instead of a label PTR.
+  // Skip the prototype-array-tie read in that case so the rest of the tree
+  // (data array of instance bvh nodes) can still extract.
+  {
+    auto proto_field_ref = get_field_ref(ref, "prototypes", dts);
+    const auto& proto_word =
+        proto_field_ref.data->words_by_seg.at(proto_field_ref.seg)
+            .at(proto_field_ref.byte_offset / 4);
+    if (proto_word.kind() == decompiler::LinkedWord::PTR) {
+      auto pt = deref_label(proto_field_ref);
+      pt.byte_offset -= 4;
+      prototypes.read_from_file(typed_ref_from_basic(pt, dts), dts, version);
+    } else {
+      lg::warn(
+          "DrawableTreeInstanceTie: skipping prototypes field (kind={} data={}) — not a label PTR; "
+          "tree will have empty prototype array",
+          (int)proto_word.kind(), proto_word.data);
+    }
+  }
 
   auto data_ref = get_field_ref(ref, "data", dts);
   if ((data_ref.byte_offset % 4) != 0) {
