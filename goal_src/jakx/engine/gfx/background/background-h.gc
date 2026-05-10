@@ -35,3 +35,5 @@
    (wait-to-vu0             uint32)
    )
   )
+
+(define-extern *background-work* background-work)

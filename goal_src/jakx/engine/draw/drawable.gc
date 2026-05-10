@@ -393,13 +393,14 @@
   (set! *spawn-actors* #t)
   (actors-update *level*)
 
-  ;; JAKX BOOT-PATH 2026-05-05: init-background / finish-background are
-  ;; declared via define-extern but have no implementation in jakx
-  ;; (background-work type not decompiled). Skipping so execute-connections
-  ;; can run — that's what actually queues bsp drawable DMA via add-bsp-drawable.
-  ;; (init-background)
+  ;; jakx Cycle 71: init-background + finish-background now implemented
+  ;; in background.gc. execute-connections enqueues TIE trees into
+  ;; *background-work*; finish-background dequeues and dispatches to
+  ;; draw-drawable-tree-instance-tie -> instance-tie-patch-buckets ->
+  ;; add-pc-tfrag3-data -> Tie3.cpp common_data_ok=true.
+  (init-background)
   (execute-connections *background-draw-engine* #f)
-  ;; (finish-background)
+  (finish-background)
   (none))
 
 (define *draw-hook* main-draw-hook)
