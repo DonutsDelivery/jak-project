@@ -638,6 +638,19 @@
   )
 
 ;; --- Entity birth system ports (entity.gc not yet ported) ---
+
+;; ported from jak3 entity.gc:1906. Five-line trivial port; was define-extern'd
+;; in entity-h.gc with no body, causing every actor's init-from-entity! to
+;; null-dispatch (addr 0x2123000000) the moment bsp-init-actors! wires up the
+;; entity-links-array. Found cycle 54 by isolating Path B atoll regression.
+(defun process-drawable-from-entity! ((arg0 process-drawable) (arg1 entity-actor))
+  (logior! (-> arg0 mask) (process-mask actor-pause))
+  (vector-copy! (-> arg0 root trans) (-> arg1 extra trans))
+  (quaternion-copy! (-> arg0 root quat) (-> arg1 quat))
+  (vector-identity! (-> arg0 root scale))
+  (none)
+  )
+
 ;; activate a process from BSP entity data and run its init-from-entity!
 ;; ported from entity.gc:3990
 (defun init-entity ((arg0 process) (arg1 entity-actor) (arg2 type))
