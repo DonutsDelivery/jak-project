@@ -14,13 +14,15 @@
 
 (deftype eco (process-drawable)
   ()
+  (:state-methods
+    running ;; 50
+    die ;; 51
+    )
   (:methods
-    (eco-method-50 (_type_) none)
-    (eco-method-51 (_type_) none)
-    (eco-method-52 (_type_) none)
-    (eco-method-53 (_type_) none)
-    (eco-method-54 (_type_) none)
-    (eco-method-55 (_type_) none)
+    (eco-method-52 (_type_) none) ;; 52
+    (eco-method-53 (_type_) int) ;; 53
+    (eco-method-54 (_type_ int uint) none) ;; 54
+    (eco-method-55 (_type_) int) ;; 55
     )
   )
 

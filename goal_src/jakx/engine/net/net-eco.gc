@@ -179,11 +179,9 @@
   ;; SCAFFOLDING: unresolvable MIPS label removed
   )
 
-;; ERROR: failed type prop at 4: At op 4, called enter-state, but the current next-state has type none, which is not a valid state.
-(defmethod eco-method-52 ((a0-0 eco))
-  ;; SCAFFOLDING
-  (format 0 "call to eco-method-52~%")
-  (break!)
+;; Per decompiler_out/jakx/net-eco_disasm.gc:406 — real body is just (go running).
+(defmethod eco-method-52 ((this eco))
+  (go (method-of-object this running))
   (none)
   )
 
@@ -201,7 +199,7 @@
 
 ;; ERROR: Function may read a register that is not set: a1
 ;; ERROR: Function may read a register that is not set: a2
-(defmethod eco-method-54 ((a0-0 eco))
+(defmethod eco-method-54 ((this eco) (arg0 int) (arg1 uint))
   ;; SCAFFOLDING
   (format 0 "call to eco-method-54~%")
   (break!)
@@ -213,11 +211,9 @@
       (send-event this 'go-die)
       )
   0
-  (none)
   )
 
 (defmethod eco-method-55 ((this eco))
   ;; SCAFFOLDING: task-node-info net-play-mode field missing — default to racing mode (3000)
   3000
-  (none)
   )

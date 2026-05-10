@@ -166,7 +166,7 @@
               )
             )
       )
-  (inherit-state gp-0 (the-as state (method-of-type eco eco-method-50)))
+  (inherit-state gp-0 (the-as state (method-of-type eco running)))
   (method-set! eco-blue 50 gp-0)
   ;; SCAFFOLDING: unresolvable MIPS label removed
   ;; SCAFFOLDING: unresolvable MIPS label removed
@@ -223,7 +223,7 @@
               )
             )
       )
-  (inherit-state gp-1 (the-as state (method-of-type eco eco-method-50)))
+  (inherit-state gp-1 (the-as state (method-of-type eco running)))
   (method-set! eco-yellow 50 gp-1)
   ;; SCAFFOLDING: unresolvable MIPS label removed
   ;; SCAFFOLDING: unresolvable MIPS label removed
@@ -279,7 +279,7 @@
               )
             )
       )
-  (inherit-state gp-2 (the-as state (method-of-type eco eco-method-50)))
+  (inherit-state gp-2 (the-as state (method-of-type eco running)))
   (method-set! eco-red 50 gp-2)
   ;; SCAFFOLDING: unresolvable MIPS label removed
   ;; SCAFFOLDING: unresolvable MIPS label removed
@@ -335,7 +335,7 @@
               )
             )
       )
-  (inherit-state gp-3 (the-as state (method-of-type eco eco-method-50)))
+  (inherit-state gp-3 (the-as state (method-of-type eco running)))
   (method-set! eco-green 50 gp-3)
   ;; SCAFFOLDING: unresolvable MIPS label removed
   ;; SCAFFOLDING: unresolvable MIPS label removed

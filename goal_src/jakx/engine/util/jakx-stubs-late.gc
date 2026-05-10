@@ -748,6 +748,7 @@
 (declare-type training-marker process-drawable)
 (declare-type training-wall process-drawable)
 (declare-type training-bollard process-drawable)
+(declare-type eco-green process-drawable)
 
 (defun bsp-actor-type-allowed? ((et type))
   (cond
@@ -755,6 +756,7 @@
     ((= et training-marker) #t)
     ((= et training-wall) #t)
     ((= et training-bollard) #t)
+    ((= et eco-green) #t)
     (else #f)))
 
 ;; Minimal port of jak3 entity.gc:1652 bsp-header.birth method.
@@ -793,7 +795,7 @@
                         (logand (-> bsp actor-birth-order i) 8191)
                         i))
                (actor (-> bsp actors data idx actor)))
-          (format 0 "[bsp-init-actors!] actor[~D] etype=~A~%" i (-> actor etype))
+          (format 0 "[bsp-init-actors!] actor[~D] etype=~A raw=~X aid=~X~%" i (-> actor etype) (-> actor etype) (-> actor aid))
           (when (bsp-actor-type-allowed? (-> actor etype))
             (+! allowed-count 1)
             ;; Grab the next empty slot from the entity-links-array.
