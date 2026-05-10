@@ -26,6 +26,16 @@
   ()
   )
 
+;; -----------------------------------------------------------------------------
+;; Method 100 — v-bobcat control-points writer.
+;; Reads root->root-prim->[opaque@+64] and writes 7 stride-80 vectors
+;; (L96..L102 = wheel/anchor positions) before chaining to wcar-base's m100.
+;; Decompiler can't type-prop the +64 chain (target struct unknown to all-types);
+;; wrapped Tier 2 mips2c. Body: game/mips2c/jakx_functions/wcar-bobcat.cpp.
+;; Cycle 101 (plan Cycle 6 part-2) 2026-05-10.
+;; -----------------------------------------------------------------------------
+(defmethod-mips2c "(method 100 v-bobcat)" 100 v-bobcat)
+
 ;; Method overrides (3 inspect, 65 build-collide-shape, 66 init-from-entity,
-;; 100 task-complete-hook, 115 update-shocks) deferred until wcar-base 65/115
-;; land and the L* static vectors are rebuilt.
+;; 115 update-shocks) deferred until wcar-base 65/115 land
+;; and the L* static vectors are rebuilt.

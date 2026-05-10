@@ -477,6 +477,8 @@ namespace plot_engine_torque_curve { extern void link(); }
 namespace estimate_eng_torque_from_gear { extern void link(); }
 // wcar-base.cpp port (see game/mips2c/jakx_functions/wcar-base.cpp)
 namespace method_115_wcar_base { extern void link(); }
+// wcar-bobcat.cpp port (see game/mips2c/jakx_functions/wcar-bobcat.cpp)
+namespace method_100_v_bobcat { extern void link(); }
 // net_player.cpp port (see game/mips2c/jakx_functions/net_player.cpp)
 namespace net_player_init_local { extern void link(); }
 // ripple.cpp port (see game/mips2c/jakx_functions/ripple.cpp)
@@ -957,6 +959,9 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      // wcar-base: shock-joint updater (method 115) — dense VU stack math + 4-wheel iteration.
      // See game/mips2c/jakx_functions/wcar-base.cpp.
      {"wcar-base", {jakx::method_115_wcar_base::link}},
+     // wcar-bobcat: control-points writer (method 100 v-bobcat) — opaque struct +64
+     // chain not in any all-types layout. See game/mips2c/jakx_functions/wcar-bobcat.cpp.
+     {"wcar-bobcat", {jakx::method_100_v_bobcat::link}},
      // net-player: BAD-PROLOGUE asm function (net-player-init-local) — process-spawn
      // :init handler called from net-game-mgr-method-52. See game/mips2c/jakx_functions/net_player.cpp.
      {"net-player", {jakx::net_player_init_local::link}},
