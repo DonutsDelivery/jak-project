@@ -16,13 +16,38 @@
 ;; wcar-base's size.
 ;;
 ;; Tiger has one extra override vs the other wcars: method 69 (->L37).
-;; Method overrides 3 (inspect), 69, 100, 115 are NOT ported - the bodies
-;; weren't captured in the decomp.
 ;; -----------------------------------------------------------------------------
 
 (deftype v-tiger (wcar-base)
   ()
   )
 
-;; Method overrides (3 inspect, 69, 100 task-complete-hook, 115 update-shocks)
-;; deferred until wcar-base 115 lands and the L* static vectors are rebuilt.
+;; -----------------------------------------------------------------------------
+;; Method 100 — v-tiger control-points writer.
+;; Same shape as the prior 5 sibling vehicles (bobcat/cougar/wolf/leopard/
+;; cheetah): reads root->root-prim->[opaque@+64] and writes 7 stride-80 vectors
+;; before chaining to wcar-base's m100. Static labels are L96..L102 here vs the
+;; other siblings' L95..L101 because v-tiger reserves L95 for the
+;; "skel-tiger-chassis" string used by m66.
+;; Body: game/mips2c/jakx_functions/wcar-tiger.cpp.
+;; Cycle 106 2026-05-10.
+;; -----------------------------------------------------------------------------
+(defmethod-mips2c "(method 100 v-tiger)" 100 v-tiger)
+
+;; -----------------------------------------------------------------------------
+;; Method 115 — v-tiger shock-joint quaternion updater (4-wheel iteration).
+;; NOVEL shape: differs from all prior 5 siblings.
+;; - Bobcat used quaternion-set! + normalize! + axis-angle! + mul!
+;; - Cougar/wolf/leopard/cheetah used quaternion-set! + normalize! + copy!
+;; - Tiger uses quaternion-axis-angle! + quaternion-copy! (no normalize, no mul)
+;;   plus an in-stack (-1740.8, -1740.8, -2048.0, -2048.0) scratch float array
+;;   that supplies a per-wheel constant scalar to a per-wheel write at
+;;   gp+4288+48*i. Translation is the verbatim mips2c auto-emit from
+;;   wcar-tiger_ir2.asm:2967-3099.
+;; Body: game/mips2c/jakx_functions/wcar-tiger.cpp.
+;; Cycle 106 2026-05-10.
+;; -----------------------------------------------------------------------------
+(defmethod-mips2c "(method 115 v-tiger)" 115 v-tiger)
+
+;; Method overrides (3 inspect, 66 init-from-entity, 69 task-complete-hook)
+;; deferred. m66 references *v-tiger-constants*; m69 a small return-int sig.
