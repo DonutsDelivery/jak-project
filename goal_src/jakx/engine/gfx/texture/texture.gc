@@ -695,7 +695,19 @@
        (set! (-> *level* level-default texture-page-dir 6 page) page)
        )
       (else
-        (set! (-> *texture-pool* allocate-func) texture-page-default-allocate)
+        ;; Cycle 90: previously this branch permanently switched allocate-func to
+        ;; default-allocate. In jakx that breaks subsequent dispatch — pages 1, 2, 3
+        ;; (small system pages with unhandled ids in the case table) hit this branch
+        ;; first, flip allocate-func, and force page-id=4 (size 94336, the
+        ;; level-default common page) onto the default-allocate path. That path
+        ;; uses pool->cur, which after method-12's seeding sits at #xff000
+        ;; (slot 16320), only ~64 slots from the m_textures[16384] hard ceiling.
+        ;; Page 4 then overflows the array → crash inside __pc-texture-upload-now.
+        ;; jak3 doesn't hit this because get-common-page-slot-by-id finds pages 1-3
+        ;; via the (>= s2-0 0) branch; jakx's texture-pool-method-18 stub always
+        ;; returns -1, sending those pages to else here. Without the permanent
+        ;; switch, common-boot-allocate stays as allocate-func and pages 4-12 keep
+        ;; routing to common-allocate via their case-id branches.
         (texture-page-default-allocate pool page heap page-id)
         )
       )
@@ -1388,6 +1400,23 @@
 (kmemclose)
 
 (defmethod texture-page-method-13 ((this texture-page) (mode tex-upload-mode))
+  "Upload a texture page to VRAM immediately (jak3 calls this upload-now!).
+   Cycle 90: jakx was missing the PC-port hook __pc-texture-upload-now
+   (jak3 texture.gc:1612-1615). Without it, the only upload path was the
+   PS2 dma-buffer-send-chain to #x1000a000 (VIF1 MMIO), which crashes on
+   PC because that address falls inside fake-mapped EE memory and dma-chcr
+   write does nothing useful — every prior attempt to dispatch from
+   relocate via texture-page-default-allocate / common-boot-allocate
+   crashed at addr=0x213300a020, which is the EE_base + 0x1000a020 offset
+   the chcr write hits. With the PC-port hook in place, C++ TexturePool
+   immediately registers m_textures[tex.dest[mip_idx]] for every texture
+   in the page, and the DMA send is skipped under PC_PORT."
+  ;; PC-port: hand the page to the C++ TexturePool synchronously. This
+  ;; populates m_textures[tex.dest[mip_idx]] so Sprite3 lookup_texture
+  ;; finds particle textures rather than logging 'Failed to find ...'.
+  (#when PC_PORT
+    (__pc-texture-upload-now this mode)
+    )
   (let ((gp-0 *txt-dma-list*))
     (let ((v1-0 gp-0))
       (set! (-> v1-0 base) (-> v1-0 data))
@@ -1402,8 +1431,12 @@
         (set! (-> (the-as (pointer uint64) a0-7) 1) (the-as uint 0))
         (set! (-> v1-6 base) (&+ a0-7 16))
         )
-      (dma-buffer-send-chain (the-as dma-bank-source #x1000a000) gp-0)
-      (dma-sync (the-as pointer #x1000a000) 0 0)
+      ;; PC build: VIF1 MMIO write would crash. Skip — PC-port hook above
+      ;; already did the equivalent work.
+      (#unless PC_PORT
+        (dma-buffer-send-chain (the-as dma-bank-source #x1000a000) gp-0)
+        (dma-sync (the-as pointer #x1000a000) 0 0)
+        )
       s5-0
       )
     )
@@ -1667,11 +1700,17 @@
    stub left *texture-page-dir* entries[id].page = #f, so every lookup-texture-by-id-fast
    for sparticle adgif TBP missed -> Sprite3 'Failed to find texture at 5120' warning
    every frame in krastrn. This version JUST populates *texture-page-dir* entries and
-   the per-entry link buffer. We do NOT call texture-page-default-allocate here because
-   that crashed during early tpage-1 link (address 0x213300a020 — *texture-pool*
-   uninitialized or has half-initialized allocate-func vtable at link time). The actual
-   VRAM allocation + TextureUploadHandler upload should happen via login-level (which
-   walks *level-texture-page-translate* and dispatches texture-page-login)."
+   the per-entry link buffer.
+   Cycle 90 attempted full dispatch via *texture-pool* allocate-func, but pages 1-3
+   route through default-allocate (common-boot-allocate else branch) which calls
+   method-13 -> __pc-texture-upload-now -> handle_upload_now. The resulting m_textures
+   slot occupancy collides with later (texture-relocate) calls during background level
+   load, hitting GpuTexture::remove_slot 'it != slots.end()' assertion. Real fix is
+   to port jak3's add-level-tpage-dma + upload-vram-pages-pris-pc per-frame texture
+   upload pipeline so level pages get registered to TexturePool with their correct
+   TBP values, not via the boot-time default-allocate path that overlaps with
+   subsequent goal texture-relocate calls. Until that lands, keep the minimal page-dir
+   population so sparticle TBP lookup at least sees the page header."
   (cond
     ((or (not this) (not (file-info-correct-version? (-> this info) (file-kind tpage) 0)))
      (the-as texture-page #f)
