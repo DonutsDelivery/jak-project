@@ -353,15 +353,15 @@
   (set! (-> this entity) arg0)
   (set! (-> this root) (new 'process 'trsqv))
   (process-drawable-from-entity! this arg0)
+  ;; Cycle 79: skel-grp lookup SUCCEEDS (verified: returns valid skeleton-group
+  ;; "skel-eco-green" :length 0 @ #x13f5554) but initialize-skeleton OR
+  ;; subsequent ja-post crashes at 0x2123000000. Disabling both for now to
+  ;; keep boot stable. Cycle 80 needs to either (a) port initialize-skeleton's
+  ;; skel-grp consumption path properly, or (b) allocate process.draw manually
+  ;; with a minimal draw-control. Process spawns alive but invisible.
   (let ((skel-grp (art-group-get-by-name *level* "skel-eco-green" (the-as (pointer level) #f))))
-    (format 0 "[eco-green init] aid=~X skel-grp=~A~%" (-> arg0 aid) skel-grp)
-    (cond
-      (skel-grp
-       (initialize-skeleton this (the-as skeleton-group skel-grp) (the-as pair 0))
-       (go (method-of-object this running)))
-      (else
-       (format 0 "[eco-green init] aid=~X SKIP go-running (no skel-grp; would crash ja-post)~%" (-> arg0 aid)))
-      )
+    (format 0 "[eco-green init] aid=~X skel-grp=~A (skipping init-skeleton/go-running until Cycle 80)~%"
+            (-> arg0 aid) skel-grp)
     )
   (none)
   )
