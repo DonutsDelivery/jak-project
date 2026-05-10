@@ -495,6 +495,9 @@ namespace method_115_v_cheetah { extern void link(); }
 // wcar-tiger.cpp port (see game/mips2c/jakx_functions/wcar-tiger.cpp)
 namespace method_100_v_tiger { extern void link(); }
 namespace method_115_v_tiger { extern void link(); }
+// wcar-bear.cpp port (see game/mips2c/jakx_functions/wcar-bear.cpp)
+namespace method_100_v_bear { extern void link(); }
+namespace method_115_v_bear { extern void link(); }
 // net_player.cpp port (see game/mips2c/jakx_functions/net_player.cpp)
 namespace net_player_init_local { extern void link(); }
 // ripple.cpp port (see game/mips2c/jakx_functions/ripple.cpp)
@@ -1000,6 +1003,14 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      // (-1740.8, -1740.8, -2048.0, -2048.0) scratch float array. Verbatim mips2c
      // auto-emit translation. See wcar-tiger.cpp.
      {"wcar-tiger", {jakx::method_100_v_tiger::link, jakx::method_115_v_tiger::link}},
+     // wcar-bear: methods 100 + 115. m100 = standard 7-stride-80 control-vector
+     // writer (labels L96..L102; L95 reserved for "skel-bear-chassis" string).
+     // m115 = bobcat-extended-variant: quaternion-set! + axis-angle! + normalize!
+     // + mul! per wheel, but with a conditional front-wheel f0 negation
+     // (slti s4,2 → -1.0 * f0) and a sp+64 scratch (-1820.4444, -1820.4444,
+     // 0.0, 0.0) constants block (vs bobcat's (0,0,1820.45,1820.45) layout).
+     // Verbatim mips2c auto-emit from wcar-bear_ir2.asm:2971-3127.
+     {"wcar-bear", {jakx::method_100_v_bear::link, jakx::method_115_v_bear::link}},
      // net-player: BAD-PROLOGUE asm function (net-player-init-local) — process-spawn
      // :init handler called from net-game-mgr-method-52. See game/mips2c/jakx_functions/net_player.cpp.
      {"net-player", {jakx::net_player_init_local::link}},

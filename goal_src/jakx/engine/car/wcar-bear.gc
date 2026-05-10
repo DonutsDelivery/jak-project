@@ -14,18 +14,45 @@
 ;; (method-set! ...) calls are visible, no actual lisp bodies). The deftype
 ;; itself has no extra fields: flag/size assertions say #x13c0 = parent
 ;; wcar-base's size.
-;;
-;; Method overrides 3 (inspect), 66, 100, 115 are NOT ported - they are
-;; deferred along with the matching wcar-base methods, and depend on
-;; anonymous static labels L1/L33/L34/L103 that live inside this object
-;; file and weren't captured in the decomp. Boot does not dispatch to these
-;; overrides today.
 ;; -----------------------------------------------------------------------------
 
 (deftype v-bear (wcar-base)
   ()
   )
 
-;; Method overrides (3 inspect, 66 init-from-entity, 100 task-complete-hook,
-;; 115 update-shocks) deferred until wcar-base 115 lands and the L* static
-;; vectors are rebuilt.
+;; -----------------------------------------------------------------------------
+;; Method 100 — v-bear control-points writer.
+;; Same shape as the prior 6 sibling vehicles (bobcat/cougar/wolf/leopard/
+;; cheetah/tiger): reads root->root-prim->[opaque@+64] and writes 7 stride-80
+;; vectors before chaining to wcar-base's m100. Static labels are L96..L102
+;; here (matching tiger's layout) because L95 is reserved for the
+;; "skel-bear-chassis" string used by m66.
+;; Body: game/mips2c/jakx_functions/wcar-bear.cpp.
+;; Cycle 107 2026-05-10.
+;; -----------------------------------------------------------------------------
+(defmethod-mips2c "(method 100 v-bear)" 100 v-bear)
+
+;; -----------------------------------------------------------------------------
+;; Method 115 — v-bear shock-joint quaternion updater (4-wheel iteration).
+;; Bobcat-extended variant — uses the same quaternion-set! + normalize! +
+;; axis-angle! + mul! shape as bobcat, but with TWO key differences:
+;;
+;;   (a) Conditional front-wheel f0 negation. For wheel indices 0 and 1
+;;       (front wheels, slti s4, 2), the read at gp+248[i] is negated by
+;;       multiplying by -1.0 (lui -16512 / mtc1 / mul.s) before being passed
+;;       to quaternion-set!. Rear wheels skip the negation. This is a
+;;       per-wheel sign flip absent from bobcat/tiger.
+;;
+;;   (b) Scratch float constants at sp+64 hold (-1820.4444, -1820.4444,
+;;       0.0, 0.0) — vs bobcat's (0,0,1820.45,1820.45) layout. Reads the
+;;       first two slots into f30 for use in the axis-angle component.
+;;
+;; Translation is the verbatim mips2c auto-emit from wcar-bear_ir2.asm:2971-3127.
+;; Body: game/mips2c/jakx_functions/wcar-bear.cpp.
+;; Cycle 107 2026-05-10.
+;; -----------------------------------------------------------------------------
+(defmethod-mips2c "(method 115 v-bear)" 115 v-bear)
+
+;; Method overrides (3 inspect, 66 init-from-entity) deferred. m66 references
+;; *v-bear-constants* — needs the constants struct + init-from-entity flow
+;; ported in a follow-up cycle.
