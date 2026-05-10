@@ -71,6 +71,67 @@
 
 (kmemclose)
 
+;; Cycle 83: port the particle-adgif-cache from jak3 sparticle-launcher.gc:159-182.
+;; Without it, mips2c particle_adgif::execute reads 0(*particle-adgif-cache*) where
+;; the symbol is still #f → SEGFAULT at 0x2123000000 (the #f sentinel address).
+;; Deftype matches jakx all-types.gc (size #x19b0, byte-identical to jak3).
+(deftype particle-adgif-cache (basic)
+  ((used     int32)
+   (last     uint16)
+   (lastgif  adgif-shader)
+   (tidhash  uint16        80)
+   (spadgif  adgif-shader  80 :inline)
+   )
+  )
+
+(kmemopen global "part-adgif-cache")
+
+(define *particle-adgif-cache* (new 'global 'particle-adgif-cache))
+
+(set! (-> *particle-adgif-cache* used) 0)
+
+(kmemclose)
+
+;; Cycle 83: real particle-adgif-cache-flush body. Overrides the empty stub in
+;; jakx-stubs-late.gc (load order: stubs-late=169, sparticle-launcher=230 in
+;; goal_src/jakx/dgos/game.gd, so this redefinition is the final binding).
+(defun particle-adgif-cache-flush ()
+  (set! (-> *particle-adgif-cache* used) 0)
+  (set! (-> *particle-adgif-cache* last) (the-as uint 0))
+  0
+  (none)
+  )
+
+;; Cycle 83: port particle-setup-adgif from jak3 sparticle-launcher.gc:133-157.
+;; Called by mips2c particle_adgif::execute via jalr cache.particle_setup_adgif.
+;; Without it that jalr fires with addr=0 → ASSERT(addr) fail in jalr().
+(defun particle-setup-adgif ((arg0 adgif-shader) (arg1 int))
+  (let ((a1-1 (lookup-texture-by-id-fast (the-as texture-id arg1)))
+        (s5-0 #f)
+        )
+    (when (not a1-1)
+      (set! a1-1 (get-texture common-white common))
+      (set! s5-0 #t)
+      )
+    (set! (-> arg0 tex1) (the-as uint (new 'static 'gs-tex1 :mmag #x1 :mmin #x1)))
+    ;; jak3 wrote (-> arg0 tex0 tfx) = 0; in jakx tex0 is uint64. Clear bits 35-36 (tfx).
+    (set! (-> arg0 tex0) (logand (-> arg0 tex0) (the-as uint #xFFFFFFE7FFFFFFFF)))
+    (adgif-shader<-texture! arg0 a1-1)
+    (set! (-> arg0 prims 1) (gs-reg64 tex0-1))
+    (set! (-> arg0 prims 3) (the-as gs-reg64 (logior arg1 20)))
+    (set! (-> arg0 prims 5) (gs-reg64 miptbp1-1))
+    (set! (-> arg0 clamp-reg) (the-as uint (gs-reg64 zbuf-1)))
+    (set! (-> arg0 prims 9) (gs-reg64 alpha-1))
+    (if s5-0
+        (logior! (-> arg0 link-test) (link-test-flags backup-sprite-tex))
+        )
+    )
+  (set! (-> arg0 alpha) (the-as uint (new 'static 'gs-miptbp :tbp1 #x44)))
+  (set! (-> arg0 clamp) (the-as uint (new 'static 'gs-clamp :minu #x13 :minv #x101)))
+  0
+  (none)
+  )
+
 ;; jakx Cycle 81: bind mips2c registrations to GOAL function-name slots.
 ;; The C++ side (game/mips2c/jakx_functions/sparticle_launcher.cpp) registers
 ;; these via gLinkedFunctionTable.reg, but without (def-mips2c) the GOAL

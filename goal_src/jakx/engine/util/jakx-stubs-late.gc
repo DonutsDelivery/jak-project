@@ -1013,6 +1013,7 @@
 (defun emerc-vu1-init-buffers () (none))
 (defun generic-vu1-init-buffers () (none))
 
-;; particle-adgif-cache-flush is define-extern'd in sparticle-launcher-h.gc with
-;; no body; called every frame by display-frame-finish -> null fn dispatch.
+;; particle-adgif-cache-flush — early empty stub. Real body in
+;; sparticle-launcher.gc (Cycle 83) overrides this at load-time line 230,
+;; after *particle-adgif-cache* has been allocated.
 (defun particle-adgif-cache-flush () (none))
