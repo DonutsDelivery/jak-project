@@ -66,7 +66,9 @@
 
 
 (deftype prototype-tie (drawable-inline-array)
-  ()
+  ((data  tie-fragment  1  :inline  :offset 32)
+   (pad   uint32)
+   )
   )
 
 (deftype tie-matrix (structure)
@@ -175,6 +177,7 @@
    (wait-from-spr               uint32)
    (wait-to-spr                 uint32)
    (mood                        mood-context)
+   (wide-level-index            uint32)
    (last                        uint32      16 :offset 416)
    (next                        uint32      16)
    (count                       uint16      16)
@@ -308,4 +311,4 @@
    )
   )
 
-(define *instance-tie-work-copy* (the-as object #f))
+(define *instance-tie-work-copy* (the-as instance-tie-work #f))

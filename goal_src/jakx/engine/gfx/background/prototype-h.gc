@@ -83,12 +83,15 @@
   )
 
 
+(declare-type prototype-tie drawable-inline-array)
+
 (deftype prototype-bucket-tie (prototype-bucket)
   ((next                         uint32   12)
    (count                        uint16   12)
    (frag-count                   uint8    4)
    (index-start                  uint8    4)
    (base-qw                      uint16   4)
+   (tie-geom                     prototype-tie  4  :offset 16)
    (tie-rvanish                  float)
    (tie-vanish-far               float)
    (envmap-rfade                 float)
@@ -168,7 +171,8 @@
 
 
 (deftype prototype-array-tie (array)
-  ()
+  ((array-data  prototype-bucket-tie  :dynamic  :offset 16)
+   )
   (:methods
     (prototype-array-tie-method-9 (_type_) none)
     )

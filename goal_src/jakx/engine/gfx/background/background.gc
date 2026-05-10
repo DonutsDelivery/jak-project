@@ -136,4 +136,7 @@
 
 ;; DECOMP BEGINS
 
+;; SCAFFOLDING -- ported from jak3 background.gc:126; needed by tie-methods draw method
+(define *background-work* (new 'global 'background-work))
+
 ;; ERROR: top level function was not converted to expressions. Cannot decompile.

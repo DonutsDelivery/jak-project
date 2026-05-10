@@ -68,22 +68,261 @@
 
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 
-;; ERROR: failed type prop at 1: Could not figure out load: (set! v1 (l.w (+ v1 1092)))
-;; WARN: Return type mismatch none vs int.
-(defmethod draw ((a0-0 drawable-tree-instance-tie))
-  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — stubbed to no-op
+(defun draw-drawable-tree-instance-tie ((arg0 drawable-tree-instance-tie) (arg1 level))
+  (when (logtest? (vu1-renderer-mask
+                    hfrag-scissor
+                    tfrag
+                    tie-scissor
+                    tie
+                    etie
+                    etie-scissor
+                    shrub-vanish
+                    tfrag-trans
+                    tie-scissor-trans
+                    tie-trans
+                    )
+                  (-> *display* vu1-enable-user)
+                  )
+    (set! (-> *instance-tie-work* wind-vectors) (-> arg0 prototypes wind-vectors))
+    (let ((gp-0 (+ (-> arg0 length) -1)))
+      (when (nonzero? gp-0)
+        (dotimes (s5-0 gp-0)
+          (let* ((v1-9 (-> arg0 data s5-0))
+                 (a0-7 (-> arg0 data (+ s5-0 1)))
+                 (a1-2 (/ (-> (the-as drawable-inline-array-node v1-9) data 0 id) 8))
+                 (a0-9 (/ (-> (the-as drawable-inline-array-node a0-7) data 0 id) 8))
+                 (a1-4 (+ a1-2 #x3800 #x70000000))
+                 (a0-11 (+ a0-9 #x3800 #x70000000))
+                 )
+            (draw-node-cull
+              (the-as pointer a0-11)
+              (the-as pointer a1-4)
+              (-> (the-as drawable-inline-array-node v1-9) data)
+              (-> (the-as drawable-inline-array-node v1-9) length)
+              )
+            )
+          )
+        )
+      (let* ((s1-0 (-> arg0 data gp-0))
+             (gp-1 (-> arg0 prototypes prototype-array-tie))
+             (s5-1 (-> gp-1 length))
+             (s4-0 (-> *display* frames (-> *display* on-screen) global-buf))
+             (s0-0 (-> s4-0 base))
+             (s2-1 (&- (-> s4-0 end) (the-as uint (* (-> arg0 prototypes prototype-max-qwc) 16))))
+             )
+        (set! (-> *instance-tie-work* buffer-start) (the-as uint (-> s4-0 base)))
+        (set! (-> *instance-tie-work* buffer-end) (the-as uint s2-1))
+        (when *debug-segment*
+          (if (>= (the-as uint s0-0) (the-as uint s2-1))
+              (format *stdcon* "out of tie memory~%")
+              )
+          )
+        (when (< (the-as uint s0-0) (the-as uint s2-1))
+          (dotimes (v1-29 s5-1)
+            (let ((a0-20 (-> gp-1 array-data v1-29)))
+              (dotimes (a1-6 3)
+                (set! (-> a0-20 next-clear a1-6) (the-as uint128 0))
+                (set! (-> a0-20 count-clear a1-6) (the-as uint 0))
+                )
+              )
+            )
+          (let* ((s2-2 (&+ s1-0 32))
+                 (s0-1 (+ (/ (-> s2-2 id) 8) #x3800 #x70000000))
+                 (s1-1 (-> (the-as drawable-inline-array-instance-tie s1-0) length))
+                 )
+            (when (nonzero? s1-1)
+              (let* ((v1-37 (logand (the-as int *gsf-buffer*) 8191))
+                     (v1-39
+                       (the-as
+                         object
+                         (logand (the-as int (&- (logand (the-as int (&-> gp-1 data -640)) 8191) (the-as uint v1-37))) 8191)
+                         )
+                       )
+                     )
+                (set! *instance-tie-work-copy* (the-as instance-tie-work (+ (the-as int *gsf-buffer*) (the-as int v1-39))))
+                )
+              (quad-copy! (the-as pointer *instance-tie-work-copy*) (the-as pointer *instance-tie-work*) 35)
+              (set! (-> *instance-tie-work-copy* wait-to-spr) (the-as uint 0))
+              (set! (-> *instance-tie-work-copy* wait-from-spr) (the-as uint 0))
+              (set! (-> *instance-tie-work-copy* tfrag-dists) (the-as uint (-> arg1 bsp tfrag-closest)))
+              (set! (-> *instance-tie-work-copy* alpha-dists) (the-as uint (-> arg1 bsp alpha-closest)))
+              (set! (-> *instance-tie-work-copy* water-dists) (the-as uint (-> arg1 bsp water-closest)))
+              ;; SCAFFOLDING -- asm sibling, commented out matching jak3 (TIE3 C++ renderer handles drawing)
+              ;; (draw-inline-array-instance-tie (the-as pointer s0-1) (the-as (inline-array instance-tie) s2-2) s1-1 s4-0)
+              0
+              (let ((v1-62 (-> *instance-tie-work-copy* min-dist quad)))
+                (set! (-> *instance-tie-work* min-dist quad) v1-62)
+                )
+              (if (and *debug-segment* (< (the-as int (-> *instance-tie-work* buffer-end)) (the-as int (-> s4-0 base))))
+                  (format *stdcon* "out of tie memory~%")
+                  )
+              )
+            )
+          (dotimes (v1-69 16)
+            (set! (-> *prototype-tie-work* last v1-69) (the-as uint 0))
+            (set! (-> *prototype-tie-work* next v1-69) (the-as uint 0))
+            (set! (-> *prototype-tie-work* count v1-69) (the-as uint 0))
+            )
+          (when (>= (the-as int (-> *instance-tie-work* buffer-end)) (the-as int (-> s4-0 base)))
+            (set! (-> *prototype-tie-work* wait-to-spr) (the-as uint 0))
+            (set! (-> *prototype-tie-work* wait-from-spr) (the-as uint 0))
+            ;; SCAFFOLDING -- asm sibling, commented out matching jak3
+            ;; (draw-inline-array-prototype-tie-asm s4-0 s5-1 gp-1)
+            0
+            )
+          (cond
+            ((< (the-as int (-> *instance-tie-work* buffer-end)) (the-as int (-> s4-0 base)))
+             (if *debug-segment*
+                 (format *stdcon* "out of tie memory~%")
+                 )
+             (set! (-> s4-0 base) (the-as pointer (-> *instance-tie-work* buffer-start)))
+             )
+            (else
+              (instance-tie-patch-buckets s4-0 arg1)
+              )
+            )
+          (dotimes (s3-1 2)
+            (let ((s2-3 (the-as object (-> *level* wide-level s3-1))))
+              (when (the-as level s2-3)
+                (dotimes (v1-99 16)
+                  (set! (-> *prototype-tie-work* last v1-99) (the-as uint 0))
+                  (set! (-> *prototype-tie-work* next v1-99) (the-as uint 0))
+                  (set! (-> *prototype-tie-work* count v1-99) (the-as uint 0))
+                  )
+                (set! (-> *prototype-tie-work* wide-level-index) (the-as uint (-> (the-as level s2-3) index)))
+                (when (>= (the-as int (-> *instance-tie-work* buffer-end)) (the-as int (-> s4-0 base)))
+                  (set! (-> *prototype-tie-work* wait-to-spr) (the-as uint 0))
+                  (set! (-> *prototype-tie-work* wait-from-spr) (the-as uint 0))
+                  ;; SCAFFOLDING -- asm sibling, commented out matching jak3
+                  ;; (draw-inline-array-prototype-tie-shared-asm)
+                  0
+                  )
+                (cond
+                  ((< (the-as int (-> *instance-tie-work* buffer-end)) (the-as int (-> s4-0 base)))
+                   (if *debug-segment*
+                       (format *stdcon* "out of tie memory~%")
+                       )
+                   (set! (-> s4-0 base) (the-as pointer (-> *instance-tie-work* buffer-start)))
+                   )
+                  (else
+                    (instance-tie-patch-buckets s4-0 (the-as level s2-3))
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+  0
+  (none)
+  )
+
+(defmethod draw ((this drawable-tree-instance-tie))
+  "Draw the drawable, and typically its children."
+  (let ((v1-1 (-> *background-work* tie-tree-count))
+        (a1-3 (-> *level* draw-level *draw-index*))
+        )
+    (set! (-> *background-work* tie-trees v1-1) this)
+    (set! (-> *background-work* tie-levels v1-1) a1-3)
+    )
+  (+! (-> *background-work* tie-tree-count) 1)
   0
   )
 
-;; ERROR: failed type prop at 26: Could not figure out load: (set! t0 (l.hu (+ t0 124)))
-;; WARN: Return type mismatch none vs int.
-(defmethod collect-stats ((a0-0 drawable-tree-instance-tie))
-  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — stubbed to no-op
+(defmethod collect-stats ((this drawable-tree-instance-tie))
+  "Collect triangle/perf statistics for rendering."
+  (when (logtest? (vu1-renderer-mask
+                    hfrag-scissor
+                    tfrag
+                    tie-scissor
+                    etie
+                    etie-scissor
+                    shrub-vanish
+                    tfrag-trans
+                    tie-scissor-trans
+                    etie-scissor-trans
+                    tfrag-water
+                    tie-scissor-water
+                    )
+                  (-> *display* vu1-enable-user)
+                  )
+    (-> this data (+ (-> this length) -1))
+    (let ((v1-9 (-> this prototypes prototype-array-tie)))
+      (dotimes (a0-1 (-> v1-9 length))
+        (let ((a1-4 (-> v1-9 array-data a0-1)))
+          (when (logtest? (-> *display* vu1-enable-user) (vu1-renderer-mask etie-scissor))
+            (let ((a2-4 0)
+                  (a3-0 2)
+                  )
+              (while (>= a3-0 a2-4)
+                (let ((t0-2 (-> a1-4 generic-count a2-4))
+                      (t2-0 (-> a1-4 tie-geom (+ a2-4 1)))
+                      )
+                  (when (nonzero? t0-2)
+                    (let ((t1-4 (the-as object (-> t2-0 data)))
+                          (t2-1 (-> t2-0 length))
+                          )
+                      (+! (-> *terrain-stats* tie-generic groups) 1)
+                      (+! (-> *terrain-stats* tie-generic fragments) t2-1)
+                      (+! (-> *terrain-stats* tie-generic instances) t0-2)
+                      (dotimes (t3-9 t2-1)
+                        (let ((t5-0 (* (-> (the-as tie-fragment t1-4) debug num-tris) t0-2))
+                              (t4-7 (* (-> (the-as tie-fragment t1-4) debug num-dverts) t0-2))
+                              )
+                          (+! (-> *terrain-stats* tie-generic tris) t5-0)
+                          (+! (-> *terrain-stats* tie-generic dverts) t4-7)
+                          )
+                        (set! t1-4 (&+ (the-as tie-fragment t1-4) 64))
+                        )
+                      )
+                    )
+                  )
+                (+! a2-4 1)
+                )
+              )
+            )
+          (when (logtest? (-> *display* vu1-enable-user) (vu1-renderer-mask etie))
+            (let ((a2-11 (-> a1-4 vanish-count))
+                  (t0-4 (-> a1-4 tie-geom 3))
+                  )
+              (when (nonzero? a2-11)
+                (let ((a3-2 (the-as object (-> t0-4 data)))
+                      (t0-5 (-> t0-4 length))
+                      )
+                  (+! (-> *terrain-stats* tie-vanish groups) 1)
+                  (+! (-> *terrain-stats* tie-vanish fragments) t0-5)
+                  (+! (-> *terrain-stats* tie-vanish instances) a2-11)
+                  (dotimes (t1-15 t0-5)
+                    (let ((t3-10 (* (-> (the-as tie-fragment a3-2) debug num-tris) a2-11))
+                          (t2-9 (* (-> (the-as tie-fragment a3-2) debug num-dverts) a2-11))
+                          )
+                      (+! (-> *terrain-stats* tie-vanish tris) t3-10)
+                      (+! (-> *terrain-stats* tie-vanish dverts) t2-9)
+                      )
+                    (set! a3-2 (&+ (the-as tie-fragment a3-2) 64))
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+      )
+    )
   0
   )
 
-;; ERROR: failed type prop at 13: Could not figure out load: (set! a0 (l.wu (+ v1 12)))
-(defmethod debug-draw ((a0-0 drawable-tree-instance-tie))
-  (none) ;; JAKX BOOT-PATH 2026-05-05: was (break!) — stubbed to no-op
+(defmethod debug-draw ((this drawable-tree-instance-tie))
+  "Debug-draw a drawable and its children."
+  (-> this data (+ (-> this length) -1))
+  (let* ((gp-0 (-> this prototypes prototype-array-tie))
+         (s5-0 (-> gp-0 length))
+         )
+    (dotimes (s4-0 s5-0)
+      (debug-draw (-> gp-0 array-data s4-0 tie-geom 0))
+      )
+    )
   0
   )
