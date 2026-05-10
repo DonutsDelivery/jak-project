@@ -20327,6 +20327,7 @@
 
   
 (declare-type collide-hash-fragment-array array)
+(declare-type prototype-tie drawable-inline-array) ;; added 2026-05-10 (cycle 67) — fwd-ref for tie-geom field below
 (deftype prototype-bucket-tie (prototype-bucket)
   ((next                        uint32                      12       :offset-assert 64) ;; guessed by decompiler
    (count                       uint16                      12       :offset-assert 112) ;; guessed by decompiler
@@ -20339,7 +20340,7 @@
    (envmap-fade-far             float                                :offset-assert 164)
    (envmap-shader               adgif-shader                         :offset-assert 168)
    (tint-color                  uint32                               :offset-assert 172)
-   (collide-hash-fragment-array uint32                               :offset-assert 176) ;; TODO collide-hash-fragment-array — forward ref at L30710
+   (collide-hash-fragment-array collide-hash-fragment-array          :offset-assert 176) ;; promoted 2026-05-10 (cycle 67) — type defined later, jak3-equivalent
    (tie-colors                  time-of-day-palette                  :offset-assert 180) ;; guessed by decompiler
    (data                        uint32                      :dynamic :offset-assert 184) ;; guessed by decompiler
    (color-index-qwc             uint32                      :dynamic :offset 184) ;; guessed by decompiler
@@ -20407,6 +20408,8 @@
    (vanish-count                uint16                               :offset 134)
    (next-clear                  uint128                     3        :offset 64) ;; guessed by decompiler
    (count-clear                 uint64                      3        :offset 112) ;; guessed by decompiler
+   ;; added 2026-05-10 (cycle 67) — jak3-equivalent — gives type to (-> bucket-tie 16) load
+   (tie-geom                    prototype-tie               4        :offset 16 :score 1)
    )
   :method-count-assert 9
   :size-assert         #xb8
@@ -20418,7 +20421,8 @@
 
   
 (deftype prototype-array-tie (array)
-  ()
+  ((array-data prototype-bucket-tie :dynamic :offset 16) ;; jak3-equivalent (cycle 67) — gives type to indexed array slots
+   )
   :method-count-assert 10
   :size-assert         #x10
   :flag-assert         #xa00000010
