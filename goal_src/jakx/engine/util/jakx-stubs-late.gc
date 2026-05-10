@@ -742,9 +742,19 @@
 ;; actor is filtered out, so entity-links-array stays empty and the per-frame
 ;; auto-spawn dispatcher has nothing to walk. As actor classes get ported into
 ;; goal_src/jakx/levels/, add their etype to the cond branches.
+;; Forward type decls — net-training-obs.o loads after this file in GAME.CGO,
+;; but the type-symbols must be visible at compile time of bsp-actor-type-allowed?.
+;; The types themselves resolve at runtime once net-training-obs.o is linked in.
+(declare-type training-marker process-drawable)
+(declare-type training-wall process-drawable)
+(declare-type training-bollard process-drawable)
+
 (defun bsp-actor-type-allowed? ((et type))
   (cond
     ((zero? (the-as int et)) #f)
+    ((= et training-marker) #t)
+    ((= et training-wall) #t)
+    ((= et training-bollard) #t)
     (else #f)))
 
 ;; Minimal port of jak3 entity.gc:1652 bsp-header.birth method.
@@ -783,6 +793,7 @@
                         (logand (-> bsp actor-birth-order i) 8191)
                         i))
                (actor (-> bsp actors data idx actor)))
+          (format 0 "[bsp-init-actors!] actor[~D] etype=~A~%" i (-> actor etype))
           (when (bsp-actor-type-allowed? (-> actor etype))
             (+! allowed-count 1)
             ;; Grab the next empty slot from the entity-links-array.

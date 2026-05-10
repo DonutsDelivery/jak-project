@@ -1,0 +1,164 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; Ported from decompiler_out/jakx/net-training-obs_disasm.gc.
+;; training-bollard, training-marker, training-wall — krastrn tutorial obstacles.
+;;
+;; Per session-7 level-DGO type-registration pitfall: types must be in
+;; GAME.CGO (not KRASTRN.DGO) — level-DGO loaded .o files do not register
+;; deftypes. So this file is wired into goal_src/jakx/dgos/game.gd after
+;; atoll-obs.o, mirroring the same pattern.
+;;
+;; defskelgroup forms from the decomp output are omitted: skel-* art-group
+;; elements live in KRASTRN.DGO art-groups (training-marker-ag.go,
+;; training-wall-ag.go, etc.) and are not available at compile time. We use
+;; runtime art-group-get-by-name lookup inside init-from-entity! instead.
+;;
+;; Curated jakx method-name renames vs decomp regen-names:
+;;   level-group-method-22  -> art-group-get-by-name      (level-h.gc:477)
+;;   process-drawable-method-42 -> initialize-skeleton    (game-h.gc:133)
+;; The decomp body also calls collide-shape-method-46 directly — that one
+;; was ported by name in commit abb0982cf (jakx-stubs-late.gc).
+
+;; ---------------------------------------------------------------------------
+;; training-bollard
+;; ---------------------------------------------------------------------------
+
+(deftype training-bollard (process-drawable)
+  ()
+  (:state-methods
+    idle
+    )
+  )
+
+(defstate idle (training-bollard)
+  :virtual #t
+  :code (behavior ()
+    (loop (suspend))
+    )
+  :post ja-post
+  )
+
+(defmethod init-from-entity! ((this training-bollard) (arg0 entity-actor))
+  (logior! (-> this mask) (process-mask actor-pause))
+  (let ((s4-0 (new 'process 'collide-shape this (collide-list-enum hit-by-others)))
+        )
+    (let ((v1-2 (new 'process 'collide-shape-prim-mesh s4-0 (the-as uint 0) (the-as uint 0))))
+      (set! (-> v1-2 prim-core collide-as) (collide-spec obstacle))
+      (set! (-> v1-2 prim-core action) (collide-action solid))
+      (set! (-> v1-2 transform-index) 3)
+      (set-vector! (-> v1-2 local-sphere) 0.0 20480.0 0.0 21299.2)
+      (set! (-> s4-0 total-prims) (the-as uint 1))
+      (set! (-> s4-0 root-prim) v1-2)
+      )
+    (set! (-> s4-0 nav-radius) (* 0.75 (-> s4-0 root-prim local-sphere w)))
+    (let ((v1-5 (-> s4-0 root-prim)))
+      (set! (-> s4-0 backup-collide-as) (-> v1-5 prim-core collide-as))
+      (set! (-> s4-0 backup-collide-with) (-> v1-5 prim-core collide-with))
+      )
+    (set! (-> this root) s4-0)
+    )
+  (process-drawable-from-entity! this arg0)
+  (let ((skel-grp (art-group-get-by-name *level* "skel-training-bollard" (the-as (pointer level) #f))))
+    (when skel-grp
+      (initialize-skeleton this (the-as skeleton-group skel-grp) (the-as pair 0))
+      )
+    )
+  (collide-shape-method-46 (the-as collide-shape (-> this root)))
+  (go (method-of-object this idle))
+  )
+
+;; ---------------------------------------------------------------------------
+;; training-marker
+;; ---------------------------------------------------------------------------
+
+(deftype training-marker (process-drawable)
+  ()
+  (:state-methods
+    idle
+    )
+  )
+
+(defstate idle (training-marker)
+  :virtual #t
+  :code (behavior ()
+    (loop (suspend))
+    )
+  :post ja-post
+  )
+
+(defmethod init-from-entity! ((this training-marker) (arg0 entity-actor))
+  (logior! (-> this mask) (process-mask actor-pause))
+  (let ((s4-0 (new 'process 'collide-shape this (collide-list-enum hit-by-others)))
+        )
+    (let ((v1-2 (new 'process 'collide-shape-prim-mesh s4-0 (the-as uint 0) (the-as uint 0))))
+      (set! (-> v1-2 prim-core action) (collide-action solid))
+      (set! (-> v1-2 transform-index) 3)
+      (set-vector! (-> v1-2 local-sphere) 0.0 0.0 0.0 4096.0)
+      (set! (-> s4-0 total-prims) (the-as uint 1))
+      (set! (-> s4-0 root-prim) v1-2)
+      )
+    (set! (-> s4-0 nav-radius) (* 0.75 (-> s4-0 root-prim local-sphere w)))
+    (let ((v1-5 (-> s4-0 root-prim)))
+      (set! (-> s4-0 backup-collide-as) (-> v1-5 prim-core collide-as))
+      (set! (-> s4-0 backup-collide-with) (-> v1-5 prim-core collide-with))
+      )
+    (set! (-> this root) s4-0)
+    )
+  (process-drawable-from-entity! this arg0)
+  (let ((skel-grp (art-group-get-by-name *level* "skel-training-marker" (the-as (pointer level) #f))))
+    (when skel-grp
+      (initialize-skeleton this (the-as skeleton-group skel-grp) (the-as pair 0))
+      )
+    )
+  (collide-shape-method-46 (the-as collide-shape (-> this root)))
+  (go (method-of-object this idle))
+  )
+
+;; ---------------------------------------------------------------------------
+;; training-wall
+;; ---------------------------------------------------------------------------
+
+(deftype training-wall (process-drawable)
+  ()
+  (:state-methods
+    idle
+    )
+  )
+
+(defstate idle (training-wall)
+  :virtual #t
+  :code (behavior ()
+    (loop (suspend))
+    )
+  :post ja-post
+  )
+
+(defmethod init-from-entity! ((this training-wall) (arg0 entity-actor))
+  (logior! (-> this mask) (process-mask actor-pause))
+  (let ((s4-0 (new 'process 'collide-shape this (collide-list-enum hit-by-others)))
+        )
+    (let ((v1-2 (new 'process 'collide-shape-prim-mesh s4-0 (the-as uint 0) (the-as uint 0))))
+      (set! (-> v1-2 prim-core collide-as) (collide-spec obstacle))
+      (set! (-> v1-2 prim-core action) (collide-action solid))
+      (set! (-> v1-2 transform-index) 3)
+      (set-vector! (-> v1-2 local-sphere) 0.0 0.0 0.0 266240.0)
+      (set! (-> s4-0 total-prims) (the-as uint 1))
+      (set! (-> s4-0 root-prim) v1-2)
+      )
+    (set! (-> s4-0 nav-radius) (* 0.75 (-> s4-0 root-prim local-sphere w)))
+    (let ((v1-5 (-> s4-0 root-prim)))
+      (set! (-> s4-0 backup-collide-as) (-> v1-5 prim-core collide-as))
+      (set! (-> s4-0 backup-collide-with) (-> v1-5 prim-core collide-with))
+      )
+    (set! (-> this root) s4-0)
+    )
+  (process-drawable-from-entity! this arg0)
+  (let ((skel-grp (art-group-get-by-name *level* "skel-training-wall" (the-as (pointer level) #f))))
+    (when skel-grp
+      (initialize-skeleton this (the-as skeleton-group skel-grp) (the-as pair 0))
+      )
+    )
+  (collide-shape-method-46 (the-as collide-shape (-> this root)))
+  (go (method-of-object this idle))
+  )
