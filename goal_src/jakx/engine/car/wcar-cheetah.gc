@@ -14,15 +14,29 @@
 ;; (method-set! ...) calls are visible, no actual lisp bodies). The deftype
 ;; itself has no extra fields: flag/size assertions say #x13c0 = parent
 ;; wcar-base's size.
-;;
-;; Method overrides 3 (inspect), 66, 100, 115 deferred along with the
-;; matching wcar-base methods.
 ;; -----------------------------------------------------------------------------
 
 (deftype v-cheetah (wcar-base)
   ()
   )
 
-;; Method overrides (3 inspect, 66 init-from-entity, 100 task-complete-hook,
-;; 115 update-shocks) deferred until wcar-base 115 lands and the L* static
-;; vectors are rebuilt.
+;; -----------------------------------------------------------------------------
+;; Method 100 — v-cheetah control-points writer.
+;; Same shape as the other v-* m100 siblings: reads root->root-prim->[opaque@+64]
+;; and writes 7 stride-80 vectors (L95..L101) before chaining to wcar-base's m100.
+;; Wrapped Tier 2 mips2c. Body: game/mips2c/jakx_functions/wcar-cheetah.cpp.
+;; Cycle 105 (plan Cycle 9) 2026-05-10.
+;; -----------------------------------------------------------------------------
+(defmethod-mips2c "(method 100 v-cheetah)" 100 v-cheetah)
+
+;; -----------------------------------------------------------------------------
+;; Method 115 — v-cheetah shock-joint quaternion updater (4-wheel iteration).
+;; Same overall shape as v-cougar method 115 but quaternion-set! arg layout
+;; differs: cheetah passes (l.f +248) as X (a1) — X-axis rotation — vs cougar's
+;; Z-axis (a3). Body: game/mips2c/jakx_functions/wcar-cheetah.cpp.
+;; Cycle 105 (plan Cycle 9) 2026-05-10.
+;; -----------------------------------------------------------------------------
+(defmethod-mips2c "(method 115 v-cheetah)" 115 v-cheetah)
+
+;; Method overrides (3 inspect, 66 init-from-entity) deferred until wcar-base
+;; 65/115 land and the L* static vectors are rebuilt.

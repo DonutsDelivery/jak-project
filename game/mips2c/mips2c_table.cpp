@@ -489,6 +489,9 @@ namespace method_115_v_wolf { extern void link(); }
 // wcar-leopard.cpp port (see game/mips2c/jakx_functions/wcar-leopard.cpp)
 namespace method_100_v_leopard { extern void link(); }
 namespace method_115_v_leopard { extern void link(); }
+// wcar-cheetah.cpp port (see game/mips2c/jakx_functions/wcar-cheetah.cpp)
+namespace method_100_v_cheetah { extern void link(); }
+namespace method_115_v_cheetah { extern void link(); }
 // net_player.cpp port (see game/mips2c/jakx_functions/net_player.cpp)
 namespace net_player_init_local { extern void link(); }
 // ripple.cpp port (see game/mips2c/jakx_functions/ripple.cpp)
@@ -984,6 +987,9 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      // wcar-leopard: methods 100 + 115 (same Tier 2 shape as v-wolf — simpler 115
      // body without axis-angle/mul; +4096 steering multiplier). See wcar-leopard.cpp.
      {"wcar-leopard", {jakx::method_100_v_leopard::link, jakx::method_115_v_leopard::link}},
+     // wcar-cheetah: methods 100 + 115 (same Tier 2 shape as v-cougar; 115 differs
+     // only in quaternion-set! arg layout — X-axis vs Z-axis). See wcar-cheetah.cpp.
+     {"wcar-cheetah", {jakx::method_100_v_cheetah::link, jakx::method_115_v_cheetah::link}},
      // net-player: BAD-PROLOGUE asm function (net-player-init-local) — process-spawn
      // :init handler called from net-game-mgr-method-52. See game/mips2c/jakx_functions/net_player.cpp.
      {"net-player", {jakx::net_player_init_local::link}},
