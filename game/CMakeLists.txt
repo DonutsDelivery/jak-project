@@ -265,6 +265,7 @@ set(RUNTIME_SOURCE
         mips2c/jakx_functions/wcar-base.cpp
         mips2c/jakx_functions/wcar-bobcat.cpp
         mips2c/jakx_functions/wcar-cougar.cpp
+        mips2c/jakx_functions/wcar-wolf.cpp
         mips2c/jakx_functions/wvehicle.cpp
         mips2c/jakx_functions/wvehicle_part.cpp
         mips2c/mips2c_table.cpp

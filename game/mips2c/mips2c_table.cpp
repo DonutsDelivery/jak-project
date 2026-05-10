@@ -483,6 +483,9 @@ namespace method_115_v_bobcat { extern void link(); }
 // wcar-cougar.cpp port (see game/mips2c/jakx_functions/wcar-cougar.cpp)
 namespace method_100_v_cougar { extern void link(); }
 namespace method_115_v_cougar { extern void link(); }
+// wcar-wolf.cpp port (see game/mips2c/jakx_functions/wcar-wolf.cpp)
+namespace method_100_v_wolf { extern void link(); }
+namespace method_115_v_wolf { extern void link(); }
 // net_player.cpp port (see game/mips2c/jakx_functions/net_player.cpp)
 namespace net_player_init_local { extern void link(); }
 // ripple.cpp port (see game/mips2c/jakx_functions/ripple.cpp)
@@ -972,6 +975,9 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      // wcar-cougar: methods 100 + 115 (same Tier 2 shape as v-bobcat; 115 is simpler —
      // no axis-angle/mul, just quaternion-set + normalize + copy). See wcar-cougar.cpp.
      {"wcar-cougar", {jakx::method_100_v_cougar::link, jakx::method_115_v_cougar::link}},
+     // wcar-wolf: methods 100 + 115 (same Tier 2 shape as v-cougar; 115 uses +4096
+     // steering multiplier like v-bobcat). See wcar-wolf.cpp.
+     {"wcar-wolf", {jakx::method_100_v_wolf::link, jakx::method_115_v_wolf::link}},
      // net-player: BAD-PROLOGUE asm function (net-player-init-local) — process-spawn
      // :init handler called from net-game-mgr-method-52. See game/mips2c/jakx_functions/net_player.cpp.
      {"net-player", {jakx::net_player_init_local::link}},
