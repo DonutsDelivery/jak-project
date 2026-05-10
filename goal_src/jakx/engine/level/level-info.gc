@@ -189,12 +189,12 @@
     :continues '((new 'static 'continue-point
         :name "kras-wide-start"
         :level 'krasw
-        :trans (static-vectorm 0 10 0)
-        :camera-trans (static-vectorm 0 5 -20)
+        :trans (new 'static 'vector :x 2142120.0 :y 88224.5625 :z -484012.84375 :w 1.0)
+        :camera-trans (new 'static 'vector :x 2154718.5 :y 110423.65625 :z -451738.0 :w 1.0)
         :quat (new 'static 'vector4h :data
-               (new 'static 'array int16 4 0 0 0 #x7fff))
+               (new 'static 'array int16 4 -222 32196 -1212 -5950))
         :camera-rot (new 'static 'array int16 9
-               #x7fff 0 0 0 #x7fff 0 0 0 #x7fff)
+               -30529 0 11891 -4747 30040 -12186 -10904 -13080 -27992)
         :on-goto #f
         :vis-nick 'krasw
         :vehicle-type #x1b

@@ -32279,12 +32279,16 @@
 
 
 (deftype drawable-inline-array-instance-shrub (drawable-inline-array)
-  ()
-  :flag-assert #x1100000020
+  ((data instance-shrubbery 1 :inline :offset-assert 32)
+   (pad uint32)
+   )
+  :flag-assert #x1100000074
   )
 
 (deftype drawable-tree-instance-shrub (drawable-tree)
-  ()
+  ((info prototype-array-shrub-info :offset 8)
+   (colors-added time-of-day-palette :offset 12)
+   )
   :flag-assert #x1100000020
   )
 
@@ -32516,8 +32520,10 @@
 
 
 (deftype drawable-inline-array-instance-tie (drawable-inline-array)
-  ()
-  :flag-assert #x1100000020
+  ((data instance-tie 1 :inline :offset-assert 32)
+   (pad uint32)
+   )
+  :flag-assert #x1100000064
   )
 
 
@@ -32531,8 +32537,10 @@
 
 
 (deftype prototype-tie (drawable-inline-array)
-  ()
-  :flag-assert #x1100000020
+  ((data tie-fragment 1 :inline :offset-assert 32)
+   (pad uint32)
+   )
+  :flag-assert #x1100000064
   )
 
 

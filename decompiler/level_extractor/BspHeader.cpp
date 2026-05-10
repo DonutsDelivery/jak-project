@@ -1171,6 +1171,19 @@ void DrawableTreeInstanceTie::read_from_file(TypedRef ref,
     Ref array_slot_ref = data_ref;
     array_slot_ref.byte_offset += idx * 4;
 
+    // SCAFFOLDING (Cycle 64): skip slots with non-PTR words. krasw has TYPE_PTR
+    // sentinels in its tie array that crash deref_label.
+    {
+      const auto& slot_word =
+          array_slot_ref.data->words_by_seg.at(array_slot_ref.seg).at(array_slot_ref.byte_offset / 4);
+      if (slot_word.kind() != decompiler::LinkedWord::PTR) {
+        lg::warn(
+            "DrawableTreeInstanceTie: skipping slot {}/{} at word {} (kind={} data={}) — not a label PTR",
+            idx, length, array_slot_ref.byte_offset / 4, (int)slot_word.kind(), slot_word.data);
+        continue;
+      }
+    }
+
     Ref object_ref = deref_label(array_slot_ref);
     object_ref.byte_offset -= 4;
 
