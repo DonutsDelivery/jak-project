@@ -370,7 +370,7 @@ bool Tie3::set_up_common_data_from_dma(DmaFollower& dma, SharedRenderState* rend
  */
 void Tie3::render(DmaFollower& dma, SharedRenderState* render_state, ScopedProfilerNode& prof) {
   static int s_tie3_render_dbg_count = 0;
-  bool dbg_print = s_tie3_render_dbg_count++ < 20;
+  bool dbg_print = s_tie3_render_dbg_count++ < 600;
   if (dbg_print) {
     fmt::print("[TIE3DBG] render() id={} name={} enabled={} frame={}\n",
                m_my_id, m_name, m_enabled, render_state->frame_idx);

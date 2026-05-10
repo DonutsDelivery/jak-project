@@ -231,7 +231,7 @@
     :dbname 'krastrn
     :taskname 'default
     :index #x3c
-    :master-level #f
+    :master-level 'krasa  ;; Cycle 72: KRASA.DGO holds the kras-* shared geometry (krasa-vis tfrag/pris/shrub/water); krastrn is overlay only. play() chain-loads master via (bg 'krasa) before (bg 'krastrn).
     :packages '()
     :memory-mode (level-memory-mode small-center)
     :mood-func 'update-mood-default

@@ -251,6 +251,24 @@
        )
      )
     (('loading)
+     ;; Cycle 72: jakx single-level-heap scaffolding makes all level slots
+     ;; share the same physical [base, top-base] range. With master-level
+     ;; chain-loading (krasa→krastrn), krasa stays 'loaded' while krastrn
+     ;; goes 'loading'. The original `!= 'inactive` test returns the FIRST
+     ;; non-inactive match — which is krasa, causing illegal-login errors
+     ;; on krastrn art-groups. Prefer status='loading' first; only fall
+     ;; back to other non-inactive levels if no loading slot matches.
+     (dotimes (v1-4 (-> this length))
+       (let ((a2-11 (-> this level v1-4)))
+         (when (= (-> a2-11 status) 'loading)
+           (if (and (>= (the-as int arg0) (the-as int (-> a2-11 heap base)))
+                    (< (the-as int arg0) (the-as int (-> a2-11 heap top-base)))
+                    )
+               (return a2-11)
+               )
+           )
+         )
+       )
      (dotimes (v1-5 (-> this length))
        (let ((a2-12 (-> this level v1-5)))
          (when (!= (-> a2-12 status) 'inactive)
@@ -827,12 +845,30 @@
     )
   (set! (-> this borrow-from-level) #f)
   (set! (-> this memory-mask) (the-as uint 0))
-  ;; Single-level heap: take all of *level*.heap.
-  (let ((h (-> this heap)))
-    (set! (-> h base) (-> *level* heap base))
-    (set! (-> h current) (-> h base))
-    (set! (-> h top-base) (-> *level* heap top-base))
-    (set! (-> h top) (-> h top-base))
+  ;; Cycle 72: shared *level*.heap with multi-level co-existence support.
+  ;; If another level is already non-inactive, partition the remaining space:
+  ;; new-base = max(other.heap.current) and new-top = min(other.heap.top)
+  ;; so we don't overwrite their existing allocations or top-buffers.
+  (let ((h (-> this heap))
+        (new-base (-> *level* heap base))
+        (new-top (-> *level* heap top-base)))
+    (dotimes (i (-> *level* length))
+      (let ((other (-> *level* level i)))
+        (when (and (!= other this)
+                   (!= (-> other status) 'inactive)
+                   (>= (the-as int (-> other heap base)) (the-as int new-base))
+                   (<= (the-as int (-> other heap top-base)) (the-as int new-top)))
+          (when (> (the-as int (-> other heap current)) (the-as int new-base))
+            (set! new-base (-> other heap current)))
+          (when (< (the-as int (-> other heap top)) (the-as int new-top))
+            (set! new-top (-> other heap top)))
+          )
+        )
+      )
+    (set! (-> h base) new-base)
+    (set! (-> h current) new-base)
+    (set! (-> h top-base) new-top)
+    (set! (-> h top) new-top)
     )
   (set! (-> *level* loading-level) this)
   (set! (-> this level-type) #f)
@@ -1330,6 +1366,17 @@
   (start-debug "call to play! arg0=~A arg1=~A~%" arg0 arg1)
   (when *kernel-boot-level*
     (start-debug "play: *kernel-boot-level*=~A — calling bg~%" *kernel-boot-level*)
+    ;; Cycle 72: chain-load master before child if level-load-info specifies one.
+    ;; Required because level-get-for-use rejects child-loads if master not loaded.
+    (let ((info (lookup-level-info *kernel-boot-level*)))
+      (when (and info (-> info master-level))
+        (let ((master (-> info master-level)))
+          (start-debug "play: chain-loading master ~A before ~A~%" master *kernel-boot-level*)
+          (bg master)
+          (start-debug "play: master ~A loaded, now loading ~A~%" master *kernel-boot-level*)
+          )
+        )
+      )
     (bg *kernel-boot-level*)
     (start-debug "play: bg returned, calling (on #f)~%")
     (on #f)

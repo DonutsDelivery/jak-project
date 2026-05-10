@@ -383,21 +383,8 @@
   ;; (draw *sky-work*)
   (flush-cache 0)
   (foreground-engine-execute *foreground-draw-engine*)
-
-  ;; Entity birth: spawn/kill BSP entity-actors each frame.
-  ;; Matches jak3 real-main-draw-hook:1674. Gated internally on *spawn-actors*.
-  ;; Force *spawn-actors* back on each frame: game-info.gc's initialize! 'play
-  ;; branch sets it to #f, and jak3's target-death turns it back on after the
-  ;; player spawns — but jakx's target-death port doesn't yet have that set! #t.
-  ;; Until target-death is fully ported, this guarantees entity birth stays on.
   (set! *spawn-actors* #t)
   (actors-update *level*)
-
-  ;; jakx Cycle 71: init-background + finish-background now implemented
-  ;; in background.gc. execute-connections enqueues TIE trees into
-  ;; *background-work*; finish-background dequeues and dispatches to
-  ;; draw-drawable-tree-instance-tie -> instance-tie-patch-buckets ->
-  ;; add-pc-tfrag3-data -> Tie3.cpp common_data_ok=true.
   (init-background)
   (execute-connections *background-draw-engine* #f)
   (finish-background)

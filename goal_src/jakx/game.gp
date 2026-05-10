@@ -88,6 +88,12 @@
 ;; Named ATL.DGO to match level info nickname 'atl (loader requests ATL.DGO).
 (cgo-file "atoll.gd" '())
 
+;; Kras City master art DGO (KRA.DGO → krasa-vis). Bundles geometry shared by
+;; krastrn/krasw/krastbox/krastt. Required for those levels to render TIE/tfrag
+;; trees — without it the BSP only has drawable-tree-actor and TIE buckets stay
+;; empty (Cycle 71 finding).
+(cgo-file "krasa.gd" '())
+
 ;; tutorial level — krastrn (Kras City training arena). Code objects (net-training)
 ;; not yet ported; only level data/visibility.
 (cgo-file "krastrn.gd" '())
