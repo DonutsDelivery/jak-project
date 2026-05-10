@@ -250,6 +250,7 @@ set(RUNTIME_SOURCE
         mips2c/jakx_functions/merc_blend_shape.cpp
         mips2c/jakx_functions/nav_control.cpp
         mips2c/jakx_functions/nav_engine.cpp
+        mips2c/jakx_functions/net_player.cpp
         mips2c/jakx_functions/ocean.cpp
         mips2c/jakx_functions/ocean_vu0.cpp
         mips2c/jakx_functions/particle_curves.cpp

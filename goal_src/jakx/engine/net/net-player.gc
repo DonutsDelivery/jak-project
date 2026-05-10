@@ -631,3 +631,9 @@
 ;; ERROR: function has no type analysis. Cannot decompile.
 
 ;; ERROR: function has no type analysis. Cannot decompile.
+
+;; net-player-init-local — BAD-PROLOGUE asm function (no GOAL form).
+;; Body at decompiler_out/jakx/net-player_ir2.asm:7952 (309 lines, no VU).
+;; Mips2c port at game/mips2c/jakx_functions/net_player.cpp.
+;; Called by net-game-mgr-method-52 via process-spawn :init.
+(def-mips2c net-player-init-local (function none))
