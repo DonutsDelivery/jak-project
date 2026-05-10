@@ -531,6 +531,7 @@
   "net-powerup.o"
   "net-powerups.o"
   "net-eco.o"
+  "net-eco-part.o"
   "net-eco-types.o"
   "net-simple-destruct.o"
   "net-enemy.o"

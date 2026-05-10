@@ -1,0 +1,153 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; name: net-eco-part.gc
+;; name in dgo: net-eco-part
+;; dgos: COMMON, GAME
+
+;; jakx Cycle 80: port group-eco-green sparticle-launch-group from
+;; jak3 collectables-part.gc:707-823 to make eco-green pickups visible.
+;; eco-green renders via the particle system, NOT skeleton geometry —
+;; its skel-eco-green art-group is :length 0. (See cycle 79 finding.)
+;;
+;; jak3's defpart 444 references :func 'sparticle-track-root-prim, which
+;; pulls position from collide-shape root-prim. Our jakx eco-green uses
+;; a trsqv root (no collide-shape yet), so we drop that :func — particles
+;; emit at the launcher's static origin instead, which matches stationary
+;; pickups fine. Other tracking refinements deferred to a later cycle.
+
+(defun eco-fadeout ((arg0 sparticle-system) (arg1 sparticle-cpuinfo))
+  "Slow fadeout when the parent eco is alive (sf0 set means dying).
+   Pulled from jak3 collectables-part.gc:163."
+  (if (not (logtest? (-> arg1 key proc state-flags) (state-flags sf0)))
+      (set! (-> arg1 next-time)
+            (the-as uint (* (max 1 (the-as int (-> *display* clock (-> arg1 clock-index) sparticle-data x))) 2))
+            )
+      )
+  0
+  (none)
+  )
+
+(defpartgroup group-eco-green
+  :id 129
+  :bounds (static-bspherem 0 0 0 1)
+  :parts ((sp-item 444 :flags (sp3) :binding 441)
+    (sp-item 441 :flags (sp2 sp3) :binding 442)
+    (sp-item 441 :flags (sp2 sp3) :binding 442)
+    (sp-item 441 :flags (sp2 sp3) :binding 442)
+    (sp-item 441 :flags (sp2 sp3) :binding 442)
+    (sp-item 441 :flags (sp2 sp3) :binding 442)
+    (sp-item 441 :flags (sp2 sp3) :binding 442)
+    (sp-item 441 :flags (sp2 sp3) :binding 442)
+    (sp-item 442 :fade-after (meters 90) :flags (sp2 sp3) :binding 443)
+    (sp-item 442 :fade-after (meters 90) :flags (sp2 sp3) :binding 443)
+    (sp-item 442 :fade-after (meters 90) :flags (sp2 sp3) :binding 443)
+    (sp-item 442 :fade-after (meters 90) :flags (sp2 sp3) :binding 443)
+    (sp-item 442 :fade-after (meters 90) :flags (sp2 sp3) :binding 443)
+    (sp-item 443 :fade-after (meters 40) :falloff-to (meters 60) :flags (sp2))
+    (sp-item 443 :fade-after (meters 40) :falloff-to (meters 60) :flags (sp2))
+    (sp-item 443 :fade-after (meters 40) :falloff-to (meters 60) :flags (sp2))
+    (sp-item 443 :fade-after (meters 40) :falloff-to (meters 60) :flags (sp2))
+    (sp-item 443 :fade-after (meters 40) :falloff-to (meters 60) :flags (sp2))
+    )
+  )
+
+(defpart 444
+  :init-specs ((:texture (starflash level-default-sprite))
+    (:num 1.0)
+    (:x (meters 4))
+    (:scale-x (meters 0.01))
+    (:scale-y :copy scale-x)
+    (:r 0.0)
+    (:g 0.0)
+    (:a 1.0)
+    (:timer (seconds -0.005))
+    (:flags (sp-cpuinfo-flag-2 sp-cpuinfo-flag-3 sp-cpuinfo-flag-14))
+    )
+  )
+
+(defpart 441
+  :init-specs ((:texture (bigpuff level-default-sprite))
+    (:num 6.0)
+    (:y (meters 0) (meters 16))
+    (:z (meters 0.3) (meters 0.25))
+    (:scale-x (meters 2) (meters 1))
+    (:rot-z (degrees 0) (degrees 360))
+    (:scale-y :copy scale-x)
+    (:r 32.0 92.0)
+    (:g 128.0 128.0)
+    (:a 24.0)
+    (:omega (degrees 0) (degrees 360))
+    (:vel-x (meters 0.0148148155) (meters 0.0044444446))
+    (:vel-y (meters 0))
+    (:vel-z (meters 0))
+    (:rotvel-z (degrees -0.1) 1 (degrees 0.2))
+    (:timer (seconds -0.005))
+    (:flags (sp-cpuinfo-flag-3 ready-to-launch sp-cpuinfo-flag-14))
+    (:func 'eco-fadeout)
+    (:next-time (seconds 0.035))
+    (:next-launcher 445)
+    )
+  )
+
+(defpart 445
+  :init-specs ((:fade-a -0.16) (:timer (seconds 0.5)))
+  )
+
+(defpart 442
+  :init-specs ((:texture (hotdot level-default-sprite))
+    (:num 1.0)
+    (:y (meters 0) (meters 16))
+    (:z (meters 0.3))
+    (:scale-x (meters 0.3) (meters 0.2))
+    (:scale-y :copy scale-x)
+    (:r 64.0 64.0)
+    (:g 255.0)
+    (:a 64.0)
+    (:omega (degrees 0) (degrees 360))
+    (:vel-x (meters 0.053333335) (meters 0.0148148155))
+    (:vel-y (meters 0))
+    (:vel-z (meters 0))
+    (:timer (seconds -0.005))
+    (:flags (sp-cpuinfo-flag-2 sp-cpuinfo-flag-3 ready-to-launch sp-cpuinfo-flag-14))
+    (:func 'eco-fadeout)
+    (:next-time (seconds 0.035))
+    (:next-launcher 446)
+    )
+  )
+
+(defpart 446
+  :init-specs ((:fade-a -0.42666668) (:timer (seconds 0.5)))
+  )
+
+(defpart 443
+  :init-specs ((:texture (hotdot level-default-sprite))
+    (:num 0.25)
+    (:y (meters -0.05))
+    (:scale-x (meters 0.3))
+    (:scale-y :copy scale-x)
+    (:r 255.0)
+    (:g 255.0)
+    (:b 0.0)
+    (:a 48.0)
+    (:scalevel-x (meters -0.00075757573))
+    (:scalevel-y :copy scalevel-x)
+    (:fade-r -2.8333333)
+    (:accel-y (meters -0.00015))
+    (:timer (seconds 0.1) (seconds 0.997))
+    (:flags (sp-cpuinfo-flag-2 sp-cpuinfo-flag-3 sp-cpuinfo-flag-14))
+    (:next-time (seconds 0.3))
+    (:next-launcher 427)
+    )
+  )
+
+(defpart 427
+  :init-specs ((:fade-r 0.0))
+  )
+
+;; jakx Cycle 80: defpartgroup macro doesn't bind a symbol; jak3 keeps these
+;; defconstants in a separate part-groups.gc. Inline it here for self-containment.
+(defconstant group-eco-green (-> *part-group-id-table* 129))
+
+;; The :post behavior eco-green-post lives in net-eco-types.gc next to the
+;; eco-green running state setup, where it can see eco-green type + state slot.

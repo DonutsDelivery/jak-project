@@ -323,6 +323,23 @@
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
+;; Cycle 80: custom post for eco-green :running state.
+;; eco-green has NO skeleton (renders via particles), so ja-post would crash.
+;;
+;; INTENT: each frame, spawn particles at the trsqv trans position.
+;;
+;; CYCLE 80 BLOCKER: `spawn` method (sparticle-launcher.gc:1076 in jak3, ~250 lines)
+;; is NOT yet ported into jakx. Calling it null-derefs at addr=0x2123000000 in
+;; the dispatch tick AFTER all 7 eco-green entities init successfully.
+;; Next-cycle plan: port `spawn`, `is-visible?`, related helpers.
+;; For now, no-op so boot stays stable past actor pipeline.
+(defbehavior eco-green-post eco-green ()
+  ;; (when (nonzero? (-> self part))
+  ;;   (spawn (-> self part) (-> self root trans))
+  ;;   )
+  (none)
+  )
+
 (let ((gp-3 (new 'static 'state
               :name 'running
               :next #f
@@ -337,31 +354,32 @@
             )
       )
   (inherit-state gp-3 (the-as state (method-of-type eco running)))
-  ;; Cycle 79: ensure post=ja-post so the skeleton bones update each frame
-  ;; (eco's running state inherits from sleep-code with no post).
+  ;; Cycle 80: code=sleep-code keeps process alive; post emits particles.
   (set! (-> gp-3 code) sleep-code)
-  (set! (-> gp-3 post) ja-post)
+  (set! (-> gp-3 post) eco-green-post)
   (method-set! eco-green 50 gp-3)
   )
 
-;; Cycle 79: minimal eco-green init that mirrors training-marker pattern —
-;; sets up trsqv root, lifts entity link, looks up skel-grp, and
-;; initializes the skeleton so the eco-green geometry actually renders.
-;; Skips eco's pickup/fact/launcher path (target/eco-mgr/FACT-bank not wired).
+;; Cycle 80: eco-green init wires the sparticle launcher (group-eco-green).
+;; eco-green renders via the particle system, NOT a skeleton — see net-eco-part.gc.
+;; trsqv root works fine because spawn pulls position from (-> self root trans).
 (defmethod init-from-entity! ((this eco-green) (arg0 entity-actor))
+  ;; Cycle 80 stage A: replicate Cycle 79 stable init (boot-stable known-good).
+  ;; jak3's eco init starts with stack-size-set! 32 — match it so the process has
+  ;; enough main-thread stack for go transitions / further method calls.
+  (stack-size-set! (-> this main-thread) 32)
   (logior! (-> this mask) (process-mask actor-pause))
   (set! (-> this entity) arg0)
   (set! (-> this root) (new 'process 'trsqv))
   (process-drawable-from-entity! this arg0)
-  ;; Cycle 79: skel-grp lookup SUCCEEDS (verified: returns valid skeleton-group
-  ;; "skel-eco-green" :length 0 @ #x13f5554) but initialize-skeleton OR
-  ;; subsequent ja-post crashes at 0x2123000000. Disabling both for now to
-  ;; keep boot stable. Cycle 80 needs to either (a) port initialize-skeleton's
-  ;; skel-grp consumption path properly, or (b) allocate process.draw manually
-  ;; with a minimal draw-control. Process spawns alive but invisible.
-  (let ((skel-grp (art-group-get-by-name *level* "skel-eco-green" (the-as (pointer level) #f))))
-    (format 0 "[eco-green init] aid=~X skel-grp=~A (skipping init-skeleton/go-running until Cycle 80)~%"
-            (-> arg0 aid) skel-grp)
-    )
+  (format 0 "[eco-green C80 sA] aid=~X stable-base done~%" (-> arg0 aid))
+  ;; Cycle 80 stage B: create-launch-control wires sparticle-launch-control to
+  ;; group-eco-green (id 129). Methods ported in sparticle-launcher.gc this cycle.
+  (set! (-> this part) (create-launch-control group-eco-green this))
+  (format 0 "[eco-green C80 sB] aid=~X part=~A~%" (-> arg0 aid) (-> this part))
+  ;; Cycle 80 stage C: enter running state — :post emits particles each frame
+  ;; via eco-green-post (declared above). :code is sleep-code so the process
+  ;; just sits and ticks particles.
+  (go (method-of-object this running))
   (none)
   )
