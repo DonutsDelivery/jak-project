@@ -8,6 +8,12 @@
 (define-extern level-update-after-load (function level login-state level))
 (define-extern *level-type-list* type)
 (define-extern city-sound-expand-want-list (function none))
+;; Cycle 54 Path B: bsp-init-actors! is in jakx-stubs-late.gc; forward-declare
+;; so level.birth can wire it. Allow-list filter inside bsp-init-actors!
+;; (bsp-actor-type-allowed?) gates per-actor population — empty list = no
+;; entity-links populated, no per-frame actor dispatch, safe boot baseline.
+(define-extern bsp-init-actors! (function bsp-header none))
+(define-extern bsp-actor-type-allowed? (function type symbol))
 
 (defglobalconstant NUM_LEVEL_PAGES 146)
 (defglobalconstant LEVEL_PAGE_SIZE_KB 126) ;; original value
@@ -933,17 +939,21 @@
 ;; ERROR: failed type prop at 8: Could not figure out load: (set! s3 (l.wu (+ v1 4)))
 ;; WARN: Return type mismatch none vs level.
 (defmethod birth ((this level))
-  "JAKX BOOT-PATH PATCH 2026-05-05: stub. If bsp non-null, advance to 'alive
-   (lets level reach 'active for rendering). If bsp null (level has no BSP
-   file loaded), leave status='loaded so update-visible/render-level won't
-   try to deref a null bsp pointer."
+  "JAKX BOOT-PATH (cycle 54 Path B): if bsp non-null, populate the level's
+   entity-links-array via bsp-init-actors! before advancing to 'alive.
+   bsp-init-actors!'s allow-list filter (bsp-actor-type-allowed?) gates
+   per-actor slot insertion — currently the allow-list is empty, so
+   entity-links stays length 0 and the per-frame auto-spawn dispatcher
+   has nothing to walk. As actor classes are ported into goal_src/jakx/levels/,
+   their etype gets added to bsp-actor-type-allowed? cond branches."
   (cond
     ((-> this bsp)
-     (format 0 "[birth] STUB: level ~A has bsp; status loaded -> alive; display?=display~%" (-> this name))
+     (format 0 "[birth] level ~A has bsp — invoking bsp-init-actors!~%" (-> this name))
+     (bsp-init-actors! (-> this bsp))
      (set! (-> this display?) 'display)
      (set! (-> this status) 'alive))
     (else
-     (format 0 "[birth] STUB: level ~A bsp=null; leaving status=loaded~%" (-> this name))))
+     (format 0 "[birth] level ~A bsp=null; leaving status=loaded~%" (-> this name))))
   this
   )
 

@@ -723,6 +723,17 @@
   this
   )
 
+;; Cycle 54 Path B (allow-list per orchestrator inbox decision):
+;; Returns #t if the actor's process class is ported into jakx and safe to
+;; spawn from bsp-init-actors!. Conservative default: empty allow-list — every
+;; actor is filtered out, so entity-links-array stays empty and the per-frame
+;; auto-spawn dispatcher has nothing to walk. As actor classes get ported into
+;; goal_src/jakx/levels/, add their etype to the cond branches.
+(defun bsp-actor-type-allowed? ((et type))
+  (cond
+    ((zero? (the-as int et)) #f)
+    (else #f)))
+
 ;; Minimal port of jak3 entity.gc:1652 bsp-header.birth method.
 ;; Just the essential work:
 ;;   (1) allocate the level's entity-links-array if empty
@@ -730,12 +741,17 @@
 ;; add-to-level! is declared in the entity deftype but never defmethod'd in jakx
 ;; entity.gc (not yet ported), so calling it would invoke a null slot → SEGFAULT.
 ;; Skips the camera birth loop and actor-groups init (which touch *camera*/*target*).
+;;
+;; Cycle 54 Path B: per-actor body gated by bsp-actor-type-allowed? — actors
+;; whose process class isn't on the allow-list are skipped (no slot insertion).
+;; Empty allow-list = entity-links remains length 0; safe boot baseline.
 (defun bsp-init-actors! ((bsp bsp-header))
   (let* ((lev (-> bsp level))
          (lgrp *level*)
          (actor-count (if (nonzero? (-> bsp actors))
                           (-> bsp actors length)
-                          0)))
+                          0))
+         (allowed-count 0))
     (format 0 "[bsp-init-actors!] level=~A actor-count=~D~%" (-> lev name) actor-count)
     (cond
       ((not (-> lev entity))
@@ -753,37 +769,34 @@
         (let* ((idx (if (nonzero? (-> bsp actor-birth-order))
                         (logand (-> bsp actor-birth-order i) 8191)
                         i))
-               (actor (-> bsp actors data idx actor))
-               ;; Grab the next empty slot from the entity-links-array.
-               ;; This is inlined from jak3 add-to-level! (entity.gc:663) —
-               ;; that method is declared but not defmethod'd in jakx yet.
-               (slot (-> lev entity data (-> lev entity length))))
-          (+! (-> lev entity length) 1)
-          (set! (-> slot process) #f)
-          (set! (-> slot entity) actor)
-          (set! (-> actor extra) slot)
-          ;; Insert slot into level-group's entity-link circular list.
-          (cond
-            ((-> lgrp entity-link)
-             (let* ((head (-> lgrp entity-link))
-                    (nxt (-> head next-link)))
-               (set! (-> head next-link) slot)
-               (set! (-> slot prev-link) head)
-               (set! (-> slot next-link) nxt)
-               (set! (-> nxt prev-link) slot)))
-            (else
-              (set! (-> slot prev-link) slot)
-              (set! (-> slot next-link) slot)))
-          (set! (-> lgrp entity-link) slot)
-          (vector-copy! (-> slot trans) (-> actor trans))
-          (set! (-> slot perm aid) (the-as actor-id (-> actor aid)))
-          (set! (-> slot level) lev)
-          (when (zero? (mod i 50))
-            (format 0 "[bsp-init-actors!] actor ~D/~D idx=~D aid=#x~X etype=#x~X actorp=#x~X~%"
-                    i (-> bsp actors length) idx (-> actor aid)
-                    (the-as int (-> actor etype))
-                    (the-as int actor))))))
-    (format 0 "[bsp-init-actors!] entity-links populated len=~D~%" (-> lev entity length)))
+               (actor (-> bsp actors data idx actor)))
+          (when (bsp-actor-type-allowed? (-> actor etype))
+            (+! allowed-count 1)
+            ;; Grab the next empty slot from the entity-links-array.
+            ;; Inlined from jak3 add-to-level! (entity.gc:663) — that method
+            ;; is declared but not defmethod'd in jakx yet.
+            (let ((slot (-> lev entity data (-> lev entity length))))
+              (+! (-> lev entity length) 1)
+              (set! (-> slot process) #f)
+              (set! (-> slot entity) actor)
+              (set! (-> actor extra) slot)
+              (cond
+                ((-> lgrp entity-link)
+                 (let* ((head (-> lgrp entity-link))
+                        (nxt (-> head next-link)))
+                   (set! (-> head next-link) slot)
+                   (set! (-> slot prev-link) head)
+                   (set! (-> slot next-link) nxt)
+                   (set! (-> nxt prev-link) slot)))
+                (else
+                  (set! (-> slot prev-link) slot)
+                  (set! (-> slot next-link) slot)))
+              (set! (-> lgrp entity-link) slot)
+              (vector-copy! (-> slot trans) (-> actor trans))
+              (set! (-> slot perm aid) (the-as actor-id (-> actor aid)))
+              (set! (-> slot level) lev))))))
+    (format 0 "[bsp-init-actors!] entity-links populated len=~D (allowed=~D of ~D)~%"
+            (-> lev entity length) allowed-count actor-count))
   (none))
 
 ;; --- Ports from jak3 collide-shape.gc (for target-init! bringup) ---
