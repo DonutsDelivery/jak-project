@@ -72,7 +72,50 @@
       (format 0 "[goal-cam-instr] LOOP-TOP~%")
       (set! *artist-all-visible* #t)
       (set! *external-cam-mode* 'locked)
-      (set-vector! (-> *math-camera* trans) -67563.0 900000.0 -299048.0 1.0)
+      ;; SCAFFOLDING (Cycle 77): per-level cam-trans derivation. Atoll keeps
+      ;; the empirically-known-good hardcoded debug-cam (which lands above
+      ;; near-origin geometry). For any other loaded level, average non-zero
+      ;; drawable-tree[1..] bspheres (skipping ti=0, which is typically the
+      ;; skybox/master extent that skews the average) then offset cam 50m up
+      ;; and 100m back. This is the first jakx camera placement that gets
+      ;; krastrn (the tutorial level) to render visible terrain instead of
+      ;; the previous black screen. Real fix waits on race-camera bringup.
+      (let ((cx -67563.0) (cy 900000.0) (cz -299048.0) (got-atoll #f))
+        (dotimes (li (-> *level* length))
+          (let ((lev (-> *level* level li)))
+            (when (and (or (= (-> lev status) 'active) (= (-> lev status) 'alive))
+                       (= (level-method-13 lev) 'atoll))
+              (set! got-atoll #t))))
+        (when (not got-atoll)
+          ;; Average centers of "small" trees (radius < median heuristic: skip
+          ;; first tree which is usually skybox/master). Take last non-zero.
+          (let ((sum-x 0.0) (sum-y 0.0) (sum-z 0.0) (n 0))
+            (dotimes (li (-> *level* length))
+              (let ((lev (-> *level* level li)))
+                (when (and (or (= (-> lev status) 'active) (= (-> lev status) 'alive))
+                           (nonzero? (the-as int (-> lev bsp))))
+                  (let* ((bsp (the-as bsp-header (-> lev bsp)))
+                         (dt (-> bsp drawable-trees)))
+                    (when dt
+                      ;; Skip ti=0 (typically skybox/master extent), include rest.
+                      (dotimes (ti (the int (-> dt length)))
+                        (when (> ti 0)
+                          (let ((tr (-> dt data ti)))
+                            (when tr
+                              (let ((tbs (-> tr bsphere)))
+                                (when (> (-> tbs w) 0.0)
+                                  (set! sum-x (+ sum-x (-> tbs x)))
+                                  (set! sum-y (+ sum-y (-> tbs y)))
+                                  (set! sum-z (+ sum-z (-> tbs z)))
+                                  (set! n (+ n 1)))))))))))))
+            (when (> n 0)
+              (let ((nf (the float n)))
+                (set! cx (/ sum-x nf))
+                (set! cy (+ (/ sum-y nf) (meters 50.0)))
+                (set! cz (- (/ sum-z nf) (meters 100.0))))
+              (when (zero? (mod *jakx-cam-instr-count* 120))
+                (format 0 "[cycle77-cam] n=~D trans=<~F ~F ~F>~%" n cx cy cz)))))
+        (set-vector! (-> *math-camera* trans) cx cy cz 1.0))
       (set-vector! (-> *save-camera-inv-rot* rvec) 1.0 0.0 0.0 0.0)
       (set-vector! (-> *save-camera-inv-rot* uvec) 0.0 0.0 1.0 0.0)
       (set-vector! (-> *save-camera-inv-rot* fvec) 0.0 -1.0 0.0 0.0)

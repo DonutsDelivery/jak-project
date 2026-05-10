@@ -14,6 +14,10 @@
 ;; entity-links populated, no per-frame actor dispatch, safe boot baseline.
 (define-extern bsp-init-actors! (function bsp-header none))
 (define-extern bsp-actor-type-allowed? (function type symbol))
+;; SCAFFOLDING (Cycle 77): forward-decl of cam-update.gc global so play() can
+;; init it to identity before update-camera ever runs. cam-update.gc compiles
+;; later (build idx 432 vs level.gc 413).
+(define-extern *save-camera-inv-rot* matrix)
 
 (defglobalconstant NUM_LEVEL_PAGES 146)
 (defglobalconstant LEVEL_PAGE_SIZE_KB 126) ;; original value
@@ -1412,6 +1416,51 @@
           (matrix-identity! (-> *math-camera* camera-rot))
           )
         )
+      ;; SCAFFOLDING (Cycle 77): empty-continues fallback for jakx race-levels
+      ;; (krasa, krastrn, etc. ship with :continues '()). Find first non-zero
+      ;; bsphere on the master-level's BSP drawable-trees, place camera 50m up
+      ;; and 100m back of that center, lock *external-cam-mode* so update-camera's
+      ;; per-frame move-camera-from-pad short-circuits (cam-update.gc:274) and
+      ;; preserves our trans across frames. Identity rotation. Real fix waits on
+      ;; race-camera bringup. Logged with [START] tag.
+      (when (and info (null? (-> info continues)))
+        (let* ((master-name (the-as symbol (or (-> info master-level) *kernel-boot-level*)))
+               (lev (level-get *level* master-name))
+               (bsp (the-as bsp-header (and lev (-> lev bsp)))))
+          (cond
+            ((nonzero? (the-as int bsp))
+             (let ((cx 0.0) (cy 0.0) (cz 0.0) (r 0.0))
+               (let ((dt (-> bsp drawable-trees)))
+                 (when dt
+                   (dotimes (i (the int (-> dt length)))
+                     (when (zero? r)
+                       (let ((tr (-> dt data i)))
+                         (when tr
+                           (let ((bs (-> tr bsphere)))
+                             (when (> (-> bs w) 0.0)
+                               (set! cx (-> bs x))
+                               (set! cy (-> bs y))
+                               (set! cz (-> bs z))
+                               (set! r  (-> bs w))))))))))
+               (cond
+                 ((nonzero? r)
+                  (start-debug "play: cycle77-cam master=~A center=<~F ~F ~F> r=~F~%"
+                    master-name cx cy cz r)
+                  (set! (-> *math-camera* trans x) cx)
+                  (set! (-> *math-camera* trans y) (+ cy (meters 50.0)))
+                  (set! (-> *math-camera* trans z) (- cz (meters 100.0)))
+                  (set! (-> *math-camera* trans w) 1.0)
+                  (set! (-> *math-camera* prev-trans quad) (-> *math-camera* trans quad))
+                  (matrix-identity! (-> *math-camera* inv-camera-rot))
+                  (matrix-identity! (-> *math-camera* camera-rot))
+                  (matrix-identity! *save-camera-inv-rot*)
+                  ;; Lock external-cam-mode → move-camera-from-pad short-circuits.
+                  (set! *external-cam-mode* 'locked))
+                 (else
+                  (start-debug "play: cycle77-cam ~A — no nonzero bsphere on drawable-trees~%"
+                    master-name)))))
+            (else
+             (start-debug "play: cycle77-cam skipped — no level/bsp for ~A~%" master-name)))))
       )
     (start-debug "play: (on #f) returned, kmemclose~%")
     (kmemclose)
