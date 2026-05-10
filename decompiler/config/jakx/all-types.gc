@@ -32650,7 +32650,7 @@
 
   
 
-#|
+;; activated 2026-05-10 (cycle 68) — needed for draw-drawable-tree-instance-tie type prop
 (deftype prototype-tie-work (structure)
   ((upload-flushe              dma-packet   :inline :offset-assert 0)
    (upload-palette             dma-packet   :inline :offset-assert 16)
@@ -32682,63 +32682,62 @@
    (wait-to-spr                uint32               :offset-assert 400)
    (mood                       mood-context         :offset-assert 404)
    (wide-level-index           uint32               :offset-assert 408)
-   (last                       uint32       16      :offset-assert 416) ;; guessed by decompiler
+   (last                       uint32       16      :offset 416) ;; guessed by decompiler
    (next                       uint32       16      :offset-assert 480) ;; guessed by decompiler
    (count                      uint16       16      :offset-assert 544) ;; guessed by decompiler
-   (tie-last                   uint32               :offset-assert 416)
-   (tie-next                   uint32               :offset-assert 480)
-   (tie-count                  uint16               :offset-assert 544)
-   (trans-last                 uint32               :offset-assert 420)
-   (trans-next                 uint32               :offset-assert 484)
-   (trans-count                uint16               :offset-assert 546)
-   (water-last                 uint32               :offset-assert 424)
-   (water-next                 uint32               :offset-assert 488)
-   (water-count                uint16               :offset-assert 548)
-   (scissor-last               uint32               :offset-assert 428)
-   (scissor-next               uint32               :offset-assert 492)
-   (scissor-count              uint16               :offset-assert 550)
-   (scissor-trans-last         uint32               :offset-assert 432)
-   (scissor-trans-next         uint32               :offset-assert 496)
-   (scissor-trans-count        uint16               :offset-assert 552)
-   (scissor-water-last         uint32               :offset-assert 436)
-   (scissor-water-next         uint32               :offset-assert 500)
-   (scissor-water-count        uint16               :offset-assert 554)
-   (envmap-last                uint32               :offset-assert 440)
-   (envmap-next                uint32               :offset-assert 504)
-   (envmap-count               uint16               :offset-assert 556)
-   (envmap-trans-last          uint32               :offset-assert 444)
-   (envmap-trans-next          uint32               :offset-assert 508)
-   (envmap-trans-count         uint16               :offset-assert 558)
-   (envmap-water-last          uint32               :offset-assert 448)
-   (envmap-water-next          uint32               :offset-assert 512)
-   (envmap-water-count         uint16               :offset-assert 560)
-   (envmap-scissor-last        uint32               :offset-assert 452)
-   (envmap-scissor-next        uint32               :offset-assert 516)
-   (envmap-scissor-count       uint16               :offset-assert 562)
-   (envmap-scissor-trans-last  uint32               :offset-assert 456)
-   (envmap-scissor-trans-next  uint32               :offset-assert 520)
-   (envmap-scissor-trans-count uint16               :offset-assert 564)
-   (envmap-scissor-water-last  uint32               :offset-assert 460)
-   (envmap-scissor-water-next  uint32               :offset-assert 524)
-   (envmap-scissor-water-count uint16               :offset-assert 566)
-   (generic-last               uint32               :offset-assert 464)
-   (generic-next               uint32               :offset-assert 528)
-   (generic-count              uint16               :offset-assert 568)
-   (generic-trans-last         uint32               :offset-assert 468)
-   (generic-trans-next         uint32               :offset-assert 532)
-   (generic-trans-count        uint16               :offset-assert 570)
-   (generic-water-last         uint32               :offset-assert 472)
-   (generic-water-next         uint32               :offset-assert 536)
-   (generic-water-count        uint16               :offset-assert 572)
-   (vanish-last                uint32               :offset-assert 476)
-   (vanish-next                uint32               :offset-assert 540)
-   (vanish-count               uint16               :offset-assert 574)
+   (tie-last                   uint32               :offset 416)
+   (tie-next                   uint32               :offset 480)
+   (tie-count                  uint16               :offset 544)
+   (trans-last                 uint32               :offset 420)
+   (trans-next                 uint32               :offset 484)
+   (trans-count                uint16               :offset 546)
+   (water-last                 uint32               :offset 424)
+   (water-next                 uint32               :offset 488)
+   (water-count                uint16               :offset 548)
+   (scissor-last               uint32               :offset 428)
+   (scissor-next               uint32               :offset 492)
+   (scissor-count              uint16               :offset 550)
+   (scissor-trans-last         uint32               :offset 432)
+   (scissor-trans-next         uint32               :offset 496)
+   (scissor-trans-count        uint16               :offset 552)
+   (scissor-water-last         uint32               :offset 436)
+   (scissor-water-next         uint32               :offset 500)
+   (scissor-water-count        uint16               :offset 554)
+   (envmap-last                uint32               :offset 440)
+   (envmap-next                uint32               :offset 504)
+   (envmap-count               uint16               :offset 556)
+   (envmap-trans-last          uint32               :offset 444)
+   (envmap-trans-next          uint32               :offset 508)
+   (envmap-trans-count         uint16               :offset 558)
+   (envmap-water-last          uint32               :offset 448)
+   (envmap-water-next          uint32               :offset 512)
+   (envmap-water-count         uint16               :offset 560)
+   (envmap-scissor-last        uint32               :offset 452)
+   (envmap-scissor-next        uint32               :offset 516)
+   (envmap-scissor-count       uint16               :offset 562)
+   (envmap-scissor-trans-last  uint32               :offset 456)
+   (envmap-scissor-trans-next  uint32               :offset 520)
+   (envmap-scissor-trans-count uint16               :offset 564)
+   (envmap-scissor-water-last  uint32               :offset 460)
+   (envmap-scissor-water-next  uint32               :offset 524)
+   (envmap-scissor-water-count uint16               :offset 566)
+   (generic-last               uint32               :offset 464)
+   (generic-next               uint32               :offset 528)
+   (generic-count              uint16               :offset 568)
+   (generic-trans-last         uint32               :offset 468)
+   (generic-trans-next         uint32               :offset 532)
+   (generic-trans-count        uint16               :offset 570)
+   (generic-water-last         uint32               :offset 472)
+   (generic-water-next         uint32               :offset 536)
+   (generic-water-count        uint16               :offset 572)
+   (vanish-last                uint32               :offset 476)
+   (vanish-next                uint32               :offset 540)
+   (vanish-count               uint16               :offset 574)
    )
   :method-count-assert 9
   :size-assert         #x240
   :flag-assert         #x900000240
   )
-|#
 
   
 ;; DEAD: asset type (decompiler regen)
@@ -38265,7 +38264,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define-extern *instance-tie-work* instance-tie-work) ;; instance-tie-work
-(define-extern *prototype-tie-work* symbol) ;; prototype-tie-work type not yet activated
+(define-extern *prototype-tie-work* prototype-tie-work)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; tie-methods                    ;;
@@ -61963,7 +61962,7 @@
 ;; (define-extern net-type-client object)  ;; clobbers active deftype
 (define-extern net-type-lookup-response object)
 ;; (define-extern patch-group object)  ;; clobbers active deftype
-(define-extern prototype-tie-work object)
+;; (define-extern prototype-tie-work object) ;; clobbers active deftype
 ;;(define-extern race-mesh-hash object)
 ;; (define-extern sprite-frame-data object) ;; clobbers active deftype (Lane SM round 1 batch 3)
 ;;(define-extern text-display-deflected-view-1 object)

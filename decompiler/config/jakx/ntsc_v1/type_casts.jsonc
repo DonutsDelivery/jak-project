@@ -10855,36 +10855,15 @@
     ]
   ],
   "draw-drawable-tree-instance-tie": [
-    [
-      [
-        23,
-        37
-      ],
-      "v1",
-      "drawable-inline-array-node"
-    ],
-    [
-      25,
-      "a0",
-      "drawable-inline-array-node"
-    ],
-    [
-      120,
-      "s2",
-      "drawable-inline-array-instance-tie"
-    ],
-    [
-      132,
-      "v1",
-      "int"
-    ],
-    [
-      132,
-      "a0",
-      "int"
-    ]
+    [[23, 37], "v1", "drawable-inline-array-node"],
+    [25, "a0", "drawable-inline-array-node"],
+    [102, "s1", "drawable-inline-array-instance-tie"],
+    [112, "v1", "int"],
+    [112, "a0", "int"],
+    [[249, 270], "s2", "level"]
   ],
   "(method 13 drawable-tree-instance-tie)": [
+    [30, "t2", "prototype-tie"],
     [[51, 70], "t1", "tie-fragment"],
     [[102, 120], "a3", "tie-fragment"],
     [[160, 178], "t1", "tie-fragment"],
