@@ -629,11 +629,12 @@
     (with-dma-buffer-add-bucket ((s4-0 (-> *display* frames (-> *display* on-screen) global-buf))
                                  (bucket-id particles)
                                  )
-      ;; og:preserve-this
-      (when #t
-        (sprite-init-distorter s4-0)
-        (sprite-draw-distorters s4-0)
-        )
+      ;; Cycle 87: distorter init data is now populated by
+      ;; sprite-distorter-generate-tables (called from update-math-camera).
+      ;; sprite-draw-distorters still skipped because no actor calls
+      ;; add-distorter — emitting it without sources just blits zeros.
+      (sprite-init-distorter s4-0)
+      ;; (sprite-draw-distorters s4-0)
       (dma-buffer-add-gs-set s4-0
                              (test-1 (new 'static 'gs-test
                                        :ate #x1
@@ -685,9 +686,14 @@
         (set! (-> a0-25 vif1) (new 'static 'vif-tag :cmd (vif-cmd flushe) :msk #x1))
         (set! (-> v1-23 base) (the-as pointer (&+ a0-25 16)))
         )
-      (sprite-glow-init-engine s4-0)
-      (sprite-glow-draw s4-0)
-      (draw-all-sprites! *simple-sprite-system* s4-0)
+      ;; Cycle 87: glow + simple-sprite paths skipped — same uninitialized-
+      ;; data risk as distorters. Eco-green particles emit through the 2d-all
+      ;; path above (sprite-add-2d-all), no glow needed.
+      (when #f
+        (sprite-glow-init-engine s4-0)
+        (sprite-glow-draw s4-0)
+        (draw-all-sprites! *simple-sprite-system* s4-0)
+        )
       (let* ((v1-26 s4-0)
              (a0-30 (the-as dma-packet (-> v1-26 base)))
              )

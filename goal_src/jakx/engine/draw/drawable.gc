@@ -388,6 +388,10 @@
   (init-background)
   (execute-connections *background-draw-engine* #f)
   (finish-background)
+  ;; Cycle 87: emit sprite/particle DMA into the bucket-id::particles bucket.
+  ;; sp-process-block-2d fills sprite-array-2d each frame, but without this
+  ;; call the GPU never sees those sprites.
+  (sprite-draw *display*)
   (none))
 
 (define *draw-hook* main-draw-hook)

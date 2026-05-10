@@ -197,6 +197,12 @@ Without this corrector, the fogginess of the world would change as the FOV chang
         )
       )
     )
+  ;; Cycle 87: regenerate distorter sine tables — without this the gs-gif-tag
+  ;; in *sprite-distorter-sine-tables* stays zero-init and the C++ Sprite3
+  ;; renderer asserts (kind != TRI_STRIP) on the bucket-id::particles bucket.
+  (if (nonzero? sprite-distorter-generate-tables)
+      (sprite-distorter-generate-tables)
+      )
   0
   )
 
