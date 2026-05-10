@@ -1006,7 +1006,9 @@
 ;; but boot continues so atoll geometry can render via tfrag.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun tie-vu1-init-buffers () (none))
+;; Cycle 74: tie-vu1-init-buffers got a real body in
+;; goal_src/jakx/engine/gfx/background/tie/tie-methods.gc (ported from jak3).
+;; (defun tie-vu1-init-buffers () (none))
 (defun merc-vu1-init-buffers () (none))
 (defun emerc-vu1-init-buffers () (none))
 (defun generic-vu1-init-buffers () (none))
