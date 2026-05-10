@@ -326,9 +326,11 @@ void TFragment::update_load(const std::vector<tfrag3::TFragmentTreeKind>& tree_k
     for (size_t tree_idx = 0; tree_idx < lev_data->tfrag_trees[geom].size(); tree_idx++) {
       const auto& tree = lev_data->tfrag_trees[geom][tree_idx];
 
-      fmt::print("[update_load/{}] geo={} tree_idx={} kind={} match={}\n",
+      fmt::print("[update_load/{}] geo={} tree_idx={} kind={} match={} draws.size={} verts={} indices.size={} bvh_nodes={}\n",
                  m_name, geom, tree_idx, (int)tree.kind,
-                 std::find(tree_kinds.begin(), tree_kinds.end(), tree.kind) != tree_kinds.end());
+                 std::find(tree_kinds.begin(), tree_kinds.end(), tree.kind) != tree_kinds.end(),
+                 tree.draws.size(), tree.packed_vertices.vertices.size(),
+                 tree.unpacked.indices.size(), tree.bvh.vis_nodes.size());
       if (std::find(tree_kinds.begin(), tree_kinds.end(), tree.kind) != tree_kinds.end()) {
         auto& tree_cache = m_cached_trees[geom].emplace_back();
         tree_cache.kind = tree.kind;
@@ -449,6 +451,38 @@ bool TFragment::setup_for_level(const std::vector<tfrag3::TFragmentTreeKind>& tr
     m_level_name = level;
     fmt::print("[setup_for_level/{}] update_load done: trees[0]={} trees[1]={} trees[2]={}\n",
                m_name, m_cached_trees[0].size(), m_cached_trees[1].size(), m_cached_trees[2].size());
+    // SCAFFOLDING (Cycle 64): dump bsphere of root vis-node of LOD0 trees so
+    // we can verify camera-trans actually points at geometry. bsphere is in
+    // game-meters (4096 = 1m) per Tfrag3Data.h; multiply by 4096 for game-units.
+    for (size_t ti = 0; ti < m_cached_trees[0].size(); ti++) {
+      auto& tree = m_cached_trees[0][ti];
+      size_t nvn = tree.vis ? tree.vis->vis_nodes.size() : 0;
+      fmt::print("[BSPHERE/{}] level='{}' lod0 tree[{}] vis={} vis_nodes.size={} num_roots={} first_root={}\n",
+                 m_name, level, ti, (void*)tree.vis, nvn,
+                 tree.vis ? tree.vis->num_roots : -1,
+                 tree.vis ? tree.vis->first_root : -1);
+      if (tree.vis && nvn > 0) {
+        const auto& root = tree.vis->vis_nodes.front();
+        fmt::print("[BSPHERE/{}] level='{}' lod0 tree[{}] FRONT bsphere(meters): "
+                   "center=<{:.2f} {:.2f} {:.2f}> r={:.2f} | game-units: "
+                   "center=<{:.1f} {:.1f} {:.1f}> r={:.1f}\n",
+                   m_name, level, ti,
+                   root.bsphere.x(), root.bsphere.y(), root.bsphere.z(), root.bsphere.w(),
+                   root.bsphere.x() * 4096.f, root.bsphere.y() * 4096.f, root.bsphere.z() * 4096.f,
+                   root.bsphere.w() * 4096.f);
+        // Also dump first_root entry
+        if (tree.vis->first_root >= 0 && (u32)tree.vis->first_root < nvn) {
+          const auto& fr = tree.vis->vis_nodes[tree.vis->first_root];
+          fmt::print("[BSPHERE/{}] level='{}' lod0 tree[{}] FIRST_ROOT[{}] bsphere(meters): "
+                     "center=<{:.2f} {:.2f} {:.2f}> r={:.2f} | game-units: "
+                     "center=<{:.1f} {:.1f} {:.1f}> r={:.1f}\n",
+                     m_name, level, ti, tree.vis->first_root,
+                     fr.bsphere.x(), fr.bsphere.y(), fr.bsphere.z(), fr.bsphere.w(),
+                     fr.bsphere.x() * 4096.f, fr.bsphere.y() * 4096.f, fr.bsphere.z() * 4096.f,
+                     fr.bsphere.w() * 4096.f);
+        }
+      }
+    }
   } else {
     m_has_level = true;
   }

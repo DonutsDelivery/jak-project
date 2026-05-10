@@ -1333,6 +1333,39 @@
     (bg *kernel-boot-level*)
     (start-debug "play: bg returned, calling (on #f)~%")
     (on #f)
+    ;; SCAFFOLDING (Cycle 64 hypothesis test): teleport *math-camera* to the
+    ;; level's first continue-point camera-trans so tfrag geometry at world
+    ;; coords (e.g. krasw at ~(2.14M, 88K, -484K)) is visible from boot.
+    ;; Without this, default camera at origin can't see geometry millions of
+    ;; units away. Real fix lives in move-camera! (game-info.gc:73, stubbed).
+    (let ((info (lookup-level-info *kernel-boot-level*)))
+      (when (and info (not (null? (-> info continues))))
+        (let ((cont (the-as continue-point (car (-> info continues)))))
+          (start-debug "play: teleport cam to ~A camera-trans=<~F ~F ~F>~%"
+            *kernel-boot-level*
+            (-> cont camera-trans x) (-> cont camera-trans y) (-> cont camera-trans z))
+          (set! (-> *math-camera* trans quad) (-> cont camera-trans quad))
+          (set! (-> *math-camera* prev-trans quad) (-> cont camera-trans quad))
+          ;; Decode int16 camera-rot[9] (PS2 packed rotation, scale 1/32767)
+          ;; into the math-camera inv-camera-rot 3x3. This mirrors move-camera!
+          ;; (game-info.gc:73 stub) so the boot view orients toward the geometry.
+          (let ((m (-> *math-camera* inv-camera-rot))
+                (r (-> cont camera-rot)))
+            (matrix-identity! m)
+            (set! (-> m rvec x) (* 0.00003051851 (the float (-> r 0))))
+            (set! (-> m rvec y) (* 0.00003051851 (the float (-> r 1))))
+            (set! (-> m rvec z) (* 0.00003051851 (the float (-> r 2))))
+            (set! (-> m uvec x) (* 0.00003051851 (the float (-> r 3))))
+            (set! (-> m uvec y) (* 0.00003051851 (the float (-> r 4))))
+            (set! (-> m uvec z) (* 0.00003051851 (the float (-> r 5))))
+            (set! (-> m fvec x) (* 0.00003051851 (the float (-> r 6))))
+            (set! (-> m fvec y) (* 0.00003051851 (the float (-> r 7))))
+            (set! (-> m fvec z) (* 0.00003051851 (the float (-> r 8))))
+            )
+          (matrix-identity! (-> *math-camera* camera-rot))
+          )
+        )
+      )
     (start-debug "play: (on #f) returned, kmemclose~%")
     (kmemclose)
     (start-debug "play: kmemclose 1 done~%")

@@ -236,6 +236,36 @@ void Loader::loader_thread() {
       fmt::print(
           "------------> Load from file: {:.3f}s, import {:.3f}s, decomp {:.3f}s unpack {:.3f}s\n",
           disk_load_time, import_time, decomp_time, unpack_timer.getSeconds());
+      // SCAFFOLDING (Cycle 64): dump tfrag3::Level contents to identify what's in fr3.
+      {
+        size_t tfrag_total_draws = 0, tfrag_total_verts = 0;
+        for (auto& g : result->tfrag_trees) for (auto& t : g) {
+          tfrag_total_draws += t.draws.size();
+          tfrag_total_verts += t.packed_vertices.vertices.size();
+        }
+        size_t tie_total_draws = 0, tie_total_verts = 0;
+        for (auto& g : result->tie_trees) for (auto& t : g) {
+          tie_total_draws += t.static_draws.size();
+          tie_total_verts += t.packed_vertices.vertices.size();
+        }
+        size_t shrub_total_draws = 0, shrub_total_verts = 0;
+        for (auto& s : result->shrub_trees) {
+          shrub_total_draws += s.static_draws.size();
+          shrub_total_verts += s.packed_vertices.vertices.size();
+        }
+        fmt::print(
+            "[FR3DUMP/{}] tfrag: trees={}+{}+{} draws={} verts={} | "
+            "tie: trees={}+{}+{}+{} draws={} verts={} | "
+            "shrub: trees={} draws={} verts={} | merc_models={}\n",
+            lev,
+            result->tfrag_trees[0].size(), result->tfrag_trees[1].size(), result->tfrag_trees[2].size(),
+            tfrag_total_draws, tfrag_total_verts,
+            result->tie_trees[0].size(), result->tie_trees[1].size(),
+            result->tie_trees[2].size(), result->tie_trees[3].size(),
+            tie_total_draws, tie_total_verts,
+            result->shrub_trees.size(), shrub_total_draws, shrub_total_verts,
+            result->merc_data.models.size());
+      }
 
       // grab the lock again
       lk.lock();
