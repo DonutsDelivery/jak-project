@@ -369,6 +369,12 @@ bool Tie3::set_up_common_data_from_dma(DmaFollower& dma, SharedRenderState* rend
  * Does common setup for all category, but only renderers default_category.
  */
 void Tie3::render(DmaFollower& dma, SharedRenderState* render_state, ScopedProfilerNode& prof) {
+  static int s_tie3_render_dbg_count = 0;
+  bool dbg_print = s_tie3_render_dbg_count++ < 20;
+  if (dbg_print) {
+    fmt::print("[TIE3DBG] render() id={} name={} enabled={} frame={}\n",
+               m_my_id, m_name, m_enabled, render_state->frame_idx);
+  }
   if (!m_enabled) {
     while (dma.current_tag_offset() != render_state->next_bucket) {
       dma.read_and_advance();
@@ -376,7 +382,13 @@ void Tie3::render(DmaFollower& dma, SharedRenderState* render_state, ScopedProfi
     return;
   }
 
-  if (set_up_common_data_from_dma(dma, render_state)) {
+  bool common_ok = set_up_common_data_from_dma(dma, render_state);
+  if (dbg_print) {
+    fmt::print("[TIE3DBG] render() id={} name={} common_data_ok={} level_name={} has_level={} trees[lod={}].size={}\n",
+               m_my_id, m_name, common_ok, m_pc_port_data.level_name, m_has_level, lod(),
+               m_trees.empty() ? 0 : (int)m_trees[lod()].size());
+  }
+  if (common_ok) {
     setup_all_trees(lod(), m_common_data.settings, m_common_data.proto_vis_data,
                     m_common_data.proto_vis_data_size, !render_state->no_multidraw, prof);
 
@@ -1014,6 +1026,12 @@ void Tie3AnotherCategory::draw_debug_window() {
 void Tie3AnotherCategory::render(DmaFollower& dma,
                                  SharedRenderState* render_state,
                                  ScopedProfilerNode& prof) {
+  static int s_tie3ac_render_dbg_count = 0;
+  bool dbg_print = s_tie3ac_render_dbg_count++ < 40;
+  if (dbg_print) {
+    fmt::print("[TIE3DBG-AC] render() id={} name={} category={} frame={}\n",
+               m_my_id, m_name, (int)m_category, render_state->frame_idx);
+  }
   auto first_tag = dma.current_tag();
   dma.read_and_advance();
   if (first_tag.kind != DmaTag::Kind::CNT || first_tag.qwc != 0) {
