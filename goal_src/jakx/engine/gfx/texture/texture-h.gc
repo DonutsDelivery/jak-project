@@ -203,6 +203,7 @@ Lower number segments are larger and have hi-res versions of textures."
    (data       texture               :dynamic)
    )
   (:methods
+    (relocate (_type_ kheap (pointer uint8)) texture-page :replace)
     (texture-page-method-9 (_type_ kheap) none)
     (texture-page-method-10 (_type_ int int) int)
     (texture-page-method-11 (_type_ int int) texture-page)

@@ -514,8 +514,34 @@
 ;; ERROR: failed type prop at 34: add failed: sparticle-cpuinfo <integer 9216>
 
 (defun forall-particles-runner ((a0-0 (function sparticle-system sparticle-cpuinfo pointer none)) (a1-0 sparticle-system))
-  ;; JAKX BOOT-PATH STUB: real iterator decomp incomplete; (break!) was crashing
-  ;; remap-all-particles every frame. No-op until particles ported.
+  ;; Cycle 89: ported verbatim from jak3 sparticle.gc:524. Earlier stub left
+  ;; remap-all-particles a no-op which left adgif tex0 at compile-time TBP
+  ;; placeholder (5120) — Sprite3 renderer logged "Failed to find texture at
+  ;; 5120" every frame because the GS adgif tag still pointed at the static
+  ;; texture-id encoding instead of the loaded vram dest.
+  (let ((s4-0 (the-as object (-> a1-0 cpuinfo-table 0)))
+        (s3-0 (&+ (-> a1-0 vecdata-table) 0))
+        (s2-0 (+ (-> a1-0 blocks 0) (-> a1-0 blocks 1)))
+        )
+    (dotimes (s1-0 s2-0)
+      (cond
+        ((!= (-> a1-0 alloc-table s1-0) -1)
+         (dotimes (s0-0 64)
+           (if (nonzero? (-> (the-as sparticle-cpuinfo s4-0) valid))
+               (a0-0 a1-0 (the-as sparticle-cpuinfo s4-0) s3-0)
+               )
+           (set! s4-0 (+ (the-as uint s4-0) 144))
+           (&+! s3-0 48)
+           )
+         )
+        (else
+          (set! s4-0 (&+ (the-as pointer s4-0) 9216))
+          (&+! s3-0 3072)
+          )
+        )
+      )
+    )
+  0
   (none)
   )
 

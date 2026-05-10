@@ -1661,10 +1661,38 @@
   this
   )
 
-;; ERROR: failed type prop at 64: Could not figure out load: (set! v1 (l.wu (+ s4 8)))
-(defmethod relocate ((a0-0 texture-page) (a1-0 int))
-  ;; SCAFFOLDING — broken decompiler output
-  a0-0
+(defmethod relocate ((this texture-page) (heap kheap) (filename (pointer uint8)))
+  "Handle a texture page that has been loaded by the linker.
+   jakx Cycle 89: minimally adapted from jak3 texture.gc:1886. The previous SCAFFOLDING
+   stub left *texture-page-dir* entries[id].page = #f, so every lookup-texture-by-id-fast
+   for sparticle adgif TBP missed -> Sprite3 'Failed to find texture at 5120' warning
+   every frame in krastrn. This version JUST populates *texture-page-dir* entries and
+   the per-entry link buffer. We do NOT call texture-page-default-allocate here because
+   that crashed during early tpage-1 link (address 0x213300a020 — *texture-pool*
+   uninitialized or has half-initialized allocate-func vtable at link time). The actual
+   VRAM allocation + TextureUploadHandler upload should happen via login-level (which
+   walks *level-texture-page-translate* and dispatches texture-page-login)."
+  (cond
+    ((or (not this) (not (file-info-correct-version? (-> this info) (file-kind tpage) 0)))
+     (the-as texture-page #f)
+     )
+    (else
+      (when (and *texture-page-dir*
+                 (< (the-as uint (-> this id)) (the-as uint (-> *texture-page-dir* length))))
+        (let* ((a3-0 (-> this id))
+               (s4-0 (-> *texture-page-dir* entries a3-0))
+               )
+          (set! (-> s4-0 page) this)
+          (if (not (-> s4-0 link))
+              (set! (-> s4-0 link)
+                    (the-as texture-link (malloc 'loading-level (* (max (-> s4-0 length) (-> this length)) 4)))
+                    )
+              )
+          )
+        )
+      this
+      )
+    )
   )
 
 (defun relocate-later ()
@@ -2091,8 +2119,11 @@
 ;; og:preserve-this (jak3 port adapted for jakx — tex1 is uint64 not gs-tex1)
 (defun adgif-shader<-texture! ((arg0 adgif-shader) (arg1 texture))
   ;; gs-tex1 bit layout: mxl[4:2]=3bits, mmag[5]=1bit, mmin[8:6]=3bits, l[20:19]=2bits
-  ;; preserve the tfx field from current tex0 before rebuilding
-  (let ((tfx-save (the-as int (logand (shr (-> arg0 tex0) 3) 3))))
+  ;; preserve the tfx field from current tex0 before rebuilding.
+  ;; jakx Cycle 89 fix: prior hand-port used (shr tex0 3) which reads bits 3-4
+  ;; (random TBP bits) instead of TFX at bits 35-36; that fed garbage into
+  ;; :tfx and tripped Sprite3.cpp:685 ASSERT(reg.tfx() == MODULATE) in krastrn.
+  (let ((tfx-save (the-as int (logand (shr (-> arg0 tex0) 35) 3))))
     (let* ((mxl-v (logand (+ (the-as int (-> arg1 num-mips)) -1) 7))
            (mmag-v (logand (-> arg1 tex1-control) 1))
            (mmin-v (logand (shr (-> arg1 tex1-control) 1) 7))

@@ -10396,6 +10396,7 @@
   :size-assert         #x80
   :flag-assert         #xf00000080
   (:methods
+    (relocate (_type_ kheap (pointer uint8)) texture-page :replace) ;; 7
     (texture-page-method-9 (_type_ kheap) none) ;; 9 ;; (remove-data-from-heap (_type_ kheap) _type_)
     (texture-page-method-10 (_type_ int int) int) ;; 10
     (texture-page-method-11 (_type_ int int) texture-page) ;; 11
