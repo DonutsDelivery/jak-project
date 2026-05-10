@@ -66,12 +66,8 @@
 ;; jak3 sparticle-launcher.gc:125,127,129 sets these explicitly.
 (define *sp-launcher-lock* #f)
 (define *sp-launch-queue* (new 'global 'sp-launch-queue))
-;; Cycle 81: temporarily #f. enable=#t triggers a deeper null-deref inside
-;; mips2c sp-launch-particles-var (at addr 0x2123000000 in block_8) even with
-;; all 4 helpers (sp-queue-launch, sp-adjust-launch, sp-euler-convert,
-;; sp-rotate-system) ported and *sp-launch-queue* allocated. Cycle 82 will
-;; instrument the mips2c block_8 path to find the offending dereference.
-(define *sp-launcher-enable* #f)
+;; Cycle 82: deftype fix lands init-specs at correct offset; re-enable launcher.
+(define *sp-launcher-enable* #t)
 
 (kmemclose)
 

@@ -164,9 +164,10 @@
 ;; ERROR: Unsupported inline assembly instruction kind - [movz a2, t3, t2]
 ;; ERROR: Unsupported inline assembly instruction kind - [movz a2, t3, t2]
 ;; ERROR: Unsupported inline assembly instruction kind - [movz a2, t2, t1]
+;; Cycle 82: stub returns #f silently so sp-launch-particles-var (mips2c) can run
+;; without taking the game down on (break!). Real port deferred — visible geometry
+;; in krastrn is the priority; sp-get-particle is the next port-target.
 (defun sp-get-particle ((arg0 sparticle-system) (arg1 int) (arg2 sparticle-launch-state))
-  (format 0 "call to sp-get-particle~%")
-  (break!)
   (the-as sparticle-cpuinfo #f)
   )
 

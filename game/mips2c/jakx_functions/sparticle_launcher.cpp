@@ -750,7 +750,7 @@ block_8:
   c->lw(s6, 24, s3);                                // lw s6, 24(s3)
   c->mov64(s0, a3);                                 // or s0, a3, r0
   c->mov64(s1, t0);                                 // or s1, t0, r0
-  c->lw(a1, 8, a1);                                 // lw a1, 8(a1)
+  c->lw(a1, 4, a1);                                 // lw a1, 4(a1) -- jakx init-specs offset (jak3 was 8); see out/jakx/sparticle-launcher_ir2.asm L15214
   c->daddiu(a0, sp, 160);                           // daddiu a0, sp, 160
   c->addiu(a2, r0, 0);                              // addiu a2, r0, 0
   c->addiu(a3, r0, 8);                              // addiu a3, r0, 8
