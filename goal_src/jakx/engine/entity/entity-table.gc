@@ -67,6 +67,11 @@
                   (when (and (-> lnk entity)
                              (not (-> lnk process))
                              (not (logtest? (-> lnk perm status) (entity-perm-status dead bit-0))))
+                    ;; Cycle 78: one-shot trace per entity (gate above already
+                    ;; ensures we only run this branch until birth! sets process).
+                    (let ((act (the-as entity-actor (-> lnk entity))))
+                      (format 0 "[actors-update] birth! level=~A j=~D etype=~A aid=~X~%"
+                              (-> lev name) j (-> act etype) (-> act aid)))
                     (birth! (-> lnk entity))
                     )
                   )

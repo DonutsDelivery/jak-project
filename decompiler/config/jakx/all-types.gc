@@ -31828,9 +31828,9 @@
    (nickname                 symbol               :offset-assert 76)
    (vis-info                 level-vis-info 8     :offset-assert 80)
    (actors                   drawable-inline-array-actor :offset-assert 112)
-   (cameras                  basic               :offset-assert 116) ;; (array entity-camera) — type defined later
+   (cameras                  (array entity-camera) :offset-assert 116)
    (nodes                    basic               :offset-assert 120) ;; (inline-array bsp-node)
-   (level                    basic               :offset-assert 124)
+   (level                    level               :offset-assert 124)
    (current-leaf-idx         uint16              :offset-assert 128)
    (texture-flags            uint8 20            :offset-assert 130) ;; texture-page-flag 10 (10×uint16)
    (cam-outside-bsp          uint8               :offset        152)
@@ -31843,7 +31843,7 @@
    (actor-birth-order        (pointer uint32)    :offset 172)
    (light-hash               light-hash          :offset-assert 176)
    (nav-meshes               basic               :offset-assert 180) ;; (array entity-nav-mesh)
-   (actor-groups             basic               :offset-assert 184) ;; (array actor-group)
+   (actor-groups             (array actor-group) :offset-assert 184)
    (region-trees             basic               :offset 188) ;; (array drawable-tree-region-prim)
    (region-array             region-array        :offset-assert 192)
    (collide-hash             collide-hash        :offset 196)
@@ -31870,8 +31870,8 @@
   :size-assert         #x190
   :flag-assert         #x1300000190
   (:methods
-    (bsp-header-method-17 (_type_) none) ;; 17
-    (bsp-header-method-18 (_type_) none) ;; 18
+    (birth (_type_) bsp-header) ;; 17
+    (deactivate-entities (_type_) bsp-header) ;; 18
     )
   )
 

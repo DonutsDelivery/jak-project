@@ -49,7 +49,7 @@ This probably started as a very simple structure, but now it is extremely compli
    (pat                  pointer)
    (pat-length           int32)
    (actors               drawable-inline-array-actor  :offset 112)
-   (cameras              basic                         :offset 116)
+   (cameras              (array entity-camera)         :offset 116)
    (nodes                (inline-array bsp-node)       :offset 120)
    (level                level                         :offset 124)
    (current-leaf-idx     uint16                        :offset 128)
@@ -61,6 +61,7 @@ This probably started as a very simple structure, but now it is extremely compli
    (race-meshes          basic                         :offset 168)
    (actor-birth-order    (pointer uint32)              :offset 172)
    (nav-meshes           basic                         :offset 180)
+   (actor-groups         (array actor-group)           :offset 184)
    (vis-spheres          vector-array                  :offset 216)
    (vis-spheres-length   uint32                        :offset 248)
    (tfrag-masks          texture-masks-array           :offset 256)
@@ -78,8 +79,8 @@ This probably started as a very simple structure, but now it is extremely compli
    (data                 uint8  348                    :offset  52)
    )
   (:methods
-    (bsp-header-method-17 (_type_) none)
-    (bsp-header-method-18 (_type_) none)
+    (birth (_type_) bsp-header)
+    (deactivate-entities (_type_) bsp-header)
     )
   )
 
