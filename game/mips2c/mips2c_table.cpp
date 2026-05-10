@@ -475,6 +475,8 @@ namespace wv_player_post_move_update { extern void link(); }
 namespace plot_x_with_transform { extern void link(); }
 namespace plot_engine_torque_curve { extern void link(); }
 namespace estimate_eng_torque_from_gear { extern void link(); }
+// wcar-base.cpp port (see game/mips2c/jakx_functions/wcar-base.cpp)
+namespace method_115_wcar_base { extern void link(); }
 // net_player.cpp port (see game/mips2c/jakx_functions/net_player.cpp)
 namespace net_player_init_local { extern void link(); }
 // ripple.cpp port (see game/mips2c/jakx_functions/ripple.cpp)
@@ -952,6 +954,9 @@ PerGameVersion<std::unordered_map<std::string, std::vector<void (*)()>>> gMips2C
      // wvehicle: jakx-native methods that fail to decompile to GOAL expressions
      // (decompiler emits raw mips2c instead). See game/mips2c/jakx_functions/wvehicle.cpp.
      {"wvehicle", {jakx::method_61_wvehicle::link, jakx::method_64_wvehicle::link, jakx::method_129_wvehicle::link, jakx::method_134_wvehicle::link, jakx::method_157_wvehicle::link, jakx::method_214_wvehicle::link, jakx::method_215_wvehicle::link, jakx::method_217_wvehicle::link, jakx::method_218_wvehicle::link, jakx::method_219_wvehicle::link, jakx::method_220_wvehicle::link, jakx::method_224_wvehicle::link, jakx::method_133_wvehicle::link, jakx::method_112_wvehicle::link, jakx::wv_player_post_move_update::link, jakx::plot_x_with_transform::link, jakx::plot_engine_torque_curve::link, jakx::estimate_eng_torque_from_gear::link}},
+     // wcar-base: shock-joint updater (method 115) — dense VU stack math + 4-wheel iteration.
+     // See game/mips2c/jakx_functions/wcar-base.cpp.
+     {"wcar-base", {jakx::method_115_wcar_base::link}},
      // net-player: BAD-PROLOGUE asm function (net-player-init-local) — process-spawn
      // :init handler called from net-game-mgr-method-52. See game/mips2c/jakx_functions/net_player.cpp.
      {"net-player", {jakx::net_player_init_local::link}},

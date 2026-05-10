@@ -126,3 +126,13 @@
     )
   (none)
   )
+
+;; -----------------------------------------------------------------------------
+;; Method 115 — vehicle shock-joint updater (4-wheel iteration).
+;; Bound to mips2c port at game/mips2c/jakx_functions/wcar-base.cpp.
+;; Ported from decompiler_out/jakx/wcar-base_ir2.asm MIPS2C-Start scaffold;
+;; Tier 1 (type_casts + stack_structures) cannot model the 12+ inline storage
+;; slots referenced via s5+N varying offsets, so wrapped as Tier 2 mips2c.
+;; -----------------------------------------------------------------------------
+(defmethod-mips2c "(method 115 wcar-base)" 115 wcar-base)
+
