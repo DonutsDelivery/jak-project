@@ -699,7 +699,14 @@ of the texture."
 (define *eyes-texture-base* (new 'static 'texture-base))
 
 (defmacro get-texture (name tpage)
-  `(lookup-texture-by-id ,(string->symbol-format "{}-{}" name tpage)))
+  ;; Cycle 94: route through lookup-texture-by-id-fast instead of the slow
+  ;; lookup-texture-by-id, which currently calls texture-page-login (a
+  ;; SCAFFOLDING stub returning #f) and therefore always misses. Fast variant
+  ;; consults *texture-page-dir* directly; jakx populates that via
+  ;; texture-page-method-11/relocate (Cycle 89). Both functions share the
+  ;; (function texture-id texture) signature, so all 125+ get-texture call
+  ;; sites are unaffected at the type level.
+  `(lookup-texture-by-id-fast ,(string->symbol-format "{}-{}" name tpage)))
 
 (import "goal_src/jak3/engine/data/tpages.gc")
 (import "goal_src/jak3/engine/data/textures.gc")
