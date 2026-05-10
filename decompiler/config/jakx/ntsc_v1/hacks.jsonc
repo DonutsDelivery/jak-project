@@ -2421,6 +2421,7 @@
     "local-human-player-above-height?",
     "playback-cam",
     // wcar-* methods that are asm-only (cannot be decompiled; REF expects defmethod-mips2c)
+    "(method 115 wcar-base)",
     "(method 66 v-tiger)",
     "(method 69 v-tiger)",
     "(method 100 v-tiger)",
