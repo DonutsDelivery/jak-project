@@ -80,13 +80,22 @@
       ;; and 100m back. This is the first jakx camera placement that gets
       ;; krastrn (the tutorial level) to render visible terrain instead of
       ;; the previous black screen. Real fix waits on race-camera bringup.
-      (let ((cx -67563.0) (cy 900000.0) (cz -299048.0) (got-atoll #f))
+      (let ((cx -67563.0) (cy 900000.0) (cz -299048.0) (got-atoll #f) (got-krastrn #f))
         (dotimes (li (-> *level* length))
           (let ((lev (-> *level* level li)))
-            (when (and (or (= (-> lev status) 'active) (= (-> lev status) 'alive))
-                       (= (level-method-13 lev) 'atoll))
-              (set! got-atoll #t))))
-        (when (not got-atoll)
+            (when (or (= (-> lev status) 'active) (= (-> lev status) 'alive))
+              (when (= (level-method-13 lev) 'atoll) (set! got-atoll #t))
+              (when (= (level-method-13 lev) 'krastrn) (set! got-krastrn #t)))))
+        ;; Cycle 85: krastrn cam aimed at known eco-green spawn area to validate
+        ;; sparticle launcher pipeline emits visible green pixels. Coords from
+        ;; cycle-83 cpu[0] world-position probe (989937, 93559, -2926956); cam
+        ;; placed +50m up so down-looking frustum (fvec=0,-1,0) frames the spot.
+        (cond
+          (got-krastrn
+            (set! cx 989937.0)
+            (set! cy (+ 93559.0 (meters 50.0)))
+            (set! cz -2926956.0))
+          ((not got-atoll)
           ;; Average centers of "small" trees (radius < median heuristic: skip
           ;; first tree which is usually skybox/master). Take last non-zero.
           (let ((sum-x 0.0) (sum-y 0.0) (sum-z 0.0) (n 0))
@@ -114,7 +123,7 @@
                 (set! cy (+ (/ sum-y nf) (meters 50.0)))
                 (set! cz (- (/ sum-z nf) (meters 100.0))))
               (when (zero? (mod *jakx-cam-instr-count* 120))
-                (format 0 "[cycle77-cam] n=~D trans=<~F ~F ~F>~%" n cx cy cz)))))
+                (format 0 "[cycle77-cam] n=~D trans=<~F ~F ~F>~%" n cx cy cz))))))
         (set-vector! (-> *math-camera* trans) cx cy cz 1.0))
       (set-vector! (-> *save-camera-inv-rot* rvec) 1.0 0.0 0.0 0.0)
       (set-vector! (-> *save-camera-inv-rot* uvec) 0.0 0.0 1.0 0.0)
