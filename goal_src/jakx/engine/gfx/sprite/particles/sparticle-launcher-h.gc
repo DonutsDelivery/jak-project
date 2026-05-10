@@ -18,6 +18,11 @@
 (define-extern sp-launch-particles-var (function sparticle-system sparticle-launcher matrix sparticle-launch-state sparticle-launch-control float none))
 (define-extern execute-part-engine (function none))
 (define-extern execute-particle-local-space-engine (function int none))
+;; jakx Cycle 81: forward-extern for sparticle-launcher.gc::spawn body which
+;; references both 2d and 3d systems. Both globals are defined in sparticle.gc
+;; (compiled after sparticle-launcher.gc).
+(define-extern *sp-particle-system-2d* sparticle-system)
+(define-extern *sp-particle-system-3d* sparticle-system)
 
 ;; +++sp-field-id
 (defenum sp-field-id

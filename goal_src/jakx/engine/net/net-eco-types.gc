@@ -326,38 +326,24 @@
 ;; Cycle 80: custom post for eco-green :running state.
 ;; eco-green has NO skeleton (renders via particles), so ja-post would crash.
 ;;
-;; INTENT: each frame, spawn particles at the trsqv trans position.
-;;
-;; CYCLE 80 BLOCKER: `spawn` method (sparticle-launcher.gc:1076 in jak3, ~250 lines)
-;; is NOT yet ported into jakx. Calling it null-derefs at addr=0x2123000000 in
-;; the dispatch tick AFTER all 7 eco-green entities init successfully.
-;; Next-cycle plan: port `spawn`, `is-visible?`, related helpers.
-;; For now, no-op so boot stays stable past actor pipeline.
-(defbehavior eco-green-post eco-green ()
-  ;; (when (nonzero? (-> self part))
-  ;;   (spawn (-> self part) (-> self root trans))
-  ;;   )
-  (none)
-  )
-
-(let ((gp-3 (new 'static 'state
-              :name 'running
-              :next #f
-              :exit #f
-              :parent #f
-              :code #f
-              :trans #f
-              :post #f
-              :enter #f
-              :event #f
-              )
-            )
+;; Cycle 81: spawn + is-visible? methods are now ported in sparticle-launcher.gc.
+;; Each frame this calls (spawn part vec) which iterates the launch group's 18
+;; sl-data entries, sphere-in-frustum-checks, fade/period-checks, and dispatches
+;; sp-launch-particles-var into *sp-particle-system-2d*/3d. End result: green
+;; particles emit at (-> self root trans) once per visible eco-green entity.
+;; jakx Cycle 81: defstate replaces the older method-set!-on-static-state
+;; pattern (Cycle 80) which silently never fired the post. defstate's macro
+;; emits the right state-vtable wiring, matching training-marker (which works).
+(defstate running (eco-green)
+  :virtual #t
+  :code (behavior ()
+    (loop (suspend))
+    )
+  :post (behavior ()
+    (when (nonzero? (-> self part))
+      (spawn (-> self part) (-> self root trans))
       )
-  (inherit-state gp-3 (the-as state (method-of-type eco running)))
-  ;; Cycle 80: code=sleep-code keeps process alive; post emits particles.
-  (set! (-> gp-3 code) sleep-code)
-  (set! (-> gp-3 post) eco-green-post)
-  (method-set! eco-green 50 gp-3)
+    )
   )
 
 ;; Cycle 80: eco-green init wires the sparticle launcher (group-eco-green).
@@ -372,11 +358,9 @@
   (set! (-> this entity) arg0)
   (set! (-> this root) (new 'process 'trsqv))
   (process-drawable-from-entity! this arg0)
-  (format 0 "[eco-green C80 sA] aid=~X stable-base done~%" (-> arg0 aid))
   ;; Cycle 80 stage B: create-launch-control wires sparticle-launch-control to
   ;; group-eco-green (id 129). Methods ported in sparticle-launcher.gc this cycle.
   (set! (-> this part) (create-launch-control group-eco-green this))
-  (format 0 "[eco-green C80 sB] aid=~X part=~A~%" (-> arg0 aid) (-> this part))
   ;; Cycle 80 stage C: enter running state — :post emits particles each frame
   ;; via eco-green-post (declared above). :code is sleep-code so the process
   ;; just sits and ticks particles.
