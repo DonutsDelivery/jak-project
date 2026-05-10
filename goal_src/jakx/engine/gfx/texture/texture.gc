@@ -644,7 +644,13 @@
 
 (defun texture-page-common-boot-allocate ((pool texture-pool) (page texture-page) (heap kheap) (page-id int))
   "Allocator function for texture loaded at startup time.
-   For jak 3, this seems to always do default-allocate (permanently in vram?)"
+   For jak 3, this seems to always do default-allocate (permanently in vram?)
+   NOTE (Cycle 91): in jakx this is currently unreachable because
+   texture-page-login (texture.gc:~1794) is a SCAFFOLDING stub that returns #f
+   without invoking allocate-func. upload-textures (Cycle 91c sync block) lazily
+   syncs the same level-default texture-page-dir slots from the global
+   *texture-page-dir* (populated by Cycle 89 relocate). When login is ported
+   properly, this case-table can take over."
   (let ((s2-0 (texture-pool-method-18 pool page-id)))
     (cond
       ((>= s2-0 0)
@@ -719,6 +725,14 @@
 ;; WARN: Return type mismatch symbol vs none.
 (defun upload-vram-data ((dma-buf dma-buffer) (dest int) (data-ptr pointer) (h int) (w int))
   "Add DMA to later upload a texture, by reference. Sets up the GIF for receiving the texture."
+  (#when PC_PORT
+    ;; Cycle 91d: disabled on PC. The BITBLTBUF/TRXPOS/TRXREG/TRXDIR DIRECT chunks
+    ;; emitted by this function are PS2-only — on PC they reach DirectRenderer
+    ;; via TextureUploadHandler::render and assert in handle_ad. Jak3 has the
+    ;; same guard (texture.gc:719). The PC port instead consumes the PC_PORT vif
+    ;; tag at end of upload-vram-pages → handle_upload_now to register textures.
+    (return #f)
+    )
   (let ((v1-0 *display*)
         (a0-2 (* 96 (+ (sar h 11) 1)))
         )
@@ -832,6 +846,20 @@
               (+! s5-0 sv-32)
               )
             (dma-buffer-add-gs-set s3-0 (texflush 1))
+
+            ;; Cycle 91: PC_PORT hook ported from jak3 texture.gc:837. Emits a
+            ;; vif-cmd pc-port tag containing the texture-page* and upload-mode
+            ;; that TextureUploadHandler::render reads to call handle_upload_now,
+            ;; which registers m_textures[tex.dest[mip_idx]] for every texture in
+            ;; the page. Without this, the per-frame DMA path uploads texel data
+            ;; but never tells C++ to populate the lookup table -> Sprite3 logs
+            ;; 'Failed to find texture at TBP=N (sprite)'.
+            (#when PC_PORT
+              (dma-buffer-add-cnt-vif2 s3-0 1 (new 'static 'vif-tag :cmd (vif-cmd pc-port)) (the-as vif-tag 3))
+              (dma-buffer-add-uint64 s3-0 page)
+              (dma-buffer-add-uint64 s3-0 mode)
+              )
+
             (let ((a3-3 (-> s3-0 base)))
               (when (!= s4-0 a3-3)
                 (let ((v1-56 (the-as dma-packet (-> s3-0 base))))
@@ -1001,6 +1029,68 @@
       )
     (shl s5-0 14)
     )
+  )
+
+;; Cycle 91: PC port variant of upload-vram-pages-pris. Ported verbatim from jak3
+;; texture.gc:921. Skips the PS2-style mask/upload-vram-data dance entirely; just
+;; advances pool->ids[] for every chunk in the page, then emits the pc-port vif
+;; tag so TextureUploadHandler can call handle_upload_now to register the page's
+;; textures in m_textures.
+;; og:preserve-this pc port function
+(defun upload-vram-pages-pris-pc ((pool texture-pool)
+                                  (dest-seg texture-pool-segment)
+                                  (tpage texture-page)
+                                  (bucket bucket-id)
+                                  (mask (pointer int32))
+                                  )
+  "Build DMA for uploading the given texture-page in pc format.
+  We don't use the mask system of the original game properly."
+  (if (not tpage)
+      (return 0)
+      )
+  (let* ((dma-buf (-> *display* frames (-> *display* on-screen) global-buf))
+         (s4-0 (-> dma-buf base))
+         (any-uploads #f)
+         (vram-ptr (shr (-> tpage segment 0 dest) 12))
+         (tpage-num-chunks (the-as int (-> tpage size)))
+         (tpage-id (-> tpage id))
+         )
+    (set! tpage-num-chunks (shr (min (the-as int (-> dest-seg size)) (the-as int (+ tpage-num-chunks 4095))) 12))
+
+    (dotimes (chunk-idx tpage-num-chunks)
+      (let ((mask-work (-> mask (/ chunk-idx 32))))
+        (when (logtest? mask-work (ash 1 (logand chunk-idx 31)))
+          (set! any-uploads #t)
+          )
+        )
+      )
+
+    (dotimes (chunk-idx tpage-num-chunks)
+      (let ((chunk-dest (+ vram-ptr chunk-idx)))
+        (set! (-> pool ids chunk-dest) tpage-id)
+        )
+      )
+
+    (dma-buffer-add-cnt-vif2 dma-buf 1 (new 'static 'vif-tag :cmd (vif-cmd pc-port)) (the-as vif-tag 3))
+    (dma-buffer-add-uint64 dma-buf tpage)
+    (dma-buffer-add-uint64 dma-buf -1)
+
+    (let ((a3-5 (-> dma-buf base)))
+      (let ((v1-43 (the-as dma-packet (-> dma-buf base))))
+        (set! (-> v1-43 dma) (new 'static 'dma-tag :id (dma-tag-id next)))
+        (set! (-> v1-43 vif0) (new 'static 'vif-tag))
+        (set! (-> v1-43 vif1) (new 'static 'vif-tag))
+        (set! (-> dma-buf base) (the-as pointer (&+ v1-43 16)))
+        )
+      (dma-bucket-insert-tag
+        (-> *display* frames (-> *display* on-screen) bucket-group)
+        bucket
+        s4-0
+        (the-as (pointer dma-tag) a3-5)
+        )
+      )
+    )
+  0
   )
 
 (defun texture-page-level-allocate ((pool texture-pool) (page texture-page) (heap kheap) (page-id int))
@@ -1183,134 +1273,113 @@
   0
   )
 
-;; ERROR: failed type prop at 28: Called a function, but we do not know its type
-(defmethod texture-pool-method-14 ((a0-0 texture-pool) (a1-0 level) (a2-0 tpage-category) (a3-0 bucket-id))
-  (local-vars
-    (v0-0 none)
-    (v0-1 none)
-    (v0-2 none)
-    (v0-3 none)
-    (v0-4 none)
-    (v0-5 none)
-    (v0-6 none)
-    (v0-7 none)
-    (v0-8 none)
-    (v0-9 none)
-    (v1-0 int)
-    (v1-1 int)
-    (v1-2 int)
-    (v1-3 uint)
-    (v1-4 int)
-    (v1-5 int)
-    (v1-6 uint)
-    (v1-8 none)
-    (v1-9 none)
-    (v1-11 none)
-    (v1-12 none)
-    (v1-13 none)
-    (v1-14 none)
-    (v1-15 none)
-    (v1-16 none)
-    (v1-17 none)
-    (v1-18 none)
-    (v1-19 none)
-    (v1-20 none)
-    (v1-21 none)
-    (v1-22 none)
-    (v1-25 none)
-    (v1-26 none)
-    (v1-27 none)
-    (v1-28 none)
-    (v1-29 none)
-    (v1-30 none)
-    (v1-31 none)
-    (v1-34 none)
-    (v1-35 none)
-    (v1-38 none)
-    (v1-39 none)
-    (v1-40 none)
-    (v1-41 none)
-    (v1-43 none)
-    (v1-44 none)
-    (v1-45 none)
-    (v1-47 none)
-    (v1-48 none)
-    (v1-51 none)
-    (v1-52 none)
-    (v1-53 none)
-    (v1-54 none)
-    (a0-1 symbol)
-    (a0-3 symbol)
-    (a0-4 int)
-    (a0-6 none)
-    (a0-7 none)
-    (a0-9 none)
-    (a0-11 none)
-    (a0-12 none)
-    (a0-13 none)
-    (a0-14 none)
-    (a0-15 none)
-    (a0-16 none)
-    (a0-17 none)
-    (a0-19 none)
-    (a0-23 none)
-    (a0-24 none)
-    (a0-27 none)
-    (a0-28 none)
-    (a0-32 none)
-    (a1-1 texture-page)
-    (a1-3 none)
-    (a1-4 none)
-    (a1-5 none)
-    (a1-6 none)
-    (a1-7 none)
-    (a1-8 none)
-    (a1-9 none)
-    (a1-10 none)
-    (a1-13 none)
-    (a1-14 none)
-    (a2-1 symbol)
-    (a2-3 none)
-    (a2-4 none)
-    (a2-5 none)
-    (a2-10 none)
-    (a2-12 none)
-    (a3-1 none)
-    (a3-3 none)
-    (a3-4 none)
-    (a3-5 none)
-    (a3-6 none)
-    (a3-8 none)
-    (a3-9 none)
-    (a3-10 none)
-    (a3-11 none)
-    (t0-1 none)
-    (t0-4 none)
-    (t0-6 none)
-    (t0-7 none)
-    (t0-8 none)
-    (s2-0 int)
-    (s2-1 none)
-    (s2-2 none)
-    (t9-0 function)
-    (t9-1 none)
-    (t9-2 none)
-    (t9-3 none)
-    (t9-4 none)
-    (t9-5 none)
-    (t9-6 none)
-    (t9-7 none)
-    (t9-8 none)
-    (f0-0 meters)
+;; Cycle 91: jak3-derived port of add-level-tpage-dma. Was a SCAFFOLDING `(none)`
+;; stub. Per-frame dispatcher: per (level, tpage-category, bucket) tuple,
+;; queue the page's textures for upload via upload-vram-pages, which emits
+;; the pc-port vif tag that TextureUploadHandler reads to populate m_textures.
+;; Adapted to jakx layout: jakx has no separate `texture-page` array on level —
+;; the per-category texture-page* lives inside `texture-page-dir N page`. Only
+;; the maskless categories (sprite/hud/sky/warp/shrub) are wired this cycle;
+;; tfrag/pris/etc. need jakx-specific texture-mask layout work.
+(define *jakx-c91-method14-debug-fired* #f)
+
+(defmethod texture-pool-method-14 ((this texture-pool) (lev level) (category tpage-category) (bucket bucket-id))
+  "Set up DMA to upload all textures needed to draw this level on this frame.
+   Jakx Cycle 91 port of jak3 add-level-tpage-dma (texture.gc:1281). Minimal
+   per-frame texture-upload dispatch. Returns 0.
+   Cycle 91b: common categories (sprite/hud/sky/warp) live on level-default's
+   texture-page-dir (populated by texture-page-common-boot-allocate). Per-level
+   categories (shrub) live on the loaded level's texture-page-dir."
+  (let* ((src-lev (case category
+                    (((tpage-category sprite) (tpage-category hud) (tpage-category sky) (tpage-category warp))
+                     (-> *level* level-default))
+                    (else lev)
+                    ))
+         (a2-1 (-> src-lev texture-page-dir (the-as int category) page))
+         )
+    (#when PC_PORT
+      (when (not *jakx-c91-method14-debug-fired*)
+        (format 0 "[c91] method-14 fired: lev='~A' src='~A' index=~D cat=~D bucket=~D pageptr=~A~%"
+                (-> lev name) (-> src-lev name) (-> lev index) (the-as int category) (the-as int bucket) a2-1)
+        (set! *jakx-c91-method14-debug-fired* #t)
+        )
+      )
+    (when (and a2-1 (nonzero? (the-as int a2-1)))
+      (case category
+        (((tpage-category sprite))
+         (set! (-> lev upload-size 7)
+               (upload-vram-pages this (-> this segment-common) a2-1 (tex-upload-mode seg0-1-2) bucket)
+               )
+         )
+        (((tpage-category hud))
+         (set! (-> lev upload-size 8)
+               (upload-vram-pages this (-> this segment-common) a2-1 (tex-upload-mode seg0-1-2) bucket)
+               )
+         )
+        (((tpage-category sky))
+         (set! (-> lev upload-size 9)
+               (upload-vram-pages this (-> this segment-common) a2-1 (tex-upload-mode seg0-1-2) bucket)
+               )
+         )
+        (((tpage-category warp))
+         (set! (-> lev upload-size 5)
+               (upload-vram-pages this (-> this segment-common) a2-1 (tex-upload-mode seg0-1-2) bucket)
+               )
+         )
+        (((tpage-category shrub))
+         (set! (-> lev upload-size 2)
+               (upload-vram-pages this (-> this segment-common) a2-1 (tex-upload-mode seg0-1-2) bucket)
+               )
+         )
+        (((tpage-category hfrag))
+         ;; Disabled per jak3 PC port — hfrag renderer is rewritten on PC.
+         )
+        )
+      )
     )
-  ;; SCAFFOLDING — broken decompiler output
+  0
   (none)
   )
 
 (define-extern set-dirty-mask! (function level int int int int))
 
+(define *jakx-c91-tdir-sync-done* #f)
+(define *jakx-c91-tdir-debug-fired* #f)
+
 (defun upload-textures ((pool texture-pool))
   "Set up DMA for all texture uploads for this frame."
+  (#when PC_PORT
+    ;; Cycle 91c: texture-page-login is a SCAFFOLDING stub in jakx, so
+    ;; common-boot-allocate's case-branches never fire and level-default's
+    ;; texture-page-dir slots stay #f. But Cycle-89 relocate did populate the
+    ;; global *texture-page-dir* via each level's link buffer. Lazy-sync the
+    ;; common pages into level-default once they're reachable.
+    (when (not *jakx-c91-tdir-sync-done*)
+      (when (not *jakx-c91-tdir-debug-fired*)
+        (format 0 "[c91] tdir sync probe: *texture-page-dir*=~A~%" *texture-page-dir*)
+        (set! *jakx-c91-tdir-debug-fired* #t)
+        )
+      (when (and *texture-page-dir* (>= (-> *texture-page-dir* length) 12))
+        (let ((dir *texture-page-dir*))
+          (let ((p (-> dir entries 4 page))) (when p (set! (-> *level* level-default texture-page-dir 7 page) p)
+            (format 0 "[c91] sync entry[4] -> tdir[7] sprite page='~A' length=~D~%" (-> p name) (-> p length))))
+          (let ((p (-> dir entries 5 page))) (when p (set! (-> *level* level-default texture-page-dir 4 page) p)))
+          (let ((p (-> dir entries 6 page))) (when p (set! (-> *level* level-default texture-page-dir 0 page) p)))
+          (let ((p (-> dir entries 7 page))) (when p (set! (-> *level* level-default texture-page-dir 1 page) p)))
+          (let ((p (-> dir entries 8 page))) (when p (set! (-> *level* level-default texture-page-dir 9 page) p)))
+          (let ((p (-> dir entries 9 page))) (when p (set! (-> *level* level-default texture-page-dir 8 page) p)
+            (format 0 "[c91] sync entry[9] -> tdir[8] hud~%")))
+          (let ((p (-> dir entries 10 page))) (when p (set! (-> *level* level-default texture-page-dir 5 page) p)))
+          (let ((p (-> dir entries 11 page))) (when p (set! (-> *level* level-default texture-page-dir 2 page) p)))
+          )
+        ;; Mark done only when sprite slot got populated
+        (when (-> *level* level-default texture-page-dir 7 page)
+          (set! *jakx-c91-tdir-sync-done* #t)
+          (format 0 "[c91] tdir sync DONE~%")
+          )
+        )
+      )
+    )
   (set! (-> *level* level-default texture-anim-array 0) #f)
   (dotimes (v1-1 19)
     (let ((a0-4 (-> *level* level v1-1)))
@@ -1321,34 +1390,39 @@
         )
       )
     )
-  ;; JAKX BOOT-PATH STUB: *car-level-array* and *texture-page-translate* are
-  ;; define-extern'd but never assigned -> null. Skip car-tbp dirty-masking and
-  ;; texture-page translation iteration until those globals are populated.
-  (when (and (nonzero? (the-as int *car-level-array*)) (nonzero? (the-as int *texture-page-translate*)))
-  (dotimes (s5-0 6)
-    (let ((a3-0 (* (-> *car-level-array* data s5-0 first-tbp) 256))
-          (v1-10 (* (-> *car-level-array* data s5-0 last-tbp) 256))
-          )
-      (set-dirty-mask! (-> *level* level (+ s5-0 6)) 1 (the-as int (- v1-10 a3-0)) (the-as int a3-0))
-      )
-    )
-  (dotimes (s5-1 (-> *texture-page-translate* length))
-    (let* ((v1-16 (-> *texture-page-translate* s5-1))
-           (a1-11 (-> *level* draw-level (-> v1-16 level-index)))
-           )
-      (if (and a1-11
-               (logtest? (the-as texture-enable-mask-u32 (-> *texture-pool* texture-enable-user)) (-> v1-16 texture-user))
-               )
-          (texture-pool-method-14
-            pool
-            a1-11
-            (the-as tpage-category (-> v1-16 level-texture-page))
-            (the-as bucket-id (-> v1-16 bucket))
+  ;; Cycle 91: split the boot-path gate. The car-level-array dirty-mask loop
+  ;; still requires *car-level-array* (per-vehicle TBP ranges, not yet wired).
+  ;; The texture-page-translate iteration dispatches the per-frame upload
+  ;; pipeline now that *texture-page-translate* is defined (jakx-h.gc).
+  ;; Without splitting, the AND-gate skipped both even when only car-level was
+  ;; missing -> sprite TBPs never registered in C++ TexturePool m_textures.
+  (when (nonzero? (the-as int *car-level-array*))
+    (dotimes (s5-0 6)
+      (let ((a3-0 (* (-> *car-level-array* data s5-0 first-tbp) 256))
+            (v1-10 (* (-> *car-level-array* data s5-0 last-tbp) 256))
             )
-          )
+        (set-dirty-mask! (-> *level* level (+ s5-0 6)) 1 (the-as int (- v1-10 a3-0)) (the-as int a3-0))
+        )
       )
     )
-  ) ;; end (when (and *car-level-array* *texture-page-translate*) ...)
+  (when (nonzero? (the-as int *texture-page-translate*))
+    (dotimes (s5-1 (-> *texture-page-translate* length))
+      (let* ((v1-16 (-> *texture-page-translate* s5-1))
+             (a1-11 (-> *level* draw-level (-> v1-16 level-index)))
+             )
+        (if (and a1-11
+                 (logtest? (the-as texture-enable-mask-u32 (-> *texture-pool* texture-enable-user)) (-> v1-16 texture-user))
+                 )
+            (texture-pool-method-14
+              pool
+              a1-11
+              (the-as tpage-category (-> v1-16 level-texture-page))
+              (the-as bucket-id (-> v1-16 bucket))
+              )
+            )
+        )
+      )
+    )
   (dotimes (gp-1 6)
     (let ((v1-24 (-> *level* level (+ gp-1 6))))
       (let ((a0-23 gp-1))

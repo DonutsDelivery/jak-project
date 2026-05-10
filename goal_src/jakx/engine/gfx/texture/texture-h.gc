@@ -616,7 +616,85 @@ of the texture."
   )
 
 
-(define-extern *texture-page-translate* (array texture-page-translate-item))
+;; Cycle 91: define *texture-page-translate* with sprite/hud entries for level
+;; indices 0-10 (level-default lives at index 10). Each entry tells
+;; upload-textures to dispatch texture-pool-method-14 once per (level, category,
+;; bucket) tuple per frame. Without this table populated, the per-frame texture
+;; upload pipeline is dormant -> sprite/particle TBPs (367, 5120) never reach
+;; m_textures and Sprite3 logs 'Failed to find texture at TBP=N (sprite)'.
+;; Minimal jakx subset — tfrag/pris/shrub/alpha/water/warp/pris2 entries can be
+;; added later once their per-level buckets are wired up.
+(define *texture-page-translate*
+  (the-as (array texture-page-translate-item) (new 'static 'boxed-array :type texture-page-translate-item
+                                  ;; sprite — bucket tex-sprite, all 11 level slots
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-sprite)
+                                    :level-texture-page (tpage-category-u32 sprite)
+                                    :texture-user (texture-enable-mask-u32 sprite)
+                                    )
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-sprite) :level-index #x1
+                                    :level-texture-page (tpage-category-u32 sprite)
+                                    :texture-user (texture-enable-mask-u32 sprite)
+                                    )
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-sprite) :level-index #x2
+                                    :level-texture-page (tpage-category-u32 sprite)
+                                    :texture-user (texture-enable-mask-u32 sprite)
+                                    )
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-sprite) :level-index #x3
+                                    :level-texture-page (tpage-category-u32 sprite)
+                                    :texture-user (texture-enable-mask-u32 sprite)
+                                    )
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-sprite) :level-index #x4
+                                    :level-texture-page (tpage-category-u32 sprite)
+                                    :texture-user (texture-enable-mask-u32 sprite)
+                                    )
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-sprite) :level-index #x5
+                                    :level-texture-page (tpage-category-u32 sprite)
+                                    :texture-user (texture-enable-mask-u32 sprite)
+                                    )
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-sprite) :level-index #x6
+                                    :level-texture-page (tpage-category-u32 sprite)
+                                    :texture-user (texture-enable-mask-u32 sprite)
+                                    )
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-sprite) :level-index #x7
+                                    :level-texture-page (tpage-category-u32 sprite)
+                                    :texture-user (texture-enable-mask-u32 sprite)
+                                    )
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-sprite) :level-index #x8
+                                    :level-texture-page (tpage-category-u32 sprite)
+                                    :texture-user (texture-enable-mask-u32 sprite)
+                                    )
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-sprite) :level-index #x9
+                                    :level-texture-page (tpage-category-u32 sprite)
+                                    :texture-user (texture-enable-mask-u32 sprite)
+                                    )
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-sprite) :level-index #xa
+                                    :level-texture-page (tpage-category-u32 sprite)
+                                    :texture-user (texture-enable-mask-u32 sprite)
+                                    )
+                                  ;; hud — bucket tex-hud-hud-alpha
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-hud-hud-alpha)
+                                    :level-texture-page (tpage-category-u32 hud)
+                                    :texture-user (texture-enable-mask-u32 hud)
+                                    )
+                                  (new 'static 'texture-page-translate-item
+                                    :bucket (bucket-id tex-hud-hud-alpha) :level-index #xa
+                                    :level-texture-page (tpage-category-u32 hud)
+                                    :texture-user (texture-enable-mask-u32 hud)
+                                    )
+                                  ))
+  )
 
 (define *eyes-texture-base* (new 'static 'texture-base))
 
