@@ -1382,33 +1382,27 @@
         (when (-> *level* level-default texture-page-dir 7 page)
           (set! *jakx-c91-tdir-sync-done* #t)
           (format 0 "[c91] tdir sync DONE~%")
-          ;; Cycle 92: one-shot bulk upload of all populated common pages.
-          ;; Each call queues a PC_PORT vif tag in the tex-sprite bucket;
-          ;; TextureUploadHandler::render consumes them and calls handle_upload_now,
-          ;; registering every texture in the page (m_textures[tex.dest[mip]] = source).
-          ;; tex-sprite is wired to TextureUploadHandler in init_bucket_renderers_jak3
-          ;; (used for both jak3 and jakx). After this one-shot, Sprite3 lookups for
-          ;; pris/water/sky/warp/shrub textures succeed without needing per-frame
-          ;; method-14 dispatch for those categories.
-          (let ((sprite-bucket (bucket-id tex-sprite)))
-            (let ((p (-> *level* level-default texture-page-dir 1 page)))
-              (when p (upload-vram-pages pool (-> pool segment-common) p (tex-upload-mode seg0-1-2) sprite-bucket)
-                (format 0 "[c92] bulk-upload pris len=~D~%" (-> p length))))
-            (let ((p (-> *level* level-default texture-page-dir 4 page)))
-              (when p (upload-vram-pages pool (-> pool segment-common) p (tex-upload-mode seg0-1-2) sprite-bucket)
-                (format 0 "[c92] bulk-upload water len=~D~%" (-> p length))))
-            (let ((p (-> *level* level-default texture-page-dir 0 page)))
-              (when p (upload-vram-pages pool (-> pool segment-common) p (tex-upload-mode seg0-1-2) sprite-bucket)
-                (format 0 "[c92] bulk-upload tfrag len=~D~%" (-> p length))))
-            (let ((p (-> *level* level-default texture-page-dir 2 page)))
-              (when p (upload-vram-pages pool (-> pool segment-common) p (tex-upload-mode seg0-1-2) sprite-bucket)
-                (format 0 "[c92] bulk-upload shrub len=~D~%" (-> p length))))
-            (let ((p (-> *level* level-default texture-page-dir 3 page)))
-              (when p (upload-vram-pages pool (-> pool segment-common) p (tex-upload-mode seg0-1-2) sprite-bucket)
-                (format 0 "[c92] bulk-upload alpha len=~D~%" (-> p length))))
-            (let ((p (-> *level* level-default texture-page-dir 6 page)))
-              (when p (upload-vram-pages pool (-> pool segment-common) p (tex-upload-mode seg0-1-2) sprite-bucket)
-                (format 0 "[c92] bulk-upload pris2 len=~D~%" (-> p length))))
+          ;; Cycle 92/93: one-shot bulk upload of every populated entry in
+          ;; *texture-page-dir*. Each call queues a PC_PORT vif tag in the
+          ;; tex-sprite bucket; TextureUploadHandler::render consumes them and
+          ;; calls handle_upload_now, registering every texture in the page
+          ;; (m_textures[tex.dest[mip]] = source). tex-sprite is wired to
+          ;; TextureUploadHandler in init_bucket_renderers_jak3 (jakx shares).
+          ;; Iterating the full *texture-page-dir* (rather than just the
+          ;; level-default category slots) catches level-specific tpages like
+          ;; krasa's own tfrag/pris that are loaded with the master DGO --
+          ;; without this, sparticles whose adgif-shaders reference krasa
+          ;; textures still hit "Failed to find texture at N (sprite)" warns.
+          (let ((sprite-bucket (bucket-id tex-sprite))
+                (dir *texture-page-dir*)
+                )
+            (dotimes (idx (-> dir length))
+              (let ((p (-> dir entries idx page)))
+                (when p
+                  (upload-vram-pages pool (-> pool segment-common) p (tex-upload-mode seg0-1-2) sprite-bucket)
+                  )
+                )
+              )
             )
           )
         )

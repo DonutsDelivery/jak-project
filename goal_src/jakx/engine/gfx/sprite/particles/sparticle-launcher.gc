@@ -139,6 +139,24 @@
 ;; Mirrors jak3 sparticle-launcher.gc:106,184,397,1920.
 (def-mips2c sp-init-fields! (function (pointer float) (inline-array sp-field-init-spec) sp-field-id sp-field-id symbol (inline-array sp-field-init-spec)))
 (def-mips2c particle-adgif (function adgif-shader texture-id none))
+
+;; Cycle 93: port particle-adgif-callback from jak3 sparticle-launcher.gc:191.
+;; Without it, mips2c sp-launch-particles-var dereferences a null function
+;; pointer for the per-particle adgif-setup callback -> sparticle adgif tex0
+;; never runs through particle-setup-adgif -> tbp0 stays at compile-time
+;; placeholder (5120) -> Sprite3 'Failed to find texture at 5120' every frame.
+;; Stripped vf-register save/restore (OpenGOAL doesn't need PS2 VU preservation).
+(defun particle-adgif-callback ((arg0 adgif-shader) (arg1 texture-id))
+  (let ((s4-0 (-> arg0 alpha))
+        (s3-0 (-> arg0 clamp))
+        )
+    (particle-adgif arg0 arg1)
+    (set! (-> arg0 alpha) s4-0)
+    (set! (-> arg0 clamp) s3-0)
+    )
+  0
+  (none)
+  )
 (def-mips2c sp-launch-particles-var (function sparticle-system sparticle-launcher matrix sparticle-launch-state sparticle-launch-control float none))
 (def-mips2c sparticle-motion-blur (function sparticle-system sparticle-cpuinfo vector none))
 
