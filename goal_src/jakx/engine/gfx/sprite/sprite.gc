@@ -74,6 +74,7 @@
   )
 
 (defun add-to-sprite-aux-list ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 sprite-vec-data-3d) (arg3 uint))
+  (format 0 "[c86-aux] cpuinfo=#x~X sp-func=#x~X flags=#x~X~%" arg1 (-> arg1 sp-func) (-> arg1 flags))
   (let ((s2-0 (-> arg1 sp-func)))
     (if (and (nonzero? s2-0) (not (paused?)))
         (s2-0 arg0 arg1 arg2 arg3)

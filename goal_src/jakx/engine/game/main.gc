@@ -190,6 +190,15 @@
             (set! (-> lev mood-context times 0 z) 1.0)
             (set! (-> lev mood-context times 0 w) 1.0)
             (update-mood-itimes (-> lev mood-context)))))
+      ;; Cycle 86: jak3 main.gc:1604 calls (process-particles) here. PROFILED:
+      ;; print kernel-time around it so a regression (slow path / hang) shows up
+      ;; as a delta in the per-frame log instead of just "no frames coming."
+      (when *particles-flag*
+        (let ((tA (-> *display* base-clock frame-counter)))
+          (process-particles)
+          (let ((tB (-> *display* base-clock frame-counter)))
+            (when (> (- tB tA) 1)
+              (format 0 "[cycle86-pp] frame-delta=~D~%" (- tB tA))))))
       (*draw-hook*)
       (display-frame-finish disp)
       ;; og:preserve-this — load common.TXT into *common-text*. Ported from jak3

@@ -152,9 +152,28 @@
   )
 
 ;; ERROR: failed type prop at 3: Could not figure out load: (set! v1 (l.wu v1))
-(defun sp-free-particle ((a0-0 sparticle-system) (a1-0 int) (a2-0 sparticle-cpuinfo) (a3-0 sprite-vec-data-2d))
-  (format 0 "call to sp-free-particle~%")
-  (break!)
+;; Cycle 86: real port from jak3 sparticle.gc:147-164. The previous stub
+;; emitted (break!) which mips2c sp-process-block-2d hit as soon as a
+;; particle's timer expired — manifesting as SIGILL because BREAK becomes
+;; UD2 on x86. Verbatim copy; sparticle-system / sparticle-cpuinfo are
+;; layout-identical between jak3 and jakx.
+(defun sp-free-particle ((arg0 sparticle-system) (arg1 int) (arg2 sparticle-cpuinfo) (arg3 sprite-vec-data-2d))
+  (format 0 "[c86-spfree] arg1=~D bind=#x~X~%" arg1 (-> arg2 binding))
+  (if (and (-> arg2 binding) (nonzero? (-> arg2 binding)))
+      (logclear! (-> (the-as sparticle-launch-state (-> arg2 binding)) flags) (sp-launch-state-flags sp0 sp1))
+      )
+  (let ((v1-6 (/ arg1 64))
+        (t0-4 (logand arg1 63))
+        )
+    (logior! (-> arg0 alloc-table v1-6) (ash 1 t0-4))
+    )
+  (if (< arg1 (-> arg0 length 0))
+      (+! (-> arg0 num-alloc 0) -1)
+      (+! (-> arg0 num-alloc 1) -1)
+      )
+  (set! (-> arg2 valid) (the-as uint 0))
+  (set! (-> arg3 r-g-b-a w) 0.0)
+  0
   (none)
   )
 
@@ -276,10 +295,58 @@
   #t
   )
 
-;; ERROR: failed type prop at 80: Could not figure out load: (set! f1 (l.f v1))
-(defun sp-orbiter ((a0-0 sparticle-system) (a1-0 sparticle-cpuinfo) (a2-0 vector))
-  (format 0 "call to sp-orbiter~%")
-  (break!)
+;; Cycle 86 NEXT-BLOCKER: sp-orbiter stubbed — the real body (jak3 verbatim port,
+;; preserved as sp-orbiter-DISABLED-c86 below) SIGILLs at rip=0x21236f0804 (byte
+;; 0x60 / pusha invalid in 64-bit mode) inside JIT'd quaternion*!. Bisect:
+;; quaternion*! works on first call, crashes on second invocation with identical
+;; stack-only args. Suspected goalc emitter bug for one of the VU asm ops
+;; (.outer.product.{a,b}.vf, .add.mul.w.vf, .sub.mul.w.vf.w). Fix lane = goalc
+;; emitter (Lane 1 / decompiler C++). Stubbed to no-op so eco-green particles
+;; can flow through pipeline; orbiter motion not required for visible pixels.
+(defun sp-orbiter ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 vector))
+  (let ((v1-8 (the-as sprite-vec-data-2d (-> arg1 user-float))))
+    (set! (-> arg2 x) (-> v1-8 x-y-z-sx x))
+    (set! (-> arg2 y) (-> v1-8 x-y-z-sx y))
+    (set! (-> arg2 z) (-> v1-8 x-y-z-sx z)))
+  0
+  (none))
+
+(defun sp-orbiter-DISABLED-c86 ((arg0 sparticle-system) (arg1 sparticle-cpuinfo) (arg2 vector))
+  (let* ((f2-0 (-> arg1 omega))
+         (f0-0 (-> arg1 radius))
+         (f3-0 (-> arg1 vel-sxvel x))
+         (f30-0 (-> arg1 vel-sxvel y))
+         (f1-0 (-> arg1 vel-sxvel z))
+         (f4-0 (-> *display* clock (-> arg1 clock-index) sparticle-data y))
+         (f26-0 (+ f2-0 (* f3-0 f4-0)))
+         )
+    (set! (-> arg1 omega) f26-0)
+    (let ((f28-0 (+ f0-0 (* f1-0 f4-0))))
+      (set! (-> arg1 radius) f28-0)
+      (let ((f24-0 (sin f26-0))
+            (f26-1 (cos f26-0))
+            (f22-0 (sin (/ f30-0 2)))
+            (f0-5 (cos (/ f30-0 2)))
+            (a2-1 (new 'stack-no-clear 'quaternion))
+            (s4-0 (new 'stack-no-clear 'vector))
+            )
+        (let ((s3-0 (new 'stack-no-clear 'matrix)))
+          (set-vector! a2-1 (* f22-0 f26-1) 0.0 (* f22-0 f24-0) f0-5)
+          (quaternion*! (-> arg1 rotvel3d) (-> arg1 rotvel3d) a2-1)
+          (quaternion-normalize! (-> arg1 rotvel3d))
+          (set-vector! s4-0 (* f24-0 f28-0) 0.0 (* f26-1 f28-0) 1.0)
+          (quaternion->matrix s3-0 (-> arg1 rotvel3d))
+          (vector-matrix*! s4-0 s4-0 s3-0)
+          )
+        (let ((v1-8 (the-as sprite-vec-data-2d (-> arg1 user-float))))
+          (set! (-> arg2 x) (+ (-> s4-0 x) (-> v1-8 x-y-z-sx x)))
+          (set! (-> arg2 y) (+ (-> s4-0 y) (-> v1-8 x-y-z-sx y)))
+          (set! (-> arg2 z) (+ (-> s4-0 z) (-> v1-8 x-y-z-sx z)))
+          )
+        )
+      )
+    )
+  0
   (none)
   )
 
@@ -287,9 +354,13 @@
 
 ;; ERROR: function was not converted to expressions. Cannot decompile.
 
+;; Cycle 86: PS2 used scratchpad DMA (dma-send-to-spr-no-flush) but on the PC
+;; port that crashes (dma.gc:106). Match jak3's PC-port pattern: __mem-move
+;; the bytes into the fake-scratchpad area at (scratchpad-start)+arg0. The
+;; mips2c sp-process-block-{2d,3d} reads from that same address.
 (defun sp-copy-to-spr ((arg0 int) (arg1 pointer) (arg2 int))
   (let ((a2-1 (/ (+ arg2 15) 16)))
-    (dma-send-to-spr-no-flush (the-as uint arg0) (the-as uint arg1) (the-as uint a2-1) #t)
+    (__mem-move (&+ (scratchpad-start) arg0) arg1 (the uint (* a2-1 16)))
     )
   0
   (none)
@@ -297,24 +368,78 @@
 
 (defun sp-copy-from-spr ((arg0 int) (arg1 pointer) (arg2 int))
   (let ((a2-1 (/ (+ arg2 15) 16)))
-    (dma-send-from-spr-no-flush (the-as uint arg1) (the-as uint arg0) (the-as uint a2-1) #t)
+    (__mem-move arg1 (&+ (scratchpad-start) arg0) (the uint (* a2-1 16)))
     )
   0
   (none)
   )
 
-;; ERROR: function was not converted to expressions. Cannot decompile.
+;; Cycle 86: declare the two mips2c targets that sp-process-block dispatches
+;; to. Implementations are in game/mips2c/jakx_functions/sparticle.cpp (already
+;; registered as "sp-process-block-2d"/"-3d" in cycle 82-era work). Without
+;; these def-mips2c forms, GOAL can't reference the C++ symbols.
+(def-mips2c sp-process-block-2d (function sparticle-system int int int int symbol none))
 
+(def-mips2c sp-process-block-3d (function sparticle-system int int int int symbol none))
+
+;; Cycle 86: real port from jak3 sparticle.gc:351-391. Stages cpuinfo +
+;; vec-data + adgif-data into the scratchpad, then dispatches the per-system
+;; mips2c block, then copies back. Replaces the format+break! stub which was
+;; the previous boot-path placeholder.
 (defun sp-process-block ((arg0 sparticle-system) (arg1 int) (arg2 sprite-array-2d) (arg3 int))
-  (format 0 "call to sp-process-block~%")
-  (break!)
+  (local-vars (sv-16 int) (sv-32 int) (sv-48 int) (sv-64 int))
+  (let ((s3-0 352)
+        (s2-0 (* 144 arg3))
+        (s5-0 (* 48 arg3))
+        )
+    (set! sv-32 (* 80 arg3))
+    (let ((s1-0 (+ s3-0 s2-0)))
+      (set! sv-16 (+ s1-0 s5-0))
+      (sp-copy-to-spr s3-0 (the-as pointer (-> arg0 cpuinfo-table arg1)) s2-0)
+      (sp-copy-to-spr s1-0 (&+ (-> arg0 vecdata-table) (* 48 arg1)) s5-0)
+      (let ((t9-2 sp-copy-to-spr)
+            (a1-7 (-> arg0 adgifdata-table arg1))
+            )
+        (t9-2 sv-16 (the-as pointer a1-7) sv-32)
+        )
+      (set! sv-48 (+ (the int (scratchpad-start)) s3-0))
+      (set! sv-64 (+ (the int (scratchpad-start)) s1-0))
+      (let ((t1-0 (paused?)))
+        (cond
+          ((-> arg0 is-3d)
+           (let ((t9-4 sp-process-block-3d)
+                 (a0-6 arg0)
+                 (a3-1 arg1)
+                 )
+             (t9-4 a0-6 sv-48 sv-64 a3-1 arg3 t1-0)
+             )
+           )
+          (else
+            (format 0 "[c86-spb/2d/PRE] base=~D cnt=~D first-flags=#x~X first-spfunc=#x~X first-bind=#x~X~%"
+                    arg1 arg3
+                    (-> arg0 cpuinfo-table arg1 flags)
+                    (-> arg0 cpuinfo-table arg1 sp-func)
+                    (-> arg0 cpuinfo-table arg1 binding))
+            (sp-process-block-2d arg0 sv-48 sv-64 arg1 arg3 t1-0)
+            (format 0 "[c86-spb/2d/POST] base=~D cnt=~D~%" arg1 arg3)
+            )
+          )
+        )
+      (sp-copy-from-spr s3-0 (the-as pointer (-> arg0 cpuinfo-table arg1)) s2-0)
+      (sp-copy-from-spr s1-0 (&+ (-> arg0 vecdata-table) (* 48 arg1)) s5-0)
+      )
+    )
+  0
   (none)
   )
 
 (defun sp-process-particle-system ((arg0 sparticle-system) (arg1 int) (arg2 sprite-array-2d))
+  ;; Cycle 86: jak3 uses (scratchpad-start) here too — PS2 hardcoded the
+  ;; scratchpad at 0x70000000 but the PC port relocates it via the
+  ;; (scratchpad-start) macro (kernel/gkernel.gc:151).
   (countdown (v1-0 22)
     (let ((a0-4 (-> *display* clock v1-0 sparticle-data quad)))
-      (set! (-> (the-as vector (+ #x70000000 (* v1-0 16))) quad) a0-4)
+      (set! (-> (the-as vector (+ (the int (scratchpad-start)) (* v1-0 16))) quad) a0-4)
       )
     )
   (let* ((v1-3 352)
@@ -327,20 +452,29 @@
         )
     (set! (-> arg2 num-valid arg1) s3-0)
     (flush-cache 0)
+    (format 0 "[c86-spps] arg1=~D s3-0=~D s2-0=~D~%" arg1 s3-0 s2-0)
     (while (>= s3-0 s1-0)
+      (format 0 "[c86-spps/loop] s2-0=~D s1-0=~D~%" s2-0 s1-0)
       (sp-process-block arg0 s2-0 arg2 s1-0)
       (set! s3-0 (- s3-0 s1-0))
       (+! s2-0 s1-0)
       )
-    (if (> s3-0 0)
-        (sp-process-block arg0 s2-0 arg2 s3-0)
-        )
+    (when (> s3-0 0)
+      (format 0 "[c86-spps/tail] s2-0=~D s3-0=~D~%" s2-0 s3-0)
+      (sp-process-block arg0 s2-0 arg2 s3-0)
+      (format 0 "[c86-spps/tail/done]~%")
+      )
     )
   0
   (none)
   )
 
 (define-perm *particles-flag* symbol #t)
+
+;; Cycle 86 bisect flags: localize which staging path slows the renderer.
+;; Default both off — turn on one at a time from the listener.
+(define-perm *cycle86-stage-2d* symbol #t)
+(define-perm *cycle86-stage-3d* symbol #f)
 
 ;; ERROR: function has no type analysis. Cannot decompile.
 
@@ -440,13 +574,60 @@
   (none)
   )
 
-;; ERROR: failed type prop at 146: Could not figure out load: (set! a2 (l.w (+ v1 16)))
-;; ERROR: Unsupported inline assembly instruction kind - [mfc0 gp, Count]
-;; ERROR: Unsupported inline assembly instruction kind - [mfc0 v1, Count]
+;; Cycle 86: real port from jak3 sparticle.gc:608-694 with PS2-only profiling
+;; bits stripped. Drops:
+;;  - (.mfc0 gp-0 Count) and (.mfc0 v1-53 Count): unsupported inline asm; only
+;;    used to compute the elapsed-cycles delta which got discarded anyway.
+;;  - The *debug-segment* / *dproc* profile-array push/pop block (debug HUD).
+;;  - The *display-sprite-info* format block (debug HUD).
+;; Core dispatch (sp-process-particle-system × 3 + sp-clear-queue) preserved
+;; verbatim; this is the function jak3's display-loop calls each frame to
+;; stage particles for the sprite renderer.
 (defun process-particles ()
-  (format 0 "call to process-particles~%")
-  (break!)
-  (none)
+  (with-pp
+    (when *particles-flag*
+      (set! *sp-launcher-lock* #t)
+      (cond
+        (*sp-60-hz*
+          (when (= (-> *setting-control* user-current video-mode) 'pal)
+            (set! *sp-60-hz* #f)
+            (all-particles-60-to-50)
+            )
+          )
+        (else
+          (when (= (-> *setting-control* user-current video-mode) 'ntsc)
+            (set! *sp-60-hz* #t)
+            (all-particles-50-to-60)
+            )
+          )
+        )
+      (clear-sprite-aux-list)
+      ;; Cycle 86 instrumentation: log num-alloc state every 60 frames so
+      ;; performance impact of staging is observable. Bisect-flagged sections
+      ;; gated by *cycle86-stage-2d* / *cycle86-stage-3d* to localize hangs.
+      (format 0 "[c86-pp/pre] 2d.alloc=(~D ~D) 3d.alloc=(~D ~D) queue.in-use=~D~%"
+              (-> *sp-particle-system-2d* num-alloc 0)
+              (-> *sp-particle-system-2d* num-alloc 1)
+              (-> *sp-particle-system-3d* num-alloc 0)
+              (-> *sp-particle-system-3d* num-alloc 1)
+              (-> *sp-launch-queue* in-use))
+      (when *cycle86-stage-2d*
+        (format 0 "[c86-pp/2d-blk0-PRE]~%")
+        (sp-process-particle-system *sp-particle-system-2d* 0 *sprite-array-2d*)
+        (format 0 "[c86-pp/2d-blk0-POST]~%")
+        (sp-process-particle-system *sp-particle-system-2d* 1 *sprite-array-2d*)
+        (format 0 "[c86-pp/2d-blk1-POST]~%"))
+      (when *cycle86-stage-3d*
+        (sp-process-particle-system *sp-particle-system-3d* 0 (the-as sprite-array-2d *sprite-array-3d*)))
+      (format 0 "[c86-pp/post] 2d.alloc=(~D ~D)~%"
+              (-> *sp-particle-system-2d* num-alloc 0)
+              (-> *sp-particle-system-2d* num-alloc 1))
+      (set! *sp-launcher-lock* #f)
+      (sp-clear-queue)
+      )
+    0
+    (none)
+    )
   )
 
 ;; ERROR: function has no type analysis. Cannot decompile.
