@@ -1765,7 +1765,9 @@
   ],
   "dma-initialize": [
     [1, "v1", "(pointer uint32)"],
-    [8, "v1", "(pointer uint32)"]
+    [8, "v1", "(pointer uint32)"],
+    [6, "a0", "(pointer uint32)"],
+    [13, "a0", "(pointer uint32)"]
   ],
   "rtclock-to-secs": [
     [3, "gp", "(pointer uint8)"],
@@ -41455,6 +41457,13 @@
       "hud-item-group"
     ]
   ],
+  "(method 9 hud-headset-talker)": [
+    [
+      17,
+      "a1",
+      "(pointer int32)"
+    ]
+  ],
   "(method 9 in-game-menu-hud-options)": [
     [
       62,
@@ -44428,6 +44437,13 @@
       19,
       "s3",
       "vector"
+    ]
+  ],
+  "ocean-texture-anim-time-func": [
+    [
+      3,
+      "a0",
+      "(pointer float)"
     ]
   ],
   "set-alpha-texture-anim-layer-func": [
@@ -50942,6 +50958,21 @@
     [
       71,
       "s5",
+      "memblock"
+    ],
+    [
+      52,
+      "a0",
+      "memblock"
+    ],
+    [
+      56,
+      "a0",
+      "memblock"
+    ],
+    [
+      63,
+      "a0",
       "memblock"
     ]
   ],
