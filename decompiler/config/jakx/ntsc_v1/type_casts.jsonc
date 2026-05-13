@@ -1729,6 +1729,16 @@
   "dma-sync-hang": [
     [0, "a0", "pointer"]
   ],
+  "vehicle-shielded?": [
+    [[1, 15], "a0", "pointer"]
+  ],
+  "etn-init-engine": [
+    [4, "a0", "pointer"],
+    [35, "a0", "pointer"]
+  ],
+  "tie-near-init-engine": [
+    [6, "a0", "pointer"]
+  ],
   "dma-initialize": [
     [1, "v1", "(pointer uint32)"],
     [8, "v1", "(pointer uint32)"]
