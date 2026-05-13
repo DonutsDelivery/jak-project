@@ -44356,11 +44356,9 @@
     ]
   ],
   "collide-planes-test1": [
-    [
-      3,
-      "a3",
-      "sphere"
-    ]
+    [3, "a3", "sphere"],
+    [30, "gp", "pointer"],
+    [31, "s5", "pointer"]
   ],
   "compute-veh-eco-owner-score": [
     [
@@ -50818,14 +50816,10 @@
     ]
   ],
   "vehicle-antenna-init-by-other": [
-    [
-      [
-        0,
-        999
-      ],
-      "s6",
-      "process-drawable"
-    ]
+    [[0, 999], "s6", "process-drawable"],
+    [32, "a0", "pointer"],
+    [[39, 200], "gp", "pointer"],
+    [[48, 60], "v1", "pointer"]
   ],
   "oil-slick-init-by-other": [
     [
