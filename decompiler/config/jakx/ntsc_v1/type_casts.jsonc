@@ -1707,6 +1707,18 @@
       "ramdisk-rpc-load"
     ]
   ],
+  "dynamic-patch-hook": [
+    [[8, 93], "s5", "(pointer uint8)"],
+    [53, "a0", "(pointer uint32)"]
+  ],
+  "rtclock-to-secs": [
+    [3, "gp", "(pointer uint8)"],
+    [27, "gp", "(pointer uint8)"],
+    [31, "gp", "(pointer uint8)"],
+    [42, "gp", "(pointer uint8)"],
+    [48, "gp", "(pointer uint8)"],
+    [53, "gp", "(pointer uint8)"]
+  ],
   "sound-buffer-dump": [
     [
       [

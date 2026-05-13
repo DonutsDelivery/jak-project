@@ -1,0 +1,230 @@
+;;-*-Lisp-*-
+(in-package goal)
+
+;; definition of type timer-mode
+(deftype timer-mode (uint32)
+  ()
+  )
+
+;; definition of type timer-bank
+(deftype timer-bank (structure)
+  ((count  uint32)
+   (mode   timer-mode  :offset  16)
+   (comp   uint32      :offset  32)
+   )
+  )
+
+;; definition for method 3 of type timer-bank
+(defmethod inspect ((this timer-bank))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'timer-bank)
+  (format #t "~1Tcount: #x~X~%" (-> this count))
+  (format #t "~1Tmode: #x~X~%" (-> this mode))
+  (format #t "~1Tcomp: #x~X~%" (-> this comp))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type timer-hold-bank
+(deftype timer-hold-bank (timer-bank)
+  ((hold  uint32  :offset  48)
+   )
+  )
+
+;; definition for method 3 of type timer-hold-bank
+(defmethod inspect ((this timer-hold-bank))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'timer-hold-bank)
+  (format #t "~1Tcount: #x~X~%" (-> this count))
+  (format #t "~1Tmode: #x~X~%" (-> this mode))
+  (format #t "~1Tcomp: #x~X~%" (-> this comp))
+  (format #t "~1Thold: #x~X~%" (-> this hold))
+  (label cfg-4)
+  this
+  )
+
+;; definition of type stopwatch
+(deftype stopwatch (basic)
+  ((prev-time-elapsed  uint64)
+   (start-time         uint64)
+   (begin-level        int32)
+   )
+  )
+
+;; definition for method 3 of type stopwatch
+(defmethod inspect ((this stopwatch))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this (-> this type))
+  (format #t "~1Tprev-time-elapsed: ~D~%" (-> this prev-time-elapsed))
+  (format #t "~1Tstart-time: ~D~%" (-> this start-time))
+  (format #t "~1Tbegin-level: ~D~%" (-> this begin-level))
+  (label cfg-4)
+  this
+  )
+
+;; definition for symbol *ticks-per-frame*, type int
+(define *ticks-per-frame* 9765)
+
+;; definition for function timer-init
+(defun timer-init ((arg0 timer-bank) (arg1 timer-mode))
+  (set! (-> arg0 mode) arg1)
+  (set! (-> arg0 count) (the-as uint 0))
+  0
+  )
+
+(timer-init (the-as timer-bank #x10000800) (the-as timer-mode 130))
+
+;; definition of type sce-cd-clock
+(deftype sce-cd-clock (structure)
+  ((stat    uint8)
+   (second  uint8)
+   (minute  uint8)
+   (hour    uint8)
+   (pad     uint8)
+   (day     uint8)
+   (month   uint8)
+   (year    uint8)
+   )
+  )
+
+;; definition for method 3 of type sce-cd-clock
+(defmethod inspect ((this sce-cd-clock))
+  (when (not this)
+    (set! this this)
+    (goto cfg-4)
+    )
+  (format #t "[~8x] ~A~%" this 'sce-cd-clock)
+  (format #t "~1Tstat: ~D~%" (-> this stat))
+  (format #t "~1Tsecond: ~D~%" (-> this second))
+  (format #t "~1Tminute: ~D~%" (-> this minute))
+  (format #t "~1Thour: ~D~%" (-> this hour))
+  (format #t "~1Tpad: ~D~%" (-> this pad))
+  (format #t "~1Tday: ~D~%" (-> this day))
+  (format #t "~1Tmonth: ~D~%" (-> this month))
+  (format #t "~1Tyear: ~D~%" (-> this year))
+  (label cfg-4)
+  this
+  )
+
+;; definition for function bcd-conv
+(defun bcd-conv ((arg0 int))
+  (+ (* 10 (/ arg0 16)) (logand arg0 15))
+  )
+
+;; definition for symbol *month-days*, type (pointer int32)
+(define *month-days* (the-as (pointer int32) (new 'static 'array uint8 48
+                                               #x1f
+                                               #x0
+                                               #x0
+                                               #x0
+                                               #x1c
+                                               #x0
+                                               #x0
+                                               #x0
+                                               #x1f
+                                               #x0
+                                               #x0
+                                               #x0
+                                               #x1e
+                                               #x0
+                                               #x0
+                                               #x0
+                                               #x1f
+                                               #x0
+                                               #x0
+                                               #x0
+                                               #x1e
+                                               #x0
+                                               #x0
+                                               #x0
+                                               #x1f
+                                               #x0
+                                               #x0
+                                               #x0
+                                               #x1f
+                                               #x0
+                                               #x0
+                                               #x0
+                                               #x1e
+                                               #x0
+                                               #x0
+                                               #x0
+                                               #x1f
+                                               #x0
+                                               #x0
+                                               #x0
+                                               #x1e
+                                               #x0
+                                               #x0
+                                               #x0
+                                               #x1f
+                                               #x0
+                                               #x0
+                                               #x0
+                                               )
+                                             )
+        )
+
+;; definition for function is-leap
+;; WARN: Return type mismatch symbol vs none.
+(defun is-leap ((arg0 int))
+  (or (zero? (mod arg0 400)) (and (not (logtest? arg0 3)) (nonzero? (mod arg0 100))))
+  (none)
+  )
+
+;; definition for function mdy-to-day
+;; WARN: Return type mismatch uint vs int.
+(defun mdy-to-day ((arg0 uint) (arg1 uint) (arg2 int))
+  (if (is-leap arg2)
+      (set! (-> *month-days* 1) 29)
+      (set! (-> *month-days* 1) 28)
+      )
+  (let ((v1-2 (+ arg0 -1))
+        (v0-1 (+ arg1 -1))
+        )
+    (dotimes (a0-4 (the-as int v1-2))
+      (+! v0-1 (-> *month-days* a0-4))
+      )
+    (the-as int v0-1)
+    )
+  )
+
+;; definition for function rtclock-to-secs
+;; WARN: Return type mismatch int vs none.
+(defun rtclock-to-secs ((arg0 uint))
+  (let ((s5-0 0)
+        (s4-0 (bcd-conv (the-as int (-> (the-as (pointer uint8) arg0) 7))))
+        )
+    (if (< s4-0 2000)
+        (+! s4-0 2000)
+        )
+    (dotimes (s3-0 (+ s4-0 -1970))
+      (+! s5-0 (* #x15180 (mdy-to-day (the-as uint 12) (the-as uint 32) (+ s3-0 1970))))
+      )
+    (+ s5-0
+       (* #x15180 (mdy-to-day
+                    (the-as uint (bcd-conv (the-as int (-> (the-as (pointer uint8) arg0) 6))))
+                    (the-as uint (bcd-conv (the-as int (-> (the-as (pointer uint8) arg0) 5))))
+                    s4-0
+                    )
+          )
+       (* 3600 (bcd-conv (the-as int (-> (the-as (pointer uint8) arg0) 3))))
+       (* 60 (bcd-conv (the-as int (-> (the-as (pointer uint8) arg0) 2))))
+       (bcd-conv (the-as int (-> (the-as (pointer uint8) arg0) 1)))
+       )
+    )
+  (none)
+  )
+
+
+
+

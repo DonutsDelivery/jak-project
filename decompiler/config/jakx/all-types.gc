@@ -7649,10 +7649,10 @@
 
 (define-extern *ticks-per-frame* int)
 (define-extern timer-init (function timer-bank timer-mode int))
-(define-extern bcd-conv (function int none))
+(define-extern bcd-conv (function int int))
 (define-extern *month-days* (pointer int32))
 (define-extern is-leap (function int none))
-(define-extern mdy-to-day (function uint uint int none))
+(define-extern mdy-to-day (function uint uint int int))
 (define-extern rtclock-to-secs (function uint none))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
