@@ -1709,6 +1709,25 @@
   ],
   "dynamic-patch-hook": [
   ],
+  "fixup-relocated-link": [
+    [[0, 25], "a0", "pointer"],
+    [[11, 31], "a1", "pointer"],
+    [3, "v1", "pointer"],
+    [6, "v1", "pointer"],
+    [19, "v1", "pointer"],
+    [22, "v1", "pointer"],
+    [24, "a0", "pointer"]
+  ],
+  "(method 11 linked-list)": [
+    [[0, 15], "a1", "pointer"]
+  ],
+  "dma-sync-hang": [
+    [0, "a0", "pointer"]
+  ],
+  "dma-initialize": [
+    [1, "v1", "(pointer uint32)"],
+    [8, "v1", "(pointer uint32)"]
+  ],
   "rtclock-to-secs": [
     [3, "gp", "(pointer uint8)"],
     [27, "gp", "(pointer uint8)"],
