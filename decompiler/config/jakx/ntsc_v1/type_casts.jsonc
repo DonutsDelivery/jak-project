@@ -1741,6 +1741,19 @@
   "set-local-vehicle": [
     [16, "a1", "pointer"]
   ],
+  "(method 3 prim-strip)": [
+    [[14, 200], "gp", "pointer"]
+  ],
+  "(method 5 prim-strip)": [
+    [[2, 25], "a0", "pointer"]
+  ],
+  "shadow-vu1-add-constants": [
+    [18, "a2", "pointer"],
+    [[22, 40], "t2", "pointer"]
+  ],
+  "shadow-vu1-patch-consts": [
+    [[5, 15], "v1", "pointer"]
+  ],
   "dma-initialize": [
     [1, "v1", "(pointer uint32)"],
     [8, "v1", "(pointer uint32)"]
@@ -8538,14 +8551,8 @@
       "a3",
       "uint"
     ],
-    [
-      [
-        46,
-        59
-      ],
-      "a1",
-      "dma-packet"
-    ]
+    [[46, 59], "a1", "dma-packet"],
+    [[20, 40], "a1", "pointer"]
   ],
   "sprite-draw-distorters": [
     [
@@ -39556,14 +39563,8 @@
     ]
   ],
   "shadow-vu1-init-buffer": [
-    [
-      [
-        18,
-        27
-      ],
-      "a0",
-      "dma-packet"
-    ]
+    [[18, 27], "a0", "dma-packet"],
+    [[15, 30], "s5", "pointer"]
   ],
   "shadow-vu1-add-matrix": [
     [
