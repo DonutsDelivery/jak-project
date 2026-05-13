@@ -1708,6 +1708,9 @@
     ]
   ],
   "dynamic-patch-hook": [
+    [[8, 165], "s5", "pointer"],
+    [53, "a0", "pointer"],
+    [[46, 180], "gp", "pointer"]
   ],
   "fixup-relocated-link": [
     [[0, 25], "a0", "pointer"],
