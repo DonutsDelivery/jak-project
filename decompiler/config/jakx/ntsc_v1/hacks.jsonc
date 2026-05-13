@@ -2467,7 +2467,48 @@
     "wv-player-post-move-update",
     "plot-x-with-transform",
     "plot-engine-torque-curve",
-    "estimate-eng-torque-from-gear"
+    "estimate-eng-torque-from-gear",
+    // near-clean queue (NOT_CONVERTED): asm-func auto-suppress 2026-05-13
+    // source: capture
+    "store-image",
+    // source: cloth-h
+    "(method 3 cloth-system)",
+    "(method 3 cloth-on-skeleton)",
+    // source: water-anim
+    "water-anim-event-handler",
+    // source: cam-update
+    "update-camera",
+    // source: effect-control
+    "(method 10 effect-control)",
+    "sound-name-with-material",
+    // source: texture-anim-tables
+    "this-way-water-texture-anim-func",
+    // source: vehicle-physics
+    "(method 137 vehicle)",
+    // source: wcar-snake
+    "(method 100 v-snake)",
+    "(method 115 v-snake)",
+    // source: hud-high-scores
+    "(method 19 hud-high-score)",
+    // source: tie
+    "(method 9 tie-fragment)",
+    // source: net-start
+    "qo",
+    // source: mood-funcs2
+    "update-garage-brdroom-lights",
+    "update-mood-garage-brdroom",
+    "update-rustyh-lights",
+    // source: movie-path
+    "(method 11 movie-path)",
+    "(method 16 movie-path)",
+    // source: wcar-mongoose
+    "(method 100 v-mongoose)",
+    "(method 69 v-mongoose)",
+    // source: hud-widgets-4
+    "display-nice-shot-to-view",
+    // source: merc-blend-shape
+    "dma-from-spr",
+    "merc-dma-chain-to-spr"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
