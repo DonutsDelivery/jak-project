@@ -1735,9 +1735,6 @@
   "artist-continue": [
     [17, "gp", "pointer"]
   ],
-  "artist-continue": [
-    [17, "gp", "pointer"]
-  ],
   "set-local-vehicle": [
     [16, "a1", "pointer"]
   ],
@@ -2072,28 +2069,6 @@
       ],
       "v1",
       "sound-rpc-set-fps"
-    ]
-  ],
-  "(method 0 ambient-sound)": [
-    [
-      "_stack_",
-      16,
-      "sound-spec"
-    ],
-    [
-      "_stack_",
-      32,
-      "int32"
-    ],
-    [
-      "_stack_",
-      48,
-      "vector"
-    ],
-    [
-      87,
-      "v1",
-      "sound-spec"
     ]
   ],
   "ear-trans": [
@@ -2576,16 +2551,6 @@
       "pointer"
     ]
   ],
-  "merc-vu1-init-buffer": [
-    [
-      [
-        90,
-        92
-      ],
-      "v1",
-      "dma-packet"
-    ]
-  ],
   "texture-usage-init": [
     [
       27,
@@ -2819,12 +2784,6 @@
       "t3",
       "uint"
     ]
-  ],
-  "(method 16 level)": [
-    [225, "v1", "(pointer uint128)"],
-    [238, "v1", "(pointer uint128)"],
-    [239, "a1", "(pointer uint128)"],
-    [243, "v1", "(pointer uint128)"]
   ],
   "level-remap-texture": [
     [
@@ -7372,23 +7331,6 @@
       "float"
     ]
   ],
-  "next-continue": [
-    [
-      4,
-      "a2",
-      "symbol"
-    ],
-    [
-      5,
-      "a2",
-      "level-load-info"
-    ],
-    [
-      12,
-      "a3",
-      "continue-point"
-    ]
-  ],
   "(code target-hit)": [
     [
       915,
@@ -9011,23 +8953,6 @@
       66,
       "v1",
       "collide-shape-prim"
-    ]
-  ],
-  "cam-slave-get-vector-with-offset": [
-    [
-      59,
-      "v0",
-      "vector"
-    ],
-    [
-      24,
-      "v0",
-      "vector"
-    ],
-    [
-      69,
-      "s3",
-      "vector"
     ]
   ],
   "cam-slave-get-interp-time": [
@@ -17021,13 +16946,6 @@
       "float"
     ]
   ],
-  "region-prim-lookup-by-id": [
-    [
-      45,
-      "t6",
-      "drawable-region-prim"
-    ]
-  ],
   "(method 18 drawable-tree-region-prim)": [
     [
       [
@@ -17035,31 +16953,6 @@
         49
       ],
       "s2",
-      "drawable-region-prim"
-    ]
-  ],
-  "(method 9 region)": [
-    [
-      [
-        55,
-        60
-      ],
-      "a0",
-      "drawable-region-prim"
-    ],
-    [
-      58,
-      "v1",
-      "region-prim-area"
-    ],
-    [
-      4,
-      "a0",
-      "region-prim-area"
-    ],
-    [
-      50,
-      "v1",
       "drawable-region-prim"
     ]
   ],
@@ -19182,42 +19075,6 @@
       "_stack_",
       176,
       "rgba"
-    ]
-  ],
-  "(method 12 nav-engine)": [
-    [
-      [
-        22,
-        28
-      ],
-      "v1",
-      "connection"
-    ],
-    [
-      [
-        29,
-        31
-      ],
-      "a0",
-      "process-focusable"
-    ],
-    [
-      [
-        34,
-        86
-      ],
-      "s2",
-      "collide-shape"
-    ],
-    [
-      90,
-      "v1",
-      "collide-shape-prim-group"
-    ],
-    [
-      110,
-      "s2",
-      "collide-shape-prim-sphere"
     ]
   ],
   "(method 13 nav-engine)": [
@@ -40420,13 +40277,6 @@
       "hud-points-combo"
     ]
   ],
-  "(method 19 in-game-menu-hud)": [
-    [
-      1,
-      "gp",
-      "in-game-menu-hud"
-    ]
-  ],
   "(method 19 in-game-menu-hud-options)": [
     [
       1,
@@ -40613,18 +40463,6 @@
       0,
       "a0",
       "spartacus-editor"
-    ]
-  ],
-  "(method 26 hang-time-hud-single)": [
-    [
-      30,
-      "a0",
-      "hang-time-hud-single"
-    ],
-    [
-      31,
-      "a0",
-      "process-tree"
     ]
   ],
   "(method 26 hud-item-string)": [
@@ -41474,13 +41312,6 @@
       17,
       "a1",
       "(pointer int32)"
-    ]
-  ],
-  "(method 9 in-game-menu-hud-options)": [
-    [
-      62,
-      "gp",
-      "in-game-menu-hud-options"
     ]
   ],
   "(method 9 nav-mesh-editable)": [
@@ -45100,30 +44931,6 @@
       "collide-shape-prim"
     ]
   ],
-  "(method 100 v-daxtermobile)": [
-    [
-      1,
-      "v1",
-      "collide-shape"
-    ],
-    [
-      2,
-      "v1",
-      "collide-shape-prim"
-    ]
-  ],
-  "(method 100 v-falcon)": [
-    [
-      1,
-      "v1",
-      "collide-shape"
-    ],
-    [
-      2,
-      "v1",
-      "collide-shape-prim"
-    ]
-  ],
   "(method 100 v-gila)": [
     [
       1,
@@ -45209,18 +45016,6 @@
     ]
   ],
   "(method 100 v-wolf)": [
-    [
-      1,
-      "v1",
-      "collide-shape"
-    ],
-    [
-      2,
-      "v1",
-      "collide-shape-prim"
-    ]
-  ],
-  "(method 100 v-wombat)": [
     [
       1,
       "v1",
@@ -50843,12 +50638,6 @@
       "process-drawable"
     ]
   ],
-  "vehicle-antenna-init-by-other": [
-    [[0, 999], "s6", "process-drawable"],
-    [32, "a0", "pointer"],
-    [[39, 200], "gp", "pointer"],
-    [[48, 60], "v1", "pointer"]
-  ],
   "oil-slick-init-by-other": [
     [
       [
@@ -51329,11 +51118,6 @@
     [72, "a0", "vector"]
   ],
 
-  // field-type-load FTPs: C++ patch allows type_casts overrides for load dest regs
-  // gsound-h: method 0 ambient-sound (new) — l.q v1+16
-  "(method 0 ambient-sound)": [
-    [88, "a0", "pointer"]
-  ],
   // hud-widgets-powerhang: method 23 hud-item-power-slide-distance — l.d t0+16
   "(method 23 hud-item-power-slide-distance-tenths)": [
     [3, "v1", "pointer"]
@@ -51342,8 +51126,10 @@
     [3, "v1", "pointer"]
   ],
   // hud-widgets-powerhang: method 26 hang-time-hud-single — l.wu a0+12
+  // hud-widgets-powerhang: method 26 hang-time-hud-single — l.wu a0+12
   "(method 26 hang-time-hud-single)": [
     [30, "a0", "pointer"],
+    [31, "a0", "process-tree"],
     [36, "a0", "pointer"]
   ],
   // hud-widgets-4: method 19 hud-headset-talker — all raw pointer arithmetic + cascades
@@ -51357,13 +51143,14 @@
     [71, "v1", "uint"],
     [72, "v1", "uint"]
   ],
-  // nav-engine: method 12 — l.b s2+40, s2=collide-shape-prim, +40=field
-  "(method 12 nav-engine)": [
-    [87, "v1", "collide-shape-prim"]
-  ],
+  // decomp: method 16 level — l.bu s1, s1=(pointer uint8)
   // decomp: method 16 level — l.bu s1, s1=(pointer uint8)
   "(method 16 level)": [
-    [187, "a0", "(pointer uint8)"]
+    [187, "a0", "(pointer uint8)"],
+    [225, "v1", "(pointer uint128)"],
+    [238, "v1", "(pointer uint128)"],
+    [239, "a1", "(pointer uint128)"],
+    [243, "v1", "(pointer uint128)"]
   ],
   // hud-high-scores: method 19 — l.wu v1+16
   "(method 19 hud-high-scores)": [
@@ -51373,67 +51160,65 @@
   "net-process-class-register": [
     [36, "v1", "pointer"]
   ],
-  // wcar-*: method 100 — l.wu v1+64, v1=collide-shape-prim, +64=field
-  "(method 100 v-daxtermobile)": [
-    [2, "v1", "collide-shape-prim"]
-  ],
-  "(method 100 v-falcon)": [
-    [2, "v1", "collide-shape-prim"]
-  ],
-  "(method 100 v-wombat)": [
-    [2, "v1", "collide-shape-prim"]
-  ],
-  // etie-near-vu1: etn-init-engine — l.w a0+8, a0=etn-vu1-block (use pointer, vu-function breaks arithmetic)
-  "etn-init-engine": [
-    [4, "a0", "pointer"]
-  ],
+  // region: method 9 — l.w v1, v1 from bsp+region-trees (use pointer, bsp-header breaks add in region-tree-execute)
   // region: method 9 — l.w v1, v1 from bsp+region-trees (use pointer, bsp-header breaks add in region-tree-execute)
   "(method 9 region)": [
-    [22, "s3", "pointer"]
-  ],
-  // region: region-prim-lookup-by-id — l.w t1, t1 from bsp+region-trees
-  "region-prim-lookup-by-id": [
-    [16, "t1", "pointer"]
+    [4, "a0", "region-prim-area"],
+    [22, "s3", "pointer"],
+    [50, "v1", "drawable-region-prim"],
+    [[55,60], "a0", "drawable-region-prim"],
+    [58, "v1", "region-prim-area"]
   ],
   // merc: merc-vu1-init-buffer — l.d v1+216, v1=viewport
+  // merc: merc-vu1-init-buffer — l.d v1+216, v1=viewport
   "merc-vu1-init-buffer": [
+    [[90,92], "v1", "dma-packet"],
     [91, "v1", "viewport"]
   ],
-  // tie-near: tie-near-init-engine — l.w a0+8, a0=tie-near-vu1-block (use pointer, vu-function breaks arithmetic)
-  "tie-near-init-engine": [
-    [6, "a0", "pointer"]
-  ],
-  // tie-near: tie-near-end-buffer — l.wu v1+4, v1=dma-buffer
-  "tie-near-end-buffer": [
-    [21, "a1", "pointer"]
-  ],
+  // vehicle-antenna: vehicle-antenna-init-by-other — l.wu a0+28, a0 from arg0+20
   // vehicle-antenna: vehicle-antenna-init-by-other — l.wu a0+28, a0 from arg0+20
   "vehicle-antenna-init-by-other": [
+    [[0,999], "s6", "process-drawable"],
     [13, "v1", "pointer"],
-    [46, "v1", "pointer"]
-  ],
-  // target-death: next-continue — l.w a2-2, a2=continue-point linked list, -2=prev
-  "next-continue": [
-    [6, "a3", "continue-point"]
+    [32, "a0", "pointer"],
+    [[39,200], "gp", "pointer"],
+    [46, "v1", "pointer"],
+    [[48,60], "v1", "pointer"]
   ],
   // camera: cam-slave-get-vector-with-offset — l.q a0 (zero offset), a0=vector
+  // camera: cam-slave-get-vector-with-offset — l.q a0 (zero offset), a0=vector
   "cam-slave-get-vector-with-offset": [
+    [24, "v0", "vector"],
+    [59, "v0", "vector"],
+    [69, "s3", "vector"],
     [74, "a0", "vector"]
   ],
 
   // === new cascade FTPs (appeared after previous type_casts fixed earlier errors) ===
   // gsound-h: method 0 ambient-sound — second cascade: l.wu v1+20
+  // === new cascade FTPs (appeared after previous type_casts fixed earlier errors) ===
+  // gsound-h: method 0 ambient-sound — second cascade: l.wu v1+20
   "(method 0 ambient-sound)": [
-    [88, "a0", "sound-spec"],
-    [87, "v1", "pointer"]
+    ["_stack_", 16, "sound-spec"],
+    ["_stack_", 32, "int32"],
+    ["_stack_", 48, "vector"],
+    [87, "v1", "pointer"],
+    [88, "a0", "sound-spec"]
   ],
   // nav-engine: method 12 — second cascade: l.w v1+20
+  // nav-engine: method 12 — second cascade: l.w v1+20
   "(method 12 nav-engine)": [
-    [87, "v1", "collide-shape-prim"],
+    [[22,28], "v1", "connection"],
     [25, "a0", "pointer"],
     [26, "s2", "pointer"],
-    [27, "v1", "pointer"]
+    [27, "v1", "pointer"],
+    [[29,31], "a0", "process-focusable"],
+    [[34,86], "s2", "collide-shape"],
+    [87, "v1", "collide-shape-prim"],
+    [90, "v1", "collide-shape-prim-group"],
+    [110, "s2", "collide-shape-prim-sphere"]
   ],
+  // etie-near-vu1: etn-init-engine — second cascade: l.wu a0+4 → a1 dest
   // etie-near-vu1: etn-init-engine — second cascade: l.wu a0+4 → a1 dest
   "etn-init-engine": [
     [4, "a0", "pointer"],
@@ -51441,22 +51226,30 @@
     [35, "a1", "pointer"]
   ],
   // wcar-*: method 100 — v1+64 collideshapeprim chain; use pointer
+  // wcar-*: method 100 — v1+64 collideshapeprim chain; use pointer
   "(method 100 v-daxtermobile)": [
-    [1, "v1", "pointer"]
+    [1, "v1", "pointer"],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-falcon)": [
-    [1, "v1", "pointer"]
+    [1, "v1", "pointer"],
+    [2, "v1", "collide-shape-prim"]
   ],
   "(method 100 v-wombat)": [
-    [1, "v1", "pointer"]
+    [1, "v1", "pointer"],
+    [2, "v1", "collide-shape-prim"]
   ],
   // in-game-menu-hud2: method 19 in-game-menu-hud — l.w v1 (items)
+  // in-game-menu-hud2: method 19 in-game-menu-hud — l.w v1 (items)
   "(method 19 in-game-menu-hud)": [
+    [1, "gp", "in-game-menu-hud"],
     [2, "s5", "pointer"],
     [193, "a0", "pointer"]
   ],
   // in-game-menu-hud2: method 9 in-game-menu-hud-options — l.wu a0+36
+  // in-game-menu-hud2: method 9 in-game-menu-hud-options — l.wu a0+36
   "(method 9 in-game-menu-hud-options)": [
+    [62, "gp", "in-game-menu-hud-options"],
     [93, "a0", "pointer"]
   ],
   // in-game-menu-hud2: in-game-menu-startup — l.wu v1
@@ -51464,10 +51257,12 @@
     [6, "a0", "pointer"]
   ],
   // region: region-prim-lookup-by-id — second cascade: l.wu t3+4 → t4 dest
+  // region: region-prim-lookup-by-id — second cascade: l.wu t3+4 → t4 dest
   "region-prim-lookup-by-id": [
     [16, "t1", "pointer"],
     [26, "t4", "pointer"],
-    [29, "t4", "pointer"]
+    [29, "t4", "pointer"],
+    [45, "t6", "drawable-region-prim"]
   ],
   // wvehicle-sounds: method 223 — gp+3868 (global symbol)
   "(method 223 wvehicle)": [
@@ -51480,11 +51275,13 @@
     [52, "a0", "pointer"]
   ],
   // tie-near: tie-near-init-engine — second cascade: l.wu v1+4 → a0 dest
+  // tie-near: tie-near-init-engine — second cascade: l.wu v1+4 → a0 dest
   "tie-near-init-engine": [
     [6, "a0", "pointer"],
     [8, "a0", "uint"],
     [37, "a0", "pointer"]
   ],
+  // tie-near: tie-near-end-buffer — l.wu v1+4 → a1 dest (re-verify: is the existing entry working?)
   // tie-near: tie-near-end-buffer — l.wu v1+4 → a1 dest (re-verify: is the existing entry working?)
   "tie-near-end-buffer": [
     [21, "a1", "pointer"],
@@ -51501,8 +51298,11 @@
     [8, "v1", "pointer"]
   ],
   // target-death: next-continue — l.wu a2+60
+  // target-death: next-continue — l.wu a2+60
   "next-continue": [
     [4, "a2", "pointer"],
-    [5, "a2", "pointer"]
+    [5, "a2", "pointer"],
+    [6, "a3", "continue-point"],
+    [12, "a3", "continue-point"]
   ]
 }
