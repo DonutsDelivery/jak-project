@@ -51387,5 +51387,82 @@
   // camera: cam-slave-get-vector-with-offset — l.q a0 (zero offset), a0=vector
   "cam-slave-get-vector-with-offset": [
     [74, "a0", "vector"]
+  ],
+
+  // === new cascade FTPs (appeared after previous type_casts fixed earlier errors) ===
+  // gsound-h: method 0 ambient-sound — second cascade: l.wu v1+20
+  "(method 0 ambient-sound)": [
+    [88, "a0", "sound-spec"],
+    [87, "v1", "pointer"]
+  ],
+  // nav-engine: method 12 — second cascade: l.w v1+20
+  "(method 12 nav-engine)": [
+    [87, "v1", "collide-shape-prim"],
+    [25, "a0", "pointer"]
+  ],
+  // etie-near-vu1: etn-init-engine — second cascade: l.wu a0+4 → a1 dest
+  "etn-init-engine": [
+    [4, "a0", "pointer"],
+    [35, "a1", "pointer"]
+  ],
+  // wcar-*: method 100 — second cascade: v1+156 (was v1+64)
+  "(method 100 v-daxtermobile)": [
+    [2, "v1", "collide-shape-prim"],
+    [1, "v1", "pointer"]
+  ],
+  "(method 100 v-falcon)": [
+    [2, "v1", "collide-shape-prim"],
+    [1, "v1", "pointer"]
+  ],
+  "(method 100 v-wombat)": [
+    [2, "v1", "collide-shape-prim"],
+    [1, "v1", "pointer"]
+  ],
+  // in-game-menu-hud2: method 19 in-game-menu-hud — l.w v1 (items)
+  "(method 19 in-game-menu-hud)": [
+    [2, "s5", "pointer"]
+  ],
+  // in-game-menu-hud2: method 9 in-game-menu-hud-options — l.w a0
+  "(method 9 in-game-menu-hud-options)": [
+    [193, "a0", "pointer"]
+  ],
+  // in-game-menu-hud2: in-game-menu-startup — l.wu v1
+  "in-game-menu-startup": [
+    [6, "a0", "pointer"]
+  ],
+  // region: region-prim-lookup-by-id — second cascade: l.wu t3+4 → t4 dest
+  "region-prim-lookup-by-id": [
+    [16, "t1", "pointer"],
+    [26, "t4", "pointer"]
+  ],
+  // wvehicle-sounds: method 223 — gp+3868 (global symbol)
+  "(method 223 wvehicle)": [
+    [29, "a0", "pointer"]
+  ],
+  // wvehicle-sounds: method 144 — gp+3856 (global symbol)
+  "(method 144 wvehicle)": [
+    [47, "a0", "pointer"]
+  ],
+  // tie-near: tie-near-init-engine — second cascade: l.wu v1+4 → a0 dest
+  "tie-near-init-engine": [
+    [6, "a0", "pointer"],
+    [37, "a0", "pointer"]
+  ],
+  // tie-near: tie-near-end-buffer — l.wu v1+4 → a1 dest (re-verify: is the existing entry working?)
+  "tie-near-end-buffer": [
+    [21, "a1", "pointer"]
+  ],
+  // race-sabotage: sabotage-sequence-trans — l.wu a0 (zero offset)
+  "sabotage-sequence-trans": [
+    [5, "a0", "pointer"]
+  ],
+  // race-sabotage: sabotage-sequence-init-by-other — gp+28
+  "sabotage-sequence-init-by-other": [
+    [8, "v1", "pointer"]
+  ],
+  // target-death: next-continue — second cascade: l.w a2-1 (was a2-2 → a3)
+  "next-continue": [
+    [6, "a3", "continue-point"],
+    [4, "a2", "pointer"]
   ]
 }
