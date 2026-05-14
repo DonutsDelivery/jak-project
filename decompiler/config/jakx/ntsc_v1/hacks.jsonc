@@ -2693,7 +2693,34 @@
     "in-out-curve",
     // source: foreground
     "foreground-draw",
-    "foreground-init"
+    "foreground-init",
+    // asm-func: auto-added by asm_func_apply.py 2026-05-14
+    // source: hud-cash
+    "(method 19 hud-cash-stats)",
+    // source: hud-effects
+    "(method 10 hud-effect-scale)",
+    "(method 14 hud-effect-emit-score-icon)",
+    "(method 14 hud-effect-trigger-score-sound)",
+    // source: hud-player-indicators
+    "(method 18 hud-indicator)",
+    "(method 24 hud-health)",
+    // source: hud-results
+    "(method 19 hud-team-score-results)",
+    "(method 24 hud-medal-results)",
+    "(method 9 hud-medal-results)",
+    "(method 9 hud-results)",
+    "spawn-hud-results",
+    // source: hud-widgets
+    "(method 19 hud-item-score)",
+    "(method 19 hud-item-score-list)",
+    "(method 19 hud-localized-string)",
+    "(method 19 hud-medal)",
+    "(method 20 hud-player-icon-name)",
+    "(method 24 hud-player-icon)",
+    "(method 24 hud-player-icon-name)",
+    "(method 28 hud-localized-string)",
+    // source: hud-widgets-powerhang
+    "(method 23 hud-item-hang-time-seconds)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
