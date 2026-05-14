@@ -51343,6 +51343,7 @@
   ],
   // hud-widgets-powerhang: method 26 hang-time-hud-single — l.wu a0+12
   "(method 26 hang-time-hud-single)": [
+    [30, "a0", "pointer"],
     [36, "a0", "pointer"]
   ],
   // hud-widgets-4: method 19 hud-headset-talker — all raw pointer arithmetic + cascades
@@ -51408,6 +51409,7 @@
   ],
   // vehicle-antenna: vehicle-antenna-init-by-other — l.wu a0+28, a0 from arg0+20
   "vehicle-antenna-init-by-other": [
+    [13, "v1", "pointer"],
     [46, "v1", "pointer"]
   ],
   // target-death: next-continue — l.w a2-2, a2=continue-point linked list, -2=prev
@@ -51450,7 +51452,8 @@
   ],
   // in-game-menu-hud2: method 19 in-game-menu-hud — l.w v1 (items)
   "(method 19 in-game-menu-hud)": [
-    [2, "s5", "pointer"]
+    [2, "s5", "pointer"],
+    [193, "a0", "pointer"]
   ],
   // in-game-menu-hud2: method 9 in-game-menu-hud-options — l.wu a0+36
   "(method 9 in-game-menu-hud-options)": [
@@ -51463,28 +51466,35 @@
   // region: region-prim-lookup-by-id — second cascade: l.wu t3+4 → t4 dest
   "region-prim-lookup-by-id": [
     [16, "t1", "pointer"],
-    [26, "t4", "pointer"]
+    [26, "t4", "pointer"],
+    [29, "t4", "pointer"]
   ],
   // wvehicle-sounds: method 223 — gp+3868 (global symbol)
   "(method 223 wvehicle)": [
-    [29, "a0", "pointer"]
+    [29, "a0", "pointer"],
+    [33, "a0", "pointer"]
   ],
   // wvehicle-sounds: method 144 — gp+3856 (global symbol)
   "(method 144 wvehicle)": [
-    [47, "a0", "pointer"]
+    [47, "a0", "pointer"],
+    [52, "a0", "pointer"]
   ],
   // tie-near: tie-near-init-engine — second cascade: l.wu v1+4 → a0 dest
   "tie-near-init-engine": [
     [6, "a0", "pointer"],
+    [8, "a0", "uint"],
     [37, "a0", "pointer"]
   ],
   // tie-near: tie-near-end-buffer — l.wu v1+4 → a1 dest (re-verify: is the existing entry working?)
   "tie-near-end-buffer": [
-    [21, "a1", "pointer"]
+    [21, "a1", "pointer"],
+    [30, "a1", "pointer"]
   ],
   // race-sabotage: sabotage-sequence-trans — l.w a0+48
   "sabotage-sequence-trans": [
-    [6, "a1", "pointer"]
+    [5, "a0", "pointer"],
+    [6, "a1", "pointer"],
+    [11, "a0", "pointer"]
   ],
   // race-sabotage: sabotage-sequence-init-by-other — gp+28
   "sabotage-sequence-init-by-other": [
@@ -51492,6 +51502,7 @@
   ],
   // target-death: next-continue — l.wu a2+60
   "next-continue": [
+    [4, "a2", "pointer"],
     [5, "a2", "pointer"]
   ]
 }
