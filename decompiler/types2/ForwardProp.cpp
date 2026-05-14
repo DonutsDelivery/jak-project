@@ -2107,8 +2107,9 @@ bool load_var_op_determine_type(types2::Type& type_out,
       rd_in.offset = ro.offset;
       auto rd = dts.ts.reverse_field_multi_lookup(rd_in);
 
-      if (rd.success) {
-        // dest register type cast overrides field type lookup
+      // dest register type cast overrides — checked even when field
+      // lookup fails (e.g. out-of-bounds offset, pointer arithmetic)
+      {
         auto cast_it = env.casts().find(op.op_id());
         if (cast_it != env.casts().end()) {
           for (auto& cast : cast_it->second) {
@@ -2119,7 +2120,9 @@ bool load_var_op_determine_type(types2::Type& type_out,
             }
           }
         }
+      }
 
+      if (rd.success) {
         if (rd.results.size() == 1) {
           if (rd_in.base_type.base_type() == "state" && rd.results.front().tokens.size() == 1 &&
               rd.results.front().tokens.front().kind ==

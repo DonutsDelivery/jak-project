@@ -224,7 +224,6 @@ VariableWithCast Env::get_variable_and_cast(const RegisterAccess& access) const 
                     "(var {}) to type {}, but the actual type is {} ({})",
                     access.reg().to_charp(), access.idx(), lookup_name, x.type_name,
                     type_in_reg.print(), type_in_reg.print());
-                ASSERT(false);
               }
 
               if (type_of_var != type_in_reg) {
@@ -308,7 +307,6 @@ std::optional<TypeSpec> Env::get_user_cast_for_access(const RegisterAccess& acce
                   "(var {}) to type {}, but the actual type is {} ({})",
                   access.reg().to_charp(), access.idx(), original_name, x.type_name,
                   type_in_reg.print(), type_in_reg.print());
-              ASSERT(false);
             }
           }
 

@@ -1127,8 +1127,9 @@ TP_Type LoadVarOp::get_src_type(const TypeState& input,
       rd_in.offset = ro.offset;
       auto rd = dts.ts.reverse_field_lookup(rd_in);
 
-      if (rd.success) {
-        // dest register type cast overrides field type lookup
+      // dest register type cast overrides — checked even when field
+      // lookup fails (e.g. out-of-bounds offset, pointer arithmetic)
+      {
         auto cast_it = env.casts().find(m_my_idx);
         if (cast_it != env.casts().end()) {
           for (auto& cast : cast_it->second) {
@@ -1138,7 +1139,9 @@ TP_Type LoadVarOp::get_src_type(const TypeState& input,
             }
           }
         }
+      }
 
+      if (rd.success) {
         if (rd_in.base_type.base_type() == "state" && rd.tokens.size() == 1 &&
             rd.tokens.front().kind == FieldReverseLookupOutput::Token::Kind::FIELD &&
             rd.tokens.front().name == "enter" && rd_in.base_type.arg_count() > 0) {
