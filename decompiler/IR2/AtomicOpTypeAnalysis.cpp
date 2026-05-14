@@ -1128,6 +1128,17 @@ TP_Type LoadVarOp::get_src_type(const TypeState& input,
       auto rd = dts.ts.reverse_field_lookup(rd_in);
 
       if (rd.success) {
+        // dest register type cast overrides field type lookup
+        auto cast_it = env.casts().find(m_my_idx);
+        if (cast_it != env.casts().end()) {
+          for (auto& cast : cast_it->second) {
+            if (cast.reg == m_dst.reg()) {
+              return TP_Type::make_from_ts(
+                  coerce_to_reg_type(dts.parse_type_spec(cast.type_name)));
+            }
+          }
+        }
+
         if (rd_in.base_type.base_type() == "state" && rd.tokens.size() == 1 &&
             rd.tokens.front().kind == FieldReverseLookupOutput::Token::Kind::FIELD &&
             rd.tokens.front().name == "enter" && rd_in.base_type.arg_count() > 0) {
