@@ -51333,9 +51333,16 @@
   "(method 26 hang-time-hud-single)": [
     [36, "a0", "pointer"]
   ],
-  // hud-widgets-4: method 19 hud-headset-talker — l.wu a0+36, a0 from items array
+  // hud-widgets-4: method 19 hud-headset-talker — all raw pointer arithmetic + cascades
   "(method 19 hud-headset-talker)": [
-    [38, "a1", "pointer"]
+    [35, "a1", "(pointer uint32)"],
+    [37, "a0", "(pointer uint32)"],
+    [38, "a1", "(pointer uint32)"],
+    [39, "s1", "hud-item"],
+    [40, "a0", "(pointer uint32)"],
+    [41, "s0", "uint32"],
+    [71, "v1", "uint"],
+    [72, "v1", "uint"]
   ],
   // nav-engine: method 12 — l.b s2+40, s2=collide-shape-prim, +40=field
   "(method 12 nav-engine)": [
