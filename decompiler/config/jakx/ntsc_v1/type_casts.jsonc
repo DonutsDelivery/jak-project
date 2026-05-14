@@ -51318,9 +51318,20 @@
   ],
 
   // field-type-load FTPs: C++ patch allows type_casts overrides for load dest regs
-  // gsound-h: method 0 ambient-sound (new) — l.q v1+16, v1=ambient-sound, +16=spec
+  // gsound-h: method 0 ambient-sound (new) — l.q v1+16
   "(method 0 ambient-sound)": [
-    [88, "a0", "sound-spec"]
+    [88, "a0", "pointer"]
+  ],
+  // hud-widgets-powerhang: method 23 hud-item-power-slide-distance — l.d t0+16
+  "(method 23 hud-item-power-slide-distance-tenths)": [
+    [3, "v1", "pointer"]
+  ],
+  "(method 23 hud-item-power-slide-distance)": [
+    [3, "v1", "pointer"]
+  ],
+  // hud-widgets-powerhang: method 26 hang-time-hud-single — l.wu a0+12
+  "(method 26 hang-time-hud-single)": [
+    [36, "a0", "pointer"]
   ],
   // hud-widgets-4: method 19 hud-headset-talker — l.wu a0+36, a0 from items array
   "(method 19 hud-headset-talker)": [
@@ -51334,9 +51345,9 @@
   "(method 16 level)": [
     [187, "a0", "(pointer uint8)"]
   ],
-  // hud-high-scores: method 19 — l.wu v1+16, v1 from items array element
+  // hud-high-scores: method 19 — l.wu v1+16
   "(method 19 hud-high-scores)": [
-    [158, "v1", "hud-item"]
+    [158, "v1", "pointer"]
   ],
   // process-nettable-h: net-process-class-register — l.wu v1 (zero offset)
   "net-process-class-register": [
@@ -51405,26 +51416,23 @@
     [4, "a0", "pointer"],
     [35, "a1", "pointer"]
   ],
-  // wcar-*: method 100 — second cascade: v1+156 (was v1+64)
+  // wcar-*: method 100 — v1+64 collideshapeprim chain; use pointer
   "(method 100 v-daxtermobile)": [
-    [2, "v1", "collide-shape-prim"],
-    [1, "v1", "pointer"]
+    [2, "v1", "pointer"]
   ],
   "(method 100 v-falcon)": [
-    [2, "v1", "collide-shape-prim"],
-    [1, "v1", "pointer"]
+    [2, "v1", "pointer"]
   ],
   "(method 100 v-wombat)": [
-    [2, "v1", "collide-shape-prim"],
-    [1, "v1", "pointer"]
+    [2, "v1", "pointer"]
   ],
   // in-game-menu-hud2: method 19 in-game-menu-hud — l.w v1 (items)
   "(method 19 in-game-menu-hud)": [
     [2, "s5", "pointer"]
   ],
-  // in-game-menu-hud2: method 9 in-game-menu-hud-options — l.w a0
+  // in-game-menu-hud2: method 9 in-game-menu-hud-options — l.wu a0+36
   "(method 9 in-game-menu-hud-options)": [
-    [193, "a0", "pointer"]
+    [93, "a0", "pointer"]
   ],
   // in-game-menu-hud2: in-game-menu-startup — l.wu v1
   "in-game-menu-startup": [
@@ -51452,17 +51460,16 @@
   "tie-near-end-buffer": [
     [21, "a1", "pointer"]
   ],
-  // race-sabotage: sabotage-sequence-trans — l.wu a0 (zero offset)
+  // race-sabotage: sabotage-sequence-trans — l.w a0+48
   "sabotage-sequence-trans": [
-    [5, "a0", "pointer"]
+    [6, "a1", "pointer"]
   ],
   // race-sabotage: sabotage-sequence-init-by-other — gp+28
   "sabotage-sequence-init-by-other": [
     [8, "v1", "pointer"]
   ],
-  // target-death: next-continue — second cascade: l.w a2-1 (was a2-2 → a3)
+  // target-death: next-continue — l.wu a2+60
   "next-continue": [
-    [6, "a3", "continue-point"],
-    [4, "a2", "pointer"]
+    [5, "a2", "pointer"]
   ]
 }
