@@ -2602,7 +2602,36 @@
     "slip-object-init-by-other",
     // source: wvehicle-weapons-part
     "birth-func-copy-rotate-z-to-rot-z",
-    "birth-func-wasted-missile"
+    "birth-func-wasted-missile",
+    // asm-func: auto-added by asm_func_apply.py 2026-05-14
+    // source: anim-tester
+    "anim-tester-adjust-frame",
+    "anim-tester-get-playing-item",
+    "anim-tester-update-anim-info",
+    // source: background
+    "finish-texture-mask",
+    // source: blit-displays
+    "(method 23 blit-displays-work)",
+    // source: cam-debug
+    "camera-plot-float-func",
+    "debug-euler",
+    // source: cam-master
+    "cam-master-init",
+    "reset-follow",
+    "reset-target-tracking",
+    // source: cam-states
+    "choose-crash-camera",
+    "choose-victor-prefix-camera",
+    "target-cam-runtime-push",
+    "target-camera-active?",
+    // source: car-textures
+    "(method 18 car-info-full)",
+    "(method 9 car-hsv-color)",
+    "(method 9 car-rgb-color)",
+    // source: cloth
+    "(method 16 cloth-system)",
+    "(method 9 cloth-on-skeleton)",
+    "(method 9 cloth-system)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
