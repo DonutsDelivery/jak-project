@@ -2663,7 +2663,37 @@
     "(method 15 drawable-tree)",
     // source: driver
     "(method 66 driver)",
-    "driver-anim"
+    "driver-anim",
+    // asm-func: auto-added by asm_func_apply.py 2026-05-14
+    // source: editable-h
+    "editable-command->string",
+    "editable-filter->string",
+    // source: editable-player
+    "(method 52 editable-player)",
+    "get-light-value",
+    "insert-box",
+    "insert-wall",
+    // source: entity
+    "(method 14 level-group)",
+    "(method 24 entity-actor)",
+    "(method 25 level-group)",
+    // source: explosion
+    "find-closest-solid-sphere-prim",
+    // source: eye
+    "merc-eye-anim",
+    // source: fact-h
+    "(method 0 fact-info)",
+    // source: fmv-player
+    "(method 18 fmv-player)",
+    // source: font
+    "(method 12 font-context)",
+    "char-effect-compute",
+    "draw-effect-string",
+    "draw-string-adv",
+    "in-out-curve",
+    // source: foreground
+    "foreground-draw",
+    "foreground-init"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
