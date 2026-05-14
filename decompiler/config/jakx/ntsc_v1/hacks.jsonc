@@ -2818,7 +2818,12 @@
     "change-to-screen-space",
     "create-points-icon",
     // source: hud-widgets-powerhang
-    "(method 23 hud-item-hang-time-tenths-seconds)"
+    "(method 23 hud-item-hang-time-tenths-seconds)",
+    // asm-func: auto-added by asm_func_apply.py 2026-05-14
+    // source: net-hud
+    "(method 9 hud-item)",
+    // source: wvehicle-wheel
+    "vehicle-wheel-init-by-other"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
