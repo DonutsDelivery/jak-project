@@ -2765,7 +2765,48 @@
     "(method 10 v-wpn-red-tractor-beam)",
     "shield-jiggle-scale!",
     // source: wvehicle-wheel
-    "(method 80 vehicle-wheel)"
+    "(method 80 vehicle-wheel)",
+    // asm-func: auto-added by asm_func_apply.py 2026-05-14
+    // source: in-game-menu-hud
+    "(method 24 hud-bar-slider)",
+    // source: in-game-menu-hud2
+    "(method 19 in-game-menu-hud-options)",
+    // source: menu2-COMMON-GAME
+    "(method 59 index-sprite-list-menu)",
+    "(method 61 options-bar-indicator)",
+    "(method 66 index-sprite-list-menu)",
+    "(method 67 basic-list-selection)",
+    // source: net-anim
+    "get-dist-based-path-pos",
+    // source: net-boss-battle
+    "(method 17 hud-boss-meter)",
+    "(method 49 net-game-mgr-boss-battle)",
+    "(method 56 net-player-boss-battle)",
+    // source: net-deathmatch
+    "get-best-defensive-powerup",
+    // source: net-enemy
+    "(method 11 net-enemy)",
+    "(method 65 net-enemy)",
+    "(method 66 net-enemy)",
+    "(method 68 net-enemy)",
+    "(method 70 net-enemy)",
+    "(method 83 net-enemy)",
+    "(method 84 net-enemy)",
+    "(method 86 net-enemy)",
+    "advance-anim-by-motion",
+    "net-enemy-default-handler",
+    // source: net-game-mgr
+    "(method 17 net-game-mgr)",
+    "(method 77 net-game-mgr)",
+    "cam-battle-intro-player-update",
+    "cam-battle-intro-update",
+    "cam-event-intro-update",
+    "print-intro-text",
+    "update-framing",
+    // source: net-hud
+    "(method 17 hud-item)",
+    "(method 18 hud-item)",
+    "(method 20 hud-item)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
