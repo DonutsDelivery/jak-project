@@ -2832,7 +2832,14 @@
     // source: generic-obs
     "(method 11 process-hidden)",
     "lightning-tracker-init",
-    "manipy-init"
+    "manipy-init",
+    // asm-func: auto-added by asm_func_apply.py 2026-05-14
+    // source: hud-cash
+    "(method 26 hud-cash-stats)",
+    "get-medal-ignore-gamestate",
+    // source: hud-effects
+    "(method 10 hud-effect-move)",
+    "(method 10 hud-effect-slide)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
