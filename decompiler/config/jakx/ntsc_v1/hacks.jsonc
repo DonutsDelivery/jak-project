@@ -2574,7 +2574,35 @@
     // source: wvehicle-ai
     "(method 9 spring-tracker)",
     // source: wvehicle-effects
-    "(method 24 tire-trail)"
+    "(method 24 tire-trail)",
+    // asm-func: auto-added by asm_func_apply.py 2026-05-14
+    // source: math-camera
+    "(method 9 math-camera)",
+    "update-math-camera",
+    // source: mem-buffer-h
+    "(method 24 mem-buffer)",
+    "(method 25 mem-buffer)",
+    "(method 42 mem-buffer)",
+    "(method 43 mem-buffer)",
+    // source: menu2-COMMON-GAME
+    "(method 66 prim-strip-menu)",
+    // source: wvehicle-util
+    "(method 168 wvehicle)",
+    "(method 182 wvehicle)",
+    "(method 201 wvehicle)",
+    // source: wvehicle-weapons-aux
+    "(method 64 vehicle-weapon-drone)",
+    "(method 66 red-sentry-bot)",
+    "(method 66 vehicle-weapon-drone)",
+    "red-sentry-bot-common-trans",
+    "sentrybot-poke-pitch!",
+    "sentrybot-poke-yaw!",
+    // source: wvehicle-weapons-oil
+    "lightning-sphere-init-by-other",
+    "slip-object-init-by-other",
+    // source: wvehicle-weapons-part
+    "birth-func-copy-rotate-z-to-rot-z",
+    "birth-func-wasted-missile"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
