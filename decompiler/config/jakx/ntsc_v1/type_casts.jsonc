@@ -14717,6 +14717,11 @@
       "_stack_",
       48,
       "res-tag"
+    ],
+    [
+      127,
+      "s2",
+      "pointer"
     ]
   ],
   "(method 15 level-group)": [
@@ -24171,6 +24176,11 @@
       1,
       "a1",
       "(pointer symbol)"
+    ],
+    [
+      28,
+      "v1",
+      "symbol"
     ]
   ],
   "vehicle-handle->net-player": [
@@ -40576,6 +40586,11 @@
       5,
       "gp",
       "vehicle"
+    ],
+    [
+      6,
+      "v1",
+      "pointer"
     ]
   ],
   "(method 16 bsp-header)": [
@@ -40654,6 +40669,11 @@
       1,
       "gp",
       "bsp-header"
+    ],
+    [
+      177,
+      "s5",
+      "function"
     ]
   ],
   "(method 18 level-group)": [
@@ -40974,7 +40994,6 @@
       "(pointer uint128)"
     ]
   ],
-  "(method 3 index-sprite-list-menu-info)": [],
   "(method 3 manipy)": [
     [
       12,
@@ -40996,7 +41015,6 @@
       "uint"
     ]
   ],
-  "(method 3 touching-list)": [],
   "(method 3 projectile-bounce)": [
     [
       12,
@@ -41030,7 +41048,6 @@
       "uint"
     ]
   ],
-  "(method 3 water-control)": [],
   "(method 3 talker)": [
     [
       17,
@@ -41451,6 +41468,11 @@
       3,
       "gp",
       "vehicle"
+    ],
+    [
+      14,
+      "s3",
+      "pointer"
     ]
   ],
   "(method 69 projectile)": [
@@ -41639,6 +41661,11 @@
       33,
       "gp",
       "wvehicle"
+    ],
+    [
+      34,
+      "v1",
+      "pointer"
     ]
   ],
   "(method 86 vehicle)": [
@@ -41944,6 +41971,11 @@
       85,
       "gp",
       "nav-mesh-editable"
+    ],
+    [
+      81,
+      "v1",
+      "pointer"
     ]
   ],
   "(method 12 nav-mesh-poly)": [
@@ -41970,6 +42002,11 @@
       0,
       "gp",
       "nav-mesh-editable"
+    ],
+    [
+      12,
+      "v1",
+      "nav-mesh-tri-quad-array"
     ]
   ],
   "(method 13 nav-mesh-poly)": [
@@ -42443,6 +42480,11 @@
       0,
       "a0",
       "nav-graph-editor"
+    ],
+    [
+      7,
+      "v1",
+      "pointer"
     ]
   ],
   "(method 38 net-process-mgr)": [
@@ -42887,6 +42929,11 @@
       2,
       "a0",
       "v-wpn-red-turbo-preventor"
+    ],
+    [
+      12,
+      "a0",
+      "pointer"
     ]
   ],
   "(method 56 nav-mesh-editor)": [
@@ -42894,6 +42941,11 @@
       0,
       "a0",
       "nav-mesh-editor"
+    ],
+    [
+      66,
+      "a1",
+      "pointer"
     ]
   ],
   "(method 56 net-game-mgr)": [
@@ -42922,6 +42974,11 @@
       0,
       "gp",
       "nav-mesh-editor"
+    ],
+    [
+      64,
+      "a0",
+      "pointer"
     ]
   ],
   "(method 57 net-enemy)": [
@@ -43222,6 +43279,11 @@
     [
       3,
       "a0",
+      "wvehicle"
+    ],
+    [
+      44,
+      "gp",
       "wvehicle"
     ]
   ],
@@ -43892,6 +43954,11 @@
       0,
       "a1",
       "nav-mesh-link-search-node"
+    ],
+    [
+      1,
+      "a1",
+      "pointer"
     ]
   ],
   "driver-trans": [
@@ -44163,6 +44230,11 @@
       3,
       "a0",
       "mine-a"
+    ],
+    [
+      49,
+      "a0",
+      "pointer"
     ]
   ],
   "(method 35 mine-b)": [
@@ -44175,6 +44247,11 @@
   "(method 35 v-yellow-guided-missile)": [
     [
       6,
+      "a0",
+      "v-yellow-guided-missile"
+    ],
+    [
+      17,
       "a0",
       "v-yellow-guided-missile"
     ]
@@ -44212,6 +44289,11 @@
       2,
       "a0",
       "v-wpn-yellow-seismic-blaster"
+    ],
+    [
+      27,
+      "a1",
+      "pointer"
     ]
   ],
   "(method 57 net-world)": [
@@ -44387,7 +44469,6 @@
       "wvehicle"
     ]
   ],
-  "get-non-conflicting-driver": [],
   "player-wait-control-hook": [
     [
       8,
@@ -45199,6 +45280,11 @@
       0,
       "a0",
       "vehicle"
+    ],
+    [
+      5,
+      "a0",
+      "vehicle"
     ]
   ],
   "(method 14 vehicle-section)": [
@@ -45271,6 +45357,11 @@
     [
       1,
       "gp",
+      "vehicle"
+    ],
+    [
+      6,
+      "a0",
       "vehicle"
     ]
   ],
@@ -51244,6 +51335,11 @@
       ],
       "s6",
       "oil-slick"
+    ],
+    [
+      28,
+      "gp",
+      "pointer"
     ]
   ],
   "slip-object-init-by-other": [
@@ -51274,6 +51370,11 @@
       ],
       "s6",
       "process-drawable"
+    ],
+    [
+      11,
+      "s4",
+      "pointer"
     ]
   ],
   "calc-grand-prix-score": [
@@ -52145,6 +52246,11 @@
       ],
       "v1",
       "pointer"
+    ],
+    [
+      49,
+      "a0",
+      "pointer"
     ]
   ],
   "cam-slave-get-vector-with-offset": [
@@ -52446,6 +52552,11 @@
       11,
       "a0",
       "pointer"
+    ],
+    [
+      22,
+      "a0",
+      "pointer"
     ]
   ],
   "sabotage-sequence-init-by-other": [
@@ -52453,6 +52564,11 @@
       8,
       "v1",
       "pointer"
+    ],
+    [
+      11,
+      "a0",
+      "cpu-thread"
     ]
   ],
   "next-continue": [
@@ -52594,6 +52710,11 @@
       48,
       "a0",
       "pointer"
+    ],
+    [
+      59,
+      "a0",
+      "nav-poly"
     ]
   ],
   "(method 9 hud-string)": [
@@ -52656,6 +52777,930 @@
     [
       75,
       "s4",
+      "pointer"
+    ]
+  ],
+  "(method 14 entity-more-perm-hash)": [
+    [
+      1,
+      "gp",
+      "entity-more-perm-hash"
+    ]
+  ],
+  "(method 13 entity-more-perm-hash)": [
+    [
+      1,
+      "gp",
+      "entity-more-perm-hash"
+    ]
+  ],
+  "dump-entity-remap": [
+    [
+      52,
+      "s2",
+      "drawable-inline-array-actor"
+    ]
+  ],
+  "vis-dist-additional-ok?": [
+    [
+      15,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(code exit wrong-way)": [
+    [
+      43,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(code shoot wrong-way-linebot)": [
+    [
+      225,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(event shoot wrong-way-linebot)": [
+    [
+      20,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(code idle sabotage-sequence)": [
+    [
+      6,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "encode-vehicle-net-construction": [
+    [
+      5,
+      "gp",
+      "pointer"
+    ]
+  ],
+  "(trans idle vehicle-reticle-on-them)": [
+    [
+      7,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(post peacemaker-incoming-abort vehicle-reticle-on-me)": [
+    [
+      6,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(post peacemaker-incoming vehicle-reticle-on-me)": [
+    [
+      26,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(trans peacemaker-incoming vehicle-reticle-on-me)": [
+    [
+      7,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(post missile-incoming-abort vehicle-reticle-on-me)": [
+    [
+      6,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(post missile-incoming vehicle-reticle-on-me)": [
+    [
+      6,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "(trans missile-incoming vehicle-reticle-on-me)": [
+    [
+      7,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "vehicle-reticle-base-trans": [
+    [
+      5,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 250 wvehicle)": [
+    [
+      15,
+      "a0",
+      "wvehicle"
+    ]
+  ],
+  "(method 3 wvehicle-wheel-launcher-spec)": [
+    [
+      14,
+      "gp",
+      "pointer"
+    ]
+  ],
+  "(method 261 wvehicle)": [
+    [
+      20,
+      "a0",
+      "wvehicle"
+    ]
+  ],
+  "(method 23 tire-trail-tracker)": [
+    [
+      6,
+      "a0",
+      "tire-trail-tracker"
+    ]
+  ],
+  "(method 24 hud-weapon-field)": [
+    [
+      29,
+      "v0",
+      "pointer"
+    ]
+  ],
+  "(method 17 wvehicle)": [
+    [
+      28,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 249 wvehicle)": [
+    [
+      214,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(code idle vehicle-suppress-look)": [
+    [
+      19,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(code idle vehicle-respawn-invul)": [
+    [
+      25,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 266 wvehicle)": [
+    [
+      25,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 116 wvehicle)": [
+    [
+      97,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(code firing-missiles red-sentry-bot)": [
+    [
+      19,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "test-vehicle-weapon": [
+    [
+      36,
+      "a0",
+      "net-player"
+    ]
+  ],
+  "(method 61 v-wpn-red-oil)": [
+    [
+      6,
+      "a0",
+      "v-wpn-red-oil"
+    ]
+  ],
+  "(method 61 v-wpn-red-smoke)": [
+    [
+      10,
+      "a0",
+      "v-wpn-red-smoke"
+    ]
+  ],
+  "(post idle smoke-system)": [
+    [
+      25,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(enter idle smoke-system)": [
+    [
+      5,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 43 smoke-system)": [
+    [
+      14,
+      "a0",
+      "smoke-system"
+    ]
+  ],
+  "(enter die v-yellow-guided-missile)": [
+    [
+      17,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(enter impact v-yellow-guided-missile)": [
+    [
+      125,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(post launching v-yellow-guided-missile)": [
+    [
+      5,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(post wild v-yellow-guided-missile)": [
+    [
+      5,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(post tracking v-yellow-guided-missile)": [
+    [
+      5,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(trans tracking v-yellow-guided-missile)": [
+    [
+      5,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(post moving v-yellow-guided-missile)": [
+    [
+      5,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 58 v-yellow-guided-missile)": [
+    [
+      22,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 61 v-yellow-guided-missile)": [
+    [
+      6,
+      "a0",
+      "v-yellow-guided-missile"
+    ]
+  ],
+  "(method 78 v-yellow-guided-missile)": [
+    [
+      29,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(code die mine-b)": [
+    [
+      43,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(exit falling mine-b)": [
+    [
+      31,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(exit attached mine-b)": [
+    [
+      5,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(code attached mine-b)": [
+    [
+      30,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "(trans attached mine-b)": [
+    [
+      5,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(code leaping-onto mine-b)": [
+    [
+      122,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(trans leaping-onto mine-b)": [
+    [
+      5,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 15 mine-a)": [
+    [
+      26,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(code die mine-a)": [
+    [
+      54,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(exit falling mine-a)": [
+    [
+      55,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "v-wpn-mask-selection-table!": [
+    [
+      5,
+      "s5",
+      "pointer"
+    ]
+  ],
+  "v-wpn-num-available": [
+    [
+      24,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "(method 10 v-wpn-red-drone-gun)": [
+    [
+      18,
+      "a0",
+      "v-wpn-red-drone-gun"
+    ]
+  ],
+  "(method 56 v-wpn-red-sentry-gun)": [
+    [
+      6,
+      "a0",
+      "v-wpn-red-sentry-gun"
+    ]
+  ],
+  "(method 56 v-wpn-red-mine-launcher)": [
+    [
+      5,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "(method 52 v-wpn-red-tractor-beam)": [
+    [
+      6,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "(method 57 v-wpn-red-tractor-beam)": [
+    [
+      5,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "(method 56 v-wpn-yellow-guided-missile)": [
+    [
+      6,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 52 v-wpn-yellow-guided-missile)": [
+    [
+      7,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 56 v-wpn-yellow-grenade)": [
+    [
+      6,
+      "a0",
+      "v-wpn-yellow-grenade"
+    ]
+  ],
+  "(method 52 v-wpn-yellow-grenade)": [
+    [
+      7,
+      "a0",
+      "v-wpn-yellow-grenade"
+    ]
+  ],
+  "(method 52 v-wpn-yellow-default-gun)": [
+    [
+      7,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 52 v-wpn-yellow-chain-gun)": [
+    [
+      7,
+      "a0",
+      "v-wpn-yellow-chain-gun"
+    ]
+  ],
+  "(method 58 vehicle-weapon-slot)": [
+    [
+      7,
+      "a0",
+      "vehicle-weapon-slot"
+    ]
+  ],
+  "(method 10 vehicle-weapon-slot)": [
+    [
+      6,
+      "a0",
+      "vehicle-weapon-slot"
+    ]
+  ],
+  "(method 3 entity-more-perm-hash)": [
+    [
+      19,
+      "gp",
+      "entity-more-perm-hash"
+    ]
+  ],
+  "(method 12 entity-more-perm-hash)": [
+    [
+      26,
+      "gp",
+      "entity-more-perm-hash"
+    ]
+  ],
+  "register-additional-spawner": [
+    [
+      5,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 16 nav-link-search-info)": [
+    [
+      18,
+      "s2",
+      "pointer"
+    ]
+  ],
+  "(method 15 nav-link-search-info)": [
+    [
+      38,
+      "s5",
+      "pointer"
+    ]
+  ],
+  "get-pos-from-node": [
+    [
+      0,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 27 nav-mesh)": [
+    [
+      13,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "id-hash-find-matching-index": [
+    [
+      11,
+      "a2",
+      "pointer"
+    ]
+  ],
+  "(event idle wrong-way-linebot)": [
+    [
+      16,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 65 vehicle-debris)": [
+    [
+      3,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "vehicle-draw-thruster": [
+    [
+      136,
+      "gp",
+      "pointer"
+    ]
+  ],
+  "(method 41 vehicle)": [
+    [
+      63,
+      "v1",
+      "net-world"
+    ]
+  ],
+  "targeting-reticle-line-of-sight?": [
+    [
+      7,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "v-reticle-update-missile": [
+    [
+      3,
+      "gp",
+      "pointer"
+    ]
+  ],
+  "vehicle-reticle-base-init-by-other": [
+    [
+      1,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 203 vehicle)": [
+    [
+      3,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "(method 140 vehicle)": [
+    [
+      2,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "(method 106 vehicle)": [
+    [
+      1,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "(method 108 vehicle)": [
+    [
+      1,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "(method 104 vehicle)": [
+    [
+      2,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "(method 102 vehicle)": [
+    [
+      1,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "(method 181 vehicle)": [
+    [
+      12,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "(method 10 vehicle-section)": [
+    [
+      5,
+      "s5",
+      "pointer"
+    ]
+  ],
+  "get-vehicle-player-id": [
+    [
+      0,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "vehicle-damage-local-space-1": [
+    [
+      1,
+      "s5",
+      "pointer"
+    ]
+  ],
+  "vehicle-damage-local-space-0": [
+    [
+      1,
+      "s5",
+      "pointer"
+    ]
+  ],
+  "get-player-id": [
+    [
+      0,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "consider-attacking": [
+    [
+      2,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "get-portal-corner-point": [
+    [
+      2,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "(method 113 wvehicle)": [
+    [
+      2,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "wv-weapon-pickup-helper": [
+    [
+      2,
+      "gp",
+      "pointer"
+    ]
+  ],
+  "handle-weapon-moved-event": [
+    [
+      2,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "handle-weapon-removed-event": [
+    [
+      1,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "(method 24 hud-vehicle-large-bar)": [
+    [
+      22,
+      "v1",
+      "clock"
+    ]
+  ],
+  "(method 210 wvehicle)": [
+    [
+      455,
+      "s2",
+      "pointer"
+    ]
+  ],
+  "(method 236 wvehicle)": [
+    [
+      202,
+      "a2",
+      "pointer"
+    ]
+  ],
+  "local-space-proc-vehicle-turbo": [
+    [
+      1,
+      "gp",
+      "pointer"
+    ]
+  ],
+  "vehicle-suppress-look-init-by-other": [
+    [
+      8,
+      "gp",
+      "pointer"
+    ]
+  ],
+  "vehicle-respawn-invul-init-by-other": [
+    [
+      8,
+      "gp",
+      "pointer"
+    ]
+  ],
+  "(method 213 wvehicle)": [
+    [
+      31,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "(method 230 wvehicle)": [
+    [
+      52,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "(method 228 wvehicle)": [
+    [
+      3,
+      "a3",
+      "pointer"
+    ]
+  ],
+  "(method 227 wvehicle)": [
+    [
+      1,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "(method 111 wvehicle)": [
+    [
+      5,
+      "s2",
+      "pointer"
+    ]
+  ],
+  "whoosh-shake-camera": [
+    [
+      23,
+      "s2",
+      "pointer"
+    ]
+  ],
+  "(method 18 oil-flame-emitter)": [
+    [
+      5,
+      "s5",
+      "pointer"
+    ]
+  ],
+  "(method 17 oil-flame-emitter)": [
+    [
+      1,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "oil-flame-emitter-init-by-other": [
+    [
+      8,
+      "gp",
+      "pointer"
+    ]
+  ],
+  "oil-emitter-init-by-other": [
+    [
+      8,
+      "gp",
+      "pointer"
+    ]
+  ],
+  "(method 18 oil-emitter)": [
+    [
+      5,
+      "s5",
+      "pointer"
+    ]
+  ],
+  "(method 17 oil-emitter)": [
+    [
+      1,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "smoke-system-init-by-other": [
+    [
+      15,
+      "a0",
+      "cpu-thread"
+    ]
+  ],
+  "(event idle lightning-sphere)": [
+    [
+      28,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "smoke-system-local-space": [
+    [
+      1,
+      "s5",
+      "pointer"
+    ]
+  ],
+  "(method 67 v-yellow-guided-missile)": [
+    [
+      1,
+      "a1",
+      "pointer"
+    ]
+  ],
+  "(event falling mine-b)": [
+    [
+      6,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "(event attached mine-b)": [
+    [
+      5,
+      "gp",
+      "pointer"
+    ]
+  ],
+  "vehicle-get-weapon-level": [
+    [
+      27,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "v-wpn-pack-msg": [
+    [
+      1,
+      "a0",
+      "pointer"
+    ]
+  ],
+  "v-wpn-choose-random": [
+    [
+      24,
+      "v1",
+      "pointer"
+    ]
+  ],
+  "make-vehicle-weapon-slot": [
+    [
+      8,
+      "gp",
+      "pointer"
+    ]
+  ],
+  "muzzle-flash-event-handler": [
+    [
+      19,
+      "v1",
       "pointer"
     ]
   ]
