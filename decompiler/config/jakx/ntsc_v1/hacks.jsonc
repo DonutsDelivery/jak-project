@@ -2631,7 +2631,39 @@
     // source: cloth
     "(method 16 cloth-system)",
     "(method 9 cloth-on-skeleton)",
-    "(method 9 cloth-system)"
+    "(method 9 cloth-system)",
+    // asm-func: auto-added by asm_func_apply.py 2026-05-14
+    // source: collide-cache
+    "(method 19 collide-cache)",
+    // source: collide-hash
+    "(method 8 collide-hash-fragment-array)",
+    // source: collide-shape
+    "(method 15 collide-shape-prim-sphere)",
+    "(method 16 collide-shape-prim-sphere)",
+    "(method 18 collide-shape-prim-mesh)",
+    "(method 37 collide-shape-moving)",
+    // source: collide-shape-rider
+    "(method 17 collide-shape-prim-mesh)",
+    // source: construction-obs
+    "(method 65 construction-barricade)",
+    "(method 65 construction-cone)",
+    "(method 80 construction-cone)",
+    // source: construction-obs-h
+    "(method 82 construction-object)",
+    "(method 92 construction-object)",
+    // source: daxter
+    "check-hide",
+    // source: default-menu
+    "debug-menu-make-continue-sub-menu",
+    "dm-debug-actor-lod-dist",
+    "dm-float-field-tie-rvanish-func",
+    // source: drawable
+    "display-frame-start",
+    // source: drawable-tree
+    "(method 15 drawable-tree)",
+    // source: driver
+    "(method 66 driver)",
+    "driver-anim"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
