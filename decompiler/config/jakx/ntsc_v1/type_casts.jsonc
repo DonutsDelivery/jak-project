@@ -51315,5 +51315,77 @@
 
   "spartacus-birth-func-set-color": [
     [72, "a0", "vector"]
+  ],
+
+  // field-type-load FTPs: C++ patch allows type_casts overrides for load dest regs
+  // gsound-h: method 0 ambient-sound (new) — l.q v1+16, v1=ambient-sound, +16=spec
+  "(method 0 ambient-sound)": [
+    [88, "a0", "sound-spec"]
+  ],
+  // hud-widgets-4: method 19 hud-headset-talker — l.wu a0+36, a0 from items array
+  "(method 19 hud-headset-talker)": [
+    [38, "a1", "pointer"]
+  ],
+  // nav-engine: method 12 — l.b s2+40, s2=collide-shape-prim, +40=field
+  "(method 12 nav-engine)": [
+    [87, "v1", "collide-shape-prim"]
+  ],
+  // decomp: method 16 level — l.bu s1, s1=(pointer uint8)
+  "(method 16 level)": [
+    [187, "a0", "(pointer uint8)"]
+  ],
+  // hud-high-scores: method 19 — l.wu v1+16, v1 from items array element
+  "(method 19 hud-high-scores)": [
+    [158, "v1", "hud-item"]
+  ],
+  // process-nettable-h: net-process-class-register — l.wu v1 (zero offset)
+  "net-process-class-register": [
+    [36, "v1", "pointer"]
+  ],
+  // wcar-*: method 100 — l.wu v1+64, v1=collide-shape-prim, +64=field
+  "(method 100 v-daxtermobile)": [
+    [2, "v1", "collide-shape-prim"]
+  ],
+  "(method 100 v-falcon)": [
+    [2, "v1", "collide-shape-prim"]
+  ],
+  "(method 100 v-wombat)": [
+    [2, "v1", "collide-shape-prim"]
+  ],
+  // etie-near-vu1: etn-init-engine — l.w a0+8, a0=etn-vu1-block (use pointer, vu-function breaks arithmetic)
+  "etn-init-engine": [
+    [4, "a0", "pointer"]
+  ],
+  // region: method 9 — l.w v1, v1 from bsp+region-trees (use pointer, bsp-header breaks add in region-tree-execute)
+  "(method 9 region)": [
+    [22, "s3", "pointer"]
+  ],
+  // region: region-prim-lookup-by-id — l.w t1, t1 from bsp+region-trees
+  "region-prim-lookup-by-id": [
+    [16, "t1", "pointer"]
+  ],
+  // merc: merc-vu1-init-buffer — l.d v1+216, v1=viewport
+  "merc-vu1-init-buffer": [
+    [91, "v1", "viewport"]
+  ],
+  // tie-near: tie-near-init-engine — l.w a0+8, a0=tie-near-vu1-block (use pointer, vu-function breaks arithmetic)
+  "tie-near-init-engine": [
+    [6, "a0", "pointer"]
+  ],
+  // tie-near: tie-near-end-buffer — l.wu v1+4, v1=dma-buffer
+  "tie-near-end-buffer": [
+    [21, "a1", "pointer"]
+  ],
+  // vehicle-antenna: vehicle-antenna-init-by-other — l.wu a0+28, a0 from arg0+20
+  "vehicle-antenna-init-by-other": [
+    [46, "v1", "pointer"]
+  ],
+  // target-death: next-continue — l.w a2-2, a2=continue-point linked list, -2=prev
+  "next-continue": [
+    [6, "a3", "continue-point"]
+  ],
+  // camera: cam-slave-get-vector-with-offset — l.q a0 (zero offset), a0=vector
+  "cam-slave-get-vector-with-offset": [
+    [74, "a0", "vector"]
   ]
 }

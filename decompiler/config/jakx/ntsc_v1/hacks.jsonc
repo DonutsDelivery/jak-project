@@ -2508,7 +2508,73 @@
     "display-nice-shot-to-view",
     // source: merc-blend-shape
     "dma-from-spr",
-    "merc-dma-chain-to-spr"
+    "merc-dma-chain-to-spr",
+    // asm-func: auto-added by asm_func_apply.py 2026-05-14
+    // source: net-powerup
+    "(method 10 powerup-draw)",
+    "(method 11 net-powerup)",
+    "(method 15 net-powerup)",
+    "(method 35 net-powerup)",
+    "(method 48 net-powerup)",
+    "eject-powerup",
+    "eject-test",
+    "powerup-check-collision",
+    // source: net-race
+    "(method 100 net-player-race)",
+    "(method 106 net-player-race)",
+    "(method 48 net-player-race)",
+    "(method 49 net-game-mgr-race)",
+    "(method 51 net-game-mgr-race)",
+    "(method 54 net-player-race)",
+    "(method 85 net-game-mgr-race)",
+    "change-to-eye-position",
+    "race-mesh-debug-init-by-other",
+    "shuffle-race-grid",
+    // source: net-race-hud
+    "(method 18 hud-player-progress)",
+    "(method 24 hud-player-positions)",
+    "(method 25 hud-player-progress)",
+    "(method 34 hud-player-positions)",
+    // source: net-rushhour
+    "(method 110 net-player-rushhour)",
+    "(method 60 net-player-rushhour)",
+    "(method 65 net-game-mgr-rushhour)",
+    // source: net-simple-destruct
+    "(method 11 net-simple-destruct)",
+    "(method 35 net-simple-destruct-mgr)",
+    "(method 62 net-simple-destruct)",
+    "(method 65 net-simple-destruct)",
+    "(method 69 net-simple-destruct)",
+    "get-destruct-perm",
+    "rand-spawn-pickup",
+    "spawn-pickups-from-destructible",
+    // source: pat-h
+    "(method 3 pat-surface)",
+    // source: race-mesh
+    "(method 15 race-mesh)",
+    // source: race-obs
+    "(method 10 race-banner)",
+    "(method 11 finish-banner)",
+    "set-children-position-and-orientation",
+    "set-position-and-orientation",
+    // source: race-sabotage
+    "(method 16 sabotage-sequence)",
+    // source: texture
+    "(method 9 texture-page-dir)",
+    "adgif-shader-login",
+    "adgif-shader-login-no-remap",
+    "adgif-shader<-texture!",
+    "adgif-shader<-texture-with-update!",
+    // source: trigonometry
+    "sign-float",
+    // source: vehicle-reticle
+    "reticle-allowed?",
+    // source: wcar-projectiles
+    "(method 61 v-toad-shot)",
+    // source: wvehicle-ai
+    "(method 9 spring-tracker)",
+    // source: wvehicle-effects
+    "(method 24 tire-trail)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
