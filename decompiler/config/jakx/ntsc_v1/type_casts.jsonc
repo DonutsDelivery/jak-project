@@ -12584,6 +12584,11 @@
       25,
       "v1",
       "collide-shape"
+    ],
+    [
+      26,
+      "v1",
+      "uint"
     ]
   ],
   "(method 83 enemy)": [
@@ -20990,6 +20995,11 @@
       83,
       "a0",
       "int"
+    ],
+    [
+      60,
+      "a0",
+      "uint"
     ],
     [
       [
@@ -51425,17 +51435,18 @@
   // etie-near-vu1: etn-init-engine — second cascade: l.wu a0+4 → a1 dest
   "etn-init-engine": [
     [4, "a0", "pointer"],
+    [6, "a0", "uint"],
     [35, "a1", "pointer"]
   ],
   // wcar-*: method 100 — v1+64 collideshapeprim chain; use pointer
   "(method 100 v-daxtermobile)": [
-    [2, "v1", "pointer"]
+    [1, "v1", "pointer"]
   ],
   "(method 100 v-falcon)": [
-    [2, "v1", "pointer"]
+    [1, "v1", "pointer"]
   ],
   "(method 100 v-wombat)": [
-    [2, "v1", "pointer"]
+    [1, "v1", "pointer"]
   ],
   // in-game-menu-hud2: method 19 in-game-menu-hud — l.w v1 (items)
   "(method 19 in-game-menu-hud)": [
