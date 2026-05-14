@@ -2839,7 +2839,14 @@
     "get-medal-ignore-gamestate",
     // source: hud-effects
     "(method 10 hud-effect-move)",
-    "(method 10 hud-effect-slide)"
+    "(method 10 hud-effect-slide)",
+    // asm-func: auto-added by asm_func_apply.py 2026-05-14
+    // source: hud-effects
+    "(method 10 hud-effect-throb)",
+    "(method 14 hud-effect-scale)",
+    "(method 9 hud-effect-throb)",
+    // source: hud-widgets-2
+    "(method 9 hud-manager-death-indicator)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
