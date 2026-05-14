@@ -2720,7 +2720,52 @@
     "(method 24 hud-player-icon-name)",
     "(method 28 hud-localized-string)",
     // source: hud-widgets-powerhang
-    "(method 23 hud-item-hang-time-seconds)"
+    "(method 23 hud-item-hang-time-seconds)",
+    // asm-func: auto-added by asm_func_apply.py 2026-05-14
+    // source: net-hud
+    "(method 17 hud-item-group)",
+    "(method 17 hud-item-sprite)",
+    "(method 18 hud-item-group)",
+    // source: net-powerup
+    "(method 45 net-powerup)",
+    // source: wvehicle-effects
+    "(method 114 wvehicle)",
+    "(method 20 tire-trail)",
+    "(method 254 wvehicle)",
+    "(method 255 wvehicle)",
+    "(method 259 wvehicle)",
+    // source: wvehicle-events
+    "wv-pickup-handler",
+    "wv-query-handler",
+    // source: wvehicle-hud
+    "(method 11 hud-vehicle-eco-bar)",
+    "(method 24 hud-vehicle-eco-bar)",
+    "(method 25 hud-vehicle-eco-bar)",
+    "kill-vehicle-hud",
+    // source: wvehicle-net
+    "(method 196 wvehicle)",
+    "(method 197 wvehicle)",
+    // source: wvehicle-physics
+    "(method 216 wvehicle)",
+    // source: wvehicle-sounds
+    "update-engine-mix-state",
+    // source: wvehicle-util
+    "(method 270 wvehicle)",
+    // source: wvehicle-weapons
+    "seismic-blaster-affects-player?",
+    "vws-focus-search-base",
+    // source: wvehicle-weapons-proj
+    "(method 60 v-yellow-guided-missile)",
+    "guided-missile-base-trans",
+    // source: wvehicle-weapons-util
+    "is-friendly-fire-helper",
+    "race-player-behind-more-than",
+    "v-wpn-get-mask",
+    // source: wvehicle-weapons3
+    "(method 10 v-wpn-red-tractor-beam)",
+    "shield-jiggle-scale!",
+    // source: wvehicle-wheel
+    "(method 80 vehicle-wheel)"
   ],
   "mips2c_jump_table_functions": {},
   "missing_textures": [
